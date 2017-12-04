@@ -18,12 +18,12 @@
 
     class CategoryForm extends Form
     {
-        static public function primary_input_hidden($category)
+        public static function primary_input_hidden($category)
         {
             parent::generic_input_hidden( 'id' , $category[ 'pk_i_id' ]);
         }
 
-        static public function category_select($categories, $category, $default_item = null, $name = 'sCategory' )
+        public static function category_select($categories, $category, $default_item = null, $name = 'sCategory' )
         {
             echo '<select name="' . $name . '" id="' . $name . '">';
             if(isset($default_item)) {
@@ -38,7 +38,7 @@
             echo '</select>';
         }
 
-        static public function subcategory_select($categories, $category, $default_item = null, $deep = 0)
+        public static function subcategory_select($categories, $category, $default_item = null, $deep = 0)
         {
             $deep_string = '';
             for($var = 0;$var<$deep;$var++) {
@@ -53,7 +53,7 @@
             }
         }
 
-        static public function categories_tree($categories = null, $selected = null, $depth = 0)
+        public static function categories_tree($categories = null, $selected = null, $depth = 0)
         {
             if( ( $categories != null ) && is_array($categories) ) {
                 echo '<ul id="cat' . $categories[0]['fk_i_parent_id'] . '">';
@@ -73,34 +73,34 @@
             }
         }
 
-        static public function expiration_days_input_text($category = null)
+        public static function expiration_days_input_text($category = null)
         {
             parent::generic_input_text( 'i_expiration_days' , ( isset($category) && isset($category['i_expiration_days'])) ? $category[ 'i_expiration_days' ] : '' , 3);
         }
 
-        static public function position_input_text($category = null)
+        public static function position_input_text($category = null)
         {
             parent::generic_input_text( 'i_position' , ( isset($category) && isset($category['i_position'])) ? $category[ 'i_position' ] : '' , 3);
         }
 
-        static public function enabled_input_checkbox($category = null)
+        public static function enabled_input_checkbox($category = null)
         {
             parent::generic_input_checkbox( 'b_enabled' , '1' , ( isset($category) && isset($category['b_enabled']) && $category[ 'b_enabled' ] == 1) ? true : false);
         }
 
-        static public function apply_changes_to_subcategories($category = null)
+        public static function apply_changes_to_subcategories($category = null)
         {
             if($category['fk_i_parent_id']==NULL) {
                 parent::generic_input_checkbox( 'apply_changes_to_subcategories' , '1' , true);
             }
         }
 
-        static public function price_enabled_for_category($category = null)
+        public static function price_enabled_for_category($category = null)
         {
 			parent::generic_input_checkbox( 'b_price_enabled' , '1' , ( isset($category) && isset($category['b_price_enabled']) && $category[ 'b_price_enabled' ] == 1) ? true : false);
         }
 
-        static public function multilanguage_name_description($locales, $category = null)
+        public static function multilanguage_name_description($locales, $category = null)
         {
             $tabs = array();
             $content = array();

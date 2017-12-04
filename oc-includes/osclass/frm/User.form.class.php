@@ -18,63 +18,63 @@
 
     class UserForm extends Form {
 
-        static public function primary_input_hidden($user) {
+        public static function primary_input_hidden($user) {
             parent::generic_input_hidden( 'id' , (isset($user[ 'pk_i_id' ]) ? $user['pk_i_id'] : '') );
         }
 
-        static public function name_text($user = null) {
+        public static function name_text($user = null) {
             parent::generic_input_text( 's_name' , isset($user['s_name'])? $user['s_name'] : '', null, false);
         }
 
-        static public function username_text($user = null) {
+        public static function username_text($user = null) {
             parent::generic_input_text( 's_username' , isset($user['s_username'])? $user['s_username'] : '', null, false);
         }
 
-        static public function email_login_text($user = null) {
+        public static function email_login_text($user = null) {
             parent::generic_input_text( 'email' , isset($user['s_email'])? $user['s_email'] : '', null, false);
         }
 
-        static public function password_login_text($user = null) {
+        public static function password_login_text($user = null) {
             parent::generic_password( 'password' , '', null, false);
         }
 
-        static public function rememberme_login_checkbox($user = null) {
+        public static function rememberme_login_checkbox($user = null) {
             parent::generic_input_checkbox( 'remember' , '1', false);
         }
 
-        static public function old_password_text($user = null) {
+        public static function old_password_text($user = null) {
             parent::generic_password( 'old_password' , '', null, false);
         }
 
-        static public function password_text($user = null) {
+        public static function password_text($user = null) {
             parent::generic_password( 's_password' , '', null, false);
         }
 
-        static public function check_password_text($user = null) {
+        public static function check_password_text($user = null) {
             parent::generic_password( 's_password2' , '', null, false);
         }
 
-        static public function email_text($user = null) {
+        public static function email_text($user = null) {
             parent::generic_input_text( 's_email' , isset($user['s_email'])? $user['s_email'] : '', null, false);
         }
 
-        static public function website_text($user = null) {
+        public static function website_text($user = null) {
             parent::generic_input_text( 's_website' , isset($user['s_website'])? $user['s_website'] : '', null, false);
         }
 
-        static public function mobile_text($user = null) {
+        public static function mobile_text($user = null) {
             parent::generic_input_text( 's_phone_mobile' , isset($user['s_phone_mobile'])? $user['s_phone_mobile'] : '', null, false);
         }
 
-        static public function phone_land_text($user = null) {
+        public static function phone_land_text($user = null) {
             parent::generic_input_text( 's_phone_land' , isset($user['s_phone_land'])? $user['s_phone_land'] : '', null, false);
         }
 
-        static public function info_textarea($name, $locale = 'en_US', $value = '') {
+        public static function info_textarea($name, $locale = 'en_US', $value = '') {
             parent::generic_textarea($name . '[' . $locale . ']', $value);
         }
 
-        static public function multilanguage_info($locales, $user = null) {
+        public static function multilanguage_info($locales, $user = null) {
             $num_locales = count($locales);
             if($num_locales > 1) { echo '<div class="tabber">'; }
             foreach($locales as $locale) {
@@ -94,7 +94,7 @@
             if($num_locales>1) { echo '</div>'; }
         }
 
-        static public function country_select($countries, $user = null) {
+        public static function country_select($countries, $user = null) {
             if( count($countries) > 1 ) {
                 parent::generic_select('countryId', $countries, 'pk_c_code', 's_name', __('Select a country...'), isset($user['fk_c_country_code']) ? $user['fk_c_country_code'] : null);
             } else {
@@ -103,11 +103,11 @@
             }
         }
 
-        static public function country_text($user = null) {
+        public static function country_text($user = null) {
             parent::generic_input_text('country', isset($user['s_country']) ? $user['s_country'] : null);
         }
 
-        static public function region_select($regions, $user = null) {
+        public static function region_select($regions, $user = null) {
             if( count($regions) >= 1 ) {
                 parent::generic_select('regionId', $regions, 'pk_i_id', 's_name', __('Select a region...'), isset($user['fk_i_region_id']) ? $user['fk_i_region_id'] : null);
             } else {
@@ -115,11 +115,11 @@
             }
         }
 
-        static public function region_text($user = null) {
+        public static function region_text($user = null) {
             parent::generic_input_text('region', isset($user['s_region']) ? $user['s_region'] : null);
         }
 
-        static public function city_select($cities, $user = null) {
+        public static function city_select($cities, $user = null) {
             if( count($cities) >= 1 ) {
                 parent::generic_select('cityId', $cities, 'pk_i_id', 's_name', __('Select a city...'), isset($user['fk_i_city_id']) ? $user['fk_i_city_id'] : null);
             } else {
@@ -127,23 +127,23 @@
             }
         }
 
-        static public function city_text($user = null) {
+        public static function city_text($user = null) {
             parent::generic_input_text('city', isset($user['s_city']) ? $user['s_city'] : null);
         }
 
-        static public function city_area_text($user = null) {
+        public static function city_area_text($user = null) {
             parent::generic_input_text('cityArea', isset($user['s_city_area']) ? $user['s_city_area'] : null);
         }
 
-        static public function address_text($user = null) {
+        public static function address_text($user = null) {
             parent::generic_input_text('address', isset($user['s_address']) ? $user['s_address'] : null);
         }
 
-        static public function zip_text($user = null) {
+        public static function zip_text($user = null) {
             parent::generic_input_text('zip', isset($user['s_zip']) ? $user['s_zip'] : null);
         }
 
-        static public function is_company_select($user = null, $user_label = null, $company_label = null) {
+        public static function is_company_select($user = null, $user_label = null, $company_label = null) {
             $options = array(
                 array( 'i_value' => '0', 's_text' => $user_label?$user_label:__( 'User') )
                 ,array( 'i_value' => '1', 's_text' => $company_label?$company_label:__( 'Company') )
@@ -152,11 +152,11 @@
             parent::generic_select( 'b_company', $options, 'i_value', 's_text', null, isset($user['b_company']) ? $user['b_company'] : null );
         }
 
-        static public function user_select($users){
+        public static function user_select($users){
             Form::generic_select('userId', $users, 'pk_i_id', 's_name',  __('All') , NULL );
         }
 
-        static public function js_validation() {
+        public static function js_validation() {
 ?>
 <script type="text/javascript">
     $(document).ready(function(){
@@ -213,7 +213,7 @@
 <?php
         }
 
-        static public function js_validation_old() {
+        public static function js_validation_old() {
 ?>
 <script type="text/javascript">
 $(document).ready(function(){
@@ -268,7 +268,7 @@ function checkForm() {
 <?php
         }
 
-        static public function js_validation_edit() {
+        public static function js_validation_edit() {
 ?>
 <script type="text/javascript">
     $(document).ready(function(){
@@ -321,7 +321,7 @@ function checkForm() {
 <?php
         }
 
-        static public function location_javascript($path = 'front') {
+        public static function location_javascript($path = 'front') {
 ?>
 <script type="text/javascript">
     $(document).ready(function(){

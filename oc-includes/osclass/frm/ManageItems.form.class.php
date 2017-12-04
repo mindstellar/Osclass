@@ -19,7 +19,7 @@
     class ManageItemsForm extends Form {
 
         // OK
-        static public function category_select($categories = null, $item = null, $default_item = null, $parent_selectable = false)
+        public static function category_select($categories = null, $item = null, $default_item = null, $parent_selectable = false)
         {
             // Did user select a specific category to post in?
             $catId = Params::getParam('catId');
@@ -60,7 +60,7 @@
         }
 
         // OK
-        static public function subcategory_select($categories, $item, $default_item = null, $deep = 0)
+        public static function subcategory_select($categories, $item, $default_item = null, $deep = 0)
         {
             // Did user select a specific category to post in?
             $catId = Params::getParam('catId');
@@ -81,7 +81,7 @@
             }
         }
 
-        static public function country_text()
+        public static function country_text()
         {
             // get params GET (only manageItems)
             if(Params::getParam('countryName') != '') {
@@ -94,7 +94,7 @@
             return true;
         }
 
-        static public function region_text()
+        public static function region_text()
         {
             // get params GET (only manageItems)
             if(Params::getParam('region') != '') {
@@ -106,7 +106,7 @@
             return true;
         }
 
-        static public function city_text()
+        public static function city_text()
         {
             // get params GET (only manageItems)
             if(Params::getParam('city') != '') {

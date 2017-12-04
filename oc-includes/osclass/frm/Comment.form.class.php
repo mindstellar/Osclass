@@ -19,7 +19,7 @@
     class CommentForm extends Form
     {
 
-        static public function primary_input_hidden($comment = null)
+        public static function primary_input_hidden($comment = null)
         {
             $commentId = null;
             if( isset($comment['pk_i_id']) ) {
@@ -33,7 +33,7 @@
             }
         }
 
-        static public function title_input_text($comment = null)
+        public static function title_input_text($comment = null)
         {
             $commentTitle = '';
             if( isset($comment['s_title']) ) {
@@ -45,7 +45,7 @@
             parent::generic_input_text( 'title' , $commentTitle, null, false);
         }
 
-        static public function author_input_text($comment = null)
+        public static function author_input_text($comment = null)
         {
             $commentAuthorName = '';
             if( isset($comment['s_author_name']) ) {
@@ -57,7 +57,7 @@
             parent::generic_input_text( 'authorName' , $commentAuthorName, null, false);
         }
 
-        static public function email_input_text($comment = null)
+        public static function email_input_text($comment = null)
         {
             $commentAuthorEmail = '';
             if( isset($comment['s_author_email']) ) {
@@ -69,7 +69,7 @@
             parent::generic_input_text( 'authorEmail' , $commentAuthorEmail, null, false);
         }
 
-        static public function body_input_textarea($comment = null)
+        public static function body_input_textarea($comment = null)
         {
             $commentBody = '';
             if( isset($comment['s_body']) ) {
@@ -81,7 +81,7 @@
             parent::generic_textarea( 'body' , $commentBody);
         }
 
-        static public function js_validation($admin = false) {
+        public static function js_validation($admin = false) {
 ?>
 <script type="text/javascript">
     $(document).ready(function(){

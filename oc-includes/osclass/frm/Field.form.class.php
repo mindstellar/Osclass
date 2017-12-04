@@ -18,7 +18,7 @@
 
     class FieldForm extends Form {
 
-        static public function i18n_datePicker() {
+        public static function i18n_datePicker() {
             ?>
         <script type="text/javascript">
 
@@ -43,7 +43,7 @@
             <?php
         }
 
-        static public function initDatePicker($id_field, $dateFormat, $value, $type='none') {
+        public static function initDatePicker($id_field, $dateFormat, $value, $type='none') {
 
             if($value=='') $value = 0;
             $aux = <<<FB
@@ -92,31 +92,31 @@ FB;
             echo  $aux;
         }
 
-        static public function primary_input_hidden($field = null) {
+        public static function primary_input_hidden($field = null) {
             if(isset($field['pk_i_id'])) {
                 parent::generic_input_hidden( 'id' , $field[ 'pk_i_id' ]);
             }
         }
 
-        static public function name_input_text($field = null) {
+        public static function name_input_text($field = null) {
             parent::generic_input_text( 's_name' , ( isset($field) && isset($field[ 's_name' ])) ? $field[ 's_name' ] : '' , null, false);
             return true;
         }
 
-        static public function options_input_text($field = null) {
+        public static function options_input_text($field = null) {
             parent::generic_input_text( 's_options' , ( isset($field) && isset($field[ 's_options' ])) ? html_entity_decode( $field[ 's_options' ]) : '' , null, false);
             return true;
         }
 
-        static public function required_checkbox($field = null) {
+        public static function required_checkbox($field = null) {
             parent::generic_input_checkbox('field_required', 1, ($field!=null && isset($field['b_required']) && $field['b_required']==1)?true:false);
         }
 
-        static public function searchable_checkbox($field = null) {
+        public static function searchable_checkbox($field = null) {
             parent::generic_input_checkbox('field_searchable', 1, ($field!=null && isset($field['b_searchable']) && $field['b_searchable']==1)?true:false);
         }
 
-        static public function type_select($field = null) {
+        public static function type_select($field = null) {
             ?>
             <select name="field_type" id="field_type">
                 <option value="TEXT" <?php if( $field['e_type'] == 'TEXT' ) { echo 'selected="selected"';} ?>><?php _e( 'TEXT'); ?></option>
@@ -132,7 +132,7 @@ FB;
             return true;
         }
 
-        static public function meta($field = null, $search = false) {
+        public static function meta($field = null, $search = false) {
 
             if($field!=null) {
                 // date interval
@@ -301,7 +301,7 @@ FB;
             }
         }
 
-        static public function meta_fields_input($catId = null, $itemId = null) {
+        public static function meta_fields_input($catId = null, $itemId = null) {
             $fields = Field::newInstance()->findByCategoryItem($catId, $itemId);
             if(count($fields)>0) {
                 echo '<div class="meta_list">';

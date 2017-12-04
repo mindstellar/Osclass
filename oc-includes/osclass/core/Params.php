@@ -157,7 +157,7 @@
             print_r(self::getParamsAsArray());
         }
 
-        static private function _purify($value, $xss_check)
+        private static function _purify($value, $xss_check)
         {
             if( !$xss_check ) {
                 return $value;

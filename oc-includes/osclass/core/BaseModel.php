@@ -81,8 +81,8 @@
         }
 
         //Funciones que se tendran que reescribir en la clase que extienda de esta
-        protected abstract function doModel();
-        protected abstract function doView($file);
+        abstract protected function doModel();
+        abstract protected function doView($file);
 
         public function do400()
         {

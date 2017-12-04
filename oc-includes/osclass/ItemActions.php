@@ -804,7 +804,7 @@
          * Delete resources from the hard drive
          * @param <type> $itemId
          */
-        static public function deleteResourcesFromHD( $itemId, $is_admin = false )
+        public static function deleteResourcesFromHD( $itemId, $is_admin = false )
         {
             $resources = ItemResource::newInstance()->getAllResourcesFromItem($itemId);
             Log::newInstance()->insertLog('itemActions', 'deleteResourcesFromHD', $itemId, $itemId, $is_admin?'admin':'user', $is_admin?osc_logged_admin_id():osc_logged_user_id());
