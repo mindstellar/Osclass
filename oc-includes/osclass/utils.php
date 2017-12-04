@@ -1659,6 +1659,7 @@ function version_compare2($a, $b)
         foreach($aux['categories'] as &$cat) {
             $count_items += _recursive_category_stats($cat, $categoryTotal);
         }
+        unset($cat);
     }
     $categoryTotal[$aux['pk_i_id']] = $count_items;
     return $count_items;
@@ -1679,6 +1680,7 @@ function osc_update_cat_stats() {
             _recursive_category_stats($category, $categoryTotal);
         }
     }
+	unset($category);
 
     $sql = 'REPLACE INTO '.DB_TABLE_PREFIX.'t_category_stats (fk_i_category_id, i_num_items) VALUES ';
     $aValues = array();
