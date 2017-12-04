@@ -293,8 +293,8 @@
                     require_once LIB_PATH . 'AjaxUploader.php';
                     $uploader = new AjaxUploader();
                     $original = pathinfo($uploader->getOriginalName());
-                    $filename = uniqid( 'qqfile_' ) . '.' . $original['extension'];
-                    $result = $uploader->handleUpload(osc_content_path().'uploads/temp/'.$filename);
+	                $filename = uniqid( 'qqfile_' , true ) . '.' . $original[ 'extension' ];
+                    $result   = $uploader->handleUpload(osc_content_path().'uploads/temp/'.$filename);
 
                     // auto rotate
                     try {
