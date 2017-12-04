@@ -341,13 +341,13 @@
             $url = str_replace(osc_admin_base_url(true) , '', $url );
             $url = str_replace(osc_admin_base_url()     , '', $url );
 
-            array_push($aMenu_actions, $url);
+	        $aMenu_actions[] = $url;
             if( array_key_exists('sub', $value) ) {
                 $aSubmenu = $value['sub'];
                 if($aSubmenu) {
                     foreach($aSubmenu as $aSub) {
-                        $url = str_replace(osc_admin_base_url(true), '', $aSub[1] );
-                        array_push($aMenu_actions, $url);
+	                    $url             = str_replace( osc_admin_base_url( true ) , '' , $aSub[ 1 ] );
+	                    $aMenu_actions[] = $url;
                     }
                 }
             }
@@ -370,13 +370,13 @@
             $url = str_replace(osc_admin_base_url(true) , '', $url );
             $url = str_replace(osc_admin_base_url()     , '', $url );
 
-            array_push($aMenu_actions, $url);
+	        $aMenu_actions[] = $url;
             if( array_key_exists('sub', $value) ) {
                 $aSubmenu = $value['sub'];
                 if($aSubmenu) {
                     foreach($aSubmenu as $aSub) {
-                        $url = str_replace(osc_admin_base_url(true), '', $aSub[1] );
-                        array_push($aMenu_actions, $url);
+	                    $url             = str_replace( osc_admin_base_url( true ) , '' , $aSub[ 1 ] );
+	                    $aMenu_actions[] = $url;
                     }
                 }
             }

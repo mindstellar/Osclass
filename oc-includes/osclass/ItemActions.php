@@ -1353,12 +1353,12 @@
                         if( is_array($mime) ){
                             foreach($mime as $aux){
                                 if( !in_array($aux, $aMimesAllowed) ) {
-                                    array_push($aMimesAllowed, $aux );
+	                                $aMimesAllowed[] = $aux;
                                 }
                             }
                         } else {
                             if( !in_array($mime, $aMimesAllowed) ) {
-                                array_push($aMimesAllowed, $mime );
+	                            $aMimesAllowed[] = $mime;
                             }
                         }
                     }

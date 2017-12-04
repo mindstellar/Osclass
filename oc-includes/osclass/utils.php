@@ -1529,7 +1529,7 @@ function osc_update_cat_stats() {
     $sql = 'REPLACE INTO '.DB_TABLE_PREFIX.'t_category_stats (fk_i_category_id, i_num_items) VALUES ';
     $aValues = array();
     foreach($categoryTotal as $k => $v) {
-        array_push($aValues, "($k, $v)" );
+	    $aValues[] = "($k, $v)";
     }
     $sql .= implode(',', $aValues);
     $result = CategoryStats::newInstance()->dao->query($sql);

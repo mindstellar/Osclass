@@ -140,7 +140,7 @@
                     $i = 0;
 
                     while ($meta = $res->resultId->fetch_field()) {
-                        array_push($field_type, $meta->type);
+	                    $field_type[] = $meta->type;
                     }
 
                     $_str .= 'insert into `' . $table . '` values';
