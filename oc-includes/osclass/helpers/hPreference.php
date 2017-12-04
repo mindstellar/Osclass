@@ -961,7 +961,8 @@
      *
      * @param string $key
      * @param string $section
-     * @return string
+     *
+     * @return mixed
      */
     function osc_get_preference($key, $section = 'osclass') {
         return getPreference($key, $section);

@@ -108,7 +108,7 @@
 		/**
 		 * @param $key
 		 *
-		 * @return string
+		 * @return mixed
 		 */
 		public function _get( $key ) {
             if (!isset($this->session[$key])) {
