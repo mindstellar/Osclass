@@ -175,7 +175,7 @@
         public function extractURL($uri = '')
         {
             $uri_array = explode('?', str_replace('index.php', '', $uri));
-            if( substr($uri_array[0], 0, 1) == '/' ) {
+	        if ( $uri_array[ 0 ][ 0 ] == '/' ) {
                 return substr($uri_array[0], 1);
             } else {
                 return $uri_array[0];

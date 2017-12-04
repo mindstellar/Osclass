@@ -775,15 +775,15 @@ function display_database_config() {
 
 function display_target() {
     $country_list = osc_file_get_contents('https://geo.osclass.org/newgeo.services.php?action=countries');
-    $country_list = json_decode(substr($country_list, 1, strlen($country_list)-2), true);
+	$country_list = json_decode( substr( $country_list , 1 , - 2 ) , true );
 
     $region_list = array();
 
     $country_ip = '';
     if(preg_match('|([a-z]{2})-([A-Z]{2})|', Params::getServerParam('HTTP_ACCEPT_LANGUAGE'), $match)) {
-        $country_ip = $match[2];
+        $country_ip  = $match[2];
         $region_list = osc_file_get_contents('https://geo.osclass.org/newgeo.services.php?action=regions&country='.$match[2]);
-        $region_list = json_decode(substr($region_list, 1, strlen($region_list)-2), true);
+	    $region_list = json_decode( substr( $region_list , 1 , - 2 ) , true );
     }
 
     if(!isset($country_list[0]) || !isset($country_list[0]['s_name'])) {

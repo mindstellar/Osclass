@@ -197,7 +197,7 @@
 		        "\\"
 	        ) , str_replace( '.' , "\.", strtolower( $rule['s_email'])) );
             if($rule!='') {
-                if( substr($rule,0,1) == '!' ) {
+	            if ( $rule[ 0 ] == '!' ) {
                     $rule = '|^((?'.$rule.').*)$|';
                 } else {
                     $rule = '|^'.$rule.'$|';

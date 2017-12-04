@@ -1196,7 +1196,7 @@ function _zip_folder_pclzip($archive_folder, $archive_name) {
 
         // To support windows and the C: root you need to add the
         // following 3 lines, should be ignored on linux
-        if (substr($v_dir, 1,1) == ':') {
+	    if ( $v_dir[ 1 ] == ':' ) {
             $v_remove = substr($v_dir, 2);
         }
         $v_list = $zip->create($dir, PCLZIP_OPT_REMOVE_PATH, $v_remove);
@@ -1285,7 +1285,7 @@ function osc_change_permissions( $dir = ABS_PATH ) {
     clearstatcache();
     if ($dh = opendir($dir)) {
         while (($file = readdir($dh)) !== false) {
-            if( $file != '.' && $file != '..' && substr( $file, 0, 1) != '.' ) {
+	        if ( $file != '.' && $file != '..' && $file[ 0 ] != '.' ) {
                 if(is_dir(str_replace( '//' , '/' , $dir . '/' . $file))) {
                     if(!is_writable(str_replace( '//' , '/' , $dir . '/' . $file))) {
                         $res = @chmod( str_replace( '//' , '/' , $dir . '/' . $file), 0777);
@@ -1833,8 +1833,8 @@ function osc_do_upgrade() {
     /***********************
      **** DOWNLOAD FILE ****
      ***********************/
-    $data = osc_file_get_contents( 'https://osclass.org/latest_version_v1.php' );
-    $data = json_decode(substr($data, 1, strlen($data)-3), true);
+    $data        = osc_file_get_contents( 'https://osclass.org/latest_version_v1.php' );
+	$data        = json_decode( substr( $data , 1 , - 3 ) , true );
     $source_file = $data['url'];
     if ($source_file != '') {
 
@@ -1972,21 +1972,21 @@ function osc_do_auto_upgrade() {
         if ($json->version > osc_version()) {
             osc_set_preference('update_core_json', $data);
             if (osc_check_dir_writable()) {
-                if (substr($json->version, 0, 1) != substr(osc_version(), 0, 1)) {
+	            if ( $json->version[ 0 ] != osc_version()[ 0 ] ) {
                     // NEW BRANCH
                     if (strpos(osc_auto_update(), 'branch') !== false) {
                         osc_run_hook('before_auto_upgrade');
                         $result = osc_do_upgrade();
                         osc_run_hook('after_auto_upgrade', $result);
                     }
-                } else if (substr($json->version, 1, 1) != substr(osc_version(), 1, 1)) {
+	            } else if ( $json->version[ 1 ] != osc_version()[ 1 ] ) {
                     // MAJOR RELEASE
                     if (strpos(osc_auto_update(), 'branch') !== false || strpos(osc_auto_update(), 'major') !== false) {
                         osc_run_hook('before_auto_upgrade');
                         $result = osc_do_upgrade();
                         osc_run_hook('after_auto_upgrade', $result);
                     }
-                } else if (substr($json->version, 2, 1) != substr(osc_version(), 2, 1)) {
+	            } else if ( $json->version[ 2 ] != osc_version()[ 2 ] ) {
                     // MINOR RELEASE
                     if (strpos(osc_auto_update(), 'branch') !== false || strpos(osc_auto_update(), 'major') !== false || strpos(osc_auto_update(), 'minor') !== false) {
                         osc_run_hook('before_auto_upgrade');

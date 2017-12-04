@@ -83,7 +83,7 @@
                             }
                             Params::setParam('sCategory', $search_uri);
                         } else {
-                            if(stripos(Params::getParam('sCategory'), '/')!==false) {
+	                        if ( strpos( Params::getParam( 'sCategory' ) , '/' ) !== false ) {
                                 $tmp = explode( '/' , preg_replace( '|/$|', '', Params::getParam( 'sCategory')));
                                 $category  = Category::newInstance()->findBySlug($tmp[count($tmp)-1]);
                                 Params::setParam('sCategory', $tmp[count($tmp)-1]);
