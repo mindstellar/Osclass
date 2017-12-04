@@ -130,10 +130,10 @@
                     foreach($categories as $c) {
                         if( count($c['categories']) > 0 ) {
                             $subcategory = array();
-                            for($i = 0; $i < count($c['categories']); $i++) {
-                                $subcategory[] = array($c['categories'][$i]['pk_i_id'], $c['categories'][$i]['s_name']);
-                            }
-                            printf('var categories_%1$s = %2$s;', $c['pk_i_id'], json_encode($subcategory));
+	                        foreach ( $c[ 'categories' ] as $i => $iValue ) {
+	                            $subcategory[] = array($c['categories'][$i]['pk_i_id'], $c['categories'][$i]['s_name']);
+	                        }
+	                        printf('var categories_%1$s = %2$s;', $c['pk_i_id'], json_encode($subcategory));
                             echo PHP_EOL;
                         }
                     }
