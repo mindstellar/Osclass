@@ -416,7 +416,9 @@ CREATE TABLE %st_item_description_tmp (
         osc_set_preference('rewrite_user_change_username', 'username/change');
         osc_set_preference('csrf_name', 'CSRF'.mt_rand(0,mt_getrandmax()));
 
-        @mkdir(osc_uploads_path() . 'page-images');
+	    if ( ! mkdir( osc_uploads_path() . 'page-images' ) && ! is_dir( osc_uploads_path() . 'page-images' ) ) {
+		    throw new \RuntimeException( sprintf( 'Directory "%s" was not created' , osc_uploads_path() . 'page-images' ) );
+	    }
 
     }
 
@@ -448,7 +450,9 @@ CREATE TABLE %st_item_description_tmp (
     }
 
     if(osc_version() < 330) {
-        @mkdir(osc_content_path().'uploads/temp/');
+	    if ( ! mkdir( osc_content_path() . 'uploads/temp/' ) && ! is_dir( osc_content_path() . 'uploads/temp/' ) ) {
+		    throw new \RuntimeException( sprintf( 'Directory "%s" was not created' , osc_content_path() . 'uploads/temp/' ) );
+	    }
         @mkdir(osc_content_path().'downloads/oc-temp/', 0777);
         @unlink(osc_lib_path() . 'osclass/classes/Watermark.php');
         osc_set_preference('title_character_length', '100', 'osclass', 'INTEGER');

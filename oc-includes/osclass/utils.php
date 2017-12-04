@@ -524,7 +524,9 @@ function osc_copy($source, $dest, $options=array('folderPermission'=>0755,'fileP
             } else {
                 //Change parent itself and its contents
 	            $dest .= basename( $source );
-                @mkdir($dest);
+	            if ( ! mkdir( $dest ) && ! is_dir( $dest ) ) {
+		            throw new \RuntimeException( sprintf( 'Directory "%s" was not created' , $dest ) );
+	            }
                 @chmod($dest,$options['filePermission']);
             }
         } else {
@@ -2126,7 +2128,9 @@ function osc_market($section, $code) {
                 /**********************
                  ***** UNZIP FILE *****
                  **********************/
-                @mkdir(osc_content_path() . 'downloads/oc-temp/');
+	            if ( ! mkdir( osc_content_path() . 'downloads/oc-temp/' ) && ! is_dir( osc_content_path() . 'downloads/oc-temp/' ) ) {
+		            throw new \RuntimeException( sprintf( 'Directory "%s" was not created' , osc_content_path() . 'downloads/oc-temp/' ) );
+	            }
                 $res = osc_unzip_file(osc_content_path() . 'downloads/' . $filename, osc_content_path() . 'downloads/oc-temp/');
                 if ($res == 1) { // Everything is OK, continue
                     /**********************
