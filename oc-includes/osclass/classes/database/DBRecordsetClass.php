@@ -75,7 +75,7 @@
         public $numRows;
 
         /**
-         * Initializate Recordset Class
+         * Initialize Recordset Class
          * 
          * @param mysqli $connId
          * @param MySQLi_Result $resultId 
