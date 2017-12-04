@@ -81,12 +81,8 @@
                 if($num_locales>1) { echo '<div class="tabbertab">'; }
 	            if($num_locales > 1) { echo '<h2>' . $locale['s_name'] . '</h2>'; }
                     $info = '';
-                    if( is_array($user) ) {
-                        if( isset($user['locale'][$locale['pk_c_code']])) {
-                            if(isset($user['locale'][$locale['pk_c_code']]['s_info'])) {
-                                $info = $user['locale'][$locale['pk_c_code']]['s_info'];
-                            }
-                        }
+	            if ( is_array( $user ) && isset( $user[ 'locale' ][ $locale[ 'pk_c_code' ] ] ) && isset( $user[ 'locale' ][ $locale[ 'pk_c_code' ] ][ 's_info' ] ) ) {
+		            $info = $user[ 'locale' ][ $locale[ 'pk_c_code' ] ][ 's_info' ];
                     }
                     self::info_textarea('s_info', $locale['pk_c_code'], $info);
                 if($num_locales>1) { echo '</div>'; }

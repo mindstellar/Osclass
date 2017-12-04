@@ -234,10 +234,8 @@
 
                     $alert = Alerts::newInstance()->findByPrimaryKey($id);
                     $result = 0;
-                    if(!empty($alert)) {
-                        if($email==$alert['s_email'] && $secret==$alert['s_secret']) {
-                            $result = Alerts::newInstance()->unsub($id);
-                        }
+	                if ( ! empty( $alert ) && $email == $alert[ 's_email' ] && $secret == $alert[ 's_secret' ] ) {
+		                $result = Alerts::newInstance()->unsub( $id );
                     }
 
                     if( $result == 1 ) {

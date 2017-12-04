@@ -117,10 +117,8 @@ function osc_packageExtract($zipPath, $path) {
         return false;
     }
 
-    if(!file_exists($path)) {
-        if (!@mkdir($path, 0666)) {
-            return false;
-        }
+	if ( ! file_exists( $path ) && ! @mkdir( $path , 0666 ) ) {
+		return false;
     }
 
     @chmod($path, 0777);
@@ -969,10 +967,8 @@ function osc_unzip_file($file, $to) {
         return 0;
     }
 
-    if (!file_exists($to)) {
-        if (!@mkdir($to, 0766)) {
-            return 0;
-        }
+	if ( ! file_exists( $to ) && ! @mkdir( $to , 0766 ) ) {
+		return 0;
     }
 
     @chmod($to, 0777);
@@ -1880,10 +1876,8 @@ function osc_do_upgrade() {
                             $dir = new RecursiveIteratorIterator(new RecursiveDirectoryIterator($tmp_path), RecursiveIteratorIterator::CHILD_FIRST);
                             for ($dir->rewind(); $dir->valid(); $dir->next()) {
                                 if ($dir->isDir()) {
-                                    if ($dir->getFilename() != '.' && $dir->getFilename() != '..') {
-                                        if (!rmdir($dir->getPathname())) {
-                                            $rm_errors++;
-                                        }
+	                                if ( $dir->getFilename() != '.' && $dir->getFilename() != '..' && ! rmdir( $dir->getPathname() ) ) {
+		                                $rm_errors ++;
                                     }
                                 } else {
                                     if (!unlink($dir->getPathname())) {
@@ -2144,10 +2138,8 @@ function osc_market($section, $code) {
                         $dir = new RecursiveIteratorIterator(new RecursiveDirectoryIterator($path), RecursiveIteratorIterator::CHILD_FIRST);
                         for ($dir->rewind(); $dir->valid(); $dir->next()) {
                             if ($dir->isDir()) {
-                                if ($dir->getFilename() != '.' && $dir->getFilename() != '..') {
-                                    if (!rmdir($dir->getPathname())) {
-                                        $rm_errors++;
-                                    }
+	                            if ( $dir->getFilename() != '.' && $dir->getFilename() != '..' && ! rmdir( $dir->getPathname() ) ) {
+		                            $rm_errors ++;
                                 }
                             } else {
                                 if (!unlink($dir->getPathname())) {

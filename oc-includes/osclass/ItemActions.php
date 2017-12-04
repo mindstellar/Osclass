@@ -1435,10 +1435,8 @@
                             ));
                             $resourceId = $itemResourceManager->dao->insertedId();
 
-                            if(!is_dir($folder)) {
-                                if (!@mkdir($folder, 0755, true)) {
-                                    return 3; // PATH CAN NOT BE CREATED
-                                }
+	                        if ( ! is_dir( $folder ) && ! @mkdir( $folder , 0755 , true ) ) {
+		                        return 3; // PATH CAN NOT BE CREATED
                             }
                             osc_copy($tmpName.'_normal', $folder.$resourceId.'.'.$extension);
                             osc_copy($tmpName.'_preview', $folder.$resourceId.'_preview.'.$extension);

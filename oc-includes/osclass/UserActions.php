@@ -32,11 +32,9 @@
         {
             $error = array();
             $flash_error = '';
-            if( (osc_recaptcha_private_key() != '') && !$this->is_admin ) {
-                if( !osc_check_recaptcha() ) {
-                    $flash_error .= _m('The reCAPTCHA was not entered correctly') . PHP_EOL;
-                    $error[] = 4;
-                }
+	        if ( ( osc_recaptcha_private_key() != '' ) && ! $this->is_admin && ! osc_check_recaptcha() ) {
+		        $flash_error .= _m( 'The reCAPTCHA was not entered correctly' ) . PHP_EOL;
+		        $error[]     = 4;
             }
 
             if( Params::getParam('s_password', false, false) == '' ) {
@@ -229,10 +227,8 @@
             $user = User::newInstance()->findByEmail( Params::getParam('s_email') );
             Session::newInstance()->_set( 'recover_time', time() );
 
-            if ( (osc_recaptcha_private_key() != '') && Session::newInstance()->_get('recover_captcha_not_set')!=1) {
-                if( !osc_check_recaptcha() ) {
-                    return 2; // BREAK THE PROCESS, THE RECAPTCHA IS WRONG
-                }
+	        if ( ( osc_recaptcha_private_key() != '' ) && Session::newInstance()->_get( 'recover_captcha_not_set' ) != 1 && ! osc_check_recaptcha() ) {
+		        return 2; // BREAK THE PROCESS, THE RECAPTCHA IS WRONG
             }
 
             if( !$user || ($user['b_enabled'] == 0) ) {

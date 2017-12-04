@@ -118,12 +118,11 @@
                         $this->redirectTo( osc_base_url(true) );
                     }
 
-                    if(osc_recaptcha_items_enabled() && osc_recaptcha_private_key() != '') {
-                        if(!osc_check_recaptcha()) {
-                            osc_add_flash_error_message( _m('The Recaptcha code is wrong') );
-                            $this->redirectTo( osc_item_post_url() );
-                            return false; // BREAK THE PROCESS, THE RECAPTCHA IS WRONG
-                        }
+	                if ( osc_recaptcha_items_enabled() && osc_recaptcha_private_key() != '' && ! osc_check_recaptcha() ) {
+		                osc_add_flash_error_message( _m( 'The Recaptcha code is wrong' ) );
+		                $this->redirectTo( osc_item_post_url() );
+
+		                return false; // BREAK THE PROCESS, THE RECAPTCHA IS WRONG
                     }
 
                     if(!osc_is_web_user_logged_in()) {
@@ -227,12 +226,11 @@
                     if (count($item) == 1) {
                         $this->_exportVariableToView('item', $item[0]);
 
-                        if(osc_recaptcha_items_enabled() && osc_recaptcha_private_key() != '') {
-                            if( !osc_check_recaptcha() ) {
-                                osc_add_flash_error_message( _m('The Recaptcha code is wrong') );
-                                $this->redirectTo( osc_item_edit_url($secret, $id) );
-                                return false; // BREAK THE PROCESS, THE RECAPTCHA IS WRONG
-                            }
+	                    if ( osc_recaptcha_items_enabled() && osc_recaptcha_private_key() != '' && ! osc_check_recaptcha() ) {
+		                    osc_add_flash_error_message( _m( 'The Recaptcha code is wrong' ) );
+		                    $this->redirectTo( osc_item_edit_url( $secret , $id ) );
+
+		                    return false; // BREAK THE PROCESS, THE RECAPTCHA IS WRONG
                         }
 
                         $success = $mItems->edit();

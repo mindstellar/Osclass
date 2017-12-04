@@ -215,11 +215,8 @@
             $data['s_value'] = osc_installed_plugins();
             $plugins_list    = unserialize($data['s_value']);
 
-            if( is_array($plugins_list) ) {
-                // check if the plugin is already installed
-                if( in_array($path, $plugins_list) ) {
-                    return array('error_code' => 'error_installed');
-                }
+	        if ( is_array( $plugins_list ) && in_array( $path , $plugins_list ) ) {
+		        return array ( 'error_code' => 'error_installed' );
             }
 
             if( !file_exists(osc_plugins_path() . $path) ) {
@@ -296,11 +293,8 @@
             $data['s_value'] = osc_active_plugins();
             $plugins_list    = unserialize($data['s_value']);
 
-            if( is_array($plugins_list) ) {
-                // check if the plugin is already active
-                if( in_array($path, $plugins_list) ) {
-                    return false;
-                }
+	        if ( is_array( $plugins_list ) && in_array( $path , $plugins_list ) ) {
+		        return false;
             }
 
             $plugins_list[]  = $path;

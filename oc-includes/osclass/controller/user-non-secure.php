@@ -71,14 +71,12 @@
 
                     $alert = Alerts::newInstance()->findByPrimaryKey($id);
                     $result = 0;
-                    if(!empty($alert)) {
-                        if($email==$alert['s_email'] && $secret==$alert['s_secret']) {
-                            $user = User::newInstance()->findByEmail($alert['s_email']);
-                            if(isset($user['pk_i_id'])) {
-                                Alerts::newInstance()->update(array('fk_i_user_id' => $user['pk_i_id']), array('pk_i_id' => $id));
-                            }
-                            $result = Alerts::newInstance()->activate($id);
-                        }
+	                if ( ! empty( $alert ) && $email == $alert[ 's_email' ] && $secret == $alert[ 's_secret' ] ) {
+		                $user = User::newInstance()->findByEmail( $alert[ 's_email' ] );
+		                if ( isset( $user[ 'pk_i_id' ] ) ) {
+			                Alerts::newInstance()->update( array ( 'fk_i_user_id' => $user[ 'pk_i_id' ] ) , array ( 'pk_i_id' => $id ) );
+		                }
+		                $result = Alerts::newInstance()->activate( $id );
                     }
 
                     if( $result == 1 ) {
@@ -96,10 +94,8 @@
 
                     $alert  = Alerts::newInstance()->findByPrimaryKey($id);
                     $result = 0;
-                    if(!empty($alert)) {
-                        if($email==$alert['s_email'] && $secret==$alert['s_secret']) {
-                            $result = Alerts::newInstance()->unsub($id);
-                        }
+	                if ( ! empty( $alert ) && $email == $alert[ 's_email' ] && $secret == $alert[ 's_secret' ] ) {
+		                $result = Alerts::newInstance()->unsub( $id );
                     }
 
                     if( $result == 1 ) {

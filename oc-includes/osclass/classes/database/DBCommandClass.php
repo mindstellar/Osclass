@@ -1032,10 +1032,8 @@
 
             foreach($queries as $q) {
                 $q = trim($q);
-                if( !empty($q) ) {
-                    if( !$this->query($q) ) {
-                        return false;
-                    }
+	            if ( ! empty( $q ) && ! $this->query( $q ) ) {
+		            return false;
                 }
             }
 

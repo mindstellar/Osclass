@@ -736,10 +736,8 @@
                         }
                     } else if($rs > 0) {
                         $affectedRows += $rs;
-                    } else if( is_bool($rs) ) { // catch error
-                        if($return) {
-                            $return = $rs;
-                        }
+                    } else if ( is_bool( $rs ) && $return ) {
+	                    $return = $rs;
                     }
                 }
             } else {

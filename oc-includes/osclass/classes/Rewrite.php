@@ -82,10 +82,8 @@
         {
             $regexp = trim($regexp);
             $uri = trim($uri);
-            if($regexp!='' && $uri!='') {
-                if(!in_array($regexp, $this->rules)) {
-                    $this->rules[$regexp] = $uri;
-                }
+	        if ( $regexp != '' && $uri != '' && ! in_array( $regexp , $this->rules ) ) {
+		        $this->rules[ $regexp ] = $uri;
             }
         }
 
