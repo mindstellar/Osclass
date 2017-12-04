@@ -1095,14 +1095,17 @@
             return $arows;
         }
 
-        /**
-         * Extends the given array $item with description in available locales
-         *
-         * @access public
-         * @since unknown
-         * @param array $item
-         * @return array item array with description in available locales
-         */
+	    /**
+	     * Extends the given array $item with description in available locales
+	     *
+	     * @access public
+	     * @since  unknown
+	     *
+	     * @param array $item
+	     *
+	     * @return array item array with description in available locales
+	     * @throws \Exception
+	     */
         public function extendDataSingle($item)
         {
             $prefLocale = osc_current_user_locale();

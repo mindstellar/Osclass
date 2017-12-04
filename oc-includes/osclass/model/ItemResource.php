@@ -86,14 +86,17 @@
             return $result->result();
         }
 
-        /**
-         * Get all resources belong to an item given its id
-         *
-         * @access public
-         * @since 2.3.7
-         * @param int $itemId Item id
-         * @return array of resources
-         */
+	    /**
+	     * Get all resources belong to an item given its id
+	     *
+	     * @access public
+	     * @since  2.3.7
+	     *
+	     * @param int $itemId Item id
+	     *
+	     * @return array of resources
+	     * @throws \Exception
+	     */
         public function getAllResourcesFromItem($itemId) {
             $key    = md5(osc_base_url().'ItemResource:getAllResourcesFromItem:'.$itemId);
             $found  = null;

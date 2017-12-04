@@ -646,6 +646,7 @@ if(osc_is_home_page() || osc_is_search_page()){
 	 * @param null $catId
 	 *
 	 * @return string
+	 * @throws \Exception
 	 */
 	function bender_sidebar_category_search( $catId = null )
 {
@@ -678,6 +679,7 @@ if(osc_is_home_page() || osc_is_search_page()){
 	 * @param int  $i
 	 *
 	 * @return null
+	 * @throws \Exception
 	 */
 	function bender_print_sidebar_category_search( $aCategories , $current_category = null , $i = 0 )
 {

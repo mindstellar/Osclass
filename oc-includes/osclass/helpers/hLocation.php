@@ -268,38 +268,46 @@
         return osc_field(osc_city_area(), 'items', '');
     }
 
-    /**
-     * Gets country's url
-     *
-     * @return string
-     */
+
+	/**
+	 * Gets country's url
+	 *
+	 * @return string
+	 * @throws \Exception
+	 */
     function osc_country_url() {
         return osc_search_url(array('sCountry' => osc_country_name()));
     }
 
-    /**
-     * Gets region's url
-     *
-     * @return string
-     */
+
+	/**
+	 * Gets region's url
+	 *
+	 * @return string
+	 * @throws \Exception
+	 */
     function osc_region_url() {
         return osc_search_url(array('sRegion' => osc_region_name()));
     }
 
-    /**
-     * Gets city's url
-     *
-     * @return string
-     */
+
+	/**
+	 * Gets city's url
+	 *
+	 * @return string
+	 * @throws \Exception
+	 */
     function osc_city_url() {
         return osc_search_url(array('sCity' => osc_city_name()));
     }
 
-    /**
-     * Gets city area's url
-     *
-     * @return string
-     */
+
+	/**
+	 * Gets city area's url
+	 *
+	 * @return string
+	 * @throws \Exception
+	 */
     function osc_city_area_url() {
         return osc_search_url(array('sCityArea' => osc_city_area_name()));
     }

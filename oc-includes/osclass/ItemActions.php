@@ -73,9 +73,11 @@
             return $spam;
         }
 
-        /**
-         * @return boolean
-         */
+		/**
+		 * @return boolean
+		 * @throws \Exception
+		 * @throws \Will
+		 */
         public function add()
         {
             $aItem       = $this->data;
@@ -1120,8 +1122,11 @@
 
 		/**
 		 * Return an array with all data necessary for do the action (ADD OR EDIT)
+		 *
 		 * @param <type> $is_add
+		 *
 		 * @return void
+		 * @throws \Exception
 		 */
         public function prepareData( $is_add )
         {

@@ -23,11 +23,12 @@
     * @author Osclass
     */
 
-    /**
-     * Gets the pagination links of search pagination
-     *
-     * @return string pagination links
-     */
+	/**
+	 * Gets the pagination links of search pagination
+	 *
+	 * @return string pagination links
+	 * @throws \Exception
+	 */
     function osc_search_pagination()
     {
         $params = array();

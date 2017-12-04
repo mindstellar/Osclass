@@ -177,12 +177,15 @@
         return false;
     }
 
-    /**
-     * Validate if exist category $value and is enabled in db
-     *
-     * @param string $value
-     * @return boolean
-     */
+
+	/**
+	 * Validate if exist category $value and is enabled in db
+	 *
+	 * @param string $value
+	 *
+	 * @return boolean
+	 * @throws \Exception
+	 */
     function osc_validate_category ($value) {
         if ( osc_validate_nozero($value) ) {
             $data = Category::newInstance()->findByPrimaryKey($value);

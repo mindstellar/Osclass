@@ -116,7 +116,9 @@
          *
          * @access public
          * @since unknown
-         * @param string $ids
+         *
+         * @param mixed $ids
+         *
          * @return array Fields' id
          */
         public function findIDSearchableByCategories($ids)

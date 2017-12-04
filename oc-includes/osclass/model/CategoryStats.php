@@ -64,14 +64,17 @@
             $this->setFields( array('fk_i_category_id', 'i_num_items') );
         }
 
-        /**
-         * Increase number of category items, given a category id
-         *
-         * @access public
-         * @since unknown
-         * @param int $categoryId Category id
-         * @return int number of affected rows, id error occurred return false
-         */
+	    /**
+	     * Increase number of category items, given a category id
+	     *
+	     * @access public
+	     * @since  unknown
+	     *
+	     * @param int $categoryId Category id
+	     *
+	     * @return int number of affected rows, id error occurred return false
+	     * @throws \Exception
+	     */
         public function increaseNumItems($categoryId)
         {
             if(!is_numeric($categoryId)) {
@@ -93,14 +96,17 @@
             return $return;
         }
 
-        /**
-         * Increase number of category items, given a category id
-         *
-         * @access public
-         * @since unknown
-         * @param int $categoryId Category id
-         * @return int number of affected rows, id error occurred return false
-         */
+	    /**
+	     * Increase number of category items, given a category id
+	     *
+	     * @access public
+	     * @since  unknown
+	     *
+	     * @param int $categoryId Category id
+	     *
+	     * @return int number of affected rows, id error occurred return false
+	     * @throws \Exception
+	     */
         public function decreaseNumItems($categoryId)
         {
             $this->dao->select( 'i_num_items' );
@@ -211,12 +217,14 @@
 		        return 0;
 	        }
         }
-        /**
-         *
-         * @access public
-         * @since unknown
-         * @return array
-         */
+
+	    /**
+	     *
+	     * @access public
+	     * @since  unknown
+	     * @return array
+	     * @throws \Exception
+*/
         public function toNumItemsMap()
         {
             $map = array();

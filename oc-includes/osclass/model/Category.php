@@ -158,14 +158,17 @@
             return $rs->result();
         }
 
-        /**
-         * Return categories in a tree
-         *
-         * @access public
-         * @since unknown
-         * @param bool $empty
-         * @return array
-         */
+	    /**
+	     * Return categories in a tree
+	     *
+	     * @access public
+	     * @since  unknown
+	     *
+	     * @param bool $empty
+	     *
+	     * @return array
+	     * @throws \Exception
+	     */
         public function toTree($empty = true)
         {
 	        $key   = md5( osc_base_url() . $this->_language . (string) $empty );
@@ -381,14 +384,17 @@
             return $tree;
         }
 
-        /**
-         * Return the root category of a one given
-         *
-         * @access public
-         * @since unknown
-         * @param integer $categoryID
-         * @return array
-         */
+	    /**
+	     * Return the root category of a one given
+	     *
+	     * @access public
+	     * @since  unknown
+	     *
+	     * @param integer $categoryID
+	     *
+	     * @return array
+	     * @throws \Exception
+	     */
         public function findRootCategory($categoryID)
         {
             // juanramon: specific condition
@@ -405,14 +411,15 @@
             return $this->findByPrimaryKey( $categoryID );
         }
 
-        /**
-         * Find a category find its slug
-         *
-         * @access public
-         * @since unknown
-         * @param string $slug
-         * @return array
-         */
+	    /**
+	     * Find a category find its slug
+	     *
+	     * @access public
+	     * @since  unknown
+	     * @param string $slug
+	     * @return array
+	     * @throws \Exception
+*/
         public function findBySlug($slug)
         {
             $slug = trim($slug);
@@ -430,17 +437,18 @@
                     return $results[0];
                 }
             }
-            return array();
+            return array ();
         }
 
-        /**
-         * Same as toRootTree but reverse the results
-         *
-         * @access public
-         * @since unknown
-         * @param integer$category_id
-         * @return array
-         */
+	    /**
+	     * Same as toRootTree but reverse the results
+	     *
+	     * @access public
+	     * @since  unknown
+	     * @param integer $category_id
+	     * @return array
+	     * @throws \Exception
+*/
         public function hierarchy($category_id)
         {
             return array_reverse($this->toRootTree($category_id ) );

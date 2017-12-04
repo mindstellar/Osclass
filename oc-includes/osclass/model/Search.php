@@ -1142,15 +1142,17 @@
         }
 
 
-        /**
-         * Return latest posted items, you can filter by category and specify the
-         * number of items returned.
-         *
-         * @param int $numItems
-         * @param mixed $options
-         * @param bool $withPicture
-         * @return array
-         */
+	    /**
+	     * Return latest posted items, you can filter by category and specify the
+	     * number of items returned.
+	     *
+	     * @param int   $numItems
+	     * @param mixed $options
+	     * @param bool  $withPicture
+	     *
+	     * @return array
+	     * @throws \Exception
+	     */
         public function getLatestItems($numItems = 10, $options = array(), $withPicture = false)
         {
             $key = md5(osc_base_url().(string)$numItems.json_encode($options).(string)$withPicture);
@@ -1216,6 +1218,7 @@
 	     * @param string $order
 	     *
 	     * @return array
+	     * @throws \Exception
 	     */
         public function listRegions($country = '%%%%', $zero = '>' , $order = 'items DESC' )
         {

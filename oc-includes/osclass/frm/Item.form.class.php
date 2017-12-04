@@ -197,6 +197,8 @@
 		 * @param null $item
 		 * @param null $default_item
 		 * @param bool $parent_selectable
+		 *
+		 * @throws \Exception
 		 */
 		public static function category_multiple_selects( $categories = null , $item = null , $default_item = null , $parent_selectable = false )
         {

@@ -333,6 +333,7 @@
 	 * @param array $params
 	 *
 	 * @return string
+	 * @throws \Exception
 	 */
     function osc_search_show_all_url($params = array()) {
         $params['page'] = 'search';
@@ -722,7 +723,9 @@
 	 * Gets the next region in the list_regions list
 	 *
 	 * @param string $country
+	 *
 	 * @return bool
+	 * @throws \Exception
 	 */
     function osc_has_list_regions($country = '%%%%') {
         if ( !View::newInstance()->_exists('list_regions') ) {
@@ -765,12 +768,15 @@
         return View::newInstance()->_count('list_countries');
     }
 
-    /**
-     * Gets the total number of regions in list_regions
-     *
-     * @param string $country
-     * @return int
-     */
+
+	/**
+	 * Gets the total number of regions in list_regions
+	 *
+	 * @param string $country
+	 *
+	 * @return int
+	 * @throws \Exception
+	 */
     function osc_count_list_regions($country = '%%%%') {
         if ( !View::newInstance()->_exists('list_regions') ) {
             View::newInstance()->_exportVariableToView('list_regions', RegionStats::newInstance()->listRegions($country) );
@@ -819,11 +825,13 @@
         return osc_field(osc_list_country(), 'items', '');
     }
 
-    /**
-     * Gets the url of current "list country"
-     *
-     * @return string
-     */
+
+	/**
+	 * Gets the url of current "list country"
+	 *
+	 * @return string
+	 * @throws \Exception
+	 */
     function osc_list_country_url() {
         return osc_search_url(array('sCountry' => osc_list_country_code()));
     }
@@ -865,11 +873,13 @@
         return osc_field(osc_list_region(), 'items', '');
     }
 
-    /**
-     * Gets the url of current "list region"
-     *
-     * @return string
-     */
+
+	/**
+	 * Gets the url of current "list region"
+	 *
+	 * @return string
+	 * @throws \Exception
+	 */
     function osc_list_region_url() {
         return osc_search_url( array( 'sRegion' => osc_list_region_id() ) );
     }
@@ -911,11 +921,13 @@
         return osc_field(osc_list_city(), 'items', '');
     }
 
-    /**
-     * Gets the url of current "list city"
-     *
-     * @return string
-     */
+
+	/**
+	 * Gets the url of current "list city"
+	 *
+	 * @return string
+	 * @throws \Exception
+	 */
     function osc_list_city_url() {
         return osc_search_url(array('sCity' => osc_list_city_id()));
     }
@@ -1066,6 +1078,7 @@
 	 * @param $paramCat
 	 *
 	 * @return string
+	 * @throws \Exception
 	 */
 	function _aux_search_category_slug( $paramCat) {
         if (is_array($paramCat)) {

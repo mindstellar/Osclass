@@ -157,12 +157,15 @@
         return (string) $title;
     }
 
-    /**
-     * Gets category from current premium
-     *
-     * @param string $locale
-     * @return string
-     */
+
+	/**
+	 * Gets category from current premium
+	 *
+	 * @param string $locale
+	 *
+	 * @return string
+	 * @throws \Exception
+	 */
     function osc_premium_category($locale = '' ) {
 	    if ( $locale == '' ) {
 		    $locale = osc_current_user_locale();

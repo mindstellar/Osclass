@@ -1689,11 +1689,14 @@ function osc_update_cat_stats() {
     $result = CategoryStats::newInstance()->dao->query($sql);
 }
 
-/**
- * Recount items for a given a category id
- *
- * @param int $id
- */
+
+	/**
+	 * Recount items for a given a category id
+	 *
+	 * @param int $id
+	 *
+	 * @throws \Exception
+	 */
 function osc_update_cat_stats_id($id)
 {
     // get sub categorias

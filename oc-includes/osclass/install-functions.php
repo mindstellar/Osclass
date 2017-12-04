@@ -981,6 +981,8 @@ function display_target() {
 
 	/**
 	 * @param $bool
+	 *
+	 * @throws \Exception
 	 */
 	function ping_search_engines( $bool){
     $mPreference = Preference::newInstance();

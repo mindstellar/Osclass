@@ -155,17 +155,19 @@
             return $this->dao->query('DELETE FROM '.DB_TABLE_PREFIX.'t_city_stats WHERE fk_i_city_id IN (SELECT pk_i_id FROM '.DB_TABLE_PREFIX.'t_city WHERE fk_i_region_id = '.$regionId.');');
         }
 
-        /**
-         * Return a list of cities and counter items.
-         * Can be filtered by region and num_items,
-         * and ordered by city_name or items counter
-         * $order = 'city_name ASC' OR $oder = 'items DESC'
-         *
-         * @param int $region
-         * @param string $zero
-         * @param string $order
-         * @return array
-         */
+	    /**
+	     * Return a list of cities and counter items.
+	     * Can be filtered by region and num_items,
+	     * and ordered by city_name or items counter
+	     * $order = 'city_name ASC' OR $oder = 'items DESC'
+	     *
+	     * @param int    $region
+	     * @param string $zero
+	     * @param string $order
+	     *
+	     * @return array
+	     * @throws \Exception
+	     */
         public function listCities($region = null, $zero = '>' , $order = 'city_name ASC' )
         {
             $key    = md5(osc_base_url().(string)$region.(string)$zero.(string)$order);

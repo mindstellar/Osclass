@@ -49,6 +49,7 @@
 	 * @param array $params
 	 *
 	 * @return string
+	 * @throws \Exception
 	 */
 	function osc_subdomain_base_url( $params = array () ) {
         $fields['category'] = 'sCategory';

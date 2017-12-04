@@ -53,6 +53,7 @@ osc_add_hook('search_form', 'osc_meta_search');
 
 	/**
 	 * @return string
+	 * @throws \Exception
 	 */
 	function search_title() {
     $region   = osc_search_region();
@@ -92,6 +93,7 @@ osc_add_hook('search_form', 'osc_meta_search');
 
 	/**
 	 * @return bool|mixed
+	 * @throws \Exception
 	 */
 	function meta_title() {
     $location = Rewrite::newInstance()->get_location();
@@ -291,6 +293,7 @@ osc_add_hook('search_form', 'osc_meta_search');
 
 	/**
 	 * @return array
+	 * @throws \Exception
 	 */
 	function osc_search_footer_links() {
     if( !osc_rewrite_enabled() ) {
@@ -359,6 +362,7 @@ osc_add_hook('search_form', 'osc_meta_search');
 	 * @param null $f
 	 *
 	 * @return string
+	 * @throws \Exception
 	 */
 	function osc_footer_link_url( $f = null ) {
     if($f==null) {

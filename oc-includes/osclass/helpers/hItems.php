@@ -190,12 +190,15 @@
         return (string) $title;
     }
 
-    /**
-     * Gets category from current item
-     *
-     * @param string $locale
-     * @return string
-     */
+
+	/**
+	 * Gets category from current item
+	 *
+	 * @param string $locale
+	 *
+	 * @return string
+	 * @throws \Exception
+	 */
     function osc_item_category($locale = '' ) {
         if ( !View::newInstance()->_exists('item_category') ) {
             View::newInstance()->_exportVariableToView('item_category', Category::newInstance()->findByPrimaryKey( osc_item_category_id(), $locale ) );
