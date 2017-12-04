@@ -21,7 +21,7 @@ themes, multi-language, CAPTCHA, dashboard, SEO friendly.
 Clone the repository and the submodules.
 
 ```
-$> git clone --recursive git@github.com:osclass/Osclass.git
+$> git clone --recursive git@github.com:navjottomer/Osclass.git
 ```
 
 ## Installation
@@ -30,7 +30,7 @@ Go to [our site][installing] to get detailed information on installing Osclass.
 
 [osclass]: http://osclass.org/
 [preview]: http://osclass.org/wp-content/uploads/2011/01/single_job_board-1024x729.png
-[code]: https://github.com/osclass/Osclass
+[code]: https://github.com/navjottomer/Osclass
 [mailing]: http://list.osclass.org/listinfo/osc-develop
 [irc]: http://webchat.freenode.net/?channels=osclass
 [license]: http://www.apache.org/licenses/LICENSE-2.0
