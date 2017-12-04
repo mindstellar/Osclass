@@ -70,7 +70,7 @@
          * @param string $date
          * @return bool
          */
-        function increase($date)
+        public function increase($date)
         {
             // check the date it's ok
             if( !preg_match('|^[0-9]{4}-[0-9]{2}-[0-9]{2}$|', $date) ) {

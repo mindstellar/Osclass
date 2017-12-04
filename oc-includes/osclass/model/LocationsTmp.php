@@ -54,14 +54,14 @@
         /**
          * Set data related to t_locations_tmp table
          */
-        function __construct()
+        public function __construct()
         {
             parent::__construct();
             $this->setTableName('t_locations_tmp');
             $this->setFields( array('id_location', 'e_type') );
         }
 
-        function getLocations($max)
+        public function getLocations($max)
         {
             $this->dao->select();
             $this->dao->from($this->getTableName());
@@ -74,12 +74,12 @@
             return $rs->result();
         }
 
-        function delete($where)
+        public function delete($where)
         {
             return $this->dao->delete($this->getTableName(), $where );
         }
 
-        function batchInsert($ids, $type) {
+        public function batchInsert($ids, $type) {
             if(!empty($ids)) {
                 return $this->dao->query(sprintf("INSERT INTO %s (id_location, e_type) VALUES (%s, '%s')", $this->getTableName(), implode(",'".$type."'),(", $ids), $type));
             }

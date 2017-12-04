@@ -7,7 +7,7 @@
  */
 class Styles {
 
-    var $styles = array();
+    public $styles = array();
 
     private static $instance;
 

@@ -38,7 +38,7 @@
         /**
          *
          */
-        function __construct()
+        public function __construct()
         {
             parent::__construct();
             $this->setTableName('t_locale');
@@ -72,7 +72,7 @@
          * @param boole $indexedByKk
          * @return array
          */
-        function listAllEnabled($isBo = false, $indexedByPk = false)
+        public function listAllEnabled($isBo = false, $indexedByPk = false)
         {
             $this->dao->select();
             $this->dao->from($this->getTableName());
@@ -109,7 +109,7 @@
          * @param string $code
          * @return array
          */
-        function findByCode($code)
+        public function findByCode($code)
         {
             $this->dao->select();
             $this->dao->from($this->getTableName());

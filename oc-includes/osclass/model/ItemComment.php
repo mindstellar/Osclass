@@ -54,7 +54,7 @@
         /**
          * Set data related to t_item_comment table
          */
-        function __construct()
+        public function __construct()
         {
             parent::__construct();
             $this->setTableName('t_item_comment');
@@ -83,7 +83,7 @@
          * @param integer $id
          * @return array
          */
-        function findByItemIDAll($id)
+        public function findByItemIDAll($id)
         {
             $this->dao->select();
             $this->dao->from($this->getTableName());
@@ -107,7 +107,7 @@
          * @param integer $comments_per_page
          * @return array
          */
-        function findByItemID($id, $page = null, $commentsPerPage = null)
+        public function findByItemID($id, $page = null, $commentsPerPage = null)
         {
             $result = array();
             if( $page == null ) { $page = osc_item_comments_page(); }
@@ -149,7 +149,7 @@
          * @param integer $id
          * @return integer
          */
-        function total_comments($id)
+        public function total_comments($id)
         {
             return $this->totalComments($id);
         }
@@ -162,7 +162,7 @@
          * @param integer $id
          * @return integer
          */
-        function totalComments($id)
+        public function totalComments($id)
         {
             $this->dao->select('count(pk_i_id) as total');
             $this->dao->from($this->getTableName());
@@ -191,7 +191,7 @@
          * @param integer $id
          * @return array
          */
-        function findByAuthorID($id)
+        public function findByAuthorID($id)
         {
             $this->dao->select();
             $this->dao->from($this->getTableName());
@@ -216,7 +216,7 @@
          * @param integer $itemId
          * @return array
          */
-        function getAllComments($itemId = null)
+        public function getAllComments($itemId = null)
         {
             $this->dao->select('c.*');
             $this->dao->from($this->getTableName().' c');
@@ -251,7 +251,7 @@
          * @param integer $num
          * @return array
          */
-        function getLastComments($num)
+        public function getLastComments($num)
         {
             if(!intval($num)) return false;
 

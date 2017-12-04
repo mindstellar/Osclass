@@ -23,7 +23,7 @@
         protected $ajax;
         protected $time;
 
-        function __construct()
+        public function __construct()
         {
             // this is necessary because if HTTP_HOST doesn't have the PORT the parse_url is null
             $current_host = parse_url(Params::getServerParam('HTTP_HOST'), PHP_URL_HOST);
@@ -61,7 +61,7 @@
             osc_run_hook( 'init' );
         }
 
-        function __destruct()
+        public function __destruct()
         {
             if( !$this->ajax && OSC_DEBUG ) {
                 echo '<!-- ' . $this->getTime() . ' seg. -->';
@@ -69,13 +69,13 @@
         }
 
         //to export variables at the business layer
-        function _exportVariableToView($key, $value)
+        public function _exportVariableToView($key, $value)
         {
             View::newInstance()->_exportVariableToView($key, $value);
         }
 
         //only for debug (deprecated, all inside View.php)
-        function _view($key = null)
+        public function _view($key = null)
         {
             View::newInstance()->_view($key);
         }
@@ -84,7 +84,7 @@
         protected abstract function doModel();
         protected abstract function doView($file);
 
-        function do400()
+        public function do400()
         {
             Rewrite::newInstance()->set_location('error');
             header('HTTP/1.1 400 Bad Request');
@@ -92,7 +92,7 @@
             exit;
         }
 
-        function do404()
+        public function do404()
         {
             Rewrite::newInstance()->set_location('error');
             header('HTTP/1.1 404 Not Found');
@@ -100,7 +100,7 @@
             exit;
         }
 
-        function do410()
+        public function do410()
         {
             Rewrite::newInstance()->set_location('error');
             header('HTTP/1.1 410 Gone');
@@ -108,12 +108,12 @@
             exit;
         }
 
-        function redirectTo($url, $code = null)
+        public function redirectTo($url, $code = null)
         {
             osc_redirect_to($url, $code);
         }
 
-        function getTime()
+        public function getTime()
         {
             $timeEnd = microtime(true);
             return $timeEnd - $this->time;

@@ -43,7 +43,7 @@
         /**
          *
          */
-        function __construct()
+        public function __construct()
         {
             parent::__construct();
             $this->setTableName('t_preference');
@@ -60,7 +60,7 @@
          * @param type $name
          * @return type
          */
-        function findValueByName($name)
+        public function findValueByName($name)
         {
             $this->dao->select('s_value');
             $this->dao->from($this->getTableName());

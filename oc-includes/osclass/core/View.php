@@ -30,19 +30,19 @@
             return self::$instance;
         }
 
-        function __construct()
+        public function __construct()
         {
             $this->aExported = array();
         }
 
         //to export variables at the business layer
-        function _exportVariableToView($key, $value)
+        public function _exportVariableToView($key, $value)
         {
             $this->aExported[$key] = $value;
         }
 
         //to get the exported variables for the view
-        function _get($key)
+        public function _get($key)
         {
             if ($this->_exists($key)) {
                 return($this->aExported[$key]);
@@ -52,7 +52,7 @@
         }
 
         //only for debug
-        function _view($key = null)
+        public function _view($key = null)
         {
             if ($key) {
                 print_r($this->aExported[$key]);
@@ -61,7 +61,7 @@
             }
         }
 
-        function _next($key)
+        public function _next($key)
         {
             if (is_array($this->aExported[$key])) {
                 $this->aCurrent[$key] = current( $this->aExported[$key] );
@@ -73,7 +73,7 @@
             return false;
         }
 
-        function _current($key)
+        public function _current($key)
         {
             if(is_array($this->aExported[$key])) {
                 if(!isset($this->aCurrent[$key]) ) {
@@ -84,7 +84,7 @@
             return '';
         }
 
-        function _key($key)
+        public function _key($key)
         {
             if ( is_array($this->aExported[$key]) ) {
                 $_key = key( $this->aExported[$key] ) -1;
@@ -96,7 +96,7 @@
             return false;
         }
 
-        function _seek($key, $position)
+        public function _seek($key, $position)
         {
             if ( is_array($this->aExported[$key]) ) {
                 $this->_reset($key);
@@ -111,7 +111,7 @@
             return false;
         }
 
-        function _reset($key)
+        public function _reset($key)
         {
             if ( !array_key_exists($key, $this->aExported) ) {
                 return array();
@@ -122,12 +122,12 @@
             return reset($this->aExported[$key]);
         }
 
-        function _exists($key)
+        public function _exists($key)
         {
             return ( isset($this->aExported[$key]) ? true : false );
         }
 
-        function _count($key)
+        public function _count($key)
         {
             if (isset($this->aExported[$key]) && is_array($this->aExported[$key])) {
                 return count($this->aExported[$key]);
@@ -135,7 +135,7 @@
             return -1; // @TOFIX @FIXME ?? why ? why not 0 ?
         }
 
-        function _erase($key)
+        public function _erase($key)
         {
             unset($this->aExported[$key]);
             unset($this->aCurrent[$key]);

@@ -80,7 +80,7 @@
          * @param mysqli $connId
          * @param MySQLi_Result $resultId 
          */
-        function __construct($connId = null, $resultId = null)
+        public function __construct($connId = null, $resultId = null)
         {
             $this->connId       = $connId;
             $this->resultId     = $resultId;
@@ -98,7 +98,7 @@
          * @param string $type 
          * @return mixed It can be an array or an object 
          */
-        function result($type = 'array')
+        public function result($type = 'array')
         {
             if($type == 'array') {
                 return $this->resultArray();
@@ -114,7 +114,7 @@
          * @since 2.3
          * @return array 
          */
-        function resultArray()
+        public function resultArray()
         {
             if( count($this->resultArray) > 0 ) {
                 return $this->resultArray;
@@ -135,7 +135,7 @@
          * @since 2.3
          * @return object 
          */
-        function resultObject()
+        public function resultObject()
         {
             if( count($this->resultObject) > 0 ) {
                 return $this->resultObject;
@@ -157,7 +157,7 @@
          * @param int $offset Must be between zero and the total number of rows minus one
          * @return bool true on success or false on failure
          */
-        function _dataSeek($offset = 0)
+        public function _dataSeek($offset = 0)
         {
             return $this->resultId->data_seek($offset);
         }
@@ -169,7 +169,7 @@
          * @since 2.3
          * @return object 
          */
-        function _fetchObject()
+        public function _fetchObject()
         {
             return $this->resultId->fetch_object();
         }
@@ -181,7 +181,7 @@
          * @since 2.3
          * @return array 
          */
-        function _fetchArray()
+        public function _fetchArray()
         {
             return $this->resultId->fetch_assoc();
         }
@@ -193,7 +193,7 @@
          * @param string $type
          * @return mixed 
          */
-        function row($n = 0, $type = 'array')
+        public function row($n = 0, $type = 'array')
         {
             if( !is_numeric($n) ) {
                 $n = 0;
@@ -214,7 +214,7 @@
          * @param int $n
          * @return object 
          */
-        function rowObject($n = 0)
+        public function rowObject($n = 0)
         {
             $result = $this->resultObject();
 
@@ -237,7 +237,7 @@
          * @param int $n
          * @return array
          */
-        function rowArray($n = 0)
+        public function rowArray($n = 0)
         {
             $result = $this->resultArray();
 
@@ -260,7 +260,7 @@
          * @param string $type
          * @return mixed 
          */
-        function firstRow($type = 'array')
+        public function firstRow($type = 'array')
         {
             $result = $this->result($type);
 
@@ -279,7 +279,7 @@
          * @param string $type
          * @return mixed 
          */
-        function lastRow($type = 'array')
+        public function lastRow($type = 'array')
         {
             $result = $this->result($type);
 
@@ -298,7 +298,7 @@
          * @param string $type
          * @return mixed 
          */
-        function nextRow($type = 'array')
+        public function nextRow($type = 'array')
         {
             $result = $this->result($type);
 
@@ -321,7 +321,7 @@
          * @param string $type
          * @return mixed 
          */
-        function previousRow($type = 'array')
+        public function previousRow($type = 'array')
         {
             $result = $this->result($type);
 
@@ -343,7 +343,7 @@
          * @since 2.3
          * @return int 
          */
-        function numRows()
+        public function numRows()
         {
             return $this->resultId->num_rows;
         }
@@ -355,7 +355,7 @@
          * @since 2.3
          * @return int 
          */
-        function numFields()
+        public function numFields()
         {
             return $this->resultId->field_count;
         }
@@ -367,7 +367,7 @@
          * @since 2.3
          * @return array 
          */
-        function listFields()
+        public function listFields()
         {
             $fieldNames = array();
             while( $field = $this->resultId->fetch_field() ) {

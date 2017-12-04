@@ -31,7 +31,7 @@
             return self::$instance;
         }
 
-        function __construct()
+        public function __construct()
 		{
 			$this->val = array();
 			$web_path = (MULTISITE) ? osc_multisite_url() : WEB_PATH;
@@ -57,24 +57,24 @@
             }
 		}
 		
-		function push($var, $value)
+		public function push($var, $value)
 		{
 			$this->val["$var"] = $value;
 			$_COOKIE["$var"] = $value;
 		}
 		
-		function pop($var)
+		public function pop($var)
 		{
             unset($this->val[$var]);
 			unset($_COOKIE[$var]);
 		}
 			
-		function clear()
+		public function clear()
 		{
 			$this->val = array();
 		}
 			
-		function set()
+		public function set()
 		{
 			$cookie_val = "";
             if(is_array($this->val) && count($this->val) > 0)
@@ -97,17 +97,17 @@
             setcookie($this->name, $cookie_val, $this->expires, REL_WEB_URL);
 		}
         
-        function num_vals() {
+        public function num_vals() {
             return(count($this->val));
         }
         
-        function get_value($str) {
+        public function get_value($str) {
             if (isset($this->val[$str])) return($this->val[$str]);
             return('');
         }
 
         //$tm: time in seconds
-        function set_expires($tm) {
+        public function set_expires($tm) {
         	$this->expires = time() + $tm;
 		}
 	}

@@ -18,18 +18,18 @@
 
     class WebSecBaseModel extends SecBaseModel
     {
-        function __construct()
+        public function __construct()
         {
             parent::__construct();
         }
 
-        function isLogged()
+        public function isLogged()
         {
             return osc_is_web_user_logged_in();
         }
 
         //destroying current session
-        function logout()
+        public function logout()
         {
             //destroying session
             $locale = Session::newInstance()->_get('userLocale');
@@ -46,7 +46,7 @@
             Cookie::newInstance()->set();
         }
 
-        function showAuthFailPage()
+        public function showAuthFailPage()
         {
             if(Params::getParam('page')=='ajax') {
                 echo json_encode(array('error' => 1, 'msg' => __('Session timed out')));

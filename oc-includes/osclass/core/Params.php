@@ -25,14 +25,14 @@
         private static $_request;
         private static $_server;
 
-        function __construct() { }
+        public function __construct() { }
 
-        static function init() {
+        public static function init() {
             self::$_request = array_merge($_GET, $_POST);
             self::$_server = $_SERVER;
         }
 
-        static function getParam($param, $htmlencode = false, $xss_check = true, $quotes_encode = true)
+        public static function getParam($param, $htmlencode = false, $xss_check = true, $quotes_encode = true)
         {
             if ($param == "") return '';
             if (!isset(self::$_request[$param])) return '';
@@ -54,14 +54,14 @@
             return ($value);
         }
 
-        static function existParam($param)
+        public static function existParam($param)
         {
             if ($param == "") return false;
             if (!isset(self::$_request[$param])) return false;
             return true;
         }
 
-        static function getServerParam($param, $htmlencode = false, $xss_check = true, $quotes_encode = true)
+        public static function getServerParam($param, $htmlencode = false, $xss_check = true, $quotes_encode = true)
         {
             if ($param == "") return '';
             if (!isset(self::$_server[$param])) return '';
@@ -83,14 +83,14 @@
             return ($value);
         }
 
-        static function existServerParam($param)
+        public static function existServerParam($param)
         {
             if ($param == "") return false;
             if (!isset(self::$_server[$param])) return false;
             return true;
         }
 
-        static function getServerParamsAsArray($xss_check = true)
+        public static function getServerParamsAsArray($xss_check = true)
         {
             $value = self::_purify(self::$_server, $xss_check);
 
@@ -101,7 +101,7 @@
             return $value;
         }
 
-        static function getFiles($param)
+        public static function getFiles($param)
         {
             if (isset($_FILES[$param])) {
                 return ($_FILES[$param]);
@@ -110,7 +110,7 @@
             return array();
         }
 
-        static function getParamsAsArray($what = "", $htmlencode = false, $xss_check = true, $quotes_encode = true)
+        public static function getParamsAsArray($what = "", $htmlencode = false, $xss_check = true, $quotes_encode = true)
         {
             switch ($what) {
                 case("get"):
@@ -142,17 +142,17 @@
             return $value;
         }
 
-        static function setParam($key, $value)
+        public static function setParam($key, $value)
         {
             self::$_request[$key] = $value;
         }
 
-        static function unsetParam($key)
+        public static function unsetParam($key)
         {
             unset(self::$_request[$key]);
         }
 
-        static function _view()
+        public static function _view()
         {
             print_r(self::getParamsAsArray());
         }

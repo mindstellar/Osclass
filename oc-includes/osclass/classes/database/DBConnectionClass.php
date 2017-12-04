@@ -186,7 +186,7 @@
          * @access private
          * @since 2.3
          */
-        function errorReport()
+        public function errorReport()
         {
             if( OSC_DEBUG ) {
                 $this->errorLevel = $this->db->errno;
@@ -203,7 +203,7 @@
          * @access private
          * @since 2.3
          */
-        function errorConnection()
+        public function errorConnection()
         {
             if( OSC_DEBUG ) {
                 $this->connErrorLevel = $this->db->connect_errno;
@@ -221,7 +221,7 @@
          * @since 2.3
          * @return type
          */
-        function getErrorConnectionLevel()
+        public function getErrorConnectionLevel()
         {
             return $this->connErrorLevel;
         }
@@ -233,7 +233,7 @@
          * @since 2.3
          * @return type
          */
-        function getErrorConnectionDesc()
+        public function getErrorConnectionDesc()
         {
             return $this->connErrorDesc;
         }
@@ -245,7 +245,7 @@
          * @since 2.3
          * @return type
          */
-        function getErrorLevel()
+        public function getErrorLevel()
         {
             return $this->errorLevel;
         }
@@ -257,7 +257,7 @@
          * @since 2.3
          * @return string
          */
-        function getErrorDesc()
+        public function getErrorDesc()
         {
             return $this->errorDesc;
         }
@@ -269,7 +269,7 @@
          * @since 2.3
          * @return boolean It returns true if the connection has been successful or false if not
          */
-        function connectToOsclassDb()
+        public function connectToOsclassDb()
         {
             $conn = $this->_connectToDb($this->dbHost, $this->dbUser, $this->dbPassword, $this->db);
 
@@ -320,7 +320,7 @@
          * @since 2.3
          * @return boolean It returns true if the connection has been successful or false if not
          */
-        function connectToMetadataDb()
+        public function connectToMetadataDb()
         {
             $conn = $this->_connectToDb(DB_HOST, DB_USER, DB_PASSWORD, $this->metadataDb);
 
@@ -351,7 +351,7 @@
          * @since 2.3
          * @return boolean It returns true if the database has been selected sucessfully or false if not
          */
-        function selectOsclassDb()
+        public function selectOsclassDb()
         {
             return $this->_selectDb($this->dbName, $this->db);
         }
@@ -363,7 +363,7 @@
          * @since 2.3
          * @return boolean It returns true if the database has been selected sucessfully or false if not
          */
-        function selectMetadataDb()
+        public function selectMetadataDb()
         {
             return $this->_selectDb(DB_NAME, $this->metadataDb);
         }
@@ -374,7 +374,7 @@
          * @access private
          * @since 2.3
          */
-        function reconnectOsclassDb()
+        public function reconnectOsclassDb()
         {
             $this->releaseOsclassDb();
             $this->connectToOsclassDb();
@@ -386,7 +386,7 @@
          * @access private
          * @since 2.3
          */
-        function reconnectMetadataDb()
+        public function reconnectMetadataDb()
         {
             $this->releaseMetadataDb();
             $this->connectToMetadataDb();
@@ -399,7 +399,7 @@
          * @since 2.3
          * @return boolean
          */
-        function releaseOsclassDb()
+        public function releaseOsclassDb()
         {
             $release = $this->_releaseDb($this->db);
 
@@ -417,7 +417,7 @@
          * @since 2.3
          * @return boolean
          */
-        function releaseMetadataDb()
+        public function releaseMetadataDb()
         {
             return $this->_releaseDb($this->metadataDb);
         }
@@ -428,7 +428,7 @@
          * @access public
          * @since 2.3
          */
-        function getOsclassDb()
+        public function getOsclassDb()
         {
             return $this->_getDb($this->db);
         }
@@ -439,7 +439,7 @@
          * @access public
          * @since 2.3
          */
-        function getMetadataDb()
+        public function getMetadataDb()
         {
             return $this->_getDb($this->metadataDb);
         }
@@ -453,7 +453,7 @@
          * @param mysqli $connId Database connector link
          * @return boolean It returns true if the connection
          */
-        function _connectToDb($host, $user, $password, &$connId)
+        public function _connectToDb($host, $user, $password, &$connId)
         {
             if( OSC_DEBUG ) {
                 $connId = new mysqli($host, $user, $password);
@@ -514,7 +514,7 @@
          * @since 2.3
          * @access private
          */
-        function debug($printFrontend = true)
+        public function debug($printFrontend = true)
         {
             $log = LogDatabase::newInstance();
 
@@ -552,7 +552,7 @@
          * @param mysqli $connId Database connector link
          * @return boolean It returns true if the database has been selected or false if not
          */
-        function _selectDb($dbName, &$connId)
+        public function _selectDb($dbName, &$connId)
         {
             if ( $connId->connect_errno ) {
                 return false;
@@ -573,7 +573,7 @@
          * @param string $charset The charset to be set
          * @param mysqli $connId Database link connector
          */
-        function _setCharset($charset, &$connId)
+        public function _setCharset($charset, &$connId)
         {
             if( OSC_DEBUG ) {
                 $connId->set_charset($charset);
@@ -591,7 +591,7 @@
          * @return boolean It returns true if the database connection is released and false
          * if the database connection couldn't be closed
          */
-        function _releaseDb(&$connId)
+        public function _releaseDb(&$connId)
         {
             if( !$connId ) {
                 return true;
@@ -607,7 +607,7 @@
          * @return mixed mysqli link connector if it's correct, or false if the dabase connection
          * hasn't been done.
          */
-        function _getDb(&$connId)
+        public function _getDb(&$connId)
         {
             if( $connId != false ) {
                 return $connId;

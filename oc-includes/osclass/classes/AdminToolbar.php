@@ -46,7 +46,7 @@
         /**
          * Add toolbar menus and add menus running hook add_admin_toolbar_menus
          */
-        function add_menus()
+        public function add_menus()
         {
             // User related, aligned right.
             osc_add_hook( 'add_admin_toolbar_menus', 'osc_admin_toolbar_menu'    , 0 );
@@ -76,7 +76,7 @@
          * - meta       - array     - Meta data including the following keys: html, class, onclick, target, title, tabindex.
          * - target     - string    - _blank
          */
-        function add_menu( $array )
+        public function add_menu( $array )
         {
                 $this->nodes[ $array['id'] ] = (object) $array;
         }
@@ -86,7 +86,7 @@
          *
          * @param type $id
          */
-        function remove_menu( $id )
+        public function remove_menu( $id )
         {
             unset( $this->nodes[ $id ] );
         }

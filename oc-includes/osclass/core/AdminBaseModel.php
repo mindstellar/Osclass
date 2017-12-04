@@ -18,7 +18,7 @@
 
     class AdminBaseModel extends BaseModel
     {
-        function __construct()
+        public function __construct()
         {
             parent::__construct();
             // @deprecated: to be removed
@@ -26,8 +26,8 @@
             osc_run_hook( 'init_admin_insecure' );
         }
 
-        function doModel() {}
-        function doView($file) {}
+        public function doModel() {}
+        public function doView($file) {}
     }
 
     /* file end: ./oc-includes/osclass/core/AdminBaseModel.php */

@@ -18,17 +18,17 @@
 
     Class UserActions
     {
-        var $is_admin;
-        var $manager;
+        public $is_admin;
+        public $manager;
 
-        function __construct($is_admin)
+        public function __construct($is_admin)
         {
             $this->is_admin = $is_admin;
             $this->manager  = User::newInstance();
         }
 
         //add...
-        function add()
+        public function add()
         {
             $error = array();
             $flash_error = '';
@@ -138,7 +138,7 @@
         }
 
         //edit...
-        function edit($userId)
+        public function edit($userId)
         {
 
             $input = $this->prepareData(false);
@@ -224,7 +224,7 @@
             return 1;
         }
 
-        function recover_password()
+        public function recover_password()
         {
             $user = User::newInstance()->findByEmail( Params::getParam('s_email') );
             Session::newInstance()->_set( 'recover_time', time() );
@@ -252,7 +252,7 @@
             return 0;
         }
 
-        function prepareData($is_add)
+        public function prepareData($is_add)
         {
             $input = array();
 

@@ -19,10 +19,10 @@
     Class ItemActions
     {
         private $manager = null;
-        var $is_admin;
-        var $data;
+        public $is_admin;
+        public $data;
 
-        function __construct($is_admin = false) {
+        public function __construct($is_admin = false) {
             $this->is_admin = $is_admin;
             $this->manager = Item::newInstance();
         }
@@ -287,7 +287,7 @@
             return $success;
         }
 
-        function edit() {
+        public function edit() {
             $aItem       = $this->data;
             $aItem = osc_apply_filter('item_edit_prepare_data', $aItem);
             $flash_error = '';
@@ -1298,7 +1298,7 @@
             $this->data = $aItem;
         }
 
-        function insertItemLocales($type, $title, $description, $itemId )
+        public function insertItemLocales($type, $title, $description, $itemId )
         {
             foreach($title as $k => $_data){
                 $_title         = $title[$k];

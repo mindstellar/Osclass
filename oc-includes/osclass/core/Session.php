@@ -30,7 +30,7 @@
 
         public function __construct() {}
 
-        function session_start() {
+        public function session_start() {
             $currentCookieParams = session_get_cookie_params();
             if ( defined('COOKIE_DOMAIN') ) {
                 $currentCookieParams["domain"] = COOKIE_DOMAIN;
@@ -64,7 +64,7 @@
             }
         }
 
-        function _session_start()
+        public function _session_start()
         {
             $sn = session_name();
             if (isset($_COOKIE[$sn])) {
@@ -81,16 +81,16 @@
             return session_start();
         }
 
-        function session_destroy() {
+        public function session_destroy() {
             session_destroy();
         }
 
-        function _set($key, $value) {
+        public function _set($key, $value) {
             $_SESSION[$key] = $value;
             $this->session[$key] = $value;
         }
 
-        function _get($key) {
+        public function _get($key) {
             if (!isset($this->session[$key])) {
                 return '';
             }
@@ -98,20 +98,20 @@
             return ($this->session[$key]);
         }
 
-        function _drop($key) {
+        public function _drop($key) {
             unset($_SESSION[$key]);
             unset($this->session[$key]);
 
         }
 
-        function _setReferer($value) {
+        public function _setReferer($value) {
             $_SESSION['osc_http_referer'] = $value;
             $this->session['osc_http_referer'] = $value;
             $_SESSION['osc_http_referer_state'] = 0;
             $this->session['osc_http_referer_state'] = 0;
         }
 
-        function _getReferer() {
+        public function _getReferer() {
             if(isset($this->session['osc_http_referer'])) {
                 return ($this->session['osc_http_referer']);
             } else {
@@ -119,24 +119,24 @@
             }
         }
 
-        function _dropReferer() {
+        public function _dropReferer() {
             unset($_SESSION['osc_http_referer']);
             unset($this->session['osc_http_referer']);
             unset($_SESSION['osc_http_referer_state']);
             unset($this->session['osc_http_referer_state']);
         }
 
-        function _view() {
+        public function _view() {
             print_r($this->session);
         }
 
-        function _setMessage($key, $value, $type) {
+        public function _setMessage($key, $value, $type) {
             $messages = $this->_get('messages');
             $messages[$key][] = array('msg' => str_replace(PHP_EOL, "<br />", $value), 'type' => $type);
             $this->_set('messages', $messages);
         }
 
-        function _getMessage($key) {
+        public function _getMessage($key) {
             $messages = $this->_get('messages');
             if ( isset($messages[$key]) ) {
                 return ( $messages[$key] );
@@ -145,19 +145,19 @@
             }
         }
 
-        function _dropMessage($key) {
+        public function _dropMessage($key) {
             $messages = $this->_get('messages');
             unset($messages[$key]);
             $this->_set('messages', $messages);
         }
 
-        function _keepForm($key) {
+        public function _keepForm($key) {
             $aKeep = $this->_get('keepForm');
             $aKeep[$key] = 1;
             $this->_set('keepForm',$aKeep);
         }
 
-        function _dropKeepForm($key = '') {
+        public function _dropKeepForm($key = '') {
             $aKeep = $this->_get('keepForm');
             if($key!='') {
                 unset( $aKeep[$key] );
@@ -167,13 +167,13 @@
             }
         }
 
-        function _setForm($key, $value) {
+        public function _setForm($key, $value) {
             $form = $this->_get('form');
             $form[$key] = $value;
             $this->_set('form', $form);
         }
 
-        function _getForm($key = '') {
+        public function _getForm($key = '') {
             $form = $this->_get('form');
             if($key!='') {
                 if ( isset($form[$key]) ) {
@@ -186,23 +186,23 @@
             }
         }
 
-        function _getKeepForm() {
+        public function _getKeepForm() {
             return $this->_get('keepForm');
         }
 
-        function _viewMessage() {
+        public function _viewMessage() {
             print_r($this->session['messages']);
         }
 
-        function _viewForm() {
+        public function _viewForm() {
             print_r($_SESSION['form']);
         }
 
-        function _viewKeep() {
+        public function _viewKeep() {
             print_r($_SESSION['keepForm']);
         }
 
-        function  _clearVariables() {
+        public function  _clearVariables() {
             $form = $this->_get('form');
             $aKeep = $this->_get('keepForm');
             if( is_array($form) ) {

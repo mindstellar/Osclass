@@ -30,12 +30,12 @@
          *
          * @var type
          */
-        var $messages;
+        public $messages;
         /**
          *
          * @var type
          */
-        var $explain_messages;
+        public $explain_messages;
 
         /**
          *
@@ -122,7 +122,7 @@
             echo '</fieldset>' . PHP_EOL;
         }
 
-        function writeMessages()
+        public function writeMessages()
         {
             $filename = CONTENT_PATH . 'queries.log';
 
@@ -162,7 +162,7 @@
             return true;
         }
 
-        function writeExplainMessages()
+        public function writeExplainMessages()
         {
             $filename = CONTENT_PATH . 'explain_queries.log';
 

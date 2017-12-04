@@ -57,7 +57,7 @@
          * @access public
          * @since 2.4
          */
-        function __construct()
+        public function __construct()
         {
             parent::__construct();
             $this->setTableName('t_city_stats');
@@ -195,7 +195,7 @@
          * @param type $cityId
          * @return int total items
          */
-        function calculateNumItems($cityId)
+        public function calculateNumItems($cityId)
         {
             $sql  = 'SELECT count(*) as total FROM '.DB_TABLE_PREFIX.'t_item_location, '.DB_TABLE_PREFIX.'t_item, '.DB_TABLE_PREFIX.'t_category ';
             $sql .= 'WHERE '.DB_TABLE_PREFIX.'t_item_location.fk_i_city_id = '.$cityId.' AND ';

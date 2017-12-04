@@ -38,7 +38,7 @@
         /**
          *
          */
-        function __construct()
+        public function __construct()
         {
             parent::__construct();
             $this->setTableName('t_pages');
@@ -64,7 +64,7 @@
          * @param string $locale By default is null but you can specify locale code.
          * @return array Page information. If there's no information, return an empty array.
          */
-        function findByPrimaryKey($id, $locale = null)
+        public function findByPrimaryKey($id, $locale = null)
         {
             $this->dao->select();
             $this->dao->from($this->getTableName());
@@ -108,7 +108,7 @@
          * @param string $locale Locale string.
          * @return array It returns page fields. If it has no results, it returns an empty array.
          */
-        function findByInternalName($intName, $locale = null)
+        public function findByInternalName($intName, $locale = null)
         {
             $this->dao->select();
             $this->dao->from($this->getTableName());
@@ -136,7 +136,7 @@
          * @param int order
          * @return array It returns page fields. If it has no results, it returns an empty array.
          */
-        function findByOrder($order, $locale = null)
+        public function findByOrder($order, $locale = null)
         {
             $this->dao->select();
             $this->dao->from($this->getTableName());
@@ -577,7 +577,7 @@
          * @param int $id Page id
          * @return true if it's indelible, false in case not
          */
-        function isIndelible($id)
+        public function isIndelible($id)
         {
             $page = $this->findByPrimaryKey($id);
             if($page['b_indelible'] == 1) {
@@ -595,7 +595,7 @@
          * @param string $internalName page internal name
          * @return true if internal name exists, false if not
          */
-        function internalNameExists($id, $internalName)
+        public function internalNameExists($id, $internalName)
         {
             $this->dao->select();
             $this->dao->from($this->tableName);
@@ -609,7 +609,7 @@
             return false;
         }
 
-        function getDescriptionTableName()
+        public function getDescriptionTableName()
         {
             return $this->getTablePrefix() . 't_pages_description';
         }

@@ -38,7 +38,7 @@
         /**
          *
          */
-        function __construct()
+        public function __construct()
         {
             parent::__construct();
             $this->setTableName('t_cron');
@@ -53,7 +53,7 @@
          * @param string $type
          * @return array
          */
-        function getCronByType($type)
+        public function getCronByType($type)
         {
             $this->dao->select('*');
             $this->dao->from($this->getTableName());

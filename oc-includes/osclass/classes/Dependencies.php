@@ -6,12 +6,12 @@
  */
 class Dependencies {
 
-    var $registered   = array();
-    var $queue        = array();
+    public $registered   = array();
+    public $queue        = array();
 
-    var $resolved     = array();
-    var $unresolved   = array();
-    var $error        = array();
+    public $resolved     = array();
+    public $unresolved   = array();
+    public $error        = array();
 
     public function __construct()
     {

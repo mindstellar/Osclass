@@ -54,7 +54,7 @@
         /**
          * Set data related to t_meta_fields table
          */
-        function __construct()
+        public function __construct()
         {
             parent::__construct();
             $this->setTableName('t_meta_fields');

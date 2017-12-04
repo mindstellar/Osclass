@@ -77,7 +77,7 @@
         /**
          *
          */
-        function __construct($expired = false)
+        public function __construct($expired = false)
         {
             parent::__construct();
             $this->setTableName('t_item');

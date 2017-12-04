@@ -264,7 +264,7 @@ FB;
             }
         }
 
-        static function meta_fields_search($catId = null) {
+        public static function meta_fields_search($catId = null) {
             // we received the categoryID
             if($catId == null) {
                 return false;

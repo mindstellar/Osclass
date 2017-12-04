@@ -54,7 +54,7 @@
         /**
          * Set data related to t_item_resource table
          */
-        function __construct()
+        public function __construct()
         {
             parent::__construct();
             $this->setTableName('t_item_resource');
@@ -70,7 +70,7 @@
          * @param int $itemId Item id
          * @return array of resources
          */
-        function getAllResources()
+        public function getAllResources()
         {
             $this->dao->select('r.*, c.dt_pub_date');
             $this->dao->from($this->getTableName() . ' r');
@@ -93,7 +93,7 @@
          * @param int $itemId Item id
          * @return array of resources
          */
-        function getAllResourcesFromItem($itemId) {
+        public function getAllResourcesFromItem($itemId) {
             $key    = md5(osc_base_url().'ItemResource:getAllResourcesFromItem:'.$itemId);
             $found  = null;
             $cache  = osc_cache_get($key, $found);
@@ -124,7 +124,7 @@
          * @param int $itemId Item id
          * @return array resource
          */
-        function getResource($itemId)
+        public function getResource($itemId)
         {
             $this->dao->select( $this->getFields() );
             $this->dao->from( $this->getTableName() );
@@ -152,7 +152,7 @@
          * @param string $code
          * @return bool
          */
-        function getResourceSecure($resourceId, $code)
+        public function getResourceSecure($resourceId, $code)
         {
             return $this->existResource($resourceId, $code);
         }
@@ -166,7 +166,7 @@
          * @param string $code
          * @return bool
          */
-        function existResource($resourceId, $code)
+        public function existResource($resourceId, $code)
         {
             $this->dao->select('COUNT(*) AS numrows');
             $this->dao->from( $this->getTableName() );
@@ -195,7 +195,7 @@
          * @param int $itemId Item id
          * @return int
          */
-        function countResources($itemId = null)
+        public function countResources($itemId = null)
         {
             $this->dao->select('COUNT(*) AS numrows');
             $this->dao->from( $this->getTableName() );
@@ -230,7 +230,7 @@
          * @param string $type order type [DESC|ASC]
          * @return array of resources
          */
-        function getResources($itemId = NULL, $start = 0, $length = 10, $order = 'r.pk_i_id', $type = 'DESC')
+        public function getResources($itemId = NULL, $start = 0, $length = 10, $order = 'r.pk_i_id', $type = 'DESC')
         {
             if( !in_array($order, array(  0=> 'r.pk_i_id',
                     1=> 'r.pk_i_id',
@@ -282,7 +282,7 @@
          * @since unknown
          * @return string table name
          */
-        function getTableItemName()
+        public function getTableItemName()
         {
             return $this->getTablePrefix() . 't_item';
         }
@@ -294,7 +294,7 @@
          * @since unknown
          * @return string table description name
          */
-        function getTableItemDescription()
+        public function getTableItemDescription()
         {
             return $this->getTablePrefix() . 't_item_description';
         }

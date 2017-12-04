@@ -18,7 +18,7 @@
 
     class AdminSecBaseModel extends SecBaseModel
     {
-        function __construct()
+        public function __construct()
         {
             parent::__construct();
 
@@ -55,17 +55,17 @@
             osc_enqueue_script('admin-ui-osc');
         }
 
-        function isLogged()
+        public function isLogged()
         {
             return osc_is_admin_user_logged_in();
         }
 
-        function isModerator()
+        public function isModerator()
         {
             return osc_is_moderator();
         }
 
-        function logout()
+        public function logout()
         {
             //destroying session
             $locale = Session::newInstance()->_get('oc_adminLocale');
@@ -84,7 +84,7 @@
             Cookie::newInstance()->set();
         }
 
-        function showAuthFailPage()
+        public function showAuthFailPage()
         {
             if(Params::getParam('page')=='ajax') {
                 echo json_encode(array('error' => 1, 'msg' => __('Session timed out')));
@@ -98,7 +98,7 @@
         }
 
         //hopefully generic...
-        function doView($file)
+        public function doView($file)
         {
             osc_run_hook("before_admin_html");
             osc_current_admin_theme_path($file);

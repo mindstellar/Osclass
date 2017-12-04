@@ -18,14 +18,14 @@
 
     class CWebLanguage extends BaseModel
     {
-        function __construct()
+        public function __construct()
         {
             parent::__construct();
             osc_run_hook( 'init_language' );
         }
 
         // business layer...
-        function doModel()
+        public function doModel()
         {
             $locale = Params::getParam('locale');
 
@@ -44,7 +44,7 @@
         }
 
         // hopefully generic...
-        function doView($file) { }
+        public function doView($file) { }
     }
 
     /* file end: ./language.php */

@@ -45,7 +45,7 @@
         /**
          * Set data related to t_category table
          */
-        function __construct($l = '')
+        public function __construct($l = '')
         {
             parent::__construct();
             $this->setTableName('t_category');

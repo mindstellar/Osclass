@@ -38,7 +38,7 @@
         /**
          *
          */
-        function __construct()
+        public function __construct()
         {
             parent::__construct();
             $this->setTableName('t_alerts');
@@ -66,7 +66,7 @@
          * @param string $userId
          * @return array
          */
-        function findByUser($userId, $unsub = false)
+        public function findByUser($userId, $unsub = false)
         {
             $this->dao->select();
             $this->dao->from($this->getTableName());
@@ -91,7 +91,7 @@
          * @param string $email
          * @return array
          */
-        function findByEmail($email, $unsub = false)
+        public function findByEmail($email, $unsub = false)
         {
             $this->dao->select();
             $this->dao->from($this->getTableName());
@@ -116,7 +116,7 @@
          * @param string $type
          * @return array
          */
-        function findByType($type, $active = false, $unsub = false)
+        public function findByType($type, $active = false, $unsub = false)
         {
             $this->dao->select();
             $this->dao->from($this->getTableName());
@@ -145,7 +145,7 @@
          * @param bool $active
          * @return array
          */
-        function findByTypeGroup($type, $active = FALSE, $unsub = false)
+        public function findByTypeGroup($type, $active = FALSE, $unsub = false)
         {
             $this->dao->select();
             $this->dao->from($this->getTableName());
@@ -177,7 +177,7 @@
          *
          * WARNIGN doble where!
          */
-        function findBySearchAndUser($search, $user, $unsub = false)
+        public function findBySearchAndUser($search, $user, $unsub = false)
         {
             $this->dao->select();
             $this->dao->from($this->getTableName());
@@ -206,7 +206,7 @@
          *
          * WARNIGN doble where!
          */
-        function findBySearchAndType($search, $type, $unsub = false)
+        public function findBySearchAndType($search, $type, $unsub = false)
         {
             $this->dao->select();
             $this->dao->from($this->getTableName());
@@ -235,7 +235,7 @@
          * @param bool $active
          * @return array
          */
-        function findUsersBySearchAndType($search, $type, $active = FALSE, $unsub = false)
+        public function findUsersBySearchAndType($search, $type, $active = FALSE, $unsub = false)
         {
             $this->dao->select();
             $this->dao->from($this->getTableName());
@@ -266,7 +266,7 @@
          * @param string $type
          * @return array
          */
-        function findByUserByType($userId, $type, $unsub = false)
+        public function findByUserByType($userId, $type, $unsub = false)
         {
             $this->dao->select();
             $this->dao->from($this->getTableName());
@@ -294,7 +294,7 @@
          * @param string $type
          * @return array
          */
-        function findByEmailByType($email, $type, $unsub = false)
+        public function findByEmailByType($email, $type, $unsub = false)
         {
             $this->dao->select();
             $this->dao->from($this->getTableName());
@@ -324,7 +324,7 @@
          * @param string $type
          * @return bool on success
          */
-        function createAlert($userid, $email, $alert, $secret, $type = 'DAILY')
+        public function createAlert($userid, $email, $alert, $secret, $type = 'DAILY')
         {
             $results = 0;
             $this->dao->select();
@@ -362,7 +362,7 @@
          * @param string $id
          * @return mixed false on fail, int of num. of affected rows
          */
-        function activate($id)
+        public function activate($id)
         {
             return $this->dao->update($this->getTableName(), array('b_active' => 1), array('pk_i_id' => $id));
         }
@@ -375,7 +375,7 @@
          * @param string $id
          * @return mixed false on fail, int of num. of affected rows
          */
-        function deactivate($id)
+        public function deactivate($id)
         {
             return $this->dao->update($this->getTableName(), array('b_active' => 0), array('pk_i_id' => $id));
         }
@@ -388,7 +388,7 @@
          * @param string $id
          * @return mixed false on fail, int of num. of affected rows
          */
-        function unsub($id)
+        public function unsub($id)
         {
             return $this->dao->update($this->getTableName(), array('dt_unsub_date' => date("Y-m-d H:i:s")), array('pk_i_id' => $id));
         }

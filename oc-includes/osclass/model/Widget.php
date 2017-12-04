@@ -38,7 +38,7 @@
         /**
          *
          */
-        function __construct()
+        public function __construct()
         {
             parent::__construct();
             $this->setTableName('t_widget');
@@ -53,7 +53,7 @@
          * @param string $location
          * @return array
          */
-        function findByLocation($location)
+        public function findByLocation($location)
         {
             $this->dao->select('*');
             $this->dao->from($this->getTableName());
@@ -74,7 +74,7 @@
          * @param string $description
          * @return array
          */
-        function findByDescription($description)
+        public function findByDescription($description)
         {
             $this->dao->select('*');
             $this->dao->from($this->getTableName());

@@ -20,7 +20,7 @@
 
     class CWebAjax extends BaseModel
     {
-        function __construct()
+        public function __construct()
         {
             parent::__construct();
             $this->ajax = true;
@@ -28,7 +28,7 @@
         }
 
         //Business Layer...
-        function doModel()
+        public function doModel()
         {
             //specific things for this class
             switch ($this->action)
@@ -336,7 +336,7 @@
         }
 
         //hopefully generic...
-        function doView($file)
+        public function doView($file)
         {
             osc_run_hook("before_html");
             osc_current_web_theme_path($file);

@@ -27,7 +27,7 @@
         private $dbName = null;
         private $msg = "";
 
-        function __construct($dbHost, $dbUser, $dbPassword, $dbName) {
+        public function __construct($dbHost, $dbUser, $dbPassword, $dbName) {
             $this->dbHost = $dbHost;
             $this->dbUser = $dbUser;
             $this->dbPassword = $dbPassword;
@@ -37,11 +37,11 @@
             $this->osc_dbConnect();
         }
 
-        function __destruct() {
+        public function __destruct() {
             $this->osc_dbClose();
         }
 
-        function debug($msg, $ok = true)
+        public function debug($msg, $ok = true)
         {
             if( OSC_DEBUG_DB ) {
                 $this->msg .= date("d/m/Y - H:i:s") . " ";
@@ -58,7 +58,7 @@
             }
         }
 
-        function print_debug()
+        public function print_debug()
         {
             if( OSC_DEBUG_DB && !defined('IS_AJAX') ) {
                 echo $this->msg;
@@ -73,7 +73,7 @@
          * @param string database password
          * @param string datatabase name
          */
-        function osc_dbConnect() {
+        public function osc_dbConnect() {
             $this->db = @new mysqli($this->dbHost, $this->dbUser, $this->dbPassword, $this->dbName);
             if ($this->db->connect_error) {
                 if( !defined('OSC_INSTALLING') ) {
@@ -93,7 +93,7 @@
         /**
          * Close the database connection.
          */
-        function osc_dbClose() {
+        public function osc_dbClose() {
             if (!@$this->db->close()) {
                 $this->debug('Error releasing the connection to \'' . $this->dbName . '\'', false);
             }
@@ -105,7 +105,7 @@
         /**
          * Executes a SQL statement in the database.
          */
-        function osc_dbExec()
+        public function osc_dbExec()
         {
             $sql = null;
             $argv = func_get_args();
@@ -133,7 +133,7 @@
             return $result;
         }
 
-        function osc_dbFetchValue() {
+        public function osc_dbFetchValue() {
             $result = null;
 
             $sql = null;
@@ -162,7 +162,7 @@
         /**
          * @return array with values resulting of execution of query passed by parameter.
          */
-        function osc_dbFetchValues() {
+        public function osc_dbFetchValues() {
             $results = array();
 
             $sql = null;
@@ -188,7 +188,7 @@
             return $results;
         }
 
-        function osc_dbFetchResult() {
+        public function osc_dbFetchResult() {
             $result = null;
 
             $sql = null;
@@ -214,7 +214,7 @@
             return $result;
         }
 
-        function osc_dbFetchResults() {
+        public function osc_dbFetchResults() {
             $results = array();
 
             $sql = null;
@@ -243,7 +243,7 @@
         /**
          * Import (executes) the SQL passed as parameter making some proper adaptations.
          */
-        function osc_dbImportSQL($sql, $needle = '')
+        public function osc_dbImportSQL($sql, $needle = '')
         {
             $sql = str_replace('/*TABLE_PREFIX*/', DB_TABLE_PREFIX, $sql);
             $sentences = explode( $needle . ';', $sql);
@@ -287,27 +287,27 @@
             return true;
         }
 
-        function autocommit($b_value) {
+        public function autocommit($b_value) {
             $this->db->autocommit($b_value);
         }
 
-        function commit() {
+        public function commit() {
             $this->db->commit();
         }
 
-        function rollback() {
+        public function rollback() {
             $this->db->rollback();
         }
 
-        function get_last_id() {
+        public function get_last_id() {
             return($this->db->insert_id);
         }
 
-        function get_affected_rows() {
+        public function get_affected_rows() {
             return($this->db->affected_rows);
         }
 
-        function get_errno() {
+        public function get_errno() {
             return($this->db_errno);
         }
 
@@ -317,7 +317,7 @@
          * @param mixed array or string with the SQL queries.
          * @return BOOLEAN true on success, false on fail
          */
-        function osc_updateDB($queries = '') {
+        public function osc_updateDB($queries = '') {
 
             if(!is_array($queries)) {
                 $queries = explode(";", $queries);

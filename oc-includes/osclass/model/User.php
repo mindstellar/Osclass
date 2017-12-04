@@ -38,7 +38,7 @@
         /**
          *
          */
-        function __construct()
+        public function __construct()
         {
             parent::__construct();
             $this->setTableName('t_user');
@@ -519,7 +519,7 @@
          *
          * @return boolean on success
          */
-        function lastAccess($userId, $date, $ip, $time = NULL) {
+        public function lastAccess($userId, $date, $ip, $time = NULL) {
             if($time!=null) {
                 $this->dao->select("dt_access_date, s_access_ip");
                 $this->dao->from(DB_TABLE_PREFIX.'t_user');

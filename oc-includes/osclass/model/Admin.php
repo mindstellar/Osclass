@@ -52,7 +52,7 @@
         /**
          * Set data from t_admin table
          */
-        function __construct()
+        public function __construct()
         {
             parent::__construct();
             $this->setTableName('t_admin');
@@ -86,7 +86,7 @@
          * @param string $email
          * @return array
          */
-        function findByEmail($email)
+        public function findByEmail($email)
         {
             $this->dao->select();
             $this->dao->from($this->getTableName());
@@ -109,7 +109,7 @@
          * @param string $username
          * @return array
          */
-        function findByUsername($username)
+        public function findByUsername($username)
         {
             $this->dao->select();
             $this->dao->from($this->getTableName());
@@ -133,7 +133,7 @@
          * @param string $password
          * @return array
          */
-        function findByCredentials($userName, $password)
+        public function findByCredentials($userName, $password)
         {
             $user = $this->findByUsername($userName);
             if($user!==false && isset($user['s_password'])) {
@@ -154,7 +154,7 @@
          * @param string $secret
          * @return array
          */
-        function findByIdSecret($id, $secret)
+        public function findByIdSecret($id, $secret)
         {
             $this->dao->select();
             $this->dao->from($this->getTableName());
@@ -180,7 +180,7 @@
          * @param string $password
          * @return array
          */
-        function findByIdPassword($id, $password)
+        public function findByIdPassword($id, $password)
         {
             $this->dao->select();
             $this->dao->from($this->getTableName());
@@ -204,7 +204,7 @@
          * @param array $id
          * @return boolean
          */
-        function deleteBatch( $id )
+        public function deleteBatch( $id )
         {
             $this->dao->from( $this->getTableName() );
             $this->dao->whereIn( 'pk_i_id', $id );

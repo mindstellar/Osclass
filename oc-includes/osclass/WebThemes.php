@@ -176,7 +176,7 @@
          * @param <type> $theme
          * @return <type>
          */
-        function loadThemeInfo($theme)
+        public function loadThemeInfo($theme)
         {
             $path = $this->path . $theme . '/index.php';
             if( !file_exists($path) ) {
@@ -258,12 +258,12 @@
             return $result;
         }
 
-        function isValidPage($internal_name)
+        public function isValidPage($internal_name)
         {
             return !in_array($internal_name, $this->pages);
         }
 
-        function getAvailableTemplates($theme = null)
+        public function getAvailableTemplates($theme = null)
         {
             if($theme==null) { $theme = $this->theme; };
 

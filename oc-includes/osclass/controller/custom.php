@@ -18,7 +18,7 @@
 
     class CWebCustom extends BaseModel
     {
-        function __construct()
+        public function __construct()
         {
             parent::__construct();
             //specific things for this class
@@ -26,7 +26,7 @@
         }
 
         //Business Layer...
-        function doModel()
+        public function doModel()
         {
             $user_menu = false;
             if(Params::existParam('route')) {
@@ -71,7 +71,7 @@
         }
 
         //hopefully generic...
-        function doView($file)
+        public function doView($file)
         {
             osc_run_hook("before_html");
             osc_current_web_theme_path($file);

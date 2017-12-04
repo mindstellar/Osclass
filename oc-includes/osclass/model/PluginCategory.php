@@ -58,7 +58,7 @@
          * @param type $categoryId
          * @return type
          */
-        function findByCategoryId($categoryId)
+        public function findByCategoryId($categoryId)
         {
             $this->dao->select( $this->getFields() );
             $this->dao->from( $this->getTableName() );
@@ -81,7 +81,7 @@
          * @param string $plugin
          * @return array
          */
-        function listSelected($plugin)
+        public function listSelected($plugin)
         {
             $this->dao->select( $this->getFields() );
             $this->dao->from( $this->getTableName() );
@@ -110,7 +110,7 @@
          * @param int $categoryId
          * @return bool
          */
-        function isThisCategory($pluginName, $categoryId)
+        public function isThisCategory($pluginName, $categoryId)
         {
             $this->dao->select('COUNT(*) AS numrows');
             $this->dao->from( $this->getTableName() );

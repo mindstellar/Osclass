@@ -37,7 +37,7 @@
          * @since 2.3
          * @var DBCommandClass 
          */
-        var $dao;
+        public $dao;
         /**
          * Table name
          * 
@@ -45,7 +45,7 @@
          * @since unknown
          * @var string 
          */
-        var $tableName;
+        public $tableName;
         /**
          * Table prefix
          * 
@@ -53,7 +53,7 @@
          * @since unknown
          * @var string 
          */
-        var $tablePrefix;
+        public $tablePrefix;
         /**
          * Primary key of the table
          *
@@ -61,7 +61,7 @@
          * @since 2.3
          * @var string 
          */
-        var $primaryKey;
+        public $primaryKey;
         /**
          * Fields of the table
          * 
@@ -69,12 +69,12 @@
          * @since 2.3
          * @var array 
          */
-        var $fields;
+        public $fields;
 
         /**
          * Init connection of the database and create DBCommandClass object
          */
-        function __construct()
+        public function __construct()
         {
             $conn              = DBConnectionClass::newInstance();
             $data              = $conn->getOsclassDb();
@@ -100,7 +100,7 @@
          * @param string $value
          * @return mixed If the result has been found, it return the array row. If not, it returns false
          */
-        function findByPrimaryKey($value)
+        public function findByPrimaryKey($value)
         {
             $this->dao->select($this->fields);
             $this->dao->from($this->getTableName());
@@ -128,7 +128,7 @@
          * @return mixed It return the number of affected rows if the update has been 
          * correct or false if nothing has been modified
          */
-        function updateByPrimaryKey($values, $key)
+        public function updateByPrimaryKey($values, $key)
         {
             $cond = array(
                 $this->getPrimaryKey() => $key
@@ -146,7 +146,7 @@
          * @return mixed It return the number of affected rows if the delete has been 
          * correct or false if nothing has been modified
          */
-        function deleteByPrimaryKey($value)
+        public function deleteByPrimaryKey($value)
         {
             $cond = array(
                 $this->getPrimaryKey() => $value
@@ -162,7 +162,7 @@
          * @since unknown
          * @return array 
          */
-        function listAll()
+        public function listAll()
         {
             $this->dao->select($this->getFields());
             $this->dao->from($this->getTableName());
@@ -183,7 +183,7 @@
          * @param array $values
          * @return boolean 
          */
-        function insert($values)
+        public function insert($values)
         {
             if( !$this->checkFieldKeys(array_keys($values)) ) {
                 return false;
@@ -205,7 +205,7 @@
          * @return mixed It returns the number of affected rows if the update has been 
          * correct or false if an error happended
          */
-        function update($values, $where)
+        public function update($values, $where)
         {
             if( !$this->checkFieldKeys(array_keys($values)) ) {
                 return false;
@@ -231,7 +231,7 @@
          * @return mixed It returns the number of affected rows if the delete has been 
          * correct or false if an error happended
          */
-        function delete($where)
+        public function delete($where)
         {
             if( !$this->checkFieldKeys(array_keys($where)) ) {
                 return false;
@@ -249,7 +249,7 @@
          * @since unknown
          * @param string $table 
          */
-        function setTableName($table)
+        public function setTableName($table)
         {
             $this->tableName = $this->tablePrefix . $table;
         }
@@ -261,7 +261,7 @@
          * @since unknown
          * @return string 
          */
-        function getTableName()
+        public function getTableName()
         {
             return $this->tableName;
         }
@@ -273,7 +273,7 @@
          * @since unknown
          * @param string $key 
          */
-        function setPrimaryKey($key)
+        public function setPrimaryKey($key)
         {
             $this->primaryKey = $key;
         }
@@ -285,7 +285,7 @@
          * @since unknown
          * @return string 
          */
-        function getPrimaryKey()
+        public function getPrimaryKey()
         {
             return $this->primaryKey;
         }
@@ -297,7 +297,7 @@
          * @since 2.3
          * @param array $fields 
          */
-        function setFields($fields)
+        public function setFields($fields)
         {
             $this->fields = $fields;
         }
@@ -309,7 +309,7 @@
          * @since 2.3
          * @return array 
          */
-        function getFields()
+        public function getFields()
         {
             return $this->fields;
         }
@@ -322,7 +322,7 @@
          * @param array $aKey
          * @return boolean 
          */
-        function checkFieldKeys($aKey)
+        public function checkFieldKeys($aKey)
         {
             foreach($aKey as $key) {
                 if( !in_array($key, $this->getFields()) ) {
@@ -340,7 +340,7 @@
          * @since 2.3
          * @return string 
          */
-        function getTablePrefix()
+        public function getTablePrefix()
         {
             return $this->tablePrefix;
         }
@@ -352,7 +352,7 @@
          * @since 2.3
          * @return int 
          */
-        function getErrorLevel()
+        public function getErrorLevel()
         {
             return $this->dao->getErrorLevel();
         }
@@ -364,7 +364,7 @@
          * @since 2.3
          * @return string 
          */
-        function getErrorDesc()
+        public function getErrorDesc()
         {
             return $this->dao->getErrorDesc();
         }

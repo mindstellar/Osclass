@@ -46,7 +46,7 @@
         /**
          * Set data
          */
-        function __construct()
+        public function __construct()
         {
             parent::__construct();
         }
@@ -56,7 +56,7 @@
          *
          * @return array
          */
-        function showTables()
+        public function showTables()
         {
             $res = $this->dao->query('SHOW TABLES;');
             if($res) {
@@ -73,7 +73,7 @@
          * @param string $table
          * @return bool
          */
-        function table_structure($path, $table)
+        public function table_structure($path, $table)
         {
             if ( !is_writable($path) ) return false;
 
@@ -107,7 +107,7 @@
          * @param type $table
          * @return bool
          */
-        function table_data($path, $table)
+        public function table_data($path, $table)
         {
             if ( !is_writable($path) ) return false;
 

@@ -57,7 +57,7 @@
          * @access public
          * @since 2.4
          */
-        function __construct()
+        public function __construct()
         {
             parent::__construct();
             $this->setTableName('t_country_stats');
@@ -179,7 +179,7 @@
          * @param type $countryCode
          * @return int total items
          */
-        function calculateNumItems($countryCode)
+        public function calculateNumItems($countryCode)
         {
             $sql  = 'SELECT count(*) as total FROM '.DB_TABLE_PREFIX.'t_item_location, '.DB_TABLE_PREFIX.'t_item, '.DB_TABLE_PREFIX.'t_category ';
             $sql .= 'WHERE '.DB_TABLE_PREFIX.'t_item_location.fk_c_country_code = \''.$countryCode.'\' AND ';

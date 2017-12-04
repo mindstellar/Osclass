@@ -32,7 +32,7 @@
          * @since 2.3
          * @var mysqli
          */
-        var $connId;
+        public $connId;
         /**
          * Database result object
          *
@@ -40,102 +40,102 @@
          * @since 2.3
          * @var MySQLi_Result
          */
-        var $resultId;
+        public $resultId;
 
         /**
          *
          * @var array
          */
-        var $queries;
+        public $queries;
         /**
          *
          * @var array
          */
-        var $queryTimes;
+        public $queryTimes;
         /**
          *
          * @var int
          */
-        var $queryCount;
+        public $queryCount;
 
         /**
          *
          * @var int
          */
-        var $errorLevel;
+        public $errorLevel;
         /**
          *
          * @var string
          */
-        var $errorDesc;
+        public $errorDesc;
 
         /**
          *
          * @var array
          */
-        var $aSelect;
+        public $aSelect;
         /* var $aDistinct; */
         /**
          *
          * @var array
          */
-        var $aFrom;
+        public $aFrom;
         /**
          *
          * @var array
          */
-        var $aJoin;
+        public $aJoin;
         /**
          *
          * @var array
          */
-        var $aWhere;
+        public $aWhere;
         /**
          *
          * @var array
          */
-        var $aLike;
+        public $aLike;
         /**
          *
          * @var array
          */
-        var $aGroupby;
+        public $aGroupby;
         /**
          *
          * @var array
          */
-        var $aHaving;
+        public $aHaving;
         /* var $aKeys; */
         /**
          *
          * @var mixed
          */
-        var $aLimit;
+        public $aLimit;
         /**
          *
          * @var mixed
          */
-        var $aOffset;
+        public $aOffset;
         /**
          *
          * @var mixed
          */
-        var $aOrder;
+        public $aOrder;
         /**
          *
          * @var array
          */
-        var $aOrderby;
+        public $aOrderby;
         /**
          *
          * @var array
          */
-        var $aSet;
+        public $aSet;
         /**
          *
          * @var array
          */
-        var $aWherein;
+        public $aWherein;
         /* var $aAliasedTables; */
         /* var $aStoreArray; */
 
@@ -143,14 +143,14 @@
          *
          * @var LogDatabase
          */
-        var $log;
+        public $log;
 
         /**
          * Initializate variables
          *
          * @param mysqli $connId
          */
-        function __construct(&$connId)
+        public function __construct(&$connId)
         {
             $this->connId     = &$connId;
             $this->resultId   = 0;
@@ -181,7 +181,7 @@
         /**
          * Unset connection and result objects
          */
-        function __destruct()
+        public function __destruct()
         {
             unset($this->connId);
             unset($this->resultId);
@@ -211,7 +211,7 @@
          * @param mixed $select It can be a string or array
          * @return DBCommandClass
          */
-        function select($select = '*')
+        public function select($select = '*')
         {
             if( is_string($select) ) {
                 $select = explode(',', $select);
@@ -234,7 +234,7 @@
          * @param mixed $from It can be a string or array
          * @return DBCommandClass
          */
-        function from($from)
+        public function from($from)
         {
             if( !is_array($from) ) {
                 if( strpos($from, ',') !== false) {
@@ -261,7 +261,7 @@
          * @param string $type It can be: LEFT, RIGHT, OUTER, INNER, LEFT OUTER or RIGHT OUTER
          * @return DBCommandClass
          */
-        function join($table, $cond, $type = '')
+        public function join($table, $cond, $type = '')
         {
             if($type != '') {
                 $type = strtoupper(trim($type));
@@ -288,7 +288,7 @@
          * @param mixed $value
          * @return DBCommandClass
          */
-        function where($key, $value = null)
+        public function where($key, $value = null)
         {
             return $this->_where($key, $value, 'AND ');
         }
@@ -302,7 +302,7 @@
          * @param mixed $value
          * @return DBCommandClass
          */
-        function orWhere($key, $value = null)
+        public function orWhere($key, $value = null)
         {
             return $this->_where($key, $value, 'OR ');
         }
@@ -317,7 +317,7 @@
          * @param string $type
          * @return DBCommandClass
          */
-        function _where($key, $value = null, $type = 'AND ')
+        public function _where($key, $value = null, $type = 'AND ')
         {
             if( !is_array($key) ) {
                 $key = array($key => $value);
@@ -349,7 +349,7 @@
          * @param mixed $values
          * @return DBCommandClass
          */
-        function whereIn($key = null, $values = null)
+        public function whereIn($key = null, $values = null)
         {
             return $this->_whereIn($key, $values, false, 'AND ');
         }
@@ -363,7 +363,7 @@
          * @param mixed $values
          * @return DBCommandClass
          */
-        function orWhereIn($key = null, $values = null)
+        public function orWhereIn($key = null, $values = null)
         {
             return $this->_whereIn($key, $values, false, 'OR ');
         }
@@ -377,7 +377,7 @@
          * @param mixed $values
          * @return DBCommandClass
          */
-        function whereNotIn($key = null, $values = null)
+        public function whereNotIn($key = null, $values = null)
         {
             return $this->_whereIn($key, $values, true, 'AND ');
         }
@@ -391,7 +391,7 @@
          * @param mixed $values
          * @return DBCommandClass
          */
-        function orWhereNotIn($key = null, $values = null)
+        public function orWhereNotIn($key = null, $values = null)
         {
             return $this->_whereIn($key, $values, true, 'OR ');
         }
@@ -407,7 +407,7 @@
          * @param string $type
          * @return DBCommandClass
          */
-        function _whereIn($key = null, $values = null, $not = false, $type = 'AND ')
+        public function _whereIn($key = null, $values = null, $not = false, $type = 'AND ')
         {
             if( !is_array($values) ) {
                 $values = array($values);
@@ -437,7 +437,7 @@
          * @param type $side
          * @return DBCommandClass
          */
-        function like($field, $match = '', $side = 'both')
+        public function like($field, $match = '', $side = 'both')
         {
             return $this->_like($field, $match, 'AND ', $side);
         }
@@ -452,7 +452,7 @@
          * @param string $side
          * @return DBCommandClass
          */
-        function notLike($field, $match = '', $side = 'both')
+        public function notLike($field, $match = '', $side = 'both')
         {
             return $this->_like($field, $match, 'AND ', $side, 'NOT');
         }
@@ -467,7 +467,7 @@
          * @param type $side
          * @return string
          */
-        function orLike($field, $match = '', $side = 'both')
+        public function orLike($field, $match = '', $side = 'both')
         {
             return $this->_like($field, $match, 'OR ', $side);
         }
@@ -482,7 +482,7 @@
          * @param string $side
          * @return DBCommandClass
          */
-        function orNotLike($field, $match = '', $side = 'both')
+        public function orNotLike($field, $match = '', $side = 'both')
         {
             return $this->_like($field, $match, 'OR ', $side, 'NOT');
         }
@@ -499,7 +499,7 @@
          * @param string $not Two possibilities: blank or NOT
          * @return DBCommandClass
          */
-        function _like($field, $match = '', $type = 'AND ', $side = 'both', $not = '')
+        public function _like($field, $match = '', $type = 'AND ', $side = 'both', $not = '')
         {
             $likeStatement = '';
 
@@ -534,7 +534,7 @@
          * @param mixed $by
          * @return DBCommandClass
          */
-        function groupBy($by)
+        public function groupBy($by)
         {
             if( is_string($by) ) {
                 $by = explode(',', $by);
@@ -557,7 +557,7 @@
          * @param type $value
          * @return type
          */
-        function having($key, $value = '')
+        public function having($key, $value = '')
         {
             return $this->_having($key, $value, 'AND ');
         }
@@ -568,7 +568,7 @@
          * @param type $value
          * @return type
          */
-        function orHaving($key, $value = '')
+        public function orHaving($key, $value = '')
         {
             return $this->_having($key, $value, 'OR ');
         }
@@ -579,7 +579,7 @@
          * @param type $value
          * @param type $type
          */
-        function _having($key, $value = '', $type = 'AND ')
+        public function _having($key, $value = '', $type = 'AND ')
         {
             if( !is_array($key) ) {
                 $key = array($key => $value);
@@ -606,7 +606,7 @@
          * @param string $orderby
          * @param string $direction Accepted directions: random, asc, desc
          */
-        function orderBy($orderby, $direction = '')
+        public function orderBy($orderby, $direction = '')
         {
             if(strtolower($direction) == 'random') {
                 $direction = ' RAND()';
@@ -627,7 +627,7 @@
          * @param int $offset
          * @return DBCommandClass
          */
-        function limit($value, $offset = '')
+        public function limit($value, $offset = '')
         {
             if(is_numeric($value)) {
                 $this->aLimit = intval($value);
@@ -652,7 +652,7 @@
          * @param int $offset
          * @return DBCommandClass
          */
-        function offset($offset)
+        public function offset($offset)
         {
             if(is_numeric($offset)) {
                 $this->aOffset = intval($offset);
@@ -671,7 +671,7 @@
          * @param mixed $set
          * @return boolean
          */
-        function insert($table = '', $set = null)
+        public function insert($table = '', $set = null)
         {
             if( !is_null($set) ) {
                 $this->set($set);
@@ -704,7 +704,7 @@
          * @param array $values
          * @return string
          */
-        function _insert($table, $keys, $values)
+        public function _insert($table, $keys, $values)
         {
             return 'INSERT INTO ' . $table . ' (' . implode(', ', $keys). ') VALUES (' . implode(', ', $values) . ')';
         }
@@ -718,7 +718,7 @@
          * @param mixed $set
          * @return boolean
          */
-        function replace($table = '', $set = null)
+        public function replace($table = '', $set = null)
         {
             if( !is_null($set) ) {
                 $this->set($set);
@@ -751,7 +751,7 @@
          * @param array $values
          * @return string
          */
-        function _replace($table, $keys, $values)
+        public function _replace($table, $keys, $values)
         {
             return 'REPLACE INTO ' . $table . ' (' . implode(', ', $keys) . ') VALUES (' . implode(', ', $values) . ')';
         }
@@ -766,7 +766,7 @@
          * @param mixed $where
          * @return mixed
          */
-        function update($table = '', $set = null, $where = null)
+        public function update($table = '', $set = null, $where = null)
         {
             if( !is_null($set) ) {
                 $this->set($set);
@@ -810,7 +810,7 @@
          * @param array $where
          * @return string
          */
-        function _update($table, $values, $where)
+        public function _update($table, $values, $where)
         {
             foreach($values as $k => $v) {
                 $valstr[] = $k . ' = ' . $v;
@@ -832,7 +832,7 @@
          * @param mixed $where
          * @return mixed
          */
-        function delete($table = '', $where = '')
+        public function delete($table = '', $where = '')
         {
             if( $table == '') {
                 if( !isset($this->aFrom[0]) ) {
@@ -872,7 +872,7 @@
          * @param array $like
          * @return string
          */
-        function _delete($table, $where, $like)
+        public function _delete($table, $where, $like)
         {
             $conditions = '';
 
@@ -901,7 +901,7 @@
          * @param mixed $offset
          * @return mixed
          */
-        function get($table = '', $limit = null, $offset = null)
+        public function get($table = '', $limit = null, $offset = null)
         {
             if($table != '') {
                 $this->from($table);
@@ -927,7 +927,7 @@
          * @param string $sql
          * @return mixed
          */
-        function query($sql)
+        public function query($sql)
         {
             if($sql == '') {
                 return false;
@@ -971,7 +971,7 @@
             return $rs;
         }
 
-        function query_debug($sql)
+        public function query_debug($sql)
         {
             if($sql == '') {
                 return false;
@@ -1006,7 +1006,7 @@
          * @param string $sql
          * @return mixed
          */
-        function _execute($sql)
+        public function _execute($sql)
         {
             return $this->connId->query($sql);
         }
@@ -1020,7 +1020,7 @@
          * @param string $sql
          * @return boolean true if it's succesful, false if not
          */
-        function importSQL($sql)
+        public function importSQL($sql)
         {
             $sql     = str_replace( '/*TABLE_PREFIX*/', DB_TABLE_PREFIX, $sql);
             $sql     = preg_replace('#/\*(?:[^*]*(?:\*(?!/))*)*\*/#','',($sql));
@@ -1378,7 +1378,7 @@
          * @param mixed array or string with the SQL queries.
          * @return BOOLEAN true on success, false on fail
         */
-        function updateDB($queries = '')
+        public function updateDB($queries = '')
         {
             error_log(' ----- START updateDB ----- ');
             if(!is_array($queries)) {
@@ -1483,7 +1483,7 @@
          * @param mixed $value
          * @return DBCommandClass
          */
-        function set($key, $value = '', $escape = true)
+        public function set($key, $value = '', $escape = true)
         {
             if( !is_array($key) ) {
                 $key = array($key => $value);
@@ -1507,7 +1507,7 @@
          * @since 2.3
          * @return string
          */
-        function _getSelect()
+        public function _getSelect()
         {
             $sql = 'SELECT ';
 
@@ -1592,7 +1592,7 @@
          * @since 2.3
          * @return int
          */
-        function affectedRows()
+        public function affectedRows()
         {
             return $this->connId->affected_rows;
         }
@@ -1604,7 +1604,7 @@
          * @since 2.3
          * @return string
          */
-        function lastQuery()
+        public function lastQuery()
         {
             return end($this->queries);
         }
@@ -1616,7 +1616,7 @@
          * @since 2.3
          * @return mixed
          */
-        function insertedId()
+        public function insertedId()
         {
             return $this->connId->insert_id;
         }
@@ -1629,7 +1629,7 @@
          * @param string $str
          * @return bool
          */
-        function _hasOperator($str)
+        public function _hasOperator($str)
         {
             $str = trim($str);
 
@@ -1648,7 +1648,7 @@
          * @param string $sql
          * @return bool
          */
-        function isSelectType($sql)
+        public function isSelectType($sql)
         {
             if ( ! preg_match('/^\s*"?(SELECT)\s+/i', $sql)) {
                 return false;
@@ -1665,7 +1665,7 @@
          * @param string $sql
          * @return bool
          */
-        function isWriteType($sql)
+        public function isWriteType($sql)
         {
             if ( ! preg_match('/^\s*"?(SET|INSERT|UPDATE|DELETE|REPLACE|CREATE|DROP|TRUNCATE|LOAD DATA|COPY|ALTER|GRANT|REVOKE|LOCK|UNLOCK|RENAME)\s+/i', $sql)) {
                 return false;
@@ -1682,7 +1682,7 @@
          * @param string $str
          * @return string
          */
-        function escape($str)
+        public function escape($str)
         {
             if( is_string($str) ) {
                 $str = "'" . $this->escapeStr($str) . "'";
@@ -1703,7 +1703,7 @@
          * @param string $str
          * @return string
          */
-        function escapeStr($str, $like = false)
+        public function escapeStr($str, $like = false)
         {
             if( is_object($this->connId) ) {
                 $str = $this->connId->real_escape_string($str);
@@ -1724,7 +1724,7 @@
          * @access private
          * @since 2.3
          */
-        function _resetWrite()
+        public function _resetWrite()
         {
             $aReset = array('aSet'     => array(),
                             'aFrom'    => array(),
@@ -1744,7 +1744,7 @@
          * @access private
          * @since 2.3
          */
-        function _resetSelect()
+        public function _resetSelect()
         {
             $aReset = array('aSelect'  => array(),
                             'aFrom'    => array(),
@@ -1769,7 +1769,7 @@
          * @since 2.3
          * @param array $aReset
          */
-        function _resetRun($aReset){
+        public function _resetRun($aReset){
             foreach ($aReset as $item => $defaultValue) {
                 $this->$item = $defaultValue;
             }
@@ -1781,7 +1781,7 @@
          * @access private
          * @since 2.3
          */
-        function errorReport()
+        public function errorReport()
         {
             $this->errorLevel = $this->connId->errno;
             $this->errorDesc  = $this->connId->error;
@@ -1794,7 +1794,7 @@
          * @since 2.3
          * @return int
          */
-        function getErrorLevel()
+        public function getErrorLevel()
         {
             return $this->errorLevel;
         }
@@ -1806,7 +1806,7 @@
          * @since 2.3
          * @return string
          */
-        function getErrorDesc()
+        public function getErrorDesc()
         {
             return $this->errorDesc;
         }

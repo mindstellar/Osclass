@@ -38,7 +38,7 @@
         /**
          *
          */
-        function __construct()
+        public function __construct()
         {
             parent::__construct();
             $this->setTableName('t_latest_searches');
@@ -57,7 +57,7 @@
          * @param int $limit
          * @return array
          */
-        function getSearches($limit = 20)
+        public function getSearches($limit = 20)
         {
             $this->dao->select('d_date, s_search, COUNT(s_search) as i_total');
             $this->dao->from($this->getTableName());
@@ -81,7 +81,7 @@
          * @param int $time
          * @return array
          */
-        function getSearchesByDate($time = null)
+        public function getSearchesByDate($time = null)
         {
             if($time==null) { $time = time() - (7*24*3600); };
 
@@ -108,7 +108,7 @@
          * @param string $date
          * @return bool
          */
-        function purgeDate($date = null)
+        public function purgeDate($date = null)
         {
             if($date == null) {
                 return false;

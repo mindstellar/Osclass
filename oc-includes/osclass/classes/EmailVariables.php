@@ -120,7 +120,7 @@
          *
          * @param type $email 
          */
-        function getVariables( $email )
+        public function getVariables( $email )
         {
             $array = array();
             $variables = array(

@@ -35,7 +35,7 @@
             return self::$instance;
         }
 
-        function __construct($install = false) {
+        public function __construct($install = false) {
             if(!$install) {
                 // get user/admin locale
                 if( OC_ADMIN ) {
@@ -81,7 +81,7 @@
             }
         }
 
-        function _get($domain) {
+        public function _get($domain) {
             if(!isset($this->messages[$domain])) {
                 return false;
             }
@@ -89,7 +89,7 @@
             return $this->messages[$domain];
         }
 
-        function _set($domain, $reader) {
+        public function _set($domain, $reader) {
             if(isset($messages[$domain])) {
                false;
             }
@@ -98,7 +98,7 @@
             return true;
         }
 
-        function _load($file, $domain) {
+        public function _load($file, $domain) {
             if(!file_exists($file)) {
                 return false;
             }

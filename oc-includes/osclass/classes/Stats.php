@@ -39,7 +39,7 @@
         /**
          * 
          */
-        function __construct()
+        public function __construct()
         {
             $conn = DBConnectionClass::newInstance();
             $data = $conn->getOsclassDb();

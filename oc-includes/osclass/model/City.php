@@ -54,7 +54,7 @@
         /**
          * Set data related to t_city table
          */
-        function __construct()
+        public function __construct()
         {
             parent::__construct();
             $this->setTableName('t_city');
@@ -71,7 +71,7 @@
          * @param int|null $regionId Region id
          * @return array If there's an error or 0 results, it returns an empty array
          */
-        function ajax($query, $regionId = null)
+        public function ajax($query, $regionId = null)
         {
             $this->dao->select('a.pk_i_id as id, a.s_name as label, a.s_name as value, aux.s_name as region');
             $this->dao->from($this->getTableName().' as a');
@@ -104,7 +104,7 @@
          * @param int $regionId Region id
          * @return array If there's an error or 0 results, it returns an empty array
          */
-        function getByRegion($regionId)
+        public function getByRegion($regionId)
         {
             return $this->findByRegion($regionId);
         }
@@ -117,7 +117,7 @@
          * @param int $regionId Region id
          * @return array If there's an error or 0 results, it returns an empty array
          */
-        function findByRegion($regionId)
+        public function findByRegion($regionId)
         {
             $this->dao->select($this->getFields());
             $this->dao->from($this->getTableName());
@@ -142,7 +142,7 @@
          * @param int $regionId
          * @return array
          */
-        function findByName($cityName, $regionId = null)
+        public function findByName($cityName, $regionId = null)
         {
             $this->dao->select($this->getFields());
             $this->dao->from($this->getTableName());
@@ -168,7 +168,7 @@
          * @since unknown
          * @return array
          */
-        function listAll()
+        public function listAll()
         {
             $this->dao->select($this->getFields());
             $this->dao->from($this->getTableName());
@@ -190,7 +190,7 @@
          *  @param $pk
          *  @return int number of failed deletions or 0 in case of none
          */
-        function deleteByPrimaryKey($pk) {
+        public function deleteByPrimaryKey($pk) {
             $mCityAreas = CityArea::NewInstance();
             $aCityAreas = $mCityAreas->findByCity($pk);
             $result = 0;

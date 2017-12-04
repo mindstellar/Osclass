@@ -42,7 +42,7 @@
         /**
          *
          */
-        function __construct()
+        public function __construct()
         {
             parent::__construct();
             $this->setTableName('t_region');
@@ -155,7 +155,7 @@
          *  @param $pk
          *  @return int number of failed deletions or 0 in case of none
          */
-        function deleteByPrimaryKey($pk) {
+        public function deleteByPrimaryKey($pk) {
             $mCities = City::NewInstance();
             $aCities = $mCities->findByRegion($pk);
             $result = 0;

@@ -23,7 +23,7 @@
         private $os;
         private $component = 'INSTALLER';
 
-        static function instance()
+        public static function instance()
         {
             if (!isset(self::$_instance)) {
                 $c = __CLASS__;

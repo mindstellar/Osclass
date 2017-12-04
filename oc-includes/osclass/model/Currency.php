@@ -55,7 +55,7 @@
         /**
          * Set data related to t_currency table
          */
-        function __construct()
+        public function __construct()
         {
             parent::__construct();
             $this->setTableName('t_currency');
@@ -63,7 +63,7 @@
             $this->setFields(array('pk_c_code', 's_name', 's_description', 'b_enabled'));
         }
 
-        function findByPrimaryKey($value)
+        public function findByPrimaryKey($value)
         {
             if(isset(Currency::$_currencies[$value])) {
                 return Currency::$_currencies[$value];

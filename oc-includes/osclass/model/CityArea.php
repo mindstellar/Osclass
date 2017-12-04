@@ -54,7 +54,7 @@
         /**
          * Set data related to t_city_area table
          */
-        function __construct()
+        public function __construct()
         {
             parent::__construct();
             $this->setTableName('t_city_area');
@@ -71,7 +71,7 @@
          * @param int $cityId
          * @return array
          */
-        function findByName($cityAreaName, $cityId = null)
+        public function findByName($cityAreaName, $cityId = null)
         {
             $this->dao->select($this->getFields());
             $this->dao->from($this->getTableName());
@@ -98,7 +98,7 @@
          * @param $cityId
          * @return array
          */
-        function findByCity($cityId) {
+        public function findByCity($cityId) {
             $this->dao->select($this->getFields());
             $this->dao->from($this->getTableName());
             $this->dao->where('fk_i_city_id', $cityId);
@@ -120,7 +120,7 @@
          *  @param $pk
          *  @return int number of failed deletions or 0 in case of none
          */
-        function deleteByPrimaryKey($pk) {
+        public function deleteByPrimaryKey($pk) {
             Item::newInstance()->deleteByCityArea($pk);
             User::newInstance()->update(array('fk_i_city_area_id' => null, 's_city_area' => ''), array('fk_i_city_area_id' => $pk));
             if(!$this->delete(array('pk_i_id' => $pk))) {

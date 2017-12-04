@@ -18,7 +18,7 @@
 
     class CWebUserNonSecure extends BaseModel
     {
-        function __construct()
+        public function __construct()
         {
             parent::__construct();
             if( !osc_users_enabled() && ($this->action != 'activate_alert' && $this->action != 'unsub_alert') ) {
@@ -29,7 +29,7 @@
         }
 
         //Business Layer...
-        function doModel()
+        public function doModel()
         {
             switch( $this->action ) {
                 case 'change_email_confirm':    //change email confirm
@@ -190,7 +190,7 @@
         }
 
         //hopefully generic...
-        function doView($file)
+        public function doView($file)
         {
             osc_run_hook("before_html");
             osc_current_web_theme_path($file);
