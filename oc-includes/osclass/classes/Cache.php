@@ -1,4 +1,6 @@
-<?php if ( ! defined('ABS_PATH')) exit('ABS_PATH is not loaded. Direct access is not allowed.');
+<?php if ( ! defined( 'ABS_PATH' ) ) {
+	exit( 'ABS_PATH is not loaded. Direct access is not allowed.' );
+}
 
 /*
  * Copyright 2014 Osclass
@@ -42,7 +44,9 @@
          */
         public function check() {
             $path = $this->preparePath();
-            if(!file_exists($path)) return false;
+	        if ( ! file_exists( $path ) ) {
+		        return false;
+	        }
 
             if(time() - filemtime($path) > $this->expiration) {
                 unlink($path);

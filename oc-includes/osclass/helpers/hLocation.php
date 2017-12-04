@@ -110,7 +110,9 @@
         }
         $result = View::newInstance()->_next('cities');
 
-        if (!$result) View::newInstance()->_erase('cities');
+	    if ( ! $result ) {
+		    View::newInstance()->_erase( 'cities' );
+	    }
         return $result;
     }
 
@@ -125,7 +127,9 @@
         }
         $result = View::newInstance()->_next('city_areas');
 
-        if (!$result) View::newInstance()->_erase('city_areas');
+	    if ( ! $result ) {
+		    View::newInstance()->_erase( 'city_areas' );
+	    }
         return $result;
     }
 

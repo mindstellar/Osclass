@@ -35,8 +35,9 @@
         shuffle($dict);
 
         $pass = '';
-        for($i = 0; $i < $length; $i++)
-            $pass .= $dict[rand(0, count($dict) - 1)];
+	    for ( $i = 0; $i < $length; $i ++ ) {
+		    $pass .= $dict[ rand( 0 , count( $dict ) - 1 ) ];
+	    }
 
         return $pass;
     }

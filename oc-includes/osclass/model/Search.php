@@ -1,4 +1,6 @@
-<?php if ( !defined('ABS_PATH') ) exit('ABS_PATH is not loaded. Direct access is not allowed.');
+<?php if ( ! defined( 'ABS_PATH' ) ) {
+	exit( 'ABS_PATH is not loaded. Direct access is not allowed.' );
+}
 
 /*
  * Copyright 2014 Osclass
@@ -1223,9 +1225,13 @@
            $aOrder = explode(' ', $order);
             $nOrder = count($aOrder);
 
-            if($nOrder == 2) $this->dao->orderBy($aOrder[0], $aOrder[1]);
-            else if($nOrder == 1) $this->dao->orderBy($aOrder[0], 'DESC');
-            else $this->dao->orderBy('item', 'DESC');
+	        if ( $nOrder == 2 ) {
+		        $this->dao->orderBy( $aOrder[ 0 ] , $aOrder[ 1 ] );
+	        } else if ( $nOrder == 1 ) {
+		        $this->dao->orderBy( $aOrder[ 0 ] , 'DESC' );
+	        } else {
+		        $this->dao->orderBy( 'item' , 'DESC' );
+	        }
 
             $this->dao->select('fk_i_city_area_id as city_area_id, s_city_area as city_area_name, fk_i_city_id , s_city as city_name, fk_i_region_id as region_id, s_region as region_name, fk_c_country_code as pk_c_code, s_country as country_name, count(*) as items');
             $this->dao->from(DB_TABLE_PREFIX.'t_item, '.DB_TABLE_PREFIX.'t_item_location, '.DB_TABLE_PREFIX.'t_category, '.DB_TABLE_PREFIX.'t_country');

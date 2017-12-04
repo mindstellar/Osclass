@@ -126,8 +126,9 @@ class Object_Cache_memcache implements iObject_Cache{
      */
     public function get( $key, &$found = null ) {
         $found = false;
-        if ( $this->multisite )
-            $key = $this->site_prefix . $key;
+	    if ( $this->multisite ) {
+		    $key = $this->site_prefix . $key;
+	    }
 
         if ( isset($this->cache[$key]) ) {
             $found = true;
@@ -174,16 +175,19 @@ class Object_Cache_memcache implements iObject_Cache{
      * @return bool Always returns true on success, false on failure
      */
     public function set($key, $data, $expire = 0) {
-        if ($this->multisite)
-            $key = $this->site_prefix . $key;
+	    if ( $this->multisite ) {
+		    $key = $this->site_prefix . $key;
+	    }
 
-        if (is_object($data))
-            $data = clone $data;
+	    if ( is_object( $data ) ) {
+		    $data = clone $data;
+	    }
 
         $store_data = $data;
 
-        if (is_array($data))
-            $store_data = new ArrayObject($data);
+	    if ( is_array( $data ) ) {
+		    $store_data = new ArrayObject( $data );
+	    }
 
         $this->cache[$key] = $data;
 

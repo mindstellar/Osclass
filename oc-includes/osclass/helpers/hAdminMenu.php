@@ -358,8 +358,9 @@
             }
         }
 
-        if($something_selected)
-            return $menu_id;
+	    if ( $something_selected ) {
+		    return $menu_id;
+	    }
 
         // try again without action
         $url_actual = preg_replace('/(&action=.+)/', '', $url_actual);

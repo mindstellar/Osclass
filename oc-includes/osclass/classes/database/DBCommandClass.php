@@ -175,7 +175,9 @@
             $this->aOrderby   = array();
             $this->aWherein   = array();
 
-            if ( OSC_DEBUG_DB || OSC_DEBUG_DB_EXPLAIN ) $this->log = LogDatabase::newInstance();
+	        if ( OSC_DEBUG_DB || OSC_DEBUG_DB_EXPLAIN ) {
+		        $this->log = LogDatabase::newInstance();
+	        }
         }
 
         /**
@@ -1269,7 +1271,9 @@
                     $columns = '';
                     // For each column in the index
                     foreach ($v['columns'] as $column) {
-                        if ($columns != '') $columns .= ', ';
+	                    if ( $columns != '' ) {
+		                    $columns .= ', ';
+	                    }
                         // Add the field to the column list string
                         $columns .= '' . $column['fieldname'] . '';
                         if ($column['subpart'] != '') {

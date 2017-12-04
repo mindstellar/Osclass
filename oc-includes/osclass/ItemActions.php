@@ -1,4 +1,6 @@
-<?php if ( ! defined('ABS_PATH')) exit('ABS_PATH is not loaded. Direct access is not allowed.');
+<?php if ( ! defined( 'ABS_PATH' ) ) {
+	exit( 'ABS_PATH is not loaded. Direct access is not allowed.' );
+}
 
 /*
  * Copyright 2014 Osclass
@@ -1023,8 +1025,9 @@
             switch ( $action ){
                 case 'send_friend':
                     $item = $this->manager->findByPrimaryKey( Params::getParam('id') );
-                    if ($item===false || !is_array($item) || count($item)==0)
-                        break;
+	                if ( $item === false || ! is_array( $item ) || count( $item ) == 0 ) {
+		                break;
+	                }
 
                     $aItem['item']          = $item;
                     View::newInstance()->_exportVariableToView('item', $aItem['item']);
@@ -1039,8 +1042,9 @@
                 break;
                 case 'contact':
                     $item = $this->manager->findByPrimaryKey( Params::getParam('id') );
-                    if ($item===false || !is_array($item) || count($item)==0)
-                        break;
+	                if ( $item === false || ! is_array( $item ) || count( $item ) == 0 ) {
+		                break;
+	                }
 
                     $aItem['item']          = $item;
                     View::newInstance()->_exportVariableToView('item', $aItem['item']);
@@ -1052,8 +1056,9 @@
                 break;
                 case 'add_comment':
                     $item = $this->manager->findByPrimaryKey( Params::getParam('id') );
-                    if ($item===false || !is_array($item) || count($item)==0)
-                        break;
+	                if ( $item === false || ! is_array( $item ) || count( $item ) == 0 ) {
+		                break;
+	                }
 
                     $aItem['item']          = $item;
                     View::newInstance()->_exportVariableToView('item', $aItem['item']);

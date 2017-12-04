@@ -1,4 +1,6 @@
-<?php if ( !defined('ABS_PATH') ) exit('ABS_PATH is not loaded. Direct access is not allowed.');
+<?php if ( ! defined( 'ABS_PATH' ) ) {
+	exit( 'ABS_PATH is not loaded. Direct access is not allowed.' );
+}
 
 /*
  * Copyright 2014 Osclass
@@ -195,12 +197,13 @@
             if(is_null($numItemsMap)) {
                 $numItemsMap = $this->toNumItemsMap();
             }
-            if(isset($numItemsMap['parent'][$cat['pk_i_id']]))
-                return $numItemsMap['parent'][$cat['pk_i_id']]['numItems'];
-            else if (isset($numItemsMap['subcategories'][$cat['pk_i_id']]))
-                return $numItemsMap['subcategories'][$cat['pk_i_id']]['numItems'];
-            else
-                return 0;
+	        if ( isset( $numItemsMap[ 'parent' ][ $cat[ 'pk_i_id' ] ] ) ) {
+		        return $numItemsMap[ 'parent' ][ $cat[ 'pk_i_id' ] ][ 'numItems' ];
+	        } else if ( isset( $numItemsMap[ 'subcategories' ][ $cat[ 'pk_i_id' ] ] ) ) {
+		        return $numItemsMap[ 'subcategories' ][ $cat[ 'pk_i_id' ] ][ 'numItems' ];
+	        } else {
+		        return 0;
+	        }
         }
         /**
          *
@@ -213,12 +216,15 @@
             $map = array();
             $all = $this->listAll();
 
-            if( empty($all) ) return array();
+	        if ( empty( $all ) ) {
+		        return array ();
+	        }
 
             $roots = Category::newInstance()->findRootCategories();
 
-            foreach($all as $a)
-                $map[$a['fk_i_category_id']] = $a['i_num_items'];
+	        foreach ( $all as $a ) {
+		        $map[ $a[ 'fk_i_category_id' ] ] = $a[ 'i_num_items' ];
+	        }
 
             $new_map = array();
             foreach($roots as $root ){

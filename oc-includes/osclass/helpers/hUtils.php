@@ -82,8 +82,9 @@ function osc_field($item, $field, $locale) {
  */
 function osc_show_widgets($location) {
     $widgets = Widget::newInstance()->findByLocation($location);
-    foreach ($widgets as $w)
-        echo $w['s_content'];
+	foreach ( $widgets as $w ) {
+		echo $w[ 's_content' ];
+	}
 }
 
 /**
@@ -94,8 +95,9 @@ function osc_show_widgets($location) {
  */
 function osc_show_widgets_by_description($description) {
     $widgets = Widget::newInstance()->findByDescription($description);
-    foreach ($widgets as $w)
-        echo $w['s_content'];
+	foreach ( $widgets as $w ) {
+		echo $w[ 's_content' ];
+	}
 }
 
 /**

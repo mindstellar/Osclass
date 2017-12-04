@@ -67,8 +67,9 @@ function osc_sanitizeString($string) {
 }
 
 function remove_accents($string) {
-	if ( !preg_match('/[\x80-\xff]/', $string) )
+	if ( ! preg_match( '/[\x80-\xff]/' , $string ) ) {
 		return $string;
+	}
 
 	if (is_utf8($string)) {
 		$chars = array(

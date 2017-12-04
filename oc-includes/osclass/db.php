@@ -1,4 +1,6 @@
-<?php if ( ! defined('ABS_PATH')) exit('ABS_PATH is not loaded. Direct access is not allowed.');
+<?php if ( ! defined( 'ABS_PATH' ) ) {
+	exit( 'ABS_PATH is not loaded. Direct access is not allowed.' );
+}
 
 /*
  * Copyright 2014 Osclass
@@ -114,8 +116,9 @@
                 case 1: $sql = $argv[0]; break;
                 default:
                     $format = array_shift($argv);
-                    foreach($argv as &$arg)
-                        $arg = $this->db->real_escape_string($arg);
+	                foreach ( $argv as &$arg ) {
+		                $arg = $this->db->real_escape_string( $arg );
+	                }
                     unset($arg);
 
                     $sql = vsprintf($format, $argv);
@@ -178,8 +181,9 @@
 
             if($qry = $this->db->query($sql)) {
                 $this->debug($sql);
-                while($result = $qry->fetch_array())
-                    $results[] = $result[0];
+	            while ( $result = $qry->fetch_array() ) {
+		            $results[] = $result[ 0 ];
+	            }
                 $qry->free();
             } else {
                 $this->debug($sql . ' | ' . $this->db->error . ' (' . $this->db->errno . ')', false);
@@ -230,8 +234,9 @@
 
             if($qry = $this->db->query($sql)) {
                 $this->debug($sql);
-                while($result = $qry->fetch_assoc())
-                    $results[] = $result;
+	            while ( $result = $qry->fetch_assoc() ) {
+		            $results[] = $result;
+	            }
                 $qry->free();
             } else {
                 $this->debug($sql . ' | ' . $this->db->error . ' (' . $this->db->errno . ')', false);
@@ -283,7 +288,9 @@
             }
             $this->db_errno = $this->db->errno;
 
-            if ($this->db_errno != 0) return false;
+	        if ( $this->db_errno != 0 ) {
+		        return false;
+	        }
             return true;
         }
 
@@ -473,10 +480,18 @@
     {
         static $instance;
 
-        if(defined('DB_HOST') && $dbHost == null)                 $dbHost     = osc_db_host();
-        if(defined('DB_USER') && $dbUser == null)                 $dbUser     = osc_db_user();
-        if(defined('DB_PASSWORD') && $dbPassword == null)         $dbPassword = osc_db_password();
-        if(defined('DB_NAME') && $dbName == null)                 $dbName     = osc_db_name();
+	    if ( defined( 'DB_HOST' ) && $dbHost == null ) {
+		    $dbHost = osc_db_host();
+	    }
+	    if ( defined( 'DB_USER' ) && $dbUser == null ) {
+		    $dbUser = osc_db_user();
+	    }
+	    if ( defined( 'DB_PASSWORD' ) && $dbPassword == null ) {
+		    $dbPassword = osc_db_password();
+	    }
+	    if ( defined( 'DB_NAME' ) && $dbName == null ) {
+		    $dbName = osc_db_name();
+	    }
 
         if(!isset($instance[ $dbName . '_' . $dbHost])) {
             if(!isset($instance)) {

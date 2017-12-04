@@ -1,4 +1,6 @@
-<?php if ( ! defined('ABS_PATH')) exit('ABS_PATH is not loaded. Direct access is not allowed.');
+<?php if ( ! defined( 'ABS_PATH' ) ) {
+	exit( 'ABS_PATH is not loaded. Direct access is not allowed.' );
+}
 
 /*
  * Copyright 2014 Osclass
@@ -34,8 +36,12 @@
 
         public static function getParam($param, $htmlencode = false, $xss_check = true, $quotes_encode = true)
         {
-            if ( $param == '' ) return '';
-            if (!isset(self::$_request[$param])) return '';
+	        if ( $param == '' ) {
+		        return '';
+	        }
+	        if ( ! isset( self::$_request[ $param ] ) ) {
+		        return '';
+	        }
 
             $value = self::_purify(self::$_request[$param], $xss_check);
 
@@ -56,15 +62,23 @@
 
         public static function existParam($param)
         {
-            if ( $param == '' ) return false;
-            if (!isset(self::$_request[$param])) return false;
+	        if ( $param == '' ) {
+		        return false;
+	        }
+	        if ( ! isset( self::$_request[ $param ] ) ) {
+		        return false;
+	        }
             return true;
         }
 
         public static function getServerParam($param, $htmlencode = false, $xss_check = true, $quotes_encode = true)
         {
-            if ( $param == '' ) return '';
-            if (!isset(self::$_server[$param])) return '';
+	        if ( $param == '' ) {
+		        return '';
+	        }
+	        if ( ! isset( self::$_server[ $param ] ) ) {
+		        return '';
+	        }
 
             $value = self::_purify(self::$_server[$param], $xss_check);
 
@@ -85,8 +99,12 @@
 
         public static function existServerParam($param)
         {
-            if ( $param == '' ) return false;
-            if (!isset(self::$_server[$param])) return false;
+	        if ( $param == '' ) {
+		        return false;
+	        }
+	        if ( ! isset( self::$_server[ $param ] ) ) {
+		        return false;
+	        }
             return true;
         }
 

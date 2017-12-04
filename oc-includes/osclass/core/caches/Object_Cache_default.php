@@ -52,11 +52,13 @@ class Object_Cache_default implements iObject_Cache{
      */
     public function add( $key, $data, $expire = 0) {
         $id = $key;
-        if ( $this->multisite )
-            $id = $this->site_prefix . $key;
+	    if ( $this->multisite ) {
+		    $id = $this->site_prefix . $key;
+	    }
 
-        if ( $this->_exists( $id ) )
-            return false;
+	    if ( $this->_exists( $id ) ) {
+		    return false;
+	    }
 
         return $this->set($key, $data, $expire);
     }
@@ -70,11 +72,13 @@ class Object_Cache_default implements iObject_Cache{
      */
     public function delete($key) {
 
-        if ( $this->multisite )
-            $key = $this->site_prefix . $key;
+	    if ( $this->multisite ) {
+		    $key = $this->site_prefix . $key;
+	    }
 
-        if ( ! $this->_exists( $key ) )
-            return false;
+	    if ( ! $this->_exists( $key ) ) {
+		    return false;
+	    }
 
         unset( $this->cache[$key] );
         return true;
@@ -103,16 +107,18 @@ class Object_Cache_default implements iObject_Cache{
      */
     public function get( $key, &$found = null ) {
 
-        if ( $this->multisite )
-            $key = $this->site_prefix . $key;
+	    if ( $this->multisite ) {
+		    $key = $this->site_prefix . $key;
+	    }
 
         if ( $this->_exists( $key ) ) {
             $found = true;
             $this->cache_hits += 1;
-            if ( is_object($this->cache[$key]) )
-                return clone $this->cache[$key];
-            else
-                return $this->cache[$key];
+	        if ( is_object( $this->cache[ $key ] ) ) {
+		        return clone $this->cache[ $key ];
+	        } else {
+		        return $this->cache[ $key ];
+	        }
         }
         $found = false;
         $this->cache_misses += 1;
@@ -129,11 +135,13 @@ class Object_Cache_default implements iObject_Cache{
      * @return bool Always returns true
      */
     public function set($key, $data, $expire = 0) {
-        if ( $this->multisite )
-            $key = $this->site_prefix . $key;
+	    if ( $this->multisite ) {
+		    $key = $this->site_prefix . $key;
+	    }
 
-        if ( is_object( $data ) )
-            $data = clone $data;
+	    if ( is_object( $data ) ) {
+		    $data = clone $data;
+	    }
 
         $this->cache[$key] = $data;
         return true;

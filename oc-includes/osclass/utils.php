@@ -206,25 +206,30 @@ function osc_unserialize($data) {
  */
 function is_serialized($data) {
     // if it isn't a string, it isn't serialized
-    if (!is_string($data))
-        return false;
+	if ( ! is_string( $data ) ) {
+		return false;
+	}
     $data = trim($data);
-    if ('N;' == $data)
-        return true;
-    if (!preg_match('/^([adObis]):/', $data, $badions))
-        return false;
+	if ( 'N;' == $data ) {
+		return true;
+	}
+	if ( ! preg_match( '/^([adObis]):/' , $data , $badions ) ) {
+		return false;
+	}
     switch ($badions[1]) {
         case 'a' :
         case 'O' :
         case 's' :
-            if (preg_match("/^{$badions[1]}:[0-9]+:.*[;}]\$/s", $data))
-                return true;
+	        if ( preg_match( "/^{$badions[1]}:[0-9]+:.*[;}]\$/s" , $data ) ) {
+		        return true;
+	        }
             break;
         case 'b' :
         case 'i' :
         case 'd' :
-            if (preg_match("/^{$badions[1]}:[0-9.E-]+;\$/", $data))
-                return true;
+	        if ( preg_match( "/^{$badions[1]}:[0-9.E-]+;\$/" , $data ) ) {
+		        return true;
+	        }
             break;
     }
     return false;
@@ -583,12 +588,18 @@ function osc_copyemz($file1,$file2){
 function osc_dbdump($path, $file) {
 
     require_once LIB_PATH . 'osclass/model/Dump.php';
-    if ( !is_writable($path) ) return -4;
-    if($path == '') return -1;
+	if ( ! is_writable( $path ) ) {
+		return - 4;
+	}
+	if ( $path == '' ) {
+		return - 1;
+	}
 
     //checking connection
     $dump = Dump::newInstance();
-    if (!$dump) return -2;
+	if ( ! $dump ) {
+		return - 2;
+	}
 
     $path .= $file;
     $result = $dump->showTables();
@@ -644,8 +655,9 @@ function osc_dbdump($path, $file) {
  * @return type
  */
 function testCurl() {
-    if ( ! function_exists( 'curl_init' ) || ! function_exists( 'curl_exec' ) )
-        return false;
+	if ( ! function_exists( 'curl_init' ) || ! function_exists( 'curl_exec' ) ) {
+		return false;
+	}
 
     return true;
 }
@@ -656,8 +668,9 @@ function testCurl() {
  * @return type
  */
 function testFsockopen() {
-    if ( ! function_exists( 'fsockopen' ) )
-        return false;
+	if ( ! function_exists( 'fsockopen' ) ) {
+		return false;
+	}
 
     return true;
 }
@@ -763,13 +776,15 @@ function download_fsockopen($sourceFile, $fileout = null, $post_data = null)
     // parse URL
     $aUrl = parse_url($sourceFile);
     $host = $aUrl['host'];
-    if ('localhost' == strtolower($host))
-        $host = '127.0.0.1';
+	if ( 'localhost' == strtolower( $host ) ) {
+		$host = '127.0.0.1';
+	}
 
     $link = $aUrl['path'] . ( isset($aUrl['query']) ? '?' . $aUrl['query'] : '' );
 
-    if (empty($link))
-        $link .= '/';
+	if ( empty( $link ) ) {
+		$link .= '/';
+	}
 
     $fp = @fsockopen($host, 80, $errno, $errstr, 30);
     if (!$fp) {
@@ -803,13 +818,15 @@ function download_fsockopen($sourceFile, $fileout = null, $post_data = null)
             $aUrl = parse_url($headers['location']);
 
             $host = $aUrl['host'];
-            if ('localhost' == strtolower($host))
-                $host = '127.0.0.1';
+	        if ( 'localhost' == strtolower( $host ) ) {
+		        $host = '127.0.0.1';
+	        }
 
             $requestPath = $aUrl['path'] . ( isset($aUrl['query']) ? '?' . $aUrl['query'] : '' );
 
-            if (empty($requestPath))
-                $requestPath .= '/';
+	        if ( empty( $requestPath ) ) {
+		        $requestPath .= '/';
+	        }
 
             download_fsockopen($host, $requestPath, $fileout);
         } else {
@@ -883,7 +900,9 @@ function osc_file_get_contents($url, $post_data = null)
         curl_setopt($ch, CURLOPT_URL, $url);
         @curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, 5);
         curl_setopt($ch, CURLOPT_USERAGENT, Params::getServerParam('HTTP_USER_AGENT') . ' Osclass (v.' . osc_version() . ')');
-        if( !defined('CURLOPT_RETURNTRANSFER') ) define('CURLOPT_RETURNTRANSFER', 1);
+	    if ( ! defined( 'CURLOPT_RETURNTRANSFER' ) ) {
+		    define( 'CURLOPT_RETURNTRANSFER' , 1 );
+	    }
         @curl_setopt($ch, CURLOPT_FOLLOWLOCATION, 1);
         curl_setopt($ch, CURLOPT_REFERER, osc_base_url());
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
@@ -1348,12 +1367,16 @@ function osc_prepare_price($price) {
  */
 function rglob($pattern, $flags = 0, $path = '') {
     if (!$path && ($dir = dirname($pattern)) != '.') {
-        if ($dir == '\\' || $dir == '/') $dir = '';
+	    if ( $dir == '\\' || $dir == '/' ) {
+		    $dir = '';
+	    }
         return rglob(basename($pattern), $flags, $dir . '/');
     }
     $paths = glob($path . '*', GLOB_ONLYDIR | GLOB_NOSORT);
     $files = glob($path . $pattern, $flags);
-    foreach ($paths as $p) $files = array_merge($files, rglob($pattern, $flags, $p . '/'));
+	foreach ( $paths as $p ) {
+		$files = array_merge( $files , rglob( $pattern , $flags , $p . '/' ) );
+	}
     return $files;
 }
 
@@ -1457,8 +1480,12 @@ function version_compare2($a, $b)
     { //Iterate over each piece of A
         if (isset($b[$depth]))
         { //If B matches A to this depth, compare the values
-            if ($aVal > $b[$depth]) return 1; //Return A > B
-            else if ($aVal < $b[$depth]) return -1; //Return B > A
+	        if ( $aVal > $b[ $depth ] ) {
+		        return 1;
+	        } //Return A > B
+	        else if ( $aVal < $b[ $depth ] ) {
+		        return - 1;
+	        } //Return B > A
             //An equal result is inconclusive at this point
         }
         else
@@ -2249,8 +2276,9 @@ if(!function_exists('hmacsha1')) {
     function hmacsha1($key,$data) {
         $blocksize=64;
         $hashfunc='sha1';
-        if (strlen($key)>$blocksize)
-            $key=pack('H*', $hashfunc($key));
+	    if ( strlen( $key ) > $blocksize ) {
+		    $key = pack( 'H*' , $hashfunc( $key ) );
+	    }
         $key=str_pad($key,$blocksize,chr(0x00));
         $ipad=str_repeat(chr(0x36),$blocksize);
         $opad=str_repeat(chr(0x5c),$blocksize);

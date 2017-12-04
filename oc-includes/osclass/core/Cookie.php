@@ -1,4 +1,6 @@
-<?php if ( ! defined('ABS_PATH')) exit('ABS_PATH is not loaded. Direct access is not allowed.');
+<?php if ( ! defined( 'ABS_PATH' ) ) {
+	exit( 'ABS_PATH is not loaded. Direct access is not allowed.' );
+}
 
 /*
  * Copyright 2014 Osclass
@@ -102,7 +104,9 @@
         }
         
         public function get_value($str) {
-            if (isset($this->val[$str])) return $this->val[$str];
+	        if ( isset( $this->val[ $str ] ) ) {
+		        return $this->val[ $str ];
+	        }
             return '';
         }
 

@@ -139,7 +139,9 @@
      * @return string $desc
      */
     function osc_item_description($locale = '' ) {
-        if ( $locale == '' ) $locale = osc_current_user_locale();
+	    if ( $locale == '' ) {
+		    $locale = osc_current_user_locale();
+	    }
         $desc = osc_item_field( 's_description' , $locale);
         if($desc=='') {
             $desc = osc_item_field( 's_description' , osc_language());
@@ -163,7 +165,9 @@
      * @return string
      */
     function osc_item_title($locale = '' ) {
-        if ( $locale == '' ) $locale = osc_current_user_locale();
+	    if ( $locale == '' ) {
+		    $locale = osc_current_user_locale();
+	    }
         $title = osc_item_field( 's_title' , $locale);
         if($title=='') {
             $title = osc_item_field( 's_title' , osc_language());
@@ -266,8 +270,11 @@
      * @return float
      */
     function osc_item_price() {
-        if( osc_item_field( 'i_price' ) == '') return null;
-        else return (float) osc_item_field( 'i_price' );
+	    if ( osc_item_field( 'i_price' ) == '' ) {
+		    return null;
+	    } else {
+		    return (float) osc_item_field( 'i_price' );
+	    }
     }
 
     /**
@@ -461,8 +468,11 @@
      * @return boolean
      */
     function osc_item_is_premium() {
-        if ( osc_item_field( 'b_premium' ) ) return true;
-        else return false;
+	    if ( osc_item_field( 'b_premium' ) ) {
+		    return true;
+	    } else {
+		    return false;
+	    }
     }
 
     /**
@@ -1116,8 +1126,12 @@
      * @return string
      */
     function osc_format_price($price, $symbol = null) {
-        if ($price === null) return osc_apply_filter ('item_price_null', __('Check with seller') );
-        if ($price == 0) return osc_apply_filter ('item_price_zero', __('Free') );
+	    if ( $price === null ) {
+		    return osc_apply_filter( 'item_price_null' , __( 'Check with seller' ) );
+	    }
+	    if ( $price == 0 ) {
+		    return osc_apply_filter( 'item_price_zero' , __( 'Free' ) );
+	    }
 
         if($symbol==null) { $symbol = osc_item_currency_symbol(); }
 

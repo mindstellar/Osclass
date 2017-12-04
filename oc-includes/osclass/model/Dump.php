@@ -1,4 +1,6 @@
-<?php if ( !defined('ABS_PATH') ) exit('ABS_PATH is not loaded. Direct access is not allowed.');
+<?php if ( ! defined( 'ABS_PATH' ) ) {
+	exit( 'ABS_PATH is not loaded. Direct access is not allowed.' );
+}
 
 /*
  * Copyright 2014 Osclass
@@ -75,7 +77,9 @@
          */
         public function table_structure($path, $table)
         {
-            if ( !is_writable($path) ) return false;
+	        if ( ! is_writable( $path ) ) {
+		        return false;
+	        }
 
             $_str = '/* Table structure for table `' . $table . "` */\n";
 
@@ -109,7 +113,9 @@
          */
         public function table_data($path, $table)
         {
-            if ( !is_writable($path) ) return false;
+	        if ( ! is_writable( $path ) ) {
+		        return false;
+	        }
 
             $this->dao->select();
             $this->dao->from($table);

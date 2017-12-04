@@ -1,4 +1,6 @@
-<?php if ( ! defined('ABS_PATH')) exit('ABS_PATH is not loaded. Direct access is not allowed.');
+<?php if ( ! defined( 'ABS_PATH' ) ) {
+	exit( 'ABS_PATH is not loaded. Direct access is not allowed.' );
+}
 
 /*
  * Copyright 2014 Osclass
@@ -46,7 +48,9 @@
 
         public static function multilanguage_name_description($locales, $page = null) {
             $num_locales = count($locales);
-            if($num_locales > 1) echo '<div class="tabber">';
+	        if ( $num_locales > 1 ) {
+		        echo '<div class="tabber">';
+	        }
             $aFieldsDescription = Session::newInstance()->_getForm( 'aFieldsDescription' );
             foreach($locales as $locale) {
                 if($num_locales > 1) {

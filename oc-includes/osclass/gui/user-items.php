@@ -61,7 +61,9 @@
     ?>
         <ul class="footer-links">
             <?php foreach($footerLinks as $f) { View::newInstance()->_exportVariableToView('footer_link', $f); ?>
-                <?php if($f['total'] < 3) continue; ?>
+	            <?php if ( $f[ 'total' ] < 3 ) {
+		            continue;
+	            } ?>
                 <li><a href="<?php echo osc_footer_link_url(); ?>"><?php echo osc_footer_link_title(); ?></a></li>
             <?php } ?>
         </ul>

@@ -309,7 +309,9 @@
      * @return string
      */
     function osc_user_info($locale = '' ) {
-        if ( $locale == '' ) $locale = osc_current_user_locale();
+	    if ( $locale == '' ) {
+		    $locale = osc_current_user_locale();
+	    }
         $info = osc_user_field( 's_info' , $locale);
         if($info == '') {
             $info = osc_user_field( 's_info' , osc_language());

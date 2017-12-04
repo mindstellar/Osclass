@@ -1,4 +1,6 @@
-<?php if ( ! defined('ABS_PATH')) exit('ABS_PATH is not loaded. Direct access is not allowed.');
+<?php if ( ! defined( 'ABS_PATH' ) ) {
+	exit( 'ABS_PATH is not loaded. Direct access is not allowed.' );
+}
 
 /*
  * Copyright 2014 Osclass
@@ -105,8 +107,9 @@
                 foreach( $this->nodes as $value ) {
                     $meta = '';
                     if( isset($value->meta) ) {
-                        foreach($value->meta as $k => $v)
-                            $meta .= $k.'="'.$v.'" ';
+	                    foreach ( $value->meta as $k => $v ) {
+		                    $meta .= $k . '="' . $v . '" ';
+	                    }
                     }
                     echo '<a id="osc_toolbar_'.$value->id.'" '.$meta.' href="'.$value->href.'" ' . ( isset($value->target) ? 'target="' . $value->target . '"' : '') . '>' . $value->title . '</a>';
                 }

@@ -1,4 +1,6 @@
-<?php if ( ! defined('ABS_PATH')) exit('ABS_PATH is not loaded. Direct access is not allowed.');
+<?php if ( ! defined( 'ABS_PATH' ) ) {
+	exit( 'ABS_PATH is not loaded. Direct access is not allowed.' );
+}
 
 /*
  * Copyright 2014 Osclass
@@ -299,7 +301,9 @@
             // search results: it's blocked with the maxResultsPerPage@search defined in t_preferences
             $p_iPageSize  = intval(Params::getParam('iPagesize'));
             if($p_iPageSize > 0) {
-                if($p_iPageSize > osc_max_results_per_page_at_search()) $p_iPageSize = osc_max_results_per_page_at_search();
+	            if ( $p_iPageSize > osc_max_results_per_page_at_search() ) {
+		            $p_iPageSize = osc_max_results_per_page_at_search();
+	            }
             } else {
                 $p_iPageSize = osc_default_results_per_page_at_search();
             }

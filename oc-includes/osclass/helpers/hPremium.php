@@ -108,7 +108,9 @@
      * @return string $desc
      */
     function osc_premium_description($locale = '' ) {
-        if ( $locale == '' ) $locale = osc_current_user_locale();
+	    if ( $locale == '' ) {
+		    $locale = osc_current_user_locale();
+	    }
         $desc = osc_premium_field( 's_description' , $locale);
         if($desc=='') {
             $desc = osc_premium_field( 's_description' , osc_language());
@@ -132,7 +134,9 @@
      * @return string
      */
     function osc_premium_title($locale = '' ) {
-        if ( $locale == '' ) $locale = osc_current_user_locale();
+	    if ( $locale == '' ) {
+		    $locale = osc_current_user_locale();
+	    }
         $title = osc_premium_field( 's_title' , $locale);
         if($title=='') {
             $title = osc_premium_field( 's_title' , osc_language());
@@ -156,7 +160,9 @@
      * @return string
      */
     function osc_premium_category($locale = '' ) {
-        if ( $locale == '' ) $locale = osc_current_user_locale();
+	    if ( $locale == '' ) {
+		    $locale = osc_current_user_locale();
+	    }
         if ( !View::newInstance()->_exists('premium_category') ) {
             View::newInstance()->_exportVariableToView('premium_category', Category::newInstance()->findByPrimaryKey( osc_premium_category_id(), $locale ) );
         }
@@ -172,7 +178,9 @@
      * @return string
      */
     function osc_premium_category_description($locale = '' ) {
-        if ( $locale == '' ) $locale = osc_current_user_locale();
+	    if ( $locale == '' ) {
+		    $locale = osc_current_user_locale();
+	    }
         if ( !View::newInstance()->_exists('premium_category') ) {
             View::newInstance()->_exportVariableToView('premium_category', Category::newInstance()->findByPrimaryKey( osc_premium_category_id() ) );
         }
@@ -213,8 +221,11 @@
      * @return float
      */
     function osc_premium_price() {
-        if( osc_premium_field( 'i_price' ) == '') return null;
-        else return (float) osc_premium_field( 'i_price' );
+	    if ( osc_premium_field( 'i_price' ) == '' ) {
+		    return null;
+	    } else {
+		    return (float) osc_premium_field( 'i_price' );
+	    }
 
     }
 
@@ -362,8 +373,11 @@
      * @return boolean
      */
     function osc_premium_is_premium() {
-        if ( osc_premium_field( 'b_premium' ) ) return true;
-        else return false;
+	    if ( osc_premium_field( 'b_premium' ) ) {
+		    return true;
+	    } else {
+		    return false;
+	    }
     }
 
     /**

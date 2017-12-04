@@ -49,8 +49,12 @@
 
     function getErrorParam($param, $htmlencode = false, $quotes_encode = true)
     {
-        if ( $param == '' ) return '';
-        if (!isset($_SERVER[$param])) return '';
+	    if ( $param == '' ) {
+		    return '';
+	    }
+	    if ( ! isset( $_SERVER[ $param ] ) ) {
+		    return '';
+	    }
         $value = $_SERVER[$param];
         if ($htmlencode) {
             if($quotes_encode) {

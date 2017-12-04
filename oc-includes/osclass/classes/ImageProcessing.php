@@ -1,4 +1,6 @@
-<?php if ( ! defined('ABS_PATH')) exit('ABS_PATH is not loaded. Direct access is not allowed.');
+<?php if ( ! defined( 'ABS_PATH' ) ) {
+	exit( 'ABS_PATH is not loaded. Direct access is not allowed.' );
+}
 /*
  * Copyright 2014 Osclass
  *
@@ -522,10 +524,12 @@
             $src_y = max($src_y, 0);
             $dst_x = max($dst_x, 0);
             $dst_y = max($dst_y, 0);
-            if ($dst_x + $src_w > $dst_w)
-                $src_w = $dst_w - $dst_x;
-            if ($dst_y + $src_h > $dst_h)
-                $src_h = $dst_h - $dst_y;
+	        if ( $dst_x + $src_w > $dst_w ) {
+		        $src_w = $dst_w - $dst_x;
+	        }
+	        if ( $dst_y + $src_h > $dst_h ) {
+		        $src_h = $dst_h - $dst_y;
+	        }
 
             for($x_offset = 0; $x_offset < $src_w; $x_offset++) {
                 for($y_offset = 0; $y_offset < $src_h; $y_offset++) {
@@ -544,8 +548,9 @@
                         $dst_a = 127 - ($src_a + $dst_a * (127 - $src_a) / 127);
                         $color = imagecolorallocatealpha($dst_im, $dst_r, $dst_g, $dst_b, $dst_a);
 
-                        if (!imagesetpixel($dst_im, $dst_x + $x_offset, $dst_y + $y_offset, $color))
-                            return false;
+	                    if ( ! imagesetpixel( $dst_im , $dst_x + $x_offset , $dst_y + $y_offset , $color ) ) {
+		                    return false;
+	                    }
                         imagecolordeallocate($dst_im, $color);
                     }
                 }
@@ -558,8 +563,12 @@
 if(!function_exists('imageflip')) {
     function imageflip(&$image, $x = 0, $y = 0, $width = null, $height = null)
     {
-        if ($width  < 1) $width  = imagesx($image);
-        if ($height < 1) $height = imagesy($image);
+	    if ( $width < 1 ) {
+		    $width = imagesx( $image );
+	    }
+	    if ( $height < 1 ) {
+		    $height = imagesy( $image );
+	    }
         // Truecolor provides better results, if possible.
         if (function_exists('imageistruecolor') && imageistruecolor($image))
         {

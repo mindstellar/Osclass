@@ -104,7 +104,9 @@
      * @return string sanitized
      */
     function osc_sanitize_phone($value) {
-        if (empty($value))  return;
+	    if ( empty( $value ) ) {
+		    return;
+	    }
 
         // Remove strings that aren't letter and number.
         $value = preg_replace( '/[^a-z0-9]/' , '' , strtolower( $value));

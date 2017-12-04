@@ -1,4 +1,6 @@
-<?php if ( !defined('ABS_PATH') ) exit('ABS_PATH is not loaded. Direct access is not allowed.');
+<?php if ( ! defined( 'ABS_PATH' ) ) {
+	exit( 'ABS_PATH is not loaded. Direct access is not allowed.' );
+}
 
 /*
  * Copyright 2014 Osclass
@@ -890,8 +892,11 @@
          */
         public function formatValue($value)
         {
-            if(is_null($value)) return DB_CONST_NULL;
-            else $value = trim($value);
+	        if ( is_null( $value ) ) {
+		        return DB_CONST_NULL;
+	        } else {
+		        $value = trim( $value );
+	        }
             switch($value) {
                 case DB_FUNC_NOW:
                 case DB_CONST_TRUE:

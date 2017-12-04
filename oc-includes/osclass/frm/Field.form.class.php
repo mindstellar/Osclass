@@ -1,4 +1,6 @@
-<?php if ( ! defined('ABS_PATH')) exit('ABS_PATH is not loaded. Direct access is not allowed.');
+<?php if ( ! defined( 'ABS_PATH' ) ) {
+	exit( 'ABS_PATH is not loaded. Direct access is not allowed.' );
+}
 
 /*
  * Copyright 2014 Osclass
@@ -45,7 +47,9 @@
 
         public static function initDatePicker($id_field, $dateFormat, $value, $type='none') {
 
-            if($value=='') $value = 0;
+	        if ( $value == '' ) {
+		        $value = 0;
+	        }
             $aux = <<<FB
             <script type="text/javascript">
             $(document).ready(function(){

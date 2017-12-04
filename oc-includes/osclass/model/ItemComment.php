@@ -1,4 +1,6 @@
-<?php if ( !defined('ABS_PATH') ) exit('ABS_PATH is not loaded. Direct access is not allowed.');
+<?php if ( ! defined( 'ABS_PATH' ) ) {
+	exit( 'ABS_PATH is not loaded. Direct access is not allowed.' );
+}
 
 /*
  * Copyright 2014 Osclass
@@ -253,7 +255,9 @@
          */
         public function getLastComments($num)
         {
-            if(!intval($num)) return false;
+	        if ( ! intval( $num ) ) {
+		        return false;
+	        }
 
             $lang = osc_current_user_locale();
 

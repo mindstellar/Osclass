@@ -1,4 +1,6 @@
-<?php if ( ! defined('ABS_PATH')) exit('ABS_PATH is not loaded. Direct access is not allowed.');
+<?php if ( ! defined( 'ABS_PATH' ) ) {
+	exit( 'ABS_PATH is not loaded. Direct access is not allowed.' );
+}
 
 /*
  * Copyright 2014 Osclass
@@ -162,25 +164,39 @@
 
             switch ($sort) {
                 case('spam'):
-                    if($direction == 'desc' || $direction == '') $arg_spam .= '&direction=asc';
+	                if ( $direction == 'desc' || $direction == '' ) {
+		                $arg_spam .= '&direction=asc';
+	                }
                     break;
                 case('bad'):
-                    if($direction == 'desc' || $direction == '') $arg_bad .= '&direction=asc';
+	                if ( $direction == 'desc' || $direction == '' ) {
+		                $arg_bad .= '&direction=asc';
+	                }
                     break;
                 case('rep'):
-                    if($direction == 'desc' || $direction == '') $arg_rep .= '&direction=asc';
+	                if ( $direction == 'desc' || $direction == '' ) {
+		                $arg_rep .= '&direction=asc';
+	                }
                     break;
                 case('off'):
-                    if($direction == 'desc' || $direction == '') $arg_off .= '&direction=asc';
+	                if ( $direction == 'desc' || $direction == '' ) {
+		                $arg_off .= '&direction=asc';
+	                }
                     break;
                 case('exp'):
-                    if($direction == 'desc' || $direction == '') $arg_exp .= '&direction=asc';
+	                if ( $direction == 'desc' || $direction == '' ) {
+		                $arg_exp .= '&direction=asc';
+	                }
                     break;
                 case('date'):
-                    if($direction == 'desc' || $direction == '') $arg_date .= '&direction=asc';
+	                if ( $direction == 'desc' || $direction == '' ) {
+		                $arg_date .= '&direction=asc';
+	                }
                     break;
                 case('expiration'):
-                    if($direction == 'desc' || $direction == '') $arg_expiration .= '&direction=asc';
+	                if ( $direction == 'desc' || $direction == '' ) {
+		                $arg_expiration .= '&direction=asc';
+	                }
                     break;
                 default:
                     break;

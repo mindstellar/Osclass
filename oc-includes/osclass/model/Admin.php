@@ -1,4 +1,6 @@
-<?php if ( !defined('ABS_PATH') ) exit('ABS_PATH is not loaded. Direct access is not allowed.');
+<?php if ( ! defined( 'ABS_PATH' ) ) {
+	exit( 'ABS_PATH is not loaded. Direct access is not allowed.' );
+}
 
 /*
  * Copyright 2014 Osclass
@@ -69,7 +71,9 @@
 
         public function findByPrimaryKey($id, $locale = null)
         {
-            if ($id == '') return '';
+	        if ( $id == '' ) {
+		        return '';
+	        }
             if (isset($this->cachedAdmin[$id])) {
                 return $this->cachedAdmin[$id];
             }

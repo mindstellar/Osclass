@@ -1,4 +1,6 @@
-<?php if ( !defined('ABS_PATH') ) exit('ABS_PATH is not loaded. Direct access is not allowed.');
+<?php if ( ! defined( 'ABS_PATH' ) ) {
+	exit( 'ABS_PATH is not loaded. Direct access is not allowed.' );
+}
 
 /*
  * Copyright 2014 Osclass
@@ -283,7 +285,9 @@
                 $input['s_website'] = 'http://'.$input['s_website'];
             }
             $input['s_website'] = osc_sanitize_url($input['s_website']);
-            if ( ! osc_validate_url($input['s_website'])) $input['s_website'] = '';
+	        if ( ! osc_validate_url( $input[ 's_website' ] ) ) {
+		        $input[ 's_website' ] = '';
+	        }
 
             //locations...
             $country = Country::newInstance()->findByCode( Params::getParam('countryId') );

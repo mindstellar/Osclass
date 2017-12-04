@@ -1,4 +1,6 @@
-<?php if ( ! defined('ABS_PATH')) exit('ABS_PATH is not loaded. Direct access is not allowed.');
+<?php if ( ! defined( 'ABS_PATH' ) ) {
+	exit( 'ABS_PATH is not loaded. Direct access is not allowed.' );
+}
 
 /*
  * Copyright 2014 Osclass
@@ -46,8 +48,9 @@
             if( $config_version > osc_get_preference('version') && MULTISITE==0) {
                 if(get_class($this) == 'CAdminTools') {
                 } else {
-                    if(get_class($this) != 'CAdminUpgrade' )
-                        $this->redirectTo(osc_admin_base_url(true) . '?page=upgrade');
+	                if ( get_class( $this ) != 'CAdminUpgrade' ) {
+		                $this->redirectTo( osc_admin_base_url( true ) . '?page=upgrade' );
+	                }
                 }
             }
 
