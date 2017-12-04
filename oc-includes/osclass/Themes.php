@@ -91,8 +91,8 @@
         /**
          * Add style to be loaded
          *
-         * @param type $id
-         * @param type $url
+         * @param $id
+         * @param $url
          * @deprecated deprecated since version 3.1
          */
         public function addStyle($id, $url)
@@ -103,7 +103,7 @@
         /**
          * Remove style to not be loaded
          *
-         * @param type $id
+         * @param $id
          * @deprecated deprecated since version 3.1
          */
         public function removeStyle($id)
@@ -129,14 +129,14 @@
         public function printStyles()
         {
             foreach($this->styles as $css) {
-                echo '<link href="'.$css.'" rel="stylesheet" type="text/css" />' . PHP_EOL;
+                echo '<link href="'.$css.'" rel="stylesheet"="text/css" />' . PHP_EOL;
             }
         }
 
         /**
          * Add script to queue
          *
-         * @param type $id
+         * @param $id
          * @deprecated deprecated since version 3.1
          */
         public function enqueueScript($id)
@@ -147,7 +147,7 @@
         /**
          * Remove script to not be loaded
          *
-         * @param type $id
+         * @param $id
          * @deprecated deprecated since version 3.1
          */
         public function removeScript($id)
@@ -158,9 +158,9 @@
         /**
          * Add script to be loaded
          *
-         * @param type $id
-         * @param type $url
-         * @param type $dependencies mixed, it could be an array or a string
+         * @param $id
+         * @param $url
+         * @param $dependencies mixed, it could be an array or a string
          * @deprecated deprecated since version 3.1
          */
         public function registerScript($id, $url, $dependencies = null)
@@ -175,7 +175,7 @@
         /**
          * Remove script to not be loaded
          *
-         * @param type $id
+         * @param $id
          * @deprecated deprecated since version 3.1
          */
         public function unregisterScript($id)
@@ -233,14 +233,14 @@
         public function printScripts()
         {
             foreach($this->getScripts() as $script) {
-                echo '<script type="text/javascript" src="' . osc_apply_filter('theme_url', $script) . '"></script>' . PHP_EOL;
+                echo '<script="text/javascript" src="' . osc_apply_filter('theme_url', $script) . '"></script>' . PHP_EOL;
             }
         }
 
         /**
          * Algorithm to solve the dependencies of the scripts
          *
-         * @param type $node
+         * @param $node
          * @deprecated deprecated since version 3.1
          */
         private function solveDeps($node)

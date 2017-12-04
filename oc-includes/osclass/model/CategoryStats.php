@@ -175,7 +175,7 @@
          *
          * @access public
          * @since unknown
-         * @param type $categoryId Category id
+         * @param $categoryId Category id
          * @return int number of items into category
          */
         public function countItemsFromCategory($categoryId)

@@ -28,9 +28,9 @@ class Scripts extends Dependencies {
     /**
      * Add script to be loaded
      *
-     * @param type $id
-     * @param type $url
-     * @param type $dependencies mixed, it could be an array or a string
+     * @param $id
+     * @param $url
+     * @param $dependencies mixed, it could be an array or a string
      */
     public function registerScript($id, $url, $dependencies = null)
     {
@@ -40,7 +40,7 @@ class Scripts extends Dependencies {
     /**
      * Remove script to not be loaded
      *
-     * @param type $id
+     * @param $id
      */
     public function unregisterScript($id)
     {
@@ -50,7 +50,7 @@ class Scripts extends Dependencies {
     /**
      * Enqueu script to be loaded
      *
-     * @param type $id
+     * @param $id
      */
     public function enqueuScript($id)
     {
@@ -60,7 +60,7 @@ class Scripts extends Dependencies {
     /**
      * Remove script to not be loaded
      *
-     * @param type $id
+     * @param $id
      */
     public function removeScript($id)
     {
@@ -89,7 +89,7 @@ class Scripts extends Dependencies {
     {
         foreach($this->getScripts() as $script) {
             if($script!='') {
-                echo '<script type="text/javascript" src="' . osc_apply_filter('theme_url', $script) . '"></script>' . PHP_EOL;
+                echo '<script="text/javascript" src="' . osc_apply_filter('theme_url', $script) . '"></script>' . PHP_EOL;
             }
         }
     }

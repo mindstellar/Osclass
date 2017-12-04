@@ -215,7 +215,7 @@
          *
          * @access public
          * @since 3.2.1
-         * @param type $slug
+         * @param $slug
          * @return array
          */
         public function findBySlug($slug)

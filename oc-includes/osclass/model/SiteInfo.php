@@ -25,23 +25,23 @@
     {
         /**
          *
-         * @var type
+         * @var
          */
         private static $instance;
         /**
          *
-         * @var type
+         * @var
          */
         private $daoMetadata;
         /**
          *
-         * @var type
+         * @var
          */
         private $siteInfo;
 
         /**
          *
-         * @return type
+         * @return
          */
         public static function newInstance()
         {
@@ -82,8 +82,8 @@
          *
          * @access public
          * @since unknown
-         * @param type $key
-         * @return type
+         * @param $key
+         * @return
          */
         public function get($key)
         {
@@ -98,8 +98,8 @@
          *
          * @access public
          * @since unknown
-         * @param type $value
-         * @return type
+         * @param $value
+         * @return
          */
         public function findByPrimaryKey($value)
         {
@@ -120,8 +120,8 @@
          *
          * @access public
          * @since unknown
-         * @param type $table
-         * @return type
+         * @param $table
+         * @return
          */
         public function setTableName($table)
         {

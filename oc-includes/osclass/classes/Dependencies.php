@@ -22,9 +22,9 @@ class Dependencies {
     /**
      * Register url to be loaded
      *
-     * @param type $id
-     * @param type $url
-     * @param type $dependencies mixed, it could be an array or a string
+     * @param $id
+     * @param $url
+     * @param $dependencies mixed, it could be an array or a string
      */
     public function register($id, $url, $dependencies) {
         if($id!='' && $url!='') {
@@ -39,7 +39,7 @@ class Dependencies {
     /**
      * Remove url to not be loaded
      *
-     * @param type $id
+     * @param $id
      */
     public function unregister($id)
     {
@@ -75,7 +75,7 @@ class Dependencies {
     /**
      * Algorithm to solve the dependencies of the scripts
      *
-     * @param type $node
+     * @param $node
      */
     private function solveDeps($node)
     {

@@ -120,12 +120,12 @@
         /**
          * Add menu entry
          *
-         * @param type $menu_title
-         * @param type $url
-         * @param type $menu_id
-         * @param type $icon_url   (unused)
-         * @param type $capability (unused)
-         * @param type $position   (unused)
+         * @param $menu_title
+         * @param $url
+         * @param $menu_id
+         * @param $icon_url   (unused)
+         * @param $capability (unused)
+         * @param $position   (unused)
          */
         public function add_menu($menu_title, $url, $menu_id, $capability = null ,$icon_url = null, $position = null )
         {
@@ -153,11 +153,11 @@
 	    /**
 	     * Add submenu under menu id $menu_id
 	     *
-	     * @param type $menu_id
-	     * @param type $submenu_title
-	     * @param type $url
+	     * @param $menu_id
+	     * @param $submenu_title
+	     * @param $url
 	     * @param      $submenu_id
-	     * @param type $capability
+	     * @param $capability
 	     */
         public function add_submenu( $menu_id, $submenu_title, $url, $submenu_id, $capability = null)
         {
@@ -185,10 +185,10 @@
 	    /**
 	     * Add submenu under menu id $menu_id
 	     *
-	     * @param type $menu_id
-	     * @param type $submenu_title
+	     * @param $menu_id
+	     * @param $submenu_title
 	     * @param      $submenu_id
-	     * @param type $capability
+	     * @param $capability
 	     *
 	     * @since 3.1
 	     */

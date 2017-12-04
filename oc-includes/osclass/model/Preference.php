@@ -25,7 +25,7 @@
     {
         /**
          *
-         * @var type
+         * @var
          */
         private static $instance;
         /**
@@ -62,8 +62,8 @@
          *
          * @access public
          * @since unknown
-         * @param type $name
-         * @return type
+         * @param $name
+         * @return
          */
         public function findValueByName($name)
         {
@@ -186,7 +186,7 @@
         }
 
         /**
-         * Replace preference value, given preference name, preference section and type value.
+         * Replace preference value, given preference name, preference section and value.
          *
          * @access public
          * @since unknown

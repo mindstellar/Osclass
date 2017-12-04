@@ -25,23 +25,23 @@
     {
         /**
          *
-         * @var type
+         * @var
          */
         private static $instance;
         /**
          *
-         * @var type
+         * @var
          */
         public $messages;
         /**
          *
-         * @var type
+         * @var
          */
         public $explain_messages;
 
         /**
          *
-         * @return type
+         * @return
          */
         public static function newInstance()
         {
@@ -62,10 +62,10 @@
 
         /**
          *
-         * @param type $sql
-         * @param type $time
-         * @param type $errorLevel
-         * @param type $errorDescription
+         * @param $sql
+         * @param $time
+         * @param $errorLevel
+         * @param $errorDescription
          */
         public function addMessage($sql, $time, $errorLevel, $errorDescription)
         {
@@ -79,7 +79,7 @@
 
 	    /**
 	     *
-	     * @param type $sql
+	     * @param $sql
 	     * @param      $results
 	     */
         public function addExplainMessage($sql, $results)

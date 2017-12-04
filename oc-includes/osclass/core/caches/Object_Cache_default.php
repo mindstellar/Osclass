@@ -180,8 +180,8 @@ padding: 1em;'><h2>Default(dummy) stats</h2>";
 
     /**
      * Return hash of a given key
-     * @param type $key
-     * @return type
+     * @param $key
+     * @return
      */
     protected function _getKey( $key ) {
         return md5( $key );

@@ -85,7 +85,7 @@
         /**
          * Remove entry with id $id
          *
-         * @param type $id
+         * @param $id
          */
         public function remove_menu( $id )
         {

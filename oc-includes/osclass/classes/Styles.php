@@ -30,8 +30,8 @@ class Styles {
     /**
      * Add style to be loaded
      *
-     * @param type $id
-     * @param type $url
+     * @param $id
+     * @param $url
      */
     public function addStyle($id, $url)
     {
@@ -41,7 +41,7 @@ class Styles {
     /**
      * Remove style to not be loaded
      *
-     * @param type $id
+     * @param $id
      */
     public function removeStyle($id)
     {
@@ -62,7 +62,7 @@ class Styles {
     public function printStyles()
     {
         foreach($this->styles as $css) {
-            echo '<link href="' . osc_apply_filter('style_url', $css) . '" rel="stylesheet" type="text/css" />' . PHP_EOL;
+            echo '<link href="' . osc_apply_filter('style_url', $css) . '" rel="stylesheet"="text/css" />' . PHP_EOL;
         }
     }
 }

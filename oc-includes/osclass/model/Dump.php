@@ -194,13 +194,13 @@
         /**
          * Specific dump for t_category table
          *
-         * @param type $result
-         * @param type $num_fields
-         * @param type $field_type
-         * @param type $fields
-         * @param type $index
-         * @param type $num_rows
-         * @param type $_str
+         * @param $result
+         * @param $num_fields
+         * @param $field_type
+         * @param $fields
+         * @param $index
+         * @param $num_rows
+         * @param $_str
          */
         private function _dump_table_category($result, $num_fields, $field_type, $fields, $index, $num_rows, &$_str)
         {
@@ -255,7 +255,7 @@
 	    /**
 	     * Add quotes if it's necessary
 	     *
-	     * data type =>  http://www.php.net/manual/es/mysqli-result.fetch-field.php#106064
+	     * data =>  http://www.php.net/manual/es/mysqli-result.fetch-field.php#106064
 	     *
 	     * @param $type
 	     * @param $_str

@@ -261,7 +261,7 @@
 	     * @access public
 	     * @since  unknown
 	     *
-	     * @param type $email
+	     * @param $email
 	     *
 	     * @return array
 	     */
@@ -558,7 +558,7 @@
         }
 
 	    /**
-	     * Find enable items according the type
+	     * Find enable items according the
 	     *
 	     * @access public
 	     * @since  unknown
@@ -566,7 +566,7 @@
 	     * @param int  $userId   User id
 	     * @param int  $start    beginning from $start
 	     * @param int  $end      ending
-	     * @param bool $itemType type item(active, expired, pending validate, premium, all, enabled, blocked)
+	     * @param bool $itemType item(active, expired, pending validate, premium, all, enabled, blocked)
 	     *
 	     * @return array of items
 	     */
@@ -616,7 +616,7 @@
         }
 
 	    /**
-	     * Count items by User Id according the type
+	     * Count items by User Id according the
 	     *
 	     * @access public
 	     * @since  unknown
@@ -670,7 +670,7 @@
         }
 
 	    /**
-	     * Count items by Email according the type
+	     * Count items by Email according the
 	     * Usefull for counting item that posted by unregistered user
 	     *
 	     * @access public
@@ -1190,7 +1190,7 @@
          *
          * @access public
          * @since unknown
-         * @param type $items
+         * @param $items
          * @return array with description extended with all available locales
          */
         public function extendData($items)

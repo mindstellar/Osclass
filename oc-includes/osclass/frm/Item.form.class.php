@@ -1509,7 +1509,7 @@
                 $aExt[$key] = "'".$value."'";
             }
 
-            $allowedExtensions = join(',', $aExt);
+            $allowedExtensions = implode( ',', $aExt);
 	        $maxSize           = osc_max_size_kb() * 1024;
 	        $maxImages         = osc_max_images_per_item();
             ?>

@@ -163,8 +163,8 @@
                     $content[] = $contentTemp;
              }
              echo '<div class="ui-osc-tabs osc-tab">';
-             echo '<ul>'.join('',$tabs).'</ul>';
-             echo join('',$content);
+             echo '<ul>' . implode( '', $tabs) . '</ul>';
+             echo implode( '', $content);
              echo '</div>';
         }
     }

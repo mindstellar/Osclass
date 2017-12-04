@@ -25,7 +25,7 @@
     {
         /**
          *
-         * @var type
+         * @var
          */
         private static $instance;
 
@@ -55,7 +55,7 @@
          *
          * @access public
          * @since unknown
-         * @param type $userEmailTmp
+         * @param $userEmailTmp
          * @return array
          */
         public function insertOrUpdate($userEmailTmp) {

@@ -201,7 +201,7 @@
         /**
          * Calculate the total items that belong to region
          *
-         * @param type $regionId
+         * @param $regionId
          * @return int total items
          */
         public function calculateNumItems($regionId)

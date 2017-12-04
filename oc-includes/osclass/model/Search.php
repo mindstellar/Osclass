@@ -25,7 +25,7 @@
     {
         /**
          *
-         * @var type
+         * @var
          */
         private $conditions;
         private $itemConditions;
@@ -149,7 +149,7 @@
         }
 
         /**
-         * Return an array with type of sorting
+         * Return an array with of sorting
          *
          * @return array
          */
@@ -555,7 +555,7 @@
         /**
          * Set having sentence to sql
          *
-         * @param type $having
+         * @param $having
          */
         public function addHaving($having)
         {
@@ -1054,7 +1054,7 @@
         /**
          * Return total items on t_item without any filter
          *
-         * @return type
+         * @return
          */
         public function countAll()
         {

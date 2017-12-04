@@ -36,7 +36,7 @@
         if($file=='') {
             $file = __get('file');
         }
-        // Clean $file to prevent hacking of some type
+        // Clean $file to prevent hacking of some
         osc_sanitize_url($file);
         $file = str_replace( array (
 	                             "..\\" ,
@@ -154,7 +154,7 @@
     /**
      * Remove style from the queue, so it will not be loaded
      *
-     * @param type $id
+     * @param $id
      */
     function osc_remove_style($id) {
         Styles::newInstance()->removeStyle($id);

@@ -786,7 +786,7 @@ function is_hex($hex) {
 	 * Process response and return headers and body
 	 *
 	 * @since 3.0
-	 * @param type $content
+	 * @param $content
 	 * @return array
 */
 function processResponse($content)
@@ -805,8 +805,8 @@ function processResponse($content)
 /**
  * Parse headers and return into array format
  *
- * @param type $headers
- * @return type
+ * @param $headers
+ * @return
  */
 function processHeaders($headers)
 {
@@ -830,8 +830,8 @@ function processHeaders($headers)
 	 *
 	 * @since 3.0
 	 *
-	 * @param type $sourceFile
-	 * @param type $fileout
+	 * @param $sourceFile
+	 * @param $fileout
 	 *
 	 * @param null $post_data
 	 * @return bool|string
@@ -1615,8 +1615,8 @@ function rglob($pattern, $flags = 0, $path = '') {
 	 *      1  if A > B, and
 	 *      -1 if B < A.
 	 *
-	 * @param type $a -> from market
-	 * @param type $b -> installed version
+	 * @param $a -> from market
+	 * @param $b -> installed version
 	 * @return int
 */
 function version_compare2($a, $b)

@@ -29,7 +29,7 @@
     {
         /**
          *
-         * @var type
+         * @var
          */
         private static $instance;
 
@@ -62,7 +62,7 @@
          * @since unknown
          * @deprecated since 2.3
          * @see Region::findByCountry
-         * @param type $countryId
+         * @param $countryId
          * @return array
          */
         public function getByCountry($countryId)
@@ -75,7 +75,7 @@
          *
          * @access public
          * @since unknown
-         * @param type $countryId
+         * @param $countryId
          * @return array
          */
         public function findByCountry($countryId)
@@ -126,7 +126,7 @@
 	     * @access public
 	     * @since  unknown
 	     *
-	     * @param type $query
+	     * @param $query
 	     * @param null $country
 	     *
 	     * @return array
@@ -184,7 +184,7 @@
          *
          * @access public
          * @since 3.2.1
-         * @param type $slug
+         * @param $slug
          * @return array
          */
         public function findBySlug($slug)

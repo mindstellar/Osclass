@@ -88,8 +88,8 @@
 	    /**
 	     * Add a colum
 	     *
-	     * @param type $id
-	     * @param type $text
+	     * @param $id
+	     * @param $text
 	     * @param int  $priority
 	     */
         public function addColumn($id, $text, $priority = 5)

@@ -76,7 +76,7 @@
 	/**
 	 * Gets a specific field from current item
 	 *
-	 * @param type   $field
+	 * @param   $field
 	 * @param string $locale
 	 *
 	 * @return field_type
@@ -89,7 +89,7 @@
 	/**
 	 * Gets a specific field from current comment
 	 *
-	 * @param type   $field
+	 * @param   $field
 	 * @param string $locale
 	 *
 	 * @return field_type
@@ -808,7 +808,7 @@
     }
 
     /**
-     * Gets content type of current resource
+     * Gets content of current resource
      *
      * @return string
      */

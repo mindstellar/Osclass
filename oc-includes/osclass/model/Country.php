@@ -60,7 +60,7 @@
          *
          * @access public
          * @since unknown
-         * @param type $code
+         * @param $code
          * @return array
          */
         public function findByCode($code)
@@ -81,7 +81,7 @@
          *
          * @access public
          * @since unknown
-         * @param type $name
+         * @param $name
          * @return array
          */
         public function findByName($name)
@@ -116,7 +116,7 @@
          *
          * @access public
          * @since unknown
-         * @param type $query
+         * @param $query
          * @return array
          */
         public function ajax($query)
@@ -162,7 +162,7 @@
          *
          * @access public
          * @since 3.2.1
-         * @param type $slug
+         * @param $slug
          * @return array
          */
         public function findBySlug($slug)

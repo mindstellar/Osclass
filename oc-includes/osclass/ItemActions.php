@@ -505,13 +505,13 @@
          * User item stats, Category item stats,
          *  country item stats, region item stats, city item stats
          *
-         * @param type $result
-         * @param type $old_item
-         * @param type $oldIsExpired
-         * @param type $old_item_location
-         * @param type $aItem
-         * @param type $newIsExpired
-         * @param type $location
+         * @param $result
+         * @param $old_item
+         * @param $oldIsExpired
+         * @param $old_item_location
+         * @param $aItem
+         * @param $newIsExpired
+         * @param $location
          */
         private function _updateStats($result, $old_item, $oldIsExpired, $old_item_location, $aItem, $newIsExpired, $location)
         {

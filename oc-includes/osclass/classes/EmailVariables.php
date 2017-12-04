@@ -103,8 +103,8 @@
         /**
          * Add new email variable and description
          *
-         * @param type $key
-         * @param type $description 
+         * @param $key
+         * @param $description 
          */
         public function add($key, $description)
         {
@@ -114,7 +114,7 @@
         /**
          * Remove email variable from the array 
          * 
-         * @param type $key
+         * @param $key
          */
         public function remove( $key ) 
         {
@@ -123,7 +123,7 @@
 
 	    /**
 	     *
-	     * @param type $email
+	     * @param $email
 	     *
 	     * @return bool|mixed
 	     */

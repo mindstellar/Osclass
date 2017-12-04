@@ -435,7 +435,7 @@
 		 *
 		 * @access public
 		 *
-		 * @param type   $field
+		 * @param   $field
 		 * @param string $match
 		 * @param string $side
 		 *
@@ -559,7 +559,7 @@
 
 		/**
 		 *
-		 * @param type   $key
+		 * @param   $key
 		 * @param string $value
 		 * @return void
 */
@@ -570,7 +570,7 @@
 
 		/**
 		 *
-		 * @param type   $key
+		 * @param   $key
 		 * @param string $value
 		 * @return void
 */
@@ -581,7 +581,7 @@
 
 		/**
 		 *
-		 * @param type   $key
+		 * @param   $key
 		 * @param string $value
 		 * @param string $type $type
 */
@@ -1133,11 +1133,11 @@
         /**
          * Classify fields, inside arrays $normal_fields, $indexes, $constrains (foreign key's)
          *
-         * @param type $fields
-         * @param type $normal_fields
-         * @param type $indexes
-         * @param type $constrains
-         * @param type $lastTable
+         * @param $fields
+         * @param $normal_fields
+         * @param $indexes
+         * @param $constrains
+         * @param $lastTable
          */
         private function classifyFieldsSql($fields, &$normal_fields, &$indexes, &$constrains, &$lastTable)
         {
@@ -1198,7 +1198,7 @@
             foreach($tbl_fields as $tbl_field) {
                 //Every field should we on the definition, so else SHOULD never happen, unless a very aggressive plugin modify our tables
                 if(array_key_exists(strtolower($tbl_field['Field']), $normal_fields)) {
-                    // Take the type of the field
+                    // Take the of the field
                     if( preg_match( '|' . $tbl_field['Field'] . " (ENUM\s*\(([^\)]*)\))|i", $normal_fields[strtolower( $tbl_field['Field'])], $match) || preg_match( '|' . $tbl_field['Field'] . ' ([^ ]*( unsigned)?)|i' , $normal_fields[strtolower( $tbl_field['Field'])], $match)) {
                         $field_type = $match[1];
                         // Are they the same?
@@ -1243,8 +1243,8 @@
 		 * With all the indexes from struct.sql, remove indexes which actually
 		 * exist into database
 		 *
-		 * @param type $tbl_indexes
-		 * @param type $indexes
+		 * @param $tbl_indexes
+		 * @param $indexes
 		 * @param      $table
 		 * @param      $struct_queries
 */
@@ -1679,7 +1679,7 @@
 	    }
 
         /**
-         * Check if the sql is a write type such as INSERT, UPDATE, UPDATE...
+         * Check if the sql is a write such as INSERT, UPDATE, UPDATE...
          *
          * @access private
          * @since 2.3

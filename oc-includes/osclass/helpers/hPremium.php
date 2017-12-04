@@ -68,7 +68,7 @@
 	/**
 	 * Gets a specific field from current premium
 	 *
-	 * @param type   $field
+	 * @param   $field
 	 * @param string $locale
 	 *
 	 * @return field_type

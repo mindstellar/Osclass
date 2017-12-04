@@ -25,13 +25,13 @@
     {
         /**
          *
-         * @var type
+         * @var
          */
         private static $instance;
 
         /**
          *
-         * @return type
+         * @return
          */
         public static function newInstance()
         {
@@ -57,8 +57,8 @@
          *
          * @access public
          * @since unknown
-         * @param type $categoryId
-         * @return type
+         * @param $categoryId
+         * @return
          */
         public function findByCategoryId($categoryId)
         {
