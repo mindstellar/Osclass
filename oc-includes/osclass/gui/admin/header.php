@@ -75,7 +75,7 @@
     <div class="flashmessage flashmessage-error" style="display: block;">
         <p>
             <?php
-                $msg  = sprintf(__('The images folder <strong>%s</strong> is not writable on your server', 'bender'), WebThemes::newInstance()->getCurrentThemePath() ."images/" ) .", ";
+                $msg  = sprintf(__('The images folder <strong>%s</strong> is not writable on your server', 'bender'), WebThemes::newInstance()->getCurrentThemePath() . 'images/' ) . ', ';
                 $msg .= __("Osclass can't upload the logo image from the administration panel.", 'bender') . ' ';
                 $msg .= __('Please make the aforementioned image folder writable.', 'bender') . ' ';
                 echo $msg;
@@ -85,7 +85,7 @@
             <?php _e('To make a directory writable under UNIX execute this command from the shell:','bender'); ?>
         </p>
         <p class="command">
-            chmod a+w <?php echo WebThemes::newInstance()->getCurrentThemePath() ."images/"; ?>
+            chmod a+w <?php echo WebThemes::newInstance()->getCurrentThemePath() . 'images/'; ?>
         </p>
     </div>
 <?php } ?>

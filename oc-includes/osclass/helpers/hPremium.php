@@ -69,7 +69,7 @@
     * @param type $locale
     * @return field_type
     */
-    function osc_premium_field($field, $locale = "") {
+    function osc_premium_field($field, $locale = '' ) {
         return osc_field(osc_premium(), $field, $locale);
     }
 
@@ -89,7 +89,7 @@
     * @return int
     */
     function osc_premium_id() {
-        return (int) osc_premium_field("pk_i_id");
+        return (int) osc_premium_field( 'pk_i_id' );
     }
 
     /**
@@ -98,7 +98,7 @@
     * @return int
     */
     function osc_premium_user_id() {
-        return (int) osc_premium_field("fk_i_user_id");
+        return (int) osc_premium_field( 'fk_i_user_id' );
     }
 
     /**
@@ -107,15 +107,15 @@
      * @param string $locale
      * @return string $desc
      */
-    function osc_premium_description($locale = "") {
-        if ($locale == "") $locale = osc_current_user_locale();
-        $desc = osc_premium_field("s_description", $locale);
+    function osc_premium_description($locale = '' ) {
+        if ( $locale == '' ) $locale = osc_current_user_locale();
+        $desc = osc_premium_field( 's_description' , $locale);
         if($desc=='') {
-            $desc = osc_premium_field("s_description", osc_language());
+            $desc = osc_premium_field( 's_description' , osc_language());
             if($desc=='') {
                 $aLocales = osc_get_locales();
                 foreach($aLocales as $locale) {
-                    $desc = osc_premium_field("s_description", $locale);
+                    $desc = osc_premium_field( 's_description' , $locale);
                     if($desc!='') {
                         break;
                     }
@@ -131,15 +131,15 @@
      * @param string $locale
      * @return string
      */
-    function osc_premium_title($locale = "") {
-        if ($locale == "") $locale = osc_current_user_locale();
-        $title = osc_premium_field("s_title", $locale);
+    function osc_premium_title($locale = '' ) {
+        if ( $locale == '' ) $locale = osc_current_user_locale();
+        $title = osc_premium_field( 's_title' , $locale);
         if($title=='') {
-            $title = osc_premium_field("s_title", osc_language());
+            $title = osc_premium_field( 's_title' , osc_language());
             if($title=='') {
                 $aLocales = osc_get_locales();
                 foreach($aLocales as $locale) {
-                    $title = osc_premium_field("s_title", $locale);
+                    $title = osc_premium_field( 's_title' , $locale);
                     if($title!='') {
                         break;
                     }
@@ -155,13 +155,13 @@
      * @param string $locale
      * @return string
      */
-    function osc_premium_category($locale = "") {
-        if ($locale == "") $locale = osc_current_user_locale();
+    function osc_premium_category($locale = '' ) {
+        if ( $locale == '' ) $locale = osc_current_user_locale();
         if ( !View::newInstance()->_exists('premium_category') ) {
             View::newInstance()->_exportVariableToView('premium_category', Category::newInstance()->findByPrimaryKey( osc_premium_category_id(), $locale ) );
         }
         $category = View::newInstance()->_get('premium_category');
-        return (string) osc_field($category, "s_name", $locale);
+        return (string) osc_field( $category, 's_name' , $locale);
     }
 
     /**
@@ -170,13 +170,13 @@
      * @param type $locale
      * @return string
      */
-    function osc_premium_category_description($locale = "") {
-        if ($locale == "") $locale = osc_current_user_locale();
+    function osc_premium_category_description($locale = '' ) {
+        if ( $locale == '' ) $locale = osc_current_user_locale();
         if ( !View::newInstance()->_exists('premium_category') ) {
             View::newInstance()->_exportVariableToView('premium_category', Category::newInstance()->findByPrimaryKey( osc_premium_category_id() ) );
         }
         $category = View::newInstance()->_get('premium_category');
-        return osc_field($category, "s_description", $locale);
+        return osc_field( $category, 's_description' , $locale);
     }
 
     /**
@@ -185,7 +185,7 @@
      * @return int
      */
     function osc_premium_category_id() {
-        return (int) osc_premium_field("fk_i_category_id");
+        return (int) osc_premium_field( 'fk_i_category_id' );
     }
 
     /**
@@ -194,7 +194,7 @@
      * @return string
      */
     function osc_premium_pub_date() {
-        return (string) osc_premium_field("dt_pub_date");
+        return (string) osc_premium_field( 'dt_pub_date' );
     }
 
     /**
@@ -203,7 +203,7 @@
      * @return string
      */
     function osc_premium_mod_date() {
-        return (string) osc_premium_field("dt_mod_date");
+        return (string) osc_premium_field( 'dt_mod_date' );
     }
 
     /**
@@ -212,8 +212,8 @@
      * @return float
      */
     function osc_premium_price() {
-        if(osc_premium_field("i_price")=='') return null;
-        else return (float) osc_premium_field("i_price");
+        if( osc_premium_field( 'i_price' ) == '') return null;
+        else return (float) osc_premium_field( 'i_price' );
 
     }
 
@@ -243,7 +243,7 @@
      * @return string
      */
     function osc_premium_currency() {
-        return (string) osc_premium_field("fk_c_currency_code");
+        return (string) osc_premium_field( 'fk_c_currency_code' );
     }
 
     /**
@@ -252,7 +252,7 @@
      * @return string
      */
     function osc_premium_contact_name() {
-        return (string) osc_premium_field("s_contact_name");
+        return (string) osc_premium_field( 's_contact_name' );
     }
 
     /**
@@ -261,7 +261,7 @@
      * @return string
      */
     function osc_premium_contact_email() {
-        return (string) osc_premium_field("s_contact_email");
+        return (string) osc_premium_field( 's_contact_email' );
     }
 
     /**
@@ -270,7 +270,7 @@
      * @return string
      */
     function osc_premium_country() {
-        return (string) osc_premium_field("s_country");
+        return (string) osc_premium_field( 's_country' );
     }
 
     /**
@@ -280,7 +280,7 @@
      * @return string
      */
     function osc_premium_country_code() {
-        return (string) osc_premium_field("fk_c_country_code");
+        return (string) osc_premium_field( 'fk_c_country_code' );
     }
 
     /**
@@ -289,7 +289,7 @@
      * @return string
      */
     function osc_premium_region() {
-        return (string) osc_premium_field("s_region");
+        return (string) osc_premium_field( 's_region' );
     }
 
     /**
@@ -298,7 +298,7 @@
      * @return string
      */
     function osc_premium_city() {
-        return (string) osc_premium_field("s_city");
+        return (string) osc_premium_field( 's_city' );
     }
 
     /**
@@ -307,7 +307,7 @@
      * @return string
      */
     function osc_premium_city_area() {
-        return (string) osc_premium_field("s_city_area");
+        return (string) osc_premium_field( 's_city_area' );
     }
 
     /**
@@ -316,7 +316,7 @@
      * @return string
      */
     function osc_premium_address() {
-        return (string) osc_premium_field("s_address");
+        return (string) osc_premium_field( 's_address' );
     }
 
     /**
@@ -325,7 +325,7 @@
      * @return boolean
      */
     function osc_premium_show_email() {
-        return (boolean) osc_premium_field("b_show_email");
+        return (boolean) osc_premium_field( 'b_show_email' );
     }
 
     /**
@@ -334,7 +334,7 @@
      * @return string
      */
     function osc_premium_zip() {
-        return (string) osc_premium_field("s_zip");
+        return (string) osc_premium_field( 's_zip' );
     }
 
     /**
@@ -343,7 +343,7 @@
      * @return float
      */
     function osc_premium_latitude() {
-        return (float) osc_premium_field("d_coord_lat");
+        return (float) osc_premium_field( 'd_coord_lat' );
     }
 
     /**
@@ -352,7 +352,7 @@
      * @return float
      */
     function osc_premium_longitude() {
-        return (float) osc_premium_field("d_coord_long");
+        return (float) osc_premium_field( 'd_coord_long' );
     }
 
     /**
@@ -361,7 +361,7 @@
      * @return boolean
      */
     function osc_premium_is_premium() {
-        if ( osc_premium_field("b_premium") ) return true;
+        if ( osc_premium_field( 'b_premium' ) ) return true;
         else return false;
     }
 
@@ -373,7 +373,7 @@
     function osc_premium_views() {
         $item = osc_premium();
         if(isset($item['i_num_premium_views'])) {
-            return (int) osc_premium_field("i_num_premium_views");
+            return (int) osc_premium_field( 'i_num_premium_views' );
         } else {
             return ItemStats::newInstance()->getViews(osc_premium_id());
         }
@@ -387,7 +387,7 @@
      * @return boolean
      */
     function osc_premium_status() {
-        return (boolean) osc_premium_field("b_active");
+        return (boolean) osc_premium_field( 'b_active' );
     }
 
     /**
@@ -396,7 +396,7 @@
      * @return string
      */
     function osc_premium_secret() {
-        return (string) osc_premium_field("s_secret");
+        return (string) osc_premium_field( 's_secret' );
     }
 
     /**
@@ -405,7 +405,7 @@
      * @return boolean
      */
     function osc_premium_is_active() {
-        return (osc_premium_field("b_active")==1);
+        return ( osc_premium_field( 'b_active' ) == 1);
     }
 
     /**
@@ -414,7 +414,7 @@
      * @return boolean
      */
     function osc_premium_is_inactive() {
-        return (osc_premium_field("b_active")==0);
+        return ( osc_premium_field( 'b_active' ) == 0);
     }
 
     /**
@@ -423,7 +423,7 @@
      * @return boolean
      */
     function osc_premium_is_spam() {
-        return (osc_premium_field("b_spam")==1);
+        return ( osc_premium_field( 'b_spam' ) == 1);
     }
 
     /**

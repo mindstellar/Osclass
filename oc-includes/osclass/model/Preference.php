@@ -142,7 +142,7 @@
          * @param string $section
          * @return string
          */
-        public function get($key, $section = "osclass")
+        public function get($key, $section = 'osclass' )
         {
             if (isset($this->pref[$section]) && isset($this->pref[$section][$key])) {
                 return $this->pref[$section][$key];
@@ -158,7 +158,7 @@
          * @param string $section
          * @return array
          */
-        public function getSection($section = "osclass")
+        public function getSection($section = 'osclass' )
         {
             if (isset($this->pref[$section]) && is_array($this->pref[$section])) {
                 return $this->pref[$section];
@@ -175,7 +175,7 @@
          * @param string$value
          * @param string $section
          */
-        public function set($key, $value, $section = "osclass")
+        public function set($key, $value, $section = 'osclass' )
         {
             $this->pref[$section][$key] = $value;
         }

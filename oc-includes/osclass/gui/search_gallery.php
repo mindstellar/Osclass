@@ -20,7 +20,7 @@
 ?>
 <table border="0" cellspacing="0">
      <tbody>
-        <?php $class = "even"; ?>
+        <?php $class = 'even'; ?>
         <?php while(osc_has_premiums()) { ?>
             <tr class="premium_<?php echo $class; ?>">
                 <?php if( osc_images_enabled_at_items() ) { ?>
@@ -34,7 +34,7 @@
                  <?php } ?>
                  <td class="text">
                      <h3>
-                         <span style="float:left;"><a href="<?php echo osc_premium_url(); ?>"><?php echo osc_premium_title(); ?></a></span><span style="float:right;"><?php _e("Sponsored ad", "modern"); ?></span>
+                         <span style="float:left;"><a href="<?php echo osc_premium_url(); ?>"><?php echo osc_premium_title(); ?></a></span><span style="float:right;"><?php _e( 'Sponsored ad' , 'modern' ); ?></span>
                      </h3>
                      <p style="clear: left;">
                          <strong><?php if( osc_price_enabled_at_items() && osc_item_category_price_enabled() ) { echo osc_premium_formated_price(); ?> - <?php } echo osc_premium_city(); ?> (<?php echo osc_premium_region(); ?>) - <?php echo osc_format_date(osc_premium_pub_date()); ?></strong>
@@ -49,7 +49,7 @@
 <?php } ?>
 <table border="0" cellspacing="0">
     <tbody>
-        <?php $class = "even"; ?>
+        <?php $class = 'even'; ?>
         <?php while(osc_has_items()) { ?>
             <tr class="<?php echo $class; ?>">
                 <?php if( osc_images_enabled_at_items() ) { ?>

@@ -98,7 +98,7 @@
          * @since 2.3
          * @var string
          */
-        private $errorDesc      = "";
+        private $errorDesc      = '';
         /**
          * Database connection error number
          *

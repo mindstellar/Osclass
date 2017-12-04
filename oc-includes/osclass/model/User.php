@@ -241,7 +241,7 @@
         public function findByIdPasswordSecret($id, $secret, $locale = null)
         {
             if($secret=='') { return null; }
-            $date = date("Y-m-d H:i:s", (time()-(24*3600)));
+            $date = date( 'Y-m-d H:i:s' , ( time() - ( 24 * 3600)));
             $this->dao->select();
             $this->dao->from($this->getTableName());
             $conditions = array(
@@ -300,7 +300,7 @@
                 osc_run_hook('delete_user', $id);
 
                 $this->dao->select('pk_i_id, fk_i_category_id');
-                $this->dao->from(DB_TABLE_PREFIX."t_item");
+                $this->dao->from( DB_TABLE_PREFIX . 't_item' );
                 $this->dao->where('fk_i_user_id', $id);
                 $result = $this->dao->get();
                 $items = $result->result();
@@ -496,7 +496,7 @@
          */
         public function countUsers($condition = 'b_enabled = 1 AND b_active = 1')
         {
-            $this->dao->select("COUNT(*) as i_total");
+            $this->dao->select( 'COUNT(*) as i_total' );
             $this->dao->from(DB_TABLE_PREFIX.'t_user');
             $this->dao->where($condition);
 
@@ -521,7 +521,7 @@
          */
         public function lastAccess($userId, $date, $ip, $time = NULL) {
             if($time!=null) {
-                $this->dao->select("dt_access_date, s_access_ip");
+                $this->dao->select( 'dt_access_date, s_access_ip' );
                 $this->dao->from(DB_TABLE_PREFIX.'t_user');
                 $this->dao->where('pk_i_id', $userId);
                 $this->dao->where("dt_access_date <= '" . (date('Y-m-d H:i:s', time()-$time))."'");

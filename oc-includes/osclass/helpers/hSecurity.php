@@ -61,7 +61,7 @@
      */
     function osc_csrf_token_url() {
         list($name, $token) = osc_csrfguard_generate_token();
-        return "CSRFName=".$name."&CSRFToken=".$token;
+        return 'CSRFName=' . $name . '&CSRFToken=' . $token;
     }
 
     /**
@@ -151,11 +151,11 @@
         if($rules==null) {
             $rules = BanRule::newInstance()->listAll();
         }
-        $ip_blocks = explode(".", $ip);
+        $ip_blocks = explode( '.' , $ip);
         if(count($ip_blocks)==4) {
             foreach($rules as $rule) {
                 if($rule['s_ip']!='') {
-                    $blocks = explode(".", $rule['s_ip']);
+                    $blocks = explode( '.' , $rule['s_ip']);
                     if(count($blocks)==4) {
                         $matched = true;
                         for($k=0;$k<4;$k++) {
@@ -164,7 +164,7 @@
                                     $matched = false;
                                     break;
                                 }
-                            } else if($blocks[$k]!="*" && $blocks[$k]!=$ip_blocks[$k]) {
+                            } else if( $blocks[$k] != '*' && $blocks[$k] != $ip_blocks[$k]) {
                                 $matched = false;
                                 break;
                             }
@@ -193,10 +193,10 @@
         }
         $email = strtolower($email);
         foreach($rules as $rule) {
-            $rule = str_replace("*", ".*", str_replace(".", "\.", strtolower($rule['s_email'])));
-            $rule = str_replace("|", "\\", $rule);
+            $rule = str_replace( '*' , '.*' , str_replace( '.' , "\.", strtolower( $rule['s_email'])));
+            $rule = str_replace( '|' , "\\", $rule);
             if($rule!='') {
-                if(substr($rule,0,1)=="!") {
+                if( substr($rule,0,1) == '!' ) {
                     $rule = '|^((?'.$rule.').*)$|';
                 } else {
                     $rule = '|^'.$rule.'$|';
@@ -221,7 +221,7 @@
         if(preg_replace('|(\d+)|', '', $username)=='') {
          return true;
         }
-        $blacklist = explode(",", osc_username_blacklist());
+        $blacklist = explode( ',' , osc_username_blacklist());
         foreach($blacklist as $bl) {
             if(stripos($username, $bl)!==false) {
                 return true;
@@ -276,7 +276,7 @@
         $string = osc_genRandomPassword(32) . $alert;
         osc_set_alert_private_key(); // renew private key and
         osc_set_alert_public_key();  // public key
-        $key = hash("sha256", osc_get_alert_private_key(), true);
+        $key = hash( 'sha256' , osc_get_alert_private_key(), true);
 
         if(Cryptor::Usable()) {
             return Cryptor::Encrypt($string, $key, 0);
@@ -315,7 +315,7 @@
     }
 
     function osc_decrypt_alert($string) {
-        $key = hash("sha256", osc_get_alert_private_key(), true);
+        $key = hash( 'sha256' , osc_get_alert_private_key(), true);
 
         if(Cryptor::Usable()) {
             return trim(substr(Cryptor::Decrypt($string, $key, 0), 32));

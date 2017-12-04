@@ -62,8 +62,8 @@
      * @return string
      */
     function osc_static_page_title($locale = '') {
-        if ($locale == "") $locale = osc_current_user_locale();
-        return osc_static_page_field("s_title", $locale);
+        if ( $locale == '' ) $locale = osc_current_user_locale();
+        return osc_static_page_field( 's_title' , $locale);
     }
 
     /**
@@ -73,8 +73,8 @@
      * @return string
      */
     function osc_static_page_text($locale = '') {
-        if ($locale == "") $locale = osc_current_user_locale();
-        return osc_static_page_field("s_text", $locale);
+        if ( $locale == '' ) $locale = osc_current_user_locale();
+        return osc_static_page_field( 's_text' , $locale);
     }
 
     /**
@@ -83,7 +83,7 @@
      * @return string
      */
     function osc_static_page_id() {
-        return osc_static_page_field("pk_i_id");
+        return osc_static_page_field( 'pk_i_id' );
     }
 
     /**
@@ -92,7 +92,7 @@
      * @return int
      */
     function osc_static_page_order() {
-        return (int)osc_static_page_field("i_order");
+        return (int)osc_static_page_field( 'i_order' );
     }
 
     /**
@@ -101,7 +101,7 @@
      * @return string
      */
     function osc_static_page_mod_date() {
-        return osc_static_page_field("dt_mod_date");
+        return osc_static_page_field( 'dt_mod_date' );
     }
 
     /**
@@ -110,7 +110,7 @@
      * @return string
      */
     function osc_static_page_pub_date() {
-        return osc_static_page_field("dt_pub_date");
+        return osc_static_page_field( 'dt_pub_date' );
     }
 
     /**
@@ -119,7 +119,7 @@
      * @return string
      */
     function osc_static_page_slug() {
-        return osc_static_page_field("s_internal_name");
+        return osc_static_page_field( 's_internal_name' );
     }
 
     /**
@@ -129,7 +129,7 @@
      */
     function osc_static_page_meta($field = null) {
         if ( !View::newInstance()->_exists('page_meta') ) {
-            $meta = json_decode(osc_static_page_field("s_meta"),  true);
+            $meta = json_decode( osc_static_page_field( 's_meta' ), true);
         } else {
             $meta = View::newInstance()->_get('page_meta');
         }
@@ -154,15 +154,15 @@
             }
             $url = str_replace('{PAGE_TITLE}', osc_static_page_title(), str_replace('{PAGE_ID}', osc_static_page_id(), str_replace('{PAGE_SLUG}', urlencode(osc_static_page_slug()), osc_get_preference('rewrite_page_url'))));
             if($locale!='') {
-                $path = osc_base_url().$locale."/".$url;
+                $path = osc_base_url().$locale . '/' . $url;
             } else {
                 $path = osc_base_url().$url;
             }
         } else {
             if($locale!='') {
-                $path = osc_base_url(true)."?page=page&id=".osc_static_page_id()."&lang=".$locale;
+                $path = osc_base_url(true) . '?page=page&id=' . osc_static_page_id() . '&lang=' . $locale;
             } else {
-                $path = osc_base_url(true)."?page=page&id=".osc_static_page_id();
+                $path = osc_base_url(true) . '?page=page&id=' . osc_static_page_id();
             }
         }
         return $path;
@@ -176,7 +176,7 @@
      * @return boolean
      */
     function osc_get_static_page($internal_name, $locale = '') {
-        if ($locale == "") $locale = osc_current_user_locale();
+        if ( $locale == '' ) $locale = osc_current_user_locale();
         $page = Page::newInstance()->findByInternalName($internal_name, $locale);
         View::newInstance()->_exportVariableToView('page_meta', json_decode(@$page['s_meta'], true));
         return View::newInstance()->_exportVariableToView('page', $page);

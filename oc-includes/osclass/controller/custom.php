@@ -50,7 +50,7 @@
             }
 
             // check if the file exists
-            if( !file_exists(osc_plugins_path() . $file) && !file_exists(osc_themes_path() . osc_theme() . "/plugins/" . $file) ) {
+            if( !file_exists(osc_plugins_path() . $file) && !file_exists(osc_themes_path() . osc_theme() . '/plugins/' . $file) ) {
                 $this->do404();
                 return;
             }
@@ -73,10 +73,10 @@
         //hopefully generic...
         public function doView($file)
         {
-            osc_run_hook("before_html");
+            osc_run_hook( 'before_html' );
             osc_current_web_theme_path($file);
             Session::newInstance()->_clearVariables();
-            osc_run_hook("after_html");
+            osc_run_hook( 'after_html' );
         }
     }
 

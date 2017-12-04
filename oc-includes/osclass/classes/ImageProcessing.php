@@ -41,15 +41,15 @@
 
         private function __construct($imagePath) {
             if(!file_exists($imagePath)) {
-                throw new Exception(sprintf(__("%s does not exist!"), $imagePath));
+                throw new Exception(sprintf( __( '%s does not exist!' ), $imagePath));
             }
 
             if(!is_readable($imagePath)) {
-                throw new Exception(sprintf(__("%s is not readable!"), $imagePath));
+                throw new Exception(sprintf( __( '%s is not readable!' ), $imagePath));
             }
 
             if(filesize($imagePath)==0) {
-                throw new Exception(sprintf(__("%s is corrupt or broken!"), $imagePath));
+                throw new Exception(sprintf( __( '%s is corrupt or broken!' ), $imagePath));
             }
 
             $this->image_info = @getimagesize($imagePath);
@@ -321,12 +321,12 @@
 
         public function doWatermarkText($text, $color = 'ff0000', $fontsize = '30') {
             $this->_watermarked = true;
-            $this->_font = osc_apply_filter('watermark_font_path', LIB_PATH . "osclass/assets/fonts/Arial.ttf");
+            $this->_font = osc_apply_filter('watermark_font_path', LIB_PATH . 'osclass/assets/fonts/Arial.ttf' );
             $text = osc_apply_filter('watermark_text_value', $text);
             $fontsize = osc_apply_filter('watermark_font_size', $fontsize);
             if($this->_use_imagick) {
                 $draw = new ImagickDraw();
-                $draw->setFillColor("#".$color);
+                $draw->setFillColor( '#' . $color);
                 $draw->setFont($this->_font);
                 $draw->setFontSize( $fontsize );
                 $metrics = $this->im->queryFontMetrics($draw, $text);
@@ -362,7 +362,7 @@
                 }
                 $color  = $this->_imageColorAllocateHex($color);
                 $offset = $this->_calculateOffset($text);
-                imagettftext($this->im, 20, 0, $offset['x'], $offset['y'], $color, $this->_font , html_entity_decode($text, null, "UTF-8"));
+                imagettftext($this->im, 20, 0, $offset['x'], $offset['y'], $color, $this->_font , html_entity_decode( $text, null, 'UTF-8' ));
             }
             return $this;
         }

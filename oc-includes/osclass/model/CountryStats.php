@@ -127,7 +127,7 @@
          */
         public function setNumItems($countryCode, $numItems)
         {
-            return $this->dao->query("INSERT INTO ".$this->getTableName()." (fk_c_country_code, i_num_items) VALUES ('$countryCode', $numItems) ON DUPLICATE KEY UPDATE i_num_items = ".$numItems);
+            return $this->dao->query( 'INSERT INTO ' . $this->getTableName() . " (fk_c_country_code, i_num_items) VALUES ('$countryCode', $numItems) ON DUPLICATE KEY UPDATE i_num_items = " . $numItems);
         }
 
         /**
@@ -156,7 +156,7 @@
          * @param string $order
          * @return array
          */
-        public function listCountries($zero = ">", $order = "country_name ASC")
+        public function listCountries($zero = '>' , $order = 'country_name ASC' )
         {
             $this->dao->select($this->getTableName().'.fk_c_country_code as country_code, '.$this->getTableName().'.i_num_items as items, '.DB_TABLE_PREFIX.'t_country.s_name as country_name, '.DB_TABLE_PREFIX.'t_country.s_slug as country_slug');
             $this->dao->from($this->getTableName() );

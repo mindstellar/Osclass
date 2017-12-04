@@ -219,7 +219,7 @@ switch( $step ) {
                 <?php } elseif($step == 2) {
                          display_database_config();
                     } elseif($step == 3) {
-                        if( !isset($error["error"]) ) {
+                        if( !isset($error[ 'error' ]) ) {
                             display_target();
                         } else {
                             display_database_error($error, ($step - 1));
@@ -237,7 +237,7 @@ switch( $step ) {
                             @copy($source, $destination);
                         } else {
                             $contentx = @file_get_contents($source);
-                            $openedfile = fopen($destination, "w");
+                            $openedfile = fopen( $destination, 'w' );
                             fwrite($openedfile, $contentx);
                             fclose($openedfile);
                             if ($contentx === FALSE) {

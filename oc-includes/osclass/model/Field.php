@@ -121,7 +121,7 @@
         {
             if(!is_array($ids)) { $ids = array($ids); };
             $this->dao->select('f.pk_i_id');
-            $this->dao->from($this->getTableName()." f, ".DB_TABLE_PREFIX."t_meta_categories c");
+            $this->dao->from( $this->getTableName() . ' f, ' . DB_TABLE_PREFIX . 't_meta_categories c' );
             $where = array();
             $mCat = Category::newInstance();
             foreach($ids as $id) {
@@ -167,7 +167,7 @@
                 return array();
             }
 
-            $result = $this->dao->query(sprintf("SELECT query.*, im.s_value as s_value, im.fk_i_item_id FROM (SELECT mf.* FROM %st_meta_fields mf, %st_meta_categories mc WHERE mc.fk_i_category_id = %d AND mf.pk_i_id = mc.fk_i_field_id) as query LEFT JOIN %st_item_meta im ON im.fk_i_field_id = query.pk_i_id AND im.fk_i_item_id = %d group by pk_i_id", DB_TABLE_PREFIX, DB_TABLE_PREFIX, $catId, DB_TABLE_PREFIX, $itemId));
+            $result = $this->dao->query(sprintf( 'SELECT query.*, im.s_value as s_value, im.fk_i_item_id FROM (SELECT mf.* FROM %st_meta_fields mf, %st_meta_categories mc WHERE mc.fk_i_category_id = %d AND mf.pk_i_id = mc.fk_i_field_id) as query LEFT JOIN %st_item_meta im ON im.fk_i_field_id = query.pk_i_id AND im.fk_i_item_id = %d group by pk_i_id' , DB_TABLE_PREFIX, DB_TABLE_PREFIX, $catId, DB_TABLE_PREFIX, $itemId));
 
             if( $result == false ) {
                 return array();
@@ -299,10 +299,10 @@
                     break;
                 } else {
                     $slug_k++;
-                    $slug = $slug_tmp."_".$slug_k;
+                    $slug = $slug_tmp . '_' . $slug_k;
                 }
             }
-            $this->dao->insert($this->getTableName(), array("s_name" => $name, "e_type" =>$type, "b_required" => $required, "s_slug" => $slug, 's_options' => $options));
+            $this->dao->insert($this->getTableName(), array( 's_name' => $name, 'e_type' =>$type, 'b_required' => $required, 's_slug' => $slug, 's_options' => $options));
             $id = $this->dao->insertedId();
             $return = true;
             foreach($categories as $c) {

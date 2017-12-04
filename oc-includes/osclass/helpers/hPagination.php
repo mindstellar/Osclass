@@ -161,9 +161,9 @@
             $from = $to = $filtered = 0;
         }
         if($total!=null && $total>$filtered) {
-            return sprintf(__("Showing %s to %s of %s results (filtered from %s total results)"), $from, $to, $filtered, $total);
+            return sprintf( __( 'Showing %s to %s of %s results (filtered from %s total results)' ), $from, $to, $filtered, $total);
         } else {
-            return sprintf(__("Showing %s to %s of %s results"), $from, $to, $filtered);
+            return sprintf( __( 'Showing %s to %s of %s results' ), $from, $to, $filtered);
         }
     }
 

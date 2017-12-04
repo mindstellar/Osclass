@@ -149,10 +149,10 @@ class Object_Cache_default implements iObject_Cache{
         echo "<div style='position:absolute; width:200px;top:0px;'><div style='float:right;margin-right:30px;margin-top:15px;border: 1px red solid;
 border-radius: 17px;
 padding: 1em;'><h2>Default(dummy) stats</h2>";
-        echo "<p>";
+        echo '<p>';
         echo "<strong>Cache Hits:</strong> {$this->cache_hits}<br />";
         echo "<strong>Cache Misses:</strong> {$this->cache_misses}<br />";
-        echo "</p>";
+        echo '</p>';
         echo '</div></div>';
     }
 

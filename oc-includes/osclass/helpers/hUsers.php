@@ -13,7 +13,7 @@
      * @param string $locale
      * @return mixed
      */
-    function osc_user_field($field, $locale = "") {
+    function osc_user_field($field, $locale = '' ) {
         if (View::newInstance()->_exists('users')) {
             $user = View::newInstance()->_current('users');
         } else {
@@ -52,8 +52,8 @@
             }
         }
 
-        if (Session::newInstance()->_get("userId") != '') {
-            $user = User::newInstance()->findByPrimaryKey(Session::newInstance()->_get("userId"));
+        if ( Session::newInstance()->_get( 'userId' ) != '') {
+            $user = User::newInstance()->findByPrimaryKey(Session::newInstance()->_get( 'userId' ));
             View::newInstance()->_exportVariableToView('_loggedUser', $user);
             if(isset($user['b_enabled']) && $user['b_enabled']==1) {
                 return true;
@@ -88,7 +88,7 @@
      * @return int
      */
     function osc_logged_user_id() {
-        return (int) Session::newInstance()->_get("userId");
+        return (int) Session::newInstance()->_get( 'userId' );
     }
 
     /**
@@ -130,7 +130,7 @@
         if ($id != '') {
             if ( osc_rewrite_enabled() ) {
                 $user = User::newInstance()->findByPrimaryKey($id);
-                $path = osc_base_url().osc_get_preference('rewrite_user_profile')."/".$user['s_username'];
+                $path = osc_base_url().osc_get_preference('rewrite_user_profile') . '/' . $user['s_username'];
             } else {
                 $path = sprintf(osc_base_url(true) . '?page=user&action=pub_profile&id=%d', $id);
             }
@@ -149,13 +149,13 @@
     function osc_user_list_items_pub_profile_url($page = '', $itemsPerPage = false) {
         $path  = osc_user_public_profile_url();
         if ($itemsPerPage) {
-            $path .= "?itemsPerPage=" . $itemsPerPage;
+            $path .= '?itemsPerPage=' . $itemsPerPage;
         }
         if($page) {
             if(!$itemsPerPage) {
-                $path .= "?iPage=" . $page;
+                $path .= '?iPage=' . $page;
             } else {
-                $path .= "&iPage=" . $page;
+                $path .= '&iPage=' . $page;
             }
         }
 
@@ -168,8 +168,8 @@
      * @return boolean
      */
     function osc_is_admin_user_logged_in() {
-        if (Session::newInstance()->_get("adminId") != '') {
-            $admin = Admin::newInstance()->findByPrimaryKey( Session::newInstance()->_get("adminId") );
+        if ( Session::newInstance()->_get( 'adminId' ) != '') {
+            $admin = Admin::newInstance()->findByPrimaryKey( Session::newInstance()->_get( 'adminId' ) );
             if(isset($admin['pk_i_id'])) {
                 return true;
             } else {
@@ -202,7 +202,7 @@
      * @return int
      */
     function osc_logged_admin_id() {
-        return (int) Session::newInstance()->_get("adminId");
+        return (int) Session::newInstance()->_get( 'adminId' );
     }
 
     /**
@@ -237,7 +237,7 @@
      * @return string
      */
     function osc_user_name() {
-        return (string) osc_user_field("s_name");
+        return (string) osc_user_field( 's_name' );
     }
 
     /**
@@ -246,7 +246,7 @@
      * @return string
      */
     function osc_user_email() {
-        return (string) osc_user_field("s_email");
+        return (string) osc_user_field( 's_email' );
     }
 
     /**
@@ -255,7 +255,7 @@
      * @return string
      */
     function osc_user_username() {
-        return (string) osc_user_field("s_username");
+        return (string) osc_user_field( 's_username' );
     }
 
     /**
@@ -264,7 +264,7 @@
      * @return string
      */
     function osc_user_regdate() {
-        return (string) osc_user_field("dt_reg_date");
+        return (string) osc_user_field( 'dt_reg_date' );
     }
 
     /**
@@ -273,7 +273,7 @@
      * @return int
      */
     function osc_user_id() {
-        return (int) osc_user_field("pk_i_id");
+        return (int) osc_user_field( 'pk_i_id' );
     }
 
     /**
@@ -282,7 +282,7 @@
      * @return string
      */
     function osc_user_access_date() {
-        return (int) osc_user_field("dt_access_date");
+        return (int) osc_user_field( 'dt_access_date' );
     }
 
     /**
@@ -291,7 +291,7 @@
      * @return string
      */
     function osc_user_access_ip() {
-        return (int) osc_user_field("s_access_ip");
+        return (int) osc_user_field( 's_access_ip' );
     }
 
     /**
@@ -300,7 +300,7 @@
      * @return string
      */
     function osc_user_website() {
-        return (string) osc_user_field("s_website");
+        return (string) osc_user_field( 's_website' );
     }
 
     /**
@@ -308,15 +308,15 @@
      *
      * @return string
      */
-    function osc_user_info($locale = "") {
-        if ($locale == "") $locale = osc_current_user_locale();
-        $info = osc_user_field("s_info", $locale);
+    function osc_user_info($locale = '' ) {
+        if ( $locale == '' ) $locale = osc_current_user_locale();
+        $info = osc_user_field( 's_info' , $locale);
         if($info == '') {
-            $info = osc_user_field("s_info", osc_language());
+            $info = osc_user_field( 's_info' , osc_language());
             if($info=='') {
                 $aLocales = osc_get_locales();
                 foreach($aLocales as $locale) {
-                    $info = osc_user_field("s_info", $locale['pk_c_code']);
+                    $info = osc_user_field( 's_info' , $locale['pk_c_code']);
                     if($info!='') {
                         break;
                     }
@@ -332,7 +332,7 @@
      * @return string
      */
     function osc_user_phone_land() {
-        return (string) osc_user_field("s_phone_land");
+        return (string) osc_user_field( 's_phone_land' );
     }
 
     /**
@@ -341,7 +341,7 @@
      * @return string
      */
     function osc_user_phone_mobile() {
-        return (string) osc_user_field("s_phone_mobile");
+        return (string) osc_user_field( 's_phone_mobile' );
     }
 
     /**
@@ -350,12 +350,12 @@
      * @return string
      */
     function osc_user_phone() {
-        if(osc_user_field("s_phone_land")!="") {
-            return osc_user_field("s_phone_land");
-        } else if(osc_user_field("s_phone_mobile")!="") {
-            return osc_user_field("s_phone_mobile");
+        if( osc_user_field( 's_phone_land' ) != '' ) {
+            return osc_user_field( 's_phone_land' );
+        } else if( osc_user_field( 's_phone_mobile' ) != '' ) {
+            return osc_user_field( 's_phone_mobile' );
         }
-        return "";
+        return '';
     }
 
     /**
@@ -364,7 +364,7 @@
      * @return string
      */
     function osc_user_country() {
-        return (string) osc_user_field("s_country");
+        return (string) osc_user_field( 's_country' );
     }
 
     /**
@@ -373,7 +373,7 @@
      * @return string
      */
     function osc_user_region() {
-        return (string) osc_user_field("s_region");
+        return (string) osc_user_field( 's_region' );
     }
 
     /**
@@ -382,7 +382,7 @@
      * @return string
      */
     function osc_user_region_id() {
-        return (string) osc_user_field("fk_i_region_id");
+        return (string) osc_user_field( 'fk_i_region_id' );
     }
 
     /**
@@ -391,7 +391,7 @@
      * @return string
      */
     function osc_user_city() {
-        return (string) osc_user_field("s_city");
+        return (string) osc_user_field( 's_city' );
     }
 
     /**
@@ -400,7 +400,7 @@
      * @return string
      */
     function osc_user_city_id() {
-        return (string) osc_user_field("fk_i_city_id");
+        return (string) osc_user_field( 'fk_i_city_id' );
     }
 
     /**
@@ -409,7 +409,7 @@
      * @return string
      */
     function osc_user_city_area() {
-        return (string) osc_user_field("s_city_area");
+        return (string) osc_user_field( 's_city_area' );
     }
 
     /**
@@ -418,7 +418,7 @@
      * @return string
      */
     function osc_user_city_area_id() {
-        return (string) osc_user_field("fk_i_city_area_id");
+        return (string) osc_user_field( 'fk_i_city_area_id' );
     }
 
     /**
@@ -427,7 +427,7 @@
      * @return address
      */
     function osc_user_address() {
-        return (string) osc_user_field("s_address");
+        return (string) osc_user_field( 's_address' );
     }
 
     /**
@@ -436,7 +436,7 @@
      * @return string
      */
     function osc_user_zip() {
-        return (string) osc_user_field("s_zip");
+        return (string) osc_user_field( 's_zip' );
     }
 
     /**
@@ -445,7 +445,7 @@
      * @return float
      */
     function osc_user_latitude() {
-        return (float) osc_user_field("d_coord_lat");
+        return (float) osc_user_field( 'd_coord_lat' );
     }
 
     /**
@@ -454,7 +454,7 @@
      * @return float
      */
     function osc_user_longitude() {
-        return (float) osc_user_field("d_coord_long");
+        return (float) osc_user_field( 'd_coord_long' );
     }
 
     /**
@@ -463,7 +463,7 @@
      * @return float
      */
     function osc_user_is_company() {
-        return (bool) osc_user_field("b_company");
+        return (bool) osc_user_field( 'b_company' );
     }
 
     /**
@@ -472,7 +472,7 @@
      * @return int
      */
     function osc_user_items_validated() {
-        return (int) osc_user_field("i_items");
+        return (int) osc_user_field( 'i_items' );
     }
 
     /**
@@ -481,7 +481,7 @@
      * @return int
      */
     function osc_user_comments_validated() {
-        return osc_user_field("i_comments");
+        return osc_user_field( 'i_comments' );
     }
 
     /**
@@ -524,7 +524,7 @@
     function osc_has_alerts() {
         $result = View::newInstance()->_next('alerts');
         $alert = osc_alert();
-        View::newInstance()->_exportVariableToView("items", isset($alert['items'])?$alert['items']:array());
+        View::newInstance()->_exportVariableToView( 'items' , isset($alert['items'])?$alert['items']:array());
         return $result;
     }
 

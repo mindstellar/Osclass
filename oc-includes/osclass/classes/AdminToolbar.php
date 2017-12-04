@@ -103,7 +103,7 @@
             if( count($this->nodes) > 0) {
                 echo '<div id="header" class="navbar"><div class="header-wrapper">';
                 foreach( $this->nodes as $value ) {
-                    $meta = "";
+                    $meta = '';
                     if( isset($value->meta) ) {
                         foreach($value->meta as $k => $v)
                             $meta .= $k.'="'.$v.'" ';

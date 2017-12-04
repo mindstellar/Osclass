@@ -112,7 +112,7 @@
             <?php osc_run_hook('user_profile_form', osc_user()); ?>
             <div class="control-group">
                 <div class="controls">
-                    <button type="submit" class="ui-button ui-button-middle ui-button-main"><?php _e("Update", 'bender');?></button>
+                    <button type="submit" class="ui-button ui-button-middle ui-button-main"><?php _e( 'Update' , 'bender');?></button>
                 </div>
             </div>
             <div class="control-group">

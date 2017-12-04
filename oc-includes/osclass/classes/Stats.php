@@ -88,7 +88,7 @@
         
         public function items_by_user() 
         {
-            $result = $this->conn->query("SELECT AVG( num ) as avg FROM (SELECT COUNT( pk_i_id ) AS num FROM ".DB_TABLE_PREFIX."t_item GROUP BY s_contact_email ) AS dummy_table");
+            $result = $this->conn->query( 'SELECT AVG( num ) as avg FROM (SELECT COUNT( pk_i_id ) AS num FROM ' . DB_TABLE_PREFIX . 't_item GROUP BY s_contact_email ) AS dummy_table' );
             return $result->result();
         }
         
@@ -116,7 +116,7 @@
                 $this->conn->groupBy('DAY(dt_pub_date)');
             }
             
-            $this->conn->from(DB_TABLE_PREFIX."t_item");
+            $this->conn->from( DB_TABLE_PREFIX . 't_item' );
             $this->conn->where("dt_pub_date >= '$from_date'");
             $this->conn->orderBy('dt_pub_date', 'DESC');
             
@@ -153,7 +153,7 @@
                 $this->conn->groupBy('DAY(dt_pub_date)');
             }
             
-            $this->conn->from(DB_TABLE_PREFIX."t_item_comment");
+            $this->conn->from( DB_TABLE_PREFIX . 't_item_comment' );
             $this->conn->where("dt_pub_date >= '$from_date'");
             $this->conn->orderBy('dt_pub_date', 'DESC');
             
@@ -206,9 +206,9 @@
                 $this->conn->groupBy('DAY(dt_date)');
             }
             
-            $this->conn->from(DB_TABLE_PREFIX."t_alerts");
+            $this->conn->from( DB_TABLE_PREFIX . 't_alerts' );
             $this->conn->where("dt_date >= '$from_date'");
-            $this->conn->where("dt_unsub_date IS NULL");
+            $this->conn->where( 'dt_unsub_date IS NULL' );
             $this->conn->orderBy('dt_date', 'ASC');
             
             $result = $this->conn->get();
@@ -228,9 +228,9 @@
                 $this->conn->groupBy('DAY(dt_date)');
             }
             
-            $this->conn->from(DB_TABLE_PREFIX."t_alerts");
+            $this->conn->from( DB_TABLE_PREFIX . 't_alerts' );
             $this->conn->where("dt_date >= '$from_date'");
-            $this->conn->where("dt_unsub_date IS NULL");
+            $this->conn->where( 'dt_unsub_date IS NULL' );
             $this->conn->orderBy('dt_date', 'ASC');
             
             $result = $this->conn->get();

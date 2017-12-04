@@ -19,66 +19,66 @@
     class ContactForm extends Form {
 
         static public function primary_input_hidden() {
-            parent::generic_input_hidden("id", osc_item_id() );
+            parent::generic_input_hidden( 'id' , osc_item_id() );
             return true;
         }
 
         static public function page_hidden() {
-            parent::generic_input_hidden("page", 'item');
+            parent::generic_input_hidden( 'page' , 'item');
             return true;
         }
 
         static public function action_hidden() {
-            parent::generic_input_hidden("action", 'contact_post');
+            parent::generic_input_hidden( 'action' , 'contact_post');
             return true;
         }
 
         static public function your_name() {
-            if( Session::newInstance()->_getForm("yourName") != "" ) {
-                $name = Session::newInstance()->_getForm("yourName");
-                parent::generic_input_text("yourName", $name, null, false);
+            if( Session::newInstance()->_getForm( 'yourName' ) != '' ) {
+                $name = Session::newInstance()->_getForm( 'yourName' );
+                parent::generic_input_text( 'yourName' , $name, null, false);
             } else {
-                parent::generic_input_text("yourName", osc_logged_user_name(), null, false);
+                parent::generic_input_text( 'yourName' , osc_logged_user_name(), null, false);
             }
             return true;
         }
 
         static public function your_email() {
-             if( Session::newInstance()->_getForm("yourEmail") != "" ) {
-                $email = Session::newInstance()->_getForm("yourEmail");
-                parent::generic_input_text("yourEmail", $email, null, false);
+             if( Session::newInstance()->_getForm( 'yourEmail' ) != '' ) {
+                $email = Session::newInstance()->_getForm( 'yourEmail' );
+                parent::generic_input_text( 'yourEmail' , $email, null, false);
             } else {
-                parent::generic_input_text("yourEmail", osc_logged_user_email(), null, false);
+                parent::generic_input_text( 'yourEmail' , osc_logged_user_email(), null, false);
             }
             return true;
         }
 
         static public function your_phone_number() {
-            if( Session::newInstance()->_getForm("phoneNumber") != "" ) {
-                $phoneNumber = Session::newInstance()->_getForm("phoneNumber");
-                parent::generic_input_text("phoneNumber", $phoneNumber, null, false);
+            if( Session::newInstance()->_getForm( 'phoneNumber' ) != '' ) {
+                $phoneNumber = Session::newInstance()->_getForm( 'phoneNumber' );
+                parent::generic_input_text( 'phoneNumber' , $phoneNumber, null, false);
             } else {
-                parent::generic_input_text("phoneNumber", osc_logged_user_phone(), null, false);
+                parent::generic_input_text( 'phoneNumber' , osc_logged_user_phone(), null, false);
             }
             return true;
         }
 
         static public function the_subject() {
-            if( Session::newInstance()->_getForm("subject") != "" ) {
-                $subject = Session::newInstance()->_getForm("subject");
-                parent::generic_input_text("subject", $subject, null, false);
+            if( Session::newInstance()->_getForm( 'subject' ) != '' ) {
+                $subject = Session::newInstance()->_getForm( 'subject' );
+                parent::generic_input_text( 'subject' , $subject, null, false);
             } else {
-                parent::generic_input_text("subject", "", null, false);
+                parent::generic_input_text( 'subject' , '' , null, false);
             }
             return true;
         }
 
         static public function your_message() {
-            if( Session::newInstance()->_getForm("message_body") != "" ) {
-                $message = Session::newInstance()->_getForm("message_body");
-                parent::generic_textarea("message", $message);
+            if( Session::newInstance()->_getForm( 'message_body' ) != '' ) {
+                $message = Session::newInstance()->_getForm( 'message_body' );
+                parent::generic_textarea( 'message' , $message);
             } else {
-                parent::generic_textarea("message", "");
+                parent::generic_textarea( 'message' , '' );
             }
             return true;
         }
@@ -105,12 +105,12 @@
             },
             messages: {
                 yourEmail: {
-                    required: "<?php _e("Email: this field is required"); ?>.",
-                    email: "<?php _e("Invalid email address"); ?>."
+                    required: "<?php _e( 'Email: this field is required' ); ?>.",
+                    email: "<?php _e( 'Invalid email address' ); ?>."
                 },
                 message: {
-                    required: "<?php _e("Message: this field is required"); ?>.",
-                    minlength: "<?php _e("Message: this field is required"); ?>."
+                    required: "<?php _e( 'Message: this field is required' ); ?>.",
+                    minlength: "<?php _e( 'Message: this field is required' ); ?>."
                 }
             },
             errorLabelContainer: "#error_list",

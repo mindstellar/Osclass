@@ -129,7 +129,7 @@
             $this->dao->join(DB_TABLE_PREFIX.'t_category_description as b', 'a.pk_i_id = b.fk_i_category_id', 'INNER');
             $this->dao->join(DB_TABLE_PREFIX.'t_category_stats  as c ', 'a.pk_i_id = c.fk_i_category_id', 'LEFT');
             $this->dao->where("b.s_name != ''");
-            $this->dao->where("a.b_enabled = 1");
+            $this->dao->where( 'a.b_enabled = 1' );
             $this->dao->orderBy('locale_order', 'DESC');
             $subquery = $this->dao->_getSelect();
             $this->dao->_resetSelect();
@@ -498,7 +498,7 @@
          * @param int $categoryID primary key
          * @return array
          */
-        public function findByPrimaryKey($categoryID, $locale = "")
+        public function findByPrimaryKey($categoryID, $locale = '' )
         {
             if($categoryID == null) {
                 return false;
@@ -513,7 +513,7 @@
                     $category = $this->_categories[$categoryID];
 
                     // if we already have locale data, we return the category
-                    if( $locale=="" || ($locale!="" && isset($category['locale']))) {
+                    if( $locale == '' || ( $locale != '' && isset($category['locale']))) {
                         if($locale!='' && isset($category['locale'][$locale])) {
                             $category['s_name'] = $category['locale'][$locale]['s_name'];
                             $category['s_description'] = $category['locale'][$locale]['s_description'];
@@ -584,7 +584,7 @@
             if( array_key_exists($categoryID, $this->_categories) ) {
                 $category = $this->_categories[$categoryID];
             } else {
-                $this->dao->select( "s_name" );
+                $this->dao->select( 's_name' );
                 $this->dao->from( $this->getTablePrefix() . 't_category_description' );
                 $this->dao->where( 'fk_i_category_id', $categoryID );
                 $result = $this->dao->get();
@@ -617,7 +617,7 @@
                 return false;
             }
 
-            $this->dao->select( "s_name, fk_i_category_id as pk_i_id" );
+            $this->dao->select( 's_name, fk_i_category_id as pk_i_id' );
             $this->dao->from( $this->getTablePrefix() . 't_category_description' );
             $this->dao->where( 'fk_c_locale_code', $locale );
             $result = $this->dao->get();
@@ -642,13 +642,13 @@
             $subcats = $this->findSubcategories((int)($pk));
             if (count($subcats) > 0) {
                 foreach ($subcats as $s) {
-                    $this->deleteByPrimaryKey((int)($s["pk_i_id"]));
+                    $this->deleteByPrimaryKey((int)($s[ 'pk_i_id' ]));
                 }
             }
 
             if (count($items) > 0) {
                 foreach ($items as $item) {
-                    Item::newInstance()->deleteByPrimaryKey($item["pk_i_id"]);
+                    Item::newInstance()->deleteByPrimaryKey($item[ 'pk_i_id' ]);
                 }
             }
 
@@ -711,23 +711,23 @@
                         if(!isset($cat_slug['pk_i_id']) || $cat_slug['pk_i_id']==$pk) {
                             break;
                         } else {
-                            $slug = $slug_tmp . "_" . $slug_unique;
+                            $slug = $slug_tmp . '_' . $slug_unique;
                             $slug_unique++;
                         }
                     }
                     $fieldsDescription['s_slug'] = $slug;
                     $array_where = array(
                         'fk_i_category_id'  => $pk,
-                        'fk_c_locale_code'  => $fieldsDescription["fk_c_locale_code"]
+                        'fk_c_locale_code'  => $fieldsDescription[ 'fk_c_locale_code' ]
                     );
 
                     $rs = $this->dao->update(DB_TABLE_PREFIX.'t_category_description', $fieldsDescription, $array_where);
                     if($rs == 0) {
                         $this->dao->select();
-                        $this->dao->from($this->tableName." as a");
-                        $this->dao->join(sprintf("%st_category_description as b", DB_TABLE_PREFIX), "a.pk_i_id = b.fk_i_category_id", "INNER");
-                        $this->dao->where("a.pk_i_id", $pk);
-                        $this->dao->where("b.fk_c_locale_code", $k);
+                        $this->dao->from( $this->tableName . ' as a' );
+                        $this->dao->join( sprintf( '%st_category_description as b' , DB_TABLE_PREFIX), 'a.pk_i_id = b.fk_i_category_id' , 'INNER' );
+                        $this->dao->where( 'a.pk_i_id' , $pk);
+                        $this->dao->where( 'b.fk_c_locale_code' , $k);
                         $result = $this->dao->get();
                         $rows = $result->result();
                         if($result->numRows == 0) {
@@ -774,7 +774,7 @@
                     if(!$this->findBySlug($slug)) {
                         break;
                     } else {
-                        $slug = $slug_tmp . "_" . $slug_unique;
+                        $slug = $slug_tmp . '_' . $slug_unique;
                         $slug_unique++;
                     }
                 }

@@ -25,7 +25,7 @@
         private $dbUser = null;
         private $dbPassword = null;
         private $dbName = null;
-        private $msg = "";
+        private $msg = '';
 
         public function __construct($dbHost, $dbUser, $dbPassword, $dbName) {
             $this->dbHost = $dbHost;
@@ -44,7 +44,7 @@
         public function debug($msg, $ok = true)
         {
             if( OSC_DEBUG_DB ) {
-                $this->msg .= date("d/m/Y - H:i:s") . " ";
+                $this->msg .= date( 'd/m/Y - H:i:s' ) . ' ';
 
                 if( $ok ) {
                     $this->msg .= "<span style='background-color: #D0F5A9;' >[ OPERATION OK ] ";
@@ -52,7 +52,7 @@
                     $this->msg .= "<span style='background-color: #F5A9A9;' >[ OPERATION FAILED ] ";
                 }
 
-                $this->msg .= str_replace("\n", " ", $msg);
+                $this->msg .= str_replace( "\n", ' ' , $msg);
                 $this->msg .= '</span><br />';
                 $this->msg .= "\n";
             }
@@ -262,7 +262,7 @@
                         //echo "[OK] ".$s." <br />";
                     } else {
                         unset($sentences[$var_k]);
-                        $s_temp = $s.";";
+                        $s_temp = $s . ';';
                         //echo "[FAIL] ".$s." <br />";
                     }
                 } else {
@@ -320,7 +320,7 @@
         public function osc_updateDB($queries = '') {
 
             if(!is_array($queries)) {
-                $queries = explode(";", $queries);
+                $queries = explode( ';' , $queries);
             }
 
             // Prepare and separate the queries
@@ -377,16 +377,16 @@
                             //Every field should we on the definition, so else SHOULD never happen, unless a very aggressive plugin modify our tables
                             if(array_key_exists(strtolower($tbl_field['Field']), $normal_fields)) {
                                 // Take the type of the field
-                                if(preg_match("|".$tbl_field['Field']." (ENUM\s*\(([^\)]*)\))|i", $normal_fields[strtolower($tbl_field['Field'])], $match) || preg_match("|".$tbl_field['Field']." ([^ ]*( unsigned)?)|i", $normal_fields[strtolower($tbl_field['Field'])], $match)) {
+                                if( preg_match( '|' . $tbl_field['Field'] . " (ENUM\s*\(([^\)]*)\))|i", $normal_fields[strtolower( $tbl_field['Field'])], $match) || preg_match( '|' . $tbl_field['Field'] . ' ([^ ]*( unsigned)?)|i' , $normal_fields[strtolower( $tbl_field['Field'])], $match)) {
                                     $field_type = $match[1];
                                     // Are they the same?
                                     if(strtolower($field_type)!=strtolower($tbl_field['Type']) && str_replace(' ', '', strtolower($field_type))!=str_replace(' ', '', strtolower($tbl_field['Type']))) {
-                                        $struct_queries[] = "ALTER TABLE ".$table." CHANGE COLUMN ".$tbl_field['Field']." ".$normal_fields[strtolower($tbl_field['Field'])];
+                                        $struct_queries[] = 'ALTER TABLE ' . $table . ' CHANGE COLUMN ' . $tbl_field['Field'] . ' ' . $normal_fields[strtolower( $tbl_field['Field'])];
                                     }
                                 }
                                 // Have we changed the default value?
                                 if(preg_match("| DEFAULT '(.*)'|i", $normal_fields[strtolower($tbl_field['Field'])], $default_match)) {
-                                    $struct_queries[] = "ALTER TABLE ".$table." ALTER COLUMN ".$tbl_field['Field']." SET DEFAULT ".$default_match[1];
+                                    $struct_queries[] = 'ALTER TABLE ' . $table . ' ALTER COLUMN ' . $tbl_field['Field'] . ' SET DEFAULT ' . $default_match[1];
                                 }
                                 // Remove it from the list, so it will not be added
                                 unset($normal_fields[strtolower($tbl_field['Field'])]);
@@ -394,11 +394,11 @@
                         }
                         // For the rest of normal fields (they are not in the table) we add them.
                         foreach($normal_fields as $k => $v) {
-                            $struct_queries[] = "ALTER TABLE ".$table." ADD COLUMN ".$v;
+                            $struct_queries[] = 'ALTER TABLE ' . $table . ' ADD COLUMN ' . $v;
                         }
 
                         // Go for the index part
-                        $tbl_indexes = $this->osc_dbFetchResults("SHOW INDEX FROM ".$table);
+                        $tbl_indexes = $this->osc_dbFetchResults( 'SHOW INDEX FROM ' . $table);
                         if($tbl_indexes) {
                             unset($indexes_array);
                             foreach($tbl_indexes as $tbl_index) {
@@ -441,7 +441,7 @@
                         // For the rest of the indexes (they are in the new definition but not in the table installed
                         foreach($indexes as $index) {
                             if(strtolower(substr(trim($index),0,2))!='on') {// && strtolower(substr(trim($index),0,7))!='foreign') {
-                                $struct_queries[] = "ALTER TABLE ".$table." ADD ".$index;
+                                $struct_queries[] = 'ALTER TABLE ' . $table . ' ADD ' . $index;
                             //} else {
                                 //$struct_queries[] = "ALTER TABLE ".$table." ".$index;
                             }
@@ -477,15 +477,15 @@
         if(defined('DB_PASSWORD') && $dbPassword == null)         $dbPassword = osc_db_password();
         if(defined('DB_NAME') && $dbName == null)                 $dbName     = osc_db_name();
 
-        if(!isset($instance[$dbName . "_" . $dbHost])) {
+        if(!isset($instance[ $dbName . '_' . $dbHost])) {
             if(!isset($instance)) {
                 $instance = array();
             }
 
-            $instance[$dbName . "_" . $dbHost] = new DB($dbHost, $dbUser, $dbPassword, $dbName);
+            $instance[ $dbName . '_' . $dbHost] = new DB( $dbHost, $dbUser, $dbPassword, $dbName);
         }
 
-        return ($instance[$dbName . "_" . $dbHost]);
+        return ($instance[ $dbName . '_' . $dbHost]);
     }
 
 ?>

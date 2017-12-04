@@ -78,11 +78,11 @@
                         Session::newInstance()->_dropKeepForm();
                     }
 
-                    if( Session::newInstance()->_getForm('countryId') != "" ) {
+                    if( Session::newInstance()->_getForm('countryId') != '' ) {
                         $countryId  = Session::newInstance()->_getForm('countryId');
                         $regions    = Region::newInstance()->findByCountry($countryId);
                         $this->_exportVariableToView('regions', $regions);
-                        if(Session::newInstance()->_getForm('regionId') != "" ) {
+                        if( Session::newInstance()->_getForm('regionId') != '' ) {
                             $regionId  = Session::newInstance()->_getForm('regionId');
                             $cities = City::newInstance()->findByRegion($regionId );
                             $this->_exportVariableToView('cities', $cities );
@@ -176,7 +176,7 @@
                 case 'item_edit':   // edit item
                                     $secret = Params::getParam('secret');
                                     $id     = Params::getParam('id');
-                                    $item   = $this->itemManager->listWhere("i.pk_i_id = %d AND ((i.s_secret = %s AND i.fk_i_user_id IS NULL) OR (i.fk_i_user_id = %d))", (int)($id), $secret, (int)($this->userId));
+                                    $item   = $this->itemManager->listWhere( 'i.pk_i_id = %d AND ((i.s_secret = %s AND i.fk_i_user_id IS NULL) OR (i.fk_i_user_id = %d))' , (int)($id), $secret, (int)($this->userId));
                                     if (count($item) == 1) {
                                         $item     = Item::newInstance()->findByPrimaryKey($id);
 
@@ -188,7 +188,7 @@
 
                                         $this->_exportVariableToView('item', $item);
 
-                                        osc_run_hook("before_item_edit", $item);
+                                        osc_run_hook( 'before_item_edit' , $item);
                                         $this->doView('item-edit.php');
                                     } else {
                                         // add a flash message [ITEM NO EXISTE]
@@ -222,7 +222,7 @@
 
                     $secret = Params::getParam('secret');
                     $id     = Params::getParam('id');
-                    $item   = $this->itemManager->listWhere("i.pk_i_id = %d AND ((i.s_secret = %s AND i.fk_i_user_id IS NULL) OR (i.fk_i_user_id = %d))", (int)($id), $secret, (int)($this->userId));
+                    $item   = $this->itemManager->listWhere( 'i.pk_i_id = %d AND ((i.s_secret = %s AND i.fk_i_user_id IS NULL) OR (i.fk_i_user_id = %d))' , (int)($id), $secret, (int)($this->userId));
 
                     if (count($item) == 1) {
                         $this->_exportVariableToView('item', $item[0]);
@@ -245,7 +245,7 @@
                             }
                             Session::newInstance()->_clearVariables();
                             osc_add_flash_ok_message( _m("Great! We've just updated your listing") );
-                            View::newInstance()->_exportVariableToView("item", Item::newInstance()->findByPrimaryKey($id));
+                            View::newInstance()->_exportVariableToView( 'item' , Item::newInstance()->findByPrimaryKey( $id));
                             $this->redirectTo( osc_item_url() );
                         } else {
                             osc_add_flash_error_message( $success);
@@ -256,7 +256,7 @@
                 case 'activate':
                     $secret = Params::getParam('secret');
                     $id     = Params::getParam('id');
-                    $item   = $this->itemManager->listWhere("i.pk_i_id = %d AND ((i.s_secret = %s) OR (i.fk_i_user_id = %d))", (int)($id), $secret, (int)($this->userId));
+                    $item   = $this->itemManager->listWhere( 'i.pk_i_id = %d AND ((i.s_secret = %s) OR (i.fk_i_user_id = %d))' , (int)($id), $secret, (int)($this->userId));
 
                     // item doesn't exist
                     if( count($item) == 0 ) {
@@ -284,7 +284,7 @@
                 case 'item_delete':
                     $secret = Params::getParam('secret');
                     $id     = Params::getParam('id');
-                    $item   = $this->itemManager->listWhere("i.pk_i_id = %d AND ((i.s_secret = %s) OR (i.fk_i_user_id = %d))", (int)($id), $secret, (int)($this->userId));
+                    $item   = $this->itemManager->listWhere( 'i.pk_i_id = %d AND ((i.s_secret = %s) OR (i.fk_i_user_id = %d))' , (int)($id), $secret, (int)($this->userId));
                     if (count($item) == 1) {
                         $mItems = new ItemActions(false);
                         $success = $mItems->delete($item[0]['s_secret'], $item[0]['pk_i_id']);
@@ -351,7 +351,7 @@
                             ItemResource::newInstance()->delete(array('pk_i_id' => $id, 'fk_i_item_id' => $item, 's_name' => $code) );
                             osc_add_flash_ok_message(_m('The selected photo has been successfully deleted'));
                         } else {
-                            osc_add_flash_error_message(_m("The selected photo does not belong to you"));
+                            osc_add_flash_error_message(_m( 'The selected photo does not belong to you' ));
                         }
                     } else {
                         osc_add_flash_error_message(_m("The selected photo couldn't be deleted"));
@@ -391,11 +391,11 @@
                     $item = $this->itemManager->findByPrimaryKey( Params::getParam('id') );
                     $this->_exportVariableToView('item', $item);
 
-                    Session::newInstance()->_setForm("yourEmail",   Params::getParam('yourEmail'));
-                    Session::newInstance()->_setForm("yourName",    Params::getParam('yourName'));
-                    Session::newInstance()->_setForm("friendName", Params::getParam('friendName'));
-                    Session::newInstance()->_setForm("friendEmail", Params::getParam('friendEmail'));
-                    Session::newInstance()->_setForm("message_body",Params::getParam('message'));
+                    Session::newInstance()->_setForm( 'yourEmail' , Params::getParam( 'yourEmail'));
+                    Session::newInstance()->_setForm( 'yourName' , Params::getParam( 'yourName'));
+                    Session::newInstance()->_setForm( 'friendName' , Params::getParam( 'friendName'));
+                    Session::newInstance()->_setForm( 'friendEmail' , Params::getParam( 'friendEmail'));
+                    Session::newInstance()->_setForm( 'message_body' , Params::getParam( 'message'));
 
                     if ((osc_recaptcha_private_key() != '')) {
                         if(!osc_check_recaptcha()) {
@@ -435,7 +435,7 @@
                         if( osc_reg_user_can_contact() && osc_is_web_user_logged_in() || !osc_reg_user_can_contact() ){
                             $this->doView('item-contact.php');
                         } else {
-                            osc_add_flash_warning_message( _m("You can't contact the seller, only registered users can").'. <br />'.sprintf( _m("<a href=\"%s\">Click here to sign-in</a>"), osc_user_login_url() ) );
+                            osc_add_flash_warning_message( _m("You can't contact the seller, only registered users can").'. <br />'.sprintf( _m( '<a href="%s">Click here to sign-in</a>' ), osc_user_login_url() ) );
                             $this->redirectTo( osc_item_url() );
                         }
                     }
@@ -452,10 +452,10 @@
                     if ((osc_recaptcha_private_key() != '')) {
                         if(!osc_check_recaptcha()) {
                             osc_add_flash_error_message( _m('The Recaptcha code is wrong') );
-                            Session::newInstance()->_setForm("yourEmail",   Params::getParam('yourEmail'));
-                            Session::newInstance()->_setForm("yourName",    Params::getParam('yourName'));
-                            Session::newInstance()->_setForm("phoneNumber", Params::getParam('phoneNumber'));
-                            Session::newInstance()->_setForm("message_body",Params::getParam('message'));
+                            Session::newInstance()->_setForm( 'yourEmail' , Params::getParam( 'yourEmail'));
+                            Session::newInstance()->_setForm( 'yourName' , Params::getParam( 'yourName'));
+                            Session::newInstance()->_setForm( 'phoneNumber' , Params::getParam( 'phoneNumber'));
+                            Session::newInstance()->_setForm( 'message_body' , Params::getParam( 'message'));
                             $this->redirectTo( osc_item_url( ) );
                             return false; // BREAK THE PROCESS, THE RECAPTCHA IS WRONG
                         }
@@ -596,7 +596,7 @@
                         if( osc_is_admin_user_logged_in() ) {
                             osc_add_flash_warning_message( _m("The listing hasn't been enabled. Please enable it in order to make it public") );
                         } else if(osc_is_web_user_logged_in() && osc_logged_user_id()==$item['fk_i_user_id']) {
-                            osc_add_flash_warning_message( _m("The listing has been blocked or is awaiting moderation from the admin") );
+                            osc_add_flash_warning_message( _m( 'The listing has been blocked or is awaiting moderation from the admin' ) );
                         } else {
                             $this->do400();
                             return;
@@ -658,10 +658,10 @@
         //hopefully generic...
         public function doView($file)
         {
-            osc_run_hook("before_html");
+            osc_run_hook( 'before_html' );
             osc_current_web_theme_path($file);
             Session::newInstance()->_clearVariables();
-            osc_run_hook("after_html");
+            osc_run_hook( 'after_html' );
         }
     }
 

@@ -38,7 +38,7 @@
         }
         // add the index.php if it's true
         if($with_index) {
-            $path .= "index.php";
+            $path .= 'index.php';
         }
 
         return osc_apply_filter('base_url', $path, $with_index);
@@ -70,7 +70,7 @@
 
         // add the index.php if it's true
         if($with_index) {
-            $path .= "index.php";
+            $path .= 'index.php';
         }
 
         return osc_apply_filter('admin_base_url', $path, $with_index);
@@ -91,7 +91,7 @@
     * @return string
     */
     function osc_admin_base_path() {
-        return(osc_base_path() . "oc-admin/");
+        return( osc_base_path() . 'oc-admin/' );
     }
 
     /**
@@ -446,9 +446,9 @@
      */
     function osc_item_comments_url($page = 'all', $locale = '') {
         if ( osc_rewrite_enabled() ) {
-            return osc_item_url($locale) . "?comments-page=" . $page;
+            return osc_item_url($locale) . '?comments-page=' . $page;
         } else {
-            return osc_item_url($locale) . "&comments-page=" . $page;
+            return osc_item_url($locale) . '&comments-page=' . $page;
         }
     }
 
@@ -459,7 +459,7 @@
      * @return string
      */
     function osc_comment_url($locale = '') {
-        return osc_item_url($locale) . "?comment=" . osc_comment_id();
+        return osc_item_url($locale) . '?comment=' . osc_comment_id();
     }
 
 
@@ -492,14 +492,14 @@
                 for ($i = (count($cat)); $i > 0; $i--) {
                     $sanitized_categories[] = $cat[$i - 1]['s_slug'];
                 }
-                $url = str_replace('{CATEGORIES}', implode("/", $sanitized_categories), $url);
+                $url = str_replace( '{CATEGORIES}', implode( '/' , $sanitized_categories), $url);
             }
             $url = str_replace('{ITEM_ID}', osc_sanitizeString($item['pk_i_id']), $url);
             $url = str_replace('{ITEM_CITY}', osc_sanitizeString($item['s_city']), $url);
             $url = str_replace('{ITEM_TITLE}', osc_sanitizeString(str_replace(',', '-', $item['s_title'])), $url);
             $url = str_replace('?', '', $url);
             if($locale!='') {
-                $path = osc_base_url().$locale."/".$url;
+                $path = osc_base_url().$locale . '/' . $url;
             } else {
                 $path = osc_base_url().$url;
             }
@@ -522,9 +522,9 @@
             for ($i = (count($cat)); $i > 0; $i--) {
                 $sanitized_categories[] = $cat[$i - 1]['s_slug'];
             }
-            $url = str_replace('{CATEGORIES}', implode("/", $sanitized_categories), str_replace('{ITEM_ID}', osc_premium_id(), str_replace('{ITEM_TITLE}', osc_sanitizeString(str_replace(',', '-', osc_premium_title())), osc_get_preference('rewrite_item_url'))));
+            $url = str_replace( '{CATEGORIES}', implode( '/' , $sanitized_categories), str_replace( '{ITEM_ID}', osc_premium_id(), str_replace( '{ITEM_TITLE}', osc_sanitizeString( str_replace( ',', '-', osc_premium_title())), osc_get_preference( 'rewrite_item_url'))));
             if($locale!='') {
-                $path = osc_base_url().$locale."/".$url;
+                $path = osc_base_url().$locale . '/' . $url;
             } else {
                 $path = osc_base_url().$url;
             }
@@ -544,7 +544,7 @@
     function osc_item_url_ns($id, $locale = '') {
         $path = osc_base_url(true) . '?page=item&id=' . $id;
         if($locale!='') {
-            $path .= "&lang=" . $locale;
+            $path .= '&lang=' . $locale;
         }
 
         return $path;
@@ -626,11 +626,11 @@
         if ( osc_rewrite_enabled() ) {
 
             if($page=='') {
-                $typeItem = $typeItem != '' ? "?itemType=" . $typeItem : "";
+                $typeItem = $typeItem != '' ? '?itemType=' . $typeItem : '';
                 return osc_base_url() . osc_get_preference('rewrite_user_items') . $typeItem ;
             } else {
-                $typeItem = $typeItem != '' ? "&itemType=" . $typeItem  : "";
-                return osc_base_url() . osc_get_preference('rewrite_user_items') . "?iPage=" . $page . $typeItem ;
+                $typeItem = $typeItem != '' ? '&itemType=' . $typeItem  : '';
+                return osc_base_url() . osc_get_preference('rewrite_user_items') . '?iPage=' . $page . $typeItem ;
             }
         } else {
             if($page=='') {
@@ -826,7 +826,7 @@
         if ( osc_rewrite_enabled() ) {
             return osc_base_url() . osc_get_preference('rewrite_item_send_friend') . '/' . osc_item_id();
         } else {
-            return osc_base_url(true)."?page=item&action=send_friend&id=".osc_item_id();
+            return osc_base_url(true) . '?page=item&action=send_friend&id=' . osc_item_id();
         }
     }
 
@@ -854,7 +854,7 @@
             foreach($args as $k => $v) {
                 $params_url .= '&'.$k.'='.$v;
             }
-            return osc_base_url(true)."?page=custom&route=".$id.$params_url;
+            return osc_base_url(true) . '?page=custom&route=' . $id . $params_url;
         }
     }
 
@@ -870,7 +870,7 @@
         foreach($args as $k => $v) {
             $params_url .= '&'.$k.'='.$v;
         }
-        return osc_admin_base_url(true)."?page=plugins&action=renderplugin&route=".$id.$params_url;
+        return osc_admin_base_url(true) . '?page=plugins&action=renderplugin&route=' . $id . $params_url;
     }
 
     /**
@@ -885,7 +885,7 @@
         foreach($args as $k => $v) {
             $params_url .= '&'.$k.'='.$v;
         }
-        return osc_base_url(true)."?page=ajax&action=custom&route=".$id.$params_url;
+        return osc_base_url(true) . '?page=ajax&action=custom&route=' . $id . $params_url;
     }
 
     /**
@@ -900,7 +900,7 @@
         foreach($args as $k => $v) {
             $params_url .= '&'.$k.'='.$v;
         }
-        return osc_admin_base_url(true)."?page=ajax&action=custom&route=".$id.$params_url;
+        return osc_admin_base_url(true) . '?page=ajax&action=custom&route=' . $id . $params_url;
     }
 
     /////////////////////////////////////
@@ -1080,7 +1080,7 @@
      * @return boolean
      */
     function osc_is_register_page() {
-        return osc_is_current_page("register", "register");
+        return osc_is_current_page( 'register' , 'register' );
     }
 
     /**

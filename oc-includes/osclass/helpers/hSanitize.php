@@ -66,7 +66,7 @@
      * @return string sanitized
      */
     function osc_sanitize_allcaps($value) {
-        if ( preg_match("/^([A-Z][^A-Z]*)+$/", $value) && !preg_match("/[a-z]+/", $value) ) {
+        if ( preg_match( '/^([A-Z][^A-Z]*)+$/' , $value) && !preg_match( '/[a-z]+/' , $value) ) {
             $value = ucfirst(strtolower($value));
         }
         return $value;
@@ -79,7 +79,7 @@
      * @return string sanitized
      */
     function osc_sanitize_username($value) {
-        return preg_replace("/(_+)/", "_", preg_replace("/([^0-9A-Za-z_]*)/", "", str_replace(" ", "_", trim($value))));
+        return preg_replace( '/(_+)/' , '_' , preg_replace( '/([^0-9A-Za-z_]*)/' , '' , str_replace( ' ' , '_' , trim( $value))));
     }
 
     /**
@@ -89,7 +89,7 @@
      * @return string sanitized
      */
     function osc_sanitize_int($value) {
-        if ( !preg_match("/^[0-9]*$/", $value) ) {
+        if ( !preg_match( '/^[0-9]*$/' , $value) ) {
             return (int)$value;
         }
         return $value;
@@ -107,27 +107,27 @@
         if (empty($value))  return;
 
         // Remove strings that aren't letter and number.
-        $value = preg_replace("/[^a-z0-9]/", "", strtolower($value));
+        $value = preg_replace( '/[^a-z0-9]/' , '' , strtolower( $value));
 
         // Remove 1 from front of number.
-        if (preg_match("/^([0-9]{11})/", $value) && $value[0] == 1) {
+        if ( preg_match( '/^([0-9]{11})/' , $value) && $value[0] == 1) {
             $value = substr($value, 1);
         }
 
         // Check for phone ext.
-        if (!preg_match("/^[0-9]$/", $value)) {
-            $value = preg_replace("/^([0-9]{10})([a-z]+)([0-9]+)/", "$1ext$3", $value); // Replace 'x|ext|extension' with 'ext'.
-            list($value, $ext) = explode("ext", $value); // Split number & ext.
+        if (!preg_match( '/^[0-9]$/' , $value)) {
+            $value = preg_replace( '/^([0-9]{10})([a-z]+)([0-9]+)/' , '$1ext$3' , $value); // Replace 'x|ext|extension' with 'ext'.
+            list($value, $ext) = explode( 'ext' , $value); // Split number & ext.
         }
 
         // Add dashes: ___-___-____
         if (strlen($value) == 7) {
-            $value = preg_replace("/([0-9]{3})([0-9]{4})/", "$1-$2", $value);
+            $value = preg_replace( '/([0-9]{3})([0-9]{4})/' , '$1-$2' , $value);
         } else if (strlen($value) == 10) {
-            $value = preg_replace("/([0-9]{3})([0-9]{3})([0-9]{4})/", "$1-$2-$3", $value);
+            $value = preg_replace( '/([0-9]{3})([0-9]{3})([0-9]{4})/' , '$1-$2-$3' , $value);
         }
 
-        return ($ext)? $value." x".$ext : $value;
+        return ($ext)? $value . ' x' . $ext : $value;
     }
 
     /**
@@ -155,7 +155,7 @@
         $str = htmlspecialchars($str);
 
         // In case htmlspecialchars misses these.
-        $str = str_replace(array("'", '"'), array("&#39;", "&quot;"), $str);
+        $str = str_replace( array("'", '"'), array( '&#39;' , '&quot;' ), $str);
 
         // Decode the temp markers back to entities
         $str = preg_replace("/$temp(\d+);/","&#\\1;",$str);

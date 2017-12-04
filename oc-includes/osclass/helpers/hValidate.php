@@ -32,7 +32,7 @@
      */
     function osc_validate_text ($value = '', $count = 1, $required = true) {
         if ($required || $value) {
-            if ( !preg_match("/([\p{L}\p{N}]){".$count."}/iu", strip_tags($value)) ) {
+            if ( !preg_match("/([\p{L}\p{N}]){".$count . '}/iu' , strip_tags( $value)) ) {
                 return false;
             }
         }
@@ -46,7 +46,7 @@
      * @return boolean
      */
     function osc_validate_int ($value) {
-        if ( preg_match("/^[0-9]+$/", $value) ) {
+        if ( preg_match( '/^[0-9]+$/' , $value) ) {
             return true;
         }
         return false;
@@ -59,7 +59,7 @@
      * @return boolean
      */
     function osc_validate_nozero ($value) {
-        if ( preg_match("/^[0-9]+$/", $value) && $value>0 ) {
+        if ( preg_match( '/^[0-9]+$/' , $value) && $value > 0 ) {
             return true;
         }
         return false;
@@ -92,7 +92,7 @@
      */
     function osc_validate_phone ($value = null, $count = 10, $required = false) {
         if ($required || mb_strlen($value, 'UTF-8') > 0) {
-            if ( !preg_match("/([\p{Nd}][^\p{Nd}]*){".$count."}/i", strip_tags($value)) ) {
+            if ( !preg_match("/([\p{Nd}][^\p{Nd}]*){".$count . '}/i' , strip_tags( $value)) ) {
                 return false;
             }
         }
@@ -162,11 +162,11 @@
                     }
                 }
             }
-        } else if(osc_validate_nozero($region) && osc_validate_text($country,2) && $sCity != "" ) {
+        } else if(osc_validate_nozero($region) && osc_validate_text($country,2) && $sCity != '' ) {
             return true;
-        } else if($sRegion != "" && osc_validate_text($country,2) && $sCity != "" ) {
+        } else if( $sRegion != '' && osc_validate_text( $country, 2) && $sCity != '' ) {
             return true;
-        } else if($sRegion != "" && $sCountry != "" && $sCity != "" ){
+        } else if( $sRegion != '' && $sCountry != '' && $sCity != '' ){
             return true;
         }
         return false;

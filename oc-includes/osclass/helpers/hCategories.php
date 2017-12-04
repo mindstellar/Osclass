@@ -65,7 +65,7 @@
      * @return <array>
      */
     function osc_category_field($field, $locale = '') {
-        return osc_field(osc_category(), $field, "");
+        return osc_field( osc_category(), $field, '' );
     }
 
     /**
@@ -154,9 +154,9 @@
      * @param string $locale
      * @return string
      */
-    function osc_category_name($locale = "") {
-        if ($locale == "") $locale = osc_current_user_locale();
-        return osc_category_field("s_name", $locale);
+    function osc_category_name($locale = '' ) {
+        if ( $locale == '' ) $locale = osc_current_user_locale();
+        return osc_category_field( 's_name' , $locale);
     }
 
     /**
@@ -165,9 +165,9 @@
      * @param string $locale
      * @return string
      */
-    function osc_category_description($locale = "") {
-        if ($locale == "") $locale = osc_current_user_locale();
-        return osc_category_field("s_description", $locale);
+    function osc_category_description($locale = '' ) {
+        if ( $locale == '' ) $locale = osc_current_user_locale();
+        return osc_category_field( 's_description' , $locale);
     }
 
     /**
@@ -176,9 +176,9 @@
      * @param string $locale
      * @return string
      */
-    function osc_category_id($locale = "") {
-        if ($locale == "") $locale = osc_current_user_locale();
-        return osc_category_field("pk_i_id", $locale);
+    function osc_category_id($locale = '' ) {
+        if ( $locale == '' ) $locale = osc_current_user_locale();
+        return osc_category_field( 'pk_i_id' , $locale);
     }
 
     /**
@@ -187,9 +187,9 @@
      * @param string $locale
      * @return string
      */
-    function osc_category_slug($locale = "") {
-        if ($locale == "") $locale = osc_current_user_locale();
-        return osc_category_field("s_slug", $locale);
+    function osc_category_slug($locale = '' ) {
+        if ( $locale == '' ) $locale = osc_current_user_locale();
+        return osc_category_field( 's_slug' , $locale);
     }
 
     /**
@@ -198,7 +198,7 @@
      * @return boolean
      */
     function osc_category_price_enabled() {
-        return (boolean)osc_category_field("b_price_enabled");
+        return (boolean)osc_category_field( 'b_price_enabled' );
     }
 
     /**
@@ -207,7 +207,7 @@
      * @return int
      */
     function osc_category_parent_id() {
-        return osc_category_field("fk_i_parent_id");
+        return osc_category_field( 'fk_i_parent_id' );
     }
 
     /**
@@ -216,7 +216,7 @@
      * @return int
      */
     function osc_category_total_items() {
-        return osc_category_field("i_num_items", "");
+        return osc_category_field( 'i_num_items' , '' );
         //$category = osc_category();
         //return CategoryStats::newInstance()->getNumItems($category);
     }

@@ -390,7 +390,7 @@
          */
         public function unsub($id)
         {
-            return $this->dao->update($this->getTableName(), array('dt_unsub_date' => date("Y-m-d H:i:s")), array('pk_i_id' => $id));
+            return $this->dao->update( $this->getTableName(), array('dt_unsub_date' => date( 'Y-m-d H:i:s' )), array( 'pk_i_id' => $id));
         }
 
 

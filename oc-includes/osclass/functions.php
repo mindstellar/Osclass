@@ -451,7 +451,7 @@ function osc_admin_toolbar_comments()
         AdminToolbar::newInstance()->add_menu(
                 array('id'    => 'comments',
                       'title' => $title,
-                      'href'  => osc_admin_base_url(true) . "?page=comments",
+                      'href'  => osc_admin_base_url(true) . '?page=comments' ,
                       'meta'  => array('class' => 'action-btn action-btn-black')
                 ) );
     }
@@ -466,7 +466,7 @@ function osc_admin_toolbar_spam()
         AdminToolbar::newInstance()->add_menu(
                 array('id'    => 'spam',
                       'title' => $title,
-                      'href'  => osc_admin_base_url(true) . "?page=items&action=items_reported&sort=spam",
+                      'href'  => osc_admin_base_url(true) . '?page=items&action=items_reported&sort=spam' ,
                       'meta'  => array('class' => 'action-btn action-btn-black')
                 ) );
     }
@@ -485,7 +485,7 @@ function osc_admin_toolbar_update_core($force = false)
             AdminToolbar::newInstance()->add_menu(
                 array('id'    => 'update_core',
                     'title' => $title,
-                    'href'  => osc_admin_base_url(true) . "?page=tools&action=upgrade",
+                    'href'  => osc_admin_base_url(true) . '?page=tools&action=upgrade' ,
                     'meta'  => array('class' => 'action-btn action-btn-black')
                 ) );
         }
@@ -539,7 +539,7 @@ function osc_admin_toolbar_update_plugins($force = false)
             AdminToolbar::newInstance()->add_menu(
                 array('id'    => 'update_plugin',
                     'title' => $title,
-                    'href'  => osc_admin_base_url(true) . "?page=plugins#update-plugins",
+                    'href'  => osc_admin_base_url(true) . '?page=plugins#update-plugins' ,
                     'meta'  => array('class' => 'action-btn action-btn-black')
                 ) );
         }
@@ -590,7 +590,7 @@ function osc_admin_toolbar_update_themes($force = false)
             AdminToolbar::newInstance()->add_menu(
                     array('id'    => 'update_theme',
                           'title' => $title,
-                          'href'  => osc_admin_base_url(true) . "?page=appearance",
+                          'href'  => osc_admin_base_url(true) . '?page=appearance' ,
                           'meta'  => array('class' => 'action-btn action-btn-black')
                     ) );
         }
@@ -640,7 +640,7 @@ function osc_admin_toolbar_update_languages($force = false)
             AdminToolbar::newInstance()->add_menu(
                     array('id'    => 'update_language',
                           'title' => $title,
-                          'href'  => osc_admin_base_url(true) . "?page=languages",
+                          'href'  => osc_admin_base_url(true) . '?page=languages' ,
                           'meta'  => array('class' => 'action-btn action-btn-black')
                     ) );
         }
@@ -663,7 +663,7 @@ function osc_admin_toolbar_market_connect() {
             AdminToolbar::newInstance()->add_menu(
                 array('id'    => 'market_connect',
                     'title' => __('Connect Market'),
-                    'href'  => osc_admin_base_url(true) . "?page=market&open_market_connect=true",
+                    'href'  => osc_admin_base_url(true) . '?page=market&open_market_connect=true' ,
                     'meta'  => array('class' => 'action-btn', 'style' => 'color:black;')
                 ) );
         }

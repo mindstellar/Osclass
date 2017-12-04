@@ -19,55 +19,55 @@
     class UserForm extends Form {
 
         static public function primary_input_hidden($user) {
-            parent::generic_input_hidden("id", (isset($user["pk_i_id"]) ? $user['pk_i_id'] : '') );
+            parent::generic_input_hidden( 'id' , (isset($user[ 'pk_i_id' ]) ? $user['pk_i_id'] : '') );
         }
 
         static public function name_text($user = null) {
-            parent::generic_input_text("s_name", isset($user['s_name'])? $user['s_name'] : '', null, false);
+            parent::generic_input_text( 's_name' , isset($user['s_name'])? $user['s_name'] : '', null, false);
         }
 
         static public function username_text($user = null) {
-            parent::generic_input_text("s_username", isset($user['s_username'])? $user['s_username'] : '', null, false);
+            parent::generic_input_text( 's_username' , isset($user['s_username'])? $user['s_username'] : '', null, false);
         }
 
         static public function email_login_text($user = null) {
-            parent::generic_input_text("email", isset($user['s_email'])? $user['s_email'] : '', null, false);
+            parent::generic_input_text( 'email' , isset($user['s_email'])? $user['s_email'] : '', null, false);
         }
 
         static public function password_login_text($user = null) {
-            parent::generic_password("password", '', null, false);
+            parent::generic_password( 'password' , '', null, false);
         }
 
         static public function rememberme_login_checkbox($user = null) {
-            parent::generic_input_checkbox("remember", '1', false);
+            parent::generic_input_checkbox( 'remember' , '1', false);
         }
 
         static public function old_password_text($user = null) {
-            parent::generic_password("old_password", '', null, false);
+            parent::generic_password( 'old_password' , '', null, false);
         }
 
         static public function password_text($user = null) {
-            parent::generic_password("s_password", '', null, false);
+            parent::generic_password( 's_password' , '', null, false);
         }
 
         static public function check_password_text($user = null) {
-            parent::generic_password("s_password2", '', null, false);
+            parent::generic_password( 's_password2' , '', null, false);
         }
 
         static public function email_text($user = null) {
-            parent::generic_input_text("s_email", isset($user['s_email'])? $user['s_email'] : '', null, false);
+            parent::generic_input_text( 's_email' , isset($user['s_email'])? $user['s_email'] : '', null, false);
         }
 
         static public function website_text($user = null) {
-            parent::generic_input_text("s_website", isset($user['s_website'])? $user['s_website'] : '', null, false);
+            parent::generic_input_text( 's_website' , isset($user['s_website'])? $user['s_website'] : '', null, false);
         }
 
         static public function mobile_text($user = null) {
-            parent::generic_input_text("s_phone_mobile", isset($user['s_phone_mobile'])? $user['s_phone_mobile'] : '', null, false);
+            parent::generic_input_text( 's_phone_mobile' , isset($user['s_phone_mobile'])? $user['s_phone_mobile'] : '', null, false);
         }
 
         static public function phone_land_text($user = null) {
-            parent::generic_input_text("s_phone_land", isset($user['s_phone_land'])? $user['s_phone_land'] : '', null, false);
+            parent::generic_input_text( 's_phone_land' , isset($user['s_phone_land'])? $user['s_phone_land'] : '', null, false);
         }
 
         static public function info_textarea($name, $locale = 'en_US', $value = '') {
@@ -182,19 +182,19 @@
             },
             messages: {
                 s_name: {
-                    required: "<?php _e("Name: this field is required"); ?>."
+                    required: "<?php _e( 'Name: this field is required' ); ?>."
                 },
                 s_email: {
-                    required: "<?php _e("Email: this field is required"); ?>.",
-                    email: "<?php _e("Invalid email address"); ?>."
+                    required: "<?php _e( 'Email: this field is required' ); ?>.",
+                    email: "<?php _e( 'Invalid email address' ); ?>."
                 },
                 s_password: {
-                    required: "<?php _e("Password: this field is required"); ?>.",
-                    minlength: "<?php _e("Password: enter at least 5 characters"); ?>."
+                    required: "<?php _e( 'Password: this field is required' ); ?>.",
+                    minlength: "<?php _e( 'Password: enter at least 5 characters' ); ?>."
                 },
                 s_password2: {
-                    required: "<?php _e("Second password: this field is required"); ?>.",
-                    minlength: "<?php _e("Second password: enter at least 5 characters"); ?>.",
+                    required: "<?php _e( 'Second password: this field is required' ); ?>.",
+                    minlength: "<?php _e( 'Second password: enter at least 5 characters' ); ?>.",
                     equalTo: "<?php _e("Passwords don't match"); ?>."
                 }
             },
@@ -292,17 +292,17 @@ function checkForm() {
             },
             messages: {
                 s_name: {
-                    required: "<?php _e("Name: this field is required"); ?>."
+                    required: "<?php _e( 'Name: this field is required' ); ?>."
                 },
                 s_email: {
-                    required: "<?php _e("Email: this field is required"); ?>.",
-                    email: "<?php _e("Invalid email address"); ?>."
+                    required: "<?php _e( 'Email: this field is required' ); ?>.",
+                    email: "<?php _e( 'Invalid email address' ); ?>."
                 },
                 s_password: {
-                    minlength: "<?php _e("Password: enter at least 5 characters"); ?>."
+                    minlength: "<?php _e( 'Password: enter at least 5 characters' ); ?>."
                 },
                 s_password2: {
-                    minlength: "<?php _e("Second password: enter at least 5 characters"); ?>.",
+                    minlength: "<?php _e( 'Second password: enter at least 5 characters' ); ?>.",
                     equalTo: "<?php _e("Passwords don't match"); ?>."
                 }
             },
@@ -327,10 +327,10 @@ function checkForm() {
     $(document).ready(function(){
         $("#countryId").on("change",function(){
             var pk_c_code = $(this).val();
-            <?php if($path=="admin") { ?>
-                var url = '<?php echo osc_admin_base_url(true)."?page=ajax&action=regions&countryId="; ?>' + pk_c_code;
+            <?php if($path == 'admin') { ?>
+                var url = '<?php echo osc_admin_base_url(true) . '?page=ajax&action=regions&countryId='; ?>' + pk_c_code;
             <?php } else { ?>
-                var url = '<?php echo osc_base_url(true)."?page=ajax&action=regions&countryId="; ?>' + pk_c_code;
+                var url = '<?php echo osc_base_url(true) . '?page=ajax&action=regions&countryId='; ?>' + pk_c_code;
             <?php }; ?>
             var result = '';
 
@@ -345,7 +345,7 @@ function checkForm() {
                     success: function(data){
                         var length = data.length;
                         if(length > 0) {
-                            result += '<option value=""><?php _e("Select a region..."); ?></option>';
+                            result += '<option value=""><?php _e( 'Select a region...' ); ?></option>';
                             for(key in data) {
                                 result += '<option value="' + data[key].pk_i_id + '">' + data[key].s_name + '</option>';
                             }
@@ -364,27 +364,27 @@ function checkForm() {
                             $("#cityId").remove();
                         }
                         $("#regionId").html(result);
-                        $("#cityId").html('<option selected value=""><?php _e("Select a city..."); ?></option>');
+                        $("#cityId").html('<option selected value=""><?php _e( 'Select a city...' ); ?></option>');
                     }
                  });
              } else {
                  // add empty select
-                 $("#region").before('<select name="regionId" id="regionId" ><option value=""><?php _e("Select a region..."); ?></option></select>');
+                 $("#region").before('<select name="regionId" id="regionId" ><option value=""><?php _e( 'Select a region...' ); ?></option></select>');
                  $("#region").remove();
 
-                 $("#city").before('<select name="cityId" id="cityId" ><option value=""><?php _e("Select a city..."); ?></option></select>');
+                 $("#city").before('<select name="cityId" id="cityId" ><option value=""><?php _e( 'Select a city...' ); ?></option></select>');
                  $("#city").remove();
 
                  if( $("#regionId").length > 0 ){
-                     $("#regionId").html('<option value=""><?php _e("Select a region..."); ?></option>');
+                     $("#regionId").html('<option value=""><?php _e( 'Select a region...' ); ?></option>');
                  } else {
-                     $("#region").before('<select name="regionId" id="regionId" ><option value=""><?php _e("Select a region..."); ?></option></select>');
+                     $("#region").before('<select name="regionId" id="regionId" ><option value=""><?php _e( 'Select a region...' ); ?></option></select>');
                      $("#region").remove();
                  }
                  if( $("#cityId").length > 0 ){
-                     $("#cityId").html('<option value=""><?php _e("Select a city..."); ?></option>');
+                     $("#cityId").html('<option value=""><?php _e( 'Select a city...' ); ?></option>');
                  } else {
-                     $("#city").before('<select name="cityId" id="cityId" ><option value=""><?php _e("Select a city..."); ?></option></select>');
+                     $("#city").before('<select name="cityId" id="cityId" ><option value=""><?php _e( 'Select a city...' ); ?></option></select>');
                      $("#city").remove();
                  }
 
@@ -395,10 +395,10 @@ function checkForm() {
 
         $("#regionId").on("change",function(){
             var pk_c_code = $(this).val();
-            <?php if($path=="admin") { ?>
-                var url = '<?php echo osc_admin_base_url(true)."?page=ajax&action=cities&regionId="; ?>' + pk_c_code;
+            <?php if($path == 'admin') { ?>
+                var url = '<?php echo osc_admin_base_url(true) . '?page=ajax&action=cities&regionId='; ?>' + pk_c_code;
             <?php } else { ?>
-                var url = '<?php echo osc_base_url(true)."?page=ajax&action=cities&regionId="; ?>' + pk_c_code;
+                var url = '<?php echo osc_base_url(true) . '?page=ajax&action=cities&regionId='; ?>' + pk_c_code;
             <?php }; ?>
 
             var result = '';
@@ -413,7 +413,7 @@ function checkForm() {
                     success: function(data){
                         var length = data.length;
                         if(length > 0) {
-                            result += '<option selected value=""><?php _e("Select a city..."); ?></option>';
+                            result += '<option selected value=""><?php _e( 'Select a city...' ); ?></option>';
                             for(key in data) {
                                 result += '<option value="' + data[key].pk_i_id + '">' + data[key].s_name + '</option>';
                             }

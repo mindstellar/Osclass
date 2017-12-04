@@ -162,10 +162,10 @@
                     if ((osc_recaptcha_private_key() != '')) {
                         if(!osc_check_recaptcha()) {
                             osc_add_flash_error_message( _m('The Recaptcha code is wrong'));
-                            Session::newInstance()->_setForm("yourEmail",   Params::getParam('yourEmail'));
-                            Session::newInstance()->_setForm("yourName",    Params::getParam('yourName'));
-                            Session::newInstance()->_setForm("phoneNumber", Params::getParam('phoneNumber'));
-                            Session::newInstance()->_setForm("message_body",Params::getParam('message'));
+                            Session::newInstance()->_setForm( 'yourEmail' , Params::getParam( 'yourEmail'));
+                            Session::newInstance()->_setForm( 'yourName' , Params::getParam( 'yourName'));
+                            Session::newInstance()->_setForm( 'phoneNumber' , Params::getParam( 'phoneNumber'));
+                            Session::newInstance()->_setForm( 'message_body' , Params::getParam( 'message'));
                             $this->redirectTo( osc_user_public_profile_url( ) );
                             return false; // BREAK THE PROCESS, THE RECAPTCHA IS WRONG
                         }
@@ -192,10 +192,10 @@
         //hopefully generic...
         public function doView($file)
         {
-            osc_run_hook("before_html");
+            osc_run_hook( 'before_html' );
             osc_current_web_theme_path($file);
             Session::newInstance()->_clearVariables();
-            osc_run_hook("after_html");
+            osc_run_hook( 'after_html' );
         }
     }
 

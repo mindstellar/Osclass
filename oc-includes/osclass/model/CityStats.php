@@ -124,7 +124,7 @@
          */
         public function setNumItems($cityID, $numItems)
         {
-            return $this->dao->query("INSERT INTO ".$this->getTableName()." (fk_i_city_id, i_num_items) VALUES ($cityID, $numItems) ON DUPLICATE KEY UPDATE i_num_items = ".$numItems);
+            return $this->dao->query( 'INSERT INTO ' . $this->getTableName() . " (fk_i_city_id, i_num_items) VALUES ($cityID, $numItems) ON DUPLICATE KEY UPDATE i_num_items = " . $numItems);
         }
 
         /**
@@ -161,7 +161,7 @@
          * @param string $order
          * @return array
          */
-        public function listCities($region = null, $zero = ">", $order = "city_name ASC")
+        public function listCities($region = null, $zero = '>' , $order = 'city_name ASC' )
         {
             $key    = md5(osc_base_url().(string)$region.(string)$zero.(string)$order);
             $found  = null;

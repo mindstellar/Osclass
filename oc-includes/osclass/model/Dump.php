@@ -77,7 +77,7 @@
         {
             if ( !is_writable($path) ) return false;
 
-            $_str = "/* Table structure for table `" . $table . "` */\n";
+            $_str = '/* Table structure for table `' . $table . "` */\n";
 
             $sql = 'show create table `' . $table . '`;';
 
@@ -93,7 +93,7 @@
                 $_str .= "\n\n";
             }
 
-            $f = fopen($path, "a");
+            $f = fopen( $path, 'a' );
             fwrite($f, $_str);
             fclose($f);
 
@@ -145,7 +145,7 @@
                         $this->_dump_table_category($result, $num_fields, $field_type, $fields, $index, $num_rows, $_str);
                     } else {
                         foreach($result as $row) {
-                            $_str .= "(";
+                            $_str .= '(';
                             for( $i = 0; $i < $num_fields; $i++ ) {
                                 $v = $row[$fields[$i]->name];
                                 if(is_null($v)) {
@@ -174,7 +174,7 @@
 
             $_str .= "\n";
 
-            $f = fopen($path, "a");
+            $f = fopen( $path, 'a' );
             fwrite($f, $_str);
             fclose($f);
 
@@ -216,7 +216,7 @@
             }
 
             foreach($short_rows as $row) {
-                $_str .= "(";
+                $_str .= '(';
                 for( $i = 0; $i < $num_fields; $i++ ) {
                     $v = $row[$fields[$i]->name];
                     if(is_null($v)) {

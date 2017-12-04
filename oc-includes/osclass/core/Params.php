@@ -34,7 +34,7 @@
 
         public static function getParam($param, $htmlencode = false, $xss_check = true, $quotes_encode = true)
         {
-            if ($param == "") return '';
+            if ( $param == '' ) return '';
             if (!isset(self::$_request[$param])) return '';
 
             $value = self::_purify(self::$_request[$param], $xss_check);
@@ -56,14 +56,14 @@
 
         public static function existParam($param)
         {
-            if ($param == "") return false;
+            if ( $param == '' ) return false;
             if (!isset(self::$_request[$param])) return false;
             return true;
         }
 
         public static function getServerParam($param, $htmlencode = false, $xss_check = true, $quotes_encode = true)
         {
-            if ($param == "") return '';
+            if ( $param == '' ) return '';
             if (!isset(self::$_server[$param])) return '';
 
             $value = self::_purify(self::$_server[$param], $xss_check);
@@ -85,7 +85,7 @@
 
         public static function existServerParam($param)
         {
-            if ($param == "") return false;
+            if ( $param == '' ) return false;
             if (!isset(self::$_server[$param])) return false;
             return true;
         }
@@ -110,22 +110,22 @@
             return array();
         }
 
-        public static function getParamsAsArray($what = "", $htmlencode = false, $xss_check = true, $quotes_encode = true)
+        public static function getParamsAsArray($what = '' , $htmlencode = false, $xss_check = true, $quotes_encode = true)
         {
             switch ($what) {
-                case("get"):
+                case( 'get' ):
                     $value = $_GET;
                 break;
-                case("post"):
+                case( 'post' ):
                     $value = $_POST;
                 break;
-                case("cookie"):
+                case( 'cookie' ):
                     return $_COOKIE;
                     break;
-                case("files"):
+                case( 'files' ):
                     return $_FILES;
                     break;
-                case("request"): // This should not be called, as it depends on server's configuration
+                case( 'request' ): // This should not be called, as it depends on server's configuration
                     return $_REQUEST;
                     break;
                 default:

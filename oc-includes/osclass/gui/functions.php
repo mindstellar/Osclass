@@ -25,7 +25,7 @@ DEFINES
 
 */
     define('BENDER_THEME_VERSION', '314');
-    if( (string)osc_get_preference('keyword_placeholder', 'bender')=="" ) {
+    if( (string)osc_get_preference('keyword_placeholder', 'bender') == '' ) {
         Params::setParam('keyword_placeholder', __('ie. PHP Programmer', 'bender') ) ;
     }
     osc_register_script('fancybox', osc_current_web_theme_url('js/fancybox/jquery.fancybox.pack.js'), array('jquery'));
@@ -301,9 +301,9 @@ FUNCTIONS
         function bender_item_title() {
             $title = osc_item_title();
             foreach( osc_get_locales() as $locale ) {
-                if( Session::newInstance()->_getForm('title') != "" ) {
+                if( Session::newInstance()->_getForm('title') != '' ) {
                     $title_ = Session::newInstance()->_getForm('title');
-                    if( @$title_[$locale['pk_c_code']] != "" ){
+                    if( @$title_[$locale['pk_c_code']] != '' ){
                         $title = $title_[$locale['pk_c_code']];
                     }
                 }
@@ -315,9 +315,9 @@ FUNCTIONS
         function bender_item_description() {
             $description = osc_item_description();
             foreach( osc_get_locales() as $locale ) {
-                if( Session::newInstance()->_getForm('description') != "" ) {
+                if( Session::newInstance()->_getForm('description') != '' ) {
                     $description_ = Session::newInstance()->_getForm('description');
-                    if( @$description_[$locale['pk_c_code']] != "" ){
+                    if( @$description_[$locale['pk_c_code']] != '' ){
                         $description = $description_[$locale['pk_c_code']];
                     }
                 }
@@ -332,7 +332,7 @@ FUNCTIONS
             $mSearch = new Search();
             $mSearch->addCategory(osc_item_category_id());
             $mSearch->addRegion(osc_item_region());
-            $mSearch->addItemConditions(sprintf("%st_item.pk_i_id < %s ", DB_TABLE_PREFIX, osc_item_id()));
+            $mSearch->addItemConditions(sprintf( '%st_item.pk_i_id < %s ' , DB_TABLE_PREFIX, osc_item_id()));
             $mSearch->limit('0', '3');
 
             $aItems      = $mSearch->doSearch();
@@ -345,7 +345,7 @@ FUNCTIONS
 
             $mSearch = new Search();
             $mSearch->addCategory(osc_item_category_id());
-            $mSearch->addItemConditions(sprintf("%st_item.pk_i_id != %s ", DB_TABLE_PREFIX, osc_item_id()));
+            $mSearch->addItemConditions(sprintf( '%st_item.pk_i_id != %s ' , DB_TABLE_PREFIX, osc_item_id()));
             $mSearch->limit('0', '3');
 
             $aItems = $mSearch->doSearch();
@@ -405,7 +405,7 @@ FUNCTIONS
                 if(ob_get_length()>0) {
                     ob_end_flush();
                 }
-                header("Location: ".osc_user_list_items_url(), TRUE,301);
+                header( 'Location: ' . osc_user_list_items_url(), TRUE, 301);
             }
         }
         osc_add_hook('init', 'user_dashboard_redirect');
@@ -482,7 +482,7 @@ FUNCTIONS
 <script type="text/javascript">
     bender.user = {};
     bender.user.id = '<?php echo osc_user_id(); ?>';
-    bender.user.secret = '<?php echo osc_user_field("s_secret"); ?>';
+    bender.user.secret = '<?php echo osc_user_field( 's_secret' ); ?>';
 </script>
             <?php }
         }
@@ -532,7 +532,7 @@ FUNCTIONS
 
                     osc_add_flash_ok_message(__('The logo image has been uploaded correctly', 'bender'), 'admin');
                 } else {
-                    osc_add_flash_error_message(__("An error has occurred, please try again", 'bender'), 'admin');
+                    osc_add_flash_error_message( __( 'An error has occurred, please try again' , 'bender'), 'admin');
                 }
                 osc_redirect_to(osc_admin_render_theme_url('oc-content/themes/bender/admin/header.php'));
             break;
@@ -545,7 +545,7 @@ FUNCTIONS
                     osc_reset_preferences();
                     osc_add_flash_ok_message(__('The logo image has been removed', 'bender'), 'admin');
                 } else {
-                    osc_add_flash_error_message(__("Image not found", 'bender'), 'admin');
+                    osc_add_flash_error_message( __( 'Image not found' , 'bender'), 'admin');
                 }
                 osc_redirect_to(osc_admin_render_theme_url('oc-content/themes/bender/admin/header.php'));
             break;
@@ -604,7 +604,7 @@ function bender_sidebar_category_search($catId = null)
     }
 
     if(count($aCategories) == 0) {
-        return "";
+        return '';
     }
 
     bender_print_sidebar_category_search($aCategories, $catId);
@@ -626,7 +626,7 @@ function bender_print_sidebar_category_search($aCategories, $current_category = 
     if(!isset($c['pk_i_id'])) {
         echo '<ul '.$class.'>';
         if($i==1) {
-            echo '<li><a href="'.osc_esc_html(osc_update_search_url(array('sCategory'=>null, 'iPage'=>null))).'">'.__('All categories', 'bender')."</a></li>";
+            echo '<li><a href="'.osc_esc_html(osc_update_search_url(array('sCategory'=>null, 'iPage'=>null))).'">'.__('All categories', 'bender') . '</a></li>';
         }
         foreach($c as $key => $value) {
     ?>
@@ -640,9 +640,9 @@ function bender_print_sidebar_category_search($aCategories, $current_category = 
     <?php
         }
         if($i==1) {
-        echo "</ul>";
+        echo '</ul>';
         } else {
-        echo "</ul>";
+        echo '</ul>';
         }
     } else {
     ?>

@@ -206,10 +206,10 @@ class Object_Cache_apc implements iObject_Cache{
         echo "<div style='position:absolute; width:200px;top:0px;'><div style='float:right;margin-right:30px;margin-top:15px;border: 1px red solid;
 border-radius: 17px;
 padding: 1em;'><h2>APC stats</h2>";
-        echo "<p>";
+        echo '<p>';
         echo "<strong>Cache Hits:</strong> {$this->cache_hits}<br />";
         echo "<strong>Cache Misses:</strong> {$this->cache_misses}<br />";
-        echo "</p>";
+        echo '</p>';
         echo '<ul>';
         echo '</ul></div></div>';
     }
@@ -248,7 +248,7 @@ padding: 1em;'><h2>APC stats</h2>";
      */
     public static function is_supported()
     {
-        if ( ! extension_loaded('apc') OR ini_get('apc.enabled') != "1") {
+        if ( ! extension_loaded('apc') OR ini_get('apc.enabled') != '1' ) {
             error_log('The APC PHP extension must be loaded to use APC Cache.');
             return false;
         }

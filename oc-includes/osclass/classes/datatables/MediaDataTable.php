@@ -77,7 +77,7 @@
             $this->addColumn('date', '<a href="'.osc_esc_html($url_base.$arg_date).'">'.__('Date').'</a>');
 
             $dummy = &$this;
-            osc_run_hook("admin_media_table", $dummy);
+            osc_run_hook( 'admin_media_table' , $dummy);
         }
         
         private function processData($media)

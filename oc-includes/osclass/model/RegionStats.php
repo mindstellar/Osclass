@@ -123,7 +123,7 @@
          */
         public function setNumItems($regionID, $numItems)
         {
-            $sql = "INSERT INTO ".$this->getTableName()." (fk_i_region_id, i_num_items) VALUES ($regionID, $numItems) ON DUPLICATE KEY UPDATE i_num_items = ".$numItems;
+            $sql = 'INSERT INTO ' . $this->getTableName() . " (fk_i_region_id, i_num_items) VALUES ($regionID, $numItems) ON DUPLICATE KEY UPDATE i_num_items = " . $numItems;
             return $this->dao->query($sql);
         }
 
@@ -154,7 +154,7 @@
          * @param string $order
          * @return array
          */
-        public function listRegions($country = '%%%%', $zero = ">", $order = "region_name ASC")
+        public function listRegions($country = '%%%%', $zero = '>' , $order = 'region_name ASC' )
         {
             $key    = md5(osc_base_url().(string)$country.(string)$zero.(string)$order);
             $found  = null;

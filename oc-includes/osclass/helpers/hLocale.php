@@ -58,7 +58,7 @@
     function osc_get_locales() {
         if (!View::newInstance()->_exists('locales')) {
             $locale = OSCLocale::newInstance()->listAllEnabled();
-            View::newInstance()->_exportVariableToView("locales", $locale);
+            View::newInstance()->_exportVariableToView( 'locales' , $locale);
         } else {
             $locale = View::newInstance()->_get('locales');
         }
@@ -114,7 +114,7 @@
      * @return string
      */
     function osc_locale_code() {
-        return osc_locale_field("pk_c_code");
+        return osc_locale_field( 'pk_c_code' );
     }
 
     /**
@@ -123,7 +123,7 @@
      * @return string
      */
     function osc_locale_name() {
-        return osc_locale_field("s_name");
+        return osc_locale_field( 's_name' );
     }
 
     /**

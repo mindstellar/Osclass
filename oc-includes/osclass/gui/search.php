@@ -119,16 +119,16 @@
             osc_get_premiums();
             if(osc_count_premiums() > 0) {
             echo '<h5>'.__('Premium listings','bender').'</h5>';
-            View::newInstance()->_exportVariableToView("listType", 'premiums');
-            View::newInstance()->_exportVariableToView("listClass",$listClass.' premium-list');
+            View::newInstance()->_exportVariableToView( 'listType' , 'premiums');
+            View::newInstance()->_exportVariableToView( 'listClass' , $listClass . ' premium-list');
             osc_current_web_theme_path('loop.php');
             echo '<div style="clear:both;"></div><br/>';
             }
         ?>
      <?php if(osc_count_items() > 0) {
         echo '<h5>'.__('Listings','bender').'</h5>';
-        View::newInstance()->_exportVariableToView("listType", 'items');
-        View::newInstance()->_exportVariableToView("listClass",$listClass);
+        View::newInstance()->_exportVariableToView( 'listType' , 'items');
+        View::newInstance()->_exportVariableToView( 'listClass' , $listClass);
         osc_current_web_theme_path('loop.php');
     ?>
 

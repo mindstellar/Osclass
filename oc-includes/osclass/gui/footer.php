@@ -47,7 +47,7 @@
             <?php } ?>
             <?php if( osc_users_enabled() || ( !osc_users_enabled() && !osc_reg_user_post() )) { ?>
             <li class="publish">
-                <a href="<?php echo osc_item_post_url_in_category(); ?>"><?php _e("Publish your ad for free", 'bender');?></a>
+                <a href="<?php echo osc_item_post_url_in_category(); ?>"><?php _e( 'Publish your ad for free' , 'bender');?></a>
             </li>
             <?php } ?>
         </ul>
@@ -74,7 +74,7 @@
             <strong><?php _e('Language:', 'bender'); ?></strong>
             <?php $i = 0;  ?>
             <?php while ( osc_has_web_enabled_locales() ) { ?>
-            <span><a id="<?php echo osc_locale_code(); ?>" href="<?php echo osc_change_language_url ( osc_locale_code() ); ?>"><?php echo osc_locale_name(); ?></a></span><?php if( $i == 0 ) { echo " &middot; "; } ?>
+            <span><a id="<?php echo osc_locale_code(); ?>" href="<?php echo osc_change_language_url ( osc_locale_code() ); ?>"><?php echo osc_locale_name(); ?></a></span><?php if( $i == 0 ) { echo ' &middot; '; } ?>
                 <?php $i++; ?>
             <?php } ?>
         <?php } ?>

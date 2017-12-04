@@ -47,8 +47,8 @@
       </span>
     </div>
     <?php
-    View::newInstance()->_exportVariableToView("listType", 'latestItems');
-    View::newInstance()->_exportVariableToView("listClass",$listClass);
+    View::newInstance()->_exportVariableToView( 'listType' , 'latestItems');
+    View::newInstance()->_exportVariableToView( 'listClass' , $listClass);
     osc_current_web_theme_path('loop.php');
     ?>
     <div class="clear"></div>
@@ -71,7 +71,7 @@
     <div class="widget-box">
         <?php if(osc_count_list_regions() > 0 ) { ?>
         <div class="box location">
-            <h3><strong><?php _e("Location", 'bender') ; ?></strong></h3>
+            <h3><strong><?php _e( 'Location' , 'bender') ; ?></strong></h3>
             <ul>
             <?php while(osc_has_list_regions() ) { ?>
                 <li><a href="<?php echo osc_list_region_url(); ?>"><?php echo osc_list_region_name() ; ?> <em>(<?php echo osc_list_region_items() ; ?>)</em></a></li>

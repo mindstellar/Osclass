@@ -17,7 +17,7 @@
  */
 
     function fn_email_alert_validation($alert, $email, $secret) {
-        $user['s_name'] = "";
+        $user['s_name'] = '';
 
         // send alert validation email
         $prefLocale = osc_language();
@@ -463,7 +463,7 @@
             osc_sendMail($params);
             osc_add_flash_ok_message( _m("We've sent you an e-mail. Follow its instructions to validate the changes"));
         } else {
-            osc_add_flash_error_message( _m("We tried to sent you an e-mail, but it failed. Please, contact an administrator"));
+            osc_add_flash_error_message( _m( 'We tried to sent you an e-mail, but it failed. Please, contact an administrator' ));
         }
     }
     osc_add_hook('hook_email_new_email', 'fn_email_new_email');

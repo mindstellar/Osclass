@@ -260,7 +260,7 @@
         $file        = preg_replace('|/+|', '/', str_replace('\\', '/', $file));
         $plugin_path = str_replace('\\', '/', osc_plugins_path());
         $file        = str_replace($plugin_path, '', $file);
-        return (osc_base_url(true) . "?page=ajax&action=custom&ajaxfile=" . $file);
+        return ( osc_base_url(true) . '?page=ajax&action=custom&ajaxfile=' . $file);
     }
 
     /**

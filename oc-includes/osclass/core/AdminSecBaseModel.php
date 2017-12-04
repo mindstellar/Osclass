@@ -92,7 +92,7 @@
             } else {
                 //Session::newInstance()->session_start();
                 Session::newInstance()->_setReferer(osc_base_url() . preg_replace('|^' . REL_WEB_URL . '|', '', Params::getServerParam('REQUEST_URI', false, false)));
-                header("Location: " . osc_admin_base_url(true)."?page=login" );
+                header( 'Location: ' . osc_admin_base_url( true) . '?page=login' );
                 exit;
             }
         }
@@ -100,10 +100,10 @@
         //hopefully generic...
         public function doView($file)
         {
-            osc_run_hook("before_admin_html");
+            osc_run_hook( 'before_admin_html' );
             osc_current_admin_theme_path($file);
             Session::newInstance()->_clearVariables();
-            osc_run_hook("after_admin_html");
+            osc_run_hook( 'after_admin_html' );
         }
     }
 

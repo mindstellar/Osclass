@@ -63,7 +63,7 @@
             </div>
             <?php if (count($location)>0) { ?>
                 <ul id="item_location">
-                    <li><strong><?php _e("Location", 'bender'); ?></strong>: <?php echo implode(', ', $location); ?></li>
+                    <li><strong><?php _e( 'Location' , 'bender'); ?></strong>: <?php echo implode( ', ', $location); ?></li>
                 </ul>
             <?php }; ?>
         </div>
@@ -140,7 +140,7 @@
         <div class="similar_ads">
             <h2><?php _e('Related listings', 'bender'); ?></h2>
             <?php
-            View::newInstance()->_exportVariableToView("listType", 'items');
+            View::newInstance()->_exportVariableToView( 'listType' , 'items');
             osc_current_web_theme_path('loop.php');
             ?>
             <div class="clear"></div>
@@ -156,7 +156,7 @@
                 <div class="comments_list">
                     <?php while ( osc_has_item_comments() ) { ?>
                         <div class="comment">
-                            <h3><strong><?php echo osc_comment_title(); ?></strong> <em><?php _e("by", 'bender'); ?> <?php echo osc_comment_author_name(); ?>:</em></h3>
+                            <h3><strong><?php echo osc_comment_title(); ?></strong> <em><?php _e( 'by' , 'bender'); ?> <?php echo osc_comment_author_name(); ?>:</em></h3>
                             <p><?php echo nl2br( osc_comment_body() ); ?> </p>
                             <?php if ( osc_comment_user_id() && (osc_comment_user_id() == osc_logged_user_id()) ) { ?>
                             <p>

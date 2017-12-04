@@ -267,14 +267,14 @@
                             Cookie::newInstance()->pop('oc_userSecret');
                             Cookie::newInstance()->set();
 
-                            osc_add_flash_ok_message(_m("Your account have been deleted"));
+                            osc_add_flash_ok_message(_m( 'Your account have been deleted' ));
                             $this->redirectTo( osc_base_url() );
                         } else {
-                            osc_add_flash_error_message(_m("Oops! you can not do that"));
+                            osc_add_flash_error_message(_m( 'Oops! you can not do that' ));
                             $this->redirectTo(osc_user_dashboard_url() );
                         }
                     } else {
-                        osc_add_flash_error_message(_m("Oops! you can not do that"));
+                        osc_add_flash_error_message(_m( 'Oops! you can not do that' ));
                         $this->redirectTo(osc_base_url() );
                     }
                 break;
@@ -284,10 +284,10 @@
         //hopefully generic...
         public function doView($file)
         {
-            osc_run_hook("before_html");
+            osc_run_hook( 'before_html' );
             osc_current_web_theme_path($file);
             Session::newInstance()->_clearVariables();
-            osc_run_hook("after_html");
+            osc_run_hook( 'after_html' );
         }
     }
 

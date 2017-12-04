@@ -122,7 +122,7 @@ MESSAGE;
                                                     $output = finfo_file($finfo, $tmpName);
                                                     finfo_close($finfo);
 
-                                                    $output = explode("; ",$output);
+                                                    $output = explode( '; ' , $output);
                                                     if ( is_array($output) ) {
                                                         $output = $output[0];
                                                     }
@@ -169,10 +169,10 @@ MESSAGE;
         //hopefully generic...
         public function doView($file)
         {
-            osc_run_hook("before_html");
+            osc_run_hook( 'before_html' );
             osc_current_web_theme_path($file);
             Session::newInstance()->_clearVariables();
-            osc_run_hook("after_html");
+            osc_run_hook( 'after_html' );
         }
     }
 

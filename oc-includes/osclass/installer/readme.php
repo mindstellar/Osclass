@@ -25,7 +25,7 @@ function _purify($value, $xss_check)
 }
 function getServerParam($param, $htmlencode = false, $xss_check = true, $quotes_encode = true)
 {
-    if ($param == "") return '';
+    if ( $param == '' ) return '';
     if (!isset($_SERVER[$param])) return '';
     $value = _purify($_SERVER[$param], $xss_check);
     if ($htmlencode) {

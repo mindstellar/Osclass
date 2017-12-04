@@ -109,7 +109,7 @@ function basic_info() {
         )
     );
 
-    $body  = sprintf(__('Hi %s,'),Params::getParam('webtitle'))."<br/><br/>";
+    $body  = sprintf(__('Hi %s,'),Params::getParam('webtitle')) . '<br/><br/>';
     $body .= sprintf(__('Your Osclass installation at %s is up and running. You can access the administration panel with these details:'), WEB_PATH) . '<br/>';
     $body .= '<ul>';
     $body .= '<li>'.sprintf(__('username: %s'), $admin).'</li>';
@@ -117,7 +117,7 @@ function basic_info() {
     $body .= '</ul>';
     $body .= sprintf(__('Remember that for any doubts you might have you can consult our <a href="%1$s">documentation</a>, <a href="%2$s">forum</a> or <a href="%3$s">blog</a>.'), 'http://doc.osclass.org/', 'http://forums.osclass.org/', 'http://blog.osclass.org/');
     $body .= sprintf(' ' . __('Osclass doesn’t run any developments but we can put you in touch with third party developers through a Premium Support. And hey, if you would like to contribute to Osclass - learn how <a href="%1$s">here</a>!'), 'http://blog.osclass.org/2012/11/22/how-to-collaborate-to-osclass/') . '<br/><br/>';
-    $body .= __('Cheers,')."<br/>";
+    $body .= __('Cheers,') . '<br/>';
     $body .= __('The <a href="http://osclass.org/">Osclass</a> team');
 
     $sitename = strtolower( Params::getServerParam('SERVER_NAME'));
@@ -128,8 +128,8 @@ function basic_info() {
     try{
         require_once LIB_PATH . 'phpmailer/class.phpmailer.php';
         $mail = new PHPMailer(true);
-        $mail->CharSet  = "utf-8";
-        $mail->Host     = "localhost";
+        $mail->CharSet  = 'utf-8';
+        $mail->Host     = 'localhost';
         $mail->From     = 'osclass@' . $sitename;
         $mail->FromName = 'Osclass';
         $mail->Subject  = 'Osclass successfully installed!';
@@ -137,20 +137,20 @@ function basic_info() {
         $mail->Body     = $body;
         $mail->AltBody  = $body;
         if( !$mail->send() ) {
-            return array('email_status' => Params::getParam('email') . "<br>" . $mail->ErrorInfo, 's_password'   => $password );
+            return array( 'email_status' => Params::getParam('email') . '<br>' . $mail->ErrorInfo, 's_password' => $password );
         }
 
         return array('email_status' => '', 's_password'   => $password );
     } catch(phpmailerException $exception) {
-        return array('email_status' => Params::getParam('email') . "<br>" . $exception->errorMessage(), 's_password'   => $password );
+        return array( 'email_status' => Params::getParam('email') . '<br>' . $exception->errorMessage(), 's_password' => $password );
     }
 }
 
 function install_locations ( ) {
 
-    $country = Params::getParam("country-input");
-    $region = Params::getParam("region-input");
-    $city = Params::getParam("city-input");
+    $country = Params::getParam( 'country-input' );
+    $region = Params::getParam( 'region-input' );
+    $city = Params::getParam( 'city-input' );
 
     if($country!='all') {
         if($region!='all') {
@@ -171,9 +171,9 @@ function install_locations ( ) {
     $conn = DBConnectionClass::newInstance();
     $c_db = $conn->getOsclassDb();
     $comm = new DBCommandClass($c_db);
-    $comm->query("SET FOREIGN_KEY_CHECKS = 0");
+    $comm->query( 'SET FOREIGN_KEY_CHECKS = 0' );
     $imported = $comm->importSQL($data_sql);
-    $comm->query("SET FOREIGN_KEY_CHECKS = 1");
+    $comm->query( 'SET FOREIGN_KEY_CHECKS = 1' );
     return $imported;
 }
 

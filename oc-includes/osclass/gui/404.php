@@ -29,10 +29,10 @@
 <div class="flashmessage-404">
     <h1><?php _e("Sorry but I can't find the page you're looking for", 'bender') ; ?></h1>
 
-    <p><?php _e("Let us help you, we have got a few tips for you to find it.", 'bender') ; ?></p>
+    <p><?php _e( 'Let us help you, we have got a few tips for you to find it.' , 'bender') ; ?></p>
     <ul>
         <li>
-            <?php _e("<strong>Search</strong> for it:", 'bender') ; ?>
+            <?php _e( '<strong>Search</strong> for it:' , 'bender') ; ?>
             <form action="<?php echo osc_base_url(true) ; ?>" method="get" class="search">
                 <input type="hidden" name="page" value="search" />
                 <fieldset class="main">
@@ -41,7 +41,7 @@
                 </fieldset>
             </form>
         </li>
-        <li><?php _e("<strong>Look</strong> for it in the most popular categories.", 'bender') ; ?>
+        <li><?php _e( '<strong>Look</strong> for it in the most popular categories.' , 'bender') ; ?>
             <div class="categories">
                 <?php osc_goto_first_category() ; ?>
                 <?php while ( osc_has_categories() ) { ?>

@@ -160,7 +160,7 @@
             $this->queryCount = 0;
 
             $this->errorLevel = 0;
-            $this->errorDesc  = "";
+            $this->errorDesc  = '';
 
             $this->aSelect    = array();
             $this->aFrom      = array();
@@ -818,7 +818,7 @@
 
             $sql = 'UPDATE ' . $table . ' SET ' . implode(', ', $valstr);
 
-            $sql .= ($where != '' && count($where) > 0) ? " WHERE " . implode(" ", $where) : '';
+            $sql .= ($where != '' && count($where) > 0) ? ' WHERE ' . implode( ' ' , $where) : '';
 
             return $sql;
         }
@@ -1183,33 +1183,33 @@
                 //Every field should we on the definition, so else SHOULD never happen, unless a very aggressive plugin modify our tables
                 if(array_key_exists(strtolower($tbl_field['Field']), $normal_fields)) {
                     // Take the type of the field
-                    if(preg_match("|".$tbl_field['Field']." (ENUM\s*\(([^\)]*)\))|i", $normal_fields[strtolower($tbl_field['Field'])], $match) || preg_match("|".$tbl_field['Field']." ([^ ]*( unsigned)?)|i", $normal_fields[strtolower($tbl_field['Field'])], $match)) {
+                    if( preg_match( '|' . $tbl_field['Field'] . " (ENUM\s*\(([^\)]*)\))|i", $normal_fields[strtolower( $tbl_field['Field'])], $match) || preg_match( '|' . $tbl_field['Field'] . ' ([^ ]*( unsigned)?)|i' , $normal_fields[strtolower( $tbl_field['Field'])], $match)) {
                         $field_type = $match[1];
                         // Are they the same?
                         if(strtolower($field_type)!=strtolower($tbl_field['Type']) && str_replace(' ', '', strtolower($field_type))!=str_replace(' ', '', strtolower($tbl_field['Type']))) {
-                            $struct_queries[] = "ALTER TABLE ".$table." CHANGE COLUMN ".$tbl_field['Field']." ".$normal_fields[strtolower($tbl_field['Field'])];
+                            $struct_queries[] = 'ALTER TABLE ' . $table . ' CHANGE COLUMN ' . $tbl_field['Field'] . ' ' . $normal_fields[strtolower( $tbl_field['Field'])];
                         }
                     }
-                    error_log(" --- ".$normal_fields[strtolower($tbl_field['Field'])]);
+                    error_log( ' --- ' . $normal_fields[strtolower( $tbl_field['Field'])]);
 
                     // Have we changed the default value? [with quotes]
                     if(preg_match("| DEFAULT\s+'(.*)'|i", $normal_fields[strtolower($tbl_field['Field'])], $default_match)) {
                         // alter column only if default value has been changed
                         if($tbl_field['Default'] != $default_match[1]) {
-                            $struct_queries[] = "ALTER TABLE ".$table." ALTER COLUMN ".$tbl_field['Field']." SET DEFAULT '".$default_match[1]."'";
+                            $struct_queries[] = 'ALTER TABLE ' . $table . ' ALTER COLUMN ' . $tbl_field['Field'] . " SET DEFAULT '" . $default_match[1] . "'";
                         }
                     // Have we changed the default value? [without quotes]
                     } else if(preg_match("| DEFAULT\s+(.*)|i", $normal_fields[strtolower($tbl_field['Field'])], $default_match)) {
                         if(isset($tbl_field['Default'])) {
                             // alter column only if default value has been changed
                             if( $tbl_field['Default'] != $default_match[1] ) {
-                                $struct_queries[] = "ALTER TABLE ".$table." ALTER COLUMN ".$tbl_field['Field']." SET DEFAULT ".$default_match[1];
+                                $struct_queries[] = 'ALTER TABLE ' . $table . ' ALTER COLUMN ' . $tbl_field['Field'] . ' SET DEFAULT ' . $default_match[1];
                             }
                         } else {
                             // check NULL default values
                             // if new default value is diferent, alter column ...
                             if($default_match[1] != 'NULL' ) {
-                                $struct_queries[] = "ALTER TABLE ".$table." ALTER COLUMN ".$tbl_field['Field']." SET DEFAULT ".$default_match[1];
+                                $struct_queries[] = 'ALTER TABLE ' . $table . ' ALTER COLUMN ' . $tbl_field['Field'] . ' SET DEFAULT ' . $default_match[1];
                             }
                         }
                     }
@@ -1219,7 +1219,7 @@
             }
             // For the rest of normal fields (they are not in the table) we add them.
             foreach($normal_fields as $k => $v) {
-                $struct_queries[] = "ALTER TABLE ".$table." ADD COLUMN ".$v;
+                $struct_queries[] = 'ALTER TABLE ' . $table . ' ADD COLUMN ' . $v;
             }
         }
 
@@ -1273,7 +1273,7 @@
                     foreach ($v['columns'] as $column) {
                         if ($columns != '') $columns .= ', ';
                         // Add the field to the column list string
-                        $columns .= "".$column['fieldname']."";
+                        $columns .= '' . $column['fieldname'] . '';
                         if ($column['subpart'] != '') {
                             $columns .= '('.$column['subpart'].')';
                         }
@@ -1297,9 +1297,9 @@
             // alter table
             foreach($indexes as $v ) {
                 if(preg_match('/primary key/i', $v, $coincidencias) > 0 ) {
-                    $struct_queries[] = "ALTER TABLE ".$table." DROP PRIMARY KEY, ADD ".$v;
+                    $struct_queries[] = 'ALTER TABLE ' . $table . ' DROP PRIMARY KEY, ADD ' . $v;
                 } else {
-                    $struct_queries[] = "ALTER TABLE ".$table." ADD ".$v;
+                    $struct_queries[] = 'ALTER TABLE ' . $table . ' ADD ' . $v;
                 }
             }
         }
@@ -1335,8 +1335,8 @@
             $delete_foreign = array();
             if( count($foreignRepited) > 0 ) {
                 foreach( $foreignRepited as $_key ) {
-                    echo "ALTER TABLE ".$table." DROP FOREIGN KEY ".$_key ."<br>";
-                    $struct_queries[] = "ALTER TABLE ".$table." DROP FOREIGN KEY ".$_key;
+                    echo 'ALTER TABLE ' . $table . ' DROP FOREIGN KEY ' . $_key . '<br>';
+                    $struct_queries[] = 'ALTER TABLE ' . $table . ' DROP FOREIGN KEY ' . $_key;
                 }
             }
 
@@ -1348,7 +1348,7 @@
                     // alter table
                     $index = 'FOREIGN KEY '.$k.' REFERENCES '.$v;
 
-                    $struct_queries[] = "ALTER TABLE ".$table." ADD ".$index;
+                    $struct_queries[] = 'ALTER TABLE ' . $table . ' ADD ' . $index;
                 }
             }
         }
@@ -1391,7 +1391,7 @@
             $this->prepareAndSepareQueries($queries, $data_queries, $struct_queries);
 
             // hack
-            $this->query("SET FOREIGN_KEY_CHECKS = 0");
+            $this->query( 'SET FOREIGN_KEY_CHECKS = 0' );
 
             // Get tables from DB (already installed)
             $result = $this->query('SHOW TABLES');
@@ -1411,7 +1411,7 @@
                         // compare and create alter statments
                         $this->createAlterTable($tbl_fields, $table, $normal_fields, $struct_queries);
                         // Go for the index part
-                        $result = $this->query("SHOW INDEX FROM ".$table);
+                        $result = $this->query( 'SHOW INDEX FROM ' . $table);
                         $tbl_indexes = $result->result();
 
 
@@ -1420,7 +1420,7 @@
 
 
                         // show create table TABLE_NAME constrains
-                        $result = $this->query("SHOW CREATE TABLE ".$table);
+                        $result = $this->query( 'SHOW CREATE TABLE ' . $table);
                         $tbl_constraint = $result->row();
                         // create foreign keys
                         $this->createForeignKey($tbl_constraint, $table, $struct_queries, $constrains);
@@ -1441,8 +1441,8 @@
             }
             // HACK: AUTO_INCREMENT fields needs to be also a PRIMARY KEY
             foreach($struct_queries as $k => $v) {
-                if(stripos($v, "auto_increment")!==FALSE && stripos($v, "primary key")===FALSE) {
-                    $struct_queries[$k] = $v." PRIMARY KEY";
+                if( stripos( $v, 'auto_increment' ) !== FALSE && stripos( $v, 'primary key' ) === FALSE) {
+                    $struct_queries[$k] = $v . ' PRIMARY KEY';
                 }
             }
 
@@ -1468,7 +1468,7 @@
                 }
             }
             // hack
-            $this->query("SET FOREIGN_KEY_CHECKS = 1");
+            $this->query( 'SET FOREIGN_KEY_CHECKS = 1' );
             error_log(' ----- END updateDB ----- ');
 
             return array($ok, $queries, $error_queries);
@@ -1536,7 +1536,7 @@
             // "WHERE" portion of the query
             if( count($this->aWhere) > 0 || count($this->aLike) > 0 ) {
                 $sql .= "\n";
-                $sql .= "WHERE ";
+                $sql .= 'WHERE ';
             }
 
             $sql .= implode("\n", $this->aWhere);
@@ -1575,10 +1575,10 @@
             // "LIMIT" portion of the query
             if( is_numeric($this->aLimit) ) {
                 $sql .= "\n";
-                $sql .= "LIMIT " . $this->aLimit;
+                $sql .= 'LIMIT ' . $this->aLimit;
 
                 if( $this->aOffset > 0 ) {
-                    $sql .= ", " . $this->aOffset;
+                    $sql .= ', ' . $this->aOffset;
                 }
             }
 

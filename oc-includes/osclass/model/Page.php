@@ -247,7 +247,7 @@
         {
             $this->dao->select();
             $this->dao->from($this->getDescriptionTableName());
-            $this->dao->where("fk_i_pages_id", $aPage['pk_i_id']);
+            $this->dao->where( 'fk_i_pages_id' , $aPage['pk_i_id']);
             if( !is_null($locale) ) {
                 $this->dao->where('fk_c_locale_code', $locale);
             }
@@ -388,7 +388,7 @@
          */
         public function insert($aFields, $aFieldsDescription = null)
         {
-            $this->dao->select("MAX(i_order) as o");
+            $this->dao->select( 'MAX(i_order) as o' );
             $this->dao->from($this->tableName);
             $results = $this->dao->get();
             $lastPage = $results->row();
@@ -503,7 +503,7 @@
          * @return bool Return true if exists and false if not.
          */
         public function existDescription($conditions){
-            $this->dao->select("COUNT(*) as total");
+            $this->dao->select( 'COUNT(*) as total' );
             $this->dao->from($this->getDescriptionTableName());
             foreach($conditions as $key => $value) {
                 $this->dao->where($key, $value);

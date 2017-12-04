@@ -104,8 +104,8 @@
                                             if(strpos($url_redirect,'oc-admin')!==false) {
                                                 $url_redirect = osc_user_dashboard_url();
                                             } else {
-                                                $request_uri = urldecode(preg_replace('@^' . osc_base_url() . '@', "", $url_redirect));
-                                                $tmp_ar = explode("?", $request_uri);
+                                                $request_uri = urldecode(preg_replace('@^' . osc_base_url() . '@', '' , $url_redirect));
+                                                $tmp_ar = explode( '?' , $request_uri);
                                                 $request_uri = $tmp_ar[0];
                                                 $rules = Rewrite::newInstance()->listRules();
                                                 foreach($rules as $match => $uri) {
@@ -159,7 +159,7 @@
 												$url_redirect = osc_user_dashboard_url();
 											}
 
-											osc_run_hook("after_login", $user, $url_redirect);
+											osc_run_hook( 'after_login' , $user, $url_redirect);
 
 											$this->redirectTo( osc_apply_filter('correct_login_url_redirect', $url_redirect) );
 
@@ -275,9 +275,9 @@
         //hopefully generic...
         public function doView($file)
         {
-            osc_run_hook("before_html");
+            osc_run_hook( 'before_html' );
             osc_current_web_theme_path($file);
-            osc_run_hook("after_html");
+            osc_run_hook( 'after_html' );
         }
     }
 

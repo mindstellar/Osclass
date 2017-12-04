@@ -188,13 +188,13 @@
          */
         public function add_submenu_divider( $menu_id, $submenu_title, $submenu_id, $capability = null)
         {
-            $array = array(
+            $array                                                   = array(
                 $submenu_title,
-                "divider_" . $submenu_id,
+	            'divider_' . $submenu_id,
                 $menu_id,
                 $capability
             );
-            $this->aMenu[$menu_id]['sub']["divider_" . $submenu_id] = $array;
+            $this->aMenu[$menu_id]['sub'][ 'divider_' . $submenu_id] = $array;
         }
 
         /**
@@ -206,7 +206,7 @@
          */
         public function remove_submenu_divider( $menu_id, $submenu_id )
         {
-            unset( $this->aMenu[$menu_id]['sub']["divider_" . $submenu_id] );
+            unset( $this->aMenu[$menu_id]['sub'][ 'divider_' . $submenu_id] );
         }
 
         /**

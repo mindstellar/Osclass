@@ -71,11 +71,11 @@
             if($input['s_username']!='') {
                 $username_taken = $this->manager->findByUsername($input['s_username']);
                 if( !$error && $username_taken != false ) {
-                    $flash_error .= _m("Username is already taken") . PHP_EOL;
+                    $flash_error .= _m( 'Username is already taken' ) . PHP_EOL;
                     $error[] = 8;
                 }
                 if(osc_is_username_blacklisted($input['s_username'])) {
-                    $flash_error .= _m("The specified username is not valid, it contains some invalid words") . PHP_EOL;
+                    $flash_error .= _m( 'The specified username is not valid, it contains some invalid words' ) . PHP_EOL;
                     $error[] = 9;
                 }
             }
@@ -204,13 +204,13 @@
 
             if ( $this->is_admin ) {
                 $iUpdated = 0;
-                if( (Params::getParam("b_enabled") != '') && (Params::getParam("b_enabled") == 1 ) ) {
+                if( ( Params::getParam( 'b_enabled' ) != '') && ( Params::getParam( 'b_enabled' ) == 1 ) ) {
                     $iUpdated += $this->manager->update( array('b_enabled' => 1), array('pk_i_id' => $userId) );
                 } else {
                     $iUpdated += $this->manager->update( array('b_enabled' => 0), array('pk_i_id' => $userId) );
                 }
 
-                if( (Params::getParam("b_active") != '') && (Params::getParam("b_active") == 1) ) {
+                if( ( Params::getParam( 'b_active' ) != '') && ( Params::getParam( 'b_active' ) == 1) ) {
                     $iUpdated += $this->manager->update( array('b_active' => 1), array('pk_i_id' => $userId) );
                 } else {
                     $iUpdated += $this->manager->update( array('b_active' => 0), array('pk_i_id' => $userId) );

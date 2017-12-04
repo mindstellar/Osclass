@@ -208,7 +208,7 @@
                                 </div>
                             <?php }?>
                             <div class="controls">
-                                <button type="submit" class="ui-button ui-button-middle ui-button-main"><?php if($edit) { _e("Update", 'bender'); } else { _e("Publish", 'bender'); } ?></button>
+                                <button type="submit" class="ui-button ui-button-middle ui-button-main"><?php if($edit) { _e( 'Update' , 'bender'); } else { _e( 'Publish' , 'bender'); } ?></button>
                             </div>
                         </div>
                     </fieldset>

@@ -48,7 +48,7 @@
                         ManageItemsForm::subcategory_select($c['categories'], $item, $default_item, 1);
                     }
                 } else {
-                    $selected = ( (isset($item["fk_i_category_id"]) && $item["fk_i_category_id"] == $c['pk_i_id']) || (isset($catId) && $catId == $c['pk_i_id']) );
+                    $selected = ( ( isset($item[ 'fk_i_category_id' ]) && $item[ 'fk_i_category_id' ] == $c['pk_i_id']) || ( isset($catId) && $catId == $c['pk_i_id']) );
                     echo '<option value="' . $c['pk_i_id'] . '"' . ($selected ? 'selected="selected"' : '' ). '>' . $c['s_name'] . '</option>';
                     if(isset($c['categories']) && is_array($c['categories'])) {
                         ManageItemsForm::subcategory_select($c['categories'], $item, $default_item, 1);
@@ -65,16 +65,16 @@
             // Did user select a specific category to post in?
             $catId = Params::getParam('catId');
             // How many indents to add?
-            $deep_string = "";
+            $deep_string = '';
             for($var = 0;$var<$deep;$var++) {
                 $deep_string .= '&nbsp;&nbsp;';
             }
             $deep++;
 
             foreach($categories as $c) {
-                $selected = ( (isset($item["fk_i_category_id"]) && $item["fk_i_category_id"] == $c['pk_i_id']) || (isset($catId) && $catId == $c['pk_i_id']) );
+                $selected = ( ( isset($item[ 'fk_i_category_id' ]) && $item[ 'fk_i_category_id' ] == $c['pk_i_id']) || ( isset($catId) && $catId == $c['pk_i_id']) );
 
-                echo '<option value="' . $c['pk_i_id'] . '"' . ($selected ? 'selected="selected'.$item["fk_i_category_id"].'"' : '') . '>' . $deep_string . $c['s_name'] . '</option>';
+                echo '<option value="' . $c['pk_i_id'] . '"' . ($selected ? 'selected="selected'.$item[ 'fk_i_category_id' ] . '"' : '') . '>' . $deep_string . $c['s_name'] . '</option>';
                 if(isset($c['categories']) && is_array($c['categories'])) {
                     ManageItemsForm::subcategory_select($c['categories'], $item, $default_item, $deep);
                 }

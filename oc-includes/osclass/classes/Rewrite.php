@@ -89,7 +89,7 @@
             }
         }
 
-        public function addRoute($id, $regexp, $url, $file, $user_menu = false, $location = "custom", $section = "custom", $title = "Custom")
+        public function addRoute($id, $regexp, $url, $file, $user_menu = false, $location = 'custom' , $section = 'custom' , $title = 'Custom' )
         {
             $regexp = trim($regexp);
             $file = trim($file);
@@ -108,9 +108,9 @@
             if(Params::existServerParam('REQUEST_URI')) {
                 if(preg_match('|[\?&]{1}http_referer=(.*)$|', urldecode(Params::getServerParam('REQUEST_URI', false, false)), $ref_match)) {
                     $this->http_referer = $ref_match[1];
-                    $_SERVER['REQUEST_URI'] = preg_replace('|[\?&]{1}http_referer=(.*)$|', "", urldecode(Params::getServerParam('REQUEST_URI', false, false)));
+                    $_SERVER['REQUEST_URI'] = preg_replace( '|[\?&]{1}http_referer=(.*)$|', '' , urldecode( Params::getServerParam( 'REQUEST_URI', false, false)));
                 }
-                $request_uri = preg_replace('@^' . REL_WEB_URL . '@', "", Params::getServerParam('REQUEST_URI', false, false));
+                $request_uri = preg_replace('@^' . REL_WEB_URL . '@', '' , Params::getServerParam( 'REQUEST_URI', false, false));
                 $this->raw_request_uri = $request_uri;
                 $route_used = false;
                 foreach($this->routes as $id => $route) {
@@ -140,12 +140,12 @@
                 }
                 if(!$route_used) {
                     if(osc_rewrite_enabled()) {
-                        $tmp_ar = explode("?", $request_uri);
+                        $tmp_ar = explode( '?' , $request_uri);
                         $request_uri = $tmp_ar[0];
 
                         // if try to access directly to a php file
                         if(preg_match('#^(.+?)\.php(.*)$#', $request_uri)) {
-                            $file = explode("?", $request_uri);
+                            $file = explode( '?' , $request_uri);
                             if(!file_exists(ABS_PATH . $file[0])) {
                                 Rewrite::newInstance()->set_location('error');
                                 header('HTTP/1.1 404 Not Found');
@@ -175,7 +175,7 @@
         public function extractURL($uri = '')
         {
             $uri_array = explode('?', str_replace('index.php', '', $uri));
-            if(substr($uri_array[0], 0, 1)=="/") {
+            if( substr($uri_array[0], 0, 1) == '/' ) {
                 return substr($uri_array[0], 1);
             } else {
                 return $uri_array[0];

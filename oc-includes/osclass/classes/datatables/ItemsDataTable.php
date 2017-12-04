@@ -88,7 +88,7 @@
 
             $this->mSearch->order( $sort, $direction );
 
-            $this->mSearch->addTable(sprintf("%st_item_stats s", DB_TABLE_PREFIX));
+            $this->mSearch->addTable(sprintf( '%st_item_stats s' , DB_TABLE_PREFIX));
             $this->mSearch->addField('SUM(s.`i_num_spam`) as i_num_spam');
             $this->mSearch->addField('SUM(s.`i_num_bad_classified`) as i_num_bad_classified');
             $this->mSearch->addField('SUM(s.`i_num_repeated`) as i_num_repeated');
@@ -98,9 +98,9 @@
             // having
 
 
-            $this->mSearch->addConditions(sprintf(" %st_item.pk_i_id ", DB_TABLE_PREFIX));
-            $this->mSearch->addConditions(sprintf(" %st_item.pk_i_id = s.fk_i_item_id", DB_TABLE_PREFIX));
-            $this->mSearch->addGroupBy(sprintf(" %st_item.pk_i_id ", DB_TABLE_PREFIX));
+            $this->mSearch->addConditions(sprintf( ' %st_item.pk_i_id ' , DB_TABLE_PREFIX));
+            $this->mSearch->addConditions(sprintf( ' %st_item.pk_i_id = s.fk_i_item_id' , DB_TABLE_PREFIX));
+            $this->mSearch->addGroupBy(sprintf( ' %st_item.pk_i_id ' , DB_TABLE_PREFIX));
             // do Search
             $this->processDataReported(Item::newInstance()->extendCategoryName($this->mSearch->doSearch(true)));
             $this->totalFiltered = $this->mSearch->countAll();
@@ -142,7 +142,7 @@
             $this->addColumn('expiration', '<a href="'.osc_esc_html($url_base.$arg_expiration).'">'.__('Expiration date').'</a>');
 
             $dummy = &$this;
-            osc_run_hook("admin_items_table", $dummy);
+            osc_run_hook( 'admin_items_table' , $dummy);
         }
 
         private function addTableHeaderReported()
@@ -157,8 +157,8 @@
             $arg_rep    = '&sort=rep';  $arg_off    = '&sort=off';
             $arg_exp    = '&sort=exp';  $arg_date   = '&sort=date';
             $arg_expiration = '&sort=expiration';
-            $sort       = Params::getParam("sort");
-            $direction  = Params::getParam("direction");
+            $sort       = Params::getParam( 'sort' );
+            $direction  = Params::getParam( 'direction' );
 
             switch ($sort) {
                 case('spam'):
@@ -206,7 +206,7 @@
             $this->addColumn('expiration', '<a id="order_expiration" href="'.osc_esc_html($url_expiration).'">'.__('Expiration date').'</a>');
 
             $dummy = &$this;
-            osc_run_hook("admin_items_reported_table", $dummy);
+            osc_run_hook( 'admin_items_reported_table' , $dummy);
         }
 
         private function processData($items)
@@ -267,7 +267,7 @@
                     // more actions
                     $moreOptions = '<li class="show-more">'.PHP_EOL.'<a href="#" class="show-more-trigger">'. __('Show more') .'...</a>'. PHP_EOL .'<ul>'. PHP_EOL;
                     foreach( $options_more as $actual) {
-                        $moreOptions .= '<li>'.$actual."</li>".PHP_EOL;
+                        $moreOptions .= '<li>'.$actual . '</li>' . PHP_EOL;
                     }
                     $moreOptions .= '</ul>'. PHP_EOL .'</li>'.PHP_EOL;
 

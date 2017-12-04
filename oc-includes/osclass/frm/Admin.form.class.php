@@ -19,31 +19,31 @@
     class AdminForm extends Form {
 
         static public function primary_input_hidden($admin) {
-            parent::generic_input_hidden("id", (isset($admin["pk_i_id"]) ? $admin['pk_i_id'] : '') );
+            parent::generic_input_hidden( 'id' , (isset($admin[ 'pk_i_id' ]) ? $admin['pk_i_id'] : '') );
         }
 
         static public function name_text($admin = null) {
-            parent::generic_input_text("s_name", isset($admin['s_name'])? $admin['s_name'] : '', null, false);
+            parent::generic_input_text( 's_name' , isset($admin['s_name'])? $admin['s_name'] : '', null, false);
         }
 
         static public function username_text($admin = null) {
-            parent::generic_input_text("s_username", isset($admin['s_username'])? $admin['s_username'] : '', null, false);
+            parent::generic_input_text( 's_username' , isset($admin['s_username'])? $admin['s_username'] : '', null, false);
         }
 
         static public function old_password_text($admin = null) {
-            parent::generic_password("old_password", '', null, false);
+            parent::generic_password( 'old_password' , '', null, false);
         }
 
         static public function password_text($admin = null) {
-            parent::generic_password("s_password", '', null, false);
+            parent::generic_password( 's_password' , '', null, false);
         }
 
         static public function check_password_text($admin = null) {
-            parent::generic_password("s_password2", '', null, false);
+            parent::generic_password( 's_password2' , '', null, false);
         }
 
         static public function email_text($admin = null) {
-            parent::generic_input_text("s_email", isset($admin['s_email'])? $admin['s_email'] : '', null, false);
+            parent::generic_input_text( 's_email' , isset($admin['s_email'])? $admin['s_email'] : '', null, false);
         }
 
         static public function type_select($admin = null) {
@@ -91,21 +91,21 @@
             },
             messages: {
                 s_name: {
-                    required:  "<?php _e("Name: this field is required"); ?>.",
-                    minlength: "<?php _e("Name: enter at least 3 characters"); ?>.",
-                    maxlength: "<?php _e("Name: no more than 50 characters"); ?>."
+                    required:  "<?php _e( 'Name: this field is required' ); ?>.",
+                    minlength: "<?php _e( 'Name: enter at least 3 characters' ); ?>.",
+                    maxlength: "<?php _e( 'Name: no more than 50 characters' ); ?>."
                 },
                 s_username: {
-                    required:  "<?php _e("Username: this field is required"); ?>.",
-                    minlength: "<?php _e("Username: enter at least 3 characters"); ?>.",
-                    maxlength: "<?php _e("Username: no more than 50 characters"); ?>."
+                    required:  "<?php _e( 'Username: this field is required' ); ?>.",
+                    minlength: "<?php _e( 'Username: enter at least 3 characters' ); ?>.",
+                    maxlength: "<?php _e( 'Username: no more than 50 characters' ); ?>."
                 },
                 s_email: {
-                    required: "<?php _e("Email: this field is required"); ?>.",
-                    email: "<?php _e("Invalid email address"); ?>."
+                    required: "<?php _e( 'Email: this field is required' ); ?>.",
+                    email: "<?php _e( 'Invalid email address' ); ?>."
                 },
                 s_password: {
-                    minlength: "<?php _e("Password: enter at least 5 characters"); ?>."
+                    minlength: "<?php _e( 'Password: enter at least 5 characters' ); ?>."
                 },
                 s_password2: {
                     equalTo: "<?php _e("Passwords don't match"); ?>."

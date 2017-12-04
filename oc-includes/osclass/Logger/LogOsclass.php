@@ -85,7 +85,7 @@
         private function sendOsclass($type, $message, $caller )
         {
             osc_doRequest(
-                    "http://admin.osclass.org/logger.php"
+	            'http://admin.osclass.org/logger.php'
                     , array(
                         'type' => $type
                         ,'component' => $this->component

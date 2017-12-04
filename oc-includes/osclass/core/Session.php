@@ -33,13 +33,13 @@
         public function session_start() {
             $currentCookieParams = session_get_cookie_params();
             if ( defined('COOKIE_DOMAIN') ) {
-                $currentCookieParams["domain"] = COOKIE_DOMAIN;
+                $currentCookieParams[ 'domain' ] = COOKIE_DOMAIN;
             }
             session_set_cookie_params(
-                $currentCookieParams["lifetime"],
-                $currentCookieParams["path"],
-                $currentCookieParams["domain"],
-                $currentCookieParams["secure"],
+                $currentCookieParams[ 'lifetime' ],
+                $currentCookieParams[ 'path' ],
+                $currentCookieParams[ 'domain' ],
+                $currentCookieParams[ 'secure' ],
                 true
             );
 
@@ -132,7 +132,7 @@
 
         public function _setMessage($key, $value, $type) {
             $messages = $this->_get('messages');
-            $messages[$key][] = array('msg' => str_replace(PHP_EOL, "<br />", $value), 'type' => $type);
+            $messages[$key][] = array( 'msg' => str_replace( PHP_EOL, '<br />' , $value), 'type' => $type);
             $this->_set('messages', $messages);
         }
 

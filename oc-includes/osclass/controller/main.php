@@ -29,7 +29,7 @@
         {
             switch($this->action) {
                 case('logout'):         // unset only the required parameters in Session
-                                        osc_run_hook("logout");
+                                        osc_run_hook( 'logout' );
 
                                         Session::newInstance()->_drop('userId');
                                         Session::newInstance()->_drop('userName');
@@ -49,10 +49,10 @@
         //hopefully generic...
         public function doView($file)
         {
-            osc_run_hook("before_html");
+            osc_run_hook( 'before_html' );
             osc_current_web_theme_path($file);
             Session::newInstance()->_clearVariables();
-            osc_run_hook("after_html");
+            osc_run_hook( 'after_html' );
         }
     }
 

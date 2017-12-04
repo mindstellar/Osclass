@@ -114,7 +114,7 @@
         $value = array();
         foreach($aMenu as $key => $value) {
 
-            $sSubmenu   = "";
+            $sSubmenu   = '';
             $credential = $value[3];
             if(!$is_moderator || $is_moderator && $credential == 'moderator') { // show
 
@@ -123,11 +123,11 @@
                     // submenu
                     $aSubmenu = $value['sub'];
                     if($aSubmenu) {
-                        $sSubmenu .= "<ul>".PHP_EOL;
+                        $sSubmenu .= '<ul>' . PHP_EOL;
                         foreach($aSubmenu as $aSub) {
                             $credential_sub = isset($aSub[4])?$aSub[4]:$aSub[3];
                             if(!$is_moderator || $is_moderator && $credential_sub == 'moderator') { // show
-                                if(substr($aSub[1], 0, 8)=="divider_") {
+                                if( substr($aSub[1], 0, 8) == 'divider_' ) {
                                     $sSubmenu .= '<li class="submenu-divide">'.$aSub[0].'</li>'.PHP_EOL;
                                 } else {
                                     $sSubmenu .= '<li><a id="'.$aSub[2].'" href="'.$aSub[1].'">'.$aSub[0].'</a></li>'.PHP_EOL;
@@ -140,7 +140,7 @@
                         }
 
                         $sSubmenu .= '<li class="arrow"></li>'.PHP_EOL;
-                        $sSubmenu .= "</ul>".PHP_EOL;
+                        $sSubmenu .= '</ul>' . PHP_EOL;
                     }
                 }
 

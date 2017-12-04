@@ -87,7 +87,7 @@
      * @param $id
      * @return void
      */
-    function osc_show_flash_message($section = 'pubMessages', $class = "flashmessage", $id = "flashmessage") {
+    function osc_show_flash_message($section = 'pubMessages', $class = 'flashmessage' , $id = 'flashmessage' ) {
         $messages = Session::newInstance()->_getMessage($section);
         if (is_array($messages)) {
 

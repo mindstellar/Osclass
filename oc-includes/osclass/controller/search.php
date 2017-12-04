@@ -82,7 +82,7 @@
                             Params::setParam('sCategory', $search_uri);
                         } else {
                             if(stripos(Params::getParam('sCategory'), '/')!==false) {
-                                $tmp = explode("/", preg_replace('|/$|', '', Params::getParam('sCategory')));
+                                $tmp = explode( '/' , preg_replace( '|/$|', '', Params::getParam( 'sCategory')));
                                 $category  = Category::newInstance()->findBySlug($tmp[count($tmp)-1]);
                                 Params::setParam('sCategory', $tmp[count($tmp)-1]);
                             } else {
@@ -106,7 +106,7 @@
 
             if(osc_rewrite_enabled()) {
                 // IF rewrite is not enabled, skip this part, preg_match is always time&resources consuming task
-                $p_sParams = "/".Params::getParam('sParams', false, false);
+                $p_sParams = '/' . Params::getParam( 'sParams', false, false);
                 if(preg_match_all('|\/([^,]+),([^\/]*)|', $p_sParams, $m)) {
                     $l = count($m[0]);
                     for($k = 0;$k<$l;$k++) {
@@ -171,7 +171,7 @@
                 if( MULTISITE==1 ) {
                     $_base_url = osc_multisite_url();
                 }
-                if (str_replace("%20", '+', $searchUri) != str_replace("%20", '+', ($_base_url . $this->uri))) {
+                if ( str_replace( '%20' , '+', $searchUri) != str_replace( '%20' , '+', ( $_base_url . $this->uri))) {
                     $this->redirectTo($searchUri, 301);
                 }
             }
@@ -184,7 +184,7 @@
                 if($p_sCategory == '') {
                     $p_sCategory = array();
                 } else {
-                    $p_sCategory = explode(",",$p_sCategory);
+                    $p_sCategory = explode( ',' , $p_sCategory);
                 }
             }
 
@@ -193,7 +193,7 @@
                 if($p_sCityArea == '') {
                     $p_sCityArea = array();
                 } else {
-                    $p_sCityArea = explode(",", $p_sCityArea);
+                    $p_sCityArea = explode( ',' , $p_sCityArea);
                 }
             }
 
@@ -202,7 +202,7 @@
                 if($p_sCity == '') {
                     $p_sCity = array();
                 } else {
-                    $p_sCity = explode(",", $p_sCity);
+                    $p_sCity = explode( ',' , $p_sCity);
                 }
             }
 
@@ -211,7 +211,7 @@
                 if($p_sRegion == '') {
                     $p_sRegion = array();
                 } else {
-                    $p_sRegion = explode(",", $p_sRegion);
+                    $p_sRegion = explode( ',' , $p_sRegion);
                 }
             }
 
@@ -220,7 +220,7 @@
                 if($p_sCountry == '') {
                     $p_sCountry = array();
                 } else {
-                    $p_sCountry = explode(",", $p_sCountry);
+                    $p_sCountry = explode( ',' , $p_sCountry);
                 }
             }
 
@@ -229,7 +229,7 @@
                 if($p_sUser == '') {
                     $p_sUser = '';
                 } else {
-                    $p_sUser = explode(",", $p_sUser);
+                    $p_sUser = explode( ',' , $p_sUser);
                 }
             }
 
@@ -238,7 +238,7 @@
                 if($p_sLocale == '') {
                     $p_sLocale = '';
                 } else {
-                    $p_sLocale = explode(",", $p_sLocale);
+                    $p_sLocale = explode( ',' , $p_sLocale);
                 }
             }
 
@@ -319,25 +319,25 @@
             foreach($p_sCityArea as $city_area) {
                 $this->mSearch->addCityArea($city_area);
             }
-            $p_sCityArea = implode(", ", $p_sCityArea);
+            $p_sCityArea = implode( ', ' , $p_sCityArea);
 
             //FILTERING CITY
             foreach($p_sCity as $city) {
                 $this->mSearch->addCity($city);
             }
-            $p_sCity = implode(", ", $p_sCity);
+            $p_sCity = implode( ', ' , $p_sCity);
 
             //FILTERING REGION
             foreach($p_sRegion as $region) {
                 $this->mSearch->addRegion($region);
             }
-            $p_sRegion = implode(", ", $p_sRegion);
+            $p_sRegion = implode( ', ' , $p_sRegion);
 
             //FILTERING COUNTRY
             foreach($p_sCountry as $country) {
                 $this->mSearch->addCountry($country);
             }
-            $p_sCountry = implode(", ", $p_sCountry);
+            $p_sCountry = implode( ', ' , $p_sCountry);
 
             // FILTERING PATTERN
             if($p_sPattern != '') {
@@ -406,7 +406,7 @@
                                     $sql = "SELECT fk_i_item_id FROM $table WHERE ";
                                     $str_escaped = Search::newInstance()->dao->escape($aux);
                                     $sql .= $table.'.fk_i_field_id = '.$key.' AND ';
-                                    $sql .= $table.".s_value LIKE ".$str_escaped;
+                                    $sql .= $table . '.s_value LIKE ' . $str_escaped;
                                     $this->mSearch->addConditions(DB_TABLE_PREFIX.'t_item.pk_i_id IN ('.$sql.')');
                                 }
                                 break;
@@ -416,7 +416,7 @@
                                     $sql = "SELECT fk_i_item_id FROM $table WHERE ";
                                     $str_escaped = Search::newInstance()->dao->escape($aux);
                                     $sql .= $table.'.fk_i_field_id = '.$key.' AND ';
-                                    $sql .= $table.".s_value = ".$str_escaped;
+                                    $sql .= $table . '.s_value = ' . $str_escaped;
                                     $this->mSearch->addConditions(DB_TABLE_PREFIX.'t_item.pk_i_id IN ('.$sql.')');
                                 }
                                 break;
@@ -424,7 +424,7 @@
                                 if($aux!='') {
                                     $sql = "SELECT fk_i_item_id FROM $table WHERE ";
                                     $sql .= $table.'.fk_i_field_id = '.$key.' AND ';
-                                    $sql .= $table.".s_value = 1";
+                                    $sql .= $table . '.s_value = 1';
                                     $this->mSearch->addConditions(DB_TABLE_PREFIX.'t_item.pk_i_id IN ('.$sql.')');
                                 }
                                 break;
@@ -437,8 +437,8 @@
                                     $end   = mktime('23', '59', '59', $m, $d, $y);
                                     $sql = "SELECT fk_i_item_id FROM $table WHERE ";
                                     $sql .= $table.'.fk_i_field_id = '.$key.' AND ';
-                                    $sql .= $table.".s_value >= ".($start)." AND ";
-                                    $sql .= $table.".s_value <= ".$end;
+                                    $sql .= $table . '.s_value >= ' . ($start) . ' AND ';
+                                    $sql .= $table . '.s_value <= ' . $end;
                                     $this->mSearch->addConditions(DB_TABLE_PREFIX.'t_item.pk_i_id IN ('.$sql.')');
                                 }
                                 break;
@@ -450,11 +450,11 @@
                                     $end   = $to;
                                     $sql = "SELECT fk_i_item_id FROM $table WHERE ";
                                     $sql .= $table.'.fk_i_field_id = '.$key.' AND ';
-                                    $sql .= $start." >= ".$table.".s_value AND s_multi = 'from'";
+                                    $sql .= $start . ' >= ' . $table . ".s_value AND s_multi = 'from'";
                                     $sql1 = "SELECT fk_i_item_id FROM $table WHERE ";
-                                    $sql1 .= $table.".fk_i_field_id = ".$key." AND ";
-                                    $sql1 .= $end." <= ".$table.".s_value AND s_multi = 'to'";
-                                    $sql_interval = "select a.fk_i_item_id from (".$sql.") a where a.fk_i_item_id IN (".$sql1.")";
+                                    $sql1 .= $table . '.fk_i_field_id = ' . $key . ' AND ';
+                                    $sql1 .= $end . ' <= ' . $table . ".s_value AND s_multi = 'to'";
+                                    $sql_interval = 'select a.fk_i_item_id from (' . $sql . ') a where a.fk_i_item_id IN (' . $sql1 . ')';
                                     $this->mSearch->addConditions(DB_TABLE_PREFIX.'t_item.pk_i_id IN ('.$sql_interval.')');
                                 }
                                 break;
@@ -566,7 +566,7 @@
                 header('HTTP/1.1 404 Not Found');
             }
 
-            osc_run_hook("after_search");
+            osc_run_hook( 'after_search' );
 
             if(!Params::existParam('sFeed')) {
                 $this->doView('search.php');
@@ -585,7 +585,7 @@
 
                             $itemArray = array(
                                 'title' => osc_item_title(),
-                                'link' => htmlentities( osc_item_url() , ENT_COMPAT, "UTF-8"),
+                                'link' => htmlentities( osc_item_url() , ENT_COMPAT, 'UTF-8' ),
                                 'description' => osc_item_description(),
                                 'country' => osc_item_country(),
                                 'region' => osc_item_region(),
@@ -597,9 +597,9 @@
 
                             if(osc_count_item_resources() > 0) {
                                 osc_has_item_resources();
-                                $itemArray['image'] = array('url' => htmlentities(osc_resource_thumbnail_url(), ENT_COMPAT, "UTF-8"),
+                                $itemArray['image'] = array('url' => htmlentities( osc_resource_thumbnail_url(), ENT_COMPAT, 'UTF-8' ),
                                     'title' => osc_item_title(),
-                                    'link' => htmlentities(osc_item_url(), ENT_COMPAT, "UTF-8"));
+                                    'link' => htmlentities( osc_item_url(), ENT_COMPAT, 'UTF-8' ));
                             }
                             $feed->addItem($itemArray);
                         }
@@ -616,10 +616,10 @@
         //hopefully generic...
         public function doView($file)
         {
-            osc_run_hook("before_html");
+            osc_run_hook( 'before_html' );
             osc_current_web_theme_path($file);
             Session::newInstance()->_clearVariables();
-            osc_run_hook("after_html");
+            osc_run_hook( 'after_html' );
         }
     }
 

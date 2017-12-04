@@ -57,7 +57,7 @@
             <?php } ?>
             <?php } ?>
             <?php if( osc_users_enabled() || ( !osc_users_enabled() && !osc_reg_user_post() )) { ?>
-            <li class="publish"><a href="<?php echo osc_item_post_url_in_category() ; ?>"><?php _e("Publish your ad for free", 'bender');?></a></li>
+            <li class="publish"><a href="<?php echo osc_item_post_url_in_category() ; ?>"><?php _e( 'Publish your ad for free' , 'bender');?></a></li>
             <?php } ?>
         </ul>
 
@@ -77,7 +77,7 @@
             <?php  } else { ?>
                 <div class="cell">
             <?php  } ?>
-                <button class="ui-button ui-button-big js-submit"><?php _e("Search", 'bender');?></button>
+                <button class="ui-button ui-button-big js-submit"><?php _e( 'Search' , 'bender');?></button>
             </div>
         </div>
         <div id="message-seach"></div>

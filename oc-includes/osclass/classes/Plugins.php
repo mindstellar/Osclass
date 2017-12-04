@@ -92,7 +92,7 @@
                     // This has to change in order to catch any .php file
                     $pluginPath = $pluginsPath . "$file/index.php";
                     if(file_exists($pluginPath)) {
-                        $plugins[] = $file."/index.php";
+                        $plugins[] = $file . '/index.php';
                     } else {
                         trigger_error(sprintf(__('Plugin %s is missing the index.php file %s'), $file, $pluginPath));
                     }
@@ -107,7 +107,7 @@
                 foreach($plugins as $p) {
                     $extended_list[$p] = self::getInfo($p);
                 }
-                uasort($extended_list, array("self", "strnatcmpCustom"));
+                uasort($extended_list, array( 'self' , 'strnatcmpCustom' ));
                 $plugins = array();
                 // Enabled
                 foreach($extended_list as $k => $v) {
@@ -201,7 +201,7 @@
         public static function register($path, $function)
         {
             $path = str_replace(osc_plugins_path(), '', $path);
-            $tmp = explode("oc-content/plugins/", $path);
+            $tmp = explode( 'oc-content/plugins/' , $path);
             if(count($tmp)==2) {
                 $path = $tmp[1];
             }
@@ -210,7 +210,7 @@
 
         public static function install($path)
         {
-            osc_run_hook("before_plugin_install");
+            osc_run_hook( 'before_plugin_install' );
 
             $data['s_value'] = osc_installed_plugins();
             $plugins_list    = unserialize($data['s_value']);
@@ -246,14 +246,14 @@
                 return array('error_code' => 'error_output', 'output' => ob_get_clean());
             }
 
-            osc_run_hook("after_plugin_install");
+            osc_run_hook( 'after_plugin_install' );
 
             return true;
         }
 
         public static function uninstall($path)
         {
-            osc_run_hook("before_plugin_uninstall");
+            osc_run_hook( 'before_plugin_uninstall' );
 
             $data['s_value'] = osc_installed_plugins();
             $plugins_list    = unserialize($data['s_value']);
@@ -283,14 +283,14 @@
             $plugin = self::getInfo($path);
             self::cleanCategoryFromPlugin($plugin['short_name']);
 
-            osc_run_hook("after_plugin_uninstall");
+            osc_run_hook( 'after_plugin_uninstall' );
 
             return true;
         }
 
         public static function activate($path)
         {
-            osc_run_hook("before_plugin_activate");
+            osc_run_hook( 'before_plugin_activate' );
 
             $data = array();
             $data['s_value'] = osc_active_plugins();
@@ -310,14 +310,14 @@
 
             self::runHook($path . '_enable');
 
-            osc_run_hook("after_plugin_activate");
+            osc_run_hook( 'after_plugin_activate' );
 
             return true;
         }
 
         public static function deactivate($path)
         {
-            osc_run_hook("before_plugin_deactivate");
+            osc_run_hook( 'before_plugin_deactivate' );
 
             $data['s_value'] = osc_active_plugins();
             $plugins_list = unserialize($data['s_value']);
@@ -342,7 +342,7 @@
 
             self::reload();
 
-            osc_run_hook("after_plugin_deactivate");
+            osc_run_hook( 'after_plugin_deactivate' );
 
             return true;
         }
@@ -365,43 +365,43 @@
             if( preg_match('|Plugin URI:([^\\r\\t\\n]*)|i', $s_info, $match) ) {
                 $info['plugin_uri'] = trim($match[1]);
             } else {
-                $info['plugin_uri'] = "";
+                $info['plugin_uri'] = '';
             }
 
             if( preg_match('|Plugin update URI:([^\\r\\t\\n]*)|i', $s_info, $match) ) {
                 $info['plugin_update_uri'] = trim($match[1]);
             } else {
-                $info['plugin_update_uri'] = "";
+                $info['plugin_update_uri'] = '';
             }
 
             if( preg_match('|Support URI:([^\\r\\t\\n]*)|i', $s_info, $match) ) {
                 $info['support_uri'] = trim($match[1]);
             } else {
-                $info['support_uri'] = "";
+                $info['support_uri'] = '';
             }
 
             if( preg_match('|Description:([^\\r\\t\\n]*)|i', $s_info, $match) ) {
                 $info['description'] = trim($match[1]);
             } else {
-                $info['description'] = "";
+                $info['description'] = '';
             }
 
             if( preg_match('|Version:([^\\r\\t\\n]*)|i', $s_info, $match) ) {
                 $info['version'] = trim($match[1]);
             } else {
-                $info['version'] = "";
+                $info['version'] = '';
             }
 
             if( preg_match('|Author:([^\\r\\t\\n]*)|i', $s_info, $match) ) {
                 $info['author'] = trim($match[1]);
             } else {
-                $info['author'] = "";
+                $info['author'] = '';
             }
 
             if( preg_match('|Author URI:([^\\r\\t\\n]*)|i', $s_info, $match) ) {
                 $info['author_uri'] = trim($match[1]);
             } else {
-                $info['author_uri'] = "";
+                $info['author_uri'] = '';
             }
 
             if( preg_match('|Short Name:([^\\r\\t\\n]*)|i', $s_info, $match) ) {
@@ -424,7 +424,7 @@
         public static function configureView($path)
         {
             $plugin = str_replace(osc_plugins_path(), '', $path);
-            if(stripos($plugin, ".php")===FALSE) {
+            if( stripos( $plugin, '.php' ) === FALSE) {
                 $plugins_list = unserialize(osc_active_plugins());
                 if(is_array($plugins_list)) {
                     foreach($plugins_list as $p){

@@ -50,8 +50,8 @@
         </div>
     </div>
     <?php
-        View::newInstance()->_exportVariableToView("listClass",$listClass);
-        View::newInstance()->_exportVariableToView("listAdmin", true);
+        View::newInstance()->_exportVariableToView( 'listClass' , $listClass);
+        View::newInstance()->_exportVariableToView( 'listAdmin' , true);
         osc_current_web_theme_path('loop.php');
     ?>
     <div class="clear"></div>

@@ -39,19 +39,19 @@
 			$this->expires = time() + 3600; // 1 hour by default
 			if ( isset( $_COOKIE[$this->name] ) )
             {
-			    $tmp = explode("&", $_COOKIE[$this->name]);
+			    $tmp = explode( '&' , $_COOKIE[$this->name]);
 			    $vars = $tmp[0];
 			    $vals = isset($tmp[1])?$tmp[1]:array();
-			    $vars = explode("._.", $vars);
-			    $vals = explode("._.", $vals);
+			    $vars = explode( '._.' , $vars);
+			    $vals = explode( '._.' , $vals);
 
 			    foreach($vars as $key => $var) {
-			        if($var!="" && isset($vals[$key])) {
+			        if( $var != '' && isset($vals[$key])) {
                         $this->val["$var"] = $vals[$key];
                         $_COOKIE["$var"] = $vals[$key];
                     } else {
-                        $this->val["$var"] = "";
-                        $_COOKIE["$var"] = "";
+                        $this->val["$var"] = '';
+                        $_COOKIE["$var"] = '';
                     }
                 }
             }
@@ -76,7 +76,7 @@
 			
 		public function set()
 		{
-			$cookie_val = "";
+			$cookie_val = '';
             if(is_array($this->val) && count($this->val) > 0)
 			{
 				$cookie_val = '';
@@ -84,14 +84,14 @@
 				
 				foreach ($this->val as $key => $curr)
 				{
-					if($curr !== "")
+					if( $curr !== '' )
 					{
 						$vars[] = $key;
 						$vals[] = $curr;
 					}
 				}
 				if(count($vars) > 0 && count($vals) > 0) {
-					$cookie_val = implode("._.", $vars) . "&" . implode("._.", $vals);
+					$cookie_val = implode( '._.' , $vars) . '&' . implode( '._.' , $vals);
 				}
 			}
             setcookie($this->name, $cookie_val, $this->expires, REL_WEB_URL);

@@ -64,7 +64,7 @@ if(View::newInstance()->_exists('listClass')){
                     $class = 'last';
                 }
                 $admin = false;
-                if(View::newInstance()->_exists("listAdmin")){
+                if(View::newInstance()->_exists( 'listAdmin' )){
                     $admin = true;
                 }
 

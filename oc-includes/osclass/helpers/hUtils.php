@@ -53,18 +53,18 @@ function osc_get_param($key) {
  */
 function osc_field($item, $field, $locale) {
     if(!is_null($item)) {
-        if($locale == "") {
+        if( $locale == '' ) {
             if(isset($item[$field])) {
                 return $item[$field];
             }
         } else {
-            if(isset($item["locale"]) && !empty($item['locale']) && isset($item["locale"][$locale]) && isset($item["locale"][$locale][$field])) {
-                return $item["locale"][$locale][$field];
+            if( isset($item[ 'locale' ]) && !empty($item['locale']) && isset($item[ 'locale' ][$locale]) && isset($item[ 'locale' ][$locale][$field])) {
+                return $item[ 'locale' ][$locale][$field];
             }else{
-                if(isset($item["locale"])){
-                    foreach($item["locale"] as $locale => $data) {
-                        if( isset($item["locale"][$locale][$field] ) ) {
-                            return $item["locale"][$locale][$field];
+                if(isset($item[ 'locale' ])){
+                    foreach($item[ 'locale' ] as $locale => $data) {
+                        if( isset($item[ 'locale' ][$locale][$field] ) ) {
+                            return $item[ 'locale' ][$locale][$field];
                         }
                     }
                 }
@@ -106,13 +106,13 @@ function osc_show_widgets_by_description($description) {
  * @return void
  */
 function osc_show_recaptcha($section = '') {
-    if(osc_recaptcha_version()=="2") {
+    if( osc_recaptcha_version() == '2' ) {
         switch($section) {
             case('recover_password'):
                 Session::newInstance()->_set('recover_captcha_not_set',0);
                 $time  = Session::newInstance()->_get('recover_time');
                 if((time()-$time)<=1200) {
-                    echo _osc_recaptcha_get_html(osc_recaptcha_public_key(), substr(osc_language(), 0, 2))."<br />";
+                    echo _osc_recaptcha_get_html(osc_recaptcha_public_key(), substr(osc_language(), 0, 2)) . '<br />';
                 }
                 else{
                     Session::newInstance()->_set('recover_captcha_not_set',1);
@@ -120,7 +120,7 @@ function osc_show_recaptcha($section = '') {
                 break;
 
             default:
-                echo _osc_recaptcha_get_html(osc_recaptcha_public_key(), substr(osc_language(), 0, 2))."<br />";
+                echo _osc_recaptcha_get_html(osc_recaptcha_public_key(), substr(osc_language(), 0, 2)) . '<br />';
                 break;
         }
     } else {
@@ -130,7 +130,7 @@ function osc_show_recaptcha($section = '') {
                 case('recover_password'):
                     $time  = Session::newInstance()->_get('recover_time');
                     if((time()-$time)<=1200) {
-                        echo recaptcha_get_html( osc_recaptcha_public_key(), null, osc_is_ssl() )."<br />";
+                        echo recaptcha_get_html( osc_recaptcha_public_key(), null, osc_is_ssl() ) . '<br />';
                     }
                     break;
 
@@ -244,7 +244,7 @@ function osc_highlight($txt, $len = 300, $start_tag = '<strong>', $end_tag = '</
     $txt = trim($txt);
     $txt = preg_replace('/\s+/', ' ', $txt);
     if( mb_strlen($txt, 'UTF-8') > $len ) {
-        $txt = mb_substr($txt, 0, $len, 'UTF-8') . "...";
+        $txt = mb_substr($txt, 0, $len, 'UTF-8') . '...';
     }
     $query = osc_search_pattern();
     $query = str_replace(array('(',')','+','-','~','>','<'), array('','','','','','',''), $query);
@@ -265,11 +265,11 @@ function osc_highlight($txt, $len = 300, $start_tag = '<strong>', $end_tag = '</
     }
 
     $query = trim(preg_replace('/\s+/', ' ', preg_replace('/"([^"]*)"/', '', $query)));
-    $words = array_merge($words, explode(" ", $query));
+    $words = array_merge($words, explode( ' ' , $query));
 
     foreach($words as $word) {
         if($word!='') {
-            $txt = preg_replace("/(\PL|\s+|^)($word)(\PL|\s+|$)/i", "$01" . $start_tag . "$02". $end_tag . "$03", $txt);
+            $txt = preg_replace( "/(\PL|\s+|^)($word)(\PL|\s+|$)/i", '$01' . $start_tag . '$02' . $end_tag . '$03' , $txt);
         }
     }
     return $txt;
@@ -293,7 +293,7 @@ function osc_get_http_referer() {
     return '';
 }
 
-function osc_add_route($id, $regexp, $url, $file, $user_menu = false, $location = "custom", $section = "custom", $title = "Custom") {
+function osc_add_route($id, $regexp, $url, $file, $user_menu = false, $location = 'custom' , $section = 'custom' , $title = 'Custom' ) {
     Rewrite::newInstance()->addRoute($id, $regexp, $url, $file, $user_menu, $location, $section, $title);
 }
 

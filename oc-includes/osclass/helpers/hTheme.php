@@ -38,9 +38,9 @@
         }
         // Clean $file to prevent hacking of some type
         osc_sanitize_url($file);
-        $file = str_replace("../", "", str_replace("..\\", "", str_replace("://", "", preg_replace("|http([s]*)|", "", $file))));
-        if(file_exists(osc_themes_path() . osc_theme() . "/plugins/" . $file)) {
-            include osc_themes_path() . osc_theme() . "/plugins/" . $file;
+        $file = str_replace( '../' , '' , str_replace( "..\\", '' , str_replace( '://' , '' , preg_replace( '|http([s]*)|' , '' , $file))));
+        if(file_exists(osc_themes_path() . osc_theme() . '/plugins/' . $file)) {
+            include osc_themes_path() . osc_theme() . '/plugins/' . $file;
         } else if(file_exists(osc_plugins_path() . $file)) {
             include osc_plugins_path() . $file;
         }
@@ -55,7 +55,7 @@
      */
     function osc_render_file_url($file = '') {
         osc_sanitize_url($file);
-        $file = str_replace("../", "", str_replace("..\\", "", str_replace("://", "", preg_replace("|http([s]*)|", "", $file))));
+        $file = str_replace( '../' , '' , str_replace( "..\\", '' , str_replace( '://' , '' , preg_replace( '|http([s]*)|' , '' , $file))));
         return osc_base_url(true).'?page=custom&file=' . $file;
     }
 
@@ -64,7 +64,7 @@
      *
      * @param string $$section
      */
-    function osc_resend_flash_messages($section = "pubMessages") {
+    function osc_resend_flash_messages($section = 'pubMessages' ) {
         $messages = Session::newInstance()->_getMessage($section);
         if (is_array($messages)) {
 
@@ -72,9 +72,9 @@
       
                 $message = Session::newInstance()->_getMessage($section);
                 if(isset($message['msg'])) {
-                    if(isset($message["type"]) && $message["type"]=="info") {
+                    if( isset($message[ 'type' ]) && $message[ 'type' ] == 'info' ) {
                         osc_add_flash_info_message($message['msg'], $section);
-                    } else if(isset($message["type"]) && $message["type"]=="ok") {
+                    } else if( isset($message[ 'type' ]) && $message[ 'type' ] == 'ok' ) {
                         osc_add_flash_ok_message($message['msg'], $section);
                     } else {
                         osc_add_flash_error_message($message['msg'], $section);

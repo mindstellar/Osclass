@@ -263,7 +263,7 @@
          */
         public function findByEmail($email)
         {
-            return $this->listWhere("s_contact_email = %s", $email);
+            return $this->listWhere( 's_contact_email = %s' , $email);
         }
 
         /**
@@ -286,7 +286,7 @@
             }
 
             if(!is_array($options)) {
-                $options = explode("|", $options);
+                $options = explode( '|' , $options);
             }
             foreach($options as $option) {
                 switch ($option) {
@@ -361,7 +361,7 @@
         // BUT REMEMBER TO DELETE IN ANYTHING > 2.1.x THANKS
         public function listLatest($limit = 10)
         {
-            return $this->listWhere(" b_active = 1 AND b_enabled = 1 ORDER BY dt_pub_date DESC LIMIT %d", (int)$limit);
+            return $this->listWhere( ' b_active = 1 AND b_enabled = 1 ORDER BY dt_pub_date DESC LIMIT %d' , (int)$limit);
         }
 
         /**
@@ -483,9 +483,9 @@
         {
             $this->dao->select('l.*, i.*');
 
-            $this->dao->where( "i.b_enabled = 1 " );
-            $this->dao->where( "i.b_active = 1 " );
-            $this->dao->where( "i.b_spam = 0" );
+            $this->dao->where( 'i.b_enabled = 1 ' );
+            $this->dao->where( 'i.b_active = 1 ' );
+            $this->dao->where( 'i.b_spam = 0' );
 
             $this->dao->from($this->getTableName().' i, '.DB_TABLE_PREFIX.'t_item_location l');
             $this->dao->where('l.fk_i_item_id = i.pk_i_id');
@@ -511,9 +511,9 @@
         {
             $this->dao->select('l.*, i.*');
 
-            $this->dao->where( "i.b_enabled = 1 " );
-            $this->dao->where( "i.b_active = 1 " );
-            $this->dao->where( "i.b_spam = 0" );
+            $this->dao->where( 'i.b_enabled = 1 ' );
+            $this->dao->where( 'i.b_active = 1 ' );
+            $this->dao->where( 'i.b_spam = 0' );
 
             $this->dao->from($this->getTableName().' i, '.DB_TABLE_PREFIX.'t_item_location l');
             $this->dao->where('l.fk_i_item_id = i.pk_i_id');
@@ -790,7 +790,7 @@
                 $expired_old = osc_isExpired($item['dt_expiration']);
                 if(ctype_digit($expiration_time)) {
                     if($expiration_time > 0) {
-                        $sql =  sprintf("UPDATE %s SET dt_expiration = ", $this->getTableName());
+                        $sql =  sprintf( 'UPDATE %s SET dt_expiration = ' , $this->getTableName());
                         $sql .= sprintf(' date_add(%s.dt_pub_date, INTERVAL %d DAY) ', $this->getTableName(), $expiration_time);
                         $sql .= sprintf(' WHERE pk_i_id = %d', $id);
                     } else {
@@ -804,7 +804,7 @@
 
                 if($result && $result>0) {
                     $this->dao->select('i.dt_expiration, i.fk_i_user_id, i.fk_i_category_id, l.fk_c_country_code, l.fk_i_region_id, l.fk_i_city_id');
-                    $this->dao->from($this->getTableName()." i, ".DB_TABLE_PREFIX.'t_item_location l');
+                    $this->dao->from( $this->getTableName() . ' i, ' . DB_TABLE_PREFIX . 't_item_location l');
                     $this->dao->where('i.pk_i_id = l.fk_i_item_id' );
                     $this->dao->where('i.pk_i_id', $id );
                     $result = $this->dao->get();
@@ -1087,7 +1087,7 @@
 
             $item['locale'] = array();
             foreach ($descriptions as $desc) {
-                if ($desc['s_title'] != "" || $desc['s_description'] != "") {
+                if ( $desc['s_title'] != '' || $desc['s_description'] != '' ) {
                     $item['locale'][$desc['fk_c_locale_code']] = $desc;
                 }
             }
@@ -1185,7 +1185,7 @@
 
                 $item['locale'] = array();
                 foreach ($descriptions as $desc) {
-                    if ($desc['s_title'] != "" || $desc['s_description'] != "") {
+                    if ( $desc['s_title'] != '' || $desc['s_description'] != '' ) {
                         $item['locale'][$desc['fk_c_locale_code']] = $desc;
                     }
                 }

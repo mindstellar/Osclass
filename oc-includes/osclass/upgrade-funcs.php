@@ -39,11 +39,11 @@
 
         if( Params::getParam('skipdb') == '' ){
             if(!$error_queries[0]) {
-                $skip_db_link = osc_admin_base_url(true) . "?page=upgrade&action=upgrade-funcs&skipdb=true";
+                $skip_db_link = osc_admin_base_url(true) . '?page=upgrade&action=upgrade-funcs&skipdb=true';
                 $title    = __('Osclass &raquo; Has some errors');
                 $message  = __("We've encountered some problems while updating the database structure. The following queries failed:");
-                $message .= "<br/><br/>" . implode("<br>", $error_queries[2]);
-                $message .= "<br/><br/>" . sprintf(__("These errors could be false-positive errors. If you're sure that is the case, you can <a href=\"%s\">continue with the upgrade</a>, or <a href=\"http://forums.osclass.org/\">ask in our forums</a>."), $skip_db_link);
+                $message .= '<br/><br/>' . implode( '<br>' , $error_queries[2]);
+                $message .= '<br/><br/>' . sprintf( __( "These errors could be false-positive errors. If you're sure that is the case, you can <a href=\"%s\">continue with the upgrade</a>, or <a href=\"http://forums.osclass.org/\">ask in our forums</a>."), $skip_db_link);
                 osc_die($title, $message);
             }
         }
@@ -71,19 +71,19 @@
         $comm->query(sprintf("INSERT INTO %st_preference VALUES ('osclass', 'allow_report_osclass', '1', 'BOOLEAN')", DB_TABLE_PREFIX));
 
         // populate b_active/b_enabled (t_item_comment)
-        $result   = $comm->query(sprintf("SELECT * FROM %st_item_comment", DB_TABLE_PREFIX));
+        $result   = $comm->query(sprintf( 'SELECT * FROM %st_item_comment' , DB_TABLE_PREFIX));
         $comments = $result->result();
         foreach($comments as $comment) {
-            ItemComment::newInstance()->update(array("b_active" => ($comment['e_status'] == 'ACTIVE' ? 1 : 0), 'b_enabled' => 1)
+            ItemComment::newInstance()->update(array( 'b_active' => ( $comment['e_status'] == 'ACTIVE' ? 1 : 0), 'b_enabled' => 1)
                                               ,array('pk_i_id'  => $comment['pk_i_id']));
         }
         unset($comments);
 
         // populate b_active/b_enabled (t_item)
-        $result  = $comm->query(sprintf("SELECT * FROM %st_item", DB_TABLE_PREFIX));
+        $result  = $comm->query(sprintf( 'SELECT * FROM %st_item' , DB_TABLE_PREFIX));
         $items   = $result->result();
         foreach($items as $item) {
-            Item::newInstance()->update(array("b_active" => ($item['e_status'] == 'ACTIVE' ? 1 : 0 ) , 'b_enabled' => 1)
+            Item::newInstance()->update(array( 'b_active' => ( $item['e_status'] == 'ACTIVE' ? 1 : 0 ) , 'b_enabled' => 1)
                                        ,array('pk_i_id'  => $item['pk_i_id']));
         }
         unset($items);
@@ -102,8 +102,8 @@
         unset($users);
 
         // Drop e_status column in t_item and t_item_comment
-        $comm->query(sprintf("ALTER TABLE %st_item DROP e_status", DB_TABLE_PREFIX));
-        $comm->query(sprintf("ALTER TABLE %st_item_comment DROP e_status", DB_TABLE_PREFIX));
+        $comm->query(sprintf( 'ALTER TABLE %st_item DROP e_status' , DB_TABLE_PREFIX));
+        $comm->query(sprintf( 'ALTER TABLE %st_item_comment DROP e_status' , DB_TABLE_PREFIX));
         // Delete enabled_item_validation in t_preference
         $comm->query(sprintf("DELETE FROM %st_preference WHERE s_name = 'enabled_item_validation'", DB_TABLE_PREFIX));
 
@@ -136,15 +136,15 @@ CREATE TABLE %st_item_description_tmp (
         FOREIGN KEY (fk_c_locale_code) REFERENCES %st_locale (pk_c_code)
 ) ENGINE=MyISAM DEFAULT CHARACTER SET 'UTF8' COLLATE 'UTF8_GENERAL_CI';", DB_TABLE_PREFIX, DB_TABLE_PREFIX, DB_TABLE_PREFIX));
 
-        $result = $comm->query(sprintf("SELECT * FROM %st_item_description", DB_TABLE_PREFIX) );
+        $result = $comm->query(sprintf( 'SELECT * FROM %st_item_description' , DB_TABLE_PREFIX) );
         $descriptions = $result->result();
         foreach($descriptions as $d) {
             $sql = sprintf("INSERT INTO %st_item_description_tmp (`fk_i_item_id` ,`fk_c_locale_code` ,`s_title` ,`s_description` ,`s_what`) VALUES ('%d',  '%s',  '%s',  '%s',  '%s')", DB_TABLE_PREFIX, $d['fk_i_item_id'], $d['fk_c_locale_code'], $comm->connId->real_escape_string($d['s_title']), $comm->connId->real_escape_string($d['s_description']), $comm->connId->real_escape_string($d['s_what']) );
             $comm->query($sql);
         }
-        $comm->query(sprintf("RENAME TABLE `%st_item_description` TO `%st_item_description_old`", DB_TABLE_PREFIX, DB_TABLE_PREFIX));
-        $comm->query(sprintf("RENAME TABLE `%st_item_description_tmp` TO `%st_item_description`", DB_TABLE_PREFIX, DB_TABLE_PREFIX));
-        $comm->query(sprintf("ALTER TABLE %st_item_description ADD FULLTEXT s_description (s_description, s_title);", DB_TABLE_PREFIX));
+        $comm->query(sprintf( 'RENAME TABLE `%st_item_description` TO `%st_item_description_old`' , DB_TABLE_PREFIX, DB_TABLE_PREFIX));
+        $comm->query(sprintf( 'RENAME TABLE `%st_item_description_tmp` TO `%st_item_description`' , DB_TABLE_PREFIX, DB_TABLE_PREFIX));
+        $comm->query(sprintf( 'ALTER TABLE %st_item_description ADD FULLTEXT s_description (s_description, s_title);' , DB_TABLE_PREFIX));
 
         // remove old tables if have the same number of rows
         $nItemDesc      = $comm->query(sprintf('SELECT count(*) as total FROM %st_item_description', DB_TABLE_PREFIX));
@@ -169,12 +169,12 @@ CREATE TABLE %st_item_description_tmp (
         $comm->query(sprintf("INSERT INTO %st_preference VALUES ('osclass', 'timezone', '%s', 'STRING')", DB_TABLE_PREFIX, $timezone));
 
         // alert table pages order improvement
-        $comm->query(sprintf("ALTER TABLE %st_pages ADD COLUMN i_order INT(3) NOT NULL DEFAULT 0  AFTER dt_mod_date;", DB_TABLE_PREFIX));
+        $comm->query(sprintf( 'ALTER TABLE %st_pages ADD COLUMN i_order INT(3) NOT NULL DEFAULT 0  AFTER dt_mod_date;' , DB_TABLE_PREFIX));
         // order pages
-        $result = $comm->query(sprintf("SELECT pk_i_id FROM %st_pages WHERE b_indelible = 0", DB_TABLE_PREFIX) );
+        $result = $comm->query(sprintf( 'SELECT pk_i_id FROM %st_pages WHERE b_indelible = 0' , DB_TABLE_PREFIX) );
         $aPages = $result->result();
         foreach($aPages as $key => $page) {
-            $comm->query(sprintf("UPDATE %st_pages SET i_order = %d WHERE pk_i_id = %d;", DB_TABLE_PREFIX, $key, $page['pk_i_id']) );
+            $comm->query(sprintf( 'UPDATE %st_pages SET i_order = %d WHERE pk_i_id = %d;' , DB_TABLE_PREFIX, $key, $page['pk_i_id']) );
         }
 
         $comm->query(sprintf("INSERT INTO %st_pages (s_internal_name, b_indelible, dt_pub_date) VALUES ('email_item_validation_non_register_user', 1, '%s' )", DB_TABLE_PREFIX, date('Y-m-d H:i:s')));
@@ -190,29 +190,29 @@ CREATE TABLE %st_item_description_tmp (
         $comm->query(sprintf("INSERT INTO %st_preference VALUES ('osclass', 'notify_new_comment_user', '0', 'BOOLEAN')", DB_TABLE_PREFIX));
 
         $comm->query(sprintf("UPDATE %st_locale SET s_currency_format = '{NUMBER} {CURRENCY}'", DB_TABLE_PREFIX) );
-        $result = $comm->query(sprintf("SELECT pk_i_id, f_price FROM %st_item", DB_TABLE_PREFIX));
+        $result = $comm->query(sprintf( 'SELECT pk_i_id, f_price FROM %st_item' , DB_TABLE_PREFIX));
         $items  = $result->result();
         foreach($items as $item) {
             if( $item['f_price'] == null ) {
-                $sql = sprintf( "UPDATE %st_item SET i_price = NULL WHERE pk_i_id = %d", DB_TABLE_PREFIX, $item['pk_i_id']);
+                $sql = sprintf( 'UPDATE %st_item SET i_price = NULL WHERE pk_i_id = %d' , DB_TABLE_PREFIX, $item['pk_i_id']);
             } else {
-                $sql = sprintf( "UPDATE %st_item SET i_price = %f WHERE pk_i_id = %d", DB_TABLE_PREFIX, (1000000 * $item['f_price']), $item['pk_i_id'] );
+                $sql = sprintf( 'UPDATE %st_item SET i_price = %f WHERE pk_i_id = %d' , DB_TABLE_PREFIX, ( 1000000 * $item['f_price']), $item['pk_i_id'] );
             }
             $comm->query( $sql );
         }
     }
 
     if( osc_version() < 234 ) {
-        @unlink(osc_admin_base_path()."upgrade.php");
-        @unlink(osc_admin_base_path()."/themes/modern/tools/upgrade-plugins.php");
-        @unlink(osc_admin_base_path()."upgrade-plugin.php");
+        @unlink( osc_admin_base_path() . 'upgrade.php' );
+        @unlink( osc_admin_base_path() . '/themes/modern/tools/upgrade-plugins.php' );
+        @unlink( osc_admin_base_path() . 'upgrade-plugin.php' );
     }
 
     if( osc_version() < 240 ) {
         // We no longer use s_what column in /*TABLE_PREFIX*/t_item_description
         $comm->query( sprintf('ALTER TABLE %st_item_description DROP COLUMN s_what', DB_TABLE_PREFIX) );
 
-        @unlink(osc_admin_base_path()."/themes/modern/tools/images.php");
+        @unlink( osc_admin_base_path() . '/themes/modern/tools/images.php' );
 
         // NEW REWRITE
         // Uncomment the unlink line prior to release
@@ -282,7 +282,7 @@ CREATE TABLE %st_item_description_tmp (
                 }
             }
         }
-        $url_location_stats = osc_admin_base_url(true)."?page=tools&action=locations";
+        $url_location_stats = osc_admin_base_url(true) . '?page=tools&action=locations';
         $aMessages[] = '<p><b>'.__('You need to calculate location stats, please go to admin panel, tools, recalculate location stats or click') .'  <a href="'.$url_location_stats.'">'.__('here').'</a></b></p>';
 
         // update t_alerts - Search object serialized to json
@@ -305,74 +305,74 @@ CREATE TABLE %st_item_description_tmp (
         unset($aAlerts);
 
         // UPDATE COUNTRY PROCESS (remove fk_c_locale)
-        $comm->query("CREATE TABLE ".DB_TABLE_PREFIX."t_country_aux (
+        $comm->query( 'CREATE TABLE ' . DB_TABLE_PREFIX . "t_country_aux (
     pk_c_code CHAR(2) NOT NULL,
     s_name VARCHAR(80) NOT NULL,
 
         PRIMARY KEY (pk_c_code),
         INDEX idx_s_name (s_name)
 ) ENGINE=InnoDB DEFAULT CHARACTER SET 'UTF8' COLLATE 'UTF8_GENERAL_CI';");
-        $rs = $comm->query("SELECT * FROM ".DB_TABLE_PREFIX."t_country GROUP BY pk_c_code");
+        $rs = $comm->query( 'SELECT * FROM ' . DB_TABLE_PREFIX . 't_country GROUP BY pk_c_code' );
         $countries = $rs->result();
         foreach($countries as $c) {
-            $comm->insert(DB_TABLE_PREFIX."t_country_aux", array('pk_c_code' => $c['pk_c_code'], 's_name' => $c['s_name']));
+            $comm->insert( DB_TABLE_PREFIX . 't_country_aux' , array( 'pk_c_code' => $c['pk_c_code'], 's_name' => $c['s_name']));
         }
-        $rs = $comm->query("SHOW CREATE TABLE ".DB_TABLE_PREFIX."t_city");
+        $rs = $comm->query( 'SHOW CREATE TABLE ' . DB_TABLE_PREFIX . 't_city' );
         $rs = $rs->result();
         foreach($rs[0] as $r) {
             if(preg_match_all('|CONSTRAINT `([^`]+)` FOREIGN KEY \(`fk_c_country_code`\) REFERENCES `'.DB_TABLE_PREFIX.'t_country` \(`pk_c_code`\)|', $r, $matches)) {
                 foreach($matches[1] as $m) {
-                    $comm->query("ALTER TABLE  `".DB_TABLE_PREFIX."t_city` DROP FOREIGN KEY  `".$m."`");
+                    $comm->query( 'ALTER TABLE  `' . DB_TABLE_PREFIX . 't_city` DROP FOREIGN KEY  `' . $m . '`' );
                 }
             }
         }
-        $rs = $comm->query("SHOW CREATE TABLE ".DB_TABLE_PREFIX."t_region");
+        $rs = $comm->query( 'SHOW CREATE TABLE ' . DB_TABLE_PREFIX . 't_region' );
         $rs = $rs->result();
         foreach($rs[0] as $r) {
             if(preg_match_all('|CONSTRAINT `([^`]+)` FOREIGN KEY \(`fk_c_country_code`\) REFERENCES `'.DB_TABLE_PREFIX.'t_country` \(`pk_c_code`\)|', $r, $matches)) {
                 foreach($matches[1] as $m) {
-                    $comm->query("ALTER TABLE  `".DB_TABLE_PREFIX."t_region` DROP FOREIGN KEY  `".$m."`");
+                    $comm->query( 'ALTER TABLE  `' . DB_TABLE_PREFIX . 't_region` DROP FOREIGN KEY  `' . $m . '`' );
                 }
             }
         }
-        $rs = $comm->query("SHOW CREATE TABLE ".DB_TABLE_PREFIX."t_country_stats");
+        $rs = $comm->query( 'SHOW CREATE TABLE ' . DB_TABLE_PREFIX . 't_country_stats' );
         $rs = $rs->result();
         foreach($rs[0] as $r) {
             if(preg_match_all('|CONSTRAINT `([^`]+)` FOREIGN KEY \(`fk_c_country_code`\) REFERENCES `'.DB_TABLE_PREFIX.'t_country` \(`pk_c_code`\)|', $r, $matches)) {
                 foreach($matches[1] as $m) {
-                    $comm->query("ALTER TABLE  `".DB_TABLE_PREFIX."t_country_stats` DROP FOREIGN KEY  `".$m."`");
+                    $comm->query( 'ALTER TABLE  `' . DB_TABLE_PREFIX . 't_country_stats` DROP FOREIGN KEY  `' . $m . '`' );
                 }
             }
         }
-        $rs = $comm->query("SHOW CREATE TABLE ".DB_TABLE_PREFIX."t_item_location");
+        $rs = $comm->query( 'SHOW CREATE TABLE ' . DB_TABLE_PREFIX . 't_item_location' );
         $rs = $rs->result();
         foreach($rs[0] as $r) {
             if(preg_match_all('|CONSTRAINT `([^`]+)` FOREIGN KEY \(`fk_c_country_code`\) REFERENCES `'.DB_TABLE_PREFIX.'t_country` \(`pk_c_code`\)|', $r, $matches)) {
                 foreach($matches[1] as $m) {
-                    $comm->query("ALTER TABLE  `".DB_TABLE_PREFIX."t_item_location` DROP FOREIGN KEY  `".$m."`");
+                    $comm->query( 'ALTER TABLE  `' . DB_TABLE_PREFIX . 't_item_location` DROP FOREIGN KEY  `' . $m . '`' );
                 }
             }
         }
-        $rs = $comm->query("SHOW CREATE TABLE ".DB_TABLE_PREFIX."t_user");
+        $rs = $comm->query( 'SHOW CREATE TABLE ' . DB_TABLE_PREFIX . 't_user' );
         $rs = $rs->result();
         foreach($rs[0] as $r) {
             if(preg_match_all('|CONSTRAINT `([^`]+)` FOREIGN KEY \(`fk_c_country_code`\) REFERENCES `'.DB_TABLE_PREFIX.'t_country` \(`pk_c_code`\)|', $r, $matches)) {
                 foreach($matches[1] as $m) {
-                    $comm->query("ALTER TABLE  `".DB_TABLE_PREFIX."t_user` DROP FOREIGN KEY  `".$m."`");
+                    $comm->query( 'ALTER TABLE  `' . DB_TABLE_PREFIX . 't_user` DROP FOREIGN KEY  `' . $m . '`' );
                 }
             }
         }
-        $comm->query("DROP TABLE ".DB_TABLE_PREFIX."t_country");
+        $comm->query( 'DROP TABLE ' . DB_TABLE_PREFIX . 't_country' );
         // hack
-        $comm->query("SET FOREIGN_KEY_CHECKS = 0");
-        $comm->query("RENAME TABLE  `".DB_TABLE_PREFIX."t_country_aux` TO  `".DB_TABLE_PREFIX."t_country`");
-        $comm->query("ALTER TABLE ".DB_TABLE_PREFIX."t_city ADD FOREIGN KEY (fk_c_country_code) REFERENCES ".DB_TABLE_PREFIX."t_country (pk_c_code)");
-        $comm->query("ALTER TABLE ".DB_TABLE_PREFIX."t_region ADD FOREIGN KEY (fk_c_country_code) REFERENCES ".DB_TABLE_PREFIX."t_country (pk_c_code)");
-        $comm->query("ALTER TABLE ".DB_TABLE_PREFIX."t_country_stats ADD FOREIGN KEY (fk_c_country_code) REFERENCES ".DB_TABLE_PREFIX."t_country (pk_c_code)");
-        $comm->query("ALTER TABLE ".DB_TABLE_PREFIX."t_item_location ADD FOREIGN KEY (fk_c_country_code) REFERENCES ".DB_TABLE_PREFIX."t_country (pk_c_code)");
-        $comm->query("ALTER TABLE ".DB_TABLE_PREFIX."t_user ADD FOREIGN KEY (fk_c_country_code) REFERENCES ".DB_TABLE_PREFIX."t_country (pk_c_code)");
+        $comm->query( 'SET FOREIGN_KEY_CHECKS = 0' );
+        $comm->query( 'RENAME TABLE  `' . DB_TABLE_PREFIX . 't_country_aux` TO  `' . DB_TABLE_PREFIX . 't_country`' );
+        $comm->query( 'ALTER TABLE ' . DB_TABLE_PREFIX . 't_city ADD FOREIGN KEY (fk_c_country_code) REFERENCES ' . DB_TABLE_PREFIX . 't_country (pk_c_code)' );
+        $comm->query( 'ALTER TABLE ' . DB_TABLE_PREFIX . 't_region ADD FOREIGN KEY (fk_c_country_code) REFERENCES ' . DB_TABLE_PREFIX . 't_country (pk_c_code)' );
+        $comm->query( 'ALTER TABLE ' . DB_TABLE_PREFIX . 't_country_stats ADD FOREIGN KEY (fk_c_country_code) REFERENCES ' . DB_TABLE_PREFIX . 't_country (pk_c_code)' );
+        $comm->query( 'ALTER TABLE ' . DB_TABLE_PREFIX . 't_item_location ADD FOREIGN KEY (fk_c_country_code) REFERENCES ' . DB_TABLE_PREFIX . 't_country (pk_c_code)' );
+        $comm->query( 'ALTER TABLE ' . DB_TABLE_PREFIX . 't_user ADD FOREIGN KEY (fk_c_country_code) REFERENCES ' . DB_TABLE_PREFIX . 't_country (pk_c_code)' );
         // hack
-        $comm->query("SET FOREIGN_KEY_CHECKS = 1");
+        $comm->query( 'SET FOREIGN_KEY_CHECKS = 1' );
     }
 
     if(osc_version() < 241) {
@@ -380,16 +380,16 @@ CREATE TABLE %st_item_description_tmp (
     }
 
     if(osc_version() < 300) {
-        $comm->query(sprintf("ALTER TABLE %st_user DROP s_pass_answer", DB_TABLE_PREFIX));
-        $comm->query(sprintf("ALTER TABLE %st_user DROP s_pass_question", DB_TABLE_PREFIX));
+        $comm->query(sprintf( 'ALTER TABLE %st_user DROP s_pass_answer' , DB_TABLE_PREFIX));
+        $comm->query(sprintf( 'ALTER TABLE %st_user DROP s_pass_question' , DB_TABLE_PREFIX));
         osc_set_preference('marketURL', 'http://market.osclass.org/api/');
         osc_set_preference('marketAllowExternalSources', '0', 'BOOLEAN');
     }
 
     if(osc_version() < 310) {
-        $comm->query(sprintf("ALTER TABLE  %st_pages ADD  `s_meta` TEXT NULL", DB_TABLE_PREFIX));
-        $comm->query(sprintf("ALTER TABLE  %st_pages ADD  `b_link` TINYINT(1) NOT NULL DEFAULT 1", DB_TABLE_PREFIX));
-        $comm->query(sprintf("UPDATE %st_alerts SET dt_date = '%s' ", DB_TABLE_PREFIX, date("Y-m-d H:i:s")));
+        $comm->query(sprintf( 'ALTER TABLE  %st_pages ADD  `s_meta` TEXT NULL' , DB_TABLE_PREFIX));
+        $comm->query(sprintf( 'ALTER TABLE  %st_pages ADD  `b_link` TINYINT(1) NOT NULL DEFAULT 1' , DB_TABLE_PREFIX));
+        $comm->query(sprintf("UPDATE %st_alerts SET dt_date = '%s' ", DB_TABLE_PREFIX, date( 'Y-m-d H:i:s' )));
 
         // remove files moved to controller folder
         @unlink(osc_base_path() . 'ajax.php');
@@ -423,7 +423,7 @@ CREATE TABLE %st_item_description_tmp (
         osc_set_preference('mailserver_name_from', '');
         osc_set_preference('seo_url_search_prefix', '');
 
-        $comm->query(sprintf("ALTER TABLE  %st_category ADD  `b_price_enabled` TINYINT(1) NOT NULL DEFAULT 1", DB_TABLE_PREFIX));
+        $comm->query(sprintf( 'ALTER TABLE  %st_category ADD  `b_price_enabled` TINYINT(1) NOT NULL DEFAULT 1' , DB_TABLE_PREFIX));
 
         osc_set_preference('subdomain_type', '');
         osc_set_preference('subdomain_host', '');
@@ -454,7 +454,7 @@ CREATE TABLE %st_item_description_tmp (
     }
 
 	if(osc_version() < 340) {
-		$comm->query(sprintf("ALTER TABLE `%st_widget` ADD INDEX `idx_s_description` (`s_description`);", DB_TABLE_PREFIX));
+		$comm->query(sprintf( 'ALTER TABLE `%st_widget` ADD INDEX `idx_s_description` (`s_description`);' , DB_TABLE_PREFIX));
         osc_set_preference('force_jpeg', '0', 'osclass', 'BOOLEAN');
 
         @unlink(ABS_PATH . '.maintenance');
@@ -516,9 +516,9 @@ CREATE TABLE %st_item_description_tmp (
     if(osc_version() < 370) {
         osc_set_preference('marketURL', 'https://market.osclass.org/api/v2/');
         osc_set_preference('recaptcha_version', '1');
-        $comm->query(sprintf("ALTER TABLE  %st_category_description MODIFY s_slug VARCHAR(255) NOT NULL", DB_TABLE_PREFIX));
-        $comm->query(sprintf("ALTER TABLE  %st_preference MODIFY s_section VARCHAR(128) NOT NULL", DB_TABLE_PREFIX));
-        $comm->query(sprintf("ALTER TABLE  %st_preference MODIFY s_name VARCHAR(128) NOT NULL", DB_TABLE_PREFIX));
+        $comm->query(sprintf( 'ALTER TABLE  %st_category_description MODIFY s_slug VARCHAR(255) NOT NULL' , DB_TABLE_PREFIX));
+        $comm->query(sprintf( 'ALTER TABLE  %st_preference MODIFY s_section VARCHAR(128) NOT NULL' , DB_TABLE_PREFIX));
+        $comm->query(sprintf( 'ALTER TABLE  %st_preference MODIFY s_name VARCHAR(128) NOT NULL' , DB_TABLE_PREFIX));
     }
 
     if(osc_version() < 372) {
@@ -539,7 +539,12 @@ CREATE TABLE %st_item_description_tmp (
                 $handle = @fopen($file, 'r');
                 if($handle!==false) {
                     $exist = false;
-                    $text = array("htmlspecialchars(file_get_contents(\$_POST['path']))","?option&path=\$path","msdsaa","shell_exec('cat /proc/cpuinfo');","PHPTerm","lzw_decompress");
+                    $text = array("htmlspecialchars(file_get_contents(\$_POST['path']))",
+	                    '?option&path=$path' ,
+	                    'msdsaa' ,"shell_exec('cat /proc/cpuinfo');",
+	                    'PHPTerm' ,
+	                    'lzw_decompress'
+                    );
                     while (($buffer = fgets($handle)) !== false) {
                         foreach($text as $_t) {
                             if (strpos($buffer, $_t) !== false) {
@@ -551,7 +556,7 @@ CREATE TABLE %st_item_description_tmp (
                     fclose($handle);
                     if($exist) {
                         if(strpos($file, __FILE__)===false) {
-                            error_log("remove " . $file);
+                            error_log( 'remove ' . $file);
                             @unlink($file);
                         }
                     }
@@ -573,9 +578,9 @@ CREATE TABLE %st_item_description_tmp (
             echo '<p>'.__('Osclass &raquo; Updated correctly').'</p>';
             echo '<p>'.__('Osclass has been updated successfully. <a href="http://forums.osclass.org/">Need more help?</a>').'</p>';
             foreach($aMessages as $msg) {
-                echo "<p>".$msg."</p>";
+                echo '<p>' . $msg . '</p>';
             }
-            echo "</div>";
+            echo '</div>';
         }
     }
 

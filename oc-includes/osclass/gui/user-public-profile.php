@@ -25,7 +25,7 @@
     $address = '';
     if(osc_user_address()!='') {
         if(osc_user_city_area()!='') {
-            $address = osc_user_address().", ".osc_user_city_area();
+            $address = osc_user_address() . ', ' . osc_user_city_area();
         } else {
             $address = osc_user_address();
         }
@@ -33,8 +33,8 @@
         $address = osc_user_city_area();
     }
     $location_array = array();
-    if(trim(osc_user_city()." ".osc_user_zip())!='') {
-        $location_array[] = trim(osc_user_city()." ".osc_user_zip());
+    if( trim( osc_user_city() . ' ' . osc_user_zip()) != '') {
+        $location_array[] = trim( osc_user_city() . ' ' . osc_user_zip());
     }
     if(osc_user_region()!='') {
         $location_array[] = osc_user_region();
@@ -42,7 +42,7 @@
     if(osc_user_country()!='') {
         $location_array[] = osc_user_country();
     }
-    $location = implode(", ", $location_array);
+    $location = implode( ', ' , $location_array);
     unset($location_array);
 
     osc_enqueue_script('jquery-validate');

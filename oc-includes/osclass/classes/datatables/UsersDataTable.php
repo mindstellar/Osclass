@@ -69,7 +69,7 @@
             $this->addColumn('update_date', __('Update date'));
 
             $dummy = &$this;
-            osc_run_hook("admin_users_table", $dummy);
+            osc_run_hook( 'admin_users_table' , $dummy);
         }
 
         private function processData($users)
@@ -105,7 +105,7 @@
                     // more actions
                     $moreOptions = '<li class="show-more">'.PHP_EOL.'<a href="#" class="show-more-trigger">'. __('Show more') .'...</a>'. PHP_EOL .'<ul>'. PHP_EOL;
                     foreach( $options_more as $actual ) {
-                        $moreOptions .= '<li>'.$actual."</li>".PHP_EOL;
+                        $moreOptions .= '<li>'.$actual . '</li>' . PHP_EOL;
                     }
                     $moreOptions .= '</ul>'. PHP_EOL .'</li>'.PHP_EOL;
 

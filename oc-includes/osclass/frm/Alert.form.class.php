@@ -33,7 +33,7 @@
         }
 
         static public function email_text() {
-            $value = "";
+            $value = '';
             if( osc_logged_user_email() == '' ){
                 $value = self::default_email_text();
             }

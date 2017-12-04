@@ -189,53 +189,53 @@
             if( preg_match('|Theme Name:([^\\r\\t\\n]*)|i', $s_info, $match) ) {
                 $info['name'] = trim($match[1]);
             } else {
-                $info['name'] = "";
+                $info['name'] = '';
             }
 
             if( preg_match('|Parent Theme:([^\\r\\t\\n]*)|i', $s_info, $match) ) {
                 $info['template'] = trim($match[1]);
             } else {
-                $info['template'] = "";
+                $info['template'] = '';
             }
 
             if( preg_match('|Theme URI:([^\\r\\t\\n]*)|i', $s_info, $match) ) {
                 $info['theme_uri'] = trim($match[1]);
             } else {
-                $info['theme_uri'] = "";
+                $info['theme_uri'] = '';
             }
 
             if( preg_match('|Theme update URI:([^\\r\\t\\n]*)|i', $s_info, $match) ) {
                 $info['theme_update_uri'] = trim($match[1]);
             } else {
-                $info['theme_update_uri'] = "";
+                $info['theme_update_uri'] = '';
             }
 
             if( preg_match('|Description:([^\\r\\t\\n]*)|i', $s_info, $match) ) {
                 $info['description'] = trim($match[1]);
             } else {
-                $info['description'] = "";
+                $info['description'] = '';
             }
 
             if( preg_match('|Version:([^\\r\\t\\n]*)|i', $s_info, $match) ) {
                 $info['version'] = trim($match[1]);
             } else {
-                $info['version'] = "";
+                $info['version'] = '';
             }
 
             if( preg_match('|Author:([^\\r\\t\\n]*)|i', $s_info, $match) ) {
                 $info['author_name'] = trim($match[1]);
             } else {
-                $info['author_name'] = "";
+                $info['author_name'] = '';
             }
 
             if( preg_match('|Author URI:([^\\r\\t\\n]*)|i', $s_info, $match) ) {
                 $info['author_url'] = trim($match[1]);
             } else {
-                $info['author_url'] = "";
+                $info['author_url'] = '';
             }
 
             if( preg_match('|Widgets:([^\\r\\t\\n]*)|i', $s_info, $match) ) {
-                $info['locations'] = explode(",", str_replace(" ", "", $match[1]));
+                $info['locations'] = explode( ',' , str_replace( ' ' , '' , $match[1]));
             } else {
                 $info['locations'] = array();
             }
@@ -268,7 +268,7 @@
             if($theme==null) { $theme = $this->theme; };
 
             $templates = array();
-            $dir = opendir( $this->path . $theme . "/" );
+            $dir = opendir( $this->path . $theme . '/' );
             while ($file = readdir($dir)) {
                 if (preg_match('/^template-[a-zA-Z0-9_\.]+$/', $file)) {
                     $templates[] = $file;

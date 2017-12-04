@@ -68,7 +68,7 @@ class Dependencies {
             }
         }
         if(!empty($this->error)) {
-            echo sprintf(__('ERROR: Some dependencies could not be loaded (%s)'), implode(", ", $this->error));
+            echo sprintf(__('ERROR: Some dependencies could not be loaded (%s)'), implode( ', ' , $this->error));
         }
     }
 

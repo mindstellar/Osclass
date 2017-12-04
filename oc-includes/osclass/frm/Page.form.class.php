@@ -20,7 +20,7 @@
 
         static public function primary_input_hidden($page = null) {
             if(isset($page['pk_i_id'])) {
-                parent::generic_input_hidden("id", $page["pk_i_id"]);
+                parent::generic_input_hidden( 'id' , $page[ 'pk_i_id' ]);
             }
         }
 
@@ -41,13 +41,13 @@
                 $checked = false;
             }
 
-            parent::generic_input_checkbox('b_link', "1", $checked);
+            parent::generic_input_checkbox( 'b_link', '1' , $checked);
         }
 
         static public function multilanguage_name_description($locales, $page = null) {
             $num_locales = count($locales);
             if($num_locales > 1) echo '<div class="tabber">';
-            $aFieldsDescription = Session::newInstance()->_getForm("aFieldsDescription");
+            $aFieldsDescription = Session::newInstance()->_getForm( 'aFieldsDescription' );
             foreach($locales as $locale) {
                 if($num_locales > 1) {
                     echo '<div class="tabbertab">';

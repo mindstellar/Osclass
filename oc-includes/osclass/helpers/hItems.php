@@ -79,7 +79,7 @@
     * @param type $locale
     * @return field_type
     */
-    function osc_item_field($field, $locale = "") {
+    function osc_item_field($field, $locale = '' ) {
         return osc_field(osc_item(), $field, $locale);
     }
 
@@ -120,7 +120,7 @@
     * @return int
     */
     function osc_item_id() {
-        return (int) osc_item_field("pk_i_id");
+        return (int) osc_item_field( 'pk_i_id' );
     }
 
     /**
@@ -129,7 +129,7 @@
     * @return int
     */
     function osc_item_user_id() {
-        return (int) osc_item_field("fk_i_user_id");
+        return (int) osc_item_field( 'fk_i_user_id' );
     }
 
     /**
@@ -138,15 +138,15 @@
      * @param string $locale
      * @return string $desc
      */
-    function osc_item_description($locale = "") {
-        if ($locale == "") $locale = osc_current_user_locale();
-        $desc = osc_item_field("s_description", $locale);
+    function osc_item_description($locale = '' ) {
+        if ( $locale == '' ) $locale = osc_current_user_locale();
+        $desc = osc_item_field( 's_description' , $locale);
         if($desc=='') {
-            $desc = osc_item_field("s_description", osc_language());
+            $desc = osc_item_field( 's_description' , osc_language());
             if($desc=='') {
                 $aLocales = osc_get_locales();
                 foreach($aLocales as $locale) {
-                    $desc = osc_item_field("s_description", @$locale['pk_c_code']);
+                    $desc = osc_item_field( 's_description' , @$locale['pk_c_code']);
                     if($desc!='') {
                         break;
                     }
@@ -162,15 +162,15 @@
      * @param string $locale
      * @return string
      */
-    function osc_item_title($locale = "") {
-        if ($locale == "") $locale = osc_current_user_locale();
-        $title = osc_item_field("s_title", $locale);
+    function osc_item_title($locale = '' ) {
+        if ( $locale == '' ) $locale = osc_current_user_locale();
+        $title = osc_item_field( 's_title' , $locale);
         if($title=='') {
-            $title = osc_item_field("s_title", osc_language());
+            $title = osc_item_field( 's_title' , osc_language());
             if($title=='') {
                 $aLocales = osc_get_locales();
                 foreach($aLocales as $locale) {
-                    $title = osc_item_field("s_title", @$locale['pk_c_code']);
+                    $title = osc_item_field( 's_title' , @$locale['pk_c_code']);
                     if($title!='') {
                         break;
                     }
@@ -186,12 +186,12 @@
      * @param string $locale
      * @return string
      */
-    function osc_item_category($locale = "") {
+    function osc_item_category($locale = '' ) {
         if ( !View::newInstance()->_exists('item_category') ) {
             View::newInstance()->_exportVariableToView('item_category', Category::newInstance()->findByPrimaryKey( osc_item_category_id(), $locale ) );
         }
         $category = View::newInstance()->_get('item_category');
-        return (string) osc_field($category, "s_name", $locale);
+        return (string) osc_field( $category, 's_name' , $locale);
     }
 
     /**
@@ -200,12 +200,12 @@
      * @param type $locale
      * @return string
      */
-    function osc_item_category_description($locale = "") {
+    function osc_item_category_description($locale = '' ) {
         if ( !View::newInstance()->_exists('item_category') ) {
             View::newInstance()->_exportVariableToView('item_category', Category::newInstance()->findByPrimaryKey( osc_item_category_id(), $locale ) );
         }
         $category = View::newInstance()->_get('item_category');
-        return osc_field($category, "s_description", $locale);
+        return osc_field( $category, 's_description' , $locale);
     }
 
     /**
@@ -214,7 +214,7 @@
      * @return int
      */
     function osc_item_category_id() {
-        return (int) osc_item_field("fk_i_category_id");
+        return (int) osc_item_field( 'fk_i_category_id' );
     }
 
     /**
@@ -238,7 +238,7 @@
      * @return string
      */
     function osc_item_pub_date() {
-        return (string) osc_item_field("dt_pub_date");
+        return (string) osc_item_field( 'dt_pub_date' );
     }
 
     /**
@@ -247,7 +247,7 @@
      * @return string
      */
     function osc_item_mod_date() {
-        return (string) osc_item_field("dt_mod_date");
+        return (string) osc_item_field( 'dt_mod_date' );
     }
 
     /**
@@ -256,7 +256,7 @@
      * @return string
      */
     function osc_item_dt_expiration() {
-        return (string) osc_item_field("dt_expiration");
+        return (string) osc_item_field( 'dt_expiration' );
     }
 
     /**
@@ -265,8 +265,8 @@
      * @return float
      */
     function osc_item_price() {
-        if(osc_item_field("i_price")=='') return null;
-        else return (float) osc_item_field("i_price");
+        if( osc_item_field( 'i_price' ) == '') return null;
+        else return (float) osc_item_field( 'i_price' );
     }
 
     /**
@@ -295,7 +295,7 @@
      * @return string
      */
     function osc_item_currency() {
-        return (string) osc_item_field("fk_c_currency_code");
+        return (string) osc_item_field( 'fk_c_currency_code' );
     }
 
     /**
@@ -315,7 +315,7 @@
      * @return string
      */
     function osc_item_contact_name() {
-        return (string) osc_item_field("s_contact_name");
+        return (string) osc_item_field( 's_contact_name' );
     }
 
     /**
@@ -324,7 +324,7 @@
      * @return string
      */
     function osc_item_contact_email() {
-        return (string) osc_item_field("s_contact_email");
+        return (string) osc_item_field( 's_contact_email' );
     }
 
     /**
@@ -333,7 +333,7 @@
      * @return string
      */
     function osc_item_country() {
-        return (string) osc_item_field("s_country");
+        return (string) osc_item_field( 's_country' );
     }
 
     /**
@@ -343,7 +343,7 @@
      * @return string
      */
     function osc_item_country_code() {
-        return (string) osc_item_field("fk_c_country_code");
+        return (string) osc_item_field( 'fk_c_country_code' );
     }
 
     /**
@@ -352,7 +352,7 @@
      * @return string
      */
     function osc_item_region() {
-        return (string) osc_item_field("s_region");
+        return (string) osc_item_field( 's_region' );
     }
 
     /**
@@ -361,7 +361,7 @@
      * @return string
      */
     function osc_item_region_id() {
-        return (string) osc_item_field("fk_i_region_id");
+        return (string) osc_item_field( 'fk_i_region_id' );
     }
 
     /**
@@ -370,7 +370,7 @@
      * @return string
      */
     function osc_item_city() {
-        return (string) osc_item_field("s_city");
+        return (string) osc_item_field( 's_city' );
     }
 
     /**
@@ -379,7 +379,7 @@
      * @return string
      */
     function osc_item_city_id() {
-        return (string) osc_item_field("fk_i_city_id");
+        return (string) osc_item_field( 'fk_i_city_id' );
     }
 
     /**
@@ -388,7 +388,7 @@
      * @return string
      */
     function osc_item_city_area() {
-        return (string) osc_item_field("s_city_area");
+        return (string) osc_item_field( 's_city_area' );
     }
 
     /**
@@ -397,7 +397,7 @@
      * @return string
      */
     function osc_item_city_area_id() {
-        return (string) osc_item_field("fk_i_city_area_id");
+        return (string) osc_item_field( 'fk_i_city_area_id' );
     }
 
     /**
@@ -406,7 +406,7 @@
      * @return string
      */
     function osc_item_address() {
-        return (string) osc_item_field("s_address");
+        return (string) osc_item_field( 's_address' );
     }
 
     /**
@@ -415,7 +415,7 @@
      * @return boolean
      */
     function osc_item_show_email() {
-        return (boolean) osc_item_field("b_show_email");
+        return (boolean) osc_item_field( 'b_show_email' );
     }
 
     /**
@@ -424,7 +424,7 @@
      * @return string
      */
     function osc_item_zip() {
-        return (string) osc_item_field("s_zip");
+        return (string) osc_item_field( 's_zip' );
     }
 
     /**
@@ -433,7 +433,7 @@
      * @return float
      */
     function osc_item_latitude() {
-        return (float) osc_item_field("d_coord_lat");
+        return (float) osc_item_field( 'd_coord_lat' );
     }
 
     /**
@@ -442,7 +442,7 @@
      * @return float
      */
     function osc_item_longitude() {
-        return (float) osc_item_field("d_coord_long");
+        return (float) osc_item_field( 'd_coord_long' );
     }
 
     /**
@@ -451,7 +451,7 @@
      * @return string
      */
     function osc_item_ip() {
-        return osc_item_field("s_ip");
+        return osc_item_field( 's_ip' );
     }
 
     /**
@@ -460,7 +460,7 @@
      * @return boolean
      */
     function osc_item_is_premium() {
-        if ( osc_item_field("b_premium") ) return true;
+        if ( osc_item_field( 'b_premium' ) ) return true;
         else return false;
     }
 
@@ -475,7 +475,7 @@
             return ItemStats::newInstance()->getViews(osc_item_id());
         } else {
             if(isset($item['i_num_views'])) {
-                return (int) osc_item_field("i_num_views");
+                return (int) osc_item_field( 'i_num_views' );
             } else {
                 return ItemStats::newInstance()->getViews(osc_item_id());
             }
@@ -503,7 +503,7 @@
      * @return boolean
      */
     function osc_item_status() {
-        return (boolean) osc_item_field("b_active");
+        return (boolean) osc_item_field( 'b_active' );
     }
 
     /**
@@ -512,7 +512,7 @@
      * @return string
      */
     function osc_item_secret() {
-        return (string) osc_item_field("s_secret");
+        return (string) osc_item_field( 's_secret' );
     }
 
     /**
@@ -521,7 +521,7 @@
      * @return boolean
      */
     function osc_item_is_active() {
-        return (osc_item_field("b_active")==1);
+        return ( osc_item_field( 'b_active' ) == 1);
     }
 
     /**
@@ -530,7 +530,7 @@
      * @return boolean
      */
     function osc_item_is_inactive() {
-        return (osc_item_field("b_active")==0);
+        return ( osc_item_field( 'b_active' ) == 0);
     }
 
     /**
@@ -539,7 +539,7 @@
      * @return boolean
      */
     function osc_item_is_enabled() {
-        return (osc_item_field("b_enabled")==1);
+        return ( osc_item_field( 'b_enabled' ) == 1);
     }
 
     /**
@@ -548,7 +548,7 @@
      * @return boolean
      */
     function osc_item_is_spam() {
-        return (osc_item_field("b_spam")==1);
+        return ( osc_item_field( 'b_spam' ) == 1);
     }
 
     /**
@@ -558,9 +558,9 @@
      */
     function osc_item_link_spam() {
         if(!osc_rewrite_enabled ()) {
-            $url = osc_base_url(true) . "?page=item&action=mark&as=spam&id=" . osc_item_id();
+            $url = osc_base_url(true) . '?page=item&action=mark&as=spam&id=' . osc_item_id();
         } else {
-            $url = osc_base_url() . osc_get_preference('rewrite_item_mark') . "/spam/" . osc_item_id();
+            $url = osc_base_url() . osc_get_preference('rewrite_item_mark') . '/spam/' . osc_item_id();
         }
 
         return (string) $url;
@@ -573,9 +573,9 @@
      */
     function osc_item_link_bad_category() {
         if(!osc_rewrite_enabled ()) {
-            $url = osc_base_url(true) . "?page=item&action=mark&as=badcat&id=" . osc_item_id();
+            $url = osc_base_url(true) . '?page=item&action=mark&as=badcat&id=' . osc_item_id();
         } else {
-            $url = osc_base_url() . osc_get_preference('rewrite_item_mark') . "/badcat/" . osc_item_id();
+            $url = osc_base_url() . osc_get_preference('rewrite_item_mark') . '/badcat/' . osc_item_id();
         }
 
         return (string) $url;
@@ -588,9 +588,9 @@
      */
     function osc_item_link_repeated() {
         if(!osc_rewrite_enabled ()) {
-            $url = osc_base_url(true) . "?page=item&action=mark&as=repeated&id=" . osc_item_id();
+            $url = osc_base_url(true) . '?page=item&action=mark&as=repeated&id=' . osc_item_id();
         } else {
-            $url = osc_base_url() . osc_get_preference('rewrite_item_mark') . "/repeated/" . osc_item_id();
+            $url = osc_base_url() . osc_get_preference('rewrite_item_mark') . '/repeated/' . osc_item_id();
         }
 
         return (string) $url;
@@ -603,9 +603,9 @@
      */
     function osc_item_link_offensive() {
         if(!osc_rewrite_enabled ()) {
-            $url = osc_base_url(true) . "?page=item&action=mark&as=offensive&id=" . osc_item_id();
+            $url = osc_base_url(true) . '?page=item&action=mark&as=offensive&id=' . osc_item_id();
         } else {
-            $url = osc_base_url() . osc_get_preference('rewrite_item_mark') . "/offensive/" . osc_item_id();
+            $url = osc_base_url() . osc_get_preference('rewrite_item_mark') . '/offensive/' . osc_item_id();
         }
 
         return (string) $url;
@@ -618,9 +618,9 @@
      */
     function osc_item_link_expired() {
         if(!osc_rewrite_enabled ()) {
-            $url = osc_base_url(true) . "?page=item&action=mark&as=expired&id=" . osc_item_id();
+            $url = osc_base_url(true) . '?page=item&action=mark&as=expired&id=' . osc_item_id();
         } else {
-            $url = osc_base_url() . osc_get_preference('rewrite_item_mark') . "/expired/" . osc_item_id();
+            $url = osc_base_url() . osc_get_preference('rewrite_item_mark') . '/expired/' . osc_item_id();
         }
 
         return (string) $url;
@@ -684,7 +684,7 @@
      * @return int
      */
     function osc_comment_id() {
-        return (int) osc_comment_field("pk_i_id");
+        return (int) osc_comment_field( 'pk_i_id' );
     }
 
     /**
@@ -693,7 +693,7 @@
      * @return string
      */
     function osc_comment_pub_date() {
-        return (string) osc_comment_field("dt_pub_date");
+        return (string) osc_comment_field( 'dt_pub_date' );
     }
 
     /**
@@ -702,7 +702,7 @@
      * @return string
      */
     function osc_comment_title() {
-        return (string) osc_comment_field("s_title");
+        return (string) osc_comment_field( 's_title' );
     }
 
     /**
@@ -711,7 +711,7 @@
      * @return string
      */
     function osc_comment_author_name() {
-        return (string) osc_comment_field("s_author_name");
+        return (string) osc_comment_field( 's_author_name' );
     }
 
     /**
@@ -720,7 +720,7 @@
      * @return string
      */
     function osc_comment_author_email() {
-        return (string) osc_comment_field("s_author_email");
+        return (string) osc_comment_field( 's_author_email' );
     }
 
     /**
@@ -729,7 +729,7 @@
      * @return string
      */
     function osc_comment_body() {
-        return (string) osc_comment_field("s_body");
+        return (string) osc_comment_field( 's_body' );
     }
 
     /**
@@ -738,7 +738,7 @@
      * @return int
      */
     function osc_comment_user_id() {
-        return (int) osc_comment_field("fk_i_user_id");
+        return (int) osc_comment_field( 'fk_i_user_id' );
     }
 
     /**
@@ -747,7 +747,7 @@
      * @return string
      */
     function osc_delete_comment_url() {
-        return (string) osc_base_url(true)."?page=item&action=delete_comment&id=".osc_item_id()."&comment=".osc_comment_id()."&".osc_csrf_token_url();
+        return (string) osc_base_url(true) . '?page=item&action=delete_comment&id=' . osc_item_id() . '&comment=' . osc_comment_id() . '&' . osc_csrf_token_url();
     }
 
     //////////////////////////////
@@ -764,7 +764,7 @@
      * @return int
      */
     function osc_resource_id() {
-        return (int) osc_resource_field("pk_i_id");
+        return (int) osc_resource_field( 'pk_i_id' );
     }
 
     /**
@@ -773,7 +773,7 @@
      * @return string
      */
     function osc_resource_name() {
-        return (string) osc_resource_field("s_name");
+        return (string) osc_resource_field( 's_name' );
     }
 
     /**
@@ -782,7 +782,7 @@
      * @return string
      */
     function osc_resource_type() {
-        return (string) osc_resource_field("s_content_type");
+        return (string) osc_resource_field( 's_content_type' );
     }
 
     /**
@@ -791,7 +791,7 @@
      * @return string
      */
     function osc_resource_extension() {
-        return (string) osc_resource_field("s_extension");
+        return (string) osc_resource_field( 's_extension' );
     }
 
     /**
@@ -800,7 +800,7 @@
      * @return string
      */
     function osc_resource_path() {
-        return (string) osc_apply_filter('resource_path', osc_base_url().osc_resource_field("s_path"));
+        return (string) osc_apply_filter('resource_path', osc_base_url().osc_resource_field( 's_path' ));
     }
 
     /**
@@ -809,7 +809,7 @@
      * @return string
      */
     function osc_resource_url() {
-        return (string) osc_resource_path().osc_resource_id().".".osc_resource_field("s_extension");
+        return (string) osc_resource_path().osc_resource_id() . '.' . osc_resource_field( 's_extension' );
     }
 
     /**
@@ -818,7 +818,7 @@
      * @return string
      */
     function osc_resource_thumbnail_url() {
-        return (string) osc_resource_path().osc_resource_id()."_thumbnail.".osc_resource_field("s_extension");
+        return (string) osc_resource_path().osc_resource_id() . '_thumbnail.' . osc_resource_field( 's_extension' );
     }
 
     /**
@@ -828,7 +828,7 @@
      * @return string
      */
     function osc_resource_preview_url() {
-        return (string) osc_resource_path().osc_resource_id()."_preview.".osc_resource_field("s_extension");
+        return (string) osc_resource_path().osc_resource_id() . '_preview.' . osc_resource_field( 's_extension' );
     }
 
     /**
@@ -837,7 +837,7 @@
      * @return string
      */
     function osc_resource_original_url() {
-        return (string) osc_resource_path().osc_resource_id()."_original.".osc_resource_field("s_extension");
+        return (string) osc_resource_path().osc_resource_id() . '_original.' . osc_resource_field( 's_extension' );
     }
 
     /**
@@ -1205,44 +1205,44 @@
      */
     function osc_item_meta_value() {
         $meta = osc_item_meta();
-        if($meta['e_type']=="DATEINTERVAL" || $meta['e_type']=="DATE") {
+        if( $meta['e_type'] == 'DATEINTERVAL' || $meta['e_type'] == 'DATE' ) {
             $value = osc_field(osc_item_meta(), 's_value', '');
             if(is_array($value)) {
                 // from [date_from] to [date_to]
                 if(isset($value['from']) && $value['from']!='' && is_numeric($value['from']) && isset($value['to']) && $value['to']!='' && is_numeric($value['to'])) {
-                    $return  = __('From') . ' ' . htmlentities( date(osc_date_format(), $value['from']), ENT_COMPAT, "UTF-8");
-                    $return .= ' ' . __('to') . ' ' . htmlentities( date(osc_date_format(), $value['to']), ENT_COMPAT, "UTF-8");
+                    $return  = __('From') . ' ' . htmlentities( date(osc_date_format(), $value['from']), ENT_COMPAT, 'UTF-8' );
+                    $return .= ' ' . __('to') . ' ' . htmlentities( date(osc_date_format(), $value['to']), ENT_COMPAT, 'UTF-8' );
                     return $return;
                 } else {
                     return '';
                 }
             } else {
                 if($value!='' && is_numeric($value)) {
-                    return htmlentities( date(osc_date_format(), $value), ENT_COMPAT, "UTF-8");
+                    return htmlentities( date(osc_date_format(), $value), ENT_COMPAT, 'UTF-8' );
                 } else {
                     return '';
                 }
             }
-        } else if($meta['e_type']=="CHECKBOX") {
+        } else if( $meta['e_type'] == 'CHECKBOX' ) {
             if(osc_field(osc_item_meta(), 's_value', '')==1) {
                 return '<img src="'.osc_current_web_theme_url('images/tick.png').'" alt="" title=""/>';
             } else {
                 return '<img src="'.osc_current_web_theme_url('images/cross.png').'" alt="" title=""/>';
             }
-        } else if($meta['e_type']=="URL") {
+        } else if( $meta['e_type'] == 'URL' ) {
             if(osc_field(osc_item_meta(), 's_value', '')!='') {
                 if(stripos(osc_field(osc_item_meta(), 's_value', ''),'http://')!==false || stripos(osc_field(osc_item_meta(), 's_value', ''),'https://')!==false) {
-                    return '<a href="'.html_entity_decode(osc_field(osc_item_meta(), 's_value', ''), ENT_COMPAT, "UTF-8").'" >'.html_entity_decode(osc_field(osc_item_meta(), 's_value', ''), ENT_COMPAT, "UTF-8").'</a>';
+                    return '<a href="'.html_entity_decode( osc_field(osc_item_meta(), 's_value', ''), ENT_COMPAT, 'UTF-8' ) . '" >' . html_entity_decode( osc_field( osc_item_meta(), 's_value', ''), ENT_COMPAT, 'UTF-8' ) . '</a>';
                 } else {
-                    return '<a href="http://'.html_entity_decode(osc_field(osc_item_meta(), 's_value', ''), ENT_COMPAT, "UTF-8").'" >'.html_entity_decode(osc_field(osc_item_meta(), 's_value', ''), ENT_COMPAT, "UTF-8").'</a>';
+                    return '<a href="http://'.html_entity_decode( osc_field(osc_item_meta(), 's_value', ''), ENT_COMPAT, 'UTF-8' ) . '" >' . html_entity_decode( osc_field( osc_item_meta(), 's_value', ''), ENT_COMPAT, 'UTF-8' ) . '</a>';
                 }
             } else {
                 return '';
             }
-        } else if($meta['e_type']=="DROPDOWN" || $meta['e_type']=="RADIO") {
+        } else if( $meta['e_type'] == 'DROPDOWN' || $meta['e_type'] == 'RADIO' ) {
             return osc_field(osc_item_meta(), 's_value', '');
         } else {
-            return nl2br(htmlentities(osc_field(osc_item_meta(), 's_value', ''), ENT_COMPAT, "UTF-8"));
+            return nl2br(htmlentities( osc_field(osc_item_meta(), 's_value', ''), ENT_COMPAT, 'UTF-8' ));
         }
     }
 
@@ -1362,7 +1362,7 @@
         if($params==null) {
             $params = array();
         } else if(is_string($params)){
-            $keyvalue = explode("=", $params);
+            $keyvalue = explode( '=' , $params);
             $params = array($keyvalue[0] => $keyvalue[1]);
         }
         foreach($params as $key => $value) {
@@ -1374,7 +1374,7 @@
                     $mSearch->addPattern($value);
                     break;
                 case 'author':
-                    $tmp = explode(",", $value);
+                    $tmp = explode( ',' , $value);
                     foreach($tmp as $t) {
                         $mSearch->fromUser($t);
                     }
@@ -1382,7 +1382,7 @@
 
                 case 'category':
                 case 'category_name':
-                    $tmp = explode(",", $value);
+                    $tmp = explode( ',' , $value);
                     foreach($tmp as $t) {
                         $mSearch->addCategory($t);
                     }
@@ -1390,7 +1390,7 @@
 
                 case 'country':
                 case 'country_name':
-                    $tmp = explode(",", $value);
+                    $tmp = explode( ',' , $value);
                     foreach($tmp as $t) {
                         $mSearch->addCountry($t);
                     }
@@ -1398,7 +1398,7 @@
 
                 case 'region':
                 case 'region_name':
-                    $tmp = explode(",", $value);
+                    $tmp = explode( ',' , $value);
                     foreach($tmp as $t) {
                         $mSearch->addRegion($t);
                     }
@@ -1406,7 +1406,7 @@
 
                 case 'city':
                 case 'city_name':
-                    $tmp = explode(",", $value);
+                    $tmp = explode( ',' , $value);
                     foreach($tmp as $t) {
                         $mSearch->addCity($t);
                     }
@@ -1414,7 +1414,7 @@
 
                 case 'city_area':
                 case 'city_area_name':
-                    $tmp = explode(",", $value);
+                    $tmp = explode( ',' , $value);
                     foreach($tmp as $t) {
                         $mSearch->addCityArea($t);
                     }
@@ -1441,7 +1441,7 @@
                     break;
             }
         }
-        View::newInstance()->_exportVariableToView("customItems", $mSearch->doSearch());
+        View::newInstance()->_exportVariableToView( 'customItems' , $mSearch->doSearch());
     }
 
 

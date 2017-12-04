@@ -110,7 +110,7 @@
          */
         public function countRules()
         {
-            $this->dao->select("COUNT(*) as i_total");
+            $this->dao->select( 'COUNT(*) as i_total' );
             $this->dao->from($this->getTableName());
 
             $result = $this->dao->get();

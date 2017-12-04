@@ -191,7 +191,7 @@
                 }
             }
             if(!empty($this->error)) {
-                echo sprintf(__('ERROR: Some scripts could not be loaded (%s)'), implode(", ", $this->error));
+                echo sprintf(__('ERROR: Some scripts could not be loaded (%s)'), implode( ', ' , $this->error));
             }
         }
 

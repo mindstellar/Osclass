@@ -53,7 +53,7 @@
             $this->addColumn('date', __('Date'));
 
             $dummy = &$this;
-            osc_run_hook("admin_alerts_table", $dummy);
+            osc_run_hook( 'admin_alerts_table' , $dummy);
         }
         
         private function processData($alerts)
@@ -94,7 +94,7 @@
                     $pieces = array();
                     $conditions = osc_get_raw_search((array)json_decode($aRow['s_search'], true));
                     if(isset($conditions['sPattern']) && $conditions['sPattern']!='') {
-                        $pieces[] = sprintf(__("<b>Pattern:</b> %s"), $conditions['sPattern']);
+                        $pieces[] = sprintf( __( '<b>Pattern:</b> %s' ), $conditions['sPattern']);
                     }
                     if(isset($conditions['aCategories']) && !empty($conditions['aCategories'])) {
                         $l = min(count($conditions['aCategories']), 4);
@@ -103,13 +103,13 @@
                             $cat_array[] = $conditions['aCategories'][$c];
                         }
                         if(count($conditions['aCategories'])>$l) {
-                            $cat_array[] = '<a href="#" class="more-tooltip" categories="'.osc_esc_html(implode(", ", $conditions['aCategories'])).'" >'.__("...More").'</a>';
+                            $cat_array[] = '<a href="#" class="more-tooltip" categories="'.osc_esc_html(implode( ', ' , $conditions['aCategories'])) . '" >' . __( '...More' ) . '</a>';
                         }
 
-                        $pieces[] = sprintf(__("<b>Categories:</b> %s"), implode(", ", $cat_array));
+                        $pieces[] = sprintf( __( '<b>Categories:</b> %s' ), implode( ', ' , $cat_array));
                     }
 
-                    $row['alert'] = implode($pieces, ", ");
+                    $row['alert'] = implode( $pieces, ', ' );
                     // fourth row
                     $row['date'] = osc_format_date($aRow['dt_date']);
 

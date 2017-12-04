@@ -42,7 +42,7 @@ function _purify($value, $xss_check)
 }
 function getServerParam($param, $htmlencode = false, $xss_check = true, $quotes_encode = true)
 {
-    if ($param == "") return '';
+    if ( $param == '' ) return '';
     if (!isset($_SERVER[$param])) return '';
     $value = _purify($_SERVER[$param], $xss_check);
     if ($htmlencode) {
@@ -83,7 +83,7 @@ function get_absolute_url( ) {
  */
 function get_relative_url( ) {
     $url = Params::getServerParam('REQUEST_URI', false, false);
-    return substr($url, 0, strpos($url, '/oc-includes')) . "/";
+    return substr($url, 0, strpos($url, '/oc-includes')) . '/';
 }
 
 /*
@@ -245,7 +245,7 @@ function oc_install( ) {
 
         if( $error_num > 0 ) {
             if( reportToOsclass() ) {
-                LogOsclassInstaller::instance()->error(sprintf(__('Cannot connect to the database. Error number: %s') , $error_num ), __FILE__."::".__LINE__);
+                LogOsclassInstaller::instance()->error(sprintf(__('Cannot connect to the database. Error number: %s') , $error_num ), __FILE__ . '::' . __LINE__);
             }
 
             switch ($error_num) {
@@ -270,7 +270,7 @@ function oc_install( ) {
 
         if( $error_num > 0 ) {
             if( reportToOsclass() ) {
-                LogOsclassInstaller::instance()->error(sprintf(__("Can't create the database. Error number: %s"), $error_num) , __FILE__."::".__LINE__);
+                LogOsclassInstaller::instance()->error(sprintf(__("Can't create the database. Error number: %s"), $error_num) , __FILE__ . '::' . __LINE__);
             }
 
             if( in_array( $error_num, array(1006, 1044, 1045) ) ) {
@@ -294,7 +294,7 @@ function oc_install( ) {
 
     if( $error_num > 0 ) {
         if( reportToOsclass() ) {
-            LogOsclassInstaller::instance()->error(sprintf(__('Cannot connect to the database. Error number: %s'), $error_num) , __FILE__."::".__LINE__);
+            LogOsclassInstaller::instance()->error(sprintf(__('Cannot connect to the database. Error number: %s'), $error_num) , __FILE__ . '::' . __LINE__);
         }
 
         switch( $error_num ) {
@@ -314,7 +314,7 @@ function oc_install( ) {
     if( file_exists(ABS_PATH . 'config.php') ) {
         if( !is_writable(ABS_PATH . 'config.php') ) {
             if( reportToOsclass() ) {
-                LogOsclassInstaller::instance()->error(__("Can't write in config.php file. Check if the file is writable.") , __FILE__."::".__LINE__);
+                LogOsclassInstaller::instance()->error(__("Can't write in config.php file. Check if the file is writable.") , __FILE__ . '::' . __LINE__);
             }
             return array('error' => __("Can't write in config.php file. Check if the file is writable."));
         }
@@ -322,14 +322,14 @@ function oc_install( ) {
     } else {
         if( !file_exists(ABS_PATH . 'config-sample.php') ) {
             if( reportToOsclass() ) {
-                LogOsclassInstaller::instance()->error(__("config-sample.php doesn't exist. Check if everything is decompressed correctly.") , __FILE__."::".__LINE__);
+                LogOsclassInstaller::instance()->error(__("config-sample.php doesn't exist. Check if everything is decompressed correctly.") , __FILE__ . '::' . __LINE__);
             }
 
             return array('error' => __("config-sample.php doesn't exist. Check if everything is decompressed correctly."));
         }
         if( !is_writable(ABS_PATH) ) {
             if( reportToOsclass() ) {
-                LogOsclassInstaller::instance()->error(__('Can\'t copy config-sample.php. Check if the root directory is writable.') , __FILE__."::".__LINE__);
+                LogOsclassInstaller::instance()->error(__('Can\'t copy config-sample.php. Check if the root directory is writable.') , __FILE__ . '::' . __LINE__);
             }
 
             return array('error' => __('Can\'t copy config-sample.php. Check if the root directory is writable.'));
@@ -349,7 +349,7 @@ function oc_install( ) {
 
     if( $error_num > 0 ) {
         if( reportToOsclass() ) {
-            LogOsclassInstaller::instance()->error(sprintf(__("Can't create the database structure. Error number: %s"), $error_num)  , __FILE__."::".__LINE__);
+            LogOsclassInstaller::instance()->error(sprintf(__("Can't create the database structure. Error number: %s"), $error_num)  , __FILE__ . '::' . __LINE__);
         }
 
         switch ($error_num) {
@@ -394,7 +394,7 @@ function oc_install( ) {
     foreach($required_files as $file) {
         if ( !file_exists($file) ) {
             if( reportToOsclass() ) {
-                LogOsclassInstaller::instance()->error(sprintf(__('The file %s doesn\'t exist'), $file) , __FILE__."::".__LINE__);
+                LogOsclassInstaller::instance()->error(sprintf(__('The file %s doesn\'t exist'), $file) , __FILE__ . '::' . __LINE__);
             }
 
             return array('error' => sprintf(__('The file %s doesn\'t exist'), $file) );
@@ -408,7 +408,7 @@ function oc_install( ) {
 
     if( $error_num > 0 ) {
         if( reportToOsclass() ) {
-            LogOsclassInstaller::instance()->error(sprintf(__("Can't insert basic configuration. Error number: %s"), $error_num)  , __FILE__."::".__LINE__);
+            LogOsclassInstaller::instance()->error(sprintf(__("Can't insert basic configuration. Error number: %s"), $error_num)  , __FILE__ . '::' . __LINE__);
         }
 
         switch ($error_num) {
@@ -581,7 +581,7 @@ function copy_config_file($dbname, $username, $password, $dbhost, $tableprefix) 
     foreach ($config_sample as $line_num => $line) {
         switch (substr($line, 0, 16)) {
             case "define('DB_NAME'":
-                $config_sample[$line_num] = str_replace("database_name", $dbname, $line);
+                $config_sample[$line_num] = str_replace( 'database_name' , $dbname, $line);
                 break;
             case "define('DB_USER'":
                 $config_sample[$line_num] = str_replace("'username'", "'$username'", $line);
@@ -590,7 +590,7 @@ function copy_config_file($dbname, $username, $password, $dbhost, $tableprefix) 
                 $config_sample[$line_num] = str_replace("'password'", "'$password'", $line);
                 break;
             case "define('DB_HOST'":
-                $config_sample[$line_num] = str_replace("localhost", $dbhost, $line);
+                $config_sample[$line_num] = str_replace( 'localhost' , $dbhost, $line);
                 break;
             case "define('DB_TABLE":
                 $config_sample[$line_num] = str_replace('oc_', $tableprefix, $line);
@@ -831,8 +831,8 @@ function display_target() {
                     <td></td>
                     <td>
                         <input type="checkbox" checked="checked" id="createmarketaccount" name="createmarketaccount" value="1" /><label for="createmarketaccount"><?php _e('Create market.osclass.org account'); ?>
-                            <br><?php _e("(You agree to our <a href=\"https://osclass.org/page/legal-note\">Terms & Conditions</a>)"); ?></label>
-                        <img class="vtip" src="<?php echo get_absolute_url(); ?>oc-includes/images/question.png" title="<?php echo osc_esc_html(__("Create a market.osclass.org account and download free themes and plugins.")); ?>" alt="" />
+                            <br><?php _e( '(You agree to our <a href="https://osclass.org/page/legal-note">Terms & Conditions</a>)' ); ?></label>
+                        <img class="vtip" src="<?php echo get_absolute_url(); ?>oc-includes/images/question.png" title="<?php echo osc_esc_html(__( 'Create a market.osclass.org account and download free themes and plugins.' )); ?>" alt="" />
                     </td>
                 </tr>
                 </tbody>
@@ -852,24 +852,24 @@ function display_target() {
                     <div id="country-box">
 
                         <select name="country_select" id="country_select" >
-                            <option value="skip"><?php _e("Skip location"); ?></option>
-                            <!-- <option value="all"><?php _e("International"); ?></option> -->
+                            <option value="skip"><?php _e( 'Skip location' ); ?></option>
+                            <!-- <option value="all"><?php _e( 'International' ); ?></option> -->
                             <?php foreach($country_list as $c) { ?>
                                 <option value="<?php echo $c['code']; ?>" <?php if($c['code']==$country_ip) { echo 'selected="selected"'; }; ?>><?php echo $c['s_name']; ?></option>
                             <?php }; ?>
                         </select>
 
                         <select name="region_select" id="region_select" style="display: none;">
-                            <option value="all"><?php _e("All regions"); ?></option>
+                            <option value="all"><?php _e( 'All regions' ); ?></option>
                         </select>
 
                         <select name="city_select" id="city_select" style="display: none;">
-                            <option value="all"><?php _e("All cities"); ?></option>
+                            <option value="all"><?php _e( 'All cities' ); ?></option>
                         </select>
 
-                        <div id="no_region_text" aria-hidden="true" style="display: none;"><?php _e("There are no regions available for this country"); ?></div>
+                        <div id="no_region_text" aria-hidden="true" style="display: none;"><?php _e( 'There are no regions available for this country' ); ?></div>
 
-                        <div id="no_city_text" aria-hidden="true" style="display: none;"><?php _e("There are no cities available for this region"); ?></div>
+                        <div id="no_city_text" aria-hidden="true" style="display: none;"><?php _e( 'There are no cities available for this region' ); ?></div>
 
 
                     </div>
@@ -889,7 +889,7 @@ function display_target() {
     </form>
     <div id="lightbox" style="display:none;">
         <div class="center">
-            <img src="<?php echo get_absolute_url(); ?>oc-includes/images/loading.gif" alt="<?php echo osc_esc_html(__("Loading...")); ?>" title="" />
+            <img src="<?php echo get_absolute_url(); ?>oc-includes/images/loading.gif" alt="<?php echo osc_esc_html(__( 'Loading...' )); ?>" title="" />
         </div>
     </div>
 <?php
@@ -948,7 +948,7 @@ function display_finish($password) {
         </div>
     <?php } ?>
     <h2 class="target"><?php _e('Congratulations!');?></h2>
-    <p class="space-left-10"><?php _e("Osclass has been installed. Were you expecting more steps? Sorry to disappoint you!");?></p>
+    <p class="space-left-10"><?php _e( 'Osclass has been installed. Were you expecting more steps? Sorry to disappoint you!' );?></p>
     <p class="space-left-10"><?php echo sprintf(__('An e-mail with the password for oc-admin has been sent to: %s'), $data['s_email']);?></p>
     <div style="clear:both;"></div>
     <div class="form-table finish">

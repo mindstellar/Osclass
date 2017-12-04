@@ -29,7 +29,7 @@
                 $commentId = Session::newInstance()->_getForm('commentId');
             }
             if( !is_null($commentId) ) {
-                parent::generic_input_hidden("id", $commentId);
+                parent::generic_input_hidden( 'id' , $commentId);
             }
         }
 
@@ -42,7 +42,7 @@
             if(Session::newInstance()->_getForm('commentTitle') != '') {
                 $commentTitle = Session::newInstance()->_getForm('commentTitle');
             }
-            parent::generic_input_text("title", $commentTitle, null, false);
+            parent::generic_input_text( 'title' , $commentTitle, null, false);
         }
 
         static public function author_input_text($comment = null)
@@ -54,7 +54,7 @@
             if(Session::newInstance()->_getForm('commentAuthorName') != '') {
                 $commentAuthorName = Session::newInstance()->_getForm('commentAuthorName');
             }
-            parent::generic_input_text("authorName", $commentAuthorName, null, false);
+            parent::generic_input_text( 'authorName' , $commentAuthorName, null, false);
         }
 
         static public function email_input_text($comment = null)
@@ -66,7 +66,7 @@
             if(Session::newInstance()->_getForm('commentAuthorEmail') != '') {
                 $commentAuthorEmail = Session::newInstance()->_getForm('commentAuthorEmail');
             }
-            parent::generic_input_text("authorEmail", $commentAuthorEmail, null, false);
+            parent::generic_input_text( 'authorEmail' , $commentAuthorEmail, null, false);
         }
 
         static public function body_input_textarea($comment = null)
@@ -78,7 +78,7 @@
             if(Session::newInstance()->_getForm('commentBody') != '') {
                 $commentBody = Session::newInstance()->_getForm('commentBody');
             }
-            parent::generic_textarea("body", $commentBody);
+            parent::generic_textarea( 'body' , $commentBody);
         }
 
         static public function js_validation($admin = false) {
@@ -99,12 +99,12 @@
             },
             messages: {
                 authorEmail: {
-                    required: "<?php _e("Email: this field is required"); ?>.",
-                    email: "<?php _e("Invalid email address"); ?>."
+                    required: "<?php _e( 'Email: this field is required' ); ?>.",
+                    email: "<?php _e( 'Invalid email address' ); ?>."
                 },
                 body: {
-                    required: "<?php _e("Comment: this field is required"); ?>.",
-                    minlength: "<?php _e("Comment: this field is required"); ?>."
+                    required: "<?php _e( 'Comment: this field is required' ); ?>.",
+                    minlength: "<?php _e( 'Comment: this field is required' ); ?>."
                 }
             },
             wrapper: "li",
