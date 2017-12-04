@@ -137,7 +137,7 @@ class Object_Cache_memcache implements iObject_Cache{
             } else {
                 $value = $this->cache[$key];
             }
-            $this->cache_hits += 1;
+	        ++ $this->cache_hits;
             $return = $value;
         } else {
             $found = true;
@@ -152,10 +152,10 @@ class Object_Cache_memcache implements iObject_Cache{
 
             $this->cache[$key] = is_object( $value ) ? clone $value : $value;
             if($found) {
-                $this->cache_hits += 1;
+	            ++ $this->cache_hits;
                 $return = $this->cache[$key];
             } else {
-                $this->cache_misses += 1;
+	            ++ $this->cache_misses;
                 $return = false;
             }
 

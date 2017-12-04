@@ -113,7 +113,7 @@ class Object_Cache_default implements iObject_Cache{
 
         if ( $this->_exists( $key ) ) {
             $found = true;
-            $this->cache_hits += 1;
+	        ++ $this->cache_hits;
 	        if ( is_object( $this->cache[ $key ] ) ) {
 		        return clone $this->cache[ $key ];
 	        } else {
@@ -121,7 +121,7 @@ class Object_Cache_default implements iObject_Cache{
 	        }
         }
         $found = false;
-        $this->cache_misses += 1;
+	    ++ $this->cache_misses;
         return false;
     }
 

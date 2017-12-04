@@ -734,7 +734,7 @@
                         $rows = $result->result();
                         if($result->numRows == 0) {
                             $res_insert = $this->insertDescription($fieldsDescription);
-                            $affectedRows += 1;
+	                        ++ $affectedRows;
                         }
                     } else if($rs > 0) {
                         $affectedRows += $rs;
