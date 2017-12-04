@@ -254,7 +254,7 @@
             if (!function_exists($fxName)) {
                 return false;
             }
-            $result = call_user_func($fxName);
+	        $result             = $fxName();
             $result['int_name'] = $theme;
 
             return $result;

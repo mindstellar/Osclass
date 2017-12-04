@@ -25,7 +25,7 @@ function osc_listLocales() {
         if(file_exists($path)) {
             require_once $path;
             if(function_exists($fxName)) {
-                $languages[$code] = call_user_func($fxName);
+	            $languages[ $code ]       = $fxName();
                 $languages[$code]['code'] = $code;
             }
         }
