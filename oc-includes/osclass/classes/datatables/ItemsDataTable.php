@@ -86,7 +86,7 @@
                 'expiration'  => 'dt_expiration'
                 );
             // column sort
-            if( !key_exists($sort, $arraySortColumns) ) {
+	        if ( ! array_key_exists( $sort , $arraySortColumns ) ) {
                 $sort       = 'dt_pub_date';
                 $this->mSearch->addHaving('i_num_spam > 0 OR i_num_bad_classified > 0 OR i_num_repeated > 0 OR i_num_offensive > 0 OR i_num_expired > 0');
             } else {
@@ -520,7 +520,7 @@
             // column sort
             $sort       = $_get['sort'];
             $arraySortColumns = array('date'  => 'dt_pub_date', 'expiration'  => 'dt_expiration');
-            if(!key_exists($sort, $arraySortColumns)) {
+	        if ( ! array_key_exists( $sort , $arraySortColumns ) ) {
                 $sort       = 'dt_pub_date';
             } else {
                 $sort = $arraySortColumns[$sort];

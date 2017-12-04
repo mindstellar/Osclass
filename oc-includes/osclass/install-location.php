@@ -2,7 +2,7 @@
 
 error_reporting(E_ERROR | E_CORE_ERROR | E_COMPILE_ERROR | E_PARSE);
 
-define( 'ABS_PATH', dirname(dirname(dirname(__FILE__))) . '/' );
+	define( 'ABS_PATH' , dirname( dirname( __DIR__ ) ) . '/' );
 define( 'LIB_PATH', ABS_PATH . 'oc-includes/');
 
 require_once ABS_PATH . 'config.php';

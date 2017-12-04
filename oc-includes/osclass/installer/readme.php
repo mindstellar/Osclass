@@ -1,5 +1,5 @@
 <?php
-require_once dirname(dirname(dirname(__FILE__))) . '/htmlpurifier/HTMLPurifier.auto.php';
+	require_once dirname( dirname( __DIR__ ) ) . '/htmlpurifier/HTMLPurifier.auto.php';
 	/**
 	 * @param $value
 	 * @param $xss_check
@@ -14,7 +14,7 @@ require_once dirname(dirname(dirname(__FILE__))) . '/htmlpurifier/HTMLPurifier.a
 
     $_config = HTMLPurifier_Config::createDefault();
     $_config->set('HTML.Allowed', '');
-    $_config->set('Cache.SerializerPath', dirname(dirname(dirname(dirname(__FILE__)))) . '/oc-content/uploads/');
+	$_config->set( 'Cache.SerializerPath' , dirname( dirname( dirname( __DIR__ ) ) ) . '/oc-content/uploads/' );
 
     $_purifier = new HTMLPurifier($_config);
 

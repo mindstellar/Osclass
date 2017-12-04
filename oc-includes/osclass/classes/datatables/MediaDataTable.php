@@ -144,7 +144,7 @@
             // column sort
             $sort       = $_get['sort'];
             $arraySortColumns = array('date' => 'r.pk_i_id', 'attached_to' => 'r.fk_i_item_id');
-            if(!key_exists($sort, $arraySortColumns)) {
+	        if ( ! array_key_exists( $sort , $arraySortColumns ) ) {
                 $this->order_by['column_name'] = 'r.pk_i_id';
             } else {
                 $this->order_by['column_name'] = $arraySortColumns[$sort];

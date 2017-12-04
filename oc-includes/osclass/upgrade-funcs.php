@@ -22,7 +22,7 @@
     error_log(' ------- START upgrade-funcs ------- ');
 
     if(!defined('ABS_PATH')) {
-        define('ABS_PATH', dirname(dirname(dirname(__FILE__))) . '/');
+	    define( 'ABS_PATH' , dirname( dirname( __DIR__ ) ) . '/' );
     }
 
     require_once ABS_PATH . 'oc-load.php';

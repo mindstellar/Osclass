@@ -16,7 +16,7 @@
  */
 
 
-require_once dirname(dirname(__FILE__)) . '/htmlpurifier/HTMLPurifier.auto.php';
+	require_once dirname( __DIR__ ) . '/htmlpurifier/HTMLPurifier.auto.php';
 	/**
 	 * @param $value
 	 * @param $xss_check
@@ -31,7 +31,7 @@ require_once dirname(dirname(__FILE__)) . '/htmlpurifier/HTMLPurifier.auto.php';
 
     $_config = HTMLPurifier_Config::createDefault();
     $_config->set('HTML.Allowed', '');
-    $_config->set('Cache.SerializerPath', dirname(dirname(dirname(dirname(__FILE__)))) . '/oc-content/uploads/');
+	$_config->set( 'Cache.SerializerPath' , dirname( dirname( dirname( __DIR__ ) ) ) . '/oc-content/uploads/' );
 
     $_purifier = new HTMLPurifier($_config);
 
@@ -125,9 +125,9 @@ require_once dirname(dirname(__FILE__)) . '/htmlpurifier/HTMLPurifier.auto.php';
 	function get_requirements() {
     $array = array(
         'PHP version >= 5.6.x' => array(
-            'requirement' => __('PHP version >= 5.6.x'),
-            'fn' => version_compare(PHP_VERSION, '5.6.0', '>='),
-            'solution' => __('At least PHP5.6 (PHP 7.0 or higher recommended) is required to run Osclass. You may talk with your hosting to upgrade your PHP version.')),
+	        'requirement' => __('PHP version >= 5.6.x'),
+	        'fn'          => PHP_VERSION_ID >= 50600 ,
+	        'solution'    => __('At least PHP5.6 (PHP 7.0 or higher recommended) is required to run Osclass. You may talk with your hosting to upgrade your PHP version.')),
 
         'MySQLi extension for PHP' => array(
             'requirement' => __('MySQLi extension for PHP'),

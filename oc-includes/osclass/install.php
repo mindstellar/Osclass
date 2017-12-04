@@ -17,7 +17,7 @@
 
 error_reporting(E_ERROR | E_CORE_ERROR | E_COMPILE_ERROR | E_PARSE);
 
-define( 'ABS_PATH', dirname(dirname(dirname(__FILE__))) . '/' );
+	define( 'ABS_PATH' , dirname( dirname( __DIR__ ) ) . '/' );
 define( 'LIB_PATH', ABS_PATH . 'oc-includes/' );
 define( 'CONTENT_PATH', ABS_PATH . 'oc-content/' );
 define( 'TRANSLATIONS_PATH', CONTENT_PATH . 'languages/' );
@@ -66,7 +66,7 @@ if(Params::getParam('install_locale')!='') {
     Session::newInstance()->_set('adminLocale', Params::getParam('install_locale'));
 }
 
-if(Session::newInstance()->_get('adminLocale')!='' && key_exists(Session::newInstance()->_get('adminLocale'), $locales)) {
+	if ( Session::newInstance()->_get( 'adminLocale' ) != '' && array_key_exists( Session::newInstance()->_get( 'adminLocale' ) , $locales ) ) {
     $current_locale = Session::newInstance()->_get('adminLocale');
 } else if(isset($locales['en_US'])) {
     $current_locale = 'en_US';
