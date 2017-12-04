@@ -291,7 +291,7 @@ if (!defined('PASSWORD_DEFAULT')) {
         }
 
         $status = 0;
-        for ($i = 0; $i < strlen($ret); $i++) {
+	    for ( $i = 0 , $iMax = strlen( $ret ); $i < $iMax; $i ++ ) {
             $status |= (ord($ret[$i]) ^ ord($hash[$i]));
         }
 

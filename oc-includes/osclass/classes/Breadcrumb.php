@@ -278,7 +278,7 @@
             }
 
             $node = array();
-            for($i = 0; $i < count($this->aLevel); $i++) {
+	        for ( $i = 0 , $iMax = count( $this->aLevel ); $i < $iMax; $i ++ ) {
                 $text = '<li ';
                 // set a class style for first and last <li>
                 if( $i == 0 ) {

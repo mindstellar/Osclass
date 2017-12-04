@@ -2260,7 +2260,7 @@ if(!function_exists('hex2b64')) {
     function hex2b64($str)
     {
         $raw = '';
-        for ($i=0; $i < strlen($str); $i+=2)
+	    for ( $i = 0 , $iMax = strlen( $str ); $i < $iMax; $i += 2 )
         {
             $raw .= chr(hexdec(substr($str, $i, 2)));
         }

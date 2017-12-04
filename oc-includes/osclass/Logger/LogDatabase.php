@@ -197,7 +197,7 @@
             $title .= str_pad( 'rows', 8, ' ' , STR_PAD_BOTH) . '|';
             $title .= str_pad( 'Extra', 38, ' ' , STR_PAD_BOTH) . '|';
 
-            for($i = 0; $i < count($this->explain_messages); $i++) {
+	        for ( $i = 0 , $iMax = count( $this->explain_messages ); $i < $iMax; $i ++ ) {
                 fwrite($fp, $this->explain_messages[$i]['query'] . PHP_EOL);
                 fwrite($fp, str_pad( '', 211, '-' , STR_PAD_BOTH) . PHP_EOL);
                 fwrite($fp, $title . PHP_EOL);

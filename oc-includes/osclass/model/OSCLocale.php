@@ -94,7 +94,7 @@
 
             if ($indexedByPk) {
                 $aTmp = array();
-                for ($i = 0; $i < count($aResults); $i++) {
+	            for ( $i = 0 , $iMax = count( $aResults ); $i < $iMax; $i ++ ) {
                     $aTmp[(string)$aResults[$i][$this->getPrimaryKey()]] = $aResults[$i];
                 }
                 $aResults = $aTmp;
