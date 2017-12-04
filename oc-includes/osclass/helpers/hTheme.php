@@ -94,7 +94,7 @@
     /**
      * Enqueue script
      *
-     * @param type $id
+     * @param string $id
      */
     function osc_enqueue_script($id) {
         Scripts::newInstance()->enqueuScript($id);
@@ -103,7 +103,7 @@
     /**
      * Remove script from the queue, so it will not be loaded
      *
-     * @param type $id
+     * @param string $id
      */
     function osc_remove_script($id) {
         Scripts::newInstance()->removeScript($id);
@@ -123,7 +123,7 @@
     /**
      * Remove script from the queue, so it will not be loaded
      *
-     * @param type $id
+     * @param string $id
      */
     function osc_unregister_script($id) {
         Scripts::newInstance()->unregisterScript($id);

@@ -119,9 +119,11 @@
          *
          * @access public
          * @since 2.4
-         * @param type $regionID
-         * @param type $numItems
-         * @return type
+         *
+         * @param int $regionID
+         * @param int $numItems
+         *
+         * @return mixed
          */
         public function setNumItems($regionID, $numItems)
         {
@@ -140,22 +142,25 @@
 
         public function findByRegionId($regionId)
         {
-            return $this->findByPrimaryKey($regionId);
+            return $this->findByPrimaryKey($regionId );
         }
 
-        /**
-         * Return a list of regions and counter items.
-         * Can be filtered by country and num_items,
-         * and ordered by region_name or items counter.
-         * $order = 'region_name ASC' OR $oder = 'items DESC'
-         *
-         * @access public
-         * @since 2.4
-         * @param string $country
-         * @param string $zero
-         * @param string $order
-         * @return array
-         */
+	    /**
+	     * Return a list of regions and counter items.
+	     * Can be filtered by country and num_items,
+	     * and ordered by region_name or items counter.
+	     * $order = 'region_name ASC' OR $oder = 'items DESC'
+	     *
+	     * @access public
+	     * @since  2.4
+	     *
+	     * @param string $country
+	     * @param string $zero
+	     * @param string $order
+	     *
+	     * @return array
+	     * @throws \Exception
+	     */
         public function listRegions($country = '%%%%', $zero = '>' , $order = 'region_name ASC' )
         {
             $key    = md5(osc_base_url().(string)$country.(string)$zero.(string)$order);

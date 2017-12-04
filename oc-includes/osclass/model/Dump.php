@@ -110,8 +110,9 @@
         /**
          * Dump all table rows into path
          *
-         * @param type $path
-         * @param type $table
+         * @param string $path
+         * @param string $table
+         *
          * @return bool
          */
         public function table_data($path, $table)
@@ -250,16 +251,17 @@
             }
         }
 
-        /**
-         * Add quotes if it's necessary
-         *
-         * data type =>  http://www.php.net/manual/es/mysqli-result.fetch-field.php#106064
-         *
-         * @param type $type
-         * @param type $_str
-         * @param type $value
-         */
-        private function _quotes($type, &$_str, $value)
+
+	    /**
+	     * Add quotes if it's necessary
+	     *
+	     * data type =>  http://www.php.net/manual/es/mysqli-result.fetch-field.php#106064
+	     *
+	     * @param $type
+	     * @param $_str
+	     * @param $value
+	     */
+	    private function _quotes( $type , &$_str, $value)
         {
 //            * numeric *
 //            BIT: 16 - TINYINT: 1 - BOOL: 1 - SMALLINT: 2 - MEDIUMINT: 9
@@ -274,13 +276,13 @@
 
             $aNumeric = array(16, 1, 2, 9, 3, 8, 4, 5, 246 );
             $aDates   = array(10, 12, 7, 11, 13 );
-            $aString  = array(254, 253, 252 );
+            $aString  = array ( 254 , 253 , 252 );
 
-            if(in_array($type, $aNumeric) ) {
-                $_str .= $value;
-            } else if(in_array($type, $aDates) ) {
-                $_str .= '\'' . $this->dao->connId->real_escape_string($value) . '\'';
-            } else if(in_array($type, $aString) ) {
+		    if ( in_array( $type , $aNumeric , true ) ) {
+			    $_str .= $value;
+		    } else if ( in_array( $type , $aDates , true ) ) {
+                $_str .= '\'' . $this->dao->connId->real_escape_string( $value ) . '\'';
+		    } else if ( in_array( $type , $aString , true ) ) {
                 $_str .= '\'' . $this->dao->connId->real_escape_string($value) . '\'';
             }
         }

@@ -1188,10 +1188,10 @@
         /**
          * Build alter sql, ADD COLUMN, CHANGE COLUMN, ALTER COLUMN
          *
-         * @param array $tbl_fields, contain all fields inside database
-         * @param type $table
-         * @param type $normal_fields
-         * @param type $struct_queries
+         * @param array  $tbl_fields, contain all fields inside database
+         * @param string $table
+         * @param        $normal_fields
+         * @param        $struct_queries
          */
         private function createAlterTable($tbl_fields, $table, &$normal_fields, &$struct_queries )
         {

@@ -120,15 +120,17 @@
             return false;
         }
 
-        /**
-         * Set i_num_items, given a country code
-         *
-         * @access public
-         * @since 2.4
-         * @param type $countryCode
-         * @param type $numItems
-         * @return type
-         */
+	    /**
+	     * Set i_num_items, given a country code
+	     *
+	     * @access public
+	     * @since  2.4
+	     *
+	     * @param string $countryCode
+	     * @param int    $numItems
+	     *
+	     * @return mixed
+	     */
         public function setNumItems($countryCode, $numItems)
         {
             return $this->dao->query( 'INSERT INTO ' . $this->getTableName() . " (fk_c_country_code, i_num_items) VALUES ('$countryCode', $numItems) ON DUPLICATE KEY UPDATE i_num_items = " . $numItems);
@@ -180,7 +182,9 @@
          * Calculate the total items that belong to countryCode
          * @access public
          * @since 2.4
-         * @param type $countryCode
+         *
+         * @param string $countryCode
+         *
          * @return int total items
          */
         public function calculateNumItems($countryCode)

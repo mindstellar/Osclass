@@ -102,9 +102,10 @@
 	/**
 	 * Gets a specific field from current resource
 	 *
-	 * @param type   $field
+	 * @param string $field
 	 * @param string $locale
-	 * @return field_type
+	 *
+	 * @return mixed
 	 */
     function osc_resource_field($field, $locale = '') {
         return osc_field(osc_resource(), $field, $locale);

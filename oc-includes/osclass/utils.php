@@ -638,8 +638,9 @@ function osc_doRequest($url, $_data) {
 	/**
 	 * Dump osclass database into path file
 	 *
-	 * @param type $path
-	 * @param type $file
+	 * @param string $path
+	 * @param string $file
+	 *
 	 * @return int
 */
 function osc_dbdump($path, $file) {

@@ -115,15 +115,17 @@
             return false;
         }
 
-        /**
-         * Set i_num_items, given a city id
-         *
-         * @access public
-         * @since 2.4
-         * @param type $cityID
-         * @param type $numItems
-         * @return type
-         */
+	    /**
+	     * Set i_num_items, given a city id
+	     *
+	     * @access public
+	     * @since  2.4
+	     *
+	     * @param int $cityID
+	     * @param int $numItems
+	     *
+	     * @return mixed
+	     */
         public function setNumItems($cityID, $numItems)
         {
             return $this->dao->query( 'INSERT INTO ' . $this->getTableName() . " (fk_i_city_id, i_num_items) VALUES ($cityID, $numItems) ON DUPLICATE KEY UPDATE i_num_items = " . $numItems);
@@ -142,11 +144,12 @@
             return $this->findByPrimaryKey($cityId);
         }
 
-        /**
-         *
-         * @param type $regionId
-         * @return type
-         */
+	    /**
+	     *
+	     * @param int $regionId
+	     *
+	     * @return mixed
+	     */
         public function deleteByRegion($regionId)
         {
             return $this->dao->query('DELETE FROM '.DB_TABLE_PREFIX.'t_city_stats WHERE fk_i_city_id IN (SELECT pk_i_id FROM '.DB_TABLE_PREFIX.'t_city WHERE fk_i_region_id = '.$regionId.');');
@@ -194,7 +197,8 @@
         /**
          * Calculate the total items that belong to city id
          *
-         * @param type $cityId
+         * @param int $cityId
+         *
          * @return int total items
          */
         public function calculateNumItems($cityId)
