@@ -30,7 +30,7 @@
     }
     osc_add_filter('meta_title_filter','custom_meta_title');
     function custom_meta_title($data){
-        return __('Change e-mail', 'bender');;
+        return __('Change e-mail', 'bender');
     }
     osc_current_web_theme_path('header.php') ;
     $osc_user = osc_user();

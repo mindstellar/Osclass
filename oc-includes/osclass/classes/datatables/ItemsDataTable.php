@@ -116,19 +116,19 @@
             if(Params::getParam('sort') == 'date') {
                 if(Params::getParam('direction') == 'desc') {
                     $arg_date .= '&direction=asc';
-                };
+                }
             }
             $arg_expiration = '&sort=expiration';
             if(Params::getParam('sort') == 'expiration') {
                 if(Params::getParam('direction') == 'desc') {
                     $arg_expiration .= '&direction=asc';
-                };
+                }
             }
 
             Rewrite::newInstance()->init();
             $page  = (int)Params::getParam('iPage');
-            if($page==0) { $page = 1; };
-            Params::setParam('iPage', $page);
+            if($page==0) { $page = 1; }
+	        Params::setParam('iPage', $page);
             $url_base = preg_replace('|&direction=([^&]*)|', '', preg_replace('|&sort=([^&]*)|', '', osc_base_url().Rewrite::newInstance()->get_raw_request_uri()));
 
             $this->addColumn('status-border', '');
@@ -150,8 +150,8 @@
 
             Rewrite::newInstance()->init();
             $page  = (int)Params::getParam('iPage');
-            if($page==0) { $page = 1; };
-            Params::setParam('iPage', $page);
+            if($page==0) { $page = 1; }
+	        Params::setParam('iPage', $page);
             $url_base = preg_replace('|&direction=([^&]*)|', '', preg_replace('|&sort=([^&]*)|', '', osc_base_url().Rewrite::newInstance()->get_raw_request_uri()));
             $arg_spam   = '&sort=spam'; $arg_bad    = '&sort=bad';
             $arg_rep    = '&sort=rep';  $arg_off    = '&sort=off';

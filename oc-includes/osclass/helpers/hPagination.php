@@ -62,7 +62,7 @@
     {
         if(osc_is_public_profile()) {
             $url = osc_user_list_items_pub_profile_url('{PAGE}', $field);
-            $first_url = osc_user_public_profile_url();;
+            $first_url = osc_user_public_profile_url();
         } elseif(osc_is_list_items()) {
             $url = osc_user_list_items_url('{PAGE}', $field);
             $first_url = osc_user_list_items_url();

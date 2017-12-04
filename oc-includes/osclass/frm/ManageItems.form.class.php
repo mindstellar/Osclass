@@ -39,9 +39,9 @@
                 echo '<option value="">' . __('Select a category') . '</option>';
             }
 
-            if(count($categories)==1) { $parent_selectable = 1; };
+            if(count($categories)==1) { $parent_selectable = 1; }
 
-            foreach($categories as $c) {
+	        foreach($categories as $c) {
                 if ( !osc_selectable_parent_categories() && !$parent_selectable ) {
                     echo '<optgroup label="' . $c['s_name'] . '">';
                     if(isset($c['categories']) && is_array($c['categories'])) {

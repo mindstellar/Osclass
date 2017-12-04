@@ -166,8 +166,8 @@
                     $this->extractParams($request_uri);
                     $this->request_uri = $request_uri;
 
-                    if(Params::getParam('page')!='') { $this->location = Params::getParam('page'); };
-                    if(Params::getParam('action')!='') { $this->section = Params::getParam('action'); };
+                    if(Params::getParam('page')!='') { $this->location = Params::getParam('page'); }
+	                if(Params::getParam('action')!='') { $this->section = Params::getParam('action'); }
                 }
             }
         }

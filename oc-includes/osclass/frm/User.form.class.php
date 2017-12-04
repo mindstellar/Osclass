@@ -78,8 +78,8 @@
             $num_locales = count($locales);
             if($num_locales > 1) { echo '<div class="tabber">'; }
             foreach($locales as $locale) {
-                if($num_locales>1) { echo '<div class="tabbertab">'; };
-                    if($num_locales > 1) { echo '<h2>' . $locale['s_name'] . '</h2>'; }
+                if($num_locales>1) { echo '<div class="tabbertab">'; }
+	            if($num_locales > 1) { echo '<h2>' . $locale['s_name'] . '</h2>'; }
                     $info = '';
                     if( is_array($user) ) {
                         if( isset($user['locale'][$locale['pk_c_code']])) {
@@ -89,9 +89,9 @@
                         }
                     }
                     self::info_textarea('s_info', $locale['pk_c_code'], $info);
-                if($num_locales>1) { echo '</div>'; };
+                if($num_locales>1) { echo '</div>'; }
             }
-            if($num_locales>1) { echo '</div>'; };
+            if($num_locales>1) { echo '</div>'; }
         }
 
         static public function country_select($countries, $user = null) {
@@ -331,7 +331,7 @@ function checkForm() {
                 var url = '<?php echo osc_admin_base_url(true) . '?page=ajax&action=regions&countryId='; ?>' + pk_c_code;
             <?php } else { ?>
                 var url = '<?php echo osc_base_url(true) . '?page=ajax&action=regions&countryId='; ?>' + pk_c_code;
-            <?php }; ?>
+            <?php } ?>
             var result = '';
 
             if(pk_c_code != '') {
@@ -399,7 +399,7 @@ function checkForm() {
                 var url = '<?php echo osc_admin_base_url(true) . '?page=ajax&action=cities&regionId='; ?>' + pk_c_code;
             <?php } else { ?>
                 var url = '<?php echo osc_base_url(true) . '?page=ajax&action=cities&regionId='; ?>' + pk_c_code;
-            <?php }; ?>
+            <?php } ?>
 
             var result = '';
 

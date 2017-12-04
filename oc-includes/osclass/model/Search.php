@@ -341,7 +341,7 @@
         public function limit($l_i = 0, $r_p_p = null)
         {
             $this->limit_init = $l_i;
-            if($r_p_p!=null) { $this->results_per_page = $r_p_p; };
+            if($r_p_p!=null) { $this->results_per_page = $r_p_p; }
         }
 
         /**
@@ -366,8 +366,8 @@
          */
         public function page($p = 0, $r_p_p = null)
         {
-            if($r_p_p!=null) { $this->results_per_page = $r_p_p; };
-            $this->limit_init = $this->results_per_page*$p;
+            if($r_p_p!=null) { $this->results_per_page = $r_p_p; }
+	        $this->limit_init = $this->results_per_page*$p;
         }
 
         /**

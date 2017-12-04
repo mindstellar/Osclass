@@ -119,8 +119,8 @@
          */
         public function findIDSearchableByCategories($ids)
         {
-            if(!is_array($ids)) { $ids = array($ids); };
-            $this->dao->select('f.pk_i_id');
+            if(!is_array($ids)) { $ids = array($ids); }
+	        $this->dao->select('f.pk_i_id');
             $this->dao->from( $this->getTableName() . ' f, ' . DB_TABLE_PREFIX . 't_meta_categories c' );
             $where = array();
             $mCat = Category::newInstance();
@@ -149,8 +149,9 @@
             }
 
             $tmp = array();
-            foreach($result->result() as $t) { $tmp[] = $t['pk_i_id']; };
-            return $tmp;
+            foreach($result->result() as $t) { $tmp[] = $t['pk_i_id']; }
+
+	        return $tmp;
         }
 
         /**
@@ -307,7 +308,7 @@
             $return = true;
             foreach($categories as $c) {
                 $result = $this->dao->insert(sprintf('%st_meta_categories', DB_TABLE_PREFIX), array('fk_i_category_id' => $c, 'fk_i_field_id' =>$id));
-                if(!$result) { $return = false; };
+                if(!$result) { $return = false; }
             }
             return $return;
         }

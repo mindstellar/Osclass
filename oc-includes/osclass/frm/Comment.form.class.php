@@ -126,7 +126,7 @@
                     $('button[type=submit], input[type=submit]').attr('disabled', 'disabled');
                     form.submit();
                 }
-            <?php }; ?>
+            <?php } ?>
         });
     });
 </script>

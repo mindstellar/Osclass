@@ -83,9 +83,9 @@
          */
         public function getSearchesByDate($time = null)
         {
-            if($time==null) { $time = time() - (7*24*3600); };
+            if($time==null) { $time = time() - (7*24*3600); }
 
-            $this->dao->select('d_date, s_search, COUNT(s_search) as i_total');
+	        $this->dao->select('d_date, s_search, COUNT(s_search) as i_total');
             $this->dao->from($this->getTableName());
             $this->dao->where('d_date', date('Y-m-d H:i:s', $time));
             $this->dao->groupBy('s_search');

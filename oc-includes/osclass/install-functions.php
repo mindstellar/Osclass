@@ -855,8 +855,8 @@ function display_target() {
                             <option value="skip"><?php _e( 'Skip location' ); ?></option>
                             <!-- <option value="all"><?php _e( 'International' ); ?></option> -->
                             <?php foreach($country_list as $c) { ?>
-                                <option value="<?php echo $c['code']; ?>" <?php if($c['code']==$country_ip) { echo 'selected="selected"'; }; ?>><?php echo $c['s_name']; ?></option>
-                            <?php }; ?>
+                                <option value="<?php echo $c['code']; ?>" <?php if($c['code']==$country_ip) { echo 'selected="selected"'; } ?>><?php echo $c['s_name']; ?></option>
+                            <?php } ?>
                         </select>
 
                         <select name="region_select" id="region_select" style="display: none;">
@@ -878,7 +878,7 @@ function display_target() {
                         <?php _e('No internet connection. You can continue the installation and insert countries later.'); ?>
                         <input type="hidden" id="skip-location-input" name="skip-location-input" value="1" />
                     </div>
-                <?php }; ?>
+                <?php } ?>
             </div>
         </div>
         <div class="clear"></div>

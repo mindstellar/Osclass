@@ -65,7 +65,7 @@
                 <ul id="item_location">
                     <li><strong><?php _e( 'Location' , 'bender'); ?></strong>: <?php echo implode( ', ', $location); ?></li>
                 </ul>
-            <?php }; ?>
+            <?php } ?>
         </div>
         <?php if(osc_is_web_user_logged_in() && osc_logged_user_id()==osc_item_user_id()) { ?>
             <p id="edit_item_view">
@@ -197,7 +197,7 @@
                                         <?php CommentForm::email_input_text(); ?>
                                     </div>
                                 </div>
-                            <?php }; ?>
+                            <?php } ?>
                             <div class="control-group">
                                 <label class="control-label" for="title"><?php _e('Title', 'bender'); ?></label>
                                 <div class="controls">

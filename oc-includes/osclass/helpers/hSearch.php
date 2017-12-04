@@ -340,8 +340,8 @@
             osc_prune_array($params);
         }
         $countP = count($params);
-        if ($countP == 0) { $params['page'] = 'search'; };
-        $base_url = osc_base_url();
+        if ($countP == 0) { $params['page'] = 'search'; }
+	    $base_url = osc_base_url();
         $http_url = osc_is_ssl()? 'https://' : 'http://';
         if(osc_subdomain_type()=='category' && isset($params['sCategory'])) {
             if($params['sCategory']!=Params::getParam('sCategory')) {
@@ -444,8 +444,8 @@
         }
 
         $countP = count($params);
-        if ($countP == 0) { return $base_url; };
-        unset($params['page']);
+        if ($countP == 0) { return $base_url; }
+	    unset($params['page']);
         $countP = count($params);
 
         if(osc_rewrite_enabled()) {
@@ -490,8 +490,8 @@
                     // TODO CHANGE TO NEW ROUTES!!
                     return $base_url . 'index.php?page=search&sCategory=' . urlencode($params['sCategory']);
                 }
-                if(isset($params['iPage']) && $params['iPage']!='' && $params['iPage']!=1) { $url .= '/'.$params['iPage']; };
-                $url = $base_url.$seo_prefix.$url;
+                if(isset($params['iPage']) && $params['iPage']!='' && $params['iPage']!=1) { $url .= '/'.$params['iPage']; }
+	            $url = $base_url.$seo_prefix.$url;
             } else if(isset($params['sRegion']) && is_string($params['sRegion']) && strpos($params['sRegion'], ',')===false &&
                 ($countP==1 || ($countP==2 && (isset($params['iPage']) || isset($params['sCategory']))) || ($countP==3 && isset($params['iPage']) && isset($params['sCategory'])))) {
                 $url = $base_url;
@@ -518,10 +518,10 @@
                             // Search by a region which does not exists (by form)
                             // TODO CHANGE TO NEW ROUTES!!
                             return $url . 'index.php?page=search&sRegion=' . urlencode($params['sRegion']);
-                        };
+                        }
                     }
                 }
-                if(isset($params['iPage']) && $params['iPage']!='' && $params['iPage']!=1) { $url .= '/'.$params['iPage']; };
+                if(isset($params['iPage']) && $params['iPage']!='' && $params['iPage']!=1) { $url .= '/'.$params['iPage']; }
             } else if(isset($params['sCity']) && !is_array($params['sCity']) && strpos($params['sCity'], ',')===false &&
                 ($countP==1 || ($countP==2 && (isset($params['iPage']) || isset($params['sCategory']))) || ($countP==3 && isset($params['iPage']) && isset($params['sCategory'])))) {
                 $url = $base_url;
@@ -547,10 +547,10 @@
                             // Search by a city which does not exists (by form)
                             // TODO CHANGE TO NEW ROUTES!!
                             return $url . 'index.php?page=search&sCity=' . urlencode($params['sCity']);
-                        };
+                        }
                     }
                 }
-                if(isset($params['iPage']) && $params['iPage']!='' && $params['iPage']!=1) { $url .= '/'.$params['iPage']; };
+                if(isset($params['iPage']) && $params['iPage']!='' && $params['iPage']!=1) { $url .= '/'.$params['iPage']; }
             } else if($params!=null && is_array($params)) {
                 foreach($params as $k => $v) {
                     switch($k) {

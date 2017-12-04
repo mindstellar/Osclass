@@ -255,9 +255,9 @@ function osc_doRequest($url, $_data) {
         // use localhost in case of issues with NATs (hairpinning)
         $fp = @fsockopen($host, 80);
         
-        if($fp===false) { return false; };
+        if($fp===false) { return false; }
 
-        $data = http_build_query($_data);
+	    $data = http_build_query($_data);
         $out  = "POST $path HTTP/1.1\r\n";
         $out .= "Host: $host\r\n";
         $out .= 'Referer: Osclass (v.' . osc_version() . ")\r\n";
@@ -706,8 +706,8 @@ if( !function_exists('http_chunked_decode') ) {
 function is_hex($hex) {
     // regex is for weenies
     $hex = strtolower(trim(ltrim( $hex, '0' )));
-    if (empty($hex)) { $hex = 0; };
-    $dec = hexdec($hex);
+    if (empty($hex)) { $hex = 0; }
+	$dec = hexdec($hex);
     return ($hex == dechex($dec));
 }
 
@@ -1233,23 +1233,23 @@ function osc_check_dir_writable( $dir = ABS_PATH ) {
                     if( str_replace( '//' , '/' , $dir) == ( ABS_PATH . 'oc-content/themes' )) {
                         if( $file == 'bender' || $file == 'index.php' ) {
                             $res = osc_check_dir_writable( str_replace( '//' , '/' , $dir . '/' . $file));
-                            if(!$res) { return false; };
+                            if(!$res) { return false; }
                         }
                     } else if( str_replace( '//' , '/' , $dir) == ( ABS_PATH . 'oc-content/plugins' )) {
                         if( $file == 'google_maps' || $file == 'google_analytics' || $file == 'index.php' ) {
                             $res = osc_check_dir_writable( str_replace( '//' , '/' , $dir . '/' . $file));
-                            if(!$res) { return false; };
+                            if(!$res) { return false; }
                         }
                     } else if( str_replace( '//' , '/' , $dir) == ( ABS_PATH . 'oc-content/languages' )) {
                         if( $file == 'en_US' || $file == 'index.php' ) {
                             $res = osc_check_dir_writable( str_replace( '//' , '/' , $dir . '/' . $file));
-                            if(!$res) { return false; };
+                            if(!$res) { return false; }
                         }
                     } else if( str_replace( '//' , '/' , $dir) == ( ABS_PATH . 'oc-content/downloads' )) {
                     } else if( str_replace( '//' , '/' , $dir) == osc_uploads_path() ) {
                     } else {
                         $res = osc_check_dir_writable( str_replace( '//' , '/' , $dir . '/' . $file));
-                        if(!$res) { return false; };
+                        if(!$res) { return false; }
                     }
                 } else {
                     return is_writable( str_replace( '//' , '/' , $dir . '/' . $file));
@@ -1275,28 +1275,28 @@ function osc_change_permissions( $dir = ABS_PATH ) {
                 if(is_dir(str_replace( '//' , '/' , $dir . '/' . $file))) {
                     if(!is_writable(str_replace( '//' , '/' , $dir . '/' . $file))) {
                         $res = @chmod( str_replace( '//' , '/' , $dir . '/' . $file), 0777);
-                        if(!$res) { return false; };
+                        if(!$res) { return false; }
                     }
                     if( str_replace( '//' , '/' , $dir) == ( ABS_PATH . 'oc-content/themes' )) {
                         if( $file == 'modern' || $file == 'index.php' ) {
                             $res = osc_change_permissions( str_replace( '//' , '/' , $dir . '/' . $file));
-                            if(!$res) { return false; };
+                            if(!$res) { return false; }
                         }
                     } else if( str_replace( '//' , '/' , $dir) == ( ABS_PATH . 'oc-content/plugins' )) {
                         if( $file == 'google_maps' || $file == 'google_analytics' || $file == 'index.php' ) {
                             $res = osc_change_permissions( str_replace( '//' , '/' , $dir . '/' . $file));
-                            if(!$res) { return false; };
+                            if(!$res) { return false; }
                         }
                     } else if( str_replace( '//' , '/' , $dir) == ( ABS_PATH . 'oc-content/languages' )) {
                         if( $file == 'en_US' || $file == 'index.php' ) {
                             $res = osc_change_permissions( str_replace( '//' , '/' , $dir . '/' . $file));
-                            if(!$res) { return false; };
+                            if(!$res) { return false; }
                         }
                     } else if( str_replace( '//' , '/' , $dir) == ( ABS_PATH . 'oc-content/downloads' )) {
                     } else if( str_replace( '//' , '/' , $dir) == osc_uploads_path() ) {
                     } else {
                         $res = osc_change_permissions( str_replace( '//' , '/' , $dir . '/' . $file));
-                        if(!$res) { return false; };
+                        if(!$res) { return false; }
                     }
                 } else {
                     if(!is_writable(str_replace( '//' , '/' , $dir . '/' . $file))) {
@@ -1840,7 +1840,7 @@ function osc_do_upgrade() {
                             $data = osc_copy($tmp_path.$_file, ABS_PATH.$_file);
                             if ($data == false) {
                                 $fail = 1;
-                            };
+                            }
                         }
                     }
                     closedir($handle);
@@ -2127,7 +2127,7 @@ function osc_market($section, $code) {
                                 $copyprocess = osc_copy( osc_content_path() . 'downloads/oc-temp/' . $_file, $folder_dest . $_file);
                                 if ($copyprocess == false) {
                                     $fail = 1;
-                                };
+                                }
                             }
                         }
                         closedir($handle);

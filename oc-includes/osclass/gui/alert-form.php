@@ -76,7 +76,7 @@ $(document).ready(function(){
                     <?php AlertForm::user_id_hidden(); ?>
                     <?php AlertForm::email_text(); ?>
 
-                <?php }; ?>
+                <?php } ?>
                 <button type="submit" class="sub_button" ><?php _e('Subscribe now', 'bender'); ?>!</button>
         </form>
     <?php } ?>

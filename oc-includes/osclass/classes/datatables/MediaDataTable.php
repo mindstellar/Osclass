@@ -55,19 +55,19 @@
             if(Params::getParam('sort') == 'date') {
                 if(Params::getParam('direction') == 'desc') {
                     $arg_date .= '&direction=asc';
-                };
+                }
             }
             $arg_item = '&sort=attached_to';
             if(Params::getParam('sort') == 'attached_to') {
                 if(Params::getParam('direction') == 'desc') {
                     $arg_item .= '&direction=asc';
-                };
+                }
             }
 
             Rewrite::newInstance()->init();
             $page  = (int)Params::getParam('iPage');
-            if($page==0) { $page = 1; };
-            Params::setParam('iPage', $page);
+            if($page==0) { $page = 1; }
+	        Params::setParam('iPage', $page);
             $url_base = preg_replace('|&direction=([^&]*)|', '', preg_replace('|&sort=([^&]*)|', '', osc_base_url().Rewrite::newInstance()->get_raw_request_uri()));
 
             $this->addColumn('bulkactions', '<input id="check_all" type="checkbox" />');

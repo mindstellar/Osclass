@@ -53,7 +53,7 @@
                 <li><a id="login_open" href="<?php echo osc_user_login_url(); ?>"><?php _e('Login', 'bender') ; ?></a></li>
                 <?php if(osc_user_registration_enabled()) { ?>
                     <li><a href="<?php echo osc_register_account_url() ; ?>"><?php _e('Register for a free account', 'bender'); ?></a></li>
-                <?php }; ?>
+                <?php } ?>
             <?php } ?>
             <?php } ?>
             <?php if( osc_users_enabled() || ( !osc_users_enabled() && !osc_reg_user_post() )) { ?>

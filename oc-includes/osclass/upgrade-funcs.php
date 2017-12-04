@@ -162,11 +162,11 @@ CREATE TABLE %st_item_description_tmp (
         $timezone = 'Europe/Madrid';
         if(ini_get('date.timezone')!='') {
             $timezone = ini_get('date.timezone');
-        };
-        if(date_default_timezone_get()!='') {
+        }
+	    if(date_default_timezone_get()!='') {
             $timezone = date_default_timezone_get();
-        };
-        $comm->query(sprintf("INSERT INTO %st_preference VALUES ('osclass', 'timezone', '%s', 'STRING')", DB_TABLE_PREFIX, $timezone));
+        }
+	    $comm->query(sprintf("INSERT INTO %st_preference VALUES ('osclass', 'timezone', '%s', 'STRING')", DB_TABLE_PREFIX, $timezone));
 
         // alert table pages order improvement
         $comm->query(sprintf( 'ALTER TABLE %st_pages ADD COLUMN i_order INT(3) NOT NULL DEFAULT 0  AFTER dt_mod_date;' , DB_TABLE_PREFIX));

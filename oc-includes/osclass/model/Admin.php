@@ -139,7 +139,7 @@
             if($user!==false && isset($user['s_password'])) {
                 if(osc_verify_password($password, $user['s_password'])) {
                     return $user;
-                };
+                }
             }
             return false;
         }

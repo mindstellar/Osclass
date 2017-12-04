@@ -177,7 +177,7 @@
             $this->dao->where('fk_i_category_id', $categoryId);
             $result = $this->dao->get();
             $data = $result->row();
-            if($data==null) { return 0; } else { return $data['i_num_items']; };
+            if($data==null) { return 0; } else { return $data['i_num_items']; }
         }
 
         /**

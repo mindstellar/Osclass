@@ -367,9 +367,9 @@
                         }
                     }
                 }
-            };
+            }
 
-            // hook pre add or edit
+	        // hook pre add or edit
             // DEPRECATED : preitem_psot will be removed in 3.4
             osc_run_hook('pre_item_post');
             osc_run_hook('pre_item_edit', $aItem, $flash_error);
@@ -1211,9 +1211,9 @@
                 unset($dt_expiration);
             } else {
                 $aItem['dt_expiration'] = '';
-            };
+            }
 
-            // check params
+	        // check params
             $country = Country::newInstance()->findByCode($aItem['countryId']);
             if( count($country) > 0 ) {
                 $countryId = $country['pk_c_code'];
@@ -1371,11 +1371,11 @@
                                 } else {
                                     $fileMime = '';
                                 }
-                            };
-                        };
+                            }
+                        }
 
 
-                        if(in_array($fileMime,$aMimesAllowed)) {
+	                    if(in_array($fileMime,$aMimesAllowed)) {
                             $bool_img = true;
                         }
                         if(!$bool_img && $success) {$success = false;}

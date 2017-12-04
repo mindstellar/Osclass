@@ -326,8 +326,8 @@
                         unset($files[Params::getParam('qquuid')]);
                         Session::newInstance()->_set('ajax_files', $files);
                         $success = @unlink(osc_content_path().'uploads/temp/'.$filename);
-                    };
-                    echo json_encode(array('success' => $success, 'uploadName' => $filename));
+                    }
+	                echo json_encode(array('success' => $success, 'uploadName' => $filename));
                     break;
                 default:
                     echo json_encode(array('error' => __('no action defined')));

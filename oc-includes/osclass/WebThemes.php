@@ -265,9 +265,9 @@
 
         public function getAvailableTemplates($theme = null)
         {
-            if($theme==null) { $theme = $this->theme; };
+            if($theme==null) { $theme = $this->theme; }
 
-            $templates = array();
+	        $templates = array();
             $dir = opendir( $this->path . $theme . '/' );
             while ($file = readdir($dir)) {
                 if (preg_match('/^template-[a-zA-Z0-9_\.]+$/', $file)) {

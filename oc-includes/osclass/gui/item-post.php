@@ -232,16 +232,16 @@
             while(price.indexOf('<?php echo osc_esc_js(osc_locale_thousands_sep());  ?>')!=-1) {
                 price = price.replace('<?php echo osc_esc_js(osc_locale_thousands_sep());  ?>', '');
             }
-            <?php }; ?>
+            <?php } ?>
             <?php if(osc_locale_dec_point()!='') { ?>
             var tmp = price.split('<?php echo osc_esc_js(osc_locale_dec_point())?>');
             if(tmp.length>2) {
                 price = tmp[0]+'<?php echo osc_esc_js(osc_locale_dec_point())?>'+tmp[1];
             }
-            <?php }; ?>
+            <?php } ?>
             $("#price").prop("value", price);
         });
     });
-    <?php }; ?>
+    <?php } ?>
 </script>
 <?php osc_current_web_theme_path('footer.php'); ?>

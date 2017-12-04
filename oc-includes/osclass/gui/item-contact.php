@@ -44,7 +44,7 @@ osc_enqueue_script('jquery-validate');
                         <?php } else { ?>
                             <label for="yourName"><?php _e('Your name', 'modern'); ?></label> <?php ContactForm::your_name(); ?><br />
                             <label for="yourEmail"><?php _e('Your e-mail address', 'modern'); ?></label> <?php ContactForm::your_email(); ?><br />
-                        <?php }; ?>
+                        <?php } ?>
                         <label for="phoneNumber"><?php _e('Phone number', 'modern'); ?> (<?php _e('optional', 'modern'); ?>)</label> <?php ContactForm::your_phone_number(); ?><br />
                         <label for="message"><?php _e('Message', 'modern'); ?></label> <?php ContactForm::your_message(); ?><br />
                         <?php osc_show_recaptcha(); ?>

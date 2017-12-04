@@ -760,8 +760,8 @@
      * @return string
      */
     function osc_item_edit_url($secret = '', $id = '') {
-        if ($id == '') { $id = osc_item_id(); };
-        if ( osc_rewrite_enabled() ) {
+        if ($id == '') { $id = osc_item_id(); }
+	    if ( osc_rewrite_enabled() ) {
             return osc_base_url() . osc_get_preference('rewrite_item_edit') . '/' . $id . '/' . $secret;
         } else {
             return osc_base_url(true) . '?page=item&action=item_edit&id=' . $id . ($secret != '' ? '&secret=' . $secret : '');
@@ -776,8 +776,8 @@
      * @return string
      */
     function osc_item_delete_url($secret = '', $id = '') {
-        if ($id == '') { $id = osc_item_id(); };
-        if ( osc_rewrite_enabled() ) {
+        if ($id == '') { $id = osc_item_id(); }
+	    if ( osc_rewrite_enabled() ) {
             return osc_base_url() . osc_get_preference('rewrite_item_delete') . '/' . $id . '/' . $secret;
         } else {
             return osc_base_url(true) . '?page=item&action=item_delete&id=' . $id . ($secret != '' ? '&secret=' . $secret : '');
@@ -792,8 +792,8 @@
      * @return string
      */
     function osc_item_activate_url($secret = '', $id = '') {
-        if ($id == '') { $id = osc_item_id(); };
-        if ( osc_rewrite_enabled() ) {
+        if ($id == '') { $id = osc_item_id(); }
+	    if ( osc_rewrite_enabled() ) {
             return osc_base_url() . osc_get_preference('rewrite_item_activate') . '/' . $id . '/' . $secret;
         } else {
             return osc_base_url(true) . '?page=item&action=activate&id=' . $id . ($secret != '' ? '&secret=' . $secret : '');
@@ -837,8 +837,8 @@
      */
     function osc_route_url($id, $args = array()) {
         $routes = Rewrite::newInstance()->getRoutes();
-        if(!isset($routes[$id])) { return ''; };
-        if ( osc_rewrite_enabled() ) {
+        if(!isset($routes[$id])) { return ''; }
+	    if ( osc_rewrite_enabled() ) {
             $uri = $routes[$id]['url'];
             $params_url = '';
             foreach($args as $k => $v) {
@@ -865,8 +865,8 @@
      */
     function osc_route_admin_url($id, $args = array()) {
         $routes = Rewrite::newInstance()->getRoutes();
-        if(!isset($routes[$id])) { return ''; };
-        $params_url = '';
+        if(!isset($routes[$id])) { return ''; }
+	    $params_url = '';
         foreach($args as $k => $v) {
             $params_url .= '&'.$k.'='.$v;
         }
@@ -880,8 +880,8 @@
      */
     function osc_route_ajax_url($id, $args = array()) {
         $routes = Rewrite::newInstance()->getRoutes();
-        if(!isset($routes[$id])) { return ''; };
-        $params_url = '';
+        if(!isset($routes[$id])) { return ''; }
+	    $params_url = '';
         foreach($args as $k => $v) {
             $params_url .= '&'.$k.'='.$v;
         }
@@ -895,8 +895,8 @@
      */
     function osc_route_admin_ajax_url($id, $args = array()) {
         $routes = Rewrite::newInstance()->getRoutes();
-        if(!isset($routes[$id])) { return ''; };
-        $params_url = '';
+        if(!isset($routes[$id])) { return ''; }
+	    $params_url = '';
         foreach($args as $k => $v) {
             $params_url .= '&'.$k.'='.$v;
         }
