@@ -18,13 +18,19 @@
  * limitations under the License.
  */
 
-    class Plugins
+	/**
+	 * Class Plugins
+	 */
+	class Plugins
     {
         private static $hooks;
 
         public function __construct() {}
 
-        public static function runHook($hook)
+		/**
+		 * @param $hook
+		 */
+		public static function runHook( $hook )
         {
             $args = func_get_args();
             array_shift($args);
@@ -41,7 +47,12 @@
             }
         }
 
-        public static function applyFilter($hook)
+		/**
+		 * @param $hook
+		 *
+		 * @return mixed|string
+		 */
+		public static function applyFilter( $hook )
         {
             $args   = func_get_args();
             $hook   = array_shift($args);
@@ -66,7 +77,12 @@
             return $content;
         }
 
-        public static function isInstalled($plugin)
+		/**
+		 * @param $plugin
+		 *
+		 * @return bool
+		 */
+		public static function isInstalled( $plugin )
         {
             if( in_array($plugin, self::listInstalled()) ) {
                 return true;
@@ -75,7 +91,12 @@
             return false;
         }
 
-        public static function isEnabled($plugin)
+		/**
+		 * @param $plugin
+		 *
+		 * @return bool
+		 */
+		public static function isEnabled( $plugin )
         {
             if( in_array($plugin, self::listEnabled()) ) {
                 return true;
@@ -84,7 +105,12 @@
             return false;
         }
 
-        public static function listAll($sort = true)
+		/**
+		 * @param bool $sort
+		 *
+		 * @return array
+		 */
+		public static function listAll( $sort = true )
         {
             $plugins = array();
             $pluginsPath = osc_plugins_path();
@@ -134,7 +160,13 @@
             return $plugins;
         }
 
-        public static function strnatcmpCustom($a, $b) {
+		/**
+		 * @param $a
+		 * @param $b
+		 *
+		 * @return int
+		 */
+		public static function strnatcmpCustom( $a , $b ) {
             return strnatcasecmp($a['plugin_name'], $b['plugin_name']);
         }
 
@@ -153,7 +185,10 @@
             }
         }
 
-        public static function listInstalled()
+		/**
+		 * @return array
+		 */
+		public static function listInstalled()
         {
             $p_array = array();
 
@@ -168,7 +203,10 @@
             return $p_array;
         }
 
-        public static function listEnabled()
+		/**
+		 * @return array
+		 */
+		public static function listEnabled()
         {
             $p_array = array();
 
@@ -183,7 +221,12 @@
             return $p_array;
         }
 
-        public static function findByUpdateURI($uri) {
+		/**
+		 * @param $uri
+		 *
+		 * @return bool|mixed
+		 */
+		public static function findByUpdateURI( $uri ) {
 	        $plugins = self::listAll();
             foreach($plugins as $p) {
 	            $info = self::getInfo( $p );
@@ -194,13 +237,22 @@
             return false;
         }
 
-        public static function resource($path)
+		/**
+		 * @param $path
+		 *
+		 * @return bool|string
+		 */
+		public static function resource( $path )
         {
             $fullPath = osc_plugins_path() . $path;
             return file_exists($fullPath) ? $fullPath : false;
         }
 
-        public static function register($path, $function)
+		/**
+		 * @param $path
+		 * @param $function
+		 */
+		public static function register( $path , $function )
         {
             $path = str_replace(osc_plugins_path(), '', $path);
             $tmp = explode( 'oc-content/plugins/' , $path);
@@ -210,7 +262,12 @@
             self::addHook('install_' . $path, $function);
         }
 
-        public static function install($path)
+		/**
+		 * @param $path
+		 *
+		 * @return array|bool
+		 */
+		public static function install( $path )
         {
             osc_run_hook( 'before_plugin_install' );
 
@@ -250,7 +307,12 @@
             return true;
         }
 
-        public static function uninstall($path)
+		/**
+		 * @param $path
+		 *
+		 * @return bool
+		 */
+		public static function uninstall( $path )
         {
             osc_run_hook( 'before_plugin_uninstall' );
 
@@ -287,7 +349,12 @@
             return true;
         }
 
-        public static function activate($path)
+		/**
+		 * @param $path
+		 *
+		 * @return bool
+		 */
+		public static function activate( $path )
         {
             osc_run_hook( 'before_plugin_activate' );
 
@@ -311,7 +378,12 @@
             return true;
         }
 
-        public static function deactivate($path)
+		/**
+		 * @param $path
+		 *
+		 * @return bool
+		 */
+		public static function deactivate( $path )
         {
             osc_run_hook( 'before_plugin_deactivate' );
 
@@ -343,12 +415,23 @@
             return true;
         }
 
-        public static function isThisCategory($name, $id)
+		/**
+		 * @param $name
+		 * @param $id
+		 *
+		 * @return mixed
+		 */
+		public static function isThisCategory( $name , $id )
         {
             return PluginCategory::newInstance()->isThisCategory($name, $id);
         }
 
-        public static function getInfo($plugin)
+		/**
+		 * @param $plugin
+		 *
+		 * @return array
+		 */
+		public static function getInfo( $plugin )
         {
             $s_info = file_get_contents(osc_plugins_path() . $plugin);
             $info   = array();
@@ -411,13 +494,21 @@
             return $info;
         }
 
-        public static function checkUpdate($plugin) {
+		/**
+		 * @param $plugin
+		 *
+		 * @return bool
+		 */
+		public static function checkUpdate( $plugin ) {
 	        $info = self::getInfo( $plugin );
             return osc_check_plugin_update($info['plugin_update_uri'], $info['version']);
         }
 
 
-        public static function configureView($path)
+		/**
+		 * @param $path
+		 */
+		public static function configureView( $path )
         {
             $plugin = str_replace(osc_plugins_path(), '', $path);
             if( stripos( $plugin, '.php' ) === FALSE) {
@@ -435,14 +526,21 @@
             osc_redirect_to(osc_plugin_configure_url($plugin));
         }
 
-        public static function cleanCategoryFromPlugin($plugin)
+		/**
+		 * @param $plugin
+		 */
+		public static function cleanCategoryFromPlugin( $plugin )
         {
             $dao_pluginCategory = new PluginCategory();
             $dao_pluginCategory->delete(array('s_plugin_name' => $plugin));
             unset($dao_pluginCategory);
         }
 
-        public static function addToCategoryPlugin($categories, $plugin)
+		/**
+		 * @param $categories
+		 * @param $plugin
+		 */
+		public static function addToCategoryPlugin( $categories , $plugin )
         {
             $dao_pluginCategory = new PluginCategory();
             $dao_category = new Category();
@@ -472,7 +570,13 @@
         }
 
         // Add a hook
-        public static function addHook($hook, $function, $priority = 5)
+
+		/**
+		 * @param     $hook
+		 * @param     $function
+		 * @param int $priority
+		 */
+		public static function addHook( $hook , $function , $priority = 5 )
         {
             $hook         = preg_replace('|/+|', '/', str_replace('\\', '/', $hook));
             $plugin_path  = str_replace('\\', '/', osc_plugins_path());
@@ -493,7 +597,11 @@
             if(!$found_plugin) { self::$hooks[$hook][$priority][] = $function; }
         }
 
-        public static function removeHook($hook, $function)
+		/**
+		 * @param $hook
+		 * @param $function
+		 */
+		public static function removeHook( $hook , $function )
         {
             for($priority = 0;$priority<=10;$priority++) {
                 if(isset(self::$hooks[$hook][$priority])) {

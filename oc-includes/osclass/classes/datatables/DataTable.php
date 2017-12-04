@@ -46,9 +46,11 @@
         }
 
 
-        /**
-         * FUNCTIONS THAT SHOULD BE REDECLARED IN SUB-CLASSES
-         */
+	    /**
+	     * FUNCTIONS THAT SHOULD BE REDECLARED IN SUB-CLASSES
+	     *
+	     * @param null $results
+	     */
         public function setResults($results = null) {
             if(is_array($results)) {
                 $this->start = 0;
@@ -83,31 +85,41 @@
          */
 
 
-        /**
-         * Add a colum
-         * @param type $id
-         * @param type $text
-         * @param type $priority
-         */
+	    /**
+	     * Add a colum
+	     *
+	     * @param type $id
+	     * @param type $text
+	     * @param int  $priority
+	     */
         public function addColumn($id, $text, $priority = 5)
         {
             $this->removeColumn($id);
             $this->aColumns[$priority][$id] = $text;
         }
 
-        public function removeColumn($id)
+	    /**
+	     * @param $id
+	     */
+	    public function removeColumn($id)
         {
             for($priority=1;$priority<=10;$priority++) {
                 unset($this->aColumns[$priority][$id]);
             }
         }
 
-        protected function addRow($aRow)
+	    /**
+	     * @param $aRow
+	     */
+	    protected function addRow($aRow)
         {
             $this->aRows[] = $aRow;
         }
 
-        public function sortedColumns()
+	    /**
+	     * @return array
+	     */
+	    public function sortedColumns()
         {
             $columns_ordered = array();
             for($priority=1;$priority<=10;$priority++) {
@@ -120,7 +132,10 @@
             return $columns_ordered;
         }
 
-        public function sortedRows()
+	    /**
+	     * @return array
+	     */
+	    public function sortedRows()
         {
             $rows = array();
             $columns = $this->sortedColumns();
@@ -141,7 +156,10 @@
             return $rows;
         }
 
-        public function getData()
+	    /**
+	     * @return array
+	     */
+	    public function getData()
         {
             return array(
                     'aColumns'              => $this->sortedColumns()
@@ -153,7 +171,10 @@
             );
         }
 
-        public function rawRows()
+	    /**
+	     * @return array
+	     */
+	    public function rawRows()
         {
             return $this->rawRows;
         }

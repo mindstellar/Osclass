@@ -36,7 +36,10 @@
             $this->aMenu = array();
         }
 
-        public static function newInstance()
+	    /**
+	     * @return \AdminMenu
+	     */
+	    public static function newInstance()
         {
             if(!self::$instance instanceof self) {
                 self::$instance = new self;
@@ -137,25 +140,25 @@
             $this->aMenu[$menu_id] = $array;
         }
 
-        /**
-         * Remove menu and submenus under menu with id $id_menu
-         *
-         * @param type $id_menu
-         */
+	    /**
+	     * Remove menu and submenus under menu with id $id_menu
+	     *
+	     * @param $menu_id
+	     */
         public function remove_menu( $menu_id )
         {
             unset( $this->aMenu[$menu_id] );
         }
 
-        /**
-         * Add submenu under menu id $menu_id
-         *
-         * @param type $menu_id
-         * @param type $submenu_title
-         * @param type $url
-         * @param type $id_submenu
-         * @param type $capability
-         */
+	    /**
+	     * Add submenu under menu id $menu_id
+	     *
+	     * @param type $menu_id
+	     * @param type $submenu_title
+	     * @param type $url
+	     * @param      $submenu_id
+	     * @param type $capability
+	     */
         public function add_submenu( $menu_id, $submenu_title, $url, $submenu_id, $capability = null)
         {
             $array = array(
@@ -168,26 +171,27 @@
             $this->aMenu[$menu_id]['sub'][$submenu_id] = $array;
         }
 
-        /**
-         * Remove submenu with id $id_submenu under menu id $id_menu
-         *
-         * @param type $id_menu
-         * @param type $id_submenu
-         */
+	    /**
+	     * Remove submenu with id $id_submenu under menu id $id_menu
+	     *
+	     * @param $menu_id
+	     * @param $submenu_id
+	     */
         public function remove_submenu( $menu_id, $submenu_id )
         {
             unset( $this->aMenu[$menu_id]['sub'][$submenu_id] );
         }
 
-        /**
-         * Add submenu under menu id $menu_id
-         *
-         * @param type $menu_id
-         * @param type $submenu_title
-         * @param type $id_submenu
-         * @param type $capability
-         * @since 3.1
-         */
+	    /**
+	     * Add submenu under menu id $menu_id
+	     *
+	     * @param type $menu_id
+	     * @param type $submenu_title
+	     * @param      $submenu_id
+	     * @param type $capability
+	     *
+	     * @since 3.1
+	     */
         public function add_submenu_divider( $menu_id, $submenu_title, $submenu_id, $capability = null)
         {
             $array                                                   = array(
@@ -199,70 +203,135 @@
             $this->aMenu[$menu_id]['sub'][ 'divider_' . $submenu_id] = $array;
         }
 
-        /**
-         * Remove submenu with id $id_submenu under menu id $id_menu
-         *
-         * @param type $id_menu
-         * @param type $id_submenu
-         * @since 3.1
-         */
+	    /**
+	     * Remove submenu with id $id_submenu under menu id $id_menu
+	     *
+	     * @param $menu_id
+	     * @param $submenu_id
+	     *
+	     * @since 3.1
+	     */
         public function remove_submenu_divider( $menu_id, $submenu_id )
         {
             unset( $this->aMenu[$menu_id]['sub'][ 'divider_' . $submenu_id] );
         }
 
-        /**
-         * Return menu as array
-         *
-         * @return type
-         */
+	    /**
+	     * Return menu as array
+	     *
+	     * @return array
+	     */
         public function get_array_menu()
         {
             return $this->aMenu;
         }
 
         // common functions
-        public function add_menu_items( $submenu_title, $url, $submenu_id, $capability = null, $icon_url = null )
+
+	    /**
+	     * @param      $submenu_title
+	     * @param      $url
+	     * @param      $submenu_id
+	     * @param null $capability
+	     * @param null $icon_url
+	     */
+	    public function add_menu_items( $submenu_title , $url , $submenu_id , $capability = null , $icon_url = null )
         {
             $this->add_submenu('items', $submenu_title, $url, $submenu_id, $capability, $icon_url);
         }
 
-        public function add_menu_categories( $submenu_title, $url, $submenu_id, $capability = null, $icon_url = null )
+	    /**
+	     * @param      $submenu_title
+	     * @param      $url
+	     * @param      $submenu_id
+	     * @param null $capability
+	     * @param null $icon_url
+	     */
+	    public function add_menu_categories( $submenu_title , $url , $submenu_id , $capability = null , $icon_url = null )
         {
             $this->add_submenu('categories', $submenu_title, $url, $submenu_id, $capability, $icon_url);
         }
 
-        public function add_menu_pages( $submenu_title, $url, $submenu_id, $capability = null, $icon_url = null )
+	    /**
+	     * @param      $submenu_title
+	     * @param      $url
+	     * @param      $submenu_id
+	     * @param null $capability
+	     * @param null $icon_url
+	     */
+	    public function add_menu_pages( $submenu_title , $url , $submenu_id , $capability = null , $icon_url = null )
         {
             $this->add_submenu('pages', $submenu_title, $url, $submenu_id, $capability, $icon_url);
         }
 
-        public function add_menu_appearance( $submenu_title, $url, $submenu_id, $capability = null, $icon_url = null )
+	    /**
+	     * @param      $submenu_title
+	     * @param      $url
+	     * @param      $submenu_id
+	     * @param null $capability
+	     * @param null $icon_url
+	     */
+	    public function add_menu_appearance( $submenu_title , $url , $submenu_id , $capability = null , $icon_url = null )
         {
             $this->add_submenu('appearance', $submenu_title, $url, $submenu_id, $capability, $icon_url);
         }
 
-        public function add_menu_plugins( $submenu_title, $url, $submenu_id, $capability = null, $icon_url = null )
+	    /**
+	     * @param      $submenu_title
+	     * @param      $url
+	     * @param      $submenu_id
+	     * @param null $capability
+	     * @param null $icon_url
+	     */
+	    public function add_menu_plugins( $submenu_title , $url , $submenu_id , $capability = null , $icon_url = null )
         {
             $this->add_submenu('plugins', $submenu_title, $url, $submenu_id, $capability, $icon_url);
         }
 
-        public function add_menu_settings( $submenu_title, $url, $submenu_id, $capability = null, $icon_url = null )
+	    /**
+	     * @param      $submenu_title
+	     * @param      $url
+	     * @param      $submenu_id
+	     * @param null $capability
+	     * @param null $icon_url
+	     */
+	    public function add_menu_settings( $submenu_title , $url , $submenu_id , $capability = null , $icon_url = null )
         {
             $this->add_submenu('settings', $submenu_title, $url, $submenu_id, $capability, $icon_url);
         }
 
-        public function add_menu_tools( $submenu_title, $url, $submenu_id, $capability = null, $icon_url = null )
+	    /**
+	     * @param      $submenu_title
+	     * @param      $url
+	     * @param      $submenu_id
+	     * @param null $capability
+	     * @param null $icon_url
+	     */
+	    public function add_menu_tools( $submenu_title , $url , $submenu_id , $capability = null , $icon_url = null )
         {
             $this->add_submenu('tools', $submenu_title, $url, $submenu_id, $capability, $icon_url);
         }
 
-        public function add_menu_users( $submenu_title, $url, $submenu_id, $capability = null, $icon_url = null )
+	    /**
+	     * @param      $submenu_title
+	     * @param      $url
+	     * @param      $submenu_id
+	     * @param null $capability
+	     * @param null $icon_url
+	     */
+	    public function add_menu_users( $submenu_title , $url , $submenu_id , $capability = null , $icon_url = null )
         {
             $this->add_submenu('users', $submenu_title, $url, $submenu_id, $capability, $icon_url);
         }
 
-        public function add_menu_stats( $submenu_title, $url, $submenu_id, $capability = null, $icon_url = null )
+	    /**
+	     * @param      $submenu_title
+	     * @param      $url
+	     * @param      $submenu_id
+	     * @param null $capability
+	     * @param null $icon_url
+	     */
+	    public function add_menu_stats( $submenu_title , $url , $submenu_id , $capability = null , $icon_url = null )
         {
             $this->add_submenu('stats', $submenu_title, $url, $submenu_id, $capability, $icon_url);
         }

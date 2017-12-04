@@ -18,7 +18,10 @@
  * limitations under the License.
  */
 
-    class CWebUser extends WebSecBaseModel
+	/**
+	 * Class CWebUser
+	 */
+	class CWebUser extends WebSecBaseModel
     {
         public function __construct()
         {
@@ -282,7 +285,13 @@
         }
 
         //hopefully generic...
-        public function doView($file)
+
+		/**
+		 * @param $file
+		 *
+		 * @return mixed|void
+		 */
+		public function doView( $file )
         {
             osc_run_hook( 'before_html' );
             osc_current_web_theme_path($file);

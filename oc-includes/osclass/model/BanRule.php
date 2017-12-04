@@ -29,7 +29,10 @@
          */
         private static $instance;
 
-        public static function newInstance()
+	    /**
+	     * @return \BanRule|\type
+	     */
+	    public static function newInstance()
         {
             if( !self::$instance instanceof self ) {
                 self::$instance = new self;
@@ -54,18 +57,21 @@
             $this->setFields($array_fields);
         }
 
-        /**
-         * Return list of ban rules
-         *
-         * @access public
-         * @since 3.1
-         * @param int $start
-         * @param int $end
-         * @param string $order_column
-         * @param string $order_direction
-         * @parma string $name
-         * @return array
-         */
+	    /**
+	     * Return list of ban rules
+	     *
+	     * @access public
+	     * @since  3.1
+	     *
+	     * @param int    $start
+	     * @param int    $end
+	     * @param string $order_column
+	     * @param string $order_direction
+	     * @param string $name
+	     *
+	     * @return array
+	     * @parma  string $name
+	     */
         public function search($start = 0, $end = 10, $order_column = 'pk_i_id', $order_direction = 'DESC', $name = '')
         {
             // SET data, so we always return a valid object

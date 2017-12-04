@@ -18,7 +18,12 @@
  * limitations under the License.
  */
 
-    function fn_email_alert_validation($alert, $email, $secret) {
+	/**
+	 * @param $alert
+	 * @param $email
+	 * @param $secret
+	 */
+	function fn_email_alert_validation( $alert , $email , $secret ) {
         $user['s_name'] = '';
 
         // send alert validation email
@@ -58,7 +63,14 @@
     }
     osc_add_hook('hook_email_alert_validation', 'fn_email_alert_validation');
 
-    function fn_alert_email_hourly($user, $ads, $s_search, $items, $totalItems) {
+	/**
+	 * @param $user
+	 * @param $ads
+	 * @param $s_search
+	 * @param $items
+	 * @param $totalItems
+	 */
+	function fn_alert_email_hourly( $user , $ads , $s_search , $items , $totalItems ) {
         $prefLocale = osc_language();
         $page = Page::newInstance()->findByInternalName('alert_email_hourly');
         $page_description = $page['locale'];
@@ -104,7 +116,14 @@
     }
     osc_add_hook('hook_alert_email_hourly', 'fn_alert_email_hourly');
 
-    function fn_alert_email_daily($user, $ads, $s_search, $items, $totalItems) {
+	/**
+	 * @param $user
+	 * @param $ads
+	 * @param $s_search
+	 * @param $items
+	 * @param $totalItems
+	 */
+	function fn_alert_email_daily( $user , $ads , $s_search , $items , $totalItems ) {
         $prefLocale = osc_language();
         $page = Page::newInstance()->findByInternalName('alert_email_daily');
         $page_description = $page['locale'];
@@ -150,7 +169,14 @@
     }
     osc_add_hook('hook_alert_email_daily', 'fn_alert_email_daily');
 
-    function fn_alert_email_weekly($user, $ads, $s_search, $items, $totalItems) {
+	/**
+	 * @param $user
+	 * @param $ads
+	 * @param $s_search
+	 * @param $items
+	 * @param $totalItems
+	 */
+	function fn_alert_email_weekly( $user , $ads , $s_search , $items , $totalItems ) {
         $prefLocale = osc_language();
         $page = Page::newInstance()->findByInternalName('alert_email_weekly');
         $page_description = $page['locale'];
@@ -196,7 +222,14 @@
     }
     osc_add_hook('hook_alert_email_weekly', 'fn_alert_email_weekly');
 
-    function fn_alert_email_instant($user, $ads, $s_search, $items, $totalItems) {
+	/**
+	 * @param $user
+	 * @param $ads
+	 * @param $s_search
+	 * @param $items
+	 * @param $totalItems
+	 */
+	function fn_alert_email_instant( $user , $ads , $s_search , $items , $totalItems ) {
         $prefLocale = osc_language();
         $page = Page::newInstance()->findByInternalName('alert_email_instant');
         $page_description = $page['locale'];
@@ -242,7 +275,10 @@
     }
     osc_add_hook('hook_alert_email_instant', 'fn_alert_email_instant');
 
-    function fn_email_comment_validated($aComment) {
+	/**
+	 * @param $aComment
+	 */
+	function fn_email_comment_validated( $aComment ) {
         $mPages = new Page();
         $locale = osc_current_user_locale();
         $aPage = $mPages->findByInternalName('email_comment_validated');
@@ -289,7 +325,10 @@
     }
     osc_add_hook('hook_email_comment_validated', 'fn_email_comment_validated');
 
-    function fn_email_new_item_non_register_user($item) {
+	/**
+	 * @param $item
+	 */
+	function fn_email_new_item_non_register_user( $item ) {
         $mPages = new Page();
         $aPage = $mPages->findByInternalName('email_new_item_non_register_user');
         $locale = osc_current_user_locale();
@@ -346,7 +385,11 @@
     }
     osc_add_hook('hook_email_new_item_non_register_user', 'fn_email_new_item_non_register_user');
 
-    function fn_email_user_forgot_password($user, $password_url) {
+	/**
+	 * @param $user
+	 * @param $password_url
+	 */
+	function fn_email_user_forgot_password( $user , $password_url ) {
         $aPage = Page::newInstance()->findByInternalName('email_user_forgot_password');
         $locale = osc_current_user_locale();
 
@@ -389,7 +432,10 @@
     }
     osc_add_hook('hook_email_user_forgot_password', 'fn_email_user_forgot_password');
 
-    function fn_email_user_registration($user) {
+	/**
+	 * @param $user
+	 */
+	function fn_email_user_registration( $user ) {
         $pageManager = new Page();
         $locale = osc_current_user_locale();
         $aPage = $pageManager->findByInternalName('email_user_registration');
@@ -427,7 +473,11 @@
     }
     osc_add_hook('hook_email_user_registration', 'fn_email_user_registration');
 
-    function fn_email_new_email($new_email, $validation_url) {
+	/**
+	 * @param $new_email
+	 * @param $validation_url
+	 */
+	function fn_email_new_email( $new_email , $validation_url ) {
         $locale = osc_current_user_locale();
         $aPage = Page::newInstance()->findByInternalName('email_new_email');
 
@@ -470,7 +520,11 @@
     }
     osc_add_hook('hook_email_new_email', 'fn_email_new_email');
 
-    function fn_email_user_validation($user, $input) {
+	/**
+	 * @param $user
+	 * @param $input
+	 */
+	function fn_email_user_validation( $user , $input ) {
         $mPages = new Page();
         $locale = osc_current_user_locale();
         $aPage = $mPages->findByInternalName('email_user_validation');
@@ -512,7 +566,10 @@
     }
     osc_add_hook('hook_email_user_validation', 'fn_email_user_validation');
 
-    function fn_email_send_friend($aItem) {
+	/**
+	 * @param $aItem
+	 */
+	function fn_email_send_friend( $aItem ) {
         $mPages = new Page();
         $aPage = $mPages->findByInternalName('email_send_friend');
         $locale = osc_current_user_locale();
@@ -569,7 +626,10 @@
     }
     osc_add_hook('hook_email_send_friend', 'fn_email_send_friend');
 
-    function fn_email_item_inquiry($aItem) {
+	/**
+	 * @param $aItem
+	 */
+	function fn_email_item_inquiry( $aItem ) {
         $id         = $aItem['id'];
         $yourEmail  = $aItem['yourEmail'];
         $yourName   = $aItem['yourName'];
@@ -662,7 +722,10 @@
     }
     osc_add_hook('hook_email_item_inquiry', 'fn_email_item_inquiry');
 
-    function fn_email_new_comment_admin($aItem) {
+	/**
+	 * @param $aItem
+	 */
+	function fn_email_new_comment_admin( $aItem ) {
         $authorName  = trim(strip_tags($aItem['authorName']));
         $authorEmail = trim(strip_tags($aItem['authorEmail']));
         $body        = trim($aItem['body']);
@@ -723,7 +786,10 @@
     }
     osc_add_hook('hook_email_new_comment_admin', 'fn_email_new_comment_admin');
 
-    function fn_email_item_validation($item) {
+	/**
+	 * @param $item
+	 */
+	function fn_email_item_validation( $item ) {
         View::newInstance()->_exportVariableToView('item', $item);
         $contactEmail   = $item['s_contact_email'];
         $contactName    = $item['s_contact_name'];
@@ -811,7 +877,10 @@
     }
     osc_add_hook('hook_email_item_validation', 'fn_email_item_validation');
 
-    function fn_email_admin_new_item($item) {
+	/**
+	 * @param $item
+	 */
+	function fn_email_admin_new_item( $item ) {
         View::newInstance()->_exportVariableToView('item', $item);
         $title  = osc_item_title();
         $mPages = new Page();
@@ -905,7 +974,10 @@
     }
     osc_add_hook('hook_email_admin_new_item', 'fn_email_admin_new_item');
 
-    function fn_email_item_validation_non_register_user($item) {
+	/**
+	 * @param $item
+	 */
+	function fn_email_item_validation_non_register_user( $item ) {
         View::newInstance()->_exportVariableToView('item', $item);
 
         $mPages = new Page();
@@ -1003,7 +1075,10 @@
     }
     osc_add_hook('hook_email_item_validation_non_register_user', 'fn_email_item_validation_non_register_user');
 
-    function fn_email_admin_new_user($user) {
+	/**
+	 * @param $user
+	 */
+	function fn_email_admin_new_user( $user ) {
         $pageManager = new Page();
         $locale      = osc_current_user_locale();
         $aPage       = $pageManager->findByInternalName('email_admin_new_user');
@@ -1040,7 +1115,14 @@
     }
     osc_add_hook('hook_email_admin_new_user', 'fn_email_admin_new_user');
 
-    function fn_email_contact_user($id, $yourEmail, $yourName, $phoneNumber, $message) {
+	/**
+	 * @param $id
+	 * @param $yourEmail
+	 * @param $yourName
+	 * @param $phoneNumber
+	 * @param $message
+	 */
+	function fn_email_contact_user( $id , $yourEmail , $yourName , $phoneNumber , $message ) {
         $mPages = new Page();
         $aPage = $mPages->findByInternalName('email_contact_user');
         $locale = osc_current_user_locale();
@@ -1088,7 +1170,10 @@
     }
     osc_add_hook('hook_email_contact_user', 'fn_email_contact_user');
 
-    function fn_email_new_comment_user($aItem) {
+	/**
+	 * @param $aItem
+	 */
+	function fn_email_new_comment_user( $aItem ) {
         $authorName  = trim(strip_tags($aItem['authorName']));
         $authorEmail = trim(strip_tags($aItem['authorEmail']));
         $body        = trim(strip_tags($aItem['body']));
@@ -1152,7 +1237,10 @@
     }
     osc_add_hook('hook_email_new_comment_user', 'fn_email_new_comment_user');
 
-    function fn_email_new_admin($data) {
+	/**
+	 * @param $data
+	 */
+	function fn_email_new_admin( $data ) {
 
         $name       = trim(strip_tags($data['s_name']));
         $username   = trim(strip_tags($data['s_username']));
@@ -1196,7 +1284,10 @@
     osc_add_hook('hook_email_new_admin', 'fn_email_new_admin');
 
 
-    function fn_email_warn_expiration($aItem) {
+	/**
+	 * @param $aItem
+	 */
+	function fn_email_warn_expiration( $aItem ) {
         $itemId      = $aItem['pk_i_id'];
         $admin_email = osc_contact_email();
 
@@ -1254,7 +1345,10 @@
     }
     osc_add_hook('hook_email_warn_expiration', 'fn_email_warn_expiration');
 
-    function fn_email_auto_upgrade($result) {
+	/**
+	 * @param $result
+	 */
+	function fn_email_auto_upgrade( $result ) {
 
 
         $body = __('<p>Dear {WEB_TITLE} admin,</p>');
@@ -1299,7 +1393,10 @@
     osc_add_hook('after_auto_upgrade', 'fn_email_auto_upgrade', 10);
 
 
-    function _osc_from_email_aux() {
+	/**
+	 * @return string
+	 */
+	function _osc_from_email_aux() {
         $tmp = osc_mailserver_mail_from();
         return !empty($tmp)?$tmp:osc_contact_email();
     }

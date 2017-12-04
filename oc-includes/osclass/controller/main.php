@@ -18,7 +18,10 @@
  * limitations under the License.
  */
 
-    class CWebMain extends BaseModel
+	/**
+	 * Class CWebMain
+	 */
+	class CWebMain extends BaseModel
     {
         public function __construct()
         {
@@ -49,7 +52,13 @@
         }
 
         //hopefully generic...
-        public function doView($file)
+
+		/**
+		 * @param $file
+		 *
+		 * @return mixed|void
+		 */
+		public function doView( $file )
         {
             osc_run_hook( 'before_html' );
             osc_current_web_theme_path($file);

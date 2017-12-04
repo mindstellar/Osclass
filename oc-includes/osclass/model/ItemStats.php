@@ -133,14 +133,13 @@
             }
         }
 
-        /**
-         * Return number of views of an item
-         *
-         * @access public
-         * @since 2.3.3
-         * @param int $itemId Item id
-         * @return int
-         */
+	    /**
+	     * Return number of views of an item
+	     *
+	     * @access public
+	     * @since  2.3.3
+	     * @return int
+	     */
         public function getAllViews()
         {
             $this->dao->select('SUM(i_num_views) AS i_num_views');

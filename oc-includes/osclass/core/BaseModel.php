@@ -18,7 +18,10 @@
  * limitations under the License.
  */
 
-    abstract class BaseModel
+	/**
+	 * Class BaseModel
+	 */
+	abstract class BaseModel
     {
         protected $page;
         protected $action;
@@ -71,20 +74,35 @@
         }
 
         //to export variables at the business layer
-        public function _exportVariableToView($key, $value)
+
+		/**
+		 * @param $key
+		 * @param $value
+		 */
+		public function _exportVariableToView( $key , $value )
         {
             View::newInstance()->_exportVariableToView($key, $value);
         }
 
         //only for debug (deprecated, all inside View.php)
-        public function _view($key = null)
+
+		/**
+		 * @param null $key
+		 */
+		public function _view( $key = null )
         {
             View::newInstance()->_view($key);
         }
 
         //Funciones que se tendran que reescribir en la clase que extienda de esta
         abstract protected function doModel();
-        abstract protected function doView($file);
+
+		/**
+		 * @param $file
+		 *
+		 * @return mixed
+		 */
+		abstract protected function doView( $file );
 
         public function do400()
         {
@@ -110,18 +128,28 @@
             exit;
         }
 
-        public function redirectTo($url, $code = null)
+		/**
+		 * @param      $url
+		 * @param null $code
+		 */
+		public function redirectTo( $url , $code = null )
         {
             osc_redirect_to($url, $code);
         }
 
-        public function getTime()
+		/**
+		 * @return mixed
+		 */
+		public function getTime()
         {
             $timeEnd = microtime(true);
             return $timeEnd - $this->time;
         }
 
-        private function subdomain_params($host) {
+		/**
+		 * @param $host
+		 */
+		private function subdomain_params( $host ) {
             $subdomain_type = osc_subdomain_type();
             $subhost = osc_subdomain_host();
             // strpos is used to check if the domain is different, useful when accessing the website by diferent domains

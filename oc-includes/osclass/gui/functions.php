@@ -63,7 +63,12 @@ FUNCTIONS
     }
     // update options
     if( !function_exists('bender_theme_update') ) {
-        function bender_theme_update($current_version) {
+	    /**
+	     * @param $current_version
+	     *
+	     * @throws \Exception
+	     */
+	    function bender_theme_update( $current_version ) {
             if($current_version==0) {
                 bender_theme_install();
             }
@@ -104,14 +109,24 @@ FUNCTIONS
     }
 
     if(!function_exists('bender_add_body_class_construct')) {
-        function bender_add_body_class_construct($classes){
+	    /**
+	     * @param $classes
+	     *
+	     * @return array
+	     */
+	    function bender_add_body_class_construct( $classes ) {
             $benderBodyClass = benderBodyClass::newInstance();
             $classes = array_merge($classes, $benderBodyClass->get());
             return $classes;
         }
     }
     if(!function_exists('bender_body_class')) {
-        function bender_body_class($echo = true){
+	    /**
+	     * @param bool $echo
+	     *
+	     * @return bool|mixed
+	     */
+	    function bender_body_class( $echo = true ) {
             /**
             * Print body classes.
             *
@@ -128,7 +143,10 @@ FUNCTIONS
         }
     }
     if(!function_exists('bender_add_body_class')) {
-        function bender_add_body_class($class){
+	    /**
+	     * @param $class
+	     */
+	    function bender_add_body_class( $class ) {
             /**
             * Add new body class to body class array.
             *
@@ -160,7 +178,10 @@ FUNCTIONS
     }
     /* logo */
     if( !function_exists('logo_header') ) {
-        function logo_header() {
+	    /**
+	     * @return string
+	     */
+	    function logo_header() {
              $logo = osc_get_preference('logo','bender');
              $html = '<a href="'.osc_base_url().'"><img border="0" alt="' . osc_page_title() . '" src="' . bender_logo_url() . '"></a>';
              if( $logo!='' && file_exists( osc_uploads_path() . $logo ) ) {
@@ -172,7 +193,10 @@ FUNCTIONS
     }
     /* logo */
     if( !function_exists('bender_logo_url') ) {
-        function bender_logo_url() {
+	    /**
+	     * @return bool|string
+	     */
+	    function bender_logo_url() {
             $logo = osc_get_preference('logo','bender');
             if( $logo ) {
                 return osc_uploads_url($logo);
@@ -181,7 +205,12 @@ FUNCTIONS
         }
     }
     if( !function_exists('bender_draw_item') ) {
-        function bender_draw_item($class = false,$admin = false, $premium = false) {
+	    /**
+	     * @param bool $class
+	     * @param bool $admin
+	     * @param bool $premium
+	     */
+	    function bender_draw_item( $class = false , $admin = false , $premium = false ) {
             $filename = 'loop-single';
             if($premium){
                 $filename .='-premium';
@@ -190,7 +219,10 @@ FUNCTIONS
         }
     }
     if( !function_exists('bender_show_as') ){
-        function bender_show_as(){
+	    /**
+	     * @return \Purified|string
+	     */
+	    function bender_show_as() {
 
             $p_sShowAs    = Params::getParam('sShowAs');
             $aValidShowAsValues = array('list', 'gallery');
@@ -202,12 +234,18 @@ FUNCTIONS
         }
     }
     if( !function_exists('bender_default_show_as') ){
-        function bender_default_show_as(){
+	    /**
+	     * @return string
+	     */
+	    function bender_default_show_as() {
             return getPreference('defaultShowAs@all','bender');
         }
     }
     if( !function_exists('bender_default_location_show_as') ){
-        function bender_default_location_show_as(){
+	    /**
+	     * @return string
+	     */
+	    function bender_default_location_show_as() {
             return osc_get_preference('defaultLocationShowAs','bender');
         }
     }
@@ -298,7 +336,10 @@ FUNCTIONS
      * Helpers used at view
      */
     if( !function_exists('bender_item_title') ) {
-        function bender_item_title() {
+	    /**
+	     * @return string
+	     */
+	    function bender_item_title() {
             $title = osc_item_title();
             foreach( osc_get_locales() as $locale ) {
                 if( Session::newInstance()->_getForm('title') != '' ) {
@@ -312,7 +353,10 @@ FUNCTIONS
         }
     }
     if( !function_exists('bender_item_description') ) {
-        function bender_item_description() {
+	    /**
+	     * @return string
+	     */
+	    function bender_item_description() {
             $description = osc_item_description();
             foreach( osc_get_locales() as $locale ) {
                 if( Session::newInstance()->_getForm('description') != '' ) {
@@ -326,7 +370,10 @@ FUNCTIONS
         }
     }
     if( !function_exists('related_listings') ) {
-        function related_listings() {
+	    /**
+	     * @return int
+	     */
+	    function related_listings() {
             View::newInstance()->_exportVariableToView('items', array());
 
             $mSearch = new Search();
@@ -361,7 +408,10 @@ FUNCTIONS
     }
 
     if( !function_exists('osc_is_contact_page') ) {
-        function osc_is_contact_page() {
+	    /**
+	     * @return bool
+	     */
+	    function osc_is_contact_page() {
             if( Rewrite::newInstance()->get_location() === 'contact' ) {
                 return true;
             }
@@ -371,7 +421,10 @@ FUNCTIONS
     }
 
     if( !function_exists('get_breadcrumb_lang') ) {
-        function get_breadcrumb_lang() {
+	    /**
+	     * @return array
+	     */
+	    function get_breadcrumb_lang() {
             $lang = array();
             $lang['item_add']               = __('Publish a listing', 'bender');
             $lang['item_edit']              = __('Edit your listing', 'bender');
@@ -412,7 +465,10 @@ FUNCTIONS
     }
 
     if( !function_exists('get_user_menu') ) {
-        function get_user_menu() {
+	    /**
+	     * @return array
+	     */
+	    function get_user_menu() {
             $options   = array();
             $options[] = array(
                 'name' => __('Public Profile'),
@@ -586,7 +642,12 @@ if(osc_is_home_page() || osc_is_search_page()){
 }
 
 
-function bender_sidebar_category_search($catId = null)
+	/**
+	 * @param null $catId
+	 *
+	 * @return string
+	 */
+	function bender_sidebar_category_search( $catId = null )
 {
     $aCategories = array();
     if($catId==null) {
@@ -610,7 +671,15 @@ function bender_sidebar_category_search($catId = null)
     bender_print_sidebar_category_search($aCategories, $catId);
 }
 
-function bender_print_sidebar_category_search($aCategories, $current_category = null, $i = 0)
+
+	/**
+	 * @param      $aCategories
+	 * @param null $current_category
+	 * @param int  $i
+	 *
+	 * @return null
+	 */
+	function bender_print_sidebar_category_search( $aCategories , $current_category = null , $i = 0 )
 {
     $class = '';
     if(!isset($aCategories[$i])) {
@@ -685,7 +754,10 @@ class benderBodyClass
         $this->class = array();
     }
 
-    public static function newInstance()
+	/**
+	 * @return \benderBodyClass
+	 */
+	public static function newInstance()
     {
         if (  !self::$instance instanceof self)
         {
@@ -694,11 +766,18 @@ class benderBodyClass
         return self::$instance;
     }
 
-    public function add($class)
+	/**
+	 * @param $class
+	 */
+	public function add( $class )
     {
         $this->class[] = $class;
     }
-    public function get()
+
+	/**
+	 * @return array
+	 */
+	public function get()
     {
         return $this->class;
     }
@@ -710,7 +789,12 @@ HELPERS
 
 */
 if( !function_exists('osc_uploads_url')) {
-    function osc_uploads_url($item = '') {
+	/**
+	 * @param string $item
+	 *
+	 * @return string
+	 */
+	function osc_uploads_url( $item = '' ) {
         $logo = osc_get_preference('logo', 'bender');
         if ($logo != '' && file_exists(osc_uploads_path() . $logo)) {
             $path = str_replace(ABS_PATH, '', osc_uploads_path() . '/');

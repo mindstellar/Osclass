@@ -103,12 +103,14 @@
         return Plugins::isThisCategory($name, $id);
     }
 
-    /**
-     * Returns plugin's information
-     *
-     * @param string $plugins
-     * @return array
-     */
+
+	/**
+	 * Returns plugin's information
+	 *
+	 * @param $plugin
+	 *
+	 * @return array
+	 */
     function osc_plugin_get_info($plugin) {
         return Plugins::getInfo($plugin);
     }
@@ -143,32 +145,36 @@
         return Plugins::getActive();
     }
 
-    /**
-     * Gets if a plugin is installed or not
-     *
-     * @param string $plugin
-     * @return void
-     */
+
+	/**
+	 * Gets if a plugin is installed or not
+	 *
+	 * @param string $plugin
+	 *
+	 * @return bool
+	 */
     function osc_plugin_is_installed($plugin) {
         return Plugins::isInstalled($plugin);
     }
 
-    /**
-     * Gets if a plugin is enabled or not
-     *
-     * @param string $plugin
-     * @return void
-     */
+
+	/**
+	 * Gets if a plugin is enabled or not
+	 *
+	 * @param string $plugin
+	 * @return bool
+	 */
     function osc_plugin_is_enabled($plugin) {
         return Plugins::isEnabled($plugin);
     }
 
-    /**
-     * Show the default configure view for plugins (attach them to categories)
-     *
-     * @param string $plugin
-     * @return boolean
-     */
+
+	/**
+	 * Show the default configure view for plugins (attach them to categories)
+	 *
+	 * @param string $plugin
+	 * @return void
+	 */
     function osc_plugin_configure_view($plugin) {
         return Plugins::configureView($plugin);
     }

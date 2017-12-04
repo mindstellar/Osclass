@@ -58,7 +58,14 @@
         }
     }
 
-    function osc_pagination_items($extraParams = array(), $field = false)
+
+	/**
+	 * @param array $extraParams
+	 * @param bool  $field
+	 *
+	 * @return string
+	 */
+	function osc_pagination_items( $extraParams = array () , $field = false )
     {
         if(osc_is_public_profile()) {
             $url = osc_user_list_items_pub_profile_url('{PAGE}', $field);
@@ -83,37 +90,50 @@
         return $pagination->doPagination();
     }
 
-    /**
-     * Gets generic pagination links
-     *
-     * @array $params
-     *          'total' => number of total pages (default osc_search_total_pages())
-     *          'selected' => number of the page selected (starting at 0) (default osc_search_page())
-     *          'class_first' => css class for the first link (default 'searchPaginationFirst')
-     *          'class_last' => css class for the last link (default 'searchPaginationLast')
-     *          'class_prev' => css class for the prev link (default 'searchPaginationPrev')
-     *          'class_next' => css class for the next link (default 'searchPaginationNext')
-     *          'text_first' => text for the first link ('<<', 'First', ...) (default '&laquo;')
-     *          'text_prev' => text for the first link ('<', 'Previous.', ...) (default '&raquo;')
-     *          'text_next' => text for the first link ('>', 'Next', ...) (default '&lt;')
-     *          'text_last' => text for the lastst link ('>>', 'Last', ...) (default '&gt;')
-     *          'class_selected' => css class for the selected link (default 'searchPaginationSelected')
-     *          'class_non_selected' => css class for non selected links (default 'searchPaginationNonSelected')
-     *          'delimiter' => delimiter between links (default " ")
-     *          'force_limits' => Always show the first/last links even if you're already on first/last page (default false)
-     *          'sides' => How many pages to show (default 2)
-     *          'url' => Format of the URL of the links, put "{PAGE}" on the page variable. Example http://www.example.com/index.php?page=search&amp;sCategory=2&amp;iPage={PAGE} (default osc_update_search_url(array('iPage' => '{PAGE}'))
-     *          'first_url' => Format of the FIRST URL of the links, if you want to avoid to have the page variable "{PAGE}" on the page variable. Example http://www.example.com/index.php?page=search&amp;sCategory=2&amp; (default osc_update_search_url(array('iPage' => null))
-     *
-     * @return string pagination links
-     */
+
+	/**
+	 * Gets generic pagination links
+	 *
+	 * @array $params
+	 *          'total' => number of total pages (default osc_search_total_pages())
+	 *          'selected' => number of the page selected (starting at 0) (default osc_search_page())
+	 *          'class_first' => css class for the first link (default 'searchPaginationFirst')
+	 *          'class_last' => css class for the last link (default 'searchPaginationLast')
+	 *          'class_prev' => css class for the prev link (default 'searchPaginationPrev')
+	 *          'class_next' => css class for the next link (default 'searchPaginationNext')
+	 *          'text_first' => text for the first link ('<<', 'First', ...) (default '&laquo;')
+	 *          'text_prev' => text for the first link ('<', 'Previous.', ...) (default '&raquo;')
+	 *          'text_next' => text for the first link ('>', 'Next', ...) (default '&lt;')
+	 *          'text_last' => text for the lastst link ('>>', 'Last', ...) (default '&gt;')
+	 *          'class_selected' => css class for the selected link (default 'searchPaginationSelected')
+	 *          'class_non_selected' => css class for non selected links (default 'searchPaginationNonSelected')
+	 *          'delimiter' => delimiter between links (default " ")
+	 *          'force_limits' => Always show the first/last links even if you're already on first/last page (default
+	 *          false)
+	 *          'sides' => How many pages to show (default 2)
+	 *          'url' => Format of the URL of the links, put "{PAGE}" on the page variable. Example
+	 *          http://www.example.com/index.php?page=search&amp;sCategory=2&amp;iPage={PAGE} (default
+	 *          osc_update_search_url(array('iPage' => '{PAGE}'))
+	 *          'first_url' => Format of the FIRST URL of the links, if you want to avoid to have the page variable
+	 *          "{PAGE}" on the page variable. Example
+	 *          http://www.example.com/index.php?page=search&amp;sCategory=2&amp; (default
+	 *          osc_update_search_url(array('iPage' => null))
+	 *
+	 * @param null $params
+	 *
+	 * @return string pagination links
+	 */
     function osc_pagination($params = null)
     {
         $pagination = new Pagination($params);
         return $pagination->doPagination();
     }
 
-    function osc_show_pagination_admin($aData)
+
+	/**
+	 * @param $aData
+	 */
+	function osc_show_pagination_admin( $aData )
     {
         $pageActual = isset($aData['iPage'])?$aData['iPage']:Params::getParam('iPage');
         $urlActual  = osc_admin_base_url(true).'?'.Params::getServerParam('QUERY_STRING', false, false);
@@ -155,7 +175,16 @@
     <?php
     }
 
-    function osc_pagination_showing($from, $to, $filtered, $total = null)
+
+	/**
+	 * @param      $from
+	 * @param      $to
+	 * @param      $filtered
+	 * @param null $total
+	 *
+	 * @return string
+	 */
+	function osc_pagination_showing( $from , $to , $filtered , $total = null )
     {
         if($to==0 || $filtered==0) {
             $from = $to = $filtered = 0;

@@ -214,13 +214,13 @@
             }
         }
 
-        /**
-         * Return the mysqli connection error number
-         *
-         * @access public
-         * @since 2.3
-         * @return type
-         */
+	    /**
+	     * Return the mysqli connection error number
+	     *
+	     * @access public
+	     * @since  2.3
+	     * @return int
+	     */
         public function getErrorConnectionLevel()
         {
             return $this->connErrorLevel;
@@ -238,13 +238,13 @@
             return $this->connErrorDesc;
         }
 
-        /**
-         * Return the mysqli error number
-         *
-         * @access public
-         * @since 2.3
-         * @return type
-         */
+	    /**
+	     * Return the mysqli error number
+	     *
+	     * @access public
+	     * @since  2.3
+	     * @return int
+	     */
         public function getErrorLevel()
         {
             return $this->errorLevel;
@@ -468,11 +468,12 @@
             return true;
         }
 
-        /**
-         *
-         *
-         * @param array $modes
-         */
+	    /**
+	     *
+	     *
+	     * @param array $modes
+	     * @param       $connId
+	     */
         public function set_sql_mode($modes = array(), &$connId)
         {
             if ( empty( $modes ) ) {
@@ -508,12 +509,16 @@
             mysqli_query($connId, "SET SESSION sql_mode='$modes_str'" );
 		}
 
-        /**
-         * At the end of the execution it prints the database debug if it's necessary
-         *
-         * @since 2.3
-         * @access private
-         */
+	    /**
+	     * At the end of the execution it prints the database debug if it's necessary
+	     *
+	     * @since  2.3
+	     * @access private
+	     *
+	     * @param bool $printFrontend
+	     *
+	     * @return bool
+	     */
         public function debug($printFrontend = true)
         {
             $log = LogDatabase::newInstance();

@@ -20,7 +20,10 @@
 
     require_once LIB_PATH . 'htmlpurifier/HTMLPurifier.auto.php';
 
-    class Params
+	/**
+	 * Class Params
+	 */
+	class Params
     {
         private static $_purifier;
         private static $_config;
@@ -34,7 +37,15 @@
             self::$_server = $_SERVER;
         }
 
-        public static function getParam($param, $htmlencode = false, $xss_check = true, $quotes_encode = true)
+		/**
+		 * @param      $param
+		 * @param bool $htmlencode
+		 * @param bool $xss_check
+		 * @param bool $quotes_encode
+		 *
+		 * @return \Purified|string
+		 */
+		public static function getParam( $param , $htmlencode = false , $xss_check = true , $quotes_encode = true )
         {
 	        if ( $param == '' ) {
 		        return '';
@@ -60,7 +71,12 @@
             return $value;
         }
 
-        public static function existParam($param)
+		/**
+		 * @param $param
+		 *
+		 * @return bool
+		 */
+		public static function existParam( $param )
         {
 	        if ( $param == '' ) {
 		        return false;
@@ -71,7 +87,15 @@
             return true;
         }
 
-        public static function getServerParam($param, $htmlencode = false, $xss_check = true, $quotes_encode = true)
+		/**
+		 * @param      $param
+		 * @param bool $htmlencode
+		 * @param bool $xss_check
+		 * @param bool $quotes_encode
+		 *
+		 * @return \Purified|string
+		 */
+		public static function getServerParam( $param , $htmlencode = false , $xss_check = true , $quotes_encode = true )
         {
 	        if ( $param == '' ) {
 		        return '';
@@ -97,7 +121,12 @@
             return $value;
         }
 
-        public static function existServerParam($param)
+		/**
+		 * @param $param
+		 *
+		 * @return bool
+		 */
+		public static function existServerParam( $param )
         {
 	        if ( $param == '' ) {
 		        return false;
@@ -108,7 +137,12 @@
             return true;
         }
 
-        public static function getServerParamsAsArray($xss_check = true)
+		/**
+		 * @param bool $xss_check
+		 *
+		 * @return \Purified|string
+		 */
+		public static function getServerParamsAsArray( $xss_check = true )
         {
             $value = self::_purify(self::$_server, $xss_check);
 
@@ -119,7 +153,12 @@
             return $value;
         }
 
-        public static function getFiles($param)
+		/**
+		 * @param $param
+		 *
+		 * @return array
+		 */
+		public static function getFiles( $param )
         {
             if (isset($_FILES[$param])) {
                 return $_FILES[$param];
@@ -128,7 +167,15 @@
             return array();
         }
 
-        public static function getParamsAsArray($what = '' , $htmlencode = false, $xss_check = true, $quotes_encode = true)
+		/**
+		 * @param string $what
+		 * @param bool   $htmlencode
+		 * @param bool   $xss_check
+		 * @param bool   $quotes_encode
+		 *
+		 * @return \Purified|string
+		 */
+		public static function getParamsAsArray( $what = '' , $htmlencode = false , $xss_check = true , $quotes_encode = true )
         {
             switch ($what) {
                 case( 'get' ):
@@ -160,12 +207,19 @@
             return $value;
         }
 
-        public static function setParam($key, $value)
+		/**
+		 * @param $key
+		 * @param $value
+		 */
+		public static function setParam( $key , $value )
         {
             self::$_request[$key] = $value;
         }
 
-        public static function unsetParam($key)
+		/**
+		 * @param $key
+		 */
+		public static function unsetParam( $key )
         {
             unset(self::$_request[$key]);
         }
@@ -175,7 +229,13 @@
             print_r(self::getParamsAsArray());
         }
 
-        private static function _purify($value, $xss_check)
+		/**
+		 * @param $value
+		 * @param $xss_check
+		 *
+		 * @return \Purified
+		 */
+		private static function _purify( $value , $xss_check )
         {
             if( !$xss_check ) {
                 return $value;

@@ -18,13 +18,19 @@
  * limitations under the License.
  */
 
-    class SendFriendForm extends Form {
+	/**
+	 * Class SendFriendForm
+	 */
+	class SendFriendForm extends Form {
 
         /*static public function primary_input_hidden($page) {
             parent::generic_input_hidden("id", $page["pk_i_id"]);
         }*/
 
-        public static function your_name() {
+		/**
+		 * @return bool
+		 */
+		public static function your_name() {
 
             if( Session::newInstance()->_getForm( 'yourName' ) != '' ){
                 $yourName = Session::newInstance()->_getForm( 'yourName' );
@@ -35,7 +41,10 @@
             return true;
         }
 
-        public static function your_email() {
+		/**
+		 * @return bool
+		 */
+		public static function your_email() {
 
             if( Session::newInstance()->_getForm( 'yourEmail' ) != '' ){
                 $yourEmail = Session::newInstance()->_getForm( 'yourEmail' );
@@ -46,7 +55,10 @@
             return true;
         }
 
-        public static function friend_name() {
+		/**
+		 * @return bool
+		 */
+		public static function friend_name() {
             if( Session::newInstance()->_getForm( 'friendName' ) != '' ){
                 $friendName = Session::newInstance()->_getForm( 'friendName' );
                 parent::generic_input_text( 'friendName' , $friendName, null, false);
@@ -56,7 +68,10 @@
             return true;
         }
 
-        public static function friend_email() {
+		/**
+		 * @return bool
+		 */
+		public static function friend_email() {
             if( Session::newInstance()->_getForm( 'friendEmail' ) != '' ){
                 $friendEmail = Session::newInstance()->_getForm( 'friendEmail' );
                 parent::generic_input_text( 'friendEmail' , $friendEmail, null, false);
@@ -66,7 +81,10 @@
             return true;
         }
 
-        public static function your_message() {
+		/**
+		 * @return bool
+		 */
+		public static function your_message() {
             if( Session::newInstance()->_getForm( 'message_body' ) != '' ){
                 $message_body = Session::newInstance()->_getForm( 'message_body' );
                 parent::generic_textarea( 'message' , $message_body, null, false);

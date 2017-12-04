@@ -18,14 +18,20 @@
  * limitations under the License.
  */
 
-    class WebSecBaseModel extends SecBaseModel
+	/**
+	 * Class WebSecBaseModel
+	 */
+	class WebSecBaseModel extends SecBaseModel
     {
         public function __construct()
         {
             parent::__construct();
         }
 
-        public function isLogged()
+		/**
+		 * @return bool
+		 */
+		public function isLogged()
         {
             return osc_is_web_user_logged_in();
         }

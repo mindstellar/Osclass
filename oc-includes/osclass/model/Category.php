@@ -36,7 +36,10 @@
         private $_emptyTree;
         private $_slugs;
 
-        public static function newInstance()
+	    /**
+	     * @return \Category|\type
+	     */
+	    public static function newInstance()
         {
             if( !self::$instance instanceof self ) {
                 self::$instance = new self;
@@ -44,9 +47,11 @@
             return self::$instance;
         }
 
-        /**
-         * Set data related to t_category table
-         */
+	    /**
+	     * Set data related to t_category table
+	     *
+	     * @param string $l
+	     */
         public function __construct($l = '')
         {
             parent::__construct();
@@ -298,13 +303,16 @@
             }
         }
 
-        /**
-         * Lit all categories
-         *
-         * @access public
-         * @since unknown
-         * @return array
-         */
+	    /**
+	     * Lit all categories
+	     *
+	     * @access public
+	     * @since  unknown
+	     *
+	     * @param bool $description
+	     *
+	     * @return array
+	     */
         public function listAll($description = true)
         {
             // juanramon: specific condition
@@ -344,14 +352,15 @@
             return $tree;
         }
 
-        /**
-         * Given a category, return the branch from the root to the category
-         *
-         * @access public
-         * @since unknown
-         * @param integer$category
-         * @return array
-         */
+	    /**
+	     * Given a category, return the branch from the root to the category
+	     *
+	     * @access public
+	     * @since  unknown
+	     * @param null $cat
+	     * @return array
+	     * @throws \Exception
+	     */
         public function toRootTree($cat = null)
         {
             $tree = array();
@@ -434,17 +443,17 @@
          */
         public function hierarchy($category_id)
         {
-            return array_reverse($this->toRootTree($category_id));
+            return array_reverse($this->toRootTree($category_id ) );
         }
 
-        /**
-         * Check if it's a root category
-         *
-         * @access public
-         * @since unknown
-         * @param integer$category_id
-         * @return boolean
-         */
+	    /**
+	     * Check if it's a root category
+	     *
+	     * @access public
+	     * @since  unknown
+	     * @param $categoryID
+	     * @return boolean
+	     */
         public function isRoot($categoryID)
         {
             // juanramon: specific condition
@@ -490,16 +499,18 @@
             return $this->listWhere();
         }
 
-        /**
-         * Return a category given an id
-         * This overwrite findByPrimaryKey of DAO model because we store the
-         * categories on an array for the tree and it's faster than a SQL query
-         *
-         * @access public
-         * @since unknown
-         * @param int $categoryID primary key
-         * @return array
-         */
+	    /**
+	     * Return a category given an id
+	     * This overwrite findByPrimaryKey of DAO model because we store the
+	     * categories on an array for the tree and it's faster than a SQL query
+	     *
+	     * @access public
+	     * @since  unknown
+	     * @param int    $categoryID primary key
+	     * @param string $locale
+	     * @return array
+	     * @throws \Exception
+	     */
         public function findByPrimaryKey($categoryID, $locale = '' )
         {
             if($categoryID == null) {
@@ -631,13 +642,16 @@
             return $result->result();
         }
 
-        /**
-         * delete a category and all information linked to it
-         *
-         * @access public
-         * @since unknown
-         * @param integer$pk primary key
-         */
+	    /**
+	     * delete a category and all information linked to it
+	     *
+	     * @access public
+	     * @since  unknown
+	     *
+	     * @param integer $pk primary key
+	     *
+	     * @return mixed
+	     */
         public function deleteByPrimaryKey($pk)
         {
             $items = Item::newInstance()->findByCategoryID((int) $pk );
@@ -663,16 +677,15 @@
             return $this->dao->delete( sprintf('%st_category', DB_TABLE_PREFIX), array('pk_i_id' => (int) $pk ) );
         }
 
-        /**
-         * Update a category
-         *
-         * @access public
-         * @since unknown
-         * @param array $fields
-         * @param array $aFieldsDescriptions
-         * @param int $pk primary key
-         * @return mixed bool if there is an error, affectedRows if there isn't errors
-         */
+	    /**
+	     * Update a category
+	     *
+	     * @access public
+	     * @since  unknown
+	     * @param     $data
+	     * @param int $pk primary key
+	     * @return mixed bool if there is an error, affectedRows if there isn't errors
+	     */
         public function updateByPrimaryKey($data, $pk)
         {
             $fields = $data['fields'];
@@ -753,14 +766,16 @@
             }
         }
 
-        /**
-         * Inser a new category
-         *
-         * @access public
-         * @since unknown
-         * @param array $fields
-         * @param array $aFieldsDescriptions
-         */
+	    /**
+	     * Inser a new category
+	     *
+	     * @access public
+	     * @since  unknown
+	     *
+	     * @param array $fields
+	     * @param null  $aFieldsDescription
+	     * @return mixed
+	     */
         public function insert($fields, $aFieldsDescription = null )
         {
             $this->dao->insert($this->getTableName(),$fields);
@@ -884,12 +899,14 @@
          */
         public function updateName($pk_i_id, $locale, $name)
         {
-            return $this->dao->update(DB_TABLE_PREFIX.'t_category_description', array('s_name' => $name), array('fk_i_category_id' => $pk_i_id,'fk_c_locale_code' => $locale));
+            return $this->dao->update(DB_TABLE_PREFIX.'t_category_description', array('s_name' => $name), array('fk_i_category_id' => $pk_i_id,'fk_c_locale_code' => $locale ) );
         }
 
-        /**
-         * Formats a value before being inserted in DB.
-         */
+	    /**
+	     * Formats a value before being inserted in DB.
+	     * @param $value
+	     * @return string
+	     */
         public function formatValue($value)
         {
 	        if ( is_null( $value ) ) {

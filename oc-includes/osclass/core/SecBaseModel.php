@@ -38,7 +38,11 @@
         }
 
         //granting methods
-        public function setGranting($grant)
+
+	    /**
+	     * @param $grant
+	     */
+	    public function setGranting( $grant )
         {
             $this->grant = $grant;
         }
@@ -52,7 +56,11 @@
 
         public function doModel() {}
 
-        public function doView($file) {}
+	    /**
+	     * @param $file
+	     */
+	    public function doView( $file ) {
+	    }
     }
 
     /* file end: ./oc-includes/osclass/core/SecBaseModel.php */

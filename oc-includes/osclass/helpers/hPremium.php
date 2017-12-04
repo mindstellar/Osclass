@@ -28,11 +28,13 @@
     ////////////////////////////////////////////////////////////////
 
 
-    /**
-    * Gets new premiums ads
-    *
-    * @return array $premiums
-    */
+	/**
+	 * Gets new premiums ads
+	 *
+	 * @param int $max
+	 *
+	 * @return array $premiums
+	 */
     function osc_get_premiums($max = 2) {
         if (View::newInstance()->_exists('search')) {
             $mSearch = View::newInstance()->_get('search');
@@ -62,13 +64,15 @@
         }
     }
 
-    /**
-    * Gets a specific field from current premium
-    *
-    * @param type $field
-    * @param type $locale
-    * @return field_type
-    */
+
+	/**
+	 * Gets a specific field from current premium
+	 *
+	 * @param type   $field
+	 * @param string $locale
+	 *
+	 * @return field_type
+	 */
     function osc_premium_field($field, $locale = '' ) {
         return osc_field(osc_premium(), $field, $locale);
     }
@@ -171,12 +175,14 @@
 	    return osc_field( $category , 's_name' , $locale );
     }
 
-    /**
-     * Gets category description from current premium, if $locale is unspecified $locale is current user locale
-     *
-     * @param type $locale
-     * @return string
-     */
+
+	/**
+	 * Gets category description from current premium, if $locale is unspecified $locale is current user locale
+	 *
+	 * @param string $locale
+	 * @return string
+	 * @throws \Exception
+	 */
     function osc_premium_category_description($locale = '' ) {
 	    if ( $locale == '' ) {
 		    $locale = osc_current_user_locale();
@@ -450,11 +456,12 @@
         return premiumComment::newInstance()->total_comments(osc_premium_id());
     }
 
-    /**
-     * Gets page of comments in current pagination
-     *
-     * @return <type>
-     */
+
+	/**
+	 * Gets page of comments in current pagination
+	 *
+	 * @return int <type>
+	 */
     function osc_premium_comments_page() {
         $page = Params::getParam('comments-page');
         if($page=='') {
@@ -473,11 +480,11 @@
     // DETAILS //
     /////////////
 
-    /**
-     * Gets next premium if there is, else return null
-     *
-     * @return array
-     */
+	/**
+	 * Gets next premium if there is, else return null
+	 *
+	 * @return bool
+	 */
     function osc_has_premiums() {
         if ( View::newInstance()->_exists('resources') ) {
             View::newInstance()->_erase('resources');
@@ -521,11 +528,12 @@
         return osc_priv_count_item_resources();
     }
 
-    /**
-     * Gets next premium resource if there is, else return null
-     *
-     * @return array
-     */
+
+	/**
+	 * Gets next premium resource if there is, else return null
+	 *
+	 * @return bool
+	 */
     function osc_has_premium_resources() {
         if ( !View::newInstance()->_exists('resources') ) {
             View::newInstance()->_exportVariableToView('resources', ItemResource::newInstance()->getAllResourcesFromItem( osc_premium_id() ) );
@@ -557,11 +565,12 @@
         return View::newInstance()->_count('comments');
     }
 
-    /**
-     * Gets next comment of current premium comments
-     *
-     * @return array
-     */
+
+	/**
+	 * Gets next comment of current premium comments
+	 *
+	 * @return bool
+	 */
     function osc_has_premium_comments() {
         if ( !View::newInstance()->_exists('comments') ) {
             View::newInstance()->_exportVariableToView('comments', ItemComment::newInstance()->findBypremiumID( osc_premium_id(), osc_premium_comments_page(), osc_comments_per_page() ) );
@@ -597,11 +606,12 @@
         return View::newInstance()->_count('metafields');
     }
 
-    /**
-     * Gets next premium meta field if there is, else return null
-     *
-     * @return array
-     */
+
+	/**
+	 * Gets next premium meta field if there is, else return null
+	 *
+	 * @return bool
+	 */
     function osc_has_premium_meta() {
         if ( !View::newInstance()->_exists('metafields') ) {
             View::newInstance()->_exportVariableToView('metafields', Item::newInstance()->metaFields(osc_premium_id()) );

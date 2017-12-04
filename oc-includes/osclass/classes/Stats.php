@@ -26,9 +26,12 @@
          * @var type 
          */
         private static $instance;
-        private $conn; 
+	    private $conn;
 
-        public static function newInstance()
+	    /**
+	     * @return \Stats|\type
+	     */
+	    public static function newInstance()
         {
             if( !self::$instance instanceof self ) {
                 self::$instance = new self;
@@ -45,8 +48,14 @@
             $data = $conn->getOsclassDb();
             $this->conn = new DBCommandClass($data);
         }
-        
-        public function new_users_count($from_date, $date = 'day') 
+
+	    /**
+	     * @param        $from_date
+	     * @param string $date
+	     *
+	     * @return mixed
+	     */
+	    public function new_users_count( $from_date , $date = 'day' )
         {    
             if($date=='week') {
                 $this->conn->select('WEEK(dt_reg_date) as d_date, COUNT(pk_i_id) as num');
@@ -65,8 +74,11 @@
             $result = $this->conn->get();
             return $result->result();
         }
-        
-        public function users_by_country()
+
+	    /**
+	     * @return mixed
+	     */
+	    public function users_by_country()
         {  
             $this->conn->select('s_country, COUNT(pk_i_id) as num');
             $this->conn->from(DB_TABLE_PREFIX.'t_user');
@@ -75,8 +87,11 @@
             $result = $this->conn->get();
             return $result->result();
         }
-        
-        public function users_by_region() 
+
+	    /**
+	     * @return mixed
+	     */
+	    public function users_by_region() 
         { 
             $this->conn->select('s_region, COUNT(pk_i_id) as num');
             $this->conn->from(DB_TABLE_PREFIX.'t_user');
@@ -85,14 +100,20 @@
             $result = $this->conn->get();
             return $result->result();
         }
-        
-        public function items_by_user() 
+
+	    /**
+	     * @return mixed
+	     */
+	    public function items_by_user() 
         {
             $result = $this->conn->query( 'SELECT AVG( num ) as avg FROM (SELECT COUNT( pk_i_id ) AS num FROM ' . DB_TABLE_PREFIX . 't_item GROUP BY s_contact_email ) AS dummy_table' );
             return $result->result();
         }
-        
-        public function latest_users() 
+
+	    /**
+	     * @return mixed
+	     */
+	    public function latest_users() 
         {
             $this->conn->select();
             $this->conn->from(DB_TABLE_PREFIX.'t_user');
@@ -102,8 +123,14 @@
             $result = $this->conn->get();
             return $result->result();
         }
-        
-        public function new_items_count($from_date, $date = 'day') 
+
+	    /**
+	     * @param        $from_date
+	     * @param string $date
+	     *
+	     * @return array
+	     */
+	    public function new_items_count( $from_date , $date = 'day' )
         {
             if($date=='week') {
                 $this->conn->select('WEEK(dt_pub_date) as d_date, COUNT(pk_i_id) as num');
@@ -126,8 +153,11 @@
             }
             return array();
         }
-        
-        public function latest_items() 
+
+	    /**
+	     * @return mixed
+	     */
+	    public function latest_items() 
         {
             $this->conn->select('l.*, i.*, d.*');
             $this->conn->from(DB_TABLE_PREFIX.'t_item i, '.DB_TABLE_PREFIX.'t_item_location l, '.DB_TABLE_PREFIX.'t_item_description d');
@@ -139,8 +169,14 @@
             $result = $this->conn->get();
             return $result->result();
         }
-        
-        public function new_comments_count($from_date, $date = 'day') 
+
+	    /**
+	     * @param        $from_date
+	     * @param string $date
+	     *
+	     * @return mixed
+	     */
+	    public function new_comments_count( $from_date , $date = 'day' )
         {
             if($date=='week') {
                 $this->conn->select('WEEK(dt_pub_date) as d_date, COUNT(pk_i_id) as num');
@@ -160,8 +196,11 @@
             $result = $this->conn->get();
             return $result->result();
         }
-        
-        public function latest_comments() 
+
+	    /**
+	     * @return mixed
+	     */
+	    public function latest_comments() 
         {
             $this->conn->select('i.*, c.*');
             $this->conn->from(DB_TABLE_PREFIX.'t_item i, '.DB_TABLE_PREFIX.'t_item_comment c');
@@ -172,8 +211,14 @@
             $result = $this->conn->get();
             return $result->result();
         }
-        
-        public function new_reports_count($from_date, $date = 'day') 
+
+	    /**
+	     * @param        $from_date
+	     * @param string $date
+	     *
+	     * @return mixed
+	     */
+	    public function new_reports_count( $from_date , $date = 'day' )
         {
             if($date=='week') {
                 $this->conn->select('WEEK(dt_date) as d_date, SUM(i_num_views) as views, SUM(i_num_spam) as spam, SUM(i_num_repeated) as repeated, SUM(i_num_bad_classified) as bad_classified, SUM(i_num_offensive) as offensive, SUM(i_num_expired) as expired');
@@ -192,8 +237,14 @@
             $result = $this->conn->get();
             return $result->result();
         }
-        
-        public function new_alerts_count($from_date, $date = 'day') 
+
+	    /**
+	     * @param        $from_date
+	     * @param string $date
+	     *
+	     * @return mixed
+	     */
+	    public function new_alerts_count( $from_date , $date = 'day' )
         {
             if($date=='week') {
                 $this->conn->select('WEEK(dt_date) as d_date, COUNT(s_email) as num');
@@ -214,8 +265,14 @@
             $result = $this->conn->get();
             return $result->result();
         }
-        
-        public function new_subscribers_count($from_date, $date = 'day') 
+
+	    /**
+	     * @param        $from_date
+	     * @param string $date
+	     *
+	     * @return mixed
+	     */
+	    public function new_subscribers_count( $from_date , $date = 'day' )
         {
             if($date=='week') {
                 $this->conn->select('WEEK(dt_date) as d_date, COUNT(DISTINCT s_email) as num');

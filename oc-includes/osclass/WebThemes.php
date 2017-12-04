@@ -18,7 +18,10 @@
  * limitations under the License.
  */
 
-    class WebThemes extends Themes
+	/**
+	 * Class WebThemes
+	 */
+	class WebThemes extends Themes
     {
         private static $instance;
 
@@ -54,7 +57,10 @@
                                 'user-register',
                                 );
 
-        public static function newInstance()
+		/**
+		 * @return \WebThemes
+		 */
+		public static function newInstance()
         {
             if(!self::$instance instanceof self) {
                 self::$instance = new self;
@@ -109,7 +115,12 @@
         }
 
         /* PUBLIC */
-        public function setPath($path)
+		/**
+		 * @param $path
+		 *
+		 * @return bool
+		 */
+		public function setPath( $path )
         {
             if( file_exists($path) ) {
                 $this->path = $path;
@@ -119,7 +130,10 @@
             return false;
         }
 
-        public function setCurrentTheme($theme)
+		/**
+		 * @param $theme
+		 */
+		public function setCurrentTheme( $theme )
         {
             $this->theme = $theme;
             $this->setCurrentThemePath();
@@ -156,10 +170,10 @@
             //}
         }
 
-        /**
-         * This function returns an array of themes (those copied in the oc-content/themes folder)
-         * @return <type>
-         */
+		/**
+		 * This function returns an array of themes (those copied in the oc-content/themes folder)
+		 * @return array <type>
+		 */
         public function getListThemes()
         {
             $themes = array();
@@ -173,11 +187,12 @@
             return $themes;
         }
 
-        /**
-         *
-         * @param <type> $theme
-         * @return <type>
-         */
+		/**
+		 *
+		 * @param <type> $theme
+		 *
+		 * @return array|bool <type>
+		 */
         public function loadThemeInfo($theme)
         {
             $path = $this->path . $theme . '/index.php';
@@ -260,12 +275,22 @@
             return $result;
         }
 
-        public function isValidPage($internal_name)
+		/**
+		 * @param $internal_name
+		 *
+		 * @return bool
+		 */
+		public function isValidPage( $internal_name )
         {
             return !in_array($internal_name, $this->pages);
         }
 
-        public function getAvailableTemplates($theme = null)
+		/**
+		 * @param null $theme
+		 *
+		 * @return array
+		 */
+		public function getAvailableTemplates( $theme = null )
         {
             if($theme==null) { $theme = $this->theme; }
 

@@ -30,9 +30,14 @@
     {
 
         private $order_by;
-        
-        
-        public function table($params)
+
+
+	    /**
+	     * @param $params
+	     *
+	     * @return array
+	     */
+	    public function table( $params )
         {
             
             $this->addTableHeader();
@@ -58,8 +63,11 @@
             $dummy = &$this;
             osc_run_hook( 'admin_rules_table' , $dummy);
         }
-        
-        private function processData($rules)
+
+	    /**
+	     * @param $rules
+	     */
+	    private function processData( $rules )
         {
             if(!empty($rules)) {
 
@@ -105,8 +113,11 @@
 
             }
         }
-                
-        private function getDBParams($_get)
+
+	    /**
+	     * @param $_get
+	     */
+	    private function getDBParams( $_get )
         {
             
             if( !isset($_get['iDisplayStart']) ) {

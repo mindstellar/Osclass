@@ -255,14 +255,16 @@
             return $this->listWhere('fk_i_category_id = %d', (int) $catId );
         }
 
-        /**
-         * Find items belong to an email
-         *
-         * @access public
-         * @since unknown
-         * @param type $email
-         * @return type
-         */
+	    /**
+	     * Find items belong to an email
+	     *
+	     * @access public
+	     * @since  unknown
+	     *
+	     * @param type $email
+	     *
+	     * @return array
+	     */
         public function findByEmail($email)
         {
             return $this->listWhere( 's_contact_email = %s' , $email);
@@ -334,7 +336,14 @@
             return $total_ads['total'];
         }
 
-        public function numItems($category, $enabled = true, $active = true)
+	    /**
+	     * @param      $category
+	     * @param bool $enabled
+	     * @param bool $active
+	     *
+	     * @return int
+	     */
+	    public function numItems( $category , $enabled = true , $active = true )
         {
             $this->dao->select( 'COUNT(*) AS total' );
             $this->dao->from( $this->getTableName() );
@@ -361,7 +370,12 @@
 
         // LEAVE THIS FOR COMPATIBILITIES ISSUES (ONLY SITEMAP GENERATOR)
         // BUT REMEMBER TO DELETE IN ANYTHING > 2.1.x THANKS
-        public function listLatest($limit = 10)
+	    /**
+	     * @param int $limit
+	     *
+	     * @return array
+	     */
+	    public function listLatest( $limit = 10 )
         {
             return $this->listWhere( ' b_active = 1 AND b_enabled = 1 ORDER BY dt_pub_date DESC LIMIT %d' , (int)$limit);
         }
@@ -543,17 +557,19 @@
             return $this->countItemTypesByUserID($userId, 'enabled');
         }
 
-        /**
-         * Find enable items according the type
-         *
-         * @access public
-         * @since unknown
-         * @param int $userId User id
-         * @param int $start beginning from $start
-         * @param int $end ending
-         * @param string $itemType type item(active, expired, pending validate, premium, all, enabled, blocked)
-         * @return array of items
-         */
+	    /**
+	     * Find enable items according the type
+	     *
+	     * @access public
+	     * @since  unknown
+	     *
+	     * @param int  $userId   User id
+	     * @param int  $start    beginning from $start
+	     * @param int  $end      ending
+	     * @param bool $itemType type item(active, expired, pending validate, premium, all, enabled, blocked)
+	     *
+	     * @return array of items
+	     */
         public function findItemTypesByUserID($userId, $start = 0, $end = null, $itemType = false)
         {
             $this->dao->from($this->getTableName());
@@ -596,18 +612,19 @@
                 return array();
             }
             $items  = $result->result();
-            return $this->extendData($items);
+            return $this->extendData($items );
         }
 
-        /**
-         * Count items by User Id according the type
-         *
-         * @access public
-         * @since unknown
-         * @param int $userId User id
-         * @param string $itemType (active, expired, pending validate, premium, all, enabled, blocked)
-         * @return int number of items
-         */
+	    /**
+	     * Count items by User Id according the type
+	     *
+	     * @access public
+	     * @since  unknown
+	     * @param int    $userId   User id
+	     * @param bool   $itemType (active, expired, pending validate, premium, all, enabled, blocked)
+	     * @param string $cond
+	     * @return int number of items
+*/
         public function countItemTypesByUserID($userId, $itemType = false, $cond = '')
         {
             $this->dao->select('count(pk_i_id) as total');
@@ -649,19 +666,20 @@
                 return 0;
             }
             $items  = $result->row();
-            return $items['total'];
+            return $items['total' ];
         }
 
-        /**
-         * Count items by Email according the type 
-         * Usefull for counting item that posted by unregistered user
-         * 
-         * @access public
-         * @since unknown
-         * @param int $email Email
-         * @param string $itemType (active, expired, pending validate, premium, all, enabled, blocked)
-         * @return int number of items
-         */
+	    /**
+	     * Count items by Email according the type
+	     * Usefull for counting item that posted by unregistered user
+	     *
+	     * @access public
+	     * @since  unknown
+	     * @param int    $email    Email
+	     * @param bool   $itemType (active, expired, pending validate, premium, all, enabled, blocked)
+	     * @param string $cond
+	     * @return int number of items
+*/
         public function countItemTypesByEmail($email, $itemType = false, $cond = '')
         {
             $this->dao->select('count(pk_i_id) as total');
@@ -767,15 +785,17 @@
                 'fk_c_locale_code'  => $locale,
                 'fk_i_item_id'      => $id
             );
-            return $this->dao->replace(DB_TABLE_PREFIX.'t_item_description', $array_replace);
+            return $this->dao->replace(DB_TABLE_PREFIX.'t_item_description', $array_replace );
         }
 
-        /**
-         * Update dt_expiration field, using $expiration_time
-         *
-         * @param mixed $expiration_time could be interget (number of days) or directly a date
-         * @return string new date expiration, false if error occurs
-         */
+	    /**
+	     * Update dt_expiration field, using $expiration_time
+	     *
+	     * @param       $id
+	     * @param mixed $expiration_time could be interget (number of days) or directly a date
+	     * @param bool  $do_stats
+	     * @return string new date expiration, false if error occurs
+*/
         public function updateExpirationDate($id, $expiration_time, $do_stats = true)
         {
             if($expiration_time=='') {
@@ -842,7 +862,13 @@
             return false;
         }
 
-        public function enableByCategory($enable, $aIds)
+	    /**
+	     * @param $enable
+	     * @param $aIds
+	     *
+	     * @return mixed
+	     */
+	    public function enableByCategory($enable, $aIds)
         {
             $sql  = sprintf('UPDATE %st_item SET b_enabled = %d WHERE ', DB_TABLE_PREFIX, $enable );
             $sql .= sprintf('%st_item.fk_i_category_id IN (%s)', DB_TABLE_PREFIX, implode(',', $aIds) );

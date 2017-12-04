@@ -75,11 +75,12 @@
         }
     }
 
-    /**
-     * Iterator for countries, return null if there's no more countries
-     *
-     * @return array
-     */
+
+	/**
+	 * Iterator for countries, return null if there's no more countries
+	 *
+	 * @return bool
+	 */
     function osc_has_countries() {
         if ( !View::newInstance()->_exists('countries') ) {
             View::newInstance()->_exportVariableToView('countries', Search::newInstance()->listCountries( '>=' , 'country_name ASC' ) );
@@ -87,11 +88,14 @@
         return View::newInstance()->_next('countries');
     }
 
-    /**
-     * Iterator for regions, return null if there's no more regions
-     *
-     * @return array
-     */
+
+	/**
+	 * Iterator for regions, return null if there's no more regions
+	 *
+	 * @param string $country
+	 *
+	 * @return bool
+	 */
     function osc_has_regions($country = '%%%%') {
         if ( !View::newInstance()->_exists('regions') ) {
             View::newInstance()->_exportVariableToView('regions', Search::newInstance()->listRegions( $country, '>=' , 'region_name ASC' ) );
@@ -99,11 +103,14 @@
         return View::newInstance()->_next('regions');
     }
 
-    /**
-     * Iterator for cities, return null if there's no more cities
-     *
-     * @return array
-     */
+
+	/**
+	 * Iterator for cities, return null if there's no more cities
+	 *
+	 * @param string $region
+	 *
+	 * @return bool
+	 */
     function osc_has_cities($region = '%%%%') {
         if ( !View::newInstance()->_exists('cities') ) {
             View::newInstance()->_exportVariableToView('cities', Search::newInstance()->listCities( $region, '>=' , 'city_name ASC' ) );
@@ -116,11 +123,13 @@
         return $result;
     }
 
-    /**
-     * Iterator for city areas, return null if there's no more city areas
-     *
-     * @return array
-     */
+
+	/**
+	 * Iterator for city areas, return null if there's no more city areas
+	 *
+	 * @param string $city
+	 * @return bool
+	 */
     function osc_has_city_areas($city = '%%%%') {
         if ( !View::newInstance()->_exists('city_areas') ) {
             View::newInstance()->_exportVariableToView('city_areas', Search::newInstance()->listCityAreas( $city, '>=' , 'city_area_name ASC' ) );
@@ -145,11 +154,13 @@
         return View::newInstance()->_count('countries');
     }
 
-    /**
-     * Gets number of regions
-     *
-     * @return int
-     */
+
+	/**
+	 * Gets number of regions
+	 *
+	 * @param string $country
+	 * @return int
+	 */
     function osc_count_regions($country = '%%%%') {
         if ( !View::newInstance()->_exists('regions') ) {
             View::newInstance()->_exportVariableToView('regions', Search::newInstance()->listRegions( $country, '>=' , 'region_name ASC' ) );
@@ -157,11 +168,13 @@
         return View::newInstance()->_count('regions');
     }
 
-    /**
-     * Gets number of cities
-     *
-     * @return int
-     */
+
+	/**
+	 * Gets number of cities
+	 *
+	 * @param string $region
+	 * @return int
+	 */
     function osc_count_cities($region = '%%%%') {
         if ( !View::newInstance()->_exists('cities') ) {
             View::newInstance()->_exportVariableToView('cities', Search::newInstance()->listCities( $region, '>=' , 'city_name ASC' ) );
@@ -169,11 +182,13 @@
         return View::newInstance()->_count('cities');
     }
 
-    /**
-     * Gets number of city areas
-     *
-     * @return int
-     */
+
+	/**
+	 * Gets number of city areas
+	 *
+	 * @param string $city
+	 * @return int
+	 */
     function osc_count_city_areas($city = '%%%%') {
         if ( !View::newInstance()->_exists('city_areas') ) {
             View::newInstance()->_exportVariableToView('city_areas', Search::newInstance()->listCityAreas( $city, '>=' , 'city_area_name ASC' ) );

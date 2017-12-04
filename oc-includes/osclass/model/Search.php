@@ -68,7 +68,10 @@
 
         private static $instance;
 
-        public static function newInstance()
+	    /**
+	     * @return \Search
+	     */
+	    public static function newInstance()
         {
             if( !self::$instance instanceof self ) {
                 self::$instance = new self;
@@ -76,9 +79,9 @@
             return self::$instance;
         }
 
-        /**
-         *
-         */
+	    /**
+	     * @param bool $expired
+	     */
         public function __construct($expired = false)
         {
             parent::__construct();
@@ -296,14 +299,14 @@
             }
         }
 
-        /**
-         * Add group by to the search
-         *
-         * @access public
-         * @since unknown
-         * @param mixed $tables
-         *
-         */
+	    /**
+	     * Add group by to the search
+	     *
+	     * @access public
+	     * @since  unknown
+	     *
+	     * @param $groupBy
+	     */
         public function addGroupBy( $groupBy )
         {
             $this->groupBy = $groupBy;
@@ -332,40 +335,41 @@
             $this->order_direction = $o_d;
         }
 
-        /**
-         * Limit the results of the search
-         *
-         * @access public
-         * @since unknown
-         * @param int $l_i
-         * @param int $t_p_p results per page
-         */
+	    /**
+	     * Limit the results of the search
+	     *
+	     * @access public
+	     * @since  unknown
+	     *
+	     * @param int  $l_i
+	     * @param null $r_p_p
+	     */
         public function limit($l_i = 0, $r_p_p = null)
         {
             $this->limit_init = $l_i;
             if($r_p_p!=null) { $this->results_per_page = $r_p_p; }
         }
 
-        /**
-         * Limit the results of the search
-         *
-         * @access public
-         * @since unknown
-         * @param int $t_p_p results per page
-         */
+	    /**
+	     * Limit the results of the search
+	     *
+	     * @access public
+	     * @since  unknown
+	     * @param $r_p_p
+	     */
         public function set_rpp($r_p_p)
         {
             $this->results_per_page = $r_p_p;
         }
 
-        /**
-         * Select the page of the search
-         *
-         * @access public
-         * @since unknown
-         * @param int $p page
-         * @param int $t_p_p results per page
-         */
+	    /**
+	     * Select the page of the search
+	     *
+	     * @access public
+	     * @since  unknown
+	     * @param int  $p page
+	     * @param null $r_p_p
+	     */
         public function page($p = 0, $r_p_p = null)
         {
             if($r_p_p!=null) { $this->results_per_page = $r_p_p; }
@@ -595,13 +599,13 @@
             $this->sPattern     = $this->dao->escapeStr($pattern);
         }
 
-        /**
-         * Filter by email
-         *
-         * @access public
-         * @since 2.4
-         * @param string $pattern
-         */
+	    /**
+	     * Filter by email
+	     *
+	     * @access public
+	     * @since  2.4
+	     * @param $email
+	     */
         public function addContactEmail($email)
         {
             $this->withNoUserEmail  = true;
@@ -656,7 +660,10 @@
             }
         }
 
-        public function notFromUser($id)
+	    /**
+	     * @param $id
+	     */
+	    public function notFromUser($id)
         {
             $this->_loadUserTable();
 
@@ -677,7 +684,10 @@
         }
 
 
-        public function addItemId($id)
+	    /**
+	     * @param $id
+	     */
+	    public function addItemId($id)
         {
             $this->withItemId = true;
             $this->itemId = $id;
@@ -704,13 +714,16 @@
             }
         }
 
-        /**
-         * Add categories to the search
-         *
-         * @access public
-         * @since unknown
-         * @param mixed $category
-         */
+	    /**
+	     * Add categories to the search
+	     *
+	     * @access public
+	     * @since  unknown
+	     *
+	     * @param mixed $category
+	     *
+	     * @return bool
+	     */
         public function addCategory($category = null)
         {
             if( $category == null ) {
@@ -806,11 +819,13 @@
             );
         }
 
-        /**
-         * Only search by pattern + location + category
-         *
-         * @param type $num
-         */
+	    /**
+	     * Only search by pattern + location + category
+	     *
+	     * @param int $num
+	     *
+	     * @return string
+	     */
         private function _makeSQLPremium($num = 2)
         {
             $arrayConditions    = $this->_conditions();
@@ -906,13 +921,17 @@
             }
         }
 
-        /**
-         * Make the SQL for the search with all the conditions and filters specified
-         *
-         * @access private
-         * @since unknown
-         * @param bool $count
-         */
+	    /**
+	     * Make the SQL for the search with all the conditions and filters specified
+	     *
+	     * @access private
+	     * @since  unknown
+	     *
+	     * @param bool $count
+	     *
+	     * @param bool $premium
+	     * @return string
+	     */
         private function _makeSQL($count = false,$premium = false)
         {
             $arrayConditions    = $this->_conditions();
@@ -1047,13 +1066,17 @@
             return $this->total_results_table;
         }
 
-        /**
-         * Perform the search
-         *
-         * @access public
-         * @since unknown
-         * @param bool $extended if you want to extend ad's data
-         */
+	    /**
+	     * Perform the search
+	     *
+	     * @access public
+	     * @since  unknown
+	     *
+	     * @param bool $extended if you want to extend ad's data
+	     *
+	     * @param bool $count
+	     * @return array
+	     */
         public function doSearch($extended = true, $count = true)
         {
             $sql = $this->_makeSQL(false);
@@ -1095,10 +1118,11 @@
          * @since unknown
          * @param int $max
          */
-        /**
-         * solo acepta pattern + location + stats, category
-         *
-         */
+	    /**
+	     * solo acepta pattern + location + stats, category
+	     * @param int $max
+	     * @return array
+	     */
         public function getPremiums($max = 2)
         {
             $premium_sql = $this->_makeSQLPremium($max); // make premium sql
@@ -1160,66 +1184,78 @@
             }
         }
 
-        /**
-         * Returns number of ads from each country
-         *
-         * @deprecated
-         * @access public
-         * @since unknown
-         * @param string $zero if you want to include locations with zero results
-         * @param string $order
-         */
+	    /**
+	     * Returns number of ads from each country
+	     *
+	     * @deprecated
+	     * @access public
+	     * @since  unknown
+	     *
+	     * @param string $zero if you want to include locations with zero results
+	     * @param string $order
+	     *
+	     * @return array
+	     */
         public function listCountries($zero = '>' , $order = 'items DESC' )
         {
            return CountryStats::newInstance()->listCountries($zero, $order);
         }
 
-        /**
-         * Returns number of ads from each region
-         * <code>
-         *  Search::newInstance()->listRegions($country, ">=", "country_name ASC" )
-         * </code>
-         *
-         * @deprecated
-         * @access public
-         * @since unknown
-         * @param string $country
-         * @param string $zero if you want to include locations with zero results
-         * @param string $order
-         */
+	    /**
+	     * Returns number of ads from each region
+	     * <code>
+	     *  Search::newInstance()->listRegions($country, ">=", "country_name ASC" )
+	     * </code>
+	     *
+	     * @deprecated
+	     * @access public
+	     * @since  unknown
+	     *
+	     * @param string $country
+	     * @param string $zero if you want to include locations with zero results
+	     * @param string $order
+	     *
+	     * @return array
+	     */
         public function listRegions($country = '%%%%', $zero = '>' , $order = 'items DESC' )
         {
            return RegionStats::newInstance()->listRegions($country, $zero, $order);
         }
 
-        /**
-         * Returns number of ads from each city
-         *
-         * <code>
-         *  Search::newInstance()->listCities($region, ">=", "city_name ASC" )
-         * </code>
-         *
-         * @deprecated
-         * @access public
-         * @since unknown
-         * @param string $region
-         * @param string $zero if you want to include locations with zero results
-         * @param string $order
-         */
+	    /**
+	     * Returns number of ads from each city
+	     *
+	     * <code>
+	     *  Search::newInstance()->listCities($region, ">=", "city_name ASC" )
+	     * </code>
+	     *
+	     * @deprecated
+	     * @access public
+	     * @since  unknown
+	     *
+	     * @param string $region
+	     * @param string $zero if you want to include locations with zero results
+	     * @param string $order
+	     *
+	     * @return
+	     */
         public function listCities($region = null, $zero = '>' , $order = 'city_name ASC' )
         {
             return CityStats::newInstance()->listCities($region, $zero, $order);
         }
 
-        /**
-         * Returns number of ads from each city area
-         *
-         * @access public
-         * @since unknown
-         * @param string $city
-         * @param string $zero if you want to include locations with zero results
-         * @param string $order
-         */
+	    /**
+	     * Returns number of ads from each city area
+	     *
+	     * @access public
+	     * @since  unknown
+	     *
+	     * @param string $city
+	     * @param string $zero if you want to include locations with zero results
+	     * @param string $order
+	     *
+	     * @return array
+	     */
         public function listCityAreas($city = null, $zero = '>' , $order = 'items DESC' )
         {
            $aOrder = explode(' ', $order);
@@ -1364,11 +1400,12 @@
             return $aData;
         }
 
-        /**
-         * Return json with all search attributes
-         *
-         * @return string
-         */
+	    /**
+	     * Return json with all search attributes
+	     *
+	     * @param bool $convert
+	     * @return string
+	     */
         public function toJson($convert = false)
         {
             if($convert) {
@@ -1410,7 +1447,10 @@
             return json_encode($aData);
         }
 
-        public function setJsonAlert($aData)
+	    /**
+	     * @param $aData
+	     */
+	    public function setJsonAlert($aData)
         {
             $this->priceRange($aData['price_min'], $aData['price_max'] );
 

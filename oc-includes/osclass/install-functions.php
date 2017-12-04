@@ -17,7 +17,13 @@
 
 
 require_once dirname(dirname(__FILE__)) . '/htmlpurifier/HTMLPurifier.auto.php';
-function _purify($value, $xss_check)
+	/**
+	 * @param $value
+	 * @param $xss_check
+	 *
+	 * @return \Purified
+	 */
+	function _purify( $value , $xss_check )
 {
     if( !$xss_check ) {
         return $value;
@@ -40,7 +46,17 @@ function _purify($value, $xss_check)
 
     return $value;
 }
-function getServerParam($param, $htmlencode = false, $xss_check = true, $quotes_encode = true)
+
+
+	/**
+	 * @param      $param
+	 * @param bool $htmlencode
+	 * @param bool $xss_check
+	 * @param bool $quotes_encode
+	 *
+	 * @return \Purified|string
+	 */
+	function getServerParam( $param , $htmlencode = false , $xss_check = true , $quotes_encode = true )
 {
 	if ( $param == '' ) {
 		return '';
@@ -71,7 +87,10 @@ function getServerParam($param, $htmlencode = false, $xss_check = true, $quotes_
  *
  * @return string The url of the site
  */
-function get_absolute_url( ) {
+	/**
+	 * @return string
+	 */
+	function get_absolute_url() {
     $protocol = ( getServerParam('HTTPS') == 'on' || getServerParam('HTTP_X_FORWARDED_PROTO')=='https') ? 'https' : 'http';
     $pos      = strpos(getServerParam('REQUEST_URI'), 'oc-includes');
     $URI      = rtrim( substr( getServerParam('REQUEST_URI'), 0, $pos ), '/' ) . '/';
@@ -85,7 +104,10 @@ function get_absolute_url( ) {
  *
  * @return string The relative url on the domain url
  */
-function get_relative_url( ) {
+	/**
+	 * @return string
+	 */
+	function get_relative_url() {
     $url = Params::getServerParam('REQUEST_URI', false, false);
     return substr($url, 0, strpos($url, '/oc-includes')) . '/';
 }
@@ -97,7 +119,10 @@ function get_relative_url( ) {
  *
  * @return array Requirements
  */
-function get_requirements( ) {
+	/**
+	 * @return array
+	 */
+	function get_requirements() {
     $array = array(
         'PHP version >= 5.6.x' => array(
             'requirement' => __('PHP version >= 5.6.x'),
@@ -178,13 +203,15 @@ function get_requirements( ) {
 }
 
 
-/**
- * Check if some of the requirements to install Osclass are correct or not
- *
- * @since 1.2
- *
- * @return boolean Check if all the requirements are correct
- */
+	/**
+	 * Check if some of the requirements to install Osclass are correct or not
+	 *
+	 * @since 1.2
+	 *
+	 * @param $array
+	 *
+	 * @return boolean Check if all the requirements are correct
+	 */
 function check_requirements($array) {
     foreach($array as $k => $v) {
 	    if ( ! $v[ 'fn' ] ) {
@@ -203,10 +230,12 @@ function reportToOsclass() {
     return $_COOKIE['osclass_save_stats'];
 }
 
-/**
- * insert/update preference allow_report_osclass
- * @param boolean $bool
- */
+
+	/**
+	 * insert/update preference allow_report_osclass
+	 *
+	 * @param $value
+	 */
 function set_allow_report_osclass($value) {
     $values = array(
         's_section' => 'osclass',
@@ -225,7 +254,10 @@ function set_allow_report_osclass($value) {
  *
  * @return mixed Error messages of the installation
  */
-function oc_install( ) {
+	/**
+	 * @return array|bool
+	 */
+	function oc_install( ) {
     $dbhost      = Params::getParam('dbhost');
     $dbname      = Params::getParam('dbname');
     $username    = Params::getParam('username');
@@ -453,8 +485,14 @@ function oc_install_example_data() {
     require_once LIB_PATH . 'osclass/model/Category.php';
     $mCat = Category::newInstance();
 
-    if(!function_exists('osc_apply_filter')) {
-        function osc_apply_filter($dummyfilter, $str) {
+    if(!function_exists('osc_apply_filter') ) {
+	    /**
+	     * @param $dummyfilter
+	     * @param $str
+	     *
+	     * @return mixed
+	     */
+	    function osc_apply_filter( $dummyfilter , $str) {
             return $str;
         }
     }
@@ -538,7 +576,14 @@ function oc_install_example_data() {
  * @param string $tableprefix Prefix for table names
  * @return mixed Error messages of the installation
  */
-function create_config_file($dbname, $username, $password, $dbhost, $tableprefix) {
+	/**
+	 * @param $dbname
+	 * @param $username
+	 * @param $password
+	 * @param $dbhost
+	 * @param $tableprefix
+	 */
+	function create_config_file( $dbname , $username , $password , $dbhost , $tableprefix) {
     $password = addslashes($password);
     $abs_url = get_absolute_url();
     $rel_url = get_relative_url();
@@ -578,7 +623,14 @@ CONFIG;
  *
  * @since 1.2
  */
-function copy_config_file($dbname, $username, $password, $dbhost, $tableprefix) {
+	/**
+	 * @param $dbname
+	 * @param $username
+	 * @param $password
+	 * @param $dbhost
+	 * @param $tableprefix
+	 */
+	function copy_config_file( $dbname , $username , $password , $dbhost , $tableprefix) {
     $password = addslashes($password);
     $abs_url = get_absolute_url();
     $rel_url = get_relative_url();
@@ -616,10 +668,13 @@ function copy_config_file($dbname, $username, $password, $dbhost, $tableprefix) 
     }
     fclose($handle);
     chmod(ABS_PATH . 'config.php', 0666);
-}
+	}
 
 
-function is_osclass_installed( ) {
+	/**
+	 * @return bool
+	 */
+	function is_osclass_installed( ) {
     if( !file_exists( ABS_PATH . 'config.php' ) ) {
         return false;
     }
@@ -640,9 +695,15 @@ function is_osclass_installed( ) {
     }
 
     return true;
-}
+	}
 
-function finish_installation( $password ) {
+
+	/**
+	 * @param $password
+	 *
+	 * @return array
+	 */
+	function finish_installation( $password ) {
     require_once LIB_PATH . 'osclass/model/Admin.php';
     require_once LIB_PATH . 'osclass/model/Category.php';
     require_once LIB_PATH . 'osclass/model/Item.php';
@@ -901,7 +962,12 @@ function display_target() {
 <?php
 }
 
-function display_database_error($error ,$step) {
+
+	/**
+	 * @param $error
+	 * @param $step
+	 */
+	function display_database_error( $error , $step) {
     ?>
     <h2 class="target"><?php _e('Error'); ?></h2>
     <p class="bottom space-left-10">
@@ -910,9 +976,13 @@ function display_database_error($error ,$step) {
     <a href="<?php echo get_absolute_url(); ?>oc-includes/osclass/install.php?step=<?php echo $step; ?>" class="button"><?php _e('Go back'); ?></a>
     <div class="clear bottom"></div>
 <?php
-}
+	}
 
-function ping_search_engines($bool){
+
+	/**
+	 * @param $bool
+	 */
+	function ping_search_engines( $bool){
     $mPreference = Preference::newInstance();
     if($bool == 1){
         $mPreference->insert (
@@ -939,8 +1009,13 @@ function ping_search_engines($bool){
             )
         );
     }
-}
-function display_finish($password) {
+	}
+
+
+	/**
+	 * @param $password
+	 */
+	function display_finish( $password) {
     $data = finish_installation( $password );
     ?>
     <?php if(Params::getParam('error_location') == 1) { ?>

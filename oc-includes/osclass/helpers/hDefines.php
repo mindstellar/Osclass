@@ -44,7 +44,13 @@
         return osc_apply_filter('base_url', $path, $with_index);
     }
 
-    function osc_subdomain_base_url($params = array()) {
+
+	/**
+	 * @param array $params
+	 *
+	 * @return string
+	 */
+	function osc_subdomain_base_url( $params = array () ) {
         $fields['category'] = 'sCategory';
         $fields['country'] = 'sCountry';
         $fields['region'] = 'sRegion';
@@ -345,12 +351,13 @@
         return $path;
     }
 
-    /**
-     * Create automatically the url of a category
-     *
-     * @param string $pattern
-     * @return string the url
-     */
+
+	/**
+	 * Create automatically the url of a category
+	 *
+	 * @return string the url
+	 * @throws \Exception
+	 */
     function osc_search_category_url() {
         return osc_search_url(array('sCategory' => osc_category_id()));
     }
@@ -586,13 +593,16 @@
         }
     }
 
-    /**
-     * Gets current user alert unsubscribe url
-     *
-     * @param string $email
-     * @param string $secret
-     * @return string
-     */
+
+	/**
+	 * Gets current user alert unsubscribe url
+	 *
+	 * @param string $id
+	 * @param string $email
+	 * @param string $secret
+	 *
+	 * @return string
+	 */
     function osc_user_unsubscribe_alert_url( $id = '', $email = '', $secret = '') {
         if($secret=='') { $secret = osc_alert_secret(); }
         if($id=='') { $id = osc_alert_id(); }
@@ -600,13 +610,16 @@
         return osc_base_url(true) . '?page=user&action=unsub_alert&email='.urlencode($email).'&secret='.$secret.'&id='.$id;
     }
 
-    /**
-     * Gets user alert activate url
-     *
-     * @param string $secret
-     * @param string $email
-     * @return string
-     */
+
+	/**
+	 * Gets user alert activate url
+	 *
+	 * @param        $id
+	 * @param string $secret
+	 * @param string $email
+	 *
+	 * @return string
+	 */
     function osc_user_activate_alert_url( $id, $secret , $email ) {
         if ( osc_rewrite_enabled() ) {
             return osc_base_url() . osc_get_preference('rewrite_user_activate_alert') . '/' . $id . '/' . $secret . '/' . urlencode($email);
@@ -629,12 +642,14 @@
         }
     }
 
-    /**
-     * Gets current user alert activate url
-     *
-     * @param int $page
-     * @return string
-     */
+
+	/**
+	 * Gets current user alert activate url
+	 *
+	 * @param string $page
+	 * @param string $typeItem
+	 * @return string
+	 */
     function osc_user_list_items_url($page = '', $typeItem = '') {
         if ( osc_rewrite_enabled() ) {
 
@@ -765,13 +780,13 @@
     //       functions for items       //
     /////////////////////////////////////
 
-    /**
-     * Gets url for editing an item
-     *
-     * @param string $secret
-     * @param int $id
-     * @return string
-     */
+	/**
+	 * Gets url for editing an item
+	 *
+	 * @param string $secret
+	 * @param string $id
+	 * @return string
+	 */
     function osc_item_edit_url($secret = '', $id = '') {
         if ($id == '') { $id = osc_item_id(); }
 	    if ( osc_rewrite_enabled() ) {
@@ -781,13 +796,14 @@
         }
     }
 
-    /**
-     * Gets url for delete an item
-     *
-     * @param string $secret
-     * @param int $id
-     * @return string
-     */
+
+	/**
+	 * Gets url for delete an item
+	 *
+	 * @param string $secret
+	 * @param string $id
+	 * @return string
+	 */
     function osc_item_delete_url($secret = '', $id = '') {
         if ($id == '') { $id = osc_item_id(); }
 	    if ( osc_rewrite_enabled() ) {
@@ -797,13 +813,14 @@
         }
     }
 
-    /**
-     * Gets url for activate an item
-     *
-     * @param string $secret
-     * @param int $id
-     * @return string
-     */
+
+	/**
+	 * Gets url for activate an item
+	 *
+	 * @param string $secret
+	 * @param string $id
+	 * @return string
+	 */
     function osc_item_activate_url($secret = '', $id = '') {
         if ($id == '') { $id = osc_item_id(); }
 	    if ( osc_rewrite_enabled() ) {
@@ -843,11 +860,14 @@
         }
     }
 
-    /**
-     * @param $id
-     * @param $args
-     * @since 3.2
-     */
+
+	/**
+	 * @param $id
+	 * @param $args
+	 *
+	 * @since 3.2
+	 * @return string
+	 */
     function osc_route_url($id, $args = array()) {
         $routes = Rewrite::newInstance()->getRoutes();
         if(!isset($routes[$id])) { return ''; }
@@ -871,11 +891,14 @@
         }
     }
 
-    /**
-     * @param $id
-     * @param $args
-     * @since 3.2
-     */
+
+	/**
+	 * @param $id
+	 * @param $args
+	 *
+	 * @since 3.2
+	 * @return string
+	 */
     function osc_route_admin_url($id, $args = array()) {
         $routes = Rewrite::newInstance()->getRoutes();
         if(!isset($routes[$id])) { return ''; }
@@ -886,11 +909,14 @@
         return osc_admin_base_url(true) . '?page=plugins&action=renderplugin&route=' . $id . $params_url;
     }
 
-    /**
-     * @param $id
-     * @param $args
-     * @since 3.2
-     */
+
+	/**
+	 * @param $id
+	 * @param $args
+	 *
+	 * @since 3.2
+	 * @return string
+	 */
     function osc_route_ajax_url($id, $args = array()) {
         $routes = Rewrite::newInstance()->getRoutes();
         if(!isset($routes[$id])) { return ''; }
@@ -901,11 +927,14 @@
         return osc_base_url(true) . '?page=ajax&action=custom&route=' . $id . $params_url;
     }
 
-    /**
-     * @param $id
-     * @param $args
-     * @since 3.2
-     */
+
+	/**
+	 * @param $id
+	 * @param $args
+	 *
+	 * @since 3.2
+	 * @return string
+	 */
     function osc_route_admin_ajax_url($id, $args = array()) {
         $routes = Rewrite::newInstance()->getRoutes();
         if(!isset($routes[$id])) { return ''; }
@@ -934,12 +963,13 @@
         }
     }
 
-    /**
-     * Gets list of regions (from a country)
-     *
-     * @param int $country
-     * @return string
-     */
+
+	/**
+	 * Gets list of regions (from a country)
+	 *
+	 * @param string $country
+	 * @return string
+	 */
     function osc_get_regions($country = '') {
         if (View::newInstance()->_exists('regions')) {
             return View::newInstance()->_get('regions');
@@ -952,12 +982,13 @@
         }
     }
 
-    /**
-     * Gets list of cities (from a region)
-     *
-     * @param int $region
-     * @return string
-     */
+
+	/**
+	 * Gets list of cities (from a region)
+	 *
+	 * @param string $region
+	 * @return string
+	 */
     function osc_get_cities($region = '') {
         if (View::newInstance()->_exists('cities')) {
             return View::newInstance()->_get('cities');
@@ -1114,11 +1145,13 @@
         return osc_is_current_page('login', 'forgot');
     }
 
-    /**
-     * Get if the user is on custom page
-     *
-     * @return boolean
-     */
+
+	/**
+	 * Get if the user is on custom page
+	 *
+	 * @param null $value
+	 * @return boolean
+	 */
     function osc_is_custom_page($value = null) {
         if(Rewrite::newInstance()->get_location()=='custom') {
             if($value==null || Params::getParam('file')==$value || Params::getParam('route')==$value) {
@@ -1259,13 +1292,25 @@
         return false;
     }
 
-    function osc_get_domain() {
+
+	/**
+	 * @return mixed
+	 */
+	function osc_get_domain() {
         $result = parse_url( osc_base_url() );
 
         return $result['host'];
-    }
+	}
 
-    function osc_breadcrumb($separator = '&raquo;', $echo = true, $lang = array()) {
+
+	/**
+	 * @param string $separator
+	 * @param bool   $echo
+	 * @param array  $lang
+	 *
+	 * @return string|void
+	 */
+	function osc_breadcrumb( $separator = '&raquo;' , $echo = true , $lang = array ()) {
         $br = new Breadcrumb($lang);
         $br->init();
         if( $echo ) {
@@ -1273,17 +1318,29 @@
             return;
         }
         return $br->render($separator);
-    }
+	}
 
-    function osc_subdomain_name() {
+
+	/**
+	 * @return mixed|string
+	 */
+	function osc_subdomain_name() {
         return View::newInstance()->_get('subdomain_name');
-    }
+	}
 
-    function osc_subdomain_slug() {
+
+	/**
+	 * @return mixed|string
+	 */
+	function osc_subdomain_slug() {
         return View::newInstance()->_get('subdomain_slug');
-    }
+	}
 
-    function osc_is_subdomain() {
+
+	/**
+	 * @return bool
+	 */
+	function osc_is_subdomain() {
         return View::newInstance()->_get('subdomain_slug')!='';
     }
     /* file end: ./oc-includes/osclass/helpers/hDefines.php */

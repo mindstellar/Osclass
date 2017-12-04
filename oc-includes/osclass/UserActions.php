@@ -18,19 +18,31 @@
  * limitations under the License.
  */
 
-    Class UserActions
+	/**
+	 * Class UserActions
+	 */
+	Class UserActions
     {
         public $is_admin;
         public $manager;
 
-        public function __construct($is_admin)
+		/**
+		 * UserActions constructor.
+		 *
+		 * @param $is_admin
+		 */
+		public function __construct( $is_admin )
         {
             $this->is_admin = $is_admin;
             $this->manager  = User::newInstance();
         }
 
         //add...
-        public function add()
+
+		/**
+		 * @return int
+		 */
+		public function add()
         {
             $error = array();
             $flash_error = '';
@@ -138,7 +150,13 @@
         }
 
         //edit...
-        public function edit($userId)
+
+		/**
+		 * @param $userId
+		 *
+		 * @return int
+		 */
+		public function edit( $userId )
         {
 
             $input = $this->prepareData(false);
@@ -224,7 +242,10 @@
             return 1;
         }
 
-        public function recover_password()
+		/**
+		 * @return int
+		 */
+		public function recover_password()
         {
             $user = User::newInstance()->findByEmail( Params::getParam('s_email') );
             Session::newInstance()->_set( 'recover_time', time() );
@@ -250,7 +271,12 @@
             return 0;
         }
 
-        public function prepareData($is_add)
+		/**
+		 * @param $is_add
+		 *
+		 * @return array
+		 */
+		public function prepareData( $is_add )
         {
             $input = array();
 
@@ -337,7 +363,12 @@
             return $input;
         }
 
-        public function activate($user_id)
+		/**
+		 * @param $user_id
+		 *
+		 * @return bool
+		 */
+		public function activate( $user_id )
         {
             $user = $this->manager->findByPrimaryKey($user_id);
 
@@ -374,7 +405,12 @@
             return true;
         }
 
-        public function deactivate($user_id)
+		/**
+		 * @param $user_id
+		 *
+		 * @return bool
+		 */
+		public function deactivate( $user_id )
         {
             $user = $this->manager->findByPrimaryKey($user_id);
 
@@ -398,7 +434,12 @@
             return true;
         }
 
-        public function enable($user_id)
+		/**
+		 * @param $user_id
+		 *
+		 * @return bool
+		 */
+		public function enable( $user_id )
         {
             $user = $this->manager->findByPrimaryKey($user_id);
 
@@ -422,7 +463,12 @@
             return true;
         }
 
-        public function disable($user_id)
+		/**
+		 * @param $user_id
+		 *
+		 * @return bool
+		 */
+		public function disable( $user_id )
         {
             $user = $this->manager->findByPrimaryKey($user_id);
 
@@ -446,7 +492,12 @@
             return true;
         }
 
-        public function resend_activation($user_id)
+		/**
+		 * @param $user_id
+		 *
+		 * @return int
+		 */
+		public function resend_activation( $user_id )
         {
             $user = $this->manager->findByPrimaryKey($user_id);
             $input['s_secret'] = $user['s_secret'];
@@ -463,7 +514,12 @@
             return 0;
         }
 
-        public function bootstrap_login($user_id)
+		/**
+		 * @param $user_id
+		 *
+		 * @return int
+		 */
+		public function bootstrap_login( $user_id )
         {
             $user = User::newInstance()->findByPrimaryKey( $user_id );
 

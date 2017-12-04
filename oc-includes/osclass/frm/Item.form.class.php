@@ -18,15 +18,29 @@
  * limitations under the License.
  */
 
-    class ItemForm extends Form {
+	/**
+	 * Class ItemForm
+	 */
+	class ItemForm extends Form {
 
-        public static function primary_input_hidden($item)
+		/**
+		 * @param $item
+		 */
+		public static function primary_input_hidden( $item )
         {
             if($item==null) { $item = osc_item(); }
 	        parent::generic_input_hidden( 'id' , $item[ 'pk_i_id' ]);
         }
 
-        public static function category_select($categories = null, $item = null, $default_item = null, $parent_selectable = false)
+		/**
+		 * @param null $categories
+		 * @param null $item
+		 * @param null $default_item
+		 * @param bool $parent_selectable
+		 *
+		 * @return bool
+		 */
+		public static function category_select( $categories = null , $item = null , $default_item = null , $parent_selectable = false )
         {
             // Did user select a specific category to post in?
             $catId = Params::getParam('catId');
@@ -71,7 +85,13 @@
             return true;
         }
 
-        public static function category_two_selects($categories = null, $item = null, $default_item = null, $parent_selectable = false)
+		/**
+		 * @param null $categories
+		 * @param null $item
+		 * @param null $default_item
+		 * @param bool $parent_selectable
+		 */
+		public static function category_two_selects( $categories = null , $item = null , $default_item = null , $parent_selectable = false )
         {
 
             $categoryID = Params::getParam('catId');
@@ -172,7 +192,13 @@
         <?php
         }
 
-        public static function category_multiple_selects($categories = null, $item = null, $default_item = null, $parent_selectable = false)
+		/**
+		 * @param null $categories
+		 * @param null $item
+		 * @param null $default_item
+		 * @param bool $parent_selectable
+		 */
+		public static function category_multiple_selects( $categories = null , $item = null , $default_item = null , $parent_selectable = false )
         {
 
             $categoryID = Params::getParam('catId');
@@ -280,7 +306,13 @@
         }
 
 
-        public static function subcategory_select($categories, $item, $default_item = null, $deep = 0)
+		/**
+		 * @param      $categories
+		 * @param      $item
+		 * @param null $default_item
+		 * @param int  $deep
+		 */
+		public static function subcategory_select( $categories , $item , $default_item = null , $deep = 0 )
         {
             // Did user select a specific category to post in?
             $catId = Params::getParam('catId');
@@ -304,7 +336,14 @@
             }
         }
 
-        public static function user_select($users = null, $item = null, $default_item = null)
+		/**
+		 * @param null $users
+		 * @param null $item
+		 * @param null $default_item
+		 *
+		 * @return bool
+		 */
+		public static function user_select( $users = null , $item = null , $default_item = null )
         {
             if($users==null) { $users = User::newInstance()->listAll(); }
 	        if($item==null) { $item = osc_item(); }
@@ -332,7 +371,13 @@
             return true;
         }
 
-        public static function expiration_input($type = 'add', $value = '') {
+		/**
+		 * @param string $type
+		 * @param string $value
+		 *
+		 * @return bool
+		 */
+		public static function expiration_input( $type = 'add' , $value = '' ) {
             if($type=='edit') {
                 $value = '-1';  // default no change expiration date
             }
@@ -341,7 +386,12 @@
         }
 
 
-        public static function expiration_select($options = null)
+		/**
+		 * @param null $options
+		 *
+		 * @return bool
+		 */
+		public static function expiration_select( $options = null )
         {
             if(OC_ADMIN) {
                 if($options==null) { $options = array(-1,0,1,3,5,7,10,15,30); }
@@ -392,19 +442,37 @@
             return true;
         }
 
-        public static function title_input($name, $locale = 'en_US', $value = '')
+		/**
+		 * @param        $name
+		 * @param string $locale
+		 * @param string $value
+		 *
+		 * @return bool
+		 */
+		public static function title_input( $name , $locale = 'en_US' , $value = '' )
         {
             parent::generic_input_text($name . '[' . $locale . ']', $value);
             return true;
         }
 
-        public static function description_textarea($name, $locale = 'en_US', $value = '')
+		/**
+		 * @param        $name
+		 * @param string $locale
+		 * @param string $value
+		 *
+		 * @return bool
+		 */
+		public static function description_textarea( $name , $locale = 'en_US' , $value = '' )
         {
             parent::generic_textarea($name . '[' . $locale . ']', $value);
             return true;
         }
 
-        public static function multilanguage_title_description($locales = null, $item = null) {
+		/**
+		 * @param null $locales
+		 * @param null $item
+		 */
+		public static function multilanguage_title_description( $locales = null , $item = null ) {
             if($locales==null) { $locales = osc_get_locales(); }
             if($item==null) { $item = osc_item(); }
             $num_locales = count($locales);
@@ -440,7 +508,10 @@
              if($num_locales>1) { echo '</div>'; }
         }
 
-        public static function price_input_text($item = null)
+		/**
+		 * @param null $item
+		 */
+		public static function price_input_text( $item = null )
         {
             if($item==null) { $item = osc_item(); }
 	        if( Session::newInstance()->_getForm('price') != '' ) {
@@ -449,7 +520,11 @@
             parent::generic_input_text('price', isset($item['i_price']) ? osc_prepare_price( $item['i_price']) : null);
         }
 
-        public static function currency_select($currencies = null, $item = null) {
+		/**
+		 * @param null $currencies
+		 * @param null $item
+		 */
+		public static function currency_select( $currencies = null , $item = null ) {
             if( $currencies == null ) { $currencies = osc_get_currencies(); }
             if( $item == null) { $item = osc_item(); }
             if( Session::newInstance()->_getForm('currency') != '' ) {
@@ -471,7 +546,13 @@
             }
         }
 
-        public static function country_select($countries = null, $item = null) {
+		/**
+		 * @param null $countries
+		 * @param null $item
+		 *
+		 * @return bool
+		 */
+		public static function country_select( $countries = null , $item = null ) {
             if($countries==null) { $countries = osc_get_countries(); }
 	        if($item==null) { $item = osc_item(); }
 	        if( count($countries) >= 1 ) {
@@ -489,7 +570,12 @@
             }
         }
 
-        public static function country_text($item = null) {
+		/**
+		 * @param null $item
+		 *
+		 * @return bool
+		 */
+		public static function country_text( $item = null ) {
             if($item==null) { $item = osc_item(); }
 	        if( Session::newInstance()->_getForm('country') != '' ) {
                 $item['s_country'] = Session::newInstance()->_getForm('country');
@@ -508,7 +594,13 @@
             return true;
         }
 
-        public static function region_select($regions = null, $item = null) {
+		/**
+		 * @param null $regions
+		 * @param null $item
+		 *
+		 * @return bool
+		 */
+		public static function region_select( $regions = null , $item = null ) {
 
             if($item==null) { $item = osc_item(); }
 
@@ -534,7 +626,13 @@
         }
 
 
-        public static function city_select($cities = null, $item = null) {
+		/**
+		 * @param null $cities
+		 * @param null $item
+		 *
+		 * @return bool
+		 */
+		public static function city_select( $cities = null , $item = null ) {
 
             if($item==null) { $item = osc_item(); }
 
@@ -559,7 +657,12 @@
             }
         }
 
-        public static function region_text($item = null) {
+		/**
+		 * @param null $item
+		 *
+		 * @return bool
+		 */
+		public static function region_text( $item = null ) {
             if($item==null) { $item = osc_item(); }
 	        if( Session::newInstance()->_getForm('region') != '' ) {
                 $item['s_region'] = Session::newInstance()->_getForm('region');
@@ -569,7 +672,12 @@
             return true;
         }
 
-        public static function city_text($item = null) {
+		/**
+		 * @param null $item
+		 *
+		 * @return bool
+		 */
+		public static function city_text( $item = null ) {
             if($item==null) { $item = osc_item(); }
 	        if( Session::newInstance()->_getForm('city') != '' ) {
                 $item['s_city'] = Session::newInstance()->_getForm('city');
@@ -579,7 +687,12 @@
             return true;
         }
 
-        public static function city_area_text($item = null) {
+		/**
+		 * @param null $item
+		 *
+		 * @return bool
+		 */
+		public static function city_area_text( $item = null ) {
             if($item==null) { $item = osc_item(); }
 	        if( Session::newInstance()->_getForm('cityArea') != '' ) {
                 $item['s_city_area'] = Session::newInstance()->_getForm('cityArea');
@@ -589,7 +702,12 @@
             return true;
         }
 
-        public static function address_text($item = null) {
+		/**
+		 * @param null $item
+		 *
+		 * @return bool
+		 */
+		public static function address_text( $item = null ) {
             if($item==null) { $item = osc_item(); }
 	        if( Session::newInstance()->_getForm('address') != '' ) {
                 $item['s_address'] = Session::newInstance()->_getForm('address');
@@ -598,7 +716,12 @@
             return true;
         }
 
-        public static function zip_text($item = null) {
+		/**
+		 * @param null $item
+		 *
+		 * @return bool
+		 */
+		public static function zip_text( $item = null ) {
             if($item==null) { $item = osc_item(); }
 	        if( Session::newInstance()->_getForm('zip') != '' ) {
                 $item['s_zip'] = Session::newInstance()->_getForm('zip');
@@ -607,7 +730,12 @@
             return true;
         }
 
-        public static function contact_name_text($item = null) {
+		/**
+		 * @param null $item
+		 *
+		 * @return bool
+		 */
+		public static function contact_name_text( $item = null ) {
             if($item==null) { $item = osc_item(); }
 	        if( Session::newInstance()->_getForm('contactName') != '' ) {
                 $item['s_contact_name'] = Session::newInstance()->_getForm('contactName');
@@ -616,7 +744,12 @@
             return true;
         }
 
-        public static function contact_email_text($item = null) {
+		/**
+		 * @param null $item
+		 *
+		 * @return bool
+		 */
+		public static function contact_email_text( $item = null ) {
             if($item==null) { $item = osc_item(); }
 	        if( Session::newInstance()->_getForm('contactEmail') != '' ) {
                 $item['s_contact_email'] = Session::newInstance()->_getForm('contactEmail');
@@ -625,7 +758,11 @@
             return true;
         }
         // NOTHING TO DO
-        public static function user_data_hidden() {
+
+		/**
+		 * @return bool
+		 */
+		public static function user_data_hidden() {
             if(isset($_SESSION['userId']) && $_SESSION['userId']!=null) {
                 $user = User::newInstance()->findByPrimaryKey($_SESSION['userId']);
                 parent::generic_input_hidden('contactName', $user['s_name']);
@@ -636,7 +773,12 @@
             }
         }
 
-        public static function show_email_checkbox($item = null) {
+		/**
+		 * @param null $item
+		 *
+		 * @return bool
+		 */
+		public static function show_email_checkbox( $item = null ) {
             if($item==null) { $item = osc_item(); }
 	        if( Session::newInstance()->_getForm('showEmail') != 0) {
                 $item['b_show_email'] = Session::newInstance()->_getForm('showEmail');
@@ -645,7 +787,10 @@
             return true;
         }
 
-        public static function location_javascript_new($path = 'front' ) {
+		/**
+		 * @param string $path
+		 */
+		public static function location_javascript_new( $path = 'front' ) {
 ?>
 <script type="text/javascript">
     $(document).ready(function(){
@@ -853,7 +998,10 @@
         }
 
 
-        public static function location_javascript($path = 'front' ) {
+		/**
+		 * @param string $path
+		 */
+		public static function location_javascript( $path = 'front' ) {
 ?>
 <script type="text/javascript">
     $(document).ready(function(){
@@ -1148,7 +1296,10 @@
         }
 
 
-        public static function photos($resources = null) {
+		/**
+		 * @param null $resources
+		 */
+		public static function photos( $resources = null ) {
             if($resources==null) { $resources = osc_get_item_resources(); }
 	        if($resources!=null && is_array($resources) && count($resources)>0) { ?>
                 <div class="photos_div">
@@ -1224,7 +1375,10 @@
 <?php
         }
 
-        public static function plugin_post_item($case = 'form') {
+		/**
+		 * @param string $case
+		 */
+		public static function plugin_post_item( $case = 'form' ) {
 ?>
 <script type="text/javascript">
 	var catPriceEnabled = new Array();
@@ -1305,7 +1459,10 @@
         }
 
 
-        public static function ajax_photos($resources = null) {
+		/**
+		 * @param null $resources
+		 */
+		public static function ajax_photos( $resources = null ) {
             if($resources==null) { $resources = osc_get_item_resources(); }
 	        $aImages = array();
             if( Session::newInstance()->_getForm('photos') != '' ) {

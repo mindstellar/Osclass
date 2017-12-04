@@ -18,7 +18,10 @@
  * limitations under the License.
  */
 
-    class CWebSearch extends BaseModel
+	/**
+	 * Class CWebSearch
+	 */
+	class CWebSearch extends BaseModel
     {
         public $mSearch;
         public $uri;
@@ -618,7 +621,13 @@
         }
 
         //hopefully generic...
-        public function doView($file)
+
+		/**
+		 * @param $file
+		 *
+		 * @return mixed|void
+		 */
+		public function doView( $file )
         {
             osc_run_hook( 'before_html' );
             osc_current_web_theme_path($file);

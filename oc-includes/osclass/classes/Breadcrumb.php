@@ -15,14 +15,22 @@
  * limitations under the License.
  */
 
-    class Breadcrumb
+	/**
+	 * Class Breadcrumb
+	 */
+	class Breadcrumb
     {
         private $location;
         private $section;
         private $title;
         protected $aLevel;
 
-        public function __construct($lang = array())
+		/**
+		 * Breadcrumb constructor.
+		 *
+		 * @param array $lang
+		 */
+		public function __construct( $lang = array () )
         {
             $this->location = Rewrite::newInstance()->get_location();
             $this->section  = Rewrite::newInstance()->get_section();
@@ -271,7 +279,12 @@
             }
         }
 
-        public function render($separator = '&raquo;')
+		/**
+		 * @param string $separator
+		 *
+		 * @return string
+		 */
+		public function render( $separator = '&raquo;' )
         {
             if( count($this->aLevel) == 0 ) {
                 return '';
@@ -307,11 +320,13 @@
             return $result;
         }
 
-        /**
-         * Set the texts for the breadcrumb
-         * 
-         * @since 3.1
-         */
+		/**
+		 * Set the texts for the breadcrumb
+		 *
+		 * @since 3.1
+		 *
+		 * @param $lang
+		 */
         public function setTitles($lang)
         {
             // default titles
@@ -348,37 +363,58 @@
             }
         }
 
-        public function getaLevel()
+		/**
+		 * @return array
+		 */
+		public function getaLevel()
         {
             return $this->aLevel;
         }
 
-        public function setaLevel($aLevel)
+		/**
+		 * @param $aLevel
+		 */
+		public function setaLevel( $aLevel )
         {
             $this->aLevel = $aLevel;
         }
 
-        public function setLocation($location)
+		/**
+		 * @param $location
+		 */
+		public function setLocation( $location )
         {
             $this->location = $location;
         }
 
-        public function getLocation()
+		/**
+		 * @return string
+		 */
+		public function getLocation()
         {
             return $this->location;
         }
 
-        public function setSection($section)
+		/**
+		 * @param $section
+		 */
+		public function setSection( $section )
         {
             $this->section = $section;
         }
 
-        public function getSection()
+		/**
+		 * @return string
+		 */
+		public function getSection()
         {
             return $this->section;
         }
 
-        public function addLevel($level) {
+		/**
+		 * @param $level
+		 */
+		public function addLevel( $level ) {
             if( !is_array($level) ) {
                 return;
             }

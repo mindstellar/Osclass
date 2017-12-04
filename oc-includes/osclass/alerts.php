@@ -15,7 +15,11 @@
  * limitations under the License.
  */
 
-    function osc_runAlert($type = null, $last_exec = null) {
+	/**
+	 * @param null $type
+	 * @param null $last_exec
+	 */
+	function osc_runAlert( $type = null , $last_exec = null ) {
         $mUser = User::newInstance();
         if ( !in_array($type, array('HOURLY', 'DAILY', 'WEEKLY', 'INSTANT')) ) {
             return;

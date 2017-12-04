@@ -9,7 +9,10 @@ class Scripts extends Dependencies {
 
     private static $instance;
 
-    public static function newInstance()
+	/**
+	 * @return \Scripts
+	 */
+	public static function newInstance()
     {
         if(!self::$instance instanceof self) {
             self::$instance = new self;

@@ -37,7 +37,12 @@
             osc_add_filter('datatable_listing_class', array(&$this, 'row_class'));
         }
 
-        public function table($params)
+	    /**
+	     * @param $params
+	     *
+	     * @return array
+	     */
+	    public function table( $params )
         {
             $this->addTableHeader();
             $this->mSearch = new Search(true);
@@ -52,7 +57,12 @@
             return $this->getData();
         }
 
-        public function tableReported($params)
+	    /**
+	     * @param $params
+	     *
+	     * @return array
+	     */
+	    public function tableReported( $params )
         {
             $this->addTableHeaderReported();
             $this->mSearch = new Search(true);
@@ -225,7 +235,10 @@
             osc_run_hook( 'admin_items_reported_table' , $dummy);
         }
 
-        private function processData($items)
+	    /**
+	     * @param $items
+	     */
+	    private function processData( $items )
         {
             if(!empty($items)) {
 
@@ -325,7 +338,10 @@
             }
         }
 
-        private function processDataReported($items)
+	    /**
+	     * @param $items
+	     */
+	    private function processDataReported( $items )
         {
             if(!empty($items)) {
 
@@ -392,7 +408,10 @@
             }
         }
 
-        private function getDBParams($_get)
+	    /**
+	     * @param $_get
+	     */
+	    private function getDBParams( $_get )
         {
 
             if(!isset($_get['iDisplayStart'])) {
@@ -512,17 +531,30 @@
 
         }
 
-        public function withFilters()
+	    /**
+	     * @return bool
+	     */
+	    public function withFilters()
         {
             return $this->withFilters;
         }
 
-        public function rawRows()
+	    /**
+	     * @return array
+	     */
+	    public function rawRows()
         {
             return $this->rawRows;
         }
 
-        public function row_class($class, $rawRow, $row)
+	    /**
+	     * @param $class
+	     * @param $rawRow
+	     * @param $row
+	     *
+	     * @return array
+	     */
+	    public function row_class( $class , $rawRow , $row )
         {
             View::newInstance()->_exportVariableToView('item', $rawRow);
             $status = $this->get_row_status();

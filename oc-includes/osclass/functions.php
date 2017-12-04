@@ -15,14 +15,22 @@
  * limitations under the License.
  */
 
-function osc_meta_publish($catId = null) {
+	/**
+	 * @param null $catId
+	 */
+	function osc_meta_publish( $catId = null ) {
     osc_enqueue_script('php-date');
     echo '<div class="row">';
         FieldForm::meta_fields_input($catId);
     echo '</div>';
 }
 
-function osc_meta_edit($catId = null, $item_id = null) {
+
+	/**
+	 * @param null $catId
+	 * @param null $item_id
+	 */
+	function osc_meta_edit( $catId = null , $item_id = null ) {
     osc_enqueue_script('php-date');
     echo '<div class="row">';
         FieldForm::meta_fields_input($catId, $item_id);
@@ -32,17 +40,21 @@ function osc_meta_edit($catId = null, $item_id = null) {
 osc_add_hook('item_form', 'osc_meta_publish');
 osc_add_hook('item_edit', 'osc_meta_edit');
 
-/**
- *
- * All CF will be searchable
- *
- */
+	/**
+	 *
+	 * All CF will be searchable
+	 *
+	 * @param null $catId
+	 */
 function osc_meta_search($catId = null) {
     FieldForm::meta_fields_search($catId);
 }
 osc_add_hook('search_form', 'osc_meta_search');
 
-function search_title() {
+	/**
+	 * @return string
+	 */
+	function search_title() {
     $region   = osc_search_region();
     $city     = osc_search_city();
     $category = osc_search_category_id();
@@ -77,7 +89,11 @@ function search_title() {
     return $result;
 }
 
-function meta_title() {
+
+	/**
+	 * @return bool|mixed
+	 */
+	function meta_title() {
     $location = Rewrite::newInstance()->get_location();
     $section  = Rewrite::newInstance()->get_section();
     $text = '';
@@ -194,7 +210,11 @@ function meta_title() {
     return osc_apply_filter( 'meta_title_filter', $text);
 }
 
-function meta_description( ) {
+
+	/**
+	 * @return bool|mixed
+	 */
+	function meta_description() {
     $text = '';
     // home page
     if( osc_is_home_page() ) {
@@ -219,7 +239,11 @@ function meta_description( ) {
     return osc_apply_filter( 'meta_description_filter', $text);
 }
 
-function meta_keywords( ) {
+
+	/**
+	 * @return bool|mixed
+	 */
+	function meta_keywords() {
     $text = '';
     // search
     if( osc_is_search_page() ) {
@@ -264,7 +288,11 @@ function meta_keywords( ) {
     return osc_apply_filter( 'meta_keywords_filter', $text);
 }
 
-function osc_search_footer_links() {
+
+	/**
+	 * @return array
+	 */
+	function osc_search_footer_links() {
     if( !osc_rewrite_enabled() ) {
         return array();
     }
@@ -326,7 +354,13 @@ function osc_search_footer_links() {
     return $rs->result();
 }
 
-function osc_footer_link_url($f = null) {
+
+	/**
+	 * @param null $f
+	 *
+	 * @return string
+	 */
+	function osc_footer_link_url( $f = null ) {
     if($f==null) {
         if(View::newInstance()->_exists('footer_link')) {
             $f = View::newInstance()->_get('footer_link');
@@ -351,7 +385,13 @@ function osc_footer_link_url($f = null) {
     return osc_search_url($params);
 }
 
-function osc_footer_link_title($f = null) {
+
+	/**
+	 * @param null $f
+	 *
+	 * @return string
+	 */
+	function osc_footer_link_title( $f = null ) {
     if($f==null) {
         if(View::newInstance()->_exists('footer_link')) {
             $f = View::newInstance()->_get('footer_link');
@@ -469,7 +509,11 @@ function osc_admin_toolbar_spam()
     }
 }
 
-function osc_admin_toolbar_update_core($force = false)
+
+	/**
+	 * @param bool $force
+	 */
+	function osc_admin_toolbar_update_core( $force = false )
 {
     if( !osc_is_moderator() ) {
         $data = json_decode(osc_update_core_json(), true);
@@ -490,7 +534,12 @@ function osc_admin_toolbar_update_core($force = false)
 }
 
 
-function osc_check_plugins_update( $force = false )
+	/**
+	 * @param bool $force
+	 *
+	 * @return int|string
+	 */
+	function osc_check_plugins_update( $force = false )
 {
     $total = getPreference('plugins_update_count');
     if($force) {
@@ -500,7 +549,12 @@ function osc_check_plugins_update( $force = false )
     }
     return $total;
 }
-function _osc_check_plugins_update() {
+
+
+	/**
+	 * @return int
+	 */
+	function _osc_check_plugins_update() {
     $total = 0;
     $array = array();
     $array_downloaded = array();
@@ -523,7 +577,11 @@ function _osc_check_plugins_update() {
     return $total;
 }
 
-function osc_admin_toolbar_update_plugins($force = false)
+
+	/**
+	 * @param bool $force
+	 */
+	function osc_admin_toolbar_update_plugins( $force = false )
 {
     if( !osc_is_moderator() ) {
         $total = osc_check_plugins_update( $force );
@@ -543,7 +601,13 @@ function osc_admin_toolbar_update_plugins($force = false)
     }
 }
 
-function osc_check_themes_update( $force = false )
+
+	/**
+	 * @param bool $force
+	 *
+	 * @return int|string
+	 */
+	function osc_check_themes_update( $force = false )
 {
     $total = getPreference('themes_update_count');
     if($force) {
@@ -553,7 +617,12 @@ function osc_check_themes_update( $force = false )
     }
     return $total;
 }
-function _osc_check_themes_update() {
+
+
+	/**
+	 * @return int
+	 */
+	function _osc_check_themes_update() {
     $total = 0;
     $array = array();
     $array_downloaded = array();
@@ -574,7 +643,11 @@ function _osc_check_themes_update() {
     return $total;
 }
 
-function osc_admin_toolbar_update_themes($force = false)
+
+	/**
+	 * @param bool $force
+	 */
+	function osc_admin_toolbar_update_themes( $force = false )
 {
     if( !osc_is_moderator() ) {
         $total = osc_check_themes_update( $force );
@@ -595,7 +668,12 @@ function osc_admin_toolbar_update_themes($force = false)
 }
 
 // languages todo
-function osc_check_languages_update( $force = false ) {
+	/**
+	 * @param bool $force
+	 *
+	 * @return int|string
+	 */
+	function osc_check_languages_update( $force = false ) {
     $total = getPreference('languages_update_count');
     if($force) {
         return _osc_check_languages_update();
@@ -604,7 +682,12 @@ function osc_check_languages_update( $force = false ) {
     }
     return $total;
 }
-function _osc_check_languages_update() {
+
+
+	/**
+	 * @return int
+	 */
+	function _osc_check_languages_update() {
     $total = 0;
     $array = array();
     $array_downloaded = array();
@@ -624,7 +707,11 @@ function _osc_check_languages_update() {
     return $total;
 }
 
-function osc_admin_toolbar_update_languages($force = false)
+
+	/**
+	 * @param bool $force
+	 */
+	function osc_admin_toolbar_update_languages( $force = false )
 {
     if( !osc_is_moderator() ) {
         $total = osc_check_languages_update( $force );
@@ -644,7 +731,11 @@ function osc_admin_toolbar_update_languages($force = false)
     }
 }
 
-function osc_check_market_connect()
+
+	/**
+	 * @return bool
+	 */
+	function osc_check_market_connect()
 {
     return (getPreference('marketAPIConnect')=='') ? false : true;
 }

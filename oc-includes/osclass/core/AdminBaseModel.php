@@ -18,7 +18,10 @@
  * limitations under the License.
  */
 
-    class AdminBaseModel extends BaseModel
+	/**
+	 * Class AdminBaseModel
+	 */
+	class AdminBaseModel extends BaseModel
     {
         public function __construct()
         {
@@ -29,7 +32,12 @@
         }
 
         public function doModel() {}
-        public function doView($file) {}
+
+		/**
+		 * @param $file
+		 */
+		public function doView( $file ) {
+		}
     }
 
     /* file end: ./oc-includes/osclass/core/AdminBaseModel.php */

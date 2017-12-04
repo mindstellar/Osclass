@@ -239,7 +239,13 @@
      * @since 3.3
      * @return boolean
      */
-    function osc_verify_password($password, $hash) {
+	/**
+	 * @param $password
+	 * @param $hash
+	 *
+	 * @return bool
+	 */
+	function osc_verify_password( $password , $hash ) {
         if(version_compare(PHP_VERSION, '5.3.7')>=0) {
             return password_verify($password, $hash)?true:(sha1($password)==$hash);
         }
@@ -259,7 +265,12 @@
      * @since 3.3
      * @return string hashed password
      */
-    function osc_hash_password($password) {
+	/**
+	 * @param $password
+	 *
+	 * @return bool|false|string
+	 */
+	function osc_hash_password( $password ) {
         if(version_compare(PHP_VERSION, '5.3.7')>=0) {
             $options = array('cost' => BCRYPT_COST);
             return password_hash($password, PASSWORD_BCRYPT, $options);
@@ -273,7 +284,13 @@
         return sha1($password);
     }
 
-    function osc_encrypt_alert($alert) {
+
+	/**
+	 * @param $alert
+	 *
+	 * @return string
+	 */
+	function osc_encrypt_alert( $alert ) {
         $string = osc_genRandomPassword(32) . $alert;
         osc_set_alert_private_key(); // renew private key and
         osc_set_alert_public_key();  // public key
@@ -315,7 +332,13 @@
         return $cipher->encrypt($string);
     }
 
-    function osc_decrypt_alert($string) {
+
+	/**
+	 * @param $string
+	 *
+	 * @return string
+	 */
+	function osc_decrypt_alert( $string ) {
         $key = hash( 'sha256' , osc_get_alert_private_key(), true);
 
         if(Cryptor::Usable()) {
@@ -356,7 +379,11 @@
         }
     }
 
-    function osc_get_alert_public_key() {
+
+	/**
+	 * @return string
+	 */
+	function osc_get_alert_public_key() {
         return Session::newInstance()->_get('alert_public_key');
     }
 
@@ -366,11 +393,21 @@
         }
     }
 
-    function osc_get_alert_private_key() {
+
+	/**
+	 * @return string
+	 */
+	function osc_get_alert_private_key() {
         return Session::newInstance()->_get('alert_private_key');
     }
 
-    function osc_random_string($length) {
+
+	/**
+	 * @param $length
+	 *
+	 * @return bool|string
+	 */
+	function osc_random_string( $length ) {
         $buffer = '';
         $buffer_valid = false;
 

@@ -31,7 +31,12 @@
         private $order_by;
         private $resourceID;
 
-        public function table($params)
+	    /**
+	     * @param $params
+	     *
+	     * @return array
+	     */
+	    public function table( $params )
         {
             
             $this->addTableHeader();
@@ -81,8 +86,11 @@
             $dummy = &$this;
             osc_run_hook( 'admin_media_table' , $dummy);
         }
-        
-        private function processData($media)
+
+	    /**
+	     * @param $media
+	     */
+	    private function processData( $media )
         {
             if(!empty($media)) {
             
@@ -103,8 +111,11 @@
 
             }
         }
-                
-        private function getDBParams($_get)
+
+	    /**
+	     * @param $_get
+	     */
+	    private function getDBParams( $_get )
         {
             
             foreach($_get as $k => $v) {

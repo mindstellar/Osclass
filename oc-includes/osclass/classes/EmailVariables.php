@@ -37,7 +37,10 @@
             $this->init();
         }
 
-        public static function newInstance()
+	    /**
+	     * @return \EmailVariables
+	     */
+	    public static function newInstance()
         {
             if(!self::$instance instanceof self) {
                 self::$instance = new self;
@@ -117,11 +120,13 @@
         {
             unset( $this->variables[$key] );
         }
-        
-        /**
-         *
-         * @param type $email 
-         */
+
+	    /**
+	     *
+	     * @param type $email
+	     *
+	     * @return bool|mixed
+	     */
         public function getVariables( $email )
         {
             $array = array();

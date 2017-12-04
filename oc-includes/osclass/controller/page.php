@@ -18,7 +18,10 @@
  * limitations under the License.
  */
 
-    class CWebPage extends BaseModel
+	/**
+	 * Class CWebPage
+	 */
+	class CWebPage extends BaseModel
     {
         public $pageManager;
 
@@ -83,7 +86,12 @@
             }
         }
 
-        public function doView($file)
+		/**
+		 * @param $file
+		 *
+		 * @return mixed|void
+		 */
+		public function doView( $file )
         {
             osc_run_hook('before_html');
             osc_current_web_theme_path($file);

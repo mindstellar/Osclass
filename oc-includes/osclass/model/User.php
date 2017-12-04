@@ -29,7 +29,10 @@
          */
         private static $instance;
 
-        public static function newInstance()
+	    /**
+	     * @return \type|\User
+	     */
+	    public static function newInstance()
         {
             if( !self::$instance instanceof self ) {
                 self::$instance = new self;
@@ -83,14 +86,16 @@
             $this->setFields($array_fields);
         }
 
-        /**
-         * Find an user by its primary key
-         *
-         * @access public
-         * @since 2.3.2
-         * @param string $term
-         * @return array
-         */
+	    /**
+	     * Find an user by its primary key
+	     *
+	     * @access public
+	     * @since  2.3.2
+	     *
+	     * @param string $query
+	     *
+	     * @return array
+	     */
         public function ajax($query = '')
         {
             $this->dao->select('pk_i_id as id, CONCAT(s_name, \' (\', s_email , \')\') as label, s_name as value');
@@ -135,14 +140,17 @@
             return $this->extendData($result->row(), $locale);
         }
 
-        /**
-         * Find an user by its email
-         *
-         * @access public
-         * @since unknown
-         * @param string $email
-         * @return array
-         */
+	    /**
+	     * Find an user by its email
+	     *
+	     * @access public
+	     * @since  unknown
+	     *
+	     * @param string $email
+	     * @param null   $locale
+	     *
+	     * @return array
+	     */
         public function findByEmail($email, $locale = null)
         {
             $this->dao->select();
@@ -159,14 +167,15 @@
             }
         }
 
-        /**
-         * Find an user by its username
-         *
-         * @access public
-         * @since 3.1
-         * @param string $username
-         * @return array
-         */
+	    /**
+	     * Find an user by its username
+	     *
+	     * @access public
+	     * @since  3.1
+	     * @param string $username
+	     * @param null   $locale
+	     * @return array
+*/
         public function findByUsername($username, $locale = null)
         {
             $this->dao->select();
@@ -183,15 +192,16 @@
             }
         }
 
-        /**
-         * Find an user by its email and password
-         *
-         * @access public
-         * @since unknown
-         * @param string $key
-         * @param string $password
-         * @return array
-         */
+	    /**
+	     * Find an user by its email and password
+	     *
+	     * @access public
+	     * @since  unknown
+	     * @param        $email
+	     * @param string $password
+	     * @param null   $locale
+	     * @return array
+*/
         public function findByCredentials($email, $password, $locale = null)
         {
             $user = $this->findByEmail($email);
@@ -200,17 +210,21 @@
                     return $this->extendData($user, $locale);
                 }
             }
-            return array();
+            return array ();
         }
 
-        /**
-         * Find an user by its id and secret
-         *
-         * @access public
-         * @since unknown
-         * @param string $id
-         * @param string $secret
-         */
+	    /**
+	     * Find an user by its id and secret
+	     *
+	     * @access public
+	     * @since  unknown
+	     *
+	     * @param string $id
+	     * @param string $secret
+	     *
+	     * @param null   $locale
+	     * @return array|bool
+*/
         public function findByIdSecret($id, $secret, $locale = null)
         {
             $this->dao->select();
@@ -231,15 +245,16 @@
             }
         }
 
-        /**
-         *
-         *
-         * @access public
-         * @since unknown
-         * @param string $id
-         * @param string $secret
-         * @return array
-         */
+	    /**
+	     *
+	     *
+	     * @access public
+	     * @since  unknown
+	     * @param string $id
+	     * @param string $secret
+	     * @param null   $locale
+	     * @return array
+*/
         public function findByIdPasswordSecret($id, $secret, $locale = null)
         {
             if($secret=='') { return null; }
@@ -260,16 +275,17 @@
                 return $this->extendData($result->row(), $locale);
             } else {
                 return array();
-            }
+           }
         }
 
-        /**
-         * Add description to user array
-         *
-         * @since 3.1.1
-         * @param $row with user's info
-         * @return array
-         */
+	    /**
+	     * Add description to user array
+	     *
+	     * @since 3.1.1
+	     * @param      $user
+	     * @param null $locale
+	     * @return array
+*/
         private function extendData($user, $locale = null) {
             $this->dao->select();
             $this->dao->from(DB_TABLE_PREFIX.'t_user_description');
@@ -326,16 +342,16 @@
             return false;
         }
 
-        /**
-         * Insert users' description
-         *
-         * @access private
-         * @since unknown
-         * @param int $id
-         * @param string $locale
-         * @param string $info
-         * @return array
-         */
+	    /**
+	     * Insert users' description
+	     *
+	     * @access private
+	     * @since  unknown
+	     * @param int    $id
+	     * @param string $locale
+	     * @param string $info
+	     * @return bool
+*/
         private function insertDescription($id, $locale, $info)
         {
             $array_set = array(
@@ -399,58 +415,70 @@
             return (bool) $result;
         }
 
-        /**
-         * Return list of users
-         *
-         * @access public
-         * @since 2.4
-         * @param int $start
-         * @param int $end
-         * @param string $order_column
-         * @param string $order_direction
-         * @parma array $conditions
-         * @return array
-         */
+	    /**
+	     * Return list of users
+	     *
+	     * @access public
+	     * @since  2.4
+	     * @param int    $start
+	     * @param int    $end
+	     * @param string $order_column
+	     * @param string $order_direction
+	     * @param null   $conditions
+	     * @return array
+	     * @parma  array $conditions
+*/
         public function search($start = 0, $end = 10, $order_column = 'pk_i_id', $order_direction = 'DESC', $conditions = null)
         {
-            return $this->_search($conditions, $start, $end, $order_column, $order_direction);
+            return $this->_search($conditions, $start, $end, $order_column, $order_direction );
         }
 
-        /**
-         * Return list of users
-         *
-         * @access public
-         * @since 2.4
-         * @param int $start
-         * @param int $end
-         * @param string $order_column
-         * @param string $order_direction
-         * @parma string $name
-         * @return array
-         */
+	    /**
+	     * Return list of users
+	     *
+	     * @access public
+	     * @since  2.4
+	     * @param int    $start
+	     * @param int    $end
+	     * @param string $order_column
+	     * @param string $order_direction
+	     * @param string $name
+	     * @return array
+	     * @parma  string $name
+*/
         public function searchByName($start = 0, $end = 10, $order_column = 'pk_i_id', $order_direction = 'DESC', $name = '')
         {
-            return $this->_search(array('s_name' => $name), $start, $end, $order_column, $order_direction);
+            return $this->_search(array('s_name' => $name), $start, $end, $order_column, $order_direction );
         }
 
-        /**
-         * Return list of users by email
-         *
-         * @access public
-         * @since 2.4
-         * @param int $start
-         * @param int $end
-         * @param string $order_column
-         * @param string $order_direction
-         * @parma string $email
-         * @return array
-         */
+	    /**
+	     * Return list of users by email
+	     *
+	     * @access public
+	     * @since  2.4
+	     * @param int    $start
+	     * @param int    $end
+	     * @param string $order_column
+	     * @param string $order_direction
+	     * @param string $email
+	     * @return array
+	     * @parma  string $email
+*/
         public function searchByEmail($start = 0, $end = 10, $order_column = 'pk_i_id', $order_direction = 'DESC', $email = '')
         {
-            return $this->_search(array('s_email' => $email), $start, $end, $order_column, $order_direction);
+            return $this->_search(array('s_email' => $email), $start, $end, $order_column, $order_direction );
         }
 
-        private function _search($fields, $start = 0, $end = 10, $order_column = 'pk_i_id', $order_direction = 'DESC')
+	    /**
+	     * @param        $fields
+	     * @param int    $start
+	     * @param int    $end
+	     * @param string $order_column
+	     * @param string $order_direction
+	     *
+	     * @return array
+	     */
+	    private function _search( $fields , $start = 0 , $end = 10 , $order_column = 'pk_i_id' , $order_direction = 'DESC')
         {
             // SET data, so we always return a valid object
             $users = array();
@@ -490,12 +518,13 @@
             return $users;
         }
 
-        /**
-         * Return number of users
-         *
-         * @since 2.3.6
-         * @return int
-         */
+	    /**
+	     * Return number of users
+	     *
+	     * @since 2.3.6
+	     * @param string $condition
+	     * @return int
+*/
         public function countUsers($condition = 'b_enabled = 1 AND b_active = 1')
         {
             $this->dao->select( 'COUNT(*) as i_total' );
@@ -509,18 +538,19 @@
             }
 
             $row = $result->row();
-            return $row['i_total'];
+            return $row['i_total' ];
         }
 
-        /**
-         * Insert last access data
-         *
-         * @param int $userId
-         * @param datetime $date
-         * @param string $ip
-         *
-         * @return boolean on success
-         */
+	    /**
+	     * Insert last access data
+	     *
+	     * @param int      $userId
+	     * @param datetime $date
+	     * @param string   $ip
+	     *
+	     * @param null     $time
+	     * @return boolean on success
+*/
         public function lastAccess($userId, $date, $ip, $time = NULL) {
             if($time!=null) {
                 $this->dao->select( 'dt_access_date, s_access_ip' );

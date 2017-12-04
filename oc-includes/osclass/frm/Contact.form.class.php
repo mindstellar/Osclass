@@ -18,24 +18,39 @@
  * limitations under the License.
  */
 
-    class ContactForm extends Form {
+	/**
+	 * Class ContactForm
+	 */
+	class ContactForm extends Form {
 
-        public static function primary_input_hidden() {
+		/**
+		 * @return bool
+		 */
+		public static function primary_input_hidden() {
             parent::generic_input_hidden( 'id' , osc_item_id() );
             return true;
         }
 
-        public static function page_hidden() {
+		/**
+		 * @return bool
+		 */
+		public static function page_hidden() {
             parent::generic_input_hidden( 'page' , 'item');
             return true;
         }
 
-        public static function action_hidden() {
+		/**
+		 * @return bool
+		 */
+		public static function action_hidden() {
             parent::generic_input_hidden( 'action' , 'contact_post');
             return true;
         }
 
-        public static function your_name() {
+		/**
+		 * @return bool
+		 */
+		public static function your_name() {
             if( Session::newInstance()->_getForm( 'yourName' ) != '' ) {
                 $name = Session::newInstance()->_getForm( 'yourName' );
                 parent::generic_input_text( 'yourName' , $name, null, false);
@@ -45,7 +60,10 @@
             return true;
         }
 
-        public static function your_email() {
+		/**
+		 * @return bool
+		 */
+		public static function your_email() {
              if( Session::newInstance()->_getForm( 'yourEmail' ) != '' ) {
                 $email = Session::newInstance()->_getForm( 'yourEmail' );
                 parent::generic_input_text( 'yourEmail' , $email, null, false);
@@ -55,7 +73,10 @@
             return true;
         }
 
-        public static function your_phone_number() {
+		/**
+		 * @return bool
+		 */
+		public static function your_phone_number() {
             if( Session::newInstance()->_getForm( 'phoneNumber' ) != '' ) {
                 $phoneNumber = Session::newInstance()->_getForm( 'phoneNumber' );
                 parent::generic_input_text( 'phoneNumber' , $phoneNumber, null, false);
@@ -65,7 +86,10 @@
             return true;
         }
 
-        public static function the_subject() {
+		/**
+		 * @return bool
+		 */
+		public static function the_subject() {
             if( Session::newInstance()->_getForm( 'subject' ) != '' ) {
                 $subject = Session::newInstance()->_getForm( 'subject' );
                 parent::generic_input_text( 'subject' , $subject, null, false);
@@ -75,7 +99,10 @@
             return true;
         }
 
-        public static function your_message() {
+		/**
+		 * @return bool
+		 */
+		public static function your_message() {
             if( Session::newInstance()->_getForm( 'message_body' ) != '' ) {
                 $message = Session::newInstance()->_getForm( 'message_body' );
                 parent::generic_textarea( 'message' , $message);

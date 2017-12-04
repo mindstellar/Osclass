@@ -18,7 +18,10 @@
  * limitations under the License.
  */
 
-    abstract class Themes
+	/**
+	 * Class Themes
+	 */
+	abstract class Themes
     {
         private static $instance;
         protected $theme;
@@ -44,7 +47,10 @@
         abstract protected function setCurrentThemePath();
 
         /* PUBLIC */
-        public function setCurrentTheme($theme)
+		/**
+		 * @param $theme
+		 */
+		public function setCurrentTheme( $theme )
         {
             $this->theme = $theme;
             $this->setCurrentThemePath();
@@ -66,12 +72,18 @@
             return $this->theme_path;
         }
 
-        public function getCurrentThemeStyles()
+		/**
+		 * @return string
+		 */
+		public function getCurrentThemeStyles()
         {
             return $this->theme_url . 'css/';
         }
 
-        public function getCurrentThemeJs()
+		/**
+		 * @return string
+		 */
+		public function getCurrentThemeJs()
         {
             return $this->theme_url . 'js/';
         }

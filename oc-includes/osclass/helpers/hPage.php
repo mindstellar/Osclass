@@ -126,11 +126,14 @@
         return osc_static_page_field( 's_internal_name' );
     }
 
-    /**
-     * Gets current page meta information
-     *
-     * @return string
-     */
+
+	/**
+	 * Gets current page meta information
+	 *
+	 * @param null $field
+	 *
+	 * @return string
+	 */
     function osc_static_page_meta($field = null) {
         if ( !View::newInstance()->_exists('page_meta') ) {
             $meta = json_decode( osc_static_page_field( 's_meta' ), true);
@@ -175,13 +178,15 @@
         return $path;
     }
 
-    /**
-     * Gets the specified static page by internal name.
-     *
-     * @param string $internal_name
-     * @param string $locale
-     * @return boolean
-     */
+
+	/**
+	 * Gets the specified static page by internal name.
+	 *
+	 * @param string $internal_name
+	 * @param string $locale
+	 *
+	 * @return void
+	 */
     function osc_get_static_page($internal_name, $locale = '') {
 	    if ( $locale == '' ) {
 		    $locale = osc_current_user_locale();
@@ -219,13 +224,14 @@
         return $page;
     }
 
-    /**
-     * Move the iterator to the first position of the pages array
-     * It reset the osc_has_page function so you could have several loops
-     * on the same page
-     *
-     * @return boolean
-     */
+
+	/**
+	 * Move the iterator to the first position of the pages array
+	 * It reset the osc_has_page function so you could have several loops
+	 * on the same page
+	 *
+	 * @return void
+	 */
     function osc_reset_static_pages() {
         return View::newInstance()->_erase('pages');
     }

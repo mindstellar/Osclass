@@ -156,14 +156,17 @@
 	        return $tmp;
         }
 
-        /**
-         * Find fields from a category and an item
-         *
-         * @access public
-         * @since unknown
-         * @param string $id
-         * @return array Field information. If there's no information, return an empty array.
-         */
+	    /**
+	     * Find fields from a category and an item
+	     *
+	     * @access public
+	     * @since  unknown
+	     *
+	     * @param $catId
+	     * @param $itemId
+	     *
+	     * @return array Field information. If there's no information, return an empty array.
+	     */
         public function findByCategoryItem($catId, $itemId)
         {
             if( !is_numeric($catId) || (!is_numeric($itemId) && $itemId != null) ) {
@@ -225,11 +228,15 @@
             return $result->row();
         }
 
-        /**
-         * Return an array with from and to date values
-         * given a meta field id
-         *
-         */
+	    /**
+	     * Return an array with from and to date values
+	     * given a meta field id
+	     *
+	     * @param $item_id
+	     * @param $field_id
+	     *
+	     * @return array
+	     */
         public function getDateIntervalByPrimaryKey($item_id, $field_id)
         {
             $this->dao->select();
@@ -279,18 +286,21 @@
             return $cats;
         }
 
-        /**
-         * Insert a new field
-         *
-         * @access public
-         * @since unknown
-         * @param string $name
-         * @param string $type
-         * @param string $slug
-         * @param bool $required
-         * @param array $options
-         * @param array $categories
-         */
+	    /**
+	     * Insert a new field
+	     *
+	     * @access public
+	     * @since  unknown
+	     *
+	     * @param string $name
+	     * @param string $type
+	     * @param string $slug
+	     * @param bool   $required
+	     * @param array  $options
+	     * @param array  $categories
+	     *
+	     * @return bool
+	     */
         public function insertField($name, $type, $slug, $required, $options, $categories = null) {
             if($slug=='') {
                 $slug = preg_replace('|([-]+)|', '-', preg_replace('|[^a-z0-9_-]|', '-', strtolower($name)));

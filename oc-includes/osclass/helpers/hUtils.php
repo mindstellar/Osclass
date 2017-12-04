@@ -144,17 +144,25 @@ function osc_show_recaptcha($section = '') {
     }
 }
 
-function _osc_recaptcha_get_html($siteKey, $lang) {
+
+	/**
+	 * @param $siteKey
+	 * @param $lang
+	 */
+	function _osc_recaptcha_get_html( $siteKey , $lang ) {
     echo '<div class="g-recaptcha" data-sitekey="' . $siteKey . '"></div>';
     echo '<script type="text/javascript" src="https://www.google.com/recaptcha/api.js?hl=' . $lang . '"></script>';
 }
 
-/**
- * Formats the date using the appropiate format.
- *
- * @param string $date
- * @return string
- */
+
+	/**
+	 * Formats the date using the appropiate format.
+	 *
+	 * @param string $date
+	 * @param null   $dateformat
+	 *
+	 * @return string
+	 */
 function osc_format_date($date, $dateformat = null) {
     if($dateformat==null) {
         $dateformat = osc_date_format();
@@ -299,7 +307,18 @@ function osc_get_http_referer() {
     return '';
 }
 
-function osc_add_route($id, $regexp, $url, $file, $user_menu = false, $location = 'custom' , $section = 'custom' , $title = 'Custom' ) {
+
+	/**
+	 * @param        $id
+	 * @param        $regexp
+	 * @param        $url
+	 * @param        $file
+	 * @param bool   $user_menu
+	 * @param string $location
+	 * @param string $section
+	 * @param string $title
+	 */
+	function osc_add_route( $id , $regexp , $url , $file , $user_menu = false , $location = 'custom' , $section = 'custom' , $title = 'Custom' ) {
     Rewrite::newInstance()->addRoute($id, $regexp, $url, $file, $user_menu, $location, $section, $title);
 }
 

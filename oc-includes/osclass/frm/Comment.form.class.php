@@ -18,10 +18,16 @@
  * limitations under the License.
  */
 
-    class CommentForm extends Form
+	/**
+	 * Class CommentForm
+	 */
+	class CommentForm extends Form
     {
 
-        public static function primary_input_hidden($comment = null)
+		/**
+		 * @param null $comment
+		 */
+		public static function primary_input_hidden( $comment = null )
         {
             $commentId = null;
             if( isset($comment['pk_i_id']) ) {
@@ -35,7 +41,10 @@
             }
         }
 
-        public static function title_input_text($comment = null)
+		/**
+		 * @param null $comment
+		 */
+		public static function title_input_text( $comment = null )
         {
             $commentTitle = '';
             if( isset($comment['s_title']) ) {
@@ -47,7 +56,10 @@
             parent::generic_input_text( 'title' , $commentTitle, null, false);
         }
 
-        public static function author_input_text($comment = null)
+		/**
+		 * @param null $comment
+		 */
+		public static function author_input_text( $comment = null )
         {
             $commentAuthorName = '';
             if( isset($comment['s_author_name']) ) {
@@ -59,7 +71,10 @@
             parent::generic_input_text( 'authorName' , $commentAuthorName, null, false);
         }
 
-        public static function email_input_text($comment = null)
+		/**
+		 * @param null $comment
+		 */
+		public static function email_input_text( $comment = null )
         {
             $commentAuthorEmail = '';
             if( isset($comment['s_author_email']) ) {
@@ -71,7 +86,10 @@
             parent::generic_input_text( 'authorEmail' , $commentAuthorEmail, null, false);
         }
 
-        public static function body_input_textarea($comment = null)
+		/**
+		 * @param null $comment
+		 */
+		public static function body_input_textarea( $comment = null )
         {
             $commentBody = '';
             if( isset($comment['s_body']) ) {
@@ -83,7 +101,10 @@
             parent::generic_textarea( 'body' , $commentBody);
         }
 
-        public static function js_validation($admin = false) {
+		/**
+		 * @param bool $admin
+		 */
+		public static function js_validation( $admin = false ) {
 ?>
 <script type="text/javascript">
     $(document).ready(function(){

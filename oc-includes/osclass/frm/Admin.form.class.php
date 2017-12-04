@@ -18,37 +18,64 @@
  * limitations under the License.
  */
 
-    class AdminForm extends Form {
+	/**
+	 * Class AdminForm
+	 */
+	class AdminForm extends Form {
 
-        public static function primary_input_hidden($admin) {
+		/**
+		 * @param $admin
+		 */
+		public static function primary_input_hidden( $admin ) {
             parent::generic_input_hidden( 'id' , (isset($admin[ 'pk_i_id' ]) ? $admin['pk_i_id'] : '') );
         }
 
-        public static function name_text($admin = null) {
+		/**
+		 * @param null $admin
+		 */
+		public static function name_text( $admin = null ) {
             parent::generic_input_text( 's_name' , isset($admin['s_name'])? $admin['s_name'] : '', null, false);
         }
 
-        public static function username_text($admin = null) {
+		/**
+		 * @param null $admin
+		 */
+		public static function username_text( $admin = null ) {
             parent::generic_input_text( 's_username' , isset($admin['s_username'])? $admin['s_username'] : '', null, false);
         }
 
-        public static function old_password_text($admin = null) {
+		/**
+		 * @param null $admin
+		 */
+		public static function old_password_text( $admin = null ) {
             parent::generic_password( 'old_password' , '', null, false);
         }
 
-        public static function password_text($admin = null) {
+		/**
+		 * @param null $admin
+		 */
+		public static function password_text( $admin = null ) {
             parent::generic_password( 's_password' , '', null, false);
         }
 
-        public static function check_password_text($admin = null) {
+		/**
+		 * @param null $admin
+		 */
+		public static function check_password_text( $admin = null ) {
             parent::generic_password( 's_password2' , '', null, false);
         }
 
-        public static function email_text($admin = null) {
+		/**
+		 * @param null $admin
+		 */
+		public static function email_text( $admin = null ) {
             parent::generic_input_text( 's_email' , isset($admin['s_email'])? $admin['s_email'] : '', null, false);
         }
 
-        public static function type_select($admin = null) {
+		/**
+		 * @param null $admin
+		 */
+		public static function type_select( $admin = null ) {
             $options = array(
                 array( 'i_value' => '0', 's_text' => __('Administrator') )
                 ,array( 'i_value' => '1', 's_text' => __('Moderator') )

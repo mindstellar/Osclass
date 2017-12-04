@@ -18,6 +18,9 @@
  * limitations under the License.
  */
 
+	/**
+	 * Class Cookie
+	 */
 	class Cookie
 	{
 		public $name;
@@ -26,7 +29,10 @@
 		
 		private static $instance;
 
-        public static function newInstance() {
+		/**
+		 * @return \Cookie
+		 */
+		public static function newInstance() {
             if(!self::$instance instanceof self) {
                 self::$instance = new self;
             }
@@ -58,13 +64,20 @@
                 }
             }
 		}
-		
+
+		/**
+		 * @param $var
+		 * @param $value
+		 */
 		public function push($var, $value)
 		{
 			$this->val["$var"] = $value;
 			$_COOKIE["$var"] = $value;
 		}
-		
+
+		/**
+		 * @param $var
+		 */
 		public function pop($var)
 		{
             unset($this->val[$var]);
@@ -98,12 +111,20 @@
 			}
             setcookie($this->name, $cookie_val, $this->expires, REL_WEB_URL);
 		}
-        
-        public function num_vals() {
+
+		/**
+		 * @return int
+		 */
+		public function num_vals() {
             return count( $this->val);
         }
-        
-        public function get_value($str) {
+
+		/**
+		 * @param $str
+		 *
+		 * @return mixed|string
+		 */
+		public function get_value( $str ) {
 	        if ( isset( $this->val[ $str ] ) ) {
 		        return $this->val[ $str ];
 	        }
@@ -111,7 +132,11 @@
         }
 
         //$tm: time in seconds
-        public function set_expires($tm) {
+
+		/**
+		 * @param $tm
+		 */
+		public function set_expires( $tm ) {
         	$this->expires = time() + $tm;
 		}
 	}

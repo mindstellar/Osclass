@@ -1,9 +1,17 @@
 <?php
-class Object_Cache_Factory {
+
+	/**
+	 * Class Object_Cache_Factory
+	 */
+	class Object_Cache_Factory {
 
     private static $instance = null;
 
-    public static function newInstance()
+		/**
+		 * @return null|\Object_Cache_default
+		 * @throws \Exception
+		 */
+		public static function newInstance()
     {
         if( self::$instance == null ) {
             self::$instance = self::getCache();
@@ -11,7 +19,11 @@ class Object_Cache_Factory {
         return self::$instance;
     }
 
-    public static function getCache() {
+		/**
+		 * @return null|\Object_Cache_default
+		 * @throws \Exception
+		 */
+		public static function getCache() {
         if(self::$instance == null) {
             $cache = 'default';
             if( defined('OSC_CACHE') ) {

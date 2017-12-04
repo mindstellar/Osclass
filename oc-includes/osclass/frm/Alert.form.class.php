@@ -18,23 +18,38 @@
  * limitations under the License.
  */
 
-    class AlertForm extends Form {
+	/**
+	 * Class AlertForm
+	 */
+	class AlertForm extends Form {
 
-        public static function user_id_hidden() {
+		/**
+		 * @return bool
+		 */
+		public static function user_id_hidden() {
             parent::generic_input_hidden('alert_userId', osc_logged_user_id() );
             return true;
         }
 
-        public static function email_hidden() {
+		/**
+		 * @return bool
+		 */
+		public static function email_hidden() {
             parent::generic_input_hidden('alert_email', osc_logged_user_email() );
             return true;
         }
 
-        public static function default_email_text() {
+		/**
+		 * @return string
+		 */
+		public static function default_email_text() {
             return __('Enter your e-mail');
         }
 
-        public static function email_text() {
+		/**
+		 * @return bool
+		 */
+		public static function email_text() {
             $value = '';
             if( osc_logged_user_email() == '' ){
                 $value = self::default_email_text();
@@ -43,12 +58,18 @@
             return true;
         }
 
-        public static function page_hidden() {
+		/**
+		 * @return bool
+		 */
+		public static function page_hidden() {
             parent::generic_input_hidden('page', 'search');
             return true;
         }
 
-        public static function alert_hidden() {
+		/**
+		 * @return bool
+		 */
+		public static function alert_hidden() {
             parent::generic_input_hidden('alert', osc_search_alert() );
             return true;
         }

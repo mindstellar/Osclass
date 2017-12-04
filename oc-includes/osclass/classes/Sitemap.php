@@ -31,7 +31,13 @@
             $this->urls = array();
         }
 
-        public function addURL($loc, $changeFreq = 'daily', $priority = 0.7, $lastMod = null) {
+	    /**
+	     * @param        $loc
+	     * @param string $changeFreq
+	     * @param float  $priority
+	     * @param null   $lastMod
+	     */
+	    public function addURL( $loc , $changeFreq = 'daily' , $priority = 0.7 , $lastMod = null ) {
             $this->urls[] = array(
                 'loc' => $loc,
                 'lastMod' => $lastMod,

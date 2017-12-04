@@ -18,10 +18,21 @@
  * limitations under the License.
  */
 
-    class ManageItemsForm extends Form {
+	/**
+	 * Class ManageItemsForm
+	 */
+	class ManageItemsForm extends Form {
 
         // OK
-        public static function category_select($categories = null, $item = null, $default_item = null, $parent_selectable = false)
+		/**
+		 * @param null $categories
+		 * @param null $item
+		 * @param null $default_item
+		 * @param bool $parent_selectable
+		 *
+		 * @return bool
+		 */
+		public static function category_select( $categories = null , $item = null , $default_item = null , $parent_selectable = false )
         {
             // Did user select a specific category to post in?
             $catId = Params::getParam('catId');
@@ -62,7 +73,14 @@
         }
 
         // OK
-        public static function subcategory_select($categories, $item, $default_item = null, $deep = 0)
+
+		/**
+		 * @param      $categories
+		 * @param      $item
+		 * @param null $default_item
+		 * @param int  $deep
+		 */
+		public static function subcategory_select( $categories , $item , $default_item = null , $deep = 0 )
         {
             // Did user select a specific category to post in?
             $catId = Params::getParam('catId');
@@ -83,7 +101,10 @@
             }
         }
 
-        public static function country_text()
+		/**
+		 * @return bool
+		 */
+		public static function country_text()
         {
             // get params GET (only manageItems)
             if(Params::getParam('countryName') != '') {
@@ -96,7 +117,10 @@
             return true;
         }
 
-        public static function region_text()
+		/**
+		 * @return bool
+		 */
+		public static function region_text()
         {
             // get params GET (only manageItems)
             if(Params::getParam('region') != '') {
@@ -108,7 +132,10 @@
             return true;
         }
 
-        public static function city_text()
+		/**
+		 * @return bool
+		 */
+		public static function city_text()
         {
             // get params GET (only manageItems)
             if(Params::getParam('city') != '') {

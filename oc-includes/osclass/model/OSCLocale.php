@@ -29,7 +29,10 @@
          */
         private static $instance;
 
-        public static function newInstance()
+	    /**
+	     * @return \OSCLocale|\type
+	     */
+	    public static function newInstance()
         {
             if( !self::$instance instanceof self ) {
                 self::$instance = new self;
@@ -65,15 +68,17 @@
             $this->setFields($array_fields);
         }
 
-        /**
-         * Return all locales enabled.
-         *
-         * @access public
-         * @since unknown
-         * @param boole $isBo
-         * @param boole $indexedByKk
-         * @return array
-         */
+	    /**
+	     * Return all locales enabled.
+	     *
+	     * @access public
+	     * @since  unknown
+	     *
+	     * @param bool $isBo
+	     * @param bool $indexedByPk
+	     *
+	     * @return array
+	     */
         public function listAllEnabled($isBo = false, $indexedByPk = false)
         {
             $this->dao->select();

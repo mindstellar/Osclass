@@ -47,7 +47,15 @@
         <?php die(); ?>
     <?php }
 
-    function getErrorParam($param, $htmlencode = false, $quotes_encode = true)
+
+	/**
+	 * @param      $param
+	 * @param bool $htmlencode
+	 * @param bool $quotes_encode
+	 *
+	 * @return string
+	 */
+	function getErrorParam( $param , $htmlencode = false , $quotes_encode = true )
     {
 	    if ( $param == '' ) {
 		    return '';
@@ -70,7 +78,14 @@
 
         return $value;
     }
-    function strip_slashes_extended_e($array) {
+
+
+	/**
+	 * @param $array
+	 *
+	 * @return string
+	 */
+	function strip_slashes_extended_e( $array ) {
         if(is_array($array)) {
             foreach($array as $k => &$v) {
                 $v = strip_slashes_extended_e($v);
@@ -80,7 +95,12 @@
         }
         return $array;
     }
-    function osc_get_absolute_url() {
+
+
+	/**
+	 * @return string
+	 */
+	function osc_get_absolute_url() {
         $protocol = (getErrorParam('HTTPS') == 'on'  || getErrorParam('HTTPS') == 1  || getErrorParam('HTTP_X_FORWARDED_PROTO')=='https')? 'https' : 'http';
         return $protocol . '://' . getErrorParam('HTTP_HOST') . preg_replace('/((oc-admin)|(oc-includes)|(oc-content)|([a-z]+\.php)|(\?.*)).*/i', '', getErrorParam('REQUEST_URI', false, false));
     }

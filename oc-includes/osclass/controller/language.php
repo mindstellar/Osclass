@@ -18,7 +18,10 @@
  * limitations under the License.
  */
 
-    class CWebLanguage extends BaseModel
+	/**
+	 * Class CWebLanguage
+	 */
+	class CWebLanguage extends BaseModel
     {
         public function __construct()
         {
@@ -46,7 +49,14 @@
         }
 
         // hopefully generic...
-        public function doView($file) { }
+
+		/**
+		 * @param $file
+		 *
+		 * @return mixed|void
+		 */
+		public function doView( $file ) {
+		}
     }
 
     /* file end: ./language.php */

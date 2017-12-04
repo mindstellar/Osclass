@@ -21,23 +21,39 @@
     require_once osc_lib_path() . 'php-gettext/streams.php';
     require_once osc_lib_path() . 'php-gettext/gettext.php';
 
-    class Translation {
+	/**
+	 * Class Translation
+	 */
+	class Translation {
         private $messages;
         private static $instance;
 
-        public static function newInstance($install = false) {
+		/**
+		 * @param bool $install
+		 *
+		 * @return \Translation
+		 */
+		public static function newInstance( $install = false ) {
             if(!self::$instance instanceof self) {
                 self::$instance = new self($install);
             }
             return self::$instance;
         }
 
-        public static function init() {
+		/**
+		 * @return \Translation
+		 */
+		public static function init() {
             self::$instance = new self();
             return self::$instance;
         }
 
-        public function __construct($install = false) {
+		/**
+		 * Translation constructor.
+		 *
+		 * @param bool $install
+		 */
+		public function __construct( $install = false ) {
             if(!$install) {
                 // get user/admin locale
                 if( OC_ADMIN ) {
@@ -83,7 +99,12 @@
             }
         }
 
-        public function _get($domain) {
+		/**
+		 * @param $domain
+		 *
+		 * @return bool
+		 */
+		public function _get( $domain ) {
             if(!isset($this->messages[$domain])) {
                 return false;
             }
@@ -91,7 +112,13 @@
             return $this->messages[$domain];
         }
 
-        public function _set($domain, $reader) {
+		/**
+		 * @param $domain
+		 * @param $reader
+		 *
+		 * @return bool
+		 */
+		public function _set( $domain , $reader ) {
             if(isset($messages[$domain])) {
                false;
             }
@@ -100,7 +127,13 @@
             return true;
         }
 
-        public function _load($file, $domain) {
+		/**
+		 * @param $file
+		 * @param $domain
+		 *
+		 * @return bool
+		 */
+		public function _load( $file , $domain ) {
             if(!file_exists($file)) {
                 return false;
             }

@@ -11,7 +11,10 @@ class Styles {
 
     private static $instance;
 
-    public static function newInstance()
+	/**
+	 * @return \Styles
+	 */
+	public static function newInstance()
     {
         if(!self::$instance instanceof self) {
             self::$instance = new self;

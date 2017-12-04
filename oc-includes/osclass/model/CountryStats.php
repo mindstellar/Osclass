@@ -85,14 +85,16 @@
             return $this->dao->query($sql);
         }
 
-        /**
-         * Increase number of country items, given a Country code
-         *
-         * @access public
-         * @since 2.4
-         * @param int $countrycode Country code
-         * @return int number of affected rows, id error occurred return false
-         */
+	    /**
+	     * Increase number of country items, given a Country code
+	     *
+	     * @access public
+	     * @since  2.4
+	     *
+	     * @param $countryCode
+	     *
+	     * @return int number of affected rows, id error occurred return false
+	     */
         public function decreaseNumItems($countryCode)
         {
             $lenght = strlen($countryCode);

@@ -64,15 +64,17 @@
             $this->setFields( array('pk_i_id', 'fk_i_city_id', 's_name') );
         }
 
-        /**
-         * Get the cityArea by its name and city
-         *
-         * @access public
-         * @since unknown
-         * @param string $query
-         * @param int $cityId
-         * @return array
-         */
+	    /**
+	     * Get the cityArea by its name and city
+	     *
+	     * @access public
+	     * @since  unknown
+	     *
+	     * @param     $cityAreaName
+	     * @param int $cityId
+	     *
+	     * @return array
+	     */
         public function findByName($cityAreaName, $cityId = null)
         {
             $this->dao->select($this->getFields());

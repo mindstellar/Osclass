@@ -630,11 +630,15 @@
         return getPreference( 'recaptchaPrivKey');
     }
 
-    /**
-     * Gets Osclass' market URL
-     *
-     * @return string
-     */
+
+	/**
+	 * Gets Osclass' market URL
+	 *
+	 * @param string $type
+	 * @param string $code
+	 *
+	 * @return string
+	 */
     function osc_market_url($type = '', $code = '') {
         $url = getPreference('marketURL');
         switch ($type) {
@@ -688,11 +692,15 @@
         return $url . 'count/';
     }
 
-    /**
-     * Osclass' market url for get featured items in categories
-     *
-     * @return string
-     */
+
+	/**
+	 * Osclass' market url for get featured items in categories
+	 *
+	 * @param        $type
+	 * @param string $num
+	 *
+	 * @return string
+	 */
     function osc_market_featured_url($type, $num = '') {
         $url = getPreference('marketURL');
         $url .= 'featured/';
@@ -904,7 +912,11 @@
         return getBoolPreference( 'save_latest_searches');
     }
 
-    function osc_purge_latest_searches() {
+
+	/**
+	 * @return string
+	 */
+	function osc_purge_latest_searches() {
         return getPreference( 'purge_latest_searches');
     }
 
@@ -970,12 +982,13 @@
         return false;
     }
 
-    /**
-     * generic function to retrieve preferences
-     *
-     * @param string $section
-     * @return string
-     */
+
+	/**
+	 * generic function to retrieve preferences
+	 *
+	 * @param string $section
+	 * @return array
+	 */
     function osc_get_preference_section($section = 'osclass') {
         $_P = Preference::newInstance();
         return $_P->getSection($section);
@@ -1005,11 +1018,12 @@
         return Preference::newInstance()->delete(array('s_name' => $key, 's_section' => $section));
     }
 
-    /**
-     * Reload preferences
-     *
-     * @return <array>
-     */
+
+	/**
+	 * Reload preferences
+	 *
+	 * @return bool <array>
+	 */
     function osc_reset_preferences() {
         return Preference::newInstance()->toArray();
     }

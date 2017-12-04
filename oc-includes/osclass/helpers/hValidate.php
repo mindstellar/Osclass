@@ -140,14 +140,19 @@
         return false;
     }
 
-    /**
-     * Validate if exist $city, $region, $country in db
-     *
-     * @param string $city
-     * @param string $region
-     * @param string $country
-     * @return boolean
-     */
+
+	/**
+	 * Validate if exist $city, $region, $country in db
+	 *
+	 * @param string $city
+	 * @param        $sCity
+	 * @param string $region
+	 * @param        $sRegion
+	 * @param string $country
+	 * @param        $sCountry
+	 *
+	 * @return boolean
+	 */
     function osc_validate_location ($city,$sCity,$region,$sRegion,$country,$sCountry) {
         if ( osc_validate_nozero($city) && osc_validate_nozero($region) && osc_validate_text($country,2) ) {
             $data = Country::newInstance()->findByCode($country);
@@ -306,12 +311,15 @@
         return true;
     }
 
-    /**
-     * validate username, accept letters plus underline, without separators
-     *
-     * @param $value
-     * @param $min
-     */
+
+	/**
+	 * validate username, accept letters plus underline, without separators
+	 *
+	 * @param $value
+	 * @param $min
+	 *
+	 * @return bool
+	 */
     function osc_validate_username( $value, $min = 1 ) {
         if(mb_strlen($value, 'UTF-8') >= $min && preg_match('/^[A-Za-z0-9_]+$/',$value) ){
             return true;

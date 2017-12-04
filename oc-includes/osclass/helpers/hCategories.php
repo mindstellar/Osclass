@@ -41,17 +41,18 @@
         return $category;
     }
 
-    /**
-     * Low level function: Gets the list of categories as a tree
-     *
-     * <code>
-     * <?php
-     *  $c = osc_get_categories();
-     * ?>
-     * </code>
-     *
-     * @return <array>
-     */
+
+	/**
+	 * Low level function: Gets the list of categories as a tree
+	 *
+	 * <code>
+	 * <?php
+	 *  $c = osc_get_categories();
+	 * ?>
+	 * </code>
+	 *
+	 * @return mixed|string <array>
+	 */
     function osc_get_categories() {
        if ( !View::newInstance()->_exists('categories') ) {
            osc_export_categories(Category::newInstance()->toTree());
@@ -59,11 +60,15 @@
         return  View::newInstance()->_get('categories');
     }
 
-    /**
-     * Low level function: Gets the value of the category attribute
-     *
-     * @return <array>
-     */
+
+	/**
+	 * Low level function: Gets the value of the category attribute
+	 *
+	 * @param        $field
+	 * @param string $locale
+	 *
+	 * @return string <array>
+	 */
     function osc_category_field($field, $locale = '') {
         return osc_field( osc_category(), $field, '' );
     }
@@ -263,11 +268,16 @@
         return  View::newInstance()->_get('categories');
     }
 
-    /**
-     * Prints category select
-     *
-     * @return void
-     */
+
+	/**
+	 * Prints category select
+	 *
+	 * @param string $name
+	 * @param null   $category
+	 * @param null   $default_str
+	 *
+	 * @return void
+	 */
     function osc_categories_select($name = 'sCategory', $category = null, $default_str = null) {
 	    if ( $default_str == null ) {
 		    $default_str = __( 'Select a category' );
@@ -298,7 +308,11 @@
         }
     }
 
-    function osc_category_move_to_children() {
+
+	/**
+	 * @return bool|int
+	 */
+	function osc_category_move_to_children() {
         $category = View::newInstance()->_current('categories');
 	    if ( $category == '' ) {
 		    return - 1;
@@ -316,9 +330,13 @@
         View::newInstance()->_exportVariableToView('categoryTrail', $catTrail);
         View::newInstance()->_exportVariableToView('categories', $category['categories']);
         View::newInstance()->_reset('categories');
-    }
+	}
 
-    function osc_category_move_to_parent() {
+
+	/**
+	 * @return bool|int
+	 */
+	function osc_category_move_to_parent() {
         $category = View::newInstance()->_get('categories');
         $category = end($category);
 
@@ -370,7 +388,11 @@
         return count($category['categories']);
     }
 
-    function osc_export_categories($categories = null) {
+
+	/**
+	 * @param null $categories
+	 */
+	function osc_export_categories( $categories = null) {
         if($categories==null) {
             $categories = Category::newInstance()->toTree();
         }

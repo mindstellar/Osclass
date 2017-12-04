@@ -18,11 +18,17 @@
  * limitations under the License.
  */
 
-    class AdminThemes extends Themes
+	/**
+	 * Class AdminThemes
+	 */
+	class AdminThemes extends Themes
     {
         private static $instance;
 
-        public static function newInstance()
+		/**
+		 * @return \AdminThemes
+		 */
+		public static function newInstance()
         {
             if(!self::$instance instanceof self) {
                 self::$instance = new self;

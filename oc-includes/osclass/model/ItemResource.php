@@ -64,14 +64,13 @@
             $this->setFields( array('pk_i_id', 'fk_i_item_id', 's_name', 's_extension', 's_content_type', 's_path') );
         }
 
-        /**
-         * Get all resources
-         *
-         * @access public
-         * @since unknown
-         * @param int $itemId Item id
-         * @return array of resources
-         */
+	    /**
+	     * Get all resources
+	     *
+	     * @access public
+	     * @since  unknown
+	     * @return array of resources
+	     */
         public function getAllResources()
         {
             $this->dao->select('r.*, c.dt_pub_date');
@@ -266,11 +265,13 @@
             return $result->result();
         }
 
-        /**
-         * Delete all resources where id is in $ids
-         *
-         * @param array $ids
-         */
+	    /**
+	     * Delete all resources where id is in $ids
+	     *
+	     * @param array $ids
+	     *
+	     * @return mixed
+	     */
         public function deleteResourcesIds($ids)
         {
             $this->dao->whereIn('pk_i_id', $ids);

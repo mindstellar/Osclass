@@ -34,7 +34,10 @@
          */
         private $pref;
 
-        public static function newInstance()
+	    /**
+	     * @return \Preference|\type
+	     */
+	    public static function newInstance()
         {
             if( !self::$instance instanceof self ) {
                 self::$instance = new self;

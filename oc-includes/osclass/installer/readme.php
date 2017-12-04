@@ -1,6 +1,12 @@
 <?php
 require_once dirname(dirname(dirname(__FILE__))) . '/htmlpurifier/HTMLPurifier.auto.php';
-function _purify($value, $xss_check)
+	/**
+	 * @param $value
+	 * @param $xss_check
+	 *
+	 * @return \Purified
+	 */
+	function _purify( $value , $xss_check )
 {
     if( !$xss_check ) {
         return $value;
@@ -23,7 +29,17 @@ function _purify($value, $xss_check)
 
     return $value;
 }
-function getServerParam($param, $htmlencode = false, $xss_check = true, $quotes_encode = true)
+
+
+	/**
+	 * @param      $param
+	 * @param bool $htmlencode
+	 * @param bool $xss_check
+	 * @param bool $quotes_encode
+	 *
+	 * @return \Purified|string
+	 */
+	function getServerParam( $param , $htmlencode = false , $xss_check = true , $quotes_encode = true )
 {
 	if ( $param == '' ) {
 		return '';
@@ -46,13 +62,22 @@ function getServerParam($param, $htmlencode = false, $xss_check = true, $quotes_
 
     return $value;
 }
-function osc_getRelativeWebURL() {
+
+
+	/**
+	 * @return bool|string
+	 */
+	function osc_getRelativeWebURL() {
     $url = getServerParam('REQUEST_URI', false, false);
     $pos = strpos($url, '/oc-includes');
     return substr($url, 0, strpos($url, '/oc-includes'));
 }
 
-function osc_getAbsoluteWebURL() {
+
+	/**
+	 * @return string
+	 */
+	function osc_getAbsoluteWebURL() {
     $protocol = 'http';
     if((isset($_SERVER['HTTP_X_FORWARDED_PROTO']) && strtolower($_SERVER['HTTP_X_FORWARDED_PROTO'])=='https') || (isset($_SERVER['HTTPS']) && ($_SERVER['HTTPS'] == 'on' || $_SERVER['HTTPS'] == 1))) {
         $protocol = 'https';

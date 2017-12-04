@@ -19,7 +19,12 @@
  * Check if json_encode function is loaded. In case it is not loaded, we implement it.
  */
 if ( !function_exists('json_encode') ) {
-    function json_encode( $string ) {
+	/**
+	 * @param $string
+	 *
+	 * @return mixed
+	 */
+	function json_encode( $string ) {
         global $osc_json;
 
         if ( !is_a($osc_json, 'Services_JSON') ) {
@@ -35,7 +40,13 @@ if ( !function_exists('json_encode') ) {
  * Check if json_decode function is loaded. In case it is not loaded, we implement it.
  */
 if ( !function_exists('json_decode') ) {
-    function json_decode( $string, $assoc_array = false ) {
+	/**
+	 * @param      $string
+	 * @param bool $assoc_array
+	 *
+	 * @return array|mixed
+	 */
+	function json_decode( $string , $assoc_array = false ) {
         global $osc_json;
 
         if ( !is_a($osc_json, 'Services_JSON') ) {
@@ -51,7 +62,13 @@ if ( !function_exists('json_decode') ) {
         return $res;
     }
 
-    function _json_decode_object_helper($data) {
+
+	/**
+	 * @param $data
+	 *
+	 * @return array
+	 */
+	function _json_decode_object_helper( $data ) {
 	    if ( is_object( $data ) ) {
 		    $data = get_object_vars( $data );
 	    }
@@ -64,7 +81,15 @@ if ( !function_exists('json_decode') ) {
  * Check if mb_substr function is loaded. In case it is not loaded, we implement it.
  */
 if ( !function_exists('mb_substr') ) {
-    function mb_substr( $str, $start, $length = null, $encoding = null ) {
+	/**
+	 * @param      $str
+	 * @param      $start
+	 * @param null $length
+	 * @param null $encoding
+	 *
+	 * @return string
+	 */
+	function mb_substr( $str , $start , $length = null , $encoding = null ) {
         preg_match_all( '/./us', $str, $match );
         $chars = is_null( $length ) ? array_slice( $match[0], $start ) : array_slice( $match[0], $start, $length );
         return implode('', $chars );
@@ -72,7 +97,13 @@ if ( !function_exists('mb_substr') ) {
 }
 
 if ( !function_exists('mb_strlen') ) {
-    function mb_strlen($str, $encoding = null ) {
+	/**
+	 * @param      $str
+	 * @param null $encoding
+	 *
+	 * @return int
+	 */
+	function mb_strlen( $str , $encoding = null ) {
         return strlen(utf8_decode($str));
     }
 }

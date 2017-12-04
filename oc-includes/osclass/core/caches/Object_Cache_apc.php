@@ -218,12 +218,16 @@ padding: 1em;'><h2>APC stats</h2>";
         echo '</ul></div></div>';
     }
 
-    /**
-     * Utility function to determine whether a key exists in the cache.
-     * @since 3.4
-     *
-     * @access protected
-     */
+	/**
+	 * Utility function to determine whether a key exists in the cache.
+	 * @since  3.4
+	 *
+	 * @access protected
+	 *
+	 * @param $key
+	 *
+	 * @return bool
+	 */
     protected function _exists( $key ) {
         return isset( $this->cache[ $key ] );
     }
@@ -259,11 +263,17 @@ padding: 1em;'><h2>APC stats</h2>";
         return true;
     }
 
-    public function __destruct() {
+	/**
+	 *
+	 */
+	public function __destruct() {
         return true;
     }
 
-    public function _get_cache() {
+	/**
+	 * @return string
+	 */
+	public function _get_cache() {
         return 'apc';
     }
 }

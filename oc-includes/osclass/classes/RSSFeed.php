@@ -32,19 +32,31 @@
             $this->items = array();
         }
 
-        public function setTitle($title) {
+	    /**
+	     * @param $title
+	     */
+	    public function setTitle( $title ) {
             $this->title = $title;
         }
 
-        public function setLink($link) {
+	    /**
+	     * @param $link
+	     */
+	    public function setLink( $link ) {
             $this->link = $link;
         }
 
-        public function setDescription($description) {
+	    /**
+	     * @param $description
+	     */
+	    public function setDescription( $description ) {
             $this->description = $description;
         }
 
-        public function addItem($item) {
+	    /**
+	     * @param $item
+	     */
+	    public function addItem( $item ) {
             $this->items[] = $item;
         }
 

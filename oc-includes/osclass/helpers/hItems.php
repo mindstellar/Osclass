@@ -72,35 +72,40 @@
         return $resource;
     }
 
-    /**
-    * Gets a specific field from current item
-    *
-    * @param type $field
-    * @param type $locale
-    * @return field_type
-    */
+
+	/**
+	 * Gets a specific field from current item
+	 *
+	 * @param type   $field
+	 * @param string $locale
+	 *
+	 * @return field_type
+	 */
     function osc_item_field($field, $locale = '' ) {
         return osc_field(osc_item(), $field, $locale);
     }
 
-    /**
-    * Gets a specific field from current comment
-    *
-    * @param type $field
-    * @param type $locale
-    * @return field_type
-    */
+
+	/**
+	 * Gets a specific field from current comment
+	 *
+	 * @param type   $field
+	 * @param string $locale
+	 *
+	 * @return field_type
+	 */
     function osc_comment_field($field, $locale = '') {
         return osc_field(osc_comment(), $field, $locale);
     }
 
-    /**
-    * Gets a specific field from current resource
-    *
-    * @param type $field
-    * @param type $locale
-    * @return field_type
-    */
+
+	/**
+	 * Gets a specific field from current resource
+	 *
+	 * @param type   $field
+	 * @param string $locale
+	 * @return field_type
+	 */
     function osc_resource_field($field, $locale = '') {
         return osc_field(osc_resource(), $field, $locale);
     }
@@ -199,12 +204,14 @@
 	    return osc_field( $category , 's_name' , $locale );
     }
 
-    /**
-     * Gets category description from current item, if $locale is unspecified $locale is current user locale
-     *
-     * @param type $locale
-     * @return string
-     */
+
+	/**
+	 * Gets category description from current item, if $locale is unspecified $locale is current user locale
+	 *
+	 * @param string $locale
+	 * @return string
+	 * @throws \Exception
+	 */
     function osc_item_category_description($locale = '' ) {
         if ( !View::newInstance()->_exists('item_category') ) {
             View::newInstance()->_exportVariableToView('item_category', Category::newInstance()->findByPrimaryKey( osc_item_category_id(), $locale ) );
@@ -222,12 +229,14 @@
         return (int) osc_item_field( 'fk_i_category_id' );
     }
 
-    /**
-     * Checks to see if the price is enabled for this category.
-     *
-     * @param string $locale
-     * @return string
-     */
+
+	/**
+	 * Checks to see if the price is enabled for this category.
+	 *
+	 * @param null $catId
+	 * @return string
+	 * @throws \Exception
+	 */
     function osc_item_category_price_enabled($catId = null) {
 		if($catId == null) {
 			$category = Category::newInstance()->findByPrimaryKey( osc_item_category_id() ) ;
@@ -475,11 +484,13 @@
 	    }
     }
 
-    /**
-     * return number of views of current item
-     *
-     * @return int
-     */
+
+	/**
+	 * return number of views of current item
+	 *
+	 * @param bool $viewAll
+	 * @return int
+	 */
     function osc_item_views($viewAll = false) {
         $item = osc_item();
         if($viewAll) {
@@ -638,20 +649,27 @@
     }
 
     // DEPRECATED: This function will be removed in version 4.0
-    function osc_list_page() {
+	/**
+	 * @return int
+	 */
+	function osc_list_page() {
         return osc_search_page();
     }
 
     // DEPRECATED: This function will be removed in version 4.0
-    function osc_list_total_pages() {
+	/**
+	 * @return int
+	 */
+	function osc_list_total_pages() {
         return osc_search_total_pages();
-    }
+	}
 
-    /**
-     * Gets number of items per page for current pagination
-     *
-     * @return <type>
-     */
+
+	/**
+	 * Gets number of items per page for current pagination
+	 *
+	 * @return mixed|string <type>
+	 */
     function osc_list_items_per_page() {
         return View::newInstance()->_get('items_per_page');
     }
@@ -665,11 +683,12 @@
         return ItemComment::newInstance()->totalComments( osc_item_id() );
     }
 
-    /**
-     * Gets page of comments in current pagination
-     *
-     * @return <type>
-     */
+
+	/**
+	 * Gets page of comments in current pagination
+	 *
+	 * @return int <type>
+	 */
     function osc_item_comments_page() {
         $page = Params::getParam('comments-page');
         if($page=='') {
@@ -870,11 +889,11 @@
     // DETAILS //
     /////////////
 
-    /**
-     * Gets next item if there is, else return null
-     *
-     * @return array
-     */
+	/**
+	 * Gets next item if there is, else return null
+	 *
+	 * @return bool
+	 */
     function osc_has_items() {
         if ( View::newInstance()->_exists('resources') ) {
             View::newInstance()->_erase('resources');
@@ -943,11 +962,12 @@
         return (int) View::newInstance()->_count('resources');
     }
 
-    /**
-     * Gets next item resource if there is, else return null
-     *
-     * @return array
-     */
+
+	/**
+	 * Gets next item resource if there is, else return null
+	 *
+	 * @return bool
+	 */
     function osc_has_item_resources() {
         if ( !View::newInstance()->_exists('resources') ) {
             View::newInstance()->_exportVariableToView('resources', ItemResource::newInstance()->getAllResourcesFromItem( osc_item_id() ) );
@@ -979,11 +999,12 @@
         return View::newInstance()->_count('comments');
     }
 
-    /**
-     * Gets next comment of current item comments
-     *
-     * @return array
-     */
+
+	/**
+	 * Gets next comment of current item comments
+	 *
+	 * @return bool
+	 */
     function osc_has_item_comments() {
         if ( !View::newInstance()->_exists('comments') ) {
             View::newInstance()->_exportVariableToView('comments', ItemComment::newInstance()->findByItemID( osc_item_id(), osc_item_comments_page(), osc_comments_per_page() ) );
@@ -995,11 +1016,14 @@
     // HOME //
     //////////
 
-    /**
-     * Gets next item of latest items query
-     *
-     * @return boolean It returns true if there is another item available or false if there isn't
-     */
+	/**
+	 * Gets next item of latest items query
+	 *
+	 * @param null  $total_latest_items
+	 * @param array $options
+	 * @param bool  $withPicture
+	 * @return boolean It returns true if there is another item available or false if there isn't
+	 */
     function osc_has_latest_items($total_latest_items = null, $options = array(), $withPicture = false) {
         // if we don't have the latest items loaded, do the query
         if ( !View::newInstance()->_exists('latestItems') ) {
@@ -1043,11 +1067,14 @@
         return $item;
     }
 
-    /**
-     * Gets number of latest items
-     *
-     * @return int
-     */
+
+	/**
+	 * Gets number of latest items
+	 *
+	 * @param null  $total_latest_items
+	 * @param array $options
+	 * @return int
+	 */
     function osc_count_latest_items($total_latest_items = null, $options = array()) {
         if ( !View::newInstance()->_exists('latestItems') ) {
             $search = Search::newInstance();
@@ -1069,11 +1096,11 @@
     // END HOME //
     //////////////
 
-    /**
-     * Gets next item of custom items
-     *
-     * @return array
-     */
+	/**
+	 * Gets next item of custom items
+	 *
+	 * @return bool
+	 */
     function osc_has_custom_items() {
         if ( View::newInstance()->_exists('resources') ) {
             View::newInstance()->_erase('resources');
@@ -1119,12 +1146,14 @@
         return View::newInstance()->_reset('customItems');
     }
 
-    /**
-     * Formats the price using the appropiate currency.
-     *
-     * @param float $price
-     * @return string
-     */
+
+	/**
+	 * Formats the price using the appropiate currency.
+	 *
+	 * @param float $price
+	 * @param null  $symbol
+	 * @return string
+	 */
     function osc_format_price($price, $symbol = null) {
 	    if ( $price === null ) {
 		    return osc_apply_filter( 'item_price_null' , __( 'Check with seller' ) );
@@ -1186,11 +1215,12 @@
         return View::newInstance()->_count('metafields');
     }
 
-    /**
-     * Gets next item meta field if there is, else return null
-     *
-     * @return array
-     */
+
+	/**
+	 * Gets next item meta field if there is, else return null
+	 *
+	 * @return bool
+	 */
     function osc_has_item_meta() {
         if ( !View::newInstance()->_exists('metafields') ) {
             View::newInstance()->_exportVariableToView('metafields', Item::newInstance()->metaFields(osc_item_id()) );

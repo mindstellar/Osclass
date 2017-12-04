@@ -15,7 +15,10 @@
  * limitations under the License.
  */
 
-    class Pagination
+	/**
+	 * Class Pagination
+	 */
+	class Pagination
     {
         protected $total;
         protected $selected;
@@ -37,7 +40,12 @@
         protected $nofollow;
         protected $listClass;
 
-        public function __construct($params = null)
+		/**
+		 * Pagination constructor.
+		 *
+		 * @param null $params
+		 */
+		public function __construct( $params = null )
         {
             $this->total              = isset($params['total']) ? $params['total'] + 1 : osc_search_total_pages() + 1;
             $this->selected           = isset($params['selected']) ? $params['selected'] + 1 : osc_search_page() + 1;
@@ -60,7 +68,12 @@
             $this->listClass          = isset($params['list_class']) ? $params['list_class'] : false;
         }
 
-        public function get_raw_pages($params = null)
+		/**
+		 * @param null $params
+		 *
+		 * @return array
+		 */
+		public function get_raw_pages( $params = null )
         {
             $pages = array();
 
@@ -86,7 +99,10 @@
             return $pages;
         }
 
-        public function get_pages()
+		/**
+		 * @return array
+		 */
+		public function get_pages()
         {
             $pages = $this->get_raw_pages();
 
@@ -108,7 +124,10 @@
             return $pages;
         }
 
-        public function get_links()
+		/**
+		 * @return array
+		 */
+		public function get_links()
         {
             $pages = $this->get_pages();
             $links = array();
@@ -199,7 +218,10 @@
             return $links;
         }
 
-        public function doPagination()
+		/**
+		 * @return string
+		 */
+		public function doPagination()
         {
             if( $this->total > 1 ) {
                 $links = $this->get_links();
@@ -213,7 +235,13 @@
             }
         }
 
-        protected function createATag($text, $attrs)
+		/**
+		 * @param $text
+		 * @param $attrs
+		 *
+		 * @return string
+		 */
+		protected function createATag( $text , $attrs )
         {
             $att = array();
             foreach($attrs as $k => $v) {
@@ -222,7 +250,13 @@
             return '<li><a ' . implode(' ', $att) . '>' . $text . '</a></li>';
         }
 
-        protected function createSpanTag($text, $attrs)
+		/**
+		 * @param $text
+		 * @param $attrs
+		 *
+		 * @return string
+		 */
+		protected function createSpanTag( $text , $attrs )
         {
             $att = array();
             foreach($attrs as $k => $v) {

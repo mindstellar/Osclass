@@ -65,7 +65,12 @@
             $this->setFields(array('pk_c_code', 's_name', 's_description', 'b_enabled'));
         }
 
-        public function findByPrimaryKey($value)
+	    /**
+	     * @param string $value
+	     *
+	     * @return bool|mixed
+	     */
+	    public function findByPrimaryKey( $value )
         {
 	        if ( isset( self::$_currencies[ $value ] ) ) {
 		        return self::$_currencies[ $value ];

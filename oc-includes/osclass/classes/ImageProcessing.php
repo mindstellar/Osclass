@@ -22,7 +22,12 @@
      */
     class ImageProcessing {
 
-        public static function fromFile($imagePath) {
+	    /**
+	     * @param $imagePath
+	     *
+	     * @return \ImageProcessing
+	     */
+	    public static function fromFile( $imagePath ) {
             return new ImageProcessing($imagePath);
         }
 
@@ -41,7 +46,14 @@
         private $_use_imagick = false;
 
 
-        private function __construct($imagePath) {
+	    /**
+	     * ImageProcessing constructor.
+	     *
+	     * @param $imagePath
+	     *
+	     * @throws \Exception
+	     */
+	    private function __construct( $imagePath ) {
             if(!file_exists($imagePath)) {
                 throw new Exception(sprintf( __( '%s does not exist!' ), $imagePath));
             }
@@ -117,12 +129,43 @@
             }
         }
 
-        public function getExt() { return $this->ext; }
-        public function getMime() { return $this->mime; }
-        public function getWidth() { return $this->_width; }
-        public function getHeight() { return $this->_height; }
+	    /**
+	     * @return string
+	     */
+	    public function getExt() {
+		    return $this->ext;
+	    }
 
-        public function resizeTo($width, $height, $force_aspect = null, $upscale = true) {
+	    /**
+	     * @return string
+	     */
+	    public function getMime() {
+		    return $this->mime;
+	    }
+
+	    /**
+	     * @return int
+	     */
+	    public function getWidth() {
+		    return $this->_width;
+	    }
+
+	    /**
+	     * @return int
+	     */
+	    public function getHeight() {
+		    return $this->_height;
+	    }
+
+	    /**
+	     * @param      $width
+	     * @param      $height
+	     * @param null $force_aspect
+	     * @param bool $upscale
+	     *
+	     * @return $this
+	     */
+	    public function resizeTo( $width , $height , $force_aspect = null , $upscale = true ) {
             if($force_aspect==null) {
                 $force_aspect = osc_force_aspect_image();
             }
@@ -174,7 +217,13 @@
             return $this;
         }
 
-        public function saveToFile($imagePath, $ext = null) {
+	    /**
+	     * @param      $imagePath
+	     * @param null $ext
+	     *
+	     * @throws \Exception
+	     */
+	    public function saveToFile( $imagePath , $ext = null ) {
             if(file_exists($imagePath) && !is_writable($imagePath)) {
                 throw new Exception("$imagePath is not writable!");
             }
@@ -216,7 +265,10 @@
             }
         }
 
-        public function autoRotate() {
+	    /**
+	     * @return $this
+	     */
+	    public function autoRotate() {
             if($this->_use_imagick) {
                 switch($this->im->getImageOrientation()) {
                     case imagick::ORIENTATION_TOPRIGHT:
@@ -321,7 +373,14 @@
             }
         }
 
-        public function doWatermarkText($text, $color = 'ff0000', $fontsize = '30') {
+	    /**
+	     * @param        $text
+	     * @param string $color
+	     * @param string $fontsize
+	     *
+	     * @return $this
+	     */
+	    public function doWatermarkText( $text , $color = 'ff0000' , $fontsize = '30' ) {
             $this->_watermarked = true;
             $this->_font = osc_apply_filter('watermark_font_path', LIB_PATH . 'osclass/assets/fonts/Arial.ttf' );
             $text = osc_apply_filter('watermark_text_value', $text);
@@ -370,7 +429,12 @@
         }
 
 
-        private function _imageColorAllocateHex($hexstr) {
+	    /**
+	     * @param $hexstr
+	     *
+	     * @return int
+	     */
+	    private function _imageColorAllocateHex( $hexstr ) {
             $red    = hexdec(substr($hexstr, 0, 2));
             $green  = hexdec(substr($hexstr, 2, 2));
             $blue   = hexdec(substr($hexstr, 4, 2));
@@ -379,7 +443,12 @@
             return imagecolorallocate($this->im, $red, $green, $blue);
         }
 
-        private function _calculateOffset($text) {
+	    /**
+	     * @param $text
+	     *
+	     * @return array
+	     */
+	    private function _calculateOffset( $text ) {
             $offset = array('x' => 0, 'y' => 0);
             $bbox   = $this->_calculateBBox($text);
 
@@ -409,7 +478,12 @@
             return $offset;
         }
 
-        private function _calculateBBox($text) {
+	    /**
+	     * @param $text
+	     *
+	     * @return array
+	     */
+	    private function _calculateBBox( $text ) {
             $bbox = imagettfbbox(
                 20,
                 0,
@@ -442,7 +516,10 @@
             return $bbox;
         }
 
-        public function doWatermarkImage()
+	    /**
+	     * @return $this
+	     */
+	    public function doWatermarkImage()
         {
             $this->_watermarked = true;
             $path_watermark = osc_uploads_path() . 'watermark.png';
@@ -511,8 +588,21 @@
         }
 
 
-
-        private function _imagecopymerge_alpha(&$dst_im, $src_im, $dst_x, $dst_y, $src_x, $src_y, $src_w, $src_h, $pct, $trans = NULL)
+	    /**
+	     * @param      $dst_im
+	     * @param      $src_im
+	     * @param      $dst_x
+	     * @param      $dst_y
+	     * @param      $src_x
+	     * @param      $src_y
+	     * @param      $src_w
+	     * @param      $src_h
+	     * @param      $pct
+	     * @param null $trans
+	     *
+	     * @return bool
+	     */
+	    private function _imagecopymerge_alpha( &$dst_im , $src_im , $dst_x , $dst_y , $src_x , $src_y , $src_w , $src_h , $pct , $trans = null )
         {
             imagealphablending( $dst_im, false );
             imagesavealpha( $dst_im, true );
@@ -561,7 +651,16 @@
 
 
 if(!function_exists('imageflip')) {
-    function imageflip(&$image, $x = 0, $y = 0, $width = null, $height = null)
+	/**
+	 * @param      $image
+	 * @param int  $x
+	 * @param int  $y
+	 * @param null $width
+	 * @param null $height
+	 *
+	 * @return mixed
+	 */
+	function imageflip( &$image , $x = 0 , $y = 0 , $width = null , $height = null )
     {
 	    if ( $width < 1 ) {
 		    $width = imagesx( $image );

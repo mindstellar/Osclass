@@ -15,7 +15,10 @@
  * limitations under the License.
  */
 
-function osc_listLocales() {
+	/**
+	 * @return array
+	 */
+	function osc_listLocales() {
     $languages = array();
 
     $codes = osc_listLanguageCodes();
@@ -34,7 +37,11 @@ function osc_listLocales() {
     return $languages;
 }
 
-function osc_checkLocales() {
+
+	/**
+	 * @return bool
+	 */
+	function osc_checkLocales() {
     $locales = osc_listLocales();
 
     foreach($locales as $locale) {
@@ -89,7 +96,11 @@ function osc_checkLocales() {
     return true;
 }
 
-function osc_listLanguageCodes() {
+
+	/**
+	 * @return array
+	 */
+	function osc_listLanguageCodes() {
     $codes = array();
 
     $dir = opendir(osc_translations_path());

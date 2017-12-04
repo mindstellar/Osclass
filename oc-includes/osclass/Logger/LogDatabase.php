@@ -77,13 +77,11 @@
             );
         }
 
-        /**
-         *
-         * @param type $sql
-         * @param type $time
-         * @param type $errorLevel
-         * @param type $errorDescription
-         */
+	    /**
+	     *
+	     * @param type $sql
+	     * @param      $results
+	     */
         public function addExplainMessage($sql, $results)
         {
             $this->explain_messages[] = array(
@@ -124,7 +122,10 @@
             echo '</fieldset>' . PHP_EOL;
         }
 
-        public function writeMessages()
+	    /**
+	     * @return bool
+	     */
+	    public function writeMessages()
         {
             $filename = CONTENT_PATH . 'queries.log';
 
@@ -164,7 +165,10 @@
             return true;
         }
 
-        public function writeExplainMessages()
+	    /**
+	     * @return bool
+	     */
+	    public function writeExplainMessages()
         {
             $filename = CONTENT_PATH . 'explain_queries.log';
 
@@ -226,7 +230,10 @@
             return true;
         }
 
-        public function getTotalQueriesTime()
+	    /**
+	     * @return int
+	     */
+	    public function getTotalQueriesTime()
         {
             $time = 0;
             foreach($this->messages as $m) {
@@ -236,7 +243,10 @@
             return $time;
         }
 
-        public function getTotalNumberQueries()
+	    /**
+	     * @return int
+	     */
+	    public function getTotalNumberQueries()
         {
             return count($this->messages);
         }

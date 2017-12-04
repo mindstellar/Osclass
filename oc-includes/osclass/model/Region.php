@@ -33,7 +33,10 @@
          */
         private static $instance;
 
-        public static function newInstance()
+	    /**
+	     * @return \Region|\type
+	     */
+	    public static function newInstance()
         {
             if( !self::$instance instanceof self ) {
                 self::$instance = new self;
@@ -117,14 +120,17 @@
             return $result->row();
         }
 
-        /**
-         * Function to deal with ajax queries
-         *
-         * @access public
-         * @since unknown
-         * @param type $query
-         * @return array
-         */
+	    /**
+	     * Function to deal with ajax queries
+	     *
+	     * @access public
+	     * @since  unknown
+	     *
+	     * @param type $query
+	     * @param null $country
+	     *
+	     * @return array
+	     */
         public function ajax($query, $country = null)
         {
             $country = trim($country);

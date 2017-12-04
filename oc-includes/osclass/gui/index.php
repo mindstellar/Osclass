@@ -30,7 +30,10 @@ Widgets:  header, footer
 Theme update URI: bender
 */
 
-    function bender_theme_info() {
+	/**
+	 * @return array
+	 */
+	function bender_theme_info() {
         return array(
              'name'        => 'bender'
             ,'version'     => '3.1.4'

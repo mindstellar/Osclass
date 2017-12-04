@@ -29,7 +29,10 @@
          */
         private static $instance;
 
-        public static function newInstance()
+	    /**
+	     * @return \Log|\type
+	     */
+	    public static function newInstance()
         {
             if( !self::$instance instanceof self ) {
                 self::$instance = new self;
@@ -57,19 +60,21 @@
             $this->setFields($array_fields);
         }
 
-        /**
-         * Insert a log row.
-         *
-         * @access public
-         * @since unknown
-         * @param string $section
-         * @param string $action
-         * @param integer $id
-         * @param string $data
-         * @param string $who
-         * @param integer $who_id
-         * @return boolean
-         */
+	    /**
+	     * Insert a log row.
+	     *
+	     * @access public
+	     * @since  unknown
+	     *
+	     * @param string  $section
+	     * @param string  $action
+	     * @param integer $id
+	     * @param string  $data
+	     * @param string  $who
+	     * @param         $whoId
+	     *
+	     * @return boolean
+	     */
         public function insertLog($section, $action, $id, $data, $who, $whoId)
         {
             if ( Params::getServerParam('REMOTE_ADDR') == '' ) {

@@ -37,7 +37,13 @@ function add_slashes_extended( $array ) {
     return $array;
 }
 
-function osc_sanitizeString($string) {
+
+	/**
+	 * @param $string
+	 *
+	 * @return mixed|null|string|string[]
+	 */
+	function osc_sanitizeString( $string ) {
     $string = strip_tags($string);
     $string = preg_replace('/%([a-fA-F0-9][a-fA-F0-9])/', '--$1--', $string);
     $string = str_replace('%', '', $string);
@@ -66,7 +72,13 @@ function osc_sanitizeString($string) {
     return $string;
 }
 
-function remove_accents($string) {
+
+	/**
+	 * @param $string
+	 *
+	 * @return mixed|null|string|string[]
+	 */
+	function remove_accents( $string ) {
 	if ( ! preg_match( '/[\x80-\xff]/' , $string ) ) {
 		return $string;
 	}
@@ -202,7 +214,13 @@ function remove_accents($string) {
 	return $string;
 }
 
-function is_utf8($string) {
+
+	/**
+	 * @param $string
+	 *
+	 * @return false|int
+	 */
+	function is_utf8( $string ) {
     return preg_match('%^(?:
           [\x09\x0A\x0D\x20-\x7E]            # ASCII
         | [\xC2-\xDF][\x80-\xBF]             # non-overlong 2-byte

@@ -18,18 +18,35 @@
  * limitations under the License.
  */
 
-    Class ItemActions
+	/**
+	 * Class ItemActions
+	 */
+	Class ItemActions
     {
         private $manager = null;
         public $is_admin;
         public $data;
 
-        public function __construct($is_admin = false) {
+		/**
+		 * ItemActions constructor.
+		 *
+		 * @param bool $is_admin
+		 */
+		public function __construct( $is_admin = false ) {
             $this->is_admin = $is_admin;
             $this->manager = Item::newInstance();
         }
 
-        private function _akismet_text( $title, $description, $author, $email )
+		/**
+		 * @param $title
+		 * @param $description
+		 * @param $author
+		 * @param $email
+		 *
+		 * @return bool
+		 * @throws \Will
+		 */
+		private function _akismet_text( $title , $description , $author , $email )
         {
             $spam = false;
             foreach($title as $k => $_data){
@@ -289,7 +306,11 @@
             return $success;
         }
 
-        public function edit() {
+		/**
+		 * @return mixed|string
+		 * @throws \Exception
+		 */
+		public function edit() {
             $aItem       = $this->data;
             $aItem = osc_apply_filter('item_edit_prepare_data', $aItem);
             $flash_error = '';
@@ -552,13 +573,15 @@
             }
         }
 
-        /**
-         * Activates an item.
-         * Set s_enabled value to 1, for a given item id
-         *
-         * @param int $id
-         * @return bool
-         */
+		/**
+		 * Activates an item.
+		 * Set s_enabled value to 1, for a given item id
+		 *
+		 * @param int  $id
+		 * @param null $secret
+		 *
+		 * @return bool
+		 */
         public function activate( $id, $secret = NULL )
         {
             $aWhere = array();
@@ -778,12 +801,14 @@
             osc_run_hook('item_decrease_stat',$item);
         }
 
-        /**
-         * Delete an item, given s_secret and item id.
-         *
-         * @param <type> $secret
-         * @param <type> $itemId
-         */
+		/**
+		 * Delete an item, given s_secret and item id.
+		 *
+		 * @param <type> $secret
+		 * @param <type> $itemId
+		 *
+		 * @return bool
+		 */
         public function delete( $secret, $itemId )
         {
             $item = $this->manager->findByPrimaryKey($itemId);
@@ -802,10 +827,12 @@
             return false;
         }
 
-        /**
-         * Delete resources from the hard drive
-         * @param <type> $itemId
-         */
+		/**
+		 * Delete resources from the hard drive
+		 *
+		 * @param <type> $itemId
+		 * @param bool $is_admin
+		 */
         public static function deleteResourcesFromHD( $itemId, $is_admin = false )
         {
             $resources = ItemResource::newInstance()->getAllResourcesFromItem($itemId);
@@ -846,7 +873,10 @@
             ItemStats::newInstance()->increase( $column, $id );
         }
 
-        public function send_friend()
+		/**
+		 * @return bool
+		 */
+		public function send_friend()
         {
             // get data for this function
             $aItem = $this->prepareDataForFunction( 'send_friend' );
@@ -863,7 +893,10 @@
             return true;
         }
 
-        public function contact()
+		/**
+		 * @return string
+		 */
+		public function contact()
         {
             $flash_error = '';
             $aItem = $this->prepareDataForFunction( 'contact' );
@@ -889,7 +922,11 @@
         /*
          *
          */
-        public function add_comment()
+		/**
+		 * @return int
+		 * @throws \Will
+		 */
+		public function add_comment()
         {
 
             if(!osc_comments_enabled()) {
@@ -1014,10 +1051,13 @@
             return -1;
         }
 
-        /**
-         * Return an array with all data necessary for do the action
-         * @param <type> $action
-         */
+		/**
+		 * Return an array with all data necessary for do the action
+		 *
+		 * @param <type> $action
+		 *
+		 * @return array
+		 */
         private function prepareDataForFunction( $action )
         {
             $aItem = array();
@@ -1078,11 +1118,11 @@
             return $aItem;
         }
 
-        /**
-         * Return an array with all data necessary for do the action (ADD OR EDIT)
-         * @param <type> $is_add
-         * @return array
-         */
+		/**
+		 * Return an array with all data necessary for do the action (ADD OR EDIT)
+		 * @param <type> $is_add
+		 * @return void
+		 */
         public function prepareData( $is_add )
         {
             $aItem = array();
@@ -1305,7 +1345,13 @@
             $this->data = $aItem;
         }
 
-        public function insertItemLocales($type, $title, $description, $itemId )
+		/**
+		 * @param $type
+		 * @param $title
+		 * @param $description
+		 * @param $itemId
+		 */
+		public function insertItemLocales( $type , $title , $description , $itemId )
         {
             foreach($title as $k => $_data){
                 $_title         = $title[$k];
@@ -1318,7 +1364,12 @@
             }
         }
 
-        private function checkSize($aResources)
+		/**
+		 * @param $aResources
+		 *
+		 * @return bool
+		 */
+		private function checkSize( $aResources)
         {
             $success = true;
 
@@ -1341,7 +1392,12 @@
             return $success;
         }
 
-        private function checkAllowedExt($aResources)
+		/**
+		 * @param $aResources
+		 *
+		 * @return bool
+		 */
+		private function checkAllowedExt( $aResources)
         {
             $success = true;
             require LIB_PATH . 'osclass/mimes.php';
@@ -1396,7 +1452,14 @@
             return $success;
         }
 
-        public function uploadItemResources($aResources,$itemId)
+		/**
+		 * @param $aResources
+		 * @param $itemId
+		 *
+		 * @return int
+		 * @throws \Exception
+		 */
+		public function uploadItemResources( $aResources , $itemId)
         {
             if(!empty($aResources)) {
                 $itemResourceManager = ItemResource::newInstance();
@@ -1479,7 +1542,10 @@
             return 0; // NO PROBLEMS
         }
 
-        public function sendEmails($aItem){
+		/**
+		 * @param $aItem
+		 */
+		public function sendEmails( $aItem){
 
             $item   = $aItem['item'];
             View::newInstance()->_exportVariableToView('item', $item);
@@ -1504,11 +1570,23 @@
         }
     }
 
-    if(osc_force_jpeg()) {
-        function osc_force_jpeg_extension($content) {
+    if(osc_force_jpeg() ) {
+	    /**
+	     * @param $content
+	     *
+	     * @return string
+	     */
+	    function osc_force_jpeg_extension( $content) {
             return 'jpg';
-        }
-        function osc_force_jpeg_mime($content) {
+	    }
+
+
+	    /**
+	     * @param $content
+	     *
+	     * @return string
+	     */
+	    function osc_force_jpeg_mime( $content) {
             return 'image/jpeg';
         }
         osc_add_filter('upload_image_extension', 'osc_force_jpeg_extension');

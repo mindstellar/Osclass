@@ -18,7 +18,10 @@
  * limitations under the License.
  */
 
-    class DB
+	/**
+	 * Class DB
+	 */
+	class DB
     {
         private $db = null;
         private $db_errno = 0;
@@ -29,7 +32,15 @@
         private $dbName = null;
         private $msg = '';
 
-        public function __construct($dbHost, $dbUser, $dbPassword, $dbName) {
+		/**
+		 * DB constructor.
+		 *
+		 * @param $dbHost
+		 * @param $dbUser
+		 * @param $dbPassword
+		 * @param $dbName
+		 */
+		public function __construct( $dbHost , $dbUser , $dbPassword , $dbName ) {
             $this->dbHost = $dbHost;
             $this->dbUser = $dbUser;
             $this->dbPassword = $dbPassword;
@@ -43,7 +54,11 @@
             $this->osc_dbClose();
         }
 
-        public function debug($msg, $ok = true)
+		/**
+		 * @param      $msg
+		 * @param bool $ok
+		 */
+		public function debug( $msg , $ok = true )
         {
             if( OSC_DEBUG_DB ) {
                 $this->msg .= date( 'd/m/Y - H:i:s' ) . ' ';
@@ -136,7 +151,10 @@
             return $result;
         }
 
-        public function osc_dbFetchValue() {
+		/**
+		 * @return null
+		 */
+		public function osc_dbFetchValue() {
             $result = null;
 
             $sql = null;
@@ -192,7 +210,10 @@
             return $results;
         }
 
-        public function osc_dbFetchResult() {
+		/**
+		 * @return null
+		 */
+		public function osc_dbFetchResult() {
             $result = null;
 
             $sql = null;
@@ -218,7 +239,10 @@
             return $result;
         }
 
-        public function osc_dbFetchResults() {
+		/**
+		 * @return array
+		 */
+		public function osc_dbFetchResults() {
             $results = array();
 
             $sql = null;
@@ -245,9 +269,14 @@
             return $results;
         }
 
-        /**
-         * Import (executes) the SQL passed as parameter making some proper adaptations.
-         */
+		/**
+		 * Import (executes) the SQL passed as parameter making some proper adaptations.
+		 *
+		 * @param        $sql
+		 * @param string $needle
+		 *
+		 * @return bool
+		 */
         public function osc_dbImportSQL($sql, $needle = '')
         {
             $sql = str_replace('/*TABLE_PREFIX*/', DB_TABLE_PREFIX, $sql);
@@ -294,7 +323,10 @@
             return true;
         }
 
-        public function autocommit($b_value) {
+		/**
+		 * @param $b_value
+		 */
+		public function autocommit( $b_value ) {
             $this->db->autocommit($b_value);
         }
 
@@ -306,24 +338,34 @@
             $this->db->rollback();
         }
 
-        public function get_last_id() {
+		/**
+		 * @return mixed
+		 */
+		public function get_last_id() {
             return $this->db->insert_id;
         }
 
-        public function get_affected_rows() {
+		/**
+		 * @return mixed
+		 */
+		public function get_affected_rows() {
             return $this->db->affected_rows;
         }
 
-        public function get_errno() {
+		/**
+		 * @return int
+		 */
+		public function get_errno() {
             return $this->db_errno;
-        }
+		}
 
-        /**
-         * Given some queries, it will check against the installed database if the information is the same
-         *
-         * @param mixed array or string with the SQL queries.
-         * @return BOOLEAN true on success, false on fail
-         */
+		/**
+		 * Given some queries, it will check against the installed database if the information is the same
+		 *
+		 * @param mixed array or string with the SQL queries.
+		 *
+		 * @return array true on success, false on fail
+		 */
         public function osc_updateDB($queries = '') {
 
             if(!is_array($queries)) {
@@ -474,9 +516,18 @@
             return array($ok, $queries, $error_queries);
         }
 
-    }
+	}
 
-    function getConnection($dbHost = null, $dbUser = null, $dbPassword = null, $dbName = null, $dbLogLevel = null)
+	/**
+	 * @param null $dbHost
+	 * @param null $dbUser
+	 * @param null $dbPassword
+	 * @param null $dbName
+	 * @param null $dbLogLevel
+	 *
+	 * @return mixed
+	 */
+	function getConnection( $dbHost = null , $dbUser = null , $dbPassword = null , $dbName = null , $dbLogLevel = null)
     {
         static $instance;
 

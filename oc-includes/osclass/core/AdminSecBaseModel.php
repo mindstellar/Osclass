@@ -18,7 +18,10 @@
  * limitations under the License.
  */
 
-    class AdminSecBaseModel extends SecBaseModel
+	/**
+	 * Class AdminSecBaseModel
+	 */
+	class AdminSecBaseModel extends SecBaseModel
     {
         public function __construct()
         {
@@ -66,12 +69,18 @@
             osc_enqueue_script('admin-ui-osc');
         }
 
-        public function isLogged()
+		/**
+		 * @return bool
+		 */
+		public function isLogged()
         {
             return osc_is_admin_user_logged_in();
         }
 
-        public function isModerator()
+		/**
+		 * @return bool
+		 */
+		public function isModerator()
         {
             return osc_is_moderator();
         }
@@ -109,7 +118,11 @@
         }
 
         //hopefully generic...
-        public function doView($file)
+
+		/**
+		 * @param $file
+		 */
+		public function doView( $file )
         {
             osc_run_hook( 'before_admin_html' );
             osc_current_admin_theme_path($file);

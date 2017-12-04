@@ -135,15 +135,17 @@
             return $result->result();
         }
 
-        /**
-         * Get the citiy by its name and region
-         *
-         * @access public
-         * @since unknown
-         * @param string $query
-         * @param int $regionId
-         * @return array
-         */
+	    /**
+	     * Get the citiy by its name and region
+	     *
+	     * @access public
+	     * @since  unknown
+	     *
+	     * @param     $cityName
+	     * @param int $regionId
+	     *
+	     * @return array
+	     */
         public function findByName($cityName, $regionId = null)
         {
             $this->dao->select($this->getFields());

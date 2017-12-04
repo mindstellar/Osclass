@@ -30,7 +30,12 @@
         osc_current_web_theme_path('user-sidebar.php');
     }
     osc_add_filter('meta_title_filter','custom_meta_title');
-    function custom_meta_title($data){
+	/**
+	 * @param $data
+	 *
+	 * @return string
+	 */
+	function custom_meta_title( $data ) {
         return __('Change username', 'bender');
     }
     osc_current_web_theme_path('header.php') ;

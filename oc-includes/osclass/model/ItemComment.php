@@ -99,16 +99,18 @@
             return $result->result();
         }
 
-        /**
-         * Searches for comments information, given an item id, page and comments per page.
-         *
-         * @access public
-         * @since unknown
-         * @param integer $id
-         * @param integer $page
-         * @param integer $comments_per_page
-         * @return array
-         */
+	    /**
+	     * Searches for comments information, given an item id, page and comments per page.
+	     *
+	     * @access public
+	     * @since  unknown
+	     *
+	     * @param integer $id
+	     * @param integer $page
+	     * @param null    $commentsPerPage
+	     *
+	     * @return array
+	     */
         public function findByItemID($id, $page = null, $commentsPerPage = null)
         {
             $result = array();
@@ -393,7 +395,12 @@
             return $row['numrows'];
         }
 
-        public function countAll($aConditions = null )
+	    /**
+	     * @param null $aConditions
+	     *
+	     * @return bool|int
+	     */
+	    public function countAll( $aConditions = null )
         {
             $this->dao->select('count(*) as total');
             $this->dao->from($this->getTableName().' c');

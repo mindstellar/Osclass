@@ -35,7 +35,10 @@
         {
         }
 
-        public static function newInstance()
+	    /**
+	     * @return \AdminToolbar
+	     */
+	    public static function newInstance()
         {
             if(!self::$instance instanceof self) {
                 self::$instance = new self;
@@ -66,18 +69,14 @@
 
             osc_run_hook( 'add_admin_toolbar_menus' );
         }
-        /**
-         * Add a node to the menu.
-         *
-         * @todo implement parent nodes
-         *
-         * @param array $args - The arguments for each node.
-         * - id         - string    - The ID of the item.
-         * - title      - string    - The title of the node.
-         * - href       - string    - The link for the item. Optional.
-         * - meta       - array     - Meta data including the following keys: html, class, onclick, target, title, tabindex.
-         * - target     - string    - _blank
-         */
+
+	    /**
+	     * Add a node to the menu.
+	     *
+	     * @todo implement parent nodes
+	     *
+	     * @param $array
+	     */
         public function add_menu( $array )
         {
                 $this->nodes[ $array['id'] ] = (object) $array;

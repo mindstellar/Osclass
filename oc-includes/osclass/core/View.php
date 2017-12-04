@@ -18,13 +18,19 @@
  * limitations under the License.
  */
 
-    class View
+	/**
+	 * Class View
+	 */
+	class View
     {
         private $aExported;
         private $aCurrent;
         private static $instance;
 
-        public static function newInstance()
+		/**
+		 * @return \View
+		 */
+		public static function newInstance()
         {
             if(!self::$instance instanceof self) {
                 self::$instance = new self;
@@ -38,13 +44,24 @@
         }
 
         //to export variables at the business layer
-        public function _exportVariableToView($key, $value)
+
+		/**
+		 * @param $key
+		 * @param $value
+		 */
+		public function _exportVariableToView( $key , $value )
         {
             $this->aExported[$key] = $value;
         }
 
         //to get the exported variables for the view
-        public function _get($key)
+
+		/**
+		 * @param $key
+		 *
+		 * @return mixed|string
+		 */
+		public function _get( $key )
         {
             if ($this->_exists($key)) {
                 return $this->aExported[$key];
@@ -54,7 +71,11 @@
         }
 
         //only for debug
-        public function _view($key = null)
+
+		/**
+		 * @param null $key
+		 */
+		public function _view( $key = null )
         {
             if ($key) {
                 print_r($this->aExported[$key]);
@@ -63,7 +84,12 @@
             }
         }
 
-        public function _next($key)
+		/**
+		 * @param $key
+		 *
+		 * @return bool
+		 */
+		public function _next( $key )
         {
             if (is_array($this->aExported[$key])) {
                 $this->aCurrent[$key] = current( $this->aExported[$key] );
@@ -75,7 +101,12 @@
             return false;
         }
 
-        public function _current($key)
+		/**
+		 * @param $key
+		 *
+		 * @return string
+		 */
+		public function _current( $key )
         {
             if(is_array($this->aExported[$key])) {
                 if(!isset($this->aCurrent[$key]) ) {
@@ -86,7 +117,12 @@
             return '';
         }
 
-        public function _key($key)
+		/**
+		 * @param $key
+		 *
+		 * @return bool|int|null|string
+		 */
+		public function _key( $key )
         {
             if ( is_array($this->aExported[$key]) ) {
                 $_key = key( $this->aExported[$key] ) -1;
@@ -98,7 +134,13 @@
             return false;
         }
 
-        public function _seek($key, $position)
+		/**
+		 * @param $key
+		 * @param $position
+		 *
+		 * @return bool
+		 */
+		public function _seek( $key , $position )
         {
             if ( is_array($this->aExported[$key]) ) {
                 $this->_reset($key);
@@ -113,7 +155,12 @@
             return false;
         }
 
-        public function _reset($key)
+		/**
+		 * @param $key
+		 *
+		 * @return array|mixed
+		 */
+		public function _reset( $key )
         {
             if ( !array_key_exists($key, $this->aExported) ) {
                 return array();
@@ -124,12 +171,22 @@
             return reset($this->aExported[$key]);
         }
 
-        public function _exists($key)
+		/**
+		 * @param $key
+		 *
+		 * @return bool
+		 */
+		public function _exists( $key )
         {
             return ( isset($this->aExported[$key]) ? true : false );
         }
 
-        public function _count($key)
+		/**
+		 * @param $key
+		 *
+		 * @return int
+		 */
+		public function _count( $key )
         {
             if (isset($this->aExported[$key]) && is_array($this->aExported[$key])) {
                 return count($this->aExported[$key]);
@@ -137,7 +194,10 @@
             return -1; // @TOFIX @FIXME ?? why ? why not 0 ?
         }
 
-        public function _erase($key)
+		/**
+		 * @param $key
+		 */
+		public function _erase( $key )
         {
             unset($this->aExported[$key]);
             unset($this->aCurrent[$key]);

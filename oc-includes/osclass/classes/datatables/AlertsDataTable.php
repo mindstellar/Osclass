@@ -31,8 +31,13 @@
         
         private $search;
         private $order_by;
-        
-        public function table($params)
+
+	    /**
+	     * @param $params
+	     *
+	     * @return array
+	     */
+	    public function table( $params )
         {
             
             $this->addTableHeader();
@@ -57,8 +62,11 @@
             $dummy = &$this;
             osc_run_hook( 'admin_alerts_table' , $dummy);
         }
-        
-        private function processData($alerts)
+
+	    /**
+	     * @param $alerts
+	     */
+	    private function processData( $alerts )
         {
             if(!empty($alerts) && !empty($alerts['alerts'])) {
 
@@ -123,8 +131,11 @@
 
             }
         }
-                
-        private function getDBParams($_get)
+
+	    /**
+	     * @param $_get
+	     */
+	    private function getDBParams( $_get )
         {
             
             

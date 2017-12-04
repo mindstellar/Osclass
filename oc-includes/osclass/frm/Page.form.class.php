@@ -18,15 +18,24 @@
  * limitations under the License.
  */
 
-    class PageForm extends Form {
+	/**
+	 * Class PageForm
+	 */
+	class PageForm extends Form {
 
-        public static function primary_input_hidden($page = null) {
+		/**
+		 * @param null $page
+		 */
+		public static function primary_input_hidden( $page = null ) {
             if(isset($page['pk_i_id'])) {
                 parent::generic_input_hidden( 'id' , $page[ 'pk_i_id' ]);
             }
         }
 
-        public static function internal_name_input_text($page = null) {
+		/**
+		 * @param null $page
+		 */
+		public static function internal_name_input_text( $page = null ) {
             $internal_name = '';
             if( is_array($page) && isset($page['s_internal_name']) ) {
                 $internal_name = $page['s_internal_name'];
@@ -36,8 +45,11 @@
             }
             parent::generic_input_text('s_internal_name', $internal_name, null, (isset($page['b_indelible']) && $page['b_indelible'] == 1) ? true : false);
         }
-        
-        public static function link_checkbox($page = null) {
+
+		/**
+		 * @param null $page
+		 */
+		public static function link_checkbox( $page = null ) {
             $checked = true;
             if( is_array($page) && isset($page['b_link']) && $page['b_link']==0 ) {
                 $checked = false;
@@ -46,7 +58,11 @@
             parent::generic_input_checkbox( 'b_link', '1' , $checked);
         }
 
-        public static function multilanguage_name_description($locales, $page = null) {
+		/**
+		 * @param      $locales
+		 * @param null $page
+		 */
+		public static function multilanguage_name_description( $locales , $page = null ) {
             $num_locales = count($locales);
 	        if ( $num_locales > 1 ) {
 		        echo '<div class="tabber">';

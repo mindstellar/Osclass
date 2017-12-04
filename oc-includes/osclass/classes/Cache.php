@@ -31,7 +31,13 @@
         private $objectKey;
         private $expiration;
 
-        public function __construct($objectKey, $expiration = 900 /* 15 minutes */) {
+	    /**
+	     * Cache constructor.
+	     *
+	     * @param     $objectKey
+	     * @param int $expiration
+	     */
+	    public function __construct( $objectKey , $expiration = 900 /* 15 minutes */ ) {
             $this->objectKey = $objectKey;
             $this->expiration = $expiration;
         }
@@ -56,9 +62,11 @@
             return true;
         }
 
-        /**
-         * Stores the object passed as parameter in the cache backend (filesystem).
-         */
+	    /**
+	     * Stores the object passed as parameter in the cache backend (filesystem).
+	     *
+	     * @param $object
+	     */
         public function store($object) {
             $serialized = serialize($object);
             file_put_contents($this->preparePath(), $serialized);

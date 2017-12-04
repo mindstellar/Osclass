@@ -18,7 +18,10 @@
  * limitations under the License.
  */
 
-    class CWebItem extends BaseModel
+	/**
+	 * Class CWebItem
+	 */
+	class CWebItem extends BaseModel
     {
         private $itemManager;
         private $user;
@@ -656,7 +659,13 @@
         }
 
         //hopefully generic...
-        public function doView($file)
+
+		/**
+		 * @param $file
+		 *
+		 * @return mixed|void
+		 */
+		public function doView( $file )
         {
             osc_run_hook( 'before_html' );
             osc_current_web_theme_path($file);

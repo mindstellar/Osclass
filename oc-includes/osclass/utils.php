@@ -17,9 +17,13 @@
  */
 
 
-/**
- * check if the item is expired
- */
+	/**
+	 * check if the item is expired
+	 *
+	 * @param $dt_expiration
+	 *
+	 * @return bool
+	 */
 function osc_isExpired($dt_expiration) {
     $now       = date( 'YmdHis' );
 
@@ -67,10 +71,14 @@ function osc_deleteResource( $id , $admin) {
     }
 }
 
-/**
- * Tries to delete the directory recursivaly.
- * @return true on success.
- */
+
+	/**
+	 * Tries to delete the directory recursivaly.
+	 *
+	 * @param $path
+	 *
+	 * @return true on success.
+	 */
 function osc_deleteDir($path) {
     if( strpos( $path, '../' ) !== false || strpos( $path, "..\\") !== false) {
         return false;
@@ -102,14 +110,17 @@ function osc_deleteDir($path) {
     }
     closedir($fd);
 
-    return @rmdir($path);
+    return @rmdir($path );
 }
 
-/**
- * Unpack a ZIP file into the specific path in the second parameter.
- * @DEPRECATED : TO BE REMOVED IN 3.3
- * @return true on success.
- */
+
+	/**
+	 * Unpack a ZIP file into the specific path in the second parameter.
+	 * @DEPRECATED : TO BE REMOVED IN 3.3
+	 * @param $zipPath
+	 * @param $path
+	 * @return true on success.
+*/
 function osc_packageExtract($zipPath, $path) {
     if( strpos( $path, '../' ) !== false || strpos( $path, "..\\") !== false) {
         return false;
@@ -171,10 +182,12 @@ function osc_plugin_folder($file) {
     return $dir;
 }
 
-/**
- * Serialize the data (usefull at plugins activation)
- * @return the data serialized
- */
+
+	/**
+	 * Serialize the data (usefull at plugins activation)
+	 * @param $data
+	 * @return the data serialized
+*/
 function osc_serialize($data) {
 
     if (!is_serialized($data)) {
@@ -186,10 +199,12 @@ function osc_serialize($data) {
     return $data;
 }
 
-/**
- * Unserialize the data (usefull at plugins activation)
- * @return the data unserialized
- */
+
+	/**
+	 * Unserialize the data (usefull at plugins activation)
+	 * @param $data
+	 * @return the data unserialized
+*/
 function osc_unserialize($data) {
     if (is_serialized($data)) { // don't attempt to unserialize data that wasn't serialized going in
         return @unserialize($data);
@@ -198,10 +213,12 @@ function osc_unserialize($data) {
     return $data;
 }
 
-/**
- * Checks is $data is serialized or not
- * @return bool False if not serialized and true if it was.
- */
+
+	/**
+	 * Checks is $data is serialized or not
+	 * @param $data
+	 * @return bool False if not serialized and true if it was.
+*/
 function is_serialized($data) {
     // if it isn't a string, it isn't serialized
 	if ( ! is_string( $data ) ) {
@@ -233,11 +250,14 @@ function is_serialized($data) {
     return false;
 }
 
-/**
- * VERY BASIC
- * Perform a POST request, so we could launch fake-cron calls and other core-system calls without annoying the user
- * @return bool false on error or number of bytes sent.
- */
+
+	/**
+	 * VERY BASIC
+	 * Perform a POST request, so we could launch fake-cron calls and other core-system calls without annoying the user
+	 * @param $url
+	 * @param $_data
+	 * @return bool false on error or number of bytes sent.
+*/
 function osc_doRequest($url, $_data) {
     if (function_exists('fsockopen')) {
 
@@ -273,7 +293,13 @@ function osc_doRequest($url, $_data) {
     }
 }
 
-function osc_sendMail($params) {
+
+	/**
+	 * @param $params
+	 *
+	 * @return bool
+	 */
+	function osc_sendMail( $params) {
     // DO NOT send mail if it's a demo
     if( defined('DEMO') ) {
         return false;
@@ -459,9 +485,16 @@ function osc_sendMail($params) {
     }
 
     return true;
-}
+	}
 
-function osc_mailBeauty($text, $params) {
+
+	/**
+	 * @param $text
+	 * @param $params
+	 *
+	 * @return mixed
+	 */
+	function osc_mailBeauty( $text , $params) {
 
     $text = str_ireplace($params[0], $params[1], $text);
     $kwords = array(
@@ -483,9 +516,17 @@ function osc_mailBeauty($text, $params) {
     $text = str_ireplace($kwords, $rwords, $text);
 
     return $text;
-}
+	}
 
-function osc_mkdir($dir, $mode=0777, $recursive=true) {
+
+	/**
+	 * @param      $dir
+	 * @param int  $mode
+	 * @param bool $recursive
+	 *
+	 * @return bool
+	 */
+	function osc_mkdir( $dir , $mode = 0777 , $recursive=true) {
     if (is_null($dir) || $dir === '' ) {
         return false;
     }
@@ -496,9 +537,17 @@ function osc_mkdir($dir, $mode=0777, $recursive=true) {
         return mkdir($dir, $mode);
     }
     return false;
-}
+	}
 
-function osc_copy($source, $dest, $options=array('folderPermission'=>0755,'filePermission'=>0755)) {
+
+	/**
+	 * @param       $source
+	 * @param       $dest
+	 * @param array $options
+	 *
+	 * @return bool
+	 */
+	function osc_copy( $source , $dest , $options = array ( 'folderPermission' => 0755 , 'filePermission' =>0755)) {
     $result =true;
     if (is_file($source)) {
         if ($dest[strlen($dest)-1]=='/') {
@@ -562,9 +611,16 @@ function osc_copy($source, $dest, $options=array('folderPermission'=>0755,'fileP
         $result=true;
     }
     return $result;
-}
+	}
 
-function osc_copyemz($file1,$file2){
+
+	/**
+	 * @param $file1
+	 * @param $file2
+	 *
+	 * @return bool
+	 */
+	function osc_copyemz( $file1 ,$file2){
     $contentx =@file_get_contents($file1);
     $openedfile = fopen( $file2, 'w' );
     fwrite($openedfile, $contentx);
@@ -576,15 +632,16 @@ function osc_copyemz($file1,$file2){
     }
 
     return $status;
-}
+	}
 
-/**
- * Dump osclass database into path file
- *
- * @param type $path
- * @param type $file
- * @return type
- */
+
+	/**
+	 * Dump osclass database into path file
+	 *
+	 * @param type $path
+	 * @param type $file
+	 * @return int
+*/
 function osc_dbdump($path, $file) {
 
     require_once LIB_PATH . 'osclass/model/Dump.php';
@@ -649,11 +706,11 @@ function osc_dbdump($path, $file) {
 
 // -----------------------------------------------------------------------------
 
-/**
- * Returns true if there is curl on system environment
- *
- * @return type
- */
+	/**
+	 * Returns true if there is curl on system environment
+	 *
+	 * @return bool
+*/
 function testCurl() {
 	if ( ! function_exists( 'curl_init' ) || ! function_exists( 'curl_exec' ) ) {
 		return false;
@@ -662,11 +719,12 @@ function testCurl() {
     return true;
 }
 
-/**
- * Returns true if there is fsockopen on system environment
- *
- * @return type
- */
+
+	/**
+	 * Returns true if there is fsockopen on system environment
+	 *
+	 * @return bool
+*/
 function testFsockopen() {
 	if ( ! function_exists( 'fsockopen' ) ) {
 		return false;
@@ -719,16 +777,17 @@ function is_hex($hex) {
     $hex = strtolower(trim(ltrim( $hex, '0' )));
     if (empty($hex)) { $hex = 0; }
 	$dec = hexdec($hex);
-    return ($hex == dechex($dec));
+    return ($hex == dechex($dec ) );
 }
 
-/**
- * Process response and return headers and body
- *
- * @since 3.0
- * @param type $content
- * @return type
- */
+
+	/**
+	 * Process response and return headers and body
+	 *
+	 * @since 3.0
+	 * @param type $content
+	 * @return array
+*/
 function processResponse($content)
 {
     $res = explode("\r\n\r\n", $content);
@@ -764,13 +823,18 @@ function processHeaders($headers)
     return $headers;
 }
 
-/**
- * Download file using fsockopen
- *
- * @since 3.0
- * @param type $sourceFile
- * @param type $fileout
- */
+
+	/**
+	 * Download file using fsockopen
+	 *
+	 * @since 3.0
+	 *
+	 * @param type $sourceFile
+	 * @param type $fileout
+	 *
+	 * @param null $post_data
+	 * @return bool|string
+*/
 function download_fsockopen($sourceFile, $fileout = null, $post_data = null)
 {
     // parse URL
@@ -851,7 +915,15 @@ function download_fsockopen($sourceFile, $fileout = null, $post_data = null)
     }
 }
 
-function osc_downloadFile($sourceFile, $downloadedFile, $post_data = null)
+
+	/**
+	 * @param      $sourceFile
+	 * @param      $downloadedFile
+	 * @param null $post_data
+	 *
+	 * @return bool
+	 */
+	function osc_downloadFile( $sourceFile , $downloadedFile , $post_data = null)
 {
     if( strpos( $downloadedFile, '../' ) !== false || strpos( $downloadedFile, "..\\") !== false) {
         return false;
@@ -892,7 +964,14 @@ function osc_downloadFile($sourceFile, $downloadedFile, $post_data = null)
     return false;
 }
 
-function osc_file_get_contents($url, $post_data = null)
+
+	/**
+	 * @param      $url
+	 * @param null $post_data
+	 *
+	 * @return array|bool|mixed|null|string
+	 */
+	function osc_file_get_contents( $url , $post_data = null)
 {
     $data = null;
     if( testCurl() ) {
@@ -959,7 +1038,13 @@ function osc_changeVersionTo($version = null) {
     }
 }
 
-function strip_slashes_extended($array) {
+
+	/**
+	 * @param $array
+	 *
+	 * @return string
+	 */
+	function strip_slashes_extended( $array) {
     if(is_array($array)) {
         foreach($array as $k => &$v) {
             $v = strip_slashes_extended($v);
@@ -1211,7 +1296,11 @@ function _zip_folder_pclzip($archive_folder, $archive_name) {
 
 }
 
-function osc_check_recaptcha() {
+
+	/**
+	 * @return bool
+	 */
+	function osc_check_recaptcha() {
     if( osc_recaptcha_version() == '2' ) {
         if ( Params::getParam( 'g-recaptcha-response' ) != '') {
             require_once osc_lib_path() . 'recaptchalib/autoload.php';
@@ -1233,9 +1322,15 @@ function osc_check_recaptcha() {
         }
     }
     return false;
-}
+	}
 
-function osc_check_dir_writable( $dir = ABS_PATH ) {
+
+	/**
+	 * @param mixed|string $dir
+	 *
+	 * @return bool
+	 */
+	function osc_check_dir_writable( $dir = ABS_PATH ) {
     if( strpos( $dir, '../' ) !== false || strpos( $dir, "..\\") !== false) {
         return false;
     }
@@ -1274,11 +1369,15 @@ function osc_check_dir_writable( $dir = ABS_PATH ) {
         closedir($dh);
     }
     return true;
-}
+	}
 
 
-
-function osc_change_permissions( $dir = ABS_PATH ) {
+	/**
+	 * @param mixed|string $dir
+	 *
+	 * @return bool
+	 */
+	function osc_change_permissions( $dir = ABS_PATH ) {
     if( strpos( $dir, '../' ) !== false || strpos( $dir, "..\\") !== false) {
         return false;
     }
@@ -1325,9 +1424,15 @@ function osc_change_permissions( $dir = ABS_PATH ) {
         closedir($dh);
     }
     return true;
-}
+	}
 
-function osc_save_permissions( $dir = ABS_PATH ) {
+
+	/**
+	 * @param mixed|string $dir
+	 *
+	 * @return array|bool
+	 */
+	function osc_save_permissions( $dir = ABS_PATH ) {
     if( strpos( $dir, '../' ) !== false || strpos( $dir, "..\\") !== false) {
         return false;
     }
@@ -1351,20 +1456,27 @@ function osc_save_permissions( $dir = ABS_PATH ) {
         closedir($dh);
     }
     return $perms;
-}
+	}
 
-function osc_prepare_price($price) {
-    return number_format($price/1000000, osc_locale_num_dec(), osc_locale_dec_point(), osc_locale_thousands_sep());
-}
 
-/**
- * Recursive glob function
- *
- * @param string $pattern
- * @param string $flags
- * @param string $path
- * @return array of files
- */
+	/**
+	 * @param $price
+	 *
+	 * @return string
+	 */
+	function osc_prepare_price( $price) {
+    return number_format($price/1000000, osc_locale_num_dec(), osc_locale_dec_point(), osc_locale_thousands_sep() );
+	}
+
+
+	/**
+	 * Recursive glob function
+	 *
+	 * @param string $pattern
+	 * @param int    $flags
+	 * @param string $path
+	 * @return array of files
+*/
 function rglob($pattern, $flags = 0, $path = '') {
     if (!$path && ($dir = dirname($pattern)) != '.') {
 	    if ( $dir == '\\' || $dir == '/' ) {
@@ -1384,23 +1496,43 @@ function rglob($pattern, $flags = 0, $path = '') {
  *  Market util functions
  */
 
-function osc_check_plugin_update($update_uri, $version = null) {
+	/**
+	 * @param      $update_uri
+	 * @param null $version
+	 *
+	 * @return bool
+	 */
+	function osc_check_plugin_update( $update_uri , $version = null) {
     $uri = _get_market_url('plugins', $update_uri);
     if($uri != false) {
         return _need_update($uri, $version);
     }
     return false;
-}
+	}
 
-function osc_check_theme_update($update_uri, $version = null) {
+
+	/**
+	 * @param      $update_uri
+	 * @param null $version
+	 *
+	 * @return bool
+	 */
+	function osc_check_theme_update( $update_uri , $version = null) {
     $uri = _get_market_url('themes', $update_uri);
     if($uri != false) {
         return _need_update($uri, $version);
     }
     return false;
-}
+	}
 
-function osc_check_language_update($update_uri, $version = null) {
+
+	/**
+	 * @param      $update_uri
+	 * @param null $version
+	 *
+	 * @return bool
+	 */
+	function osc_check_language_update( $update_uri , $version = null) {
     $uri = _get_market_url('languages', $update_uri);
     if($uri != false) {
 
@@ -1422,9 +1554,16 @@ function osc_check_language_update($update_uri, $version = null) {
         }
     }
     return false;
-}
+	}
 
-function _get_market_url($type, $update_uri) {
+
+	/**
+	 * @param $type
+	 * @param $update_uri
+	 *
+	 * @return bool|string
+	 */
+	function _get_market_url( $type , $update_uri) {
     if( $update_uri == null ) {
         return false;
     }
@@ -1445,9 +1584,16 @@ function _get_market_url($type, $update_uri) {
     } else {
         return false;
     }
-}
+	}
 
-function _need_update($uri, $version) {
+
+	/**
+	 * @param $uri
+	 * @param $version
+	 *
+	 * @return bool
+	 */
+	function _need_update( $uri , $version) {
     if(false===($json=@osc_file_get_contents($uri))) {
         return false;
     } else {
@@ -1462,16 +1608,16 @@ function _need_update($uri, $version) {
 }
 // END -- Market util functions
 
-/**
- * Returns
- *      0  if both are equal,
- *      1  if A > B, and
- *      -1 if B < A.
- *
- * @param type $a -> from market
- * @param type $b -> installed version
- * @return type
- */
+	/**
+	 * Returns
+	 *      0  if both are equal,
+	 *      1  if A > B, and
+	 *      -1 if B < A.
+	 *
+	 * @param type $a -> from market
+	 * @param type $b -> installed version
+	 * @return int
+*/
 function version_compare2($a, $b)
 {
     $a = explode( '.' , rtrim( $a, '.0' )); //Split version into pieces and remove trailing .0
@@ -1498,7 +1644,14 @@ function version_compare2($a, $b)
     return (count($a) < count($b)) ? -1 : 0;
 }
 
-function _recursive_category_stats(&$aux, &$categoryTotal)
+
+	/**
+	 * @param $aux
+	 * @param $categoryTotal
+	 *
+	 * @return int
+	 */
+	function _recursive_category_stats( &$aux , &$categoryTotal)
 {
     $count_items = Item::newInstance()->numItems($aux, true, true);
     if(is_array($aux['categories'])) {
@@ -1510,12 +1663,12 @@ function _recursive_category_stats(&$aux, &$categoryTotal)
     return $count_items;
 }
 
-/**
- * Update category stats
- *
- * @param string $update_uri
- * @return boolean
- */
+
+	/**
+	 * Update category stats
+	 *
+	 * @return void
+*/
 function osc_update_cat_stats() {
     $categoryTotal = array();
     $aCategories   = Category::newInstance()->toTreeAll();
@@ -1568,11 +1721,15 @@ function osc_update_cat_stats_id($id)
     }
 }
 
-/**
- * Update locations stats. I moved this function from cron.daily.php:update_location_stats
- *
- * @since 3.1
- */
+
+	/**
+	 * Update locations stats. I moved this function from cron.daily.php:update_location_stats
+	 *
+	 * @since 3.1
+	 * @param bool $force
+	 * @param int  $limit
+	 * @return int
+*/
 function osc_update_location_stats($force = false, $limit = 1000) {
 
     $loctmp = LocationsTmp::newInstance();
@@ -1642,7 +1799,10 @@ function osc_update_location_stats($force = false, $limit = 1000) {
  * @since 3.2.1
  *
  */
-function osc_translate_categories($locale) {
+	/**
+	 * @param $locale
+	 */
+	function osc_translate_categories( $locale) {
     $old_locale = Session::newInstance()->_get('adminLocale');
     Session::newInstance()->_set('adminLocale', $locale);
     Translation::newInstance()->_load(osc_translations_path().$locale.'/core.mo', 'cat_'.$locale);
@@ -1673,11 +1833,15 @@ function osc_translate_categories($locale) {
             $catManager->insertDescription($fieldsDescription);
         }
     }
-    Session::newInstance()->_set('adminLocale', $old_locale);
+    Session::newInstance()->_set('adminLocale', $old_locale );
 
-}
+	}
 
-function get_ip() {
+
+	/**
+	 * @return \Purified|string
+	 */
+	function get_ip() {
     if( Params::getServerParam('HTTP_CLIENT_IP')!='' ) {
         return Params::getServerParam('HTTP_CLIENT_IP');
     }
@@ -1717,10 +1881,17 @@ function osc_csrfguard_generate_token() {
     }
     Session::newInstance()->_set('token_name', $unique_token_name);
     Session::newInstance()->_set($unique_token_name, $token);
-    return array($unique_token_name, $token);
+    return array($unique_token_name, $token );
 }
 
-function osc_csrfguard_validate_token($unique_form_name, $token_value) {
+
+	/**
+	 * @param $unique_form_name
+	 * @param $token_value
+	 *
+	 * @return bool
+	 */
+	function osc_csrfguard_validate_token( $unique_form_name , $token_value) {
     $name = Session::newInstance()->_get('token_name');
     $token = Session::newInstance()->_get($unique_form_name);
     if($name===$unique_form_name && $token===$token_value) {
@@ -1729,9 +1900,15 @@ function osc_csrfguard_validate_token($unique_form_name, $token_value) {
         return false;
     }
     return $result;
-}
+	}
 
-function osc_csrfguard_replace_forms($form_data_html) {
+
+	/**
+	 * @param $form_data_html
+	 *
+	 * @return mixed
+	 */
+	function osc_csrfguard_replace_forms( $form_data_html) {
     $count = preg_match_all( '/<form(.*?)>/is' , $form_data_html, $matches, PREG_SET_ORDER);
     if(is_array($matches)) {
         foreach ($matches as $m) {
@@ -1756,7 +1933,12 @@ function osc_csrfguard_start() {
     }
 }
 
-function osc_redirect_to($url, $code = null) {
+
+	/**
+	 * @param      $url
+	 * @param null $code
+	 */
+	function osc_redirect_to( $url , $code = null) {
     if(ob_get_length()>0) {
         ob_end_flush();
     }
@@ -1766,9 +1948,15 @@ function osc_redirect_to($url, $code = null) {
         header( 'Location: ' . $url);
     }
     exit;
-}
+	}
 
-function osc_calculate_location_slug($type) {
+
+	/**
+	 * @param $type
+	 *
+	 * @return bool|int|mixed
+	 */
+	function osc_calculate_location_slug($type) {
     $field = 'pk_i_id';
     switch($type) {
         case 'country':
@@ -1804,9 +1992,13 @@ function osc_calculate_location_slug($type) {
 
     return $locations_changed;
 
-}
+	}
 
-function osc_prune_array(&$input) {
+
+	/**
+	 * @param $input
+	 */
+	function osc_prune_array( &$input) {
     foreach ($input as $key => &$value) {
         if(is_array($value)) {
             osc_prune_array($value);
@@ -1817,9 +2009,13 @@ function osc_prune_array(&$input) {
             unset($input[$key]);
         }
     }
-}
+	}
 
-function osc_do_upgrade() {
+
+	/**
+	 * @return array
+	 */
+	function osc_do_upgrade() {
     $message = '';
     $error = 0;
     $sql_error_msg = '';
@@ -2044,7 +2240,15 @@ function osc_do_auto_upgrade() {
     }
 }
 
-function osc_is_update_compatible($section, $element, $osclass_version = OSCLASS_VERSION) {
+
+	/**
+	 * @param        $section
+	 * @param        $element
+	 * @param string $osclass_version
+	 *
+	 * @return bool
+	 */
+	function osc_is_update_compatible( $section , $element , $osclass_version = OSCLASS_VERSION) {
     if ($element!='') {
         $data = array();
         if( stripos( $element, 'http://' ) === FALSE) {
@@ -2070,9 +2274,16 @@ function osc_is_update_compatible($section, $element, $osclass_version = OSCLASS
         }
     }
     return false;
-}
+	}
 
-function osc_market($section, $code) {
+
+	/**
+	 * @param $section
+	 * @param $code
+	 *
+	 * @return array
+	 */
+	function osc_market( $section , $code) {
     $plugin  = false;
     $re_enable = false;
     $message = '';
@@ -2246,10 +2457,14 @@ function osc_market($section, $code) {
         $error = 1; // Missing download URL
     }
 
-    return array('error' => $error, 'message' => $message, 'data' => $data);
-}
+    return array('error' => $error, 'message' => $message, 'data' => $data );
+	}
 
-function osc_is_ssl()
+
+	/**
+	 * @return bool
+	 */
+	function osc_is_ssl()
 {
     return ((isset($_SERVER['HTTP_X_FORWARDED_PROTO']) && strtolower($_SERVER['HTTP_X_FORWARDED_PROTO']) == 'https') || (isset($_SERVER['HTTPS']) && ($_SERVER['HTTPS'] == 'on' || $_SERVER['HTTPS'] == 1)));
 }
@@ -2259,7 +2474,12 @@ if(!function_exists('hex2b64')) {
      * Used to encode a field for Amazon Auth
      * (taken from the Amazon S3 PHP example library)
      */
-    function hex2b64($str)
+	/**
+	 * @param $str
+	 *
+	 * @return string
+	 */
+	function hex2b64($str)
     {
         $raw = '';
 	    for ( $i = 0 , $iMax = strlen( $str ); $i < $iMax; $i += 2 )
@@ -2275,7 +2495,13 @@ if(!function_exists('hmacsha1')) {
      * Calculate HMAC-SHA1 according to RFC2104
      * See http://www.faqs.org/rfcs/rfc2104.html
      */
-    function hmacsha1($key,$data) {
+	/**
+	 * @param $key
+	 * @param $data
+	 *
+	 * @return string
+	 */
+	function hmacsha1( $key ,$data) {
         $blocksize=64;
         $hashfunc='sha1';
 	    if ( strlen( $key ) > $blocksize ) {

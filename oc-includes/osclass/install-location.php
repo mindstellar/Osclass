@@ -67,7 +67,11 @@ function create_market_account() {
     );
 }
 
-function basic_info() {
+
+	/**
+	 * @return array
+	 */
+	function basic_info() {
     require_once LIB_PATH . 'osclass/model/Admin.php';
     require_once LIB_PATH . 'osclass/helpers/hSecurity.php';
 
@@ -146,7 +150,11 @@ function basic_info() {
     }
 }
 
-function install_locations ( ) {
+
+	/**
+	 * @return bool
+	 */
+	function install_locations() {
 
     $country = Params::getParam( 'country-input' );
     $region = Params::getParam( 'region-input' );

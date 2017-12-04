@@ -33,7 +33,10 @@
          */
         private static $instance;
 
-        public static function newInstance()
+	    /**
+	     * @return \Country
+	     */
+	    public static function newInstance()
         {
             if( !self::$instance instanceof self ) {
                 self::$instance = new self;
@@ -93,14 +96,13 @@
             return $result->row();
         }
 
-        /**
-         * List all the countries
-         *
-         * @access public
-         * @since unknown
-         * @param type $language
-         * @return array
-         */
+	    /**
+	     * List all the countries
+	     *
+	     * @access public
+	     * @since  unknown
+	     * @return array
+	     */
         public function listAll() {
             $result = $this->dao->query(sprintf('SELECT * FROM %s ORDER BY s_name ASC', $this->getTableName()));
             if($result == false) {

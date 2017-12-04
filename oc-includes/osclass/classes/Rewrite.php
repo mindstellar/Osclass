@@ -18,7 +18,10 @@
  * limitations under the License.
  */
 
-    class Rewrite
+	/**
+	 * Class Rewrite
+	 */
+	class Rewrite
     {
         private static $instance;
         private $rules;
@@ -44,7 +47,10 @@
             $this->rules = $this->getRules();
         }
 
-        public static function newInstance()
+		/**
+		 * @return \Rewrite
+		 */
+		public static function newInstance()
         {
             if(!self::$instance instanceof self) {
                 self::$instance = new self;
@@ -54,7 +60,10 @@
 
         public function getTableName() {}
 
-        public function getRules()
+		/**
+		 * @return \the
+		 */
+		public function getRules()
         {
             return osc_unserialize(osc_rewrite_rules());
         }
@@ -64,12 +73,18 @@
             osc_set_preference('rewrite_rules', osc_serialize($this->rules));
         }
 
-        public function listRules()
+		/**
+		 * @return \the
+		 */
+		public function listRules()
         {
             return $this->rules;
         }
 
-        public function addRules($rules)
+		/**
+		 * @param $rules
+		 */
+		public function addRules( $rules )
         {
             if(is_array($rules)) {
                 foreach($rules as $rule) {
@@ -80,7 +95,11 @@
             }
         }
 
-        public function addRule($regexp, $uri)
+		/**
+		 * @param $regexp
+		 * @param $uri
+		 */
+		public function addRule( $regexp , $uri )
         {
             $regexp = trim($regexp);
             $uri = trim($uri);
@@ -89,7 +108,17 @@
             }
         }
 
-        public function addRoute($id, $regexp, $url, $file, $user_menu = false, $location = 'custom' , $section = 'custom' , $title = 'Custom' )
+		/**
+		 * @param        $id
+		 * @param        $regexp
+		 * @param        $url
+		 * @param        $file
+		 * @param bool   $user_menu
+		 * @param string $location
+		 * @param string $section
+		 * @param string $title
+		 */
+		public function addRoute( $id , $regexp , $url , $file , $user_menu = false , $location = 'custom' , $section = 'custom' , $title = 'Custom' )
         {
             $regexp = trim($regexp);
             $file = trim($file);
@@ -98,7 +127,10 @@
             }
         }
 
-        public function getRoutes()
+		/**
+		 * @return array
+		 */
+		public function getRoutes()
         {
             return $this->routes;
         }
@@ -172,7 +204,12 @@
             }
         }
 
-        public function extractURL($uri = '')
+		/**
+		 * @param string $uri
+		 *
+		 * @return bool|string
+		 */
+		public function extractURL( $uri = '' )
         {
             $uri_array = explode('?', str_replace('index.php', '', $uri));
 	        if ( $uri_array[ 0 ][ 0 ] == '/' ) {
@@ -182,7 +219,10 @@
             }
         }
 
-        public function extractParams($uri = '')
+		/**
+		 * @param string $uri
+		 */
+		public function extractParams( $uri = '' )
         {
             $uri_array = explode('?', $uri);
             $length_i = count($uri_array);
@@ -194,7 +234,10 @@
             }
         }
 
-        public function removeRule($regexp)
+		/**
+		 * @param $regexp
+		 */
+		public function removeRule( $regexp )
         {
             unset($this->rules[$regexp]);
         }
@@ -205,37 +248,58 @@
             $this->rules = array();
         }
 
-        public function get_request_uri()
+		/**
+		 * @return string
+		 */
+		public function get_request_uri()
         {
             return $this->request_uri;
         }
 
-        public function get_raw_request_uri()
+		/**
+		 * @return string
+		 */
+		public function get_raw_request_uri()
         {
             return $this->raw_request_uri;
         }
 
-        public function set_location($location)
+		/**
+		 * @param $location
+		 */
+		public function set_location( $location )
         {
             $this->location = $location;
         }
 
-        public function get_location()
+		/**
+		 * @return string
+		 */
+		public function get_location()
         {
             return $this->location;
         }
 
-        public function get_section()
+		/**
+		 * @return string
+		 */
+		public function get_section()
         {
             return $this->section;
         }
 
-        public function get_title()
+		/**
+		 * @return string
+		 */
+		public function get_title()
         {
             return $this->title;
         }
 
-        public function get_http_referer()
+		/**
+		 * @return string
+		 */
+		public function get_http_referer()
         {
             return $this->http_referer;
         }

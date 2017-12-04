@@ -18,12 +18,18 @@
  * limitations under the License.
  */
 
-    class Session {
+	/**
+	 * Class Session
+	 */
+	class Session {
         //attributes
         private $session;
         private static $instance;
 
-        public static function newInstance() {
+		/**
+		 * @return \Session
+		 */
+		public static function newInstance() {
             if(!self::$instance instanceof self) {
                 self::$instance = new self;
             }
@@ -66,7 +72,10 @@
             }
         }
 
-        public function _session_start()
+		/**
+		 * @return bool
+		 */
+		public function _session_start()
         {
             $sn = session_name();
             if (isset($_COOKIE[$sn])) {
@@ -87,12 +96,21 @@
             session_destroy();
         }
 
-        public function _set($key, $value) {
+		/**
+		 * @param $key
+		 * @param $value
+		 */
+		public function _set( $key , $value ) {
             $_SESSION[$key] = $value;
             $this->session[$key] = $value;
         }
 
-        public function _get($key) {
+		/**
+		 * @param $key
+		 *
+		 * @return string
+		 */
+		public function _get( $key ) {
             if (!isset($this->session[$key])) {
                 return '';
             }
@@ -100,20 +118,29 @@
             return $this->session[$key];
         }
 
-        public function _drop($key) {
+		/**
+		 * @param $key
+		 */
+		public function _drop( $key ) {
             unset($_SESSION[$key]);
             unset($this->session[$key]);
 
         }
 
-        public function _setReferer($value) {
+		/**
+		 * @param $value
+		 */
+		public function _setReferer( $value ) {
             $_SESSION['osc_http_referer'] = $value;
             $this->session['osc_http_referer'] = $value;
             $_SESSION['osc_http_referer_state'] = 0;
             $this->session['osc_http_referer_state'] = 0;
         }
 
-        public function _getReferer() {
+		/**
+		 * @return string
+		 */
+		public function _getReferer() {
             if(isset($this->session['osc_http_referer'])) {
                 return $this->session['osc_http_referer'];
             } else {
@@ -132,13 +159,23 @@
             print_r($this->session);
         }
 
-        public function _setMessage($key, $value, $type) {
+		/**
+		 * @param $key
+		 * @param $value
+		 * @param $type
+		 */
+		public function _setMessage( $key , $value , $type ) {
             $messages = $this->_get('messages');
             $messages[$key][] = array( 'msg' => str_replace( PHP_EOL, '<br />' , $value), 'type' => $type);
             $this->_set('messages', $messages);
         }
 
-        public function _getMessage($key) {
+		/**
+		 * @param $key
+		 *
+		 * @return string
+		 */
+		public function _getMessage( $key ) {
             $messages = $this->_get('messages');
             if ( isset($messages[$key]) ) {
                 return $messages[$key];
@@ -147,19 +184,28 @@
             }
         }
 
-        public function _dropMessage($key) {
+		/**
+		 * @param $key
+		 */
+		public function _dropMessage( $key ) {
             $messages = $this->_get('messages');
             unset($messages[$key]);
             $this->_set('messages', $messages);
         }
 
-        public function _keepForm($key) {
+		/**
+		 * @param $key
+		 */
+		public function _keepForm( $key ) {
             $aKeep = $this->_get('keepForm');
             $aKeep[$key] = 1;
             $this->_set('keepForm',$aKeep);
         }
 
-        public function _dropKeepForm($key = '') {
+		/**
+		 * @param string $key
+		 */
+		public function _dropKeepForm( $key = '' ) {
             $aKeep = $this->_get('keepForm');
             if($key!='') {
                 unset( $aKeep[$key] );
@@ -169,13 +215,22 @@
             }
         }
 
-        public function _setForm($key, $value) {
+		/**
+		 * @param $key
+		 * @param $value
+		 */
+		public function _setForm( $key , $value ) {
             $form = $this->_get('form');
             $form[$key] = $value;
             $this->_set('form', $form);
         }
 
-        public function _getForm($key = '') {
+		/**
+		 * @param string $key
+		 *
+		 * @return string
+		 */
+		public function _getForm( $key = '' ) {
             $form = $this->_get('form');
             if($key!='') {
                 if ( isset($form[$key]) ) {
@@ -188,7 +243,10 @@
             }
         }
 
-        public function _getKeepForm() {
+		/**
+		 * @return string
+		 */
+		public function _getKeepForm() {
             return $this->_get('keepForm');
         }
 

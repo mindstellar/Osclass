@@ -118,11 +118,14 @@
         return (string) Session::newInstance()->_get('userPhone');
     }
 
-    /**
-     * Gets user's profile url
-     *
-     * @return string
-     */
+
+	/**
+	 * Gets user's profile url
+	 *
+	 * @param null $id
+	 *
+	 * @return string
+	 */
     function osc_user_public_profile_url($id = null) {
         if($id==null) {
             $id = osc_user_id();
@@ -140,12 +143,15 @@
         return $path;
     }
 
-    /**
-     * Gets current items page from public profile
-     *
-     * @param int $page
-     * @return string
-     */
+
+	/**
+	 * Gets current items page from public profile
+	 *
+	 * @param string $page
+	 * @param bool   $itemsPerPage
+	 *
+	 * @return string
+	 */
     function osc_user_list_items_pub_profile_url($page = '', $itemsPerPage = false) {
         $path  = osc_user_public_profile_url();
         if ($itemsPerPage) {
@@ -303,11 +309,13 @@
         return (string) osc_user_field( 's_website' );
     }
 
-    /**
-     * Gets description/information of current user
-     *
-     * @return string
-     */
+
+	/**
+	 * Gets description/information of current user
+	 *
+	 * @param string $locale
+	 * @return string
+	 */
     function osc_user_info($locale = '' ) {
 	    if ( $locale == '' ) {
 		    $locale = osc_current_user_locale();
@@ -486,11 +494,13 @@
         return osc_user_field( 'i_comments' );
     }
 
-    /**
-     * Gets number of users
-     *
-     * @return int
-     */
+
+	/**
+	 * Gets number of users
+	 *
+	 * @param string $condition
+	 * @return int
+	 */
     function osc_total_users($condition = '') {
         switch($condition) {
             case 'active':
@@ -518,11 +528,12 @@
         return osc_field(View::newInstance()->_current('alerts'), $field, '');
     }
 
-    /**
-     * Gets next alert if there is, else return null
-     *
-     * @return array
-     */
+
+	/**
+	 * Gets next alert if there is, else return null
+	 *
+	 * @return bool
+	 */
     function osc_has_alerts() {
         $result = View::newInstance()->_next('alerts');
         $alert = osc_alert();
@@ -604,11 +615,12 @@
         return (bool) osc_alert_field('b_active');
     }
 
-    /**
-     * Gets next user in users array
-     *
-     * @return <type>
-     */
+
+	/**
+	 * Gets next user in users array
+	 *
+	 * @return bool <type>
+	 */
     function osc_prepare_user_info() {
         if ( !View::newInstance()->_exists('users') ) {
             View::newInstance()->_exportVariableToView('users', array ( User::newInstance()->findByPrimaryKey( osc_item_user_id() ) ) );

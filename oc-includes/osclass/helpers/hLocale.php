@@ -95,11 +95,12 @@
         return osc_priv_count_locales();
     }
 
-    /**
-     * Iterator for enabled locales for website
-     *
-     * @return array
-     */
+
+	/**
+	 * Iterator for enabled locales for website
+	 *
+	 * @return bool
+	 */
     function osc_has_web_enabled_locales() {
         if ( !View::newInstance()->_exists('locales') ) {
             View::newInstance()->_exportVariableToView('locales', OSCLocale::newInstance()->listAllEnabled() );
@@ -202,11 +203,14 @@
         return $cLocale['i_num_dec'];
     }
 
-    /**
-     * Gets list of enabled locales
-     *
-     * @return array
-     */
+
+	/**
+	 * Gets list of enabled locales
+	 *
+	 * @param bool $indexed_by_pk
+	 *
+	 * @return array
+	 */
     function osc_all_enabled_locales_for_admin($indexed_by_pk = false) {
         return OSCLocale::newInstance()->listAllEnabled( true, $indexed_by_pk);
     }

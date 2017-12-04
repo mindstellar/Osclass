@@ -38,7 +38,12 @@
             osc_add_filter('datatable_comment_class', array(&$this, 'row_class'));
         }
 
-        public function table($params)
+	    /**
+	     * @param $params
+	     *
+	     * @return array
+	     */
+	    public function table( $params )
         {
 
             $this->addTableHeader();
@@ -80,7 +85,10 @@
             osc_run_hook( 'admin_comments_table' , $dummy);
         }
 
-        private function processData($comments)
+	    /**
+	     * @param $comments
+	     */
+	    private function processData( $comments )
         {
             if(!empty($comments)) {
 
@@ -144,7 +152,10 @@
             }
         }
 
-        private function getDBParams($_get)
+	    /**
+	     * @param $_get
+	     */
+	    private function getDBParams( $_get )
         {
 
             $this->order_by['column_name'] = 'c.dt_pub_date';
@@ -172,27 +183,36 @@
 
         }
 
-        public function row_class($class, $rawRow, $row)
+	    /**
+	     * @param $class
+	     * @param $rawRow
+	     * @param $row
+	     *
+	     * @return array
+	     */
+	    public function row_class( $class , $rawRow , $row )
         {
             $status = $this->get_row_status($rawRow);
             $class[] = $status['class'];
             return $class;
         }
 
-        /**
-         * Get the status of the row. There are three status:
-         *     - blocked
-         *     - inactive
-         *     - active
-         *
-         * @since 3.3
-         *
-         * @return array Array with the class and text of the status of the listing in this row. Example:
-         *     array(
-         *         'class' => '',
-         *         'text'  => ''
-         *     )
-         */
+	    /**
+	     * Get the status of the row. There are three status:
+	     *     - blocked
+	     *     - inactive
+	     *     - active
+	     *
+	     * @since 3.3
+	     *
+	     * @param $user
+	     *
+	     * @return array Array with the class and text of the status of the listing in this row. Example:
+	     *     array(
+	     *         'class' => '',
+	     *         'text'  => ''
+	     *     )
+	     */
         private function get_row_status($user)
         {
 

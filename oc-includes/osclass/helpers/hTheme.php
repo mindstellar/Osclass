@@ -65,11 +65,12 @@
         return osc_base_url(true).'?page=custom&file=' . $file;
     }
 
-    /**
-     * Re-send the flash messages of the given section. Usefull for custom theme/plugins files.
-     *
-     * @param string $$section
-     */
+
+	/**
+	 * Re-send the flash messages of the given section. Usefull for custom theme/plugins files.
+	 *
+	 * @param string $section
+	 */
     function osc_resend_flash_messages($section = 'pubMessages' ) {
         $messages = Session::newInstance()->_getMessage($section);
         if (is_array($messages)) {
@@ -166,7 +167,14 @@
         Styles::newInstance()->printStyles();
     }
 
-    function osc_print_bulk_actions($id, $name, $options, $class = '') {
+
+	/**
+	 * @param        $id
+	 * @param        $name
+	 * @param        $options
+	 * @param string $class
+	 */
+	function osc_print_bulk_actions( $id , $name , $options , $class = '' ) {
         echo '<select id="'.$id.'" name="'.$name.'" '.($class!=''?'class="'.$class.'"':'').'>';
         foreach($options as $o) {
             $opt = '';

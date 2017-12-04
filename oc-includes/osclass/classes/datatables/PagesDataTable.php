@@ -30,8 +30,13 @@
     {
 
         private $pages;
-        
-        public function table($params)
+
+	    /**
+	     * @param $params
+	     *
+	     * @return array
+	     */
+	    public function table( $params )
         {
             
             $this->addTableHeader();
@@ -61,8 +66,11 @@
             $dummy = &$this;
             osc_run_hook( 'admin_pages_table' , $dummy);
         }
-        
-        private function processData($pages)
+
+	    /**
+	     * @param $pages
+	     */
+	    private function processData( $pages )
         {
             if(!empty($pages)) {
             

@@ -43,7 +43,10 @@
          */
         private $cachedAdmin;
 
-        public static function newInstance()
+	    /**
+	     * @return \Admin
+	     */
+	    public static function newInstance()
         {
             if( !self::$instance instanceof self ) {
                 self::$instance = new self;
@@ -69,7 +72,13 @@
             }
         }
 
-        public function findByPrimaryKey($id, $locale = null)
+	    /**
+	     * @param string $id
+	     * @param null   $locale
+	     *
+	     * @return mixed|string
+	     */
+	    public function findByPrimaryKey( $id , $locale = null )
         {
 	        if ( $id == '' ) {
 		        return '';

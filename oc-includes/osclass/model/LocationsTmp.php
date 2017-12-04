@@ -63,7 +63,12 @@
             $this->setFields( array('id_location', 'e_type') );
         }
 
-        public function getLocations($max)
+	    /**
+	     * @param $max
+	     *
+	     * @return array
+	     */
+	    public function getLocations( $max )
         {
             $this->dao->select();
             $this->dao->from($this->getTableName());
@@ -76,12 +81,23 @@
             return $rs->result();
         }
 
-        public function delete($where)
+	    /**
+	     * @param array $where
+	     *
+	     * @return mixed
+	     */
+	    public function delete( $where )
         {
             return $this->dao->delete($this->getTableName(), $where );
         }
 
-        public function batchInsert($ids, $type) {
+	    /**
+	     * @param $ids
+	     * @param $type
+	     *
+	     * @return bool|mixed
+	     */
+	    public function batchInsert( $ids , $type ) {
             if(!empty($ids)) {
                 return $this->dao->query(sprintf("INSERT INTO %s (id_location, e_type) VALUES (%s, '%s')", $this->getTableName(), implode(",'".$type."'),(", $ids), $type));
             }

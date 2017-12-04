@@ -29,7 +29,10 @@
          */
         private static $instance;
 
-        public static function newInstance()
+	    /**
+	     * @return \Page|\type
+	     */
+	    public static function newInstance()
         {
             if( !self::$instance instanceof self ) {
                 self::$instance = new self;
@@ -130,14 +133,17 @@
             return $this->extendDescription($row, $locale);
         }
 
-        /**
-         * Find a page by order.
-         *
-         * @access public
-         * @since unknown
-         * @param int order
-         * @return array It returns page fields. If it has no results, it returns an empty array.
-         */
+	    /**
+	     * Find a page by order.
+	     *
+	     * @access public
+	     * @since  unknown
+	     *
+	     * @param      $order
+	     * @param null $locale
+	     *
+	     * @return array It returns page fields. If it has no results, it returns an empty array.
+	     */
         public function findByOrder($order, $locale = null)
         {
             $this->dao->select();
@@ -162,18 +168,21 @@
             return $result;
         }
 
-        /**
-         * Get all the pages with the parameters you choose.
-         *
-         * @access public
-         * @since unknown
-        *  @param bool $indelible true if the page is indelible
-         * @param string $locale
-         * @param int $start
-         * @param int $limit
-         * @return array Return all the pages that have been found with the criteria selected. If there's no pages, the
-         * result is an empty array.
-         */
+	    /**
+	     * Get all the pages with the parameters you choose.
+	     *
+	     * @access public
+	     * @since  unknown
+	     *
+	     * @param bool   $indelible true if the page is indelible
+	     * @param null   $b_link
+	     * @param string $locale
+	     * @param int    $start
+	     * @param int    $limit
+	     *
+	     * @return array Return all the pages that have been found with the criteria selected. If there's no pages, the
+	     *                          result is an empty array.
+	     */
         public function listAll($indelible = null, $b_link = null, $locale = null, $start = null, $limit = null)
         {
             $this->dao->select();
@@ -237,14 +246,15 @@
 
         }
 
-        /**
-         * An array with data of some page, returns the title and description in every language available
-         *
-         * @access public
-         * @since unknown
-         * @param array $aPage
-         * @return array Page information, title and description in every language available
-         */
+	    /**
+	     * An array with data of some page, returns the title and description in every language available
+	     *
+	     * @access public
+	     * @since  unknown
+	     * @param array $aPage
+	     * @param null  $locale
+	     * @return array Page information, title and description in every language available
+*/
         public function extendDescription($aPage, $locale = null)
         {
             $this->dao->select();
@@ -271,15 +281,15 @@
             return $aPage;
         }
 
-        /**
-         * Delete a page by id number.
-         *
-         * @access public
-         * @since unknown
-         * @param int $id Page id which is going to be deleted
-         * @return@return mixed It return the number of affected rows if the delete has been
-         * correct or false if nothing has been modified
-         */
+	    /**
+	     * Delete a page by id number.
+	     *
+	     * @access public
+	     * @since  unknown
+	     * @param int $id Page id which is going to be deleted
+	     * @return mixed @return mixed It return the number of affected rows if the delete has been
+	     *                correct or false if nothing has been modified
+*/
         public function deleteByPrimaryKey($id)
         {
             $row = $this->findByPrimaryKey($id);
@@ -302,16 +312,19 @@
         public function deleteByInternalName($intName)
         {
             $row = $this->findByInternalName($intName);
-            return $this->deleteByPrimaryKey($row['pk_i_id']);
+            return $this->deleteByPrimaryKey($row['pk_i_id' ] );
         }
 
-        /**
-         * Order pages from $order
-         *
-         * @access private
-         * @since unknown
-         * @param int $order
-         */
+	    /**
+	     * Order pages from $order
+	     *
+	     * @access private
+	     * @since  unknown
+	     *
+	     * @param int $order
+	     *
+	     * @return int|mixed
+	     */
         private function reOrderPages($order)
         {
             $aPages = $this->listAll(false);
@@ -325,13 +338,16 @@
             return $arows;
         }
 
-        /**
-         * Find previous page
-         *
-         * @access public
-         * @since 2.4
-         * @param int $order
-         */
+	    /**
+	     * Find previous page
+	     *
+	     * @access public
+	     * @since  2.4
+	     *
+	     * @param int $order
+	     *
+	     * @return array
+	     */
         public function findPrevPage($order)
         {
             $this->dao->select();
@@ -352,13 +368,16 @@
             return $result->row();
         }
 
-        /**
-         * Find next page
-         *
-         * @access public
-         * @since 2.4
-         * @param int $order
-         */
+	    /**
+	     * Find next page
+	     *
+	     * @access public
+	     * @since  2.4
+	     *
+	     * @param int $order
+	     *
+	     * @return array
+	     */
         public function findNextPage($order)
         {
             $this->dao->select();
@@ -611,7 +630,10 @@
             return false;
         }
 
-        public function getDescriptionTableName()
+	    /**
+	     * @return string
+	     */
+	    public function getDescriptionTableName()
         {
             return $this->getTablePrefix() . 't_pages_description';
         }

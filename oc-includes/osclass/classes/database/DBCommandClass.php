@@ -430,15 +430,17 @@
             return $this;
         }
 
-        /**
-         * Set LIKE clause
-         *
-         * @access public
-         * @param type $field
-         * @param type $match
-         * @param type $side
-         * @return DBCommandClass
-         */
+		/**
+		 * Set LIKE clause
+		 *
+		 * @access public
+		 *
+		 * @param type   $field
+		 * @param string $match
+		 * @param string $side
+		 *
+		 * @return DBCommandClass
+		 */
         public function like($field, $match = '', $side = 'both')
         {
             return $this->_like($field, $match, 'AND ', $side);
@@ -459,16 +461,18 @@
             return $this->_like($field, $match, 'AND ', $side, 'NOT');
         }
 
-        /**
-         * Set LIKE clause using OR operator
-         *
-         * @access public
-         * @since 2.3
-         * @param string $field
-         * @param string $match
-         * @param type $side
-         * @return string
-         */
+		/**
+		 * Set LIKE clause using OR operator
+		 *
+		 * @access public
+		 * @since  2.3
+		 *
+		 * @param string $field
+		 * @param string $match
+		 * @param string $side
+		 *
+		 * @return string
+		 */
         public function orLike($field, $match = '', $side = 'both')
         {
             return $this->_like($field, $match, 'OR ', $side);
@@ -553,34 +557,34 @@
             return $this;
         }
 
-        /**
-         *
-         * @param type $key
-         * @param type $value
-         * @return type
-         */
+		/**
+		 *
+		 * @param type   $key
+		 * @param string $value
+		 * @return void
+*/
         public function having($key, $value = '')
         {
             return $this->_having($key, $value, 'AND ');
         }
 
-        /**
-         *
-         * @param type $key
-         * @param type $value
-         * @return type
-         */
+		/**
+		 *
+		 * @param type   $key
+		 * @param string $value
+		 * @return void
+*/
         public function orHaving($key, $value = '')
         {
             return $this->_having($key, $value, 'OR ');
         }
 
-        /**
-         *
-         * @param type $key
-         * @param type $value
-         * @param type $type
-         */
+		/**
+		 *
+		 * @param type   $key
+		 * @param string $value
+		 * @param string $type $type
+*/
         public function _having($key, $value = '', $type = 'AND ')
         {
             if( !is_array($key) ) {
@@ -600,14 +604,17 @@
             }
         }
 
-        /**
-         * Set ORDER BY clause
-         *
-         * @access public
-         * @since 2.3
-         * @param string $orderby
-         * @param string $direction Accepted directions: random, asc, desc
-         */
+		/**
+		 * Set ORDER BY clause
+		 *
+		 * @access public
+		 * @since  2.3
+		 *
+		 * @param string $orderby
+		 * @param string $direction Accepted directions: random, asc, desc
+		 *
+		 * @return \DBCommandClass
+		 */
         public function orderBy($orderby, $direction = '')
         {
             if(strtolower($direction) == 'random') {
@@ -620,15 +627,15 @@
             return $this;
         }
 
-        /**
-         * Set LIMIT clause
-         *
-         * @access public
-         * @since 2.3
-         * @param int $value
-         * @param int $offset
-         * @return DBCommandClass
-         */
+		/**
+		 * Set LIMIT clause
+		 *
+		 * @access public
+		 * @since  2.3
+		 * @param int    $value
+		 * @param string $offset
+		 * @return DBCommandClass
+*/
         public function limit($value, $offset = '')
         {
             if(is_numeric($value)) {
@@ -743,16 +750,16 @@
             return $this->query($sql);
         }
 
-        /**
-         * Create the REPLACE INTO sql string
-         *
-         * @access private
-         * @since 2.3
-         * @param string $table
-         * @param array $key
-         * @param array $values
-         * @return string
-         */
+		/**
+		 * Create the REPLACE INTO sql string
+		 *
+		 * @access private
+		 * @since  2.3
+		 * @param string $table
+		 * @param        $keys
+		 * @param array  $values
+		 * @return string
+*/
         public function _replace($table, $keys, $values)
         {
             return 'REPLACE INTO ' . $table . ' (' . implode(', ', $keys) . ') VALUES (' . implode(', ', $values) . ')';
@@ -973,7 +980,12 @@
             return $rs;
         }
 
-        public function query_debug($sql)
+		/**
+		 * @param $sql
+		 *
+		 * @return bool
+		 */
+		public function query_debug($sql)
         {
             if($sql == '') {
                 return false;
@@ -1084,23 +1096,27 @@
             }
         }
 
-        /**
-         * Check if $table exist into array $struct_queries
-         *
-         * @param string $table
-         * @param array $struct_queries
-         */
+		/**
+		 * Check if $table exist into array $struct_queries
+		 *
+		 * @param string $table
+		 * @param array  $struct_queries
+		 *
+		 * @return bool
+		 */
         private function existTableIntoStruct($table, $struct_queries)
         {
             return array_key_exists(strtolower($table), $struct_queries);
         }
 
-        /**
-         * Get fields from struct_queries (struct.sql)
-         *
-         * @param string $table
-         * @param array $struct_queries
-         */
+		/**
+		 * Get fields from struct_queries (struct.sql)
+		 *
+		 * @param string $table
+		 * @param array  $struct_queries
+		 *
+		 * @return array|bool
+		 */
         private function getTableFieldsFromStruct($table, &$struct_queries)
         {
             if(preg_match('|\((.*)\)|ms', $struct_queries[strtolower($table)], $match)) {
@@ -1223,13 +1239,15 @@
             }
         }
 
-        /**
-         * With all the indexes from struct.sql, remove indexes which actually
-         * exist into database
-         *
-         * @param type $tbl_indexes
-         * @param type $indexes
-         */
+		/**
+		 * With all the indexes from struct.sql, remove indexes which actually
+		 * exist into database
+		 *
+		 * @param type $tbl_indexes
+		 * @param type $indexes
+		 * @param      $table
+		 * @param      $struct_queries
+*/
         private function createNewIndex($tbl_indexes, &$indexes, $table, &$struct_queries)
         {
             if($tbl_indexes) {
@@ -1355,31 +1373,31 @@
             }
         }
 
-        /**
-         * Given some queries, it will check against the installed database if the information is the same
-         *
-         * _______pseudocode_______
-         *
-         *   _separeQueries()
-         *   showTables_DataBase()
-         *   foreach(table)
-         *     if(table exist into struct.sql)
-         *       _getTableFields()
-         *       _createAlterTables() (save info into array)
-         *       _createNewIndex()    (save info into array)
-         *       _createForeignKeys() (save info into array)
-         *     endif
-         *   enforeach
-         *
-         *   foreach(query created before)
-         *     exec(query)
-         *   endforeach
-         *
-         * ______endpseudocode______
-         *
-         * @param mixed array or string with the SQL queries.
-         * @return BOOLEAN true on success, false on fail
-        */
+		/**
+		 * Given some queries, it will check against the installed database if the information is the same
+		 *
+		 * _______pseudocode_______
+		 *
+		 *   _separeQueries()
+		 *   showTables_DataBase()
+		 *   foreach(table)
+		 *     if(table exist into struct.sql)
+		 *       _getTableFields()
+		 *       _createAlterTables() (save info into array)
+		 *       _createNewIndex()    (save info into array)
+		 *       _createForeignKeys() (save info into array)
+		 *     endif
+		 *   enforeach
+		 *
+		 *   foreach(query created before)
+		 *     exec(query)
+		 *   endforeach
+		 *
+		 * ______endpseudocode______
+		 *
+		 * @param mixed array or string with the SQL queries.
+		 * @return array true on success, false on fail
+*/
         public function updateDB($queries = '')
         {
             error_log(' ----- START updateDB ----- ');
@@ -1476,15 +1494,16 @@
             return array($ok, $queries, $error_queries);
         }
 
-        /**
-         * Set aSet array
-         *
-         * @access public
-         * @since 2.3
-         * @param mixed $key
-         * @param mixed $value
-         * @return DBCommandClass
-         */
+		/**
+		 * Set aSet array
+		 *
+		 * @access public
+		 * @since  2.3
+		 * @param mixed $key
+		 * @param mixed $value
+		 * @param bool  $escape
+		 * @return DBCommandClass
+*/
         public function set($key, $value = '', $escape = true)
         {
             if( !is_array($key) ) {
@@ -1697,14 +1716,15 @@
             return $str;
         }
 
-        /**
-         * Escape the string if it's necessary
-         *
-         * @access private
-         * @since 2.3
-         * @param string $str
-         * @return string
-         */
+		/**
+		 * Escape the string if it's necessary
+		 *
+		 * @access private
+		 * @since  2.3
+		 * @param string $str
+		 * @param bool   $like
+		 * @return string
+*/
         public function escapeStr($str, $like = false)
         {
             if( is_object($this->connId) ) {
