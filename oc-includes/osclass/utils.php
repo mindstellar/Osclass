@@ -279,13 +279,13 @@ function osc_sendMail($params) {
     }
 
     $mail = new PHPMailer(true);
-    $mail->ClearAddresses();
-    $mail->ClearAllRecipients();
-    $mail->ClearAttachments();
-    $mail->ClearBCCs();
-    $mail->ClearCCs();
-    $mail->ClearCustomHeaders();
-    $mail->ClearReplyTos();
+    $mail->clearAddresses();
+    $mail->clearAllRecipients();
+    $mail->clearAttachments();
+    $mail->clearBCCs();
+    $mail->clearCCs();
+    $mail->clearCustomHeaders();
+    $mail->clearReplyTos();
 
     $mail = osc_apply_filter('init_send_mail', $mail, $params);
 
@@ -313,7 +313,7 @@ function osc_sendMail($params) {
             $pop3_password = $params['password'];
         }
 
-        $pop->Authorise($pop3_host, $pop3_port, 30, $pop3_username, $pop3_password, 0);
+        $pop->authorise( $pop3_host, $pop3_port, 30, $pop3_username, $pop3_password, 0);
     }
 
     if( osc_mailserver_auth() ) {

@@ -133,10 +133,10 @@ function basic_info() {
         $mail->From     = 'osclass@' . $sitename;
         $mail->FromName = 'Osclass';
         $mail->Subject  = 'Osclass successfully installed!';
-        $mail->AddAddress(Params::getParam('email'), 'Osclass administrator');
+        $mail->addAddress( Params::getParam( 'email'), 'Osclass administrator');
         $mail->Body     = $body;
         $mail->AltBody  = $body;
-        if( !$mail->Send() ) {
+        if( !$mail->send() ) {
             return array('email_status' => Params::getParam('email') . "<br>" . $mail->ErrorInfo, 's_password'   => $password );
         }
 

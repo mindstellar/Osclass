@@ -138,7 +138,7 @@
          *  @return int number of failed deletions or 0 in case of none
          */
         public function deleteByPrimaryKey($pk) {
-            $mRegions = Region::NewInstance();
+            $mRegions = Region::newInstance();
             $aRegions = $mRegions->findByCountry($pk);
             $result = 0;
             foreach($aRegions as $region) {

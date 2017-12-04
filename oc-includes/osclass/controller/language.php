@@ -30,7 +30,7 @@
             $locale = Params::getParam('locale');
 
             if(preg_match('/.{2}_.{2}/', $locale)) {
-                Session::newinstance()->_set('userLocale', $locale);
+                Session::newInstance()->_set( 'userLocale', $locale);
             }
 
             $redirect_url = '';

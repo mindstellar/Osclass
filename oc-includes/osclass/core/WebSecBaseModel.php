@@ -39,7 +39,7 @@
             Session::newInstance()->_drop('userEmail');
             Session::newInstance()->_drop('userPhone');
             Session::newInstance()->session_start();
-            Session::newinstance()->_set('userLocale', $locale);
+            Session::newInstance()->_set( 'userLocale', $locale);
 
             Cookie::newInstance()->pop('oc_userId');
             Cookie::newInstance()->pop('oc_userSecret');

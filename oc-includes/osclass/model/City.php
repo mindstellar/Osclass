@@ -191,7 +191,7 @@
          *  @return int number of failed deletions or 0 in case of none
          */
         public function deleteByPrimaryKey($pk) {
-            $mCityAreas = CityArea::NewInstance();
+            $mCityAreas = CityArea::newInstance();
             $aCityAreas = $mCityAreas->findByCity($pk);
             $result = 0;
             foreach($aCityAreas as $cityarea) {
