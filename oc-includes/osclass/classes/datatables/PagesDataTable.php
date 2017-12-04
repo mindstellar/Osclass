@@ -43,8 +43,8 @@
 
             $start = ((int)$params['iPage']-1) * $params['iDisplayLength'];
 
-            $this->start = intval( $start );
-            $this->limit = intval( $params['iDisplayLength'] );
+	        $this->start = (int) $start;
+	        $this->limit = (int) $params[ 'iDisplayLength' ];
             
             $pages = Page::newInstance()->listAll(0, null, null, $this->start, $this->limit);
             $this->processData($pages);

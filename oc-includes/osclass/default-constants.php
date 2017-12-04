@@ -80,7 +80,7 @@
         define('HASH_ALGO', 'sha256');
     }
 
-    if( function_exists('memory_get_usage') && ( (int) @ini_get('memory_limit') < abs(intval(OSC_MEMORY_LIMIT)) ) ) {
+	if ( function_exists( 'memory_get_usage' ) && ( (int) @ini_get( 'memory_limit' ) < abs( (int) OSC_MEMORY_LIMIT ) ) ) {
         @ini_set('memory_limit', OSC_MEMORY_LIMIT);
     }
 

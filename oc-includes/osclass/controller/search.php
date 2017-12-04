@@ -288,7 +288,7 @@
             $p_sFeed      = Params::getParam('sFeed');
             $p_iPage      = 0;
             if( is_numeric(Params::getParam('iPage')) && Params::getParam('iPage') > 0 ) {
-                $p_iPage      = intval(Params::getParam('iPage')) - 1;
+	            $p_iPage = (int) Params::getParam( 'iPage' ) - 1;
             }
 
             if($p_sFeed != '') {
@@ -302,7 +302,7 @@
             }
 
             // search results: it's blocked with the maxResultsPerPage@search defined in t_preferences
-            $p_iPageSize  = intval(Params::getParam('iPagesize'));
+	        $p_iPageSize = (int) Params::getParam( 'iPagesize' );
             if($p_iPageSize > 0) {
 	            if ( $p_iPageSize > osc_max_results_per_page_at_search() ) {
 		            $p_iPageSize = osc_max_results_per_page_at_search();

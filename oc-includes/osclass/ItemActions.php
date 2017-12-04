@@ -1271,7 +1271,7 @@
             $aItem['countryName']   = $countryName;
 
             if( $aItem['regionId'] != '' ) {
-                if( intval($aItem['regionId']) ) {
+	            if ( (int) $aItem[ 'regionId' ] ) {
                     $region = Region::newInstance()->findByPrimaryKey($aItem['regionId']);
                     if( count($region) > 0 ) {
                         $regionId = $region['pk_i_id'];
@@ -1294,7 +1294,7 @@
             $aItem['regionName']    = $regionName;
 
             if( $aItem['cityId'] != '' ) {
-                if( intval($aItem['cityId']) ) {
+	            if ( (int) $aItem[ 'cityId' ] ) {
                     $city = City::newInstance()->findByPrimaryKey($aItem['cityId']);
                     if( count($city) > 0 ) {
                         $cityId = $city['pk_i_id'];

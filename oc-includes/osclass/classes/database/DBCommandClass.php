@@ -639,12 +639,12 @@
         public function limit($value, $offset = '')
         {
             if(is_numeric($value)) {
-                $this->aLimit = intval($value);
+	            $this->aLimit = (int) $value;
             }
 
             if( $offset != '' ) {
                 if(is_numeric($offset)) {
-                    $this->aOffset = intval($offset);
+	                $this->aOffset = (int) $offset;
                 } else {
                     $this->aOffset = 0;
                 }
@@ -664,7 +664,7 @@
         public function offset($offset)
         {
             if(is_numeric($offset)) {
-                $this->aOffset = intval($offset);
+	            $this->aOffset = (int) $offset;
             } else {
                 $this->aOffset = 0;
             }

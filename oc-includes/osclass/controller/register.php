@@ -87,7 +87,7 @@
                                         }
                 break;
                 case('validate'):       //validate account
-                                        $id          = intval( Params::getParam('id') );
+	                $id                              = (int) Params::getParam( 'id' );
                                         $code        = Params::getParam('code');
                                         $userManager = new User();
                                         $user        = $userManager->findByIdSecret($id, $code);

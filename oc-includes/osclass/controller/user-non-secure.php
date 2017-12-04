@@ -124,15 +124,15 @@
                     }
 
                     $itemsPerPage = Params::getParam('itemsPerPage');
-                    if(is_numeric($itemsPerPage) && intval($itemsPerPage)>0) {
-                        $itemsPerPage = intval($itemsPerPage);
+	                if ( is_numeric( $itemsPerPage ) && (int) $itemsPerPage > 0 ) {
+		                $itemsPerPage = (int) $itemsPerPage;
                     } else {
                         $itemsPerPage = 10;
                     }
 
                     $page = Params::getParam('iPage');
-                    if(is_numeric($page) && intval($page)>0) {
-                        $page = intval($page)-1;
+	                if ( is_numeric( $page ) && (int) $page > 0 ) {
+		                $page = (int) $page - 1;
                     } else {
                         $page = 0;
                     }

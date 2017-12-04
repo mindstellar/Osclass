@@ -325,7 +325,7 @@
                 $countryName = Params::getParam('country');
             }
 
-            if( intval( Params::getParam('regionId') ) ) {
+	        if ( (int) Params::getParam( 'regionId' ) ) {
                 $region = Region::newInstance()->findByPrimaryKey( Params::getParam('regionId') );
                 if( count($region) > 0 ) {
                     $regionId   = $region['pk_i_id'];
@@ -336,7 +336,7 @@
                 $regionName = Params::getParam('region');
             }
 
-            if( intval( Params::getParam('cityId') ) ) {
+	        if ( (int) Params::getParam( 'cityId' ) ) {
                 $city = City::newInstance()->findByPrimaryKey( Params::getParam('cityId') );
                 if( count($city) > 0 ) {
                     $cityId   = $city['pk_i_id'];

@@ -257,7 +257,7 @@
          */
         public function getLastComments($num)
         {
-	        if ( ! intval( $num ) ) {
+	        if ( ! (int) $num ) {
 		        return false;
 	        }
 

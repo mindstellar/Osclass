@@ -120,16 +120,16 @@
             
             foreach($_get as $k => $v) {
                 if( ( $k == 'resourceId' ) && !empty($v) ) {
-                    $this->resourceID = intval($v);
+	                $this->resourceID = (int) $v;
                 }
                 if( $k == 'iDisplayStart' ) {
-                    $this->start = intval($v);
+	                $this->start = (int) $v;
                 }
                 if( $k == 'iDisplayLength' ) {
-                    $this->limit = intval($v);
+	                $this->limit = (int) $v;
                 }
                 if( $k == 'sEcho' ) {
-                    $this->sEcho = intval($v);
+	                $this->sEcho = (int) $v;
                 }
             }
 
@@ -153,8 +153,8 @@
             // set start and limit using iPage param
             $start = ((int)Params::getParam('iPage')-1) * $_get['iDisplayLength'];
 
-            $this->start = intval($start);
-            $this->limit = intval($_get['iDisplayLength']);
+	        $this->start = (int) $start;
+	        $this->limit = (int) $_get[ 'iDisplayLength' ];
 
             
         }

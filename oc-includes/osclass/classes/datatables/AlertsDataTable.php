@@ -177,9 +177,9 @@
             }
             // set start and limit using iPage param
             $start = ($this->iPage - 1) * $_get['iDisplayLength'];
-            
-            $this->start = intval( $start );
-            $this->limit = intval( $_get['iDisplayLength'] );
+
+	        $this->start = (int) $start;
+	        $this->limit = (int) $_get[ 'iDisplayLength' ];
 
         }
         
