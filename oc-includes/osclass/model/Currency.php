@@ -65,8 +65,8 @@
 
         public function findByPrimaryKey($value)
         {
-            if(isset(Currency::$_currencies[$value])) {
-                return Currency::$_currencies[$value];
+	        if ( isset( self::$_currencies[ $value ] ) ) {
+		        return self::$_currencies[ $value ];
             }
 
             $this->dao->select($this->fields);
@@ -82,8 +82,9 @@
                 return false;
             }
 
-            Currency::$_currencies[$value] = $result->row();
-            return Currency::$_currencies[$value];
+	        self::$_currencies[ $value ] = $result->row();
+
+	        return self::$_currencies[ $value ];
         }
 
     }

@@ -182,9 +182,9 @@
         }
 
         public static function findByUpdateURI($uri) {
-            $plugins = Plugins::listAll();
+	        $plugins = self::listAll();
             foreach($plugins as $p) {
-                $info = Plugins::getInfo($p);
+	            $info = self::getInfo( $p );
                 if($info['plugin_update_uri']==$uri) {
                     return $p;
                 }
@@ -416,7 +416,7 @@
         }
 
         public static function checkUpdate($plugin) {
-            $info = Plugins::getInfo($plugin);
+	        $info = self::getInfo( $plugin );
             return osc_check_plugin_update($info['plugin_update_uri'], $info['version']);
         }
 

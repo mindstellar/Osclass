@@ -147,7 +147,7 @@
                         if(preg_match('#^(.+?)\.php(.*)$#', $request_uri)) {
                             $file = explode( '?' , $request_uri);
                             if(!file_exists(ABS_PATH . $file[0])) {
-                                Rewrite::newInstance()->set_location('error');
+	                            self::newInstance()->set_location( 'error' );
                                 header('HTTP/1.1 404 Not Found');
                                 osc_current_web_theme_path('404.php');
                                 exit;

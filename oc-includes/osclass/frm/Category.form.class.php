@@ -32,7 +32,7 @@
             foreach($categories as $c) {
                 echo '<option value="' . $c['pk_i_id'] . '"' . ( ($category['pk_i_id'] == $c['pk_i_id']) ? 'selected="selected"' : '' ) . '>' . $c['s_name'] . '</option>';
                 if(isset($c['categories']) && is_array($c['categories'])) {
-                    CategoryForm::subcategory_select($c['categories'], $category, $default_item, 1);
+	                self::subcategory_select( $c[ 'categories' ] , $category , $default_item , 1 );
                 }
             }
             echo '</select>';
@@ -48,7 +48,7 @@
             foreach($categories as $c) {
                 echo '<option value="' . $c['pk_i_id'] . '"' . ( ($category['pk_i_id'] == $c['pk_i_id']) ? 'selected="selected"' : '' ) . '>' . $deep_string.$c['s_name'] . '</option>';
                 if(isset($c['categories']) && is_array($c['categories'])) {
-                    CategoryForm::subcategory_select($c['categories'], $category, $default_item, $deep);
+	                self::subcategory_select( $c[ 'categories' ] , $category , $default_item , $deep );
                 }
             }
         }
@@ -66,7 +66,7 @@
                 foreach($categories as $c) {
                     echo '<li>';
                     echo $d_string . '<input type="checkbox" name="categories[]" value="' . $c['pk_i_id'] . '" onclick="javascript:checkCat(\'' . $c['pk_i_id'] . '\', this.checked);" ' . ( in_array($c['pk_i_id'], $selected) ? 'checked="checked"' : '' ) . ' />' . ( ( $depth == 0 ) ? '<span>' : '' ) . $c['s_name'] . ( ( $depth == 0 ) ? '</span>' : '' );
-                    CategoryForm::categories_tree($c['categories'], $selected, $depth + 1);
+	                self::categories_tree( $c[ 'categories' ] , $selected , $depth + 1 );
                     echo '</li>';
                 }
                 echo '</ul>';
