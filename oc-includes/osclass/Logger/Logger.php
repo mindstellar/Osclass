@@ -52,4 +52,3 @@
     }
 
     /* file end: ./oc-includes/osclass/Logger/Logger.php */
-?>

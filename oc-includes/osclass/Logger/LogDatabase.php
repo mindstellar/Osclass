@@ -241,4 +241,4 @@
     }
 
     /* file end: ./oc-includes/osclass/Logger/LogDatabase.php */
-?>
+

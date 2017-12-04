@@ -46,4 +46,3 @@ function osc_cache_set($key, $data, $expire = 0) {
     $key .= osc_current_user_locale();
     return Object_Cache_Factory::newInstance()->set($key, $data, $expire);
 }
-?>

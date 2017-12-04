@@ -571,4 +571,3 @@
     }
 
     /* file end: ./oc-includes/osclass/model/User.php */
-?>

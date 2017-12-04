@@ -123,4 +123,3 @@
                     'otg'   =>  'application/vnd.oasis.opendocument.graphics-templte'
                 );
 
-?>

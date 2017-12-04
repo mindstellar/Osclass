@@ -69,4 +69,3 @@
     }
 
     /* file end: ./oc-includes/osclass/model/Cron.php */
-?>

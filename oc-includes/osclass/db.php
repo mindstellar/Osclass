@@ -488,4 +488,4 @@
         return $instance[ $dbName . '_' . $dbHost];
     }
 
-?>
+

@@ -41,4 +41,3 @@ Theme update URI: bender
         );
     }
 
-?>

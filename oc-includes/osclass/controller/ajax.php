@@ -345,4 +345,3 @@
     }
 
     /* file end: ./ajax.php */
-?>

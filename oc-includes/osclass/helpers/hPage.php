@@ -221,4 +221,4 @@
         return View::newInstance()->_erase('pages');
     }
 
-?>
+

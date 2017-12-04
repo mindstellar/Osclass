@@ -59,4 +59,3 @@
     }
 
     /* file end: ./oc-includes/osclass/core/WebSecBaseModel.php */
-?>

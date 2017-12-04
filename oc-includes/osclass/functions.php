@@ -669,4 +669,4 @@ function osc_admin_toolbar_market_connect() {
         }
     }
 }
-?>
+

@@ -1048,4 +1048,4 @@
         return isset($category['s_slug'])?$category['s_slug']:'';
     }
 
-?>
+

@@ -153,4 +153,3 @@
     }
 
     /* file end: ./oc-includes/osclass/model/LatestSearches.php */
-?>

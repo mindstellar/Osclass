@@ -48,4 +48,3 @@
     }
 
     /* file end: ./language.php */
-?>

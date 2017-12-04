@@ -54,4 +54,3 @@
     }
 
     /* file end: ./oc-includes/osclass/core/SecBaseModel.php */
-?>

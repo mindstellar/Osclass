@@ -57,4 +57,3 @@
     }
 
     /* file end: ./main.php */
-?>

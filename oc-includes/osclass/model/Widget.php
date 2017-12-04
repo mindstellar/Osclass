@@ -90,4 +90,4 @@
     }
 
     /* file end: ./oc-includes/osclass/model/Widget.php */
-?>
+

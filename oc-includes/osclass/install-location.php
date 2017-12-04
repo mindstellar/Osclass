@@ -177,4 +177,3 @@ function install_locations ( ) {
     return $imported;
 }
 
-?>

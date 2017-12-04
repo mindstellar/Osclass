@@ -418,4 +418,3 @@
                       'Pacific/Wake',
                       'Pacific/Wallis');
 
-?>

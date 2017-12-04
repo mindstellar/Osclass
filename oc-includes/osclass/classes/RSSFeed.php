@@ -81,4 +81,3 @@
             echo '</rss>', PHP_EOL;
         }
     }
-?>

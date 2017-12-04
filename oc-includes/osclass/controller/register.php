@@ -133,4 +133,3 @@
     }
 
     /* file end: ./register.php */
-?>

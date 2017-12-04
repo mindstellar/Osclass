@@ -220,4 +220,3 @@
     }
 
     /* file end: ./oc-includes/osclass/model/CityStats.php */
-?>

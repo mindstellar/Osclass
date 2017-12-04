@@ -105,4 +105,3 @@
     }
 
     /* file end: ./oc-includes/osclass/helpers/hTranslations.php */
-?>

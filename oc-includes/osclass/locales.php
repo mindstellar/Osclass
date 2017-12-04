@@ -103,4 +103,3 @@ function osc_listLanguageCodes() {
     return $codes;
 }
 
-?>

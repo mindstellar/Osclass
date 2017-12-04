@@ -285,4 +285,4 @@
         return osc_search_url(array('sCityArea' => osc_city_area_name()));
     }
 
-?>
+

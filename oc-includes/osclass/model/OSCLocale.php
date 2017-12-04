@@ -145,4 +145,3 @@
     }
 
     /* file end: ./oc-includes/osclass/model/OSCLocale.php */
-?>

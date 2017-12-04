@@ -618,4 +618,3 @@
 	}
 
     /* file end: ./oc-includes/osclass/classes/database/DBConnectionClass.php */
-?>

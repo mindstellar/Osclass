@@ -253,4 +253,3 @@
 
         return osc_admin_language();
     }
-?>

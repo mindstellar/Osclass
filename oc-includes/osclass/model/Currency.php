@@ -89,4 +89,3 @@
     }
 
     /* file end: ./oc-includes/osclass/model/Currency.php */
-?>
