@@ -1152,8 +1152,8 @@
                             if( preg_match("|PRIMARY KEY\s+\((.*)\)|mi", $field, $match) ) {
                                 $_field = strtolower($match[1]);
                                 if(isset($normal_fields[$_field])) {
-                                    $normal_fields[ $_field ] = $normal_fields[ $_field ] . ' PRIMARY KEY';
-                                    $added = true;
+	                                $normal_fields[ $_field ] .= ' PRIMARY KEY';
+	                                $added                    = true;
                                 }
                             }
 

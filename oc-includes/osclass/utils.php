@@ -521,7 +521,7 @@ function osc_copy($source, $dest, $options=array('folderPermission'=>0755,'fileP
                 //Copy only contents
             } else {
                 //Change parent itself and its contents
-                $dest=$dest.basename($source);
+	            $dest .= basename( $source );
                 @mkdir($dest);
                 @chmod($dest,$options['filePermission']);
             }

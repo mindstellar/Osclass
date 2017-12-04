@@ -190,7 +190,7 @@ if (!defined('PASSWORD_DEFAULT')) {
                 $bl = strlen($buffer);
                 for ($i = 0; $i < $raw_salt_len; $i++) {
                     if ($i < $bl) {
-                        $buffer[$i] = $buffer[$i] ^ chr(mt_rand(0, 255));
+	                    $buffer[ $i ] ^= chr( mt_rand( 0 , 255 ) );
                     } else {
                         $buffer .= chr(mt_rand(0, 255));
                     }

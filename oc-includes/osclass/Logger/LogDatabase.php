@@ -228,7 +228,7 @@
         {
             $time = 0;
             foreach($this->messages as $m) {
-                $time = $time + $m['query_time'];
+	            $time += $m[ 'query_time' ];
             }
 
             return $time;

@@ -1121,7 +1121,7 @@
 
         if($symbol==null) { $symbol = osc_item_currency_symbol(); }
 
-        $price = $price/1000000;
+	    $price /= 1000000;
 
         $currencyFormat = osc_locale_currency_format();
         $currencyFormat = str_replace('{NUMBER}', number_format($price, osc_locale_num_dec(), osc_locale_dec_point(), osc_locale_thousands_sep()), $currencyFormat);
