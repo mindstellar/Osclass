@@ -1285,8 +1285,10 @@
             }
 
             if( !is_null($aItem['price']) ) {
-                $price = str_replace(osc_locale_thousands_sep(), '', trim($aItem['price']));
-                $price = str_replace(osc_locale_dec_point(), '.', $price);
+	            $price = str_replace( array ( osc_locale_thousands_sep() , osc_locale_dec_point() ) , array (
+		            '' ,
+		            '.'
+	            ) , trim( $aItem['price']) );
                 $aItem['price'] = $price*1000000;
                 //$aItem['price'] = (float) $aItem['price'];
             }

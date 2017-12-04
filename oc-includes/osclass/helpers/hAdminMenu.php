@@ -69,8 +69,10 @@
                     if(!$is_moderator || ($is_moderator && $credential_sub == 'moderator')) { // show
 
                         $url_submenu   = $aSub[1];
-                        $url_submenu   = str_replace(osc_admin_base_url(true).'?', '', $url_submenu);
-                        $url_submenu   = str_replace(osc_admin_base_url(), '', $url_submenu);
+	                    $url_submenu   = str_replace( array (
+		                                                  osc_admin_base_url( true ) . '?' ,
+		                                                  osc_admin_base_url()
+	                                                  ) , '' , $url_submenu );
 
                         if( strpos($actual_url, $url_submenu, 0) === 0 && $priority<=2  && $url_submenu != '') {
 
@@ -91,8 +93,10 @@
 
             // --- menu section
             $url_menu   = $value[1];
-            $url_menu   = str_replace(osc_admin_base_url(true).'?', '', $url_menu);
-            $url_menu   = str_replace(osc_admin_base_url(), '', $url_menu);
+	        $url_menu   = str_replace( array (
+		                                   osc_admin_base_url( true ) . '?' ,
+		                                   osc_admin_base_url()
+	                                   ) , '' , $url_menu );
 
             if(@strpos($actual_url, $url_menu) === 0  && $priority<=2 && $url_menu != '') {
                 if( $urlLenght<strlen($url_menu) ) {
@@ -338,8 +342,7 @@
         foreach($aMenu as $key => $value) {
             $aMenu_actions = array();
             $url = $value[1];
-            $url = str_replace(osc_admin_base_url(true) , '', $url );
-            $url = str_replace(osc_admin_base_url()     , '', $url );
+	        $url = str_replace( array ( osc_admin_base_url( true ) , osc_admin_base_url() ) , '' , $url );
 
 	        $aMenu_actions[] = $url;
             if( array_key_exists('sub', $value) ) {
@@ -367,8 +370,7 @@
         foreach($aMenu as $key => $value) {
             $aMenu_actions = array();
             $url = $value[1];
-            $url = str_replace(osc_admin_base_url(true) , '', $url );
-            $url = str_replace(osc_admin_base_url()     , '', $url );
+	        $url = str_replace( array ( osc_admin_base_url( true ) , osc_admin_base_url() ) , '' , $url );
 
 	        $aMenu_actions[] = $url;
             if( array_key_exists('sub', $value) ) {

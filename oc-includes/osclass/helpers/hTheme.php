@@ -38,7 +38,10 @@
         }
         // Clean $file to prevent hacking of some type
         osc_sanitize_url($file);
-        $file = str_replace( '../' , '' , str_replace( "..\\", '' , str_replace( '://' , '' , preg_replace( '|http([s]*)|' , '' , $file))));
+        $file = str_replace( array (
+	                             "..\\" ,
+	                             '../'
+                             ) , '' , str_replace( '://' , '' , preg_replace( '|http([s]*)|' , '' , $file)) );
         if(file_exists(osc_themes_path() . osc_theme() . '/plugins/' . $file)) {
             include osc_themes_path() . osc_theme() . '/plugins/' . $file;
         } else if(file_exists(osc_plugins_path() . $file)) {
@@ -55,7 +58,10 @@
      */
     function osc_render_file_url($file = '') {
         osc_sanitize_url($file);
-        $file = str_replace( '../' , '' , str_replace( "..\\", '' , str_replace( '://' , '' , preg_replace( '|http([s]*)|' , '' , $file))));
+        $file = str_replace( array (
+	                             "..\\" ,
+	                             '../'
+                             ) , '' , str_replace( '://' , '' , preg_replace( '|http([s]*)|' , '' , $file)) );
         return osc_base_url(true).'?page=custom&file=' . $file;
     }
 

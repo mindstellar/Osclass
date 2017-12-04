@@ -483,8 +483,10 @@
                     }
                     $url = str_replace('{CATEGORY_NAME}', $category['s_slug'], $url);
                     // DEPRECATED : CATEGORY_SLUG is going to be removed in 3.4
-                    $url = str_replace('{CATEGORY_SLUG}', $category['s_slug'], $url);
-                    $url = str_replace('{CATEGORY_ID}', $category['pk_i_id'], $url);
+	                $url = str_replace( array ( '{CATEGORY_SLUG}' , '{CATEGORY_ID}' ) , array (
+		                $category[ 's_slug' ] ,
+		                $category[ 'pk_i_id' ]
+	                ) , $url );
                 } else {
                     // Search by a category which does not exists (by form)
                     // TODO CHANGE TO NEW ROUTES!!

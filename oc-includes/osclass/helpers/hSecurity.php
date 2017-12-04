@@ -192,8 +192,10 @@
         }
         $email = strtolower($email);
         foreach($rules as $rule) {
-            $rule = str_replace( '*' , '.*' , str_replace( '.' , "\.", strtolower( $rule['s_email'])));
-            $rule = str_replace( '|' , "\\", $rule);
+	        $rule = str_replace( array ( '*' , '|' ) , array (
+		        '.*' ,
+		        "\\"
+	        ) , str_replace( '.' , "\.", strtolower( $rule['s_email'])) );
             if($rule!='') {
                 if( substr($rule,0,1) == '!' ) {
                     $rule = '|^((?'.$rule.').*)$|';

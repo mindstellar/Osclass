@@ -156,7 +156,10 @@
             for ($i = count( $cat); $i > 0; $i--) {
                 $sanitized_categories[] = $cat[$i - 1]['s_slug'];
             }
-            $url = str_replace('{PAGE_TITLE}', osc_static_page_title(), str_replace('{PAGE_ID}', osc_static_page_id(), str_replace('{PAGE_SLUG}', urlencode(osc_static_page_slug()), osc_get_preference('rewrite_page_url'))));
+            $url = str_replace( array ( '{PAGE_ID}' , '{PAGE_TITLE}' ) , array (
+	            osc_static_page_id() ,
+	            osc_static_page_title()
+            ) , str_replace( '{PAGE_SLUG}', urlencode( osc_static_page_slug()), osc_get_preference( 'rewrite_page_url')) );
             if($locale!='') {
                 $path = osc_base_url().$locale . '/' . $url;
             } else {

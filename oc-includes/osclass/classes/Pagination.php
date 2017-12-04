@@ -127,7 +127,7 @@
                     $isFirst++;
                 }
                 $attrs['class'] = $this->class_first;
-                $attrs['href'] = str_replace('{PAGE}', '', str_replace(urlencode('{PAGE}'), '', $this->firstUrl));
+                $attrs['href'] = str_replace( array ( urlencode( '{PAGE}' ) , '{PAGE}' ) , '' , $this->firstUrl );
                 $links[] = $this->createATag($this->text_first, $attrs);
             }
             if( isset($pages['prev']) ) {
@@ -137,9 +137,12 @@
                 }
                 $attrs['class'] = $this->class_prev;
                 if( $pages['prev'] == 1 ) {
-                    $attrs['href'] = str_replace('{PAGE}', '', str_replace(urlencode('{PAGE}'), '', $this->firstUrl));
+                    $attrs['href'] = str_replace( array ( urlencode( '{PAGE}' ) , '{PAGE}' ) , '' , $this->firstUrl );
                 } else {
-                    $attrs['href']  = str_replace('{PAGE}', $pages['prev'], str_replace(urlencode('{PAGE}'), $pages['prev'], $this->url));
+                    $attrs['href']  = str_replace( array (
+	                                                   urlencode( '{PAGE}' ) ,
+	                                                   '{PAGE}'
+                                                   ) , array ( $pages[ 'prev' ] , $pages[ 'prev' ] ) , $this->url );
                 }
                 $links[] = $this->createATag($this->text_prev, $attrs);
             }
@@ -158,9 +161,12 @@
                     $classfirst_non_selected = $this->class_non_selected;
                 }
                 if( $p == 1 ) {
-                    $attrs['href'] = str_replace('{PAGE}', '', str_replace(urlencode('{PAGE}'), '', $this->firstUrl));
+                    $attrs['href'] = str_replace( array ( urlencode( '{PAGE}' ) , '{PAGE}' ) , '' , $this->firstUrl );
                 } else {
-                    $attrs['href'] = str_replace('{PAGE}', $p, str_replace(urlencode('{PAGE}'), $p, $this->url));
+                    $attrs['href'] = str_replace( array ( urlencode( '{PAGE}' ) , '{PAGE}' ) , array (
+	                    $p ,
+	                    $p
+                    ) , $this->url );
                 }
                 if( $p == $this->selected ) {
                     $links[] = $this->createSpanTag($p, array('class' => $classfirst_selected));
@@ -174,13 +180,19 @@
                     $this->class_next .= ' list-last';
                 }
                 $attrs['class'] = $this->class_next;
-                $attrs['href']  = str_replace('{PAGE}', $pages['next'], str_replace(urlencode('{PAGE}'), $pages['next'], $this->url));
+                $attrs['href']  = str_replace( array ( urlencode( '{PAGE}' ) , '{PAGE}' ) , array (
+	                $pages[ 'next' ] ,
+	                $pages[ 'next' ]
+                ) , $this->url );
                 $links[] = $this->createATag($this->text_next, $attrs);
             }
             if( isset($pages['last']) ) {
                 $this->class_last .= ' list-last';
                 $attrs['class'] = $this->class_last;
-                $attrs['href']  = str_replace('{PAGE}', $pages['last'], str_replace(urlencode('{PAGE}'), $pages['last'], $this->url));
+                $attrs['href']  = str_replace( array ( urlencode( '{PAGE}' ) , '{PAGE}' ) , array (
+	                $pages[ 'last' ] ,
+	                $pages[ 'last' ]
+                ) , $this->url );
                 $links[] = $this->createATag($this->text_last, $attrs);
             }
 
