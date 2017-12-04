@@ -208,7 +208,7 @@
 
             if(!$this->is_admin) {
                 Session::newInstance()->_set('userName', $input['s_name']);
-                $phone = $input['s_phone_mobile'] ? $input['s_phone_mobile'] : $input['s_phone_land'];
+	            $phone = $input[ 's_phone_mobile' ] ?: $input[ 's_phone_land' ];
                 Session::newInstance()->_set('userPhone', $phone);
             }
 
@@ -539,7 +539,7 @@
             Session::newInstance()->_set('userId', $user['pk_i_id']);
             Session::newInstance()->_set('userName', $user['s_name']);
             Session::newInstance()->_set('userEmail', $user['s_email']);
-            $phone = $user['s_phone_mobile'] ? $user['s_phone_mobile'] : $user['s_phone_land'];
+	        $phone = $user[ 's_phone_mobile' ] ?: $user[ 's_phone_land' ];
             Session::newInstance()->_set('userPhone', $phone);
 
             return 3;

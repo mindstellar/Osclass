@@ -50,8 +50,8 @@
             $this->getDBParams($params);
 
             $comments = ItemComment::newInstance()->search($this->resourceID, $this->start, $this->limit,
-                    ( $this->order_by['column_name'] ? $this->order_by['column_name'] : 'pk_i_id' ),
-                    ( $this->order_by['type'] ? $this->order_by['type'] : 'desc' ),
+	            ( $this->order_by[ 'column_name' ] ?: 'pk_i_id' ) ,
+	            ( $this->order_by[ 'type' ] ?: 'desc' ) ,
                     $this->showAll);
             $this->processData($comments);
 
