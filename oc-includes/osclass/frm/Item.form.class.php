@@ -1351,8 +1351,8 @@
             }
 
             $allowedExtensions = join(',', $aExt);
-            $maxSize    = (int) osc_max_size_kb()*1024;
-            $maxImages  = (int) osc_max_images_per_item();
+	        $maxSize           = osc_max_size_kb() * 1024;
+	        $maxImages         = osc_max_images_per_item();
             ?>
 
             <script>

@@ -161,7 +161,8 @@
             View::newInstance()->_exportVariableToView('premium_category', Category::newInstance()->findByPrimaryKey( osc_premium_category_id(), $locale ) );
         }
         $category = View::newInstance()->_get('premium_category');
-        return (string) osc_field( $category, 's_name' , $locale);
+
+	    return osc_field( $category , 's_name' , $locale );
     }
 
     /**
@@ -223,7 +224,7 @@
      * @return string
      */
     function osc_premium_formated_price() {
-        return (string) osc_format_price( osc_premium_price(), osc_premium_currency_symbol() );
+	    return osc_format_price( osc_premium_price() , osc_premium_currency_symbol() );
     }
 
     /**

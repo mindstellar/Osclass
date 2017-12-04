@@ -684,8 +684,8 @@
             }
 
             $result = $this->manager->update(
-                array('b_premium' => (int)$value)
-                ,array('pk_i_id' => $id)
+	            array ( 'b_premium' => $value )
+                , array('pk_i_id' => $id)
             );
             // updated corretcly
             if($result == 1) {

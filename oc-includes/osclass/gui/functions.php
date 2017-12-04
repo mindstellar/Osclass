@@ -25,7 +25,7 @@ DEFINES
 
 */
     define('BENDER_THEME_VERSION', '314');
-    if( (string)osc_get_preference('keyword_placeholder', 'bender') == '' ) {
+	if ( osc_get_preference( 'keyword_placeholder' , 'bender' ) == '' ) {
         Params::setParam('keyword_placeholder', __('ie. PHP Programmer', 'bender') ) ;
     }
     osc_register_script('fancybox', osc_current_web_theme_url('js/fancybox/jquery.fancybox.pack.js'), array('jquery'));

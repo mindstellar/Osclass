@@ -191,7 +191,8 @@
             View::newInstance()->_exportVariableToView('item_category', Category::newInstance()->findByPrimaryKey( osc_item_category_id(), $locale ) );
         }
         $category = View::newInstance()->_get('item_category');
-        return (string) osc_field( $category, 's_name' , $locale);
+
+	    return osc_field( $category , 's_name' , $locale );
     }
 
     /**
@@ -275,7 +276,7 @@
      * @return string
      */
     function osc_item_formatted_price() {
-        return (string) osc_format_price( osc_item_price() );
+	    return osc_format_price( osc_item_price() );
     }
 
     /**
@@ -563,7 +564,7 @@
             $url = osc_base_url() . osc_get_preference('rewrite_item_mark') . '/spam/' . osc_item_id();
         }
 
-        return (string) $url;
+	    return $url;
     }
 
     /**
@@ -578,7 +579,7 @@
             $url = osc_base_url() . osc_get_preference('rewrite_item_mark') . '/badcat/' . osc_item_id();
         }
 
-        return (string) $url;
+	    return $url;
     }
 
     /**
@@ -593,7 +594,7 @@
             $url = osc_base_url() . osc_get_preference('rewrite_item_mark') . '/repeated/' . osc_item_id();
         }
 
-        return (string) $url;
+	    return $url;
     }
 
     /**
@@ -608,7 +609,7 @@
             $url = osc_base_url() . osc_get_preference('rewrite_item_mark') . '/offensive/' . osc_item_id();
         }
 
-        return (string) $url;
+	    return $url;
     }
 
     /**
@@ -623,7 +624,7 @@
             $url = osc_base_url() . osc_get_preference('rewrite_item_mark') . '/expired/' . osc_item_id();
         }
 
-        return (string) $url;
+	    return $url;
     }
 
     // DEPRECATED: This function will be removed in version 4.0
@@ -747,7 +748,7 @@
      * @return string
      */
     function osc_delete_comment_url() {
-        return (string) osc_base_url(true) . '?page=item&action=delete_comment&id=' . osc_item_id() . '&comment=' . osc_comment_id() . '&' . osc_csrf_token_url();
+	    return osc_base_url( true ) . '?page=item&action=delete_comment&id=' . osc_item_id() . '&comment=' . osc_comment_id() . '&' . osc_csrf_token_url();
     }
 
     //////////////////////////////
@@ -809,7 +810,7 @@
      * @return string
      */
     function osc_resource_url() {
-        return (string) osc_resource_path().osc_resource_id() . '.' . osc_resource_field( 's_extension' );
+	    return osc_resource_path() . osc_resource_id() . '.' . osc_resource_field( 's_extension' );
     }
 
     /**
@@ -818,7 +819,7 @@
      * @return string
      */
     function osc_resource_thumbnail_url() {
-        return (string) osc_resource_path().osc_resource_id() . '_thumbnail.' . osc_resource_field( 's_extension' );
+	    return osc_resource_path() . osc_resource_id() . '_thumbnail.' . osc_resource_field( 's_extension' );
     }
 
     /**
@@ -828,7 +829,7 @@
      * @return string
      */
     function osc_resource_preview_url() {
-        return (string) osc_resource_path().osc_resource_id() . '_preview.' . osc_resource_field( 's_extension' );
+	    return osc_resource_path() . osc_resource_id() . '_preview.' . osc_resource_field( 's_extension' );
     }
 
     /**
@@ -837,7 +838,7 @@
      * @return string
      */
     function osc_resource_original_url() {
-        return (string) osc_resource_path().osc_resource_id() . '_original.' . osc_resource_field( 's_extension' );
+	    return osc_resource_path() . osc_resource_id() . '_original.' . osc_resource_field( 's_extension' );
     }
 
     /**

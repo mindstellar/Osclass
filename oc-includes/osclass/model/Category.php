@@ -161,9 +161,9 @@
          */
         public function toTree($empty = true)
         {
-            $key    = md5(osc_base_url().(string)$this->_language.(string)$empty);
-            $found  = null;
-            $cache  = osc_cache_get($key, $found);
+	        $key   = md5( osc_base_url() . $this->_language . (string) $empty );
+            $found = null;
+            $cache = osc_cache_get($key, $found);
             if($cache===false) {
                 if($empty==$this->_emptyTree && $this->_tree!=null) {
                     return $this->_tree;
