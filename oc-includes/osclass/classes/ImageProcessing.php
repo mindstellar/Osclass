@@ -626,7 +626,7 @@
                     $srccolor = imagecolorsforindex($src_im, imagecolorat($src_im, $src_x + $x_offset, $src_y + $y_offset));
                     $dstcolor = imagecolorsforindex($dst_im, imagecolorat($dst_im, $dst_x + $x_offset, $dst_y + $y_offset));
 
-                    if (is_null($trans) || ($srccolor !== $trans))
+	                if ( null === $trans || ( $srccolor !== $trans ) )
                     {
                         $src_a = $srccolor['alpha'] * $pct / 100;
                         // blend

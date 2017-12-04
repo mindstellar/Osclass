@@ -36,7 +36,7 @@
             if(Session::newInstance()->_getForm('commentId') != '') {
                 $commentId = Session::newInstance()->_getForm('commentId');
             }
-            if( !is_null($commentId) ) {
+	        if ( null !== $commentId ) {
                 parent::generic_input_hidden( 'id' , $commentId);
             }
         }

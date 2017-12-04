@@ -293,7 +293,7 @@
             $file = '';
         }
 
-        if ( is_null($assets_base_url) ) {
+	    if ( null === $assets_base_url ) {
             return osc_base_url() . 'oc-includes/osclass/assets/' . $file;
         }
         else {

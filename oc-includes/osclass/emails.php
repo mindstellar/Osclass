@@ -289,7 +289,7 @@
             $content = current($aPage['locale']);
         }
 
-        if (!is_null($content)) {
+		if ( null !== $content ) {
             $words   = array();
             $words[] = array(
                 '{COMMENT_AUTHOR}',
@@ -399,7 +399,7 @@
             $content = current($aPage['locale']);
         }
 
-        if (!is_null($content)) {
+		if ( null !== $content ) {
             $words   = array();
             $words[] = array(
                 '{USER_NAME}',
@@ -446,7 +446,7 @@
             $content = current($aPage['locale']);
         }
 
-        if (!is_null($content)) {
+		if ( null !== $content ) {
             $words   = array();
             $words[] = array(
                 '{USER_NAME}',
@@ -487,7 +487,7 @@
             $content = current($aPage['locale']);
         }
 
-        if (!is_null($content)) {
+		if ( null !== $content ) {
             $words   = array();
             $words[] = array(
                 '{USER_NAME}',
@@ -535,7 +535,7 @@
             $content = current($aPage['locale']);
         }
 
-        if (!is_null($content)) {
+		if ( null !== $content ) {
             $validation_url = osc_user_activate_url($user['pk_i_id'], $input['s_secret']);
             $words   = array();
             $words[] = array(
@@ -1089,7 +1089,7 @@
             $content = current($aPage['locale']);
         }
 
-        if( !is_null($content) ) {
+		if ( null !== $content ) {
             $words   = array();
             $words[] = array(
                 '{USER_NAME}',

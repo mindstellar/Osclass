@@ -1045,7 +1045,7 @@
          */
         public function count()
         {
-            if( is_null($this->total_results) ) {
+	        if ( null === $this->total_results ) {
                 $this->doSearch();
             }
             return $this->total_results;
@@ -1058,7 +1058,7 @@
          */
         public function countAll()
         {
-            if( is_null($this->total_results_table) ) {
+	        if ( null === $this->total_results_table ) {
                 $result = $this->dao->query(sprintf('select count(*) as total from %st_item', DB_TABLE_PREFIX ));
                 $row = $result->row();
                 $this->total_results_table = $row['total'];

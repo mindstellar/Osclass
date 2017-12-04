@@ -91,7 +91,7 @@ if ( !function_exists('mb_substr') ) {
 	 */
 	function mb_substr( $str , $start , $length = null , $encoding = null ) {
         preg_match_all( '/./us', $str, $match );
-        $chars = is_null( $length ) ? array_slice( $match[0], $start ) : array_slice( $match[0], $start, $length );
+		$chars = null === $length ? array_slice( $match[ 0 ] , $start ) : array_slice( $match[ 0 ] , $start , $length );
         return implode('', $chars );
     }
 }

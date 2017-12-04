@@ -290,7 +290,7 @@
             $this->dao->select();
             $this->dao->from(DB_TABLE_PREFIX.'t_user_description');
             $this->dao->where('fk_i_user_id', $user['pk_i_id']);
-            if(!is_null($locale)) {
+	        if ( null !== $locale ) {
                 $this->dao->where('fk_c_locale_code', $locale);
             }
             $result = $this->dao->get();

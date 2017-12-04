@@ -142,7 +142,7 @@
 
             $item   = $result->row();
 
-            if(!is_null($item) ) {
+	        if ( null !== $item ) {
                 return $this->extendDataSingle($item);
             } else {
                 return array();
@@ -284,7 +284,7 @@
         {
             $this->dao->select('count(*) as total');
             $this->dao->from($this->getTableName().' i');
-            if(!is_null($categoryId)) {
+	        if ( null !== $categoryId ) {
                 $this->dao->join(DB_TABLE_PREFIX.'t_category c', 'c.pk_i_id = i.fk_i_category_id');
                 $this->dao->where('i.fk_i_category_id', $categoryId);
             }
@@ -890,7 +890,7 @@
 
             $this->dao->where( 'i.pk_i_id = s.fk_i_item_id' );
             // i_num_spam, i_num_repeated, i_num_bad_classified, i_num_offensive, i_num_expired
-            if (!is_null($type)) {
+	        if ( null !== $type ) {
                 switch ($type) {
                     case 'spam':
                         $this->dao->where('s.i_num_spam > 0 AND i.b_spam = 0');
@@ -978,7 +978,7 @@
         {
             $item = $this->findByPrimaryKey($id);
 
-            if ( is_null($item) ) {
+	        if ( null === $item ) {
                 return false;
             }
 

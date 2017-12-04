@@ -49,7 +49,7 @@ function osc_deleteResource( $id , $admin) {
         $id = $id[0];
     }
     $resource = ItemResource::newInstance()->findByPrimaryKey($id);
-    if( !is_null($resource) ){
+	if ( null !== $resource ) {
         Log::newInstance()->insertLog('item', 'delete resource', $resource['pk_i_id'], $id, $admin?'admin':'user', $admin ? osc_logged_admin_id() : osc_logged_user_id());
 
         $backtracel = '';
@@ -527,7 +527,7 @@ function osc_doRequest($url, $_data) {
 	 * @return bool
 	 */
 	function osc_mkdir( $dir , $mode = 0777 , $recursive=true) {
-    if (is_null($dir) || $dir === '' ) {
+		if ( null === $dir || $dir === '' ) {
         return false;
     }
     if (is_dir($dir) || $dir === '/' ) {
@@ -1675,7 +1675,7 @@ function osc_update_cat_stats() {
     $aCategories   = Category::newInstance()->toTreeAll();
 
     foreach($aCategories as &$category) {
-        if( is_null($category['fk_i_parent_id']) ) {
+	    if ( null === $category[ 'fk_i_parent_id' ] ) {
             _recursive_category_stats($category, $categoryTotal);
         }
     }

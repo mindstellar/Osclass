@@ -227,7 +227,7 @@
             $this->dao->from(DB_TABLE_PREFIX.'t_item i');
 
             $conditions = array();
-            if(is_null($itemId)) {
+	        if ( null === $itemId ) {
                 $conditions = 'c.fk_i_item_id = i.pk_i_id';
             } else {
                 $conditions = array(
@@ -339,7 +339,7 @@
             $this->dao->from(DB_TABLE_PREFIX.'t_item i');
 
             $conditions = array();
-            if(is_null($itemId)) {
+	        if ( null === $itemId ) {
                 $conditions = 'c.fk_i_item_id = i.pk_i_id';
             } else {
                 $conditions = array(
@@ -377,7 +377,7 @@
             $this->dao->from(DB_TABLE_PREFIX.'t_item i');
 
             $conditions = array();
-            if(is_null($itemId)) {
+	        if ( null === $itemId ) {
                 $conditions = 'c.fk_i_item_id = i.pk_i_id';
             } else {
                 $conditions = array(
@@ -407,7 +407,7 @@
             $this->dao->from(DB_TABLE_PREFIX.'t_item i');
 
             $this->dao->where('c.fk_i_item_id = i.pk_i_id');
-            if(!is_null($aConditions)) {
+	        if ( null !== $aConditions ) {
                 $this->dao->where($aConditions);
             }
             $result = $this->dao->get();

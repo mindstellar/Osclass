@@ -96,7 +96,7 @@
                 $aItem['title'][$key] = strip_tags( trim ( $value ) );
             }
 
-            $aItem['price']    = !is_null($aItem['price']) ? strip_tags( trim( $aItem['price'] ) ) : $aItem['price'];
+	        $aItem[ 'price' ]  = null !== $aItem[ 'price' ] ? strip_tags( trim( $aItem[ 'price' ] ) ) : $aItem[ 'price' ];
             $contactName       = strip_tags( trim( $aItem['contactName'] ) );
             $contactEmail      = strip_tags( trim( $aItem['contactEmail'] ) );
             $aItem['cityArea'] = osc_sanitize_name( strip_tags( trim( $aItem['cityArea'] ) ) );
@@ -149,8 +149,8 @@
 	            ((!osc_validate_category($aItem['catId'])) ? _m( 'Category invalid.' ) . PHP_EOL : '' ) .
 	            ((!osc_validate_number($aItem['price'])) ? _m( 'Price must be a number.' ) . PHP_EOL : '' ) .
 	            ((!osc_validate_max(number_format($aItem['price'],0,'',''), 15)) ? _m( 'Price too long.' ) . PHP_EOL : '' ) .
-	            ((!is_null($aItem['price']) && (int)$aItem['price']<0 ) ? _m('Price must be positive number.') . PHP_EOL : '' ) .
-                ((!osc_validate_max($contactName, 35)) ? _m( 'Name too long.' ) . PHP_EOL : '' ) .
+	            ( ( null !== $aItem[ 'price' ] && (int) $aItem[ 'price' ] < 0 ) ? _m( 'Price must be positive number.' ) . PHP_EOL : '' ) .
+	            ( ( ! osc_validate_max( $contactName , 35 ) ) ? _m( 'Name too long.' ) . PHP_EOL : '' ) .
 	            ((!osc_validate_email($contactEmail)) ? _m( 'Email invalid.' ) . PHP_EOL : '' ) .
 	            ((!osc_validate_text($aItem['countryName'], 2, false)) ? _m( 'Country too short.' ) . PHP_EOL : '' ) .
 	            ((!osc_validate_max($aItem['countryName'], 50)) ? _m( 'Country too long.' ) . PHP_EOL : '' ) .
@@ -320,7 +320,7 @@
                 $aItem['title'][$key] = strip_tags( trim ( $value ) );
             }
 
-            $aItem['price']    = !is_null($aItem['price']) ? strip_tags( trim( $aItem['price'] ) ) : $aItem['price'];
+			$aItem[ 'price' ]  = null !== $aItem[ 'price' ] ? strip_tags( trim( $aItem[ 'price' ] ) ) : $aItem[ 'price' ];
             $aItem['cityArea'] = osc_sanitize_name( strip_tags( trim( $aItem['cityArea'] ) ) );
             $aItem['address']  = osc_sanitize_name( strip_tags( trim( $aItem['address'] ) ) );
 
@@ -363,8 +363,8 @@
 	            ((!osc_validate_category($aItem['catId'])) ? _m( 'Category invalid.' ) . PHP_EOL : '' ) .
 	            ((!osc_validate_number($aItem['price'])) ? _m( 'Price must be a number.' ) . PHP_EOL : '' ) .
 	            ((!osc_validate_max(number_format($aItem['price'],0,'',''), 15)) ? _m( 'Price too long.' ) . PHP_EOL : '' ) .
-	            ((!is_null($aItem['price']) && (int)$aItem['price']<0 ) ? _m('Price must be positive number.') . PHP_EOL : '' ) .
-                ((!osc_validate_text($aItem['countryName'], 3, false)) ? _m( 'Country too short.' ) . PHP_EOL : '' ) .
+	            ( ( null !== $aItem[ 'price' ] && (int) $aItem[ 'price' ] < 0 ) ? _m( 'Price must be positive number.' ) . PHP_EOL : '' ) .
+	            ( ( ! osc_validate_text( $aItem[ 'countryName' ] , 3 , false ) ) ? _m( 'Country too short.' ) . PHP_EOL : '' ) .
 	            ((!osc_validate_max($aItem['countryName'], 50)) ? _m( 'Country too long.' ) . PHP_EOL : '' ) .
 	            ((!osc_validate_text($aItem['regionName'], 2, false)) ? _m( 'Region too short.' ) . PHP_EOL : '' ) .
 	            ((!osc_validate_max($aItem['regionName'], 50)) ? _m( 'Region too long.' ) . PHP_EOL : '' ) .
@@ -1324,7 +1324,7 @@
                 $aItem['address'] = null;
             }
 
-            if( !is_null($aItem['price']) ) {
+	        if ( null !== $aItem[ 'price' ] ) {
 	            $price = str_replace( array ( osc_locale_thousands_sep() , osc_locale_dec_point() ) , array (
 		            '' ,
 		            '.'

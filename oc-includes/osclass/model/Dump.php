@@ -158,7 +158,7 @@
                             $_str .= '(';
                             for( $i = 0; $i < $num_fields; $i++ ) {
                                 $v = $row[$fields[$i]->name];
-                                if(is_null($v)) {
+	                            if ( null === $v ) {
                                     $_str .= 'null';
                                 } else {
                                     $this->_quotes($fields[$i]->type, $_str, $row[$fields[$i]->name]);
@@ -229,7 +229,7 @@
                 $_str .= '(';
                 for( $i = 0; $i < $num_fields; $i++ ) {
                     $v = $row[$fields[$i]->name];
-                    if(is_null($v)) {
+	                if ( null === $v ) {
                         $_str .= 'null';
                     } else {
                         $this->_quotes($fields[$i]->type, $_str, $v);

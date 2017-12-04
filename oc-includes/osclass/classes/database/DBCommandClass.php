@@ -332,7 +332,7 @@
                     $k .= ' =';
                 }
 
-                if(!is_null($v)) {
+	            if ( null !== $v ) {
                     $v = ' ' . $this->escape($v);
                 }
 
@@ -682,7 +682,7 @@
          */
         public function insert($table = '', $set = null)
         {
-            if( !is_null($set) ) {
+	        if ( null !== $set ) {
                 $this->set($set);
             }
 
@@ -729,7 +729,7 @@
          */
         public function replace($table = '', $set = null)
         {
-            if( !is_null($set) ) {
+	        if ( null !== $set ) {
                 $this->set($set);
             }
 
@@ -777,7 +777,7 @@
          */
         public function update($table = '', $set = null, $where = null)
         {
-            if( !is_null($set) ) {
+	        if ( null !== $set ) {
                 $this->set($set);
             }
 
@@ -916,7 +916,7 @@
                 $this->from($table);
             }
 
-            if( !is_null($limit) ) {
+	        if ( null !== $limit ) {
                 $this->limit($limit, $offset);
             }
 
@@ -1709,7 +1709,7 @@
                 $str = "'" . $this->escapeStr($str) . "'";
             } elseif ( is_bool($str) ) {
                 $str = ($str === false) ? 0 : 1;
-            } elseif( is_null($str) ) {
+            } elseif ( null === $str ) {
                 $str = 'NULL';
             }
 

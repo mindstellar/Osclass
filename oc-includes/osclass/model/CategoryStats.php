@@ -200,7 +200,7 @@
         public function getNumItems($cat)
         {
             static $numItemsMap = null;
-            if(is_null($numItemsMap)) {
+	        if ( null === $numItemsMap ) {
                 $numItemsMap = $this->toNumItemsMap();
             }
 	        if ( isset( $numItemsMap[ 'parent' ][ $cat[ 'pk_i_id' ] ] ) ) {

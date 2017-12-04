@@ -52,7 +52,7 @@ function osc_get_param($key) {
  * @return string
  */
 function osc_field($item, $field, $locale) {
-    if(!is_null($item)) {
+	if ( null !== $item ) {
         if( $locale == '' ) {
             if(isset($item[$field])) {
                 return $item[$field];

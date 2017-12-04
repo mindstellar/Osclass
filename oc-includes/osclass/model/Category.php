@@ -909,7 +909,7 @@
 	     */
         public function formatValue($value)
         {
-	        if ( is_null( $value ) ) {
+	        if ( null === $value ) {
 		        return DB_CONST_NULL;
 	        } else {
 		        $value = trim( $value );

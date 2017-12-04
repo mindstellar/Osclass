@@ -90,7 +90,7 @@
             $this->dao->select();
             $this->dao->from($this->getDescriptionTableName());
             $this->dao->where('fk_i_pages_id', $id);
-            if( !is_null($locale) ) {
+	        if ( null !== $locale ) {
                 $this->dao->where('fk_c_locale_code', $locale);
             }
             $result   = $this->dao->get();
@@ -187,14 +187,14 @@
         {
             $this->dao->select();
             $this->dao->from($this->getTableName());
-            if( !is_null($indelible) ) {
+	        if ( null !== $indelible ) {
                 $this->dao->where('b_indelible', $indelible);
             }
             if( $b_link!=null) {
                 $this->dao->where('b_link', $b_link);
             }
             $this->dao->orderBy('i_order', 'ASC');
-            if( !is_null($limit) ) {
+	        if ( null !== $limit ) {
                 $this->dao->limit($limit, $start);
             }
             $result = $this->dao->get();
@@ -232,7 +232,7 @@
         {
             $this->dao->select('count(*) as total');
             $this->dao->from($this->getTableName());
-            if( !is_null($indelible) ) {
+	        if ( null !== $indelible ) {
                 $this->dao->where('b_indelible', $indelible);
             }
 
@@ -260,7 +260,7 @@
             $this->dao->select();
             $this->dao->from($this->getDescriptionTableName());
             $this->dao->where( 'fk_i_pages_id' , $aPage['pk_i_id']);
-            if( !is_null($locale) ) {
+	        if ( null !== $locale ) {
                 $this->dao->where('fk_c_locale_code', $locale);
             }
             $results       = $this->dao->get();
@@ -415,7 +415,7 @@
             $lastPage = $results->row();
 
             $order = $lastPage['o'];
-            if( is_null($order) ){
+	        if ( null === $order ) {
                 $order = -1;
             }
 
