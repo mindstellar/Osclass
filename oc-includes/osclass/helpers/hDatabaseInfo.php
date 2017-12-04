@@ -91,7 +91,7 @@
     function getSiteInfo($key, $default_value) {
         if (MULTISITE) {
             $_P = SiteInfo::newInstance();
-            return($_P->get($key));
+            return $_P->get( $key);
         }
 
         return $default_value;

@@ -47,7 +47,7 @@
         } else {
             $locale = null;
         }
-        return($locale);
+        return $locale;
     }
 
     /**
@@ -208,7 +208,7 @@
      * @return array
      */
     function osc_all_enabled_locales_for_admin($indexed_by_pk = false) {
-        return ( OSCLocale::newInstance()->listAllEnabled(true, $indexed_by_pk));
+        return OSCLocale::newInstance()->listAllEnabled( true, $indexed_by_pk);
     }
 
     /**

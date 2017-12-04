@@ -52,7 +52,7 @@
                 ,array( 'i_value' => '1', 's_text' => __('Moderator') )
             );
 
-            parent::generic_select( 'b_moderator', $options, 'i_value', 's_text', null, (isset($admin['b_moderator'])) ? $admin['b_moderator'] : null );
+            parent::generic_select( 'b_moderator', $options, 'i_value', 's_text', null, isset($admin['b_moderator']) ? $admin['b_moderator'] : null );
         }
 
         static public function js_validation() {

@@ -74,7 +74,7 @@
         $result   = $comm->query(sprintf( 'SELECT * FROM %st_item_comment' , DB_TABLE_PREFIX));
         $comments = $result->result();
         foreach($comments as $comment) {
-            ItemComment::newInstance()->update(array( 'b_active' => ( $comment['e_status'] == 'ACTIVE' ? 1 : 0), 'b_enabled' => 1)
+            ItemComment::newInstance()->update(array( 'b_active' => $comment['e_status'] == 'ACTIVE' ? 1 : 0 , 'b_enabled' => 1)
                                               ,array('pk_i_id'  => $comment['pk_i_id']));
         }
         unset($comments);
@@ -83,7 +83,7 @@
         $result  = $comm->query(sprintf( 'SELECT * FROM %st_item' , DB_TABLE_PREFIX));
         $items   = $result->result();
         foreach($items as $item) {
-            Item::newInstance()->update(array( 'b_active' => ( $item['e_status'] == 'ACTIVE' ? 1 : 0 ) , 'b_enabled' => 1)
+            Item::newInstance()->update(array( 'b_active' => $item['e_status'] == 'ACTIVE' ? 1 : 0 , 'b_enabled' => 1)
                                        ,array('pk_i_id'  => $item['pk_i_id']));
         }
         unset($items);
@@ -196,7 +196,7 @@ CREATE TABLE %st_item_description_tmp (
             if( $item['f_price'] == null ) {
                 $sql = sprintf( 'UPDATE %st_item SET i_price = NULL WHERE pk_i_id = %d' , DB_TABLE_PREFIX, $item['pk_i_id']);
             } else {
-                $sql = sprintf( 'UPDATE %st_item SET i_price = %f WHERE pk_i_id = %d' , DB_TABLE_PREFIX, ( 1000000 * $item['f_price']), $item['pk_i_id'] );
+                $sql = sprintf( 'UPDATE %st_item SET i_price = %f WHERE pk_i_id = %d' , DB_TABLE_PREFIX, 1000000 * $item['f_price'] , $item['pk_i_id'] );
             }
             $comm->query( $sql );
         }

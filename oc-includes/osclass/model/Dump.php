@@ -197,7 +197,7 @@
             $short_rows = array();
             $unshort_rows = array();
             foreach($result as $row) {
-                if(($row['fk_i_parent_id']) == NULL) {
+                if( $row['fk_i_parent_id'] == NULL) {
                     $short_rows[] = $row;
                 } else {
                     $unshort_rows[$row['pk_i_id']] = $row;

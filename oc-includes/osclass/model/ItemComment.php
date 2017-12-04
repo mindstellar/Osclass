@@ -127,7 +127,7 @@
             $this->dao->where($conditions);
 
             if( $page !== 'all' && $commentsPerPage > 0 ) {
-                $this->dao->limit(($page*$commentsPerPage), $commentsPerPage);
+                $this->dao->limit( $page * $commentsPerPage , $commentsPerPage);
             }
 
             $result = $this->dao->get();

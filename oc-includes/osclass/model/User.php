@@ -241,7 +241,7 @@
         public function findByIdPasswordSecret($id, $secret, $locale = null)
         {
             if($secret=='') { return null; }
-            $date = date( 'Y-m-d H:i:s' , ( time() - ( 24 * 3600)));
+            $date = date( 'Y-m-d H:i:s' , time() - ( 24 * 3600) );
             $this->dao->select();
             $this->dao->from($this->getTableName());
             $conditions = array(
@@ -524,7 +524,7 @@
                 $this->dao->select( 'dt_access_date, s_access_ip' );
                 $this->dao->from(DB_TABLE_PREFIX.'t_user');
                 $this->dao->where('pk_i_id', $userId);
-                $this->dao->where("dt_access_date <= '" . (date('Y-m-d H:i:s', time()-$time))."'");
+                $this->dao->where( "dt_access_date <= '" . date( 'Y-m-d H:i:s', time() - $time) . "'");
                 $result = $this->dao->get();
                 if( $result == false || $result->numRows() == 0) {
                     return false;

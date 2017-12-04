@@ -98,7 +98,7 @@
                 $aResults = $aTmp;
             }
 
-            return($aResults);
+            return $aResults;
         }
 
         /**

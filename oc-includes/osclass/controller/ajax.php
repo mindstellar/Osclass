@@ -288,7 +288,7 @@
                 break;
                 case 'ajax_upload':
                     // Include the uploader class
-                    require_once( LIB_PATH . 'AjaxUploader.php' );
+                    require_once LIB_PATH . 'AjaxUploader.php';
                     $uploader = new AjaxUploader();
                     $original = pathinfo($uploader->getOriginalName());
                     $filename = uniqid( 'qqfile_' ) . '.' . $original['extension'];
@@ -314,7 +314,7 @@
                     $item = Item::newInstance()->findByPrimaryKey($id);
                     if($item['s_secret']!=$secret) { echo json_encode(array('success' => false)); die();}
                     $nResources = ItemResource::newInstance()->countResources($id);
-                    $result = array('success' => ($nResources<osc_max_images_per_item()), 'count' => $nResources);
+                    $result = array( 'success' => $nResources < osc_max_images_per_item() , 'count' => $nResources);
                     echo json_encode($result);
                     break;
                 case 'delete_ajax_upload':

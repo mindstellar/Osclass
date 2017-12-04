@@ -82,7 +82,7 @@
     * @return string
     */
     function osc_base_path() {
-        return(ABS_PATH);
+        return ABS_PATH;
     }
 
     /**
@@ -100,7 +100,7 @@
     * @return string
     */
     function osc_lib_path() {
-        return(LIB_PATH);
+        return LIB_PATH;
     }
 
     /**
@@ -109,7 +109,7 @@
     * @return string
     */
     function osc_content_path() {
-        return(CONTENT_PATH);
+        return CONTENT_PATH;
     }
 
     /**
@@ -118,7 +118,7 @@
     * @return string
     */
     function osc_themes_path() {
-        return(THEMES_PATH);
+        return THEMES_PATH;
     }
 
     /**
@@ -127,7 +127,7 @@
     * @return string
     */
     function osc_plugins_path() {
-        return(PLUGINS_PATH);
+        return PLUGINS_PATH;
     }
 
     /**
@@ -136,7 +136,7 @@
     * @return string
     */
     function osc_translations_path() {
-        return(TRANSLATIONS_PATH);
+        return TRANSLATIONS_PATH;
     }
 
     /**
@@ -149,7 +149,7 @@
             return osc_multisite_upload_path();
         }
 
-        return(UPLOADS_PATH);
+        return UPLOADS_PATH;
     }
 
     /**
@@ -158,7 +158,7 @@
     * @return string
     */
     function osc_current_admin_theme() {
-        return( AdminThemes::newInstance()->getCurrentTheme() );
+        return AdminThemes::newInstance()->getCurrentTheme();
     }
 
     /**
@@ -489,7 +489,7 @@
             if( preg_match('|{CATEGORIES}|', $url) ) {
                 $sanitized_categories = array();
                 $cat = Category::newInstance()->hierarchy($item['fk_i_category_id']);
-                for ($i = (count($cat)); $i > 0; $i--) {
+                for ($i = count( $cat); $i > 0; $i--) {
                     $sanitized_categories[] = $cat[$i - 1]['s_slug'];
                 }
                 $url = str_replace( '{CATEGORIES}', implode( '/' , $sanitized_categories), $url);
@@ -519,7 +519,7 @@
         if ( osc_rewrite_enabled() ) {
             $sanitized_categories = array();
             $cat = Category::newInstance()->hierarchy(osc_premium_category_id());
-            for ($i = (count($cat)); $i > 0; $i--) {
+            for ($i = count( $cat); $i > 0; $i--) {
                 $sanitized_categories[] = $cat[$i - 1]['s_slug'];
             }
             $url = str_replace( '{CATEGORIES}', implode( '/' , $sanitized_categories), str_replace( '{ITEM_ID}', osc_premium_id(), str_replace( '{ITEM_TITLE}', osc_sanitizeString( str_replace( ',', '-', osc_premium_title())), osc_get_preference( 'rewrite_item_url'))));

@@ -413,7 +413,7 @@
                 $values = array($values);
             }
 
-            $not = ($not) ? ' NOT' : '';
+            $not = $not ? ' NOT' : '';
 
             foreach($values as $value) {
                 $this->aWherein[] = $this->escape($value);
@@ -611,7 +611,7 @@
             if(strtolower($direction) == 'random') {
                 $direction = ' RAND()';
             } elseif( trim($direction) != '' ) {
-                $direction = (in_array(strtoupper(trim($direction)), array('ASC', 'DESC'))) ? ' ' . $direction : ' ASC';
+                $direction = in_array(strtoupper(trim($direction)), array('ASC', 'DESC')) ? ' ' . $direction : ' ASC';
             }
 
             $this->aOrderby[] = $orderby . $direction;
@@ -1023,7 +1023,7 @@
         public function importSQL($sql)
         {
             $sql     = str_replace( '/*TABLE_PREFIX*/', DB_TABLE_PREFIX, $sql);
-            $sql     = preg_replace('#/\*(?:[^*]*(?:\*(?!/))*)*\*/#','',($sql));
+            $sql     = preg_replace( '#/\*(?:[^*]*(?:\*(?!/))*)*\*/#', '', $sql );
             $queries = $this->splitSQL($sql, ';');
 
             if( count($queries) == 0 ) {

@@ -171,7 +171,7 @@
                 if( MULTISITE==1 ) {
                     $_base_url = osc_multisite_url();
                 }
-                if ( str_replace( '%20' , '+', $searchUri) != str_replace( '%20' , '+', ( $_base_url . $this->uri))) {
+                if ( str_replace( '%20' , '+', $searchUri) != str_replace( '%20' , '+', $_base_url . $this->uri )) {
                     $this->redirectTo($searchUri, 301);
                 }
             }
@@ -437,7 +437,7 @@
                                     $end   = mktime('23', '59', '59', $m, $d, $y);
                                     $sql = "SELECT fk_i_item_id FROM $table WHERE ";
                                     $sql .= $table.'.fk_i_field_id = '.$key.' AND ';
-                                    $sql .= $table . '.s_value >= ' . ($start) . ' AND ';
+                                    $sql .= $table . '.s_value >= ' . $start . ' AND ';
                                     $sql .= $table . '.s_value <= ' . $end;
                                     $this->mSearch->addConditions(DB_TABLE_PREFIX.'t_item.pk_i_id IN ('.$sql.')');
                                 }

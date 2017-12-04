@@ -73,7 +73,7 @@
                                             Params::setParam('action', 'login_post');
                                             Params::setParam('email', Params::getParam('s_email'));
                                             Params::setParam('password', Params::getParam('s_password', false, false));
-                                            require_once(osc_lib_path() . 'osclass/controller/login.php');
+                                            require_once osc_lib_path() . 'osclass/controller/login.php';
                                             $do = new CWebLogin();
                                             $do->doModel();
                                         } else {
@@ -108,7 +108,7 @@
                                             Session::newInstance()->_set('userId', $user['pk_i_id']);
                                             Session::newInstance()->_set('userName', $user['s_name']);
                                             Session::newInstance()->_set('userEmail', $user['s_email']);
-                                            $phone = ($user['s_phone_mobile']) ? $user['s_phone_mobile'] : $user['s_phone_land'];
+                                            $phone = $user['s_phone_mobile'] ? $user['s_phone_mobile'] : $user['s_phone_land'];
                                             Session::newInstance()->_set('userPhone', $phone);
 
                                             osc_run_hook('hook_email_user_registration', $user);

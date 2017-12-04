@@ -38,7 +38,7 @@
         } else {
             $category = null;
         }
-        return($category);
+        return $category;
     }
 
     /**

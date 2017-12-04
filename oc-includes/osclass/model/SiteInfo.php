@@ -89,7 +89,7 @@
                 return '';
             }
 
-            return ($this->siteInfo[$key]);
+            return $this->siteInfo[$key];
         }
 
         /**

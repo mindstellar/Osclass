@@ -1246,7 +1246,7 @@ function osc_check_dir_writable( $dir = ABS_PATH ) {
                             if(!$res) { return false; };
                         }
                     } else if( str_replace( '//' , '/' , $dir) == ( ABS_PATH . 'oc-content/downloads' )) {
-                    } else if( str_replace( '//' , '/' , $dir) == (osc_uploads_path())) {
+                    } else if( str_replace( '//' , '/' , $dir) == osc_uploads_path() ) {
                     } else {
                         $res = osc_check_dir_writable( str_replace( '//' , '/' , $dir . '/' . $file));
                         if(!$res) { return false; };
@@ -1293,7 +1293,7 @@ function osc_change_permissions( $dir = ABS_PATH ) {
                             if(!$res) { return false; };
                         }
                     } else if( str_replace( '//' , '/' , $dir) == ( ABS_PATH . 'oc-content/downloads' )) {
-                    } else if( str_replace( '//' , '/' , $dir) == (osc_uploads_path())) {
+                    } else if( str_replace( '//' , '/' , $dir) == osc_uploads_path() ) {
                     } else {
                         $res = osc_change_permissions( str_replace( '//' , '/' , $dir . '/' . $file));
                         if(!$res) { return false; };

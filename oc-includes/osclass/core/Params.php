@@ -51,7 +51,7 @@
                 $value = strip_slashes_extended($value);
             }
 
-            return ($value);
+            return $value;
         }
 
         public static function existParam($param)
@@ -80,7 +80,7 @@
                 $value = strip_slashes_extended($value);
             }
 
-            return ($value);
+            return $value;
         }
 
         public static function existServerParam($param)
@@ -104,7 +104,7 @@
         public static function getFiles($param)
         {
             if (isset($_FILES[$param])) {
-                return ($_FILES[$param]);
+                return $_FILES[$param];
             }
 
             return array();

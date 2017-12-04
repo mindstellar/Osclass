@@ -240,7 +240,7 @@
             $category = View::newInstance()->_get('search_category');
         }
         if(!is_array($category)) { $category = array(); }
-        return($category);
+        return $category;
     }
 
     /**

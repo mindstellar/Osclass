@@ -222,7 +222,7 @@ switch( $step ) {
                         if( !isset($error[ 'error' ]) ) {
                             display_target();
                         } else {
-                            display_database_error($error, ($step - 1));
+                            display_database_error( $error, $step - 1 );
                         }
                     } elseif($step == 4) {
                         // ping engines

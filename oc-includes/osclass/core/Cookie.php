@@ -34,7 +34,7 @@
         public function __construct()
 		{
 			$this->val = array();
-			$web_path = (MULTISITE) ? osc_multisite_url() : WEB_PATH;
+			$web_path = MULTISITE ? osc_multisite_url() : WEB_PATH;
 			$this->name = md5($web_path);
 			$this->expires = time() + 3600; // 1 hour by default
 			if ( isset( $_COOKIE[$this->name] ) )
@@ -98,12 +98,12 @@
 		}
         
         public function num_vals() {
-            return(count($this->val));
+            return count( $this->val);
         }
         
         public function get_value($str) {
-            if (isset($this->val[$str])) return($this->val[$str]);
-            return('');
+            if (isset($this->val[$str])) return $this->val[$str];
+            return '';
         }
 
         //$tm: time in seconds

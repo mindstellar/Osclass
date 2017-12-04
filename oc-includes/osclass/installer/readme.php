@@ -40,7 +40,7 @@ function getServerParam($param, $htmlencode = false, $xss_check = true, $quotes_
         $value = strip_slashes_extended($value);
     }
 
-    return ($value);
+    return $value;
 }
 function osc_getRelativeWebURL() {
     $url = getServerParam('REQUEST_URI', false, false);

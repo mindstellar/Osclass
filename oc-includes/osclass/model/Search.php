@@ -140,7 +140,7 @@
          */
         public static function getAllowedColumnsForSorting()
         {
-            return( array('i_price', 'dt_pub_date', 'dt_expiration') );
+            return array('i_price', 'dt_pub_date', 'dt_expiration');
         }
 
         /**
@@ -150,7 +150,7 @@
          */
         public static function getAllowedTypesForSorting()
         {
-            return ( array (0 => 'asc', 1 => 'desc') );
+            return array ( 0 => 'asc', 1 => 'desc');
         }
 
 

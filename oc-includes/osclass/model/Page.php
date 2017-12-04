@@ -413,7 +413,7 @@
                 ,'b_indelible' => $aFields['b_indelible']
                 ,'dt_pub_date' => date('Y-m-d H:i:s')
                 ,'dt_mod_date' => date('Y-m-d H:i:s')
-                ,'i_order' => ($order+1)
+                ,'i_order' => $order + 1
                 ,'s_meta' => @$aFields['s_meta']
                 ,'b_link' => $aFields['b_link']
             ));

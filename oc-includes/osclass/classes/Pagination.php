@@ -145,7 +145,7 @@
             }
             foreach($pages['pages'] as $p) {
                 $isLast++;
-                if((!isset($pages['next']) && !isset($pages['last']) && ( $isLast == count($pages['pages']))) ){
+                if( !isset($pages['next']) && !isset($pages['last']) && ( $isLast == count( $pages['pages'])) ){
                     $classfirst_selected = $this->class_selected . ' list-last';
                     $classfirst_non_selected =$this->class_non_selected . ' list-last';
                 }

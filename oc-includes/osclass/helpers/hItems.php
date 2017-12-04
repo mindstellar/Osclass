@@ -39,7 +39,7 @@
             $item = null;
         }
 
-        return($item);
+        return $item;
     }
 
     /**
@@ -54,7 +54,7 @@
             $comment = View::newInstance()->_get('comment');
         }
 
-        return($comment);
+        return $comment;
     }
 
     /**
@@ -69,7 +69,7 @@
             $resource = View::newInstance()->_get('resource');
         }
 
-        return($resource);
+        return $resource;
     }
 
     /**

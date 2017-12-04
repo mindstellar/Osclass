@@ -127,7 +127,7 @@
             $value = preg_replace( '/([0-9]{3})([0-9]{3})([0-9]{4})/' , '$1-$2-$3' , $value);
         }
 
-        return ($ext)? $value . ' x' . $ext : $value;
+        return $ext ? $value . ' x' . $ext : $value;
     }
 
     /**

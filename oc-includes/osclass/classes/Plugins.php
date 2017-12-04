@@ -227,7 +227,7 @@
             }
 
             try {
-                include_once( osc_plugins_path() . $path );
+                include_once osc_plugins_path() . $path;
                 
                 self::runHook('install_' . $path);
             } catch(Exception $e) {
@@ -263,7 +263,7 @@
                 return false;
             }
 
-            include_once( osc_plugins_path() . $path );
+            include_once osc_plugins_path() . $path;
 
             self::deactivate($path);
             /*if( !self::deactivate($path) ) {

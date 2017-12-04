@@ -95,7 +95,7 @@
                 return '';
             }
 
-            return ($this->session[$key]);
+            return $this->session[$key];
         }
 
         public function _drop($key) {
@@ -113,7 +113,7 @@
 
         public function _getReferer() {
             if(isset($this->session['osc_http_referer'])) {
-                return ($this->session['osc_http_referer']);
+                return $this->session['osc_http_referer'];
             } else {
                 return '';
             }
@@ -139,9 +139,9 @@
         public function _getMessage($key) {
             $messages = $this->_get('messages');
             if ( isset($messages[$key]) ) {
-                return ( $messages[$key] );
+                return $messages[$key];
             } else {
-                return ( '' );
+                return '';
             }
         }
 
@@ -177,9 +177,9 @@
             $form = $this->_get('form');
             if($key!='') {
                 if ( isset($form[$key]) ) {
-                    return ( $form[$key] );
+                    return $form[$key];
                 } else {
-                    return ( '' );
+                    return '';
                 }
             } else {
                 return $form;
@@ -217,7 +217,7 @@
             if(isset($this->session['osc_http_referer_state'])) {
                 $this->session['osc_http_referer_state']++;
                 $_SESSION['osc_http_referer_state']++;
-                if((int)($this->session['osc_http_referer_state'])>=2) {
+                if( (int) $this->session['osc_http_referer_state'] >= 2) {
                     $this->_dropReferer();
                 }
             }

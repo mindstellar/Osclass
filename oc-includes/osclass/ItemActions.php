@@ -84,7 +84,7 @@
             $aItem['address']  = osc_sanitize_name( strip_tags( trim( $aItem['address'] ) ) );
 
             // Anonymous
-            $contactName = (osc_validate_text($contactName,3))? $contactName : __( 'Anonymous' );
+            $contactName = osc_validate_text($contactName,3) ? $contactName : __( 'Anonymous' );
 
             // Validate
             if ( !$this->checkAllowedExt($aItem['photos']) ) {
@@ -149,7 +149,7 @@
             $meta = Params::getParam( 'meta' );
 
             foreach($_meta as $_m) {
-                $meta[$_m['pk_i_id']] = (isset($meta[$_m['pk_i_id']]))?$meta[$_m['pk_i_id']]:'';
+                $meta[$_m['pk_i_id']] = isset($meta[$_m['pk_i_id']]) ?$meta[$_m['pk_i_id']]:'';
             }
 
             if($meta!='' && count($meta)>0) {
@@ -189,7 +189,7 @@
                     's_contact_name'        => $contactName,
                     's_contact_email'       => $contactEmail,
                     's_secret'              => $code,
-                    'b_active'              => ($active=='ACTIVE'?1:0),
+                    'b_active'              => $active == 'ACTIVE'?1:0 ,
                     'b_enabled'             => $enabled,
                     'b_show_email'          => $aItem['showEmail'],
                     'b_spam'                => $is_spam,
@@ -355,7 +355,7 @@
             $_meta = Field::newInstance()->findByCategory($aItem['catId']);
             $meta = Params::getParam( 'meta' );
             foreach($_meta as $_m) {
-                $meta[$_m['pk_i_id']] = (isset($meta[$_m['pk_i_id']]))?$meta[$_m['pk_i_id']]:'';
+                $meta[$_m['pk_i_id']] = isset($meta[$_m['pk_i_id']]) ?$meta[$_m['pk_i_id']]:'';
             }
             if($meta!='' && count($meta)>0) {
                 $mField = Field::newInstance();
@@ -935,7 +935,7 @@
                 return 3;
             }
 
-            if( ($body == '') ) {
+            if( $body == '' ) {
                 Session::newInstance()->_setForm('commentAuthorName', $authorName);
                 Session::newInstance()->_setForm('commentAuthorEmail', $authorEmail);
                 Session::newInstance()->_setForm('commentTitle', $title);
@@ -979,7 +979,7 @@
                               ,'s_author_email' => $authorEmail
                               ,'s_title'        => $title
                               ,'s_body'         => $body
-                              ,'b_active'       => ($status=='ACTIVE' ? 1 : 0)
+                              ,'b_active'       => $status == 'ACTIVE' ? 1 : 0
                               ,'b_enabled'      => 1
                               ,'fk_i_user_id'   => $userId);
 
@@ -1393,7 +1393,7 @@
         {
             if(!empty($aResources)) {
                 $itemResourceManager = ItemResource::newInstance();
-                $folder = osc_uploads_path().(floor($itemId/100)) . '/';
+                $folder = osc_uploads_path() . floor( $itemId / 100) . '/';
 
                 $numImagesItems = osc_max_images_per_item();
                 $numImages = $itemResourceManager->countResources($itemId);

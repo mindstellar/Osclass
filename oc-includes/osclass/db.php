@@ -300,15 +300,15 @@
         }
 
         public function get_last_id() {
-            return($this->db->insert_id);
+            return $this->db->insert_id;
         }
 
         public function get_affected_rows() {
-            return($this->db->affected_rows);
+            return $this->db->affected_rows;
         }
 
         public function get_errno() {
-            return($this->db_errno);
+            return $this->db_errno;
         }
 
         /**
@@ -485,7 +485,7 @@
             $instance[ $dbName . '_' . $dbHost] = new DB( $dbHost, $dbUser, $dbPassword, $dbName);
         }
 
-        return ($instance[ $dbName . '_' . $dbHost]);
+        return $instance[ $dbName . '_' . $dbHost];
     }
 
 ?>

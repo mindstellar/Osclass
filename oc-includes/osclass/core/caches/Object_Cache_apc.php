@@ -143,7 +143,7 @@ class Object_Cache_apc implements iObject_Cache{
             if ( NULL === $value ) {
                 $value = false;
             }
-            $this->cache[$key] = ( is_object( $value ) ) ? clone $value : $value;
+            $this->cache[$key] = is_object( $value ) ? clone $value : $value;
             if($found) {
                 $this->cache_hits += 1;
                 $return = $this->cache[$key];

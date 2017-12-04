@@ -64,7 +64,7 @@
             $value = strip_slashes_extended_e($value);
         }
 
-        return ($value);
+        return $value;
     }
     function strip_slashes_extended_e($array) {
         if(is_array($array)) {

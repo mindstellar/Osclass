@@ -45,7 +45,7 @@
         public function _get($key)
         {
             if ($this->_exists($key)) {
-                return($this->aExported[$key]);
+                return $this->aExported[$key];
             } else {
                 return '';
             }

@@ -176,7 +176,7 @@
                 case 'item_edit':   // edit item
                                     $secret = Params::getParam('secret');
                                     $id     = Params::getParam('id');
-                                    $item   = $this->itemManager->listWhere( 'i.pk_i_id = %d AND ((i.s_secret = %s AND i.fk_i_user_id IS NULL) OR (i.fk_i_user_id = %d))' , (int)($id), $secret, (int)($this->userId));
+                                    $item   = $this->itemManager->listWhere( 'i.pk_i_id = %d AND ((i.s_secret = %s AND i.fk_i_user_id IS NULL) OR (i.fk_i_user_id = %d))' , (int) $id , $secret, (int) $this->userId );
                                     if (count($item) == 1) {
                                         $item     = Item::newInstance()->findByPrimaryKey($id);
 
@@ -222,7 +222,7 @@
 
                     $secret = Params::getParam('secret');
                     $id     = Params::getParam('id');
-                    $item   = $this->itemManager->listWhere( 'i.pk_i_id = %d AND ((i.s_secret = %s AND i.fk_i_user_id IS NULL) OR (i.fk_i_user_id = %d))' , (int)($id), $secret, (int)($this->userId));
+                    $item   = $this->itemManager->listWhere( 'i.pk_i_id = %d AND ((i.s_secret = %s AND i.fk_i_user_id IS NULL) OR (i.fk_i_user_id = %d))' , (int) $id , $secret, (int) $this->userId );
 
                     if (count($item) == 1) {
                         $this->_exportVariableToView('item', $item[0]);
@@ -256,7 +256,7 @@
                 case 'activate':
                     $secret = Params::getParam('secret');
                     $id     = Params::getParam('id');
-                    $item   = $this->itemManager->listWhere( 'i.pk_i_id = %d AND ((i.s_secret = %s) OR (i.fk_i_user_id = %d))' , (int)($id), $secret, (int)($this->userId));
+                    $item   = $this->itemManager->listWhere( 'i.pk_i_id = %d AND ((i.s_secret = %s) OR (i.fk_i_user_id = %d))' , (int) $id , $secret, (int) $this->userId );
 
                     // item doesn't exist
                     if( count($item) == 0 ) {
@@ -284,7 +284,7 @@
                 case 'item_delete':
                     $secret = Params::getParam('secret');
                     $id     = Params::getParam('id');
-                    $item   = $this->itemManager->listWhere( 'i.pk_i_id = %d AND ((i.s_secret = %s) OR (i.fk_i_user_id = %d))' , (int)($id), $secret, (int)($this->userId));
+                    $item   = $this->itemManager->listWhere( 'i.pk_i_id = %d AND ((i.s_secret = %s) OR (i.fk_i_user_id = %d))' , (int) $id , $secret, (int) $this->userId );
                     if (count($item) == 1) {
                         $mItems = new ItemActions(false);
                         $success = $mItems->delete($item[0]['s_secret'], $item[0]['pk_i_id']);
@@ -366,7 +366,7 @@
                     $item = Item::newInstance()->findByPrimaryKey($id);
                     View::newInstance()->_exportVariableToView('item', $item);
 
-                    require_once(osc_lib_path() . 'osclass/user-agents.php');
+                    require_once osc_lib_path() . 'osclass/user-agents.php';
                     foreach($user_agents as $ua) {
                         if(preg_match('|'.$ua.'|', Params::getServerParam('HTTP_USER_AGENT'))) {
                             // mark item if it's not a bot
@@ -397,7 +397,7 @@
                     Session::newInstance()->_setForm( 'friendEmail' , Params::getParam( 'friendEmail'));
                     Session::newInstance()->_setForm( 'message_body' , Params::getParam( 'message'));
 
-                    if ((osc_recaptcha_private_key() != '')) {
+                    if ( osc_recaptcha_private_key() != '' ) {
                         if(!osc_check_recaptcha()) {
                             osc_add_flash_error_message( _m('The Recaptcha code is wrong') );
                             $this->redirectTo(osc_item_send_friend_url() );
@@ -449,7 +449,7 @@
 
                     $item = $this->itemManager->findByPrimaryKey( Params::getParam('id') );
                     $this->_exportVariableToView('item', $item);
-                    if ((osc_recaptcha_private_key() != '')) {
+                    if ( osc_recaptcha_private_key() != '' ) {
                         if(!osc_check_recaptcha()) {
                             osc_add_flash_error_message( _m('The Recaptcha code is wrong') );
                             Session::newInstance()->_setForm( 'yourEmail' , Params::getParam( 'yourEmail'));
@@ -604,7 +604,7 @@
                     }
 
                     if(!osc_is_admin_user_logged_in() && !($item['fk_i_user_id']!='' && $item['fk_i_user_id']==osc_logged_user_id())) {
-                        require_once(osc_lib_path() . 'osclass/user-agents.php');
+                        require_once osc_lib_path() . 'osclass/user-agents.php';
                         foreach($user_agents as $ua) {
                             if(preg_match('|'.$ua.'|', Params::getServerParam('HTTP_USER_AGENT'))) {
                                 $mStats = new ItemStats();

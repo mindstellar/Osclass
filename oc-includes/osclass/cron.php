@@ -21,7 +21,7 @@
     $i_now = strtotime($d_now);
     $i_now_truncated = strtotime(date('Y-m-d H:i:00'));
     if ( ! defined('CLI')) {
-        define('CLI', (PHP_SAPI==='cli'));
+        define( 'CLI', PHP_SAPI === 'cli' );
     }
 
     // Hourly crons
@@ -40,7 +40,7 @@
             // Run cron AFTER updating the next execution time to avoid double run of cron
             $purge = osc_purge_latest_searches();
             if( $purge == 'hour' ) {
-                LatestSearches::newInstance()->purgeDate( date('Y-m-d H:i:s', ( time() - 3600) ) );
+                LatestSearches::newInstance()->purgeDate( date( 'Y-m-d H:i:s', time() - 3600 ) );
             } else if( !in_array($purge, array('forever', 'day', 'week')) ) {
                 LatestSearches::newInstance()->purgeNumber($purge);
             }
@@ -90,7 +90,7 @@
             // Run cron AFTER updating the next execution time to avoid double run of cron
             $purge = osc_purge_latest_searches();
             if( $purge == 'day' ) {
-                LatestSearches::newInstance()->purgeDate( date('Y-m-d H:i:s', ( time() - (24 * 3600) ) ) );
+                LatestSearches::newInstance()->purgeDate( date( 'Y-m-d H:i:s', time() - ( 24 * 3600) ) );
             }
             osc_update_cat_stats();
 
@@ -123,7 +123,7 @@
             // Run cron AFTER updating the next execution time to avoid double run of cron
             $purge = osc_purge_latest_searches();
             if( $purge == 'week' ) {
-                LatestSearches::newInstance()->purgeDate( date('Y-m-d H:i:s', ( time() - (7 * 24 * 3600) ) ) );
+                LatestSearches::newInstance()->purgeDate( date( 'Y-m-d H:i:s', time() - ( 7 * 24 * 3600) ) );
             }
             osc_run_hook('cron_weekly');
         }

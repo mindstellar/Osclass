@@ -316,7 +316,7 @@
                 foreach($users as $user) {
                     $bool = false;
                     if($userId != '' && $userId == $user['pk_i_id']){$bool = true;}
-                    if(( isset($item[ 'fk_i_user_id' ]) && $item[ 'fk_i_user_id' ] == $user['pk_i_id'])){$bool = true;}
+                    if( isset($item[ 'fk_i_user_id' ]) && $item[ 'fk_i_user_id' ] == $user['pk_i_id'] ){$bool = true;}
                     echo '<option value="' . $user['pk_i_id'] . '"' . ( $bool ? ' selected="selected"' : '' ) . '>';
 
                     if( isset($user['s_name']) && !empty($user['s_name']) ) {
@@ -444,7 +444,7 @@
             if( Session::newInstance()->_getForm('price') != '' ) {
                 $item['i_price'] = Session::newInstance()->_getForm('price');
             }
-            parent::generic_input_text('price', (isset($item['i_price'])) ? osc_prepare_price($item['i_price']) : null);
+            parent::generic_input_text('price', isset($item['i_price']) ? osc_prepare_price( $item['i_price']) : null);
         }
 
         static public function currency_select($currencies = null, $item = null) {
@@ -476,13 +476,13 @@
                 if( Session::newInstance()->_getForm('countryId') != '' ) {
                     $item['fk_c_country_code'] = Session::newInstance()->_getForm('countryId');
                 }
-                parent::generic_select('countryId', $countries, 'pk_c_code', 's_name', __('Select a country...'), (isset($item['fk_c_country_code'])) ? $item['fk_c_country_code'] : null);
+                parent::generic_select('countryId', $countries, 'pk_c_code', 's_name', __('Select a country...'), isset($item['fk_c_country_code']) ? $item['fk_c_country_code'] : null);
                 return true;
             } else {
                 if( Session::newInstance()->_getForm('country') != '' ) {
                     $item['s_country'] = Session::newInstance()->_getForm('country');
                 }
-                parent::generic_input_text('country', (isset($item['s_country'])) ? $item['s_country'] : null);
+                parent::generic_input_text('country', isset($item['s_country']) ? $item['s_country'] : null);
                 return true;
             }
         }
@@ -501,7 +501,7 @@
                     $only_one = true;
                 }
             }
-            parent::generic_input_text('countryName', (isset($item['s_country'])) ? $item['s_country'] : null, null, $only_one);
+            parent::generic_input_text( 'countryName', isset($item['s_country']) ? $item['s_country'] : null, null, $only_one);
             parent::generic_input_hidden('countryId', (isset($item['fk_c_country_code']) && $item['fk_c_country_code']!=null)?$item['fk_c_country_code']:'');
             return true;
         }
@@ -520,13 +520,13 @@
                 if( Session::newInstance()->_getForm('regionId') != '' ) {
                     $item['fk_i_region_id'] = Session::newInstance()->_getForm('regionId');
                 }
-                parent::generic_select('regionId', $regions, 'pk_i_id', 's_name', __('Select a region...'), (isset($item['fk_i_region_id'])) ? $item['fk_i_region_id'] : null);
+                parent::generic_select('regionId', $regions, 'pk_i_id', 's_name', __('Select a region...'), isset($item['fk_i_region_id']) ? $item['fk_i_region_id'] : null);
                 return true;
             } else {
                 if( Session::newInstance()->_getForm('region') != '' ) {
                     $item['s_region'] = Session::newInstance()->_getForm('region');
                 }
-                parent::generic_input_text('region', (isset($item['s_region'])) ? $item['s_region'] : null);
+                parent::generic_input_text('region', isset($item['s_region']) ? $item['s_region'] : null);
                 return true;
             }
         }
@@ -546,13 +546,13 @@
                 if( Session::newInstance()->_getForm('cityId') != '' ) {
                     $item['fk_i_city_id'] = Session::newInstance()->_getForm('cityId');
                 }
-                parent::generic_select('cityId', $cities, 'pk_i_id', 's_name', __('Select a city...'), (isset($item['fk_i_city_id'])) ? $item['fk_i_city_id'] : null);
+                parent::generic_select('cityId', $cities, 'pk_i_id', 's_name', __('Select a city...'), isset($item['fk_i_city_id']) ? $item['fk_i_city_id'] : null);
                 return true;
             } else {
                 if( Session::newInstance()->_getForm('city') != '' ) {
                     $item['s_city'] = Session::newInstance()->_getForm('city');
                 }
-                parent::generic_input_text('city', (isset($item['s_city'])) ? $item['s_city'] : null);
+                parent::generic_input_text('city', isset($item['s_city']) ? $item['s_city'] : null);
                 return true;
             }
         }
@@ -562,7 +562,7 @@
             if( Session::newInstance()->_getForm('region') != '' ) {
                 $item['s_region'] = Session::newInstance()->_getForm('region');
             }
-            parent::generic_input_text('region', (isset($item['s_region'])) ? $item['s_region'] : null, false, false);
+            parent::generic_input_text( 'region', isset($item['s_region']) ? $item['s_region'] : null, false, false);
             parent::generic_input_hidden('regionId', (isset($item['fk_i_region_id']) && $item['fk_i_region_id']!=null)?$item['fk_i_region_id']:'');
             return true;
         }
@@ -572,7 +572,7 @@
             if( Session::newInstance()->_getForm('city') != '' ) {
                 $item['s_city'] = Session::newInstance()->_getForm('city');
             }
-            parent::generic_input_text('city', (isset($item['s_city'])) ? $item['s_city'] : null, false, false);
+            parent::generic_input_text( 'city', isset($item['s_city']) ? $item['s_city'] : null, false, false);
             parent::generic_input_hidden('cityId', (isset($item['fk_i_city_id']) && $item['fk_i_city_id']!=null)?$item['fk_i_city_id']:'');
             return true;
         }
@@ -582,7 +582,7 @@
             if( Session::newInstance()->_getForm('cityArea') != '' ) {
                 $item['s_city_area'] = Session::newInstance()->_getForm('cityArea');
             }
-            parent::generic_input_text('cityArea', (isset($item['s_city_area'])) ? $item['s_city_area'] : null);
+            parent::generic_input_text('cityArea', isset($item['s_city_area']) ? $item['s_city_area'] : null);
             parent::generic_input_hidden('cityAreaId', (isset($item['fk_i_city_area_id']) && $item['fk_i_city_area_id']!=null)?$item['fk_i_city_area_id']:'');
             return true;
         }
@@ -592,7 +592,7 @@
             if( Session::newInstance()->_getForm('address') != '' ) {
                 $item['s_address'] = Session::newInstance()->_getForm('address');
             }
-            parent::generic_input_text('address', (isset($item['s_address'])) ? $item['s_address'] : null);
+            parent::generic_input_text('address', isset($item['s_address']) ? $item['s_address'] : null);
             return true;
         }
 
@@ -601,7 +601,7 @@
             if( Session::newInstance()->_getForm('zip') != '' ) {
                 $item['s_zip'] = Session::newInstance()->_getForm('zip');
             }
-            parent::generic_input_text('zip', (isset($item['s_zip'])) ? $item['s_zip'] : null);
+            parent::generic_input_text('zip', isset($item['s_zip']) ? $item['s_zip'] : null);
             return true;
         }
 
@@ -610,7 +610,7 @@
             if( Session::newInstance()->_getForm('contactName') != '' ) {
                 $item['s_contact_name'] = Session::newInstance()->_getForm('contactName');
             }
-            parent::generic_input_text('contactName', (isset($item['s_contact_name'])) ? $item['s_contact_name'] : null);
+            parent::generic_input_text('contactName', isset($item['s_contact_name']) ? $item['s_contact_name'] : null);
             return true;
         }
 
@@ -619,7 +619,7 @@
             if( Session::newInstance()->_getForm('contactEmail') != '' ) {
                 $item['s_contact_email'] = Session::newInstance()->_getForm('contactEmail');
             }
-            parent::generic_input_text('contactEmail', (isset($item['s_contact_email'])) ? $item['s_contact_email'] : null);
+            parent::generic_input_text('contactEmail', isset($item['s_contact_email']) ? $item['s_contact_email'] : null);
             return true;
         }
         // NOTHING TO DO
@@ -639,7 +639,7 @@
             if( Session::newInstance()->_getForm('showEmail') != 0) {
                 $item['b_show_email'] = Session::newInstance()->_getForm('showEmail');
             }
-            parent::generic_input_checkbox('showEmail', '1', (isset($item['b_show_email']) ) ? $item['b_show_email'] : false );
+            parent::generic_input_checkbox('showEmail', '1', isset($item['b_show_email']) ? $item['b_show_email'] : false );
             return true;
         }
 

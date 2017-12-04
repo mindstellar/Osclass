@@ -23,42 +23,42 @@
         }
 
         static public function name_input_text($locale = null) {
-            parent::generic_input_text( 's_name' , (isset($locale)) ? $locale['s_name'] : '' );
+            parent::generic_input_text( 's_name' , isset($locale) ? $locale['s_name'] : '' );
             return true;
         }
 
         static public function short_name_input_text($locale = null) {
-            parent::generic_input_text( 's_short_name' , (isset($locale)) ? $locale['s_short_name'] : '' );
+            parent::generic_input_text( 's_short_name' , isset($locale) ? $locale['s_short_name'] : '' );
             return true;
         }
 
         static public function description_input_text($locale = null) {
-            parent::generic_input_text( 's_description' , (isset($locale)) ? $locale['s_description'] : '' );
+            parent::generic_input_text( 's_description' , isset($locale) ? $locale['s_description'] : '' );
             return true;
         }
 
         static public function currency_format_input_text($locale = null) {
-            parent::generic_input_text( 's_currency_format' , (isset($locale)) ? $locale['s_currency_format'] : '' );
+            parent::generic_input_text( 's_currency_format' , isset($locale) ? $locale['s_currency_format'] : '' );
             return true;
         }
 
         static public function dec_point_input_text($locale = null) {
-            parent::generic_input_text( 's_dec_point' , (isset($locale)) ? $locale['s_dec_point'] : '' );
+            parent::generic_input_text( 's_dec_point' , isset($locale) ? $locale['s_dec_point'] : '' );
             return true;
         }
 
         static public function num_dec_input_text($locale = null) {
-            parent::generic_input_text( 'i_num_dec' , (isset($locale)) ? $locale['i_num_dec'] : '' );
+            parent::generic_input_text( 'i_num_dec' , isset($locale) ? $locale['i_num_dec'] : '' );
             return true;
         }
 
         static public function thousands_sep_input_text($locale = null) {
-            parent::generic_input_text( 's_thousands_sep' , (isset($locale)) ? $locale['s_thousands_sep'] : '' );
+            parent::generic_input_text( 's_thousands_sep' , isset($locale) ? $locale['s_thousands_sep'] : '' );
             return true;
         }
 
         static public function date_format_input_text($locale = null) {
-            parent::generic_input_text( 's_date_format' , (isset($locale)) ? $locale['s_date_format'] : '' );
+            parent::generic_input_text( 's_date_format' , isset($locale) ? $locale['s_date_format'] : '' );
             return true;
         }
 

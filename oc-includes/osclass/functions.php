@@ -111,7 +111,7 @@ function meta_title() {
             }
 
             $b_show_all = ($region == '' && $city == '' && $pattern == '' && empty($category));
-            $b_category = (!empty($category));
+            $b_category = !empty($category);
             $b_pattern  = ($pattern != '');
             $b_city     = ($city != '');
             $b_region   = ($region != '');
@@ -191,7 +191,7 @@ function meta_title() {
         }
     }
 
-    return (osc_apply_filter('meta_title_filter', $text));
+    return osc_apply_filter( 'meta_title_filter', $text);
 }
 
 function meta_description( ) {
@@ -216,7 +216,7 @@ function meta_description( ) {
         $text = osc_item_category() . ' ' . osc_item_city() . ', ' . osc_highlight(osc_item_description(), 120);
     }
 
-    return (osc_apply_filter('meta_description_filter', $text));
+    return osc_apply_filter( 'meta_description_filter', $text);
 }
 
 function meta_keywords( ) {
@@ -261,7 +261,7 @@ function meta_keywords( ) {
         $text = implode(', ', $keywords);
     }
 
-    return (osc_apply_filter('meta_keywords_filter', $text));
+    return osc_apply_filter( 'meta_keywords_filter', $text);
 }
 
 function osc_search_footer_links() {
