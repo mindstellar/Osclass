@@ -205,10 +205,8 @@
         public function findByCredentials($email, $password, $locale = null)
         {
             $user = $this->findByEmail($email);
-            if(isset($user['s_password'])) {
-                if(osc_verify_password($password, $user['s_password'])) {
-                    return $this->extendData($user, $locale);
-                }
+	        if ( isset( $user[ 's_password' ] ) && osc_verify_password( $password , $user[ 's_password' ] ) ) {
+		        return $this->extendData( $user , $locale );
             }
             return array ();
         }

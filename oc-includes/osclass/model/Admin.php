@@ -142,17 +142,17 @@
          *
          * @access public
          * @since unknown
+         *
          * @param string $userName
          * @param string $password
-         * @return array
+         *
+         * @return array|bool
          */
         public function findByCredentials($userName, $password)
         {
-            $user = $this->findByUsername($userName);
-            if($user!==false && isset($user['s_password'])) {
-                if(osc_verify_password($password, $user['s_password'])) {
-                    return $user;
-                }
+            $user = $this->findByUsername( $userName );
+	        if ( $user !== false && isset( $user[ 's_password' ] ) && osc_verify_password( $password , $user[ 's_password' ] ) ) {
+		        return $user;
             }
             return false;
         }
@@ -163,9 +163,11 @@
          *
          * @access public
          * @since unknown
+         *
          * @param integer $id
-         * @param string $secret
-         * @return array
+         * @param string  $secret
+         *
+         * @return array|bool
          */
         public function findByIdSecret($id, $secret)
         {
