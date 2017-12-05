@@ -79,9 +79,9 @@
       
                 $message = Session::newInstance()->_getMessage($section);
                 if(isset($message['msg'])) {
-                    if( isset($message[ 'type' ]) && $message[ 'type' ] == 'info' ) {
+                    if( isset($message[ 'type' ]) && $message[ 'type' ] === 'info' ) {
                         osc_add_flash_info_message($message['msg'], $section);
-                    } else if( isset($message[ 'type' ]) && $message[ 'type' ] == 'ok' ) {
+                    } else if( isset($message[ 'type' ]) && $message[ 'type' ] === 'ok' ) {
                         osc_add_flash_ok_message($message['msg'], $section);
                     } else {
                         osc_add_flash_error_message($message['msg'], $section);
@@ -180,7 +180,7 @@
             $opt = '';
             $label = '';
             foreach($o as $k => $v) {
-                if($k!='label') {
+                if( $k !== 'label') {
                     $opt .= $k.'="'.$v.'" ';
                 } else {
                     $label = $v;

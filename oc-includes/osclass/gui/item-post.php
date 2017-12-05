@@ -26,7 +26,7 @@
     bender_add_body_class('item item-post');
     $action = 'item_add_post';
     $edit = false;
-    if(Params::getParam('action') == 'item_edit') {
+    if( Params::getParam('action') === 'item_edit') {
         $action = 'item_edit_post';
         $edit = true;
     }
@@ -34,7 +34,7 @@
     ?>
 <?php osc_current_web_theme_path('header.php') ; ?>
         <?php
-    if (bender_default_location_show_as() == 'dropdown') {
+    if ( bender_default_location_show_as() === 'dropdown') {
         ItemForm::location_javascript();
     } else {
         ItemForm::location_javascript_new();
@@ -98,7 +98,7 @@
                                 <label class="control-label" for="regionId"><?php _e('Region', 'bender'); ?></label>
                                 <div class="controls">
                                     <?php
-                                    if (bender_default_location_show_as() == 'dropdown') {
+                                    if ( bender_default_location_show_as() === 'dropdown') {
                                         if($edit) {
                                             ItemForm::region_select(osc_get_regions(osc_item_country_code()), osc_item());
                                         } else {
@@ -124,7 +124,7 @@
                                 <label class="control-label" for="region"><?php _e('Region', 'bender'); ?></label>
                                 <div class="controls">
                                   <?php
-                                    if (bender_default_location_show_as() == 'dropdown') {
+                                    if ( bender_default_location_show_as() === 'dropdown') {
                                         if($edit) {
                                             ItemForm::region_select($aRegions, osc_item());
                                         } else {
@@ -146,7 +146,7 @@
                                 <label class="control-label" for="city"><?php _e('City', 'bender'); ?></label>
                                 <div class="controls">
                                     <?php
-                                    if (bender_default_location_show_as() == 'dropdown') {
+                                    if ( bender_default_location_show_as() === 'dropdown') {
                                         if($edit) {
                                             ItemForm::city_select(null, osc_item());
                                         } else { // add new item

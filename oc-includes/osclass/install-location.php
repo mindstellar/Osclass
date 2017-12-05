@@ -50,7 +50,7 @@ if(Params::getParam('createmarketaccount')!='' && Params::getParam('createmarket
     create_market_account();
 }
 
-if($_POST['skip-location-input']==0 && $_POST['country-input']!='skip') {
+if($_POST['skip-location-input']==0 && $_POST['country-input'] !== 'skip') {
     $msg = install_locations();
     $json_message['status'] = $msg;
 }
@@ -160,9 +160,9 @@ function create_market_account() {
     $region = Params::getParam( 'region-input' );
     $city = Params::getParam( 'city-input' );
 
-    if($country!='all') {
-        if($region!='all') {
-            if($city!='all') {
+    if( $country !== 'all') {
+        if( $region !== 'all') {
+            if( $city !== 'all') {
                 $sql = 'action=city&term='.urlencode($city);
             } else {
                 $sql = 'action=region&term='.urlencode($region);

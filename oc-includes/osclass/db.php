@@ -452,7 +452,7 @@
 			            }
 			            foreach ( $indexes_array as $k => $v ) {
 				            $string = '';
-				            if ( $k == 'PRIMARY' ) {
+				            if ( $k === 'PRIMARY' ) {
 					            $string .= 'PRIMARY KEY ';
 				            } else if ( $v[ 'unique' ] ) {
 					            $string .= 'UNIQUE KEY ';

@@ -383,7 +383,7 @@
 		 * @return bool
 		 */
 		public static function expiration_input( $type = 'add' , $value = '' ) {
-            if($type=='edit') {
+            if( $type === 'edit') {
                 $value = '-1';  // default no change expiration date
             }
             echo '<input id="dt_expiration" type="text" name="dt_expiration" value="'.osc_esc_html(htmlentities( $value, ENT_COMPAT, 'UTF-8' )) . '" placeholder="yyyy-mm-dd HH:mm:ss" />';
@@ -898,7 +898,7 @@
                     accept: "<?php echo osc_esc_js(osc_allowed_extension()); ?>"
                 },
                 <?php } ?>
-                <?php if($path == 'front') { ?>
+                <?php if($path === 'front') { ?>
                 contactName: {
                     minlength: 3,
                     maxlength: 35
@@ -926,7 +926,7 @@
                     accept: "<?php echo osc_esc_js(sprintf( __( 'Photo: must be %s' ), osc_allowed_extension())); ?>."
                 },
                 <?php } ?>
-                <?php if($path == 'front') { ?>
+                <?php if($path === 'front') { ?>
                 contactName: {
                     minlength: "<?php echo osc_esc_js(__( 'Name: enter at least 3 characters' )); ?>.",
                     maxlength: "<?php echo osc_esc_js(__( 'Name: no more than 35 characters' )); ?>."
@@ -1012,7 +1012,7 @@
     $(document).ready(function(){
         $("#countryId").on("change",function(){
             var pk_c_code = $(this).val();
-            <?php if($path == 'admin') { ?>
+            <?php if($path === 'admin') { ?>
                 var url = '<?php echo osc_admin_base_url(true) . '?page=ajax&action=regions&countryId='; ?>' + pk_c_code;
             <?php } else { ?>
                 var url = '<?php echo osc_base_url(true) . '?page=ajax&action=regions&countryId='; ?>' + pk_c_code;
@@ -1091,7 +1091,7 @@
 
         $("#regionId").on("change",function(){
             var pk_c_code = $(this).val();
-            <?php if($path == 'admin') { ?>
+            <?php if($path === 'admin') { ?>
                 var url = '<?php echo osc_admin_base_url(true) . '?page=ajax&action=cities&regionId='; ?>' + pk_c_code;
             <?php } else { ?>
                 var url = '<?php echo osc_base_url(true) . '?page=ajax&action=cities&regionId='; ?>' + pk_c_code;
@@ -1178,7 +1178,7 @@
                     accept: "<?php echo osc_allowed_extension(); ?>"
                 },
                 <?php } ?>
-                <?php if($path == 'front') { ?>
+                <?php if($path === 'front') { ?>
                 contactName: {
                     minlength: 3,
                     maxlength: 35
@@ -1218,7 +1218,7 @@
                     accept: "<?php echo osc_esc_js(sprintf( __( 'Photo: must be %s' ), osc_allowed_extension())); ?>."
                 },
                 <?php } ?>
-                <?php if($path == 'front') { ?>
+                <?php if($path === 'front') { ?>
                 contactName: {
                     minlength: "<?php echo osc_esc_js(__( 'Name: enter at least 3 characters' )); ?>.",
                     maxlength: "<?php echo osc_esc_js(__( 'Name: no more than 35 characters' )); ?>."
@@ -1656,7 +1656,7 @@
                         if (responseJSON.success) {
                             var new_id = id - removed_images;
                             var li = $('.qq-upload-list li')[new_id];
-                            <?php if(Params::getParam('action')=='item_add') { ?>
+                            <?php if(Params::getParam('action') === 'item_add') { ?>
                             if(parseInt(new_id)==0) {
                                 $(li).append('<div class="primary_image primary"></div>');
                             } else {
@@ -1668,7 +1668,7 @@
                             $(li).append('<div class="ajax_preview_img"><img src="<?php echo osc_base_url(); ?>oc-content/uploads/temp/'+responseJSON.uploadName+'" alt="' + responseJSON.uploadName + '"></div>');
                             $(li).append('<input type="hidden" name="ajax_photos[]" value="'+responseJSON.uploadName+'"></input>');
                         }
-                        <?php if(Params::getParam('action')=='item_edit') { ?>
+                        <?php if(Params::getParam('action') === 'item_edit') { ?>
                     }).on('validateBatch', function(event, fileOrBlobDataArray) {
                         // clear alert messages
                         if($('#restricted-fine-uploader .alert-error').size()>0) {

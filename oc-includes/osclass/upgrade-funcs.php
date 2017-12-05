@@ -76,7 +76,7 @@
         $result   = $comm->query(sprintf( 'SELECT * FROM %st_item_comment' , DB_TABLE_PREFIX));
         $comments = $result->result();
         foreach($comments as $comment) {
-            ItemComment::newInstance()->update(array( 'b_active' => $comment['e_status'] == 'ACTIVE' ? 1 : 0 , 'b_enabled' => 1)
+            ItemComment::newInstance()->update(array( 'b_active' => $comment['e_status'] === 'ACTIVE' ? 1 : 0 , 'b_enabled' => 1)
                                               ,array('pk_i_id'  => $comment['pk_i_id']));
         }
         unset($comments);
@@ -85,7 +85,7 @@
         $result  = $comm->query(sprintf( 'SELECT * FROM %st_item' , DB_TABLE_PREFIX));
         $items   = $result->result();
         foreach($items as $item) {
-            Item::newInstance()->update(array( 'b_active' => $item['e_status'] == 'ACTIVE' ? 1 : 0 , 'b_enabled' => 1)
+            Item::newInstance()->update(array( 'b_active' => $item['e_status'] === 'ACTIVE' ? 1 : 0 , 'b_enabled' => 1)
                                        ,array('pk_i_id'  => $item['pk_i_id']));
         }
         unset($items);
@@ -602,7 +602,7 @@ CREATE TABLE %st_item_description_tmp (
         if (is_serialized($data)) { // don't attempt to unserialize data that wasn't serialized going in
             $data = unserialize($data);
             // if search model, convert alert
-            if(get_class($data) == 'Search') {
+            if( get_class($data) === 'Search') {
                 // get json
                 $json = $data->toJson(true);
                 // insert new alert with json

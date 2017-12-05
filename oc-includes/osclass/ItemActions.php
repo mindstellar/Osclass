@@ -64,7 +64,7 @@
 
                     $status  = '';
                     $status = $akismet->isCommentSpam() ? 'SPAM' : $status;
-                    if($status == 'SPAM') {
+                    if( $status === 'SPAM') {
                         $spam = true;
                         break;
                     }
@@ -210,7 +210,7 @@
                     's_contact_name'        => $contactName,
                     's_contact_email'       => $contactEmail,
                     's_secret'              => $code,
-                    'b_active'              => $active == 'ACTIVE'?1:0 ,
+                    'b_active'              => $active === 'ACTIVE'?1:0 ,
                     'b_enabled'             => $enabled,
                     'b_show_email'          => $aItem['showEmail'],
                     'b_spam'                => $is_spam,
@@ -284,7 +284,7 @@
                     $this->sendEmails($aItem);
                 }
 
-                if($active=='INACTIVE') {
+                if( $active === 'INACTIVE') {
                     $success = 1;
                 } else {
                     $aAux = array(
@@ -1013,7 +1013,7 @@
                 $akismet->setPermalink($itemURL);
 
                 $status = $akismet->isCommentSpam() ? 'SPAM' : $status;
-                if($status == 'SPAM') {
+                if( $status === 'SPAM') {
                     $status_num = 5;
                 }
             }
@@ -1025,7 +1025,7 @@
                               ,'s_author_email' => $authorEmail
                               ,'s_title'        => $title
                               ,'s_body'         => $body
-                              ,'b_active'       => $status == 'ACTIVE' ? 1 : 0
+                              ,'b_active'       => $status === 'ACTIVE' ? 1 : 0
                               ,'b_enabled'      => 1
                               ,'fk_i_user_id'   => $userId);
 
@@ -1364,9 +1364,9 @@
             foreach($title as $k => $_data){
                 $_title         = $title[$k];
                 $_description   = $description[$k];
-                if($type == 'ADD'){
+                if( $type === 'ADD'){
                     $this->manager->insertLocale($itemId, $k, $_title, $_description);
-                }else if($type == 'EDIT'){
+                }else if( $type === 'EDIT'){
                     $this->manager->updateLocaleForce($itemId, $k, $_title, $_description);
                 }
             }
@@ -1560,9 +1560,9 @@
             /**
              * Send email to non-reg user requesting item activation
              */
-            if( Session::newInstance()->_get('userId') == '' && $aItem['active']=='INACTIVE' ) {
+            if( Session::newInstance()->_get('userId') == '' && $aItem['active'] === 'INACTIVE' ) {
                 osc_run_hook('hook_email_item_validation_non_register_user', $item);
-            } else if ( $aItem['active']=='INACTIVE' ) { //  USER IS REGISTERED
+            } else if ( $aItem['active'] === 'INACTIVE' ) { //  USER IS REGISTERED
                 osc_run_hook('hook_email_item_validation', $item);
             } else if( Session::newInstance()->_get('userId') == '' ){ // USER IS NOT REGISTERED
                 osc_run_hook('hook_email_new_item_non_register_user', $item);

@@ -153,7 +153,7 @@
         <?php if( $pageTotal > 1 ) { ?>
         <form method="get" action="<?php echo $urlActual; ?>" style="display:inline;">
             <?php foreach( Params::getParamsAsArray('get') as $key => $value ) { ?>
-            <?php if($key!='iPage') { ?>
+            <?php if( $key !== 'iPage') { ?>
             <input type="hidden" name="<?php echo osc_esc_html($key); ?>" value="<?php echo osc_esc_html($value); ?>" />
             <?php } } ?>
             <ul>

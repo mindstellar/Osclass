@@ -908,7 +908,7 @@
         if ( View::newInstance()->_exists('metafields') ) {
             View::newInstance()->_erase('metafields');
         }
-        if(View::newInstance()->_get('itemLoop')!='items') {
+        if( View::newInstance()->_get('itemLoop') !== 'items') {
             View::newInstance()->_exportVariableToView('oldItem', View::newInstance()->_get('item'));
             View::newInstance()->_exportVariableToView('itemLoop', 'items');
         }
@@ -1123,7 +1123,7 @@
         if ( View::newInstance()->_exists('metafields') ) {
             View::newInstance()->_erase('metafields');
         }
-        if(View::newInstance()->_get('itemLoop')!='custom') {
+        if( View::newInstance()->_get('itemLoop') !== 'custom') {
             View::newInstance()->_exportVariableToView('oldItem', View::newInstance()->_get('item'));
             View::newInstance()->_exportVariableToView('itemLoop', 'custom');
         }
@@ -1269,7 +1269,7 @@
      */
     function osc_item_meta_value() {
         $meta = osc_item_meta();
-        if( $meta['e_type'] == 'DATEINTERVAL' || $meta['e_type'] == 'DATE' ) {
+        if( $meta['e_type'] === 'DATEINTERVAL' || $meta['e_type'] === 'DATE' ) {
             $value = osc_field(osc_item_meta(), 's_value', '');
             if(is_array($value)) {
                 // from [date_from] to [date_to]
@@ -1287,13 +1287,13 @@
                     return '';
                 }
             }
-        } else if( $meta['e_type'] == 'CHECKBOX' ) {
+        } else if( $meta['e_type'] === 'CHECKBOX' ) {
             if(osc_field(osc_item_meta(), 's_value', '')==1) {
                 return '<img src="'.osc_current_web_theme_url('images/tick.png').'" alt="" title=""/>';
             } else {
                 return '<img src="'.osc_current_web_theme_url('images/cross.png').'" alt="" title=""/>';
             }
-        } else if( $meta['e_type'] == 'URL' ) {
+        } else if( $meta['e_type'] === 'URL' ) {
             if(osc_field(osc_item_meta(), 's_value', '')!='') {
                 if(stripos(osc_field(osc_item_meta(), 's_value', ''),'http://')!==false || stripos(osc_field(osc_item_meta(), 's_value', ''),'https://')!==false) {
                     return '<a href="'.html_entity_decode( osc_field(osc_item_meta(), 's_value', ''), ENT_COMPAT, 'UTF-8' ) . '" >' . html_entity_decode( osc_field( osc_item_meta(), 's_value', ''), ENT_COMPAT, 'UTF-8' ) . '</a>';
@@ -1303,7 +1303,7 @@
             } else {
                 return '';
             }
-        } else if( $meta['e_type'] == 'DROPDOWN' || $meta['e_type'] == 'RADIO' ) {
+        } else if( $meta['e_type'] === 'DROPDOWN' || $meta['e_type'] === 'RADIO' ) {
             return osc_field(osc_item_meta(), 's_value', '');
         } else {
             return nl2br(htmlentities( osc_field(osc_item_meta(), 's_value', ''), ENT_COMPAT, 'UTF-8' ));

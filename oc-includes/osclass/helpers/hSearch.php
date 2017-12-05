@@ -289,15 +289,15 @@
         unset($request['sUser[]']);
         if(!$forced && View::newInstance()->_get('subdomain_slug')!='') {
             $subdomain_type = osc_subdomain_type();
-            if($subdomain_type=='category') {
+            if( $subdomain_type === 'category') {
                 unset($request['sCategory']);
-            } else if($subdomain_type=='country') {
+            } else if( $subdomain_type === 'country') {
                 unset($request['sCountry']);
-            } else if($subdomain_type=='region') {
+            } else if( $subdomain_type === 'region') {
 	            unset( $request[ 'sCountry' ] , $request[ 'sRegion' ] );
-            } else if($subdomain_type=='city') {
+            } else if( $subdomain_type === 'city') {
 	            unset( $request[ 'sCountry' ] , $request[ 'sRegion' ] , $request[ 'sCity' ] );
-            } else if($subdomain_type=='user') {
+            } else if( $subdomain_type === 'user') {
                 unset($request['sUser']);
             }
         }
@@ -354,7 +354,7 @@
         if ($countP == 0) { $params['page'] = 'search'; }
 	    $base_url = osc_base_url();
         $http_url = osc_is_ssl()? 'https://' : 'http://';
-        if(osc_subdomain_type()=='category' && isset($params['sCategory'])) {
+        if( osc_subdomain_type() === 'category' && isset($params['sCategory'])) {
             if($params['sCategory']!=Params::getParam('sCategory')) {
                 if(is_array($params['sCategory'])) {
                     $params['sCategory'] = implode( ',' , $params['sCategory']);
@@ -373,7 +373,7 @@
             } else if(osc_is_subdomain()) {
                 unset($params['sCategory']);
             }
-        } else if(osc_subdomain_type()=='country' && isset($params['sCountry'])) {
+        } else if( osc_subdomain_type() === 'country' && isset($params['sCountry'])) {
             if($params['sCountry']!=Params::getParam('sCountry')) {
                 if(is_array($params['sCountry'])) {
                     $params['sCountry'] = implode( ',' , $params['sCountry']);
@@ -392,7 +392,7 @@
             } else if(osc_is_subdomain()) {
                 unset($params['sCountry']);
             }
-        } else if(osc_subdomain_type()=='region' && isset($params['sRegion'])) {
+        } else if( osc_subdomain_type() === 'region' && isset($params['sRegion'])) {
             if($params['sRegion']!=Params::getParam('sRegion')) {
                 if(is_array($params['sRegion'])) {
                     $params['sRegion'] = implode( ',' , $params['sRegion']);
@@ -412,7 +412,7 @@
             } else if(osc_is_subdomain()) {
                 unset($params['sRegion']);
             }
-        } else if(osc_subdomain_type()=='city' && isset($params['sCity'])) {
+        } else if( osc_subdomain_type() === 'city' && isset($params['sCity'])) {
             if($params['sCity']!=Params::getParam('sCity')) {
                 if(is_array($params['sCity'])) {
                     $params['sCity'] = implode( ',' , $params['sCity']);
@@ -432,7 +432,7 @@
             } else if(osc_is_subdomain()) {
                 unset($params['sCity']);
             }
-        } else if(osc_subdomain_type()=='user' && isset($params['sUser'])) {
+        } else if( osc_subdomain_type() === 'user' && isset($params['sUser'])) {
             if($params['sUser']!=Params::getParam('sUser')) {
                 if(is_array($params['sUser'])) {
                     $params['sUser'] = implode( ',' , $params['sUser']);
@@ -620,7 +620,7 @@
             $url = $base_url . 'index.php?page=search';
             if($params!=null && is_array($params)) {
                 foreach($params as $k => $v) {
-	                if ( $k == 'meta' || 0 === strpos( $k , 'meta[' ) ) {
+	                if ( $k === 'meta' || 0 === strpos( $k , 'meta[' ) ) {
                         if( is_array($v) ) {
                             foreach($v as $_k => $aux) {
                                 if(is_array($aux)) {
@@ -1041,7 +1041,7 @@
             if(isset($conditions[$key]) && is_array($conditions[$key]) && !empty($conditions[$key])) {
                 foreach($conditions[$key] as $k => $v) {
                     if(preg_match('|([0-9]+)|', $v, $match)) {
-                        if( $key == 'aCategories' ) {
+                        if( $key === 'aCategories' ) {
                             $conditions[$key][$k] = $mCategory->findNameByPrimaryKey($match[1]);
                         } else {
                             $conditions[$key][$k] = $match[1];

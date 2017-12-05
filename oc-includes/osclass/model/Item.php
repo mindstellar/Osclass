@@ -578,28 +578,28 @@
             $this->dao->from($this->getTableName());
             $this->dao->where("fk_i_user_id = $userId");
 
-            if($itemType=='blocked') {
+            if( $itemType === 'blocked') {
                 $this->dao->where('b_enabled', 0);
-            } elseif($itemType != 'all') {
+            } elseif( $itemType !== 'all') {
                 $this->dao->where('b_enabled', 1);
             }
 
-            if($itemType == 'active') {
+            if( $itemType === 'active') {
                 $this->dao->where('b_active', 1);
                 $this->dao->where('dt_expiration > \'' . date('Y-m-d H:i:s') . '\'');
 
-            } elseif($itemType == 'nospam') {
+            } elseif( $itemType === 'nospam') {
                 $this->dao->where('b_spam', 0);
                 $this->dao->where('b_active', 1);
                 $this->dao->where('dt_expiration > \'' . date('Y-m-d H:i:s') . '\'');
 
-            } elseif($itemType == 'expired'){
+            } elseif( $itemType === 'expired'){
                 $this->dao->where('dt_expiration < \'' . date('Y-m-d H:i:s') . '\'');
 
-            } elseif($itemType == 'pending_validate'){
+            } elseif( $itemType === 'pending_validate'){
                 $this->dao->where('b_active', 0);
 
-            } elseif($itemType == 'premium'){
+            } elseif( $itemType === 'premium'){
                 $this->dao->where('b_premium', 1);
             }
 
@@ -635,28 +635,28 @@
             $this->dao->where("fk_i_user_id = $userId");
             //$this->dao->orderBy('pk_i_id', 'DESC');
 
-            if($itemType=='blocked') {
+            if( $itemType === 'blocked') {
                 $this->dao->where('b_enabled', 0);
-            } elseif($itemType != 'all') {
+            } elseif( $itemType !== 'all') {
                 $this->dao->where('b_enabled', 1);
             }
 
-            if($itemType == 'active') {
+            if( $itemType === 'active') {
                 $this->dao->where('b_active', 1);
                 $this->dao->where("dt_expiration > '" . date('Y-m-d H:i:s') . "'");
 
-            } elseif($itemType == 'nospam') {
+            } elseif( $itemType === 'nospam') {
                 $this->dao->where('b_spam', 0);
                 $this->dao->where('b_active', 1);
                 $this->dao->where("dt_expiration > '" . date('Y-m-d H:i:s') . "'");
 
-            } elseif($itemType == 'expired'){
+            } elseif( $itemType === 'expired'){
                 $this->dao->where("dt_expiration <= '" . date('Y-m-d H:i:s') . "'");
 
-            } elseif($itemType == 'pending_validate'){
+            } elseif( $itemType === 'pending_validate'){
                 $this->dao->where('b_active', 0);
 
-            } elseif($itemType == 'premium'){
+            } elseif( $itemType === 'premium'){
                 $this->dao->where('b_premium', 1);
             }
 
@@ -689,28 +689,28 @@
             $this->dao->from($this->getTableName());
             $this->dao->where("s_contact_email = '" . $email . "'");
 
-            if($itemType=='blocked') {
+            if( $itemType === 'blocked') {
                 $this->dao->where('b_enabled', 0);
-            } elseif($itemType != 'all') {
+            } elseif( $itemType !== 'all') {
                 $this->dao->where('b_enabled', 1);
             }
 
-            if($itemType == 'active') {
+            if( $itemType === 'active') {
                 $this->dao->where('b_active', 1);
                 $this->dao->where("dt_expiration > '" . date('Y-m-d H:i:s') . "'");
 
-            } elseif($itemType == 'nospam') {
+            } elseif( $itemType === 'nospam') {
                 $this->dao->where('b_spam', 0);
                 $this->dao->where('b_active', 1);
                 $this->dao->where("dt_expiration > '" . date('Y-m-d H:i:s') . "'");
 
-            } elseif($itemType == 'expired'){
+            } elseif( $itemType === 'expired'){
                 $this->dao->where("dt_expiration <= '" . date('Y-m-d H:i:s') . "'");
 
-            } elseif($itemType == 'pending_validate'){
+            } elseif( $itemType === 'pending_validate'){
                 $this->dao->where('b_active', 0);
 
-            } elseif($itemType == 'premium'){
+            } elseif( $itemType === 'premium'){
                 $this->dao->where('b_premium', 1);
             }
 
@@ -955,7 +955,7 @@
             $array = array();
             // prepare data - date interval - from <-> to
             foreach($aTemp as $value) {
-                if($value['e_type'] == 'DATEINTERVAL') {
+                if( $value['e_type'] === 'DATEINTERVAL') {
                     $aValue = array();
                     if( isset($array[$value['pk_i_id']]) ) {
                         $aValue = $array[$value['pk_i_id']]['s_value'];

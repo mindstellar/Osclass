@@ -616,7 +616,7 @@
 		 */
         public function orderBy($orderby, $direction = '')
         {
-            if(strtolower($direction) == 'random') {
+            if( strtolower($direction) === 'random') {
                 $direction = ' RAND()';
             } elseif( trim($direction) != '' ) {
                 $direction = in_array(strtoupper(trim($direction)), array('ASC', 'DESC')) ? ' ' . $direction : ' ASC';
@@ -1221,7 +1221,7 @@
                         } else {
                             // check NULL default values
                             // if new default value is diferent, alter column ...
-                            if($default_match[1] != 'NULL' ) {
+                            if( $default_match[1] !== 'NULL' ) {
                                 $struct_queries[] = 'ALTER TABLE ' . $table . ' ALTER COLUMN ' . $tbl_field['Field'] . ' SET DEFAULT ' . $default_match[1];
                             }
                         }
@@ -1260,7 +1260,7 @@
 
                     // if PRIMARY KEY already exist
                     $exist_primary = false;
-                    if($k == 'PRIMARY') {
+                    if( $k === 'PRIMARY') {
                         if(isset($indexes_array['PRIMARY'])) {
                             if(count($indexes_array['PRIMARY']['columns'])>0) {
                                 $exist_primary = true;
@@ -1269,11 +1269,11 @@
                     }
 
                     $string = '';
-                    if ($k=='PRIMARY') {
+                    if ( $k === 'PRIMARY') {
                         $string .= 'PRIMARY KEY ';
                     } else if($v['unique']) {
                         $string .= 'UNIQUE KEY ';
-                    } else if($v['index_type'] == 'FULLTEXT') {  // FULLTEXT INDEX MUST HAVE KEY_NAME
+                    } else if( $v['index_type'] === 'FULLTEXT') {  // FULLTEXT INDEX MUST HAVE KEY_NAME
                         $string .= 'FULLTEXT '.$k.' ';
                     } else {
                         if( ( count($v['columns']) == 1 && $v['columns'][0]['fieldname'] !=  $k ) || ( preg_match('/^idx/', $k, $coincidencias) > 0 ) ) {
@@ -1586,7 +1586,7 @@
                 $sql .= implode(', ', $this->aOrderby);
 
                 if($this->aOrder !== false) {
-                    $sql .= ($this->aOrder == 'desc') ? ' DESC' : ' ASC';
+                    $sql .= ( $this->aOrder === 'desc') ? ' DESC' : ' ASC';
                 }
             }
 

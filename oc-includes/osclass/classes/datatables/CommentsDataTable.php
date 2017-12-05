@@ -164,13 +164,13 @@
 	        $this->showAll = Params::getParam( 'showAll' ) != 'off';
 
             foreach($_get as $k => $v) {
-                if( ( $k == 'resourceId' ) && !empty($v) ) {
+                if( ( $k === 'resourceId' ) && !empty($v) ) {
 	                $this->resourceID = (int) $v;
                 }
-                if( $k == 'iDisplayStart' ) {
+                if( $k === 'iDisplayStart' ) {
 	                $this->start = (int) $v;
                 }
-                if( $k == 'iDisplayLength' ) {
+                if( $k === 'iDisplayLength' ) {
 	                $this->limit = (int) $v;
                 }
             }

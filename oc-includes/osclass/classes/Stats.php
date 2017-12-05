@@ -57,10 +57,10 @@
 	     */
 	    public function new_users_count( $from_date , $date = 'day' )
         {    
-            if($date=='week') {
+            if( $date === 'week') {
                 $this->conn->select('WEEK(dt_reg_date) as d_date, COUNT(pk_i_id) as num');
                 $this->conn->groupBy('WEEK(dt_reg_date)');
-            } else if($date=='month') {
+            } else if( $date === 'month') {
                 $this->conn->select('MONTHNAME(dt_reg_date) as d_date, COUNT(pk_i_id) as num');
                 $this->conn->groupBy('MONTH(dt_reg_date)');
             } else {
@@ -132,10 +132,10 @@
 	     */
 	    public function new_items_count( $from_date , $date = 'day' )
         {
-            if($date=='week') {
+            if( $date === 'week') {
                 $this->conn->select('WEEK(dt_pub_date) as d_date, COUNT(pk_i_id) as num');
                 $this->conn->groupBy('WEEK(dt_pub_date)');
-            } else if($date=='month') {
+            } else if( $date === 'month') {
                 $this->conn->select('MONTHNAME(dt_pub_date) as d_date, COUNT(pk_i_id) as num');
                 $this->conn->groupBy('MONTH(dt_pub_date)');
             } else {
@@ -178,10 +178,10 @@
 	     */
 	    public function new_comments_count( $from_date , $date = 'day' )
         {
-            if($date=='week') {
+            if( $date === 'week') {
                 $this->conn->select('WEEK(dt_pub_date) as d_date, COUNT(pk_i_id) as num');
                 $this->conn->groupBy('WEEK(dt_pub_date)');
-            } else if($date=='month') {
+            } else if( $date === 'month') {
                 $this->conn->select('MONTH(dt_pub_date) as d_date, COUNT(pk_i_id) as num');
                 $this->conn->groupBy('MONTH(dt_pub_date)');
             } else {
@@ -220,10 +220,10 @@
 	     */
 	    public function new_reports_count( $from_date , $date = 'day' )
         {
-            if($date=='week') {
+            if( $date === 'week') {
                 $this->conn->select('WEEK(dt_date) as d_date, SUM(i_num_views) as views, SUM(i_num_spam) as spam, SUM(i_num_repeated) as repeated, SUM(i_num_bad_classified) as bad_classified, SUM(i_num_offensive) as offensive, SUM(i_num_expired) as expired');
                 $this->conn->groupBy('WEEK(dt_date)');
-            } else if($date=='month') {
+            } else if( $date === 'month') {
                 $this->conn->select('MONTHNAME(dt_date) as d_date, SUM(i_num_views) as views, SUM(i_num_spam) as spam, SUM(i_num_repeated) as repeated, SUM(i_num_bad_classified) as bad_classified, SUM(i_num_offensive) as offensive, SUM(i_num_expired) as expired');
                 $this->conn->groupBy('MONTH(dt_date)');
             } else {
@@ -246,10 +246,10 @@
 	     */
 	    public function new_alerts_count( $from_date , $date = 'day' )
         {
-            if($date=='week') {
+            if( $date === 'week') {
                 $this->conn->select('WEEK(dt_date) as d_date, COUNT(s_email) as num');
                 $this->conn->groupBy('WEEK(dt_date)');
-            } else if($date=='month') {
+            } else if( $date === 'month') {
                 $this->conn->select('MONTHNAME(dt_date) as d_date, COUNT(s_email) as num');
                 $this->conn->groupBy('MONTH(dt_date)');
             } else {
@@ -274,10 +274,10 @@
 	     */
 	    public function new_subscribers_count( $from_date , $date = 'day' )
         {
-            if($date=='week') {
+            if( $date === 'week') {
                 $this->conn->select('WEEK(dt_date) as d_date, COUNT(DISTINCT s_email) as num');
                 $this->conn->groupBy('WEEK(dt_date)');
-            } else if($date=='month') {
+            } else if( $date === 'month') {
                 $this->conn->select('MONTHNAME(dt_date) as d_date, COUNT(DISTINCT s_email) as num');
                 $this->conn->groupBy('MONTH(dt_date)');
             } else {

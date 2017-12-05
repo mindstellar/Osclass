@@ -31,7 +31,7 @@
 
     $listClass = '';
     $buttonClass = '';
-    if(Params::getParam('ShowAs') == 'gallery'){
+    if( Params::getParam('ShowAs') === 'gallery'){
         $listClass = 'listing-grid';
         $buttonClass = 'active';
     }

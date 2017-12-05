@@ -157,8 +157,8 @@
             // strpos is used to check if the domain is different, useful when accessing the website by diferent domains
 	        if ( $subdomain_type != '' && $subhost != '' && strpos( $host , $subhost ) !== false && preg_match( '|^(www\.)?(.+)\.' . $subhost . '$|i' , $host , $match ) ) {
 		        $subdomain = $match[ 2 ];
-		        if ( $subdomain != '' && $subdomain != 'www' ) {
-			        if ( $subdomain_type == 'category' ) {
+		        if ( $subdomain != '' && $subdomain !== 'www' ) {
+			        if ( $subdomain_type === 'category' ) {
 				        $category = Category::newInstance()->findBySlug( $subdomain );
 				        if ( isset( $category[ 'pk_i_id' ] ) ) {
 					        View::newInstance()->_exportVariableToView( 'subdomain_name' , $category[ 's_name' ] );
@@ -170,7 +170,7 @@
 				        } else {
 					        $this->do400();
 				        }
-			        } else if ( $subdomain_type == 'country' ) {
+			        } else if ( $subdomain_type === 'country' ) {
 				        $country = Country::newInstance()->findBySlug( $subdomain );
 				        if ( isset( $country[ 'pk_c_code' ] ) ) {
 					        View::newInstance()->_exportVariableToView( 'subdomain_name' , $country[ 's_name' ] );
@@ -179,7 +179,7 @@
 				        } else {
 					        $this->do400();
 				        }
-			        } else if ( $subdomain_type == 'region' ) {
+			        } else if ( $subdomain_type === 'region' ) {
 				        $region = Region::newInstance()->findBySlug( $subdomain );
 				        if ( isset( $region[ 'pk_i_id' ] ) ) {
 					        View::newInstance()->_exportVariableToView( 'subdomain_name' , $region[ 's_name' ] );
@@ -188,7 +188,7 @@
 				        } else {
 					        $this->do400();
 				        }
-			        } else if ( $subdomain_type == 'city' ) {
+			        } else if ( $subdomain_type === 'city' ) {
 				        $city = City::newInstance()->findBySlug( $subdomain );
 				        if ( isset( $city[ 'pk_i_id' ] ) ) {
 					        View::newInstance()->_exportVariableToView( 'subdomain_name' , $city[ 's_name' ] );
@@ -197,7 +197,7 @@
 				        } else {
 					        $this->do400();
 				        }
-			        } else if ( $subdomain_type == 'user' ) {
+			        } else if ( $subdomain_type === 'user' ) {
 				        $user = User::newInstance()->findByUsername( $subdomain );
 				        if ( isset( $user[ 'pk_i_id' ] ) ) {
 					        View::newInstance()->_exportVariableToView( 'subdomain_name' , $user[ 's_name' ] );

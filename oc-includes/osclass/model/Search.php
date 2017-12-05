@@ -326,7 +326,7 @@
             if($table == '') {
                 $this->order_column = $o_c;
             } else if($table != ''){
-                if( $table == '%st_user' ) {
+                if( $table === '%st_user' ) {
                     $this->order_column = sprintf("ISNULL($table.$o_c), $table.$o_c", DB_TABLE_PREFIX, DB_TABLE_PREFIX);
                 } else {
                     $this->order_column = sprintf("$table.$o_c", DB_TABLE_PREFIX);

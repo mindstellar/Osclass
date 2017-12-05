@@ -156,14 +156,14 @@ FB;
 		public static function type_select( $field = null ) {
             ?>
             <select name="field_type" id="field_type">
-                <option value="TEXT" <?php if( $field['e_type'] == 'TEXT' ) { echo 'selected="selected"';} ?>><?php _e( 'TEXT'); ?></option>
-                <option value="TEXTAREA" <?php if( $field['e_type'] == 'TEXTAREA' ) { echo 'selected="selected"';} ?>><?php _e( 'TEXTAREA'); ?></option>
-                <option value="DROPDOWN" <?php if( $field['e_type'] == 'DROPDOWN' ) { echo 'selected="selected"';} ?>><?php _e( 'DROPDOWN'); ?></option>
-                <option value="RADIO" <?php if( $field['e_type'] == 'RADIO' ) { echo 'selected="selected"';} ?>><?php _e( 'RADIO'); ?></option>
-                <option value="CHECKBOX" <?php if( $field['e_type'] == 'CHECKBOX' ) { echo 'selected="selected"';} ?>><?php _e( 'CHECKBOX'); ?></option>
-                <option value="URL" <?php if( $field['e_type'] == 'URL' ) { echo 'selected="selected"';} ?>><?php _e( 'URL'); ?></option>
-                <option value="DATE" <?php if( $field['e_type'] == 'DATE' ) { echo 'selected="selected"';} ?>><?php _e( 'DATE'); ?></option>
-                <option value="DATEINTERVAL" <?php if( $field['e_type'] == 'DATEINTERVAL' ) { echo 'selected="selected"';} ?>><?php _e( 'DATE INTERVAL'); ?></option>
+                <option value="TEXT" <?php if( $field['e_type'] === 'TEXT' ) { echo 'selected="selected"';} ?>><?php _e( 'TEXT'); ?></option>
+                <option value="TEXTAREA" <?php if( $field['e_type'] === 'TEXTAREA' ) { echo 'selected="selected"';} ?>><?php _e( 'TEXTAREA'); ?></option>
+                <option value="DROPDOWN" <?php if( $field['e_type'] === 'DROPDOWN' ) { echo 'selected="selected"';} ?>><?php _e( 'DROPDOWN'); ?></option>
+                <option value="RADIO" <?php if( $field['e_type'] === 'RADIO' ) { echo 'selected="selected"';} ?>><?php _e( 'RADIO'); ?></option>
+                <option value="CHECKBOX" <?php if( $field['e_type'] === 'CHECKBOX' ) { echo 'selected="selected"';} ?>><?php _e( 'CHECKBOX'); ?></option>
+                <option value="URL" <?php if( $field['e_type'] === 'URL' ) { echo 'selected="selected"';} ?>><?php _e( 'URL'); ?></option>
+                <option value="DATE" <?php if( $field['e_type'] === 'DATE' ) { echo 'selected="selected"';} ?>><?php _e( 'DATE'); ?></option>
+                <option value="DATEINTERVAL" <?php if( $field['e_type'] === 'DATEINTERVAL' ) { echo 'selected="selected"';} ?>><?php _e( 'DATE INTERVAL'); ?></option>
             </select>
             <?php
             return true;
@@ -177,7 +177,7 @@ FB;
 
             if($field!=null) {
                 // date interval
-                if($field['e_type']=='DATEINTERVAL') {
+                if( $field['e_type'] === 'DATEINTERVAL') {
                     $field['s_value'] = array();
                     $field['s_value']['from']   = '';
                     $field['s_value']['to']     = '';
@@ -207,7 +207,7 @@ FB;
                     }
                 }
 
-                if( $field['e_type'] == 'TEXTAREA' ) {
+                if( $field['e_type'] === 'TEXTAREA' ) {
                     if($search) {
                         echo '<h6>'.$field['s_name'].'</h6>';
                         echo '<input id="meta_'.$field['s_slug'].'" type="text" name="meta['.$field['pk_i_id'].']" value="' . osc_esc_html((isset($field) && isset($field[ 's_value' ])) ? $field[ 's_value' ] : '' ) . '" />';
@@ -217,7 +217,7 @@ FB;
                         echo '<label for="meta_'.$field['s_slug'].'">'.$field['s_name'].': </label>';
                         echo '<textarea id="meta_' . $field['s_slug'] . '" name="meta['.$field['pk_i_id'].']" rows="10">' . ((isset($field) && isset($field_textarea_value)) ? $field_textarea_value : '' ) . '</textarea>';
                     }
-                } else if( $field['e_type'] == 'DROPDOWN' ) {
+                } else if( $field['e_type'] === 'DROPDOWN' ) {
                     if($search) {
                         echo '<h6>'.$field['s_name'].'</h6>';
                     } else {
@@ -236,7 +236,7 @@ FB;
                             echo '</select>';
                         }
                     }
-                } else if( $field['e_type'] == 'RADIO' ) {
+                } else if( $field['e_type'] === 'RADIO' ) {
                     // radio at search page, becomes dropdown with radio options
                     if($search) {
                         echo '<h6>'.$field['s_name'].'</h6>';
@@ -261,12 +261,12 @@ FB;
                             }
                         }
                     }
-                } else if( $field['e_type'] == 'CHECKBOX' ) {
+                } else if( $field['e_type'] === 'CHECKBOX' ) {
                     if(isset($field) && isset($field['s_options'])) {
                         echo '<input type="checkbox" name="meta['.$field['pk_i_id'].']" id="meta_' . $field['s_slug'] .'" value="1"'.((isset($field) && isset($field['s_value']) && $field['s_value']==1)?' checked="checked"':'').' />';
                         echo '<label for="meta_'.$field['s_slug'].'">'. $field['s_name'].' </label>';
                     }
-                } else if( $field['e_type'] == 'DATE' ) {
+                } else if( $field['e_type'] === 'DATE' ) {
                     if($search) {
                         echo '<h6>'.$field['s_name'].'</h6>';
                     } else {
@@ -277,7 +277,7 @@ FB;
                     echo '<input type="text" id="" class="meta_'.$field['s_slug'].' cf_date" value="" />';
 	                self::initDatePicker( 'meta_' . $field[ 's_slug' ] , osc_date_format() , $field[ 's_value' ] );
 
-                } else if( $field['e_type'] == 'DATEINTERVAL' ) {
+                } else if( $field['e_type'] === 'DATEINTERVAL' ) {
                     if($search) {
                         echo '<h6>'.$field['s_name'].'</h6>';
                     } else {
@@ -331,11 +331,11 @@ FB;
             if(count($aCustomFields)>0) {
                 echo '<fieldset>';
                 foreach($aCustomFields as $field) {
-                    if($field['e_type']=='DATEINTERVAL') {
+                    if( $field['e_type'] === 'DATEINTERVAL') {
                         echo '<div class="row two_input">';
-                    } else if($field['e_type']=='CHECKBOX') {
+                    } else if( $field['e_type'] === 'CHECKBOX') {
                         echo '<div class="row checkbox">';
-                    } else if($field['e_type']=='RADIO') {
+                    } else if( $field['e_type'] === 'RADIO') {
                         echo '<div class="row radio">';
                     } else {
                         echo '<div class="row one_input">';

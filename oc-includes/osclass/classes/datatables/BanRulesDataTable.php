@@ -134,19 +134,19 @@
             $this->order_by['column_name'] = 'pk_i_id';
             $this->order_by['type'] = 'DESC';
             foreach($_get as $k=>$v) {
-                if( $k == 'user') {
+                if( $k === 'user') {
                     $this->search = $v;
                 }
-                if( $k == 'userId' && $v != '') {
+                if( $k === 'userId' && $v != '') {
                     $this->withUserId = true;
                     $this->userId = $v;
                 }
 
                 /* for sorting */
-                if( $k == 'iSortCol_0' ) {
+                if( $k === 'iSortCol_0' ) {
                     $this->order_by['column_name'] = $this->column_names[$v];
                 }
-                if( $k == 'sSortDir_0' ) {
+                if( $k === 'sSortDir_0' ) {
                     $this->order_by['type'] = $v;
                 }
             }

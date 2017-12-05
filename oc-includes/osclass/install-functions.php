@@ -91,7 +91,7 @@
 	 * @return string
 	 */
 	function get_absolute_url() {
-    $protocol = ( getServerParam('HTTPS') == 'on' || getServerParam('HTTP_X_FORWARDED_PROTO')=='https') ? 'https' : 'http';
+    $protocol = ( getServerParam('HTTPS') === 'on' || getServerParam( 'HTTP_X_FORWARDED_PROTO') === 'https') ? 'https' : 'http';
     $pos      = strpos(getServerParam('REQUEST_URI'), 'oc-includes');
     $URI      = rtrim( substr( getServerParam('REQUEST_URI'), 0, $pos ), '/' ) . '/';
     return $protocol . '://' . getServerParam('HTTP_HOST') . $URI;
@@ -536,7 +536,7 @@ function oc_install_example_data() {
     $mItem = new ItemActions(true);
 
     foreach($item as $k => $v) {
-        if($k=='description' || $k=='title') {
+        if( $k === 'description' || $k === 'title') {
             Params::setParam($k, array(osc_current_admin_locale() => $v));
         } else {
             Params::setParam($k, $v);

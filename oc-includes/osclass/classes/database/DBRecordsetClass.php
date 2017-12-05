@@ -100,7 +100,7 @@
          */
         public function result($type = 'array')
         {
-            if($type == 'array') {
+            if( $type === 'array') {
                 return $this->resultArray();
             }
 
@@ -199,7 +199,7 @@
                 $n = 0;
             }
 
-            if( $type == 'array' ) {
+            if( $type === 'array' ) {
                 return $this->rowArray($n);
             }
 

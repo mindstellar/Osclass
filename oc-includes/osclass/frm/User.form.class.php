@@ -418,7 +418,7 @@ function checkForm() {
     $(document).ready(function(){
         $("#countryId").on("change",function(){
             var pk_c_code = $(this).val();
-            <?php if($path == 'admin') { ?>
+            <?php if($path === 'admin') { ?>
                 var url = '<?php echo osc_admin_base_url(true) . '?page=ajax&action=regions&countryId='; ?>' + pk_c_code;
             <?php } else { ?>
                 var url = '<?php echo osc_base_url(true) . '?page=ajax&action=regions&countryId='; ?>' + pk_c_code;
@@ -486,7 +486,7 @@ function checkForm() {
 
         $("#regionId").on("change",function(){
             var pk_c_code = $(this).val();
-            <?php if($path == 'admin') { ?>
+            <?php if($path === 'admin') { ?>
                 var url = '<?php echo osc_admin_base_url(true) . '?page=ajax&action=cities&regionId='; ?>' + pk_c_code;
             <?php } else { ?>
                 var url = '<?php echo osc_base_url(true) . '?page=ajax&action=cities&regionId='; ?>' + pk_c_code;

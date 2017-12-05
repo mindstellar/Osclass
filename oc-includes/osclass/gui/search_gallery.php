@@ -42,7 +42,7 @@
                      <p><?php echo osc_highlight( strip_tags( osc_premium_description() ) ); ?></p>
                  </td>
              </tr>
-            <?php $class = ($class == 'even') ? 'odd' : 'even'; ?>
+            <?php $class = ( $class === 'even') ? 'odd' : 'even'; ?>
         <?php } ?>
     </tbody>
 </table>
@@ -71,7 +71,7 @@
                      <p><?php echo osc_highlight( strip_tags( osc_item_description() ) ); ?></p>
                  </td>
              </tr>
-            <?php $class = ($class == 'even') ? 'odd' : 'even'; ?>
+            <?php $class = ( $class === 'even') ? 'odd' : 'even'; ?>
         <?php } ?>
     </tbody>
 </table>

@@ -59,14 +59,14 @@
         {
 
             $arg_date = '&sort=date';
-            if(Params::getParam('sort') == 'date') {
-                if(Params::getParam('direction') == 'desc') {
+            if( Params::getParam('sort') === 'date') {
+                if( Params::getParam('direction') === 'desc') {
                     $arg_date .= '&direction=asc';
                 }
             }
             $arg_item = '&sort=attached_to';
-            if(Params::getParam('sort') == 'attached_to') {
-                if(Params::getParam('direction') == 'desc') {
+            if( Params::getParam('sort') === 'attached_to') {
+                if( Params::getParam('direction') === 'desc') {
                     $arg_item .= '&direction=asc';
                 }
             }
@@ -119,16 +119,16 @@
         {
             
             foreach($_get as $k => $v) {
-                if( ( $k == 'resourceId' ) && !empty($v) ) {
+                if( ( $k === 'resourceId' ) && !empty($v) ) {
 	                $this->resourceID = (int) $v;
                 }
-                if( $k == 'iDisplayStart' ) {
+                if( $k === 'iDisplayStart' ) {
 	                $this->start = (int) $v;
                 }
-                if( $k == 'iDisplayLength' ) {
+                if( $k === 'iDisplayLength' ) {
 	                $this->limit = (int) $v;
                 }
-                if( $k == 'sEcho' ) {
+                if( $k === 'sEcho' ) {
 	                $this->sEcho = (int) $v;
                 }
             }

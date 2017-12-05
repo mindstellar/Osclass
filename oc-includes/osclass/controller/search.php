@@ -171,7 +171,7 @@
 
             $uriParams = Params::getParamsAsArray();
             $searchUri = osc_search_url($uriParams);
-            if($this->uri!='feed') {
+            if( $this->uri !== 'feed') {
                 $_base_url = WEB_PATH;
                 if( MULTISITE==1 ) {
                     $_base_url = osc_multisite_url();

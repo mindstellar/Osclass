@@ -118,7 +118,7 @@
                                                         $request_uri = preg_replace('#'.$match.'#', $uri, $request_uri);
                                                         if(preg_match('|([&?]{1})page=([^&]*)|', '&'.$request_uri.'&', $match)) {
 															$page_redirect = $match[2];
-															if($page_redirect=='' || $page_redirect=='login') {
+															if($page_redirect=='' || $page_redirect === 'login') {
 																$url_redirect = osc_user_dashboard_url();
 															}
 														}

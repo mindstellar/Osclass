@@ -92,7 +92,7 @@
                 $this->_height = imagesy($this->im);
 
                 $this->_exif = array();
-                if(@$this->image_info['mime']=='image/jpeg' && function_exists('exif_read_data')) {
+                if( @$this->image_info['mime'] === 'image/jpeg' && function_exists( 'exif_read_data')) {
                     $this->_exif = @exif_read_data($imagePath);
                 }
 
@@ -195,7 +195,7 @@
 
             if($this->_use_imagick) {
                 $bg = new Imagick();
-                if($this->ext=='jpg') {
+                if( $this->ext === 'jpg') {
                     $bg->newImage($width, $height, 'white');
                 } else {
                     $bg->newImage($width, $height, 'none');
@@ -233,12 +233,12 @@
                 $ext = $this->ext;
             }
 
-            if($ext!='png' && $ext!='gif') {
+            if( $ext !== 'png' && $ext !== 'gif') {
                 $ext = 'jpeg';
             }
 
             if($this->_use_imagick) {
-                if($ext=='jpeg' && ($this->ext!='jpeg' && $this->ext!='jpg')) {
+                if( $ext === 'jpeg' && ( $this->ext !== 'jpeg' && $this->ext !== 'jpg')) {
                     $bg = new Imagick();
                     $bg->newImage($this->_width, $this->_height, 'white');
                     $this->im->thumbnailImage($this->_width, $this->_height, true);
@@ -257,7 +257,7 @@
                         imagepng($this->im, $imagePath, 0);
                         break;
                     default:
-                        if(($ext=='jpeg' && ($this->ext!='jpeg' && $this->ext!='jpg')) || $this->_watermarked) {
+                        if( ( $ext === 'jpeg' && ( $this->ext !== 'jpeg' && $this->ext !== 'jpg')) || $this->_watermarked) {
                             $this->ext = 'jpeg';
                         }
                         imagejpeg($this->im, $imagePath);
@@ -418,7 +418,7 @@
             } else {
                 imagealphablending( $this->im, true );
                 imagesavealpha( $this->im, true );
-                if($this->ext!='jpg') {
+                if( $this->ext !== 'jpg') {
                     $white = imagecolorallocatealpha($this->im, 255, 255, 255, 127);
                     imagefill($this->im, 0, 0, $white);
                 }

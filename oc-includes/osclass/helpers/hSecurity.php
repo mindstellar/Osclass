@@ -163,7 +163,7 @@
                                     $matched = false;
                                     break;
                                 }
-                            } else if( $blocks[$k] != '*' && $blocks[$k] != $ip_blocks[$k]) {
+                            } else if( $blocks[$k] !== '*' && $blocks[$k] != $ip_blocks[$k]) {
                                 $matched = false;
                                 break;
                             }
@@ -197,7 +197,7 @@
 		        "\\"
 	        ) , str_replace( '.' , "\.", strtolower( $rule['s_email'])) );
             if($rule!='') {
-	            if ( $rule[ 0 ] == '!' ) {
+	            if ( $rule[ 0 ] === '!' ) {
                     $rule = '|^((?'.$rule.').*)$|';
                 } else {
                     $rule = '|^'.$rule.'$|';

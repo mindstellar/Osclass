@@ -29,7 +29,7 @@
     bender_add_body_class('search');
     $listClass = '';
     $buttonClass = '';
-    if(osc_search_show_as() == 'gallery'){
+    if( osc_search_show_as() === 'gallery'){
           $listClass = 'listing-grid';
           $buttonClass = 'active';
     }
@@ -87,7 +87,7 @@
               $orders = osc_list_orders();
               $current = '';
               foreach($orders as $label => $params) {
-                  $orderType = ($params['iOrderType'] == 'asc') ? '0' : '1';
+                  $orderType = ( $params['iOrderType'] === 'asc') ? '0' : '1';
                   if(osc_search_order() == $params['sOrder'] && osc_search_order_type() == $orderType) {
                       $current = $label;
                   }
@@ -98,7 +98,7 @@
               <ul>
                   <?php
                   foreach($orders as $label => $params) {
-                      $orderType = ($params['iOrderType'] == 'asc') ? '0' : '1'; ?>
+                      $orderType = ( $params['iOrderType'] === 'asc') ? '0' : '1'; ?>
                       <?php if(osc_search_order() == $params['sOrder'] && osc_search_order_type() == $orderType) { ?>
                           <li><a class="current" href="<?php echo osc_esc_html(osc_update_search_url($params)); ?>"><?php echo $label; ?></a></li>
                       <?php } else { ?>

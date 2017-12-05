@@ -60,8 +60,8 @@
                 <div class="form-label"><?php _e('Show lists as:', 'bender'); ?></div>
                 <div class="form-controls">
                     <select name="defaultShowAs@all">
-                        <option value="gallery" <?php if(bender_default_show_as() == 'gallery'){ echo 'selected="selected"' ; } ?>><?php _e('Gallery','bender'); ?></option>
-                        <option value="list" <?php if(bender_default_show_as() == 'list'){ echo 'selected="selected"' ; } ?>><?php _e('List','bender'); ?></option>
+                        <option value="gallery" <?php if( bender_default_show_as() === 'gallery'){ echo 'selected="selected"' ; } ?>><?php _e( 'Gallery', 'bender'); ?></option>
+                        <option value="list" <?php if( bender_default_show_as() === 'list'){ echo 'selected="selected"' ; } ?>><?php _e( 'List', 'bender'); ?></option>
                     </select>
                 </div>
             </div>
@@ -84,8 +84,8 @@
                 <div class="form-label"><?php _e('Show location input as:', 'bender'); ?></div>
                 <div class="form-controls">
                     <select name="defaultLocationShowAs">
-                        <option value="dropdown" <?php if(bender_default_location_show_as() == 'dropdown'){ echo 'selected="selected"' ; } ?>><?php _e('Dropdown','bender'); ?></option>
-                        <option value="autocomplete" <?php if(bender_default_location_show_as() == 'autocomplete'){ echo 'selected="selected"' ; } ?>><?php _e('Autocomplete','bender'); ?></option>
+                        <option value="dropdown" <?php if( bender_default_location_show_as() === 'dropdown'){ echo 'selected="selected"' ; } ?>><?php _e( 'Dropdown', 'bender'); ?></option>
+                        <option value="autocomplete" <?php if( bender_default_location_show_as() === 'autocomplete'){ echo 'selected="selected"' ; } ?>><?php _e( 'Autocomplete', 'bender'); ?></option>
                     </select>
                 </div>
             </div>

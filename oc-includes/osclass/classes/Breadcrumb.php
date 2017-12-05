@@ -50,7 +50,7 @@
 
             switch($this->getLocation()) {
                 case('item'):
-                    if( $this->getSection() == 'item_add' ) {
+                    if( $this->getSection() === 'item_add' ) {
                         $l = array('title' => $this->title['item_add']);
                         $this->addLevel($l);
                         break;
@@ -194,14 +194,14 @@
                 break;
                 case('user'):
                     // use dashboard without url if you're in the dashboards
-                    if( $this->getSection() == 'dashboard' ) {
+                    if( $this->getSection() === 'dashboard' ) {
                         $l = array('title' => $this->title['user_dashboard']);
                         $this->addLevel($l);
                         break;
                     }
 
                     // use dashboard without url if you're in the dashboards
-                    if( $this->getSection() == 'pub_profile' ) {
+                    if( $this->getSection() === 'pub_profile' ) {
                         $l = array('title' => sprintf($this->title['user_dashboard_profile'], osc_user_name()));
                         $this->addLevel($l);
                         break;

@@ -138,7 +138,7 @@ class Object_Cache_apc implements iObject_Cache{
         } else {
             $value = apc_fetch( $key , $found);
 
-            if ( is_object( $value ) && 'ArrayObject' == get_class( $value ) ) {
+            if ( is_object( $value ) && 'ArrayObject' === get_class( $value ) ) {
                 $value = $value->getArrayCopy();
             }
             if ( NULL === $value ) {

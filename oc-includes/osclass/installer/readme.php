@@ -79,7 +79,7 @@
 	 */
 	function osc_getAbsoluteWebURL() {
     $protocol = 'http';
-    if((isset($_SERVER['HTTP_X_FORWARDED_PROTO']) && strtolower($_SERVER['HTTP_X_FORWARDED_PROTO'])=='https') || (isset($_SERVER['HTTPS']) && ($_SERVER['HTTPS'] == 'on' || $_SERVER['HTTPS'] == 1))) {
+    if( (isset($_SERVER['HTTP_X_FORWARDED_PROTO']) && strtolower($_SERVER['HTTP_X_FORWARDED_PROTO']) === 'https') || ( isset($_SERVER['HTTPS']) && ( $_SERVER['HTTPS'] === 'on' || $_SERVER['HTTPS'] == 1))) {
         $protocol = 'https';
     }
     return $protocol . '://' . getServerParam('HTTP_HOST') . osc_getRelativeWebURL();

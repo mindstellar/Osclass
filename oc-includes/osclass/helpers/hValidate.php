@@ -225,7 +225,7 @@
      * @return boolean
      */
     function osc_validate_spam_delay($type = 'item') {
-        if ($type == 'item') {
+        if ( $type === 'item') {
             $delay = osc_item_spam_delay();
             $saved_as = 'last_submit_item';
         } else {

@@ -56,7 +56,7 @@
 
         public function showAuthFailPage()
         {
-            if(Params::getParam('page')=='ajax') {
+            if( Params::getParam('page') === 'ajax') {
                 echo json_encode(array('error' => 1, 'msg' => __('Session timed out')));
                 exit;
             } else {

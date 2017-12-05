@@ -27,7 +27,7 @@
 
     $buttonClass = '';
     $listClass   = '';
-    if(bender_show_as() == 'gallery'){
+    if( bender_show_as() === 'gallery'){
           $listClass = 'listing-grid';
           $buttonClass = 'active';
     }

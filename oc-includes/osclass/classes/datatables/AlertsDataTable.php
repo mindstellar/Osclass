@@ -163,15 +163,15 @@
             $this->order_by['column_name'] = 'dt_date';
             $this->order_by['type'] = 'DESC';
             foreach($_get as $k=>$v) {
-                if( $k == 'sSearch' ) {
+                if( $k === 'sSearch' ) {
                     $this->search = $v;
                 }
 
                 /* for sorting */
-                if( $k == 'iSortCol_0' ) {
+                if( $k === 'iSortCol_0' ) {
                     $this->order_by['column_name'] = $column_names[$v];
                 }
-                if( $k == 'sSortDir_0' ) {
+                if( $k === 'sSortDir_0' ) {
                     $this->order_by['type'] = $v;
                 }
             }

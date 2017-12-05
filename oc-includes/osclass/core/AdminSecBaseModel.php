@@ -49,16 +49,16 @@
             $config_version = preg_replace('|-.*|', '', $config_version);
 
             if( $config_version > osc_get_preference('version') && MULTISITE==0) {
-                if(get_class($this) == 'CAdminTools') {
+                if( get_class($this) === 'CAdminTools') {
                 } else {
-	                if ( get_class( $this ) != 'CAdminUpgrade' ) {
+	                if ( get_class( $this ) !== 'CAdminUpgrade' ) {
 		                $this->redirectTo( osc_admin_base_url( true ) . '?page=upgrade' );
 	                }
                 }
             }
 
             // show donation successful
-            if( Params::getParam('donation') == 'successful' ) {
+            if( Params::getParam('donation') === 'successful' ) {
                 osc_add_flash_ok_message(_m('Thank you very much for your donation'), 'admin');
             }
 
@@ -106,7 +106,7 @@
 
         public function showAuthFailPage()
         {
-            if(Params::getParam('page')=='ajax') {
+            if( Params::getParam('page') === 'ajax') {
                 echo json_encode(array('error' => 1, 'msg' => __('Session timed out')));
                 exit;
             } else {

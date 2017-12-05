@@ -142,7 +142,7 @@ class Object_Cache_memcache implements iObject_Cache{
         } else {
             $found = true;
             $value = $this->_memcached->get($key);
-            if ( is_object( $value ) && 'ArrayObject' == get_class( $value ) ) {
+            if ( is_object( $value ) && 'ArrayObject' === get_class( $value ) ) {
                 $value = $value->getArrayCopy();
             }
             if ( NULL === $value ) {

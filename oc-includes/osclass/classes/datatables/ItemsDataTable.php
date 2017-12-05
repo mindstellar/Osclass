@@ -91,7 +91,7 @@
                 $this->mSearch->addHaving('i_num_spam > 0 OR i_num_bad_classified > 0 OR i_num_repeated > 0 OR i_num_offensive > 0 OR i_num_expired > 0');
             } else {
                 $sort = $arraySortColumns[$sort];
-                if($sort!='dt_pub_date') {
+                if( $sort !== 'dt_pub_date') {
                     $this->mSearch->addHaving($sort.' > 0');
                 } else {
                     $this->mSearch->addHaving('i_num_spam > 0 OR i_num_bad_classified > 0 OR i_num_repeated > 0 OR i_num_offensive > 0 OR i_num_expired > 0');
@@ -125,14 +125,14 @@
         {
 
             $arg_date = '&sort=date';
-            if(Params::getParam('sort') == 'date') {
-                if(Params::getParam('direction') == 'desc') {
+            if( Params::getParam('sort') === 'date') {
+                if( Params::getParam('direction') === 'desc') {
                     $arg_date .= '&direction=asc';
                 }
             }
             $arg_expiration = '&sort=expiration';
-            if(Params::getParam('sort') == 'expiration') {
-                if(Params::getParam('direction') == 'desc') {
+            if( Params::getParam('sort') === 'expiration') {
+                if( Params::getParam('direction') === 'desc') {
                     $arg_expiration .= '&direction=asc';
                 }
             }
@@ -174,37 +174,37 @@
 
             switch ($sort) {
                 case('spam'):
-	                if ( $direction == 'desc' || $direction == '' ) {
+	                if ( $direction === 'desc' || $direction == '' ) {
 		                $arg_spam .= '&direction=asc';
 	                }
                     break;
                 case('bad'):
-	                if ( $direction == 'desc' || $direction == '' ) {
+	                if ( $direction === 'desc' || $direction == '' ) {
 		                $arg_bad .= '&direction=asc';
 	                }
                     break;
                 case('rep'):
-	                if ( $direction == 'desc' || $direction == '' ) {
+	                if ( $direction === 'desc' || $direction == '' ) {
 		                $arg_rep .= '&direction=asc';
 	                }
                     break;
                 case('off'):
-	                if ( $direction == 'desc' || $direction == '' ) {
+	                if ( $direction === 'desc' || $direction == '' ) {
 		                $arg_off .= '&direction=asc';
 	                }
                     break;
                 case('exp'):
-	                if ( $direction == 'desc' || $direction == '' ) {
+	                if ( $direction === 'desc' || $direction == '' ) {
 		                $arg_exp .= '&direction=asc';
 	                }
                     break;
                 case('date'):
-	                if ( $direction == 'desc' || $direction == '' ) {
+	                if ( $direction === 'desc' || $direction == '' ) {
 		                $arg_date .= '&direction=asc';
 	                }
                     break;
                 case('expiration'):
-	                if ( $direction == 'desc' || $direction == '' ) {
+	                if ( $direction === 'desc' || $direction == '' ) {
 		                $arg_expiration .= '&direction=asc';
 	                }
                     break;
@@ -327,7 +327,7 @@
                     $row['category'] = $aRow['s_category_name'];
                     $row['location'] = $this->get_row_location();
                     $row['date'] = osc_format_date($aRow['dt_pub_date'], osc_date_format() . ' ' . osc_time_format() );
-                    $row['expiration'] = ($aRow['dt_expiration'] != '9999-12-31 23:59:59') ? osc_format_date($aRow['dt_expiration'], osc_date_format() . ' ' . osc_time_format() ) : __('Never expires');
+                    $row['expiration'] = ( $aRow['dt_expiration'] !== '9999-12-31 23:59:59') ? osc_format_date( $aRow['dt_expiration'], osc_date_format() . ' ' . osc_time_format() ) : __( 'Never expires');
 
                     $row = osc_apply_filter('items_processing_row', $row, $aRow);
 
@@ -397,7 +397,7 @@
                     $row['exp'] = $aRow['i_num_expired'];
                     $row['off'] = $aRow['i_num_offensive'];
                     $row['date'] = osc_format_date($aRow['dt_pub_date'], osc_date_format() . ' ' . osc_time_format() );
-                    $row['expiration'] = ($aRow['dt_expiration'] != '9999-12-31 23:59:59') ? osc_format_date($aRow['dt_expiration'], osc_date_format() . ' ' . osc_time_format() ) : __('Never expires') ;
+                    $row['expiration'] = ( $aRow['dt_expiration'] !== '9999-12-31 23:59:59') ? osc_format_date( $aRow['dt_expiration'], osc_date_format() . ' ' . osc_time_format() ) : __( 'Never expires') ;
 
                     $row = osc_apply_filter('items_processing_reported_row', $row, $aRow);
 
@@ -432,67 +432,67 @@
             $no_user_email  = '';
             // get & set values
             foreach($_get as $k => $v) {
-                if($k == 'sSearch' && $v != '') {
+                if( $k === 'sSearch' && $v != '') {
                     $this->mSearch->addPattern($v);
                     $this->withFilters = true;
                 }
 
                 // filters
-                if($k == 'userId' && $v != '') {
+                if( $k === 'userId' && $v != '') {
                     $this->mSearch->fromUser($v);
                     $this->withFilters = true;
                     $withUserId = true;
                 }
-                if($k == 'itemId' && $v != '') {
+                if( $k === 'itemId' && $v != '') {
                     $this->mSearch->addItemId($v);
                     $this->withFilters = true;
                 }
-                if($k == 'countryId' && $v != '') {
+                if( $k === 'countryId' && $v != '') {
                     $this->mSearch->addCountry($v);
                     $this->withFilters = true;
                 }
-                if($k == 'regionId' && $v != '') {
+                if( $k === 'regionId' && $v != '') {
                     $this->mSearch->addRegion($v);
                     $this->withFilters = true;
                 }
-                if($k == 'cityId' && $v != '') {
+                if( $k === 'cityId' && $v != '') {
                     $this->mSearch->addCity($v);
                     $this->withFilters = true;
                 }
-                if($k == 'country' && $v != '') {
+                if( $k === 'country' && $v != '') {
                     $this->mSearch->addCountry($v);
                     $this->withFilters = true;
                 }
-                if($k == 'region' && $v != '') {
+                if( $k === 'region' && $v != '') {
                     $this->mSearch->addRegion($v);
                     $this->withFilters = true;
                 }
 
-                if($k == 'city' && $v != '') {
+                if( $k === 'city' && $v != '') {
                     $this->mSearch->addCity($v);
                     $this->withFilters = true;
                 }
-                if($k == 'catId' && $v != '') {
+                if( $k === 'catId' && $v != '') {
                     $this->mSearch->addCategory($v);
                     $this->withFilters = true;
                 }
-                if($k == 'b_premium' && $v != '') {
+                if( $k === 'b_premium' && $v != '') {
                     $this->mSearch->addItemConditions(DB_TABLE_PREFIX.'t_item.b_premium = '.$v);
                     $this->withFilters = true;
                 }
-                if($k == 'b_active' && $v != '') {
+                if( $k === 'b_active' && $v != '') {
                     $this->mSearch->addItemConditions(DB_TABLE_PREFIX.'t_item.b_active = '.$v);
                     $this->withFilters = true;
                 }
-                if($k == 'b_enabled' && $v != '') {
+                if( $k === 'b_enabled' && $v != '') {
                     $this->mSearch->addItemConditions(DB_TABLE_PREFIX.'t_item.b_enabled = '.$v);
                     $this->withFilters = true;
                 }
-                if($k == 'b_spam' && $v != '') {
+                if( $k === 'b_spam' && $v != '') {
                     $this->mSearch->addItemConditions(DB_TABLE_PREFIX.'t_item.b_spam = '.$v);
                     $this->withFilters = true;
                 }
-                if($k == 'user' && $v != '') {
+                if( $k === 'user' && $v != '') {
                     $no_user_email = $v;
                 }
             }
