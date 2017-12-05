@@ -404,11 +404,7 @@
 
             $result = $this->dao->get();
 
-            if( $result == false || $result->numRows() == 0) {
-                return false;
-            } else {
-                return true;
-            }
+	        return ! ( $result == false || $result->numRows() == 0 );
 
             return (bool) $result;
         }

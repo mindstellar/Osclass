@@ -977,10 +977,8 @@
      */
     function osc_get_bool_preference($key, $section = 'osclass') {
         $var = getPreference($key, $section);
-        if($var==1 || $var == '1' || $var == 'true' || $var == true) {
-            return true;
-        }
-        return false;
+
+	    return $var == 1 || $var == '1' || $var == 'true' || $var == true;
     }
 
 
@@ -1036,11 +1034,8 @@
      */
     function osc_is_watermark_text() {
        $text = getPreference('watermark_text');
-       if($text != ''){
-           return true;
-       } else {
-           return false;
-       }
+
+	    return $text != '';
     }
 
     /**
@@ -1050,11 +1045,8 @@
      */
     function osc_is_watermark_image() {
         $image = getPreference('watermark_image');
-        if($image != ''){
-            return true;
-        } else {
-            return false;
-        }
+
+	    return $image != '';
     }
 
     /**

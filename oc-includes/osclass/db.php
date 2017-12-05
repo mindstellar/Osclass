@@ -316,10 +316,7 @@
             }
             $this->db_errno = $this->db->errno;
 
-	        if ( $this->db_errno != 0 ) {
-		        return false;
-	        }
-            return true;
+	        return ! ( $this->db_errno != 0 );
         }
 
 		/**

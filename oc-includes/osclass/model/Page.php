@@ -477,11 +477,7 @@
                 ,'s_text' => $text
             ));
 
-            if($this->dao->affectedRows() == 0) {
-                return false;
-            }
-
-            return true;
+	        return ! ( $this->dao->affectedRows() == 0 );
         }
 
         /**
@@ -601,10 +597,8 @@
         public function isIndelible($id)
         {
             $page = $this->findByPrimaryKey($id);
-            if($page['b_indelible'] == 1) {
-                return true;
-            }
-            return false;
+
+	        return $page[ 'b_indelible' ] == 1;
         }
 
         /**
@@ -624,10 +618,7 @@
             $this->dao->where('pk_i_id <> '.$id);
             $result = $this->dao->get();
 
-            if($result->numRows() > 0) {
-                return true;
-            }
-            return false;
+	        return $result->numRows() > 0;
         }
 
 	    /**

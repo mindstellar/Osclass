@@ -133,11 +133,7 @@
 
             $row = $result->row();
 
-            if( $row['numrows'] == 0 ) {
-                return false;
-            }
-
-            return true;
+	        return ! ( $row[ 'numrows' ] == 0 );
         }
     }
 

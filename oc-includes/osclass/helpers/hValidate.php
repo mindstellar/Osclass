@@ -59,10 +59,7 @@
      * @return boolean
      */
     function osc_validate_nozero ($value) {
-        if ( preg_match( '/^[0-9]+$/' , $value) && $value > 0 ) {
-            return true;
-        }
-        return false;
+	    return preg_match( '/^[0-9]+$/' , $value ) && $value > 0;
     }
 
     /**
@@ -107,10 +104,7 @@
      * @return boolean
      */
     function osc_validate_min ($value = null, $min = 6) {
-        if ( mb_strlen($value, 'UTF-8') < $min ) {
-            return false;
-        }
-        return true;
+	    return ! ( mb_strlen( $value , 'UTF-8' ) < $min );
     }
 
     /**
@@ -120,10 +114,7 @@
      * @return boolean
      */
     function osc_validate_max ($value = null, $max = 255) {
-        if ( mb_strlen($value, 'UTF-8') > $max ) {
-            return false;
-        }
-        return true;
+	    return ! ( mb_strlen( $value , 'UTF-8' ) > $max );
     }
 
     /**
@@ -134,10 +125,7 @@
      * @return boolean
      */
     function osc_validate_range ($value, $min = 6, $max = 255) {
-        if ( mb_strlen($value, 'UTF-8')>=$min && mb_strlen($value, 'UTF-8')<=$max ) {
-            return true;
-        }
-        return false;
+	    return mb_strlen( $value , 'UTF-8' ) >= $min && mb_strlen( $value , 'UTF-8' ) <= $max;
     }
 
 
@@ -245,11 +233,8 @@
             $saved_as = 'last_submit_comment';
         }
         // check $_SESSION
-        if ((Session::newInstance()->_get($saved_as)+$delay) > time() ||
-            (Cookie::newInstance()->get_value($saved_as)+$delay) > time()) {
-                return false;
-        }
-        return true;
+	    return ! ( ( Session::newInstance()->_get( $saved_as ) + $delay ) > time()
+	               || ( Cookie::newInstance()->get_value( $saved_as ) + $delay ) > time() );
     }
 
     /**
@@ -324,11 +309,7 @@
 	 * @return bool
 	 */
     function osc_validate_username( $value, $min = 1 ) {
-        if(mb_strlen($value, 'UTF-8') >= $min && preg_match('/^[A-Za-z0-9_]+$/',$value) ){
-            return true;
-        } else {
-            return false;
-        }
+	    return mb_strlen( $value , 'UTF-8' ) >= $min && preg_match( '/^[A-Za-z0-9_]+$/' , $value );
     }
 
 

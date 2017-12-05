@@ -45,21 +45,15 @@
     function osc_is_web_user_logged_in() {
         if(View::newInstance()->_exists('_loggedUser')) {
             $user = View::newInstance()->_get('_loggedUser');
-            if(isset($user['b_enabled']) && $user['b_enabled']==1) {
-                return true;
-            } else {
-                return false;
-            }
+
+	        return isset( $user[ 'b_enabled' ] ) && $user[ 'b_enabled' ] == 1;
         }
 
         if ( Session::newInstance()->_get( 'userId' ) != '') {
             $user = User::newInstance()->findByPrimaryKey(Session::newInstance()->_get( 'userId' ));
             View::newInstance()->_exportVariableToView('_loggedUser', $user);
-            if(isset($user['b_enabled']) && $user['b_enabled']==1) {
-                return true;
-            } else {
-                return false;
-            }
+
+	        return isset( $user[ 'b_enabled' ] ) && $user[ 'b_enabled' ] == 1;
         }
 
         //can already be a logged user or not, we'll take a look into the cookie

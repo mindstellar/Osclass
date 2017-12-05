@@ -412,11 +412,7 @@ FUNCTIONS
 	     * @return bool
 	     */
 	    function osc_is_contact_page() {
-            if( Rewrite::newInstance()->get_location() === 'contact' ) {
-                return true;
-            }
-
-            return false;
+		    return Rewrite::newInstance()->get_location() === 'contact';
         }
     }
 

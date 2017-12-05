@@ -1247,10 +1247,7 @@
      * @return boolean
      */
     function osc_is_current_page($location, $section) {
-        if( osc_get_osclass_location() === $location && osc_get_osclass_section() === $section ) {
-            return true;
-        }
-        return false;
+	    return osc_get_osclass_location() === $location && osc_get_osclass_section() === $section;
     }    
 
     /**
@@ -1291,11 +1288,7 @@
     function osc_is_moderator() {
         $admin = Admin::newInstance()->findByPrimaryKey(osc_logged_admin_id());
 
-        if( isset($admin['b_moderator']) && $admin['b_moderator']!=0 ) {
-            return true;
-        }
-
-        return false;
+	    return isset( $admin[ 'b_moderator' ] ) && $admin[ 'b_moderator' ] != 0;
     }
 
 

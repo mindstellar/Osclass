@@ -474,11 +474,7 @@
 
             $results = $this->listWhere();
 
-            if( count($results) > 0 ) {
-                return true;
-            }
-
-            return false;
+	        return count( $results ) > 0;
         }
 
         /**
