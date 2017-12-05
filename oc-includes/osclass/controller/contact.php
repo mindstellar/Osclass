@@ -67,7 +67,7 @@
                                             $this->redirectTo(osc_contact_url());
                                         }
 
-                                        if ( !osc_validate_email($yourEmail, true) ) {
+                                        if ( !osc_validate_email($yourEmail) ) {
                                             osc_add_flash_error_message( _m('Please enter a correct email') );
                                             Session::newInstance()->_setForm('yourName', $yourName);
                                             Session::newInstance()->_setForm('subject', $subject);

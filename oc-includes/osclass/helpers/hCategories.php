@@ -248,7 +248,7 @@
      * @return int
      */
     function osc_category_total_items() {
-        return osc_category_field( 'i_num_items' , '' );
+        return osc_category_field( 'i_num_items' );
         //$category = osc_category();
         //return CategoryStats::newInstance()->getNumItems($category);
     }

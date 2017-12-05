@@ -120,7 +120,7 @@
                 return $this->resultArray;
             }
 
-            $this->_dataSeek(0);
+            $this->_dataSeek();
             while($row = $this->_fetchArray()) {
                 $this->resultArray[] = $row;
             }
@@ -141,7 +141,7 @@
                 return $this->resultObject;
             }
 
-            $this->_dataSeek(0);
+            $this->_dataSeek();
             while( $row = $this->_fetchObject() ) {
                 $this->resultObject[] = $row;
             }

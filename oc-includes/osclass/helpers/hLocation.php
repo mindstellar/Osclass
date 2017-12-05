@@ -117,7 +117,7 @@
 	 */
     function osc_has_cities($region = '%%%%') {
         if ( !View::newInstance()->_exists('cities') ) {
-            View::newInstance()->_exportVariableToView('cities', Search::newInstance()->listCities( $region, '>=' , 'city_name ASC' ) );
+            View::newInstance()->_exportVariableToView('cities', Search::newInstance()->listCities( $region, '>=' ) );
         }
         $result = View::newInstance()->_next('cities');
 
@@ -183,7 +183,7 @@
 	 */
     function osc_count_cities($region = '%%%%') {
         if ( !View::newInstance()->_exists('cities') ) {
-            View::newInstance()->_exportVariableToView('cities', Search::newInstance()->listCities( $region, '>=' , 'city_name ASC' ) );
+            View::newInstance()->_exportVariableToView('cities', Search::newInstance()->listCities( $region, '>=' ) );
         }
         return View::newInstance()->_count('cities');
     }

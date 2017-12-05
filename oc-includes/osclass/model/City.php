@@ -220,7 +220,7 @@
          */
         public function findBySlug($slug)
         {
-            $this->dao->select('*');
+            $this->dao->select();
             $this->dao->from($this->getTableName());
             $this->dao->where('s_slug', $slug);
             $result = $this->dao->get();
@@ -240,7 +240,7 @@
          */
         public function listByEmptySlug()
         {
-            $this->dao->select('*');
+            $this->dao->select();
             $this->dao->from($this->getTableName());
             $this->dao->where('s_slug', '');
             $result = $this->dao->get();

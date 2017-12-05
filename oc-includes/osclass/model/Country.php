@@ -65,7 +65,7 @@
          */
         public function findByCode($code)
         {
-            $this->dao->select('*');
+            $this->dao->select();
             $this->dao->from($this->getTableName());
             $this->dao->where('pk_c_code', $code);
             $result = $this->dao->get();
@@ -86,7 +86,7 @@
          */
         public function findByName($name)
         {
-            $this->dao->select('*');
+            $this->dao->select();
             $this->dao->from($this->getTableName());
             $this->dao->where('s_name', $name);
             $result = $this->dao->get();
@@ -167,7 +167,7 @@
          */
         public function findBySlug($slug)
         {
-            $this->dao->select('*');
+            $this->dao->select();
             $this->dao->from($this->getTableName());
             $this->dao->where('s_slug', $slug);
             $result = $this->dao->get();
@@ -187,7 +187,7 @@
          */
         public function listByEmptySlug()
         {
-            $this->dao->select('*');
+            $this->dao->select();
             $this->dao->from($this->getTableName());
             $this->dao->where('s_slug', '');
             $result = $this->dao->get();

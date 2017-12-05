@@ -292,7 +292,7 @@
          */
         public function where($key, $value = null)
         {
-            return $this->_where($key, $value, 'AND ');
+            return $this->_where($key, $value);
         }
 
         /**
@@ -353,7 +353,7 @@
          */
         public function whereIn($key = null, $values = null)
         {
-            return $this->_whereIn($key, $values, false, 'AND ');
+            return $this->_whereIn($key, $values);
         }
 
         /**
@@ -381,7 +381,7 @@
          */
         public function whereNotIn($key = null, $values = null)
         {
-            return $this->_whereIn($key, $values, true, 'AND ');
+            return $this->_whereIn($key, $values, true);
         }
 
         /**
@@ -565,7 +565,7 @@
 */
         public function having($key, $value = '')
         {
-            return $this->_having($key, $value, 'AND ');
+            return $this->_having($key, $value);
         }
 
 		/**

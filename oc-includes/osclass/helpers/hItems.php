@@ -1352,7 +1352,7 @@
      * @return string
      */
     function osc_total_items() {
-        return Item::newInstance()->totalItems(null);
+        return Item::newInstance()->totalItems();
     }
 
     /**

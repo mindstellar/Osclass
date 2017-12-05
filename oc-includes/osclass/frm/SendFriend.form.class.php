@@ -34,9 +34,9 @@
 
             if( Session::newInstance()->_getForm( 'yourName' ) != '' ){
                 $yourName = Session::newInstance()->_getForm( 'yourName' );
-                parent::generic_input_text( 'yourName' , $yourName, null, false);
+                parent::generic_input_text( 'yourName' , $yourName);
             } else {
-                parent::generic_input_text( 'yourName' , '' , null, false);
+                parent::generic_input_text( 'yourName' , '');
             }
             return true;
         }
@@ -48,9 +48,9 @@
 
             if( Session::newInstance()->_getForm( 'yourEmail' ) != '' ){
                 $yourEmail = Session::newInstance()->_getForm( 'yourEmail' );
-                parent::generic_input_text( 'yourEmail' , $yourEmail, null, false);
+                parent::generic_input_text( 'yourEmail' , $yourEmail);
             } else {
-                parent::generic_input_text( 'yourEmail' , '' , null, false);
+                parent::generic_input_text( 'yourEmail' , '');
             }
             return true;
         }
@@ -61,9 +61,9 @@
 		public static function friend_name() {
             if( Session::newInstance()->_getForm( 'friendName' ) != '' ){
                 $friendName = Session::newInstance()->_getForm( 'friendName' );
-                parent::generic_input_text( 'friendName' , $friendName, null, false);
+                parent::generic_input_text( 'friendName' , $friendName);
             } else {
-                parent::generic_input_text( 'friendName' , '' , null, false);
+                parent::generic_input_text( 'friendName' , '');
             }
             return true;
         }
@@ -74,9 +74,9 @@
 		public static function friend_email() {
             if( Session::newInstance()->_getForm( 'friendEmail' ) != '' ){
                 $friendEmail = Session::newInstance()->_getForm( 'friendEmail' );
-                parent::generic_input_text( 'friendEmail' , $friendEmail, null, false);
+                parent::generic_input_text( 'friendEmail' , $friendEmail);
             } else {
-                parent::generic_input_text( 'friendEmail' , '' , null, false);
+                parent::generic_input_text( 'friendEmail' , '');
             }
             return true;
         }

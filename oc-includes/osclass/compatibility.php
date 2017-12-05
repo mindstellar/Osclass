@@ -197,7 +197,7 @@ if (!defined('PASSWORD_DEFAULT')) {
             $buffer = '';
             $buffer_valid = false;
             if (function_exists('mcrypt_create_iv') && !defined('PHALANGER')) {
-                $buffer = mcrypt_create_iv($raw_salt_len, MCRYPT_DEV_URANDOM);
+                $buffer = mcrypt_create_iv($raw_salt_len);
                 if ($buffer) {
                     $buffer_valid = true;
                 }

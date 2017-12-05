@@ -60,7 +60,7 @@
          */
         public function findByLocation($location)
         {
-            $this->dao->select('*');
+            $this->dao->select();
             $this->dao->from($this->getTableName());
             $this->dao->where('s_location', $location);
             $result = $this->dao->get();
@@ -81,7 +81,7 @@
          */
         public function findByDescription($description)
         {
-            $this->dao->select('*');
+            $this->dao->select();
             $this->dao->from($this->getTableName());
             $this->dao->where('s_description', $description);
             $result = $this->dao->get();

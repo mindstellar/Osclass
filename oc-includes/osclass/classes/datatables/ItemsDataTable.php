@@ -50,7 +50,7 @@
             // add more conditions here
             osc_run_hook('manage_item_search_conditions', $this->mSearch);
             // do Search
-            $this->processData(Item::newInstance()->extendCategoryName($this->mSearch->doSearch(true)));
+            $this->processData(Item::newInstance()->extendCategoryName($this->mSearch->doSearch()));
             $this->totalFiltered = $this->mSearch->countAll();
             $this->total = $this->mSearch->count();
 
@@ -114,7 +114,7 @@
             $this->mSearch->addConditions(sprintf( ' %st_item.pk_i_id = s.fk_i_item_id' , DB_TABLE_PREFIX));
             $this->mSearch->addGroupBy(sprintf( ' %st_item.pk_i_id ' , DB_TABLE_PREFIX));
             // do Search
-            $this->processDataReported(Item::newInstance()->extendCategoryName($this->mSearch->doSearch(true)));
+            $this->processDataReported(Item::newInstance()->extendCategoryName($this->mSearch->doSearch()));
             $this->totalFiltered = $this->mSearch->countAll();
             $this->total = $this->mSearch->count();
 

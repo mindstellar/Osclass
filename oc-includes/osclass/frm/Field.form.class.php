@@ -120,7 +120,7 @@ FB;
 		 * @return bool
 		 */
 		public static function name_input_text( $field = null ) {
-            parent::generic_input_text( 's_name' , ( isset($field) && isset($field[ 's_name' ])) ? $field[ 's_name' ] : '' , null, false);
+            parent::generic_input_text( 's_name' , ( isset($field) && isset($field[ 's_name' ])) ? $field[ 's_name' ] : '');
             return true;
         }
 
@@ -130,7 +130,7 @@ FB;
 		 * @return bool
 		 */
 		public static function options_input_text( $field = null ) {
-            parent::generic_input_text( 's_options' , ( isset($field) && isset($field[ 's_options' ])) ? html_entity_decode( $field[ 's_options' ]) : '' , null, false);
+            parent::generic_input_text( 's_options' , ( isset($field) && isset($field[ 's_options' ])) ? html_entity_decode( $field[ 's_options' ]) : '');
             return true;
         }
 

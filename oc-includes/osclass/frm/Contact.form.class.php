@@ -53,9 +53,9 @@
 		public static function your_name() {
             if( Session::newInstance()->_getForm( 'yourName' ) != '' ) {
                 $name = Session::newInstance()->_getForm( 'yourName' );
-                parent::generic_input_text( 'yourName' , $name, null, false);
+                parent::generic_input_text( 'yourName' , $name);
             } else {
-                parent::generic_input_text( 'yourName' , osc_logged_user_name(), null, false);
+                parent::generic_input_text( 'yourName' , osc_logged_user_name());
             }
             return true;
         }
@@ -66,9 +66,9 @@
 		public static function your_email() {
              if( Session::newInstance()->_getForm( 'yourEmail' ) != '' ) {
                 $email = Session::newInstance()->_getForm( 'yourEmail' );
-                parent::generic_input_text( 'yourEmail' , $email, null, false);
+                parent::generic_input_text( 'yourEmail' , $email);
             } else {
-                parent::generic_input_text( 'yourEmail' , osc_logged_user_email(), null, false);
+                parent::generic_input_text( 'yourEmail' , osc_logged_user_email());
             }
             return true;
         }
@@ -79,9 +79,9 @@
 		public static function your_phone_number() {
             if( Session::newInstance()->_getForm( 'phoneNumber' ) != '' ) {
                 $phoneNumber = Session::newInstance()->_getForm( 'phoneNumber' );
-                parent::generic_input_text( 'phoneNumber' , $phoneNumber, null, false);
+                parent::generic_input_text( 'phoneNumber' , $phoneNumber);
             } else {
-                parent::generic_input_text( 'phoneNumber' , osc_logged_user_phone(), null, false);
+                parent::generic_input_text( 'phoneNumber' , osc_logged_user_phone());
             }
             return true;
         }
@@ -92,9 +92,9 @@
 		public static function the_subject() {
             if( Session::newInstance()->_getForm( 'subject' ) != '' ) {
                 $subject = Session::newInstance()->_getForm( 'subject' );
-                parent::generic_input_text( 'subject' , $subject, null, false);
+                parent::generic_input_text( 'subject' , $subject);
             } else {
-                parent::generic_input_text( 'subject' , '' , null, false);
+                parent::generic_input_text( 'subject' , '');
             }
             return true;
         }

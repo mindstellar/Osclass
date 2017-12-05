@@ -118,13 +118,13 @@
             $title_message = '';
             foreach(@$aItem['title'] as $key => $value) {
 
-                if( osc_validate_text($value, 1) && osc_validate_max($value, osc_max_characters_per_title()) ) {
+                if( osc_validate_text($value) && osc_validate_max($value, osc_max_characters_per_title()) ) {
                     $title_message = '';
                     break;
                 }
 
                 $title_message .=
-	                (!osc_validate_text($value, 1) ? sprintf( _m( 'Title too short (%s).' ), $key) . PHP_EOL : '' ) .
+	                (!osc_validate_text($value) ? sprintf( _m( 'Title too short (%s).' ), $key) . PHP_EOL : '' ) .
 	                (!osc_validate_max($value, osc_max_characters_per_title()) ? sprintf( _m( 'Title too long (%s).' ), $key) . PHP_EOL : '' );
             }
             $flash_error .= $title_message;
@@ -337,13 +337,13 @@
             $title_message  = '';
             $td_message     = '';
             foreach(@$aItem['title'] as $key => $value) {
-                if( osc_validate_text($value, 1) && osc_validate_max($value, osc_max_characters_per_title()) ) {
+                if( osc_validate_text($value) && osc_validate_max($value, osc_max_characters_per_title()) ) {
                     $td_message = '';
                     break;
                 }
 
                 $td_message .=
-	                (!osc_validate_text($value, 1) ? _m( 'Title too short.' ) . PHP_EOL : '' ) .
+	                (!osc_validate_text($value) ? _m( 'Title too short.' ) . PHP_EOL : '' ) .
 	                (!osc_validate_max($value, osc_max_characters_per_title()) ? _m( 'Title too long.' ) . PHP_EOL : '' );
             }
             $flash_error .= $td_message;
@@ -912,7 +912,7 @@
             if ( !osc_validate_text($aItem['yourName']) ){
                 $flash_error = __( 'Your name: this field is required' ) . PHP_EOL;
             }
-            if( !osc_validate_email($aItem['yourEmail'], true) ){
+            if( !osc_validate_email($aItem['yourEmail']) ){
                 $flash_error .= __( 'Invalid email address' ) . PHP_EOL;
             }
             if( !osc_validate_text($aItem['message']) ){

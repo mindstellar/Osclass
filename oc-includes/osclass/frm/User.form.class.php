@@ -34,84 +34,84 @@
 		 * @param null $user
 		 */
 		public static function name_text( $user = null ) {
-            parent::generic_input_text( 's_name' , isset($user['s_name'])? $user['s_name'] : '', null, false);
+            parent::generic_input_text( 's_name' , isset($user['s_name'])? $user['s_name'] : '');
         }
 
 		/**
 		 * @param null $user
 		 */
 		public static function username_text( $user = null ) {
-            parent::generic_input_text( 's_username' , isset($user['s_username'])? $user['s_username'] : '', null, false);
+            parent::generic_input_text( 's_username' , isset($user['s_username'])? $user['s_username'] : '');
         }
 
 		/**
 		 * @param null $user
 		 */
 		public static function email_login_text( $user = null ) {
-            parent::generic_input_text( 'email' , isset($user['s_email'])? $user['s_email'] : '', null, false);
+            parent::generic_input_text( 'email' , isset($user['s_email'])? $user['s_email'] : '');
         }
 
 		/**
 		 * @param null $user
 		 */
 		public static function password_login_text( $user = null ) {
-            parent::generic_password( 'password' , '', null, false);
+            parent::generic_password( 'password' , '');
         }
 
 		/**
 		 * @param null $user
 		 */
 		public static function rememberme_login_checkbox( $user = null ) {
-            parent::generic_input_checkbox( 'remember' , '1', false);
+            parent::generic_input_checkbox( 'remember' , '1');
         }
 
 		/**
 		 * @param null $user
 		 */
 		public static function old_password_text( $user = null ) {
-            parent::generic_password( 'old_password' , '', null, false);
+            parent::generic_password( 'old_password' , '');
         }
 
 		/**
 		 * @param null $user
 		 */
 		public static function password_text( $user = null ) {
-            parent::generic_password( 's_password' , '', null, false);
+            parent::generic_password( 's_password' , '');
         }
 
 		/**
 		 * @param null $user
 		 */
 		public static function check_password_text( $user = null ) {
-            parent::generic_password( 's_password2' , '', null, false);
+            parent::generic_password( 's_password2' , '');
         }
 
 		/**
 		 * @param null $user
 		 */
 		public static function email_text( $user = null ) {
-            parent::generic_input_text( 's_email' , isset($user['s_email'])? $user['s_email'] : '', null, false);
+            parent::generic_input_text( 's_email' , isset($user['s_email'])? $user['s_email'] : '');
         }
 
 		/**
 		 * @param null $user
 		 */
 		public static function website_text( $user = null ) {
-            parent::generic_input_text( 's_website' , isset($user['s_website'])? $user['s_website'] : '', null, false);
+            parent::generic_input_text( 's_website' , isset($user['s_website'])? $user['s_website'] : '');
         }
 
 		/**
 		 * @param null $user
 		 */
 		public static function mobile_text( $user = null ) {
-            parent::generic_input_text( 's_phone_mobile' , isset($user['s_phone_mobile'])? $user['s_phone_mobile'] : '', null, false);
+            parent::generic_input_text( 's_phone_mobile' , isset($user['s_phone_mobile'])? $user['s_phone_mobile'] : '');
         }
 
 		/**
 		 * @param null $user
 		 */
 		public static function phone_land_text( $user = null ) {
-            parent::generic_input_text( 's_phone_land' , isset($user['s_phone_land'])? $user['s_phone_land'] : '', null, false);
+            parent::generic_input_text( 's_phone_land' , isset($user['s_phone_land'])? $user['s_phone_land'] : '');
         }
 
 		/**

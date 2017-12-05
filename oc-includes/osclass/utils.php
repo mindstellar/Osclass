@@ -340,7 +340,7 @@ function osc_doRequest($url, $_data) {
             $pop3_password = $params['password'];
         }
 
-        $pop->authorise( $pop3_host, $pop3_port, 30, $pop3_username, $pop3_password, 0);
+        $pop->authorise( $pop3_host, $pop3_port, 30, $pop3_username, $pop3_password);
     }
 
     if( osc_mailserver_auth() ) {
@@ -552,7 +552,7 @@ function osc_doRequest($url, $_data) {
     if (is_file($source)) {
         if ($dest[strlen($dest)-1]=='/') {
             if (!file_exists($dest)) {
-                osc_mkdir($dest, $options['folderPermission'], true);
+                osc_mkdir($dest, $options['folderPermission']);
             }
             $__dest= $dest . '/' . basename( $source);
         } else {
@@ -1128,7 +1128,7 @@ function _unzip_file_ziparchive($file, $to) {
         }
 
         if (substr($file['name'], -1) == '/') {
-            @mkdir($to . $file['name'], 0777);
+            @mkdir($to . $file['name']);
             continue;
         }
 
@@ -1183,7 +1183,7 @@ function _unzip_file_pclzip($zip_file, $to) {
         }
 
         if ($file['folder']) {
-            @mkdir($to . $file['filename'], 0777);
+            @mkdir($to . $file['filename']);
             continue;
         }
 
@@ -1656,7 +1656,7 @@ function version_compare2($a, $b)
 	 */
 	function _recursive_category_stats( &$aux , &$categoryTotal)
 {
-    $count_items = Item::newInstance()->numItems($aux, true, true);
+    $count_items = Item::newInstance()->numItems($aux);
     if(is_array($aux['categories'])) {
         foreach($aux['categories'] as &$cat) {
             $count_items += _recursive_category_stats($cat, $categoryTotal);
@@ -1711,12 +1711,12 @@ function osc_update_cat_stats_id($id)
     if( count($aCategories) > 0 ) {
         // sumar items de la categoría
         foreach($aCategories as $subcategory) {
-            $total     = Item::newInstance()->numItems($subcategory, true, true);
+            $total     = Item::newInstance()->numItems($subcategory);
             $categoryTotal += $total;
         }
-        $categoryTotal += Item::newInstance()->numItems($category, true, true);
+        $categoryTotal += Item::newInstance()->numItems($category);
     } else {
-        $total     = Item::newInstance()->numItems($category, true, true);
+        $total     = Item::newInstance()->numItems($category);
         $categoryTotal += $total;
     }
 
@@ -2054,8 +2054,8 @@ function osc_csrfguard_start() {
              ***** UNZIP FILE *****
              **********************/
             $tmp_path = osc_content_path().'downloads/oc-temp/core-'.$data['version'].'/';
-            @mkdir(osc_content_path().'downloads/oc-temp/', 0777);
-            @mkdir($tmp_path, 0777);
+            @mkdir(osc_content_path().'downloads/oc-temp/');
+            @mkdir($tmp_path);
             $res = osc_unzip_file(osc_content_path().'downloads/'.$filename, $tmp_path);
             if ($res == 1) { // Everything is OK, continue
                 /**********************
@@ -2094,7 +2094,7 @@ function osc_csrfguard_start() {
                             /**********************************
                              ** EXECUTING ADDITIONAL ACTIONS **
                              **********************************/
-                            osc_set_preference('update_core_json', '');
+                            osc_set_preference('update_core_json');
                             if (file_exists(osc_lib_path() . 'osclass/upgrade-funcs.php')) {
                                 // There should be no errors here
                                 define('AUTO_UPGRADE', true);
@@ -2203,11 +2203,11 @@ function osc_do_auto_upgrade() {
                 }
             }
         } else {
-            osc_set_preference('update_core_json', '');
+            osc_set_preference('update_core_json');
         }
         osc_set_preference('last_version_check', time());
     } else {
-        osc_set_preference('update_core_json', '');
+        osc_set_preference('update_core_json');
         osc_set_preference('last_version_check', time() - 23*3600);
     }
 

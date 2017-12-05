@@ -433,7 +433,7 @@
 
         // START DEPRECATED: To be removed in future releases
         if (!$buffer_valid && function_exists('mcrypt_create_iv') && !defined('PHALANGER')) {
-            $buffer = mcrypt_create_iv($length, MCRYPT_DEV_URANDOM);
+            $buffer = mcrypt_create_iv($length);
             if ($buffer) {
                 $buffer_valid = true;
             }

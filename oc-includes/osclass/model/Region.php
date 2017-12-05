@@ -80,7 +80,7 @@
          */
         public function findByCountry($countryId)
         {
-            $this->dao->select('*');
+            $this->dao->select();
             $this->dao->from($this->getTableName());
             $this->dao->where('fk_c_country_code', $countryId);
             $this->dao->orderBy('s_name', 'ASC');
@@ -104,7 +104,7 @@
          */
         public function findByName($name, $country = null)
         {
-            $this->dao->select('*');
+            $this->dao->select();
             $this->dao->from($this->getTableName());
             $this->dao->where('s_name', $name);
             if($country!=null) {
@@ -189,7 +189,7 @@
          */
         public function findBySlug($slug)
         {
-            $this->dao->select('*');
+            $this->dao->select();
             $this->dao->from($this->getTableName());
             $this->dao->where('s_slug', $slug);
             $result = $this->dao->get();
@@ -209,7 +209,7 @@
          */
         public function listByEmptySlug()
         {
-            $this->dao->select('*');
+            $this->dao->select();
             $this->dao->from($this->getTableName());
             $this->dao->where('s_slug', '');
             $result = $this->dao->get();

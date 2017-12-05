@@ -60,7 +60,7 @@
          */
         public function getCronByType($type)
         {
-            $this->dao->select('*');
+            $this->dao->select();
             $this->dao->from($this->getTableName());
             $this->dao->where('e_type', $type);
             $result = $this->dao->get();

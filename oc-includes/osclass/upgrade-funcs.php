@@ -257,7 +257,7 @@ CREATE TABLE %st_item_description_tmp (
         osc_set_preference('rewrite_user_change_email_confirm', 'user/change_email_confirm');
 
         osc_set_preference('last_version_check', time());
-        osc_set_preference('update_core_json', '');
+        osc_set_preference('update_core_json');
 
         $update_dt_expiration = sprintf('update %st_item as a
                     left join %st_category  as b on b.pk_i_id = a.fk_i_category_id
@@ -412,7 +412,7 @@ CREATE TABLE %st_item_description_tmp (
         @unlink(osc_lib_path() . 'osclass/feeds.php');
 
         $comm->query(sprintf('UPDATE %st_user t, (SELECT pk_i_id FROM %st_user) t1 SET t.s_username = t1.pk_i_id WHERE t.pk_i_id = t1.pk_i_id', DB_TABLE_PREFIX, DB_TABLE_PREFIX));
-        osc_set_preference('username_blacklist', 'admin,user', 'osclass', 'STRING');
+        osc_set_preference('username_blacklist', 'admin,user');
         osc_set_preference('rewrite_user_change_username', 'username/change');
         osc_set_preference('csrf_name', 'CSRF'.mt_rand(0,mt_getrandmax()));
 
@@ -423,14 +423,14 @@ CREATE TABLE %st_item_description_tmp (
     }
 
     if(osc_version() < 320) {
-        osc_set_preference('mailserver_mail_from', '');
-        osc_set_preference('mailserver_name_from', '');
-        osc_set_preference('seo_url_search_prefix', '');
+        osc_set_preference('mailserver_mail_from');
+        osc_set_preference('mailserver_name_from');
+        osc_set_preference('seo_url_search_prefix');
 
         $comm->query(sprintf( 'ALTER TABLE  %st_category ADD  `b_price_enabled` TINYINT(1) NOT NULL DEFAULT 1' , DB_TABLE_PREFIX));
 
-        osc_set_preference('subdomain_type', '');
-        osc_set_preference('subdomain_host', '');
+        osc_set_preference('subdomain_type');
+        osc_set_preference('subdomain_host');
         // email_new_admin
         $comm->query(sprintf("INSERT INTO %st_pages (s_internal_name, b_indelible, dt_pub_date) VALUES ('email_new_admin', 1, '%s' )", DB_TABLE_PREFIX, date('Y-m-d H:i:s')));
         $comm->query(sprintf("INSERT INTO %st_pages_description (fk_i_pages_id, fk_c_locale_code, s_title, s_text) VALUES (%d, 'en_US', '{WEB_TITLE} - Success creating admin account!', '<p>Hi {ADMIN_NAME},</p><p>The admin of {WEB_LINK} has created an account for you,</p><ul><li>Username: {USERNAME}</li><li>Password: {PASSWORD}</li></ul><p>You can access the admin panel here {WEB_ADMIN_LINK}.</p><p>Thank you!</p><p>Regards,</p>')", DB_TABLE_PREFIX, $comm->insertedId()));
@@ -453,7 +453,7 @@ CREATE TABLE %st_item_description_tmp (
 	    if ( ! mkdir( osc_content_path() . 'uploads/temp/' ) && ! is_dir( osc_content_path() . 'uploads/temp/' ) ) {
 		    throw new \RuntimeException( sprintf( 'Directory "%s" was not created' , osc_content_path() . 'uploads/temp/' ) );
 	    }
-        @mkdir(osc_content_path().'downloads/oc-temp/', 0777);
+        @mkdir(osc_content_path().'downloads/oc-temp/');
         @unlink(osc_lib_path() . 'osclass/classes/Watermark.php');
         osc_set_preference('title_character_length', '100', 'osclass', 'INTEGER');
         osc_set_preference('description_character_length', '5000', 'osclass', 'INTEGER');
@@ -510,8 +510,8 @@ CREATE TABLE %st_item_description_tmp (
 
     if(osc_version() < 350) {
         osc_set_preference('marketURL', 'http://market.osclass.org/api/v2/');
-        osc_set_preference('marketAPIConnect', '');
-        osc_set_preference('marketCategories', '');
+        osc_set_preference('marketAPIConnect');
+        osc_set_preference('marketCategories');
         osc_set_preference('marketDataUpdate', 0);
     }
 
@@ -539,7 +539,7 @@ CREATE TABLE %st_item_description_tmp (
             Admin::newInstance()->deleteByPrimaryKey($admin['pk_i_id']);
         }
         $iterator = new RecursiveIteratorIterator(new RecursiveDirectoryIterator(ABS_PATH),RecursiveIteratorIterator::SELF_FIRST, RecursiveIteratorIterator::CATCH_GET_CHILD);
-        $objects = iterator_to_array($iterator, true);
+        $objects = iterator_to_array($iterator);
         foreach($objects as $file => $object) {
             try{
 	            $handle = @fopen( $file , 'rb' );

@@ -671,7 +671,7 @@
 	        if( Session::newInstance()->_getForm('region') != '' ) {
                 $item['s_region'] = Session::newInstance()->_getForm('region');
             }
-            parent::generic_input_text( 'region', isset($item['s_region']) ? $item['s_region'] : null, false, false);
+            parent::generic_input_text( 'region', isset($item['s_region']) ? $item['s_region'] : null, false);
             parent::generic_input_hidden('regionId', (isset($item['fk_i_region_id']) && $item['fk_i_region_id']!=null)?$item['fk_i_region_id']:'');
             return true;
         }
@@ -686,7 +686,7 @@
 	        if( Session::newInstance()->_getForm('city') != '' ) {
                 $item['s_city'] = Session::newInstance()->_getForm('city');
             }
-            parent::generic_input_text( 'city', isset($item['s_city']) ? $item['s_city'] : null, false, false);
+            parent::generic_input_text( 'city', isset($item['s_city']) ? $item['s_city'] : null, false);
             parent::generic_input_hidden('cityId', (isset($item['fk_i_city_id']) && $item['fk_i_city_id']!=null)?$item['fk_i_city_id']:'');
             return true;
         }

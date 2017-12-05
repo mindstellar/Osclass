@@ -34,42 +34,42 @@
 		 * @param null $admin
 		 */
 		public static function name_text( $admin = null ) {
-            parent::generic_input_text( 's_name' , isset($admin['s_name'])? $admin['s_name'] : '', null, false);
+            parent::generic_input_text( 's_name' , isset($admin['s_name'])? $admin['s_name'] : '');
         }
 
 		/**
 		 * @param null $admin
 		 */
 		public static function username_text( $admin = null ) {
-            parent::generic_input_text( 's_username' , isset($admin['s_username'])? $admin['s_username'] : '', null, false);
+            parent::generic_input_text( 's_username' , isset($admin['s_username'])? $admin['s_username'] : '');
         }
 
 		/**
 		 * @param null $admin
 		 */
 		public static function old_password_text( $admin = null ) {
-            parent::generic_password( 'old_password' , '', null, false);
+            parent::generic_password( 'old_password' , '');
         }
 
 		/**
 		 * @param null $admin
 		 */
 		public static function password_text( $admin = null ) {
-            parent::generic_password( 's_password' , '', null, false);
+            parent::generic_password( 's_password' , '');
         }
 
 		/**
 		 * @param null $admin
 		 */
 		public static function check_password_text( $admin = null ) {
-            parent::generic_password( 's_password2' , '', null, false);
+            parent::generic_password( 's_password2' , '');
         }
 
 		/**
 		 * @param null $admin
 		 */
 		public static function email_text( $admin = null ) {
-            parent::generic_input_text( 's_email' , isset($admin['s_email'])? $admin['s_email'] : '', null, false);
+            parent::generic_input_text( 's_email' , isset($admin['s_email'])? $admin['s_email'] : '');
         }
 
 		/**

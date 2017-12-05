@@ -1080,7 +1080,7 @@
 	     */
         public function doSearch($extended = true, $count = true)
         {
-            $sql = $this->_makeSQL(false);
+            $sql = $this->_makeSQL();
             $result = $this->dao->query($sql);
             if($count) {
                 $sql = $this->_makeSQL(true);

@@ -53,7 +53,7 @@
             if(Session::newInstance()->_getForm('commentTitle') != '') {
                 $commentTitle = Session::newInstance()->_getForm('commentTitle');
             }
-            parent::generic_input_text( 'title' , $commentTitle, null, false);
+            parent::generic_input_text( 'title' , $commentTitle);
         }
 
 		/**
@@ -68,7 +68,7 @@
             if(Session::newInstance()->_getForm('commentAuthorName') != '') {
                 $commentAuthorName = Session::newInstance()->_getForm('commentAuthorName');
             }
-            parent::generic_input_text( 'authorName' , $commentAuthorName, null, false);
+            parent::generic_input_text( 'authorName' , $commentAuthorName);
         }
 
 		/**
@@ -83,7 +83,7 @@
             if(Session::newInstance()->_getForm('commentAuthorEmail') != '') {
                 $commentAuthorEmail = Session::newInstance()->_getForm('commentAuthorEmail');
             }
-            parent::generic_input_text( 'authorEmail' , $commentAuthorEmail, null, false);
+            parent::generic_input_text( 'authorEmail' , $commentAuthorEmail);
         }
 
 		/**
