@@ -651,10 +651,9 @@
 		$openedfile = fopen( $file2 , 'wb' );
 		fwrite( $openedfile , $contentx );
 		fclose( $openedfile );
+		$status = true;
 		if ( $contentx === false ) {
 			$status = false;
-		} else {
-			$status = true;
 		}
 
 		return $status;
@@ -2008,7 +2007,7 @@
 			return array ( $token_name , Session::newInstance()->_get( $token_name ) );
 		}
 		$unique_token_name = osc_csrf_name() . '_' . mt_rand( 0 , mt_getrandmax() );
-		if ( function_exists( 'hash_algos' ) and in_array( 'sha512' , hash_algos() , true ) ) {
+		if ( function_exists( 'hash_algos' ) && in_array( 'sha512' , hash_algos() , true ) ) {
 			$token = hash( 'sha512' , mt_rand( 0 , mt_getrandmax() ) );
 		} else {
 			$token = '';
