@@ -198,7 +198,7 @@
                 break;
             }
 
-	        $value = self::_purify( $value , $htmlencode ) // $xss_check, $quotes_encode );
+	        $value = self::_purify( $value , $htmlencode ); // $xss_check, $quotes_encode );
 
             if(get_magic_quotes_gpc()) {
                 return strip_slashes_extended($value);
