@@ -227,16 +227,15 @@
             $this->dao->from(DB_TABLE_PREFIX.'t_item i');
 
             $conditions = array();
+	        $conditions = array (
+		        'i.pk_i_id'      => $itemId ,
+		        'c.fk_i_item_id' => $itemId
+	        );
 	        if ( null === $itemId ) {
-                $conditions = 'c.fk_i_item_id = i.pk_i_id';
-            } else {
-                $conditions = array(
-                    'i.pk_i_id'      => $itemId,
-                    'c.fk_i_item_id' => $itemId
-                );
+		        $conditions = 'c.fk_i_item_id = i.pk_i_id';
             }
 
-            $this->dao->where($conditions);
+	        $this->dao->where( $conditions );
             $this->dao->orderBy('c.dt_pub_date','DESC');
             $aux = $this->dao->get();
             if($aux == false) {
@@ -339,16 +338,15 @@
             $this->dao->from(DB_TABLE_PREFIX.'t_item i');
 
             $conditions = array();
+	        $conditions = array (
+		        'i.pk_i_id'      => $itemId ,
+		        'c.fk_i_item_id' => $itemId
+	        );
 	        if ( null === $itemId ) {
-                $conditions = 'c.fk_i_item_id = i.pk_i_id';
-            } else {
-                $conditions = array(
-                    'i.pk_i_id'      => $itemId,
-                    'c.fk_i_item_id' => $itemId
-                );
+		        $conditions = 'c.fk_i_item_id = i.pk_i_id';
             }
 
-            $this->dao->where($conditions);
+	        $this->dao->where( $conditions );
 
             if(!$all) {
                 $auxCond = '( c.b_enabled = 0 OR c.b_active = 0 OR c.b_spam = 1 )';
@@ -377,16 +375,15 @@
             $this->dao->from(DB_TABLE_PREFIX.'t_item i');
 
             $conditions = array();
+	        $conditions = array (
+		        'i.pk_i_id'      => $itemId ,
+		        'c.fk_i_item_id' => $itemId
+	        );
 	        if ( null === $itemId ) {
-                $conditions = 'c.fk_i_item_id = i.pk_i_id';
-            } else {
-                $conditions = array(
-                    'i.pk_i_id'      => $itemId,
-                    'c.fk_i_item_id' => $itemId
-                );
+		        $conditions = 'c.fk_i_item_id = i.pk_i_id';
             }
 
-            $this->dao->where($conditions);
+	        $this->dao->where( $conditions );
             $aux = $this->dao->get();
             if($aux == false) {
                 return array();

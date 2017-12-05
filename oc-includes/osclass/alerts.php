@@ -26,11 +26,10 @@
         }
 
         if($last_exec==null) {
-            $cron = Cron::newInstance()->getCronByType($type);
-            if( is_array($cron) ) {
+            $cron      = Cron::newInstance()->getCronByType($type);
+	        $last_exec = '0000-00-00 00:00:00';
+	        if ( is_array( $cron ) ) {
                 $last_exec = $cron['d_last_exec'];
-            } else {
-                $last_exec = '0000-00-00 00:00:00';
             }
         }
 

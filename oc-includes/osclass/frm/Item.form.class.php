@@ -351,9 +351,10 @@
         {
             if($users==null) { $users = User::newInstance()->listAll(); }
 	        if($item==null) { $item = osc_item(); }
-	        if( Session::newInstance()->_getForm('userId') != '' ){
+	        $userId = '';
+	        if ( Session::newInstance()->_getForm( 'userId' ) != '' ) {
                 $userId = Session::newInstance()->_getForm('userId');
-            } else { $userId = ''; }
+	        }
 	        echo '<select name="userId" id="userId">';
                 if(isset($default_item)) {
                     echo '<option value="">' . $default_item . '</option>';

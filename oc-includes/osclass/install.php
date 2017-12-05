@@ -240,10 +240,9 @@ switch( $step ) {
 	                        $openedfile = fopen( $destination , 'wb' );
                             fwrite($openedfile, $contentx);
                             fclose($openedfile);
-                            if ($contentx === FALSE) {
+	                        $status = true;
+	                        if ( $contentx === false ) {
                                 $status = false;
-                            } else {
-                                $status = true;
                             }
                         }
                         display_finish($password);

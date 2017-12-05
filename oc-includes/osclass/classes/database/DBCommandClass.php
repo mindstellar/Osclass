@@ -643,10 +643,9 @@
             }
 
             if( $offset != '' ) {
-                if(is_numeric($offset)) {
+	            $this->aOffset = 0;
+	            if ( is_numeric( $offset ) ) {
 	                $this->aOffset = (int) $offset;
-                } else {
-                    $this->aOffset = 0;
                 }
             }
 
@@ -663,12 +662,12 @@
          */
         public function offset($offset)
         {
-            if(is_numeric($offset)) {
+	        $this->aOffset = 0;
+	        if ( is_numeric( $offset ) ) {
 	            $this->aOffset = (int) $offset;
-            } else {
-                $this->aOffset = 0;
             }
-            return $this;
+
+	        return $this;
         }
 
         /**

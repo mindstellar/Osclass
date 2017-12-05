@@ -1176,19 +1176,17 @@
                             if(osc_logged_user_item_validation()) { //USER IS LOGGED, BUT NO NEED TO VALIDATE
                                 $active = 'ACTIVE';
                             } else { // USER IS LOGGED, NEED TO VALIDATE, CHECK NUMBER OF PREVIOUS ITEMS
-                                $user = User::newInstance()->findByPrimaryKey(osc_logged_user_id());
-                                if($user['i_items']<osc_moderate_items()) {
+                                $user   = User::newInstance()->findByPrimaryKey(osc_logged_user_id());
+	                            $active = 'ACTIVE';
+	                            if ( $user[ 'i_items' ] < osc_moderate_items() ) {
                                     $active = 'INACTIVE';
-                                } else {
-                                    $active = 'ACTIVE';
                                 }
                             }
                         }
                     } else if(osc_moderate_items()==0 ){
-                        if(osc_is_web_user_logged_in() && osc_logged_user_item_validation() ) {
+	                    $active = 'INACTIVE';
+	                    if ( osc_is_web_user_logged_in() && osc_logged_user_item_validation() ) {
                             $active = 'ACTIVE';
-                        } else {
-                            $active = 'INACTIVE';
                         }
                     } else {
                         $active = 'ACTIVE';
@@ -1438,11 +1436,10 @@
                         $fileMime = $aResources['type'][$key];
                         if( stripos( $fileMime, 'image/' ) !== FALSE) {
                             if(function_exists( 'getimagesize' )) {
-                                $info = getimagesize($aResources['tmp_name'][$key]);
-                                if(isset($info['mime'])) {
+                                $info     = getimagesize($aResources['tmp_name'][$key]);
+	                            $fileMime = '';
+	                            if ( isset( $info[ 'mime' ] ) ) {
                                     $fileMime = $info['mime'];
-                                } else {
-                                    $fileMime = '';
                                 }
                             }
                         }

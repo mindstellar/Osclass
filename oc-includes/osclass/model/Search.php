@@ -1099,13 +1099,12 @@
                 return array();
             }
 
-            if($result) {
+	        $items = array ();
+	        if ( $result ) {
                 $items = $result->result();
-            } else {
-                $items = array();
             }
 
-            if($extended) {
+	        if ( $extended ) {
                 return Item::newInstance()->extendData($items);
             } else {
                 return $items;

@@ -31,13 +31,14 @@
     function osc_static_page() {
         if (View::newInstance()->_exists('pages')) {
             $page = View::newInstance()->_current('pages');
-        } else if (View::newInstance()->_exists('page')) {
-            $page = View::newInstance()->_get('page');
         } else {
-            $page = null;
+	        $page = null;
+        }
+	    if ( View::newInstance()->_exists( 'page' ) ) {
+            $page = View::newInstance()->_get('page');
         }
 
-        if ( !View::newInstance()->_exists('page_meta') ) {
+	    if ( ! View::newInstance()->_exists( 'page_meta' ) ) {
             View::newInstance()->_exportVariableToView('page_meta', json_decode(@$page['s_meta'], true));
         }
 

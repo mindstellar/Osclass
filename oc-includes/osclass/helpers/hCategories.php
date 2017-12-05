@@ -29,16 +29,16 @@
      * @return array
      */
     function osc_category() {
-        if (View::newInstance()->_exists('subcategories')) {
+	    $category = null;
+	    if ( View::newInstance()->_exists( 'subcategories' ) ) {
             $category = View::newInstance()->_current('subcategories');
         } elseif (View::newInstance()->_exists('categories')) {
             $category = View::newInstance()->_current('categories');
         } elseif (View::newInstance()->_exists('category')) {
             $category = View::newInstance()->_get('category');
-        } else {
-            $category = null;
         }
-        return $category;
+
+	    return $category;
     }
 
 

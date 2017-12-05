@@ -40,14 +40,14 @@
      * @return array
      */
     function osc_locale() {
-        if (View::newInstance()->_exists('locales')) {
+	    $locale = null;
+	    if ( View::newInstance()->_exists( 'locales' ) ) {
             $locale = View::newInstance()->_current('locales');
         } elseif (View::newInstance()->_exists('locale')) {
             $locale = View::newInstance()->_get('locale');
-        } else {
-            $locale = null;
         }
-        return $locale;
+
+	    return $locale;
     }
 
     /**

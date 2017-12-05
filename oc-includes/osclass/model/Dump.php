@@ -123,14 +123,13 @@
 
             $this->dao->select();
             $this->dao->from($table);
-            $res = $this->dao->get();
-            if($res) {
+            $res    = $this->dao->get();
+	        $result = array ();
+	        if ( $res ) {
                 $result = $res->result();
-            } else {
-                $result = array();
             }
 
-            $_str = '';
+	        $_str = '';
             if($res) {
                 $num_rows   = $res->numRows();
                 $num_fields = $res->numFields();

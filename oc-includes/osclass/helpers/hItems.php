@@ -33,13 +33,12 @@
     * @return array $item, or null if not exist
     */
     function osc_item() {
-        if(View::newInstance()->_exists('item')) {
+	    $item = null;
+	    if ( View::newInstance()->_exists( 'item' ) ) {
             $item = View::newInstance()->_get('item');
-        } else {
-            $item = null;
         }
 
-        return $item;
+	    return $item;
     }
 
     /**

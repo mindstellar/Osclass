@@ -54,15 +54,14 @@
 		 */
 		public static function applyFilter( $hook )
         {
-            $args   = func_get_args();
-            $hook   = array_shift($args);
-            if(isset($args[0])) {
+            $args    = func_get_args();
+            $hook    = array_shift($args);
+	        $content = '';
+	        if ( isset( $args[ 0 ] ) ) {
                 $content = $args[0];
-            } else {
-                $content = '';
             }
 
-            if(isset(self::$hooks[$hook])) {
+	        if ( isset( self::$hooks[ $hook ] ) ) {
                 for($priority = 0;$priority<=10;$priority++) {
                     if(isset(self::$hooks[$hook][$priority]) && is_array(self::$hooks[$hook][$priority])) {
                         foreach(self::$hooks[$hook][$priority] as $fxName) {

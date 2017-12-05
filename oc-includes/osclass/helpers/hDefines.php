@@ -31,12 +31,11 @@
      * @return string
      */
     function osc_base_url($with_index = false) {
-        if(MULTISITE) {
+	    $path = WEB_PATH;
+	    if ( MULTISITE ) {
             $path = osc_multisite_url();
-        } else {
-            $path = WEB_PATH;
         }
-        // add the index.php if it's true
+	    // add the index.php if it's true
         if($with_index) {
             $path .= 'index.php';
         }
