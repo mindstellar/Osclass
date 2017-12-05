@@ -2046,13 +2046,10 @@
 	function osc_csrfguard_validate_token( $unique_form_name , $token_value ) {
 		$name  = Session::newInstance()->_get( 'token_name' );
 		$token = Session::newInstance()->_get( $unique_form_name );
-		if ( $name === $unique_form_name && $token === $token_value ) {
-			return true;
-		} else {
-			return false;
-		}
 
-		return $result;
+		return ( $name === $unique_form_name && $token === $token_value );
+
+		//return $result;
 	}
 
 
