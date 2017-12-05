@@ -5,7 +5,7 @@
 	 */
 	class Object_Cache_Factory {
 
-    private static $instance = null;
+		private static $instance;
 
 		/**
 		 * @return null|\Object_Cache_default

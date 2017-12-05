@@ -23,13 +23,13 @@
 	 */
 	class DB
     {
-        private $db = null;
+		private $db;
         private $db_errno = 0;
         private $db_error = 0;
-        private $dbHost = null;
-        private $dbUser = null;
-        private $dbPassword = null;
-        private $dbName = null;
+		private $dbHost;
+		private $dbUser;
+		private $dbPassword;
+		private $dbName;
         private $msg = '';
 
 		/**
@@ -45,7 +45,6 @@
             $this->dbUser = $dbUser;
             $this->dbPassword = $dbPassword;
             $this->dbName = $dbName;
-            $this->db_errno = 0;
 
             $this->osc_dbConnect();
         }
@@ -88,7 +87,7 @@
          * @param string server ip or name
          * @param string database user
          * @param string database password
-         * @param string datatabase name
+         * @param string database name
          */
         public function osc_dbConnect() {
             $this->db = @new mysqli($this->dbHost, $this->dbUser, $this->dbPassword, $this->dbName);

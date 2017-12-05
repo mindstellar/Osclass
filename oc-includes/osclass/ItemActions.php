@@ -23,7 +23,7 @@
 	 */
 	Class ItemActions
     {
-        private $manager = null;
+		private $manager;
         public $is_admin;
         public $data;
 
