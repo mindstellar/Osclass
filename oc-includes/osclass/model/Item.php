@@ -762,6 +762,7 @@
                         'i_num_offensive'       => 0,
                         'i_num_expired'         => 0
                     );
+	                break;
                 default:
                     break;
             }

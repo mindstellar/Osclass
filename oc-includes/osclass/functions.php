@@ -169,9 +169,10 @@ osc_add_hook('search_form', 'osc_meta_search');
             $text .= $result . $s_page;
         break;
         case('login'):
-            switch ($section) {
-                case('recover'): $text = __('Recover your password');
-                default:         $text = __('Login');
+	        if ( $section === 'recover' ) {
+		        $text = __( 'Recover your password' );
+	        } else {
+		        $text = __( 'Login' );
             }
         break;
         case('register'):

@@ -434,7 +434,7 @@
     /**
      * Gets address of current user
      *
-     * @return address
+     * @return string
      */
     function osc_user_address() {
         return (string) osc_user_field( 's_address' );
