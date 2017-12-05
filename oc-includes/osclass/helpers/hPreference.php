@@ -453,10 +453,10 @@
     /**
      * Gets when was the last version check
      *
-     * @return string
+     * @return int
      */
     function osc_last_version_check() {
-        return getPreference( 'last_version_check');
+	    return getPreference( 'last_version_check') ?:0;
     }
 
     /**
