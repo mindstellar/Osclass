@@ -36,7 +36,7 @@
 
         $pass = '';
 	    for ( $i = 0; $i < $length; $i ++ ) {
-		    $pass .= $dict[ rand( 0 , count( $dict ) - 1 ) ];
+		    $pass .= $dict[ mt_rand( 0 , count( $dict ) - 1 ) ];
 	    }
 
         return $pass;
