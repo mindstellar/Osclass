@@ -58,7 +58,7 @@
 
 			$backtracel = '';
 			foreach ( debug_backtrace() as $k => $v ) {
-				if ( $v[ 'function' ] == 'include' || $v[ 'function' ] == 'include_once' || $v[ 'function' ] == 'require_once' || $v[ 'function' ] == 'require' ) {
+				if ( $v[ 'function' ] === 'include' || $v[ 'function' ] === 'include_once' || $v[ 'function' ] === 'require_once' || $v[ 'function' ] === 'require' ) {
 					$backtracel .= '#' . $k . ' ' . $v[ 'function' ] . '(' . $v[ 'args' ][ 0 ] . ') called@ [' . $v[ 'file' ] . ':' . $v[ 'line' ] . '] / ';
 				} else {
 					$backtracel .= '#' . $k . ' ' . $v[ 'function' ] . ' called@ [' . $v[ 'file' ] . ':' . $v[ 'line' ] . '] / ';
@@ -98,7 +98,7 @@
 		}
 
 		while ( $file = @readdir( $fd ) ) {
-			if ( $file != '.' && $file != '..' ) {
+			if ( $file !== '.' && $file !== '..' ) {
 				if ( ! is_dir( $path . '/' . $file ) ) {
 					@chmod( $path . '/' . $file , 0777 );
 					if ( ! @unlink( $path . '/' . $file ) ) {
@@ -579,7 +579,7 @@
 	function osc_copy( $source , $dest , $options = array ( 'folderPermission' => 0755 , 'filePermission' => 0755 ) ) {
 		$result = true;
 		if ( is_file( $source ) ) {
-			if ( $dest[ strlen( $dest ) - 1 ] == '/' ) {
+			if ( $dest[ strlen( $dest ) - 1 ] === '/' ) {
 				if ( ! file_exists( $dest ) ) {
 					osc_mkdir( $dest , $options[ 'folderPermission' ] );
 				}
@@ -607,7 +607,7 @@
 					@chmod( $dest , $options[ 'filePermission' ] );
 				}
 			} else {
-				if ( $source[ strlen( $source ) - 1 ] == '/' ) {
+				if ( $source[ strlen( $source ) - 1 ] === '/' ) {
 					//Copy parent directory with new name and all its content
 					@mkdir( $dest , $options[ 'folderPermission' ] );
 					@chmod( $dest , $options[ 'filePermission' ] );
@@ -621,7 +621,7 @@
 			$dirHandle = opendir( $source );
 			$result    = true;
 			while ( $file = readdir( $dirHandle ) ) {
-				if ( $file != '.' && $file != '..' ) {
+				if ( $file !== '.' && $file !== '..' ) {
 					if ( ! is_dir( $source . '/' . $file ) ) {
 						$__dest = $dest . '/' . $file;
 					} else {
@@ -914,7 +914,7 @@
 		// parse URL
 		$aUrl = parse_url( $sourceFile );
 		$host = $aUrl[ 'host' ];
-		if ( 'localhost' == strtolower( $host ) ) {
+		if ( 'localhost' === strtolower( $host ) ) {
 			$host = '127.0.0.1';
 		}
 
@@ -956,7 +956,7 @@
 				$aUrl = parse_url( $headers[ 'location' ] );
 
 				$host = $aUrl[ 'host' ];
-				if ( 'localhost' == strtolower( $host ) ) {
+				if ( 'localhost' === strtolower( $host ) ) {
 					$host = '127.0.0.1';
 				}
 
@@ -970,7 +970,7 @@
 			} else {
 				$body             = $aResult[ 'body' ];
 				$transferEncoding = @$headers[ 'transfer-encoding' ];
-				if ( $transferEncoding == 'chunked' ) {
+				if ( $transferEncoding === 'chunked' ) {
 					$body = http_chunked_decode( $aResult[ 'body' ] );
 				}
 				if ( $fileout != null ) {
@@ -1216,7 +1216,7 @@
 				continue;
 			}
 
-			if ( substr( $file[ 'name' ] , - 1 ) == '/' ) {
+			if ( substr( $file[ 'name' ] , - 1 ) === '/' ) {
 				if ( ! mkdir( $to . $file[ 'name' ] ) && ! is_dir( $to . $file[ 'name' ] ) ) {
 					throw new \RuntimeException( sprintf( 'Directory "%s" was not created' , $to . $file[ 'name' ] ) );
 				}
@@ -1342,7 +1342,7 @@
 
 				$dh = opendir( $dir );
 				while ( false !== ( $_file = readdir( $dh ) ) ) {
-					if ( $_file != '.' && $_file != '..' && stripos( $_file , 'Osclass_backup.' ) === false ) {
+					if ( $_file !== '.' && $_file !== '..' && stripos( $_file , 'Osclass_backup.' ) === false ) {
 						if ( is_file( $dir . $_file ) ) {
 							$zip->addFile( $dir . $_file , str_replace( ABS_PATH , '' , $dir . $_file ) );
 						} elseif ( is_dir( $dir . $_file ) ) {
@@ -1388,7 +1388,7 @@
 
 			// To support windows and the C: root you need to add the
 			// following 3 lines, should be ignored on linux
-			if ( $v_dir[ 1 ] == ':' ) {
+			if ( $v_dir[ 1 ] === ':' ) {
 				$v_remove = substr( $v_dir , 2 );
 			}
 			$v_list = $zip->create( $dir , PCLZIP_OPT_REMOVE_PATH , $v_remove );
@@ -1446,24 +1446,24 @@
 		clearstatcache();
 		if ( $dh = opendir( $dir ) ) {
 			while ( ( $file = readdir( $dh ) ) !== false ) {
-				if ( $file != '.' && $file != '..' ) {
+				if ( $file !== '.' && $file !== '..' ) {
 					if ( is_dir( str_replace( '//' , '/' , $dir . '/' . $file ) ) ) {
 						if ( str_replace( '//' , '/' , $dir ) == ( ABS_PATH . 'oc-content/themes' ) ) {
-							if ( $file == 'bender' || $file == 'index.php' ) {
+							if ( $file === 'bender' || $file === 'index.php' ) {
 								$res = osc_check_dir_writable( str_replace( '//' , '/' , $dir . '/' . $file ) );
 								if ( ! $res ) {
 									return false;
 								}
 							}
 						} else if ( str_replace( '//' , '/' , $dir ) == ( ABS_PATH . 'oc-content/plugins' ) ) {
-							if ( $file == 'google_maps' || $file == 'google_analytics' || $file == 'index.php' ) {
+							if ( $file === 'google_maps' || $file === 'google_analytics' || $file === 'index.php' ) {
 								$res = osc_check_dir_writable( str_replace( '//' , '/' , $dir . '/' . $file ) );
 								if ( ! $res ) {
 									return false;
 								}
 							}
 						} else if ( str_replace( '//' , '/' , $dir ) == ( ABS_PATH . 'oc-content/languages' ) ) {
-							if ( $file == 'en_US' || $file == 'index.php' ) {
+							if ( $file === 'en_US' || $file === 'index.php' ) {
 								$res = osc_check_dir_writable( str_replace( '//' , '/' , $dir . '/' . $file ) );
 								if ( ! $res ) {
 									return false;
@@ -1502,7 +1502,7 @@
 		clearstatcache();
 		if ( $dh = opendir( $dir ) ) {
 			while ( ( $file = readdir( $dh ) ) !== false ) {
-				if ( $file != '.' && $file != '..' && $file[ 0 ] != '.' ) {
+				if ( $file !== '.' && $file !== '..' && $file[ 0 ] !== '.' ) {
 					if ( is_dir( str_replace( '//' , '/' , $dir . '/' . $file ) ) ) {
 						if ( ! is_writable( str_replace( '//' , '/' , $dir . '/' . $file ) ) ) {
 							$res = @chmod( str_replace( '//' , '/' , $dir . '/' . $file ) , 0777 );
@@ -1511,21 +1511,21 @@
 							}
 						}
 						if ( str_replace( '//' , '/' , $dir ) == ( ABS_PATH . 'oc-content/themes' ) ) {
-							if ( $file == 'modern' || $file == 'index.php' ) {
+							if ( $file === 'modern' || $file === 'index.php' ) {
 								$res = osc_change_permissions( str_replace( '//' , '/' , $dir . '/' . $file ) );
 								if ( ! $res ) {
 									return false;
 								}
 							}
 						} else if ( str_replace( '//' , '/' , $dir ) == ( ABS_PATH . 'oc-content/plugins' ) ) {
-							if ( $file == 'google_maps' || $file == 'google_analytics' || $file == 'index.php' ) {
+							if ( $file === 'google_maps' || $file === 'google_analytics' || $file === 'index.php' ) {
 								$res = osc_change_permissions( str_replace( '//' , '/' , $dir . '/' . $file ) );
 								if ( ! $res ) {
 									return false;
 								}
 							}
 						} else if ( str_replace( '//' , '/' , $dir ) == ( ABS_PATH . 'oc-content/languages' ) ) {
-							if ( $file == 'en_US' || $file == 'index.php' ) {
+							if ( $file === 'en_US' || $file === 'index.php' ) {
 								$res = osc_change_permissions( str_replace( '//' , '/' , $dir . '/' . $file ) );
 								if ( ! $res ) {
 									return false;
@@ -1570,7 +1570,7 @@
 		clearstatcache();
 		if ( $dh = opendir( $dir ) ) {
 			while ( ( $file = readdir( $dh ) ) !== false ) {
-				if ( $file != '.' && $file != '..' ) {
+				if ( $file !== '.' && $file !== '..' ) {
 					if ( is_dir( str_replace( '//' , '/' , $dir . '/' . $file ) ) ) {
 						$res = osc_save_permissions( str_replace( '//' , '/' , $dir . '/' . $file ) );
 						foreach ( $res as $k => $v ) {
@@ -1608,8 +1608,8 @@
 	 * @return array of files
 	 */
 	function rglob( $pattern , $flags = 0 , $path = '' ) {
-		if ( ! $path && ( $dir = dirname( $pattern ) ) != '.' ) {
-			if ( $dir == '\\' || $dir == '/' ) {
+		if ( ! $path && ( $dir = dirname( $pattern ) ) !== '.' ) {
+			if ( $dir === '\\' || $dir === '/' ) {
 				$dir = '';
 			}
 
@@ -1878,7 +1878,7 @@
 
 		if ( $workToDo > 0 ) {
 			// there is work to do
-			if ( $limit == 'auto' ) {
+			if ( $limit === 'auto' ) {
 				$total_cities = City::newInstance()->count();
 				$limit        = max( 1000 , ceil( $total_cities / 22 ) );
 			}
@@ -2217,7 +2217,7 @@
 					if ( $handle = opendir( $tmp_path ) ) {
 						$fail = 0;
 						while ( false !== ( $_file = readdir( $handle ) ) ) {
-							if ( $_file != '.' && $_file != '..' && $_file != 'oc-content' ) {
+							if ( $_file !== '.' && $_file !== '..' && $_file !== 'oc-content' ) {
 								$data = osc_copy( $tmp_path . $_file , ABS_PATH . $_file );
 								if ( $data == false ) {
 									$fail = 1;
@@ -2261,7 +2261,7 @@
 								$dir       = new RecursiveIteratorIterator( new RecursiveDirectoryIterator( $tmp_path ) , RecursiveIteratorIterator::CHILD_FIRST );
 								for ( $dir->rewind(); $dir->valid(); $dir->next() ) {
 									if ( $dir->isDir() ) {
-										if ( $dir->getFilename() != '.' && $dir->getFilename() != '..' && ! rmdir( $dir->getPathname() ) ) {
+										if ( $dir->getFilename() !== '.' && $dir->getFilename() !== '..' && ! rmdir( $dir->getPathname() ) ) {
 											$rm_errors ++;
 										}
 									} else {
@@ -2526,7 +2526,7 @@
 
 							$fail = 0;
 							while ( false !== ( $_file = readdir( $handle ) ) ) {
-								if ( $_file != '.' && $_file != '..' ) {
+								if ( $_file !== '.' && $_file !== '..' ) {
 									$copyprocess = osc_copy( osc_content_path() . 'downloads/oc-temp/' . $_file , $folder_dest . $_file );
 									if ( $copyprocess == false ) {
 										$fail = 1;
@@ -2547,7 +2547,7 @@
 							$dir       = new RecursiveIteratorIterator( new RecursiveDirectoryIterator( $path ) , RecursiveIteratorIterator::CHILD_FIRST );
 							for ( $dir->rewind(); $dir->valid(); $dir->next() ) {
 								if ( $dir->isDir() ) {
-									if ( $dir->getFilename() != '.' && $dir->getFilename() != '..' && ! rmdir( $dir->getPathname() ) ) {
+									if ( $dir->getFilename() !== '.' && $dir->getFilename() !== '..' && ! rmdir( $dir->getPathname() ) ) {
 										$rm_errors ++;
 									}
 								} else {
@@ -2562,7 +2562,7 @@
 							}
 
 							if ( $fail == 0 ) { // Everything is OK, continue
-								if ( $data[ 'e_type' ] != 'THEME' && $data[ 'e_type' ] != 'LANGUAGE' ) {
+								if ( $data[ 'e_type' ] !== 'THEME' && $data[ 'e_type' ] !== 'LANGUAGE' ) {
 									if ( $plugin != false && $re_enable ) {
 										$enabled = Plugins::activate( $plugin );
 										if ( $enabled ) {
@@ -2570,15 +2570,15 @@
 										}
 									}
 
-								} else if ( $data[ 'e_type' ] == 'LANGUAGE' ) {
+								} else if ( $data[ 'e_type' ] === 'LANGUAGE' ) {
 									osc_checkLocales();
 								}
 								// recount plugins&themes for update
-								if ( $section == 'plugins' ) {
+								if ( $section === 'plugins' ) {
 									osc_check_plugins_update( true );
-								} else if ( $section == 'themes' ) {
+								} else if ( $section === 'themes' ) {
 									osc_check_themes_update( true );
-								} else if ( $section == 'languages' ) {
+								} else if ( $section === 'languages' ) {
 									osc_check_languages_update( true );
 								}
 
@@ -2634,7 +2634,7 @@
 	 * @return bool
 	 */
 	function osc_is_ssl() {
-		return ( ( isset( $_SERVER[ 'HTTP_X_FORWARDED_PROTO' ] ) && strtolower( $_SERVER[ 'HTTP_X_FORWARDED_PROTO' ] ) == 'https' ) || ( isset( $_SERVER[ 'HTTPS' ] ) && ( $_SERVER[ 'HTTPS' ] == 'on' || $_SERVER[ 'HTTPS' ] == 1 ) ) );
+		return ( ( isset( $_SERVER[ 'HTTP_X_FORWARDED_PROTO' ] ) && strtolower( $_SERVER[ 'HTTP_X_FORWARDED_PROTO' ] ) === 'https' ) || ( isset( $_SERVER[ 'HTTPS' ] ) && ( $_SERVER[ 'HTTPS' ] === 'on' || $_SERVER[ 'HTTPS' ] == 1 ) ) );
 	}
 
 
