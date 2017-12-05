@@ -771,11 +771,7 @@
 	 * @return bool
 	 */
 	function testCurl() {
-		if ( ! function_exists( 'curl_init' ) || ! function_exists( 'curl_exec' ) ) {
-			return false;
-		}
-
-		return true;
+		return ! ( ! function_exists( 'curl_init' ) || ! function_exists( 'curl_exec' ) );
 	}
 
 
@@ -1390,11 +1386,8 @@
 				$v_remove = substr( $v_dir , 2 );
 			}
 			$v_list = $zip->create( $dir , PCLZIP_OPT_REMOVE_PATH , $v_remove );
-			if ( $v_list == 0 ) {
-				return false;
-			}
 
-			return true;
+			return ! ( $v_list == 0 );
 		}
 
 		return false;
