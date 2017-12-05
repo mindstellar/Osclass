@@ -86,7 +86,7 @@
             if (isset($this->cachedAdmin[$id])) {
                 return $this->cachedAdmin[$id];
             }
-            $this->cachedAdmin[$id] = parent::findByPrimaryKey($id, $locale);
+	        $this->cachedAdmin[ $id ] = parent::findByPrimaryKey( $id );
             return $this->cachedAdmin[$id];
         }
 

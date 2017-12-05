@@ -87,7 +87,7 @@
 		public static function your_message() {
             if( Session::newInstance()->_getForm( 'message_body' ) != '' ){
                 $message_body = Session::newInstance()->_getForm( 'message_body' );
-                parent::generic_textarea( 'message' , $message_body, null, false);
+	            parent::generic_textarea( 'message' , $message_body );
             } else {
                 parent::generic_textarea( 'message' , '' );
             }

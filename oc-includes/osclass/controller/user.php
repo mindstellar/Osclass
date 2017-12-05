@@ -221,7 +221,7 @@
 
                     $result = 0;
                     if($email!='' && $secret!='') {
-                        $result = Alerts::newInstance()->activate($email, $secret );
+	                    $result = Alerts::newInstance()->activate( $email );
                     }
 
                     if( $result == 1 ) {
