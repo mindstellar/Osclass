@@ -29,11 +29,7 @@
 
 		$dt_expiration = str_replace( array ( ' ' , '-' , ':' ) , '' , $dt_expiration );
 
-		if ( $dt_expiration > $now ) {
-			return false;
-		} else {
-			return true;
-		}
+		return ! ( $dt_expiration > $now );
 	}
 
 
@@ -105,9 +101,9 @@
 						closedir( $fd );
 
 						return false;
-					} else {
-						osc_deleteDir( $path . '/' . $file );
 					}
+
+					osc_deleteDir( $path . '/' . $file );
 				} else {
 					osc_deleteDir( $path . '/' . $file );
 				}
@@ -145,9 +141,9 @@
 			$zip->close();
 
 			return true;
-		} else {
-			return false;
 		}
+
+		return false;
 	}
 
 
@@ -927,65 +923,65 @@
 		$fp = @fsockopen( $host , 80 , $errno , $errstr , 30 );
 		if ( ! $fp ) {
 			return false;
+		}
+
+		$ua  = Params::getServerParam( 'HTTP_USER_AGENT' ) . ' Osclass (v.' . osc_version() . ')';
+		$out = ( $post_data != null && is_array( $post_data ) ? 'POST' : 'GET' ) . " $link HTTP/1.1\r\n";
+		$out .= "Host: $host\r\n";
+		$out .= "User-Agent: $ua\r\n";
+		$out .= "Connection: Close\r\n\r\n";
+		$out .= "\r\n";
+		if ( $post_data != null && is_array( $post_data ) ) {
+			$out .= http_build_query( $post_data );
+		}
+		fwrite( $fp , $out );
+
+		$contents = '';
+		while ( ! feof( $fp ) ) {
+			$contents .= fgets( $fp , 1024 );
+		}
+
+		fclose( $fp );
+
+		// check redirections ?
+		// if (redirections) then do request again
+		$aResult = processResponse( $contents );
+		$headers = processHeaders( $aResult[ 'headers' ] );
+
+		$location = @$headers[ 'location' ];
+		if ( isset( $location ) && $location != '' ) {
+			$aUrl = parse_url( $headers[ 'location' ] );
+
+			$host = $aUrl[ 'host' ];
+			if ( 'localhost' === strtolower( $host ) ) {
+				$host = '127.0.0.1';
+			}
+
+			$requestPath = $aUrl[ 'path' ] . ( isset( $aUrl[ 'query' ] ) ? '?' . $aUrl[ 'query' ] : '' );
+
+			if ( empty( $requestPath ) ) {
+				$requestPath .= '/';
+			}
+
+			download_fsockopen( $host , $requestPath , $fileout );
 		} else {
-			$ua  = Params::getServerParam( 'HTTP_USER_AGENT' ) . ' Osclass (v.' . osc_version() . ')';
-			$out = ( $post_data != null && is_array( $post_data ) ? 'POST' : 'GET' ) . " $link HTTP/1.1\r\n";
-			$out .= "Host: $host\r\n";
-			$out .= "User-Agent: $ua\r\n";
-			$out .= "Connection: Close\r\n\r\n";
-			$out .= "\r\n";
-			if ( $post_data != null && is_array( $post_data ) ) {
-				$out .= http_build_query( $post_data );
+			$body             = $aResult[ 'body' ];
+			$transferEncoding = @$headers[ 'transfer-encoding' ];
+			if ( $transferEncoding === 'chunked' ) {
+				$body = http_chunked_decode( $aResult[ 'body' ] );
 			}
-			fwrite( $fp , $out );
+			if ( $fileout != null ) {
+				$ff = @fopen( $fileout , 'wb+' );
+				if ( $ff !== false ) {
+					fwrite( $ff , $body );
+					fclose( $ff );
 
-			$contents = '';
-			while ( ! feof( $fp ) ) {
-				$contents .= fgets( $fp , 1024 );
-			}
-
-			fclose( $fp );
-
-			// check redirections ?
-			// if (redirections) then do request again
-			$aResult = processResponse( $contents );
-			$headers = processHeaders( $aResult[ 'headers' ] );
-
-			$location = @$headers[ 'location' ];
-			if ( isset( $location ) && $location != '' ) {
-				$aUrl = parse_url( $headers[ 'location' ] );
-
-				$host = $aUrl[ 'host' ];
-				if ( 'localhost' === strtolower( $host ) ) {
-					$host = '127.0.0.1';
-				}
-
-				$requestPath = $aUrl[ 'path' ] . ( isset( $aUrl[ 'query' ] ) ? '?' . $aUrl[ 'query' ] : '' );
-
-				if ( empty( $requestPath ) ) {
-					$requestPath .= '/';
-				}
-
-				download_fsockopen( $host , $requestPath , $fileout );
-			} else {
-				$body             = $aResult[ 'body' ];
-				$transferEncoding = @$headers[ 'transfer-encoding' ];
-				if ( $transferEncoding === 'chunked' ) {
-					$body = http_chunked_decode( $aResult[ 'body' ] );
-				}
-				if ( $fileout != null ) {
-					$ff = @fopen( $fileout , 'wb+' );
-					if ( $ff !== false ) {
-						fwrite( $ff , $body );
-						fclose( $ff );
-
-						return true;
-					} else {
-						return false;
-					}
+					return true;
 				} else {
-					return $body;
+					return false;
 				}
+			} else {
+				return $body;
 			}
 		}
 	}
@@ -1029,10 +1025,12 @@
 				fclose( $fp );
 
 				return true;
-			} else {
-				return false;
 			}
-		} else if ( testFsockopen() ) { // test curl/fsockopen
+
+			return false;
+		}
+
+		if ( testFsockopen() ) { // test curl/fsockopen
 			$downloadedFile = osc_content_path() . 'downloads/' . $downloadedFile;
 			download_fsockopen( $sourceFile , $downloadedFile );
 
@@ -1356,9 +1354,9 @@
 			$zip->close();
 
 			return true;
-		} else {
-			return false;
 		}
+
+		return false;
 
 	}
 
@@ -1397,9 +1395,9 @@
 			}
 
 			return true;
-		} else {
-			return false;
 		}
+
+		return false;
 
 	}
 
@@ -1542,9 +1540,9 @@
 					} else {
 						if ( ! is_writable( str_replace( '//' , '/' , $dir . '/' . $file ) ) ) {
 							return @chmod( str_replace( '//' , '/' , $dir . '/' . $file ) , 0777 );
-						} else {
-							return true;
 						}
+
+						return true;
 					}
 				}
 			}
@@ -1673,17 +1671,17 @@
 
 			if ( false === ( $json = @osc_file_get_contents( $uri ) ) ) {
 				return false;
-			} else {
-				$data = json_decode( $json , true );
-				if ( isset( $data[ 's_version' ] ) ) {
-					$result = version_compare2( $version , $data[ 's_version' ] );
-					if ( $result == - 1 ) {
-						// market have a newer version of this language
-						$result = version_compare2( $data[ 's_version' ] , OSCLASS_VERSION );
-						if ( $result == 0 || $result == - 1 ) {
-							// market version is compatible with current osclass version
-							return true;
-						}
+			}
+
+			$data = json_decode( $json , true );
+			if ( isset( $data[ 's_version' ] ) ) {
+				$result = version_compare2( $version , $data[ 's_version' ] );
+				if ( $result == - 1 ) {
+					// market have a newer version of this language
+					$result = version_compare2( $data[ 's_version' ] , OSCLASS_VERSION );
+					if ( $result == 0 || $result == - 1 ) {
+						// market version is compatible with current osclass version
+						return true;
 					}
 				}
 			}
@@ -1718,9 +1716,9 @@
 			}
 
 			return $uri;
-		} else {
-			return false;
 		}
+
+		return false;
 	}
 
 
@@ -1733,13 +1731,13 @@
 	function _need_update( $uri , $version ) {
 		if ( false === ( $json = @osc_file_get_contents( $uri ) ) ) {
 			return false;
-		} else {
-			$data = json_decode( $json , true );
-			if ( isset( $data[ 's_version' ] ) ) {
-				$result = version_compare2( $data[ 's_version' ] , $version );
-				if ( $result == 1 ) {
-					return true;
-				}
+		}
+
+		$data = json_decode( $json , true );
+		if ( isset( $data[ 's_version' ] ) ) {
+			$result = version_compare2( $data[ 's_version' ] , $version );
+			if ( $result == 1 ) {
+				return true;
 			}
 		}
 	}
@@ -1766,7 +1764,8 @@
 				if ( $aVal > $b[ $depth ] ) {
 					return 1;
 				} //Return A > B
-				else if ( $aVal < $b[ $depth ] ) {
+
+				if ( $aVal < $b[ $depth ] ) {
 					return - 1;
 				} //Return B > A
 				//An equal result is inconclusive at this point
@@ -1974,10 +1973,10 @@
 				while ( true ) {
 					if ( ! $catManager->findBySlug( $slug ) ) {
 						break;
-					} else {
-						$slug = $slug_tmp . '_' . $slug_unique;
-						$slug_unique ++;
 					}
+
+					$slug = $slug_tmp . '_' . $slug_unique;
+					$slug_unique ++;
 				}
 				$fieldsDescription[ 's_slug' ] = $slug;
 				$catManager->insertDescription( $fieldsDescription );
@@ -2137,10 +2136,10 @@
 				$location_slug = $manager->findBySlug( $slug );
 				if ( ! isset( $location_slug[ $field ] ) ) {
 					break;
-				} else {
-					$slug = $slug_tmp . '-' . $slug_unique;
-					$slug_unique ++;
 				}
+
+				$slug = $slug_tmp . '-' . $slug_unique;
+				$slug_unique ++;
 			}
 			$locations_changed += $manager->update( array ( 's_slug' => $slug ) , array ( $field => $location[ $field ] ) );
 		}
