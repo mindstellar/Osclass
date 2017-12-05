@@ -43,7 +43,7 @@
 		 * @param bool $xss_check
 		 * @param bool $quotes_encode
 		 *
-		 * @return \Purified|string
+		 * @return mixed
 		 */
 		public static function getParam( $param , $htmlencode = false , $xss_check = true , $quotes_encode = true )
         {
