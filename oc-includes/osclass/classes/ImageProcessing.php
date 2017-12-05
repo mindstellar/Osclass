@@ -56,15 +56,15 @@
 	     */
 	    private function __construct( $imagePath ) {
             if(!file_exists($imagePath)) {
-                throw new Exception(sprintf( __( '%s does not exist!' ), $imagePath));
+	            throw new RuntimeException( sprintf( __( '%s does not exist!' ) , $imagePath ) );
             }
 
             if(!is_readable($imagePath)) {
-                throw new Exception(sprintf( __( '%s is not readable!' ), $imagePath));
+	            throw new RuntimeException( sprintf( __( '%s is not readable!' ) , $imagePath ) );
             }
 
             if(filesize($imagePath)==0) {
-                throw new Exception(sprintf( __( '%s is corrupt or broken!' ), $imagePath));
+	            throw new RuntimeException( sprintf( __( '%s is corrupt or broken!' ) , $imagePath ) );
             }
 
             $this->image_info = @getimagesize($imagePath);
@@ -226,7 +226,7 @@
 	     */
 	    public function saveToFile( $imagePath , $ext = null ) {
             if(file_exists($imagePath) && !is_writable($imagePath)) {
-                throw new Exception("$imagePath is not writable!");
+	            throw new RuntimeException( "$imagePath is not writable!" );
             }
 
             if($ext==null) {

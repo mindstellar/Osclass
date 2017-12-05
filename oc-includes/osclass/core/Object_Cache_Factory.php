@@ -48,7 +48,7 @@
                     return self::$instance;
                 }
             }
-            throw new Exception('Unknown cache');
+	        throw new RuntimeException( 'Unknown cache' );
         } else {
             return self::$instance;
         }
