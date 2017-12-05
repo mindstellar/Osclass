@@ -1009,8 +1009,7 @@
 
             osc_run_hook('delete_item', $id);
 
-            $res = parent::deleteByPrimaryKey($id);
-            return $res;
+	        return parent::deleteByPrimaryKey( $id );
         }
 
         /**

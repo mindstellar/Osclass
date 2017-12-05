@@ -377,8 +377,7 @@
             $exist = $this->existDescription($conditions);
 
             if(!$exist) {
-                $result = $this->insertDescription($id, $locale, $info);
-                return $result;
+	            return $this->insertDescription( $id , $locale , $info );
             }
 
             $array_where = array(

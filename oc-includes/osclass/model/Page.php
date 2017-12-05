@@ -497,8 +497,7 @@
             $exist= $this->existDescription($conditions);
 
             if(!$exist) {
-                $result = $this->insertDescription($id, $locale, $title, $text);
-                return $result;
+	            return $this->insertDescription( $id , $locale , $title , $text );
             }
 
             return $this->dao->update($this->getDescriptionTableName(),

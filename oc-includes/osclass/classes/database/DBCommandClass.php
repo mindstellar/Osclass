@@ -894,8 +894,7 @@
                 $conditions .= implode("\n", $like);
             }
 
-            $sql = 'DELETE FROM ' . $table . $conditions;
-            return $sql;
+	        return 'DELETE FROM ' . $table . $conditions;
         }
 
         /**

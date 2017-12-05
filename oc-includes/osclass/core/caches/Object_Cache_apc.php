@@ -195,9 +195,8 @@ class Object_Cache_apc implements iObject_Cache{
         $this->cache[$key] = $data;
 
         $expire = ( $expire == 0 ) ? $this->default_expiration : $expire;
-        $result = apc_store($key, $store_data, $expire);
 
-        return $result;
+	    return apc_store( $key , $store_data , $expire );
     }
 
     /**

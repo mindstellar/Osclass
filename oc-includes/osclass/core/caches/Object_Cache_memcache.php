@@ -193,9 +193,7 @@ class Object_Cache_memcache implements iObject_Cache{
 
         $expire = ( $expire == 0 ) ? $this->default_expiration : $expire;
 
-        $result = $this->_memcached->set($key, $store_data, 0, $expire);
-
-        return $result;
+	    return $this->_memcached->set( $key , $store_data , 0 , $expire );
     }
 
     /**
