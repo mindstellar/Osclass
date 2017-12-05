@@ -621,8 +621,8 @@ function osc_doRequest($url, $_data) {
 	 * @return bool
 	 */
 	function osc_copyemz( $file1 ,$file2){
-    $contentx =@file_get_contents($file1);
-    $openedfile = fopen( $file2, 'w' );
+    $contentx       =@file_get_contents($file1);
+		$openedfile = fopen( $file2 , 'wb' );
     fwrite($openedfile, $contentx);
     fclose($openedfile);
     if ($contentx === FALSE) {
@@ -667,7 +667,7 @@ function osc_dbdump($path, $file) {
         $_str .= '/* no tables in ' . DB_NAME . ' */';
         $_str .= "\n";
 
-        $f = fopen( $path, 'a' );
+	    $f = fopen( $path , 'ab' );
         fwrite($f, $_str);
         fclose($f);
 
@@ -676,7 +676,7 @@ function osc_dbdump($path, $file) {
 
 	$_str = '/* OSCLASS MYSQL Autobackup (' . date( osc_date_format() ?: 'Y-m-d' ) . ' ' . date( osc_time_format() ?: 'H:i:s' ) . ') */' . "\n";
 
-    $f = fopen( $path, 'a' );
+	$f = fopen( $path , 'ab' );
     fwrite($f, $_str);
     fclose($f);
 
@@ -901,7 +901,7 @@ function download_fsockopen($sourceFile, $fileout = null, $post_data = null)
                 $body = http_chunked_decode($aResult['body']);
             }
             if($fileout!=null) {
-                $ff = @fopen($fileout, 'w+');
+	            $ff = @fopen( $fileout , 'wb+' );
                 if($ff!==FALSE) {
                     fwrite($ff, $body);
                     fclose($ff);
@@ -932,7 +932,7 @@ function download_fsockopen($sourceFile, $fileout = null, $post_data = null)
 
     if ( testCurl() ) {
         @set_time_limit(0);
-        $fp = @fopen (osc_content_path() . 'downloads/' . $downloadedFile, 'w+');
+	    $fp = @fopen( osc_content_path() . 'downloads/' . $downloadedFile , 'wb+' );
         if($fp) {
             $ch = curl_init($sourceFile);
             @curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, 5);
@@ -1135,7 +1135,7 @@ function _unzip_file_ziparchive($file, $to) {
             return -1;
         }
 
-        $fp = @fopen($to . $file['name'], 'w');
+	    $fp = @fopen( $to . $file[ 'name' ] , 'wb' );
         if (!$fp) {
             return -1;
         }
@@ -1186,7 +1186,7 @@ function _unzip_file_pclzip($zip_file, $to) {
         }
 
 
-        $fp = @fopen($to . $file['filename'], 'w');
+	    $fp = @fopen( $to . $file[ 'filename' ] , 'wb' );
         if (!$fp) {
             return -1;
         }
@@ -2030,7 +2030,7 @@ function osc_csrfguard_start() {
     osc_change_permissions();
 
     $maintenance_file = ABS_PATH . '.maintenance';
-    $fileHandler = @fopen($maintenance_file, 'w');
+		$fileHandler  = @fopen( $maintenance_file , 'wb' );
     fclose($fileHandler);
 
     /***********************

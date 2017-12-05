@@ -209,7 +209,7 @@ if (!defined('PASSWORD_DEFAULT')) {
                 }
             }
             if (!$buffer_valid && is_readable('/dev/urandom')) {
-                $f = fopen('/dev/urandom', 'r');
+	            $f    = fopen( '/dev/urandom' , 'rb' );
                 $read = strlen($buffer);
                 while ($read < $raw_salt_len) {
                     $buffer .= fread($f, $raw_salt_len - $read);

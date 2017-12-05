@@ -542,7 +542,7 @@ CREATE TABLE %st_item_description_tmp (
         $objects = iterator_to_array($iterator, true);
         foreach($objects as $file => $object) {
             try{
-                $handle = @fopen($file, 'r');
+	            $handle = @fopen( $file , 'rb' );
                 if($handle!==false) {
                     $exist = false;
                     $text = array("htmlspecialchars(file_get_contents(\$_POST['path']))",

@@ -236,8 +236,8 @@ switch( $step ) {
                         if (function_exists('copy')) {
                             @copy($source, $destination);
                         } else {
-                            $contentx = @file_get_contents($source);
-                            $openedfile = fopen( $destination, 'w' );
+                            $contentx   = @file_get_contents($source);
+	                        $openedfile = fopen( $destination , 'wb' );
                             fwrite($openedfile, $contentx);
                             fclose($openedfile);
                             if ($contentx === FALSE) {

@@ -419,7 +419,7 @@
         }
 
         if (!$buffer_valid && is_readable('/dev/urandom')) {
-            $f = fopen('/dev/urandom', 'r');
+	        $f    = fopen( '/dev/urandom' , 'rb' );
             $read = strlen($buffer);
             while ($read < $length) {
                 $buffer .= fread($f, $length - $read);

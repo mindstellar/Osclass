@@ -100,7 +100,7 @@
                 $_str .= "\n\n";
             }
 
-            $f = fopen( $path, 'a' );
+	        $f = fopen( $path , 'ab' );
             fwrite($f, $_str);
             fclose($f);
 
@@ -184,7 +184,7 @@
 
             $_str .= "\n";
 
-            $f = fopen( $path, 'a' );
+	        $f = fopen( $path , 'ab' );
             fwrite($f, $_str);
             fclose($f);
 

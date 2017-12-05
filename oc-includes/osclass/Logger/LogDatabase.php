@@ -133,7 +133,7 @@
                 return false;
             }
 
-            $fp = fopen($filename, 'a');
+	        $fp = fopen( $filename , 'ab' );
 
             if( $fp == false ) {
                 return false;
@@ -176,7 +176,7 @@
                 return false;
             }
 
-            $fp = fopen($filename, 'a');
+	        $fp = fopen( $filename , 'ab' );
 
             if( $fp == false ) {
                 return false;

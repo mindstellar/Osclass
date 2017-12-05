@@ -662,7 +662,7 @@ CONFIG;
         }
     }
 
-    $handle = fopen(ABS_PATH . 'config.php', 'w');
+		$handle = fopen( ABS_PATH . 'config.php' , 'wb' );
     foreach( $config_sample as $line ) {
         fwrite($handle, $line);
     }
