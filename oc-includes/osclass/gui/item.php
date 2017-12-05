@@ -115,7 +115,7 @@
         <p class="contact_button">
             <?php if( !osc_item_is_expired () ) { ?>
             <?php if( !( ( osc_logged_user_id() == osc_item_user_id() ) && osc_logged_user_id() != 0 ) ) { ?>
-                <?php     if(osc_reg_user_can_contact() && osc_is_web_user_logged_in() || !osc_reg_user_can_contact() ) { ?>
+		            <?php if ( ( osc_reg_user_can_contact() && osc_is_web_user_logged_in() ) || ! osc_reg_user_can_contact() ) { ?>
                     <a href="#contact" class="ui-button ui-button-middle ui-button-main resp-toogle"><?php _e('Contact seller', 'bender'); ?></a>
                 <?php     } ?>
             <?php     } ?>
@@ -147,7 +147,7 @@
         </div>
     <?php } ?>
     <?php if( osc_comments_enabled() ) { ?>
-        <?php if( osc_reg_user_post_comments () && osc_is_web_user_logged_in() || !osc_reg_user_post_comments() ) { ?>
+	    <?php if ( ( osc_reg_user_post_comments() && osc_is_web_user_logged_in() ) || ! osc_reg_user_post_comments() ) { ?>
         <div id="comments">
             <h2><?php _e('Comments', 'bender'); ?></h2>
             <ul id="comment_error_list"></ul>

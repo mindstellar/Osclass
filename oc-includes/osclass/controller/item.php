@@ -435,7 +435,7 @@
                             $this->redirectTo( osc_item_url() );
                         }
 
-                        if( osc_reg_user_can_contact() && osc_is_web_user_logged_in() || !osc_reg_user_can_contact() ){
+	                    if ( ( osc_reg_user_can_contact() && osc_is_web_user_logged_in() ) || ! osc_reg_user_can_contact() ) {
                             $this->doView('item-contact.php');
                         } else {
                             osc_add_flash_warning_message( _m("You can't contact the seller, only registered users can").'. <br />'.sprintf( _m( '<a href="%s">Click here to sign-in</a>' ), osc_user_login_url() ) );
@@ -589,7 +589,7 @@
                     }
 
                     if ($item['b_active'] != 1) {
-                        if( ($this->userId == $item['fk_i_user_id']) && ($this->userId != '') || osc_is_admin_user_logged_in()) {
+	                    if ( ( ( $this->userId == $item[ 'fk_i_user_id' ] ) && ( $this->userId != '' ) ) || osc_is_admin_user_logged_in() ) {
                             osc_add_flash_warning_message( _m("The listing hasn't been validated. Please validate it in order to make it public") );
                         } else {
                             $this->do400();
