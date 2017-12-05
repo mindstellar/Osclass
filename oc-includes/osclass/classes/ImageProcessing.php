@@ -26,6 +26,7 @@
 	     * @param $imagePath
 	     *
 	     * @return \ImageProcessing
+	     * @throws \Exception
 	     */
 	    public static function fromFile( $imagePath ) {
             return new ImageProcessing($imagePath);
