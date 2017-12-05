@@ -990,7 +990,7 @@
                 }
                 if($this->withPicture) {
                     $this->dao->join(sprintf('%st_item_resource', DB_TABLE_PREFIX), sprintf('%st_item_resource.fk_i_item_id = %st_item.pk_i_id', DB_TABLE_PREFIX, DB_TABLE_PREFIX), 'LEFT');
-                    $this->dao->where(sprintf("%st_item_resource.s_content_type LIKE '%%image%%' ", DB_TABLE_PREFIX, DB_TABLE_PREFIX, DB_TABLE_PREFIX));
+	                $this->dao->where( sprintf( "%st_item_resource.s_content_type LIKE '%%image%%' " , DB_TABLE_PREFIX ) );
                     $this->dao->groupBy(DB_TABLE_PREFIX.'t_item.pk_i_id');
                 }
                 if($this->onlyPremium) {
