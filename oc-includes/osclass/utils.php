@@ -566,8 +566,8 @@ function osc_doRequest($url, $_data) {
         @chmod($__dest,$options['filePermission']);
 
     } elseif(is_dir($source)) {
-        if ($dest[strlen($dest)-1]=='/') {
-            if ($source[strlen($source)-1]=='/') {
+	    if ( $dest[ strlen( $dest ) - 1 ] === '/' ) {
+		    if ( $source[ strlen( $source ) - 1 ] === '/' ) {
                 //Copy only contents
             } else {
                 //Change parent itself and its contents
@@ -1019,7 +1019,9 @@ function download_fsockopen($sourceFile, $fileout = null, $post_data = null)
 function apache_mod_loaded($mod) {
     if(function_exists('apache_get_modules')) {
         $modules = apache_get_modules();
-        if(in_array($mod, $modules)) { return true; }
+	    if ( in_array( $mod , $modules , true ) ) {
+		    return true;
+	    }
     } else if(function_exists('phpinfo')) {
         ob_start();
         phpinfo(INFO_MODULES);
@@ -1577,7 +1579,7 @@ function rglob($pattern, $flags = 0, $path = '') {
         return false;
     }
 
-    if(in_array($type, array('plugins', 'themes', 'languages') ) ) {
+		if ( in_array( $type , array ( 'plugins' , 'themes' , 'languages' ) , true ) ) {
         $uri = '';
         if( stripos( $update_uri, 'http://' ) === FALSE ) {
             // OSCLASS OFFICIAL REPOSITORY
@@ -1881,7 +1883,7 @@ function osc_csrfguard_generate_token() {
         return array($token_name, Session::newInstance()->_get($token_name));
     }
     $unique_token_name = osc_csrf_name() . '_' . mt_rand( 0, mt_getrandmax());
-    if( function_exists( 'hash_algos' ) and in_array( 'sha512' , hash_algos())) {
+	if ( function_exists( 'hash_algos' ) and in_array( 'sha512' , hash_algos() , true ) ) {
         $token = hash( 'sha512' , mt_rand( 0, mt_getrandmax()));
     } else {
         $token = '';
@@ -2317,7 +2319,7 @@ function osc_do_auto_upgrade() {
             // OSCLASS OFFICIAL REPOSITORY
             $url  = osc_market_url($section, $code);
             $data = osc_file_get_contents($url, array('api_key' => osc_market_api_connect()));
-	        $data = json_decode( $data ), true);
+	        $data = json_decode( $data , true );
         } else {
             // THIRD PARTY REPOSITORY
             if(osc_market_external_sources()) {
@@ -2333,9 +2335,9 @@ function osc_do_auto_upgrade() {
          ***********************/
         if( isset($data['s_update_url']) && isset($data['s_source_file']) && isset($data['e_type'])) {
 
-            if($data['e_type']=='THEME') {
+	        if ( $data[ 'e_type' ] === 'THEME' ) {
                 $folder = 'themes/';
-            } else if($data['e_type']=='LANGUAGE') {
+	        } else if ( $data[ 'e_type' ] === 'LANGUAGE' ) {
                 $folder = 'languages/';
             } else { // PLUGINS
                 $folder = 'plugins/';
