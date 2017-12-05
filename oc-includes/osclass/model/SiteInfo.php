@@ -39,10 +39,10 @@
          */
         private $siteInfo;
 
-        /**
-         *
-         * @return
-         */
+	    /**
+	     *
+	     * @return \SiteInfo
+	     */
         public static function newInstance()
         {
             if( !self::$instance instanceof self ) {
@@ -78,13 +78,15 @@
             $this->siteInfo = $this->findByPrimaryKey($domain);
         }
 
-        /**
-         *
-         * @access public
-         * @since unknown
-         * @param $key
-         * @return
-         */
+	    /**
+	     *
+	     * @access public
+	     * @since  unknown
+	     *
+	     * @param $key
+	     *
+	     * @return string
+	     */
         public function get($key)
         {
             if (!isset($this->siteInfo[$key])) {
@@ -94,13 +96,13 @@
             return $this->siteInfo[$key];
         }
 
-        /**
-         *
-         * @access public
-         * @since unknown
-         * @param $value
-         * @return
-         */
+	    /**
+	     *
+	     * @access public
+	     * @since  unknown
+	     * @param $value
+	     * @return array
+*/
         public function findByPrimaryKey($value)
         {
             $this->daoMetadata->select($this->getFields());
@@ -116,13 +118,13 @@
             return $result->row();
         }
 
-        /**
-         *
-         * @access public
-         * @since unknown
-         * @param $table
-         * @return
-         */
+	    /**
+	     *
+	     * @access public
+	     * @since  unknown
+	     * @param $table
+	     * @return string
+*/
         public function setTableName($table)
         {
             return $this->tableName = $table;

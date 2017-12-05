@@ -549,11 +549,12 @@
         return (int) View::newInstance()->_count('alerts');
     }
 
-    /**
-     * Gets current alert fomr view
-     *
-     * @return array
-     */
+
+	/**
+	 * Gets current alert fomr view
+	 *
+	 * @return string
+	 */
     function osc_alert() {
         return View::newInstance()->_current('alerts');
     }

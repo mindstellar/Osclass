@@ -23,11 +23,11 @@
     * @author Osclass
     */
 
-    /**
-     * Gets current country
-     *
-     * @return array
-     */
+	/**
+	 * Gets current country
+	 *
+	 * @return null|string
+	 */
     function osc_country() {
         if (View::newInstance()->_exists('countries')) {
             return View::newInstance()->_current('countries');
@@ -36,11 +36,12 @@
         }
     }
 
-    /**
-     * Gets current region
-     *
-     * @return array
-     */
+
+	/**
+	 * Gets current region
+	 *
+	 * @return null|string
+	 */
     function osc_region() {
         if (View::newInstance()->_exists('regions')) {
             return View::newInstance()->_current('regions');
@@ -49,11 +50,12 @@
         }
     }
 
-    /**
-     * Gets current city
-     *
-     * @return array
-     */
+
+	/**
+	 * Gets current city
+	 *
+	 * @return null|string
+	 */
     function osc_city() {
         if (View::newInstance()->_exists('cities')) {
             return View::newInstance()->_current('cities');
@@ -62,11 +64,12 @@
         }
     }
 
-    /**
-     * Gets current city area
-     *
-     * @return array
-     */
+
+	/**
+	 * Gets current city area
+	 *
+	 * @return null|string
+	 */
     function osc_city_area() {
         if (View::newInstance()->_exists('city_areas')) {
             return View::newInstance()->_current('city_areas');
@@ -95,6 +98,7 @@
 	 * @param string $country
 	 *
 	 * @return bool
+	 * @throws \Exception
 	 */
     function osc_has_regions($country = '%%%%') {
         if ( !View::newInstance()->_exists('regions') ) {
@@ -159,7 +163,9 @@
 	 * Gets number of regions
 	 *
 	 * @param string $country
+	 *
 	 * @return int
+	 * @throws \Exception
 	 */
     function osc_count_regions($country = '%%%%') {
         if ( !View::newInstance()->_exists('regions') ) {

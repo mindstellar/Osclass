@@ -39,10 +39,10 @@
          */
         public $explain_messages;
 
-        /**
-         *
-         * @return
-         */
+	    /**
+	     *
+	     * @return \LogDatabase
+	     */
         public static function newInstance()
         {
             if( !self::$instance instanceof self ) {

@@ -178,11 +178,13 @@ padding: 1em;'><h2>Default(dummy) stats</h2>";
         return isset( $this->cache[ $key ] );
     }
 
-    /**
-     * Return hash of a given key
-     * @param $key
-     * @return
-     */
+	/**
+	 * Return hash of a given key
+	 *
+	 * @param $key
+	 *
+	 * @return string
+	 */
     protected function _getKey( $key ) {
         return md5( $key );
     }

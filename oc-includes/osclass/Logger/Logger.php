@@ -47,10 +47,12 @@
 
 		/**
 		 * Log a message with the ERROR level.
+		 *
 		 * @param string $message
 		 * @param <type> $message
+		 *
 		 * @return
-*/
+		 */
         abstract public function error($message = '', $caller = null );
 
 		/**

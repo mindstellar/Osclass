@@ -52,6 +52,7 @@
 	 * </code>
 	 *
 	 * @return mixed|string <array>
+	 * @throws \Exception
 	 */
     function osc_get_categories() {
        if ( !View::newInstance()->_exists('categories') ) {
@@ -91,11 +92,13 @@
         return View::newInstance()->_count('subcategories');
     }
 
-    /**
-     * Gets the total of categories. If categories are not loaded, this function will load them.
-     *
-     * @return int
-     */
+
+	/**
+	 * Gets the total of categories. If categories are not loaded, this function will load them.
+	 *
+	 * @return int
+	 * @throws \Exception
+	 */
     function osc_count_categories() {
         if ( !View::newInstance()->_exists('categories') ) {
             View::newInstance()->_exportVariableToView('categories', Category::newInstance()->toTree() );
@@ -103,11 +106,13 @@
         return osc_priv_count_categories();
     }
 
-    /**
-     * Let you know if there are more categories in the list. If categories are not loaded, this function will load them.
-     *
-     * @return boolean
-     */
+
+	/**
+	 * Let you know if there are more categories in the list. If categories are not loaded, this function will load them.
+	 *
+	 * @return boolean
+	 * @throws \Exception
+	 */
     function osc_has_categories() {
         if ( !View::newInstance()->_exists('categories') ) {
             View::newInstance()->_exportVariableToView('categories', Category::newInstance()->toTree() );
@@ -257,11 +262,13 @@
         View::newInstance()->_reset('categories');
     }
 
-    /**
-     * Gets list of non-empty categories
-     *
-     * @return void
-     */
+
+	/**
+	 * Gets list of non-empty categories
+	 *
+	 * @return void
+	 * @throws \Exception
+	 */
     function osc_get_non_empty_categories() {
         $aCategories = Category::newInstance()->toTree(false);
         View::newInstance()->_exportVariableToView('categories', $aCategories );
@@ -277,6 +284,7 @@
 	 * @param null   $default_str
 	 *
 	 * @return void
+	 * @throws \Exception
 	 */
     function osc_categories_select($name = 'sCategory', $category = null, $default_str = null) {
 	    if ( $default_str == null ) {
@@ -339,6 +347,7 @@
 
 	/**
 	 * @return bool|int
+	 * @throws \Exception
 	 */
 	function osc_category_move_to_parent() {
         $category = View::newInstance()->_get('categories');
@@ -395,6 +404,8 @@
 
 	/**
 	 * @param null $categories
+	 *
+	 * @throws \Exception
 	 */
 	function osc_export_categories( $categories = null) {
         if($categories==null) {

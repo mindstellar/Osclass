@@ -148,6 +148,8 @@
 
 		/**
 		 * @param $host
+		 *
+		 * @throws \Exception
 		 */
 		private function subdomain_params( $host ) {
             $subdomain_type = osc_subdomain_type();

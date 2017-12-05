@@ -110,15 +110,18 @@
             return $this->extendData($items);
         }
 
-        /**
-         * Get the result match of the primary key passed by parameter, extended with
-         * location information and number of views.
-         *
-         * @access public
-         * @since unknown
-         * @param int $id Item id
-         * @return array
-         */
+	    /**
+	     * Get the result match of the primary key passed by parameter, extended with
+	     * location information and number of views.
+	     *
+	     * @access public
+	     * @since  unknown
+	     *
+	     * @param int $id Item id
+	     *
+	     * @return array
+	     * @throws \Exception
+	     */
         public function findByPrimaryKey($id)
         {
             if( !is_numeric($id) || $id == null ) {
@@ -795,6 +798,7 @@
 	     * @param mixed $expiration_time could be interget (number of days) or directly a date
 	     * @param bool  $do_stats
 	     * @return string new date expiration, false if error occurs
+	     * @throws \Exception
 */
         public function updateExpirationDate($id, $expiration_time, $do_stats = true)
         {
@@ -966,14 +970,15 @@
             return $array;
         }
 
-        /**
-         * Delete by primary key, delete dependencies too
-         *
-         * @access public
-         * @since unknown
-         * @param int $id Item id
-         * @return bool
-         */
+	    /**
+	     * Delete by primary key, delete dependencies too
+	     *
+	     * @access public
+	     * @since  unknown
+	     * @param int $id Item id
+	     * @return bool
+	     * @throws \Exception
+*/
         public function deleteByPrimaryKey($id)
         {
             $item = $this->findByPrimaryKey($id);

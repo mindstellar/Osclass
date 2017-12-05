@@ -111,16 +111,17 @@
             return $result->result();
         }
 
-        /**
-         * Find a field by its name
-         *
-         * @access public
-         * @since unknown
-         *
-         * @param mixed $ids
-         *
-         * @return array Fields' id
-         */
+	    /**
+	     * Find a field by its name
+	     *
+	     * @access public
+	     * @since  unknown
+	     *
+	     * @param mixed $ids
+	     *
+	     * @return array Fields' id
+	     * @throws \Exception
+	     */
         public function findIDSearchableByCategories($ids)
         {
             if(!is_array($ids)) { $ids = array($ids); }

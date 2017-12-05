@@ -146,12 +146,15 @@
         return $meta;
     }
 
-    /**
-     * Gets current page url
-     *
-     * @param string $locale
-     * @return string
-     */
+
+	/**
+	 * Gets current page url
+	 *
+	 * @param string $locale
+	 *
+	 * @return string
+	 * @throws \Exception
+	 */
     function osc_static_page_url($locale = '') {
         if ( osc_rewrite_enabled() ) {
             $sanitized_categories = array();

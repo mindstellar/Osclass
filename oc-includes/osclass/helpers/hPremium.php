@@ -51,11 +51,11 @@
     }
 
 
-    /**
-    * Gets current premium array from view
-    *
-    * @return array $premium, or null if not exist
-    */
+	/**
+	 * Gets current premium array from view
+	 *
+	 * @return null|string $premium, or null if not exist
+	 */
     function osc_premium() {
         if (View::newInstance()->_exists('premiums')) {
             return View::newInstance()->_current('premiums');
@@ -519,11 +519,13 @@
         return (int) View::newInstance()->_count('premiums');
     }
 
-    /**
-     * Gets number of resources in array resources of current premium
-     *
-     * @return int
-     */
+
+	/**
+	 * Gets number of resources in array resources of current premium
+	 *
+	 * @return int
+	 * @throws \Exception
+	 */
     function osc_count_premium_resources() {
         if ( !View::newInstance()->_exists('resources') ) {
             View::newInstance()->_exportVariableToView('resources', ItemResource::newInstance()->getAllResourcesFromItem( osc_premium_id() ) );
@@ -536,6 +538,7 @@
 	 * Gets next premium resource if there is, else return null
 	 *
 	 * @return bool
+	 * @throws \Exception
 	 */
     function osc_has_premium_resources() {
         if ( !View::newInstance()->_exists('resources') ) {
@@ -544,11 +547,13 @@
         return View::newInstance()->_next('resources');
     }
 
-    /**
-     * Gets current resource of current array resources of current premium
-     *
-     * @return array
-     */
+
+	/**
+	 * Gets current resource of current array resources of current premium
+	 *
+	 * @return array
+	 * @throws \Exception
+	 */
     function osc_get_premium_resources() {
         if ( !View::newInstance()->_exists('resources') ) {
             View::newInstance()->_exportVariableToView('resources', ItemResource::newInstance()->getAllResourcesFromItem( osc_premium_id() ) );

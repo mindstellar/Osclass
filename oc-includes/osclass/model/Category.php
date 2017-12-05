@@ -51,6 +51,8 @@
 	     * Set data related to t_category table
 	     *
 	     * @param string $l
+	     *
+	     * @throws \Exception
 	     */
         public function __construct($l = '')
         {
@@ -283,14 +285,15 @@
             return $this->listWhere();
         }
 
-        /**
-         * Returna  tree of a given category as the root
-         *
-         * @access public
-         * @since unknown
-         * @param integer$category
-         * @return array
-         */
+	    /**
+	     * Returna  tree of a given category as the root
+	     *
+	     * @access public
+	     * @since  unknown
+	     * @param integer $category
+	     * @return array
+	     * @throws \Exception
+	     */
         public function toSubTree($category = null)
         {
             $this->toTree();
@@ -693,6 +696,7 @@
 	     * @param     $data
 	     * @param int $pk primary key
 	     * @return mixed bool if there is an error, affectedRows if there isn't errors
+	     * @throws \Exception
 	     */
         public function updateByPrimaryKey($data, $pk)
         {
@@ -783,6 +787,7 @@
 	     * @param array $fields
 	     * @param null  $aFieldsDescription
 	     * @return mixed
+	     * @throws \Exception
 	     */
         public function insert($fields, $aFieldsDescription = null )
         {

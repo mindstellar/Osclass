@@ -215,6 +215,7 @@ osc_add_hook('search_form', 'osc_meta_search');
 
 	/**
 	 * @return bool|mixed
+	 * @throws \Exception
 	 */
 	function meta_description() {
     $text = '';
@@ -244,6 +245,7 @@ osc_add_hook('search_form', 'osc_meta_search');
 
 	/**
 	 * @return bool|mixed
+	 * @throws \Exception
 	 */
 	function meta_keywords() {
     $text = '';
@@ -394,6 +396,7 @@ osc_add_hook('search_form', 'osc_meta_search');
 	 * @param null $f
 	 *
 	 * @return string
+	 * @throws \Exception
 	 */
 	function osc_footer_link_title( $f = null ) {
     if($f==null) {

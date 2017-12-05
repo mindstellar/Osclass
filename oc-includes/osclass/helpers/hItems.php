@@ -954,11 +954,13 @@
         return (int) View::newInstance()->_count('items');
     }
 
-    /**
-     * Gets number of resources in array resources of current item
-     *
-     * @return int
-     */
+
+	/**
+	 * Gets number of resources in array resources of current item
+	 *
+	 * @return int
+	 * @throws \Exception
+	 */
     function osc_count_item_resources() {
         if ( !View::newInstance()->_exists('resources') ) {
             View::newInstance()->_exportVariableToView('resources', ItemResource::newInstance()->getAllResourcesFromItem( osc_item_id() ) );
@@ -971,6 +973,7 @@
 	 * Gets next item resource if there is, else return null
 	 *
 	 * @return bool
+	 * @throws \Exception
 	 */
     function osc_has_item_resources() {
         if ( !View::newInstance()->_exists('resources') ) {
@@ -979,11 +982,13 @@
         return View::newInstance()->_next('resources');
     }
 
-    /**
-     * Gets current resource of current array resources of current item
-     *
-     * @return array
-     */
+
+	/**
+	 * Gets current resource of current array resources of current item
+	 *
+	 * @return array
+	 * @throws \Exception
+	 */
     function osc_get_item_resources() {
         if ( !View::newInstance()->_exists('resources') ) {
             View::newInstance()->_exportVariableToView('resources', ItemResource::newInstance()->getAllResourcesFromItem( osc_item_id() ) );
@@ -1026,7 +1031,9 @@
 	 * @param null  $total_latest_items
 	 * @param array $options
 	 * @param bool  $withPicture
+	 *
 	 * @return boolean It returns true if there is another item available or false if there isn't
+	 * @throws \Exception
 	 */
     function osc_has_latest_items($total_latest_items = null, $options = array(), $withPicture = false) {
         // if we don't have the latest items loaded, do the query
@@ -1078,6 +1085,7 @@
 	 * @param null  $total_latest_items
 	 * @param array $options
 	 * @return int
+	 * @throws \Exception
 	 */
     function osc_count_latest_items($total_latest_items = null, $options = array()) {
         if ( !View::newInstance()->_exists('latestItems') ) {
@@ -1244,11 +1252,12 @@
         return View::newInstance()->_get('metafields');
     }
 
-    /**
-     * Gets item meta field
-     *
-     * @return array
-     */
+
+	/**
+	 * Gets item meta field
+	 *
+	 * @return string
+	 */
     function osc_item_meta() {
         return View::newInstance()->_current('metafields');
     }

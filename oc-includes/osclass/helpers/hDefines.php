@@ -482,14 +482,18 @@
         return osc_item_url_from_item(osc_item(), $locale);
     }
 
-    /**
-     * Create item url from item data without exported to view.
-     *
-     * @since 3.3
-     * @param array $item
-     * @param string $locale
-     * @return string
-     */
+
+	/**
+	 * Create item url from item data without exported to view.
+	 *
+	 * @since 3.3
+	 *
+	 * @param array  $item
+	 * @param string $locale
+	 *
+	 * @return string
+	 * @throws \Exception
+	 */
     function osc_item_url_from_item($item, $locale = '')
     {
         if ( osc_rewrite_enabled() ) {
@@ -527,12 +531,14 @@
         return $path;
     }
 
-    /**
-     * Create automatically the url of the item details page
-     *
-     * @param string $locale
-     * @return string
-     */
+
+	/**
+	 * Create automatically the url of the item details page
+	 *
+	 * @param string $locale
+	 * @return string
+	 * @throws \Exception
+*/
     function osc_premium_url($locale = '') {
         if ( osc_rewrite_enabled() ) {
             $sanitized_categories = array();

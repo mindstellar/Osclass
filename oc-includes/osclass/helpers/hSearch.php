@@ -662,11 +662,12 @@
         return $var;
     }
 
-    /**
-     * Gets list of countries with items
-     *
-     * @return array
-     */
+
+	/**
+	 * Gets list of countries with items
+	 *
+	 * @return null|string
+	 */
     function osc_list_country() {
         if (View::newInstance()->_exists('list_countries')) {
             return View::newInstance()->_current('list_countries');
@@ -675,11 +676,12 @@
         }
     }
 
-    /**
-     * Gets list of regions with items
-     *
-     * @return array
-     */
+
+	/**
+	 * Gets list of regions with items
+	 *
+	 * @return null|string
+	 */
     function osc_list_region() {
         if (View::newInstance()->_exists('list_regions')) {
             return View::newInstance()->_current('list_regions');
@@ -688,11 +690,12 @@
         }
     }
 
-    /**
-     * Gets list of cities with items
-     *
-     * @return array
-     */
+
+	/**
+	 * Gets list of cities with items
+	 *
+	 * @return null|string
+	 */
     function osc_list_city() {
         if (View::newInstance()->_exists('list_cities')) {
             return View::newInstance()->_current('list_cities');
@@ -743,7 +746,9 @@
 	 * Gets the next city in the list_cities list
 	 *
 	 * @param string $region
+	 *
 	 * @return bool
+	 * @throws \Exception
 	 */
     function osc_has_list_cities($region = '%%%%') {
         if ( !View::newInstance()->_exists('list_cities') ) {
@@ -784,12 +789,14 @@
         return View::newInstance()->_count('list_regions');
     }
 
-    /**
-     * Gets the total number of cities in list_cities
-     *
-     * @param string $region
-     * @return int
-     */
+
+	/**
+	 * Gets the total number of cities in list_cities
+	 *
+	 * @param string $region
+	 * @return int
+	 * @throws \Exception
+	 */
     function osc_count_list_cities($region = '%%%%') {
         if ( !View::newInstance()->_exists('list_cities') ) {
             View::newInstance()->_exportVariableToView('list_cities', CityStats::newInstance()->listCities($region) );
@@ -973,11 +980,12 @@
         return View::newInstance()->_next('latest_searches');
     }
 
-    /**
-     * Gets the current latest search
-     *
-     * @return array
-     */
+
+	/**
+	 * Gets the current latest search
+	 *
+	 * @return null|string
+	 */
     function osc_latest_search() {
         if (View::newInstance()->_exists('latest_searches')) {
             return View::newInstance()->_current('latest_searches');

@@ -194,15 +194,18 @@
             if($data==null) { return 0; } else { return $data['i_num_items']; }
         }
 
-        /**
-         * Get number of items
-         *
-         * @access public
-         * @since unknown
-         * @staticvar string $numItemsMap
-         * @param array $cat category array
-         * @return int
-         */
+	    /**
+	     * Get number of items
+	     *
+	     * @access    public
+	     * @since     unknown
+	     * @staticvar string $numItemsMap
+	     *
+	     * @param array $cat category array
+	     *
+	     * @return int
+	     * @throws \Exception
+	     */
         public function getNumItems($cat)
         {
             static $numItemsMap = null;

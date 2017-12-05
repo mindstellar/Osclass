@@ -723,6 +723,7 @@
 	     * @param mixed $category
 	     *
 	     * @return bool
+	     * @throws \Exception
 	     */
         public function addCategory($category = null)
         {
@@ -1051,11 +1052,11 @@
             return $this->total_results;
         }
 
-        /**
-         * Return total items on t_item without any filter
-         *
-         * @return
-         */
+	    /**
+	     * Return total items on t_item without any filter
+	     *
+	     * @return null
+	     */
         public function countAll()
         {
 	        if ( null === $this->total_results_table ) {
@@ -1240,7 +1241,8 @@
 	     * @param string $zero if you want to include locations with zero results
 	     * @param string $order
 	     *
-	     * @return
+	     * @return array
+	     * @throws \Exception
 	     */
         public function listCities($region = null, $zero = '>' , $order = 'city_name ASC' )
         {

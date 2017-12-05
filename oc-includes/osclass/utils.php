@@ -802,12 +802,14 @@ function processResponse($content)
     return array('headers' => $headers, 'body' => $body);
 }
 
-/**
- * Parse headers and return into array format
- *
- * @param $headers
- * @return
- */
+
+	/**
+	 * Parse headers and return into array format
+	 *
+	 * @param $headers
+	 *
+	 * @return array|mixed|null|string|string[]
+	 */
 function processHeaders($headers)
 {
     $headers = str_replace("\r\n", "\n", $headers);
@@ -1807,6 +1809,8 @@ function osc_update_location_stats($force = false, $limit = 1000) {
  */
 	/**
 	 * @param $locale
+	 *
+	 * @throws \Exception
 	 */
 	function osc_translate_categories( $locale) {
     $old_locale = Session::newInstance()->_get('adminLocale');

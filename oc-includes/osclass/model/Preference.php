@@ -57,14 +57,16 @@
             $this->toArray();
         }
 
-        /**
-         * Find a value by its name
-         *
-         * @access public
-         * @since unknown
-         * @param $name
-         * @return
-         */
+	    /**
+	     * Find a value by its name
+	     *
+	     * @access public
+	     * @since  unknown
+	     *
+	     * @param $name
+	     *
+	     * @return bool
+	     */
         public function findValueByName($name)
         {
             $this->dao->select('s_value');

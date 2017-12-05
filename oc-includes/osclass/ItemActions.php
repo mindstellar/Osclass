@@ -501,20 +501,22 @@
             return $success;
         }
 
-        /**
-         * Increment or decrement stats related with items.
-         *
-         * User item stats, Category item stats,
-         *  country item stats, region item stats, city item stats
-         *
-         * @param $result
-         * @param $old_item
-         * @param $oldIsExpired
-         * @param $old_item_location
-         * @param $aItem
-         * @param $newIsExpired
-         * @param $location
-         */
+		/**
+		 * Increment or decrement stats related with items.
+		 *
+		 * User item stats, Category item stats,
+		 *  country item stats, region item stats, city item stats
+		 *
+		 * @param $result
+		 * @param $old_item
+		 * @param $oldIsExpired
+		 * @param $old_item_location
+		 * @param $aItem
+		 * @param $newIsExpired
+		 * @param $location
+		 *
+		 * @throws \Exception
+		 */
         private function _updateStats($result, $old_item, $oldIsExpired, $old_item_location, $aItem, $newIsExpired, $location)
         {
             if($result==1 && $old_item['b_enabled']==1 && $old_item['b_active']==1 && $old_item['b_spam']==0) {
@@ -767,12 +769,13 @@
             return false;
         }
 
-        /**
-         * Private function for increment stats.
-         * tables: t_user/t_category_stats/t_country_stats/t_region_stats/t_city_stats
-         *
-         * @param array item
-         */
+		/**
+		 * Private function for increment stats.
+		 * tables: t_user/t_category_stats/t_country_stats/t_region_stats/t_city_stats
+		 *
+		 * @param array item
+		 * @throws \Exception
+		 */
         private function _increaseStats($item)
         {
             if($item['fk_i_user_id']!=null) {
@@ -785,12 +788,13 @@
             osc_run_hook('item_increase_stat',$item);
         }
 
-        /**
-         * Private function for decrease stats.
-         * tables: t_user/t_category_stats/t_country_stats/t_region_stats/t_city_stats
-         *
-         * @param array item
-         */
+		/**
+		 * Private function for decrease stats.
+		 * tables: t_user/t_category_stats/t_country_stats/t_region_stats/t_city_stats
+		 *
+		 * @param array item
+		 * @throws \Exception
+		 */
         private function _decreaseStats($item)
         {
             if($item['fk_i_user_id']!=null) {
@@ -834,6 +838,7 @@
 		 *
 		 * @param <type> $itemId
 		 * @param bool $is_admin
+		 * @throws \Exception
 		 */
         public static function deleteResourcesFromHD( $itemId, $is_admin = false )
         {

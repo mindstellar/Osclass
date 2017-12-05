@@ -29,10 +29,10 @@
          */
         private static $instance;
 
-        /**
-         *
-         * @return
-         */
+	    /**
+	     *
+	     * @return \PluginCategory
+	     */
         public static function newInstance()
         {
             if( !self::$instance instanceof self ) {
@@ -52,14 +52,16 @@
             $this->setFields( array('s_plugin_name', 'fk_i_category_id') );
         }
 
-        /**
-         * Return all information given a category id
-         *
-         * @access public
-         * @since unknown
-         * @param $categoryId
-         * @return
-         */
+	    /**
+	     * Return all information given a category id
+	     *
+	     * @access public
+	     * @since  unknown
+	     *
+	     * @param $categoryId
+	     *
+	     * @return array
+	     */
         public function findByCategoryId($categoryId)
         {
             $this->dao->select( $this->getFields() );
