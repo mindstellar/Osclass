@@ -1212,7 +1212,7 @@
 				return - 1;
 			}
 
-			if ( substr( $file[ 'name' ] , 0 , 9 ) === '__MACOSX/' ) {
+			if ( 0 === strpos( $file[ 'name' ] , '__MACOSX/' ) ) {
 				continue;
 			}
 
@@ -1271,7 +1271,7 @@
 
 		// Extract the files from the zip
 		foreach ( $files as $file ) {
-			if ( substr( $file[ 'filename' ] , 0 , 9 ) === '__MACOSX/' ) {
+			if ( 0 === strpos( $file[ 'filename' ] , '__MACOSX/' ) ) {
 				continue;
 			}
 
