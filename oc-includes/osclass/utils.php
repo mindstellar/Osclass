@@ -944,7 +944,8 @@ function download_fsockopen($sourceFile, $fileout = null, $post_data = null)
             curl_setopt($ch, CURLOPT_REFERER, osc_base_url());
 
             if(stripos($sourceFile, 'https')!==false) {
-                curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, FALSE);
+	            /** @noinspection CurlSslServerSpoofingInspection */
+	            curl_setopt( $ch , CURLOPT_SSL_VERIFYPEER , false );
                 curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, 2);
             }
             if($post_data!=null) {
@@ -989,7 +990,8 @@ function download_fsockopen($sourceFile, $fileout = null, $post_data = null)
         curl_setopt($ch, CURLOPT_REFERER, osc_base_url());
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
         if(stripos($url, 'https')!==false) {
-            curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, FALSE);
+	        /** @noinspection CurlSslServerSpoofingInspection */
+	        curl_setopt( $ch , CURLOPT_SSL_VERIFYPEER , false );
             curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, 2);
         }
 
@@ -1128,7 +1130,9 @@ function _unzip_file_ziparchive($file, $to) {
         }
 
         if (substr($file['name'], -1) == '/') {
-            @mkdir($to . $file['name']);
+	        if ( ! mkdir( $to . $file[ 'name' ] ) && ! is_dir( $to . $file[ 'name' ] ) ) {
+		        throw new \RuntimeException( sprintf( 'Directory "%s" was not created' , $to . $file[ 'name' ] ) );
+	        }
             continue;
         }
 
@@ -1183,7 +1187,9 @@ function _unzip_file_pclzip($zip_file, $to) {
         }
 
         if ($file['folder']) {
-            @mkdir($to . $file['filename']);
+	        if ( ! mkdir( $to . $file[ 'filename' ] ) && ! is_dir( $to . $file[ 'filename' ] ) ) {
+		        throw new \RuntimeException( sprintf( 'Directory "%s" was not created' , $to . $file[ 'filename' ] ) );
+	        }
             continue;
         }
 
@@ -2054,8 +2060,12 @@ function osc_csrfguard_start() {
              ***** UNZIP FILE *****
              **********************/
             $tmp_path = osc_content_path().'downloads/oc-temp/core-'.$data['version'].'/';
-            @mkdir(osc_content_path().'downloads/oc-temp/');
-            @mkdir($tmp_path);
+	        if ( ! mkdir( osc_content_path() . 'downloads/oc-temp/' ) && ! is_dir( osc_content_path() . 'downloads/oc-temp/' ) ) {
+		        throw new \RuntimeException( sprintf( 'Directory "%s" was not created' , osc_content_path() . 'downloads/oc-temp/' ) );
+	        }
+	        if ( ! mkdir( $tmp_path ) && ! is_dir( $tmp_path ) ) {
+		        throw new \RuntimeException( sprintf( 'Directory "%s" was not created' , $tmp_path ) );
+	        }
             $res = osc_unzip_file(osc_content_path().'downloads/'.$filename, $tmp_path);
             if ($res == 1) { // Everything is OK, continue
                 /**********************
@@ -2305,9 +2315,9 @@ function osc_do_auto_upgrade() {
     if ($code != '' && $section != '') {
         if( stripos( $code, 'http://' ) === FALSE) {
             // OSCLASS OFFICIAL REPOSITORY
-            $url = osc_market_url($section, $code);
+            $url  = osc_market_url($section, $code);
             $data = osc_file_get_contents($url, array('api_key' => osc_market_api_connect()));
-            $data = json_decode(osc_file_get_contents($url, array('api_key' => osc_market_api_connect())), true);
+	        $data = json_decode( $data ), true);
         } else {
             // THIRD PARTY REPOSITORY
             if(osc_market_external_sources()) {
