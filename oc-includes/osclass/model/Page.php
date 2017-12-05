@@ -528,7 +528,7 @@
             $result = $this->dao->get();
             $count = $result->row();
 
-            return ($count['total']>0)?true:false;
+	        return $count[ 'total' ] > 0;
         }
 
         /**

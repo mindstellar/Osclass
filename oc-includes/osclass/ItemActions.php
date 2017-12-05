@@ -88,7 +88,7 @@
             $flash_error = '';
 
             // Requires email validation?
-            $has_to_validate = (osc_moderate_items() != -1) ? true : false;
+	        $has_to_validate = osc_moderate_items() != - 1;
 
             // Check status
             $active = $aItem['active'];

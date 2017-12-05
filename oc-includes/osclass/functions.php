@@ -745,7 +745,7 @@ function osc_admin_toolbar_spam()
 	 */
 	function osc_check_market_connect()
 {
-    return (getPreference('marketAPIConnect')=='') ? false : true;
+	return getPreference( 'marketAPIConnect' ) != '';
 }
 
 

@@ -119,7 +119,7 @@
 		 */
 		public static function enabled_input_checkbox( $category = null )
         {
-            parent::generic_input_checkbox( 'b_enabled' , '1' , ( isset($category) && isset($category['b_enabled']) && $category[ 'b_enabled' ] == 1) ? true : false);
+	        parent::generic_input_checkbox( 'b_enabled' , '1' , ( isset( $category ) && isset( $category[ 'b_enabled' ] ) && $category[ 'b_enabled' ] == 1 ) );
         }
 
 		/**
@@ -137,7 +137,7 @@
 		 */
 		public static function price_enabled_for_category( $category = null )
         {
-			parent::generic_input_checkbox( 'b_price_enabled' , '1' , ( isset($category) && isset($category['b_price_enabled']) && $category[ 'b_price_enabled' ] == 1) ? true : false);
+	        parent::generic_input_checkbox( 'b_price_enabled' , '1' , ( isset( $category ) && isset( $category[ 'b_price_enabled' ] ) && $category[ 'b_price_enabled' ] == 1 ) );
         }
 
 		/**

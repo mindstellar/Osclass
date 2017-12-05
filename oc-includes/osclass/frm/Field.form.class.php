@@ -138,14 +138,14 @@ FB;
 		 * @param null $field
 		 */
 		public static function required_checkbox( $field = null ) {
-            parent::generic_input_checkbox('field_required', 1, ($field!=null && isset($field['b_required']) && $field['b_required']==1)?true:false);
+			parent::generic_input_checkbox( 'field_required' , 1 , ( $field != null && isset( $field[ 'b_required' ] ) && $field[ 'b_required' ] == 1 ) );
         }
 
 		/**
 		 * @param null $field
 		 */
 		public static function searchable_checkbox( $field = null ) {
-            parent::generic_input_checkbox('field_searchable', 1, ($field!=null && isset($field['b_searchable']) && $field['b_searchable']==1)?true:false);
+			parent::generic_input_checkbox( 'field_searchable' , 1 , ( $field != null && isset( $field[ 'b_searchable' ] ) && $field[ 'b_searchable' ] == 1 ) );
         }
 
 		/**

@@ -89,7 +89,10 @@
                             }
                         }
 
-                        echo json_encode(array('success' => $success, 'msg' => $success?_m('The selected photo has been successfully deleted'):_m("The selected photo couldn't be deleted")));
+	                    echo json_encode( array (
+		                                      'success' => $success ,
+		                                      'msg'     => _m( $success ? 'The selected photo has been successfully deleted' : "The selected photo couldn't be deleted" )
+	                                      ) );
                         return false;
                     }
 

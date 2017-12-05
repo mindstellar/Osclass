@@ -246,7 +246,8 @@
 		} else {
 			$category = Category::newInstance()->findByPrimaryKey($catId) ;
 		}
-        return $category['b_price_enabled']==1?true:false;
+
+	    return $category[ 'b_price_enabled' ] == 1;
     }
 
     /**
@@ -1488,7 +1489,7 @@
                     break;
 
                 case 'premium':
-                    $mSearch->onlyPremium(($value==1?true:false));
+	                $mSearch->onlyPremium( ( $value == 1 ) );
                     break;
 
                 case 'page':

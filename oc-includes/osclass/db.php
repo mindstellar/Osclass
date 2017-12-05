@@ -448,7 +448,7 @@
 					            'fieldname' => $tbl_index[ 'Column_name' ] ,
 					            'subpart'   => $tbl_index[ 'Sub_part' ]
 				            );
-				            $indexes_array[ $tbl_index[ 'Key_name' ] ][ 'unique' ]    = ( $tbl_index[ 'Non_unique' ] == 0 ) ? true : false;
+				            $indexes_array[ $tbl_index[ 'Key_name' ] ][ 'unique' ]    = $tbl_index[ 'Non_unique' ] == 0;
 			            }
 			            foreach ( $indexes_array as $k => $v ) {
 				            $string = '';

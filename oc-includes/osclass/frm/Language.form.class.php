@@ -126,7 +126,7 @@
 		 * @return bool
 		 */
 		public static function enabled_input_checkbox( $locale = null ) {
-            parent::generic_input_checkbox( 'b_enabled' , '1' , ( $locale[ 'b_enabled' ] == 1) ? true : false);
+			parent::generic_input_checkbox( 'b_enabled' , '1' , $locale[ 'b_enabled' ] == 1 );
             return true;
         }
 
@@ -136,7 +136,7 @@
 		 * @return bool
 		 */
 		public static function enabled_bo_input_checkbox( $locale = null ) {
-            parent::generic_input_checkbox( 'b_enabled_bo' , '1' , ( $locale[ 'b_enabled_bo' ] == 1) ? true : false);
+			parent::generic_input_checkbox( 'b_enabled_bo' , '1' , $locale[ 'b_enabled_bo' ] == 1 );
             return true;
         }
 
