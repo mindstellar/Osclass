@@ -80,8 +80,7 @@
 		 */
 		public function pop($var)
 		{
-            unset($this->val[$var]);
-			unset($_COOKIE[$var]);
+			unset( $this->val[ $var ] , $_COOKIE[ $var ] );
 		}
 			
 		public function clear()

@@ -122,10 +122,9 @@
 		 * @param $key
 		 */
 		public function _drop( $key ) {
-            unset($_SESSION[$key]);
-            unset($this->session[$key]);
+			unset( $_SESSION[ $key ] , $this->session[ $key ] );
 
-        }
+		}
 
 		/**
 		 * @param $value
@@ -149,10 +148,7 @@
         }
 
         public function _dropReferer() {
-            unset($_SESSION['osc_http_referer']);
-            unset($this->session['osc_http_referer']);
-            unset($_SESSION['osc_http_referer_state']);
-            unset($this->session['osc_http_referer_state']);
+	        unset( $_SESSION[ 'osc_http_referer' ] , $this->session[ 'osc_http_referer' ] , $_SESSION[ 'osc_http_referer_state' ] , $this->session[ 'osc_http_referer_state' ] );
         }
 
         public function _view() {
@@ -268,8 +264,7 @@
             if( is_array($form) ) {
                 foreach($form as $key => $value) {
                     if( !isset($aKeep[$key]) ) {
-                        unset($_SESSION['form'][$key]);
-                        unset($this->session['form'][$key]);
+	                    unset( $_SESSION[ 'form' ][ $key ] , $this->session[ 'form' ][ $key ] );
                     }
                 }
             }

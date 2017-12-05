@@ -199,8 +199,7 @@
 		 */
 		public function _erase( $key )
         {
-            unset($this->aExported[$key]);
-            unset($this->aCurrent[$key]);
+	        unset( $this->aExported[ $key ] , $this->aCurrent[ $key ] );
         }
     }
 

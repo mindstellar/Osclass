@@ -185,8 +185,7 @@
          */
         public function __destruct()
         {
-            unset($this->connId);
-            unset($this->resultId);
+	        unset( $this->connId , $this->resultId );
         }
 
         /**

@@ -294,12 +294,9 @@
             } else if($subdomain_type=='country') {
                 unset($request['sCountry']);
             } else if($subdomain_type=='region') {
-                unset($request['sCountry']);
-                unset($request['sRegion']);
+	            unset( $request[ 'sCountry' ] , $request[ 'sRegion' ] );
             } else if($subdomain_type=='city') {
-                unset($request['sCountry']);
-                unset($request['sRegion']);
-                unset($request['sCity']);
+	            unset( $request[ 'sCountry' ] , $request[ 'sRegion' ] , $request[ 'sCity' ] );
             } else if($subdomain_type=='user') {
                 unset($request['sUser']);
             }
@@ -1068,17 +1065,9 @@
             unset($conditions['sPattern']);
         }
 
-        unset($conditions['withPattern']);
-        unset($conditions['tables']);
-        unset($conditions['tables_join']);
-        unset($conditions['no_catched_tables']);
-        unset($conditions['no_catched_conditions']);
-        unset($conditions['user_ids']);
-        unset($conditions['order_column']);
-        unset($conditions['order_direction']);
-        unset($conditions['limit_init']);
-        unset($conditions['results_per_page']);
-        return $conditions;
+		unset( $conditions[ 'withPattern' ] , $conditions[ 'tables' ] , $conditions[ 'tables_join' ] , $conditions[ 'no_catched_tables' ] , $conditions[ 'no_catched_conditions' ] , $conditions[ 'user_ids' ] , $conditions[ 'order_column' ] , $conditions[ 'order_direction' ] , $conditions[ 'limit_init' ] , $conditions[ 'results_per_page' ] );
+
+		return $conditions;
 	}
 
 

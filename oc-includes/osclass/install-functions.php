@@ -318,9 +318,7 @@ function set_allow_report_osclass($value) {
             return array('error' => sprintf(__("Can't create the database. Error number: %s"),  $error_num));
         }
 
-        unset($conn);
-        unset($comm);
-        unset($master_conn);
+	    unset( $conn , $comm , $master_conn );
     }
 
     $conn      = new DBConnectionClass($dbhost, $username, $password, $dbname);
