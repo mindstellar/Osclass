@@ -39,7 +39,8 @@
 	 * @param <type> $id
 	 * @param boolean $admin
 	 *
-	 * @return boolean
+	 *
+	 * @return bool
 	 */
 	function osc_deleteResource( $id , $admin ) {
 		if ( defined( 'DEMO' ) ) {
@@ -827,7 +828,7 @@
 	 *
 	 * @since 3.0
 	 *
-	 * @param string $hex
+	 * @param string | integer $hex
 	 *
 	 * @return boolean true if the string is a hex, otherwise false
 	 */
