@@ -125,7 +125,7 @@ function create_market_account() {
     $body .= __('The <a href="http://osclass.org/">Osclass</a> team');
 
     $sitename = strtolower( Params::getServerParam('SERVER_NAME'));
-    if ( substr( $sitename, 0, 4 ) == 'www.' ) {
+		if ( 0 === strpos( $sitename , 'www.' ) ) {
         $sitename = substr( $sitename, 4 );
     }
 

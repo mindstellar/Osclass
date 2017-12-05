@@ -307,7 +307,7 @@
             $input['s_phone_land']   = trim(Params::getParam('s_phone_land'));
             $input['s_phone_mobile'] = trim(Params::getParam('s_phone_mobile'));
 
-            if(strtolower(substr($input['s_website'], 0, 4))!=='http') {
+	        if ( 0 !== stripos( $input[ 's_website' ] , 'http' ) ) {
                 $input['s_website'] = 'http://'.$input['s_website'];
             }
             $input['s_website'] = osc_sanitize_url($input['s_website']);

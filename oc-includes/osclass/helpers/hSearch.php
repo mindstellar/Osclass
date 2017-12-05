@@ -623,7 +623,7 @@
             $url = $base_url . 'index.php?page=search';
             if($params!=null && is_array($params)) {
                 foreach($params as $k => $v) {
-                    if($k=='meta' || substr($k, 0, 5)=='meta[') {
+	                if ( $k == 'meta' || 0 === strpos( $k , 'meta[' ) ) {
                         if( is_array($v) ) {
                             foreach($v as $_k => $aux) {
                                 if(is_array($aux)) {

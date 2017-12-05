@@ -267,7 +267,7 @@ if (!defined('PASSWORD_DEFAULT')) {
             'algoName' => 'unknown',
             'options' => array(),
         );
-        if (substr($hash, 0, 4) == '$2y$' && strlen($hash) == 60) {
+	    if ( 0 === strpos( $hash , '$2y$' ) && strlen( $hash ) == 60 ) {
             $return['algo'] = PASSWORD_BCRYPT;
             $return['algoName'] = 'bcrypt';
             list($cost) = sscanf( $hash, '$2y$%d$' );

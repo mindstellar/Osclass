@@ -487,7 +487,7 @@
 		            }
 		            // For the rest of the indexes (they are in the new definition but not in the table installed
 		            foreach ( $indexes as $index ) {
-			            if ( strtolower( substr( trim( $index ) , 0 , 2 ) ) != 'on' ) {// && strtolower(substr(trim($index),0,7))!='foreign') {
+			            if ( 0 !== stripos( trim( $index ) , 'on' ) ) {// && strtolower(substr(trim($index),0,7))!='foreign') {
 				            $struct_queries[] = 'ALTER TABLE ' . $table . ' ADD ' . $index;
 				            //} else {
 				            //$struct_queries[] = "ALTER TABLE ".$table." ".$index;
