@@ -60,7 +60,7 @@
                 </div>
             </div>
             <div class="control-group">
-                <label for="friendEmail"><?php _e("Your friend's e-mail address", 'bender'); ?></label> </label>
+                <label for="friendEmail"><?php _e( "Your friend's e-mail address" , 'bender' ); ?></label>
                 <div class="controls">
                     <?php SendFriendForm::friend_email(); ?>
                 </div>
