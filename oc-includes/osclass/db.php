@@ -375,7 +375,7 @@
                 if(preg_match('|CREATE DATABASE ([^ ]*)|', $query, $match)) {
                     array_unshift($struct_queries, $query);
                 } else if(preg_match('|CREATE TABLE ([^ ]*)|', $query, $match)) {
-                    $struct_queries[trim(strtolower($match[1]), '`')] = $query;
+	                $struct_queries[ strtolower( trim( $match[ 1 ] , '`' ) ) ] = $query;
                 } else if(preg_match('|INSERT INTO ([^ ]*)|', $query, $match)) {
                     $data_queries[] = $query;
                 } else if(preg_match('|UPDATE ([^ ]*)|', $query, $match)) {
