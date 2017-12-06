@@ -91,8 +91,10 @@
          *
          * @access public
          * @since unknown
+         *
          * @param string $name
-         * @return array
+         *
+         * @return array|bool
          */
         public function findBySection($name)
         {

@@ -55,8 +55,10 @@
          *
          * @access public
          * @since unknown
+         *
          * @param string $type
-         * @return array
+         *
+         * @return array|bool
          */
         public function getCronByType($type)
         {

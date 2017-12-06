@@ -513,9 +513,11 @@
 	     *
 	     * @access public
 	     * @since  unknown
+	     *
 	     * @param int    $categoryID primary key
 	     * @param string $locale
-	     * @return array
+	     *
+	     * @return array|bool
 	     * @throws \Exception
 	     */
         public function findByPrimaryKey($categoryID, $locale = '' )
@@ -628,8 +630,10 @@
          *
          * @access public
          * @since 3.2.1
+         *
          * @param string $locale
-         * @return array
+         *
+         * @return array|bool
          */
         public function _findNameIDByLocale($locale = null)
         {

@@ -59,8 +59,10 @@
          *
          * @access public
          * @since unknown
+         *
          * @param int $limit
-         * @return array
+         *
+         * @return array|bool
          */
         public function getSearches($limit = 20)
         {
@@ -83,8 +85,10 @@
          *
          * @access public
          * @since unknown
+         *
          * @param int $time
-         * @return array
+         *
+         * @return array|bool
          */
         public function getSearchesByDate($time = null)
         {

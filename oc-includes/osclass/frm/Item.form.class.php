@@ -527,8 +527,8 @@
         }
 
 		/**
-		 * @param null $currencies
-		 * @param null $item
+		 * @param array|null $currencies
+		 * @param array|null $item
 		 */
 		public static function currency_select( $currencies = null , $item = null ) {
             if( $currencies == null ) { $currencies = osc_get_currencies(); }
@@ -553,8 +553,8 @@
         }
 
 		/**
-		 * @param null $countries
-		 * @param null $item
+		 * @param array|null $countries
+		 * @param array|null $item
 		 *
 		 * @return bool
 		 */

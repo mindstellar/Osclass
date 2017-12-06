@@ -149,7 +149,7 @@
 	     * @param string $email
 	     * @param null   $locale
 	     *
-	     * @return array
+	     * @return array|bool
 	     */
         public function findByEmail($email, $locale = null)
         {
@@ -172,10 +172,12 @@
 	     *
 	     * @access public
 	     * @since  3.1
+	     *
 	     * @param string $username
 	     * @param null   $locale
-	     * @return array
-*/
+	     *
+	     * @return array|bool
+	     */
         public function findByUsername($username, $locale = null)
         {
             $this->dao->select();
@@ -248,11 +250,13 @@
 	     *
 	     * @access public
 	     * @since  unknown
+	     *
 	     * @param string $id
 	     * @param string $secret
 	     * @param null   $locale
-	     * @return array
-*/
+	     *
+	     * @return array|bool
+	     */
         public function findByIdPasswordSecret($id, $secret, $locale = null)
         {
             if($secret=='') { return null; }

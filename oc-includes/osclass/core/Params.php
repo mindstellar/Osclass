@@ -173,7 +173,7 @@
 		 * @param bool   $xss_check
 		 * @param bool   $quotes_encode
 		 *
-		 * @return \Purified|string
+		 * @return array|string
 		 */
 		public static function getParamsAsArray( $what = '' , $htmlencode = false , $xss_check = true , $quotes_encode = true )
         {

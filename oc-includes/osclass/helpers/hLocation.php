@@ -26,7 +26,7 @@
 	/**
 	 * Gets current country
 	 *
-	 * @return null|string
+	 * @return array|string
 	 */
     function osc_country() {
         if (View::newInstance()->_exists('countries')) {
@@ -40,7 +40,7 @@
 	/**
 	 * Gets current region
 	 *
-	 * @return null|string
+	 * @return array|string
 	 */
     function osc_region() {
         if (View::newInstance()->_exists('regions')) {
@@ -54,7 +54,7 @@
 	/**
 	 * Gets current city
 	 *
-	 * @return null|string
+	 * @return array|string
 	 */
     function osc_city() {
         if (View::newInstance()->_exists('cities')) {
@@ -68,7 +68,7 @@
 	/**
 	 * Gets current city area
 	 *
-	 * @return null|string
+	 * @return array|string
 	 */
     function osc_city_area() {
         if (View::newInstance()->_exists('city_areas')) {
@@ -226,7 +226,7 @@
     /**
      * Gets region's name
      *
-     * @return string
+     * @return array|string
      */
     function osc_region_name() {
         return osc_field(osc_region(), 'region_name', '');

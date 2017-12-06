@@ -54,7 +54,7 @@
 	/**
 	 * Gets current premium array from view
 	 *
-	 * @return null|string $premium, or null if not exist
+	 * @return array|string $premium, or null if not exist
 	 */
     function osc_premium() {
         if (View::newInstance()->_exists('premiums')) {
@@ -71,7 +71,7 @@
 	 * @param   $field
 	 * @param string $locale
 	 *
-	 * @return field_type
+	 * @return string
 	 */
     function osc_premium_field($field, $locale = '' ) {
         return osc_field(osc_premium(), $field, $locale);

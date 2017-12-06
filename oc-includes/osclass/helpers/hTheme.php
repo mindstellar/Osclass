@@ -112,8 +112,8 @@
     /**
      * Add script to be loaded
      *
-     * @param $id keyname to identify the script
-     * @param $url url of the .js file
+     * @param $id           string Id to identify the script
+     * @param $url          string url of the .js file
      * @param $dependencies mixed, could be an array or a string
      */
     function osc_register_script($id, $url, $dependencies = null) {
@@ -144,8 +144,8 @@
     /**
      * Add style to be loaded
      *
-     * @param $id keyname to identify the style
-     * @param $url url of the .css file
+     * @param $id  string Id to identify the style
+     * @param $url string Url of the .css file
      */
     function osc_enqueue_style($id, $url) {
         Styles::newInstance()->addStyle($id, $url);

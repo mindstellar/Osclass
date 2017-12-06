@@ -967,7 +967,7 @@
     /**
      * Gets list of countries
      *
-     * @return string
+     * @return array
      */
     function osc_get_countries() {
         if (View::newInstance()->_exists('countries')) {
@@ -982,7 +982,8 @@
 	 * Gets list of regions (from a country)
 	 *
 	 * @param string $country
-	 * @return string
+	 *
+	 * @return array|string
 	 */
     function osc_get_regions($country = '') {
         if (View::newInstance()->_exists('regions')) {
@@ -1001,7 +1002,8 @@
 	 * Gets list of cities (from a region)
 	 *
 	 * @param string $region
-	 * @return string
+	 *
+	 * @return array|string
 	 */
     function osc_get_cities($region = '') {
         if (View::newInstance()->_exists('cities')) {

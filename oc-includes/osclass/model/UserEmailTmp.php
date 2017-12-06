@@ -55,8 +55,10 @@
          *
          * @access public
          * @since unknown
+         *
          * @param $userEmailTmp
-         * @return array
+         *
+         * @return array|bool
          */
         public function insertOrUpdate($userEmailTmp) {
 

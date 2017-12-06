@@ -78,7 +78,7 @@
 	 * @param   $field
 	 * @param string $locale
 	 *
-	 * @return field_type
+	 * @return string
 	 */
     function osc_item_field($field, $locale = '' ) {
         return osc_field(osc_item(), $field, $locale);
@@ -91,7 +91,7 @@
 	 * @param   $field
 	 * @param string $locale
 	 *
-	 * @return field_type
+	 * @return string
 	 */
     function osc_comment_field($field, $locale = '') {
         return osc_field(osc_comment(), $field, $locale);

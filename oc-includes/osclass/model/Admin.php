@@ -96,8 +96,10 @@
          *
          * @access public
          * @since unknown
+         *
          * @param string $email
-         * @return array
+         *
+         * @return array|bool
          */
         public function findByEmail($email)
         {
@@ -119,8 +121,10 @@
          *
          * @access public
          * @since unknown
+         *
          * @param string $username
-         * @return array
+         *
+         * @return array|bool
          */
         public function findByUsername($username)
         {
@@ -191,9 +195,11 @@
          *
          * @access public
          * @since unknown
+         *
          * @param integer $id
-         * @param string $password
-         * @return array
+         * @param string  $password
+         *
+         * @return array|bool
          */
         public function findByIdPassword($id, $password)
         {

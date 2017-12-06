@@ -163,7 +163,7 @@
     /**
      * Gets current search users
      *
-     * @return string
+     * @return array
      */
     function osc_search_user() {
         if(is_array(View::newInstance()->_get('search_from_user') ) ){
@@ -663,7 +663,7 @@
 	/**
 	 * Gets list of countries with items
 	 *
-	 * @return null|string
+	 * @return array|string
 	 */
     function osc_list_country() {
         if (View::newInstance()->_exists('list_countries')) {
@@ -677,7 +677,7 @@
 	/**
 	 * Gets list of regions with items
 	 *
-	 * @return null|string
+	 * @return array|string
 	 */
     function osc_list_region() {
         if (View::newInstance()->_exists('list_regions')) {
@@ -691,7 +691,7 @@
 	/**
 	 * Gets list of cities with items
 	 *
-	 * @return null|string
+	 * @return array|string
 	 */
     function osc_list_city() {
         if (View::newInstance()->_exists('list_cities')) {
@@ -981,7 +981,7 @@
 	/**
 	 * Gets the current latest search
 	 *
-	 * @return null|string
+	 * @return array|string
 	 */
     function osc_latest_search() {
         if (View::newInstance()->_exists('latest_searches')) {

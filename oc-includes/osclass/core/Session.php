@@ -240,7 +240,7 @@
         }
 
 		/**
-		 * @return string
+		 * @return string|array
 		 */
 		public function _getKeepForm() {
             return $this->_get('keepForm');

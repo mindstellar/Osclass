@@ -119,7 +119,7 @@
 	     *
 	     * @param int $id Item id
 	     *
-	     * @return array
+	     * @return array|bool
 	     * @throws \Exception
 	     */
         public function findByPrimaryKey($id)

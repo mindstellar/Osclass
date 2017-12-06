@@ -299,10 +299,10 @@
 	 *
 	 * @since 3.0
 	 *
-	 * @param $by   two possibilities: slug or id
-	 * @param $what the id or slug category we're looking for
+	 * @param $by   //two possibilities: slug or id
+	 * @param $what //the id or slug category we're looking for
 	 *
-	 * @return array
+	 * @return array|bool
 	 * @throws \Exception
 	 */
     function osc_get_category($by, $what) {

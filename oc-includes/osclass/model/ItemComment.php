@@ -249,8 +249,10 @@
          *
          * @access public
          * @since unknown
+         *
          * @param integer $num
-         * @return array
+         *
+         * @return array|bool
          */
         public function getLastComments($num)
         {
@@ -365,7 +367,8 @@
          * Count the number of comments
          *
          * @param int item's ID or null
-         * @return int
+         *
+         * @return array|int
          */
         public function count($itemId = null) {
             $this->dao->select('COUNT(*) AS numrows');

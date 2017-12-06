@@ -231,7 +231,7 @@
          *
          * @access public
          * @since 2.3
-         * @return type
+         * @return string
          */
         public function getErrorConnectionDesc()
         {
