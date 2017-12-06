@@ -42,11 +42,13 @@
         return $pagination->doPagination();
     }
 
-    /**
-     * Gets the pagination links of comments pagination
-     *
-     * @return string pagination links
-     */
+
+	/**
+	 * Gets the pagination links of comments pagination
+	 *
+	 * @return string pagination links
+	 * @throws \Exception
+	 */
     function osc_comments_pagination() {
         if( (osc_comments_per_page() == 0) || (osc_item_comments_page() === 'all') || (osc_item_total_comments() <= osc_comments_per_page())) {
             return '';
