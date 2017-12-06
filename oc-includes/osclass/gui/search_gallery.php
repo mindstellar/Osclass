@@ -25,19 +25,35 @@
             <tr class="premium_<?php echo $class; ?>">
                 <?php if( osc_images_enabled_at_items() ) { ?>
                  <td class="photo">
-                     <?php if(osc_count_premium_resources()) { ?>
-                        <a href="<?php echo osc_premium_url(); ?>"><img src="<?php echo osc_resource_thumbnail_url(); ?>" width="75" height="56" title="<?php echo osc_item_title(); ?>" alt="<?php echo osc_item_title(); ?>" /></a>
-                    <?php } else { ?>
-                        <img src="<?php echo osc_current_web_theme_url('images/no_photo.gif'); ?>" title="" alt="" />
-                    <?php } ?>
+                     <?php try {
+	                     if ( osc_count_premium_resources() ) { ?>
+                             <a href="<?php try {
+			                     echo osc_premium_url();
+		                     } catch ( Exception $e ) {
+		                     } ?>"><img src="<?php echo osc_resource_thumbnail_url(); ?>" width="75" height="56"
+                                        title="<?php echo osc_item_title(); ?>" alt="<?php echo osc_item_title(); ?>"/></a>
+	                     <?php } else { ?>
+                             <img src="<?php echo osc_current_web_theme_url( 'images/no_photo.gif' ); ?>" title=""
+                                  alt=""/>
+	                     <?php }
+                     } catch ( Exception $e ) {
+                     } ?>
                  </td>
                  <?php } ?>
                  <td class="text">
                      <h3>
-                         <span style="float:left;"><a href="<?php echo osc_premium_url(); ?>"><?php echo osc_premium_title(); ?></a></span><span style="float:right;"><?php _e( 'Sponsored ad' , 'modern' ); ?></span>
+                         <span style="float:left;"><a href="<?php try {
+		                         echo osc_premium_url();
+	                         } catch ( Exception $e ) {
+	                         } ?>"><?php echo osc_premium_title(); ?></a></span><span style="float:right;"><?php _e( 'Sponsored ad' , 'modern' ); ?></span>
                      </h3>
                      <p style="clear: left;">
-                         <strong><?php if( osc_price_enabled_at_items() && osc_item_category_price_enabled() ) { echo osc_premium_formated_price(); ?> - <?php } echo osc_premium_city(); ?> (<?php echo osc_premium_region(); ?>) - <?php echo osc_format_date(osc_premium_pub_date()); ?></strong>
+                         <strong><?php try {
+		                         if ( osc_price_enabled_at_items() && osc_item_category_price_enabled() ) {
+			                         echo osc_premium_formated_price(); ?> - <?php }
+	                         } catch ( Exception $e ) {
+	                         }
+		                         echo osc_premium_city(); ?> (<?php echo osc_premium_region(); ?>) - <?php echo osc_format_date( osc_premium_pub_date()); ?></strong>
                      </p>
                      <p><?php echo osc_highlight( strip_tags( osc_premium_description() ) ); ?></p>
                  </td>
@@ -54,19 +70,35 @@
             <tr class="<?php echo $class; ?>">
                 <?php if( osc_images_enabled_at_items() ) { ?>
                  <td class="photo">
-                     <?php if(osc_count_item_resources()) { ?>
-                        <a href="<?php echo osc_item_url(); ?>"><img src="<?php echo osc_resource_thumbnail_url(); ?>" width="75" height="56" title="<?php echo osc_item_title(); ?>" alt="<?php echo osc_item_title(); ?>" /></a>
-                    <?php } else { ?>
-                        <img src="<?php echo osc_current_web_theme_url('images/no_photo.gif'); ?>" title="" alt="" />
-                    <?php } ?>
+                     <?php try {
+	                     if ( osc_count_item_resources() ) { ?>
+                             <a href="<?php try {
+			                     echo osc_item_url();
+		                     } catch ( Exception $e ) {
+		                     } ?>"><img src="<?php echo osc_resource_thumbnail_url(); ?>" width="75" height="56"
+                                        title="<?php echo osc_item_title(); ?>" alt="<?php echo osc_item_title(); ?>"/></a>
+	                     <?php } else { ?>
+                             <img src="<?php echo osc_current_web_theme_url( 'images/no_photo.gif' ); ?>" title=""
+                                  alt=""/>
+	                     <?php }
+                     } catch ( Exception $e ) {
+                     } ?>
                  </td>
                  <?php } ?>
                  <td class="text">
                      <h3>
-                         <a href="<?php echo osc_item_url(); ?>"><?php echo osc_item_title(); ?></a>
+                         <a href="<?php try {
+	                         echo osc_item_url();
+                         } catch ( Exception $e ) {
+                         } ?>"><?php echo osc_item_title(); ?></a>
                      </h3>
                      <p>
-                         <strong><?php if( osc_price_enabled_at_items() && osc_item_category_price_enabled() ) { echo osc_item_formated_price(); ?> - <?php } echo osc_item_city(); ?> (<?php echo osc_item_region(); ?>) - <?php echo osc_format_date(osc_item_pub_date()); ?></strong>
+                         <strong><?php try {
+		                         if ( osc_price_enabled_at_items() && osc_item_category_price_enabled() ) {
+			                         echo osc_item_formated_price(); ?> - <?php }
+	                         } catch ( Exception $e ) {
+	                         }
+		                         echo osc_item_city(); ?> (<?php echo osc_item_region(); ?>) - <?php echo osc_format_date( osc_item_pub_date()); ?></strong>
                      </p>
                      <p><?php echo osc_highlight( strip_tags( osc_item_description() ) ); ?></p>
                  </td>

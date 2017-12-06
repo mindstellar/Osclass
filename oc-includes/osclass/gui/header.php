@@ -69,14 +69,20 @@
             <div class="cell">
                 <input type="text" name="sPattern" id="query" class="input-text" value="" placeholder="<?php echo osc_esc_html(__(osc_get_preference('keyword_placeholder', 'bender'), 'bender')); ?>" />
             </div>
-            <?php  if ( osc_count_categories() ) { ?>
-                <div class="cell selector">
-                    <?php osc_categories_select('sCategory', null, __('Select a category', 'bender')) ; ?>
-                </div>
-                <div class="cell reset-padding">
-            <?php  } else { ?>
+            <?php try{
+	            if ( osc_count_categories() ) { ?>
+            <div class="cell selector">
+		        <?php try {
+			        osc_categories_select( 'sCategory' , null , __( 'Select a category' , 'bender' ) );
+		        } catch ( Exception $e ) {
+		        } ?>
+            </div>
+            <div class="cell reset-padding">
+		        <?php } else { ?>
                 <div class="cell">
-            <?php  } ?>
+			        <?php }
+				        } catch ( Exception $e ) {
+			        } ?>
                 <button class="ui-button ui-button-big js-submit"><?php _e( 'Search' , 'bender');?></button>
             </div>
         </div>

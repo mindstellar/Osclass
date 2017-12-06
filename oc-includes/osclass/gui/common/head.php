@@ -34,14 +34,32 @@
 ?>
 <meta http-equiv="Content-type" content="text/html; charset=utf-8" />
 
-<title><?php echo meta_title() ; ?></title>
-<meta name="title" content="<?php echo osc_esc_html(meta_title()); ?>" />
-<?php if( meta_description() != '' ) { ?>
-<meta name="description" content="<?php echo osc_esc_html(meta_description()); ?>" />
-<?php } ?>
-<?php if( meta_keywords() != '' ) { ?>
-<meta name="keywords" content="<?php echo osc_esc_html(meta_keywords()); ?>" />
-<?php } ?>
+<title><?php try {
+		echo meta_title();
+	} catch ( Exception $e ) {
+	} ?></title>
+<meta name="title" content="<?php try {
+	echo osc_esc_html( meta_title() );
+} catch ( Exception $e ) {
+} ?>" />
+<?php try {
+	if ( meta_description() != '' ) { ?>
+        <meta name="description" content="<?php try {
+			echo osc_esc_html( meta_description() );
+		} catch ( Exception $e ) {
+		} ?>"/>
+	<?php }
+} catch ( Exception $e ) {
+} ?>
+<?php try {
+	if ( meta_keywords() != '' ) { ?>
+        <meta name="keywords" content="<?php try {
+			echo osc_esc_html( meta_keywords() );
+		} catch ( Exception $e ) {
+		} ?>"/>
+	<?php }
+} catch ( Exception $e ) {
+} ?>
 <?php if( osc_get_canonical() != '' ) { ?>
 <!-- canonical -->
 <link rel="canonical" href="<?php echo osc_get_canonical(); ?>"/>

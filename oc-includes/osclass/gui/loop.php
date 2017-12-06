@@ -35,14 +35,17 @@ if(View::newInstance()->_exists('listClass')){
         $i = 0;
 
         if( $type === 'latestItems'){
-            while ( osc_has_latest_items() ) {
-                $class = '';
-                if($i%3 == 0){
-                    $class = 'first';
-                }
-                bender_draw_item($class);
-                $i++;
-            }
+	        try {
+		        while ( osc_has_latest_items() ) {
+			        $class = '';
+			        if ( $i % 3 == 0 ) {
+				        $class = 'first';
+			        }
+			        bender_draw_item( $class );
+			        $i ++;
+		        }
+	        } catch ( Exception $e ) {
+	        }
         } elseif( $type === 'premiums'){
             while ( osc_has_premiums() ) {
                 $class = '';

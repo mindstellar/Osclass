@@ -56,34 +56,49 @@
                         break;
                     }
 
-                    $aCategory = osc_get_category('id', osc_item_category_id());
-                    // remove
+	                try {
+		                $aCategory = osc_get_category( 'id' , osc_item_category_id() );
+	                } catch ( Exception $e ) {
+	                }
+	                // remove
                     View::newInstance()->_erase('categories');
                     View::newInstance()->_erase('subcategories');
                     View::newInstance()->_exportVariableToView('category', $aCategory);
 
-                    $l = array(
-                        'url'   => osc_search_category_url(),
-                        'title' => osc_category_name()
-                    );
-                    $this->addLevel($l);
+	                try {
+		                $l = array (
+			                'url'   => osc_search_category_url() ,
+			                'title' => osc_category_name()
+		                );
+	                } catch ( Exception $e ) {
+	                }
+	                $this->addLevel($l);
 
                     switch ($this->getSection()) {
                         case('item_edit'):
-                            $l = array('url' => osc_item_url(), 'title' => osc_item_title());
-                            $this->addLevel($l);
+	                        try {
+		                        $l = array ( 'url' => osc_item_url() , 'title' => osc_item_title() );
+	                        } catch ( Exception $e ) {
+	                        }
+	                        $this->addLevel($l);
                             $l = array('title' => $this->title['item_edit']);
                             $this->addLevel($l);
                         break;
                         case('send_friend'):
-                            $l = array('url' => osc_item_url(), 'title' => osc_item_title());
-                            $this->addLevel($l);
+	                        try {
+		                        $l = array ( 'url' => osc_item_url() , 'title' => osc_item_title() );
+	                        } catch ( Exception $e ) {
+	                        }
+	                        $this->addLevel($l);
                             $l = array('title' => $this->title['item_send_friend']);
                             $this->addLevel($l);
                         break;
                         case('contact'):
-                            $l = array('url' => osc_item_url(), 'title' => osc_item_title());
-                            $this->addLevel($l);
+	                        try {
+		                        $l = array ( 'url' => osc_item_url() , 'title' => osc_item_title() );
+	                        } catch ( Exception $e ) {
+	                        }
+	                        $this->addLevel($l);
                             $l = array('title' => $this->title['item_contact']);
                             $this->addLevel($l);
                         break;
@@ -101,8 +116,11 @@
                         $region     = osc_search_region();
                         $city       = osc_search_city();
                         $pattern    = osc_search_pattern();
-                        $category   = osc_search_category_id();
-                        $category   = ((count($category) == 1) ? $category[0] : '');
+	                try {
+		                $category = osc_search_category_id();
+	                } catch ( Exception $e ) {
+	                }
+	                $category   = ((count($category) == 1) ? $category[0] : '');
 
                         $b_show_all = ($pattern == '' && $category == '' && $region == '' && $city == '');
                         $b_category = ($category != '');
@@ -120,17 +138,23 @@
 
                         // category
                         if( $b_category ) {
-                            $aCategories = Category::newInstance()->toRootTree($category);
-                            foreach( $aCategories as $c ) {
+	                        try {
+		                        $aCategories = Category::newInstance()->toRootTree( $category );
+	                        } catch ( Exception $e ) {
+	                        }
+	                        foreach( $aCategories as $c ) {
                                 View::newInstance()->_erase('categories');
                                 View::newInstance()->_erase('subcategories');
                                 View::newInstance()->_exportVariableToView('category', $c);
 
-                                $l = array(
-                                    'url'   => osc_search_category_url(),
-                                    'title' => osc_category_name()
-                                );
-                                $this->addLevel($l);
+	                            try {
+		                            $l = array (
+			                            'url'   => osc_search_category_url() ,
+			                            'title' => osc_category_name()
+		                            );
+	                            } catch ( Exception $e ) {
+	                            }
+	                            $this->addLevel($l);
                             }
                         }
 
@@ -145,35 +169,47 @@
                                 $aCity = City::newInstance()->findByName($city);
                                 if( count($aCity) == 0 ) {
                                     $params['sCity'] = $city;
-                                    $l = array(
-                                        'url'   => osc_search_url($params),
-                                        'title' => $city
-                                    );
-                                    $this->addLevel($l);
+	                                try {
+		                                $l = array (
+			                                'url'   => osc_search_url( $params ) ,
+			                                'title' => $city
+		                                );
+	                                } catch ( Exception $e ) {
+	                                }
+	                                $this->addLevel($l);
                                 } else {
                                     $aRegion = Region::newInstance()->findByPrimaryKey($aCity['fk_i_region_id']);
 
                                     $params['sRegion'] = $aRegion['s_name'];
-                                    $l = array(
-                                        'url'   => osc_search_url($params),
-                                        'title' => $aRegion['s_name']
-                                    );
-                                    $this->addLevel($l);
+	                                try {
+		                                $l = array (
+			                                'url'   => osc_search_url( $params ) ,
+			                                'title' => $aRegion[ 's_name' ]
+		                                );
+	                                } catch ( Exception $e ) {
+	                                }
+	                                $this->addLevel($l);
 
                                     $params['sCity'] = $aCity['s_name'];
-                                    $l = array(
-                                        'url'   => osc_search_url($params),
-                                        'title' => $aCity['s_name']
-                                    );
-                                    $this->addLevel($l);
+	                                try {
+		                                $l = array (
+			                                'url'   => osc_search_url( $params ) ,
+			                                'title' => $aCity[ 's_name' ]
+		                                );
+	                                } catch ( Exception $e ) {
+	                                }
+	                                $this->addLevel($l);
                                 }
                             } else if( $b_region ) {
                                 $params['sRegion'] = $region;
-                                $l = array(
-                                    'url'   => osc_search_url($params),
-                                    'title' => $region
-                                );
-                                $this->addLevel($l);
+	                            try {
+		                            $l = array (
+			                            'url'   => osc_search_url( $params ) ,
+			                            'title' => $region
+		                            );
+	                            } catch ( Exception $e ) {
+	                            }
+	                            $this->addLevel($l);
                             }
                         }
 

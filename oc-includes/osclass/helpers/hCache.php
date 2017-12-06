@@ -59,7 +59,10 @@
 }
 
 function osc_cache_init() {
-    Object_Cache_Factory::newInstance();
+	try {
+		Object_Cache_Factory::newInstance();
+	} catch ( Exception $e ) {
+	}
 }
 
 

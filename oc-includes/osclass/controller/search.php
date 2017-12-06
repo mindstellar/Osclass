@@ -80,19 +80,28 @@
                         }
                     } else {
                         if(!Params::existParam('sCategory')) {
-                            $category  = Category::newInstance()->findBySlug($search_uri);
-                            if( count($category) === 0 ) {
+	                        try {
+		                        $category = Category::newInstance()->findBySlug( $search_uri );
+	                        } catch ( Exception $e ) {
+	                        }
+	                        if( count($category) === 0 ) {
                                 $this->do404();
                             }
                             Params::setParam('sCategory', $search_uri);
                         } else {
 	                        if ( strpos( Params::getParam( 'sCategory' ) , '/' ) !== false ) {
                                 $tmp = explode( '/' , preg_replace( '|/$|', '', Params::getParam( 'sCategory')));
-                                $category  = Category::newInstance()->findBySlug($tmp[count($tmp)-1]);
-                                Params::setParam('sCategory', $tmp[count($tmp)-1]);
+		                        try {
+			                        $category = Category::newInstance()->findBySlug( $tmp[ count( $tmp ) - 1 ] );
+		                        } catch ( Exception $e ) {
+		                        }
+		                        Params::setParam('sCategory', $tmp[count($tmp)-1]);
                             } else {
-                                $category  = Category::newInstance()->findBySlug(Params::getParam('sCategory'));
-                                Params::setParam('sCategory', Params::getParam('sCategory'));
+		                        try {
+			                        $category = Category::newInstance()->findBySlug( Params::getParam( 'sCategory' ) );
+		                        } catch ( Exception $e ) {
+		                        }
+		                        Params::setParam('sCategory', Params::getParam('sCategory'));
                             }
                             if( count($category) === 0 ) {
                                 $this->do404();
@@ -170,8 +179,11 @@
 
 
             $uriParams = Params::getParamsAsArray();
-            $searchUri = osc_search_url($uriParams);
-            if( $this->uri !== 'feed') {
+	        try {
+		        $searchUri = osc_search_url( $uriParams );
+	        } catch ( Exception $e ) {
+	        }
+	        if( $this->uri !== 'feed') {
                 $_base_url = WEB_PATH;
                 if( MULTISITE==1 ) {
                     $_base_url = osc_multisite_url();
@@ -316,7 +328,10 @@
             $successCat = false;
             if(count($p_sCategory) > 0) {
                 foreach($p_sCategory as $category) {
-                    $successCat = ($this->mSearch->addCategory($category) || $successCat);
+	                try {
+		                $successCat = ( $this->mSearch->addCategory( $category ) || $successCat );
+	                } catch ( Exception $e ) {
+	                }
                 }
             } else {
                 $bAllCategoriesChecked = true;
@@ -398,8 +413,11 @@
 
             // CUSTOM FIELDS
             $custom_fields = Params::getParam('meta');
-            $fields = Field::newInstance()->findIDSearchableByCategories($p_sCategory);
-            $table = DB_TABLE_PREFIX.'t_item_meta';
+	        try {
+		        $fields = Field::newInstance()->findIDSearchableByCategories( $p_sCategory );
+	        } catch ( Exception $e ) {
+	        }
+	        $table = DB_TABLE_PREFIX.'t_item_meta';
             if(is_array($custom_fields)) {
                 foreach($custom_fields as $key => $aux) {
                     if(in_array($key, $fields)) {
@@ -478,9 +496,12 @@
             // RETRIEVE ITEMS AND TOTAL
             $key    = md5(osc_base_url().$this->mSearch->toJson());
             $found  = null;
-            $cache  = osc_cache_get($key, $found);
+	        try {
+		        $cache = osc_cache_get( $key , $found );
+	        } catch ( Exception $e ) {
+	        }
 
-            $aItems         = null;
+	        $aItems         = null;
             $iTotalItems    = null;
             if($cache) {
                 $aItems         = $cache['aItems'];
@@ -490,7 +511,10 @@
                 $iTotalItems = $this->mSearch->count();
                 $_cache['aItems']      = $aItems;
                 $_cache['iTotalItems'] = $iTotalItems;
-                osc_cache_set($key, $_cache, OSC_CACHE_TTL);
+	            try {
+		            osc_cache_set( $key , $_cache , OSC_CACHE_TTL );
+	            } catch ( Exception $e ) {
+	            }
             }
             
             $aItems = osc_apply_filter('pre_show_items', $aItems);
@@ -590,25 +614,39 @@
                     if(osc_count_items()>0) {
                         while(osc_has_items()) {
 
-                            $itemArray = array(
-                                'title' => osc_item_title(),
-                                'link' => htmlentities( osc_item_url() , ENT_COMPAT, 'UTF-8' ),
-                                'description' => osc_item_description(),
-                                'country' => osc_item_country(),
-                                'region' => osc_item_region(),
-                                'city' => osc_item_city(),
-                                'city_area' => osc_item_city_area(),
-                                'category' => osc_item_category(),
-                                'dt_pub_date' => osc_item_pub_date()
-                            );
+	                        try {
+		                        $itemArray = array (
+			                        'title'       => osc_item_title() ,
+			                        'link'        => htmlentities( osc_item_url() , ENT_COMPAT , 'UTF-8' ) ,
+			                        'description' => osc_item_description() ,
+			                        'country'     => osc_item_country() ,
+			                        'region'      => osc_item_region() ,
+			                        'city'        => osc_item_city() ,
+			                        'city_area'   => osc_item_city_area() ,
+			                        'category'    => osc_item_category() ,
+			                        'dt_pub_date' => osc_item_pub_date()
+		                        );
+	                        } catch ( Exception $e ) {
+	                        }
 
-                            if(osc_count_item_resources() > 0) {
-                                osc_has_item_resources();
-                                $itemArray['image'] = array('url' => htmlentities( osc_resource_thumbnail_url(), ENT_COMPAT, 'UTF-8' ),
-                                    'title' => osc_item_title(),
-                                    'link' => htmlentities( osc_item_url(), ENT_COMPAT, 'UTF-8' ));
-                            }
-                            $feed->addItem($itemArray);
+	                        try {
+		                        if ( osc_count_item_resources() > 0 ) {
+			                        try {
+				                        osc_has_item_resources();
+			                        } catch ( Exception $e ) {
+			                        }
+			                        try {
+				                        $itemArray[ 'image' ] = array (
+					                        'url'   => htmlentities( osc_resource_thumbnail_url() , ENT_COMPAT , 'UTF-8' ) ,
+					                        'title' => osc_item_title() ,
+					                        'link'  => htmlentities( osc_item_url() , ENT_COMPAT , 'UTF-8' )
+				                        );
+			                        } catch ( Exception $e ) {
+			                        }
+		                        }
+	                        } catch ( Exception $e ) {
+	                        }
+	                        $feed->addItem($itemArray);
                         }
                     }
 

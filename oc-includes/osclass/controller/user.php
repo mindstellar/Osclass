@@ -259,9 +259,12 @@
                         osc_run_hook('before_user_delete', $user);
                         View::newInstance()->_exportVariableToView('user', $user);
                         if(!empty($user) && osc_logged_user_id()==$id && $secret==$user['s_secret']) {
-                            User::newInstance()->deleteUser(osc_logged_user_id());
+	                        try {
+		                        User::newInstance()->deleteUser( osc_logged_user_id() );
+	                        } catch ( Exception $e ) {
+	                        }
 
-                            Session::newInstance()->_drop('userId');
+	                        Session::newInstance()->_drop('userId');
                             Session::newInstance()->_drop('userName');
                             Session::newInstance()->_drop('userEmail');
                             Session::newInstance()->_drop('userPhone');

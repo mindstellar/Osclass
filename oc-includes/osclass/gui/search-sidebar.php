@@ -69,11 +69,17 @@
         <?php } ?>
         <div class="plugin-hooks">
             <?php
-            if(osc_search_category_id()) {
-                osc_run_hook('search_form', osc_search_category_id()) ;
-            } else {
-                osc_run_hook('search_form') ;
-            }
+	            try {
+		            if ( osc_search_category_id() ) {
+			            try {
+				            osc_run_hook( 'search_form' , osc_search_category_id() );
+			            } catch ( Exception $e ) {
+			            }
+		            } else {
+			            osc_run_hook( 'search_form' );
+		            }
+	            } catch ( Exception $e ) {
+	            }
             ?>
         </div>
         <?php

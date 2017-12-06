@@ -103,8 +103,11 @@
                 case 'item_add_post':
                     // SAVE form data before CSRF CHECK
                     $mItems = new ItemActions(false);
-                    $mItems->prepareData(true);
-                    foreach( $mItems->data as $key => $value ) {
+	                try {
+		                $mItems->prepareData( true );
+	                } catch ( Exception $e ) {
+	                }
+	                foreach( $mItems->data as $key => $value ) {
                         Session::newInstance()->_setForm($key,$value);
                     }
 
@@ -152,9 +155,13 @@
                     }
 
                     // POST ITEM ( ADD ITEM )
-                    $success = $mItems->add();
+	                try {
+		                $success = $mItems->add();
+	                } catch ( Exception $e ) {
+	                } catch ( Will $e ) {
+	                }
 
-                    if($success!=1 && $success!=2) {
+	                if($success!=1 && $success!=2) {
                         osc_add_flash_error_message( $success);
                         $this->redirectTo( osc_item_post_url() );
                     } else {
@@ -172,9 +179,15 @@
 
                         $itemId         = Params::getParam('itemId');
 
-                        $category = Category::newInstance()->findByPrimaryKey(Params::getParam('catId'));
-                        View::newInstance()->_exportVariableToView('category', $category);
-                        $this->redirectTo(osc_search_category_url());
+	                    try {
+		                    $category = Category::newInstance()->findByPrimaryKey( Params::getParam( 'catId' ) );
+	                    } catch ( Exception $e ) {
+	                    }
+	                    View::newInstance()->_exportVariableToView('category', $category);
+	                    try {
+		                    $this->redirectTo( osc_search_category_url() );
+	                    } catch ( Exception $e ) {
+	                    }
                     }
                 break;
                 case 'item_edit':   // edit item
@@ -182,9 +195,12 @@
                                     $id     = Params::getParam('id');
                                     $item   = $this->itemManager->listWhere( 'i.pk_i_id = %d AND ((i.s_secret = %s AND i.fk_i_user_id IS NULL) OR (i.fk_i_user_id = %d))' , (int) $id , $secret, (int) $this->userId );
                                     if (count($item) == 1) {
-                                        $item     = Item::newInstance()->findByPrimaryKey($id);
+	                                    try {
+		                                    $item = Item::newInstance()->findByPrimaryKey( $id );
+	                                    } catch ( Exception $e ) {
+	                                    }
 
-                                        $form     = count(Session::newInstance()->_getForm());
+	                                    $form     = count(Session::newInstance()->_getForm());
                                         $keepForm = count(Session::newInstance()->_getKeepForm());
                                         if($form == 0 || $form == $keepForm) {
                                             Session::newInstance()->_dropKeepForm();
@@ -208,8 +224,11 @@
                     // SAVE form data before CSRF CHECK
                     $mItems = new ItemActions(false);
                     // prepare data for ADD ITEM
-                    $mItems->prepareData(false);
-                    // set all parameters into session
+	                try {
+		                $mItems->prepareData( false );
+	                } catch ( Exception $e ) {
+	                }
+	                // set all parameters into session
                     foreach( $mItems->data as $key => $value ) {
                         Session::newInstance()->_setForm($key,$value);
                     }
@@ -238,9 +257,12 @@
 		                    return false; // BREAK THE PROCESS, THE RECAPTCHA IS WRONG
                         }
 
-                        $success = $mItems->edit();
+	                    try {
+		                    $success = $mItems->edit();
+	                    } catch ( Exception $e ) {
+	                    }
 
-                        if($success==1) {
+	                    if($success==1) {
                             if(is_array($meta)) {
                                 foreach( $meta as $key => $value ) {
                                     Session::newInstance()->_dropKeepForm('meta_'.$key);
@@ -248,8 +270,14 @@
                             }
                             Session::newInstance()->_clearVariables();
                             osc_add_flash_ok_message( _m("Great! We've just updated your listing") );
-                            View::newInstance()->_exportVariableToView( 'item' , Item::newInstance()->findByPrimaryKey( $id));
-                            $this->redirectTo( osc_item_url() );
+	                        try {
+		                        View::newInstance()->_exportVariableToView( 'item' , Item::newInstance()->findByPrimaryKey( $id ) );
+	                        } catch ( Exception $e ) {
+	                        }
+	                        try {
+		                        $this->redirectTo( osc_item_url() );
+	                        } catch ( Exception $e ) {
+	                        }
                         } else {
                             osc_add_flash_error_message( $success);
                             $this->redirectTo( osc_item_edit_url($secret, $id) );
@@ -271,9 +299,12 @@
                     if( $item[0]['b_active'] == 0 ) {
                         // ACTIVETE ITEM
                         $mItems = new ItemActions(false);
-                        $success = $mItems->activate( $item[0]['pk_i_id'], $item[0]['s_secret'] );
+	                    try {
+		                    $success = $mItems->activate( $item[ 0 ][ 'pk_i_id' ] , $item[ 0 ][ 's_secret' ] );
+	                    } catch ( Exception $e ) {
+	                    }
 
-                        if( $success ) {
+	                    if( $success ) {
                             osc_add_flash_ok_message( _m('The listing has been validated') );
                         }else{
                             osc_add_flash_error_message( _m("The listing can't be validated") );
@@ -282,16 +313,22 @@
                         osc_add_flash_warning_message( _m('The listing has already been validated') );
                     }
 
-                    $this->redirectTo( osc_item_url( ) );
-                break;
+	                try {
+		                $this->redirectTo( osc_item_url() );
+	                } catch ( Exception $e ) {
+	                }
+	                break;
                 case 'item_delete':
                     $secret = Params::getParam('secret');
                     $id     = Params::getParam('id');
                     $item   = $this->itemManager->listWhere( 'i.pk_i_id = %d AND ((i.s_secret = %s) OR (i.fk_i_user_id = %d))' , (int) $id , $secret, (int) $this->userId );
                     if (count($item) == 1) {
                         $mItems = new ItemActions(false);
-                        $success = $mItems->delete($item[0]['s_secret'], $item[0]['pk_i_id']);
-                        if($success) {
+	                    try {
+		                    $success = $mItems->delete( $item[ 0 ][ 's_secret' ] , $item[ 0 ][ 'pk_i_id' ] );
+	                    } catch ( Exception $e ) {
+	                    }
+	                    if($success) {
                             osc_add_flash_ok_message( _m('Your listing has been deleted') );
                         } else {
                             osc_add_flash_error_message( _m("The listing you are trying to delete couldn't be deleted") );
@@ -325,8 +362,11 @@
                         $this->redirectTo(osc_item_edit_url($secret, $item));
                     }
 
-                    $aItem = Item::newInstance()->findByPrimaryKey($item);
-                    if(count($aItem) == 0) {
+	                try {
+		                $aItem = Item::newInstance()->findByPrimaryKey( $item );
+	                } catch ( Exception $e ) {
+	                }
+	                if(count($aItem) == 0) {
                         osc_add_flash_error_message(_m("The listing doesn't exist"));
                         $this->redirectTo(osc_item_edit_url($secret, $item));
                     }
@@ -366,8 +406,11 @@
                     $id = Params::getParam('id');
                     $as = Params::getParam('as');
 
-                    $item = Item::newInstance()->findByPrimaryKey($id);
-                    View::newInstance()->_exportVariableToView('item', $item);
+	                try {
+		                $item = Item::newInstance()->findByPrimaryKey( $id );
+	                } catch ( Exception $e ) {
+	                }
+	                View::newInstance()->_exportVariableToView('item', $item);
 
                     require_once osc_lib_path() . 'osclass/user-agents.php';
                     foreach($user_agents as $ua) {
@@ -380,19 +423,28 @@
                     }
 
                     osc_add_flash_ok_message( _m("Thanks! That's very helpful") );
-                    $this->redirectTo( osc_item_url( ) );
-                break;
+	                try {
+		                $this->redirectTo( osc_item_url() );
+	                } catch ( Exception $e ) {
+	                }
+	                break;
                 case 'send_friend':
-                    $item = $this->itemManager->findByPrimaryKey( Params::getParam('id') );
+	                try {
+		                $item = $this->itemManager->findByPrimaryKey( Params::getParam( 'id' ) );
+	                } catch ( Exception $e ) {
+	                }
 
-                    $this->_exportVariableToView('item', $item);
+	                $this->_exportVariableToView('item', $item);
 
                     $this->doView('item-send-friend.php');
                 break;
                 case 'send_friend_post':
                     osc_csrf_check();
-                    $item = $this->itemManager->findByPrimaryKey( Params::getParam('id') );
-                    $this->_exportVariableToView('item', $item);
+	                try {
+		                $item = $this->itemManager->findByPrimaryKey( Params::getParam( 'id' ) );
+	                } catch ( Exception $e ) {
+	                }
+	                $this->_exportVariableToView('item', $item);
 
                     Session::newInstance()->_setForm( 'yourEmail' , Params::getParam( 'yourEmail'));
                     Session::newInstance()->_setForm( 'yourName' , Params::getParam( 'yourName'));
@@ -411,20 +463,29 @@
                     osc_run_hook('pre_item_send_friend_post', $item);
 
                     $mItem = new ItemActions(false);
-                    $success = $mItem->send_friend();
+	                try {
+		                $success = $mItem->send_friend();
+	                } catch ( Exception $e ) {
+	                }
 
-                    osc_run_hook('post_item_send_friend_post', $item);
+	                osc_run_hook('post_item_send_friend_post', $item);
 
                     if($success) {
                         Session::newInstance()->_clearVariables();
-                        $this->redirectTo( osc_item_url() );
+	                    try {
+		                    $this->redirectTo( osc_item_url() );
+	                    } catch ( Exception $e ) {
+	                    }
                     } else {
                         $this->redirectTo(osc_item_send_friend_url() );
                     }
                 break;
                 case 'contact':
-                    $item = $this->itemManager->findByPrimaryKey( Params::getParam('id') );
-                    if( empty($item) ){
+	                try {
+		                $item = $this->itemManager->findByPrimaryKey( Params::getParam( 'id' ) );
+	                } catch ( Exception $e ) {
+	                }
+	                if( empty($item) ){
                         osc_add_flash_error_message( _m("This listing doesn't exist") );
                         $this->redirectTo( osc_base_url(true) );
                     } else {
@@ -432,15 +493,21 @@
 
                         if( osc_item_is_expired () ) {
                             osc_add_flash_error_message( _m("We're sorry, but the listing has expired. You can't contact the seller") );
-                            $this->redirectTo( osc_item_url() );
+	                        try {
+		                        $this->redirectTo( osc_item_url() );
+	                        } catch ( Exception $e ) {
+	                        }
                         }
 
 	                    if ( ( osc_reg_user_can_contact() && osc_is_web_user_logged_in() ) || ! osc_reg_user_can_contact() ) {
                             $this->doView('item-contact.php');
                         } else {
                             osc_add_flash_warning_message( _m("You can't contact the seller, only registered users can").'. <br />'.sprintf( _m( '<a href="%s">Click here to sign-in</a>' ), osc_user_login_url() ) );
-                            $this->redirectTo( osc_item_url() );
-                        }
+		                    try {
+			                    $this->redirectTo( osc_item_url() );
+		                    } catch ( Exception $e ) {
+		                    }
+	                    }
                     }
                 break;
                 case 'contact_post':
@@ -450,8 +517,11 @@
                         $this->redirectTo( osc_base_url(true) );
                     }
 
-                    $item = $this->itemManager->findByPrimaryKey( Params::getParam('id') );
-                    $this->_exportVariableToView('item', $item);
+	                try {
+		                $item = $this->itemManager->findByPrimaryKey( Params::getParam( 'id' ) );
+	                } catch ( Exception $e ) {
+	                }
+	                $this->_exportVariableToView('item', $item);
                     if ( osc_recaptcha_private_key() != '' ) {
                         if(!osc_check_recaptcha()) {
                             osc_add_flash_error_message( _m('The Recaptcha code is wrong') );
@@ -459,44 +529,67 @@
                             Session::newInstance()->_setForm( 'yourName' , Params::getParam( 'yourName'));
                             Session::newInstance()->_setForm( 'phoneNumber' , Params::getParam( 'phoneNumber'));
                             Session::newInstance()->_setForm( 'message_body' , Params::getParam( 'message'));
-                            $this->redirectTo( osc_item_url( ) );
-                            return false; // BREAK THE PROCESS, THE RECAPTCHA IS WRONG
+	                        try {
+		                        $this->redirectTo( osc_item_url() );
+	                        } catch ( Exception $e ) {
+	                        }
+
+	                        return false; // BREAK THE PROCESS, THE RECAPTCHA IS WRONG
                         }
                     }
 
                     $banned = osc_is_banned(Params::getParam('yourEmail'));
                     if($banned==1) {
                         osc_add_flash_error_message( _m('Your current email is not allowed'));
-                        $this->redirectTo(osc_item_url());
+	                    try {
+		                    $this->redirectTo( osc_item_url() );
+	                    } catch ( Exception $e ) {
+	                    }
                     } else if($banned==2) {
                         osc_add_flash_error_message( _m('Your current IP is not allowed'));
-                        $this->redirectTo(osc_item_url());
+	                    try {
+		                    $this->redirectTo( osc_item_url() );
+	                    } catch ( Exception $e ) {
+	                    }
                     }
 
                     if( osc_isExpired($item['dt_expiration']) ) {
                         osc_add_flash_error_message( _m("We're sorry, but the listing has expired. You can't contact the seller") );
-                        $this->redirectTo(osc_item_url());
+	                    try {
+		                    $this->redirectTo( osc_item_url() );
+	                    } catch ( Exception $e ) {
+	                    }
                     }
 
                     osc_run_hook('pre_item_contact_post', $item);
 
                     $mItem  = new ItemActions(false);
-                    $result = $mItem->contact();
+	                try {
+		                $result = $mItem->contact();
+	                } catch ( Exception $e ) {
+	                }
 
-                    osc_run_hook('post_item_contact_post', $item);
+	                osc_run_hook('post_item_contact_post', $item);
                     if(is_string($result)){
                         osc_add_flash_error_message( $result );
                     } else {
                         osc_add_flash_ok_message( _m("We've just sent an e-mail to the seller") );
                     }
 
-                    $this->redirectTo( osc_item_url( ) );
-                    break;
+	                try {
+		                $this->redirectTo( osc_item_url() );
+	                } catch ( Exception $e ) {
+	                }
+	                break;
                 case 'add_comment':
                     osc_csrf_check();
                     $mItem  = new ItemActions(false);
-                    $status = $mItem->add_comment();
-                    switch ($status) {
+	                try {
+		                $status = $mItem->add_comment();
+	                } catch ( Exception $e ) {
+	                } catch ( Will $e ) {
+	                }
+	                switch ($status) {
                         case -1: $msg = _m('Sorry, we could not save your comment. Try again later');
                                  osc_add_flash_error_message($msg);
                             break;
@@ -524,19 +617,29 @@
                     }
 
                     //View::newInstance()->_exportVariableToView('item', Item::newInstance()->findByPrimaryKey(Params::getParam('id')));
-                    $this->redirectTo( osc_item_url() );
-                    break;
+	                try {
+		                $this->redirectTo( osc_item_url() );
+	                } catch ( Exception $e ) {
+	                }
+	                break;
                 case 'delete_comment':
                     osc_csrf_check();
                     $mItem = new ItemActions(false);
-                    $status = $mItem->add_comment(); // @TOFIX @FIXME $status never used + ?? need to add_comment() before deleting it??
+	                try {
+		                $status = $mItem->add_comment();
+	                } catch ( Exception $e ) {
+	                } catch ( Will $e ) {
+	                } // @TOFIX @FIXME $status never used + ?? need to add_comment() before deleting it??
 
                     $itemId    = Params::getParam('id');
                     $commentId = Params::getParam('comment');
 
-                    $item = Item::newInstance()->findByPrimaryKey($itemId);
+	                try {
+		                $item = Item::newInstance()->findByPrimaryKey( $itemId );
+	                } catch ( Exception $e ) {
+	                }
 
-                    if( count($item) == 0 ) {
+	                if( count($item) == 0 ) {
                         osc_add_flash_error_message( _m("This listing doesn't exist") );
                         $this->redirectTo( osc_base_url(true) );
                     }
@@ -545,7 +648,10 @@
 
                     if($this->userId == null) {
                         osc_add_flash_error_message(_m('You must be logged in to delete a comment') );
-                        $this->redirectTo( osc_item_url() );
+	                    try {
+		                    $this->redirectTo( osc_item_url() );
+	                    } catch ( Exception $e ) {
+	                    }
                     }
 
                     $commentManager = ItemComment::newInstance();
@@ -553,23 +659,35 @@
 
                     if( count($aComment) == 0 ) {
                         osc_add_flash_error_message( _m("The comment doesn't exist") );
-                        $this->redirectTo( osc_item_url() );
+	                    try {
+		                    $this->redirectTo( osc_item_url() );
+	                    } catch ( Exception $e ) {
+	                    }
                     }
 
                     if( $aComment['b_active'] != 1 ) {
                         osc_add_flash_error_message( _m('The comment is not active, you cannot delete it') );
-                        $this->redirectTo( osc_item_url() );
+	                    try {
+		                    $this->redirectTo( osc_item_url() );
+	                    } catch ( Exception $e ) {
+	                    }
                     }
 
                     if($aComment['fk_i_user_id'] != $this->userId) {
                         osc_add_flash_error_message( _m('The comment was not added by you, you cannot delete it') );
-                        $this->redirectTo( osc_item_url() );
+	                    try {
+		                    $this->redirectTo( osc_item_url() );
+	                    } catch ( Exception $e ) {
+	                    }
                     }
 
                      $commentManager->deleteByPrimaryKey($commentId);
                      osc_add_flash_ok_message( _m('The comment has been deleted' ) );
-                     $this->redirectTo( osc_item_url() );
-                break;
+	                try {
+		                $this->redirectTo( osc_item_url() );
+	                } catch ( Exception $e ) {
+	                }
+	                break;
                 default:
                     // if there isn't ID, show an error 404
                     if( Params::getParam('id') == '') {
@@ -581,8 +699,11 @@
                         Session::newInstance()->_set('userLocale', Params::getParam('lang'));
                     }
 
-                    $item = osc_apply_filter('pre_show_item', $this->itemManager->findByPrimaryKey( Params::getParam('id') ));
-                    // if item doesn't exist show an error 410
+	                try {
+		                $item = osc_apply_filter( 'pre_show_item' , $this->itemManager->findByPrimaryKey( Params::getParam( 'id' ) ) );
+	                } catch ( Exception $e ) {
+	                }
+	                // if item doesn't exist show an error 410
                     if( count($item) == 0 ) {
                         $this->do410();
                         return;
@@ -632,8 +753,11 @@
                     osc_run_hook('show_item', $item);
 
                     // redirect to the correct url just in case it has changed
-                    $itemURI = str_replace(osc_base_url(), '', osc_item_url());
-                    $URI = preg_replace('|^' . REL_WEB_URL . '|', '', Params::getServerParam('REQUEST_URI', false, false));
+	                try {
+		                $itemURI = str_replace( osc_base_url() , '' , osc_item_url() );
+	                } catch ( Exception $e ) {
+	                }
+	                $URI = preg_replace('|^' . REL_WEB_URL . '|', '', Params::getServerParam('REQUEST_URI', false, false));
                     // do not clean QUERY_STRING if permalink is not enabled
                     if( osc_rewrite_enabled () ) {
                         $URI = str_replace('?' . Params::getServerParam('QUERY_STRING', false, false), '', $URI);

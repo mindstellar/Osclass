@@ -57,8 +57,11 @@
                 $this->redirectTo($url);
             }
 
-            $this->subdomain_params($current_host);
-            $this->page   = Params::getParam('page');
+	        try {
+		        $this->subdomain_params( $current_host );
+	        } catch ( Exception $e ) {
+	        }
+	        $this->page   = Params::getParam('page');
             $this->action = Params::getParam('action');
             $this->ajax   = false;
             $this->time   = microtime(true);

@@ -506,7 +506,10 @@ function oc_install_example_data() {
 
         $aFieldsDescription[osc_current_admin_locale()]['s_name'] = $category['s_name'];
 
-        $mCat->insert($fields, $aFieldsDescription);
+	    try {
+		    $mCat->insert( $fields , $aFieldsDescription );
+	    } catch ( Exception $e ) {
+	    }
     }
 
     require_once LIB_PATH . 'osclass/model/Item.php';
@@ -543,10 +546,17 @@ function oc_install_example_data() {
         }
     }
 
-    $mItem->prepareData(true);
-    $successItem = $mItem->add();
+	try {
+		$mItem->prepareData( true );
+	} catch ( Exception $e ) {
+	}
+	try {
+		$successItem = $mItem->add();
+	} catch ( Exception $e ) {
+	} catch ( Will $e ) {
+	}
 
-    $successPageresult = Page::newInstance()->insert(
+	$successPageresult = Page::newInstance()->insert(
         array(
             's_internal_name' => $page['s_internal_name'],
             'b_indelible' => 0,

@@ -58,7 +58,10 @@
                         <div class="control-group">
                             <label class="control-label" for="select_1"><?php _e('Category', 'bender'); ?></label>
                             <div class="controls">
-                                <?php ItemForm::category_select(null, null, __('Select a category', 'bender')); ?>
+                                <?php try {
+	                                ItemForm::category_select( null , null , __( 'Select a category' , 'bender' ) );
+                                } catch ( Exception $e ) {
+                                } ?>
                             </div>
                         </div>
                         <div class="control-group">
@@ -83,8 +86,11 @@
                         </div>
                         <?php } ?>
                         <?php if( osc_images_enabled_at_items() ) {
-                            ItemForm::ajax_photos();
-                         } ?>
+	                        try {
+		                        ItemForm::ajax_photos();
+	                        } catch ( Exception $e ) {
+	                        }
+                        } ?>
                         <div class="box location">
                             <h2><?php _e('Listing Location', 'bender'); ?></h2>
                             <?php if(count(osc_get_countries()) > 1) { ?>

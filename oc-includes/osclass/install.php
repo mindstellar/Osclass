@@ -226,8 +226,11 @@ switch( $step ) {
                         }
                     } elseif($step == 4) {
                         // ping engines
-                        ping_search_engines($_COOKIE['osclass_ping_engines']);
-                        setcookie('osclass_save_stats', '', time() - 3600);
+	                try {
+		                ping_search_engines( $_COOKIE[ 'osclass_ping_engines' ] );
+	                } catch ( Exception $e ) {
+	                }
+	                setcookie('osclass_save_stats', '', time() - 3600);
                         setcookie('osclass_ping_engines', '', time() - 3600);
 
                         // copy robots.txt

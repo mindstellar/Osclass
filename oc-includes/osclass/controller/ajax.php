@@ -112,9 +112,12 @@
                         return false;
                     }
 
-                    $aItem = Item::newInstance()->findByPrimaryKey($item);
+	                try {
+		                $aItem = Item::newInstance()->findByPrimaryKey( $item );
+	                } catch ( Exception $e ) {
+	                }
 
-                    // Check if the item exists
+	                // Check if the item exists
                     if(count($aItem) == 0) {
                         $json['success'] = false;
                         $json['msg'] = _m("The listing doesn't exist");
@@ -319,8 +322,11 @@
                     $id = Params::getParam('id');
                     if(!is_numeric($id)) { echo json_encode(array('success' => false)); die();}
                     $secret = Params::getParam('secret');
-                    $item = Item::newInstance()->findByPrimaryKey($id);
-                    if($item['s_secret']!=$secret) { echo json_encode(array('success' => false)); die();}
+	                try {
+		                $item = Item::newInstance()->findByPrimaryKey( $id );
+	                } catch ( Exception $e ) {
+	                }
+	                if($item['s_secret']!=$secret) { echo json_encode(array('success' => false)); die();}
                     $nResources = ItemResource::newInstance()->countResources($id);
                     $result = array( 'success' => $nResources < osc_max_images_per_item() , 'count' => $nResources);
                     echo json_encode($result);

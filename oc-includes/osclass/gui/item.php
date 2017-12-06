@@ -78,22 +78,38 @@
 
     <?php if( osc_images_enabled_at_items() ) { ?>
         <?php
-        if( osc_count_item_resources() > 0 ) {
-            $i = 0;
-        ?>
-        <div class="item-photos">
-            <a href="<?php echo osc_resource_url(); ?>" class="main-photo" title="<?php _e('Image', 'bender'); ?> <?php echo $i+1;?> / <?php echo osc_count_item_resources();?>">
-                <img src="<?php echo osc_resource_url(); ?>" alt="<?php echo osc_item_title(); ?>" title="<?php echo osc_item_title(); ?>" />
-            </a>
-            <div class="thumbs">
-                <?php for ( $i = 0; osc_has_item_resources(); $i++ ) { ?>
-                <a href="<?php echo osc_resource_url(); ?>" class="fancybox" data-fancybox-group="group" title="<?php _e('Image', 'bender'); ?> <?php echo $i+1;?> / <?php echo osc_count_item_resources();?>">
-                    <img src="<?php echo osc_resource_thumbnail_url(); ?>" width="75" alt="<?php echo osc_item_title(); ?>" title="<?php echo osc_item_title(); ?>" />
-                </a>
-                <?php } ?>
-            </div>
-        </div>
-        <?php } ?>
+	    try {
+		    if ( osc_count_item_resources() > 0 ) {
+			    $i = 0;
+			    ?>
+                <div class="item-photos">
+                    <a href="<?php echo osc_resource_url(); ?>" class="main-photo"
+                       title="<?php _e( 'Image' , 'bender' ); ?> <?php echo $i + 1; ?> / <?php try {
+					       echo osc_count_item_resources();
+				       } catch ( Exception $e ) {
+				       } ?>">
+                        <img src="<?php echo osc_resource_url(); ?>" alt="<?php echo osc_item_title(); ?>"
+                             title="<?php echo osc_item_title(); ?>"/>
+                    </a>
+                    <div class="thumbs">
+					    <?php try {
+						    for ( $i = 0; osc_has_item_resources(); $i ++ ) { ?>
+                                <a href="<?php echo osc_resource_url(); ?>" class="fancybox" data-fancybox-group="group"
+                                   title="<?php _e( 'Image' , 'bender' ); ?> <?php echo $i + 1; ?> / <?php try {
+								       echo osc_count_item_resources();
+							       } catch ( Exception $e ) {
+							       } ?>">
+                                    <img src="<?php echo osc_resource_thumbnail_url(); ?>" width="75"
+                                         alt="<?php echo osc_item_title(); ?>" title="<?php echo osc_item_title(); ?>"/>
+                                </a>
+						    <?php }
+					    } catch ( Exception $e ) {
+					    } ?>
+                    </div>
+                </div>
+		    <?php }
+	    } catch ( Exception $e ) {
+	    } ?>
     <?php } ?>
     <div id="description">
         <p><?php echo osc_item_description(); ?></p>
@@ -166,7 +182,10 @@
                         </div>
                     <?php } ?>
                     <div class="paginate" style="text-align: right;">
-                        <?php echo osc_comments_pagination(); ?>
+                        <?php try {
+	                        echo osc_comments_pagination();
+                        } catch ( Exception $e ) {
+                        } ?>
                     </div>
                 </div>
             <?php } ?>

@@ -37,7 +37,10 @@ osc_enqueue_script('jquery-validate');
                         <?php ContactForm::action_hidden(); ?>
                         <?php ContactForm::page_hidden(); ?>
                         <label><?php _e('To (seller)', 'modern'); ?>: <?php echo osc_item_contact_name();?></label><br />
-                        <label><?php _e('Listing', 'modern'); ?>: <a href="<?php echo osc_item_url(); ?>"><?php echo osc_item_title(); ?></a></label><br />
+                        <label><?php _e('Listing', 'modern'); ?>: <a href="<?php try {
+		                        echo osc_item_url();
+	                        } catch ( Exception $e ) {
+	                        } ?>"><?php echo osc_item_title(); ?></a></label><br />
                         <?php if(osc_is_web_user_logged_in()) { ?>
                             <input type="hidden" name="yourName" value="<?php echo osc_esc_html( osc_logged_user_name() ); ?>" />
                             <input type="hidden" name="yourEmail" value="<?php echo osc_logged_user_email();?>" />

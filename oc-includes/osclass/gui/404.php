@@ -44,16 +44,27 @@
         <li><?php _e( '<strong>Look</strong> for it in the most popular categories.' , 'bender') ; ?>
             <div class="categories">
                 <?php osc_goto_first_category() ; ?>
-                <?php while ( osc_has_categories() ) { ?>
-                        <h2><a class="category <?php echo osc_category_slug() ; ?>" href="<?php echo osc_search_category_url() ; ?>"><?php echo osc_category_name() ; ?></a> <span>(<?php echo osc_category_total_items() ; ?>)</h2>
-                        <?php if ( osc_count_subcategories() > 0 ) { ?>
-                            <?php while ( osc_has_subcategories() ) { ?>
-                                <?php if( osc_category_total_items() > 0 ) { ?>
-                                    <h3><a class="category <?php echo osc_category_slug() ; ?>" href="<?php echo osc_search_category_url() ; ?>"><?php echo osc_category_name() ; ?></a> <span>(<?php echo osc_category_total_items() ; ?>)</h3>
-                                <?php } ?>
-                            <?php } ?>
-                        <?php } ?>
-                <?php } ?>
+                <?php try {
+	                while ( osc_has_categories() ) { ?>
+                        <h2><a class="category <?php echo osc_category_slug(); ?>" href="<?php try {
+				                echo osc_search_category_url();
+			                } catch ( Exception $e ) {
+			                } ?>"><?php echo osc_category_name(); ?></a>
+                            <span>(<?php echo osc_category_total_items(); ?>)</h2>
+		                <?php if ( osc_count_subcategories() > 0 ) { ?>
+			                <?php while ( osc_has_subcategories() ) { ?>
+				                <?php if ( osc_category_total_items() > 0 ) { ?>
+                                    <h3><a class="category <?php echo osc_category_slug(); ?>" href="<?php try {
+							                echo osc_search_category_url();
+						                } catch ( Exception $e ) {
+						                } ?>"><?php echo osc_category_name(); ?></a>
+                                        <span>(<?php echo osc_category_total_items(); ?>)</h3>
+				                <?php } ?>
+			                <?php } ?>
+		                <?php } ?>
+	                <?php }
+                } catch ( Exception $e ) {
+                } ?>
            </div>
            <div class="clear"></div>
         </li>
