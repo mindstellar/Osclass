@@ -109,7 +109,6 @@ class Object_Cache_apc implements iObject_Cache{
         } else {
             return apc_clear_cache('user');
         }
-        return true;
     }
 
     /**

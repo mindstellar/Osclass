@@ -463,7 +463,7 @@
 	/**
 	 * Gets page of comments in current pagination
 	 *
-	 * @return int <type>
+	 * @return int 
 	 */
     function osc_premium_comments_page() {
         $page = Params::getParam('comments-page');

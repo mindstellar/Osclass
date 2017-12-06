@@ -810,8 +810,8 @@
 		/**
 		 * Delete an item, given s_secret and item id.
 		 *
-		 * @param <type> $secret
-		 * @param <type> $itemId
+		 * @param  $secret
+		 * @param  $itemId
 		 *
 		 * @return bool
 		 */
@@ -836,7 +836,7 @@
 		/**
 		 * Delete resources from the hard drive
 		 *
-		 * @param <type> $itemId
+		 * @param  $itemId
 		 * @param bool $is_admin
 		 * @throws \Exception
 		 */
@@ -1061,7 +1061,7 @@
 		/**
 		 * Return an array with all data necessary for do the action
 		 *
-		 * @param <type> $action
+		 * @param  $action
 		 *
 		 * @return array
 		 */
@@ -1128,7 +1128,7 @@
 		/**
 		 * Return an array with all data necessary for do the action (ADD OR EDIT)
 		 *
-		 * @param <type> $is_add
+		 * @param  $is_add
 		 *
 		 * @return void
 		 * @throws \Exception

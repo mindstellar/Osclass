@@ -49,7 +49,7 @@
 		 * Log a message with the INFO level.
 		 *
 		 * @param string $message
-		 * @param <type> $message
+		 * @param  $message
 		 */
         public function info($message = '', $caller = null )
         {
@@ -60,7 +60,7 @@
 		 * Log a message with the WARN level.
 		 *
 		 * @param string $message
-		 * @param <type> $message
+		 * @param  $message
 		 */
         public function warn($message = '', $caller = null )
         {
@@ -70,7 +70,7 @@
 		/**
 		 * Log a message with the ERROR level.
 		 * @param string $message
-		 * @param <type> $message
+		 * @param  $message
 		 */
         public function error($message = '', $caller = null )
         {
@@ -80,7 +80,7 @@
 		/**
 		 * Log a message with the DEBUG level.
 		 * @param string $message
-		 * @param <type> $message
+		 * @param  $message
 		 */
         public function debug($message = '', $caller = null )
         {
@@ -90,7 +90,7 @@
 		/**
 		 * Log a message object with the FATAL level including the caller.
 		 * @param string $message
-		 * @param <type> $message
+		 * @param  $message
 		 */
         public function fatal($message = '', $caller = null )
         {

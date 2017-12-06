@@ -36,7 +36,7 @@
 	/**
 	 * Remove resources from disk
 	 *
-	 * @param <type> $id
+	 * @param  $id
 	 * @param boolean $admin
 	 *
 	 *

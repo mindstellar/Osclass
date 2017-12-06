@@ -614,7 +614,7 @@
 	/**
 	 * Gets next user in users array
 	 *
-	 * @return bool <type>
+	 * @return bool 
 	 */
     function osc_prepare_user_info() {
         if ( !View::newInstance()->_exists('users') ) {
