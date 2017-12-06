@@ -672,7 +672,7 @@
 	/**
 	 * Gets number of items per page for current pagination
 	 *
-	 * @return mixed|string <type>
+	 * @return mixed|string 
 	 */
     function osc_list_items_per_page() {
         return View::newInstance()->_get('items_per_page');
@@ -691,7 +691,7 @@
 	/**
 	 * Gets page of comments in current pagination
 	 *
-	 * @return int <type>
+	 * @return int 
 	 */
     function osc_item_comments_page() {
         $page = Params::getParam('comments-page');

@@ -172,7 +172,7 @@
 
 		/**
 		 * This function returns an array of themes (those copied in the oc-content/themes folder)
-		 * @return array <type>
+		 * @return array 
 		 */
         public function getListThemes()
         {
@@ -189,9 +189,9 @@
 
 		/**
 		 *
-		 * @param <type> $theme
+		 * @param  $theme
 		 *
-		 * @return array|bool <type>
+		 * @return array|bool 
 		 */
         public function loadThemeInfo($theme)
         {
