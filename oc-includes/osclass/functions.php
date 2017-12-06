@@ -572,7 +572,6 @@ function osc_admin_toolbar_spam()
         if(osc_check_plugin_update(@$info['plugin_update_uri'], @$info['version'])) {
             $array[] = @$info['plugin_update_uri'];
             $total++;
-        }else{
         }
         $array_downloaded[] = @$info['plugin_update_uri'];
     }

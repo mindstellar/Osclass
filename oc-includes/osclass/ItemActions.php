@@ -195,9 +195,7 @@
             if ($flash_error) {
                 $success = $flash_error;
             } else {
-                if($aItem['price']!='') {
-                    $aItem['currency'] = $aItem['currency'];
-                } else {
+	            if ( $aItem[ 'price' ] = '' ) {
                     $aItem['currency'] = NULL;
                 }
 
@@ -427,16 +425,14 @@
 
                 if($aItem['userId'] != '') {
                     $user = User::newInstance()->findByPrimaryKey( $aItem['userId'] );
-                    $aItem['userId']      = $aItem['userId'];
+	                //$aItem['userId']      = $aItem['userId']; Unnecessary
                     $aItem['contactName'] = $user['s_name'];
                     $aItem['contactEmail'] = $user['s_email'];
                 } else {
                     $aItem['userId']      = NULL;
                 }
 
-                if($aItem['price']!='') {
-                    $aItem['currency'] = $aItem['currency'];
-                } else {
+	            if ( $aItem[ 'price' ] = '' ) {
                     $aItem['currency'] = NULL;
                 }
 

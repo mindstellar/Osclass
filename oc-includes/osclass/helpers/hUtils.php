@@ -203,7 +203,8 @@ function osc_escape_string($string) {
  * Prints the user's account menu
  *
  * @param array $options array with options of the form array('name' => 'display name', 'url' => 'url of link')
- * @return void
+ *
+ * @return string
  */
 function osc_private_user_menu($options = null)
 {
@@ -239,13 +240,14 @@ function osc_private_user_menu($options = null)
 
 /**
  * Gets prepared text, with:
- * - higlight search pattern and search city
+ * - highlight search pattern and search city
  * - maxim length of text
  *
  * @param string $txt
  * @param int  $len
  * @param string $start_tag
  * @param string $end_tag
+ *
  * @return string
  */
 function osc_highlight($txt, $len = 300, $start_tag = '<strong>', $end_tag = '</strong>') {

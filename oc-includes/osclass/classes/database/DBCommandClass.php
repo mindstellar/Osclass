@@ -1444,9 +1444,9 @@
                         // No need to create the table, so we delete it SQL
                         unset($struct_queries[strtolower($table)]);
 //                        error_log(' --- struct_queries ---');
-                        foreach($struct_queries as $q) {
+	                    //foreach($struct_queries as $q) {
 //                            error_log(' --- ' . $q );
-                        }
+	                    //}
                     }
                 }
             }
