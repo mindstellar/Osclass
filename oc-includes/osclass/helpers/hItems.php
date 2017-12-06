@@ -1256,7 +1256,7 @@
 	/**
 	 * Gets item meta field
 	 *
-	 * @return string
+	 * @return array
 	 */
     function osc_item_meta() {
         return View::newInstance()->_current('metafields');

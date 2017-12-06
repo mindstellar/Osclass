@@ -104,7 +104,7 @@
 		/**
 		 * @param $key
 		 *
-		 * @return string
+		 * @return string|array
 		 */
 		public function _current( $key )
         {

@@ -169,7 +169,7 @@
 		/**
 		 * @param $key
 		 *
-		 * @return string
+		 * @return string|array
 		 */
 		public function _getMessage( $key ) {
             $messages = $this->_get('messages');
@@ -224,7 +224,7 @@
 		/**
 		 * @param string $key
 		 *
-		 * @return string
+		 * @return string|array
 		 */
 		public function _getForm( $key = '' ) {
             $form = $this->_get('form');

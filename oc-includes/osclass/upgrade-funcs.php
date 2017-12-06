@@ -593,7 +593,7 @@ CREATE TABLE %st_item_description_tmp (
     /**
      * Convert alerts < 2.4, updating s_search with json encoded to based64.
      *
-     * @param string $alert base64+serialized
+     * @param array $alert base64+serialized
      */
     function convertAlert($alert)
     {

@@ -515,7 +515,7 @@
     /**
      * Gets a specific field from current alert
      *
-     * @param array $field
+     * @param string $field
      * @return mixed
      */
     function osc_alert_field($field) {
@@ -547,7 +547,7 @@
 	/**
 	 * Gets current alert fomr view
 	 *
-	 * @return string
+	 * @return string|array
 	 */
     function osc_alert() {
         return View::newInstance()->_current('alerts');
