@@ -25,7 +25,8 @@
      */
 	class DBCommandClass
 	{
-        /**
+		private static $instance;
+		/**
          * Database connection object to Osclass database
          *
          * @access private
@@ -74,7 +75,7 @@
          * @var array
          */
         public $aSelect;
-        /* var $aDistinct; */
+		/*var $aDistinct; */
         /**
          *
          * @var array
