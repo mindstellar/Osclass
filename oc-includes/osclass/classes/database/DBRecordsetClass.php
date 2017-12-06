@@ -133,7 +133,7 @@
          * 
          * @access public
          * @since 2.3
-         * @return object 
+         * @return object|countable
          */
         public function resultObject()
         {

@@ -200,8 +200,10 @@
          * 
          * @access public
          * @since unknown
-         * @param array $values Array with keys (database field) and values
+         *
+         * @param string|array $values Array with keys (database field) and values
          * @param array $where
+         *
          * @return mixed It returns the number of affected rows if the update has been 
          * correct or false if an error happended
          */

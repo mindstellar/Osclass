@@ -61,9 +61,10 @@
     /**
      * Add a filter
      *
-     * @param string $hook
-     * @param string $function
-     * @param int $priority
+     * @param string       $hook
+     * @param string|array $function
+     * @param int          $priority
+     *
      * @return void
      */
     function osc_add_filter($hook, $function, $priority = 5) {
