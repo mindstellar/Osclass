@@ -159,14 +159,15 @@
 	     * @param      $submenu_id
 	     * @param $capability
 	     */
-        public function add_submenu( $menu_id, $submenu_title, $url, $submenu_id, $capability = null)
+	    public function add_submenu( $menu_id , $submenu_title , $url , $submenu_id , $capability = null , $icon_url = null )
         {
             $array = array(
                 $submenu_title,
                 $url,
                 $submenu_id,
                 $menu_id,
-                $capability
+	            $capability ,
+	            $icon_url
             );
             $this->aMenu[$menu_id]['sub'][$submenu_id] = $array;
         }
