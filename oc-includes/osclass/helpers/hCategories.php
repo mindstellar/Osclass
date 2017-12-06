@@ -266,7 +266,7 @@
 	/**
 	 * Gets list of non-empty categories
 	 *
-	 * @return void
+	 * @return array
 	 * @throws \Exception
 	 */
     function osc_get_non_empty_categories() {

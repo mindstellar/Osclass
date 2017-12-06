@@ -570,10 +570,11 @@
 
 		/**
 		 *
-		 * @param   $key
+		 * @param        $key
 		 * @param string $value
+		 *
 		 * @return void
-*/
+		 */
         public function orHaving($key, $value = '')
         {
             return $this->_having($key, $value, 'OR ');
