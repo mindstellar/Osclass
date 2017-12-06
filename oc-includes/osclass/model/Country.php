@@ -133,14 +133,17 @@
         }
 
 
-        /**
-         *  Delete a country with its regions, cities,..
-         *
-         *  @access public
-         *  @since 2.4
-         *  @param $pk
-         *  @return int number of failed deletions or 0 in case of none
-         */
+	    /**
+	     *  Delete a country with its regions, cities,..
+	     *
+	     * @access public
+	     * @since  2.4
+	     *
+	     * @param $pk
+	     *
+	     * @return int number of failed deletions or 0 in case of none
+	     * @throws \Exception
+	     */
         public function deleteByPrimaryKey($pk) {
             $mRegions = Region::newInstance();
             $aRegions = $mRegions->findByCountry($pk);

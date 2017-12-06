@@ -444,13 +444,16 @@
         return osc_base_url(true) . '?page=login&action=resend&id='.$id.'&email='.$email;
     }
 
-    /**
-     * Create automatically the url of the item's comments page
-     *
-     * @param mixed $page
-     * @param string $locale
-     * @return string
-     */
+
+	/**
+	 * Create automatically the url of the item's comments page
+	 *
+	 * @param mixed  $page
+	 * @param string $locale
+	 *
+	 * @return string
+	 * @throws \Exception
+	 */
     function osc_item_comments_url($page = 'all', $locale = '') {
         if ( osc_rewrite_enabled() ) {
             return osc_item_url($locale) . '?comments-page=' . $page;
@@ -459,12 +462,15 @@
         }
     }
 
-    /**
-     * Create automatically the url of the item's comments page
-     *
-     * @param string $locale
-     * @return string
-     */
+
+	/**
+	 * Create automatically the url of the item's comments page
+	 *
+	 * @param string $locale
+	 *
+	 * @return string
+	 * @throws \Exception
+	 */
     function osc_comment_url($locale = '') {
         return osc_item_url($locale) . '?comment=' . osc_comment_id();
     }

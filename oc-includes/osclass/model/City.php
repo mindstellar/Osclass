@@ -186,14 +186,17 @@
             return $result->result();
         }
 
-        /**
-         *  Delete a city with its city areas
-         *
-         *  @access public
-         *  @since 3.1
-         *  @param $pk
-         *  @return int number of failed deletions or 0 in case of none
-         */
+	    /**
+	     *  Delete a city with its city areas
+	     *
+	     * @access public
+	     * @since  3.1
+	     *
+	     * @param $pk
+	     *
+	     * @return int number of failed deletions or 0 in case of none
+	     * @throws \Exception
+	     */
         public function deleteByPrimaryKey($pk) {
             $mCityAreas = CityArea::newInstance();
             $aCityAreas = $mCityAreas->findByCity($pk);

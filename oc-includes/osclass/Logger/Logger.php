@@ -32,7 +32,6 @@
 		 *
 		 * @param null   $caller
 		 *
-		 * @return
 		 */
         abstract public function info($message = '', $caller = null );
 
@@ -42,7 +41,7 @@
 		 * @param string $message
 		 *
 		 * @param null   $caller
-		 * @return
+		 *
 		 */
         abstract public function warn($message = '', $caller = null );
 
@@ -52,7 +51,6 @@
 		 * @param string $message
 		 *
 		 * @param null   $caller
-		 * @return
 		 */
         abstract public function error($message = '', $caller = null );
 
@@ -60,7 +58,6 @@
 		 * Log a message with the DEBUG level.
 		 * @param string $message
 		 * @param null   $caller
-		 * @return
 		 */
         abstract public function debug($message = '', $caller = null );
 
@@ -68,7 +65,6 @@
 		 * Log a message object with the FATAL level including the caller.
 		 * @param string $message
 		 * @param null   $caller
-		 * @return
 		 */
         abstract public function fatal($message = '', $caller = null );
     }

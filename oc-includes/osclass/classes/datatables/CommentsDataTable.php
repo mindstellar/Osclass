@@ -42,6 +42,7 @@
 	     * @param $params
 	     *
 	     * @return array
+	     * @throws \Exception
 	     */
 	    public function table( $params )
         {

@@ -889,6 +889,7 @@
 
 		/**
 		 * @return bool
+		 * @throws \Exception
 		 */
 		public function send_friend()
         {
@@ -909,6 +910,7 @@
 
 		/**
 		 * @return string
+		 * @throws \Exception
 		 */
 		public function contact()
         {

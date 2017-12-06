@@ -277,6 +277,8 @@
 
 	/**
 	 * @param $aComment
+	 *
+	 * @throws \Exception
 	 */
 	function fn_email_comment_validated( $aComment ) {
         $mPages = new Page();
@@ -327,6 +329,8 @@
 
 	/**
 	 * @param $item
+	 *
+	 * @throws \Exception
 	 */
 	function fn_email_new_item_non_register_user( $item ) {
         $mPages = new Page();
@@ -568,6 +572,8 @@
 
 	/**
 	 * @param $aItem
+	 *
+	 * @throws \Exception
 	 */
 	function fn_email_send_friend( $aItem ) {
         $mPages = new Page();
@@ -791,6 +797,8 @@
 
 	/**
 	 * @param $item
+	 *
+	 * @throws \Exception
 	 */
 	function fn_email_item_validation( $item ) {
         View::newInstance()->_exportVariableToView('item', $item);
@@ -882,6 +890,8 @@
 
 	/**
 	 * @param $item
+	 *
+	 * @throws \Exception
 	 */
 	function fn_email_admin_new_item( $item ) {
         View::newInstance()->_exportVariableToView('item', $item);
@@ -979,6 +989,8 @@
 
 	/**
 	 * @param $item
+	 *
+	 * @throws \Exception
 	 */
 	function fn_email_item_validation_non_register_user( $item ) {
         View::newInstance()->_exportVariableToView('item', $item);
@@ -1290,6 +1302,8 @@
 
 	/**
 	 * @param $aItem
+	 *
+	 * @throws \Exception
 	 */
 	function fn_email_warn_expiration( $aItem ) {
         $itemId      = $aItem['pk_i_id'];

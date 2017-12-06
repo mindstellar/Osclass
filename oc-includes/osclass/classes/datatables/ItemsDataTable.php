@@ -237,6 +237,8 @@
 
 	    /**
 	     * @param $items
+	     *
+	     * @throws \Exception
 	     */
 	    private function processData( $items )
         {
@@ -340,6 +342,8 @@
 
 	    /**
 	     * @param $items
+	     *
+	     * @throws \Exception
 	     */
 	    private function processDataReported( $items )
         {

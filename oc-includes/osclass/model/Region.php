@@ -155,14 +155,17 @@
         }
 
 
-        /**
-         *  Delete a region with its cities and city areas
-         *
-         *  @access public
-         *  @since 3.1
-         *  @param $pk
-         *  @return int number of failed deletions or 0 in case of none
-         */
+	    /**
+	     *  Delete a region with its cities and city areas
+	     *
+	     * @access public
+	     * @since  3.1
+	     *
+	     * @param $pk
+	     *
+	     * @return int number of failed deletions or 0 in case of none
+	     * @throws \Exception
+	     */
         public function deleteByPrimaryKey($pk) {
             $mCities = City::newInstance();
             $aCities = $mCities->findByRegion($pk);

@@ -74,7 +74,7 @@
         }
 
 		/**
-		 * @return \the
+		 * @return array
 		 */
 		public function listRules()
         {
