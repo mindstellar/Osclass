@@ -59,15 +59,15 @@
 		/**
 		 * @param $key
 		 *
-		 * @return mixed|string
+		 * @return mixed|string|array
 		 */
 		public function _get( $key )
         {
             if ($this->_exists($key)) {
                 return $this->aExported[$key];
-            } else {
-                return '';
             }
+
+	        return '';
         }
 
         //only for debug
