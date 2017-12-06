@@ -445,11 +445,7 @@
 		}
 
 		foreach ( $to as $to_email => $to_name ) {
-			try {
-				$mail->addAddress( $to_email , $to_name );
-			} catch ( phpmailerException $e ) {
-				continue;
-			}
+			$mail->addAddress( $to_email , $to_name );
 		}
 
 		if ( array_key_exists( 'add_bcc' , $params ) ) {
@@ -458,20 +454,12 @@
 			}
 
 			foreach ( $params[ 'add_bcc' ] as $bcc ) {
-				try {
-					$mail->AddBCC( $bcc );
-				} catch ( phpmailerException $e ) {
-					continue;
-				}
+				$mail->AddBCC( $bcc );
 			}
 		}
 
 		if ( array_key_exists( 'reply_to' , $params ) ) {
-			try {
-				$mail->AddReplyTo( $params[ 'reply_to' ] );
-			} catch ( phpmailerException $e ) {
-				//continue;
-			}
+			$mail->AddReplyTo( $params[ 'reply_to' ] );
 		}
 
 		$mail->Subject = $params[ 'subject' ];
@@ -483,16 +471,12 @@
 			}
 
 			foreach ( $params[ 'attachment' ] as $attachment ) {
-				try {
-					if ( is_array( $attachment ) ) {
-						if ( isset( $attachment[ 'path' ] ) && isset( $attachment[ 'name' ] ) ) {
-							$mail->AddAttachment( $attachment[ 'path' ] , $attachment[ 'name' ] );
-						}
-					} else {
-						$mail->AddAttachment( $attachment );
+				if ( is_array( $attachment ) ) {
+					if ( isset( $attachment[ 'path' ] ) && isset( $attachment[ 'name' ] ) ) {
+						$mail->AddAttachment( $attachment[ 'path' ] , $attachment[ 'name' ] );
 					}
-				} catch ( phpmailerException $e ) {
-					continue;
+				} else {
+					$mail->AddAttachment( $attachment );
 				}
 			}
 		}
@@ -503,11 +487,7 @@
 		$mail = osc_apply_filter( 'pre_send_mail' , $mail , $params );
 
 		// send email!
-		try {
-			$mail->Send();
-		} catch ( phpmailerException $e ) {
-			return false;
-		}
+		$mail->Send();
 
 		return true;
 	}
