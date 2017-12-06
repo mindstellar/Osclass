@@ -658,6 +658,7 @@
 	     * @param integer $pk primary key
 	     *
 	     * @return mixed
+	     * @throws \Exception
 	     */
         public function deleteByPrimaryKey($pk)
         {
@@ -839,16 +840,19 @@
 
         }
 
-        /**
-         * Update categories' expiration
-         *
-         * @access public
-         * @since unknown
-         * @param integer $pk_i_id
-         * @param integer $expiration
-         * @param boolean $updateSubcategories
-         * @return mixed false on fail, int of num. of affected rows
-         */
+	    /**
+	     * Update categories' expiration
+	     *
+	     * @access public
+	     * @since  unknown
+	     *
+	     * @param integer $pk_i_id
+	     * @param integer $expiration
+	     * @param boolean $updateSubcategories
+	     *
+	     * @return mixed false on fail, int of num. of affected rows
+	     * @throws \Exception
+	     */
         public function updateExpiration($pk_i_id, $expiration, $updateSubcategories = false)
         {
             $itemManager = Item::newInstance();

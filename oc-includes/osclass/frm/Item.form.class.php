@@ -39,6 +39,7 @@
 		 * @param bool $parent_selectable
 		 *
 		 * @return bool
+		 * @throws \Exception
 		 */
 		public static function category_select( $categories = null , $item = null , $default_item = null , $parent_selectable = false )
         {
@@ -1303,6 +1304,8 @@
 
 		/**
 		 * @param null $resources
+		 *
+		 * @throws \Exception
 		 */
 		public static function photos( $resources = null ) {
             if($resources==null) { $resources = osc_get_item_resources(); }
@@ -1466,6 +1469,7 @@
 
 		/**
 		 * @param null $resources
+		 * @throws \Exception
 		 */
 		public static function ajax_photos( $resources = null ) {
             if($resources==null) { $resources = osc_get_item_resources(); }

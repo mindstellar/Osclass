@@ -628,6 +628,8 @@
 
 	/**
 	 * @param $aItem
+	 *
+	 * @throws \Exception
 	 */
 	function fn_email_item_inquiry( $aItem ) {
         $id         = $aItem['id'];
@@ -724,6 +726,7 @@
 
 	/**
 	 * @param $aItem
+	 * @throws \Exception
 	 */
 	function fn_email_new_comment_admin( $aItem ) {
         $authorName  = trim(strip_tags($aItem['authorName']));
@@ -1172,6 +1175,7 @@
 
 	/**
 	 * @param $aItem
+	 * @throws \Exception
 	 */
 	function fn_email_new_comment_user( $aItem ) {
         $authorName  = trim(strip_tags($aItem['authorName']));

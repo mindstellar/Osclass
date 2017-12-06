@@ -1012,14 +1012,17 @@
 	        return parent::deleteByPrimaryKey( $id );
         }
 
-        /**
-         * Delete by city area
-         *
-         * @access public
-         * @since 3.1
-         * @param int $cityAreaId city area id
-         * @return bool
-         */
+	    /**
+	     * Delete by city area
+	     *
+	     * @access public
+	     * @since  3.1
+	     *
+	     * @param int $cityAreaId city area id
+	     *
+	     * @return bool
+	     * @throws \Exception
+	     */
         public function deleteByCityArea($cityAreaId)
         {
             $this->dao->select('fk_i_item_id');
@@ -1034,14 +1037,15 @@
             return $arows;
         }
 
-        /**
-         * Delete by city
-         *
-         * @access public
-         * @since unknown
-         * @param int $cityId city id
-         * @return bool
-         */
+	    /**
+	     * Delete by city
+	     *
+	     * @access public
+	     * @since  unknown
+	     * @param int $cityId city id
+	     * @return bool
+	     * @throws \Exception
+*/
         public function deleteByCity($cityId)
         {
             $this->dao->select('fk_i_item_id');
@@ -1056,14 +1060,15 @@
             return $arows;
         }
 
-        /**
-         * Delete by region
-         *
-         * @access public
-         * @since unknown
-         * @param int $regionId region id
-         * @return bool
-         */
+	    /**
+	     * Delete by region
+	     *
+	     * @access public
+	     * @since  unknown
+	     * @param int $regionId region id
+	     * @return bool
+	     * @throws \Exception
+*/
         public function deleteByRegion($regionId)
         {
             $this->dao->select('fk_i_item_id');
@@ -1078,14 +1083,15 @@
             return $arows;
         }
 
-        /**
-         * Delete by country
-         *
-         * @access public
-         * @since unknown
-         * @param int $countryId country id
-         * @return bool
-         */
+	    /**
+	     * Delete by country
+	     *
+	     * @access public
+	     * @since  unknown
+	     * @param int $countryId country id
+	     * @return bool
+	     * @throws \Exception
+*/
         public function deleteByCountry($countryId)
         {
             $this->dao->select('fk_i_item_id');

@@ -31,6 +31,7 @@
 		 * @param bool $parent_selectable
 		 *
 		 * @return bool
+		 * @throws \Exception
 		 */
 		public static function category_select( $categories = null , $item = null , $default_item = null , $parent_selectable = false )
         {

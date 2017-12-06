@@ -61,7 +61,7 @@
         public function getTableName() {}
 
 		/**
-		 * @return \the
+		 * @return array
 		 */
 		public function getRules()
         {

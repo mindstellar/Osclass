@@ -302,14 +302,17 @@
         }
 
 
-/**
-         * Delete an user given its id
-         *
-         * @access public
-         * @since unknown
-         * @param int $id
-         * @return bool
-         */
+	    /**
+	     * Delete an user given its id
+	     *
+	     * @access public
+	     * @since  unknown
+	     *
+	     * @param int $id
+	     *
+	     * @return bool
+	     * @throws \Exception
+	     */
         public function deleteUser($id = null)
         {
             if($id!=null) {

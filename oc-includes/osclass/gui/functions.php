@@ -372,6 +372,7 @@ FUNCTIONS
     if( !function_exists('related_listings') ) {
 	    /**
 	     * @return int
+	     * @throws \Exception
 	     */
 	    function related_listings() {
             View::newInstance()->_exportVariableToView('items', array());

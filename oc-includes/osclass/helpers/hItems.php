@@ -1374,53 +1374,54 @@
     }
 
 
-    /**
-     * Perform a search based on custom filters and conditions
-     * export the results to a variable to be able to manage it
-     * from custom_items' helpers
-     *
-     *
-     * @param params This could be a string or and array
-     * Examples:
-     *  Only one keyword
-     *  osc_query_item("keyword=value1,value2,value3,...")
-     *
-     *  Multiple keywords
-     *  osc_query_item(array(
-     *      'keyword1' => 'value1,value2',
-     *      'keyword2' => 'value3,value4'
-     *  ))
-     *
-     * Real live examples:
-     *  osc_query_item('category_name=cars,houses');
-     *  osc_query_item(array(
-     *      'category_name' => 'cars,houses',
-     *      'city' => 'Madrid'
-     *  ))
-     *
-     * Possible keywords:
-     *  author
-     *  country
-     *  country_name
-     *  region
-     *  region_name
-     *  city
-     *  city_name
-     *  city_area
-     *  city_area_name
-     *  category
-     *  category_name
-     *  premium
-     *  results_per_page
-     *  page
-     *  offset
-     *
-     *  Any other keyword will be passed to the hook "custom_query"
-     *   osc_run_hook("custom_query", $mSearch, $keyword, $value);
-     *  A plugin could be created to handle those extra situation
-     *
-     * @since 3.0
-     */
+	/**
+	 * Perform a search based on custom filters and conditions
+	 * export the results to a variable to be able to manage it
+	 * from custom_items' helpers
+	 *
+	 *
+	 * @param params This could be a string or and array
+	 *  Examples:
+	 *  Only one keyword
+	 *  osc_query_item("keyword=value1,value2,value3,...")
+	 *
+	 *  Multiple keywords
+	 *  osc_query_item(array(
+	 *      'keyword1' => 'value1,value2',
+	 *      'keyword2' => 'value3,value4'
+	 *  ))
+	 *
+	 * Real live examples:
+	 *  osc_query_item('category_name=cars,houses');
+	 *  osc_query_item(array(
+	 *      'category_name' => 'cars,houses',
+	 *      'city' => 'Madrid'
+	 *  ))
+	 *
+	 * Possible keywords:
+	 *  author
+	 *  country
+	 *  country_name
+	 *  region
+	 *  region_name
+	 *  city
+	 *  city_name
+	 *  city_area
+	 *  city_area_name
+	 *  category
+	 *  category_name
+	 *  premium
+	 *  results_per_page
+	 *  page
+	 *  offset
+	 *
+	 *  Any other keyword will be passed to the hook "custom_query"
+	 *   osc_run_hook("custom_query", $mSearch, $keyword, $value);
+	 *  A plugin could be created to handle those extra situation
+	 *
+	 * @throws \Exception
+	 * @since 3.0
+	 */
     function osc_query_item($params = null) {
         $mSearch = new Search();
         if($params==null) {

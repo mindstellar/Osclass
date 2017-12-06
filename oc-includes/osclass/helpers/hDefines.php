@@ -470,12 +470,14 @@
     }
 
 
-    /**
-     * Create automatically the url of the item details page
-     *
-     * @param string $locale
-     * @return string
-     */
+	/**
+	 * Create automatically the url of the item details page
+	 *
+	 * @param string $locale
+	 *
+	 * @return string
+	 * @throws \Exception
+	 */
     function osc_item_url($locale = '')
     {
         return osc_item_url_from_item(osc_item(), $locale);

@@ -114,6 +114,7 @@
 	 * @param string $region
 	 *
 	 * @return bool
+	 * @throws \Exception
 	 */
     function osc_has_cities($region = '%%%%') {
         if ( !View::newInstance()->_exists('cities') ) {
@@ -179,7 +180,9 @@
 	 * Gets number of cities
 	 *
 	 * @param string $region
+	 *
 	 * @return int
+	 * @throws \Exception
 	 */
     function osc_count_cities($region = '%%%%') {
         if ( !View::newInstance()->_exists('cities') ) {

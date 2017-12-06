@@ -585,6 +585,7 @@
 		 * @param null $secret
 		 *
 		 * @return bool
+		 * @throws \Exception
 		 */
         public function activate( $id, $secret = NULL )
         {
@@ -620,13 +621,15 @@
             }
         }
 
-        /**
-         * Deactivates an item
-         * Set s_active value to 0, for a given item id
-         *
-         * @param int $id
-         * @return bool
-         */
+		/**
+		 * Deactivates an item
+		 * Set s_active value to 0, for a given item id
+		 *
+		 * @param int $id
+		 *
+		 * @return bool
+		 * @throws \Exception
+		 */
         public function deactivate($id)
         {
             $result = $this->manager->update(
@@ -646,13 +649,14 @@
             return false;
         }
 
-        /**
-         * Enable an item
-         * Set s_enabled value to 1, for a given item id
-         *
-         * @param int $id
-         * @return bool
-         */
+		/**
+		 * Enable an item
+		 * Set s_enabled value to 1, for a given item id
+		 *
+		 * @param int $id
+		 * @return bool
+		 * @throws \Exception
+		 */
         public function enable($id)
         {
             $result = $this->manager->update(
@@ -672,13 +676,14 @@
             return false;
         }
 
-        /**
-         * Disable an item.
-         * Set s_enabled value to 0, for a given item id
-         *
-         * @param int $id
-         * @return bool
-         */
+		/**
+		 * Disable an item.
+		 * Set s_enabled value to 0, for a given item id
+		 *
+		 * @param int $id
+		 * @return bool
+		 * @throws \Exception
+		 */
         public function disable($id)
         {
             $result = $this->manager->update(
@@ -728,13 +733,14 @@
             return false;
         }
 
-        /**
-         * Set spam value depending on $on, for a given item id
-         *
-         * @param int $id
-         * @param bool $on
-         * @return bool
-         */
+		/**
+		 * Set spam value depending on $on, for a given item id
+		 *
+		 * @param int  $id
+		 * @param bool $on
+		 * @return bool
+		 * @throws \Exception
+		 */
         public function spam($id, $on = true)
         {
             $item = $this->manager->findByPrimaryKey($id);
@@ -814,6 +820,7 @@
 		 * @param  $itemId
 		 *
 		 * @return bool
+		 * @throws \Exception
 		 */
         public function delete( $secret, $itemId )
         {
@@ -931,6 +938,7 @@
          */
 		/**
 		 * @return int
+		 * @throws \Exception
 		 * @throws \Will
 		 */
 		public function add_comment()
@@ -1064,6 +1072,7 @@
 		 * @param  $action
 		 *
 		 * @return array
+		 * @throws \Exception
 		 */
         private function prepareDataForFunction( $action )
         {

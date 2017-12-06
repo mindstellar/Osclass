@@ -69,6 +69,8 @@
 
 	    /**
 	     * @param $pages
+	     *
+	     * @throws \Exception
 	     */
 	    private function processData( $pages )
         {

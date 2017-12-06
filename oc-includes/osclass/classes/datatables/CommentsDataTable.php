@@ -87,6 +87,8 @@
 
 	    /**
 	     * @param $comments
+	     *
+	     * @throws \Exception
 	     */
 	    private function processData( $comments )
         {
