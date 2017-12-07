@@ -126,7 +126,7 @@
             $sql = null;
             $argv = func_get_args();
             switch(func_num_args()) {
-                case 0: return; break;
+                case 0: return null; break;
                 case 1: $sql = $argv[0]; break;
                 default:
                     $format = array_shift($argv);

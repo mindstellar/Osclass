@@ -929,11 +929,9 @@
             } else {
                 osc_run_hook('hook_email_item_inquiry', $aItem);
             }
+            return true;
         }
 
-        /*
-         *
-         */
 		/**
 		 * @return int
 		 * @throws \Exception
