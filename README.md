@@ -21,7 +21,7 @@ themes, multi-language, CAPTCHA, dashboard, SEO friendly.
 Clone the repository and the submodules.
 
 ```
-$> git clone --recursive git@github.com:navjottomer/Osclass.git
+$> git clone --recursive https://github.com/navjottomer/Osclass.git
 ```
 
 ## Installation
