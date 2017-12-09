@@ -89,7 +89,7 @@ class Scripts extends Dependencies {
     {
         foreach($this->getScripts() as $script) {
             if($script!=='') {
-                echo '<script src="' . osc_apply_filter('theme_url', $script) . '"></script>' . PHP_EOL;
+                echo '<script type="text/javascript" src="' . osc_apply_filter('theme_url', $script) . '"></script>' . PHP_EOL;
             }
         }
     }
