@@ -134,7 +134,7 @@
 			return false;
 		}
 
-		@chmod( $path , 0777 );
+		@chmod( $path , 0755 );
 
 		$zip = new ZipArchive;
 		if ( $zip->open( $zipPath ) === true ) {
@@ -1139,7 +1139,7 @@
 			return 0;
 		}
 
-		@chmod( $to , 0777 );
+		@chmod( $to , 0755 );
 
 		if ( ! is_writable( $to ) ) {
 			return 0;
@@ -1476,7 +1476,7 @@
 				if ( $file !== '.' && $file !== '..' && $file[ 0 ] !== '.' ) {
 					if ( is_dir( str_replace( '//' , '/' , $dir . '/' . $file ) ) ) {
 						if ( ! is_writable( str_replace( '//' , '/' , $dir . '/' . $file ) ) ) {
-							$res = @chmod( str_replace( '//' , '/' , $dir . '/' . $file ) , 0777 );
+							$res = @chmod( str_replace( '//' , '/' , $dir . '/' . $file ) , 0755 );
 							if ( ! $res ) {
 								return false;
 							}
@@ -1512,7 +1512,7 @@
 						}
 					} else {
 						if ( ! is_writable( str_replace( '//' , '/' , $dir . '/' . $file ) ) ) {
-							return @chmod( str_replace( '//' , '/' , $dir . '/' . $file ) , 0777 );
+							return @chmod( str_replace( '//' , '/' , $dir . '/' . $file ) , 0755 );
 						}
 
 						return true;
