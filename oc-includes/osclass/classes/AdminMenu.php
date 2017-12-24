@@ -153,11 +153,12 @@
 	    /**
 	     * Add submenu under menu id $menu_id
 	     *
-	     * @param $menu_id
-	     * @param $submenu_title
-	     * @param $url
+	     * @param      $menu_id
+	     * @param      $submenu_title
+	     * @param      $url
 	     * @param      $submenu_id
-	     * @param $capability
+	     * @param      $capability
+	     * @param null $icon_url
 	     */
 	    public function add_submenu( $menu_id , $submenu_title , $url , $submenu_id , $capability = null , $icon_url = null )
         {

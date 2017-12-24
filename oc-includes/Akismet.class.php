@@ -116,13 +116,14 @@ class Akismet
 		 */
 		$this->comment['user_ip'] = Params::getServerParam('REMOTE_ADDR') != getenv('SERVER_ADDR') ? Params::getServerParam('REMOTE_ADDR') : getenv('HTTP_X_FORWARDED_FOR');
 	}
-	
+
 	/**
 	 * Makes a request to the Akismet service to see if the API key passed to the constructor is valid.
-	 * 
+	 *
 	 * Use this method if you suspect your API key is invalid.
-	 * 
-	 * @return bool	True is if the key is valid, false if not.
+	 *
+	 * @return bool    True is if the key is valid, false if not.
+	 * @throws \exception
 	 */
 	public function isKeyValid() {
 		// Check to see if the key is valid
@@ -131,6 +132,15 @@ class Akismet
 	}
 	
 	// makes a request to the Akismet service
+
+	/**
+	 * @param $request
+	 * @param $host
+	 * @param $path
+	 *
+	 * @return array
+	 * @throws \exception
+	 */
 	private function sendRequest($request, $host, $path) {
 		$http_request  = "POST " . $path . " HTTP/1.0\r\n";
 		$http_request .= "Host: " . $host . "\r\n";
@@ -175,7 +185,7 @@ class Akismet
 	 *	Uses the web service provided by {@link http://www.akismet.com Akismet} to see whether or not the submitted comment is spam.  Returns a boolean value.
 	 *
 	 *	@return		bool	True if the comment is spam, false if not
-	 *  @throws		Will throw an exception if the API key passed to the constructor is invalid.
+	 *  @throws		exception Will throw an exception if the API key passed to the constructor is invalid.
 	 */
 	public function isCommentSpam() {
 		$response = $this->sendRequest($this->getQueryString(), $this->wordPressAPIKey . '.rest.akismet.com', '/' . $this->akismetVersion . '/comment-check');
@@ -335,7 +345,7 @@ class SocketWriteRead {
 	/**
 	 *  Sends the data to the remote host.
 	 *
-	 * @throws	An exception is thrown if a connection cannot be made to the remote host.
+	 * @throws	exception An exception is thrown if a connection cannot be made to the remote host.
 	 */
 	public function send() {
 		$this->response = '';

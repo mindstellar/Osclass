@@ -29,7 +29,7 @@
 	    private $conn;
 
 	    /**
-	     * @return \Stats|\type
+	     * @return \Stats
 	     */
 	    public static function newInstance()
         {
