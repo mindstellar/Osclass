@@ -435,9 +435,13 @@
 					} catch ( Exception $e ) {
 					}
 
-					$this->_exportVariableToView( 'item' , $item );
-
-					$this->doView( 'item-send-friend.php' );
+					if ( !empty( $item ) ) {
+						$this->_exportVariableToView( 'item' , $item );
+						$this->doView( 'item-send-friend.php' );
+					} else {
+						osc_add_flash_error_message( _m( "This listing doesn't exist" ) );
+						$this->redirectTo( osc_base_url( true ) );
+					}
 					break;
 				case 'send_friend_post':
 					osc_csrf_check();
