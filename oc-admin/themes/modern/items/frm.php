@@ -198,6 +198,7 @@ function customPageHeader() { ?>
                             } else {
                                 ItemForm::plugin_edit_item();
                             }
+                            osc_run_hook('admin_item_form');
                         ?>
                     </div>
                     <div id="right-side">
