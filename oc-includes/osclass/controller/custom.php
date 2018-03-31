@@ -34,6 +34,9 @@
         public function doModel()
         {
             $user_menu = false;
+	    if(Params::getParam('section') == 'user') {
+		$user_menu = true;
+	    }
             if(Params::existParam('route')) {
                 $routes = Rewrite::newInstance()->getRoutes();
                 $rid = Params::getParam('route');
