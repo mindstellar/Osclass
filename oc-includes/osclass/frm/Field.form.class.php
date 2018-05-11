@@ -228,7 +228,7 @@ FB;
                         if(count($options)>0) {
                             echo '<select name="meta['.$field['pk_i_id'].']" id="meta_' . $field['s_slug'] . '">';
                             if($search) {
-                                echo '<option value=""></option>';
+                                echo '<option value="">'. __('Select', 'osclass')." ". $field['s_name'].'</option>';
                             }
                             foreach($options as $option) {
                                 echo '<option value="'.osc_esc_html($option).'" '.($field['s_value']==$option?'selected="selected"':'').'>'.$option.'</option>';
