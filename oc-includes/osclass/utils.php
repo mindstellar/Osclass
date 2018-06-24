@@ -90,7 +90,7 @@ function osc_deleteDir($path) {
     while ($file = @readdir($fd)) {
         if ($file != '.' && $file != '..') {
             if (!is_dir($path . '/' . $file)) {
-                @chmod($path."/".$file, 0777);
+                @chmod($path."/".$file, 0755);
                 if (!@unlink($path . '/' . $file)) {
                     closedir($fd);
                     return false;
@@ -123,7 +123,7 @@ function osc_packageExtract($zipPath, $path) {
         }
     }
 
-    @chmod($path, 0777);
+    @chmod($path, 0755);
 
     $zip = new ZipArchive;
     if ($zip->open($zipPath) === true) {
@@ -484,7 +484,7 @@ function osc_mailBeauty($text, $params) {
     return $text;
 }
 
-function osc_mkdir($dir, $mode=0777, $recursive=true) {
+function osc_mkdir($dir, $mode=0755, $recursive=true) {
     if (is_null($dir) || $dir==="") {
         return false;
     }
@@ -975,7 +975,7 @@ function osc_unzip_file($file, $to) {
         }
     }
 
-    @chmod($to, 0777);
+    @chmod($to, 755);
 
     if (!is_writable($to)) {
         return 0;
@@ -1028,7 +1028,7 @@ function _unzip_file_ziparchive($file, $to) {
         }
 
         if (substr($file['name'], -1) == '/') {
-            @mkdir($to . $file['name'], 0777);
+            @mkdir($to . $file['name'], 0755);
             continue;
         }
 
@@ -1086,7 +1086,7 @@ function _unzip_file_pclzip($zip_file, $to) {
         }
 
         if ($file['folder']) {
-            @mkdir($to . $file['filename'], 0777);
+            @mkdir($to . $file['filename'], 0755);
             continue;
         }
 
@@ -1280,7 +1280,7 @@ function osc_change_permissions( $dir = ABS_PATH ) {
             if($file!="." && $file!=".." && substr($file,0,1)!="." ) {
                 if(is_dir(str_replace("//", "/", $dir . "/" . $file))) {
                     if(!is_writable(str_replace("//", "/", $dir . "/" . $file))) {
-                        $res = @chmod( str_replace("//", "/", $dir . "/" . $file), 0777);
+                        $res = @chmod( str_replace("//", "/", $dir . "/" . $file), 0755);
                         if(!$res) { return false; };
                     }
                     if(str_replace("//", "/", $dir)==(ABS_PATH . "oc-content/themes")) {
@@ -1306,7 +1306,7 @@ function osc_change_permissions( $dir = ABS_PATH ) {
                     }
                 } else {
                     if(!is_writable(str_replace("//", "/", $dir . "/" . $file))) {
-                        return @chmod( str_replace("//", "/", $dir . "/" . $file), 0777);
+                        return @chmod( str_replace("//", "/", $dir . "/" . $file), 0755);
                     } else {
                         return true;
                     }
@@ -1831,8 +1831,8 @@ function osc_do_upgrade() {
              ***** UNZIP FILE *****
              **********************/
             $tmp_path = osc_content_path().'downloads/oc-temp/core-'.$data['version'].'/';
-            @mkdir(osc_content_path().'downloads/oc-temp/', 0777);
-            @mkdir($tmp_path, 0777);
+            @mkdir(osc_content_path().'downloads/oc-temp/', 0755);
+            @mkdir($tmp_path, 0755);
             $res = osc_unzip_file(osc_content_path().'downloads/'.$filename, $tmp_path);
             if ($res == 1) { // Everything is OK, continue
                 /**********************
