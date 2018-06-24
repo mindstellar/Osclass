@@ -16,14 +16,9 @@
  */
 
 
-	require_once dirname( __DIR__ ) . '/htmlpurifier/HTMLPurifier.auto.php';
-	/**
-	 * @param $value
-	 * @param $xss_check
-	 *
-	 * @return \Purified
-	 */
-	function _purify( $value , $xss_check )
+require_once dirname(dirname(__FILE__)) . '/htmlpurifier/HTMLPurifier.auto.php';
+require_once dirname(dirname(__FILE__)) . '/osclass/compatibility.php';
+function _purify($value, $xss_check)
 {
     if( !$xss_check ) {
         return $value;
@@ -31,7 +26,7 @@
 
     $_config = HTMLPurifier_Config::createDefault();
     $_config->set('HTML.Allowed', '');
-	$_config->set( 'Cache.SerializerPath' , dirname( dirname( dirname( __DIR__ ) ) ) . '/oc-content/uploads/' );
+    $_config->set('Cache.SerializerPath', dirname(dirname(dirname(dirname(__FILE__)))) . '/oc-content/uploads/');
 
     $_purifier = new HTMLPurifier($_config);
 
@@ -46,24 +41,10 @@
 
     return $value;
 }
-
-
-	/**
-	 * @param      $param
-	 * @param bool $htmlencode
-	 * @param bool $xss_check
-	 * @param bool $quotes_encode
-	 *
-	 * @return \Purified|string
-	 */
-	function getServerParam( $param , $htmlencode = false , $xss_check = true , $quotes_encode = true )
+function getServerParam($param, $htmlencode = false, $xss_check = true, $quotes_encode = true)
 {
-	if ( $param == '' ) {
-		return '';
-	}
-	if ( ! isset( $_SERVER[ $param ] ) ) {
-		return '';
-	}
+    if ($param == "") return '';
+    if (!isset($_SERVER[$param])) return '';
     $value = _purify($_SERVER[$param], $xss_check);
     if ($htmlencode) {
         if($quotes_encode) {
@@ -77,7 +58,7 @@
         $value = strip_slashes_extended($value);
     }
 
-    return $value;
+    return ($value);
 }
 
 /*
@@ -87,11 +68,8 @@
  *
  * @return string The url of the site
  */
-	/**
-	 * @return string
-	 */
-	function get_absolute_url() {
-    $protocol = ( getServerParam('HTTPS') === 'on' || getServerParam( 'HTTP_X_FORWARDED_PROTO') === 'https') ? 'https' : 'http';
+function get_absolute_url( ) {
+    $protocol = ( getServerParam('HTTPS') == 'on' || getServerParam('HTTP_X_FORWARDED_PROTO')=='https') ? 'https' : 'http';
     $pos      = strpos(getServerParam('REQUEST_URI'), 'oc-includes');
     $URI      = rtrim( substr( getServerParam('REQUEST_URI'), 0, $pos ), '/' ) . '/';
     return $protocol . '://' . getServerParam('HTTP_HOST') . $URI;
@@ -104,12 +82,9 @@
  *
  * @return string The relative url on the domain url
  */
-	/**
-	 * @return string
-	 */
-	function get_relative_url() {
+function get_relative_url( ) {
     $url = Params::getServerParam('REQUEST_URI', false, false);
-    return substr($url, 0, strpos($url, '/oc-includes')) . '/';
+    return substr($url, 0, strpos($url, '/oc-includes')) . "/";
 }
 
 /*
@@ -119,15 +94,12 @@
  *
  * @return array Requirements
  */
-	/**
-	 * @return array
-	 */
-	function get_requirements() {
+function get_requirements( ) {
     $array = array(
         'PHP version >= 5.6.x' => array(
-	        'requirement' => __('PHP version >= 5.6.x'),
-	        'fn'          => PHP_VERSION_ID >= 50600 ,
-	        'solution'    => __('At least PHP5.6 (PHP 7.0 or higher recommended) is required to run Osclass. You may talk with your hosting to upgrade your PHP version.')),
+            'requirement' => __('PHP version >= 5.6.x'),
+            'fn' => version_compare(PHP_VERSION, '5.6.0', '>='),
+            'solution' => __('At least PHP5.6 (PHP 7.0 or higher recommended) is required to run Osclass. You may talk with your hosting to upgrade your PHP version.')),
 
         'MySQLi extension for PHP' => array(
             'requirement' => __('MySQLi extension for PHP'),
@@ -147,7 +119,7 @@
         'Folder <code>oc-content/uploads</code> is writable' => array(
             'requirement' => __('<code>oc-content/uploads</code> folder is writable'),
             'fn' => is_writable( ABS_PATH . 'oc-content/uploads/' ),
-            'solution' => sprintf(__('<code>uploads</code> folder has to be writable, i.e.: <code>chmod 0755 %soc-content/uploads/</code>'), ABS_PATH)),
+            'solution' => sprintf(__('<code>uploads</code> folder has to be writable, i.e.: <code>chmod a+w %soc-content/uploads/</code>'), ABS_PATH)),
         // oc-content/downlods
         'Folder <code>oc-content/downloads</code> exists' => array(
             'requirement' => __('Folder <code>oc-content/downloads</code> exists'),
@@ -157,7 +129,7 @@
         'Folder <code>oc-content/downloads</code> is writable' => array(
             'requirement' => __('<code>oc-content/downloads</code> folder is writable'),
             'fn' => is_writable( ABS_PATH . 'oc-content/downloads/' ),
-            'solution' => sprintf(__('<code>downloads</code> folder has to be writable, i.e.: <code>chmod 0755 %soc-content/downloads/</code>'), ABS_PATH)),
+            'solution' => sprintf(__('<code>downloads</code> folder has to be writable, i.e.: <code>chmod a+w %soc-content/downloads/</code>'), ABS_PATH)),
         // oc-content/languages
         'Folder <code>oc-content/languages</code> exists' => array(
             'requirement' => __('Folder <code>oc-content/languages</code> folder exists'),
@@ -167,7 +139,7 @@
         'Folder <code>oc-content/languages</code> is writable' => array(
             'requirement' => __('<code>oc-content/languages</code> folder is writable'),
             'fn' => is_writable( ABS_PATH . 'oc-content/languages/' ),
-            'solution' => sprintf(__('<code>languages</code> folder has to be writable, i.e.: <code>chmod 0755 %soc-content/languages/</code>'), ABS_PATH)),
+            'solution' => sprintf(__('<code>languages</code> folder has to be writable, i.e.: <code>chmod a+w %soc-content/languages/</code>'), ABS_PATH)),
     );
 
     $config_writable = false;
@@ -180,7 +152,7 @@
         $array['File <code>config.php</code> is writable'] = array(
             'requirement' => __('<code>config.php</code> file is writable'),
             'fn' => $config_writable,
-            'solution' => sprintf(__('<code>config.php</code> file has to be writable, i.e.: <code>chmod 0755 %sconfig.php</code>'), ABS_PATH));
+            'solution' => sprintf(__('<code>config.php</code> file has to be writable, i.e.: <code>chmod a+w %sconfig.php</code>'), ABS_PATH));
     } else {
         if (is_writable(ABS_PATH) ) {
             $root_writable = true;
@@ -188,7 +160,7 @@
         $array['Root directory is writable'] = array(
             'requirement' => __('Root directory is writable'),
             'fn' => $root_writable,
-            'solution' => sprintf(__('Root folder has to be writable, i.e.: <code>chmod 0755 %s</code>'), ABS_PATH));
+            'solution' => sprintf(__('Root folder has to be writable, i.e.: <code>chmod a+w %s</code>'), ABS_PATH));
 
         if( file_exists(ABS_PATH . 'config-sample.php') ) {
             $config_sample = true;
@@ -203,20 +175,16 @@
 }
 
 
-	/**
-	 * Check if some of the requirements to install Osclass are correct or not
-	 *
-	 * @since 1.2
-	 *
-	 * @param $array
-	 *
-	 * @return boolean Check if all the requirements are correct
-	 */
+/**
+ * Check if some of the requirements to install Osclass are correct or not
+ *
+ * @since 1.2
+ *
+ * @return boolean Check if all the requirements are correct
+ */
 function check_requirements($array) {
     foreach($array as $k => $v) {
-	    if ( ! $v[ 'fn' ] ) {
-		    return true;
-	    }
+        if( !$v['fn'] ) return true;
     }
     return false;
 }
@@ -230,12 +198,10 @@ function reportToOsclass() {
     return $_COOKIE['osclass_save_stats'];
 }
 
-
-	/**
-	 * insert/update preference allow_report_osclass
-	 *
-	 * @param $value
-	 */
+/**
+ * insert/update preference allow_report_osclass
+ * @param boolean $bool
+ */
 function set_allow_report_osclass($value) {
     $values = array(
         's_section' => 'osclass',
@@ -254,10 +220,7 @@ function set_allow_report_osclass($value) {
  *
  * @return mixed Error messages of the installation
  */
-	/**
-	 * @return array|bool
-	 */
-	function oc_install( ) {
+function oc_install( ) {
     $dbhost      = Params::getParam('dbhost');
     $dbname      = Params::getParam('dbname');
     $username    = Params::getParam('username');
@@ -283,7 +246,7 @@ function set_allow_report_osclass($value) {
 
         if( $error_num > 0 ) {
             if( reportToOsclass() ) {
-                LogOsclassInstaller::instance()->error(sprintf(__('Cannot connect to the database. Error number: %s') , $error_num ), __FILE__ . '::' . __LINE__);
+                LogOsclassInstaller::instance()->error(sprintf(__('Cannot connect to the database. Error number: %s') , $error_num ), __FILE__."::".__LINE__);
             }
 
             switch ($error_num) {
@@ -308,7 +271,7 @@ function set_allow_report_osclass($value) {
 
         if( $error_num > 0 ) {
             if( reportToOsclass() ) {
-                LogOsclassInstaller::instance()->error(sprintf(__("Can't create the database. Error number: %s"), $error_num) , __FILE__ . '::' . __LINE__);
+                LogOsclassInstaller::instance()->error(sprintf(__("Can't create the database. Error number: %s"), $error_num) , __FILE__."::".__LINE__);
             }
 
             if( in_array( $error_num, array(1006, 1044, 1045) ) ) {
@@ -318,7 +281,9 @@ function set_allow_report_osclass($value) {
             return array('error' => sprintf(__("Can't create the database. Error number: %s"),  $error_num));
         }
 
-	    unset( $conn , $comm , $master_conn );
+        unset($conn);
+        unset($comm);
+        unset($master_conn);
     }
 
     $conn      = new DBConnectionClass($dbhost, $username, $password, $dbname);
@@ -330,7 +295,7 @@ function set_allow_report_osclass($value) {
 
     if( $error_num > 0 ) {
         if( reportToOsclass() ) {
-            LogOsclassInstaller::instance()->error(sprintf(__('Cannot connect to the database. Error number: %s'), $error_num) , __FILE__ . '::' . __LINE__);
+            LogOsclassInstaller::instance()->error(sprintf(__('Cannot connect to the database. Error number: %s'), $error_num) , __FILE__."::".__LINE__);
         }
 
         switch( $error_num ) {
@@ -350,7 +315,7 @@ function set_allow_report_osclass($value) {
     if( file_exists(ABS_PATH . 'config.php') ) {
         if( !is_writable(ABS_PATH . 'config.php') ) {
             if( reportToOsclass() ) {
-                LogOsclassInstaller::instance()->error(__("Can't write in config.php file. Check if the file is writable.") , __FILE__ . '::' . __LINE__);
+                LogOsclassInstaller::instance()->error(__("Can't write in config.php file. Check if the file is writable.") , __FILE__."::".__LINE__);
             }
             return array('error' => __("Can't write in config.php file. Check if the file is writable."));
         }
@@ -358,14 +323,14 @@ function set_allow_report_osclass($value) {
     } else {
         if( !file_exists(ABS_PATH . 'config-sample.php') ) {
             if( reportToOsclass() ) {
-                LogOsclassInstaller::instance()->error(__("config-sample.php doesn't exist. Check if everything is decompressed correctly.") , __FILE__ . '::' . __LINE__);
+                LogOsclassInstaller::instance()->error(__("config-sample.php doesn't exist. Check if everything is decompressed correctly.") , __FILE__."::".__LINE__);
             }
 
             return array('error' => __("config-sample.php doesn't exist. Check if everything is decompressed correctly."));
         }
         if( !is_writable(ABS_PATH) ) {
             if( reportToOsclass() ) {
-                LogOsclassInstaller::instance()->error(__('Can\'t copy config-sample.php. Check if the root directory is writable.') , __FILE__ . '::' . __LINE__);
+                LogOsclassInstaller::instance()->error(__('Can\'t copy config-sample.php. Check if the root directory is writable.') , __FILE__."::".__LINE__);
             }
 
             return array('error' => __('Can\'t copy config-sample.php. Check if the root directory is writable.'));
@@ -385,7 +350,7 @@ function set_allow_report_osclass($value) {
 
     if( $error_num > 0 ) {
         if( reportToOsclass() ) {
-            LogOsclassInstaller::instance()->error(sprintf(__("Can't create the database structure. Error number: %s"), $error_num)  , __FILE__ . '::' . __LINE__);
+            LogOsclassInstaller::instance()->error(sprintf(__("Can't create the database structure. Error number: %s"), $error_num)  , __FILE__."::".__LINE__);
         }
 
         switch ($error_num) {
@@ -430,7 +395,7 @@ function set_allow_report_osclass($value) {
     foreach($required_files as $file) {
         if ( !file_exists($file) ) {
             if( reportToOsclass() ) {
-                LogOsclassInstaller::instance()->error(sprintf(__('The file %s doesn\'t exist'), $file) , __FILE__ . '::' . __LINE__);
+                LogOsclassInstaller::instance()->error(sprintf(__('The file %s doesn\'t exist'), $file) , __FILE__."::".__LINE__);
             }
 
             return array('error' => sprintf(__('The file %s doesn\'t exist'), $file) );
@@ -444,7 +409,7 @@ function set_allow_report_osclass($value) {
 
     if( $error_num > 0 ) {
         if( reportToOsclass() ) {
-            LogOsclassInstaller::instance()->error(sprintf(__("Can't insert basic configuration. Error number: %s"), $error_num)  , __FILE__ . '::' . __LINE__);
+            LogOsclassInstaller::instance()->error(sprintf(__("Can't insert basic configuration. Error number: %s"), $error_num)  , __FILE__."::".__LINE__);
         }
 
         switch ($error_num) {
@@ -483,14 +448,8 @@ function oc_install_example_data() {
     require_once LIB_PATH . 'osclass/model/Category.php';
     $mCat = Category::newInstance();
 
-    if(!function_exists('osc_apply_filter') ) {
-	    /**
-	     * @param $dummyfilter
-	     * @param $str
-	     *
-	     * @return mixed
-	     */
-	    function osc_apply_filter( $dummyfilter , $str) {
+    if(!function_exists('osc_apply_filter')) {
+        function osc_apply_filter($dummyfilter, $str) {
             return $str;
         }
     }
@@ -506,10 +465,7 @@ function oc_install_example_data() {
 
         $aFieldsDescription[osc_current_admin_locale()]['s_name'] = $category['s_name'];
 
-	    try {
-		    $mCat->insert( $fields , $aFieldsDescription );
-	    } catch ( Exception $e ) {
-	    }
+        $mCat->insert($fields, $aFieldsDescription);
     }
 
     require_once LIB_PATH . 'osclass/model/Item.php';
@@ -539,23 +495,17 @@ function oc_install_example_data() {
     $mItem = new ItemActions(true);
 
     foreach($item as $k => $v) {
-        if( $k === 'description' || $k === 'title') {
+        if($k=='description' || $k=='title') {
             Params::setParam($k, array(osc_current_admin_locale() => $v));
         } else {
             Params::setParam($k, $v);
         }
     }
 
-	try {
-		$mItem->prepareData( true );
-	} catch ( Exception $e ) {
-	}
-	try {
-		$successItem = $mItem->add();
-	} catch ( Exception $e ) {
-	}
+    $mItem->prepareData(true);
+    $successItem = $mItem->add();
 
-	$successPageresult = Page::newInstance()->insert(
+    $successPageresult = Page::newInstance()->insert(
         array(
             's_internal_name' => $page['s_internal_name'],
             'b_indelible' => 0,
@@ -583,14 +533,7 @@ function oc_install_example_data() {
  * @param string $tableprefix Prefix for table names
  * @return mixed Error messages of the installation
  */
-	/**
-	 * @param $dbname
-	 * @param $username
-	 * @param $password
-	 * @param $dbhost
-	 * @param $tableprefix
-	 */
-	function create_config_file( $dbname , $username , $password , $dbhost , $tableprefix) {
+function create_config_file($dbname, $username, $password, $dbhost, $tableprefix) {
     $password = addslashes($password);
     $abs_url = get_absolute_url();
     $rel_url = get_relative_url();
@@ -630,14 +573,7 @@ CONFIG;
  *
  * @since 1.2
  */
-	/**
-	 * @param $dbname
-	 * @param $username
-	 * @param $password
-	 * @param $dbhost
-	 * @param $tableprefix
-	 */
-	function copy_config_file( $dbname , $username , $password , $dbhost , $tableprefix) {
+function copy_config_file($dbname, $username, $password, $dbhost, $tableprefix) {
     $password = addslashes($password);
     $abs_url = get_absolute_url();
     $rel_url = get_relative_url();
@@ -646,7 +582,7 @@ CONFIG;
     foreach ($config_sample as $line_num => $line) {
         switch (substr($line, 0, 16)) {
             case "define('DB_NAME'":
-                $config_sample[$line_num] = str_replace( 'database_name' , $dbname, $line);
+                $config_sample[$line_num] = str_replace("database_name", $dbname, $line);
                 break;
             case "define('DB_USER'":
                 $config_sample[$line_num] = str_replace("'username'", "'$username'", $line);
@@ -655,7 +591,7 @@ CONFIG;
                 $config_sample[$line_num] = str_replace("'password'", "'$password'", $line);
                 break;
             case "define('DB_HOST'":
-                $config_sample[$line_num] = str_replace( 'localhost' , $dbhost, $line);
+                $config_sample[$line_num] = str_replace("localhost", $dbhost, $line);
                 break;
             case "define('DB_TABLE":
                 $config_sample[$line_num] = str_replace('oc_', $tableprefix, $line);
@@ -669,19 +605,16 @@ CONFIG;
         }
     }
 
-		$handle = fopen( ABS_PATH . 'config.php' , 'wb' );
+    $handle = fopen(ABS_PATH . 'config.php', 'w');
     foreach( $config_sample as $line ) {
         fwrite($handle, $line);
     }
     fclose($handle);
     chmod(ABS_PATH . 'config.php', 0666);
-	}
+}
 
 
-	/**
-	 * @return bool
-	 */
-	function is_osclass_installed( ) {
+function is_osclass_installed( ) {
     if( !file_exists( ABS_PATH . 'config.php' ) ) {
         return false;
     }
@@ -702,20 +635,13 @@ CONFIG;
     }
 
     return true;
-	}
+}
 
-
-	/**
-	 * @param $password
-	 *
-	 * @return array
-	 */
-	function finish_installation( $password ) {
+function finish_installation( $password ) {
     require_once LIB_PATH . 'osclass/model/Admin.php';
     require_once LIB_PATH . 'osclass/model/Category.php';
     require_once LIB_PATH . 'osclass/model/Item.php';
     require_once LIB_PATH . 'osclass/helpers/hPlugins.php';
-    require_once LIB_PATH . 'osclass/compatibility.php';
     require_once LIB_PATH . 'osclass/classes/Plugins.php';
 
     $data = array();
@@ -843,15 +769,15 @@ function display_database_config() {
 
 function display_target() {
     $country_list = osc_file_get_contents('https://geo.osclass.org/newgeo.services.php?action=countries');
-	$country_list = json_decode( substr( $country_list , 1 , - 2 ) , true );
+    $country_list = json_decode(substr($country_list, 1, strlen($country_list)-2), true);
 
     $region_list = array();
 
     $country_ip = '';
     if(preg_match('|([a-z]{2})-([A-Z]{2})|', Params::getServerParam('HTTP_ACCEPT_LANGUAGE'), $match)) {
-        $country_ip  = $match[2];
+        $country_ip = $match[2];
         $region_list = osc_file_get_contents('https://geo.osclass.org/newgeo.services.php?action=regions&country='.$match[2]);
-	    $region_list = json_decode( substr( $region_list , 1 , - 2 ) , true );
+        $region_list = json_decode(substr($region_list, 1, strlen($region_list)-2), true);
     }
 
     if(!isset($country_list[0]) || !isset($country_list[0]['s_name'])) {
@@ -904,9 +830,9 @@ function display_target() {
                 <tr>
                     <td></td>
                     <td>
-                        <input type="checkbox" checked="checked" id="createmarketaccount" name="createmarketaccount" value="1" /><label for="createmarketaccount"><?php _e('Create market.osclass.org account'); ?>
-                            <br><?php _e( '(You agree to our <a href="https://osclass.org/page/legal-note">Terms & Conditions</a>)' ); ?></label>
-                        <img class="vtip" src="<?php echo get_absolute_url(); ?>oc-includes/images/question.png" title="<?php echo osc_esc_html(__( 'Create a market.osclass.org account and download free themes and plugins.' )); ?>" alt="" />
+                        <input type="checkbox" id="createmarketaccount" name="createmarketaccount" value="1" /><label for="createmarketaccount"><?php _e('Create a Market.osclass.org account'); ?>
+                        <img class="vtip" src="<?php echo get_absolute_url(); ?>oc-includes/images/question.png" title="<?php echo osc_esc_html(__("Create a market.osclass.org account and download free themes and plugins.")); ?>" alt="" />
+                        <br><?php _e("I accept Osclass SL’s <a href=\"https://osclass.org/page/legal-note\">Terms of Use</a> and <a href=\"https://osclass.org/page/cookies\">Cookies Policy</a> and grant them permission to manage my data."); ?></label>
                     </td>
                 </tr>
                 </tbody>
@@ -926,24 +852,24 @@ function display_target() {
                     <div id="country-box">
 
                         <select name="country_select" id="country_select" >
-                            <option value="skip"><?php _e( 'Skip location' ); ?></option>
-                            <!-- <option value="all"><?php _e( 'International' ); ?></option> -->
+                            <option value="skip"><?php _e("Skip location"); ?></option>
+                            <!-- <option value="all"><?php _e("International"); ?></option> -->
                             <?php foreach($country_list as $c) { ?>
-                                <option value="<?php echo $c['code']; ?>" <?php if($c['code']==$country_ip) { echo 'selected="selected"'; } ?>><?php echo $c['s_name']; ?></option>
-                            <?php } ?>
+                                <option value="<?php echo $c['code']; ?>" <?php if($c['code']==$country_ip) { echo 'selected="selected"'; }; ?>><?php echo $c['s_name']; ?></option>
+                            <?php }; ?>
                         </select>
 
                         <select name="region_select" id="region_select" style="display: none;">
-                            <option value="all"><?php _e( 'All regions' ); ?></option>
+                            <option value="all"><?php _e("All regions"); ?></option>
                         </select>
 
                         <select name="city_select" id="city_select" style="display: none;">
-                            <option value="all"><?php _e( 'All cities' ); ?></option>
+                            <option value="all"><?php _e("All cities"); ?></option>
                         </select>
 
-                        <div id="no_region_text" aria-hidden="true" style="display: none;"><?php _e( 'There are no regions available for this country' ); ?></div>
+                        <div id="no_region_text" aria-hidden="true" style="display: none;"><?php _e("There are no regions available for this country"); ?></div>
 
-                        <div id="no_city_text" aria-hidden="true" style="display: none;"><?php _e( 'There are no cities available for this region' ); ?></div>
+                        <div id="no_city_text" aria-hidden="true" style="display: none;"><?php _e("There are no cities available for this region"); ?></div>
 
 
                     </div>
@@ -952,7 +878,7 @@ function display_target() {
                         <?php _e('No internet connection. You can continue the installation and insert countries later.'); ?>
                         <input type="hidden" id="skip-location-input" name="skip-location-input" value="1" />
                     </div>
-                <?php } ?>
+                <?php }; ?>
             </div>
         </div>
         <div class="clear"></div>
@@ -963,18 +889,13 @@ function display_target() {
     </form>
     <div id="lightbox" style="display:none;">
         <div class="center">
-            <img src="<?php echo get_absolute_url(); ?>oc-includes/images/loading.gif" alt="<?php echo osc_esc_html(__( 'Loading...' )); ?>" title="" />
+            <img src="<?php echo get_absolute_url(); ?>oc-includes/images/loading.gif" alt="<?php echo osc_esc_html(__("Loading...")); ?>" title="" />
         </div>
     </div>
 <?php
 }
 
-
-	/**
-	 * @param $error
-	 * @param $step
-	 */
-	function display_database_error( $error , $step) {
+function display_database_error($error ,$step) {
     ?>
     <h2 class="target"><?php _e('Error'); ?></h2>
     <p class="bottom space-left-10">
@@ -983,14 +904,9 @@ function display_target() {
     <a href="<?php echo get_absolute_url(); ?>oc-includes/osclass/install.php?step=<?php echo $step; ?>" class="button"><?php _e('Go back'); ?></a>
     <div class="clear bottom"></div>
 <?php
-	}
+}
 
-
-	/**
-	 * @param $bool
-	 *
-	 */
-	function ping_search_engines( $bool){
+function ping_search_engines($bool){
     $mPreference = Preference::newInstance();
     if($bool == 1){
         $mPreference->insert (
@@ -1017,13 +933,8 @@ function display_target() {
             )
         );
     }
-	}
-
-
-	/**
-	 * @param $password
-	 */
-	function display_finish( $password) {
+}
+function display_finish($password) {
     $data = finish_installation( $password );
     ?>
     <?php if(Params::getParam('error_location') == 1) { ?>
@@ -1037,7 +948,7 @@ function display_target() {
         </div>
     <?php } ?>
     <h2 class="target"><?php _e('Congratulations!');?></h2>
-    <p class="space-left-10"><?php _e( 'Osclass has been installed. Were you expecting more steps? Sorry to disappoint you!' );?></p>
+    <p class="space-left-10"><?php _e("Osclass has been installed. Were you expecting more steps? Sorry to disappoint you!");?></p>
     <p class="space-left-10"><?php echo sprintf(__('An e-mail with the password for oc-admin has been sent to: %s'), $data['s_email']);?></p>
     <div style="clear:both;"></div>
     <div class="form-table finish">

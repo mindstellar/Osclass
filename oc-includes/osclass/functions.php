@@ -169,11 +169,10 @@ osc_add_hook('search_form', 'osc_meta_search');
             $text .= $result . $s_page;
         break;
         case('login'):
-	        if ( $section === 'recover' ) {
-		        $text = __( 'Recover your password' );
-	        } else {
-		        $text = __( 'Login' );
-            }
+            switch ($section) {
+                case('recover'): $text = __('Recover your password'); break;
+                case('forgot'):  $text = __('Recover my password'); break;
+                default:         $text = __('Login');
         break;
         case('register'):
             $text = __('Create a new account');
@@ -188,7 +187,6 @@ osc_add_hook('search_form', 'osc_meta_search');
                 case('change_email'):    $text = __('Change my email'); break;
                 case('change_username'): $text = __('Change my username'); break;
                 case('change_password'): $text = __('Change my password'); break;
-                case('forgot'):          $text = __('Recover my password'); break;
             }
         break;
         case('contact'):
