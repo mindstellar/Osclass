@@ -194,6 +194,9 @@ require_once LIB_PATH . 'osclass/helpers/hCache.php';
 require_once LIB_PATH . 'openssl-cryptor/Cryptor.php';
 require_once LIB_PATH . 'osclass/compatibility.php';
 
+//Include Composer's autoloader
+include LIB_PATH . 'vendor/autoload.php';
+
 
 
 if( !defined('OSC_CRYPT_KEY') ) {
