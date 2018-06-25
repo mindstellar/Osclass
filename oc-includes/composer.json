@@ -1,5 +1,6 @@
 {
     "require" : {
-        "hybridauth/hybridauth" : "~2.9"
+        "hybridauth/hybridauth" : "~2.9",
+        "ezyang/htmlpurifier": "^4.10"
     }
 }

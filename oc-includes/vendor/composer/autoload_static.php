@@ -8,6 +8,7 @@ class ComposerStaticInitba5814f5176937f6b158c67874a346d6
 {
     public static $files = array (
         'c65d09b6820da036953a371c8c73a9b1' => __DIR__ . '/..' . '/facebook/graph-sdk/src/Facebook/polyfills.php',
+        '2cffec82183ee1cea088009cef9a6fc3' => __DIR__ . '/..' . '/ezyang/htmlpurifier/library/HTMLPurifier.composer.php',
     );
 
     public static $prefixLengthsPsr4 = array (
@@ -45,6 +46,10 @@ class ComposerStaticInitba5814f5176937f6b158c67874a346d6
             'Hybrid' => 
             array (
                 0 => __DIR__ . '/..' . '/hybridauth/hybridauth/hybridauth',
+            ),
+            'HTMLPurifier' => 
+            array (
+                0 => __DIR__ . '/..' . '/ezyang/htmlpurifier/library',
             ),
         ),
     );
