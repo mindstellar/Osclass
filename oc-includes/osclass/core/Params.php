@@ -72,7 +72,7 @@
 		 * @param $value
 		 * @param $xss_check
 		 *
-		 * @return \Purified
+		 * @return string
 		 */
 		private static function _purify( $value , $xss_check ) {
 			if ( ! $xss_check ) {
@@ -120,7 +120,7 @@
 		 * @param bool $xss_check
 		 * @param bool $quotes_encode
 		 *
-		 * @return \Purified|string
+		 * @return string
 		 */
 		public static function getServerParam( $param , $htmlencode = false , $xss_check = true , $quotes_encode = true ) {
 			if ( $param == '' ) {
@@ -166,7 +166,7 @@
 		/**
 		 * @param bool $xss_check
 		 *
-		 * @return \Purified|string
+		 * @return string
 		 */
 		public static function getServerParamsAsArray( $xss_check = true ) {
 			$value = self::_purify( self::$_server , $xss_check );
