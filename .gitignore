@@ -39,6 +39,7 @@ oc-content/plugins/*
 dist
 nbproject/
 .sass-cache
+package-lock.json
 
 # npm
 node_modules
