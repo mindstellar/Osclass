@@ -6,6 +6,7 @@ $vendorDir = dirname(dirname(__FILE__));
 $baseDir = dirname($vendorDir);
 
 return array(
+    'EasyPeasyICS' => $vendorDir . '/phpmailer/phpmailer/extras/EasyPeasyICS.php',
     'Hybrid_Auth' => $vendorDir . '/hybridauth/hybridauth/hybridauth/Hybrid/Auth.php',
     'Hybrid_Endpoint' => $vendorDir . '/hybridauth/hybridauth/hybridauth/Hybrid/Endpoint.php',
     'Hybrid_Error' => $vendorDir . '/hybridauth/hybridauth/hybridauth/Hybrid/Error.php',
@@ -46,4 +47,11 @@ return array(
     'OAuthSignatureMethod_RSA_SHA1' => $vendorDir . '/hybridauth/hybridauth/hybridauth/Hybrid/thirdparty/OAuth/OAuth.php',
     'OAuthToken' => $vendorDir . '/hybridauth/hybridauth/hybridauth/Hybrid/thirdparty/OAuth/OAuth.php',
     'OAuthUtil' => $vendorDir . '/hybridauth/hybridauth/hybridauth/Hybrid/thirdparty/OAuth/OAuth.php',
+    'PHPMailer' => $vendorDir . '/phpmailer/phpmailer/class.phpmailer.php',
+    'PHPMailerOAuth' => $vendorDir . '/phpmailer/phpmailer/class.phpmaileroauth.php',
+    'PHPMailerOAuthGoogle' => $vendorDir . '/phpmailer/phpmailer/class.phpmaileroauthgoogle.php',
+    'POP3' => $vendorDir . '/phpmailer/phpmailer/class.pop3.php',
+    'SMTP' => $vendorDir . '/phpmailer/phpmailer/class.smtp.php',
+    'ntlm_sasl_client_class' => $vendorDir . '/phpmailer/phpmailer/extras/ntlm_sasl_client.php',
+    'phpmailerException' => $vendorDir . '/phpmailer/phpmailer/class.phpmailer.php',
 );
