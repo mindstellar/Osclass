@@ -272,11 +272,3 @@ if( OC_ADMIN ) {
 } else {
     Rewrite::newInstance()->init();
 }
-
-if( !class_exists('PHPMailer') ) {
-    require_once osc_lib_path() . 'phpmailer/class.phpmailer.php';
-}
-if( !class_exists('SMTP') ) {
-    require_once osc_lib_path() . 'phpmailer/class.smtp.php';
-}
-
