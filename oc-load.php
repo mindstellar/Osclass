@@ -55,7 +55,7 @@
 		error_reporting( E_CORE_ERROR | E_CORE_WARNING | E_COMPILE_ERROR | E_ERROR | E_WARNING | E_PARSE | E_USER_ERROR | E_USER_WARNING );
 	}
 //Include Composer's autoloader
-	include LIB_PATH . 'vendor/autoload.php';
+	require_once LIB_PATH . 'vendor/autoload.php';
 
 	require_once LIB_PATH . 'osclass/db.php';
 	require_once LIB_PATH . 'osclass/Logger/LogDatabase.php';
