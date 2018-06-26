@@ -2,6 +2,7 @@
     "require" : {
         "hybridauth/hybridauth" : "~2.9",
         "ezyang/htmlpurifier": "dev-master",
-        "phpmailer/phpmailer": "5.2.x"
+        "phpmailer/phpmailer": "5.2.x",
+        "pclzip/pclzip": "2.8.2"
     }
 }

@@ -17,9 +17,13 @@
  */
 
 
-/**
- * check if the item is expired
- */
+	/**
+	 * check if the item is expired
+	 *
+	 * @param $dt_expiration
+	 *
+	 * @return bool
+	 */
 function osc_isExpired($dt_expiration) {
     $now       = date("YmdHis");
 
@@ -69,10 +73,13 @@ function osc_deleteResource( $id , $admin) {
     }
 }
 
-/**
- * Tries to delete the directory recursivaly.
- * @return true on success.
- */
+	/**
+	 * Tries to delete the directory recursivaly.
+	 *
+	 * @param $path
+	 *
+	 * @return true on success.
+	 */
 function osc_deleteDir($path) {
     if(strpos($path, "../")!==false || strpos($path, "..\\")!==false) {
         return false;
@@ -107,11 +114,15 @@ function osc_deleteDir($path) {
     return @rmdir($path);
 }
 
-/**
- * Unpack a ZIP file into the specific path in the second parameter.
- * @DEPRECATED : TO BE REMOVED IN 3.3
- * @return true on success.
- */
+	/**
+	 * Unpack a ZIP file into the specific path in the second parameter.
+	 * @DEPRECATED : TO BE REMOVED IN 3.3
+	 *
+	 * @param $zipPath
+	 * @param $path
+	 *
+	 * @return true on success.
+	 */
 function osc_packageExtract($zipPath, $path) {
     if(strpos($path, "../")!==false || strpos($path, "..\\")!==false) {
         return false;
@@ -175,10 +186,13 @@ function osc_plugin_folder($file) {
     return $dir;
 }
 
-/**
- * Serialize the data (usefull at plugins activation)
- * @return the data serialized
- */
+	/**
+	 * Serialize the data (usefull at plugins activation)
+	 *
+	 * @param $data
+	 *
+	 * @return the data serialized
+	 */
 function osc_serialize($data) {
 
     if (!is_serialized($data)) {
@@ -190,10 +204,13 @@ function osc_serialize($data) {
     return $data;
 }
 
-/**
- * Unserialize the data (usefull at plugins activation)
- * @return the data unserialized
- */
+	/**
+	 * Unserialize the data (usefull at plugins activation)
+	 *
+	 * @param $data
+	 *
+	 * @return the data unserialized
+	 */
 function osc_unserialize($data) {
     if (is_serialized($data)) { // don't attempt to unserialize data that wasn't serialized going in
         return @unserialize($data);
@@ -202,10 +219,13 @@ function osc_unserialize($data) {
     return $data;
 }
 
-/**
- * Checks is $data is serialized or not
- * @return bool False if not serialized and true if it was.
- */
+	/**
+	 * Checks is $data is serialized or not
+	 *
+	 * @param $data
+	 *
+	 * @return bool False if not serialized and true if it was.
+	 */
 function is_serialized($data) {
     // if it isn't a string, it isn't serialized
     if (!is_string($data))
@@ -232,11 +252,15 @@ function is_serialized($data) {
     return false;
 }
 
-/**
- * VERY BASIC
- * Perform a POST request, so we could launch fake-cron calls and other core-system calls without annoying the user
- * @return bool false on error or number of bytes sent.
- */
+	/**
+	 * VERY BASIC
+	 * Perform a POST request, so we could launch fake-cron calls and other core-system calls without annoying the user
+	 *
+	 * @param $url
+	 * @param $_data
+	 *
+	 * @return bool false on error or number of bytes sent.
+	 */
 function osc_doRequest($url, $_data) {
     if (function_exists('fsockopen')) {
 
@@ -290,7 +314,7 @@ function osc_sendMail($params) {
     $mail = osc_apply_filter('init_send_mail', $mail, $params);
 
     if( osc_mailserver_pop() ) {
-        require_once osc_lib_path() . 'phpmailer/class.pop3.php';
+        //require_once osc_lib_path() . 'phpmailer/class.pop3.php';
         $pop = new POP3();
 
         $pop3_host = osc_mailserver_host();
@@ -753,13 +777,18 @@ function processHeaders($headers)
     return $headers;
 }
 
-/**
- * Download file using fsockopen
- *
- * @since 3.0
- * @param type $sourceFile
- * @param type $fileout
- */
+	/**
+	 * Download file using fsockopen
+	 *
+	 * @since 3.0
+	 *
+	 * @param type $sourceFile
+	 * @param type $fileout
+	 *
+	 * @param null $post_data
+	 *
+	 * @return bool|string
+	 */
 function download_fsockopen($sourceFile, $fileout = null, $post_data = null)
 {
     // parse URL
@@ -1064,7 +1093,7 @@ function _unzip_file_pclzip($zip_file, $to) {
     }
 
     // first, we load the library
-    require_once LIB_PATH . 'pclzip/pclzip.lib.php';
+    //require_once LIB_PATH . 'pclzip/pclzip.lib.php';
 
     $archive = new PclZip($zip_file);
     if (($files = $archive->extract(PCLZIP_OPT_EXTRACT_AS_STRING)) == false) {
@@ -1177,7 +1206,7 @@ function _zip_folder_pclzip($archive_folder, $archive_name) {
     }
 
     // first, we load the library
-    require_once LIB_PATH . 'pclzip/pclzip.lib.php';
+    //require_once LIB_PATH . 'pclzip/pclzip.lib.php';
 
     $zip = new PclZip($archive_name);
     if($zip) {
@@ -1348,14 +1377,15 @@ function osc_prepare_price($price) {
     return number_format($price/1000000, osc_locale_num_dec(), osc_locale_dec_point(), osc_locale_thousands_sep());
 }
 
-/**
- * Recursive glob function
- *
- * @param string $pattern
- * @param string $flags
- * @param string $path
- * @return array of files
- */
+	/**
+	 * Recursive glob function
+	 *
+	 * @param string $pattern
+	 * @param int $flags
+	 * @param string $path
+	 *
+	 * @return array of files
+	 */
 function rglob($pattern, $flags = 0, $path = '') {
     if (!$path && ($dir = dirname($pattern)) != '.') {
         if ($dir == '\\' || $dir == '/') $dir = '';
@@ -1493,12 +1523,11 @@ function _recursive_category_stats(&$aux, &$categoryTotal)
     return $count_items;
 }
 
-/**
- * Update category stats
- *
- * @param string $update_uri
- * @return boolean
- */
+	/**
+	 * Update category stats
+	 *
+	 * @return void
+	 */
 function osc_update_cat_stats() {
     $categoryTotal = array();
     $aCategories   = Category::newInstance()->toTreeAll();
@@ -1551,11 +1580,16 @@ function osc_update_cat_stats_id($id)
     }
 }
 
-/**
- * Update locations stats. I moved this function from cron.daily.php:update_location_stats
- *
- * @since 3.1
- */
+	/**
+	 * Update locations stats. I moved this function from cron.daily.php:update_location_stats
+	 *
+	 * @since 3.1
+	 *
+	 * @param bool $force
+	 * @param int $limit
+	 *
+	 * @return int
+	 */
 function osc_update_location_stats($force = false, $limit = 1000) {
 
     $loctmp = LocationsTmp::newInstance();
