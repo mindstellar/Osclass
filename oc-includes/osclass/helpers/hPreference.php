@@ -29,7 +29,7 @@
      * @return int
      */
     function osc_time_cookie() {
-        return 31536000; // one year in seconds
+        return (int) 31536000; // one year in seconds
     }
 
     /**
@@ -56,7 +56,7 @@
      * @return int
      */
     function osc_comments_per_page() {
-        return getPreference( 'comments_per_page');
+        return (int)(getPreference('comments_per_page'));
     }
 
     /**
@@ -74,13 +74,13 @@
      * @return int
      */
     function osc_warn_expiration() {
-        return getPreference( 'warn_expiration');
+        return (int)(getPreference('warn_expiration'));
     }
 
     /**
-     * Gets comments per page
+     * Gets timezone
      *
-     * @return int
+     * @return string
      */
     function osc_timezone() {
         return getPreference( 'timezone');
@@ -164,7 +164,7 @@
      * @return int
      */
     function osc_moderate_comments() {
-        return getPreference( 'moderate_comments');
+        return (int)(getPreference('moderate_comments'));
     }
 
     /**
@@ -245,7 +245,7 @@
      * @return int
      */
     function osc_items_wait_time() {
-        return getPreference( 'items_wait_time');
+        return (int)(getPreference('items_wait_time'));
     }
 
     /**
@@ -254,7 +254,7 @@
      * @return int
      */
     function osc_moderate_items() {
-        return getPreference( 'moderate_items');
+        return (int)(getPreference('moderate_items'));
     }
 
     /**
@@ -290,7 +290,7 @@
      * @return int
      */
     function osc_max_images_per_item() {
-        return getPreference( 'numImages@items');
+        return (int)(getPreference('numImages@items'));
     }
 
     /**
@@ -300,7 +300,7 @@
      */
     function osc_max_characters_per_title() {
         $value = getPreference('title_character_length');
-        return ( !empty($value) ? $value : 128);
+        return ( !empty($value) ? (int)$value : 128);
     }
 
     /**
@@ -310,7 +310,7 @@
      */
     function osc_max_characters_per_description() {
         $value = getPreference('description_character_length');
-        return ( !empty($value) ? $value : 4096);
+        return ( !empty($value) ? (int)$value : 4096);
     }
 
     /**
@@ -402,7 +402,7 @@
      * @return int
      */
     function osc_max_size_kb() {
-        return getPreference( 'maxSizeKb');
+        return (int)(getPreference('maxSizeKb'));
     }
 
     /**
@@ -456,34 +456,34 @@
      * @return int
      */
     function osc_last_version_check() {
-	    return getPreference( 'last_version_check') ?:0;
+        return (int)(getPreference('last_version_check'));
     }
 
     /**
      * Gets when was the last version check
      *
-     * @return string
+     * @return int
      */
     function osc_themes_last_version_check() {
-        return getPreference( 'themes_last_version_check');
+        return (int)(getPreference('themes_last_version_check'));
     }
 
     /**
      * Gets when was the last version check
      *
-     * @return string
+     * @return int
      */
     function osc_plugins_last_version_check() {
-        return getPreference( 'plugins_last_version_check');
+        return (int)(getPreference('plugins_last_version_check'));
     }
 
     /**
      * Gets when was the last version check
      *
-     * @return string
+     * @return int
      */
     function osc_languages_last_version_check() {
-        return getPreference( 'languages_last_version_check');
+        return (int)(getPreference('languages_last_version_check'));
     }
 
     /**
@@ -501,7 +501,7 @@
      * @return int
      */
     function osc_version() {
-        return getPreference( 'version');
+        return (int)(getPreference('version'));
     }
 
     /**
@@ -519,7 +519,7 @@
      * @return string
      */
     function osc_language() {
-        return getPreference( 'language');
+        return (getPreference('language'));
     }
 
     /**
@@ -528,7 +528,7 @@
      * @return string
      */
     function osc_admin_language() {
-        return getPreference( 'admin_language');
+        return (getPreference('admin_language'));
     }
 
     /**
@@ -537,7 +537,7 @@
      * @return string
      */
     function osc_theme() {
-        return getPreference( 'theme');
+        return (getPreference('theme'));
     }
 
     /**
@@ -546,7 +546,7 @@
      * @return string
      */
     function osc_admin_theme() {
-        return getPreference( 'admin_theme');
+        return (getPreference('admin_theme'));
     }
 
     /**
@@ -555,7 +555,7 @@
      * @return string
      */
     function osc_page_description() {
-        return getPreference( 'pageDesc');
+        return (getPreference('pageDesc'));
     }
 
     /**
@@ -564,7 +564,7 @@
      * @return string
      */
     function osc_contact_email() {
-        return getPreference( 'contactEmail');
+        return (getPreference('contactEmail'));
     }
 
     /**
@@ -573,7 +573,7 @@
      * @return string
      */
     function osc_date_format() {
-        return getPreference( 'dateFormat');
+        return (getPreference('dateFormat'));
     }
 
     /**
@@ -582,7 +582,7 @@
      * @return string
      */
     function osc_time_format() {
-        return getPreference( 'timeFormat');
+        return (getPreference('timeFormat'));
     }
 
     /**
@@ -591,7 +591,7 @@
      * @return string
      */
     function osc_week_starts_at() {
-        return getPreference( 'weekStart');
+        return (getPreference('weekStart'));
     }
 
     /**
@@ -600,7 +600,7 @@
      * @return int
      */
     function osc_num_rss_items() {
-        return getPreference( 'num_rss_items');
+        return (int)(getPreference('num_rss_items'));
     }
 
     /**
@@ -609,7 +609,7 @@
      * @return string
      */
     function osc_currency() {
-        return getPreference( 'currency');
+        return (getPreference('currency'));
     }
 
     /**
@@ -618,7 +618,7 @@
      * @return string
      */
     function osc_akismet_key() {
-        return getPreference( 'akismetKey');
+        return (getPreference('akismetKey'));
     }
 
     /**
@@ -627,7 +627,7 @@
      * @return string
      */
     function osc_recaptcha_private_key() {
-        return getPreference( 'recaptchaPrivKey');
+        return (getPreference('recaptchaPrivKey'));
     }
 
 
@@ -729,7 +729,7 @@
      * @return int
      */
     function osc_market_external_sources() {
-        return getBoolPreference( 'marketAllowExternalSources');
+        return (getBoolPreference('marketAllowExternalSources'));
     }
 
     /**
@@ -738,7 +738,7 @@
      * @return int
      */
     function osc_market_categories() {
-        return getPreference( 'marketCategories');
+        return (getPreference('marketCategories'));
     }
 
     /**
@@ -747,7 +747,7 @@
      * @return int
      */
     function osc_market_data_update() {
-        return getPreference( 'marketDataUpdate');
+        return (getPreference('marketDataUpdate'));
     }
 
     /**
@@ -756,7 +756,7 @@
      * @return string
      */
     function osc_recaptcha_public_key() {
-        return getPreference( 'recaptchaPubKey');
+        return (getPreference('recaptchaPubKey'));
     }
 
     /**
@@ -765,7 +765,7 @@
      * @return string
      */
     function osc_mailserver_type() {
-        return getPreference( 'mailserver_type');
+        return (getPreference('mailserver_type'));
     }
 
     /**
@@ -774,7 +774,7 @@
      * @return string
      */
     function osc_mailserver_host() {
-        return getPreference( 'mailserver_host');
+        return (getPreference('mailserver_host'));
     }
 
     /**
@@ -783,7 +783,7 @@
      * @return int
      */
     function osc_mailserver_port() {
-        return getPreference( 'mailserver_port');
+        return (int)(getPreference('mailserver_port'));
     }
 
     /**
@@ -792,7 +792,7 @@
     * @return string
     */
     function osc_mailserver_mail_from() {
-        return getPreference( 'mailserver_mail_from');
+        return (getPreference('mailserver_mail_from'));
     }
 
     /**
@@ -801,7 +801,7 @@
     * @return string
     */
     function osc_mailserver_name_from() {
-        return getPreference( 'mailserver_name_from');
+        return (getPreference('mailserver_name_from'));
     }
 
     /**
@@ -810,7 +810,7 @@
      * @return string
      */
     function osc_mailserver_username() {
-        return getPreference( 'mailserver_username');
+        return (getPreference('mailserver_username'));
     }
 
     /**
@@ -819,7 +819,7 @@
      * @return string
      */
     function osc_mailserver_password() {
-        return getPreference( 'mailserver_password');
+        return (getPreference('mailserver_password'));
     }
 
     /**
@@ -828,7 +828,7 @@
      * @return boolean
      */
     function osc_mailserver_ssl() {
-        return getPreference( 'mailserver_ssl');
+        return (getPreference('mailserver_ssl'));
     }
 
     /**
@@ -837,7 +837,7 @@
      * @return string
      */
     function osc_active_plugins() {
-        return getPreference( 'active_plugins');
+        return (getPreference('active_plugins'));
     }
 
     /**
@@ -846,7 +846,7 @@
      * @return string
      */
     function osc_installed_plugins() {
-        return getPreference( 'installed_plugins');
+        return (getPreference('installed_plugins'));
     }
 
     /**
@@ -855,7 +855,7 @@
      * @return string
      */
     function osc_default_order_field_at_search() {
-        return getPreference( 'defaultOrderField@search');
+        return (getPreference('defaultOrderField@search'));
     }
 
     /**
@@ -864,7 +864,7 @@
      * @return string
      */
     function osc_default_order_type_at_search() {
-        return getPreference( 'defaultOrderType@search');
+        return (getPreference('defaultOrderType@search'));
     }
 
     /**
@@ -873,7 +873,7 @@
      * @return string
      */
     function osc_default_show_as_at_search() {
-        return getPreference( 'defaultShowAs@search');
+        return (getPreference('defaultShowAs@search'));
     }
 
     /**
@@ -882,7 +882,7 @@
      * @return int
      */
     function osc_max_results_per_page_at_search() {
-        return getPreference( 'maxResultsPerPage@search');
+        return (int)(getPreference('maxResultsPerPage@search'));
     }
 
     /**
@@ -891,7 +891,7 @@
      * @return int
      */
     function osc_default_results_per_page_at_search() {
-        return getPreference( 'defaultResultsPerPage@search');
+        return (int)(getPreference('defaultResultsPerPage@search'));
     }
 
     /**
@@ -900,7 +900,7 @@
      * @return int
      */
     function osc_max_latest_items() {
-        return getPreference( 'maxLatestItems@home');
+        return (int)(getPreference('maxLatestItems@home'));
     }
 
     /**
@@ -926,7 +926,7 @@
      * @return int
      */
     function osc_item_spam_delay() {
-        return 60; // need to be changed
+        return (int)60; // need to be changed
     }
 
     /**
@@ -935,7 +935,7 @@
      * @return int
      */
     function osc_comment_spam_delay() {
-        return 60; // need to be changed
+        return (int)60; // need to be changed
     }
 
     /**
@@ -953,7 +953,7 @@
      * @return int
      */
     function osc_max_latest_items_at_home() {
-        return getPreference( 'maxLatestItems@home');
+        return (int)(getPreference('maxLatestItems@home'));
     }
 
     /**
@@ -977,8 +977,10 @@
      */
     function osc_get_bool_preference($key, $section = 'osclass') {
         $var = getPreference($key, $section);
-
-	    return $var == 1 || $var == '1' || $var == 'true' || $var == true;
+        if($var==1 || $var=="1" || $var=="true" || $var==true) {
+            return true;
+        }
+        return false;
     }
 
 
@@ -1120,7 +1122,7 @@
         }
     }
 
-    //PRIVATE FUNCTION FOR GETTING NO BOOLEAN INFORMATION (if there was a class :P)
+    // PRIVATE FUNCTION FOR GETTING NO BOOLEAN INFORMATION (if there was a class :P)
     /**
      * Gets preference
      *
