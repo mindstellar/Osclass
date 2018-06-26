@@ -130,7 +130,7 @@ function create_market_account() {
     }
 
     try{
-        require_once LIB_PATH . 'phpmailer/class.phpmailer.php';
+	    //require_once LIB_PATH . 'phpmailer/class.phpmailer.php';
         $mail = new PHPMailer(true);
         $mail->CharSet  = 'utf-8';
         $mail->Host     = 'localhost';
