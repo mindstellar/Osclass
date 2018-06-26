@@ -1036,6 +1036,7 @@
         public function importSQL($sql)
         {
             $sql     = str_replace( '/*TABLE_PREFIX*/', DB_TABLE_PREFIX, $sql);
+            $sql     = str_replace( '/*OSCLASS_VERSION*/', strtr( OSCLASS_VERSION , array ( '.' => '' ) ), $sql);
             $sql     = preg_replace( '#/\*(?:[^*]*(?:\*(?!/))*)*\*/#', '', $sql );
             $queries = $this->splitSQL($sql, ';');
 

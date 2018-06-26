@@ -573,7 +573,7 @@ CREATE TABLE %st_item_description_tmp (
         }
     }
 
-    osc_changeVersionTo(375);
+    osc_changeVersionTo( strtr( OSCLASS_VERSION , array ( '.' => '' ) ));
 
     if(!defined('IS_AJAX') || !IS_AJAX) {
         if(empty($aMessages)) {
