@@ -3,6 +3,7 @@
         "hybridauth/hybridauth" : "~2.9",
         "ezyang/htmlpurifier": "dev-master",
         "phpmailer/phpmailer": "5.2.x",
-        "pclzip/pclzip": "2.8.2"
+        "pclzip/pclzip": "2.8.2",
+        "phpseclib/phpseclib": "dev-master#383e4e73a7f402daf8389f045cb54eaa99e21d55"
     }
 }

@@ -47,3 +47,4 @@ node_modules
 # test
 oc-includes/osclass/t/config.php
 oc-includes/simpletest/test/osclass/custom_config.php
+composer.phar

@@ -317,12 +317,6 @@
             $string .= "\0";
         }
 
-        require_once LIB_PATH . 'phpseclib/autoload.php';
-        require_once LIB_PATH . 'phpseclib/bootstrap.php';
-        $loader = new \Composer\Autoload\ClassLoader();
-        $loader->addPsr4('phpseclib\\', LIB_PATH . 'phpseclib');
-        $loader->register();
-
 
         $cipher = new phpseclib\Crypt\Rijndael(phpseclib\Crypt\Common\SymmetricKey::MODE_CBC);
         $cipher->disablePadding();
@@ -358,12 +352,6 @@
         // END DEPRECATED : To be removed in future versions
 
         // COMPATIBILITY
-        require_once LIB_PATH . 'phpseclib/autoload.php';
-        require_once LIB_PATH . 'phpseclib/bootstrap.php';
-        $loader = new \Composer\Autoload\ClassLoader();
-        $loader->addPsr4('phpseclib\\', LIB_PATH . 'phpseclib');
-        $loader->register();
-
 
         $cipher = new phpseclib\Crypt\Rijndael(phpseclib\Crypt\Common\SymmetricKey::MODE_CBC);
         $cipher->disablePadding();
