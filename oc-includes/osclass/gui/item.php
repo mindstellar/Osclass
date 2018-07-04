@@ -37,6 +37,9 @@
     }
 
     $location = array();
+    if( osc_item_address() !== '' ) {
+        $location[] = osc_item_address();
+    }
     if( osc_item_city_area() !== '' ) {
         $location[] = osc_item_city_area();
     }
@@ -63,9 +66,9 @@
             </div>
             <?php if (count($location)>0) { ?>
                 <ul id="item_location">
-                    <li><strong><?php _e( 'Location' , 'bender'); ?></strong>: <?php echo implode( ', ', $location); ?></li>
+                    <li><strong><?php _e("Location", 'bender'); ?></strong>: <?php echo implode(', ', $location); ?></li>
                 </ul>
-            <?php } ?>
+            <?php }; ?>
         </div>
         <?php if(osc_is_web_user_logged_in() && osc_logged_user_id()==osc_item_user_id()) { ?>
             <p id="edit_item_view">
@@ -78,38 +81,22 @@
 
     <?php if( osc_images_enabled_at_items() ) { ?>
         <?php
-	    try {
-		    if ( osc_count_item_resources() > 0 ) {
-			    $i = 0;
-			    ?>
-                <div class="item-photos">
-                    <a href="<?php echo osc_resource_url(); ?>" class="main-photo"
-                       title="<?php _e( 'Image' , 'bender' ); ?> <?php echo $i + 1; ?> / <?php try {
-					       echo osc_count_item_resources();
-				       } catch ( Exception $e ) {
-				       } ?>">
-                        <img src="<?php echo osc_resource_url(); ?>" alt="<?php echo osc_item_title(); ?>"
-                             title="<?php echo osc_item_title(); ?>"/>
-                    </a>
-                    <div class="thumbs">
-					    <?php try {
-						    for ( $i = 0; osc_has_item_resources(); $i ++ ) { ?>
-                                <a href="<?php echo osc_resource_url(); ?>" class="fancybox" data-fancybox-group="group"
-                                   title="<?php _e( 'Image' , 'bender' ); ?> <?php echo $i + 1; ?> / <?php try {
-								       echo osc_count_item_resources();
-							       } catch ( Exception $e ) {
-							       } ?>">
-                                    <img src="<?php echo osc_resource_thumbnail_url(); ?>" width="75"
-                                         alt="<?php echo osc_item_title(); ?>" title="<?php echo osc_item_title(); ?>"/>
-                                </a>
-						    <?php }
-					    } catch ( Exception $e ) {
-					    } ?>
-                    </div>
-                </div>
-		    <?php }
-	    } catch ( Exception $e ) {
-	    } ?>
+        if( osc_count_item_resources() > 0 ) {
+            $i = 0;
+        ?>
+        <div class="item-photos">
+            <a href="<?php echo osc_resource_url(); ?>" class="main-photo" title="<?php _e('Image', 'bender'); ?> <?php echo $i+1;?> / <?php echo osc_count_item_resources();?>">
+                <img src="<?php echo osc_resource_url(); ?>" alt="<?php echo osc_item_title(); ?>" title="<?php echo osc_item_title(); ?>" />
+            </a>
+            <div class="thumbs">
+                <?php for ( $i = 0; osc_has_item_resources(); $i++ ) { ?>
+                <a href="<?php echo osc_resource_url(); ?>" class="fancybox" data-fancybox-group="group" title="<?php _e('Image', 'bender'); ?> <?php echo $i+1;?> / <?php echo osc_count_item_resources();?>">
+                    <img src="<?php echo osc_resource_thumbnail_url(); ?>" width="75" alt="<?php echo osc_item_title(); ?>" title="<?php echo osc_item_title(); ?>" />
+                </a>
+                <?php } ?>
+            </div>
+        </div>
+        <?php } ?>
     <?php } ?>
     <div id="description">
         <p><?php echo osc_item_description(); ?></p>
@@ -131,8 +118,8 @@
         <p class="contact_button">
             <?php if( !osc_item_is_expired () ) { ?>
             <?php if( !( ( osc_logged_user_id() == osc_item_user_id() ) && osc_logged_user_id() != 0 ) ) { ?>
-		            <?php if ( ( osc_reg_user_can_contact() && osc_is_web_user_logged_in() ) || ! osc_reg_user_can_contact() ) { ?>
-                    <a href="#contact" class="ui-button ui-button-middle ui-button-main resp-toogle"><?php _e('Contact seller', 'bender'); ?></a>
+                <?php     if(osc_reg_user_can_contact() && osc_is_web_user_logged_in() || !osc_reg_user_can_contact() ) { ?>
+                    <a href="#contact" class="ui-button ui-button-middle ui-button-main resp-toggle"><?php _e('Contact seller', 'bender'); ?></a>
                 <?php     } ?>
             <?php     } ?>
             <?php } ?>
@@ -182,10 +169,7 @@
                         </div>
                     <?php } ?>
                     <div class="paginate" style="text-align: right;">
-                        <?php try {
-	                        echo osc_comments_pagination();
-                        } catch ( Exception $e ) {
-                        } ?>
+                        <?php echo osc_comments_pagination(); ?>
                     </div>
                 </div>
             <?php } ?>
@@ -216,7 +200,7 @@
                                         <?php CommentForm::email_input_text(); ?>
                                     </div>
                                 </div>
-                            <?php } ?>
+                            <?php }; ?>
                             <div class="control-group">
                                 <label class="control-label" for="title"><?php _e('Title', 'bender'); ?></label>
                                 <div class="controls">

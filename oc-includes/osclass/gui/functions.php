@@ -24,8 +24,8 @@
 DEFINES
 
 */
-    define('BENDER_THEME_VERSION', '314');
-	if ( osc_get_preference( 'keyword_placeholder' , 'bender' ) == '' ) {
+    define('BENDER_THEME_VERSION', '315');
+    if( (string)osc_get_preference('keyword_placeholder', 'bender')=="" ) {
         Params::setParam('keyword_placeholder', __('ie. PHP Programmer', 'bender') ) ;
     }
     osc_register_script('fancybox', osc_current_web_theme_url('js/fancybox/jquery.fancybox.pack.js'), array('jquery'));
@@ -79,7 +79,7 @@ FUNCTIONS
             $temp_name     = WebThemes::newInstance()->getCurrentThemePath() . 'images/logo.jpg';
             if( file_exists( $temp_name ) && !$logo_prefence) {
 
-                $img = ImageProcessing::fromFile($temp_name);
+                $img = ImageResizer::fromFile($temp_name);
                 $ext = $img->getExt();
                 $logo_name .= '.'.$ext;
                 $img->saveToFile(osc_uploads_path().$logo_name);
@@ -92,7 +92,7 @@ FUNCTIONS
                 osc_set_preference('defaultLocationShowAs', 'dropdown', 'bender');
                 osc_set_preference('version', '313', 'bender');
             }
-            osc_set_preference('version', '314', 'bender');
+            osc_set_preference('version', '315', 'bender');
             osc_reset_preferences();
         }
     }
@@ -101,26 +101,15 @@ FUNCTIONS
             $current_version = osc_get_preference('version', 'bender');
             //check if current version is installed or need an update<
             if( $current_version=='' ) {
-	            try {
-		            bender_theme_update( 0 );
-	            } catch ( Exception $e ) {
-	            }
+                bender_theme_update(0);
             } else if($current_version < BENDER_THEME_VERSION){
-	            try {
-		            bender_theme_update( $current_version );
-	            } catch ( Exception $e ) {
-	            }
+                bender_theme_update($current_version);
             }
         }
     }
 
     if(!function_exists('bender_add_body_class_construct')) {
-	    /**
-	     * @param $classes
-	     *
-	     * @return array
-	     */
-	    function bender_add_body_class_construct( $classes ) {
+        function bender_add_body_class_construct($classes){
             $benderBodyClass = benderBodyClass::newInstance();
             $classes = array_merge($classes, $benderBodyClass->get());
             return $classes;
@@ -260,82 +249,60 @@ FUNCTIONS
         <?php if(!osc_is_home_page()){ echo '<div class="resp-wrapper">'; } ?>
          <?php
          //cell_3
-	        try {
-		        $total_categories = osc_count_categories();
-	        } catch ( Exception $e ) {
-	        }
-	        $col1_max_cat       = ceil($total_categories/3);
+        $total_categories   = osc_count_categories();
+        $col1_max_cat       = ceil($total_categories/3);
 
          osc_goto_first_category();
          $i      = 0;
 
-	        try {
-		        while ( osc_has_categories() ) {
-			        ?>
-			        <?php
-			        if ( $i % $col1_max_cat == 0 ) {
-				        if ( $i > 0 ) {
-					        echo '</div>';
-				        }
-				        if ( $i == 0 ) {
-					        echo '<div class="cell_3 first_cel">';
-				        } else {
-					        echo '<div class="cell_3">';
-				        }
-			        }
-			        ?>
-                    <ul class="r-list">
-                        <li>
-                            <h1>
-						        <?php
-							        $_slug = osc_category_slug();
-							        try {
-								        $_url = osc_search_category_url();
-							        } catch ( Exception $e ) {
-							        }
-							        $_name        = osc_category_name();
-							        $_total_items = osc_category_total_items();
-							        if ( osc_count_subcategories() > 0 ) { ?>
-                                        <span class="collapse resp-toogle"><i
-                                                    class="fa fa-caret-right fa-lg"></i></span>
-							        <?php } ?>
-						        <?php if ( $_total_items > 0 ) { ?>
-                                    <a class="category <?php echo $_slug; ?>"
-                                       href="<?php echo $_url; ?>"><?php echo $_name; ?></a>
-                                    <span>(<?php echo $_total_items; ?>)</span>
-						        <?php } else { ?>
-                                    <a class="category <?php echo $_slug; ?>" href="#"><?php echo $_name; ?></a>
-                                    <span>(<?php echo $_total_items; ?>)</span>
-						        <?php } ?>
-                            </h1>
-					        <?php if ( osc_count_subcategories() > 0 ) { ?>
-                                <ul>
-							        <?php while ( osc_has_subcategories() ) { ?>
-                                        <li>
-									        <?php if ( osc_category_total_items() > 0 ) { ?>
-                                                <a class="category sub-category <?php echo osc_category_slug(); ?>"
-                                                   href="<?php try {
-											           echo osc_search_category_url();
-										           } catch ( Exception $e ) {
-										           } ?>"><?php echo osc_category_name(); ?></a>
-                                                <span>(<?php echo osc_category_total_items(); ?>)</span>
-									        <?php } else { ?>
-                                                <a class="category sub-category <?php echo osc_category_slug(); ?>"
-                                                   href="#"><?php echo osc_category_name(); ?></a>
-                                                <span>(<?php echo osc_category_total_items(); ?>)</span>
-									        <?php } ?>
-                                        </li>
-							        <?php } ?>
-                                </ul>
-					        <?php } ?>
-                        </li>
-                    </ul>
-			        <?php
-			        $i ++;
-		        }
-	        } catch ( Exception $e ) {
-	        }
-	        echo '</div>';
+         while ( osc_has_categories() ) {
+         ?>
+        <?php
+            if($i%$col1_max_cat == 0){
+                if($i > 0) { echo '</div>'; }
+                if($i == 0) {
+                   echo '<div class="cell_3 first_cel">';
+                } else {
+                    echo '<div class="cell_3">';
+                }
+            }
+        ?>
+        <ul class="r-list">
+             <li>
+                 <h1>
+                    <?php
+                    $_slug      = osc_category_slug();
+                    $_url       = osc_search_category_url();
+                    $_name      = osc_category_name();
+                    $_total_items = osc_category_total_items();
+                    if ( osc_count_subcategories() > 0 ) { ?>
+                    <span class="collapse resp-toggle"><i class="fa fa-caret-right fa-lg"></i></span>
+                    <?php } ?>
+                    <?php if($_total_items > 0) { ?>
+                    <a class="category <?php echo $_slug; ?>" href="<?php echo $_url; ?>"><?php echo $_name ; ?></a> <span>(<?php echo $_total_items ; ?>)</span>
+                    <?php } else { ?>
+                    <a class="category <?php echo $_slug; ?>" href="#"><?php echo $_name ; ?></a> <span>(<?php echo $_total_items ; ?>)</span>
+                    <?php } ?>
+                 </h1>
+                 <?php if ( osc_count_subcategories() > 0 ) { ?>
+                   <ul>
+                         <?php while ( osc_has_subcategories() ) { ?>
+                             <li>
+                             <?php if( osc_category_total_items() > 0 ) { ?>
+                                 <a class="category sub-category <?php echo osc_category_slug() ; ?>" href="<?php echo osc_search_category_url() ; ?>"><?php echo osc_category_name() ; ?></a> <span>(<?php echo osc_category_total_items() ; ?>)</span>
+                             <?php } else { ?>
+                                 <a class="category sub-category <?php echo osc_category_slug() ; ?>" href="#"><?php echo osc_category_name() ; ?></a> <span>(<?php echo osc_category_total_items() ; ?>)</span>
+                             <?php } ?>
+                             </li>
+                         <?php } ?>
+                   </ul>
+                 <?php } ?>
+             </li>
+        </ul>
+        <?php
+                $i++;
+            }
+            echo '</div>';
         ?>
         <?php if(!osc_is_home_page()){ echo '</div>'; } ?>
         <?php
@@ -602,18 +569,12 @@ FUNCTIONS
             case('upload_logo'):
                 $package = Params::getFiles('logo');
                 if( $package['error'] == UPLOAD_ERR_OK ) {
-	                try {
-		                $img = ImageProcessing::fromFile( $package[ 'tmp_name' ] );
-	                } catch ( Exception $e ) {
-	                }
-	                $ext = $img->getExt();
+                    $img = ImageResizer::fromFile($package['tmp_name']);
+                    $ext = $img->getExt();
                     $logo_name     = 'bender_logo';
                     $logo_name    .= '.'.$ext;
                     $path = osc_uploads_path() . $logo_name ;
-	                try {
-		                $img->saveToFile( $path );
-	                } catch ( Exception $e ) {
-	                }
+                    $img->saveToFile($path);
 
 	                osc_set_preference('logo', $logo_name, 'bender');
 

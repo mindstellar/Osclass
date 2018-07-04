@@ -18,7 +18,7 @@
      *      You should have received a copy of the GNU Affero General Public
      * License along with this program.  If not, see <http://www.gnu.org/licenses/>.
      */
-     $category = __get( 'category' );
+     $category = (array) __get("category");
      if(!isset($category['pk_i_id']) ) {
          $category['pk_i_id'] = null;
      }
@@ -69,17 +69,11 @@
         <?php } ?>
         <div class="plugin-hooks">
             <?php
-	            try {
-		            if ( osc_search_category_id() ) {
-			            try {
-				            osc_run_hook( 'search_form' , osc_search_category_id() );
-			            } catch ( Exception $e ) {
-			            }
-		            } else {
-			            osc_run_hook( 'search_form' );
-		            }
-	            } catch ( Exception $e ) {
-	            }
+            if(osc_search_category_id()) {
+                osc_run_hook('search_form', osc_search_category_id()) ;
+            } else {
+                osc_run_hook('search_form') ;
+            }
             ?>
         </div>
         <?php
