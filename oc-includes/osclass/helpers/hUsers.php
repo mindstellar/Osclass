@@ -13,7 +13,7 @@
      * @param string $locale
      * @return mixed
      */
-    function osc_user_field($field, $locale = '' ) {
+    function osc_user_field($field, $locale = "") {
         if (View::newInstance()->_exists('users')) {
             $user = View::newInstance()->_current('users');
         } else {
@@ -34,7 +34,7 @@
             $user = View::newInstance()->_get('user');
         }
 
-        return $user;
+        return($user);
     }
 
     /**
@@ -45,15 +45,21 @@
     function osc_is_web_user_logged_in() {
         if(View::newInstance()->_exists('_loggedUser')) {
             $user = View::newInstance()->_get('_loggedUser');
-
-	        return isset( $user[ 'b_enabled' ] ) && $user[ 'b_enabled' ] == 1;
+            if(isset($user['b_enabled']) && $user['b_enabled']==1) {
+                return true;
+            } else {
+                return false;
+            }
         }
 
-        if ( Session::newInstance()->_get( 'userId' ) != '') {
-            $user = User::newInstance()->findByPrimaryKey(Session::newInstance()->_get( 'userId' ));
+        if (Session::newInstance()->_get("userId") != '') {
+            $user = User::newInstance()->findByPrimaryKey(Session::newInstance()->_get("userId"));
             View::newInstance()->_exportVariableToView('_loggedUser', $user);
-
-	        return isset( $user[ 'b_enabled' ] ) && $user[ 'b_enabled' ] == 1;
+            if(isset($user['b_enabled']) && $user['b_enabled']==1) {
+                return true;
+            } else {
+                return false;
+            }
         }
 
         //can already be a logged user or not, we'll take a look into the cookie
@@ -64,7 +70,7 @@
                 Session::newInstance()->_set('userId', $user['pk_i_id']);
                 Session::newInstance()->_set('userName', $user['s_name']);
                 Session::newInstance()->_set('userEmail', $user['s_email']);
-	            $phone = $user[ 's_phone_mobile' ] ?: $user[ 's_phone_land' ];
+                $phone = ($user['s_phone_mobile'])? $user['s_phone_mobile'] : $user['s_phone_land'];
                 Session::newInstance()->_set('userPhone', $phone);
 
                 return true;
@@ -82,7 +88,7 @@
      * @return int
      */
     function osc_logged_user_id() {
-        return (int) Session::newInstance()->_get( 'userId' );
+        return (int) Session::newInstance()->_get("userId");
     }
 
     /**
@@ -112,14 +118,11 @@
         return (string) Session::newInstance()->_get('userPhone');
     }
 
-
-	/**
-	 * Gets user's profile url
-	 *
-	 * @param null $id
-	 *
-	 * @return string
-	 */
+    /**
+     * Gets user's profile url
+     *
+     * @return string
+     */
     function osc_user_public_profile_url($id = null) {
         if($id==null) {
             $id = osc_user_id();
@@ -127,7 +130,7 @@
         if ($id != '') {
             if ( osc_rewrite_enabled() ) {
                 $user = User::newInstance()->findByPrimaryKey($id);
-                $path = osc_base_url().osc_get_preference('rewrite_user_profile') . '/' . $user['s_username'];
+                $path = osc_base_url().osc_get_preference('rewrite_user_profile')."/".$user['s_username'];
             } else {
                 $path = sprintf(osc_base_url(true) . '?page=user&action=pub_profile&id=%d', $id);
             }
@@ -137,25 +140,22 @@
         return $path;
     }
 
-
-	/**
-	 * Gets current items page from public profile
-	 *
-	 * @param string $page
-	 * @param bool   $itemsPerPage
-	 *
-	 * @return string
-	 */
+    /**
+     * Gets current items page from public profile
+     *
+     * @param int $page
+     * @return string
+     */
     function osc_user_list_items_pub_profile_url($page = '', $itemsPerPage = false) {
         $path  = osc_user_public_profile_url();
         if ($itemsPerPage) {
-            $path .= '?itemsPerPage=' . $itemsPerPage;
+            $path .= "?itemsPerPage=" . $itemsPerPage;
         }
         if($page) {
             if(!$itemsPerPage) {
-                $path .= '?iPage=' . $page;
+                $path .= "?iPage=" . $page;
             } else {
-                $path .= '&iPage=' . $page;
+                $path .= "&iPage=" . $page;
             }
         }
 
@@ -168,8 +168,8 @@
      * @return boolean
      */
     function osc_is_admin_user_logged_in() {
-        if ( Session::newInstance()->_get( 'adminId' ) != '') {
-            $admin = Admin::newInstance()->findByPrimaryKey( Session::newInstance()->_get( 'adminId' ) );
+        if (Session::newInstance()->_get("adminId") != '') {
+            $admin = Admin::newInstance()->findByPrimaryKey( Session::newInstance()->_get("adminId") );
             if(isset($admin['pk_i_id'])) {
                 return true;
             } else {
@@ -202,7 +202,7 @@
      * @return int
      */
     function osc_logged_admin_id() {
-        return (int) Session::newInstance()->_get( 'adminId' );
+        return (int) Session::newInstance()->_get("adminId");
     }
 
     /**
@@ -237,7 +237,7 @@
      * @return string
      */
     function osc_user_name() {
-        return (string) osc_user_field( 's_name' );
+        return (string) osc_user_field("s_name");
     }
 
     /**
@@ -246,7 +246,7 @@
      * @return string
      */
     function osc_user_email() {
-        return (string) osc_user_field( 's_email' );
+        return (string) osc_user_field("s_email");
     }
 
     /**
@@ -255,7 +255,7 @@
      * @return string
      */
     function osc_user_username() {
-        return (string) osc_user_field( 's_username' );
+        return (string) osc_user_field("s_username");
     }
 
     /**
@@ -264,7 +264,7 @@
      * @return string
      */
     function osc_user_regdate() {
-        return (string) osc_user_field( 'dt_reg_date' );
+        return (string) osc_user_field("dt_reg_date");
     }
 
     /**
@@ -273,7 +273,7 @@
      * @return int
      */
     function osc_user_id() {
-        return (int) osc_user_field( 'pk_i_id' );
+        return (int) osc_user_field("pk_i_id");
     }
 
     /**
@@ -282,7 +282,7 @@
      * @return string
      */
     function osc_user_access_date() {
-        return (int) osc_user_field( 'dt_access_date' );
+        return (int) osc_user_field("dt_access_date");
     }
 
     /**
@@ -291,7 +291,7 @@
      * @return string
      */
     function osc_user_access_ip() {
-        return (int) osc_user_field( 's_access_ip' );
+        return (int) osc_user_field("s_access_ip");
     }
 
     /**
@@ -300,27 +300,29 @@
      * @return string
      */
     function osc_user_website() {
-        return (string) osc_user_field( 's_website' );
+        return (string) osc_user_field("s_website");
     }
 
-
-	/**
-	 * Gets description/information of current user
-	 *
-	 * @param string $locale
-	 * @return string
-	 */
-    function osc_user_info($locale = '' ) {
-	    if ( $locale == '' ) {
-		    $locale = osc_current_user_locale();
-	    }
-        $info = osc_user_field( 's_info' , $locale);
+    /**
+     * Gets description/information of current user
+     *
+     * @return string
+     */
+    function osc_user_info($locale = "") {
+        $userId = osc_user_id();
+        if ($locale == "") {
+            $locale = osc_current_user_locale();
+        }
+        $info = osc_user_field("s_info", $locale);
+        $info = osc_apply_filter('user_info', $info, $userId, $locale);
         if($info == '') {
-            $info = osc_user_field( 's_info' , osc_language());
+            $info = osc_user_field("s_info", osc_language());
+            $info = osc_apply_filter('user_info', $info, $userId, osc_language());
             if($info=='') {
                 $aLocales = osc_get_locales();
                 foreach($aLocales as $locale) {
-                    $info = osc_user_field( 's_info' , $locale['pk_c_code']);
+                    $info = osc_user_field("s_info", $locale['pk_c_code']);
+                    $info = osc_apply_filter('user_info', $info, $userId, $locale['pk_c_code']);
                     if($info!='') {
                         break;
                     }
@@ -336,7 +338,7 @@
      * @return string
      */
     function osc_user_phone_land() {
-        return (string) osc_user_field( 's_phone_land' );
+        return (string) osc_user_field("s_phone_land");
     }
 
     /**
@@ -345,7 +347,7 @@
      * @return string
      */
     function osc_user_phone_mobile() {
-        return (string) osc_user_field( 's_phone_mobile' );
+        return (string) osc_user_field("s_phone_mobile");
     }
 
     /**
@@ -354,12 +356,12 @@
      * @return string
      */
     function osc_user_phone() {
-        if( osc_user_field( 's_phone_land' ) != '' ) {
-            return osc_user_field( 's_phone_land' );
-        } else if( osc_user_field( 's_phone_mobile' ) != '' ) {
-            return osc_user_field( 's_phone_mobile' );
+        if(osc_user_field("s_phone_land")!="") {
+            return osc_user_field("s_phone_land");
+        } else if(osc_user_field("s_phone_mobile")!="") {
+            return osc_user_field("s_phone_mobile");
         }
-        return '';
+        return "";
     }
 
     /**
@@ -368,7 +370,7 @@
      * @return string
      */
     function osc_user_country() {
-        return (string) osc_user_field( 's_country' );
+        return (string) osc_user_field("s_country");
     }
 
     /**
@@ -377,7 +379,7 @@
      * @return string
      */
     function osc_user_region() {
-        return (string) osc_user_field( 's_region' );
+        return (string) osc_user_field("s_region");
     }
 
     /**
@@ -386,7 +388,7 @@
      * @return string
      */
     function osc_user_region_id() {
-        return (string) osc_user_field( 'fk_i_region_id' );
+        return (string) osc_user_field("fk_i_region_id");
     }
 
     /**
@@ -395,7 +397,7 @@
      * @return string
      */
     function osc_user_city() {
-        return (string) osc_user_field( 's_city' );
+        return (string) osc_user_field("s_city");
     }
 
     /**
@@ -404,7 +406,7 @@
      * @return string
      */
     function osc_user_city_id() {
-        return (string) osc_user_field( 'fk_i_city_id' );
+        return (string) osc_user_field("fk_i_city_id");
     }
 
     /**
@@ -413,7 +415,7 @@
      * @return string
      */
     function osc_user_city_area() {
-        return (string) osc_user_field( 's_city_area' );
+        return (string) osc_user_field("s_city_area");
     }
 
     /**
@@ -422,16 +424,16 @@
      * @return string
      */
     function osc_user_city_area_id() {
-        return (string) osc_user_field( 'fk_i_city_area_id' );
+        return (string) osc_user_field("fk_i_city_area_id");
     }
 
     /**
      * Gets address of current user
      *
-     * @return string
+     * @return address
      */
     function osc_user_address() {
-        return (string) osc_user_field( 's_address' );
+        return (string) osc_user_field("s_address");
     }
 
     /**
@@ -440,7 +442,7 @@
      * @return string
      */
     function osc_user_zip() {
-        return (string) osc_user_field( 's_zip' );
+        return (string) osc_user_field("s_zip");
     }
 
     /**
@@ -449,7 +451,7 @@
      * @return float
      */
     function osc_user_latitude() {
-        return (float) osc_user_field( 'd_coord_lat' );
+        return (float) osc_user_field("d_coord_lat");
     }
 
     /**
@@ -458,7 +460,7 @@
      * @return float
      */
     function osc_user_longitude() {
-        return (float) osc_user_field( 'd_coord_long' );
+        return (float) osc_user_field("d_coord_long");
     }
 
     /**
@@ -467,7 +469,7 @@
      * @return float
      */
     function osc_user_is_company() {
-        return (bool) osc_user_field( 'b_company' );
+        return (bool) osc_user_field("b_company");
     }
 
     /**
@@ -476,7 +478,7 @@
      * @return int
      */
     function osc_user_items_validated() {
-        return (int) osc_user_field( 'i_items' );
+        return (int) osc_user_field("i_items");
     }
 
     /**
@@ -485,16 +487,14 @@
      * @return int
      */
     function osc_user_comments_validated() {
-        return osc_user_field( 'i_comments' );
+        return osc_user_field("i_comments");
     }
 
-
-	/**
-	 * Gets number of users
-	 *
-	 * @param string $condition
-	 * @return int
-	 */
+    /**
+     * Gets number of users
+     *
+     * @return int
+     */
     function osc_total_users($condition = '') {
         switch($condition) {
             case 'active':
@@ -515,23 +515,22 @@
     /**
      * Gets a specific field from current alert
      *
-     * @param string $field
+     * @param array $field
      * @return mixed
      */
     function osc_alert_field($field) {
         return osc_field(View::newInstance()->_current('alerts'), $field, '');
     }
 
-
-	/**
-	 * Gets next alert if there is, else return null
-	 *
-	 * @return bool
-	 */
+    /**
+     * Gets next alert if there is, else return null
+     *
+     * @return array
+     */
     function osc_has_alerts() {
         $result = View::newInstance()->_next('alerts');
         $alert = osc_alert();
-        View::newInstance()->_exportVariableToView( 'items' , isset($alert['items'])?$alert['items']:array());
+        View::newInstance()->_exportVariableToView("items", isset($alert['items'])?$alert['items']:array());
         return $result;
     }
 
@@ -543,12 +542,11 @@
         return (int) View::newInstance()->_count('alerts');
     }
 
-
-	/**
-	 * Gets current alert fomr view
-	 *
-	 * @return string|array
-	 */
+    /**
+     * Gets current alert fomr view
+     *
+     * @return array
+     */
     function osc_alert() {
         return View::newInstance()->_current('alerts');
     }
@@ -610,12 +608,11 @@
         return (bool) osc_alert_field('b_active');
     }
 
-
-	/**
-	 * Gets next user in users array
-	 *
-	 * @return bool 
-	 */
+    /**
+     * Gets next user in users array
+     *
+     * @return <type>
+     */
     function osc_prepare_user_info() {
         if ( !View::newInstance()->_exists('users') ) {
             View::newInstance()->_exportVariableToView('users', array ( User::newInstance()->findByPrimaryKey( osc_item_user_id() ) ) );
@@ -624,4 +621,4 @@
     }
 
 
-
+?>
