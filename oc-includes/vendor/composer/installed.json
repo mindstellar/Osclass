@@ -1,26 +1,26 @@
 [
     {
         "name": "ezyang/htmlpurifier",
-        "version": "dev-master",
-        "version_normalized": "9999999-dev",
+        "version": "v4.11.0",
+        "version_normalized": "4.11.0.0",
         "source": {
             "type": "git",
             "url": "https://github.com/ezyang/htmlpurifier.git",
-            "reference": "b81690c17eae5dbea7557d1f359af8dd17e9beef"
+            "reference": "83ab08bc1af7d808a9e0fbf024f1c24bfd73c0a7"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/ezyang/htmlpurifier/zipball/b81690c17eae5dbea7557d1f359af8dd17e9beef",
-            "reference": "b81690c17eae5dbea7557d1f359af8dd17e9beef",
+            "url": "https://api.github.com/repos/ezyang/htmlpurifier/zipball/83ab08bc1af7d808a9e0fbf024f1c24bfd73c0a7",
+            "reference": "83ab08bc1af7d808a9e0fbf024f1c24bfd73c0a7",
             "shasum": ""
         },
         "require": {
             "php": ">=5.2"
         },
         "require-dev": {
-            "simpletest/simpletest": "^1.1"
+            "simpletest/simpletest": "dev-master#72de02a7b80c6bb8864ef9bf66d41d2f58f826bd"
         },
-        "time": "2018-06-10T02:48:13+00:00",
+        "time": "2019-07-14T18:58:38+00:00",
         "type": "library",
         "installation-source": "source",
         "autoload": {
@@ -50,17 +50,17 @@
     },
     {
         "name": "facebook/graph-sdk",
-        "version": "5.6.2",
-        "version_normalized": "5.6.2.0",
+        "version": "5.7.0",
+        "version_normalized": "5.7.0.0",
         "source": {
             "type": "git",
             "url": "https://github.com/facebook/php-graph-sdk.git",
-            "reference": "030f8c5b9b1a6c09e71719fd638b66ea4daa2f10"
+            "reference": "2d8250638b33d73e7a87add65f47fabf91f8ad9b"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/facebook/php-graph-sdk/zipball/030f8c5b9b1a6c09e71719fd638b66ea4daa2f10",
-            "reference": "030f8c5b9b1a6c09e71719fd638b66ea4daa2f10",
+            "url": "https://api.github.com/repos/facebook/php-graph-sdk/zipball/2d8250638b33d73e7a87add65f47fabf91f8ad9b",
+            "reference": "2d8250638b33d73e7a87add65f47fabf91f8ad9b",
             "shasum": ""
         },
         "require": {
@@ -75,7 +75,7 @@
             "guzzlehttp/guzzle": "Allows for implementation of the Guzzle HTTP client",
             "paragonie/random_compat": "Provides a better CSPRNG option in PHP 5"
         },
-        "time": "2018-02-14T23:24:51+00:00",
+        "time": "2018-12-11T22:56:31+00:00",
         "type": "library",
         "extra": {
             "branch-alias": {
@@ -110,17 +110,17 @@
     },
     {
         "name": "hybridauth/hybridauth",
-        "version": "v2.11.0",
-        "version_normalized": "2.11.0.0",
+        "version": "v2.15.1",
+        "version_normalized": "2.15.1.0",
         "source": {
             "type": "git",
             "url": "https://github.com/hybridauth/hybridauth.git",
-            "reference": "1e79357867e5647343d08270b2143a05a47d7421"
+            "reference": "f713e93e620ccda31a724ad31f1e42e808e85994"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/hybridauth/hybridauth/zipball/1e79357867e5647343d08270b2143a05a47d7421",
-            "reference": "1e79357867e5647343d08270b2143a05a47d7421",
+            "url": "https://api.github.com/repos/hybridauth/hybridauth/zipball/f713e93e620ccda31a724ad31f1e42e808e85994",
+            "reference": "f713e93e620ccda31a724ad31f1e42e808e85994",
             "shasum": ""
         },
         "require": {
@@ -132,7 +132,7 @@
         "require-dev": {
             "squizlabs/php_codesniffer": "2.*"
         },
-        "time": "2018-06-11T05:39:19+00:00",
+        "time": "2019-06-11T13:22:54+00:00",
         "type": "library",
         "installation-source": "dist",
         "autoload": {
@@ -168,134 +168,18 @@
         ]
     },
     {
-        "name": "paragonie/constant_time_encoding",
-        "version": "v1.0.4",
-        "version_normalized": "1.0.4.0",
-        "source": {
-            "type": "git",
-            "url": "https://github.com/paragonie/constant_time_encoding.git",
-            "reference": "2132f0f293d856026d7d11bd81b9f4a23a1dc1f6"
-        },
-        "dist": {
-            "type": "zip",
-            "url": "https://api.github.com/repos/paragonie/constant_time_encoding/zipball/2132f0f293d856026d7d11bd81b9f4a23a1dc1f6",
-            "reference": "2132f0f293d856026d7d11bd81b9f4a23a1dc1f6",
-            "shasum": ""
-        },
-        "require": {
-            "php": "^5.3|^7"
-        },
-        "require-dev": {
-            "paragonie/random_compat": "^1.4|^2",
-            "phpunit/phpunit": "4.*|5.*",
-            "vimeo/psalm": "^0.3|^1"
-        },
-        "time": "2018-04-30T17:57:16+00:00",
-        "type": "library",
-        "installation-source": "dist",
-        "autoload": {
-            "psr-4": {
-                "ParagonIE\\ConstantTime\\": "src/"
-            }
-        },
-        "notification-url": "https://packagist.org/downloads/",
-        "license": [
-            "MIT"
-        ],
-        "authors": [
-            {
-                "name": "Paragon Initiative Enterprises",
-                "email": "security@paragonie.com",
-                "homepage": "https://paragonie.com",
-                "role": "Maintainer"
-            },
-            {
-                "name": "Steve 'Sc00bz' Thomas",
-                "email": "steve@tobtu.com",
-                "homepage": "https://www.tobtu.com",
-                "role": "Original Developer"
-            }
-        ],
-        "description": "Constant-time Implementations of RFC 4648 Encoding (Base-64, Base-32, Base-16)",
-        "keywords": [
-            "base16",
-            "base32",
-            "base32_decode",
-            "base32_encode",
-            "base64",
-            "base64_decode",
-            "base64_encode",
-            "bin2hex",
-            "encoding",
-            "hex",
-            "hex2bin",
-            "rfc4648"
-        ]
-    },
-    {
-        "name": "paragonie/random_compat",
-        "version": "v2.0.15",
-        "version_normalized": "2.0.15.0",
-        "source": {
-            "type": "git",
-            "url": "https://github.com/paragonie/random_compat.git",
-            "reference": "10bcb46e8f3d365170f6de9d05245aa066b81f09"
-        },
-        "dist": {
-            "type": "zip",
-            "url": "https://api.github.com/repos/paragonie/random_compat/zipball/10bcb46e8f3d365170f6de9d05245aa066b81f09",
-            "reference": "10bcb46e8f3d365170f6de9d05245aa066b81f09",
-            "shasum": ""
-        },
-        "require": {
-            "php": ">=5.2.0"
-        },
-        "require-dev": {
-            "phpunit/phpunit": "4.*|5.*"
-        },
-        "suggest": {
-            "ext-libsodium": "Provides a modern crypto API that can be used to generate random bytes."
-        },
-        "time": "2018-06-08T15:26:40+00:00",
-        "type": "library",
-        "installation-source": "dist",
-        "autoload": {
-            "files": [
-                "lib/random.php"
-            ]
-        },
-        "notification-url": "https://packagist.org/downloads/",
-        "license": [
-            "MIT"
-        ],
-        "authors": [
-            {
-                "name": "Paragon Initiative Enterprises",
-                "email": "security@paragonie.com",
-                "homepage": "https://paragonie.com"
-            }
-        ],
-        "description": "PHP 5.x polyfill for random_bytes() and random_int() from PHP 7",
-        "keywords": [
-            "csprng",
-            "polyfill",
-            "pseudorandom",
-            "random"
-        ]
-    },
-    {
         "name": "paypal/rest-api-sdk-php",
-        "version": "1.13.0",
-        "version_normalized": "1.13.0.0",
+        "version": "1.14.0",
+        "version_normalized": "1.14.0.0",
         "source": {
             "type": "git",
             "url": "https://github.com/paypal/PayPal-PHP-SDK.git",
-            "reference": "192e217beed14c8e75624e821fdc8ec51e2a21f5"
+            "reference": "72e2f2466975bf128a31e02b15110180f059fc04"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/paypal/PayPal-PHP-SDK/zipball/192e217beed14c8e75624e821fdc8ec51e2a21f5",
-            "reference": "192e217beed14c8e75624e821fdc8ec51e2a21f5",
+            "url": "https://api.github.com/repos/paypal/PayPal-PHP-SDK/zipball/72e2f2466975bf128a31e02b15110180f059fc04",
+            "reference": "72e2f2466975bf128a31e02b15110180f059fc04",
             "shasum": ""
         },
         "require": {
@@ -307,7 +191,7 @@
         "require-dev": {
             "phpunit/phpunit": "^4.8.35"
         },
-        "time": "2017-11-13T19:21:59+00:00",
+        "time": "2019-01-04T20:04:25+00:00",
         "type": "library",
         "installation-source": "dist",
         "autoload": {
@@ -375,17 +259,17 @@
     },
     {
         "name": "phpmailer/phpmailer",
-        "version": "v5.2.26",
-        "version_normalized": "5.2.26.0",
+        "version": "v5.2.27",
+        "version_normalized": "5.2.27.0",
         "source": {
             "type": "git",
             "url": "https://github.com/PHPMailer/PHPMailer.git",
-            "reference": "70362997bda4376378be7d92d81e2200550923f7"
+            "reference": "dde1db116511aa4956389d75546c5be4c2beb2a6"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/PHPMailer/PHPMailer/zipball/70362997bda4376378be7d92d81e2200550923f7",
-            "reference": "70362997bda4376378be7d92d81e2200550923f7",
+            "url": "https://api.github.com/repos/PHPMailer/PHPMailer/zipball/dde1db116511aa4956389d75546c5be4c2beb2a6",
+            "reference": "dde1db116511aa4956389d75546c5be4c2beb2a6",
             "shasum": ""
         },
         "require": {
@@ -415,7 +299,7 @@
         "suggest": {
             "league/oauth2-google": "Needed for Google XOAUTH2 authentication"
         },
-        "time": "2017-11-04T09:26:05+00:00",
+        "time": "2018-11-15T22:32:31+00:00",
         "type": "library",
         "installation-source": "dist",
         "autoload": {
@@ -454,23 +338,21 @@
     },
     {
         "name": "phpseclib/phpseclib",
-        "version": "dev-master",
-        "version_normalized": "9999999-dev",
+        "version": "2.0.21",
+        "version_normalized": "2.0.21.0",
         "source": {
             "type": "git",
             "url": "https://github.com/phpseclib/phpseclib.git",
-            "reference": "383e4e73a7f402daf8389f045cb54eaa99e21d55"
+            "reference": "9f1287e68b3f283339a9f98f67515dd619e5bf9d"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/phpseclib/phpseclib/zipball/383e4e73a7f402daf8389f045cb54eaa99e21d55",
-            "reference": "383e4e73a7f402daf8389f045cb54eaa99e21d55",
+            "url": "https://api.github.com/repos/phpseclib/phpseclib/zipball/9f1287e68b3f283339a9f98f67515dd619e5bf9d",
+            "reference": "9f1287e68b3f283339a9f98f67515dd619e5bf9d",
             "shasum": ""
         },
         "require": {
-            "paragonie/constant_time_encoding": "^1",
-            "paragonie/random_compat": "^1.4|^2.0",
-            "php": ">=5.6.1"
+            "php": ">=5.3.3"
         },
         "require-dev": {
             "phing/phing": "~2.7",
@@ -484,7 +366,7 @@
             "ext-mcrypt": "Install the Mcrypt extension in order to speed up a few other cryptographic operations.",
             "ext-openssl": "Install the OpenSSL extension in order to speed up a wide variety of cryptographic operations."
         },
-        "time": "2018-05-27T16:34:32+00:00",
+        "time": "2019-07-12T12:53:49+00:00",
         "type": "library",
         "installation-source": "source",
         "autoload": {
@@ -502,28 +384,28 @@
         "authors": [
             {
                 "name": "Jim Wigginton",
-                "email": "terrafrost@php.net",
-                "role": "Lead Developer"
+                "role": "Lead Developer",
+                "email": "terrafrost@php.net"
             },
             {
                 "name": "Patrick Monnerat",
-                "email": "pm@datasphere.ch",
-                "role": "Developer"
+                "role": "Developer",
+                "email": "pm@datasphere.ch"
             },
             {
                 "name": "Andreas Fischer",
-                "email": "bantu@phpbb.com",
-                "role": "Developer"
+                "role": "Developer",
+                "email": "bantu@phpbb.com"
             },
             {
                 "name": "Hans-Jürgen Petrich",
-                "email": "petrich@tronic-media.com",
-                "role": "Developer"
+                "role": "Developer",
+                "email": "petrich@tronic-media.com"
             },
             {
                 "name": "Graham Campbell",
-                "email": "graham@alt-three.com",
-                "role": "Developer"
+                "role": "Developer",
+                "email": "graham@alt-three.com"
             }
         ],
         "description": "PHP Secure Communications Library - Pure-PHP implementations of RSA, AES, SSH2, SFTP, X.509 etc.",
@@ -550,23 +432,23 @@
     },
     {
         "name": "psr/log",
-        "version": "1.0.2",
-        "version_normalized": "1.0.2.0",
+        "version": "1.1.0",
+        "version_normalized": "1.1.0.0",
         "source": {
             "type": "git",
             "url": "https://github.com/php-fig/log.git",
-            "reference": "4ebe3a8bf773a19edfe0a84b6585ba3d401b724d"
+            "reference": "6c001f1daafa3a3ac1d8ff69ee4db8e799a654dd"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/php-fig/log/zipball/4ebe3a8bf773a19edfe0a84b6585ba3d401b724d",
-            "reference": "4ebe3a8bf773a19edfe0a84b6585ba3d401b724d",
+            "url": "https://api.github.com/repos/php-fig/log/zipball/6c001f1daafa3a3ac1d8ff69ee4db8e799a654dd",
+            "reference": "6c001f1daafa3a3ac1d8ff69ee4db8e799a654dd",
             "shasum": ""
         },
         "require": {
             "php": ">=5.3.0"
         },
-        "time": "2016-10-10T12:19:37+00:00",
+        "time": "2018-11-20T15:27:04+00:00",
         "type": "library",
         "extra": {
             "branch-alias": {

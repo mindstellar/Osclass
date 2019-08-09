@@ -1,9 +1,9 @@
 {
     "require" : {
         "hybridauth/hybridauth" : "~2.9",
-        "ezyang/htmlpurifier": "dev-master",
+        "ezyang/htmlpurifier": "4.11.0",
         "phpmailer/phpmailer": "5.2.x",
         "pclzip/pclzip": "2.8.2",
-        "phpseclib/phpseclib": "dev-master#383e4e73a7f402daf8389f045cb54eaa99e21d55"
+        "phpseclib/phpseclib": "2.0.21"
     }
 }
