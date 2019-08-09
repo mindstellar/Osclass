@@ -105,11 +105,7 @@
         /**
          * Remove entry with id $id
          *
-<<<<<<< HEAD
-         * @param $id
-=======
          * @param string $id
->>>>>>> 45d2453c5dd429be0a39d0dc2cc1bef11e19bc98
          */
         public function remove_menu( $id )
         {
@@ -140,16 +136,7 @@
         {
             if (count($this->nodes) > 0) {
                 echo '<div id="header" class="navbar"><div class="header-wrapper">';
-<<<<<<< HEAD
-                foreach( $this->nodes as $value ) {
-                    $meta = '';
-                    if( isset($value->meta) ) {
-	                    foreach ( $value->meta as $k => $v ) {
-		                    $meta .= $k . '="' . $v . '" ';
-	                    }
-                    }
-                    echo '<a id="osc_toolbar_'.$value->id.'" '.$meta.' href="'.$value->href.'" ' . ( isset($value->target) ? 'target="' . $value->target . '"' : '') . '>' . $value->title . '</a>';
-=======
+
                 foreach($this->nodes as $value) {
                     $meta = "";
                     if (isset($value->meta)) {
@@ -172,15 +159,10 @@
                         }
                         echo '</ul></nav>';
                     }
-                    echo '</div>';                     
->>>>>>> 45d2453c5dd429be0a39d0dc2cc1bef11e19bc98
+                    echo '</div>';
                 }
                 osc_run_hook('render_admintoolbar');
                 echo '<div style="clear: both;"></div></div></div>';
             }
         }
     }
-<<<<<<< HEAD
-=======
-?>
->>>>>>> 45d2453c5dd429be0a39d0dc2cc1bef11e19bc98
