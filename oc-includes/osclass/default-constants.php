@@ -16,6 +16,10 @@
  * limitations under the License.
  */
 
+    if (!defined('OSCLASS_VERSION')){
+		define('OSCLASS_VERSION', '3.8.0');
+	} 
+
     if( !defined('MULTISITE') ) {
         define('MULTISITE', 0);
     }

@@ -23,6 +23,7 @@ oc-content/uploads/*
 # themes
 oc-content/themes/*
 !oc-content/themes/modern/
+!oc-content/themes/bender
 
 # plugins
 oc-content/plugins/*
