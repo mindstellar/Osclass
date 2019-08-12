@@ -4,6 +4,6 @@
         "ezyang/htmlpurifier": "4.11.0",
         "phpmailer/phpmailer": "5.2.x",
         "pclzip/pclzip": "2.8.2",
-        "phpseclib/phpseclib": "2.0.21"
+        "phpseclib/phpseclib": "dev-master#6c1befa"
     }
 }
