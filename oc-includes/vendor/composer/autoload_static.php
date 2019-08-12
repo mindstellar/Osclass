@@ -22,6 +22,10 @@ class ComposerStaticInit6b0b4fafd693b0d76015f213169bd812
         array (
             'ioncube\\phpOpensslCryptor\\' => 26,
         ),
+        'R' => 
+        array (
+            'ReCaptcha\\' => 10,
+        ),
         'P' => 
         array (
             'Psr\\Log\\' => 8,
@@ -41,6 +45,10 @@ class ComposerStaticInit6b0b4fafd693b0d76015f213169bd812
         'ioncube\\phpOpensslCryptor\\' => 
         array (
             0 => __DIR__ . '/..' . '/ioncube/php-openssl-cryptor/src',
+        ),
+        'ReCaptcha\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/google/recaptcha/src/ReCaptcha',
         ),
         'Psr\\Log\\' => 
         array (

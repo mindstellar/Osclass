@@ -89,18 +89,8 @@
         <form name="settings_form" action="<?php echo osc_admin_base_url(true); ?>" method="post">
             <input type="hidden" name="page" value="settings" />
             <input type="hidden" name="action" value="recaptcha_post" />
+            <input type="hidden" id="recaptchaVersion" name="recaptchaVersion" value="2" />
             <fieldset>
-                <div class="form-horizontal">
-                <div class="form-row">
-                    <div class="form-label"><?php _e('Use reCaptcha v2'); ?></div>
-                    <div class="form-controls">
-                        <div class="form-label-checkbox">
-                            <input type="checkbox" id="recaptchaVersion" name="recaptchaVersion" value="2" <?php echo ( osc_recaptcha_version()=="2" ? 'checked="checked"' : '' ); ?> />
-                            <label for="recaptchaVersion"><?php _e('Use reCaptcha v2.'); ?></label>
-                            <span class="help-box"><?php printf(__('If you were using v1, you need to <a href="%s">re-generate your reCaptcha keys</a>.'), 'https://www.google.com/recaptcha/admin'); ?></span>
-                        </div>
-                    </div>
-                </div>
                 <div class="form-row">
                     <div class="form-label"><?php _e('Site key'); ?></div>
                     <div class="form-controls">
