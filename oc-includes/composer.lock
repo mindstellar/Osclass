@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "02d460629dff84c62940733a7f0d979e",
+    "content-hash": "9de608ffc9d452d98dcda1d26e6afc42",
     "packages": [
         {
             "name": "ezyang/htmlpurifier",
@@ -167,6 +167,29 @@
                 "yahoo"
             ],
             "time": "2019-06-11T13:22:54+00:00"
+        },
+        {
+            "name": "ioncube/php-openssl-cryptor",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/ioncube/php-openssl-cryptor",
+                "reference": "f62397b"
+            },
+            "require": {
+                "ext-openssl": "*"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "ioncube\\phpOpensslCryptor\\": "src/"
+                }
+            },
+            "license": [
+                "MIT"
+            ],
+            "description": "Simple to use class for encrypting/decrypting using the PHP Openssl library.",
+            "time": "2017-12-05T17:15:57+00:00"
         },
         {
             "name": "paragonie/constant_time_encoding",
@@ -589,7 +612,8 @@
     "aliases": [],
     "minimum-stability": "stable",
     "stability-flags": {
-        "phpseclib/phpseclib": 20
+        "phpseclib/phpseclib": 20,
+        "ioncube/php-openssl-cryptor": 20
     },
     "prefer-stable": false,
     "prefer-lowest": false,

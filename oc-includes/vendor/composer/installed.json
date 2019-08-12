@@ -168,6 +168,31 @@
         ]
     },
     {
+        "name": "ioncube/php-openssl-cryptor",
+        "version": "dev-master",
+        "version_normalized": "9999999-dev",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/ioncube/php-openssl-cryptor",
+            "reference": "f62397b"
+        },
+        "require": {
+            "ext-openssl": "*"
+        },
+        "time": "2017-12-05T17:15:57+00:00",
+        "type": "library",
+        "installation-source": "source",
+        "autoload": {
+            "psr-4": {
+                "ioncube\\phpOpensslCryptor\\": "src/"
+            }
+        },
+        "license": [
+            "MIT"
+        ],
+        "description": "Simple to use class for encrypting/decrypting using the PHP Openssl library."
+    },
+    {
         "name": "paragonie/constant_time_encoding",
         "version": "v1.0.4",
         "version_normalized": "1.0.4.0",

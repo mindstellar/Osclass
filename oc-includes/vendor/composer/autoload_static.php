@@ -18,6 +18,10 @@ class ComposerStaticInit6b0b4fafd693b0d76015f213169bd812
         array (
             'phpseclib\\' => 10,
         ),
+        'i' => 
+        array (
+            'ioncube\\phpOpensslCryptor\\' => 26,
+        ),
         'P' => 
         array (
             'Psr\\Log\\' => 8,
@@ -33,6 +37,10 @@ class ComposerStaticInit6b0b4fafd693b0d76015f213169bd812
         'phpseclib\\' => 
         array (
             0 => __DIR__ . '/..' . '/phpseclib/phpseclib/phpseclib',
+        ),
+        'ioncube\\phpOpensslCryptor\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/ioncube/php-openssl-cryptor/src',
         ),
         'Psr\\Log\\' => 
         array (

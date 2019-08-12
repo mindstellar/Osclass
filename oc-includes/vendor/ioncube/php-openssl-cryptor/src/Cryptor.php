@@ -23,6 +23,8 @@
  * OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
+namespace ioncube\phpOpensslCryptor;
+
 class Cryptor
 {
     private $cipher_algo;
@@ -40,7 +42,7 @@ class Cryptor
      * @param string $hash_algo   Key hashing algorithm.
      * @param [type] $fmt         Format of the encrypted data.
      */
-    public function __construct($cipher_algo = CIPHER_ALGO, $hash_algo = HASH_ALGO, $fmt = Cryptor::FORMAT_B64)
+    public function __construct($cipher_algo = 'aes-256-ctr', $hash_algo = 'sha256', $fmt = Cryptor::FORMAT_B64)
     {
         $this->cipher_algo = $cipher_algo;
         $this->hash_algo = $hash_algo;
@@ -74,7 +76,10 @@ class Cryptor
         }
 
         // Build an initialisation vector
-        $iv = osc_random_string($this->iv_num_bytes);
+        $iv = openssl_random_pseudo_bytes($this->iv_num_bytes, $isStrongCrypto);
+        if (!$isStrongCrypto) {
+            throw new \Exception("Cryptor::encryptString() - Not a strong key");
+        }
 
         // Hash the key
         $keyhash = openssl_digest($key, $this->hash_algo, true);
@@ -98,8 +103,7 @@ class Cryptor
         }
         else if ($fmt == Cryptor::FORMAT_HEX)
         {
-            $tmp = unpack('H*', $res);
-            $res = $tmp[1];
+            $res = unpack('H*', $res)[1];
         }
 
         return $res;
@@ -134,7 +138,8 @@ class Cryptor
         // and do an integrity check on the size.
         if (strlen($raw) < $this->iv_num_bytes)
         {
-            throw new \Exception('Cryptor::decryptString() - ' . 'data length ' . strlen($raw) . " is less than iv length {$this->iv_num_bytes}");
+            throw new \Exception('Cryptor::decryptString() - ' .
+                'data length ' . strlen($raw) . " is less than iv length {$this->iv_num_bytes}");
         }
 
         // Extract the initialisation vector and encrypted data
@@ -152,6 +157,7 @@ class Cryptor
         {
             throw new \Exception('Cryptor::decryptString - decryption failed: ' . openssl_error_string());
         }
+
         return $res;
     }
 
@@ -180,18 +186,4 @@ class Cryptor
         $c = new Cryptor();
         return $c->decryptString($in, $key, $fmt);
     }
-
-    /**
-     * Static convenience method for knowing if we could use this or not
-     * @return bool
-     */
-    public static function Usable()
-    {
-        return (function_exists('openssl_digest') &&
-        function_exists('openssl_encrypt') &&
-        function_exists('openssl_decrypt') &&
-        in_array(CIPHER_ALGO, openssl_get_cipher_methods(true)) &&
-        in_array(HASH_ALGO, openssl_get_md_methods(true)));
-    }
-
 }
