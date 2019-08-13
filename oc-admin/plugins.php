@@ -255,11 +255,6 @@
                     exit;
                 break;
                 default:
-
-                    if(Params::getParam('checkUpdated') != '') {
-                        osc_admin_toolbar_update_plugins(true);
-                    }
-
                     if( Params::getParam('iDisplayLength') == '' ) {
                         Params::setParam('iDisplayLength', 25 );
                     }
