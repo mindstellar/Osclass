@@ -83,14 +83,6 @@
                 form.submit();
             }
         });
-
-        $("#market_disconnect").on('click', function() {
-            var x = confirm('<?php _e('You are going to be disconnected from the Market, all your plugins and themes downloaded will remain installed and configured but you will not be able to update or download new plugins and themes. Are you sure?'); ?>');
-            if(x) {
-                window.location = '<?php echo osc_admin_base_url(true); ?>?page=settings&action=market_disconnect&<?php echo osc_csrf_token_url(); ?>';
-            }
-        })
-
     });
 
     function custom_date(date_format) {
@@ -320,76 +312,6 @@
                                 </label>
                             </div>
                             <span class="help-box"><?php _e('It is <b>recommended</b> to have this option enabled, because some features require it.'); ?></span>
-                        </div>
-                    </div>
-                    <?php if(osc_market_api_connect()!='') { ?>
-                    <h2 class="render-title separate-top"><?php _e('Market Settings'); ?></h2>
-                    <div class="form-row">
-                        <div class="form-label"><?php _e('Connect ID'); ?></div>
-                        <div class="form-controls">
-                            <div class="form-label-checkbox">
-                                <label>
-                                    <?php echo osc_market_api_connect(); ?>
-                                </label>
-                            </div>
-                            <span class="help-box"><a href="#" id="market_disconnect"><?php _e('Disconnect from market.osclass.org'); ?></a></span>
-                        </div>
-                    </div>
-                    <?php }; ?>
-                    <h2 class="render-title separate-top"><?php _e('Software updates'); ?></h2>
-                    <div class="form-row">
-                        <div class="form-label"><?php _e('Core updates'); ?></div>
-                        <div class="form-controls">
-                            <select name="auto_update[]" id="auto_update_core">
-                                <option value="disabled" ><?php _e('Disabled'); ?></option>
-                                <option value="branch" <?php if(strpos(osc_auto_update(),'branch')!==false) { ?>selected="selected"<?php } ?>><?php _e('Branch - big changes'); ?></option>
-                                <option value="major" <?php if(strpos(osc_auto_update(),'major')!==false) { ?>selected="selected"<?php } ?>><?php _e('Major - new features'); ?></option>
-                                <option value="minor" <?php if(strpos(osc_auto_update(),'minor')!==false) { ?>selected="selected"<?php } ?>><?php _e('Minor - bug fixes'); ?></option>
-                            </select>
-                        </div>
-                    </div>
-                    <div class="form-row">
-                        <div class="form-label"><?php _e('Plugin updates'); ?></div>
-                        <div class="form-controls">
-                            <div class="form-label-checkbox">
-                                <label>
-                                    <input type="checkbox" <?php echo ( (strpos(osc_auto_update(),'plugins')!==false) ? 'checked="checked"' : '' ); ?> name="auto_update[]" value="plugins" />
-                                    <?php _e('Allow auto-updates plugins'); ?>
-                                </label>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="form-row">
-                        <div class="form-label"><?php _e('Theme updates'); ?></div>
-                        <div class="form-controls">
-                            <div class="form-label-checkbox">
-                                <label>
-                                    <input type="checkbox" <?php echo ( (strpos(osc_auto_update(),'themes')!==false) ? 'checked="checked"' : '' ); ?> name="auto_update[]" value="themes" />
-                                    <?php _e('Allow auto-updates of themes'); ?>
-                                </label>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="form-row">
-                        <div class="form-label"><?php _e('Language updates'); ?></div>
-                        <div class="form-controls">
-                            <div class="form-label-checkbox">
-                                <label>
-                                    <input type="checkbox" <?php echo ( (strpos(osc_auto_update(),'languages')!==false) ? 'checked="checked"' : '' ); ?> name="auto_update[]" value="languages" />
-                                    <?php _e('Allow auto-updates of languages'); ?>
-                                </label>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="form-row">
-                        <div class="form-label"><?php _e('Market external sources'); ?></div>
-                        <div class="form-controls">
-                            <div class="form-label-checkbox">
-                                <label>
-                                    <input type="checkbox" <?php echo ( osc_market_external_sources() ? 'checked="checked"' : '' ); ?> name="market_external_sources" />
-                                    <?php _e('Allow updates and installations of non-official plugins and themes'); ?>
-                                </label>
-                            </div>
                         </div>
                     </div>
                     <div class="form-row">
