@@ -39,9 +39,6 @@
     <div id="upload-plugins">
         <div class="form-horizontal">
         <?php if( is_writable( osc_plugins_path() ) ) { ?>
-            <div class="flashmessage flashmessage-info flashmessage-inline" style="display:block;">
-                <p class="info"><?php printf( __('Download more plugins at %s'), '<a href="'.osc_admin_base_url(true) . '?page=market&action=plugins">Market</a>'); ?></p>
-            </div>
             <form class="separate-top" action="<?php echo osc_admin_base_url(true); ?>" method="post" enctype="multipart/form-data">
                 <input type="hidden" name="action" value="add_post" />
                 <input type="hidden" name="page" value="plugins" />
