@@ -16,6 +16,10 @@
  * limitations under the License.
  */
 
+    if (!defined('OSCLASS_VERSION')){
+		define('OSCLASS_VERSION', '3.8.0');
+	} 
+
     if( !defined('MULTISITE') ) {
         define('MULTISITE', 0);
     }
@@ -90,14 +94,6 @@
 
     if( !defined('OSC_MEMORY_LIMIT') ) {
         define('OSC_MEMORY_LIMIT', '32M');
-    }
-
-    if( !defined('CIPHER_ALGO') ) {
-        define('CIPHER_ALGO', 'aes-256-ctr');
-    }
-
-    if( !defined('HASH_ALGO') ) {
-        define('HASH_ALGO', 'sha256');
     }
 
 	if ( function_exists( 'memory_get_usage' ) && ( (int) @ini_get( 'memory_limit' ) < abs( (int) OSC_MEMORY_LIMIT ) ) ) {

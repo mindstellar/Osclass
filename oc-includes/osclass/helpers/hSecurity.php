@@ -23,7 +23,9 @@
     * @author Osclass
     */
 
-    if(!defined('BCRYPT_COST')) { define('BCRYPT_COST', 15); }
+	use ioncube\phpOpensslCryptor\Cryptor;
+
+	if(!defined( 'BCRYPT_COST')) { define( 'BCRYPT_COST', 15); }
 
     /**
      * Creates a random password.
@@ -231,19 +233,17 @@
         return false;
     }
 
-    /*
-     * Verify an user's password
-     *
-     * @param $password plain-text
-     * @hash bcrypt/sha1
-     * @since 3.3
-     * @return boolean
-     */
+
 	/**
-	 * @param $password
+	 * Verify an user's password
+	 *
+	 * @param $password plain-text
 	 * @param $hash
 	 *
 	 * @return bool
+	 * @throws \Exception
+	 * @hash  bcrypt/sha1
+	 * @since 3.3
 	 */
 	function osc_verify_password( $password , $hash ) {
         if(version_compare(PHP_VERSION, '5.3.7')>=0) {
@@ -258,17 +258,15 @@
         return (sha1($password)==$hash);
     }
 
-    /*
-     * Hash a password in available method (bcrypt/sha1)
-     *
-     * @param $password plain-text
-     * @since 3.3
-     * @return string hashed password
-     */
+
 	/**
-	 * @param $password
+	 * Hash a password in available method (bcrypt/sha1)
 	 *
-	 * @return bool|false|string
+	 * @param $password plain-text
+	 *
+	 * @return string hashed password
+	 * @throws \Exception
+	 * @since 3.3
 	 */
 	function osc_hash_password( $password ) {
         if(version_compare(PHP_VERSION, '5.3.7')>=0) {
@@ -296,7 +294,7 @@
         osc_set_alert_public_key();  // public key
         $key = hash( 'sha256' , osc_get_alert_private_key(), true);
 
-        if(Cryptor::Usable()) {
+		if(function_exists('openssl_digest') && function_exists('openssl_encrypt') && function_exists('openssl_decrypt') && in_array('aes-256-ctr', openssl_get_cipher_methods(true)) && in_array('sha256', openssl_get_md_methods(true))) {
             return Cryptor::Encrypt($string, $key, 0);
         }
 
@@ -335,7 +333,7 @@
 	function osc_decrypt_alert( $string ) {
         $key = hash( 'sha256' , osc_get_alert_private_key(), true);
 
-        if(Cryptor::Usable()) {
+		if(function_exists('openssl_digest') && function_exists('openssl_encrypt') && function_exists('openssl_decrypt') && in_array('aes-256-ctr', openssl_get_cipher_methods(true)) && in_array('sha256', openssl_get_md_methods(true))) {
             return trim(substr(Cryptor::Decrypt($string, $key, 0), 32));
         }
 

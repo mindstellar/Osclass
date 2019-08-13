@@ -9,20 +9,21 @@
 sftp-config*
 
 # Config Osclass
-config.php
-_config.php
+/config.php
+/_config.php
 oc-includes/osclass/t/config.php
 .maintenance
 
 # oc-content
-oc-content/debug*.log
-oc-content/queries.log
-oc-content/explain_queries.log
-oc-content/uploads/*
+/oc-content/debug*.log
+/oc-content/queries.log
+/oc-content/explain_queries.log
+/oc-content/uploads/*
 
 # themes
 oc-content/themes/*
 !oc-content/themes/modern/
+!oc-content/themes/bender
 
 # plugins
 oc-content/plugins/*
@@ -36,7 +37,6 @@ oc-content/plugins/*
 
 # Others
 .htaccess
-dist
 nbproject/
 .sass-cache
 package-lock.json
@@ -48,3 +48,4 @@ node_modules
 oc-includes/osclass/t/config.php
 oc-includes/simpletest/test/osclass/custom_config.php
 composer.phar
+osclass_latest.zip
