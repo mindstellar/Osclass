@@ -3,7 +3,8 @@ This fork just removes all Osclass Market connections, including auto-upgrade of
 # Status report
 
 - Fully successful script installation (removed location insert, instead showing message to download and import manually; removed "connect with Market").
-- No errors when opening admin panel (removed Market from menus and header).
+- No errors when opening admin panel (removed Market from menus and header, removed upgrade from menus).
+- No errors when importing, installing and enabling a plugin.
 
 # Osclass
 
