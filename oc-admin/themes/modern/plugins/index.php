@@ -95,14 +95,6 @@
 <?php osc_current_admin_theme_path( 'parts/header.php' ); ?>
 <div id="tabs" class="ui-osc-tabs ui-tabs-right">
     <ul>
-        <?php
-            $aPluginsToUpdate = json_decode( osc_get_preference('plugins_to_update') );
-            $bPluginsToUpdate = is_array($aPluginsToUpdate)?true:false;
-            if($bPluginsToUpdate && count($aPluginsToUpdate) > 0) {
-                $tab_index = 0;
-        ?>
-        <li><a href="#update-plugins"><?php _e('Updates'); ?></a></li>
-        <?php } ?>
         <li><a href="#upload-plugins"><?php _e('Available plugins'); ?></a></li>
     </ul>
     <div id="upload-plugins">
@@ -161,57 +153,7 @@
                 </select>
             </form>
         </div>
-
-
     </div>
-    <?php if($bPluginsToUpdate && count($aPluginsToUpdate) > 0) { ?>
-    <div id="update-plugins">
-        <?php
-            $aIndex = array();
-            if($bPluginsToUpdate) {
-                $array_aux  = array_keys($aData['aaInfo']);
-
-                foreach($aPluginsToUpdate as $slug) {
-                    $key = array_search($slug, $array_aux, true);
-                    if($key!==false) {
-                        $aIndex[]   = $aData['aaData'][$key];
-                    }
-                }
-            }
-        ?>
-        <table class="table" cellpadding="0" cellspacing="0">
-            <thead>
-                <tr>
-                    <th><?php _e('Name'); ?></th>
-                    <th colspan=""><?php _e('Description'); ?></th>
-                    <th> &nbsp; </th>
-                    <th> &nbsp; </th>
-                    <th> &nbsp; </th>
-                    <th> &nbsp; </th>
-                </tr>
-            </thead>
-            <tbody>
-            <?php if(count($aIndex)>0) : ?>
-            <?php foreach( $aIndex as $array) : ?>
-                <tr>
-                <?php foreach($array as $key => $value) : ?>
-                    <td>
-                    <?php echo $value; ?>
-                    </td>
-                <?php endforeach; ?>
-                </tr>
-            <?php endforeach;?>
-            <?php else : ?>
-            <tr>
-                <td colspan="6" class="text-center">
-                <p><?php _e('No data available in table'); ?></p>
-                </td>
-            </tr>
-            <?php endif; ?>
-            </tbody>
-        </table>
-    </div>
-    <?php } ?>
 </div>
 <form id="dialog-uninstall" method="get" action="<?php echo osc_admin_base_url(true); ?>" class="has-form-actions hide">
     <input type="hidden" name="page" value="plugins" />
