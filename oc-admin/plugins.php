@@ -289,8 +289,6 @@
                     $aInfo = array();
                     $max = ($start+$limit);
                     if($max > $count) $max = $count;
-                    $aPluginsToUpdate = json_decode( osc_get_preference('plugins_to_update') );
-                    $bPluginsToUpdate = is_array($aPluginsToUpdate)?true:false;
                     for($i = $start; $i < $max; $i++) {
                         $plugin = $aPlugin[$i];
                         $row   = array();
@@ -308,11 +306,6 @@
                         // prepare row 2
                         $sUpdate = '';
                         // get plugins to update from t_preference
-                        if($bPluginsToUpdate) {
-                            if(in_array(@$pInfo['plugin_update_uri'],$aPluginsToUpdate )){
-                                $sUpdate = '<a class="market_update market-popup" href="#' . htmlentities($pInfo['plugin_update_uri']) . '">' . __("There's a new update available") . '</a>';
-                            }
-                        }
                         // prepare row 4
                         $sConfigure = '';
                         if( isset($active_plugins[$plugin . '_configure']) ) {
