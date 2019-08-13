@@ -45,28 +45,12 @@
 	$json_message[ 'email_status' ] = $result[ 'email_status' ];
 	$json_message[ 'password' ]     = $result[ 's_password' ];
 
-// create market.osclass.org account
-	if ( Params::getParam( 'createmarketaccount' ) != '' && Params::getParam( 'createmarketaccount' ) == 1 ) {
-		create_market_account();
-	}
-
 	if ( $_POST[ 'skip-location-input' ] == 0 && $_POST[ 'country-input' ] !== 'skip' ) {
 		$msg                      = install_locations();
 		$json_message[ 'status' ] = $msg;
 	}
 
 	echo json_encode( $json_message );
-
-	function create_market_account() {
-		$url  = osc_market_url() . 'create_account/';
-		$json = osc_file_get_contents(
-			$url
-			, array (
-				's_email' => Params::getParam( 'email' )
-			)
-		);
-	}
-
 
 	/**
 	 * @return array
