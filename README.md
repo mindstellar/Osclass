@@ -1,3 +1,5 @@
+This fork just removes all Osclass Market connections, including auto-upgrade of the script as well as plugins, themes and languages update functions.
+
 # Osclass
 
 **This repo is a fork of official [Osclass][original-code] repository.**
