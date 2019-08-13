@@ -23,11 +23,6 @@
         {
             switch($this->action) {
                 case('check_updates'):
-                    osc_admin_toolbar_update_themes(true);
-                    osc_admin_toolbar_update_plugins(true);
-
-                    osc_add_flash_ok_message( _m('Last check') . ':   ' . date("Y-m-d H:i") , 'admin');
-
                     $this->redirectTo(osc_admin_base_url(true) . '?page=settings');
                 break;
                 case('update'):
