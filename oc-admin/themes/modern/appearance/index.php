@@ -45,7 +45,7 @@
     osc_add_hook('admin_header','customHead', 10);
 
     function addHelp() {
-        echo '<p>' . sprintf(__("Change your site's look and feel by activating a theme among those available. You can download new themes from the <a href=\"%s\">market</a>. <strong>Be careful</strong>: if your theme has been customized, you'll lose all changes if you change to a new theme."), osc_admin_base_url(true) . '?page=market&action=themes') . '</p>';
+        echo '<p>' . __("Change your site's look and feel by activating a theme among those available. <strong>Be careful</strong>: if your theme has been customized, you'll lose all changes if you change to a new theme.") . '</p>';
     }
     osc_add_hook('help_box','addHelp');
 
@@ -69,7 +69,6 @@
     <div class="appearance">
         <div id="tabs" class="ui-osc-tabs ui-tabs-right">
             <ul>
-                <li><a href="#market" onclick="window.location = '<?php echo osc_admin_base_url(true) . '?page=market&action=themes'; ?>'; return false; "><?php _e('Market'); ?></a></li>
                 <li><a href="#available-themes"><?php _e('Available themes'); ?></a></li>
             </ul>
             <div id="available-themes" class="ui-osc-tabs-panel">
