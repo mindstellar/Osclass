@@ -314,11 +314,6 @@
                                             $this->redirectTo(osc_admin_base_url(true) . '?page=languages');
                 break;
                 default:
-
-                                            if(Params::getParam('checkUpdated') != '') {
-                                                osc_admin_toolbar_update_languages(true);
-                                            }
-
                                             if(Params::getParam("action")!="") {
                                                 osc_run_hook("language_bulk_".Params::getParam("action"), Params::getParam('id'));
                                             }
@@ -347,10 +342,6 @@
                                             if( ($start+$limit ) > $count ) {
                                                 $displayRecords = ($start+$limit) - $count;
                                             }
-                                            // ----
-                                            $aLanguagesToUpdate = json_decode( osc_get_preference('languages_to_update') );
-                                            $bLanguagesToUpdate = is_array($aLanguagesToUpdate)?true:false;
-                                            // ----
                                             $aData = array();
                                             $max = ($start+$limit);
                                             if($max > $count) $max = $count;
@@ -371,15 +362,7 @@
                                                 }
                                                 $actions = '<div class="actions">'.$auxOptions.'</div>'.PHP_EOL;
 
-                                                $sUpdate = '';
-                                                // get languages to update from t_preference
-                                                if($bLanguagesToUpdate) {
-                                                    if(in_array($l['pk_c_code'],$aLanguagesToUpdate )){
-                                                        $sUpdate = '<a class="btn-market-update btn-market-popup" href="#' . htmlentities($l['pk_c_code']) . '">' . __("Update here") . '</a>';
-                                                    }
-                                                }
-
-                                                $row[] = $l['s_name'] . $sUpdate . $actions;
+                                                $row[] = $l['s_name'] . $actions;
                                                 $row[] = $l['s_short_name'];
                                                 $row[] = $l['s_description'];
                                                 $row[] = ( $l['b_enabled'] ? __('Yes') : __('No') );

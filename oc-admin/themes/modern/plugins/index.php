@@ -95,15 +95,6 @@
 <?php osc_current_admin_theme_path( 'parts/header.php' ); ?>
 <div id="tabs" class="ui-osc-tabs ui-tabs-right">
     <ul>
-        <?php
-            $aPluginsToUpdate = json_decode( osc_get_preference('plugins_to_update') );
-            $bPluginsToUpdate = is_array($aPluginsToUpdate)?true:false;
-            if($bPluginsToUpdate && count($aPluginsToUpdate) > 0) {
-                $tab_index = 0;
-        ?>
-        <li><a href="#update-plugins"><?php _e('Updates'); ?></a></li>
-        <?php } ?>
-        <li><a href="#market" onclick="window.location = '<?php echo osc_admin_base_url(true) . '?page=market&action=plugins'; ?>'; return false; "><?php _e('Market'); ?></a></li>
         <li><a href="#upload-plugins"><?php _e('Available plugins'); ?></a></li>
     </ul>
     <div id="upload-plugins">
@@ -162,91 +153,6 @@
                 </select>
             </form>
         </div>
-
-
-    </div>
-    <?php if($bPluginsToUpdate && count($aPluginsToUpdate) > 0) { ?>
-    <div id="update-plugins">
-        <?php
-            $aIndex = array();
-            if($bPluginsToUpdate) {
-                $array_aux  = array_keys($aData['aaInfo']);
-
-                foreach($aPluginsToUpdate as $slug) {
-                    $key = array_search($slug, $array_aux, true);
-                    if($key!==false) {
-                        $aIndex[]   = $aData['aaData'][$key];
-                    }
-                }
-            }
-        ?>
-        <table class="table" cellpadding="0" cellspacing="0">
-            <thead>
-                <tr>
-                    <th><?php _e('Name'); ?></th>
-                    <th colspan=""><?php _e('Description'); ?></th>
-                    <th> &nbsp; </th>
-                    <th> &nbsp; </th>
-                    <th> &nbsp; </th>
-                    <th> &nbsp; </th>
-                </tr>
-            </thead>
-            <tbody>
-            <?php if(count($aIndex)>0) : ?>
-            <?php foreach( $aIndex as $array) : ?>
-                <tr>
-                <?php foreach($array as $key => $value) : ?>
-                    <td>
-                    <?php echo $value; ?>
-                    </td>
-                <?php endforeach; ?>
-                </tr>
-            <?php endforeach;?>
-            <?php else : ?>
-            <tr>
-                <td colspan="6" class="text-center">
-                <p><?php _e('No data available in table'); ?></p>
-                </td>
-            </tr>
-            <?php endif; ?>
-            </tbody>
-        </table>
-    </div>
-    <?php } ?>
-    <div id="market_installer" class="has-form-actions hide">
-        <form action="" method="post">
-            <input type="hidden" name="market_code" id="market_code" value="" />
-            <div class="osc-modal-content-market">
-                <img src="" id="market_thumb" class="float-left"/>
-                <table class="table" cellpadding="0" cellspacing="0">
-                    <tbody>
-                        <tr class="table-first-row">
-                            <td><?php _e('Name'); ?></td>
-                            <td><span id="market_name"><?php _e("Loading data"); ?></span></td>
-                        </tr>
-                        <tr class="even">
-                            <td><?php _e('Version'); ?></td>
-                            <td><span id="market_version"><?php _e("Loading data"); ?></span></td>
-                        </tr>
-                        <tr>
-                            <td><?php _e('Author'); ?></td>
-                            <td><span id="market_author"><?php _e("Loading data"); ?></span></td>
-                        </tr>
-                        <tr class="even">
-                            <td><?php _e('URL'); ?></td>
-                            <td><span id="market_url_span"><a id="market_url" href="#"><?php _e("Download manually"); ?></a></span></td>
-                        </tr>
-                    </tbody>
-                </table>
-                <div class="clear"></div>
-            </div>
-            <div class="form-actions">
-                <div class="wrapper">
-                    <button id="market_cancel" class="btn btn-red" ><?php _e('Cancel'); ?></button>
-                    <button id="market_install" class="btn btn-submit" ><?php _e('Continue install'); ?></button>
-                </div>
-            </div>
-        </form>
     </div>
 </div>
 <form id="dialog-uninstall" method="get" action="<?php echo osc_admin_base_url(true); ?>" class="has-form-actions hide">
@@ -274,59 +180,8 @@
         } else {
             $( "#tabs" ).tabs({ active: -1 });
         }
-
-        $("#market_cancel").on("click", function(){
-            $(".ui-dialog-content").dialog("close");
-            return false;
-        });
-
-        $("#market_install").on("click", function(){
-            $(".ui-dialog-content").dialog("close");
-            $('<div id="downloading"><div class="osc-modal-content"><?php _e('Please wait until the download is completed'); ?></div></div>').dialog({title:'<?php _e('Downloading'); ?>...',modal:true});
-            $.getJSON(
-            "<?php echo osc_admin_base_url(true); ?>?page=ajax&action=market&<?php echo osc_csrf_token_url(); ?>",
-            {"code" : $("#market_code").attr("value"), "section" : 'plugins'},
-            function(data){
-                var content = data.message;
-                if(data.error == 0) { // no errors
-                    content += '<p><?php echo osc_esc_js(__('The plugin has been downloaded correctly, proceed to install and configure.')); ?></p>';
-                    content += "<p>";
-                    content += '<a class="btn btn-mini btn-green" href="<?php echo osc_admin_base_url(true); ?>?page=plugins&marketError='+data.error+'&slug='+oscEscapeHTML(data.data['s_update_url'])+'"><?php echo osc_esc_js(__('Close')); ?></a>';
-                    content += "</p>";
-                } else {
-                    content += '<a class="btn btn-mini btn-green" onclick=\'$(".ui-dialog-content").dialog("close");\'><?php echo osc_esc_js(__('Close')); ?>...</a>';
-                }
-                $("#downloading .osc-modal-content").html(content);
-            });
-            return false;
-        });
     });
 
-    $('.market-popup').on('click',function(){
-        $.getJSON(
-            "<?php echo osc_admin_base_url(true); ?>?page=ajax&action=check_market",
-            {"code" : $(this).attr('href').replace('#',''), 'section' : 'plugins'},
-            function(data){
-                if(data!=null) {
-                    $("#market_thumb").attr('src',data.s_thumbnail);
-                    $("#market_code").attr("value", data.s_update_url);
-                    $("#market_name").text(data.s_title);
-                    $("#market_version").text(data.s_version);
-                    $("#market_author").text(data.s_contact_name);
-                    $("#market_url").attr('href',data.s_source_file);
-                    $('#market_install').text("<?php echo osc_esc_js( __('Update') ); ?>");
-
-                    $('#market_installer').dialog({
-                        modal:true,
-                        title: '<?php echo osc_esc_js( __('Osclass Market') ); ?>',
-                        width:485
-                    });
-                }
-            }
-        );
-
-        return false;
-    });
     function delete_plugin(plugin) {
         var x = confirm('<?php echo osc_esc_js(__('You are about to delete the files of the plugin. Do you want to continue?'))?>');
         if(x) {

@@ -23,23 +23,8 @@
         {
             switch($this->action) {
                 case('check_updates'):
-                    osc_admin_toolbar_update_themes(true);
-                    osc_admin_toolbar_update_plugins(true);
-
-                    osc_add_flash_ok_message( _m('Last check') . ':   ' . date("Y-m-d H:i") , 'admin');
-
                     $this->redirectTo(osc_admin_base_url(true) . '?page=settings');
                 break;
-                case('market_disconnect'):
-                    osc_csrf_check();
-                    osc_set_preference('marketAPIConnect', '');
-                    osc_add_flash_ok_message( _m('Disconnected from the market') , 'admin');
-                    if(Params::getParam('redirect')!='') {
-                        $this->redirectTo(base64_decode(Params::getParam('redirect')));
-                    } else {
-                        $this->redirectTo(osc_admin_base_url(true) . '?page=settings');
-                    }
-                    break;
                 case('update'):
                     // update index view
                     osc_csrf_check();
@@ -59,7 +44,6 @@
                     $contactAttachment = Params::getParam('enabled_attachment');
                     $selectableParent  = Params::getParam('selectable_parent_categories');
                     $bAutoCron         = Params::getParam('auto_cron');
-                    $bMarketSources    = (Params::getParam('market_external_sources') != '' ? true: false);
                     $sAutoUpdate       = join("|", Params::getParam('auto_update'));
 
                     // preparing parameters
@@ -111,7 +95,6 @@
                     $iUpdated += osc_set_preference('weekStart', $sWeekStart);
                     $iUpdated += osc_set_preference('timeFormat', $sTimeFormat);
                     $iUpdated += osc_set_preference('timezone', $sTimezone);
-                    $iUpdated += osc_set_preference('marketAllowExternalSources', $bMarketSources);
                     $iUpdated += osc_set_preference('auto_update', $sAutoUpdate);
                     if(is_int($sNumRssItems)) {
                         $iUpdated += osc_set_preference('num_rss_items', $sNumRssItems);
