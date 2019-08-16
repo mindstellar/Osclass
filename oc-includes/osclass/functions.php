@@ -555,3 +555,256 @@
 				) );
 		}
 	}
+
+
+	/**
+	 * @param bool $force
+	 */
+	function osc_admin_toolbar_update_core( $force = false ) {
+		if ( ! osc_is_moderator() ) {
+			$data = json_decode( osc_update_core_json() , true );
+
+			if ( $force ) {
+				AdminToolbar::newInstance()->remove_menu( 'update_core' );
+			}
+			if ( isset( $data[ 'version' ] ) && $data[ 'version' ] > 0 ) {
+				$title = sprintf( __( 'Osclass %s is available' ) , $data[ 's_name' ] );
+				AdminToolbar::newInstance()->add_menu(
+					array (
+						'id'    => 'update_core' ,
+						'title' => $title ,
+						'href'  => osc_admin_base_url( true ) . '?page=tools&action=upgrade' ,
+						'meta'  => array ( 'class' => 'action-btn action-btn-black' )
+					) );
+			}
+		}
+	}
+
+
+	/**
+	 * @param bool $force
+	 *
+	 * @return int|string
+	 */
+	function osc_check_plugins_update( $force = false ) {
+		$total = getPreference( 'plugins_update_count' );
+		if ( $force ) {
+			return _osc_check_plugins_update();
+		} else if ( ( time() - (int) osc_plugins_last_version_check() ) > ( 24 * 3600 ) ) {
+			osc_add_hook( 'admin_footer' , 'check_plugins_admin_footer' );
+		}
+
+		return $total;
+	}
+
+
+	/**
+	 * @return int
+	 */
+	function _osc_check_plugins_update() {
+		$total            = 0;
+		$array            = array ();
+		$array_downloaded = array ();
+		$plugins          = Plugins::listAll();
+		foreach ( $plugins as $plugin ) {
+			$info = osc_plugin_get_info( $plugin );
+			if ( osc_check_plugin_update( @$info[ 'plugin_update_uri' ] , @$info[ 'version' ] ) ) {
+				$array[] = @$info[ 'plugin_update_uri' ];
+				$total ++;
+			}
+			$array_downloaded[] = @$info[ 'plugin_update_uri' ];
+		}
+
+		osc_set_preference( 'plugins_to_update' , json_encode( $array ) );
+		osc_set_preference( 'plugins_downloaded' , json_encode( $array_downloaded ) );
+		osc_set_preference( 'plugins_update_count' , $total );
+		osc_set_preference( 'plugins_last_version_check' , time() );
+		osc_reset_preferences();
+
+		return $total;
+	}
+
+
+	/**
+	 * @param bool $force
+	 */
+	function osc_admin_toolbar_update_plugins( $force = false ) {
+		if ( ! osc_is_moderator() ) {
+			$total = osc_check_plugins_update( $force );
+
+			if ( $force ) {
+				AdminToolbar::newInstance()->remove_menu( 'update_plugin' );
+			}
+			if ( $total > 0 ) {
+				$title = '<i class="circle circle-gray">' . $total . '</i>' . __( 'Plugin updates' );
+				AdminToolbar::newInstance()->add_menu(
+					array (
+						'id'    => 'update_plugin' ,
+						'title' => $title ,
+						'href'  => osc_admin_base_url( true ) . '?page=plugins#update-plugins' ,
+						'meta'  => array ( 'class' => 'action-btn action-btn-black' )
+					) );
+			}
+		}
+	}
+
+
+	/**
+	 * @param bool $force
+	 *
+	 * @return int|string
+	 */
+	function osc_check_themes_update( $force = false ) {
+		$total = getPreference( 'themes_update_count' );
+		if ( $force ) {
+			return _osc_check_themes_update();
+		} else if ( ( time() - (int) osc_themes_last_version_check() ) > ( 24 * 3600 ) ) {
+			osc_add_hook( 'admin_footer' , 'check_themes_admin_footer' );
+		}
+
+		return $total;
+	}
+
+
+	/**
+	 * @return int
+	 */
+	function _osc_check_themes_update() {
+		$total            = 0;
+		$array            = array ();
+		$array_downloaded = array ();
+		$themes           = WebThemes::newInstance()->getListThemes();
+		foreach ( $themes as $theme ) {
+			$info = WebThemes::newInstance()->loadThemeInfo( $theme );
+			if ( osc_check_theme_update( @$info[ 'theme_update_uri' ] , @$info[ 'version' ] ) ) {
+				$array[] = $theme;
+				$total ++;
+			}
+			$array_downloaded[] = @$info[ 'theme_update_uri' ];
+		}
+		osc_set_preference( 'themes_to_update' , json_encode( $array ) );
+		osc_set_preference( 'themes_downloaded' , json_encode( $array_downloaded ) );
+		osc_set_preference( 'themes_update_count' , $total );
+		osc_set_preference( 'themes_last_version_check' , time() );
+		osc_reset_preferences();
+
+		return $total;
+	}
+
+
+	/**
+	 * @param bool $force
+	 */
+	function osc_admin_toolbar_update_themes( $force = false ) {
+		if ( ! osc_is_moderator() ) {
+			$total = osc_check_themes_update( $force );
+
+			if ( $force ) {
+				AdminToolbar::newInstance()->remove_menu( 'update_theme' );
+			}
+			if ( $total > 0 ) {
+				$title = '<i class="circle circle-gray">' . $total . '</i>' . __( 'Theme updates' );
+				AdminToolbar::newInstance()->add_menu(
+					array (
+						'id'    => 'update_theme' ,
+						'title' => $title ,
+						'href'  => osc_admin_base_url( true ) . '?page=appearance' ,
+						'meta'  => array ( 'class' => 'action-btn action-btn-black' )
+					) );
+			}
+		}
+	}
+
+
+// languages todo
+	/**
+	 * @param bool $force
+	 *
+	 * @return int|string
+	 */
+	function osc_check_languages_update( $force = false ) {
+		$total = getPreference( 'languages_update_count' );
+		if ( $force ) {
+			return _osc_check_languages_update();
+		} else if ( ( time() - (int) osc_languages_last_version_check() ) > ( 24 * 3600 ) ) {
+			osc_add_hook( 'admin_footer' , 'check_languages_admin_footer' );
+		}
+
+		return $total;
+	}
+
+
+	/**
+	 * @return int
+	 */
+	function _osc_check_languages_update() {
+		$total            = 0;
+		$array            = array ();
+		$array_downloaded = array ();
+		$languages        = OSCLocale::newInstance()->listAll();
+		foreach ( $languages as $lang ) {
+			if ( osc_check_language_update( $lang[ 'pk_c_code' ] , $lang[ 's_version' ] ) ) {
+				$array[] = $lang[ 'pk_c_code' ];
+				$total ++;
+			}
+			$array_downloaded[] = $lang[ 'pk_c_code' ];
+		}
+		osc_set_preference( 'languages_to_update' , json_encode( $array ) );
+		osc_set_preference( 'languages_downloaded' , json_encode( $array_downloaded ) );
+		osc_set_preference( 'languages_update_count' , $total );
+		osc_set_preference( 'languages_last_version_check' , time() );
+		osc_reset_preferences();
+
+		return $total;
+	}
+
+
+	/**
+	 * @param bool $force
+	 */
+	function osc_admin_toolbar_update_languages( $force = false ) {
+		if ( ! osc_is_moderator() ) {
+			$total = osc_check_languages_update( $force );
+
+			if ( $force ) {
+				AdminToolbar::newInstance()->remove_menu( 'update_language' );
+			}
+			if ( $total > 0 ) {
+				$title = '<i class="circle circle-gray">' . $total . '</i>' . __( 'Language updates' );
+				AdminToolbar::newInstance()->add_menu(
+					array (
+						'id'    => 'update_language' ,
+						'title' => $title ,
+						'href'  => osc_admin_base_url( true ) . '?page=languages' ,
+						'meta'  => array ( 'class' => 'action-btn action-btn-black' )
+					) );
+			}
+		}
+	}
+
+
+	/**
+	 * @return bool
+	 */
+	function osc_check_market_connect() {
+		return getPreference( 'marketAPIConnect' ) != '';
+	}
+
+
+	function osc_admin_toolbar_market_connect() {
+
+		if ( ! osc_is_moderator() ) {
+			$connected = osc_check_market_connect();
+			AdminToolbar::newInstance()->remove_menu( 'market_connect' );
+
+			if ( ! $connected ) {
+				AdminToolbar::newInstance()->add_menu(
+					array (
+						'id'    => 'market_connect' ,
+						'title' => __( 'Connect Market' ) ,
+						'href'  => osc_admin_base_url( true ) . '?page=market&open_market_connect=true' ,
+						'meta'  => array ( 'class' => 'action-btn' , 'style' => 'color:black;' )
+					) );
+			}
+		}
+	}

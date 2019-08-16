@@ -1460,6 +1460,58 @@
 	osc_add_hook( 'hook_email_warn_expiration' , 'fn_email_warn_expiration' );
 
 	/**
+	 * @param $result
+	 */
+	function fn_email_auto_upgrade( $result ) {
+
+		$body = __( '<p>Dear {WEB_TITLE} admin,</p>' );
+		if ( $result[ 'error' ] == 0 || $result[ 'error' ] == 6 ) {
+			$title = __( '{WEB_TITLE} - Your site has upgraded to Osclass {VERSION}' );
+			$body  .= __( '<p>Your site at {WEB_LINK} has been updated automatically to Osclass {VERSION}</p>' );
+			if ( $result[ 'error' ] == 6 ) {
+				$body .= __( '<p>There were some minor errors removing temporary files. Please manually remove the "oc-content/downloads/oc-temp" folder</p>' );
+			}
+		} else {
+			$title = __( '{WEB_TITLE} - We failed trying to upgrade your site to Osclass {VERSION}' );
+			$body  .= '<p>We failed trying to upgrade your site to Osclass {VERSION}. Heres is the error message: {MESSAGE}</p>';
+		}
+		$body .= '<p>If you experience any issues or need support, we will be happy to help you at the Osclass support forums</p>';
+		$body .= '<p><a href="http://forums.osclass.org/">http://forums.osclass.org/</a></p>';
+		$body .= '<p>The Osclass team</p>';
+
+		$words   = array ();
+		$words[] = array (
+			'{MESSAGE}' ,
+			'{VERSION}'
+		);
+		$words[] = array (
+			$result[ 'message' ] ,
+			$result[ 'version' ]
+		);
+
+		$title = osc_apply_filter( 'email_after_auto_upgrade_title_after' , osc_mailBeauty( osc_apply_filter( 'email_title' , osc_apply_filter( 'email_after_auto_upgrade_title' , $title , $result ) ) , $words ) , $result );
+		$body  = osc_apply_filter( 'email_after_auto_upgrade_description_after' , osc_mailBeauty( osc_apply_filter( 'email_description' , osc_apply_filter( 'email_after_auto_upgrade_description' , $body , $result ) ) , $words ) , $result );
+
+		$admins = Admin::newInstance()->listAll();
+		foreach ( $admins as $admin ) {
+			if ( ! empty( $admin[ 's_email' ] ) && ( $admin[ 'b_moderator' ] == 0 ) ) {
+				$emailParams = array (
+					'from'     => _osc_from_email_aux() ,
+					'to'       => $admin[ 's_email' ] ,
+					'to_name'  => osc_page_title() ,
+					'subject'  => $title ,
+					'body'     => $body ,
+					'alt_body' => $body ,
+				);
+				osc_sendMail( $emailParams );
+			}
+		}
+	}
+
+
+	osc_add_hook( 'after_auto_upgrade' , 'fn_email_auto_upgrade' , 10 );
+
+	/**
 	 * @return string
 	 */
 	function _osc_from_email_aux() {
