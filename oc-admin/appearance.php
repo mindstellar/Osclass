@@ -203,6 +203,10 @@
                     $this->doView('appearance/view.php');
                 break;
                 default:
+                    if(Params::getParam('checkUpdated') != '') {
+                        osc_admin_toolbar_update_themes(true);
+                    }
+
                     $themes = WebThemes::newInstance()->getListThemes();
 
                     //preparing variables for the view

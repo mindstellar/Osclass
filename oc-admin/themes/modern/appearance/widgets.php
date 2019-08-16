@@ -19,6 +19,11 @@
 
     $info = __get("info");
 
+    function addHelp() {
+        echo '<p>' . __("Modify your site's header or footer here. Only works with compatible themes, such as those available in the market.") . '</p>';
+    }
+    osc_add_hook('help_box','addHelp');
+
     osc_add_hook('admin_page_header','customPageHeader');
     function customPageHeader(){ ?>
         <h1><?php _e('Appearance'); ?>

@@ -84,6 +84,9 @@
             Cron::newInstance()->update(array('d_last_exec' => $d_now, 'd_next_exec' => $d_next),
                 array('e_type'      => 'DAILY'));
 
+
+            osc_do_auto_upgrade();
+
             osc_runAlert('DAILY', $cron['d_last_exec']);
 
             // Run cron AFTER updating the next execution time to avoid double run of cron

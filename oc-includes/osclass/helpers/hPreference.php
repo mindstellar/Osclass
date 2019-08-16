@@ -630,6 +630,126 @@
         return (getPreference('recaptchaPrivKey'));
     }
 
+
+	/**
+	 * Gets Osclass' market URL
+	 *
+	 * @param string $type
+	 * @param string $code
+	 *
+	 * @return string
+	 */
+    function osc_market_url($type = '', $code = '') {
+        $url = getPreference('marketURL');
+        switch ($type) {
+            case 'plugins':
+            case 'plugin':
+                $url .= 'section/plugins/';
+                if($code!='') {
+                    $url .= 'code/'. $code;
+                }
+                break;
+            case 'themes':
+            case 'theme':
+                $url .= 'section/themes/';
+                if($code!='') {
+                    $url .= 'code/'. $code;
+                }
+                break;
+            case 'languages':
+            case 'language':
+                $url .= 'section/languages/';
+                if($code!='') {
+                    $url .= 'code/'. $code;
+                }
+                break;
+            case 'purchases':
+            case 'purchase':
+                $url .= 'section/purchases/';
+                break;
+            default:
+                break;
+        }
+        return $url;
+    }
+
+    /**
+     * Gets market connect api key
+     *
+     * @return string
+     */
+    function osc_market_api_connect() {
+        return getPreference( 'marketAPIConnect');
+    }
+
+    /**
+     * Get Osclass' market url for count items in categories
+     *
+     * @return string
+     */
+    function osc_market_count_url() {
+        $url = getPreference('marketURL');
+        return $url . 'count/';
+    }
+
+
+	/**
+	 * Osclass' market url for get featured items in categories
+	 *
+	 * @param        $type
+	 * @param string $num
+	 *
+	 * @return string
+	 */
+    function osc_market_featured_url($type, $num = '') {
+        $url = getPreference('marketURL');
+        $url .= 'featured/';
+        switch ($type) {
+            case 'plugins':
+                $url .= 'plugins/';
+                break;
+            case 'themes':
+                $url .= 'themes/';
+                break;
+            case 'languages':
+                $url .= 'languages/';
+                break;
+            default:
+                break;
+        }
+        if($num!='') {
+            $url .= 'num/'. $num;
+        }
+        return $url;
+    }
+
+    /**
+     * Gets if third party sources are allowed to install new plugins and themes
+     *
+     * @return int
+     */
+    function osc_market_external_sources() {
+        return (getBoolPreference('marketAllowExternalSources'));
+    }
+
+    /**
+     * Market filters
+     *
+     * @return int
+     */
+    function osc_market_categories() {
+        return (getPreference('marketCategories'));
+    }
+
+    /**
+     * Market data update
+     *
+     * @return int
+     */
+    function osc_market_data_update() {
+        return (getPreference('marketDataUpdate'));
+    }
+
     /**
      * Gets recaptcha public key
      *
