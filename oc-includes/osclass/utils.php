@@ -270,7 +270,7 @@
      * @return bool false on error or number of bytes sent.
      */
 	function osc_doRequest( $url , $_data ) {
-	    if (testCurl() == false){
+	    if (testCurl()){
             $ch = curl_init();
             curl_setopt( $ch , CURLOPT_URL , $url );
             @curl_setopt( $ch , CURLOPT_CONNECTTIMEOUT , 5 );
