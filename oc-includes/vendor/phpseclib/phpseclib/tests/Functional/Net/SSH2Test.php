@@ -14,9 +14,8 @@ class Functional_Net_SSH2Test extends PhpseclibFunctionalTestCase
     {
         $ssh = new SSH2($this->getEnv('SSH_HOSTNAME'));
 
-        $this->assertInternalType(
-            'object',
-            $ssh,
+        $this->assertTrue(
+            is_object($ssh),
             'Could not construct NET_SSH2 object.'
         );
 
@@ -116,7 +115,7 @@ class Functional_Net_SSH2Test extends PhpseclibFunctionalTestCase
             ->expects($this->atLeastOnce())
             ->method('callbackMethod')
             ->will($this->returnValue(true));
-        $ssh->exec('pwd', [$callbackObject, 'callbackMethod']);
+        $ssh->exec('pwd', array($callbackObject, 'callbackMethod'));
 
         return $ssh;
     }

@@ -18,11 +18,11 @@ class Functional_Net_SFTPStreamTest extends Functional_Net_SFTPTestCase
 
     public function testFopenFcloseCreatesFile()
     {
-        $context = stream_context_create([
-            'sftp' => ['session' => $this->sftp],
-        ]);
+        $context = stream_context_create(array(
+            'sftp' => array('session' => $this->sftp),
+        ));
         $fp = fopen($this->buildUrl('fooo.txt'), 'wb', false, $context);
-        $this->assertInternalType('resource', $fp);
+        $this->assertTrue(is_resource($fp));
         fclose($fp);
         $this->assertSame(0, $this->sftp->size('fooo.txt'));
     }
@@ -32,27 +32,14 @@ class Functional_Net_SFTPStreamTest extends Functional_Net_SFTPTestCase
      */
     public function testFilenameWithHash()
     {
-        $context = stream_context_create([
-            'sftp' => ['session' => $this->sftp],
-        ]);
+        $context = stream_context_create(array(
+            'sftp' => array('session' => $this->sftp),
+        ));
         $fp = fopen($this->buildUrl('te#st.txt'), 'wb', false, $context);
         fputs($fp, 'zzzz');
         fclose($fp);
 
-        $this->assertContains('te#st.txt', $this->sftp->nlist());
-    }
-
-    /**
-     * Tests connection reuse functionality same as ssh2 extension:
-     * {@link http://php.net/manual/en/wrappers.ssh2.php#refsect1-wrappers.ssh2-examples}
-     */
-    public function testConnectionReuse()
-    {
-        $originalConnectionsCount = count(\phpseclib\Net\SSH2::getConnections());
-        $session = $this->sftp;
-        $dirs = scandir("sftp://$session/");
-        $this->assertCount($originalConnectionsCount, \phpseclib\Net\SSH2::getConnections());
-        $this->assertEquals(['.', '..'], array_slice($dirs, 0, 2));
+        $this->assertTrue(in_array('te#st.txt', $this->sftp->nlist()));
     }
 
     protected function buildUrl($suffix)

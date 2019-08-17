@@ -287,7 +287,7 @@
             $string .= "\0";
         }
 
-        $cipher = new phpseclib\Crypt\Rijndael(phpseclib\Crypt\Common\SymmetricKey::MODE_CBC);
+        $cipher = new phpseclib\Crypt\Rijndael();
         $cipher->disablePadding();
         $cipher->setBlockLength(256);
         $cipher->setKey($key);
@@ -310,7 +310,7 @@
 
         // COMPATIBILITY
 
-        $cipher = new phpseclib\Crypt\Rijndael(phpseclib\Crypt\Common\SymmetricKey::MODE_CBC);
+        $cipher = new phpseclib\Crypt\Rijndael();
         $cipher->disablePadding();
         $cipher->setBlockLength(256);
         $cipher->setKey($key);
