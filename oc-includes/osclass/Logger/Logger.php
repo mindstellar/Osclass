@@ -23,7 +23,6 @@
 	 */
 	abstract class Logger
     {
-        private function __construct() {}
 
 		/**
 		 * Log a message with the INFO level.
