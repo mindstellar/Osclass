@@ -246,16 +246,8 @@
 	 * @since 3.3
 	 */
 	function osc_verify_password( $password , $hash ) {
-        if(version_compare(PHP_VERSION, '5.3.7')>=0) {
-            return password_verify($password, $hash)?true:(sha1($password)==$hash);
-        }
 
-        require_once LIB_PATH . 'Bcrypt.php';
-        if(CRYPT_BLOWFISH==1) {
-            $bcrypt = new Bcrypt(BCRYPT_COST);
-            return $bcrypt->verify($password, $hash)?true:(sha1($password)==$hash);
-        }
-        return (sha1($password)==$hash);
+            return password_verify($password, $hash)?true:(sha1($password)==$hash);
     }
 
 
@@ -269,17 +261,9 @@
 	 * @since 3.3
 	 */
 	function osc_hash_password( $password ) {
-        if(version_compare(PHP_VERSION, '5.3.7')>=0) {
+
             $options = array('cost' => BCRYPT_COST);
             return password_hash($password, PASSWORD_BCRYPT, $options);
-        }
-
-        require_once LIB_PATH . 'Bcrypt.php';
-        if(CRYPT_BLOWFISH==1) {
-            $bcrypt = new Bcrypt(BCRYPT_COST);
-            return $bcrypt->hash($password);
-        }
-        return sha1($password);
     }
 
 
@@ -298,23 +282,10 @@
             return Cryptor::Encrypt($string, $key, 0);
         }
 
-        // START DEPRECATED : To be removed in future versions
-        if(function_exists('mcrypt_module_open')) {
-            $cipher = mcrypt_module_open(MCRYPT_RIJNDAEL_256, '', MCRYPT_MODE_CBC, '');
-            $cipherText = '';
-            if (mcrypt_generic_init($cipher, $key, $key) != -1) {
-                $cipherText = mcrypt_generic($cipher, $string);
-                mcrypt_generic_deinit($cipher);
-            }
-            return $cipherText;
-        }
-        // END DEPRECATED : To be removed in future versions
-
         // COMPATIBILITY
         while (strlen($string) % 32 != 0) {
             $string .= "\0";
         }
-
 
         $cipher = new phpseclib\Crypt\Rijndael(phpseclib\Crypt\Common\SymmetricKey::MODE_CBC);
         $cipher->disablePadding();
@@ -336,18 +307,6 @@
 		if(function_exists('openssl_digest') && function_exists('openssl_encrypt') && function_exists('openssl_decrypt') && in_array('aes-256-ctr', openssl_get_cipher_methods(true)) && in_array('sha256', openssl_get_md_methods(true))) {
             return trim(substr(Cryptor::Decrypt($string, $key, 0), 32));
         }
-
-        // START DEPRECATED : To be removed in future versions
-        if(function_exists('mcrypt_module_open')) {
-            $cipher = mcrypt_module_open(MCRYPT_RIJNDAEL_256, '', MCRYPT_MODE_CBC, '');
-            $cipherText = '';
-            if (mcrypt_generic_init($cipher, $key, $key) != -1) {
-                $cipherText = mdecrypt_generic($cipher, $string);
-                mcrypt_generic_deinit($cipher);
-            }
-            return trim(substr($cipherText, 32));
-        }
-        // END DEPRECATED : To be removed in future versions
 
         // COMPATIBILITY
 
@@ -416,15 +375,6 @@
                 $buffer_valid = true;
             }
         }
-
-        // START DEPRECATED: To be removed in future releases
-        if (!$buffer_valid && function_exists('mcrypt_create_iv') && !defined('PHALANGER')) {
-            $buffer = mcrypt_create_iv($length);
-            if ($buffer) {
-                $buffer_valid = true;
-            }
-        }
-        // END DEPRECATED: To be removed in future releases
 
         if (!$buffer_valid || strlen($buffer) < $length) {
             $bl = strlen($buffer);
