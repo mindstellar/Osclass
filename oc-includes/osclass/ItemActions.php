@@ -1170,13 +1170,15 @@
             // $ajax_photos is an array of filenames of the photos uploaded by ajax to a temporary folder
             // fake insert them into the array of the form-uploaded photos
             if(is_array($ajax_photos)) {
-                foreach($ajax_photos as $photo) {
-                    if(file_exists(osc_content_path().'uploads/temp/'.$photo)) {
-                        $aItem['photos']['name'][]      = $photo;
-                        $aItem['photos']['type'][]      = 'image/*';
-                        $aItem['photos']['tmp_name'][]  = osc_content_path().'uploads/temp/'.$photo;
-                        $aItem['photos']['error'][]     = UPLOAD_ERR_OK;
-                        $aItem['photos']['size'][]      = 0;
+                if ( ! empty($ajax_photos)) {
+                    foreach($ajax_photos as $photo) {
+                        if(file_exists(osc_content_path().'uploads/temp/'.$photo)) {
+                            $aItem['photos']['name'][]      = $photo;
+                            $aItem['photos']['type'][]      = 'image/*';
+                            $aItem['photos']['tmp_name'][]  = osc_content_path().'uploads/temp/'.$photo;
+                            $aItem['photos']['error'][]     = UPLOAD_ERR_OK;
+                            $aItem['photos']['size'][]      = 0;
+                        }
                     }
                 }
             }
