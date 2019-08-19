@@ -355,7 +355,8 @@
 		$mail->clearCustomHeaders();
 		$mail->clearReplyTos();
 
-		$mail = osc_apply_filter( 'init_send_mail' , $mail , $params );
+        /** @var \PHPMailer $mail */
+        $mail = osc_apply_filter( 'init_send_mail' , $mail , $params );
 
 		if ( osc_mailserver_pop() ) {
 
