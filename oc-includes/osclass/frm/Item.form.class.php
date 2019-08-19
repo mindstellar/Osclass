@@ -435,7 +435,7 @@
                         <?php } else if($o==1) { ?>
                             options += '<option value="1" >' + (osc.langs.expiration_day!=null?osc.langs.expiration_day:'<?php echo osc_esc_js(__('1 day')); ?>')+ '</option>';
                         <?php } else { ?>
-                            if(max_exp==0 || <?php echo $o; ?><=max_exp) {
+                            if(max_exp==0 || max_exp>=<?php echo $o; ?>) {
                                 options += '<option value="<?php echo $o; ?>" >' + (osc.langs.expiration_days!=null?osc.langs.expiration_days:'<?php echo osc_esc_js(__('%d days')); ?>').replace("%d", <?php echo $o; ?>) + '</option>';
                             }
                     <?php }
