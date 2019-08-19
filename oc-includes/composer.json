@@ -14,6 +14,7 @@
     "ioncube/php-openssl-cryptor": "dev-master#f62397b",
     "google/recaptcha": "^1.1.2",
     "ext-json": "*",
-    "ext-openssl": "*"
+    "ext-openssl": "*",
+    "ext-mysqli": "*"
   }
 }
