@@ -1691,7 +1691,10 @@
 
             if (isset($regionId)) {
                 $aItem[ 'regionId' ] = $regionId;
+            } else {
+                $aItem[ 'regionId' ] = null;
             }
+            
             if (isset($regionName)) {
                 $aItem[ 'regionName' ] = $regionName;
             }
@@ -1718,7 +1721,10 @@
 
             if (isset($cityId)) {
                 $aItem[ 'cityId' ] = $cityId;
+            } else {
+                $aItem[ 'cityId' ] = null;
             }
+            
             if (isset($cityName)) {
                 $aItem[ 'cityName' ] = $cityName;
             }
