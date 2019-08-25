@@ -129,10 +129,6 @@
         {
             $filename = CONTENT_PATH . 'queries.log';
 
-            if( !file_exists($filename) || !is_writable($filename) ) {
-                return false;
-            }
-
 	        $fp = fopen( $filename , 'ab' );
 
             if( $fp == false ) {
