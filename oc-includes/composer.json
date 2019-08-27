@@ -15,6 +15,11 @@
     "google/recaptcha": "^1.1.2",
     "ext-json": "*",
     "ext-openssl": "*",
-    "ext-mysqli": "*"
+    "ext-mysqli": "*",
+    "ext-zip": "*"
+  }
+  ,
+  "require-dev": {
+    "roave/security-advisories": "dev-master"
   }
 }
