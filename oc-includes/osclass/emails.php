@@ -41,7 +41,7 @@
                 $email, $secret));
 
         $validation_link = osc_user_activate_alert_url($alert[ 'pk_i_id' ], $secret, $email);
-        $validation_link = '<a href ="' . $validation_link . '" target="_blank" >' . $validation_link . '<a/>';
+        $validation_link = '<a href ="' . $validation_link . '" target="_blank" >' . $validation_link . '</a>';
 
         $words   = array ();
         $words[] = array (
