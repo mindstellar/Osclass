@@ -54,17 +54,6 @@
         {
             $this->add_menu( __('Dashboard'), osc_admin_base_url(), 'dash', 'moderator');
 
-            $this->add_menu( __('Market'), osc_admin_base_url(true) .'?page=market', 'market', 'administrator');
-            if( !osc_is_moderator() ) {
-                $connected = osc_check_market_connect();
-                if(!$connected) {
-                    $this->add_submenu( 'market', __('Connect Market'), osc_admin_base_url(true) . "?page=market&open_market_connect=true", 'market_connect', 'administrator');
-                }
-            }
-            $this->add_submenu( 'market', __('Themes'), osc_admin_base_url(true) .'?page=market&action=themes', 'market_view_themes', 'administrator');
-            $this->add_submenu( 'market', __('Plugins'), osc_admin_base_url(true).'?page=market&action=plugins', 'market_view_plugins', 'administrator');
-            $this->add_submenu( 'market', __('Languages'), osc_admin_base_url(true).'?page=market&action=languages', 'market_view_languages', 'administrator');
-
             $this->add_menu( __('Listings'), osc_admin_base_url(true).'?page=items', 'items', 'moderator');
             $this->add_submenu( 'items', __('Manage listings'), osc_admin_base_url(true).'?page=items', 'items_manage', 'moderator');
             $this->add_submenu( 'items', __('Reported listings'), osc_admin_base_url(true).'?page=items&action=items_reported', 'items_reported', 'moderator');
@@ -74,13 +63,11 @@
             $this->add_submenu( 'items', __('Settings'), osc_admin_base_url(true).'?page=items&action=settings', 'items_settings', 'administrator');
 
             $this->add_menu( __('Appearance'), osc_admin_base_url(true) .'?page=appearance', 'appearance', 'administrator');
-            $this->add_submenu( 'appearance', __('Market'), osc_admin_base_url(true).'?page=market&action=themes', 'appearance_market', 'administrator');
             $this->add_submenu( 'appearance', __('Manage themes'), osc_admin_base_url(true) .'?page=appearance', 'appearance_manage', 'administrator');
             $this->add_submenu( 'appearance', __('Manage widgets'), osc_admin_base_url(true) .'?page=appearance&action=widgets', 'appearance_widgets', 'administrator');
 
             $this->add_menu(__('Plugins'), osc_admin_base_url(true) .'?page=plugins', 'plugins', 'administrator');
             $this->add_submenu( 'plugins', __('Manage plugins'), osc_admin_base_url(true) .'?page=plugins', 'plugins_manage', 'administrator');
-            $this->add_submenu( 'plugins', __('Market'), osc_admin_base_url(true).'?page=market&action=plugins', 'plugins_market', 'administrator');
 
             $this->add_menu( __('Statistics'), osc_admin_base_url(true) .'?page=stats&action=items', 'stats', 'moderator' );
             $this->add_submenu( 'stats', __('Listings'), osc_admin_base_url(true) .'?page=stats&action=items', 'stats_items', 'moderator');
@@ -352,5 +339,3 @@
             $this->aMenu = array();
         }
     }
-
-
