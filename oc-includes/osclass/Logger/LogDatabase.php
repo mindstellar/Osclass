@@ -127,13 +127,16 @@
 	     */
 	    public function writeMessages()
         {
-            $filename = CONTENT_PATH . 'queries.log';
+			$filename = CONTENT_PATH . 'queries.log';
 
-            if( !file_exists($filename) || !is_writable($filename) ) {
-                return false;
-            }
+			if(!file_exists($filename)) {
+			    file_put_contents($filename, '');
+			}
+			if(!is_writable($filename)) {
+			   return false;
+			}
 
-	        $fp = fopen( $filename , 'ab' );
+			$fp = fopen( $filename , 'ab' );
 
             if( $fp == false ) {
                 return false;
@@ -170,13 +173,16 @@
 	     */
 	    public function writeExplainMessages()
         {
-            $filename = CONTENT_PATH . 'explain_queries.log';
+			$filename = CONTENT_PATH . 'explain_queries.log';
 
-            if( !file_exists($filename) || !is_writable($filename) ) {
-                return false;
-            }
+			if(!file_exists($filename)) {
+			    file_put_contents($filename, '');
+			}
+			if(!is_writable($filename)) {
+			   return false;
+			}
 
-	        $fp = fopen( $filename , 'ab' );
+			$fp = fopen( $filename , 'ab' );
 
             if( $fp == false ) {
                 return false;
@@ -253,4 +259,3 @@
     }
 
     /* file end: ./oc-includes/osclass/Logger/LogDatabase.php */
-
