@@ -40,9 +40,6 @@
         <div id="upload-themes" class="ui-osc-tabs-panel">
             <div class="form-horizontal">
             <?php if( is_writable( osc_themes_path() ) ) { ?>
-                <div class="flashmessage flashmessage-info flashmessage-inline" style="display: block;">
-                    <p class="info"><?php printf( __('Download more themes at %s'), '<a href="'.osc_admin_base_url(true) . '?page=market&action=themes">Market</a>'); ?></p>
-                </div>
                 <form class="separate-top" action="<?php echo osc_admin_base_url(true); ?>" method="post" enctype="multipart/form-data">
                     <input type="hidden" name="action" value="add_post" />
                     <input type="hidden" name="page" value="appearance" />
@@ -70,41 +67,6 @@
                 <pre>chmod 0755 <?php echo osc_themes_path(); ?></pre>
             <?php } ?>
             </div>
-        </div>
-        <div id="market_installer" class="has-form-actions hide">
-            <form action="" method="post">
-                <input type="hidden" name="market_code" id="market_code" value="" />
-                <div class="osc-modal-content-market">
-                    <img src="" id="market_thumb" class="float-left"/>
-                    <table class="table" cellpadding="0" cellspacing="0">
-                        <tbody>
-                            <tr class="table-first-row">
-                                <td><?php _e('Name'); ?></td>
-                                <td><span id="market_name"><?php _e("Loading data"); ?></span></td>
-                            </tr>
-                            <tr class="even">
-                                <td><?php _e('Version'); ?></td>
-                                <td><span id="market_version"><?php _e("Loading data"); ?></span></td>
-                            </tr>
-                            <tr>
-                                <td><?php _e('Author'); ?></td>
-                                <td><span id="market_author"><?php _e("Loading data"); ?></span></td>
-                            </tr>
-                            <tr class="even">
-                                <td><?php _e('URL'); ?></td>
-                                <td><span id="market_url_span"><a id="market_url" href="#"><?php _e("Download manually"); ?></a></span></td>
-                            </tr>
-                        </tbody>
-                    </table>
-                    <div class="clear"></div>
-                </div>
-                <div class="form-actions">
-                    <div class="wrapper">
-                        <button id="market_cancel" class="btn btn-red" ><?php _e('Cancel'); ?></button>
-                        <button id="market_install" class="btn btn-submit" ><?php _e('Continue install'); ?></button>
-                    </div>
-                </div>
-            </form>
         </div>
     </div>
     <!-- /themes list -->

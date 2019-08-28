@@ -45,7 +45,7 @@
     osc_add_hook('admin_header','customHead', 10);
 
     function addHelp() {
-        echo '<p>' . sprintf(__("Change your site's look and feel by activating a theme among those available. You can download new themes from the <a href=\"%s\">market</a>. <strong>Be careful</strong>: if your theme has been customized, you'll lose all changes if you change to a new theme."), osc_admin_base_url(true) . '?page=market&action=themes') . '</p>';
+        echo '<p>' . __("Change your site's look and feel by activating a theme among those available. <strong>Be careful</strong>: if your theme has been customized, you'll lose all changes if you change to a new theme.") . '</p>';
     }
     osc_add_hook('help_box','addHelp');
 
@@ -68,10 +68,6 @@
     <!-- themes list -->
     <div class="appearance">
         <div id="tabs" class="ui-osc-tabs ui-tabs-right">
-            <ul>
-                <li><a href="#market" onclick="window.location = '<?php echo osc_admin_base_url(true) . '?page=market&action=themes'; ?>'; return false; "><?php _e('Market'); ?></a></li>
-                <li><a href="#available-themes"><?php _e('Available themes'); ?></a></li>
-            </ul>
             <div id="available-themes" class="ui-osc-tabs-panel">
                 <h2 class="render-title"><?php _e('Current theme'); ?> <a href="<?php echo osc_admin_base_url(true); ?>?page=appearance&amp;action=add" class="btn btn-mini"><?php _e('Add new'); ?></a></h2>
                 <div class="current-theme">
@@ -125,41 +121,6 @@
                     <div class="clear"></div>
                 </div>
             </div>
-            <div id="market_installer" class="has-form-actions hide">
-                <form action="" method="post">
-                    <input type="hidden" name="market_code" id="market_code" value="" />
-                    <div class="osc-modal-content-market">
-                        <img src="" id="market_thumb" class="float-left"/>
-                        <table class="table" cellpadding="0" cellspacing="0">
-                            <tbody>
-                                <tr class="table-first-row">
-                                    <td><?php _e('Name'); ?></td>
-                                    <td><span id="market_name"><?php _e("Loading data"); ?></span></td>
-                                </tr>
-                                <tr class="even">
-                                    <td><?php _e('Version'); ?></td>
-                                    <td><span id="market_version"><?php _e("Loading data"); ?></span></td>
-                                </tr>
-                                <tr>
-                                    <td><?php _e('Author'); ?></td>
-                                    <td><span id="market_author"><?php _e("Loading data"); ?></span></td>
-                                </tr>
-                                <tr class="even">
-                                    <td><?php _e('URL'); ?></td>
-                                    <td><span id="market_url_span"><a id="market_url" href="#"><?php _e("Download manually"); ?></a></span></td>
-                                </tr>
-                            </tbody>
-                        </table>
-                        <div class="clear"></div>
-                    </div>
-                    <div class="form-actions">
-                        <div class="wrapper">
-                            <button id="market_cancel" class="btn btn-red" ><?php _e('Cancel'); ?></button>
-                            <button id="market_install" class="btn btn-submit" ><?php _e('Continue install'); ?></button>
-                        </div>
-                    </div>
-                </form>
-            </div>
         </div>
     </div>
     <!-- /themes list -->
@@ -181,37 +142,6 @@
     </div>
 </form>
 <script type="text/javascript">
-    $(function() {
-        $( "#tabs" ).tabs({ active: -1 });
-
-        $("#market_cancel").on("click", function(){
-            $(".ui-dialog-content").dialog("close");
-            return false;
-        });
-
-        $("#market_install").on("click", function(){
-            $(".ui-dialog-content").dialog("close");
-            $('<div id="downloading"><div class="osc-modal-content"><?php echo osc_esc_js(__('Please wait until the download is completed')); ?></div></div>').dialog({title:'<?php echo osc_esc_js(__('Downloading')); ?>...',modal:true});
-            $.getJSON(
-            "<?php echo osc_admin_base_url(true); ?>?page=ajax&action=market&<?php echo osc_csrf_token_url(); ?>",
-            {"code" : $("#market_code").attr("value"), "section" : 'themes'},
-            function(data){
-                var content = data.message;
-                if(data.error == 0) { // no errors
-                    content += '<h3><?php echo osc_esc_js(__('The theme has been downloaded correctly, proceed to activate or preview it.')); ?></h3>';
-                    content += "<p>";
-                    content += '<a class="btn btn-mini btn-green" href="<?php echo osc_admin_base_url(true); ?>?page=appearance&marketError='+data.error+'&slug='+oscEscapeHTML(data.data['s_update_url'])+'"><?php echo osc_esc_js(__('Ok')); ?></a>';
-                    content += '<a class="btn btn-mini" href="javascript:location.reload(true)"><?php echo osc_esc_js(__('Close')); ?></a>';
-                    content += "</p>";
-                } else {
-                    content += '<a class="btn btn-mini" href="javascript:location.reload(true)"><?php echo osc_esc_js(__('Close')); ?></a>';
-                }
-                $("#downloading .osc-modal-content").html(content);
-            });
-            return false;
-        });
-    });
-
     $('.market-popup').on('click',function(){
         $.getJSON(
             "<?php echo osc_admin_base_url(true); ?>?page=ajax&action=check_market",
@@ -229,7 +159,7 @@
 
                     $('#market_installer').dialog({
                         modal:true,
-                        title: '<?php echo osc_esc_js( __('Osclass Market') ); ?>',
+                        title: '<?php echo osc_esc_js( __('Update theme') ); ?>',
                         width:485
                     });
                 }
