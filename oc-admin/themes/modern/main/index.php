@@ -248,33 +248,6 @@
             </div>
         </div>
     </div>
-    <style>
-        .mk-item {
-            width: 90%;
-            margin:5%;
-            margin-top: 3%;
-        }
-        .mk-item-plugin {
-            height: 225px;
-        }
-        .mk-item .mk-info {
-            width:auto;
-        }
-        .mk-item-plugin .banner ,
-        .mk-item-theme .banner {
-            width: 90%;
-            height: 155px;
-            border-radius: 5px 5px 0 0;
-            -webkit-border-radius: 5px 5px 0 0;
-            -moz-border-radius: 5px 5px 0 0;
-        }
-
-        .mk-item-plugin .mk-info {
-            height: 40px;
-            padding: 170px 15px 15px;
-        }
-
-    </style>
     <div class="clear"></div>
 </div>
 </div>
