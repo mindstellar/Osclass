@@ -1536,12 +1536,10 @@
 			$uri = '';
 			if ( stripos( $update_uri , "http://" ) === false ) {
 				// OSCLASS OFFICIAL REPOSITORY
-				$uri = osc_market_url( $type , $update_uri );
+				// $uri = osc_market_url( $type , $update_uri );
+				return false;
 			} else {
 				// THIRD PARTY REPOSITORY
-				if ( ! osc_market_external_sources() ) {
-					return false;
-				}
 				$uri = $update_uri;
 			}
 
@@ -2168,9 +2166,7 @@
 				$data = json_decode( osc_file_get_contents( $url , array ( 'api_key' => osc_market_api_connect() ) ) , true );
 			} else {
 				// THIRD PARTY REPOSITORY
-				if ( osc_market_external_sources() ) {
-					$data = json_decode( osc_file_get_contents( $element ) , true );
-				}
+				$data = json_decode( osc_file_get_contents( $element ) , true );
 			}
 			if ( isset( $data[ 's_compatible' ] ) ) {
 				$versions = explode( ',' , $data[ 's_compatible' ] );
@@ -2205,16 +2201,8 @@
 				$data = json_decode( osc_file_get_contents( $url , array ( 'api_key' => osc_market_api_connect() ) ) , true );
 			} else {
 				// THIRD PARTY REPOSITORY
-				if ( osc_market_external_sources() ) {
-					$download_post_data = array ();
-					$data               = json_decode( osc_file_get_contents( $code ) , true );
-				} else {
-					return array (
-						'error'   => 9 ,
-						'message' => __( 'No external sources are allowed' ) ,
-						'data'    => $data
-					);
-				}
+				$download_post_data = array ();
+				$data               = json_decode( osc_file_get_contents( $code ) , true );
 			}
 
 			/***********************
