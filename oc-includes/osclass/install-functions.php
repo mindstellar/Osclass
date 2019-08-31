@@ -845,12 +845,6 @@ CONFIG;
                 </table>
             </div>
             <div class="clear"></div>
-            <p class="margin20">
-                <input type="submit" class="button" name="submit" value="Next"/>
-                <a style="float:right;"
-                   href="https://osclass.org/page/hosting"><?php _e( 'Discover the best hosting providers for Osclass' ); ?></a>
-            </p>
-            <div class="clear"></div>
         </form>
 		<?php
 	}

@@ -184,6 +184,7 @@
 				<?php } ?>
 
                 <form action="install.php" method="post">
+					<input type="hidden" name="step" value="2"/>
                     <div class="form-table">
 						<?php if ( count( $locales ) > 1 ) { ?>
                             <div>
@@ -223,15 +224,6 @@
                                             alt="" title=""/></li>
 							<?php } ?>
                         </ul>
-                        <div class="more-stats">
-                            <input type="checkbox" name="save_stats" id="save_stats" value="1"/>
-                            <input type="hidden" name="step" value="2"/>
-                            <label for="save_stats">
-								<?php _e( 'Help make Osclass better by automatically sending usage statistics and crash reports to Osclass.' ); ?>
-                                </br><span
-                                        style="margin-left: 24px;"><?php _e( "I accept Osclass SL’s <a href=\"https://osclass.org/page/legal-note\">Terms of Use</a> and <a href=\"https://osclass.org/page/cookies\">Cookies Policy</a> and grant them permission to manage my data." ); ?></span>
-                            </label>
-                        </div>
                     </div>
 					<?php if ( $error ) { ?>
                         <p class="margin20">
@@ -287,7 +279,7 @@
                        hreflang="en"><?php _e( 'Readme' ); ?></a>
                 </li>
                 <li>
-                    <a href="https://osclass.org/contact" target="_blank" hreflang="en"><?php _e( 'Feedback' ); ?></a>
+                    <a href="https://github.com/navjottomer/Osclass/" target="_blank" hreflang="en"><?php _e( 'Feedback' ); ?></a>
                 </li>
                 <li>
                     <a href="http://forums.osclass.org/index.php" target="_blank"
