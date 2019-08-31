@@ -1,0 +1,1711 @@
+# Translation of Flash Messages in Dutch
+# This file is distributed under the same license as the Flash Messages package.
+msgid ""
+msgstr ""
+"PO-Revision-Date: 2014-04-11 07:27:59+0000\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: GlotPress/0.1\n"
+"Project-Id-Version: Flash Messages\n"
+
+#: oc-admin/items.php:669
+msgid "Title Length has to be a numeric value"
+msgstr "Lengte van titel moet een numeriek getal zijn"
+
+#: oc-admin/items.php:672
+msgid "Description Length has to be a numeric value"
+msgstr "Lengte van beschrijving moet een numeriek getal zijn"
+
+#: oc-includes/osclass/ItemActions.php:106
+msgid "Title too short (%s)."
+msgstr "Titel is te kort (%s)."
+
+#: oc-includes/osclass/ItemActions.php:107
+msgid "Title too long (%s)."
+msgstr "Titel is te lang (%s)."
+
+#: oc-includes/osclass/ItemActions.php:119
+msgid "Description too short (%s)."
+msgstr "Beschrijving is te kort (%s)."
+
+#: oc-includes/osclass/ItemActions.php:120
+msgid "Description too long (%s)."
+msgstr "Beschrijving is te lang (%s)."
+
+#: oc-includes/osclass/controller/login.php:102
+msgid "The user has not been validated yet. Would you like to re-send your <a href=\"%s\">activation?</a>"
+msgstr "De gebruiker is nog niet gevalideerd. Wilt u opnieuw uw <a href=\"%s\">activation?</a> verzenden?"
+
+#: oc-includes/osclass/controller/login.php:146
+msgid "Incorrect link"
+msgstr "Incorrecte link"
+
+#: oc-includes/osclass/controller/login.php:157
+msgid "Validation email re-sent"
+msgstr "Validatie e-mail opnieuw verzonden"
+
+#: oc-includes/osclass/controller/login.php:159
+msgid "We have just sent you an email to validate your account, you will have to wait a few minutes to resend it again"
+msgstr "We hebben net een e-mail naar u verzonden om uw account te valideren, u moet een aantal minuten wachten om de validatie opnieuw te verzenden"
+
+#: oc-includes/osclass/controller/user-non-secure.php:167
+msgid "Your email has been sent properly."
+msgstr "Uw e-mail is correct verzonden."
+
+#: oc-includes/osclass/upgrade-funcs.php:460
+msgid "Osclass has been updated successfully. <a href=\"http://forums.osclass.org/\">Need more help?</a>"
+msgstr "Osclass is succesvol geüpdate. <a href=\"http://forums.osclass.org/\">Heeft u meer hulp nodig?</a>"
+
+#: oc-includes/osclass/controller/ajax.php:115
+#: oc-includes/osclass/controller/item.php:320
+msgid "The listing doesn't exist"
+msgstr "Deze aanmelding bestaat niet"
+
+#: oc-includes/osclass/controller/ajax.php:124
+#: oc-includes/osclass/controller/ajax.php:132
+#: oc-includes/osclass/controller/item.php:326
+#: oc-includes/osclass/controller/item.php:331
+msgid "The listing doesn't belong to you"
+msgstr "De aanmelding is niet van jouw"
+
+#: oc-includes/osclass/controller/ajax.php:90
+#: oc-includes/osclass/controller/ajax.php:155
+#: oc-includes/osclass/controller/item.php:345
+msgid "The selected photo has been successfully deleted"
+msgstr "De geselecteerde afbeelding is correct verwijderd"
+
+#: oc-includes/osclass/controller/ajax.php:158
+#: oc-includes/osclass/controller/item.php:347
+msgid "The selected photo does not belong to you"
+msgstr "De geselecteerde afbeelding is niet van jouw"
+
+#: oc-includes/osclass/controller/ajax.php:90
+#: oc-includes/osclass/controller/ajax.php:162
+#: oc-includes/osclass/controller/item.php:350
+msgid "The selected photo couldn't be deleted"
+msgstr "De geselecteerde afbeelding kon niet worden verwijderd"
+
+#: oc-includes/osclass/controller/contact.php:40
+#: oc-includes/osclass/controller/item.php:123
+#: oc-includes/osclass/controller/item.php:231
+#: oc-includes/osclass/controller/item.php:395
+#: oc-includes/osclass/controller/item.php:442
+#: oc-includes/osclass/controller/user-non-secure.php:148
+msgid "The Recaptcha code is wrong"
+msgstr "De reCAPTCHA code is fout"
+
+#: oc-includes/osclass/emails.php:655
+msgid "There has been some errors sending the message"
+msgstr "Er zijn foutmeldingen tijdens het versturen van het bericht ontstaan"
+
+#: oc-includes/osclass/controller/item.php:52
+#: oc-includes/osclass/controller/item.php:101
+msgid "Only registered users are allowed to post listings"
+msgstr "Alleen geregistreerde gebruikers mogen advertentie plaatsen"
+
+#: oc-includes/osclass/controller/item.php:166
+msgid "Your listing has been published"
+msgstr "U advertentie is geplaatst"
+
+#: oc-includes/osclass/controller/item.php:240
+msgid "Great! We've just updated your listing"
+msgstr "Geweldig! We hebben net uw advertentie bijgewerkt"
+
+#: oc-includes/osclass/controller/item.php:267
+msgid "The listing has been validated"
+msgstr "De advertentie is gevalideerd"
+
+#: oc-includes/osclass/controller/item.php:269
+msgid "The listing can't be validated"
+msgstr "De advertentie kan niet worden gevalideerd"
+
+#: oc-includes/osclass/controller/item.php:272
+msgid "The listing has already been validated"
+msgstr "De advertentie is reeds gevalideerd"
+
+#: oc-includes/osclass/controller/item.php:285
+msgid "Your listing has been deleted"
+msgstr "U advertentie is verwijderd"
+
+#: oc-includes/osclass/controller/item.php:287
+#: oc-includes/osclass/controller/item.php:295
+msgid "The listing you are trying to delete couldn't be deleted"
+msgstr "De vermelding die u probeert te verwijderen, kon niet worden verwijderd"
+
+#: oc-includes/osclass/controller/item.php:372
+msgid "Thanks! That's very helpful"
+msgstr "Hartstikke bedankt! Dit is erg behulpzaam"
+
+#: oc-includes/osclass/controller/item.php:418
+#: oc-includes/osclass/controller/item.php:525
+msgid "This listing doesn't exist"
+msgstr "deze advertentie bestaat niet"
+
+#: oc-includes/osclass/controller/item.php:424
+#: oc-includes/osclass/controller/item.php:462
+msgid "We're sorry, but the listing has expired. You can't contact the seller"
+msgstr "Het spijt ons, maar de aanbieding is verlopen. Je kunt geen contact opnemen met de verkoper "
+
+#: oc-includes/osclass/controller/item.php:431
+msgid "You can't contact the seller, only registered users can"
+msgstr "U kunt geen contact opnemen met de adverteerder, dat kunnen alleen geregistreerde gebruikers"
+
+#: oc-includes/osclass/controller/item.php:475
+msgid "We've just sent an e-mail to the seller"
+msgstr "We hebben net een email naar de verkoper gestuurd"
+
+#: oc-includes/osclass/controller/item.php:485
+msgid "Sorry, we could not save your comment. Try again later"
+msgstr "Sorry, uw reactie kon niet worden opgeslagen. Probeer het later opnieuw"
+
+#: oc-includes/osclass/controller/item.php:488
+msgid "Your comment is awaiting moderation"
+msgstr "Uw reactie wacht op verificatie"
+
+#: oc-includes/osclass/controller/item.php:491
+msgid "Your comment has been approved"
+msgstr "Uw reactie is geaccordeerd"
+
+#: oc-includes/osclass/controller/item.php:494
+msgid "Please fill the required field (email)"
+msgstr "Vul het verpichte veld (e-mail) in aub."
+
+#: oc-includes/osclass/controller/item.php:497
+msgid "Please type a comment"
+msgstr "Voer uw reactie in"
+
+#: oc-includes/osclass/controller/item.php:500
+msgid "Your comment has been marked as spam"
+msgstr "Uw reactie is beoordeeld als spam"
+
+#: oc-includes/osclass/controller/item.php:532
+msgid "You must be logged in to delete a comment"
+msgstr "U moet ingelogd zijn om een reactie te kunnen verwijderen"
+
+#: oc-includes/osclass/controller/item.php:540
+msgid "The comment doesn't exist"
+msgstr "De reactie bestaat niet"
+
+#: oc-includes/osclass/controller/item.php:545
+msgid "The comment is not active, you cannot delete it"
+msgstr "De reactie is niet actief, u kunt deze niet verwijderen"
+
+#: oc-includes/osclass/controller/item.php:550
+msgid "The comment was not added by you, you cannot delete it"
+msgstr "De reactie is niet door u gegeven. U kunt deze reactie niet verwijderen"
+
+#: oc-admin/comments.php:199 oc-includes/osclass/controller/item.php:555
+msgid "The comment has been deleted"
+msgstr "De reactie is verwijderd"
+
+#: oc-includes/osclass/controller/login.php:26
+#: oc-includes/osclass/controller/register.php:27
+#: oc-includes/osclass/controller/user-non-secure.php:26
+#: oc-includes/osclass/controller/user.php:26
+msgid "Users not enabled"
+msgstr "Niet actieve gebruikers"
+
+#: oc-includes/osclass/controller/login.php:37
+#: oc-includes/osclass/controller/register.php:50
+msgid "Users are not enabled"
+msgstr "Gebruikers zijn niet ingeschakeld"
+
+#: oc-includes/osclass/controller/login.php:77
+#: oc-includes/osclass/controller/login.php:99
+msgid "The user doesn't exist"
+msgstr "De gebruiker bestaat niet"
+
+#: oc-includes/osclass/controller/login.php:82
+msgid "The password is incorrect"
+msgstr "Het wachtwoord is onjuist"
+
+#: oc-includes/osclass/controller/login.php:104
+msgid "The user has not been validated yet"
+msgstr "De gebruiker is nog niet gevalideerd"
+
+#: oc-includes/osclass/controller/login.php:107
+msgid "The user has been suspended"
+msgstr "De gebruiker is verboden"
+
+#: oc-includes/osclass/controller/login.php:172
+msgid "Invalid email address"
+msgstr "Ongeldig emailadres"
+
+#: oc-includes/osclass/controller/login.php:181
+msgid "We have sent you an email with the instructions to reset your password"
+msgstr "We hebben u een email gestuurd met de instructies om uw wachtwoord te resetten"
+
+#: oc-includes/osclass/controller/login.php:185
+msgid "We were not able to identify you given the information provided"
+msgstr "We zijn niet in staat om u te identificeren op basis van de verstrekte informatie"
+
+#: oc-includes/osclass/controller/login.php:189
+msgid "The recaptcha code is wrong"
+msgstr "de reCAPTCHA code is niet correct"
+
+#: oc-admin/login.php:135 oc-admin/login.php:145
+#: oc-includes/osclass/controller/login.php:199
+#: oc-includes/osclass/controller/login.php:227
+#: oc-includes/osclass/controller/user-non-secure.php:55
+#: oc-includes/osclass/controller/user-non-secure.php:59
+msgid "Sorry, the link is not valid"
+msgstr "Sorry, de link is niet meer geldig"
+
+#: oc-includes/osclass/controller/login.php:206
+#: oc-includes/osclass/controller/user.php:175
+msgid "Password cannot be blank"
+msgstr "Wachtwoord kan niet leeg zijn"
+
+#: oc-admin/login.php:155 oc-includes/osclass/controller/login.php:220
+msgid "The password has been changed"
+msgstr "Het wachtword is veranderd"
+
+#: oc-includes/osclass/controller/login.php:223
+msgid "Error, the password don't match"
+msgstr "Foutmelding: de wachtwoorden zijn niet identiek"
+
+#: oc-includes/osclass/controller/register.php:32
+msgid "User registration is not enabled"
+msgstr "Gebruikers registratie is niet geactiveerd"
+
+#: oc-includes/osclass/controller/register.php:70
+msgid "The user has been created. An activation email has been sent"
+msgstr "De gebruiker is aangemaakt. Een activerings email is opgestuurd"
+
+#: oc-includes/osclass/controller/register.php:73
+msgid "Your account has been created successfully"
+msgstr "Je account is succesvol aangemaakt"
+
+#: oc-includes/osclass/controller/register.php:82
+#: oc-includes/osclass/controller/user.php:135
+msgid "The specified e-mail is already in use"
+msgstr "De opgegeven email wordt al gebruikt"
+
+#: oc-includes/osclass/controller/register.php:88
+msgid "The email is not valid"
+msgstr "Het emailadres is niet correct"
+
+#: oc-includes/osclass/controller/register.php:91
+msgid "The password cannot be empty"
+msgstr "Het wachtwoord mag niet leeg zijn"
+
+#: oc-admin/users.php:141 oc-includes/osclass/controller/register.php:94
+#: oc-includes/osclass/controller/user.php:190
+msgid "Passwords don't match"
+msgstr "Wachtwoorden komen niet overeen"
+
+#: oc-includes/osclass/controller/register.php:115
+msgid "The link is not valid anymore. Sorry for the inconvenience!"
+msgstr "Deze link is niet meer geldig. Onze excuses voor het ongemak!"
+
+#: oc-includes/osclass/controller/register.php:120
+msgid "Your account has already been validated"
+msgstr "Uw account is al gevalideerd"
+
+#: oc-includes/osclass/controller/register.php:140
+msgid "Your account has been validated"
+msgstr "Je account is goedgekeurd"
+
+#: oc-includes/osclass/controller/user-non-secure.php:52
+msgid "Your email has been changed successfully"
+msgstr "Je email adres is succesvol aangepast"
+
+#: oc-includes/osclass/controller/user-non-secure.php:81
+#: oc-includes/osclass/controller/user.php:227
+msgid "Alert activated"
+msgstr "Melding geactiveerd"
+
+#: oc-includes/osclass/controller/user-non-secure.php:102
+#: oc-includes/osclass/controller/user.php:248
+msgid "Unsubscribed correctly"
+msgstr "Correct afgemeld"
+
+#: oc-includes/osclass/controller/user.php:79
+msgid "Your profile has been updated successfully"
+msgstr "Je profiel is succesvol bijgewerkt. "
+
+#: oc-admin/users.php:78 oc-includes/osclass/controller/user.php:111
+msgid "The specified e-mail is not valid"
+msgstr "Het emailadres is niet correct"
+
+#: oc-includes/osclass/controller/user.php:180
+msgid "Current password doesn't match"
+msgstr "Het huidige wachtwoord komt niet overeen"
+
+#: oc-includes/osclass/controller/user.php:185
+msgid "Passwords can't be empty"
+msgstr "Wachtwoorden kunnen niet leeg zijn"
+
+#: oc-includes/osclass/controller/user.php:197
+msgid "Password has been changed"
+msgstr "Wachtwoord is aangepast"
+
+#: oc-admin/admins.php:34 oc-admin/items.php:42
+#: oc-includes/osclass/core/AdminSecBaseModel.php:32
+msgid "You don't have enough permissions"
+msgstr "Je hebt niet genoeg rechten"
+
+#: oc-admin/admins.php:77 oc-admin/admins.php:177
+msgid "Email invalid"
+msgstr "Emailadres is niet correct"
+
+#: oc-admin/admins.php:81 oc-admin/admins.php:181
+msgid "Username invalid"
+msgstr "Gebruikersnaam is niet correct"
+
+#: oc-admin/admins.php:85 oc-admin/admins.php:185
+msgid "Name invalid"
+msgstr "Naam ongeldig"
+
+#: oc-admin/admins.php:89 oc-admin/admins.php:216
+msgid "Password invalid"
+msgstr "Wachtwoord is niet correct"
+
+#: oc-admin/admins.php:94
+msgid "Email already in use"
+msgstr "Emailadres is reeds in gebruik"
+
+#: oc-admin/admins.php:99
+msgid "Username already in use"
+msgstr "Gebruikersnaam is reeds in gebruik"
+
+#: oc-admin/admins.php:122
+msgid "The admin has been added"
+msgstr "De admin is toegevoegd"
+
+#: oc-admin/admins.php:192
+msgid "This admin doesn't exist"
+msgstr "Deze admin bestaat niet"
+
+#: oc-admin/admins.php:198
+msgid "Existing email"
+msgstr "Bestaande email"
+
+#: oc-admin/admins.php:205
+msgid "Existing username"
+msgstr "Bestaande gebruikersnaam"
+
+#: oc-admin/admins.php:224 oc-admin/admins.php:234
+msgid "The password couldn't be updated. Passwords don't match"
+msgstr "Het wachtwoord kon niet worden bijgewerkt. De wachtwoorden komen niet overeen"
+
+#: oc-admin/admins.php:251
+msgid "The admin has been updated"
+msgstr "De admin is bijgewerkt"
+
+#: oc-admin/admins.php:270
+msgid "The admin id isn't in the correct format"
+msgstr "De admin id staat niet in het goede formaat"
+
+#: oc-admin/admins.php:276
+msgid "The operation hasn't been completed. You're trying to remove yourself!"
+msgstr "De opdracht is niet uitgevoerd. Je probeert jezelf te verwijderen!"
+
+#: oc-admin/admins.php:283
+msgid "The admin has been deleted correctly"
+msgstr "De admin is succesvol verwijderd"
+
+#: oc-admin/admins.php:285
+msgid "The admin couldn't be deleted"
+msgstr "De admin kan niet verwijderd worden"
+
+#: oc-admin/tools.php:40 oc-admin/tools.php:67 oc-admin/tools.php:77
+#: oc-admin/tools.php:94 oc-admin/tools.php:130 oc-admin/tools.php:173
+#: oc-admin/tools.php:200 oc-admin/tools.php:229
+msgid "This action cannot be done because it is a demo site"
+msgstr "Deze actie kan niet worden uitgevoerd omdat dit een demo site is"
+
+#: oc-admin/tools.php:122 oc-admin/tools.php:154
+msgid "Backup completed successfully"
+msgstr "Back-up succesvol afgerond"
+
+#: oc-admin/appearance.php:52
+msgid "The theme folder is not writable"
+msgstr "De thema map heeft geen schrijfrechten"
+
+#: oc-admin/appearance.php:55
+msgid "The theme has been installed correctly"
+msgstr "Het thema is correct geinstalleerd"
+
+#: oc-admin/appearance.php:58 oc-admin/languages.php:71 oc-admin/plugins.php:64
+msgid "The zip file is not valid"
+msgstr "De zipfile is niet correct"
+
+#: oc-admin/appearance.php:61 oc-admin/languages.php:74 oc-admin/plugins.php:67
+#: oc-admin/tools.php:59
+msgid "No file was uploaded"
+msgstr "Geen bestand geupload"
+
+#: oc-admin/appearance.php:66
+msgid "There was a problem adding the theme"
+msgstr "Er is een fout ontstaan tijdens het toevoegen van het thema"
+
+#: oc-admin/appearance.php:84
+msgid "Theme removed successfully"
+msgstr "Thema succesvol verwijderd"
+
+#: oc-admin/appearance.php:86
+msgid "There was a problem removing the theme"
+msgstr "Er was een probleem bij het verwijderen van het thema"
+
+#: oc-admin/appearance.php:89
+msgid "Current theme can not be deleted"
+msgstr "Actuele thema kan niet worden verwijderd"
+
+#: oc-admin/appearance.php:92
+msgid "No theme selected"
+msgstr "Geen thema geselcteerd"
+
+#: oc-admin/appearance.php:121
+msgid "Widget removed correctly"
+msgstr "Widget correct verwijderd"
+
+#: oc-admin/appearance.php:127 oc-admin/appearance.php:149
+msgid "Description field is required"
+msgstr "Beschrijving veld is verplicht"
+
+#: oc-admin/appearance.php:140
+msgid "Widget updated correctly"
+msgstr "Widget correct geupdate"
+
+#: oc-admin/appearance.php:142
+msgid "Widget cannot be updated correctly"
+msgstr "Widget kan niet correct geupdate worden"
+
+#: oc-admin/appearance.php:161
+msgid "Widget added correctly"
+msgstr "Widget correct toegevoegd"
+
+#: oc-admin/appearance.php:168
+msgid "Theme activated correctly"
+msgstr "Thema correct geactiveerd"
+
+#: oc-admin/comments.php:56
+msgid "The comments have been deleted"
+msgstr "De opmerkingen zijn verwijderd"
+
+#: oc-admin/comments.php:69
+msgid "The comments have been approved"
+msgstr "De opmerkingen zijn goedgekeurd"
+
+#: oc-admin/comments.php:79
+msgid "The comments have been disapproved"
+msgstr "De reacties zijn afgekeurd"
+
+#: oc-admin/comments.php:132
+msgid "The comment has been approved"
+msgstr "De opmerking is goedgekeurd"
+
+#: oc-admin/comments.php:139
+msgid "The comment has been disapproved"
+msgstr "De reactie is afgekeurd"
+
+#: oc-admin/comments.php:146
+msgid "The comment has been enabled"
+msgstr "De reactie is ingeschakeld"
+
+#: oc-admin/comments.php:153
+msgid "The comment has been disabled"
+msgstr "De reactie is uitgeschakeld"
+
+#: oc-admin/comments.php:168
+msgid "Email is not correct"
+msgstr "E-mail is niet goed"
+
+#: oc-admin/comments.php:171
+msgid "Comment is required"
+msgstr "Reactie is verplicht"
+
+#: oc-admin/comments.php:193
+msgid "Great! We just updated your comment"
+msgstr "Geweldig! We hebben je opmerking vernieuwd"
+
+#: oc-admin/emails.php:86
+msgid "The email/alert has been updated"
+msgstr "De email/melding is vernieuwd"
+
+#: oc-admin/emails.php:89 oc-admin/pages.php:106
+msgid "You can't repeat internal name"
+msgstr "Je kan geen interne naam herhalen"
+
+#: oc-admin/emails.php:91
+msgid "The email couldn't be updated, at least one title should not be empty"
+msgstr "De email kan niet worden gewijzigd, voer tenminste een titel in"
+
+#: oc-admin/items.php:63
+msgid "%d listing has been enabled"
+msgstr "%d advertentie is ingeschakeld"
+
+#: oc-admin/items.php:75
+msgid "%d listing has been disabled"
+msgstr "%d advertentie is uitgeschakeld"
+
+#: oc-admin/items.php:87
+msgid "%d listing has been activated"
+msgstr "%d advertentie is geactiveerd"
+
+#: oc-admin/items.php:99
+msgid "%d listing has been deactivated"
+msgstr "%d advertentie is gedeactiveerd"
+
+#: oc-admin/items.php:111
+msgid "%d listing has been marked as premium"
+msgstr "%d advertentie is gemarkeerd als premium"
+
+#: oc-admin/items.php:123 oc-admin/items.php:148
+msgid "%d change has been made"
+msgstr "%d wijzigingen is gemaakt "
+
+#: oc-admin/items.php:135
+msgid "%d listing has been marked as spam"
+msgstr "%d advertentie is gemarkeerd als spam"
+
+#: oc-admin/items.php:166
+msgid "%d listing has been deleted"
+msgstr "%d advertentie is verwijderd"
+
+#: oc-admin/items.php:183
+msgid "%d listing has been unmarked as spam"
+msgstr "%d advertentie is ongemarkeerd als spam"
+
+#: oc-admin/items.php:200
+msgid "%d listing has been unmarked as missclassified"
+msgstr "%d advertentie is ongemarkeerd als onjuist geclassificeerd"
+
+#: oc-admin/items.php:217
+msgid "%d listing has been unmarked as duplicated"
+msgstr "%d advertentie is ongemarkeerde als gedupliceerd"
+
+#: oc-admin/items.php:234
+msgid "%d listing has been unmarked as expired"
+msgstr "%d advertentie is ongemarkeerd als vervallen"
+
+#: oc-admin/items.php:251
+msgid "%d listing has been unmarked as offensive"
+msgstr "%d advertentie is ongemarkeerd als onpasselijk"
+
+#: oc-admin/items.php:326 oc-admin/items.php:338 oc-admin/items.php:348
+#: oc-admin/items.php:358 oc-admin/items.php:387 oc-admin/items.php:413
+#: oc-admin/items.php:557
+msgid "An error has occurred"
+msgstr "Er is een fout opgetreden"
+
+#: oc-admin/items.php:293
+msgid "The listing has been deleted"
+msgstr "De advertentie is verwijderd"
+
+#: oc-admin/items.php:295
+msgid "The listing couldn't be deleted"
+msgstr "De advertentie kon niet verwijderd worden"
+
+#: oc-admin/items.php:324
+msgid "The listing has been activated"
+msgstr "De advertentie is geactiveerd"
+
+#: oc-admin/items.php:336
+msgid "The listing has been deactivated"
+msgstr "De advertentie is gedeactiveerd"
+
+#: oc-admin/items.php:346
+msgid "The listing has been enabled"
+msgstr "De advertentie is ingeschakeld"
+
+#: oc-admin/items.php:356
+msgid "The listing has been disabled"
+msgstr "De advertentie is uitgeschakeld"
+
+#: oc-admin/items.php:385 oc-admin/items.php:411
+msgid "Changes have been applied"
+msgstr "De veranderingen zijn toegepast"
+
+#: oc-admin/items.php:437
+msgid "The listing has been unmarked as"
+msgstr "De advertentie is ongemarkeerd als"
+
+#: oc-admin/items.php:439
+msgid "The listing hasn't been unmarked as"
+msgstr "De advertntie is niet ongemarkeerd als"
+
+#: oc-admin/items.php:526
+msgid "Changes saved correctly"
+msgstr "Wijzigingen correct opgeslagen"
+
+#: oc-admin/items.php:559 oc-admin/media.php:55 oc-admin/media.php:78
+msgid "Resource deleted"
+msgstr "Bron verwijderd"
+
+#: oc-admin/items.php:608
+msgid "A new listing has been added"
+msgstr "Er is een nieuwe advertentie geplaast"
+
+#: oc-admin/items.php:703
+msgid "Listings' settings have been updated"
+msgstr "Advertentie instellingen zijn geupdate"
+
+#: oc-admin/languages.php:60
+msgid "The translation folder is not writable"
+msgstr "De taal map heeft geen schrijfrechten"
+
+#: oc-admin/languages.php:64
+msgid "The language has been installed correctly"
+msgstr "De taal is succesvol geïnstalleerd"
+
+#: oc-admin/languages.php:67 oc-admin/languages.php:79
+msgid "There was a problem adding the language"
+msgstr "Er was een probleem met het toevoegen van de taal"
+
+#: oc-admin/languages.php:89 oc-admin/languages.php:122
+msgid "Language id isn't in the correct format"
+msgstr "Taal id is niet in het juiste formaat"
+
+#: oc-admin/languages.php:96
+msgid "Language id doesn't exist"
+msgstr "Taal id bestaat niet"
+
+#: oc-admin/languages.php:145
+msgid "Language name field is required"
+msgstr "Taal naam veld is verplicht"
+
+#: oc-admin/languages.php:148
+msgid "Language short name field is required"
+msgstr "Taal korte naamveld is verplicht"
+
+#: oc-admin/languages.php:151
+msgid "Language description field is required"
+msgstr "Taal omschrijving veld is verplicht"
+
+#: oc-admin/languages.php:154
+msgid "Currency format field is required"
+msgstr "Valuta-indeling is een verplicht veld"
+
+#: oc-admin/languages.php:178
+msgid "%s has been updated"
+msgstr "%s is vernieuwd"
+
+#: oc-admin/languages.php:184
+msgid "Selected languages have been enabled for the website"
+msgstr "De geselecteerde talen zijn ingeschakeld voor de website"
+
+#: oc-admin/languages.php:191 oc-admin/languages.php:216
+#: oc-admin/languages.php:249 oc-admin/languages.php:274
+msgid "The language ids aren't in the correct format"
+msgstr "De taal-id's zijn niet in het juiste formaat"
+
+#: oc-admin/languages.php:208
+msgid "Selected languages have been disabled for the website"
+msgstr "De geselecteerde talen zijn uitgeschakeld voor de website"
+
+#: oc-admin/languages.php:242
+msgid "Selected languages have been enabled for the backoffice (oc-admin)"
+msgstr "De geselecteerde talen zijn ingeschakeld voor de back-office (oc-admin)"
+
+#: oc-admin/languages.php:266
+msgid "Selected languages have been disabled for the backoffice (oc-admin)"
+msgstr "De geselecteerde talen zijn uitgeschakeld voor de back-office (oc-admin)"
+
+#: oc-admin/languages.php:222 oc-admin/languages.php:280
+msgid "%s can't be disabled because it's the default language"
+msgstr "%s kan niet worden uitgeschakeld omdat het de standaard taal is"
+
+#: oc-admin/languages.php:306
+msgid "Directory '%s' couldn't be removed"
+msgstr "Map '%s'kon niet verwijderd worden"
+
+#: oc-admin/languages.php:308
+msgid "Directory \"%s\" has been successfully removed"
+msgstr "Map \\\"%s\\\" is verwijderd"
+
+#: oc-admin/languages.php:314
+msgid "Directory '%s' couldn't be removed because it's the default language. Set another language as default first and try again"
+msgstr "Map  '%s' kon niet verwijderd worden omdat het de standaard taal. Stel eerts een andere taal als standaard in en probeer het opnieuw"
+
+#: oc-admin/login.php:47
+msgid "The username field is empty"
+msgstr "Het gebruikersnaam veld is leeg"
+
+#: oc-admin/login.php:52
+msgid "The password field is empty"
+msgstr "Het wachtwoord veld is leeg"
+
+#: oc-admin/login.php:60
+msgid "Sorry, incorrect username. <a href=\"%s\">Have you lost your password?</a>"
+msgstr "Sorry, foute gebruikersnaam.  <a href=\"%s\">Bent u uw wachtwoord kwijt?</a>"
+
+#: oc-admin/login.php:65
+msgid "Sorry, incorrect password. <a href=\"%s\">Have you lost your password?</a>"
+msgstr "Sorry, fout wachtwoord. <a href=\"%s\">Bent u uw wachtwoord kwijt?</a>"
+
+#: oc-admin/login.php:111
+msgid "The reCAPTCHA code is wrong"
+msgstr "De reCAPTCHA code is fout"
+
+#: oc-admin/login.php:129
+msgid "A new password has been sent to your e-mail"
+msgstr "Er is een nieuw wachtwoord naar uw emailadres gestuurd"
+
+#: oc-admin/login.php:158
+msgid "Error, the passwords don't match"
+msgstr "Fout, de wachtwoorden zijn niet het zelfde"
+
+#: oc-admin/pages.php:86 oc-admin/pages.php:151
+msgid "You have to set a different internal name"
+msgstr "U moet een andere interne naam instellen"
+
+#: oc-admin/pages.php:103
+msgid "The page has been updated"
+msgstr "De pagina is vernieuwd"
+
+#: oc-admin/pages.php:108
+msgid "The page couldn't be updated, at least one title should not be empty"
+msgstr "De pagina kon niet worden geupdate, voer tenminste een titel in"
+
+#: oc-admin/pages.php:81 oc-admin/pages.php:146
+msgid "You have to set an internal name"
+msgstr "Je moet een interne naam instellen"
+
+#: oc-admin/pages.php:162
+msgid "The page has been added"
+msgstr "De pagina is toegevoegd"
+
+#: oc-admin/pages.php:165
+msgid "The page couldn't be added, at least one title should not be empty"
+msgstr "De pagina kan niet worden toegevoegd, voer tenminste een titel in"
+
+#: oc-admin/pages.php:168
+msgid "Oops! That internal name is already in use. We can't make the changes"
+msgstr "Oeps! Die de interne naam is al in gebruik. Kunnen we er niet wijzigingen aan aanbrengen?"
+
+#: oc-admin/pages.php:199
+msgid "One page can't be deleted because it is indelible"
+msgstr "Een pagina kan niet worden verwijderd aangezien deze onuitwisbaar is"
+
+#: oc-admin/pages.php:201
+msgid "%s pages couldn't be deleted because they are indelible"
+msgstr "%s pagina kon niet worden verwijderd, omdat ze onuitwisbaar zijn"
+
+#: oc-admin/pages.php:206
+msgid "One page couldn't be deleted"
+msgstr "Één pagina kon niet worden verwijderd"
+
+#: oc-admin/pages.php:208
+msgid "%s pages couldn't be deleted"
+msgstr "%s paginas konden niet verwijderd worden"
+
+#: oc-admin/pages.php:213
+msgid "One page has been deleted correctly"
+msgstr "Één pagina is succesvol verwijderd"
+
+#: oc-admin/pages.php:215
+msgid "%s pages have been deleted correctly"
+msgstr "%s pagina's zijn correct verwijderd"
+
+#: oc-admin/plugins.php:58
+msgid "The plugin folder is not writable"
+msgstr "De plugin folder heeft geen schrijfrechten"
+
+#: oc-admin/plugins.php:61
+msgid "The plugin has been uploaded correctly"
+msgstr "De pluging is correct geupload"
+
+#: oc-admin/plugins.php:72
+msgid "There was a problem adding the plugin"
+msgstr "Er was een foutmelding met het toevoegen van de plugin"
+
+#: oc-admin/plugins.php:97
+msgid "Plugin is already installed"
+msgstr "Plugin is al geinstalleerd"
+
+#: oc-admin/plugins.php:100
+msgid "Plugin couldn't be installed because their files are missing"
+msgstr "Plugin kon niet worden geïnstalleerd, omdat er bestanden ontbreken"
+
+#: oc-admin/plugins.php:103
+msgid "Plugin couldn't be installed because of: %s"
+msgstr "Plugin kon niet worden geïnstalleerd omdat: %s"
+
+#: oc-admin/plugins.php:106
+msgid "Plugin couldn't be installed"
+msgstr "Plugin kon niet geinstalleerd worden"
+
+#: oc-admin/plugins.php:110
+msgid "Plugin installed"
+msgstr "Plugin geïnstalleerd"
+
+#: oc-admin/plugins.php:123
+msgid "Plugin uninstalled"
+msgstr "Plugin verwijderd"
+
+#: oc-admin/plugins.php:125
+msgid "Plugin couldn't be uninstalled"
+msgstr "Plugin kon niet verwijderd worden"
+
+#: oc-admin/plugins.php:138
+msgid "Plugin enabled"
+msgstr "Plugin geactiveerd"
+
+#: oc-admin/plugins.php:140
+msgid "Plugin is already enabled"
+msgstr "Plugin is al geactiveerd"
+
+#: oc-admin/plugins.php:153
+msgid "Plugin disabled"
+msgstr "Plugin gedeactiveerd"
+
+#: oc-admin/plugins.php:155
+msgid "Plugin is already disabled"
+msgstr "Plugin is al gedeactiveerd"
+
+#: oc-admin/plugins.php:226
+msgid "No plugin selected"
+msgstr "Geen Plugin geselecteerd"
+
+#: oc-admin/plugins.php:222
+msgid "Configuration was saved"
+msgstr "Configuratie is bewaard"
+
+#: oc-admin/controller/settings/locations.php:43
+#: oc-admin/controller/settings/locations.php:186
+#: oc-admin/controller/settings/locations.php:244
+#: oc-admin/controller/settings/locations.php:330
+#: oc-admin/controller/settings/locations.php:388
+msgid "%s already was in the database"
+msgstr "%s is reeds in de database aanwezig"
+
+#: oc-admin/controller/settings/locations.php:51
+msgid "Country code and name should have at least two characters"
+msgstr "Landcode en de naam moet minstens twee karakters hebben"
+
+#: oc-admin/controller/settings/locations.php:48
+#: oc-admin/controller/settings/locations.php:66
+msgid "%s has been added as a new country"
+msgstr "%s is toegevoegd als een nieuw land"
+
+#: oc-admin/controller/settings/locations.php:108
+msgid "Country has been edited"
+msgstr "Land is gewijzigd"
+
+#: oc-admin/controller/settings/locations.php:110
+msgid "There were some problems editing the country"
+msgstr "Er waren foutmeldingen tijdens het wijzigen van het land"
+
+#: oc-admin/controller/settings/locations.php:162
+#: oc-admin/controller/settings/locations.php:184
+msgid "%s has been added as a new region"
+msgstr "%s is toegevoegd als een nieuwe provincie"
+
+#: oc-admin/controller/settings/locations.php:241
+#: oc-admin/controller/settings/locations.php:386
+msgid "%s has been edited"
+msgstr "%s is aangepast"
+
+#: oc-admin/controller/settings/locations.php:303
+#: oc-admin/controller/settings/locations.php:328
+msgid "%s has been added as a new city"
+msgstr "%s is toegevoegd als een nieuwe stad"
+
+#: oc-admin/controller/settings/permalinks.php:428
+msgid "One field was not updated"
+msgstr "Één veld was niet geupdate"
+
+#: oc-admin/controller/settings/permalinks.php:431
+#: oc-admin/controller/settings/permalinks.php:479
+msgid "Permalinks structure updated"
+msgstr "Permalinks structuur bijgewerkt"
+
+#: oc-admin/controller/settings/permalinks.php:440
+msgid "Permalinks structure updated."
+msgstr "Permalinks structuur bijgewerkt"
+
+#: oc-admin/controller/settings/permalinks.php:442
+msgid "However, we can't check if Apache module <b>mod_rewrite</b> is loaded. If you experience some problems with the URLs, you should deactivate <em>Friendly URLs</em>"
+msgstr "Echter, we kunnen niet controleren of Apache module <b>mod_rewrite</b>geladen is.Als je wat problemen met de URL's te ervaart, moet je <em>Friendly URLs</em> deactiveren"
+
+#: oc-admin/controller/settings/permalinks.php:508
+msgid "Friendly URLs successfully deactivated"
+msgstr "Friendly URLs succesvol gedeactiveerd"
+
+#: oc-admin/controller/settings/spamnbots.php:60
+msgid "Your Akismet key has been cleared"
+msgstr "Uw Akismet sleutel is leeg gemaakt"
+
+#: oc-admin/controller/settings/spamnbots.php:62
+msgid "Your Akismet key has been updated"
+msgstr "Uw Akismet sleutel is geupdate"
+
+#: oc-admin/controller/settings/spamnbots.php:79
+msgid "Your reCAPTCHA key has been cleared"
+msgstr "Uw reCAPTCHA sleutel is gewist"
+
+#: oc-admin/controller/settings/spamnbots.php:81
+msgid "Your reCAPTCHA key has been updated"
+msgstr "Uw reCAPTCHA sleutel is geupdate"
+
+#: oc-admin/controller/settings/currencies.php:55
+msgid "The currency code is not in the correct format"
+msgstr "De valuta code is niet in het juiste formaat"
+
+#: oc-admin/controller/settings/currencies.php:68
+msgid "Currency added"
+msgstr "Valuta toegevoegd"
+
+#: oc-admin/controller/settings/currencies.php:70
+msgid "Currency couldn't be added"
+msgstr "Valuta kon niet worden toegevoegd"
+
+#: oc-admin/controller/settings/currencies.php:81
+#: oc-admin/controller/settings/currencies.php:88
+msgid "The currency code '%s' doesn't exist"
+msgstr "De valuta code '%s' bestaat niet"
+
+#: oc-admin/controller/settings/currencies.php:111
+msgid "Error: the currency code is not in the correct format"
+msgstr "Foutmelding: de valuta code staat niet in het juiste formaat"
+
+#: oc-admin/controller/settings/currencies.php:124
+msgid "Currency updated"
+msgstr "Valuta geupdate"
+
+#: oc-admin/controller/settings/currencies.php:126
+msgid "No changes were made"
+msgstr "Er zijn geen wijzigingen gemaakt"
+
+#: oc-admin/controller/settings/currencies.php:158
+msgid "No currencies have been deleted"
+msgstr "Er zijn geen valuta's vewijderd"
+
+#: oc-admin/controller/settings/currencies.php:162
+msgid "One currency has been deleted"
+msgstr "Één valuta is verwijderd"
+
+#: oc-admin/controller/settings/currencies.php:166
+msgid "%s currencies have been deleted"
+msgstr "%s valuta's zijn verwijderd"
+
+#: oc-admin/controller/settings/mailserver.php:56
+msgid "Mail server type is incorrect"
+msgstr "Mail server type is onjuist"
+
+#: oc-admin/controller/settings/mailserver.php:72
+msgid "Mail server configuration has changed"
+msgstr "Mail server configuratie is vernieuwd"
+
+#: oc-admin/controller/settings/media.php:86
+#: oc-admin/controller/settings/media.php:94
+msgid "There was a problem uploading the watermark image"
+msgstr "Er was een probleem bij het uploaden van het watermerk afbeelding"
+
+#: oc-admin/controller/settings/media.php:90
+msgid "The watermark image has to be a .PNG file"
+msgstr "Het watermerk afbeelding moet een .PNG bestand zijn"
+
+#: oc-admin/controller/settings/media.php:140
+msgid "You cannot set a maximum file size higher than the one allowed in the PHP configuration: <b>%d KB</b>"
+msgstr "U kunt  de maximale bestandsgrootte niet hoger instellen dan toegestaan ​​in de PHP configuratie: <b>%d KB</b>"
+
+#: oc-admin/controller/settings/media.php:164
+msgid "Media config has been updated"
+msgstr "Media configuratie is vernieuwd"
+
+#: oc-admin/controller/settings/media.php:218
+msgid "Re-generation complete"
+msgstr "Regeneratie uitgevoerd"
+
+#: oc-admin/controller/settings/main.php:77
+msgid "Page title field is required"
+msgstr "Pagina titel veld is verplicht"
+
+#: oc-admin/controller/settings/main.php:80
+msgid "Contact email field is required"
+msgstr "Contact e-mail veld is verplicht"
+
+#: oc-admin/controller/settings/main.php:131
+#: oc-admin/controller/settings/main.php:133
+msgid "General settings have been updated"
+msgstr "Algemene instellingen zijn vernieuwd"
+
+#: oc-admin/controller/settings/latestsearches.php:43
+msgid "Custom number could not be left empty"
+msgstr "Aangepaste nummer kan niet leeg worden gelaten"
+
+#: oc-admin/controller/settings/latestsearches.php:48
+msgid "Last search settings have been updated"
+msgstr "Laatste zoekinstellingen zijn bijgewerkt"
+
+#: oc-admin/tools.php:54
+msgid "Import complete"
+msgstr "Importeren gereed"
+
+#: oc-admin/tools.php:56
+msgid "There was a problem importing data to the database"
+msgstr "Foutmelding tijdens importeren van de database"
+
+#: oc-admin/tools.php:71
+msgid "Recount category stats has been successful"
+msgstr "Hertelling categorie stats is succesvol geweest"
+
+#: oc-admin/tools.php:110 oc-admin/tools.php:139
+msgid "Path is empty"
+msgstr "Path is leeg"
+
+#: oc-admin/tools.php:113 oc-admin/tools.php:142
+msgid "Could not connect with the database. Error: %s"
+msgstr "Er is geen erbinding met de database mogelijk. Foutmelding: %s"
+
+#: oc-admin/tools.php:116 oc-admin/tools.php:148
+msgid "There are no tables to back up"
+msgstr "Er zijn geen tabellen om te backuppen"
+
+#: oc-admin/tools.php:119 oc-admin/tools.php:151
+msgid "The folder is not writable"
+msgstr "De map heeft geen schrijfrechten"
+
+#: oc-admin/tools.php:145
+msgid "Could not select the database. Error: %s"
+msgstr "Database kan niet geselecteerd worden. Foutmelding: %s"
+
+#: oc-admin/tools.php:239
+msgid "Maintenance mode is ON"
+msgstr "Onderhoudsmodus actief"
+
+#: oc-admin/tools.php:249
+msgid "Maintenance mode is OFF"
+msgstr "Onderhoudsmodus is uitgeschakeld"
+
+#: oc-admin/users.php:72
+msgid "The user has been created. We've sent an activation e-mail"
+msgstr "De gebruiker is aangemaakt. We hebben een activerings email gestuurd"
+
+#: oc-admin/users.php:74
+msgid "The user has been created successfully"
+msgstr "De gebruiker is succesvol gecreërd"
+
+#: oc-admin/users.php:76
+msgid "Sorry, but that e-mail is already in use"
+msgstr "Sorry, maar dit email adres is al in gebruik"
+
+#: oc-admin/users.php:80
+msgid "Sorry, the password cannot be empty"
+msgstr "Sorry, het wachtwoord kan niet leeg zijn"
+
+#: oc-admin/users.php:82
+msgid "Sorry, passwords don't match"
+msgstr "Sorry, wachtwoorden komen niet overeen"
+
+#: oc-admin/users.php:144
+msgid "The user has been updated and activated"
+msgstr "De gebruiker is vernieuwd en geactiveerd"
+
+#: oc-admin/users.php:153
+msgid "The user has been updated"
+msgstr "De gebruiker is vernieuwd"
+
+#: oc-admin/users.php:166 oc-admin/users.php:189 oc-admin/users.php:214
+#: oc-admin/users.php:238 oc-admin/users.php:262 oc-admin/users.php:286
+#: oc-admin/users.php:584
+msgid "User id isn't in the correct format"
+msgstr "Gebruikers id staat niet in het juiste formaat"
+
+#: oc-admin/users.php:178
+msgid "Activation email sent to one user"
+msgstr "Activatie e-mail verzonden naar gebruiker"
+
+#: oc-admin/users.php:201
+msgid "One user has been activated"
+msgstr "Één gebruiker is geactiveerd"
+
+#: oc-admin/users.php:226
+msgid "One user has been deactivated"
+msgstr "Één gebruiker is gedeactiveerd"
+
+#: oc-admin/users.php:250
+msgid "One user has been unblocked"
+msgstr "Één gebruiker is gedeblokeerd"
+
+#: oc-admin/users.php:274
+msgid "One user has been blocked"
+msgstr "Één gebruiker is geblokeerd"
+
+#: oc-admin/users.php:301
+msgid "One user has been deleted"
+msgstr "Één gebruiker is verwijderd"
+
+#: oc-includes/osclass/ItemActions.php:319
+msgid "Title too short."
+msgstr "Titel te kort"
+
+#: oc-includes/osclass/ItemActions.php:320
+msgid "Title too long."
+msgstr "Titel te lang"
+
+#: oc-includes/osclass/ItemActions.php:332
+msgid "Description too short."
+msgstr "Omschrijven te kort"
+
+#: oc-includes/osclass/ItemActions.php:333
+msgid "Description too long."
+msgstr "Omschrijving te lang"
+
+#: oc-includes/osclass/ItemActions.php:130
+#: oc-includes/osclass/ItemActions.php:338
+msgid "Category invalid."
+msgstr "Categorie foutief"
+
+#: oc-includes/osclass/ItemActions.php:132
+#: oc-includes/osclass/ItemActions.php:340
+msgid "Price too long."
+msgstr "Prijs te lang"
+
+#: oc-includes/osclass/ItemActions.php:134
+msgid "Name too long."
+msgstr "Naam te lang"
+
+#: oc-includes/osclass/ItemActions.php:135
+msgid "Email invalid."
+msgstr "Email niet correct"
+
+#: oc-includes/osclass/ItemActions.php:136
+#: oc-includes/osclass/ItemActions.php:342
+msgid "Country too short."
+msgstr "Land te kort"
+
+#: oc-includes/osclass/ItemActions.php:137
+#: oc-includes/osclass/ItemActions.php:343
+msgid "Country too long."
+msgstr "Land te lang"
+
+#: oc-includes/osclass/ItemActions.php:138
+#: oc-includes/osclass/ItemActions.php:344
+msgid "Region too short."
+msgstr "Regio te kort"
+
+#: oc-includes/osclass/ItemActions.php:139
+#: oc-includes/osclass/ItemActions.php:345
+msgid "Region too long."
+msgstr "Regio te lang"
+
+#: oc-includes/osclass/ItemActions.php:140
+#: oc-includes/osclass/ItemActions.php:346
+msgid "City too short."
+msgstr "Stad te kort"
+
+#: oc-includes/osclass/ItemActions.php:141
+#: oc-includes/osclass/ItemActions.php:347
+msgid "City too long."
+msgstr "Stad te lang"
+
+#: oc-includes/osclass/ItemActions.php:142
+#: oc-includes/osclass/ItemActions.php:348
+msgid "Municipality too short."
+msgstr "Municipality te kort"
+
+#: oc-includes/osclass/ItemActions.php:143
+#: oc-includes/osclass/ItemActions.php:349
+msgid "Municipality too long."
+msgstr "Municipality te lang"
+
+#: oc-includes/osclass/ItemActions.php:144
+#: oc-includes/osclass/ItemActions.php:350
+msgid "Address too short."
+msgstr "Adres te kort"
+
+#: oc-includes/osclass/ItemActions.php:145
+#: oc-includes/osclass/ItemActions.php:351
+msgid "Address too long."
+msgstr "Adres te lang"
+
+#: oc-includes/osclass/ItemActions.php:146
+msgid "Too fast. You should wait a little to publish your ad."
+msgstr "Te snel. Even geduld om uw advertentie te publiceren"
+
+#: oc-includes/osclass/ItemActions.php:161
+#: oc-includes/osclass/ItemActions.php:364
+msgid "%s field is required."
+msgstr "%s dit veld is verplicht"
+
+#: oc-includes/osclass/ItemActions.php:1297
+msgid "One of the files you tried to upload exceeds the maximum size"
+msgstr "Een van de bestanden die u probeert te uploaden is groter dan de toegestane limiet"
+
+#: oc-includes/osclass/controller/item.php:164
+msgid "Check your inbox to validate your listing"
+msgstr "Kijk in je inbox om uw advertentie te valideren"
+
+#: oc-admin/comments.php:92
+msgid "The comments have been unblocked"
+msgstr "De reacties zijn gedeblokeerd"
+
+#: oc-admin/comments.php:102
+msgid "The comments have been blocked"
+msgstr "De reacties xijn geblokeerd"
+
+#: oc-admin/items.php:268
+msgid "%d listing has been unmarked"
+msgstr "%d advertentie is ongemarkeerd"
+
+#: oc-admin/controller/settings/main.php:33
+msgid "Last check"
+msgstr "Laatste controle"
+
+#: oc-admin/main.php:75
+msgid "Entered an invalid email"
+msgstr "Fout e-mail adres ingevoerd"
+
+#: oc-admin/main.php:78
+msgid "You're already subscribed"
+msgstr "Je bent al geabonneerd"
+
+#: oc-admin/main.php:81
+msgid "Subscribed correctly"
+msgstr "Correct geabonneerd"
+
+#: oc-admin/main.php:84
+msgid "Error subscribing"
+msgstr "Fout bij abonnering"
+
+#: oc-includes/osclass/core/AdminSecBaseModel.php:66
+msgid "Thank you very much for your donation"
+msgstr "Hartelijk dank voor u donatie"
+
+#: oc-includes/osclass/controller/item.php:503
+msgid "You need to be logged to comment"
+msgstr "Uw moet ingelogd zijn om te reageren"
+
+#: oc-includes/osclass/helpers/hSecurity.php:88
+msgid "Invalid CSRF token."
+msgstr "Ongeldige CSRF token."
+
+#: oc-includes/osclass/helpers/hSecurity.php:82
+msgid "Probable invalid request."
+msgstr "Waarschijnlijk ongeldig verzoek."
+
+#: oc-includes/osclass/controller/item.php:506
+msgid "Sorry, comments are disabled"
+msgstr "Sorry, zijn reacties uitgeschakeld"
+
+#: oc-includes/osclass/controller/item.php:585
+msgid "The listing hasn't been enabled. Please enable it in order to make it public"
+msgstr "De lijst is nog niet geactiveerd. Schakel JavaScript in om deze openbaar te maken"
+
+#: oc-admin/users.php:88 oc-admin/users.php:150
+#: oc-includes/osclass/controller/register.php:103
+#: oc-includes/osclass/controller/user.php:76
+msgid "The name cannot be empty"
+msgstr "De naam kan niet leeg zijn"
+
+#: oc-admin/users.php:147
+msgid "E-mail is already in used by another user"
+msgstr "E-mail is reeds in gebruik bij een andere gebruiker"
+
+#: oc-admin/users.php:90
+msgid "There was some error"
+msgstr "Er was een fout"
+
+#: oc-admin/admins.php:54 oc-admin/admins.php:147 oc-admin/admins.php:261
+#: oc-admin/appearance.php:38 oc-admin/appearance.php:75
+#: oc-admin/controller/settings/advanced.php:36
+#: oc-admin/controller/settings/locations.php:35
+#: oc-admin/controller/settings/locations.php:75
+#: oc-admin/controller/settings/locations.php:117
+#: oc-admin/controller/settings/locations.php:146
+#: oc-admin/controller/settings/locations.php:195
+#: oc-admin/controller/settings/locations.php:251
+#: oc-admin/controller/settings/locations.php:287
+#: oc-admin/controller/settings/locations.php:339
+#: oc-admin/controller/settings/locations.php:395
+#: oc-admin/controller/settings/mailserver.php:35
+#: oc-admin/controller/settings/media.php:171 oc-admin/languages.php:45
+#: oc-admin/login.php:101 oc-admin/plugins.php:44 oc-admin/plugins.php:81
+#: oc-admin/plugins.php:117 oc-admin/plugins.php:132 oc-admin/plugins.php:147
+msgid "This action can't be done because it's a demo site"
+msgstr "Deze actie kan niet worden uitgevoerd omdat het een demo site is"
+
+#: oc-admin/admins.php:124
+msgid "There has been an error adding a new admin"
+msgstr "Er is een fout geweest bij het toevoegen van een nieuwe admin"
+
+#: oc-admin/admins.php:139
+msgid "There is no admin with this id"
+msgstr "Er is geen admin met deze id"
+
+#: oc-admin/items.php:328
+msgid "The listing can't be activated because it's blocked"
+msgstr "De advertentie kan niet worden geactiveerd omdat het is geblokkeerd"
+
+#: oc-admin/items.php:657
+msgid "Wait time must only contain numeric characters"
+msgstr "Wachttijd mag alleen numerieke tekens bevatten"
+
+#: oc-admin/items.php:660
+msgid "Number of moderated listings must only contain numeric characters"
+msgstr "Aantal gemodereerde advertenties mogen alleen numerieke tekens bevatten"
+
+#: oc-admin/items.php:663
+msgid "Images per listing must only contain numeric characters"
+msgstr "Aantal afbeeldingen per advertentie mogen alleen numerieke tekens bevatten"
+
+#: oc-admin/languages.php:157
+msgid "Number of decimals must only contain numeric characters"
+msgstr "Aantal decimalen mag alleen numerieke tekens bevatten"
+
+#: oc-admin/languages.php:311
+msgid "Directory '%s' couldn't be removed;)"
+msgstr "Directory '%s 'kon niet worden verwijderd ;)"
+
+#: oc-admin/main.php:66
+msgid "You have very few free space left, users will not be able to upload pictures"
+msgstr "Je hebt heel weinig vrije ruimte , de gebruikers  zullen niet in staat zijn om foto's te uploaden"
+
+#: oc-admin/controller/settings/comments.php:52
+msgid "Number of moderate comments must only contain numeric characters"
+msgstr "Aantal moderate reacties mag alleen numerieke tekens bevatten"
+
+#: oc-admin/controller/settings/comments.php:55
+msgid "Comments per page must only contain numeric characters"
+msgstr "Advertenties per pagina mogen alleen numerieke tekens bevatten"
+
+#: oc-admin/controller/settings/comments.php:75
+msgid "Comment settings have been updated"
+msgstr "Reacties instellingen is geupdate"
+
+#: oc-admin/controller/settings/locations.php:80
+msgid "Country name cannot be blank"
+msgstr "Land naam kan niet oningevuld zijn"
+
+#: oc-admin/controller/settings/locations.php:137
+#: oc-admin/controller/settings/locations.php:278
+#: oc-admin/controller/settings/locations.php:419
+msgid "There was a problem deleting locations"
+msgstr "Er was een probleem bij het verwijderen van locties"
+
+#: oc-admin/controller/settings/locations.php:140
+msgid "No country was selected"
+msgstr "Er is geen land geselcteerd"
+
+#: oc-admin/controller/settings/locations.php:164
+#: oc-admin/controller/settings/locations.php:305
+msgid "%s can't be added"
+msgstr "%s kan niet toegevoegd worden"
+
+#: oc-admin/controller/settings/locations.php:174
+#: oc-admin/controller/settings/locations.php:204
+msgid "Region name cannot be blank"
+msgstr "Regio naam kan niet oningevuld zijn"
+
+#: oc-admin/controller/settings/locations.php:281
+msgid "No region was selected"
+msgstr "Geen regio geselecteerd"
+
+#: oc-admin/controller/settings/locations.php:316
+msgid "New city name cannot be blank"
+msgstr "Nieuwe stad naam kan niet oningevuld zijn"
+
+#: oc-admin/controller/settings/locations.php:349
+msgid "City name cannot be blank"
+msgstr "Stad naam kan niet oningevuld zijn"
+
+#: oc-admin/controller/settings/locations.php:422
+msgid "No city was selected"
+msgstr "Geen stad geselecteerd"
+
+#: oc-admin/controller/settings/permalinks.php:428
+msgid "All fields are required."
+msgstr "Alle velden zijn verplicht"
+
+#: oc-admin/controller/settings/permalinks.php:449
+#: oc-admin/controller/settings/permalinks.php:459
+msgid "File <b>.htaccess</b> couldn't be filled out with the right content."
+msgstr "Bestand  <b>.htaccess</b> kan niet worden gevuld met de juiste inhoud."
+
+#: oc-admin/controller/settings/permalinks.php:451
+msgid "Here's the content you have to add to the <b>.htaccess</b> file. If you can't create the file, please deactivate the <em>Friendly URLs</em> option."
+msgstr "Hier is de inhoud die u moet toevoegen aan de  <b>.htaccess</b> bestand. Als u het bestand niet kunt maken, kunt u de opie van <em>Friendly URLs</em> uitschakelen"
+
+#: oc-admin/controller/settings/permalinks.php:461
+msgid "Here's the content you have to add to the <b>.htaccess</b> file. If you can't create the file or experience some problems with the URLs, please deactivate the <em>Friendly URLs</em> option."
+msgstr "Hier is de inhoud die u moet toevoegen aan de <b>.htaccess</b> bestand.Als u het bestand niet kan maken of ondervinden u problemen met de URL's, kunt u de optie van <em>Friendly URLs</em> uitschakelen"
+
+#: oc-admin/controller/settings/currencies.php:148
+msgid "%s couldn't be deleted because it has listings associated to it"
+msgstr "%s kon niet worden verwijderd, omdat het heeft lijsten gekoppeld aan het"
+
+#: oc-admin/controller/settings/currencies.php:150
+msgid "%s couldn't be deleted because it's the default currency"
+msgstr "%s kon niet worden verwijderd omdat het de standaard valuta is"
+
+#: oc-admin/controller/settings/main.php:83
+msgid "Number of listings in the RSS has to be a numeric value"
+msgstr "Aantal advertenties in de RSS moet een numerieke waarde zijn"
+
+#: oc-admin/controller/settings/main.php:86
+msgid "Max latest listings has to be a numeric value"
+msgstr "Max nieuwe advertenties moet een numerieke waarde zijn"
+
+#: oc-admin/controller/settings/main.php:89
+msgid "Number of listings on search has to be a numeric value"
+msgstr "Aantal advertenties zoeken moet een numerieke waarde zijn"
+
+#: oc-admin/controller/settings/main.php:114
+msgid "Number of listings in the RSS must be an integer"
+msgstr "Aantal advertenties in de RSS moet een integer zijn"
+
+#: oc-admin/controller/settings/main.php:121
+msgid "Number of recent listings displayed at home must be an integer"
+msgstr "Aantal recente advertenties thuis moet een integer zijn"
+
+#: oc-admin/themes/modern/market/header.php:5
+msgid "<code>downloads</code> folder has to be writable, i.e.: <code>chmod a+w %soc-content/downloads/</code>"
+msgstr "<code>downloads</code> Map moet beschrijfbaar zijn, dat wil zeggen:  <code>chmod a+w %soc-content/downloads/</code>"
+
+#: oc-admin/tools.php:180 oc-admin/tools.php:217
+msgid "Archived successfully!"
+msgstr "Succesvol  gearchiveerd!"
+
+#: oc-admin/tools.php:194 oc-admin/tools.php:220
+msgid "Error, the zip file was not created in the specified directory"
+msgstr "Fout, werd het zip-bestand niet gemaakt in de opgegeven directory"
+
+#: oc-admin/tools.php:241
+msgid "There was an error creating the .maintenance file, please create it manually at the root folder"
+msgstr "Er was een fout bij het maken van de. Onderhoudsdossier, maak dan handmatig op de hoofdmap"
+
+#: oc-admin/tools.php:251
+msgid "There was an error removing the .maintenance file, please remove it manually from the root folder"
+msgstr "Er is een fout opgetreden het. Onderhoudsdossier verwijderen, kunt u handmatig verwijderen uit de hoofdmap"
+
+#: oc-admin/users.php:176
+msgid "No users have been selected"
+msgstr "Geen gebruiker is geselecteerd"
+
+#: oc-admin/users.php:199
+msgid "No users have been activated"
+msgstr "Geen gebruiker is geactiveerd"
+
+#: oc-admin/users.php:224
+msgid "No users have been deactivated"
+msgstr "geen gebruiker is gedeactiveerd"
+
+#: oc-admin/users.php:248
+msgid "No users have been enabled"
+msgstr "Geen gebruiker is ingeschakeld"
+
+#: oc-admin/users.php:272
+msgid "No users have been disabled"
+msgstr "Geen gebruiker is uitgeschakeld"
+
+#: oc-admin/users.php:299
+msgid "No users have been deleted"
+msgstr "Geen gebruiker is verwijderd"
+
+#: oc-admin/users.php:312 oc-admin/users.php:346
+msgid "Alert id isn't in the correct format"
+msgstr "Alarm is niet in het juiste formaat"
+
+#: oc-admin/users.php:327
+msgid "No alerts have been deleted"
+msgstr "Geen alarm is verwijderd"
+
+#: oc-admin/users.php:329
+msgid "One alert has been deleted"
+msgstr "Één alarm is verwijderd"
+
+#: oc-admin/users.php:366
+msgid "No alerts have been activated"
+msgstr "Geen alarm is geactiveerd"
+
+#: oc-admin/users.php:368
+msgid "One alert has been activated"
+msgstr "Één alarm is geactiveerd"
+
+#: oc-admin/users.php:372
+msgid "No alerts have been deactivated"
+msgstr "Geen alarm is gedeactiveerd"
+
+#: oc-admin/users.php:374
+msgid "One alert has been deactivated"
+msgstr "Één alarm is gedeactiveerd"
+
+#: oc-admin/users.php:412
+msgid "User settings have been updated"
+msgstr "Gebruikers instellingen zijn geupdate"
+
+#: oc-admin/users.php:555 oc-admin/users.php:570
+msgid "Both rules can not be empty"
+msgstr "Beide regls kunnen niet leeg zijn"
+
+#: oc-admin/users.php:560
+msgid "Rule updated correctly"
+msgstr "regels correct geupdate"
+
+#: oc-admin/users.php:575
+msgid "Rule saved correctly"
+msgstr "Regels correct opgeslagen"
+
+#: oc-admin/users.php:596
+msgid "No rules have been deleted"
+msgstr "Geen regels zijn verwijderd"
+
+#: oc-admin/users.php:598
+msgid "One ban rule has been deleted"
+msgstr "Één verban regel is verwijderd"
+
+#: oc-includes/osclass/ItemActions.php:91
+#: oc-includes/osclass/ItemActions.php:304
+msgid "Image with an incorrect extension."
+msgstr "Afbeelding met een foute extentie"
+
+#: oc-includes/osclass/ItemActions.php:94
+#: oc-includes/osclass/ItemActions.php:307
+msgid "Image is too big. Max. size"
+msgstr "Afbeelding is te groot maximale grootte"
+
+#: oc-includes/osclass/ItemActions.php:131
+#: oc-includes/osclass/ItemActions.php:339
+msgid "Price must be a number."
+msgstr "Prijs moet een nummer zijn"
+
+#: oc-includes/osclass/ItemActions.php:858
+msgid "We just sent your message to %s"
+msgstr "We hebbn u bericht verzonden naar %s"
+
+#: oc-includes/osclass/ItemActions.php:1352
+msgid "The file you tried to upload does not have a valid extension"
+msgstr "Het bestand dat u probeerde te uploaden heeft niet de juiste extentie"
+
+#: oc-includes/osclass/controller/contact.php:66
+msgid "Please enter a correct email"
+msgstr "Geef aub. het juiste e-mail adres in"
+
+#: oc-includes/osclass/controller/contact.php:106
+msgid "There have been some errors sending the message"
+msgstr "Er zijn een aantal fouten die het bericht verstuurt geweest"
+
+#: oc-includes/osclass/controller/contact.php:124
+msgid "Your email has been sent properly. Thank you for contacting us!"
+msgstr "Uw e-mail werd goed verzonden. Dank u voor het contact opnemen met ons!"
+
+#: oc-includes/osclass/controller/item.php:136
+msgid "A user with that email address already exists, if it is you, please log in"
+msgstr "Een gebruiker met dat e-mailadres bestaat al, als ij het bent, log aub. in"
+
+#: oc-includes/osclass/controller/contact.php:52
+#: oc-includes/osclass/controller/contact.php:61
+#: oc-includes/osclass/controller/item.php:143
+#: oc-includes/osclass/controller/item.php:454
+#: oc-includes/osclass/controller/login.php:88
+#: oc-includes/osclass/controller/register.php:58
+#: oc-includes/osclass/controller/user-non-secure.php:159
+msgid "Your current email is not allowed"
+msgstr "Uw huidige e-mail is niet toegestaan"
+
+#: oc-includes/osclass/controller/contact.php:55
+#: oc-includes/osclass/controller/item.php:146
+#: oc-includes/osclass/controller/item.php:457
+#: oc-includes/osclass/controller/login.php:91
+#: oc-includes/osclass/controller/register.php:61
+#: oc-includes/osclass/controller/user-non-secure.php:162
+msgid "Your current IP is not allowed"
+msgstr "Uw huidige IP is niet toegestaan"
+
+#: oc-includes/osclass/controller/item.php:195
+msgid "Sorry, we don't have any listings with that ID"
+msgstr "Sorry, we hebben geen advertentie met dat ID"
+
+#: oc-includes/osclass/controller/item.php:578
+msgid "The listing hasn't been validated. Please validate it in order to make it public"
+msgstr "De lijst is niet gevalideerd. Gelieve te bevestigen het in om het openbaar te maken"
+
+#: oc-includes/osclass/controller/login.php:132
+msgid "This should never happen"
+msgstr "Dit mag nooit gebeuren"
+
+#: oc-includes/osclass/controller/register.php:85
+msgid "The reCAPTCHA was not entered correctly"
+msgstr "De reCAPTCHA was niet correct ingevuld"
+
+#: oc-admin/users.php:84 oc-includes/osclass/controller/register.php:97
+msgid "Username is already taken"
+msgstr "Deze gebruikersnaam is al in gebruik"
+
+#: oc-admin/users.php:86 oc-includes/osclass/controller/register.php:100
+#: oc-includes/osclass/controller/user.php:159
+msgid "The specified username is not valid, it contains some invalid words"
+msgstr "De opgegeven gebruikersnaam is niet geldig, het bevat een aantal ongeldige woorden"
+
+#: oc-includes/osclass/controller/user-non-secure.php:83
+#: oc-includes/osclass/controller/user.php:229
+msgid "Oops! There was a problem trying to activate your alert. Please contact an administrator"
+msgstr "Oeps! Er was een probleem bij het proberen om je alert te activeren. Neem dan contact op met een beheerder"
+
+#: oc-includes/osclass/controller/user-non-secure.php:104
+#: oc-includes/osclass/controller/user.php:250
+msgid "Oops! There was a problem trying to unsubscribe you. Please contact an administrator"
+msgstr "Oeps! Er was een probleem bij het proberen je af te melden. Neem dan contact op met een beheerder"
+
+#: oc-includes/osclass/controller/user.php:149
+msgid "The specified username is already in use"
+msgstr "De opgegeven gebruikersnaam is al in gebruik"
+
+#: oc-includes/osclass/controller/user.php:155
+msgid "The username was updated"
+msgstr "De gebruikersnaam is geupdate"
+
+#: oc-includes/osclass/controller/user.php:163
+msgid "The specified username could not be empty"
+msgstr "De opgegeven gebruikersnaam kan niet leeg zijn"
+
+#: oc-includes/osclass/controller/user.php:273
+msgid "Your account have been deleted"
+msgstr "Uw account is verwijderd"
+
+#: oc-includes/osclass/controller/user.php:276
+#: oc-includes/osclass/controller/user.php:280
+msgid "Oops! you can not do that"
+msgstr "Oeps! je kan dat niet doen"
+
+#: oc-includes/osclass/emails.php:470
+msgid "We've sent you an e-mail. Follow its instructions to validate the changes"
+msgstr "We hebben u een e-mail gestuurd. Volg de instructies om de wijzigingen te valideren"
+
+#: oc-includes/osclass/emails.php:472
+msgid "We tried to sent you an e-mail, but it failed. Please, contact an administrator"
+msgstr "We hebben geprobeerd om u een e-mail te versturen, maar het lukte niet. Neem aub. contact op met een beheerder"
+
+#: oc-includes/osclass/ItemActions.php:133
+#: oc-includes/osclass/ItemActions.php:341
+msgid "Price must be positive number."
+msgstr "Prijs moet een positief getal zijn."
+
+#: oc-admin/plugins.php:94
+msgid "The plugin generated %d characters of <strong>unexpected output</strong> during the installation. Output: \"%s\""
+msgstr "De plugin gegenereerde %d tekens of <strong>unexpected output</strong> geduurende de installatie. Uitgang  \"%s\""
+
+#: oc-admin/items.php:666
+msgid "Number of expiration days has to be a numeric value"
+msgstr "Aantal expiratie dagen moet een numerieke waarde zijn"
+
+#: oc-admin/controller/settings/permalinks.php:513
+msgid "Friendly URLs deactivated, but .htaccess file was modified outside Osclass and was not deleted"
+msgstr "Vriendelijke URL's uitgeschakeld, maar. Htaccess bestand is buiten Osclass gewijzigd en werd niet verwijderd"
+
+#: oc-admin/controller/settings/permalinks.php:511
+msgid "Friendly URLs deactivated, but .htaccess file could not be deleted. Please, remove it manually"
+msgstr "Vriendelijke URL's uitgeschakeld, maar. Htaccess-bestand kon niet worden verwijderd. Alstublieft, verwijder deze handmatig"
+
+#: oc-admin/controller/settings/permalinks.php:475
+msgid "Here's the content you have to add to the <b>.htaccess</b> file. If you can't modify the file or experience some problems with the URLs, please deactivate the <em>Friendly URLs</em> option."
+msgstr "Hier is de inhoud die u moet toevoegen aan het <b>.htaccess</b> bestand. Als u het bestand niet kunt wijzigen of ondervinden wat problemen met de URL's,dan kunt u de <em>Friendly URLs</em> optie uitschakelen "
+
+#: oc-admin/controller/settings/permalinks.php:473
+msgid "File <b>.htaccess</b> already exists and was not modified."
+msgstr "Bestand  <b>.htaccess</b> bestaat al en is niet gewijzigd."
+
+#: oc-admin/controller/settings/advanced.php:48
+msgid "Advanced settings have been updated"
+msgstr "Geavanceerde instellingen zijn bijgewerkt"
+
+#: oc-includes/osclass/controller/ajax.php:105
+#: oc-includes/osclass/controller/item.php:314
+msgid "The selected photo couldn't be deleted, the url doesn't exist"
+msgstr "De geselecteerde afbeelding kan niet worden verwijderd, de URL bestaat niet"

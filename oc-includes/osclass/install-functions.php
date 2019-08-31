@@ -844,6 +844,10 @@ CONFIG;
                     </tbody>
                 </table>
             </div>
+			<div class="clear"></div>
+			<p class="margin20">
+				<input type="submit" class="button" name="submit" value="Next"/>
+			</p>
             <div class="clear"></div>
         </form>
 		<?php

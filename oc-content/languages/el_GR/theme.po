@@ -1,0 +1,796 @@
+# Translation of Bender in Greek
+# This file is distributed under the same license as the Bender package.
+msgid ""
+msgstr ""
+"PO-Revision-Date: 2014-01-07 10:50:06+0000\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: GlotPress/0.1\n"
+"Project-Id-Version: Bender\n"
+
+#: 404.php:8
+msgid "Sorry but I can't find the page you're looking for"
+msgstr "Συγνώμη αλλά δεν μπορούμε να βρούμε την σελίδα που ψάχνετε"
+
+#: 404.php:10
+msgid "Let us help you, we have got a few tips for you to find it."
+msgstr "Αφήστε μας να σας βοηθήσουμε, έχουμε μερικές συμβουλές για να μπορείτε να το βρείτε."
+
+#: 404.php:13
+msgid "<strong>Search</strong> for it:"
+msgstr "<strong>Ψάξτε</strong> το:"
+
+#: 404.php:18 header.php:69
+msgid "Search"
+msgstr "Αναζήτηση"
+
+#: 404.php:22
+msgid "<strong>Look</strong> for it in the most popular categories."
+msgstr "<strong>Ψάξτε</strong> το στις πιο δημοφιλής κατηγορίες."
+
+#: admin/header.php:7 functions.php:472
+msgid "Header logo"
+msgstr "Εικόνα Κεφαλίδας"
+
+#: admin/header.php:10
+msgid "Preview"
+msgstr "Προεπισκόπηση"
+
+#: admin/header.php:17
+msgid "Remove logo"
+msgstr "Κατάργηση λογότυπου"
+
+#: admin/header.php:25
+msgid "No logo has been uploaded yet"
+msgstr "Δεν έχει ανέβει ακόμα λογότυπο"
+
+#: admin/header.php:28
+msgid "Upload logo"
+msgstr "Ανεβάστε λογότυπο"
+
+#: admin/header.php:30
+msgid "The preferred size of the logo is 600x100."
+msgstr "Το προτιμώμενο μέγεθος του λογότυπου είναι 600x100."
+
+#: admin/header.php:32
+msgid "<strong>Note:</strong> Uploading another logo will overwrite the current logo."
+msgstr "<strong>Σημείωση:</ strong> Η μεταφόρτωση άλλου λογότυπου θα αντικαταστήσει το τωρινό λογότυπο."
+
+#: admin/header.php:40
+msgid "Logo image (png,gif,jpg)"
+msgstr "Εικόνα λογότυπου (png, gif, jpg)"
+
+#: admin/header.php:46
+msgid "Upload"
+msgstr "Μεταφόρτωση"
+
+#: admin/header.php:55
+msgid "The images folder <strong>%s</strong> is not writable on your server"
+msgstr "Ο φάκελος εικόνων<strong>%s</strong>δεν είναι εγγράψιμος στον server σας"
+
+#: admin/header.php:56
+msgid "Osclass can't upload the logo image from the administration panel."
+msgstr "Το Osclass Δεν μπορείτε να ανεβάσει την εικόνα του λογότυπου από τον πίνακα διαχείρισης."
+
+#: admin/header.php:57
+msgid "Please make the aforementioned image folder writable."
+msgstr "Παρακαλούμε κάντε τον παραπάνω  φάκελο εικόνας εγγράψιμο."
+
+#: admin/header.php:62
+msgid "To make a directory writable under UNIX execute this command from the shell:"
+msgstr "Για να κάνετε ένα directory με δυνατότητα εγγραφής σε UNIX εκτελέστε αυτή την εντολή από το shell:"
+
+#: admin/settings.php:14
+msgid "I would like to contribute to the development of Osclass with a donation of"
+msgstr "Θα ήθελα να συμβάλω στην ανάπτυξη του Osclass με δωρεά των"
+
+#: admin/settings.php:19
+msgid "Custom"
+msgstr "Προσαρμοσμένη"
+
+#: admin/settings.php:20
+msgid "Donate"
+msgstr "Δωρεά"
+
+#: admin/settings.php:24 functions.php:473
+msgid "Theme settings"
+msgstr "Ρυθμίσειςθέματος"
+
+#: admin/settings.php:30
+msgid "Search placeholder"
+msgstr "Κείμενο μπάρας αναζήτησης"
+
+#: admin/settings.php:34
+msgid "Show lists as:"
+msgstr "Δείτε τις λίστες ως εξής:"
+
+#: admin/settings.php:37
+msgid "Gallery"
+msgstr "Γκάλερι"
+
+#: admin/settings.php:38 main.php:45 search.php:80
+msgid "List"
+msgstr "Λίστα"
+
+#: admin/settings.php:43
+msgid "Footer link"
+msgstr "Σύνδεσμος στο footer(Υποσέλιδο)"
+
+#: admin/settings.php:45
+msgid "I want to help Osclass by linking to <a href=\"http://osclass.org/\" target=\"_blank\">osclass.org</a> from my site with the following text:"
+msgstr "Θέλω να βοηθήσω το Osclass λινκ-άρωντας  στο <a href=\"http://osclass.org/\" target=\"_blank\">osclass.org</a>απο την σελίδα μου με το παρακάτω κείμενοt:"
+
+#: admin/settings.php:46
+msgid "This website is proudly using the <a title=\"Osclass web\" href=\"http://osclass.org/\">classifieds scripts</a> software <strong>Osclass</strong>"
+msgstr "Αυτή η ιστοσελίδα χρησιμοποιεί με υπερηφάνεια το <a title=\"Osclass web\" href=\"http://osclass.org/\">classifieds scripts</a> software <strong>Osclass</strong>"
+
+#: admin/settings.php:50
+msgid "Save changes"
+msgstr "Αποθήκευση Αλλαγών"
+
+#: alert-form.php:27
+msgid "You have sucessfully subscribed to the alert"
+msgstr "Έχετε εγγραφεί επιτυχώς στην ειδοποίηση"
+
+#: alert-form.php:28 user-change_email.php:77
+msgid "Invalid email address"
+msgstr "Λάθος email"
+
+#: alert-form.php:29
+msgid "There was a problem with the alert"
+msgstr "Υπήρξε πρόβλημα με την ειδοποίηση"
+
+#: alert-form.php:60
+msgid "Subscribe to this search"
+msgstr "Εγγραφή σε αυτή την αναζήτηση"
+
+#: alert-form.php:75
+msgid "Subscribe now"
+msgstr "Εγγραφή"
+
+#: common/head.php:3 item.php:165 loop-single-premium.php:26 loop-single.php:26
+msgid "Delete"
+msgstr "Διαγραφή"
+
+#: common/head.php:4
+msgid "Cancel"
+msgstr "Άκυρο"
+
+#: contact.php:31
+msgid "Contact us"
+msgstr "Επικοινωνήστε μαζί μας"
+
+#: contact.php:40 item-send-friend.php:44 item-sidebar.php:76 item.php:191
+#: user-public-sidebar.php:33
+msgid "Your name"
+msgstr "Το όνομα σας"
+
+#: contact.php:41 contact.php:54 item-sidebar.php:84 user-public-sidebar.php:41
+msgid "optional"
+msgstr "προαιρετικό"
+
+#: contact.php:47 user-public-sidebar.php:37
+msgid "Your email address"
+msgstr "Η διεύθυνση email σας"
+
+#: contact.php:53
+msgid "Subject"
+msgstr "Θέμα"
+
+#: contact.php:60 item-send-friend.php:78 item-sidebar.php:89
+#: user-public-sidebar.php:46
+msgid "Message"
+msgstr "Μήνυμα"
+
+#: contact.php:68 item-send-friend.php:87 item-sidebar.php:112 item.php:216
+#: user-public-sidebar.php:69
+msgid "Send"
+msgstr "Αποστολή"
+
+#: footer.php:33 header.php:41
+msgid "Hi %s"
+msgstr "Γειά σου %s"
+
+#: footer.php:34 header.php:42
+msgid "My account"
+msgstr "Ο λογαριασμός μου"
+
+#: footer.php:35 header.php:43
+msgid "Logout"
+msgstr "Αποσύνδεση"
+
+#: footer.php:38 functions.php:319 header.php:46 item-sidebar.php:54
+msgid "Login"
+msgstr "Σύνδεση"
+
+#: footer.php:41 header.php:48 item-sidebar.php:55 user-login.php:58
+msgid "Register for a free account"
+msgstr "Εγγραφείτε για ένα Δωρεάν λογαριασμό"
+
+#: footer.php:46 header.php:51
+msgid "Publish your ad for free"
+msgstr "Δημοσιεύστε την αγγελία σας δωρεάν"
+
+#: footer.php:60 functions.php:323 user-public-sidebar.php:26
+msgid "Contact"
+msgstr "Επικοινωνία"
+
+#: footer.php:70
+msgid "Language:"
+msgstr "Γλώσσα:"
+
+#: functions.php:29
+msgid "ie. PHP Programmer"
+msgstr "π.χ.. Προγραμματιστής PHP"
+
+#: functions.php:304 item-post.php:40
+msgid "Publish a listing"
+msgstr "Δημοσιεύση Αγγελίας"
+
+#: functions.php:305
+msgid "Edit your listing"
+msgstr "Επεξεργασία Αγγελίας"
+
+#: functions.php:306 item-send-friend.php:31
+msgid "Send to a friend"
+msgstr "Αποστολή σε φίλο"
+
+#: functions.php:307 item-sidebar.php:40
+msgid "Contact publisher"
+msgstr "Επικοινωνία με τον αποστολέα"
+
+#: functions.php:308
+msgid "Search results"
+msgstr "Αποτελέσματα Αναζήτησης"
+
+#: functions.php:309
+msgid "Search results: %s"
+msgstr "Αποτελέσματα Αναζήτησης: %s"
+
+#: functions.php:310
+msgid "Dashboard"
+msgstr "Πίνακας ελέγχου"
+
+#: functions.php:311
+msgid "%s's profile"
+msgstr "Το προφίλ του %s"
+
+#: functions.php:312 functions.php:356
+msgid "Account"
+msgstr "Λογαριασμός"
+
+#: functions.php:313 functions.php:346 user-alerts.php:53
+msgid "Listings"
+msgstr "Αγγελίες"
+
+#: functions.php:314 functions.php:351 user-alerts.php:32 user-alerts.php:37
+msgid "Alerts"
+msgstr "Ειδοποιήσεις"
+
+#: functions.php:315 user-profile.php:32 user-profile.php:37
+msgid "Update account"
+msgstr "Ενημέρωση λογαριασμού"
+
+#: functions.php:316 functions.php:361
+msgid "Change email"
+msgstr "Αλλαγή email"
+
+#: functions.php:317 functions.php:366 user-change_username.php:34
+#: user-change_username.php:39
+msgid "Change username"
+msgstr "Αλλαγή ονόματος χρήστη"
+
+#: functions.php:318 functions.php:321 functions.php:371
+#: user-change_password.php:32 user-change_password.php:37
+#: user-forgot_password.php:52
+msgid "Change password"
+msgstr "Αλλαγή κωδικού"
+
+#: functions.php:320
+msgid "Recover password"
+msgstr "Ανάκτηση κωδικού πρόσβασης"
+
+#: functions.php:322
+msgid "Create a new account"
+msgstr "Δημιουργία Λογαριασμού"
+
+#: functions.php:376 user-sidebar.php:28
+msgid "Delete account"
+msgstr "Διαγραφή λογαριασμού"
+
+#: functions.php:435
+msgid "Theme settings updated correctly"
+msgstr "Οι ρυθμίσεις του Θέματος ενημερώθηκαν σωστά"
+
+#: functions.php:442
+msgid "The logo image has been uploaded correctly"
+msgstr "Η εικόνα του λογότυπου ανέβηκε σωστά"
+
+#: functions.php:444 functions.php:447
+msgid "An error has occurred, please try again"
+msgstr "Παρουσιάστηκε σφάλμα, παρακαλώ προσπαθήστε ξανά"
+
+#: functions.php:454
+msgid "The logo image has been removed"
+msgstr "Η εικόνα του λογότυπου έχει αφαιρεθεί"
+
+#: functions.php:456
+msgid "Image not found"
+msgstr "Η εικόνα δεν βρέθηκε"
+
+#: functions.php:531 functions.php:553
+msgid "All categories"
+msgstr "Όλες οι κατηγορίες"
+
+#: header.php:63 item-post.php:55
+msgid "Select a category"
+msgstr "Επιλέξτε κατηγορία"
+
+#: item-post.php:51
+msgid "General Information"
+msgstr "Γενικές πληροφορίες"
+
+#: item-post.php:53
+msgid "Category"
+msgstr "Κατηγορία"
+
+#: item-post.php:59 item.php:204
+msgid "Title"
+msgstr "Τίτλος"
+
+#: item-post.php:65 user-profile.php:106
+msgid "Description"
+msgstr "Περιγραφή"
+
+#: item-post.php:72 search-sidebar.php:61
+msgid "Price"
+msgstr "Τιμή"
+
+#: item-post.php:81 item-post.php:83
+msgid "Photos"
+msgstr "Φωτογραφίες"
+
+#: item-post.php:90
+msgid "Add new photo"
+msgstr "Προσθέστε φωτογραφία"
+
+#: item-post.php:96
+msgid "Listing Location"
+msgstr "Τοποθεσία Αγγελίας"
+
+#: item-post.php:99 user-profile.php:70
+msgid "Country"
+msgstr "Χώρα"
+
+#: item-post.php:105 user-profile.php:76
+msgid "Region"
+msgstr "Πόλη"
+
+#: item-post.php:111 search-sidebar.php:44 user-profile.php:82
+msgid "City"
+msgstr "Πόλη"
+
+#: item-post.php:117
+msgid "City Area"
+msgstr "Περιοχή Πόλης"
+
+#: item-post.php:123 user-profile.php:94
+msgid "Address"
+msgstr "Διεύθυνση"
+
+#: item-post.php:132
+msgid "Seller's information"
+msgstr "Πληροφορίες "
+
+#: item-post.php:134 item-sidebar.php:59 user-profile.php:46
+#: user-register.php:39
+msgid "Name"
+msgstr "Όνομα"
+
+#: item-post.php:140 user-login.php:38 user-recover.php:37 user-register.php:45
+msgid "E-mail"
+msgstr "email"
+
+#: item-post.php:147
+msgid "Show e-mail on the listing page"
+msgstr "Να εμφανίζεται το email στην σελίδα της αγγελίας"
+
+#: item-post.php:166 user-change_email.php:59 user-change_password.php:64
+#: user-change_username.php:102 user-profile.php:113
+msgid "Update"
+msgstr "Ανανέωση"
+
+#: item-post.php:166
+msgid "Publish"
+msgstr "Αποστολή"
+
+#: item-send-friend.php:50 item.php:197
+msgid "Your e-mail"
+msgstr "Το email σου"
+
+#: item-send-friend.php:57
+msgid "Your friend's name"
+msgstr "Το όνομα του φίλου σου"
+
+#: item-send-friend.php:63
+msgid "Your friend's e-mail address"
+msgstr "Το email του φίλου σου"
+
+#: item-send-friend.php:70
+msgid "Subject (optional)"
+msgstr "Θέμα"
+
+#: item-sidebar.php:30
+msgid "Mark as..."
+msgstr "Επισήμανση ως ..."
+
+#: item-sidebar.php:31
+msgid "Mark as spam"
+msgstr "Επισήμανση ως ανεπιθύμητο"
+
+#: item-sidebar.php:32
+msgid "Mark as misclassified"
+msgstr "Επισήμανση ως λανθασμένη καταχώρηση"
+
+#: item-sidebar.php:33
+msgid "Mark as duplicated"
+msgstr "Επισήμανση ως διπλότυπη αγγελία"
+
+#: item-sidebar.php:34
+msgid "Mark as expired"
+msgstr "Επισήμανση ως λιγμένη αγγελία"
+
+#: item-sidebar.php:35
+msgid "Mark as offensive"
+msgstr "Επισήμανση ως προσβλητική αγγελία"
+
+#: item-sidebar.php:43
+msgid "The listing is expired. You can't contact the publisher."
+msgstr "Η αγγελία έχει λήξει. Δεν μπορείτε να επικοινωνήσετε με τον εκδότη."
+
+#: item-sidebar.php:47
+msgid "It's your own listing, you can't contact the publisher."
+msgstr "Είναι δική σας αγγελία, δεν μπορείτε να επικοινωνήσετε με τον εκδότη."
+
+#: item-sidebar.php:51
+msgid "You must log in or register a new account in order to contact the advertiser"
+msgstr "Θα πρέπει να συνδεθείτε ή να δημιουργήσετε ένα νέο λογαριασμό, ώστε να επικοινωνήσετε με τον διαφημιστή"
+
+#: item-sidebar.php:61
+msgid "Name: %s"
+msgstr "Όνομα: %s"
+
+#: item-sidebar.php:64
+msgid "E-mail: %s"
+msgstr "E-mail: %s"
+
+#: item-sidebar.php:67
+msgid "Phone: %s"
+msgstr "Τηλέφωνο: %s"
+
+#: item-sidebar.php:80
+msgid "Your e-mail address"
+msgstr "Το email σου"
+
+#: item-sidebar.php:84 user-public-sidebar.php:41
+msgid "Phone number"
+msgstr "Αριθμός τηλεφώνου"
+
+#: item-sidebar.php:106 user-public-sidebar.php:63
+msgid "Enter the words above"
+msgstr "Εισάγετε τις παραπάνω λέξεις"
+
+#: item-sidebar.php:108 user-public-sidebar.php:65
+msgid "Help"
+msgstr "Βοήθεια"
+
+#: item.php:55
+msgid "<strong class=\"publish\">Published date</strong>: %1$s"
+msgstr "<strong class=\"publish\">Ημερομηνία δημοσίευσης</strong>: %1$s"
+
+#: item.php:58
+msgid "<strong class=\"update\">Modified date:</strong> %1$s"
+msgstr "<strong class=\"update\">Ημερομηνία τροποποίησης:</strong> %1$s"
+
+#: item.php:61 main.php:75
+msgid "Location"
+msgstr "Τοποθεσία"
+
+#: item.php:67 loop-single-premium.php:24 loop-single.php:24
+msgid "Edit item"
+msgstr "Επεξεργασία Αγγελίας"
+
+#: item.php:79 item.php:84
+msgid "Image"
+msgstr "Εικόνα"
+
+#: item.php:113
+msgid "Contact seller"
+msgstr "Επικοινωνία με τον πωλητή"
+
+#: item.php:117
+msgid "Share"
+msgstr "Μοιράσου"
+
+#: item.php:123
+msgid "Useful information"
+msgstr "Χρήσιμες πληροφορίες"
+
+#: item.php:125
+msgid "Avoid scams by acting locally or paying with PayPal"
+msgstr "Αποφύγετε απάτες δρώντας τοπικά ή πληρώνοντας μέσω PayPal"
+
+#: item.php:126
+msgid "Never pay with Western Union, Moneygram or other anonymous payment services"
+msgstr "Μην πληρώνετε με Western Union, Moneygram ή άλλες ανώνυμες υπηρεσίες πληρωμών"
+
+#: item.php:127
+msgid "Don't buy or sell outside of your country. Don't accept cashier cheques from outside your country"
+msgstr "Μην αγοράζετε από ή πουλάτε έξω απο την χώρας σας. Μην δέχεστε επιταγές ταμείου έξω από τη χώρα σας"
+
+#: item.php:128
+msgid "This site is never involved in any transaction, and does not handle payments, shipping, guarantee transactions, provide escrow services, or offer \"buyer protection\" or \"seller certification\""
+msgstr "Αυτή η ιστοσελίδα δεν εμπλέκεται ποτέ σε συναλλαγές και δεν χειρίζεται πληρωμές, μεταφορές, εγγυήσεις συναλλαγών, δεν παρέχει υπηρεσίες διαμεσολάβησης και δεν προσφέρει \"προστασία αγοραστή \" ή \"πιστοποίηση πωλητή \""
+
+#: item.php:135
+msgid "Related listings"
+msgstr "Σχετικές καταχωρήσεις"
+
+#: item.php:154
+msgid "Comments"
+msgstr "Σχόλια"
+
+#: item.php:161
+msgid "by"
+msgstr "απο"
+
+#: item.php:165
+msgid "Delete your comment"
+msgstr "Διαγραφή του σχόλιού σου"
+
+#: item.php:177
+msgid "Leave your comment (spam and offensive messages will be removed)"
+msgstr "Αφήστε το σχόλιό σας (ανεπιθύμητα μηνύματα και μηνύματα προσβλητικού περιεχομένου θα διαγράφονται)"
+
+#: item.php:210
+msgid "Comment"
+msgstr "Σχόλιο"
+
+#: loop-single-premium.php:26 loop-single.php:26
+msgid "This action can not be undone. Are you sure you want to continue?"
+msgstr "Αυτή η ενέργεια δεν μπορεί να αναιρεθεί. Είστε βέβαιοι ότι θέλετε να συνεχίσετε;"
+
+#: loop-single-premium.php:29 loop-single.php:29
+msgid "Activate"
+msgstr "Ενεργοποίηση"
+
+#: main.php:38
+msgid "Latest Listings"
+msgstr "Τελευταίες Αγγελίες"
+
+#: main.php:41
+msgid "There aren't job offers available at this moment"
+msgstr "Δεν υπάρχουν προσφορές εργασίας διαθέσιμα αυτή τη στιγμή"
+
+#: main.php:46 search.php:81
+msgid "Grid"
+msgstr "Κουτιά"
+
+#: main.php:65
+msgid "See all listings"
+msgstr "Δείτε όλες τις αγγελίες"
+
+#: search-sidebar.php:38
+msgid "Your search"
+msgstr "Η αναζήτηση σου"
+
+#: search-sidebar.php:51
+msgid "Show only"
+msgstr "Δείξε μόνο"
+
+#: search-sidebar.php:54
+msgid "listings with pictures"
+msgstr "Αγγελίες με εικόνες"
+
+#: search-sidebar.php:62
+msgid "Min"
+msgstr "Ελ"
+
+#: search-sidebar.php:64
+msgid "Max"
+msgstr "Μεγ"
+
+#: search-sidebar.php:84
+msgid "Apply"
+msgstr "Αναζήτηση"
+
+#: search-sidebar.php:89
+msgid "Refine category"
+msgstr "Αλάξτε την κατηγορία"
+
+#: search.php:55
+msgid "Selected"
+msgstr "Επιλεγμένο"
+
+#: search.php:56
+msgid "Nothing selected, input was"
+msgstr "Τίποτα δεν επιλέγη, το πεδίο ήταν"
+
+#: search.php:71
+msgid "There are no results matching \"%s\""
+msgstr "Δεν υπάρχουν αποτελέσματα που για \"%s\""
+
+#: search.php:78
+msgid "Show filters"
+msgstr "Προβολή Φίλτρων"
+
+#: search.php:85
+msgid "Sort by"
+msgstr "Ταξινόμηση κατά"
+
+#: search.php:157
+msgid "Other searches that may interest you"
+msgstr "Άλλες αναζητήσεις που μπορεί να σε ενδιαφέρουν"
+
+#: user-alerts.php:39
+msgid "You do not have any alerts yet"
+msgstr "Δεν έχεις ειδοποιήσεις ακόμα"
+
+#: user-alerts.php:46
+msgid "Alert"
+msgstr "Ειδοποίηση"
+
+#: user-alerts.php:46
+msgid "This action can't be undone. Are you sure you want to continue?"
+msgstr "Αυτή ηΑυτή η ενέργεια δεν μπορεί να αναιρεθεί. Είστε βέβαιοι ότι θέλετε να συνεχίσετε;"
+
+#: user-alerts.php:46
+msgid "Delete this alert"
+msgstr "Διαγραφή αυτής της ειδοποίησης"
+
+#: user-change_email.php:33 user-change_email.php:38
+msgid "Change e-mail"
+msgstr "Αλλαγή e-mail"
+
+#: user-change_email.php:46
+msgid "Current e-mail"
+msgstr "Τρέχον  e-mail"
+
+#: user-change_email.php:52
+msgid "New e-mail"
+msgstr "Νέο e-mail"
+
+#: user-change_password.php:45
+msgid "Current password"
+msgstr "Τρέχον  Κωδικός"
+
+#: user-change_password.php:51 user-forgot_password.php:39
+msgid "New password"
+msgstr "Νέος Κωδικός"
+
+#: user-change_password.php:57 user-forgot_password.php:45
+msgid "Repeat new password"
+msgstr "Επανάληψη κωδικού"
+
+#: user-change_username.php:50
+msgid "Username: this field is required"
+msgstr "Όνομα χρήστη: Αυτό το πεδίο απαιτείται"
+
+#: user-change_username.php:75
+msgid "The username is available"
+msgstr "Το όνομα χρήστη είναι διαθέσιμο"
+
+#: user-change_username.php:77
+msgid "The username is NOT available"
+msgstr "Το όνομα χρήστη Δεν είναι διαθέσιμο"
+
+#: user-change_username.php:94
+msgid "Username"
+msgstr "Όνομα χρήστη"
+
+#: user-forgot_password.php:30 user-recover.php:30
+msgid "Recover your password"
+msgstr "Ανάκτηση κωδικού"
+
+#: user-items.php:41
+msgid "My listings"
+msgstr "Οι Αγγελίες μου"
+
+#: user-items.php:43
+msgid "No listings have been added yet"
+msgstr "Δεν υπάρχουν αγγελίες ακόμα"
+
+#: user-login.php:30
+msgid "Access to your account"
+msgstr "Πρόσβαση στο λογαριασμό σας"
+
+#: user-login.php:44 user-register.php:52
+msgid "Password"
+msgstr "Κωδικός"
+
+#: user-login.php:51
+msgid "Remember me"
+msgstr "Να με θυμάσαι"
+
+#: user-login.php:54
+msgid "Log in"
+msgstr "Σύνδεση"
+
+#: user-login.php:58
+msgid "Forgot password?"
+msgstr "Ξέχασες τον κωδικό?"
+
+#: user-profile.php:52
+msgid "User type"
+msgstr "Τύπος χρήστη"
+
+#: user-profile.php:58
+msgid "Cell phone"
+msgstr "Κινητό"
+
+#: user-profile.php:64
+msgid "Phone"
+msgstr "Τηλέφωνο"
+
+#: user-profile.php:88
+msgid "City area"
+msgstr "Περιοχή της πόλης"
+
+#: user-profile.php:100
+msgid "Website"
+msgstr "Σελίδα"
+
+#: user-public-profile.php:67
+msgid "<strong>Address:</strong> %1$s"
+msgstr "<strong>Διεύθυνση:</strong> %1$s"
+
+#: user-public-profile.php:70
+msgid "<strong>Location:</strong> %1$s"
+msgstr "<strong>Τοποθεσία:</strong> %1$s"
+
+#: user-public-profile.php:75
+msgid "User description"
+msgstr "Περιγραφή χρήστη"
+
+#: user-public-profile.php:80
+msgid "Latest listings"
+msgstr "Τελευταίες Αγγελίες"
+
+#: user-recover.php:45
+msgid "Send me a new password"
+msgstr "Στείλτε μου ένα νέο κωδικό πρόσβασης"
+
+#: user-register.php:31
+msgid "Register an account for free"
+msgstr "Ανοίξτε έναν ΔΩΡΕΑΝ λογαριασμό"
+
+#: user-register.php:58
+msgid "Repeat password"
+msgstr "Επαναλάβετε τον κωδικό"
+
+#: user-register.php:62
+msgid "Passwords don't match"
+msgstr "Οι κωδικοί πρόσβασης δεν ταιριάζουν"
+
+#: user-register.php:69
+msgid "Create"
+msgstr "Δημιουργία"
+
+#: user-sidebar.php:23
+msgid "Display menu"
+msgstr "Εμφανίση μενού"
+
+#: user-sidebar.php:29
+msgid "Are you sure you want to delete your account?"
+msgstr "Είσε σίγουρος ότι θέλεις να διαγράψεις τον λογαριασμό σου?"
+
+msgid "bender"
+msgstr "bender"
+
+msgid "http://www.osclass.org/"
+msgstr "http://www.osclass.org/"
+
+msgid "Osclass team"
+msgstr "Ομάδα του Osclass"

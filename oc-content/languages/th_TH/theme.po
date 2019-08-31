@@ -1,0 +1,796 @@
+# Translation of Bender in Thai
+# This file is distributed under the same license as the Bender package.
+msgid ""
+msgstr ""
+"PO-Revision-Date: 2014-01-07 10:51:06+0000\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"X-Generator: GlotPress/0.1\n"
+"Project-Id-Version: Bender\n"
+
+#: 404.php:8
+msgid "Sorry but I can't find the page you're looking for"
+msgstr "ขออภัยค่ะไม่พบหน้าที่ท่านต้องการ"
+
+#: 404.php:10
+msgid "Let us help you, we have got a few tips for you to find it."
+msgstr "ให้เราช่วยเหลือคุณ, เรารมีเคล็ดลับเล็ก ๆ น้อย ๆ ที่จะแนะนำคุณ"
+
+#: 404.php:13
+msgid "<strong>Search</strong> for it:"
+msgstr "<strong>ค้นหา</strong> :"
+
+#: 404.php:18 header.php:69
+msgid "Search"
+msgstr "ค้นหา"
+
+#: 404.php:22
+msgid "<strong>Look</strong> for it in the most popular categories."
+msgstr "<strong>มองหา</strong> ในหมวดหมู่."
+
+#: admin/header.php:7 functions.php:472
+msgid "Header logo"
+msgstr "โลโก้ส่วนหัว"
+
+#: admin/header.php:10
+msgid "Preview"
+msgstr "แสดงผล"
+
+#: admin/header.php:17
+msgid "Remove logo"
+msgstr "ลบโลโก้"
+
+#: admin/header.php:25
+msgid "No logo has been uploaded yet"
+msgstr "ยังไม่มีโลโก้อัพโหลดในตอนนี้"
+
+#: admin/header.php:28
+msgid "Upload logo"
+msgstr "อัพโหลดโลโก้"
+
+#: admin/header.php:30
+msgid "The preferred size of the logo is 600x100."
+msgstr "ขนาดโลโก้ที่แนะนำคือ 600x100."
+
+#: admin/header.php:32
+msgid "<strong>Note:</strong> Uploading another logo will overwrite the current logo."
+msgstr "<strong>บันทึก:</strong>การอัพโหลดโลโก้อื่นจะทับโลโก้เดิมของคุณ."
+
+#: admin/header.php:40
+msgid "Logo image (png,gif,jpg)"
+msgstr "รูปโลโก้ (png,gif,jpg)"
+
+#: admin/header.php:46
+msgid "Upload"
+msgstr "อัพโหลด"
+
+#: admin/header.php:55
+msgid "The images folder <strong>%s</strong> is not writable on your server"
+msgstr "โฟลเดอร์รูปภาพ <strong>%s</strong> บนเซิร์ฟเวอร์ไม่สามารถเขียนทับได้"
+
+#: admin/header.php:56
+msgid "Osclass can't upload the logo image from the administration panel."
+msgstr "Osclass ไม่สามารถอัพโหลดโลโก้ได้จากส่วนควบคุมระบบ"
+
+#: admin/header.php:57
+msgid "Please make the aforementioned image folder writable."
+msgstr "กรุณาทำห้โฟลเดอร์รูปภาพสามารถเขียนทับได้"
+
+#: admin/header.php:62
+msgid "To make a directory writable under UNIX execute this command from the shell:"
+msgstr "เพื่อที่จะทำให้ไดเรกทอรี่นี้เขียนได้ในระบบ UNIX รันคำสั่งในเชลล์"
+
+#: admin/settings.php:14
+msgid "I would like to contribute to the development of Osclass with a donation of"
+msgstr "ฉันต้องการที่จะสันบสนุนผู้พัฒนาของ Osclass ด้วยการบริจาค"
+
+#: admin/settings.php:19
+msgid "Custom"
+msgstr "ปรับแต่ง"
+
+#: admin/settings.php:20
+msgid "Donate"
+msgstr "บริจาค"
+
+#: admin/settings.php:24 functions.php:473
+msgid "Theme settings"
+msgstr "การตั้งค่าธีม"
+
+#: admin/settings.php:30
+msgid "Search placeholder"
+msgstr "ค้นหาตำแหน่งแทนที่"
+
+#: admin/settings.php:34
+msgid "Show lists as:"
+msgstr "แสดงรายการแบบ"
+
+#: admin/settings.php:37
+msgid "Gallery"
+msgstr "แกลอรี่"
+
+#: admin/settings.php:38 main.php:45 search.php:80
+msgid "List"
+msgstr "แสดงรายการ"
+
+#: admin/settings.php:43
+msgid "Footer link"
+msgstr "ลิ้งค์ด้านล่าง"
+
+#: admin/settings.php:45
+msgid "I want to help Osclass by linking to <a href=\"http://osclass.org/\" target=\"_blank\">osclass.org</a> from my site with the following text:"
+msgstr "ฉันต้องการที่จะช่วยให้ Osclass โดยเชื่อมโยงไป <a href=\"http://osclass.org/\" target=\"_blank\"> osclass.org </ a> จากเว็บไซต์ของฉันที่มีข้อความต่อไปนี้:"
+
+#: admin/settings.php:46
+msgid "This website is proudly using the <a title=\"Osclass web\" href=\"http://osclass.org/\">classifieds scripts</a> software <strong>Osclass</strong>"
+msgstr "เว็บไซต์นี้ได้อย่างภาคภูมิใจโดยใช้ <a title=\"Osclass web\" href=\"http://osclass.org/\"> คลาสสิฟายด์สคริปต์ </ a> ซอฟแวร์ <strong> Osclass </ strong>"
+
+#: admin/settings.php:50
+msgid "Save changes"
+msgstr "บันทึกการเปลี่ยนแปลง"
+
+#: alert-form.php:27
+msgid "You have sucessfully subscribed to the alert"
+msgstr "คุณทำการสมัครบริการแจ้งเตือนสำเร็จแล้ว"
+
+#: alert-form.php:28 user-change_email.php:77
+msgid "Invalid email address"
+msgstr "อีเมลล์ไม่ถูกต้อง"
+
+#: alert-form.php:29
+msgid "There was a problem with the alert"
+msgstr "มีปัญหากับระบบแจ้งเตือน"
+
+#: alert-form.php:60
+msgid "Subscribe to this search"
+msgstr "สมัครบริการสำหรับการค้นหานี้"
+
+#: alert-form.php:75
+msgid "Subscribe now"
+msgstr "รับการติดตามตอนนี้"
+
+#: common/head.php:3 item.php:165 loop-single-premium.php:26 loop-single.php:26
+msgid "Delete"
+msgstr "ลบ"
+
+#: common/head.php:4
+msgid "Cancel"
+msgstr "ยกเลิก"
+
+#: contact.php:31
+msgid "Contact us"
+msgstr "ติดต่อเรา"
+
+#: contact.php:40 item-send-friend.php:44 item-sidebar.php:76 item.php:191
+#: user-public-sidebar.php:33
+msgid "Your name"
+msgstr "ชื่อของคุณ"
+
+#: contact.php:41 contact.php:54 item-sidebar.php:84 user-public-sidebar.php:41
+msgid "optional"
+msgstr "ตัวเลือกเพิ่มเติม"
+
+#: contact.php:47 user-public-sidebar.php:37
+msgid "Your email address"
+msgstr "ที่อยู่อีเมลล์ของคุณ"
+
+#: contact.php:53
+msgid "Subject"
+msgstr "หัวข้อ"
+
+#: contact.php:60 item-send-friend.php:78 item-sidebar.php:89
+#: user-public-sidebar.php:46
+msgid "Message"
+msgstr "ข้อความ"
+
+#: contact.php:68 item-send-friend.php:87 item-sidebar.php:112 item.php:216
+#: user-public-sidebar.php:69
+msgid "Send"
+msgstr "ส่ง"
+
+#: footer.php:33 header.php:41
+msgid "Hi %s"
+msgstr "สวัสดี %s"
+
+#: footer.php:34 header.php:42
+msgid "My account"
+msgstr "บัญชีผู้ใช้งานนของฉัน"
+
+#: footer.php:35 header.php:43
+msgid "Logout"
+msgstr "ออกจากระบบ"
+
+#: footer.php:38 functions.php:319 header.php:46 item-sidebar.php:54
+msgid "Login"
+msgstr "เข้าสู่ระบบ"
+
+#: footer.php:41 header.php:48 item-sidebar.php:55 user-login.php:58
+msgid "Register for a free account"
+msgstr "สมัครสมาชิก ฟรี !!!"
+
+#: footer.php:46 header.php:51
+msgid "Publish your ad for free"
+msgstr "ประกาศโฆษณา ขายสินค้า ฟรี !!!"
+
+#: footer.php:60 functions.php:323 user-public-sidebar.php:26
+msgid "Contact"
+msgstr "ติดต่อเรา"
+
+#: footer.php:70
+msgid "Language:"
+msgstr "ภาษา:"
+
+#: functions.php:29
+msgid "ie. PHP Programmer"
+msgstr "ยกตัวอย่างเช่น. นักบัญชี"
+
+#: functions.php:304 item-post.php:40
+msgid "Publish a listing"
+msgstr "เผยแพร่รายการโฆษณา"
+
+#: functions.php:305
+msgid "Edit your listing"
+msgstr "แก้ไขรายการโฆษณา"
+
+#: functions.php:306 item-send-friend.php:31
+msgid "Send to a friend"
+msgstr "ส่งให้เพื่อน"
+
+#: functions.php:307 item-sidebar.php:40
+msgid "Contact publisher"
+msgstr "ติดต่อผู้ลงประกาศ"
+
+#: functions.php:308
+msgid "Search results"
+msgstr "ผลลัพธ์ในการค้นหา"
+
+#: functions.php:309
+msgid "Search results: %s"
+msgstr "ผลลัพธ์ในการค้นหา: %s"
+
+#: functions.php:310
+msgid "Dashboard"
+msgstr "หน้าควบคุมหลัก"
+
+#: functions.php:311
+msgid "%s's profile"
+msgstr "บัญชีผู้ใช้งานของ %s"
+
+#: functions.php:312 functions.php:356
+msgid "Account"
+msgstr "บัญชีผู้ใช้งาน"
+
+#: functions.php:313 functions.php:346 user-alerts.php:53
+msgid "Listings"
+msgstr "ลิสต์รายการ"
+
+#: functions.php:314 functions.php:351 user-alerts.php:32 user-alerts.php:37
+msgid "Alerts"
+msgstr "แจ้งเตือน"
+
+#: functions.php:315 user-profile.php:32 user-profile.php:37
+msgid "Update account"
+msgstr "อัพเดตบัญชี"
+
+#: functions.php:316 functions.php:361
+msgid "Change email"
+msgstr "เปลี่ยนอีเมลล์"
+
+#: functions.php:317 functions.php:366 user-change_username.php:34
+#: user-change_username.php:39
+msgid "Change username"
+msgstr "เปลี่ยนชื่อผู้ใช้งาน"
+
+#: functions.php:318 functions.php:321 functions.php:371
+#: user-change_password.php:32 user-change_password.php:37
+#: user-forgot_password.php:52
+msgid "Change password"
+msgstr "เปลี่ยนรหัสผ่าน"
+
+#: functions.php:320
+msgid "Recover password"
+msgstr "กู้คืนรหัสผ่าน"
+
+#: functions.php:322
+msgid "Create a new account"
+msgstr "สร้างบัญชีใหม่"
+
+#: functions.php:376 user-sidebar.php:28
+msgid "Delete account"
+msgstr "ลบบัญชีผู้ใช้งาน"
+
+#: functions.php:435
+msgid "Theme settings updated correctly"
+msgstr "ธีมนี้ได้รับการอัพเดตแล้ว"
+
+#: functions.php:442
+msgid "The logo image has been uploaded correctly"
+msgstr "โลโก้ได้ทำการอัพโหลดแล้ว"
+
+#: functions.php:444 functions.php:447
+msgid "An error has occurred, please try again"
+msgstr "มีข้อผิดพลาด เกิดขึ้น กรุณาลองใหม่อีกครั้ง"
+
+#: functions.php:454
+msgid "The logo image has been removed"
+msgstr "โลโก้ได้ถูกลบแล้ว"
+
+#: functions.php:456
+msgid "Image not found"
+msgstr "ไม่เจอรูปภาพนี้"
+
+#: functions.php:531 functions.php:553
+msgid "All categories"
+msgstr "หมาวดหมู่ทั้งหมด"
+
+#: header.php:63 item-post.php:55
+msgid "Select a category"
+msgstr "เลือกหมวดหมู่"
+
+#: item-post.php:51
+msgid "General Information"
+msgstr "ข้อมูลทั่วไป"
+
+#: item-post.php:53
+msgid "Category"
+msgstr "หมวดหมู่"
+
+#: item-post.php:59 item.php:204
+msgid "Title"
+msgstr "หัวข้อ"
+
+#: item-post.php:65 user-profile.php:106
+msgid "Description"
+msgstr "คำอธิบาย"
+
+#: item-post.php:72 search-sidebar.php:61
+msgid "Price"
+msgstr "ราคา"
+
+#: item-post.php:81 item-post.php:83
+msgid "Photos"
+msgstr "รูปภาพ"
+
+#: item-post.php:90
+msgid "Add new photo"
+msgstr "เพิ่มรูปภาพ"
+
+#: item-post.php:96
+msgid "Listing Location"
+msgstr "ที่ตั้งรายการประกาศ"
+
+#: item-post.php:99 user-profile.php:70
+msgid "Country"
+msgstr "ประเทศ"
+
+#: item-post.php:105 user-profile.php:76
+msgid "Region"
+msgstr "เขตพื้นที่จังหวัด"
+
+#: item-post.php:111 search-sidebar.php:44 user-profile.php:82
+msgid "City"
+msgstr "เมือง"
+
+#: item-post.php:117
+msgid "City Area"
+msgstr "เขตเมือง"
+
+#: item-post.php:123 user-profile.php:94
+msgid "Address"
+msgstr "ที่อยู่"
+
+#: item-post.php:132
+msgid "Seller's information"
+msgstr "ข้อมูลผู้ขาย"
+
+#: item-post.php:134 item-sidebar.php:59 user-profile.php:46
+#: user-register.php:39
+msgid "Name"
+msgstr "ชื่อ"
+
+#: item-post.php:140 user-login.php:38 user-recover.php:37 user-register.php:45
+msgid "E-mail"
+msgstr "อีเมลล์"
+
+#: item-post.php:147
+msgid "Show e-mail on the listing page"
+msgstr "แสดงอีเมลล์ในหน้าประกาศ"
+
+#: item-post.php:166 user-change_email.php:59 user-change_password.php:64
+#: user-change_username.php:102 user-profile.php:113
+msgid "Update"
+msgstr "อัพเดต"
+
+#: item-post.php:166
+msgid "Publish"
+msgstr "เผยแพร่"
+
+#: item-send-friend.php:50 item.php:197
+msgid "Your e-mail"
+msgstr "อีเมลล์ของคุณ"
+
+#: item-send-friend.php:57
+msgid "Your friend's name"
+msgstr "ชื่อเพื่อนของคุณ"
+
+#: item-send-friend.php:63
+msgid "Your friend's e-mail address"
+msgstr "อีเมลล์ของเพื่อนคุณ"
+
+#: item-send-friend.php:70
+msgid "Subject (optional)"
+msgstr "หัวข้อ (ตัวเลือกเพิ่มเติม)"
+
+#: item-sidebar.php:30
+msgid "Mark as..."
+msgstr "ทำเครื่องหมายเป็น..."
+
+#: item-sidebar.php:31
+msgid "Mark as spam"
+msgstr "ทำเครื่องหมายว่าเป็นสแปม"
+
+#: item-sidebar.php:32
+msgid "Mark as misclassified"
+msgstr "ทำเครื่องหมายว่าโพสต์ผิดหมวดหมู่"
+
+#: item-sidebar.php:33
+msgid "Mark as duplicated"
+msgstr "ทำเครื่องหมายว่าประกาศซ้ำ"
+
+#: item-sidebar.php:34
+msgid "Mark as expired"
+msgstr "ทำเครื่องหมายว่าหมดอายุ"
+
+#: item-sidebar.php:35
+msgid "Mark as offensive"
+msgstr "ทำเครื่องหมายว่ามีการละเมิด"
+
+#: item-sidebar.php:43
+msgid "The listing is expired. You can't contact the publisher."
+msgstr "ประกาศหมดอายุ. คุณม่สามารถติดต่อผู้ประกาศได้"
+
+#: item-sidebar.php:47
+msgid "It's your own listing, you can't contact the publisher."
+msgstr "ประกาศนี้เป็นของคุณเอง. คุณไม่สามารถติดต่อผู้ประกาศได้"
+
+#: item-sidebar.php:51
+msgid "You must log in or register a new account in order to contact the advertiser"
+msgstr "คุณจำเป็นต้องเข้าสู่ระบบหรือสมัครสมาชิกใหม่ ในกรณีที่ต้องการติดต่อผู้โฆษณาหรือผู้ประกาศ"
+
+#: item-sidebar.php:61
+msgid "Name: %s"
+msgstr "ชื่อ: %s"
+
+#: item-sidebar.php:64
+msgid "E-mail: %s"
+msgstr "อีเมลล์: %s"
+
+#: item-sidebar.php:67
+msgid "Phone: %s"
+msgstr "โทรศัพท์: %s"
+
+#: item-sidebar.php:80
+msgid "Your e-mail address"
+msgstr "อีเมลล์ของคุณ"
+
+#: item-sidebar.php:84 user-public-sidebar.php:41
+msgid "Phone number"
+msgstr "เบอร์โทรศัพท์"
+
+#: item-sidebar.php:106 user-public-sidebar.php:63
+msgid "Enter the words above"
+msgstr "กรุณาเติมคำข้างล่างนี้"
+
+#: item-sidebar.php:108 user-public-sidebar.php:65
+msgid "Help"
+msgstr "ช่วยเหลือ"
+
+#: item.php:55
+msgid "<strong class=\"publish\">Published date</strong>: %1$s"
+msgstr "<strong class=\"publish\">วันที่ทำการประกาศ</strong>: %1$s"
+
+#: item.php:58
+msgid "<strong class=\"update\">Modified date:</strong> %1$s"
+msgstr "<strong class=\"update\">วันที่ทำการแก้ไข:</strong> %1$s"
+
+#: item.php:61 main.php:75
+msgid "Location"
+msgstr "ตำแหน่งที่ตั้ง"
+
+#: item.php:67 loop-single-premium.php:24 loop-single.php:24
+msgid "Edit item"
+msgstr "แก้ไขไอเท็ม"
+
+#: item.php:79 item.php:84
+msgid "Image"
+msgstr "รูปภาพ"
+
+#: item.php:113
+msgid "Contact seller"
+msgstr "ติดต่อคนขาย"
+
+#: item.php:117
+msgid "Share"
+msgstr "แบ่งปัน"
+
+#: item.php:123
+msgid "Useful information"
+msgstr "ข้อมูลที่มีประโยชน์"
+
+#: item.php:125
+msgid "Avoid scams by acting locally or paying with PayPal"
+msgstr "หลีกเลี่ยงการ ฉ้อโกงโดยเลือกการพบปะเพื่อทำการซื้อ ขาย หรือทำการชำระเงินผ่านทางระบบ Paypal"
+
+#: item.php:126
+msgid "Never pay with Western Union, Moneygram or other anonymous payment services"
+msgstr "ไม่ควรทำการชำระเงินโดย Western Union, Moneygram หรือการชำระเงินอื่น ๆ ที่ไม่มีความน่าเชื่อถือ"
+
+#: item.php:127
+msgid "Don't buy or sell outside of your country. Don't accept cashier cheques from outside your country"
+msgstr "กรุณาอย่าทำการขายนอกพื้นที่ จังหวัดหรือประเทศไทย. และอย่ารับเช็คจากนอกประเทศของคุณ"
+
+#: item.php:128
+msgid "This site is never involved in any transaction, and does not handle payments, shipping, guarantee transactions, provide escrow services, or offer \"buyer protection\" or \"seller certification\""
+msgstr "เว็บไซต์นี้ไม่มีส่วนเกี่ยวข้องกับการทำรายการ และไม่มีส่วนเกี่ยวข้องกับการชำระเงินใด ๆ ,การขนส่ง,การทำธุรกรรมหรือการรับประกันบริการรับฝากทรัพย์สินหรือข้อเสนอใน \"การคุ้มครองผู้ซื้อ \" หรือ \"การรับรองผู้ขาย \""
+
+#: item.php:135
+msgid "Related listings"
+msgstr "รายการที่เกี่ยวข้อง"
+
+#: item.php:154
+msgid "Comments"
+msgstr "แสดงความคิดเห็น"
+
+#: item.php:161
+msgid "by"
+msgstr "โดย"
+
+#: item.php:165
+msgid "Delete your comment"
+msgstr "ลบความคิดเห็น"
+
+#: item.php:177
+msgid "Leave your comment (spam and offensive messages will be removed)"
+msgstr "แสดงความคิดเห็นของคุณ (สแปมหรือข้อควาที่เป็นการะเมิดจะถูกทำการลบ)"
+
+#: item.php:210
+msgid "Comment"
+msgstr "แสดงความคิดเห็น"
+
+#: loop-single-premium.php:26 loop-single.php:26
+msgid "This action can not be undone. Are you sure you want to continue?"
+msgstr "การกระทำนี้ไม่สามารถย้อนกลับได้ คุณแน่ใจหรือไม่ทำจะดำเนินการต่อ"
+
+#: loop-single-premium.php:29 loop-single.php:29
+msgid "Activate"
+msgstr "เปิดการใช้งาน"
+
+#: main.php:38
+msgid "Latest Listings"
+msgstr "รายการล่าสุด"
+
+#: main.php:41
+msgid "There aren't job offers available at this moment"
+msgstr "ยังไม่มีงานใด ๆ ในตอนนี้"
+
+#: main.php:46 search.php:81
+msgid "Grid"
+msgstr "ตาราง"
+
+#: main.php:65
+msgid "See all listings"
+msgstr "ดูรายการทั้งหมด"
+
+#: search-sidebar.php:38
+msgid "Your search"
+msgstr "การค้นหาของคุณ"
+
+#: search-sidebar.php:51
+msgid "Show only"
+msgstr "แสดงเฉพาะ"
+
+#: search-sidebar.php:54
+msgid "listings with pictures"
+msgstr "รายการที่มีรูปภาพ"
+
+#: search-sidebar.php:62
+msgid "Min"
+msgstr "น้อยที่สุด"
+
+#: search-sidebar.php:64
+msgid "Max"
+msgstr "มากที่สุด"
+
+#: search-sidebar.php:84
+msgid "Apply"
+msgstr "ใช้งาน"
+
+#: search-sidebar.php:89
+msgid "Refine category"
+msgstr "ปรับแต่งหมวดหมู่"
+
+#: search.php:55
+msgid "Selected"
+msgstr "ที่เลือก"
+
+#: search.php:56
+msgid "Nothing selected, input was"
+msgstr "ไม่มีการเลือก, ใส่ค่าเป็น"
+
+#: search.php:71
+msgid "There are no results matching \"%s\""
+msgstr "การมีผลลัพธ์ใดที่เกี่ยวข้องกับ \"%s\""
+
+#: search.php:78
+msgid "Show filters"
+msgstr "แสดงตัวกรอง"
+
+#: search.php:85
+msgid "Sort by"
+msgstr "จัดเรียงแบบ"
+
+#: search.php:157
+msgid "Other searches that may interest you"
+msgstr "การค้นหาอื่น ๆ ที่คุณอาจจะสนใจ"
+
+#: user-alerts.php:39
+msgid "You do not have any alerts yet"
+msgstr "คุณยังไม่มีการแจ้งเตือนใด ๆ ในตอนนี้"
+
+#: user-alerts.php:46
+msgid "Alert"
+msgstr "การแจ้งเตือน"
+
+#: user-alerts.php:46
+msgid "This action can't be undone. Are you sure you want to continue?"
+msgstr "การกระทำนี้ไม่สามารถย้อนกลับได้ คุณแน่ใจหรือไม่ทำจะดำเนินการต่อ"
+
+#: user-alerts.php:46
+msgid "Delete this alert"
+msgstr "ลบการแจ้งเตือนนี้"
+
+#: user-change_email.php:33 user-change_email.php:38
+msgid "Change e-mail"
+msgstr "เปลี่ยนอีเมลล์"
+
+#: user-change_email.php:46
+msgid "Current e-mail"
+msgstr "อีเมลล์ปัจจุบัน"
+
+#: user-change_email.php:52
+msgid "New e-mail"
+msgstr "อีเมลล์ใหม่"
+
+#: user-change_password.php:45
+msgid "Current password"
+msgstr "รหัสผ่านปัจจุบัน"
+
+#: user-change_password.php:51 user-forgot_password.php:39
+msgid "New password"
+msgstr "รหัสผ่านใหม่"
+
+#: user-change_password.php:57 user-forgot_password.php:45
+msgid "Repeat new password"
+msgstr "กรอกรหัสผ่านอีกครั้ง"
+
+#: user-change_username.php:50
+msgid "Username: this field is required"
+msgstr "ชื่อผู้ใช้งาน: ฟีลล์นี้จำเป็นต้องกรอก"
+
+#: user-change_username.php:75
+msgid "The username is available"
+msgstr "ชื่อผู้ใช้งานนี้สามารถใช้งานได้"
+
+#: user-change_username.php:77
+msgid "The username is NOT available"
+msgstr "ชื่อผู้ใช้งานนี้ไม่สามารถใช้ได้"
+
+#: user-change_username.php:94
+msgid "Username"
+msgstr "ชื่อผู้ใช้งาน"
+
+#: user-forgot_password.php:30 user-recover.php:30
+msgid "Recover your password"
+msgstr "กู้คืนรหัสผ่าน"
+
+#: user-items.php:41
+msgid "My listings"
+msgstr "รายการประกาศของฉัน"
+
+#: user-items.php:43
+msgid "No listings have been added yet"
+msgstr "ยังไม่มีรายการที่เพิ่มเข้ามาใหม่ในตอนนี้"
+
+#: user-login.php:30
+msgid "Access to your account"
+msgstr "เข้าสู่บัญชีผู้ใช้งานของคุณ"
+
+#: user-login.php:44 user-register.php:52
+msgid "Password"
+msgstr "รหัสผ่าน"
+
+#: user-login.php:51
+msgid "Remember me"
+msgstr "จำฉันไว้"
+
+#: user-login.php:54
+msgid "Log in"
+msgstr "เข้าสู่ระบบ"
+
+#: user-login.php:58
+msgid "Forgot password?"
+msgstr "ลืมรหัสผ่าน ?"
+
+#: user-profile.php:52
+msgid "User type"
+msgstr "ประเภทผู้ใช้งาน"
+
+#: user-profile.php:58
+msgid "Cell phone"
+msgstr "โทรศัพท์มือถือ"
+
+#: user-profile.php:64
+msgid "Phone"
+msgstr "โทรศัพท์"
+
+#: user-profile.php:88
+msgid "City area"
+msgstr "เขตพื้นที่"
+
+#: user-profile.php:100
+msgid "Website"
+msgstr "เว็บไซต์"
+
+#: user-public-profile.php:67
+msgid "<strong>Address:</strong> %1$s"
+msgstr "<strong>ที่อยู่:</strong> %1$s"
+
+#: user-public-profile.php:70
+msgid "<strong>Location:</strong> %1$s"
+msgstr "<strong>ที่ตั้ง:</strong> %1$s"
+
+#: user-public-profile.php:75
+msgid "User description"
+msgstr "คำอธิบายผู้ใช้งาน"
+
+#: user-public-profile.php:80
+msgid "Latest listings"
+msgstr "ลิสต์รายการล่าสุด"
+
+#: user-recover.php:45
+msgid "Send me a new password"
+msgstr "ส่งรหัสผ่านใหม่ให้ฉัน"
+
+#: user-register.php:31
+msgid "Register an account for free"
+msgstr "สมัครสมาชิกใหม่ ฟรี !!"
+
+#: user-register.php:58
+msgid "Repeat password"
+msgstr "ทวนรหัสผ่าน"
+
+#: user-register.php:62
+msgid "Passwords don't match"
+msgstr "รหัสผ่านไม่ตรงกัน"
+
+#: user-register.php:69
+msgid "Create"
+msgstr "สร้าง"
+
+#: user-sidebar.php:23
+msgid "Display menu"
+msgstr "แสดงเมนู"
+
+#: user-sidebar.php:29
+msgid "Are you sure you want to delete your account?"
+msgstr "คุณแน่ใจหรือไม่ที่จะลบบัญชีของคุณ ?"
+
+msgid "bender"
+msgstr "bender"
+
+msgid "http://www.osclass.org/"
+msgstr "http://www.osclass.org/"
+
+msgid "Osclass team"
+msgstr "ทีมงาน Osclass team"

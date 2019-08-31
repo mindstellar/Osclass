@@ -1,0 +1,880 @@
+# Translation of Bender in Russian
+# This file is distributed under the same license as the Bender package.
+msgid ""
+msgstr ""
+"PO-Revision-Date: 2014-12-17 14:15:07+0000\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
+"X-Generator: GlotPress/0.1\n"
+"Project-Id-Version: Bender\n"
+
+#: 404.php:30
+msgid "Sorry but I can't find the page you're looking for"
+msgstr "Извините, но такая страница не найдена"
+
+#: 404.php:32
+msgid "Let us help you, we have got a few tips for you to find it."
+msgstr "Позвольте нам помочь Вам, у нас есть для вас несколько подсказок"
+
+#: 404.php:35
+msgid "<strong>Search</strong> for it:"
+msgstr "<strong>Поиск</strong> того,что Вы ищите:"
+
+#: 404.php:40 header.php:80
+msgid "Search"
+msgstr "Поиск"
+
+#: 404.php:44
+msgid "<strong>Look</strong> for it in the most popular categories."
+msgstr "<strong>Посмотрите</strong>  в самых популярных категориях."
+
+#: admin/header.php:29 functions.php:549
+msgid "Header logo"
+msgstr "Логотип верхней части страницы"
+
+#: admin/header.php:35
+msgid "Preview"
+msgstr "Предпросмотр"
+
+#: admin/header.php:42
+msgid "Remove logo"
+msgstr "Удалить логотип"
+
+#: admin/header.php:49
+msgid "No logo has been uploaded yet"
+msgstr "Логотип еще не загружен"
+
+#: admin/header.php:52
+msgid "Upload logo"
+msgstr "Загрузить логотип"
+
+#: admin/header.php:53
+msgid "The preferred size of the logo is 600x100."
+msgstr "Предпочтительный размер логотипа 600х100"
+
+#: admin/header.php:55
+msgid "<strong>Note:</strong> Uploading another logo will overwrite the current logo."
+msgstr "<strong>Внимание:</strong> Загрузка другого логотипа перепишет существующий."
+
+#: admin/header.php:63
+msgid "Logo image (png,gif,jpg)"
+msgstr "Изображение логотипа (png,gif,jpg)"
+
+#: admin/header.php:69
+msgid "Upload"
+msgstr "Загрузить"
+
+#: admin/header.php:78
+msgid "The images folder <strong>%s</strong> is not writable on your server"
+msgstr "Папка с изображениями <strong>%s</strong>недоступна для записи на вашем сервере"
+
+#: admin/header.php:79
+msgid "Osclass can't upload the logo image from the administration panel."
+msgstr "Osclass не может загрузить изображение логотипа из административной панели"
+
+#: admin/header.php:80
+msgid "Please make the aforementioned image folder writable."
+msgstr "Пожалуйста сделайте вышеупомянутую папку изображений доступную для записи"
+
+#: admin/header.php:85
+msgid "To make a directory writable under UNIX execute this command from the shell:"
+msgstr "Чтобы сделать каталог доступный для записи в UNIX  выполните эту команду из терминала"
+
+#: admin/settings.php:36
+msgid "I would like to contribute to the development of Osclass with a donation of"
+msgstr "Я бы хотел помочь разработке Osclass пожертвованием в размере"
+
+#: admin/settings.php:41
+msgid "Custom"
+msgstr "Настроить"
+
+#: admin/settings.php:42
+msgid "Donate"
+msgstr "Пожертвовать"
+
+#: admin/settings.php:46 functions.php:550
+msgid "Theme settings"
+msgstr "Параметры темы"
+
+#: admin/settings.php:52
+msgid "Search placeholder"
+msgstr "Найти местодержатель"
+
+#: admin/settings.php:56
+msgid "Show lists as:"
+msgstr "Показать список объявлений как"
+
+#: admin/settings.php:59
+msgid "Gallery"
+msgstr "Галерея"
+
+#: admin/settings.php:60 main.php:45 search.php:80
+msgid "List"
+msgstr "Список"
+
+#: admin/settings.php:65
+msgid "Footer link"
+msgstr "Ссылка нижнего колонтитула"
+
+#: admin/settings.php:67
+msgid "I want to help Osclass by linking to <a href=\"http://osclass.org/\" target=\"_blank\">osclass.org</a> from my site with the following text:"
+msgstr "Я хочу помочь Osclass, установив ссылку<a href=\"http://osclass.org/\" target=\"_blank\">osclass.org</a> с моего сайта со следующим текстом:"
+
+#: admin/settings.php:68
+msgid "This website is proudly using the <a title=\"Osclass web\" href=\"http://osclass.org/\">classifieds scripts</a> software <strong>Osclass</strong>"
+msgstr "Этот вебсайт использует <a title=\"Osclass web\" href=\"http://osclass.org/\">classifieds scripts</a> ПО <strong>Osclass</strong>"
+
+#: admin/settings.php:124
+msgid "Save changes"
+msgstr "Сохранить изменения"
+
+#: alert-form.php:27
+msgid "You have sucessfully subscribed to the alert"
+msgstr "Вы успешно подписались на рассылку"
+
+#: alert-form.php:28 user-change_email.php:77
+msgid "Invalid email address"
+msgstr "Недопустимый адрес электронной почты"
+
+#: alert-form.php:29
+msgid "There was a problem with the alert"
+msgstr "Была проблемы с рассылкой"
+
+#: alert-form.php:60
+msgid "Subscribe to this search"
+msgstr "Подпишитесь на этот поиск"
+
+#: alert-form.php:75
+msgid "Subscribe now"
+msgstr "Подписаться сейчас"
+
+#: common/head.php:25 item.php:163 loop-single-premium.php:48
+#: loop-single.php:48
+msgid "Delete"
+msgstr "Удалить"
+
+#: common/head.php:26
+msgid "Cancel"
+msgstr "Отменить"
+
+#: contact.php:31
+msgid "Contact us"
+msgstr "Свяжитесь с нами"
+
+#: contact.php:40 item-send-friend.php:44 item-sidebar.php:85 item.php:189
+#: user-public-sidebar.php:33
+msgid "Your name"
+msgstr "Ваше имя"
+
+#: contact.php:41 contact.php:54 item-sidebar.php:93 user-public-sidebar.php:41
+msgid "optional"
+msgstr "Опционально"
+
+#: contact.php:47 user-public-sidebar.php:37
+msgid "Your email address"
+msgstr "Ваш адрес электронной почты"
+
+#: contact.php:53
+msgid "Subject"
+msgstr "Тема"
+
+#: contact.php:60 item-send-friend.php:78 item-sidebar.php:98
+#: user-public-sidebar.php:46
+msgid "Message"
+msgstr "Сообщение"
+
+#: contact.php:68 item-send-friend.php:87 item-sidebar.php:128 item.php:214
+#: user-public-sidebar.php:69
+msgid "Send"
+msgstr "Отправить"
+
+#: footer.php:35 header.php:48
+msgid "Hi %s"
+msgstr "Привет %s"
+
+#: footer.php:36 header.php:49
+msgid "My account"
+msgstr "Мой аккаунт"
+
+#: footer.php:37 header.php:50
+msgid "Logout"
+msgstr "Выйти"
+
+#: footer.php:40 functions.php:372 header.php:53 item-sidebar.php:63
+msgid "Login"
+msgstr "Войти"
+
+#: footer.php:43 header.php:55 item-sidebar.php:64 user-login.php:58
+msgid "Register for a free account"
+msgstr "Зарегистрироваться"
+
+#: footer.php:50 header.php:60
+msgid "Publish your ad for free"
+msgstr "Опубликовать объявление"
+
+#: footer.php:65 functions.php:376 user-public-sidebar.php:26
+msgid "Contact"
+msgstr "Контакты"
+
+#: footer.php:75
+msgid "Language:"
+msgstr "Язык:"
+
+#: functions.php:29
+msgid "ie. PHP Programmer"
+msgstr "например, программист PHP"
+
+#: functions.php:357 item-post.php:40
+msgid "Publish a listing"
+msgstr "Опубликовать объявление"
+
+#: functions.php:358
+msgid "Edit your listing"
+msgstr "Редактировать объявление"
+
+#: functions.php:359 item-send-friend.php:31
+msgid "Send to a friend"
+msgstr "Отправить другу"
+
+#: functions.php:360 item-sidebar.php:49
+msgid "Contact publisher"
+msgstr "Связаться с автором"
+
+#: functions.php:361
+msgid "Search results"
+msgstr "Результаты поиска"
+
+#: functions.php:362
+msgid "Search results: %s"
+msgstr "Результаты поиска: %s"
+
+#: functions.php:363
+msgid "Dashboard"
+msgstr "Панель управления"
+
+#: functions.php:364
+msgid "%s's profile"
+msgstr "%s's профиль"
+
+#: functions.php:365 functions.php:414
+msgid "Account"
+msgstr "Аккаунт"
+
+#: functions.php:366 functions.php:404 search.php:128 user-alerts.php:51
+msgid "Listings"
+msgstr "Объявления"
+
+#: functions.php:367 functions.php:409 user-alerts.php:32 user-alerts.php:37
+msgid "Alerts"
+msgstr "Подписки"
+
+#: functions.php:368 user-profile.php:32 user-profile.php:37
+msgid "Update account"
+msgstr "Обновить учетную запись"
+
+#: functions.php:369 functions.php:419
+msgid "Change email"
+msgstr "Изменить электронную почту"
+
+#: functions.php:370 functions.php:424 user-change_username.php:34
+#: user-change_username.php:39
+msgid "Change username"
+msgstr "Изменить имя пользователя"
+
+#: functions.php:371 functions.php:374 functions.php:429
+#: user-change_password.php:32 user-change_password.php:37
+#: user-forgot_password.php:52
+msgid "Change password"
+msgstr "Сменить пароль"
+
+#: functions.php:373
+msgid "Recover password"
+msgstr "Восстановить пароль"
+
+#: functions.php:375
+msgid "Create a new account"
+msgstr "Создать новую учетную запись"
+
+#: functions.php:434 user-sidebar.php:28
+msgid "Delete account"
+msgstr "Удалить учетную запись"
+
+#: functions.php:497
+msgid "Theme settings updated correctly"
+msgstr "Параметры темы успешно обновлены"
+
+#: functions.php:512
+msgid "The logo image has been uploaded correctly"
+msgstr "Изображение логотипа успешно загружено"
+
+#: functions.php:514
+msgid "An error has occurred, please try again"
+msgstr "Произошла ошибка, пожалуйста попробуйте снова"
+
+#: functions.php:525
+msgid "The logo image has been removed"
+msgstr "Изображение логотипа было удалено"
+
+#: functions.php:527
+msgid "Image not found"
+msgstr "Изображение не найдено"
+
+#: functions.php:608 functions.php:630
+msgid "All categories"
+msgstr "Все категории"
+
+#: header.php:74 item-post.php:55
+msgid "Select a category"
+msgstr "Выбрать категорию"
+
+#: item-post.php:51
+msgid "General Information"
+msgstr "Общая информация"
+
+#: item-post.php:53
+msgid "Category"
+msgstr "Категория"
+
+#: item-post.php:59 item.php:202
+msgid "Title"
+msgstr "Заголовок"
+
+#: item-post.php:65 user-profile.php:106
+msgid "Description"
+msgstr "Описание"
+
+#: item-post.php:72 search-sidebar.php:61
+msgid "Price"
+msgstr "Цена"
+
+#: item-post.php:83
+msgid "Listing Location"
+msgstr "Местоположение"
+
+#: item-post.php:86 user-profile.php:70
+msgid "Country"
+msgstr "Страна"
+
+#: item-post.php:92 user-profile.php:76
+msgid "Region"
+msgstr "Регион"
+
+#: item-post.php:98 search-sidebar.php:44 user-profile.php:82
+msgid "City"
+msgstr "Город"
+
+#: item-post.php:104
+msgid "City Area"
+msgstr "Район"
+
+#: item-post.php:110 user-profile.php:94
+msgid "Address"
+msgstr "Адрес"
+
+#: item-post.php:119
+msgid "Seller's information"
+msgstr "Информация продавца"
+
+#: item-post.php:121 item-sidebar.php:68 user-profile.php:46
+#: user-register.php:39
+msgid "Name"
+msgstr "Имя"
+
+#: item-post.php:127 user-login.php:38 user-recover.php:37 user-register.php:45
+msgid "E-mail"
+msgstr "Электронная почта"
+
+#: item-post.php:134
+msgid "Show e-mail on the listing page"
+msgstr "Показать электронную почту в объявлении"
+
+#: item-post.php:153 user-change_email.php:59 user-change_password.php:64
+#: user-change_username.php:102 user-profile.php:114
+msgid "Update"
+msgstr "Обновить"
+
+#: item-post.php:153
+msgid "Publish"
+msgstr "Опубликовать"
+
+#: item-send-friend.php:50 item.php:195
+msgid "Your e-mail"
+msgstr "Ваша электронная почта"
+
+#: item-send-friend.php:57
+msgid "Your friend's name"
+msgstr "Имя вашего друга"
+
+#: item-send-friend.php:63
+msgid "Your friend's e-mail address"
+msgstr "Электронная почта вашего друга"
+
+#: item-send-friend.php:70
+msgid "Subject (optional)"
+msgstr "Тема (опционально)"
+
+#: item-sidebar.php:30
+msgid "Mark as..."
+msgstr "Пометить как..."
+
+#: item-sidebar.php:31
+msgid "Mark as spam"
+msgstr "Пометить как спам"
+
+#: item-sidebar.php:32
+msgid "Mark as misclassified"
+msgstr "Пометить как неверно классифицированное"
+
+#: item-sidebar.php:33
+msgid "Mark as duplicated"
+msgstr "Пометить как продублированное"
+
+#: item-sidebar.php:34
+msgid "Mark as expired"
+msgstr "Пометить как неактуальное"
+
+#: item-sidebar.php:35
+msgid "Mark as offensive"
+msgstr "Пометить как оскорбительное"
+
+#: item-sidebar.php:52
+msgid "The listing is expired. You can't contact the publisher."
+msgstr "Объявление не актуально. Вы не можете связаться с автором."
+
+#: item-sidebar.php:56
+msgid "It's your own listing, you can't contact the publisher."
+msgstr "Это ваше собственное объявление, и вы не можете связаться с автором."
+
+#: item-sidebar.php:60
+msgid "You must log in or register a new account in order to contact the advertiser"
+msgstr "Вы должны войти или зарегистрироваться чтобы связаться с автором объявления"
+
+#: item-sidebar.php:70
+msgid "Name: %s"
+msgstr "Имя: %s"
+
+#: item-sidebar.php:73
+msgid "E-mail: %s"
+msgstr "Электронная почта: %s"
+
+#: item-sidebar.php:76
+msgid "Phone: %s"
+msgstr "Телефон: %s"
+
+#: item-sidebar.php:89
+msgid "Your e-mail address"
+msgstr "Адрес вашей электронной почты"
+
+#: item-sidebar.php:93 user-public-sidebar.php:41
+msgid "Phone number"
+msgstr "Номер телефона"
+
+#: item-sidebar.php:122 user-public-sidebar.php:63
+msgid "Enter the words above"
+msgstr "Введите слова, указанные выше"
+
+#: item-sidebar.php:124 user-public-sidebar.php:65
+msgid "Help"
+msgstr "Помощь"
+
+#: item.php:59
+msgid "<strong class=\"publish\">Published date</strong>: %1$s"
+msgstr "<strong class=\"publish\">Дата публикации</strong>: %1$s"
+
+#: item.php:62
+msgid "<strong class=\"update\">Modified date:</strong> %1$s"
+msgstr "<strong class=\"update\">Дата изменения:</strong> %1$s"
+
+#: item.php:66 main.php:74
+msgid "Location"
+msgstr "Местоположение"
+
+#: item.php:73 loop-single-premium.php:46 loop-single.php:46
+msgid "Edit item"
+msgstr "Редактировать "
+
+#: item.php:85 item.php:90
+msgid "Image"
+msgstr "Изображение"
+
+#: item.php:119
+msgid "Contact seller"
+msgstr "Связаться с автором"
+
+#: item.php:123
+msgid "Share"
+msgstr "Поделиться"
+
+#: item.php:129
+msgid "Useful information"
+msgstr "Полезная информация"
+
+#: item.php:131
+msgid "Avoid scams by acting locally or paying with PayPal"
+msgstr "Избегайте мошенничества, встречайтесь с продавцом лично или оплачивайте через PayPal"
+
+#: item.php:132
+msgid "Never pay with Western Union, Moneygram or other anonymous payment services"
+msgstr "Никогда не оплачивайте через Western Union, Moneygram или через другие анонимные платежные системы"
+
+#: item.php:133
+msgid "Don't buy or sell outside of your country. Don't accept cashier cheques from outside your country"
+msgstr "Не продавайте и не покупайте за пределами своей страны. Не принимайте к оптате чеки за пределами своей страны"
+
+#: item.php:134
+msgid "This site is never involved in any transaction, and does not handle payments, shipping, guarantee transactions, provide escrow services, or offer \"buyer protection\" or \"seller certification\""
+msgstr "Этот сайт не занимается денежными переводами и не обрабатывает платежи, доставки, гарантированные переводы и не предлагает \"системы защиты\" покупателя или продавца"
+
+#: item.php:141
+msgid "Related listings"
+msgstr "Похожие объявления"
+
+#: item.php:152
+msgid "Comments"
+msgstr "Комментарии"
+
+#: item.php:159
+msgid "by"
+msgstr " "
+
+#: item.php:163
+msgid "Delete your comment"
+msgstr "Удалить Ваш комментарий"
+
+#: item.php:175
+msgid "Leave your comment (spam and offensive messages will be removed)"
+msgstr "Оставьте Ваш комментарий (спам и оскорбительные сообщения будут удалены)"
+
+#: item.php:208
+msgid "Comment"
+msgstr "Комментарий"
+
+#: loop-single-premium.php:48 loop-single.php:48
+msgid "This action can not be undone. Are you sure you want to continue?"
+msgstr "Это действие не может быть отменено. Вы уверены, что хотите продолжить?"
+
+#: loop-single-premium.php:51 loop-single.php:51
+msgid "Activate"
+msgstr "Активировать"
+
+#: main.php:38
+msgid "Latest Listings"
+msgstr "Последние объявления"
+
+#: main.php:46 search.php:81
+msgid "Grid"
+msgstr "Сетка"
+
+#: main.php:57
+msgid "See all listings"
+msgstr "Посмотреть все объявления"
+
+#: search-sidebar.php:38
+msgid "Your search"
+msgstr "Ваш поиск"
+
+#: search-sidebar.php:51
+msgid "Show only"
+msgstr "Показать только"
+
+#: search-sidebar.php:54
+msgid "listings with pictures"
+msgstr "Объявления с фотографиями"
+
+#: search-sidebar.php:62
+msgid "Min"
+msgstr "Минимум"
+
+#: search-sidebar.php:64
+msgid "Max"
+msgstr "Максимум"
+
+#: search-sidebar.php:84
+msgid "Apply"
+msgstr "Применить"
+
+#: search-sidebar.php:89
+msgid "Refine category"
+msgstr "Уточните категорию"
+
+#: search.php:55
+msgid "Selected"
+msgstr "Выбранное"
+
+#: search.php:56
+msgid "Nothing selected, input was"
+msgstr "Ничего не выбрано, ввод был"
+
+#: search.php:71
+msgid "There are no results matching \"%s\""
+msgstr "Нет подходящих результатов \"%s\""
+
+#: search.php:78
+msgid "Show filters"
+msgstr "Показать фильтры"
+
+#: search.php:85
+msgid "Sort by"
+msgstr "Сортировать по"
+
+#: search.php:141
+msgid "Other searches that may interest you"
+msgstr "Другие поиски, которые могут Вас заинтересовать"
+
+#: user-alerts.php:39
+msgid "You do not have any alerts yet"
+msgstr "У Вас еще нет подписок"
+
+#: user-alerts.php:46
+msgid "Alert"
+msgstr "Подписка"
+
+#: user-alerts.php:46
+msgid "This action can't be undone. Are you sure you want to continue?"
+msgstr "Это действие не может был отменено. Вы уверены, что хотите продолжить?"
+
+#: user-alerts.php:46
+msgid "Delete this alert"
+msgstr "Удалить эту подписку"
+
+#: user-change_email.php:33 user-change_email.php:38
+msgid "Change e-mail"
+msgstr "Изменить электронную почту"
+
+#: user-change_email.php:46
+msgid "Current e-mail"
+msgstr "Текущая электронная почта"
+
+#: user-change_email.php:52
+msgid "New e-mail"
+msgstr "Новая электронная почта"
+
+#: user-change_password.php:45
+msgid "Current password"
+msgstr "Старый пароль"
+
+#: user-change_password.php:51 user-forgot_password.php:39
+msgid "New password"
+msgstr "Новый пароль"
+
+#: user-change_password.php:57 user-forgot_password.php:45
+msgid "Repeat new password"
+msgstr "Повторить новый пароль"
+
+#: user-change_username.php:50
+msgid "Username: this field is required"
+msgstr "Имя пользователя: Это поле обязательно для заполнения"
+
+#: user-change_username.php:75
+msgid "The username is available"
+msgstr "Это имя пользователя доступно"
+
+#: user-change_username.php:77
+msgid "The username is NOT available"
+msgstr "Это имя пользователя НЕ ДОСТУПНО"
+
+#: user-change_username.php:94
+msgid "Username"
+msgstr "Имя пользователя"
+
+#: user-forgot_password.php:30 user-recover.php:30
+msgid "Recover your password"
+msgstr "Восстановить Ваш пароль"
+
+#: user-items.php:41
+msgid "My listings"
+msgstr "Мои объявления"
+
+#: user-items.php:43
+msgid "No listings have been added yet"
+msgstr "У Вас еще нет объявлений"
+
+#: user-login.php:30
+msgid "Access to your account"
+msgstr "Доступ к вашей учетной записи"
+
+#: user-login.php:44 user-register.php:51
+msgid "Password"
+msgstr "Пароль"
+
+#: user-login.php:51
+msgid "Remember me"
+msgstr "Запомнить меня"
+
+#: user-login.php:54
+msgid "Log in"
+msgstr "Вход"
+
+#: user-login.php:58
+msgid "Forgot password?"
+msgstr "Забыли пароль?"
+
+#: user-profile.php:52
+msgid "User type"
+msgstr "Тип пользователя"
+
+#: user-profile.php:58
+msgid "Cell phone"
+msgstr "Мобильный телефон"
+
+#: user-profile.php:64
+msgid "Phone"
+msgstr "Телефон"
+
+#: user-profile.php:88
+msgid "City area"
+msgstr "Район"
+
+#: user-profile.php:100
+msgid "Website"
+msgstr "Вебсайт"
+
+#: user-public-profile.php:67
+msgid "<strong>Address:</strong> %1$s"
+msgstr "<strong>Адрес:</strong> %1$s"
+
+#: user-public-profile.php:70
+msgid "<strong>Location:</strong> %1$s"
+msgstr "<strong>Местоположение:</strong> %1$s"
+
+#: user-public-profile.php:75
+msgid "User description"
+msgstr "Описание пользователя"
+
+#: user-public-profile.php:80
+msgid "Latest listings"
+msgstr "Последние объявления"
+
+#: user-recover.php:45
+msgid "Send me a new password"
+msgstr "Выслать мне новый пароль"
+
+#: user-register.php:31
+msgid "Register an account for free"
+msgstr "Бесплатная регистрация"
+
+#: user-register.php:57
+msgid "Repeat password"
+msgstr "Повторите пароль"
+
+#: user-register.php:61
+msgid "Passwords don't match"
+msgstr "Пароль не совпадает"
+
+#: user-register.php:73
+msgid "Create"
+msgstr "Создать"
+
+#: user-sidebar.php:23
+msgid "Display menu"
+msgstr "Показать меню"
+
+#: user-sidebar.php:29
+msgid "Are you sure you want to delete your account?"
+msgstr "Вы уверены, что хотите удалить вашу учетную запись?"
+
+msgid "bender"
+msgstr "bender"
+
+#: functions.php:399
+msgid "Public Profile"
+msgstr "Открытый профиль"
+
+#: item-sidebar.php:104
+msgid "Attachment"
+msgstr "Вложение"
+
+#: main.php:41
+msgid "There aren't listings available at this moment"
+msgstr "Объявлений пока нет"
+
+#: search.php:75
+msgid "%1$d - %2$d of %3$d listings"
+msgstr "%1$d - %2$d из %3$d объявлений"
+
+#: search.php:121
+msgid "Premium listings"
+msgstr "Премиум объявления"
+
+msgid "http://osclass.org/"
+msgstr "http://osclass.org/"
+
+msgid "Bender theme"
+msgstr "Тема Bender"
+
+msgid "Osclass"
+msgstr "Osclass"
+
+#: common/head.php:74
+msgid "Close"
+msgstr "Закрыть"
+
+#: common/head.php:73
+msgid "Next image"
+msgstr "Следующее изображение"
+
+#: common/head.php:72
+msgid "Previous image"
+msgstr "Предыдущее изображение"
+
+#: footer.php:70
+msgid "This website is proudly using the <a title=\"Osclass web\" href=\"%s\">classifieds scripts</a> software <strong>Osclass</strong>"
+msgstr "Наш сайт с гордостью использует <a title=\"Osclass web\" href=\"%s\">скрипт доски объявлений</a> <strong>Osclass</strong>"
+
+#: admin/settings.php:74
+msgid "Ads management"
+msgstr "Управление объявлениями"
+
+#: admin/settings.php:78
+msgid "In this section you can configure your site to display ads and start generating revenue."
+msgstr "В этом разделе вы можете настроить ваш сайт для показа объявлений и начать получать доход."
+
+#: admin/settings.php:78
+msgid "If you are using an online advertising platform, such as Google Adsense, copy and paste here the provided code for ads."
+msgstr "Если вы используете онлайн-рекламную площадку, например, Google Adsense, скопируйте и вставьте сюда предоставленный код для объявлений."
+
+#: admin/settings.php:84
+msgid "Header 728x90"
+msgstr "Верх 728x90"
+
+#: admin/settings.php:88
+msgid "This ad will be shown at the top of your website, next to the site title and above the search results. Note that the size of the ad has to be 728x90 pixels."
+msgstr "Это объявление будет показано в верхней части вашего сайта, рядом с названием сайта и над результатами поиска. Следует отметить, что размер объявления должен быть 728x90 пикселей."
+
+#: admin/settings.php:92
+msgid "Homepage 728x90"
+msgstr "Домашняя 728x90"
+
+#: admin/settings.php:96
+msgid "This ad will be shown on the main site of your website. It will appear both at the top and bottom of your site homepage. Note that the size of the ad has to be 728x90 pixels."
+msgstr "Это объявление будет показано на главной странице вашего сайта. Объявление будет отображаться как в верхней, так и нижней частях главной страницы сайта. Следует отметить, что размер объявления должен быть 728x90 пикселей."
+
+#: admin/settings.php:100
+msgid "Search results 728x90 (top of the page)"
+msgstr "Результаты поиска 728х90 (верхней части страницы)"
+
+#: admin/settings.php:104
+msgid "This ad will be shown on top of the search results of your site. Note that the size of the ad has to be 728x90 pixels."
+msgstr "Это объявление будет показываться в верхней части результатов поиска сайта. Следует отметить, что размер объявления должен быть 728x90 пикселей."
+
+#: admin/settings.php:108
+msgid "Search results 728x90 (middle of the page)"
+msgstr "Результаты поиска 728х90 (середина страницы)"
+
+#: admin/settings.php:112
+msgid "This ad will be shown among the search results of your site. Note that the size of the ad has to be 728x90 pixels."
+msgstr "Это объявление будет показываться среди результатов поиска вашего сайта. Следует отметить, что размер объявления должен быть 728x90 пикселей."
+
+#: admin/settings.php:116
+msgid "Sidebar 300x250"
+msgstr "Боковая панель 300x250"
+
+#: admin/settings.php:120
+msgid "This ad will be shown at the right sidebar of your website, on the product detail page. Note that the size of the ad has to be 300x350 pixels."
+msgstr "Это объявление будет показываться в правой боковой панели вашего сайта, на странице подробнее о товаре. Следует отметить, что размер объявления должен быть 300x350 пикселей."
+
+#: user-change_email.php:76
+msgid "Email: this field is required"
+msgstr "Email: это поле обязательно к заполнению."

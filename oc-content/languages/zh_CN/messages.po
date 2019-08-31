@@ -1,0 +1,1554 @@
+# Translation of Flash Messages in Chinese (China)
+# This file is distributed under the same license as the Flash Messages package.
+msgid ""
+msgstr ""
+"PO-Revision-Date: 2013-04-28 18:13:02+0000\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"X-Generator: GlotPress/0.1\n"
+"Project-Id-Version: Flash Messages\n"
+
+#: /var/www/osclass-git/oc-admin/settings.php:197
+#: /var/www/osclass-git/oc-admin/settings.php:270
+#: /var/www/osclass-git/oc-admin/settings.php:337
+msgid "%s has been deleted"
+msgstr "已删除 %"
+
+#: /var/www/osclass-git/oc-admin/settings.php:199
+msgid "There was a problem deleting %s"
+msgstr "删除时出了点错 %s"
+
+#: /var/www/osclass-git/oc-admin/settings.php:1658
+msgid "%s has been added as a region of %s"
+msgstr "%已添加到地区%"
+
+#: /var/www/osclass-git/ajax.php:86
+msgid "The selected photo couldn't be deleted, the url doesn't exist"
+msgstr "选择的图片不能被删除，URL不存在"
+
+#: /var/www/osclass-git/ajax.php:96
+msgid "The listing doesn't exist"
+msgstr "列表不存在"
+
+#: /var/www/osclass-git/ajax.php:105 /var/www/osclass-git/ajax.php:113
+msgid "The listing doesn't belong to you"
+msgstr "列表不属于你"
+
+#: /var/www/osclass-git/ajax.php:136 /var/www/osclass-git/user.php:222
+msgid "The selected photo has been successfully deleted"
+msgstr "选择的图片已成功删除"
+
+#: /var/www/osclass-git/ajax.php:139 /var/www/osclass-git/user.php:224
+msgid "The selected photo does not belong to you"
+msgstr "选择的图片不属于你"
+
+#: /var/www/osclass-git/ajax.php:143 /var/www/osclass-git/user.php:227
+msgid "The selected photo couldn't be deleted"
+msgstr "选择的图像不能被删除"
+
+#: /var/www/osclass-git/contact.php:39 /var/www/osclass-git/item.php:121
+#: /var/www/osclass-git/item.php:217 /var/www/osclass-git/item.php:326
+#: /var/www/osclass-git/item.php:368
+#: /var/www/osclass-git/user-non-secure.php:118
+msgid "The Recaptcha code is wrong"
+msgstr "Recaptcha 代码错误"
+
+#: /var/www/osclass-git/oc-includes/osclass/emails.php:644
+msgid "There has been some errors sending the message"
+msgstr "发送信息是出现错误"
+
+#: /var/www/osclass-git/item.php:52 /var/www/osclass-git/item.php:99
+msgid "Only registered users are allowed to post listings"
+msgstr "只有注册用户才允许张贴信息"
+
+#: /var/www/osclass-git/item.php:151
+msgid "Your listing has been published"
+msgstr "你的广告已发布"
+
+#: /var/www/osclass-git/item.php:228
+msgid "Great! We've just updated your listing"
+msgstr "恭喜！我们已更新了你的广告"
+
+#: /var/www/osclass-git/item.php:255
+msgid "The listing has been validated"
+msgstr "本广告违反我们的规定"
+
+#: /var/www/osclass-git/item.php:257
+msgid "The listing can't be validated"
+msgstr "你的广告不能被批准"
+
+#: /var/www/osclass-git/item.php:260
+msgid "The listing has already been validated"
+msgstr "你的广告已经批准"
+
+#: /var/www/osclass-git/item.php:273
+msgid "Your listing has been deleted"
+msgstr "你的广告已被删除"
+
+#: /var/www/osclass-git/item.php:275 /var/www/osclass-git/item.php:283
+msgid "The listing you are trying to delete couldn't be deleted"
+msgstr "你其他删除，但抱歉你不能删除"
+
+#: /var/www/osclass-git/item.php:304
+msgid "Thanks! That's very helpful"
+msgstr "感谢！非常有用"
+
+#: /var/www/osclass-git/item.php:345 /var/www/osclass-git/item.php:432
+msgid "This listing doesn't exist"
+msgstr "广告信息不存在"
+
+#: /var/www/osclass-git/item.php:351 /var/www/osclass-git/item.php:379
+msgid "We're sorry, but the listing has expired. You can't contact the seller"
+msgstr "抱歉，信息已过期，你不能联系卖家"
+
+#: /var/www/osclass-git/item.php:358
+msgid "You can't contact the seller, only registered users can"
+msgstr "只有注册用户可以联系卖家"
+
+#: /var/www/osclass-git/item.php:390
+msgid "We've just sent an e-mail to the seller"
+msgstr "我们已发送邮件至卖家"
+
+#: /var/www/osclass-git/item.php:400
+msgid "Sorry, we could not save your comment. Try again later"
+msgstr "抱歉，不能保存您的留言。稍后再试"
+
+#: /var/www/osclass-git/item.php:403
+msgid "Your comment is awaiting moderation"
+msgstr "您的留言队列审核中"
+
+#: /var/www/osclass-git/item.php:406
+msgid "Your comment has been approved"
+msgstr "您的留言已被批准"
+
+#: /var/www/osclass-git/item.php:409
+msgid "Please fill the required field (email)"
+msgstr "请填写邮件"
+
+#: /var/www/osclass-git/item.php:412
+msgid "Please type a comment"
+msgstr "请输入留言"
+
+#: /var/www/osclass-git/item.php:415
+msgid "Your comment has been marked as spam"
+msgstr "您的留言被标记为垃圾"
+
+#: /var/www/osclass-git/item.php:439
+msgid "You must be logged in to delete a comment"
+msgstr "您必须登录才能删除留言"
+
+#: /var/www/osclass-git/item.php:447
+msgid "The comment doesn't exist"
+msgstr "留言不存在"
+
+#: /var/www/osclass-git/item.php:452
+msgid "The comment is not active, you cannot delete it"
+msgstr "留言未激活，不能被删除"
+
+#: /var/www/osclass-git/item.php:457
+msgid "The comment was not added by you, you cannot delete it"
+msgstr "您的留言未添加，您不能删除"
+
+#: /var/www/osclass-git/item.php:462
+msgid "The comment has been deleted"
+msgstr "留言已删除"
+
+#: /var/www/osclass-git/item.php:487
+msgid "This listing hasn't been validated"
+msgstr "信息为被批准发表"
+
+#: /var/www/osclass-git/item.php:491
+msgid "The listing has been suspended"
+msgstr "信息在纳入审查中"
+
+#: /var/www/osclass-git/login.php:26 /var/www/osclass-git/register.php:27
+#: /var/www/osclass-git/user-non-secure.php:26 /var/www/osclass-git/user.php:26
+msgid "Users not enabled"
+msgstr "无效用户"
+
+#: /var/www/osclass-git/login.php:37 /var/www/osclass-git/register.php:49
+msgid "Users are not enabled"
+msgstr "用户为激活"
+
+#: /var/www/osclass-git/login.php:73 /var/www/osclass-git/login.php:86
+msgid "The user doesn't exist"
+msgstr "用户不存在"
+
+#: /var/www/osclass-git/login.php:78
+msgid "The password is incorrect"
+msgstr "密码错误"
+
+#: /var/www/osclass-git/login.php:88
+msgid "The user has not been validated yet"
+msgstr "该用户已被验证"
+
+#: /var/www/osclass-git/login.php:90
+msgid "The user has been suspended"
+msgstr "用户已暂停"
+
+#: /var/www/osclass-git/login.php:130
+msgid "Invalid email address"
+msgstr "无效的邮箱地址"
+
+#: /var/www/osclass-git/login.php:139
+msgid "We have sent you an email with the instructions to reset your password"
+msgstr "我们已发送重置密码邮件"
+
+#: /var/www/osclass-git/login.php:143
+msgid "We were not able to identify you given the information provided"
+msgstr "我们不能验证提供的信息"
+
+#: /var/www/osclass-git/login.php:147
+msgid "The recaptcha code is wrong"
+msgstr "recaptcha 代码错误"
+
+#: /var/www/osclass-git/login.php:157 /var/www/osclass-git/login.php:184
+#: /var/www/osclass-git/user-non-secure.php:55
+#: /var/www/osclass-git/user-non-secure.php:59
+msgid "Sorry, the link is not valid"
+msgstr "抱歉，连接错误"
+
+#: /var/www/osclass-git/login.php:163 /var/www/osclass-git/user.php:139
+msgid "Password cannot be blank"
+msgstr "密码不能为空"
+
+#: /var/www/osclass-git/login.php:177
+msgid "The password has been changed"
+msgstr "密码修改成功"
+
+#: /var/www/osclass-git/login.php:180
+msgid "Error, the password don't match"
+msgstr "错误，密码不匹配"
+
+#: /var/www/osclass-git/register.php:32
+msgid "User registration is not enabled"
+msgstr "用户注册未激活"
+
+#: /var/www/osclass-git/register.php:60
+msgid "The user has been created. An activation email has been sent"
+msgstr "用户已创建，激活邮件已发送"
+
+#: /var/www/osclass-git/register.php:63
+msgid "Your account has been created successfully"
+msgstr "您的账户创建成功"
+
+#: /var/www/osclass-git/register.php:66 /var/www/osclass-git/user.php:127
+msgid "The specified e-mail is already in use"
+msgstr "邮件已被使用"
+
+#: /var/www/osclass-git/register.php:72
+msgid "The email is not valid"
+msgstr "邮件不合法"
+
+#: /var/www/osclass-git/register.php:75
+msgid "The password cannot be empty"
+msgstr "密码不能为空"
+
+#: /var/www/osclass-git/register.php:78 /var/www/osclass-git/user.php:154
+msgid "Passwords don't match"
+msgstr "密码不符"
+
+#: /var/www/osclass-git/register.php:90
+msgid "The link is not valid anymore. Sorry for the inconvenience!"
+msgstr "链接已失效。抱歉给您带来的不便"
+
+#: /var/www/osclass-git/register.php:95
+msgid "Your account has already been validated"
+msgstr "您的账户已被验证"
+
+#: /var/www/osclass-git/register.php:115
+msgid "Your account has been validated"
+msgstr "您的账户已被验证"
+
+#: /var/www/osclass-git/user-non-secure.php:52
+msgid "Your email has been changed successfully"
+msgstr "您的邮件修改成功"
+
+#: /var/www/osclass-git/user-non-secure.php:73
+#: /var/www/osclass-git/user.php:189
+msgid "Alert activated"
+msgstr "激活提醒"
+
+#: /var/www/osclass-git/user-non-secure.php:85
+#: /var/www/osclass-git/user.php:201
+msgid "Unsubscribed correctly"
+msgstr "取消订阅成功"
+
+#: /var/www/osclass-git/user.php:75
+msgid "Your profile has been updated successfully"
+msgstr "您的配置文件已更新完成"
+
+#: /var/www/osclass-git/user.php:103
+msgid "The specified e-mail is not valid"
+msgstr "指定邮件无效"
+
+#: /var/www/osclass-git/user.php:144
+msgid "Current password doesn't match"
+msgstr "当前密码不匹配"
+
+#: /var/www/osclass-git/user.php:149
+msgid "Passwords can't be empty"
+msgstr "密码不能为空"
+
+#: /var/www/osclass-git/user.php:161
+msgid "Password has been changed"
+msgstr "密码重置成功"
+
+#: /var/www/osclass-git/oc-admin/admins.php:34
+#: /var/www/osclass-git/oc-admin/items.php:42
+msgid "You don't have enough permissions"
+msgstr "你没有足够的授权"
+
+#: /var/www/osclass-git/oc-admin/admins.php:76
+#: /var/www/osclass-git/oc-admin/admins.php:167
+msgid "Email invalid"
+msgstr "邮件有效"
+
+#: /var/www/osclass-git/oc-admin/admins.php:80
+#: /var/www/osclass-git/oc-admin/admins.php:171
+msgid "Username invalid"
+msgstr "用户名有效"
+
+#: /var/www/osclass-git/oc-admin/admins.php:84
+#: /var/www/osclass-git/oc-admin/admins.php:175
+msgid "Name invalid"
+msgstr "名称不合法"
+
+#: /var/www/osclass-git/oc-admin/admins.php:88
+#: /var/www/osclass-git/oc-admin/admins.php:206
+msgid "Password invalid"
+msgstr "密码有效"
+
+#: /var/www/osclass-git/oc-admin/admins.php:93
+msgid "Email already in use"
+msgstr "邮件已被使用"
+
+#: /var/www/osclass-git/oc-admin/admins.php:98
+msgid "Username already in use"
+msgstr "用户名已被使用"
+
+#: /var/www/osclass-git/oc-admin/admins.php:113
+msgid "The admin has been added"
+msgstr "管理员已添加"
+
+#: /var/www/osclass-git/oc-admin/admins.php:182
+msgid "This admin doesn't exist"
+msgstr "管理员不存在"
+
+#: /var/www/osclass-git/oc-admin/admins.php:188
+msgid "Existing email"
+msgstr "邮箱已存在"
+
+#: /var/www/osclass-git/oc-admin/admins.php:195
+msgid "Existing username"
+msgstr "用户名已存在"
+
+#: /var/www/osclass-git/oc-admin/admins.php:214
+#: /var/www/osclass-git/oc-admin/admins.php:224
+msgid "The password couldn't be updated. Passwords don't match"
+msgstr "密码不能被修改。密码不匹配"
+
+#: /var/www/osclass-git/oc-admin/admins.php:241
+msgid "The admin has been updated"
+msgstr "管理员已更新"
+
+#: /var/www/osclass-git/oc-admin/admins.php:259
+msgid "The admin id isn't in the correct format"
+msgstr "管理员ID格式错误"
+
+#: /var/www/osclass-git/oc-admin/admins.php:265
+msgid "The operation hasn't been completed. You're trying to remove yourself!"
+msgstr "操作未完成，正在尝试删除本身！"
+
+#: /var/www/osclass-git/oc-admin/admins.php:272
+msgid "The admin has been deleted correctly"
+msgstr "管理员已被正确的删除"
+
+#: /var/www/osclass-git/oc-admin/admins.php:274
+msgid "The admin couldn't be deleted"
+msgstr "管理员不能被删除"
+
+#: /var/www/osclass-git/oc-admin/tools.php:40
+#: /var/www/osclass-git/oc-admin/tools.php:65
+#: /var/www/osclass-git/oc-admin/tools.php:155
+#: /var/www/osclass-git/oc-admin/tools.php:165
+#: /var/www/osclass-git/oc-admin/tools.php:202
+#: /var/www/osclass-git/oc-admin/tools.php:237
+#: /var/www/osclass-git/oc-admin/tools.php:280
+#: /var/www/osclass-git/oc-admin/tools.php:307
+#: /var/www/osclass-git/oc-admin/tools.php:335
+msgid "This action cannot be done because it is a demo site"
+msgstr "此操作不能进行因为这是演示站"
+
+#: /var/www/osclass-git/oc-admin/tools.php:229
+#: /var/www/osclass-git/oc-admin/tools.php:261
+msgid "Backup completed successfully"
+msgstr "备份成功完成"
+
+#: /var/www/osclass-git/oc-admin/appearance.php:50
+msgid "The theme folder is not writable"
+msgstr "主题文件夹不可写"
+
+#: /var/www/osclass-git/oc-admin/appearance.php:53
+msgid "The theme has been installed correctly"
+msgstr "主题已正确的安装"
+
+#: /var/www/osclass-git/oc-admin/appearance.php:56
+#: /var/www/osclass-git/oc-admin/languages.php:64
+#: /var/www/osclass-git/oc-admin/plugins.php:62
+msgid "The zip file is not valid"
+msgstr "压缩文件不正确"
+
+#: /var/www/osclass-git/oc-admin/appearance.php:59
+#: /var/www/osclass-git/oc-admin/languages.php:67
+#: /var/www/osclass-git/oc-admin/plugins.php:65
+msgid "No file was uploaded"
+msgstr "无文件上传"
+
+#: /var/www/osclass-git/oc-admin/appearance.php:64
+msgid "There was a problem adding the theme"
+msgstr "添加主题时出现错误"
+
+#: /var/www/osclass-git/oc-admin/appearance.php:80
+msgid "Theme removed successfully"
+msgstr "主图已成功移除"
+
+#: /var/www/osclass-git/oc-admin/appearance.php:82
+msgid "There was a problem removing the theme"
+msgstr "移除主题事出了问题"
+
+#: /var/www/osclass-git/oc-admin/appearance.php:85
+msgid "Current theme can not be deleted"
+msgstr "当前主题不能删除"
+
+#: /var/www/osclass-git/oc-admin/appearance.php:88
+msgid "No theme selected"
+msgstr "没有选择主题"
+
+#: /var/www/osclass-git/oc-admin/appearance.php:116
+msgid "Widget removed correctly"
+msgstr "小部件正确的删除"
+
+#: /var/www/osclass-git/oc-admin/appearance.php:121
+#: /var/www/osclass-git/oc-admin/appearance.php:142
+msgid "Description field is required"
+msgstr "必须填写描述区域"
+
+#: /var/www/osclass-git/oc-admin/appearance.php:134
+msgid "Widget updated correctly"
+msgstr "更新工具成功"
+
+#: /var/www/osclass-git/oc-admin/appearance.php:136
+msgid "Widget cannot be updated correctly"
+msgstr "工具更新不成功"
+
+#: /var/www/osclass-git/oc-admin/appearance.php:154
+msgid "Widget added correctly"
+msgstr "小部件已正确的添加"
+
+#: /var/www/osclass-git/oc-admin/appearance.php:163
+msgid "Theme activated correctly"
+msgstr "主题已激活"
+
+#: /var/www/osclass-git/oc-admin/comments.php:54
+msgid "The comments have been deleted"
+msgstr "留言删除"
+
+#: /var/www/osclass-git/oc-admin/comments.php:67
+msgid "The comments have been approved"
+msgstr "留言获准"
+
+#: /var/www/osclass-git/oc-admin/comments.php:77
+msgid "The comments have been disapproved"
+msgstr "留言被驳回"
+
+#: /var/www/osclass-git/oc-admin/comments.php:123
+msgid "The comment has been approved"
+msgstr "留言已获准"
+
+#: /var/www/osclass-git/oc-admin/comments.php:130
+msgid "The comment has been disapproved"
+msgstr "留言被驳回"
+
+#: /var/www/osclass-git/oc-admin/comments.php:137
+msgid "The comment has been enabled"
+msgstr "留言已审核"
+
+#: /var/www/osclass-git/oc-admin/comments.php:144
+msgid "The comment has been disabled"
+msgstr "留言无效"
+
+#: /var/www/osclass-git/oc-admin/comments.php:158
+msgid "Email is not correct"
+msgstr "电子邮件不正确"
+
+#: /var/www/osclass-git/oc-admin/comments.php:161
+msgid "Comment is required"
+msgstr "必须填写内容"
+
+#: /var/www/osclass-git/oc-admin/comments.php:183
+msgid "Great! We just updated your comment"
+msgstr "很好，我们更新了您的留言"
+
+#: /var/www/osclass-git/oc-admin/emails.php:85
+msgid "The email/alert has been updated"
+msgstr "邮件/通知已更新"
+
+#: /var/www/osclass-git/oc-admin/emails.php:88
+#: /var/www/osclass-git/oc-admin/pages.php:97
+msgid "You can't repeat internal name"
+msgstr "不能重复网名"
+
+#: /var/www/osclass-git/oc-admin/emails.php:90
+msgid "The email couldn't be updated, at least one title should not be empty"
+msgstr "邮件不能给更新，至少有一个标题为空"
+
+#: /var/www/osclass-git/oc-admin/items.php:61
+msgid "%d listing has been enabled"
+msgid_plural "%d listings have been enabled"
+msgstr[0] ""
+"单一模式: %d信息已启用\n"
+"多模式: %d信息已启用"
+
+#: /var/www/osclass-git/oc-admin/items.php:73
+msgid "%d listing has been disabled"
+msgid_plural "%d listings have been disabled"
+msgstr[0] ""
+"单一模式：%日期 信息已启动\n"
+"多模式：%日期  信息已启动"
+
+#: /var/www/osclass-git/oc-admin/items.php:85
+msgid "%d listing has been activated"
+msgid_plural "%d listings have been activated"
+msgstr[0] ""
+"单一模式 %日期 信息已激活\n"
+"多模式 %日期 信息已激活"
+
+#: /var/www/osclass-git/oc-admin/items.php:97
+msgid "%d listing has been deactivated"
+msgstr "%d 广告已反激活"
+
+#: /var/www/osclass-git/oc-admin/items.php:109
+msgid "%d listing has been marked as premium"
+msgid_plural "%d listings have been marked as premium"
+msgstr[0] ""
+"单一模式; %日期 广告已标记为高级广告\n"
+"多模式: %日期 广告已标记为高级广告"
+
+#: /var/www/osclass-git/oc-admin/items.php:121
+#: /var/www/osclass-git/oc-admin/items.php:145
+msgid "%d change has been made"
+msgid_plural "%d changes have been made"
+msgstr[0] ""
+"单一模式：%日期 改变决定\n"
+"多模式：%日期 已改变"
+
+#: /var/www/osclass-git/oc-admin/items.php:133
+msgid "%d listing has been marked as spam"
+msgid_plural "%d listings have been marked as spam"
+msgstr[0] ""
+"单一模式：%日期 标记为垃圾\n"
+"多模式：%日期 已标记为垃圾"
+
+#: /var/www/osclass-git/oc-admin/items.php:163
+msgid "%d listing has been deleted"
+msgid_plural "%d listings have been deleted"
+msgstr[0] ""
+"单一模式：%日期 已删除\n"
+"多模式：%日期 已删除"
+
+#: /var/www/osclass-git/oc-admin/items.php:180
+msgid "%d listing has been unmarked as spam"
+msgid_plural "%d listings have been unmarked as spam"
+msgstr[0] ""
+"单一模式：%日期 已标记为垃圾\n"
+"多模式：%日期 已标记为垃圾"
+
+#: /var/www/osclass-git/oc-admin/items.php:197
+msgid "%d listing has been unmarked as missclassified"
+msgid_plural "%d listings have been unmarked as missclassified"
+msgstr[0] ""
+"单一模式：%日期 错误分类\n"
+"多模式：%日期 错误分类"
+
+#: /var/www/osclass-git/oc-admin/items.php:214
+msgid "%d listing has been unmarked as duplicated"
+msgid_plural "%d listings have been unmarked as duplicated"
+msgstr[0] ""
+"单一模式：%日期 未标记重复\n"
+"多模式：%日期 未标记重复"
+
+#: /var/www/osclass-git/oc-admin/items.php:231
+msgid "%d listing has been unmarked as expired"
+msgid_plural "%d listings have been unmarked as expired"
+msgstr[0] ""
+"单一模式：%日期 未标记已过期\n"
+"多模式：%日期 未标记已过期"
+
+#: /var/www/osclass-git/oc-admin/items.php:248
+msgid "%d listing has been unmarked as offensive"
+msgid_plural "%d listings have been unmarked as offensive"
+msgstr[0] ""
+"单一模式：%日期 解除惩罚标记\n"
+"多模式：%日期 解除惩罚标记"
+
+#: /var/www/osclass-git/oc-admin/items.php:316
+#: /var/www/osclass-git/oc-admin/items.php:328
+#: /var/www/osclass-git/oc-admin/items.php:338
+#: /var/www/osclass-git/oc-admin/items.php:348
+#: /var/www/osclass-git/oc-admin/items.php:376
+#: /var/www/osclass-git/oc-admin/items.php:401
+#: /var/www/osclass-git/oc-admin/items.php:534
+msgid "An error has occurred"
+msgstr "错误"
+
+#: /var/www/osclass-git/oc-admin/items.php:284
+msgid "The listing has been deleted"
+msgstr "该广告已删除"
+
+#: /var/www/osclass-git/oc-admin/items.php:286
+msgid "The listing couldn't be deleted"
+msgstr "广告不能删除"
+
+#: /var/www/osclass-git/oc-admin/items.php:314
+msgid "The listing has been activated"
+msgstr "广告已激活"
+
+#: /var/www/osclass-git/oc-admin/items.php:326
+msgid "The listing has been deactivated"
+msgstr "广告已负激活"
+
+#: /var/www/osclass-git/oc-admin/items.php:336
+msgid "The listing has been enabled"
+msgstr "广告启动"
+
+#: /var/www/osclass-git/oc-admin/items.php:346
+msgid "The listing has been disabled"
+msgstr "广告启动锁定"
+
+#: /var/www/osclass-git/oc-admin/items.php:374
+#: /var/www/osclass-git/oc-admin/items.php:399
+msgid "Changes have been applied"
+msgstr "应用修改"
+
+#: /var/www/osclass-git/oc-admin/items.php:424
+msgid "The listing has been unmarked as"
+msgstr "广告已解除标记为"
+
+#: /var/www/osclass-git/oc-admin/items.php:426
+msgid "The listing hasn't been unmarked as"
+msgstr "广告未解除惩罚标记为"
+
+#: /var/www/osclass-git/oc-admin/items.php:510
+msgid "Changes saved correctly"
+msgstr "保存修改"
+
+#: /var/www/osclass-git/oc-admin/items.php:536
+#: /var/www/osclass-git/oc-admin/media.php:54
+#: /var/www/osclass-git/oc-admin/media.php:71
+msgid "Resource deleted"
+msgstr "删除的资源"
+
+#: /var/www/osclass-git/oc-admin/items.php:572
+msgid "A new listing has been added"
+msgstr "新广告已添加"
+
+#: /var/www/osclass-git/oc-admin/items.php:663
+msgid "Listings' settings have been updated"
+msgstr "广告设置已更新"
+
+#: /var/www/osclass-git/oc-admin/languages.php:53
+msgid "The translation folder is not writable"
+msgstr "翻译文件夹不可写"
+
+#: /var/www/osclass-git/oc-admin/languages.php:57
+msgid "The language has been installed correctly"
+msgstr "语言包已正确安装"
+
+#: /var/www/osclass-git/oc-admin/languages.php:60
+#: /var/www/osclass-git/oc-admin/languages.php:72
+msgid "There was a problem adding the language"
+msgstr "添加预言时出错"
+
+#: /var/www/osclass-git/oc-admin/languages.php:82
+#: /var/www/osclass-git/oc-admin/languages.php:114
+msgid "Language id isn't in the correct format"
+msgstr "语言ID格式错误"
+
+#: /var/www/osclass-git/oc-admin/languages.php:89
+msgid "Language id doesn't exist"
+msgstr "语言ID不存在"
+
+#: /var/www/osclass-git/oc-admin/languages.php:137
+msgid "Language name field is required"
+msgstr "语言文件名是必须的"
+
+#: /var/www/osclass-git/oc-admin/languages.php:140
+msgid "Language short name field is required"
+msgstr "语言文件名缩写是必须的"
+
+#: /var/www/osclass-git/oc-admin/languages.php:143
+msgid "Language description field is required"
+msgstr "语言描述要求"
+
+#: /var/www/osclass-git/oc-admin/languages.php:146
+msgid "Currency format field is required"
+msgstr "当前格式区是要求的"
+
+#: /var/www/osclass-git/oc-admin/languages.php:170
+msgid "%s has been updated"
+msgstr "%s已更新"
+
+#: /var/www/osclass-git/oc-admin/languages.php:175
+msgid "Selected languages have been enabled for the website"
+msgstr "选择语言在网站上有效"
+
+#: /var/www/osclass-git/oc-admin/languages.php:182
+#: /var/www/osclass-git/oc-admin/languages.php:205
+#: /var/www/osclass-git/oc-admin/languages.php:237
+#: /var/www/osclass-git/oc-admin/languages.php:260
+msgid "The language ids aren't in the correct format"
+msgstr "语言id格式不正确"
+
+#: /var/www/osclass-git/oc-admin/languages.php:197
+msgid "Selected languages have been disabled for the website"
+msgstr "选中语言被设置为无效"
+
+#: /var/www/osclass-git/oc-admin/languages.php:230
+msgid "Selected languages have been enabled for the backoffice (oc-admin)"
+msgstr "选中语言在后台被设为有效"
+
+#: /var/www/osclass-git/oc-admin/languages.php:252
+msgid "Selected languages have been disabled for the backoffice (oc-admin)"
+msgstr "选中语言已在后台被设为无效"
+
+#: /var/www/osclass-git/oc-admin/languages.php:211
+#: /var/www/osclass-git/oc-admin/languages.php:266
+msgid "%s can't be disabled because it's the default language"
+msgstr "%s 不能反激活因为默认语言"
+
+#: /var/www/osclass-git/oc-admin/languages.php:290
+msgid "Directory '%s' couldn't be removed"
+msgstr "目录的'%s'不能移除"
+
+#: /var/www/osclass-git/oc-admin/languages.php:292
+msgid "Directory \"%s\" has been successfully removed"
+msgstr "%s 文件夹删除成功"
+
+#: /var/www/osclass-git/oc-admin/languages.php:298
+msgid "Directory '%s' couldn't be removed because it's the default language. Set another language as default first and try again"
+msgstr "目录的'%s'是不可移除的因为这是默语言。你需要首先设置另一种语言为默认语言，再试"
+
+#: /var/www/osclass-git/oc-admin/login.php:45
+msgid "The username field is empty"
+msgstr "用户名怎么是空着的呢"
+
+#: /var/www/osclass-git/oc-admin/login.php:50
+msgid "The password field is empty"
+msgstr "密码是必须的"
+
+#: /var/www/osclass-git/oc-admin/login.php:58
+msgid "Sorry, incorrect username. <a href=\"%s\">Have you lost your password?</a>"
+msgstr "抱歉，不正确的用户名，<a href=\"%s\">你是不是把密码搞忘了哦?</a>"
+
+#: /var/www/osclass-git/oc-admin/login.php:63
+msgid "Sorry, incorrect password. <a href=\"%s\">Have you lost your password?</a>"
+msgstr "抱歉，你的密码都不正确，<a href=\"%s\">你把密码弄丢了是吧?</a>"
+
+#: /var/www/osclass-git/oc-admin/login.php:106
+msgid "The reCAPTCHA code is wrong"
+msgstr "验证码错了吧"
+
+#: /var/www/osclass-git/oc-admin/login.php:124
+msgid "A new password has been sent to your e-mail"
+msgstr "新密码已发送至您邮箱"
+
+#: /var/www/osclass-git/oc-admin/login.php:152
+msgid "Error, the passwords don't match"
+msgstr "错误。你输入的密码不正确"
+
+#: /var/www/osclass-git/oc-admin/pages.php:79
+#: /var/www/osclass-git/oc-admin/pages.php:136
+msgid "You have to set a different internal name"
+msgstr "你必须再设定一个内部使用名称"
+
+#: /var/www/osclass-git/oc-admin/pages.php:94
+msgid "The page has been updated"
+msgstr "页面已更新"
+
+#: /var/www/osclass-git/oc-admin/pages.php:99
+msgid "The page couldn't be updated, at least one title should not be empty"
+msgstr "该页不能被更新，您至少有一个标题未填写。"
+
+#: /var/www/osclass-git/oc-admin/pages.php:74
+#: /var/www/osclass-git/oc-admin/pages.php:131
+msgid "You have to set an internal name"
+msgstr "您必须设置一个网名"
+
+#: /var/www/osclass-git/oc-admin/pages.php:147
+msgid "The page has been added"
+msgstr "该页已被添加"
+
+#: /var/www/osclass-git/oc-admin/pages.php:150
+msgid "The page couldn't be added, at least one title should not be empty"
+msgstr "该页不能被添加，您至少有一个标题未填写"
+
+#: /var/www/osclass-git/oc-admin/pages.php:153
+msgid "Oops! That internal name is already in use. We can't make the changes"
+msgstr "啊哈！那个内部使用名称已经有人用了。我看你还是另外选一个好了"
+
+#: /var/www/osclass-git/oc-admin/pages.php:183
+msgid "One page can't be deleted because it is indelible"
+msgstr "一个页不能被删除因为它不能被删除"
+
+#: /var/www/osclass-git/oc-admin/pages.php:185
+msgid "%s pages couldn't be deleted because they are indelible"
+msgstr "%s 页面不能删除，因为你知道那不可以删除"
+
+#: /var/www/osclass-git/oc-admin/pages.php:190
+msgid "One page couldn't be deleted"
+msgstr "一个页面不能被删除"
+
+#: /var/www/osclass-git/oc-admin/pages.php:192
+msgid "%s pages couldn't be deleted"
+msgstr "%s 这些页面是不能删除的"
+
+#: /var/www/osclass-git/oc-admin/pages.php:197
+msgid "One page has been deleted correctly"
+msgstr "一个页面已删除成功"
+
+#: /var/www/osclass-git/oc-admin/pages.php:199
+msgid "%s pages have been deleted correctly"
+msgstr "%s 页面已成功删除"
+
+#: /var/www/osclass-git/oc-admin/plugins.php:56
+msgid "The plugin folder is not writable"
+msgstr "插件文件夹不可以写"
+
+#: /var/www/osclass-git/oc-admin/plugins.php:59
+msgid "The plugin has been uploaded correctly"
+msgstr "插件上传成功"
+
+#: /var/www/osclass-git/oc-admin/plugins.php:70
+msgid "There was a problem adding the plugin"
+msgstr "添加插件时出现问题"
+
+#: /var/www/osclass-git/oc-admin/plugins.php:91
+msgid "The plugin generated %d characters of <strong>unexpected output</strong> during the installation"
+msgstr "插件产生 %日期 字符<strong>错误输出</strong> 按照过程中"
+
+#: /var/www/osclass-git/oc-admin/plugins.php:94
+msgid "Plugin is already installed"
+msgstr "插件已安装好啦"
+
+#: /var/www/osclass-git/oc-admin/plugins.php:97
+msgid "Plugin couldn't be installed because their files are missing"
+msgstr "插件不能安装，因为有文件丢失啦"
+
+#: /var/www/osclass-git/oc-admin/plugins.php:100
+msgid "Plugin couldn't be installed because of: %s"
+msgstr "插件未能安装，因为：%s"
+
+#: /var/www/osclass-git/oc-admin/plugins.php:103
+msgid "Plugin couldn't be installed"
+msgstr "插件未能安装"
+
+#: /var/www/osclass-git/oc-admin/plugins.php:107
+msgid "Plugin installed"
+msgstr "插件已安装"
+
+#: /var/www/osclass-git/oc-admin/plugins.php:119
+msgid "Plugin uninstalled"
+msgstr "插件已被卸载"
+
+#: /var/www/osclass-git/oc-admin/plugins.php:121
+msgid "Plugin couldn't be uninstalled"
+msgstr "插件为能卸载"
+
+#: /var/www/osclass-git/oc-admin/plugins.php:133
+msgid "Plugin enabled"
+msgstr "插件已可用"
+
+#: /var/www/osclass-git/oc-admin/plugins.php:135
+msgid "Plugin is already enabled"
+msgstr "插件已可用"
+
+#: /var/www/osclass-git/oc-admin/plugins.php:147
+msgid "Plugin disabled"
+msgstr "插件未激活"
+
+#: /var/www/osclass-git/oc-admin/plugins.php:149
+msgid "Plugin is already disabled"
+msgstr "插件已激活"
+
+#: /var/www/osclass-git/oc-admin/plugins.php:208
+msgid "No plugin selected"
+msgstr "无插件被选择"
+
+#: /var/www/osclass-git/oc-admin/plugins.php:204
+msgid "Configuration was saved"
+msgstr "配置已保存"
+
+#: /var/www/osclass-git/oc-admin/settings.php:99
+#: /var/www/osclass-git/oc-admin/settings.php:222
+#: /var/www/osclass-git/oc-admin/settings.php:247
+#: /var/www/osclass-git/oc-admin/settings.php:295
+#: /var/www/osclass-git/oc-admin/settings.php:320
+#: /var/www/osclass-git/oc-admin/settings.php:1548
+#: /var/www/osclass-git/oc-admin/settings.php:1628
+msgid "%s already was in the database"
+msgstr "%s 已存在于数据库"
+
+#: /var/www/osclass-git/oc-admin/settings.php:162
+#: /var/www/osclass-git/oc-admin/settings.php:1592
+msgid "%s has been added as a new country"
+msgstr "%s 已作为新国家被添加"
+
+#: /var/www/osclass-git/oc-admin/settings.php:171
+msgid "Country has been edited"
+msgstr "国家已被编辑"
+
+#: /var/www/osclass-git/oc-admin/settings.php:173
+msgid "There were some problems editing the country"
+msgstr "编辑国家时发生错误"
+
+#: /var/www/osclass-git/oc-admin/settings.php:219
+msgid "%s has been added as a new region"
+msgstr "%s 已被作为一个地区添加"
+
+#: /var/www/osclass-git/oc-admin/settings.php:243
+#: /var/www/osclass-git/oc-admin/settings.php:317
+msgid "%s has been edited"
+msgstr "%s 已被编辑"
+
+#: /var/www/osclass-git/oc-admin/settings.php:292
+msgid "%s has been added as a new city"
+msgstr "%s 已被作为一个城市添加"
+
+#: /var/www/osclass-git/oc-admin/settings.php:761
+msgid "One field was not updated"
+msgid_plural "%s fields were not updated"
+msgstr[0] ""
+"单一模式：有一个区未能上传\n"
+"多模式：%s 有多个区未能上传"
+
+#: /var/www/osclass-git/oc-admin/settings.php:764
+msgid "Permalinks structure updated"
+msgstr "永久链接结构更新"
+
+#: /var/www/osclass-git/oc-admin/settings.php:773
+msgid "Permalinks structure updated."
+msgstr "永久链接结构更新"
+
+#: /var/www/osclass-git/oc-admin/settings.php:775
+msgid "However, we can't check if Apache module <b>mod_rewrite</b> is loaded. If you experience some problems with the URLs, you should deactivate <em>Friendly URLs</em>"
+msgstr "但是，我们不能检查到是否你的Apache模块<b>mod_rewrite</b> 已经上传，如果这个链接有问题，你得先反激活 <em>有好链接</em>"
+
+#: /var/www/osclass-git/oc-admin/settings.php:808
+msgid "Friendly URLs successfully deactivated"
+msgstr "有好链接成功反激活"
+
+#: /var/www/osclass-git/oc-admin/settings.php:837
+msgid "Your Akismet key has been cleared"
+msgstr "你的Akismet Key被清除掉了"
+
+#: /var/www/osclass-git/oc-admin/settings.php:839
+msgid "Your Akismet key has been updated"
+msgstr "Akismet Key已更新"
+
+#: /var/www/osclass-git/oc-admin/settings.php:855
+msgid "Your reCAPTCHA key has been cleared"
+msgstr "你的验证码已清出掉"
+
+#: /var/www/osclass-git/oc-admin/settings.php:857
+msgid "Your reCAPTCHA key has been updated"
+msgstr "你的验证码已更新"
+
+#: /var/www/osclass-git/oc-admin/settings.php:888
+msgid "The currency code is not in the correct format"
+msgstr "当前的编码是不正确的格式哦"
+
+#: /var/www/osclass-git/oc-admin/settings.php:901
+msgid "Currency added"
+msgstr "添加货币"
+
+#: /var/www/osclass-git/oc-admin/settings.php:903
+msgid "Currency couldn't be added"
+msgstr "不能添加货币"
+
+#: /var/www/osclass-git/oc-admin/settings.php:913
+#: /var/www/osclass-git/oc-admin/settings.php:920
+msgid "The currency code '%s' doesn't exist"
+msgstr "货币添加代码 '%s' 不存在"
+
+#: /var/www/osclass-git/oc-admin/settings.php:941
+msgid "Error: the currency code is not in the correct format"
+msgstr "错误：当前货币代码格式错误"
+
+#: /var/www/osclass-git/oc-admin/settings.php:954
+msgid "Currency updated"
+msgstr "货币更新"
+
+#: /var/www/osclass-git/oc-admin/settings.php:956
+msgid "No changes were made"
+msgstr "没有改变什么"
+
+#: /var/www/osclass-git/oc-admin/settings.php:986
+msgid "No currencies have been deleted"
+msgstr "无货币已删除"
+
+#: /var/www/osclass-git/oc-admin/settings.php:990
+msgid "One currency has been deleted"
+msgstr "一个货币已删除"
+
+#: /var/www/osclass-git/oc-admin/settings.php:994
+msgid "%s currencies have been deleted"
+msgstr "%s 货币已被删除"
+
+#: /var/www/osclass-git/oc-admin/settings.php:1043
+msgid "Mail server type is incorrect"
+msgstr "邮件服务器类型错误"
+
+#: /var/www/osclass-git/oc-admin/settings.php:1065
+msgid "Mail server configuration has changed"
+msgstr "邮件服务器设置已修改"
+
+#: /var/www/osclass-git/oc-admin/settings.php:1139
+#: /var/www/osclass-git/oc-admin/settings.php:1145
+msgid "There was a problem uploading the watermark image"
+msgstr "水印上传出故障"
+
+#: /var/www/osclass-git/oc-admin/settings.php:1142
+msgid "The watermark image has to be a .PNG file"
+msgstr "水印图像必须是.PNG格式啊"
+
+#: /var/www/osclass-git/oc-admin/settings.php:1189
+msgid "You cannot set a maximum file size higher than the one allowed in the PHP configuration: <b>%d KB</b>"
+msgstr "既然PHP中设置过最大图像尺寸，你这里就不能超过那设定了: <b>%d KB</b>"
+
+#: /var/www/osclass-git/oc-admin/settings.php:1234
+msgid "Media config has been updated"
+msgstr "媒体配置已更新"
+
+#: /var/www/osclass-git/oc-admin/settings.php:1321
+msgid "Re-generation complete"
+msgstr "重置完成"
+
+#: /var/www/osclass-git/oc-admin/settings.php:1361
+msgid "Page title field is required"
+msgstr "页面的标题你还得写一个"
+
+#: /var/www/osclass-git/oc-admin/settings.php:1364
+msgid "Contact email field is required"
+msgstr "联系邮箱那是必须的，没有是不行的"
+
+#: /var/www/osclass-git/oc-admin/settings.php:1463
+#: /var/www/osclass-git/oc-admin/settings.php:1465
+msgid "General settings have been updated"
+msgstr "常规设置已更新"
+
+#: /var/www/osclass-git/oc-admin/settings.php:1498
+msgid "Custom number could not be left empty"
+msgstr "开户编号不能为空"
+
+#: /var/www/osclass-git/oc-admin/settings.php:1507
+msgid "Last search settings have been updated"
+msgstr "最新的搜索设置已更新"
+
+#: /var/www/osclass-git/oc-admin/tools.php:52
+msgid "Import complete"
+msgstr "导入完成"
+
+#: /var/www/osclass-git/oc-admin/tools.php:54
+msgid "There was a problem importing data to the database"
+msgstr "导入数据出错"
+
+#: /var/www/osclass-git/oc-admin/tools.php:159
+msgid "Recount category stats has been successful"
+msgstr "重置账户分类状态成功"
+
+#: /var/www/osclass-git/oc-admin/tools.php:217
+#: /var/www/osclass-git/oc-admin/tools.php:246
+msgid "Path is empty"
+msgstr "路径为空"
+
+#: /var/www/osclass-git/oc-admin/tools.php:220
+#: /var/www/osclass-git/oc-admin/tools.php:249
+msgid "Could not connect with the database. Error: %s"
+msgstr "不能连接至数据库.错误：%s"
+
+#: /var/www/osclass-git/oc-admin/tools.php:223
+#: /var/www/osclass-git/oc-admin/tools.php:255
+msgid "There are no tables to back up"
+msgstr "没有表被备份"
+
+#: /var/www/osclass-git/oc-admin/tools.php:226
+#: /var/www/osclass-git/oc-admin/tools.php:258
+msgid "The folder is not writable"
+msgstr "文件夹不可写"
+
+#: /var/www/osclass-git/oc-admin/tools.php:252
+msgid "Could not select the database. Error: %s"
+msgstr "不能选择数据库.错误：%s"
+
+#: /var/www/osclass-git/oc-admin/tools.php:344
+msgid "Maintenance mode is ON"
+msgstr "维护模式被启用"
+
+#: /var/www/osclass-git/oc-admin/tools.php:353
+msgid "Maintenance mode is OFF"
+msgstr "维护模式未启用"
+
+#: /var/www/osclass-git/oc-admin/users.php:72
+msgid "The user has been created. We've sent an activation e-mail"
+msgstr "用户注册成功，我们已发送激活邮件至您的邮箱"
+
+#: /var/www/osclass-git/oc-admin/users.php:74
+msgid "The user has been created successfully"
+msgstr "用户创建成功了，恭喜"
+
+#: /var/www/osclass-git/oc-admin/users.php:76
+msgid "Sorry, but that e-mail is already in use"
+msgstr "抱歉，邮箱被占用"
+
+#: /var/www/osclass-git/oc-admin/users.php:80
+msgid "Sorry, the password cannot be empty"
+msgstr "抱歉，你密码都不填写怎么可以呢"
+
+#: /var/www/osclass-git/oc-admin/users.php:82
+msgid "Sorry, passwords don't match"
+msgstr "抱歉，你的密码不正确的哈"
+
+#: /var/www/osclass-git/oc-admin/users.php:124
+msgid "The user has been updated and activated"
+msgstr "用户已被更新、激活"
+
+#: /var/www/osclass-git/oc-admin/users.php:126
+msgid "The user has been updated"
+msgstr "用户已被更新"
+
+#: /var/www/osclass-git/oc-admin/users.php:138
+#: /var/www/osclass-git/oc-admin/users.php:160
+#: /var/www/osclass-git/oc-admin/users.php:183
+#: /var/www/osclass-git/oc-admin/users.php:206
+#: /var/www/osclass-git/oc-admin/users.php:229
+#: /var/www/osclass-git/oc-admin/users.php:251
+msgid "User id isn't in the correct format"
+msgstr "用户ID格式错误"
+
+#: /var/www/osclass-git/oc-admin/users.php:150
+msgid "Activation email sent to one user"
+msgid_plural "Activation email sent to %s users"
+msgstr[0] ""
+"单一模式：激活邮件已发送到你的邮箱\n"
+"多模式：激活邮件已发送到 % 用户"
+
+#: /var/www/osclass-git/oc-admin/users.php:172
+msgid "One user has been activated"
+msgid_plural "%s users have been activated"
+msgstr[0] ""
+"单一模式：一个用户激活\n"
+"多模式：%s用户已激活"
+
+#: /var/www/osclass-git/oc-admin/users.php:195
+msgid "One user has been deactivated"
+msgid_plural "%s users have been deactivated"
+msgstr[0] ""
+"单一模式：一个用户已反激活\n"
+"多模式L %用户已反激活"
+
+#: /var/www/osclass-git/oc-admin/users.php:218
+msgid "One user has been unblocked"
+msgid_plural "%s users have been unblocked"
+msgstr[0] ""
+"单一模式: 一个用户已解锁\n"
+"多模式： %用户已解锁"
+
+#: /var/www/osclass-git/oc-admin/users.php:241
+msgid "One user has been blocked"
+msgid_plural "%s users have been blocked"
+msgstr[0] ""
+"单一模式: 一个用户被锁定\n"
+"多模式: % 用户被锁定"
+
+#: /var/www/osclass-git/oc-admin/users.php:266
+msgid "One user has been deleted"
+msgid_plural "%s users have been deleted"
+msgstr[0] ""
+"单一模式：一个用户被删除\n"
+"多模式: %用户被删除"
+
+#: /var/www/osclass-git/oc-includes/osclass/ItemActions.php:78
+#: /var/www/osclass-git/oc-includes/osclass/ItemActions.php:274
+msgid "Title too short."
+msgstr "标题太短"
+
+#: /var/www/osclass-git/oc-includes/osclass/ItemActions.php:79
+#: /var/www/osclass-git/oc-includes/osclass/ItemActions.php:275
+msgid "Title too long."
+msgstr "标题太长"
+
+#: /var/www/osclass-git/oc-includes/osclass/ItemActions.php:91
+#: /var/www/osclass-git/oc-includes/osclass/ItemActions.php:287
+msgid "Description too short."
+msgstr "描述太短"
+
+#: /var/www/osclass-git/oc-includes/osclass/ItemActions.php:92
+#: /var/www/osclass-git/oc-includes/osclass/ItemActions.php:288
+msgid "Description too long."
+msgstr "描述太长"
+
+#: /var/www/osclass-git/oc-includes/osclass/ItemActions.php:97
+#: /var/www/osclass-git/oc-includes/osclass/ItemActions.php:293
+msgid "Category invalid."
+msgstr "分类错误"
+
+#: /var/www/osclass-git/oc-includes/osclass/ItemActions.php:99
+#: /var/www/osclass-git/oc-includes/osclass/ItemActions.php:295
+msgid "Price too long."
+msgstr "价格太长"
+
+#: /var/www/osclass-git/oc-includes/osclass/ItemActions.php:100
+msgid "Name too long."
+msgstr "名字太长"
+
+#: /var/www/osclass-git/oc-includes/osclass/ItemActions.php:101
+msgid "Email invalid."
+msgstr "邮件无效"
+
+#: /var/www/osclass-git/oc-includes/osclass/ItemActions.php:102
+#: /var/www/osclass-git/oc-includes/osclass/ItemActions.php:296
+msgid "Country too short."
+msgstr "国家太短"
+
+#: /var/www/osclass-git/oc-includes/osclass/ItemActions.php:103
+#: /var/www/osclass-git/oc-includes/osclass/ItemActions.php:297
+msgid "Country too long."
+msgstr "国家名称太长"
+
+#: /var/www/osclass-git/oc-includes/osclass/ItemActions.php:104
+#: /var/www/osclass-git/oc-includes/osclass/ItemActions.php:298
+msgid "Region too short."
+msgstr "地区名称太短(如出现该提示，请在地区名称后加拼音，写成这样: 北京beijing)"
+
+#: /var/www/osclass-git/oc-includes/osclass/ItemActions.php:105
+#: /var/www/osclass-git/oc-includes/osclass/ItemActions.php:299
+msgid "Region too long."
+msgstr "地区名称太长"
+
+#: /var/www/osclass-git/oc-includes/osclass/ItemActions.php:106
+#: /var/www/osclass-git/oc-includes/osclass/ItemActions.php:300
+msgid "City too short."
+msgstr "城市名太短((如出现该提示，请在城市名称后加拼音，写成这样: 上海shanghai)"
+
+#: /var/www/osclass-git/oc-includes/osclass/ItemActions.php:107
+#: /var/www/osclass-git/oc-includes/osclass/ItemActions.php:301
+msgid "City too long."
+msgstr "城市太长"
+
+#: /var/www/osclass-git/oc-includes/osclass/ItemActions.php:108
+#: /var/www/osclass-git/oc-includes/osclass/ItemActions.php:302
+msgid "Municipality too short."
+msgstr "直辖市太短"
+
+#: /var/www/osclass-git/oc-includes/osclass/ItemActions.php:109
+#: /var/www/osclass-git/oc-includes/osclass/ItemActions.php:303
+msgid "Municipality too long."
+msgstr "直辖市太长"
+
+#: /var/www/osclass-git/oc-includes/osclass/ItemActions.php:110
+#: /var/www/osclass-git/oc-includes/osclass/ItemActions.php:304
+msgid "Address too short."
+msgstr "地址太短"
+
+#: /var/www/osclass-git/oc-includes/osclass/ItemActions.php:111
+#: /var/www/osclass-git/oc-includes/osclass/ItemActions.php:305
+msgid "Address too long."
+msgstr "地址太长"
+
+#: /var/www/osclass-git/oc-includes/osclass/ItemActions.php:112
+msgid "Too fast. You should wait a little to publish your ad."
+msgstr "您发送的广告频率太快，请稍后再发布"
+
+#: /var/www/osclass-git/oc-includes/osclass/ItemActions.php:125
+#: /var/www/osclass-git/oc-includes/osclass/ItemActions.php:319
+msgid "%s field is required."
+msgstr "%s 要求填写的，你想不填写也不行"
+
+#: /var/www/osclass-git/oc-includes/osclass/ItemActions.php:1198
+msgid "One of the files you tried to upload exceeds the maximum size"
+msgstr "其中一个文件大小已达到最大"
+
+#: /var/www/osclass-git/item.php:149
+msgid "Check your inbox to validate your listing"
+msgstr "检查你的邮箱激活你的广告"
+
+#: /var/www/osclass-git/oc-admin/comments.php:90
+msgid "The comments have been unblocked"
+msgstr "评论已解锁"
+
+#: /var/www/osclass-git/oc-admin/comments.php:100
+msgid "The comments have been blocked"
+msgstr "评论已解锁"
+
+#: /var/www/osclass-git/oc-admin/items.php:265
+msgid "%d listing has been unmarked"
+msgid_plural "%d listings have been unmarked"
+msgstr[0] ""
+"单一模式: %广告未打标\n"
+"多模式: %广告未打标"
+
+#: /var/www/osclass-git/oc-admin/settings.php:1477
+msgid "Last check"
+msgstr "最近的查核"
+
+#: /var/www/osclass-git/oc-includes/osclass/core/AdminSecBaseModel.php:69
+msgid "Entered an invalid email"
+msgstr "你输入的邮箱不合法"
+
+#: /var/www/osclass-git/oc-includes/osclass/core/AdminSecBaseModel.php:72
+msgid "You're already subscribed"
+msgstr "你已经订阅了"
+
+#: /var/www/osclass-git/oc-includes/osclass/core/AdminSecBaseModel.php:75
+msgid "Subscribed correctly"
+msgstr "成功订阅"
+
+#: /var/www/osclass-git/oc-includes/osclass/core/AdminSecBaseModel.php:78
+msgid "Error subscribing"
+msgstr "错误订阅"
+
+#: /var/www/osclass-git/oc-includes/osclass/core/AdminSecBaseModel.php:85
+msgid "Thank you very much for your donation"
+msgstr "谢谢了哈"
+
+#: /var/www/osclass-git/oc-admin/admins.php:54
+#: /var/www/osclass-git/oc-admin/admins.php:138
+#: /var/www/osclass-git/oc-admin/admins.php:251
+#: /var/www/osclass-git/oc-admin/appearance.php:38
+#: /var/www/osclass-git/oc-admin/appearance.php:73
+#: /var/www/osclass-git/oc-admin/login.php:97
+#: /var/www/osclass-git/oc-admin/plugins.php:44
+#: /var/www/osclass-git/oc-admin/plugins.php:79
+#: /var/www/osclass-git/oc-admin/plugins.php:114
+#: /var/www/osclass-git/oc-admin/plugins.php:128
+#: /var/www/osclass-git/oc-admin/plugins.php:142
+#: /var/www/osclass-git/oc-admin/settings.php:1026
+#: /var/www/osclass-git/oc-admin/settings.php:1240
+msgid "This action can't be done because it's a demo site"
+msgstr "你不能操作这个，因为这是演示网站"
+
+#: /var/www/osclass-git/oc-admin/admins.php:115
+msgid "There has been an error adding a new admin"
+msgstr "你添加新管理人时出错了"
+
+#: /var/www/osclass-git/oc-admin/admins.php:130
+msgid "There is no admin with this id"
+msgstr "没有哪个神仙管理人有这个id"
+
+#: /var/www/osclass-git/oc-admin/items.php:318
+msgid "The listing can't be activated because it's blocked"
+msgstr "这广告不能激活，因为这是锁定了的广告"
+
+#: /var/www/osclass-git/oc-admin/items.php:615
+msgid "Wait time must only contain numeric characters"
+msgstr "等待时间自然要包含数字的了"
+
+#: /var/www/osclass-git/oc-admin/items.php:618
+msgid "Number of moderated listings must only contain numeric characters"
+msgstr "等待审查的广告的数字自然是要包含数字的了"
+
+#: /var/www/osclass-git/oc-admin/items.php:621
+msgid "Images per listing must only contain numeric characters"
+msgstr "每个广告的图必须只能包含数字符号，这是我们的要求"
+
+#: /var/www/osclass-git/oc-admin/languages.php:149
+msgid "Number of decimals must only contain numeric characters"
+msgstr "决定数字自然是一个数字了"
+
+#: /var/www/osclass-git/oc-admin/languages.php:295
+msgid "Directory '%s' couldn't be removed;)"
+msgstr "目录'%s'你不能删除，别把你当黑客：) "
+
+#: /var/www/osclass-git/oc-admin/settings.php:54
+msgid "Number of moderate comments must only contain numeric characters"
+msgstr "评论审查数必须只能是数字符号了"
+
+#: /var/www/osclass-git/oc-admin/settings.php:57
+msgid "Comments per page must only contain numeric characters"
+msgstr "这是每页上显示的评论数量，所以，只能是数字"
+
+#: /var/www/osclass-git/oc-admin/settings.php:84
+msgid "Comment settings have been updated"
+msgstr "评论设置更新了"
+
+#: /var/www/osclass-git/oc-admin/settings.php:1541
+#: /var/www/osclass-git/oc-admin/settings.php:1621
+msgid "%s can't be added"
+msgstr "%s 那是不可以添加的"
+
+#: /var/www/osclass-git/oc-admin/settings.php:761
+msgid "All fields are required."
+msgstr "所有要求的你都填写"
+
+#: /var/www/osclass-git/oc-admin/settings.php:782
+#: /var/www/osclass-git/oc-admin/settings.php:792
+msgid "File <b>.htaccess</b> couldn't be filled out with the right content."
+msgstr "文件 <b>.htaccess</b> 不能归档，虽然你的内容无懈可击."
+
+#: /var/www/osclass-git/oc-admin/settings.php:784
+msgid "Here's the content you have to add to the <b>.htaccess</b> file. If you can't create the file, please deactivate the <em>Friendly URLs</em> option."
+msgstr "你添加的内容 <b>.htaccess</b> 到文件. 如果你不能创建文件，你们，请你先反激活 <em>有好链接</em> 选项就Okay了."
+
+#: /var/www/osclass-git/oc-admin/settings.php:794
+msgid "Here's the content you have to add to the <b>.htaccess</b> file. If you can't create the file or experience some problems with the URLs, please deactivate the <em>Friendly URLs</em> option."
+msgstr "你必须添加内容 <b>.htaccess</b> 到文件. 如果你创建文件遇到麻烦，你一定得先反激活 <em>有好链接</em> 选项."
+
+#: /var/www/osclass-git/oc-admin/settings.php:976
+msgid "%s couldn't be deleted because it has listings associated to it"
+msgstr "%s 是不可以删除的，你知道有你们多的广告在里面呢，你想删就删，那我疯了算了"
+
+#: /var/www/osclass-git/oc-admin/settings.php:978
+msgid "%s couldn't be deleted because it's the default currency"
+msgstr "%s是不可以删除的，你知道那是默认的货币"
+
+#: /var/www/osclass-git/oc-admin/settings.php:1367
+msgid "Number of listings in the RSS has to be a numeric value"
+msgstr "RSS广告数自然是数字了"
+
+#: /var/www/osclass-git/oc-admin/settings.php:1370
+msgid "Max latest listings has to be a numeric value"
+msgstr "最大近期广告数也只能是数字了"
+
+#: /var/www/osclass-git/oc-admin/settings.php:1373
+msgid "Number of listings on search has to be a numeric value"
+msgstr "搜索广告数也只能是数字了"
+
+#: /var/www/osclass-git/oc-admin/settings.php:1430
+msgid "Number of listings in the RSS must be an integer"
+msgstr "RSS里的广告数还能是什么呢如果不是一个整数的话，我死了算了"
+
+#: /var/www/osclass-git/oc-admin/settings.php:1440
+msgid "Number of recent listings displayed at home must be an integer"
+msgstr "近期广告展示数，首页上的，那自然不可能是小数"
+
+#: /var/www/osclass-git/oc-admin/tools.php:287
+#: /var/www/osclass-git/oc-admin/tools.php:323
+msgid "Archived successfully!"
+msgstr "文件袋成功了"
+
+#: /var/www/osclass-git/oc-admin/tools.php:301
+#: /var/www/osclass-git/oc-admin/tools.php:326
+msgid "Error, the zip file was not created in the specified directory"
+msgstr "错，zip文件没有在指定的目录创建"
+
+#: /var/www/osclass-git/oc-admin/tools.php:346
+msgid "There was an error creating the .maintenance file, please create it manually at the root folder"
+msgstr "你在创建.maintenance文件的时候整错了。请重来，在更目录创建，手工创建"
+
+#: /var/www/osclass-git/oc-admin/tools.php:355
+msgid "There was an error removing the .maintenance file, please remove it manually from the root folder"
+msgstr "你在移除.maintenance文件的时候整错了。那在更目录里面，返工重做，"
+
+#: /var/www/osclass-git/oc-admin/users.php:148
+msgid "No users have been selected"
+msgstr "没有选择任何用户"
+
+#: /var/www/osclass-git/oc-admin/users.php:170
+msgid "No users have been activated"
+msgstr "没有用户激活"
+
+#: /var/www/osclass-git/oc-admin/users.php:193
+msgid "No users have been deactivated"
+msgstr "没有用户反激活"
+
+#: /var/www/osclass-git/oc-admin/users.php:216
+msgid "No users have been enabled"
+msgstr "没有用户启动"
+
+#: /var/www/osclass-git/oc-admin/users.php:239
+msgid "No users have been disabled"
+msgstr "没有用户反启动"
+
+#: /var/www/osclass-git/oc-admin/users.php:264
+msgid "No users have been deleted"
+msgstr "没有用户删除"
+
+#: /var/www/osclass-git/oc-admin/users.php:304
+msgid "User settings have been updated"
+msgstr "用户设置更新"
+
+#: /var/www/osclass-git/oc-includes/osclass/ItemActions.php:64
+#: /var/www/osclass-git/oc-includes/osclass/ItemActions.php:259
+msgid "Image with an incorrect extension."
+msgstr "图像文件后坠不正确的"
+
+#: /var/www/osclass-git/oc-includes/osclass/ItemActions.php:67
+#: /var/www/osclass-git/oc-includes/osclass/ItemActions.php:262
+msgid "Image is too big. Max. size"
+msgstr "图像文件太大了的"
+
+#: /var/www/osclass-git/oc-includes/osclass/ItemActions.php:98
+#: /var/www/osclass-git/oc-includes/osclass/ItemActions.php:294
+msgid "Price must be a number."
+msgstr "价格，你知道，那应该是个数字"
+
+#: /var/www/osclass-git/oc-includes/osclass/ItemActions.php:796
+msgid "We just sent your message to %s"
+msgstr "我们刚才发了信息给你的哈 %s"
+
+#: /var/www/osclass-git/oc-includes/osclass/ItemActions.php:1243
+msgid "The file you tried to upload does not have a valid extension"
+msgstr "你想上传的文件，怎么是那个后缀啊，我晕"
+
+#: /var/www/osclass-git/contact.php:50
+msgid "Please enter a correct email"
+msgstr "你还是把你的邮箱输入正确的好"
+
+#: /var/www/osclass-git/contact.php:77
+msgid "There have been some errors sending the message"
+msgstr "发送信息时错误"
+
+#: /var/www/osclass-git/contact.php:92
+msgid "Your email has been sent properly. Thank you for contacting us!"
+msgstr "你的邮件已发出，并成功发送，谢谢联系我们。"
+
+#: /var/www/osclass-git/item.php:134
+msgid "A user with that email address already exists, if it is you, please log in"
+msgstr "嘿，怎么有一模一样的邮件已经存在了呢，那是你还是不是哦"
+
+#: /var/www/osclass-git/item.php:182
+msgid "Sorry, we don't have any listings with that ID"
+msgstr "我晕，那个id，我们没有啥子广告呢"
+
+#: /var/www/osclass-git/item.php:485
+msgid "The listing hasn't been validated. Please validate it in order to make it public"
+msgstr "广告已激活，你去验证一下就发表了，就扬名天下了。"
+
+#: /var/www/osclass-git/login.php:113
+msgid "This should never happen"
+msgstr "这可永远不要出现"
+
+#: /var/www/osclass-git/register.php:69
+msgid "The reCAPTCHA was not entered correctly"
+msgstr "验证码，你输入的是不正确的"
+
+#: /var/www/osclass-git/user-non-secure.php:75
+#: /var/www/osclass-git/user.php:191
+msgid "Oops! There was a problem trying to activate your alert. Please contact an administrator"
+msgstr "看起来糟透了，激活出了毛病，你联系管理员吧"
+
+#: /var/www/osclass-git/user-non-secure.php:87
+#: /var/www/osclass-git/user.php:203
+msgid "Oops! There was a problem trying to unsubscribe you. Please contact an administrator"
+msgstr "遭透了。虽然你退订，但我们处理处了点毛病，不成功，你联系管理员。"
+
+#: /var/www/osclass-git/oc-includes/osclass/emails.php:460
+msgid "We've sent you an e-mail. Follow its instructions to validate the changes"
+msgstr "我们已给你发邮件。按那上面说的，激活之，就好了"
+
+#: /var/www/osclass-git/oc-includes/osclass/emails.php:462
+msgid "We tried to sent you an e-mail, but it failed. Please, contact an administrator"
+msgstr "我们努力发邮件给你，但失败了。你联系一下管理员好了"

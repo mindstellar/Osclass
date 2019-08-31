@@ -1,0 +1,807 @@
+# Translation of Bender in Norwegian
+# This file is distributed under the same license as the Bender package.
+msgid ""
+msgstr ""
+"PO-Revision-Date: 2014-04-15 08:17:58+0000\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: GlotPress/0.1\n"
+"Project-Id-Version: Bender\n"
+
+#: functions.php:382
+msgid "Public Profile"
+msgstr "Offentlig profil"
+
+#: item-sidebar.php:95
+msgid "Attachment"
+msgstr "Vedlegg"
+
+#: main.php:41
+msgid "There aren't listings available at this moment"
+msgstr "Det finnes ingen tilgjengelige annonser for øyeblikket"
+
+#: search.php:75
+msgid "%1$d - %2$d of %3$d listings"
+msgstr "%1$d - %2$d av %3$d annonser"
+
+#: search.php:121
+msgid "Premium listings"
+msgstr "Premium annonser"
+
+msgid "http://osclass.org/"
+msgstr "http://osclass.org/"
+
+msgid "Bender theme"
+msgstr "Bender tema"
+
+msgid "Osclass"
+msgstr "Osclass"
+
+#: 404.php:8
+msgid "Sorry but I can't find the page you're looking for"
+msgstr "Beklager, men jeg kan ikke finne siden du leter etter"
+
+#: 404.php:10
+msgid "Let us help you, we have got a few tips for you to find it."
+msgstr "La oss hjelpe deg, vi har noen tips for hvordan du kan finne det."
+
+#: 404.php:13
+msgid "<strong>Search</strong> for it:"
+msgstr "<strong>Søk</strong> etter det:"
+
+#: 404.php:18 header.php:73
+msgid "Search"
+msgstr "Søk"
+
+#: 404.php:22
+msgid "<strong>Look</strong> for it in the most popular categories."
+msgstr "<strong>Se</strong> etter det i de mest populære kategoriene."
+
+#: admin/header.php:7 functions.php:526
+msgid "Header logo"
+msgstr "Topplogo"
+
+#: admin/header.php:13
+msgid "Preview"
+msgstr "Forhåndsvis"
+
+#: admin/header.php:20
+msgid "Remove logo"
+msgstr "Fjern logo"
+
+#: admin/header.php:28
+msgid "No logo has been uploaded yet"
+msgstr "Ingen logo har blitt lastet opp"
+
+#: admin/header.php:31
+msgid "Upload logo"
+msgstr "Last opp logo"
+
+#: admin/header.php:33
+msgid "The preferred size of the logo is 600x100."
+msgstr "Foretrukket størrelse på logoen er 600x100."
+
+#: admin/header.php:35
+msgid "<strong>Note:</strong> Uploading another logo will overwrite the current logo."
+msgstr "<strong>Merk:</strong> Ved å laste opp en annen logo vil den nåværende logoen overskrives."
+
+#: admin/header.php:43
+msgid "Logo image (png,gif,jpg)"
+msgstr "Logo-bilde (png,gif,jpg)"
+
+#: admin/header.php:49
+msgid "Upload"
+msgstr "Last opp"
+
+#: admin/header.php:58
+msgid "The images folder <strong>%s</strong> is not writable on your server"
+msgstr "Bildekatalogen <strong>%s</strong> er ikke skrivbar på serveren din"
+
+#: admin/header.php:59
+msgid "Osclass can't upload the logo image from the administration panel."
+msgstr "Osclass kan ikke laste opp logobildet fra kontrollpanelet"
+
+#: admin/header.php:60
+msgid "Please make the aforementioned image folder writable."
+msgstr "Vennligst gjør den nevnte bildemappen skrivbar."
+
+#: admin/header.php:65
+msgid "To make a directory writable under UNIX execute this command from the shell:"
+msgstr "For å gjøre en katalog skrivbar i UNIX, utfør denne kommandoen fra shellet:"
+
+#: admin/settings.php:14
+msgid "I would like to contribute to the development of Osclass with a donation of"
+msgstr "Jeg ønsker å bidra til utviklingen av Osclass med en donasjon på"
+
+#: admin/settings.php:19
+msgid "Custom"
+msgstr "Tilpasset"
+
+#: admin/settings.php:20
+msgid "Donate"
+msgstr "Doner"
+
+#: admin/settings.php:24 functions.php:527
+msgid "Theme settings"
+msgstr "Temainnstillinger"
+
+#: admin/settings.php:30
+msgid "Search placeholder"
+msgstr "Søk plassholder"
+
+#: admin/settings.php:34
+msgid "Show lists as:"
+msgstr "Vis liste som:"
+
+#: admin/settings.php:37
+msgid "Gallery"
+msgstr "Galleri"
+
+#: admin/settings.php:38 main.php:45 search.php:80
+msgid "List"
+msgstr "Liste"
+
+#: admin/settings.php:43
+msgid "Footer link"
+msgstr "Bunntekstlink"
+
+#: admin/settings.php:45
+msgid "I want to help Osclass by linking to <a href=\"http://osclass.org/\" target=\"_blank\">osclass.org</a> from my site with the following text:"
+msgstr "Jeg ønsker å hjelpe Osclass ved å linke til <a href=\"http://osclass.org/\" target=\"_blank\">osclass.org</a> fra nettstedet mitt med følgende tekst:"
+
+#: admin/settings.php:46
+msgid "This website is proudly using the <a title=\"Osclass web\" href=\"http://osclass.org/\">classifieds scripts</a> software <strong>Osclass</strong>"
+msgstr "Denne nettsiden er en stolt bruker av <a title=\"Osclass web\" href=\"http://osclass.org/\">rubrikkannonse</a>-programvaren <strong>Osclass</strong>"
+
+#: admin/settings.php:50
+msgid "Save changes"
+msgstr "Lagre endringer"
+
+#: alert-form.php:27
+msgid "You have sucessfully subscribed to the alert"
+msgstr "Du abonnerer nå på denne varslingen"
+
+#: alert-form.php:28 user-change_email.php:77
+msgid "Invalid email address"
+msgstr "Ugyldig e-postadresse"
+
+#: alert-form.php:29
+msgid "There was a problem with the alert"
+msgstr "Det var et problem med varslingen"
+
+#: alert-form.php:60
+msgid "Subscribe to this search"
+msgstr "Abonner på dette søket"
+
+#: alert-form.php:75
+msgid "Subscribe now"
+msgstr "Abonner nå"
+
+#: common/head.php:3 item.php:157 loop-single-premium.php:26 loop-single.php:26
+msgid "Delete"
+msgstr "Slett"
+
+#: common/head.php:4
+msgid "Cancel"
+msgstr "Avbryt"
+
+#: contact.php:31
+msgid "Contact us"
+msgstr "Kontakt oss"
+
+#: contact.php:40 item-send-friend.php:44 item-sidebar.php:76 item.php:183
+#: user-public-sidebar.php:33
+msgid "Your name"
+msgstr "Ditt navn"
+
+#: contact.php:41 contact.php:54 item-sidebar.php:84 user-public-sidebar.php:41
+msgid "optional"
+msgstr "valgfritt"
+
+#: contact.php:47 user-public-sidebar.php:37
+msgid "Your email address"
+msgstr "Din e-postadresse"
+
+#: contact.php:53
+msgid "Subject"
+msgstr "Emne"
+
+#: contact.php:60 item-send-friend.php:78 item-sidebar.php:89
+#: user-public-sidebar.php:46
+msgid "Message"
+msgstr "Melding"
+
+#: contact.php:68 item-send-friend.php:87 item-sidebar.php:119 item.php:208
+#: user-public-sidebar.php:69
+msgid "Send"
+msgstr "Send"
+
+#: footer.php:34 header.php:42
+msgid "Hi %s"
+msgstr "Hei %s"
+
+#: footer.php:35 header.php:43
+msgid "My account"
+msgstr "Min konto"
+
+#: footer.php:36 header.php:44
+msgid "Logout"
+msgstr "Logg ut"
+
+#: footer.php:39 functions.php:355 header.php:47 item-sidebar.php:54
+msgid "Login"
+msgstr "Logg inn"
+
+#: footer.php:42 header.php:49 item-sidebar.php:55 user-login.php:58
+msgid "Register for a free account"
+msgstr "Registrer for en gratis konto"
+
+#: footer.php:49 header.php:54
+msgid "Publish your ad for free"
+msgstr "Sett inn annonse"
+
+#: footer.php:64 functions.php:359 user-public-sidebar.php:26
+msgid "Contact"
+msgstr "Kontakt"
+
+#: footer.php:74
+msgid "Language:"
+msgstr "Språk:"
+
+#: functions.php:29
+msgid "ie. PHP Programmer"
+msgstr "F.eks. PHP-programmerer"
+
+#: functions.php:340 item-post.php:40
+msgid "Publish a listing"
+msgstr "Sett inn ny annonse"
+
+#: functions.php:341
+msgid "Edit your listing"
+msgstr "Rediger din annonse"
+
+#: functions.php:342 item-send-friend.php:31
+msgid "Send to a friend"
+msgstr "Send til en venn"
+
+#: functions.php:343 item-sidebar.php:40
+msgid "Contact publisher"
+msgstr "Kontakt annonsør"
+
+#: functions.php:344
+msgid "Search results"
+msgstr "Søkeresultat"
+
+#: functions.php:345
+msgid "Search results: %s"
+msgstr "Søkeresultat: %s"
+
+#: functions.php:346
+msgid "Dashboard"
+msgstr "Dashboard"
+
+#: functions.php:347
+msgid "%s's profile"
+msgstr "%s's profil"
+
+#: functions.php:348 functions.php:397
+msgid "Account"
+msgstr "Konto"
+
+#: functions.php:349 functions.php:387 search.php:128 user-alerts.php:51
+msgid "Listings"
+msgstr "Annonser"
+
+#: functions.php:350 functions.php:392 user-alerts.php:32 user-alerts.php:37
+msgid "Alerts"
+msgstr "Varslinger"
+
+#: functions.php:351 user-profile.php:32 user-profile.php:37
+msgid "Update account"
+msgstr "Oppdater konto"
+
+#: functions.php:352 functions.php:402
+msgid "Change email"
+msgstr "Endre e-post"
+
+#: functions.php:353 functions.php:407 user-change_username.php:34
+#: user-change_username.php:39
+msgid "Change username"
+msgstr "Endre brukernavn"
+
+#: functions.php:354 functions.php:357 functions.php:412
+#: user-change_password.php:32 user-change_password.php:37
+#: user-forgot_password.php:52
+msgid "Change password"
+msgstr "Endre passord"
+
+#: functions.php:356
+msgid "Recover password"
+msgstr "Gjenopprett passord"
+
+#: functions.php:358
+msgid "Create a new account"
+msgstr "Opprett en ny konto"
+
+#: functions.php:417 user-sidebar.php:28
+msgid "Delete account"
+msgstr "Slett konto"
+
+#: functions.php:474
+msgid "Theme settings updated correctly"
+msgstr "Temainnstillinger er oppdatert korrekt"
+
+#: functions.php:489
+msgid "The logo image has been uploaded correctly"
+msgstr "Logoen er lastet opp korrekt"
+
+#: functions.php:491
+msgid "An error has occurred, please try again"
+msgstr "En feil oppstod, vennligst prøv igjen"
+
+#: functions.php:502
+msgid "The logo image has been removed"
+msgstr "Logoen har blitt fjernet"
+
+#: functions.php:504
+msgid "Image not found"
+msgstr "Bilde ikke funnet"
+
+#: functions.php:585 functions.php:607
+msgid "All categories"
+msgstr "Alle kategorier"
+
+#: header.php:67 item-post.php:55
+msgid "Select a category"
+msgstr "Velg kategori"
+
+#: item-post.php:51
+msgid "General Information"
+msgstr "Generell informasjon"
+
+#: item-post.php:53
+msgid "Category"
+msgstr "Kategori"
+
+#: item-post.php:59 item.php:196
+msgid "Title"
+msgstr "Tittel"
+
+#: item-post.php:65 user-profile.php:106
+msgid "Description"
+msgstr "Beskrivelse"
+
+#: item-post.php:72 search-sidebar.php:61
+msgid "Price"
+msgstr "Pris"
+
+#: item-post.php:83
+msgid "Listing Location"
+msgstr "Sted"
+
+#: item-post.php:86 user-profile.php:70
+msgid "Country"
+msgstr "Land"
+
+#: item-post.php:92 user-profile.php:76
+msgid "Region"
+msgstr "Region"
+
+#: item-post.php:98 search-sidebar.php:44 user-profile.php:82
+msgid "City"
+msgstr "By"
+
+#: item-post.php:104
+msgid "City Area"
+msgstr "Bydel"
+
+#: item-post.php:110 user-profile.php:94
+msgid "Address"
+msgstr "Adresse"
+
+#: item-post.php:119
+msgid "Seller's information"
+msgstr "Selgerinformasjon"
+
+#: item-post.php:121 item-sidebar.php:59 user-profile.php:46
+#: user-register.php:39
+msgid "Name"
+msgstr "Navn"
+
+#: item-post.php:127 user-login.php:38 user-recover.php:37 user-register.php:45
+msgid "E-mail"
+msgstr "E-post"
+
+#: item-post.php:134
+msgid "Show e-mail on the listing page"
+msgstr "Vis e-post på annonsesiden"
+
+#: item-post.php:153 user-change_email.php:59 user-change_password.php:64
+#: user-change_username.php:102 user-profile.php:113
+msgid "Update"
+msgstr "Oppdater"
+
+#: item-post.php:153
+msgid "Publish"
+msgstr "Publiser"
+
+#: item-send-friend.php:50 item.php:189
+msgid "Your e-mail"
+msgstr "Din e-post"
+
+#: item-send-friend.php:57
+msgid "Your friend's name"
+msgstr "Din venns navn"
+
+#: item-send-friend.php:63
+msgid "Your friend's e-mail address"
+msgstr "Din venns e-postadresse"
+
+#: item-send-friend.php:70
+msgid "Subject (optional)"
+msgstr "Emne (valgfritt)"
+
+#: item-sidebar.php:30
+msgid "Mark as..."
+msgstr "Merk som..."
+
+#: item-sidebar.php:31
+msgid "Mark as spam"
+msgstr "Merk som spam"
+
+#: item-sidebar.php:32
+msgid "Mark as misclassified"
+msgstr "Merk som feilklassifisert"
+
+#: item-sidebar.php:33
+msgid "Mark as duplicated"
+msgstr "Merk som duplikat"
+
+#: item-sidebar.php:34
+msgid "Mark as expired"
+msgstr "Merk som utløpt"
+
+#: item-sidebar.php:35
+msgid "Mark as offensive"
+msgstr "Merk som støtende"
+
+#: item-sidebar.php:43
+msgid "The listing is expired. You can't contact the publisher."
+msgstr "Oppføringen er utløpt. Du kan ikke kontakte annonsøren."
+
+#: item-sidebar.php:47
+msgid "It's your own listing, you can't contact the publisher."
+msgstr "Dette er din annonse, du kan ikke kontakte annonsøren."
+
+#: item-sidebar.php:51
+msgid "You must log in or register a new account in order to contact the advertiser"
+msgstr "Du må logge inn eller registrere en ny konto for å kontakte annonsøren"
+
+#: item-sidebar.php:61
+msgid "Name: %s"
+msgstr "Navn: %s"
+
+#: item-sidebar.php:64
+msgid "E-mail: %s"
+msgstr "E-post: %s"
+
+#: item-sidebar.php:67
+msgid "Phone: %s"
+msgstr "Telefon: %s"
+
+#: item-sidebar.php:80
+msgid "Your e-mail address"
+msgstr "Din e-postadresse"
+
+#: item-sidebar.php:84 user-public-sidebar.php:41
+msgid "Phone number"
+msgstr "Telefonnummer"
+
+#: item-sidebar.php:113 user-public-sidebar.php:63
+msgid "Enter the words above"
+msgstr "Skriv inn ordene ovenfor"
+
+#: item-sidebar.php:115 user-public-sidebar.php:65
+msgid "Help"
+msgstr "Hjelp"
+
+#: item.php:55
+msgid "<strong class=\"publish\">Published date</strong>: %1$s"
+msgstr "<strong class=\"publish\">Publisert</strong>: %1$s"
+
+#: item.php:58
+msgid "<strong class=\"update\">Modified date:</strong> %1$s"
+msgstr "<strong class=\"update\">Endret:</strong> %1$s"
+
+#: item.php:61 main.php:67
+msgid "Location"
+msgstr "Sted"
+
+#: item.php:67 loop-single-premium.php:24 loop-single.php:24
+msgid "Edit item"
+msgstr "Rediger annonse"
+
+#: item.php:79 item.php:84
+msgid "Image"
+msgstr "Bilde"
+
+#: item.php:113
+msgid "Contact seller"
+msgstr "Kontakt selger"
+
+#: item.php:117
+msgid "Share"
+msgstr "Del"
+
+#: item.php:123
+msgid "Useful information"
+msgstr "Nyttig informasjon"
+
+#: item.php:125
+msgid "Avoid scams by acting locally or paying with PayPal"
+msgstr "Unngå svindel ved å handle lokalt eller benytt PayPal som betalingsmiddel"
+
+#: item.php:126
+msgid "Never pay with Western Union, Moneygram or other anonymous payment services"
+msgstr "Aldri betal med Western Union, Moneygram eller andre anonyme betalingstjenester"
+
+#: item.php:127
+msgid "Don't buy or sell outside of your country. Don't accept cashier cheques from outside your country"
+msgstr "Bruk sunn fornuft. Virker et tilbud for godt til å være sant så er det mest sannsynlig det."
+
+#: item.php:128
+msgid "This site is never involved in any transaction, and does not handle payments, shipping, guarantee transactions, provide escrow services, or offer \"buyer protection\" or \"seller certification\""
+msgstr "Dette nettstedet er ikke involvert i noen transaksjoner. Vi håndterer ikke betalinger eller forsendelser."
+
+#: item.php:135
+msgid "Related listings"
+msgstr "Relaterte annonser"
+
+#: item.php:146
+msgid "Comments"
+msgstr "Kommentarer"
+
+#: item.php:153
+msgid "by"
+msgstr "av"
+
+#: item.php:157
+msgid "Delete your comment"
+msgstr "Slett din kommentar"
+
+#: item.php:169
+msgid "Leave your comment (spam and offensive messages will be removed)"
+msgstr "Legg igjen din kommentar (spam og støtende meldinger vil bli slettet)"
+
+#: item.php:202
+msgid "Comment"
+msgstr "Kommentar"
+
+#: loop-single-premium.php:26 loop-single.php:26
+msgid "This action can not be undone. Are you sure you want to continue?"
+msgstr "Denne handlingen kan ikke omgjøres. Er du sikker på at du vil fortsette?"
+
+#: loop-single-premium.php:29 loop-single.php:29
+msgid "Activate"
+msgstr "Aktiver"
+
+#: main.php:38
+msgid "Latest Listings"
+msgstr "Siste annonser"
+
+#: main.php:46 search.php:81
+msgid "Grid"
+msgstr "Rutenett"
+
+#: main.php:57
+msgid "See all listings"
+msgstr "Vis alle annonser"
+
+#: search-sidebar.php:38
+msgid "Your search"
+msgstr "Ditt søk"
+
+#: search-sidebar.php:51
+msgid "Show only"
+msgstr "Vis kun"
+
+#: search-sidebar.php:54
+msgid "listings with pictures"
+msgstr "annonser med bilder"
+
+#: search-sidebar.php:62
+msgid "Min"
+msgstr "Min"
+
+#: search-sidebar.php:64
+msgid "Max"
+msgstr "Maks"
+
+#: search-sidebar.php:84
+msgid "Apply"
+msgstr "Oppdater"
+
+#: search-sidebar.php:89
+msgid "Refine category"
+msgstr "Avgrens kategori"
+
+#: search.php:55
+msgid "Selected"
+msgstr "Valgt"
+
+#: search.php:56
+msgid "Nothing selected, input was"
+msgstr "Ingenting er valgt, input var"
+
+#: search.php:71
+msgid "There are no results matching \"%s\""
+msgstr "Fant ingen resultater for \"%s\""
+
+#: search.php:78
+msgid "Show filters"
+msgstr "Vis filtre"
+
+#: search.php:85
+msgid "Sort by"
+msgstr "Sorter etter"
+
+#: search.php:141
+msgid "Other searches that may interest you"
+msgstr "Andre søk som kan interessere deg"
+
+#: user-alerts.php:39
+msgid "You do not have any alerts yet"
+msgstr "Du har ingen varsler enda"
+
+#: user-alerts.php:46
+msgid "Alert"
+msgstr "Varsling"
+
+#: user-alerts.php:46
+msgid "This action can't be undone. Are you sure you want to continue?"
+msgstr "Denne handlingen kan ikke omgjøres. Er du sikker på at du vil fortsette?"
+
+#: user-alerts.php:46
+msgid "Delete this alert"
+msgstr "Slett denne varslingen"
+
+#: user-change_email.php:33 user-change_email.php:38
+msgid "Change e-mail"
+msgstr "Endre e-post"
+
+#: user-change_email.php:46
+msgid "Current e-mail"
+msgstr "Nåværende e-post"
+
+#: user-change_email.php:52
+msgid "New e-mail"
+msgstr "Ny e-post"
+
+#: user-change_password.php:45
+msgid "Current password"
+msgstr "Nåværende passord"
+
+#: user-change_password.php:51 user-forgot_password.php:39
+msgid "New password"
+msgstr "Nytt passord"
+
+#: user-change_password.php:57 user-forgot_password.php:45
+msgid "Repeat new password"
+msgstr "Gjenta nytt passord"
+
+#: user-change_username.php:50
+msgid "Username: this field is required"
+msgstr "Brukernavn: dette feltet er påkrevd"
+
+#: user-change_username.php:75
+msgid "The username is available"
+msgstr "Brukernavnet er tilgjengelig"
+
+#: user-change_username.php:77
+msgid "The username is NOT available"
+msgstr "Brukernavnet er ikke tilgjengelig"
+
+#: user-change_username.php:94
+msgid "Username"
+msgstr "Brukernavn"
+
+#: user-forgot_password.php:30 user-recover.php:30
+msgid "Recover your password"
+msgstr "Gjenopprett passordet ditt"
+
+#: user-items.php:41
+msgid "My listings"
+msgstr "Mine annonser"
+
+#: user-items.php:43
+msgid "No listings have been added yet"
+msgstr "Ingen annonser har blitt lagt til enda"
+
+#: user-login.php:30
+msgid "Access to your account"
+msgstr "Tilgang til din konto"
+
+#: user-login.php:44 user-register.php:52
+msgid "Password"
+msgstr "Passord"
+
+#: user-login.php:51
+msgid "Remember me"
+msgstr "Husk meg"
+
+#: user-login.php:54
+msgid "Log in"
+msgstr "Logg inn"
+
+#: user-login.php:58
+msgid "Forgot password?"
+msgstr "Glemt passord?"
+
+#: user-profile.php:52
+msgid "User type"
+msgstr "Brukertype:"
+
+#: user-profile.php:58
+msgid "Cell phone"
+msgstr "Mobiltelefon"
+
+#: user-profile.php:64
+msgid "Phone"
+msgstr "Telefon"
+
+#: user-profile.php:88
+msgid "City area"
+msgstr "Bydel"
+
+#: user-profile.php:100
+msgid "Website"
+msgstr "Nettside"
+
+#: user-public-profile.php:67
+msgid "<strong>Address:</strong> %1$s"
+msgstr "<strong>Adresse:</strong> %1$s"
+
+#: user-public-profile.php:70
+msgid "<strong>Location:</strong> %1$s"
+msgstr "<strong>Sted:</strong> %1$s"
+
+#: user-public-profile.php:75
+msgid "User description"
+msgstr "Brukerbeskrivelse"
+
+#: user-public-profile.php:80
+msgid "Latest listings"
+msgstr "Siste annonser"
+
+#: user-recover.php:45
+msgid "Send me a new password"
+msgstr "Send meg et nytt passord"
+
+#: user-register.php:31
+msgid "Register an account for free"
+msgstr "Registrer en konto gratis"
+
+#: user-register.php:58
+msgid "Repeat password"
+msgstr "Gjenta passord"
+
+#: user-register.php:62
+msgid "Passwords don't match"
+msgstr "Passordene samsvarer ikke"
+
+#: user-register.php:69
+msgid "Create"
+msgstr "Opprett"
+
+#: user-sidebar.php:23
+msgid "Display menu"
+msgstr "Vis meny"
+
+#: user-sidebar.php:29
+msgid "Are you sure you want to delete your account?"
+msgstr "Er du sikker på at du vil slette din konto?"
+
+msgid "bender"
+msgstr "bender"

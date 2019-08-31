@@ -1,0 +1,786 @@
+# Translation of Modern Theme in Hebrew
+# This file is distributed under the same license as the Modern Theme package.
+msgid ""
+msgstr ""
+"PO-Revision-Date: 2013-05-13 17:52:35+0000\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: GlotPress/0.1\n"
+"Project-Id-Version: Modern Theme\n"
+
+#: /var/www/osclass-git/oc-content/themes/modern/user-forgot_password.php:41
+msgid "New pasword"
+msgstr "סיסמא חדשה"
+
+#: /var/www/osclass-git/oc-content/themes/modern/user-forgot_password.php:45
+msgid "Repeat new pasword"
+msgstr "חזור על הסיסמא"
+
+#: /var/www/osclass-git/oc-content/themes/modern/404.php:33
+msgid "Page not found"
+msgstr "עמוד לא נמצא"
+
+#: /var/www/osclass-git/oc-content/themes/modern/alert-form.php:6
+msgid "You have sucessfully subscribed to the alert"
+msgstr "נרשמת בהצלחה להתראות"
+
+#: /var/www/osclass-git/oc-content/themes/modern/alert-form.php:7
+msgid "Invalid email address"
+msgstr "כתובת דואר אלקטרוני שגוייה"
+
+#: /var/www/osclass-git/oc-content/themes/modern/alert-form.php:8
+msgid "There was a problem with the alert"
+msgstr "ארעה תקלה עם ההתראה"
+
+#: /var/www/osclass-git/oc-content/themes/modern/alert-form.php:39
+msgid "Subscribe to this search"
+msgstr "הרשם לחיפוש זה"
+
+#: /var/www/osclass-git/oc-content/themes/modern/alert-form.php:55
+msgid "Subscribe now"
+msgstr "הרשם עכשיו"
+
+#: /var/www/osclass-git/oc-content/themes/modern/contact.php:34
+msgid "Contact us"
+msgstr "צור קשר"
+
+#: /var/www/osclass-git/oc-content/themes/modern/contact.php:40
+msgid "Subject"
+msgstr "נושא"
+
+#: /var/www/osclass-git/oc-content/themes/modern/contact.php:40
+#: /var/www/osclass-git/oc-content/themes/modern/contact.php:42
+#: /var/www/osclass-git/oc-content/themes/modern/item-contact.php:51
+#: /var/www/osclass-git/oc-content/themes/modern/item.php:218
+msgid "optional"
+msgstr "אופציונלי"
+
+#: /var/www/osclass-git/oc-content/themes/modern/contact.php:41
+#: /var/www/osclass-git/oc-content/themes/modern/item-contact.php:52
+#: /var/www/osclass-git/oc-content/themes/modern/item-send-friend.php:51
+#: /var/www/osclass-git/oc-content/themes/modern/item.php:219
+msgid "Message"
+msgstr "הודעה"
+
+#: /var/www/osclass-git/oc-content/themes/modern/contact.php:42
+#: /var/www/osclass-git/oc-content/themes/modern/item-contact.php:48
+#: /var/www/osclass-git/oc-content/themes/modern/item-send-friend.php:46
+#: /var/www/osclass-git/oc-content/themes/modern/item.php:153
+#: /var/www/osclass-git/oc-content/themes/modern/item.php:216
+msgid "Your name"
+msgstr "שם"
+
+#: /var/www/osclass-git/oc-content/themes/modern/contact.php:43
+#: /var/www/osclass-git/oc-content/themes/modern/item-contact.php:49
+#: /var/www/osclass-git/oc-content/themes/modern/item-send-friend.php:47
+#: /var/www/osclass-git/oc-content/themes/modern/item.php:217
+msgid "Your e-mail address"
+msgstr "כתובת דוא\"ל"
+
+#: /var/www/osclass-git/oc-content/themes/modern/contact.php:45
+#: /var/www/osclass-git/oc-content/themes/modern/item-send-friend.php:54
+#: /var/www/osclass-git/oc-content/themes/modern/item.php:158
+#: /var/www/osclass-git/oc-content/themes/modern/item.php:239
+msgid "Send"
+msgstr "שלח"
+
+#: /var/www/osclass-git/oc-content/themes/modern/footer.php:28
+msgid "Contact"
+msgstr "איש קשר"
+
+#: /var/www/osclass-git/oc-content/themes/modern/footer.php:48
+msgid "Your search must be at least three characters long"
+msgstr "החיפוש חייב להכיל לפחות 3 תווים"
+
+#: /var/www/osclass-git/oc-content/themes/modern/functions.php:53
+msgid "Theme settings updated correctly"
+msgstr "ערכת הנושא עודכנה בהצלחה"
+
+#: /var/www/osclass-git/oc-content/themes/modern/functions.php:60
+msgid "The logo image has been uploaded correctly"
+msgstr "הלוגו עלה בהצלחה"
+
+#: /var/www/osclass-git/oc-content/themes/modern/functions.php:62
+#: /var/www/osclass-git/oc-content/themes/modern/functions.php:65
+msgid "An error has occurred, please try again"
+msgstr "ארעה תקלה. אנא נסה שנית"
+
+#: /var/www/osclass-git/oc-content/themes/modern/functions.php:72
+msgid "The logo image has been removed"
+msgstr "הלוגו הוסר"
+
+#: /var/www/osclass-git/oc-content/themes/modern/functions.php:74
+msgid "Image not found"
+msgstr "תמונה לא נמצאת"
+
+#: /var/www/osclass-git/oc-content/themes/modern/functions.php:81
+msgid "Header logo"
+msgstr "לוגו הכותרת"
+
+#: /var/www/osclass-git/oc-content/themes/modern/functions.php:82
+msgid "Theme settings"
+msgstr "הגדרות ערכת נושא"
+
+#: /var/www/osclass-git/oc-content/themes/modern/functions.php:100
+msgid "ie. PHP Programmer"
+msgstr "לדוגמא. מתכנתי PHP"
+
+#: /var/www/osclass-git/oc-content/themes/modern/head.php:44
+msgid "No file selected"
+msgstr "לא נבחרו קבצים"
+
+#: /var/www/osclass-git/oc-content/themes/modern/head.php:45
+msgid "Choose File"
+msgstr "בחר קובץ"
+
+#: /var/www/osclass-git/oc-content/themes/modern/header.php:34
+msgid "Hi %s"
+msgstr "שלום %s"
+
+#: /var/www/osclass-git/oc-content/themes/modern/header.php:35
+msgid "My account"
+msgstr "החשבון שלי"
+
+#: /var/www/osclass-git/oc-content/themes/modern/header.php:36
+msgid "Logout"
+msgstr "יציאה"
+
+#: /var/www/osclass-git/oc-content/themes/modern/header.php:40
+#: /var/www/osclass-git/oc-content/themes/modern/item.php:196
+msgid "Login"
+msgstr "כניסה"
+
+#: /var/www/osclass-git/oc-content/themes/modern/header.php:43
+#: /var/www/osclass-git/oc-content/themes/modern/item.php:197
+msgid "Register for a free account"
+msgstr "הרשם לחשבון חינמי"
+
+#: /var/www/osclass-git/oc-content/themes/modern/header.php:49
+#: /var/www/osclass-git/oc-content/themes/modern/item-post.php:162
+#: /var/www/osclass-git/oc-content/themes/modern/item.php:206
+msgid "E-mail"
+msgstr "דוא\"ל"
+
+#: /var/www/osclass-git/oc-content/themes/modern/header.php:51
+msgid "Password"
+msgstr "סיסמא"
+
+#: /var/www/osclass-git/oc-content/themes/modern/header.php:53
+msgid "Remember me"
+msgstr "זכור אותי"
+
+#: /var/www/osclass-git/oc-content/themes/modern/header.php:54
+msgid "Log in"
+msgstr "התחבר"
+
+#: /var/www/osclass-git/oc-content/themes/modern/header.php:56
+msgid "Forgot password?"
+msgstr "שכחת סיסמא?"
+
+#: /var/www/osclass-git/oc-content/themes/modern/header.php:66
+msgid "Language"
+msgstr "שפה"
+
+#: /var/www/osclass-git/oc-content/themes/modern/header.php:79
+msgid "Publish your ad for free"
+msgstr "פרסם את מודעתך בחינם"
+
+#: /var/www/osclass-git/oc-content/themes/modern/inc.search.php:54
+#: /var/www/osclass-git/oc-content/themes/modern/item-edit.php:107
+#: /var/www/osclass-git/oc-content/themes/modern/item-post.php:105
+msgid "Select a category"
+msgstr "בחר קטגוריה"
+
+#: /var/www/osclass-git/oc-content/themes/modern/inc.search.php:56
+msgid "Search"
+msgstr "חפש"
+
+#: /var/www/osclass-git/oc-content/themes/modern/item-contact.php:34
+#: /var/www/osclass-git/oc-content/themes/modern/item.php:101
+msgid "Contact seller"
+msgstr "צור קשר עם המוכר"
+
+#: /var/www/osclass-git/oc-content/themes/modern/item.php:193
+msgid "You must log in or register a new account in order to contact the advertiser"
+msgstr "עליך להתחבר או להרשם כדי ליצור קשר עם המפרסם"
+
+#: /var/www/osclass-git/oc-content/themes/modern/item-contact.php:42
+msgid "To (seller)"
+msgstr "אל (המוכר)"
+
+#: /var/www/osclass-git/oc-content/themes/modern/item-contact.php:43
+#: /var/www/osclass-git/oc-content/themes/modern/item-send-friend.php:41
+msgid "Listing"
+msgstr "מודעות"
+
+#: /var/www/osclass-git/oc-content/themes/modern/item-contact.php:51
+#: /var/www/osclass-git/oc-content/themes/modern/item.php:218
+msgid "Phone number"
+msgstr "מספר טלפון"
+
+#: /var/www/osclass-git/oc-content/themes/modern/item-contact.php:54
+msgid "Send message"
+msgstr "שלח הודעה"
+
+#: /var/www/osclass-git/oc-content/themes/modern/item-edit.php:95
+msgid "Update your listing"
+msgstr "עדכן את המודעה שלך"
+
+#: /var/www/osclass-git/oc-content/themes/modern/item-edit.php:104
+#: /var/www/osclass-git/oc-content/themes/modern/item-post.php:102
+msgid "General Information"
+msgstr "מידע כללי"
+
+#: /var/www/osclass-git/oc-content/themes/modern/item-edit.php:106
+#: /var/www/osclass-git/oc-content/themes/modern/item-post.php:104
+msgid "Category"
+msgstr "קטגוריה"
+
+#: /var/www/osclass-git/oc-content/themes/modern/item-edit.php:114
+#: /var/www/osclass-git/oc-content/themes/modern/item-post.php:113
+msgid "Price"
+msgstr "מחיר"
+
+#: /var/www/osclass-git/oc-content/themes/modern/item-edit.php:122
+#: /var/www/osclass-git/oc-content/themes/modern/item-post.php:120
+msgid "Photos"
+msgstr "תמונות"
+
+#: /var/www/osclass-git/oc-content/themes/modern/item-edit.php:131
+#: /var/www/osclass-git/oc-content/themes/modern/item-post.php:126
+msgid "Add new photo"
+msgstr "הוסף תמונה חדשה"
+
+#: /var/www/osclass-git/oc-content/themes/modern/item-edit.php:136
+#: /var/www/osclass-git/oc-content/themes/modern/main.php:120
+msgid "Location"
+msgstr "מיקום"
+
+#: /var/www/osclass-git/oc-content/themes/modern/item-edit.php:138
+#: /var/www/osclass-git/oc-content/themes/modern/item-post.php:133
+#: /var/www/osclass-git/oc-content/themes/modern/item.php:74
+msgid "Country"
+msgstr "מדינה"
+
+#: /var/www/osclass-git/oc-content/themes/modern/item-edit.php:142
+#: /var/www/osclass-git/oc-content/themes/modern/item-post.php:137
+#: /var/www/osclass-git/oc-content/themes/modern/item.php:75
+msgid "Region"
+msgstr "אזור"
+
+#: /var/www/osclass-git/oc-content/themes/modern/item-edit.php:146
+#: /var/www/osclass-git/oc-content/themes/modern/item-post.php:141
+#: /var/www/osclass-git/oc-content/themes/modern/item.php:76
+msgid "City"
+msgstr "עיר"
+
+#: /var/www/osclass-git/oc-content/themes/modern/item-edit.php:150
+#: /var/www/osclass-git/oc-content/themes/modern/item.php:77
+msgid "City area"
+msgstr "שכונה"
+
+#: /var/www/osclass-git/oc-content/themes/modern/item-edit.php:154
+#: /var/www/osclass-git/oc-content/themes/modern/item-post.php:149
+#: /var/www/osclass-git/oc-content/themes/modern/item.php:78
+msgid "Address"
+msgstr "כתובת"
+
+#: /var/www/osclass-git/oc-content/themes/modern/item-edit.php:166
+msgid "Update"
+msgstr "עדכן"
+
+#: /var/www/osclass-git/oc-content/themes/modern/item-edit.php:167
+msgid "Cancel"
+msgstr "בטל"
+
+#: /var/www/osclass-git/oc-content/themes/modern/item-post.php:95
+msgid "Publish a listing"
+msgstr "פרסום מודעה"
+
+#: /var/www/osclass-git/oc-content/themes/modern/item-post.php:131
+msgid "Listing Location"
+msgstr "מיקום המודעה"
+
+#: /var/www/osclass-git/oc-content/themes/modern/item-post.php:145
+msgid "City Area"
+msgstr "אזור"
+
+#: /var/www/osclass-git/oc-content/themes/modern/item-post.php:156
+msgid "Seller's information"
+msgstr "מידע על המוכר"
+
+#: /var/www/osclass-git/oc-content/themes/modern/item-post.php:158
+#: /var/www/osclass-git/oc-content/themes/modern/item.php:201
+#: /var/www/osclass-git/oc-content/themes/modern/item.php:203
+msgid "Name"
+msgstr "שם"
+
+#: /var/www/osclass-git/oc-content/themes/modern/item-post.php:169
+msgid "Show e-mail on the listing page"
+msgstr "הצג מייל בעמוד המודעה"
+
+#: /var/www/osclass-git/oc-content/themes/modern/item-post.php:182
+msgid "Publish"
+msgstr "פרסם"
+
+#: /var/www/osclass-git/oc-content/themes/modern/item-send-friend.php:34
+msgid "Send to a friend"
+msgstr "שלח לחבר"
+
+#: /var/www/osclass-git/oc-content/themes/modern/item-send-friend.php:49
+msgid "Your friend's name"
+msgstr "שם החבר"
+
+#: /var/www/osclass-git/oc-content/themes/modern/item-send-friend.php:50
+msgid "Your friend's e-mail address"
+msgstr "כתובת אימייל של החבר"
+
+#: /var/www/osclass-git/oc-content/themes/modern/item.php:56
+msgid "Mark as"
+msgstr "סמן כ"
+
+#: /var/www/osclass-git/oc-content/themes/modern/item.php:58
+msgid "spam"
+msgstr "דואר זבל"
+
+#: /var/www/osclass-git/oc-content/themes/modern/item.php:59
+msgid "misclassified"
+msgstr "לא ממויין"
+
+#: /var/www/osclass-git/oc-content/themes/modern/item.php:60
+msgid "duplicated"
+msgstr "כפול"
+
+#: /var/www/osclass-git/oc-content/themes/modern/item.php:61
+msgid "expired"
+msgstr "פג תוקף"
+
+#: /var/www/osclass-git/oc-content/themes/modern/item.php:62
+msgid "offensive"
+msgstr "מידע פוגעני"
+
+#: /var/www/osclass-git/oc-content/themes/modern/item.php:70
+msgid "Published date"
+msgstr "תאריך פירסום"
+
+#: /var/www/osclass-git/oc-content/themes/modern/item.php:71
+msgid "Modified date"
+msgstr "תאריך שינויי"
+
+#: /var/www/osclass-git/oc-content/themes/modern/item.php:105
+msgid "Share"
+msgstr "שתף"
+
+#: /var/www/osclass-git/oc-content/themes/modern/item.php:111
+msgid "Useful information"
+msgstr "מידע חיוני"
+
+#: /var/www/osclass-git/oc-content/themes/modern/item.php:113
+msgid "Avoid scams by acting locally or paying with PayPal"
+msgstr "הימנע מהונאות על ידי שימוש בפאיפאל"
+
+#: /var/www/osclass-git/oc-content/themes/modern/item.php:114
+msgid "Never pay with Western Union, Moneygram or other anonymous payment services"
+msgstr "לעולם אל תשלם ב-Western Union, Moneygram  או בכל אמצעי תשלום אנונימי אחר"
+
+#: /var/www/osclass-git/oc-content/themes/modern/item.php:115
+msgid "Don't buy or sell outside of your country. Don't accept cashier cheques from outside your country"
+msgstr "אל תקנה או תמכור מחוץ למדינה שלך. אל תקבל המחאות מחוץ למדינתך"
+
+#: /var/www/osclass-git/oc-content/themes/modern/item.php:116
+msgid "This site is never involved in any transaction, and does not handle payments, shipping, guarantee transactions, provide escrow services, or offer \"buyer protection\" or \"seller certification\""
+msgstr "אתר זה אף פעם לא היה מעורב בכל עסקה, ואינו מטפל בתשלומים, משלוח, עסקות אחריות, לספק שירותי נאמנות, או הצעה \"הגנה על קונה\", או \"אישור מוכר\""
+
+#: /var/www/osclass-git/oc-content/themes/modern/item.php:122
+msgid "Comments"
+msgstr "תגובות"
+
+#: /var/www/osclass-git/oc-content/themes/modern/item.php:129
+msgid "by"
+msgstr "על ידי"
+
+#: /var/www/osclass-git/oc-content/themes/modern/item.php:133
+msgid "Delete your comment"
+msgstr "מחק את התגובה שלך"
+
+#: /var/www/osclass-git/oc-content/themes/modern/item.php:133
+msgid "Delete"
+msgstr "מחק"
+
+#: /var/www/osclass-git/oc-content/themes/modern/item.php:145
+msgid "Leave your comment (spam and offensive messages will be removed)"
+msgstr "השאר תגובה (תגובות זבל או פגעניות ימחקו)"
+
+#: /var/www/osclass-git/oc-content/themes/modern/item.php:154
+msgid "Your e-mail"
+msgstr "כתובת הדוא\"ל שלך"
+
+#: /var/www/osclass-git/oc-content/themes/modern/item.php:156
+msgid "Title"
+msgstr "כותרת"
+
+#: /var/www/osclass-git/oc-content/themes/modern/item.php:157
+msgid "Comment"
+msgstr "תגובה"
+
+#: /var/www/osclass-git/oc-content/themes/modern/item.php:170
+msgid "Image"
+msgstr "תמונה"
+
+#: /var/www/osclass-git/oc-content/themes/modern/item.php:182
+msgid "Contact publisher"
+msgstr "צור קשר עם המפרסם"
+
+#: /var/www/osclass-git/oc-content/themes/modern/item.php:209
+msgid "Tel"
+msgstr "טלפון"
+
+#: /var/www/osclass-git/oc-content/themes/modern/item.php:233
+msgid "Enter the words above"
+msgstr "הזן את הדברים לעיל"
+
+#: /var/www/osclass-git/oc-content/themes/modern/item.php:235
+msgid "Help"
+msgstr "עזרה"
+
+#: /var/www/osclass-git/oc-content/themes/modern/main.php:79
+msgid "Latest Listings"
+msgstr "מודעות אחרונות"
+
+#: /var/www/osclass-git/oc-content/themes/modern/main.php:81
+msgid "No Latest Listings"
+msgstr "אין מודעות אחרונות"
+
+#: /var/www/osclass-git/oc-content/themes/modern/main.php:111
+msgid "See all offers"
+msgstr "הצג את כל ההצעות"
+
+#: /var/www/osclass-git/oc-content/themes/modern/search.php:195
+msgid "Sort by"
+msgstr "מיין על ידי"
+
+#: /var/www/osclass-git/oc-content/themes/modern/search.php:214
+msgid "There are no results matching \"%s\""
+msgstr "אין תוצאות מתאימות ל %s"
+
+#: /var/www/osclass-git/oc-content/themes/modern/search.php:242
+msgid "Your search"
+msgstr "החיפוש שלך"
+
+#: /var/www/osclass-git/oc-content/themes/modern/search.php:256
+msgid "Show only"
+msgstr "הצג רק"
+
+#: /var/www/osclass-git/oc-content/themes/modern/search.php:261
+msgid "Show only listings with pictures"
+msgstr "הצג רק מודעות עם תמונות"
+
+#: /var/www/osclass-git/oc-content/themes/modern/search.php:269
+msgid "Min"
+msgstr "מינימום"
+
+#: /var/www/osclass-git/oc-content/themes/modern/search.php:271
+msgid "Max"
+msgstr "מקסימום"
+
+#: /var/www/osclass-git/oc-content/themes/modern/search.php:308
+msgid "Apply"
+msgstr "החל"
+
+#: /var/www/osclass-git/oc-content/themes/modern/search.php:325
+msgid "Selected"
+msgstr "נבחר"
+
+#: /var/www/osclass-git/oc-content/themes/modern/search.php:326
+msgid "Nothing selected, input was"
+msgstr "לא נבחר דבר"
+
+#: /var/www/osclass-git/oc-content/themes/modern/search_gallery.php:41
+#: /var/www/osclass-git/oc-content/themes/modern/search_list.php:41
+msgid "Sponsored ad"
+msgstr "מודעות ממומנים"
+
+#: /var/www/osclass-git/oc-content/themes/modern/user-alerts.php:32
+#: /var/www/osclass-git/oc-content/themes/modern/user-change_email.php:33
+#: /var/www/osclass-git/oc-content/themes/modern/user-change_password.php:33
+#: /var/www/osclass-git/oc-content/themes/modern/user-dashboard.php:33
+#: /var/www/osclass-git/oc-content/themes/modern/user-items.php:33
+#: /var/www/osclass-git/oc-content/themes/modern/user-profile.php:35
+msgid "User account manager"
+msgstr "ניהול חשבון משתמש"
+
+#: /var/www/osclass-git/oc-content/themes/modern/user-alerts.php:37
+msgid "Your alerts"
+msgstr "ההתראות שלך"
+
+#: /var/www/osclass-git/oc-content/themes/modern/user-alerts.php:39
+msgid "You do not have any alerts yet"
+msgstr "עדיין איתך לך התראות"
+
+#: /var/www/osclass-git/oc-content/themes/modern/user-alerts.php:43
+msgid "Alert"
+msgstr "התראה"
+
+#: /var/www/osclass-git/oc-content/themes/modern/user-alerts.php:43
+msgid "This action can't be undone. Are you sure you want to continue?"
+msgstr "פעולה זו לא ניתנת לשיחזור. האם אתה בטוח שברצונך להמשיך?"
+
+#: /var/www/osclass-git/oc-content/themes/modern/user-alerts.php:43
+msgid "Delete this alert"
+msgstr "מחק התראה זו"
+
+#: /var/www/osclass-git/oc-content/themes/modern/user-alerts.php:49
+#: /var/www/osclass-git/oc-content/themes/modern/user-dashboard.php:49
+#: /var/www/osclass-git/oc-content/themes/modern/user-items.php:49
+msgid "Publication date"
+msgstr "תאריך פרסום"
+
+#: /var/www/osclass-git/oc-content/themes/modern/user-alerts.php:57
+msgid "Listings"
+msgstr "מודעות"
+
+#: /var/www/osclass-git/oc-content/themes/modern/user-change_email.php:39
+msgid "Change your e-mail"
+msgstr "החלף את כתובת הדוא\"ל שלך"
+
+#: /var/www/osclass-git/oc-content/themes/modern/user-change_email.php:45
+msgid "Current e-mail"
+msgstr "כתובת דוא\"ל נוכחי"
+
+#: /var/www/osclass-git/oc-content/themes/modern/user-change_email.php:49
+msgid "New e-mail"
+msgstr "כתובת דוא\"ל חדשה"
+
+#: /var/www/osclass-git/oc-content/themes/modern/user-change_password.php:39
+msgid "Change your password"
+msgstr "החלף את הסיסמא שלך"
+
+#: /var/www/osclass-git/oc-content/themes/modern/user-change_password.php:45
+msgid "Current password"
+msgstr "סיסמא נוכחית"
+
+#: /var/www/osclass-git/oc-content/themes/modern/user-change_password.php:49
+msgid "New password"
+msgstr "סיסמא חדשה"
+
+#: /var/www/osclass-git/oc-content/themes/modern/user-change_password.php:53
+msgid "Repeat new password"
+msgstr "חזור על סיסמא"
+
+#: /var/www/osclass-git/oc-content/themes/modern/user-dashboard.php:39
+msgid "Listings from %s"
+msgstr "מודעות מ %s"
+
+#: /var/www/osclass-git/oc-content/themes/modern/user-dashboard.php:41
+msgid "No listings have been added yet"
+msgstr "עדיין לא נוספו מודעות"
+
+#: /var/www/osclass-git/oc-content/themes/modern/user-dashboard.php:52
+msgid "View listing"
+msgstr "הצג מודעות"
+
+#: /var/www/osclass-git/oc-content/themes/modern/user-dashboard.php:54
+#: /var/www/osclass-git/oc-content/themes/modern/user-items.php:53
+msgid "Edit"
+msgstr "עריכה"
+
+#: /var/www/osclass-git/oc-content/themes/modern/user-dashboard.php:57
+#: /var/www/osclass-git/oc-content/themes/modern/user-items.php:58
+msgid "Activate"
+msgstr "הפעל"
+
+#: /var/www/osclass-git/oc-content/themes/modern/user-forgot_password.php:33
+#: /var/www/osclass-git/oc-content/themes/modern/user-recover.php:33
+msgid "Recover your password"
+msgstr "שחזר את הסיסמא שלך"
+
+#: /var/www/osclass-git/oc-content/themes/modern/user-forgot_password.php:48
+msgid "Change password"
+msgstr "החלף סיסמא"
+
+#: /var/www/osclass-git/oc-content/themes/modern/user-items.php:39
+msgid "Your listings"
+msgstr "המודעות שלך"
+
+#: /var/www/osclass-git/oc-content/themes/modern/user-items.php:39
+msgid "Post a new listing"
+msgstr "הוסף מודעה חדשה"
+
+#: /var/www/osclass-git/oc-content/themes/modern/user-items.php:41
+msgid "You don't have any listings yet"
+msgstr "עדיין אין לך מודעות"
+
+#: /var/www/osclass-git/oc-content/themes/modern/user-items.php:55
+msgid "This action can not be undone. Are you sure you want to continue?"
+msgstr "פעולה זו לא ניתנת לשחזור. האם אתה בטוח שברצונך לבצע אותה?"
+
+#: /var/www/osclass-git/oc-content/themes/modern/user-login.php:33
+msgid "Access to your account"
+msgstr "גישה לחשבונך"
+
+#: /var/www/osclass-git/oc-content/themes/modern/user-profile.php:41
+msgid "Update your profile"
+msgstr "עדכן את הפרופיל שלך"
+
+#: /var/www/osclass-git/oc-content/themes/modern/user-profile.php:55
+msgid "Modify e-mail"
+msgstr "שינוי כתובת דוא\"ל"
+
+#: /var/www/osclass-git/oc-content/themes/modern/user-profile.php:55
+msgid "Modify password"
+msgstr "שינויי סיסמא"
+
+#: /var/www/osclass-git/oc-content/themes/modern/user-profile.php:59
+msgid "User type"
+msgstr "סוג משתמש"
+
+#: /var/www/osclass-git/oc-content/themes/modern/user-profile.php:63
+msgid "Cell phone"
+msgstr "טלפון סלולרי"
+
+#: /var/www/osclass-git/oc-content/themes/modern/user-profile.php:67
+msgid "Phone"
+msgstr "טלפון"
+
+#: /var/www/osclass-git/oc-content/themes/modern/user-profile.php:91
+#: /var/www/osclass-git/oc-content/themes/modern/user-public-profile.php:69
+msgid "Website"
+msgstr "אתר אינטרנט"
+
+#: /var/www/osclass-git/oc-content/themes/modern/user-public-profile.php:58
+msgid "%s's profile"
+msgstr "הפרופיל של %s"
+
+#: /var/www/osclass-git/oc-content/themes/modern/user-public-profile.php:64
+msgid "Profile"
+msgstr "פרופיל"
+
+#: /var/www/osclass-git/oc-content/themes/modern/user-public-profile.php:66
+msgid "Full name"
+msgstr "שם מלא"
+
+#: /var/www/osclass-git/oc-content/themes/modern/user-public-profile.php:70
+msgid "User Description"
+msgstr "תיאור משתמש"
+
+#: /var/www/osclass-git/oc-content/themes/modern/user-public-profile.php:74
+msgid "Latest listings"
+msgstr "מודעות אחרונות"
+
+#: /var/www/osclass-git/oc-content/themes/modern/user-recover.php:40
+msgid "Send me a new password"
+msgstr "שלח לי סיסמא חדשה"
+
+#: /var/www/osclass-git/oc-content/themes/modern/user-register.php:35
+msgid "Register an account for free"
+msgstr "הרשם לחשבון בחינם"
+
+#: /var/www/osclass-git/oc-content/themes/modern/user-register.php:44
+msgid "Re-type password"
+msgstr "הקלד שוב את הסיסמא"
+
+#: /var/www/osclass-git/oc-content/themes/modern/user-register.php:46
+msgid "Passwords don't match"
+msgstr "סיסמא לא זהה"
+
+#: /var/www/osclass-git/oc-content/themes/modern/user-register.php:51
+msgid "Create"
+msgstr "צור"
+
+#: /var/www/osclass-git/oc-content/themes/modern/admin/header.php:8
+msgid "Preview"
+msgstr "תצוגה מקדימה"
+
+#: /var/www/osclass-git/oc-content/themes/modern/admin/header.php:15
+msgid "Remove logo"
+msgstr "הסר לוגו"
+
+#: /var/www/osclass-git/oc-content/themes/modern/admin/header.php:26
+msgid "Upload logo"
+msgstr "העלה לוגו"
+
+#: /var/www/osclass-git/oc-content/themes/modern/admin/header.php:28
+msgid "The preferred size of the logo is 600x100."
+msgstr "המידה המועודפת ללוגו 600x100"
+
+#: /var/www/osclass-git/oc-content/themes/modern/admin/header.php:30
+msgid "<strong>Note:</strong> Uploading another logo will overwrite the current logo."
+msgstr "<strong>הערה:</strong> העלאת לוגו נוסף תדרוס את הלוגו הנוכחי"
+
+#: /var/www/osclass-git/oc-content/themes/modern/admin/header.php:38
+msgid "Logo image (png,gif,jpg)"
+msgstr "תמונת לוגו (png,gif,jpg)"
+
+#: /var/www/osclass-git/oc-content/themes/modern/admin/header.php:44
+msgid "Upload"
+msgstr "העלה"
+
+#: /var/www/osclass-git/oc-content/themes/modern/admin/header.php:53
+msgid "The images folder <strong>%s</strong> is not writable on your server"
+msgstr "תיקיית התמונות <strong>%s</strong> לא ניתנת לכתיבה בשרת שלך."
+
+#: /var/www/osclass-git/oc-content/themes/modern/admin/header.php:60
+msgid "To make a directory writable under UNIX execute this command from the shell:"
+msgstr "To make a directory writable under UNIX execute this command from the shell:"
+
+#: /var/www/osclass-git/oc-content/themes/modern/admin/settings.php:18
+msgid "Donate"
+msgstr "לתרום"
+
+#: /var/www/osclass-git/oc-content/themes/modern/admin/settings.php:28
+msgid "Search placeholder"
+msgstr "מציין מיקום חיפוש"
+
+#: /var/www/osclass-git/oc-content/themes/modern/admin/settings.php:32
+msgid "Footer link"
+msgstr "קישור תחתון"
+
+#: /var/www/osclass-git/oc-content/themes/modern/admin/settings.php:45
+msgid "Save changes"
+msgstr "שמור שינויים"
+
+#: /var/www/osclass-git/oc-content/themes/modern/admin/settings.php:17
+msgid "Custom"
+msgstr "Custom"
+
+#: /var/www/osclass-git/oc-content/themes/modern/item.php:189
+msgid "It's your own listing, you can't contact the publisher."
+msgstr "זו המודעה שלך, אינך יכול ליצור קשר עם המפרסם"
+
+#: /var/www/osclass-git/oc-content/themes/modern/item.php:185
+msgid "The listing is expired. You can't contact the publisher."
+msgstr "פג תוקף המודעה. אין אפשרות ליצור קשר עם המפרסם"
+
+#: /var/www/osclass-git/oc-content/themes/modern/admin/header.php:23
+msgid "No logo has been uploaded yet"
+msgstr "עדיין לא עלה לוגו"
+
+#: /var/www/osclass-git/oc-content/themes/modern/admin/header.php:54
+msgid "Osclass can't upload the logo image from the administration panel."
+msgstr "לא ניתן להעלות את הלוגו מפאנל הניהול"
+
+#: /var/www/osclass-git/oc-content/themes/modern/admin/settings.php:34
+msgid "I want to help Osclass by linking to <a href=\"http://osclass.org/\" target=\"_blank\">osclass.org</a> from my site with the following text:"
+msgstr "I want to help Osclass by linking to <a href=\"http://osclass.org/\" target=\"_blank\">osclass.org</a> from my site with the following text:"
+
+#: /var/www/osclass-git/oc-content/themes/modern/admin/header.php:55
+msgid "Please make the aforementioned image folder writable."
+msgstr "הפוך את תיקיית התמונות ניתנת לכתיבה"
+
+#: /var/www/osclass-git/oc-content/themes/modern/admin/settings.php:12
+msgid "I would like to contribute to the development of Osclass with a donation of"
+msgstr "I would like to contribute to the development of Osclass with a donation of"
+
+#: /var/www/osclass-git/oc-content/themes/modern/footer.php:35
+msgid "This website is proudly using the <a title=\"Osclass web\" href=\"http://osclass.org/\">classifieds scripts</a> software <strong>Osclass</strong>"
+msgstr "This website is proudly using the <a title=\"Osclass web\" href=\"http://osclass.org/\">classifieds scripts</a> software <strong>Osclass</strong>"
+
+#: /var/www/osclass-git/oc-content/themes/modern/admin/settings.php:39
+msgid "Default logo"
+msgstr "ברירת מחדל של לוגו"
+
+#: /var/www/osclass-git/oc-content/themes/modern/admin/settings.php:41
+msgid "Show default logo in case you didn't upload one previously"
+msgstr "הצג את לוגו ברירת המחדל במידה ולא הועלה לוגו"

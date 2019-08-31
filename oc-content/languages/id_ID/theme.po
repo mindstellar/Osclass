@@ -1,0 +1,786 @@
+# Translation of Modern Theme in Indonesian
+# This file is distributed under the same license as the Modern Theme package.
+msgid ""
+msgstr ""
+"PO-Revision-Date: 2013-05-08 08:41:34+0000\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n > 1;\n"
+"X-Generator: GlotPress/0.1\n"
+"Project-Id-Version: Modern Theme\n"
+
+#: /var/www/osclass-git/oc-content/themes/modern/user-forgot_password.php:41
+msgid "New pasword"
+msgstr "Password baru"
+
+#: /var/www/osclass-git/oc-content/themes/modern/user-forgot_password.php:45
+msgid "Repeat new pasword"
+msgstr "Password baru"
+
+#: /var/www/osclass-git/oc-content/themes/modern/404.php:33
+msgid "Page not found"
+msgstr "Halaman tidak ditemukan"
+
+#: /var/www/osclass-git/oc-content/themes/modern/alert-form.php:6
+msgid "You have sucessfully subscribed to the alert"
+msgstr "Anda telah berhasil berlangganan notifikasi siaga"
+
+#: /var/www/osclass-git/oc-content/themes/modern/alert-form.php:7
+msgid "Invalid email address"
+msgstr "Alamat email tidak valid"
+
+#: /var/www/osclass-git/oc-content/themes/modern/alert-form.php:8
+msgid "There was a problem with the alert"
+msgstr "Terdapat masalah dengan notifikasi siaga"
+
+#: /var/www/osclass-git/oc-content/themes/modern/alert-form.php:39
+msgid "Subscribe to this search"
+msgstr "Berlangganan ke pencarian ini"
+
+#: /var/www/osclass-git/oc-content/themes/modern/alert-form.php:55
+msgid "Subscribe now"
+msgstr "Berlangganan sekarang"
+
+#: /var/www/osclass-git/oc-content/themes/modern/contact.php:34
+msgid "Contact us"
+msgstr "Hubungi kami"
+
+#: /var/www/osclass-git/oc-content/themes/modern/contact.php:40
+msgid "Subject"
+msgstr "Judul"
+
+#: /var/www/osclass-git/oc-content/themes/modern/contact.php:40
+#: /var/www/osclass-git/oc-content/themes/modern/contact.php:42
+#: /var/www/osclass-git/oc-content/themes/modern/item-contact.php:51
+#: /var/www/osclass-git/oc-content/themes/modern/item.php:218
+msgid "optional"
+msgstr "pilihan"
+
+#: /var/www/osclass-git/oc-content/themes/modern/contact.php:41
+#: /var/www/osclass-git/oc-content/themes/modern/item-contact.php:52
+#: /var/www/osclass-git/oc-content/themes/modern/item-send-friend.php:51
+#: /var/www/osclass-git/oc-content/themes/modern/item.php:219
+msgid "Message"
+msgstr "Pesan"
+
+#: /var/www/osclass-git/oc-content/themes/modern/contact.php:42
+#: /var/www/osclass-git/oc-content/themes/modern/item-contact.php:48
+#: /var/www/osclass-git/oc-content/themes/modern/item-send-friend.php:46
+#: /var/www/osclass-git/oc-content/themes/modern/item.php:153
+#: /var/www/osclass-git/oc-content/themes/modern/item.php:216
+msgid "Your name"
+msgstr "Nama anda"
+
+#: /var/www/osclass-git/oc-content/themes/modern/contact.php:43
+#: /var/www/osclass-git/oc-content/themes/modern/item-contact.php:49
+#: /var/www/osclass-git/oc-content/themes/modern/item-send-friend.php:47
+#: /var/www/osclass-git/oc-content/themes/modern/item.php:217
+msgid "Your e-mail address"
+msgstr "Alamat e-mail anda"
+
+#: /var/www/osclass-git/oc-content/themes/modern/contact.php:45
+#: /var/www/osclass-git/oc-content/themes/modern/item-send-friend.php:54
+#: /var/www/osclass-git/oc-content/themes/modern/item.php:158
+#: /var/www/osclass-git/oc-content/themes/modern/item.php:239
+msgid "Send"
+msgstr "Kirim"
+
+#: /var/www/osclass-git/oc-content/themes/modern/footer.php:28
+msgid "Contact"
+msgstr "Kontak"
+
+#: /var/www/osclass-git/oc-content/themes/modern/footer.php:48
+msgid "Your search must be at least three characters long"
+msgstr "Pencarian anda harus menggunakan paling sedikitnya tiga karakter"
+
+#: /var/www/osclass-git/oc-content/themes/modern/functions.php:53
+msgid "Theme settings updated correctly"
+msgstr "Penyetalan Tema telah diperbaharui dengan tepat."
+
+#: /var/www/osclass-git/oc-content/themes/modern/functions.php:60
+msgid "The logo image has been uploaded correctly"
+msgstr "Gambar logo telah diunggah dengan tepat"
+
+#: /var/www/osclass-git/oc-content/themes/modern/functions.php:62
+#: /var/www/osclass-git/oc-content/themes/modern/functions.php:65
+msgid "An error has occurred, please try again"
+msgstr "Terjadi kesalahan, silahkan dicoba lagi"
+
+#: /var/www/osclass-git/oc-content/themes/modern/functions.php:72
+msgid "The logo image has been removed"
+msgstr "Gambar logo telah dihapus"
+
+#: /var/www/osclass-git/oc-content/themes/modern/functions.php:74
+msgid "Image not found"
+msgstr "Gambar tidak ditemukan"
+
+#: /var/www/osclass-git/oc-content/themes/modern/functions.php:81
+msgid "Header logo"
+msgstr "Logo header"
+
+#: /var/www/osclass-git/oc-content/themes/modern/functions.php:82
+msgid "Theme settings"
+msgstr "Penyetelan Tema"
+
+#: /var/www/osclass-git/oc-content/themes/modern/functions.php:100
+msgid "ie. PHP Programmer"
+msgstr "spt. Programmer PHP "
+
+#: /var/www/osclass-git/oc-content/themes/modern/head.php:44
+msgid "No file selected"
+msgstr "Tidak ada file yang dipilih"
+
+#: /var/www/osclass-git/oc-content/themes/modern/head.php:45
+msgid "Choose File"
+msgstr "Pilih file"
+
+#: /var/www/osclass-git/oc-content/themes/modern/header.php:34
+msgid "Hi %s"
+msgstr "Hai %s"
+
+#: /var/www/osclass-git/oc-content/themes/modern/header.php:35
+msgid "My account"
+msgstr "Akun ku"
+
+#: /var/www/osclass-git/oc-content/themes/modern/header.php:36
+msgid "Logout"
+msgstr "Keluar"
+
+#: /var/www/osclass-git/oc-content/themes/modern/header.php:40
+#: /var/www/osclass-git/oc-content/themes/modern/item.php:196
+msgid "Login"
+msgstr "Masuk"
+
+#: /var/www/osclass-git/oc-content/themes/modern/header.php:43
+#: /var/www/osclass-git/oc-content/themes/modern/item.php:197
+msgid "Register for a free account"
+msgstr "Daftar gratis"
+
+#: /var/www/osclass-git/oc-content/themes/modern/header.php:49
+#: /var/www/osclass-git/oc-content/themes/modern/item-post.php:162
+#: /var/www/osclass-git/oc-content/themes/modern/item.php:206
+msgid "E-mail"
+msgstr "E-mail"
+
+#: /var/www/osclass-git/oc-content/themes/modern/header.php:51
+msgid "Password"
+msgstr "Kata sandi"
+
+#: /var/www/osclass-git/oc-content/themes/modern/header.php:53
+msgid "Remember me"
+msgstr "Ingatkan saya"
+
+#: /var/www/osclass-git/oc-content/themes/modern/header.php:54
+msgid "Log in"
+msgstr "Masuk"
+
+#: /var/www/osclass-git/oc-content/themes/modern/header.php:56
+msgid "Forgot password?"
+msgstr "Lupa password?"
+
+#: /var/www/osclass-git/oc-content/themes/modern/header.php:66
+msgid "Language"
+msgstr "Bahasa"
+
+#: /var/www/osclass-git/oc-content/themes/modern/header.php:79
+msgid "Publish your ad for free"
+msgstr "Publikasikan iklan anada secara gratis"
+
+#: /var/www/osclass-git/oc-content/themes/modern/inc.search.php:54
+#: /var/www/osclass-git/oc-content/themes/modern/item-edit.php:107
+#: /var/www/osclass-git/oc-content/themes/modern/item-post.php:105
+msgid "Select a category"
+msgstr "Pilih kategori"
+
+#: /var/www/osclass-git/oc-content/themes/modern/inc.search.php:56
+msgid "Search"
+msgstr "Cari"
+
+#: /var/www/osclass-git/oc-content/themes/modern/item-contact.php:34
+#: /var/www/osclass-git/oc-content/themes/modern/item.php:101
+msgid "Contact seller"
+msgstr "Kontak penjual"
+
+#: /var/www/osclass-git/oc-content/themes/modern/item.php:193
+msgid "You must log in or register a new account in order to contact the advertiser"
+msgstr "Kamu harus masuk atau daftarkan akun baru untuk bisa menghubungi pemasang iklan"
+
+#: /var/www/osclass-git/oc-content/themes/modern/item-contact.php:42
+msgid "To (seller)"
+msgstr "Kepada (penjual)"
+
+#: /var/www/osclass-git/oc-content/themes/modern/item-contact.php:43
+#: /var/www/osclass-git/oc-content/themes/modern/item-send-friend.php:41
+msgid "Listing"
+msgstr "Iklan"
+
+#: /var/www/osclass-git/oc-content/themes/modern/item-contact.php:51
+#: /var/www/osclass-git/oc-content/themes/modern/item.php:218
+msgid "Phone number"
+msgstr "Nomer telepon"
+
+#: /var/www/osclass-git/oc-content/themes/modern/item-contact.php:54
+msgid "Send message"
+msgstr "Kirim pesan"
+
+#: /var/www/osclass-git/oc-content/themes/modern/item-edit.php:95
+msgid "Update your listing"
+msgstr "Perbaharui iklan anda"
+
+#: /var/www/osclass-git/oc-content/themes/modern/item-edit.php:104
+#: /var/www/osclass-git/oc-content/themes/modern/item-post.php:102
+msgid "General Information"
+msgstr "Informasi Umum"
+
+#: /var/www/osclass-git/oc-content/themes/modern/item-edit.php:106
+#: /var/www/osclass-git/oc-content/themes/modern/item-post.php:104
+msgid "Category"
+msgstr "Kategori"
+
+#: /var/www/osclass-git/oc-content/themes/modern/item-edit.php:114
+#: /var/www/osclass-git/oc-content/themes/modern/item-post.php:113
+msgid "Price"
+msgstr "Harga"
+
+#: /var/www/osclass-git/oc-content/themes/modern/item-edit.php:122
+#: /var/www/osclass-git/oc-content/themes/modern/item-post.php:120
+msgid "Photos"
+msgstr "Foto"
+
+#: /var/www/osclass-git/oc-content/themes/modern/item-edit.php:131
+#: /var/www/osclass-git/oc-content/themes/modern/item-post.php:126
+msgid "Add new photo"
+msgstr "Tambah foto baru"
+
+#: /var/www/osclass-git/oc-content/themes/modern/item-edit.php:136
+#: /var/www/osclass-git/oc-content/themes/modern/main.php:120
+msgid "Location"
+msgstr "Lokasi"
+
+#: /var/www/osclass-git/oc-content/themes/modern/item-edit.php:138
+#: /var/www/osclass-git/oc-content/themes/modern/item-post.php:133
+#: /var/www/osclass-git/oc-content/themes/modern/item.php:74
+msgid "Country"
+msgstr "Negara"
+
+#: /var/www/osclass-git/oc-content/themes/modern/item-edit.php:142
+#: /var/www/osclass-git/oc-content/themes/modern/item-post.php:137
+#: /var/www/osclass-git/oc-content/themes/modern/item.php:75
+msgid "Region"
+msgstr "Daerah"
+
+#: /var/www/osclass-git/oc-content/themes/modern/item-edit.php:146
+#: /var/www/osclass-git/oc-content/themes/modern/item-post.php:141
+#: /var/www/osclass-git/oc-content/themes/modern/item.php:76
+msgid "City"
+msgstr "Kota"
+
+#: /var/www/osclass-git/oc-content/themes/modern/item-edit.php:150
+#: /var/www/osclass-git/oc-content/themes/modern/item.php:77
+msgid "City area"
+msgstr "Area Kota"
+
+#: /var/www/osclass-git/oc-content/themes/modern/item-edit.php:154
+#: /var/www/osclass-git/oc-content/themes/modern/item-post.php:149
+#: /var/www/osclass-git/oc-content/themes/modern/item.php:78
+msgid "Address"
+msgstr "Alamat"
+
+#: /var/www/osclass-git/oc-content/themes/modern/item-edit.php:166
+msgid "Update"
+msgstr "Memperbaharui"
+
+#: /var/www/osclass-git/oc-content/themes/modern/item-edit.php:167
+msgid "Cancel"
+msgstr "Batal"
+
+#: /var/www/osclass-git/oc-content/themes/modern/item-post.php:95
+msgid "Publish a listing"
+msgstr "Publikasikan iklan"
+
+#: /var/www/osclass-git/oc-content/themes/modern/item-post.php:131
+msgid "Listing Location"
+msgstr "Lokasi iklan"
+
+#: /var/www/osclass-git/oc-content/themes/modern/item-post.php:145
+msgid "City Area"
+msgstr "Area Kota"
+
+#: /var/www/osclass-git/oc-content/themes/modern/item-post.php:156
+msgid "Seller's information"
+msgstr "Informasi Penjual"
+
+#: /var/www/osclass-git/oc-content/themes/modern/item-post.php:158
+#: /var/www/osclass-git/oc-content/themes/modern/item.php:201
+#: /var/www/osclass-git/oc-content/themes/modern/item.php:203
+msgid "Name"
+msgstr "Nama"
+
+#: /var/www/osclass-git/oc-content/themes/modern/item-post.php:169
+msgid "Show e-mail on the listing page"
+msgstr "Tampilkan e-mal di halaman iklan"
+
+#: /var/www/osclass-git/oc-content/themes/modern/item-post.php:182
+msgid "Publish"
+msgstr "Publikasikan"
+
+#: /var/www/osclass-git/oc-content/themes/modern/item-send-friend.php:34
+msgid "Send to a friend"
+msgstr "Kirim ke teman"
+
+#: /var/www/osclass-git/oc-content/themes/modern/item-send-friend.php:49
+msgid "Your friend's name"
+msgstr "Nama teman anda"
+
+#: /var/www/osclass-git/oc-content/themes/modern/item-send-friend.php:50
+msgid "Your friend's e-mail address"
+msgstr "Alamat e-mail teman anda"
+
+#: /var/www/osclass-git/oc-content/themes/modern/item.php:56
+msgid "Mark as"
+msgstr "Tandai sebagai"
+
+#: /var/www/osclass-git/oc-content/themes/modern/item.php:58
+msgid "spam"
+msgstr "spam"
+
+#: /var/www/osclass-git/oc-content/themes/modern/item.php:59
+msgid "misclassified"
+msgstr "kesalahan klasifikasi"
+
+#: /var/www/osclass-git/oc-content/themes/modern/item.php:60
+msgid "duplicated"
+msgstr "digandakan"
+
+#: /var/www/osclass-git/oc-content/themes/modern/item.php:61
+msgid "expired"
+msgstr "kadaluwarsa"
+
+#: /var/www/osclass-git/oc-content/themes/modern/item.php:62
+msgid "offensive"
+msgstr "penyerangan"
+
+#: /var/www/osclass-git/oc-content/themes/modern/item.php:70
+msgid "Published date"
+msgstr "Tanggal diterbitkan"
+
+#: /var/www/osclass-git/oc-content/themes/modern/item.php:71
+msgid "Modified date"
+msgstr "Tanggal dimodifikasi"
+
+#: /var/www/osclass-git/oc-content/themes/modern/item.php:105
+msgid "Share"
+msgstr "Bagikan"
+
+#: /var/www/osclass-git/oc-content/themes/modern/item.php:111
+msgid "Useful information"
+msgstr "Informasi yang berguna"
+
+#: /var/www/osclass-git/oc-content/themes/modern/item.php:113
+msgid "Avoid scams by acting locally or paying with PayPal"
+msgstr "Hindari penipuan dengan bertransaksi langsung atau membayar dengan PayPal"
+
+#: /var/www/osclass-git/oc-content/themes/modern/item.php:114
+msgid "Never pay with Western Union, Moneygram or other anonymous payment services"
+msgstr "Jangan pernah membayar dengan Western Union, MoneyGram atau layanan pembayaran sejenis"
+
+#: /var/www/osclass-git/oc-content/themes/modern/item.php:115
+msgid "Don't buy or sell outside of your country. Don't accept cashier cheques from outside your country"
+msgstr "Jangan membeli atau menjual di luar negara Anda. Jangan menerima cek kasir dari luar negara Anda"
+
+#: /var/www/osclass-git/oc-content/themes/modern/item.php:116
+msgid "This site is never involved in any transaction, and does not handle payments, shipping, guarantee transactions, provide escrow services, or offer \"buyer protection\" or \"seller certification\""
+msgstr "Situs ini tidak pernah terlibat dalam transaksi apapun, dan tidak menangani pembayaran, pengiriman, jaminan transaksi, memberikan layanan wasiat dari pihak ketiga, atau menawarkan \"perlindungan pembeli\" atau \"sertifikasi penjual\""
+
+#: /var/www/osclass-git/oc-content/themes/modern/item.php:122
+msgid "Comments"
+msgstr "Komentar"
+
+#: /var/www/osclass-git/oc-content/themes/modern/item.php:129
+msgid "by"
+msgstr "oleh"
+
+#: /var/www/osclass-git/oc-content/themes/modern/item.php:133
+msgid "Delete your comment"
+msgstr "Hapus komentar anda"
+
+#: /var/www/osclass-git/oc-content/themes/modern/item.php:133
+msgid "Delete"
+msgstr "Hapus"
+
+#: /var/www/osclass-git/oc-content/themes/modern/item.php:145
+msgid "Leave your comment (spam and offensive messages will be removed)"
+msgstr "Tinggalkan komentar Anda (spam dan pesan ofensif akan dihapus)"
+
+#: /var/www/osclass-git/oc-content/themes/modern/item.php:154
+msgid "Your e-mail"
+msgstr "E-mail anda"
+
+#: /var/www/osclass-git/oc-content/themes/modern/item.php:156
+msgid "Title"
+msgstr "Judul"
+
+#: /var/www/osclass-git/oc-content/themes/modern/item.php:157
+msgid "Comment"
+msgstr "Komentar"
+
+#: /var/www/osclass-git/oc-content/themes/modern/item.php:170
+msgid "Image"
+msgstr "Gambar"
+
+#: /var/www/osclass-git/oc-content/themes/modern/item.php:182
+msgid "Contact publisher"
+msgstr "Hubungi penerbit"
+
+#: /var/www/osclass-git/oc-content/themes/modern/item.php:209
+msgid "Tel"
+msgstr "Telepon"
+
+#: /var/www/osclass-git/oc-content/themes/modern/item.php:233
+msgid "Enter the words above"
+msgstr "Masukkan kata-kata di atas"
+
+#: /var/www/osclass-git/oc-content/themes/modern/item.php:235
+msgid "Help"
+msgstr "Bantuan"
+
+#: /var/www/osclass-git/oc-content/themes/modern/main.php:79
+msgid "Latest Listings"
+msgstr "Iklan terakhir"
+
+#: /var/www/osclass-git/oc-content/themes/modern/main.php:81
+msgid "No Latest Listings"
+msgstr "Tidak ada iklan terakhir"
+
+#: /var/www/osclass-git/oc-content/themes/modern/main.php:111
+msgid "See all offers"
+msgstr "Lihat semua penawaran"
+
+#: /var/www/osclass-git/oc-content/themes/modern/search.php:195
+msgid "Sort by"
+msgstr "Urutkan berdasarkan"
+
+#: /var/www/osclass-git/oc-content/themes/modern/search.php:214
+msgid "There are no results matching \"%s\""
+msgstr "Tidak ada hasil yang cocok \"%s\""
+
+#: /var/www/osclass-git/oc-content/themes/modern/search.php:242
+msgid "Your search"
+msgstr "Pencarian anda"
+
+#: /var/www/osclass-git/oc-content/themes/modern/search.php:256
+msgid "Show only"
+msgstr "Hanya menampilkan"
+
+#: /var/www/osclass-git/oc-content/themes/modern/search.php:261
+msgid "Show only listings with pictures"
+msgstr "Hanya tampilkan iklan yang disertai gambar"
+
+#: /var/www/osclass-git/oc-content/themes/modern/search.php:269
+msgid "Min"
+msgstr "Min"
+
+#: /var/www/osclass-git/oc-content/themes/modern/search.php:271
+msgid "Max"
+msgstr "Maks"
+
+#: /var/www/osclass-git/oc-content/themes/modern/search.php:308
+msgid "Apply"
+msgstr "Terapkan"
+
+#: /var/www/osclass-git/oc-content/themes/modern/search.php:325
+msgid "Selected"
+msgstr "Dipilih"
+
+#: /var/www/osclass-git/oc-content/themes/modern/search.php:326
+msgid "Nothing selected, input was"
+msgstr "Tidak ada yang dipilih, masukannya adalah"
+
+#: /var/www/osclass-git/oc-content/themes/modern/search_gallery.php:41
+#: /var/www/osclass-git/oc-content/themes/modern/search_list.php:41
+msgid "Sponsored ad"
+msgstr "Iklan Seponsor"
+
+#: /var/www/osclass-git/oc-content/themes/modern/user-alerts.php:32
+#: /var/www/osclass-git/oc-content/themes/modern/user-change_email.php:33
+#: /var/www/osclass-git/oc-content/themes/modern/user-change_password.php:33
+#: /var/www/osclass-git/oc-content/themes/modern/user-dashboard.php:33
+#: /var/www/osclass-git/oc-content/themes/modern/user-items.php:33
+#: /var/www/osclass-git/oc-content/themes/modern/user-profile.php:35
+msgid "User account manager"
+msgstr "Pengelola akun pengguna"
+
+#: /var/www/osclass-git/oc-content/themes/modern/user-alerts.php:37
+msgid "Your alerts"
+msgstr "Notifikasi siaga anda"
+
+#: /var/www/osclass-git/oc-content/themes/modern/user-alerts.php:39
+msgid "You do not have any alerts yet"
+msgstr "Anda belum memiliki notifkasi siaga"
+
+#: /var/www/osclass-git/oc-content/themes/modern/user-alerts.php:43
+msgid "Alert"
+msgstr "Notifikasi siaga"
+
+#: /var/www/osclass-git/oc-content/themes/modern/user-alerts.php:43
+msgid "This action can't be undone. Are you sure you want to continue?"
+msgstr "Tindakan ini tidak dapat dibatalkan. Apakah Anda yakin ingin melanjutkan?"
+
+#: /var/www/osclass-git/oc-content/themes/modern/user-alerts.php:43
+msgid "Delete this alert"
+msgstr "Hapus notifikasi siaga ini"
+
+#: /var/www/osclass-git/oc-content/themes/modern/user-alerts.php:49
+#: /var/www/osclass-git/oc-content/themes/modern/user-dashboard.php:49
+#: /var/www/osclass-git/oc-content/themes/modern/user-items.php:49
+msgid "Publication date"
+msgstr "Tanggal publikasi"
+
+#: /var/www/osclass-git/oc-content/themes/modern/user-alerts.php:57
+msgid "Listings"
+msgstr "Iklan"
+
+#: /var/www/osclass-git/oc-content/themes/modern/user-change_email.php:39
+msgid "Change your e-mail"
+msgstr "Ganti e-mail anda"
+
+#: /var/www/osclass-git/oc-content/themes/modern/user-change_email.php:45
+msgid "Current e-mail"
+msgstr "E-mail sekarang"
+
+#: /var/www/osclass-git/oc-content/themes/modern/user-change_email.php:49
+msgid "New e-mail"
+msgstr "E-mail baru"
+
+#: /var/www/osclass-git/oc-content/themes/modern/user-change_password.php:39
+msgid "Change your password"
+msgstr "Ganti password anda"
+
+#: /var/www/osclass-git/oc-content/themes/modern/user-change_password.php:45
+msgid "Current password"
+msgstr "Password sekarang"
+
+#: /var/www/osclass-git/oc-content/themes/modern/user-change_password.php:49
+msgid "New password"
+msgstr "Password baru"
+
+#: /var/www/osclass-git/oc-content/themes/modern/user-change_password.php:53
+msgid "Repeat new password"
+msgstr "Ketik ulang password baru"
+
+#: /var/www/osclass-git/oc-content/themes/modern/user-dashboard.php:39
+msgid "Listings from %s"
+msgstr "Iklan dari %s"
+
+#: /var/www/osclass-git/oc-content/themes/modern/user-dashboard.php:41
+msgid "No listings have been added yet"
+msgstr "Belum ada iklan yang ditambahkan"
+
+#: /var/www/osclass-git/oc-content/themes/modern/user-dashboard.php:52
+msgid "View listing"
+msgstr "Lihat iklan"
+
+#: /var/www/osclass-git/oc-content/themes/modern/user-dashboard.php:54
+#: /var/www/osclass-git/oc-content/themes/modern/user-items.php:53
+msgid "Edit"
+msgstr "Edit"
+
+#: /var/www/osclass-git/oc-content/themes/modern/user-dashboard.php:57
+#: /var/www/osclass-git/oc-content/themes/modern/user-items.php:58
+msgid "Activate"
+msgstr "Aktifkan"
+
+#: /var/www/osclass-git/oc-content/themes/modern/user-forgot_password.php:33
+#: /var/www/osclass-git/oc-content/themes/modern/user-recover.php:33
+msgid "Recover your password"
+msgstr "Pulihkan password anda"
+
+#: /var/www/osclass-git/oc-content/themes/modern/user-forgot_password.php:48
+msgid "Change password"
+msgstr "Ganti password"
+
+#: /var/www/osclass-git/oc-content/themes/modern/user-items.php:39
+msgid "Your listings"
+msgstr "Iklan anda"
+
+#: /var/www/osclass-git/oc-content/themes/modern/user-items.php:39
+msgid "Post a new listing"
+msgstr "Pasang Iklan Baru"
+
+#: /var/www/osclass-git/oc-content/themes/modern/user-items.php:41
+msgid "You don't have any listings yet"
+msgstr "Anda belum punya iklan"
+
+#: /var/www/osclass-git/oc-content/themes/modern/user-items.php:55
+msgid "This action can not be undone. Are you sure you want to continue?"
+msgstr "Tindakan ini tidak dapat dibatalkan. Anda yakin mau melanjutkan?"
+
+#: /var/www/osclass-git/oc-content/themes/modern/user-login.php:33
+msgid "Access to your account"
+msgstr "Akses ke akun anda"
+
+#: /var/www/osclass-git/oc-content/themes/modern/user-profile.php:41
+msgid "Update your profile"
+msgstr "Perbaharui profil anda"
+
+#: /var/www/osclass-git/oc-content/themes/modern/user-profile.php:55
+msgid "Modify e-mail"
+msgstr "Memodifikasi e-mail"
+
+#: /var/www/osclass-git/oc-content/themes/modern/user-profile.php:55
+msgid "Modify password"
+msgstr "Modifikasi password"
+
+#: /var/www/osclass-git/oc-content/themes/modern/user-profile.php:59
+msgid "User type"
+msgstr "Jenis Pengguna"
+
+#: /var/www/osclass-git/oc-content/themes/modern/user-profile.php:63
+msgid "Cell phone"
+msgstr "Telepon selular"
+
+#: /var/www/osclass-git/oc-content/themes/modern/user-profile.php:67
+msgid "Phone"
+msgstr "Telpon"
+
+#: /var/www/osclass-git/oc-content/themes/modern/user-profile.php:91
+#: /var/www/osclass-git/oc-content/themes/modern/user-public-profile.php:69
+msgid "Website"
+msgstr "Website"
+
+#: /var/www/osclass-git/oc-content/themes/modern/user-public-profile.php:58
+msgid "%s's profile"
+msgstr "%s's profil"
+
+#: /var/www/osclass-git/oc-content/themes/modern/user-public-profile.php:64
+msgid "Profile"
+msgstr "Profil"
+
+#: /var/www/osclass-git/oc-content/themes/modern/user-public-profile.php:66
+msgid "Full name"
+msgstr "Nama Lengkap"
+
+#: /var/www/osclass-git/oc-content/themes/modern/user-public-profile.php:70
+msgid "User Description"
+msgstr "Deskripsi pengguna"
+
+#: /var/www/osclass-git/oc-content/themes/modern/user-public-profile.php:74
+msgid "Latest listings"
+msgstr "Iklan Terakhir"
+
+#: /var/www/osclass-git/oc-content/themes/modern/user-recover.php:40
+msgid "Send me a new password"
+msgstr "Kirimkan saya password yang baru"
+
+#: /var/www/osclass-git/oc-content/themes/modern/user-register.php:35
+msgid "Register an account for free"
+msgstr "Daftar akun gratis"
+
+#: /var/www/osclass-git/oc-content/themes/modern/user-register.php:44
+msgid "Re-type password"
+msgstr "Ketik ulang password"
+
+#: /var/www/osclass-git/oc-content/themes/modern/user-register.php:46
+msgid "Passwords don't match"
+msgstr "Password tidak cocok"
+
+#: /var/www/osclass-git/oc-content/themes/modern/user-register.php:51
+msgid "Create"
+msgstr "Buat"
+
+#: /var/www/osclass-git/oc-content/themes/modern/admin/header.php:8
+msgid "Preview"
+msgstr "Tampilan sementara"
+
+#: /var/www/osclass-git/oc-content/themes/modern/admin/header.php:15
+msgid "Remove logo"
+msgstr "Hapus logo"
+
+#: /var/www/osclass-git/oc-content/themes/modern/admin/header.php:26
+msgid "Upload logo"
+msgstr "Unggah Logo"
+
+#: /var/www/osclass-git/oc-content/themes/modern/admin/header.php:28
+msgid "The preferred size of the logo is 600x100."
+msgstr "Ukuran logo yang lebih baik adalah 600x100."
+
+#: /var/www/osclass-git/oc-content/themes/modern/admin/header.php:30
+msgid "<strong>Note:</strong> Uploading another logo will overwrite the current logo."
+msgstr "<strong>Catatan:</strong> Pengunggahan logo yang lain akan menindih logo yang sekarang."
+
+#: /var/www/osclass-git/oc-content/themes/modern/admin/header.php:38
+msgid "Logo image (png,gif,jpg)"
+msgstr "Gambar Logo  (png,gif,jpg)"
+
+#: /var/www/osclass-git/oc-content/themes/modern/admin/header.php:44
+msgid "Upload"
+msgstr "Unggah"
+
+#: /var/www/osclass-git/oc-content/themes/modern/admin/header.php:53
+msgid "The images folder <strong>%s</strong> is not writable on your server"
+msgstr ""
+
+#: /var/www/osclass-git/oc-content/themes/modern/admin/header.php:60
+msgid "To make a directory writable under UNIX execute this command from the shell:"
+msgstr "Agar bisa direktori bisa ditulisi di sistem UNIX laksanakan perintah ini dari shell:"
+
+#: /var/www/osclass-git/oc-content/themes/modern/admin/settings.php:18
+msgid "Donate"
+msgstr "Donasi"
+
+#: /var/www/osclass-git/oc-content/themes/modern/admin/settings.php:28
+msgid "Search placeholder"
+msgstr "Tempat Pencarian"
+
+#: /var/www/osclass-git/oc-content/themes/modern/admin/settings.php:32
+msgid "Footer link"
+msgstr "Tautan Footer"
+
+#: /var/www/osclass-git/oc-content/themes/modern/admin/settings.php:45
+msgid "Save changes"
+msgstr "Simpan perubahan"
+
+#: /var/www/osclass-git/oc-content/themes/modern/admin/settings.php:17
+msgid "Custom"
+msgstr "Kustom"
+
+#: /var/www/osclass-git/oc-content/themes/modern/item.php:189
+msgid "It's your own listing, you can't contact the publisher."
+msgstr "Ini iklan anda sendiri, anda tidak dapat menghubungi penerbit atau tanyakan ke diri anda sendiri :)"
+
+#: /var/www/osclass-git/oc-content/themes/modern/item.php:185
+msgid "The listing is expired. You can't contact the publisher."
+msgstr "Iklan telah kedaluwarsa. Anda tidak dapat lagi menggubungi pernebitnya"
+
+#: /var/www/osclass-git/oc-content/themes/modern/admin/header.php:23
+msgid "No logo has been uploaded yet"
+msgstr "Belum ada logo yang diunggah."
+
+#: /var/www/osclass-git/oc-content/themes/modern/admin/header.php:54
+msgid "Osclass can't upload the logo image from the administration panel."
+msgstr "Osclass tidak bisa mengunggah gambar logo dari panel administrasi"
+
+#: /var/www/osclass-git/oc-content/themes/modern/admin/settings.php:34
+msgid "I want to help Osclass by linking to <a href=\"http://osclass.org/\" target=\"_blank\">osclass.org</a> from my site with the following text:"
+msgstr "Saya ingin membantu Osclass dengan memberi tautan ke <a href=\"http://osclass.org/\" target=\"_blank\">osclass.org</a> dari situs saya dengan teks berikut:"
+
+#: /var/www/osclass-git/oc-content/themes/modern/admin/header.php:55
+msgid "Please make the aforementioned image folder writable."
+msgstr "Silakan membuat folder gambar tersebut yang bisa diisi."
+
+#: /var/www/osclass-git/oc-content/themes/modern/admin/settings.php:12
+msgid "I would like to contribute to the development of Osclass with a donation of"
+msgstr "Saya ingin berkontribusi dalam pengembangan Osclass dengan donasi pada"
+
+#: /var/www/osclass-git/oc-content/themes/modern/footer.php:35
+msgid "This website is proudly using the <a title=\"Osclass web\" href=\"http://osclass.org/\">classifieds scripts</a> software <strong>Osclass</strong>"
+msgstr "Website ini dengan bangga menggunakan <a title=\"Osclass web\" href=\"http://osclass.org/\">aplikasi  iklan baris</a> dari <strong>Osclass</strong>"
+
+#: /var/www/osclass-git/oc-content/themes/modern/admin/settings.php:39
+msgid "Default logo"
+msgstr "Logo standar"
+
+#: /var/www/osclass-git/oc-content/themes/modern/admin/settings.php:41
+msgid "Show default logo in case you didn't upload one previously"
+msgstr "Tampilkan logo standar, jika anda tidak menggungah sebelumnya."

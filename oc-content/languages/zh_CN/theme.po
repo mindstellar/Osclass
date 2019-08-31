@@ -1,0 +1,786 @@
+# Translation of Modern Theme in Chinese (China)
+# This file is distributed under the same license as the Modern Theme package.
+msgid ""
+msgstr ""
+"PO-Revision-Date: 2013-04-28 18:13:02+0000\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"X-Generator: GlotPress/0.1\n"
+"Project-Id-Version: Modern Theme\n"
+
+#: /var/www/osclass-git/oc-content/themes/modern/user-forgot_password.php:41
+msgid "New pasword"
+msgstr "新密码"
+
+#: /var/www/osclass-git/oc-content/themes/modern/user-forgot_password.php:45
+msgid "Repeat new pasword"
+msgstr "重复新密码"
+
+#: /var/www/osclass-git/oc-content/themes/modern/404.php:33
+msgid "Page not found"
+msgstr "您要找得页面没有找到"
+
+#: /var/www/osclass-git/oc-content/themes/modern/alert-form.php:6
+msgid "You have sucessfully subscribed to the alert"
+msgstr "您已经成功订阅了消息提醒"
+
+#: /var/www/osclass-git/oc-content/themes/modern/alert-form.php:7
+msgid "Invalid email address"
+msgstr "无效的邮箱地址"
+
+#: /var/www/osclass-git/oc-content/themes/modern/alert-form.php:8
+msgid "There was a problem with the alert"
+msgstr "通知中心有些问题"
+
+#: /var/www/osclass-git/oc-content/themes/modern/alert-form.php:39
+msgid "Subscribe to this search"
+msgstr "订阅搜索"
+
+#: /var/www/osclass-git/oc-content/themes/modern/alert-form.php:55
+msgid "Subscribe now"
+msgstr "现在订阅"
+
+#: /var/www/osclass-git/oc-content/themes/modern/contact.php:34
+msgid "Contact us"
+msgstr "联系我们"
+
+#: /var/www/osclass-git/oc-content/themes/modern/contact.php:40
+msgid "Subject"
+msgstr "主题"
+
+#: /var/www/osclass-git/oc-content/themes/modern/contact.php:40
+#: /var/www/osclass-git/oc-content/themes/modern/contact.php:42
+#: /var/www/osclass-git/oc-content/themes/modern/item-contact.php:51
+#: /var/www/osclass-git/oc-content/themes/modern/item.php:218
+msgid "optional"
+msgstr "可选"
+
+#: /var/www/osclass-git/oc-content/themes/modern/contact.php:41
+#: /var/www/osclass-git/oc-content/themes/modern/item-contact.php:52
+#: /var/www/osclass-git/oc-content/themes/modern/item-send-friend.php:51
+#: /var/www/osclass-git/oc-content/themes/modern/item.php:219
+msgid "Message"
+msgstr "消息"
+
+#: /var/www/osclass-git/oc-content/themes/modern/contact.php:42
+#: /var/www/osclass-git/oc-content/themes/modern/item-contact.php:48
+#: /var/www/osclass-git/oc-content/themes/modern/item-send-friend.php:46
+#: /var/www/osclass-git/oc-content/themes/modern/item.php:153
+#: /var/www/osclass-git/oc-content/themes/modern/item.php:216
+msgid "Your name"
+msgstr "您的名字"
+
+#: /var/www/osclass-git/oc-content/themes/modern/contact.php:43
+#: /var/www/osclass-git/oc-content/themes/modern/item-contact.php:49
+#: /var/www/osclass-git/oc-content/themes/modern/item-send-friend.php:47
+#: /var/www/osclass-git/oc-content/themes/modern/item.php:217
+msgid "Your e-mail address"
+msgstr "你的邮件"
+
+#: /var/www/osclass-git/oc-content/themes/modern/contact.php:45
+#: /var/www/osclass-git/oc-content/themes/modern/item-send-friend.php:54
+#: /var/www/osclass-git/oc-content/themes/modern/item.php:158
+#: /var/www/osclass-git/oc-content/themes/modern/item.php:239
+msgid "Send"
+msgstr "发送"
+
+#: /var/www/osclass-git/oc-content/themes/modern/footer.php:28
+msgid "Contact"
+msgstr "联系我们"
+
+#: /var/www/osclass-git/oc-content/themes/modern/footer.php:48
+msgid "Your search must be at least three characters long"
+msgstr "至少要三个字符长度"
+
+#: /var/www/osclass-git/oc-content/themes/modern/functions.php:53
+msgid "Theme settings updated correctly"
+msgstr "主题设置已更新"
+
+#: /var/www/osclass-git/oc-content/themes/modern/functions.php:60
+msgid "The logo image has been uploaded correctly"
+msgstr "企业标记图像已上传成功"
+
+#: /var/www/osclass-git/oc-content/themes/modern/functions.php:62
+#: /var/www/osclass-git/oc-content/themes/modern/functions.php:65
+msgid "An error has occurred, please try again"
+msgstr "发生错误，稍后再试"
+
+#: /var/www/osclass-git/oc-content/themes/modern/functions.php:72
+msgid "The logo image has been removed"
+msgstr "企业标记图标已移除"
+
+#: /var/www/osclass-git/oc-content/themes/modern/functions.php:74
+msgid "Image not found"
+msgstr "图像未找到"
+
+#: /var/www/osclass-git/oc-content/themes/modern/functions.php:81
+msgid "Header logo"
+msgstr "头标图像"
+
+#: /var/www/osclass-git/oc-content/themes/modern/functions.php:82
+msgid "Theme settings"
+msgstr "主题设置"
+
+#: /var/www/osclass-git/oc-content/themes/modern/functions.php:100
+msgid "ie. PHP Programmer"
+msgstr "例如：PHP程序员"
+
+#: /var/www/osclass-git/oc-content/themes/modern/head.php:44
+msgid "No file selected"
+msgstr "未选择文件"
+
+#: /var/www/osclass-git/oc-content/themes/modern/head.php:45
+msgid "Choose File"
+msgstr "选择文件"
+
+#: /var/www/osclass-git/oc-content/themes/modern/header.php:34
+msgid "Hi %s"
+msgstr "您好%s"
+
+#: /var/www/osclass-git/oc-content/themes/modern/header.php:35
+msgid "My account"
+msgstr "我的账户"
+
+#: /var/www/osclass-git/oc-content/themes/modern/header.php:36
+msgid "Logout"
+msgstr "退出"
+
+#: /var/www/osclass-git/oc-content/themes/modern/header.php:40
+#: /var/www/osclass-git/oc-content/themes/modern/item.php:196
+msgid "Login"
+msgstr "登陆"
+
+#: /var/www/osclass-git/oc-content/themes/modern/header.php:43
+#: /var/www/osclass-git/oc-content/themes/modern/item.php:197
+msgid "Register for a free account"
+msgstr "注册一个免费的账户"
+
+#: /var/www/osclass-git/oc-content/themes/modern/header.php:49
+#: /var/www/osclass-git/oc-content/themes/modern/item-post.php:162
+#: /var/www/osclass-git/oc-content/themes/modern/item.php:206
+msgid "E-mail"
+msgstr "邮箱"
+
+#: /var/www/osclass-git/oc-content/themes/modern/header.php:51
+msgid "Password"
+msgstr "密码"
+
+#: /var/www/osclass-git/oc-content/themes/modern/header.php:53
+msgid "Remember me"
+msgstr "记住我"
+
+#: /var/www/osclass-git/oc-content/themes/modern/header.php:54
+msgid "Log in"
+msgstr "登陆"
+
+#: /var/www/osclass-git/oc-content/themes/modern/header.php:56
+msgid "Forgot password?"
+msgstr "忘记密码"
+
+#: /var/www/osclass-git/oc-content/themes/modern/header.php:66
+msgid "Language"
+msgstr "语言"
+
+#: /var/www/osclass-git/oc-content/themes/modern/header.php:79
+msgid "Publish your ad for free"
+msgstr "免费发布您的广告"
+
+#: /var/www/osclass-git/oc-content/themes/modern/inc.search.php:54
+#: /var/www/osclass-git/oc-content/themes/modern/item-edit.php:107
+#: /var/www/osclass-git/oc-content/themes/modern/item-post.php:105
+msgid "Select a category"
+msgstr "选择分类"
+
+#: /var/www/osclass-git/oc-content/themes/modern/inc.search.php:56
+msgid "Search"
+msgstr "搜索"
+
+#: /var/www/osclass-git/oc-content/themes/modern/item-contact.php:34
+#: /var/www/osclass-git/oc-content/themes/modern/item.php:101
+msgid "Contact seller"
+msgstr "联系卖家"
+
+#: /var/www/osclass-git/oc-content/themes/modern/item.php:193
+msgid "You must log in or register a new account in order to contact the advertiser"
+msgstr "你必须注册一个新账户才能联系广告人"
+
+#: /var/www/osclass-git/oc-content/themes/modern/item-contact.php:42
+msgid "To (seller)"
+msgstr "给(卖家)"
+
+#: /var/www/osclass-git/oc-content/themes/modern/item-contact.php:43
+#: /var/www/osclass-git/oc-content/themes/modern/item-send-friend.php:41
+msgid "Listing"
+msgstr "广告"
+
+#: /var/www/osclass-git/oc-content/themes/modern/item-contact.php:51
+#: /var/www/osclass-git/oc-content/themes/modern/item.php:218
+msgid "Phone number"
+msgstr "手机号码"
+
+#: /var/www/osclass-git/oc-content/themes/modern/item-contact.php:54
+msgid "Send message"
+msgstr "发送信息"
+
+#: /var/www/osclass-git/oc-content/themes/modern/item-edit.php:95
+msgid "Update your listing"
+msgstr "更新广告"
+
+#: /var/www/osclass-git/oc-content/themes/modern/item-edit.php:104
+#: /var/www/osclass-git/oc-content/themes/modern/item-post.php:102
+msgid "General Information"
+msgstr "常规信息"
+
+#: /var/www/osclass-git/oc-content/themes/modern/item-edit.php:106
+#: /var/www/osclass-git/oc-content/themes/modern/item-post.php:104
+msgid "Category"
+msgstr "分类"
+
+#: /var/www/osclass-git/oc-content/themes/modern/item-edit.php:114
+#: /var/www/osclass-git/oc-content/themes/modern/item-post.php:113
+msgid "Price"
+msgstr "价格"
+
+#: /var/www/osclass-git/oc-content/themes/modern/item-edit.php:122
+#: /var/www/osclass-git/oc-content/themes/modern/item-post.php:120
+msgid "Photos"
+msgstr "图片"
+
+#: /var/www/osclass-git/oc-content/themes/modern/item-edit.php:131
+#: /var/www/osclass-git/oc-content/themes/modern/item-post.php:126
+msgid "Add new photo"
+msgstr "添加图片"
+
+#: /var/www/osclass-git/oc-content/themes/modern/item-edit.php:136
+#: /var/www/osclass-git/oc-content/themes/modern/main.php:120
+msgid "Location"
+msgstr "定位"
+
+#: /var/www/osclass-git/oc-content/themes/modern/item-edit.php:138
+#: /var/www/osclass-git/oc-content/themes/modern/item-post.php:133
+#: /var/www/osclass-git/oc-content/themes/modern/item.php:74
+msgid "Country"
+msgstr "国家"
+
+#: /var/www/osclass-git/oc-content/themes/modern/item-edit.php:142
+#: /var/www/osclass-git/oc-content/themes/modern/item-post.php:137
+#: /var/www/osclass-git/oc-content/themes/modern/item.php:75
+msgid "Region"
+msgstr "地区"
+
+#: /var/www/osclass-git/oc-content/themes/modern/item-edit.php:146
+#: /var/www/osclass-git/oc-content/themes/modern/item-post.php:141
+#: /var/www/osclass-git/oc-content/themes/modern/item.php:76
+msgid "City"
+msgstr "城市"
+
+#: /var/www/osclass-git/oc-content/themes/modern/item-edit.php:150
+#: /var/www/osclass-git/oc-content/themes/modern/item.php:77
+msgid "City area"
+msgstr "城市地区"
+
+#: /var/www/osclass-git/oc-content/themes/modern/item-edit.php:154
+#: /var/www/osclass-git/oc-content/themes/modern/item-post.php:149
+#: /var/www/osclass-git/oc-content/themes/modern/item.php:78
+msgid "Address"
+msgstr "地质"
+
+#: /var/www/osclass-git/oc-content/themes/modern/item-edit.php:166
+msgid "Update"
+msgstr "更新"
+
+#: /var/www/osclass-git/oc-content/themes/modern/item-edit.php:167
+msgid "Cancel"
+msgstr "取消"
+
+#: /var/www/osclass-git/oc-content/themes/modern/item-post.php:95
+msgid "Publish a listing"
+msgstr "发布广告"
+
+#: /var/www/osclass-git/oc-content/themes/modern/item-post.php:131
+msgid "Listing Location"
+msgstr "广告位置"
+
+#: /var/www/osclass-git/oc-content/themes/modern/item-post.php:145
+msgid "City Area"
+msgstr "城市地区"
+
+#: /var/www/osclass-git/oc-content/themes/modern/item-post.php:156
+msgid "Seller's information"
+msgstr "卖家信息"
+
+#: /var/www/osclass-git/oc-content/themes/modern/item-post.php:158
+#: /var/www/osclass-git/oc-content/themes/modern/item.php:201
+#: /var/www/osclass-git/oc-content/themes/modern/item.php:203
+msgid "Name"
+msgstr "名称"
+
+#: /var/www/osclass-git/oc-content/themes/modern/item-post.php:169
+msgid "Show e-mail on the listing page"
+msgstr "在广告页上显示邮箱"
+
+#: /var/www/osclass-git/oc-content/themes/modern/item-post.php:182
+msgid "Publish"
+msgstr "发布"
+
+#: /var/www/osclass-git/oc-content/themes/modern/item-send-friend.php:34
+msgid "Send to a friend"
+msgstr "发送给好友"
+
+#: /var/www/osclass-git/oc-content/themes/modern/item-send-friend.php:49
+msgid "Your friend's name"
+msgstr "您朋友的名字"
+
+#: /var/www/osclass-git/oc-content/themes/modern/item-send-friend.php:50
+msgid "Your friend's e-mail address"
+msgstr "您朋友的邮箱"
+
+#: /var/www/osclass-git/oc-content/themes/modern/item.php:56
+msgid "Mark as"
+msgstr "标注为"
+
+#: /var/www/osclass-git/oc-content/themes/modern/item.php:58
+msgid "spam"
+msgstr "垃圾信息"
+
+#: /var/www/osclass-git/oc-content/themes/modern/item.php:59
+msgid "misclassified"
+msgstr "错误的"
+
+#: /var/www/osclass-git/oc-content/themes/modern/item.php:60
+msgid "duplicated"
+msgstr "重复的"
+
+#: /var/www/osclass-git/oc-content/themes/modern/item.php:61
+msgid "expired"
+msgstr "过期的"
+
+#: /var/www/osclass-git/oc-content/themes/modern/item.php:62
+msgid "offensive"
+msgstr "攻击性的"
+
+#: /var/www/osclass-git/oc-content/themes/modern/item.php:70
+msgid "Published date"
+msgstr "发布日期"
+
+#: /var/www/osclass-git/oc-content/themes/modern/item.php:71
+msgid "Modified date"
+msgstr "修改日期"
+
+#: /var/www/osclass-git/oc-content/themes/modern/item.php:105
+msgid "Share"
+msgstr "分享"
+
+#: /var/www/osclass-git/oc-content/themes/modern/item.php:111
+msgid "Useful information"
+msgstr "有用的信息"
+
+#: /var/www/osclass-git/oc-content/themes/modern/item.php:113
+msgid "Avoid scams by acting locally or paying with PayPal"
+msgstr "为避免欺诈，尽量本地交易，使用Paypal或者支付宝担保"
+
+#: /var/www/osclass-git/oc-content/themes/modern/item.php:114
+msgid "Never pay with Western Union, Moneygram or other anonymous payment services"
+msgstr "请不要使用西联支付或其他不知名的支付服务"
+
+#: /var/www/osclass-git/oc-content/themes/modern/item.php:115
+msgid "Don't buy or sell outside of your country. Don't accept cashier cheques from outside your country"
+msgstr "请勿越国交易"
+
+#: /var/www/osclass-git/oc-content/themes/modern/item.php:116
+msgid "This site is never involved in any transaction, and does not handle payments, shipping, guarantee transactions, provide escrow services, or offer \"buyer protection\" or \"seller certification\""
+msgstr "本网站不涉及交易，不处理支付，运输，担保交易，提供担保支付，买家保护，卖房证明等。"
+
+#: /var/www/osclass-git/oc-content/themes/modern/item.php:122
+msgid "Comments"
+msgstr "留言"
+
+#: /var/www/osclass-git/oc-content/themes/modern/item.php:129
+msgid "by"
+msgstr "被"
+
+#: /var/www/osclass-git/oc-content/themes/modern/item.php:133
+msgid "Delete your comment"
+msgstr "删除您的留言"
+
+#: /var/www/osclass-git/oc-content/themes/modern/item.php:133
+msgid "Delete"
+msgstr "删除"
+
+#: /var/www/osclass-git/oc-content/themes/modern/item.php:145
+msgid "Leave your comment (spam and offensive messages will be removed)"
+msgstr "留言（垃圾信息跟过期的信息将会被删除）"
+
+#: /var/www/osclass-git/oc-content/themes/modern/item.php:154
+msgid "Your e-mail"
+msgstr "您的邮件"
+
+#: /var/www/osclass-git/oc-content/themes/modern/item.php:156
+msgid "Title"
+msgstr "标题"
+
+#: /var/www/osclass-git/oc-content/themes/modern/item.php:157
+msgid "Comment"
+msgstr "留言"
+
+#: /var/www/osclass-git/oc-content/themes/modern/item.php:170
+msgid "Image"
+msgstr "图片"
+
+#: /var/www/osclass-git/oc-content/themes/modern/item.php:182
+msgid "Contact publisher"
+msgstr "联系发布人"
+
+#: /var/www/osclass-git/oc-content/themes/modern/item.php:209
+msgid "Tel"
+msgstr "电话"
+
+#: /var/www/osclass-git/oc-content/themes/modern/item.php:233
+msgid "Enter the words above"
+msgstr "填入以上单词"
+
+#: /var/www/osclass-git/oc-content/themes/modern/item.php:235
+msgid "Help"
+msgstr "帮助"
+
+#: /var/www/osclass-git/oc-content/themes/modern/main.php:79
+msgid "Latest Listings"
+msgstr "最新广告"
+
+#: /var/www/osclass-git/oc-content/themes/modern/main.php:81
+msgid "No Latest Listings"
+msgstr "无最新广告"
+
+#: /var/www/osclass-git/oc-content/themes/modern/main.php:111
+msgid "See all offers"
+msgstr "查看所有的信息"
+
+#: /var/www/osclass-git/oc-content/themes/modern/search.php:195
+msgid "Sort by"
+msgstr "排序"
+
+#: /var/www/osclass-git/oc-content/themes/modern/search.php:214
+msgid "There are no results matching \"%s\""
+msgstr "没有跟\\\"%s\\\"匹配的结果"
+
+#: /var/www/osclass-git/oc-content/themes/modern/search.php:242
+msgid "Your search"
+msgstr "您的搜索"
+
+#: /var/www/osclass-git/oc-content/themes/modern/search.php:256
+msgid "Show only"
+msgstr "只显示"
+
+#: /var/www/osclass-git/oc-content/themes/modern/search.php:261
+msgid "Show only listings with pictures"
+msgstr "只显示有图像的广告"
+
+#: /var/www/osclass-git/oc-content/themes/modern/search.php:269
+msgid "Min"
+msgstr "最小值"
+
+#: /var/www/osclass-git/oc-content/themes/modern/search.php:271
+msgid "Max"
+msgstr "最大值"
+
+#: /var/www/osclass-git/oc-content/themes/modern/search.php:308
+msgid "Apply"
+msgstr "保存"
+
+#: /var/www/osclass-git/oc-content/themes/modern/search.php:325
+msgid "Selected"
+msgstr "选择"
+
+#: /var/www/osclass-git/oc-content/themes/modern/search.php:326
+msgid "Nothing selected, input was"
+msgstr "您没有选择任何信息"
+
+#: /var/www/osclass-git/oc-content/themes/modern/search_gallery.php:41
+#: /var/www/osclass-git/oc-content/themes/modern/search_list.php:41
+msgid "Sponsored ad"
+msgstr "制造商广告"
+
+#: /var/www/osclass-git/oc-content/themes/modern/user-alerts.php:32
+#: /var/www/osclass-git/oc-content/themes/modern/user-change_email.php:33
+#: /var/www/osclass-git/oc-content/themes/modern/user-change_password.php:33
+#: /var/www/osclass-git/oc-content/themes/modern/user-dashboard.php:33
+#: /var/www/osclass-git/oc-content/themes/modern/user-items.php:33
+#: /var/www/osclass-git/oc-content/themes/modern/user-profile.php:35
+msgid "User account manager"
+msgstr "用户账户管理"
+
+#: /var/www/osclass-git/oc-content/themes/modern/user-alerts.php:37
+msgid "Your alerts"
+msgstr "通知中心"
+
+#: /var/www/osclass-git/oc-content/themes/modern/user-alerts.php:39
+msgid "You do not have any alerts yet"
+msgstr "您没有任何通知"
+
+#: /var/www/osclass-git/oc-content/themes/modern/user-alerts.php:43
+msgid "Alert"
+msgstr "通知"
+
+#: /var/www/osclass-git/oc-content/themes/modern/user-alerts.php:43
+msgid "This action can't be undone. Are you sure you want to continue?"
+msgstr "刚才的动作没有完成.您确定要继续吗？"
+
+#: /var/www/osclass-git/oc-content/themes/modern/user-alerts.php:43
+msgid "Delete this alert"
+msgstr "删除此通知"
+
+#: /var/www/osclass-git/oc-content/themes/modern/user-alerts.php:49
+#: /var/www/osclass-git/oc-content/themes/modern/user-dashboard.php:49
+#: /var/www/osclass-git/oc-content/themes/modern/user-items.php:49
+msgid "Publication date"
+msgstr "发布日期"
+
+#: /var/www/osclass-git/oc-content/themes/modern/user-alerts.php:57
+msgid "Listings"
+msgstr "广告"
+
+#: /var/www/osclass-git/oc-content/themes/modern/user-change_email.php:39
+msgid "Change your e-mail"
+msgstr "修改您的邮箱"
+
+#: /var/www/osclass-git/oc-content/themes/modern/user-change_email.php:45
+msgid "Current e-mail"
+msgstr "当前邮箱"
+
+#: /var/www/osclass-git/oc-content/themes/modern/user-change_email.php:49
+msgid "New e-mail"
+msgstr "新邮箱"
+
+#: /var/www/osclass-git/oc-content/themes/modern/user-change_password.php:39
+msgid "Change your password"
+msgstr "修改密码"
+
+#: /var/www/osclass-git/oc-content/themes/modern/user-change_password.php:45
+msgid "Current password"
+msgstr "当前密码"
+
+#: /var/www/osclass-git/oc-content/themes/modern/user-change_password.php:49
+msgid "New password"
+msgstr "新密码"
+
+#: /var/www/osclass-git/oc-content/themes/modern/user-change_password.php:53
+msgid "Repeat new password"
+msgstr "重新新密码"
+
+#: /var/www/osclass-git/oc-content/themes/modern/user-dashboard.php:39
+msgid "Listings from %s"
+msgstr "广告从 %s"
+
+#: /var/www/osclass-git/oc-content/themes/modern/user-dashboard.php:41
+msgid "No listings have been added yet"
+msgstr "尚没有添加任何广告"
+
+#: /var/www/osclass-git/oc-content/themes/modern/user-dashboard.php:52
+msgid "View listing"
+msgstr "查看广告"
+
+#: /var/www/osclass-git/oc-content/themes/modern/user-dashboard.php:54
+#: /var/www/osclass-git/oc-content/themes/modern/user-items.php:53
+msgid "Edit"
+msgstr "修改"
+
+#: /var/www/osclass-git/oc-content/themes/modern/user-dashboard.php:57
+#: /var/www/osclass-git/oc-content/themes/modern/user-items.php:58
+msgid "Activate"
+msgstr "激活"
+
+#: /var/www/osclass-git/oc-content/themes/modern/user-forgot_password.php:33
+#: /var/www/osclass-git/oc-content/themes/modern/user-recover.php:33
+msgid "Recover your password"
+msgstr "找回密码"
+
+#: /var/www/osclass-git/oc-content/themes/modern/user-forgot_password.php:48
+msgid "Change password"
+msgstr "修改密码"
+
+#: /var/www/osclass-git/oc-content/themes/modern/user-items.php:39
+msgid "Your listings"
+msgstr "你的广告"
+
+#: /var/www/osclass-git/oc-content/themes/modern/user-items.php:39
+msgid "Post a new listing"
+msgstr "发布新广告"
+
+#: /var/www/osclass-git/oc-content/themes/modern/user-items.php:41
+msgid "You don't have any listings yet"
+msgstr "你目前尚没有广告发布"
+
+#: /var/www/osclass-git/oc-content/themes/modern/user-items.php:55
+msgid "This action can not be undone. Are you sure you want to continue?"
+msgstr "刚才的动作没有完成.您确定要继续吗？"
+
+#: /var/www/osclass-git/oc-content/themes/modern/user-login.php:33
+msgid "Access to your account"
+msgstr "收藏"
+
+#: /var/www/osclass-git/oc-content/themes/modern/user-profile.php:41
+msgid "Update your profile"
+msgstr "更新您的配置资料"
+
+#: /var/www/osclass-git/oc-content/themes/modern/user-profile.php:55
+msgid "Modify e-mail"
+msgstr "修改邮箱"
+
+#: /var/www/osclass-git/oc-content/themes/modern/user-profile.php:55
+msgid "Modify password"
+msgstr "修改密码"
+
+#: /var/www/osclass-git/oc-content/themes/modern/user-profile.php:59
+msgid "User type"
+msgstr "用户类型"
+
+#: /var/www/osclass-git/oc-content/themes/modern/user-profile.php:63
+msgid "Cell phone"
+msgstr "个人电话"
+
+#: /var/www/osclass-git/oc-content/themes/modern/user-profile.php:67
+msgid "Phone"
+msgstr "电话"
+
+#: /var/www/osclass-git/oc-content/themes/modern/user-profile.php:91
+#: /var/www/osclass-git/oc-content/themes/modern/user-public-profile.php:69
+msgid "Website"
+msgstr "网站"
+
+#: /var/www/osclass-git/oc-content/themes/modern/user-public-profile.php:58
+msgid "%s's profile"
+msgstr "%s 的个人简介"
+
+#: /var/www/osclass-git/oc-content/themes/modern/user-public-profile.php:64
+msgid "Profile"
+msgstr "简介"
+
+#: /var/www/osclass-git/oc-content/themes/modern/user-public-profile.php:66
+msgid "Full name"
+msgstr "全名"
+
+#: /var/www/osclass-git/oc-content/themes/modern/user-public-profile.php:70
+msgid "User Description"
+msgstr "用户描述"
+
+#: /var/www/osclass-git/oc-content/themes/modern/user-public-profile.php:74
+msgid "Latest listings"
+msgstr "最新广告"
+
+#: /var/www/osclass-git/oc-content/themes/modern/user-recover.php:40
+msgid "Send me a new password"
+msgstr "给我发送一个新密码"
+
+#: /var/www/osclass-git/oc-content/themes/modern/user-register.php:35
+msgid "Register an account for free"
+msgstr "免费注册"
+
+#: /var/www/osclass-git/oc-content/themes/modern/user-register.php:44
+msgid "Re-type password"
+msgstr "重复密码"
+
+#: /var/www/osclass-git/oc-content/themes/modern/user-register.php:46
+msgid "Passwords don't match"
+msgstr "密码不符"
+
+#: /var/www/osclass-git/oc-content/themes/modern/user-register.php:51
+msgid "Create"
+msgstr "创建"
+
+#: /var/www/osclass-git/oc-content/themes/modern/admin/header.php:8
+msgid "Preview"
+msgstr "预览"
+
+#: /var/www/osclass-git/oc-content/themes/modern/admin/header.php:15
+msgid "Remove logo"
+msgstr "删除Logo"
+
+#: /var/www/osclass-git/oc-content/themes/modern/admin/header.php:26
+msgid "Upload logo"
+msgstr "上传图标"
+
+#: /var/www/osclass-git/oc-content/themes/modern/admin/header.php:28
+msgid "The preferred size of the logo is 600x100."
+msgstr "图标的大小最好为 600x100."
+
+#: /var/www/osclass-git/oc-content/themes/modern/admin/header.php:30
+msgid "<strong>Note:</strong> Uploading another logo will overwrite the current logo."
+msgstr "<strong>注:</strong> 上传新图标会覆盖以前的."
+
+#: /var/www/osclass-git/oc-content/themes/modern/admin/header.php:38
+msgid "Logo image (png,gif,jpg)"
+msgstr "图标图文件 (png,gif,jpg)"
+
+#: /var/www/osclass-git/oc-content/themes/modern/admin/header.php:44
+msgid "Upload"
+msgstr "上传"
+
+#: /var/www/osclass-git/oc-content/themes/modern/admin/header.php:53
+msgid "The images folder <strong>%s</strong> is not writable on your server"
+msgstr "图像文件夹 <strong>%s</strong> 在服务器上不可写"
+
+#: /var/www/osclass-git/oc-content/themes/modern/admin/header.php:60
+msgid "To make a directory writable under UNIX execute this command from the shell:"
+msgstr "在UNIX下从shell中执行，目录需要可写"
+
+#: /var/www/osclass-git/oc-content/themes/modern/admin/settings.php:18
+msgid "Donate"
+msgstr "捐款"
+
+#: /var/www/osclass-git/oc-content/themes/modern/admin/settings.php:28
+msgid "Search placeholder"
+msgstr "搜索地点保持人"
+
+#: /var/www/osclass-git/oc-content/themes/modern/admin/settings.php:32
+msgid "Footer link"
+msgstr "底部链接"
+
+#: /var/www/osclass-git/oc-content/themes/modern/admin/settings.php:45
+msgid "Save changes"
+msgstr "保持改变"
+
+#: /var/www/osclass-git/oc-content/themes/modern/admin/settings.php:17
+msgid "Custom"
+msgstr "客户"
+
+#: /var/www/osclass-git/oc-content/themes/modern/item.php:189
+msgid "It's your own listing, you can't contact the publisher."
+msgstr "这是你自己的广告，你不能联系你自己嘛"
+
+#: /var/www/osclass-git/oc-content/themes/modern/item.php:185
+msgid "The listing is expired. You can't contact the publisher."
+msgstr "该广告已过期，请联系广告发布人"
+
+#: /var/www/osclass-git/oc-content/themes/modern/admin/header.php:23
+msgid "No logo has been uploaded yet"
+msgstr "目前尚没有图标上传"
+
+#: /var/www/osclass-git/oc-content/themes/modern/admin/header.php:54
+msgid "Osclass can't upload the logo image from the administration panel."
+msgstr "Osclass不能上传管理面板处上传图标图像"
+
+#: /var/www/osclass-git/oc-content/themes/modern/admin/settings.php:34
+msgid "I want to help Osclass by linking to <a href=\"http://osclass.org/\" target=\"_blank\">osclass.org</a> from my site with the following text:"
+msgstr "我想帮助Osclass，<a href=\"http://osclass.org/\" target=\"_blank\">osclass.org</a> 在我的网站上添加链接文字如下:"
+
+#: /var/www/osclass-git/oc-content/themes/modern/admin/header.php:55
+msgid "Please make the aforementioned image folder writable."
+msgstr "请将前面提到的图像文件夹设置为可写"
+
+#: /var/www/osclass-git/oc-content/themes/modern/admin/settings.php:12
+msgid "I would like to contribute to the development of Osclass with a donation of"
+msgstr "我想赞助一下Osclass程序"
+
+#: /var/www/osclass-git/oc-content/themes/modern/footer.php:35
+msgid "This website is proudly using the <a title=\"Osclass web\" href=\"http://osclass.org/\">classifieds scripts</a> software <strong>Osclass</strong>"
+msgstr "本网站骄傲地使用了<a title=\"Osclass web\" href=\"http://osclass.org/\">分类脚本</a> software <strong>Osclass</strong>"
+
+#: /var/www/osclass-git/oc-content/themes/modern/admin/settings.php:39
+msgid "Default logo"
+msgstr "默认图标"
+
+#: /var/www/osclass-git/oc-content/themes/modern/admin/settings.php:41
+msgid "Show default logo in case you didn't upload one previously"
+msgstr "如无上传文件，显示默认图标"
