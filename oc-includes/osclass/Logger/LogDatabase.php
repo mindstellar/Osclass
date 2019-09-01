@@ -122,21 +122,20 @@
             echo '</fieldset>' . PHP_EOL;
         }
 
-	    /**
-	     * @return bool
-	     */
-	    public function writeMessages()
-        {
-			$filename = CONTENT_PATH . 'queries.log';
+		/**
+		 * @return bool
+		*/
+    	public function writeMessages()
+		{
 
-			if(!file_exists($filename)) {
-			    file_put_contents($filename, '');
-			}
-			if(!is_writable($filename)) {
-			   return false;
-			}
+		    $filename = CONTENT_PATH . 'queries.log';
 
-			$fp = fopen( $filename , 'ab' );
+		    if ((!file_exists($filename) && !is_writable(CONTENT_PATH)) || (file_exists($filename) && !is_writable($filename))) {
+				error_log('Can not write queries.log file in "'.CONTENT_PATH.'", please check directory/file permissions.');
+				return false;
+		    }
+
+		    $fp = fopen( $filename , 'ab' );
 
             if( $fp == false ) {
                 return false;
@@ -171,18 +170,15 @@
 	    /**
 	     * @return bool
 	     */
-	    public function writeExplainMessages()
-        {
+	    public function writeExplainMessages() {
 			$filename = CONTENT_PATH . 'explain_queries.log';
 
-			if(!file_exists($filename)) {
-			    file_put_contents($filename, '');
-			}
-			if(!is_writable($filename)) {
-			   return false;
-			}
+			if ((!file_exists($filename) && !is_writable(CONTENT_PATH)) || (file_exists($filename) && !is_writable($filename))) {
+				error_log('Can not write explain_queries.log file in "'.CONTENT_PATH.'", please check directory/file permissions.');
+				return false;
+		    }
 
-			$fp = fopen( $filename , 'ab' );
+		    $fp = fopen( $filename , 'ab' );
 
             if( $fp == false ) {
                 return false;
