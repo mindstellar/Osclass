@@ -129,9 +129,10 @@
         {
             $filename = CONTENT_PATH . 'queries.log';
 
-            if (!file_exists($filename) || !is_writable($filename)) {
-                return false;
-            }
+            if ((!file_exists($filename) && !is_writable(CONTENT_PATH)) || (file_exists($filename) && !is_writable($filename))) {
+				        error_log('Can not write explain_queries.log file in "'.CONTENT_PATH.'", please check directory/file permissions.');
+				        return false;
+		        }
 
             $fp = fopen($filename, 'ab');
 
@@ -172,9 +173,10 @@
         {
             $filename = CONTENT_PATH . 'explain_queries.log';
 
-            if (!file_exists($filename) || !is_writable($filename)) {
-                return false;
-            }
+            if ((!file_exists($filename) && !is_writable(CONTENT_PATH)) || (file_exists($filename) && !is_writable($filename))) {
+				        error_log('Can not write explain_queries.log file in "'.CONTENT_PATH.'", please check directory/file permissions.');
+				        return false;
+		        }
 
             $fp = fopen($filename, 'ab');
 
