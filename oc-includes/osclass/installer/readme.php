@@ -1,5 +1,7 @@
 <?php
 
+    require_once '../../vendor/autoload.php';
+    
 	/**
 	 * @param $value
 	 * @param $xss_check
