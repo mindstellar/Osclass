@@ -5,37 +5,37 @@
  * @license   http://www.opensource.org/licenses/mit-license.html  MIT License
  */
 
+use phpseclib\Crypt\Base;
 use phpseclib\Crypt\RC2;
 
 class Unit_Crypt_RC2Test extends PhpseclibTestCase
 {
-    var $engines = [
-        'PHP',
-        'Eval',
-        'mcrypt',
-        'OpenSSL',
-    ];
+    var $engines = array(
+        Base::ENGINE_INTERNAL => 'internal',
+        Base::ENGINE_MCRYPT => 'mcrypt',
+        Base::ENGINE_OPENSSL => 'OpenSSL',
+    );
 
     public function engineVectors()
     {
         // tests from https://tools.ietf.org/html/rfc2268#page-8
-        $tests = [
+        $tests = array(
             // key, effective key length, plaintext, ciphertext
-            ['0000000000000000', 63, '0000000000000000', 'ebb773f993278eff'],
-            ['ffffffffffffffff', 64, 'ffffffffffffffff', '278b27e42e2f0d49'],
-            ['3000000000000000', 64, '1000000000000001', '30649edf9be7d2c2'],
-            ['88', 64, '0000000000000000', '61a8a244adacccf0'],
-            ['88bca90e90875a', 64, '0000000000000000', '6ccf4308974c267f'],
-            ['88bca90e90875a7f0f79c384627bafb2', 64, '0000000000000000', '1a807d272bbe5db1'],
-            ['88bca90e90875a7f0f79c384627bafb2', 128, '0000000000000000', '2269552ab0f85ca6'],
-            ['88bca90e90875a7f0f79c384627bafb216f80a6f85920584c42fceb0be255daf1e', 129, '0000000000000000', '5b78d3a43dfff1f1']
-        ];
+            array('0000000000000000', 63, '0000000000000000', 'ebb773f993278eff'),
+            array('ffffffffffffffff', 64, 'ffffffffffffffff', '278b27e42e2f0d49'),
+            array('3000000000000000', 64, '1000000000000001', '30649edf9be7d2c2'),
+            array('88', 64, '0000000000000000', '61a8a244adacccf0'),
+            array('88bca90e90875a', 64, '0000000000000000', '6ccf4308974c267f'),
+            array('88bca90e90875a7f0f79c384627bafb2', 64, '0000000000000000', '1a807d272bbe5db1'),
+            array('88bca90e90875a7f0f79c384627bafb2', 128, '0000000000000000', '2269552ab0f85ca6'),
+            array('88bca90e90875a7f0f79c384627bafb216f80a6f85920584c42fceb0be255daf1e', 129, '0000000000000000', '5b78d3a43dfff1f1')
+        );
 
-        $result = [];
+        $result = array();
 
-        foreach ($this->engines as $engine) {
+        foreach ($this->engines as $engine => $engineName) {
             foreach ($tests as $test) {
-                $result[] = [$engine, $test[0], $test[1], $test[2], $test[3]];
+                $result[] = array($engine, $engineName, $test[0], $test[1], $test[2], $test[3]);
             }
         }
 
@@ -45,7 +45,7 @@ class Unit_Crypt_RC2Test extends PhpseclibTestCase
     // this test is just confirming RC2's key expansion
     public function testEncryptPadding()
     {
-        $rc2 = new RC2('ecb');
+        $rc2 = new RC2(Base::MODE_ECB);
 
         // unlike Crypt_AES / Crypt_Rijndael, when you tell Crypt_RC2 that the key length is 128-bits the key isn't null padded to that length.
         // instead, RC2 key expansion is used to extend it out to that length. this isn't done for AES / Rijndael since that doesn't define any
@@ -82,22 +82,22 @@ class Unit_Crypt_RC2Test extends PhpseclibTestCase
 
         $rc2->setKey(str_repeat('d', 16), 128);
 
-        $rc2->setPreferredEngine('PHP');
+        $rc2->setPreferredEngine(Base::ENGINE_INTERNAL);
         $internal = $rc2->encrypt('d');
 
         $result = pack('H*', 'e3b36057f4821346');
         $this->assertEquals($result, $internal, 'Failed asserting that the internal engine produced the correct result');
 
-        $rc2->setPreferredEngine('mcrypt');
-        if ($rc2->getEngine() == 'mcrypt') {
+        $rc2->setPreferredEngine(Base::ENGINE_MCRYPT);
+        if ($rc2->getEngine() == Base::ENGINE_MCRYPT) {
             $mcrypt = $rc2->encrypt('d');
             $this->assertEquals($result, $mcrypt, 'Failed asserting that the mcrypt engine produced the correct result');
         } else {
             self::markTestSkipped('Unable to initialize mcrypt engine');
         }
 
-        $rc2->setPreferredEngine('OpenSSL');
-        if ($rc2->getEngine() == 'OpenSSL') {
+        $rc2->setPreferredEngine(Base::ENGINE_OPENSSL);
+        if ($rc2->getEngine() == Base::ENGINE_OPENSSL) {
             $openssl = $rc2->encrypt('d');
             $this->assertEquals($result, $openssl,  'Failed asserting that the OpenSSL engine produced the correct result');
         } else {
@@ -108,22 +108,21 @@ class Unit_Crypt_RC2Test extends PhpseclibTestCase
     /**
      * @dataProvider engineVectors
      */
-    public function testVectors($engine, $key, $keyLen, $plaintext, $ciphertext)
+    public function testVectors($engine, $engineName, $key, $keyLen, $plaintext, $ciphertext)
     {
-        $rc2 = new RC2('cbc');
+        $rc2 = new RC2();
         $rc2->disablePadding();
         $rc2->setKeyLength($keyLen);
         $rc2->setKey(pack('H*', $key)); // could also do $rc2->setKey(pack('H*', $key), $keyLen)
-        $rc2->setIV(str_repeat("\0", $rc2->getBlockLength() >> 3));
         if (!$rc2->isValidEngine($engine)) {
-            self::markTestSkipped("Unable to initialize $engine engine");
+            self::markTestSkipped('Unable to initialize ' . $engineName . ' engine');
         }
         $rc2->setPreferredEngine($engine);
 
         $result = bin2hex($rc2->encrypt(pack('H*', $plaintext)));
-        $this->assertEquals($result, $ciphertext, "Failed asserting that $plaintext yielded expected output in $engine engine");
+        $this->assertEquals($result, $ciphertext, "Failed asserting that $plaintext yielded expected output in $engineName engine");
 
         $result = bin2hex($rc2->decrypt(pack('H*', $ciphertext)));
-        $this->assertEquals($result, $plaintext, "Failed asserting that decrypted result yielded $plaintext as a result in $engine engine");
+        $this->assertEquals($result, $plaintext, "Failed asserting that decrypted result yielded $plaintext as a result in $engineName engine");
     }
 }

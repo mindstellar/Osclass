@@ -10,19 +10,19 @@ class Unit_Net_SSH2Test extends PhpseclibTestCase
 {
     public function formatLogDataProvider()
     {
-        return [
-            [
-                ['hello world'],
-                ['<--'],
+        return array(
+            array(
+                array('hello world'),
+                array('<--'),
                 "<--\r\n00000000  68:65:6c:6c:6f:20:77:6f:72:6c:64                 hello world\r\n\r\n"
-            ],
-            [
-                ['hello', 'world'],
-                ['<--', '<--'],
+            ),
+            array(
+                array('hello', 'world'),
+                array('<--', '<--'),
                 "<--\r\n00000000  68:65:6c:6c:6f                                   hello\r\n\r\n" .
                 "<--\r\n00000000  77:6f:72:6c:64                                   world\r\n\r\n"
-            ],
-        ];
+            ),
+        );
     }
 
     /**
@@ -32,13 +32,13 @@ class Unit_Net_SSH2Test extends PhpseclibTestCase
     {
         $ssh = $this->createSSHMock();
 
-        $result = self::callFunc($ssh, 'format_log', [$message_log, $message_number_log]);
+        $result = $ssh->_format_log($message_log, $message_number_log);
         $this->assertEquals($expected, $result);
     }
 
     public function testGenerateIdentifier()
     {
-        $identifier = self::callFunc($this->createSSHMock(), 'generate_identifier');
+        $identifier = $this->createSSHMock()->_generate_identifier();
         $this->assertStringStartsWith('SSH-2.0-phpseclib_2.0', $identifier);
 
         if (function_exists('\\Sodium\\library_version_major')) {
@@ -110,18 +110,6 @@ class Unit_Net_SSH2Test extends PhpseclibTestCase
         $this->assertFalse($ssh->isQuietModeEnabled());
     }
 
-    public function testGetConnectionByResourceId()
-    {
-        $ssh = new \phpseclib\Net\SSH2('localhost');
-        $this->assertSame($ssh, \phpseclib\Net\SSH2::getConnectionByResourceId($ssh->getResourceId()));
-    }
-
-    public function testGetResourceId()
-    {
-        $ssh = new \phpseclib\Net\SSH2('localhost');
-        $this->assertSame('{' . spl_object_hash($ssh) . '}', $ssh->getResourceId());
-    }
-
     /**
      * @return \phpseclib\Net\SSH2
      */
@@ -129,7 +117,7 @@ class Unit_Net_SSH2Test extends PhpseclibTestCase
     {
         return $this->getMockBuilder('phpseclib\Net\SSH2')
             ->disableOriginalConstructor()
-            ->setMethods(['__destruct'])
+            ->setMethods(array('__destruct'))
             ->getMock();
     }
 }

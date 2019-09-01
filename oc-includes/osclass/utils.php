@@ -188,10 +188,14 @@
 		return $dir;
 	}
 
-	/**
-	 * Serialize the data (usefull at plugins activation)
-	 * @return the data serialized
-	 */
+
+    /**
+     * Serialize the data (usefull at plugins activation)
+     *
+     * @param $data
+     *
+     * @return string the data serialized
+     */
 	function osc_serialize( $data ) {
 
 		if ( ! is_serialized( $data ) ) {
@@ -203,10 +207,14 @@
 		return $data;
 	}
 
-	/**
-	 * Unserialize the data (usefull at plugins activation)
-	 * @return the data unserialized
-	 */
+
+    /**
+     * Unserialize the data (usefull at plugins activation)
+     *
+     * @param $data
+     *
+     * @return mixed data unserialized
+     */
 	function osc_unserialize( $data ) {
 		if ( is_serialized( $data ) ) { // don't attempt to unserialize data that wasn't serialized going in
 			return @unserialize( $data );
@@ -251,43 +259,82 @@
 		return false;
 	}
 
-	/**
-	 * VERY BASIC
-	 * Perform a POST request, so we could launch fake-cron calls and other core-system calls without annoying the user
-	 * @return bool false on error or number of bytes sent.
-	 */
+
+    /**
+     * VERY BASIC
+     * Perform a POST request, so we could launch fake-cron calls and other core-system calls without annoying the user
+     *
+     * @param $url string
+     * @param $_data array
+     *
+     * @return bool false on error or number of bytes sent.
+     */
 	function osc_doRequest( $url , $_data ) {
-		if ( function_exists( 'fsockopen' ) ) {
+	    if (testCurl()){
+            $ch = curl_init();
+            curl_setopt( $ch , CURLOPT_URL , $url );
+            @curl_setopt( $ch , CURLOPT_CONNECTTIMEOUT , 5 );
+            curl_setopt( $ch , CURLOPT_USERAGENT , Params::getServerParam( 'HTTP_USER_AGENT' ) . ' Osclass (v.' . osc_version() . ')' );
+            @curl_setopt( $ch , CURLOPT_FOLLOWLOCATION , 1 );
+            curl_setopt( $ch , CURLOPT_REFERER , osc_base_url() );
+            if ( stripos( $url , 'https' ) !== false ) {
+                curl_setopt( $ch , CURLOPT_SSL_VERIFYPEER , false );
+                curl_setopt( $ch , CURLOPT_SSL_VERIFYHOST , 2 );
+            }
 
-			// parse the given URL
-			$url = parse_url( $url );
+            if ( $_data != null ) {
+                curl_setopt( $ch , CURLOPT_POST , 1 );
+                curl_setopt( $ch , CURLOPT_POSTFIELDS , http_build_query( $_data ) );
+            }
 
-			if ( $url === false || ! isset( $url[ 'host' ] ) || ! isset( $url[ 'path' ] ) ) {
-				return false;
-			}
+            curl_exec( $ch );
 
-			// extract host and path:
-			$host = $url[ 'host' ];
-			$path = $url[ 'path' ];
+            // Check if any error occurred
+            if (curl_errno($ch)) {
+                return false;
+            }
+            $info = curl_getinfo($ch);
 
-			// open a socket connection on port 80
-			// use localhost in case of issues with NATs (hairpinning)
-			$fp = @fsockopen( $host , 80 );
+            curl_close( $ch );
 
-			if ( $fp === false ) {
-				return false;
-			};
+            return $info['request_size'];
+        }
+	    else {
+            if(ini_get('allow_url_fopen') == false){
+                error_log('enable allow_url_fopen in php.ini or install and enable php-curl extension.'.PHP_EOL);
+                return false;
+            }
+            // parse the given URL
+            $url = parse_url( $url );
 
-			$data              = http_build_query( $_data );
-			$out               = "POST $path HTTP/1.1\r\n";
-			$out               .= "Host: $host\r\n";
-			$out               .= "Referer: Osclass (v." . osc_version() . ")\r\n";
-			$out               .= "Content-type: application/x-www-form-urlencoded\r\n";
-			$out               .= "Content-Length: " . strlen( $data ) . "\r\n";
-			$out               .= "Connection: Close\r\n\r\n";
-			$out               .= "$data";
-			$number_bytes_sent = fwrite( $fp , $out );
-			fclose( $fp );
+            // extract host, path, port:
+            $host = $url[ 'host' ];
+            $path = $url[ 'path' ];
+            $port = $url['port'];
+
+            if ( $url === false || ! isset( $url[ 'host' ] ) || ! isset( $url[ 'path' ] ) || ! isset( $url[ 'port' ] ) ) {
+                return false;
+            }
+
+            // open a socket connection on port 80
+            // use localhost in case of issues with NATs (hairpinning)
+            $fp = fsockopen( $host , 80, $errNo, $errStr, 1 );
+
+            if ( $fp === false ) {
+                return false;
+            };
+
+            $data              = http_build_query( $_data );
+            $out               = "POST $path HTTP/1.1\r\n";
+            $out               .= "Host: $host\r\n";
+            $out               .= "Port: $port\r\n";
+            $out               .= "Referer: Osclass ".osc_version()."\r\n";
+            $out               .= "Content-type: application/x-www-form-urlencoded\r\n";
+            $out               .= "Content-Length: " . strlen( $data ) . "\r\n";
+            $out               .= "Connection: close\r\n\r\n";
+            $out               .= $data;
+            $number_bytes_sent = fwrite( $fp , $out );
+            fclose( $fp );
 
 			return $number_bytes_sent; // or false on fwrite() error
 		}
@@ -300,18 +347,19 @@
 		}
 
 		$mail = new PHPMailer( true );
-		$mail->ClearAddresses();
-		$mail->ClearAllRecipients();
-		$mail->ClearAttachments();
-		$mail->ClearBCCs();
-		$mail->ClearCCs();
-		$mail->ClearCustomHeaders();
-		$mail->ClearReplyTos();
+		$mail->clearAddresses();
+		$mail->clearAllRecipients();
+		$mail->clearAttachments();
+		$mail->clearBCCs();
+		$mail->clearCCs();
+		$mail->clearCustomHeaders();
+		$mail->clearReplyTos();
 
-		$mail = osc_apply_filter( 'init_send_mail' , $mail , $params );
+        /** @var \PHPMailer $mail */
+        $mail = osc_apply_filter( 'init_send_mail' , $mail , $params );
 
 		if ( osc_mailserver_pop() ) {
-			require_once osc_lib_path() . 'phpmailer/class.pop3.php';
+
 			$pop = new POP3();
 
 			$pop3_host = osc_mailserver_host();
@@ -334,14 +382,14 @@
 				$pop3_password = $params[ 'password' ];
 			}
 
-			$pop->Authorise( $pop3_host , $pop3_port , 30 , $pop3_username , $pop3_password , 0 );
+			$pop->authorise( $pop3_host , $pop3_port , 30 , $pop3_username , $pop3_password , 0 );
 		}
 
 		if ( osc_mailserver_auth() ) {
-			$mail->IsSMTP();
+			$mail->isSMTP();
 			$mail->SMTPAuth = true;
 		} else if ( osc_mailserver_pop() ) {
-			$mail->IsSMTP();
+			$mail->isSMTP();
 		}
 
 		$smtpSecure = osc_mailserver_ssl();
@@ -414,11 +462,8 @@
 		}
 
 		foreach ( $to as $to_email => $to_name ) {
-			try {
-				$mail->addAddress( $to_email , $to_name );
-			} catch ( phpmailerException $e ) {
-				continue;
-			}
+
+		    $mail->addAddress( $to_email , $to_name );
 		}
 
 		if ( array_key_exists( 'add_bcc' , $params ) ) {
@@ -427,20 +472,14 @@
 			}
 
 			foreach ( $params[ 'add_bcc' ] as $bcc ) {
-				try {
-					$mail->AddBCC( $bcc );
-				} catch ( phpmailerException $e ) {
-					continue;
-				}
+
+			    $mail->addBCC( $bcc );
 			}
 		}
 
 		if ( array_key_exists( 'reply_to' , $params ) ) {
-			try {
-				$mail->AddReplyTo( $params[ 'reply_to' ] );
-			} catch ( phpmailerException $e ) {
-				//continue;
-			}
+
+				$mail->addReplyTo( $params[ 'reply_to' ] );
 		}
 
 		$mail->Subject = $params[ 'subject' ];
@@ -452,31 +491,37 @@
 			}
 
 			foreach ( $params[ 'attachment' ] as $attachment ) {
-				try {
-					if ( is_array( $attachment ) ) {
-						if ( isset( $attachment[ 'path' ] ) && isset( $attachment[ 'name' ] ) ) {
-							$mail->AddAttachment( $attachment[ 'path' ] , $attachment[ 'name' ] );
-						}
-					} else {
-						$mail->AddAttachment( $attachment );
-					}
-				} catch ( phpmailerException $e ) {
-					continue;
-				}
+
+			    if ( is_array( $attachment ) ) {
+			        if ( isset( $attachment[ 'path' ] ) && isset( $attachment[ 'name' ] ) ) {
+                        try {
+                            $mail->addAttachment($attachment[ 'path' ], $attachment[ 'name' ]);
+                        } catch (phpmailerException $e) {
+                            continue;
+                        }
+                    }
+			    } else {
+                    try {
+                        $mail->addAttachment($attachment);
+                    } catch (phpmailerException $e) {
+                        continue;
+                    }
+                }
+
 			}
 		}
 
 		$mail->CharSet = 'utf-8';
-		$mail->IsHTML( true );
+		$mail->isHTML( true );
 
 		$mail = osc_apply_filter( 'pre_send_mail' , $mail , $params );
 
 		// send email!
-		try {
-			$mail->Send();
-		} catch ( phpmailerException $e ) {
-			return false;
-		}
+        try {
+            $mail->send();
+        } catch (phpmailerException $e) {
+            return false;
+        }
 
 		return true;
 	}

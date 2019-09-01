@@ -10,6 +10,5 @@ return array(
     'ioncube\\phpOpensslCryptor\\' => array($vendorDir . '/ioncube/php-openssl-cryptor/src'),
     'ReCaptcha\\' => array($vendorDir . '/google/recaptcha/src/ReCaptcha'),
     'Psr\\Log\\' => array($vendorDir . '/psr/log/Psr/Log'),
-    'ParagonIE\\ConstantTime\\' => array($vendorDir . '/paragonie/constant_time_encoding/src'),
     'Facebook\\' => array($vendorDir . '/facebook/graph-sdk/src/Facebook'),
 );

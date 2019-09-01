@@ -5,25 +5,16 @@
  * @license   http://www.opensource.org/licenses/mit-license.html  MIT License
  */
 
-use \phpseclib\Math\BigInteger\Engines\BCMath;
-
 class Unit_Math_BigInteger_BCMathTest extends Unit_Math_BigInteger_TestCase
 {
     public static function setUpBeforeClass()
     {
-        if (!BCMath::isValidEngine()) {
+        if (!extension_loaded('bcmath')) {
             self::markTestSkipped('BCMath extension is not available.');
         }
-        BCMath::setModExpEngine('DefaultEngine');
-    }
 
-    public function getInstance($x = 0, $base = 10)
-    {
-        return new BCMath($x, $base);
-    }
+        parent::setUpBeforeClass();
 
-    public static function getStaticClass()
-    {
-        return 'phpseclib\Math\BigInteger\Engines\BCMath';
+        self::ensureConstant('MATH_BIGINTEGER_MODE', \phpseclib\Math\BigInteger::MODE_BCMATH);
     }
 }
