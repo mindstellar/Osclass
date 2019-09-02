@@ -44,6 +44,9 @@
             if (defined('COOKIE_DOMAIN')) {
                 $currentCookieParams[ 'domain' ] = COOKIE_DOMAIN;
             }
+            if ( isset($_SERVER['HTTPS']) ) {
+                $currentCookieParams["secure"] = true;
+            }
             session_set_cookie_params(
                 $currentCookieParams[ 'lifetime' ],
                 $currentCookieParams[ 'path' ],
