@@ -2162,8 +2162,8 @@
 			$data = array ();
 			if ( stripos( $element , "http://" ) === false && stripos( $element , "https://" ) === false ) {
 				// OSCLASS OFFICIAL REPOSITORY
-				$url  = osc_market_url( $section , $element );
-				$data = json_decode( osc_file_get_contents( $url , array ( 'api_key' => osc_market_api_connect() ) ) , true );
+				// $url  = osc_market_url( $section , $element );
+				// $data = json_decode( osc_file_get_contents( $url , array ( 'api_key' => osc_market_api_connect() ) ) , true );
 			} else {
 				// THIRD PARTY REPOSITORY
 				$data = json_decode( osc_file_get_contents( $element ) , true );
@@ -2189,16 +2189,16 @@
 		$re_enable          = false;
 		$message            = "";
 		$data               = array ();
-		$download_post_data = array ( 'api_key' => osc_market_api_connect() );
+		$download_post_data = array ();
 		/************************
 		 *** CHECK VALID CODE ***
 		 ************************/
 		if ( $code != '' && $section != '' ) {
 			if ( stripos( $code , "http://" ) === false && stripos( $code , "https://" ) === false) {
 				// OSCLASS OFFICIAL REPOSITORY
-				$url  = osc_market_url( $section , $code );
-				$data = osc_file_get_contents( $url , array ( 'api_key' => osc_market_api_connect() ) );
-				$data = json_decode( osc_file_get_contents( $url , array ( 'api_key' => osc_market_api_connect() ) ) , true );
+				// $url  = osc_market_url( $section , $code );
+				// $data = osc_file_get_contents( $url , array ( 'api_key' => osc_market_api_connect() ) );
+				// data = json_decode( osc_file_get_contents( $url , array ( 'api_key' => osc_market_api_connect() ) ) , true );
 			} else {
 				// THIRD PARTY REPOSITORY
 				$download_post_data = array ();
