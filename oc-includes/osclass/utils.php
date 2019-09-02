@@ -1534,7 +1534,7 @@
 
 		if ( in_array( $type , array ( 'plugins' , 'themes' , 'languages' ) ) ) {
 			$uri = '';
-			if ( stripos( $update_uri , "http://" ) === false ) {
+			if ( stripos( $update_uri , "http://" ) === false  && stripos( $update_uri , "https://" ) === false ) {
 				// OSCLASS OFFICIAL REPOSITORY
 				// $uri = osc_market_url( $type , $update_uri );
 				return false;
@@ -1550,7 +1550,7 @@
 	}
 
 	function _need_update( $uri , $version ) {
-		if ( false === ( $json = @osc_file_get_contents( $uri ) ) ) {
+		if ( false === ( $json = osc_file_get_contents( $uri ) ) ) {
 			return false;
 		} else {
 			$data = json_decode( $json , true );
@@ -2160,7 +2160,7 @@
 	function osc_is_update_compatible( $section , $element , $osclass_version = OSCLASS_VERSION ) {
 		if ( $element != '' ) {
 			$data = array ();
-			if ( stripos( $element , "http://" ) === false ) {
+			if ( stripos( $element , "http://" ) === false && stripos( $element , "https://" ) === false ) {
 				// OSCLASS OFFICIAL REPOSITORY
 				$url  = osc_market_url( $section , $element );
 				$data = json_decode( osc_file_get_contents( $url , array ( 'api_key' => osc_market_api_connect() ) ) , true );
@@ -2194,7 +2194,7 @@
 		 *** CHECK VALID CODE ***
 		 ************************/
 		if ( $code != '' && $section != '' ) {
-			if ( stripos( $code , "http://" ) === false ) {
+			if ( stripos( $code , "http://" ) === false && stripos( $code , "https://" ) === false) {
 				// OSCLASS OFFICIAL REPOSITORY
 				$url  = osc_market_url( $section , $code );
 				$data = osc_file_get_contents( $url , array ( 'api_key' => osc_market_api_connect() ) );

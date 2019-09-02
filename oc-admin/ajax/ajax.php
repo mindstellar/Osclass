@@ -570,7 +570,7 @@
                      *** CHECK VALID CODE ***
                      ************************/
                     if ($code != '' && $section != '') {
-                        if(stripos($code, "http://")===FALSE) {
+                        if(stripos($code, "http://")===FALSE && stripos($code, "https://")===FALSE) {
                             // OSCLASS OFFICIAL REPOSITORY
                             // Disable Osclass Market update checking.
                             // $data = json_decode(osc_file_get_contents(osc_market_url($section, $code), array('api_key' => osc_market_api_connect())), true);
