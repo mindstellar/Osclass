@@ -557,11 +557,6 @@
                 /*******************************
                  ** COMPLETE MARKET PROCESS **
                  *******************************/
-                case 'market': // AT THIS POINT WE KNOW IF THERE'S AN UPDATE OR NOT
-                    osc_csrf_check(false);
-                    $result = osc_market(Params::getParam('section'), Params::getParam('code'));
-                    echo json_encode($result);
-                    break;
                 case 'check_market': // AT THIS POINT WE KNOW IF THERE'S AN UPDATE OR NOT
                     $section = Params::getParam('section');
                     $code = Params::getParam('code');
