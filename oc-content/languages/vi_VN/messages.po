@@ -1,0 +1,1724 @@
+# Translation of Flash Messages in Vietnamese
+# This file is distributed under the same license as the Flash Messages package.
+msgid ""
+msgstr ""
+"PO-Revision-Date: 2014-08-12 13:35:04+0000\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"X-Generator: GlotPress/0.1\n"
+"Project-Id-Version: Flash Messages\n"
+
+#: oc-includes/osclass/controller/ajax.php:101
+#: oc-includes/osclass/controller/item.php:313
+msgid "The selected photo couldn't be deleted, the url doesn't exist"
+msgstr "Không thể xoá hình ảnh đã chọn, liên kết không tồn tại"
+
+#: oc-includes/osclass/controller/ajax.php:111
+#: oc-includes/osclass/controller/item.php:319
+msgid "The listing doesn't exist"
+msgstr "Rao vặt không tồn tại"
+
+#: oc-includes/osclass/controller/ajax.php:120
+#: oc-includes/osclass/controller/ajax.php:128
+#: oc-includes/osclass/controller/item.php:325
+#: oc-includes/osclass/controller/item.php:330
+msgid "The listing doesn't belong to you"
+msgstr "Rao vặt này không thuộc về bạn"
+
+#: oc-includes/osclass/controller/ajax.php:86
+#: oc-includes/osclass/controller/ajax.php:151
+#: oc-includes/osclass/controller/item.php:344
+msgid "The selected photo has been successfully deleted"
+msgstr "Đã xoá thành công hình ảnh được chọn"
+
+#: oc-includes/osclass/controller/ajax.php:154
+#: oc-includes/osclass/controller/item.php:346
+msgid "The selected photo does not belong to you"
+msgstr "Hình ảnh được chọn không thuộc về bạn"
+
+#: oc-includes/osclass/controller/ajax.php:86
+#: oc-includes/osclass/controller/ajax.php:158
+#: oc-includes/osclass/controller/item.php:349
+msgid "The selected photo couldn't be deleted"
+msgstr "Không thể xoá hình ảnh đã chọn"
+
+#: oc-includes/osclass/controller/contact.php:39
+#: oc-includes/osclass/controller/item.php:122
+#: oc-includes/osclass/controller/item.php:230
+#: oc-includes/osclass/controller/item.php:394
+#: oc-includes/osclass/controller/item.php:446
+#: oc-includes/osclass/controller/user-non-secure.php:147
+msgid "The Recaptcha code is wrong"
+msgstr "Mã reCAPTCHA không đúng"
+
+#: oc-includes/osclass/emails.php:645
+msgid "There has been some errors sending the message"
+msgstr "Xảy ra lỗi khi gửi tin nhắn"
+
+#: oc-includes/osclass/controller/item.php:51
+#: oc-includes/osclass/controller/item.php:100
+msgid "Only registered users are allowed to post listings"
+msgstr "Chỉ có thành viên mới được quyền gửi rao vặt"
+
+#: oc-includes/osclass/controller/item.php:165
+msgid "Your listing has been published"
+msgstr "Rao vặt của bạn đã được đăng tải"
+
+#: oc-includes/osclass/controller/item.php:239
+msgid "Great! We've just updated your listing"
+msgstr "Tuyệt! Chúng tôi vừa cập nhật rao vặt của bạn"
+
+#: oc-includes/osclass/controller/item.php:266
+msgid "The listing has been validated"
+msgstr "Rao vặt đã được xác nhận"
+
+#: oc-includes/osclass/controller/item.php:268
+msgid "The listing can't be validated"
+msgstr "Rao vặt không thể xác nhận"
+
+#: oc-includes/osclass/controller/item.php:271
+msgid "The listing has already been validated"
+msgstr "Rao vặt đã xác nhận rồi"
+
+#: oc-includes/osclass/controller/item.php:284
+msgid "Your listing has been deleted"
+msgstr "Rao vặt của bạn đã bị xoá"
+
+#: oc-includes/osclass/controller/item.php:286
+#: oc-includes/osclass/controller/item.php:294
+msgid "The listing you are trying to delete couldn't be deleted"
+msgstr "Rao vặt mà bạn đang cố gắng xoá thì không thể xoá được"
+
+#: oc-includes/osclass/controller/item.php:371
+msgid "Thanks! That's very helpful"
+msgstr "Cảm ơn! Điều này thật hữu ích"
+
+#: oc-includes/osclass/controller/item.php:417
+#: oc-includes/osclass/controller/item.php:529
+msgid "This listing doesn't exist"
+msgstr "Rao vặt này không tồn tại"
+
+#: oc-includes/osclass/controller/item.php:423
+#: oc-includes/osclass/controller/item.php:466
+msgid "We're sorry, but the listing has expired. You can't contact the seller"
+msgstr "Xin thứ lỗi, nhưng rao vặt đã hết hạn. Bạn không thể liên lạc với người bán"
+
+#: oc-includes/osclass/controller/item.php:430
+#: oc-includes/osclass/controller/item.php:438
+msgid "You can't contact the seller, only registered users can"
+msgstr "Bạn không thể liên hệ người bán, chỉ thành viên mới có thể"
+
+#: oc-includes/osclass/controller/item.php:479
+msgid "We've just sent an e-mail to the seller"
+msgstr "Chúng tôi vừa gửi email cho người bán"
+
+#: oc-includes/osclass/controller/item.php:489
+msgid "Sorry, we could not save your comment. Try again later"
+msgstr "Rất tiếc, chúng tôi không thể lưu thảo luận của bạn. Hãy thử lại sau"
+
+#: oc-includes/osclass/controller/item.php:492
+msgid "Your comment is awaiting moderation"
+msgstr "Thảo luận của bạn phải chờ duyệt"
+
+#: oc-includes/osclass/controller/item.php:495
+msgid "Your comment has been approved"
+msgstr "Thảo luận của bạn đã được chấp nhận"
+
+#: oc-includes/osclass/controller/item.php:498
+msgid "Please fill the required field (email)"
+msgstr "Hãy điền đầy đủ mục được yêu cầu (email)"
+
+#: oc-includes/osclass/controller/item.php:501
+msgid "Please type a comment"
+msgstr "Hãy gõ một bình luận"
+
+#: oc-includes/osclass/controller/item.php:504
+msgid "Your comment has been marked as spam"
+msgstr "Thảo luận của bạn đã bị đánh dấu tin rác"
+
+#: oc-includes/osclass/controller/item.php:536
+msgid "You must be logged in to delete a comment"
+msgstr "Bạn phải đăng nhập để xoá bình luận"
+
+#: oc-includes/osclass/controller/item.php:544
+msgid "The comment doesn't exist"
+msgstr "Bình luận không tồn tại"
+
+#: oc-includes/osclass/controller/item.php:549
+msgid "The comment is not active, you cannot delete it"
+msgstr "Bình luận chưa được kích hoạt, bạn không thể xoá nó"
+
+#: oc-includes/osclass/controller/item.php:554
+msgid "The comment was not added by you, you cannot delete it"
+msgstr "Bạn không thể xoá bình luận không phải của mình"
+
+#: oc-admin/comments.php:195 oc-includes/osclass/controller/item.php:559
+msgid "The comment has been deleted"
+msgstr "Bình luận đã bị xoá"
+
+#: oc-includes/osclass/controller/login.php:25
+#: oc-includes/osclass/controller/register.php:26
+#: oc-includes/osclass/controller/user-non-secure.php:25
+#: oc-includes/osclass/controller/user.php:25
+msgid "Users not enabled"
+msgstr "Thành viên không được kích hoạt"
+
+#: oc-includes/osclass/controller/login.php:36
+#: oc-includes/osclass/controller/register.php:49
+msgid "Users are not enabled"
+msgstr "Thành viên không được kích hoạt"
+
+#: oc-includes/osclass/controller/login.php:65
+#: oc-includes/osclass/controller/login.php:114
+msgid "The user doesn't exist"
+msgstr "Thành viên không tồn tại"
+
+#: oc-includes/osclass/controller/login.php:69
+msgid "The password is incorrect"
+msgstr "Mật khẩu không chính xác"
+
+#: oc-includes/osclass/controller/login.php:119
+msgid "The user has not been validated yet"
+msgstr "Thành viên chưa xác nhận"
+
+#: oc-includes/osclass/controller/login.php:122
+msgid "The user has been suspended"
+msgstr "Thành viên đã bị đình chỉ"
+
+#: oc-includes/osclass/controller/login.php:190
+msgid "Invalid email address"
+msgstr "Sai địa chỉ email"
+
+#: oc-includes/osclass/controller/login.php:199
+msgid "We have sent you an email with the instructions to reset your password"
+msgstr "Chúng tôi đã gửi cho bạn một email với các hướng dẫn để bạn khôi phục mật khẩu"
+
+#: oc-includes/osclass/controller/login.php:203
+msgid "We were not able to identify you given the information provided"
+msgstr "Chúng tôi không thể xác định bạn với các thông tin vừa cung cấp"
+
+#: oc-includes/osclass/controller/login.php:207
+msgid "The recaptcha code is wrong"
+msgstr "Mã reCAPTCHA không đúng"
+
+#: oc-admin/login.php:131 oc-admin/login.php:141
+#: oc-includes/osclass/controller/login.php:217
+#: oc-includes/osclass/controller/login.php:245
+#: oc-includes/osclass/controller/user-non-secure.php:54
+#: oc-includes/osclass/controller/user-non-secure.php:58
+msgid "Sorry, the link is not valid"
+msgstr "Rất tiếc, sai liên kết"
+
+#: oc-includes/osclass/controller/login.php:224
+#: oc-includes/osclass/controller/user.php:171
+msgid "Password cannot be blank"
+msgstr "Mật khẩu không thể bỏ trống"
+
+#: oc-admin/login.php:151 oc-includes/osclass/controller/login.php:238
+msgid "The password has been changed"
+msgstr "Đã thay đổi mật khẩu"
+
+#: oc-includes/osclass/controller/login.php:241
+msgid "Error, the password don't match"
+msgstr "Lỗi, mật khẩu không trùng khớp"
+
+#: oc-includes/osclass/controller/register.php:31
+msgid "User registration is not enabled"
+msgstr "Không kích hoạt chức năng đăng ký thành viên"
+
+#: oc-includes/osclass/controller/register.php:68
+msgid "The user has been created. An activation email has been sent"
+msgstr "Tài khoản vừa được tạo. Một thư xác nhận đã được gửi đi"
+
+#: oc-includes/osclass/controller/register.php:71
+msgid "Your account has been created successfully"
+msgstr "Tài khoản của bạn đã được tạo thành công"
+
+#: oc-includes/osclass/UserActions.php:67
+#: oc-includes/osclass/controller/user.php:131
+msgid "The specified e-mail is already in use"
+msgstr "Email chỉ định đã từng được sử dụng"
+
+#: oc-includes/osclass/UserActions.php:60
+msgid "The email is not valid"
+msgstr "Email không đúng"
+
+#: oc-includes/osclass/UserActions.php:43
+msgid "The password cannot be empty"
+msgstr "Mật khẩu không thể bỏ trống"
+
+#: oc-includes/osclass/UserActions.php:48
+#: oc-includes/osclass/UserActions.php:166
+#: oc-includes/osclass/controller/user.php:186
+msgid "Passwords don't match"
+msgstr "Mật khẩu không trùng khớp"
+
+#: oc-includes/osclass/controller/register.php:90
+msgid "The link is not valid anymore. Sorry for the inconvenience!"
+msgstr "Liên kết không hợp lệ nữa. Xin lỗi vì sự bất tiện này!"
+
+#: oc-includes/osclass/controller/register.php:95
+msgid "Your account has already been validated"
+msgstr "Tài khoản của bạn đã được xác nhận"
+
+#: oc-includes/osclass/controller/register.php:116
+msgid "Your account has been validated"
+msgstr "Tài khoản của bạn đã được xác nhận"
+
+#: oc-includes/osclass/controller/user-non-secure.php:51
+msgid "Your email has been changed successfully"
+msgstr "Thay đổi thành công địa chỉ email của bạn"
+
+#: oc-includes/osclass/controller/user-non-secure.php:80
+#: oc-includes/osclass/controller/user.php:223
+msgid "Alert activated"
+msgstr "Thông báo kích hoạt"
+
+#: oc-includes/osclass/controller/user-non-secure.php:101
+#: oc-includes/osclass/controller/user.php:244
+msgid "Unsubscribed correctly"
+msgstr "Bỏ theo dõi thành công"
+
+#: oc-includes/osclass/controller/user.php:75
+msgid "Your profile has been updated successfully"
+msgstr "Thông tin cá nhân của bạn đã được cập nhật thành công"
+
+#: oc-includes/osclass/controller/user.php:107
+msgid "The specified e-mail is not valid"
+msgstr "Địa chỉ email chỉ định không đúng"
+
+#: oc-includes/osclass/controller/user.php:176
+msgid "Current password doesn't match"
+msgstr "Mật khẩu hiện tại không chính xác"
+
+#: oc-includes/osclass/controller/user.php:181
+msgid "Passwords can't be empty"
+msgstr "Mật khẩu không thể bỏ trống"
+
+#: oc-includes/osclass/controller/user.php:193
+msgid "Password has been changed"
+msgstr "Đã thay đổi mật khẩu"
+
+#: oc-admin/admins.php:30 oc-admin/items.php:38
+#: oc-includes/osclass/core/AdminSecBaseModel.php:28
+msgid "You don't have enough permissions"
+msgstr "Bạn không đủ quyền truy cập"
+
+#: oc-admin/admins.php:73 oc-admin/admins.php:173
+msgid "Email invalid"
+msgstr "Sai email"
+
+#: oc-admin/admins.php:77 oc-admin/admins.php:177
+msgid "Username invalid"
+msgstr "Sai tên truy cập"
+
+#: oc-admin/admins.php:81 oc-admin/admins.php:181
+msgid "Name invalid"
+msgstr "Sai tên"
+
+#: oc-admin/admins.php:85 oc-admin/admins.php:212
+msgid "Password invalid"
+msgstr "Sai mật khẩu"
+
+#: oc-admin/admins.php:90
+msgid "Email already in use"
+msgstr "Địa chỉ email đã được sử dụng"
+
+#: oc-admin/admins.php:95
+msgid "Username already in use"
+msgstr "Tên tài khoản đã được sử dụng"
+
+#: oc-admin/admins.php:118
+msgid "The admin has been added"
+msgstr "Đã thêm người quản trị"
+
+#: oc-admin/admins.php:188
+msgid "This admin doesn't exist"
+msgstr "Người quản trị này không tồn tại"
+
+#: oc-admin/admins.php:194
+msgid "Existing email"
+msgstr "Email hiện có"
+
+#: oc-admin/admins.php:201
+msgid "Existing username"
+msgstr "Tài khoản hiện có"
+
+#: oc-admin/admins.php:220 oc-admin/admins.php:230
+msgid "The password couldn't be updated. Passwords don't match"
+msgstr "Mật khẩu không cập nhật được. Mật khẩu không khớp"
+
+#: oc-admin/admins.php:247
+msgid "The admin has been updated"
+msgstr "Người quản trị đã được cập nhật"
+
+#: oc-admin/admins.php:266
+msgid "The admin id isn't in the correct format"
+msgstr "ID người quản trị không chuẩn"
+
+#: oc-admin/admins.php:272
+msgid "The operation hasn't been completed. You're trying to remove yourself!"
+msgstr "Hành động không thể hoàn thành. Bạn đã cố xoá tài khoản của chính mình!"
+
+#: oc-admin/admins.php:279
+msgid "The admin has been deleted correctly"
+msgstr "Xoá người quản trị thành công"
+
+#: oc-admin/admins.php:281
+msgid "The admin couldn't be deleted"
+msgstr "Người quản trị không thể bị xoá"
+
+#: oc-admin/tools.php:36 oc-admin/tools.php:63 oc-admin/tools.php:73
+#: oc-admin/tools.php:90 oc-admin/tools.php:126 oc-admin/tools.php:169
+#: oc-admin/tools.php:196 oc-admin/tools.php:225
+msgid "This action cannot be done because it is a demo site"
+msgstr "Không thể hoàn thành hành động này vì đây là site dùng thử"
+
+#: oc-admin/tools.php:118 oc-admin/tools.php:150
+msgid "Backup completed successfully"
+msgstr "Quá trình sao lưu đã thành công"
+
+#: oc-admin/appearance.php:51
+msgid "The theme folder is not writable"
+msgstr "Thư mục giao diện không ghi được"
+
+#: oc-admin/appearance.php:54
+msgid "The theme has been installed correctly"
+msgstr "Cài đặt giao diện thành công"
+
+#: oc-admin/appearance.php:57 oc-admin/languages.php:67 oc-admin/plugins.php:60
+msgid "The zip file is not valid"
+msgstr "Tệp nén zip không hợp lệ"
+
+#: oc-admin/appearance.php:60 oc-admin/languages.php:70 oc-admin/plugins.php:63
+#: oc-admin/tools.php:55
+msgid "No file was uploaded"
+msgstr "Không có tệp nào được tải lên"
+
+#: oc-admin/appearance.php:65
+msgid "There was a problem adding the theme"
+msgstr "Có vấn đề khi thêm giao diện"
+
+#: oc-admin/appearance.php:83
+msgid "Theme removed successfully"
+msgstr "Xoá giao diện thành công"
+
+#: oc-admin/appearance.php:85
+msgid "There was a problem removing the theme"
+msgstr "Đã có vấn đề khi xoá bỏ giao diện"
+
+#: oc-admin/appearance.php:88
+msgid "Current theme can not be deleted"
+msgstr "Giao diện hiện tại không thể xoá bỏ"
+
+#: oc-admin/appearance.php:91
+msgid "No theme selected"
+msgstr "Chưa chọn giao diện"
+
+#: oc-admin/appearance.php:120
+msgid "Widget removed correctly"
+msgstr "Xoá widget thành công"
+
+#: oc-admin/appearance.php:126 oc-admin/appearance.php:148
+msgid "Description field is required"
+msgstr "Bắt buộc nhập nội dung mô tả"
+
+#: oc-admin/appearance.php:139
+msgid "Widget updated correctly"
+msgstr "Cập nhật widget thành công"
+
+#: oc-admin/appearance.php:141
+msgid "Widget cannot be updated correctly"
+msgstr "Widget không thể cập nhật"
+
+#: oc-admin/appearance.php:160
+msgid "Widget added correctly"
+msgstr "Thêm widget thành công"
+
+#: oc-admin/appearance.php:167
+msgid "Theme activated correctly"
+msgstr "Kích hoạt giao diện thành công"
+
+#: oc-admin/comments.php:52
+msgid "The comments have been deleted"
+msgstr "Các bình luận đã bị xoá"
+
+#: oc-admin/comments.php:65
+msgid "The comments have been approved"
+msgstr "Các bình luận đã được chấp nhận"
+
+#: oc-admin/comments.php:75
+msgid "The comments have been disapproved"
+msgstr "Các bình luận đã bị từ chối"
+
+#: oc-admin/comments.php:128
+msgid "The comment has been approved"
+msgstr "Bình luận đã được chấp nhận"
+
+#: oc-admin/comments.php:135
+msgid "The comment has been disapproved"
+msgstr "Bình luận đã bị từ chối"
+
+#: oc-admin/comments.php:142
+msgid "The comment has been enabled"
+msgstr "Bình luận đã được kích hoạt"
+
+#: oc-admin/comments.php:149
+msgid "The comment has been disabled"
+msgstr "Bình luận đã bị vô hiệu"
+
+#: oc-admin/comments.php:164
+msgid "Email is not correct"
+msgstr "Email không đúng"
+
+#: oc-admin/comments.php:167
+msgid "Comment is required"
+msgstr "Yêu cầu có bình luận"
+
+#: oc-admin/comments.php:189
+msgid "Great! We just updated your comment"
+msgstr "Tuyệt! Chúng tôi mới cập nhật bình luận của bạn"
+
+#: oc-admin/emails.php:82
+msgid "The email/alert has been updated"
+msgstr "Email/cảnh báo đã được cập nhật"
+
+#: oc-admin/emails.php:85 oc-admin/pages.php:102
+msgid "You can't repeat internal name"
+msgstr "Bạn không thể lặp lại tên nội bộ"
+
+#: oc-admin/emails.php:87
+msgid "The email couldn't be updated, at least one title should not be empty"
+msgstr "Email không thể cập nhật, ít nhất một tiêu đề không được bỏ trống"
+
+#: oc-admin/items.php:59
+msgid "%d listing has been enabled"
+msgstr "Rao vặt %d đã được kích hoạt"
+
+#: oc-admin/items.php:71
+msgid "%d listing has been disabled"
+msgstr "Rao vặt %d đã bị vô hiệu"
+
+#: oc-admin/items.php:83
+msgid "%d listing has been activated"
+msgstr "Rao vặt %d đã được kích hoạt"
+
+#: oc-admin/items.php:95
+msgid "%d listing has been deactivated"
+msgstr "Rao vặt %d đã bị vô hiệu"
+
+#: oc-admin/items.php:107
+msgid "%d listing has been marked as premium"
+msgstr "Rao vặt %d đã được đánh dấu cao cấp"
+
+#: oc-admin/items.php:119 oc-admin/items.php:144
+msgid "%d change has been made"
+msgstr "Thay đổi %d đã được thực hiện"
+
+#: oc-admin/items.php:131
+msgid "%d listing has been marked as spam"
+msgstr "Rao vặt %d đã bị đánh dấu tin rác"
+
+#: oc-admin/items.php:162
+msgid "%d listing has been deleted"
+msgstr "Rao vặt %d đã bị xoá"
+
+#: oc-admin/items.php:179
+msgid "%d listing has been unmarked as spam"
+msgstr "Rao vặt %d đã được gỡ đánh dấu tin rác"
+
+#: oc-admin/items.php:196
+msgid "%d listing has been unmarked as missclassified"
+msgstr "Rao vặt %d đã được gỡ đánh dấu chưa phân loại"
+
+#: oc-admin/items.php:213
+msgid "%d listing has been unmarked as duplicated"
+msgstr "Rao vặt %d đã được gỡ đánh dấu trùng lặp"
+
+#: oc-admin/items.php:230
+msgid "%d listing has been unmarked as expired"
+msgstr "Rao vặt %d đã được gỡ đánh dấu hết hạn"
+
+#: oc-admin/items.php:247
+msgid "%d listing has been unmarked as offensive"
+msgstr "Rao vặt %d đã được gỡ đánh dấu xúc phạm"
+
+#: oc-admin/items.php:322 oc-admin/items.php:334 oc-admin/items.php:344
+#: oc-admin/items.php:354 oc-admin/items.php:383 oc-admin/items.php:409
+#: oc-admin/items.php:553
+msgid "An error has occurred"
+msgstr "Xảy ra một lỗi"
+
+#: oc-admin/items.php:289
+msgid "The listing has been deleted"
+msgstr "Rao vặt đã bị xoá"
+
+#: oc-admin/items.php:291
+msgid "The listing couldn't be deleted"
+msgstr "Rao vặt không thể xoá"
+
+#: oc-admin/items.php:320
+msgid "The listing has been activated"
+msgstr "Rao vặt đã được kích hoạt"
+
+#: oc-admin/items.php:332
+msgid "The listing has been deactivated"
+msgstr "Rao vặt đã bị vô hiệu"
+
+#: oc-admin/items.php:342
+msgid "The listing has been enabled"
+msgstr "Rao vặt đã được kích hoạt"
+
+#: oc-admin/items.php:352
+msgid "The listing has been disabled"
+msgstr "Rao vặt đã bị vô hiệu"
+
+#: oc-admin/items.php:381 oc-admin/items.php:407
+msgid "Changes have been applied"
+msgstr "Thay đổi đã được áp dụng"
+
+#: oc-admin/items.php:433
+msgid "The listing has been unmarked as"
+msgstr "Rao vặt đã được gỡ đánh dấu là"
+
+#: oc-admin/items.php:435
+msgid "The listing hasn't been unmarked as"
+msgstr "Rao vặt không được gỡ đánh dấu là"
+
+#: oc-admin/items.php:522
+msgid "Changes saved correctly"
+msgstr "Đã lưu những thay đổi hoàn chỉnh"
+
+#: oc-admin/items.php:555 oc-admin/media.php:51 oc-admin/media.php:74
+msgid "Resource deleted"
+msgstr "Tài nguyên đã bị xoá"
+
+#: oc-admin/items.php:604
+msgid "A new listing has been added"
+msgstr "Đã thêm một rao vặt mới"
+
+#: oc-admin/items.php:699
+msgid "Listings' settings have been updated"
+msgstr "Thiết lập rao vặt đã được cập nhật"
+
+#: oc-admin/languages.php:56
+msgid "The translation folder is not writable"
+msgstr "Không thể ghi vào thư mục dịch"
+
+#: oc-admin/languages.php:60
+msgid "The language has been installed correctly"
+msgstr "Đã cài đặt ngôn ngữ thành công"
+
+#: oc-admin/languages.php:63 oc-admin/languages.php:75
+msgid "There was a problem adding the language"
+msgstr "Thêm ngôn ngữ xảy ra vấn đề"
+
+#: oc-admin/languages.php:85 oc-admin/languages.php:118
+msgid "Language id isn't in the correct format"
+msgstr "ID ngôn ngữ không đúng định dạng"
+
+#: oc-admin/languages.php:92
+msgid "Language id doesn't exist"
+msgstr "Không tồn tại ID ngôn ngữ này"
+
+#: oc-admin/languages.php:141
+msgid "Language name field is required"
+msgstr "Yêu cầu nhập tên ngôn ngữ"
+
+#: oc-admin/languages.php:144
+msgid "Language short name field is required"
+msgstr "Yêu cầu nhập tên ngắn gọn của ngôn ngữ"
+
+#: oc-admin/languages.php:147
+msgid "Language description field is required"
+msgstr "Yêu cầu nhập miêu tả cho ngôn ngữ"
+
+#: oc-admin/languages.php:150
+msgid "Currency format field is required"
+msgstr "Yêu cầu nhập định dạng đơn vị tiền tệ"
+
+#: oc-admin/languages.php:174
+msgid "%s has been updated"
+msgstr "%s đã được cập nhật"
+
+#: oc-admin/languages.php:180
+msgid "Selected languages have been enabled for the website"
+msgstr "Ngôn ngữ được chọn đã được kích hoạt cho website"
+
+#: oc-admin/languages.php:187 oc-admin/languages.php:212
+#: oc-admin/languages.php:245 oc-admin/languages.php:270
+msgid "The language ids aren't in the correct format"
+msgstr "Các ID ngôn ngữ không đúng định dạng"
+
+#: oc-admin/languages.php:204
+msgid "Selected languages have been disabled for the website"
+msgstr "Những ngôn ngữ được chọn đã bị vô hiệu cho website"
+
+#: oc-admin/languages.php:238
+msgid "Selected languages have been enabled for the backoffice (oc-admin)"
+msgstr "Những ngôn ngữ được chọn đã được kích hoạt cho backoffice (oc-admin)"
+
+#: oc-admin/languages.php:262
+msgid "Selected languages have been disabled for the backoffice (oc-admin)"
+msgstr "Những ngôn ngữ được chọn đã bị vô hiệu cho backoffice (oc-admin)"
+
+#: oc-admin/languages.php:218 oc-admin/languages.php:276
+msgid "%s can't be disabled because it's the default language"
+msgstr "Không thể vô hiệu %s vì nó là ngôn ngữ mặc định"
+
+#: oc-admin/languages.php:302
+msgid "Directory '%s' couldn't be removed"
+msgstr "Không thể xoá thư mục '%s'"
+
+#: oc-admin/languages.php:304
+msgid "Directory \"%s\" has been successfully removed"
+msgstr "Đã xoá thư mục \"%s\" thành công"
+
+#: oc-admin/languages.php:310
+msgid "Directory '%s' couldn't be removed because it's the default language. Set another language as default first and try again"
+msgstr "Không thể xoá thư mục '%s' vì nó là ngôn ngữ mặc định. Thiết lập ngôn ngữ khác là mặc định trước và thử lại"
+
+#: oc-admin/login.php:43
+msgid "The username field is empty"
+msgstr "Tên tài khoản bị bỏ trống"
+
+#: oc-admin/login.php:48
+msgid "The password field is empty"
+msgstr "Mật khẩu bị bỏ trống"
+
+#: oc-admin/login.php:56
+msgid "Sorry, incorrect username. <a href=\"%s\">Have you lost your password?</a>"
+msgstr "Rất tiếc, sai tên tài khoản. <a href=\"%s\">Bạn đã mất mật khẩu?</a>"
+
+#: oc-admin/login.php:61
+msgid "Sorry, incorrect password. <a href=\"%s\">Have you lost your password?</a>"
+msgstr "Rất tiếc, sai mật khẩu. <a href=\"%s\">Bạn đã mất mật khẩu?</a>"
+
+#: oc-admin/login.php:107
+msgid "The reCAPTCHA code is wrong"
+msgstr "Nhập sai mã reCAPTCHA"
+
+#: oc-admin/login.php:125
+msgid "A new password has been sent to your e-mail"
+msgstr "Mật khẩu mới đã được gửi vào email của bạn"
+
+#: oc-admin/login.php:154
+msgid "Error, the passwords don't match"
+msgstr "Lỗi, mật khẩu không trùng khớp"
+
+#: oc-admin/pages.php:82 oc-admin/pages.php:147
+msgid "You have to set a different internal name"
+msgstr "Bạn phải đặt tên nội bộ khác"
+
+#: oc-admin/pages.php:99
+msgid "The page has been updated"
+msgstr "Đã cập nhật trang"
+
+#: oc-admin/pages.php:104
+msgid "The page couldn't be updated, at least one title should not be empty"
+msgstr "Không thể cập nhật trang, ít nhất một tiêu đề không được bỏ trống"
+
+#: oc-admin/pages.php:77 oc-admin/pages.php:142
+msgid "You have to set an internal name"
+msgstr "Bạn phải đặt tên nội bộ"
+
+#: oc-admin/pages.php:158
+msgid "The page has been added"
+msgstr "Đã thêm trang"
+
+#: oc-admin/pages.php:161
+msgid "The page couldn't be added, at least one title should not be empty"
+msgstr "Không thể thêm trang, ít nhất một tiêu đề không được bỏ trống"
+
+#: oc-admin/pages.php:164
+msgid "Oops! That internal name is already in use. We can't make the changes"
+msgstr "Ồ! Tên nội bộ này đã được sử dụng. Chúng tôi không thể thay đổi"
+
+#: oc-admin/pages.php:195
+msgid "One page can't be deleted because it is indelible"
+msgstr "Một trang không thể xoá vì nó không phai mờ"
+
+#: oc-admin/pages.php:197
+msgid "%s pages couldn't be deleted because they are indelible"
+msgstr "Những trang %s không thể xoá vì chúng không phai mờ"
+
+#: oc-admin/pages.php:202
+msgid "One page couldn't be deleted"
+msgstr "Một trang không thể xoá"
+
+#: oc-admin/pages.php:204
+msgid "%s pages couldn't be deleted"
+msgstr "Những trang %s không thể xoá"
+
+#: oc-admin/pages.php:209
+msgid "One page has been deleted correctly"
+msgstr "Đã xoá hoàn chỉnh một trang"
+
+#: oc-admin/pages.php:211
+msgid "%s pages have been deleted correctly"
+msgstr "Đã xoá hoàn chỉnh các trang %s"
+
+#: oc-admin/plugins.php:54
+msgid "The plugin folder is not writable"
+msgstr "Không thể ghi vào thư mục plugin"
+
+#: oc-admin/plugins.php:57
+msgid "The plugin has been uploaded correctly"
+msgstr "Đã tải lên plugin hoàn chỉnh"
+
+#: oc-admin/plugins.php:68
+msgid "There was a problem adding the plugin"
+msgstr "Xảy ra vấn đề khi thêm plugin"
+
+#: oc-admin/plugins.php:93
+msgid "Plugin is already installed"
+msgstr "Đã cài đặt plugin"
+
+#: oc-admin/plugins.php:96
+msgid "Plugin couldn't be installed because their files are missing"
+msgstr "Không thể cài đặt plugin vì chúng thiếu tập tin"
+
+#: oc-admin/plugins.php:99
+msgid "Plugin couldn't be installed because of: %s"
+msgstr "Không thể cài đặt plugin vì: %s"
+
+#: oc-admin/plugins.php:102
+msgid "Plugin couldn't be installed"
+msgstr "Không thể cài đặt plugin"
+
+#: oc-admin/plugins.php:106
+msgid "Plugin installed"
+msgstr "Đã cài đặt plugin"
+
+#: oc-admin/plugins.php:119
+msgid "Plugin uninstalled"
+msgstr "Đã gỡ cài đặt plugin"
+
+#: oc-admin/plugins.php:121
+msgid "Plugin couldn't be uninstalled"
+msgstr "Không thể gỡ cài đặt plugin"
+
+#: oc-admin/plugins.php:134
+msgid "Plugin enabled"
+msgstr "Đã kích hoạt plugin"
+
+#: oc-admin/plugins.php:136
+msgid "Plugin is already enabled"
+msgstr "Plugin đã được kích hoạt rồi"
+
+#: oc-admin/plugins.php:149
+msgid "Plugin disabled"
+msgstr "Đã vô hiệu plugin"
+
+#: oc-admin/plugins.php:151
+msgid "Plugin is already disabled"
+msgstr "Plugin đã bị vô hiệu rồi"
+
+#: oc-admin/plugins.php:222 oc-admin/plugins.php:238
+msgid "No plugin selected"
+msgstr "Chưa chọn plugin nào"
+
+#: oc-admin/plugins.php:218
+msgid "Configuration was saved"
+msgstr "Đã lưu cấu hình"
+
+#: oc-admin/controller/settings/locations.php:39
+#: oc-admin/controller/settings/locations.php:182
+#: oc-admin/controller/settings/locations.php:240
+#: oc-admin/controller/settings/locations.php:326
+#: oc-admin/controller/settings/locations.php:384
+msgid "%s already was in the database"
+msgstr "%s đã có trong cơ sở dữ liệu"
+
+#: oc-admin/controller/settings/locations.php:47
+msgid "Country code and name should have at least two characters"
+msgstr "Mã và tên quốc gia phải có ít nhất hai ký tự"
+
+#: oc-admin/controller/settings/locations.php:44
+#: oc-admin/controller/settings/locations.php:62
+msgid "%s has been added as a new country"
+msgstr "%s đã được thêm như một quốc gia mới"
+
+#: oc-admin/controller/settings/locations.php:104
+msgid "Country has been edited"
+msgstr "Quốc gia đã được chỉnh sửa"
+
+#: oc-admin/controller/settings/locations.php:106
+msgid "There were some problems editing the country"
+msgstr "Có vài vấn đề khi chỉnh sửa quốc gia"
+
+#: oc-admin/controller/settings/locations.php:158
+#: oc-admin/controller/settings/locations.php:180
+msgid "%s has been added as a new region"
+msgstr "%s đã được thêm như một địa phương mới"
+
+#: oc-admin/controller/settings/locations.php:237
+#: oc-admin/controller/settings/locations.php:382
+msgid "%s has been edited"
+msgstr "%s đã được chỉnh sửa"
+
+#: oc-admin/controller/settings/locations.php:304
+#: oc-admin/controller/settings/locations.php:324
+msgid "%s has been added as a new city"
+msgstr "%s đã được thêm như là một thành phố mới"
+
+#: oc-admin/controller/settings/permalinks.php:424
+msgid "One field was not updated"
+msgstr "Một trường dữ liệu không được cập nhật"
+
+#: oc-admin/controller/settings/permalinks.php:427
+#: oc-admin/controller/settings/permalinks.php:475
+msgid "Permalinks structure updated"
+msgstr "Cấu trúc permalinks đã được cập nhật"
+
+#: oc-admin/controller/settings/permalinks.php:436
+msgid "Permalinks structure updated."
+msgstr "Cấu trúc permalinks đã được cập nhật"
+
+#: oc-admin/controller/settings/permalinks.php:438
+msgid "However, we can't check if Apache module <b>mod_rewrite</b> is loaded. If you experience some problems with the URLs, you should deactivate <em>Friendly URLs</em>"
+msgstr "Tuy nhiên, chúng tôi không thể kiểm tra Apache <b>mod_rewrite</b> đã được tải hay chưa. Nếu bạn gặp một số vấn đề với các URL, bạn nên tắt <em>URLs thân thiện</em>"
+
+#: oc-admin/controller/settings/permalinks.php:504
+msgid "Friendly URLs successfully deactivated"
+msgstr "URLs thân thiện đã bị vô hiệu thành công"
+
+#: oc-admin/controller/settings/spamnbots.php:56
+msgid "Your Akismet key has been cleared"
+msgstr "Chìa khoá Akismet của bạn đã bị giải toả"
+
+#: oc-admin/controller/settings/spamnbots.php:58
+msgid "Your Akismet key has been updated"
+msgstr "Chìa khoá Akismet của bạn đã được cập nhật"
+
+#: oc-admin/controller/settings/spamnbots.php:75
+msgid "Your reCAPTCHA key has been cleared"
+msgstr "Chìa khoá reCAPTCHA của bạn đã bị giải toả"
+
+#: oc-admin/controller/settings/spamnbots.php:77
+msgid "Your reCAPTCHA key has been updated"
+msgstr "Chìa khoá reCAPTCHA của bạn đã được cập nhật"
+
+#: oc-admin/controller/settings/currencies.php:51
+msgid "The currency code is not in the correct format"
+msgstr "Mã tiền tệ không đúng định dạng"
+
+#: oc-admin/controller/settings/currencies.php:64
+msgid "Currency added"
+msgstr "Đã thêm đơn vị tiền tệ"
+
+#: oc-admin/controller/settings/currencies.php:66
+msgid "Currency couldn't be added"
+msgstr "Không thể thêm đơn vị tiền tệ"
+
+#: oc-admin/controller/settings/currencies.php:77
+#: oc-admin/controller/settings/currencies.php:84
+msgid "The currency code '%s' doesn't exist"
+msgstr "Đơn vị tiền tệ '%s' không tồn tại"
+
+#: oc-admin/controller/settings/currencies.php:107
+msgid "Error: the currency code is not in the correct format"
+msgstr "Lỗi: Mã tiền tệ không đúng định dạng"
+
+#: oc-admin/controller/settings/currencies.php:120
+msgid "Currency updated"
+msgstr "Cập nhật tiền tệ"
+
+#: oc-admin/controller/settings/currencies.php:122
+msgid "No changes were made"
+msgstr "Không thực hiện thay đổi nào"
+
+#: oc-admin/controller/settings/currencies.php:154
+msgid "No currencies have been deleted"
+msgstr "Không có đơn vị tiền tệ nào bị xoá"
+
+#: oc-admin/controller/settings/currencies.php:158
+msgid "One currency has been deleted"
+msgstr "Một đơn vị tiền tệ đã bị xoá"
+
+#: oc-admin/controller/settings/currencies.php:162
+msgid "%s currencies have been deleted"
+msgstr "%s đơn vị tiền tệ đã bị xoá"
+
+#: oc-admin/controller/settings/mailserver.php:52
+msgid "Mail server type is incorrect"
+msgstr "Kiểu máy chủ mail không đúng"
+
+#: oc-admin/controller/settings/mailserver.php:68
+msgid "Mail server configuration has changed"
+msgstr "Thiết lập máy chủ mail đã được thay đổi"
+
+#: oc-admin/controller/settings/media.php:83
+#: oc-admin/controller/settings/media.php:91
+msgid "There was a problem uploading the watermark image"
+msgstr "Có vấn đề khi tải lên hình ảnh watermark"
+
+#: oc-admin/controller/settings/media.php:87
+msgid "The watermark image has to be a .PNG file"
+msgstr "Ảnh watermark phải là tệp .PNG"
+
+#: oc-admin/controller/settings/media.php:138
+msgid "You cannot set a maximum file size higher than the one allowed in the PHP configuration: <b>%d KB</b>"
+msgstr "Bạn không thể thiết đặt dung lượng tệp cao hơn cấu hình cho phép của PHP là: <b>%d Kb</b>"
+
+#: oc-admin/controller/settings/media.php:163
+msgid "Media config has been updated"
+msgstr "Cấu hình media đã được cập nhật"
+
+#: oc-admin/controller/settings/media.php:223
+msgid "Re-generation complete"
+msgstr "Tái tại hoàn chỉnh"
+
+#: oc-admin/controller/settings/main.php:73
+msgid "Page title field is required"
+msgstr "Yêu cầu nhập tiêu đề trang"
+
+#: oc-admin/controller/settings/main.php:76
+msgid "Contact email field is required"
+msgstr "Yêu cầu nhập email liên hệ"
+
+#: oc-admin/controller/settings/main.php:127
+#: oc-admin/controller/settings/main.php:129
+msgid "General settings have been updated"
+msgstr "Các cài đặt chung đã được cập nhật"
+
+#: oc-admin/controller/settings/latestsearches.php:39
+msgid "Custom number could not be left empty"
+msgstr "Số tùy chỉnh không thể để trống"
+
+#: oc-admin/controller/settings/latestsearches.php:44
+msgid "Last search settings have been updated"
+msgstr "Thiết lập tìm kiếm cuối cùng đã được cập nhật"
+
+#: oc-admin/tools.php:50
+msgid "Import complete"
+msgstr "Hoàn thành nhập liệu"
+
+#: oc-admin/tools.php:52
+msgid "There was a problem importing data to the database"
+msgstr "Có một vấn đề khi nhập liệu vào cơ sở dữ liệu"
+
+#: oc-admin/tools.php:67
+msgid "Recount category stats has been successful"
+msgstr "Đã hoàn thành việc đếm lại số liệu thống kê chuyên mục"
+
+#: oc-admin/tools.php:106 oc-admin/tools.php:135
+msgid "Path is empty"
+msgstr "Đường dẫn bị bỏ trống"
+
+#: oc-admin/tools.php:109 oc-admin/tools.php:138
+msgid "Could not connect with the database. Error: %s"
+msgstr "Không thể kết nối cơ sở dữ liệu. Lỗi: %s"
+
+#: oc-admin/tools.php:112 oc-admin/tools.php:144
+msgid "There are no tables to back up"
+msgstr "Không có bảng dữ liệu nào để sao lưu"
+
+#: oc-admin/tools.php:115 oc-admin/tools.php:147
+msgid "The folder is not writable"
+msgstr "Không ghi được vào thư mục"
+
+#: oc-admin/tools.php:141
+msgid "Could not select the database. Error: %s"
+msgstr "Không thể chọn cơ sở dữ liệu. Lỗi: %s"
+
+#: oc-admin/tools.php:235
+msgid "Maintenance mode is ON"
+msgstr "Chế độ bảo trì đang BẬT"
+
+#: oc-admin/tools.php:245
+msgid "Maintenance mode is OFF"
+msgstr "Chế độ bảo trì đang TẮT"
+
+#: oc-admin/users.php:68
+msgid "The user has been created. We've sent an activation e-mail"
+msgstr "Đã tạo người dùng. Chúng tôi đã gửi một email kích hoạt"
+
+#: oc-admin/users.php:70
+msgid "The user has been created successfully"
+msgstr "Đã tạo người dùng thành công"
+
+#: oc-admin/users.php:123
+msgid "The user has been updated and activated"
+msgstr "Người dùng đã được cập nhật và kích hoạt"
+
+#: oc-admin/users.php:121
+msgid "The user has been updated"
+msgstr "Người dùng đã được cập nhật"
+
+#: oc-admin/users.php:137 oc-admin/users.php:160 oc-admin/users.php:185
+#: oc-admin/users.php:209 oc-admin/users.php:233 oc-admin/users.php:257
+#: oc-admin/users.php:555
+msgid "User id isn't in the correct format"
+msgstr "ID người dùng không đúng định dạng"
+
+#: oc-admin/users.php:149
+msgid "Activation email sent to one user"
+msgstr "Email kích hoạt được gửi cho mỗi người dùng"
+
+#: oc-admin/users.php:172
+msgid "One user has been activated"
+msgstr "Một thành viên đã được kích hoạt"
+
+#: oc-admin/users.php:197
+msgid "One user has been deactivated"
+msgstr "Một thành viên bị vô hiệu"
+
+#: oc-admin/users.php:221
+msgid "One user has been unblocked"
+msgstr "Một thành viên đã được mở khoá"
+
+#: oc-admin/users.php:245
+msgid "One user has been blocked"
+msgstr "Một thành viên đã bị khoá"
+
+#: oc-admin/users.php:272
+msgid "One user has been deleted"
+msgstr "Một thành viên đã bị xoá"
+
+#: oc-includes/osclass/ItemActions.php:318
+msgid "Title too short."
+msgstr "Tiêu đề quá ngắn."
+
+#: oc-includes/osclass/ItemActions.php:319
+msgid "Title too long."
+msgstr "Tiêu đề quá dài."
+
+#: oc-includes/osclass/ItemActions.php:331
+msgid "Description too short."
+msgstr "Mô tả quá ngắn."
+
+#: oc-includes/osclass/ItemActions.php:332
+msgid "Description too long."
+msgstr "Mô tả quá dài."
+
+#: oc-includes/osclass/ItemActions.php:129
+#: oc-includes/osclass/ItemActions.php:337
+msgid "Category invalid."
+msgstr "Sai chuyên mục."
+
+#: oc-includes/osclass/ItemActions.php:131
+#: oc-includes/osclass/ItemActions.php:339
+msgid "Price too long."
+msgstr "Giá quá dài."
+
+#: oc-includes/osclass/ItemActions.php:133
+msgid "Name too long."
+msgstr "Tên quá dài."
+
+#: oc-includes/osclass/ItemActions.php:134
+msgid "Email invalid."
+msgstr "Sai email."
+
+#: oc-includes/osclass/ItemActions.php:135
+#: oc-includes/osclass/ItemActions.php:341
+msgid "Country too short."
+msgstr "Quốc gia quá ngắn."
+
+#: oc-includes/osclass/ItemActions.php:136
+#: oc-includes/osclass/ItemActions.php:342
+msgid "Country too long."
+msgstr "Quốc gia quá dài."
+
+#: oc-includes/osclass/ItemActions.php:137
+#: oc-includes/osclass/ItemActions.php:343
+msgid "Region too short."
+msgstr "Địa phương quá ngắn."
+
+#: oc-includes/osclass/ItemActions.php:138
+#: oc-includes/osclass/ItemActions.php:344
+msgid "Region too long."
+msgstr "Địa phương quá dài."
+
+#: oc-includes/osclass/ItemActions.php:139
+#: oc-includes/osclass/ItemActions.php:345
+msgid "City too short."
+msgstr "Thành phố quá ngắn."
+
+#: oc-includes/osclass/ItemActions.php:140
+#: oc-includes/osclass/ItemActions.php:346
+msgid "City too long."
+msgstr "Thành phố quá dài."
+
+#: oc-includes/osclass/ItemActions.php:141
+#: oc-includes/osclass/ItemActions.php:347
+msgid "Municipality too short."
+msgstr "Đô thị quá ngắn."
+
+#: oc-includes/osclass/ItemActions.php:142
+#: oc-includes/osclass/ItemActions.php:348
+msgid "Municipality too long."
+msgstr "Đô thị quá dài."
+
+#: oc-includes/osclass/ItemActions.php:143
+#: oc-includes/osclass/ItemActions.php:349
+msgid "Address too short."
+msgstr "Địa chỉ quá ngắn."
+
+#: oc-includes/osclass/ItemActions.php:144
+#: oc-includes/osclass/ItemActions.php:350
+msgid "Address too long."
+msgstr "Địa chỉ quá dài."
+
+#: oc-includes/osclass/ItemActions.php:145
+msgid "Too fast. You should wait a little to publish your ad."
+msgstr "Quá nhanh. Bạn nên chờ một lát trước khi đăng quảng cáo."
+
+#: oc-includes/osclass/ItemActions.php:160
+#: oc-includes/osclass/ItemActions.php:363
+msgid "%s field is required."
+msgstr "Yêu cầu nhập %s."
+
+#: oc-includes/osclass/ItemActions.php:1311
+msgid "One of the files you tried to upload exceeds the maximum size"
+msgstr "Một trong số những tập tin mà bạn tải lên có dung lượng vượt mức tối đa"
+
+#: oc-includes/osclass/controller/item.php:163
+msgid "Check your inbox to validate your listing"
+msgstr "Kiểm tra hộp thư của bạn để xác nhận"
+
+#: oc-admin/comments.php:88
+msgid "The comments have been unblocked"
+msgstr "Các bình luận đã được bỏ khoá"
+
+#: oc-admin/comments.php:98
+msgid "The comments have been blocked"
+msgstr "Các bình luận đã bị khoá"
+
+#: oc-admin/items.php:264
+msgid "%d listing has been unmarked"
+msgstr "Rao vặt %d đã được gỡ đánh dấu"
+
+#: oc-admin/controller/settings/main.php:29
+msgid "Last check"
+msgstr "Lần kiểm cuối"
+
+#: oc-admin/main.php:71
+msgid "Entered an invalid email"
+msgstr "Đã nhập sai địa chỉ email"
+
+#: oc-admin/main.php:74
+msgid "You're already subscribed"
+msgstr "Bạn đã đăng ký"
+
+#: oc-admin/main.php:77
+msgid "Subscribed correctly"
+msgstr "Đăng ký thành công"
+
+#: oc-admin/main.php:80
+msgid "Error subscribing"
+msgstr "Lỗi đăng ký"
+
+#: oc-includes/osclass/core/AdminSecBaseModel.php:62
+msgid "Thank you very much for your donation"
+msgstr "Chân thành cảm ơn bạn đã đóng góp"
+
+#: oc-includes/osclass/controller/item.php:507
+msgid "You need to be logged to comment"
+msgstr "Bạn cần đăng nhập để gửi thảo luận"
+
+#: oc-includes/osclass/helpers/hSecurity.php:85
+msgid "Invalid CSRF token."
+msgstr "CSRF token không hợp lệ."
+
+#: oc-includes/osclass/helpers/hSecurity.php:79
+msgid "Probable invalid request."
+msgstr "Có thể đã xảy ra yêu cầu không hợp lệ."
+
+#: oc-includes/osclass/controller/item.php:510
+msgid "Sorry, comments are disabled"
+msgstr "Rất tiếc, thảo luận đã bị vô hiệu"
+
+#: oc-includes/osclass/controller/item.php:589
+msgid "The listing hasn't been enabled. Please enable it in order to make it public"
+msgstr "Rao vặt chưa được kích hoạt"
+
+#: oc-includes/osclass/UserActions.php:55
+#: oc-includes/osclass/UserActions.php:160
+msgid "The name cannot be empty"
+msgstr "Tên không được bỏ trống"
+
+#: oc-includes/osclass/UserActions.php:154
+msgid "The specified e-mail is already used by %"
+msgstr "E-mail chỉ định đã được sử dụng bởi %"
+
+#: oc-admin/admins.php:50 oc-admin/admins.php:143 oc-admin/admins.php:257
+#: oc-admin/appearance.php:37 oc-admin/appearance.php:74
+#: oc-admin/controller/settings/advanced.php:32
+#: oc-admin/controller/settings/locations.php:31
+#: oc-admin/controller/settings/locations.php:71
+#: oc-admin/controller/settings/locations.php:113
+#: oc-admin/controller/settings/locations.php:142
+#: oc-admin/controller/settings/locations.php:191
+#: oc-admin/controller/settings/locations.php:247
+#: oc-admin/controller/settings/locations.php:283
+#: oc-admin/controller/settings/locations.php:335
+#: oc-admin/controller/settings/locations.php:391
+#: oc-admin/controller/settings/mailserver.php:31
+#: oc-admin/controller/settings/media.php:170 oc-admin/languages.php:41
+#: oc-admin/login.php:97 oc-admin/plugins.php:40 oc-admin/plugins.php:77
+#: oc-admin/plugins.php:113 oc-admin/plugins.php:128 oc-admin/plugins.php:143
+msgid "This action can't be done because it's a demo site"
+msgstr "Hành động này không thể hoàn thành vì đây là website mẫu"
+
+#: oc-admin/admins.php:120
+msgid "There has been an error adding a new admin"
+msgstr "Có lỗi khi thêm người quản trị"
+
+#: oc-admin/admins.php:135
+msgid "There is no admin with this id"
+msgstr "Không có quản trị nào với id này"
+
+#: oc-admin/items.php:324
+msgid "The listing can't be activated because it's blocked"
+msgstr "Không thể kích hoạt rao vặt vì nó đã bị khoá"
+
+#: oc-admin/items.php:653
+msgid "Wait time must only contain numeric characters"
+msgstr "Thời gian chờ phải chứa các ký số"
+
+#: oc-admin/items.php:656
+msgid "Number of moderated listings must only contain numeric characters"
+msgstr "Số lượng các rao vặt đã kiểm duyệt phải là các ký số"
+
+#: oc-admin/items.php:659
+msgid "Images per listing must only contain numeric characters"
+msgstr "Số lượng hình ảnh trong một rao vặt phải là các ký số"
+
+#: oc-admin/languages.php:153
+msgid "Number of decimals must only contain numeric characters"
+msgstr "Số lượng chữ số thập phân phải là các ký số"
+
+#: oc-admin/languages.php:307
+msgid "Directory '%s' couldn't be removed;)"
+msgstr "Không thể xoá thư mục '%s' ;)"
+
+#: oc-admin/main.php:62
+msgid "You have very few free space left, users will not be able to upload pictures"
+msgstr "Bạn còn lại rất ít dung lượng, không thể tải thêm hình ảnh"
+
+#: oc-admin/controller/settings/comments.php:48
+msgid "Number of moderate comments must only contain numeric characters"
+msgstr "Số lượng duyệt nhận xét chỉ được chứa các ký số"
+
+#: oc-admin/controller/settings/comments.php:51
+msgid "Comments per page must only contain numeric characters"
+msgstr "Số lượng bình luận trên mỗi trang chỉ được chứa các ký số"
+
+#: oc-admin/controller/settings/comments.php:71
+msgid "Comment settings have been updated"
+msgstr "Các thiết lập bình luận đã được cập nhật"
+
+#: oc-admin/controller/settings/locations.php:76
+msgid "Country name cannot be blank"
+msgstr "Tên quốc gia không thể bỏ trống"
+
+#: oc-admin/controller/settings/locations.php:133
+#: oc-admin/controller/settings/locations.php:274
+#: oc-admin/controller/settings/locations.php:415
+msgid "There was a problem deleting locations"
+msgstr "Có vấn đề khi xoá vị trí"
+
+#: oc-admin/controller/settings/locations.php:136
+msgid "No country was selected"
+msgstr "Chưa chọn quốc gia"
+
+#: oc-admin/controller/settings/locations.php:160
+#: oc-admin/controller/settings/locations.php:306
+msgid "%s can't be added"
+msgstr "%s không thể thêm"
+
+#: oc-admin/controller/settings/locations.php:170
+#: oc-admin/controller/settings/locations.php:200
+msgid "Region name cannot be blank"
+msgstr "Tên địa phương không thể bỏ trống"
+
+#: oc-admin/controller/settings/locations.php:277
+msgid "No region was selected"
+msgstr "Chưa chọn địa phương"
+
+#: oc-admin/controller/settings/locations.php:314
+msgid "New city name cannot be blank"
+msgstr "Tên thành phố mới không thể bỏ trống"
+
+#: oc-admin/controller/settings/locations.php:345
+msgid "City name cannot be blank"
+msgstr "Tên thành phố không thể bỏ trống"
+
+#: oc-admin/controller/settings/locations.php:418
+msgid "No city was selected"
+msgstr "Chưa chọn thành phố"
+
+#: oc-admin/controller/settings/permalinks.php:424
+msgid "All fields are required."
+msgstr "Yêu cầu điền đủ các trường dữ liệu"
+
+#: oc-admin/controller/settings/permalinks.php:445
+#: oc-admin/controller/settings/permalinks.php:455
+msgid "File <b>.htaccess</b> couldn't be filled out with the right content."
+msgstr "Có thể tập tin <b>.htaccess</b> không được điền đúng nội dung."
+
+#: oc-admin/controller/settings/permalinks.php:447
+msgid "Here's the content you have to add to the <b>.htaccess</b> file. If you can't create the file, please deactivate the <em>Friendly URLs</em> option."
+msgstr "Đây là nội dung bạn phải thêm vào tập tin <b>.htaccess</b>. Nếu bạn không thể tạo tập tin, vui lòng vô hiệu tuỳ chọn <em>URLs thân thiện</em>"
+
+#: oc-admin/controller/settings/permalinks.php:457
+msgid "Here's the content you have to add to the <b>.htaccess</b> file. If you can't create the file or experience some problems with the URLs, please deactivate the <em>Friendly URLs</em> option."
+msgstr "Đây là nội dung bạn phải thêm vào tập tin <b>.htaccess</b>. Nếu bạn không thể tạo tập tin hoặc không có kinh nghiệm xử lý, vui lòng vô hiệu tuỳ chọn <em>URLs thân thiện</em>."
+
+#: oc-admin/controller/settings/currencies.php:144
+msgid "%s couldn't be deleted because it has listings associated to it"
+msgstr "% s không thể bị xóa bởi vì có rao vặt liên quan"
+
+#: oc-admin/controller/settings/currencies.php:146
+msgid "%s couldn't be deleted because it's the default currency"
+msgstr "%s không thể bị xoá bởi vì nó là đơn vị tiền tệ mặc định"
+
+#: oc-admin/controller/settings/main.php:79
+msgid "Number of listings in the RSS has to be a numeric value"
+msgstr "Số lượng rao vặt tin RSS phải có giá trị số"
+
+#: oc-admin/controller/settings/main.php:82
+msgid "Max latest listings has to be a numeric value"
+msgstr "Rao vặt mới cập nhật tối đa phải có giá trị số"
+
+#: oc-admin/controller/settings/main.php:85
+msgid "Number of listings on search has to be a numeric value"
+msgstr "Số lượng rao vặt tìm kiếm phải có giá trị số"
+
+#: oc-admin/controller/settings/main.php:110
+msgid "Number of listings in the RSS must be an integer"
+msgstr "Số lượng rao vặt tin RSS phải là số nguyên"
+
+#: oc-admin/controller/settings/main.php:117
+msgid "Number of recent listings displayed at home must be an integer"
+msgstr "Số lượng rao vặt hiển thị gần nhất trên trang chủ phải là số nguyên"
+
+#: oc-admin/themes/modern/market/header.php:5
+msgid "<code>downloads</code> folder has to be writable, i.e.: <code>chmod a+w %soc-content/downloads/</code>"
+msgstr "Thư mục <code>downloads</code> phải ghi được, ví dụ: <code>chmod a+w %soc-content/downloads/</code>"
+
+#: oc-admin/tools.php:176 oc-admin/tools.php:213
+msgid "Archived successfully!"
+msgstr "Lưu trữ thành công!"
+
+#: oc-admin/tools.php:190 oc-admin/tools.php:216
+msgid "Error, the zip file was not created in the specified directory"
+msgstr "Lỗi, không thể tạo tập tin zip trong thư mục chỉ định"
+
+#: oc-admin/tools.php:237
+msgid "There was an error creating the .maintenance file, please create it manually at the root folder"
+msgstr "Xảy ra lỗi khi tạo tập tin bảo trì, hãy tạo nó thủ công tại thư mục gốc (root)"
+
+#: oc-admin/tools.php:247
+msgid "There was an error removing the .maintenance file, please remove it manually from the root folder"
+msgstr "Xảy ra lỗi khi xoá tập tin bảo trì, hãy xoá nó thủ công khỏi thư mục gốc (root)"
+
+#: oc-admin/users.php:147
+msgid "No users have been selected"
+msgstr "Chưa chọn tên người dùng nào"
+
+#: oc-admin/users.php:170
+msgid "No users have been activated"
+msgstr "Chưa kích hoạt thành viên nào"
+
+#: oc-admin/users.php:195
+msgid "No users have been deactivated"
+msgstr "Không có thành viên nào bị vô hiệu"
+
+#: oc-admin/users.php:219
+msgid "No users have been enabled"
+msgstr "Không có thành viên nào được kích hoạt"
+
+#: oc-admin/users.php:243
+msgid "No users have been disabled"
+msgstr "Không thành viên nào bị vô hiệu"
+
+#: oc-admin/users.php:270
+msgid "No users have been deleted"
+msgstr "Không thành viên nào bị xoá"
+
+#: oc-admin/users.php:283 oc-admin/users.php:317
+msgid "Alert id isn't in the correct format"
+msgstr "Cảnh báo id không đúng định dạng"
+
+#: oc-admin/users.php:298
+msgid "No alerts have been deleted"
+msgstr "Không có cảnh báo nào bị xoá"
+
+#: oc-admin/users.php:300
+msgid "One alert has been deleted"
+msgstr "Một cảnh báo bị xoá"
+
+#: oc-admin/users.php:337
+msgid "No alerts have been activated"
+msgstr "Không kích hoạt cảnh báo nào"
+
+#: oc-admin/users.php:339
+msgid "One alert has been activated"
+msgstr "Một cảnh báo đã được kích hoạt"
+
+#: oc-admin/users.php:343
+msgid "No alerts have been deactivated"
+msgstr "Không cảnh báo nào bị vô hiệu"
+
+#: oc-admin/users.php:345
+msgid "One alert has been deactivated"
+msgstr "Một cảnh báo đã bị vô hiệu"
+
+#: oc-admin/users.php:383
+msgid "User settings have been updated"
+msgstr "Thiết lập người dùng đã được cập nhật"
+
+#: oc-admin/users.php:526 oc-admin/users.php:541
+msgid "Both rules can not be empty"
+msgstr "Tất cả các điều lệ không thể bị bỏ trống"
+
+#: oc-admin/users.php:531
+msgid "Rule updated correctly"
+msgstr "Cập nhật điều lệ thành công"
+
+#: oc-admin/users.php:546
+msgid "Rule saved correctly"
+msgstr "Lưu điều lệ thành công"
+
+#: oc-admin/users.php:567
+msgid "No rules have been deleted"
+msgstr "Không điều lệ nào bị xoá"
+
+#: oc-admin/users.php:569
+msgid "One ban rule has been deleted"
+msgstr "Một điều lệ cấm đã bị xoá"
+
+#: oc-includes/osclass/ItemActions.php:90
+#: oc-includes/osclass/ItemActions.php:303
+msgid "Image with an incorrect extension."
+msgstr "Hình ảnh bị sao phần đuôi mở rộng"
+
+#: oc-includes/osclass/ItemActions.php:93
+#: oc-includes/osclass/ItemActions.php:306
+msgid "Image is too big. Max. size"
+msgstr "Hình ảnh quá lớn. Kích thước tối đa"
+
+#: oc-includes/osclass/ItemActions.php:130
+#: oc-includes/osclass/ItemActions.php:338
+msgid "Price must be a number."
+msgstr "Giá phải là số."
+
+#: oc-includes/osclass/ItemActions.php:857
+msgid "We just sent your message to %s"
+msgstr "Chúng tôi vừa gửi cho bạn một tin nhắn tới %s"
+
+#: oc-includes/osclass/ItemActions.php:1366
+msgid "The file you tried to upload does not have a valid extension"
+msgstr "Tập tin mà bạn tải lên có đuôi mở rộng không đúng"
+
+#: oc-includes/osclass/controller/contact.php:65
+msgid "Please enter a correct email"
+msgstr "Vui lòng nhập địa chỉ email chính xác"
+
+#: oc-includes/osclass/controller/contact.php:105
+msgid "There have been some errors sending the message"
+msgstr "Xảy ra lỗi khi gửi tin nhắn"
+
+#: oc-includes/osclass/controller/contact.php:123
+msgid "Your email has been sent properly. Thank you for contacting us!"
+msgstr "Email của bạn được gửi thành công. Cảm ơn bạn đã liên hệ với chúng tôi!"
+
+#: oc-includes/osclass/controller/item.php:135
+msgid "A user with that email address already exists, if it is you, please log in"
+msgstr "Đã có thành viên sử dụng địa chỉ email này, nếu là bạn thì hãy đăng nhập"
+
+#: oc-includes/osclass/controller/contact.php:51
+#: oc-includes/osclass/controller/contact.php:60
+#: oc-includes/osclass/controller/item.php:142
+#: oc-includes/osclass/controller/item.php:458
+#: oc-includes/osclass/controller/login.php:75
+#: oc-includes/osclass/controller/register.php:57
+#: oc-includes/osclass/controller/user-non-secure.php:158
+msgid "Your current email is not allowed"
+msgstr "Email hiện tại của bạn không được phép truy cập"
+
+#: oc-includes/osclass/controller/contact.php:54
+#: oc-includes/osclass/controller/item.php:145
+#: oc-includes/osclass/controller/item.php:461
+#: oc-includes/osclass/controller/login.php:78
+#: oc-includes/osclass/controller/register.php:60
+#: oc-includes/osclass/controller/user-non-secure.php:161
+msgid "Your current IP is not allowed"
+msgstr "Địa chỉ IP của bạn không được phép truy cập"
+
+#: oc-includes/osclass/controller/item.php:194
+msgid "Sorry, we don't have any listings with that ID"
+msgstr "Rất tiếc, chúng tôi không có rao vặt nào của ID này"
+
+#: oc-includes/osclass/controller/item.php:582
+msgid "The listing hasn't been validated. Please validate it in order to make it public"
+msgstr "Rao vặt chưa được xác nhận. Hãy xác nhận để nó được đăng tải"
+
+#: oc-includes/osclass/controller/login.php:150
+msgid "This should never happen"
+msgstr "Việc này không nên xảy ra"
+
+#: oc-includes/osclass/UserActions.php:37
+msgid "The reCAPTCHA was not entered correctly"
+msgstr "Mã reCAPTCHA đã nhập không chính xác"
+
+#: oc-includes/osclass/UserActions.php:74
+msgid "Username is already taken"
+msgstr "Tên tài khoản đã bị lấy mất"
+
+#: oc-includes/osclass/UserActions.php:78
+#: oc-includes/osclass/controller/user.php:155
+msgid "The specified username is not valid, it contains some invalid words"
+msgstr "Tên tài khoản chỉ định không đúng, nó chưa vài từ sai"
+
+#: oc-includes/osclass/controller/user-non-secure.php:82
+#: oc-includes/osclass/controller/user.php:225
+msgid "Oops! There was a problem trying to activate your alert. Please contact an administrator"
+msgstr "Rất tiếc! Có một vấn đề khi bạn cố gắng kích hoạt cảnh báo. Xin vui lòng liên hệ với quản trị viên"
+
+#: oc-includes/osclass/controller/user-non-secure.php:103
+#: oc-includes/osclass/controller/user.php:246
+msgid "Oops! There was a problem trying to unsubscribe you. Please contact an administrator"
+msgstr "Rất tiếc! Có một vấn đề khi bạn cố gắng để bỏ theo dõi. Xin vui lòng liên hệ với quản trị viên"
+
+#: oc-includes/osclass/controller/user.php:145
+msgid "The specified username is already in use"
+msgstr "Tên tài khoản chỉ định đã từng được sử dụng"
+
+#: oc-includes/osclass/controller/user.php:151
+msgid "The username was updated"
+msgstr "Đã cập nhật tên tài khoản"
+
+#: oc-includes/osclass/controller/user.php:159
+msgid "The specified username could not be empty"
+msgstr "Tên tài khoản chỉ định không được bỏ trống"
+
+#: oc-includes/osclass/controller/user.php:269
+msgid "Your account have been deleted"
+msgstr "Đã xoá tài khoản của bạn"
+
+#: oc-includes/osclass/controller/user.php:272
+#: oc-includes/osclass/controller/user.php:276
+msgid "Oops! you can not do that"
+msgstr "Ồ! Bạn không thể thực hiện việc này"
+
+#: oc-includes/osclass/emails.php:464
+msgid "We've sent you an e-mail. Follow its instructions to validate the changes"
+msgstr "Chúng tôi đã gửi cho bạn một email. Hãy làm theo hướng dẫn trong đó để xác nhận việc thay đổi"
+
+#: oc-includes/osclass/emails.php:466
+msgid "We tried to sent you an e-mail, but it failed. Please, contact an administrator"
+msgstr "Chúng tôi đã cố gắng gửi cho bạn một email nhưng không được. Vui lòng liên hệ quản trị viên"
+
+#: oc-includes/osclass/ItemActions.php:132
+#: oc-includes/osclass/ItemActions.php:340
+msgid "Price must be positive number."
+msgstr "Giá phải là số dương."
+
+#: oc-admin/plugins.php:90
+msgid "The plugin generated %d characters of <strong>unexpected output</strong> during the installation. Output: \"%s\""
+msgstr "Plugin tạo ra %d ký tự <strong>không mong muốn</strong> trong quá trình cài đặt. Đầu ra: \"%s\""
+
+#: oc-admin/items.php:662
+msgid "Number of expiration days has to be a numeric value"
+msgstr "Số ngày hết hạn phải là giá trị số"
+
+#: oc-admin/controller/settings/permalinks.php:509
+msgid "Friendly URLs deactivated, but .htaccess file was modified outside Osclass and was not deleted"
+msgstr "URLs thân thiện đã bị vô hiệu, nhưng tập tin .htaccess đã được chỉnh sửa từ bên ngoài Osclass và chưa bị xoá"
+
+#: oc-admin/controller/settings/permalinks.php:507
+msgid "Friendly URLs deactivated, but .htaccess file could not be deleted. Please, remove it manually"
+msgstr "URLs thân thiện đã bị vô hiệu, nhưng không thể xoá tập tin .htaccess. Vui lòng xoá thủ công"
+
+#: oc-admin/controller/settings/permalinks.php:471
+msgid "Here's the content you have to add to the <b>.htaccess</b> file. If you can't modify the file or experience some problems with the URLs, please deactivate the <em>Friendly URLs</em> option."
+msgstr "Đây là nội dung bạn phải thêm vào tập tin <b>.htaccess</b>. Nếu bạn không thể tạo tập tin hoặc không có kinh nghiệm xử lý, vui lòng vô hiệu tuỳ chọn <em>URLs thân thiện</em>."
+
+#: oc-admin/controller/settings/permalinks.php:469
+msgid "File <b>.htaccess</b> already exists and was not modified."
+msgstr "Tập tin <b>.htaccess</b> đã có sẵn và không thể hiệu chỉnh."
+
+#: oc-admin/items.php:665
+msgid "Title Length has to be a numeric value"
+msgstr "Chiều dài tiêu đề phải là giá trị dạng số"
+
+#: oc-admin/controller/settings/advanced.php:44
+msgid "Advanced settings have been updated"
+msgstr "Cài đặt nâng cao đã được cập nhật"
+
+#: oc-admin/items.php:668
+msgid "Description Length has to be a numeric value"
+msgstr "Độ dài mô tả phải là giá trị dạng số"
+
+#: oc-includes/osclass/ItemActions.php:105
+msgid "Title too short (%s)."
+msgstr "Tiêu đề quá ngắn (%s)."
+
+#: oc-includes/osclass/ItemActions.php:106
+msgid "Title too long (%s)."
+msgstr "Tiêu đề quá dài (%s)."
+
+#: oc-includes/osclass/ItemActions.php:118
+msgid "Description too short (%s)."
+msgstr "Mô tả quá ngắn (%s)."
+
+#: oc-includes/osclass/ItemActions.php:119
+msgid "Description too long (%s)."
+msgstr "Mô tả quá dài (%s)."
+
+#: oc-includes/osclass/controller/register.php:118
+msgid "Account validation failed"
+msgstr "Xác nhận tài khoản bị lỗi"
+
+#: oc-includes/osclass/controller/login.php:117
+msgid "The user has not been validated yet. Would you like to re-send your <a href=\"%s\">activation?</a>"
+msgstr "Người dùng chưa được xác thực. Bạn có muốn gửi lại <a href=\"%s\">xác thực tài khoản của bạn?</a>"
+
+#: oc-includes/osclass/controller/login.php:164
+msgid "Incorrect link"
+msgstr "Đường dẫn không đúng"
+
+#: oc-includes/osclass/controller/login.php:175
+msgid "Validation email re-sent"
+msgstr "Email xác thực đã được gửi lại"
+
+#: oc-includes/osclass/controller/login.php:177
+msgid "We have just sent you an email to validate your account, you will have to wait a few minutes to resend it again"
+msgstr "Chúng tôi vừa gửi cho bạn một email để xác nhận tài khoản của bạn, bạn sẽ phải chờ một vài phút để gửi lại một lần nữa"
+
+#: oc-includes/osclass/controller/user-non-secure.php:166
+msgid "Your email has been sent properly."
+msgstr "Email của bạn đã được gửi đi."
+
+#: oc-includes/osclass/upgrade-funcs.php:470
+msgid "Osclass has been updated successfully. <a href=\"http://forums.osclass.org/\">Need more help?</a>"
+msgstr "Osclass đã cập nhật thành công. <a href=\"http://forums.osclass.org/\">Cần thêm thông tin?</a>"
+
+#: oc-admin/plugins.php:231
+msgid "The files were deleted"
+msgstr "Tệp đã được xóa"
+
+#: oc-admin/controller/settings/advanced.php:51
+msgid "Cache flushed correctly"
+msgstr "Xả từ bộ nhớ tạm chính xác"
+
+#: oc-admin/plugins.php:233
+msgid "There were an error deleting the files, please check the permissions of the files in %s"
+msgstr "Có lỗi xảy ra trong quá trính xóa tệp, kiểm tra lại phân quyền của tệp tin trong %s"
+
+#: oc-includes/osclass/controller/item.php:591
+msgid "The listing has been blocked or is awaiting moderation from the admin"
+msgstr "Tin đăng đã bị giữ lại và chờ xác thực từ người quản trị"
+
+#: oc-includes/osclass/controller/login.php:47
+msgid "Please provide an email address"
+msgstr "Bạn hãy cung cấp 1 địa chỉ email"
+
+#: oc-includes/osclass/controller/login.php:51
+msgid "Empty passwords are not allowed. Please provide a password"
+msgstr "Không cho phép dùng mật khẩu rỗng. Bạn hãy nhập mật khẩu"

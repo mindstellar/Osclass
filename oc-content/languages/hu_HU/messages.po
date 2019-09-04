@@ -1,0 +1,1727 @@
+# Translation of Flash Messages in Hungarian
+# This file is distributed under the same license as the Flash Messages package.
+msgid ""
+msgstr ""
+"PO-Revision-Date: 2015-04-08 09:05:48+0000\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: GlotPress/0.1\n"
+"Project-Id-Version: Flash Messages\n"
+
+#: oc-includes/osclass/controller/ajax.php:101
+#: oc-includes/osclass/controller/item.php:313
+msgid "The selected photo couldn't be deleted, the url doesn't exist"
+msgstr "A kiválasztott képet nem lehet törölni, az url nem létezik"
+
+#: oc-includes/osclass/controller/ajax.php:111
+#: oc-includes/osclass/controller/item.php:319
+msgid "The listing doesn't exist"
+msgstr "A hirdetés nem létezik"
+
+#: oc-includes/osclass/controller/ajax.php:120
+#: oc-includes/osclass/controller/ajax.php:128
+#: oc-includes/osclass/controller/item.php:325
+#: oc-includes/osclass/controller/item.php:330
+msgid "The listing doesn't belong to you"
+msgstr "A hirdetés már nem a tiéd"
+
+#: oc-includes/osclass/controller/ajax.php:86
+#: oc-includes/osclass/controller/ajax.php:151
+#: oc-includes/osclass/controller/item.php:344
+msgid "The selected photo has been successfully deleted"
+msgstr "A kiválasztott fotó sikeresen törölve lett"
+
+#: oc-includes/osclass/controller/ajax.php:154
+#: oc-includes/osclass/controller/item.php:346
+msgid "The selected photo does not belong to you"
+msgstr "A kép már nem a tiéd"
+
+#: oc-includes/osclass/controller/ajax.php:86
+#: oc-includes/osclass/controller/ajax.php:158
+#: oc-includes/osclass/controller/item.php:349
+msgid "The selected photo couldn't be deleted"
+msgstr "A kiváasztott képet nem lehet törölni"
+
+#: oc-includes/osclass/controller/contact.php:39
+#: oc-includes/osclass/controller/item.php:122
+#: oc-includes/osclass/controller/item.php:230
+#: oc-includes/osclass/controller/item.php:394
+#: oc-includes/osclass/controller/item.php:446
+#: oc-includes/osclass/controller/user-non-secure.php:147
+msgid "The Recaptcha code is wrong"
+msgstr "A Recaptcha kód nem megfelelő"
+
+#: oc-includes/osclass/emails.php:645
+msgid "There has been some errors sending the message"
+msgstr "Hiba történt az üzenet elküldése közben"
+
+#: oc-includes/osclass/controller/item.php:51
+#: oc-includes/osclass/controller/item.php:100
+msgid "Only registered users are allowed to post listings"
+msgstr "Csak regisztrált felhasználóknak engedélyezett a hirdetés feladása"
+
+#: oc-includes/osclass/controller/item.php:165
+msgid "Your listing has been published"
+msgstr "A hirdetésed közzétéve"
+
+#: oc-includes/osclass/controller/item.php:239
+msgid "Great! We've just updated your listing"
+msgstr "Nagyszerű! Hirdetésed frissítése megtörtént"
+
+#: oc-includes/osclass/controller/item.php:266
+msgid "The listing has been validated"
+msgstr "A hirdetés hitelesítve"
+
+#: oc-includes/osclass/controller/item.php:268
+msgid "The listing can't be validated"
+msgstr "A hirdetést nem lehet hitelesíteni"
+
+#: oc-includes/osclass/controller/item.php:271
+msgid "The listing has already been validated"
+msgstr "A hirdetés már hitelesítve"
+
+#: oc-includes/osclass/controller/item.php:284
+msgid "Your listing has been deleted"
+msgstr "A hirdetésed törölve lett"
+
+#: oc-includes/osclass/controller/item.php:286
+#: oc-includes/osclass/controller/item.php:294
+msgid "The listing you are trying to delete couldn't be deleted"
+msgstr "A hirdetés amelyet törölni szeretnél, nem töröhető"
+
+#: oc-includes/osclass/controller/item.php:371
+msgid "Thanks! That's very helpful"
+msgstr "Köszönjük a visszajelzésed!"
+
+#: oc-includes/osclass/controller/item.php:417
+#: oc-includes/osclass/controller/item.php:529
+msgid "This listing doesn't exist"
+msgstr "Ez a hirdetés nem létezik"
+
+#: oc-includes/osclass/controller/item.php:423
+#: oc-includes/osclass/controller/item.php:466
+msgid "We're sorry, but the listing has expired. You can't contact the seller"
+msgstr "Sajnáljuk, de a hirdetésed érvényessége lejárt. Nem értesítheted a szerzőt"
+
+#: oc-includes/osclass/controller/item.php:430
+#: oc-includes/osclass/controller/item.php:438
+msgid "You can't contact the seller, only registered users can"
+msgstr "Nem tudod értesíteni a szerzőt, csak regisztrált felhasználók tehetik azt meg"
+
+#: oc-includes/osclass/controller/item.php:479
+msgid "We've just sent an e-mail to the seller"
+msgstr "Épp most küldtél egy e-mailt a szerzőnek"
+
+#: oc-includes/osclass/controller/item.php:489
+msgid "Sorry, we could not save your comment. Try again later"
+msgstr "Sajnáljuk, hozzászólásod nem lett mentve. Próbálkozz később."
+
+#: oc-includes/osclass/controller/item.php:492
+msgid "Your comment is awaiting moderation"
+msgstr "A hozzászólásod moderálásra vár"
+
+#: oc-includes/osclass/controller/item.php:495
+msgid "Your comment has been approved"
+msgstr "A hozzászólásod jóváhagyott"
+
+#: oc-includes/osclass/controller/item.php:498
+msgid "Please fill the required field (email)"
+msgstr "Kérlek a mező kitöltése kötelező (e-mail)"
+
+#: oc-includes/osclass/controller/item.php:501
+msgid "Please type a comment"
+msgstr "Írd be a hozzászólásod"
+
+#: oc-includes/osclass/controller/item.php:504
+msgid "Your comment has been marked as spam"
+msgstr "A hozzászólásod SPAM-nek lett jelölve"
+
+#: oc-includes/osclass/controller/item.php:536
+msgid "You must be logged in to delete a comment"
+msgstr "Be kell jelentkezned a hozzászólásod törléséhez"
+
+#: oc-includes/osclass/controller/item.php:544
+msgid "The comment doesn't exist"
+msgstr "A hozzászólás nem létezik"
+
+#: oc-includes/osclass/controller/item.php:549
+msgid "The comment is not active, you cannot delete it"
+msgstr "A hozzászólás nem aktív, nem lehet törölni"
+
+#: oc-includes/osclass/controller/item.php:554
+msgid "The comment was not added by you, you cannot delete it"
+msgstr "A hozzászólást nem te írtad, nem törölhető"
+
+#: oc-admin/comments.php:195 oc-includes/osclass/controller/item.php:559
+msgid "The comment has been deleted"
+msgstr "Hozzászólás törölve"
+
+#: oc-includes/osclass/controller/login.php:25
+#: oc-includes/osclass/controller/register.php:26
+#: oc-includes/osclass/controller/user-non-secure.php:25
+#: oc-includes/osclass/controller/user.php:25
+msgid "Users not enabled"
+msgstr "Felhasználók nincsenek aktiválva"
+
+#: oc-includes/osclass/controller/login.php:36
+#: oc-includes/osclass/controller/register.php:49
+msgid "Users are not enabled"
+msgstr "Felhasználók nincsenek engedélyezve"
+
+#: oc-includes/osclass/controller/login.php:65
+#: oc-includes/osclass/controller/login.php:114
+msgid "The user doesn't exist"
+msgstr "Nem létező felhasználó"
+
+#: oc-includes/osclass/controller/login.php:69
+msgid "The password is incorrect"
+msgstr "A jelszó helytelen"
+
+#: oc-includes/osclass/controller/login.php:119
+msgid "The user has not been validated yet"
+msgstr "A felhasználó még nincs hitelesítve"
+
+#: oc-includes/osclass/controller/login.php:122
+msgid "The user has been suspended"
+msgstr "Felfüggesztett felhasználó"
+
+#: oc-includes/osclass/controller/login.php:190
+msgid "Invalid email address"
+msgstr "Érvénytelen e-mail cím"
+
+#: oc-includes/osclass/controller/login.php:199
+msgid "We have sent you an email with the instructions to reset your password"
+msgstr "Küldtünk egy e-mailt, az utasításokkal a jelszó visszaállításához"
+
+#: oc-includes/osclass/controller/login.php:203
+msgid "We were not able to identify you given the information provided"
+msgstr "Nem tudjuk azonosítani az adott információkat"
+
+#: oc-includes/osclass/controller/login.php:207
+msgid "The recaptcha code is wrong"
+msgstr "A recaptcha kód helytelen"
+
+#: oc-admin/login.php:131 oc-admin/login.php:141
+#: oc-includes/osclass/controller/login.php:217
+#: oc-includes/osclass/controller/login.php:245
+#: oc-includes/osclass/controller/user-non-secure.php:54
+#: oc-includes/osclass/controller/user-non-secure.php:58
+msgid "Sorry, the link is not valid"
+msgstr "Elnézést, de a link nem érvényes"
+
+#: oc-includes/osclass/controller/login.php:224
+#: oc-includes/osclass/controller/user.php:170
+msgid "Password cannot be blank"
+msgstr "A jelszó nem lehet üres"
+
+#: oc-admin/login.php:151 oc-includes/osclass/controller/login.php:238
+msgid "The password has been changed"
+msgstr "Jelszó megváltoztatva"
+
+#: oc-includes/osclass/controller/login.php:241
+msgid "Error, the password don't match"
+msgstr "Hiba. A jelszavak nem azonosak"
+
+#: oc-includes/osclass/controller/register.php:31
+msgid "User registration is not enabled"
+msgstr "Felhasználó regisztráció engedélyezve"
+
+#: oc-includes/osclass/controller/register.php:68
+msgid "The user has been created. An activation email has been sent"
+msgstr "Felhsználó létrehozva. Aktivációs e-mail elküldve"
+
+#: oc-includes/osclass/controller/register.php:71
+msgid "Your account has been created successfully"
+msgstr "A fiókod sikeresen létrehozva"
+
+#: oc-includes/osclass/UserActions.php:67
+#: oc-includes/osclass/controller/user.php:130
+msgid "The specified e-mail is already in use"
+msgstr "E-mail cím már használatban"
+
+#: oc-includes/osclass/UserActions.php:60
+msgid "The email is not valid"
+msgstr "Az e-mail nem érvényes"
+
+#: oc-includes/osclass/UserActions.php:43
+msgid "The password cannot be empty"
+msgstr "A jelszó nem lehet üres"
+
+#: oc-includes/osclass/UserActions.php:48
+#: oc-includes/osclass/UserActions.php:167
+#: oc-includes/osclass/controller/user.php:185
+msgid "Passwords don't match"
+msgstr "A jelszavak nem azonosak"
+
+#: oc-includes/osclass/controller/register.php:90
+msgid "The link is not valid anymore. Sorry for the inconvenience!"
+msgstr "A link már nem érvényes. Elnézést a kellemetlenségért!"
+
+#: oc-includes/osclass/controller/register.php:95
+msgid "Your account has already been validated"
+msgstr "A fiókod már hitelesítve"
+
+#: oc-includes/osclass/controller/register.php:116
+msgid "Your account has been validated"
+msgstr "A fiókod hitelesítve"
+
+#: oc-includes/osclass/controller/user-non-secure.php:51
+msgid "Your email has been changed successfully"
+msgstr "E-mail címed sikeresen megváltoztatva"
+
+#: oc-includes/osclass/controller/user-non-secure.php:80
+#: oc-includes/osclass/controller/user.php:222
+msgid "Alert activated"
+msgstr "Figyelmeztetések aktívak"
+
+#: oc-includes/osclass/controller/user-non-secure.php:101
+#: oc-includes/osclass/controller/user.php:243
+msgid "Unsubscribed correctly"
+msgstr "Megfelelően leiratkzova"
+
+#: oc-includes/osclass/controller/user.php:75
+msgid "Your profile has been updated successfully"
+msgstr "A profilod sikeresen frissítve"
+
+#: oc-includes/osclass/controller/user.php:106
+msgid "The specified e-mail is not valid"
+msgstr "A megadott e-mail nem érvényes"
+
+#: oc-includes/osclass/controller/user.php:175
+msgid "Current password doesn't match"
+msgstr "A jelenlegi jelszó nem azonos"
+
+#: oc-includes/osclass/controller/user.php:180
+msgid "Passwords can't be empty"
+msgstr "A jelszó nem lehet üres"
+
+#: oc-includes/osclass/controller/user.php:192
+msgid "Password has been changed"
+msgstr "Jelszó módosítva"
+
+#: oc-admin/admins.php:30 oc-admin/items.php:38
+#: oc-includes/osclass/core/AdminSecBaseModel.php:28
+msgid "You don't have enough permissions"
+msgstr "Nincs elég jogosultságod"
+
+#: oc-admin/admins.php:73 oc-admin/admins.php:173
+msgid "Email invalid"
+msgstr "Helytelen e-mail"
+
+#: oc-admin/admins.php:77 oc-admin/admins.php:177
+msgid "Username invalid"
+msgstr "Helytelen felhasználónév"
+
+#: oc-admin/admins.php:81 oc-admin/admins.php:181
+msgid "Name invalid"
+msgstr "Helytelen név"
+
+#: oc-admin/admins.php:85 oc-admin/admins.php:212
+msgid "Password invalid"
+msgstr "Helytelen jelszó"
+
+#: oc-admin/admins.php:90
+msgid "Email already in use"
+msgstr "E-mail már használatban"
+
+#: oc-admin/admins.php:95
+msgid "Username already in use"
+msgstr "Felhsználónév már használatban"
+
+#: oc-admin/admins.php:118
+msgid "The admin has been added"
+msgstr "Adminisztrátor hozzáadva"
+
+#: oc-admin/admins.php:188
+msgid "This admin doesn't exist"
+msgstr "Ez az adminisztrátor már nem létezik"
+
+#: oc-admin/admins.php:194
+msgid "Existing email"
+msgstr "Létező e-mail"
+
+#: oc-admin/admins.php:201
+msgid "Existing username"
+msgstr "Létező felhasználónév"
+
+#: oc-admin/admins.php:220 oc-admin/admins.php:230
+msgid "The password couldn't be updated. Passwords don't match"
+msgstr "A jelszó nem frissíthető. Nem azonos jelszavak"
+
+#: oc-admin/admins.php:247
+msgid "The admin has been updated"
+msgstr "Adminisztrátor frissítve"
+
+#: oc-admin/admins.php:266
+msgid "The admin id isn't in the correct format"
+msgstr "Az adminisztrátor ID-je nem megfelelő formátumú"
+
+#: oc-admin/admins.php:272
+msgid "The operation hasn't been completed. You're trying to remove yourself!"
+msgstr "A művelet nem végezhető el. Magadat próbálod törölni"
+
+#: oc-admin/admins.php:279
+msgid "The admin has been deleted correctly"
+msgstr "Az adminisztrátor megfelelően eltávolítva"
+
+#: oc-admin/admins.php:281
+msgid "The admin couldn't be deleted"
+msgstr "Az adminisztrátort nem lehet törölni"
+
+#: oc-admin/tools.php:36 oc-admin/tools.php:63 oc-admin/tools.php:73
+#: oc-admin/tools.php:90 oc-admin/tools.php:126 oc-admin/tools.php:169
+#: oc-admin/tools.php:196 oc-admin/tools.php:225
+msgid "This action cannot be done because it is a demo site"
+msgstr "A művelet nem elvégezhető mert ez egy DEMO oldal"
+
+#: oc-admin/tools.php:118 oc-admin/tools.php:150
+msgid "Backup completed successfully"
+msgstr "Sikeres biztonsági mentés"
+
+#: oc-admin/appearance.php:51
+msgid "The theme folder is not writable"
+msgstr "A téma mappa nem írható"
+
+#: oc-admin/appearance.php:54
+msgid "The theme has been installed correctly"
+msgstr "A téma megfelelően telepítve"
+
+#: oc-admin/appearance.php:57 oc-admin/languages.php:67 oc-admin/plugins.php:60
+msgid "The zip file is not valid"
+msgstr "A *.zip fájl nem érvényes"
+
+#: oc-admin/appearance.php:60 oc-admin/languages.php:70 oc-admin/plugins.php:63
+#: oc-admin/tools.php:55
+msgid "No file was uploaded"
+msgstr "Nem lett fájl feltöltve"
+
+#: oc-admin/appearance.php:65
+msgid "There was a problem adding the theme"
+msgstr "Hiba történt a téma hozzáadásakor"
+
+#: oc-admin/appearance.php:83
+msgid "Theme removed successfully"
+msgstr "Téma sikeresen eltávolítva."
+
+#: oc-admin/appearance.php:85
+msgid "There was a problem removing the theme"
+msgstr "Hiba történt a téma eltávolítása közben"
+
+#: oc-admin/appearance.php:88
+msgid "Current theme can not be deleted"
+msgstr "A jelenlegi téma nem törölhető"
+
+#: oc-admin/appearance.php:91
+msgid "No theme selected"
+msgstr "Nincs téma kiválasztva"
+
+#: oc-admin/appearance.php:120
+msgid "Widget removed correctly"
+msgstr "Minialkalmazás sikeresen eltávoltva"
+
+#: oc-admin/appearance.php:126 oc-admin/appearance.php:148
+msgid "Description field is required"
+msgstr "Leírás mező kitöltése kötelező"
+
+#: oc-admin/appearance.php:139
+msgid "Widget updated correctly"
+msgstr "Minialkalmazás sikeresen frissitve"
+
+#: oc-admin/appearance.php:141
+msgid "Widget cannot be updated correctly"
+msgstr "Minialkalmazás frissítése nem sikerült"
+
+#: oc-admin/appearance.php:160
+msgid "Widget added correctly"
+msgstr "Minialkalmazás hozzáadva"
+
+#: oc-admin/appearance.php:167
+msgid "Theme activated correctly"
+msgstr "Téma aktiválva"
+
+#: oc-admin/comments.php:52
+msgid "The comments have been deleted"
+msgstr "A hozzászólást törölték"
+
+#: oc-admin/comments.php:65
+msgid "The comments have been approved"
+msgstr "A hozzászólást elfogadták"
+
+#: oc-admin/comments.php:75
+msgid "The comments have been disapproved"
+msgstr "A hozzászólást elutasították"
+
+#: oc-admin/comments.php:128
+msgid "The comment has been approved"
+msgstr "A Hozzászólásod elfogadva"
+
+#: oc-admin/comments.php:135
+msgid "The comment has been disapproved"
+msgstr "A Hozzászólásod elutasítva"
+
+#: oc-admin/comments.php:142
+msgid "The comment has been enabled"
+msgstr "A Hozzászólás engedélyezve "
+
+#: oc-admin/comments.php:149
+msgid "The comment has been disabled"
+msgstr "A Hozzászólás letiltva"
+
+#: oc-admin/comments.php:164
+msgid "Email is not correct"
+msgstr "E-mail nem megfelelő"
+
+#: oc-admin/comments.php:167
+msgid "Comment is required"
+msgstr "Szükséges a hozzászólás"
+
+#: oc-admin/comments.php:189
+msgid "Great! We just updated your comment"
+msgstr "Nagysszerű! Épp frissítettük a hozzászólásod"
+
+#: oc-admin/emails.php:82
+msgid "The email/alert has been updated"
+msgstr "Az e-mail figyelmeztetések frissítve"
+
+#: oc-admin/emails.php:85 oc-admin/pages.php:102
+msgid "You can't repeat internal name"
+msgstr "Nem ismételhetőek a belső nevek"
+
+#: oc-admin/emails.php:87
+msgid "The email couldn't be updated, at least one title should not be empty"
+msgstr "Az e-mailt nem lehet frissíteni, legalább az egyik cím nem lehet üres"
+
+#: oc-admin/items.php:59
+msgid "%d listing has been enabled"
+msgstr "%d hirdetés engedélyezve"
+
+#: oc-admin/items.php:71
+msgid "%d listing has been disabled"
+msgstr "%d hirdetés letiltva"
+
+#: oc-admin/items.php:83
+msgid "%d listing has been activated"
+msgstr "%d hirdetés aktiválva lett"
+
+#: oc-admin/items.php:95
+msgid "%d listing has been deactivated"
+msgstr "%d hirdetés kikapcsolva"
+
+#: oc-admin/items.php:107
+msgid "%d listing has been marked as premium"
+msgstr "%d megjelölve mint prémium hirdetés"
+
+#: oc-admin/items.php:119 oc-admin/items.php:144
+msgid "%d change has been made"
+msgstr "%d módosítása megtörtént"
+
+#: oc-admin/items.php:131
+msgid "%d listing has been marked as spam"
+msgstr "%d hirdetés SPAM-nek jelölve"
+
+#: oc-admin/items.php:162
+msgid "%d listing has been deleted"
+msgstr "%d hirdetés törölve lett"
+
+#: oc-admin/items.php:179
+msgid "%d listing has been unmarked as spam"
+msgstr "%d hirdetés nincs már SPAM-nek jelölve"
+
+#: oc-admin/items.php:196
+msgid "%d listing has been unmarked as missclassified"
+msgstr "%d hirdetés nincs már tévesnek jelölve"
+
+#: oc-admin/items.php:213
+msgid "%d listing has been unmarked as duplicated"
+msgstr "%d hirdetés nincs már megduplázottnak jelölve"
+
+#: oc-admin/items.php:230
+msgid "%d listing has been unmarked as expired"
+msgstr "%d hirdetés nincs már lejárt érvényességűnek jelölve"
+
+#: oc-admin/items.php:247
+msgid "%d listing has been unmarked as offensive"
+msgstr "%d hirdetés nincs már zaklatónak jelölve"
+
+#: oc-admin/items.php:322 oc-admin/items.php:334 oc-admin/items.php:344
+#: oc-admin/items.php:354 oc-admin/items.php:383 oc-admin/items.php:409
+#: oc-admin/items.php:553
+msgid "An error has occurred"
+msgstr "Hiba történt"
+
+#: oc-admin/items.php:289
+msgid "The listing has been deleted"
+msgstr "A hirdetés törölve lett"
+
+#: oc-admin/items.php:291
+msgid "The listing couldn't be deleted"
+msgstr "A hirdetést nem lehetett törölni"
+
+#: oc-admin/items.php:320
+msgid "The listing has been activated"
+msgstr "A hirdetés aktiválva lett"
+
+#: oc-admin/items.php:332
+msgid "The listing has been deactivated"
+msgstr "A hirdetés ki lett kapcsolava"
+
+#: oc-admin/items.php:342
+msgid "The listing has been enabled"
+msgstr "A hirdetés engedéyezve"
+
+#: oc-admin/items.php:352
+msgid "The listing has been disabled"
+msgstr "A hirdetés letiltva"
+
+#: oc-admin/items.php:381 oc-admin/items.php:407
+msgid "Changes have been applied"
+msgstr "Módosítások alkalmazva"
+
+#: oc-admin/items.php:433
+msgid "The listing has been unmarked as"
+msgstr "A hirdetés már nincs megjelölve mint"
+
+#: oc-admin/items.php:435
+msgid "The listing hasn't been unmarked as"
+msgstr "A hirdetések már nincsenek megjelölve mint"
+
+#: oc-admin/items.php:522
+msgid "Changes saved correctly"
+msgstr "Módosítások sikeresen mentve"
+
+#: oc-admin/items.php:555 oc-admin/media.php:51 oc-admin/media.php:74
+msgid "Resource deleted"
+msgstr "Forrás törölve"
+
+#: oc-admin/items.php:604
+msgid "A new listing has been added"
+msgstr "Új hirdetés lett létrehozva"
+
+#: oc-admin/items.php:699
+msgid "Listings' settings have been updated"
+msgstr "Hirdetések beállítása frissitve"
+
+#: oc-admin/languages.php:56
+msgid "The translation folder is not writable"
+msgstr "A fordítás mappa (transalation) nem írható"
+
+#: oc-admin/languages.php:60
+msgid "The language has been installed correctly"
+msgstr "A nyelv sikeresen telepitve"
+
+#: oc-admin/languages.php:63 oc-admin/languages.php:75
+msgid "There was a problem adding the language"
+msgstr "Hiba történt a nyelv hozzáadásakor"
+
+#: oc-admin/languages.php:85 oc-admin/languages.php:118
+msgid "Language id isn't in the correct format"
+msgstr "A nyelv ID nem megfelelő formátumú"
+
+#: oc-admin/languages.php:92
+msgid "Language id doesn't exist"
+msgstr "Nyelv ID nem létezik"
+
+#: oc-admin/languages.php:141
+msgid "Language name field is required"
+msgstr "A nyelv mező kitöltése kötelező"
+
+#: oc-admin/languages.php:144
+msgid "Language short name field is required"
+msgstr "A nyelv rövidített neve mező kitöltése kötelező"
+
+#: oc-admin/languages.php:147
+msgid "Language description field is required"
+msgstr "Nyelv leírás mező kitöltése kötelező"
+
+#: oc-admin/languages.php:150
+msgid "Currency format field is required"
+msgstr "Valuta mező kitöltése kötelező"
+
+#: oc-admin/languages.php:174
+msgid "%s has been updated"
+msgstr "%s frissitve lett"
+
+#: oc-admin/languages.php:180
+msgid "Selected languages have been enabled for the website"
+msgstr "A kiválasztott nyelv engedélyezve lett a weblapon"
+
+#: oc-admin/languages.php:187 oc-admin/languages.php:212
+#: oc-admin/languages.php:245 oc-admin/languages.php:270
+msgid "The language ids aren't in the correct format"
+msgstr "A nyelv ID-k nemmegfelelő formátumúak"
+
+#: oc-admin/languages.php:204
+msgid "Selected languages have been disabled for the website"
+msgstr "A kiválasztott nyelv le lett tiltva a weblapon"
+
+#: oc-admin/languages.php:238
+msgid "Selected languages have been enabled for the backoffice (oc-admin)"
+msgstr "A kiválasztott nyelv engedélyezve lett az adminisztrátor felületre (oc-admin)"
+
+#: oc-admin/languages.php:262
+msgid "Selected languages have been disabled for the backoffice (oc-admin)"
+msgstr "A kiválasztott nyelv le lett tiltva az adminisztrátor felületre (oc-admin)"
+
+#: oc-admin/languages.php:218 oc-admin/languages.php:276
+msgid "%s can't be disabled because it's the default language"
+msgstr "%s nyelvet nem lehet letiltani, mert alapértelmezett nyelv"
+
+#: oc-admin/languages.php:302
+msgid "Directory '%s' couldn't be removed"
+msgstr "'%s' mappát nem lehet eltávolítani"
+
+#: oc-admin/languages.php:304
+msgid "Directory \"%s\" has been successfully removed"
+msgstr "'%s' mappa sikeresen eltávolítva"
+
+#: oc-admin/languages.php:310
+msgid "Directory '%s' couldn't be removed because it's the default language. Set another language as default first and try again"
+msgstr "'%s' mappa nem eltávolítható, mert az alapértelmezett nyelvet tartalmazza. Válasssz más nyelvet alapértelmezettnek, és próbálkozz újra"
+
+#: oc-admin/login.php:43
+msgid "The username field is empty"
+msgstr "A felhasználónév mező üres"
+
+#: oc-admin/login.php:48
+msgid "The password field is empty"
+msgstr "A jelszó mező üres"
+
+#: oc-admin/login.php:56
+msgid "Sorry, incorrect username. <a href=\"%s\">Have you lost your password?</a>"
+msgstr "Helytelen felhasználónév. <a href=\"%s\">Elfelejtetted a jelszavad?</a>"
+
+#: oc-admin/login.php:61
+msgid "Sorry, incorrect password. <a href=\"%s\">Have you lost your password?</a>"
+msgstr "Helytelen jelszó. <a href=\"%s\">Elfelejtetted a jelszavad?</a>"
+
+#: oc-admin/login.php:107
+msgid "The reCAPTCHA code is wrong"
+msgstr "A reCAPTCHA kód helytelen"
+
+#: oc-admin/login.php:125
+msgid "A new password has been sent to your e-mail"
+msgstr "Új jelszó lett küldve az e-mail címedre"
+
+#: oc-admin/login.php:154
+msgid "Error, the passwords don't match"
+msgstr "Hiba a jelszavak nem azonosak"
+
+#: oc-admin/pages.php:82 oc-admin/pages.php:147
+msgid "You have to set a different internal name"
+msgstr "Be kell állítanod egy másik mbelső nevet"
+
+#: oc-admin/pages.php:99
+msgid "The page has been updated"
+msgstr "Az oldal frissitve"
+
+#: oc-admin/pages.php:104
+msgid "The page couldn't be updated, at least one title should not be empty"
+msgstr "Az oldalt nem lehet frissíteni, a cím nem lehet üres"
+
+#: oc-admin/pages.php:77 oc-admin/pages.php:142
+msgid "You have to set an internal name"
+msgstr "Be kell állítanod egy belső nevet"
+
+#: oc-admin/pages.php:158
+msgid "The page has been added"
+msgstr "Az oldal hozzá lett adva"
+
+#: oc-admin/pages.php:161
+msgid "The page couldn't be added, at least one title should not be empty"
+msgstr "Nem lehetett oldalt hozzáadni, a cím nem lehet üres"
+
+#: oc-admin/pages.php:164
+msgid "Oops! That internal name is already in use. We can't make the changes"
+msgstr "Hoppá! A belső név már használatban van, ezért nem módosítható"
+
+#: oc-admin/pages.php:195
+msgid "One page can't be deleted because it is indelible"
+msgstr "Egy oldal nem törölhető, mert nélkülözhetetlen"
+
+#: oc-admin/pages.php:197
+msgid "%s pages couldn't be deleted because they are indelible"
+msgstr "%s oldal nem törölhető, mert nélkülözhetetlen"
+
+#: oc-admin/pages.php:202
+msgid "One page couldn't be deleted"
+msgstr "Egy oldal nem törölhető"
+
+#: oc-admin/pages.php:204
+msgid "%s pages couldn't be deleted"
+msgstr "%s oldal nem törölhető"
+
+#: oc-admin/pages.php:209
+msgid "One page has been deleted correctly"
+msgstr "Egy oldal sikeresn törölve"
+
+#: oc-admin/pages.php:211
+msgid "%s pages have been deleted correctly"
+msgstr "%s oldal sikeresn törölve"
+
+#: oc-admin/plugins.php:54
+msgid "The plugin folder is not writable"
+msgstr "A bővítmény mappa nem írható"
+
+#: oc-admin/plugins.php:57
+msgid "The plugin has been uploaded correctly"
+msgstr "A bővítmény sikeresen feltöltve"
+
+#: oc-admin/plugins.php:68
+msgid "There was a problem adding the plugin"
+msgstr "Ahiba történt a bővítmény hozzáadásakor"
+
+#: oc-admin/plugins.php:93
+msgid "Plugin is already installed"
+msgstr "A bővítmény már telepítve"
+
+#: oc-admin/plugins.php:96
+msgid "Plugin couldn't be installed because their files are missing"
+msgstr "A bővítmény nem található mert a fájlok nem találhatóak"
+
+#: oc-admin/plugins.php:99
+msgid "Plugin couldn't be installed because of: %s"
+msgstr "A bővítényt nem lehet telepíteni mert: %s"
+
+#: oc-admin/plugins.php:102
+msgid "Plugin couldn't be installed"
+msgstr "A bővítmény nem telepíthető"
+
+#: oc-admin/plugins.php:106
+msgid "Plugin installed"
+msgstr "A bővítmény telepítve"
+
+#: oc-admin/plugins.php:119
+msgid "Plugin uninstalled"
+msgstr "A bővítmény eltávolítva"
+
+#: oc-admin/plugins.php:121
+msgid "Plugin couldn't be uninstalled"
+msgstr "A bővítményt nem lehet eltávolítani"
+
+#: oc-admin/plugins.php:134
+msgid "Plugin enabled"
+msgstr "Bővítmény engedélyezve"
+
+#: oc-admin/plugins.php:136
+msgid "Plugin is already enabled"
+msgstr "A bővítmény már engedélyezve"
+
+#: oc-admin/plugins.php:149
+msgid "Plugin disabled"
+msgstr "Bővítmény letiltva"
+
+#: oc-admin/plugins.php:151
+msgid "Plugin is already disabled"
+msgstr "A bővítmény már letiltva"
+
+#: oc-admin/plugins.php:222 oc-admin/plugins.php:238
+msgid "No plugin selected"
+msgstr "Nincs bővítmény kiválasztva"
+
+#: oc-admin/plugins.php:218
+msgid "Configuration was saved"
+msgstr "A beállítás mentve lett"
+
+#: oc-admin/controller/settings/locations.php:39
+#: oc-admin/controller/settings/locations.php:184
+#: oc-admin/controller/settings/locations.php:243
+#: oc-admin/controller/settings/locations.php:329
+#: oc-admin/controller/settings/locations.php:387
+msgid "%s already was in the database"
+msgstr "%s már az adatbázisban van"
+
+#: oc-admin/controller/settings/locations.php:47
+msgid "Country code and name should have at least two characters"
+msgstr "Ország kódja és neve legalább két karaktert kell tartalmaznia"
+
+#: oc-admin/controller/settings/locations.php:44
+#: oc-admin/controller/settings/locations.php:62
+msgid "%s has been added as a new country"
+msgstr "%s hozzá lett adva mint új ország"
+
+#: oc-admin/controller/settings/locations.php:106
+msgid "Country has been edited"
+msgstr "Az ország szerkesztve lett"
+
+#: oc-admin/controller/settings/locations.php:108
+msgid "There were some problems editing the country"
+msgstr "Hiba történt az ország szerkesztése közben"
+
+#: oc-admin/controller/settings/locations.php:160
+#: oc-admin/controller/settings/locations.php:182
+msgid "%s has been added as a new region"
+msgstr "%s hozzá lett adva mint új régió"
+
+#: oc-admin/controller/settings/locations.php:240
+#: oc-admin/controller/settings/locations.php:385
+msgid "%s has been edited"
+msgstr "%s szerkesztve lett"
+
+#: oc-admin/controller/settings/locations.php:307
+#: oc-admin/controller/settings/locations.php:327
+msgid "%s has been added as a new city"
+msgstr "%s hozzá lett adva mint új város"
+
+#: oc-admin/controller/settings/permalinks.php:424
+msgid "One field was not updated"
+msgstr "Egy mező nem lett frissítve"
+
+#: oc-admin/controller/settings/permalinks.php:427
+#: oc-admin/controller/settings/permalinks.php:475
+msgid "Permalinks structure updated"
+msgstr "Permalinkek struktúrája frissítve"
+
+#: oc-admin/controller/settings/permalinks.php:436
+msgid "Permalinks structure updated."
+msgstr "Permalinkek struktúrája frissítve"
+
+#: oc-admin/controller/settings/permalinks.php:438
+msgid "However, we can't check if Apache module <b>mod_rewrite</b> is loaded. If you experience some problems with the URLs, you should deactivate <em>Friendly URLs</em>"
+msgstr "Nem tudjuk ellenőrizni az APACHE modult <b>sikeresen-e</b> be van töltve. Ha gondok vannak az URL címekkel, akkor ajánlatos a <em>Keresőmotor barát URL-ek</em> kikapcsolása"
+
+#: oc-admin/controller/settings/permalinks.php:504
+msgid "Friendly URLs successfully deactivated"
+msgstr "<em>Keresőmotor barát URL-ek</em> funkció kikapcsolva"
+
+#: oc-admin/controller/settings/spamnbots.php:56
+msgid "Your Akismet key has been cleared"
+msgstr "Akismet kulcs törölve"
+
+#: oc-admin/controller/settings/spamnbots.php:58
+msgid "Your Akismet key has been updated"
+msgstr "Az Akismet kulcs frissítve"
+
+#: oc-admin/controller/settings/spamnbots.php:75
+msgid "Your reCAPTCHA key has been cleared"
+msgstr "A reCAPTCHA kulcs törölve"
+
+#: oc-admin/controller/settings/spamnbots.php:77
+msgid "Your reCAPTCHA key has been updated"
+msgstr "A reCAPTCHA kulcs frissitve"
+
+#: oc-admin/controller/settings/currencies.php:50
+msgid "The currency code is not in the correct format"
+msgstr "A valuta kód nem megfelelő formátumú"
+
+#: oc-admin/controller/settings/currencies.php:63
+msgid "Currency added"
+msgstr "Valuta hozzáadva"
+
+#: oc-admin/controller/settings/currencies.php:65
+msgid "Currency couldn't be added"
+msgstr "Valuta nem hózzáadható"
+
+#: oc-admin/controller/settings/currencies.php:75
+#: oc-admin/controller/settings/currencies.php:82
+msgid "The currency code '%s' doesn't exist"
+msgstr "A valuta kód '%s' nem létezik"
+
+#: oc-admin/controller/settings/currencies.php:104
+msgid "Error: the currency code is not in the correct format"
+msgstr "Hiba: a valuta kód helytelen formátumú"
+
+#: oc-admin/controller/settings/currencies.php:117
+msgid "Currency updated"
+msgstr "Valuta frissítve"
+
+#: oc-admin/controller/settings/currencies.php:119
+msgid "No changes were made"
+msgstr "Nem történtek változások"
+
+#: oc-admin/controller/settings/currencies.php:151
+msgid "No currencies have been deleted"
+msgstr "Nem lett valuta törölve"
+
+#: oc-admin/controller/settings/currencies.php:155
+msgid "One currency has been deleted"
+msgstr "Egy valuta törölve lett"
+
+#: oc-admin/controller/settings/currencies.php:159
+msgid "%s currencies have been deleted"
+msgstr "%s valuták törölve lettek"
+
+#: oc-admin/controller/settings/mailserver.php:52
+msgid "Mail server type is incorrect"
+msgstr "E-mail szerver típus nem megfelelő"
+
+#: oc-admin/controller/settings/mailserver.php:68
+msgid "Mail server configuration has changed"
+msgstr "E-mail szerver beállítása megváltozott"
+
+#: oc-admin/controller/settings/media.php:83
+#: oc-admin/controller/settings/media.php:91
+msgid "There was a problem uploading the watermark image"
+msgstr "Hiba történt a vízjel kép frissitése közben"
+
+#: oc-admin/controller/settings/media.php:87
+msgid "The watermark image has to be a .PNG file"
+msgstr "A vízjel képnek *.PNG fájlnak kell lennie"
+
+#: oc-admin/controller/settings/media.php:138
+msgid "You cannot set a maximum file size higher than the one allowed in the PHP configuration: <b>%d KB</b>"
+msgstr "Nem lehet a maximális fájl mérete nagyobb mint amennyi a PHP beállításoknál engedélyezve van: <b>%d KB</b>"
+
+#: oc-admin/controller/settings/media.php:163
+msgid "Media config has been updated"
+msgstr "Média konfiguráció frissítve lett"
+
+#: oc-admin/controller/settings/media.php:223
+msgid "Re-generation complete"
+msgstr "Regeneráció kész"
+
+#: oc-admin/controller/settings/main.php:83
+msgid "Page title field is required"
+msgstr "Az oldal címét kötelező kitölteni"
+
+#: oc-admin/controller/settings/main.php:86
+msgid "Contact email field is required"
+msgstr "Kapcsoaltfelvétel e-mail mező kitöltése kötelező"
+
+#: oc-admin/controller/settings/main.php:137
+#: oc-admin/controller/settings/main.php:139
+msgid "General settings have been updated"
+msgstr "Általános beállítások frissítve lettek"
+
+#: oc-admin/controller/settings/latestsearches.php:39
+msgid "Custom number could not be left empty"
+msgstr "A saját szám nem maradhat üresen"
+
+#: oc-admin/controller/settings/latestsearches.php:44
+msgid "Last search settings have been updated"
+msgstr "Az utolsó keresési beállítások frissítve lettek"
+
+#: oc-admin/tools.php:50
+msgid "Import complete"
+msgstr "Importálás kész"
+
+#: oc-admin/tools.php:52
+msgid "There was a problem importing data to the database"
+msgstr "Hiba történt az adatbázisba való adatok importálása közben"
+
+#: oc-admin/tools.php:67
+msgid "Recount category stats has been successful"
+msgstr "A kategóriák újraszámolásának frissitése sikeres volt"
+
+#: oc-admin/tools.php:106 oc-admin/tools.php:135
+msgid "Path is empty"
+msgstr "Patch üres"
+
+#: oc-admin/tools.php:109 oc-admin/tools.php:138
+msgid "Could not connect with the database. Error: %s"
+msgstr "Nem lehet csatlakozni az adatbázishoz. Hiba: %s"
+
+#: oc-admin/tools.php:112 oc-admin/tools.php:144
+msgid "There are no tables to back up"
+msgstr "Nincsenek táblák a biztonsági mentés elvégzésére"
+
+#: oc-admin/tools.php:115 oc-admin/tools.php:147
+msgid "The folder is not writable"
+msgstr "A mappa nem írható"
+
+#: oc-admin/tools.php:141
+msgid "Could not select the database. Error: %s"
+msgstr "Nem sikerült kiválsztani az adatbázist. Hiba %s"
+
+#: oc-admin/tools.php:235
+msgid "Maintenance mode is ON"
+msgstr "Karbantartás mód bekapcsolava"
+
+#: oc-admin/tools.php:245
+msgid "Maintenance mode is OFF"
+msgstr "Karbantartás mód kikapcsolava"
+
+#: oc-admin/users.php:68
+msgid "The user has been created. We've sent an activation e-mail"
+msgstr "Felhasználó létrehozva. E-mailt küldtünk a fikók aktiválásához"
+
+#: oc-admin/users.php:70
+msgid "The user has been created successfully"
+msgstr "A felhasználó sikeresen létrehozva"
+
+#: oc-admin/users.php:123
+msgid "The user has been updated and activated"
+msgstr "A felhasználó frissítve, és aktiválva"
+
+#: oc-admin/users.php:121
+msgid "The user has been updated"
+msgstr "A felhasználó frissitve lett"
+
+#: oc-admin/users.php:137 oc-admin/users.php:160 oc-admin/users.php:185
+#: oc-admin/users.php:209 oc-admin/users.php:233 oc-admin/users.php:257
+#: oc-admin/users.php:555
+msgid "User id isn't in the correct format"
+msgstr "A felhasználó ID nem megfeleő formátumú"
+
+#: oc-admin/users.php:149
+msgid "Activation email sent to one user"
+msgstr "Aktivációs e-mail elküldve a felhasználónak"
+
+#: oc-admin/users.php:172
+msgid "One user has been activated"
+msgstr "Egy felhasználó akitválva lett"
+
+#: oc-admin/users.php:197
+msgid "One user has been deactivated"
+msgstr "Egy felhasználó kikapcsolva"
+
+#: oc-admin/users.php:221
+msgid "One user has been unblocked"
+msgstr "Egy felhasználómár nincs bokkolva"
+
+#: oc-admin/users.php:245
+msgid "One user has been blocked"
+msgstr "Egy felhasználó blokkolva"
+
+#: oc-admin/users.php:272
+msgid "One user has been deleted"
+msgstr "Felhasználó törölve lett"
+
+#: oc-includes/osclass/ItemActions.php:318
+msgid "Title too short."
+msgstr "A cím túl rövid"
+
+#: oc-includes/osclass/ItemActions.php:319
+msgid "Title too long."
+msgstr "A cím túl hosszú"
+
+#: oc-includes/osclass/ItemActions.php:331
+msgid "Description too short."
+msgstr "A leírás túl rövid"
+
+#: oc-includes/osclass/ItemActions.php:332
+msgid "Description too long."
+msgstr "A leírás túl hosszú"
+
+#: oc-includes/osclass/ItemActions.php:129
+#: oc-includes/osclass/ItemActions.php:337
+msgid "Category invalid."
+msgstr "Érvénytelen kategória"
+
+#: oc-includes/osclass/ItemActions.php:131
+#: oc-includes/osclass/ItemActions.php:339
+msgid "Price too long."
+msgstr "Az ár túl hosszú"
+
+#: oc-includes/osclass/ItemActions.php:133
+msgid "Name too long."
+msgstr "A név túl hosszú"
+
+#: oc-includes/osclass/ItemActions.php:134
+msgid "Email invalid."
+msgstr "Helytelen e-mail"
+
+#: oc-includes/osclass/ItemActions.php:135
+#: oc-includes/osclass/ItemActions.php:341
+msgid "Country too short."
+msgstr "Az ország túl rövid"
+
+#: oc-includes/osclass/ItemActions.php:136
+#: oc-includes/osclass/ItemActions.php:342
+msgid "Country too long."
+msgstr "Az oszrág túl hosszú"
+
+#: oc-includes/osclass/ItemActions.php:137
+#: oc-includes/osclass/ItemActions.php:343
+msgid "Region too short."
+msgstr "A régió túl rövid"
+
+#: oc-includes/osclass/ItemActions.php:138
+#: oc-includes/osclass/ItemActions.php:344
+msgid "Region too long."
+msgstr "A régió túl hosszú"
+
+#: oc-includes/osclass/ItemActions.php:139
+#: oc-includes/osclass/ItemActions.php:345
+msgid "City too short."
+msgstr "A város túl rövid"
+
+#: oc-includes/osclass/ItemActions.php:140
+#: oc-includes/osclass/ItemActions.php:346
+msgid "City too long."
+msgstr "A város túl hosszú"
+
+#: oc-includes/osclass/ItemActions.php:141
+#: oc-includes/osclass/ItemActions.php:347
+msgid "Municipality too short."
+msgstr "A városnegyed túl rövid"
+
+#: oc-includes/osclass/ItemActions.php:142
+#: oc-includes/osclass/ItemActions.php:348
+msgid "Municipality too long."
+msgstr "A városnyegyed túl hosszú"
+
+#: oc-includes/osclass/ItemActions.php:143
+#: oc-includes/osclass/ItemActions.php:349
+msgid "Address too short."
+msgstr "A cím túl rövid"
+
+#: oc-includes/osclass/ItemActions.php:144
+#: oc-includes/osclass/ItemActions.php:350
+msgid "Address too long."
+msgstr "A cím túl hosszú"
+
+#: oc-includes/osclass/ItemActions.php:145
+msgid "Too fast. You should wait a little to publish your ad."
+msgstr "Túl gyors vagy. Várnod kell kicsit mielőtt a hirdetésed publikálod."
+
+#: oc-includes/osclass/ItemActions.php:160
+#: oc-includes/osclass/ItemActions.php:363
+msgid "%s field is required."
+msgstr "%s mező kitöltése kötelező"
+
+#: oc-includes/osclass/ItemActions.php:1311
+msgid "One of the files you tried to upload exceeds the maximum size"
+msgstr "Egy a fájlok közül amit próbáltál feltölteni, túllépte a megengedett méretet"
+
+#: oc-includes/osclass/controller/item.php:163
+msgid "Check your inbox to validate your listing"
+msgstr "Ellenőrizd a bejövő e-mail üzeneteid a hirdetésed hitelesítésére"
+
+#: oc-admin/comments.php:88
+msgid "The comments have been unblocked"
+msgstr "Hozzászólás feloldva"
+
+#: oc-admin/comments.php:98
+msgid "The comments have been blocked"
+msgstr "Hozzászólás blokkolva"
+
+#: oc-admin/items.php:264
+msgid "%d listing has been unmarked"
+msgstr "%d hirdetés már nem megjelölt"
+
+#: oc-admin/controller/settings/main.php:29
+msgid "Last check"
+msgstr "Utolsó ellenőrzés"
+
+#: oc-admin/main.php:71
+msgid "Entered an invalid email"
+msgstr "Helytelen e-mail cím"
+
+#: oc-admin/main.php:74
+msgid "You're already subscribed"
+msgstr "Már fel vagy iratkozva"
+
+#: oc-admin/main.php:77
+msgid "Subscribed correctly"
+msgstr "Sikeresen feliratkozva"
+
+#: oc-admin/main.php:80
+msgid "Error subscribing"
+msgstr "Hiba a feliratkozáskor"
+
+#: oc-includes/osclass/core/AdminSecBaseModel.php:62
+msgid "Thank you very much for your donation"
+msgstr "Köszönjük a támogatásod"
+
+#: oc-includes/osclass/controller/item.php:507
+msgid "You need to be logged to comment"
+msgstr "Be kell jelentkezned, hogy hozzá tudj szólni"
+
+#: oc-includes/osclass/helpers/hSecurity.php:85
+msgid "Invalid CSRF token."
+msgstr "Helytelen CSRF jel."
+
+#: oc-includes/osclass/helpers/hSecurity.php:79
+msgid "Probable invalid request."
+msgstr "Valószínűleg helytelen kérés"
+
+#: oc-includes/osclass/controller/item.php:510
+msgid "Sorry, comments are disabled"
+msgstr "Elnézést, hozzászólások letiltva"
+
+#: oc-includes/osclass/controller/item.php:589
+msgid "The listing hasn't been enabled. Please enable it in order to make it public"
+msgstr "A hirdetés nincs engedélyezve. Kérlek engedélyezd, hogy nyilvános legyen"
+
+#: oc-includes/osclass/UserActions.php:55
+#: oc-includes/osclass/UserActions.php:161
+msgid "The name cannot be empty"
+msgstr "A név nem maradhat üresen "
+
+#: oc-admin/admins.php:50 oc-admin/admins.php:143 oc-admin/admins.php:257
+#: oc-admin/appearance.php:37 oc-admin/appearance.php:74
+#: oc-admin/controller/settings/advanced.php:32
+#: oc-admin/controller/settings/locations.php:31
+#: oc-admin/controller/settings/locations.php:73
+#: oc-admin/controller/settings/locations.php:115
+#: oc-admin/controller/settings/locations.php:144
+#: oc-admin/controller/settings/locations.php:194
+#: oc-admin/controller/settings/locations.php:250
+#: oc-admin/controller/settings/locations.php:286
+#: oc-admin/controller/settings/locations.php:338
+#: oc-admin/controller/settings/locations.php:394
+#: oc-admin/controller/settings/mailserver.php:31
+#: oc-admin/controller/settings/media.php:170 oc-admin/languages.php:41
+#: oc-admin/login.php:97 oc-admin/plugins.php:40 oc-admin/plugins.php:77
+#: oc-admin/plugins.php:113 oc-admin/plugins.php:128 oc-admin/plugins.php:143
+msgid "This action can't be done because it's a demo site"
+msgstr "A művelet nem hajtható létre, mert ez egy demo oldal"
+
+#: oc-admin/admins.php:120
+msgid "There has been an error adding a new admin"
+msgstr "Hiba törént az új adminisztrátor hozzáadása közben"
+
+#: oc-admin/admins.php:135
+msgid "There is no admin with this id"
+msgstr "Nincs ilyen adminisztrátor ezzel az ID-vel"
+
+#: oc-admin/items.php:324
+msgid "The listing can't be activated because it's blocked"
+msgstr "Ahirdetést nem lehet aktiválni, mert blokkolva van"
+
+#: oc-admin/items.php:653
+msgid "Wait time must only contain numeric characters"
+msgstr "A várakozási idő csak számokat tartalmazhat"
+
+#: oc-admin/items.php:656
+msgid "Number of moderated listings must only contain numeric characters"
+msgstr "A moderálások száma a hirdetéseknél csak számokat tartalmazhat"
+
+#: oc-admin/items.php:659
+msgid "Images per listing must only contain numeric characters"
+msgstr "A képek korlátozása hirdetésenként csak számokat tartalmazhat"
+
+#: oc-admin/languages.php:153
+msgid "Number of decimals must only contain numeric characters"
+msgstr "A tizedesjegyek száma csak numerikus karaktert tartalmazhat"
+
+#: oc-admin/languages.php:307
+msgid "Directory '%s' couldn't be removed;)"
+msgstr "'%s' mappa nem lett eltávolítva"
+
+#: oc-admin/main.php:62
+msgid "You have very few free space left, users will not be able to upload pictures"
+msgstr "Nagyon kevés szabad hely maradt, a felhasználók nem tudják feltölteni a képeket"
+
+#: oc-admin/controller/settings/comments.php:48
+msgid "Number of moderate comments must only contain numeric characters"
+msgstr "A hozzászólások moderálásank száma csak numerikus karaktert tartalmazhat"
+
+#: oc-admin/controller/settings/comments.php:51
+msgid "Comments per page must only contain numeric characters"
+msgstr "Hozzászólások oldalanként csak numerikus karaktert tartalmazhatnak"
+
+#: oc-admin/controller/settings/comments.php:71
+msgid "Comment settings have been updated"
+msgstr "A hozzászólás beállítása frissitve lett"
+
+#: oc-admin/controller/settings/locations.php:78
+msgid "Country name cannot be blank"
+msgstr "Ország neve nem lehet üres"
+
+#: oc-admin/controller/settings/locations.php:135
+#: oc-admin/controller/settings/locations.php:277
+#: oc-admin/controller/settings/locations.php:418
+msgid "There was a problem deleting locations"
+msgstr "Probléma történt a hely(ek) törlése során"
+
+#: oc-admin/controller/settings/locations.php:138
+msgid "No country was selected"
+msgstr "Nincs Ország kiválasztva"
+
+#: oc-admin/controller/settings/locations.php:162
+#: oc-admin/controller/settings/locations.php:309
+msgid "%s can't be added"
+msgstr "%s nem lehet hozzáadni"
+
+#: oc-admin/controller/settings/locations.php:172
+#: oc-admin/controller/settings/locations.php:203
+msgid "Region name cannot be blank"
+msgstr "Régió neve nem lehet üres"
+
+#: oc-admin/controller/settings/locations.php:280
+msgid "No region was selected"
+msgstr "Nincs Régió kiválasztva"
+
+#: oc-admin/controller/settings/locations.php:317
+msgid "New city name cannot be blank"
+msgstr "Az új Város neve nem lehet üres"
+
+#: oc-admin/controller/settings/locations.php:348
+msgid "City name cannot be blank"
+msgstr "Város neve nem lehet üres"
+
+#: oc-admin/controller/settings/locations.php:421
+msgid "No city was selected"
+msgstr "Nincs Város kiválasztva"
+
+#: oc-admin/controller/settings/permalinks.php:424
+msgid "All fields are required."
+msgstr "Minden mező kitöltése kötelező"
+
+#: oc-admin/controller/settings/permalinks.php:445
+#: oc-admin/controller/settings/permalinks.php:455
+msgid "File <b>.htaccess</b> couldn't be filled out with the right content."
+msgstr "A <b>.htaccess</b> fájl nem fölthető fel a megfelelő tartalommal."
+
+#: oc-admin/controller/settings/permalinks.php:447
+msgid "Here's the content you have to add to the <b>.htaccess</b> file. If you can't create the file, please deactivate the <em>Friendly URLs</em> option."
+msgstr "Itt van a tartalom amivel fel kell töltened a <b>.htaccess</b> fájlt. Ha nem tudod elvégezni, akkor kapcsold ki a <em>Keresőmotor barát URL-ek</em> funkciót."
+
+#: oc-admin/controller/settings/permalinks.php:457
+msgid "Here's the content you have to add to the <b>.htaccess</b> file. If you can't create the file or experience some problems with the URLs, please deactivate the <em>Friendly URLs</em> option."
+msgstr "Itt van a tartalom amivel fel kell töltened a <b>.htaccess</b> fájlt. Ha nem tudod elvégezni, akkor kapcsold ki a <em>Keresőmotor barát URL-ek</em> funkciót."
+
+#: oc-admin/controller/settings/currencies.php:141
+msgid "%s couldn't be deleted because it has listings associated to it"
+msgstr "%s nem lehet törölni, mert a hirdetéshez kapcsolódik"
+
+#: oc-admin/controller/settings/currencies.php:143
+msgid "%s couldn't be deleted because it's the default currency"
+msgstr "%s nem törölhető, mert az alapértelmezett valuta"
+
+#: oc-admin/controller/settings/main.php:89
+msgid "Number of listings in the RSS has to be a numeric value"
+msgstr "A hirdetések száma az RSS hírcsatornán numerikus értéket kell tartalmaznia"
+
+#: oc-admin/controller/settings/main.php:92
+msgid "Max latest listings has to be a numeric value"
+msgstr "Maximum az utolsó hirdetésnek numerikus értéket kell tartalmaznia"
+
+#: oc-admin/controller/settings/main.php:95
+msgid "Number of listings on search has to be a numeric value"
+msgstr "A hirdetések száma keresések alapján numerikus értéket kell tartalmaznikuk"
+
+#: oc-admin/controller/settings/main.php:120
+msgid "Number of listings in the RSS must be an integer"
+msgstr "A hirdetések száma az RSS hírcsatornán egész szot kell tartalmazniuk"
+
+#: oc-admin/controller/settings/main.php:127
+msgid "Number of recent listings displayed at home must be an integer"
+msgstr "A legutóbbi hirdetések számánának a megjelenítéskor egész számot kell tartalmazniuk"
+
+#: oc-admin/themes/modern/market/header.php:5
+msgid "<code>downloads</code> folder has to be writable, i.e.: <code>chmod a+w %soc-content/downloads/</code>"
+msgstr "<code>Letöltések</code> a mappának írhatónak kell lennie, pl.: <code>chmod a+w %soc-content/downloads/</code>"
+
+#: oc-admin/tools.php:176 oc-admin/tools.php:213
+msgid "Archived successfully!"
+msgstr "Archíválás sikeres!"
+
+#: oc-admin/tools.php:190 oc-admin/tools.php:216
+msgid "Error, the zip file was not created in the specified directory"
+msgstr "Hiba, a *.zip fájl nem lett létrehzova a kiválasztott mappában"
+
+#: oc-admin/tools.php:237
+msgid "There was an error creating the .maintenance file, please create it manually at the root folder"
+msgstr "Hiba történt a *.karbantartás fájlban, kérlek hozd létre manuálisan a gyökér 'root' könyvtárban"
+
+#: oc-admin/tools.php:247
+msgid "There was an error removing the .maintenance file, please remove it manually from the root folder"
+msgstr "Hiba történt a*.karbantartás fájlban eltávolítás közben, kérlek töröld ki manuálisan a gyökér 'root' könyvtárból"
+
+#: oc-admin/users.php:147
+msgid "No users have been selected"
+msgstr "Nincs felhasználó kiválasztva"
+
+#: oc-admin/users.php:170
+msgid "No users have been activated"
+msgstr "Nem lettek felhasználók aktiválva"
+
+#: oc-admin/users.php:195
+msgid "No users have been deactivated"
+msgstr "Nem lettek felhasználók kikapcsolva"
+
+#: oc-admin/users.php:219
+msgid "No users have been enabled"
+msgstr "Nincsenek felhasználók engedélyezve"
+
+#: oc-admin/users.php:243
+msgid "No users have been disabled"
+msgstr "Nem lettek felhasznáók letiltva"
+
+#: oc-admin/users.php:270
+msgid "No users have been deleted"
+msgstr "Nem lettek felhasználók törölve"
+
+#: oc-admin/users.php:283 oc-admin/users.php:317
+msgid "Alert id isn't in the correct format"
+msgstr "Figyelmeztető ID nem a megfelelő formátumban"
+
+#: oc-admin/users.php:298
+msgid "No alerts have been deleted"
+msgstr "Nincsenek Figyelmeztetések, törölték"
+
+#: oc-admin/users.php:300
+msgid "One alert has been deleted"
+msgstr "Figyelmeztetés törölve"
+
+#: oc-admin/users.php:337
+msgid "No alerts have been activated"
+msgstr "Nincs Figyelmeztetés aktiválva"
+
+#: oc-admin/users.php:339
+msgid "One alert has been activated"
+msgstr "Figyelmeztetés aktiválva"
+
+#: oc-admin/users.php:343
+msgid "No alerts have been deactivated"
+msgstr "Nincs figyelmeztetés kikapcsolva"
+
+#: oc-admin/users.php:345
+msgid "One alert has been deactivated"
+msgstr "Figyelmeztető jelzés kikapcsolva"
+
+#: oc-admin/users.php:383
+msgid "User settings have been updated"
+msgstr "Falhaszsnáló beállítások frissitve"
+
+#: oc-admin/users.php:526 oc-admin/users.php:541
+msgid "Both rules can not be empty"
+msgstr "Mindkét szabályozás nem lehet üres"
+
+#: oc-admin/users.php:531
+msgid "Rule updated correctly"
+msgstr "Szabály megfelelően frissítve"
+
+#: oc-admin/users.php:546
+msgid "Rule saved correctly"
+msgstr "Szabály megfelelően mentve"
+
+#: oc-admin/users.php:567
+msgid "No rules have been deleted"
+msgstr "Nincsenek szabályok törölve"
+
+#: oc-admin/users.php:569
+msgid "One ban rule has been deleted"
+msgstr "Tiltás szabály törölve"
+
+#: oc-includes/osclass/ItemActions.php:90
+#: oc-includes/osclass/ItemActions.php:303
+msgid "Image with an incorrect extension."
+msgstr "A képnek nem megfelelő a kiterjesztése"
+
+#: oc-includes/osclass/ItemActions.php:93
+#: oc-includes/osclass/ItemActions.php:306
+msgid "Image is too big. Max. size"
+msgstr "A kép túl nagy. Max. méret"
+
+#: oc-includes/osclass/ItemActions.php:130
+#: oc-includes/osclass/ItemActions.php:338
+msgid "Price must be a number."
+msgstr "Az árnak számot kell tartalmaznia"
+
+#: oc-includes/osclass/ItemActions.php:857
+msgid "We just sent your message to %s"
+msgstr "Épp most küldtük el üzenetetd %s számára"
+
+#: oc-includes/osclass/ItemActions.php:1366
+#: oc-includes/osclass/controller/contact.php:158
+msgid "The file you tried to upload does not have a valid extension"
+msgstr "A fájlnak amit próbáltál feltölteni, helytelen kiterjesztése volt"
+
+#: oc-includes/osclass/controller/contact.php:65
+msgid "Please enter a correct email"
+msgstr "Kérlek írd be a helyes e-mail címet"
+
+#: oc-includes/osclass/controller/contact.php:156
+msgid "Your email has been sent properly. Thank you for contacting us!"
+msgstr "Az e-mail elküldve, Köszönjük, hogy felkerestél minket!"
+
+#: oc-includes/osclass/controller/item.php:135
+msgid "A user with that email address already exists, if it is you, please log in"
+msgstr "Ezzel az e-mail címmel már létezik felhasználó, ha te vagy az, jelentkezz be"
+
+#: oc-includes/osclass/controller/contact.php:51
+#: oc-includes/osclass/controller/contact.php:60
+#: oc-includes/osclass/controller/item.php:142
+#: oc-includes/osclass/controller/item.php:458
+#: oc-includes/osclass/controller/login.php:75
+#: oc-includes/osclass/controller/register.php:57
+#: oc-includes/osclass/controller/user-non-secure.php:158
+msgid "Your current email is not allowed"
+msgstr "A jelenlegi e-mail nem engedélyezett"
+
+#: oc-includes/osclass/controller/contact.php:54
+#: oc-includes/osclass/controller/item.php:145
+#: oc-includes/osclass/controller/item.php:461
+#: oc-includes/osclass/controller/login.php:78
+#: oc-includes/osclass/controller/register.php:60
+#: oc-includes/osclass/controller/user-non-secure.php:161
+msgid "Your current IP is not allowed"
+msgstr "A jelenlegi IP nem engedélyezett"
+
+#: oc-includes/osclass/controller/item.php:194
+msgid "Sorry, we don't have any listings with that ID"
+msgstr "Elnézést, de nem létezik ezzel az ID kóddal hirdetés"
+
+#: oc-includes/osclass/controller/item.php:582
+msgid "The listing hasn't been validated. Please validate it in order to make it public"
+msgstr "A hirdetést nem lett jóváhagyva. Kérlek hagyd jóvá, hogy megjelenjen az oldalon"
+
+#: oc-includes/osclass/controller/login.php:150
+msgid "This should never happen"
+msgstr "Ez soha nem történhet meg"
+
+#: oc-includes/osclass/UserActions.php:37
+msgid "The reCAPTCHA was not entered correctly"
+msgstr "A reCAPTCHA nem volt rendesen megadva"
+
+#: oc-includes/osclass/UserActions.php:74
+msgid "Username is already taken"
+msgstr "Felhasználónév már foglalt"
+
+#: oc-includes/osclass/UserActions.php:78
+#: oc-includes/osclass/controller/user.php:154
+msgid "The specified username is not valid, it contains some invalid words"
+msgstr "A megadott felhasználónév érvénytelen, tartalmaz néhány érvénytelen szót"
+
+#: oc-includes/osclass/controller/user-non-secure.php:82
+#: oc-includes/osclass/controller/user.php:224
+msgid "Oops! There was a problem trying to activate your alert. Please contact an administrator"
+msgstr "Hiba történt a figyelmeztetéseid aktiválása közben. Értesítsd az oldal adminisztrátorát"
+
+#: oc-includes/osclass/controller/user-non-secure.php:103
+#: oc-includes/osclass/controller/user.php:245
+msgid "Oops! There was a problem trying to unsubscribe you. Please contact an administrator"
+msgstr "Hiba történt a leiratkozásod közben. Értesítsd az oldal adminisztrátorát"
+
+#: oc-includes/osclass/controller/user.php:144
+msgid "The specified username is already in use"
+msgstr "A megadott felhasználónév használatban van"
+
+#: oc-includes/osclass/controller/user.php:150
+msgid "The username was updated"
+msgstr "A felhasználónév frissítve"
+
+#: oc-includes/osclass/controller/user.php:158
+msgid "The specified username could not be empty"
+msgstr "A megadott felhasználónév nem lehet üres"
+
+#: oc-includes/osclass/controller/user.php:268
+msgid "Your account have been deleted"
+msgstr "Felhasználói fiókja törölve"
+
+#: oc-includes/osclass/controller/user.php:271
+#: oc-includes/osclass/controller/user.php:275
+msgid "Oops! you can not do that"
+msgstr "Hoppá! Ön nem tudta, hogy"
+
+#: oc-includes/osclass/emails.php:464
+msgid "We've sent you an e-mail. Follow its instructions to validate the changes"
+msgstr "Küldtünk egy e-mailt utasításokkal a módosítások hitelesítéséhez"
+
+#: oc-includes/osclass/emails.php:466
+msgid "We tried to sent you an e-mail, but it failed. Please, contact an administrator"
+msgstr "Megpróbáltunk e-mailt küldeni, de nem sikerült. Kérlek értesítsd az adminisztrátort"
+
+#: oc-includes/osclass/ItemActions.php:132
+#: oc-includes/osclass/ItemActions.php:340
+msgid "Price must be positive number."
+msgstr "Az árnak pozitív számnak kell lennie"
+
+#: oc-admin/plugins.php:90
+msgid "The plugin generated %d characters of <strong>unexpected output</strong> during the installation. Output: \"%s\""
+msgstr ""
+"A bővítmény generált %d karaktereiből <strong>várt eredmény</strong> a telepítés folyamán.\n"
+"Kimeneti eredmény: \"%s\""
+
+#: oc-admin/items.php:662
+msgid "Number of expiration days has to be a numeric value"
+msgstr "Az érvényesség napjainak száma csak numerikus értékű lehet"
+
+#: oc-admin/controller/settings/permalinks.php:509
+msgid "Friendly URLs deactivated, but .htaccess file was modified outside Osclass and was not deleted"
+msgstr "Keresőbarát URL kikapcsolva, a .htaccess fájl módosítva lett kívülről Osclass nem lett törölve  "
+
+#: oc-admin/controller/settings/permalinks.php:507
+msgid "Friendly URLs deactivated, but .htaccess file could not be deleted. Please, remove it manually"
+msgstr "Keresőbarát URL kikapcsolva, de a .htaccess fájl nem lett törölve. Kérlek távolítsd el manuálisan "
+
+#: oc-admin/controller/settings/permalinks.php:471
+msgid "Here's the content you have to add to the <b>.htaccess</b> file. If you can't modify the file or experience some problems with the URLs, please deactivate the <em>Friendly URLs</em> option."
+msgstr "Itt van a tartalom amit hozzá kell adnod a  <b>.htaccess</b> fájlhoz. Ha nem tudod módosítani, akkor ellenőrizd a <em>Keresőbarát URL</em> funkciót, és a szükséges időre kapcsold ki."
+
+#: oc-admin/controller/settings/permalinks.php:469
+msgid "File <b>.htaccess</b> already exists and was not modified."
+msgstr "A <b>.htaccess</b> fájl már létezik, és nem lett módosítva."
+
+#: oc-admin/items.php:665
+msgid "Title Length has to be a numeric value"
+msgstr "A cím hosszának tartalmaznia kell numerikus értéket"
+
+#: oc-admin/controller/settings/advanced.php:44
+msgid "Advanced settings have been updated"
+msgstr "Haladó beállítások frissítve lettek"
+
+#: oc-admin/items.php:668
+msgid "Description Length has to be a numeric value"
+msgstr "A leírás hosszának tartalmaznia kell numerikus értéket"
+
+#: oc-includes/osclass/ItemActions.php:105
+msgid "Title too short (%s)."
+msgstr "A cím túl rövid (%s)."
+
+#: oc-includes/osclass/ItemActions.php:106
+msgid "Title too long (%s)."
+msgstr "A cím túl hosszú (%s)."
+
+#: oc-includes/osclass/ItemActions.php:118
+msgid "Description too short (%s)."
+msgstr "A leírás túl rövid (%s)."
+
+#: oc-includes/osclass/ItemActions.php:119
+msgid "Description too long (%s)."
+msgstr "A leírás túl hosszú (%s)."
+
+#: oc-includes/osclass/controller/register.php:118
+msgid "Account validation failed"
+msgstr "Fiókhitelesítés nem sikerült"
+
+#: oc-includes/osclass/controller/login.php:117
+msgid "The user has not been validated yet. Would you like to re-send your <a href=\"%s\">activation?</a>"
+msgstr "A felhasználó még nem hitelesített. Szeretnéd újra elküldeni a <a href=\"%s\">hitelesítő mailt?</a>"
+
+#: oc-includes/osclass/controller/login.php:164
+msgid "Incorrect link"
+msgstr "Helytelen link"
+
+#: oc-includes/osclass/controller/login.php:175
+msgid "Validation email re-sent"
+msgstr "Hitelesítő e-mail újra elküldve"
+
+#: oc-includes/osclass/controller/login.php:177
+msgid "We have just sent you an email to validate your account, you will have to wait a few minutes to resend it again"
+msgstr "Épp most küldtük el az e-mailt a fiókod hitelesítésére, várnod kell pár percet, hogy újra elküldhessük neked"
+
+#: oc-includes/osclass/controller/user-non-secure.php:166
+msgid "Your email has been sent properly."
+msgstr "Az e-mail-ed megfelelően elküldve."
+
+#: oc-includes/osclass/upgrade-funcs.php:516
+msgid "Osclass has been updated successfully. <a href=\"http://forums.osclass.org/\">Need more help?</a>"
+msgstr "Az Osclass sikeresen frissítve lett. <a href=\"http://forums.osclass.org/\">Kérsz segítséget?</a>"
+
+#: oc-admin/plugins.php:231
+msgid "The files were deleted"
+msgstr "A fájlok törölve lettek"
+
+#: oc-admin/controller/settings/advanced.php:51
+msgid "Cache flushed correctly"
+msgstr "A gyorsítótár megfelelően tisztítva"
+
+#: oc-admin/plugins.php:233
+msgid "There were an error deleting the files, please check the permissions of the files in %s"
+msgstr "Hiba történt a fájlok törlése közben. Kérlek ellenőrizd a fájl jogosultságot %s"
+
+#: oc-includes/osclass/controller/item.php:591
+msgid "The listing has been blocked or is awaiting moderation from the admin"
+msgstr "A hirdetés blokkolva, vagy moderálásra vár"
+
+#: oc-includes/osclass/controller/login.php:47
+msgid "Please provide an email address"
+msgstr "Kérjük, add meg e-mail címed"
+
+#: oc-includes/osclass/controller/login.php:51
+msgid "Empty passwords are not allowed. Please provide a password"
+msgstr "Üres jelszó nem engedélyezett. Kérjük add meg a jelszavad"
+
+#: oc-includes/osclass/UserActions.php:155
+msgid "The specified e-mail is already used by %s"
+msgstr "A megadott e-mail már használatban van %s által."
+
+#: oc-admin/controller/settings/main.php:36
+msgid "Disconnected from the market"
+msgstr "Kapcsolat bontva a market szolgáltatással"

@@ -1,0 +1,807 @@
+# Translation of Bender in Czech
+# This file is distributed under the same license as the Bender package.
+msgid ""
+msgstr ""
+"PO-Revision-Date: 2014-04-11 07:27:41+0000\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2;\n"
+"X-Generator: GlotPress/0.1\n"
+"Project-Id-Version: Bender\n"
+
+#: functions.php:382
+msgid "Public Profile"
+msgstr "Veřejný profil"
+
+#: item-sidebar.php:95
+msgid "Attachment"
+msgstr "Příloha"
+
+#: main.php:41
+msgid "There aren't listings available at this moment"
+msgstr "Žádné inzeráty nejsou v tuto chvíli k dispozici"
+
+#: search.php:75
+msgid "%1$d - %2$d of %3$d listings"
+msgstr "%1$d - %2$d of %3$d inzerátů"
+
+#: search.php:121
+msgid "Premium listings"
+msgstr "Prémiové inzeráty"
+
+msgid "http://osclass.org/"
+msgstr "http://osclass.org/"
+
+msgid "Bender theme"
+msgstr "Bender motiv"
+
+msgid "Osclass"
+msgstr "Osclass"
+
+#: 404.php:8
+msgid "Sorry but I can't find the page you're looking for"
+msgstr "Omlouvám se, ale nemohu najít stránku, kterou hledáte"
+
+#: 404.php:10
+msgid "Let us help you, we have got a few tips for you to find it."
+msgstr "Nechte abychom vám pomohli, máme pro vás pár tipů abyste to nalezli"
+
+#: 404.php:13
+msgid "<strong>Search</strong> for it:"
+msgstr "<strong>Hledat</strong>:"
+
+#: 404.php:18 header.php:73
+msgid "Search"
+msgstr "Hledat"
+
+#: 404.php:22
+msgid "<strong>Look</strong> for it in the most popular categories."
+msgstr "<strong>Hledej</strong> v nejoblíbenějších kategoriích."
+
+#: admin/header.php:7 functions.php:526
+msgid "Header logo"
+msgstr "Logo hlavičky stránky"
+
+#: admin/header.php:13
+msgid "Preview"
+msgstr "Náhled"
+
+#: admin/header.php:20
+msgid "Remove logo"
+msgstr "Odstranit logo"
+
+#: admin/header.php:28
+msgid "No logo has been uploaded yet"
+msgstr "Žádné logo nebylo ještě nahráno"
+
+#: admin/header.php:31
+msgid "Upload logo"
+msgstr "Nahraj logo"
+
+#: admin/header.php:33
+msgid "The preferred size of the logo is 600x100."
+msgstr "Preferovaná velikost logo je 600x100."
+
+#: admin/header.php:35
+msgid "<strong>Note:</strong> Uploading another logo will overwrite the current logo."
+msgstr "<strong>Poznámka:</strong> Nahráním jiného loga přepíšete stávající logo."
+
+#: admin/header.php:43
+msgid "Logo image (png,gif,jpg)"
+msgstr "Obrázek loga (png, gif, jpg)"
+
+#: admin/header.php:49
+msgid "Upload"
+msgstr "Nahrát"
+
+#: admin/header.php:58
+msgid "The images folder <strong>%s</strong> is not writable on your server"
+msgstr "Složka s obrázky  <strong>%s</strong> na vašem serveru nemá povolené zapisování."
+
+#: admin/header.php:59
+msgid "Osclass can't upload the logo image from the administration panel."
+msgstr "Osclass nemůže nahrát obrázek loga z administrativního panelu."
+
+#: admin/header.php:60
+msgid "Please make the aforementioned image folder writable."
+msgstr "Prosím umožněte zápis do výše zmíněného adresáře."
+
+#: admin/header.php:65
+msgid "To make a directory writable under UNIX execute this command from the shell:"
+msgstr "Spusť následující příkaz v UNIXovém systému z příkazové řádky, abys umožnil zápis do složky:"
+
+#: admin/settings.php:14
+msgid "I would like to contribute to the development of Osclass with a donation of"
+msgstr "Rád bych se podílel na vývoji Osclass přispěním částky"
+
+#: admin/settings.php:19
+msgid "Custom"
+msgstr "Vlastní"
+
+#: admin/settings.php:20
+msgid "Donate"
+msgstr "Přispěj"
+
+#: admin/settings.php:24 functions.php:527
+msgid "Theme settings"
+msgstr "Nastavení motivu"
+
+#: admin/settings.php:30
+msgid "Search placeholder"
+msgstr "Hledat zástupný symbol"
+
+#: admin/settings.php:34
+msgid "Show lists as:"
+msgstr "Zobraz inzeráty jako:"
+
+#: admin/settings.php:37
+msgid "Gallery"
+msgstr "Galerie"
+
+#: admin/settings.php:38 main.php:45 search.php:80
+msgid "List"
+msgstr "Seznam"
+
+#: admin/settings.php:43
+msgid "Footer link"
+msgstr "Odkaz patičky"
+
+#: admin/settings.php:45
+msgid "I want to help Osclass by linking to <a href=\"http://osclass.org/\" target=\"_blank\">osclass.org</a> from my site with the following text:"
+msgstr "Chci pomoct Osclass umístěním odkazu <a href=\"http://osclass.org/\" target=\"_blank\">osclass.org</a> na můj web s následujícím textem:"
+
+#: admin/settings.php:46
+msgid "This website is proudly using the <a title=\"Osclass web\" href=\"http://osclass.org/\">classifieds scripts</a> software <strong>Osclass</strong>"
+msgstr "Tato webová stránka hrdě používá  <a title=\"Osclass web\" href=\"http://osclass.org/\">classifieds scripts</a> software <strong>Osclass</strong>"
+
+#: admin/settings.php:50
+msgid "Save changes"
+msgstr "Uložit změny"
+
+#: alert-form.php:27
+msgid "You have sucessfully subscribed to the alert"
+msgstr "Úspěšně si se přihlásil k odběru upozornění"
+
+#: alert-form.php:28 user-change_email.php:77
+msgid "Invalid email address"
+msgstr "Neplatná emailová adresa"
+
+#: alert-form.php:29
+msgid "There was a problem with the alert"
+msgstr "Vyskytnul se problém s upozorněním"
+
+#: alert-form.php:60
+msgid "Subscribe to this search"
+msgstr "Přihlaš s k odběru tohoto hledání"
+
+#: alert-form.php:75
+msgid "Subscribe now"
+msgstr "Přihlašte se"
+
+#: common/head.php:3 item.php:157 loop-single-premium.php:26 loop-single.php:26
+msgid "Delete"
+msgstr "Smazat"
+
+#: common/head.php:4
+msgid "Cancel"
+msgstr "Zrušit"
+
+#: contact.php:31
+msgid "Contact us"
+msgstr "Kontaktujte nás"
+
+#: contact.php:40 item-send-friend.php:44 item-sidebar.php:76 item.php:183
+#: user-public-sidebar.php:33
+msgid "Your name"
+msgstr "Tvé jméno"
+
+#: contact.php:41 contact.php:54 item-sidebar.php:84 user-public-sidebar.php:41
+msgid "optional"
+msgstr "volitelné"
+
+#: contact.php:47 user-public-sidebar.php:37
+msgid "Your email address"
+msgstr "Tvá emailová adresa"
+
+#: contact.php:53
+msgid "Subject"
+msgstr "Předmět"
+
+#: contact.php:60 item-send-friend.php:78 item-sidebar.php:89
+#: user-public-sidebar.php:46
+msgid "Message"
+msgstr "Zpráva"
+
+#: contact.php:68 item-send-friend.php:87 item-sidebar.php:119 item.php:208
+#: user-public-sidebar.php:69
+msgid "Send"
+msgstr "Odeslat"
+
+#: footer.php:34 header.php:42
+msgid "Hi %s"
+msgstr "Ahoj %s"
+
+#: footer.php:35 header.php:43
+msgid "My account"
+msgstr "Můj účet"
+
+#: footer.php:36 header.php:44
+msgid "Logout"
+msgstr "Odhlásit"
+
+#: footer.php:39 functions.php:355 header.php:47 item-sidebar.php:54
+msgid "Login"
+msgstr "Přihlásit"
+
+#: footer.php:42 header.php:49 item-sidebar.php:55 user-login.php:58
+msgid "Register for a free account"
+msgstr "Vytvořit nový účet zdarma"
+
+#: footer.php:49 header.php:54
+msgid "Publish your ad for free"
+msgstr "Publikuj své inzeráty zdarma"
+
+#: footer.php:64 functions.php:359 user-public-sidebar.php:26
+msgid "Contact"
+msgstr "Kontakt"
+
+#: footer.php:74
+msgid "Language:"
+msgstr "Jazyk:"
+
+#: functions.php:29
+msgid "ie. PHP Programmer"
+msgstr "např: Audi A6"
+
+#: functions.php:340 item-post.php:40
+msgid "Publish a listing"
+msgstr "Zveřejnit inzerát"
+
+#: functions.php:341
+msgid "Edit your listing"
+msgstr "Upravit inzerát"
+
+#: functions.php:342 item-send-friend.php:31
+msgid "Send to a friend"
+msgstr "Poštli to příteli"
+
+#: functions.php:343 item-sidebar.php:40
+msgid "Contact publisher"
+msgstr "Kontaktuj inzerenta"
+
+#: functions.php:344
+msgid "Search results"
+msgstr "Výsledky hledání"
+
+#: functions.php:345
+msgid "Search results: %s"
+msgstr "Výsledky hledání: %s"
+
+#: functions.php:346
+msgid "Dashboard"
+msgstr "Ovládací panel"
+
+#: functions.php:347
+msgid "%s's profile"
+msgstr "profil uživatele %s"
+
+#: functions.php:348 functions.php:397
+msgid "Account"
+msgstr "Účet"
+
+#: functions.php:349 functions.php:387 search.php:128 user-alerts.php:51
+msgid "Listings"
+msgstr "Inzeráty"
+
+#: functions.php:350 functions.php:392 user-alerts.php:32 user-alerts.php:37
+msgid "Alerts"
+msgstr "Upozornění"
+
+#: functions.php:351 user-profile.php:32 user-profile.php:37
+msgid "Update account"
+msgstr "Aktualizuj účet"
+
+#: functions.php:352 functions.php:402
+msgid "Change email"
+msgstr "Změnit email"
+
+#: functions.php:353 functions.php:407 user-change_username.php:34
+#: user-change_username.php:39
+msgid "Change username"
+msgstr "Změnit uživatelské jméno"
+
+#: functions.php:354 functions.php:357 functions.php:412
+#: user-change_password.php:32 user-change_password.php:37
+#: user-forgot_password.php:52
+msgid "Change password"
+msgstr "Změňit heslo"
+
+#: functions.php:356
+msgid "Recover password"
+msgstr "Obnovit heslo"
+
+#: functions.php:358
+msgid "Create a new account"
+msgstr "Vytvořit nový účet"
+
+#: functions.php:417 user-sidebar.php:28
+msgid "Delete account"
+msgstr "Smazat účet"
+
+#: functions.php:474
+msgid "Theme settings updated correctly"
+msgstr "Nastavení motivu bylo úspěšně aktualizováno"
+
+#: functions.php:489
+msgid "The logo image has been uploaded correctly"
+msgstr "Logo bylo úspěšně nahráno"
+
+#: functions.php:491
+msgid "An error has occurred, please try again"
+msgstr "Vyskytla se chyba, zkus to znou"
+
+#: functions.php:502
+msgid "The logo image has been removed"
+msgstr "Logo bylo odstraněno"
+
+#: functions.php:504
+msgid "Image not found"
+msgstr "Obrázek nebyl nalezen"
+
+#: functions.php:585 functions.php:607
+msgid "All categories"
+msgstr "Všechny kategorie"
+
+#: header.php:67 item-post.php:55
+msgid "Select a category"
+msgstr "Vyber kategorii"
+
+#: item-post.php:51
+msgid "General Information"
+msgstr "Obecné informace"
+
+#: item-post.php:53
+msgid "Category"
+msgstr "Kategorie"
+
+#: item-post.php:59 item.php:196
+msgid "Title"
+msgstr "Nadpis"
+
+#: item-post.php:65 user-profile.php:106
+msgid "Description"
+msgstr "Popis"
+
+#: item-post.php:72 search-sidebar.php:61
+msgid "Price"
+msgstr "Cena"
+
+#: item-post.php:83
+msgid "Listing Location"
+msgstr "Umístění inzerátu"
+
+#: item-post.php:86 user-profile.php:70
+msgid "Country"
+msgstr "Země"
+
+#: item-post.php:92 user-profile.php:76
+msgid "Region"
+msgstr "Region"
+
+#: item-post.php:98 search-sidebar.php:44 user-profile.php:82
+msgid "City"
+msgstr "Město"
+
+#: item-post.php:104
+msgid "City Area"
+msgstr "Městská část"
+
+#: item-post.php:110 user-profile.php:94
+msgid "Address"
+msgstr "Adresa"
+
+#: item-post.php:119
+msgid "Seller's information"
+msgstr "Informace o prodejci"
+
+#: item-post.php:121 item-sidebar.php:59 user-profile.php:46
+#: user-register.php:39
+msgid "Name"
+msgstr "Jméno"
+
+#: item-post.php:127 user-login.php:38 user-recover.php:37 user-register.php:45
+msgid "E-mail"
+msgstr "E-mail"
+
+#: item-post.php:134
+msgid "Show e-mail on the listing page"
+msgstr "Zobrazit e-mail na stránce inzerátu"
+
+#: item-post.php:153 user-change_email.php:59 user-change_password.php:64
+#: user-change_username.php:102 user-profile.php:113
+msgid "Update"
+msgstr "Aktualizovat"
+
+#: item-post.php:153
+msgid "Publish"
+msgstr "Zveřejnit"
+
+#: item-send-friend.php:50 item.php:189
+msgid "Your e-mail"
+msgstr "Tvůj e-mail"
+
+#: item-send-friend.php:57
+msgid "Your friend's name"
+msgstr "Jméno tvého přítele"
+
+#: item-send-friend.php:63
+msgid "Your friend's e-mail address"
+msgstr "E-mail tvého přítele"
+
+#: item-send-friend.php:70
+msgid "Subject (optional)"
+msgstr "Předmět (nepovinný)"
+
+#: item-sidebar.php:30
+msgid "Mark as..."
+msgstr "Označit jako..."
+
+#: item-sidebar.php:31
+msgid "Mark as spam"
+msgstr "Označit jako spam"
+
+#: item-sidebar.php:32
+msgid "Mark as misclassified"
+msgstr "Označit jako špatně umístěné"
+
+#: item-sidebar.php:33
+msgid "Mark as duplicated"
+msgstr "Označit jako duplikát"
+
+#: item-sidebar.php:34
+msgid "Mark as expired"
+msgstr "Označit jako expirované"
+
+#: item-sidebar.php:35
+msgid "Mark as offensive"
+msgstr "Označit jako urážlivé"
+
+#: item-sidebar.php:43
+msgid "The listing is expired. You can't contact the publisher."
+msgstr "Inzerát expiroval, nemůžeš již kontaktovat inzerenta."
+
+#: item-sidebar.php:47
+msgid "It's your own listing, you can't contact the publisher."
+msgstr "Toto je tvůj vlastní inzerát, nemůžeš kontaktovat inzerenta."
+
+#: item-sidebar.php:51
+msgid "You must log in or register a new account in order to contact the advertiser"
+msgstr "Musíš se přihlásit nebo si vytvořit nový účet pokud chceš kontaktovat inzerenta."
+
+#: item-sidebar.php:61
+msgid "Name: %s"
+msgstr "Jméno: %s"
+
+#: item-sidebar.php:64
+msgid "E-mail: %s"
+msgstr "E-mail: %s"
+
+#: item-sidebar.php:67
+msgid "Phone: %s"
+msgstr "Telefon: %s"
+
+#: item-sidebar.php:80
+msgid "Your e-mail address"
+msgstr "Tvá e-mailová adresa"
+
+#: item-sidebar.php:84 user-public-sidebar.php:41
+msgid "Phone number"
+msgstr "Telefoní číslo"
+
+#: item-sidebar.php:113 user-public-sidebar.php:63
+msgid "Enter the words above"
+msgstr "Vlož slova, která vidíš výše"
+
+#: item-sidebar.php:115 user-public-sidebar.php:65
+msgid "Help"
+msgstr "Pomoc"
+
+#: item.php:55
+msgid "<strong class=\"publish\">Published date</strong>: %1$s"
+msgstr "<strong class=\"publish\">Zveřejněno dne</strong>: %1$s"
+
+#: item.php:58
+msgid "<strong class=\"update\">Modified date:</strong> %1$s"
+msgstr "<strong class=\"update\">Upraveno dne:</strong> %1$s"
+
+#: item.php:61 main.php:67
+msgid "Location"
+msgstr "Poloha"
+
+#: item.php:67 loop-single-premium.php:24 loop-single.php:24
+msgid "Edit item"
+msgstr "Upravit inzerát"
+
+#: item.php:79 item.php:84
+msgid "Image"
+msgstr "Obrázek"
+
+#: item.php:113
+msgid "Contact seller"
+msgstr "Kontaktovat prodejce"
+
+#: item.php:117
+msgid "Share"
+msgstr "Sdílet"
+
+#: item.php:123
+msgid "Useful information"
+msgstr "Užitečné informace"
+
+#: item.php:125
+msgid "Avoid scams by acting locally or paying with PayPal"
+msgstr "Vyhni se podvodům placením pomocí PayPal"
+
+#: item.php:126
+msgid "Never pay with Western Union, Moneygram or other anonymous payment services"
+msgstr "Nikdy neplať pomocí Western Union, Moneygram nebo pomocí jiné anonymní platební služby"
+
+#: item.php:127
+msgid "Don't buy or sell outside of your country. Don't accept cashier cheques from outside your country"
+msgstr "Neprodávej ani nenakupuj mimo svou zemi. Nepřijímej šeky, které nepocházejí z tvé země."
+
+#: item.php:128
+msgid "This site is never involved in any transaction, and does not handle payments, shipping, guarantee transactions, provide escrow services, or offer \"buyer protection\" or \"seller certification\""
+msgstr "Tento web neručí za platby, ani platby nevyřizuje. Také neposkytuje žádné záruky za prodávané položky, dopravu, úschovu, a neposkytuje \"ochranu kupujícího\" nebo \"cerifikaci prodejců\""
+
+#: item.php:135
+msgid "Related listings"
+msgstr "Podobné inzeráty"
+
+#: item.php:146
+msgid "Comments"
+msgstr "Komentáře"
+
+#: item.php:153
+msgid "by"
+msgstr "od"
+
+#: item.php:157
+msgid "Delete your comment"
+msgstr "Smaž svůj komentář"
+
+#: item.php:169
+msgid "Leave your comment (spam and offensive messages will be removed)"
+msgstr "Zanech komentář (spam a urážlivé komentáře budou odstraněny)"
+
+#: item.php:202
+msgid "Comment"
+msgstr "Komentář"
+
+#: loop-single-premium.php:26 loop-single.php:26
+msgid "This action can not be undone. Are you sure you want to continue?"
+msgstr "Tuto akci nelze vzít zpět. Jsi si jist, že chceš pokračovat?"
+
+#: loop-single-premium.php:29 loop-single.php:29
+msgid "Activate"
+msgstr "Aktivovat"
+
+#: main.php:38
+msgid "Latest Listings"
+msgstr "Nejnovější inzeráty"
+
+#: main.php:46 search.php:81
+msgid "Grid"
+msgstr "Mřížka"
+
+#: main.php:57
+msgid "See all listings"
+msgstr "Zobrazit všechny inzeráty"
+
+#: search-sidebar.php:38
+msgid "Your search"
+msgstr "Tvé hledání"
+
+#: search-sidebar.php:51
+msgid "Show only"
+msgstr "Zobrazit pouze"
+
+#: search-sidebar.php:54
+msgid "listings with pictures"
+msgstr "inzeráty s obrázky"
+
+#: search-sidebar.php:62
+msgid "Min"
+msgstr "Min"
+
+#: search-sidebar.php:64
+msgid "Max"
+msgstr "Max"
+
+#: search-sidebar.php:84
+msgid "Apply"
+msgstr "Použít"
+
+#: search-sidebar.php:89
+msgid "Refine category"
+msgstr "Pročistit kategorii"
+
+#: search.php:55
+msgid "Selected"
+msgstr "Vybráno"
+
+#: search.php:56
+msgid "Nothing selected, input was"
+msgstr "Nebylo nic vybráno, vstup byl"
+
+#: search.php:71
+msgid "There are no results matching \"%s\""
+msgstr "Nenalezen žádný výsledek shodující se s  \"%s\""
+
+#: search.php:78
+msgid "Show filters"
+msgstr "Ukaž filtry"
+
+#: search.php:85
+msgid "Sort by"
+msgstr "Seřaď podle"
+
+#: search.php:141
+msgid "Other searches that may interest you"
+msgstr "Další vyhledávání, které by tě mohlo zajímat"
+
+#: user-alerts.php:39
+msgid "You do not have any alerts yet"
+msgstr "Nemáš zatím žádná upozornění"
+
+#: user-alerts.php:46
+msgid "Alert"
+msgstr "Upozornění"
+
+#: user-alerts.php:46
+msgid "This action can't be undone. Are you sure you want to continue?"
+msgstr "Tuto akci nelze vrátit zpět. Jsi si jist, že chceš pokračovat?"
+
+#: user-alerts.php:46
+msgid "Delete this alert"
+msgstr "Smaž toto upozornění"
+
+#: user-change_email.php:33 user-change_email.php:38
+msgid "Change e-mail"
+msgstr "Změnit email"
+
+#: user-change_email.php:46
+msgid "Current e-mail"
+msgstr "Současný email"
+
+#: user-change_email.php:52
+msgid "New e-mail"
+msgstr "Nový email"
+
+#: user-change_password.php:45
+msgid "Current password"
+msgstr "Současné heslo"
+
+#: user-change_password.php:51 user-forgot_password.php:39
+msgid "New password"
+msgstr "Nové heslo"
+
+#: user-change_password.php:57 user-forgot_password.php:45
+msgid "Repeat new password"
+msgstr "Opakuj nové heslo"
+
+#: user-change_username.php:50
+msgid "Username: this field is required"
+msgstr "Uživatelské jméno: toto pole je povinné"
+
+#: user-change_username.php:75
+msgid "The username is available"
+msgstr "Toto uživatelské jméno je dostupné"
+
+#: user-change_username.php:77
+msgid "The username is NOT available"
+msgstr "Toto uživatelské jméno NENÍ dostupné"
+
+#: user-change_username.php:94
+msgid "Username"
+msgstr "Uživatelské jméno"
+
+#: user-forgot_password.php:30 user-recover.php:30
+msgid "Recover your password"
+msgstr "Obnovit vaše heslo"
+
+#: user-items.php:41
+msgid "My listings"
+msgstr "Mé inzeráty"
+
+#: user-items.php:43
+msgid "No listings have been added yet"
+msgstr "Žádné inzeráty nebyly zatím přidány"
+
+#: user-login.php:30
+msgid "Access to your account"
+msgstr "Přístup k tvému účtu"
+
+#: user-login.php:44 user-register.php:52
+msgid "Password"
+msgstr "Heslo"
+
+#: user-login.php:51
+msgid "Remember me"
+msgstr "Zapamatuj si mne"
+
+#: user-login.php:54
+msgid "Log in"
+msgstr "Přihlásit"
+
+#: user-login.php:58
+msgid "Forgot password?"
+msgstr "Zapomněl si své heslo?"
+
+#: user-profile.php:52
+msgid "User type"
+msgstr "Typ uživatele"
+
+#: user-profile.php:58
+msgid "Cell phone"
+msgstr "Mobilní telefon"
+
+#: user-profile.php:64
+msgid "Phone"
+msgstr "Telefon"
+
+#: user-profile.php:88
+msgid "City area"
+msgstr "Městská část"
+
+#: user-profile.php:100
+msgid "Website"
+msgstr "Webová stránka"
+
+#: user-public-profile.php:67
+msgid "<strong>Address:</strong> %1$s"
+msgstr "<strong>Adresa:</strong> %1$s"
+
+#: user-public-profile.php:70
+msgid "<strong>Location:</strong> %1$s"
+msgstr "<strong>Místo:</strong> %1$s"
+
+#: user-public-profile.php:75
+msgid "User description"
+msgstr "Popis uživatele"
+
+#: user-public-profile.php:80
+msgid "Latest listings"
+msgstr "Nejnovější inzeráty"
+
+#: user-recover.php:45
+msgid "Send me a new password"
+msgstr "Pošli mi nové heslo"
+
+#: user-register.php:31
+msgid "Register an account for free"
+msgstr "Zaregistruj si účet zdarma"
+
+#: user-register.php:58
+msgid "Repeat password"
+msgstr "Opakuj heslo"
+
+#: user-register.php:62
+msgid "Passwords don't match"
+msgstr "Hesla se neshodují"
+
+#: user-register.php:69
+msgid "Create"
+msgstr "Vytvořit"
+
+#: user-sidebar.php:23
+msgid "Display menu"
+msgstr "Zobraz menu"
+
+#: user-sidebar.php:29
+msgid "Are you sure you want to delete your account?"
+msgstr "Jste si jist, že chcete odstranit svůj účet?"
+
+msgid "bender"
+msgstr "flám"

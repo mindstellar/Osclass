@@ -570,9 +570,10 @@
                      *** CHECK VALID CODE ***
                      ************************/
                     if ($code != '' && $section != '') {
-                        if(stripos($code, "http://")===FALSE) {
+                        if(stripos($code, "http://")===FALSE && stripos($code, "https://")===FALSE) {
                             // OSCLASS OFFICIAL REPOSITORY
-                            $data = json_decode(osc_file_get_contents(osc_market_url($section, $code), array('api_key' => osc_market_api_connect())), true);
+                            // Disable Osclass Market update checking.
+                            // $data = json_decode(osc_file_get_contents(osc_market_url($section, $code), array('api_key' => osc_market_api_connect())), true);
                         } else {
                             // THIRD PARTY REPOSITORY
                             if(osc_market_external_sources()) {
@@ -589,82 +590,6 @@
                         $data = array('error' => 1, 'error_msg' => __('No code was submitted'));
                     }
                     echo json_encode($data);
-                    break;
-                case 'market_data':
-                    $section  = Params::getParam('section');
-                    $page     = Params::getParam("mPage");
-                    $featured = Params::getParam("featured");
-
-                    $sort     = Params::getParam("sort");
-                    $order    = Params::getParam("order");
-
-                    // for the moment this value is static
-                    $length   = 9;
-
-                    if($page>=1) $page--;
-
-                    $url  = osc_market_url($section)."page/".$page.'/';
-
-                    if($length!='' && is_numeric($length)) {
-                        $url .= 'length/'.$length.'/';
-                    }
-
-                    if($sort!='') {
-                        $url .= 'order/'.$sort;
-                        if($order!='') {
-                            $url .= '/'.$order;
-                        }
-                    }
-
-                    if($featured != ''){
-                        $url = osc_market_featured_url($section);
-                    }
-
-                    $data = array();
-
-                    $data = json_decode(osc_file_get_contents($url, array('api_key' => osc_market_api_connect())), true);
-
-                    if( !isset($data[$section])) {
-                        $data = array('error' => 1, 'error_msg' => __('No market data'));
-                    }
-                    echo 'var market_data = window.market_data || {}; market_data.'.$section.' = '.json_encode($data).';';
-
-                    break;
-                case 'market_connect':
-                    $json = osc_file_get_contents(osc_market_url() . 'connect/', array('s_email' => Params::getParam('s_email'), 's_password' => Params::getParam('s_password')));
-                    $data = json_decode($json, true);
-                    if($data['error']==0) {
-                        osc_set_preference('marketAPIConnect', $data['api_key']);
-                        unset($data['api_key']);
-                        $json = json_encode($data);
-                    }
-                    echo $json;
-                    break;
-                case 'market_header':
-                case 'dashboardbox_market':
-                    $error = 0;
-                    // make market call
-                    $url = osc_get_preference('marketURL') . 'dashboardbox/';
-                    if(Params::getParam("action")=="market_header") {
-                        $url = osc_get_preference('marketURL') . 'market_header/';
-                    }
-                    $content = '';
-                    if(false===($json=@osc_file_get_contents($url))) {
-                        $error = 1;
-                    } else {
-                        $content = json_decode($json, true);
-                    }
-                    if(!isset($content["banner"]) || !isset($content["url"]) || $error==1) {
-                        echo json_encode(array('error' => 1));
-                    } else {
-                        // replace content with correct urls
-                        $content["url"] = str_replace('{URL_MARKET_THEMES}'    , osc_admin_base_url(true).'?page=market&action=themes' , $content["url"]);
-                        $content["url"] = str_replace('{URL_MARKET_PLUGINS}'   , osc_admin_base_url(true).'?page=market&action=plugins', $content["url"]);
-                        $content["url"] = osc_esc_html(osc_sanitize_url($content["url"]));
-                        $content["banner"] = osc_esc_html(osc_sanitize_url($content["banner"]));
-                        $content["error"] = 0;
-                        echo json_encode($content);
-                    }
                     break;
                 case 'location_stats':
                     osc_csrf_check(false);

@@ -84,13 +84,6 @@
             }
         });
 
-        $("#market_disconnect").on('click', function() {
-            var x = confirm('<?php _e('You are going to be disconnected from the Market, all your plugins and themes downloaded will remain installed and configured but you will not be able to update or download new plugins and themes. Are you sure?'); ?>');
-            if(x) {
-                window.location = '<?php echo osc_admin_base_url(true); ?>?page=settings&action=market_disconnect&<?php echo osc_csrf_token_url(); ?>';
-            }
-        })
-
     });
 
     function custom_date(date_format) {
@@ -322,20 +315,6 @@
                             <span class="help-box"><?php _e('It is <b>recommended</b> to have this option enabled, because some features require it.'); ?></span>
                         </div>
                     </div>
-                    <?php if(osc_market_api_connect()!='') { ?>
-                    <h2 class="render-title separate-top"><?php _e('Market Settings'); ?></h2>
-                    <div class="form-row">
-                        <div class="form-label"><?php _e('Connect ID'); ?></div>
-                        <div class="form-controls">
-                            <div class="form-label-checkbox">
-                                <label>
-                                    <?php echo osc_market_api_connect(); ?>
-                                </label>
-                            </div>
-                            <span class="help-box"><a href="#" id="market_disconnect"><?php _e('Disconnect from market.osclass.org'); ?></a></span>
-                        </div>
-                    </div>
-                    <?php }; ?>
                     <h2 class="render-title separate-top"><?php _e('Software updates'); ?></h2>
                     <div class="form-row">
                         <div class="form-label"><?php _e('Core updates'); ?></div>
@@ -377,17 +356,6 @@
                                 <label>
                                     <input type="checkbox" <?php echo ( (strpos(osc_auto_update(),'languages')!==false) ? 'checked="checked"' : '' ); ?> name="auto_update[]" value="languages" />
                                     <?php _e('Allow auto-updates of languages'); ?>
-                                </label>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="form-row">
-                        <div class="form-label"><?php _e('Market external sources'); ?></div>
-                        <div class="form-controls">
-                            <div class="form-label-checkbox">
-                                <label>
-                                    <input type="checkbox" <?php echo ( osc_market_external_sources() ? 'checked="checked"' : '' ); ?> name="market_external_sources" />
-                                    <?php _e('Allow updates and installations of non-official plugins and themes'); ?>
                                 </label>
                             </div>
                         </div>

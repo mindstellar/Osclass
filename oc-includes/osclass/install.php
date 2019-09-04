@@ -179,25 +179,12 @@
                     <div class="form-table">
                         <h3 style="font-weight: 400;font-size: 1.2rem;margin: 0;margin-bottom: .5em;"><?php _e( 'Oops! You need a compatible Hosting' ); ?></h3>
                         <span style="color: red;font-weight: 300;font-size: 1.09em;"><?php _e( 'Your hosting seems to be not compatible, check your settings.' ); ?></span>
-                        <p><?php _e( 'We have a partnership with the best hosting companies, check our promotions and get Osclass plugins and themes for free!' ); ?></p>
-                        <p>
-                            <a href="https://osclass.org/page/hosting?utm_source=installation-hosting-page&amp;utm_medium=installation&amp;utm_campaign=hosting_page"
-                               target="_blank" class="button"/><?php _e( 'Get Hosting!' ); ?></a></p>
                     </div>
-                    <br>
-				<?php } else { ?>
-                    <div class="form-table">
-                        <h3 style="font-weight: 400;font-size: 1.2rem;margin: 0;margin-bottom: .5em;"><?php _e( 'Discover the best hosting providers and promotions for Osclass' ); ?></h3>
-                        <p style="line-height: 1.5em"><?php _e( 'We have a partnership with the best hosting companies, check our promotions and get premium Osclass plugins and themes for free!' ); ?></p>
-                    </div>
-                    <br>
-                    <p>
-                        <a href="https://osclass.org/page/hosting?utm_source=installation-hosting-page&utm_medium=installation&utm_campaign=hosting_page"
-                           target="_blank" class="button"/><?php _e( 'Get Hosting!' ); ?></a></p>
                     <br>
 				<?php } ?>
 
                 <form action="install.php" method="post">
+					<input type="hidden" name="step" value="2"/>
                     <div class="form-table">
 						<?php if ( count( $locales ) > 1 ) { ?>
                             <div>
@@ -237,15 +224,6 @@
                                             alt="" title=""/></li>
 							<?php } ?>
                         </ul>
-                        <div class="more-stats">
-                            <input type="checkbox" name="save_stats" id="save_stats" value="1"/>
-                            <input type="hidden" name="step" value="2"/>
-                            <label for="save_stats">
-								<?php _e( 'Help make Osclass better by automatically sending usage statistics and crash reports to Osclass.' ); ?>
-                                </br><span
-                                        style="margin-left: 24px;"><?php _e( "I accept Osclass SL’s <a href=\"https://osclass.org/page/legal-note\">Terms of Use</a> and <a href=\"https://osclass.org/page/cookies\">Cookies Policy</a> and grant them permission to manage my data." ); ?></span>
-                            </label>
-                        </div>
                     </div>
 					<?php if ( $error ) { ?>
                         <p class="margin20">
@@ -301,7 +279,7 @@
                        hreflang="en"><?php _e( 'Readme' ); ?></a>
                 </li>
                 <li>
-                    <a href="https://osclass.org/contact" target="_blank" hreflang="en"><?php _e( 'Feedback' ); ?></a>
+                    <a href="https://github.com/navjottomer/Osclass/" target="_blank" hreflang="en"><?php _e( 'Feedback' ); ?></a>
                 </li>
                 <li>
                     <a href="http://forums.osclass.org/index.php" target="_blank"

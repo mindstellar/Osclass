@@ -1,0 +1,1725 @@
+# Translation of Flash Messages in Polish
+# This file is distributed under the same license as the Flash Messages package.
+msgid ""
+msgstr ""
+"PO-Revision-Date: 2014-12-17 14:17:38+0000\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=3; plural=(n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
+"X-Generator: GlotPress/0.1\n"
+"Project-Id-Version: Flash Messages\n"
+
+#: oc-includes/osclass/controller/ajax.php:101
+#: oc-includes/osclass/controller/item.php:313
+msgid "The selected photo couldn't be deleted, the url doesn't exist"
+msgstr "Wybrane zdjęcie nie może być usunięte, adres nie istnieje "
+
+#: oc-includes/osclass/controller/ajax.php:111
+#: oc-includes/osclass/controller/item.php:319
+msgid "The listing doesn't exist"
+msgstr "Ogłoszenie nie istnieje"
+
+#: oc-includes/osclass/controller/ajax.php:120
+#: oc-includes/osclass/controller/ajax.php:128
+#: oc-includes/osclass/controller/item.php:325
+#: oc-includes/osclass/controller/item.php:330
+msgid "The listing doesn't belong to you"
+msgstr "Ogłoszenie nie należy do Ciebie"
+
+#: oc-includes/osclass/controller/ajax.php:86
+#: oc-includes/osclass/controller/ajax.php:151
+#: oc-includes/osclass/controller/item.php:344
+msgid "The selected photo has been successfully deleted"
+msgstr "Wybran zdjęcie zostało pomyślnie usunięte"
+
+#: oc-includes/osclass/controller/ajax.php:154
+#: oc-includes/osclass/controller/item.php:346
+msgid "The selected photo does not belong to you"
+msgstr "Wybrane zdjęcie nie należy do Ciebie"
+
+#: oc-includes/osclass/controller/ajax.php:86
+#: oc-includes/osclass/controller/ajax.php:158
+#: oc-includes/osclass/controller/item.php:349
+msgid "The selected photo couldn't be deleted"
+msgstr "Wybrane zdjęcie nie może być usunięte."
+
+#: oc-includes/osclass/controller/contact.php:39
+#: oc-includes/osclass/controller/item.php:122
+#: oc-includes/osclass/controller/item.php:230
+#: oc-includes/osclass/controller/item.php:394
+#: oc-includes/osclass/controller/item.php:446
+#: oc-includes/osclass/controller/user-non-secure.php:147
+msgid "The Recaptcha code is wrong"
+msgstr "Kod Recaptcha jest nieprawidłowy"
+
+#: oc-includes/osclass/emails.php:645
+msgid "There has been some errors sending the message"
+msgstr "Wystąpiły błędy podczas przesyłania wiadomości"
+
+#: oc-includes/osclass/controller/item.php:51
+#: oc-includes/osclass/controller/item.php:100
+msgid "Only registered users are allowed to post listings"
+msgstr "Tylko zarejestrowani użytkownicy mogą publikować ogłoszenia"
+
+#: oc-includes/osclass/controller/item.php:165
+msgid "Your listing has been published"
+msgstr "Twoje ogłoszenie zostało opublikowane"
+
+#: oc-includes/osclass/controller/item.php:239
+msgid "Great! We've just updated your listing"
+msgstr "Świetnie! Twoje ogłoszenie zostało zaktualizowane"
+
+#: oc-includes/osclass/controller/item.php:266
+msgid "The listing has been validated"
+msgstr "Ogłoszenie zostało potwierdzone"
+
+#: oc-includes/osclass/controller/item.php:268
+msgid "The listing can't be validated"
+msgstr "Nie można potwierdzić ogłoszenia"
+
+#: oc-includes/osclass/controller/item.php:271
+msgid "The listing has already been validated"
+msgstr "Ogłoszenie zostało już potwierdzone"
+
+#: oc-includes/osclass/controller/item.php:284
+msgid "Your listing has been deleted"
+msgstr "Ogłoszenie zostało skasowane"
+
+#: oc-includes/osclass/controller/item.php:286
+#: oc-includes/osclass/controller/item.php:294
+msgid "The listing you are trying to delete couldn't be deleted"
+msgstr "Ogłoszenie które próbujesz skasować, nie może zostać usunięte"
+
+#: oc-includes/osclass/controller/item.php:371
+msgid "Thanks! That's very helpful"
+msgstr "Dzięki! Jest to bardzo pomocne!"
+
+#: oc-includes/osclass/controller/item.php:417
+#: oc-includes/osclass/controller/item.php:529
+msgid "This listing doesn't exist"
+msgstr "Ogłoszenie nie istnieje"
+
+#: oc-includes/osclass/controller/item.php:423
+#: oc-includes/osclass/controller/item.php:466
+msgid "We're sorry, but the listing has expired. You can't contact the seller"
+msgstr "Przykro nam, ale ogłoszenie wygasło. Nie można skontaktować się z ogłoszeniodawcą."
+
+#: oc-includes/osclass/controller/item.php:430
+#: oc-includes/osclass/controller/item.php:438
+msgid "You can't contact the seller, only registered users can"
+msgstr "Wyłącznie zarejestrowani użytkownicy mogą kontaktować się ze sprzedawcami"
+
+#: oc-includes/osclass/controller/item.php:479
+msgid "We've just sent an e-mail to the seller"
+msgstr "Wiadomość do sprzedającego została wysłana"
+
+#: oc-includes/osclass/controller/item.php:489
+msgid "Sorry, we could not save your comment. Try again later"
+msgstr "Przepraszamy, nie możemy zapisać Twojego komentarza. Spróbuj ponownie później."
+
+#: oc-includes/osclass/controller/item.php:492
+msgid "Your comment is awaiting moderation"
+msgstr "Twój komentarz oczekuje na moderację"
+
+#: oc-includes/osclass/controller/item.php:495
+msgid "Your comment has been approved"
+msgstr "Twój komentarz został zaakceptowany"
+
+#: oc-includes/osclass/controller/item.php:498
+msgid "Please fill the required field (email)"
+msgstr "Proszę wypełnić pola obowiązkowe (email)"
+
+#: oc-includes/osclass/controller/item.php:501
+msgid "Please type a comment"
+msgstr "Wprowadź komentarz"
+
+#: oc-includes/osclass/controller/item.php:504
+msgid "Your comment has been marked as spam"
+msgstr "Twój komentarz został oznaczony jako spam"
+
+#: oc-includes/osclass/controller/item.php:536
+msgid "You must be logged in to delete a comment"
+msgstr "Żeby usunąć komentarz musisz się najpierw zalogować"
+
+#: oc-includes/osclass/controller/item.php:544
+msgid "The comment doesn't exist"
+msgstr "Komentarz nie istnieje"
+
+#: oc-includes/osclass/controller/item.php:549
+msgid "The comment is not active, you cannot delete it"
+msgstr "Komentarz nie jest aktywny, nie możesz go usunąć."
+
+#: oc-includes/osclass/controller/item.php:554
+msgid "The comment was not added by you, you cannot delete it"
+msgstr "Komentarz nie został dodany przez Ciebie, no możesz go usunąć"
+
+#: oc-admin/comments.php:195 oc-includes/osclass/controller/item.php:559
+msgid "The comment has been deleted"
+msgstr "Komentarz został usunięty"
+
+#: oc-includes/osclass/controller/login.php:25
+#: oc-includes/osclass/controller/register.php:26
+#: oc-includes/osclass/controller/user-non-secure.php:25
+#: oc-includes/osclass/controller/user.php:25
+msgid "Users not enabled"
+msgstr "Użytkownicy wyłączeni"
+
+#: oc-includes/osclass/controller/login.php:36
+#: oc-includes/osclass/controller/register.php:49
+msgid "Users are not enabled"
+msgstr "Użytkownicy nie są aktywni"
+
+#: oc-includes/osclass/controller/login.php:65
+#: oc-includes/osclass/controller/login.php:114
+msgid "The user doesn't exist"
+msgstr "Użytkownik nie istnieje"
+
+#: oc-includes/osclass/controller/login.php:69
+msgid "The password is incorrect"
+msgstr "Hasło niepoprawne"
+
+#: oc-includes/osclass/controller/login.php:119
+msgid "The user has not been validated yet"
+msgstr "Użytkownik nie został aktywowany."
+
+#: oc-includes/osclass/controller/login.php:122
+msgid "The user has been suspended"
+msgstr "Użytkownik został zawieszony"
+
+#: oc-includes/osclass/controller/login.php:190
+msgid "Invalid email address"
+msgstr "Błędny adres email"
+
+#: oc-includes/osclass/controller/login.php:199
+msgid "We have sent you an email with the instructions to reset your password"
+msgstr "Wysłaliśmy instrukcje jak zresetować hasło"
+
+#: oc-includes/osclass/controller/login.php:203
+msgid "We were not able to identify you given the information provided"
+msgstr "Nie byliśmy w stanie Ciebie zidentyfikować z podanej informacji"
+
+#: oc-includes/osclass/controller/login.php:207
+msgid "The recaptcha code is wrong"
+msgstr "Kod recaptcha jest nieprawidłowy"
+
+#: oc-admin/login.php:131 oc-admin/login.php:141
+#: oc-includes/osclass/controller/login.php:217
+#: oc-includes/osclass/controller/login.php:245
+#: oc-includes/osclass/controller/user-non-secure.php:54
+#: oc-includes/osclass/controller/user-non-secure.php:58
+msgid "Sorry, the link is not valid"
+msgstr "Przepraszamy, link nie działa"
+
+#: oc-includes/osclass/controller/login.php:224
+#: oc-includes/osclass/controller/user.php:170
+msgid "Password cannot be blank"
+msgstr "Hasło nie może być puste"
+
+#: oc-admin/login.php:151 oc-includes/osclass/controller/login.php:238
+msgid "The password has been changed"
+msgstr "Hasło zostało zmienione"
+
+#: oc-includes/osclass/controller/login.php:241
+msgid "Error, the password don't match"
+msgstr "Error, hasło nie pasuje"
+
+#: oc-includes/osclass/controller/register.php:31
+msgid "User registration is not enabled"
+msgstr "Rejestracja użytkowników niedostępna"
+
+#: oc-includes/osclass/controller/register.php:68
+msgid "The user has been created. An activation email has been sent"
+msgstr "Użytkownik został utworzony. E-mail aktywacyjny został wysłany."
+
+#: oc-includes/osclass/controller/register.php:71
+msgid "Your account has been created successfully"
+msgstr "Twoje konto zostało utworzone"
+
+#: oc-includes/osclass/UserActions.php:67
+#: oc-includes/osclass/controller/user.php:130
+msgid "The specified e-mail is already in use"
+msgstr "Ten e-mail jest już zarejestrowany."
+
+#: oc-includes/osclass/UserActions.php:60
+msgid "The email is not valid"
+msgstr "Nieprawidłowy email"
+
+#: oc-includes/osclass/UserActions.php:43
+msgid "The password cannot be empty"
+msgstr "HAsło nie może być puste"
+
+#: oc-includes/osclass/UserActions.php:48
+#: oc-includes/osclass/UserActions.php:167
+#: oc-includes/osclass/controller/user.php:185
+msgid "Passwords don't match"
+msgstr "Hasła nie pasują do siebie"
+
+#: oc-includes/osclass/controller/register.php:90
+msgid "The link is not valid anymore. Sorry for the inconvenience!"
+msgstr "Link nie działa. Przepraszamy za problemy"
+
+#: oc-includes/osclass/controller/register.php:95
+msgid "Your account has already been validated"
+msgstr "Twoje konto zostało zweryfikowane"
+
+#: oc-includes/osclass/controller/register.php:116
+msgid "Your account has been validated"
+msgstr "Twoje konto jest zatwiedzone"
+
+#: oc-includes/osclass/controller/user-non-secure.php:51
+msgid "Your email has been changed successfully"
+msgstr "Twój e-mail został zmieniony z powodzeniemi"
+
+#: oc-includes/osclass/controller/user-non-secure.php:80
+#: oc-includes/osclass/controller/user.php:222
+msgid "Alert activated"
+msgstr "Aktywowano automatyczne powiadomienie"
+
+#: oc-includes/osclass/controller/user-non-secure.php:101
+#: oc-includes/osclass/controller/user.php:243
+msgid "Unsubscribed correctly"
+msgstr "Rejestracja odwołana prawidłowo"
+
+#: oc-includes/osclass/controller/user.php:75
+msgid "Your profile has been updated successfully"
+msgstr "Twój profil został aktualizowany z powodzeniem."
+
+#: oc-includes/osclass/controller/user.php:106
+msgid "The specified e-mail is not valid"
+msgstr "Email nie jest aktywny"
+
+#: oc-includes/osclass/controller/user.php:175
+msgid "Current password doesn't match"
+msgstr "Aktualne hasło nie pasuje"
+
+#: oc-includes/osclass/controller/user.php:180
+msgid "Passwords can't be empty"
+msgstr "Pole hasło nie może być puste"
+
+#: oc-includes/osclass/controller/user.php:192
+msgid "Password has been changed"
+msgstr "Hasło zostało zmienione"
+
+#: oc-admin/admins.php:30 oc-admin/items.php:38
+#: oc-includes/osclass/core/AdminSecBaseModel.php:28
+msgid "You don't have enough permissions"
+msgstr "Nie masz wystarczających uprawnień"
+
+#: oc-admin/admins.php:73 oc-admin/admins.php:173
+msgid "Email invalid"
+msgstr "Niepoprawny email"
+
+#: oc-admin/admins.php:77 oc-admin/admins.php:177
+msgid "Username invalid"
+msgstr "Niepoprawny login"
+
+#: oc-admin/admins.php:81 oc-admin/admins.php:181
+msgid "Name invalid"
+msgstr "Nazwa nieważna"
+
+#: oc-admin/admins.php:85 oc-admin/admins.php:212
+msgid "Password invalid"
+msgstr "Błędne hasło"
+
+#: oc-admin/admins.php:90
+msgid "Email already in use"
+msgstr "Email jest już w naszej bazie"
+
+#: oc-admin/admins.php:95
+msgid "Username already in use"
+msgstr "Login jest już zajęty"
+
+#: oc-admin/admins.php:118
+msgid "The admin has been added"
+msgstr "Dodano administratora"
+
+#: oc-admin/admins.php:188
+msgid "This admin doesn't exist"
+msgstr "Taki Administrator nie istnieje"
+
+#: oc-admin/admins.php:194
+msgid "Existing email"
+msgstr "Aktualny email"
+
+#: oc-admin/admins.php:201
+msgid "Existing username"
+msgstr "Istniejący użytkownik"
+
+#: oc-admin/admins.php:220 oc-admin/admins.php:230
+msgid "The password couldn't be updated. Passwords don't match"
+msgstr "Hasło nie może być zaktualizowne. Hasła nie pasują"
+
+#: oc-admin/admins.php:247
+msgid "The admin has been updated"
+msgstr "Admin został aktualizowany"
+
+#: oc-admin/admins.php:266
+msgid "The admin id isn't in the correct format"
+msgstr "ID admina nie jest poprawne"
+
+#: oc-admin/admins.php:272
+msgid "The operation hasn't been completed. You're trying to remove yourself!"
+msgstr "Operacja nie może się udać! Chcesz usunąć siebie!!!!!!!"
+
+#: oc-admin/admins.php:279
+msgid "The admin has been deleted correctly"
+msgstr "Admin poprawnie usunięty"
+
+#: oc-admin/admins.php:281
+msgid "The admin couldn't be deleted"
+msgstr "Admin nie może być usunięty"
+
+#: oc-admin/tools.php:36 oc-admin/tools.php:63 oc-admin/tools.php:73
+#: oc-admin/tools.php:90 oc-admin/tools.php:126 oc-admin/tools.php:169
+#: oc-admin/tools.php:196 oc-admin/tools.php:225
+msgid "This action cannot be done because it is a demo site"
+msgstr "Nie można wykonać tej czynności, ponieważ jest to wersja demo"
+
+#: oc-admin/tools.php:118 oc-admin/tools.php:150
+msgid "Backup completed successfully"
+msgstr "Kopia zapasowa zakończona sukcesem"
+
+#: oc-admin/appearance.php:51
+msgid "The theme folder is not writable"
+msgstr "Folder templatki nie jest zapisywalny"
+
+#: oc-admin/appearance.php:54
+msgid "The theme has been installed correctly"
+msgstr "Temat zainstalowany poprawnie"
+
+#: oc-admin/appearance.php:57 oc-admin/languages.php:67 oc-admin/plugins.php:60
+msgid "The zip file is not valid"
+msgstr "Plik zip nie istnieje"
+
+#: oc-admin/appearance.php:60 oc-admin/languages.php:70 oc-admin/plugins.php:63
+#: oc-admin/tools.php:55
+msgid "No file was uploaded"
+msgstr "Nie został załadowany żaden plik"
+
+#: oc-admin/appearance.php:65
+msgid "There was a problem adding the theme"
+msgstr "Wystąpił problem z dodaniem tematu"
+
+#: oc-admin/appearance.php:83
+msgid "Theme removed successfully"
+msgstr "Motyw usunięty z powodzeniem"
+
+#: oc-admin/appearance.php:85
+msgid "There was a problem removing the theme"
+msgstr "Wystąpił błąd podczas usuwania motywu"
+
+#: oc-admin/appearance.php:88
+msgid "Current theme can not be deleted"
+msgstr "Nie można skasować aktualnego motywu"
+
+#: oc-admin/appearance.php:91
+msgid "No theme selected"
+msgstr "Nie wybrano żadnego motywu"
+
+#: oc-admin/appearance.php:120
+msgid "Widget removed correctly"
+msgstr "Widget został usunięty"
+
+#: oc-admin/appearance.php:126 oc-admin/appearance.php:148
+msgid "Description field is required"
+msgstr "Pole opisu jest wymagane"
+
+#: oc-admin/appearance.php:139
+msgid "Widget updated correctly"
+msgstr "Widget zaktualizowany prawidłowo"
+
+#: oc-admin/appearance.php:141
+msgid "Widget cannot be updated correctly"
+msgstr "Widget nie może zostać zaktualizowany"
+
+#: oc-admin/appearance.php:160
+msgid "Widget added correctly"
+msgstr "Widget dodany poprawnie"
+
+#: oc-admin/appearance.php:167
+msgid "Theme activated correctly"
+msgstr "Aktywowano temat"
+
+#: oc-admin/comments.php:52
+msgid "The comments have been deleted"
+msgstr "Komentarze zostały usunięte"
+
+#: oc-admin/comments.php:65
+msgid "The comments have been approved"
+msgstr "Komentarze zostały zaakceptowane"
+
+#: oc-admin/comments.php:75
+msgid "The comments have been disapproved"
+msgstr "Komentarz został zaakceptowany"
+
+#: oc-admin/comments.php:128
+msgid "The comment has been approved"
+msgstr "Komentarz zaakcpetowany"
+
+#: oc-admin/comments.php:135
+msgid "The comment has been disapproved"
+msgstr "Komentarz został zaakceptowany"
+
+#: oc-admin/comments.php:142
+msgid "The comment has been enabled"
+msgstr "Komentarz został włączony"
+
+#: oc-admin/comments.php:149
+msgid "The comment has been disabled"
+msgstr "Komentarz został wyłączony"
+
+#: oc-admin/comments.php:164
+msgid "Email is not correct"
+msgstr "Nieprawidłowy e-mail"
+
+#: oc-admin/comments.php:167
+msgid "Comment is required"
+msgstr "Komentarz jest wymagany"
+
+#: oc-admin/comments.php:189
+msgid "Great! We just updated your comment"
+msgstr "Świetnie! Aktualizowaliśmy Twój komentarz!"
+
+#: oc-admin/emails.php:82
+msgid "The email/alert has been updated"
+msgstr "E-mail alert został aktualizowany"
+
+#: oc-admin/emails.php:85 oc-admin/pages.php:102
+msgid "You can't repeat internal name"
+msgstr "Nie możesz powtórzyć imienia"
+
+#: oc-admin/emails.php:87
+msgid "The email couldn't be updated, at least one title should not be empty"
+msgstr "Email nie został zaktualizowany. Tytuł nie może być pusty"
+
+#: oc-admin/items.php:59
+msgid "%d listing has been enabled"
+msgstr "%d ogłoszenie zostało włączone"
+
+#: oc-admin/items.php:71
+msgid "%d listing has been disabled"
+msgstr "%d ogłoszenie zostało zablokowane"
+
+#: oc-admin/items.php:83
+msgid "%d listing has been activated"
+msgstr "%d ogłoszenie zostało aktywowane"
+
+#: oc-admin/items.php:95
+msgid "%d listing has been deactivated"
+msgstr "%d ogłoszenie zostało dezaktywowane"
+
+#: oc-admin/items.php:107
+msgid "%d listing has been marked as premium"
+msgstr "%d ogłoszenie zostało zaznaczone jako premium"
+
+#: oc-admin/items.php:119 oc-admin/items.php:144
+msgid "%d change has been made"
+msgstr "dokonano %d zmianę"
+
+#: oc-admin/items.php:131
+msgid "%d listing has been marked as spam"
+msgstr "%d ogłoszenie zostało zaznaczone jako spam"
+
+#: oc-admin/items.php:162
+msgid "%d listing has been deleted"
+msgstr "%d ogłoszenie zostało skasowane"
+
+#: oc-admin/items.php:179
+msgid "%d listing has been unmarked as spam"
+msgstr "%d ogłoszenie zostało odznaczone jako spam"
+
+#: oc-admin/items.php:196
+msgid "%d listing has been unmarked as missclassified"
+msgstr "%d ogłoszenie zostało odznaczone jako źle zakwalifikowane"
+
+#: oc-admin/items.php:213
+msgid "%d listing has been unmarked as duplicated"
+msgstr "%d ogłoszenie zostało odznaczone jako duplikat"
+
+#: oc-admin/items.php:230
+msgid "%d listing has been unmarked as expired"
+msgstr "%d ogłoszenie zostało odznakowane jako wygasłe"
+
+#: oc-admin/items.php:247
+msgid "%d listing has been unmarked as offensive"
+msgstr "%d ogłoszenie zostało odznakowane jako obraźliwe"
+
+#: oc-admin/items.php:322 oc-admin/items.php:334 oc-admin/items.php:344
+#: oc-admin/items.php:354 oc-admin/items.php:383 oc-admin/items.php:409
+#: oc-admin/items.php:553
+msgid "An error has occurred"
+msgstr "Wystąpił błąd"
+
+#: oc-admin/items.php:289
+msgid "The listing has been deleted"
+msgstr "Ogłoszenie zostało skasowane"
+
+#: oc-admin/items.php:291
+msgid "The listing couldn't be deleted"
+msgstr "Nie można skasować ogłoszenia"
+
+#: oc-admin/items.php:320
+msgid "The listing has been activated"
+msgstr "Ogłoszenie zostało aktywowane"
+
+#: oc-admin/items.php:332
+msgid "The listing has been deactivated"
+msgstr "Ogłoszenie zostało dezaktywowane"
+
+#: oc-admin/items.php:342
+msgid "The listing has been enabled"
+msgstr "Ogłoszenie zostało aktywowane"
+
+#: oc-admin/items.php:352
+msgid "The listing has been disabled"
+msgstr "Ogłoszenie zostało zablokowane"
+
+#: oc-admin/items.php:381 oc-admin/items.php:407
+msgid "Changes have been applied"
+msgstr "Zmiany zostały zastosowane"
+
+#: oc-admin/items.php:433
+msgid "The listing has been unmarked as"
+msgstr "Ogłoszenie zostało odznakowane jako"
+
+#: oc-admin/items.php:435
+msgid "The listing hasn't been unmarked as"
+msgstr "Ogłoszenie nie zostało odznaczone jako"
+
+#: oc-admin/items.php:522
+msgid "Changes saved correctly"
+msgstr "Zapisano zmiany"
+
+#: oc-admin/items.php:555 oc-admin/media.php:51 oc-admin/media.php:74
+msgid "Resource deleted"
+msgstr "Źródło usunięte"
+
+#: oc-admin/items.php:604
+msgid "A new listing has been added"
+msgstr "Nowe ogłoszenie zostało dodane"
+
+#: oc-admin/items.php:699
+msgid "Listings' settings have been updated"
+msgstr "Ustawienia ogłoszeń zostały zaktualizowane"
+
+#: oc-admin/languages.php:56
+msgid "The translation folder is not writable"
+msgstr "Folder nie jest zapisywalny"
+
+#: oc-admin/languages.php:60
+msgid "The language has been installed correctly"
+msgstr "Język zainstalowany pomyślnie"
+
+#: oc-admin/languages.php:63 oc-admin/languages.php:75
+msgid "There was a problem adding the language"
+msgstr "Wystąpił problem z dodaniem języka"
+
+#: oc-admin/languages.php:85 oc-admin/languages.php:118
+msgid "Language id isn't in the correct format"
+msgstr "ID wersji językowej nie jest poprawne"
+
+#: oc-admin/languages.php:92
+msgid "Language id doesn't exist"
+msgstr "ID wersji językowej nie istnieje"
+
+#: oc-admin/languages.php:141
+msgid "Language name field is required"
+msgstr "Nazwa języka jest wymagana"
+
+#: oc-admin/languages.php:144
+msgid "Language short name field is required"
+msgstr "Skrócona nazwa języka jest wymagana"
+
+#: oc-admin/languages.php:147
+msgid "Language description field is required"
+msgstr "Opis języka jest wymagany"
+
+#: oc-admin/languages.php:150
+msgid "Currency format field is required"
+msgstr "Format waluty jest wymagany"
+
+#: oc-admin/languages.php:174
+msgid "%s has been updated"
+msgstr "% zostało aktualizowane"
+
+#: oc-admin/languages.php:180
+msgid "Selected languages have been enabled for the website"
+msgstr "Wybrane języki zostały włączone."
+
+#: oc-admin/languages.php:187 oc-admin/languages.php:212
+#: oc-admin/languages.php:245 oc-admin/languages.php:270
+msgid "The language ids aren't in the correct format"
+msgstr "Id jezyków nie posiadają poprawnego formatu"
+
+#: oc-admin/languages.php:204
+msgid "Selected languages have been disabled for the website"
+msgstr "Wybrane języki zostały wyłączone."
+
+#: oc-admin/languages.php:238
+msgid "Selected languages have been enabled for the backoffice (oc-admin)"
+msgstr "Wybrana wersja językowa została włączona dla backoffice (oc-admin)"
+
+#: oc-admin/languages.php:262
+msgid "Selected languages have been disabled for the backoffice (oc-admin)"
+msgstr "Wybrana wersja językowa została wyłączona dla backoffice (oc-admin)"
+
+#: oc-admin/languages.php:218 oc-admin/languages.php:276
+msgid "%s can't be disabled because it's the default language"
+msgstr "%s nie może być wyłączony, ponieważ jest to język domyślny"
+
+#: oc-admin/languages.php:302
+msgid "Directory '%s' couldn't be removed"
+msgstr "Wykaz '%s' nie został usunięty"
+
+#: oc-admin/languages.php:304
+msgid "Directory \"%s\" has been successfully removed"
+msgstr "\"%s\" zostało usunięte"
+
+#: oc-admin/languages.php:310
+msgid "Directory '%s' couldn't be removed because it's the default language. Set another language as default first and try again"
+msgstr "Katalog '%s' nie został usunięty, ponieważ jest to język domyślny. Ustaw inny język jako domyślny i spróbuj ponowanie"
+
+#: oc-admin/login.php:43
+msgid "The username field is empty"
+msgstr "Pole nazwy użytkownika jest puste"
+
+#: oc-admin/login.php:48
+msgid "The password field is empty"
+msgstr "Pola hasła jest puste"
+
+#: oc-admin/login.php:56
+msgid "Sorry, incorrect username. <a href=\"%s\">Have you lost your password?</a>"
+msgstr "Przepraszamy, błędna nazwa użytkownika. <a href=\\\"%s\\\">Zapomniałeś hasło?</a>"
+
+#: oc-admin/login.php:61
+msgid "Sorry, incorrect password. <a href=\"%s\">Have you lost your password?</a>"
+msgstr "Przepraszamy, błędne hasło. <a href=\\\"%s\\\">Zapomniałeś hasło?</a>"
+
+#: oc-admin/login.php:107
+msgid "The reCAPTCHA code is wrong"
+msgstr "Kod z obrazka jest nieprawidłowy"
+
+#: oc-admin/login.php:125
+msgid "A new password has been sent to your e-mail"
+msgstr "Nowe hasło zostało wysłane na podany email"
+
+#: oc-admin/login.php:154
+msgid "Error, the passwords don't match"
+msgstr "Błąd, hasło się nie zgadza"
+
+#: oc-admin/pages.php:82 oc-admin/pages.php:147
+msgid "You have to set a different internal name"
+msgstr "Musisz ustawić inną wewnętrzną nazwę"
+
+#: oc-admin/pages.php:99
+msgid "The page has been updated"
+msgstr "Strona została aktualizowana"
+
+#: oc-admin/pages.php:104
+msgid "The page couldn't be updated, at least one title should not be empty"
+msgstr "Błąd aktualizacji - tytuł nie może być pusty"
+
+#: oc-admin/pages.php:77 oc-admin/pages.php:142
+msgid "You have to set an internal name"
+msgstr "Musisz wybrać wewnętrzne imię"
+
+#: oc-admin/pages.php:158
+msgid "The page has been added"
+msgstr "Strona dodana"
+
+#: oc-admin/pages.php:161
+msgid "The page couldn't be added, at least one title should not be empty"
+msgstr "Strona nie została dodana - tytuł nie może być pusty"
+
+#: oc-admin/pages.php:164
+msgid "Oops! That internal name is already in use. We can't make the changes"
+msgstr "Ups! Ta nazwa wewnętrzna już istnieje. Nie można dokonać zmian."
+
+#: oc-admin/pages.php:195
+msgid "One page can't be deleted because it is indelible"
+msgstr "Strona nie może być usunięta."
+
+#: oc-admin/pages.php:197
+msgid "%s pages couldn't be deleted because they are indelible"
+msgstr "%s stron nie zostało usuniętych, ponieważ są trwałe."
+
+#: oc-admin/pages.php:202
+msgid "One page couldn't be deleted"
+msgstr "Strona nie może być usunięta"
+
+#: oc-admin/pages.php:204
+msgid "%s pages couldn't be deleted"
+msgstr "%s stron nie zostało usuniętych"
+
+#: oc-admin/pages.php:209
+msgid "One page has been deleted correctly"
+msgstr "Strona została usunięta poprawnie"
+
+#: oc-admin/pages.php:211
+msgid "%s pages have been deleted correctly"
+msgstr "%s stron zostało usuniętych prawidłowo"
+
+#: oc-admin/plugins.php:54
+msgid "The plugin folder is not writable"
+msgstr "Folder pluginu nie jest zapisywalny"
+
+#: oc-admin/plugins.php:57
+msgid "The plugin has been uploaded correctly"
+msgstr "Plugin dodany poprawnie"
+
+#: oc-admin/plugins.php:68
+msgid "There was a problem adding the plugin"
+msgstr "Wystąpił problem z dodaniem pluginu"
+
+#: oc-admin/plugins.php:93
+msgid "Plugin is already installed"
+msgstr "Plugin już jest zainstalowany"
+
+#: oc-admin/plugins.php:96
+msgid "Plugin couldn't be installed because their files are missing"
+msgstr "Plugin nie został zainstalowany, ponieważ brakuje plików"
+
+#: oc-admin/plugins.php:99
+msgid "Plugin couldn't be installed because of: %s"
+msgstr "Plugin nie został zainstalowany z powodu:"
+
+#: oc-admin/plugins.php:102
+msgid "Plugin couldn't be installed"
+msgstr "Plugin nie został zainstalowany"
+
+#: oc-admin/plugins.php:106
+msgid "Plugin installed"
+msgstr "Wtyczka zainstalowana"
+
+#: oc-admin/plugins.php:119
+msgid "Plugin uninstalled"
+msgstr "Wtyczka odinstalowana"
+
+#: oc-admin/plugins.php:121
+msgid "Plugin couldn't be uninstalled"
+msgstr "Plugin nie został deinstalowany"
+
+#: oc-admin/plugins.php:134
+msgid "Plugin enabled"
+msgstr "Plugin został włączony"
+
+#: oc-admin/plugins.php:136
+msgid "Plugin is already enabled"
+msgstr "Plugin jest już włączony"
+
+#: oc-admin/plugins.php:149
+msgid "Plugin disabled"
+msgstr "Plugin został wyłączony"
+
+#: oc-admin/plugins.php:151
+msgid "Plugin is already disabled"
+msgstr "Plugin jest już wyłączony"
+
+#: oc-admin/plugins.php:222 oc-admin/plugins.php:238
+msgid "No plugin selected"
+msgstr "Wtyczka nie jest wybrana"
+
+#: oc-admin/plugins.php:218
+msgid "Configuration was saved"
+msgstr "Konfiguracja zapisana"
+
+#: oc-admin/controller/settings/locations.php:39
+#: oc-admin/controller/settings/locations.php:184
+#: oc-admin/controller/settings/locations.php:243
+#: oc-admin/controller/settings/locations.php:329
+#: oc-admin/controller/settings/locations.php:387
+msgid "%s already was in the database"
+msgstr "%s znajduje się już w bazie danych"
+
+#: oc-admin/controller/settings/locations.php:47
+msgid "Country code and name should have at least two characters"
+msgstr "Kod i nazwa kraju powinny mięc przynajmniej dwa znaki"
+
+#: oc-admin/controller/settings/locations.php:44
+#: oc-admin/controller/settings/locations.php:62
+msgid "%s has been added as a new country"
+msgstr "%s został dodany jako nowy kraj"
+
+#: oc-admin/controller/settings/locations.php:106
+msgid "Country has been edited"
+msgstr "Kraj został zmieniony"
+
+#: oc-admin/controller/settings/locations.php:108
+msgid "There were some problems editing the country"
+msgstr "Wystąpił problem z edycją kraju"
+
+#: oc-admin/controller/settings/locations.php:160
+#: oc-admin/controller/settings/locations.php:182
+msgid "%s has been added as a new region"
+msgstr "%s zostało dodany jako nowe województwo"
+
+#: oc-admin/controller/settings/locations.php:240
+#: oc-admin/controller/settings/locations.php:385
+msgid "%s has been edited"
+msgstr "%s został edytowany"
+
+#: oc-admin/controller/settings/locations.php:307
+#: oc-admin/controller/settings/locations.php:327
+msgid "%s has been added as a new city"
+msgstr "%s został dodane jako nowe miasto"
+
+#: oc-admin/controller/settings/permalinks.php:424
+msgid "One field was not updated"
+msgstr "Pole nie zostało zaktualizowane."
+
+#: oc-admin/controller/settings/permalinks.php:427
+#: oc-admin/controller/settings/permalinks.php:475
+msgid "Permalinks structure updated"
+msgstr "Struktura permalinks zaktualizowana"
+
+#: oc-admin/controller/settings/permalinks.php:436
+msgid "Permalinks structure updated."
+msgstr "Struktura permalinks zaktualizowana"
+
+#: oc-admin/controller/settings/permalinks.php:438
+msgid "However, we can't check if Apache module <b>mod_rewrite</b> is loaded. If you experience some problems with the URLs, you should deactivate <em>Friendly URLs</em>"
+msgstr "Nie możemy sprawdzić czy moduł Apache <b>mod_rewrite</b> jest załadowany.  Jeśli masz problemy z adresami URL, wyłącz opcję  <em> Przyjaznych URLs </em>."
+
+#: oc-admin/controller/settings/permalinks.php:504
+msgid "Friendly URLs successfully deactivated"
+msgstr "Przyjazne URLs dezaktywowane z sukcesem"
+
+#: oc-admin/controller/settings/spamnbots.php:56
+msgid "Your Akismet key has been cleared"
+msgstr "Twój klucz Akismet został zaakceptowany"
+
+#: oc-admin/controller/settings/spamnbots.php:58
+msgid "Your Akismet key has been updated"
+msgstr "Twój klucz Akismet został zaktualizowany"
+
+#: oc-admin/controller/settings/spamnbots.php:75
+msgid "Your reCAPTCHA key has been cleared"
+msgstr "Twój klucz reCAPTCHA został zaakceptowany"
+
+#: oc-admin/controller/settings/spamnbots.php:77
+msgid "Your reCAPTCHA key has been updated"
+msgstr "Twój klucz reCAPTCHA został zaktualizowany"
+
+#: oc-admin/controller/settings/currencies.php:50
+msgid "The currency code is not in the correct format"
+msgstr "Kod waluty nie posiada prawidłowego formatu"
+
+#: oc-admin/controller/settings/currencies.php:63
+msgid "Currency added"
+msgstr "Waluta dodana"
+
+#: oc-admin/controller/settings/currencies.php:65
+msgid "Currency couldn't be added"
+msgstr "Waluta nie została dodana"
+
+#: oc-admin/controller/settings/currencies.php:75
+#: oc-admin/controller/settings/currencies.php:82
+msgid "The currency code '%s' doesn't exist"
+msgstr "Kod waluty '%s' nie istnieje"
+
+#: oc-admin/controller/settings/currencies.php:104
+msgid "Error: the currency code is not in the correct format"
+msgstr "Błąd: kod nie jest poprawny"
+
+#: oc-admin/controller/settings/currencies.php:117
+msgid "Currency updated"
+msgstr "Waluta została zaktualizowana"
+
+#: oc-admin/controller/settings/currencies.php:119
+msgid "No changes were made"
+msgstr "Nie zostały wprowadzone żadne zmiany"
+
+#: oc-admin/controller/settings/currencies.php:151
+msgid "No currencies have been deleted"
+msgstr "Waluty zostały usunięte"
+
+#: oc-admin/controller/settings/currencies.php:155
+msgid "One currency has been deleted"
+msgstr "Waluta została usunięta"
+
+#: oc-admin/controller/settings/currencies.php:159
+msgid "%s currencies have been deleted"
+msgstr "%s waluty zostały usunięte"
+
+#: oc-admin/controller/settings/mailserver.php:52
+msgid "Mail server type is incorrect"
+msgstr "Serwer poczty jest niepoprawny"
+
+#: oc-admin/controller/settings/mailserver.php:68
+msgid "Mail server configuration has changed"
+msgstr "Konfiguracja serwera poczty zapisana"
+
+#: oc-admin/controller/settings/media.php:83
+#: oc-admin/controller/settings/media.php:91
+msgid "There was a problem uploading the watermark image"
+msgstr "Wystąpił problem podczas ładowania znaku wodnego."
+
+#: oc-admin/controller/settings/media.php:87
+msgid "The watermark image has to be a .PNG file"
+msgstr "Znak wodny musi być w formacie .png"
+
+#: oc-admin/controller/settings/media.php:138
+msgid "You cannot set a maximum file size higher than the one allowed in the PHP configuration: <b>%d KB</b>"
+msgstr "Nie można ustawić maksymalnego rozmiaru pliku na większy niż dozwolony w konfiguracji PHP:  <b>%d KB</b>"
+
+#: oc-admin/controller/settings/media.php:163
+msgid "Media config has been updated"
+msgstr "Konfiguracja mediów zaktualizowana"
+
+#: oc-admin/controller/settings/media.php:223
+msgid "Re-generation complete"
+msgstr "Regeneracja powidła się z powodzeniem"
+
+#: oc-admin/controller/settings/main.php:83
+msgid "Page title field is required"
+msgstr "Pole tytułu strony jest obowiązkowe"
+
+#: oc-admin/controller/settings/main.php:86
+msgid "Contact email field is required"
+msgstr "Adres e-mail jest obowiązkowy"
+
+#: oc-admin/controller/settings/main.php:137
+#: oc-admin/controller/settings/main.php:139
+msgid "General settings have been updated"
+msgstr "Ogólnie ustawienia zaktualizowne"
+
+#: oc-admin/controller/settings/latestsearches.php:39
+msgid "Custom number could not be left empty"
+msgstr "Numer nie może być pusty."
+
+#: oc-admin/controller/settings/latestsearches.php:44
+msgid "Last search settings have been updated"
+msgstr "Ustawienia ostatniego wyszukiwania zostały zaktualizowane"
+
+#: oc-admin/tools.php:50
+msgid "Import complete"
+msgstr "Import zakończony sukcesem"
+
+#: oc-admin/tools.php:52
+msgid "There was a problem importing data to the database"
+msgstr "Wystąpił problem podczas importowania danych do bazy"
+
+#: oc-admin/tools.php:67
+msgid "Recount category stats has been successful"
+msgstr "Przeliczenie statystyk kategorii zakończone pomyślnie"
+
+#: oc-admin/tools.php:106 oc-admin/tools.php:135
+msgid "Path is empty"
+msgstr "Ścieżka jest pusta"
+
+#: oc-admin/tools.php:109 oc-admin/tools.php:138
+msgid "Could not connect with the database. Error: %s"
+msgstr "Połączenie z bazą danych niemożliwe. Błąd: %s"
+
+#: oc-admin/tools.php:112 oc-admin/tools.php:144
+msgid "There are no tables to back up"
+msgstr "Brak tabel do wykonania kopii zapasowej"
+
+#: oc-admin/tools.php:115 oc-admin/tools.php:147
+msgid "The folder is not writable"
+msgstr "Folder nie posiada uprawnień do zapisu"
+
+#: oc-admin/tools.php:141
+msgid "Could not select the database. Error: %s"
+msgstr "Błąd w wyborze bazy danych. Błąd: %s"
+
+#: oc-admin/tools.php:235
+msgid "Maintenance mode is ON"
+msgstr "Tryb obsługi WŁĄCZONY "
+
+#: oc-admin/tools.php:245
+msgid "Maintenance mode is OFF"
+msgstr "Tryb obsługi WYŁĄCZONY"
+
+#: oc-admin/users.php:68
+msgid "The user has been created. We've sent an activation e-mail"
+msgstr "Użytkownik został stworzony. E-mail aktywacyjny został wysłany"
+
+#: oc-admin/users.php:70
+msgid "The user has been created successfully"
+msgstr "Użytkownik został stworzony prawidołwo"
+
+#: oc-admin/users.php:123
+msgid "The user has been updated and activated"
+msgstr "Użytkownik został zaktualizowany i aktywowany"
+
+#: oc-admin/users.php:121
+msgid "The user has been updated"
+msgstr "Użytkownik został aktualizowany"
+
+#: oc-admin/users.php:137 oc-admin/users.php:160 oc-admin/users.php:185
+#: oc-admin/users.php:209 oc-admin/users.php:233 oc-admin/users.php:257
+#: oc-admin/users.php:555
+msgid "User id isn't in the correct format"
+msgstr "ID użytkownika nie jest poprawne"
+
+#: oc-admin/users.php:149
+msgid "Activation email sent to one user"
+msgstr "Wiadomość aktywująca wysłana do użytkownika."
+
+#: oc-admin/users.php:172
+msgid "One user has been activated"
+msgstr "Użytkownik został aktywowany."
+
+#: oc-admin/users.php:197
+msgid "One user has been deactivated"
+msgstr "Użytkownik został deaktywowany."
+
+#: oc-admin/users.php:221
+msgid "One user has been unblocked"
+msgstr "Użytkownik został odblokowany."
+
+#: oc-admin/users.php:245
+msgid "One user has been blocked"
+msgstr "Użytkownik został zablokowany."
+
+#: oc-admin/users.php:272
+msgid "One user has been deleted"
+msgstr "Użytkownik został skasowany."
+
+#: oc-includes/osclass/ItemActions.php:318
+msgid "Title too short."
+msgstr "Tytuł zbyt krótki."
+
+#: oc-includes/osclass/ItemActions.php:319
+msgid "Title too long."
+msgstr "Tytuł zbyt długi."
+
+#: oc-includes/osclass/ItemActions.php:331
+msgid "Description too short."
+msgstr "Opis zbyt krótki."
+
+#: oc-includes/osclass/ItemActions.php:332
+msgid "Description too long."
+msgstr "Opis zbyt długi."
+
+#: oc-includes/osclass/ItemActions.php:129
+#: oc-includes/osclass/ItemActions.php:337
+msgid "Category invalid."
+msgstr "Nieprawidłowa kategoria."
+
+#: oc-includes/osclass/ItemActions.php:131
+#: oc-includes/osclass/ItemActions.php:339
+msgid "Price too long."
+msgstr "Cena zbyt długa."
+
+#: oc-includes/osclass/ItemActions.php:133
+msgid "Name too long."
+msgstr "Imię zbyt długie."
+
+#: oc-includes/osclass/ItemActions.php:134
+msgid "Email invalid."
+msgstr "Nieprawidłowy adres email."
+
+#: oc-includes/osclass/ItemActions.php:135
+#: oc-includes/osclass/ItemActions.php:341
+msgid "Country too short."
+msgstr "Nazwa kraju zbyt krótka."
+
+#: oc-includes/osclass/ItemActions.php:136
+#: oc-includes/osclass/ItemActions.php:342
+msgid "Country too long."
+msgstr "Nazwa kraju zbyt długa."
+
+#: oc-includes/osclass/ItemActions.php:137
+#: oc-includes/osclass/ItemActions.php:343
+msgid "Region too short."
+msgstr "Nazwa województwa zbyt krótka"
+
+#: oc-includes/osclass/ItemActions.php:138
+#: oc-includes/osclass/ItemActions.php:344
+msgid "Region too long."
+msgstr "Nazwa województwa zbyt długa."
+
+#: oc-includes/osclass/ItemActions.php:139
+#: oc-includes/osclass/ItemActions.php:345
+msgid "City too short."
+msgstr "Nazwa miasta zbyt krótka."
+
+#: oc-includes/osclass/ItemActions.php:140
+#: oc-includes/osclass/ItemActions.php:346
+msgid "City too long."
+msgstr "Nazwa miasta zbyt długa."
+
+#: oc-includes/osclass/ItemActions.php:141
+#: oc-includes/osclass/ItemActions.php:347
+msgid "Municipality too short."
+msgstr "Miejscowość za krótka."
+
+#: oc-includes/osclass/ItemActions.php:142
+#: oc-includes/osclass/ItemActions.php:348
+msgid "Municipality too long."
+msgstr "Miejscowość za długa."
+
+#: oc-includes/osclass/ItemActions.php:143
+#: oc-includes/osclass/ItemActions.php:349
+msgid "Address too short."
+msgstr "Adres zbyt krótki."
+
+#: oc-includes/osclass/ItemActions.php:144
+#: oc-includes/osclass/ItemActions.php:350
+msgid "Address too long."
+msgstr "Adres zbyt długi."
+
+#: oc-includes/osclass/ItemActions.php:145
+msgid "Too fast. You should wait a little to publish your ad."
+msgstr "Zbyt szybko. Powinieneś trochę zaczekać zanim opublikujesz ogłoszenie."
+
+#: oc-includes/osclass/ItemActions.php:160
+#: oc-includes/osclass/ItemActions.php:363
+msgid "%s field is required."
+msgstr "pole %s jest wymagane."
+
+#: oc-includes/osclass/ItemActions.php:1311
+msgid "One of the files you tried to upload exceeds the maximum size"
+msgstr "Jeden z plików, które próbujesz przesłać jest zbyt duży"
+
+#: oc-includes/osclass/controller/item.php:163
+msgid "Check your inbox to validate your listing"
+msgstr "Sprawdź swoją skrzynkę e-mail, aby potwierdzić ogłoszenie"
+
+#: oc-admin/comments.php:88
+msgid "The comments have been unblocked"
+msgstr "Komentarze zostały odblokowane"
+
+#: oc-admin/comments.php:98
+msgid "The comments have been blocked"
+msgstr "Komentarze zostały zablokowane"
+
+#: oc-admin/items.php:264
+msgid "%d listing has been unmarked"
+msgstr "%d ogłoszenie zostało odznakowane "
+
+#: oc-admin/controller/settings/main.php:29
+msgid "Last check"
+msgstr "Ostatnie sprawdzenie"
+
+#: oc-admin/main.php:71
+msgid "Entered an invalid email"
+msgstr "Wprowadzony e-mail jest nieprawidłowy"
+
+#: oc-admin/main.php:74
+msgid "You're already subscribed"
+msgstr "Już się zapisałeś"
+
+#: oc-admin/main.php:77
+msgid "Subscribed correctly"
+msgstr "Zapisany prawidłowo"
+
+#: oc-admin/main.php:80
+msgid "Error subscribing"
+msgstr "Błąd przy zapisie"
+
+#: oc-includes/osclass/core/AdminSecBaseModel.php:62
+msgid "Thank you very much for your donation"
+msgstr "Dziękujemy bardzo za Twoją donację"
+
+#: oc-includes/osclass/controller/item.php:507
+msgid "You need to be logged to comment"
+msgstr "Musisz się zalogować, aby dodać komentarz"
+
+#: oc-includes/osclass/helpers/hSecurity.php:85
+msgid "Invalid CSRF token."
+msgstr "Token CSRF jest nieważny"
+
+#: oc-includes/osclass/helpers/hSecurity.php:79
+msgid "Probable invalid request."
+msgstr "Prawdopodobnie nieprawidłowy wniosek."
+
+#: oc-includes/osclass/controller/item.php:510
+msgid "Sorry, comments are disabled"
+msgstr "Przykro nam, funkcja dodawania komentarzy jest wyłączona"
+
+#: oc-includes/osclass/controller/item.php:589
+msgid "The listing hasn't been enabled. Please enable it in order to make it public"
+msgstr "Ogłoszenie nie zostało włączone. Prosimy włączyć je, aby zostało opublikowane. "
+
+#: oc-includes/osclass/UserActions.php:55
+#: oc-includes/osclass/UserActions.php:161
+msgid "The name cannot be empty"
+msgstr "Nazwa nie może być pustym polem"
+
+#: oc-admin/admins.php:50 oc-admin/admins.php:143 oc-admin/admins.php:257
+#: oc-admin/appearance.php:37 oc-admin/appearance.php:74
+#: oc-admin/controller/settings/advanced.php:32
+#: oc-admin/controller/settings/locations.php:31
+#: oc-admin/controller/settings/locations.php:73
+#: oc-admin/controller/settings/locations.php:115
+#: oc-admin/controller/settings/locations.php:144
+#: oc-admin/controller/settings/locations.php:194
+#: oc-admin/controller/settings/locations.php:250
+#: oc-admin/controller/settings/locations.php:286
+#: oc-admin/controller/settings/locations.php:338
+#: oc-admin/controller/settings/locations.php:394
+#: oc-admin/controller/settings/mailserver.php:31
+#: oc-admin/controller/settings/media.php:170 oc-admin/languages.php:41
+#: oc-admin/login.php:97 oc-admin/plugins.php:40 oc-admin/plugins.php:77
+#: oc-admin/plugins.php:113 oc-admin/plugins.php:128 oc-admin/plugins.php:143
+msgid "This action can't be done because it's a demo site"
+msgstr "Nie można wykonać tej akcji ponieważ jest to strona z demo"
+
+#: oc-admin/admins.php:120
+msgid "There has been an error adding a new admin"
+msgstr "Wystąpił błąd podczas dodawania nowego administratora"
+
+#: oc-admin/admins.php:135
+msgid "There is no admin with this id"
+msgstr "Administrator o tym id nie istnieje"
+
+#: oc-admin/items.php:324
+msgid "The listing can't be activated because it's blocked"
+msgstr "Nie można aktywować ogłoszenia, ponieważ zostało zablokowane."
+
+#: oc-admin/items.php:653
+msgid "Wait time must only contain numeric characters"
+msgstr "Czas oczekiwania musi być numerem."
+
+#: oc-admin/items.php:656
+msgid "Number of moderated listings must only contain numeric characters"
+msgstr "Liczba moderowanych ogłoszeń musi być numerem"
+
+#: oc-admin/items.php:659
+msgid "Images per listing must only contain numeric characters"
+msgstr "Liczba zdjęć na ogłoszenie musi być numerem"
+
+#: oc-admin/languages.php:153
+msgid "Number of decimals must only contain numeric characters"
+msgstr "Liczba miejsc po przecinku musi być numerem"
+
+#: oc-admin/languages.php:307
+msgid "Directory '%s' couldn't be removed;)"
+msgstr "Nie można usunąć katalogu '%s' ;)"
+
+#: oc-admin/main.php:62
+msgid "You have very few free space left, users will not be able to upload pictures"
+msgstr "Masz bardzo mało wolnego miejsca, użytkownicy nie będą mogli publikować zdjęć."
+
+#: oc-admin/controller/settings/comments.php:48
+msgid "Number of moderate comments must only contain numeric characters"
+msgstr "Liczba moderowanych komentarzy musi być numerem"
+
+#: oc-admin/controller/settings/comments.php:51
+msgid "Comments per page must only contain numeric characters"
+msgstr "Liczba komentarzy na stronę musi być numerem"
+
+#: oc-admin/controller/settings/comments.php:71
+msgid "Comment settings have been updated"
+msgstr "Ustawienia komentarzy zostały zaktualizowane"
+
+#: oc-admin/controller/settings/locations.php:78
+msgid "Country name cannot be blank"
+msgstr "Nazwa kraju nie może być pustym polem"
+
+#: oc-admin/controller/settings/locations.php:135
+#: oc-admin/controller/settings/locations.php:277
+#: oc-admin/controller/settings/locations.php:418
+msgid "There was a problem deleting locations"
+msgstr "Wystąpił błąd podczas usuwania lokalizacji"
+
+#: oc-admin/controller/settings/locations.php:138
+msgid "No country was selected"
+msgstr "Nie wybrano żadnego kraju"
+
+#: oc-admin/controller/settings/locations.php:162
+#: oc-admin/controller/settings/locations.php:309
+msgid "%s can't be added"
+msgstr "Nie można dodać %s"
+
+#: oc-admin/controller/settings/locations.php:172
+#: oc-admin/controller/settings/locations.php:203
+msgid "Region name cannot be blank"
+msgstr "Nazwa regionu nie może być pusta"
+
+#: oc-admin/controller/settings/locations.php:280
+msgid "No region was selected"
+msgstr "Nie wybrano żadnego regionu"
+
+#: oc-admin/controller/settings/locations.php:317
+msgid "New city name cannot be blank"
+msgstr "Nowa nazwa miasta nie może być pusta"
+
+#: oc-admin/controller/settings/locations.php:348
+msgid "City name cannot be blank"
+msgstr "Nazwa miasta nie może być pusta"
+
+#: oc-admin/controller/settings/locations.php:421
+msgid "No city was selected"
+msgstr "Nie wybrano żadnego miasta"
+
+#: oc-admin/controller/settings/permalinks.php:424
+msgid "All fields are required."
+msgstr "Wszystkie pola są obowiązkowe."
+
+#: oc-admin/controller/settings/permalinks.php:445
+#: oc-admin/controller/settings/permalinks.php:455
+msgid "File <b>.htaccess</b> couldn't be filled out with the right content."
+msgstr "Nie można wprowadzić zawartości do pliku <b>.htaccess</b> "
+
+#: oc-admin/controller/settings/permalinks.php:447
+msgid "Here's the content you have to add to the <b>.htaccess</b> file. If you can't create the file, please deactivate the <em>Friendly URLs</em> option."
+msgstr "To jest zawartość, którą musisz wprowadzić do pliku <b>.htaccess</b>. Jeśli nie możesz stworzyć pliku, zdezaktywuj opcję <em>przyjaznych URL</em>"
+
+#: oc-admin/controller/settings/permalinks.php:457
+msgid "Here's the content you have to add to the <b>.htaccess</b> file. If you can't create the file or experience some problems with the URLs, please deactivate the <em>Friendly URLs</em> option."
+msgstr "To jest zawartość, którą musisz wprowadzić do pliku <b>.htaccess</b>. Jeśli nie możesz stworzyć pliku lub masz problemy z URL, zdezaktywuj opcję <em>przyjaznych URL</em> "
+
+#: oc-admin/controller/settings/currencies.php:141
+msgid "%s couldn't be deleted because it has listings associated to it"
+msgstr "Nie można usunąć %s, ponieważ istnieją powiązane z nim ogłoszenia"
+
+#: oc-admin/controller/settings/currencies.php:143
+msgid "%s couldn't be deleted because it's the default currency"
+msgstr "Nie można usunąć %s, ponieważ jest to domyślna waluta"
+
+#: oc-admin/controller/settings/main.php:89
+msgid "Number of listings in the RSS has to be a numeric value"
+msgstr "Numer ogłoszeń w RSS musi być wartością liczbową"
+
+#: oc-admin/controller/settings/main.php:92
+msgid "Max latest listings has to be a numeric value"
+msgstr "Maksymalna liczba ostatnich ogłoszeń musi być wartością numeryczną"
+
+#: oc-admin/controller/settings/main.php:95
+msgid "Number of listings on search has to be a numeric value"
+msgstr "Liczba ogłoszeń wyszukiwanych musi być wartością liczbową"
+
+#: oc-admin/controller/settings/main.php:120
+msgid "Number of listings in the RSS must be an integer"
+msgstr "Ilość ogłoszeń w RSS musi być liczbą całkowitą"
+
+#: oc-admin/controller/settings/main.php:127
+msgid "Number of recent listings displayed at home must be an integer"
+msgstr "Ilość ostatnio pokazanych ogłoszeń na stronie głównej musi być liczbą całkowitą"
+
+#: oc-admin/themes/modern/market/header.php:5
+msgid "<code>downloads</code> folder has to be writable, i.e.: <code>chmod a+w %soc-content/downloads/</code>"
+msgstr "Folder <code>downloads</code>musi być zapisywalny, tzn.: <code>chmod a+w %soc-content/downloads/</code>"
+
+#: oc-admin/tools.php:176 oc-admin/tools.php:213
+msgid "Archived successfully!"
+msgstr "Zapisany poprawnie!"
+
+#: oc-admin/tools.php:190 oc-admin/tools.php:216
+msgid "Error, the zip file was not created in the specified directory"
+msgstr "Błąd, plik zip nie został stworzony w wybranym katalogu"
+
+#: oc-admin/tools.php:237
+msgid "There was an error creating the .maintenance file, please create it manually at the root folder"
+msgstr "Wystąpił błąd podczas tworzenia pliku .maintenance, utwórz go w korzeniu foldera"
+
+#: oc-admin/tools.php:247
+msgid "There was an error removing the .maintenance file, please remove it manually from the root folder"
+msgstr "Wystąpił błąd podczas usuwania pliku .maintenance, usuń go ręcznie z korzenia foldera"
+
+#: oc-admin/users.php:147
+msgid "No users have been selected"
+msgstr "Nie wybrano żadnego użytkownika"
+
+#: oc-admin/users.php:170
+msgid "No users have been activated"
+msgstr "Nie aktywowano żadnego użytkownika"
+
+#: oc-admin/users.php:195
+msgid "No users have been deactivated"
+msgstr "Nie dezaktywowano żadnego użytkownika"
+
+#: oc-admin/users.php:219
+msgid "No users have been enabled"
+msgstr "Nie włączono żadnego użytkownika"
+
+#: oc-admin/users.php:243
+msgid "No users have been disabled"
+msgstr "Nie wyłączono żadnego użytkownika"
+
+#: oc-admin/users.php:270
+msgid "No users have been deleted"
+msgstr "Nie usunięto żadnego użytkownika"
+
+#: oc-admin/users.php:283 oc-admin/users.php:317
+msgid "Alert id isn't in the correct format"
+msgstr "ID powiadomienia ma niepoprawny format"
+
+#: oc-admin/users.php:298
+msgid "No alerts have been deleted"
+msgstr "Nie skasowanego żadnego powiadomienia"
+
+#: oc-admin/users.php:300
+msgid "One alert has been deleted"
+msgstr "Skasowano jedno powiadomienie"
+
+#: oc-admin/users.php:337
+msgid "No alerts have been activated"
+msgstr "Nie aktywowano żadnego powiadomienia"
+
+#: oc-admin/users.php:339
+msgid "One alert has been activated"
+msgstr "Aktywowano jedno powiadomienie"
+
+#: oc-admin/users.php:343
+msgid "No alerts have been deactivated"
+msgstr "Nie zdezaktywowano żadnego powiadomienia"
+
+#: oc-admin/users.php:345
+msgid "One alert has been deactivated"
+msgstr "Zdezaktywowano jedno powiadomienie"
+
+#: oc-admin/users.php:383
+msgid "User settings have been updated"
+msgstr "Zaktualizowano ustawienia użytkownika"
+
+#: oc-admin/users.php:526 oc-admin/users.php:541
+msgid "Both rules can not be empty"
+msgstr "Obydwie reguły nie mogą być puste"
+
+#: oc-admin/users.php:531
+msgid "Rule updated correctly"
+msgstr "Reguły zostały zaktualizowane poprawnie"
+
+#: oc-admin/users.php:546
+msgid "Rule saved correctly"
+msgstr "Reguły zostały zapisane poprawnie"
+
+#: oc-admin/users.php:567
+msgid "No rules have been deleted"
+msgstr "Nie usunięto żadnych reguł"
+
+#: oc-admin/users.php:569
+msgid "One ban rule has been deleted"
+msgstr "Skasowano jedną regułę "
+
+#: oc-includes/osclass/ItemActions.php:90
+#: oc-includes/osclass/ItemActions.php:303
+msgid "Image with an incorrect extension."
+msgstr "Obraz ma nieprawidłowe rozszerzenie."
+
+#: oc-includes/osclass/ItemActions.php:93
+#: oc-includes/osclass/ItemActions.php:306
+msgid "Image is too big. Max. size"
+msgstr "Obraz jest zbyt duży. Maksymalny rozmiar"
+
+#: oc-includes/osclass/ItemActions.php:130
+#: oc-includes/osclass/ItemActions.php:338
+msgid "Price must be a number."
+msgstr "Cena musi być numerem."
+
+#: oc-includes/osclass/ItemActions.php:857
+msgid "We just sent your message to %s"
+msgstr "Właśnie wysłaliśmy Ci wiadomość do %s"
+
+#: oc-includes/osclass/ItemActions.php:1366
+#: oc-includes/osclass/controller/contact.php:158
+msgid "The file you tried to upload does not have a valid extension"
+msgstr "Plik, który próbowałeś załadować ma nieprawidłowe rozszeszenie."
+
+#: oc-includes/osclass/controller/contact.php:65
+msgid "Please enter a correct email"
+msgstr "Prosimy podać poprawny adres email"
+
+#: oc-includes/osclass/controller/contact.php:156
+msgid "Your email has been sent properly. Thank you for contacting us!"
+msgstr "Twój email został wysłany prawidłowo. Dziękujemy za skontaktowanie się z nami!"
+
+#: oc-includes/osclass/controller/item.php:135
+msgid "A user with that email address already exists, if it is you, please log in"
+msgstr "Użytkownik z tym adresem email już istnieje, jeżeli to Twój email, prosimy o zalogowanie się"
+
+#: oc-includes/osclass/controller/contact.php:51
+#: oc-includes/osclass/controller/contact.php:60
+#: oc-includes/osclass/controller/item.php:142
+#: oc-includes/osclass/controller/item.php:458
+#: oc-includes/osclass/controller/login.php:75
+#: oc-includes/osclass/controller/register.php:57
+#: oc-includes/osclass/controller/user-non-secure.php:158
+msgid "Your current email is not allowed"
+msgstr "Twój aktualny adres email jest niedozwolony"
+
+#: oc-includes/osclass/controller/contact.php:54
+#: oc-includes/osclass/controller/item.php:145
+#: oc-includes/osclass/controller/item.php:461
+#: oc-includes/osclass/controller/login.php:78
+#: oc-includes/osclass/controller/register.php:60
+#: oc-includes/osclass/controller/user-non-secure.php:161
+msgid "Your current IP is not allowed"
+msgstr "Twój aktualny adres IP jest niedozwolony"
+
+#: oc-includes/osclass/controller/item.php:194
+msgid "Sorry, we don't have any listings with that ID"
+msgstr "Przykro nam, ogłoszenie o tym ID nie istnieje"
+
+#: oc-includes/osclass/controller/item.php:582
+msgid "The listing hasn't been validated. Please validate it in order to make it public"
+msgstr "Twoje ogłoszenie nie zostało zweryfikowane. Prosimy o jego weryfikację, aby móc je opublikować."
+
+#: oc-includes/osclass/controller/login.php:150
+msgid "This should never happen"
+msgstr "To nie powinno było się stać"
+
+#: oc-includes/osclass/UserActions.php:37
+msgid "The reCAPTCHA was not entered correctly"
+msgstr "reCAPTCHA nie zostało poprawnie wprowadzone"
+
+#: oc-includes/osclass/UserActions.php:74
+msgid "Username is already taken"
+msgstr "Nazwa użytkownika już istnieje"
+
+#: oc-includes/osclass/UserActions.php:78
+#: oc-includes/osclass/controller/user.php:154
+msgid "The specified username is not valid, it contains some invalid words"
+msgstr "Podana nazwa użytkownika nie jest ważna, zawiera niedozwolone słowa"
+
+#: oc-includes/osclass/controller/user-non-secure.php:82
+#: oc-includes/osclass/controller/user.php:224
+msgid "Oops! There was a problem trying to activate your alert. Please contact an administrator"
+msgstr "Ups! Wystąpił bład podczas aktywacji powiadomienia. Prosimy skontaktować się z administratorem."
+
+#: oc-includes/osclass/controller/user-non-secure.php:103
+#: oc-includes/osclass/controller/user.php:245
+msgid "Oops! There was a problem trying to unsubscribe you. Please contact an administrator"
+msgstr "Ups! Wystąpił bład podczas wypisania się z subskrypcji. Prosimy skontaktować się z administratorem."
+
+#: oc-includes/osclass/controller/user.php:144
+msgid "The specified username is already in use"
+msgstr "Podana nazwa użytkownika już istnieje"
+
+#: oc-includes/osclass/controller/user.php:150
+msgid "The username was updated"
+msgstr "Nazwa użytkownika została zaktualizowana"
+
+#: oc-includes/osclass/controller/user.php:158
+msgid "The specified username could not be empty"
+msgstr "Podana nazwa użytkownika nie może być pusta"
+
+#: oc-includes/osclass/controller/user.php:268
+msgid "Your account have been deleted"
+msgstr "Twoje konto zostało usunięte"
+
+#: oc-includes/osclass/controller/user.php:271
+#: oc-includes/osclass/controller/user.php:275
+msgid "Oops! you can not do that"
+msgstr "Ups! nie możesz tego zrobić"
+
+#: oc-includes/osclass/emails.php:464
+msgid "We've sent you an e-mail. Follow its instructions to validate the changes"
+msgstr "Wysłaliśmy Ci email. Postępuj zgodnie ze wskazówkami, aby zatwierdzić zmiany."
+
+#: oc-includes/osclass/emails.php:466
+msgid "We tried to sent you an e-mail, but it failed. Please, contact an administrator"
+msgstr "Próba wysłania wiadomości email się nie powiodła. Prosimy skontaktować się z administratorem."
+
+#: oc-includes/osclass/ItemActions.php:132
+#: oc-includes/osclass/ItemActions.php:340
+msgid "Price must be positive number."
+msgstr "Cena musi być liczbą dodatnią"
+
+#: oc-admin/plugins.php:90
+msgid "The plugin generated %d characters of <strong>unexpected output</strong> during the installation. Output: \"%s\""
+msgstr "Plugin wygenerował %d znaków o <strong>niespodziewanym wyniku</strong> podczas instalacji. Wyjście: \"%s\""
+
+#: oc-admin/items.php:662
+msgid "Number of expiration days has to be a numeric value"
+msgstr "Liczba dni ważności musi być liczbą całkowitą"
+
+#: oc-admin/controller/settings/permalinks.php:509
+msgid "Friendly URLs deactivated, but .htaccess file was modified outside Osclass and was not deleted"
+msgstr "Funkcja przyjaznych URL została wyłączona, ale plik .htaccess został zmodyfikowany poza Osclass i nie został usunięty"
+
+#: oc-admin/controller/settings/permalinks.php:507
+msgid "Friendly URLs deactivated, but .htaccess file could not be deleted. Please, remove it manually"
+msgstr "Funkcja przyjaznych URL została wyłączona, ale plik .htaccess nie może zostać usunięty. Proszę usunąć go ręcznie."
+
+#: oc-admin/controller/settings/permalinks.php:471
+msgid "Here's the content you have to add to the <b>.htaccess</b> file. If you can't modify the file or experience some problems with the URLs, please deactivate the <em>Friendly URLs</em> option."
+msgstr "Oto zawartość, którą musisz dodać do pliku <b>.htaccess</b>. Jeśli nie można zmodyfikować plik lub wystąpił problem z adresami URL, należy wyłączyć funkcję <em>Przyjazne URL</em>."
+
+#: oc-admin/controller/settings/permalinks.php:469
+msgid "File <b>.htaccess</b> already exists and was not modified."
+msgstr "Plik <b>.htaccess</b> już istnieje i nie został zmodyfikowany."
+
+#: oc-admin/items.php:665
+msgid "Title Length has to be a numeric value"
+msgstr "Długość musi być liczbą"
+
+#: oc-admin/controller/settings/advanced.php:44
+msgid "Advanced settings have been updated"
+msgstr "Ustawienia zaawansowane zostały uaktualnione"
+
+#: oc-admin/items.php:668
+msgid "Description Length has to be a numeric value"
+msgstr "Długość opisu musi być wartością liczbową"
+
+#: oc-includes/osclass/ItemActions.php:105
+msgid "Title too short (%s)."
+msgstr "Tytuł jest zbyt krótki (%s)."
+
+#: oc-includes/osclass/ItemActions.php:106
+msgid "Title too long (%s)."
+msgstr "Tytuł jest zbyt długi (%s)."
+
+#: oc-includes/osclass/ItemActions.php:118
+msgid "Description too short (%s)."
+msgstr "Opis jest zbyt krótki (%s)."
+
+#: oc-includes/osclass/ItemActions.php:119
+msgid "Description too long (%s)."
+msgstr "Tytuł jest zbyt długi (%s)."
+
+#: oc-includes/osclass/controller/register.php:118
+msgid "Account validation failed"
+msgstr "Weryfikacja konta nie powiodła się"
+
+#: oc-includes/osclass/controller/login.php:117
+msgid "The user has not been validated yet. Would you like to re-send your <a href=\"%s\">activation?</a>"
+msgstr "Użytkownik nie został jeszcze zatwierdzony. Chcesz, aby ponownie wysłano <a href=\"%s\">link aktywacyjny?</a>"
+
+#: oc-includes/osclass/controller/login.php:164
+msgid "Incorrect link"
+msgstr "Nieprawidłowy link"
+
+#: oc-includes/osclass/controller/login.php:175
+msgid "Validation email re-sent"
+msgstr "Wiadomość aktywacyjna została ponownie wysłana"
+
+#: oc-includes/osclass/controller/login.php:177
+msgid "We have just sent you an email to validate your account, you will have to wait a few minutes to resend it again"
+msgstr "Wysłaliśmy do Ciebie e-mail, abyś potwierdził swoje konto, powtórne wysłanie tej wiadomości może nastąpić dopiero po kilku minutach"
+
+#: oc-includes/osclass/controller/user-non-secure.php:166
+msgid "Your email has been sent properly."
+msgstr "Twój e-mail został wysłany."
+
+#: oc-includes/osclass/upgrade-funcs.php:516
+msgid "Osclass has been updated successfully. <a href=\"http://forums.osclass.org/\">Need more help?</a>"
+msgstr "Osclass został uaktualniony. <a href=\"http://forums.osclass.org/\">Potrzebujesz jeszcze pomocy?</a>"
+
+#: oc-admin/plugins.php:231
+msgid "The files were deleted"
+msgstr "Pliki zostały usunięte"
+
+#: oc-admin/controller/settings/advanced.php:51
+msgid "Cache flushed correctly"
+msgstr "Cache został usunięty"
+
+#: oc-admin/plugins.php:233
+msgid "There were an error deleting the files, please check the permissions of the files in %s"
+msgstr "Wystąpił błąd podczas usuwania plików, należy sprawdzić uprawnienia do plików w %s"
+
+#: oc-includes/osclass/controller/item.php:591
+msgid "The listing has been blocked or is awaiting moderation from the admin"
+msgstr "Ogłoszenie zostało zablokowane lub oczekuje na zatwierdzenie przez administratora"
+
+#: oc-includes/osclass/controller/login.php:47
+msgid "Please provide an email address"
+msgstr "Proszę podać adres e-mail"
+
+#: oc-includes/osclass/controller/login.php:51
+msgid "Empty passwords are not allowed. Please provide a password"
+msgstr "Puste hasła nie są dozwolone. Proszę podać hasło"
+
+#: oc-includes/osclass/UserActions.php:155
+msgid "The specified e-mail is already used by %s"
+msgstr "Podany adres e-mail jest już użyty przez %s"
+
+#: oc-admin/controller/settings/main.php:36
+msgid "Disconnected from the market"
+msgstr "Zostałeś wylogowany"

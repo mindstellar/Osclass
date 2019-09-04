@@ -384,8 +384,7 @@ CREATE TABLE %st_item_description_tmp (
     if(osc_version() < 300) {
         $comm->query(sprintf( 'ALTER TABLE %st_user DROP s_pass_answer' , DB_TABLE_PREFIX));
         $comm->query(sprintf( 'ALTER TABLE %st_user DROP s_pass_question' , DB_TABLE_PREFIX));
-        osc_set_preference('marketURL', 'http://market.osclass.org/api/');
-        osc_set_preference('marketAllowExternalSources', '0', 'BOOLEAN');
+        osc_set_preference('marketAllowExternalSources', '1', 'BOOLEAN');
     }
 
     if(osc_version() < 310) {
@@ -508,19 +507,7 @@ CREATE TABLE %st_item_description_tmp (
         unset($aAlerts);
     }
 
-    if(osc_version() < 350) {
-        osc_set_preference('marketURL', 'http://market.osclass.org/api/v2/');
-        osc_set_preference('marketAPIConnect');
-        osc_set_preference('marketCategories');
-        osc_set_preference('marketDataUpdate', 0);
-    }
-
-    if(osc_version() < 352) {
-        osc_set_preference('marketURL', 'http://market.osclass.org/api/v2/');
-    }
-
     if(osc_version() < 370) {
-        osc_set_preference('marketURL', 'https://market.osclass.org/api/v2/');
         osc_set_preference('recaptcha_version', '1');
         $comm->query(sprintf( 'ALTER TABLE  %st_category_description MODIFY s_slug VARCHAR(255) NOT NULL' , DB_TABLE_PREFIX));
         $comm->query(sprintf( 'ALTER TABLE  %st_preference MODIFY s_section VARCHAR(128) NOT NULL' , DB_TABLE_PREFIX));
@@ -532,7 +519,6 @@ CREATE TABLE %st_item_description_tmp (
     }
 
     if(osc_version() < 374) {
-        osc_set_preference('marketURL', 'https://market.osclass.org/api/v3/');
         osc_changeVersionTo(374);
         $admin = Admin::newInstance()->findByEmail('demo@demo.com');
         if(isset($admin['pk_i_id'])) {
@@ -556,7 +542,7 @@ CREATE TABLE %st_item_description_tmp (
                             if (strpos($buffer, $_t) !== false) {
                                 $exist = true;
                                 break;
-                            }      
+                            }
                         }
                     }
                     fclose($handle);

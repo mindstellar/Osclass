@@ -1,0 +1,1725 @@
+# Translation of Flash Messages in Danish
+# This file is distributed under the same license as the Flash Messages package.
+msgid ""
+msgstr ""
+"PO-Revision-Date: 2015-01-09 10:58:07+0000\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: GlotPress/0.1\n"
+"Project-Id-Version: Flash Messages\n"
+
+#: oc-includes/osclass/controller/ajax.php:101
+#: oc-includes/osclass/controller/item.php:313
+msgid "The selected photo couldn't be deleted, the url doesn't exist"
+msgstr "Valgt billede kan ikke slettes, da url,en ikke eksisterer"
+
+#: oc-includes/osclass/controller/ajax.php:111
+#: oc-includes/osclass/controller/item.php:319
+msgid "The listing doesn't exist"
+msgstr "Annoncen eksisterer ikke"
+
+#: oc-includes/osclass/controller/ajax.php:120
+#: oc-includes/osclass/controller/ajax.php:128
+#: oc-includes/osclass/controller/item.php:325
+#: oc-includes/osclass/controller/item.php:330
+msgid "The listing doesn't belong to you"
+msgstr "Annoncen tilhører ikke dig"
+
+#: oc-includes/osclass/controller/ajax.php:86
+#: oc-includes/osclass/controller/ajax.php:151
+#: oc-includes/osclass/controller/item.php:344
+msgid "The selected photo has been successfully deleted"
+msgstr "Det valgte billede, er slettet korrekt"
+
+#: oc-includes/osclass/controller/ajax.php:154
+#: oc-includes/osclass/controller/item.php:346
+msgid "The selected photo does not belong to you"
+msgstr "Det valgte og brugte billede, tilhører ikke dig"
+
+#: oc-includes/osclass/controller/ajax.php:86
+#: oc-includes/osclass/controller/ajax.php:158
+#: oc-includes/osclass/controller/item.php:349
+msgid "The selected photo couldn't be deleted"
+msgstr "Valt billede kunne ikke slettes"
+
+#: oc-includes/osclass/controller/contact.php:39
+#: oc-includes/osclass/controller/item.php:122
+#: oc-includes/osclass/controller/item.php:230
+#: oc-includes/osclass/controller/item.php:394
+#: oc-includes/osclass/controller/item.php:446
+#: oc-includes/osclass/controller/user-non-secure.php:147
+msgid "The Recaptcha code is wrong"
+msgstr "Re.Captcha koden er forkert"
+
+#: oc-includes/osclass/emails.php:645
+msgid "There has been some errors sending the message"
+msgstr "Der opstod nogle fejl, i forsøget på at sende beskeden."
+
+#: oc-includes/osclass/controller/item.php:51
+#: oc-includes/osclass/controller/item.php:100
+msgid "Only registered users are allowed to post listings"
+msgstr " * Kun registrerede konto brugere kan oprette annoncer * "
+
+#: oc-includes/osclass/controller/item.php:165
+msgid "Your listing has been published"
+msgstr "Din annonce er blevet oprettet korrekt"
+
+#: oc-includes/osclass/controller/item.php:239
+msgid "Great! We've just updated your listing"
+msgstr "Super ! - Vi har nu opdateret din annonce"
+
+#: oc-includes/osclass/controller/item.php:266
+msgid "The listing has been validated"
+msgstr "Annoncen er valideret korrekt"
+
+#: oc-includes/osclass/controller/item.php:268
+msgid "The listing can't be validated"
+msgstr "Annoncen kan ikke valideres"
+
+#: oc-includes/osclass/controller/item.php:271
+msgid "The listing has already been validated"
+msgstr "Annoncen er allerede valideret korrekt"
+
+#: oc-includes/osclass/controller/item.php:284
+msgid "Your listing has been deleted"
+msgstr "Din annonce er slettet korrekt"
+
+#: oc-includes/osclass/controller/item.php:286
+#: oc-includes/osclass/controller/item.php:294
+msgid "The listing you are trying to delete couldn't be deleted"
+msgstr "Annoncen du prøver at slette, kan ikke slettes"
+
+#: oc-includes/osclass/controller/item.php:371
+msgid "Thanks! That's very helpful"
+msgstr "Mange TAK - det er meget hjælpsomt af dig."
+
+#: oc-includes/osclass/controller/item.php:417
+#: oc-includes/osclass/controller/item.php:529
+msgid "This listing doesn't exist"
+msgstr "Annoncen eksisterer ikke mere"
+
+#: oc-includes/osclass/controller/item.php:423
+#: oc-includes/osclass/controller/item.php:466
+msgid "We're sorry, but the listing has expired. You can't contact the seller"
+msgstr "Desværre:  Annoncen er udløbet. Så annoncør kan ikke kontaktes."
+
+#: oc-includes/osclass/controller/item.php:430
+#: oc-includes/osclass/controller/item.php:438
+msgid "You can't contact the seller, only registered users can"
+msgstr "Kun registrerede konto brugere kan kontakte annoncøren"
+
+#: oc-includes/osclass/controller/item.php:479
+msgid "We've just sent an e-mail to the seller"
+msgstr "Vi har nu sendt din E-Mail til annoncøren"
+
+#: oc-includes/osclass/controller/item.php:489
+msgid "Sorry, we could not save your comment. Try again later"
+msgstr "Desværre: Vi kunne ikke gemme din kommentar. Prøv venligst igen senere."
+
+#: oc-includes/osclass/controller/item.php:492
+msgid "Your comment is awaiting moderation"
+msgstr "Kommentaren offentliggøres først efter en Administrator har godkendt den.."
+
+#: oc-includes/osclass/controller/item.php:495
+msgid "Your comment has been approved"
+msgstr "Din kommentar er blevet godkendt"
+
+#: oc-includes/osclass/controller/item.php:498
+msgid "Please fill the required field (email)"
+msgstr "Venligst udfyld påkrævet felt (E-Mail)"
+
+#: oc-includes/osclass/controller/item.php:501
+msgid "Please type a comment"
+msgstr "Venligst indskriv en kommentar"
+
+#: oc-includes/osclass/controller/item.php:504
+msgid "Your comment has been marked as spam"
+msgstr "Din kommentar er blevet rapporteret som SPAM"
+
+#: oc-includes/osclass/controller/item.php:536
+msgid "You must be logged in to delete a comment"
+msgstr "Du skal være logget ind for at slette kommentarer"
+
+#: oc-includes/osclass/controller/item.php:544
+msgid "The comment doesn't exist"
+msgstr "Kommentaren eksisterer ikke"
+
+#: oc-includes/osclass/controller/item.php:549
+msgid "The comment is not active, you cannot delete it"
+msgstr "Kommentaren er ikke aktiv, så du kan ikke slette den"
+
+#: oc-includes/osclass/controller/item.php:554
+msgid "The comment was not added by you, you cannot delete it"
+msgstr "Kommentaren var ikke tilføjet af dig, derfor kan du ikke slette den"
+
+#: oc-admin/comments.php:195 oc-includes/osclass/controller/item.php:559
+msgid "The comment has been deleted"
+msgstr "Kommentaren er blevet slettet"
+
+#: oc-includes/osclass/controller/login.php:25
+#: oc-includes/osclass/controller/register.php:26
+#: oc-includes/osclass/controller/user-non-secure.php:25
+#: oc-includes/osclass/controller/user.php:25
+msgid "Users not enabled"
+msgstr "Bruger ikke aktiveret"
+
+#: oc-includes/osclass/controller/login.php:36
+#: oc-includes/osclass/controller/register.php:49
+msgid "Users are not enabled"
+msgstr "Brugere er ikke aktiverede"
+
+#: oc-includes/osclass/controller/login.php:65
+#: oc-includes/osclass/controller/login.php:114
+msgid "The user doesn't exist"
+msgstr "Brugeren eksisterer ikke"
+
+#: oc-includes/osclass/controller/login.php:69
+msgid "The password is incorrect"
+msgstr "PassWord er ikke korrekt"
+
+#: oc-includes/osclass/controller/login.php:119
+msgid "The user has not been validated yet"
+msgstr "Brugeren er ikke valideret og godkendt endnu"
+
+#: oc-includes/osclass/controller/login.php:122
+msgid "The user has been suspended"
+msgstr "Brugeren er blevet udelukket"
+
+#: oc-includes/osclass/controller/login.php:190
+msgid "Invalid email address"
+msgstr "* E-Mail adressen er tom eller forkert *"
+
+#: oc-includes/osclass/controller/login.php:199
+msgid "We have sent you an email with the instructions to reset your password"
+msgstr "Vi har sendt en E-Mail til dig, med instruktioner om at nulstille PassWord."
+
+#: oc-includes/osclass/controller/login.php:203
+msgid "We were not able to identify you given the information provided"
+msgstr "Vi var ikke i stand til at identificere, de afgivne oplysninger"
+
+#: oc-includes/osclass/controller/login.php:207
+msgid "The recaptcha code is wrong"
+msgstr "FEJL:  ReCaptcha koden er forkert"
+
+#: oc-admin/login.php:131 oc-admin/login.php:141
+#: oc-includes/osclass/controller/login.php:217
+#: oc-includes/osclass/controller/login.php:245
+#: oc-includes/osclass/controller/user-non-secure.php:54
+#: oc-includes/osclass/controller/user-non-secure.php:58
+msgid "Sorry, the link is not valid"
+msgstr "Desværre: Linket duger ikke"
+
+#: oc-includes/osclass/controller/login.php:224
+#: oc-includes/osclass/controller/user.php:170
+msgid "Password cannot be blank"
+msgstr "PassWord kan ikke være tomt"
+
+#: oc-admin/login.php:151 oc-includes/osclass/controller/login.php:238
+msgid "The password has been changed"
+msgstr "PassWord er blevet ændret"
+
+#: oc-includes/osclass/controller/login.php:241
+msgid "Error, the password don't match"
+msgstr "FEJL: PassWord passer ikke overens"
+
+#: oc-includes/osclass/controller/register.php:31
+msgid "User registration is not enabled"
+msgstr "Bruger registrering er ikke aktiveret"
+
+#: oc-includes/osclass/controller/register.php:68
+msgid "The user has been created. An activation email has been sent"
+msgstr "Din bruger konto er oprettet. - En aktiverings mail bliver sendt til dig."
+
+#: oc-includes/osclass/controller/register.php:71
+msgid "Your account has been created successfully"
+msgstr "Din konto er oprettet."
+
+#: oc-includes/osclass/UserActions.php:67
+#: oc-includes/osclass/controller/user.php:130
+msgid "The specified e-mail is already in use"
+msgstr "Desværre:  Denne E-Mail er allerede i brug"
+
+#: oc-includes/osclass/UserActions.php:60
+msgid "The email is not valid"
+msgstr "E-Mail er ikke korrekt"
+
+#: oc-includes/osclass/UserActions.php:43
+msgid "The password cannot be empty"
+msgstr "PassWord kan ikke være tomt"
+
+#: oc-includes/osclass/UserActions.php:48
+#: oc-includes/osclass/UserActions.php:167
+#: oc-includes/osclass/controller/user.php:185
+msgid "Passwords don't match"
+msgstr "PassWords er ikke ens"
+
+#: oc-includes/osclass/controller/register.php:90
+msgid "The link is not valid anymore. Sorry for the inconvenience!"
+msgstr "Linket virker ikke mere. Undskyld for ulejligheden."
+
+#: oc-includes/osclass/controller/register.php:95
+msgid "Your account has already been validated"
+msgstr "Din konto _er_ valideret og godkendt. - Brug derfor venligst:  Log.IND  "
+
+#: oc-includes/osclass/controller/register.php:116
+msgid "Your account has been validated"
+msgstr "Din bruger konto er godkendt, opdater venligst din [ KONTO PROFIL ]"
+
+#: oc-includes/osclass/controller/user-non-secure.php:51
+msgid "Your email has been changed successfully"
+msgstr "Din E-Mail er ændret korrekt"
+
+#: oc-includes/osclass/controller/user-non-secure.php:80
+#: oc-includes/osclass/controller/user.php:222
+msgid "Alert activated"
+msgstr "Påmindelse er aktiveret"
+
+#: oc-includes/osclass/controller/user-non-secure.php:101
+#: oc-includes/osclass/controller/user.php:243
+msgid "Unsubscribed correctly"
+msgstr "* Er afmeldt korrekt *"
+
+#: oc-includes/osclass/controller/user.php:75
+msgid "Your profile has been updated successfully"
+msgstr "Din konto er nu opdateret og gemt korrekt"
+
+#: oc-includes/osclass/controller/user.php:106
+msgid "The specified e-mail is not valid"
+msgstr "Den opgivne E.Mail adresse er ikke korrekt"
+
+#: oc-includes/osclass/controller/user.php:175
+msgid "Current password doesn't match"
+msgstr "Aktuelle PassWord passer ikke overens"
+
+#: oc-includes/osclass/controller/user.php:180
+msgid "Passwords can't be empty"
+msgstr "PassWord flet kan ikke være tomt"
+
+#: oc-includes/osclass/controller/user.php:192
+msgid "Password has been changed"
+msgstr "PassWord er blevet ændret"
+
+#: oc-admin/admins.php:30 oc-admin/items.php:38
+#: oc-includes/osclass/core/AdminSecBaseModel.php:28
+msgid "You don't have enough permissions"
+msgstr "Dine tilladelser rækker ikke til dette."
+
+#: oc-admin/admins.php:73 oc-admin/admins.php:173
+msgid "Email invalid"
+msgstr "E-Mail er ugyldig"
+
+#: oc-admin/admins.php:77 oc-admin/admins.php:177
+msgid "Username invalid"
+msgstr "Brugernavn er ugyldig"
+
+#: oc-admin/admins.php:81 oc-admin/admins.php:181
+msgid "Name invalid"
+msgstr "Navn er ugyldig"
+
+#: oc-admin/admins.php:85 oc-admin/admins.php:212
+msgid "Password invalid"
+msgstr "PassWord er ugyldig"
+
+#: oc-admin/admins.php:90
+msgid "Email already in use"
+msgstr "E-Mail er allerede i brug"
+
+#: oc-admin/admins.php:95
+msgid "Username already in use"
+msgstr "Brugernavnet er allerede i brug"
+
+#: oc-admin/admins.php:118
+msgid "The admin has been added"
+msgstr "Administratoren er blevet slettet"
+
+#: oc-admin/admins.php:188
+msgid "This admin doesn't exist"
+msgstr "Denne Admin eksisterer ikke"
+
+#: oc-admin/admins.php:194
+msgid "Existing email"
+msgstr "Eksisterende E-Mail"
+
+#: oc-admin/admins.php:201
+msgid "Existing username"
+msgstr "Eksisterende Brugernavn"
+
+#: oc-admin/admins.php:220 oc-admin/admins.php:230
+msgid "The password couldn't be updated. Passwords don't match"
+msgstr "PassWord kunne ikke opdateres. PassWord stemmer ikke overens"
+
+#: oc-admin/admins.php:247
+msgid "The admin has been updated"
+msgstr "Administrator er blevet opdateret"
+
+#: oc-admin/admins.php:266
+msgid "The admin id isn't in the correct format"
+msgstr "Admin ID er ikke i korrekte format"
+
+#: oc-admin/admins.php:272
+msgid "The operation hasn't been completed. You're trying to remove yourself!"
+msgstr "Handlingen kan ikke afsluttes. Du forsøger nemlig at fjerne dig selv!"
+
+#: oc-admin/admins.php:279
+msgid "The admin has been deleted correctly"
+msgstr "Administrator er blevet slettet korrekt"
+
+#: oc-admin/admins.php:281
+msgid "The admin couldn't be deleted"
+msgstr "Admin kunne ikke slettes"
+
+#: oc-admin/tools.php:36 oc-admin/tools.php:63 oc-admin/tools.php:73
+#: oc-admin/tools.php:90 oc-admin/tools.php:126 oc-admin/tools.php:169
+#: oc-admin/tools.php:196 oc-admin/tools.php:225
+msgid "This action cannot be done because it is a demo site"
+msgstr "Denne handling kan ikke udføres, fordi det er en demo side."
+
+#: oc-admin/tools.php:118 oc-admin/tools.php:150
+msgid "Backup completed successfully"
+msgstr "BackOP er udført korrekt"
+
+#: oc-admin/appearance.php:51
+msgid "The theme folder is not writable"
+msgstr "Tema mappen er ikke skrivbar"
+
+#: oc-admin/appearance.php:54
+msgid "The theme has been installed correctly"
+msgstr "Tema blev ikke installeret korrekt"
+
+#: oc-admin/appearance.php:57 oc-admin/languages.php:67 oc-admin/plugins.php:60
+msgid "The zip file is not valid"
+msgstr "ZIP filen er ikke korrekt"
+
+#: oc-admin/appearance.php:60 oc-admin/languages.php:70 oc-admin/plugins.php:63
+#: oc-admin/tools.php:55
+msgid "No file was uploaded"
+msgstr "Filen blev ikke UpLoaded"
+
+#: oc-admin/appearance.php:65
+msgid "There was a problem adding the theme"
+msgstr "Der opstod et problem under tema installationen"
+
+#: oc-admin/appearance.php:83
+msgid "Theme removed successfully"
+msgstr "Tema fjernet korrekt"
+
+#: oc-admin/appearance.php:85
+msgid "There was a problem removing the theme"
+msgstr "Der opstod et problem da tema skulle fjernes"
+
+#: oc-admin/appearance.php:88
+msgid "Current theme can not be deleted"
+msgstr "Det aktuelle tema kan ikke slettes"
+
+#: oc-admin/appearance.php:91
+msgid "No theme selected"
+msgstr "Intet tema er valgt"
+
+#: oc-admin/appearance.php:120
+msgid "Widget removed correctly"
+msgstr "Widgets er fjernet korrekt"
+
+#: oc-admin/appearance.php:126 oc-admin/appearance.php:148
+msgid "Description field is required"
+msgstr "Beskrivelses felt er påkrævet"
+
+#: oc-admin/appearance.php:139
+msgid "Widget updated correctly"
+msgstr "Widget opdateret korrekt"
+
+#: oc-admin/appearance.php:141
+msgid "Widget cannot be updated correctly"
+msgstr "Widget kan ikke opdateres korrekt"
+
+#: oc-admin/appearance.php:160
+msgid "Widget added correctly"
+msgstr "Widget tilføjet korrekt"
+
+#: oc-admin/appearance.php:167
+msgid "Theme activated correctly"
+msgstr "Tema er aktiveret korrekt"
+
+#: oc-admin/comments.php:52
+msgid "The comments have been deleted"
+msgstr "Kommentaren er blevet slettet"
+
+#: oc-admin/comments.php:65
+msgid "The comments have been approved"
+msgstr "Kommentaren er blevet godkendt"
+
+#: oc-admin/comments.php:75
+msgid "The comments have been disapproved"
+msgstr "Kommentaren er ikke blevet godkendt"
+
+#: oc-admin/comments.php:128
+msgid "The comment has been approved"
+msgstr "Kommentaren er godkent - og er nu til offentligt gennemsyn."
+
+#: oc-admin/comments.php:135
+msgid "The comment has been disapproved"
+msgstr "Kommentaren er nægtet godkendelse"
+
+#: oc-admin/comments.php:142
+msgid "The comment has been enabled"
+msgstr "Kommentaren er godkendt og aktiveret"
+
+#: oc-admin/comments.php:149
+msgid "The comment has been disabled"
+msgstr "Kommentaren er blevet DeAktiveret"
+
+#: oc-admin/comments.php:164
+msgid "Email is not correct"
+msgstr "E-Mail er ikke korrekt"
+
+#: oc-admin/comments.php:167
+msgid "Comment is required"
+msgstr "Kommentar er påkrævet"
+
+#: oc-admin/comments.php:189
+msgid "Great! We just updated your comment"
+msgstr "Fint, vi har lige opdateret din kommentar"
+
+#: oc-admin/emails.php:82
+msgid "The email/alert has been updated"
+msgstr "E-Mail påmindelse er blevet opdateret"
+
+#: oc-admin/emails.php:85 oc-admin/pages.php:102
+msgid "You can't repeat internal name"
+msgstr "Du kan ikke gentage interne navne"
+
+#: oc-admin/emails.php:87
+msgid "The email couldn't be updated, at least one title should not be empty"
+msgstr "E-Mail kunne ikke opdateres, mindst titel overskrift skal udfyldes."
+
+#: oc-admin/items.php:59
+msgid "%d listing has been enabled"
+msgstr "%d annoncer er blevet Aktiveret"
+
+#: oc-admin/items.php:71
+msgid "%d listing has been disabled"
+msgstr "%d annoncer er blevet DeAktiveret"
+
+#: oc-admin/items.php:83
+msgid "%d listing has been activated"
+msgstr "%d annoncer er blevet Aktiveret"
+
+#: oc-admin/items.php:95
+msgid "%d listing has been deactivated"
+msgstr "%d annoncer er blevet DeAktiveret"
+
+#: oc-admin/items.php:107
+msgid "%d listing has been marked as premium"
+msgstr "%d annoncer er blevet markeret som Premium"
+
+#: oc-admin/items.php:119 oc-admin/items.php:144
+msgid "%d change has been made"
+msgstr "%d ændringer er blevet udført"
+
+#: oc-admin/items.php:131
+msgid "%d listing has been marked as spam"
+msgstr "%d annoncer er blevet markeret som Spam"
+
+#: oc-admin/items.php:162
+msgid "%d listing has been deleted"
+msgstr "%d annoncer er blevet Slettet"
+
+#: oc-admin/items.php:179
+msgid "%d listing has been unmarked as spam"
+msgstr "%d annoncer er blevet De_Markeret som Spam"
+
+#: oc-admin/items.php:196
+msgid "%d listing has been unmarked as missclassified"
+msgstr "%d annoncer er blevet De_Markeret som Feljplaceret"
+
+#: oc-admin/items.php:213
+msgid "%d listing has been unmarked as duplicated"
+msgstr "%d annoncer er blevet De_Markeret som Dublikat annonce"
+
+#: oc-admin/items.php:230
+msgid "%d listing has been unmarked as expired"
+msgstr "%d annoncer er blevet De_Markeret som Udløbet"
+
+#: oc-admin/items.php:247
+msgid "%d listing has been unmarked as offensive"
+msgstr "%d annoncer er blevet De_Markeret som Stødende"
+
+#: oc-admin/items.php:322 oc-admin/items.php:334 oc-admin/items.php:344
+#: oc-admin/items.php:354 oc-admin/items.php:383 oc-admin/items.php:409
+#: oc-admin/items.php:553
+msgid "An error has occurred"
+msgstr "FEJL: er opstået ... ØV"
+
+#: oc-admin/items.php:289
+msgid "The listing has been deleted"
+msgstr "Annoncen er blevet slettet"
+
+#: oc-admin/items.php:291
+msgid "The listing couldn't be deleted"
+msgstr "Annoncen kan ikke slettes"
+
+#: oc-admin/items.php:320
+msgid "The listing has been activated"
+msgstr "Annoncen er blevet Aktiveret"
+
+#: oc-admin/items.php:332
+msgid "The listing has been deactivated"
+msgstr "Annoncen er blevet DeAktiveret"
+
+#: oc-admin/items.php:342
+msgid "The listing has been enabled"
+msgstr "Annoncen er blevet Aktiveret"
+
+#: oc-admin/items.php:352
+msgid "The listing has been disabled"
+msgstr "Annoncen er blevet fjernet"
+
+#: oc-admin/items.php:381 oc-admin/items.php:407
+msgid "Changes have been applied"
+msgstr "Ændringer er blevet tilføjet"
+
+#: oc-admin/items.php:433
+msgid "The listing has been unmarked as"
+msgstr "Annonce rapportering fjernet for:"
+
+#: oc-admin/items.php:435
+msgid "The listing hasn't been unmarked as"
+msgstr "Annoncen er ikke blevet Af.Markeret som "
+
+#: oc-admin/items.php:522
+msgid "Changes saved correctly"
+msgstr "Ændringer er gemt korrekt"
+
+#: oc-admin/items.php:555 oc-admin/media.php:51 oc-admin/media.php:74
+msgid "Resource deleted"
+msgstr "Kilden er slettet"
+
+#: oc-admin/items.php:604
+msgid "A new listing has been added"
+msgstr "En ny annonce er blevet tilføjet"
+
+#: oc-admin/items.php:699
+msgid "Listings' settings have been updated"
+msgstr "Annonce indstillinger er blevet opdateret"
+
+#: oc-admin/languages.php:56
+msgid "The translation folder is not writable"
+msgstr "Oversættelses sprog mappen er ikke skrivbar"
+
+#: oc-admin/languages.php:60
+msgid "The language has been installed correctly"
+msgstr "Sprog pakken er ikke installeret korrekt"
+
+#: oc-admin/languages.php:63 oc-admin/languages.php:75
+msgid "There was a problem adding the language"
+msgstr "Der ostod et poblem da sprog filer skulle tilføjes ?"
+
+#: oc-admin/languages.php:85 oc-admin/languages.php:118
+msgid "Language id isn't in the correct format"
+msgstr "Sprog pakken ID er ikke i korrekt format"
+
+#: oc-admin/languages.php:92
+msgid "Language id doesn't exist"
+msgstr "Sprog ID eksisterer ikke"
+
+#: oc-admin/languages.php:141
+msgid "Language name field is required"
+msgstr "Sprog pakken navne felt er påkrævet"
+
+#: oc-admin/languages.php:144
+msgid "Language short name field is required"
+msgstr "Sprog pakkens korte felt navn er påkrævet"
+
+#: oc-admin/languages.php:147
+msgid "Language description field is required"
+msgstr "Sprog pakkens beskrivelses felt er påkrævet"
+
+#: oc-admin/languages.php:150
+msgid "Currency format field is required"
+msgstr "Valuta format feltet er påkrævet"
+
+#: oc-admin/languages.php:174
+msgid "%s has been updated"
+msgstr "%s er blevet opdateret"
+
+#: oc-admin/languages.php:180
+msgid "Selected languages have been enabled for the website"
+msgstr "Valgt sprog skal være aktiveret for websiden"
+
+#: oc-admin/languages.php:187 oc-admin/languages.php:212
+#: oc-admin/languages.php:245 oc-admin/languages.php:270
+msgid "The language ids aren't in the correct format"
+msgstr "Sprog format ID er ikke i korrekt format"
+
+#: oc-admin/languages.php:204
+msgid "Selected languages have been disabled for the website"
+msgstr "Det valgte sprog, er blevet DeAktiveret for websiden"
+
+#: oc-admin/languages.php:238
+msgid "Selected languages have been enabled for the backoffice (oc-admin)"
+msgstr "Valgte sprog er aktiveret for kontrolpanel (oc-admin)"
+
+#: oc-admin/languages.php:262
+msgid "Selected languages have been disabled for the backoffice (oc-admin)"
+msgstr "Valgte sprog er DeAktiveret for kontrolpanel (oc-admin)"
+
+#: oc-admin/languages.php:218 oc-admin/languages.php:276
+msgid "%s can't be disabled because it's the default language"
+msgstr "%s kan ikke DeAktiveres, da det er standardsproget"
+
+#: oc-admin/languages.php:302
+msgid "Directory '%s' couldn't be removed"
+msgstr "Katalog '%s' kunne ikke fjernes"
+
+#: oc-admin/languages.php:304
+msgid "Directory \"%s\" has been successfully removed"
+msgstr "Kataloget \"%s\" er fjernet korrekt"
+
+#: oc-admin/languages.php:310
+msgid "Directory '%s' couldn't be removed because it's the default language. Set another language as default first and try again"
+msgstr "Mappen '%s' kunne ikke slettes, da det er standard sproget. Vælg et andet standard sprog først."
+
+#: oc-admin/login.php:43
+msgid "The username field is empty"
+msgstr "Brugernavn feltet er tomt"
+
+#: oc-admin/login.php:48
+msgid "The password field is empty"
+msgstr "PassWord feltet er tomt"
+
+#: oc-admin/login.php:56
+msgid "Sorry, incorrect username. <a href=\"%s\">Have you lost your password?</a>"
+msgstr "Desværre: Forkert brugernavn. <a href=\"%s\"> Har du glemt dit Brugernavn ?</a>"
+
+#: oc-admin/login.php:61
+msgid "Sorry, incorrect password. <a href=\"%s\">Have you lost your password?</a>"
+msgstr "Desværre: Forkert PassWord. <a href=\"%s\"> Har du glemt dit PassWord ?</a>"
+
+#: oc-admin/login.php:107
+msgid "The reCAPTCHA code is wrong"
+msgstr "Opgivet reCAPTCHA kode forkert"
+
+#: oc-admin/login.php:125
+msgid "A new password has been sent to your e-mail"
+msgstr "Et nyt PassWord er sendt til din opgivne E-Mail adresse"
+
+#: oc-admin/login.php:154
+msgid "Error, the passwords don't match"
+msgstr "FEJL: PassWord stemmer ikke overens"
+
+#: oc-admin/pages.php:82 oc-admin/pages.php:147
+msgid "You have to set a different internal name"
+msgstr "Du skal angive et anderledes internt navn"
+
+#: oc-admin/pages.php:99
+msgid "The page has been updated"
+msgstr "Siden er blevet opdateret"
+
+#: oc-admin/pages.php:104
+msgid "The page couldn't be updated, at least one title should not be empty"
+msgstr "Siden kunne ikke opdateres, minimum overskriften skal være udfyldt."
+
+#: oc-admin/pages.php:77 oc-admin/pages.php:142
+msgid "You have to set an internal name"
+msgstr "Du skal angive et internt navn"
+
+#: oc-admin/pages.php:158
+msgid "The page has been added"
+msgstr "Siden er blevet tilføjet"
+
+#: oc-admin/pages.php:161
+msgid "The page couldn't be added, at least one title should not be empty"
+msgstr "Siden kunne ikke tilføjes, minimum overskriften skal være udfyldt."
+
+#: oc-admin/pages.php:164
+msgid "Oops! That internal name is already in use. We can't make the changes"
+msgstr "Upsss... Navnet er allerede i brug. Der kan derfor ikke foretages ændringer."
+
+#: oc-admin/pages.php:195
+msgid "One page can't be deleted because it is indelible"
+msgstr "Siden kunne ikke slettes, fordi den er låst."
+
+#: oc-admin/pages.php:197
+msgid "%s pages couldn't be deleted because they are indelible"
+msgstr "%s sider kunne ikke slettes, fordi de er låste."
+
+#: oc-admin/pages.php:202
+msgid "One page couldn't be deleted"
+msgstr "En side kunne ikke slettes"
+
+#: oc-admin/pages.php:204
+msgid "%s pages couldn't be deleted"
+msgstr "%s  sider kunne ikke slettes"
+
+#: oc-admin/pages.php:209
+msgid "One page has been deleted correctly"
+msgstr "En side er blevet slettet korrekt"
+
+#: oc-admin/pages.php:211
+msgid "%s pages have been deleted correctly"
+msgstr "%s sider er blevet slettet korrekt"
+
+#: oc-admin/plugins.php:54
+msgid "The plugin folder is not writable"
+msgstr "Plugin mappen er ikke skrivbar"
+
+#: oc-admin/plugins.php:57
+msgid "The plugin has been uploaded correctly"
+msgstr "Plugin er uploadet korrekt"
+
+#: oc-admin/plugins.php:68
+msgid "There was a problem adding the plugin"
+msgstr "Et problem opstod under tilføjelse af plugin"
+
+#: oc-admin/plugins.php:93
+msgid "Plugin is already installed"
+msgstr "Plugin er allerede installeret"
+
+#: oc-admin/plugins.php:96
+msgid "Plugin couldn't be installed because their files are missing"
+msgstr "Plugin kan ikke installeres, da der mangler nogle filer"
+
+#: oc-admin/plugins.php:99
+msgid "Plugin couldn't be installed because of: %s"
+msgstr "Plugin kunne ikke installeres pga: %s"
+
+#: oc-admin/plugins.php:102
+msgid "Plugin couldn't be installed"
+msgstr "Plugin kunne ikke installeres"
+
+#: oc-admin/plugins.php:106
+msgid "Plugin installed"
+msgstr "Plugin er installeret"
+
+#: oc-admin/plugins.php:119
+msgid "Plugin uninstalled"
+msgstr "Plugin er Af_Installeret"
+
+#: oc-admin/plugins.php:121
+msgid "Plugin couldn't be uninstalled"
+msgstr "Plugin kunne ikke af_installeres"
+
+#: oc-admin/plugins.php:134
+msgid "Plugin enabled"
+msgstr "Plugin er aktiveret"
+
+#: oc-admin/plugins.php:136
+msgid "Plugin is already enabled"
+msgstr "Plugin er allerede aktivt"
+
+#: oc-admin/plugins.php:149
+msgid "Plugin disabled"
+msgstr "Plugin er DeAktiveret"
+
+#: oc-admin/plugins.php:151
+msgid "Plugin is already disabled"
+msgstr "Plugin er allerede DeAktiveret"
+
+#: oc-admin/plugins.php:222 oc-admin/plugins.php:238
+msgid "No plugin selected"
+msgstr "Intet plugin valgt"
+
+#: oc-admin/plugins.php:218
+msgid "Configuration was saved"
+msgstr "Konfigurationen blev gemt"
+
+#: oc-admin/controller/settings/locations.php:39
+#: oc-admin/controller/settings/locations.php:184
+#: oc-admin/controller/settings/locations.php:243
+#: oc-admin/controller/settings/locations.php:329
+#: oc-admin/controller/settings/locations.php:387
+msgid "%s already was in the database"
+msgstr "%s var allerede i DataBasen"
+
+#: oc-admin/controller/settings/locations.php:47
+msgid "Country code and name should have at least two characters"
+msgstr "Lande kode og navn, skal indeholde mindst to karakterer."
+
+#: oc-admin/controller/settings/locations.php:44
+#: oc-admin/controller/settings/locations.php:62
+msgid "%s has been added as a new country"
+msgstr "%s er blevet tilføjet som nyt Land"
+
+#: oc-admin/controller/settings/locations.php:106
+msgid "Country has been edited"
+msgstr "Land er blevet redigeret"
+
+#: oc-admin/controller/settings/locations.php:108
+msgid "There were some problems editing the country"
+msgstr "FEJL opstod under redigering af land."
+
+#: oc-admin/controller/settings/locations.php:160
+#: oc-admin/controller/settings/locations.php:182
+msgid "%s has been added as a new region"
+msgstr "%s er blevet tilføjet som ny region"
+
+#: oc-admin/controller/settings/locations.php:240
+#: oc-admin/controller/settings/locations.php:385
+msgid "%s has been edited"
+msgstr "%s er blevet redigeret"
+
+#: oc-admin/controller/settings/locations.php:307
+#: oc-admin/controller/settings/locations.php:327
+msgid "%s has been added as a new city"
+msgstr "%s er blevet tilføjet som nye Byer"
+
+#: oc-admin/controller/settings/permalinks.php:424
+msgid "One field was not updated"
+msgstr "Et felt blev ikke opdateret"
+
+#: oc-admin/controller/settings/permalinks.php:427
+#: oc-admin/controller/settings/permalinks.php:475
+msgid "Permalinks structure updated"
+msgstr "Permalinks struktur er opdateret"
+
+#: oc-admin/controller/settings/permalinks.php:436
+msgid "Permalinks structure updated."
+msgstr "Permalinks struktur er opdateret"
+
+#: oc-admin/controller/settings/permalinks.php:438
+msgid "However, we can't check if Apache module <b>mod_rewrite</b> is loaded. If you experience some problems with the URLs, you should deactivate <em>Friendly URLs</em>"
+msgstr "Men vi kan ikke tjekke om Apache modul <b>mod_rewrite</b> er indlæst.  Oplever du problemer med seo adresser, skal du DeAktivere <em>Friendly URLs</em>"
+
+#: oc-admin/controller/settings/permalinks.php:504
+msgid "Friendly URLs successfully deactivated"
+msgstr "SEO venlige URLs er korrekt DeAktiveret"
+
+#: oc-admin/controller/settings/spamnbots.php:56
+msgid "Your Akismet key has been cleared"
+msgstr "Din Akismet nøgle er blevet godkendt"
+
+#: oc-admin/controller/settings/spamnbots.php:58
+msgid "Your Akismet key has been updated"
+msgstr "Din Akismet nøgle er blevet opdateret"
+
+#: oc-admin/controller/settings/spamnbots.php:75
+msgid "Your reCAPTCHA key has been cleared"
+msgstr "Din reCAPTCHA nøgle er blevet godkendt"
+
+#: oc-admin/controller/settings/spamnbots.php:77
+msgid "Your reCAPTCHA key has been updated"
+msgstr "Din reCAPTCHA nøgle er blevet opdateret"
+
+#: oc-admin/controller/settings/currencies.php:50
+msgid "The currency code is not in the correct format"
+msgstr "Valuta koden er ikke i korrekt format"
+
+#: oc-admin/controller/settings/currencies.php:63
+msgid "Currency added"
+msgstr "Valuta tilføjet"
+
+#: oc-admin/controller/settings/currencies.php:65
+msgid "Currency couldn't be added"
+msgstr "Valuta kunne ikke tilføjes"
+
+#: oc-admin/controller/settings/currencies.php:75
+#: oc-admin/controller/settings/currencies.php:82
+msgid "The currency code '%s' doesn't exist"
+msgstr "Valuta koden '%s' eksisterer ikke"
+
+#: oc-admin/controller/settings/currencies.php:104
+msgid "Error: the currency code is not in the correct format"
+msgstr "FEJL: Valuta koden er ikke i et korrekt format"
+
+#: oc-admin/controller/settings/currencies.php:117
+msgid "Currency updated"
+msgstr "Valuta er opdateret"
+
+#: oc-admin/controller/settings/currencies.php:119
+msgid "No changes were made"
+msgstr "Ingen ændringer foretaget"
+
+#: oc-admin/controller/settings/currencies.php:151
+msgid "No currencies have been deleted"
+msgstr "Ingen valutaer er blevet slettet"
+
+#: oc-admin/controller/settings/currencies.php:155
+msgid "One currency has been deleted"
+msgstr "En valuta er blevet slettet"
+
+#: oc-admin/controller/settings/currencies.php:159
+msgid "%s currencies have been deleted"
+msgstr "%s valutaer er blevet slettet"
+
+#: oc-admin/controller/settings/mailserver.php:52
+msgid "Mail server type is incorrect"
+msgstr "Mail server type er forkert"
+
+#: oc-admin/controller/settings/mailserver.php:68
+msgid "Mail server configuration has changed"
+msgstr "Mail server konfiguration er blevet ændret"
+
+#: oc-admin/controller/settings/media.php:83
+#: oc-admin/controller/settings/media.php:91
+msgid "There was a problem uploading the watermark image"
+msgstr "Der opstod et problem med upload af vandmærke billede"
+
+#: oc-admin/controller/settings/media.php:87
+msgid "The watermark image has to be a .PNG file"
+msgstr "Vandmærke billedet .skal. være i .PNG format"
+
+#: oc-admin/controller/settings/media.php:138
+msgid "You cannot set a maximum file size higher than the one allowed in the PHP configuration: <b>%d KB</b>"
+msgstr "Maksimal filstørrelse, kan ikke være større end PHP konfiguration tillader, nemlig: <b>% d KB </ b>"
+
+#: oc-admin/controller/settings/media.php:163
+msgid "Media config has been updated"
+msgstr "Media konfigurations indstillinger er opdateret og gemt"
+
+#: oc-admin/controller/settings/media.php:223
+msgid "Re-generation complete"
+msgstr "Re-Generering er komplet"
+
+#: oc-admin/controller/settings/main.php:83
+msgid "Page title field is required"
+msgstr "Oerskrift felt er påkrævet"
+
+#: oc-admin/controller/settings/main.php:86
+msgid "Contact email field is required"
+msgstr "Kontakt E-Mail felt er påkrævet"
+
+#: oc-admin/controller/settings/main.php:137
+#: oc-admin/controller/settings/main.php:139
+msgid "General settings have been updated"
+msgstr "Nye generelle indstiller er blevet korrekt opdaterede og gemt."
+
+#: oc-admin/controller/settings/latestsearches.php:39
+msgid "Custom number could not be left empty"
+msgstr "Selvdefinerede tal feltet kan og må ikke være tomt"
+
+#: oc-admin/controller/settings/latestsearches.php:44
+msgid "Last search settings have been updated"
+msgstr "Sidste søge indstillinger er blevet opdateret"
+
+#: oc-admin/tools.php:50
+msgid "Import complete"
+msgstr "Import komplet"
+
+#: oc-admin/tools.php:52
+msgid "There was a problem importing data to the database"
+msgstr "Der opstod et problem, i forsøget på at importere data til DataBasen"
+
+#: oc-admin/tools.php:67
+msgid "Recount category stats has been successful"
+msgstr "Rekalkulering af kategorier statistikker blev en sukces."
+
+#: oc-admin/tools.php:106 oc-admin/tools.php:135
+msgid "Path is empty"
+msgstr "Path (sti) er tom"
+
+#: oc-admin/tools.php:109 oc-admin/tools.php:138
+msgid "Could not connect with the database. Error: %s"
+msgstr "Kunne ikke forbinde til DataBasen. FEJL: %s"
+
+#: oc-admin/tools.php:112 oc-admin/tools.php:144
+msgid "There are no tables to back up"
+msgstr "Der er ingen tabeller at back up"
+
+#: oc-admin/tools.php:115 oc-admin/tools.php:147
+msgid "The folder is not writable"
+msgstr "Katalogte er ikke skrivbart"
+
+#: oc-admin/tools.php:141
+msgid "Could not select the database. Error: %s"
+msgstr "Kunne ikke vælge database. FEJL: %s"
+
+#: oc-admin/tools.php:235
+msgid "Maintenance mode is ON"
+msgstr "Vedligeholdelses fremvisning er (ON) tændt"
+
+#: oc-admin/tools.php:245
+msgid "Maintenance mode is OFF"
+msgstr "Vedligeholdelses fremvisning er (OFF) slukket"
+
+#: oc-admin/users.php:68
+msgid "The user has been created. We've sent an activation e-mail"
+msgstr "Du er nu oprettet i vores database. - En konto aktiverings mail bliver sendt til din indbakke, inden for ca. 1 til 12 timer."
+
+#: oc-admin/users.php:70
+msgid "The user has been created successfully"
+msgstr "Brugeren er oprettet med sukces"
+
+#: oc-admin/users.php:123
+msgid "The user has been updated and activated"
+msgstr "Brugeren er blevet opdateret og aktiveret"
+
+#: oc-admin/users.php:121
+msgid "The user has been updated"
+msgstr "Brugeren er blevet opdateret"
+
+#: oc-admin/users.php:137 oc-admin/users.php:160 oc-admin/users.php:185
+#: oc-admin/users.php:209 oc-admin/users.php:233 oc-admin/users.php:257
+#: oc-admin/users.php:555
+msgid "User id isn't in the correct format"
+msgstr "Bruger ID er ikke i korrekt format"
+
+#: oc-admin/users.php:149
+msgid "Activation email sent to one user"
+msgstr "Aktiverings E-Mail afsendt til en bruger"
+
+#: oc-admin/users.php:172
+msgid "One user has been activated"
+msgstr "Denne bruger er nu aktiveret"
+
+#: oc-admin/users.php:197
+msgid "One user has been deactivated"
+msgstr "En bruger er blevet DeAktiveret"
+
+#: oc-admin/users.php:221
+msgid "One user has been unblocked"
+msgstr "En bruger er blevet Af.Blokeret"
+
+#: oc-admin/users.php:245
+msgid "One user has been blocked"
+msgstr "En bruger er blevet blokeret"
+
+#: oc-admin/users.php:272
+msgid "One user has been deleted"
+msgstr "En bruger er blevet slettet"
+
+#: oc-includes/osclass/ItemActions.php:318
+msgid "Title too short."
+msgstr "Overskrift er for kort"
+
+#: oc-includes/osclass/ItemActions.php:319
+msgid "Title too long."
+msgstr "Overskrift er for lang"
+
+#: oc-includes/osclass/ItemActions.php:331
+msgid "Description too short."
+msgstr "Beskrivelsen er for kort"
+
+#: oc-includes/osclass/ItemActions.php:332
+msgid "Description too long."
+msgstr "Beskrivelsen er for lang"
+
+#: oc-includes/osclass/ItemActions.php:129
+#: oc-includes/osclass/ItemActions.php:337
+msgid "Category invalid."
+msgstr "Kategori er forkert"
+
+#: oc-includes/osclass/ItemActions.php:131
+#: oc-includes/osclass/ItemActions.php:339
+msgid "Price too long."
+msgstr "Prisen er for lang"
+
+#: oc-includes/osclass/ItemActions.php:133
+msgid "Name too long."
+msgstr "Navn er for langt"
+
+#: oc-includes/osclass/ItemActions.php:134
+msgid "Email invalid."
+msgstr "E-Mail er ikke korrekt"
+
+#: oc-includes/osclass/ItemActions.php:135
+#: oc-includes/osclass/ItemActions.php:341
+msgid "Country too short."
+msgstr "Land er for kort"
+
+#: oc-includes/osclass/ItemActions.php:136
+#: oc-includes/osclass/ItemActions.php:342
+msgid "Country too long."
+msgstr "Land for langt"
+
+#: oc-includes/osclass/ItemActions.php:137
+#: oc-includes/osclass/ItemActions.php:343
+msgid "Region too short."
+msgstr "Region for kort"
+
+#: oc-includes/osclass/ItemActions.php:138
+#: oc-includes/osclass/ItemActions.php:344
+msgid "Region too long."
+msgstr "Region for langt"
+
+#: oc-includes/osclass/ItemActions.php:139
+#: oc-includes/osclass/ItemActions.php:345
+msgid "City too short."
+msgstr "By for kort"
+
+#: oc-includes/osclass/ItemActions.php:140
+#: oc-includes/osclass/ItemActions.php:346
+msgid "City too long."
+msgstr "By for langt"
+
+#: oc-includes/osclass/ItemActions.php:141
+#: oc-includes/osclass/ItemActions.php:347
+msgid "Municipality too short."
+msgstr "By Område for kort"
+
+#: oc-includes/osclass/ItemActions.php:142
+#: oc-includes/osclass/ItemActions.php:348
+msgid "Municipality too long."
+msgstr "By Område for langt"
+
+#: oc-includes/osclass/ItemActions.php:143
+#: oc-includes/osclass/ItemActions.php:349
+msgid "Address too short."
+msgstr "Adresse for kort"
+
+#: oc-includes/osclass/ItemActions.php:144
+#: oc-includes/osclass/ItemActions.php:350
+msgid "Address too long."
+msgstr "Adresse for lang"
+
+#: oc-includes/osclass/ItemActions.php:145
+msgid "Too fast. You should wait a little to publish your ad."
+msgstr "Du er for hurtig, du skal vente lidt med at oprette annoncen"
+
+#: oc-includes/osclass/ItemActions.php:160
+#: oc-includes/osclass/ItemActions.php:363
+msgid "%s field is required."
+msgstr "%s felt er påkrævet"
+
+#: oc-includes/osclass/ItemActions.php:1311
+msgid "One of the files you tried to upload exceeds the maximum size"
+msgstr "En af de filer du prøvede at uploade, overskred maksimum størrelses grænsen"
+
+#: oc-includes/osclass/controller/item.php:163
+msgid "Check your inbox to validate your listing"
+msgstr "Tjek din mail indboks for at validere og godkende din annonce"
+
+#: oc-admin/comments.php:88
+msgid "The comments have been unblocked"
+msgstr "Kommentaren er blevet Af.Blokeret"
+
+#: oc-admin/comments.php:98
+msgid "The comments have been blocked"
+msgstr "Kommentaren er blevet blokeret"
+
+#: oc-admin/items.php:264
+msgid "%d listing has been unmarked"
+msgstr "%d annoncer er blevet De_Markeret"
+
+#: oc-admin/controller/settings/main.php:29
+msgid "Last check"
+msgstr "Sidste tidspunkt for tjek: "
+
+#: oc-admin/main.php:71
+msgid "Entered an invalid email"
+msgstr "Du har opgivet en forkert E-Mail"
+
+#: oc-admin/main.php:74
+msgid "You're already subscribed"
+msgstr "Du abonnerer allerede"
+
+#: oc-admin/main.php:77
+msgid "Subscribed correctly"
+msgstr "Abonneret korekt"
+
+#: oc-admin/main.php:80
+msgid "Error subscribing"
+msgstr "FEJL: I abonnement"
+
+#: oc-includes/osclass/core/AdminSecBaseModel.php:62
+msgid "Thank you very much for your donation"
+msgstr "Mange TAK for din donation"
+
+#: oc-includes/osclass/controller/item.php:507
+msgid "You need to be logged to comment"
+msgstr "Du skal være logget ind for at kunne kommentere"
+
+#: oc-includes/osclass/helpers/hSecurity.php:85
+msgid "Invalid CSRF token."
+msgstr "Forkert CSRF token ! "
+
+#: oc-includes/osclass/helpers/hSecurity.php:79
+msgid "Probable invalid request."
+msgstr "Sandsynligvis forkert forspørgsel"
+
+#: oc-includes/osclass/controller/item.php:510
+msgid "Sorry, comments are disabled"
+msgstr "Desværre:  Der er lukket for kommentarer"
+
+#: oc-includes/osclass/controller/item.php:589
+msgid "The listing hasn't been enabled. Please enable it in order to make it public"
+msgstr "Annoncen er ikke aktiveret. Venligst aktiver for at offentliggøre."
+
+#: oc-includes/osclass/UserActions.php:55
+#: oc-includes/osclass/UserActions.php:161
+msgid "The name cannot be empty"
+msgstr "Navne feltet må ikke være tomt"
+
+#: oc-admin/admins.php:50 oc-admin/admins.php:143 oc-admin/admins.php:257
+#: oc-admin/appearance.php:37 oc-admin/appearance.php:74
+#: oc-admin/controller/settings/advanced.php:32
+#: oc-admin/controller/settings/locations.php:31
+#: oc-admin/controller/settings/locations.php:73
+#: oc-admin/controller/settings/locations.php:115
+#: oc-admin/controller/settings/locations.php:144
+#: oc-admin/controller/settings/locations.php:194
+#: oc-admin/controller/settings/locations.php:250
+#: oc-admin/controller/settings/locations.php:286
+#: oc-admin/controller/settings/locations.php:338
+#: oc-admin/controller/settings/locations.php:394
+#: oc-admin/controller/settings/mailserver.php:31
+#: oc-admin/controller/settings/media.php:170 oc-admin/languages.php:41
+#: oc-admin/login.php:97 oc-admin/plugins.php:40 oc-admin/plugins.php:77
+#: oc-admin/plugins.php:113 oc-admin/plugins.php:128 oc-admin/plugins.php:143
+msgid "This action can't be done because it's a demo site"
+msgstr "Det førsøgte virker ikke da, - dette er en demo side"
+
+#: oc-admin/admins.php:120
+msgid "There has been an error adding a new admin"
+msgstr "FEJL opstod, da ny Administrator skulle tilføjes"
+
+#: oc-admin/admins.php:135
+msgid "There is no admin with this id"
+msgstr "Her er ingen Admin med dette ID"
+
+#: oc-admin/items.php:324
+msgid "The listing can't be activated because it's blocked"
+msgstr "Annoncen kan ikke aktiveres, da den er blokeret"
+
+#: oc-admin/items.php:653
+msgid "Wait time must only contain numeric characters"
+msgstr "Vente tid: Må kun indeholde numeriske værdier"
+
+#: oc-admin/items.php:656
+msgid "Number of moderated listings must only contain numeric characters"
+msgstr "Antal i modererede annoncer, må kun indeholde numeriske tegn"
+
+#: oc-admin/items.php:659
+msgid "Images per listing must only contain numeric characters"
+msgstr "Billede antal pr. annonce må kun indeholde numeriske værdier"
+
+#: oc-admin/languages.php:153
+msgid "Number of decimals must only contain numeric characters"
+msgstr "Antal decimaler må kun indeholde numeriske værdier"
+
+#: oc-admin/languages.php:307
+msgid "Directory '%s' couldn't be removed;)"
+msgstr "Katalog '%s' kan ikke fjernes ;-)"
+
+#: oc-admin/main.php:62
+msgid "You have very few free space left, users will not be able to upload pictures"
+msgstr "Der er meget lidt plads tilbage på serveren, brugerne vil ikke være i stand til at uploade billeder."
+
+#: oc-admin/controller/settings/comments.php:48
+msgid "Number of moderate comments must only contain numeric characters"
+msgstr "Feltet antal moderede kommentarer, må kun indeholde numeriske værdier."
+
+#: oc-admin/controller/settings/comments.php:51
+msgid "Comments per page must only contain numeric characters"
+msgstr "Antal kommentarer pr. side, må kund indeholde numeriske værdier."
+
+#: oc-admin/controller/settings/comments.php:71
+msgid "Comment settings have been updated"
+msgstr "Kommentar indstillinger er blevet opdateret og gemt korrekt."
+
+#: oc-admin/controller/settings/locations.php:78
+msgid "Country name cannot be blank"
+msgstr "Land navn kan ikke være ingenting"
+
+#: oc-admin/controller/settings/locations.php:135
+#: oc-admin/controller/settings/locations.php:277
+#: oc-admin/controller/settings/locations.php:418
+msgid "There was a problem deleting locations"
+msgstr "Et problem opstod i forbindelse med sletning af GEO Lokaliteter"
+
+#: oc-admin/controller/settings/locations.php:138
+msgid "No country was selected"
+msgstr "Der er ikke valgt noget Land"
+
+#: oc-admin/controller/settings/locations.php:162
+#: oc-admin/controller/settings/locations.php:309
+msgid "%s can't be added"
+msgstr "%s kan ikke tilføjes"
+
+#: oc-admin/controller/settings/locations.php:172
+#: oc-admin/controller/settings/locations.php:203
+msgid "Region name cannot be blank"
+msgstr "Region navn kan ikke være ingenting"
+
+#: oc-admin/controller/settings/locations.php:280
+msgid "No region was selected"
+msgstr "Ingen region var valgt"
+
+#: oc-admin/controller/settings/locations.php:317
+msgid "New city name cannot be blank"
+msgstr "Nyt By navn kan ikke være ingenting"
+
+#: oc-admin/controller/settings/locations.php:348
+msgid "City name cannot be blank"
+msgstr "By navn kan ikke være ingenting"
+
+#: oc-admin/controller/settings/locations.php:421
+msgid "No city was selected"
+msgstr "Ingen By var valgt"
+
+#: oc-admin/controller/settings/permalinks.php:424
+msgid "All fields are required."
+msgstr "Alle felter er påkrævede"
+
+#: oc-admin/controller/settings/permalinks.php:445
+#: oc-admin/controller/settings/permalinks.php:455
+msgid "File <b>.htaccess</b> couldn't be filled out with the right content."
+msgstr "Indholdet kunne ikke tilskrives i <b>.htaccess </ b> filen"
+
+#: oc-admin/controller/settings/permalinks.php:447
+msgid "Here's the content you have to add to the <b>.htaccess</b> file. If you can't create the file, please deactivate the <em>Friendly URLs</em> option."
+msgstr "Her er indholdet du skal tilføje til <b>.htaccess</ b> filen. Hvis filen ikke kan oprettes, er en mulighed at DeAktivere <em>Friendly URLs</ em>"
+
+#: oc-admin/controller/settings/permalinks.php:457
+msgid "Here's the content you have to add to the <b>.htaccess</b> file. If you can't create the file or experience some problems with the URLs, please deactivate the <em>Friendly URLs</em> option."
+msgstr "Her er indholdet du skal tilføje til <b>.htaccess</ b> filen. Hvis filen ikke kan oprettes, eller du oplever problemer med seo adresser, er en mulighed at DeAktivere <em>Friendly URLs</ em>"
+
+#: oc-admin/controller/settings/currencies.php:141
+msgid "%s couldn't be deleted because it has listings associated to it"
+msgstr "%s kunne ikke slettes, fordi der er annoncer forbundet til det."
+
+#: oc-admin/controller/settings/currencies.php:143
+msgid "%s couldn't be deleted because it's the default currency"
+msgstr "%s kunne ikke slettes, da det er standard valutaen."
+
+#: oc-admin/controller/settings/main.php:89
+msgid "Number of listings in the RSS has to be a numeric value"
+msgstr "Antal annoncer i RSS feed, må kun være numeriske værdier."
+
+#: oc-admin/controller/settings/main.php:92
+msgid "Max latest listings has to be a numeric value"
+msgstr "Maksimum antal sidste annoncer, skal have en numerisk værdi"
+
+#: oc-admin/controller/settings/main.php:95
+msgid "Number of listings on search has to be a numeric value"
+msgstr "Antal annoncer i en fremsøgning, må kun indeholde numeriske værdier."
+
+#: oc-admin/controller/settings/main.php:120
+msgid "Number of listings in the RSS must be an integer"
+msgstr "Antallet annoncer i RSS lister, skal være heltal"
+
+#: oc-admin/controller/settings/main.php:127
+msgid "Number of recent listings displayed at home must be an integer"
+msgstr "Antallet sidste viste annoncer på  forsiden,  skal være heltal"
+
+#: oc-admin/themes/modern/market/header.php:5
+msgid "<code>downloads</code> folder has to be writable, i.e.: <code>chmod a+w %soc-content/downloads/</code>"
+msgstr "<code>Downloads</code> mapper skal være skrivbare, f.eks: <code>chmod a+w %soc-content/downloads/</code>"
+
+#: oc-admin/tools.php:176 oc-admin/tools.php:213
+msgid "Archived successfully!"
+msgstr "Arkiveret korrekt"
+
+#: oc-admin/tools.php:190 oc-admin/tools.php:216
+msgid "Error, the zip file was not created in the specified directory"
+msgstr "FEJL: zip-filen blev ikke oprettet i den angivne mappe"
+
+#: oc-admin/tools.php:237
+msgid "There was an error creating the .maintenance file, please create it manually at the root folder"
+msgstr "FEJL opstod under oprettelse af vedligeholdelses filen, Venligst opret manuelt i rod mappen."
+
+#: oc-admin/tools.php:247
+msgid "There was an error removing the .maintenance file, please remove it manually from the root folder"
+msgstr "FEJL ved fjernelse af vedligeholdelses filen. Fjern den manuelt fra rod mappen."
+
+#: oc-admin/users.php:147
+msgid "No users have been selected"
+msgstr "Ingen brugere er blevet valgte"
+
+#: oc-admin/users.php:170
+msgid "No users have been activated"
+msgstr "Ingen brugere er blevet aktiverede"
+
+#: oc-admin/users.php:195
+msgid "No users have been deactivated"
+msgstr "Ingen brugere er blevet DeAktiverede"
+
+#: oc-admin/users.php:219
+msgid "No users have been enabled"
+msgstr "Ingen brugere er blevet aktiverede"
+
+#: oc-admin/users.php:243
+msgid "No users have been disabled"
+msgstr "Ingen brugere er blevet udelukket"
+
+#: oc-admin/users.php:270
+msgid "No users have been deleted"
+msgstr "Ingen brugere er blevet slettet"
+
+#: oc-admin/users.php:283 oc-admin/users.php:317
+msgid "Alert id isn't in the correct format"
+msgstr "Påmindelse er ikke i korrekt format"
+
+#: oc-admin/users.php:298
+msgid "No alerts have been deleted"
+msgstr "Ingen påmindelse er blevet slettet"
+
+#: oc-admin/users.php:300
+msgid "One alert has been deleted"
+msgstr "En påmindelse er blevet slettet"
+
+#: oc-admin/users.php:337
+msgid "No alerts have been activated"
+msgstr "Ingen påmindelser er blevet Aktiveret"
+
+#: oc-admin/users.php:339
+msgid "One alert has been activated"
+msgstr "En påmindelse er blevet Aktiveret"
+
+#: oc-admin/users.php:343
+msgid "No alerts have been deactivated"
+msgstr "Ingen påmindelser er blevet DeAktiveret"
+
+#: oc-admin/users.php:345
+msgid "One alert has been deactivated"
+msgstr "En påmindelse er blevet DeAktiveret"
+
+#: oc-admin/users.php:383
+msgid "User settings have been updated"
+msgstr "Bruger indstillinger er blevet opdaterede"
+
+#: oc-admin/users.php:526 oc-admin/users.php:541
+msgid "Both rules can not be empty"
+msgstr "Begge regler kan ikke være tomme"
+
+#: oc-admin/users.php:531
+msgid "Rule updated correctly"
+msgstr "Regler opdateret korrekt"
+
+#: oc-admin/users.php:546
+msgid "Rule saved correctly"
+msgstr "Regler gemt korrekt"
+
+#: oc-admin/users.php:567
+msgid "No rules have been deleted"
+msgstr "Ingen regler er blevet slettet"
+
+#: oc-admin/users.php:569
+msgid "One ban rule has been deleted"
+msgstr "En ban regel er blevet slettet"
+
+#: oc-includes/osclass/ItemActions.php:90
+#: oc-includes/osclass/ItemActions.php:303
+msgid "Image with an incorrect extension."
+msgstr "Billede bredde er ikke korrekt opgivet"
+
+#: oc-includes/osclass/ItemActions.php:93
+#: oc-includes/osclass/ItemActions.php:306
+msgid "Image is too big. Max. size"
+msgstr "Billedet er for stort"
+
+#: oc-includes/osclass/ItemActions.php:130
+#: oc-includes/osclass/ItemActions.php:338
+msgid "Price must be a number."
+msgstr "Pris skal være et tal"
+
+#: oc-includes/osclass/ItemActions.php:857
+msgid "We just sent your message to %s"
+msgstr "Vi har lige afsendt en besked til  %s"
+
+#: oc-includes/osclass/ItemActions.php:1366
+#: oc-includes/osclass/controller/contact.php:158
+msgid "The file you tried to upload does not have a valid extension"
+msgstr "Filen du prøvede at uploade, havde ikke et korrekt format"
+
+#: oc-includes/osclass/controller/contact.php:65
+msgid "Please enter a correct email"
+msgstr "Venligst indskriv en korrekt E-Mail"
+
+#: oc-includes/osclass/controller/contact.php:156
+msgid "Your email has been sent properly. Thank you for contacting us!"
+msgstr "Din E-Mail blev afsendt korrekt. Tak for din henvendelse."
+
+#: oc-includes/osclass/controller/item.php:135
+msgid "A user with that email address already exists, if it is you, please log in"
+msgstr "En bruger med denne E-Mail findes allerede, hvis det er dig, skal du først logge ind."
+
+#: oc-includes/osclass/controller/contact.php:51
+#: oc-includes/osclass/controller/contact.php:60
+#: oc-includes/osclass/controller/item.php:142
+#: oc-includes/osclass/controller/item.php:458
+#: oc-includes/osclass/controller/login.php:75
+#: oc-includes/osclass/controller/register.php:57
+#: oc-includes/osclass/controller/user-non-secure.php:158
+msgid "Your current email is not allowed"
+msgstr "Denne E-Mail er ikke tilladt her"
+
+#: oc-includes/osclass/controller/contact.php:54
+#: oc-includes/osclass/controller/item.php:145
+#: oc-includes/osclass/controller/item.php:461
+#: oc-includes/osclass/controller/login.php:78
+#: oc-includes/osclass/controller/register.php:60
+#: oc-includes/osclass/controller/user-non-secure.php:161
+msgid "Your current IP is not allowed"
+msgstr "Denne IP adresse er ikke tilladt her på websiden"
+
+#: oc-includes/osclass/controller/item.php:194
+msgid "Sorry, we don't have any listings with that ID"
+msgstr "Desværre:  Vi har ingen annoncer med det ID"
+
+#: oc-includes/osclass/controller/item.php:582
+msgid "The listing hasn't been validated. Please validate it in order to make it public"
+msgstr "Annoncen er ikke godkendt. Venligst godkend, for at offentliggøre den. "
+
+#: oc-includes/osclass/controller/login.php:150
+msgid "This should never happen"
+msgstr "Dette burde sgu ikke kunne ske ? - Urghhh . . ."
+
+#: oc-includes/osclass/UserActions.php:37
+msgid "The reCAPTCHA was not entered correctly"
+msgstr "FEJL: ReCaptcha koden er ikke indskrevet korrekt"
+
+#: oc-includes/osclass/UserActions.php:74
+msgid "Username is already taken"
+msgstr "Brugernavnet er optaget"
+
+#: oc-includes/osclass/UserActions.php:78
+#: oc-includes/osclass/controller/user.php:154
+msgid "The specified username is not valid, it contains some invalid words"
+msgstr "Brugernavnet validerer ikke, pga. ikke godkendte ord."
+
+#: oc-includes/osclass/controller/user-non-secure.php:82
+#: oc-includes/osclass/controller/user.php:224
+msgid "Oops! There was a problem trying to activate your alert. Please contact an administrator"
+msgstr "Der opstod et problem, under aktivering af denne påmindelse. Kontakt venligst en administrator"
+
+#: oc-includes/osclass/controller/user-non-secure.php:103
+#: oc-includes/osclass/controller/user.php:245
+msgid "Oops! There was a problem trying to unsubscribe you. Please contact an administrator"
+msgstr "Der opstod et problem, under denne afmelding. Kontakt venligst en administrator"
+
+#: oc-includes/osclass/controller/user.php:144
+msgid "The specified username is already in use"
+msgstr "Desværre: Dette brugernavn er allerede i brug."
+
+#: oc-includes/osclass/controller/user.php:150
+msgid "The username was updated"
+msgstr "Brugernavnet er opdateret"
+
+#: oc-includes/osclass/controller/user.php:158
+msgid "The specified username could not be empty"
+msgstr "Brugernavn kan ikke være tomt"
+
+#: oc-includes/osclass/controller/user.php:268
+msgid "Your account have been deleted"
+msgstr "Din bruger konto er nu total slettet. - Som Dansk database registerlov foreskriver."
+
+#: oc-includes/osclass/controller/user.php:271
+#: oc-includes/osclass/controller/user.php:275
+msgid "Oops! you can not do that"
+msgstr "Upsss, - Det kan du ikke..."
+
+#: oc-includes/osclass/emails.php:464
+msgid "We've sent you an e-mail. Follow its instructions to validate the changes"
+msgstr "Vi har sendt dig en E-Mail. Venligst følg instrukser for at godkende ændringer."
+
+#: oc-includes/osclass/emails.php:466
+msgid "We tried to sent you an e-mail, but it failed. Please, contact an administrator"
+msgstr "Vi forsøgte at sendt dig en E-Mail, men det mislykkedes. Kontakt venligst en administrator"
+
+#: oc-includes/osclass/ItemActions.php:132
+#: oc-includes/osclass/ItemActions.php:340
+msgid "Price must be positive number."
+msgstr "Pris skal være et positivt tal"
+
+#: oc-admin/plugins.php:90
+msgid "The plugin generated %d characters of <strong>unexpected output</strong> during the installation. Output: \"%s\""
+msgstr "Plugin genererede %d karakterer af <strong>uventede fejl</strong> under installationen.  Fejl output: \"%s\""
+
+#: oc-admin/items.php:662
+msgid "Number of expiration days has to be a numeric value"
+msgstr "Antal udløbsdage må kun indeholde numeriske værdier"
+
+#: oc-admin/controller/settings/permalinks.php:509
+msgid "Friendly URLs deactivated, but .htaccess file was modified outside Osclass and was not deleted"
+msgstr "SEO venlige URLs er DeAktiveret, men  .htaccess er redigeret udenfor Osclass.  SLET den manuelt"
+
+#: oc-admin/controller/settings/permalinks.php:507
+msgid "Friendly URLs deactivated, but .htaccess file could not be deleted. Please, remove it manually"
+msgstr "SEO venlige URLs er DeAktiveret, men  .htaccess filen kunne i slettes, SLET den manuelt"
+
+#: oc-admin/controller/settings/permalinks.php:471
+msgid "Here's the content you have to add to the <b>.htaccess</b> file. If you can't modify the file or experience some problems with the URLs, please deactivate the <em>Friendly URLs</em> option."
+msgstr "Her er indholdet du skal tilføje til <b>.htaccess</ b> filen. Hvis filen ikke kan redigere, eller du oplever problemer med seo adresser, er en mulighed at DeAktivere <em>Friendly URLs</ em>"
+
+#: oc-admin/controller/settings/permalinks.php:469
+msgid "File <b>.htaccess</b> already exists and was not modified."
+msgstr "Filen <b>.htaccess</b> eksisterer allerede, og blev derfor ikke ændret."
+
+#: oc-admin/items.php:665
+msgid "Title Length has to be a numeric value"
+msgstr "Længde skal være en numerisk værdi"
+
+#: oc-admin/controller/settings/advanced.php:44
+msgid "Advanced settings have been updated"
+msgstr "Advancerede indstillinger er blevet opdaterede"
+
+#: oc-admin/items.php:668
+msgid "Description Length has to be a numeric value"
+msgstr "Beskrivelses længde: Må kun indeholde numeriske værdier"
+
+#: oc-includes/osclass/ItemActions.php:105
+msgid "Title too short (%s)."
+msgstr "Overskriften er for kort - eller mangler på [ %s ] . . ."
+
+#: oc-includes/osclass/ItemActions.php:106
+msgid "Title too long (%s)."
+msgstr "Overskrift er for lang (%s)."
+
+#: oc-includes/osclass/ItemActions.php:118
+msgid "Description too short (%s)."
+msgstr "Beskrivelsen er for kort - eller mangler på   [ %s ] "
+
+#: oc-includes/osclass/ItemActions.php:119
+msgid "Description too long (%s)."
+msgstr "Beskrivelse er for lang (%s)."
+
+#: oc-includes/osclass/controller/register.php:118
+msgid "Account validation failed"
+msgstr "Konto verificering fejlede"
+
+#: oc-includes/osclass/controller/login.php:117
+msgid "The user has not been validated yet. Would you like to re-send your <a href=\"%s\">activation?</a>"
+msgstr "Brugeren er ikke godkendt endnu.  Vil du fremsende endnu en <a href=\"%s\"> aktivering ? </a>"
+
+#: oc-includes/osclass/controller/login.php:164
+msgid "Incorrect link"
+msgstr "Ikke brugbart Link"
+
+#: oc-includes/osclass/controller/login.php:175
+msgid "Validation email re-sent"
+msgstr "Validerings E-Mail er Re.Fremsendt"
+
+#: oc-includes/osclass/controller/login.php:177
+msgid "We have just sent you an email to validate your account, you will have to wait a few minutes to resend it again"
+msgstr "Vi har sendt en E-Mail for din konto bekræftelse. Venligst vent et par minutter inden du udfører."
+
+#: oc-includes/osclass/controller/user-non-secure.php:166
+msgid "Your email has been sent properly."
+msgstr "Din E.Mail er afsendt korrekt"
+
+#: oc-includes/osclass/upgrade-funcs.php:516
+msgid "Osclass has been updated successfully. <a href=\"http://forums.osclass.org/\">Need more help?</a>"
+msgstr "Osclass blev opdateret korrekt. <a href=\"http://forums.osclass.org/\">BRUG: forums for mere selv hjælp</a>"
+
+#: oc-admin/plugins.php:231
+msgid "The files were deleted"
+msgstr "Filerne blev slettet"
+
+#: oc-admin/controller/settings/advanced.php:51
+msgid "Cache flushed correctly"
+msgstr "Cache hukommelse blev renset korrekt"
+
+#: oc-admin/plugins.php:233
+msgid "There were an error deleting the files, please check the permissions of the files in %s"
+msgstr "En fejl opstod under sletning af filer, venligst tjek dine Chmod tilladelser i  %s"
+
+#: oc-includes/osclass/controller/item.php:591
+msgid "The listing has been blocked or is awaiting moderation from the admin"
+msgstr "Annoncen er blevet visnings nægtet, eller er ikke Admin godkendt endnu"
+
+#: oc-includes/osclass/controller/login.php:47
+msgid "Please provide an email address"
+msgstr "Venligst opgiv en korrekt E-Mail adresse"
+
+#: oc-includes/osclass/controller/login.php:51
+msgid "Empty passwords are not allowed. Please provide a password"
+msgstr "Tomt PassWord felt er ikke tilladt. Venligst opgiv et korrekt PassWord"
+
+#: oc-includes/osclass/UserActions.php:155
+msgid "The specified e-mail is already used by %s"
+msgstr "Den angivne E-mail er allerede brugt af %s"
+
+#: oc-admin/controller/settings/main.php:36
+msgid "Disconnected from the market"
+msgstr "Forbindelse til markedet er afbrudt"

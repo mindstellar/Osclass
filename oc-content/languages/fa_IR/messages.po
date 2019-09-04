@@ -1,0 +1,1648 @@
+# Translation of Flash Messages in Persian
+# This file is distributed under the same license as the Flash Messages package.
+msgid ""
+msgstr ""
+"PO-Revision-Date: 2014-01-07 10:50:26+0000\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"X-Generator: GlotPress/0.1\n"
+"Project-Id-Version: Flash Messages\n"
+
+#: oc-includes/osclass/controller/item.php:446
+msgid "You need to be logged to comment"
+msgstr "برای نوشتن دیدگاه وارد سایت شوید"
+
+#: oc-includes/osclass/helpers/hSecurity.php:87
+msgid "Invalid CSRF token."
+msgstr "نشان CSRF نامعتبر است."
+
+#: oc-includes/osclass/helpers/hSecurity.php:81
+msgid "Probable invalid request."
+msgstr "احتمالا درخواست نامعتبر است."
+
+#: oc-includes/osclass/controller/item.php:449
+msgid "Sorry, comments are disabled"
+msgstr "میبخشید، دیدگاه‌ها بسته شده است."
+
+#: oc-includes/osclass/controller/item.php:528
+msgid "The listing hasn't been enabled. Please enable it in order to make it public"
+msgstr "آگهی فعال نیست. لطفا آن را برای نمایش عمومی فعال کنید."
+
+#: oc-admin/users.php:89 oc-admin/users.php:142
+#: oc-includes/osclass/controller/register.php:103
+#: oc-includes/osclass/controller/user.php:76
+msgid "The name cannot be empty"
+msgstr "نام نمیتواند خالی باشد."
+
+#: oc-admin/users.php:139
+msgid "E-mail is already in used by another user"
+msgstr "ایمیل در حال حاضر مورد استفاده کاربر دیگری است."
+
+#: oc-admin/users.php:91
+msgid "There was some error"
+msgstr "چند مورد خطا وجود داشت."
+
+#: oc-includes/osclass/ItemActions.php:133
+#: oc-includes/osclass/ItemActions.php:338
+msgid "Price must be positive number."
+msgstr "قیمت باید عددی مثبت باشد."
+
+#: oc-admin/plugins.php:93
+msgid "The plugin generated %d characters of <strong>unexpected output</strong> during the installation. Output: \"%s\""
+msgstr "این افزونه (پلاگین)  %d کاراکتر <strong>خروجی غیر متنظره تولید</strong> کرد. خروجی: \"%s\""
+
+#: oc-admin/items.php:664
+msgid "Number of expiration days has to be a numeric value"
+msgstr "تعداد روزهای انقضاء باید به صورت عددی وارد شود."
+
+#: oc-admin/controller/settings/permalinks.php:548
+msgid "Friendly URLs deactivated, but .htaccess file was modified outside Osclass and was not deleted"
+msgstr "آدرس‌های دوستانه (Friendly URL) غیر فعال‌اند. اما فایل .htaccess خارج از Osclass تغییر یافت و حذف نشد"
+
+#: oc-admin/controller/settings/permalinks.php:546
+msgid "Friendly URLs deactivated, but .htaccess file could not be deleted. Please, remove it manually"
+msgstr "آدرس‌های دوستانه (Friendly URL) غیر فعال‌اند. اما فایل .htaccess را نمی‌توان حذف کرد. لطفا آن را به صورت دستی حذف کنید."
+
+#: oc-admin/controller/settings/permalinks.php:508
+msgid "Here's the content you have to add to the <b>.htaccess</b> file. If you can't modify the file or experience some problems with the URLs, please deactivate the <em>Friendly URLs</em> option."
+msgstr "محتوای شما برای افزودن به فایل <b>.htaccess</b>. اگر شما نمی‌توانید فایل را ویرایش کنید یا در آدرس ها خطاهایی یافتید ، لطفا گزینه <em>(Friendly URLs) آدرس‌های دوستانه</em> را غیرفعال کنید."
+
+#: oc-admin/controller/settings/permalinks.php:506
+msgid "File <b>.htaccess</b> already exists and was not modified."
+msgstr "فایل <b>.htaccess</b> در حال حاضر وجود دارد و تغییری نیافته است."
+
+#: oc-admin/controller/settings/advanced.php:46
+msgid "Advanced settings have been updated"
+msgstr "تنظیمات پیشرفته به روز شد."
+
+#: oc-includes/osclass/controller/ajax.php:86
+msgid "The selected photo couldn't be deleted, the url doesn't exist"
+msgstr "تصویر انتخاب شده را نمی‌توان حذف نمود، آدرس موجود نیست."
+
+#: oc-includes/osclass/controller/ajax.php:96
+msgid "The listing doesn't exist"
+msgstr "آگهی وجود ندارد."
+
+#: oc-includes/osclass/controller/ajax.php:105
+#: oc-includes/osclass/controller/ajax.php:113
+msgid "The listing doesn't belong to you"
+msgstr "این آگهی به شما تعلق ندارد."
+
+#: oc-includes/osclass/controller/ajax.php:136
+#: oc-includes/osclass/controller/user.php:270
+msgid "The selected photo has been successfully deleted"
+msgstr "تصویری را که انتخاب نمودید با موفقیت حذف گردید"
+
+#: oc-includes/osclass/controller/ajax.php:139
+#: oc-includes/osclass/controller/user.php:272
+msgid "The selected photo does not belong to you"
+msgstr "عکس انتخابی متعلق به شما نیست"
+
+#: oc-includes/osclass/controller/ajax.php:143
+#: oc-includes/osclass/controller/user.php:275
+msgid "The selected photo couldn't be deleted"
+msgstr "تصویر انتخاب شده را نمی توان حذف نمود"
+
+#: oc-includes/osclass/controller/contact.php:40
+#: oc-includes/osclass/controller/item.php:123
+#: oc-includes/osclass/controller/item.php:230
+#: oc-includes/osclass/controller/item.php:338
+#: oc-includes/osclass/controller/item.php:385
+#: oc-includes/osclass/controller/user-non-secure.php:148
+msgid "The Recaptcha code is wrong"
+msgstr "کد reCAPTCHA اشتباه است"
+
+#: oc-includes/osclass/emails.php:655
+msgid "There has been some errors sending the message"
+msgstr "تعدادی خطا در ارسال پیام رخ داد"
+
+#: oc-includes/osclass/controller/item.php:52
+#: oc-includes/osclass/controller/item.php:101
+msgid "Only registered users are allowed to post listings"
+msgstr "فقط کاربران عضو شده مجاز به ارسال آگهی هستند."
+
+#: oc-includes/osclass/controller/item.php:165
+msgid "Your listing has been published"
+msgstr "آگهی شما منتشر شد."
+
+#: oc-includes/osclass/controller/item.php:239
+msgid "Great! We've just updated your listing"
+msgstr "آگهی شما بروز شد"
+
+#: oc-includes/osclass/controller/item.php:266
+msgid "The listing has been validated"
+msgstr "آگهی معتبر است"
+
+#: oc-includes/osclass/controller/item.php:268
+msgid "The listing can't be validated"
+msgstr "آگهی معتبر نیست"
+
+#: oc-includes/osclass/controller/item.php:271
+msgid "The listing has already been validated"
+msgstr "این آگهی از قبل وجود دارد"
+
+#: oc-includes/osclass/controller/item.php:284
+msgid "Your listing has been deleted"
+msgstr "آگهی شما حذف شد"
+
+#: oc-includes/osclass/controller/item.php:286
+#: oc-includes/osclass/controller/item.php:294
+msgid "The listing you are trying to delete couldn't be deleted"
+msgstr "شما قادر به حذف این آگهی نیستید"
+
+#: oc-includes/osclass/controller/item.php:315
+msgid "Thanks! That's very helpful"
+msgstr "با سپاس! راهنمایی شما بسیار مفید خواهد بود"
+
+#: oc-includes/osclass/controller/item.php:361
+#: oc-includes/osclass/controller/item.php:468
+msgid "This listing doesn't exist"
+msgstr "این آگهی وجود ندارد"
+
+#: oc-includes/osclass/controller/item.php:367
+#: oc-includes/osclass/controller/item.php:405
+msgid "We're sorry, but the listing has expired. You can't contact the seller"
+msgstr "متاسفم ! این آگهی منقضی است . شما نمیتوانید با فروشنده تماس بگیرید"
+
+#: oc-includes/osclass/controller/item.php:374
+msgid "You can't contact the seller, only registered users can"
+msgstr "شما قادر به برقراری تماس با فروشنده نیستید و فقط کاربران عضو می‌تواند"
+
+#: oc-includes/osclass/controller/item.php:418
+msgid "We've just sent an e-mail to the seller"
+msgstr "پیام شما به آگهی‌دهنده ارسال شد"
+
+#: oc-includes/osclass/controller/item.php:428
+msgid "Sorry, we could not save your comment. Try again later"
+msgstr "متاسفبم، ما نمی‌توانیم دیدگاه شما را ذخیره کنیم. بعدا دوباره سعی کنید"
+
+#: oc-includes/osclass/controller/item.php:431
+msgid "Your comment is awaiting moderation"
+msgstr "دیدگاه شما در انتظار تایید مدیران است"
+
+#: oc-includes/osclass/controller/item.php:434
+msgid "Your comment has been approved"
+msgstr "دیدگاه شما مورد تایید قرار گرفته است"
+
+#: oc-includes/osclass/controller/item.php:437
+msgid "Please fill the required field (email)"
+msgstr "لطفا فیلد لازم را پر کنید (ایمیل)"
+
+#: oc-includes/osclass/controller/item.php:440
+msgid "Please type a comment"
+msgstr "لطفا دیدگاه تان را بنویسید"
+
+#: oc-includes/osclass/controller/item.php:443
+msgid "Your comment has been marked as spam"
+msgstr "دیدگاه شما به عنوان هرزنامه شناخته شده است"
+
+#: oc-includes/osclass/controller/item.php:475
+msgid "You must be logged in to delete a comment"
+msgstr "برای حذف دیدگاه باید وارد وب‌سایت شوید"
+
+#: oc-includes/osclass/controller/item.php:483
+msgid "The comment doesn't exist"
+msgstr "این دیدگاه وجود ندارد"
+
+#: oc-includes/osclass/controller/item.php:488
+msgid "The comment is not active, you cannot delete it"
+msgstr "دیدگاه فعال نیست، شما نمی‌توانید آن را حذف کنید."
+
+#: oc-includes/osclass/controller/item.php:493
+msgid "The comment was not added by you, you cannot delete it"
+msgstr "دیدگاه توسط شما افزوده نشده و شما نمی‌توانید آن را حذف کنید"
+
+#: oc-admin/comments.php:199 oc-includes/osclass/controller/item.php:498
+msgid "The comment has been deleted"
+msgstr "دیدگاه حذف شده است"
+
+#: oc-includes/osclass/controller/login.php:26
+#: oc-includes/osclass/controller/register.php:27
+#: oc-includes/osclass/controller/user-non-secure.php:26
+#: oc-includes/osclass/controller/user.php:26
+msgid "Users not enabled"
+msgstr "کاربران فعال نشده‌اند"
+
+#: oc-includes/osclass/controller/login.php:37
+#: oc-includes/osclass/controller/register.php:50
+msgid "Users are not enabled"
+msgstr "کاربرها فعال نشده‌اند"
+
+#: oc-includes/osclass/controller/login.php:76
+#: oc-includes/osclass/controller/login.php:98
+msgid "The user doesn't exist"
+msgstr "کاربر وجود ندارد"
+
+#: oc-includes/osclass/controller/login.php:81
+msgid "The password is incorrect"
+msgstr "رمزعبور درست نیست"
+
+#: oc-includes/osclass/controller/login.php:100
+msgid "The user has not been validated yet"
+msgstr "کاربر هنوز تایید نشده است"
+
+#: oc-includes/osclass/controller/login.php:102
+msgid "The user has been suspended"
+msgstr "کاربر معلق شده است"
+
+#: oc-includes/osclass/controller/login.php:145
+msgid "Invalid email address"
+msgstr "ایمیل نامعتبر است"
+
+#: oc-includes/osclass/controller/login.php:154
+msgid "We have sent you an email with the instructions to reset your password"
+msgstr "یک ایمیل برای شما ارسال شد که حاوی دستورالعمل تنظیم مجدد رمزعبور است"
+
+#: oc-includes/osclass/controller/login.php:158
+msgid "We were not able to identify you given the information provided"
+msgstr "ما با توجه به اطلاعات ارائه شده قادر به شناسایی شما نیستیم"
+
+#: oc-includes/osclass/controller/login.php:162
+msgid "The recaptcha code is wrong"
+msgstr "کد reCAPTCHA اشتباه است"
+
+#: oc-admin/login.php:134 oc-admin/login.php:144
+#: oc-includes/osclass/controller/login.php:172
+#: oc-includes/osclass/controller/login.php:200
+#: oc-includes/osclass/controller/user-non-secure.php:55
+#: oc-includes/osclass/controller/user-non-secure.php:59
+msgid "Sorry, the link is not valid"
+msgstr "با عرض پوزش، آدرس پیوند معتبر نیست"
+
+#: oc-includes/osclass/controller/login.php:179
+#: oc-includes/osclass/controller/user.php:175
+msgid "Password cannot be blank"
+msgstr "رمزعبور نمی‌تواند خالی باشد"
+
+#: oc-admin/login.php:154 oc-includes/osclass/controller/login.php:193
+msgid "The password has been changed"
+msgstr "رمزعبور تغییر یافت"
+
+#: oc-includes/osclass/controller/login.php:196
+msgid "Error, the password don't match"
+msgstr "خطا، رمزعبورها باهم مطابقت ندارند"
+
+#: oc-includes/osclass/controller/register.php:32
+msgid "User registration is not enabled"
+msgstr "ثبت عضویت فعال نشده است"
+
+#: oc-includes/osclass/controller/register.php:70
+msgid "The user has been created. An activation email has been sent"
+msgstr "کاربر ایجاد شده است. ایمیل فعال‌سازی برای شما ارسال شده است"
+
+#: oc-includes/osclass/controller/register.php:73
+msgid "Your account has been created successfully"
+msgstr "حساب کاربری شما با موفقیت ساخته شد"
+
+#: oc-includes/osclass/controller/register.php:82
+#: oc-includes/osclass/controller/user.php:135
+msgid "The specified e-mail is already in use"
+msgstr "قبلا کاربری با این ایمیل ثبت نام کرده است"
+
+#: oc-includes/osclass/controller/register.php:88
+msgid "The email is not valid"
+msgstr "ایمیل نامعتبر است"
+
+#: oc-includes/osclass/controller/register.php:91
+msgid "The password cannot be empty"
+msgstr "رمزعبور نمی‌تواند خالی باشد"
+
+#: oc-admin/users.php:133 oc-includes/osclass/controller/register.php:94
+#: oc-includes/osclass/controller/user.php:190
+msgid "Passwords don't match"
+msgstr "رمزعبورها مطابقت ندارند"
+
+#: oc-includes/osclass/controller/register.php:115
+msgid "The link is not valid anymore. Sorry for the inconvenience!"
+msgstr "آدرس پیوند معتبر نیست. با عرض پوزش برای این مزاحمت ناخواسته!"
+
+#: oc-includes/osclass/controller/register.php:120
+msgid "Your account has already been validated"
+msgstr "حساب کاربری شما اکنون فعال شده است"
+
+#: oc-includes/osclass/controller/register.php:140
+msgid "Your account has been validated"
+msgstr "حساب کاربری شما تایید شده است"
+
+#: oc-includes/osclass/controller/user-non-secure.php:52
+msgid "Your email has been changed successfully"
+msgstr "ایمیل شما با موفقیت تغییر یافت"
+
+#: oc-includes/osclass/controller/user-non-secure.php:81
+#: oc-includes/osclass/controller/user.php:227
+msgid "Alert activated"
+msgstr "هشدار فعال شد"
+
+#: oc-includes/osclass/controller/user-non-secure.php:102
+#: oc-includes/osclass/controller/user.php:248
+msgid "Unsubscribed correctly"
+msgstr "لغو اشتراک به درستی انجام شد"
+
+#: oc-includes/osclass/controller/user.php:79
+msgid "Your profile has been updated successfully"
+msgstr "مشخصات کاربری شما با موفقیت بروز شده است"
+
+#: oc-admin/users.php:79 oc-includes/osclass/controller/user.php:111
+msgid "The specified e-mail is not valid"
+msgstr "ایمیل مشخص شده معتبر نیست"
+
+#: oc-includes/osclass/controller/user.php:180
+msgid "Current password doesn't match"
+msgstr "رمزعبور جاری مطابقت ندارد"
+
+#: oc-includes/osclass/controller/user.php:185
+msgid "Passwords can't be empty"
+msgstr "رمزعبور نمی‌تواند خالی باشد"
+
+#: oc-includes/osclass/controller/user.php:197
+msgid "Password has been changed"
+msgstr "رمزعبور تغییر یافت"
+
+#: oc-admin/admins.php:34 oc-admin/items.php:42
+#: oc-includes/osclass/core/AdminSecBaseModel.php:32
+msgid "You don't have enough permissions"
+msgstr "شما اجازه دسترسی کافی ندارید"
+
+#: oc-admin/admins.php:77 oc-admin/admins.php:177
+msgid "Email invalid"
+msgstr "ایمیل نامعتبر"
+
+#: oc-admin/admins.php:81 oc-admin/admins.php:181
+msgid "Username invalid"
+msgstr "نام کاربری نامعتبر"
+
+#: oc-admin/admins.php:85 oc-admin/admins.php:185
+msgid "Name invalid"
+msgstr "نام معتبر نیست"
+
+#: oc-admin/admins.php:89 oc-admin/admins.php:216
+msgid "Password invalid"
+msgstr "رمزعبور نامعتبر"
+
+#: oc-admin/admins.php:94
+msgid "Email already in use"
+msgstr "این ایمیل هم اکنون در حال استفاده است"
+
+#: oc-admin/admins.php:99
+msgid "Username already in use"
+msgstr "این نام کاربری هم اکنون در حال استفاده است"
+
+#: oc-admin/admins.php:122
+msgid "The admin has been added"
+msgstr "مدیر اضافه گردید"
+
+#: oc-admin/admins.php:192
+msgid "This admin doesn't exist"
+msgstr "این مدیر وجود ندارد"
+
+#: oc-admin/admins.php:198
+msgid "Existing email"
+msgstr "ایمیل موجود"
+
+#: oc-admin/admins.php:205
+msgid "Existing username"
+msgstr "نام کاربری موجود"
+
+#: oc-admin/admins.php:224 oc-admin/admins.php:234
+msgid "The password couldn't be updated. Passwords don't match"
+msgstr "رمزعبور را نمی‌توان بروز کرد. رمزعبورها مطابقت ندارند"
+
+#: oc-admin/admins.php:251
+msgid "The admin has been updated"
+msgstr "مدیر بروز شده است"
+
+#: oc-admin/admins.php:270
+msgid "The admin id isn't in the correct format"
+msgstr "شناسه مدیر در قالب درستی نیست"
+
+#: oc-admin/admins.php:276
+msgid "The operation hasn't been completed. You're trying to remove yourself!"
+msgstr "این عملیات تکمیل نشده است. خودتان برای حذف آن تلاش کنی!"
+
+#: oc-admin/admins.php:283
+msgid "The admin has been deleted correctly"
+msgstr "مدیر به درستی حذف گردید"
+
+#: oc-admin/admins.php:285
+msgid "The admin couldn't be deleted"
+msgstr "مدیر نمی‌توانست حذف گردد"
+
+#: oc-admin/tools.php:40 oc-admin/tools.php:66 oc-admin/tools.php:157
+#: oc-admin/tools.php:167 oc-admin/tools.php:182 oc-admin/tools.php:218
+#: oc-admin/tools.php:261 oc-admin/tools.php:288 oc-admin/tools.php:317
+msgid "This action cannot be done because it is a demo site"
+msgstr "این اقدام مقدور نیست.چون این سایت به صورت آزمایشی میباشد."
+
+#: oc-admin/appearance.php:51
+msgid "The theme folder is not writable"
+msgstr "پوشه پوسته‌ها قابل نوشتن نیست"
+
+#: oc-admin/appearance.php:54
+msgid "The theme has been installed correctly"
+msgstr "پوسته به درستی نصب گردید"
+
+#: oc-admin/appearance.php:57 oc-admin/languages.php:70 oc-admin/plugins.php:63
+msgid "The zip file is not valid"
+msgstr "فایل فشرده معتبر نیست"
+
+#: oc-admin/appearance.php:60 oc-admin/languages.php:73 oc-admin/plugins.php:66
+#: oc-admin/tools.php:58
+msgid "No file was uploaded"
+msgstr "هیچ فایلی هنوز آپلود نشده است"
+
+#: oc-admin/appearance.php:65
+msgid "There was a problem adding the theme"
+msgstr "مشکلاتی در افزودن پوسته رخ داد"
+
+#: oc-admin/appearance.php:82
+msgid "Theme removed successfully"
+msgstr "حذف قالب با موفقیت انجام شد"
+
+#: oc-admin/appearance.php:84
+msgid "There was a problem removing the theme"
+msgstr "خطایی در حذف پوسته رخ داده است"
+
+#: oc-admin/appearance.php:87
+msgid "Current theme can not be deleted"
+msgstr "پوسته فعلی نمیتواند حذف شود"
+
+#: oc-admin/appearance.php:90
+msgid "No theme selected"
+msgstr "پوسته ای انتخاب نشده است"
+
+#: oc-admin/appearance.php:119
+msgid "Widget removed correctly"
+msgstr "ابزارک به درستی حذف گردید"
+
+#: oc-admin/appearance.php:125 oc-admin/appearance.php:147
+msgid "Description field is required"
+msgstr "تکمیل کادر توضیحات لازم است"
+
+#: oc-admin/appearance.php:138
+msgid "Widget updated correctly"
+msgstr "ابزارک به درستی بروز شد"
+
+#: oc-admin/appearance.php:140
+msgid "Widget cannot be updated correctly"
+msgstr "ابزارک به درستی بروز نشد"
+
+#: oc-admin/appearance.php:159
+msgid "Widget added correctly"
+msgstr "ابزارک به درستی افزوده شد"
+
+#: oc-admin/appearance.php:169
+msgid "Theme activated correctly"
+msgstr "پوسته به درستی فعال شد"
+
+#: oc-admin/comments.php:56
+msgid "The comments have been deleted"
+msgstr "دیدگاه‌ها حذف شده‌اند"
+
+#: oc-admin/comments.php:69
+msgid "The comments have been approved"
+msgstr "دیدگاه‌هایی که مورد تایید قرار گرفته‌اند"
+
+#: oc-admin/comments.php:79
+msgid "The comments have been disapproved"
+msgstr "دیدگاه‌هایی که مورد تایید قرار نگرفته‌اند"
+
+#: oc-admin/comments.php:132
+msgid "The comment has been approved"
+msgstr "دیدگاه مورد تایید قرار گرفته است"
+
+#: oc-admin/comments.php:139
+msgid "The comment has been disapproved"
+msgstr "دیدگاه مورد تایید قرار نگرفته است"
+
+#: oc-admin/comments.php:146
+msgid "The comment has been enabled"
+msgstr "دیدگاه‌ها فعال شده‌اند"
+
+#: oc-admin/comments.php:153
+msgid "The comment has been disabled"
+msgstr "دیدگاه‌ها غیرفعال شده‌اند"
+
+#: oc-admin/comments.php:168
+msgid "Email is not correct"
+msgstr "پست الکترونیک صحیح نیست"
+
+#: oc-admin/comments.php:171
+msgid "Comment is required"
+msgstr "دیدگاه لازم است"
+
+#: oc-admin/comments.php:193
+msgid "Great! We just updated your comment"
+msgstr "دیدگاه شما بروز شد"
+
+#: oc-admin/emails.php:86
+msgid "The email/alert has been updated"
+msgstr "ایمیل/هشدار بروز شده است"
+
+#: oc-admin/emails.php:89 oc-admin/pages.php:106
+msgid "You can't repeat internal name"
+msgstr "شما نمی‌توانید نام داخلی را تکرار کنید"
+
+#: oc-admin/emails.php:91
+msgid "The email couldn't be updated, at least one title should not be empty"
+msgstr "ایمیل را نمی‌توان بروز کرد، حداقل یک عنوان باید خالی نباشد"
+
+#: oc-admin/items.php:63
+msgid "%d listing has been enabled"
+msgstr "%d آگهی فعال شده است"
+
+#: oc-admin/items.php:75
+msgid "%d listing has been disabled"
+msgstr "%d آگهی غیر فعال شده است"
+
+#: oc-admin/items.php:87
+msgid "%d listing has been activated"
+msgstr "%d آگهی مسدود شده است"
+
+#: oc-admin/items.php:99
+msgid "%d listing has been deactivated"
+msgstr "%d آگهی باز شده است"
+
+#: oc-admin/items.php:111
+msgid "%d listing has been marked as premium"
+msgstr "%d آگهی به عنوان ویژه علامت گذاری شده است"
+
+#: oc-admin/items.php:123 oc-admin/items.php:148
+msgid "%d change has been made"
+msgstr "%d تغییر ایجاد شده است"
+
+#: oc-admin/items.php:135
+msgid "%d listing has been marked as spam"
+msgstr "%d آگهی به عنوان هرز نامه علامت گذاری شده است"
+
+#: oc-admin/items.php:166
+msgid "%d listing has been deleted"
+msgstr "%d آگهی حذف شده است"
+
+#: oc-admin/items.php:183
+msgid "%d listing has been unmarked as spam"
+msgstr "%d آگهی از حالت علامت گذاری به عنوان هرز نامه درآمد"
+
+#: oc-admin/items.php:200
+msgid "%d listing has been unmarked as missclassified"
+msgstr "%d آگهی از حالت علامت گذاری به عنوان طبقه بندی نادرست درآمد"
+
+#: oc-admin/items.php:217
+msgid "%d listing has been unmarked as duplicated"
+msgstr "%d آگهی از حالت علامت گذاری به عنوان تکراری درآمد"
+
+#: oc-admin/items.php:234
+msgid "%d listing has been unmarked as expired"
+msgstr "%d آگهی از حالت علامت گذاری به عنوان تاریخ گذشته درآمد"
+
+#: oc-admin/items.php:251
+msgid "%d listing has been unmarked as offensive"
+msgstr "%d آگهی از حالت علامت گذاری به عنوان اهانت کننده درآمد"
+
+#: oc-admin/items.php:293
+msgid "The listing has been deleted"
+msgstr "آگهی حذف شده است"
+
+#: oc-admin/items.php:295
+msgid "The listing couldn't be deleted"
+msgstr "آگهی نمی تواند حذف شود"
+
+#: oc-admin/items.php:324
+msgid "The listing has been activated"
+msgstr "آگهی مسدود شده است"
+
+#: oc-admin/items.php:336
+msgid "The listing has been deactivated"
+msgstr "آگهی باز شده است"
+
+#: oc-admin/items.php:346
+msgid "The listing has been enabled"
+msgstr "آگهی فعال شده است"
+
+#: oc-admin/items.php:356
+msgid "The listing has been disabled"
+msgstr "آگهی غیر فعال شده است"
+
+#: oc-admin/items.php:385 oc-admin/items.php:411
+msgid "Changes have been applied"
+msgstr "تغییرات اعمال شده است"
+
+#: oc-admin/items.php:437
+msgid "The listing has been unmarked as"
+msgstr "آگهی از حالت علامت گذاری خارج شد به عنوان"
+
+#: oc-admin/items.php:439
+msgid "The listing hasn't been unmarked as"
+msgstr "آگهی از حالت علامت گذاری خارج نشد به عنوان"
+
+#: oc-admin/items.php:526
+msgid "Changes saved correctly"
+msgstr "تغییرات به درستی ذخیره شد"
+
+#: oc-admin/items.php:559 oc-admin/media.php:55 oc-admin/media.php:78
+msgid "Resource deleted"
+msgstr "منبع حذف شد"
+
+#: oc-admin/items.php:608
+msgid "A new listing has been added"
+msgstr "یک آگهی جدید اضافه شده است"
+
+#: oc-admin/items.php:708
+msgid "Listings' settings have been updated"
+msgstr "تنظیمات آگهی ها بروز شد"
+
+#: oc-admin/languages.php:59
+msgid "The translation folder is not writable"
+msgstr "پوشه ترجمه قابل نوشتن نیست"
+
+#: oc-admin/languages.php:63
+msgid "The language has been installed correctly"
+msgstr "زبان به درستی نصب گردید"
+
+#: oc-admin/languages.php:66 oc-admin/languages.php:78
+msgid "There was a problem adding the language"
+msgstr "خطایی در افزودن زبان وجود دارد"
+
+#: oc-admin/languages.php:88 oc-admin/languages.php:121
+msgid "Language id isn't in the correct format"
+msgstr "شناسه زبان در قالب معتبری نیست"
+
+#: oc-admin/languages.php:95
+msgid "Language id doesn't exist"
+msgstr "شناسه زبان وجود ندارد"
+
+#: oc-admin/languages.php:144
+msgid "Language name field is required"
+msgstr "فیلد نام زبان لازم است"
+
+#: oc-admin/languages.php:147
+msgid "Language short name field is required"
+msgstr "فیلد نام مخفف زبان لازم است"
+
+#: oc-admin/languages.php:150
+msgid "Language description field is required"
+msgstr "فیلد توضیح زبان لازم است"
+
+#: oc-admin/languages.php:153
+msgid "Currency format field is required"
+msgstr "فیلد قالب ارز لازم است"
+
+#: oc-admin/languages.php:177
+msgid "%s has been updated"
+msgstr "بروز شده است %s"
+
+#: oc-admin/languages.php:183
+msgid "Selected languages have been enabled for the website"
+msgstr "زبان‌های انتخاب شده برای وب‌سایت فعال شده‌اند"
+
+#: oc-admin/languages.php:190 oc-admin/languages.php:214
+#: oc-admin/languages.php:247 oc-admin/languages.php:271
+msgid "The language ids aren't in the correct format"
+msgstr "شناسه‌های زبان در قالب صحیح نیستند"
+
+#: oc-admin/languages.php:206
+msgid "Selected languages have been disabled for the website"
+msgstr "زبان‌های انتخاب شده برای وب‌سایت غیرفعال شده‌اند"
+
+#: oc-admin/languages.php:240
+msgid "Selected languages have been enabled for the backoffice (oc-admin)"
+msgstr "زبان‌های انتخاب شده برای صفحه مدیریت (او‌سی-ادمین) فعال شده است"
+
+#: oc-admin/languages.php:263
+msgid "Selected languages have been disabled for the backoffice (oc-admin)"
+msgstr "زبان‌های انتخاب شده برای صفحه مدیریت (او‌سی-ادمین) غیرفعال شده است"
+
+#: oc-admin/languages.php:220 oc-admin/languages.php:277
+msgid "%s can't be disabled because it's the default language"
+msgstr "%s نمی تواند غیر فعال شود زیرا زبان پیشفرض می باشد"
+
+#: oc-admin/languages.php:303
+msgid "Directory '%s' couldn't be removed"
+msgstr "پوشه '%s' نمی‌توانست حذف شود"
+
+#: oc-admin/languages.php:305
+msgid "Directory \"%s\" has been successfully removed"
+msgstr "با موفقیت حذف شده است \\\"%s\\\" دایرکتوری"
+
+#: oc-admin/languages.php:311
+msgid "Directory '%s' couldn't be removed because it's the default language. Set another language as default first and try again"
+msgstr "پوشه '%s' نمی‌توانست حذف شود زیرا مربوط به زبان پیش‌فرض است. زبان دیگری را به عنوان پیش‌فرض انتخاب کنید و سپس دوباره امتحان کنید"
+
+#: oc-admin/login.php:46
+msgid "The username field is empty"
+msgstr "فیلد نام کاربری خالی است"
+
+#: oc-admin/login.php:51
+msgid "The password field is empty"
+msgstr "فیلد رمزعبور خالی است"
+
+#: oc-admin/login.php:59
+msgid "Sorry, incorrect username. <a href=\"%s\">Have you lost your password?</a>"
+msgstr "متاسفانه، نام کاربری اشتباه است. <a href=\\\"%s\\\">آیا شما رمزعبورتان را فراموش کرده‌اید؟</a>"
+
+#: oc-admin/login.php:64
+msgid "Sorry, incorrect password. <a href=\"%s\">Have you lost your password?</a>"
+msgstr "متاسفانه، رمزعبور اشتباه است. <a href=\\\"%s\\\">آیا شما رمزعبورتان را فراموش کرده‌اید؟</a>"
+
+#: oc-admin/login.php:110
+msgid "The reCAPTCHA code is wrong"
+msgstr "کد کپچا اشتباه است"
+
+#: oc-admin/login.php:128
+msgid "A new password has been sent to your e-mail"
+msgstr "رمزعبور جدید به ایمیل شما ارسال شده است"
+
+#: oc-admin/login.php:157
+msgid "Error, the passwords don't match"
+msgstr "پسوردهای وارد شده یکسان نیستند"
+
+#: oc-admin/pages.php:86 oc-admin/pages.php:151
+msgid "You have to set a different internal name"
+msgstr "شما بایستی یک نام داخلی متفاوت انتخاب کنید"
+
+#: oc-admin/pages.php:103
+msgid "The page has been updated"
+msgstr "صفحه بروز شده است"
+
+#: oc-admin/pages.php:108
+msgid "The page couldn't be updated, at least one title should not be empty"
+msgstr "صفحه نمی‌تواند بروز شود، حداقل یک عنوان نباید خالی بماند"
+
+#: oc-admin/pages.php:81 oc-admin/pages.php:146
+msgid "You have to set an internal name"
+msgstr "شما باید یک نام داخلی انتخاب نمایید"
+
+#: oc-admin/pages.php:162
+msgid "The page has been added"
+msgstr "صفحه اضافه شده است"
+
+#: oc-admin/pages.php:165
+msgid "The page couldn't be added, at least one title should not be empty"
+msgstr "صفحه نمی‌تواند اضافه شود، حداقل یک عنوان نباید خالی بماند"
+
+#: oc-admin/pages.php:168
+msgid "Oops! That internal name is already in use. We can't make the changes"
+msgstr "اوه! این نام داخلی در حال حاضر در حال استفاده است. ما نمی توانیم تغییرات را ایجاد کنیم"
+
+#: oc-admin/pages.php:199
+msgid "One page can't be deleted because it is indelible"
+msgstr "صفحه نمی‌تواند حذف شود زیرا حذف‌نشدنی است"
+
+#: oc-admin/pages.php:201
+msgid "%s pages couldn't be deleted because they are indelible"
+msgstr "%s صفحات نمی توانند حذف شوند زیرا آنها ماندگار هستند"
+
+#: oc-admin/pages.php:206
+msgid "One page couldn't be deleted"
+msgstr "صفحه نمی‌تواند حذف شود"
+
+#: oc-admin/pages.php:208
+msgid "%s pages couldn't be deleted"
+msgstr "صفحه‌های %s نمی‌توانستند حذف شوند"
+
+#: oc-admin/pages.php:213
+msgid "One page has been deleted correctly"
+msgstr "صفحه به درستی حذف گردید"
+
+#: oc-admin/pages.php:215
+msgid "%s pages have been deleted correctly"
+msgstr "صفحه‌های %s به درستی حذف شدند"
+
+#: oc-admin/plugins.php:57
+msgid "The plugin folder is not writable"
+msgstr "پوشه افزونه قابل نوشتن نیست"
+
+#: oc-admin/plugins.php:60
+msgid "The plugin has been uploaded correctly"
+msgstr "افزونه به درستی بروزرسانی شد"
+
+#: oc-admin/plugins.php:71
+msgid "There was a problem adding the plugin"
+msgstr "خطایی در افزودن افزودنه وجود دارد"
+
+#: oc-admin/plugins.php:96
+msgid "Plugin is already installed"
+msgstr "افزونه در حال حاضر نصب است"
+
+#: oc-admin/plugins.php:99
+msgid "Plugin couldn't be installed because their files are missing"
+msgstr "افزونه نمی‌توانست نصب شود زیرا فایل‌هایش نیستند"
+
+#: oc-admin/plugins.php:102
+msgid "Plugin couldn't be installed because of: %s"
+msgstr "افزونه نمی‌توانست نصب شود زیرا: %s"
+
+#: oc-admin/plugins.php:105
+msgid "Plugin couldn't be installed"
+msgstr "افزونه نمی‌توانست نصب شود"
+
+#: oc-admin/plugins.php:109
+msgid "Plugin installed"
+msgstr "افزونه نصب شد"
+
+#: oc-admin/plugins.php:122
+msgid "Plugin uninstalled"
+msgstr "افزونه حذف شد"
+
+#: oc-admin/plugins.php:124
+msgid "Plugin couldn't be uninstalled"
+msgstr "افزونه نمی‌توانست حذف شود"
+
+#: oc-admin/plugins.php:137
+msgid "Plugin enabled"
+msgstr "افزونه فعال شد"
+
+#: oc-admin/plugins.php:139
+msgid "Plugin is already enabled"
+msgstr "افزونه در حال حاضر فعال است"
+
+#: oc-admin/plugins.php:152
+msgid "Plugin disabled"
+msgstr "افزونه غیر فعال شد"
+
+#: oc-admin/plugins.php:154
+msgid "Plugin is already disabled"
+msgstr "افزونه در حال حاضر غیرفعال است"
+
+#: oc-admin/plugins.php:224
+msgid "No plugin selected"
+msgstr "افزونه‌ای انتخاب نشده است"
+
+#: oc-admin/plugins.php:220
+msgid "Configuration was saved"
+msgstr "تنظیمات ذخیره شد"
+
+#: oc-admin/controller/settings/locations.php:39
+#: oc-admin/controller/settings/locations.php:146
+#: oc-admin/controller/settings/locations.php:175
+#: oc-admin/controller/settings/locations.php:253
+#: oc-admin/controller/settings/locations.php:282
+msgid "%s already was in the database"
+msgstr "%s در حال حاضر در پایگاه داده وجود دارد"
+
+#: oc-admin/controller/settings/locations.php:44
+#: oc-admin/controller/settings/locations.php:62
+msgid "%s has been added as a new country"
+msgstr "%s به عنوان یک کشور جدید اضافه شد"
+
+#: oc-admin/controller/settings/locations.php:76
+msgid "Country has been edited"
+msgstr "کشور ویرایش شده است"
+
+#: oc-admin/controller/settings/locations.php:78
+msgid "There were some problems editing the country"
+msgstr "مشکلی در ویرایش کشور بوجود آمد"
+
+#: oc-admin/controller/settings/locations.php:122
+#: oc-admin/controller/settings/locations.php:144
+msgid "%s has been added as a new region"
+msgstr "%s به عنوان منطقه جدید اضافه شده است"
+
+#: oc-admin/controller/settings/locations.php:172
+#: oc-admin/controller/settings/locations.php:280
+msgid "%s has been edited"
+msgstr "%s ویرایش شده است"
+
+#: oc-admin/controller/settings/locations.php:226
+#: oc-admin/controller/settings/locations.php:251
+msgid "%s has been added as a new city"
+msgstr "%s به عنوان شهر جدید اضافه شده است"
+
+#: oc-admin/controller/settings/permalinks.php:461
+msgid "One field was not updated"
+msgstr "یک فیلد بروزرسانی نشده است"
+
+#: oc-admin/controller/settings/permalinks.php:464
+#: oc-admin/controller/settings/permalinks.php:512
+msgid "Permalinks structure updated"
+msgstr "ساختار پیوندهای یکتا بروزرسانی شد"
+
+#: oc-admin/controller/settings/permalinks.php:473
+msgid "Permalinks structure updated."
+msgstr "ساختار پیوندهای یکتا بروزرسانی شد."
+
+#: oc-admin/controller/settings/permalinks.php:475
+msgid "However, we can't check if Apache module <b>mod_rewrite</b> is loaded. If you experience some problems with the URLs, you should deactivate <em>Friendly URLs</em>"
+msgstr "به هر حال اگر ماژول آپاچی <b>mod_rewrite</b> در حال لود باشد ما نمی توانیم چ کنیم. اگر شما بعضی مشکلات رو با آدرس ها دارید، شما باید <em>آدرس های دوستان</em> را غیر فعال کنید."
+
+#: oc-admin/controller/settings/permalinks.php:543
+msgid "Friendly URLs successfully deactivated"
+msgstr "آدرس های دوستان با موفقیت غیر فعال شده اند"
+
+#: oc-admin/controller/settings/spamnbots.php:61
+msgid "Your Akismet key has been cleared"
+msgstr "کلید Akismet شما پاک شده است"
+
+#: oc-admin/controller/settings/spamnbots.php:63
+msgid "Your Akismet key has been updated"
+msgstr "کلید Akismet شما بروزرسانی شده است"
+
+#: oc-admin/controller/settings/spamnbots.php:81
+msgid "Your reCAPTCHA key has been cleared"
+msgstr "کلید reCAPTCHA شما پاک شده است"
+
+#: oc-admin/controller/settings/spamnbots.php:83
+msgid "Your reCAPTCHA key has been updated"
+msgstr "کلید reCAPTCHA شما بروزرسانی شده است"
+
+#: oc-admin/controller/settings/currencies.php:55
+msgid "The currency code is not in the correct format"
+msgstr "کد ارز در قالب صحیح نیست"
+
+#: oc-admin/controller/settings/currencies.php:68
+msgid "Currency added"
+msgstr "ارز اضافه شد"
+
+#: oc-admin/controller/settings/currencies.php:70
+msgid "Currency couldn't be added"
+msgstr "ارز نمی‌توانست اضافه شود"
+
+#: oc-admin/controller/settings/currencies.php:81
+#: oc-admin/controller/settings/currencies.php:88
+msgid "The currency code '%s' doesn't exist"
+msgstr "کد ارز '%s' وجود ندارد"
+
+#: oc-admin/controller/settings/currencies.php:111
+msgid "Error: the currency code is not in the correct format"
+msgstr "خطاء: کد ارز در قالب صحیح نیست"
+
+#: oc-admin/controller/settings/currencies.php:124
+msgid "Currency updated"
+msgstr "ارز بروزرسانی شد"
+
+#: oc-admin/controller/settings/currencies.php:126
+msgid "No changes were made"
+msgstr "هیچ تغییری داده نشد"
+
+#: oc-admin/controller/settings/currencies.php:158
+msgid "No currencies have been deleted"
+msgstr "ارزی حذف نشده‌ است"
+
+#: oc-admin/controller/settings/currencies.php:162
+msgid "One currency has been deleted"
+msgstr "یک ازر حذف شده است"
+
+#: oc-admin/controller/settings/currencies.php:166
+msgid "%s currencies have been deleted"
+msgstr "%s ارز حذف شده است"
+
+#: oc-admin/controller/settings/mailserver.php:56
+msgid "Mail server type is incorrect"
+msgstr "نوع سرور ایمیل نادرست است"
+
+#: oc-admin/controller/settings/mailserver.php:82
+msgid "Mail server configuration has changed"
+msgstr "تنظیمات سرور ایمیل تغییر یافته است"
+
+#: oc-admin/controller/settings/media.php:108
+#: oc-admin/controller/settings/media.php:116
+msgid "There was a problem uploading the watermark image"
+msgstr "یک مشکل در آپلود تصویر واتر مارک وجود دارد"
+
+#: oc-admin/controller/settings/media.php:112
+msgid "The watermark image has to be a .PNG file"
+msgstr "تصاویر واترمارک به عنوان فایل .PNG است"
+
+#: oc-admin/controller/settings/media.php:160
+msgid "You cannot set a maximum file size higher than the one allowed in the PHP configuration: <b>%d KB</b>"
+msgstr "شما نمی توانید فایلی بیشتر از حداکثر مجاز تنظیم شده در تنظیمات PHP را قرار دهید: <b>%d KB</b>"
+
+#: oc-admin/controller/settings/media.php:205
+msgid "Media config has been updated"
+msgstr "نتظیمات رسانه بروز شده است"
+
+#: oc-admin/controller/settings/media.php:294 oc-admin/tools.php:151
+msgid "Re-generation complete"
+msgstr "بازتولید کامل شد"
+
+#: oc-admin/controller/settings/main.php:76
+msgid "Page title field is required"
+msgstr "فیلد عنوان صفحه لازم است"
+
+#: oc-admin/controller/settings/main.php:79
+msgid "Contact email field is required"
+msgstr "فیلد آدرس ایمیل تماس لازم است"
+
+#: oc-admin/controller/settings/main.php:178
+#: oc-admin/controller/settings/main.php:180
+msgid "General settings have been updated"
+msgstr "تنظیمات عمومی بروز شده است"
+
+#: oc-admin/controller/settings/latestsearches.php:49
+msgid "Custom number could not be left empty"
+msgstr "شماره سفارشی نمی تواند خالی باقی بماند"
+
+#: oc-admin/controller/settings/latestsearches.php:58
+msgid "Last search settings have been updated"
+msgstr "تنظیمات آخرین جستجو بروزرسانی شده‌اند"
+
+#: oc-admin/tools.php:53
+msgid "Import complete"
+msgstr "وارد کردن کامل شد"
+
+#: oc-admin/tools.php:55
+msgid "There was a problem importing data to the database"
+msgstr "مشکلی در وارد کردن داده‌ها به پایگاه داده وجود دارد"
+
+#: oc-admin/tools.php:161
+msgid "Recount category stats has been successful"
+msgstr "بازشماری آمار دسته‌بندی‌ها با موفقیت پایان یافته است"
+
+#: oc-admin/tools.php:198 oc-admin/tools.php:227
+msgid "Path is empty"
+msgstr "مسیر خالی است"
+
+#: oc-admin/tools.php:201 oc-admin/tools.php:230
+msgid "Could not connect with the database. Error: %s"
+msgstr "نمی‌توان به پایگاه داده وصل شد. خطاء: %s"
+
+#: oc-admin/tools.php:204 oc-admin/tools.php:236
+msgid "There are no tables to back up"
+msgstr "جدولی برای پشتیبان‌گیری نیست"
+
+#: oc-admin/tools.php:207 oc-admin/tools.php:239
+msgid "The folder is not writable"
+msgstr "پوشه قابل نوشتن نیست"
+
+#: oc-admin/tools.php:233
+msgid "Could not select the database. Error: %s"
+msgstr "%s :نمی توان پایگاه داده را انتخاب کرد.خطا"
+
+#: oc-admin/tools.php:327
+msgid "Maintenance mode is ON"
+msgstr "حالت تعمیر و نگهداری روشن است"
+
+#: oc-admin/tools.php:337
+msgid "Maintenance mode is OFF"
+msgstr "حالت تعمیر و نگهداری خاموش است"
+
+#: oc-admin/users.php:73
+msgid "The user has been created. We've sent an activation e-mail"
+msgstr "کاربر ساخته شد. یک ایمیل برای شما به منظور تایید حساب کاربری ارسال گردید"
+
+#: oc-admin/users.php:75
+msgid "The user has been created successfully"
+msgstr "کاربر با موفقیت ایجاد شد"
+
+#: oc-admin/users.php:77
+msgid "Sorry, but that e-mail is already in use"
+msgstr "با عرض پوزش، اما این ایمیل در حال حاضر در حال استفاده است"
+
+#: oc-admin/users.php:81
+msgid "Sorry, the password cannot be empty"
+msgstr "پوزش، رمزعبور نمی‌تواند خالی باشد"
+
+#: oc-admin/users.php:83
+msgid "Sorry, passwords don't match"
+msgstr "پوزش، رمزعبورها یکسان نیستند"
+
+#: oc-admin/users.php:136
+msgid "The user has been updated and activated"
+msgstr "کاربر بروزرسانی و فعال شده است "
+
+#: oc-admin/users.php:145
+msgid "The user has been updated"
+msgstr "کاربر بروز شده است"
+
+#: oc-admin/users.php:158 oc-admin/users.php:181 oc-admin/users.php:206
+#: oc-admin/users.php:230 oc-admin/users.php:254 oc-admin/users.php:278
+#: oc-admin/users.php:591
+msgid "User id isn't in the correct format"
+msgstr "شناسه کاربر در قالب معتبری نیست "
+
+#: oc-admin/users.php:170
+msgid "Activation email sent to one user"
+msgstr "ارسال ایمیل فعالسازی برای یک کاربر"
+
+#: oc-admin/users.php:193
+msgid "One user has been activated"
+msgstr "یک کاربر فعال شده است"
+
+#: oc-admin/users.php:218
+msgid "One user has been deactivated"
+msgstr "یک کاربر غیرفعال شده است"
+
+#: oc-admin/users.php:242
+msgid "One user has been unblocked"
+msgstr "یک کاربر از حالت مسدود درآمده است"
+
+#: oc-admin/users.php:266
+msgid "One user has been blocked"
+msgstr "یک کاربر مسدود شده است"
+
+#: oc-admin/users.php:293
+msgid "One user has been deleted"
+msgstr "یک کاربر حذف شده است"
+
+#: oc-includes/osclass/ItemActions.php:106
+#: oc-includes/osclass/ItemActions.php:316
+msgid "Title too short."
+msgstr "عنوان بیش از حد کوتاه است."
+
+#: oc-includes/osclass/ItemActions.php:107
+#: oc-includes/osclass/ItemActions.php:317
+msgid "Title too long."
+msgstr "عنوان بیش از حد طولانی است."
+
+#: oc-includes/osclass/ItemActions.php:119
+#: oc-includes/osclass/ItemActions.php:329
+msgid "Description too short."
+msgstr "توضیحات بیش از حد کوتاه است."
+
+#: oc-includes/osclass/ItemActions.php:120
+#: oc-includes/osclass/ItemActions.php:330
+msgid "Description too long."
+msgstr "توضیحات بیش از حد طولانی است."
+
+#: oc-includes/osclass/ItemActions.php:130
+#: oc-includes/osclass/ItemActions.php:335
+msgid "Category invalid."
+msgstr "دسته نامعتبر است."
+
+#: oc-includes/osclass/ItemActions.php:132
+#: oc-includes/osclass/ItemActions.php:337
+msgid "Price too long."
+msgstr "قیمت بیش از حد طولانی است."
+
+#: oc-includes/osclass/ItemActions.php:134
+msgid "Name too long."
+msgstr "نام بیش از حد طولانی است."
+
+#: oc-includes/osclass/ItemActions.php:135
+msgid "Email invalid."
+msgstr "ایمیل نامعتبر است."
+
+#: oc-includes/osclass/ItemActions.php:136
+#: oc-includes/osclass/ItemActions.php:339
+msgid "Country too short."
+msgstr "کشور بیش از حد کوتاه."
+
+#: oc-includes/osclass/ItemActions.php:137
+#: oc-includes/osclass/ItemActions.php:340
+msgid "Country too long."
+msgstr "کشور بیش از حد طولانی."
+
+#: oc-includes/osclass/ItemActions.php:138
+#: oc-includes/osclass/ItemActions.php:341
+msgid "Region too short."
+msgstr "استان خیلی کوتاه."
+
+#: oc-includes/osclass/ItemActions.php:139
+#: oc-includes/osclass/ItemActions.php:342
+msgid "Region too long."
+msgstr "استان بیش از حد طولانی."
+
+#: oc-includes/osclass/ItemActions.php:140
+#: oc-includes/osclass/ItemActions.php:343
+msgid "City too short."
+msgstr "شهر بیش از حد کوتاه است."
+
+#: oc-includes/osclass/ItemActions.php:141
+#: oc-includes/osclass/ItemActions.php:344
+msgid "City too long."
+msgstr "شهر بیش از حد طولانی است."
+
+#: oc-includes/osclass/ItemActions.php:142
+#: oc-includes/osclass/ItemActions.php:345
+msgid "Municipality too short."
+msgstr "شهر بیش از حد کوتاه است."
+
+#: oc-includes/osclass/ItemActions.php:143
+#: oc-includes/osclass/ItemActions.php:346
+msgid "Municipality too long."
+msgstr "شهر بیش از حد کوتاه است."
+
+#: oc-includes/osclass/ItemActions.php:144
+#: oc-includes/osclass/ItemActions.php:347
+msgid "Address too short."
+msgstr "آدرس خیلی کوتاه است."
+
+#: oc-includes/osclass/ItemActions.php:145
+#: oc-includes/osclass/ItemActions.php:348
+msgid "Address too long."
+msgstr "آدرس خیلی بلند است."
+
+#: oc-includes/osclass/ItemActions.php:146
+msgid "Too fast. You should wait a little to publish your ad."
+msgstr "خیلی سریع. شما برای انتشار آگهی خود باید کمی صبر کنید."
+
+#: oc-includes/osclass/ItemActions.php:161
+#: oc-includes/osclass/ItemActions.php:361
+msgid "%s field is required."
+msgstr "فیلد %s  الزامی است."
+
+#: oc-includes/osclass/ItemActions.php:1271
+msgid "One of the files you tried to upload exceeds the maximum size"
+msgstr "یکی از فایل‌های شما بیش از اندازه بزرگ است"
+
+#: oc-includes/osclass/controller/item.php:163
+msgid "Check your inbox to validate your listing"
+msgstr "لطفا صندوق پیام ها را بررسی کنید و آگهی خود را اضافه نمایید."
+
+#: oc-admin/comments.php:92
+msgid "The comments have been unblocked"
+msgstr "دیدگاه ها آزاد است"
+
+#: oc-admin/comments.php:102
+msgid "The comments have been blocked"
+msgstr "دیدگاه ها بسته است"
+
+#: oc-admin/items.php:268
+msgid "%d listing has been unmarked"
+msgstr "%d آگهی از حالت علامت گذاری خارج شد"
+
+#: oc-admin/controller/settings/main.php:33
+msgid "Last check"
+msgstr "آخرین بررسی"
+
+#: oc-admin/main.php:74
+msgid "Entered an invalid email"
+msgstr "ایمیل نامعتبر وارد شده است"
+
+#: oc-admin/main.php:77
+msgid "You're already subscribed"
+msgstr "در حال حاضر شما ثبت‌نام کرده‌اید"
+
+#: oc-admin/main.php:80
+msgid "Subscribed correctly"
+msgstr "موفقیت در عضویت"
+
+#: oc-admin/main.php:83
+msgid "Error subscribing"
+msgstr "خطای عضویت"
+
+#: oc-includes/osclass/core/AdminSecBaseModel.php:66
+msgid "Thank you very much for your donation"
+msgstr "از کمک مالی شما بسیار سپاسگزاریم"
+
+#: oc-admin/tools.php:210 oc-admin/tools.php:242
+msgid "Backup completed successfully"
+msgstr "بک آپ کامل با موفقیت صورت گرفت"
+
+#: oc-admin/controller/settings/locations.php:47
+msgid "Country code and name should have at least two characters"
+msgstr "کد کشور و نام می بایست حداقل دو کاراکتر داشته باشد"
+
+#: oc-admin/languages.php:308
+msgid "Directory '%s' couldn't be removed;)"
+msgstr "دایرکتوری '%s' نمی تواند حذف شود;)"
+
+#: oc-admin/main.php:65
+msgid "You have very few free space left, users will not be able to upload pictures"
+msgstr "شما فضای بسیار کمی در سمت چپ دارید، کاربران قادر به آپلود تصاویر نخواهند بود"
+
+#: oc-admin/controller/settings/comments.php:52
+msgid "Number of moderate comments must only contain numeric characters"
+msgstr "تعداد ناظم های نظرات فقط باید شامل کاراکترهای عددی باشند"
+
+#: oc-admin/controller/settings/comments.php:55
+msgid "Comments per page must only contain numeric characters"
+msgstr "نظرات در هر صفحه فقط باید شامل کاراکترهای عددی باشند"
+
+#: oc-admin/controller/settings/comments.php:82
+msgid "Comment settings have been updated"
+msgstr "تنظیمات نظرات بروز رسانی شدند"
+
+#: oc-admin/controller/settings/locations.php:71
+msgid "Country name cannot be blank"
+msgstr "نام کشور نمی تواند خالی باشد."
+
+#: oc-admin/controller/settings/locations.php:101
+#: oc-admin/controller/settings/locations.php:205
+#: oc-admin/controller/settings/locations.php:309
+msgid "There was a problem deleting locations"
+msgstr "در حذف موقعیت ها مشکلی وجود دارد"
+
+#: oc-admin/controller/settings/locations.php:104
+msgid "No country was selected"
+msgstr "هیچ کشوری انتخاب نشده"
+
+#: oc-admin/controller/settings/locations.php:124
+#: oc-admin/controller/settings/locations.php:228
+msgid "%s can't be added"
+msgstr "نمیتواند اضافه شود %s "
+
+#: oc-admin/controller/settings/locations.php:134
+#: oc-admin/controller/settings/locations.php:159
+msgid "Region name cannot be blank"
+msgstr "نام استان نمی تواند خالی باشد"
+
+#: oc-admin/controller/settings/locations.php:208
+msgid "No region was selected"
+msgstr "هیچ استانی انتخاب نشده"
+
+#: oc-admin/controller/settings/locations.php:239
+msgid "New city name cannot be blank"
+msgstr "نام شهر جدید نمی تواند خالی باشد."
+
+#: oc-admin/controller/settings/locations.php:267
+msgid "City name cannot be blank"
+msgstr "نام شهر نمی تواند خالی باشد."
+
+#: oc-admin/controller/settings/locations.php:312
+msgid "No city was selected"
+msgstr "هیچ شهر انتخاب نشده"
+
+#: oc-admin/controller/settings/permalinks.php:461
+msgid "All fields are required."
+msgstr "تمامی فیلدها لازم هستند."
+
+#: oc-admin/controller/settings/permalinks.php:482
+#: oc-admin/controller/settings/permalinks.php:492
+msgid "File <b>.htaccess</b> couldn't be filled out with the right content."
+msgstr "فایل <b>.htaccess</b> نمی تواند با محتوای درست پر شود"
+
+#: oc-admin/controller/settings/permalinks.php:484
+msgid "Here's the content you have to add to the <b>.htaccess</b> file. If you can't create the file, please deactivate the <em>Friendly URLs</em> option."
+msgstr "برای محتوای اینجا شما باید فایل <b>.htaccess</b> را اضافه کنید. اگر شما نمی توانید فایل را ایجاد کنید، لطفا گزینه <em>آدرس های دوستان</em> را غیر فعال کنید"
+
+#: oc-admin/controller/settings/permalinks.php:494
+msgid "Here's the content you have to add to the <b>.htaccess</b> file. If you can't create the file or experience some problems with the URLs, please deactivate the <em>Friendly URLs</em> option."
+msgstr "برای محتوای اینجا شما باید فایل <b>.htaccess</b> را اضافه کنید. اگر شما نمی توانید فایل را ایجاد کنید یا برخی مشکلات در آدرس ها وجود دارد، لطفا گزینه <em>آدرس های دوستان</em> را غیر فعال کنید."
+
+#: oc-admin/controller/settings/currencies.php:148
+msgid "%s couldn't be deleted because it has listings associated to it"
+msgstr "%s را نمی توانید حذف کنید زیرا این آگهی ها مربوط به آن هستند"
+
+#: oc-admin/controller/settings/currencies.php:150
+msgid "%s couldn't be deleted because it's the default currency"
+msgstr "%s را نمی توانید حذف کنید زیرا آین به عنوان ارز پیشفرض می باشد"
+
+#: oc-admin/controller/settings/main.php:82
+msgid "Number of listings in the RSS has to be a numeric value"
+msgstr "تعداد آگهی های در RSS باید یک مقدار عددی باشند"
+
+#: oc-admin/controller/settings/main.php:85
+msgid "Max latest listings has to be a numeric value"
+msgstr "حداکثر آخرین آگهی ها باید یک مقدار عددی باشند"
+
+#: oc-admin/controller/settings/main.php:88
+msgid "Number of listings on search has to be a numeric value"
+msgstr "تعداد آگهی های در جستجو باید یک مقدار عددی باشند"
+
+#: oc-admin/controller/settings/main.php:145
+msgid "Number of listings in the RSS must be an integer"
+msgstr "تعداد آگهی های RSS باید یک عدد صحیح باشند "
+
+#: oc-admin/controller/settings/main.php:155
+msgid "Number of recent listings displayed at home must be an integer"
+msgstr "تعداد آگهی های اخیر نمایش داده شده در صفحه اصلی باید یک عدد صحیح باشند"
+
+#: oc-admin/themes/modern/market/header.php:5
+msgid "<code>downloads</code> folder has to be writable, i.e.: <code>chmod a+w %soc-content/downloads/</code>"
+msgstr "پوشه <code>downloads</code> قابل نوشتن است، به عنوان مثال: <code>chmod a+w %soc-content/downloads/</code>"
+
+#: oc-admin/tools.php:268 oc-admin/tools.php:305
+msgid "Archived successfully!"
+msgstr "با موفقیت آرشیو شد !"
+
+#: oc-admin/tools.php:282 oc-admin/tools.php:308
+msgid "Error, the zip file was not created in the specified directory"
+msgstr "خطا ! فایل زیپ در پوشه مشخص شده ایجاد نشده است"
+
+#: oc-admin/tools.php:329
+msgid "There was an error creating the .maintenance file, please create it manually at the root folder"
+msgstr "خطایی در ایجاد فایل حفاظتی وجود دارد.لطفا آن را به صورت دستی در پوشه اصلی ایجاد کنید."
+
+#: oc-admin/tools.php:339
+msgid "There was an error removing the .maintenance file, please remove it manually from the root folder"
+msgstr "خطایی در حذف فایل حفاظتی وجود دارد.لطفا آن را به صورت دستی از پوشه اصلی حذف نمایید"
+
+#: oc-admin/users.php:168
+msgid "No users have been selected"
+msgstr "کاربری انتخاب نشده است"
+
+#: oc-admin/users.php:191
+msgid "No users have been activated"
+msgstr "کاربران فعال شده اند"
+
+#: oc-admin/users.php:216
+msgid "No users have been deactivated"
+msgstr "کاربران غیرفعال شده اند"
+
+#: oc-admin/users.php:240
+msgid "No users have been enabled"
+msgstr "کاربران فعال شده اند"
+
+#: oc-admin/users.php:264
+msgid "No users have been disabled"
+msgstr "کاربری غیرفعال نشده است"
+
+#: oc-admin/users.php:291
+msgid "No users have been deleted"
+msgstr "کاربری برای حذف کردن وجود ندارد"
+
+#: oc-admin/users.php:304 oc-admin/users.php:338
+msgid "Alert id isn't in the correct format"
+msgstr "شناسه هشدار در فرمت صحیح نیست"
+
+#: oc-admin/users.php:319
+msgid "No alerts have been deleted"
+msgstr "هیچ هشداری حذف نشده"
+
+#: oc-admin/users.php:321
+msgid "One alert has been deleted"
+msgstr "یک هشدار حذف شده است"
+
+#: oc-admin/users.php:358
+msgid "No alerts have been activated"
+msgstr "هیچ هشداری فعال نشده است"
+
+#: oc-admin/users.php:360
+msgid "One alert has been activated"
+msgstr "یک هشدار فعال شده است"
+
+#: oc-admin/users.php:364
+msgid "No alerts have been deactivated"
+msgstr "هیچ هشداری غیر فعال نشده است"
+
+#: oc-admin/users.php:366
+msgid "One alert has been deactivated"
+msgstr "یک هشدار غیر فعال شده است"
+
+#: oc-admin/users.php:419
+msgid "User settings have been updated"
+msgstr "تنظیمات بروز شد"
+
+#: oc-admin/users.php:562 oc-admin/users.php:577
+msgid "Both rules can not be empty"
+msgstr "هر دو دسوتر بن نمی تواند خالی باشد"
+
+#: oc-admin/users.php:567
+msgid "Rule updated correctly"
+msgstr "دستور بن بدرستی بروز شد"
+
+#: oc-admin/users.php:582
+msgid "Rule saved correctly"
+msgstr "دستور بن به درستی ذخیره شد"
+
+#: oc-admin/users.php:603
+msgid "No rules have been deleted"
+msgstr "هیچ دستور بنی حذف نشده"
+
+#: oc-admin/users.php:605
+msgid "One ban rule has been deleted"
+msgstr "یک دستور بن حذف شده است"
+
+#: oc-includes/osclass/ItemActions.php:91
+#: oc-includes/osclass/ItemActions.php:301
+msgid "Image with an incorrect extension."
+msgstr "پسوند تصویر نادرست است"
+
+#: oc-includes/osclass/ItemActions.php:94
+#: oc-includes/osclass/ItemActions.php:304
+msgid "Image is too big. Max. size"
+msgstr "تصویر بیش از حد بزرگ است . حداکثر اندازه : "
+
+#: oc-includes/osclass/ItemActions.php:131
+#: oc-includes/osclass/ItemActions.php:336
+msgid "Price must be a number."
+msgstr "قیمت باید به صورت \" عدد \" باشد"
+
+#: oc-includes/osclass/ItemActions.php:848
+msgid "We just sent your message to %s"
+msgstr "پیام شما به %s ارسال شد."
+
+#: oc-includes/osclass/ItemActions.php:1326
+msgid "The file you tried to upload does not have a valid extension"
+msgstr "فایل شما پسوند مجاز برای آپلود ندارد"
+
+#: oc-includes/osclass/controller/contact.php:60
+msgid "Please enter a correct email"
+msgstr "لطفا یک ایمل صحیح و معتبر وارد کنید."
+
+#: oc-includes/osclass/controller/contact.php:100
+msgid "There have been some errors sending the message"
+msgstr "خطایی در ارسال پیام رخ داده است."
+
+#: oc-includes/osclass/controller/contact.php:118
+msgid "Your email has been sent properly. Thank you for contacting us!"
+msgstr "‬پیام شما با موفقیت ارسال شد."
+
+#: oc-includes/osclass/controller/item.php:136
+msgid "A user with that email address already exists, if it is you, please log in"
+msgstr "قبلا کاربری با این ایمیل ثبت نام کرده است.اگر متعلق به شما است لطفا وارد سیستم شوید."
+
+#: oc-includes/osclass/controller/contact.php:52
+#: oc-includes/osclass/controller/item.php:143
+#: oc-includes/osclass/controller/item.php:397
+#: oc-includes/osclass/controller/login.php:87
+#: oc-includes/osclass/controller/register.php:58
+msgid "Your current email is not allowed"
+msgstr "ایمیل کنونی شما اجازه ندارد"
+
+#: oc-includes/osclass/controller/contact.php:55
+#: oc-includes/osclass/controller/item.php:146
+#: oc-includes/osclass/controller/item.php:400
+#: oc-includes/osclass/controller/login.php:90
+#: oc-includes/osclass/controller/register.php:61
+msgid "Your current IP is not allowed"
+msgstr "آی پی فعلی شما اجازه ندارد"
+
+#: oc-includes/osclass/controller/item.php:194
+msgid "Sorry, we don't have any listings with that ID"
+msgstr "با عرض پوزش ! آگهیی با این شناسه ندارد"
+
+#: oc-includes/osclass/controller/item.php:521
+msgid "The listing hasn't been validated. Please validate it in order to make it public"
+msgstr "آگهی معتبر نیست . لطفا برای خرید اعتبار اینجا کلیک کنید"
+
+#: oc-includes/osclass/controller/login.php:127
+msgid "This should never happen"
+msgstr "این اتفاق هرگز نباید رخ می داد !"
+
+#: oc-includes/osclass/controller/register.php:85
+msgid "The reCAPTCHA was not entered correctly"
+msgstr "کد reCAPTCHA به درستی وارد نشده است"
+
+#: oc-admin/users.php:85 oc-includes/osclass/controller/register.php:97
+msgid "Username is already taken"
+msgstr "نام کاربری قبلاً گرفته شده است"
+
+#: oc-admin/users.php:87 oc-includes/osclass/controller/register.php:100
+#: oc-includes/osclass/controller/user.php:159
+msgid "The specified username is not valid, it contains some invalid words"
+msgstr "نام کاربری مشخص شده معتبر نیست، آن حاوی برخی از کلمات غیر معتبر می باشد"
+
+#: oc-includes/osclass/controller/user-non-secure.php:83
+#: oc-includes/osclass/controller/user.php:229
+msgid "Oops! There was a problem trying to activate your alert. Please contact an administrator"
+msgstr "اوه ! مشکلی در فعال سازی وجود دارد . لطفا با مدیریت تماس بگیرید"
+
+#: oc-includes/osclass/controller/user-non-secure.php:104
+#: oc-includes/osclass/controller/user.php:250
+msgid "Oops! There was a problem trying to unsubscribe you. Please contact an administrator"
+msgstr "اوه ! مشکلی در لغو اشتراک شما وجود دارد . لطفا با مدیریت تماس بگیرید"
+
+#: oc-includes/osclass/controller/user.php:149
+msgid "The specified username is already in use"
+msgstr "قبلا کاربری با این نام ثبت نام کرده است"
+
+#: oc-includes/osclass/controller/user.php:155
+msgid "The username was updated"
+msgstr "نام کاربری بروز شد"
+
+#: oc-includes/osclass/controller/user.php:163
+msgid "The specified username could not be empty"
+msgstr "نام کاربری تعیین شده نمی تواند خالی باشد"
+
+#: oc-includes/osclass/controller/user.php:298
+msgid "Your account have been deleted"
+msgstr "حساب کاربری شما حذف شده است"
+
+#: oc-includes/osclass/controller/user.php:301
+#: oc-includes/osclass/controller/user.php:305
+msgid "Oops! you can not do that"
+msgstr "اوه! شما که نمی توانید آن را انجام دهید "
+
+#: oc-includes/osclass/emails.php:470
+msgid "We've sent you an e-mail. Follow its instructions to validate the changes"
+msgstr "ایمیلی برای شما ارسال شده است.طبق دستورالعمل درون ایمیل تغییرات را انجام دهید."
+
+#: oc-includes/osclass/emails.php:472
+msgid "We tried to sent you an e-mail, but it failed. Please, contact an administrator"
+msgstr "ما تلاش میکنیم برای شما ایمیلی بفرستیم ولی این امر ناموفق است.لطفا با مدیریت تماس بگیرید"
+
+#: oc-admin/items.php:326 oc-admin/items.php:338 oc-admin/items.php:348
+#: oc-admin/items.php:358 oc-admin/items.php:387 oc-admin/items.php:413
+#: oc-admin/items.php:557
+msgid "An error has occurred"
+msgstr "یک حطا رخ داده است"
+
+#: oc-admin/admins.php:54 oc-admin/admins.php:147 oc-admin/admins.php:261
+#: oc-admin/appearance.php:38 oc-admin/appearance.php:74
+#: oc-admin/controller/settings/mailserver.php:35
+#: oc-admin/controller/settings/media.php:212 oc-admin/languages.php:45
+#: oc-admin/login.php:100 oc-admin/plugins.php:44 oc-admin/plugins.php:80
+#: oc-admin/plugins.php:116 oc-admin/plugins.php:131 oc-admin/plugins.php:146
+msgid "This action can't be done because it's a demo site"
+msgstr "این کار را نمیتوان انجام داد.چون این یک سایت آزمایشی است"
+
+#: oc-admin/admins.php:124
+msgid "There has been an error adding a new admin"
+msgstr "خطایی در ایجاد مدیر جدید رخ داده است"
+
+#: oc-admin/admins.php:139
+msgid "There is no admin with this id"
+msgstr "مدیری با این شناسه وجود ندارد"
+
+#: oc-admin/items.php:328
+msgid "The listing can't be activated because it's blocked"
+msgstr "آگهی نمی تواند فعال شود زیرا مسدود شده است"
+
+#: oc-admin/items.php:655
+msgid "Wait time must only contain numeric characters"
+msgstr "زمان انتظار فقط باید حاوی کاراکترهای عددی باشد"
+
+#: oc-admin/items.php:658
+msgid "Number of moderated listings must only contain numeric characters"
+msgstr "تعداد ناظمان آگهی ها فقط باید حاوی کاراکترهای عددی باشد"
+
+#: oc-admin/items.php:661
+msgid "Images per listing must only contain numeric characters"
+msgstr "تعداد عکس ها در آگهی فقط باید حاوی کاراکترهای عددی باشد"
+
+#: oc-admin/languages.php:156
+msgid "Number of decimals must only contain numeric characters"
+msgstr "تعداد اعشار فقط باید حاوی کاراکترهای عددی باشد"

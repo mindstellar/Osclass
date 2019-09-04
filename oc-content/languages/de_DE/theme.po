@@ -1,0 +1,827 @@
+# Translation of Bender in German
+# This file is distributed under the same license as the Bender package.
+msgid ""
+msgstr ""
+"PO-Revision-Date: 2014-08-12 13:30:15+0000\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: GlotPress/0.1\n"
+"Project-Id-Version: Bender\n"
+
+#: 404.php:35
+msgid "<strong>Search</strong> for it:"
+msgstr "<strong>´Suchen</strong> nach:"
+
+#: admin/settings.php:59
+msgid "Gallery"
+msgstr "Gallerie"
+
+#: 404.php:40 header.php:73
+msgid "Search"
+msgstr "Suche"
+
+#: 404.php:30
+msgid "Sorry but I can't find the page you're looking for"
+msgstr "Entschuldigung, leider kann die Seite nach der Sie suchen nicht gefunden werden"
+
+#: admin/header.php:85
+msgid "To make a directory writable under UNIX execute this command from the shell:"
+msgstr "Um das Verzeichnis unter UNIX beschreibbar zu machen, führen Sie folgenden Befehl in der Kommandoeingabe aus:"
+
+#: 404.php:44
+msgid "<strong>Look</strong> for it in the most popular categories."
+msgstr "<strong>Suche</strong>in den beliebtesten Kategorien"
+
+#: admin/header.php:80
+msgid "Please make the aforementioned image folder writable."
+msgstr "Bitte machen Sie den genannten Ordner beschreibbar!"
+
+#: admin/header.php:69
+msgid "Upload"
+msgstr "Hochladen"
+
+#: admin/header.php:29 functions.php:543
+msgid "Header logo"
+msgstr "Logo Navigationsleiste"
+
+#: admin/header.php:35
+msgid "Preview"
+msgstr "Vorschau"
+
+#: admin/header.php:42
+msgid "Remove logo"
+msgstr "Logo entfernen"
+
+#: admin/header.php:49
+msgid "No logo has been uploaded yet"
+msgstr "Noch kein Logo hochgeladen"
+
+#: admin/header.php:52
+msgid "Upload logo"
+msgstr "Logo hochladen"
+
+#: admin/header.php:53
+msgid "The preferred size of the logo is 600x100."
+msgstr "Die ideale Größe des Logos beträgt 600x100px"
+
+#: admin/header.php:55
+msgid "<strong>Note:</strong> Uploading another logo will overwrite the current logo."
+msgstr "<strong>Achtung:</strong> Beim Hochladen eines neuen Logos wird das derzeitige Logo überschrieben"
+
+#: admin/header.php:63
+msgid "Logo image (png,gif,jpg)"
+msgstr "Logo (png,gif,jpg)"
+
+#: admin/settings.php:52
+msgid "Search placeholder"
+msgstr "Platzhalter"
+
+#: admin/settings.php:56
+msgid "Show lists as:"
+msgstr "Anzeigen darstellen als:"
+
+#: admin/header.php:78
+msgid "The images folder <strong>%s</strong> is not writable on your server"
+msgstr "Der Bilder Ordner auf Ihrem Server <strong>%s</strong> ist leider nicht beschreibbar."
+
+#: admin/settings.php:36
+msgid "I would like to contribute to the development of Osclass with a donation of"
+msgstr "Ich will die Entwicklung von Osclass unterstüzten und bin bereit zu einer Spende von"
+
+#: 404.php:32
+msgid "Let us help you, we have got a few tips for you to find it."
+msgstr "Lassen Sie sich Tipps von uns geben, damit Sie finden, nach was Sie suchen."
+
+#: admin/settings.php:41
+msgid "Custom"
+msgstr "Benutzerdefiniert"
+
+#: admin/settings.php:42
+msgid "Donate"
+msgstr "Spenden"
+
+#: admin/settings.php:46 functions.php:544
+msgid "Theme settings"
+msgstr "Design Einstellungen"
+
+#: admin/header.php:79
+msgid "Osclass can't upload the logo image from the administration panel."
+msgstr "Ossclass kann das Logo leider nicht vom Administrations Panel aus hochladen."
+
+#: admin/settings.php:60 main.php:45 search.php:80
+msgid "List"
+msgstr "Liste"
+
+#: admin/settings.php:65
+msgid "Footer link"
+msgstr "Link in der Fußzeile"
+
+#: admin/settings.php:67
+msgid "I want to help Osclass by linking to <a href=\"http://osclass.org/\" target=\"_blank\">osclass.org</a> from my site with the following text:"
+msgstr "I möchte Osclass helfen, indem ich einen Link <a href=\"http://osclass.org/\" target=\"_blank\">osclass.org</a> auf meiner Seite mit folgendem Text anzeige:"
+
+#: admin/settings.php:68
+msgid "This website is proudly using the <a title=\"Osclass web\" href=\"http://osclass.org/\">classifieds scripts</a> software <strong>Osclass</strong>"
+msgstr "Diese Website ist stolz darauf, basierend auf der Software von <a title=\"Osclass web\" href=\"http://osclass.org/\">classifieds scripts</a><strong></strong> zu laufen."
+
+#: admin/settings.php:72
+msgid "Save changes"
+msgstr "Änderungen speichern"
+
+#: alert-form.php:27
+msgid "You have sucessfully subscribed to the alert"
+msgstr "Sie haben die Anzeige erfolgreich abonniert"
+
+#: alert-form.php:28 user-change_email.php:77
+msgid "Invalid email address"
+msgstr "Ungültige E-Mail Adresse"
+
+#: alert-form.php:29
+msgid "There was a problem with the alert"
+msgstr "Es gab ein Problem mit dieser Anzeige"
+
+#: alert-form.php:60
+msgid "Subscribe to this search"
+msgstr "Diese Suche abonnieren"
+
+#: alert-form.php:75
+msgid "Subscribe now"
+msgstr "Jetzt abonnieren"
+
+#: common/head.php:25 item.php:163 loop-single-premium.php:48
+#: loop-single.php:48
+msgid "Delete"
+msgstr "Löschen"
+
+#: common/head.php:26
+msgid "Cancel"
+msgstr "Abbrechen"
+
+#: contact.php:31
+msgid "Contact us"
+msgstr "Kontakt"
+
+#: contact.php:40 item-send-friend.php:44 item-sidebar.php:76 item.php:189
+#: user-public-sidebar.php:33
+msgid "Your name"
+msgstr "Ihr Name"
+
+#: contact.php:41 contact.php:54 item-sidebar.php:84 user-public-sidebar.php:41
+msgid "optional"
+msgstr "optional"
+
+#: contact.php:47 user-public-sidebar.php:37
+msgid "Your email address"
+msgstr "Ihre E-Mail Adresse"
+
+#: contact.php:53
+msgid "Subject"
+msgstr "Betreff"
+
+#: contact.php:60 item-send-friend.php:78 item-sidebar.php:89
+#: user-public-sidebar.php:46
+msgid "Message"
+msgstr "Nachricht"
+
+#: contact.php:68 item-send-friend.php:87 item-sidebar.php:119 item.php:214
+#: user-public-sidebar.php:69
+msgid "Send"
+msgstr "Senden"
+
+#: footer.php:35 header.php:42
+msgid "Hi %s"
+msgstr "Hallo %s"
+
+#: footer.php:36 header.php:43
+msgid "My account"
+msgstr "Mein Account"
+
+#: footer.php:37 header.php:44
+msgid "Logout"
+msgstr "Ausloggen"
+
+#: footer.php:40 functions.php:372 header.php:47 item-sidebar.php:54
+msgid "Login"
+msgstr "Login"
+
+#: footer.php:43 header.php:49 item-sidebar.php:55 user-login.php:58
+msgid "Register for a free account"
+msgstr "Benutzerkonto registrieren"
+
+#: footer.php:50 header.php:54
+msgid "Publish your ad for free"
+msgstr "Anzeige gratis veröffentlichen"
+
+#: footer.php:65 functions.php:376 user-public-sidebar.php:26
+msgid "Contact"
+msgstr "Kontakt"
+
+#: footer.php:75
+msgid "Language:"
+msgstr "Sprache:"
+
+#: functions.php:29
+msgid "ie. PHP Programmer"
+msgstr "z.B. PHP Programmierer"
+
+#: functions.php:357 item-post.php:40
+msgid "Publish a listing"
+msgstr "Eine Anzeige veröffentlichen"
+
+#: functions.php:358
+msgid "Edit your listing"
+msgstr "Anzeige bearbeiten"
+
+#: functions.php:359 item-send-friend.php:31
+msgid "Send to a friend"
+msgstr "An einen Freund senden"
+
+#: functions.php:360 item-sidebar.php:40
+msgid "Contact publisher"
+msgstr "Zuständige Person kontaktieren"
+
+#: functions.php:361
+msgid "Search results"
+msgstr "Suchresultate"
+
+#: functions.php:362
+msgid "Search results: %s"
+msgstr "Resultate der Suche: %s"
+
+#: functions.php:363
+msgid "Dashboard"
+msgstr "Übersicht"
+
+#: functions.php:364
+msgid "%s's profile"
+msgstr "Profil von %s"
+
+#: functions.php:365 functions.php:414
+msgid "Account"
+msgstr "Benutzerkonto"
+
+#: functions.php:366 functions.php:404 search.php:128 user-alerts.php:51
+msgid "Listings"
+msgstr "Anzeigen"
+
+#: functions.php:367 functions.php:409 user-alerts.php:32 user-alerts.php:37
+msgid "Alerts"
+msgstr "Abonnements"
+
+#: functions.php:368 user-profile.php:32 user-profile.php:37
+msgid "Update account"
+msgstr "Benutzerkonto aktualisieren"
+
+#: functions.php:369 functions.php:419
+msgid "Change email"
+msgstr "E-Mail Adresse ändern"
+
+#: functions.php:370 functions.php:424 user-change_username.php:34
+#: user-change_username.php:39
+msgid "Change username"
+msgstr "Benutzername ändern"
+
+#: functions.php:371 functions.php:374 functions.php:429
+#: user-change_password.php:32 user-change_password.php:37
+#: user-forgot_password.php:52
+msgid "Change password"
+msgstr "Passwort ändern"
+
+#: functions.php:373
+msgid "Recover password"
+msgstr "Passwort wiederherstellen"
+
+#: functions.php:375
+msgid "Create a new account"
+msgstr "Neues Benutzerkonto anlegen"
+
+#: functions.php:434 user-sidebar.php:28
+msgid "Delete account"
+msgstr "Account löschen"
+
+#: functions.php:491
+msgid "Theme settings updated correctly"
+msgstr "Einstellungen der Design Vorlage erfolgreich upgedatet"
+
+#: functions.php:506
+msgid "The logo image has been uploaded correctly"
+msgstr "Das Logo wurde erfolgreich hochgeladen!"
+
+#: functions.php:508
+msgid "An error has occurred, please try again"
+msgstr "Es ist ein Fehler aufgetreten, bitte versuchen Sie es noch einmal"
+
+#: functions.php:519
+msgid "The logo image has been removed"
+msgstr "Das Logo wurde entfernt!"
+
+#: functions.php:521
+msgid "Image not found"
+msgstr "Bild nicht gefunden"
+
+#: functions.php:602 functions.php:624
+msgid "All categories"
+msgstr "Alle Kategorien"
+
+#: header.php:67 item-post.php:55
+msgid "Select a category"
+msgstr "Kategorie auswählen"
+
+#: item-post.php:51
+msgid "General Information"
+msgstr "Allgemeine Informationen"
+
+#: item-post.php:53
+msgid "Category"
+msgstr "Kategorie"
+
+#: item-post.php:59 item.php:202
+msgid "Title"
+msgstr "Titel"
+
+#: item-post.php:65 user-profile.php:106
+msgid "Description"
+msgstr "Beschreibung"
+
+#: item-post.php:72 search-sidebar.php:61
+msgid "Price"
+msgstr "Preis"
+
+#: item-post.php:83
+msgid "Listing Location"
+msgstr "Standort der Anzeige"
+
+#: item-post.php:86 user-profile.php:70
+msgid "Country"
+msgstr "Land"
+
+#: item-post.php:92 user-profile.php:76
+msgid "Region"
+msgstr "Region"
+
+#: item-post.php:98 search-sidebar.php:44 user-profile.php:82
+msgid "City"
+msgstr "Stadt"
+
+#: item-post.php:104
+msgid "City Area"
+msgstr "Stadtgebiet"
+
+#: item-post.php:110 user-profile.php:94
+msgid "Address"
+msgstr "Adresse"
+
+#: item-post.php:119
+msgid "Seller's information"
+msgstr "Information über den Verkäufer"
+
+#: item-post.php:121 item-sidebar.php:59 user-profile.php:46
+#: user-register.php:39
+msgid "Name"
+msgstr "Name"
+
+#: item-post.php:127 user-login.php:38 user-recover.php:37 user-register.php:45
+msgid "E-mail"
+msgstr "E-Mail"
+
+#: item-post.php:134
+msgid "Show e-mail on the listing page"
+msgstr "E-Mail Adresse auf der Anzeigen-Seite einblenden"
+
+#: item-post.php:153 user-change_email.php:59 user-change_password.php:64
+#: user-change_username.php:102 user-profile.php:113
+msgid "Update"
+msgstr "Übernehmen"
+
+#: item-post.php:153
+msgid "Publish"
+msgstr "Veröffentlichen"
+
+#: item-send-friend.php:50 item.php:195
+msgid "Your e-mail"
+msgstr "Ihre E-Mail Adresse"
+
+#: item-send-friend.php:57
+msgid "Your friend's name"
+msgstr "Der Name Ihres Freundes"
+
+#: item-send-friend.php:63
+msgid "Your friend's e-mail address"
+msgstr "E-Mail Adresse Ihres Freundes"
+
+#: item-send-friend.php:70
+msgid "Subject (optional)"
+msgstr "Betreff (optional)"
+
+#: item-sidebar.php:30
+msgid "Mark as..."
+msgstr "Markieren als..."
+
+#: item-sidebar.php:31
+msgid "Mark as spam"
+msgstr "Als Spam markieren"
+
+#: item-sidebar.php:32
+msgid "Mark as misclassified"
+msgstr "Als falsch kategorisiert kennzeichnen"
+
+#: item-sidebar.php:33
+msgid "Mark as duplicated"
+msgstr "Als Duplikat markieren"
+
+#: item-sidebar.php:34
+msgid "Mark as expired"
+msgstr "Als abgelaufen kennzeichnen"
+
+#: item-sidebar.php:35
+msgid "Mark as offensive"
+msgstr "Als anstößig kennzeichenen"
+
+#: item-sidebar.php:43
+msgid "The listing is expired. You can't contact the publisher."
+msgstr "Ihre Anzeige ist leider abgelaufen. Sie können den Veröffentlicher daher nicht mehr kontaktieren."
+
+#: item-sidebar.php:47
+msgid "It's your own listing, you can't contact the publisher."
+msgstr "Dies ist Ihre Anzeige, daher können Sie den Veröffentlicher nicht kontaktieren."
+
+#: item-sidebar.php:51
+msgid "You must log in or register a new account in order to contact the advertiser"
+msgstr "Bitte loggen Sie sich ein (oder registieren ein neues Benutzerkonto), um den Autor zu kontaktieren"
+
+#: item-sidebar.php:61
+msgid "Name: %s"
+msgstr "Name: %s"
+
+#: item-sidebar.php:64
+msgid "E-mail: %s"
+msgstr "E-Mail: %s"
+
+#: item-sidebar.php:67
+msgid "Phone: %s"
+msgstr "Telefon: %s"
+
+#: item-sidebar.php:80
+msgid "Your e-mail address"
+msgstr "Ihre E-Mail Adresse"
+
+#: item-sidebar.php:84 user-public-sidebar.php:41
+msgid "Phone number"
+msgstr "Telefonnummer"
+
+#: item-sidebar.php:113 user-public-sidebar.php:63
+msgid "Enter the words above"
+msgstr "Geben Sie bitte die oben angezeigten Wörter ein"
+
+#: item-sidebar.php:115 user-public-sidebar.php:65
+msgid "Help"
+msgstr "Hilfe"
+
+#: item.php:59
+msgid "<strong class=\"publish\">Published date</strong>: %1$s"
+msgstr "<strong class=\"publish\">Datum der Veröffentlichung</strong>: %1$s"
+
+#: item.php:62
+msgid "<strong class=\"update\">Modified date:</strong> %1$s"
+msgstr "<strong class=\"update\">Änderungsdatum:</strong> %1$s"
+
+#: item.php:66 main.php:67
+msgid "Location"
+msgstr "Standort"
+
+#: item.php:73 loop-single-premium.php:46 loop-single.php:46
+msgid "Edit item"
+msgstr "Eintrag bearbeiten"
+
+#: item.php:85 item.php:90
+msgid "Image"
+msgstr "Bild"
+
+#: item.php:119
+msgid "Contact seller"
+msgstr "Verkäufer kontaktieren"
+
+#: item.php:123
+msgid "Share"
+msgstr "Teilen"
+
+#: item.php:129
+msgid "Useful information"
+msgstr "Hilfreiche Information"
+
+#: item.php:131
+msgid "Avoid scams by acting locally or paying with PayPal"
+msgstr "Mit PayPal oder vor Ort bezahlen, um Betrug zu vermeinden"
+
+#: item.php:132
+msgid "Never pay with Western Union, Moneygram or other anonymous payment services"
+msgstr "Niemals Transaktionen mit Western Union oder anderen verdächtigen Bezahldiensten abwickeln"
+
+#: item.php:133
+msgid "Don't buy or sell outside of your country. Don't accept cashier cheques from outside your country"
+msgstr "Kaufen oder verkaufen Sie möglichst nichts außerhalb der EU. Akzeptieren sie keine Schecks von  Drittstaaten."
+
+#: item.php:134
+msgid "This site is never involved in any transaction, and does not handle payments, shipping, guarantee transactions, provide escrow services, or offer \"buyer protection\" or \"seller certification\""
+msgstr "Diese Website ist niemals direkt an Transaktionen beteiligt, noch werden Zahlungen, Versand, Garantien oder sonstige Versicherungsleistungen angeboten."
+
+#: item.php:141
+msgid "Related listings"
+msgstr "Verwandte Anzeigen"
+
+#: item.php:152
+msgid "Comments"
+msgstr "Kommentare"
+
+#: item.php:159
+msgid "by"
+msgstr "von"
+
+#: item.php:163
+msgid "Delete your comment"
+msgstr "Kommentar löschen"
+
+#: item.php:175
+msgid "Leave your comment (spam and offensive messages will be removed)"
+msgstr "Kommentar verfassen (Spam oder anstößige Meldungen werden gelöscht!)"
+
+#: item.php:208
+msgid "Comment"
+msgstr "Kommentar"
+
+#: loop-single-premium.php:48 loop-single.php:48
+msgid "This action can not be undone. Are you sure you want to continue?"
+msgstr "Diese Aktion kann nicht rückgängig gemacht werden. Sind sie sicher, dass Sie fortfahren möchten?"
+
+#: loop-single-premium.php:51 loop-single.php:51
+msgid "Activate"
+msgstr "Aktivieren"
+
+#: main.php:38
+msgid "Latest Listings"
+msgstr "Neuste Anzeigen"
+
+#: main.php:46 search.php:81
+msgid "Grid"
+msgstr "Gitter"
+
+#: main.php:57
+msgid "See all listings"
+msgstr "Alle Anzeigen einblenden"
+
+#: search-sidebar.php:38
+msgid "Your search"
+msgstr "Ihre Suche"
+
+#: search-sidebar.php:51
+msgid "Show only"
+msgstr "Zeige nur"
+
+#: search-sidebar.php:54
+msgid "listings with pictures"
+msgstr "Anzeigen mit Bildern"
+
+#: search-sidebar.php:62
+msgid "Min"
+msgstr "Minimum"
+
+#: search-sidebar.php:64
+msgid "Max"
+msgstr "Maximum"
+
+#: search-sidebar.php:84
+msgid "Apply"
+msgstr "Anwenden"
+
+#: search-sidebar.php:89
+msgid "Refine category"
+msgstr "Kategorie genauer spezifizieren"
+
+#: search.php:55
+msgid "Selected"
+msgstr "Ausgewählt"
+
+#: search.php:56
+msgid "Nothing selected, input was"
+msgstr "Nichts ausgewählt, Ihre Eingabe war"
+
+#: search.php:71
+msgid "There are no results matching \"%s\""
+msgstr ""
+"Keine Resultate gefunden, die mit folgender Suche übereinstimmen:\n"
+"\n"
+" \"%s\""
+
+#: search.php:78
+msgid "Show filters"
+msgstr "Filter anzeigen"
+
+#: search.php:85
+msgid "Sort by"
+msgstr "Sortieren nach"
+
+#: search.php:141
+msgid "Other searches that may interest you"
+msgstr "Andere Suchergebnisse, die Sie interessieren könnten"
+
+#: user-alerts.php:39
+msgid "You do not have any alerts yet"
+msgstr "Sie haben noch keine Alarme eingestellt"
+
+#: user-alerts.php:46
+msgid "Alert"
+msgstr "Alarm"
+
+#: user-alerts.php:46
+msgid "This action can't be undone. Are you sure you want to continue?"
+msgstr "Diese Aktion kann nicht rückgängig gemacht werden. Sind Sie sicher, dass Sie fortfahren möchten?"
+
+#: user-alerts.php:46
+msgid "Delete this alert"
+msgstr "Diese Abonnement löschen"
+
+#: user-change_email.php:33 user-change_email.php:38
+msgid "Change e-mail"
+msgstr "E-Mail Adresse ändern"
+
+#: user-change_email.php:46
+msgid "Current e-mail"
+msgstr "Aktuelle E-Mail Adresse"
+
+#: user-change_email.php:52
+msgid "New e-mail"
+msgstr "Neue E-Mail Adresse"
+
+#: user-change_password.php:45
+msgid "Current password"
+msgstr "Aktuelles Passwort"
+
+#: user-change_password.php:51 user-forgot_password.php:39
+msgid "New password"
+msgstr "Neues Passwort"
+
+#: user-change_password.php:57 user-forgot_password.php:45
+msgid "Repeat new password"
+msgstr "Neues Passwort wiederholen"
+
+#: user-change_username.php:50
+msgid "Username: this field is required"
+msgstr "Benutzername - Pflichtfeld!"
+
+#: user-change_username.php:75
+msgid "The username is available"
+msgstr "Benutzername verfügbar!"
+
+#: user-change_username.php:77
+msgid "The username is NOT available"
+msgstr "Benutzername leider nicht mehr verfügbar! "
+
+#: user-change_username.php:94
+msgid "Username"
+msgstr "Benutzername"
+
+#: user-forgot_password.php:30 user-recover.php:30
+msgid "Recover your password"
+msgstr "Passwort wiederherstellen"
+
+#: user-items.php:41
+msgid "My listings"
+msgstr "Meine Anzeigen"
+
+#: user-items.php:43
+msgid "No listings have been added yet"
+msgstr "Es wurden noch keine Anzeigen hinzugefügt"
+
+#: user-login.php:30
+msgid "Access to your account"
+msgstr "Zugang zu Ihrem Benutzerkonto"
+
+#: user-login.php:44 user-register.php:51
+msgid "Password"
+msgstr "Passwort"
+
+#: user-login.php:51
+msgid "Remember me"
+msgstr "Merken"
+
+#: user-login.php:54
+msgid "Log in"
+msgstr "Einloggen"
+
+#: user-login.php:58
+msgid "Forgot password?"
+msgstr "Passwort vergessen?"
+
+#: user-profile.php:52
+msgid "User type"
+msgstr "Benutzertyp"
+
+#: user-profile.php:58
+msgid "Cell phone"
+msgstr "Mobil"
+
+#: user-profile.php:64
+msgid "Phone"
+msgstr "Telefon"
+
+#: user-profile.php:88
+msgid "City area"
+msgstr "Stadtgebiet"
+
+#: user-profile.php:100
+msgid "Website"
+msgstr "Homepage"
+
+#: user-public-profile.php:67
+msgid "<strong>Address:</strong> %1$s"
+msgstr "<strong>Adresse:</strong> %1$s"
+
+#: user-public-profile.php:70
+msgid "<strong>Location:</strong> %1$s"
+msgstr "<strong>Standort:</strong> %1$s"
+
+#: user-public-profile.php:75
+msgid "User description"
+msgstr "Beschreibung des Benutzers"
+
+#: user-public-profile.php:80
+msgid "Latest listings"
+msgstr "Neuste Anzeigen"
+
+#: user-recover.php:45
+msgid "Send me a new password"
+msgstr "Neues Passwort zusenden"
+
+#: user-register.php:31
+msgid "Register an account for free"
+msgstr "Benutzerkonto registieren"
+
+#: user-register.php:57
+msgid "Repeat password"
+msgstr "Passwort wiederholen"
+
+#: user-register.php:61
+msgid "Passwords don't match"
+msgstr "Passwörter stimmen nicht überein"
+
+#: user-register.php:73
+msgid "Create"
+msgstr "Erstellen"
+
+#: user-sidebar.php:23
+msgid "Display menu"
+msgstr "Menü anzeigen"
+
+#: user-sidebar.php:29
+msgid "Are you sure you want to delete your account?"
+msgstr "Sind Sie sicher, dass Sie ihr Benutzerkonto löschen wollen?"
+
+msgid "bender"
+msgstr "bender"
+
+#: functions.php:399
+msgid "Public Profile"
+msgstr "Öffentliches Profil"
+
+#: item-sidebar.php:95
+msgid "Attachment"
+msgstr "Anhang"
+
+#: main.php:41
+msgid "There aren't listings available at this moment"
+msgstr "Derzeit sind keine Anzeigen verfügbar"
+
+#: search.php:75
+msgid "%1$d - %2$d of %3$d listings"
+msgstr "%1$d - %2$d von %3$d Anzeigen"
+
+#: search.php:121
+msgid "Premium listings"
+msgstr "Premium-Anzeigen"
+
+msgid "http://osclass.org/"
+msgstr "http://osclass.org/"
+
+msgid "Bender theme"
+msgstr "&quot;Bender&quot;-Thema"
+
+msgid "Osclass"
+msgstr "Osclass"
+
+#: common/head.php:74
+msgid "Close"
+msgstr "Schließen"
+
+#: common/head.php:73
+msgid "Next image"
+msgstr "Nächstes Bild"
+
+#: common/head.php:72
+msgid "Previous image"
+msgstr "Vorheriges Bild"
+
+#: footer.php:70
+msgid "This website is proudly using the <a title=\"Osclass web\" href=\"%s\">classifieds scripts</a> software <strong>Osclass</strong>"
+msgstr "Diese Website verwendet die <a title=\"Osclass web\" href=\"%s\">Kleinanzeigen</a>-Software <strong>Osclass</strong>"

@@ -1,0 +1,4918 @@
+# Translation of Core in Hebrew
+# This file is distributed under the same license as the Core package.
+msgid ""
+msgstr ""
+"PO-Revision-Date: 2013-05-13 17:52:34+0000\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: GlotPress/0.1\n"
+"Project-Id-Version: Core\n"
+
+#: /var/www/osclass-git/oc-admin/themes/modern/market/plugins.php:83
+msgid "Latest plugins available"
+msgstr "תוספים חדשים"
+
+#: /var/www/osclass-git/oc-admin/themes/modern/market/plugins.php:109
+#: /var/www/osclass-git/oc-admin/themes/modern/market/themes.php:86
+msgid "Compatible with"
+msgstr "תואם ל"
+
+#: /var/www/osclass-git/oc-admin/themes/modern/market/plugins.php:123
+#: /var/www/osclass-git/oc-admin/themes/modern/market/plugins.php:262
+#: /var/www/osclass-git/oc-admin/themes/modern/market/themes.php:100
+#: /var/www/osclass-git/oc-admin/themes/modern/market/themes.php:235
+msgid "Continue download"
+msgstr "המשך הורדה"
+
+#: /var/www/osclass-git/oc-admin/themes/modern/main/index.php:298
+msgid "Latest news"
+msgstr "החדשות האחרונות"
+
+#: /var/www/osclass-git/oc-admin/themes/modern/main/index.php:300
+msgid "Blog"
+msgstr "בלוג"
+
+#: /var/www/osclass-git/oc-admin/themes/modern/main/index.php:308
+msgid "new"
+msgstr "חדש"
+
+#: /var/www/osclass-git/oc-admin/themes/modern/main/index.php:314
+msgid "Unable to fetch news from Osclass. Please try again later"
+msgstr "לא הצליח להביא חדשות מ Osclass. אנא נסה שוב מאוחר יותר "
+
+#: /var/www/osclass-git/oc-admin/themes/modern/main/index.php:316
+msgid "Twitter"
+msgstr "טוויטר"
+
+#: /var/www/osclass-git/oc-admin/gui/forgot_password.php:50
+msgid "Repeat new pasword"
+msgstr "חזור על הסיסמא החדשה"
+
+#: /var/www/osclass-git/oc-admin/gui/forgot_password.php:44
+msgid "New pasword"
+msgstr "סיסמא חדשה"
+
+#: /var/www/osclass-git/oc-admin/themes/modern/items/frm.php:175
+msgid "Non-registered user"
+msgstr "משתמש לא רשום"
+
+#: /var/www/osclass-git/contact.php:57
+msgid "%s (%s) left this message : %s"
+msgstr "%s (%s) השאיר את ההודעה הזו: %s"
+
+#: /var/www/osclass-git/contact.php:61
+msgid "Contact form"
+msgstr "טופס יצירת קשר"
+
+#: /var/www/osclass-git/oc-admin/themes/modern/market/plugins.php:193
+#: /var/www/osclass-git/oc-admin/themes/modern/market/themes.php:165
+msgid "Already downloaded"
+msgstr "ירד כבר"
+
+#: /var/www/osclass-git/oc-admin/themes/modern/market/plugins.php:196
+msgid "Download plugin"
+msgstr "הורדת תוסף"
+
+#: /var/www/osclass-git/oc-admin/themes/modern/market/plugins.php:252
+msgid "Warning! This plugin is not compatible with your current version of Osclass (%s)"
+msgstr "אזהרה! תוסף זה אינו תואם לגרסה הנוכחית של Osclass (%s)"
+
+#: /var/www/osclass-git/oc-admin/themes/modern/market/themes.php:33
+msgid "Browse and download available Osclass themes from a constantly-updated selection. Remember, you must install the theme after you download it. If you want to design a theme for Osclass, follow these instructions: %s"
+msgstr "גלוש והורד ערכות נושא Osclass זמינות מתוך מבחר-מתעדכן כל הזמן. זכור, עליך להתקין את ערכת הנושא לאחר שהורדת אותה. אם אתה רוצה לעצב ערכת נושא לOsclass, עקוב אחר ההוראות הבאות: %s"
+
+#: /var/www/osclass-git/oc-admin/themes/modern/market/themes.php:60
+msgid "Latest themes available"
+msgstr "ערכות עיצוב אחרונות"
+
+#: /var/www/osclass-git/oc-admin/themes/modern/market/themes.php:124
+msgid "The theme have been downloaded correctly, proceed to activate or preview it."
+msgstr "הערכה ירדה בהצלחה. המשך כדי להפעיל אותה או לתצוגה מקדימה שלה."
+
+#: /var/www/osclass-git/oc-admin/themes/modern/market/themes.php:168
+msgid "Download theme"
+msgstr "הורדת ערכה"
+
+#: /var/www/osclass-git/oc-admin/themes/modern/settings/locations.php:294
+msgid "This action can't be undone. Items associated to this location will be deleted. Are you sure you want to continue?"
+msgstr "לא ניתן לבטל פעולה זו. פריטים הקשורים למיקום זה יימחק. האם אתה בטוח שברצונך להמשיך?"
+
+#: /var/www/osclass-git/oc-admin/themes/modern/settings/media.php:206
+msgid "Allowed formats"
+msgstr "קבצים מותרים"
+
+#: /var/www/osclass-git/oc-admin/themes/modern/settings/media.php:209
+msgid "For example: jpg, png, gif"
+msgstr "לדוגמא: jpg, png, gif"
+
+#: /var/www/osclass-git/oc-admin/themes/modern/settings/permalinks.php:280
+msgid "Activate aler url: this field is required"
+msgstr ""
+
+#: /var/www/osclass-git/oc-admin/themes/modern/stats/items.php:235
+msgid "Latest listings on the web"
+msgstr "המודעות החדשות באתר"
+
+#: /var/www/osclass-git/oc-admin/themes/modern/users/index.php:147
+msgid "Update Date"
+msgstr "תאריך עדכון"
+
+#: /var/www/osclass-git/oc-includes/osclass/install-functions.php:84
+msgid "<code>oc-content/languages</code> folder exists"
+msgstr "תיקייה קיימת : <code>oc-content/languages</code> "
+
+#: /var/www/osclass-git/oc-includes/osclass/install-functions.php:719
+msgid "Worldwide"
+msgstr "עולמי"
+
+#: /var/www/osclass-git/oc-includes/osclass/install-functions.php:728
+msgid "Region/City targeting is only available when you choose only \"one country\""
+msgstr "אזור / עיר מיקוד זמין רק כאשר אתה בוחר \"מדינה אחת\" בלבד"
+
+#: /var/www/osclass-git/oc-includes/osclass/install-functions.php:732
+msgid "Click here if you want to specify region/regions or city/cities"
+msgstr "לחץ כאן אם ברצונך לציין אזור / אזורים או עיר / ערים"
+
+#: /var/www/osclass-git/oc-includes/osclass/install-functions.php:737
+msgid "By Region"
+msgstr "לפי אזור"
+
+#: /var/www/osclass-git/oc-includes/osclass/install-functions.php:739
+msgid "By City"
+msgstr "לפי עיר"
+
+#: /var/www/osclass-git/oc-includes/osclass/install-functions.php:760
+msgid "Continue installation process and insert countries later"
+msgstr "המשך בתהליך התקנה והכנס מדינות מאוחר יותר"
+
+#: /var/www/osclass-git/oc-includes/osclass/install-functions.php:821
+msgid "Select your classified categories"
+msgstr "בחר את הקטגוריות המסווגות שלך"
+
+#: /var/www/osclass-git/oc-includes/osclass/install-functions.php:821
+msgid "or"
+msgstr "או"
+
+#: /var/www/osclass-git/oc-includes/osclass/install-functions.php:821
+msgid "Skip"
+msgstr "דלג"
+
+#: /var/www/osclass-git/oc-includes/osclass/install-functions.php:821
+msgid "You can add/remove categories after the installation, using the admin dashboard"
+msgstr "אתה יכול להוסיף / להסיר קטגוריות לאחר ההתקנה, באמצעות הדשבורד בלוח הניהול"
+
+#: /var/www/osclass-git/oc-includes/osclass/install-location.php:95
+msgid "Welcome %s,"
+msgstr "ברוך הבא %s,"
+
+#: /var/www/osclass-git/oc-includes/osclass/install-location.php:101
+msgid "Regards,"
+msgstr "בברכה,"
+
+#: /var/www/osclass-git/oc-includes/osclass/classes/AdminMenu.php:98
+msgid "User settings"
+msgstr "הגדרות משתמש"
+
+#: /var/www/osclass-git/oc-includes/osclass/helpers/hUtils.php:173
+msgid "My account"
+msgstr "החשבון שלי"
+
+#: /var/www/osclass-git/oc-admin/themes/modern/emails/frm.php:56
+msgid "Edit email template"
+msgstr "ערוך תבנית דואר אלקטרוני"
+
+#: /var/www/osclass-git/oc-admin/themes/modern/emails/frm.php:66
+msgid "Internal name"
+msgstr "שם פנימי"
+
+#: /var/www/osclass-git/oc-admin/themes/modern/emails/frm.php:69
+msgid "Used to identify the email template"
+msgstr "משמש לזיהוי תבנית הדואר האלקטרוני"
+
+#: /var/www/osclass-git/oc-admin/themes/modern/emails/index.php:40
+msgid "Emails templates"
+msgstr "תבניות דואר אלקטרוני"
+
+#: /var/www/osclass-git/oc-admin/themes/modern/fields/iframe.php:31
+msgid "Edit custom field"
+msgstr "עריכת שדה מותאם אישית"
+
+#: /var/www/osclass-git/oc-admin/themes/modern/fields/iframe.php:37
+msgid "Type"
+msgstr "סוג"
+
+#: /var/www/osclass-git/oc-admin/themes/modern/fields/iframe.php:41
+msgid "Options"
+msgstr "אפשרויות"
+
+#: /var/www/osclass-git/oc-admin/themes/modern/fields/iframe.php:49
+msgid "This field is required"
+msgstr "שדה זה נדרש"
+
+#: /var/www/osclass-git/oc-admin/themes/modern/plugins/configuration.php:73
+msgid "Select the categories where you want to apply these attribute:"
+msgstr "בחר את הקטגוריות שבהן ברצונך להחיל תכונות אלו:"
+
+#: /var/www/osclass-git/oc-admin/themes/modern/fields/iframe.php:55
+msgid "Check all"
+msgstr "בחר הכל"
+
+#: /var/www/osclass-git/oc-admin/themes/modern/fields/iframe.php:56
+msgid "Uncheck all"
+msgstr "בטל הכל"
+
+#: /var/www/osclass-git/oc-admin/themes/modern/fields/iframe.php:67
+msgid "Advanced options"
+msgstr "אפשרויות מתקדמות"
+
+#: /var/www/osclass-git/oc-admin/themes/modern/fields/iframe.php:71
+msgid "Identifier name"
+msgstr "שם מזהה"
+
+#: /var/www/osclass-git/oc-admin/themes/modern/fields/iframe.php:74
+msgid "Only alphanumeric characters are allowed [a-z0-9_-]"
+msgstr "מותר תווים אלפאנומריים בלבד [-Z0-9_-]"
+
+#: /var/www/osclass-git/oc-admin/themes/modern/fields/index.php:142
+msgid "Custom field could not be added"
+msgstr "לא ניתן להוסיף שדה מותאם אישית"
+
+#: /var/www/osclass-git/oc-admin/themes/modern/fields/index.php:175
+msgid "Custom fields &raquo; %s"
+msgstr "שדות מותאמים אישית &raquo; %s "
+
+#: /var/www/osclass-git/oc-admin/themes/modern/fields/index.php:182
+msgid "Custom fields"
+msgstr "שדות מותאמים אישית"
+
+#: /var/www/osclass-git/oc-admin/themes/modern/fields/index.php:191
+msgid "You don't have any custom fields yet"
+msgstr "אין לך עדיין שדות מותאמים אישית"
+
+#: /var/www/osclass-git/oc-admin/themes/modern/items/frm.php:25
+#: /var/www/osclass-git/oc-admin/themes/modern/items/frm.php:26
+#: /var/www/osclass-git/oc-admin/themes/modern/items/index.php:28
+msgid "Add listing"
+msgstr "להוסיף את הרישום"
+
+#: /var/www/osclass-git/oc-admin/themes/modern/items/frm.php:29
+msgid "Edit listing"
+msgstr "עריכת רישום"
+
+#: /var/www/osclass-git/oc-admin/themes/modern/items/frm.php:30
+msgid "Update listing"
+msgstr "עדכון רישום"
+
+#: /var/www/osclass-git/oc-admin/themes/modern/items/frm.php:139
+#: /var/www/osclass-git/oc-admin/themes/modern/items/index.php:185
+#: /var/www/osclass-git/oc-admin/themes/modern/items/index.php:364
+msgid "Category"
+msgstr "קטגוריה"
+
+#: /var/www/osclass-git/oc-admin/themes/modern/items/frm.php:147
+#: /var/www/osclass-git/oc-admin/themes/modern/items/settings.php:158
+msgid "Price"
+msgstr "מחיר"
+
+#: /var/www/osclass-git/oc-admin/themes/modern/items/frm.php:154
+msgid "Photos"
+msgstr "תמונות"
+
+#: /var/www/osclass-git/oc-admin/themes/modern/items/frm.php:159
+msgid "optional"
+msgstr "אופציונלי"
+
+#: /var/www/osclass-git/oc-admin/themes/modern/items/frm.php:163
+msgid "Add new photo"
+msgstr "הוספת תמונה חדשה"
+
+#: /var/www/osclass-git/oc-admin/themes/modern/items/frm.php:192
+#: /var/www/osclass-git/oc-admin/themes/modern/items/index.php:201
+#: /var/www/osclass-git/oc-admin/themes/modern/items/index.php:366
+msgid "Region"
+msgstr "אזור"
+
+#: /var/www/osclass-git/oc-admin/themes/modern/items/frm.php:196
+#: /var/www/osclass-git/oc-admin/themes/modern/items/index.php:209
+#: /var/www/osclass-git/oc-admin/themes/modern/items/index.php:367
+msgid "City"
+msgstr "עיר"
+
+#: /var/www/osclass-git/oc-admin/themes/modern/items/frm.php:200
+msgid "City area"
+msgstr "שכונה"
+
+#: /var/www/osclass-git/oc-admin/themes/modern/items/frm.php:204
+msgid "Address"
+msgstr "כתובת"
+
+#: /var/www/osclass-git/oc-admin/themes/modern/items/index.php:35
+msgid "Manage listings &raquo; %s"
+msgstr "ניהול רישומים &raquo; %s"
+
+#: /var/www/osclass-git/oc-admin/themes/modern/items/index.php:82
+#: /var/www/osclass-git/oc-admin/themes/modern/items/reported.php:58
+#: /var/www/osclass-git/oc-admin/themes/modern/languages/index.php:58
+msgid "Delete listing"
+msgstr "מחיקת רישום"
+
+#: /var/www/osclass-git/oc-admin/themes/modern/items/index.php:119
+msgid "Filters"
+msgstr "מסננים"
+
+#: /var/www/osclass-git/oc-admin/themes/modern/items/index.php:177
+#: /var/www/osclass-git/oc-admin/themes/modern/items/index.php:318
+msgid "Pattern"
+msgstr ""
+
+#: /var/www/osclass-git/oc-admin/themes/modern/items/index.php:193
+#: /var/www/osclass-git/oc-admin/themes/modern/items/index.php:365
+msgid "Country"
+msgstr "מדינה"
+
+#: /var/www/osclass-git/oc-admin/themes/modern/items/index.php:230
+msgid "Premium"
+msgstr "פרמיום"
+
+#: /var/www/osclass-git/oc-admin/themes/modern/items/index.php:235
+#: /var/www/osclass-git/oc-admin/themes/modern/items/index.php:247
+#: /var/www/osclass-git/oc-admin/themes/modern/items/index.php:259
+#: /var/www/osclass-git/oc-admin/themes/modern/items/index.php:271
+msgid "ON"
+msgstr "דלוק"
+
+#: /var/www/osclass-git/oc-admin/themes/modern/items/index.php:236
+#: /var/www/osclass-git/oc-admin/themes/modern/items/index.php:248
+#: /var/www/osclass-git/oc-admin/themes/modern/items/index.php:260
+#: /var/www/osclass-git/oc-admin/themes/modern/items/index.php:272
+msgid "OFF"
+msgstr "כבויי"
+
+#: /var/www/osclass-git/oc-admin/themes/modern/comments/frm.php:89
+msgid "Active"
+msgstr "פעיל"
+
+#: /var/www/osclass-git/oc-admin/themes/modern/items/index.php:266
+#: /var/www/osclass-git/oc-admin/themes/modern/items/reported.php:161
+msgid "Spam"
+msgstr "דואר זבל"
+
+#: /var/www/osclass-git/oc-admin/themes/modern/items/index.php:283
+msgid "Apply filters"
+msgstr "להחיל מסננים"
+
+#: /var/www/osclass-git/oc-admin/themes/modern/items/index.php:284
+#: /var/www/osclass-git/oc-admin/themes/modern/items/index.php:308
+#: /var/www/osclass-git/oc-admin/themes/modern/items/reported.php:132
+msgid "Reset filters"
+msgstr "איפוס מסננים"
+
+#: /var/www/osclass-git/oc-admin/themes/modern/items/index.php:288
+msgid "Manage listings"
+msgstr "ניהול רישומים"
+
+#: /var/www/osclass-git/oc-admin/themes/modern/items/index.php:298
+#: /var/www/osclass-git/oc-admin/themes/modern/items/index.php:299
+#: /var/www/osclass-git/oc-admin/themes/modern/items/index.php:300
+#: /var/www/osclass-git/oc-admin/themes/modern/items/index.php:301
+#: /var/www/osclass-git/oc-admin/themes/modern/items/reported.php:125
+#: /var/www/osclass-git/oc-admin/themes/modern/items/reported.php:126
+#: /var/www/osclass-git/oc-admin/themes/modern/items/reported.php:127
+#: /var/www/osclass-git/oc-admin/themes/modern/items/reported.php:128
+msgid "%d Listings"
+msgstr "רישומים %d"
+
+#: /var/www/osclass-git/oc-admin/themes/modern/items/index.php:310
+msgid "Show filters"
+msgstr "הצג מסננים"
+
+#: /var/www/osclass-git/oc-admin/themes/modern/items/index.php:221
+#: /var/www/osclass-git/oc-admin/themes/modern/items/index.php:319
+#: /var/www/osclass-git/oc-admin/themes/modern/items/index.php:363
+#: /var/www/osclass-git/oc-admin/themes/modern/items/reported.php:159
+msgid "User"
+msgstr "משתמש"
+
+#: /var/www/osclass-git/oc-admin/themes/modern/items/index.php:334
+msgid "Find"
+msgstr "מצא"
+
+#: /var/www/osclass-git/oc-admin/themes/modern/items/index.php:345
+#: /var/www/osclass-git/oc-admin/themes/modern/items/index.php:346
+#: /var/www/osclass-git/oc-admin/themes/modern/items/index.php:347
+#: /var/www/osclass-git/oc-admin/themes/modern/items/index.php:348
+#: /var/www/osclass-git/oc-admin/themes/modern/items/index.php:349
+#: /var/www/osclass-git/oc-admin/themes/modern/items/index.php:350
+#: /var/www/osclass-git/oc-admin/themes/modern/items/index.php:351
+#: /var/www/osclass-git/oc-admin/themes/modern/items/index.php:352
+#: /var/www/osclass-git/oc-admin/themes/modern/items/index.php:353
+msgid "Are you sure you want to %s the selected listings?"
+msgstr "האם אתה בטוח שברצונך ל %s את הרישומים הבחורים?"
+
+#: /var/www/osclass-git/oc-admin/themes/modern/items/index.php:420
+#: /var/www/osclass-git/oc-admin/themes/modern/items/reported.php:217
+msgid "Are you sure you want to delete this listing?"
+msgstr "האם אתה בטוח שברצונך למחוק את הרישום הזה?"
+
+#: /var/www/osclass-git/oc-admin/themes/modern/items/reported.php:115
+msgid "Reported listings"
+msgstr "רישומים מדווחים"
+
+#: /var/www/osclass-git/oc-admin/themes/modern/items/reported.php:33
+msgid "Reported listings &raquo; %s"
+msgstr "רישומים מדווחים »%s"
+
+#: /var/www/osclass-git/oc-admin/themes/modern/items/reported.php:146
+msgid "Clear Missclassified"
+msgstr "ניקויי מודעות חסרות"
+
+#: /var/www/osclass-git/oc-admin/themes/modern/items/reported.php:164
+msgid "Misclassified"
+msgstr "מודעות חסרות"
+
+#: /var/www/osclass-git/oc-admin/themes/modern/items/reported.php:167
+msgid "Duplicated"
+msgstr "כפולות"
+
+#: /var/www/osclass-git/oc-admin/themes/modern/items/reported.php:170
+msgid "Expired"
+msgstr "פג תוקף"
+
+#: /var/www/osclass-git/oc-admin/themes/modern/items/reported.php:173
+msgid "Offensive"
+msgstr "פוגע"
+
+#: /var/www/osclass-git/oc-admin/themes/modern/items/settings.php:56
+msgid "Listing Settings &raquo; %s"
+msgstr "הגדרות רישום » %s"
+
+#: /var/www/osclass-git/oc-admin/themes/modern/items/settings.php:64
+msgid "Listing Settings"
+msgstr "הגדרות רישום"
+
+#: /var/www/osclass-git/oc-admin/themes/modern/items/settings.php:76
+msgid "Only logged in users can post listings"
+msgstr "רק משתמשים רשומים יכולים להוסיף מודעה"
+
+#: /var/www/osclass-git/oc-admin/themes/modern/items/settings.php:80
+msgid "An user has to wait %s seconds between each listing added"
+msgstr "משתמש צריך לחכות שניות %s בין הוספת רישום"
+
+#: /var/www/osclass-git/oc-admin/themes/modern/items/settings.php:88
+msgid "Users have to validate their listings"
+msgstr "משתמשים חייבים לאמת את המודעות שלהם"
+
+#: /var/www/osclass-git/oc-admin/themes/modern/items/settings.php:94
+msgid "If the value is zero, it means that each listing must be validated"
+msgstr "אם הערך שווה אפס, כל רישום חייב אימות"
+
+#: /var/www/osclass-git/oc-admin/themes/modern/items/settings.php:100
+msgid "Logged in users don't need to validate their listings"
+msgstr "משתמשים רשומים לא מחוייבים באימות"
+
+#: /var/www/osclass-git/oc-admin/themes/modern/items/settings.php:106
+msgid "Show reCAPTCHA in add/edit listing form"
+msgstr "הצג reCAPTCHA בטופס הוספת/עריכת רישום"
+
+#: /var/www/osclass-git/oc-admin/themes/modern/items/settings.php:108
+msgid "<strong>Remember</strong> that you must configure reCAPTCHA first"
+msgstr "<strong>זכור</strong> שאתה חייב תחילה להגדיר את ה-reCAPTCHA "
+
+#: /var/www/osclass-git/oc-admin/themes/modern/items/settings.php:113
+msgid "Contact publisher"
+msgstr "צור קשר עם המפרסם"
+
+#: /var/www/osclass-git/oc-admin/themes/modern/items/settings.php:118
+msgid "Only allow registered users to contact publisher"
+msgstr "רק משתמשים רשומים יכולים ליצור קשר עם המפרסמים"
+
+#: /var/www/osclass-git/oc-admin/themes/modern/items/settings.php:130
+msgid "Notifications"
+msgstr "הודעות"
+
+#: /var/www/osclass-git/oc-admin/themes/modern/items/settings.php:135
+msgid "Notify admin when a new listing is added"
+msgstr "הודע לי כשמנהל הוסיף רישום חדש"
+
+#: /var/www/osclass-git/oc-admin/themes/modern/items/settings.php:153
+msgid "Optional fields"
+msgstr "שדה אופציונלי"
+
+#: /var/www/osclass-git/oc-admin/themes/modern/items/settings.php:163
+msgid "Attach images"
+msgstr "צרף תמונות"
+
+#: /var/www/osclass-git/oc-admin/themes/modern/items/settings.php:167
+msgid "Attach %s images per listing"
+msgstr "הוסף %s תמונות לכל מודעה"
+
+#: /var/www/osclass-git/oc-admin/themes/modern/languages/add.php:26
+msgid "Add language &raquo; %s"
+msgstr "הוסף שפה » %s"
+
+#: /var/www/osclass-git/oc-admin/themes/modern/languages/add.php:32
+#: /var/www/osclass-git/oc-admin/themes/modern/languages/index.php:27
+msgid "Add language"
+msgstr "הוסף שפה"
+
+#: /var/www/osclass-git/oc-admin/themes/modern/languages/add.php:37
+msgid "Download more languages at %s"
+msgstr "הורדת שפות נוספות ב %s"
+
+#: /var/www/osclass-git/oc-admin/themes/modern/languages/add.php:44
+msgid "Language package (.zip)"
+msgstr "חבילת שפה (zip.)"
+
+#: /var/www/osclass-git/oc-admin/themes/modern/languages/frm.php:26
+msgid "Edit language &raquo; %s"
+msgstr "ערוך שפה » %s"
+
+#: /var/www/osclass-git/oc-admin/themes/modern/languages/frm.php:46
+msgid "Edit language"
+msgstr "עריכת שפה"
+
+#: /var/www/osclass-git/oc-admin/themes/modern/languages/frm.php:62
+#: /var/www/osclass-git/oc-admin/themes/modern/languages/index.php:134
+msgid "Short name"
+msgstr "שם קצר"
+
+#: /var/www/osclass-git/oc-admin/themes/modern/languages/frm.php:74
+msgid "Currency format"
+msgstr "תבנית מטבע"
+
+#: /var/www/osclass-git/oc-admin/themes/modern/languages/frm.php:80
+msgid "Number of decimals"
+msgstr "מספר עשרוני"
+
+#: /var/www/osclass-git/oc-admin/themes/modern/languages/frm.php:86
+msgid "Decimal point"
+msgstr "נקודה עשרונית"
+
+#: /var/www/osclass-git/oc-admin/themes/modern/languages/frm.php:92
+msgid "Thousands separator"
+msgstr "מפריד (אלפים)"
+
+#: /var/www/osclass-git/oc-admin/themes/modern/languages/frm.php:98
+msgid "Date format"
+msgstr "תבנית תאריך"
+
+#: /var/www/osclass-git/oc-admin/themes/modern/languages/frm.php:104
+msgid "Stopwords"
+msgstr "מפריד מילים"
+
+#: /var/www/osclass-git/oc-admin/themes/modern/languages/frm.php:111
+msgid "Enabled for the public website"
+msgstr "מאופשר באתר הציבורי"
+
+#: /var/www/osclass-git/oc-admin/themes/modern/languages/frm.php:112
+msgid "Enabled for the backoffice (oc-admin)"
+msgstr "מאופשר למערכת הניהול"
+
+#: /var/www/osclass-git/oc-admin/themes/modern/languages/index.php:34
+msgid "Languages &raquo; %s"
+msgstr "שפות &raquo; %s "
+
+#: /var/www/osclass-git/oc-admin/themes/modern/languages/index.php:107
+msgid "Manage Languages"
+msgstr "ניהול שפות"
+
+#: /var/www/osclass-git/oc-admin/themes/modern/languages/index.php:119
+msgid "Bulk Actions"
+msgstr "פעולות גורפות"
+
+#: /var/www/osclass-git/oc-admin/themes/modern/languages/index.php:120
+msgid "Enable (Website)"
+msgstr "אפשר (באתר)"
+
+#: /var/www/osclass-git/oc-admin/themes/modern/languages/index.php:121
+msgid "Disable (Website)"
+msgstr "השבת (באתר)"
+
+#: /var/www/osclass-git/oc-admin/themes/modern/languages/index.php:136
+msgid "Enabled (website)"
+msgstr "מאופשר (באתר)"
+
+#: /var/www/osclass-git/oc-admin/themes/modern/languages/index.php:137
+msgid "Enabled (oc-admin)"
+msgstr "מאופשר (במערכת ניהול)"
+
+#: /var/www/osclass-git/oc-admin/themes/modern/main/index.php:32
+msgid "Dashboard"
+msgstr "דשבורד"
+
+#: /var/www/osclass-git/oc-admin/themes/modern/main/index.php:37
+msgid "Dashboard &raquo; %s"
+msgstr "דשבורד &raquo; %s"
+
+#: /var/www/osclass-git/oc-admin/themes/modern/main/index.php:109
+msgid "Users"
+msgstr "משתמשים"
+
+#: /var/www/osclass-git/oc-admin/themes/modern/main/index.php:222
+#: /var/www/osclass-git/oc-admin/themes/modern/main/index.php:225
+msgid "New listings"
+msgstr "רישומים חדשים"
+
+#: /var/www/osclass-git/oc-admin/themes/modern/main/index.php:222
+#: /var/www/osclass-git/oc-admin/themes/modern/main/index.php:231
+msgid "New users"
+msgstr "משתמשים חדשים"
+
+#: /var/www/osclass-git/oc-admin/themes/modern/main/index.php:226
+msgid "Total number of listings: %s"
+msgstr "סה\"כ רישומים: %s"
+
+#: /var/www/osclass-git/oc-admin/themes/modern/main/index.php:228
+msgid "Listing statistics"
+msgstr "סטטיסטיקות על רישומים"
+
+#: /var/www/osclass-git/oc-admin/themes/modern/main/index.php:232
+msgid "Total number of users: %s"
+msgstr "סה\"כ משתמשים: %s"
+
+#: /var/www/osclass-git/oc-admin/themes/modern/main/index.php:234
+msgid "User statistics"
+msgstr "סטטיסטיקות על משתמשים"
+
+#: /var/www/osclass-git/oc-admin/themes/modern/media/index.php:25
+msgid "Manage Media"
+msgstr "ניהול מדיה"
+
+#: /var/www/osclass-git/oc-admin/themes/modern/media/index.php:34
+msgid "Media &raquo; %s"
+msgstr "מדיה &raquo; %s"
+
+#: /var/www/osclass-git/oc-admin/themes/modern/media/index.php:126
+msgid "Attached to"
+msgstr "מצורף"
+
+#: /var/www/osclass-git/oc-admin/themes/modern/pages/frm.php:27
+msgid "Edit page"
+msgstr "ערוך עמוד"
+
+#: /var/www/osclass-git/oc-admin/themes/modern/pages/frm.php:32
+#: /var/www/osclass-git/oc-admin/themes/modern/pages/frm.php:34
+msgid "Add page"
+msgstr "הוסף עמוד"
+
+#: /var/www/osclass-git/oc-admin/themes/modern/pages/frm.php:41
+#: /var/www/osclass-git/oc-admin/themes/modern/pages/index.php:25
+msgid "Pages"
+msgstr "עמודים"
+
+#: /var/www/osclass-git/oc-admin/themes/modern/pages/index.php:27
+msgid "Create page"
+msgstr "יצירת עמוד"
+
+#: /var/www/osclass-git/oc-admin/themes/modern/pages/index.php:34
+msgid "Pages &raquo; %s"
+msgstr "עמודים &raquo; %s"
+
+#: /var/www/osclass-git/oc-admin/themes/modern/pages/index.php:135
+msgid "Manage pages"
+msgstr "ניהול עמודים"
+
+#: /var/www/osclass-git/oc-admin/themes/modern/pages/index.php:156
+msgid "Order"
+msgstr "מיון"
+
+#: /var/www/osclass-git/oc-admin/themes/modern/parts/footer.php:8
+msgid "Documentation"
+msgstr "תיעוד"
+
+#: /var/www/osclass-git/oc-admin/themes/modern/parts/footer.php:9
+msgid "Forums"
+msgstr "פורומים"
+
+#: /var/www/osclass-git/oc-admin/themes/modern/plugins/add.php:26
+#: /var/www/osclass-git/oc-admin/themes/modern/plugins/configuration.php:25
+#: /var/www/osclass-git/oc-admin/themes/modern/plugins/view.php:21
+msgid "Plugins"
+msgstr "תוספים"
+
+#: /var/www/osclass-git/oc-admin/themes/modern/plugins/add.php:33
+msgid "Add plugin &raquo; %s"
+msgstr "הוספת תוספים &raquo; %s"
+
+#: /var/www/osclass-git/oc-admin/themes/modern/market/plugins.php:27
+msgid "Add plugin"
+msgstr "הוספת תוסף"
+
+#: /var/www/osclass-git/oc-admin/themes/modern/plugins/add.php:63
+msgid "Cannot install new plugin"
+msgstr "התקנת תוסף חדש נכשלה"
+
+#: /var/www/osclass-git/oc-admin/themes/modern/plugins/add.php:44
+msgid "Download more plugins at %s"
+msgstr "הורדת תוספים נוספים ב %s"
+
+#: /var/www/osclass-git/oc-admin/themes/modern/plugins/add.php:51
+msgid "Plugin package (.zip)"
+msgstr "חבילת תוסף (zip.)"
+
+#: /var/www/osclass-git/oc-admin/themes/modern/market/plugins.php:25
+msgid "Manage Plugins"
+msgstr "ניהול תוספים"
+
+#: /var/www/osclass-git/oc-admin/themes/modern/market/plugins.php:34
+msgid "Plugins &raquo; %s"
+msgstr "תוספים &raquo; %s"
+
+#: /var/www/osclass-git/oc-admin/themes/modern/settings/comments.php:39
+msgid "Moderated comments: this field is required"
+msgstr "הערות מתונות: שדה זה חובה"
+
+#: /var/www/osclass-git/oc-admin/themes/modern/settings/comments.php:43
+msgid "Comments per page: this field is required"
+msgstr "הערה לעמוד: שדה זה נדרש"
+
+#: /var/www/osclass-git/oc-admin/themes/modern/settings/comments.php:104
+msgid "Default comment settings"
+msgstr "הגדרת תגובת ברירת מחדל"
+
+#: /var/www/osclass-git/oc-admin/themes/modern/settings/comments.php:108
+msgid "Allow people to post comments on listings"
+msgstr "לאפשר לאנשים לכתוב הערות על רישומים"
+
+#: /var/www/osclass-git/oc-admin/themes/modern/settings/comments.php:113
+msgid "Users must be registered and logged in to comment"
+msgstr "משתמשים חייבים להיות רשומים ומחוברים כדי להגיב"
+
+#: /var/www/osclass-git/oc-admin/themes/modern/settings/comments.php:128
+msgid "Other comment settings"
+msgstr "הגדרות נוספות לתגובה"
+
+#: /var/www/osclass-git/oc-admin/themes/modern/settings/comments.php:130
+msgid "Break comments into pages with %s comments per page"
+msgstr "פצל תגובות לעמודים. %s תגובות בעמוד"
+
+#: /var/www/osclass-git/oc-admin/themes/modern/settings/comments.php:138
+msgid "E-mail admin whenever"
+msgstr "שליחת מייל למנהל בכל פעם ש"
+
+#: /var/www/osclass-git/oc-admin/themes/modern/settings/comments.php:148
+msgid "E-mail user whenever"
+msgstr "שליחת מייל למשתמש בכל פעם ש"
+
+#: /var/www/osclass-git/oc-admin/themes/modern/settings/currencies.php:34
+msgid "Currencies &raquo; %s"
+msgstr "מטבעות &raquo; %s"
+
+#: /var/www/osclass-git/oc-admin/themes/modern/settings/currencies.php:121
+msgid "Currencies"
+msgstr "מטבעות"
+
+#: /var/www/osclass-git/oc-admin/themes/modern/settings/currencies.php:141
+msgid "Code"
+msgstr "קוד"
+
+#: /var/www/osclass-git/oc-admin/themes/modern/settings/currency_form.php:40
+#: /var/www/osclass-git/oc-admin/themes/modern/settings/currency_form.php:41
+#: /var/www/osclass-git/oc-admin/themes/modern/settings/currency_form.php:42
+msgid "Currency code: this field is required"
+msgstr "קוד מטבע: שדה חובה"
+
+#: /var/www/osclass-git/oc-admin/themes/modern/settings/currency_form.php:45
+#: /var/www/osclass-git/oc-admin/themes/modern/settings/currency_form.php:46
+msgid "Name: this field is required"
+msgstr "שם: שדה חובה"
+
+#: /var/www/osclass-git/oc-admin/themes/modern/settings/currency_form.php:76
+#: /var/www/osclass-git/oc-admin/themes/modern/settings/currency_form.php:77
+msgid "Add currency"
+msgstr "הוספת מטבע"
+
+#: /var/www/osclass-git/oc-admin/themes/modern/settings/currency_form.php:80
+msgid "Edit currency"
+msgstr "עריכת מטבע"
+
+#: /var/www/osclass-git/oc-admin/themes/modern/settings/currency_form.php:81
+msgid "Update currency"
+msgstr "עדכון מטבע"
+
+#: /var/www/osclass-git/oc-admin/themes/modern/settings/currency_form.php:109
+msgid "Currency Code"
+msgstr "קוד מטבע"
+
+#: /var/www/osclass-git/oc-admin/themes/modern/settings/index.php:57
+#: /var/www/osclass-git/oc-admin/themes/modern/settings/index.php:58
+msgid "Page title: this field is required"
+msgstr "כותרת העמוד: שדה חובה"
+
+#: /var/www/osclass-git/oc-admin/themes/modern/settings/index.php:61
+msgid "Email: this field is required"
+msgstr "מייל: שדה חובה"
+
+#: /var/www/osclass-git/oc-admin/themes/modern/settings/index.php:62
+msgid "Invalid email address"
+msgstr "כתובת מייל שגויה"
+
+#: /var/www/osclass-git/oc-admin/themes/modern/settings/index.php:73
+msgid "The search page shows: this field is required"
+msgstr "דף חיפוש מציג: שדה חובה"
+
+#: /var/www/osclass-git/oc-admin/themes/modern/settings/index.php:135
+msgid "General Settings &raquo; %s"
+msgstr "הגדרות כלליות &raquo; %s "
+
+#: /var/www/osclass-git/oc-admin/themes/modern/settings/index.php:143
+msgid "General Settings"
+msgstr "הגדרות כלליות"
+
+#: /var/www/osclass-git/oc-admin/themes/modern/settings/index.php:151
+msgid "Page title"
+msgstr "כותרת העמוד"
+
+#: /var/www/osclass-git/oc-admin/themes/modern/settings/index.php:155
+msgid "Page description"
+msgstr "תיאור העמוד"
+
+#: /var/www/osclass-git/oc-admin/themes/modern/settings/index.php:158
+msgid "Admin e-mail"
+msgstr "מייל של המנהל"
+
+#: /var/www/osclass-git/oc-admin/themes/modern/settings/index.php:161
+msgid "Default language"
+msgstr "שפת ברירת מחדל"
+
+#: /var/www/osclass-git/oc-admin/themes/modern/settings/index.php:171
+msgid "Default currency"
+msgstr "מטבע ברירת מחדל"
+
+#: /var/www/osclass-git/oc-admin/themes/modern/settings/index.php:181
+msgid "Week starts on"
+msgstr "השבוע מתחיל ב"
+
+#: /var/www/osclass-git/oc-admin/themes/modern/settings/index.php:184
+msgid "Sunday"
+msgstr "ראשון"
+
+#: /var/www/osclass-git/oc-admin/themes/modern/settings/index.php:185
+msgid "Monday"
+msgstr "שני"
+
+#: /var/www/osclass-git/oc-admin/themes/modern/settings/index.php:186
+msgid "Tuesday"
+msgstr "שלישי"
+
+#: /var/www/osclass-git/oc-admin/themes/modern/settings/index.php:187
+msgid "Wednesday"
+msgstr "רביעי"
+
+#: /var/www/osclass-git/oc-admin/themes/modern/settings/index.php:188
+msgid "Thursday"
+msgstr "חמישי"
+
+#: /var/www/osclass-git/oc-admin/themes/modern/settings/index.php:189
+msgid "Friday"
+msgstr "שישי"
+
+#: /var/www/osclass-git/oc-admin/themes/modern/settings/index.php:190
+msgid "Saturday"
+msgstr "שבת"
+
+#: /var/www/osclass-git/oc-admin/themes/modern/settings/index.php:195
+msgid "Timezone"
+msgstr "אזור זמן"
+
+#: /var/www/osclass-git/oc-admin/themes/modern/settings/index.php:200
+msgid "Select a timezone..."
+msgstr "בחירת אזור זמן"
+
+#: /var/www/osclass-git/oc-admin/themes/modern/settings/index.php:208
+msgid "Date & time format"
+msgstr "תבנית תאריך ושעה"
+
+#: /var/www/osclass-git/oc-admin/themes/modern/settings/index.php:251
+msgid "Documentation on date and time formatting"
+msgstr "הסבר על תבנית תאריך ושעה"
+
+#: /var/www/osclass-git/oc-admin/themes/modern/settings/index.php:255
+msgid "RSS shows"
+msgstr "הצג RSS"
+
+#: /var/www/osclass-git/oc-admin/themes/modern/settings/index.php:258
+#: /var/www/osclass-git/oc-admin/themes/modern/settings/index.php:272
+msgid "listings at most"
+msgstr "מוצג לרוב ב"
+
+#: /var/www/osclass-git/oc-admin/themes/modern/settings/index.php:277
+msgid "Parent categories"
+msgstr "קטגוריה ראשית"
+
+#: /var/www/osclass-git/oc-admin/themes/modern/settings/index.php:287
+msgid "Contact Settings"
+msgstr "פרטי איש קשר"
+
+#: /var/www/osclass-git/oc-admin/themes/modern/settings/index.php:289
+msgid "Attachments"
+msgstr "קבצים מצורפים"
+
+#: /var/www/osclass-git/oc-admin/themes/modern/settings/index.php:294
+msgid "Allow people to attach a file to the contact form"
+msgstr "אפשר לאנשים להוסיף קבצים לטופס יצירת קשר"
+
+#: /var/www/osclass-git/oc-admin/themes/modern/settings/index.php:299
+msgid "Cron Settings"
+msgstr "הגדרות Cron"
+
+#: /var/www/osclass-git/oc-admin/themes/modern/settings/index.php:301
+msgid "Automatic cron process"
+msgstr "תהליך cron אוטומטי"
+
+#: /var/www/osclass-git/oc-admin/themes/modern/settings/index.php:309
+msgid "It is <b>recommended</b> to have this option enabled, because some features require it."
+msgstr "<b>מומלץ</b> לאפשר אופציה זו כאפשרית משום שיש פיצ'רים שדורשים אותה"
+
+#: /var/www/osclass-git/oc-admin/themes/modern/appearance/index.php:203
+#: /var/www/osclass-git/oc-admin/themes/modern/appearance/index.php:206
+msgid "Close"
+msgstr "סגור"
+
+#: /var/www/osclass-git/oc-admin/themes/modern/settings/locations.php:35
+#: /var/www/osclass-git/oc-admin/themes/modern/settings/locations.php:258
+msgid "View more"
+msgstr "הצג עוד"
+
+#: /var/www/osclass-git/oc-admin/themes/modern/settings/locations.php:39
+#: /var/www/osclass-git/oc-admin/themes/modern/settings/locations.php:120
+msgid "Edit country"
+msgstr "עריכת מדינה"
+
+#: /var/www/osclass-git/oc-admin/themes/modern/settings/locations.php:40
+msgid "Add new country"
+msgstr "הוספת מדינה חדשה"
+
+#: /var/www/osclass-git/oc-admin/themes/modern/settings/locations.php:41
+#: /var/www/osclass-git/oc-admin/themes/modern/settings/locations.php:169
+msgid "Edit region"
+msgstr "עריכת אזור"
+
+#: /var/www/osclass-git/oc-admin/themes/modern/settings/locations.php:42
+msgid "Add new region"
+msgstr "הוספת אזור חדש"
+
+#: /var/www/osclass-git/oc-admin/themes/modern/settings/locations.php:43
+#: /var/www/osclass-git/oc-admin/themes/modern/settings/locations.php:220
+msgid "Edit city"
+msgstr "עריכת עיר"
+
+#: /var/www/osclass-git/oc-admin/themes/modern/settings/locations.php:44
+msgid "Add new city"
+msgstr "הוספת עיר"
+
+#: /var/www/osclass-git/oc-admin/themes/modern/settings/locations.php:78
+msgid "Locations"
+msgstr "מיקומים"
+
+#: /var/www/osclass-git/oc-admin/themes/modern/settings/locations.php:86
+msgid "Country code should have two characters"
+msgstr "קוד מדינה צריך להיות עם 2 תווים"
+
+#: /var/www/osclass-git/oc-admin/themes/modern/settings/locations.php:91
+msgid "Country code"
+msgstr "קוד מדינה"
+
+#: /var/www/osclass-git/oc-admin/themes/modern/settings/locations.php:100
+msgid "Add country"
+msgstr "הוספת מדינה"
+
+#: /var/www/osclass-git/oc-admin/themes/modern/settings/locations.php:145
+msgid "Add region"
+msgstr "הוספת אזור"
+
+#: /var/www/osclass-git/oc-admin/themes/modern/settings/locations.php:196
+msgid "Add city"
+msgstr "הוספת עיר"
+
+#: /var/www/osclass-git/oc-admin/themes/modern/settings/locations.php:244
+msgid "Countries"
+msgstr "מדינות"
+
+#: /var/www/osclass-git/oc-admin/themes/modern/admins/index.php:105
+#: /var/www/osclass-git/oc-admin/themes/modern/appearance/index.php:76
+msgid "Add new"
+msgstr "הוסף חדש"
+
+#: /var/www/osclass-git/oc-admin/themes/modern/settings/locations.php:271
+msgid "Regions"
+msgstr "אזורים"
+
+#: /var/www/osclass-git/oc-admin/themes/modern/settings/locations.php:281
+msgid "Cities"
+msgstr "ערים"
+
+#: /var/www/osclass-git/oc-admin/themes/modern/settings/mailserver.php:79
+msgid "Mail Settings &raquo; %s"
+msgstr "הגדרות מייל &raquo; %s"
+
+#: /var/www/osclass-git/oc-admin/themes/modern/settings/mailserver.php:87
+msgid "Mail Settings"
+msgstr "הגדרות מייל"
+
+#: /var/www/osclass-git/oc-admin/themes/modern/settings/mailserver.php:95
+msgid "Server type"
+msgstr "סוג שרת"
+
+#: /var/www/osclass-git/oc-admin/themes/modern/settings/mailserver.php:98
+msgid "Custom Server"
+msgstr "שרת מתואם אישית"
+
+#: /var/www/osclass-git/oc-admin/themes/modern/settings/mailserver.php:99
+msgid "GMail Server"
+msgstr "שרת ג'ימייל"
+
+#: /var/www/osclass-git/oc-admin/themes/modern/settings/mailserver.php:104
+msgid "Hostname"
+msgstr "Hostname"
+
+#: /var/www/osclass-git/oc-admin/themes/modern/settings/mailserver.php:110
+msgid "Server port"
+msgstr "Server Port"
+
+#: /var/www/osclass-git/oc-admin/themes/modern/settings/mailserver.php:128
+msgid "Encryption"
+msgstr "הצפנה"
+
+#: /var/www/osclass-git/oc-admin/themes/modern/settings/mailserver.php:131
+msgid "Options: blank, ssl or tls"
+msgstr "אפשרויות: ריק, SSL או TLS"
+
+#: /var/www/osclass-git/oc-admin/themes/modern/settings/mailserver.php:134
+msgid "Apache Module <b>mod_ssl</b> is not loaded"
+msgstr "Apache Module <b>mod_ssl</b> is not loaded"
+
+#: /var/www/osclass-git/oc-admin/themes/modern/settings/mailserver.php:140
+msgid "SMTP"
+msgstr "SMTP"
+
+#: /var/www/osclass-git/oc-admin/themes/modern/settings/mailserver.php:143
+msgid "SMTP authentication enabled"
+msgstr "SMTP authentication enabled"
+
+#: /var/www/osclass-git/oc-admin/themes/modern/settings/mailserver.php:147
+msgid "POP"
+msgstr "POP"
+
+#: /var/www/osclass-git/oc-admin/themes/modern/settings/mailserver.php:150
+msgid "Use POP before SMTP"
+msgstr "השתמש ב POP לפני SMTP"
+
+#: /var/www/osclass-git/oc-admin/themes/modern/settings/media.php:35
+msgid "Size is not in the correct format"
+msgstr "גודל זה לא בפורמט הנכון"
+
+#: /var/www/osclass-git/oc-admin/themes/modern/settings/media.php:58
+msgid "Thumbnail size: this field is required"
+msgstr "גודל תמונה ממוזערת: שדה חובה"
+
+#: /var/www/osclass-git/oc-admin/themes/modern/settings/media.php:59
+msgid "Thumbnail size: is not in the correct format"
+msgstr "גודל תמונה ממוזערת לא בפורמט הנכון"
+
+#: /var/www/osclass-git/oc-admin/themes/modern/settings/media.php:62
+msgid "Preview size: this field is required"
+msgstr "גודל תצוגה מקדימה: שדה חובה"
+
+#: /var/www/osclass-git/oc-admin/themes/modern/settings/media.php:63
+msgid "Preview size: is not in the correct format"
+msgstr "גודל תצוגה מקדימה: לא בפורמט הנכון"
+
+#: /var/www/osclass-git/oc-admin/themes/modern/settings/media.php:66
+msgid "Normal size: this field is required"
+msgstr "גודל רגיל: שדה חובה"
+
+#: /var/www/osclass-git/oc-admin/themes/modern/settings/media.php:67
+msgid "Normal size: is not in the correct format"
+msgstr "גודל רגיל: שדה חובה"
+
+#: /var/www/osclass-git/oc-admin/themes/modern/settings/media.php:156
+msgid "Media Settings &raquo; %s"
+msgstr "הגדרות מדיה &raquo; %s"
+
+#: /var/www/osclass-git/oc-admin/themes/modern/settings/media.php:163
+msgid "Media Settings"
+msgstr "הגדרות מדיה"
+
+#: /var/www/osclass-git/oc-admin/themes/modern/settings/media.php:172
+msgid "The sizes listed below determine the maximum dimensions in pixels to use when uploading a image. Format: <b>Width</b> x <b>Height</b>."
+msgstr "הגדלים המפורטים להלן יקבעו את הממדים המקסימאליים בפיקסלים לשימוש בעת העלאת תמונה. פורמט: <b> רוחב </b> x <b> גובה </b>."
+
+#: /var/www/osclass-git/oc-admin/themes/modern/settings/media.php:173
+msgid "Thumbnail size"
+msgstr "גודל תמונה ממוזערת"
+
+#: /var/www/osclass-git/oc-admin/themes/modern/settings/media.php:177
+msgid "Preview size"
+msgstr "גודל תצוגה מקדימה"
+
+#: /var/www/osclass-git/oc-admin/themes/modern/settings/media.php:181
+#: /var/www/osclass-git/oc-admin/themes/modern/settings/media.php:185
+msgid "Normal size"
+msgstr "גודל רגיל"
+
+#: /var/www/osclass-git/oc-admin/themes/modern/settings/media.php:189
+msgid "Keep original image, unaltered after uploading."
+msgstr "לאחר העלאה שמור על התמונה ללא שינויי."
+
+#: /var/www/osclass-git/oc-admin/themes/modern/settings/media.php:194
+msgid "Restrictions"
+msgstr "הגבלות"
+
+#: /var/www/osclass-git/oc-admin/themes/modern/settings/media.php:196
+msgid "Maximum size"
+msgstr "גודל מרבי"
+
+#: /var/www/osclass-git/oc-admin/themes/modern/settings/media.php:199
+msgid "Size in KB"
+msgstr "גודל ב KB"
+
+#: /var/www/osclass-git/oc-admin/themes/modern/settings/media.php:201
+msgid "Maximum size PHP configuration allows: %d KB"
+msgstr "תצורת PHP גודל המרבית מאפשרת: %d KB"
+
+#: /var/www/osclass-git/oc-admin/themes/modern/settings/media.php:213
+msgid "ImageMagick"
+msgstr "ImageMagick"
+
+#: /var/www/osclass-git/oc-admin/themes/modern/settings/media.php:217
+msgid "Use ImageMagick instead of GD library"
+msgstr "השתמש ImageMagick במקום ספריית GD"
+
+#: /var/www/osclass-git/oc-admin/themes/modern/settings/media.php:221
+msgid "ImageMagick library is not loaded"
+msgstr "ImageMagick לא טעונה"
+
+#: /var/www/osclass-git/oc-admin/themes/modern/settings/media.php:224
+msgid "It's faster and consumes less resources than GD library."
+msgstr "זה מהיר יותר וצורך פחות משאבים מאשר ספריית GD."
+
+#: /var/www/osclass-git/oc-admin/themes/modern/settings/media.php:227
+msgid "Watermark"
+msgstr "סימן מים"
+
+#: /var/www/osclass-git/oc-admin/themes/modern/settings/media.php:229
+msgid "Watermark type"
+msgstr "סוג סימן מים"
+
+#: /var/www/osclass-git/oc-admin/themes/modern/settings/media.php:233
+msgid "None"
+msgstr "אף אחד"
+
+#: /var/www/osclass-git/oc-admin/themes/modern/settings/media.php:237
+#: /var/www/osclass-git/oc-admin/themes/modern/settings/media.php:253
+msgid "Text"
+msgstr "טקסט"
+
+#: /var/www/osclass-git/oc-admin/themes/modern/settings/media.php:240
+msgid "Freetype library is required. How to <a target=\"_blank\" href=\"%s\">install/configure</a>"
+msgstr "הספרייה Freetype נדרשת. כיצד <a target=\"_blank\" href=\"%s\"> להתקין / להגדיר </a>"
+
+#: /var/www/osclass-git/oc-admin/themes/modern/settings/media.php:246
+#: /var/www/osclass-git/oc-admin/themes/modern/settings/media.php:280
+msgid "Image"
+msgstr "תמונה"
+
+#: /var/www/osclass-git/oc-admin/themes/modern/settings/media.php:303
+msgid "Regenerate images"
+msgstr "ליצר מחדש תמונות"
+
+#: /var/www/osclass-git/oc-admin/themes/modern/settings/media.php:309
+msgid "Regenerate"
+msgstr "לייצר מחדש"
+
+#: /var/www/osclass-git/oc-admin/themes/modern/settings/permalinks.php:171
+#: /var/www/osclass-git/oc-admin/themes/modern/settings/permalinks.php:172
+msgid "Listings url: this field is required"
+msgstr "כתובת אתר של הרישום: שדה חובה"
+
+#: /var/www/osclass-git/oc-admin/themes/modern/settings/permalinks.php:175
+#: /var/www/osclass-git/oc-admin/themes/modern/settings/permalinks.php:176
+msgid "Page url: this field is required"
+msgstr "כתובת עמוד: שדה חובה"
+
+#: /var/www/osclass-git/oc-admin/themes/modern/settings/permalinks.php:179
+#: /var/www/osclass-git/oc-admin/themes/modern/settings/permalinks.php:180
+msgid "Categories url: this field is required"
+msgstr "כתובת קטגוריה: שדה חובה"
+
+#: /var/www/osclass-git/oc-admin/themes/modern/settings/permalinks.php:183
+#: /var/www/osclass-git/oc-admin/themes/modern/settings/permalinks.php:184
+msgid "Search url: this field is required"
+msgstr "כתובת חיפוש: שדה חובה"
+
+#: /var/www/osclass-git/oc-admin/themes/modern/settings/permalinks.php:187
+#: /var/www/osclass-git/oc-admin/themes/modern/settings/permalinks.php:188
+msgid "Search country: this field is required"
+msgstr "חיפוש מדינה: שדה חובה"
+
+#: /var/www/osclass-git/oc-admin/themes/modern/settings/permalinks.php:191
+#: /var/www/osclass-git/oc-admin/themes/modern/settings/permalinks.php:192
+msgid "Search region: this field is required"
+msgstr "חיפוש אזור: שדה חובה"
+
+#: /var/www/osclass-git/oc-admin/themes/modern/settings/permalinks.php:195
+#: /var/www/osclass-git/oc-admin/themes/modern/settings/permalinks.php:196
+msgid "Search city: this field is required"
+msgstr "חיפוש עיר: שדה חובה"
+
+#: /var/www/osclass-git/oc-admin/themes/modern/settings/permalinks.php:199
+#: /var/www/osclass-git/oc-admin/themes/modern/settings/permalinks.php:200
+msgid "Search city area: this field is required"
+msgstr "חיפוש שכונה: שדה חובה"
+
+#: /var/www/osclass-git/oc-admin/themes/modern/settings/permalinks.php:203
+#: /var/www/osclass-git/oc-admin/themes/modern/settings/permalinks.php:204
+msgid "Search category: this field is required"
+msgstr "חיפוש קטגוריה: שדה חובה"
+
+#: /var/www/osclass-git/oc-admin/themes/modern/settings/permalinks.php:207
+#: /var/www/osclass-git/oc-admin/themes/modern/settings/permalinks.php:208
+msgid "Search user: this field is required"
+msgstr "חיפוש משתמש: שדה חובה"
+
+#: /var/www/osclass-git/oc-admin/themes/modern/settings/permalinks.php:211
+#: /var/www/osclass-git/oc-admin/themes/modern/settings/permalinks.php:212
+msgid "Search pattern: this field is required"
+msgstr "חיפוש צורה: שדה חובה"
+
+#: /var/www/osclass-git/oc-admin/themes/modern/settings/permalinks.php:215
+#: /var/www/osclass-git/oc-admin/themes/modern/settings/permalinks.php:216
+msgid "Contact url: this field is required"
+msgstr "כתובת איש קשר: שדה חובה"
+
+#: /var/www/osclass-git/oc-admin/themes/modern/settings/permalinks.php:219
+#: /var/www/osclass-git/oc-admin/themes/modern/settings/permalinks.php:220
+msgid "Feed url: this field is required"
+msgstr "כתובת fee: שדה חובה"
+
+#: /var/www/osclass-git/oc-admin/themes/modern/settings/permalinks.php:223
+#: /var/www/osclass-git/oc-admin/themes/modern/settings/permalinks.php:224
+msgid "Language url: this field is required"
+msgstr "כתובת שפה: שדה חובה"
+
+#: /var/www/osclass-git/oc-admin/themes/modern/settings/permalinks.php:227
+#: /var/www/osclass-git/oc-admin/themes/modern/settings/permalinks.php:228
+msgid "Listing mark url: this field is required"
+msgstr "כתובת של סימן רשום:שדה חובה"
+
+#: /var/www/osclass-git/oc-admin/themes/modern/settings/permalinks.php:231
+#: /var/www/osclass-git/oc-admin/themes/modern/settings/permalinks.php:232
+msgid "Listing send friend url: this field is required"
+msgstr "כתובת שליחה לחבר: שדה חובה"
+
+#: /var/www/osclass-git/oc-admin/themes/modern/settings/permalinks.php:235
+#: /var/www/osclass-git/oc-admin/themes/modern/settings/permalinks.php:236
+msgid "Listing contact url: this field is required"
+msgstr "כתובת איש קשר: שדה חובה"
+
+#: /var/www/osclass-git/oc-admin/themes/modern/settings/permalinks.php:239
+#: /var/www/osclass-git/oc-admin/themes/modern/settings/permalinks.php:240
+msgid "New listing url: this field is required"
+msgstr "כתובת רישום חדש: שדה חובה"
+
+#: /var/www/osclass-git/oc-admin/themes/modern/settings/permalinks.php:243
+#: /var/www/osclass-git/oc-admin/themes/modern/settings/permalinks.php:244
+msgid "Activate listing url: this field is required"
+msgstr "כתובת הפעלת רישום: שדה חובה"
+
+#: /var/www/osclass-git/oc-admin/themes/modern/settings/permalinks.php:247
+#: /var/www/osclass-git/oc-admin/themes/modern/settings/permalinks.php:248
+msgid "Edit listing url: this field is required"
+msgstr "כתובת עריכת רישום:שדה חובה"
+
+#: /var/www/osclass-git/oc-admin/themes/modern/settings/permalinks.php:251
+#: /var/www/osclass-git/oc-admin/themes/modern/settings/permalinks.php:252
+msgid "Delete listing url: this field is required"
+msgstr "כתובת מחיקת רישום: שדה חובה"
+
+#: /var/www/osclass-git/oc-admin/themes/modern/settings/permalinks.php:255
+#: /var/www/osclass-git/oc-admin/themes/modern/settings/permalinks.php:256
+msgid "Delete listing resource url: this field is required"
+msgstr "כתובת מחיקת משאבי רישום: שדה חובה"
+
+#: /var/www/osclass-git/oc-admin/themes/modern/settings/permalinks.php:259
+#: /var/www/osclass-git/oc-admin/themes/modern/settings/permalinks.php:260
+msgid "Login url: this field is required"
+msgstr "כתובת כניסה: שדה חובה"
+
+#: /var/www/osclass-git/oc-admin/themes/modern/settings/permalinks.php:263
+#: /var/www/osclass-git/oc-admin/themes/modern/settings/permalinks.php:264
+msgid "User dashboard url: this field is required"
+msgstr "כתובת דשבורד של משתמש: שדשה חובה"
+
+#: /var/www/osclass-git/oc-admin/themes/modern/settings/permalinks.php:267
+#: /var/www/osclass-git/oc-admin/themes/modern/settings/permalinks.php:268
+msgid "Logout url: this field is required"
+msgstr "כתובת יציאה מהמערכת: שדה חובה"
+
+#: /var/www/osclass-git/oc-admin/themes/modern/settings/permalinks.php:271
+#: /var/www/osclass-git/oc-admin/themes/modern/settings/permalinks.php:272
+msgid "User register url: this field is required"
+msgstr "כתובת רישום משתמש: שדה חובה"
+
+#: /var/www/osclass-git/oc-admin/themes/modern/settings/permalinks.php:275
+#: /var/www/osclass-git/oc-admin/themes/modern/settings/permalinks.php:276
+msgid "Activate user url: this field is required"
+msgstr "כתובת הפעלת משתמש: שדה חובה"
+
+#: /var/www/osclass-git/oc-admin/themes/modern/settings/permalinks.php:279
+msgid "Activate alert url: this field is required"
+msgstr "כתובת הפעלת התראה: שדה חובה"
+
+#: /var/www/osclass-git/oc-admin/themes/modern/settings/permalinks.php:283
+#: /var/www/osclass-git/oc-admin/themes/modern/settings/permalinks.php:284
+msgid "User profile url: this field is required"
+msgstr "כתובת פרופיל משתמש: שדה חובה"
+
+#: /var/www/osclass-git/oc-admin/themes/modern/settings/permalinks.php:287
+#: /var/www/osclass-git/oc-admin/themes/modern/settings/permalinks.php:288
+msgid "User listings url: this field is required"
+msgstr "כתובת רשומות של משתמש: שדה חובה"
+
+#: /var/www/osclass-git/oc-admin/themes/modern/settings/permalinks.php:291
+#: /var/www/osclass-git/oc-admin/themes/modern/settings/permalinks.php:292
+msgid "User alerts url: this field is required"
+msgstr "כתובת התראות למשתמש: שדה חובה"
+
+#: /var/www/osclass-git/oc-admin/themes/modern/settings/permalinks.php:295
+#: /var/www/osclass-git/oc-admin/themes/modern/settings/permalinks.php:296
+msgid "Recover user url: this field is required"
+msgstr "כתובת שחזור משתמש: שדה חובה"
+
+#: /var/www/osclass-git/oc-admin/themes/modern/settings/permalinks.php:299
+#: /var/www/osclass-git/oc-admin/themes/modern/settings/permalinks.php:300
+msgid "User forgot url: this field is required"
+msgstr "כתובת שכחתי סיסמא של משתמש: שדה חובה"
+
+#: /var/www/osclass-git/oc-admin/themes/modern/settings/permalinks.php:303
+#: /var/www/osclass-git/oc-admin/themes/modern/settings/permalinks.php:304
+msgid "Change password url: this field is required"
+msgstr "כתובת שינויי סיסמא: שדה חובה"
+
+#: /var/www/osclass-git/oc-admin/themes/modern/settings/permalinks.php:307
+#: /var/www/osclass-git/oc-admin/themes/modern/settings/permalinks.php:308
+msgid "Change email url: this field is required"
+msgstr "כתובת שינויי מייל: שדה חובה"
+
+#: /var/www/osclass-git/oc-admin/themes/modern/settings/permalinks.php:311
+#: /var/www/osclass-git/oc-admin/themes/modern/settings/permalinks.php:312
+msgid "Change email confirm url: this field is required"
+msgstr "כתובת שינויי מייל, אימות. : שדה חובה"
+
+#: /var/www/osclass-git/oc-admin/themes/modern/settings/permalinks.php:325
+#: /var/www/osclass-git/oc-admin/themes/modern/settings/permalinks.php:329
+#: /var/www/osclass-git/oc-admin/themes/modern/settings/permalinks.php:385
+msgid "Show rules"
+msgstr "הצגת חוקים"
+
+#: /var/www/osclass-git/oc-admin/themes/modern/settings/permalinks.php:326
+msgid "Hide rules"
+msgstr "הסתרת חוקים"
+
+#: /var/www/osclass-git/oc-admin/themes/modern/settings/permalinks.php:361
+msgid "Permalinks &raquo; %s"
+msgstr "קישורים קבועים &raquo; %s"
+
+#: /var/www/osclass-git/oc-admin/themes/modern/settings/permalinks.php:369
+msgid "Permalinks"
+msgstr "קישורים קבועים"
+
+#: /var/www/osclass-git/oc-admin/themes/modern/settings/permalinks.php:378
+msgid "Enable friendly urls"
+msgstr "אפשר כתובות ידידותיות (frendly urls)"
+
+#: /var/www/osclass-git/oc-admin/themes/modern/settings/permalinks.php:388
+msgid "Listing URL:"
+msgstr "כתובת רשימות"
+
+#: /var/www/osclass-git/oc-admin/themes/modern/settings/permalinks.php:392
+#: /var/www/osclass-git/oc-admin/themes/modern/settings/permalinks.php:401
+#: /var/www/osclass-git/oc-admin/themes/modern/settings/permalinks.php:410
+msgid "Accepted keywords: %s"
+msgstr "מילות מפתח מאושרות: %s"
+
+#: /var/www/osclass-git/oc-admin/themes/modern/settings/permalinks.php:397
+msgid "Page URL:"
+msgstr "כתובת עמוד"
+
+#: /var/www/osclass-git/oc-admin/themes/modern/settings/permalinks.php:406
+msgid "Category URL:"
+msgstr "כתובת קטגוריה"
+
+#: /var/www/osclass-git/oc-admin/themes/modern/settings/permalinks.php:415
+msgid "Search URL:"
+msgstr "כתובת חיפוש"
+
+#: /var/www/osclass-git/oc-admin/themes/modern/settings/permalinks.php:421
+msgid "Search keyword country"
+msgstr "מילות מפתח לחיפוש מדינה"
+
+#: /var/www/osclass-git/oc-admin/themes/modern/settings/permalinks.php:427
+msgid "Search keyword region"
+msgstr "מילות מפתח לחיפוש אזור"
+
+#: /var/www/osclass-git/oc-admin/themes/modern/settings/permalinks.php:433
+msgid "Search keyword city"
+msgstr "מילות מפתח לחיפוש עיר"
+
+#: /var/www/osclass-git/oc-admin/themes/modern/settings/permalinks.php:439
+msgid "Search keyword city area"
+msgstr "מילות מפתח לחיפוש שכונה"
+
+#: /var/www/osclass-git/oc-admin/themes/modern/settings/permalinks.php:445
+msgid "Search keyword category"
+msgstr "מילות מפתח לחיפוש קטגוריה"
+
+#: /var/www/osclass-git/oc-admin/themes/modern/settings/permalinks.php:451
+msgid "Search keyword user"
+msgstr "מילות מפתח לחיפוש משתמש"
+
+#: /var/www/osclass-git/oc-admin/themes/modern/settings/permalinks.php:457
+msgid "Search keyword pattern"
+msgstr "מילות מפתח לחיפוש צורה"
+
+#: /var/www/osclass-git/oc-admin/themes/modern/settings/permalinks.php:463
+msgid "Contact"
+msgstr "צור קשר"
+
+#: /var/www/osclass-git/oc-admin/themes/modern/settings/permalinks.php:469
+msgid "Feed"
+msgstr "Feed"
+
+#: /var/www/osclass-git/oc-admin/themes/modern/settings/permalinks.php:475
+msgid "Language"
+msgstr "שפה"
+
+#: /var/www/osclass-git/oc-admin/themes/modern/settings/permalinks.php:481
+msgid "Listing mark"
+msgstr "סימן רשום"
+
+#: /var/www/osclass-git/oc-admin/themes/modern/settings/permalinks.php:487
+msgid "Listing send friend"
+msgstr "שליחת רישום לחבר"
+
+#: /var/www/osclass-git/oc-admin/themes/modern/settings/permalinks.php:493
+msgid "Listing contact"
+msgstr "איש קשר לרישום"
+
+#: /var/www/osclass-git/oc-admin/themes/modern/settings/permalinks.php:499
+msgid "Listing new"
+msgstr "רישום חדש"
+
+#: /var/www/osclass-git/oc-admin/themes/modern/settings/permalinks.php:505
+msgid "Listing activate"
+msgstr "הפעלת רישום"
+
+#: /var/www/osclass-git/oc-admin/themes/modern/settings/permalinks.php:511
+msgid "Listing edit"
+msgstr "עריכת רישום"
+
+#: /var/www/osclass-git/oc-admin/themes/modern/settings/permalinks.php:517
+msgid "Listing delete"
+msgstr "מחיקת רישום"
+
+#: /var/www/osclass-git/oc-admin/themes/modern/settings/permalinks.php:523
+msgid "Listing resource delete"
+msgstr "מחיקת משאב רישום"
+
+#: /var/www/osclass-git/oc-admin/themes/modern/settings/permalinks.php:529
+msgid "User login"
+msgstr "כניסת משתמש"
+
+#: /var/www/osclass-git/oc-admin/themes/modern/settings/permalinks.php:535
+msgid "User dashboard"
+msgstr "דשבורד משתמש"
+
+#: /var/www/osclass-git/oc-admin/themes/modern/settings/permalinks.php:541
+msgid "User logout"
+msgstr "יציאת משתמש"
+
+#: /var/www/osclass-git/oc-admin/themes/modern/settings/permalinks.php:547
+msgid "User register"
+msgstr "רישום משתמש"
+
+#: /var/www/osclass-git/oc-admin/themes/modern/settings/permalinks.php:553
+msgid "User activate"
+msgstr "הפעלת משתמש"
+
+#: /var/www/osclass-git/oc-admin/themes/modern/settings/permalinks.php:559
+msgid "User activate alert"
+msgstr "התראת הפעלת משתמש"
+
+#: /var/www/osclass-git/oc-admin/themes/modern/settings/permalinks.php:565
+msgid "User profile"
+msgstr "פרופיל משתמש"
+
+#: /var/www/osclass-git/oc-admin/themes/modern/settings/permalinks.php:577
+msgid "User alerts"
+msgstr "התראות משתמש"
+
+#: /var/www/osclass-git/oc-admin/themes/modern/settings/permalinks.php:583
+msgid "User recover"
+msgstr "שחזור משתמש"
+
+#: /var/www/osclass-git/oc-admin/themes/modern/settings/permalinks.php:589
+msgid "User forgot"
+msgstr "משתמש שכח"
+
+#: /var/www/osclass-git/oc-admin/themes/modern/settings/permalinks.php:595
+msgid "User change password"
+msgstr "שינויי סיסמת משתמש"
+
+#: /var/www/osclass-git/oc-admin/themes/modern/settings/permalinks.php:601
+msgid "User change email"
+msgstr "שינויי מייל משתמש"
+
+#: /var/www/osclass-git/oc-admin/themes/modern/settings/permalinks.php:607
+msgid "User change email confirm"
+msgstr "אימות שינויי מייל משתמש"
+
+#: /var/www/osclass-git/oc-admin/themes/modern/settings/searches.php:79
+msgid "Latest searches Settings &raquo; %s"
+msgstr "הגדרות חיפושים אחרונים &raquo; %s"
+
+#: /var/www/osclass-git/oc-admin/themes/modern/settings/searches.php:87
+msgid "Latest searches Settings"
+msgstr "הגדרות לחיפושים אחרונים"
+
+#: /var/www/osclass-git/oc-admin/themes/modern/settings/searches.php:95
+msgid "Latest searches"
+msgstr "חיפושים אחרונים"
+
+#: /var/www/osclass-git/oc-admin/themes/modern/settings/searches.php:99
+msgid "Save the latest user searches"
+msgstr "שמור את החיפושים האחרונים למשתמש"
+
+#: /var/www/osclass-git/oc-admin/themes/modern/settings/searches.php:109
+msgid "One hour"
+msgstr "שעה"
+
+#: /var/www/osclass-git/oc-admin/themes/modern/settings/searches.php:113
+msgid "One day"
+msgstr "יום"
+
+#: /var/www/osclass-git/oc-admin/themes/modern/settings/searches.php:117
+msgid "One week"
+msgstr "שבוע"
+
+#: /var/www/osclass-git/oc-admin/themes/modern/settings/searches.php:121
+msgid "Forever"
+msgstr "לתמיד"
+
+#: /var/www/osclass-git/oc-admin/themes/modern/settings/searches.php:125
+msgid "Store 1000 queries"
+msgstr "שמור 1000 שאילתות"
+
+#: /var/www/osclass-git/oc-admin/themes/modern/settings/searches.php:129
+msgid "Store %s queries"
+msgstr "שמור %s שאילתות"
+
+#: /var/www/osclass-git/oc-admin/themes/modern/settings/searches.php:131
+msgid "This feature can generate a lot of data. It's recommended to purge this data periodically."
+msgstr "פיצ'ר זה יכול לייצר מידע רב. מומלץ לעשות ניקוי מדיי פעם במידה זה"
+
+#: /var/www/osclass-git/oc-admin/themes/modern/settings/spamNbots.php:37
+msgid "Spam and bots &raquo; %s"
+msgstr "דואר זבל ורובוטים &raquo; %s"
+
+#: /var/www/osclass-git/oc-admin/themes/modern/settings/spamNbots.php:43
+msgid "Spam and bots"
+msgstr "דואר זבל ורובוטים"
+
+#: /var/www/osclass-git/oc-admin/themes/modern/settings/spamNbots.php:45
+msgid "Akismet"
+msgstr "Akismet"
+
+#: /var/www/osclass-git/oc-admin/themes/modern/settings/spamNbots.php:46
+msgid "Akismet is a hosted web service that saves you time by automatically detecting comment and trackback spam. It's hosted on our servers, but we give you access to it through plugins and our API."
+msgstr "Akismet הוא שירות אינטרנט שחוסך לך זמן באופן אוטומטי לזיהוי והתגובה של ספאם. שרות זה מתארח על השרתים שלנו, אבל אנחנו נותנים לך גישה אליו דרך תוספים וה-API שלנו."
+
+#: /var/www/osclass-git/oc-admin/themes/modern/settings/spamNbots.php:53
+msgid "Akismet API Key"
+msgstr "Akismet API Key"
+
+#: /var/www/osclass-git/oc-admin/themes/modern/settings/spamNbots.php:63
+msgid "This key is valid"
+msgstr "מפתח זה הנו בתוקף"
+
+#: /var/www/osclass-git/oc-admin/themes/modern/settings/spamNbots.php:67
+msgid "The key you entered is invalid. Please double-check it"
+msgstr "המפתח שהזנת אינו חוקי. אנא בדוק אותו"
+
+#: /var/www/osclass-git/oc-admin/themes/modern/settings/spamNbots.php:71
+msgid "Akismet is disabled, please enter an API key. <a href=\"%s\" target=\"_blank\">(Get your key)</a>"
+msgstr "Akismet מושבת, אנא הכנס את מפתח ה-API. <a href=\"%s\" target=\"_blank\">(קבל את המפתח שלך)</a>"
+
+#: /var/www/osclass-git/oc-admin/themes/modern/settings/spamNbots.php:88
+msgid "reCAPTCHA"
+msgstr "reCAPTCHA"
+
+#: /var/www/osclass-git/oc-admin/themes/modern/settings/spamNbots.php:89
+msgid "reCAPTCHA helps prevent automated abuse of your site by using a CAPTCHA to ensure that only humans perform certain actions. <a href=\"%s\" target=\"_blank\">Get your key</a>"
+msgstr "reCAPTCHA מסייע במניעת התעללות אוטומטית באתר שלך על ידי שימוש CAPTCHA כדי להבטיח שרק בני האדם לבצע פעולות מסוימות. <a href=\"%s\" target=\"_blank\"> קבל את המפתח שלך </a>"
+
+#: /var/www/osclass-git/oc-admin/themes/modern/settings/spamNbots.php:96
+msgid "reCAPTCHA Public key"
+msgstr "reCAPTCHA מפתח ציבורי"
+
+#: /var/www/osclass-git/oc-admin/themes/modern/settings/spamNbots.php:102
+msgid "reCAPTCHA Private key"
+msgstr "reCAPTCHA מפתח פרטי"
+
+#: /var/www/osclass-git/oc-admin/themes/modern/settings/spamNbots.php:109
+msgid "If you see the reCAPTCHA form it means that you have correctly entered the public key"
+msgstr "אם הנך רואה את טופס ה-reCAPTCHA  זה אומר שהזנת את המפתח הציבורי בצורה טובה"
+
+#: /var/www/osclass-git/oc-admin/themes/modern/stats/comments.php:26
+#: /var/www/osclass-git/oc-admin/themes/modern/stats/comments.php:142
+#: /var/www/osclass-git/oc-admin/themes/modern/stats/items.php:28
+#: /var/www/osclass-git/oc-admin/themes/modern/stats/items.php:194
+#: /var/www/osclass-git/oc-admin/themes/modern/stats/reports.php:23
+#: /var/www/osclass-git/oc-admin/themes/modern/stats/reports.php:145
+#: /var/www/osclass-git/oc-admin/themes/modern/stats/users.php:29
+#: /var/www/osclass-git/oc-admin/themes/modern/stats/users.php:174
+msgid "Last 10 weeks"
+msgstr "10 השבועות האחרונים"
+
+#: /var/www/osclass-git/oc-admin/themes/modern/stats/comments.php:29
+#: /var/www/osclass-git/oc-admin/themes/modern/stats/comments.php:141
+#: /var/www/osclass-git/oc-admin/themes/modern/stats/items.php:31
+#: /var/www/osclass-git/oc-admin/themes/modern/stats/items.php:193
+#: /var/www/osclass-git/oc-admin/themes/modern/stats/reports.php:26
+#: /var/www/osclass-git/oc-admin/themes/modern/stats/reports.php:144
+#: /var/www/osclass-git/oc-admin/themes/modern/stats/users.php:32
+#: /var/www/osclass-git/oc-admin/themes/modern/stats/users.php:173
+msgid "Last 10 months"
+msgstr "10 החודשים האחרונים"
+
+#: /var/www/osclass-git/oc-admin/themes/modern/stats/comments.php:32
+#: /var/www/osclass-git/oc-admin/themes/modern/stats/comments.php:143
+#: /var/www/osclass-git/oc-admin/themes/modern/stats/items.php:34
+#: /var/www/osclass-git/oc-admin/themes/modern/stats/items.php:195
+#: /var/www/osclass-git/oc-admin/themes/modern/stats/reports.php:29
+#: /var/www/osclass-git/oc-admin/themes/modern/stats/reports.php:146
+#: /var/www/osclass-git/oc-admin/themes/modern/stats/users.php:35
+#: /var/www/osclass-git/oc-admin/themes/modern/stats/users.php:175
+msgid "Last 10 days"
+msgstr "10 הימים האחרונים"
+
+#: /var/www/osclass-git/oc-admin/themes/modern/comments/index.php:106
+msgid "Comments"
+msgstr "הערות"
+
+#: /var/www/osclass-git/oc-admin/themes/modern/comments/index.php:124
+#: /var/www/osclass-git/oc-admin/themes/modern/comments/index.php:125
+#: /var/www/osclass-git/oc-admin/themes/modern/comments/index.php:126
+#: /var/www/osclass-git/oc-admin/themes/modern/comments/index.php:127
+#: /var/www/osclass-git/oc-admin/themes/modern/comments/index.php:128
+msgid "Are you sure you want to %s the selected comments?"
+msgstr "האם אתה בטוח שברצונך ל %s את ההערות המסומנות?"
+
+#: /var/www/osclass-git/oc-admin/themes/modern/stats/comments.php:190
+#: /var/www/osclass-git/oc-admin/themes/modern/stats/items.php:208
+#: /var/www/osclass-git/oc-admin/themes/modern/stats/items.php:225
+#: /var/www/osclass-git/oc-admin/themes/modern/stats/users.php:188
+#: /var/www/osclass-git/oc-admin/themes/modern/stats/users.php:205
+#: /var/www/osclass-git/oc-admin/themes/modern/stats/users.php:222
+msgid "There're no statistics yet"
+msgstr "עדיין אין סטטיסטיקה"
+
+#: /var/www/osclass-git/oc-admin/themes/modern/stats/items.php:43
+msgid "Quickly find out how many new listings have been published on your site and how many visits each of the listings gets."
+msgstr "בירור מהיר כמה רישומים חדשים פורסמו באתר וכמה מבקרים לכל רישום."
+
+#: /var/www/osclass-git/oc-admin/themes/modern/stats/comments.php:166
+msgid "Latest comments on the web"
+msgstr "תגובות אחרונות באתר"
+
+#: /var/www/osclass-git/oc-admin/themes/modern/stats/items.php:56
+msgid "Listing Statistics &raquo; %s"
+msgstr "סטטיסטיקות על רישומים: &raquo; %s"
+
+#: /var/www/osclass-git/oc-admin/themes/modern/stats/items.php:83
+msgid "Items"
+msgstr "פריטים"
+
+#: /var/www/osclass-git/oc-admin/themes/modern/stats/items.php:85
+msgid "Views"
+msgstr "צפיות"
+
+#: /var/www/osclass-git/oc-admin/themes/modern/stats/items.php:188
+msgid "Listing Statistics"
+msgstr "סטטיסטיקות על רישום "
+
+#: /var/www/osclass-git/oc-admin/themes/modern/stats/items.php:202
+msgid "New listing"
+msgstr "רישום חדש"
+
+#: /var/www/osclass-git/oc-admin/themes/modern/stats/items.php:205
+msgid "Number of new listings"
+msgstr "מספר הרישומים החדשים"
+
+#: /var/www/osclass-git/oc-admin/themes/modern/stats/items.php:219
+msgid "Listings' views"
+msgstr "צפיות ברישומים"
+
+#: /var/www/osclass-git/oc-admin/themes/modern/stats/items.php:222
+msgid "Total number of listings' views"
+msgstr "סה\"כ צפיות ברישומים"
+
+#: /var/www/osclass-git/oc-admin/themes/modern/comments/frm.php:89
+msgid "Inactive"
+msgstr "לא פעיל"
+
+#: /var/www/osclass-git/oc-admin/themes/modern/stats/reports.php:75
+msgid "Bad category"
+msgstr "קטגוריה לא טובה"
+
+#: /var/www/osclass-git/oc-admin/themes/modern/stats/reports.php:153
+msgid "Total number of reports"
+msgstr "סה\"כ מספר הדוחות"
+
+#: /var/www/osclass-git/oc-admin/themes/modern/stats/users.php:136
+#: /var/www/osclass-git/oc-admin/themes/modern/stats/users.php:199
+msgid "Users per country"
+msgstr "משתמשים לפי מדינה"
+
+#: /var/www/osclass-git/oc-admin/themes/modern/stats/users.php:139
+#: /var/www/osclass-git/oc-admin/themes/modern/stats/users.php:151
+msgid "Unknown"
+msgstr "לא ידוע"
+
+#: /var/www/osclass-git/oc-admin/themes/modern/stats/users.php:148
+#: /var/www/osclass-git/oc-admin/themes/modern/stats/users.php:216
+msgid "Users per region"
+msgstr "משתמשים לפי אזור"
+
+#: /var/www/osclass-git/oc-admin/themes/modern/stats/users.php:168
+msgid "User Statistics"
+msgstr "סטטיסטיקות על משתמש"
+
+#: /var/www/osclass-git/oc-admin/themes/modern/stats/users.php:232
+msgid "Latest users on the web"
+msgstr "משתמשים אחרונים באתר"
+
+#: /var/www/osclass-git/oc-admin/themes/modern/stats/users.php:239
+msgid "E-Mail"
+msgstr "מייל"
+
+#: /var/www/osclass-git/oc-admin/themes/modern/stats/users.php:265
+msgid "Avg. items per user"
+msgstr "ממוצע פרטים למשתמש"
+
+#: /var/www/osclass-git/oc-admin/themes/modern/stats/users.php:268
+msgid "%s listings per user"
+msgstr "%s רישומים למשתמש"
+
+#: /var/www/osclass-git/oc-admin/themes/modern/tools/backup.php:43
+#: /var/www/osclass-git/oc-admin/themes/modern/tools/category.php:25
+#: /var/www/osclass-git/oc-admin/themes/modern/tools/import.php:30
+#: /var/www/osclass-git/oc-admin/themes/modern/tools/locations.php:66
+#: /var/www/osclass-git/oc-admin/themes/modern/tools/maintenance.php:32
+#: /var/www/osclass-git/oc-admin/themes/modern/tools/upgrade.php:83
+#: /var/www/osclass-git/oc-admin/themes/modern/upgrade/index.php:21
+msgid "Tools"
+msgstr "כלים"
+
+#: /var/www/osclass-git/oc-admin/themes/modern/tools/backup.php:50
+msgid "Backup &raquo; %s"
+msgstr "גיבויי &raquo; %s"
+
+#: /var/www/osclass-git/oc-admin/themes/modern/tools/backup.php:58
+msgid "Backup"
+msgstr "גיבויי"
+
+#: /var/www/osclass-git/oc-admin/themes/modern/tools/backup.php:65
+msgid "Backup folder"
+msgstr "תיקיית גיבויי"
+
+#: /var/www/osclass-git/oc-admin/themes/modern/tools/backup.php:71
+msgid "This is the folder in which your backups will be created. We recommend that you choose a non-public path."
+msgstr "זוהי התיקייה שבה ייווצרו הגיבויים שלך. אנו ממליצים לך לבחור תיקייה שאינה ציבורית."
+
+#: /var/www/osclass-git/oc-admin/themes/modern/tools/backup.php:76
+msgid "Backup SQL (store on server)"
+msgstr "גיבויי דטה בייס (נשמר בשרת)"
+
+#: /var/www/osclass-git/oc-admin/themes/modern/tools/backup.php:77
+msgid "Backup files (download file)"
+msgstr "גיבויי קבצים (הורדת קובץ)"
+
+#: /var/www/osclass-git/oc-admin/themes/modern/tools/backup.php:78
+msgid "Backup files (store on server)"
+msgstr "גיבויי קבצים (נשמר בשרת)"
+
+#: /var/www/osclass-git/oc-admin/themes/modern/tools/category.php:30
+msgid "Category stats &raquo; %s"
+msgstr "סטטיסטיקות על קטגוריה &raquo; %s"
+
+#: /var/www/osclass-git/oc-admin/themes/modern/tools/category.php:38
+msgid "Category stats"
+msgstr "סטטיסטיקות על קטגוריה"
+
+#: /var/www/osclass-git/oc-admin/themes/modern/tools/category.php:48
+msgid "Calculate category stats"
+msgstr "חישוב סטטיסטיקות על קטגוריה"
+
+#: /var/www/osclass-git/oc-admin/themes/modern/tools/import.php:37
+msgid "Import &raquo; %s"
+msgstr "יבוא &raquo; %s"
+
+#: /var/www/osclass-git/oc-admin/themes/modern/tools/import.php:44
+msgid "Import"
+msgstr "יבוא"
+
+#: /var/www/osclass-git/oc-admin/themes/modern/tools/import.php:51
+msgid "File (.sql)"
+msgstr "קובץ (.sql)"
+
+#: /var/www/osclass-git/oc-admin/themes/modern/tools/import.php:57
+msgid "Import data"
+msgstr "יבוא דטה"
+
+#: /var/www/osclass-git/oc-admin/themes/modern/tools/locations.php:71
+msgid "Location stats &raquo; %s"
+msgstr "סטטיסטיקות על מיקום &raquo; %s"
+
+#: /var/www/osclass-git/oc-admin/themes/modern/tools/locations.php:79
+msgid "Locations stats"
+msgstr "סטטיסטיקות על מיקומים"
+
+#: /var/www/osclass-git/oc-admin/themes/modern/tools/locations.php:82
+msgid "Complete"
+msgstr "השלם"
+
+#: /var/www/osclass-git/index.php:41
+msgid "Maintenance &raquo; %s"
+msgstr "תחזוקה &raquo; %s"
+
+#: /var/www/osclass-git/oc-admin/themes/modern/tools/maintenance.php:47
+msgid "Maintenance"
+msgstr "תחזוקה"
+
+#: /var/www/osclass-git/oc-admin/themes/modern/tools/maintenance.php:54
+msgid "Maintenance mode is: <strong>%s</strong>"
+msgstr "מצב תחזוקה : <strong>%s</strong>"
+
+#: /var/www/osclass-git/oc-admin/themes/modern/tools/maintenance.php:58
+msgid "Disable maintenance mode"
+msgstr "ביטול מצב תחזוקה"
+
+#: /var/www/osclass-git/oc-admin/themes/modern/tools/maintenance.php:58
+msgid "Enable maintenance mode"
+msgstr "הפעל מצב תחזוקה"
+
+#: /var/www/osclass-git/oc-admin/themes/modern/tools/upgrade.php:43
+msgid "Checking for updates (Current version %s)"
+msgstr "בודק עדכונים (גרסא נוכחית %s)"
+
+#: /var/www/osclass-git/oc-admin/themes/modern/tools/upgrade.php:49
+msgid "New version to update:"
+msgstr "גרסא חדשה לעדכון: "
+
+#: /var/www/osclass-git/oc-admin/themes/modern/tools/upgrade.php:61
+#: /var/www/osclass-git/oc-admin/themes/modern/tools/upgrade.php:98
+#: /var/www/osclass-git/oc-admin/themes/modern/upgrade/index.php:26
+#: /var/www/osclass-git/oc-admin/themes/modern/upgrade/index.php:56
+msgid "Upgrade"
+msgstr "שדרוג"
+
+#: /var/www/osclass-git/oc-admin/themes/modern/tools/upgrade.php:90
+msgid "Upgrade &raquo; %s"
+msgstr "שדרוג &raquo; %s"
+
+#: /var/www/osclass-git/oc-admin/themes/modern/users/frm.php:32
+msgid "Update user"
+msgstr "שדרוג משתמש"
+
+#: /var/www/osclass-git/oc-admin/themes/modern/users/frm.php:35
+#: /var/www/osclass-git/oc-admin/themes/modern/users/frm.php:37
+msgid "Add new user"
+msgstr "הוספת משתמש חדש"
+
+#: /var/www/osclass-git/oc-admin/themes/modern/users/frm.php:82
+msgid "Contact info"
+msgstr "פרטים ליצירת קשר"
+
+#: /var/www/osclass-git/oc-admin/themes/modern/users/frm.php:92
+msgid "Last access"
+msgstr "הגישה האחרונה"
+
+#: /var/www/osclass-git/oc-admin/themes/modern/users/frm.php:95
+msgid "%s on %s"
+msgstr "%s ב %s"
+
+#: /var/www/osclass-git/oc-admin/themes/modern/users/frm.php:107
+msgid "(required)"
+msgstr "(נדרש)"
+
+#: /var/www/osclass-git/oc-admin/themes/modern/users/frm.php:113
+#: /var/www/osclass-git/oc-admin/themes/modern/users/frm.php:126
+msgid "Cell phone"
+msgstr "סלולרי"
+
+#: /var/www/osclass-git/oc-admin/themes/modern/users/frm.php:120
+msgid "Phone"
+msgstr "טלפון"
+
+#: /var/www/osclass-git/oc-admin/themes/modern/users/frm.php:132
+msgid "Website"
+msgstr "אתר אינטרנט"
+
+#: /var/www/osclass-git/oc-admin/themes/modern/users/frm.php:139
+msgid "User type"
+msgstr "סוג משתמש"
+
+#: /var/www/osclass-git/oc-admin/themes/modern/users/frm.php:145
+msgid "Additional information"
+msgstr "מידע נוסף"
+
+#: /var/www/osclass-git/oc-admin/themes/modern/users/frm.php:150
+msgid "Location"
+msgstr "מיקום"
+
+#: /var/www/osclass-git/oc-admin/themes/modern/users/frm.php:183
+msgid "(twice, required)"
+msgstr "(נדרש, פעמיים)"
+
+#: /var/www/osclass-git/oc-admin/themes/modern/users/index.php:107
+msgid "Manage users"
+msgstr "ניהול משתמשים"
+
+#: /var/www/osclass-git/oc-admin/themes/modern/users/index.php:35
+msgid "Manage users &raquo; %s"
+msgstr "ניהול משתמשים &raquo; %s"
+
+#: /var/www/osclass-git/oc-admin/themes/modern/users/index.php:134
+msgid "Resend activation"
+msgstr "שלח שוב אקטיבציה"
+
+#: /var/www/osclass-git/oc-includes/osclass/emails.php:74
+#: /var/www/osclass-git/oc-includes/osclass/emails.php:119
+#: /var/www/osclass-git/oc-includes/osclass/emails.php:164
+#: /var/www/osclass-git/oc-includes/osclass/emails.php:209
+msgid "unsubscribe alert"
+msgstr "התראה על הסרה מהרשמה"
+
+#: /var/www/osclass-git/oc-admin/themes/modern/users/settings.php:50
+msgid "Users enabled"
+msgstr "משתמשים פעילים"
+
+#: /var/www/osclass-git/oc-admin/themes/modern/users/settings.php:56
+msgid "Anyone can register"
+msgstr "כל אחד יכול להרשם"
+
+#: /var/www/osclass-git/oc-admin/themes/modern/users/settings.php:62
+msgid "Users need to validate their account"
+msgstr "משתמשים צריכים לאמת את החשבון שלהם"
+
+#: /var/www/osclass-git/oc-admin/themes/modern/users/settings.php:67
+msgid "Admin notifications"
+msgstr "הודעות מנהל"
+
+#: /var/www/osclass-git/oc-admin/themes/modern/users/settings.php:71
+msgid "When a new user is registered"
+msgstr "מתי שמתשמש חדש נרשם"
+
+#: /var/www/osclass-git/oc-includes/osclass/emails.php:720
+#: /var/www/osclass-git/oc-includes/osclass/emails.php:723
+#: /var/www/osclass-git/oc-includes/osclass/emails.php:1160
+msgid "Admin mail system"
+msgstr "ניהול מערכת דואר"
+
+#: /var/www/osclass-git/oc-includes/osclass/functions.php:49
+#: /var/www/osclass-git/oc-includes/osclass/functions.php:139
+msgid "Search results"
+msgstr "תוצאות חיפוש"
+
+#: /var/www/osclass-git/oc-includes/osclass/functions.php:81
+msgid "Publish a listing"
+msgstr "פרסם רישום"
+
+#: /var/www/osclass-git/oc-includes/osclass/functions.php:82
+msgid "Edit your listing"
+msgstr "ערוך את הרישום שלך"
+
+#: /var/www/osclass-git/oc-includes/osclass/functions.php:83
+msgid "Send to a friend"
+msgstr "שלח לחבר"
+
+#: /var/www/osclass-git/oc-includes/osclass/functions.php:84
+msgid "Contact seller"
+msgstr "צור קשר עם המוכר"
+
+#: /var/www/osclass-git/oc-includes/osclass/functions.php:92
+#: /var/www/osclass-git/oc-includes/osclass/install-functions.php:774
+#: /var/www/osclass-git/oc-includes/osclass/install-functions.php:793
+msgid "Error"
+msgstr "תקלה"
+
+#: /var/www/osclass-git/oc-includes/osclass/classes/AdminMenu.php:86
+msgid "Languages"
+msgstr "שפות"
+
+#: /var/www/osclass-git/oc-includes/osclass/functions.php:103
+msgid "page"
+msgstr "עמוד"
+
+#: /var/www/osclass-git/oc-includes/osclass/functions.php:113
+msgid "Show all listings"
+msgstr "הצגת כל הרישומים"
+
+#: /var/www/osclass-git/oc-includes/osclass/functions.php:150
+msgid "Recover your password"
+msgstr "שחזור הסיסמא שלך"
+
+#: /var/www/osclass-git/oc-includes/osclass/functions.php:151
+msgid "Login"
+msgstr "כניסה"
+
+#: /var/www/osclass-git/oc-includes/osclass/functions.php:155
+msgid "Create a new account"
+msgstr "יצירת חשבון חדש"
+
+#: /var/www/osclass-git/oc-includes/osclass/functions.php:160
+msgid "Manage my listings"
+msgstr "ניהול הרישומים שלי"
+
+#: /var/www/osclass-git/oc-includes/osclass/functions.php:161
+msgid "Manage my alerts"
+msgstr "ניהול ההתראות שלי"
+
+#: /var/www/osclass-git/oc-includes/osclass/functions.php:162
+msgid "Update my profile"
+msgstr "עדכון הפרופיל שלי"
+
+#: /var/www/osclass-git/oc-includes/osclass/functions.php:163
+msgid "Public profile"
+msgstr "עדכון פרופיל"
+
+#: /var/www/osclass-git/oc-includes/osclass/functions.php:164
+msgid "Change my email"
+msgstr "שינויי כתובת מייל"
+
+#: /var/www/osclass-git/oc-includes/osclass/functions.php:165
+msgid "Change my password"
+msgstr "שינויי סיסמא"
+
+#: /var/www/osclass-git/oc-includes/osclass/functions.php:166
+msgid "Recover my password"
+msgstr "שחזור סיסמא"
+
+#: /var/www/osclass-git/oc-includes/osclass/functions.php:409
+msgid "Logout"
+msgstr "יציאה"
+
+#: /var/www/osclass-git/oc-includes/osclass/functions.php:419
+msgid "New comments"
+msgstr "הערות חדשות"
+
+#: /var/www/osclass-git/oc-includes/osclass/functions.php:484
+msgid "Plugin updates"
+msgstr "עדכוני תוספים"
+
+#: /var/www/osclass-git/oc-includes/osclass/install-functions.php:59
+msgid "PHP version >= 5.x"
+msgstr "PHP version >= 5.x"
+
+#: /var/www/osclass-git/oc-includes/osclass/install-functions.php:64
+msgid "MySQLi extension for PHP"
+msgstr "MySQLi extension for PHP"
+
+#: /var/www/osclass-git/oc-includes/osclass/install-functions.php:66
+msgid "MySQLi extension is required. How to <a target=\"_blank\" href=\"http://www.php.net/manual/en/mysqli.setup.php\">install/configure</a>."
+msgstr "MySQLi extension is required. מדריך איך  <a target=\"_blank\" href=\"http://www.php.net/manual/en/mysqli.setup.php\">להתקין/להגדיר</a>."
+
+#: /var/www/osclass-git/oc-includes/osclass/install-functions.php:69
+msgid "GD extension for PHP"
+msgstr "GD extension for PHP"
+
+#: /var/www/osclass-git/oc-includes/osclass/install-functions.php:71
+msgid "GD extension is required. How to <a target=\"_blank\" href=\"http://www.php.net/manual/en/image.setup.php\">install/configure</a>."
+msgstr "GD extension is required. מדריך איך <a target=\"_blank\" href=\"http://www.php.net/manual/en/image.setup.php\">להתקין/להגדיר</a>."
+
+#: /var/www/osclass-git/oc-includes/osclass/install-functions.php:74
+msgid "Folder <code>oc-content/uploads</code> exists"
+msgstr "התיקייה <code>oc-content/uploads</code> קיימת "
+
+#: /var/www/osclass-git/oc-includes/osclass/install-functions.php:76
+msgid "You have to create <code>uploads</code> folder, i.e.: <code>mkdir %soc-content/uploads/</code>"
+msgstr "עליך לייצר את התיקייה <code>uploads</code> דוגמא לפקודה: <code>mkdir %soc-content/uploads/</code>"
+
+#: /var/www/osclass-git/oc-includes/osclass/install-functions.php:105
+msgid "Root directory is writable"
+msgstr "תקייה ראשית ניתנת לכתיבה"
+
+#: /var/www/osclass-git/oc-includes/osclass/install-functions.php:107
+msgid "Root folder has to be writable, i.e.: <code>chmod a+w %s</code>"
+msgstr "תיקייה חראשית חייבת להיות עם הרשאות כתיבה. דוגמא לפקודה: <code>chmod a+w %s</code>"
+
+#: /var/www/osclass-git/oc-includes/osclass/install-functions.php:192
+#: /var/www/osclass-git/oc-includes/osclass/install-functions.php:204
+#: /var/www/osclass-git/oc-includes/osclass/install-functions.php:241
+#: /var/www/osclass-git/oc-includes/osclass/install-functions.php:253
+msgid "Cannot connect to the database. Error number: %s"
+msgstr "לא מצליח להתחבר לדטה בייס. תקלה מספר: %s"
+
+#: /var/www/osclass-git/oc-includes/osclass/install-functions.php:198
+#: /var/www/osclass-git/oc-includes/osclass/install-functions.php:247
+msgid "Cannot connect to the database. Check if the user has privileges."
+msgstr "לא מצליח להתחבר לדטה בייס. בדוק אם למשתמש יש את ההרשאות."
+
+#: /var/www/osclass-git/oc-includes/osclass/install-functions.php:200
+#: /var/www/osclass-git/oc-includes/osclass/install-functions.php:249
+msgid "Cannot connect to the database. Check if the username and password are correct."
+msgstr "לא מצליח להתחבר לדטה בייס. בדוק אם שם משתמש וסיסמא נכונים"
+
+#: /var/www/osclass-git/oc-includes/osclass/install-functions.php:276
+#: /var/www/osclass-git/oc-includes/osclass/install-functions.php:279
+msgid "Can't copy config-sample.php. Check if the root directory is writable."
+msgstr "לא מצליח להעתיק את הקובץ config-sample.php . בדוק אם תקייה ראשית ניתנת לכתיבה."
+
+#: /var/www/osclass-git/oc-includes/osclass/install-functions.php:300
+msgid "There are tables with the same name in the database. Change the table prefix or the database and try again."
+msgstr "ישנן טבלאות עם שם זהה בדטה בייס. שנה את תחילת הטבלה או את הדטה בייס כולו ונסה שוב."
+
+#: /var/www/osclass-git/oc-includes/osclass/install-functions.php:341
+#: /var/www/osclass-git/oc-includes/osclass/install-functions.php:344
+msgid "The file %s doesn't exist"
+msgstr "הקובץ %s לא קיים"
+
+#: /var/www/osclass-git/oc-includes/osclass/install-functions.php:584
+msgid "Database information"
+msgstr "מידע על הדטה בייס"
+
+#: /var/www/osclass-git/oc-includes/osclass/install-functions.php:589
+msgid "Host"
+msgstr "Host"
+
+#: /var/www/osclass-git/oc-includes/osclass/install-functions.php:591
+msgid "Server name or IP where the database engine resides"
+msgstr "שם שרת או ה-IP שבו מנוע מסד הנתונים יושב"
+
+#: /var/www/osclass-git/oc-includes/osclass/install-functions.php:594
+msgid "Database name"
+msgstr "שם הדטה בייס"
+
+#: /var/www/osclass-git/oc-includes/osclass/install-functions.php:599
+msgid "User Name"
+msgstr "שם משתמש"
+
+#: /var/www/osclass-git/oc-includes/osclass/install-functions.php:601
+msgid "Your MySQL username"
+msgstr "שם משתמש בדטה בייס (MySQL)"
+
+#: /var/www/osclass-git/oc-includes/osclass/install-functions.php:606
+msgid "Your MySQL password"
+msgstr "סיסמא ל-MySQL"
+
+#: /var/www/osclass-git/oc-includes/osclass/install-functions.php:609
+msgid "Table prefix"
+msgstr "קידומת לטבלה"
+
+#: /var/www/osclass-git/oc-includes/osclass/install-functions.php:617
+msgid "Advanced"
+msgstr "מתקדם"
+
+#: /var/www/osclass-git/oc-includes/osclass/install-functions.php:639
+msgid "Create DB"
+msgstr "צור דטה בייס"
+
+#: /var/www/osclass-git/oc-includes/osclass/install-functions.php:640
+msgid "Check here if the database is not created and you want to create it now"
+msgstr "סמן כאן אם הדטה בייס לא נוצר וברצונך להקים אותו כעת."
+
+#: /var/www/osclass-git/oc-includes/osclass/install-functions.php:643
+msgid "DB admin username"
+msgstr "דטה בייס - שם מנהל"
+
+#: /var/www/osclass-git/oc-includes/osclass/install-functions.php:648
+msgid "DB admin password"
+msgstr "דטה בייס - סיסמת מנהל"
+
+#: /var/www/osclass-git/oc-includes/osclass/install-functions.php:667
+msgid "Information needed"
+msgstr "מידע דרוש"
+
+#: /var/www/osclass-git/oc-includes/osclass/install-functions.php:669
+msgid "Admin user"
+msgstr "מנהל"
+
+#: /var/www/osclass-git/oc-includes/osclass/install-functions.php:677
+msgid "Admin user is required"
+msgstr "הזנת מנהל נדרשת"
+
+#: /var/www/osclass-git/oc-includes/osclass/install-functions.php:689
+msgid "A password will be automatically generated for you if you leave this blank."
+msgstr "במידה ותשאיר שדה זה ריק הסיסמא תווצר אוטומטית עבורך"
+
+#: /var/www/osclass-git/oc-includes/osclass/install-functions.php:692
+msgid "Contact information"
+msgstr "פרטים ליצירת קשר"
+
+#: /var/www/osclass-git/oc-includes/osclass/install-functions.php:696
+msgid "Web title"
+msgstr "כותרת האתר"
+
+#: /var/www/osclass-git/oc-includes/osclass/install-functions.php:701
+msgid "Contact e-mail"
+msgstr "מייל ליצירת קשר"
+
+#: /var/www/osclass-git/oc-includes/osclass/install-functions.php:703
+msgid "Put your e-mail here"
+msgstr "רשום את המייל שלך פה"
+
+#: /var/www/osclass-git/oc-includes/osclass/install-functions.php:708
+msgid "Choose countries/cities where your target users are located"
+msgstr "בחר מדינות/ערים שבהן הגולשים של האתר נמצאים"
+
+#: /var/www/osclass-git/oc-includes/osclass/install-functions.php:750
+msgid "No internet connection. You can continue the installation and insert countries later."
+msgstr "אין חיבור אינטרנט. ניתן להמשיך בהתקנה ולהכניס מאוחר יותר את המדינות"
+
+#: /var/www/osclass-git/oc-includes/osclass/install-functions.php:778
+msgid "Go back"
+msgstr "חזור"
+
+#: /var/www/osclass-git/oc-includes/osclass/install-functions.php:810
+msgid "The selected location could not been installed"
+msgstr "אי אפשר להתקין במיקום שנבחר"
+
+#: /var/www/osclass-git/oc-includes/osclass/install-functions.php:893
+msgid "Congratulations!"
+msgstr "מזל טוב!"
+
+#: /var/www/osclass-git/oc-includes/osclass/install-functions.php:895
+msgid "An e-mail with the password for oc-admin has been sent to: %s"
+msgstr "מייל עבור הניהול נשלך ל: %s"
+
+#: /var/www/osclass-git/oc-includes/osclass/install-functions.php:920
+msgid "Finish and go to the administration panel"
+msgstr "סיים ועבור למערכת הניהול"
+
+#: /var/www/osclass-git/oc-includes/osclass/install-location.php:98
+msgid "username: %s"
+msgstr "שם משתמש: %s"
+
+#: /var/www/osclass-git/oc-includes/osclass/install-location.php:99
+msgid "password: %s"
+msgstr "סיסמא: %s"
+
+#: /var/www/osclass-git/oc-includes/osclass/install.php:160
+msgid "Welcome"
+msgstr "ברוכים הבאים"
+
+#: /var/www/osclass-git/oc-includes/osclass/install.php:165
+msgid "Choose language"
+msgstr "בחירת שפה"
+
+#: /var/www/osclass-git/oc-includes/osclass/install.php:174
+msgid "Check the next requirements:"
+msgstr "בדקו את הדרישות הבאות:"
+
+#: /var/www/osclass-git/oc-includes/osclass/install.php:176
+msgid "Requirements help:"
+msgstr "דרישות שיעזרו"
+
+#: /var/www/osclass-git/oc-includes/osclass/install.php:183
+msgid "Need more help?"
+msgstr "צריך עזרה נוספת?"
+
+#: /var/www/osclass-git/oc-includes/osclass/install.php:187
+msgid "All right! All the requirements have met:"
+msgstr "כל הכבוד! כל הדרישות מתאימות"
+
+#: /var/www/osclass-git/oc-includes/osclass/install.php:197
+msgid "Allow my site to appear in search engines like Google."
+msgstr "אפשר לאתר שלי להופיע במנועי חיפוש כגון גוגל"
+
+#: /var/www/osclass-git/oc-includes/osclass/install.php:209
+msgid "Try again"
+msgstr "נסה שוב"
+
+#: /var/www/osclass-git/oc-includes/osclass/install.php:213
+msgid "Run the install"
+msgstr "הרץ את ההתקנה"
+
+#: /var/www/osclass-git/oc-includes/osclass/install.php:239
+msgid "Readme"
+msgstr "קרא"
+
+#: /var/www/osclass-git/oc-includes/osclass/install.php:242
+msgid "Feedback"
+msgstr "משוב"
+
+#: /var/www/osclass-git/oc-includes/osclass/ItemActions.php:60
+msgid "Anonymous"
+msgstr "אנונימי"
+
+#: /var/www/osclass-git/oc-includes/osclass/ItemActions.php:809
+msgid "Message: this field is required"
+msgstr "הודעה: שדה חובה"
+
+#: /var/www/osclass-git/oc-includes/osclass/ItemActions.php:811
+msgid "Your name: this field is required"
+msgstr "השם שלך: שדה חובה"
+
+#: /var/www/osclass-git/oc-includes/osclass/plugins.php:100
+msgid "Plugin %s is missing the index.php file %s"
+msgstr "לתוסף %s חסר קובץ index.php %s"
+
+#: /var/www/osclass-git/oc-includes/osclass/upgrade-funcs.php:286
+msgid "here"
+msgstr "כאן"
+
+#: /var/www/osclass-git/oc-includes/osclass/classes/AdminMenu.php:59
+msgid "Manage media"
+msgstr "ניהול מדיה"
+
+#: /var/www/osclass-git/oc-includes/osclass/classes/AdminMenu.php:67
+msgid "Manage themes"
+msgstr "ניהול ערכות נושא"
+
+#: /var/www/osclass-git/oc-includes/osclass/classes/AdminMenu.php:69
+msgid "Manage widgets"
+msgstr "ניהול יישומונים (widgets)"
+
+#: /var/www/osclass-git/oc-includes/osclass/classes/AdminMenu.php:72
+msgid "Manage plugins"
+msgstr "ניהול תוספים"
+
+#: /var/www/osclass-git/oc-includes/osclass/classes/AdminMenu.php:82
+msgid "General"
+msgstr "כללי"
+
+#: /var/www/osclass-git/oc-includes/osclass/classes/AdminMenu.php:90
+msgid "Mail server"
+msgstr "שרת מיילים"
+
+#: /var/www/osclass-git/oc-includes/osclass/classes/AdminMenu.php:91
+msgid "Media"
+msgstr "מדיה"
+
+#: /var/www/osclass-git/oc-includes/osclass/classes/AdminMenu.php:104
+msgid "Backup data"
+msgstr "גיבויי מידע"
+
+#: /var/www/osclass-git/oc-includes/osclass/classes/AdminMenu.php:106
+msgid "Location stats"
+msgstr "סטטיסטיקה על מיקום"
+
+#: /var/www/osclass-git/oc-includes/osclass/classes/AdminMenu.php:108
+msgid "Maintenance mode"
+msgstr "מתב תחזוקה"
+
+#: /var/www/osclass-git/oc-includes/osclass/classes/AdminMenu.php:100
+msgid "Your Profile"
+msgstr "הפורפיל שלך"
+
+#: /var/www/osclass-git/oc-includes/osclass/classes/AdminMenu.php:77
+msgid "Reports"
+msgstr "דוחות"
+
+#: /var/www/osclass-git/oc-includes/osclass/classes/Breadcrumb.php:172
+msgid "Search results: %s"
+msgstr "תוצאות חיפוש: %s"
+
+#: /var/www/osclass-git/oc-includes/osclass/classes/Breadcrumb.php:195
+msgid "%s's profile"
+msgstr "הפרופיל של %s"
+
+#: /var/www/osclass-git/oc-includes/osclass/classes/Breadcrumb.php:202
+msgid "Account"
+msgstr "חשבון"
+
+#: /var/www/osclass-git/oc-includes/osclass/classes/Breadcrumb.php:208
+msgid "My listings"
+msgstr "הרישומים שלי"
+
+#: /var/www/osclass-git/oc-includes/osclass/classes/Breadcrumb.php:212
+msgid "My alerts"
+msgstr "ההתראות שלי"
+
+#: /var/www/osclass-git/oc-includes/osclass/classes/Breadcrumb.php:216
+msgid "My profile"
+msgstr "הפרופיל שלי"
+
+#: /var/www/osclass-git/oc-includes/osclass/frm/Admin.form.class.php:56
+msgid "Moderator"
+msgstr "מנחה"
+
+#: /var/www/osclass-git/oc-includes/osclass/frm/Admin.form.class.php:99
+#: /var/www/osclass-git/oc-includes/osclass/frm/Item.form.class.php:485
+#: /var/www/osclass-git/oc-includes/osclass/frm/Item.form.class.php:766
+msgid "Name: enter at least 3 characters"
+msgstr "שם: הכנס לפחות 3 תווים"
+
+#: /var/www/osclass-git/oc-includes/osclass/frm/Admin.form.class.php:100
+msgid "Name: no more than 50 characters"
+msgstr "שם: לא יותר מ 50 תווים"
+
+#: /var/www/osclass-git/oc-includes/osclass/frm/Admin.form.class.php:103
+msgid "Username: this field is required"
+msgstr "שם משתמש: שדה חובה"
+
+#: /var/www/osclass-git/oc-includes/osclass/frm/Admin.form.class.php:104
+msgid "Username: enter at least 3 characters"
+msgstr "שם משתמש: הכנס לפחות 3 תווים"
+
+#: /var/www/osclass-git/oc-includes/osclass/frm/Admin.form.class.php:105
+msgid "Username: no more than 50 characters"
+msgstr "שם משתמש: לא יותר מ 50 תווים"
+
+#: /var/www/osclass-git/oc-includes/osclass/frm/Admin.form.class.php:112
+msgid "Password: enter at least 5 characters"
+msgstr "סיסמא: הכנס לפחות 5 תווים"
+
+#: /var/www/osclass-git/oc-includes/osclass/frm/Admin.form.class.php:115
+msgid "Passwords don't match"
+msgstr "סיסמא לא זהה"
+
+#: /var/www/osclass-git/oc-includes/osclass/frm/Alert.form.class.php:36
+msgid "Enter your e-mail"
+msgstr "הכנס כתובת מייל"
+
+#: /var/www/osclass-git/oc-includes/osclass/frm/Comment.form.class.php:110
+#: /var/www/osclass-git/oc-includes/osclass/frm/Comment.form.class.php:111
+msgid "Comment: this field is required"
+msgstr "הערה: שדה חובה"
+
+#: /var/www/osclass-git/oc-includes/osclass/frm/Item.form.class.php:53
+msgid "Select a category"
+msgstr "בחר קטגוריה"
+
+#: /var/www/osclass-git/oc-includes/osclass/frm/Item.form.class.php:216
+msgid "Select a country..."
+msgstr "בחר מדינה..."
+
+#: /var/www/osclass-git/oc-includes/osclass/frm/Item.form.class.php:263
+#: /var/www/osclass-git/oc-includes/osclass/frm/Item.form.class.php:582
+#: /var/www/osclass-git/oc-includes/osclass/frm/Item.form.class.php:613
+#: /var/www/osclass-git/oc-includes/osclass/frm/Item.form.class.php:620
+#: /var/www/osclass-git/oc-includes/osclass/frm/Item.form.class.php:622
+msgid "Select a region..."
+msgstr "בחר אזור..."
+
+#: /var/www/osclass-git/oc-includes/osclass/frm/Item.form.class.php:289
+#: /var/www/osclass-git/oc-includes/osclass/frm/Item.form.class.php:606
+#: /var/www/osclass-git/oc-includes/osclass/frm/Item.form.class.php:616
+#: /var/www/osclass-git/oc-includes/osclass/frm/Item.form.class.php:626
+#: /var/www/osclass-git/oc-includes/osclass/frm/Item.form.class.php:628
+#: /var/www/osclass-git/oc-includes/osclass/frm/Item.form.class.php:656
+msgid "Select a city..."
+msgstr "בחר עיר..."
+
+#: /var/www/osclass-git/oc-includes/osclass/frm/Item.form.class.php:471
+#: /var/www/osclass-git/oc-includes/osclass/frm/Item.form.class.php:752
+msgid "Choose one category"
+msgstr "בחר קטגוריה אחת"
+
+#: /var/www/osclass-git/oc-includes/osclass/frm/Item.form.class.php:474
+#: /var/www/osclass-git/oc-includes/osclass/frm/Item.form.class.php:755
+msgid "Price: no more than 50 characters"
+msgstr "מחיר: לא יותר מ-50 תווים"
+
+#: /var/www/osclass-git/oc-includes/osclass/frm/Item.form.class.php:476
+#: /var/www/osclass-git/oc-includes/osclass/frm/Item.form.class.php:757
+msgid "Currency: make your selection"
+msgstr "מטבע: אנא בחר"
+
+#: /var/www/osclass-git/oc-includes/osclass/frm/Item.form.class.php:480
+#: /var/www/osclass-git/oc-includes/osclass/frm/Item.form.class.php:761
+msgid "Photo: must be %s"
+msgstr "תמונה: חייב להיות %s"
+
+#: /var/www/osclass-git/oc-includes/osclass/frm/Item.form.class.php:486
+#: /var/www/osclass-git/oc-includes/osclass/frm/Item.form.class.php:767
+msgid "Name: no more than 35 characters"
+msgstr "שם: לא יותר מ 35 תווים"
+
+#: /var/www/osclass-git/oc-includes/osclass/frm/Item.form.class.php:494
+#: /var/www/osclass-git/oc-includes/osclass/frm/Item.form.class.php:781
+msgid "Address: enter at least 3 characters"
+msgstr "כתובת: הכנס לפחות 3 תווים"
+
+#: /var/www/osclass-git/oc-includes/osclass/frm/Item.form.class.php:495
+#: /var/www/osclass-git/oc-includes/osclass/frm/Item.form.class.php:782
+msgid "Address: no more than 100 characters"
+msgstr "כתובת: לא יותר מ 100 תווים"
+
+#: /var/www/osclass-git/oc-includes/osclass/frm/Item.form.class.php:774
+msgid "Select a region"
+msgstr "בחירת אזור"
+
+#: /var/www/osclass-git/oc-includes/osclass/frm/Item.form.class.php:775
+msgid "Select a city"
+msgstr "בחירת עיר"
+
+#: /var/www/osclass-git/oc-includes/osclass/frm/Item.form.class.php:777
+msgid "City area: enter at least 3 characters"
+msgstr "שכונה: לפחות 3 תווים"
+
+#: /var/www/osclass-git/oc-includes/osclass/frm/Item.form.class.php:778
+msgid "City area: no more than 50 characters"
+msgstr "שכונה: לא יותר מ 50 תווים"
+
+#: /var/www/osclass-git/oc-includes/osclass/frm/Item.form.class.php:879
+msgid "Remove"
+msgstr "הסרה"
+
+#: /var/www/osclass-git/oc-includes/osclass/frm/Language.form.class.php:129
+#: /var/www/osclass-git/oc-includes/osclass/frm/Language.form.class.php:130
+msgid "Short name: this field is required"
+msgstr "שם קצר: שדה חובה"
+
+#: /var/www/osclass-git/oc-includes/osclass/frm/Language.form.class.php:137
+#: /var/www/osclass-git/oc-includes/osclass/frm/Language.form.class.php:138
+msgid "Currency format: this field is required"
+msgstr "פורמט מטבע: שדה חובה"
+
+#: /var/www/osclass-git/oc-includes/osclass/frm/Language.form.class.php:141
+msgid "Number of decimals: this field is required"
+msgstr "מספר עשרוני: שדה חובה"
+
+#: /var/www/osclass-git/oc-includes/osclass/frm/Language.form.class.php:145
+#: /var/www/osclass-git/oc-includes/osclass/frm/Language.form.class.php:146
+msgid "Decimal point: this field is required"
+msgstr "נקודה עשרונית: שדה חובה"
+
+#: /var/www/osclass-git/oc-includes/osclass/frm/Language.form.class.php:153
+#: /var/www/osclass-git/oc-includes/osclass/frm/Language.form.class.php:154
+msgid "Date format: this field is required"
+msgstr "פורמט תאריך: שדה חובה"
+
+#: /var/www/osclass-git/oc-includes/osclass/frm/Page.form.class.php:65
+msgid "Body"
+msgstr "גוף ההודעה"
+
+#: /var/www/osclass-git/oc-includes/osclass/frm/SendFriend.form.class.php:115
+msgid "Friend's name: this field is required"
+msgstr "שם החבר: שדה חובה"
+
+#: /var/www/osclass-git/oc-includes/osclass/frm/SendFriend.form.class.php:118
+msgid "Friend's email: this field is required"
+msgstr "מייל של החבר: שדה חובה"
+
+#: /var/www/osclass-git/oc-includes/osclass/frm/SendFriend.form.class.php:119
+msgid "Invalid friend's email address"
+msgstr "כתובת מייל של החבר אינה חוקית"
+
+#: /var/www/osclass-git/oc-includes/osclass/frm/User.form.class.php:153
+msgid "Company"
+msgstr "חברה"
+
+#: /var/www/osclass-git/oc-includes/osclass/frm/User.form.class.php:160
+msgid "All"
+msgstr "הכל"
+
+#: /var/www/osclass-git/oc-includes/osclass/frm/User.form.class.php:190
+msgid "Password: this field is required"
+msgstr "סיסמא: שדה חובה"
+
+#: /var/www/osclass-git/oc-includes/osclass/frm/User.form.class.php:194
+msgid "Second password: this field is required"
+msgstr "סיסמא שניה: שדה חובה"
+
+#: /var/www/osclass-git/oc-includes/osclass/frm/User.form.class.php:195
+#: /var/www/osclass-git/oc-includes/osclass/frm/User.form.class.php:293
+msgid "Second password: enter at least 5 characters"
+msgstr "סיסמא שניה: לפחות 5 תווים"
+
+#: /var/www/osclass-git/oc-includes/osclass/helpers/hPagination.php:115
+msgid "Page"
+msgstr "עמוד"
+
+#: /var/www/osclass-git/oc-includes/osclass/helpers/hPagination.php:118
+msgid "Go!"
+msgstr "צא לדרך!"
+
+#: /var/www/osclass-git/oc-includes/osclass/helpers/hItems.php:1036
+msgid "Check with seller"
+msgstr "בדוק עם המוכר"
+
+#: /var/www/osclass-git/oc-includes/osclass/helpers/hItems.php:1037
+msgid "Free"
+msgstr "חינם"
+
+#: /var/www/osclass-git/oc-includes/osclass/helpers/hSearch.php:51
+msgid "Newly listed"
+msgstr "פרסומים חדשים"
+
+#: /var/www/osclass-git/oc-includes/osclass/helpers/hSearch.php:52
+msgid "Lower price first"
+msgstr "מחיר נמוך ראשון"
+
+#: /var/www/osclass-git/oc-includes/osclass/helpers/hSearch.php:53
+msgid "Higher price first"
+msgstr "מחיר גבוה ראשון"
+
+#: /var/www/osclass-git/oc-includes/osclass/helpers/hUtils.php:129
+msgid "January"
+msgstr "ינואר"
+
+#: /var/www/osclass-git/oc-includes/osclass/helpers/hUtils.php:129
+msgid "February"
+msgstr "פברואר"
+
+#: /var/www/osclass-git/oc-includes/osclass/helpers/hUtils.php:129
+msgid "March"
+msgstr "מרץ"
+
+#: /var/www/osclass-git/oc-includes/osclass/helpers/hUtils.php:129
+msgid "April"
+msgstr "אפריל"
+
+#: /var/www/osclass-git/oc-includes/osclass/helpers/hUtils.php:129
+#: /var/www/osclass-git/oc-includes/osclass/helpers/hUtils.php:130
+msgid "May"
+msgstr "מאי"
+
+#: /var/www/osclass-git/oc-includes/osclass/helpers/hUtils.php:129
+msgid "June"
+msgstr "יוני"
+
+#: /var/www/osclass-git/oc-includes/osclass/helpers/hUtils.php:129
+msgid "July"
+msgstr "יולי"
+
+#: /var/www/osclass-git/oc-includes/osclass/helpers/hUtils.php:129
+msgid "August"
+msgstr "אוגוסט"
+
+#: /var/www/osclass-git/oc-includes/osclass/helpers/hUtils.php:129
+msgid "September"
+msgstr "ספטמבר"
+
+#: /var/www/osclass-git/oc-includes/osclass/helpers/hUtils.php:129
+msgid "October"
+msgstr "אוקטובר"
+
+#: /var/www/osclass-git/oc-includes/osclass/helpers/hUtils.php:129
+msgid "November"
+msgstr "נובמבר"
+
+#: /var/www/osclass-git/oc-includes/osclass/helpers/hUtils.php:129
+msgid "December"
+msgstr "דצמבר"
+
+#: /var/www/osclass-git/oc-includes/osclass/helpers/hUtils.php:130
+msgid "Jan"
+msgstr "ינו'"
+
+#: /var/www/osclass-git/oc-includes/osclass/helpers/hUtils.php:130
+msgid "Feb"
+msgstr "פבר'"
+
+#: /var/www/osclass-git/oc-includes/osclass/helpers/hUtils.php:130
+msgid "Mar"
+msgstr "מרץ"
+
+#: /var/www/osclass-git/oc-includes/osclass/helpers/hUtils.php:130
+msgid "Apr"
+msgstr "אפר'"
+
+#: /var/www/osclass-git/oc-includes/osclass/helpers/hUtils.php:130
+msgid "Jun"
+msgstr "יוני"
+
+#: /var/www/osclass-git/oc-includes/osclass/helpers/hUtils.php:130
+msgid "Jul"
+msgstr "יולי"
+
+#: /var/www/osclass-git/oc-includes/osclass/helpers/hUtils.php:130
+msgid "Aug"
+msgstr "אוג'"
+
+#: /var/www/osclass-git/oc-includes/osclass/helpers/hUtils.php:130
+msgid "Sep"
+msgstr "ספט'"
+
+#: /var/www/osclass-git/oc-includes/osclass/helpers/hUtils.php:130
+msgid "Oct"
+msgstr "אוקט'"
+
+#: /var/www/osclass-git/oc-includes/osclass/helpers/hUtils.php:130
+msgid "Nov"
+msgstr "נוב'"
+
+#: /var/www/osclass-git/oc-includes/osclass/helpers/hUtils.php:130
+msgid "Dec"
+msgstr "דצמ'"
+
+#: /var/www/osclass-git/oc-includes/osclass/helpers/hUtils.php:132
+msgid "Mon"
+msgstr "ב"
+
+#: /var/www/osclass-git/oc-includes/osclass/helpers/hUtils.php:132
+msgid "Tue"
+msgstr "ג"
+
+#: /var/www/osclass-git/oc-includes/osclass/helpers/hUtils.php:132
+msgid "Wed"
+msgstr "ד"
+
+#: /var/www/osclass-git/oc-includes/osclass/helpers/hUtils.php:132
+msgid "Thu"
+msgstr "ה"
+
+#: /var/www/osclass-git/oc-includes/osclass/helpers/hUtils.php:132
+msgid "Fri"
+msgstr "ו"
+
+#: /var/www/osclass-git/oc-includes/osclass/helpers/hUtils.php:132
+msgid "Sat"
+msgstr "ש"
+
+#: /var/www/osclass-git/oc-includes/osclass/helpers/hUtils.php:132
+msgid "Sun"
+msgstr "א"
+
+#: /var/www/osclass-git/oc-includes/osclass/helpers/hUtils.php:133
+msgid "AM"
+msgstr "AM"
+
+#: /var/www/osclass-git/oc-includes/osclass/helpers/hUtils.php:133
+msgid "PM"
+msgstr "PM"
+
+#: /var/www/osclass-git/oc-includes/osclass/helpers/hUtils.php:133
+msgid "am"
+msgstr "am"
+
+#: /var/www/osclass-git/oc-includes/osclass/helpers/hUtils.php:133
+msgid "pm"
+msgstr "pm"
+
+#: /var/www/osclass-git/oc-includes/osclass/helpers/hUtils.php:171
+msgid "Manage your listings"
+msgstr "ניהול הפרסומים שלך"
+
+#: /var/www/osclass-git/oc-includes/osclass/helpers/hUtils.php:172
+msgid "Manage your alerts"
+msgstr "נהל את ההתראות שלך"
+
+#: /var/www/osclass-git/oc-includes/osclass/installer/categories.php:4
+msgid "For sale"
+msgstr "למכירה"
+
+#: /var/www/osclass-git/oc-includes/osclass/installer/categories.php:5
+msgid "Vehicles"
+msgstr "רכבים"
+
+#: /var/www/osclass-git/oc-includes/osclass/installer/categories.php:6
+msgid "Classes"
+msgstr "שיעורים"
+
+#: /var/www/osclass-git/oc-includes/osclass/installer/categories.php:7
+msgid "Real estate"
+msgstr "נדל\"ן"
+
+#: /var/www/osclass-git/oc-includes/osclass/installer/categories.php:8
+msgid "Services"
+msgstr "שרותים"
+
+#: /var/www/osclass-git/oc-includes/osclass/installer/categories.php:9
+msgid "Community"
+msgstr "קהילות"
+
+#: /var/www/osclass-git/oc-includes/osclass/installer/categories.php:10
+msgid "Personals"
+msgstr "אישי"
+
+#: /var/www/osclass-git/oc-includes/osclass/installer/categories.php:11
+msgid "Jobs"
+msgstr "משרות"
+
+#: /var/www/osclass-git/oc-includes/osclass/installer/categories.php:12
+msgid "Animals"
+msgstr "חיות"
+
+#: /var/www/osclass-git/oc-includes/osclass/installer/categories.php:13
+msgid "Art - Collectibles"
+msgstr "אומנות"
+
+#: /var/www/osclass-git/oc-includes/osclass/installer/categories.php:14
+msgid "Barter"
+msgstr "ברטר (סחר חליפין)"
+
+#: /var/www/osclass-git/oc-includes/osclass/installer/categories.php:15
+msgid "Books - Magazines"
+msgstr "ספרים/מגזינים"
+
+#: /var/www/osclass-git/oc-includes/osclass/installer/categories.php:16
+msgid "Cameras - Camera Accessories"
+msgstr "מצלמות ועזרים"
+
+#: /var/www/osclass-git/oc-includes/osclass/installer/categories.php:17
+msgid "CDs - Records"
+msgstr "צורבי CD"
+
+#: /var/www/osclass-git/oc-includes/osclass/installer/categories.php:18
+msgid "Cell Phones - Accessories"
+msgstr "טלפונים סלולרים ועזרים"
+
+#: /var/www/osclass-git/oc-includes/osclass/installer/categories.php:19
+msgid "Clothing"
+msgstr "ביגוד"
+
+#: /var/www/osclass-git/oc-includes/osclass/installer/categories.php:20
+msgid "Computers - Hardware"
+msgstr "מחשבים - חומרה"
+
+#: /var/www/osclass-git/oc-includes/osclass/installer/categories.php:21
+msgid "DVD"
+msgstr "DVD"
+
+#: /var/www/osclass-git/oc-includes/osclass/installer/categories.php:22
+msgid "Electronics"
+msgstr "אלקטרוניקה"
+
+#: /var/www/osclass-git/oc-includes/osclass/installer/categories.php:23
+msgid "For Babies - Infants"
+msgstr "מוצרים לתינוקות"
+
+#: /var/www/osclass-git/oc-includes/osclass/installer/categories.php:24
+msgid "Garage Sale"
+msgstr "מכירות חיסול"
+
+#: /var/www/osclass-git/oc-includes/osclass/installer/categories.php:25
+msgid "Health - Beauty"
+msgstr "בריאות ויופי"
+
+#: /var/www/osclass-git/oc-includes/osclass/installer/categories.php:26
+msgid "Home - Furniture - Garden Supplies"
+msgstr "לבית , לריהוט ולגינה"
+
+#: /var/www/osclass-git/oc-includes/osclass/installer/categories.php:27
+msgid "Jewelry - Watches"
+msgstr "תכשיטים - שעונים"
+
+#: /var/www/osclass-git/oc-includes/osclass/installer/categories.php:28
+msgid "Musical Instruments"
+msgstr "כלי מוזיקה"
+
+#: /var/www/osclass-git/oc-includes/osclass/installer/categories.php:29
+msgid "Sporting Goods - Bicycles"
+msgstr "ספורט - אופניים"
+
+#: /var/www/osclass-git/oc-includes/osclass/installer/categories.php:30
+msgid "Tickets"
+msgstr "כרטיסים"
+
+#: /var/www/osclass-git/oc-includes/osclass/installer/categories.php:31
+msgid "Toys - Games - Hobbies"
+msgstr "צעצועים - משחקים ותחביבים"
+
+#: /var/www/osclass-git/oc-includes/osclass/installer/categories.php:32
+msgid "Video Games - Consoles"
+msgstr "משחקי וידאו - קונסולות"
+
+#: /var/www/osclass-git/oc-includes/osclass/installer/categories.php:33
+msgid "Everything Else"
+msgstr "אחר"
+
+#: /var/www/osclass-git/oc-includes/osclass/installer/categories.php:34
+msgid "Cars"
+msgstr "רכבים"
+
+#: /var/www/osclass-git/oc-includes/osclass/installer/categories.php:35
+msgid "Car Parts"
+msgstr "חלקי חילוף לרכבים"
+
+#: /var/www/osclass-git/oc-includes/osclass/installer/categories.php:36
+msgid "Motorcycles"
+msgstr "אופנועים"
+
+#: /var/www/osclass-git/oc-includes/osclass/installer/categories.php:37
+msgid "Boats - Ships"
+msgstr "סירות / אוניות"
+
+#: /var/www/osclass-git/oc-includes/osclass/installer/categories.php:38
+msgid "RVs - Campers - Caravans"
+msgstr "קרוונים"
+
+#: /var/www/osclass-git/oc-includes/osclass/installer/categories.php:39
+msgid "Trucks - Commercial Vehicles"
+msgstr "משאיות / רכבים מסחריים"
+
+#: /var/www/osclass-git/oc-includes/osclass/installer/categories.php:40
+msgid "Other Vehicles"
+msgstr "רכבים - אחר"
+
+#: /var/www/osclass-git/oc-includes/osclass/installer/categories.php:41
+msgid "Computer - Multimedia Classes"
+msgstr "מחשבים - שיעורי מולטימדיה"
+
+#: /var/www/osclass-git/oc-includes/osclass/installer/categories.php:42
+msgid "Language Classes"
+msgstr "לימוד שפות"
+
+#: /var/www/osclass-git/oc-includes/osclass/installer/categories.php:43
+msgid "Music - Theatre - Dance Classes"
+msgstr "מוזיקה - תאטרון - ריקוד"
+
+#: /var/www/osclass-git/oc-includes/osclass/installer/categories.php:44
+msgid "Tutoring - Private Lessons"
+msgstr "שיעורים פרטיים"
+
+#: /var/www/osclass-git/oc-includes/osclass/installer/categories.php:45
+msgid "Other Classes"
+msgstr "לימוד - אחר"
+
+#: /var/www/osclass-git/oc-includes/osclass/installer/categories.php:46
+msgid "Houses - Apartments for Sale"
+msgstr "בתים - דירות למכירה"
+
+#: /var/www/osclass-git/oc-includes/osclass/installer/categories.php:47
+msgid "Houses - Apartments for Rent"
+msgstr "בתים - דירות להשכרה"
+
+#: /var/www/osclass-git/oc-includes/osclass/installer/categories.php:48
+msgid "Rooms for Rent - Shared"
+msgstr "חדרים להשכרה"
+
+#: /var/www/osclass-git/oc-includes/osclass/installer/categories.php:49
+msgid "Housing Swap"
+msgstr "החלפת דירות"
+
+#: /var/www/osclass-git/oc-includes/osclass/installer/categories.php:50
+msgid "Vacation Rentals"
+msgstr "נופש"
+
+#: /var/www/osclass-git/oc-includes/osclass/installer/categories.php:51
+msgid "Parking Spots"
+msgstr "שטחי חניה / פארק חניה"
+
+#: /var/www/osclass-git/oc-includes/osclass/installer/categories.php:52
+msgid "Land"
+msgstr "שטח אדמה"
+
+#: /var/www/osclass-git/oc-includes/osclass/installer/categories.php:53
+msgid "Office - Commercial Space"
+msgstr "משרדים - שטחים מסחריים"
+
+#: /var/www/osclass-git/oc-includes/osclass/installer/categories.php:54
+msgid "Shops for Rent - Sale"
+msgstr "חנויות להשכרה - מכירה"
+
+#: /var/www/osclass-git/oc-includes/osclass/installer/categories.php:55
+msgid "Babysitter - Nanny"
+msgstr "בייביסיטר"
+
+#: /var/www/osclass-git/oc-includes/osclass/installer/categories.php:56
+msgid "Casting - Auditions"
+msgstr "ליהוק - אודישנים"
+
+#: /var/www/osclass-git/oc-includes/osclass/installer/categories.php:57
+msgid "Computer"
+msgstr "מחשבים"
+
+#: /var/www/osclass-git/oc-includes/osclass/installer/categories.php:58
+msgid "Event Services"
+msgstr "שירותי ארועים"
+
+#: /var/www/osclass-git/oc-includes/osclass/installer/categories.php:59
+msgid "Health - Beauty - Fitness"
+msgstr "בריאות - יופי - כושר"
+
+#: /var/www/osclass-git/oc-includes/osclass/installer/categories.php:60
+msgid "Horoscopes - Tarot"
+msgstr "הורוסקופ - טארוט"
+
+#: /var/www/osclass-git/oc-includes/osclass/installer/categories.php:61
+msgid "Household - Domestic Help"
+msgstr "משק בית"
+
+#: /var/www/osclass-git/oc-includes/osclass/installer/categories.php:62
+msgid "Moving - Storage"
+msgstr "הובלה - אחסון"
+
+#: /var/www/osclass-git/oc-includes/osclass/installer/categories.php:63
+msgid "Repair"
+msgstr "תיקונים"
+
+#: /var/www/osclass-git/oc-includes/osclass/installer/categories.php:64
+msgid "Writing - Editing - Translating"
+msgstr "כתיבת - עריכה - תרגום"
+
+#: /var/www/osclass-git/oc-includes/osclass/installer/categories.php:65
+msgid "Other Services"
+msgstr "שרותים אחרים"
+
+#: /var/www/osclass-git/oc-includes/osclass/installer/categories.php:66
+msgid "Carpool"
+msgstr "שטיפת רכבים"
+
+#: /var/www/osclass-git/oc-includes/osclass/installer/categories.php:67
+msgid "Community Activities"
+msgstr "פעילויות קהילה"
+
+#: /var/www/osclass-git/oc-includes/osclass/installer/categories.php:68
+msgid "Events"
+msgstr "ארועים"
+
+#: /var/www/osclass-git/oc-includes/osclass/installer/categories.php:69
+msgid "Musicians - Artists - Bands"
+msgstr "מוזיקאים - אומנים - להקות"
+
+#: /var/www/osclass-git/oc-includes/osclass/installer/categories.php:70
+msgid "Volunteers"
+msgstr "מתנדבים"
+
+#: /var/www/osclass-git/oc-includes/osclass/installer/categories.php:71
+msgid "Lost And Found"
+msgstr "מציאות ואבידות"
+
+#: /var/www/osclass-git/oc-includes/osclass/installer/categories.php:72
+msgid "Women looking for Men"
+msgstr "נשים מחפשות גברים"
+
+#: /var/www/osclass-git/oc-includes/osclass/installer/categories.php:73
+msgid "Men looking for Women"
+msgstr "גברים מחפשים נשים"
+
+#: /var/www/osclass-git/oc-includes/osclass/installer/categories.php:74
+msgid "Men looking for Men"
+msgstr "גברים מחפשים גברים"
+
+#: /var/www/osclass-git/oc-includes/osclass/installer/categories.php:75
+msgid "Women looking for Women"
+msgstr "נשים מחפשות נשים"
+
+#: /var/www/osclass-git/oc-includes/osclass/installer/categories.php:76
+msgid "Friendship - Activity Partners"
+msgstr "חברויות"
+
+#: /var/www/osclass-git/oc-includes/osclass/installer/categories.php:77
+msgid "Missed Connections"
+msgstr "מציאת שורשים"
+
+#: /var/www/osclass-git/oc-includes/osclass/installer/categories.php:78
+msgid "Accounting - Finance"
+msgstr "פיננסים"
+
+#: /var/www/osclass-git/oc-includes/osclass/installer/categories.php:79
+msgid "Advertising - Public Relations"
+msgstr "יחסי ציבור"
+
+#: /var/www/osclass-git/oc-includes/osclass/installer/categories.php:80
+msgid "Arts - Entertainment - Publishing"
+msgstr "אמנויות - בידור - הוצאה לאור"
+
+#: /var/www/osclass-git/oc-includes/osclass/installer/categories.php:81
+msgid "Clerical - Administrative"
+msgstr "פקידותי - מנהלי"
+
+#: /var/www/osclass-git/oc-includes/osclass/installer/categories.php:82
+msgid "Customer Service"
+msgstr "שרות לקוחות"
+
+#: /var/www/osclass-git/oc-includes/osclass/installer/categories.php:83
+msgid "Education - Training"
+msgstr "חינוך - הדרכה"
+
+#: /var/www/osclass-git/oc-includes/osclass/installer/categories.php:84
+msgid "Engineering - Architecture"
+msgstr "הנדסה - אדריכלות"
+
+#: /var/www/osclass-git/oc-includes/osclass/installer/categories.php:85
+msgid "Healthcare"
+msgstr "בריאות"
+
+#: /var/www/osclass-git/oc-includes/osclass/installer/categories.php:86
+msgid "Human Resource"
+msgstr "משאבי אנוש"
+
+#: /var/www/osclass-git/oc-includes/osclass/installer/categories.php:87
+msgid "Internet"
+msgstr "אינטרנט"
+
+#: /var/www/osclass-git/oc-includes/osclass/installer/categories.php:88
+msgid "Legal"
+msgstr "משפטי"
+
+#: /var/www/osclass-git/oc-includes/osclass/installer/categories.php:89
+msgid "Manual Labor"
+msgstr "עבודות ידניות"
+
+#: /var/www/osclass-git/oc-includes/osclass/installer/categories.php:90
+msgid "Manufacturing - Operations"
+msgstr "ייצור - תפעול"
+
+#: /var/www/osclass-git/oc-includes/osclass/installer/categories.php:91
+msgid "Marketing"
+msgstr "שיווק"
+
+#: /var/www/osclass-git/oc-includes/osclass/installer/categories.php:92
+msgid "Non-profit - Volunteer"
+msgstr "מתנדברים - ללא רווח"
+
+#: /var/www/osclass-git/oc-includes/osclass/installer/categories.php:93
+msgid "Real Estate"
+msgstr "נדל\"ן"
+
+#: /var/www/osclass-git/oc-includes/osclass/installer/categories.php:94
+msgid "Restaurant - Food Service"
+msgstr "מסעדות - שרותי הסעדה"
+
+#: /var/www/osclass-git/oc-includes/osclass/installer/categories.php:95
+msgid "Retail"
+msgstr "קמעונאות"
+
+#: /var/www/osclass-git/oc-includes/osclass/installer/categories.php:96
+msgid "Sales"
+msgstr "מכירות"
+
+#: /var/www/osclass-git/oc-includes/osclass/installer/categories.php:97
+msgid "Technology"
+msgstr "טכנולוגיה"
+
+#: /var/www/osclass-git/oc-includes/osclass/installer/categories.php:98
+msgid "Other Jobs"
+msgstr "עובדות אחרות"
+
+#: /var/www/osclass-git/oc-includes/osclass/model/Item.php:773
+msgid "%s in"
+msgstr "%s ב"
+
+#: /var/www/osclass-git/oc-includes/osclass/model/Item.php:782
+msgid "There's no description available in your language"
+msgstr "אין תיאור עבור השפה שלך"
+
+#: /var/www/osclass-git/oc-admin/ajax/ajax.php:265
+msgid "The custom field has been deleted"
+msgstr "השדה המותאם אישית נמחק"
+
+#: /var/www/osclass-git/oc-admin/ajax/items_processing.php:433
+msgid "Clear All"
+msgstr "נקה הכל"
+
+#: /var/www/osclass-git/oc-admin/ajax/items_processing.php:438
+msgid "Clear Misclassified"
+msgstr "נקה חסרים"
+
+#: /var/www/osclass-git/oc-admin/ajax/pages_processing.php:101
+msgid "Up"
+msgstr "למעלה"
+
+#: /var/www/osclass-git/oc-admin/ajax/pages_processing.php:101
+msgid "Down"
+msgstr "למטה"
+
+#: /var/www/osclass-git/oc-admin/themes/modern/appearance/index.php:193
+msgid "Please wait until the download is completed"
+msgstr "אנא המתן עד שההורדה תושלם"
+
+#: /var/www/osclass-git/oc-admin/themes/modern/appearance/index.php:193
+msgid "Downloading"
+msgstr "מוריד"
+
+#: /var/www/osclass-git/oc-admin/themes/modern/appearance/index.php:202
+msgid "Ok"
+msgstr "תקין"
+
+#: /var/www/osclass-git/oc-admin/themes/modern/comments/frm.php:26
+msgid "Update comment"
+msgstr "עדכן הודעה"
+
+#: /var/www/osclass-git/oc-admin/themes/modern/comments/frm.php:29
+msgid "Add comment"
+msgstr "הוספת הערה"
+
+#: /var/www/osclass-git/oc-admin/themes/modern/comments/frm.php:41
+msgid "Edit comment &raquo; %s"
+msgstr "עריכת הערה &raquo; %s"
+
+#: /var/www/osclass-git/oc-admin/themes/modern/comments/frm.php:97
+msgid "Unblocked"
+msgstr "משוחרר"
+
+#: /var/www/osclass-git/oc-admin/themes/modern/comments/frm.php:97
+msgid "Blocked"
+msgstr "נעול"
+
+#: /var/www/osclass-git/oc-admin/themes/modern/comments/index.php:183
+msgid "Delete comment"
+msgstr "מחיקת הערה"
+
+#: /var/www/osclass-git/oc-admin/themes/modern/comments/index.php:189
+msgid "Are you sure you want to delete this comment?"
+msgstr "האם אתה בטוח למחוק הערה זו?"
+
+#: /var/www/osclass-git/oc-admin/themes/modern/fields/index.php:31
+msgid "Add custom field"
+msgstr "הוספת שדה מתואם אישית"
+
+#: /var/www/osclass-git/oc-admin/themes/modern/fields/index.php:215
+msgid "Delete custom field"
+msgstr "מחיקת שדה מתואם אישית"
+
+#: /var/www/osclass-git/oc-admin/themes/modern/fields/index.php:218
+msgid "Are you sure you want to delete this custom field?"
+msgstr "האם אתה בטוח שברצונך למחוק שדה מתואם אישי זה?"
+
+#: /var/www/osclass-git/oc-admin/themes/modern/items/index.php:234
+#: /var/www/osclass-git/oc-admin/themes/modern/items/index.php:246
+#: /var/www/osclass-git/oc-admin/themes/modern/items/index.php:258
+#: /var/www/osclass-git/oc-admin/themes/modern/items/index.php:270
+msgid "Choose an option"
+msgstr "בחר אפשרות"
+
+#: /var/www/osclass-git/oc-admin/themes/modern/items/index.php:320
+msgid "Item ID"
+msgstr "מזהה פריט"
+
+#: /var/www/osclass-git/oc-admin/themes/modern/languages/index.php:120
+#: /var/www/osclass-git/oc-admin/themes/modern/languages/index.php:121
+#: /var/www/osclass-git/oc-admin/themes/modern/languages/index.php:122
+#: /var/www/osclass-git/oc-admin/themes/modern/languages/index.php:123
+#: /var/www/osclass-git/oc-admin/themes/modern/languages/index.php:124
+msgid "Are you sure you want to %s the selected languages?"
+msgstr "האם אתה בטוח ל%s עם השפות הבחורות?"
+
+#: /var/www/osclass-git/oc-admin/themes/modern/media/index.php:116
+msgid "Are you sure you want to %s the selected media files?"
+msgstr "האם אתה בטוח שברצונך ל%s עם קבצים המדיה שבחרת?"
+
+#: /var/www/osclass-git/oc-admin/themes/modern/languages/index.php:177
+msgid "Are you sure you want to delete this language?"
+msgstr "האם אתה בטוח שברצונך למחוק את קבצי השפה?"
+
+#: /var/www/osclass-git/oc-admin/themes/modern/main/index.php:245
+msgid "Newsletter"
+msgstr "ידיעון"
+
+#: /var/www/osclass-git/oc-admin/themes/modern/main/index.php:253
+msgid "Want the latest tips and updates delivered to your inbox? <strong>Sign up now!</strong>"
+msgstr "רוצה את הטיפים והעדכונים האחרונים לתיבת הדואר הנכנס שלך? <strong> הירשם עכשיו! </strong>"
+
+#: /var/www/osclass-git/oc-admin/themes/modern/main/index.php:258
+msgid "Subscribe"
+msgstr "הירשם"
+
+#: /var/www/osclass-git/oc-admin/themes/modern/main/index.php:264
+#: /var/www/osclass-git/oc-admin/themes/modern/main/index.php:285
+msgid "Donate"
+msgstr "תרום"
+
+#: /var/www/osclass-git/oc-admin/themes/modern/main/index.php:284
+msgid "Custom"
+msgstr "מתואם אישית"
+
+#: /var/www/osclass-git/oc-admin/themes/modern/market/plugins.php:77
+msgid "Updates"
+msgstr "עדכונים"
+
+#: /var/www/osclass-git/oc-admin/themes/modern/market/plugins.php:80
+msgid "Available plugins"
+msgstr "תוספים זמינים"
+
+#: /var/www/osclass-git/oc-admin/themes/modern/pages/index.php:145
+msgid "Are you sure you want to %s the selected pages?"
+msgstr "האם אתה בטוח שברצונך ל%s עם הדפים שנבחרו?"
+
+#: /var/www/osclass-git/oc-admin/themes/modern/pages/index.php:190
+msgid "Delete page"
+msgstr "מחק דף"
+
+#: /var/www/osclass-git/oc-admin/themes/modern/pages/index.php:196
+msgid "Are you sure you want to delete this page?"
+msgstr "האם אתה בטוח למחוק דף זה?"
+
+#: /var/www/osclass-git/oc-admin/themes/modern/plugins/index.php:34
+msgid "Plugin couldn't be installed because it triggered a <strong>fatal error</strong>"
+msgstr "התקנת התוסף נכשלה עקב תקלה חמורה <strong>תקלה חמורה</strong>"
+
+#: /var/www/osclass-git/oc-admin/themes/modern/settings/index.php:312
+msgid "Check plugin & theme updates"
+msgstr "בדוק עדכונים עבור תוספים וערכות נושא"
+
+#: /var/www/osclass-git/oc-admin/themes/modern/settings/index.php:315
+msgid "Check updates"
+msgstr "בדוק עדכונים"
+
+#: /var/www/osclass-git/oc-admin/themes/modern/settings/media.php:70
+msgid "Maximum size: this field is required"
+msgstr "גודל מירבי: שדה חובה"
+
+#: /var/www/osclass-git/oc-admin/themes/modern/settings/media.php:251
+msgid "Watermark Text Settings"
+msgstr "הגדרות טקסט סימן מים"
+
+#: /var/www/osclass-git/oc-admin/themes/modern/settings/media.php:259
+msgid "Color"
+msgstr "צבע"
+
+#: /var/www/osclass-git/oc-admin/themes/modern/settings/media.php:265
+#: /var/www/osclass-git/oc-admin/themes/modern/settings/media.php:291
+msgid "Position"
+msgstr "מיקום"
+
+#: /var/www/osclass-git/oc-admin/themes/modern/settings/media.php:268
+#: /var/www/osclass-git/oc-admin/themes/modern/settings/media.php:294
+msgid "Centre"
+msgstr "מרכז"
+
+#: /var/www/osclass-git/oc-admin/themes/modern/settings/media.php:269
+#: /var/www/osclass-git/oc-admin/themes/modern/settings/media.php:295
+msgid "Top Left"
+msgstr "עליון שמאל"
+
+#: /var/www/osclass-git/oc-admin/themes/modern/settings/media.php:270
+#: /var/www/osclass-git/oc-admin/themes/modern/settings/media.php:296
+msgid "Top Right"
+msgstr "עליון ימין"
+
+#: /var/www/osclass-git/oc-admin/themes/modern/settings/media.php:271
+#: /var/www/osclass-git/oc-admin/themes/modern/settings/media.php:297
+msgid "Bottom Left"
+msgstr "תחתון שמאל"
+
+#: /var/www/osclass-git/oc-admin/themes/modern/settings/media.php:272
+#: /var/www/osclass-git/oc-admin/themes/modern/settings/media.php:298
+msgid "Bottom Right"
+msgstr "תחתון ימין"
+
+#: /var/www/osclass-git/oc-admin/themes/modern/settings/media.php:278
+msgid "Watermark Image Settings"
+msgstr "הגדרות סימון מיים - תמונה"
+
+#: /var/www/osclass-git/oc-admin/themes/modern/settings/media.php:286
+msgid "It has to be a .PNG image"
+msgstr "חייב להיות קובץ png"
+
+#: /var/www/osclass-git/oc-admin/themes/modern/settings/permalinks.php:571
+msgid "User listings"
+msgstr "רישומי משתמש"
+
+#: /var/www/osclass-git/oc-admin/themes/modern/upgrade/index.php:66
+msgid "Upgrade now"
+msgstr "עדכן עכשיו"
+
+#: /var/www/osclass-git/oc-includes/osclass/classes/AdminMenu.php:99
+msgid "Administrators"
+msgstr "מנהלים"
+
+#: /var/www/osclass-git/oc-includes/osclass/helpers/hPagination.php:139
+msgid "Showing %s to %s of %s results (filtered from %s total results)"
+msgstr "מציג %s עד %s מתוך %s תוצאות (סינון מתוך %s תוצאות)"
+
+#: /var/www/osclass-git/oc-includes/osclass/helpers/hPagination.php:141
+msgid "Showing %s to %s of %s results"
+msgstr "מציג %s עד %s מתוך %s תוצאות"
+
+#: /var/www/osclass-git/index.php:42
+msgid "We are sorry for any inconvenience. %s is undergoing maintenance."
+msgstr "אנו מצטערים על אי הנוחות. %s עובר טיפולי תחזוקה."
+
+#: /var/www/osclass-git/oc-admin/themes/modern/admins/index.php:117
+msgid "Are you sure you want to %s the selected admins?"
+msgstr "האם אתה בטוח שברצונך ל%s את המנהלים שנבחרו?"
+
+#: /var/www/osclass-git/oc-admin/ajax/ajax.php:185
+msgid "An error occurred"
+msgstr "ארעה תקלה"
+
+#: /var/www/osclass-git/oc-admin/ajax/ajax.php:245
+msgid "An error occurred while updating."
+msgstr "ארעה תקלה בזמן העדכון"
+
+#: /var/www/osclass-git/oc-admin/ajax/ajax.php:249
+msgid "Sorry, you already have a field with that name"
+msgstr "מצטער, יש כבר שדה בשם זה"
+
+#: /var/www/osclass-git/oc-admin/ajax/ajax.php:267
+#: /var/www/osclass-git/oc-admin/ajax/ajax.php:372
+msgid "An error occurred while deleting"
+msgstr "ארעה תקלה בזמן המחיקה"
+
+#: /var/www/osclass-git/oc-admin/ajax/ajax.php:304
+msgid "No category with id %d exists"
+msgstr "אין קטגוריה עם המזהה %d"
+
+#: /var/www/osclass-git/oc-admin/ajax/ajax.php:327
+msgid "The category as well as its subcategories have been enabled"
+msgstr "הקטגוריה כמו גם קטגוריות משנה שלה כבר אפשרו"
+
+#: /var/www/osclass-git/oc-admin/ajax/ajax.php:331
+msgid "The category as well as its subcategories have been disabled"
+msgstr "הקטגוריה כמו גם קטגוריות משנה שלה הושבתה"
+
+#: /var/www/osclass-git/oc-admin/ajax/ajax.php:422
+msgid "Category updated correctly, but some titles are empty"
+msgstr "הקטגוריה עודכנה בצורה נכונה, אבל ישנן מספר כותרות ריקות"
+
+#: /var/www/osclass-git/oc-admin/ajax/ajax.php:424
+msgid "Sorry, including at least a title is mandatory"
+msgstr "מצטער, חובר לכלול לפחות כותרת אחת"
+
+#: /var/www/osclass-git/oc-admin/ajax/ajax.php:427
+msgid "An error occurred while updating"
+msgstr "ארעה תקלה בזמן העדכון"
+
+#: /var/www/osclass-git/oc-admin/ajax/ajax.php:469
+msgid "An error occurred while sending email"
+msgstr "ארעה תקלה בזמן שליחת המייל"
+
+#: /var/www/osclass-git/oc-admin/ajax/ajax.php:595
+msgid "Everything looks good! Your Osclass installation is up-to-date"
+msgstr "הכל נראה טוב. מערכת Osclass עודכנה בהצלחה"
+
+#: /var/www/osclass-git/oc-admin/ajax/ajax.php:597
+msgid "Nearly everything looks good! Your Osclass installation is up-to-date, but there were some errors removing temporary files. Please manually remove the \"oc-temp\" folder"
+msgstr "כמעט הכל בוצע בהצלחה בשדרוג מערכת osclass שלך. המערכת מעודכנת אך יש מספר קבצים שצריך להוריד ידנית מתקיית \"oc-temp\""
+
+#: /var/www/osclass-git/oc-admin/ajax/ajax.php:602
+msgid "Problems when upgrading the database"
+msgstr "בעיות בעת שדרוג מסד הנתונים"
+
+#: /var/www/osclass-git/oc-admin/ajax/ajax.php:606
+#: /var/www/osclass-git/oc-admin/ajax/ajax.php:769
+msgid "Problems when copying files. Please check your permissions. "
+msgstr "בעיות בעת העתקת קבצים. אנא בדוק את ההרשאות שלך."
+
+#: /var/www/osclass-git/oc-admin/ajax/ajax.php:627
+msgid "We had some errors upgrading your database. The follwing queries failed:"
+msgstr "היו מספר תקלות בשדרוג מסד הנתונים שלך. השאילתות הבאות נכשלו:"
+
+#: /var/www/osclass-git/oc-admin/ajax/ajax.php:762
+msgid "Everything looks good!"
+msgstr "הכל נראה תקין!"
+
+#: /var/www/osclass-git/oc-admin/ajax/ajax.php:765
+msgid "Nearly everything looks good! but there were some errors removing temporary files. Please manually remove the \\\"oc-temp\\\" folder"
+msgstr "כמעט הכל תקין! יש מספר בעיות בהסרת קבצים זמניים. ניתן להוריד אותם ידנית מתיקיית \\\"oc-temp\\\""
+
+#: /var/www/osclass-git/oc-admin/ajax/ajax.php:818
+msgid "Invalid code"
+msgstr "קוד שגויי"
+
+#: /var/www/osclass-git/oc-admin/ajax/ajax.php:821
+msgid "No code was submitted"
+msgstr "לא הוזן קוד"
+
+#: /var/www/osclass-git/oc-admin/ajax/ajax.php:889
+msgid "You don't have the necessary permissions"
+msgstr "אין לך את ההרשאות הנחוצות"
+
+#: /var/www/osclass-git/oc-admin/plugins.php:288
+msgid "There's a new update available"
+msgstr "קיים עדכון חדש"
+
+#: /var/www/osclass-git/oc-admin/themes/modern/admins/frm.php:87
+msgid "Administrators have total control over all aspects of your installation, while moderators are only allowed to moderate listings, comments and media files"
+msgstr "למנהל יש שליטה מלאה על כל ההתקנה לעומת מנהלים עם הרשאות ספציפיות שלהם יש שליטה רק על קבצים ומדיה"
+
+#: /var/www/osclass-git/oc-admin/themes/modern/admins/frm.php:96
+msgid "If you want to change your password, type your current password here. Otherwise, leave this blank."
+msgstr "אם ברצונך לשנות את הסיסמה, הקלד את הסיסמה הנוכחית שלך כאן. אחרת, השאר את השדה ריק."
+
+#: /var/www/osclass-git/oc-admin/themes/modern/admins/index.php:20
+msgid "Add users who can manage your page. You can add admins or moderators: admins have access to the whole admin panel while moderators can only modify listings and see stats."
+msgstr "הוסף משתמשים שיכולים לנהל את העמוד. ביכולתך להוסיף מנהלים עם אפשרויות ניהול מוגבלות. למנהלים אלו יהיה גישה לאזור הרישומים בלבד ולהצגת סטטיסטיקות"
+
+#: /var/www/osclass-git/oc-admin/themes/modern/admins/index.php:167
+msgid "Delete admin"
+msgstr "מחיקת מנהל"
+
+#: /var/www/osclass-git/oc-admin/themes/modern/admins/index.php:173
+msgid "Are you sure you want to delete this admin?"
+msgstr "האם אתה בטוח שברצונך למחוק מנהל זה?"
+
+#: /var/www/osclass-git/oc-admin/themes/modern/appearance/add.php:20
+msgid "Manually add Osclass themes in .zip format. If you prefer, you can manually upload the decompressed theme to <em>oc-content/themes</em>."
+msgstr "הוספה ידנית של ערכות נושא Osclass בפורמט ZIP.. אם אתם מעדיפים, אתם יכולים להעלות באופן ידני את ערכת הנושא ביטול דחיסת לoc-content/themes <em> </em>."
+
+#: /var/www/osclass-git/oc-admin/themes/modern/appearance/add.php:63
+msgid "Can't install a new theme"
+msgstr "לא מצליח להתקין ערכת נושא חדשה"
+
+#: /var/www/osclass-git/oc-admin/themes/modern/appearance/add.php:66
+msgid "The theme folder is not writable on your server so you can't upload themes from the administration panel. Please make the theme folder writable and try again."
+msgstr "התיקייה של ערכת הנושא לא ניתנת לכתיבה בשרת שלך. לכן אתה לא יכול להתקין את ערכת הנושא. אנא שנה את הגדרות התיקייה שיהיה אפשר לכתוב בה."
+
+#: /var/www/osclass-git/oc-admin/themes/modern/appearance/add.php:186
+#: /var/www/osclass-git/oc-admin/themes/modern/appearance/index.php:230
+msgid "Osclass Market"
+msgstr "מרקט Osclass"
+
+#: /var/www/osclass-git/oc-admin/themes/modern/appearance/add_widget.php:118
+msgid "Description (for internal purposes only)"
+msgstr "תיאור (למטרות פנימיות בלבד)"
+
+#: /var/www/osclass-git/oc-admin/themes/modern/appearance/index.php:32
+msgid "Delete theme"
+msgstr "מחיקת ערכת נושא"
+
+#: /var/www/osclass-git/oc-admin/themes/modern/appearance/index.php:48
+msgid "Change your site's look and feel by activating a theme among those available. You can download new themes from the <a href=\"%s\">market</a>. <strong>Be careful</strong>: if your theme has been customized, you'll lose all changes if you change to a new theme."
+msgstr "שנה את מראה האתר שלך על ידי הפעלת ערכת נושא. ניתן להוריד ערכות נושא ב<a href=\"%s\">מרקט</a>. <strong>זהירות</strong> אם ערכת העיצוב עברה התאמות אישיות אתה תאבד את כל ההתאמות במידה ותעבור לערכה חדשה"
+
+#: /var/www/osclass-git/oc-admin/themes/modern/appearance/index.php:172
+msgid "This action can not be undone. Are you sure you want to delete the theme?"
+msgstr "אי אפשר לבטל פעולה זו. האם ברצונך למחוק את הערכה?"
+
+#: /var/www/osclass-git/oc-admin/themes/modern/appearance/index.php:200
+msgid "The theme has been downloaded correctly, proceed to activate or preview it."
+msgstr "ערכת הנושא ירדה בהצלחה. המשך להפעיל את הערכה או לתצוגה מקדימה שלה."
+
+#: /var/www/osclass-git/oc-admin/themes/modern/appearance/widgets.php:22
+msgid "Modify your site's header or footer here. Only works with compatible themes, such as those available in the market."
+msgstr "שינויי הכותרת או החלק התחתון של האתר. עובד רק לערכות נושא שמתאימות לכך כמו אלו הנמצאות במרקט"
+
+#: /var/www/osclass-git/oc-admin/themes/modern/appearance/widgets.php:42
+msgid "Delete widget"
+msgstr "מחק יישומון (widget)"
+
+#: /var/www/osclass-git/oc-admin/themes/modern/appearance/widgets.php:111
+msgid "Are you sure you want to delete this widget?"
+msgstr "האם אתה בטוח שברצונך למחוק יישומון (widget) זה?"
+
+#: /var/www/osclass-git/oc-admin/themes/modern/categories/iframe.php:32
+msgid "Expiration dates"
+msgstr "תאריכי תפוגה"
+
+#: /var/www/osclass-git/oc-admin/themes/modern/categories/iframe.php:35
+msgid "If the value is zero, it means this category doesn't have an expiration"
+msgstr "אם הערך הוא אפס, לקטגוריה זו אין תאריך תפוגה"
+
+#: /var/www/osclass-git/oc-admin/themes/modern/categories/iframe.php:86
+#: /var/www/osclass-git/oc-admin/themes/modern/categories/index.php:138
+msgid "Ajax error, please try again."
+msgstr "תקלה באג'קס. אנא נסה שוב"
+
+#: /var/www/osclass-git/oc-admin/themes/modern/categories/index.php:22
+msgid "Add, edit or delete the categories or subcategories in which users can post listings. Reorder sections by dragging and dropping, or nest a subcategory in an expanded category. <strong>Be careful</strong>: If you delete a category, all listings associated will also be deleted!"
+msgstr "הוספת, עריכה או מחיקה של קטגוריות או תתי קטגוריות שבהם משתמשים יכולים להוסיף רשומות. מיון מחדש על ידי גרירה ושחרור. <strong>זהירות</strong>: אם אתה מוחק קטגוריה כל הרישומים מתחתיה ימחקו גם הם"
+
+#: /var/www/osclass-git/oc-admin/themes/modern/categories/index.php:98
+msgid "Note: You must expand the category in order to make it a subcategory."
+msgstr "שים לב: עליך להרחיב את הקטגרויה על מנת להפוך אותו לקטגרויית משנה"
+
+#: /var/www/osclass-git/oc-admin/themes/modern/categories/index.php:240
+msgid "This action could take a while."
+msgstr "פעולה זו עלולה להמשך זמן רב"
+
+#: /var/www/osclass-git/oc-admin/themes/modern/categories/index.php:384
+msgid "Delete category"
+msgstr "מחיקת קטגוריה"
+
+#: /var/www/osclass-git/oc-admin/themes/modern/categories/index.php:387
+msgid "<strong>WARNING</strong>: This will also delete the listings under that category. This action cannot be undone. Are you sure you want to continue?"
+msgstr "<strong>אזהרה</strong>: פעולה זו תמחק גם את הרישומים שמתחת לקטגוריה. פעולה זו לא ניתנת לשחזור. האם אתה בטוח שברצונך לבצע פעולה זו?"
+
+#: /var/www/osclass-git/oc-admin/themes/modern/comments/frm.php:74
+msgid "Registered user"
+msgstr "משתמשים רשומים"
+
+#: /var/www/osclass-git/oc-admin/themes/modern/comments/index.php:20
+msgid "Manage the comments that users publish on the listings on your site. You can also edit, delete, activate or block comments."
+msgstr "נהל את ההערות שמפורסמים ברישוי האתר. תוכל גם לערוך, למחוק, להפעיל או לחסום תגובות."
+
+#: /var/www/osclass-git/oc-admin/themes/modern/emails/index.php:20
+msgid "Modify the emails your site's users receive when they join your site, when someone shows interest in their ad, to recover their password... <strong>Be careful</strong>: don't modify any of the words that appear within brackets."
+msgstr "לשנות את מיילים שהמשתמשים באתר שלך מקבלים כאשר הם מצטרפים לאתר, כאשר מישהו מגלה עניין במודעה שלהם, כדי לשחזר את הסיסמה שלהם ... <strong> צריך להיות זהירים </strong> : אין כל שינוי של המילים המופיעות בתוך סוגריים."
+
+#: /var/www/osclass-git/oc-admin/themes/modern/emails/index.php:33
+msgid "Email templates &raquo; %s"
+msgstr "תבניות מייל &raquo; %s"
+
+#: /var/www/osclass-git/oc-admin/themes/modern/fields/iframe.php:44
+msgid "Separate options with commas"
+msgstr "הפרד אפשרויות על ידי פסיקים"
+
+#: /var/www/osclass-git/oc-admin/themes/modern/fields/iframe.php:52
+msgid "Select the categories where you want to apply this attribute:"
+msgstr "בחר את הקטגוריות שברצונך להחיל תכונה זו:"
+
+#: /var/www/osclass-git/oc-admin/themes/modern/fields/index.php:24
+msgid "Create new fields for users to fill out when they publish a listing. You can require extra  information such as the number of bedrooms in real estate listings or fuel type in car listings, for example."
+msgstr "צור שדות חדשים למשתמשים כאשר הם מפרסמים את רישום. באפשרותך לדרוש מידע נוסף, כגון מספר חדרי השינה ברישומי הנדל\"ן או סוג דלק ברישומי רכב, למשל."
+
+#: /var/www/osclass-git/oc-admin/themes/modern/parts/footer.php:7
+msgid "Thank you for using <a href=\"%s\" target=\"_blank\">Osclass</a>"
+msgstr "תודה שהשתמשת ב <a href=\"%s\" target=\"_blank\">Osclass</a>"
+
+#: /var/www/osclass-git/oc-admin/themes/modern/items/index.php:20
+msgid "Manage all the listings on your site: edit, delete or block the latest listings published. You can also filter by several parameters: user, region, city, etc."
+msgstr "נהל את כל הרישומים באתר : לערוך, למחוק או לחסום את המודעות האחרונות שפורסמו. ניתן גם לסנן לפי מספר פרמטרים: משתמש, אזור, עיר, וכו '"
+
+#: /var/www/osclass-git/oc-admin/themes/modern/items/reported.php:20
+msgid "From here, you can edit or delete the listings reported by users (spam, misclassified, duplicate, expired, offensive). You can also delete the report if you consider it mistaken."
+msgstr "מכאן אתה יכול לערוך או למחוק את הרישומים שדווחו כדואר זבל, פוגענים או כל דבר אחר. ניתן גם למחוק את הדיווח אם זה נראה לך טעות"
+
+#: /var/www/osclass-git/oc-admin/themes/modern/items/reported.php:143
+msgid "Are you sure you want to %s the selected items?"
+msgstr "האם אתה בטוח שברצונך ל%s את הפרטים שנבחרו?"
+
+#: /var/www/osclass-git/oc-admin/themes/modern/items/reported.php:144
+msgid "Are you sure you want to clear all the reportings of the selected items?"
+msgstr "האם אתה בטוח שברצונך לנקות את כל הדיווחים לפריטים שנבחרו?"
+
+#: /var/www/osclass-git/oc-admin/themes/modern/items/reported.php:145
+msgid "Are you sure you want to clear the spam reportings of the selected items?"
+msgstr "האם אתה בטוח שברצונך למחוק את כל ההודעות על דואר זבל בפריטים שנבחרו?"
+
+#: /var/www/osclass-git/oc-admin/themes/modern/items/reported.php:146
+msgid "Are you sure you want to clear the misclassified reportings of the selected items?"
+msgstr "האם אתה בטוח שברצונך למחוק את כל הדיווחים לפריטים שנבחרו?"
+
+#: /var/www/osclass-git/oc-admin/themes/modern/items/reported.php:147
+msgid "Are you sure you want to clear the duplicated reportings of the selected items?"
+msgstr "האם אתה רוצה למחוק את כל הדיווחים על רישומים כפולים?"
+
+#: /var/www/osclass-git/oc-admin/themes/modern/items/reported.php:148
+msgid "Are you sure you want to clear the expired reportings of the selected items?"
+msgstr "האם אתה בטוח שברצונך למחוק את כל הדיוולים שפג תוקפם עבור הפריטים שנבחרו?"
+
+#: /var/www/osclass-git/oc-admin/themes/modern/items/reported.php:149
+msgid "Are you sure you want to clear the offensive reportings of the selected items?"
+msgstr "האם אתה בטוח שברצונך להסיר את הדיווחים על מוצרים פוגענים שנבחרו?"
+
+#: /var/www/osclass-git/oc-admin/themes/modern/items/settings.php:20
+msgid "Modify the general settings for your listings. Decide if users have to register in order to publish something, the number of pictures allowed for each listing, etc."
+msgstr "שנה את ההגדרות של הרישומים. החלט האם משתמשים צריכים להיות רשומים כדי לפרסם באתר, מספר תמונות מותרות לכל רישום וכו'.."
+
+#: /var/www/osclass-git/oc-admin/themes/modern/items/settings.php:82
+msgid "If the value is set to zero, there is no wait period"
+msgstr "אם הערך מוגדר לאפס, אין זמן המתנה"
+
+#: /var/www/osclass-git/oc-admin/themes/modern/items/settings.php:92
+msgid "After %s validated listings the user doesn't need to validate the listings any more"
+msgstr "אחרי %s אין צורך באימות רישום של משתמש."
+
+#: /var/www/osclass-git/oc-admin/themes/modern/items/settings.php:124
+msgid "Allow attached files in contact publisher form"
+msgstr "אפשר הוספת קבצים בטופס יצירת קושר של מפרסם"
+
+#: /var/www/osclass-git/oc-admin/themes/modern/items/settings.php:141
+msgid "Send admin a copy of the \"contact publisher\" email"
+msgstr "שלח העתק למנהל על כל טופס \"יצירת קשר עם המפרסם\""
+
+#: /var/www/osclass-git/oc-admin/themes/modern/items/settings.php:147
+msgid "Send admin a copy to \"share listing\" email"
+msgstr "שלח למנהל העתק על כל שיתוף רישום שנעשה"
+
+#: /var/www/osclass-git/oc-admin/themes/modern/items/settings.php:168
+msgid "If the value is zero, it means an unlimited number of images is allowed"
+msgstr "אם הערך הוא אפס, זה אומר שמספר בלתי מוגבל של תמונות מותר"
+
+#: /var/www/osclass-git/oc-admin/themes/modern/languages/add.php:56
+msgid "Can't install a new language"
+msgstr "לא מצליח להתקין שפה חדשה"
+
+#: /var/www/osclass-git/oc-admin/themes/modern/languages/add.php:59
+msgid "The translations folder is not writable on your server so you can't upload translations from the administration panel. Please make the translation folder writable and try again."
+msgstr "תיקיית השפות לא ניתנת לכתיבה. אנא שנה את התיקייה ניתנת לכתיבה ונסה שנית."
+
+#: /var/www/osclass-git/oc-admin/themes/modern/languages/index.php:20
+msgid "Add, edit or delete the language in which your Osclass is displayed, both the part that's viewable by users and the admin panel."
+msgstr "להוסיף, לערוך או למחוק את השפה שבה Osclass  מוצגת, על ידי המשתמשים ו/או פנל הניהול."
+
+#: /var/www/osclass-git/oc-admin/themes/modern/main/index.php:243
+msgid "Osclass"
+msgstr "Osclass"
+
+#: /var/www/osclass-git/oc-admin/themes/modern/main/index.php:276
+msgid "Osclass is a free, open-source project, sustained by the community. Money received from donations will be used to further development and improve the project."
+msgstr "Osclass הוא פרויקט חופשי, קוד פתוח, שנגרם על ידי הקהילה. הכסף שקיבל מתרומות ישמש להמשך פיתוח ולשפר את הפרויקט."
+
+#: /var/www/osclass-git/oc-admin/themes/modern/market/themes.php:224
+msgid "Warning! This theme is not compatible with your current version of Osclass (%s)"
+msgstr "אזהרה! נושא זה אינו תואם לגרסה הנוכחית שלך של Osclass (%s)"
+
+#: /var/www/osclass-git/oc-admin/themes/modern/market/plugins.php:151
+msgid "The plugin has been downloaded correctly, proceed to install and configure."
+msgstr "התוסף כבר הורד בצורה טובה. המשך כדי להתקין ולהגדיר אותו."
+
+#: /var/www/osclass-git/oc-admin/themes/modern/market/plugins.php:20
+msgid "Browse and download available Osclass plugins, from a constantly-updated selection. After downloading a plugin, you have to install it and configure it to get it up and running."
+msgstr "לגלוש ולהוריד תוספי Osclass זמינים, מתוך מבחר-מתעדכן. לאחר הורדת התוסף, יש להתקין ולהגדיר אותו."
+
+#: /var/www/osclass-git/oc-admin/themes/modern/media/index.php:20
+msgid "Manage the images that users have uploaded along with their listings. You can delete them without deleting the whole listing if the image is inappropriate or doesn’t match the listing."
+msgstr "נהל את התמונות שמשתמשים העלו עם הרישומים שלהם. ניתן למחוק אותם מבלי למחוק את כל הרשימה אם התמונה אינה הולמת או אינו תואמת את הרישום."
+
+#: /var/www/osclass-git/oc-admin/themes/modern/media/index.php:58
+msgid "Delete media"
+msgstr "מחק מדיה"
+
+#: /var/www/osclass-git/oc-admin/themes/modern/media/index.php:170
+msgid "Are you sure you want to delete this media file?"
+msgstr "האם אתה בטוח שברצונך למחוק את קובץ מדיה זה?"
+
+#: /var/www/osclass-git/oc-admin/themes/modern/pages/frm.php:88
+msgid "Used to quickly identify this page"
+msgstr "משמש לזיהוי דף זה במהירות"
+
+#: /var/www/osclass-git/oc-admin/themes/modern/pages/index.php:20
+msgid "With Osclass you can create static pages on which information can be stored, such as \"About Us\" or \"Info\" pages. From here you can create, edit or delete your site's static pages."
+msgstr "עם Osclass אתה יכול ליצור דפים סטטיים שבו ניתן לאחסן מידע, כגון \"מי אנחנו\" או \"דפי מידע\". מכאן תוכל ליצור, לערוך או למחוק דפים סטטיים באתר."
+
+#: /var/www/osclass-git/oc-admin/themes/modern/plugins/add.php:20
+msgid "Manually upload Osclass plugins in .zip format. If you prefer, you can manually upload the decompressed plugin to <em>oc-content/plugins</em>."
+msgstr "העלאה באופן ידני תוספי Osclass בפורמט ZIP.. אם אתם מעדיפים, אתם יכולים להעלות באופן ידני את התוסף לביטול דחיסת oc-content/plugins <em> </em>."
+
+#: /var/www/osclass-git/oc-admin/themes/modern/plugins/add.php:66
+msgid "The plugin folder is not writable on your server so you cannot upload plugins from the administration panel. Please make the folder writable and try again."
+msgstr "תיקיית התוספים אינה ניתנת לכתיבה. אנא שנו את ההרשאות שלה לכתיבה ונסו שנית"
+
+#: /var/www/osclass-git/oc-admin/themes/modern/plugins/index.php:20
+msgid "Install or uninstall the plugins available in your installation. In some cases, you'll have to configure the plugin in order to get it to work."
+msgstr "התקן או הסר התקנה של תוספים. במקרים מסויימים תצטרך להגדיר את התוסף כדי שיעבוד בצורה טבה."
+
+#: /var/www/osclass-git/oc-admin/themes/modern/plugins/index.php:69
+msgid "Uninstall plugin"
+msgstr "הסרת תוסף"
+
+#: /var/www/osclass-git/oc-admin/themes/modern/settings/comments.php:40
+msgid "Moderated comments: this field must only contain numeric characters"
+msgstr "הערות מיתון: שדה זה חייב להכין מספרים בלבד"
+
+#: /var/www/osclass-git/oc-admin/themes/modern/settings/comments.php:44
+msgid "Comments per page: this field must only contain numeric characters"
+msgstr "תגובות לעמוד: שדה זה חייב להכין מספרים בלבד"
+
+#: /var/www/osclass-git/oc-admin/themes/modern/settings/comments.php:76
+msgid "Modify the options that allow your users to publish comments on your site's listings."
+msgstr "עדכן את האפשרויות שמאפשרות למשתמשים לפרסם תגובות באתר"
+
+#: /var/www/osclass-git/oc-admin/themes/modern/settings/comments.php:89
+msgid "Comment Settings &raquo; %s"
+msgstr "הגדרות הערכות &raquo; %s"
+
+#: /var/www/osclass-git/oc-admin/themes/modern/settings/comments.php:101
+msgid "Comment Settings"
+msgstr "הגדרות הערה"
+
+#: /var/www/osclass-git/oc-admin/themes/modern/settings/comments.php:118
+msgid "A comment is being held for moderation"
+msgstr "תגובה מוחזקת למתינות"
+
+#: /var/www/osclass-git/oc-admin/themes/modern/settings/comments.php:122
+msgid "Before a comment appears, comment author must have at least %s previously approved comments"
+msgstr "לפני שתגובה מופיעה על כתוב התגובה חייב להיות לפחות %s הערות מאושרות"
+
+#: /var/www/osclass-git/oc-admin/themes/modern/settings/comments.php:123
+msgid "If the value is zero, an administrator must always approve comments"
+msgstr "אם הערך הוא אפס, מנהל תמיד חייב לאשר הערות"
+
+#: /var/www/osclass-git/oc-admin/themes/modern/settings/comments.php:131
+msgid "If the value is zero all comments are shown"
+msgstr "אם הערך הוא אפס כל ההערות מוצגות"
+
+#: /var/www/osclass-git/oc-admin/themes/modern/settings/comments.php:142
+msgid "A new comment is posted"
+msgstr "הערה חדשה מתפרסמת"
+
+#: /var/www/osclass-git/oc-admin/themes/modern/settings/comments.php:152
+msgid "There's a new comment on his listing"
+msgstr "יש תגובה חדשה על רישומו"
+
+#: /var/www/osclass-git/oc-admin/themes/modern/settings/currencies.php:20
+msgid "Add new currencies or edit existing currencies so users can publish listings in their country's currency."
+msgstr "הוסף מטבעות חדשים או לערוך מטבעות קיימים, כך שמשתמש יכול לפרסם רישומים במטבע של המדינה שלהם."
+
+#: /var/www/osclass-git/oc-admin/themes/modern/settings/currencies.php:133
+msgid "Are you sure you want to %s the selected currencies?"
+msgstr "האם אתה בטוח שאתה רוצה %s במטבעות הנבחרים?"
+
+#: /var/www/osclass-git/oc-admin/themes/modern/settings/currencies.php:164
+msgid "Delete currency"
+msgstr "מחק מטבע"
+
+#: /var/www/osclass-git/oc-admin/themes/modern/settings/currencies.php:171
+msgid "Are you sure you want to delete this currency?"
+msgstr "האם אתה בטוח שברצונך למחוק את המטבע הזה?"
+
+#: /var/www/osclass-git/oc-admin/themes/modern/settings/currency_form.php:112
+msgid "Must be a three-character code according to the <a href=\"%s\" target=\"_blank\">ISO 4217</a>"
+msgstr "חייב להיות קוד עם שלושה תווים לפי <a href=\"%s\" target=\"_blank\"> ISO 4217 </a>"
+
+#: /var/www/osclass-git/oc-admin/themes/modern/settings/currency_form.php:116
+msgid "Currency symbol"
+msgstr "סמל מטבע"
+
+#: /var/www/osclass-git/oc-admin/themes/modern/settings/index.php:65
+msgid "Listings shown in RSS feed: this field is required"
+msgstr "רישומים המוצגים בהזנת RSS: שדה חובה"
+
+#: /var/www/osclass-git/oc-admin/themes/modern/settings/index.php:66
+msgid "Listings shown in RSS feed: this field must only contain numeric characters"
+msgstr "רישומים המוצגים בהזנת RSS: שדה זה חייב להכיל רק תווים מספריים"
+
+#: /var/www/osclass-git/oc-admin/themes/modern/settings/index.php:69
+msgid "Latest listings shown: this field is required"
+msgstr "המודעות אחרונות שנראו: נדרש תחום זה"
+
+#: /var/www/osclass-git/oc-admin/themes/modern/settings/index.php:70
+msgid "Latest listings shown: this field must only contain numeric characters"
+msgstr "המודעות אחרונות שנראו: שדה זה חייב להכיל רק תווים מספריים"
+
+#: /var/www/osclass-git/oc-admin/themes/modern/settings/index.php:74
+msgid "The search page shows: this field must only contain numeric characters"
+msgstr "דף החיפוש מציג: שדה זה חייב להכיל רק תווים מספריים"
+
+#: /var/www/osclass-git/oc-admin/themes/modern/settings/index.php:122
+msgid "Change the basic configuration of your Osclass. From here, you can modify variables such as the site’s name, the default currency or how lists of listings are displayed. <strong>Be careful</strong> when modifying default values if you're not sure what you're doing!"
+msgstr "שינויי התצורה הבסיסית של Osclass. מכאן, אתה יכול לשנות את המשתנים כגון שמו של האתר, מטבע ברירת המחדל או איך רשימות של רישומים מוצגות. <strong> יש להיות זהירים </strong> בעת שינוי ערכי ברירת מחדל, אם אתה לא בטוח מה אתה עושה!"
+
+#: /var/www/osclass-git/oc-admin/themes/modern/settings/index.php:262
+msgid "Latest listings shown"
+msgstr "המודעות אחרונות שנראו"
+
+#: /var/www/osclass-git/oc-admin/themes/modern/settings/index.php:265
+msgid "at most"
+msgstr "לכל היותר"
+
+#: /var/www/osclass-git/oc-admin/themes/modern/settings/index.php:269
+msgid "Search page shows"
+msgstr "דף חיפוש מציג"
+
+#: /var/www/osclass-git/oc-admin/themes/modern/settings/index.php:275
+msgid "Category settings"
+msgstr "הגדרות קטגוריה"
+
+#: /var/www/osclass-git/oc-admin/themes/modern/settings/index.php:282
+msgid "Allow users to select a parent category as a category when inserting or editing a listing "
+msgstr "אפשר למשתמשים לבחור קטגוריה הורה כקטגוריה בעת הוספה או עריכה של רישום"
+
+#: /var/www/osclass-git/oc-admin/themes/modern/settings/index.php:306
+msgid "Allow Osclass to run a built-in <a href=\"%s\" target=\"_blank\">cron</a> automatically without setting crontab"
+msgstr "אפשר למערכת להריץ <a href=\"%s\" target=\"_blank\">כרון ג'וב</a> אוטומטי ללא הגדרות crontab"
+
+#: /var/www/osclass-git/oc-admin/themes/modern/settings/index.php:315
+msgid "Last checked on %s"
+msgstr "בדיקה אחרונה ב%s"
+
+#: /var/www/osclass-git/oc-admin/themes/modern/settings/locations.php:29
+msgid "Delete location"
+msgstr "מחק מיקום"
+
+#: /var/www/osclass-git/oc-admin/themes/modern/settings/locations.php:60
+msgid "Add, edit or delete the countries, regions and cities installed on your Osclass. <strong>Be careful</strong>: modifying locations can cause your statistics to be incorrect until they're recalculated. Modify only if you're sure what you're doing!"
+msgstr "הוסף או ערוך את המדינות, אזורים וערים שמותקנים ב Osclass. <strong>זהירות</strong> שינויי מיקום יכול לשנות את הסטטיסטיקות עד אשר הם יתאפסו מחדש. בצע את השינויי רק אם אתה בטוח במה שאתה עושה!"
+
+#: /var/www/osclass-git/oc-admin/themes/modern/settings/locations.php:73
+msgid "Locations &raquo; %s"
+msgstr "מיקומים &raquo; %s"
+
+#: /var/www/osclass-git/oc-admin/themes/modern/settings/mailserver.php:66
+msgid "Modify the settings of the mail server from which your site's emails are sent. <strong>Be careful</strong>: these settings can vary depending on your hosting or server. If you run into any issues, check your hosting's help section."
+msgstr "שינוי הגדרות שרת הדואר ממנו האתר ישלח מיילים. <strong>זהירות</strong>: הגדרות אלו יכולים להשתנות בהתאם לאירוח האתר שלך ו/או לשרת שלך. אם אתה נתקל בבעיות כלשהן כדאי להתייעץ עם חברת האחסון שלך."
+
+#: /var/www/osclass-git/oc-admin/themes/modern/settings/media.php:71
+msgid "Maximum size: this field must only contain numeric characters"
+msgstr "גודל מירבי: שדה זה מכיל מספרים בלבד"
+
+#: /var/www/osclass-git/oc-admin/themes/modern/settings/media.php:143
+msgid "Manage the options for the images users can upload along with their listings. You can limit their size, the number of images per ad, include a watermark, etc."
+msgstr "ניהול האפשרויות של התמונות אשר משתמשים יכולים להעלות עם הרישומים שלהם. ניתן להגביל את הגודל, את מספר התמונות של לפי מודעה כולל סימן מיים וכו'.."
+
+#: /var/www/osclass-git/oc-admin/themes/modern/settings/media.php:170
+msgid "Image sizes"
+msgstr "גדלים לתמונות"
+
+#: /var/www/osclass-git/oc-admin/themes/modern/settings/media.php:190
+msgid "Image may occupy more space than usual."
+msgstr "תמונה יכולה לתפוס שטח גדול יותר מהרגיל"
+
+#: /var/www/osclass-git/oc-admin/themes/modern/settings/media.php:287
+msgid "Osclass doesn't check the watermark image size"
+msgstr "Osclass לא בודק את גודל סימן המים"
+
+#: /var/www/osclass-git/oc-admin/themes/modern/settings/media.php:307
+msgid "You can regenerate different image dimensions. If you have changed the dimension of thumbnails, preview or normal images, you might want to regenerate your images."
+msgstr "אתה יכול לחדש את הממדים של תמונות שונים. אם שינית את הממד של תמונות ממוזערות, תצוגה מקדימה או תמונות רגילות, ייתכן שתרצה לחדש התמונות שלך."
+
+#: /var/www/osclass-git/oc-admin/themes/modern/settings/media.php:320
+msgid "Recommendation"
+msgstr "המלצה"
+
+#: /var/www/osclass-git/oc-admin/themes/modern/settings/media.php:323
+msgid "We highly recommend you have the 'Keep original image' option active when you use watermarks."
+msgstr "אנחנו מאוד ממליצים לך לקבל את \"שמרו את התמונה מקורית\" אפשרות פעילה בעת שימוש בסימני מים."
+
+#: /var/www/osclass-git/oc-admin/themes/modern/settings/permalinks.php:349
+msgid "Activate this option if you want your site's URLs to be more attractive to search engines and intelligible for users. <strong>Be careful</strong>: depending on your hosting service, this might not work correctly."
+msgstr "הפעל אפשרות זו אם אתה רוצה שכתובות האתר שלך יהיו יותר אטרקטיביים למנועי חיפוש ומובנים למשתמשים. <strong>היו זהירים: </strong> זה  תלוי בשירות האירוח שלך."
+
+#: /var/www/osclass-git/oc-admin/themes/modern/settings/permalinks.php:370
+msgid "By default Osclass uses web URLs which have question marks and lots of numbers in them. However, Osclass offers you friendly urls. This can improve the aesthetics, usability, and forward-compatibility of your links"
+msgstr "ברירת המחדל של Osclass משתמש בכתובות אתרי אינטרנט שבו יש סימני שאלה והרבה מספרים בהם. עם זאת, Osclass מציע כתובות ידידותית. זה יכול לשפר את האסתטיקה, שימושיות והתאימות קדימה של הקישורים שלך"
+
+#: /var/www/osclass-git/oc-admin/themes/modern/settings/permalinks.php:617
+msgid "Your .htaccess file"
+msgstr "קובץ ה .htaccess"
+
+#: /var/www/osclass-git/oc-admin/themes/modern/settings/permalinks.php:624
+msgid "How your .htaccess file should looks like"
+msgstr "ככה אמור להראות קובץ ה .htaccess "
+
+#: /var/www/osclass-git/oc-admin/themes/modern/settings/searches.php:45
+msgid "Custom number: this field must only contain numeric characters"
+msgstr "מספר מתואם אישית: חייב להכין מספרים בלבד"
+
+#: /var/www/osclass-git/oc-admin/themes/modern/settings/searches.php:46
+msgid "Custom number: this field cannot be left empty"
+msgstr "מספר מתואם אישית: שדה זה אינו יכול להיות ריק"
+
+#: /var/www/osclass-git/oc-admin/themes/modern/settings/searches.php:66
+msgid "Save the searches users do on your site. In this way, you can get information on what they're most interested in. From here, you can manage the options on how much information you want to save."
+msgstr "שמור את החיפושים שנעשו באתר. על ידי שמירתם תוכל לקבל מידע מה הכי מעניין את הגולשים. מכאן תוכל לנהל אפשרויות כיצד לשמור את המידע"
+
+#: /var/www/osclass-git/oc-admin/themes/modern/settings/searches.php:100
+msgid "It may be useful to know what queries users make."
+msgstr "זה עשוי להיות שימושי לדעת אילו שאילתות משתמשים מבצעים"
+
+#: /var/www/osclass-git/oc-admin/themes/modern/settings/searches.php:105
+msgid "How long queries are stored"
+msgstr "לכמה זמן השאילתות נשמרות"
+
+#: /var/www/osclass-git/oc-admin/themes/modern/settings/spamNbots.php:24
+msgid "Keep spammers from publishing on your site by configuring reCAPTCHA and Akismet. Be careful: in order to use these services, you must register on their sites first and follow their instructions."
+msgstr "שמור על שולחי דואר זבל מלפרסם באתר שלך על ידי הגדרת reCAPTCHA וAkismet. היזהר: כדי להשתמש בשירותים אלה, עליך להירשם באתרים שלהם ראשון ועקוב אחר ההוראות שלהם."
+
+#: /var/www/osclass-git/oc-admin/themes/modern/stats/comments.php:41
+msgid "See how many comments the listings published on your site have received."
+msgstr "ראה כמה הערות ברישומים שפורסמו באתר שלך קיבלת."
+
+#: /var/www/osclass-git/oc-admin/themes/modern/stats/comments.php:54
+msgid "Comment Statistics &raquo; %s"
+msgstr "סטטיסטיקות על תגובות &raquo; %s"
+
+#: /var/www/osclass-git/oc-admin/themes/modern/stats/comments.php:136
+msgid "Comment Statistics"
+msgstr "סטטיסטיקות על התגובות"
+
+#: /var/www/osclass-git/oc-admin/themes/modern/stats/comments.php:156
+#: /var/www/osclass-git/oc-admin/themes/modern/stats/items.php:259
+#: /var/www/osclass-git/oc-admin/themes/modern/stats/reports.php:159
+#: /var/www/osclass-git/oc-admin/themes/modern/stats/users.php:254
+msgid "There are no statistics yet"
+msgstr "אין עדיין סטטיסטיקות"
+
+#: /var/www/osclass-git/oc-admin/themes/modern/stats/reports.php:38
+msgid "See how many listings from your site have been reported as spam, expired, duplicate, etc."
+msgstr "הצג כמה רישומים באתר דווחו כדואר זבל, פג, משוכפלים וכו'.."
+
+#: /var/www/osclass-git/oc-admin/themes/modern/stats/reports.php:51
+msgid "Report Statistics &raquo; %s"
+msgstr "סטטיסטיקות דיווח &raquo; %s"
+
+#: /var/www/osclass-git/oc-admin/themes/modern/stats/reports.php:139
+msgid "Report Statistics"
+msgstr "סטטיסטיקות דיווח"
+
+#: /var/www/osclass-git/oc-admin/themes/modern/stats/users.php:44
+msgid "Stay up-to-date on the number of users registered on your site. You can also see a breakdown of the countries and regions where users live among those available on your site."
+msgstr "השאר מעודכן על כמות המשתמשים שרשומים באתר. ניתן גם לראות חיתוכים על מדינות ואזורים של המשתמשים."
+
+#: /var/www/osclass-git/oc-admin/themes/modern/stats/users.php:57
+msgid "User Statistics &raquo; %s"
+msgstr "סטטיסטיקות משתמש &raquo; %s"
+
+#: /var/www/osclass-git/oc-admin/themes/modern/tools/backup.php:37
+msgid "Save a backup of all of your site's information: listings, users and configuration. You can save a backup on your server or on your computer."
+msgstr "שמור גיבוי של כל המידע באתר: רישומים, משתמשים ותצורה. ניתן לשמור את גיבוי על השרת או במחשב שלך."
+
+#: /var/www/osclass-git/oc-admin/themes/modern/tools/backup.php:69
+msgid "<strong>WARNING</strong>: If you don't specify a backup folder, the backup files will be created in the root of your Osclass installation."
+msgstr "<strong> אזהרה </strong>: אם לא תציין תיקיית גיבוי, קבצי הגיבוי שייווצרו יישמרו בתיקייה הראשית של התקנת Osclass."
+
+#: /var/www/osclass-git/oc-admin/themes/modern/tools/category.php:40
+msgid "You can recalculate stats by category, useful if the stats seem to be incorrect."
+msgstr "ניתן לחשב מחדש את הסטטיסטיקה לפי קטגרויה. שימושי מאוד אם הסטטיסטיקה נראית לא נכונה"
+
+#: /var/www/osclass-git/oc-admin/themes/modern/tools/import.php:25
+msgid "Upload registers from other Osclass installations or upload new geographic information to your site. <strong>Be careful</strong>: don’t use this option if you're not 100% sure what you're doing."
+msgstr "העלאת משתמשים רשומים מהתקנה אחרת של Osclass או העלאה של מידע גיאוגרפי חדש. <strong>זהירות  </strong> לא להשתמש באפשרות זו אם אתה לא בטוח ב 100% במה שאתה עושה."
+
+#: /var/www/osclass-git/oc-admin/themes/modern/tools/locations.php:86
+msgid "You can recalculate your location stats. This is useful if you upgrade from versions older than Osclass 2.4"
+msgstr "ניתן לבצע חישוב מחדש של סטטיסטיקות אזוריות. זה שימושי אם בצעת שדרוג מגרסא ישנה יותר מ Osclass 2.4"
+
+#: /var/www/osclass-git/oc-admin/themes/modern/tools/locations.php:94
+msgid "Calculate location stats"
+msgstr "חישוב סטטיסטיקות לפי מיקומים"
+
+#: /var/www/osclass-git/oc-admin/themes/modern/tools/maintenance.php:26
+msgid "Show a \"Site in maintenance mode\" message to your users while you're updating your site or modifying its configuration."
+msgstr "הצג הודעת \"אתר במצב תחזוקה\" עד שהשדרוג יסתיים או עד שתשנה את זה בהגדרות."
+
+#: /var/www/osclass-git/oc-admin/themes/modern/tools/maintenance.php:52
+msgid "While in maintenance mode, users can't access your website. Useful if you need to make changes on your website. Use the following button to toggle maintenance mode ON/OFF."
+msgstr "בזמן מצב תחזוקה, משתמשים לא יוכלו לגשת לאתר. שימושי אם אתה צריך לעשות שינויים באתר. השתמש בכפתור כד להפעיל או לכבות את מצב תחזוקה"
+
+#: /var/www/osclass-git/oc-admin/themes/modern/tools/upgrade.php:47
+msgid "Congratulations! Your Osclass installation is up to date!"
+msgstr "מזל טוב! התקנת Osclass מעודכנת."
+
+#: /var/www/osclass-git/oc-admin/themes/modern/tools/upgrade.php:51
+msgid "Upgrading your Osclass installation (this could take a while):"
+msgstr "שדרג את Osclass (התהליך עלול לקחת זמן)"
+
+#: /var/www/osclass-git/oc-admin/themes/modern/tools/upgrade.php:77
+msgid "Check to see if you're using the latest version of Osclass. If you're not, the system will let you know so you can update and use the newest features."
+msgstr "בדקו אם אתה משתמש בגרסה האחרונה של Osclass. במידה ולא, המערכת תאפשר לך לדעת כדי שתוכל לעדכן ולהשתמש בתכונות החדשות ביותר."
+
+#: /var/www/osclass-git/oc-admin/themes/modern/tools/upgrade.php:106
+msgid "Your Osclass installation can be auto-upgraded. Please, back up your database and the folder oc-content before attempting to upgrade your Osclass installation. You can also upgrade Osclass manaully, more information in the %s"
+msgstr "ניתן לשדרג את Osclass אוטומטית. אנא,  גבה את מסד הנתונים שלך ואת תיקיית oc-content לפני שתנסה לשדרג התקנת Osclass שלך. ניתן גם לשדרג את Osclass  ידנית, מידע נוסף ב %s"
+
+#: /var/www/osclass-git/oc-admin/themes/modern/tools/upgrade.php:110
+msgid "Your Osclass installation can't be auto-upgraded. Files and folders need to be writable. You can apply write permissions via SSH with the command \"chmod -R a+w *\" (without quotes) or via an FTP client, it depends on the program so we can not provide more information. You can also upgrade Osclass by downloading the upgrade package, unzipping it and replacing the files on your server with the ones in the package."
+msgstr "Osclass לא הצליחה לבצע שדרוג. התיקיות והקבצים צריכים להיות ניתנים לכתיבה. ניתן לשנות את זה עם גישה לאחסון שלך. ניתן לשדרג את Osclass גם על ידי הורדת חבילת שדרוג, פתיחת קובץ zip והחלפת הקבצים על השרת עם אלו שבחבילה."
+
+#: /var/www/osclass-git/oc-admin/themes/modern/upgrade/index.php:60
+msgid "Upgrading your Osclass installation (this could take a while): "
+msgstr "שדרוג מערכת Osclass (עלול לקחת זמן)"
+
+#: /var/www/osclass-git/oc-admin/themes/modern/upgrade/index.php:64
+msgid "You have uploaded a new version of Osclass, you need to upgrade Osclass for it to work correctly."
+msgstr "העלת גרסא חדשה של Osclass. תצטרך לבצע שדרוג על מנת שהכל יעבוד כמו שצריך."
+
+#: /var/www/osclass-git/oc-admin/themes/modern/users/frm.php:137
+msgid "About you"
+msgstr "אודותיך"
+
+#: /var/www/osclass-git/oc-admin/themes/modern/users/frm.php:187
+msgid "If you'd like to change the password, type a new one. Otherwise leave this blank"
+msgstr "אם תרצה, ניתן לשנות את הסיסמא, הקלד סיסמא חדשה, אחרת השאר שדה זה ריק"
+
+#: /var/www/osclass-git/oc-admin/themes/modern/users/index.php:20
+msgid "Add, edit or delete information associated to registered users. Keep in mind that deleting a user also deletes all the listings the user published."
+msgstr "להוסיף, לערוך או למחוק מידע הקשור למשתמשים רשומים. זכור כי מחיקת משתמש מוחק גם את כל הרישומים למשתמש שפורסם."
+
+#: /var/www/osclass-git/oc-admin/themes/modern/users/index.php:186
+msgid "Delete user"
+msgstr "מחיקת משתמש"
+
+#: /var/www/osclass-git/oc-admin/themes/modern/users/index.php:192
+msgid "Are you sure you want to delete this user?"
+msgstr "האם אתה בטוח שברצונך למחוק משתמש זה?"
+
+#: /var/www/osclass-git/oc-admin/themes/modern/users/settings.php:20
+msgid "Manage the options related to users on your site. Here, you can decide if users must register or if email confirmation is necessary, among other options."
+msgstr "נהל את האפשרויות שקשורות למשתמשים באתר שלך. כאן, אתה יכול להחליט אם משתמשים חייבים להרשם או אם אישור בדוא\"ל הוא הכרחי, ועוד אפשרויות נוספות"
+
+#: /var/www/osclass-git/oc-admin/themes/modern/users/settings.php:33
+msgid "User Settings &raquo; %s"
+msgstr "הגדרות משתמש &raquo; %s"
+
+#: /var/www/osclass-git/oc-admin/themes/modern/users/settings.php:39
+msgid "User Settings"
+msgstr "הגדרות משתמש"
+
+#: /var/www/osclass-git/oc-admin/themes/modern/users/index.php:128
+#: /var/www/osclass-git/oc-admin/themes/modern/users/index.php:129
+#: /var/www/osclass-git/oc-admin/themes/modern/users/index.php:130
+#: /var/www/osclass-git/oc-admin/themes/modern/users/index.php:131
+#: /var/www/osclass-git/oc-admin/themes/modern/users/index.php:132
+#: /var/www/osclass-git/oc-admin/themes/modern/users/index.php:134
+msgid "Are you sure you want to %s the selected users?"
+msgstr "האם אתה בטוח שברצונך ל%s את המשתמשים המסומנים?"
+
+#: /var/www/osclass-git/oc-admin/themes/modern/users/index.php:134
+msgid "Resend the activation to"
+msgstr "שלח שוב קוד אקטיבציה ל"
+
+#: /var/www/osclass-git/oc-includes/osclass/classes/AdminMenu.php:85
+msgid "Email templates"
+msgstr "תבניות אימייל"
+
+#: /var/www/osclass-git/oc-includes/osclass/classes/AdminMenu.php:105
+msgid "Upgrade Osclass"
+msgstr "שדרוג Osclass"
+
+#: /var/www/osclass-git/oc-includes/osclass/frm/Item.form.class.php:434
+#: /var/www/osclass-git/oc-includes/osclass/frm/Item.form.class.php:703
+msgid "Description needs to be longer"
+msgstr "תיאור צריך להיות ארוך יותר"
+
+#: /var/www/osclass-git/oc-includes/osclass/frm/Item.form.class.php:891
+msgid "Sorry, you have reached the maximum number of images per listing"
+msgstr "מצטערי, עברת את מספר התמונות שמותרות למודעה"
+
+#: /var/www/osclass-git/oc-includes/osclass/frm/Language.form.class.php:142
+msgid "Number of decimals: this field must only contain numeric characters"
+msgstr "מספר עשרוני: שדה זה חייב להכיל מספרים בלבד"
+
+#: /var/www/osclass-git/oc-includes/osclass/frm/Language.form.class.php:149
+#: /var/www/osclass-git/oc-includes/osclass/frm/Language.form.class.php:150
+msgid "Thousands separator: this field is required"
+msgstr "מפריד אלפים: חובה להזין שדה זה"
+
+#: /var/www/osclass-git/oc-includes/osclass/functions.php:532
+msgid "Theme updates"
+msgstr "עדכון ערכת נושא"
+
+#: /var/www/osclass-git/oc-includes/osclass/helpers/hAdminMenu.php:112
+msgid "Compact"
+msgstr "קומפקטי"
+
+#: /var/www/osclass-git/oc-includes/osclass/install-functions.php:61
+msgid "PHP5 is required to run Osclass. You may talk with your hosting to upgrade your PHP version."
+msgstr "נרדש PHP5 כדי להריץ את Osclass. עליך לדבר עם חברת האחסון כדי לשדרג ל PHP5"
+
+#: /var/www/osclass-git/oc-includes/osclass/install-functions.php:79
+msgid "<code>oc-content/uploads</code> folder is writable"
+msgstr "תיקייה <code>oc-content/uploads</code>  ניתנת לכתיבה"
+
+#: /var/www/osclass-git/oc-includes/osclass/install-functions.php:81
+msgid "<code>uploads</code> folder has to be writable, i.e.: <code>chmod a+w %soc-content/uploads/</code>"
+msgstr "תיקיית <code>uploads</code> חייבת להיות ניתנת לכתיבה. ניתן לבצע זאת על ידי: <code>chmod a+w %soc-content/uploads/</code>"
+
+#: /var/www/osclass-git/oc-includes/osclass/install-functions.php:86
+msgid "You have to create the <code>languages</code> folder, i.e.: <code>mkdir %soc-content/languages/</code>"
+msgstr "חייבים ליצור את תיקייה <code>languages</code>. ניתן לבצע זאת על ידי הפקודה  <code>mkdir %soc-content/languages/</code>"
+
+#: /var/www/osclass-git/oc-includes/osclass/install-functions.php:97
+msgid "<code>config.php</code> file is writable"
+msgstr "הקובץ <code>config.php</code> ניתן לכתיבה"
+
+#: /var/www/osclass-git/oc-includes/osclass/install-functions.php:99
+msgid "<code>config.php</code> file has to be writable, i.e.: <code>chmod a+w %sconfig.php</code>"
+msgstr "הקובץ <code>config.php</code> חייב להיות ניתן לכתיבה. ניתן לבצע זאת על ידי הפקודה: <code>chmod a+w %sconfig.php</code>"
+
+#: /var/www/osclass-git/oc-includes/osclass/install-functions.php:113
+msgid "<code>config-sample.php</code> file exists"
+msgstr "הקובץ <code>config-sample.php</code>  קיים"
+
+#: /var/www/osclass-git/oc-includes/osclass/install-functions.php:115
+msgid "<code>config-sample.php</code> file is required, you should re-download Osclass."
+msgstr "הקובץ <code>config-sample.php</code> חייב להיות. אתה צריך להוריד מחדש את Osclass"
+
+#: /var/www/osclass-git/oc-includes/osclass/install-functions.php:196
+#: /var/www/osclass-git/oc-includes/osclass/install-functions.php:245
+msgid "The database doesn't exist. You should check the \"Create DB\" checkbox and fill in a username and password with the right privileges"
+msgstr "הדטה בייס לא קיים. אתה צריך לסמן את \"Creat DB\" ולמלא את שם המשתמש והסיסמא עם הרשאות נכונות"
+
+#: /var/www/osclass-git/oc-includes/osclass/install-functions.php:202
+#: /var/www/osclass-git/oc-includes/osclass/install-functions.php:251
+msgid "Can't resolve MySQL host. Check if the host is correct."
+msgstr "לא יכול לפתור מארח MySQL. בדקו אם המארח הוא נכון."
+
+#: /var/www/osclass-git/oc-includes/osclass/install-functions.php:217
+#: /var/www/osclass-git/oc-includes/osclass/install-functions.php:224
+msgid "Can't create the database. Error number: %s"
+msgstr "אין אפשרות ליצור את מסד הנתונים. מספר שגיאה:%s"
+
+#: /var/www/osclass-git/oc-includes/osclass/install-functions.php:221
+msgid "Can't create the database. Check if the admin username and password are correct."
+msgstr "אין אפשרות ליצור את מסד הנתונים. בדקו אם שם המשתמש וסיסמא נכונים."
+
+#: /var/www/osclass-git/oc-includes/osclass/install-functions.php:261
+#: /var/www/osclass-git/oc-includes/osclass/install-functions.php:263
+msgid "Can't write in config.php file. Check if the file is writable."
+msgstr "לא יכול לכתוב בקובץ config.php. בדקו אם הקובץ הוא לכתיבה."
+
+#: /var/www/osclass-git/oc-includes/osclass/install-functions.php:269
+#: /var/www/osclass-git/oc-includes/osclass/install-functions.php:272
+msgid "config-sample.php doesn't exist. Check if everything is decompressed correctly."
+msgstr "הקובץ config-sample.php לא קיים. בדוק אם הכל חולץ כמו שצריך"
+
+#: /var/www/osclass-git/oc-includes/osclass/install-functions.php:296
+#: /var/www/osclass-git/oc-includes/osclass/install-functions.php:302
+msgid "Can't create the database structure. Error number: %s"
+msgstr "לא מצליח ליצור את מבנה הדטה בייס. מספר תקלה: %s"
+
+#: /var/www/osclass-git/oc-includes/osclass/install-functions.php:355
+#: /var/www/osclass-git/oc-includes/osclass/install-functions.php:361
+msgid "Can't insert basic configuration. Error number: %s"
+msgstr "לא מצליח להכניס הגדרות בסיסיות. תקלה מספר: %s"
+
+#: /var/www/osclass-git/oc-includes/osclass/install-functions.php:359
+msgid "Can't insert basic configuration. This user has no privileges to 'INSERT' into the database."
+msgstr "לא מצליח להכניס הגדרות בסיסיות. למשתמש זה אין הרשאות \"INTSERT\" לטבלה"
+
+#: /var/www/osclass-git/oc-includes/osclass/install-functions.php:596
+msgid "The name of the database you want to run Osclass in"
+msgstr "שם הדטה בייס שאתה מעוניין להריץ ב Osclass"
+
+#: /var/www/osclass-git/oc-includes/osclass/install-functions.php:611
+msgid "If you want to run multiple Osclass installations in a single database, change this"
+msgstr "אם אתה רוצה להריץ מספר רב של מערכות Osclass על דטה בייס אחד שנה את זה"
+
+#: /var/www/osclass-git/oc-includes/osclass/install-functions.php:690
+msgid "You can modify username and password if you like, just change the input value."
+msgstr "ניתן לשנות שם משתמש וסיסמא, כדי לעשות זאת שנה את הערך בשדה"
+
+#: /var/www/osclass-git/oc-includes/osclass/install-functions.php:710
+msgid "Once you type a country, you'll be able to choose region and city as well. Therefore, the installation will be more specific."
+msgstr "ברגע שתבחר מדינה, תוכל לבחור אזור ועיר. לאחר ההתקנה ההגדרות יהיו יותר ספציפיות"
+
+#: /var/www/osclass-git/oc-includes/osclass/install-functions.php:894
+msgid "Osclass has been installed. Were you expecting more steps? Sorry to disappoint!"
+msgstr "Osclass הותקן. ציפית לעוד צעדים? מצטערים לאכזב אותך!"
+
+#: /var/www/osclass-git/oc-includes/osclass/install-location.php:96
+msgid "Your Osclass installation at %s is up and running. You can access the administration panel with these details:"
+msgstr "התקנת Osclass ב%s היא ולהפעלתו. אתה יכול לגשת לפנל ניהול עם הפרטים הבאים:"
+
+#: /var/www/osclass-git/oc-includes/osclass/install-location.php:102
+msgid "The <a href=\"http://osclass.org/\">Osclass</a> team"
+msgstr "קבוצת <a href=\"http://osclass.org/\">Osclass</a> "
+
+#: /var/www/osclass-git/oc-includes/osclass/install.php:86
+msgid "Looks like you've already installed Osclass. To reinstall please clear your old database tables first."
+msgstr "נראה שכבר התקנת את Osclass. כדי להתקין מחדש נקה את הדטה בייס הישן תחילה."
+
+#: /var/www/osclass-git/oc-includes/osclass/install.php:132
+msgid "Osclass Installation"
+msgstr "התקנת Osclass"
+
+#: /var/www/osclass-git/oc-includes/osclass/install.php:203
+msgid "Help make Osclass better by automatically sending usage statistics and crash reports to Osclass."
+msgstr "עזור לעשות את Osclass טובה יותר על ידי שליחה אוטמטית של סטטיסטיקות ודוחות נפילה ל Osclass"
+
+#: /var/www/osclass-git/oc-includes/osclass/upgrade-funcs.php:44
+msgid "Osclass &raquo; Has some errors"
+msgstr "Osclass $raquo; יש מספר תקלות"
+
+#: /var/www/osclass-git/oc-includes/osclass/upgrade-funcs.php:45
+msgid "We've encountered some problems while updating the database structure. The following queries failed:"
+msgstr "נתקלנו כמה בעיות בעת עדכון מבנה מסד הנתונים. השאילתות הבאות נכשלו:"
+
+#: /var/www/osclass-git/oc-includes/osclass/upgrade-funcs.php:47
+msgid "These errors could be false-positive errors. If you're sure that is the case, you can <a href=\"%s\">continue with the upgrade</a>, or <a href=\"http://forums.osclass.org/\">ask in our forums</a>."
+msgstr "תקלות אלו יכולות להיות שגיאות חיוביות. אם אתה בטוח שזה המצב ניתן <a href=\"%s\">להמשיך בשדרוג</a>, או <a href=\"http://forums.osclass.org/\">לברר בפורום שלנו</a>."
+
+#: /var/www/osclass-git/oc-includes/osclass/upgrade-funcs.php:286
+msgid "You need to calculate location stats, please go to admin panel, tools, recalculate location stats or click"
+msgstr "אתה צריך לחשב סטטיסטיקות מיקום, בבקשה גש לדשבורד הניהול, כלים, מיקום מחדש של סטטיסטיקות או לחץ"
+
+#: /var/www/osclass-git/oc-includes/osclass/upgrade-funcs.php:391
+msgid "Osclass &raquo; Updated correctly"
+msgstr "Osclass &raquo; שודרג בהצלחה"
+
+#: /var/www/osclass-git/oc-includes/osclass/upgrade-funcs.php:392
+msgid "Osclass has been updated successfully. <a href=\"http://forums.osclass.org/\">Need more help?</a>"
+msgstr "Osclass עודכנה בהצלחה. <a href=\"http://forums.osclass.org/\">צריך עזרה נוספת?</a>"
+
+#: /var/www/osclass-git/oc-load.php:207
+msgid "The website is currently undergoing maintenance"
+msgstr "האתר כרגע בתחזוקה."
+
+#: /var/www/osclass-git/ajax.php:231
+msgid "no action defined"
+msgstr "לא הוגדרה פעולה"
+
+#: /var/www/osclass-git/contact.php:63
+msgid "Administrator"
+msgstr "מנהל"
+
+#: /var/www/osclass-git/search.php:395
+msgid "Latest listings added"
+msgstr "רישומים אחרונים שנוספו"
+
+#: /var/www/osclass-git/search.php:397
+msgid "Latest listings added in"
+msgstr "רישומים אחרונים שנוספו ב"
+
+#: /var/www/osclass-git/oc-admin/admins.php:309
+#: /var/www/osclass-git/oc-admin/emails.php:131
+#: /var/www/osclass-git/oc-admin/languages.php:339
+msgid "Edit"
+msgstr "עריכה"
+
+#: /var/www/osclass-git/oc-admin/admins.php:310
+#: /var/www/osclass-git/oc-admin/languages.php:342
+msgid "Delete"
+msgstr "מחיקה"
+
+#: /var/www/osclass-git/oc-admin/items.php:440
+msgid "Deactivate"
+msgstr "לבטל פעילות"
+
+#: /var/www/osclass-git/oc-admin/items.php:442
+msgid "Activate"
+msgstr "הפעל פעילות"
+
+#: /var/www/osclass-git/oc-admin/items.php:445
+msgid "Block"
+msgstr "חסום"
+
+#: /var/www/osclass-git/oc-admin/items.php:447
+msgid "Unblock"
+msgstr "שחרר"
+
+#: /var/www/osclass-git/oc-admin/items.php:450
+msgid "Unmark as premium"
+msgstr "בטל סימון כפרמיום"
+
+#: /var/www/osclass-git/oc-admin/items.php:452
+msgid "Mark as premium"
+msgstr "סמן כפרמיום"
+
+#: /var/www/osclass-git/oc-admin/items.php:455
+msgid "Unmark as spam"
+msgstr "בטל סימון כדואר זבל"
+
+#: /var/www/osclass-git/oc-admin/items.php:457
+msgid "Mark as spam"
+msgstr "סמן כדואר זבל"
+
+#: /var/www/osclass-git/oc-admin/languages.php:340
+msgid "Disable (website)"
+msgstr "השבת (אתר)"
+
+#: /var/www/osclass-git/oc-admin/languages.php:340
+msgid "Enable (website)"
+msgstr "הפעל (אתר)"
+
+#: /var/www/osclass-git/oc-admin/languages.php:341
+msgid "Disable (oc-admin)"
+msgstr "שבת (oc-admin)"
+
+#: /var/www/osclass-git/oc-admin/languages.php:341
+msgid "Enable (oc-admin)"
+msgstr "הפעל (oc-admin)"
+
+#: /var/www/osclass-git/oc-includes/osclass/frm/Item.form.class.php:528
+#: /var/www/osclass-git/oc-includes/osclass/frm/Item.form.class.php:815
+msgid "This action can't be undone. Are you sure you want to continue?"
+msgstr "פעולה זו לא ניתנת לשיחזור. האם אתה בטוח שברצונך לבצע אותה?"
+
+#: /var/www/osclass-git/oc-admin/languages.php:353
+#: /var/www/osclass-git/oc-admin/languages.php:354
+msgid "Yes"
+msgstr "כן"
+
+#: /var/www/osclass-git/oc-admin/languages.php:353
+#: /var/www/osclass-git/oc-admin/languages.php:354
+msgid "No"
+msgstr "לא"
+
+#: /var/www/osclass-git/oc-admin/plugins.php:294
+msgid "Configure"
+msgstr "קבע את התצורה"
+
+#: /var/www/osclass-git/oc-admin/plugins.php:300
+msgid "Disable"
+msgstr "השבת"
+
+#: /var/www/osclass-git/oc-admin/plugins.php:302
+msgid "Enable"
+msgstr "אפשר"
+
+#: /var/www/osclass-git/oc-admin/themes/modern/plugins/index.php:234
+msgid "This action can not be undone. Uninstalling plugins may result in a permanent lost of data. Are you sure you want to continue?"
+msgstr "לא ניתן לבטל פעולה זו. הסרת התקנת תוספים עלולה לגרום לאובדן נתונים של התוסף. האם אתה בטוח שברצונך להמשיך?"
+
+#: /var/www/osclass-git/oc-admin/plugins.php:308
+msgid "Uninstall"
+msgstr "להסיר"
+
+#: /var/www/osclass-git/oc-admin/plugins.php:310
+msgid "Install"
+msgstr "להתקין"
+
+#: /var/www/osclass-git/oc-admin/ajax/ajax.php:57
+msgid "No results"
+msgstr "אין תוצאות"
+
+#: /var/www/osclass-git/oc-admin/ajax/ajax.php:187
+msgid "Order saved"
+msgstr "מיון נשמר"
+
+#: /var/www/osclass-git/oc-admin/ajax/ajax.php:255
+#: /var/www/osclass-git/oc-admin/ajax/ajax.php:378
+msgid "Saved"
+msgstr "נשמר"
+
+#: /var/www/osclass-git/oc-admin/ajax/ajax.php:273
+msgid "NEW custom field"
+msgstr "שדה מותאם אישית חדש"
+
+#: /var/www/osclass-git/oc-admin/ajax/ajax.php:342
+msgid "Parent category is disabled, you can not enable that category"
+msgstr "קטגוריה האם מושבתת, לא ניתן להפעיל את הקטגוריה"
+
+#: /var/www/osclass-git/oc-admin/ajax/ajax.php:350
+msgid "The subcategory has been enabled"
+msgstr "תת הקטגוריה אופשרה"
+
+#: /var/www/osclass-git/oc-admin/ajax/ajax.php:354
+msgid "The subcategory has been disabled"
+msgstr "תת הקטגוריה הושבתה"
+
+#: /var/www/osclass-git/oc-admin/ajax/ajax.php:369
+msgid "The categories have been deleted"
+msgstr "הקטגוריה נמחקה"
+
+#: /var/www/osclass-git/oc-admin/ajax/ajax.php:418
+msgid "Category updated correctly"
+msgstr "הקטגוריה עודכנה בהצלחה"
+
+#: /var/www/osclass-git/oc-admin/ajax/ajax.php:454
+msgid "Test email, %s"
+msgstr "בדיקת אימייל, %s"
+
+#: /var/www/osclass-git/oc-admin/ajax/ajax.php:455
+msgid "Test email"
+msgstr "בדיקת אימייל"
+
+#: /var/www/osclass-git/oc-admin/ajax/ajax.php:467
+msgid "Email sent successfully"
+msgstr "אימייל נשלח בהצלחה"
+
+#: /var/www/osclass-git/oc-admin/ajax/pages_processing.php:86
+msgid "View page"
+msgstr "הצג עמוד"
+
+#: /var/www/osclass-git/oc-admin/ajax/ajax.php:610
+#: /var/www/osclass-git/oc-admin/ajax/ajax.php:773
+msgid "Nothing to copy"
+msgstr "אין מה להעתיק"
+
+#: /var/www/osclass-git/oc-admin/ajax/ajax.php:614
+#: /var/www/osclass-git/oc-admin/ajax/ajax.php:777
+msgid "Unzip failed"
+msgstr "חילוץ קבצים נכשל"
+
+#: /var/www/osclass-git/oc-admin/ajax/ajax.php:618
+#: /var/www/osclass-git/oc-admin/ajax/ajax.php:781
+msgid "Download failed"
+msgstr "הורדה נכשלה"
+
+#: /var/www/osclass-git/oc-admin/ajax/ajax.php:622
+#: /var/www/osclass-git/oc-admin/ajax/ajax.php:789
+msgid "Missing download URL"
+msgstr "חסר כתובת אתר להורדה"
+
+#: /var/www/osclass-git/oc-admin/ajax/ajax.php:661
+#: /var/www/osclass-git/oc-admin/ajax/ajax.php:813
+msgid "No external sources are allowed"
+msgstr "אסור מקורות מבחוץ"
+
+#: /var/www/osclass-git/oc-admin/ajax/ajax.php:785
+msgid "Input code not valid"
+msgstr "קוד קלט לא תקף"
+
+#: /var/www/osclass-git/oc-admin/ajax/comments_processing.php:145
+#: /var/www/osclass-git/oc-admin/ajax/items_processing.php:370
+#: /var/www/osclass-git/oc-admin/ajax/users_processing.php:142
+msgid "Show more"
+msgstr "הצג עוד"
+
+#: /var/www/osclass-git/oc-admin/ajax/items_processing.php:362
+msgid "View comments"
+msgstr "צפה בתגובות"
+
+#: /var/www/osclass-git/oc-admin/ajax/items_processing.php:365
+msgid "View media"
+msgstr "צפה במדיה"
+
+#: /var/www/osclass-git/oc-admin/ajax/items_processing.php:435
+msgid "Clear Spam"
+msgstr "נקה דואר זבל"
+
+#: /var/www/osclass-git/oc-admin/ajax/items_processing.php:441
+msgid "Clear Duplicated"
+msgstr "נקה כפילויות"
+
+#: /var/www/osclass-git/oc-admin/ajax/items_processing.php:444
+msgid "Clear Offensive"
+msgstr "נקה מידע פוגעני"
+
+#: /var/www/osclass-git/oc-admin/ajax/items_processing.php:447
+msgid "Clear Expired"
+msgstr "נקה פג תוקף"
+
+#: /var/www/osclass-git/oc-admin/ajax/users_processing.php:137
+msgid "Re-send activation email"
+msgstr "שלח שוב מייל אקטיבציה"
+
+#: /var/www/osclass-git/oc-admin/gui/forgot_password.php:22
+msgid "Change your password"
+msgstr "שנה את הסיסמא שלך"
+
+#: /var/www/osclass-git/oc-admin/gui/forgot_password.php:35
+msgid "Type your new password"
+msgstr "הקלד שוב סיסמא חדשה"
+
+#: /var/www/osclass-git/oc-admin/gui/forgot_password.php:55
+msgid "Change password"
+msgstr "שנה סיסמא"
+
+#: /var/www/osclass-git/oc-admin/gui/forgot_password.php:59
+#: /var/www/osclass-git/oc-admin/gui/login.php:22
+#: /var/www/osclass-git/oc-admin/gui/login.php:68
+#: /var/www/osclass-git/oc-admin/gui/recover.php:51
+msgid "Log in"
+msgstr "התחבר"
+
+#: /var/www/osclass-git/oc-admin/gui/forgot_password.php:62
+#: /var/www/osclass-git/oc-admin/gui/login.php:73
+#: /var/www/osclass-git/oc-admin/gui/recover.php:54
+msgid "Back to %s"
+msgstr "חזרה ל%s"
+
+#: /var/www/osclass-git/oc-admin/gui/login.php:39
+msgid "Username"
+msgstr "שם משתמש"
+
+#: /var/www/osclass-git/oc-admin/gui/login.php:45
+msgid "Password"
+msgstr "סיסמא"
+
+#: /var/www/osclass-git/oc-admin/gui/login.php:63
+msgid "Remember me"
+msgstr "זכור אותי"
+
+#: /var/www/osclass-git/oc-admin/gui/login.php:65
+msgid "Forgot your password?"
+msgstr "שכחת את הסיסמא?"
+
+#: /var/www/osclass-git/oc-admin/gui/recover.php:22
+msgid "Lost your password"
+msgstr "איבדת את הסיסמא שלך?"
+
+#: /var/www/osclass-git/oc-admin/gui/recover.php:36
+msgid "Please enter your username or e-mail address"
+msgstr "אנא רשום את שם המשתמש או את כתובת האימייל שלך"
+
+#: /var/www/osclass-git/oc-admin/gui/recover.php:37
+msgid "You will receive a new password via e-mail"
+msgstr "תקבל סיסמא חדשה באימייל שלך"
+
+#: /var/www/osclass-git/oc-admin/gui/recover.php:44
+msgid "E-mail"
+msgstr "אימייל"
+
+#: /var/www/osclass-git/oc-admin/gui/recover.php:48
+msgid "Get new password"
+msgstr "קבל סיסמא חדשה"
+
+#: /var/www/osclass-git/oc-admin/themes/modern/main/index.php:183
+msgid "Listings by category"
+msgstr "רישומים לפי קטגוריה"
+
+#: /var/www/osclass-git/oc-admin/themes/modern/comments/frm.php:35
+#: /var/www/osclass-git/oc-admin/themes/modern/comments/index.php:25
+msgid "Listing"
+msgstr "רישום"
+
+#: /var/www/osclass-git/oc-admin/themes/modern/items/reported.php:25
+#: /var/www/osclass-git/oc-admin/themes/modern/main/index.php:54
+#: /var/www/osclass-git/oc-admin/themes/modern/main/index.php:195
+#: /var/www/osclass-git/oc-admin/themes/modern/main/index.php:200
+msgid "Listings"
+msgstr "רישומים"
+
+#: /var/www/osclass-git/oc-admin/themes/modern/main/index.php:213
+msgid "There aren't any uploaded listing yet"
+msgstr "אין כל רישום שהועלה עדיין"
+
+#: /var/www/osclass-git/oc-admin/themes/modern/main/index.php:222
+msgid "Statistics"
+msgstr "סטטיסטיקות"
+
+#: /var/www/osclass-git/oc-admin/themes/modern/functions.php:39
+#: /var/www/osclass-git/oc-admin/themes/modern/functions.php:69
+msgid "Enter title here"
+msgstr "הכנס כותרת כאן"
+
+#: /var/www/osclass-git/oc-admin/themes/modern/functions.php:83
+#: /var/www/osclass-git/oc-admin/themes/modern/functions.php:109
+msgid "Description"
+msgstr "תיאור"
+
+#: /var/www/osclass-git/oc-admin/themes/modern/admins/frm.php:25
+msgid "Edit admin"
+msgstr "עריכת מנהל"
+
+#: /var/www/osclass-git/oc-admin/themes/modern/admins/frm.php:27
+msgid "Save"
+msgstr "שמור"
+
+#: /var/www/osclass-git/oc-admin/themes/modern/admins/index.php:105
+msgid "Manage admins"
+msgstr "ניהול מנהלים"
+
+#: /var/www/osclass-git/oc-admin/themes/modern/admins/frm.php:30
+#: /var/www/osclass-git/oc-admin/themes/modern/admins/index.php:32
+msgid "Add admin"
+msgstr "הוספת מנהל"
+
+#: /var/www/osclass-git/oc-admin/themes/modern/admins/frm.php:32
+#: /var/www/osclass-git/oc-admin/themes/modern/categories/index.php:29
+#: /var/www/osclass-git/oc-admin/themes/modern/comments/frm.php:31
+msgid "Add"
+msgstr "להוסיף"
+
+#: /var/www/osclass-git/oc-admin/themes/modern/admins/frm.php:37
+#: /var/www/osclass-git/oc-admin/themes/modern/admins/index.php:30
+msgid "Admins"
+msgstr "מנהלים"
+
+#: /var/www/osclass-git/oc-admin/themes/modern/admins/frm.php:69
+msgid "Name <em>(required)</em>"
+msgstr "שם <em>(נדרש)</em>"
+
+#: /var/www/osclass-git/oc-admin/themes/modern/admins/frm.php:75
+msgid "Username <em>(required)</em>"
+msgstr "שם משתמש <em>(נדרש)</em>"
+
+#: /var/www/osclass-git/oc-admin/themes/modern/admins/frm.php:79
+msgid "E-mail <em>(required)</em>"
+msgstr "כתובת מייל <em>(נדרש)</em>"
+
+#: /var/www/osclass-git/oc-admin/themes/modern/admins/frm.php:84
+msgid "Admin type <em>(required)</em>"
+msgstr "סוג מנהל <em>(נדרש)</em>"
+
+#: /var/www/osclass-git/oc-admin/themes/modern/admins/frm.php:93
+msgid "Current password"
+msgstr "סיסמא נוכחית"
+
+#: /var/www/osclass-git/oc-admin/themes/modern/admins/frm.php:101
+msgid "New password"
+msgstr "סיסמא חדשה"
+
+#: /var/www/osclass-git/oc-admin/themes/modern/admins/frm.php:108
+msgid "Type your new password again"
+msgstr "רשום שוב את הסיסמא החדשה שלך"
+
+#: /var/www/osclass-git/oc-admin/themes/modern/admins/index.php:25
+msgid "Admins &raquo; %s"
+msgstr "מנהלים &raquo; %s"
+
+#: /var/www/osclass-git/oc-admin/themes/modern/admins/index.php:116
+#: /var/www/osclass-git/oc-admin/themes/modern/admins/index.php:183
+#: /var/www/osclass-git/oc-admin/themes/modern/comments/index.php:123
+#: /var/www/osclass-git/oc-admin/themes/modern/comments/index.php:199
+msgid "Bulk actions"
+msgstr "פעולות גורפות"
+
+#: /var/www/osclass-git/oc-admin/themes/modern/admins/index.php:118
+#: /var/www/osclass-git/oc-admin/themes/modern/comments/index.php:129
+msgid "Apply"
+msgstr "החל"
+
+#: /var/www/osclass-git/oc-admin/themes/modern/admins/index.php:127
+#: /var/www/osclass-git/oc-admin/themes/modern/appearance/add.php:83
+#: /var/www/osclass-git/oc-admin/themes/modern/appearance/index.php:135
+#: /var/www/osclass-git/oc-admin/themes/modern/emails/index.php:45
+#: /var/www/osclass-git/oc-admin/themes/modern/fields/iframe.php:33
+msgid "Name"
+msgstr "שם"
+
+#: /var/www/osclass-git/oc-admin/themes/modern/admins/index.php:149
+#: /var/www/osclass-git/oc-admin/themes/modern/comments/index.php:165
+#: /var/www/osclass-git/oc-admin/themes/modern/emails/index.php:63
+msgid "No data available in table"
+msgstr "אין מידע בטבלה"
+
+#: /var/www/osclass-git/oc-admin/themes/modern/appearance/add.php:26
+#: /var/www/osclass-git/oc-admin/themes/modern/appearance/index.php:54
+#: /var/www/osclass-git/oc-admin/themes/modern/appearance/view.php:21
+#: /var/www/osclass-git/oc-admin/themes/modern/appearance/widgets.php:28
+msgid "Appearance"
+msgstr "הופעה"
+
+#: /var/www/osclass-git/oc-admin/themes/modern/appearance/add.php:33
+msgid "Add theme &raquo; %s"
+msgstr "הוספת ערכת נושא » %s"
+
+#: /var/www/osclass-git/oc-admin/themes/modern/appearance/add.php:40
+msgid "Add new theme"
+msgstr "הוספת ערכת נושא חדשה"
+
+#: /var/www/osclass-git/oc-admin/themes/modern/appearance/index.php:72
+msgid "Market"
+msgstr "מרקט"
+
+#: /var/www/osclass-git/oc-admin/themes/modern/appearance/add.php:45
+msgid "Download more themes at %s"
+msgstr "הורדת עוד ערכות נושא ב %s"
+
+#: /var/www/osclass-git/oc-admin/themes/modern/appearance/add.php:51
+msgid "Theme package (.zip)"
+msgstr "חבילת ערכת נושא (zip.)"
+
+#: /var/www/osclass-git/oc-admin/themes/modern/appearance/add.php:57
+msgid "Upload"
+msgstr "העלאה"
+
+#: /var/www/osclass-git/oc-admin/themes/modern/appearance/add.php:69
+msgid "To make the directory writable under UNIX execute this command from the shell:"
+msgstr "כדי להפוך את התיקייה עם אפשרויות כתיבה עליך להכנס לבצע פקודה זו דרך ה- shell ביוניקס: "
+
+#: /var/www/osclass-git/oc-admin/themes/modern/appearance/add.php:84
+#: /var/www/osclass-git/oc-admin/themes/modern/appearance/add.php:88
+#: /var/www/osclass-git/oc-admin/themes/modern/appearance/add.php:92
+#: /var/www/osclass-git/oc-admin/themes/modern/appearance/index.php:136
+#: /var/www/osclass-git/oc-admin/themes/modern/appearance/index.php:140
+#: /var/www/osclass-git/oc-admin/themes/modern/appearance/index.php:144
+msgid "Loading data"
+msgstr "טוען מידע"
+
+#: /var/www/osclass-git/oc-admin/themes/modern/appearance/add.php:87
+#: /var/www/osclass-git/oc-admin/themes/modern/appearance/index.php:139
+msgid "Version"
+msgstr "גרסא"
+
+#: /var/www/osclass-git/oc-admin/themes/modern/appearance/add.php:91
+#: /var/www/osclass-git/oc-admin/themes/modern/appearance/index.php:143
+#: /var/www/osclass-git/oc-admin/themes/modern/comments/frm.php:70
+#: /var/www/osclass-git/oc-admin/themes/modern/comments/index.php:137
+msgid "Author"
+msgstr "מחבר"
+
+#: /var/www/osclass-git/oc-admin/themes/modern/appearance/add.php:95
+#: /var/www/osclass-git/oc-admin/themes/modern/appearance/index.php:147
+msgid "URL"
+msgstr "כתובת"
+
+#: /var/www/osclass-git/oc-admin/themes/modern/appearance/add.php:96
+#: /var/www/osclass-git/oc-admin/themes/modern/appearance/index.php:148
+msgid "Download manually"
+msgstr "הורדה ידנית"
+
+#: /var/www/osclass-git/oc-admin/themes/modern/admins/frm.php:115
+#: /var/www/osclass-git/oc-admin/themes/modern/admins/index.php:177
+#: /var/www/osclass-git/oc-admin/themes/modern/admins/index.php:188
+#: /var/www/osclass-git/oc-admin/themes/modern/appearance/add.php:104
+#: /var/www/osclass-git/oc-admin/themes/modern/appearance/index.php:156
+#: /var/www/osclass-git/oc-admin/themes/modern/appearance/index.php:176
+#: /var/www/osclass-git/oc-admin/themes/modern/appearance/widgets.php:115
+#: /var/www/osclass-git/oc-admin/themes/modern/categories/iframe.php:49
+#: /var/www/osclass-git/oc-admin/themes/modern/categories/index.php:391
+#: /var/www/osclass-git/oc-admin/themes/modern/comments/frm.php:109
+#: /var/www/osclass-git/oc-admin/themes/modern/comments/index.php:193
+#: /var/www/osclass-git/oc-admin/themes/modern/comments/index.php:204
+#: /var/www/osclass-git/oc-admin/themes/modern/fields/iframe.php:79
+msgid "Cancel"
+msgstr "ביטול"
+
+#: /var/www/osclass-git/oc-admin/themes/modern/appearance/add.php:105
+#: /var/www/osclass-git/oc-admin/themes/modern/appearance/index.php:157
+msgid "Continue install"
+msgstr "המשך בהתקנה"
+
+#: /var/www/osclass-git/oc-admin/themes/modern/appearance/add.php:154
+#: /var/www/osclass-git/oc-admin/themes/modern/appearance/index.php:105
+msgid "Preview"
+msgstr "תצוגה מקדימה"
+
+#: /var/www/osclass-git/oc-admin/themes/modern/appearance/add.php:158
+#: /var/www/osclass-git/oc-admin/themes/modern/appearance/index.php:81
+#: /var/www/osclass-git/oc-admin/themes/modern/appearance/index.php:117
+msgid "by"
+msgstr "על ידי"
+
+#: /var/www/osclass-git/oc-admin/themes/modern/appearance/index.php:56
+msgid "Add theme"
+msgstr "הוספת ערכת נושא"
+
+#: /var/www/osclass-git/oc-admin/themes/modern/appearance/add_widget.php:24
+#: /var/www/osclass-git/oc-admin/themes/modern/appearance/add_widget.php:36
+#: /var/www/osclass-git/oc-admin/themes/modern/appearance/add_widget.php:52
+msgid "Edit widget"
+msgstr "עריכת יישומון (widget)"
+
+#: /var/www/osclass-git/oc-admin/themes/modern/appearance/add_widget.php:26
+#: /var/www/osclass-git/oc-admin/themes/modern/appearance/add_widget.php:54
+#: /var/www/osclass-git/oc-admin/themes/modern/categories/iframe.php:48
+#: /var/www/osclass-git/oc-admin/themes/modern/emails/frm.php:78
+#: /var/www/osclass-git/oc-admin/themes/modern/fields/iframe.php:78
+msgid "Save changes"
+msgstr "שמירת שינויים"
+
+#: /var/www/osclass-git/oc-admin/themes/modern/appearance/add_widget.php:28
+#: /var/www/osclass-git/oc-admin/themes/modern/appearance/add_widget.php:30
+#: /var/www/osclass-git/oc-admin/themes/modern/appearance/add_widget.php:38
+#: /var/www/osclass-git/oc-admin/themes/modern/appearance/add_widget.php:56
+#: /var/www/osclass-git/oc-admin/themes/modern/appearance/add_widget.php:58
+msgid "Add widget"
+msgstr "הוספת יישומון (widget)"
+
+#: /var/www/osclass-git/oc-admin/themes/modern/appearance/add_widget.php:45
+#: /var/www/osclass-git/oc-admin/themes/modern/appearance/index.php:62
+#: /var/www/osclass-git/oc-admin/themes/modern/appearance/view.php:26
+#: /var/www/osclass-git/oc-admin/themes/modern/appearance/widgets.php:59
+msgid "Appearance &raquo; %s"
+msgstr "הופעה &raquo; %s"
+
+#: /var/www/osclass-git/oc-admin/themes/modern/appearance/add_widget.php:91
+msgid "Description: this field is required"
+msgstr "תיאור: שדה חובה"
+
+#: /var/www/osclass-git/oc-admin/themes/modern/appearance/add_widget.php:124
+msgid "HTML Code for the Widget"
+msgstr "קוד HTML עבור היישומון (widget)"
+
+#: /var/www/osclass-git/oc-admin/themes/modern/appearance/index.php:73
+#: /var/www/osclass-git/oc-admin/themes/modern/appearance/index.php:89
+msgid "Available themes"
+msgstr "ערכות נושא זמינות"
+
+#: /var/www/osclass-git/oc-admin/themes/modern/appearance/index.php:76
+msgid "Current theme"
+msgstr "ערכת נושא נוכחית"
+
+#: /var/www/osclass-git/oc-admin/themes/modern/appearance/index.php:111
+#: /var/www/osclass-git/oc-admin/themes/modern/appearance/index.php:226
+msgid "Update"
+msgstr "עדכון"
+
+#: /var/www/osclass-git/oc-admin/themes/modern/appearance/widgets.php:66
+msgid "Manage Widgets"
+msgstr "ניהול יישומונים (widgets)"
+
+#: /var/www/osclass-git/oc-admin/themes/modern/appearance/widgets.php:73
+msgid "Section: %s"
+msgstr "סעיף: %s"
+
+#: /var/www/osclass-git/oc-admin/themes/modern/appearance/widgets.php:73
+msgid "Add HTML widget"
+msgstr "הוספת HTML ליישומון (widget)"
+
+#: /var/www/osclass-git/oc-admin/themes/modern/appearance/widgets.php:82
+msgid "Widget"
+msgstr "יישומון (widget)"
+
+#: /var/www/osclass-git/oc-admin/themes/modern/appearance/widgets.php:83
+msgid "Description: %s"
+msgstr "תיאור: %s"
+
+#: /var/www/osclass-git/oc-admin/themes/modern/categories/iframe.php:23
+msgid "Edit category"
+msgstr "עריכת קטגוריה"
+
+#: /var/www/osclass-git/oc-admin/themes/modern/categories/index.php:196
+#: /var/www/osclass-git/oc-admin/themes/modern/categories/index.php:293
+#: /var/www/osclass-git/oc-admin/themes/modern/fields/iframe.php:134
+msgid "Ajax error, try again."
+msgstr "תקלה באג'קס. נסו שוב."
+
+#: /var/www/osclass-git/oc-admin/themes/modern/categories/index.php:27
+msgid "Categories"
+msgstr "קטגוריות"
+
+#: /var/www/osclass-git/oc-admin/themes/modern/categories/index.php:36
+msgid "Categories &raquo; %s"
+msgstr "קטגוריות &raquo; %s"
+
+#: /var/www/osclass-git/oc-admin/themes/modern/categories/index.php:355
+msgid "Drag&drop the categories to reorder them the way you like. Click on edit link to edit the category"
+msgstr "גרור ושחרר את הקטגרויה כדי לסדר מחדש את סדר ההופעה. לחיצה על קישור ערכיה כדי לערוך את הקטגוריה"
+
+#: /var/www/osclass-git/oc-admin/themes/modern/comments/frm.php:24
+msgid "Edit comment"
+msgstr "עריכת תגובה"
+
+#: /var/www/osclass-git/oc-admin/themes/modern/functions.php:68
+#: /var/www/osclass-git/oc-admin/themes/modern/comments/frm.php:64
+#: /var/www/osclass-git/oc-admin/themes/modern/emails/index.php:46
+msgid "Title"
+msgstr "כותרת"
+
+#: /var/www/osclass-git/oc-admin/themes/modern/comments/frm.php:75
+msgid "Edit user"
+msgstr "עריכת משתמש"
+
+#: /var/www/osclass-git/oc-admin/themes/modern/comments/frm.php:80
+msgid "Author's e-mail"
+msgstr "כתובת מייל של מחבר"
+
+#: /var/www/osclass-git/oc-admin/themes/modern/comments/frm.php:86
+#: /var/www/osclass-git/oc-admin/themes/modern/comments/frm.php:94
+msgid "Status"
+msgstr "סטטוס"
+
+#: /var/www/osclass-git/oc-admin/themes/modern/comments/frm.php:102
+#: /var/www/osclass-git/oc-admin/themes/modern/comments/index.php:138
+msgid "Comment"
+msgstr "הערה"
+
+#: /var/www/osclass-git/oc-admin/themes/modern/comments/index.php:26
+#: /var/www/osclass-git/oc-admin/themes/modern/emails/frm.php:20
+#: /var/www/osclass-git/oc-admin/themes/modern/emails/index.php:25
+msgid "Settings"
+msgstr "הגדרות"
+
+#: /var/www/osclass-git/oc-admin/themes/modern/comments/index.php:34
+msgid "Comments &raquo; %s"
+msgstr "הערות &raquo; %s"
+
+#: /var/www/osclass-git/oc-admin/themes/modern/comments/index.php:111
+msgid "Hidden comments"
+msgstr "הערות מוסתרות"
+
+#: /var/www/osclass-git/oc-admin/themes/modern/comments/index.php:113
+msgid "All comments"
+msgstr "כל ההערות"
+
+#: /var/www/osclass-git/oc-admin/themes/modern/comments/index.php:139
+msgid "Date"
+msgstr "תאריך"
+
+#: /var/www/osclass-git/oc-admin/themes/modern/emails/frm.php:48
+msgid "Edit email template &raquo; %s"
+msgstr "עריכת תבנית מייל &raquo; %s"

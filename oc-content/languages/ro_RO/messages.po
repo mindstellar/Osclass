@@ -1,0 +1,1725 @@
+# Translation of Flash Messages in Romanian
+# This file is distributed under the same license as the Flash Messages package.
+msgid ""
+msgstr ""
+"PO-Revision-Date: 2014-12-17 14:15:01+0000\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=3; plural=(n==1 ? 0 : (n==0 || (n%100 > 0 && n%100 < 20)) ? 1 : 2);\n"
+"X-Generator: GlotPress/0.1\n"
+"Project-Id-Version: Flash Messages\n"
+
+#: oc-includes/osclass/controller/ajax.php:101
+#: oc-includes/osclass/controller/item.php:313
+msgid "The selected photo couldn't be deleted, the url doesn't exist"
+msgstr "Imaginea selectată nu poate fi ștearsă, URL-ul nu există"
+
+#: oc-includes/osclass/controller/ajax.php:111
+#: oc-includes/osclass/controller/item.php:319
+msgid "The listing doesn't exist"
+msgstr "Anunțul nu există"
+
+#: oc-includes/osclass/controller/ajax.php:120
+#: oc-includes/osclass/controller/ajax.php:128
+#: oc-includes/osclass/controller/item.php:325
+#: oc-includes/osclass/controller/item.php:330
+msgid "The listing doesn't belong to you"
+msgstr "Anunțul nu îți aparține"
+
+#: oc-includes/osclass/controller/ajax.php:86
+#: oc-includes/osclass/controller/ajax.php:151
+#: oc-includes/osclass/controller/item.php:344
+msgid "The selected photo has been successfully deleted"
+msgstr "Imaginea selectată a fost ștearsă cu succes"
+
+#: oc-includes/osclass/controller/ajax.php:154
+#: oc-includes/osclass/controller/item.php:346
+msgid "The selected photo does not belong to you"
+msgstr "Imaginea selectată nu îți aparține"
+
+#: oc-includes/osclass/controller/ajax.php:86
+#: oc-includes/osclass/controller/ajax.php:158
+#: oc-includes/osclass/controller/item.php:349
+msgid "The selected photo couldn't be deleted"
+msgstr "Imaginea selectată nu poate fi ștearsă"
+
+#: oc-includes/osclass/controller/contact.php:39
+#: oc-includes/osclass/controller/item.php:122
+#: oc-includes/osclass/controller/item.php:230
+#: oc-includes/osclass/controller/item.php:394
+#: oc-includes/osclass/controller/item.php:446
+#: oc-includes/osclass/controller/user-non-secure.php:147
+msgid "The Recaptcha code is wrong"
+msgstr "Codul reCaptcha este greșit"
+
+#: oc-includes/osclass/emails.php:645
+msgid "There has been some errors sending the message"
+msgstr "Au apărut câteva erori în timpul trimiterii mesajului"
+
+#: oc-includes/osclass/controller/item.php:51
+#: oc-includes/osclass/controller/item.php:100
+msgid "Only registered users are allowed to post listings"
+msgstr "Doar utilizatorii înregistrați pot publica anunțuri"
+
+#: oc-includes/osclass/controller/item.php:165
+msgid "Your listing has been published"
+msgstr "Anunțul tău a fost publicat"
+
+#: oc-includes/osclass/controller/item.php:239
+msgid "Great! We've just updated your listing"
+msgstr "Felicitări! Tocmai ți-am actualizat anunțul"
+
+#: oc-includes/osclass/controller/item.php:266
+msgid "The listing has been validated"
+msgstr "Anunțul a fost validat"
+
+#: oc-includes/osclass/controller/item.php:268
+msgid "The listing can't be validated"
+msgstr "Anunțul nu poate fi validat"
+
+#: oc-includes/osclass/controller/item.php:271
+msgid "The listing has already been validated"
+msgstr "Anunțul a fost validat deja"
+
+#: oc-includes/osclass/controller/item.php:284
+msgid "Your listing has been deleted"
+msgstr "Anunțul tău a fost șters"
+
+#: oc-includes/osclass/controller/item.php:286
+#: oc-includes/osclass/controller/item.php:294
+msgid "The listing you are trying to delete couldn't be deleted"
+msgstr "Anunțul care încerci să îl ștergi nu a putut fi șters"
+
+#: oc-includes/osclass/controller/item.php:371
+msgid "Thanks! That's very helpful"
+msgstr "Mulțumesc ! A fost de mare ajutor"
+
+#: oc-includes/osclass/controller/item.php:417
+#: oc-includes/osclass/controller/item.php:529
+msgid "This listing doesn't exist"
+msgstr "Acest anunț nu există"
+
+#: oc-includes/osclass/controller/item.php:423
+#: oc-includes/osclass/controller/item.php:466
+msgid "We're sorry, but the listing has expired. You can't contact the seller"
+msgstr "Ne pare rău, dar anunțul a expirat. Nu mai poți contacta vânzătorul"
+
+#: oc-includes/osclass/controller/item.php:430
+#: oc-includes/osclass/controller/item.php:438
+msgid "You can't contact the seller, only registered users can"
+msgstr "Nu poți contacta vânzătorul, doar utilizatorii înregistrați pot face acest lucru"
+
+#: oc-includes/osclass/controller/item.php:479
+msgid "We've just sent an e-mail to the seller"
+msgstr "A fost trimis un e-mail către vânzător"
+
+#: oc-includes/osclass/controller/item.php:489
+msgid "Sorry, we could not save your comment. Try again later"
+msgstr "Ne pare rău, nu vă putem salva comentariul. Încercați mai târziu"
+
+#: oc-includes/osclass/controller/item.php:492
+msgid "Your comment is awaiting moderation"
+msgstr "Comentariul tău este în așteptare și necesită aprobarea din partea unui moderator"
+
+#: oc-includes/osclass/controller/item.php:495
+msgid "Your comment has been approved"
+msgstr "Comentariul tău a fost aprobat"
+
+#: oc-includes/osclass/controller/item.php:498
+msgid "Please fill the required field (email)"
+msgstr "Te rugăm să completezi câmpul obligatoriu (e-mail)"
+
+#: oc-includes/osclass/controller/item.php:501
+msgid "Please type a comment"
+msgstr "Te rog lasă un comentariu"
+
+#: oc-includes/osclass/controller/item.php:504
+msgid "Your comment has been marked as spam"
+msgstr "Comentariul tău a fost marcat ca spam"
+
+#: oc-includes/osclass/controller/item.php:536
+msgid "You must be logged in to delete a comment"
+msgstr "Trebuie să fi autentificat ca să ștergi un comentariu"
+
+#: oc-includes/osclass/controller/item.php:544
+msgid "The comment doesn't exist"
+msgstr "Comentariul nu există"
+
+#: oc-includes/osclass/controller/item.php:549
+msgid "The comment is not active, you cannot delete it"
+msgstr "Comentariul nu este activ, nu îl poți șterge"
+
+#: oc-includes/osclass/controller/item.php:554
+msgid "The comment was not added by you, you cannot delete it"
+msgstr "Comentariul nu îți aparține, nu îl poți șterge."
+
+#: oc-admin/comments.php:195 oc-includes/osclass/controller/item.php:559
+msgid "The comment has been deleted"
+msgstr "Comentariul a fost șters"
+
+#: oc-includes/osclass/controller/login.php:25
+#: oc-includes/osclass/controller/register.php:26
+#: oc-includes/osclass/controller/user-non-secure.php:25
+#: oc-includes/osclass/controller/user.php:25
+msgid "Users not enabled"
+msgstr "Utilizatorii ne-activați"
+
+#: oc-includes/osclass/controller/login.php:36
+#: oc-includes/osclass/controller/register.php:49
+msgid "Users are not enabled"
+msgstr "Utilizatorii nu au fost activați"
+
+#: oc-includes/osclass/controller/login.php:65
+#: oc-includes/osclass/controller/login.php:114
+msgid "The user doesn't exist"
+msgstr "Utilizatorul nu există"
+
+#: oc-includes/osclass/controller/login.php:69
+msgid "The password is incorrect"
+msgstr "Parola este incorectă"
+
+#: oc-includes/osclass/controller/login.php:119
+msgid "The user has not been validated yet"
+msgstr "Utilizatorul nu a fost validat"
+
+#: oc-includes/osclass/controller/login.php:122
+msgid "The user has been suspended"
+msgstr "Utilizatorul a fost suspendat"
+
+#: oc-includes/osclass/controller/login.php:190
+msgid "Invalid email address"
+msgstr "Adresă de e-mail invalidă"
+
+#: oc-includes/osclass/controller/login.php:199
+msgid "We have sent you an email with the instructions to reset your password"
+msgstr "Ți-am trimis un e-mail cu instrucțiunile de resetare a parolei"
+
+#: oc-includes/osclass/controller/login.php:203
+msgid "We were not able to identify you given the information provided"
+msgstr "Nu te putem identifica conform informațiilor furnizate"
+
+#: oc-includes/osclass/controller/login.php:207
+msgid "The recaptcha code is wrong"
+msgstr "Codul reCaptcha este incorect"
+
+#: oc-admin/login.php:131 oc-admin/login.php:141
+#: oc-includes/osclass/controller/login.php:217
+#: oc-includes/osclass/controller/login.php:245
+#: oc-includes/osclass/controller/user-non-secure.php:54
+#: oc-includes/osclass/controller/user-non-secure.php:58
+msgid "Sorry, the link is not valid"
+msgstr "Ne pare rău, dar link-ul nu este valid"
+
+#: oc-includes/osclass/controller/login.php:224
+#: oc-includes/osclass/controller/user.php:170
+msgid "Password cannot be blank"
+msgstr "Parola nu poate fi goala"
+
+#: oc-admin/login.php:151 oc-includes/osclass/controller/login.php:238
+msgid "The password has been changed"
+msgstr "Parola a fost schimbata"
+
+#: oc-includes/osclass/controller/login.php:241
+msgid "Error, the password don't match"
+msgstr "Eroare, parola nu este identica"
+
+#: oc-includes/osclass/controller/register.php:31
+msgid "User registration is not enabled"
+msgstr "Modul de inregistrare este dezactivat"
+
+#: oc-includes/osclass/controller/register.php:68
+msgid "The user has been created. An activation email has been sent"
+msgstr "Utilizatorul a fost creat, un email de activare a fost trimis"
+
+#: oc-includes/osclass/controller/register.php:71
+msgid "Your account has been created successfully"
+msgstr "Contul s-a creat cu success"
+
+#: oc-includes/osclass/UserActions.php:67
+#: oc-includes/osclass/controller/user.php:130
+msgid "The specified e-mail is already in use"
+msgstr "Emailul specificat este deja folosit"
+
+#: oc-includes/osclass/UserActions.php:60
+msgid "The email is not valid"
+msgstr "Email-ul este invalid"
+
+#: oc-includes/osclass/UserActions.php:43
+msgid "The password cannot be empty"
+msgstr "Parola nu poate fi goala"
+
+#: oc-includes/osclass/UserActions.php:48
+#: oc-includes/osclass/UserActions.php:167
+#: oc-includes/osclass/controller/user.php:185
+msgid "Passwords don't match"
+msgstr "Parolele nu seamana intre ele"
+
+#: oc-includes/osclass/controller/register.php:90
+msgid "The link is not valid anymore. Sorry for the inconvenience!"
+msgstr "Adresa nu mai e valida. Ne pare rau pentru inconveniente!"
+
+#: oc-includes/osclass/controller/register.php:95
+msgid "Your account has already been validated"
+msgstr "Contul tau a fost deja validat"
+
+#: oc-includes/osclass/controller/register.php:116
+msgid "Your account has been validated"
+msgstr "Contul a fost validat"
+
+#: oc-includes/osclass/controller/user-non-secure.php:51
+msgid "Your email has been changed successfully"
+msgstr "Emailul a fost modificat cu succes"
+
+#: oc-includes/osclass/controller/user-non-secure.php:80
+#: oc-includes/osclass/controller/user.php:222
+msgid "Alert activated"
+msgstr "Alerte activate"
+
+#: oc-includes/osclass/controller/user-non-secure.php:101
+#: oc-includes/osclass/controller/user.php:243
+msgid "Unsubscribed correctly"
+msgstr "Dezabonare cu succes"
+
+#: oc-includes/osclass/controller/user.php:75
+msgid "Your profile has been updated successfully"
+msgstr "Profilul a fost actualizat cu succes"
+
+#: oc-includes/osclass/controller/user.php:106
+msgid "The specified e-mail is not valid"
+msgstr "Adresa de email specificata nu este valida"
+
+#: oc-includes/osclass/controller/user.php:175
+msgid "Current password doesn't match"
+msgstr "Parola curenta nu se potriveste"
+
+#: oc-includes/osclass/controller/user.php:180
+msgid "Passwords can't be empty"
+msgstr "Parola nu poate fi goala"
+
+#: oc-includes/osclass/controller/user.php:192
+msgid "Password has been changed"
+msgstr "Parola a fost modificata"
+
+#: oc-admin/admins.php:30 oc-admin/items.php:38
+#: oc-includes/osclass/core/AdminSecBaseModel.php:28
+msgid "You don't have enough permissions"
+msgstr "Nu ai permisiune"
+
+#: oc-admin/admins.php:73 oc-admin/admins.php:173
+msgid "Email invalid"
+msgstr "Email invalid"
+
+#: oc-admin/admins.php:77 oc-admin/admins.php:177
+msgid "Username invalid"
+msgstr "username invalid"
+
+#: oc-admin/admins.php:81 oc-admin/admins.php:181
+msgid "Name invalid"
+msgstr "Nume invalid"
+
+#: oc-admin/admins.php:85 oc-admin/admins.php:212
+msgid "Password invalid"
+msgstr "Parola invalida"
+
+#: oc-admin/admins.php:90
+msgid "Email already in use"
+msgstr "Email deja folosit"
+
+#: oc-admin/admins.php:95
+msgid "Username already in use"
+msgstr "Username deja folosit"
+
+#: oc-admin/admins.php:118
+msgid "The admin has been added"
+msgstr "Administratorul a fost adaugat"
+
+#: oc-admin/admins.php:188
+msgid "This admin doesn't exist"
+msgstr "Acest admin nu exista"
+
+#: oc-admin/admins.php:194
+msgid "Existing email"
+msgstr "Email deja existent"
+
+#: oc-admin/admins.php:201
+msgid "Existing username"
+msgstr "Nume deja existent"
+
+#: oc-admin/admins.php:220 oc-admin/admins.php:230
+msgid "The password couldn't be updated. Passwords don't match"
+msgstr "Parola nu poate fi modificata. Parolele nu sunt identice"
+
+#: oc-admin/admins.php:247
+msgid "The admin has been updated"
+msgstr "Admin a fost actualizat"
+
+#: oc-admin/admins.php:266
+msgid "The admin id isn't in the correct format"
+msgstr "Id admin nu este in formatul corect"
+
+#: oc-admin/admins.php:272
+msgid "The operation hasn't been completed. You're trying to remove yourself!"
+msgstr "Operatia a esuat, nu puteti sa va stergeti"
+
+#: oc-admin/admins.php:279
+msgid "The admin has been deleted correctly"
+msgstr "Admin a fost sters corect"
+
+#: oc-admin/admins.php:281
+msgid "The admin couldn't be deleted"
+msgstr "Admin nu poate fi sters"
+
+#: oc-admin/tools.php:36 oc-admin/tools.php:63 oc-admin/tools.php:73
+#: oc-admin/tools.php:90 oc-admin/tools.php:126 oc-admin/tools.php:169
+#: oc-admin/tools.php:196 oc-admin/tools.php:225
+msgid "This action cannot be done because it is a demo site"
+msgstr "Aceasta actiune nu poate fi facuta deoarece acesta este un site demo"
+
+#: oc-admin/tools.php:118 oc-admin/tools.php:150
+msgid "Backup completed successfully"
+msgstr "Backup terminat cu succes"
+
+#: oc-admin/appearance.php:51
+msgid "The theme folder is not writable"
+msgstr "Tema folderului nu are drept de scriere"
+
+#: oc-admin/appearance.php:54
+msgid "The theme has been installed correctly"
+msgstr "Tema a fost instalata cu succes"
+
+#: oc-admin/appearance.php:57 oc-admin/languages.php:67 oc-admin/plugins.php:60
+msgid "The zip file is not valid"
+msgstr "Fisierul zip nu este valid"
+
+#: oc-admin/appearance.php:60 oc-admin/languages.php:70 oc-admin/plugins.php:63
+#: oc-admin/tools.php:55
+msgid "No file was uploaded"
+msgstr "Niciun fisier nu a fost incarcat"
+
+#: oc-admin/appearance.php:65
+msgid "There was a problem adding the theme"
+msgstr "A aparut o eroare la adaugarea temei"
+
+#: oc-admin/appearance.php:83
+msgid "Theme removed successfully"
+msgstr "Tema stearsa cu succes"
+
+#: oc-admin/appearance.php:85
+msgid "There was a problem removing the theme"
+msgstr "A aparut a problema la stergerea temei"
+
+#: oc-admin/appearance.php:88
+msgid "Current theme can not be deleted"
+msgstr "Tema curenta nu poate fii stearsa"
+
+#: oc-admin/appearance.php:91
+msgid "No theme selected"
+msgstr "Nici o tema selectata"
+
+#: oc-admin/appearance.php:120
+msgid "Widget removed correctly"
+msgstr "Widget sters corect"
+
+#: oc-admin/appearance.php:126 oc-admin/appearance.php:148
+msgid "Description field is required"
+msgstr "Campul Descriere este necesar"
+
+#: oc-admin/appearance.php:139
+msgid "Widget updated correctly"
+msgstr "Widget incarcat corect"
+
+#: oc-admin/appearance.php:141
+msgid "Widget cannot be updated correctly"
+msgstr "Widget-ul nu poate fi incarcat corect"
+
+#: oc-admin/appearance.php:160
+msgid "Widget added correctly"
+msgstr "Widget adaugat corect"
+
+#: oc-admin/appearance.php:167
+msgid "Theme activated correctly"
+msgstr "Tema activata cu succes"
+
+#: oc-admin/comments.php:52
+msgid "The comments have been deleted"
+msgstr "Comentariile au fost sterse"
+
+#: oc-admin/comments.php:65
+msgid "The comments have been approved"
+msgstr "Comentariile au fost aprobate"
+
+#: oc-admin/comments.php:75
+msgid "The comments have been disapproved"
+msgstr "Comentul a fost dezaprobat"
+
+#: oc-admin/comments.php:128
+msgid "The comment has been approved"
+msgstr "Comentariul a fost aprobat"
+
+#: oc-admin/comments.php:135
+msgid "The comment has been disapproved"
+msgstr "Comentul a fost dezaprobat"
+
+#: oc-admin/comments.php:142
+msgid "The comment has been enabled"
+msgstr "Comentariile sunt activate"
+
+#: oc-admin/comments.php:149
+msgid "The comment has been disabled"
+msgstr "Comentariile au fost dezactivate"
+
+#: oc-admin/comments.php:164
+msgid "Email is not correct"
+msgstr "Email incorect"
+
+#: oc-admin/comments.php:167
+msgid "Comment is required"
+msgstr "Campul comentariu este necesar"
+
+#: oc-admin/comments.php:189
+msgid "Great! We just updated your comment"
+msgstr "Perfect ! Am modificat comentul tau"
+
+#: oc-admin/emails.php:82
+msgid "The email/alert has been updated"
+msgstr "Alertele/ email au fost actualizate"
+
+#: oc-admin/emails.php:85 oc-admin/pages.php:102
+msgid "You can't repeat internal name"
+msgstr "Nu puteti refolosi nume interne"
+
+#: oc-admin/emails.php:87
+msgid "The email couldn't be updated, at least one title should not be empty"
+msgstr "Email-ul nu poate fi actualizat, macar un titlu nu trebuie sa fie gol"
+
+#: oc-admin/items.php:59
+msgid "%d listing has been enabled"
+msgstr "%d anunt a fost activat"
+
+#: oc-admin/items.php:71
+msgid "%d listing has been disabled"
+msgstr "%d anunt a fost dezactivat"
+
+#: oc-admin/items.php:83
+msgid "%d listing has been activated"
+msgstr "%d anunt a fost activat"
+
+#: oc-admin/items.php:95
+msgid "%d listing has been deactivated"
+msgstr "%d anunt a fost dezactivat"
+
+#: oc-admin/items.php:107
+msgid "%d listing has been marked as premium"
+msgstr "%d anunt a fost marcat ca premium"
+
+#: oc-admin/items.php:119 oc-admin/items.php:144
+msgid "%d change has been made"
+msgstr "%d schimbare a fost facuta"
+
+#: oc-admin/items.php:131
+msgid "%d listing has been marked as spam"
+msgstr "%d anunt a fost marcat ca spam"
+
+#: oc-admin/items.php:162
+msgid "%d listing has been deleted"
+msgstr "%d anuntul a fost sters"
+
+#: oc-admin/items.php:179
+msgid "%d listing has been unmarked as spam"
+msgstr "%d anuntul a fost demarcat ca spam"
+
+#: oc-admin/items.php:196
+msgid "%d listing has been unmarked as missclassified"
+msgstr "%d anunt a fost demarcat ca si misclasificat"
+
+#: oc-admin/items.php:213
+msgid "%d listing has been unmarked as duplicated"
+msgstr "%d anunt a fost demarcat ca si duplicat"
+
+#: oc-admin/items.php:230
+msgid "%d listing has been unmarked as expired"
+msgstr "%d anunt a fost demarcat ca si expirat"
+
+#: oc-admin/items.php:247
+msgid "%d listing has been unmarked as offensive"
+msgstr "%d anunt a fost demarcat ca si ofensiv"
+
+#: oc-admin/items.php:322 oc-admin/items.php:334 oc-admin/items.php:344
+#: oc-admin/items.php:354 oc-admin/items.php:383 oc-admin/items.php:409
+#: oc-admin/items.php:553
+msgid "An error has occurred"
+msgstr "A apărut o eroare"
+
+#: oc-admin/items.php:289
+msgid "The listing has been deleted"
+msgstr "Acest anunt a fost sters"
+
+#: oc-admin/items.php:291
+msgid "The listing couldn't be deleted"
+msgstr "Acest anunt nu a putut fii sters"
+
+#: oc-admin/items.php:320
+msgid "The listing has been activated"
+msgstr "Anuntul a fost activat"
+
+#: oc-admin/items.php:332
+msgid "The listing has been deactivated"
+msgstr "Acest anunt a fost dezactivat"
+
+#: oc-admin/items.php:342
+msgid "The listing has been enabled"
+msgstr "Anuntul a fost activat"
+
+#: oc-admin/items.php:352
+msgid "The listing has been disabled"
+msgstr "Anuntul a fost dezactivat"
+
+#: oc-admin/items.php:381 oc-admin/items.php:407
+msgid "Changes have been applied"
+msgstr "Modificarile au fost aplicate"
+
+#: oc-admin/items.php:433
+msgid "The listing has been unmarked as"
+msgstr "Anuntul a fost demarcat ca"
+
+#: oc-admin/items.php:435
+msgid "The listing hasn't been unmarked as"
+msgstr "Anuntul nu a fost demarcat ca"
+
+#: oc-admin/items.php:522
+msgid "Changes saved correctly"
+msgstr "Modificarile salvate cu succes"
+
+#: oc-admin/items.php:555 oc-admin/media.php:51 oc-admin/media.php:74
+msgid "Resource deleted"
+msgstr "Resurse sterse"
+
+#: oc-admin/items.php:604
+msgid "A new listing has been added"
+msgstr "Un nou anunt a fost adaugat"
+
+#: oc-admin/items.php:699
+msgid "Listings' settings have been updated"
+msgstr "Setarile anunturilor au fost actualizate"
+
+#: oc-admin/languages.php:56
+msgid "The translation folder is not writable"
+msgstr "Folderul translation nu poate fi scris"
+
+#: oc-admin/languages.php:60
+msgid "The language has been installed correctly"
+msgstr "Limba a fost instalata"
+
+#: oc-admin/languages.php:63 oc-admin/languages.php:75
+msgid "There was a problem adding the language"
+msgstr "A aparul o problema la adaugarea unei limbi"
+
+#: oc-admin/languages.php:85 oc-admin/languages.php:118
+msgid "Language id isn't in the correct format"
+msgstr "Id limba este incorect"
+
+#: oc-admin/languages.php:92
+msgid "Language id doesn't exist"
+msgstr "Id limba nu exista"
+
+#: oc-admin/languages.php:141
+msgid "Language name field is required"
+msgstr "Campul Limba este cerut"
+
+#: oc-admin/languages.php:144
+msgid "Language short name field is required"
+msgstr "Campul Limba nume scurt este cerut"
+
+#: oc-admin/languages.php:147
+msgid "Language description field is required"
+msgstr "Campul descrierea Limbii este cerut"
+
+#: oc-admin/languages.php:150
+msgid "Currency format field is required"
+msgstr "Formatul domeniul valutar este necesar"
+
+#: oc-admin/languages.php:174
+msgid "%s has been updated"
+msgstr "%s a fost modificat"
+
+#: oc-admin/languages.php:180
+msgid "Selected languages have been enabled for the website"
+msgstr "Limbile selectate au fost activate pentru site"
+
+#: oc-admin/languages.php:187 oc-admin/languages.php:212
+#: oc-admin/languages.php:245 oc-admin/languages.php:270
+msgid "The language ids aren't in the correct format"
+msgstr "Id-ul limbii nu este in formatul corect"
+
+#: oc-admin/languages.php:204
+msgid "Selected languages have been disabled for the website"
+msgstr "Limbile selectate au fost dezactivate pentru site"
+
+#: oc-admin/languages.php:238
+msgid "Selected languages have been enabled for the backoffice (oc-admin)"
+msgstr "Limbile selectate au fost activate pentru backoffice"
+
+#: oc-admin/languages.php:262
+msgid "Selected languages have been disabled for the backoffice (oc-admin)"
+msgstr "Limbile selectate au fost dezactivate pentru backoffice"
+
+#: oc-admin/languages.php:218 oc-admin/languages.php:276
+msgid "%s can't be disabled because it's the default language"
+msgstr "%s nu poate fii dezactivat pentru ca este limba de baza"
+
+#: oc-admin/languages.php:302
+msgid "Directory '%s' couldn't be removed"
+msgstr "Directorul '%s' nu poate fi sters"
+
+#: oc-admin/languages.php:304
+msgid "Directory \"%s\" has been successfully removed"
+msgstr "Directorul \\\"%s\\\" a fost sters cu succes"
+
+#: oc-admin/languages.php:310
+msgid "Directory '%s' couldn't be removed because it's the default language. Set another language as default first and try again"
+msgstr "Directorul '%s' nu poate fi sters deoarece este limba predefinita. Seteaza alta limba predefinita si incearca din nou"
+
+#: oc-admin/login.php:43
+msgid "The username field is empty"
+msgstr "Username este gol"
+
+#: oc-admin/login.php:48
+msgid "The password field is empty"
+msgstr "Parola este goala"
+
+#: oc-admin/login.php:56
+msgid "Sorry, incorrect username. <a href=\"%s\">Have you lost your password?</a>"
+msgstr "Ops, username incorect. <a href=\\\"%s\\\">Have you lost your password?</a>"
+
+#: oc-admin/login.php:61
+msgid "Sorry, incorrect password. <a href=\"%s\">Have you lost your password?</a>"
+msgstr "Scuze, parola incorecta. <a href=\\\"%s\\\">Ai pierdut parola?</a>"
+
+#: oc-admin/login.php:107
+msgid "The reCAPTCHA code is wrong"
+msgstr "Codul reCAPTCHA este gresit"
+
+#: oc-admin/login.php:125
+msgid "A new password has been sent to your e-mail"
+msgstr "O noua parola a fost trimisa pe email"
+
+#: oc-admin/login.php:154
+msgid "Error, the passwords don't match"
+msgstr "Eroare, parola nu se potriveste"
+
+#: oc-admin/pages.php:82 oc-admin/pages.php:147
+msgid "You have to set a different internal name"
+msgstr "Trebuie setat un nume intern diferit"
+
+#: oc-admin/pages.php:99
+msgid "The page has been updated"
+msgstr "Pagina a fost modificata"
+
+#: oc-admin/pages.php:104
+msgid "The page couldn't be updated, at least one title should not be empty"
+msgstr "Pagina nu poate fi actualizata, macar un titlu nu trebuie sa fie gol"
+
+#: oc-admin/pages.php:77 oc-admin/pages.php:142
+msgid "You have to set an internal name"
+msgstr "Trebuie setat un nume intern"
+
+#: oc-admin/pages.php:158
+msgid "The page has been added"
+msgstr "Pagina a fost adaugata"
+
+#: oc-admin/pages.php:161
+msgid "The page couldn't be added, at least one title should not be empty"
+msgstr "Pagina nu poate fi adaugata, macar un titlu nu trebuie sa fie gol"
+
+#: oc-admin/pages.php:164
+msgid "Oops! That internal name is already in use. We can't make the changes"
+msgstr "Oops! Numele intern este deja folosit. Nu putem sa facem modificarile"
+
+#: oc-admin/pages.php:195
+msgid "One page can't be deleted because it is indelible"
+msgstr "Pagina nu poate fi stearsa pentru ca este vitala"
+
+#: oc-admin/pages.php:197
+msgid "%s pages couldn't be deleted because they are indelible"
+msgstr "%s pagini nu au putut fii sterse pentru ca sunt ne modificabile"
+
+#: oc-admin/pages.php:202
+msgid "One page couldn't be deleted"
+msgstr "O pagina nu poate fi stearsa"
+
+#: oc-admin/pages.php:204
+msgid "%s pages couldn't be deleted"
+msgstr "%s pagini nu au putut fi sterse"
+
+#: oc-admin/pages.php:209
+msgid "One page has been deleted correctly"
+msgstr "O pagina a fost stearsa corect"
+
+#: oc-admin/pages.php:211
+msgid "%s pages have been deleted correctly"
+msgstr "%s pagini au fost sterse corect"
+
+#: oc-admin/plugins.php:54
+msgid "The plugin folder is not writable"
+msgstr "Folderul de plugin nu are drept de scriere"
+
+#: oc-admin/plugins.php:57
+msgid "The plugin has been uploaded correctly"
+msgstr "Plugin-ul a fost incarcat corect"
+
+#: oc-admin/plugins.php:68
+msgid "There was a problem adding the plugin"
+msgstr "A aparut o problema la adaugarea acestul plugin"
+
+#: oc-admin/plugins.php:93
+msgid "Plugin is already installed"
+msgstr "Pluginul este deja instalat"
+
+#: oc-admin/plugins.php:96
+msgid "Plugin couldn't be installed because their files are missing"
+msgstr "Pluginul nu poate fi instalat deoarece ii lipsesc fisiere continut"
+
+#: oc-admin/plugins.php:99
+msgid "Plugin couldn't be installed because of: %s"
+msgstr "Pluginul nu poate fi instalat din cauza : %s"
+
+#: oc-admin/plugins.php:102
+msgid "Plugin couldn't be installed"
+msgstr "Pluginul nu poate fi instalat"
+
+#: oc-admin/plugins.php:106
+msgid "Plugin installed"
+msgstr "Plugin instalat"
+
+#: oc-admin/plugins.php:119
+msgid "Plugin uninstalled"
+msgstr "Plugin dezinstalat"
+
+#: oc-admin/plugins.php:121
+msgid "Plugin couldn't be uninstalled"
+msgstr "Pluginul nu poate fi dezinstalat"
+
+#: oc-admin/plugins.php:134
+msgid "Plugin enabled"
+msgstr "Plugin activat"
+
+#: oc-admin/plugins.php:136
+msgid "Plugin is already enabled"
+msgstr "Pluginul este deja activat"
+
+#: oc-admin/plugins.php:149
+msgid "Plugin disabled"
+msgstr "Plugin dezactivat"
+
+#: oc-admin/plugins.php:151
+msgid "Plugin is already disabled"
+msgstr "Pluginul este deja dezactivat"
+
+#: oc-admin/plugins.php:222 oc-admin/plugins.php:238
+msgid "No plugin selected"
+msgstr "Nici un plugin selectat"
+
+#: oc-admin/plugins.php:218
+msgid "Configuration was saved"
+msgstr "Configuratia s-a salvat"
+
+#: oc-admin/controller/settings/locations.php:39
+#: oc-admin/controller/settings/locations.php:184
+#: oc-admin/controller/settings/locations.php:243
+#: oc-admin/controller/settings/locations.php:329
+#: oc-admin/controller/settings/locations.php:387
+msgid "%s already was in the database"
+msgstr "%s deja este in baza de date"
+
+#: oc-admin/controller/settings/locations.php:47
+msgid "Country code and name should have at least two characters"
+msgstr "Codul țarii ar trebuii să aibe cel puțin 2 caractere"
+
+#: oc-admin/controller/settings/locations.php:44
+#: oc-admin/controller/settings/locations.php:62
+msgid "%s has been added as a new country"
+msgstr "%s a fost adaugata ca o tara noua"
+
+#: oc-admin/controller/settings/locations.php:106
+msgid "Country has been edited"
+msgstr "Tara a fost editata"
+
+#: oc-admin/controller/settings/locations.php:108
+msgid "There were some problems editing the country"
+msgstr "Au aparut probleme la editarea Tarii"
+
+#: oc-admin/controller/settings/locations.php:160
+#: oc-admin/controller/settings/locations.php:182
+msgid "%s has been added as a new region"
+msgstr "%s a fost adaugat ca o regiune noua"
+
+#: oc-admin/controller/settings/locations.php:240
+#: oc-admin/controller/settings/locations.php:385
+msgid "%s has been edited"
+msgstr "%s a fost editat"
+
+#: oc-admin/controller/settings/locations.php:307
+#: oc-admin/controller/settings/locations.php:327
+msgid "%s has been added as a new city"
+msgstr "%s a fost adaugat ca un oras nou"
+
+#: oc-admin/controller/settings/permalinks.php:424
+msgid "One field was not updated"
+msgstr "un camp nu a fost actualizat"
+
+#: oc-admin/controller/settings/permalinks.php:427
+#: oc-admin/controller/settings/permalinks.php:475
+msgid "Permalinks structure updated"
+msgstr "Structura Permalinkuri actualizata"
+
+#: oc-admin/controller/settings/permalinks.php:436
+msgid "Permalinks structure updated."
+msgstr "Structura Permalinkuri actualizata."
+
+#: oc-admin/controller/settings/permalinks.php:438
+msgid "However, we can't check if Apache module <b>mod_rewrite</b> is loaded. If you experience some problems with the URLs, you should deactivate <em>Friendly URLs</em>"
+msgstr "Oricum, nu putem verifica daca modulul Apache <b>mod_rewrite</b> este incarcat. Daca experimentati probleme cu URL's trebuie sa dezactivati <em>Linkuri prietenoase</em>"
+
+#: oc-admin/controller/settings/permalinks.php:504
+msgid "Friendly URLs successfully deactivated"
+msgstr "Linkuri Prietenoase dezactivate cu succes"
+
+#: oc-admin/controller/settings/spamnbots.php:56
+msgid "Your Akismet key has been cleared"
+msgstr "Cheia Akismet a fost stearsa"
+
+#: oc-admin/controller/settings/spamnbots.php:58
+msgid "Your Akismet key has been updated"
+msgstr "Cheia Akismet a fost actualizata"
+
+#: oc-admin/controller/settings/spamnbots.php:75
+msgid "Your reCAPTCHA key has been cleared"
+msgstr "Cheia reCAPTCHA a fost stearsa"
+
+#: oc-admin/controller/settings/spamnbots.php:77
+msgid "Your reCAPTCHA key has been updated"
+msgstr "Cheia reCAPTCHA a fost actualizata"
+
+#: oc-admin/controller/settings/currencies.php:50
+msgid "The currency code is not in the correct format"
+msgstr "Codul monedei nu este in formatul corect"
+
+#: oc-admin/controller/settings/currencies.php:63
+msgid "Currency added"
+msgstr "Valuta a fost adăugată"
+
+#: oc-admin/controller/settings/currencies.php:65
+msgid "Currency couldn't be added"
+msgstr "Valuta nu a putut fi adăugată"
+
+#: oc-admin/controller/settings/currencies.php:75
+#: oc-admin/controller/settings/currencies.php:82
+msgid "The currency code '%s' doesn't exist"
+msgstr "Codul valutar '%s' nu există"
+
+#: oc-admin/controller/settings/currencies.php:104
+msgid "Error: the currency code is not in the correct format"
+msgstr "Eroare: codul de moneda are format incorect"
+
+#: oc-admin/controller/settings/currencies.php:117
+msgid "Currency updated"
+msgstr "Valuta a fost actualizată"
+
+#: oc-admin/controller/settings/currencies.php:119
+msgid "No changes were made"
+msgstr "Nu au fost facute schimbari"
+
+#: oc-admin/controller/settings/currencies.php:151
+msgid "No currencies have been deleted"
+msgstr "Nicio moneda nu a fost stearsa"
+
+#: oc-admin/controller/settings/currencies.php:155
+msgid "One currency has been deleted"
+msgstr "O moneda a fost stearsa"
+
+#: oc-admin/controller/settings/currencies.php:159
+msgid "%s currencies have been deleted"
+msgstr "%s monede au fost sterse"
+
+#: oc-admin/controller/settings/mailserver.php:52
+msgid "Mail server type is incorrect"
+msgstr "Tip de server mail incorect"
+
+#: oc-admin/controller/settings/mailserver.php:68
+msgid "Mail server configuration has changed"
+msgstr "S-a modificat configuratia serverului de email"
+
+#: oc-admin/controller/settings/media.php:83
+#: oc-admin/controller/settings/media.php:91
+msgid "There was a problem uploading the watermark image"
+msgstr "A fost intampinata o eroare la incarcarea imaginii watermark"
+
+#: oc-admin/controller/settings/media.php:87
+msgid "The watermark image has to be a .PNG file"
+msgstr "Imaginea watermark trebuie sa fie .PNG"
+
+#: oc-admin/controller/settings/media.php:138
+msgid "You cannot set a maximum file size higher than the one allowed in the PHP configuration: <b>%d KB</b>"
+msgstr "Nu poti sa setezi marimea maxima a unui fisier mai mare decat cea permisa in configuratia PHP: <b>%d KB</b>"
+
+#: oc-admin/controller/settings/media.php:163
+msgid "Media config has been updated"
+msgstr "S-a modificat configuratia pentru media"
+
+#: oc-admin/controller/settings/media.php:223
+msgid "Re-generation complete"
+msgstr "Regenerare completa"
+
+#: oc-admin/controller/settings/main.php:83
+msgid "Page title field is required"
+msgstr "Camplul titlul paginii este obligatoriu"
+
+#: oc-admin/controller/settings/main.php:86
+msgid "Contact email field is required"
+msgstr "Campul email de contact este obligatoriu"
+
+#: oc-admin/controller/settings/main.php:137
+#: oc-admin/controller/settings/main.php:139
+msgid "General settings have been updated"
+msgstr "S-au modificat setarile generale"
+
+#: oc-admin/controller/settings/latestsearches.php:39
+msgid "Custom number could not be left empty"
+msgstr "Numarul personalizat nu poate fii lasat gol"
+
+#: oc-admin/controller/settings/latestsearches.php:44
+msgid "Last search settings have been updated"
+msgstr "Setari pentru ultima cautare au fost actualizate"
+
+#: oc-admin/tools.php:50
+msgid "Import complete"
+msgstr "Import complet"
+
+#: oc-admin/tools.php:52
+msgid "There was a problem importing data to the database"
+msgstr "A aparut o problema la importarea datelor din baza de date"
+
+#: oc-admin/tools.php:67
+msgid "Recount category stats has been successful"
+msgstr "Recalcularea statusului categoriilor a fost efectuat cu succes"
+
+#: oc-admin/tools.php:106 oc-admin/tools.php:135
+msgid "Path is empty"
+msgstr "Pachet gol"
+
+#: oc-admin/tools.php:109 oc-admin/tools.php:138
+msgid "Could not connect with the database. Error: %s"
+msgstr "Nu se poate conecta la baza de date. Eroare: %s"
+
+#: oc-admin/tools.php:112 oc-admin/tools.php:144
+msgid "There are no tables to back up"
+msgstr "Nu exista tabele pentru back up"
+
+#: oc-admin/tools.php:115 oc-admin/tools.php:147
+msgid "The folder is not writable"
+msgstr "Folderul nu are drept de scriere"
+
+#: oc-admin/tools.php:141
+msgid "Could not select the database. Error: %s"
+msgstr "Nu se poate selecta baza de date. Eroare: %s"
+
+#: oc-admin/tools.php:235
+msgid "Maintenance mode is ON"
+msgstr "Modul mentenanta este PORNIT"
+
+#: oc-admin/tools.php:245
+msgid "Maintenance mode is OFF"
+msgstr "Modul mentenanta este OPRIT"
+
+#: oc-admin/users.php:68
+msgid "The user has been created. We've sent an activation e-mail"
+msgstr "S-a creat utilizatorul, se trimite un email de activare"
+
+#: oc-admin/users.php:70
+msgid "The user has been created successfully"
+msgstr "Utilizatorul a fost creat cu succes"
+
+#: oc-admin/users.php:123
+msgid "The user has been updated and activated"
+msgstr "Utilizatorul a fost actualizat si activat"
+
+#: oc-admin/users.php:121
+msgid "The user has been updated"
+msgstr "Utilizatorul a fost activat"
+
+#: oc-admin/users.php:137 oc-admin/users.php:160 oc-admin/users.php:185
+#: oc-admin/users.php:209 oc-admin/users.php:233 oc-admin/users.php:257
+#: oc-admin/users.php:555
+msgid "User id isn't in the correct format"
+msgstr "Id utilizator nu este in forma corecta"
+
+#: oc-admin/users.php:149
+msgid "Activation email sent to one user"
+msgstr "Email-ul de activare a fost trimis la un utilizator"
+
+#: oc-admin/users.php:172
+msgid "One user has been activated"
+msgstr "Un utilizator a fost activat"
+
+#: oc-admin/users.php:197
+msgid "One user has been deactivated"
+msgstr "Un utilizator a fost dezactivat"
+
+#: oc-admin/users.php:221
+msgid "One user has been unblocked"
+msgstr "Un utilizator a fost deblocat"
+
+#: oc-admin/users.php:245
+msgid "One user has been blocked"
+msgstr "Un utilizator a fost blocat"
+
+#: oc-admin/users.php:272
+msgid "One user has been deleted"
+msgstr "Un utilizator a fost sters"
+
+#: oc-includes/osclass/ItemActions.php:318
+msgid "Title too short."
+msgstr "Titlu prea scurt."
+
+#: oc-includes/osclass/ItemActions.php:319
+msgid "Title too long."
+msgstr "Titlu prea lung."
+
+#: oc-includes/osclass/ItemActions.php:331
+msgid "Description too short."
+msgstr "Descriere prea scurta."
+
+#: oc-includes/osclass/ItemActions.php:332
+msgid "Description too long."
+msgstr "Descriere prea mare."
+
+#: oc-includes/osclass/ItemActions.php:129
+#: oc-includes/osclass/ItemActions.php:337
+msgid "Category invalid."
+msgstr "Categorie invalida."
+
+#: oc-includes/osclass/ItemActions.php:131
+#: oc-includes/osclass/ItemActions.php:339
+msgid "Price too long."
+msgstr "Pret prea lung."
+
+#: oc-includes/osclass/ItemActions.php:133
+msgid "Name too long."
+msgstr "Nume prea lung."
+
+#: oc-includes/osclass/ItemActions.php:134
+msgid "Email invalid."
+msgstr "Email invalid."
+
+#: oc-includes/osclass/ItemActions.php:135
+#: oc-includes/osclass/ItemActions.php:341
+msgid "Country too short."
+msgstr "Tara prea scurta."
+
+#: oc-includes/osclass/ItemActions.php:136
+#: oc-includes/osclass/ItemActions.php:342
+msgid "Country too long."
+msgstr "Tara prea lunga."
+
+#: oc-includes/osclass/ItemActions.php:137
+#: oc-includes/osclass/ItemActions.php:343
+msgid "Region too short."
+msgstr "Juget prea scurt."
+
+#: oc-includes/osclass/ItemActions.php:138
+#: oc-includes/osclass/ItemActions.php:344
+msgid "Region too long."
+msgstr "Juget prea lung"
+
+#: oc-includes/osclass/ItemActions.php:139
+#: oc-includes/osclass/ItemActions.php:345
+msgid "City too short."
+msgstr "Oras prea scurt"
+
+#: oc-includes/osclass/ItemActions.php:140
+#: oc-includes/osclass/ItemActions.php:346
+msgid "City too long."
+msgstr "Oras prea lung"
+
+#: oc-includes/osclass/ItemActions.php:141
+#: oc-includes/osclass/ItemActions.php:347
+msgid "Municipality too short."
+msgstr "Municipalitate prea scurta."
+
+#: oc-includes/osclass/ItemActions.php:142
+#: oc-includes/osclass/ItemActions.php:348
+msgid "Municipality too long."
+msgstr "Municipalitate prea lunga.."
+
+#: oc-includes/osclass/ItemActions.php:143
+#: oc-includes/osclass/ItemActions.php:349
+msgid "Address too short."
+msgstr "Adresa prea scurta."
+
+#: oc-includes/osclass/ItemActions.php:144
+#: oc-includes/osclass/ItemActions.php:350
+msgid "Address too long."
+msgstr "Adresa prea lunga."
+
+#: oc-includes/osclass/ItemActions.php:145
+msgid "Too fast. You should wait a little to publish your ad."
+msgstr "Prea repede. Trebuie sa astepti putin pentru a publicat acest anunt."
+
+#: oc-includes/osclass/ItemActions.php:160
+#: oc-includes/osclass/ItemActions.php:363
+msgid "%s field is required."
+msgstr "%s campuri necesare"
+
+#: oc-includes/osclass/ItemActions.php:1311
+msgid "One of the files you tried to upload exceeds the maximum size"
+msgstr "Unul din fisierele pe care doresti sa le incarci au depasit marimea maxima"
+
+#: oc-includes/osclass/controller/item.php:163
+msgid "Check your inbox to validate your listing"
+msgstr "Verifica-ti email-ul pentru a valida anuntul"
+
+#: oc-admin/comments.php:88
+msgid "The comments have been unblocked"
+msgstr "Comentariile au fost deblocate"
+
+#: oc-admin/comments.php:98
+msgid "The comments have been blocked"
+msgstr "Comentariile au fost blocate"
+
+#: oc-admin/items.php:264
+msgid "%d listing has been unmarked"
+msgstr "%d anunt a fost demarcat"
+
+#: oc-admin/controller/settings/main.php:29
+msgid "Last check"
+msgstr "Ultima verificare"
+
+#: oc-admin/main.php:71
+msgid "Entered an invalid email"
+msgstr "Introdu o adresa de email valida"
+
+#: oc-admin/main.php:74
+msgid "You're already subscribed"
+msgstr "Esti deja inscris"
+
+#: oc-admin/main.php:77
+msgid "Subscribed correctly"
+msgstr "Inscris corect"
+
+#: oc-admin/main.php:80
+msgid "Error subscribing"
+msgstr "Eroare la inscriere"
+
+#: oc-includes/osclass/core/AdminSecBaseModel.php:62
+msgid "Thank you very much for your donation"
+msgstr "Multumim foarte mult pentru donatie"
+
+#: oc-includes/osclass/controller/item.php:507
+msgid "You need to be logged to comment"
+msgstr "Trebuie să fi autentificat pentru a lăsa un comentariu"
+
+#: oc-includes/osclass/helpers/hSecurity.php:85
+msgid "Invalid CSRF token."
+msgstr "Token CSRF invalid."
+
+#: oc-includes/osclass/helpers/hSecurity.php:79
+msgid "Probable invalid request."
+msgstr "Probabil cererea este invalidă."
+
+#: oc-includes/osclass/controller/item.php:510
+msgid "Sorry, comments are disabled"
+msgstr "Îmi pare rău, comentariile sunt dezactivate."
+
+#: oc-includes/osclass/controller/item.php:589
+msgid "The listing hasn't been enabled. Please enable it in order to make it public"
+msgstr "Anunţul nu fost activat. Te rog să-l activezi pentru ca acesta să devină public."
+
+#: oc-includes/osclass/UserActions.php:55
+#: oc-includes/osclass/UserActions.php:161
+msgid "The name cannot be empty"
+msgstr "Numele nu poate fi lăsat necompletat"
+
+#: oc-admin/admins.php:50 oc-admin/admins.php:143 oc-admin/admins.php:257
+#: oc-admin/appearance.php:37 oc-admin/appearance.php:74
+#: oc-admin/controller/settings/advanced.php:32
+#: oc-admin/controller/settings/locations.php:31
+#: oc-admin/controller/settings/locations.php:73
+#: oc-admin/controller/settings/locations.php:115
+#: oc-admin/controller/settings/locations.php:144
+#: oc-admin/controller/settings/locations.php:194
+#: oc-admin/controller/settings/locations.php:250
+#: oc-admin/controller/settings/locations.php:286
+#: oc-admin/controller/settings/locations.php:338
+#: oc-admin/controller/settings/locations.php:394
+#: oc-admin/controller/settings/mailserver.php:31
+#: oc-admin/controller/settings/media.php:170 oc-admin/languages.php:41
+#: oc-admin/login.php:97 oc-admin/plugins.php:40 oc-admin/plugins.php:77
+#: oc-admin/plugins.php:113 oc-admin/plugins.php:128 oc-admin/plugins.php:143
+msgid "This action can't be done because it's a demo site"
+msgstr "Această acțiune nu poate fi anulată, deoarece acesta este un site demonstrativ"
+
+#: oc-admin/admins.php:120
+msgid "There has been an error adding a new admin"
+msgstr "Au apărut unele erori în momentul adăugării unui nou administrator"
+
+#: oc-admin/admins.php:135
+msgid "There is no admin with this id"
+msgstr "Nu există nici un administrator cu acest ID"
+
+#: oc-admin/items.php:324
+msgid "The listing can't be activated because it's blocked"
+msgstr "Anunțul nu poate fi activat deoarece acesta este blocat"
+
+#: oc-admin/items.php:653
+msgid "Wait time must only contain numeric characters"
+msgstr "Timpul de așteptare trebuie să conțină numai caractere numerice"
+
+#: oc-admin/items.php:656
+msgid "Number of moderated listings must only contain numeric characters"
+msgstr "Numărul anunțurilor de moderat trebuie să conțină doar caractere numerice"
+
+#: oc-admin/items.php:659
+msgid "Images per listing must only contain numeric characters"
+msgstr "Imaginile per anunțuri trebuie să conțină numai caractere numerice"
+
+#: oc-admin/languages.php:153
+msgid "Number of decimals must only contain numeric characters"
+msgstr "Numărul decimalelor trebuie să conțină doar caractere numerice"
+
+#: oc-admin/languages.php:307
+msgid "Directory '%s' couldn't be removed;)"
+msgstr "Directorul \"%s\" nu poate fi înlăturat (șters) ;)"
+
+#: oc-admin/main.php:62
+msgid "You have very few free space left, users will not be able to upload pictures"
+msgstr "Mai ai foarte puțin spațiu liber, utilizatorii nu vor mai putea încărca imagini"
+
+#: oc-admin/controller/settings/comments.php:48
+msgid "Number of moderate comments must only contain numeric characters"
+msgstr "Numărul de comentarii moderate trebuie să conțină numai caractere numerice"
+
+#: oc-admin/controller/settings/comments.php:51
+msgid "Comments per page must only contain numeric characters"
+msgstr "Numărul de comentarii per pagină trebuie să conțină numai caractere numerice"
+
+#: oc-admin/controller/settings/comments.php:71
+msgid "Comment settings have been updated"
+msgstr "Setările pentru comentarii au fost actualizate"
+
+#: oc-admin/controller/settings/locations.php:78
+msgid "Country name cannot be blank"
+msgstr "Numele țării nu poate fi gol"
+
+#: oc-admin/controller/settings/locations.php:135
+#: oc-admin/controller/settings/locations.php:277
+#: oc-admin/controller/settings/locations.php:418
+msgid "There was a problem deleting locations"
+msgstr "S-a ivit o problemă la ștergerea locațiilor"
+
+#: oc-admin/controller/settings/locations.php:138
+msgid "No country was selected"
+msgstr "Nu a fost selectată nici o țară"
+
+#: oc-admin/controller/settings/locations.php:162
+#: oc-admin/controller/settings/locations.php:309
+msgid "%s can't be added"
+msgstr "%s nu poate fi adăugat(ă)"
+
+#: oc-admin/controller/settings/locations.php:172
+#: oc-admin/controller/settings/locations.php:203
+msgid "Region name cannot be blank"
+msgstr "Numele regiunii nu poate fi gol"
+
+#: oc-admin/controller/settings/locations.php:280
+msgid "No region was selected"
+msgstr "Nu a fost selectată nici o regiune"
+
+#: oc-admin/controller/settings/locations.php:317
+msgid "New city name cannot be blank"
+msgstr "Numele noului oraș nu poate fi gol"
+
+#: oc-admin/controller/settings/locations.php:348
+msgid "City name cannot be blank"
+msgstr "Numele orașului nu poate fi gol"
+
+#: oc-admin/controller/settings/locations.php:421
+msgid "No city was selected"
+msgstr "Nu a fost selectat nici un oraș"
+
+#: oc-admin/controller/settings/permalinks.php:424
+msgid "All fields are required."
+msgstr "Toate câmpurile sunt obligatorii."
+
+#: oc-admin/controller/settings/permalinks.php:445
+#: oc-admin/controller/settings/permalinks.php:455
+msgid "File <b>.htaccess</b> couldn't be filled out with the right content."
+msgstr "Fișierul <b>.htaccess</b> nu a putut fi scris cu conținutul necesar."
+
+#: oc-admin/controller/settings/permalinks.php:447
+msgid "Here's the content you have to add to the <b>.htaccess</b> file. If you can't create the file, please deactivate the <em>Friendly URLs</em> option."
+msgstr "Aici ai conținutul ce trebuie să îl adaugi fișierului <b>.htaccess</b>. Dacă nu poți creea fișierul, te rog să dezactivezi opțiunea <em>Friendly URLs</em>."
+
+#: oc-admin/controller/settings/permalinks.php:457
+msgid "Here's the content you have to add to the <b>.htaccess</b> file. If you can't create the file or experience some problems with the URLs, please deactivate the <em>Friendly URLs</em> option."
+msgstr "Uite aici conținutul care trebuie adăugat în fișierul <b>.htaccess</b>. Dacă nu poți creea fișierul, sau dacă întâmpini probleme cu url-urile, te rog deactivează opțiunea <em>URL-uri prietenoase</em>"
+
+#: oc-admin/controller/settings/currencies.php:141
+msgid "%s couldn't be deleted because it has listings associated to it"
+msgstr "%s nu poate fi șters deoarece are anunțuri asociate"
+
+#: oc-admin/controller/settings/currencies.php:143
+msgid "%s couldn't be deleted because it's the default currency"
+msgstr "%s nu poate fi șters deoarece este moneda implicită"
+
+#: oc-admin/controller/settings/main.php:89
+msgid "Number of listings in the RSS has to be a numeric value"
+msgstr "Numărul de anunțuri de afișat in RSS trebuie să fie o valoare numerică"
+
+#: oc-admin/controller/settings/main.php:92
+msgid "Max latest listings has to be a numeric value"
+msgstr "Numărul maxim din ultimele anunțuri de afișat trebuie sa fie o valoare numerică"
+
+#: oc-admin/controller/settings/main.php:95
+msgid "Number of listings on search has to be a numeric value"
+msgstr "Numărul de anunțuri din căutări trebuie să fie o valoare numerică"
+
+#: oc-admin/controller/settings/main.php:120
+msgid "Number of listings in the RSS must be an integer"
+msgstr "Numărul de anunțuri din RSS trebuie să fie un întreg"
+
+#: oc-admin/controller/settings/main.php:127
+msgid "Number of recent listings displayed at home must be an integer"
+msgstr "Numărul de anunțuri recente afișate pe pagina de start trebuie să fie un număr întreg"
+
+#: oc-admin/themes/modern/market/header.php:5
+msgid "<code>downloads</code> folder has to be writable, i.e.: <code>chmod a+w %soc-content/downloads/</code>"
+msgstr "Directorul <code>downloads</code> trebuie să aibe privilegii de scriere. Ex. <code>chmod a+w %soc-content/downloads/</code>"
+
+#: oc-admin/tools.php:176 oc-admin/tools.php:213
+msgid "Archived successfully!"
+msgstr "Arhivat cu succes!"
+
+#: oc-admin/tools.php:190 oc-admin/tools.php:216
+msgid "Error, the zip file was not created in the specified directory"
+msgstr "Eroare. Fișierul zip nu a fost creat în directorul specificat"
+
+#: oc-admin/tools.php:237
+msgid "There was an error creating the .maintenance file, please create it manually at the root folder"
+msgstr "Există o eroare la creearea fișierului .maintenance, te rog crează-l manual în directorul rădăcină"
+
+#: oc-admin/tools.php:247
+msgid "There was an error removing the .maintenance file, please remove it manually from the root folder"
+msgstr "Există o eroare la ștergerea fișierului .maintenance, te rog șterge-l manual din directorul rădăcină"
+
+#: oc-admin/users.php:147
+msgid "No users have been selected"
+msgstr "Nu au fost selectați utilizatori"
+
+#: oc-admin/users.php:170
+msgid "No users have been activated"
+msgstr "Nu au fost activați utilizatori"
+
+#: oc-admin/users.php:195
+msgid "No users have been deactivated"
+msgstr "Nici un utilizator dezactivat"
+
+#: oc-admin/users.php:219
+msgid "No users have been enabled"
+msgstr "Nici un utilizator activat"
+
+#: oc-admin/users.php:243
+msgid "No users have been disabled"
+msgstr "Nici un utilizator dezactivat"
+
+#: oc-admin/users.php:270
+msgid "No users have been deleted"
+msgstr "Nici un utilizator șters"
+
+#: oc-admin/users.php:283 oc-admin/users.php:317
+msgid "Alert id isn't in the correct format"
+msgstr "ID-ul alertei nu este în formatul corespunzător"
+
+#: oc-admin/users.php:298
+msgid "No alerts have been deleted"
+msgstr "Nici o alertă ștearsă"
+
+#: oc-admin/users.php:300
+msgid "One alert has been deleted"
+msgstr "O alertă a fost ștearsă"
+
+#: oc-admin/users.php:337
+msgid "No alerts have been activated"
+msgstr "Nici o alertă activată"
+
+#: oc-admin/users.php:339
+msgid "One alert has been activated"
+msgstr "O alertă a fost activată"
+
+#: oc-admin/users.php:343
+msgid "No alerts have been deactivated"
+msgstr "Nici o alertă dezactivată"
+
+#: oc-admin/users.php:345
+msgid "One alert has been deactivated"
+msgstr "O alertă a fost dezactivată"
+
+#: oc-admin/users.php:383
+msgid "User settings have been updated"
+msgstr "Setările utilizatorului au fost actualizate"
+
+#: oc-admin/users.php:526 oc-admin/users.php:541
+msgid "Both rules can not be empty"
+msgstr "Ambele reguli nu trebuie să fie goale"
+
+#: oc-admin/users.php:531
+msgid "Rule updated correctly"
+msgstr "Regulă actualizată cu succes"
+
+#: oc-admin/users.php:546
+msgid "Rule saved correctly"
+msgstr "Regulă salvată cu succes"
+
+#: oc-admin/users.php:567
+msgid "No rules have been deleted"
+msgstr "Nici o regulă ștearsă"
+
+#: oc-admin/users.php:569
+msgid "One ban rule has been deleted"
+msgstr "O regulă de banare a fost ștearsă"
+
+#: oc-includes/osclass/ItemActions.php:90
+#: oc-includes/osclass/ItemActions.php:303
+msgid "Image with an incorrect extension."
+msgstr "Imagine cu extensie incorectă."
+
+#: oc-includes/osclass/ItemActions.php:93
+#: oc-includes/osclass/ItemActions.php:306
+msgid "Image is too big. Max. size"
+msgstr "Imaginea este prea mare. Dimensiunea max."
+
+#: oc-includes/osclass/ItemActions.php:130
+#: oc-includes/osclass/ItemActions.php:338
+msgid "Price must be a number."
+msgstr "Prețul trebuie să fie cifră (cifre)."
+
+#: oc-includes/osclass/ItemActions.php:857
+msgid "We just sent your message to %s"
+msgstr "Tocmai am trimis mesajul tău către %s"
+
+#: oc-includes/osclass/ItemActions.php:1366
+#: oc-includes/osclass/controller/contact.php:158
+msgid "The file you tried to upload does not have a valid extension"
+msgstr "Fișierul pe care încerci să-l încarci nu are o extensie validă"
+
+#: oc-includes/osclass/controller/contact.php:65
+msgid "Please enter a correct email"
+msgstr "Te rugăm să introduci un e-mail valid (corect)"
+
+#: oc-includes/osclass/controller/contact.php:156
+msgid "Your email has been sent properly. Thank you for contacting us!"
+msgstr "E-mail-ul tău a fost trimis cu succes. Îți mulțumim."
+
+#: oc-includes/osclass/controller/item.php:135
+msgid "A user with that email address already exists, if it is you, please log in"
+msgstr "Un utilizator cu aceeași adresă de e-mail există deja în baza noastră de date. Dacă ești tot tu, te rugăm să te autentifici"
+
+#: oc-includes/osclass/controller/contact.php:51
+#: oc-includes/osclass/controller/contact.php:60
+#: oc-includes/osclass/controller/item.php:142
+#: oc-includes/osclass/controller/item.php:458
+#: oc-includes/osclass/controller/login.php:75
+#: oc-includes/osclass/controller/register.php:57
+#: oc-includes/osclass/controller/user-non-secure.php:158
+msgid "Your current email is not allowed"
+msgstr "Adresa ta de e-mail nu este permisă"
+
+#: oc-includes/osclass/controller/contact.php:54
+#: oc-includes/osclass/controller/item.php:145
+#: oc-includes/osclass/controller/item.php:461
+#: oc-includes/osclass/controller/login.php:78
+#: oc-includes/osclass/controller/register.php:60
+#: oc-includes/osclass/controller/user-non-secure.php:161
+msgid "Your current IP is not allowed"
+msgstr "IP-ul tău curent nu este permis"
+
+#: oc-includes/osclass/controller/item.php:194
+msgid "Sorry, we don't have any listings with that ID"
+msgstr "Ne pare rău, nu avem nici un anunț cu acel ID"
+
+#: oc-includes/osclass/controller/item.php:582
+msgid "The listing hasn't been validated. Please validate it in order to make it public"
+msgstr "Anunțul nu a fost validat. Te rugăm să-l validezi pentru ca el să devină public și vizibil tuturor"
+
+#: oc-includes/osclass/controller/login.php:150
+msgid "This should never happen"
+msgstr "Acest lucru n-ar trebui să se întâmple "
+
+#: oc-includes/osclass/UserActions.php:37
+msgid "The reCAPTCHA was not entered correctly"
+msgstr "Codul reCAPATCHA nu a fost introdus corect"
+
+#: oc-includes/osclass/UserActions.php:74
+msgid "Username is already taken"
+msgstr "Numele de utilizator este folosit deja, reîncercați"
+
+#: oc-includes/osclass/UserActions.php:78
+#: oc-includes/osclass/controller/user.php:154
+msgid "The specified username is not valid, it contains some invalid words"
+msgstr "Numele de utilizator specificat nu este valid. Conține câteva caractere invalide"
+
+#: oc-includes/osclass/controller/user-non-secure.php:82
+#: oc-includes/osclass/controller/user.php:224
+msgid "Oops! There was a problem trying to activate your alert. Please contact an administrator"
+msgstr "Hopa! A apărut o eroare când încercam să-ți activăm alerta. Te rugăm să contactezi administratorul acestui site"
+
+#: oc-includes/osclass/controller/user-non-secure.php:103
+#: oc-includes/osclass/controller/user.php:245
+msgid "Oops! There was a problem trying to unsubscribe you. Please contact an administrator"
+msgstr "Hopa! A apărut o eroare în momentul dezabonării tale. Te rugăm să contactezi administratorul site-ului"
+
+#: oc-includes/osclass/controller/user.php:144
+msgid "The specified username is already in use"
+msgstr "Numele de utilizator specificat este folosit deja"
+
+#: oc-includes/osclass/controller/user.php:150
+msgid "The username was updated"
+msgstr "Numele de utilizator a fost actualizat"
+
+#: oc-includes/osclass/controller/user.php:158
+msgid "The specified username could not be empty"
+msgstr "Numele de utilizator specificat nu poate fi gol"
+
+#: oc-includes/osclass/controller/user.php:268
+msgid "Your account have been deleted"
+msgstr "Contul tău a fost șters"
+
+#: oc-includes/osclass/controller/user.php:271
+#: oc-includes/osclass/controller/user.php:275
+msgid "Oops! you can not do that"
+msgstr "Hey! Nu poți face asta"
+
+#: oc-includes/osclass/emails.php:464
+msgid "We've sent you an e-mail. Follow its instructions to validate the changes"
+msgstr "Ți-am trimis un e-mail. Urmează instrucțiunile din e-mail pentru validarea modificărilor făcute"
+
+#: oc-includes/osclass/emails.php:466
+msgid "We tried to sent you an e-mail, but it failed. Please, contact an administrator"
+msgstr "Am încercat să-ți trimitem un e-mail, dar n-am reușit. Te rugăm să contactezi administratorul."
+
+#: oc-includes/osclass/ItemActions.php:132
+#: oc-includes/osclass/ItemActions.php:340
+msgid "Price must be positive number."
+msgstr "Preţul trebuie să fie un număr pozitiv."
+
+#: oc-admin/plugins.php:90
+msgid "The plugin generated %d characters of <strong>unexpected output</strong> during the installation. Output: \"%s\""
+msgstr "Modulul a generat %d caractere <strong>neaşteptate</strong> în timpul instalării. Iată rezultatul: \"%s\""
+
+#: oc-admin/items.php:662
+msgid "Number of expiration days has to be a numeric value"
+msgstr "Numărul zilelor de expirare trebuie să fie o valoare numerică (cifre)"
+
+#: oc-admin/controller/settings/permalinks.php:509
+msgid "Friendly URLs deactivated, but .htaccess file was modified outside Osclass and was not deleted"
+msgstr "Friendly URL-uri dezactivate, însă fişierul .htaccess a fost modificat înafara Osclass şi nu a fost şters"
+
+#: oc-admin/controller/settings/permalinks.php:507
+msgid "Friendly URLs deactivated, but .htaccess file could not be deleted. Please, remove it manually"
+msgstr "Frindly URL-uri dezactivate, însă fişierul .htaccess nu a putut fi şters. Te rog să-l ştergi manual."
+
+#: oc-admin/controller/settings/permalinks.php:471
+msgid "Here's the content you have to add to the <b>.htaccess</b> file. If you can't modify the file or experience some problems with the URLs, please deactivate the <em>Friendly URLs</em> option."
+msgstr "Iată conţinutul ce trebuie să-l adaugi în fişierul tău <b>.htaccess</b>. Dacă nu poţi modifica fişierul sau întâmpini alte probleme cu URL-urile, te rog să dezactivezi opţiunea <em>Friendly URL-uri</em>"
+
+#: oc-admin/controller/settings/permalinks.php:469
+msgid "File <b>.htaccess</b> already exists and was not modified."
+msgstr "Fişierul <b>.htaccess</b> există deja şi nu poate fi modificat."
+
+#: oc-admin/items.php:665
+msgid "Title Length has to be a numeric value"
+msgstr "Lungimea titlului trebuie să fie o valoare numerică"
+
+#: oc-admin/controller/settings/advanced.php:44
+msgid "Advanced settings have been updated"
+msgstr "Setările avansate au fost actualizate"
+
+#: oc-admin/items.php:668
+msgid "Description Length has to be a numeric value"
+msgstr "Lungimea descrierii trebuie să fie o valoare numerică"
+
+#: oc-includes/osclass/ItemActions.php:105
+msgid "Title too short (%s)."
+msgstr "Titlul este prea scurt (%s)."
+
+#: oc-includes/osclass/ItemActions.php:106
+msgid "Title too long (%s)."
+msgstr "Titlul este prea lung (%s)."
+
+#: oc-includes/osclass/ItemActions.php:118
+msgid "Description too short (%s)."
+msgstr "Descrierea este prea scurtă (%s)."
+
+#: oc-includes/osclass/ItemActions.php:119
+msgid "Description too long (%s)."
+msgstr "Descrierea este prea lungă (%s)."
+
+#: oc-includes/osclass/controller/register.php:118
+msgid "Account validation failed"
+msgstr "Validarea contului a eşuat"
+
+#: oc-includes/osclass/controller/login.php:117
+msgid "The user has not been validated yet. Would you like to re-send your <a href=\"%s\">activation?</a>"
+msgstr "Utilizatorul nu a fost validat încă. Doreşti să re-trimitem e-mail-ul de <a href=\"%s\">activare?</a>"
+
+#: oc-includes/osclass/controller/login.php:164
+msgid "Incorrect link"
+msgstr "Link incorect"
+
+#: oc-includes/osclass/controller/login.php:175
+msgid "Validation email re-sent"
+msgstr "E-mail-ul de validare a fost re-trimis."
+
+#: oc-includes/osclass/controller/login.php:177
+msgid "We have just sent you an email to validate your account, you will have to wait a few minutes to resend it again"
+msgstr "Tocmai acum câteva momente ţi-am trimis un e-mail de validare al contului, va trebui să aştepţi câteva minute pentru a-l putea retrimite din nou."
+
+#: oc-includes/osclass/controller/user-non-secure.php:166
+msgid "Your email has been sent properly."
+msgstr "E-mail-ul a fost trimis corespunzător."
+
+#: oc-includes/osclass/upgrade-funcs.php:516
+msgid "Osclass has been updated successfully. <a href=\"http://forums.osclass.org/\">Need more help?</a>"
+msgstr "Osclass a fost actualizat cu succes. <a href=\"http://forums.osclass.org/\">Ai nevoie de mai mult ajutor?</a>"
+
+#: oc-admin/plugins.php:231
+msgid "The files were deleted"
+msgstr "Fişierele au fost eliminate"
+
+#: oc-admin/controller/settings/advanced.php:51
+msgid "Cache flushed correctly"
+msgstr "Cache-ul a fost golit corespunzător"
+
+#: oc-admin/plugins.php:233
+msgid "There were an error deleting the files, please check the permissions of the files in %s"
+msgstr "Au apărut unele erori în timpul ştergerii fişierelor, te rugăm să verifici permisiunile fişierelor %s"
+
+#: oc-includes/osclass/controller/item.php:591
+msgid "The listing has been blocked or is awaiting moderation from the admin"
+msgstr "Anunţul a fost blocat sau aşteaptă confirmarea/validarea unui moderator/administrator."
+
+#: oc-includes/osclass/controller/login.php:47
+msgid "Please provide an email address"
+msgstr "Te rugăm să specifici o adresă de e-mail"
+
+#: oc-includes/osclass/controller/login.php:51
+msgid "Empty passwords are not allowed. Please provide a password"
+msgstr "Nu sunt permise parolele goale (necompletate). Te rugăm să alegi o parolă"
+
+#: oc-includes/osclass/UserActions.php:155
+msgid "The specified e-mail is already used by %s"
+msgstr "E-mail-ul specificat este folosit de către %s "
+
+#: oc-admin/controller/settings/main.php:36
+msgid "Disconnected from the market"
+msgstr "Deconectare de la magazin"
