@@ -1233,9 +1233,9 @@
         } else if($meta['e_type']=="URL") {
             if($value!='') {
                 if(stripos($value,'http://')!==false || stripos($value,'https://')!==false) {
-                    return '<a href="'.html_entity_decode($value, ENT_COMPAT, "UTF-8").'" >'.html_entity_decode($value, ENT_COMPAT, "UTF-8").'</a>';
+                    return '<a href="'.html_entity_decode($value, ENT_COMPAT, "UTF-8").'">'.html_entity_decode($value, ENT_COMPAT, "UTF-8").'</a>';
                 } else {
-                    return '<a href="http://'.html_entity_decode($value, ENT_COMPAT, "UTF-8").'" >'.html_entity_decode($value, ENT_COMPAT, "UTF-8").'</a>';
+                    return '<a href="http://'.html_entity_decode($value, ENT_COMPAT, "UTF-8").'" target="_blank" rel="nofollow">'.html_entity_decode($value, ENT_COMPAT, "UTF-8").'</a>';
                 }
             } else {
                 return '';
