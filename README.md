@@ -1,3 +1,5 @@
+[![CodeFactor](https://www.codefactor.io/repository/github/navjottomer/osclass/badge)](https://www.codefactor.io/repository/github/navjottomer/osclass)
+
 # Osclass
 
 **This repo is a fork of official [Osclass][original-code] repository.**
