@@ -22,7 +22,7 @@
 function locale_pt_PT_info() {
     return array(
          'name'            => 'Portuguese (Portugal)'
-        ,'short_name'      => 'Portuguese'
+        ,'short_name'      => 'Portuguese_PT'
         ,'description'     => 'Portuguese (Portugal) translation'
         ,'version'         => '3.1.0'
         ,'author_name'     => 'Osclass'

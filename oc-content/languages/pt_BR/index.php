@@ -22,7 +22,7 @@
 function locale_pt_BR_info() {
     return array(
          'name'            => 'Portuguese (Brazil)'
-        ,'short_name'      => 'Portuguese'
+        ,'short_name'      => 'Portuguese_BR'
         ,'description'     => 'Portuguese (Brazil) translation'
         ,'version'         => 'Dev version'
         ,'author_name'     => 'Osclass'

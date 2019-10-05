@@ -22,7 +22,7 @@
 function locale_zh_TW_info() {
     return array(
          'name'            => 'Chinese (Taiwan)'
-        ,'short_name'      => 'Chinese'
+        ,'short_name'      => 'Chinese_TW'
         ,'description'     => 'Chinese (Taiwan) translation'
         ,'version'         => 'Osclass 3.5.0'
         ,'author_name'     => 'Osclass'

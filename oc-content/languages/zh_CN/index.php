@@ -22,7 +22,7 @@
 function locale_zh_CN_info() {
     return array(
          'name'            => 'Chinese (China)'
-        ,'short_name'      => 'Chinese'
+        ,'short_name'      => 'Chinese_CN'
         ,'description'     => 'Chinese (China) translation'
         ,'version'         => '3.1.0'
         ,'author_name'     => 'Osclass'
