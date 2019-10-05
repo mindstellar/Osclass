@@ -1,27 +1,27 @@
 <?php
 
-/*
- * Copyright 2014 Osclass
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *     http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- */
+    /*
+     * Copyright 2014 Osclass
+     *
+     * Licensed under the Apache License, Version 2.0 (the "License");
+     * you may not use this file except in compliance with the License.
+     * You may obtain a copy of the License at
+     *
+     *     http://www.apache.org/licenses/LICENSE-2.0
+     *
+     * Unless required by applicable law or agreed to in writing, software
+     * distributed under the License is distributed on an "AS IS" BASIS,
+     * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     * See the License for the specific language governing permissions and
+     * limitations under the License.
+     */
 
     /**
      * Database command object
      *
-     * @package Osclass
+     * @package    Osclass
      * @subpackage Database
-     * @since 2.3
+     * @since      2.3
      */
     class DBCommandClass
     {
@@ -30,7 +30,7 @@
          * Database connection object to Osclass database
          *
          * @access private
-         * @since 2.3
+         * @since  2.3
          * @var mysqli
          */
         public $connId;
@@ -38,7 +38,7 @@
          * Database result object
          *
          * @access public
-         * @since 2.3
+         * @since  2.3
          * @var MySQLi_Result
          */
         public $resultId;
@@ -153,8 +153,8 @@
          */
         public function __construct(&$connId)
         {
-            $this->connId     = &$connId;
-            $this->resultId   = 0;
+            $this->connId   = &$connId;
+            $this->resultId = 0;
 
             $this->queries    = array();
             $this->queryTimes = array();
@@ -163,18 +163,18 @@
             $this->errorLevel = 0;
             $this->errorDesc  = '';
 
-            $this->aSelect    = array();
-            $this->aFrom      = array();
-            $this->aJoin      = array();
-            $this->aWhere     = array();
-            $this->aLike      = array();
-            $this->aGroupby   = array();
-            $this->aHaving    = array();
-            $this->aLimit     = false;
-            $this->aOffset    = false;
-            $this->aOrder     = false;
-            $this->aOrderby   = array();
-            $this->aWherein   = array();
+            $this->aSelect  = array();
+            $this->aFrom    = array();
+            $this->aJoin    = array();
+            $this->aWhere   = array();
+            $this->aLike    = array();
+            $this->aGroupby = array();
+            $this->aHaving  = array();
+            $this->aLimit   = false;
+            $this->aOffset  = false;
+            $this->aOrder   = false;
+            $this->aOrderby = array();
+            $this->aWherein = array();
 
             if (OSC_DEBUG_DB || OSC_DEBUG_DB_EXPLAIN) {
                 $this->log = LogDatabase::newInstance();
@@ -182,36 +182,39 @@
         }
 
         /**
-         * Unset connection and result objects
-         */
-        public function __destruct()
-        {
-            unset($this->connId , $this->resultId);
-        }
-
-        /**
          * It creates a new DBCommandClass object or if it has been created before, it
          * returns the previous object
          *
          * @access public
-         * @since 2.3
          * @return DBCommandClass
+         * @since  2.3
          */
         public static function newInstance()
         {
             if (!self::$instance instanceof self) {
                 self::$instance = new self;
             }
+
             return self::$instance;
+        }
+
+        /**
+         * Unset connection and result objects
+         */
+        public function __destruct()
+        {
+            unset($this->connId, $this->resultId);
         }
 
         /**
          * Set SELECT clause
          *
          * @access public
-         * @since 2.3
+         *
          * @param mixed $select It can be a string or array
+         *
          * @return DBCommandClass
+         * @since  2.3
          */
         public function select($select = '*')
         {
@@ -231,37 +234,16 @@
         }
 
         /**
-         * Set FROM clause
-         *
-         * @param mixed $from It can be a string or array
-         * @return DBCommandClass
-         */
-        public function from($from)
-        {
-            if (!is_array($from)) {
-                if (strpos($from, ',') !== false) {
-                    $from = explode(',', $from);
-                } else {
-                    $from = array($from);
-                }
-            }
-
-            foreach ($from as $f) {
-                $this->aFrom[] = $f;
-            }
-
-            return $this;
-        }
-
-        /**
          * Set JOIN clause
          *
          * @access public
-         * @since 2.3
+         *
          * @param string $table
          * @param string $cond
          * @param string $type It can be: LEFT, RIGHT, OUTER, INNER, LEFT OUTER or RIGHT OUTER
+         *
          * @return DBCommandClass
+         * @since  2.3
          */
         public function join($table, $cond, $type = '')
         {
@@ -275,7 +257,7 @@
                 }
             }
 
-            $join = $type . ' JOIN ' . $table . ' ON ' . $cond;
+            $join          = $type . ' JOIN ' . $table . ' ON ' . $cond;
             $this->aJoin[] = $join;
 
             return $this;
@@ -285,24 +267,12 @@
          * Set WHERE clause using OR operator
          *
          * @access public
-         * @since 2.3
-         * @param mixed $key
-         * @param mixed $value
-         * @return DBCommandClass
-         */
-        public function where($key, $value = null)
-        {
-            return $this->_where($key, $value);
-        }
-
-        /**
-         * Set WHERE clause using OR operator
          *
-         * @access public
-         * @since 2.3
          * @param mixed $key
          * @param mixed $value
+         *
          * @return DBCommandClass
+         * @since  2.3
          */
         public function orWhere($key, $value = null)
         {
@@ -313,11 +283,13 @@
          * Set WHERE clause
          *
          * @access private
-         * @since 2.3
-         * @param mixed $key
-         * @param mixed $value
+         *
+         * @param mixed  $key
+         * @param mixed  $value
          * @param string $type
+         *
          * @return DBCommandClass
+         * @since  2.3
          */
         public function _where($key, $value = null, $type = 'AND ')
         {
@@ -343,13 +315,85 @@
         }
 
         /**
+         * Check if the string has an operator
+         *
+         * @access private
+         *
+         * @param string $str
+         *
+         * @return bool
+         * @since  2.3
+         */
+        public function _hasOperator($str)
+        {
+            $str = trim($str);
+
+            if (!preg_match('/(\s|<|>|!|=|is null|is not null)/i', $str)) {
+                return false;
+            }
+
+            return true;
+        }
+
+        /**
+         * Add the apostrophe if it's an string; 0 or 1 if it's a number; NULL
+         *
+         * @access private
+         *
+         * @param string $str
+         *
+         * @return string
+         * @since  2.3
+         */
+        public function escape($str)
+        {
+            if (is_string($str)) {
+                $str = "'" . $this->escapeStr($str) . "'";
+            } elseif (is_bool($str)) {
+                $str = ($str === false) ? 0 : 1;
+            } elseif (null === $str) {
+                $str = 'NULL';
+            }
+
+            return $str;
+        }
+
+        /**
+         * Escape the string if it's necessary
+         *
+         * @access private
+         *
+         * @param string $str
+         * @param bool   $like
+         *
+         * @return string
+         * @since  2.3
+         */
+        public function escapeStr($str, $like = false)
+        {
+            if (is_object($this->connId)) {
+                $str = $this->connId->real_escape_string($str);
+            } else {
+                $str = addslashes($str);
+            }
+
+            if ($like) {
+                $str = str_replace(array('%', '_'), array('\\%', '\\_'), $str);
+            }
+
+            return $str;
+        }
+
+        /**
          * Set WHERE IN clause using AND operator
          *
          * @access public
-         * @since 2.3
+         *
          * @param mixed $key
          * @param mixed $values
+         *
          * @return DBCommandClass
+         * @since  2.3
          */
         public function whereIn($key = null, $values = null)
         {
@@ -357,57 +401,17 @@
         }
 
         /**
-         * Set WHERE IN clause using OR operator
-         *
-         * @access public
-         * @since 2.3
-         * @param mixed $key
-         * @param mixed $values
-         * @return DBCommandClass
-         */
-        public function orWhereIn($key = null, $values = null)
-        {
-            return $this->_whereIn($key, $values, false, 'OR ');
-        }
-
-        /**
-         * Set WHERE NOT IN clause using AND operator
-         *
-         * @access public
-         * @since 2.3
-         * @param mixed $key
-         * @param mixed $values
-         * @return DBCommandClass
-         */
-        public function whereNotIn($key = null, $values = null)
-        {
-            return $this->_whereIn($key, $values, true);
-        }
-
-        /**
-         * Set WHERE NOT IN clause using OR operator
-         *
-         * @access public
-         * @since 2.3
-         * @param mixed $key
-         * @param mixed $values
-         * @return DBCommandClass
-         */
-        public function orWhereNotIn($key = null, $values = null)
-        {
-            return $this->_whereIn($key, $values, true, 'OR ');
-        }
-
-        /**
          * Set WHERE IN clause
          *
          * @access private
-         * @since 2.3
-         * @param mixed $key
-         * @param mixed $values
-         * @param bool $not
+         *
+         * @param mixed  $key
+         * @param mixed  $values
+         * @param bool   $not
          * @param string $type
+         *
          * @return DBCommandClass
+         * @since  2.3
          */
         public function _whereIn($key = null, $values = null, $not = false, $type = 'AND ')
         {
@@ -421,13 +425,62 @@
                 $this->aWherein[] = $this->escape($value);
             }
 
-            $prefix  = (count($this->aWhere) > 0) ? $type : '';
+            $prefix = (count($this->aWhere) > 0) ? $type : '';
 
             $whereIn = $prefix . $key . $not . ' IN (' . implode(', ', $this->aWherein) . ') ';
 
             $this->aWhere[] = $whereIn;
             $this->aWherein = array();
+
             return $this;
+        }
+
+        /**
+         * Set WHERE IN clause using OR operator
+         *
+         * @access public
+         *
+         * @param mixed $key
+         * @param mixed $values
+         *
+         * @return DBCommandClass
+         * @since  2.3
+         */
+        public function orWhereIn($key = null, $values = null)
+        {
+            return $this->_whereIn($key, $values, false, 'OR ');
+        }
+
+        /**
+         * Set WHERE NOT IN clause using AND operator
+         *
+         * @access public
+         *
+         * @param mixed $key
+         * @param mixed $values
+         *
+         * @return DBCommandClass
+         * @since  2.3
+         */
+        public function whereNotIn($key = null, $values = null)
+        {
+            return $this->_whereIn($key, $values, true);
+        }
+
+        /**
+         * Set WHERE NOT IN clause using OR operator
+         *
+         * @access public
+         *
+         * @param mixed $key
+         * @param mixed $values
+         *
+         * @return DBCommandClass
+         * @since  2.3
+         */
+        public function orWhereNotIn($key = null, $values = null)
+        {
+            return $this->_whereIn($key, $values, true, 'OR ');
         }
 
         /**
@@ -435,7 +488,7 @@
          *
          * @access public
          *
-         * @param   $field
+         * @param        $field
          * @param string $match
          * @param string $side
          *
@@ -447,63 +500,18 @@
         }
 
         /**
-         * Set NOT LIKE clause using AND operator
-         *
-         * @access public
-         * @since 2.3
-         * @param string $field
-         * @param string $match
-         * @param string $side
-         * @return DBCommandClass
-         */
-        public function notLike($field, $match = '', $side = 'both')
-        {
-            return $this->_like($field, $match, 'AND ', $side, 'NOT');
-        }
-
-        /**
-         * Set LIKE clause using OR operator
-         *
-         * @access public
-         * @since  2.3
-         *
-         * @param string $field
-         * @param string $match
-         * @param string $side
-         *
-         * @return string
-         */
-        public function orLike($field, $match = '', $side = 'both')
-        {
-            return $this->_like($field, $match, 'OR ', $side);
-        }
-
-        /**
-         * Set NOT LIKE clause using OR operator
-         *
-         * @access public
-         * @since 2.3
-         * @param string $field
-         * @param string $match
-         * @param string $side
-         * @return DBCommandClass
-         */
-        public function orNotLike($field, $match = '', $side = 'both')
-        {
-            return $this->_like($field, $match, 'OR ', $side, 'NOT');
-        }
-
-        /**
          * Set LIKE clause
          *
          * @access private
-         * @since 2.3
+         *
          * @param string $field
          * @param string $match
          * @param string $type Types: AND, OR
          * @param string $side Options: before, after, both
-         * @param string $not Two possibilities: blank or NOT
+         * @param string $not  Two possibilities: blank or NOT
+         *
          * @return DBCommandClass
+         * @since  2.3
          */
         public function _like($field, $match = '', $type = 'AND ', $side = 'both', $not = '')
         {
@@ -518,12 +526,15 @@
                 $v      = $this->escapeStr($v, true);
 
                 switch ($side) {
-                    case 'before':  $likeStatement = "$prefix $k $not LIKE '%$v'";
-                    break;
-                    case 'after':   $likeStatement = "$prefix $k $not LIKE '$v%'";
-                    break;
-                    default:        $likeStatement = "$prefix $k $not LIKE '%$v%'";
-                    break;
+                    case 'before':
+                        $likeStatement = "$prefix $k $not LIKE '%$v'";
+                        break;
+                    case 'after':
+                        $likeStatement = "$prefix $k $not LIKE '$v%'";
+                        break;
+                    default:
+                        $likeStatement = "$prefix $k $not LIKE '%$v%'";
+                        break;
                 }
 
                 $this->aLike[] = $likeStatement;
@@ -533,12 +544,66 @@
         }
 
         /**
+         * Set NOT LIKE clause using AND operator
+         *
+         * @access public
+         *
+         * @param string $field
+         * @param string $match
+         * @param string $side
+         *
+         * @return DBCommandClass
+         * @since  2.3
+         */
+        public function notLike($field, $match = '', $side = 'both')
+        {
+            return $this->_like($field, $match, 'AND ', $side, 'NOT');
+        }
+
+        /**
+         * Set LIKE clause using OR operator
+         *
+         * @access public
+         *
+         * @param string $field
+         * @param string $match
+         * @param string $side
+         *
+         * @return string
+         * @since  2.3
+         *
+         */
+        public function orLike($field, $match = '', $side = 'both')
+        {
+            return $this->_like($field, $match, 'OR ', $side);
+        }
+
+        /**
+         * Set NOT LIKE clause using OR operator
+         *
+         * @access public
+         *
+         * @param string $field
+         * @param string $match
+         * @param string $side
+         *
+         * @return DBCommandClass
+         * @since  2.3
+         */
+        public function orNotLike($field, $match = '', $side = 'both')
+        {
+            return $this->_like($field, $match, 'OR ', $side, 'NOT');
+        }
+
+        /**
          * Fields for GROUP BY clause
          *
          * @access public
-         * @since 2.3
+         *
          * @param mixed $by
+         *
          * @return DBCommandClass
+         * @since  2.3
          */
         public function groupBy($by)
         {
@@ -559,10 +624,11 @@
 
         /**
          *
-         * @param   $key
+         * @param        $key
          * @param string $value
+         *
          * @return void
-*/
+         */
         public function having($key, $value = '')
         {
             return $this->_having($key, $value);
@@ -572,20 +638,8 @@
          *
          * @param        $key
          * @param string $value
-         *
-         * @return void
-         */
-        public function orHaving($key, $value = '')
-        {
-            return $this->_having($key, $value, 'OR ');
-        }
-
-        /**
-         *
-         * @param   $key
-         * @param string $value
          * @param string $type $type
-*/
+         */
         public function _having($key, $value = '', $type = 'AND ')
         {
             if (!is_array($key)) {
@@ -606,15 +660,28 @@
         }
 
         /**
+         *
+         * @param        $key
+         * @param string $value
+         *
+         * @return void
+         */
+        public function orHaving($key, $value = '')
+        {
+            return $this->_having($key, $value, 'OR ');
+        }
+
+        /**
          * Set ORDER BY clause
          *
          * @access public
-         * @since  2.3
          *
          * @param string $orderby
          * @param string $direction Accepted directions: random, asc, desc
          *
          * @return \DBCommandClass
+         * @since  2.3
+         *
          */
         public function orderBy($orderby, $direction = '')
         {
@@ -625,30 +692,6 @@
             }
 
             $this->aOrderby[] = $orderby . $direction;
-            return $this;
-        }
-
-        /**
-         * Set LIMIT clause
-         *
-         * @access public
-         * @since  2.3
-         * @param int    $value
-         * @param string $offset
-         * @return DBCommandClass
-*/
-        public function limit($value, $offset = '')
-        {
-            if (is_numeric($value)) {
-                $this->aLimit = (int) $value;
-            }
-
-            if ($offset != '') {
-                $this->aOffset = 0;
-                if (is_numeric($offset)) {
-                    $this->aOffset = (int) $offset;
-                }
-            }
 
             return $this;
         }
@@ -657,15 +700,17 @@
          * Set the offset in the LIMIT clause
          *
          * @access public
-         * @since 2.3
+         *
          * @param int $offset
+         *
          * @return DBCommandClass
+         * @since  2.3
          */
         public function offset($offset)
         {
             $this->aOffset = 0;
             if (is_numeric($offset)) {
-                $this->aOffset = (int) $offset;
+                $this->aOffset = (int)$offset;
             }
 
             return $this;
@@ -675,10 +720,12 @@
          * Create the INSERT sql and perform the query
          *
          * @access public
-         * @since 2.3
+         *
          * @param mixed $table
          * @param mixed $set
+         *
          * @return boolean
+         * @since  2.3
          */
         public function insert($table = '', $set = null)
         {
@@ -700,240 +747,102 @@
 
             $sql = $this->_insert($table, array_keys($this->aSet), array_values($this->aSet));
             $this->_resetWrite();
+
             return $this->query($sql);
+        }
+
+        /**
+         * Set aSet array
+         *
+         * @access public
+         *
+         * @param mixed $key
+         * @param mixed $value
+         * @param bool  $escape
+         *
+         * @return DBCommandClass
+         * @since  2.3
+         */
+        public function set($key, $value = '', $escape = true)
+        {
+            if (!is_array($key)) {
+                $key = array($key => $value);
+            }
+
+            foreach ($key as $k => $v) {
+                if ($escape) {
+                    $this->aSet[$k] = $this->escape($v);
+                } else {
+                    $this->aSet[$k] = $v;
+                }
+            }
+
+            return $this;
         }
 
         /**
          * Create the INSERT sql string
          *
          * @access private
-         * @since 2.3
+         *
          * @param string $table
-         * @param array $keys
-         * @param array $values
+         * @param array  $keys
+         * @param array  $values
+         *
          * @return string
+         * @since  2.3
          */
         public function _insert($table, $keys, $values)
         {
-            return 'INSERT INTO ' . $table . ' (' . implode(', ', $keys). ') VALUES (' . implode(', ', $values) . ')';
+            return 'INSERT INTO ' . $table . ' (' . implode(', ', $keys) . ') VALUES (' . implode(', ', $values) . ')';
         }
 
         /**
-         * Create the REPLACE INTO sql and perform the query
-         *
-         * @access public
-         * @since 2.3
-         * @param mixed $table
-         * @param mixed $set
-         * @return boolean
-         */
-        public function replace($table = '', $set = null)
-        {
-            if (null !== $set) {
-                $this->set($set);
-            }
-
-            if (count($this->aSet) == 0) {
-                return false;
-            }
-
-            if ($table == '') {
-                if (!isset($this->aFrom[0])) {
-                    return false;
-                }
-
-                $table = $this->aFrom[0];
-            }
-
-            $sql = $this->_replace($table, array_keys($this->aSet), array_values($this->aSet));
-            $this->_resetWrite();
-            return $this->query($sql);
-        }
-
-        /**
-         * Create the REPLACE INTO sql string
+         * Reset variables used in write sql: aSet, aFrom, aWhere, aLike, aOrderby, aLimit, aOrder
          *
          * @access private
          * @since  2.3
-         * @param string $table
-         * @param        $keys
-         * @param array  $values
-         * @return string
-*/
-        public function _replace($table, $keys, $values)
-        {
-            return 'REPLACE INTO ' . $table . ' (' . implode(', ', $keys) . ') VALUES (' . implode(', ', $values) . ')';
-        }
-
-        /**
-         * Create the UPDATE sql and perform the query
-         *
-         * @access public
-         * @since 2.3
-         * @param mixed $table
-         * @param mixed $set
-         * @param mixed $where
-         * @return mixed
          */
-        public function update($table = '', $set = null, $where = null)
+        public function _resetWrite()
         {
-            if (null !== $set) {
-                $this->set($set);
-            }
+            $aReset = array(
+                'aSet'     => array(),
+                'aFrom'    => array(),
+                'aWhere'   => array(),
+                'aLike'    => array(),
+                'aOrderby' => array(),
+                'aLimit'   => false,
+                'aOrder'   => false
+            );
 
-            if (count($this->aSet) == 0) {
-                return false;
-            }
-
-            if ($table == '') {
-                if (!isset($this->aFrom[0])) {
-                    return false;
-                }
-
-                $table = $this->aFrom[0];
-            }
-
-            if ($where != null) {
-                $this->where($where);
-            }
-
-            $sql = $this->_update($table, $this->aSet, $this->aWhere);
-
-            $this->_resetWrite();
-            $result = $this->query($sql);
-
-            if ($result == false) {
-                return false;
-            }
-
-            return $this->affectedRows();
+            $this->_resetRun($aReset);
         }
 
         /**
-         * Create the UPDATE sql string
+         * Initializate $aReset variables
          *
          * @access private
-         * @since 2.3
-         * @param string $table
-         * @param array $values
-         * @param array $where
-         * @return string
-         */
-        public function _update($table, $values, $where)
-        {
-            foreach ($values as $k => $v) {
-                $valstr[] = $k . ' = ' . $v;
-            }
-
-            $sql = 'UPDATE ' . $table . ' SET ' . implode(', ', $valstr);
-
-            $sql .= ($where != '' && count($where) > 0) ? ' WHERE ' . implode(' ', $where) : '';
-
-            return $sql;
-        }
-
-        /**
-         * Create the DELETE sql and perform the query
          *
-         * @access public
-         * @since 2.3
-         * @param mixed $table
-         * @param mixed $where
-         * @return mixed
-         */
-        public function delete($table = '', $where = '')
-        {
-            if ($table == '') {
-                if (!isset($this->aFrom[0])) {
-                    return false;
-                }
-
-                $table = $this->aFrom[0];
-            }
-
-            if ($where != null) {
-                $this->where($where);
-            }
-
-            if (count($this->aWhere) == 0 && count($this->aWherein) == 0 && count($this->aLike) == 0) {
-                return false;
-            }
-
-            $sql = $this->_delete($table, $this->aWhere, $this->aLike);
-
-            $this->_resetWrite();
-            $result = $this->query($sql);
-
-            if ($result == false) {
-                return false;
-            }
-
-            return $this->affectedRows();
-        }
-
-        /**
-         * Create the DELETE sql string
+         * @param array $aReset
          *
-         * @access private
-         * @since 2.3
-         * @param string $table
-         * @param array $where
-         * @param array $like
-         * @return string
+         * @since  2.3
          */
-        public function _delete($table, $where, $like)
+        public function _resetRun($aReset)
         {
-            $conditions = '';
-
-            if (count($where) > 0 || count($like) > 0) {
-                $conditions  = "\nWHERE ";
-                $conditions .= implode("\n", $where);
-
-                if (count($where) > 0 && count($like) > 0) {
-                    $conditions .= ' AND ';
-                }
-                $conditions .= implode("\n", $like);
+            foreach ($aReset as $item => $defaultValue) {
+                $this->$item = $defaultValue;
             }
-
-            return 'DELETE FROM ' . $table . $conditions;
-        }
-
-        /**
-         * Compile the select sql string and perform the query. Quick method for
-         * getting the rows of one table
-         *
-         * @access public
-         * @since 2.3
-         * @param mixed $table
-         * @param mixed $limit
-         * @param mixed $offset
-         * @return mixed
-         */
-        public function get($table = '', $limit = null, $offset = null)
-        {
-            if ($table != '') {
-                $this->from($table);
-            }
-
-            if (null !== $limit) {
-                $this->limit($limit, $offset);
-            }
-
-            $sql = $this->_getSelect();
-
-            $result = $this->query($sql);
-            $this->_resetSelect();
-
-            return $result;
         }
 
         /**
          * Performs a query on the database
          *
          * @access public
-         * @since 2.3
+         *
          * @param string $sql
+         *
          * @return mixed
+         * @since  2.3
          */
         public function query($sql)
         {
@@ -946,7 +855,7 @@
             }
 
             $this->queries[] = $sql;
-            $timeStart = microtime(true);
+            $timeStart       = microtime(true);
 
             $this->resultId = $this->_execute($sql);
 
@@ -955,10 +864,11 @@
                 if (OSC_DEBUG_DB) {
                     $this->log->addMessage($sql, 0, $this->errorLevel, $this->errorDesc);
                 }
+
                 return false;
             }
 
-            $timeEnd = microtime(true);
+            $timeEnd            = microtime(true);
             $this->queryTimes[] = $timeEnd - $timeStart;
 
             $this->queryCount++;
@@ -977,6 +887,25 @@
             $rs->numRows  = $rs->numRows();
 
             return $rs;
+        }
+
+        /**
+         * Check if the sql is a select
+         *
+         * @access private
+         *
+         * @param string $sql
+         *
+         * @return bool
+         * @since  2.3
+         */
+        public function isSelectType($sql)
+        {
+            if (!preg_match('/^\s*"?(SELECT)\s+/i', $sql)) {
+                return false;
+            }
+
+            return true;
         }
 
         /**
@@ -1015,9 +944,11 @@
          * Performs a query on the database
          *
          * @access private
-         * @since 2.3
+         *
          * @param string $sql
+         *
          * @return mixed
+         * @since  2.3
          */
         public function _execute($sql)
         {
@@ -1025,494 +956,333 @@
         }
 
         /**
-         * Execute queries sql. We replace TABLE_PREFIX for the real prefix: DB_TABLE_PREFIX
-         * The executions is stopped if some query throws an error.
+         * Set last error code and descriptionfor the most recent mysqli function call
          *
-         * @access public
-         * @since 2.3
-         * @param string $sql
-         * @return boolean true if it's succesful, false if not
+         * @access private
+         * @since  2.3
          */
-        public function importSQL($sql)
+        public function errorReport()
         {
-            $sql     = str_replace('/*TABLE_PREFIX*/', DB_TABLE_PREFIX, $sql);
-            $sql     = str_replace('/*OSCLASS_VERSION*/', strtr(OSCLASS_VERSION, array( '.' => '' )), $sql);
-            $sql     = preg_replace('#/\*(?:[^*]*(?:\*(?!/))*)*\*/#', '', $sql);
-            $queries = $this->splitSQL($sql, ';');
+            $this->errorLevel = $this->connId->errno;
+            $this->errorDesc  = $this->connId->error;
+        }
 
-            if (count($queries) == 0) {
+        /**
+         * Check if the sql is a write such as INSERT, UPDATE, UPDATE...
+         *
+         * @access private
+         *
+         * @param string $sql
+         *
+         * @return bool
+         * @since  2.3
+         */
+        public function isWriteType($sql)
+        {
+            if (!preg_match('/^\s*"?(SET|INSERT|UPDATE|DELETE|REPLACE|CREATE|DROP|TRUNCATE|LOAD DATA|COPY|ALTER|GRANT|REVOKE|LOCK|UNLOCK|RENAME)\s+/i', $sql)) {
                 return false;
-            }
-
-            foreach ($queries as $q) {
-                $q = trim($q);
-                if (! empty($q) && ! $this->query($q)) {
-                    return false;
-                }
             }
 
             return true;
         }
 
         /**
-         * Split sql queries, allowing DELIMITER blocks. We clean DELIMITER statements.
-         *
-         * @param string $sql
-         * @param string $explodeChars
-         * @return array
-         */
-        private function splitSQL($sql, $explodeChars)
-        {
-            if (preg_match('|^(.*)DELIMITER (\S+)\s(.*)$|isU', $sql, $matches)) {
-                $queries = explode($explodeChars, $matches[1]);
-                $recursive = $this->splitSQL($matches[3], $matches[2]);
-
-                return array_merge($queries, $recursive);
-            }
-
-            return explode($explodeChars, $sql);
-        }
-
-        /**
-         * Prepare and separe the queries, and save into data or struct queries
-         *
-         * @param array $queries
-         * @param array $data_queries
-         * @param array $struct_queries
-         */
-        private function prepareAndSepareQueries($queries, &$data_queries, &$struct_queries)
-        {
-            foreach ($queries as $query) {
-                if (preg_match('|CREATE DATABASE ([^ ]*)|', $query, $match)) {
-                    array_unshift($struct_queries, $query);
-                } elseif (preg_match('|CREATE TABLE ([^ ]*)|', $query, $match)) {
-                    $struct_queries[ strtolower(trim($match[ 1 ], '`')) ] = $query;
-                } elseif (preg_match('|INSERT INTO ([^ ]*)|', $query, $match)) {
-                    $data_queries[] = $query;
-                } elseif (preg_match('|UPDATE ([^ ]*)|', $query, $match)) {
-                    $data_queries[] = $query;
-                }
-            }
-        }
-
-        /**
-         * Check if $table exist into array $struct_queries
-         *
-         * @param string $table
-         * @param array  $struct_queries
-         *
-         * @return bool
-         */
-        private function existTableIntoStruct($table, $struct_queries)
-        {
-            return array_key_exists(strtolower($table), $struct_queries);
-        }
-
-        /**
-         * Get fields from struct_queries (struct.sql)
-         *
-         * @param string $table
-         * @param array  $struct_queries
-         *
-         * @return array|bool
-         */
-        private function getTableFieldsFromStruct($table, &$struct_queries)
-        {
-            if (preg_match('|\((.*)\)|ms', $struct_queries[strtolower($table)], $match)) {
-                $fields = explode("\n", trim($match[1]));
-                foreach ($fields as $key => $value) {
-                    $fields[$key] = trim(preg_replace('/,$/', '', $value));
-                }
-            } else {
-                $fields = false;
-            }
-            return $fields;
-        }
-
-        /**
-         * Classify fields, inside arrays $normal_fields, $indexes, $constrains (foreign key's)
-         *
-         * @param $fields
-         * @param $normal_fields
-         * @param $indexes
-         * @param $constrains
-         * @param $lastTable
-         */
-        private function classifyFieldsSql($fields, &$normal_fields, &$indexes, &$constrains, &$lastTable)
-        {
-            foreach ($fields as $field) {
-                if (preg_match('|([^ ]+)|', trim($field), $field_name)) {
-                    switch (strtolower($field_name[1])) {
-                        case '':
-                        case 'on':
-                            if ($lastTable) {
-                                $constrains[$lastTable] = $constrains[$lastTable].' '.trim($field);
-                            }
-                            break;
-                        case 'foreign':
-                            if (preg_match("|FOREIGN KEY\s+(.*)\s+REFERENCES\s+(.*)|mi", $field, $match)) {
-                                $_table = $match[1];
-                                $refere = $match[2];
-                                $refere = str_replace(',', '', $refere);
-                                $lastTable = $_table;
-                                $constrains[$_table] = trim($refere);
-                            }
-                            break;
-                        case 'primary':
-                        case 'index':
-                        case 'fulltext':
-                        case 'unique':
-                        case 'key':
-                            $added = false;
-                            if (preg_match("|PRIMARY KEY\s+\((.*)\)|mi", $field, $match)) {
-                                $_field = strtolower($match[1]);
-                                if (isset($normal_fields[$_field])) {
-                                    $normal_fields[ $_field ] .= ' PRIMARY KEY';
-                                    $added                    = true;
-                                }
-                            }
-
-                            if (!$added) {
-                                $indexes[] = trim($field, ", \n");
-                            }
-                            break;
-                        default:
-                            $normal_fields[strtolower($field_name[1])] = trim($field, ", \n");
-                            break;
-                    }
-                }
-            }
-        }
-
-        /**
-         * Build alter sql, ADD COLUMN, CHANGE COLUMN, ALTER COLUMN
-         *
-         * @param array  $tbl_fields, contain all fields inside database
-         * @param string $table
-         * @param        $normal_fields
-         * @param        $struct_queries
-         */
-        private function createAlterTable($tbl_fields, $table, &$normal_fields, &$struct_queries)
-        {
-            foreach ($tbl_fields as $tbl_field) {
-                //Every field should we on the definition, so else SHOULD never happen, unless a very aggressive plugin modify our tables
-                if (array_key_exists(strtolower($tbl_field['Field']), $normal_fields)) {
-                    // Take the of the field
-                    if (preg_match('|' . $tbl_field['Field'] . " (ENUM\s*\(([^\)]*)\))|i", $normal_fields[strtolower($tbl_field['Field'])], $match) || preg_match('|' . $tbl_field['Field'] . ' ([^ ]*( unsigned)?)|i', $normal_fields[strtolower($tbl_field['Field'])], $match)) {
-                        $field_type = $match[1];
-                        // Are they the same?
-                        if (strtolower($field_type)!=strtolower($tbl_field['Type']) && str_replace(' ', '', strtolower($field_type))!=str_replace(' ', '', strtolower($tbl_field['Type']))) {
-                            $struct_queries[] = 'ALTER TABLE ' . $table . ' CHANGE COLUMN ' . $tbl_field['Field'] . ' ' . $normal_fields[strtolower($tbl_field['Field'])];
-                        }
-                    }
-                    error_log(' --- ' . $normal_fields[strtolower($tbl_field['Field'])]);
-
-                    // Have we changed the default value? [with quotes]
-                    if (preg_match("| DEFAULT\s+'(.*)'|i", $normal_fields[strtolower($tbl_field['Field'])], $default_match)) {
-                        // alter column only if default value has been changed
-                        if ($tbl_field['Default'] != $default_match[1]) {
-                            $struct_queries[] = 'ALTER TABLE ' . $table . ' ALTER COLUMN ' . $tbl_field['Field'] . " SET DEFAULT '" . $default_match[1] . "'";
-                        }
-                        // Have we changed the default value? [without quotes]
-                    } elseif (preg_match("| DEFAULT\s+(.*)|i", $normal_fields[strtolower($tbl_field['Field'])], $default_match)) {
-                        if (isset($tbl_field['Default'])) {
-                            // alter column only if default value has been changed
-                            if ($tbl_field['Default'] != $default_match[1]) {
-                                $struct_queries[] = 'ALTER TABLE ' . $table . ' ALTER COLUMN ' . $tbl_field['Field'] . ' SET DEFAULT ' . $default_match[1];
-                            }
-                        } else {
-                            // check NULL default values
-                            // if new default value is diferent, alter column ...
-                            if ($default_match[1] !== 'NULL') {
-                                $struct_queries[] = 'ALTER TABLE ' . $table . ' ALTER COLUMN ' . $tbl_field['Field'] . ' SET DEFAULT ' . $default_match[1];
-                            }
-                        }
-                    }
-                    // Remove it from the list, so it will not be added
-                    unset($normal_fields[strtolower($tbl_field['Field'])]);
-                }
-            }
-            // For the rest of normal fields (they are not in the table) we add them.
-            foreach ($normal_fields as $k => $v) {
-                $struct_queries[] = 'ALTER TABLE ' . $table . ' ADD COLUMN ' . $v;
-            }
-        }
-
-        /**
-         * With all the indexes from struct.sql, remove indexes which actually
-         * exist into database
-         *
-         * @param $tbl_indexes
-         * @param $indexes
-         * @param      $table
-         * @param      $struct_queries
-*/
-        private function createNewIndex($tbl_indexes, &$indexes, $table, &$struct_queries)
-        {
-            if ($tbl_indexes) {
-                unset($indexes_array);
-                foreach ($tbl_indexes as $tbl_index) {
-                    $indexes_array[$tbl_index['Key_name']]['columns'][]    = array('fieldname' => $tbl_index['Column_name'], 'subpart' => $tbl_index['Sub_part']);
-                    $indexes_array[ $tbl_index[ 'Key_name' ] ][ 'unique' ] = $tbl_index[ 'Non_unique' ] == 0;
-                    $indexes_array[$tbl_index['Key_name']]['index_type']   = $tbl_index['Index_type'];
-                    $indexes_array[$tbl_index['Key_name']]['Key_name']     = $tbl_index['Key_name'];
-                }
-
-                foreach ($indexes_array as $k => $v) {
-
-                    // if PRIMARY KEY already exist
-                    $exist_primary = false;
-                    if ($k === 'PRIMARY') {
-                        if (isset($indexes_array['PRIMARY'])) {
-                            if (count($indexes_array['PRIMARY']['columns'])>0) {
-                                $exist_primary = true;
-                            }
-                        }
-                    }
-
-                    $string = '';
-                    if ($k === 'PRIMARY') {
-                        $string .= 'PRIMARY KEY ';
-                    } elseif ($v['unique']) {
-                        $string .= 'UNIQUE KEY ';
-                    } elseif ($v['index_type'] === 'FULLTEXT') {  // FULLTEXT INDEX MUST HAVE KEY_NAME
-                        $string .= 'FULLTEXT '.$k.' ';
-                    } else {
-                        if ((count($v['columns']) == 1 && $v['columns'][0]['fieldname'] !=  $k) || (preg_match('/^idx/', $k, $coincidencias) > 0)) {
-                            $string .= 'INDEX '.$k.' ';
-                        } else {
-                            $string .= 'INDEX ' . $v['Key_name'] . ' ';
-                        }
-                    }
-
-                    $columns = '';
-                    // For each column in the index
-                    foreach ($v['columns'] as $column) {
-                        if ($columns != '') {
-                            $columns .= ', ';
-                        }
-                        // Add the field to the column list string
-                        $columns .= '' . $column['fieldname'] . '';
-                        if ($column['subpart'] != '') {
-                            $columns .= '('.$column['subpart'].')';
-                        }
-                    }
-
-                    // Add the column list to the index create string
-                    $string .= '('.$columns.')';
-                    $var_index = array_search($string, $indexes);
-
-                    if (!($var_index===false)) {
-                        unset($indexes[$var_index]);
-                    } else {
-                        $var_index = array_search(str_replace(', ', ',', $string), $indexes);
-                        if (!($var_index===false)) {
-                            unset($indexes[$var_index]);
-                        }
-                    }
-                }
-            }
-
-            // alter table
-            foreach ($indexes as $v) {
-                if (preg_match('/primary key/i', $v, $coincidencias) > 0) {
-                    $struct_queries[] = 'ALTER TABLE ' . $table . ' DROP PRIMARY KEY, ADD ' . $v;
-                } else {
-                    $struct_queries[] = 'ALTER TABLE ' . $table . ' ADD ' . $v;
-                }
-            }
-        }
-
-        /**
-         * Create alter table if foreign key don't exist into database structure
-         *
-         * @param array $tbl_constraint
-         * @param string $table
-         * @param array $struct_queries
-         * @param array $constrains
-         */
-        private function createForeignKey($tbl_constraint, $table, &$struct_queries, $constrains)
-        {
-            $constrainsDB  = $foreignRepited =  array();
-            if (preg_match_all("| CONSTRAINT\s+(.*)\s+FOREIGN KEY\s+(.*)\s+REFERENCES\s+(.*),?\n|i", $tbl_constraint['Create Table'], $default_match)) {
-                $aKeyName = $default_match[1];
-                $aTables = $default_match[2];
-                $aRefere = $default_match[3];
-                foreach ($aTables as $index => $value) {
-                    $_refere = str_replace('`', '', $aRefere[$index]);
-                    $_keyName = str_replace('`', '', $aKeyName[$index]);
-                    $_refere = str_replace(',', '', $_refere);
-                    $_value  = str_replace('`', '', $value);
-                    if (in_array($_refere, $constrainsDB)) {
-                        $foreignRepited[] = $_keyName;
-                    }
-                    $constrainsDB[$_value] = $_refere;
-                }
-            }
-
-            $delete_foreign = array();
-            if (count($foreignRepited) > 0) {
-                foreach ($foreignRepited as $_key) {
-                    echo 'ALTER TABLE ' . $table . ' DROP FOREIGN KEY ' . $_key . '<br>';
-                    $struct_queries[] = 'ALTER TABLE ' . $table . ' DROP FOREIGN KEY ' . $_key;
-                }
-            }
-
-            $keys = array_keys($constrainsDB);
-            foreach ($constrains as $k => $v) {
-                if (in_array($k, $keys) && $constrainsDB[$k] == $v) {
-                    // nothing to do
-                } else {
-                    // alter table
-                    $index = 'FOREIGN KEY '.$k.' REFERENCES '.$v;
-
-                    $struct_queries[] = 'ALTER TABLE ' . $table . ' ADD ' . $index;
-                }
-            }
-        }
-
-        /**
-         * Given some queries, it will check against the installed database if the information is the same
-         *
-         * _______pseudocode_______
-         *
-         *   _separeQueries()
-         *   showTables_DataBase()
-         *   foreach(table)
-         *     if(table exist into struct.sql)
-         *       _getTableFields()
-         *       _createAlterTables() (save info into array)
-         *       _createNewIndex()    (save info into array)
-         *       _createForeignKeys() (save info into array)
-         *     endif
-         *   enforeach
-         *
-         *   foreach(query created before)
-         *     exec(query)
-         *   endforeach
-         *
-         * ______endpseudocode______
-         *
-         * @param mixed array or string with the SQL queries.
-         * @return array true on success, false on fail
-*/
-        public function updateDB($queries = '')
-        {
-            error_log(' ----- START updateDB ----- ');
-            if (!is_array($queries)) {
-                $queries = $this->splitSQL($queries, ';');
-            }
-
-            // Prepare and separate the queries
-            $struct_queries = array();
-            $data_queries = array();
-            $this->prepareAndSepareQueries($queries, $data_queries, $struct_queries);
-
-            // hack
-            $this->query('SET FOREIGN_KEY_CHECKS = 0');
-
-            // Get tables from DB (already installed)
-            $result = $this->query('SHOW TABLES');
-            $tables = $result->result();
-            foreach ($tables as $v) {
-                $table = current($v);
-                if ($this->existTableIntoStruct($table, $struct_queries)) {
-                    $lastTable = null;
-                    $normal_fields = $indexes = $constrains = array();
-                    $fields = $this->getTableFieldsFromStruct($table, $struct_queries);
-                    if ($fields) {
-                        // classify fields (into sql file)
-                        $this->classifyFieldsSql($fields, $normal_fields, $indexes, $constrains, $lastTable);
-                        // Take fields from the DB (now into database)
-                        $result = $this->query('DESCRIBE '.$table);
-                        $tbl_fields = $result->result();
-                        // compare and create alter statments
-                        $this->createAlterTable($tbl_fields, $table, $normal_fields, $struct_queries);
-                        // Go for the index part
-                        $result = $this->query('SHOW INDEX FROM ' . $table);
-                        $tbl_indexes = $result->result();
-
-
-                        // compare table index and struct.sql index for the same table, and only add the new ones
-                        $this->createNewIndex($tbl_indexes, $indexes, $table, $struct_queries);
-
-
-                        // show create table TABLE_NAME constrains
-                        $result = $this->query('SHOW CREATE TABLE ' . $table);
-                        $tbl_constraint = $result->row();
-                        // create foreign keys
-                        $this->createForeignKey($tbl_constraint, $table, $struct_queries, $constrains);
-                        // No need to create the table, so we delete it SQL
-                        unset($struct_queries[strtolower($table)]);
-//                        error_log(' --- struct_queries ---');
-                        //foreach($struct_queries as $q) {
-//                            error_log(' --- ' . $q );
-                        //}
-                    }
-                }
-            }
-
-
-            error_log(' --- last_struct_queries ---');
-            foreach ($struct_queries as $q) {
-                error_log(' --- ' . $q);
-            }
-            // HACK: AUTO_INCREMENT fields needs to be also a PRIMARY KEY
-            foreach ($struct_queries as $k => $v) {
-                if (stripos($v, 'auto_increment') !== false && stripos($v, 'primary key') === false) {
-                    $struct_queries[$k] = $v . ' PRIMARY KEY';
-                }
-            }
-
-            $queries = array_merge($struct_queries, $data_queries);
-
-            $ok = true;
-            $error_queries = array();
-            foreach ($queries as $query) {
-                // hack for 2.4
-                if (stripos($query, 'country ADD PRIMARY KEY')) {
-                    continue;
-                }
-                $res = $this->query($query);
-                if (!$res) {
-                    $ok = false;
-                    $error_queries[] = $query;
-                }
-            }
-            if (!empty($error_queries)) {
-                error_log(' --- error_queries ---');
-                foreach ($struct_queries as $q) {
-                    error_log(' --- ' . $q);
-                }
-            }
-            // hack
-            $this->query('SET FOREIGN_KEY_CHECKS = 1');
-            error_log(' ----- END updateDB ----- ');
-
-            return array($ok, $queries, $error_queries);
-        }
-
-        /**
-         * Set aSet array
+         * Create the REPLACE INTO sql and perform the query
          *
          * @access public
+         *
+         * @param mixed $table
+         * @param mixed $set
+         *
+         * @return boolean
          * @since  2.3
-         * @param mixed $key
-         * @param mixed $value
-         * @param bool  $escape
-         * @return DBCommandClass
-*/
-        public function set($key, $value = '', $escape = true)
+         */
+        public function replace($table = '', $set = null)
         {
-            if (!is_array($key)) {
-                $key = array($key => $value);
+            if (null !== $set) {
+                $this->set($set);
             }
 
-            foreach ($key as $k => $v) {
-                if ($escape) {
-                    $this->aSet[$k] = $this->escape($v);
+            if (count($this->aSet) == 0) {
+                return false;
+            }
+
+            if ($table == '') {
+                if (!isset($this->aFrom[0])) {
+                    return false;
+                }
+
+                $table = $this->aFrom[0];
+            }
+
+            $sql = $this->_replace($table, array_keys($this->aSet), array_values($this->aSet));
+            $this->_resetWrite();
+
+            return $this->query($sql);
+        }
+
+        /**
+         * Create the REPLACE INTO sql string
+         *
+         * @access private
+         *
+         * @param string $table
+         * @param        $keys
+         * @param array  $values
+         *
+         * @return string
+         * @since  2.3
+         */
+        public function _replace($table, $keys, $values)
+        {
+            return 'REPLACE INTO ' . $table . ' (' . implode(', ', $keys) . ') VALUES (' . implode(', ', $values) . ')';
+        }
+
+        /**
+         * Create the UPDATE sql and perform the query
+         *
+         * @access public
+         *
+         * @param mixed $table
+         * @param mixed $set
+         * @param mixed $where
+         *
+         * @return mixed
+         * @since  2.3
+         */
+        public function update($table = '', $set = null, $where = null)
+        {
+            if (null !== $set) {
+                $this->set($set);
+            }
+
+            if (count($this->aSet) == 0) {
+                return false;
+            }
+
+            if ($table == '') {
+                if (!isset($this->aFrom[0])) {
+                    return false;
+                }
+
+                $table = $this->aFrom[0];
+            }
+
+            if ($where != null) {
+                $this->where($where);
+            }
+
+            $sql = $this->_update($table, $this->aSet, $this->aWhere);
+
+            $this->_resetWrite();
+            $result = $this->query($sql);
+
+            if ($result == false) {
+                return false;
+            }
+
+            return $this->affectedRows();
+        }
+
+        /**
+         * Set WHERE clause using OR operator
+         *
+         * @access public
+         *
+         * @param mixed $key
+         * @param mixed $value
+         *
+         * @return DBCommandClass
+         * @since  2.3
+         */
+        public function where($key, $value = null)
+        {
+            return $this->_where($key, $value);
+        }
+
+        /**
+         * Create the UPDATE sql string
+         *
+         * @access private
+         *
+         * @param string $table
+         * @param array  $values
+         * @param array  $where
+         *
+         * @return string
+         * @since  2.3
+         */
+        public function _update($table, $values, $where)
+        {
+            foreach ($values as $k => $v) {
+                $valstr[] = $k . ' = ' . $v;
+            }
+
+            $sql = 'UPDATE ' . $table . ' SET ' . implode(', ', $valstr);
+
+            $sql .= ($where != '' && count($where) > 0) ? ' WHERE ' . implode(' ', $where) : '';
+
+            return $sql;
+        }
+
+        /**
+         * Gets the number of affected rows in a previous MySQL operation
+         *
+         * @access public
+         * @return int
+         * @since  2.3
+         */
+        public function affectedRows()
+        {
+            return $this->connId->affected_rows;
+        }
+
+        /**
+         * Create the DELETE sql and perform the query
+         *
+         * @access public
+         *
+         * @param mixed $table
+         * @param mixed $where
+         *
+         * @return mixed
+         * @since  2.3
+         */
+        public function delete($table = '', $where = '')
+        {
+            if ($table == '') {
+                if (!isset($this->aFrom[0])) {
+                    return false;
+                }
+
+                $table = $this->aFrom[0];
+            }
+
+            if ($where != null) {
+                $this->where($where);
+            }
+
+            if (count($this->aWhere) == 0 && count($this->aWherein) == 0 && count($this->aLike) == 0) {
+                return false;
+            }
+
+            $sql = $this->_delete($table, $this->aWhere, $this->aLike);
+
+            $this->_resetWrite();
+            $result = $this->query($sql);
+
+            if ($result == false) {
+                return false;
+            }
+
+            return $this->affectedRows();
+        }
+
+        /**
+         * Create the DELETE sql string
+         *
+         * @access private
+         *
+         * @param string $table
+         * @param array  $where
+         * @param array  $like
+         *
+         * @return string
+         * @since  2.3
+         */
+        public function _delete($table, $where, $like)
+        {
+            $conditions = '';
+
+            if (count($where) > 0 || count($like) > 0) {
+                $conditions = "\nWHERE ";
+                $conditions .= implode("\n", $where);
+
+                if (count($where) > 0 && count($like) > 0) {
+                    $conditions .= ' AND ';
+                }
+                $conditions .= implode("\n", $like);
+            }
+
+            return 'DELETE FROM ' . $table . $conditions;
+        }
+
+        /**
+         * Compile the select sql string and perform the query. Quick method for
+         * getting the rows of one table
+         *
+         * @access public
+         *
+         * @param mixed $table
+         * @param mixed $limit
+         * @param mixed $offset
+         *
+         * @return mixed
+         * @since  2.3
+         */
+        public function get($table = '', $limit = null, $offset = null)
+        {
+            if ($table != '') {
+                $this->from($table);
+            }
+
+            if (null !== $limit) {
+                $this->limit($limit, $offset);
+            }
+
+            $sql = $this->_getSelect();
+
+            $result = $this->query($sql);
+            $this->_resetSelect();
+
+            return $result;
+        }
+
+        /**
+         * Set FROM clause
+         *
+         * @param mixed $from It can be a string or array
+         *
+         * @return DBCommandClass
+         */
+        public function from($from)
+        {
+            if (!is_array($from)) {
+                if (strpos($from, ',') !== false) {
+                    $from = explode(',', $from);
                 } else {
-                    $this->aSet[$k] = $v;
+                    $from = array($from);
+                }
+            }
+
+            foreach ($from as $f) {
+                $this->aFrom[] = $f;
+            }
+
+            return $this;
+        }
+
+        /**
+         * Set LIMIT clause
+         *
+         * @access public
+         *
+         * @param int    $value
+         * @param string $offset
+         *
+         * @return DBCommandClass
+         * @since  2.3
+         */
+        public function limit($value, $offset = '')
+        {
+            if (is_numeric($value)) {
+                $this->aLimit = (int)$value;
+            }
+
+            if ($offset != '') {
+                $this->aOffset = 0;
+                if (is_numeric($offset)) {
+                    $this->aOffset = (int)$offset;
                 }
             }
 
@@ -1523,8 +1293,8 @@
          * Create SELECT sql statement
          *
          * @access private
-         * @since 2.3
          * @return string
+         * @since  2.3
          */
         public function _getSelect()
         {
@@ -1605,23 +1375,516 @@
         }
 
         /**
-         * Gets the number of affected rows in a previous MySQL operation
+         * Reset variables used in select sql: aSelect, aFrom, aJoin, aWhere, aLike, aGroupby, aHaving,
+         * aOrderby, aWherein, aLimit, aOffset, aOrder
+         *
+         * @access private
+         * @since  2.3
+         */
+        public function _resetSelect()
+        {
+            $aReset = array(
+                'aSelect'  => array(),
+                'aFrom'    => array(),
+                'aJoin'    => array(),
+                'aWhere'   => array(),
+                'aLike'    => array(),
+                'aGroupby' => array(),
+                'aHaving'  => array(),
+                'aOrderby' => array(),
+                'aWherein' => array(),
+                'aLimit'   => false,
+                'aOffset'  => false,
+                'aOrder'   => false
+            );
+
+            $this->_resetRun($aReset);
+        }
+
+        /**
+         * Execute queries sql. We replace TABLE_PREFIX for the real prefix: DB_TABLE_PREFIX
+         * The executions is stopped if some query throws an error.
          *
          * @access public
-         * @since 2.3
-         * @return int
+         *
+         * @param string $sql
+         *
+         * @return boolean true if it's succesful, false if not
+         * @since  2.3
          */
-        public function affectedRows()
+        public function importSQL($sql)
         {
-            return $this->connId->affected_rows;
+            $sql     = str_replace('/*TABLE_PREFIX*/', DB_TABLE_PREFIX, $sql);
+            $sql     = str_replace('/*OSCLASS_VERSION*/', strtr(OSCLASS_VERSION, array('.' => '')), $sql);
+            $sql     = preg_replace('#/\*(?:[^*]*(?:\*(?!/))*)*\*/#', '', $sql);
+            $queries = $this->splitSQL($sql, ';');
+
+            if (count($queries) == 0) {
+                return false;
+            }
+
+            foreach ($queries as $q) {
+                $q = trim($q);
+                if (!empty($q) && !$this->query($q)) {
+                    return false;
+                }
+            }
+
+            return true;
+        }
+
+        /**
+         * Split sql queries, allowing DELIMITER blocks. We clean DELIMITER statements.
+         *
+         * @param string $sql
+         * @param string $explodeChars
+         *
+         * @return array
+         */
+        private function splitSQL($sql, $explodeChars)
+        {
+            if (preg_match('|^(.*)DELIMITER (\S+)\s(.*)$|isU', $sql, $matches)) {
+                $queries   = explode($explodeChars, $matches[1]);
+                $recursive = $this->splitSQL($matches[3], $matches[2]);
+
+                return array_merge($queries, $recursive);
+            }
+
+            return explode($explodeChars, $sql);
+        }
+
+        /**
+         * Given some queries, it will check against the installed database if the information is the same
+         *
+         * _______pseudocode_______
+         *
+         *   _separeQueries()
+         *   showTables_DataBase()
+         *   foreach(table)
+         *     if(table exist into struct.sql)
+         *       _getTableFields()
+         *       _createAlterTables() (save info into array)
+         *       _createNewIndex()    (save info into array)
+         *       _createForeignKeys() (save info into array)
+         *     endif
+         *   enforeach
+         *
+         *   foreach(query created before)
+         *     exec(query)
+         *   endforeach
+         *
+         * ______endpseudocode______
+         *
+         * @param mixed array or string with the SQL queries.
+         *
+         * @return array true on success, false on fail
+         */
+        public function updateDB($queries = '')
+        {
+            error_log(' ----- START updateDB ----- ');
+            if (!is_array($queries)) {
+                $queries = $this->splitSQL($queries, ';');
+            }
+
+            // Prepare and separate the queries
+            $struct_queries = array();
+            $data_queries   = array();
+            $this->prepareAndSepareQueries($queries, $data_queries, $struct_queries);
+
+            // hack
+            $this->query('SET FOREIGN_KEY_CHECKS = 0');
+
+            // Get tables from DB (already installed)
+            $result = $this->query('SHOW TABLES');
+            $tables = $result->result();
+            foreach ($tables as $v) {
+                $table = current($v);
+                if ($this->existTableIntoStruct($table, $struct_queries)) {
+                    $lastTable     = null;
+                    $normal_fields = $indexes = $constrains = array();
+                    $fields        = $this->getTableFieldsFromStruct($table, $struct_queries);
+                    if ($fields) {
+                        // classify fields (into sql file)
+                        $this->classifyFieldsSql($fields, $normal_fields, $indexes, $constrains, $lastTable);
+                        // Take fields from the DB (now into database)
+                        $result     = $this->query('DESCRIBE ' . $table);
+                        $tbl_fields = $result->result();
+                        // compare and create alter statments
+                        $this->createAlterTable($tbl_fields, $table, $normal_fields, $struct_queries);
+                        // Go for the index part
+                        $result      = $this->query('SHOW INDEX FROM ' . $table);
+                        $tbl_indexes = $result->result();
+
+
+                        // compare table index and struct.sql index for the same table, and only add the new ones
+                        $this->createNewIndex($tbl_indexes, $indexes, $table, $struct_queries);
+
+
+                        // show create table TABLE_NAME constrains
+                        $result         = $this->query('SHOW CREATE TABLE ' . $table);
+                        $tbl_constraint = $result->row();
+                        // create foreign keys
+                        $this->createForeignKey($tbl_constraint, $table, $struct_queries, $constrains);
+                        // No need to create the table, so we delete it SQL
+                        unset($struct_queries[strtolower($table)]);
+//                        error_log(' --- struct_queries ---');
+                        //foreach($struct_queries as $q) {
+//                            error_log(' --- ' . $q );
+                        //}
+                    }
+                }
+            }
+
+
+            error_log(' --- last_struct_queries ---');
+            foreach ($struct_queries as $q) {
+                error_log(' --- ' . $q);
+            }
+            // HACK: AUTO_INCREMENT fields needs to be also a PRIMARY KEY
+            foreach ($struct_queries as $k => $v) {
+                if (stripos($v, 'auto_increment') !== false && stripos($v, 'primary key') === false) {
+                    $struct_queries[$k] = $v . ' PRIMARY KEY';
+                }
+            }
+
+            $queries = array_merge($struct_queries, $data_queries);
+
+            $ok            = true;
+            $error_queries = array();
+            foreach ($queries as $query) {
+                // hack for 2.4
+                if (stripos($query, 'country ADD PRIMARY KEY')) {
+                    continue;
+                }
+                $res = $this->query($query);
+                if (!$res) {
+                    $ok              = false;
+                    $error_queries[] = $query;
+                }
+            }
+            if (!empty($error_queries)) {
+                error_log(' --- error_queries ---');
+                foreach ($struct_queries as $q) {
+                    error_log(' --- ' . $q);
+                }
+            }
+            // hack
+            $this->query('SET FOREIGN_KEY_CHECKS = 1');
+            error_log(' ----- END updateDB ----- ');
+
+            return array($ok, $queries, $error_queries);
+        }
+
+        /**
+         * Prepare and separe the queries, and save into data or struct queries
+         *
+         * @param array $queries
+         * @param array $data_queries
+         * @param array $struct_queries
+         */
+        private function prepareAndSepareQueries($queries, &$data_queries, &$struct_queries)
+        {
+            foreach ($queries as $query) {
+                if (preg_match('|CREATE DATABASE ([^ ]*)|', $query, $match)) {
+                    array_unshift($struct_queries, $query);
+                } elseif (preg_match('|CREATE TABLE ([^ ]*)|', $query, $match)) {
+                    $struct_queries[strtolower(trim($match[1], '`'))] = $query;
+                } elseif (preg_match('|INSERT INTO ([^ ]*)|', $query, $match)) {
+                    $data_queries[] = $query;
+                } elseif (preg_match('|UPDATE ([^ ]*)|', $query, $match)) {
+                    $data_queries[] = $query;
+                }
+            }
+        }
+
+        /**
+         * Check if $table exist into array $struct_queries
+         *
+         * @param string $table
+         * @param array  $struct_queries
+         *
+         * @return bool
+         */
+        private function existTableIntoStruct($table, $struct_queries)
+        {
+            return array_key_exists(strtolower($table), $struct_queries);
+        }
+
+        /**
+         * Get fields from struct_queries (struct.sql)
+         *
+         * @param string $table
+         * @param array  $struct_queries
+         *
+         * @return array|bool
+         */
+        private function getTableFieldsFromStruct($table, &$struct_queries)
+        {
+            if (preg_match('|\((.*)\)|ms', $struct_queries[strtolower($table)], $match)) {
+                $fields = explode("\n", trim($match[1]));
+                foreach ($fields as $key => $value) {
+                    $fields[$key] = trim(preg_replace('/,$/', '', $value));
+                }
+            } else {
+                $fields = false;
+            }
+
+            return $fields;
+        }
+
+        /**
+         * Classify fields, inside arrays $normal_fields, $indexes, $constrains (foreign key's)
+         *
+         * @param $fields
+         * @param $normal_fields
+         * @param $indexes
+         * @param $constrains
+         * @param $lastTable
+         */
+        private function classifyFieldsSql($fields, &$normal_fields, &$indexes, &$constrains, &$lastTable)
+        {
+            foreach ($fields as $field) {
+                if (preg_match('|([^ ]+)|', trim($field), $field_name)) {
+                    switch (strtolower($field_name[1])) {
+                        case '':
+                        case 'on':
+                            if ($lastTable) {
+                                $constrains[$lastTable] = $constrains[$lastTable] . ' ' . trim($field);
+                            }
+                            break;
+                        case 'foreign':
+                            if (preg_match("|FOREIGN KEY\s+(.*)\s+REFERENCES\s+(.*)|mi", $field, $match)) {
+                                $_table              = $match[1];
+                                $refere              = $match[2];
+                                $refere              = str_replace(',', '', $refere);
+                                $lastTable           = $_table;
+                                $constrains[$_table] = trim($refere);
+                            }
+                            break;
+                        case 'primary':
+                        case 'index':
+                        case 'fulltext':
+                        case 'unique':
+                        case 'key':
+                            $added = false;
+                            if (preg_match("|PRIMARY KEY\s+\((.*)\)|mi", $field, $match)) {
+                                $_field = strtolower($match[1]);
+                                if (isset($normal_fields[$_field])) {
+                                    $normal_fields[$_field] .= ' PRIMARY KEY';
+                                    $added                  = true;
+                                }
+                            }
+
+                            if (!$added) {
+                                $indexes[] = trim($field, ", \n");
+                            }
+                            break;
+                        default:
+                            $normal_fields[strtolower($field_name[1])] = trim($field, ", \n");
+                            break;
+                    }
+                }
+            }
+        }
+
+        /**
+         * Build alter sql, ADD COLUMN, CHANGE COLUMN, ALTER COLUMN
+         *
+         * @param array  $tbl_fields , contain all fields inside database
+         * @param string $table
+         * @param        $normal_fields
+         * @param        $struct_queries
+         */
+        private function createAlterTable($tbl_fields, $table, &$normal_fields, &$struct_queries)
+        {
+            foreach ($tbl_fields as $tbl_field) {
+                //Every field should we on the definition, so else SHOULD never happen, unless a very aggressive plugin modify our tables
+                if (array_key_exists(strtolower($tbl_field['Field']), $normal_fields)) {
+                    // Take the of the field
+                    if (preg_match('|' . $tbl_field['Field'] . " (ENUM\s*\(([^\)]*)\))|i", $normal_fields[strtolower($tbl_field['Field'])], $match)
+                        || preg_match('|' . $tbl_field['Field'] . ' ([^ ]*( unsigned)?)|i', $normal_fields[strtolower($tbl_field['Field'])], $match)
+                    ) {
+                        $field_type = $match[1];
+                        // Are they the same?
+                        if (strtolower($field_type) != strtolower($tbl_field['Type'])
+                            && str_replace(' ', '', strtolower($field_type)) != str_replace(' ', '', strtolower($tbl_field['Type']))
+                        ) {
+                            $struct_queries[] =
+                                'ALTER TABLE ' . $table . ' CHANGE COLUMN ' . $tbl_field['Field'] . ' ' . $normal_fields[strtolower($tbl_field['Field'])];
+                        }
+                    }
+                    error_log(' --- ' . $normal_fields[strtolower($tbl_field['Field'])]);
+
+                    // Have we changed the default value? [with quotes]
+                    if (preg_match("| DEFAULT\s+'(.*)'|i", $normal_fields[strtolower($tbl_field['Field'])], $default_match)) {
+                        // alter column only if default value has been changed
+                        if ($tbl_field['Default'] != $default_match[1]) {
+                            $struct_queries[] = 'ALTER TABLE ' . $table . ' ALTER COLUMN ' . $tbl_field['Field'] . " SET DEFAULT '" . $default_match[1] . "'";
+                        }
+                        // Have we changed the default value? [without quotes]
+                    } elseif (preg_match("| DEFAULT\s+(.*)|i", $normal_fields[strtolower($tbl_field['Field'])], $default_match)) {
+                        if (isset($tbl_field['Default'])) {
+                            // alter column only if default value has been changed
+                            if ($tbl_field['Default'] != $default_match[1]) {
+                                $struct_queries[] = 'ALTER TABLE ' . $table . ' ALTER COLUMN ' . $tbl_field['Field'] . ' SET DEFAULT ' . $default_match[1];
+                            }
+                        } else {
+                            // check NULL default values
+                            // if new default value is diferent, alter column ...
+                            if ($default_match[1] !== 'NULL') {
+                                $struct_queries[] = 'ALTER TABLE ' . $table . ' ALTER COLUMN ' . $tbl_field['Field'] . ' SET DEFAULT ' . $default_match[1];
+                            }
+                        }
+                    }
+                    // Remove it from the list, so it will not be added
+                    unset($normal_fields[strtolower($tbl_field['Field'])]);
+                }
+            }
+            // For the rest of normal fields (they are not in the table) we add them.
+            foreach ($normal_fields as $k => $v) {
+                $struct_queries[] = 'ALTER TABLE ' . $table . ' ADD COLUMN ' . $v;
+            }
+        }
+
+        /**
+         * With all the indexes from struct.sql, remove indexes which actually
+         * exist into database
+         *
+         * @param      $tbl_indexes
+         * @param      $indexes
+         * @param      $table
+         * @param      $struct_queries
+         */
+        private function createNewIndex($tbl_indexes, &$indexes, $table, &$struct_queries)
+        {
+            if ($tbl_indexes) {
+                unset($indexes_array);
+                foreach ($tbl_indexes as $tbl_index) {
+                    $indexes_array[$tbl_index['Key_name']]['columns'][]  = array('fieldname' => $tbl_index['Column_name'], 'subpart' => $tbl_index['Sub_part']);
+                    $indexes_array[$tbl_index['Key_name']]['unique']     = $tbl_index['Non_unique'] == 0;
+                    $indexes_array[$tbl_index['Key_name']]['index_type'] = $tbl_index['Index_type'];
+                    $indexes_array[$tbl_index['Key_name']]['Key_name']   = $tbl_index['Key_name'];
+                }
+
+                foreach ($indexes_array as $k => $v) {
+
+                    // if PRIMARY KEY already exist
+                    $exist_primary = false;
+                    if ($k === 'PRIMARY') {
+                        if (isset($indexes_array['PRIMARY'])) {
+                            if (count($indexes_array['PRIMARY']['columns']) > 0) {
+                                $exist_primary = true;
+                            }
+                        }
+                    }
+
+                    $string = '';
+                    if ($k === 'PRIMARY') {
+                        $string .= 'PRIMARY KEY ';
+                    } elseif ($v['unique']) {
+                        $string .= 'UNIQUE KEY ';
+                    } elseif ($v['index_type'] === 'FULLTEXT') {  // FULLTEXT INDEX MUST HAVE KEY_NAME
+                        $string .= 'FULLTEXT ' . $k . ' ';
+                    } else {
+                        if ((count($v['columns']) == 1 && $v['columns'][0]['fieldname'] != $k) || (preg_match('/^idx/', $k, $coincidencias) > 0)) {
+                            $string .= 'INDEX ' . $k . ' ';
+                        } else {
+                            $string .= 'INDEX ' . $v['Key_name'] . ' ';
+                        }
+                    }
+
+                    $columns = '';
+                    // For each column in the index
+                    foreach ($v['columns'] as $column) {
+                        if ($columns != '') {
+                            $columns .= ', ';
+                        }
+                        // Add the field to the column list string
+                        $columns .= '' . $column['fieldname'] . '';
+                        if ($column['subpart'] != '') {
+                            $columns .= '(' . $column['subpart'] . ')';
+                        }
+                    }
+
+                    // Add the column list to the index create string
+                    $string    .= '(' . $columns . ')';
+                    $var_index = array_search($string, $indexes);
+
+                    if (!($var_index === false)) {
+                        unset($indexes[$var_index]);
+                    } else {
+                        $var_index = array_search(str_replace(', ', ',', $string), $indexes);
+                        if (!($var_index === false)) {
+                            unset($indexes[$var_index]);
+                        }
+                    }
+                }
+            }
+
+            // alter table
+            foreach ($indexes as $v) {
+                if (preg_match('/primary key/i', $v, $coincidencias) > 0) {
+                    $struct_queries[] = 'ALTER TABLE ' . $table . ' DROP PRIMARY KEY, ADD ' . $v;
+                } else {
+                    $struct_queries[] = 'ALTER TABLE ' . $table . ' ADD ' . $v;
+                }
+            }
+        }
+
+        /**
+         * Create alter table if foreign key don't exist into database structure
+         *
+         * @param array  $tbl_constraint
+         * @param string $table
+         * @param array  $struct_queries
+         * @param array  $constrains
+         */
+        private function createForeignKey($tbl_constraint, $table, &$struct_queries, $constrains)
+        {
+            $constrainsDB = $foreignRepited = array();
+            if (preg_match_all("| CONSTRAINT\s+(.*)\s+FOREIGN KEY\s+(.*)\s+REFERENCES\s+(.*),?\n|i", $tbl_constraint['Create Table'], $default_match)) {
+                $aKeyName = $default_match[1];
+                $aTables  = $default_match[2];
+                $aRefere  = $default_match[3];
+                foreach ($aTables as $index => $value) {
+                    $_refere  = str_replace('`', '', $aRefere[$index]);
+                    $_keyName = str_replace('`', '', $aKeyName[$index]);
+                    $_refere  = str_replace(',', '', $_refere);
+                    $_value   = str_replace('`', '', $value);
+                    if (in_array($_refere, $constrainsDB)) {
+                        $foreignRepited[] = $_keyName;
+                    }
+                    $constrainsDB[$_value] = $_refere;
+                }
+            }
+
+            $delete_foreign = array();
+            if (count($foreignRepited) > 0) {
+                foreach ($foreignRepited as $_key) {
+                    echo 'ALTER TABLE ' . $table . ' DROP FOREIGN KEY ' . $_key . '<br>';
+                    $struct_queries[] = 'ALTER TABLE ' . $table . ' DROP FOREIGN KEY ' . $_key;
+                }
+            }
+
+            $keys = array_keys($constrainsDB);
+            foreach ($constrains as $k => $v) {
+                if (in_array($k, $keys) && $constrainsDB[$k] == $v) {
+                    // nothing to do
+                } else {
+                    // alter table
+                    $index = 'FOREIGN KEY ' . $k . ' REFERENCES ' . $v;
+
+                    $struct_queries[] = 'ALTER TABLE ' . $table . ' ADD ' . $index;
+                }
+            }
         }
 
         /**
          * Get last SQL query
          *
          * @access public
-         * @since 2.3
          * @return string
+         * @since  2.3
          */
         public function lastQuery()
         {
@@ -1632,8 +1895,8 @@
          * Get the ID generated from the previous INSERT operation
          *
          * @access public
-         * @since 2.3
          * @return mixed
+         * @since  2.3
          */
         public function insertedId()
         {
@@ -1641,179 +1904,11 @@
         }
 
         /**
-         * Check if the string has an operator
-         *
-         * @access private
-         * @since 2.3
-         * @param string $str
-         * @return bool
-         */
-        public function _hasOperator($str)
-        {
-            $str = trim($str);
-
-            if (! preg_match('/(\s|<|>|!|=|is null|is not null)/i', $str)) {
-                return false;
-            }
-
-            return true;
-        }
-
-        /**
-         * Check if the sql is a select
-         *
-         * @access private
-         * @since 2.3
-         * @param string $sql
-         * @return bool
-         */
-        public function isSelectType($sql)
-        {
-            if (! preg_match('/^\s*"?(SELECT)\s+/i', $sql)) {
-                return false;
-            }
-
-            return true;
-        }
-
-        /**
-         * Check if the sql is a write such as INSERT, UPDATE, UPDATE...
-         *
-         * @access private
-         * @since 2.3
-         * @param string $sql
-         * @return bool
-         */
-        public function isWriteType($sql)
-        {
-            if (! preg_match('/^\s*"?(SET|INSERT|UPDATE|DELETE|REPLACE|CREATE|DROP|TRUNCATE|LOAD DATA|COPY|ALTER|GRANT|REVOKE|LOCK|UNLOCK|RENAME)\s+/i', $sql)) {
-                return false;
-            }
-
-            return true;
-        }
-
-        /**
-         * Add the apostrophe if it's an string; 0 or 1 if it's a number; NULL
-         *
-         * @access private
-         * @since 2.3
-         * @param string $str
-         * @return string
-         */
-        public function escape($str)
-        {
-            if (is_string($str)) {
-                $str = "'" . $this->escapeStr($str) . "'";
-            } elseif (is_bool($str)) {
-                $str = ($str === false) ? 0 : 1;
-            } elseif (null === $str) {
-                $str = 'NULL';
-            }
-
-            return $str;
-        }
-
-        /**
-         * Escape the string if it's necessary
-         *
-         * @access private
-         * @since  2.3
-         * @param string $str
-         * @param bool   $like
-         * @return string
-*/
-        public function escapeStr($str, $like = false)
-        {
-            if (is_object($this->connId)) {
-                $str = $this->connId->real_escape_string($str);
-            } else {
-                $str = addslashes($str);
-            }
-
-            if ($like) {
-                $str = str_replace(array('%', '_'), array('\\%', '\\_'), $str);
-            }
-
-            return $str;
-        }
-
-        /**
-         * Reset variables used in write sql: aSet, aFrom, aWhere, aLike, aOrderby, aLimit, aOrder
-         *
-         * @access private
-         * @since 2.3
-         */
-        public function _resetWrite()
-        {
-            $aReset = array('aSet'     => array(),
-                            'aFrom'    => array(),
-                            'aWhere'   => array(),
-                            'aLike'    => array(),
-                            'aOrderby' => array(),
-                            'aLimit'   => false,
-                            'aOrder'   => false );
-
-            $this->_resetRun($aReset);
-        }
-
-        /**
-         * Reset variables used in select sql: aSelect, aFrom, aJoin, aWhere, aLike, aGroupby, aHaving,
-         * aOrderby, aWherein, aLimit, aOffset, aOrder
-         *
-         * @access private
-         * @since 2.3
-         */
-        public function _resetSelect()
-        {
-            $aReset = array('aSelect'  => array(),
-                            'aFrom'    => array(),
-                            'aJoin'    => array(),
-                            'aWhere'   => array(),
-                            'aLike'    => array(),
-                            'aGroupby' => array(),
-                            'aHaving'  => array(),
-                            'aOrderby' => array(),
-                            'aWherein' => array(),
-                            'aLimit'   => false,
-                            'aOffset'  => false,
-                            'aOrder'   => false );
-
-            $this->_resetRun($aReset);
-        }
-
-        /**
-         * Initializate $aReset variables
-         *
-         * @access private
-         * @since 2.3
-         * @param array $aReset
-         */
-        public function _resetRun($aReset)
-        {
-            foreach ($aReset as $item => $defaultValue) {
-                $this->$item = $defaultValue;
-            }
-        }
-
-        /**
-         * Set last error code and descriptionfor the most recent mysqli function call
-         *
-         * @access private
-         * @since 2.3
-         */
-        public function errorReport()
-        {
-            $this->errorLevel = $this->connId->errno;
-            $this->errorDesc  = $this->connId->error;
-        }
-
-        /**
          * Returns the last error code for the most recent mysqli function call
          *
          * @access public
-         * @since 2.3
          * @return int
+         * @since  2.3
          */
         public function getErrorLevel()
         {
@@ -1824,8 +1919,8 @@
          * Returns a string description of the last error for the most recent MySQLi function call
          *
          * @access public
-         * @since 2.3
          * @return string
+         * @since  2.3
          */
         public function getErrorDesc()
         {
