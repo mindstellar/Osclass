@@ -16,7 +16,10 @@
     "ext-json": "*",
     "ext-openssl": "*",
     "ext-mysqli": "*",
-    "ext-zip": "*"
+    "ext-zip": "*",
+    "gettext/gettext": "^4.6",
+    "ext-curl": "*",
+    "ext-posix": "*"
   }
   ,
   "require-dev": {

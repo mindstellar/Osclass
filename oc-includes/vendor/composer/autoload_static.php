@@ -29,6 +29,11 @@ class ComposerStaticInit6b0b4fafd693b0d76015f213169bd812
         array (
             'Psr\\Log\\' => 8,
         ),
+        'G' => 
+        array (
+            'Gettext\\Languages\\' => 18,
+            'Gettext\\' => 8,
+        ),
         'F' => 
         array (
             'Facebook\\' => 9,
@@ -51,6 +56,14 @@ class ComposerStaticInit6b0b4fafd693b0d76015f213169bd812
         'Psr\\Log\\' => 
         array (
             0 => __DIR__ . '/..' . '/psr/log/Psr/Log',
+        ),
+        'Gettext\\Languages\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/gettext/languages/src',
+        ),
+        'Gettext\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/gettext/gettext/src',
         ),
         'Facebook\\' => 
         array (

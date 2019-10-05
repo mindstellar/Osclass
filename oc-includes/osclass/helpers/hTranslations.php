@@ -31,13 +31,10 @@
      * @param string $domain
      * @return string
      */
-    function __($key, $domain = 'core') {
-        $gt = Translation::newInstance()->_get($domain);
-
-        if(!$gt) {
-            return $key;
-        }
-        $string = $gt->translate($key);
+    function __($key, $domain = 'core')
+    {
+        $gt = Translation::newInstance()->_get();
+        $string = $gt->dgettext($domain, $key);
         return osc_apply_filter('gettext', $string);
     }
 
@@ -49,7 +46,8 @@
      * @param string $key
      * @param string $domain
      */
-    function _e($key, $domain = 'core') {
+    function _e($key, $domain = 'core')
+    {
         echo __($key, $domain);
     }
 
@@ -61,7 +59,8 @@
      * @param string $key
      * @return string
      */
-    function _m($key) {
+    function _m($key)
+    {
         return __($key, 'messages');
     }
 
@@ -76,17 +75,10 @@
      * @param string $domain
      * @return string
      */
-    function _n($single_key, $plural_key, $count, $domain = 'core') {
-        $gt = Translation::newInstance()->_get($domain);
-
-        if(!$gt) {
-            if($count>1) {
-                return $plural_key;
-            } else {
-                return $single_key;
-            }
-        }
-        $string = $gt->ngettext($single_key, $plural_key, $count);
+    function _n($single_key, $plural_key, $count, $domain = 'core')
+    {
+        $gt = Translation::newInstance()->_get();
+        $string = $gt->dngettext($domain, $single_key, $plural_key, $count);
         return osc_apply_filter('ngettext', $string);
     }
 
@@ -100,7 +92,8 @@
      * @param int $count
      * @return string
      */
-    function _mn($single_key, $plural_key, $count) {
+    function _mn($single_key, $plural_key, $count)
+    {
         return _n($single_key, $plural_key, $count, 'messages');
     }
 
