@@ -1,5 +1,7 @@
-<?php if ( ! defined( 'ABS_PATH' ) ) {
-	exit( 'ABS_PATH is not loaded. Direct access is not allowed.' );
+<?php use Gettext\Translator;
+
+if (! defined('ABS_PATH')) {
+    exit('ABS_PATH is not loaded. Direct access is not allowed.');
 }
 
 /*
@@ -18,45 +20,47 @@
  * limitations under the License.
  */
 
-    require_once osc_lib_path() . 'php-gettext/streams.php';
-    require_once osc_lib_path() . 'php-gettext/gettext.php';
-
-	/**
-	 * Class Translation
-	 */
-	class Translation {
-        private $messages;
+    /**
+     * Class Translation
+     */
+    class Translation
+    {
+        private $translator;
         private static $instance;
 
-		/**
-		 * @param bool $install
-		 *
-		 * @return \Translation
-		 */
-		public static function newInstance( $install = false ) {
-            if(!self::$instance instanceof self) {
+        /**
+         * @param bool $install
+         *
+         * @return \Translation
+         */
+        public static function newInstance($install = false)
+        {
+            if (!self::$instance instanceof self) {
                 self::$instance = new self($install);
             }
             return self::$instance;
         }
 
-		/**
-		 * @return \Translation
-		 */
-		public static function init() {
+        /**
+         * @return \Translation
+         */
+        public static function init()
+        {
             self::$instance = new self();
             return self::$instance;
         }
 
-		/**
-		 * Translation constructor.
-		 *
-		 * @param bool $install
-		 */
-		public function __construct( $install = false ) {
-            if(!$install) {
+        /**
+         * Translation constructor.
+         *
+         * @param bool $install
+         */
+        public function __construct($install = false)
+        {
+            $this->translator = new Translator();
+            if (!$install) {
                 // get user/admin locale
-                if( OC_ADMIN ) {
+                if (OC_ADMIN) {
                     $locale = osc_current_admin_locale();
                 } else {
                     $locale = osc_current_user_locale();
@@ -69,15 +73,16 @@
                 // load messages
                 $domain = osc_apply_filter('theme', osc_theme());
                 $messages_file = osc_apply_filter('mo_theme_messages_path', osc_themes_path() . $domain . '/languages/' . $locale . '/messages.mo', $locale, $domain);
-                if(!file_exists($messages_file)) {
+
+                if (!file_exists($messages_file)) {
                     $messages_file = osc_apply_filter('mo_core_messages_path', osc_translations_path() . $locale . '/messages.mo', $locale);
                 }
                 $this->_load($messages_file, 'messages');
 
                 // load theme
                 $theme_file = osc_apply_filter('mo_theme_path', osc_themes_path() . $domain . '/languages/' . $locale . '/theme.mo', $locale, $domain);
-                if(!file_exists($theme_file)) {
-                    if(!file_exists(osc_themes_path() . $domain)) {
+                if (!file_exists($theme_file)) {
+                    if (!file_exists(osc_themes_path() . $domain)) {
                         $domain = osc_theme();
                     }
                     $theme_file = osc_translations_path() . $locale . '/theme.mo';
@@ -86,10 +91,10 @@
 
                 // load plugins
                 $aPlugins = Plugins::listEnabled();
-                foreach($aPlugins as $plugin) {
+                foreach ($aPlugins as $plugin) {
                     $domain = preg_replace('|/.*|', '', $plugin);
                     $plugin_file = osc_apply_filter('mo_plugin_path', osc_plugins_path() . $domain . '/languages/' . $locale . '/messages.mo', $locale, $domain);
-                    if(file_exists($plugin_file) ) {
+                    if (file_exists($plugin_file)) {
                         $this->_load($plugin_file, $domain);
                     }
                 }
@@ -99,48 +104,32 @@
             }
         }
 
-		/**
-		 * @param $domain
-		 *
-		 * @return bool
-		 */
-		public function _get( $domain ) {
-            if(!isset($this->messages[$domain])) {
+        /**
+         * @return \Gettext\Translator
+         */
+        public function _get()
+        {
+            return $this->translator;
+        }
+        /**
+         * @param $file
+         * @param $domain
+         *
+         * @return bool|\Translation
+         */
+        public function _load($file, $domain)
+        {
+            if (!file_exists($file)) {
                 return false;
             }
+            //Create a Translations instance using a po file
+            $translations = Gettext\Translations::fromMoFile($file);
 
-            return $this->messages[$domain];
-        }
+            $translations->addFromMoFile($file);
+            $translations->setDomain($domain);
 
-		/**
-		 * @param $domain
-		 * @param $reader
-		 *
-		 * @return bool
-		 */
-		public function _set( $domain , $reader ) {
-            if(isset($messages[$domain])) {
-               false;
-            }
+            $this->translator->loadTranslations($translations);
 
-            $this->messages[$domain] = $reader;
-            return true;
-        }
-
-		/**
-		 * @param $file
-		 * @param $domain
-		 *
-		 * @return bool
-		 */
-		public function _load( $file , $domain ) {
-            if(!file_exists($file)) {
-                return false;
-            }
-
-            $streamer = new FileReader($file);
-            $reader = new gettext_reader($streamer);
-            return $this->_set($domain, $reader);
+            return $this;
         }
     }
-
