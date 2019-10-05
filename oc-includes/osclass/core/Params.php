@@ -1,253 +1,252 @@
-<?php if ( ! defined( 'ABS_PATH' ) ) {
-	exit( 'ABS_PATH is not loaded. Direct access is not allowed.' );
+<?php if (!defined('ABS_PATH')) {
+    exit('ABS_PATH is not loaded. Direct access is not allowed.');
 }
 
-	/*
-	 * Copyright 2014 Osclass
-	 *
-	 * Licensed under the Apache License, Version 2.0 (the "License");
-	 * you may not use this file except in compliance with the License.
-	 * You may obtain a copy of the License at
-	 *
-	 *     http://www.apache.org/licenses/LICENSE-2.0
-	 *
-	 * Unless required by applicable law or agreed to in writing, software
-	 * distributed under the License is distributed on an "AS IS" BASIS,
-	 * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-	 * See the License for the specific language governing permissions and
-	 * limitations under the License.
-	 */
+    /**
+     * Class Params
+     */
+    class Params
+    {
+        private static $_purifier;
+        private static $_config;
+        private static $_request;
+        private static $_server;
 
-	/**
-	 * Class Params
-	 */
-	class Params {
-		private static $_purifier;
-		private static $_config;
-		private static $_request;
-		private static $_server;
+        public function __construct()
+        {
+        }
 
-		public function __construct() {
-		}
+        public static function init()
+        {
+            self::$_request = array_merge($_GET, $_POST);
+            self::$_server  = $_SERVER;
+        }
 
-		public static function init() {
-			self::$_request = array_merge( $_GET , $_POST );
-			self::$_server  = $_SERVER;
-		}
+        /**
+         * @param      $param
+         * @param bool $htmlencode
+         * @param bool $xss_check
+         * @param bool $quotes_encode
+         *
+         * @return mixed
+         */
+        public static function getParam($param, $htmlencode = false, $xss_check = true, $quotes_encode = true)
+        {
+            if ($param === '') {
+                return '';
+            }
+            if (!isset(self::$_request[$param])) {
+                return '';
+            }
 
-		/**
-		 * @param      $param
-		 * @param bool $htmlencode
-		 * @param bool $xss_check
-		 * @param bool $quotes_encode
-		 *
-		 * @return mixed
-		 */
-		public static function getParam( $param , $htmlencode = false , $xss_check = true , $quotes_encode = true ) {
-			if ( $param == '' ) {
-				return '';
-			}
-			if ( ! isset( self::$_request[ $param ] ) ) {
-				return '';
-			}
+            $value = self::_purify(self::$_request[$param], $xss_check);
 
-			$value = self::_purify( self::$_request[ $param ] , $xss_check );
+            if ($htmlencode) {
+                if ($quotes_encode) {
+                    return htmlspecialchars(stripslashes($value), ENT_QUOTES);
+                }
 
-			if ( $htmlencode ) {
-				if ( $quotes_encode ) {
-					return htmlspecialchars( stripslashes( $value ) , ENT_QUOTES );
-				} else {
-					return htmlspecialchars( stripslashes( $value ) , ENT_NOQUOTES );
-				}
-			}
+                return htmlspecialchars(stripslashes($value), ENT_NOQUOTES);
+            }
 
-			if ( get_magic_quotes_gpc() ) {
-				$value = strip_slashes_extended( $value );
-			}
+            if (get_magic_quotes_gpc()) {
+                $value = strip_slashes_extended($value);
+            }
 
-			return $value;
-		}
+            return $value;
+        }
 
-		/**
-		 * @param $value
-		 * @param $xss_check
-		 *
-		 * @return string
-		 */
-		private static function _purify( $value , $xss_check ) {
-			if ( ! $xss_check ) {
-				return $value;
-			}
+        /**
+         * @param $value
+         * @param $xss_check
+         *
+         * @return string
+         */
+        private static function _purify($value, $xss_check)
+        {
+            if (!$xss_check) {
+                return $value;
+            }
 
-			self::$_config = HTMLPurifier_Config::createDefault();
-			self::$_config->set( 'HTML.Allowed' , '' );
-			self::$_config->set( 'Cache.SerializerPath' , osc_uploads_path() );
+            self::$_config = HTMLPurifier_Config::createDefault();
+            self::$_config->set('HTML.Allowed', '');
+            self::$_config->set('Cache.SerializerPath', osc_uploads_path());
 
-			if ( ! isset( self::$_purifier ) ) {
-				self::$_purifier = new HTMLPurifier( self::$_config );
-			}
+            if (!isset(self::$_purifier)) {
+                self::$_purifier = new HTMLPurifier(self::$_config);
+            }
 
-			if ( is_array( $value ) ) {
-				foreach ( $value as $k => &$v ) {
-					$v = self::_purify( $v , $xss_check ); // recursive
-				}
-			} else {
-				$value = self::$_purifier->purify( $value );
-			}
+            if (is_array($value)) {
+                foreach ($value as $k => &$v) {
+                    $v = self::_purify($v, $xss_check); // recursive
+                }
+            } else {
+                $value = self::$_purifier->purify($value);
+            }
 
-			return $value;
-		}
+            return $value;
+        }
 
-		/**
-		 * @param $param
-		 *
-		 * @return bool
-		 */
-		public static function existParam( $param ) {
-			if ( $param == '' ) {
-				return false;
-			}
-			if ( ! isset( self::$_request[ $param ] ) ) {
-				return false;
-			}
+        /**
+         * @param $param
+         *
+         * @return bool
+         */
+        public static function existParam($param)
+        {
+            if ($param === '') {
+                return false;
+            }
+            if (!isset(self::$_request[$param])) {
+                return false;
+            }
 
-			return true;
-		}
+            return true;
+        }
 
-		/**
-		 * @param      $param
-		 * @param bool $htmlencode
-		 * @param bool $xss_check
-		 * @param bool $quotes_encode
-		 *
-		 * @return string
-		 */
-		public static function getServerParam( $param , $htmlencode = false , $xss_check = true , $quotes_encode = true ) {
-			if ( $param == '' ) {
-				return '';
-			}
-			if ( ! isset( self::$_server[ $param ] ) ) {
-				return '';
-			}
+        /**
+         * @param      $param
+         * @param bool $htmlencode
+         * @param bool $xss_check
+         * @param bool $quotes_encode
+         *
+         * @return string
+         */
+        public static function getServerParam($param, $htmlencode = false, $xss_check = true, $quotes_encode = true)
+        {
+            if ($param === '') {
+                return '';
+            }
+            if (!isset(self::$_server[$param])) {
+                return '';
+            }
 
-			$value = self::_purify( self::$_server[ $param ] , $xss_check );
+            $value = self::_purify(self::$_server[$param], $xss_check);
 
-			if ( $htmlencode ) {
-				if ( $quotes_encode ) {
-					return htmlspecialchars( stripslashes( $value ) , ENT_QUOTES );
-				} else {
-					return htmlspecialchars( stripslashes( $value ) , ENT_NOQUOTES );
-				}
-			}
+            if ($htmlencode) {
+                if ($quotes_encode) {
+                    return htmlspecialchars(stripslashes($value), ENT_QUOTES);
+                }
 
-			if ( get_magic_quotes_gpc() ) {
-				$value = strip_slashes_extended( $value );
-			}
+                return htmlspecialchars(stripslashes($value), ENT_NOQUOTES);
+            }
 
-			return $value;
-		}
+            if (get_magic_quotes_gpc()) {
+                $value = strip_slashes_extended($value);
+            }
 
-		/**
-		 * @param $param
-		 *
-		 * @return bool
-		 */
-		public static function existServerParam( $param ) {
-			if ( $param == '' ) {
-				return false;
-			}
-			if ( ! isset( self::$_server[ $param ] ) ) {
-				return false;
-			}
+            return $value;
+        }
 
-			return true;
-		}
+        /**
+         * @param $param
+         *
+         * @return bool
+         */
+        public static function existServerParam($param)
+        {
+            if ($param === '') {
+                return false;
+            }
+            if (!isset(self::$_server[$param])) {
+                return false;
+            }
 
-		/**
-		 * @param bool $xss_check
-		 *
-		 * @return string
-		 */
-		public static function getServerParamsAsArray( $xss_check = true ) {
-			$value = self::_purify( self::$_server , $xss_check );
+            return true;
+        }
 
-			if ( get_magic_quotes_gpc() ) {
-				return strip_slashes_extended( $value );
-			}
+        /**
+         * @param bool $xss_check
+         *
+         * @return string
+         */
+        public static function getServerParamsAsArray($xss_check = true)
+        {
+            $value = self::_purify(self::$_server, $xss_check);
 
-			return $value;
-		}
+            if (get_magic_quotes_gpc()) {
+                return strip_slashes_extended($value);
+            }
 
-		/**
-		 * @param $param
-		 *
-		 * @return array
-		 */
-		public static function getFiles( $param ) {
-			if ( isset( $_FILES[ $param ] ) ) {
-				return $_FILES[ $param ];
-			}
+            return $value;
+        }
 
-			return array ();
-		}
+        /**
+         * @param $param
+         *
+         * @return array
+         */
+        public static function getFiles($param)
+        {
+            if (isset($_FILES[$param])) {
+                return $_FILES[$param];
+            }
 
-		/**
-		 * @param $key
-		 * @param $value
-		 */
-		public static function setParam( $key , $value ) {
-			self::$_request[ $key ] = $value;
-		}
+            return array();
+        }
 
-		/**
-		 * @param $key
-		 */
-		public static function unsetParam( $key ) {
-			unset( self::$_request[ $key ] );
-		}
+        /**
+         * @param $key
+         * @param $value
+         */
+        public static function setParam($key, $value)
+        {
+            self::$_request[$key] = $value;
+        }
 
-		public static function _view() {
-			print_r( self::getParamsAsArray() );
-		}
+        /**
+         * @param $key
+         */
+        public static function unsetParam($key)
+        {
+            unset(self::$_request[$key]);
+        }
 
-		/**
-		 * @param string $what
-		 * @param bool   $htmlencode
-		 * @param bool   $xss_check
-		 * @param bool   $quotes_encode
-		 *
-		 * @return array|string
-		 */
-		public static function getParamsAsArray( $what = '' , $htmlencode = false , $xss_check = true , $quotes_encode = true ) {
-			switch ( $what ) {
-				case( 'get' ):
-					$value = $_GET;
-					break;
-				case( 'post' ):
-					$value = $_POST;
-					break;
-				case( 'cookie' ):
-					return $_COOKIE;
-					break;
-				case( 'files' ):
-					return $_FILES;
-					break;
-				case( 'request' ): // This should not be called, as it depends on server's configuration
-					return $_REQUEST;
-					break;
-				default:
-					$value = self::$_request;
-					break;
-			}
+        /**
+         * return void
+         */
+        public static function _view()
+        {
+            print_r(self::getParamsAsArray());
+        }
 
-			$value = self::_purify( $value , $htmlencode ); // $xss_check, $quotes_encode );
+        /**
+         * @param string $what
+         * @param bool   $htmlencode
+         * @param bool   $xss_check
+         * @param bool   $quotes_encode
+         *
+         * @return array|string
+         */
+        public static function getParamsAsArray($what = '', $htmlencode = false, $xss_check = true, $quotes_encode = true)
+        {
+            switch ($what) {
+                case('get'):
+                    $value = $_GET;
+                    break;
+                case('post'):
+                    $value = $_POST;
+                    break;
+                case('cookie'):
+                    return $_COOKIE;
+                    break;
+                case('files'):
+                    return $_FILES;
+                    break;
+                case('request'): // This should not be called, as it depends on server's configuration
+                    return $_REQUEST;
+                    break;
+                default:
+                    $value = self::$_request;
+                    break;
+            }
 
-			if ( get_magic_quotes_gpc() ) {
-				return strip_slashes_extended( $value );
-			}
+            $value = self::_purify($value, $htmlencode); // $xss_check, $quotes_encode );
 
-			return $value;
-		}
-	}
+            if (get_magic_quotes_gpc()) {
+                return strip_slashes_extended($value);
+            }
 
-
+            return $value;
+        }
+    }
