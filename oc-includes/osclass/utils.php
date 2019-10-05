@@ -143,7 +143,7 @@
             }
         }
 
-        @chmod($path, 0777);
+        @chmod($path, 0755);
 
         $zip = new ZipArchive;
         if ($zip->open($zipPath) === true) {
@@ -591,7 +591,7 @@
      *
      * @return bool
      */
-    function osc_mkdir($dir, $mode = 0777, $recursive = true)
+    function osc_mkdir($dir, $mode = 0755, $recursive = true)
     {
         if ($dir === null || $dir === '') {
             return false;
@@ -711,7 +711,7 @@
      * @param string $path
      * @param string $file
      *
-     * @return int|\type
+     * @return int
 */
     function osc_dbdump($path, $file)
     {
@@ -806,21 +806,14 @@
         return 1;
     }
 
-
-// -----------------------------------------------------------------------------
-
     /**
      * Returns true if there is curl on system environment
      *
-     * @return bool|\type
+     * @return bool
 */
     function testCurl()
     {
-        if (!function_exists('curl_init') || !function_exists('curl_exec')) {
-            return false;
-        }
-
-        return true;
+        return !(!function_exists('curl_init') || !function_exists('curl_exec'));
     }
 
 
@@ -1270,7 +1263,7 @@
             }
 
             if (substr($file[ 'name' ], -1) === '/') {
-                if (!mkdir($concurrentDirectory = $to . $file[ 'name' ], 0777) && !is_dir($concurrentDirectory)) {
+                if (!mkdir($concurrentDirectory = $to . $file[ 'name' ], 0755) && !is_dir($concurrentDirectory)) {
                     throw new \RuntimeException(sprintf('Directory "%s" was not created', $concurrentDirectory));
                 }
                 continue;
@@ -1330,7 +1323,7 @@
             }
 
             if ($file[ 'folder' ]) {
-                if (!mkdir($concurrentDirectory = $to . $file[ 'filename' ], 0777) && !is_dir($concurrentDirectory)) {
+                if (!mkdir($concurrentDirectory = $to . $file[ 'filename' ], 0755) && !is_dir($concurrentDirectory)) {
                     throw new \RuntimeException(sprintf('Directory "%s" was not created', $concurrentDirectory));
                 }
                 continue;
@@ -2259,10 +2252,10 @@
                  ***** UNZIP FILE *****
                  **********************/
                 $tmp_path = osc_content_path() . 'downloads/oc-temp/core-' . $data[ 'version' ] . '/';
-                if (!mkdir($concurrentDirectory = osc_content_path() . 'downloads/oc-temp/', 0777) && !is_dir($concurrentDirectory)) {
+                if (!mkdir($concurrentDirectory = osc_content_path() . 'downloads/oc-temp/', 0755) && !is_dir($concurrentDirectory)) {
                     throw new \RuntimeException(sprintf('Directory "%s" was not created', $concurrentDirectory));
                 }
-                if (!mkdir($tmp_path, 0777) && !is_dir($tmp_path)) {
+                if (!mkdir($tmp_path, 0755) && !is_dir($tmp_path)) {
                     throw new \RuntimeException(sprintf('Directory "%s" was not created', $tmp_path));
                 }
                 $res = osc_unzip_file(osc_content_path() . 'downloads/' . $filename, $tmp_path);
