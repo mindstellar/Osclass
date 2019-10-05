@@ -38,8 +38,8 @@
     /**
      * Remove resources from disk
      *
-     * @param int|array  $id
-     * @param boolean $admin
+     * @param int|array $id
+     * @param boolean   $admin
      *
      * @return bool|void
      */
@@ -49,34 +49,41 @@
             return false;
         }
         if (is_array($id)) {
-            $id = $id[ 0 ];
+            $id = $id[0];
         }
         $resource = ItemResource::newInstance()->findByPrimaryKey($id);
         if ($resource !== null) {
-            Log::newInstance()->insertLog('item', 'delete resource', $resource[ 'pk_i_id' ], $id, $admin ? 'admin' : 'user', $admin ? osc_logged_admin_id() : osc_logged_user_id());
+            Log::newInstance()->insertLog(
+                'item',
+                'delete resource',
+                $resource['pk_i_id'],
+                $id,
+                $admin ? 'admin' : 'user',
+                $admin ? osc_logged_admin_id() : osc_logged_user_id()
+            );
 
             $backtracel = '';
             foreach (debug_backtrace() as $k => $v) {
-                if ($v[ 'function' ] === 'include' || $v[ 'function' ] === 'include_once' || $v[ 'function' ] === 'require_once' || $v[ 'function' ] === 'require') {
-                    $backtracel .= '#' . $k . ' ' . $v[ 'function' ] . '(' . $v[ 'args' ][ 0 ] . ') called@ [' . $v[ 'file' ] . ':' . $v[ 'line' ] . '] / ';
+                if ($v['function'] === 'include' || $v['function'] === 'include_once' || $v['function'] === 'require_once' || $v['function'] === 'require') {
+                    $backtracel .= '#' . $k . ' ' . $v['function'] . '(' . $v['args'][0] . ') called@ [' . $v['file'] . ':' . $v['line'] . '] / ';
                 } else {
-                    $backtracel .= '#' . $k . ' ' . $v[ 'function' ] . ' called@ [' . $v[ 'file' ] . ':' . $v[ 'line' ] . '] / ';
+                    $backtracel .= '#' . $k . ' ' . $v['function'] . ' called@ [' . $v['file'] . ':' . $v['line'] . '] / ';
                 }
             }
 
             Log::newInstance()->insertLog(
                 'item',
                 'delete resource backtrace',
-                $resource[ 'pk_i_id' ],
+                $resource['pk_i_id'],
                 $backtracel,
                 $admin ? 'admin' : 'user',
                 $admin ? osc_logged_admin_id() : osc_logged_user_id()
             );
 
-            @unlink(osc_base_path() . $resource[ 's_path' ] . $resource[ 'pk_i_id' ] . '.' . $resource[ 's_extension' ]);
-            @unlink(osc_base_path() . $resource[ 's_path' ] . $resource[ 'pk_i_id' ] . '_original.' . $resource[ 's_extension' ]);
-            @unlink(osc_base_path() . $resource[ 's_path' ] . $resource[ 'pk_i_id' ] . '_thumbnail.' . $resource[ 's_extension' ]);
-            @unlink(osc_base_path() . $resource[ 's_path' ] . $resource[ 'pk_i_id' ] . '_preview.' . $resource[ 's_extension' ]);
+            @unlink(osc_base_path() . $resource['s_path'] . $resource['pk_i_id'] . '.' . $resource['s_extension']);
+            @unlink(osc_base_path() . $resource['s_path'] . $resource['pk_i_id'] . '_original.' . $resource['s_extension']);
+            @unlink(osc_base_path() . $resource['s_path'] . $resource['pk_i_id'] . '_thumbnail.' . $resource['s_extension']);
+            @unlink(osc_base_path() . $resource['s_path'] . $resource['pk_i_id'] . '_preview.' . $resource['s_extension']);
             osc_run_hook('delete_resource', $resource);
         }
     }
@@ -84,9 +91,11 @@
 
     /**
      * Tries to delete the directory recursively.
+     *
      * @param $path
+     *
      * @return true on success.
-*/
+     */
     function osc_deleteDir($path)
     {
         if (strpos($path, '../') !== false || strpos($path, "..\\") !== false) {
@@ -126,9 +135,12 @@
 
     /**
      * Unpack a ZIP file into the specific path in the second parameter.
+     *
      * @DEPRECATED : TO BE REMOVED IN 3.3
+     *
      * @param $zipPath
      * @param $path
+     *
      * @return true on success.
      */
     function osc_packageExtract($zipPath, $path)
@@ -247,7 +259,9 @@
 
     /**
      * Checks is $data is serialized or not
+     *
      * @param $data
+     *
      * @return bool False if not serialized and true if it was.
      */
     function is_serialized($data)
@@ -263,7 +277,7 @@
         if (!preg_match('/^([adObis]):/', $data, $badions)) {
             return false;
         }
-        switch ($badions[ 1 ]) {
+        switch ($badions[1]) {
             case 'a':
             case 'O':
             case 's':
@@ -287,6 +301,7 @@
     /**
      * VERY BASIC
      * Perform a POST request, so we could launch fake-cron calls and other core-system calls without annoying the user
+     * TODO
      *
      * @param $url   string
      * @param $_data array
@@ -307,7 +322,7 @@
                 curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, 2);
             }
 
-            if ($_data != null) {
+            if ($_data) {
                 curl_setopt($ch, CURLOPT_POST, 1);
                 curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($_data));
             }
@@ -322,7 +337,7 @@
 
             curl_close($ch);
 
-            return $info[ 'request_size' ];
+            return $info['request_size'];
         }
 
         if (ini_get('allow_url_fopen') === false) {
@@ -334,15 +349,18 @@
         $url = parse_url($url);
 
         // extract host, path, port:
-        $host = $url[ 'host' ];
-        $path = $url[ 'path' ];
-        $port = $url[ 'port' ];
+        //$scheme = $url['scheme'];
+        $host   = $url['host'];
+        $path   = $url['path'];
+        $port   = $url['port'];
 
-        if ($url === false || !isset($url[ 'host' ]) || !isset($url[ 'path' ]) || !isset($url[ 'port' ])) {
+        if ($url === false || !isset($url['host']) || !isset($url['path']) || !isset($url['port'])) {
             return false;
         }
 
         // open a socket connection on port 80
+        // https example
+        // if ($fp = fsockopen('ssl://'. $host, 443, $errno, $errstr, 1)) {
         // use localhost in case of issues with NATs (hairpinning)
         $fp = fsockopen($host, 80, $errNo, $errStr, 1);
 
@@ -395,22 +413,22 @@
 
             $pop3_host = osc_mailserver_host();
             if (array_key_exists('host', $params)) {
-                $pop3_host = $params[ 'host' ];
+                $pop3_host = $params['host'];
             }
 
             $pop3_port = osc_mailserver_port();
             if (array_key_exists('port', $params)) {
-                $pop3_port = $params[ 'port' ];
+                $pop3_port = $params['port'];
             }
 
             $pop3_username = osc_mailserver_username();
             if (array_key_exists('username', $params)) {
-                $pop3_username = $params[ 'username' ];
+                $pop3_username = $params['username'];
             }
 
             $pop3_password = osc_mailserver_password();
             if (array_key_exists('password', $params)) {
-                $pop3_password = $params[ 'password' ];
+                $pop3_password = $params['password'];
             }
 
             $pop->authorise($pop3_host, $pop3_port, 30, $pop3_username, $pop3_password);
@@ -425,7 +443,7 @@
 
         $smtpSecure = osc_mailserver_ssl();
         if (array_key_exists('password', $params)) {
-            $smtpSecure = $params[ 'ssl' ];
+            $smtpSecure = $params['ssl'];
         }
         if ($smtpSecure != '') {
             $mail->SMTPSecure = $smtpSecure;
@@ -433,7 +451,7 @@
 
         $stmpUsername = osc_mailserver_username();
         if (array_key_exists('username', $params)) {
-            $stmpUsername = $params[ 'username' ];
+            $stmpUsername = $params['username'];
         }
         if ($stmpUsername != '') {
             $mail->Username = $stmpUsername;
@@ -441,7 +459,7 @@
 
         $smtpPassword = osc_mailserver_password();
         if (array_key_exists('password', $params)) {
-            $smtpPassword = $params[ 'password' ];
+            $smtpPassword = $params['password'];
         }
         if ($smtpPassword != '') {
             $mail->Password = $smtpPassword;
@@ -449,7 +467,7 @@
 
         $smtpHost = osc_mailserver_host();
         if (array_key_exists('host', $params)) {
-            $smtpHost = $params[ 'host' ];
+            $smtpHost = $params['host'];
         }
         if ($smtpHost != '') {
             $mail->Host = $smtpHost;
@@ -457,7 +475,7 @@
 
         $smtpPort = osc_mailserver_port();
         if (array_key_exists('port', $params)) {
-            $smtpPort = $params[ 'port' ];
+            $smtpPort = $params['port'];
         }
         if ($smtpPort != '') {
             $mail->Port = $smtpPort;
@@ -467,7 +485,7 @@
         if (empty($from)) {
             $from = 'osclass@' . osc_get_domain();
             if (array_key_exists('from', $params)) {
-                $from = $params[ 'from' ];
+                $from = $params['from'];
             }
         }
 
@@ -475,17 +493,17 @@
         if (empty($from_name)) {
             $from_name = osc_page_title();
             if (array_key_exists('from_name', $params)) {
-                $from_name = $params[ 'from_name' ];
+                $from_name = $params['from_name'];
             }
         }
 
         $mail->From     = osc_apply_filter('mail_from', $from, $params);
         $mail->FromName = osc_apply_filter('mail_from_name', $from_name, $params);
 
-        $to      = $params[ 'to' ];
+        $to      = $params['to'];
         $to_name = '';
         if (array_key_exists('to_name', $params)) {
-            $to_name = $params[ 'to_name' ];
+            $to_name = $params['to_name'];
         }
 
         if (!is_array($to)) {
@@ -497,32 +515,32 @@
         }
 
         if (array_key_exists('add_bcc', $params)) {
-            if (!is_array($params[ 'add_bcc' ]) && $params[ 'add_bcc' ] != '') {
-                $params[ 'add_bcc' ] = array($params[ 'add_bcc' ]);
+            if (!is_array($params['add_bcc']) && $params['add_bcc'] != '') {
+                $params['add_bcc'] = array($params['add_bcc']);
             }
 
-            foreach ($params[ 'add_bcc' ] as $bcc) {
+            foreach ($params['add_bcc'] as $bcc) {
                 $mail->addBCC($bcc);
             }
         }
 
         if (array_key_exists('reply_to', $params)) {
-            $mail->addReplyTo($params[ 'reply_to' ]);
+            $mail->addReplyTo($params['reply_to']);
         }
 
-        $mail->Subject = $params[ 'subject' ];
-        $mail->Body    = $params[ 'body' ];
+        $mail->Subject = $params['subject'];
+        $mail->Body    = $params['body'];
 
         if (array_key_exists('attachment', $params)) {
-            if (!is_array($params[ 'attachment' ]) || isset($params[ 'attachment' ][ 'path' ])) {
-                $params[ 'attachment' ] = array($params[ 'attachment' ]);
+            if (!is_array($params['attachment']) || isset($params['attachment']['path'])) {
+                $params['attachment'] = array($params['attachment']);
             }
 
-            foreach ($params[ 'attachment' ] as $attachment) {
+            foreach ($params['attachment'] as $attachment) {
                 if (is_array($attachment)) {
-                    if (isset($attachment[ 'path' ]) && isset($attachment[ 'name' ])) {
+                    if (isset($attachment['path']) && isset($attachment['name'])) {
                         try {
-                            $mail->addAttachment($attachment[ 'path' ], $attachment[ 'name' ]);
+                            $mail->addAttachment($attachment['path'], $attachment['name']);
                         } catch (phpmailerException $e) {
                             continue;
                         }
@@ -561,7 +579,7 @@
      */
     function osc_mailBeauty($text, $params)
     {
-        $text   = str_ireplace($params[ 0 ], $params[ 1 ], $text);
+        $text   = str_ireplace($params[0], $params[1], $text);
         $kwords = array(
             '{WEB_URL}',
             '{WEB_TITLE}',
@@ -618,9 +636,9 @@
     {
         $result = true;
         if (is_file($source)) {
-            if ($dest[ strlen($dest) - 1 ] === '/') {
+            if ($dest[strlen($dest) - 1] === '/') {
                 if (!file_exists($dest)) {
-                    osc_mkdir($dest, $options[ 'folderPermission' ]);
+                    osc_mkdir($dest, $options['folderPermission']);
                 }
                 $__dest = $dest . '/' . basename($source);
             } else {
@@ -631,31 +649,31 @@
             } else {
                 $result = osc_copyemz($source, $__dest);
             }
-            @chmod($__dest, $options[ 'filePermission' ]);
+            @chmod($__dest, $options['filePermission']);
         } elseif (is_dir($source)) {
-            if ($dest[ strlen($dest) - 1 ] === '/') {
-                if ($source[ strlen($source) - 1 ] === '/') {
+            if ($dest[strlen($dest) - 1] === '/') {
+                if ($source[strlen($source) - 1] === '/') {
                     //Copy only contents
                 } else {
                     //Change parent itself and its contents
                     $dest = $dest . basename($source);
                     if (!mkdir($dest) && !is_dir($dest)) {
-                        throw new \RuntimeException(sprintf('Directory "%s" was not created', $dest));
+                        throw new RuntimeException(sprintf('Directory "%s" was not created', $dest));
                     }
-                    @chmod($dest, $options[ 'filePermission' ]);
+                    @chmod($dest, $options['filePermission']);
                 }
-            } elseif ($source[ strlen($source) - 1 ] === '/') {
+            } elseif ($source[strlen($source) - 1] === '/') {
                 //Copy parent directory with new name and all its content
-                if (!mkdir($dest, $options[ 'folderPermission' ]) && !is_dir($dest)) {
-                    throw new \RuntimeException(sprintf('Directory "%s" was not created', $dest));
+                if (!mkdir($dest, $options['folderPermission']) && !is_dir($dest)) {
+                    throw new RuntimeException(sprintf('Directory "%s" was not created', $dest));
                 }
-                @chmod($dest, $options[ 'filePermission' ]);
+                @chmod($dest, $options['filePermission']);
             } else {
                 //Copy parent directory with new name and all its content
-                if (!mkdir($dest, $options[ 'folderPermission' ]) && !is_dir($dest)) {
-                    throw new \RuntimeException(sprintf('Directory "%s" was not created', $dest));
+                if (!mkdir($dest, $options['folderPermission']) && !is_dir($dest)) {
+                    throw new RuntimeException(sprintf('Directory "%s" was not created', $dest));
                 }
-                @chmod($dest, $options[ 'filePermission' ]);
+                @chmod($dest, $options['filePermission']);
             }
 
             $dirHandle = opendir($source);
@@ -712,7 +730,7 @@
      * @param string $file
      *
      * @return int
-*/
+     */
     function osc_dbdump($path, $file)
     {
         require_once LIB_PATH . 'osclass/model/Dump.php';
@@ -752,8 +770,8 @@
 
         $tables = array();
         foreach ($result as $_table) {
-            $tableName            = current($_table);
-            $tables[ $tableName ] = $tableName;
+            $tableName          = current($_table);
+            $tables[$tableName] = $tableName;
         }
 
         $tables_order = array(
@@ -793,7 +811,7 @@
             if (array_key_exists(DB_TABLE_PREFIX . $table, $tables)) {
                 $dump->table_structure($path, DB_TABLE_PREFIX . $table);
                 $dump->table_data($path, DB_TABLE_PREFIX . $table);
-                unset($tables[ DB_TABLE_PREFIX . $table ]);
+                unset($tables[DB_TABLE_PREFIX . $table]);
             }
         }
 
@@ -806,11 +824,12 @@
         return 1;
     }
 
+
     /**
      * Returns true if there is curl on system environment
      *
      * @return bool
-*/
+     */
     function testCurl()
     {
         return !(!function_exists('curl_init') || !function_exists('curl_exec'));
@@ -821,7 +840,7 @@
      * Returns true if there is fsockopen on system environment
      *
      * @return bool|\type
-*/
+     */
     function testFsockopen()
     {
         if (!function_exists('fsockopen')) {
@@ -834,6 +853,7 @@
 
     /**
      * IF http-chunked-decode not exist implement here
+     *
      * @since 3.0
      */
     if (!function_exists('http_chunked_decode')) {
@@ -850,7 +870,7 @@
             $len     = strlen($chunk);
             $dechunk = null;
             while (($pos < $len)
-                   && ($chunkLenHex = substr($chunk, $pos, ($newlineAt = strpos($chunk, "\n", $pos + 1)) - $pos))) {
+                && ($chunkLenHex = substr($chunk, $pos, ($newlineAt = strpos($chunk, "\n", $pos + 1)) - $pos))) {
                 if (!is_hex($chunkLenHex)) {
                     trigger_error('Value is not properly chunk encoded', E_USER_WARNING);
 
@@ -896,12 +916,12 @@
      *
      * @return array|\type
      * @since 3.0
-*/
+     */
     function processResponse($content)
     {
         $res     = explode("\r\n\r\n", $content);
-        $headers = $res[ 0 ];
-        $body    = isset($res[ 1 ]) ? $res[ 1 ] : '';
+        $headers = $res[0];
+        $body    = isset($res[1]) ? $res[1] : '';
 
         if (!is_string($headers)) {
             return array();
@@ -928,7 +948,7 @@
 
         foreach ($tmpHeaders as $aux) {
             if (preg_match('/^(.*):\s(.*)$/', $aux, $matches)) {
-                $headers[ strtolower($matches[ 1 ]) ] = $matches[ 2 ];
+                $headers[strtolower($matches[1])] = $matches[2];
             }
         }
 
@@ -939,23 +959,24 @@
     /**
      * Download file using fsockopen
      *
-     * @param type $sourceFile
-     * @param type $fileout
+     * @param string $sourceFile
+     * @param mixed  $fileout
      *
-     * @param null $post_data
+     * @param null   $post_data
+     *
      * @return bool|string
      * @since 3.0
-*/
+     */
     function download_fsockopen($sourceFile, $fileout = null, $post_data = null)
     {
         // parse URL
         $aUrl = parse_url($sourceFile);
-        $host = $aUrl[ 'host' ];
+        $host = $aUrl['host'];
         if ('localhost' === strtolower($host)) {
             $host = '127.0.0.1';
         }
 
-        $link = $aUrl[ 'path' ] . (isset($aUrl[ 'query' ]) ? '?' . $aUrl[ 'query' ] : '');
+        $link = $aUrl['path'] . (isset($aUrl['query']) ? '?' . $aUrl['query'] : '');
 
         if (empty($link)) {
             $link .= '/';
@@ -964,66 +985,66 @@
         $fp = @fsockopen($host, 80, $errno, $errstr, 30);
         if (!$fp) {
             return false;
+        }
+
+        $ua  = Params::getServerParam('HTTP_USER_AGENT') . ' Osclass (v.' . osc_version() . ')';
+        $out = ($post_data != null && is_array($post_data) ? 'POST' : 'GET') . " $link HTTP/1.1\r\n";
+        $out .= "Host: $host\r\n";
+        $out .= "User-Agent: $ua\r\n";
+        $out .= "Connection: Close\r\n\r\n";
+        $out .= "\r\n";
+        if ($post_data != null && is_array($post_data)) {
+            $out .= http_build_query($post_data);
+        }
+        fwrite($fp, $out);
+
+        $contents = '';
+        while (!feof($fp)) {
+            $contents .= fgets($fp, 1024);
+        }
+
+        fclose($fp);
+
+        // check redirections ?
+        // if (redirections) then do request again
+        $aResult = processResponse($contents);
+        $headers = processHeaders($aResult['headers']);
+
+        $location = @$headers['location'];
+        if (isset($location) && $location != '') {
+            $aUrl = parse_url($headers['location']);
+
+            $host = $aUrl['host'];
+            if ('localhost' === strtolower($host)) {
+                $host = '127.0.0.1';
+            }
+
+            $requestPath = $aUrl['path'] . (isset($aUrl['query']) ? '?' . $aUrl['query'] : '');
+
+            if (empty($requestPath)) {
+                $requestPath .= '/';
+            }
+
+            download_fsockopen($host, $requestPath, $fileout);
         } else {
-            $ua  = Params::getServerParam('HTTP_USER_AGENT') . ' Osclass (v.' . osc_version() . ')';
-            $out = ($post_data != null && is_array($post_data) ? 'POST' : 'GET') . " $link HTTP/1.1\r\n";
-            $out .= "Host: $host\r\n";
-            $out .= "User-Agent: $ua\r\n";
-            $out .= "Connection: Close\r\n\r\n";
-            $out .= "\r\n";
-            if ($post_data != null && is_array($post_data)) {
-                $out .= http_build_query($post_data);
+            $body             = $aResult['body'];
+            $transferEncoding = @$headers['transfer-encoding'];
+            if ($transferEncoding === 'chunked') {
+                $body = http_chunked_decode($aResult['body']);
             }
-            fwrite($fp, $out);
+            if ($fileout != null) {
+                $ff = @fopen($fileout, 'wb+');
+                if ($ff !== false) {
+                    fwrite($ff, $body);
+                    fclose($ff);
 
-            $contents = '';
-            while (!feof($fp)) {
-                $contents .= fgets($fp, 1024);
+                    return true;
+                }
+
+                return false;
             }
 
-            fclose($fp);
-
-            // check redirections ?
-            // if (redirections) then do request again
-            $aResult = processResponse($contents);
-            $headers = processHeaders($aResult[ 'headers' ]);
-
-            $location = @$headers[ 'location' ];
-            if (isset($location) && $location != '') {
-                $aUrl = parse_url($headers[ 'location' ]);
-
-                $host = $aUrl[ 'host' ];
-                if ('localhost' === strtolower($host)) {
-                    $host = '127.0.0.1';
-                }
-
-                $requestPath = $aUrl[ 'path' ] . (isset($aUrl[ 'query' ]) ? '?' . $aUrl[ 'query' ] : '');
-
-                if (empty($requestPath)) {
-                    $requestPath .= '/';
-                }
-
-                download_fsockopen($host, $requestPath, $fileout);
-            } else {
-                $body             = $aResult[ 'body' ];
-                $transferEncoding = @$headers[ 'transfer-encoding' ];
-                if ($transferEncoding === 'chunked') {
-                    $body = http_chunked_decode($aResult[ 'body' ]);
-                }
-                if ($fileout != null) {
-                    $ff = @fopen($fileout, 'wb+');
-                    if ($ff !== false) {
-                        fwrite($ff, $body);
-                        fclose($ff);
-
-                        return true;
-                    } else {
-                        return false;
-                    }
-                } else {
-                    return $body;
-                }
-            }
+            return $body;
         }
     }
 
@@ -1066,10 +1087,12 @@
                 fclose($fp);
 
                 return true;
-            } else {
-                return false;
             }
-        } elseif (testFsockopen()) { // test curl/fsockopen
+
+            return false;
+        }
+
+        if (testFsockopen()) { // test curl/fsockopen
             $downloadedFile = osc_content_path() . 'downloads/' . $downloadedFile;
             download_fsockopen($sourceFile, $downloadedFile);
 
@@ -1120,8 +1143,6 @@
     }
 
 
-// -----------------------------------------------------------------------------
-
     /**
      * Check if we loaded some specific module of apache
      *
@@ -1139,8 +1160,7 @@
         } elseif (function_exists('phpinfo')) {
             ob_start();
             phpinfo(INFO_MODULES);
-            $content = ob_get_contents();
-            ob_end_clean();
+            $content = ob_get_clean();
             if (stripos($content, $mod) !== false) {
                 return true;
             }
@@ -1201,10 +1221,8 @@
             return 0;
         }
 
-        if (!file_exists($to)) {
-            if (!mkdir($to, 0766) && !is_dir($to)) {
-                return 0;
-            }
+        if (!file_exists($to) && !mkdir($to, 0766) && !is_dir($to)) {
+            return 0;
         }
 
         @chmod($to, 0755);
@@ -1255,16 +1273,16 @@
                 return -1;
             }
 
-            if (substr($file[ 'name' ], 0, 9) === '__MACOSX/') {
+            if (strpos($file['name'], '__MACOSX/') === 0) {
                 continue;
             }
-            if (strpos($file[ 'name' ], '../') !== false) {
+            if (strpos($file['name'], '../') !== false) {
                 continue;
             }
 
-            if (substr($file[ 'name' ], -1) === '/') {
-                if (!mkdir($concurrentDirectory = $to . $file[ 'name' ], 0755) && !is_dir($concurrentDirectory)) {
-                    throw new \RuntimeException(sprintf('Directory "%s" was not created', $concurrentDirectory));
+            if (substr($file['name'], -1) === '/') {
+                if (!mkdir($concurrentDirectory = $to . $file['name'], 0755) && !is_dir($concurrentDirectory)) {
+                    throw new RuntimeException(sprintf('Directory "%s" was not created', $concurrentDirectory));
                 }
                 continue;
             }
@@ -1274,7 +1292,7 @@
                 return -1;
             }
 
-            $fp = @fopen($to . $file[ 'name' ], 'wb');
+            $fp = @fopen($to . $file['name'], 'wb');
             if (!$fp) {
                 return -1;
             }
@@ -1304,38 +1322,39 @@
         }
 
         $archive = new PclZip($zip_file);
-        if (($files = $archive->extract(PCLZIP_OPT_EXTRACT_AS_STRING)) == false) {
+        $files   = $archive->extract(PCLZIP_OPT_EXTRACT_AS_STRING);
+        if (($files) == false) {
             return 2;
         }
 
         // check if the zip is not empty
-        if (count($files) == 0) {
+        if (count($files) === 0) {
             return 2;
         }
 
         // Extract the files from the zip
         foreach ($files as $file) {
-            if (substr($file[ 'filename' ], 0, 9) === '__MACOSX/') {
+            if (strpos($file['filename'], '__MACOSX/') === 0) {
                 continue;
             }
-            if (strpos($file[ 'filename' ], '../') !== false) {
+            if (strpos($file['filename'], '../') !== false) {
                 continue;
             }
 
-            if ($file[ 'folder' ]) {
-                if (!mkdir($concurrentDirectory = $to . $file[ 'filename' ], 0755) && !is_dir($concurrentDirectory)) {
-                    throw new \RuntimeException(sprintf('Directory "%s" was not created', $concurrentDirectory));
+            if ($file['folder']) {
+                if (!mkdir($concurrentDirectory = $to . $file['filename'], 0755) && !is_dir($concurrentDirectory)) {
+                    throw new RuntimeException(sprintf('Directory "%s" was not created', $concurrentDirectory));
                 }
                 continue;
             }
 
 
-            $fp = @fopen($to . $file[ 'filename' ], 'wb');
+            $fp = @fopen($to . $file['filename'], 'wb');
             if (!$fp) {
                 return -1;
             }
 
-            @fwrite($fp, $file[ 'content' ]);
+            @fwrite($fp, $file['content']);
             @fclose($fp);
         }
 
@@ -1354,7 +1373,8 @@
     function osc_zip_folder($archive_folder, $archive_name)
     {
         if (strpos($archive_folder, '../') !== false || strpos($archive_name, '../') !== false || strpos($archive_folder, "..\\") !== false
-            || strpos($archive_name, "..\\") !== false) {
+            || strpos($archive_name, "..\\") !== false
+        ) {
             return false;
         }
 
@@ -1378,7 +1398,8 @@
     function _zip_folder_ziparchive($archive_folder, $archive_name)
     {
         if (strpos($archive_folder, '../') !== false || strpos($archive_name, '../') !== false || strpos($archive_folder, "..\\") !== false
-            || strpos($archive_name, "..\\") !== false) {
+            || strpos($archive_name, "..\\") !== false
+        ) {
             return false;
         }
 
@@ -1407,9 +1428,9 @@
             $zip->close();
 
             return true;
-        } else {
-            return false;
         }
+
+        return false;
     }
 
 
@@ -1424,7 +1445,8 @@
     function _zip_folder_pclzip($archive_folder, $archive_name)
     {
         if (strpos($archive_folder, '../') !== false || strpos($archive_name, '../') !== false || strpos($archive_folder, "..\\") !== false
-            || strpos($archive_name, "..\\") !== false) {
+            || strpos($archive_name, "..\\") !== false
+        ) {
             return false;
         }
 
@@ -1437,7 +1459,7 @@
 
             // To support windows and the C: root you need to add the
             // following 3 lines, should be ignored on linux
-            if ($v_dir[ 1 ] === ':') {
+            if ($v_dir[1] === ':') {
                 $v_remove = substr($v_dir, 2);
             }
             $v_list = $zip->create($dir, PCLZIP_OPT_REMOVE_PATH, $v_remove);
@@ -1454,15 +1476,29 @@
      */
     function osc_check_recaptcha()
     {
-        if (Params::getParam('g-recaptcha-response') != '') {
+        $gReCaptchaResponse = Params::getParam('g-recaptcha-response');
+        if ($gReCaptchaResponse !== '' || $gReCaptchaResponse !== false || $gReCaptchaResponse !== 0) {
             $recaptcha = new ReCaptcha(osc_recaptcha_private_key());
-            $resp      = $recaptcha->verify(Params::getParam('g-recaptcha-response'), Params::getServerParam('REMOTE_ADDR'));
+            $resp      = $recaptcha->verify($gReCaptchaResponse, Params::getServerParam('REMOTE_ADDR'));
             if ($resp->isSuccess()) {
                 return true;
             }
         }
 
         return false;
+    }
+
+
+    /**
+     * replace double slash with single slash
+     *
+     * @param $path
+     *
+     * @return string
+     */
+    function osc_replace_double_slash($path)
+    {
+        return str_replace('//', '/', $path);
     }
 
 
@@ -1481,38 +1517,40 @@
         if ($dh = opendir($dir)) {
             while (($file = readdir($dh)) !== false) {
                 if ($file !== '.' && $file !== '..') {
-                    if (is_dir(str_replace('//', '/', $dir . '/' . $file))) {
-                        if (str_replace('//', '/', $dir) == (ABS_PATH . 'oc-content/themes')) {
+                    if (is_dir(osc_replace_double_slash($dir . '/' . $file))) {
+                        if (osc_replace_double_slash($dir) === (ABS_PATH . 'oc-content/themes')) {
                             if ($file === 'bender' || $file === 'index.php') {
-                                $res = osc_check_dir_writable(str_replace('//', '/', $dir . '/' . $file));
+                                $res = osc_check_dir_writable(osc_replace_double_slash($dir . '/' . $file));
                                 if (!$res) {
                                     return false;
                                 }
                             }
-                        } elseif (str_replace('//', '/', $dir) == (ABS_PATH . 'oc-content/plugins')) {
+                        } elseif (osc_replace_double_slash($dir) === (ABS_PATH . 'oc-content/plugins')) {
                             if ($file === 'google_maps' || $file === 'google_analytics' || $file === 'index.php') {
-                                $res = osc_check_dir_writable(str_replace('//', '/', $dir . '/' . $file));
+                                $res = osc_check_dir_writable(osc_replace_double_slash($dir . '/' . $file));
                                 if (!$res) {
                                     return false;
                                 }
                             }
-                        } elseif (str_replace('//', '/', $dir) == (ABS_PATH . 'oc-content/languages')) {
+                        } elseif (osc_replace_double_slash($dir) === (ABS_PATH . 'oc-content/languages')) {
                             if ($file === 'en_US' || $file === 'index.php') {
-                                $res = osc_check_dir_writable(str_replace('//', '/', $dir . '/' . $file));
+                                $res = osc_check_dir_writable(osc_replace_double_slash($dir . '/' . $file));
                                 if (!$res) {
                                     return false;
                                 }
                             }
-                        } elseif (str_replace('//', '/', $dir) == (ABS_PATH . 'oc-content/downloads')) {
-                        } elseif (str_replace('//', '/', $dir) == osc_uploads_path()) {
+                        } elseif (osc_replace_double_slash($dir) === (ABS_PATH . 'oc-content/downloads')) {
+                            continue;
+                        } elseif (osc_replace_double_slash($dir) === osc_uploads_path()) {
+                            continue;
                         } else {
-                            $res = osc_check_dir_writable(str_replace('//', '/', $dir . '/' . $file));
+                            $res = osc_check_dir_writable(osc_replace_double_slash($dir . '/' . $file));
                             if (!$res) {
                                 return false;
                             }
                         }
                     } else {
-                        return is_writable(str_replace('//', '/', $dir . '/' . $file));
+                        return is_writable(osc_replace_double_slash($dir . '/' . $file));
                     }
                 }
             }
@@ -1537,50 +1575,51 @@
         clearstatcache();
         if ($dh = opendir($dir)) {
             while (($file = readdir($dh)) !== false) {
-                if ($file !== '.' && $file !== '..' && $file[ 0 ] !== '.') {
-                    if (is_dir(str_replace('//', '/', $dir . '/' . $file))) {
-                        if (!is_writable(str_replace('//', '/', $dir . '/' . $file))) {
-                            $res = @chmod(str_replace('//', '/', $dir . '/' . $file), 0755);
-                            if (!$res) {
-                                return false;
-                            }
-                        }
-                        if (str_replace('//', '/', $dir) == (ABS_PATH . 'oc-content/themes')) {
+                if ($file !== '.' && $file !== '..' && $file[0] !== '.') {
+                    if (!is_writable(osc_replace_double_slash($dir . '/' . $file))) {
+                        $result = @chmod(str_replace('//', '/', $dir . '/' . $file), 0755);
+                    }
+
+                    if (is_dir(osc_replace_double_slash($dir . '/' . $file))) {
+                        if (osc_replace_double_slash($dir) === (ABS_PATH . 'oc-content/themes')) {
                             if ($file === 'modern' || $file === 'index.php') {
                                 $res = osc_change_permissions(str_replace('//', '/', $dir . '/' . $file));
                                 if (!$res) {
                                     return false;
                                 }
                             }
-                        } elseif (str_replace('//', '/', $dir) == (ABS_PATH . 'oc-content/plugins')) {
+                        } elseif (osc_replace_double_slash($dir) === (ABS_PATH . 'oc-content/plugins')) {
                             if ($file === 'google_maps' || $file === 'google_analytics' || $file === 'index.php') {
-                                $res = osc_change_permissions(str_replace('//', '/', $dir . '/' . $file));
+                                $res = osc_change_permissions(osc_replace_double_slash($dir . '/' . $file));
                                 if (!$res) {
                                     return false;
                                 }
                             }
-                        } elseif (str_replace('//', '/', $dir) == (ABS_PATH . 'oc-content/languages')) {
+                        } elseif (osc_replace_double_slash($dir) === (ABS_PATH . 'oc-content/languages')) {
                             if ($file === 'en_US' || $file === 'index.php') {
-                                $res = osc_change_permissions(str_replace('//', '/', $dir . '/' . $file));
+                                $res = osc_change_permissions(osc_replace_double_slash($dir . '/' . $file));
                                 if (!$res) {
                                     return false;
                                 }
                             }
-                        } elseif (str_replace('//', '/', $dir) == (ABS_PATH . 'oc-content/downloads')) {
-                        } elseif (str_replace('//', '/', $dir) == osc_uploads_path()) {
+                        } elseif (osc_replace_double_slash($dir) === (ABS_PATH . 'oc-content/downloads')) {
+                            continue;
+                        } elseif (osc_replace_double_slash($dir) === osc_uploads_path()) {
+                            continue;
                         } else {
-                            $res = osc_change_permissions(str_replace('//', '/', $dir . '/' . $file));
+                            $res = osc_change_permissions(osc_replace_double_slash($dir . '/' . $file));
                             if (!$res) {
                                 return false;
                             }
                         }
-                    } else {
-                        if (!is_writable(str_replace('//', '/', $dir . '/' . $file))) {
-                            return @chmod(str_replace('//', '/', $dir . '/' . $file), 0755);
-                        } else {
-                            return true;
-                        }
+                        return true;
                     }
+
+                    if (isset($result)) {
+                        return $result;
+                    }
+
+                    return false;
                 }
             }
             closedir($dh);
@@ -1601,8 +1640,8 @@
             return false;
         }
 
-        $perms         = array();
-        $perms[ $dir ] = fileperms($dir);
+        $perms       = array();
+        $perms[$dir] = fileperms($dir);
         clearstatcache();
         if ($dh = opendir($dir)) {
             while (($file = readdir($dh)) !== false) {
@@ -1610,10 +1649,10 @@
                     if (is_dir(str_replace('//', '/', $dir . '/' . $file))) {
                         $res = osc_save_permissions(str_replace('//', '/', $dir . '/' . $file));
                         foreach ($res as $k => $v) {
-                            $perms[ $k ] = $v;
+                            $perms[$k] = $v;
                         }
                     } else {
-                        $perms[ str_replace('//', '/', $dir . '/' . $file) ] = @fileperms(str_replace('//', '/', $dir . '/' . $file));
+                        $perms[str_replace('//', '/', $dir . '/' . $file)] = @fileperms(str_replace('//', '/', $dir . '/' . $file));
                     }
                 }
             }
@@ -1639,7 +1678,7 @@
      * Recursive glob function
      *
      * @param string $pattern
-     * @param int $flags
+     * @param int    $flags
      * @param string $path
      *
      * @return array of files
@@ -1653,17 +1692,31 @@
 
             return rglob(basename($pattern), $flags, $dir . '/');
         }
+        /**
+         *
+         * $paths = glob($path . '*', GLOB_ONLYDIR | GLOB_NOSORT);
+         * $files = glob($path . $pattern, $flags);
+         * foreach ($paths as $p) {
+         * $files = array_merge($files, rglob($pattern, $flags, $p . '/'));
+         * }
+         */
+        //TODO
+        //Better Maybe ?
+
         $paths = glob($path . '*', GLOB_ONLYDIR | GLOB_NOSORT);
         $files = glob($path . $pattern, $flags);
         foreach ($paths as $p) {
-            $files = array_merge($files, rglob($pattern, $flags, $p . '/'));
+            $files[] = rglob($pattern, $flags, $p . '/');
         }
+        $files = array_merge([], ...$files);
 
         return $files;
     }
 
+
     /**
      * Market util functions
+     *
      * @param      $update_uri
      * @param null $version
      *
@@ -1681,8 +1734,8 @@
 
 
     /**
-     * @param  string    $update_uri
-     * @param null $version
+     * @param string $update_uri
+     * @param null   $version
      *
      * @return bool
      */
@@ -1699,7 +1752,7 @@
 
     /**
      * @param string $update_uri
-     * @param null $version
+     * @param null   $version
      *
      * @return bool
      */
@@ -1712,11 +1765,11 @@
             }
 
             $data = json_decode($json, true);
-            if (isset($data[ 's_version' ])) {
-                $result = version_compare2($version, $data[ 's_version' ]);
+            if (isset($data['s_version'])) {
+                $result = version_compare2($version, $data['s_version']);
                 if ($result == -1) {
                     // market have a newer version of this language
-                    $result = version_compare2($data[ 's_version' ], OSCLASS_VERSION);
+                    $result = version_compare2($data['s_version'], OSCLASS_VERSION);
                     if ($result == 0 || $result == -1) {
                         // market version is compatible with current osclass version
                         return true;
@@ -1742,7 +1795,6 @@
         }
 
         if (in_array($type, array('plugins', 'themes', 'languages'))) {
-            $uri = '';
             if (stripos($update_uri, 'http://') === false && stripos($update_uri, 'https://') === false) {
                 // OSCLASS OFFICIAL REPOSITORY
                 // $uri = osc_market_url( $type , $update_uri );
@@ -1773,16 +1825,16 @@
         }
 
         $data = json_decode($json, true);
-        if (isset($data[ 's_version' ])) {
-            $result = version_compare2($data[ 's_version' ], $version);
+        if (isset($data['s_version'])) {
+            $result = version_compare2($data['s_version'], $version);
             if ($result === 1) {
                 return true;
             }
         }
+
+        return false;
     }
 
-
-// END -- Market util functions
 
     /**
      * Returns
@@ -1797,15 +1849,15 @@
      */
     function version_compare2($a, $b)
     {
-        $a = explode('.', rtrim($a, '.0')); //Split version into pieces and remove trailing .0
-        $b = explode('.', rtrim($b, '.0')); //Split version into pieces and remove trailing .0
-        foreach ($a as $depth => $aVal) { //Iterate over each piece of A
-            if (isset($b[ $depth ])) { //If B matches A to this depth, compare the values
-                if ($aVal > $b[ $depth ]) {
+        $aA = explode('.', rtrim($a, '.0')); //Split version into pieces and remove trailing .0
+        $aB = explode('.', rtrim($b, '.0')); //Split version into pieces and remove trailing .0
+        foreach ($aA as $depth => $aVal) { //Iterate over each piece of A
+            if (isset($b[$depth])) { //If B matches A to this depth, compare the values
+                if ($aVal > $aB[$depth]) {
                     return 1;
                 }
 
-                if ($aVal < $b[ $depth ]) {
+                if ($aVal < $aB[$depth]) {
                     return -1;
                 } //Return A > B //Return B > A
                 //An equal result is inconclusive at this point
@@ -1815,7 +1867,7 @@
         }
         //At this point, we know that to the depth that A and B extend to, they are equivalent.
         //Either the loop ended because A is shorter than B, or both are equal.
-        return (count($a) < count($b)) ? -1 : 0;
+        return (count($aA) < count($aB)) ? -1 : 0;
     }
 
 
@@ -1828,12 +1880,13 @@
     function _recursive_category_stats(&$aux, &$categoryTotal)
     {
         $count_items = Item::newInstance()->numItems($aux);
-        if (is_array($aux[ 'categories' ])) {
-            foreach ($aux[ 'categories' ] as &$cat) {
+        if (is_array($aux['categories'])) {
+            foreach ($aux['categories'] as &$cat) {
                 $count_items += _recursive_category_stats($cat, $categoryTotal);
             }
+            unset($cat);
         }
-        $categoryTotal[ $aux[ 'pk_i_id' ] ] = $count_items;
+        $categoryTotal[$aux['pk_i_id']] = $count_items;
 
         return $count_items;
     }
@@ -1850,18 +1903,20 @@
         $aCategories   = Category::newInstance()->toTreeAll();
 
         foreach ($aCategories as &$category) {
-            if ($category[ 'fk_i_parent_id' ] === null) {
+            if ($category['fk_i_parent_id'] === null) {
                 _recursive_category_stats($category, $categoryTotal);
             }
         }
+        unset($category);
 
         $sql     = 'REPLACE INTO ' . DB_TABLE_PREFIX . 't_category_stats (fk_i_category_id, i_num_items) VALUES ';
         $aValues = array();
         foreach ($categoryTotal as $k => $v) {
             $aValues[] = "($k, $v)";
         }
-        $sql    .= implode(',', $aValues);
-        $result = CategoryStats::newInstance()->dao->query($sql);
+        $sql .= implode(',', $aValues);
+
+        CategoryStats::newInstance()->dao->query($sql);
     }
 
 
@@ -1889,12 +1944,13 @@
             $categoryTotal += $total;
         }
 
-        $sql    = 'REPLACE INTO ' . DB_TABLE_PREFIX . 't_category_stats (fk_i_category_id, i_num_items) VALUES ';
-        $sql    .= ' (' . $id . ', ' . $categoryTotal . ')';
-        $result = CategoryStats::newInstance()->dao->query($sql);
+        $sql = 'REPLACE INTO ' . DB_TABLE_PREFIX . 't_category_stats (fk_i_category_id, i_num_items) VALUES ';
+        $sql .= ' (' . $id . ', ' . $categoryTotal . ')';
 
-        if ($category[ 'fk_i_parent_id' ] != 0) {
-            osc_update_cat_stats_id($category[ 'fk_i_parent_id' ]);
+        CategoryStats::newInstance()->dao->query($sql);
+
+        if ($category['fk_i_parent_id'] != 0) {
+            osc_update_cat_stats_id($category['fk_i_parent_id']);
         }
     }
 
@@ -1902,11 +1958,12 @@
     /**
      * Update locations stats. I moved this function from cron.daily.php:update_location_stats
      *
-     * @since 3.1
      * @param bool $force
      * @param int  $limit
+     *
      * @return int
-*/
+     * @since 3.1
+     */
     function osc_update_location_stats($force = false, $limit = 1000)
     {
         $loctmp   = LocationsTmp::newInstance();
@@ -1920,8 +1977,8 @@
             }
             $aLocations = $loctmp->getLocations($limit);
             foreach ($aLocations as $location) {
-                $id   = $location[ 'id_location' ];
-                $type = $location[ 'e_type' ];
+                $id   = $location['id_location'];
+                $type = $location['e_type'];
                 $data = 0;
                 // update locations stats
                 switch ($type) {
@@ -1945,8 +2002,8 @@
                 }
                 if ($data >= 0) {
                     $loctmp->delete(array(
-                        'e_type'      => $location[ 'e_type' ],
-                        'id_location' => $location[ 'id_location' ]
+                        'e_type'      => $location['e_type'],
+                        'id_location' => $location['id_location']
                     ));
                 }
             }
@@ -1955,14 +2012,14 @@
             $aCountry = Country::newInstance()->listAll();
 
             foreach ($aCountry as $country) {
-                $aRegionsCountry = Region::newInstance()->findByCountry($country[ 'pk_c_code' ]);
-                $loctmp->insert(array('id_location' => $country[ 'pk_c_code' ], 'e_type' => 'COUNTRY'));
+                $aRegionsCountry = Region::newInstance()->findByCountry($country['pk_c_code']);
+                $loctmp->insert(array('id_location' => $country['pk_c_code'], 'e_type' => 'COUNTRY'));
                 foreach ($aRegionsCountry as $region) {
-                    $aCitiesRegion = City::newInstance()->findByRegion($region[ 'pk_i_id' ]);
-                    $loctmp->insert(array('id_location' => $region[ 'pk_i_id' ], 'e_type' => 'REGION'));
+                    $aCitiesRegion = City::newInstance()->findByRegion($region['pk_i_id']);
+                    $loctmp->insert(array('id_location' => $region['pk_i_id'], 'e_type' => 'REGION'));
                     $batchCities = array();
                     foreach ($aCitiesRegion as $city) {
-                        $batchCities[] = $city[ 'pk_i_id' ];
+                        $batchCities[] = $city['pk_i_id'];
                     }
                     unset($aCitiesRegion);
                     $loctmp->batchInsert($batchCities, 'CITY');
@@ -1980,9 +2037,10 @@
 
     /** Translate current categories to new locale
      *
-     * @since 3.2.1
      * @param $locale
-*/
+     *
+     * @since 3.2.1
+     */
     function osc_translate_categories($locale)
     {
         $old_locale = Session::newInstance()->_get('adminLocale');
@@ -1992,26 +2050,26 @@
         $old_categories = $catManager->_findNameIDByLocale($old_locale);
         $tmp_categories = $catManager->_findNameIDByLocale($locale);
         foreach ($tmp_categories as $category) {
-            $new_categories[ $category[ 'pk_i_id' ] ] = $category[ 's_name' ];
+            $new_categories[$category['pk_i_id']] = $category['s_name'];
         }
         unset($tmp_categories);
         foreach ($old_categories as $category) {
-            if (!isset($new_categories[ $category[ 'pk_i_id' ] ])) {
-                $fieldsDescription[ 's_name' ]           = __($category[ 's_name' ], 'cat_' . $locale);
-                $fieldsDescription[ 's_description' ]    = '';
-                $fieldsDescription[ 'fk_i_category_id' ] = $category[ 'pk_i_id' ];
-                $fieldsDescription[ 'fk_c_locale_code' ] = $locale;
-                $slug_tmp                                = $slug = osc_sanitizeString(osc_apply_filter('slug', $fieldsDescription[ 's_name' ]));
-                $slug_unique                             = 1;
+            if (!isset($new_categories[$category['pk_i_id']])) {
+                $fieldsDescription['s_name']           = __($category['s_name'], 'cat_' . $locale);
+                $fieldsDescription['s_description']    = '';
+                $fieldsDescription['fk_i_category_id'] = $category['pk_i_id'];
+                $fieldsDescription['fk_c_locale_code'] = $locale;
+                $slug_tmp                              = $slug = osc_sanitizeString(osc_apply_filter('slug', $fieldsDescription['s_name']));
+                $slug_unique                           = 1;
                 while (true) {
                     if (!$catManager->findBySlug($slug)) {
                         break;
-                    } else {
-                        $slug = $slug_tmp . '_' . $slug_unique;
-                        $slug_unique++;
                     }
+
+                    $slug = $slug_tmp . '_' . $slug_unique;
+                    $slug_unique++;
                 }
-                $fieldsDescription[ 's_slug' ] = $slug;
+                $fieldsDescription['s_slug'] = $slug;
                 $catManager->insertDescription($fieldsDescription);
             }
         }
@@ -2107,10 +2165,10 @@
         $count = preg_match_all('/<form(.*?)>/is', $form_data_html, $matches, PREG_SET_ORDER);
         if (is_array($matches)) {
             foreach ($matches as $m) {
-                if (strpos($m[ 1 ], 'nocsrf') !== false) {
+                if (strpos($m[1], 'nocsrf') !== false) {
                     continue;
                 }
-                $form_data_html = str_replace($m[ 0 ], "<form{$m[1]}>" . osc_csrf_token_form(), $form_data_html);
+                $form_data_html = str_replace($m[0], "<form{$m[1]}>" . osc_csrf_token_form(), $form_data_html);
             }
         }
 
@@ -2149,7 +2207,7 @@
         if (ob_get_length() > 0) {
             ob_end_flush();
         }
-        if ($code != null) {
+        if ($code !== null) {
             header('Location: ' . $url, true, $code);
         } else {
             header('Location: ' . $url);
@@ -2184,18 +2242,18 @@
         $locations         = $manager->listByEmptySlug();
         $locations_changed = 0;
         foreach ($locations as $location) {
-            $slug_tmp    = $slug = osc_sanitizeString($location[ 's_name' ]);
+            $slug_tmp    = $slug = osc_sanitizeString($location['s_name']);
             $slug_unique = 1;
             while (true) {
                 $location_slug = $manager->findBySlug($slug);
-                if (!isset($location_slug[ $field ])) {
+                if (!isset($location_slug[$field])) {
                     break;
-                } else {
-                    $slug = $slug_tmp . '-' . $slug_unique;
-                    $slug_unique++;
                 }
+
+                $slug = $slug_tmp . '-' . $slug_unique;
+                $slug_unique++;
             }
-            $locations_changed += $manager->update(array('s_slug' => $slug), array($field => $location[ $field ]));
+            $locations_changed += $manager->update(array('s_slug' => $slug), array($field => $location[$field]));
         }
 
         return $locations_changed;
@@ -2210,11 +2268,11 @@
         foreach ($input as $key => &$value) {
             if (is_array($value)) {
                 osc_prune_array($value);
-                if (empty($input[ $key ])) {
-                    unset($input[ $key ]);
+                if (empty($input[$key])) {
+                    unset($input[$key]);
                 }
             } elseif ($value === '' || $value === false || $value === null) {
-                unset($input[ $key ]);
+                unset($input[$key]);
             }
         }
     }
@@ -2241,7 +2299,7 @@
          ***********************/
         $data        = osc_file_get_contents('https://osclass.org/latest_version_v1.php');
         $data        = json_decode(substr($data, 1, -2), true);
-        $source_file = $data[ 'url' ];
+        $source_file = $data['url'];
         if ($source_file != '') {
             $tmp      = explode('/', $source_file);
             $filename = end($tmp);
@@ -2251,12 +2309,12 @@
                 /**********************
                  ***** UNZIP FILE *****
                  **********************/
-                $tmp_path = osc_content_path() . 'downloads/oc-temp/core-' . $data[ 'version' ] . '/';
+                $tmp_path = osc_content_path() . 'downloads/oc-temp/core-' . $data['version'] . '/';
                 if (!mkdir($concurrentDirectory = osc_content_path() . 'downloads/oc-temp/', 0755) && !is_dir($concurrentDirectory)) {
-                    throw new \RuntimeException(sprintf('Directory "%s" was not created', $concurrentDirectory));
+                    throw new RuntimeException(sprintf('Directory "%s" was not created', $concurrentDirectory));
                 }
                 if (!mkdir($tmp_path, 0755) && !is_dir($tmp_path)) {
-                    throw new \RuntimeException(sprintf('Directory "%s" was not created', $tmp_path));
+                    throw new RuntimeException(sprintf('Directory "%s" was not created', $tmp_path));
                 }
                 $res = osc_unzip_file(osc_content_path() . 'downloads/' . $filename, $tmp_path);
                 if ($res == 1) { // Everything is OK, continue
@@ -2291,7 +2349,7 @@
                                 $comm          = new DBCommandClass($c_db);
                                 $error_queries = $comm->updateDB(str_replace('/*TABLE_PREFIX*/', DB_TABLE_PREFIX, $sql));
                             }
-                            if ($error_queries[ 0 ]) { // Everything is OK, continue
+                            if ($error_queries[0]) { // Everything is OK, continue
                                 /**********************************
                                  ** EXECUTING ADDITIONAL ACTIONS **
                                  **********************************/
@@ -2310,15 +2368,11 @@
                                 $dir       = new RecursiveIteratorIterator(new RecursiveDirectoryIterator($tmp_path), RecursiveIteratorIterator::CHILD_FIRST);
                                 for ($dir->rewind(); $dir->valid(); $dir->next()) {
                                     if ($dir->isDir()) {
-                                        if ($dir->getFilename() !== '.' && $dir->getFilename() !== '..') {
-                                            if (!rmdir($dir->getPathname())) {
-                                                $rm_errors++;
-                                            }
-                                        }
-                                    } else {
-                                        if (!unlink($dir->getPathname())) {
+                                        if ($dir->getFilename() !== '.' && $dir->getFilename() !== '..' && !rmdir($dir->getPathname())) {
                                             $rm_errors++;
                                         }
+                                    } elseif (!unlink($dir->getPathname())) {
+                                        $rm_errors++;
                                     }
                                 }
                                 if (!rmdir($tmp_path)) {
@@ -2329,12 +2383,13 @@
                                     $message = __('Everything looks good! Your Osclass installation is up-to-date');
                                     osc_add_flash_ok_message($message, 'admin');
                                 } else {
-                                    $message = __('Nearly everything looks good! Your Osclass installation is up-to-date, but there were some errors removing temporary files. Please manually remove the "oc-content/downloads/oc-temp" folder');
+                                    $message =
+                                        __('Nearly everything looks good! Your Osclass installation is up-to-date, but there were some errors removing temporary files. Please manually remove the "oc-content/downloads/oc-temp" folder');
                                     osc_add_flash_warning_message($message, 'admin');
                                     $error = 6; // Some errors removing files
                                 }
                             } else {
-                                $sql_error_msg = $error_queries[ 2 ];
+                                $sql_error_msg = $error_queries[2];
                                 $message       = __('Problems when upgrading the database');
                                 $error         = 5; // Problems upgrading the database
                             }
@@ -2355,7 +2410,7 @@
             } else {
                 $message = __('Download failed');
                 $error   = 2; // Download failed
-                $deleted = @unlink(ABS_PATH . '.maintenance');
+                unlink(ABS_PATH . '.maintenance');
             }
         } else {
             $message = __('Missing download URL');
@@ -2371,38 +2426,40 @@
             @chmod($k, $v);
         }
 
-        return array('error' => $error, 'message' => $message, 'version' => @$data[ 's_name' ]);
+        return array('error' => $error, 'message' => $message, 'version' => @$data['s_name']);
     }
 
 
     function osc_do_auto_upgrade()
     {
-        $data              = osc_file_get_contents('https://osclass.org/latest_version_v1.php?callback=?');
-        $data              = preg_replace('|^\?\((.*?)\);$|', '$01', $data);
+        $data = osc_file_get_contents('https://osclass.org/latest_version_v1.php?callback=?');
+        $data = preg_replace('|^\?\((.*?)\);$|', '$01', $data);
         /** @var object $json */
-        $json              = json_decode($data);
-        $result[ 'error' ] = 0;
+        $json            = json_decode($data);
+        $result['error'] = 0;
         if (isset($json->version)) {
             if ($json->version > osc_version()) {
                 osc_set_preference('update_core_json', $data);
                 if (osc_check_dir_writable()) {
-                    if (substr($json->version, 0, 1) != substr(osc_version(), 0, 1)) {
+                    if (strpos($json->version, substr(osc_version(), 0, 1)) !== 0) {
                         // NEW BRANCH
                         if (strpos(osc_auto_update(), 'branch') !== false) {
                             osc_run_hook('before_auto_upgrade');
                             $result = osc_do_upgrade();
                             osc_run_hook('after_auto_upgrade', $result);
                         }
-                    } elseif (substr($json->version, 1, 1) != substr(osc_version(), 1, 1)) {
+                    } elseif (substr($json->version, 1, 1) !== substr(osc_version(), 1, 1)) {
                         // MAJOR RELEASE
                         if (strpos(osc_auto_update(), 'branch') !== false || strpos(osc_auto_update(), 'major') !== false) {
                             osc_run_hook('before_auto_upgrade');
                             $result = osc_do_upgrade();
                             osc_run_hook('after_auto_upgrade', $result);
                         }
-                    } elseif (substr($json->version, 2, 1) != substr(osc_version(), 2, 1)) {
+                    } elseif (substr($json->version, 2, 1) !== substr(osc_version(), 2, 1)) {
                         // MINOR RELEASE
-                        if (strpos(osc_auto_update(), 'branch') !== false || strpos(osc_auto_update(), 'major') !== false || strpos(osc_auto_update(), 'minor') !== false) {
+                        if (strpos(osc_auto_update(), 'branch') !== false || strpos(osc_auto_update(), 'major') !== false
+                            || strpos(osc_auto_update(), 'minor') !== false
+                        ) {
                             osc_run_hook('before_auto_upgrade');
                             $result = osc_do_upgrade();
                             osc_run_hook('after_auto_upgrade', $result);
@@ -2418,7 +2475,7 @@
             osc_set_preference('last_version_check', time() - 23 * 3600);
         }
 
-        if ($result[ 'error' ] == 0 || $result[ 'error' ] == 6) {
+        if ($result['error'] == 0 || $result['error'] == 6) {
             if (strpos(osc_auto_update(), 'plugins') !== false) {
                 $total = osc_check_plugins_update(true);
                 if ($total > 0) {
@@ -2477,8 +2534,8 @@
                 // THIRD PARTY REPOSITORY
                 $data = json_decode(osc_file_get_contents($element), true);
             }
-            if (isset($data[ 's_compatible' ])) {
-                $versions = explode(',', $data[ 's_compatible' ]);
+            if (isset($data['s_compatible'])) {
+                $versions = explode(',', $data['s_compatible']);
 
                 foreach ($versions as $_version) {
                     $result = version_compare2($osclass_version, $_version);
@@ -2525,14 +2582,14 @@
             /***********************
              **** DOWNLOAD FILE ****
              ***********************/
-            if (isset($data[ 's_update_url' ]) && isset($data[ 's_source_file' ]) && isset($data[ 'e_type' ])) {
-                if ($data[ 'e_type' ] === 'THEME') {
+            if (isset($data['s_update_url']) && isset($data['s_source_file']) && isset($data['e_type'])) {
+                if ($data['e_type'] === 'THEME') {
                     $folder = 'themes/';
-                } elseif ($data[ 'e_type' ] === 'LANGUAGE') {
+                } elseif ($data['e_type'] === 'LANGUAGE') {
                     $folder = 'languages/';
                 } else { // PLUGINS
                     $folder = 'plugins/';
-                    $plugin = Plugins::findByUpdateURI($data[ 's_update_url' ]);
+                    $plugin = Plugins::findByUpdateURI($data['s_update_url']);
                     if ($plugin != false) {
                         if (Plugins::isEnabled($plugin)) {
                             Plugins::runHook($plugin . '_disable');
@@ -2542,8 +2599,8 @@
                     }
                 }
 
-                $filename        = date('YmdHis') . '_' . osc_sanitize_string($data[ 's_title' ]) . '_' . $data[ 's_version' ] . '.zip';
-                $url_source_file = $data[ 's_source_file' ];
+                $filename        = date('YmdHis') . '_' . osc_sanitize_string($data['s_title']) . '_' . $data['s_version'] . '.zip';
+                $url_source_file = $data['s_source_file'];
 
                 $result = osc_downloadFile($url_source_file, $filename, $download_post_data);
 
@@ -2552,7 +2609,7 @@
                      ***** UNZIP FILE *****
                      **********************/
                     if (!mkdir($concurrentDirectory = osc_content_path() . 'downloads/oc-temp/') && !is_dir($concurrentDirectory)) {
-                        throw new \RuntimeException(sprintf('Directory "%s" was not created', $concurrentDirectory));
+                        throw new RuntimeException(sprintf('Directory "%s" was not created', $concurrentDirectory));
                     }
                     $res = osc_unzip_file(osc_content_path() . 'downloads/' . $filename, osc_content_path() . 'downloads/oc-temp/');
                     if ($res == 1) { // Everything is OK, continue
@@ -2608,14 +2665,14 @@
                             }
 
                             if ($fail == 0) { // Everything is OK, continue
-                                if ($data[ 'e_type' ] !== 'THEME' && $data[ 'e_type' ] !== 'LANGUAGE') {
+                                if ($data['e_type'] !== 'THEME' && $data['e_type'] !== 'LANGUAGE') {
                                     if ($plugin != false && $re_enable) {
                                         $enabled = Plugins::activate($plugin);
                                         if ($enabled) {
                                             Plugins::runHook($plugin . '_enable');
                                         }
                                     }
-                                } elseif ($data[ 'e_type' ] === 'LANGUAGE') {
+                                } elseif ($data['e_type'] === 'LANGUAGE') {
                                     osc_checkLocales();
                                 }
                                 // recount plugins&themes for update
@@ -2631,21 +2688,22 @@
                                     $message = __('Everything looks good!');
                                     $error   = 0;
                                 } else {
-                                    $message = __('Nearly everything looks good! but there were some errors removing temporary files. Please manually remove the \"oc-content/downloads/oc-temp\" folder');
+                                    $message =
+                                        __('Nearly everything looks good! but there were some errors removing temporary files. Please manually remove the \"oc-content/downloads/oc-temp\" folder');
                                     $error   = 6; // Some errors removing files
                                 }
                             } else {
                                 $message = __('Problems when copying files. Please check your permissions. ');
 
-                                if ($current_user[ 'uid' ] != $ownerFolder[ 'uid' ]) {
+                                if ($current_user['uid'] != $ownerFolder['uid']) {
                                     if (function_exists('posix_getgrgid')) {
-                                        $current_group = posix_getgrgid($current_user[ 'gid' ]);
+                                        $current_group = posix_getgrgid($current_user['gid']);
                                         $message       .= '<p><strong>' . sprintf(
                                             __('NOTE: Web user and destination folder user is not the same, you might have an issue there. <br/>Do this in your console:<br/>chown -R %s:%s %s'),
-                                            $current_user[ 'name' ],
-                                            $current_group[ 'name' ],
+                                            $current_user['name'],
+                                            $current_group['name'],
                                             $folder_dest
-                                        ) . '</strong></p>';
+                                            ) . '</strong></p>';
                                     }
                                 }
                                 $error = 4; // Problems copying files. Maybe permissions are not correct
@@ -2663,7 +2721,7 @@
                     $error   = 2; // Download failed
                 }
             } else {
-                if (isset($data[ 's_buy_url' ]) && isset($data[ 'b_paid' ]) && $data[ 's_buy_url' ] != '' && $data[ 'b_paid' ] == 0) {
+                if (isset($data['s_buy_url']) && isset($data['b_paid']) && $data['s_buy_url'] != '' && $data['b_paid'] == 0) {
                     $message = __('This is a paid item, you need to buy it before you are able to download it');
                     $error   = 8; // Item not paid
                 } else {
@@ -2685,7 +2743,9 @@
      */
     function osc_is_ssl()
     {
-        return ((isset($_SERVER[ 'HTTP_X_FORWARDED_PROTO' ]) && strtolower($_SERVER[ 'HTTP_X_FORWARDED_PROTO' ]) === 'https') || (isset($_SERVER[ 'HTTPS' ]) && ($_SERVER[ 'HTTPS' ] === 'on' || $_SERVER[ 'HTTPS' ] == 1)));
+        return ((isset($_SERVER['HTTP_X_FORWARDED_PROTO']) && strtolower($_SERVER['HTTP_X_FORWARDED_PROTO']) === 'https')
+            || (isset($_SERVER['HTTPS'])
+                && ($_SERVER['HTTPS'] === 'on' || $_SERVER['HTTPS'] == 1)));
     }
 
 
