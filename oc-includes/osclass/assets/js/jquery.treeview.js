@@ -14,7 +14,7 @@
  *
  */
 
-;(function($) {
+(function($) {
 
 	// TODO rewrite as a widget, removing all the extra plugins
 	$.extend($.fn, {
