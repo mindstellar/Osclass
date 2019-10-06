@@ -171,7 +171,7 @@ function get_regions(country) {
                 } else {
                     $('#region_select').hide();
                     $('#no_region_text').show();
-                };
+                }
             }
         );
     }
@@ -198,7 +198,7 @@ function get_cities(region) {
                 } else {
                     $('#city_select').hide();
                     $('#no_city_text').show();
-                };
+                }
             }
         );
     }
