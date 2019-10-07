@@ -144,8 +144,6 @@
             type="text/javascript"></script>
     <script src="<?php echo get_absolute_url(); ?>oc-includes/osclass/installer/install.js"
             type="text/javascript"></script>
-    <script src="<?php echo get_absolute_url(); ?>oc-admin/themes/modern/js/location.js"
-            type="text/javascript"></script>
     <link rel="stylesheet" type="text/css" media="all"
           href="<?php echo get_absolute_url(); ?>oc-includes/osclass/installer/install.css"/>
     <link rel="stylesheet" type="text/css" media="all"
@@ -275,14 +273,14 @@
         <div id="footer">
             <ul>
                 <li>
-                    <a href="<?php echo get_absolute_url(); ?>/oc-includes/osclass/installer/readme.php" target="_blank"
+                    <a href="<?php echo get_absolute_url(); ?>oc-includes/osclass/installer/readme.php" target="_blank"
                        hreflang="en"><?php _e( 'Readme' ); ?></a>
                 </li>
                 <li>
                     <a href="https://github.com/navjottomer/Osclass/" target="_blank" hreflang="en"><?php _e( 'Feedback' ); ?></a>
                 </li>
                 <li>
-                    <a href="http://forums.osclass.org/index.php" target="_blank"
+                    <a href="http://forums.osclasscommunity.com/" target="_blank"
                        hreflang="en"><?php _e( 'Forums' ); ?></a>
                 </li>
             </ul>
