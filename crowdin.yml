@@ -3,4 +3,4 @@ files:
     ignore:
       - /oc-includes/vendor/*.*
       - /.github/*
-    translation: /oc-content/languages/%locale_with_underscore%/
+    translation: /oc-content/languages/%locale_with_underscore%/core.po
