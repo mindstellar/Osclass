@@ -24,6 +24,7 @@
 	require_once LIB_PATH . 'osclass/helpers/hPreference.php';
 	require_once LIB_PATH . 'osclass/helpers/hPlugins.php';
 	require_once LIB_PATH . 'osclass/helpers/hTranslations.php';
+	require_once LIB_PATH . 'osclass/helpers/hUtils.php';
 	require_once LIB_PATH . 'osclass/compatibility.php';
 	require_once LIB_PATH . 'osclass/default-constants.php';
 	require_once LIB_PATH . 'osclass/formatting.php';
@@ -45,9 +46,9 @@
 	$json_message[ 'email_status' ] = $result[ 'email_status' ];
 	$json_message[ 'password' ]     = $result[ 's_password' ];
 
-	if ( $_POST[ 'skip-location-input' ] == 0 && $_POST[ 'country-input' ] !== 'skip' ) {
-		$msg                      = install_locations();
-		$json_message[ 'status' ] = $msg;
+	if ($_POST['skip-location-input'] == 0 && $_POST['locationsql'] !== 'skip') {
+		$msg = install_locations();
+		$json_message['status'] = $msg;
 	}
 
 	echo json_encode( $json_message );
@@ -154,33 +155,20 @@
 	 * @return bool
 	 */
 	function install_locations() {
+		$location = Params::getParam('locationsql');
+		if($location != '') {
+			$sql = osc_file_get_contents(osc_get_locations_sql($location));
+			if($sql != '') {
+				$conn = DBConnectionClass::newInstance();
+				$c_db = $conn->getOsclassDb();
+				$comm = new DBCommandClass( $c_db );
+				$comm->query('SET FOREIGN_KEY_CHECKS = 0');
+				$imported = $comm->importSQL($sql);
+				$comm->query('SET FOREIGN_KEY_CHECKS = 1');
 
-		$country = Params::getParam( 'country-input' );
-		$region  = Params::getParam( 'region-input' );
-		$city    = Params::getParam( 'city-input' );
-
-		if ( $country !== 'all' ) {
-			if ( $region !== 'all' ) {
-				if ( $city !== 'all' ) {
-					$sql = 'action=city&term=' . urlencode( $city );
-				} else {
-					$sql = 'action=region&term=' . urlencode( $region );
-				}
-			} else {
-				$sql = 'action=country&term=' . urlencode( $country );
+				return true;
 			}
-		} else {
-			$sql = 'action=country&term=all';
 		}
 
-		$data_sql = osc_file_get_contents( 'https://geo.osclass.org/newgeo.download.php?' . $sql . '&install=true' );
-
-		$conn = DBConnectionClass::newInstance();
-		$c_db = $conn->getOsclassDb();
-		$comm = new DBCommandClass( $c_db );
-		$comm->query( 'SET FOREIGN_KEY_CHECKS = 0' );
-		$imported = $comm->importSQL( $data_sql );
-		$comm->query( 'SET FOREIGN_KEY_CHECKS = 1' );
-
-		return $imported;
+		return false;
 	}

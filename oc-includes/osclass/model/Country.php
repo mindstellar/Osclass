@@ -111,6 +111,21 @@
             return $result->result();
         }
 
+		/**
+		 * List names of all the countries. Used for location import.
+		 *
+		 * @access public
+		 * @since  unknown
+		 * @return array
+		 */
+		public function listNames() {
+			$result = $this->dao->query(sprintf('SELECT s_name FROM %s ORDER BY s_name ASC', $this->getTableName()));
+			if($result == false) {
+				return array();
+			}
+			return array_column($result->result(), 's_name');
+		}
+
         /**
          * Function that work with the ajax file
          *

@@ -34,6 +34,7 @@
                     $do = new CAdminSettingsComments();
                 break;
                 case ('locations'):
+                case ('locations_import'):
                     require_once(osc_admin_base_path() . 'controller/settings/locations.php');
                     $do = new CAdminSettingsLocations();
                 break;
