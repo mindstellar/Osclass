@@ -1,9 +1,34 @@
 {
   "name": "osclass",
-  "version": "3.2.0",
+  "version": "3.9.0",
   "devDependencies": {
-    "grunt": "~0.4.1",
-    "grunt-contrib-less": "~0.6.4",
-    "grunt-contrib-sass": "~0.4.1"
+    "grunt": "^1.0.4",
+    "grunt-contrib-clean": "^2.0.0",
+    "grunt-contrib-copy": "^1.0.0",
+    "grunt-contrib-less": "^2.0.0",
+    "grunt-contrib-sass": "~1.0.*",
+    "webpack": "^4.41.0"
+  },
+  "description": "Osclass is a free and open script to create your advertisement or listings site. Best features: Plugins, themes, multi-language, CAPTCHA, dashboard, SEO friendly.",
+  "main": "Gruntfile.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/navjottomer/Osclass.git"
+  },
+  "keywords": [
+    "Classifieds",
+    "Osclass"
+  ],
+  "author": "Navjot Tomer",
+  "license": "Apache-2.0",
+  "bugs": {
+    "url": "https://github.com/navjottomer/Osclass/issues"
+  },
+  "homepage": "https://github.com/navjottomer/Osclass#readme",
+  "dependencies": {
+    "jquery": "^3.4.1"
   }
 }
