@@ -923,7 +923,7 @@ CONFIG;
                                 <option value="skip"><?php _e("Skip location"); ?></option>
                                 <!-- <option value="all"><?php _e("International"); ?></option> -->
 								<?php foreach ($country_list as $c) { ?>
-									<?php if($c['name'] == '') continue; ?>
+									<?php /* BUG: */ if($c['name'] == '') continue; ?>
                                     <option value="<?php echo $c['file']; ?>" <?php if(substr($c['file'], 0, 2) == $country_ip) {
 										echo 'selected="selected"';
 									}; ?>><?php echo $c['name']; ?></option>

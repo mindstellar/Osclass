@@ -169,6 +169,9 @@
         $("#b_new_country").click(function(){
             renderNewCountry();
         });
+        $("#b_import").click(function(){
+            renderImport();
+        });
         $("#b_new_region").click(function(){
             renderAddRegion();
         });
@@ -181,6 +184,14 @@
             width: 250,
             modal: true,
             title: addNewCountryText,
+        });
+    }
+
+    function renderImport(){
+        $( "#dialog-location-import" ).dialog({
+            width: 400,
+            modal: true,
+            title: importLocationText,
         });
     }
 

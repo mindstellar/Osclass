@@ -134,6 +134,7 @@
             var addNewRegionText   = '<?php echo osc_esc_js(__('Add new region')); ?>';
             var editNewCityText    = '<?php echo osc_esc_js(__('Edit city')); ?>';
             var addNewCityText     = '<?php echo osc_esc_js(__('Add new city')); ?>';
+            var importLocationText  = '<?php echo osc_esc_js(__('Import a location')); ?>';
 
             // dialog delete function
             function delete_dialog(item_id, item_type) {
@@ -341,7 +342,16 @@
     <div class="grid-row grid-first-row grid-33">
         <div class="row-wrapper">
             <div class="widget-box">
-                <div class="widget-box-title"><h3><?php _e('Countries'); ?> <a id="b_new_country" class="btn float-right" href="javascript:void(0);"><?php _e('Add new'); ?></a> <a id="b_remove_country" style="display:none;" class="btn float-right" href="javascript:void(0);"><?php _e('Remove selected'); ?></a></h3></div>
+                <div class="widget-box-title">
+                    <h3>
+                        <?php _e('Countries'); ?>
+                        <a id="b_import" class="btn float-right" href="javascript:void(0);"><?php _e('Import new'); ?></a>
+                        <span class="float-right">&nbsp;&nbsp;</span>
+                        <a id="b_new_country" class="btn float-right" href="javascript:void(0);"><?php _e('Add new'); ?></a>
+                        <span class="float-right">&nbsp;&nbsp;</span>
+                        <a id="b_remove_country" style="display:none;" class="btn float-right" href="javascript:void(0);"><?php _e('Remove selected'); ?></a>
+                    </h3>
+                </div>
                 <div class="widget-box-content">
                     <div id="l_countries">
                         <?php foreach( $aCountries as $country ) { ?>
@@ -400,6 +410,43 @@
                 <div class="wrapper">
                 <a class="btn" href="javascript:void(0);" onclick="$('#dialog-location-delete').dialog('close');"><?php _e('Cancel'); ?></a>
                 <input id="location-delete-submit" type="submit" value="<?php echo osc_esc_html( __('Delete') ); ?>" class="btn btn-red" />
+                </div>
+            </div>
+        </div>
+    </form>
+    <form id="dialog-location-import" method="get" action="<?php echo osc_admin_base_url(true); ?>" class="has-form-actions hide">
+        <input type="hidden" name="page" value="settings" />
+        <input type="hidden" name="action" value="locations" />
+        <input type="hidden" name="type" value="locations_import" />
+        <div class="form-horizontal">
+            <div class="form-row">
+                <?php _e("Import a country with it's regions and cities from our database. Already imported countries aren't shown."); ?>
+            </div>
+            <div class="form-row">
+                <table>
+                    <tr>
+                        <td><?php _e('Import a location'); ?>: </td>
+                        <td>
+                            <?php $locations = View::newInstance()->_get('aLocations'); ?>
+                            <?php if(count($locations)) { ?>
+                                <select name="location" required>
+                                    <option value=""><?php _e("Select an option"); ?>
+                                    <?php foreach($locations as $location) { ?>
+                                        <?php /* BUG: */ if($location['name'] == '') continue; ?>
+                                        <option value="<?php echo $location['file']; ?>"><?php echo $location['name']; ?></option>
+                                    <?php } ?>
+                                </select>
+                            <?php } else { ?>
+                                <p><?php _e("No locations available."); ?></p>
+                            <?php } ?>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+            <div class="form-actions">
+                <div class="wrapper">
+                    <a class="btn" href="javascript:void(0);" onclick="$('#dialog-location-import').dialog('close');"><?php _e('Cancel'); ?></a>
+                    <button type="submit" class="btn btn-submit"><?php echo osc_esc_html( __('Import') ); ?></button>
                 </div>
             </div>
         </div>

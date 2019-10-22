@@ -421,10 +421,54 @@
                                         }
                                         $this->redirectTo(osc_admin_base_url(true) . '?page=settings&action=locations&country_code='.@$country['pk_c_code']."&country=".@$country['s_name']."&region=".@$region['pk_i_id']);
                 break;
+                case('locations_import'): // import locations
+                    if( defined('DEMO') ) {
+                        osc_add_flash_warning_message( _m("This action can't be done because it's a demo site"), 'admin');
+                        $this->redirectTo(osc_admin_base_url(true) . '?page=settings&action=locations');
+                    }
+                    osc_csrf_check();
+
+                    $location = Params::getParam('location');
+                    if($location != '') {
+                        $sql = osc_file_get_contents(osc_get_locations_sql($location));
+                        if($sql != '') {
+                            $conn = DBConnectionClass::newInstance();
+                            $c_db = $conn->getOsclassDb();
+                            $comm = new DBCommandClass( $c_db );
+                            $comm->query('SET FOREIGN_KEY_CHECKS = 0');
+                            $imported = $comm->importSQL($sql);
+                            $comm->query('SET FOREIGN_KEY_CHECKS = 1');
+
+                            osc_add_flash_ok_message(_m('Location imported successfully'), 'admin');
+                            $this->redirectTo(osc_admin_base_url(true) . '?page=settings&action=locations');
+                            return true;
+                        }
+                    }
+
+                    osc_add_flash_error_message(_m('There was a problem importing the selected location'), 'admin');
+                    $this->redirectTo(osc_admin_base_url(true) . '?page=settings&action=locations');
+                    return false;
+                break;
             }
 
             $aCountries = $mCountries->listAll();
             $this->_exportVariableToView('aCountries', $aCountries);
+
+            $existing_locations = $mCountries->listNames();
+            $json_locations = osc_file_get_contents(osc_get_locations_json());
+            $json_locations = json_decode($json_locations, true);
+            $json_locations = $json_locations['children'];
+            // IDEA: This probably can be improved.
+            foreach($json_locations as $key => $location) {
+                if(in_array($location['name'], $existing_locations)) {
+                    unset($json_locations[$key]);
+                }
+            }
+
+            if(!isset($json_locations[0]) || !isset($json_locations[0]['name'])) {
+                $json_locations = array();
+            }
+            $this->_exportVariableToView('aLocations', $json_locations);
 
             $this->doView('settings/locations.php');
         }
