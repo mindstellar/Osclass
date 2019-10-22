@@ -65,7 +65,7 @@ function validate_form() {
         num_error = num_error + 1;
     }
 
-    
+
     var pattern_notnull=/^[a-zA-Z0-9]+$/;
     if( !pattern_notnull.test(admin_user.value) ) {
         error_admin_user.setAttribute('style', 'display:block;');
@@ -77,7 +77,7 @@ function validate_form() {
         return false;
     }
 
-    var input = $("#target_form input");
+    var input = $("#target_form input, #target_form select");
     $("#lightbox").css('display','');
 
 
@@ -207,33 +207,18 @@ function get_cities(region) {
 $(document).ready(function(){
     $("#email").focus(function() {
         $("#email").attr('style', '');
-        $('#email-error').attr({ 
+        $('#email-error').attr({
             'style'         : 'display:none;',
             'aria-hidden'   : 'true'
         });
     });
 
     $("#admin_user").focus(function() {
-        $('#admin-user-error').attr({ 
+        $('#admin-user-error').attr({
             'style'         : 'display:none;',
             'aria-hidden'   : 'true'
         });
     });
-    
-    $("#country_select").change(function(){
-        get_regions($("#country_select option:selected").attr("value"));
-    });
-
-    $("#region_select").change(function(){
-        get_cities($("#region_select option:selected").attr("value"));
-    });
-    
-    $("#city_select").change(function(){
-        $("#city-input").attr("value", $("#city_select option:selected").attr("value"));
-    });
-
-    get_regions($("#country_select option:selected").attr("value"));
-    
 });
 
 /* Extension of jQuery */

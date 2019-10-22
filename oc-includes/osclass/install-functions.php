@@ -855,23 +855,19 @@ CONFIG;
 
 
 	function display_target() {
-		$country_list = osc_file_get_contents( 'https://geo.osclass.org/newgeo.services.php?action=countries' );
-		$country_list = json_decode( substr( $country_list , 1 , strlen( $country_list ) - 2 ) , true );
-
-		$region_list = array ();
+		require_once LIB_PATH . 'osclass/helpers/hUtils.php';
+		$country_list = osc_file_get_contents(osc_get_locations_json());
+		$country_list = json_decode($country_list, true);
+		$country_list = $country_list['children'];
 
 		$country_ip = '';
-		if ( preg_match( '|([a-z]{2})-([A-Z]{2})|' , Params::getServerParam( 'HTTP_ACCEPT_LANGUAGE' ) , $match ) ) {
-			$country_ip  = $match[ 2 ];
-			$region_list = osc_file_get_contents( 'https://geo.osclass.org/newgeo.services.php?action=regions&country=' . $match[ 2 ] );
-			$region_list = json_decode( substr( $region_list , 1 , strlen( $region_list ) - 2 ) , true );
+		if(preg_match('|([a-z]{2})-([A-Z]{2})|', Params::getServerParam('HTTP_ACCEPT_LANGUAGE'), $match)) {
+			$country_ip = $match[2];
 		}
 
-		if ( ! isset( $country_list[ 0 ] ) || ! isset( $country_list[ 0 ][ 's_name' ] ) ) {
+		if (!isset($country_list[0]) || !isset($country_list[0]['name'])) {
 			$internet_error = true;
 		}
-
-
 		?>
         <form id="target_form" name="target_form" action="#" method="post" onsubmit="return false;">
             <h2 class="target"><?php _e( 'Information needed' ); ?></h2>
@@ -885,15 +881,13 @@ CONFIG;
                             <input size="25" id="admin_user" name="s_name" type="text" value="admin"/>
                         </td>
                         <td>
-                            <span id="admin-user-error" class="error" aria-hidden="true"
-                                  style="display:none;"><?php _e( 'Admin user is required' ); ?></span>
+                            <span id="admin-user-error" class="error" aria-hidden="true" style="display:none;"><?php _e( 'Admin user is required' ); ?></span>
                         </td>
                     </tr>
                     <tr>
                         <th><label for="s_passwd"><?php _e( 'Password' ); ?></label></th>
                         <td>
-                            <input size="25" class="password_test" name="s_passwd" id="s_passwd" type="password"
-                                   value="" autocomplete="off"/>
+                            <input size="25" class="password_test" name="s_passwd" id="s_passwd" type="password" value="" autocomplete="off"/>
                         </td>
                         <td></td>
                     </tr>
@@ -901,10 +895,7 @@ CONFIG;
                 </table>
                 <div class="admin-user">
 					<?php _e( 'A password will be automatically generated for you if you leave this blank.' ); ?>
-                    <img src="<?php echo get_absolute_url() ?>oc-includes/images/question.png"
-                         class="question-skip vtip"
-                         title="<?php echo osc_esc_html( __( 'You can modify username and password if you like, just change the input value.' ) ); ?>"
-                         alt=""/>
+                    <img src="<?php echo get_absolute_url() ?>oc-includes/images/question.png" class="question-skip vtip" title="<?php echo osc_esc_html( __( 'You can modify username and password if you like, just change the input value.' ) ); ?>" />
                 </div>
                 <h2 class="title"><?php _e( 'Contact information' ); ?></h2>
                 <table class="contact-info">
@@ -917,52 +908,27 @@ CONFIG;
                     <tr>
                         <th><label for="email"><?php _e( 'Contact e-mail' ); ?></label></th>
                         <td><input type="text" id="email" name="email" size="25"/></td>
-                        <td><span id="email-error" class="error"
-                                  style="display:none;"><?php _e( 'Put your e-mail here' ); ?></span></td>
+                        <td><span id="email-error" class="error" style="display:none;"><?php _e( 'Put your e-mail here' ); ?></span></td>
                     </tr>
                     </tbody>
                 </table>
-                <h2 class="title"><?php _e( 'Location' ); ?></h2>
-                <p class="space-left-25 left no-bottom"><?php _e( 'Choose countries/cities where your target users are located' ); ?></p>
-                <div id="location-question" class="left question">
-                    <img class="vtip" src="<?php echo get_absolute_url(); ?>oc-includes/images/question.png"
-                         title="<?php echo osc_esc_html( __( "Once you type a country, you'll be able to choose region and city as well. Therefore, the installation will be more specific." ) ); ?>"
-                         alt=""/>
-                </div>
+                <h2 class="title"><?php _e('Location'); ?></h2>
+                <p class="space-left-25 left no-bottom"><?php _e( 'Choose a country where your target users are located' ); ?>.</p>
                 <div class="clear"></div>
                 <div id="location">
-					<?php if ( ! $internet_error ) { ?>
+					<?php if(!$internet_error) { ?>
                         <input type="hidden" id="skip-location-input" name="skip-location-input" value="0"/>
-                        <input type="hidden" id="country-input" name="country-input" value=""/>
-                        <input type="hidden" id="region-input" name="region-input" value=""/>
-                        <input type="hidden" id="city-input" name="city-input" value=""/>
                         <div id="country-box">
-
-                            <select name="country_select" id="country_select">
-                                <option value="skip"><?php _e( "Skip location" ); ?></option>
-                                <!-- <option value="all"><?php _e( "International" ); ?></option> -->
-								<?php foreach ( $country_list as $c ) { ?>
-                                    <option value="<?php echo $c[ 'code' ]; ?>" <?php if ( $c[ 'code' ] == $country_ip ) {
+                            <select name="locationsql" id="locationsql">
+                                <option value="skip"><?php _e("Skip location"); ?></option>
+                                <!-- <option value="all"><?php _e("International"); ?></option> -->
+								<?php foreach ($country_list as $c) { ?>
+									<?php /* BUG: */ if($c['name'] == '') continue; ?>
+                                    <option value="<?php echo $c['file']; ?>" <?php if(substr($c['file'], 0, 2) == $country_ip) {
 										echo 'selected="selected"';
-									}; ?>><?php echo $c[ 's_name' ]; ?></option>
+									}; ?>><?php echo $c['name']; ?></option>
 								<?php }; ?>
                             </select>
-
-                            <select name="region_select" id="region_select" style="display: none;">
-                                <option value="all"><?php _e( "All regions" ); ?></option>
-                            </select>
-
-                            <select name="city_select" id="city_select" style="display: none;">
-                                <option value="all"><?php _e( "All cities" ); ?></option>
-                            </select>
-
-                            <div id="no_region_text" aria-hidden="true"
-                                 style="display: none;"><?php _e( "There are no regions available for this country" ); ?></div>
-
-                            <div id="no_city_text" aria-hidden="true"
-                                 style="display: none;"><?php _e( "There are no cities available for this region" ); ?></div>
-
-
                         </div>
 					<?php } else { ?>
                         <div id="location-error">
