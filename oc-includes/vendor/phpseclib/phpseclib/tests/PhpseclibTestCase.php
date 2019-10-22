@@ -7,7 +7,7 @@
 
 abstract class PhpseclibTestCase extends PHPUnit\Framework\TestCase
 {
-    protected $tempFilesToUnlinkOnTearDown = [];
+    protected $tempFilesToUnlinkOnTearDown = array();
 
     public function tearDown()
     {
@@ -100,21 +100,5 @@ abstract class PhpseclibTestCase extends PHPUnit\Framework\TestCase
                 self::markTestSkipped("Failed to reimport file $filename");
             }
         }
-    }
-
-    protected static function getVar($obj, $var)
-    {
-        $reflection = new ReflectionClass(get_class($obj));
-        $prop = $reflection->getProperty($var);
-        $prop->setAccessible(true);
-        return $prop->getValue($obj);
-    }
-
-    public static function callFunc($obj, $func, $params = [])
-    {
-        $reflection = new ReflectionClass(get_class($obj));
-        $method = $reflection->getMethod($func);
-        $method->setAccessible(true);
-        return $method->invokeArgs($obj, $params);
     }
 }

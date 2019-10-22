@@ -7,7 +7,6 @@
 
 use phpseclib\File\X509;
 use phpseclib\Crypt\RSA;
-use phpseclib\Crypt\PublicKeyLoader;
 
 class Unit_File_X509_CSRTest extends PhpseclibTestCase
 {
@@ -99,9 +98,10 @@ draiRBZruwMPwPIP
     // on PHP 7.1, with older versions of phpseclib, this would produce a "A non-numeric value encountered" warning
     public function testNewCSR()
     {
+        $rsa = new RSA();
         $x509 = new X509();
 
-        $rsa = PublicKeyLoader::load('-----BEGIN RSA PRIVATE KEY-----
+        $rsa->loadKey('-----BEGIN RSA PRIVATE KEY-----
 MIICXAIBAAKBgQCqGKukO1De7zhZj6+H0qtjTkVxwTCpvKe4eCZ0FPqri0cb2JZfXJ/DgYSF6vUp
 wmJG8wVQZKjeGcjDOL5UlsuusFncCzWBQ7RKNUSesmQRMSGkVb1/3j+skZ6UtW+5u09lHNsj6tQ5
 1s1SPrCBkedbNf0Tp0GbMJDyR4e9T04ZZwIDAQABAoGAFijko56+qGyN8M0RVyaRAXz++xTqHBLh
@@ -113,11 +113,9 @@ L0NDt4SkosjgGwJAFklyR1uZ/wPJjj611cdBcztlPdqoxssQGnh85BzCj/u3WqBpE2vjvyyvyI5k
 X6zk7S0ljKtt2jny2+00VsBerQJBAJGC1Mg5Oydo5NwD6BiROrPxGo2bpTbu/fhrT8ebHkTz2epl
 U9VQQSQzY1oZMVX8i1m5WUTLPz2yLJIBQVdXqhMCQBGoiuSoSjafUhV7i1cEGpb88h5NBYZzWXGZ
 37sJ5QsW+sJyoNde3xH8vdXhzU7eT82D6X/scw9RZz+/6rCJ4p0=
------END RSA PRIVATE KEY-----')
-            ->withPadding(RSA::SIGNATURE_PKCS1)
-            ->withHash('sha1');
+-----END RSA PRIVATE KEY-----');
         $x509->setPrivateKey($rsa);
-        $x509->setDN(['cn' => 'website.com']);
-        $x509->saveCSR($x509->signCSR(), X509::FORMAT_DER);
+        $x509->setDN(array('cn' => 'website.com'));
+        $x509->saveCSR($x509->signCSR('sha256WithRSAEncryption'), X509::FORMAT_DER);
     }
 }

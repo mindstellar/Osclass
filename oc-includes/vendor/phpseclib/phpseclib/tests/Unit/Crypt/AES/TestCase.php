@@ -6,7 +6,7 @@
  */
 
 use phpseclib\Crypt\AES;
-use phpseclib\Crypt\Common\BlockCipher;
+use phpseclib\Crypt\Base;
 use phpseclib\Crypt\Rijndael;
 
 abstract class Unit_Crypt_AES_TestCase extends PhpseclibTestCase
@@ -16,7 +16,15 @@ abstract class Unit_Crypt_AES_TestCase extends PhpseclibTestCase
     private function _checkEngine($aes)
     {
         if ($aes->getEngine() != $this->engine) {
-            self::markTestSkipped('Unable to initialize ' . $this->engine . ' engine');
+            $engine = 'internal';
+            switch ($this->engine) {
+                case Base::ENGINE_OPENSSL:
+                    $engine = 'OpenSSL';
+                    break;
+                case Base::ENGINE_MCRYPT:
+                    $engine = 'mcrypt';
+            }
+            self::markTestSkipped('Unable to initialize ' . $engine . ' engine');
         }
     }
 
@@ -27,35 +35,35 @@ abstract class Unit_Crypt_AES_TestCase extends PhpseclibTestCase
      */
     public function continuousBufferCombos()
     {
-        $modes = [
-            'ctr',
-            'ofb',
-            'cfb',
-            'cfb8'
-        ];
-        $plaintexts = [
+        $modes = array(
+            Base::MODE_CTR,
+            Base::MODE_OFB,
+            Base::MODE_CFB,
+            Base::MODE_CFB8,
+        );
+        $plaintexts = array(
             '',
             '12345678901234567', // https://github.com/phpseclib/phpseclib/issues/39
             "\xDE\xAD\xBE\xAF",
             ':-):-):-):-):-):-)', // https://github.com/phpseclib/phpseclib/pull/43
-        ];
-        $ivs = [
-            str_repeat("\0", 16),
-            str_pad('test123', 16, "\0"),
-        ];
-        $keys = [
-            str_repeat("\0", 16),
-            str_pad(':-8', 16, "\0"), // https://github.com/phpseclib/phpseclib/pull/43
-            str_pad('FOOBARZ', 16, "\0"),
-        ];
+        );
+        $ivs = array(
+            '',
+            'test123',
+        );
+        $keys = array(
+            '',
+            ':-8', // https://github.com/phpseclib/phpseclib/pull/43
+            'FOOBARZ',
+        );
 
-        $result = [];
+        $result = array();
 
         foreach ($modes as $mode) {
             foreach ($plaintexts as $plaintext) {
                 foreach ($ivs as $iv) {
                     foreach ($keys as $key) {
-                        $result[] = [$mode, $plaintext, $iv, $key];
+                        $result[] = array($mode, $plaintext, $iv, $key);
                     }
                 }
             }
@@ -93,11 +101,10 @@ abstract class Unit_Crypt_AES_TestCase extends PhpseclibTestCase
         // this test case is from the following URL:
         // https://web.archive.org/web/20070209120224/http://fp.gladman.plus.com/cryptography_technology/rijndael/aesdvec.zip
 
-        $aes = new Rijndael('cbc');
+        $aes = new Rijndael();
         $aes->setPreferredEngine($this->engine);
         $aes->disablePadding();
         $aes->setKey(pack('H*', '2b7e151628aed2a6abf7158809cf4f3c762e7160')); // 160-bit key. Valid in Rijndael.
-        $aes->setIV(str_repeat("\0", 16));
         //$this->_checkEngine($aes); // should only work in internal mode
         $ciphertext = $aes->encrypt(pack('H*', '3243f6a8885a308d313198a2e0370734'));
         $this->assertEquals($ciphertext, pack('H*', '231d844639b31b412211cfe93712b880'));
@@ -105,17 +112,15 @@ abstract class Unit_Crypt_AES_TestCase extends PhpseclibTestCase
 
     /**
      * @group github451
-     * @expectedException \LengthException
      */
     public function testKeyPaddingAES()
     {
         // same as the above - just with a different ciphertext
 
-        $aes = new AES('cbc');
+        $aes = new AES();
         $aes->setPreferredEngine($this->engine);
         $aes->disablePadding();
-        $aes->setKey(pack('H*', '2b7e151628aed2a6abf7158809cf4f3c762e7160')); // 160-bit key. supported by Rijndael - not AES
-        $aes->setIV(str_repeat("\0", 16));
+        $aes->setKey(pack('H*', '2b7e151628aed2a6abf7158809cf4f3c762e7160')); // 160-bit key. AES should null pad to 192-bits
         $this->_checkEngine($aes);
         $ciphertext = $aes->encrypt(pack('H*', '3243f6a8885a308d313198a2e0370734'));
         $this->assertEquals($ciphertext, pack('H*', 'c109292b173f841b88e0ee49f13db8c0'));
@@ -128,36 +133,36 @@ abstract class Unit_Crypt_AES_TestCase extends PhpseclibTestCase
      */
     public function continuousBufferBatteryCombos()
     {
-        $modes = [
-            'ctr',
-            'ofb',
-            'cfb',
-            'cfb8',
-        ];
+        $modes = array(
+            Base::MODE_CTR,
+            Base::MODE_OFB,
+            Base::MODE_CFB,
+            Base::MODE_CFB8,
+        );
 
-        $combos = [
-            [16],
-            [17],
-            [1, 16],
-            [3, 6, 7], // (3 to test the openssl_encrypt call and the buffer creation, 6 to test the exclusive use of the buffer and 7 to test the buffer's exhaustion and recreation)
-            [15, 4], // (15 to test openssl_encrypt call and buffer creation and 4 to test something that spans multpile bloc
-            [3, 6, 10, 16], // this is why the strlen check in the buffer-only code was needed
-            [16, 16], // two full size blocks
-            [3, 6, 7, 16], // partial block + full size block
-            [16, 3, 6, 7],
+        $combos = array(
+            array(16),
+            array(17),
+            array(1, 16),
+            array(3, 6, 7), // (3 to test the openssl_encrypt call and the buffer creation, 6 to test the exclusive use of the buffer and 7 to test the buffer's exhaustion and recreation)
+            array(15, 4), // (15 to test openssl_encrypt call and buffer creation and 4 to test something that spans multpile bloc
+            array(3, 6, 10, 16), // this is why the strlen check in the buffer-only code was needed
+            array(16, 16), // two full size blocks
+            array(3, 6, 7, 16), // partial block + full size block
+            array(16, 3, 6, 7),
             // a few others just for fun
-            [32,32],
-            [31,31],
-            [17,17],
-            [99, 99]
-        ];
+            array(32,32),
+            array(31,31),
+            array(17,17),
+            array(99, 99)
+        );
 
-        $result = [];
+        $result = array();
 
         foreach ($modes as $mode) {
             foreach ($combos as $combo) {
-                foreach (['encrypt', 'decrypt'] as $op) {
-                    $result[] = [$op, $mode, $combo];
+                foreach (array('encrypt', 'decrypt') as $op) {
+                    $result[] = array($op, $mode, $combo);
                 }
             }
         }
@@ -261,7 +266,7 @@ abstract class Unit_Crypt_AES_TestCase extends PhpseclibTestCase
     // from http://csrc.nist.gov/groups/STM/cavp/documents/aes/AESAVS.pdf#page=16
     public function testGFSBox128()
     {
-        $aes = new AES('cbc');
+        $aes = new AES();
 
         $aes->setKey(pack('H*', '00000000000000000000000000000000'));
         $aes->setIV(pack('H*', '00000000000000000000000000000000'));
@@ -288,7 +293,7 @@ abstract class Unit_Crypt_AES_TestCase extends PhpseclibTestCase
 
     public function testGFSBox192()
     {
-        $aes = new AES('cbc');
+        $aes = new AES();
 
         $aes->setKey(pack('H*', '000000000000000000000000000000000000000000000000'));
         $aes->setIV(pack('H*', '00000000000000000000000000000000'));
@@ -313,7 +318,7 @@ abstract class Unit_Crypt_AES_TestCase extends PhpseclibTestCase
 
     public function testGFSBox256()
     {
-        $aes = new AES('cbc');
+        $aes = new AES();
 
         $aes->setKey(pack('H*', '00000000000000000000000000000000' . '00000000000000000000000000000000'));
         $aes->setIV(pack('H*', '00000000000000000000000000000000'));
@@ -336,41 +341,33 @@ abstract class Unit_Crypt_AES_TestCase extends PhpseclibTestCase
 
     public function testGetKeyLengthDefault()
     {
-        $aes = new AES('cbc');
+        $aes = new AES();
         $this->assertSame($aes->getKeyLength(), 128);
     }
 
     public function testGetKeyLengthWith192BitKey()
     {
-        $aes = new AES('cbc');
+        $aes = new AES();
         $aes->setKey(str_repeat('a', 24));
         $this->assertSame($aes->getKeyLength(), 192);
     }
 
-    /**
-     * @expectedException \phpseclib\Exception\InconsistentSetupException
-     */
     public function testSetKeyLengthWithLargerKey()
     {
-        $aes = new AES('cbc');
+        $aes = new AES();
         $aes->setKeyLength(128);
         $aes->setKey(str_repeat('a', 24));
-        $aes->setIV(str_repeat("\0", 16));
         $this->assertSame($aes->getKeyLength(), 128);
         $ciphertext = bin2hex($aes->encrypt('a'));
         $this->assertSame($ciphertext, '82b7b068dfc60ed2a46893b69fecd6c2');
         $this->assertSame($aes->getKeyLength(), 128);
     }
 
-    /**
-     * @expectedException \phpseclib\Exception\InconsistentSetupException
-     */
     public function testSetKeyLengthWithSmallerKey()
     {
-        $aes = new AES('cbc');
+        $aes = new AES();
         $aes->setKeyLength(256);
         $aes->setKey(str_repeat('a', 16));
-        $aes->setIV(str_repeat("\0", 16));
         $this->assertSame($aes->getKeyLength(), 256);
         $ciphertext = bin2hex($aes->encrypt('a'));
         $this->assertSame($ciphertext, 'fd4250c0d234aa7e1aa592820aa8406b');
@@ -382,7 +379,7 @@ abstract class Unit_Crypt_AES_TestCase extends PhpseclibTestCase
      */
     public function testContinuousBuffer()
     {
-        $aes = new AES('cbc');
+        $aes = new AES();
         $aes->disablePadding();
         $aes->enableContinuousBuffer();
         $aes->setIV(pack('H*', '0457bdb4a6712986688349a29eb82535'));
@@ -391,32 +388,5 @@ abstract class Unit_Crypt_AES_TestCase extends PhpseclibTestCase
         $plaintext = $aes->decrypt(pack('H*', '0457bdb4a6712986688349a29eb82535'));
         $expected = pack('H*', '6572617574689e1be8d2d8d43c594cf3');
         $this->assertSame($plaintext, $expected);
-    }
-
-    public function testECBDecrypt()
-    {
-        $aes = new AES('ecb');
-        $aes->setPreferredEngine($this->engine);
-        $aes->setKey(str_repeat('x', 16));
-
-        $this->_checkEngine($aes);
-
-        $plaintext = str_repeat('a', 16);
-
-        $actual = $aes->decrypt($aes->encrypt($plaintext));
-
-        $this->assertEquals($plaintext, $actual);
-    }
-
-    /**
-     * @expectedException \phpseclib\Exception\InsufficientSetupException
-     */
-    public function testNoKey()
-    {
-        $aes = new AES('cbc');
-        $aes->setPreferredEngine($this->engine);
-        $aes->setIV(str_repeat('x', 16));
-
-        $aes->encrypt(str_repeat('a', 16));
     }
 }

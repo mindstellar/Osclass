@@ -10,8 +10,19 @@
     "ezyang/htmlpurifier": "4.11.0",
     "phpmailer/phpmailer": "5.2.x",
     "pclzip/pclzip": "2.8.2",
-    "phpseclib/phpseclib": "dev-master#6c1befa",
+    "phpseclib/phpseclib": "2.0.x",
     "ioncube/php-openssl-cryptor": "dev-master#f62397b",
-    "google/recaptcha": "^1.1.2"
+    "google/recaptcha": "^1.1.2",
+    "ext-json": "*",
+    "ext-openssl": "*",
+    "ext-mysqli": "*",
+    "ext-zip": "*",
+    "gettext/gettext": "^4.6",
+    "ext-curl": "*",
+    "ext-posix": "*"
+  }
+  ,
+  "require-dev": {
+    "roave/security-advisories": "dev-master"
   }
 }

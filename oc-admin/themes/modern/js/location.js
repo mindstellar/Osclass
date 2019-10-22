@@ -92,12 +92,12 @@
                 $(".trr").on("mouseleave", function() {
                     if (!$(this).find(".checkboxr input").is(':checked')) {
                         $(this).find(".checkboxr").css({ 'visibility': 'hidden'});
-                    };
+                    }
                     if($(".checkboxr input:checked").size()>0) {
                         $("#b_remove_region").show();
                     } else {
                         $("#b_remove_region").hide();
-                    };
+                    }
                 });
                 resetLayout();
                 hook_load_cities();
@@ -135,12 +135,12 @@
                 $(".trct").on("mouseleave", function() {
                     if (!$(this).find(".checkboxct input").is(':checked')) {
                         $(this).find(".checkboxct").css({ 'visibility': 'hidden'});
-                    };
+                    }
                     if($(".checkboxct input:checked").size()>0) {
                         $("#b_remove_city").show();
                     } else {
                         $("#b_remove_city").hide();
-                    };
+                    }
                 });
                 resetLayout();
             }

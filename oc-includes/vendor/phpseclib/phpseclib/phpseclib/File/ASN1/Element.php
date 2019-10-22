@@ -1,7 +1,6 @@
 <?php
-
 /**
- * ASN.1 Raw Element
+ * Pure-PHP ASN.1 Parser
  *
  * PHP version 5
  *
@@ -16,10 +15,9 @@
 namespace phpseclib\File\ASN1;
 
 /**
- * ASN.1 Raw Element
+ * ASN.1 Element
  *
- * An ASN.1 ANY mapping will return an ASN1\Element object. Use of this object
- * will also bypass the normal encoding rules in ASN1::encodeDER()
+ * Bypass normal encoding rules in phpseclib\File\ASN1::encodeDER()
  *
  * @package ASN1
  * @author  Jim Wigginton <terrafrost@php.net>
@@ -33,7 +31,7 @@ class Element
      * @var string
      * @access private
      */
-    public $element;
+    var $element;
 
     /**
      * Constructor
@@ -42,7 +40,7 @@ class Element
      * @return \phpseclib\File\ASN1\Element
      * @access public
      */
-    public function __construct($encoded)
+    function __construct($encoded)
     {
         $this->element = $encoded;
     }

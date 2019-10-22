@@ -144,6 +144,66 @@ function more_size(input, event) {
     }
 }
 
+function get_regions(country) {
+    $("#country-input").attr("value", country);
+    $("#region-input").attr("value", "all");
+    $("#city-input").attr("value", "all");
+    $('#city_select').hide();
+    $('#no_city_text').hide();
+    $('#skip-location-input').attr('value','0');
+    if(country=="skip") {
+        $('#skip-location-input').attr('value','1');
+    } else if(country=='all') {
+        $('#region_select').hide();
+        $('#no_region_text').hide();
+    } else {
+        $.getJSON(
+            "https://geo.osclass.org/newgeo.services.php?callback=?&action=regions",
+            {'country' : country},
+            function(json) {
+                if( json.length > 0 ) {
+                    $('#region_select').show();
+                    $('#no_region_text').hide();
+                    $(".region_select").remove();
+                    $.each(json, function(i, val){
+                        $("#region_select").append('<option value="'+val.code+'" class="region_select" >'+val.s_name+'</option>');
+                    });
+                } else {
+                    $('#region_select').hide();
+                    $('#no_region_text').show();
+                }
+            }
+        );
+    }
+}
+
+function get_cities(region) {
+    $("#region-input").attr("value", region);
+    $("#city-input").attr("value", "all");
+    if(region=='all') {
+        $('#city_select').hide();
+        $('#no_city_text').hide();
+    } else {
+        $.getJSON(
+            "https://geo.osclass.org/newgeo.services.php?callback=?&action=cities",
+            {'region' : region},
+            function(json) {
+                if( json.length > 0 ) {
+                    $('#city_select').show();
+                    $('#no_city_text').hide();
+                    $(".city_select").remove();
+                    $.each(json, function(i, val){
+                        $("#city_select").append('<option value="'+val.code+'" class="city_select" >'+val.s_name+'</option>');
+                    });
+                } else {
+                    $('#city_select').hide();
+                    $('#no_city_text').show();
+                }
+            }
+        );
+    }
+}
+
 $(document).ready(function(){
     $("#email").focus(function() {
         $("#email").attr('style', '');

@@ -29,9 +29,8 @@ class Functional_Net_SFTPUserStoryTest extends PhpseclibFunctionalTestCase
     {
         $sftp = new SFTP($this->getEnv('SSH_HOSTNAME'));
 
-        $this->assertInternalType(
-            'object',
-            $sftp,
+        $this->assertTrue(
+            is_object($sftp),
             'Could not construct NET_SFTP object.'
         );
 
@@ -128,7 +127,7 @@ class Functional_Net_SFTPUserStoryTest extends PhpseclibFunctionalTestCase
     public function testStatOnDir($sftp)
     {
         $this->assertNotSame(
-            [],
+            array(),
             $sftp->stat('.'),
             'Failed asserting that the cwd has a non-empty stat.'
         );
@@ -178,7 +177,7 @@ class Functional_Net_SFTPUserStoryTest extends PhpseclibFunctionalTestCase
     {
         self::$buffer = self::$exampleData;
         $this->assertTrue(
-            $sftp->put('file1.txt', [__CLASS__, 'callback'], $sftp::SOURCE_CALLBACK),
+            $sftp->put('file1.txt', array(__CLASS__, 'callback'), $sftp::SOURCE_CALLBACK),
             'Failed asserting that example data could be successfully put().'
         );
 
@@ -326,7 +325,7 @@ class Functional_Net_SFTPUserStoryTest extends PhpseclibFunctionalTestCase
         $sftp->setListOrder('filename', SORT_DESC);
 
         $list = $sftp->nlist();
-        $expected = ['.', '..', 'temp', 'file3.txt', 'file2.txt', 'file1.txt'];
+        $expected = array('.', '..', 'temp', 'file3.txt', 'file2.txt', 'file1.txt');
 
         $this->assertSame(
             $list,
@@ -337,7 +336,7 @@ class Functional_Net_SFTPUserStoryTest extends PhpseclibFunctionalTestCase
         $sftp->setListOrder('filename', SORT_ASC);
 
         $list = $sftp->nlist();
-        $expected = ['.', '..', 'temp', 'file1.txt', 'file2.txt', 'file3.txt'];
+        $expected = array('.', '..', 'temp', 'file1.txt', 'file2.txt', 'file3.txt');
 
         $this->assertSame(
             $list,
@@ -608,7 +607,7 @@ class Functional_Net_SFTPUserStoryTest extends PhpseclibFunctionalTestCase
         $this->assertInternalType(
             'array',
             $sftp->stat(self::$scratchDir),
-            'Failed asserting that stat on an existent empty directory returns an array'
+            'Failed asserting that stat on an existant empty directory returns an array'
         );
         $this->assertTrue(
             $sftp->delete(self::$scratchDir),

@@ -7,7 +7,6 @@ namespace Composer\Autoload;
 class ComposerStaticInit6b0b4fafd693b0d76015f213169bd812
 {
     public static $files = array (
-        '5255c38a0faeba867671b61dfda6d864' => __DIR__ . '/..' . '/paragonie/random_compat/lib/random.php',
         'c65d09b6820da036953a371c8c73a9b1' => __DIR__ . '/..' . '/facebook/graph-sdk/src/Facebook/polyfills.php',
         '2cffec82183ee1cea088009cef9a6fc3' => __DIR__ . '/..' . '/ezyang/htmlpurifier/library/HTMLPurifier.composer.php',
         'decc78cc4436b1292c6c0d151b19445c' => __DIR__ . '/..' . '/phpseclib/phpseclib/phpseclib/bootstrap.php',
@@ -29,7 +28,11 @@ class ComposerStaticInit6b0b4fafd693b0d76015f213169bd812
         'P' => 
         array (
             'Psr\\Log\\' => 8,
-            'ParagonIE\\ConstantTime\\' => 23,
+        ),
+        'G' => 
+        array (
+            'Gettext\\Languages\\' => 18,
+            'Gettext\\' => 8,
         ),
         'F' => 
         array (
@@ -54,9 +57,13 @@ class ComposerStaticInit6b0b4fafd693b0d76015f213169bd812
         array (
             0 => __DIR__ . '/..' . '/psr/log/Psr/Log',
         ),
-        'ParagonIE\\ConstantTime\\' => 
+        'Gettext\\Languages\\' => 
         array (
-            0 => __DIR__ . '/..' . '/paragonie/constant_time_encoding/src',
+            0 => __DIR__ . '/..' . '/gettext/languages/src',
+        ),
+        'Gettext\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/gettext/gettext/src',
         ),
         'Facebook\\' => 
         array (
