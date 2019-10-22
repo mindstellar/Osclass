@@ -913,7 +913,7 @@ CONFIG;
                     </tbody>
                 </table>
                 <h2 class="title"><?php _e('Location'); ?></h2>
-                <p class="space-left-25 left no-bottom"><?php _e( 'Choose countries where your target users are located' ); ?></p>
+                <p class="space-left-25 left no-bottom"><?php _e( 'Choose a country where your target users are located' ); ?>.</p>
                 <div class="clear"></div>
                 <div id="location">
 					<?php if(!$internet_error) { ?>
