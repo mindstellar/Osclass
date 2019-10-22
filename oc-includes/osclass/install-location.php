@@ -24,6 +24,7 @@
 	require_once LIB_PATH . 'osclass/helpers/hPreference.php';
 	require_once LIB_PATH . 'osclass/helpers/hPlugins.php';
 	require_once LIB_PATH . 'osclass/helpers/hTranslations.php';
+	require_once LIB_PATH . 'osclass/helpers/hUtils.php';
 	require_once LIB_PATH . 'osclass/compatibility.php';
 	require_once LIB_PATH . 'osclass/default-constants.php';
 	require_once LIB_PATH . 'osclass/formatting.php';
@@ -156,7 +157,7 @@
 	function install_locations() {
 		$location = Params::getParam('locationsql');
 		if($location != '') {
-			$sql = osc_file_get_contents('https://raw.githubusercontent.com/webmods-croatia/love-osclass/master/locations/'.$location);
+			$sql = osc_file_get_contents(osc_get_locations_sql($location));
 			if($sql != '') {
 				$conn = DBConnectionClass::newInstance();
 				$c_db = $conn->getOsclassDb();

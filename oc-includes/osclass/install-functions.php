@@ -855,8 +855,8 @@ CONFIG;
 
 
 	function display_target() {
-		// BUG: "Hardcoding" should be fixed.
-		$country_list = osc_file_get_contents('https://raw.githubusercontent.com/webmods-croatia/love-osclass/3f7e712c9515cdafb44ae024aaba7a61346a25ca/locations/list.json');
+		require_once LIB_PATH . 'osclass/helpers/hUtils.php';
+		$country_list = osc_file_get_contents(osc_get_locations_json());
 		$country_list = json_decode($country_list, true);
 		$country_list = $country_list['children'];
 
