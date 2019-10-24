@@ -17,6 +17,8 @@ Clone the repository and the submodules.
 ```
 $> git clone --recursive git@github.com:navjottomer/Osclass.git
 ```
+## Pull Request
+Change your target to develop branch for any pull request. Make sure to open a new issue( If your pull request is fixing a new issue which is not opened yet) and mention that issue in your pull request.
 
 ## Project info
 
