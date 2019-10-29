@@ -13,7 +13,7 @@
 	require_once LIB_PATH . 'osclass/classes/database/DAO.php';
 	require_once LIB_PATH . 'osclass/Logger/Logger.php';
 	require_once LIB_PATH . 'osclass/Logger/LogDatabase.php';
-	require_once LIB_PATH . 'osclass/Logger/LogOsclass.php';
+	require_once LIB_PATH . 'osclass/Logger/LogOsclassInstaller.php';
 	require_once LIB_PATH . 'osclass/core/Session.php';
 	require_once LIB_PATH . 'osclass/core/Params.php';
 	require_once LIB_PATH . 'osclass/model/Preference.php';

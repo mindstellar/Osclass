@@ -28,7 +28,7 @@
 	if ( extension_loaded( 'mysqli' ) ) {
 		require_once LIB_PATH . 'osclass/Logger/Logger.php';
 		require_once LIB_PATH . 'osclass/Logger/LogDatabase.php';
-		require_once LIB_PATH . 'osclass/Logger/LogOsclass.php';
+		require_once LIB_PATH . 'osclass/Logger/LogOsclassInstaller.php';
 		require_once LIB_PATH . 'osclass/classes/database/DBConnectionClass.php';
 		require_once LIB_PATH . 'osclass/classes/database/DBCommandClass.php';
 		require_once LIB_PATH . 'osclass/classes/database/DBRecordsetClass.php';
