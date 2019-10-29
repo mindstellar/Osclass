@@ -301,7 +301,6 @@
     /**
      * VERY BASIC
      * Perform a POST request, so we could launch fake-cron calls and other core-system calls without annoying the user
-     * TODO
      *
      * @param $url   string
      * @param $_data array
@@ -310,72 +309,41 @@
      */
     function osc_doRequest($url, $_data)
     {
-        if (testCurl()) {
-            $ch = curl_init();
-            curl_setopt($ch, CURLOPT_URL, $url);
-            @curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, 5);
-            curl_setopt($ch, CURLOPT_USERAGENT, Params::getServerParam('HTTP_USER_AGENT') . ' Osclass (v.' . osc_version() . ')');
-            @curl_setopt($ch, CURLOPT_FOLLOWLOCATION, 1);
-            curl_setopt($ch, CURLOPT_REFERER, osc_base_url());
-            if (stripos($url, 'https') !== false) {
-                curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
-                curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, 2);
-            }
-
-            if ($_data) {
-                curl_setopt($ch, CURLOPT_POST, 1);
-                curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($_data));
-            }
-
-            curl_exec($ch);
-
-            // Check if any error occurred
-            if (curl_errno($ch)) {
-                return false;
-            }
-            $info = curl_getinfo($ch);
-
-            curl_close($ch);
-
-            return $info['request_size'];
-        }
-
         if (ini_get('allow_url_fopen') === false) {
-            error_log('enable allow_url_fopen in php.ini or install and enable php-curl extension.' . PHP_EOL);
+            error_log('enable allow_url_fopen in php.ini' . PHP_EOL);
 
             return false;
         }
         // parse the given URL
         $url = parse_url($url);
 
-        // extract host, path, port:
-        //$scheme = $url['scheme'];
-        $host   = $url['host'];
-        $path   = $url['path'];
-        $port   = $url['port'];
-
-        if ($url === false || !isset($url['host']) || !isset($url['path']) || !isset($url['port'])) {
+        if (!isset($url['host'], $url['path']) || $url === false) {
             return false;
         }
+        // extract host, path, port:
+        $host = $url['host'];
+        $path = $url['path'];
+        $port = 80;
+        if (isset($url['port'])) {
+            $port = $url['port'];
+        }
 
-        // open a socket connection on port 80
-        // https example
-        // if ($fp = fsockopen('ssl://'. $host, 443, $errno, $errstr, 1)) {
-        // use localhost in case of issues with NATs (hairpinning)
-        $fp = fsockopen($host, 80, $errNo, $errStr, 1);
+        if (isset($url['scheme']) && $url['scheme'] === 'https') {
+            $host = 'ssl://' . $host;
+            $port = 443;
+        }
+        $fp = fsockopen($host, $port);
 
         if ($fp === false) {
             return false;
         }
-
         $data              = http_build_query($_data);
-        $out               = "POST $path HTTP/1.1\r\n";
-        $out               .= "Host: $host\r\n";
-        $out               .= "Port: $port\r\n";
-        $out               .= 'Referer: Osclass ' . osc_version() . "\r\n";
-        $out               .= "Content-type: application/x-www-form-urlencoded\r\n";
-        $out               .= 'Content-Length: ' . strlen($data) . "\r\n";
-        $out               .= "Connection: close\r\n\r\n";
+        $out               = 'POST ' . $path . ' HTTP/1.1' . PHP_EOL;
+        $out               .= 'Host: ' . $url['host'] . PHP_EOL;
+        $out               .= 'Referer: Osclass ' . osc_version() . PHP_EOL;
+        $out               .= 'Content-type: application/x-www-form-urlencoded' . PHP_EOL;
+        $out               .= 'Content-Length: ' . strlen($data) . PHP_EOL;
+        $out               .= 'Connection: close' . PHP_EOL . PHP_EOL;
         $out               .= $data;
         $number_bytes_sent = fwrite($fp, $out);
         fclose($fp);
