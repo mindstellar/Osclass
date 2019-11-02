@@ -322,7 +322,7 @@ function osc_get_locations_json() {
  * @return string
  */
 function osc_get_locations_sql($location) {
-    $location = str_replace(' ', '%20', $location);
+    $location = rawurlencode($location);
     return 'https://raw.githubusercontent.com/navjottomer/Osclass-Extras/master/locations/'.$location;
 }
 ?>
