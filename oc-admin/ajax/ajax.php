@@ -502,8 +502,8 @@
                     }
                     break;
                 case 'check_version':
-                    $data = osc_file_get_contents('https://osclass.org/latest_version_v1.php?callback=?');
-                    $data = preg_replace('|^\?\((.*?)\);$|', '$01', $data);
+                    echo json_encode(array('error' => 1, 'msg' => __('Version could not be checked')));
+                    return;
                     $json = json_decode($data);
                     if(isset($json->version)) {
                         if ($json->version > osc_version()) {
