@@ -1,20 +1,8 @@
 <?php if ( ! defined( 'ABS_PATH' ) ) {
 	exit( 'ABS_PATH is not loaded. Direct access is not allowed.' );
 }
-/*
- * Copyright 2014 Osclass
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *     http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
+/**
+ * @todo Need removal of legacy code.
  */
 
     set_time_limit(0);
@@ -563,12 +551,12 @@ CREATE TABLE %st_item_description_tmp (
 
     if(!defined('IS_AJAX') || !IS_AJAX) {
         if(empty($aMessages)) {
-            osc_add_flash_ok_message(_m('Osclass has been updated successfully. <a href="http://forums.osclass.org/">Need more help?</a>'), 'admin');
+            osc_add_flash_ok_message(_m('Osclass has been updated successfully. <a href="https://github.com/navjottomer/osclass">Need more help?</a>'), 'admin');
             echo '<script type="text/javascript"> window.location = "'.osc_admin_base_url(true).'?page=tools&action=version"; </script>';
         } else {
             echo '<div class="well ui-rounded-corners separate-top-medium">';
             echo '<p>'.__('Osclass &raquo; Updated correctly').'</p>';
-            echo '<p>'.__('Osclass has been updated successfully. <a href="http://forums.osclass.org/">Need more help?</a>').'</p>';
+            echo '<p>'.__('Osclass has been updated successfully. <a href="https://github.com/navjottomer/osclass">Need more help?</a>').'</p>';
             foreach($aMessages as $msg) {
                 echo '<p>' . $msg . '</p>';
             }
