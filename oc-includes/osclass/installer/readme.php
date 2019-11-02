@@ -1,7 +1,7 @@
 <?php
 
     require_once '../../vendor/autoload.php';
-    
+
 	/**
 	 * @param $value
 	 * @param $xss_check
@@ -103,7 +103,7 @@
     <div id="container">
         <div id="header" class="readme">
             <h1 id="logo">
-                <a href="http://osclass.org/" target="_blank">
+                <a href="https://github.com/navjottomer/Osclass/" target="_blank">
                     <img src="<?php echo osc_getAbsoluteWebURL(); ?>/oc-includes/images/osclass-logo.png" alt="Osclass"
                          title="Osclass"/>
                 </a>
@@ -199,35 +199,12 @@
                     </p>
                 </div>
                 <p>If you experienced any problem during the process, please don't hesitate in contact us in <a
-                            href="http://forums.osclass.org/">Osclass Support Forums</a>.
+                            href="https://forums.osclasscommunity.com/">Osclass Support Forums</a>.
                     We recommend to perform a backup of database and files before each upgrade. You could backup your
                     data from the "Backup" option in the admin panel.
                     If you want to run the autoupgrade manually you could do that from the following URL :
                     http://www.yourdomain.com/path/to/osclass/oc-admin/tools.php?action=upgrade
                 </p>
-            </div>
-            <div id="resources">
-                <h2 class="title">Online Resources</h2>
-                <div class="space-left-10">
-                    <p>If you have any questions that aren't addressed in this document, please look at the online
-                        resources:</p>
-                    <dl class="space-left-25">
-                        <dt><a href="http://doc.osclass.org/" target="_blank">Osclass Wiki</a></dt>
-                        <dd>
-                            The wiki is where all information about Osclass is placed.
-                        </dd>
-                        <dt><a href="http://osclass.org/blog/" target="_blank">Osclass Blog</a></dt>
-                        <dd>
-                            This is where you'll find the latest updates and news related to Osclass.
-                        </dd>
-                        <dt><a href="http://forums.osclass.org/" target="_blank">Osclass Support Forums</a></dt>
-                        <dd>
-                            If you've looked everywhere and still can't find an answer.
-                            To help them help you be sure to use a descriptive thread title
-                            and describe your question in as much detail as possible.
-                        </dd>
-                    </dl>
-                </div>
             </div>
             <div id="license">
                 <h2 class="title">License</h2>
@@ -238,8 +215,8 @@
         </div>
         <div id="footer">
             <ul>
-                <li><a href="http://admin.osclass.org/feedback.php" target="_blank">Feedback</a></li>
-                <li><a href="http://forums.osclass.org/index.php" target="_blank">Forums</a></li>
+                <li><a href="https://github.com/navjottomer/Osclass/issues/" target="_blank">Report Issue</a></li>
+                <li><a href="https://forums.osclasscommunity.com/" target="_blank">Forums</a></li>
             </ul>
         </div>
     </div>
