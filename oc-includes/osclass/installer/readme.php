@@ -215,7 +215,7 @@
         </div>
         <div id="footer">
             <ul>
-                <li><a href="https://github.com/navjottomer/Osclass/" target="_blank">Feedback</a></li>
+                <li><a href="https://github.com/navjottomer/Osclass/issues/" target="_blank">Report Issue</a></li>
                 <li><a href="https://forums.osclasscommunity.com/" target="_blank">Forums</a></li>
             </ul>
         </div>

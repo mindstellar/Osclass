@@ -61,7 +61,7 @@ function admin_footer_html() { ?>
     <div class="float-left">
         <?php printf(__('Thank you for using <a href="%s" target="_blank">Osclass</a>'), 'https://github.com/navjottomer/Osclass/'); ?> -
         <a title="<?php _e('Forums'); ?>" href="https://forums.osclasscommunity.com/" target="_blank"><?php _e('Forums'); ?></a> &middot;
-        <a title="<?php _e('Feedback'); ?>" href="https://github.com/navjottomer/Osclass/" target="_blank"><?php _e('Feedback'); ?></a>
+        <a title="<?php _e('Report Issue'); ?>" href="https://github.com/navjottomer/Osclass/issues/" target="_blank"><?php _e('Report Issue'); ?></a>
     </div>
     <div class="float-right">
         <strong>Osclass <?php echo preg_replace('|.0$|', '', OSCLASS_VERSION); ?></strong>
