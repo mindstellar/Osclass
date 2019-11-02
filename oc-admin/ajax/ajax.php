@@ -504,20 +504,20 @@
                 case 'check_version':
                     echo json_encode(array('error' => 1, 'msg' => __('Version could not be checked')));
                     return;
-                    $json = json_decode($data);
-                    if(isset($json->version)) {
-                        if ($json->version > osc_version()) {
-                            osc_set_preference('update_core_json', $data);
-                            echo json_encode(array('error' => 0, 'msg' => __('Update available')));
-                        } else {
-                            osc_set_preference('update_core_json', '');
-                            echo json_encode(array('error' => 0, 'msg' => __('No update available')));
-                        }
-                        osc_set_preference( 'last_version_check', time() );
-                    } else { // Latest version couldn't be checked (site down?)
-                        osc_set_preference( 'last_version_check', time()-82800 ); // 82800 = 23 hours, so repeat check in one hour
-                        echo json_encode(array('error' => 1, 'msg' => __('Version could not be checked')));
-                    }
+                    // $json = json_decode($data);
+                    // if(isset($json->version)) {
+                    //     if ($json->version > osc_version()) {
+                    //         osc_set_preference('update_core_json', $data);
+                    //         echo json_encode(array('error' => 0, 'msg' => __('Update available')));
+                    //     } else {
+                    //         osc_set_preference('update_core_json', '');
+                    //         echo json_encode(array('error' => 0, 'msg' => __('No update available')));
+                    //     }
+                    //     osc_set_preference( 'last_version_check', time() );
+                    // } else { // Latest version couldn't be checked (site down?)
+                    //     osc_set_preference( 'last_version_check', time()-82800 ); // 82800 = 23 hours, so repeat check in one hour
+                    //     echo json_encode(array('error' => 1, 'msg' => __('Version could not be checked')));
+                    // }
                     break;
                 case 'check_languages':
                     $total = _osc_check_languages_update();
