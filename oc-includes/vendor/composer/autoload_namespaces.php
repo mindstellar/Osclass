@@ -6,7 +6,5 @@ $vendorDir = dirname(dirname(__FILE__));
 $baseDir = dirname(dirname($vendorDir));
 
 return array(
-    'PayPal' => array($vendorDir . '/paypal/rest-api-sdk-php/lib'),
-    'Hybrid' => array($vendorDir . '/hybridauth/hybridauth/hybridauth'),
     'HTMLPurifier' => array($vendorDir . '/ezyang/htmlpurifier/library'),
 );
