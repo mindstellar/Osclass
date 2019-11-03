@@ -4,7 +4,7 @@
 
 namespace Composer\Autoload;
 
-class ComposerStaticInit6b0b4fafd693b0d76015f213169bd812
+class ComposerStaticInit8e5461a2624ed352a699afc310ff5573
 {
     public static $files = array (
         'c65d09b6820da036953a371c8c73a9b1' => __DIR__ . '/..' . '/facebook/graph-sdk/src/Facebook/polyfills.php',
@@ -147,10 +147,10 @@ class ComposerStaticInit6b0b4fafd693b0d76015f213169bd812
     public static function getInitializer(ClassLoader $loader)
     {
         return \Closure::bind(function () use ($loader) {
-            $loader->prefixLengthsPsr4 = ComposerStaticInit6b0b4fafd693b0d76015f213169bd812::$prefixLengthsPsr4;
-            $loader->prefixDirsPsr4 = ComposerStaticInit6b0b4fafd693b0d76015f213169bd812::$prefixDirsPsr4;
-            $loader->prefixesPsr0 = ComposerStaticInit6b0b4fafd693b0d76015f213169bd812::$prefixesPsr0;
-            $loader->classMap = ComposerStaticInit6b0b4fafd693b0d76015f213169bd812::$classMap;
+            $loader->prefixLengthsPsr4 = ComposerStaticInit8e5461a2624ed352a699afc310ff5573::$prefixLengthsPsr4;
+            $loader->prefixDirsPsr4 = ComposerStaticInit8e5461a2624ed352a699afc310ff5573::$prefixDirsPsr4;
+            $loader->prefixesPsr0 = ComposerStaticInit8e5461a2624ed352a699afc310ff5573::$prefixesPsr0;
+            $loader->classMap = ComposerStaticInit8e5461a2624ed352a699afc310ff5573::$classMap;
 
         }, null, ClassLoader::class);
     }

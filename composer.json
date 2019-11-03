@@ -1,4 +1,7 @@
 {
+  "config": {
+       "vendor-dir": "oc-includes/vendor"
+    },
   "repositories": [
     {
       "url": "https://github.com/ioncube/php-openssl-cryptor",
