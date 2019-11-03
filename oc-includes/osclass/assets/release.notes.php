@@ -1,7 +1,7 @@
 <div class="row-wrapper">
     <div class="widget-box">
         <div class="widget-box-title">
-            <h3>Osclass 3.9</h3>
+            <h3>Osclass <?php echo OSCLASS_VERSION; ?></h3>
         </div>
         <div class="widget-box-content">
             <b class="stats-title">Changelog</b>

@@ -64,7 +64,7 @@ function admin_footer_html() { ?>
         <a title="<?php _e('Report Issue'); ?>" href="https://github.com/navjottomer/Osclass/issues/" target="_blank"><?php _e('Report Issue'); ?></a>
     </div>
     <div class="float-right">
-        <strong>Osclass <?php echo preg_replace('|.0$|', '', OSCLASS_VERSION); ?></strong>
+        <strong>Osclass <?php echo  OSCLASS_VERSION; ?></strong>
     </div>
     <div class="clear"></div><?php
 }

@@ -113,10 +113,9 @@
 		$body .= '<li>' . sprintf( __( 'username: %s' ) , $admin ) . '</li>';
 		$body .= '<li>' . sprintf( __( 'password: %s' ) , $password ) . '</li>';
 		$body .= '</ul>';
-		$body .= sprintf( __( 'Remember that for any doubts you might have you can consult our <a href="%1$s">documentation</a>, <a href="%2$s">forum</a> or <a href="%3$s">blog</a>.' ) , 'http://doc.osclass.org/' , 'http://forums.osclass.org/' , 'http://blog.osclass.org/' );
-		$body .= sprintf( ' ' . __( 'Osclass doesn’t run any developments but we can put you in touch with third party developers through a Premium Support. And hey, if you would like to contribute to Osclass - learn how <a href="%1$s">here</a>!' ) , 'http://blog.osclass.org/2012/11/22/how-to-collaborate-to-osclass/' ) . '<br/><br/>';
+		$body .= sprintf( __( 'Remember that for any doubts you might have you can consult our <a href="%1$s">documentation</a>' ) , 'https://osclass.gitbook.io/osclass-docs/');
 		$body .= __( 'Cheers,' ) . '<br/>';
-		$body .= __( 'The <a href="http://osclass.org/">Osclass</a> team' );
+		$body .= __( 'The <a href="https://github.com/navjottomer/osclass">Osclass</a> team' );
 
 		$sitename = strtolower( Params::getServerParam( 'SERVER_NAME' ) );
 		if ( 0 === strpos( $sitename , 'www.' ) ) {
@@ -124,7 +123,6 @@
 		}
 
 		try {
-			//require_once LIB_PATH . 'phpmailer/class.phpmailer.php';
 			$mail           = new PHPMailer( true );
 			$mail->CharSet  = 'utf-8';
 			$mail->Host     = 'localhost';

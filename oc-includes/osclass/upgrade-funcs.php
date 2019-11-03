@@ -33,7 +33,7 @@
                 $title    = __('Osclass &raquo; Has some errors');
                 $message  = __("We've encountered some problems while updating the database structure. The following queries failed:");
                 $message .= '<br/><br/>' . implode( '<br>' , $error_queries[2]);
-                $message .= '<br/><br/>' . sprintf( __( "These errors could be false-positive errors. If you're sure that is the case, you can <a href=\"%s\">continue with the upgrade</a>, or <a href=\"http://forums.osclass.org/\">ask in our forums</a>."), $skip_db_link);
+                $message .= '<br/><br/>' . sprintf( __( "These errors could be false-positive errors. If you're sure that is the case, you can <a href=\"%s\">continue with the upgrade</a>, or <a href=\"https://forums.osclasscommunity.com/\">ask in our forums</a>."), $skip_db_link);
                 osc_die($title, $message);
             }
         }
