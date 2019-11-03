@@ -1,4 +1,17 @@
 {
+  "name": "navjottomer/osclass",
+  "type": "project",
+  "description": "With Osclass, get your own  classifieds site for free. Build your own Osclass installation and start advertising real estate, jobs or whatever you want- in minutes! ",
+  "keywords": ["osclass","classified","open-source","php-classified","cms"],
+  "homepage": "https://github.com/navjottomer/osclass",
+  "license": "Apache-2.0",
+  "version": "v3.9.0-RC",
+  "authors": [
+        {
+            "name": "Osclass Community",
+            "homepage": "https://github.com/navjottomer/Osclass/graphs/contributors"
+        }
+    ],
   "config": {
        "vendor-dir": "oc-includes/vendor"
     },
@@ -9,6 +22,13 @@
     }
   ],
   "require": {
+    "php": ">=5.6.20",
+    "ext-json": "*",
+    "ext-openssl": "*",
+    "ext-mysqli": "*",
+    "ext-zip": "*",
+    "ext-curl": "*",
+    "ext-posix": "*",
     "hybridauth/hybridauth": "~2.9",
     "ezyang/htmlpurifier": "4.11.0",
     "phpmailer/phpmailer": "5.2.x",
@@ -16,15 +36,8 @@
     "phpseclib/phpseclib": "2.0.x",
     "ioncube/php-openssl-cryptor": "dev-master#f62397b",
     "google/recaptcha": "^1.1.2",
-    "ext-json": "*",
-    "ext-openssl": "*",
-    "ext-mysqli": "*",
-    "ext-zip": "*",
-    "gettext/gettext": "^4.6",
-    "ext-curl": "*",
-    "ext-posix": "*"
-  }
-  ,
+    "gettext/gettext": "^4.6",    
+  },
   "require-dev": {
     "roave/security-advisories": "dev-master"
   }
