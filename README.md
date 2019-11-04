@@ -22,15 +22,16 @@ Change your target to develop branch for any pull request. Make sure to open a n
 
 ## Project info
 
-* ~~Official website~~
-* ~~Plugins and themes~~
+* Support: [support-forum]
+* Documentation: [documentation]
 * License: [Apache License V2.0][license]
 
 
 ## Installation
+* Visit our documentation : https://osclass.gitbook.io/osclass-docs/beginners/install
 
-TODO
-
+[documentation]: https://osclass.gitbook.io/osclass-docs/
+[support-forum]: https://osclass.discourse.group
 [original-code]: https://github.com/osclass/Osclass
 [code]: https://github.com/navjottomer/Osclass
 [license]: http://www.apache.org/licenses/LICENSE-2.0
