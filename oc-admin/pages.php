@@ -95,7 +95,7 @@
                                 $this->pageManager->updateLink($id,$b_link);
                             }
                             osc_run_hook('edit_page', $id);
-                             Cache::newInstance()->delete('pages'); 
+                             Cache::newInstance()->delete('core/pages'); 
                             Session::newInstance()->_clearVariables();
                             osc_add_flash_ok_message(_m('The page has been updated'), 'admin');
                             $this->redirectTo(osc_admin_base_url(true)."?page=pages");
@@ -155,7 +155,7 @@
                     if(!isset($page['pk_i_id'])) {
                         if($not_empty) {
                             $result = $this->pageManager->insert($aFields, $aFieldsDescription);
-                             Cache::newInstance()->delete('pages'); 
+                             Cache::newInstance()->delete('core/pages'); 
                             Session::newInstance()->_clearVariables();
                             osc_add_flash_ok_message(_m('The page has been added'), 'admin');
                             $this->redirectTo(osc_admin_base_url(true)."?page=pages");
@@ -213,7 +213,7 @@
                             osc_add_flash_ok_message(sprintf(_m('%s pages have been deleted correctly'), $page_deleted_correcty), 'admin');
                         }
                     }
-                     Cache::newInstance()->delete('pages'); 
+                     Cache::newInstance()->delete('core/pages'); 
                     $this->redirectTo(osc_admin_base_url(true) . "?page=pages");
                     break;
                 default:
