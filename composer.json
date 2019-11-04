@@ -29,6 +29,7 @@
     "ext-zip": "*",
     "ext-curl": "*",
     "ext-posix": "*",
+    "ext-fileinfo": "*",
     "ezyang/htmlpurifier": "4.11.x",
     "phpmailer/phpmailer": "5.2.x",
     "pclzip/pclzip": "2.8.2",
