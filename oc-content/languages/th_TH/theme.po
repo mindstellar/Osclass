@@ -119,12 +119,12 @@ msgid "Footer link"
 msgstr "ลิ้งค์ด้านล่าง"
 
 #: admin/settings.php:45
-msgid "I want to help Osclass by linking to <a href=\"http://osclass.org/\" target=\"_blank\">osclass.org</a> from my site with the following text:"
-msgstr "ฉันต้องการที่จะช่วยให้ Osclass โดยเชื่อมโยงไป <a href=\"http://osclass.org/\" target=\"_blank\"> osclass.org </ a> จากเว็บไซต์ของฉันที่มีข้อความต่อไปนี้:"
+msgid "I want to help Osclass by linking to <a href=\"https://github.com/navjottomer/osclass/\" target=\"_blank\">osclass.org</a> from my site with the following text:"
+msgstr "ฉันต้องการที่จะช่วยให้ Osclass โดยเชื่อมโยงไป <a href=\"https://github.com/navjottomer/osclass/\" target=\"_blank\"> osclass.org </ a> จากเว็บไซต์ของฉันที่มีข้อความต่อไปนี้:"
 
 #: admin/settings.php:46
-msgid "This website is proudly using the <a title=\"Osclass web\" href=\"http://osclass.org/\">classifieds scripts</a> software <strong>Osclass</strong>"
-msgstr "เว็บไซต์นี้ได้อย่างภาคภูมิใจโดยใช้ <a title=\"Osclass web\" href=\"http://osclass.org/\"> คลาสสิฟายด์สคริปต์ </ a> ซอฟแวร์ <strong> Osclass </ strong>"
+msgid "This website is proudly using the <a title=\"Osclass web\" href=\"https://github.com/navjottomer/osclass/\">classifieds scripts</a> software <strong>Osclass</strong>"
+msgstr "เว็บไซต์นี้ได้อย่างภาคภูมิใจโดยใช้ <a title=\"Osclass web\" href=\"https://github.com/navjottomer/osclass/\"> คลาสสิฟายด์สคริปต์ </ a> ซอฟแวร์ <strong> Osclass </ strong>"
 
 #: admin/settings.php:50
 msgid "Save changes"

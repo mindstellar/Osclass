@@ -60,7 +60,7 @@ osc_add_hook('admin_header', 'admin_header_favicons');
 function admin_footer_html() { ?>
     <div class="float-left">
         <?php printf(__('Thank you for using <a href="%s" target="_blank">Osclass</a>'), 'https://github.com/navjottomer/Osclass/'); ?> -
-        <a title="<?php _e('Forums'); ?>" href="https://forums.osclasscommunity.com/" target="_blank"><?php _e('Forums'); ?></a> &middot;
+        <a title="<?php _e('Forums'); ?>" href="https://osclass.discourse.group" target="_blank"><?php _e('Forums'); ?></a> &middot;
         <a title="<?php _e('Report Issue'); ?>" href="https://github.com/navjottomer/Osclass/issues/" target="_blank"><?php _e('Report Issue'); ?></a>
     </div>
     <div class="float-right">

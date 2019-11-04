@@ -1677,8 +1677,8 @@ msgid "Your Osclass installation at %s is up and running. You can access the adm
 msgstr "Osclass installationen  %s  virker nu. For adgang til kontrolpanelet, brug disse oplysninger."
 
 #: oc-includes/osclass/install-location.php:107
-msgid "The <a href=\"http://osclass.org/\">Osclass</a> team"
-msgstr " The <a href=\"http://osclass.org/\">Osclass</a> Team"
+msgid "The <a href=\"https://github.com/navjottomer/osclass/\">Osclass</a> team"
+msgstr " The <a href=\"https://github.com/navjottomer/osclass/\">Osclass</a> Team"
 
 #: oc-includes/osclass/install.php:89
 msgid "Looks like you've already installed Osclass. To reinstall please clear your old database tables first."
@@ -1737,8 +1737,8 @@ msgid "We've encountered some problems while updating the database structure. Th
 msgstr "Der opstod problemer under DataBase opdateringen. Følgende forespørgsler mislykkedes:"
 
 #: oc-includes/osclass/upgrade-funcs.php:46
-msgid "These errors could be false-positive errors. If you're sure that is the case, you can <a href=\"%s\">continue with the upgrade</a>, or <a href=\"http://forums.osclass.org/\">ask in our forums</a>."
-msgstr "Disse fejl kan være urigtige, er du sikker på det er tilfældet, kan du <a href=\"%s\">fortsætte med at opdatere</a>, og eller <a href=\"http://forums.osclass.org/\"> finde svar eller spørge i vores forum</a>. "
+msgid "These errors could be false-positive errors. If you're sure that is the case, you can <a href=\"%s\">continue with the upgrade</a>, or <a href=\"https://osclass.discourse.group/\">ask in our forums</a>."
+msgstr "Disse fejl kan være urigtige, er du sikker på det er tilfældet, kan du <a href=\"%s\">fortsætte med at opdatere</a>, og eller <a href=\"https://osclass.discourse.group/\"> finde svar eller spørge i vores forum</a>. "
 
 #: oc-includes/osclass/upgrade-funcs.php:286
 msgid "You need to calculate location stats, please go to admin panel, tools, recalculate location stats or click"
@@ -1749,8 +1749,8 @@ msgid "Osclass &raquo; Updated correctly"
 msgstr "Osclass &raquo; er opdateret korrekt"
 
 #: oc-includes/osclass/upgrade-funcs.php:521
-msgid "Osclass has been updated successfully. <a href=\"http://forums.osclass.org/\">Need more help?</a>"
-msgstr "Osclass blev opdateret korrekt. <a href=\"http://forums.osclass.org/\">BRUG: forums for mere selv hjælp</a>"
+msgid "Osclass has been updated successfully. <a href=\"https://osclass.discourse.group/\">Need more help?</a>"
+msgstr "Osclass blev opdateret korrekt. <a href=\"https://osclass.discourse.group/\">BRUG: forums for mere selv hjælp</a>"
 
 #: oc-load.php:214
 msgid "The website is currently undergoing maintenance"

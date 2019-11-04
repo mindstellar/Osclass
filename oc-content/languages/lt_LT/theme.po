@@ -30,8 +30,8 @@ msgstr "%1$d - %2$d of %3$d skelbimų"
 msgid "Premium listings"
 msgstr "Sponsorius"
 
-msgid "http://osclass.org/"
-msgstr "http://osclass.org/"
+msgid "https://github.com/navjottomer/osclass/"
+msgstr "https://github.com/navjottomer/osclass/"
 
 msgid "Bender theme"
 msgstr "Bender tema"
@@ -148,12 +148,12 @@ msgid "Footer link"
 msgstr "Apatinė nuoroda"
 
 #: admin/settings.php:45
-msgid "I want to help Osclass by linking to <a href=\"http://osclass.org/\" target=\"_blank\">osclass.org</a> from my site with the following text:"
-msgstr "Aš noriu padėti Osclass, pridėdamas nuorodą <a href=\"http://osclass.org/\" target=\"_blank\">osclass.org</a> iš mano tinklapio su šiuo tekstu: "
+msgid "I want to help Osclass by linking to <a href=\"https://github.com/navjottomer/osclass/\" target=\"_blank\">osclass.org</a> from my site with the following text:"
+msgstr "Aš noriu padėti Osclass, pridėdamas nuorodą <a href=\"https://github.com/navjottomer/osclass/\" target=\"_blank\">osclass.org</a> iš mano tinklapio su šiuo tekstu: "
 
 #: admin/settings.php:46
-msgid "This website is proudly using the <a title=\"Osclass web\" href=\"http://osclass.org/\">classifieds scripts</a> software <strong>Osclass</strong>"
-msgstr "Šis tinklapis sukurtas naudojantis <a title=\"Osclass web\" href=\"http://osclass.org/\"> sklebimų </a> skriptu iš <strong>Osclass</strong>"
+msgid "This website is proudly using the <a title=\"Osclass web\" href=\"https://github.com/navjottomer/osclass/\">classifieds scripts</a> software <strong>Osclass</strong>"
+msgstr "Šis tinklapis sukurtas naudojantis <a title=\"Osclass web\" href=\"https://github.com/navjottomer/osclass/\"> sklebimų </a> skriptu iš <strong>Osclass</strong>"
 
 #: admin/settings.php:50
 msgid "Save changes"

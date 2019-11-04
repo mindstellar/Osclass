@@ -29,7 +29,7 @@
         require_once LIB_PATH . 'osclass/helpers/hErrors.php';
 
         $title   = 'Osclass &raquo; Error';
-        $message = 'There doesn\'t seem to be a <code>config.php</code> file. Osclass isn\'t installed. <a href="http://forums.osclass.org/">Need more help?</a></p>';
+        $message = 'There doesn\'t seem to be a <code>config.php</code> file. Osclass isn\'t installed. <a href="https://osclass.discourse.group/">Need more help?</a></p>';
         $message .= '<p><a class="button" href="' . osc_get_absolute_url() . 'oc-includes/osclass/install.php">Install</a></p>';
         osc_die($title, $message);
     }
@@ -73,7 +73,7 @@
         require_once LIB_PATH . 'osclass/helpers/hErrors.php';
 
         $title   = 'Osclass &raquo; Error';
-        $message = 'Osclass isn\'t installed. <a href="http://forums.osclass.org/">Need more help?</a></p>';
+        $message = 'Osclass isn\'t installed. <a href="https://osclass.discourse.group/">Need more help?</a></p>';
         $message .= '<p><a class="button" href="' . osc_get_absolute_url() . 'oc-includes/osclass/install.php">Install</a></p>';
 
         osc_die($title, $message);

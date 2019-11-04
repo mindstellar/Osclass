@@ -26,7 +26,7 @@ function locale_zh_TW_info() {
         ,'description'     => 'Chinese (Taiwan) translation'
         ,'version'         => 'Osclass 3.5.0'
         ,'author_name'     => 'Osclass'
-        ,'author_url'      => 'http://osclass.org/'
+        ,'author_url'      => 'https://github.com/navjottomer/osclass/'
         ,'currency_format' => '{NUMBER} {CURRENCY}'
         ,'date_format'     => 'm/d/Y'
         ,'stop_words'      => ''

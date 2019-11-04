@@ -55,8 +55,8 @@ msgid "Your email has been sent properly."
 msgstr "Uw e-mail is correct verzonden."
 
 #: oc-includes/osclass/upgrade-funcs.php:460
-msgid "Osclass has been updated successfully. <a href=\"http://forums.osclass.org/\">Need more help?</a>"
-msgstr "Osclass is succesvol geüpdate. <a href=\"http://forums.osclass.org/\">Heeft u meer hulp nodig?</a>"
+msgid "Osclass has been updated successfully. <a href=\"https://osclass.discourse.group/\">Need more help?</a>"
+msgstr "Osclass is succesvol geüpdate. <a href=\"https://osclass.discourse.group/\">Heeft u meer hulp nodig?</a>"
 
 #: oc-includes/osclass/controller/ajax.php:115
 #: oc-includes/osclass/controller/item.php:320
