@@ -119,12 +119,12 @@ msgid "Footer link"
 msgstr "Footer link"
 
 #: admin/settings.php:67
-msgid "I want to help Osclass by linking to <a href=\"http://osclass.org/\" target=\"_blank\">osclass.org</a> from my site with the following text:"
-msgstr "Jeg ønsker at hjælpe med et link til <a href=\"http://osclass.org/\" target=\"_blank\">osclass.org</a> fra min side med teksten:"
+msgid "I want to help Osclass by linking to <a href=\"https://github.com/navjottomer/osclass/\" target=\"_blank\">osclass.org</a> from my site with the following text:"
+msgstr "Jeg ønsker at hjælpe med et link til <a href=\"https://github.com/navjottomer/osclass/\" target=\"_blank\">osclass.org</a> fra min side med teksten:"
 
 #: admin/settings.php:68
-msgid "This website is proudly using the <a title=\"Osclass web\" href=\"http://osclass.org/\">classifieds scripts</a> software <strong>Osclass</strong>"
-msgstr "Denne websides lynhurtige kode motor bruger: <a title=\"Osclass web\" href=\"http://osclass.org/\">Osclass software</a>"
+msgid "This website is proudly using the <a title=\"Osclass web\" href=\"https://github.com/navjottomer/osclass/\">classifieds scripts</a> software <strong>Osclass</strong>"
+msgstr "Denne websides lynhurtige kode motor bruger: <a title=\"Osclass web\" href=\"https://github.com/navjottomer/osclass/\">Osclass software</a>"
 
 #: admin/settings.php:124
 msgid "Save changes"
@@ -798,7 +798,7 @@ msgstr "%1$d til %2$d af %3$d annoncer"
 msgid "Premium listings"
 msgstr "Premium annoncer"
 
-msgid "http://osclass.org/"
+msgid "https://github.com/navjottomer/osclass/"
 msgstr "http://www.osclass.com/"
 
 msgid "Bender theme"

@@ -41,7 +41,7 @@
                 var fileToUnzip = '';
                 steps.innerHTML += '<?php echo osc_esc_js( sprintf( __('Checking for updates (Current version %s)'), osc_version() )); ?> ';
 
-                $.getJSON("https://osclass.org/latest_version_v1.php?callback=?", function(data) {
+                $.getJSON("https://example.org/latest_version_v1.php?callback=?", function(data) {
                     if(data.version <= version) {
                         steps.innerHTML += '<?php echo osc_esc_js( __('Congratulations! Your Osclass installation is up to date!')); ?>';
                     } else {
@@ -105,7 +105,7 @@
                                 <div class="tools upgrade">
                                 <?php if( $ok ) { ?>
                                     <p class="text">
-                                        <?php printf( __('Your Osclass installation can be auto-upgraded. Please, back up your database and the folder oc-content before attempting to upgrade your Osclass installation. You can also upgrade Osclass manually, more information in the %s'), '<a href="http://doc.osclass.org/">Wiki</a>'); ?>
+                                        <?php printf( __('Your Osclass installation can be auto-upgraded. Please, back up your database and the folder oc-content before attempting to upgrade your Osclass installation. You can also upgrade Osclass manually, more information in the %s'), '<a href="https://osclass.gitbook.io/osclass-docs//">Wiki</a>'); ?>
                                     </p>
                                 <?php } else { ?>
                                     <p class="text">

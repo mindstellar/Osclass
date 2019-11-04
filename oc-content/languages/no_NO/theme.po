@@ -30,8 +30,8 @@ msgstr "%1$d - %2$d av %3$d annonser"
 msgid "Premium listings"
 msgstr "Premium annonser"
 
-msgid "http://osclass.org/"
-msgstr "http://osclass.org/"
+msgid "https://github.com/navjottomer/osclass/"
+msgstr "https://github.com/navjottomer/osclass/"
 
 msgid "Bender theme"
 msgstr "Bender tema"
@@ -148,12 +148,12 @@ msgid "Footer link"
 msgstr "Bunntekstlink"
 
 #: admin/settings.php:45
-msgid "I want to help Osclass by linking to <a href=\"http://osclass.org/\" target=\"_blank\">osclass.org</a> from my site with the following text:"
-msgstr "Jeg ønsker å hjelpe Osclass ved å linke til <a href=\"http://osclass.org/\" target=\"_blank\">osclass.org</a> fra nettstedet mitt med følgende tekst:"
+msgid "I want to help Osclass by linking to <a href=\"https://github.com/navjottomer/osclass/\" target=\"_blank\">osclass.org</a> from my site with the following text:"
+msgstr "Jeg ønsker å hjelpe Osclass ved å linke til <a href=\"https://github.com/navjottomer/osclass/\" target=\"_blank\">osclass.org</a> fra nettstedet mitt med følgende tekst:"
 
 #: admin/settings.php:46
-msgid "This website is proudly using the <a title=\"Osclass web\" href=\"http://osclass.org/\">classifieds scripts</a> software <strong>Osclass</strong>"
-msgstr "Denne nettsiden er en stolt bruker av <a title=\"Osclass web\" href=\"http://osclass.org/\">rubrikkannonse</a>-programvaren <strong>Osclass</strong>"
+msgid "This website is proudly using the <a title=\"Osclass web\" href=\"https://github.com/navjottomer/osclass/\">classifieds scripts</a> software <strong>Osclass</strong>"
+msgstr "Denne nettsiden er en stolt bruker av <a title=\"Osclass web\" href=\"https://github.com/navjottomer/osclass/\">rubrikkannonse</a>-programvaren <strong>Osclass</strong>"
 
 #: admin/settings.php:50
 msgid "Save changes"

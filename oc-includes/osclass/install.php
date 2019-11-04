@@ -208,7 +208,7 @@
 										<?php } ?>
 									<?php } ?>
                                     <li>
-                                        <a href="https://osclass.org/page/hosting?utm_source=installation-hosting-page&utm_medium=installation&utm_campaign=hosting_page"
+                                        <a href="https://example.org/page/hosting?utm_source=installation-hosting-page&utm_medium=installation&utm_campaign=hosting_page"
                                            hreflang="en"><?php _e( 'Need more help?' ); ?></a></li>
                                 </ul>
                             </div>
@@ -280,7 +280,7 @@
                     <a href="https://github.com/navjottomer/Osclass/" target="_blank" hreflang="en"><?php _e( 'Feedback' ); ?></a>
                 </li>
                 <li>
-                    <a href="http://forums.osclasscommunity.com/" target="_blank"
+                    <a href="https://osclass.discourse.group/" target="_blank"
                        hreflang="en"><?php _e( 'Forums' ); ?></a>
                 </li>
             </ul>

@@ -199,7 +199,7 @@
                     </p>
                 </div>
                 <p>If you experienced any problem during the process, please don't hesitate in contact us in <a
-                            href="https://forums.osclasscommunity.com/">Osclass Support Forums</a>.
+                            href="https://osclass.discourse.group">Osclass Support Forums</a>.
                     We recommend to perform a backup of database and files before each upgrade. You could backup your
                     data from the "Backup" option in the admin panel.
                     If you want to run the autoupgrade manually you could do that from the following URL :
@@ -216,7 +216,7 @@
         <div id="footer">
             <ul>
                 <li><a href="https://github.com/navjottomer/Osclass/issues/" target="_blank">Report Issue</a></li>
-                <li><a href="https://forums.osclasscommunity.com/" target="_blank">Forums</a></li>
+                <li><a href="https://osclass.discourse.group" target="_blank">Forums</a></li>
             </ul>
         </div>
     </div>

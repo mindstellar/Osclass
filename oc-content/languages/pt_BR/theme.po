@@ -119,12 +119,12 @@ msgid "Footer link"
 msgstr "Link de Rodapé"
 
 #: admin/settings.php:45
-msgid "I want to help Osclass by linking to <a href=\"http://osclass.org/\" target=\"_blank\">osclass.org</a> from my site with the following text:"
-msgstr "Eu quero ajudar o Osclass colocando o link <a href=\"http://osclass.org/\" target=\"_blank\">osclass.org</a> do meu site com o seguinte texto:"
+msgid "I want to help Osclass by linking to <a href=\"https://github.com/navjottomer/osclass/\" target=\"_blank\">osclass.org</a> from my site with the following text:"
+msgstr "Eu quero ajudar o Osclass colocando o link <a href=\"https://github.com/navjottomer/osclass/\" target=\"_blank\">osclass.org</a> do meu site com o seguinte texto:"
 
 #: admin/settings.php:46
-msgid "This website is proudly using the <a title=\"Osclass web\" href=\"http://osclass.org/\">classifieds scripts</a> software <strong>Osclass</strong>"
-msgstr "Este site é orgulhosamente usa <a title=\"Osclass web\" href=\"http://osclass.org/\">classificados</a> software <strong>Osclass</strong>"
+msgid "This website is proudly using the <a title=\"Osclass web\" href=\"https://github.com/navjottomer/osclass/\">classifieds scripts</a> software <strong>Osclass</strong>"
+msgstr "Este site é orgulhosamente usa <a title=\"Osclass web\" href=\"https://github.com/navjottomer/osclass/\">classificados</a> software <strong>Osclass</strong>"
 
 #: admin/settings.php:50
 msgid "Save changes"

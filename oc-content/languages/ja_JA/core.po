@@ -3269,8 +3269,8 @@ msgid "Your Osclass installation at %s is up and running. You can access the adm
 msgstr "あなたのOsclass %sは稼働中です。以下の詳細から、管理者パネルにアクセス可能です:"
 
 #: oc-includes/osclass/install-location.php:105
-msgid "The <a href=\"http://osclass.org/\">Osclass</a> team"
-msgstr "<a href=\"http://osclass.org/\">Osclass</a>チーム"
+msgid "The <a href=\"https://github.com/navjottomer/osclass/\">Osclass</a> team"
+msgstr "<a href=\"https://github.com/navjottomer/osclass/\">Osclass</a>チーム"
 
 #: oc-includes/osclass/install.php:88
 msgid "Looks like you've already installed Osclass. To reinstall please clear your old database tables first."
@@ -3329,8 +3329,8 @@ msgid "We've encountered some problems while updating the database structure. Th
 msgstr "データベースをアップデート中に問題が発生しました。次のクエリ実行に失敗しました。"
 
 #: oc-includes/osclass/upgrade-funcs.php:47
-msgid "These errors could be false-positive errors. If you're sure that is the case, you can <a href=\"%s\">continue with the upgrade</a>, or <a href=\"http://forums.osclass.org/\">ask in our forums</a>."
-msgstr "これらのエラーはエラーではない可能性があります。そうであると思われる場合には<a href=\"%s\">アップグレードを継続</a>するか、<a href=\"http://forums.osclass.org/\">フォーラムで質問してください</a>。"
+msgid "These errors could be false-positive errors. If you're sure that is the case, you can <a href=\"%s\">continue with the upgrade</a>, or <a href=\"https://osclass.discourse.group/\">ask in our forums</a>."
+msgstr "これらのエラーはエラーではない可能性があります。そうであると思われる場合には<a href=\"%s\">アップグレードを継続</a>するか、<a href=\"https://osclass.discourse.group/\">フォーラムで質問してください</a>。"
 
 #: oc-includes/osclass/upgrade-funcs.php:287
 msgid "You need to calculate location stats, please go to admin panel, tools, recalculate location stats or click"
@@ -3341,8 +3341,8 @@ msgid "Osclass &raquo; Updated correctly"
 msgstr "Osclass &raquo; 正常にアップデートされました"
 
 #: oc-includes/osclass/upgrade-funcs.php:465
-msgid "Osclass has been updated successfully. <a href=\"http://forums.osclass.org/\">Need more help?</a>"
-msgstr "Osclassのアップデートに成功しました。 <a href=\"http://forums.osclass.org/\">不明な点がありますか?</a>"
+msgid "Osclass has been updated successfully. <a href=\"https://osclass.discourse.group/\">Need more help?</a>"
+msgstr "Osclassのアップデートに成功しました。 <a href=\"https://osclass.discourse.group/\">不明な点がありますか?</a>"
 
 #: oc-load.php:206
 msgid "The website is currently undergoing maintenance"

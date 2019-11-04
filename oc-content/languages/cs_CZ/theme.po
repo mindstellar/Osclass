@@ -30,8 +30,8 @@ msgstr "%1$d - %2$d of %3$d inzerátů"
 msgid "Premium listings"
 msgstr "Prémiové inzeráty"
 
-msgid "http://osclass.org/"
-msgstr "http://osclass.org/"
+msgid "https://github.com/navjottomer/osclass/"
+msgstr "https://github.com/navjottomer/osclass/"
 
 msgid "Bender theme"
 msgstr "Bender motiv"
@@ -148,12 +148,12 @@ msgid "Footer link"
 msgstr "Odkaz patičky"
 
 #: admin/settings.php:45
-msgid "I want to help Osclass by linking to <a href=\"http://osclass.org/\" target=\"_blank\">osclass.org</a> from my site with the following text:"
-msgstr "Chci pomoct Osclass umístěním odkazu <a href=\"http://osclass.org/\" target=\"_blank\">osclass.org</a> na můj web s následujícím textem:"
+msgid "I want to help Osclass by linking to <a href=\"https://github.com/navjottomer/osclass/\" target=\"_blank\">osclass.org</a> from my site with the following text:"
+msgstr "Chci pomoct Osclass umístěním odkazu <a href=\"https://github.com/navjottomer/osclass/\" target=\"_blank\">osclass.org</a> na můj web s následujícím textem:"
 
 #: admin/settings.php:46
-msgid "This website is proudly using the <a title=\"Osclass web\" href=\"http://osclass.org/\">classifieds scripts</a> software <strong>Osclass</strong>"
-msgstr "Tato webová stránka hrdě používá  <a title=\"Osclass web\" href=\"http://osclass.org/\">classifieds scripts</a> software <strong>Osclass</strong>"
+msgid "This website is proudly using the <a title=\"Osclass web\" href=\"https://github.com/navjottomer/osclass/\">classifieds scripts</a> software <strong>Osclass</strong>"
+msgstr "Tato webová stránka hrdě používá  <a title=\"Osclass web\" href=\"https://github.com/navjottomer/osclass/\">classifieds scripts</a> software <strong>Osclass</strong>"
 
 #: admin/settings.php:50
 msgid "Save changes"

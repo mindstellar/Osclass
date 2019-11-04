@@ -2265,7 +2265,7 @@
         /***********************
          **** DOWNLOAD FILE ****
          ***********************/
-        $data        = osc_file_get_contents('https://osclass.org/latest_version_v1.php');
+        $data        = osc_file_get_contents('https://example.org/latest_version_v1.php');
         $data        = json_decode(substr($data, 1, -2), true);
         $source_file = $data['url'];
         if ($source_file != '') {
@@ -2400,7 +2400,7 @@
 
     function osc_do_auto_upgrade()
     {
-        $data = osc_file_get_contents('https://osclass.org/latest_version_v1.php?callback=?');
+        $data = osc_file_get_contents('https://example.org/latest_version_v1.php?callback=?');
         $data = preg_replace('|^\?\((.*?)\);$|', '$01', $data);
         /** @var object $json */
         $json            = json_decode($data);

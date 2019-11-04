@@ -30,8 +30,8 @@ msgstr "%3$d 件中 %1$d ～ %2$d 件を表示"
 msgid "Premium listings"
 msgstr "注目の広告"
 
-msgid "http://osclass.org/"
-msgstr "http://osclass.org/"
+msgid "https://github.com/navjottomer/osclass/"
+msgstr "https://github.com/navjottomer/osclass/"
 
 msgid "Bender theme"
 msgstr "Bender テーマ"
@@ -148,12 +148,12 @@ msgid "Footer link"
 msgstr "フッターリンク"
 
 #: admin/settings.php:45
-msgid "I want to help Osclass by linking to <a href=\"http://osclass.org/\" target=\"_blank\">osclass.org</a> from my site with the following text:"
-msgstr "<a href=\"http://osclass.org/\" target=\"_blank\">osclass.org</a> への以下のテキストリンクを私のサイトに設置することにより、Osclassの開発に貢献したいです："
+msgid "I want to help Osclass by linking to <a href=\"https://github.com/navjottomer/osclass/\" target=\"_blank\">osclass.org</a> from my site with the following text:"
+msgstr "<a href=\"https://github.com/navjottomer/osclass/\" target=\"_blank\">osclass.org</a> への以下のテキストリンクを私のサイトに設置することにより、Osclassの開発に貢献したいです："
 
 #: admin/settings.php:46
-msgid "This website is proudly using the <a title=\"Osclass web\" href=\"http://osclass.org/\">classifieds scripts</a> software <strong>Osclass</strong>"
-msgstr "このサイトは<a title=\"Osclass web\" href=\"http://osclass.org/\">クラシファイド広告</a>ソフトウェア <strong>Osclass</strong>を使っています。"
+msgid "This website is proudly using the <a title=\"Osclass web\" href=\"https://github.com/navjottomer/osclass/\">classifieds scripts</a> software <strong>Osclass</strong>"
+msgstr "このサイトは<a title=\"Osclass web\" href=\"https://github.com/navjottomer/osclass/\">クラシファイド広告</a>ソフトウェア <strong>Osclass</strong>を使っています。"
 
 #: admin/settings.php:50
 msgid "Save changes"

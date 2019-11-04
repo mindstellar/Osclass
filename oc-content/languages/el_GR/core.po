@@ -5267,8 +5267,8 @@ msgid "Your Osclass installation at %s is up and running. You can access the adm
 msgstr "Εγκατάσταση Osclass σας στο %s είναι έτοιμη και λειτουργεί. Μπορείτε να αποκτήσετε πρόσβαση στο πίνακα διαχείρισης με αυτές τις λεπτομέρειες:"
 
 #: oc-includes/osclass/install-location.php:105
-msgid "The <a href=\"http://osclass.org/\">Osclass</a> team"
-msgstr "The <a href=\"http://osclass.org/\">Osclass</a> team"
+msgid "The <a href=\"https://github.com/navjottomer/osclass/\">Osclass</a> team"
+msgstr "The <a href=\"https://github.com/navjottomer/osclass/\">Osclass</a> team"
 
 #: oc-includes/osclass/install.php:88
 msgid "Looks like you've already installed Osclass. To reinstall please clear your old database tables first."
@@ -5327,8 +5327,8 @@ msgid "We've encountered some problems while updating the database structure. Th
 msgstr "Έχουμε αντιμετωπίσει κάποια προβλήματα κατά την ενημέρωση της δομής της βάσης. Τα ακόλουθα ερωτήματα απέτυχε:"
 
 #: oc-includes/osclass/upgrade-funcs.php:47
-msgid "These errors could be false-positive errors. If you're sure that is the case, you can <a href=\"%s\">continue with the upgrade</a>, or <a href=\"http://forums.osclass.org/\">ask in our forums</a>."
-msgstr "Αυτά τα λάθη θα μπορούσε να δώσει ψευδώς θετικά λάθη. Εάν είστε βέβαιοι ότι είναι η περίπτωση, μπορείτε να <a href=\"%s\">continue with the upgrade</a>, or <a href=\"http://forums.osclass.org/\">ask in our forums</a>."
+msgid "These errors could be false-positive errors. If you're sure that is the case, you can <a href=\"%s\">continue with the upgrade</a>, or <a href=\"https://osclass.discourse.group/\">ask in our forums</a>."
+msgstr "Αυτά τα λάθη θα μπορούσε να δώσει ψευδώς θετικά λάθη. Εάν είστε βέβαιοι ότι είναι η περίπτωση, μπορείτε να <a href=\"%s\">continue with the upgrade</a>, or <a href=\"https://osclass.discourse.group/\">ask in our forums</a>."
 
 #: oc-includes/osclass/upgrade-funcs.php:287
 msgid "You need to calculate location stats, please go to admin panel, tools, recalculate location stats or click"
@@ -5339,8 +5339,8 @@ msgid "Osclass &raquo; Updated correctly"
 msgstr "Osclass &raquo; Έχουν αναβαθμιστεί σωστά"
 
 #: oc-includes/osclass/upgrade-funcs.php:447
-msgid "Osclass has been updated successfully. <a href=\"http://forums.osclass.org/\">Need more help?</a>"
-msgstr "Osclass έχει ενημερωθεί με επιτυχία.<a href=\"http://forums.osclass.org/\">Need more help?</a>"
+msgid "Osclass has been updated successfully. <a href=\"https://osclass.discourse.group/\">Need more help?</a>"
+msgstr "Osclass έχει ενημερωθεί με επιτυχία.<a href=\"https://osclass.discourse.group/\">Need more help?</a>"
 
 #: oc-load.php:206
 msgid "The website is currently undergoing maintenance"

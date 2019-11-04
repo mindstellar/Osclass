@@ -5348,8 +5348,8 @@ msgid "Your Osclass installation at %s is up and running. You can access the adm
 msgstr "Osclass của bạn đã được cài đặt tại %s và đang hoạt động. Bạn có thể truy cập bảng quản trị với những thông tin sau:"
 
 #: oc-includes/osclass/install-location.php:107
-msgid "The <a href=\"http://osclass.org/\">Osclass</a> team"
-msgstr "Nhóm <a href=\"http://osclass.org/\">Osclass</a>"
+msgid "The <a href=\"https://github.com/navjottomer/osclass/\">Osclass</a> team"
+msgstr "Nhóm <a href=\"https://github.com/navjottomer/osclass/\">Osclass</a>"
 
 #: oc-includes/osclass/install.php:89
 msgid "Looks like you've already installed Osclass. To reinstall please clear your old database tables first."
@@ -5408,8 +5408,8 @@ msgid "We've encountered some problems while updating the database structure. Th
 msgstr "Chúng tôi đã gặp phải một số vấn đề khi cập nhật cấu trúc cơ sở dữ liệu. Các truy vấn sau đây bị thất bại:"
 
 #: oc-includes/osclass/upgrade-funcs.php:46
-msgid "These errors could be false-positive errors. If you're sure that is the case, you can <a href=\"%s\">continue with the upgrade</a>, or <a href=\"http://forums.osclass.org/\">ask in our forums</a>."
-msgstr "Những lỗi này có thể là lỗi sai tích cực. Nếu bạn chắc chắn đúng như vậy, bạn có thể <a href=\"%s\">tiếp tục nâng cấp</a>, hoặc <a href =\"http://forums.osclass.org/ \">đặt câu hỏi trong các diễn đàn của chúng tôi</a>."
+msgid "These errors could be false-positive errors. If you're sure that is the case, you can <a href=\"%s\">continue with the upgrade</a>, or <a href=\"https://osclass.discourse.group/\">ask in our forums</a>."
+msgstr "Những lỗi này có thể là lỗi sai tích cực. Nếu bạn chắc chắn đúng như vậy, bạn có thể <a href=\"%s\">tiếp tục nâng cấp</a>, hoặc <a href =\"https://osclass.discourse.group/ \">đặt câu hỏi trong các diễn đàn của chúng tôi</a>."
 
 #: oc-includes/osclass/upgrade-funcs.php:286
 msgid "You need to calculate location stats, please go to admin panel, tools, recalculate location stats or click"
@@ -5420,8 +5420,8 @@ msgid "Osclass &raquo; Updated correctly"
 msgstr "Osclass &raquo; Đã cập nhật chính xác"
 
 #: oc-includes/osclass/upgrade-funcs.php:475
-msgid "Osclass has been updated successfully. <a href=\"http://forums.osclass.org/\">Need more help?</a>"
-msgstr "Osclass đã được cập nhật thành công. <a href=\"http://forums.osclass.org/\">Cần thêm trợ giúp?</a>"
+msgid "Osclass has been updated successfully. <a href=\"https://osclass.discourse.group/\">Need more help?</a>"
+msgstr "Osclass đã được cập nhật thành công. <a href=\"https://osclass.discourse.group/\">Cần thêm trợ giúp?</a>"
 
 #: oc-load.php:210
 msgid "The website is currently undergoing maintenance"

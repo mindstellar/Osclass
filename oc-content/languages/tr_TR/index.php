@@ -26,7 +26,7 @@ function locale_tr_TR_info() {
         ,'description'     => 'Turkish translation'
         ,'version'         => '3.3.00'
         ,'author_name'     => 'Osclass'
-        ,'author_url'      => 'http://osclass.org/'
+        ,'author_url'      => 'https://github.com/navjottomer/osclass/'
         ,'currency_format' => '{NUMBER} {CURRENCY}'
         ,'date_format'     => 'm/d/Y'
         ,'stop_words'      => ''

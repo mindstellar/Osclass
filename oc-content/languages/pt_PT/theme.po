@@ -768,8 +768,8 @@ msgid "Osclass can't upload the logo image from the administration panel."
 msgstr "O Osclass não pode carregar o logotipo pelo painel de administração."
 
 #: admin/settings.php:34
-msgid "I want to help Osclass by linking to <a href=\"http://osclass.org/\" target=\"_blank\">osclass.org</a> from my site with the following text:"
-msgstr "Quero ajudar o Osclass fazendo um link para  <a href=\"http://osclass.org/\" target=\"_blank\">osclass.org</a>  do meu portal com o seguinte texto:"
+msgid "I want to help Osclass by linking to <a href=\"https://github.com/navjottomer/osclass/\" target=\"_blank\">osclass.org</a> from my site with the following text:"
+msgstr "Quero ajudar o Osclass fazendo um link para  <a href=\"https://github.com/navjottomer/osclass/\" target=\"_blank\">osclass.org</a>  do meu portal com o seguinte texto:"
 
 #: admin/header.php:55
 msgid "Please make the aforementioned image folder writable."
@@ -780,8 +780,8 @@ msgid "I would like to contribute to the development of Osclass with a donation 
 msgstr "Desejo contribuir para o desenvolvimento do Osclass com um donativo de"
 
 #: admin/settings.php:35 footer.php:35
-msgid "This website is proudly using the <a title=\"Osclass web\" href=\"http://osclass.org/\">classifieds scripts</a> software <strong>Osclass</strong>"
-msgstr "Este portal está a utilizar o  <a title=\"Osclass web\" href=\"http://osclass.org/\">script de classificados</a>  <strong>Osclass</strong>"
+msgid "This website is proudly using the <a title=\"Osclass web\" href=\"https://github.com/navjottomer/osclass/\">classifieds scripts</a> software <strong>Osclass</strong>"
+msgstr "Este portal está a utilizar o  <a title=\"Osclass web\" href=\"https://github.com/navjottomer/osclass/\">script de classificados</a>  <strong>Osclass</strong>"
 
 #: admin/settings.php:39
 msgid "Default logo"
