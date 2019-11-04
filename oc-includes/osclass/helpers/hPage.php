@@ -207,7 +207,8 @@
      */
     function osc_count_static_pages() {
         if ( !View::newInstance()->_exists('pages') ) {
-            if(!$pages =  Cache::newInstance()->get('core/pages')){
+            $pages =  Cache::newInstance()->get('core/pages');
+            if(!$pages){
                 $pages = Page::newInstance()->listAll(false);
                 Cache::newInstance()->set('core/pages',$pages) ;
             } else {
@@ -225,10 +226,11 @@
      */
     function osc_has_static_pages() {
         if ( !View::newInstance()->_exists('pages') ) {
-            if(!$pages=  Cache::newInstance()->get('core/pages')){
+            $pages=  Cache::newInstance()->get('core/pages');
+            if(!$pages){
                 $pages =  Page::newInstance()->listAll(false, 1);
                 Cache::newInstance()->set('core/pages',$pages) ;
-            View::newInstance()->_exportVariableToView('pages', $pages );
+                View::newInstance()->_exportVariableToView('pages', $pages );
         }else {
              View::newInstance()->_exportVariableToView('pages', $pages );
             }
