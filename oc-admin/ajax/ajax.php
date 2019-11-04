@@ -124,7 +124,7 @@
                     }
 
                     osc_run_hook('edited_category_order', $error);
-
+                    Cache::newInstance()->delete('core/categories');
                     echo json_encode($result);
                 break;
                 case 'category_edit_iframe':
@@ -324,6 +324,7 @@
                         );
                     }
                     $result['affectedIds'] = array( array('id' => $id) );
+                     Cache::newInstance()->delete('core/categories');
                     echo json_encode($result);
 
                     break;
@@ -347,6 +348,7 @@
                     } else {
                         $result = array( 'ok' => $message );
                     }
+                    Cache::newInstance()->delete('core/categories');
                     echo json_encode($result);
 
                     break;
@@ -402,6 +404,7 @@
                     } else if($error==2) {
                         $msg = __('An error occurred while updating');
                     }
+                    Cache::newInstance()->delete('core/categories');
                     echo json_encode(array('error' => $error, 'msg' => $msg, 'text' => $aFieldsDescription[$l]['s_name']));
 
                     break;

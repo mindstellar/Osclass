@@ -409,7 +409,13 @@
 	 */
 	function osc_export_categories( $categories = null) {
         if($categories==null) {
+            $categories = Cache::newInstance()->get('core/categories');
+         
+        if(!$categories) {
             $categories = Category::newInstance()->toTree();
+            Cache::newInstance()->set('core/categories',$categories);
+        }
+          
         }
         View::newInstance()->_exportVariableToView('categories', $categories);
         View::newInstance()->_exportVariableToView('categories_tree', $categories);

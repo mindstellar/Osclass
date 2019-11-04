@@ -15,79 +15,34 @@
  * limitations under the License.
  */
 
-	/**
-	 * @param     $key
-	 * @param     $data
-	 * @param int $expire
-	 *
-	 * @return bool
-	 * @throws \Exception
-	 */
-	function osc_cache_add( $key , $data , $expire = 0 ) {
-    $key .= osc_current_user_locale();
-    return Object_Cache_Factory::newInstance()->add($key, $data, $expire);
+function osc_cache_add($key, $data, $expire = 0) {
+    $key = osc_current_user_locale().'/'.$key;
+    return Cache::newInstance()->add($key, $data, $expire);
 }
 
-
-	/**
-	 * @return mixed
-	 * @throws \Exception
-	 */
-	function osc_cache_close() {
-    return Object_Cache_Factory::newInstance()->close();
+function osc_cache_close() {
+    return Cache::newInstance()->close();
 }
 
-
-	/**
-	 * @param $key
-	 *
-	 * @return bool
-	 * @throws \Exception
-	 */
-	function osc_cache_delete( $key ) {
-    $key .= osc_current_user_locale();
-    return Object_Cache_Factory::newInstance()->delete($key);
+function osc_cache_delete($key) {
+    $key = osc_current_user_locale().'/'.$key;
+    return Cache::newInstance()->delete($key);
 }
 
-
-	/**
-	 * @return bool
-	 * @throws \Exception
-	 */
-	function osc_cache_flush() {
-    return Object_Cache_Factory::newInstance()->flush();
+function osc_cache_flush() {
+    return Cache::newInstance()->clear();
 }
 
 function osc_cache_init() {
-	try {
-		Object_Cache_Factory::newInstance();
-	} catch ( Exception $e ) {
-	}
+    Cache::newInstance();
 }
 
-
-	/**
-	 * @param $key
-	 * @param $found
-	 *
-	 * @return bool|mixed
-	 * @throws \Exception
-	 */
-	function osc_cache_get( $key , &$found ) {
-    $key .= osc_current_user_locale();
-    return Object_Cache_Factory::newInstance()->get($key, $found);
+function osc_cache_get($key,$found = null) {
+     $key = osc_current_user_locale().'/'.$key;
+    return Cache::newInstance()->get($key);
 }
 
-
-	/**
-	 * @param     $key
-	 * @param     $data
-	 * @param int $expire
-	 *
-	 * @return bool
-	 * @throws \Exception
-	 */
-	function osc_cache_set( $key , $data , $expire = 0 ) {
-    $key .= osc_current_user_locale();
-    return Object_Cache_Factory::newInstance()->set($key, $data, $expire);
+function osc_cache_set($key, $data, $expire = 0) {
+    $key = osc_current_user_locale().'/'.$key;
+    return Cache::newInstance()->set($key, $data, $expire);
 }
