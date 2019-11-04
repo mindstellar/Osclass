@@ -18,73 +18,237 @@
  * limitations under the License.
  */
 
-    define('CACHE_PATH', osc_uploads_path());
+    define('CACHE_PATH',UPLOADS_PATH . 'cache/');
+
+    use Stash\Invalidation;
+
+class Cache {
 
     /**
-     * This is the simplest cache service on earth.
-     *
-     * @author Osclass
-     * @version 1.0
+     * @var int
      */
-    class Cache {
+    public $cache_hits = 0;
 
-        private $objectKey;
-        private $expiration;
+    /**
+     * @var int
+     */
+    public $cache_misses = 0;
 
-	    /**
-	     * Cache constructor.
-	     *
-	     * @param     $objectKey
-	     * @param int $expiration
-	     */
-	    public function __construct( $objectKey , $expiration = 900 /* 15 minutes */ ) {
-            $this->objectKey = $objectKey;
-            $this->expiration = $expiration;
+    /**
+     * Implementation of the caching backend
+     *
+     * @var Pool
+     */
+    private $pool;
+    
+
+    /**
+     * In-memory data cache which is kept in sync with the data in the caching back-end
+     *
+     * @var array
+     */
+    private $local = [];
+
+    /**
+     * @var bool
+     */
+    private $useInMemoryCache = true;
+    private static $instance = null;
+
+    public static function newInstance() {
+        if (self::$instance == null) {
+            self::$instance = new self ();
         }
+        return self::$instance;
+    }
+ // single Instance
+    private function __construct() {
 
-        public function __destruct() {
-        }
+        if (defined('OSC_CACHE')) {
+            $cache = OSC_CACHE;
+            $driverClassName = 'Stash\\Driver\\' . $cache;
 
-        /**
-         * @return true if the object is cached and has not expired, false otherwise.
-         */
-        public function check() {
-            $path = $this->preparePath();
-	        if ( ! file_exists( $path ) ) {
-		        return false;
-	        }
-
-            if(time() - filemtime($path) > $this->expiration) {
-                unlink($path);
-                return false;
+            if (in_array(DriverInterface::class, class_implements($driverClassName), true) || call_user_func([$driverClassName, 'isAvailable'])
+            ) {
+                $adapter = new $driverClassName();
+                global $_cache_config;
+                if (isset($_cache_config) && is_array($_cache_config)) {
+                    $adapter->setOptions($_cache_config);
+                }
             }
-
-            return true;
+        } else {
+            $adapter = new Stash\Driver\FileSystem(array('path' => UPLOADS_PATH . 'cache/'));
         }
 
-	    /**
-	     * Stores the object passed as parameter in the cache backend (filesystem).
-	     *
-	     * @param $object
-	     */
-        public function store($object) {
-            $serialized = serialize($object);
-            file_put_contents($this->preparePath(), $serialized);
-        }
-
-        /**
-         * Returns the data of the current cached object.
-         */
-        public function retrieve() {
-            $content = file_get_contents($this->preparePath());
-            return unserialize($content);
-        }
-
-        /**
-         * Constructs the path to object in filesystem.
-         */
-        private function preparePath() {
-            return CACHE_PATH . $this->objectKey . '.cache';
-        }
+      
+        $this->pool = new Stash\Pool($adapter);
+        
     }
 
+  
+ 
+
+    /**
+     * Set a cache item if it's not set already.
+     *
+     * @param string $key
+     * @param mixed $data
+     * @param int $expire
+     *
+     * @return bool
+     *
+     * 
+     */
+    public function add( $key, $data,  $expire = 0) {
+       // $key = $this->makeKey($key);
+        if ($this->pool->hasItem($key)) {
+            return false;
+        }
+        return $this->set($key, $data, $expire);
+    }
+
+    /**
+     * Set/update a cache item.
+     *
+     * @param string $key
+     * @param mixed $data
+     * @param int $expire
+     *
+     * @return bool
+     *
+     * 
+     */
+    public function set( $key, $data, $expire = 0) {
+       //$key = $this->makeKey($key);
+        try {
+            $item = $this->pool->getItem($key);
+        } catch (\InvalidArgumentException $exception) {
+            return false;
+        }
+        $item->set($data);
+        if ($expire) {
+            $item->expiresAfter($expire);
+        }
+        $item->setInvalidationMethod(Invalidation::OLD);
+        $this->pool->save($item);
+        if ($this->useInMemoryCache) {
+            $this->local[$key] = $data;
+        }
+        return true;
+    }
+
+    /**
+     * Increase a numeric cache value by the specified amount.
+     *
+     * @param string $key
+     * @param int $offset
+     *
+     * @return bool
+     */
+    public function incr( $key,  $offset = 1) {
+       // $key = $this->makeKey($key);
+        $data = $this->get($key);
+        if (!$data || !is_numeric($data)) {
+            return false;
+        }
+        return $this->set($key, $data + $offset);
+    }
+
+    /**
+     * Retrieve a cache item.
+     *
+     * @param string $key
+     *
+     * @return bool|mixed
+     *
+     * // phpcs:disable Inpsyde.CodeQuality.ReturnTypeDeclaration.NoReturnType
+     */
+    public function get( $key) {
+       // $key = $this->makeKey($key);
+        if ($this->useInMemoryCache && isset($this->local[$key])) {
+            return $this->local[$key];
+        }
+        try {
+            $item = $this->pool->getItem($key);
+        } catch (\InvalidArgumentException $exception) {
+            return false;
+        }
+        // Check to see if the data was a miss.
+        if ($item->isMiss()) {
+            $this->cache_misses++;
+            return false;
+        }
+        $result = $item->get();
+        if ($this->useInMemoryCache) {
+            $this->local[$key] = $result;
+        }
+        $this->cache_hits++;
+        return $result;
+    }
+
+    /**
+     * Decrease a numeric cache item by the specified amount.
+     *
+     * @param string $key
+     * @param int $offset
+     *
+     * @return bool
+     */
+    public function decr( $key,  $offset = 1) {
+        $key = $this->makeKey($key);
+        $data = $this->get($key);
+        if (!$data || !is_numeric($data)) {
+            return false;
+        }
+        return $this->set($key, $data - $offset);
+    }
+
+    /**
+     * Delete a cache item.
+     *
+     * @param string $key
+     *
+     * @return bool
+     */
+    public function delete( $key) {
+        //$key = $this->makeKey($key);
+        if ($this->useInMemoryCache) {
+            unset($this->local[$key]);
+        }
+        return $this->pool->deleteItem($key);
+    }
+
+    /**
+     * Clear the whole cache pool
+     */
+    public function clear() {
+        $this->local = [];
+        $this->pool->clear();
+    }
+
+    /**
+     * Replace a cache item if it exists.
+     *
+     * @param string $key
+     * @param mixed $data
+     * @param int $expire
+     *
+     * @return bool
+     *
+     * 
+     */
+    public function replace( $key, $data,  $expire = 0) {
+     //   $key = $this->makeKey($key);
+        // Check to see if the data was a miss.
+        if (!$this->pool->hasItem($key)) {
+            return false;
+        }
+        return $this->set($key, $data, $expire);
+    }
+
+    public function __destruct() {
+        $this->pool->commit();
+        $this->local = [];
+    }
+
+}

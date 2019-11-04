@@ -6,6 +6,7 @@
     }
   ],
   "require": {
+    "tedivm/stash": "0.15.1",
     "hybridauth/hybridauth": "~2.9",
     "ezyang/htmlpurifier": "4.11.0",
     "phpmailer/phpmailer": "5.2.x",

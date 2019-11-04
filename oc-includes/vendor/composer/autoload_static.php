@@ -21,6 +21,10 @@ class ComposerStaticInit6b0b4fafd693b0d76015f213169bd812
         array (
             'ioncube\\phpOpensslCryptor\\' => 26,
         ),
+        'S' => 
+        array (
+            'Stash\\' => 6,
+        ),
         'R' => 
         array (
             'ReCaptcha\\' => 10,
@@ -28,6 +32,7 @@ class ComposerStaticInit6b0b4fafd693b0d76015f213169bd812
         'P' => 
         array (
             'Psr\\Log\\' => 8,
+            'Psr\\Cache\\' => 10,
         ),
         'G' => 
         array (
@@ -49,6 +54,10 @@ class ComposerStaticInit6b0b4fafd693b0d76015f213169bd812
         array (
             0 => __DIR__ . '/..' . '/ioncube/php-openssl-cryptor/src',
         ),
+        'Stash\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/tedivm/stash/src/Stash',
+        ),
         'ReCaptcha\\' => 
         array (
             0 => __DIR__ . '/..' . '/google/recaptcha/src/ReCaptcha',
@@ -56,6 +65,10 @@ class ComposerStaticInit6b0b4fafd693b0d76015f213169bd812
         'Psr\\Log\\' => 
         array (
             0 => __DIR__ . '/..' . '/psr/log/Psr/Log',
+        ),
+        'Psr\\Cache\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/psr/cache/src',
         ),
         'Gettext\\Languages\\' => 
         array (
