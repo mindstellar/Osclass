@@ -1545,7 +1545,7 @@
             while (($file = readdir($dh)) !== false) {
                 if ($file !== '.' && $file !== '..' && $file[0] !== '.') {
                     if (!is_writable(osc_replace_double_slash($dir . '/' . $file))) {
-                        $result = @chmod(str_replace('//', '/', $dir . '/' . $file), 0755);
+                        $result = chmod(str_replace('//', '/', $dir . '/' . $file), 0755);
                     }
 
                     if (is_dir(osc_replace_double_slash($dir . '/' . $file))) {
@@ -1592,7 +1592,6 @@
             }
             closedir($dh);
         }
-
         return true;
     }
 
@@ -1620,7 +1619,7 @@
                             $perms[$k] = $v;
                         }
                     } else {
-                        $perms[str_replace('//', '/', $dir . '/' . $file)] = @fileperms(str_replace('//', '/', $dir . '/' . $file));
+                        $perms[str_replace('//', '/', $dir . '/' . $file)] = fileperms(str_replace('//', '/', $dir . '/' . $file));
                     }
                 }
             }
