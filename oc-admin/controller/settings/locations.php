@@ -38,29 +38,9 @@
                                         if(isset($exists['s_name'])) {
                                             osc_add_flash_error_message(sprintf(_m('%s already was in the database'), $countryName), 'admin');
                                         } else {
-                                            if(Params::getParam('c_manual')==1) {
-                                                $mCountries->insert(array('pk_c_code' => $countryCode,
-                                                                        's_name' => $countryName));
-                                                osc_add_flash_ok_message(sprintf(_m('%s has been added as a new country'), $countryName), 'admin');
-                                            } else {
-                                                if(!osc_validate_min($countryCode, 1) || !osc_validate_min($countryName, 1)) {
-                                                    osc_add_flash_error_message(_m('Country code and name should have at least two characters'), 'admin');
-                                                } else {
-                                                    $data_sql = osc_file_get_contents('https://geo.osclass.org/newgeo.download.php?action=country&term=' . urlencode($countryCode) );
-                                                    if($data_sql!='') {
-                                                        $conn = DBConnectionClass::newInstance();
-                                                        $c_db = $conn->getOsclassDb();
-                                                        $comm = new DBCommandClass($c_db);
-                                                        $comm->query("SET FOREIGN_KEY_CHECKS = 0");
-                                                        $comm->importSQL($data_sql);
-                                                        $comm->query("SET FOREIGN_KEY_CHECKS = 1");
-                                                    } else {
-                                                        $mCountries->insert(array('pk_c_code' => $countryCode,
-                                                                                's_name' => $countryName));
-                                                    }
-                                                    osc_add_flash_ok_message(sprintf(_m('%s has been added as a new country'), $countryName), 'admin');
-                                                }
-                                            }
+                                            $mCountries->insert(array('pk_c_code' => $countryCode,
+                                                                    's_name' => $countryName));
+                                            osc_add_flash_ok_message(sprintf(_m('%s has been added as a new country'), $countryName), 'admin');
                                         }
                                         osc_calculate_location_slug('country');
                                         osc_calculate_location_slug('region');
@@ -144,44 +124,25 @@
                                             $this->redirectTo(osc_admin_base_url(true) . '?page=settings&action=locations');
                                         }
                                         osc_csrf_check();
-                                        if( !Params::getParam('r_manual') ) {
-                                            $regionId    = Params::getParam('region_id');
-                                            $regionName  = Params::getParam('region');
-                                            if($regionId!='') {
-                                                $data_sql = osc_file_get_contents('https://geo.osclass.org/newgeo.download.php?action=region&term=' . urlencode($regionId) );
+                                        $mRegions    = new Region();
+                                        $regionName  = Params::getParam('region');
+                                        $countryCode = Params::getParam('country_c_parent');
+                                        $country     = Country::newInstance()->findByCode($countryCode);
 
-                                                $conn = DBConnectionClass::newInstance();
-                                                $c_db = $conn->getOsclassDb();
-                                                $comm = new DBCommandClass($c_db);
-                                                $comm->query("SET FOREIGN_KEY_CHECKS = 0");
-                                                $comm->importSQL($data_sql);
-                                                $comm->query("SET FOREIGN_KEY_CHECKS = 1");
+                                        if(!osc_validate_min($regionName, 1)) {
+                                            osc_add_flash_error_message(_m('Region name cannot be blank'), 'admin');
+                                        } else {
+                                            $exists = $mRegions->findByName($regionName, $countryCode);
+                                            if(!isset($exists['s_name'])) {
+                                                $data = array('fk_c_country_code' => $countryCode
+                                                            ,'s_name' => $regionName);
+                                                $mRegions->insert($data);
+                                                $id = $mRegions->dao->insertedId();
+                                                RegionStats::newInstance()->setNumItems($id, 0);
+
                                                 osc_add_flash_ok_message(sprintf(_m('%s has been added as a new region'), $regionName), 'admin');
                                             } else {
-                                                osc_add_flash_error_message(sprintf(_m("%s can't be added"), $regionName), 'admin');
-                                            }
-
-                                        } else {
-                                            $mRegions    = new Region();
-                                            $regionName  = Params::getParam('region');
-                                            $countryCode = Params::getParam('country_c_parent');
-                                            $country     = Country::newInstance()->findByCode($countryCode);
-
-                                            if(!osc_validate_min($regionName, 1)) {
-                                                osc_add_flash_error_message(_m('Region name cannot be blank'), 'admin');
-                                            } else {
-                                                $exists = $mRegions->findByName($regionName, $countryCode);
-                                                if(!isset($exists['s_name'])) {
-                                                    $data = array('fk_c_country_code' => $countryCode
-                                                                ,'s_name' => $regionName);
-                                                    $mRegions->insert($data);
-                                                    $id = $mRegions->dao->insertedId();
-                                                    RegionStats::newInstance()->setNumItems($id, 0);
-
-                                                    osc_add_flash_ok_message(sprintf(_m('%s has been added as a new region'), $regionName), 'admin');
-                                                } else {
-                                                    osc_add_flash_error_message(sprintf(_m('%s already was in the database'), $regionName), 'admin');
-                                                }
+                                                osc_add_flash_error_message(sprintf(_m('%s already was in the database'), $regionName), 'admin');
                                             }
                                         }
                                         osc_calculate_location_slug('region');
@@ -291,42 +252,23 @@
                                         $mRegion     = new Region();
                                         $region = $mRegion->findByPrimaryKey($regionId);
                                         $country = Country::newInstance()->findByCode($region['fk_c_country_code']);
-                                        if( !Params::getParam('ci_manual') ) {
-                                            $cityId    = Params::getParam('city_id');
-                                            $cityName  = Params::getParam('city');
-                                            if($cityId!='') {
-                                                $data_sql = osc_file_get_contents('https://geo.osclass.org/newgeo.download.php?action=city&term=' . urlencode($cityId) );
+                                        $mCities     = new City();
+                                        $newCity     = Params::getParam('city');
 
-                                                $conn = DBConnectionClass::newInstance();
-                                                $c_db = $conn->getOsclassDb();
-                                                $comm = new DBCommandClass($c_db);
-                                                $comm->query("SET FOREIGN_KEY_CHECKS = 0");
-                                                $comm->importSQL($data_sql);
-                                                $comm->query("SET FOREIGN_KEY_CHECKS = 1");
-                                                osc_add_flash_ok_message(sprintf(_m('%s has been added as a new city'), $cityName), 'admin');
-                                            } else {
-                                                osc_add_flash_error_message(sprintf(_m("%s can't be added"), $cityName), 'admin');
-                                            }
-
+                                        if(!osc_validate_min($newCity, 1)) {
+                                            osc_add_flash_error_message(_m('New city name cannot be blank'), 'admin');
                                         } else {
-                                            $mCities     = new City();
-                                            $newCity     = Params::getParam('city');
+                                            $exists = $mCities->findByName($newCity, $regionId);
+                                            if(!isset($exists['s_name'])) {
+                                                $mCities->insert(array('fk_i_region_id'    => $regionId
+                                                                    ,'s_name'            => $newCity
+                                                                    ,'fk_c_country_code' => $countryCode));
+                                                $id = $mCities->dao->insertedId();
+                                                CityStats::newInstance()->setNumItems($id, 0);
 
-                                            if(!osc_validate_min($newCity, 1)) {
-                                                osc_add_flash_error_message(_m('New city name cannot be blank'), 'admin');
+                                                osc_add_flash_ok_message(sprintf(_m('%s has been added as a new city'), $newCity), 'admin');
                                             } else {
-                                                $exists = $mCities->findByName($newCity, $regionId);
-                                                if(!isset($exists['s_name'])) {
-                                                    $mCities->insert(array('fk_i_region_id'    => $regionId
-                                                                        ,'s_name'            => $newCity
-                                                                        ,'fk_c_country_code' => $countryCode));
-                                                    $id = $mCities->dao->insertedId();
-                                                    CityStats::newInstance()->setNumItems($id, 0);
-
-                                                    osc_add_flash_ok_message(sprintf(_m('%s has been added as a new city'), $newCity), 'admin');
-                                                } else {
-                                                    osc_add_flash_error_message(sprintf(_m('%s already was in the database'), $newCity), 'admin');
-                                                }
+                                                osc_add_flash_error_message(sprintf(_m('%s already was in the database'), $newCity), 'admin');
                                             }
                                         }
                                         osc_calculate_location_slug('city');
