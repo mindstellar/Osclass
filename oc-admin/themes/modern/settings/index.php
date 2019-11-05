@@ -315,6 +315,8 @@
                             <span class="help-box"><?php _e('It is <b>recommended</b> to have this option enabled, because some features require it.'); ?></span>
                         </div>
                     </div>
+                    <?php
+                    /**
                     <h2 class="render-title separate-top"><?php _e('Software updates'); ?></h2>
                     <div class="form-row">
                         <div class="form-label"><?php _e('Core updates'); ?></div>
@@ -366,6 +368,8 @@
                             <?php printf(__('Last checked on %s'), osc_format_date( date('d-m-Y h:i:s', osc_get_preference('themes_last_version_check')) )); ?> <a class="btn btn-mini" href="<?php echo osc_admin_base_url(true); ?>?page=settings&action=check_updates"><?php _e('Check updates');?></a>
                         </div>
                     </div>
+                     * */
+                    ?>
                     <div class="clear"></div>
                     <div class="form-actions">
                         <input type="submit" id="save_changes" value="<?php echo osc_esc_html( __('Save changes') ); ?>" class="btn btn-submit" />
