@@ -21,11 +21,11 @@
 
 /*
 Theme Name: bender
-Theme URI: http://osclass.org/
+Theme URI: https://github.com/navjottomer/osclass/
 Description: <%- pkg.description %>
 Version: <%- pkg.version %>
 Author: <%- pkg.author %>
-Author URI: http://osclass.org/
+Author URI: https://github.com/navjottomer/osclass/
 Widgets:  header, footer
 Theme update URI: bender
 */
@@ -36,7 +36,7 @@ Theme update URI: bender
             ,'version'     => '<%- pkg.version %>'
             ,'description' => '<%- pkg.description %>'
             ,'author_name' => '<%- pkg.author %>'
-            ,'author_url'  => 'http://osclass.org'
+            ,'author_url'  => 'https://github.com/navjottomer/osclass'
             ,'locations'   => array()
         );
     }

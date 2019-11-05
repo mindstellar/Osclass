@@ -4214,8 +4214,8 @@ msgid "Your Osclass installation at %s is up and running. You can access the adm
 msgstr "安装正在进行，别急，管理面板中有如下信息："
 
 #: /var/www/osclass-git/oc-includes/osclass/install-location.php:102
-msgid "The <a href=\"http://osclass.org/\">Osclass</a> team"
-msgstr "The <a href=\"http://osclass.org/\">Osclass</a> 团队"
+msgid "The <a href=\"https://github.com/navjottomer/osclass/\">Osclass</a> team"
+msgstr "The <a href=\"https://github.com/navjottomer/osclass/\">Osclass</a> 团队"
 
 #: /var/www/osclass-git/oc-includes/osclass/install.php:86
 msgid "Looks like you've already installed Osclass. To reinstall please clear your old database tables first."
@@ -4238,8 +4238,8 @@ msgid "We've encountered some problems while updating the database structure. Th
 msgstr "更新数据库出了点毛病，如下："
 
 #: /var/www/osclass-git/oc-includes/osclass/upgrade-funcs.php:47
-msgid "These errors could be false-positive errors. If you're sure that is the case, you can <a href=\"%s\">continue with the upgrade</a>, or <a href=\"http://forums.osclass.org/\">ask in our forums</a>."
-msgstr "出错显示可能是假的哈, 如果你确定你可以 <a href=\"%s\">继续更新，懒得理会</a>, or <a href=\"http://forums.osclass.org/\">或者到论坛去潜潜水</a>."
+msgid "These errors could be false-positive errors. If you're sure that is the case, you can <a href=\"%s\">continue with the upgrade</a>, or <a href=\"https://osclass.discourse.group/\">ask in our forums</a>."
+msgstr "出错显示可能是假的哈, 如果你确定你可以 <a href=\"%s\">继续更新，懒得理会</a>, or <a href=\"https://osclass.discourse.group/\">或者到论坛去潜潜水</a>."
 
 #: /var/www/osclass-git/oc-includes/osclass/upgrade-funcs.php:286
 msgid "You need to calculate location stats, please go to admin panel, tools, recalculate location stats or click"
@@ -4250,8 +4250,8 @@ msgid "Osclass &raquo; Updated correctly"
 msgstr "Osclass &raquo; 更新成功"
 
 #: /var/www/osclass-git/oc-includes/osclass/upgrade-funcs.php:392
-msgid "Osclass has been updated successfully. <a href=\"http://forums.osclass.org/\">Need more help?</a>"
-msgstr "Osclass更新成功 <a href=\"http://forums.osclass.org/\">需要更多帮助?</a>"
+msgid "Osclass has been updated successfully. <a href=\"https://osclass.discourse.group/\">Need more help?</a>"
+msgstr "Osclass更新成功 <a href=\"https://osclass.discourse.group/\">需要更多帮助?</a>"
 
 #: /var/www/osclass-git/oc-load.php:207
 msgid "The website is currently undergoing maintenance"

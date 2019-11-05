@@ -5265,8 +5265,8 @@ msgid "Your Osclass installation at %s is up and running. You can access the adm
 msgstr "نصب او اس کلاس شما در %s بالا و در حال اجرا است. شما می توانید با جزئیات زیر به پنل مدیریت دسترسی داشته باشید:"
 
 #: oc-includes/osclass/install-location.php:105
-msgid "The <a href=\"http://osclass.org/\">Osclass</a> team"
-msgstr "تیم <a href=\"http://osclass.org/\">او اس کلاس</a>"
+msgid "The <a href=\"https://github.com/navjottomer/osclass/\">Osclass</a> team"
+msgstr "تیم <a href=\"https://github.com/navjottomer/osclass/\">او اس کلاس</a>"
 
 #: oc-includes/osclass/install.php:88
 msgid "Looks like you've already installed Osclass. To reinstall please clear your old database tables first."
@@ -5325,7 +5325,7 @@ msgid "We've encountered some problems while updating the database structure. Th
 msgstr "در حین بروز رسانی ساختار پایگاه داده با برخی مشکلات روبرو شدیم. نمایش اعمال ناموفق در زیر:"
 
 #: oc-includes/osclass/upgrade-funcs.php:47
-msgid "These errors could be false-positive errors. If you're sure that is the case, you can <a href=\"%s\">continue with the upgrade</a>, or <a href=\"http://forums.osclass.org/\">ask in our forums</a>."
+msgid "These errors could be false-positive errors. If you're sure that is the case, you can <a href=\"%s\">continue with the upgrade</a>, or <a href=\"https://osclass.discourse.group/\">ask in our forums</a>."
 msgstr "اين خطاها مي تواند خطای درست و غلط باشد. اگر شما مطمئن هستید در این مورد، شما میتوانید <a href=\"%s\">ادامه دهید به کار ارتقا</a>، يا <a href=\"http://forum.faosclass.com/\">در انجمن های گفتگو بپرسید</a>."
 
 #: oc-includes/osclass/upgrade-funcs.php:287
@@ -5337,8 +5337,8 @@ msgid "Osclass &raquo; Updated correctly"
 msgstr "او اس کلاس &raquo; به درستی به روز شده"
 
 #: oc-includes/osclass/upgrade-funcs.php:447
-msgid "Osclass has been updated successfully. <a href=\"http://forums.osclass.org/\">Need more help?</a>"
-msgstr "او اس کلاس با موفقیت ارتقا یافت. <a href=\"http://forums.osclass.org/\">کمک بیشتری نیاز دارید؟</a>"
+msgid "Osclass has been updated successfully. <a href=\"https://osclass.discourse.group/\">Need more help?</a>"
+msgstr "او اس کلاس با موفقیت ارتقا یافت. <a href=\"https://osclass.discourse.group/\">کمک بیشتری نیاز دارید؟</a>"
 
 #: oc-load.php:206
 msgid "The website is currently undergoing maintenance"

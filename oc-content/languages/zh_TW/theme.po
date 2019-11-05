@@ -119,12 +119,12 @@ msgid "Footer link"
 msgstr "頁尾連結"
 
 #: admin/settings.php:67
-msgid "I want to help Osclass by linking to <a href=\"http://osclass.org/\" target=\"_blank\">osclass.org</a> from my site with the following text:"
-msgstr "我要協助 Osclass 從我的網站透過下列文字連結到 a href=\"http://osclass.org/\" target=\"_blank\">osclass.org</a>："
+msgid "I want to help Osclass by linking to <a href=\"https://github.com/navjottomer/osclass/\" target=\"_blank\">osclass.org</a> from my site with the following text:"
+msgstr "我要協助 Osclass 從我的網站透過下列文字連結到 a href=\"https://github.com/navjottomer/osclass/\" target=\"_blank\">osclass.org</a>："
 
 #: admin/settings.php:68
-msgid "This website is proudly using the <a title=\"Osclass web\" href=\"http://osclass.org/\">classifieds scripts</a> software <strong>Osclass</strong>"
-msgstr "這個網站驕傲的使用 <a title=\"Osclass web\" href=\"http://osclass.org/\">classifieds scripts</a> 開發的 <strong>Osclass 軟體</strong>"
+msgid "This website is proudly using the <a title=\"Osclass web\" href=\"https://github.com/navjottomer/osclass/\">classifieds scripts</a> software <strong>Osclass</strong>"
+msgstr "這個網站驕傲的使用 <a title=\"Osclass web\" href=\"https://github.com/navjottomer/osclass/\">classifieds scripts</a> 開發的 <strong>Osclass 軟體</strong>"
 
 #: admin/settings.php:124
 msgid "Save changes"
@@ -798,8 +798,8 @@ msgstr "顯示第 %1$d ~ %2$d 項，全部共有 %3$d 個廣告"
 msgid "Premium listings"
 msgstr "需付費的廣告"
 
-msgid "http://osclass.org/"
-msgstr "http://osclass.org/"
+msgid "https://github.com/navjottomer/osclass/"
+msgstr "https://github.com/navjottomer/osclass/"
 
 msgid "Bender theme"
 msgstr "Bender 佈景主題"

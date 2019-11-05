@@ -1689,8 +1689,8 @@ msgid "Your email has been sent properly."
 msgstr "Tu email ha sido enviado con éxito."
 
 #: oc-includes/osclass/upgrade-funcs.php:516
-msgid "Osclass has been updated successfully. <a href=\"http://forums.osclass.org/\">Need more help?</a>"
-msgstr "Osclass ha sido actualizado con éxito. <a href=\"http://forums.osclass.org/\">¿Necesitas más ayuda?</a>"
+msgid "Osclass has been updated successfully. <a href=\"https://osclass.discourse.group/\">Need more help?</a>"
+msgstr "Osclass ha sido actualizado con éxito. <a href=\"https://osclass.discourse.group/\">¿Necesitas más ayuda?</a>"
 
 #: oc-admin/plugins.php:231
 msgid "The files were deleted"

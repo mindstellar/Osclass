@@ -4214,8 +4214,8 @@ msgid "Your Osclass installation at %s is up and running. You can access the adm
 msgstr "Instalasi Osclass Anda di %s hidup dan jalan. Anda dapat mengakses panel administrasi dengan rincian ini:"
 
 #: /var/www/osclass-git/oc-includes/osclass/install-location.php:102
-msgid "The <a href=\"http://osclass.org/\">Osclass</a> team"
-msgstr "Tim <a href=\"http://osclass.org/\">Osclass</a>"
+msgid "The <a href=\"https://github.com/navjottomer/osclass/\">Osclass</a> team"
+msgstr "Tim <a href=\"https://github.com/navjottomer/osclass/\">Osclass</a>"
 
 #: /var/www/osclass-git/oc-includes/osclass/install.php:86
 msgid "Looks like you've already installed Osclass. To reinstall please clear your old database tables first."
@@ -4238,8 +4238,8 @@ msgid "We've encountered some problems while updating the database structure. Th
 msgstr "Kami telah mengalami beberapa masalah saat memperbarui struktur database-nya. Query berikut gagal:"
 
 #: /var/www/osclass-git/oc-includes/osclass/upgrade-funcs.php:47
-msgid "These errors could be false-positive errors. If you're sure that is the case, you can <a href=\"%s\">continue with the upgrade</a>, or <a href=\"http://forums.osclass.org/\">ask in our forums</a>."
-msgstr "Kesalahan ini bisa kesalahan false-positive. Jika Anda yakin ini terjadi, Anda dapat <a href=\"%s\">melanjutkan upgrade</ a> nya, atau <a href=\"http://forums.osclass.org/\">bertanya di forum</a> kami."
+msgid "These errors could be false-positive errors. If you're sure that is the case, you can <a href=\"%s\">continue with the upgrade</a>, or <a href=\"https://osclass.discourse.group/\">ask in our forums</a>."
+msgstr "Kesalahan ini bisa kesalahan false-positive. Jika Anda yakin ini terjadi, Anda dapat <a href=\"%s\">melanjutkan upgrade</ a> nya, atau <a href=\"https://osclass.discourse.group/\">bertanya di forum</a> kami."
 
 #: /var/www/osclass-git/oc-includes/osclass/upgrade-funcs.php:286
 msgid "You need to calculate location stats, please go to admin panel, tools, recalculate location stats or click"
@@ -4250,8 +4250,8 @@ msgid "Osclass &raquo; Updated correctly"
 msgstr "Osclass &raquo; Sudah diperbarui dengan benar"
 
 #: /var/www/osclass-git/oc-includes/osclass/upgrade-funcs.php:392
-msgid "Osclass has been updated successfully. <a href=\"http://forums.osclass.org/\">Need more help?</a>"
-msgstr "Osclass sudah diperbarui dengan sukses. <a href=\"http://forums.osclass.org/\">Perlu bantuan lagi?</a>"
+msgid "Osclass has been updated successfully. <a href=\"https://osclass.discourse.group/\">Need more help?</a>"
+msgstr "Osclass sudah diperbarui dengan sukses. <a href=\"https://osclass.discourse.group/\">Perlu bantuan lagi?</a>"
 
 #: /var/www/osclass-git/oc-load.php:207
 msgid "The website is currently undergoing maintenance"

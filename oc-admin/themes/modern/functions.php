@@ -59,33 +59,14 @@ osc_add_hook('admin_header', 'admin_header_favicons');
 // admin footer
 function admin_footer_html() { ?>
     <div class="float-left">
-        <?php printf(__('Thank you for using <a href="%s" target="_blank">Osclass</a>'), 'http://osclass.org/'); ?> -
-        <a title="<?php _e('Documentation'); ?>" href="http://doc.osclass.org/" target="_blank"><?php _e('Documentation'); ?></a> &middot;
-        <a title="<?php _e('Forums'); ?>" href="http://forums.osclass.org/" target="_blank"><?php _e('Forums'); ?></a> &middot;
-        <a title="<?php _e('Feedback'); ?>" href="https://osclass.uservoice.com/" target="_blank"><?php _e('Feedback'); ?></a>
+        <?php printf(__('Thank you for using <a href="%s" target="_blank">Osclass</a>'), 'https://github.com/navjottomer/Osclass/'); ?> -
+        <a title="<?php _e('Forums'); ?>" href="https://osclass.discourse.group" target="_blank"><?php _e('Forums'); ?></a> &middot;
+        <a title="<?php _e('Report Issue'); ?>" href="https://github.com/navjottomer/Osclass/issues/" target="_blank"><?php _e('Report Issue'); ?></a>
     </div>
     <div class="float-right">
-        <strong>Osclass <?php echo preg_replace('|.0$|', '', OSCLASS_VERSION); ?></strong>
+        <strong>Osclass <?php echo  OSCLASS_VERSION; ?></strong>
     </div>
-    <a id="ninja" href="" class="ico ico-48 ico-dash-white"></a>
-    <div class="clear"></div>
-    <form id="donate-form" name="_xclick" action="https://www.paypal.com/in/cgi-bin/webscr" method="post" target="_blank">
-       <input type="hidden" name="cmd" value="_donations">
-       <input type="hidden" name="business" value="info@osclass.org">
-       <input type="hidden" name="item_name" value="Osclass project">
-       <input type="hidden" name="return" value="<?php echo osc_admin_base_url(); ?>">
-       <input type="hidden" name="currency_code" value="USD">
-       <input type="hidden" name="lc" value="US" />
-    </form>
-
-<script type="text/javascript">
-        var $ninja = $('#ninja');
-
-        $ninja.click(function(){
-            jQuery('#donate-form').submit();
-            return false;
-        });
-    </script><?php
+    <div class="clear"></div><?php
 }
 osc_add_hook('admin_content_footer', 'admin_footer_html');
 
