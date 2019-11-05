@@ -1,0 +1,1648 @@
+# Translation of Flash Messages in Thai
+# This file is distributed under the same license as the Flash Messages package.
+msgid ""
+msgstr ""
+"PO-Revision-Date: 2014-01-07 10:51:07+0000\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"X-Generator: GlotPress/0.1\n"
+"Project-Id-Version: Flash Messages\n"
+
+#: oc-includes/osclass/controller/item.php:446
+msgid "You need to be logged to comment"
+msgstr "คุณต้องเข้าสู่ระบบเพื่อทำการแสดงความคิดเห็น"
+
+#: oc-includes/osclass/helpers/hSecurity.php:87
+msgid "Invalid CSRF token."
+msgstr "CSRF token ไม่ถูกต้อง"
+
+#: oc-includes/osclass/helpers/hSecurity.php:81
+msgid "Probable invalid request."
+msgstr "คำขอที่ไม่ถูกต้องน่าจะเป็น"
+
+#: oc-includes/osclass/controller/item.php:449
+msgid "Sorry, comments are disabled"
+msgstr "ขออภัย, การแสดงความคิดเห็นถูกปิดการใช้งาน"
+
+#: oc-includes/osclass/controller/item.php:528
+msgid "The listing hasn't been enabled. Please enable it in order to make it public"
+msgstr "รายการยังไม่ได้เปิดใช้งาน. กรุณาเปิดใช้งานเพื่อทำการเผยแพร่"
+
+#: oc-admin/users.php:89 oc-admin/users.php:142
+#: oc-includes/osclass/controller/register.php:103
+#: oc-includes/osclass/controller/user.php:76
+msgid "The name cannot be empty"
+msgstr "ชื่อไม่สามารถเว้นว่างได้"
+
+#: oc-admin/users.php:139
+msgid "E-mail is already in used by another user"
+msgstr "อีเมลล์นี้ถูกใช้แล้ว โดยผู้ใช้คนอื่น"
+
+#: oc-admin/users.php:91
+msgid "There was some error"
+msgstr "มีบางอย่างผิดพลาด"
+
+#: oc-includes/osclass/ItemActions.php:133
+#: oc-includes/osclass/ItemActions.php:338
+msgid "Price must be positive number."
+msgstr "ราคาต้องเป็นจำนวนเต็มบวกเท่านั้น"
+
+#: oc-admin/plugins.php:93
+msgid "The plugin generated %d characters of <strong>unexpected output</strong> during the installation. Output: \"%s\""
+msgstr "ปลั๊กอินสร้าง %d  ของ <strong>unexpected output</strong> ในระหว่างการติดตั้ง. Output: \"%s\""
+
+#: oc-admin/items.php:664
+msgid "Number of expiration days has to be a numeric value"
+msgstr "จำนวนของวันหมดอายุต้องเป็นตัวเลขเท่านั้น"
+
+#: oc-admin/controller/settings/permalinks.php:548
+msgid "Friendly URLs deactivated, but .htaccess file was modified outside Osclass and was not deleted"
+msgstr "Friendly URLs ถูกยกเลิกการใช้งาน, แต่ไฟล์ .htaccess ได้ถูกแก้ไขภายนอก Osclass และยังไม่ได้ถูกลบ"
+
+#: oc-admin/controller/settings/permalinks.php:546
+msgid "Friendly URLs deactivated, but .htaccess file could not be deleted. Please, remove it manually"
+msgstr "Friendly URLs ถูกยกเลิกการใช้งาน, แต่ไฟล์ .htaccess ไม่ได้ถูกลบ, กรุณาลบไฟล์"
+
+#: oc-admin/controller/settings/permalinks.php:508
+msgid "Here's the content you have to add to the <b>.htaccess</b> file. If you can't modify the file or experience some problems with the URLs, please deactivate the <em>Friendly URLs</em> option."
+msgstr "นี่เป็นเนื้อหาที่คุณเพิ่มไปในไฟล์ <b>.htaccess</b>. ถ้าคุณไม่ได้ทำการปรับแต่งไฟล์หรือมีปัญหาเกี่ยวกับ URLs, กรุณาทำการยกเลิกการเปิดใช้งานตัวเลือก <em>Friendly URLs</em>"
+
+#: oc-admin/controller/settings/permalinks.php:506
+msgid "File <b>.htaccess</b> already exists and was not modified."
+msgstr "ไฟล์ <b>.htaccess</b> มีอยู่แล้วแต่ยังไม่ได้รับการปรับแต่ง"
+
+#: oc-admin/controller/settings/advanced.php:46
+msgid "Advanced settings have been updated"
+msgstr "การตั้งค่าขั้นสูงได้ทำการอัพเดต"
+
+#: oc-includes/osclass/controller/ajax.php:86
+msgid "The selected photo couldn't be deleted, the url doesn't exist"
+msgstr "รูปที่เลือกไม่สามารถลบได้, ลิงค์ url ไม่มีอยู่"
+
+#: oc-includes/osclass/controller/ajax.php:96
+msgid "The listing doesn't exist"
+msgstr "ลิสต์รายการไม่มีอยู่"
+
+#: oc-includes/osclass/controller/ajax.php:105
+#: oc-includes/osclass/controller/ajax.php:113
+msgid "The listing doesn't belong to you"
+msgstr "ลิสต์รายการนี้ไม่ใช่ของคุณ"
+
+#: oc-includes/osclass/controller/ajax.php:136
+#: oc-includes/osclass/controller/user.php:270
+msgid "The selected photo has been successfully deleted"
+msgstr "รูปที่เลือกถูกลบแล้ว"
+
+#: oc-includes/osclass/controller/ajax.php:139
+#: oc-includes/osclass/controller/user.php:272
+msgid "The selected photo does not belong to you"
+msgstr "รูปที่เลือกไม่ใช่ของคุณ"
+
+#: oc-includes/osclass/controller/ajax.php:143
+#: oc-includes/osclass/controller/user.php:275
+msgid "The selected photo couldn't be deleted"
+msgstr "รูปที่เลือกไม่สามารถลบได้"
+
+#: oc-includes/osclass/controller/contact.php:40
+#: oc-includes/osclass/controller/item.php:123
+#: oc-includes/osclass/controller/item.php:230
+#: oc-includes/osclass/controller/item.php:338
+#: oc-includes/osclass/controller/item.php:385
+#: oc-includes/osclass/controller/user-non-secure.php:148
+msgid "The Recaptcha code is wrong"
+msgstr "รหัสความปลอดภัยไม่ถูกต้อง"
+
+#: oc-includes/osclass/emails.php:655
+msgid "There has been some errors sending the message"
+msgstr "มีบางอย่างผิดพลาดขณะทำการส่งข้อความ"
+
+#: oc-includes/osclass/controller/item.php:52
+#: oc-includes/osclass/controller/item.php:101
+msgid "Only registered users are allowed to post listings"
+msgstr "เฉพาะสามชิกเท่านั้นที่จะสามารถโพสต์รายการได้"
+
+#: oc-includes/osclass/controller/item.php:165
+msgid "Your listing has been published"
+msgstr "รายการของคุณได้ถูกเผยแพร่"
+
+#: oc-includes/osclass/controller/item.php:239
+msgid "Great! We've just updated your listing"
+msgstr "ดีมาก! คุณเพิ่งจะทำการอัพเดตรายการของคุณ"
+
+#: oc-includes/osclass/controller/item.php:266
+msgid "The listing has been validated"
+msgstr "รายการได้ถูกตรวจสอบแล้ว"
+
+#: oc-includes/osclass/controller/item.php:268
+msgid "The listing can't be validated"
+msgstr "รายการไม่ผ่านการตรวจสอบ"
+
+#: oc-includes/osclass/controller/item.php:271
+msgid "The listing has already been validated"
+msgstr "รายการได้ถูกตรวจสอบแล้ว"
+
+#: oc-includes/osclass/controller/item.php:284
+msgid "Your listing has been deleted"
+msgstr "รายการถูกลบ"
+
+#: oc-includes/osclass/controller/item.php:286
+#: oc-includes/osclass/controller/item.php:294
+msgid "The listing you are trying to delete couldn't be deleted"
+msgstr "รายการที่คุณต้องการลบ ไม่สามารถทำการลบได้"
+
+#: oc-includes/osclass/controller/item.php:315
+msgid "Thanks! That's very helpful"
+msgstr "ขอบคุณ มีประโยชน์มาก"
+
+#: oc-includes/osclass/controller/item.php:361
+#: oc-includes/osclass/controller/item.php:468
+msgid "This listing doesn't exist"
+msgstr "รายการนี้ไม่มีอยู่"
+
+#: oc-includes/osclass/controller/item.php:367
+#: oc-includes/osclass/controller/item.php:405
+msgid "We're sorry, but the listing has expired. You can't contact the seller"
+msgstr "ขออภัย, แต่รายการนี้หมดอายุแล้ว. คุณไม่สามารถติดต่อผู้ขายได้"
+
+#: oc-includes/osclass/controller/item.php:374
+msgid "You can't contact the seller, only registered users can"
+msgstr "คุณไม่สามารถติดต่อผู้ขายได้, เฉพาะสมาชิกเท่านั้น"
+
+#: oc-includes/osclass/controller/item.php:418
+msgid "We've just sent an e-mail to the seller"
+msgstr "เราได้ทำการส่งอีเมลล์หาผู้ขาย"
+
+#: oc-includes/osclass/controller/item.php:428
+msgid "Sorry, we could not save your comment. Try again later"
+msgstr "ขออภัย, เราไม่สามารถบันทึกการแสดงความคิดเห็นของคุณได้, กรุณาลองใหม่อีกครั้ง"
+
+#: oc-includes/osclass/controller/item.php:431
+msgid "Your comment is awaiting moderation"
+msgstr "ความคิดเห็นของคุณอยู่ในระหว่างรอกการตรวจสอบ"
+
+#: oc-includes/osclass/controller/item.php:434
+msgid "Your comment has been approved"
+msgstr "ความคิดเห็นของคุณได้รับการอนุมัติแล้ว"
+
+#: oc-includes/osclass/controller/item.php:437
+msgid "Please fill the required field (email)"
+msgstr "กรุณากรอกรายละเอียดในช่องดังกล่าว (อีเมลล์)"
+
+#: oc-includes/osclass/controller/item.php:440
+msgid "Please type a comment"
+msgstr "กรุณากรอกความคิดเห็นของคุณ"
+
+#: oc-includes/osclass/controller/item.php:443
+msgid "Your comment has been marked as spam"
+msgstr "ความคิดเห็นของคุณถูกทำเครื่องหมายว่าเป็นสแปม"
+
+#: oc-includes/osclass/controller/item.php:475
+msgid "You must be logged in to delete a comment"
+msgstr "คุณต้องทำการเข้าสู่ระบบเพื่อลบการแสดงความคิดเห็น"
+
+#: oc-includes/osclass/controller/item.php:483
+msgid "The comment doesn't exist"
+msgstr "ไม่มีความคิดเห็นดังกล่าวอยู่ในระบบ"
+
+#: oc-includes/osclass/controller/item.php:488
+msgid "The comment is not active, you cannot delete it"
+msgstr "ความคิดเห็นไม่ถูกเปิดใช้งาน, คุณไม่สามารถลบได้"
+
+#: oc-includes/osclass/controller/item.php:493
+msgid "The comment was not added by you, you cannot delete it"
+msgstr "ความคิดเห็นนี้ไม่ได้ถูกเพิ่มโดยคุณ, คุณไม่สามารถลบได้"
+
+#: oc-admin/comments.php:199 oc-includes/osclass/controller/item.php:498
+msgid "The comment has been deleted"
+msgstr "ความคิดเห็นนี้ถูกลบแล้ว"
+
+#: oc-includes/osclass/controller/login.php:26
+#: oc-includes/osclass/controller/register.php:27
+#: oc-includes/osclass/controller/user-non-secure.php:26
+#: oc-includes/osclass/controller/user.php:26
+msgid "Users not enabled"
+msgstr "สมาชิกที่ไม่ได้เปิดใช้"
+
+#: oc-includes/osclass/controller/login.php:37
+#: oc-includes/osclass/controller/register.php:50
+msgid "Users are not enabled"
+msgstr "ผู้ใช้ไม่ได้เปิดใช้งาน"
+
+#: oc-includes/osclass/controller/login.php:76
+#: oc-includes/osclass/controller/login.php:98
+msgid "The user doesn't exist"
+msgstr "ผู้ใช้คนนี้ไม่มีอยู่"
+
+#: oc-includes/osclass/controller/login.php:81
+msgid "The password is incorrect"
+msgstr "รหัสผ่านไม่ถูกต้อง"
+
+#: oc-includes/osclass/controller/login.php:100
+msgid "The user has not been validated yet"
+msgstr "ผู้ใช้ยังไม่ได้รับการยืนยัน"
+
+#: oc-includes/osclass/controller/login.php:102
+msgid "The user has been suspended"
+msgstr "ผู้ใช้ถูกระงับการใช้งาน"
+
+#: oc-includes/osclass/controller/login.php:145
+msgid "Invalid email address"
+msgstr "ที่อยู่อีเมลล์ไม่ถูกต้อง"
+
+#: oc-includes/osclass/controller/login.php:154
+msgid "We have sent you an email with the instructions to reset your password"
+msgstr "เราได้ส่อีเมลล์ขั้นตอนในการรีเซตรหัสผ่านใหม่ให้คุณแล้ว"
+
+#: oc-includes/osclass/controller/login.php:158
+msgid "We were not able to identify you given the information provided"
+msgstr "เราไม่สามารถยืนยันข้อมูลที่คุณได้ให้ไว้ได้"
+
+#: oc-includes/osclass/controller/login.php:162
+msgid "The recaptcha code is wrong"
+msgstr "โค้ด recaptcha ไม่ถูกต้อง"
+
+#: oc-admin/login.php:134 oc-admin/login.php:144
+#: oc-includes/osclass/controller/login.php:172
+#: oc-includes/osclass/controller/login.php:200
+#: oc-includes/osclass/controller/user-non-secure.php:55
+#: oc-includes/osclass/controller/user-non-secure.php:59
+msgid "Sorry, the link is not valid"
+msgstr "ขออภัย ลิ้งค์ไม่ถูกต้อง"
+
+#: oc-includes/osclass/controller/login.php:179
+#: oc-includes/osclass/controller/user.php:175
+msgid "Password cannot be blank"
+msgstr "รหัสผ่านไม่สามารถเว้นว่างได้"
+
+#: oc-admin/login.php:154 oc-includes/osclass/controller/login.php:193
+msgid "The password has been changed"
+msgstr "เปลี่ยนแปลงรหัสผ่านแล้ว"
+
+#: oc-includes/osclass/controller/login.php:196
+msgid "Error, the password don't match"
+msgstr "ข้อผิดพลาด รหัสผ่านไม่ถูกต้อง"
+
+#: oc-includes/osclass/controller/register.php:32
+msgid "User registration is not enabled"
+msgstr "ระบบสมัครสมาชิกยังไม่เปิดใช้งาน"
+
+#: oc-includes/osclass/controller/register.php:70
+msgid "The user has been created. An activation email has been sent"
+msgstr "ชื่อสมาชิกของคุณถูกสร้าง การยืนยันบัญชีเพื่อเปิดการใช้งานถูกส่งไปที่อีเมลล์"
+
+#: oc-includes/osclass/controller/register.php:73
+msgid "Your account has been created successfully"
+msgstr "การสร้างบัญชีของคุณเสร็จเรียบร้อย"
+
+#: oc-includes/osclass/controller/register.php:82
+#: oc-includes/osclass/controller/user.php:135
+msgid "The specified e-mail is already in use"
+msgstr "อีเมลล์ที่ระบุได้ถูกใช้งานไปแล้ว"
+
+#: oc-includes/osclass/controller/register.php:88
+msgid "The email is not valid"
+msgstr "อีเมลไม่ถูกต้อง"
+
+#: oc-includes/osclass/controller/register.php:91
+msgid "The password cannot be empty"
+msgstr "รหัสผ่านไม่สามารถเว้นว่างได้"
+
+#: oc-admin/users.php:133 oc-includes/osclass/controller/register.php:94
+#: oc-includes/osclass/controller/user.php:190
+msgid "Passwords don't match"
+msgstr "รหัสผ่านที่ไม่ตรงกัน"
+
+#: oc-includes/osclass/controller/register.php:115
+msgid "The link is not valid anymore. Sorry for the inconvenience!"
+msgstr "การเชื่อมโยงไม่ถูกต้อง ขออภัยในความไม่สะดวก!"
+
+#: oc-includes/osclass/controller/register.php:120
+msgid "Your account has already been validated"
+msgstr "บัญชีของคุณได้รับการยืนยันการใช้งานไปแล้ว"
+
+#: oc-includes/osclass/controller/register.php:140
+msgid "Your account has been validated"
+msgstr "บัญชีของคุณได้รับการตรวจสอบ"
+
+#: oc-includes/osclass/controller/user-non-secure.php:52
+msgid "Your email has been changed successfully"
+msgstr "อีเมลล์ของคุณเปลี่ยนแปลงแล้ว"
+
+#: oc-includes/osclass/controller/user-non-secure.php:81
+#: oc-includes/osclass/controller/user.php:227
+msgid "Alert activated"
+msgstr "การแจ้งเตือนได้เปิดใช้งาน"
+
+#: oc-includes/osclass/controller/user-non-secure.php:102
+#: oc-includes/osclass/controller/user.php:248
+msgid "Unsubscribed correctly"
+msgstr "ยกเลิกการแจ้งเตือน"
+
+#: oc-includes/osclass/controller/user.php:79
+msgid "Your profile has been updated successfully"
+msgstr "โปรไฟล์ของคุณเปลี่ยนแปลงแล้ว"
+
+#: oc-admin/users.php:79 oc-includes/osclass/controller/user.php:111
+msgid "The specified e-mail is not valid"
+msgstr "อีเมลที่ระบุไม่ถูกต้อง"
+
+#: oc-includes/osclass/controller/user.php:180
+msgid "Current password doesn't match"
+msgstr "รหัสผ่านปัจจุบันไม่ถูกต้อง"
+
+#: oc-includes/osclass/controller/user.php:185
+msgid "Passwords can't be empty"
+msgstr "รหัสผ่านไม่สามารถเว้นว่าง"
+
+#: oc-includes/osclass/controller/user.php:197
+msgid "Password has been changed"
+msgstr "รหัสผ่านถูกเปลี่ยนแล้ว"
+
+#: oc-admin/admins.php:34 oc-admin/items.php:42
+#: oc-includes/osclass/core/AdminSecBaseModel.php:32
+msgid "You don't have enough permissions"
+msgstr "คุณไม่มีสิทธิในการกระทำนี้"
+
+#: oc-admin/admins.php:77 oc-admin/admins.php:177
+msgid "Email invalid"
+msgstr "อีเมลไม่ถูกต้อง"
+
+#: oc-admin/admins.php:81 oc-admin/admins.php:181
+msgid "Username invalid"
+msgstr "ชื่อผู้ใช้ไม่ถูกต้อง"
+
+#: oc-admin/admins.php:85 oc-admin/admins.php:185
+msgid "Name invalid"
+msgstr "ชื่อไม่ถูกต้อง"
+
+#: oc-admin/admins.php:89 oc-admin/admins.php:216
+msgid "Password invalid"
+msgstr "รหัสผ่านไม่ถูกต้อง"
+
+#: oc-admin/admins.php:94
+msgid "Email already in use"
+msgstr "อีเมลล์ได้ถูกใช้งานแล้ว"
+
+#: oc-admin/admins.php:99
+msgid "Username already in use"
+msgstr "ชื่อผู้ใช้นี้ได้ถกใช้งานแล้ว"
+
+#: oc-admin/admins.php:122
+msgid "The admin has been added"
+msgstr "เพิ่มผู้ดูแลแล้ว"
+
+#: oc-admin/admins.php:192
+msgid "This admin doesn't exist"
+msgstr "แอดมินนี้ไม่มีอยู่"
+
+#: oc-admin/admins.php:198
+msgid "Existing email"
+msgstr "อีเมลล์นี้มีอยู่แล้ว"
+
+#: oc-admin/admins.php:205
+msgid "Existing username"
+msgstr "ชื่อผู้ใช้นี้มีในระบบแล้ว"
+
+#: oc-admin/admins.php:224 oc-admin/admins.php:234
+msgid "The password couldn't be updated. Passwords don't match"
+msgstr "รหัสผ่านไม่สามารถเปลี่ยนแปลง รหัสผ่านไม่ตรงกัน"
+
+#: oc-admin/admins.php:251
+msgid "The admin has been updated"
+msgstr "ผู้ดูแลอัพเดทแล้ว"
+
+#: oc-admin/admins.php:270
+msgid "The admin id isn't in the correct format"
+msgstr "จากผู้ดูแลระบบไม่ใช่รหัสในรูปแบบที่ถูกต้อง"
+
+#: oc-admin/admins.php:276
+msgid "The operation hasn't been completed. You're trying to remove yourself!"
+msgstr "การกระทำนี้ไม่สามารถทำให้เสร็จสิ้นได้. คุณกำลังพยายามที่จะลบบัญชีของคุณเอง"
+
+#: oc-admin/admins.php:283
+msgid "The admin has been deleted correctly"
+msgstr "ผู้ดูแลระบบได้ถูกลบออกอย่างถูกต้อง"
+
+#: oc-admin/admins.php:285
+msgid "The admin couldn't be deleted"
+msgstr "ผู้ดูแลไม่สามารถลบได้"
+
+#: oc-admin/tools.php:40 oc-admin/tools.php:66 oc-admin/tools.php:157
+#: oc-admin/tools.php:167 oc-admin/tools.php:182 oc-admin/tools.php:218
+#: oc-admin/tools.php:261 oc-admin/tools.php:288 oc-admin/tools.php:317
+msgid "This action cannot be done because it is a demo site"
+msgstr "การกระทำนี้ไม่สามารถทำได้ เพราะนี่เป็นเว็บตัวอย่าง"
+
+#: oc-admin/appearance.php:51
+msgid "The theme folder is not writable"
+msgstr "โฟลเดอร์ไม่สามารถเขียนทับได้"
+
+#: oc-admin/appearance.php:54
+msgid "The theme has been installed correctly"
+msgstr "ธีมได้ทำการติดตั้งเรียบร้อยแล้ว"
+
+#: oc-admin/appearance.php:57 oc-admin/languages.php:70 oc-admin/plugins.php:63
+msgid "The zip file is not valid"
+msgstr "ไฟล์ซิบไม่ถูกต้อง"
+
+#: oc-admin/appearance.php:60 oc-admin/languages.php:73 oc-admin/plugins.php:66
+#: oc-admin/tools.php:58
+msgid "No file was uploaded"
+msgstr "ไม่มีไฟล์อัพโหลด"
+
+#: oc-admin/appearance.php:65
+msgid "There was a problem adding the theme"
+msgstr "มีปัญหาในการเพิ่มธีม"
+
+#: oc-admin/appearance.php:82
+msgid "Theme removed successfully"
+msgstr "ธีมถูกลบแล้ว"
+
+#: oc-admin/appearance.php:84
+msgid "There was a problem removing the theme"
+msgstr "มีปัญหาในการลบธีมนี้"
+
+#: oc-admin/appearance.php:87
+msgid "Current theme can not be deleted"
+msgstr "ธีมปัจจุบันไม่สามารถลบได้"
+
+#: oc-admin/appearance.php:90
+msgid "No theme selected"
+msgstr "ไม่มีการเลือกธีม"
+
+#: oc-admin/appearance.php:119
+msgid "Widget removed correctly"
+msgstr "วิดเจ็ตถูกลบแล้ว"
+
+#: oc-admin/appearance.php:125 oc-admin/appearance.php:147
+msgid "Description field is required"
+msgstr "ฟิลล์คำอธิบายจำเป็น"
+
+#: oc-admin/appearance.php:138
+msgid "Widget updated correctly"
+msgstr "อัพเดตวิดเจ็ตแล้ว"
+
+#: oc-admin/appearance.php:140
+msgid "Widget cannot be updated correctly"
+msgstr "วิดเจ็ตไม่สามารถอัพเดตได้อย่างถูกต้อง"
+
+#: oc-admin/appearance.php:159
+msgid "Widget added correctly"
+msgstr "วิดเจ็ตเพิ่มอย่างถูกต้อง"
+
+#: oc-admin/appearance.php:169
+msgid "Theme activated correctly"
+msgstr "ใช้งานธีมอย่างถูกต้อง"
+
+#: oc-admin/comments.php:56
+msgid "The comments have been deleted"
+msgstr "ความคิดเห็นถูกลบแล้ว"
+
+#: oc-admin/comments.php:69
+msgid "The comments have been approved"
+msgstr "ความคิดเห็นได้รับการอนุมัติ"
+
+#: oc-admin/comments.php:79
+msgid "The comments have been disapproved"
+msgstr "ความคิดเห็นดังกล่าวไม่ได้รับการอนุมัติ"
+
+#: oc-admin/comments.php:132
+msgid "The comment has been approved"
+msgstr "ความคิดเห็นได้รับการอนุมัติ"
+
+#: oc-admin/comments.php:139
+msgid "The comment has been disapproved"
+msgstr "ความคิดเห็นดังกล่าวไม่ได้รับการอนุมัติ"
+
+#: oc-admin/comments.php:146
+msgid "The comment has been enabled"
+msgstr "การแสดงความคิดเห็นได้เปิดใช้งาน"
+
+#: oc-admin/comments.php:153
+msgid "The comment has been disabled"
+msgstr "การแสดงความคิดเห็นได้ปิดใช้งาน"
+
+#: oc-admin/comments.php:168
+msgid "Email is not correct"
+msgstr "อีเมลล์ไม่ถูกต้อง"
+
+#: oc-admin/comments.php:171
+msgid "Comment is required"
+msgstr "การแสดงความคิดเห็นจำเป็น"
+
+#: oc-admin/comments.php:193
+msgid "Great! We just updated your comment"
+msgstr "เยี่ยม! เราเพียงอัพเดทความคิดเห็นของคุณ"
+
+#: oc-admin/emails.php:86
+msgid "The email/alert has been updated"
+msgstr "อีเมลล์/การแจ้งเตือนได้รับการอัพเดท"
+
+#: oc-admin/emails.php:89 oc-admin/pages.php:106
+msgid "You can't repeat internal name"
+msgstr "คุณไม่สามารถทำซ้ำชื่อภายใน"
+
+#: oc-admin/emails.php:91
+msgid "The email couldn't be updated, at least one title should not be empty"
+msgstr "ไม่สามารถอัพเดตอีเมลล์ได้, มีช่องอย่างน้อยหนึ่งช่องที่ไม่สามารถเว้นว่างได้"
+
+#: oc-admin/items.php:63
+msgid "%d listing has been enabled"
+msgstr "%d รายการได้เปิดใช้งาน"
+
+#: oc-admin/items.php:75
+msgid "%d listing has been disabled"
+msgstr "%d รายการได้ปิดใช้งาน"
+
+#: oc-admin/items.php:87
+msgid "%d listing has been activated"
+msgstr "%d รายการได้เปิดใช้งาน"
+
+#: oc-admin/items.php:99
+msgid "%d listing has been deactivated"
+msgstr "%d รายการได้ปิดใช้งาน"
+
+#: oc-admin/items.php:111
+msgid "%d listing has been marked as premium"
+msgstr "%d รายการถูกทำเครื่องหมายเป็นพรีเมี่ยม"
+
+#: oc-admin/items.php:123 oc-admin/items.php:148
+msgid "%d change has been made"
+msgstr "%d ได้ทำการเปลี่ยนแปลง"
+
+#: oc-admin/items.php:135
+msgid "%d listing has been marked as spam"
+msgstr "%d รายการถูกทำเครื่องหมายเป็นสแปม"
+
+#: oc-admin/items.php:166
+msgid "%d listing has been deleted"
+msgstr "%d รายการได้ถูกลบ"
+
+#: oc-admin/items.php:183
+msgid "%d listing has been unmarked as spam"
+msgstr "%dรายการถูกยกเลิกการทำเครื่องหมายว่าเป็นสแปม"
+
+#: oc-admin/items.php:200
+msgid "%d listing has been unmarked as missclassified"
+msgstr "%dรายการถูกยกเลิกการทำเครื่องหมายว่าผิดหมวดหมู่"
+
+#: oc-admin/items.php:217
+msgid "%d listing has been unmarked as duplicated"
+msgstr "%dรายการถูกยกเลิกการทำเครื่องหมายว่าซ้ำ"
+
+#: oc-admin/items.php:234
+msgid "%d listing has been unmarked as expired"
+msgstr "%dรายการถูกยกเลิกการทำเครื่องหมายว่าหมดอายุ"
+
+#: oc-admin/items.php:251
+msgid "%d listing has been unmarked as offensive"
+msgstr "%dรายการถูกยกเลิกการทำเครื่องหมายว่ามีการละเมิด"
+
+#: oc-admin/items.php:293
+msgid "The listing has been deleted"
+msgstr "รายการถูกลบ"
+
+#: oc-admin/items.php:295
+msgid "The listing couldn't be deleted"
+msgstr "รายการไม่สามารถลบได้"
+
+#: oc-admin/items.php:324
+msgid "The listing has been activated"
+msgstr "รายการได้เปิดใช้งาน"
+
+#: oc-admin/items.php:336
+msgid "The listing has been deactivated"
+msgstr "รายการได้ปิดใช้งาน"
+
+#: oc-admin/items.php:346
+msgid "The listing has been enabled"
+msgstr "รายการได้เปิดใช้งาน"
+
+#: oc-admin/items.php:356
+msgid "The listing has been disabled"
+msgstr "รายการได้ปิดใช้งาน"
+
+#: oc-admin/items.php:385 oc-admin/items.php:411
+msgid "Changes have been applied"
+msgstr "บันทึกการเปลี่ยนแปลงแล้ว"
+
+#: oc-admin/items.php:437
+msgid "The listing has been unmarked as"
+msgstr "รายการได้ถูกยกเลิกการทำเครื่องหมายเป็น"
+
+#: oc-admin/items.php:439
+msgid "The listing hasn't been unmarked as"
+msgstr "รายการไม่ได้ถูกยกเลิกการทำเครื่องหมายเป็น"
+
+#: oc-admin/items.php:526
+msgid "Changes saved correctly"
+msgstr "บันทึกการเปลี่ยนแปลงอย่างถูกต้องแล้ว"
+
+#: oc-admin/items.php:559 oc-admin/media.php:55 oc-admin/media.php:78
+msgid "Resource deleted"
+msgstr "ทรัพยากรที่ถูกลบ"
+
+#: oc-admin/items.php:608
+msgid "A new listing has been added"
+msgstr "รายการใหม่ได้ถูกเพิ่ม"
+
+#: oc-admin/items.php:708
+msgid "Listings' settings have been updated"
+msgstr "การตั้งค่ารายการได้ทำการอัพเดต"
+
+#: oc-admin/languages.php:59
+msgid "The translation folder is not writable"
+msgstr "โฟลเดอร์สำหรับไฟล์แปลภาษาไม่สามารถเขีียนทับได้"
+
+#: oc-admin/languages.php:63
+msgid "The language has been installed correctly"
+msgstr "การติดตั้งภาษาถูกต้อง"
+
+#: oc-admin/languages.php:66 oc-admin/languages.php:78
+msgid "There was a problem adding the language"
+msgstr "เกิดข้อผิดพลาดบางประการในการเพิ่มภาษา"
+
+#: oc-admin/languages.php:88 oc-admin/languages.php:121
+msgid "Language id isn't in the correct format"
+msgstr "รูปแบบของภาษา ID ไม่ถูกต้อง"
+
+#: oc-admin/languages.php:95
+msgid "Language id doesn't exist"
+msgstr "รหัสภาษาไม่มีอยู่"
+
+#: oc-admin/languages.php:144
+msgid "Language name field is required"
+msgstr "ช่องภาษาจำเป็นต้องใส่"
+
+#: oc-admin/languages.php:147
+msgid "Language short name field is required"
+msgstr "ช่องชื่อย่อภาษาจำเป็นต้องใส่"
+
+#: oc-admin/languages.php:150
+msgid "Language description field is required"
+msgstr "คำอธิบายภาษาจำเป็นต้องใส่"
+
+#: oc-admin/languages.php:153
+msgid "Currency format field is required"
+msgstr "รูปแบบสกุลเงินจำเป็นต้องใส่"
+
+#: oc-admin/languages.php:177
+msgid "%s has been updated"
+msgstr "%s อัพเดทแล้ว"
+
+#: oc-admin/languages.php:183
+msgid "Selected languages have been enabled for the website"
+msgstr "เลือกภาษาที่ต้องการเปิดใช้งานสำหรับเว็บไซต์ส่วนหน้า"
+
+#: oc-admin/languages.php:190 oc-admin/languages.php:214
+#: oc-admin/languages.php:247 oc-admin/languages.php:271
+msgid "The language ids aren't in the correct format"
+msgstr "ไอดีภาษาไม่ถูกต้องตามรูปแบบ"
+
+#: oc-admin/languages.php:206
+msgid "Selected languages have been disabled for the website"
+msgstr "เลือกภาษาที่ต้องการปิดการใช้งานสำหรับเว็บไซต์ส่วนหน้า"
+
+#: oc-admin/languages.php:240
+msgid "Selected languages have been enabled for the backoffice (oc-admin)"
+msgstr "เลือกภาษาที่ต้องการเปิดใช้งานสำหรับระบบจัดการส่วนหลัง"
+
+#: oc-admin/languages.php:263
+msgid "Selected languages have been disabled for the backoffice (oc-admin)"
+msgstr "เลือกภาษาที่ต้องการปิดการใช้งานสำหรับระบบจัดการส่วนหลัง"
+
+#: oc-admin/languages.php:220 oc-admin/languages.php:277
+msgid "%s can't be disabled because it's the default language"
+msgstr "%s ไม่สามารถยกเลิกการใช้งานได้เนื่องจากเป็นค่าเริ่มต้น"
+
+#: oc-admin/languages.php:303
+msgid "Directory '%s' couldn't be removed"
+msgstr "ไดเรกทอรี่ '%s' ไม่สามารถลบได้"
+
+#: oc-admin/languages.php:305
+msgid "Directory \"%s\" has been successfully removed"
+msgstr "ไดเรกทอรี่ \"%s\" ได้ทำการลบเรียบร้อยแล้ว"
+
+#: oc-admin/languages.php:311
+msgid "Directory '%s' couldn't be removed because it's the default language. Set another language as default first and try again"
+msgstr "ไดเรกทอรี่ '%s' ไม่สามารถลบได้เพราะเป็นค่าเริ่มต้นของภาษา. ตั้งค่าภาษาอื่นเป็นค่าเริ่มต้นแล้วลองใหม่"
+
+#: oc-admin/login.php:46
+msgid "The username field is empty"
+msgstr "ฟิลล์ชื่อผู้ใช้งานว่าง"
+
+#: oc-admin/login.php:51
+msgid "The password field is empty"
+msgstr "ฟิลล์รหัสผ่านว่าง"
+
+#: oc-admin/login.php:59
+msgid "Sorry, incorrect username. <a href=\"%s\">Have you lost your password?</a>"
+msgstr "ขออภัย, ชื่อผู้ใช้งานไม่ถูกต้อง <a href=\"%s\"> คุณลืมรหัสผ่าน ? </a>"
+
+#: oc-admin/login.php:64
+msgid "Sorry, incorrect password. <a href=\"%s\">Have you lost your password?</a>"
+msgstr "ขออภัย, รหัสผ่านไม่ถูกต้อง <a href=\"%s\"> คุณลืมรหัสผ่าน ? </a>"
+
+#: oc-admin/login.php:110
+msgid "The reCAPTCHA code is wrong"
+msgstr "โค้ด reCAPTCHA ไม่ถูกต้อง"
+
+#: oc-admin/login.php:128
+msgid "A new password has been sent to your e-mail"
+msgstr "รหัสผ่านใหม่ถูกส่งไปยังอีเมล์ของคุณเรียบร้อยแล้ว"
+
+#: oc-admin/login.php:157
+msgid "Error, the passwords don't match"
+msgstr "ผิดพลาด, รหัสผ่านไม่ตรงกัน"
+
+#: oc-admin/pages.php:86 oc-admin/pages.php:151
+msgid "You have to set a different internal name"
+msgstr "คุณได้ทำการตั้งชื่อภายในที่แตกต่าง"
+
+#: oc-admin/pages.php:103
+msgid "The page has been updated"
+msgstr "หน้าเพจได้รับการอัพเดท"
+
+#: oc-admin/pages.php:108
+msgid "The page couldn't be updated, at least one title should not be empty"
+msgstr "หน้านี้ไม่สามารถอัพเดตได้, หัวข้อไม่สามารถเว้นว่างไว้ได้"
+
+#: oc-admin/pages.php:81 oc-admin/pages.php:146
+msgid "You have to set an internal name"
+msgstr "คุณต้องกำหนดชื่อที่ใช้ภายใน"
+
+#: oc-admin/pages.php:162
+msgid "The page has been added"
+msgstr "หน้าเพจได้รับการเพิ่ม"
+
+#: oc-admin/pages.php:165
+msgid "The page couldn't be added, at least one title should not be empty"
+msgstr "หน้านี้ไม่สามารถเพิ่มได้, หัวข้อไม่สามารถเว้นว่างไว้ได้"
+
+#: oc-admin/pages.php:168
+msgid "Oops! That internal name is already in use. We can't make the changes"
+msgstr "อุ๊บบ! ชื่อภายในนี้ได้ถูกใช้งานแล้ว. เราไม่สามารถทำการเปลี่ยนแปลงได้"
+
+#: oc-admin/pages.php:199
+msgid "One page can't be deleted because it is indelible"
+msgstr "หนึ่งหน้าไม่สามารถลบได้เพราะลบไม่ออก"
+
+#: oc-admin/pages.php:201
+msgid "%s pages couldn't be deleted because they are indelible"
+msgstr "%s หน้าไม่สามารถลบได้เพราะลบไม่ออก"
+
+#: oc-admin/pages.php:206
+msgid "One page couldn't be deleted"
+msgstr "หนึ่งหน้าไม่สามารถลบได้"
+
+#: oc-admin/pages.php:208
+msgid "%s pages couldn't be deleted"
+msgstr "%s หน้าไม่สามารถลบได้"
+
+#: oc-admin/pages.php:213
+msgid "One page has been deleted correctly"
+msgstr "หนึ่งหน้าเพจถูกแล้ว"
+
+#: oc-admin/pages.php:215
+msgid "%s pages have been deleted correctly"
+msgstr "%s หน้าไม่สามารถลบได้อย่างถูกต้อง"
+
+#: oc-admin/plugins.php:57
+msgid "The plugin folder is not writable"
+msgstr "โฟลเดอร์สำหรับปลั๊กอินไม่สามารถเขียนทับได้"
+
+#: oc-admin/plugins.php:60
+msgid "The plugin has been uploaded correctly"
+msgstr "ปลั๊กอินอัพเดตอย่างถูกต้อง"
+
+#: oc-admin/plugins.php:71
+msgid "There was a problem adding the plugin"
+msgstr "มันปัญหาเกิดขึ้นขณะทำการเพิ่มปลั๊กอิน"
+
+#: oc-admin/plugins.php:96
+msgid "Plugin is already installed"
+msgstr "ปลั๊กอินติดตั้งแล้ว"
+
+#: oc-admin/plugins.php:99
+msgid "Plugin couldn't be installed because their files are missing"
+msgstr "ไม่สามารถติดตั้งปลั๊กอินได้ เนื่องจากไฟล์หายไป"
+
+#: oc-admin/plugins.php:102
+msgid "Plugin couldn't be installed because of: %s"
+msgstr "ไม่สามารถติดตั้งปลั๊กอินได้ เนื่องจาก : %s"
+
+#: oc-admin/plugins.php:105
+msgid "Plugin couldn't be installed"
+msgstr "ไม่สามารถติดตั้งปลั๊กอินได้"
+
+#: oc-admin/plugins.php:109
+msgid "Plugin installed"
+msgstr "ติดตั้งปลั๊กอิน"
+
+#: oc-admin/plugins.php:122
+msgid "Plugin uninstalled"
+msgstr "ถอนการติดตั้งปลั๊กอิน"
+
+#: oc-admin/plugins.php:124
+msgid "Plugin couldn't be uninstalled"
+msgstr "ไม่สามารถลบการติดตั้งปลั๊กอินได้"
+
+#: oc-admin/plugins.php:137
+msgid "Plugin enabled"
+msgstr "เปิดการใช้งานปลั๊กอิน"
+
+#: oc-admin/plugins.php:139
+msgid "Plugin is already enabled"
+msgstr "เปิดการใช้งานปลั๊กอินแล้ว"
+
+#: oc-admin/plugins.php:152
+msgid "Plugin disabled"
+msgstr "ปิดการใช้งานปลั๊กอิน"
+
+#: oc-admin/plugins.php:154
+msgid "Plugin is already disabled"
+msgstr "ปิดการใช้งานปลั๊กอินแล้ว"
+
+#: oc-admin/plugins.php:224
+msgid "No plugin selected"
+msgstr "ไม่มีปลั๊กอินถูกเลือก"
+
+#: oc-admin/plugins.php:220
+msgid "Configuration was saved"
+msgstr "บันทึกการตั้งค่าแล้ว"
+
+#: oc-admin/controller/settings/locations.php:39
+#: oc-admin/controller/settings/locations.php:146
+#: oc-admin/controller/settings/locations.php:175
+#: oc-admin/controller/settings/locations.php:253
+#: oc-admin/controller/settings/locations.php:282
+msgid "%s already was in the database"
+msgstr "%s มีอยู่แล้วในฐานข้อมูล"
+
+#: oc-admin/controller/settings/locations.php:44
+#: oc-admin/controller/settings/locations.php:62
+msgid "%s has been added as a new country"
+msgstr "%s เพิ่มประเทศใหม่แล้ว"
+
+#: oc-admin/controller/settings/locations.php:76
+msgid "Country has been edited"
+msgstr "ประเทศได้ทำการแก้ไขแล้ว"
+
+#: oc-admin/controller/settings/locations.php:78
+msgid "There were some problems editing the country"
+msgstr "มีปัญหาเกิดขึ้น ขณะทำการแก้ไขประเทศ"
+
+#: oc-admin/controller/settings/locations.php:122
+#: oc-admin/controller/settings/locations.php:144
+msgid "%s has been added as a new region"
+msgstr "%s เพิ่มภูมิภาคใหม่แล้ว"
+
+#: oc-admin/controller/settings/locations.php:172
+#: oc-admin/controller/settings/locations.php:280
+msgid "%s has been edited"
+msgstr "%s ได้รับการแก้ไข"
+
+#: oc-admin/controller/settings/locations.php:226
+#: oc-admin/controller/settings/locations.php:251
+msgid "%s has been added as a new city"
+msgstr "%s เพิ่มจังหวัดใหม่แล้ว"
+
+#: oc-admin/controller/settings/permalinks.php:461
+msgid "One field was not updated"
+msgstr "ฟิลล์หนึ่งไม่สามารถอัพเดตได้"
+
+#: oc-admin/controller/settings/permalinks.php:464
+#: oc-admin/controller/settings/permalinks.php:512
+msgid "Permalinks structure updated"
+msgstr "โครงสร้างถาวรได้ทำการอัพเดต"
+
+#: oc-admin/controller/settings/permalinks.php:473
+msgid "Permalinks structure updated."
+msgstr "โครงสร้างถาวรได้ทำการอัพเดต"
+
+#: oc-admin/controller/settings/permalinks.php:475
+msgid "However, we can't check if Apache module <b>mod_rewrite</b> is loaded. If you experience some problems with the URLs, you should deactivate <em>Friendly URLs</em>"
+msgstr "อย่างไรก็ตา คุณไม่สามารถเช็ค Apache module <b>mod_rewrite</b> ว่าได้โหลดแล้ว. ถ้าคุณไม่มีประสบการณ์เกี่ยวกับ URLs, คุณควรทำการเลิกใช้งาน <em>Friendly URLs</em>"
+
+#: oc-admin/controller/settings/permalinks.php:543
+msgid "Friendly URLs successfully deactivated"
+msgstr "Friendly URLs ได้ถูกเลิกใช้งานแล้ว"
+
+#: oc-admin/controller/settings/spamnbots.php:61
+msgid "Your Akismet key has been cleared"
+msgstr "Akismet key ของคุณได้ถูกล้างแล้ว"
+
+#: oc-admin/controller/settings/spamnbots.php:63
+msgid "Your Akismet key has been updated"
+msgstr "Akismet key ของคุณได้ทำการอัพเดตแล้ว"
+
+#: oc-admin/controller/settings/spamnbots.php:81
+msgid "Your reCAPTCHA key has been cleared"
+msgstr "reCAPTCHA key ของคุณได้ถูกล้างแล้ว"
+
+#: oc-admin/controller/settings/spamnbots.php:83
+msgid "Your reCAPTCHA key has been updated"
+msgstr "reCAPTCHA key ของคุณได้ทำการอัพเดตแล้ว"
+
+#: oc-admin/controller/settings/currencies.php:55
+msgid "The currency code is not in the correct format"
+msgstr "รหัสสกุลเงินไม่ถูกต้องตารมรูปแบบ"
+
+#: oc-admin/controller/settings/currencies.php:68
+msgid "Currency added"
+msgstr "เพิ่มสกุลเงิน"
+
+#: oc-admin/controller/settings/currencies.php:70
+msgid "Currency couldn't be added"
+msgstr "สกุลเงินไม่สามารถเพิ่มได้"
+
+#: oc-admin/controller/settings/currencies.php:81
+#: oc-admin/controller/settings/currencies.php:88
+msgid "The currency code '%s' doesn't exist"
+msgstr "รหัสสกุลเงิน '%s'  ไม่มีอยู่"
+
+#: oc-admin/controller/settings/currencies.php:111
+msgid "Error: the currency code is not in the correct format"
+msgstr "ข้อผิดพลาด: รหัสสกุลเงินไม่ถูกต้อง"
+
+#: oc-admin/controller/settings/currencies.php:124
+msgid "Currency updated"
+msgstr "สกุลเงินอัพเดต"
+
+#: oc-admin/controller/settings/currencies.php:126
+msgid "No changes were made"
+msgstr "ไม่มีการเปลี่ยนแปลงเกิดขึ้น"
+
+#: oc-admin/controller/settings/currencies.php:158
+msgid "No currencies have been deleted"
+msgstr "ไม่มีสกุลเงินที่ถูกลบ"
+
+#: oc-admin/controller/settings/currencies.php:162
+msgid "One currency has been deleted"
+msgstr "หนึ่งสกุลเงินถูกลบแล้ว"
+
+#: oc-admin/controller/settings/currencies.php:166
+msgid "%s currencies have been deleted"
+msgstr "%s สกุลเงินถูกลบแล้ว"
+
+#: oc-admin/controller/settings/mailserver.php:56
+msgid "Mail server type is incorrect"
+msgstr "ชนิดของเมลล์เซิร์ฟเวอร์ไม่ถูกต้อง"
+
+#: oc-admin/controller/settings/mailserver.php:82
+msgid "Mail server configuration has changed"
+msgstr "การตั้งค่าเมลล์เซฟเวอร์ได้รับการเปลี่ยนแปลง"
+
+#: oc-admin/controller/settings/media.php:108
+#: oc-admin/controller/settings/media.php:116
+msgid "There was a problem uploading the watermark image"
+msgstr "มีปัญหาเกิดขึ้นขณะทำการอัพโหลดลายน้ำ"
+
+#: oc-admin/controller/settings/media.php:112
+msgid "The watermark image has to be a .PNG file"
+msgstr "ลายน้ำควรเป็นรูปไฟล์ .PNG"
+
+#: oc-admin/controller/settings/media.php:160
+msgid "You cannot set a maximum file size higher than the one allowed in the PHP configuration: <b>%d KB</b>"
+msgstr "คุณไม่สามารถตั้งค่าขนาดไฟล์สูงสุดได้มากกว่าที่อนุญาติไว้ใน การตั้งค่า PHP : <b>%d KB</b>"
+
+#: oc-admin/controller/settings/media.php:205
+msgid "Media config has been updated"
+msgstr "การตั้งค่ามีเดียส์ได้รับการอัพเดท"
+
+#: oc-admin/controller/settings/media.php:294 oc-admin/tools.php:151
+msgid "Re-generation complete"
+msgstr "การเรียกขั้นตอนสร้างใหมม่เสร็จสมบูรณ์"
+
+#: oc-admin/controller/settings/main.php:76
+msgid "Page title field is required"
+msgstr "ฟิลล์หัวข้อหน้าจำเป็น"
+
+#: oc-admin/controller/settings/main.php:79
+msgid "Contact email field is required"
+msgstr "ฟิลล์อีเมลล์ที่ถูกต้องจำเป็น"
+
+#: oc-admin/controller/settings/main.php:178
+#: oc-admin/controller/settings/main.php:180
+msgid "General settings have been updated"
+msgstr "การตั้งค่าทั่วไปได้รับการอัพเดท"
+
+#: oc-admin/controller/settings/latestsearches.php:49
+msgid "Custom number could not be left empty"
+msgstr "จำนวนปรับแต่งไม่สามารถเว้นว่างได้"
+
+#: oc-admin/controller/settings/latestsearches.php:58
+msgid "Last search settings have been updated"
+msgstr "การตั้งค่าการค้นกาล่าสุดได้ทำการอัพเดต"
+
+#: oc-admin/tools.php:53
+msgid "Import complete"
+msgstr "นำข้อมูลเข้าเรียบร้อยแล้ว"
+
+#: oc-admin/tools.php:55
+msgid "There was a problem importing data to the database"
+msgstr "มีปัญหาในการนำเข้าข้อมูลไปยังฐานข้อมูล"
+
+#: oc-admin/tools.php:161
+msgid "Recount category stats has been successful"
+msgstr "การนับสถิติหมวดหมู่ใหม่ สำเร็จ"
+
+#: oc-admin/tools.php:198 oc-admin/tools.php:227
+msgid "Path is empty"
+msgstr "พาธว่าง"
+
+#: oc-admin/tools.php:201 oc-admin/tools.php:230
+msgid "Could not connect with the database. Error: %s"
+msgstr "ไม่สามารถเชื่อมต่อฐานข้อมูลได้ . Error: %s"
+
+#: oc-admin/tools.php:204 oc-admin/tools.php:236
+msgid "There are no tables to back up"
+msgstr "ไม่มีตารางที่ทำการสำร้องข้อมูล"
+
+#: oc-admin/tools.php:207 oc-admin/tools.php:239
+msgid "The folder is not writable"
+msgstr "โฟลเดอร์ไม่สามารถเขียนทับได้"
+
+#: oc-admin/tools.php:233
+msgid "Could not select the database. Error: %s"
+msgstr "ไม่สามารถเลือกฐานข้อมูลได้  . Error: %s"
+
+#: oc-admin/tools.php:327
+msgid "Maintenance mode is ON"
+msgstr "เปิดการใช้งานโหมดการปรับปรุงเว็บไซต์"
+
+#: oc-admin/tools.php:337
+msgid "Maintenance mode is OFF"
+msgstr "ปิดการใช้งานโหมดการปรับปรุงเว็บไซต์"
+
+#: oc-admin/users.php:73
+msgid "The user has been created. We've sent an activation e-mail"
+msgstr "สร้างบัญชีสมาชิกแล้ว การยืนยันบัญชีสมาชิกถูกส่งไปที่อีเมลล์"
+
+#: oc-admin/users.php:75
+msgid "The user has been created successfully"
+msgstr "สร้างผู้ใช้งานใหม่สำเร็จแล้ว"
+
+#: oc-admin/users.php:77
+msgid "Sorry, but that e-mail is already in use"
+msgstr "ขออภัย! อีเมลล์นี้มีในระบบแล้ว"
+
+#: oc-admin/users.php:81
+msgid "Sorry, the password cannot be empty"
+msgstr "ขออภัย, รหัสผ่านไม่สามารถเว้นว่างได้"
+
+#: oc-admin/users.php:83
+msgid "Sorry, passwords don't match"
+msgstr "ขออภัย, รหัสผ่านไม่ตรงกัน"
+
+#: oc-admin/users.php:136
+msgid "The user has been updated and activated"
+msgstr "สมาชิกได้รับการอัพเดทและเปิดใช้งาน"
+
+#: oc-admin/users.php:145
+msgid "The user has been updated"
+msgstr "สมาชิกได้รับการอัพเดท"
+
+#: oc-admin/users.php:158 oc-admin/users.php:181 oc-admin/users.php:206
+#: oc-admin/users.php:230 oc-admin/users.php:254 oc-admin/users.php:278
+#: oc-admin/users.php:591
+msgid "User id isn't in the correct format"
+msgstr "สมาชิก ID อยู่ในรูปแบบที่ไม่ถูกต้อง"
+
+#: oc-admin/users.php:170
+msgid "Activation email sent to one user"
+msgstr "อีเมลล์ยืนยันได้ส่งไปยังผู้ใช้งาน"
+
+#: oc-admin/users.php:193
+msgid "One user has been activated"
+msgstr "ผู้ใช้ได้ทำการเปิดใช้งาน"
+
+#: oc-admin/users.php:218
+msgid "One user has been deactivated"
+msgstr "ผู้ใช้ได้ทำการปิดใช้งาน"
+
+#: oc-admin/users.php:242
+msgid "One user has been unblocked"
+msgstr "ผู้ใช้ได้ทำการยกเลิกการบล็อค"
+
+#: oc-admin/users.php:266
+msgid "One user has been blocked"
+msgstr "ผู้ใช้ได้ทำการบล็อค"
+
+#: oc-admin/users.php:293
+msgid "One user has been deleted"
+msgstr "ผู้ใช้ได้ทำการลบ"
+
+#: oc-includes/osclass/ItemActions.php:106
+#: oc-includes/osclass/ItemActions.php:316
+msgid "Title too short."
+msgstr "หัวข้อสั้นไป"
+
+#: oc-includes/osclass/ItemActions.php:107
+#: oc-includes/osclass/ItemActions.php:317
+msgid "Title too long."
+msgstr "หัวข้อยาวไป"
+
+#: oc-includes/osclass/ItemActions.php:119
+#: oc-includes/osclass/ItemActions.php:329
+msgid "Description too short."
+msgstr "คำอธิบายสั้นเกินไป"
+
+#: oc-includes/osclass/ItemActions.php:120
+#: oc-includes/osclass/ItemActions.php:330
+msgid "Description too long."
+msgstr "คำอธิบายยาวเกินไป"
+
+#: oc-includes/osclass/ItemActions.php:130
+#: oc-includes/osclass/ItemActions.php:335
+msgid "Category invalid."
+msgstr "หมวดหมู่ไม่ถูกต้อง"
+
+#: oc-includes/osclass/ItemActions.php:132
+#: oc-includes/osclass/ItemActions.php:337
+msgid "Price too long."
+msgstr "ราคายาวเกินไป"
+
+#: oc-includes/osclass/ItemActions.php:134
+msgid "Name too long."
+msgstr "ชื่อยาวเกินไป"
+
+#: oc-includes/osclass/ItemActions.php:135
+msgid "Email invalid."
+msgstr "อีเมลไม่ถูกต้อง"
+
+#: oc-includes/osclass/ItemActions.php:136
+#: oc-includes/osclass/ItemActions.php:339
+msgid "Country too short."
+msgstr "ประเทศสั้นไป"
+
+#: oc-includes/osclass/ItemActions.php:137
+#: oc-includes/osclass/ItemActions.php:340
+msgid "Country too long."
+msgstr "ประเทศยาวไป"
+
+#: oc-includes/osclass/ItemActions.php:138
+#: oc-includes/osclass/ItemActions.php:341
+msgid "Region too short."
+msgstr "ภูมิภาคสั้นเกินไป"
+
+#: oc-includes/osclass/ItemActions.php:139
+#: oc-includes/osclass/ItemActions.php:342
+msgid "Region too long."
+msgstr "ภูมิภาคยาวเกินไป"
+
+#: oc-includes/osclass/ItemActions.php:140
+#: oc-includes/osclass/ItemActions.php:343
+msgid "City too short."
+msgstr "เมืองสั้นไป"
+
+#: oc-includes/osclass/ItemActions.php:141
+#: oc-includes/osclass/ItemActions.php:344
+msgid "City too long."
+msgstr "เมืองยาวไป"
+
+#: oc-includes/osclass/ItemActions.php:142
+#: oc-includes/osclass/ItemActions.php:345
+msgid "Municipality too short."
+msgstr "เขตเทศบาลสั้นไป"
+
+#: oc-includes/osclass/ItemActions.php:143
+#: oc-includes/osclass/ItemActions.php:346
+msgid "Municipality too long."
+msgstr "เขตเทศบาลยาวไป"
+
+#: oc-includes/osclass/ItemActions.php:144
+#: oc-includes/osclass/ItemActions.php:347
+msgid "Address too short."
+msgstr "ที่อยู่สั้นเกินไป"
+
+#: oc-includes/osclass/ItemActions.php:145
+#: oc-includes/osclass/ItemActions.php:348
+msgid "Address too long."
+msgstr "ที่อยู่ยาวเกินไป"
+
+#: oc-includes/osclass/ItemActions.php:146
+msgid "Too fast. You should wait a little to publish your ad."
+msgstr "เร็วเกินไป. คุณควรรอนิดึงเพื่อทำการเผยแพร่ประกาศของคุณ"
+
+#: oc-includes/osclass/ItemActions.php:161
+#: oc-includes/osclass/ItemActions.php:361
+msgid "%s field is required."
+msgstr "%s ฟิลล์นี้จำเป็น"
+
+#: oc-includes/osclass/ItemActions.php:1271
+msgid "One of the files you tried to upload exceeds the maximum size"
+msgstr "ไฟล์ที่คุณทำการอัพโหลด เกินขนาดไฟล์สูงสุดที่กำหนดไว้"
+
+#: oc-includes/osclass/controller/item.php:163
+msgid "Check your inbox to validate your listing"
+msgstr "เลือกอินบ็อกซ์เพื่อเปิดการใช้งานรายการของคุณ"
+
+#: oc-admin/comments.php:92
+msgid "The comments have been unblocked"
+msgstr "การแสดงความคิดเห็นได้ถูกยกเลิกการบล็อค"
+
+#: oc-admin/comments.php:102
+msgid "The comments have been blocked"
+msgstr "การแสดงความคิดเห็นได้ถูกบล็อค"
+
+#: oc-admin/items.php:268
+msgid "%d listing has been unmarked"
+msgstr "%d รายการได้ถูกยกเลิกการทำเครื่องหมาย"
+
+#: oc-admin/controller/settings/main.php:33
+msgid "Last check"
+msgstr "ตรวจสอบล่าสุด"
+
+#: oc-admin/main.php:74
+msgid "Entered an invalid email"
+msgstr "ใส่อีเมลล์ไม่ถูกต้อง"
+
+#: oc-admin/main.php:77
+msgid "You're already subscribed"
+msgstr "คุณได้ทำการสมัครสมาชิกแล้ว"
+
+#: oc-admin/main.php:80
+msgid "Subscribed correctly"
+msgstr "สมัครสมาชิกอย่างถูกต้อง"
+
+#: oc-admin/main.php:83
+msgid "Error subscribing"
+msgstr "สมัครสมาชิกผิดพลาด"
+
+#: oc-includes/osclass/core/AdminSecBaseModel.php:66
+msgid "Thank you very much for your donation"
+msgstr "ขอบคุณสำหรับการบริจาคของคุณ"
+
+#: oc-admin/tools.php:210 oc-admin/tools.php:242
+msgid "Backup completed successfully"
+msgstr "สำรองข้อมูลเสร็จสิ้นแล้ว"
+
+#: oc-admin/controller/settings/locations.php:47
+msgid "Country code and name should have at least two characters"
+msgstr "รหัสประเทศและชื่อไม่ควรมีน้อยกว่าสองตัวอักษร"
+
+#: oc-admin/languages.php:308
+msgid "Directory '%s' couldn't be removed;)"
+msgstr "ไดเรกทอรี่ '%s' ไม่สามารถลบได้ ;)"
+
+#: oc-admin/main.php:65
+msgid "You have very few free space left, users will not be able to upload pictures"
+msgstr "คุณมีพื้นที่ว่างเหลือน้อย, ผู้ใช้งานไม่สามารถอัพโหลดรูปภาพได้"
+
+#: oc-admin/controller/settings/comments.php:52
+msgid "Number of moderate comments must only contain numeric characters"
+msgstr "จำนวนของการแสดงความคิดเห็นของผู้ตรวจสอบต่อรายการต้องเป็นตัวเลขเท่านั้น"
+
+#: oc-admin/controller/settings/comments.php:55
+msgid "Comments per page must only contain numeric characters"
+msgstr "การแสดงความคิดเห็นต่อหน้าต่อรายการต้องเป็นตัวเลขเท่านั้น"
+
+#: oc-admin/controller/settings/comments.php:82
+msgid "Comment settings have been updated"
+msgstr "ตั้งค่าแสดงความคิดเห็นได้ถูกอัพเดต"
+
+#: oc-admin/controller/settings/locations.php:71
+msgid "Country name cannot be blank"
+msgstr "ชื่อประเทศไม่สามารถเว้นว่างได้"
+
+#: oc-admin/controller/settings/locations.php:101
+#: oc-admin/controller/settings/locations.php:205
+#: oc-admin/controller/settings/locations.php:309
+msgid "There was a problem deleting locations"
+msgstr "มีปัญหาในการลบที่คั้ง"
+
+#: oc-admin/controller/settings/locations.php:104
+msgid "No country was selected"
+msgstr "ไม่มีประเทศถูกเลือก"
+
+#: oc-admin/controller/settings/locations.php:124
+#: oc-admin/controller/settings/locations.php:228
+msgid "%s can't be added"
+msgstr "%s ไม่สามารถเพิ่มได้"
+
+#: oc-admin/controller/settings/locations.php:134
+#: oc-admin/controller/settings/locations.php:159
+msgid "Region name cannot be blank"
+msgstr "ภูมิภาคไม่สามารถเว้นว่างได้"
+
+#: oc-admin/controller/settings/locations.php:208
+msgid "No region was selected"
+msgstr "ไม่มีภูมิถาคถูกเลือก"
+
+#: oc-admin/controller/settings/locations.php:239
+msgid "New city name cannot be blank"
+msgstr "ชื่อเมืองใหม่ไม่สามารถเว้นว่างได้"
+
+#: oc-admin/controller/settings/locations.php:267
+msgid "City name cannot be blank"
+msgstr "ชื่อเมืองไม่สามารถเว้นว่างได้"
+
+#: oc-admin/controller/settings/locations.php:312
+msgid "No city was selected"
+msgstr "ไม่มีเมืองที่ถูกเลือก"
+
+#: oc-admin/controller/settings/permalinks.php:461
+msgid "All fields are required."
+msgstr "ทุกฟิลล์จำเป็น"
+
+#: oc-admin/controller/settings/permalinks.php:482
+#: oc-admin/controller/settings/permalinks.php:492
+msgid "File <b>.htaccess</b> couldn't be filled out with the right content."
+msgstr "ไฟล์ <b>.htaccess</b> ไม่สามารถเพิ่มได้ในเนื้อหาด้านขวา"
+
+#: oc-admin/controller/settings/permalinks.php:484
+msgid "Here's the content you have to add to the <b>.htaccess</b> file. If you can't create the file, please deactivate the <em>Friendly URLs</em> option."
+msgstr "นี่คือเนื้อหาที่คุณได้เพิ่มไปในไฟล์ <b>.htaccess</b>. ถ้าคุณไม่สามาารถสร้างไฟล์ได้. กรุณายกเลิกตัวเลือก <em>Friendly URLs</em>"
+
+#: oc-admin/controller/settings/permalinks.php:494
+msgid "Here's the content you have to add to the <b>.htaccess</b> file. If you can't create the file or experience some problems with the URLs, please deactivate the <em>Friendly URLs</em> option."
+msgstr "นี่คือเนื้อหาที่คุณได้เพิ่มไปในไฟล์ <b>.htaccess</b>. ถ้าคุณมีปัญหาเกี่ยวกับ URLs . กรุณายกเลิกตัวเลือก <em>Friendly URLs</em>"
+
+#: oc-admin/controller/settings/currencies.php:148
+msgid "%s couldn't be deleted because it has listings associated to it"
+msgstr "%s ไม่สามารถลบได้เพราะมีรายการที่เกี่ยวข้อง"
+
+#: oc-admin/controller/settings/currencies.php:150
+msgid "%s couldn't be deleted because it's the default currency"
+msgstr "%s ไม่สามารถลบได้เพราะเป็นสกุลเงินเริ่มต้น"
+
+#: oc-admin/controller/settings/main.php:82
+msgid "Number of listings in the RSS has to be a numeric value"
+msgstr "จำนวนของรายการใน RSS ต้องเป็นค่าตัวเลข"
+
+#: oc-admin/controller/settings/main.php:85
+msgid "Max latest listings has to be a numeric value"
+msgstr "รายการล่าสุดมากที่สุดต้องเป็นค่าตัวเลข"
+
+#: oc-admin/controller/settings/main.php:88
+msgid "Number of listings on search has to be a numeric value"
+msgstr "จำนวนรายการในการค้นหาต้องเป็นค่าตัวเลข"
+
+#: oc-admin/controller/settings/main.php:145
+msgid "Number of listings in the RSS must be an integer"
+msgstr "จำนวนรายการใน RSS ต้องเป็นค่า integer"
+
+#: oc-admin/controller/settings/main.php:155
+msgid "Number of recent listings displayed at home must be an integer"
+msgstr "ตัวเลขของรายการปัจจุบันที่แสดงหน้าแรกต้องเป็น integer"
+
+#: oc-admin/themes/modern/market/header.php:5
+msgid "<code>downloads</code> folder has to be writable, i.e.: <code>chmod a+w %soc-content/downloads/</code>"
+msgstr "โฟลเดอร์ <code>downloads</code> ถูกเขียนทับได้, ยกตัวอย่างเช่น .: <code>chmod a+w %soc-content/downloads/</code>"
+
+#: oc-admin/tools.php:268 oc-admin/tools.php:305
+msgid "Archived successfully!"
+msgstr "บีบอัดสำเร็จแล้ว"
+
+#: oc-admin/tools.php:282 oc-admin/tools.php:308
+msgid "Error, the zip file was not created in the specified directory"
+msgstr "มีข้อผิดพลาด, ไฟล์ซิบ ไม่สามารถสร้างได้ในไดเรกทอรี่ที่ระบุ"
+
+#: oc-admin/tools.php:329
+msgid "There was an error creating the .maintenance file, please create it manually at the root folder"
+msgstr "มีปัญหาในการสร้างไฟล์ .maintenance,กรุณาสร้างมันใหม่ในโฟลเดอร์รูท"
+
+#: oc-admin/tools.php:339
+msgid "There was an error removing the .maintenance file, please remove it manually from the root folder"
+msgstr "มีปัญหาในการลบไฟล์ .maintenance, กรุณาลบแบบแมนนวลจากโฟลเดอร์รูท"
+
+#: oc-admin/users.php:168
+msgid "No users have been selected"
+msgstr "ไม่มีผู้ใช้ถูกเลือก"
+
+#: oc-admin/users.php:191
+msgid "No users have been activated"
+msgstr "ไม่มีผู้ใช้ถูกเปิดใช้งาน"
+
+#: oc-admin/users.php:216
+msgid "No users have been deactivated"
+msgstr "ไม่มีผู้ใช้ถูกปิดใช้งาน"
+
+#: oc-admin/users.php:240
+msgid "No users have been enabled"
+msgstr "ไม่มีผู้ใช้ถูกเปิดใช้งาน"
+
+#: oc-admin/users.php:264
+msgid "No users have been disabled"
+msgstr "ไม่มีผู้ใช้ถูกปิดใช้งาน"
+
+#: oc-admin/users.php:291
+msgid "No users have been deleted"
+msgstr "ไม่มีผู้ใช้ถูกลบ"
+
+#: oc-admin/users.php:304 oc-admin/users.php:338
+msgid "Alert id isn't in the correct format"
+msgstr "ไอดีการแจ้งเตือนไม่ถูกต้องตามรูปแบบ"
+
+#: oc-admin/users.php:319
+msgid "No alerts have been deleted"
+msgstr "ไม่มีการแจ้งเตือนที่ถูกลบ"
+
+#: oc-admin/users.php:321
+msgid "One alert has been deleted"
+msgstr "การแจ้งเตือนถูกลบ"
+
+#: oc-admin/users.php:358
+msgid "No alerts have been activated"
+msgstr "ไม่มีการแจ้งเตือนที่ถูกเปิดใช้งาน"
+
+#: oc-admin/users.php:360
+msgid "One alert has been activated"
+msgstr "หนึ่งการแจ้งเตือนถูกเปิดใช้งาน"
+
+#: oc-admin/users.php:364
+msgid "No alerts have been deactivated"
+msgstr "ไม่มีการแจ้งเตือนที่ถูกยกเลิก"
+
+#: oc-admin/users.php:366
+msgid "One alert has been deactivated"
+msgstr "หนึ่งการแจ้งเตือนถูกยกเลิก"
+
+#: oc-admin/users.php:419
+msgid "User settings have been updated"
+msgstr "ตั้งค่าผู้ใช้ได้อัพเดต"
+
+#: oc-admin/users.php:562 oc-admin/users.php:577
+msgid "Both rules can not be empty"
+msgstr "กฎทั้งสองไม่สามารถเว้นว่างได้"
+
+#: oc-admin/users.php:567
+msgid "Rule updated correctly"
+msgstr "อัพเดตกฎถูกต้อง"
+
+#: oc-admin/users.php:582
+msgid "Rule saved correctly"
+msgstr "กฎบันทึกสำเร็จแล้ว"
+
+#: oc-admin/users.php:603
+msgid "No rules have been deleted"
+msgstr "ไม่มีกฎถูกลบ"
+
+#: oc-admin/users.php:605
+msgid "One ban rule has been deleted"
+msgstr "หนึ่งกฎในการแบนถูกลบ"
+
+#: oc-includes/osclass/ItemActions.php:91
+#: oc-includes/osclass/ItemActions.php:301
+msgid "Image with an incorrect extension."
+msgstr "นามสกุลไฟล์รูปภาพไม่ถูกต้อง"
+
+#: oc-includes/osclass/ItemActions.php:94
+#: oc-includes/osclass/ItemActions.php:304
+msgid "Image is too big. Max. size"
+msgstr "รูปภาพใหญ่เกินไป"
+
+#: oc-includes/osclass/ItemActions.php:131
+#: oc-includes/osclass/ItemActions.php:336
+msgid "Price must be a number."
+msgstr "ราคาต้องเป็นตัวเลข"
+
+#: oc-includes/osclass/ItemActions.php:848
+msgid "We just sent your message to %s"
+msgstr "เราเพิ่งจะส่งข้อความของคุณหา %s"
+
+#: oc-includes/osclass/ItemActions.php:1326
+msgid "The file you tried to upload does not have a valid extension"
+msgstr "ไฟล์ที่คุณทำการอัพโหลดนามสกุลไม่ถูกต้อง"
+
+#: oc-includes/osclass/controller/contact.php:60
+msgid "Please enter a correct email"
+msgstr "กรุณาใส่อีเมลล์ที่ถูกต้อง"
+
+#: oc-includes/osclass/controller/contact.php:100
+msgid "There have been some errors sending the message"
+msgstr "มีข้อผิดพลาดเกิดขึ้นขณะทำการส่งข้อความ"
+
+#: oc-includes/osclass/controller/contact.php:118
+msgid "Your email has been sent properly. Thank you for contacting us!"
+msgstr "อีเมลล์ของคุณได้ทำการส่งอย่างถูกต้อง. ขอบคุณที่ติดต่อเรา!"
+
+#: oc-includes/osclass/controller/item.php:136
+msgid "A user with that email address already exists, if it is you, please log in"
+msgstr "ผู้ใช้กับอีเมลล์นี้มีอยู่แล้ว, ถ้าเป็นของคุณกรุณาเข้าสู่ระบบ"
+
+#: oc-includes/osclass/controller/contact.php:52
+#: oc-includes/osclass/controller/item.php:143
+#: oc-includes/osclass/controller/item.php:397
+#: oc-includes/osclass/controller/login.php:87
+#: oc-includes/osclass/controller/register.php:58
+msgid "Your current email is not allowed"
+msgstr "อีเมลล์ของคุณไม่ถูกอนุญาติ"
+
+#: oc-includes/osclass/controller/contact.php:55
+#: oc-includes/osclass/controller/item.php:146
+#: oc-includes/osclass/controller/item.php:400
+#: oc-includes/osclass/controller/login.php:90
+#: oc-includes/osclass/controller/register.php:61
+msgid "Your current IP is not allowed"
+msgstr "ไอพีของคุณไม่อนุญาติ"
+
+#: oc-includes/osclass/controller/item.php:194
+msgid "Sorry, we don't have any listings with that ID"
+msgstr "ขออภัย, เราไม่มีรายการที่เกี่ยวข้องกับไอดีนี้"
+
+#: oc-includes/osclass/controller/item.php:521
+msgid "The listing hasn't been validated. Please validate it in order to make it public"
+msgstr "รายการได้ทำการตรวจสอบแล้ว. กรุณาทำการตรวจสอบในอันดับที่จะทำการเผยแพร่"
+
+#: oc-includes/osclass/controller/login.php:127
+msgid "This should never happen"
+msgstr "สิ่งนี้ไม่เคยเกิดขึ้นมาก่อน"
+
+#: oc-includes/osclass/controller/register.php:85
+msgid "The reCAPTCHA was not entered correctly"
+msgstr "reCAPTCHA ไม่ถูกต้อง"
+
+#: oc-admin/users.php:85 oc-includes/osclass/controller/register.php:97
+msgid "Username is already taken"
+msgstr "ชื่อผู้ใช้นี้ถูกใช้แล้ว"
+
+#: oc-admin/users.php:87 oc-includes/osclass/controller/register.php:100
+#: oc-includes/osclass/controller/user.php:159
+msgid "The specified username is not valid, it contains some invalid words"
+msgstr "ชื่อผู้ใช้ที่กำหนดไม่ถูกต้อง, มีข้อความที่ผิดพลาด"
+
+#: oc-includes/osclass/controller/user-non-secure.php:83
+#: oc-includes/osclass/controller/user.php:229
+msgid "Oops! There was a problem trying to activate your alert. Please contact an administrator"
+msgstr "อุ้บบส์ ! มีปัญหาในการพยายามที่จะเปิดการใช้งานการแจ้งเตือนของคุณ. กรุณาติดต่อแอดมิน"
+
+#: oc-includes/osclass/controller/user-non-secure.php:104
+#: oc-includes/osclass/controller/user.php:250
+msgid "Oops! There was a problem trying to unsubscribe you. Please contact an administrator"
+msgstr "อุ้บบส์ ! มีปัญหาในการพยายามที่จะเปิดการใช้งานยกเลิกข่าวสารของคุณ. กรุณาติดต่อแอดมิน"
+
+#: oc-includes/osclass/controller/user.php:149
+msgid "The specified username is already in use"
+msgstr "ผู้ใช้ที่กำหนดถูกใช้งานแล้ว"
+
+#: oc-includes/osclass/controller/user.php:155
+msgid "The username was updated"
+msgstr "ชื่อผู้ใช้ได้รับการอัพเดต"
+
+#: oc-includes/osclass/controller/user.php:163
+msgid "The specified username could not be empty"
+msgstr "ชื่อผู้ใช้ที่กำหนดไม่สามารถปล่อยว่างได้"
+
+#: oc-includes/osclass/controller/user.php:298
+msgid "Your account have been deleted"
+msgstr "บัญชีของคุณได้ถูกลบแล้ว"
+
+#: oc-includes/osclass/controller/user.php:301
+#: oc-includes/osclass/controller/user.php:305
+msgid "Oops! you can not do that"
+msgstr "อุ้บส์ ! คุณไม่สามารถทำสิ่งนี้ได้"
+
+#: oc-includes/osclass/emails.php:470
+msgid "We've sent you an e-mail. Follow its instructions to validate the changes"
+msgstr "เราได้ทำการส่งอีเมลล์ของคุณแล้ว. ทำตามขั้นตอนเพื่อที่จะตรวจสอบการเปลี่ยนแปลงนี้"
+
+#: oc-includes/osclass/emails.php:472
+msgid "We tried to sent you an e-mail, but it failed. Please, contact an administrator"
+msgstr "เราพยายามที่จะส่งอีเมลล์ของคุณแต่ล้มเหลว, กรุณาติดต่อผู้ดูแลระบบ"
+
+#: oc-admin/items.php:326 oc-admin/items.php:338 oc-admin/items.php:348
+#: oc-admin/items.php:358 oc-admin/items.php:387 oc-admin/items.php:413
+#: oc-admin/items.php:557
+msgid "An error has occurred"
+msgstr "มีข้อผิดพลาดเกิดขึ้น"
+
+#: oc-admin/admins.php:54 oc-admin/admins.php:147 oc-admin/admins.php:261
+#: oc-admin/appearance.php:38 oc-admin/appearance.php:74
+#: oc-admin/controller/settings/mailserver.php:35
+#: oc-admin/controller/settings/media.php:212 oc-admin/languages.php:45
+#: oc-admin/login.php:100 oc-admin/plugins.php:44 oc-admin/plugins.php:80
+#: oc-admin/plugins.php:116 oc-admin/plugins.php:131 oc-admin/plugins.php:146
+msgid "This action can't be done because it's a demo site"
+msgstr "การกระทำไม่ามารถทำได้ เนื่องจากนี่เป็เว็บตัวอย่าง"
+
+#: oc-admin/admins.php:124
+msgid "There has been an error adding a new admin"
+msgstr "มีข้อผิดพลาดในการเพิ่มโดเมนใหม่"
+
+#: oc-admin/admins.php:139
+msgid "There is no admin with this id"
+msgstr "ไม่มีผู้ดูแลโฆษณานี้"
+
+#: oc-admin/items.php:328
+msgid "The listing can't be activated because it's blocked"
+msgstr "รายการไม่สามารถเปิดใช้งานได้เองจากถูกบล็อคอยู่"
+
+#: oc-admin/items.php:655
+msgid "Wait time must only contain numeric characters"
+msgstr "เวลาในการรอคอยต้องใส่เป็นตัวเลข"
+
+#: oc-admin/items.php:658
+msgid "Number of moderated listings must only contain numeric characters"
+msgstr "ตัวเลขรายการของผู้ตรวจสอบจำเป็นต้องเป็นตัวเลขเท่านั้น"
+
+#: oc-admin/items.php:661
+msgid "Images per listing must only contain numeric characters"
+msgstr "จำนวนรูปภาพต่อรายการต้องเป็นตัวเลขเท่านั้น"
+
+#: oc-admin/languages.php:156
+msgid "Number of decimals must only contain numeric characters"
+msgstr "เลขฐานสิบต่อรายการต้องเป็นตัวเลขเท่านั้น"

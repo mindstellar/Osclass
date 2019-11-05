@@ -3,7 +3,7 @@
  * This is a PHP library that handles calling reCAPTCHA.
  *
  * @copyright Copyright (c) 2015, Google Inc.
- * @link      https://www.google.com/recaptcha
+ * @link      http://www.google.com/recaptcha
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -26,7 +26,6 @@
 
 namespace ReCaptcha\RequestMethod;
 
-use ReCaptcha\ReCaptcha;
 use ReCaptcha\RequestMethod;
 use ReCaptcha\RequestParameters;
 
@@ -38,27 +37,24 @@ use ReCaptcha\RequestParameters;
 class CurlPost implements RequestMethod
 {
     /**
+     * URL to which requests are sent via cURL.
+     * @const string
+     */
+    const SITE_VERIFY_URL = 'https://www.google.com/recaptcha/api/siteverify';
+
+    /**
      * Curl connection to the reCAPTCHA service
      * @var Curl
      */
     private $curl;
 
-    /**
-     * URL for reCAPTCHA siteverify API
-     * @var string
-     */
-    private $siteVerifyUrl;
-
-    /**
-     * Only needed if you want to override the defaults
-     *
-     * @param Curl $curl Curl resource
-     * @param string $siteVerifyUrl URL for reCAPTCHA siteverify API
-     */
-    public function __construct(Curl $curl = null, $siteVerifyUrl = null)
+    public function __construct(Curl $curl = null)
     {
-        $this->curl = (is_null($curl)) ? new Curl() : $curl;
-        $this->siteVerifyUrl = (is_null($siteVerifyUrl)) ? ReCaptcha::SITE_VERIFY_URL : $siteVerifyUrl;
+        if (!is_null($curl)) {
+            $this->curl = $curl;
+        } else {
+            $this->curl = new Curl();
+        }
     }
 
     /**
@@ -69,7 +65,7 @@ class CurlPost implements RequestMethod
      */
     public function submit(RequestParameters $params)
     {
-        $handle = $this->curl->init($this->siteVerifyUrl);
+        $handle = $this->curl->init(self::SITE_VERIFY_URL);
 
         $options = array(
             CURLOPT_POST => true,
@@ -87,10 +83,6 @@ class CurlPost implements RequestMethod
         $response = $this->curl->exec($handle);
         $this->curl->close($handle);
 
-        if ($response !== false) {
-            return $response;
-        }
-
-        return '{"success": false, "error-codes": ["'.ReCaptcha::E_CONNECTION_FAILED.'"]}';
+        return $response;
     }
 }

@@ -8,35 +8,36 @@
 
 'use strict';
 
-module.exports = function(grunt) {
+module.exports = function (grunt) {
     // Project configuration.
     grunt.initConfig({
         less: {
             compile: {
                 options: {
                     paths: ['oc-admin/themes/modern/less'],
-                    yuicompress: true
+                    compress: true
                 },
                 files: {
                     'oc-admin/themes/modern/css/main.css': 'oc-admin/themes/modern/less/main.less'
                 }
             }
-	    },
-	    sass: {
-	        dist: {
-		        options: {
-		            style:   'compressed',
-		            compass: true
-		        },
-		        files: {
-		            'oc-content/themes/bender/css/main.css': 'oc-content/themes/bender/sass/main.scss'
-		        }
-	        }
+        },
+        sass: {
+            dist: {
+                options: {
+                    style: 'compressed',
+                    compass: true
+                },
+                files: {
+                    'oc-content/themes/bender/css/main.css': 'oc-content/themes/bender/sass/main.scss'
+                }
+            }
         }
     });
 
     // Actually load this plugin's task(s).
-    grunt.loadTasks('tasks');
+    grunt.registerTask('less');
+    grunt.registerTask('sass');
 
     grunt.loadNpmTasks('grunt-contrib-less');
 

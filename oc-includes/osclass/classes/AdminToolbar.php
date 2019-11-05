@@ -63,7 +63,6 @@
             osc_add_hook( 'add_admin_toolbar_menus', 'osc_admin_toolbar_update_themes'      , 0 );
             osc_add_hook( 'add_admin_toolbar_menus', 'osc_admin_toolbar_update_plugins'     , 0 );
             osc_add_hook( 'add_admin_toolbar_menus', 'osc_admin_toolbar_update_languages'   , 0 );
-            osc_add_hook( 'add_admin_toolbar_menus', 'osc_admin_toolbar_market_connect'     , 0 );
 
             osc_add_hook( 'add_admin_toolbar_menus', 'osc_admin_toolbar_logout'  , 0 );
 
@@ -83,7 +82,7 @@
                 $this->nodes[ $array['id'] ] = (object) $array;
             }
         }
-        
+
         /**
          * Add a submenu to the menu.
          *
@@ -144,17 +143,17 @@
                             $meta .= $k.'="'.$v.'" ';
                     }
                     echo '<div id="osc_toolbar_'.$value->id.'" ><a '.$meta.' href="'.$value->href.'" ' . ((isset($value->target)) ? 'target="' . $value->target . '"' : '') . '>'.$value->title.'</a>';
-                                  
+
                     if (isset($value->submenu) && is_array($value->submenu)) {
                         echo '<nav class="osc_admin_submenu" id="osc_toolbar_sub_'.$value->id.'"><ul>';
                         foreach($value->submenu as $subvalue) {
-                            if (isset($subvalue->subid)) {                                
+                            if (isset($subvalue->subid)) {
                                 $submeta = "";
                                 if (isset($subvalue->meta)) {
                                     foreach($subvalue->meta as $sk => $sv)
                                         $submeta .= $sk.'="'.$sv.'" ';
                                 }
-                                echo '<li><a '.$submeta.' href="'.$subvalue->href.'" ' . ((isset($subvalue->target)) ? 'target="' . $subvalue->target . '"' : '') . '>'.$subvalue->title.'</a><li>';    
+                                echo '<li><a '.$submeta.' href="'.$subvalue->href.'" ' . ((isset($subvalue->target)) ? 'target="' . $subvalue->target . '"' : '') . '>'.$subvalue->title.'</a><li>';
                             }
                         }
                         echo '</ul></nav>';

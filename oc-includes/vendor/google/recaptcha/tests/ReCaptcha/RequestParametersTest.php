@@ -3,7 +3,7 @@
  * This is a PHP library that handles calling reCAPTCHA.
  *
  * @copyright Copyright (c) 2015, Google Inc.
- * @link      https://www.google.com/recaptcha
+ * @link      http://www.google.com/recaptcha
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -26,10 +26,9 @@
 
 namespace ReCaptcha;
 
-use PHPUnit\Framework\TestCase;
-
-class RequestParametersTest extends Testcase
+class RequestParametersTest extends \PHPUnit_Framework_TestCase
 {
+
     public function provideValidData()
     {
         return array(

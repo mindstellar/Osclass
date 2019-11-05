@@ -103,7 +103,6 @@
         ?>
         <li><a href="#update-plugins"><?php _e('Updates'); ?></a></li>
         <?php } ?>
-        <li><a href="#market" onclick="window.location = '<?php echo osc_admin_base_url(true) . '?page=market&action=plugins'; ?>'; return false; "><?php _e('Market'); ?></a></li>
         <li><a href="#upload-plugins"><?php _e('Available plugins'); ?></a></li>
     </ul>
     <div id="upload-plugins">

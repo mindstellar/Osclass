@@ -62,7 +62,7 @@
      * Add a filter
      *
      * @param string       $hook
-     * @param string|array $function
+     * @param callable     $function
      * @param int          $priority
      *
      * @return void

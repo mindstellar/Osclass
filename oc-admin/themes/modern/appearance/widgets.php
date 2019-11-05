@@ -20,7 +20,7 @@
     $info = __get("info");
 
     function addHelp() {
-        echo '<p>' . __("Modify your site's header or footer here. Only works with compatible themes, such as those available in the market.") . '</p>';
+        echo '<p>' . __("Modify your site's header or footer here.") . '</p>';
     }
     osc_add_hook('help_box','addHelp');
 

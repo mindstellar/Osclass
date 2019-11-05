@@ -3,7 +3,7 @@
  * This is a PHP library that handles calling reCAPTCHA.
  *
  * @copyright Copyright (c) 2015, Google Inc.
- * @link      https://www.google.com/recaptcha
+ * @link      http://www.google.com/recaptcha
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -26,7 +26,6 @@
 
 namespace ReCaptcha\RequestMethod;
 
-use ReCaptcha\ReCaptcha;
 use ReCaptcha\RequestMethod;
 use ReCaptcha\RequestParameters;
 
@@ -38,21 +37,44 @@ use ReCaptcha\RequestParameters;
 class SocketPost implements RequestMethod
 {
     /**
+     * reCAPTCHA service host.
+     * @const string
+     */
+    const RECAPTCHA_HOST = 'www.google.com';
+
+    /**
+     * @const string reCAPTCHA service path
+     */
+    const SITE_VERIFY_PATH = '/recaptcha/api/siteverify';
+
+    /**
+     * @const string Bad request error
+     */
+    const BAD_REQUEST = '{"success": false, "error-codes": ["invalid-request"]}';
+
+    /**
+     * @const string Bad response error
+     */
+    const BAD_RESPONSE = '{"success": false, "error-codes": ["invalid-response"]}';
+
+    /**
      * Socket to the reCAPTCHA service
      * @var Socket
      */
     private $socket;
 
     /**
-     * Only needed if you want to override the defaults
+     * Constructor
      *
      * @param \ReCaptcha\RequestMethod\Socket $socket optional socket, injectable for testing
-     * @param string $siteVerifyUrl URL for reCAPTCHA siteverify API
      */
-    public function __construct(Socket $socket = null, $siteVerifyUrl = null)
+    public function __construct(Socket $socket = null)
     {
-        $this->socket = (is_null($socket)) ? new Socket() : $socket;
-        $this->siteVerifyUrl = (is_null($siteVerifyUrl)) ? ReCaptcha::SITE_VERIFY_URL : $siteVerifyUrl;
+        if (!is_null($socket)) {
+            $this->socket = $socket;
+        } else {
+            $this->socket = new Socket();
+        }
     }
 
     /**
@@ -65,16 +87,15 @@ class SocketPost implements RequestMethod
     {
         $errno = 0;
         $errstr = '';
-        $urlParsed = parse_url($this->siteVerifyUrl);
 
-        if (false === $this->socket->fsockopen('ssl://' . $urlParsed['host'], 443, $errno, $errstr, 30)) {
-            return '{"success": false, "error-codes": ["'.ReCaptcha::E_CONNECTION_FAILED.'"]}';
+        if (false === $this->socket->fsockopen('ssl://' . self::RECAPTCHA_HOST, 443, $errno, $errstr, 30)) {
+            return self::BAD_REQUEST;
         }
 
         $content = $params->toQueryString();
 
-        $request = "POST " . $urlParsed['path'] . " HTTP/1.1\r\n";
-        $request .= "Host: " . $urlParsed['host'] . "\r\n";
+        $request = "POST " . self::SITE_VERIFY_PATH . " HTTP/1.1\r\n";
+        $request .= "Host: " . self::RECAPTCHA_HOST . "\r\n";
         $request .= "Content-Type: application/x-www-form-urlencoded\r\n";
         $request .= "Content-length: " . strlen($content) . "\r\n";
         $request .= "Connection: close\r\n\r\n";
@@ -90,7 +111,7 @@ class SocketPost implements RequestMethod
         $this->socket->fclose();
 
         if (0 !== strpos($response, 'HTTP/1.1 200 OK')) {
-            return '{"success": false, "error-codes": ["'.ReCaptcha::E_BAD_RESPONSE.'"]}';
+            return self::BAD_RESPONSE;
         }
 
         $parts = preg_split("#\n\s*\n#Uis", $response);

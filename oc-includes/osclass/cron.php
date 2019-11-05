@@ -85,7 +85,7 @@
                 array('e_type'      => 'DAILY'));
 
 
-            osc_do_auto_upgrade();
+            //osc_do_auto_upgrade();
 
             osc_runAlert('DAILY', $cron['d_last_exec']);
 

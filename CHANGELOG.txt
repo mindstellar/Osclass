@@ -1,3 +1,11 @@
+Osclass 3.9.0 2019-10-31
+- First release after official Osclass Shutdown.
+- Moved and updated almost all external PHP library to latest working one in separate vendor directory.
+- Fixed Multiple bugs
+- Removed old Osclass Market related code
+- Fixed PHP 7.3 Compatibility
+- visit https://github.com/navjottomer/Osclass/commits/master for full commits history.
+
 Osclass 3.8.0 2018-07-25
 ------------------------
 

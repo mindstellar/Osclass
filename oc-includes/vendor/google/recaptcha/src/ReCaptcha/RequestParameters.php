@@ -3,7 +3,7 @@
  * This is a PHP library that handles calling reCAPTCHA.
  *
  * @copyright Copyright (c) 2015, Google Inc.
- * @link      https://www.google.com/recaptcha
+ * @link      http://www.google.com/recaptcha
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -32,13 +32,13 @@ namespace ReCaptcha;
 class RequestParameters
 {
     /**
-     * The shared key between your site and reCAPTCHA.
+     * Site secret.
      * @var string
      */
     private $secret;
 
     /**
-     * The user response token provided by reCAPTCHA, verifying the user on your site.
+     * Form response.
      * @var string
      */
     private $response;

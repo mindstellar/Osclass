@@ -3,7 +3,7 @@
  * This is a PHP library that handles calling reCAPTCHA.
  *
  * @copyright Copyright (c) 2015, Google Inc.
- * @link      https://www.google.com/recaptcha
+ * @link      http://www.google.com/recaptcha
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -26,11 +26,9 @@
 
 namespace ReCaptcha\RequestMethod;
 
-use \ReCaptcha\ReCaptcha;
 use ReCaptcha\RequestParameters;
-use PHPUnit\Framework\TestCase;
 
-class PostTest extends TestCase
+class PostTest extends \PHPUnit_Framework_TestCase
 {
     public static $assert = null;
     protected $parameters = null;
@@ -38,7 +36,7 @@ class PostTest extends TestCase
 
     public function setUp()
     {
-        $this->parameters = new RequestParameters('secret', 'response', 'remoteip', 'version');
+        $this->parameters = new RequestParameters("secret", "response", "remoteip", "version");
     }
 
     public function tearDown()
@@ -49,43 +47,17 @@ class PostTest extends TestCase
     public function testHTTPContextOptions()
     {
         $req = new Post();
-        self::$assert = array($this, 'httpContextOptionsCallback');
+        self::$assert = array($this, "httpContextOptionsCallback");
         $req->submit($this->parameters);
-        $this->assertEquals(1, $this->runcount, 'The assertion was ran');
+        $this->assertEquals(1, $this->runcount, "The assertion was ran");
     }
 
     public function testSSLContextOptions()
     {
         $req = new Post();
-        self::$assert = array($this, 'sslContextOptionsCallback');
+        self::$assert = array($this, "sslContextOptionsCallback");
         $req->submit($this->parameters);
-        $this->assertEquals(1, $this->runcount, 'The assertion was ran');
-    }
-
-    public function testOverrideVerifyUrl()
-    {
-        $req = new Post('https://over.ride/some/path');
-        self::$assert = array($this, 'overrideUrlOptions');
-        $req->submit($this->parameters);
-        $this->assertEquals(1, $this->runcount, 'The assertion was ran');
-    }
-
-    public function testConnectionFailureReturnsError()
-    {
-        $req = new Post('https://bad.connection/');
-        self::$assert = array($this, 'connectionFailureResponse');
-        $response = $req->submit($this->parameters);
-        $this->assertEquals('{"success": false, "error-codes": ["'.ReCaptcha::E_CONNECTION_FAILED.'"]}', $response);
-    }
-
-    public function connectionFailureResponse()
-    {
-        return false;
-    }
-    public function overrideUrlOptions(array $args)
-    {
-        $this->runcount++;
-        $this->assertEquals('https://over.ride/some/path', $args[0]);
+        $this->assertEquals(1, $this->runcount, "The assertion was ran");
     }
 
     public function httpContextOptionsCallback(array $args)
@@ -97,14 +69,14 @@ class PostTest extends TestCase
         $this->assertArrayHasKey('http', $options);
 
         $this->assertArrayHasKey('method', $options['http']);
-        $this->assertEquals('POST', $options['http']['method']);
+        $this->assertEquals("POST", $options['http']['method']);
 
         $this->assertArrayHasKey('content', $options['http']);
         $this->assertEquals($this->parameters->toQueryString(), $options['http']['content']);
 
         $this->assertArrayHasKey('header', $options['http']);
         $headers = array(
-            'Content-type: application/x-www-form-urlencoded',
+            "Content-type: application/x-www-form-urlencoded",
         );
         foreach ($headers as $header) {
             $this->assertContains($header, $options['http']['header']);
@@ -120,14 +92,19 @@ class PostTest extends TestCase
         $this->assertArrayHasKey('http', $options);
         $this->assertArrayHasKey('verify_peer', $options['http']);
         $this->assertTrue($options['http']['verify_peer']);
+
+        $key = version_compare(PHP_VERSION, "5.6.0", "<") ? "CN_name" : "peer_name";
+
+        $this->assertArrayHasKey($key, $options['http']);
+        $this->assertEquals("www.google.com", $options['http'][$key]);
     }
 
     protected function assertCommonOptions(array $args)
     {
         $this->assertCount(3, $args);
-        $this->assertStringStartsWith('https://www.google.com/', $args[0]);
+        $this->assertStringStartsWith("https://www.google.com/", $args[0]);
         $this->assertFalse($args[1]);
-        $this->assertTrue(is_resource($args[2]), 'The context options should be a resource');
+        $this->assertTrue(is_resource($args[2]), "The context options should be a resource");
     }
 }
 

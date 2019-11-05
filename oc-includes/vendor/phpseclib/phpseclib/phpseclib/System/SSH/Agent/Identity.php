@@ -1,5 +1,4 @@
 <?php
-
 /**
  * Pure-PHP ssh-agent client.
  *
@@ -16,14 +15,7 @@
 
 namespace phpseclib\System\SSH\Agent;
 
-use phpseclib\Crypt\RSA;
-use phpseclib\Crypt\DSA;
-use phpseclib\Crypt\ECDSA;
-use phpseclib\Exception\UnsupportedAlgorithmException;
 use phpseclib\System\SSH\Agent;
-use phpseclib\Common\Functions\Strings;
-use phpseclib\Crypt\Common\PrivateKey;
-
 
 /**
  * Pure-PHP ssh-agent client identity object
@@ -38,7 +30,7 @@ use phpseclib\Crypt\Common\PrivateKey;
  * @author  Jim Wigginton <terrafrost@php.net>
  * @access  internal
  */
-class Identity implements PrivateKey
+class Identity
 {
     /**@+
      * Signature Flags
@@ -58,7 +50,7 @@ class Identity implements PrivateKey
      * @access private
      * @see self::getPublicKey()
      */
-    private $key;
+    var $key;
 
     /**
      * Key Blob
@@ -67,7 +59,7 @@ class Identity implements PrivateKey
      * @access private
      * @see self::sign()
      */
-    private $key_blob;
+    var $key_blob;
 
     /**
      * Socket Resource
@@ -76,7 +68,7 @@ class Identity implements PrivateKey
      * @access private
      * @see self::sign()
      */
-    private $fsock;
+    var $fsock;
 
     /**
      * Signature flags
@@ -86,20 +78,7 @@ class Identity implements PrivateKey
      * @see self::sign()
      * @see self::setHash()
      */
-    private $flags = 0;
-
-    /**
-     * Curve Aliases
-     *
-     * @var array
-     * @access private
-     */
-    private static $curveAliases = [
-        'secp256r1' => 'nistp256',
-        'secp384r1' => 'nistp384',
-        'secp521r1' => 'nistp521',
-        'Ed25519' => 'Ed25519'
-    ];
+    var $flags = 0;
 
     /**
      * Default Constructor.
@@ -108,7 +87,7 @@ class Identity implements PrivateKey
      * @return \phpseclib\System\SSH\Agent\Identity
      * @access private
      */
-    public function __construct($fsock)
+    function __construct($fsock)
     {
         $this->fsock = $fsock;
     }
@@ -118,20 +97,13 @@ class Identity implements PrivateKey
      *
      * Called by \phpseclib\System\SSH\Agent::requestIdentities()
      *
-     * @param \phpseclib\Crypt\Common\PublicKey $key
+     * @param \phpseclib\Crypt\RSA $key
      * @access private
      */
-    public function withPublicKey($key)
+    function setPublicKey($key)
     {
-        if ($key instanceof ECDSA) {
-            if (is_array($key->getCurve()) || !isset(self::$curveAliases[$key->getCurve()])) {
-                throw new UnsupportedAlgorithmException('The only supported curves are nistp256, nistp384, nistp512 and Ed25519');
-            }
-        }
-
-        $new = clone $this;
-        $new->key = $key;
-        return $new;
+        $this->key = $key;
+        $this->key->setPublicKey();
     }
 
     /**
@@ -143,11 +115,9 @@ class Identity implements PrivateKey
      * @param string $key_blob
      * @access private
      */
-    public function withPublicKeyBlob($key_blob)
+    function setPublicKeyBlob($key_blob)
     {
-        $new = clone $this;
-        $new->key_blob = $key_blob;
-        return $new;
+        $this->key_blob = $key_blob;
     }
 
     /**
@@ -155,121 +125,51 @@ class Identity implements PrivateKey
      *
      * Wrapper for $this->key->getPublicKey()
      *
-     * @param string $type optional
+     * @param int $format optional
      * @return mixed
      * @access public
      */
-    public function getPublicKey($type = 'PKCS8')
+    function getPublicKey($format = null)
     {
-        return $this->key;
+        return !isset($format) ? $this->key->getPublicKey() : $this->key->getPublicKey($format);
     }
 
     /**
-     * Sets the hash
+     * Set Signature Mode
+     *
+     * Doesn't do anything as ssh-agent doesn't let you pick and choose the signature mode. ie.
+     * ssh-agent's only supported mode is \phpseclib\Crypt\RSA::SIGNATURE_PKCS1
+     *
+     * @param int $mode
+     * @access public
+     */
+    function setSignatureMode($mode)
+    {
+    }
+
+    /**
+     * Set Hash
+     *
+     * ssh-agent doesn't support using hashes for RSA other than SHA1
      *
      * @param string $hash
      * @access public
      */
-    public function withHash($hash)
+    function setHash($hash)
     {
-        $new = clone $this;
-
-        $hash = strtolower($hash);
-
-        if ($this->key instanceof RSA) {
-            $new->flags = 0;
-            switch ($hash) {
-                case 'sha1':
-                    break;
-                case 'sha256':
-                    $new->flags = self::SSH_AGENT_RSA2_256;
-                    break;
-                case 'sha512':
-                    $new->flags = self::SSH_AGENT_RSA2_512;
-                    break;
-                default:
-                    throw new UnsupportedAlgorithmException('The only supported hashes for RSA are sha1, sha256 and sha512');
-            }
+        $this->flags = 0;
+        switch ($hash) {
+            case 'sha1':
+                break;
+            case 'sha256':
+                $this->flags = self::SSH_AGENT_RSA2_256;
+                break;
+            case 'sha512':
+                $this->flags = self::SSH_AGENT_RSA2_512;
+                break;
+            default:
+                user_error('The only supported hashes for RSA are sha1, sha256 and sha512');
         }
-        if ($this->key instanceof ECDSA) {
-            switch ($this->key->getCurve()) {
-                case 'secp256r1':
-                    $expectedHash = 'sha256';
-                    break;
-                case 'secp384r1':
-                    $expectedHash = 'sha384';
-                    break;
-                //case 'secp521r1':
-                //case 'Ed25519':
-                default:
-                    $expectedHash = 'sha512';
-            }
-            if ($hash != $expectedHash) {
-                throw new UnsupportedAlgorithmException('The only supported hash for ' . self::$curveAliases[$key->getCurve()] . ' is ' . $expectedHash);
-            }
-        }
-        if ($this->key instanceof DSA) {
-            if ($hash != 'sha1') {
-                throw new UnsupportedAlgorithmException('The only supported hash for DSA is sha1');
-            }
-        }
-        return $new;
-    }
-
-    /**
-     * Sets the padding
-     *
-     * Only PKCS1 padding is supported
-     *
-     * @param string $padding
-     * @access public
-     */
-    public function withPadding($padding)
-    {
-        if (!$this->key instanceof RSA) {
-            throw new UnsupportedAlgorithmException('Only RSA keys support padding');
-        }
-        if ($padding != RSA::SIGNATURE_PKCS1 && $padding != RSA::SIGNATURE_RELAXED_PKCS1) {
-            throw new UnsupportedAlgorithmException('ssh-agent can only create PKCS1 signatures');
-        }
-        return $this;
-    }
-
-    /**
-     * Determines the signature padding mode
-     *
-     * Valid values are: ASN1, SSH2, Raw
-     *
-     * @access public
-     * @param string $padding
-     */
-    public function withSignatureFormat($format)
-    {
-        if ($this->key instanceof RSA) {
-            throw new UnsupportedAlgorithmException('Only DSA and ECDSA keys support signature format setting');
-        }
-        if ($format != 'SSH2') {
-            throw new UnsupportedAlgorithmException('Only SSH2-formatted signatures are currently supported');
-        }
-
-        return $this;
-    }
-
-    /**
-     * Returns the curve
-     *
-     * Returns a string if it's a named curve, an array if not
-     *
-     * @access public
-     * @return string|array
-     */
-    public function getCurve()
-    {
-        if (!$this->key instanceof ECDSA) {
-            throw new UnsupportedAlgorithmException('Only ECDSA keys have curves');
-        }
-
-        return $this->key->getCurve();
     }
 
     /**
@@ -278,64 +178,53 @@ class Identity implements PrivateKey
      * See "2.6.2 Protocol 2 private key signature request"
      *
      * @param string $message
-     * @param int $padding optional
      * @return string
-     * @throws \RuntimeException on connection errors
-     * @throws \phpseclib\Exception\UnsupportedAlgorithmException if the algorithm is unsupported
      * @access public
      */
-    public function sign($message)
+    function sign($message)
     {
         // the last parameter (currently 0) is for flags and ssh-agent only defines one flag (for ssh-dss): SSH_AGENT_OLD_SIGNATURE
-        $packet = Strings::packSSH2(
-            'CssN',
-            Agent::SSH_AGENTC_SIGN_REQUEST,
-            $this->key_blob,
-            $message,
-            $this->flags
-        );
-        $packet = Strings::packSSH2('s', $packet);
+        $packet = pack('CNa*Na*N', Agent::SSH_AGENTC_SIGN_REQUEST, strlen($this->key_blob), $this->key_blob, strlen($message), $message, $this->flags);
+        $packet = pack('Na*', strlen($packet), $packet);
         if (strlen($packet) != fputs($this->fsock, $packet)) {
-            throw new \RuntimeException('Connection closed during signing');
+            user_error('Connection closed during signing');
         }
 
         $length = current(unpack('N', fread($this->fsock, 4)));
-        $packet = fread($this->fsock, $length);
-
-        list($type, $signature_blob) = Strings::unpackSSH2('Cs', $packet);
+        $type = ord(fread($this->fsock, 1));
         if ($type != Agent::SSH_AGENT_SIGN_RESPONSE) {
-            throw new \RuntimeException('Unable to retrieve signature');
+            user_error('Unable to retrieve signature');
         }
 
-        if (!$this->key instanceof RSA) {
-            return $signature_blob;
+        $signature_blob = fread($this->fsock, $length - 1);
+        $length = current(unpack('N', $this->_string_shift($signature_blob, 4)));
+        if ($length != strlen($signature_blob)) {
+            user_error('Malformed signature blob');
         }
-
-        list($type, $signature_blob) = Strings::unpackSSH2('ss', $signature_blob);
+        $length = current(unpack('N', $this->_string_shift($signature_blob, 4)));
+        if ($length > strlen($signature_blob) + 4) {
+            user_error('Malformed signature blob');
+        }
+        $type = $this->_string_shift($signature_blob, $length);
+        $this->_string_shift($signature_blob, 4);
 
         return $signature_blob;
     }
 
     /**
-     * Returns the private key
+     * String Shift
      *
-     * @param string $type
-     * @param array $options optional
+     * Inspired by array_shift
+     *
+     * @param string $string
+     * @param int $index
      * @return string
+     * @access private
      */
-    public function toString($type, array $options = [])
+    function _string_shift(&$string, $index = 1)
     {
-        throw new \RuntimeException('ssh-agent does not provide a mechanism to get the private key');
-    }
-
-    /**
-     * Sets the password
-     *
-     * @access public
-     * @param string|boolean $password
-     */
-    public function withPassword($password = false)
-    {
-        throw new \RuntimeException('ssh-agent does not provide a mechanism to get the private key');
+        $substr = substr($string, 0, $index);
+        $string = substr($string, $index);
+        return $substr;
     }
 }
