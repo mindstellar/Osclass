@@ -18,12 +18,6 @@
 	</rule>
 
 	<config name="testVersion" value="5.3-99.0"/>
-	<rule ref="PHPCompatibility">
-		<!-- Verified correct usage. -->
-		<exclude name="PHPCompatibility.PHP.DeprecatedIniDirectives.safe_modeRemoved" />
-	</rule>
-
-	<rule ref="PEAR.Commenting" />
 
 	<rule ref="Generic.Commenting.Todo.CommentFound">
 		<message>Please review this TODO comment: %s</message>
@@ -34,12 +28,11 @@
 
 	<rule ref="Generic.Files.LineLength">
 		<properties>
-			<property phpcs-only="true" name="lineLimit" value="90"/>
+			<property phpcs-only="true" name="lineLimit" value="120"/>
 			<property phpcbf-only="true" name="lineLimit" value="120"/>
-			<property name="absoluteLineLimit" value="100"/>
+			<property name="absoluteLineLimit" value="120"/>
 		</properties>
 	</rule>
-
 	<rule ref="Generic.PHP.ForbiddenFunctions">
 		<properties>
 			<property name="forbiddenFunctions" type="array" value="delete=>unset,print=>echo,create_function=>null" />

@@ -54,14 +54,14 @@
                         </label>
                     </p>
                     <p class="submit">
-                        <input type="submit" name="submit" id="submit" value="<?php echo osc_esc_html( __('Change password')); ?>"/>
+                        <input type="submit" name="submit" id="submit" value="<?php echo osc_esc_html(__('Change password')); ?>"/>
                     </p>
             </form>
             <p id="nav">
                 <a title="<?php _e('Log in'); ?>" href="<?php echo osc_admin_base_url(); ?>"><?php _e('Log in'); ?></a>
             </p>
         </div>
-        <p id="backtoblog"><a href="<?php echo osc_base_url(); ?>" title="<?php printf( __('Back to %s'), osc_page_title() ); ?>">&larr; <?php printf( __('Back to %s'), osc_page_title() ); ?></a></p>
+        <p id="backtoblog"><a href="<?php echo osc_base_url(); ?>" title="<?php printf(__('Back to %s'), osc_page_title()); ?>">&larr; <?php printf(__('Back to %s'), osc_page_title()); ?></a></p>
         <script type="text/javascript">
             $(document).ready(function(){
                 $('#new_password, #new_password2').focus(function(){

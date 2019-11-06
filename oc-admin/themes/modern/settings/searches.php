@@ -1,4 +1,6 @@
-<?php if ( ! defined('OC_ADMIN')) exit('Direct access is not allowed.');
+<?php if (! defined('OC_ADMIN')) {
+    exit('Direct access is not allowed.');
+}
 /*
  * Copyright 2014 Osclass
  *
@@ -18,7 +20,9 @@
     osc_enqueue_script('jquery-validate');
 
     //customize Head
-    function customHead() { ?>
+function customHead()
+{
+    ?>
 <script type="text/javascript">
 $(document).ready(function(){
     // Code for form validation
@@ -58,32 +62,37 @@ $(document).ready(function(){
 });
 </script>
         <?php
-    }
-    osc_add_hook('admin_header','customHead', 10);
+}
+    osc_add_hook('admin_header', 'customHead', 10);
 
-    function render_offset(){
-        return 'row-offset';
-    }
+function render_offset()
+{
+    return 'row-offset';
+}
 
-    function addHelp() {
-        echo '<p>' . __("Save the searches users do on your site. In this way, you can get information on what they're most interested in. From here, you can manage the options on how much information you want to save.") . '</p>';
-    }
-    osc_add_hook('help_box','addHelp');
+function addHelp()
+{
+    echo '<p>' . __("Save the searches users do on your site. In this way, you can get information on what they're most interested in. From here, you can manage the options on how much information you want to save.") . '</p>';
+}
+    osc_add_hook('help_box', 'addHelp');
 
-    osc_add_hook('admin_page_header','customPageHeader');
-    function customPageHeader() { ?>
+    osc_add_hook('admin_page_header', 'customPageHeader');
+function customPageHeader()
+{
+    ?>
         <h1><?php _e('Settings'); ?>
             <a href="#" class="btn ico ico-32 ico-help float-right"></a>
         </h1>
     <?php
-    }
+}
 
-    function customPageTitle($string) {
-        return sprintf(__('Latest searches Settings &raquo; %s'), $string);
-    }
+function customPageTitle($string)
+{
+    return sprintf(__('Latest searches Settings &raquo; %s'), $string);
+}
     osc_add_filter('admin_title', 'customPageTitle');
 
-    osc_current_admin_theme_path( 'parts/header.php' ); ?>
+    osc_current_admin_theme_path('parts/header.php'); ?>
 <div id="general-setting">
     <!-- settings form -->
                     <div id="general-settings">
@@ -128,18 +137,18 @@ $(document).ready(function(){
                                                 <?php _e('Store 1000 queries'); ?>
                                             </div>
                                             <div>
-                                                <input type="radio" name="purge_searches" id="purge_searches" value="custom" <?php echo ( !in_array( osc_purge_latest_searches(), array('hour', 'day', 'week', 'forever', '1000') ) ? 'checked="checked"' : '' ); ?> />
-                                                <?php printf( __('Store %s queries'), '<input name="custom_queries" id="custom_queries" type="text" class="input-small" ' . ( !in_array( osc_purge_latest_searches(), array('hour', 'day', 'week', 'forever', '1000') ) ? 'value="' . osc_esc_html( osc_purge_latest_searches() ) . '"' : '') . ' onkeyup="javascript:document.getElementById(\'customPurge\').value = this.value;" />' ); ?>
+                                                <input type="radio" name="purge_searches" id="purge_searches" value="custom" <?php echo ( !in_array(osc_purge_latest_searches(), array('hour', 'day', 'week', 'forever', '1000')) ? 'checked="checked"' : '' ); ?> />
+                                                <?php printf(__('Store %s queries'), '<input name="custom_queries" id="custom_queries" type="text" class="input-small" ' . ( !in_array(osc_purge_latest_searches(), array('hour', 'day', 'week', 'forever', '1000')) ? 'value="' . osc_esc_html(osc_purge_latest_searches()) . '"' : '') . ' onkeyup="javascript:document.getElementById(\'customPurge\').value = this.value;" />'); ?>
                                                 <div class="help-box">
                                                     <?php _e("This feature can generate a lot of data. It's recommended to purge this data periodically."); ?>
                                                 </div>
                                             </div>
-                                            <input type="hidden" id="customPurge" name="customPurge" value="<?php echo osc_esc_html( osc_purge_latest_searches() ); ?>" />
+                                            <input type="hidden" id="customPurge" name="customPurge" value="<?php echo osc_esc_html(osc_purge_latest_searches()); ?>" />
 
                                         </div>
                                     </div>
                                     <div class="form-actions">
-                                        <input type="submit" id="save_changes" value="<?php echo osc_esc_html( __('Save changes') ); ?>" class="btn btn-submit" />
+                                        <input type="submit" id="save_changes" value="<?php echo osc_esc_html(__('Save changes')); ?>" class="btn btn-submit" />
                                     </div>
                                 </div>
                         </fieldset>
@@ -147,4 +156,4 @@ $(document).ready(function(){
                 </div>
                 <!-- /settings form -->
 </div>
-<?php osc_current_admin_theme_path( 'parts/footer.php' ); ?>
+<?php osc_current_admin_theme_path('parts/footer.php'); ?>

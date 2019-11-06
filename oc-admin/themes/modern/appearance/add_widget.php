@@ -1,4 +1,6 @@
-<?php if ( ! defined('OC_ADMIN')) exit('Direct access is not allowed.');
+<?php if (! defined('OC_ADMIN')) {
+    exit('Direct access is not allowed.');
+}
 /*
  * Copyright 2014 Osclass
  *
@@ -21,44 +23,47 @@
     $info   = __get("info");
     $widget = __get("widget");
 
-    if( Params::getParam('action') == 'edit_widget' ) {
+if (Params::getParam('action') == 'edit_widget') {
+    $title  = __('Edit widget');
+    $edit   = true;
+    $button = osc_esc_html(__('Save changes'));
+} else {
+    $title  = __('Add widget');
+    $edit   = false;
+    $button = osc_esc_html(__('Add widget'));
+}
+
+    osc_add_hook('admin_page_header', 'customPageHeader');
+function customPageHeader()
+{
+    if (Params::getParam('action') == 'edit_widget') {
+        $title  = __('Edit widget');
+    } else {
+        $title  = __('Add widget');
+    }
+    ?>
+        <h1><?php echo $title; ?></h1>
+    <?php
+}
+function customPageTitle($string)
+{
+    return sprintf(__('Appearance &raquo; %s'), $string);
+}
+    osc_add_filter('admin_title', 'customPageTitle');
+function customHead()
+{
+    $info   = __get("info");
+    $widget = __get("widget");
+    if (Params::getParam('action') == 'edit_widget') {
         $title  = __('Edit widget');
         $edit   = true;
-        $button = osc_esc_html( __('Save changes') );
+        $button = osc_esc_html(__('Save changes'));
     } else {
         $title  = __('Add widget');
         $edit   = false;
-        $button = osc_esc_html( __('Add widget') );
+        $button = osc_esc_html(__('Add widget'));
     }
-
-    osc_add_hook('admin_page_header','customPageHeader');
-    function customPageHeader(){
-        if( Params::getParam('action') == 'edit_widget' ) {
-            $title  = __('Edit widget');
-        } else {
-            $title  = __('Add widget');
-        }
-        ?>
-        <h1><?php echo $title; ?></h1>
-    <?php
-    }
-    function customPageTitle($string) {
-        return sprintf(__('Appearance &raquo; %s'), $string);
-    }
-    osc_add_filter('admin_title', 'customPageTitle');
-    function customHead() {
-        $info   = __get("info");
-        $widget = __get("widget");
-        if( Params::getParam('action') == 'edit_widget' ) {
-            $title  = __('Edit widget');
-            $edit   = true;
-            $button = osc_esc_html( __('Save changes') );
-        } else {
-            $title  = __('Add widget');
-            $edit   = false;
-            $button = osc_esc_html( __('Add widget') );
-        }
-        ?>
+    ?>
         <script type="text/javascript">
             tinyMCE.init({
                 mode : "textareas",
@@ -110,9 +115,9 @@
                 });
             });
         </script>
-    <?php }
+<?php }
     osc_add_hook('admin_header', 'customHead', 10);
-    osc_current_admin_theme_path( 'parts/header.php' ); ?>
+    osc_current_admin_theme_path('parts/header.php'); ?>
 <div id="widgets-page">
     <div class="widgets">
         <div id="item-form">
@@ -120,7 +125,7 @@
             <form name="widget_form" action="<?php echo osc_admin_base_url(true); ?>" method="post">
                 <input type="hidden" name="action" value="<?php echo ( $edit ? 'edit_widget_post' : 'add_widget_post' ); ?>" />
                 <input type="hidden" name="page" value="appearance" />
-                <?php if( $edit) { ?>
+                <?php if ($edit) { ?>
                 <input type="hidden" name="id" value="<?php echo Params::getParam('id', true); ?>" />
                 <?php } ?>
                 <input type="hidden" name="location" value="<?php echo Params::getParam('location', true); ?>" />
@@ -128,12 +133,16 @@
                     <div class="input-line">
                         <label><?php _e('Description (for internal purposes only)'); ?></label>
                         <div class="input">
-                            <input type="text" class="large" name="description" value="<?php if( $edit ) { echo osc_esc_html($widget['s_description']); } ?>" />
+                            <input type="text" class="large" name="description" value="<?php if ($edit) {
+                                echo osc_esc_html($widget['s_description']);
+                                                                                       } ?>" />
                         </div>
                     </div>
                     <div class="input-description-wide">
                         <label><?php _e('HTML Code for the Widget'); ?></label>
-                        <textarea name="content" id="body"><?php if( $edit ) { echo osc_esc_html($widget['s_content']); } ?></textarea>
+                        <textarea name="content" id="body"><?php if ($edit) {
+                            echo osc_esc_html($widget['s_content']);
+                                                           } ?></textarea>
                     </div>
                     <div class="form-actions">
                         <input type="submit" value="<?php echo $button; ?>" class="btn btn-submit" />
@@ -143,4 +152,4 @@
         </div>
     </div>
 </div>
-<?php osc_current_admin_theme_path( 'parts/footer.php' ); ?>
+<?php osc_current_admin_theme_path('parts/footer.php'); ?>

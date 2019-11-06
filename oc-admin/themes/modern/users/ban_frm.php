@@ -1,4 +1,6 @@
-<?php if ( ! defined('OC_ADMIN')) exit('Direct access is not allowed.');
+<?php if (! defined('OC_ADMIN')) {
+    exit('Direct access is not allowed.');
+}
 /*
  * Copyright 2014 Osclass
  *
@@ -19,39 +21,44 @@
 
     $rule      = __get('rule');
 
-    function customFrmText(){
-        $rule = __get('rule');
-        $return = array();
+function customFrmText()
+{
+    $rule = __get('rule');
+    $return = array();
 
-        if( isset($rule['pk_i_id']) ) {
-            $return['edit']       = true;
-            $return['title']      = __('Edit rule');
-            $return['action_frm'] = 'edit_ban_rule_post';
-            $return['btn_text']   = __('Update rule');
-        } else {
-            $return['edit']       = false;
-            $return['title']      = __('Add new ban rule');
-            $return['action_frm'] = 'create_ban_rule_post';
-            $return['btn_text']   = __('Add new ban rule');
-        }
-        return $return;
+    if (isset($rule['pk_i_id'])) {
+        $return['edit']       = true;
+        $return['title']      = __('Edit rule');
+        $return['action_frm'] = 'edit_ban_rule_post';
+        $return['btn_text']   = __('Update rule');
+    } else {
+        $return['edit']       = false;
+        $return['title']      = __('Add new ban rule');
+        $return['action_frm'] = 'create_ban_rule_post';
+        $return['btn_text']   = __('Add new ban rule');
     }
-    function customPageHeader(){ ?>
+    return $return;
+}
+function customPageHeader()
+{
+    ?>
         <h1><?php _e('Ban rules'); ?></h1>
-<?php
-    }
-    osc_add_hook('admin_page_header','customPageHeader');
+    <?php
+}
+    osc_add_hook('admin_page_header', 'customPageHeader');
 
-    function customPageTitle($string) {
-        $aux = customFrmText();
-        return sprintf('%s &raquo; %s', $aux['title'], $string);
-    }
+function customPageTitle($string)
+{
+    $aux = customFrmText();
+    return sprintf('%s &raquo; %s', $aux['title'], $string);
+}
     osc_add_filter('admin_title', 'customPageTitle');
 
     //customize Head
-    function customHead() {
-    }
-    osc_add_hook('admin_header','customHead', 10);
+function customHead()
+{
+}
+    osc_add_hook('admin_header', 'customHead', 10);
 
     $aux    = customFrmText();
 ?>

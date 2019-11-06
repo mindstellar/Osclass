@@ -1,4 +1,6 @@
-<?php if ( ! defined('OC_ADMIN')) exit('Direct access is not allowed.');
+<?php if (! defined('OC_ADMIN')) {
+    exit('Direct access is not allowed.');
+}
 /*
  * Copyright 2014 Osclass
  *
@@ -15,27 +17,33 @@
  * limitations under the License.
  */
 
-    function addHelp() {
-        echo '<p>' . __("Add, edit or delete the language in which your Osclass is displayed, both the part that's viewable by users and the admin panel.") . '</p>';
-    }
-    osc_add_hook('help_box','addHelp');
+function addHelp()
+{
+    echo '<p>' . __("Add, edit or delete the language in which your Osclass is displayed, both the part that's viewable by users and the admin panel.") . '</p>';
+}
+    osc_add_hook('help_box', 'addHelp');
 
-    function customPageHeader(){ ?>
+function customPageHeader()
+{
+    ?>
         <h1><?php _e('Settings'); ?>
             <a href="#" class="btn ico ico-32 ico-help float-right"></a>
             <a href="<?php echo osc_admin_base_url(true); ?>?page=languages&amp;action=add" class="btn btn-green ico ico-32 ico-add-white float-right" ><?php _e('Add language'); ?></a>
         </h1>
-<?php
-    }
-    osc_add_hook('admin_page_header','customPageHeader');
+    <?php
+}
+    osc_add_hook('admin_page_header', 'customPageHeader');
 
-    function customPageTitle($string) {
-        return sprintf(__('Languages &raquo; %s'), $string);
-    }
+function customPageTitle($string)
+{
+    return sprintf(__('Languages &raquo; %s'), $string);
+}
     osc_add_filter('admin_title', 'customPageTitle');
 
     //customize Head
-    function customHead() { ?>
+function customHead()
+{
+    ?>
         <script type="text/javascript">
             $(document).ready(function(){
                 // check_all bulkactions
@@ -54,7 +62,7 @@
                 $("#dialog-language-delete").dialog({
                     autoOpen: false,
                     modal: true,
-                    title: '<?php echo osc_esc_js( __('Delete language') ); ?>'
+                    title: '<?php echo osc_esc_js(__('Delete language')); ?>'
                 });
 
                 // dialog bulk actions
@@ -95,13 +103,13 @@
             }
         </script>
         <?php
-    }
-    osc_add_hook('admin_header','customHead', 10);
+}
+    osc_add_hook('admin_header', 'customHead', 10);
 
     $iDisplayLength = __get('iDisplayLength');
     $aData          = __get('aLanguages');
 
-    osc_current_admin_theme_path( 'parts/header.php' );
+    osc_current_admin_theme_path('parts/header.php');
 ?>
 <h2 class="render-title"><?php _e('Manage Languages'); ?> <a href="<?php echo osc_admin_base_url(true); ?>?page=languages&amp;action=add" class="btn btn-mini"><?php _e('Add new'); ?></a></h2>
 <div class="relative">
@@ -115,7 +123,7 @@
         <div id="bulk-actions">
             <label>
                 <?php osc_print_bulk_actions('bulk_actions', 'action', __get('bulk_options'), 'select-box-extra'); ?>
-                <input type="submit" id="bulk_apply" class="btn" value="<?php echo osc_esc_html( __('Apply') ); ?>" />
+                <input type="submit" id="bulk_apply" class="btn" value="<?php echo osc_esc_html(__('Apply')); ?>" />
             </label>
         </div>
         <div class="table-contains-actions">
@@ -131,20 +139,20 @@
                     </tr>
                 </thead>
                 <tbody>
-                <?php if(count($aData['aaData'])>0) { ?>
-                <?php foreach( $aData['aaData'] as $array) { ?>
+                <?php if (count($aData['aaData'])>0) { ?>
+                    <?php foreach ($aData['aaData'] as $array) { ?>
                     <tr>
-                    <?php foreach($array as $key => $value) { ?>
-                        <?php if( $key==0 ) { ?>
+                        <?php foreach ($array as $key => $value) { ?>
+                            <?php if ($key==0) { ?>
                         <td class="col-bulkactions">
-                        <?php } else { ?>
+                            <?php } else { ?>
                         <td>
-                        <?php } ?>
-                        <?php echo $value; ?>
+                            <?php } ?>
+                            <?php echo $value; ?>
                         </td>
-                    <?php } ?>
+                        <?php } ?>
                     </tr>
-                <?php } ?>
+                    <?php } ?>
                 <?php } else { ?>
                 <tr>
                     <td colspan="6" class="text-center">
@@ -172,7 +180,7 @@
         <div class="form-actions">
             <div class="wrapper">
             <a class="btn" href="javascript:void(0);" onclick="$('#dialog-language-delete').dialog('close');"><?php _e('Cancel'); ?></a>
-            <input id="language-delete-submit" type="submit" value="<?php echo osc_esc_html( __('Delete') ); ?>" class="btn btn-red" />
+            <input id="language-delete-submit" type="submit" value="<?php echo osc_esc_html(__('Delete')); ?>" class="btn btn-red" />
             </div>
         </div>
     </div>
@@ -184,11 +192,11 @@
         <div class="form-actions">
             <div class="wrapper">
                 <a id="bulk-actions-cancel" class="btn" href="javascript:void(0);"><?php _e('Cancel'); ?></a>
-                <a id="bulk-actions-submit" href="javascript:void(0);" class="btn btn-red" ><?php echo osc_esc_html( __('Delete') ); ?></a>
+                <a id="bulk-actions-submit" href="javascript:void(0);" class="btn btn-red" ><?php echo osc_esc_html(__('Delete')); ?></a>
                 <div class="clear"></div>
             </div>
         </div>
     </div>
 </div>
 
-<?php osc_current_admin_theme_path( 'parts/footer.php' ); ?>
+<?php osc_current_admin_theme_path('parts/footer.php'); ?>

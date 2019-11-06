@@ -1,4 +1,6 @@
-<?php if ( ! defined('OC_ADMIN')) exit('Direct access is not allowed.');
+<?php if (! defined('OC_ADMIN')) {
+    exit('Direct access is not allowed.');
+}
 
 /*
  * Copyright 2014 Osclass
@@ -18,26 +20,30 @@
 
     osc_enqueue_script('jquery-validate');
 
-    function customPageHeader() { ?>
+function customPageHeader()
+{
+    ?>
         <h1><?php _e('Settings'); ?></h1>
-<?php
-    }
-    osc_add_hook('admin_page_header','customPageHeader');
+    <?php
+}
+    osc_add_hook('admin_page_header', 'customPageHeader');
 
-    function customPageTitle($string) {
-        return sprintf(__('Edit language &raquo; %s'), $string);
-    }
+function customPageTitle($string)
+{
+    return sprintf(__('Edit language &raquo; %s'), $string);
+}
     osc_add_filter('admin_title', 'customPageTitle');
 
     //customize Head
-    function customHead() {
-        LanguageForm::js_validation();
-    }
-    osc_add_hook('admin_header','customHead', 10);
+function customHead()
+{
+    LanguageForm::js_validation();
+}
+    osc_add_hook('admin_header', 'customHead', 10);
 
     $aLocale = __get('aLocale');
 
-    osc_current_admin_theme_path( 'parts/header.php' ); ?>
+    osc_current_admin_theme_path('parts/header.php'); ?>
 <h2 class="render-title"><?php _e('Edit language'); ?></h2>
 <div id="language-form">
     <ul id="error_list"></ul>
@@ -113,4 +119,4 @@
         </div>
     </form>
 </div>
-<?php osc_current_admin_theme_path( 'parts/footer.php' ); ?>
+<?php osc_current_admin_theme_path('parts/footer.php'); ?>

@@ -1,5 +1,5 @@
-<?php if ( ! defined( 'ABS_PATH' ) ) {
-	exit( 'ABS_PATH is not loaded. Direct access is not allowed.' );
+<?php if (! defined('ABS_PATH')) {
+    exit('ABS_PATH is not loaded. Direct access is not allowed.');
 }
 
 /*
@@ -18,117 +18,117 @@
  * limitations under the License.
  */
 
-	/**
-	 * Class AdminSecBaseModel
-	 */
-	class AdminSecBaseModel extends SecBaseModel
+    /**
+     * Class AdminSecBaseModel
+     */
+class AdminSecBaseModel extends SecBaseModel
+{
+    public function __construct()
     {
-        public function __construct()
-        {
-            parent::__construct();
+        parent::__construct();
 
-            // check if is moderator and can enter to this page
-	        if ( $this->isModerator()
-	             && ! in_array( $this->page , osc_apply_filter( 'moderator_access' , array (
-			        'items' ,
-			        'comments' ,
-			        'media' ,
-			        'login' ,
-			        'admins' ,
-			        'ajax' ,
-			        'stats' ,
-			        ''
-		        ) ) ) ) {
-		        osc_add_flash_error_message( _m( "You don't have enough permissions" ) , 'admin' );
-		        $this->redirectTo( osc_admin_base_url() );
-	        }
+        // check if is moderator and can enter to this page
+        if ($this->isModerator()
+             && ! in_array($this->page, osc_apply_filter('moderator_access', array (
+                'items' ,
+                'comments' ,
+                'media' ,
+                'login' ,
+                'admins' ,
+                'ajax' ,
+                'stats' ,
+                ''
+             ))) ) {
+            osc_add_flash_error_message(_m("You don't have enough permissions"), 'admin');
+            $this->redirectTo(osc_admin_base_url());
+        }
 
-            osc_run_hook( 'init_admin' );
+        osc_run_hook('init_admin');
 
-            $config_version = str_replace('.', '', OSCLASS_VERSION);
-            $config_version = preg_replace('|-.*|', '', $config_version);
+        $config_version = str_replace('.', '', OSCLASS_VERSION);
+        $config_version = preg_replace('|-.*|', '', $config_version);
 
-            if( $config_version > osc_get_preference('version') && MULTISITE==0) {
-                if( get_class($this) === 'CAdminTools') {
-                } else {
-	                if ( get_class( $this ) !== 'CAdminUpgrade' ) {
-		                $this->redirectTo( osc_admin_base_url( true ) . '?page=upgrade' );
-	                }
+        if ($config_version > osc_get_preference('version') && MULTISITE==0) {
+            if (get_class($this) === 'CAdminTools') {
+            } else {
+                if (get_class($this) !== 'CAdminUpgrade') {
+                    $this->redirectTo(osc_admin_base_url(true) . '?page=upgrade');
                 }
             }
-
-            // show donation successful
-            if( Params::getParam('donation') === 'successful' ) {
-                osc_add_flash_ok_message(_m('Thank you very much for your donation'), 'admin');
-            }
-
-            // enqueue scripts
-            osc_enqueue_script('jquery');
-            osc_enqueue_script('jquery-ui');
-            osc_enqueue_script('admin-osc');
-            osc_enqueue_script('admin-ui-osc');
         }
 
-		/**
-		 * @return bool
-		 */
-		public function isLogged()
-        {
-            return osc_is_admin_user_logged_in();
+        // show donation successful
+        if (Params::getParam('donation') === 'successful') {
+            osc_add_flash_ok_message(_m('Thank you very much for your donation'), 'admin');
         }
 
-		/**
-		 * @return bool
-		 */
-		public function isModerator()
-        {
-            return osc_is_moderator();
-        }
+        // enqueue scripts
+        osc_enqueue_script('jquery');
+        osc_enqueue_script('jquery-ui');
+        osc_enqueue_script('admin-osc');
+        osc_enqueue_script('admin-ui-osc');
+    }
 
-        public function logout()
-        {
-            //destroying session
-            $locale = Session::newInstance()->_get('oc_adminLocale');
-            Session::newInstance()->session_destroy();
-            Session::newInstance()->_drop('adminId');
-            Session::newInstance()->_drop('adminUserName');
-            Session::newInstance()->_drop('adminName');
-            Session::newInstance()->_drop('adminEmail');
-            Session::newInstance()->_drop('adminLocale');
-            Session::newInstance()->session_start();
-            Session::newInstance()->_set('oc_adminLocale', $locale);
+    /**
+     * @return bool
+     */
+    public function isLogged()
+    {
+        return osc_is_admin_user_logged_in();
+    }
 
-            Cookie::newInstance()->pop('oc_adminId');
-            Cookie::newInstance()->pop('oc_adminSecret');
-            Cookie::newInstance()->pop('oc_adminLocale');
-            Cookie::newInstance()->set();
-        }
+    /**
+     * @return bool
+     */
+    public function isModerator()
+    {
+        return osc_is_moderator();
+    }
 
-        public function showAuthFailPage()
-        {
-            if( Params::getParam('page') === 'ajax') {
-                echo json_encode(array('error' => 1, 'msg' => __('Session timed out')));
-                exit;
-            } else {
-                //Session::newInstance()->session_start();
-                Session::newInstance()->_setReferer(osc_base_url() . preg_replace('|^' . REL_WEB_URL . '|', '', Params::getServerParam('REQUEST_URI', false, false)));
-                header( 'Location: ' . osc_admin_base_url( true) . '?page=login' );
-                exit;
-            }
-        }
+    public function logout()
+    {
+        //destroying session
+        $locale = Session::newInstance()->_get('oc_adminLocale');
+        Session::newInstance()->session_destroy();
+        Session::newInstance()->_drop('adminId');
+        Session::newInstance()->_drop('adminUserName');
+        Session::newInstance()->_drop('adminName');
+        Session::newInstance()->_drop('adminEmail');
+        Session::newInstance()->_drop('adminLocale');
+        Session::newInstance()->session_start();
+        Session::newInstance()->_set('oc_adminLocale', $locale);
 
-        //hopefully generic...
+        Cookie::newInstance()->pop('oc_adminId');
+        Cookie::newInstance()->pop('oc_adminSecret');
+        Cookie::newInstance()->pop('oc_adminLocale');
+        Cookie::newInstance()->set();
+    }
 
-		/**
-		 * @param $file
-		 */
-		public function doView( $file )
-        {
-            osc_run_hook( 'before_admin_html' );
-            osc_current_admin_theme_path($file);
-            Session::newInstance()->_clearVariables();
-            osc_run_hook( 'after_admin_html' );
+    public function showAuthFailPage()
+    {
+        if (Params::getParam('page') === 'ajax') {
+            echo json_encode(array('error' => 1, 'msg' => __('Session timed out')));
+            exit;
+        } else {
+            //Session::newInstance()->session_start();
+            Session::newInstance()->_setReferer(osc_base_url() . preg_replace('|^' . REL_WEB_URL . '|', '', Params::getServerParam('REQUEST_URI', false, false)));
+            header('Location: ' . osc_admin_base_url(true) . '?page=login');
+            exit;
         }
     }
+
+    //hopefully generic...
+
+    /**
+     * @param $file
+     */
+    public function doView($file)
+    {
+        osc_run_hook('before_admin_html');
+        osc_current_admin_theme_path($file);
+        Session::newInstance()->_clearVariables();
+        osc_run_hook('after_admin_html');
+    }
+}
 
     /* file end: ./oc-includes/osclass/core/AdminSecBaseModel.php */

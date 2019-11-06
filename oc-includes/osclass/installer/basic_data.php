@@ -1,14 +1,14 @@
 <?php
 
 $categories = array(
-    array('pk_i_id' => 1,   'i_position' => 1,  'fk_i_parent_id' => NULL, 's_name' => __('For sale')),
-    array('pk_i_id' => 2,   'i_position' => 2,  'fk_i_parent_id' => NULL, 's_name' => __('Vehicles')),
-    array('pk_i_id' => 3,   'i_position' => 3,  'fk_i_parent_id' => NULL, 's_name' => __('Classes')),
-    array('pk_i_id' => 4,   'i_position' => 4,  'fk_i_parent_id' => NULL, 's_name' => __('Real estate')),
-    array('pk_i_id' => 5,   'i_position' => 5,  'fk_i_parent_id' => NULL, 's_name' => __('Services')),
-    array('pk_i_id' => 6,   'i_position' => 6,  'fk_i_parent_id' => NULL, 's_name' => __('Community')),
-    array('pk_i_id' => 7,   'i_position' => 7,  'fk_i_parent_id' => NULL, 's_name' => __('Personals')),
-    array('pk_i_id' => 8,   'i_position' => 8,  'fk_i_parent_id' => NULL, 's_name' => __('Jobs')),
+    array('pk_i_id' => 1,   'i_position' => 1,  'fk_i_parent_id' => null, 's_name' => __('For sale')),
+    array('pk_i_id' => 2,   'i_position' => 2,  'fk_i_parent_id' => null, 's_name' => __('Vehicles')),
+    array('pk_i_id' => 3,   'i_position' => 3,  'fk_i_parent_id' => null, 's_name' => __('Classes')),
+    array('pk_i_id' => 4,   'i_position' => 4,  'fk_i_parent_id' => null, 's_name' => __('Real estate')),
+    array('pk_i_id' => 5,   'i_position' => 5,  'fk_i_parent_id' => null, 's_name' => __('Services')),
+    array('pk_i_id' => 6,   'i_position' => 6,  'fk_i_parent_id' => null, 's_name' => __('Community')),
+    array('pk_i_id' => 7,   'i_position' => 7,  'fk_i_parent_id' => null, 's_name' => __('Personals')),
+    array('pk_i_id' => 8,   'i_position' => 8,  'fk_i_parent_id' => null, 's_name' => __('Jobs')),
     array('pk_i_id' => 9,   'i_position' => 1,  'fk_i_parent_id' => 1,    's_name' => __('Animals')),
     array('pk_i_id' => 10,  'i_position' => 2,  'fk_i_parent_id' => 1,    's_name' => __('Art - Collectibles')),
     array('pk_i_id' => 11,  'i_position' => 3,  'fk_i_parent_id' => 1,    's_name' => __('Barter')),

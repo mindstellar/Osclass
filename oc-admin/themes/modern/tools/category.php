@@ -1,4 +1,6 @@
-<?php if ( ! defined('OC_ADMIN')) exit('Direct access is not allowed.');
+<?php if (! defined('OC_ADMIN')) {
+    exit('Direct access is not allowed.');
+}
 /*
  * Copyright 2014 Osclass
  *
@@ -15,22 +17,26 @@
  * limitations under the License.
  */
 
-    function render_offset(){
-        return 'row-offset';
-    }
+function render_offset()
+{
+    return 'row-offset';
+}
 
-    osc_add_hook('admin_page_header','customPageHeader');
-    function customPageHeader(){ ?>
+    osc_add_hook('admin_page_header', 'customPageHeader');
+function customPageHeader()
+{
+    ?>
         <h1><?php _e('Tools'); ?></h1>
     <?php
-    }
+}
 
-    function customPageTitle($string) {
-        return sprintf(__('Category stats &raquo; %s'), $string);
-    }
+function customPageTitle($string)
+{
+    return sprintf(__('Category stats &raquo; %s'), $string);
+}
     osc_add_filter('admin_title', 'customPageTitle');
 
-    osc_current_admin_theme_path( 'parts/header.php' ); ?>
+    osc_current_admin_theme_path('parts/header.php'); ?>
 <div id="backup-setting">
     <!-- settings form -->
     <div id="backup-settings">
@@ -44,7 +50,7 @@
             <fieldset>
                 <div class="form-horizontal">
                     <div class="form-actions">
-                        <input type="submit" id="backup_save" value="<?php echo osc_esc_html( __('Calculate category stats')); ?>" class="btn btn-submit" />
+                        <input type="submit" id="backup_save" value="<?php echo osc_esc_html(__('Calculate category stats')); ?>" class="btn btn-submit" />
                     </div>
                 </div>
             </fieldset>
@@ -52,4 +58,4 @@
     </div>
     <!-- /settings form -->
 </div>
-<?php osc_current_admin_theme_path( 'parts/footer.php' ); ?>
+<?php osc_current_admin_theme_path('parts/footer.php'); ?>

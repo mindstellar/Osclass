@@ -1,4 +1,6 @@
-<?php if ( ! defined('OC_ADMIN')) exit('Direct access is not allowed.');
+<?php if (! defined('OC_ADMIN')) {
+    exit('Direct access is not allowed.');
+}
 /*
  * Copyright 2014 Osclass
  *
@@ -21,14 +23,18 @@
     $selected    = __get('selected');
     $plugin_data = __get('plugin_data');
 
-    osc_add_hook('admin_page_header','customPageHeader');
-    function customPageHeader() { ?>
+    osc_add_hook('admin_page_header', 'customPageHeader');
+function customPageHeader()
+{
+    ?>
         <h1><?php echo osc_apply_filter('custom_plugin_title', __('Plugins')); ?></h1>
     <?php
-    }
+}
 
     //customize Head
-    function customHead() { ?>
+function customHead()
+{
+    ?>
     <script type="text/javascript">
         // check all the categories
         function checkAll(id, check) {
@@ -52,14 +58,15 @@
     </script>
     <?php
 }
-    osc_add_hook('admin_header','customHead', 10);
+    osc_add_hook('admin_header', 'customHead', 10);
 
-    function customPageTitle($string) {
-        return sprintf(__('Plugins &raquo; %s'), $string);
-    }
+function customPageTitle($string)
+{
+    return sprintf(__('Plugins &raquo; %s'), $string);
+}
     osc_add_filter('admin_title', 'customPageTitle');
 
-    osc_current_admin_theme_path( 'parts/header.php' ); ?>
+    osc_current_admin_theme_path('parts/header.php'); ?>
 <!-- plugin configuration -->
 <div class="plugin-configuration form-horizontal">
     <form id="plugin-frm" action="<?php echo osc_admin_base_url(true); ?>?page=plugins" method="post">
@@ -90,4 +97,4 @@
     </form>
 </div>
 <!-- /theme files -->
-<?php osc_current_admin_theme_path( 'parts/footer.php' ); ?>
+<?php osc_current_admin_theme_path('parts/footer.php'); ?>

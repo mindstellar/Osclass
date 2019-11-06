@@ -1,4 +1,6 @@
-<?php if ( ! defined('OC_ADMIN')) exit('Direct access is not allowed.');
+<?php if (! defined('OC_ADMIN')) {
+    exit('Direct access is not allowed.');
+}
 /*
  * Copyright 2014 Osclass
  *
@@ -15,27 +17,31 @@
  * limitations under the License.
  */
 
-    function addHelp() {
-        echo '<p>' . __("Modify the emails your site's users receive when they join your site, when someone shows interest in their ad, to recover their password... <strong>Be careful</strong>: don't modify any of the words that appear within brackets.") . '</p>';
-    }
-    osc_add_hook('help_box','addHelp');
+function addHelp()
+{
+    echo '<p>' . __("Modify the emails your site's users receive when they join your site, when someone shows interest in their ad, to recover their password... <strong>Be careful</strong>: don't modify any of the words that appear within brackets.") . '</p>';
+}
+    osc_add_hook('help_box', 'addHelp');
 
-    function customPageHeader(){ ?>
+function customPageHeader()
+{
+    ?>
         <h1><?php _e('Settings'); ?>
             <a href="#" class="btn ico ico-32 ico-help float-right"></a>
         </h1>
-<?php
-    }
-    osc_add_hook('admin_page_header','customPageHeader');
+    <?php
+}
+    osc_add_hook('admin_page_header', 'customPageHeader');
 
-    function customPageTitle($string) {
-        return sprintf(__('Email templates &raquo; %s'), $string);
-    }
+function customPageTitle($string)
+{
+    return sprintf(__('Email templates &raquo; %s'), $string);
+}
     osc_add_filter('admin_title', 'customPageTitle');
 
     $aData = __get('aEmails');
 
-    osc_current_admin_theme_path( 'parts/header.php' ); ?>
+    osc_current_admin_theme_path('parts/header.php'); ?>
 <h2 class="render-title"><?php _e('Emails templates'); ?></h2>
 <div class="table-contains-actions">
     <table class="table" cellpadding="0" cellspacing="0">
@@ -46,16 +52,16 @@
             </tr>
         </thead>
         <tbody>
-        <?php if(count($aData['aaData'])>0) { ?>
-        <?php foreach( $aData['aaData'] as $array) { ?>
+        <?php if (count($aData['aaData'])>0) { ?>
+            <?php foreach ($aData['aaData'] as $array) { ?>
             <tr>
-            <?php foreach($array as $key => $value) { ?>
+                <?php foreach ($array as $key => $value) { ?>
                 <td>
-                <?php echo $value; ?>
+                    <?php echo $value; ?>
                 </td>
-            <?php } ?>
+                <?php } ?>
             </tr>
-        <?php } ?>
+            <?php } ?>
         <?php } else { ?>
         <tr>
             <td colspan="6" class="text-center">
@@ -70,4 +76,4 @@
 <?php
     osc_show_pagination_admin($aData);
 ?>
-<?php osc_current_admin_theme_path( 'parts/footer.php' ); ?>
+<?php osc_current_admin_theme_path('parts/footer.php'); ?>

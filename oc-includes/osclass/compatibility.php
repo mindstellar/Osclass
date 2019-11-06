@@ -20,4 +20,3 @@
      */
 
     class_alias('ImageProcessing', 'ImageResizer');
-

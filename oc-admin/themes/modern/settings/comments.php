@@ -1,4 +1,6 @@
-<?php if ( ! defined('OC_ADMIN')) exit('Direct access is not allowed.');
+<?php if (! defined('OC_ADMIN')) {
+    exit('Direct access is not allowed.');
+}
 /*
  * Copyright 2014 Osclass
  *
@@ -18,7 +20,9 @@
     osc_enqueue_script('jquery-validate');
 
     //customize Head
-    function customHead() { ?>
+function customHead()
+{
+    ?>
 <script type="text/javascript">
 $(document).ready(function(){
     // Code for form validation
@@ -68,32 +72,37 @@ $(document).ready(function(){
 });
 </script>
         <?php
-    }
-    osc_add_hook('admin_header','customHead', 10);
+}
+    osc_add_hook('admin_header', 'customHead', 10);
 
-    function render_offset(){
-        return 'row-offset';
-    }
+function render_offset()
+{
+    return 'row-offset';
+}
 
-    function addHelp() {
-        echo '<p>' . __("Modify the options that allow your users to publish comments on your site's listings.") . '</p>';
-    }
-    osc_add_hook('help_box','addHelp');
+function addHelp()
+{
+    echo '<p>' . __("Modify the options that allow your users to publish comments on your site's listings.") . '</p>';
+}
+    osc_add_hook('help_box', 'addHelp');
 
-    osc_add_hook('admin_page_header','customPageHeader');
-    function customPageHeader(){ ?>
+    osc_add_hook('admin_page_header', 'customPageHeader');
+function customPageHeader()
+{
+    ?>
         <h1><?php _e('Settings'); ?>
             <a href="#" class="btn ico ico-32 ico-help float-right"></a>
         </h1>
     <?php
-    }
+}
 
-    function customPageTitle($string) {
-        return sprintf(__('Comment Settings &raquo; %s'), $string);
-    }
+function customPageTitle($string)
+{
+    return sprintf(__('Comment Settings &raquo; %s'), $string);
+}
     osc_add_filter('admin_title', 'customPageTitle');
 
-    osc_current_admin_theme_path( 'parts/header.php' ); ?>
+    osc_current_admin_theme_path('parts/header.php'); ?>
 <div id="general-settings">
     <ul id="error_list"></ul>
     <form name="comments_form" action="<?php echo osc_admin_base_url(true); ?>" method="post">
@@ -122,7 +131,7 @@ $(document).ready(function(){
                             </label>
                         </div>
                         <div class="form-label-checkbox-offset">
-                            <?php printf( __('Before a comment appears, comment author must have at least %s previously approved comments'), '<input type="text" class="input-small" name="num_moderate_comments" value="' . ( (osc_moderate_comments() == -1 ) ? '0' : osc_esc_html( osc_moderate_comments() ) ) . '" />' ); ?>
+                            <?php printf(__('Before a comment appears, comment author must have at least %s previously approved comments'), '<input type="text" class="input-small" name="num_moderate_comments" value="' . ( (osc_moderate_comments() == -1 ) ? '0' : osc_esc_html(osc_moderate_comments()) ) . '" />'); ?>
                             <div class="help-box"><?php _e('If the value is zero, an administrator must always approve comments'); ?></div>
                         </div>
                     </div>
@@ -130,7 +139,7 @@ $(document).ready(function(){
                 <div class="form-row">
                     <div class="form-label"><?php _e('Other comment settings'); ?></div>
                     <div class="form-controls">
-                        <?php printf( __('Break comments into pages with %s comments per page'), '<input type="text" class="input-small" name="comments_per_page" value="' . osc_esc_html( osc_comments_per_page() ) . '" />' ); ?>
+                        <?php printf(__('Break comments into pages with %s comments per page'), '<input type="text" class="input-small" name="comments_per_page" value="' . osc_esc_html(osc_comments_per_page()) . '" />'); ?>
                         <div class="help-box"><?php _e('If the value is zero all comments are shown'); ?></div>
                     </div>
                 </div>
@@ -158,10 +167,10 @@ $(document).ready(function(){
                     </div>
                 </div>
                 <div class="form-actions">
-                    <input type="submit" id="save_changes" value="<?php echo osc_esc_html( __('Save changes') ); ?>" class="btn btn-submit" />
+                    <input type="submit" id="save_changes" value="<?php echo osc_esc_html(__('Save changes')); ?>" class="btn btn-submit" />
                 </div>
             </div>
         </fieldset>
     </form>
 </div>
-<?php osc_current_admin_theme_path( 'parts/footer.php' ); ?>
+<?php osc_current_admin_theme_path('parts/footer.php'); ?>

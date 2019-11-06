@@ -46,13 +46,13 @@
                     <input type="text" name="email" id="user_email" class="input" value="" size="20" tabindex="10"/></label>
                 </p>
                 <?php osc_show_recaptcha(); ?>
-                <p class="submit"><input type="submit" name="submit" id="submit" value="<?php echo osc_esc_html( __('Get new password')); ?>" tabindex="100"/></p>
+                <p class="submit"><input type="submit" name="submit" id="submit" value="<?php echo osc_esc_html(__('Get new password')); ?>" tabindex="100"/></p>
             </form>
             <p id="nav">
                 <a title="<?php _e('Log in'); ?>" href="<?php echo osc_admin_base_url(); ?>"><?php _e('Log in'); ?></a>
             </p>
         </div>
-        <p id="backtoblog"><a href="<?php echo osc_base_url(); ?>" title="<?php printf( __('Back to %s'), osc_page_title() ); ?>">&larr; <?php printf( __('Back to %s'), osc_page_title() ); ?></a></p>
+        <p id="backtoblog"><a href="<?php echo osc_base_url(); ?>" title="<?php printf(__('Back to %s'), osc_page_title()); ?>">&larr; <?php printf(__('Back to %s'), osc_page_title()); ?></a></p>
         <script type="text/javascript">
             $(document).ready(function() {
                 $('#user_email').focus(function() {

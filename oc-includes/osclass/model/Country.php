@@ -1,5 +1,5 @@
-<?php if ( ! defined( 'ABS_PATH' ) ) {
-	exit( 'ABS_PATH is not loaded. Direct access is not allowed.' );
+<?php if (! defined('ABS_PATH')) {
+    exit('ABS_PATH is not loaded. Direct access is not allowed.');
 }
 
 /*
@@ -25,198 +25,199 @@
      * @subpackage Model
      * @since unknown
      */
-    class Country extends DAO
+class Country extends DAO
+{
+    /**
+     *
+     * @var Country
+     */
+    private static $instance;
+
+    /**
+     * @return \Country
+     */
+    public static function newInstance()
     {
-        /**
-         *
-         * @var Country
-         */
-        private static $instance;
-
-	    /**
-	     * @return \Country
-	     */
-	    public static function newInstance()
-        {
-            if( !self::$instance instanceof self ) {
-                self::$instance = new self;
-            }
-            return self::$instance;
+        if (!self::$instance instanceof self) {
+            self::$instance = new self;
         }
-
-        /**
-         *
-         */
-        public function __construct()
-        {
-            parent::__construct();
-            $this->setTableName('t_country');
-            $this->setPrimaryKey('pk_c_code');
-            $this->setFields( array('pk_c_code', 's_name', 's_slug') );
-        }
-
-        /**
-         * Find a country by its ISO code
-         *
-         * @access public
-         * @since unknown
-         * @param $code
-         * @return array
-         */
-        public function findByCode($code)
-        {
-            $this->dao->select();
-            $this->dao->from($this->getTableName());
-            $this->dao->where('pk_c_code', $code);
-            $result = $this->dao->get();
-
-            if($result == false) {
-                return array();
-            }
-            return $result->row();
-        }
-
-        /**
-         * Find a country by its name
-         *
-         * @access public
-         * @since unknown
-         * @param $name
-         * @return array
-         */
-        public function findByName($name)
-        {
-            $this->dao->select();
-            $this->dao->from($this->getTableName());
-            $this->dao->where('s_name', $name);
-            $result = $this->dao->get();
-            if($result == false) {
-                return array();
-            }
-            return $result->row();
-        }
-
-	    /**
-	     * List all the countries
-	     *
-	     * @access public
-	     * @since  unknown
-	     * @return array
-	     */
-        public function listAll() {
-            $result = $this->dao->query(sprintf('SELECT * FROM %s ORDER BY s_name ASC', $this->getTableName()));
-            if($result == false) {
-                return array();
-            }
-            return $result->result();
-        }
-
-		/**
-		 * List names of all the countries. Used for location import.
-		 *
-		 * @access public
-		 * @since  unknown
-		 * @return array
-		 */
-		public function listNames() {
-			$result = $this->dao->query(sprintf('SELECT s_name FROM %s ORDER BY s_name ASC', $this->getTableName()));
-			if($result == false) {
-				return array();
-			}
-			return array_column($result->result(), 's_name');
-		}
-
-        /**
-         * Function that work with the ajax file
-         *
-         * @access public
-         * @since unknown
-         * @param $query
-         * @return array
-         */
-        public function ajax($query)
-        {
-            $this->dao->select('pk_c_code as id, s_name as label, s_name as value');
-            $this->dao->from($this->getTableName());
-            $this->dao->like('s_name', $query, 'after');
-            $this->dao->limit(5);
-            $result = $this->dao->get();
-            if($result == false) {
-                return array();
-            }
-            return $result->result();
-        }
-
-
-	    /**
-	     *  Delete a country with its regions, cities,..
-	     *
-	     * @access public
-	     * @since  2.4
-	     *
-	     * @param $pk
-	     *
-	     * @return int number of failed deletions or 0 in case of none
-	     * @throws \Exception
-	     */
-        public function deleteByPrimaryKey($pk) {
-            $mRegions = Region::newInstance();
-            $aRegions = $mRegions->findByCountry($pk);
-            $result = 0;
-            foreach($aRegions as $region) {
-                $result += $mRegions->deleteByPrimaryKey($region['pk_i_id']);
-            }
-            Item::newInstance()->deleteByCountry($pk);
-            CountryStats::newInstance()->delete(array('fk_c_country_code' => $pk));
-            User::newInstance()->update(array('fk_c_country_code' => null, 's_country' => ''), array('fk_c_country_code' => $pk));
-            if(!$this->delete(array('pk_c_code' => $pk))) {
-                $result++;
-            }
-            return $result;
-        }
-
-        /**
-         * Find a location by its slug
-         *
-         * @access public
-         * @since 3.2.1
-         * @param $slug
-         * @return array
-         */
-        public function findBySlug($slug)
-        {
-            $this->dao->select();
-            $this->dao->from($this->getTableName());
-            $this->dao->where('s_slug', $slug);
-            $result = $this->dao->get();
-
-            if($result == false) {
-                return array();
-            }
-            return $result->row();
-        }
-
-        /**
-         * Find a locations with no slug
-         *
-         * @access public
-         * @since 3.2.1
-         * @return array
-         */
-        public function listByEmptySlug()
-        {
-            $this->dao->select();
-            $this->dao->from($this->getTableName());
-            $this->dao->where('s_slug', '');
-            $result = $this->dao->get();
-
-            if($result == false) {
-                return array();
-            }
-            return $result->result();
-        }
-
-
+        return self::$instance;
     }
+
+    /**
+     *
+     */
+    public function __construct()
+    {
+        parent::__construct();
+        $this->setTableName('t_country');
+        $this->setPrimaryKey('pk_c_code');
+        $this->setFields(array('pk_c_code', 's_name', 's_slug'));
+    }
+
+    /**
+     * Find a country by its ISO code
+     *
+     * @access public
+     * @since unknown
+     * @param $code
+     * @return array
+     */
+    public function findByCode($code)
+    {
+        $this->dao->select();
+        $this->dao->from($this->getTableName());
+        $this->dao->where('pk_c_code', $code);
+        $result = $this->dao->get();
+
+        if ($result == false) {
+            return array();
+        }
+        return $result->row();
+    }
+
+    /**
+     * Find a country by its name
+     *
+     * @access public
+     * @since unknown
+     * @param $name
+     * @return array
+     */
+    public function findByName($name)
+    {
+        $this->dao->select();
+        $this->dao->from($this->getTableName());
+        $this->dao->where('s_name', $name);
+        $result = $this->dao->get();
+        if ($result == false) {
+            return array();
+        }
+        return $result->row();
+    }
+
+    /**
+     * List all the countries
+     *
+     * @access public
+     * @since  unknown
+     * @return array
+     */
+    public function listAll()
+    {
+        $result = $this->dao->query(sprintf('SELECT * FROM %s ORDER BY s_name ASC', $this->getTableName()));
+        if ($result == false) {
+            return array();
+        }
+        return $result->result();
+    }
+
+    /**
+     * List names of all the countries. Used for location import.
+     *
+     * @access public
+     * @since  unknown
+     * @return array
+     */
+    public function listNames()
+    {
+        $result = $this->dao->query(sprintf('SELECT s_name FROM %s ORDER BY s_name ASC', $this->getTableName()));
+        if ($result == false) {
+            return array();
+        }
+        return array_column($result->result(), 's_name');
+    }
+
+    /**
+     * Function that work with the ajax file
+     *
+     * @access public
+     * @since unknown
+     * @param $query
+     * @return array
+     */
+    public function ajax($query)
+    {
+        $this->dao->select('pk_c_code as id, s_name as label, s_name as value');
+        $this->dao->from($this->getTableName());
+        $this->dao->like('s_name', $query, 'after');
+        $this->dao->limit(5);
+        $result = $this->dao->get();
+        if ($result == false) {
+            return array();
+        }
+        return $result->result();
+    }
+
+
+    /**
+     *  Delete a country with its regions, cities,..
+     *
+     * @access public
+     * @since  2.4
+     *
+     * @param $pk
+     *
+     * @return int number of failed deletions or 0 in case of none
+     * @throws \Exception
+     */
+    public function deleteByPrimaryKey($pk)
+    {
+        $mRegions = Region::newInstance();
+        $aRegions = $mRegions->findByCountry($pk);
+        $result = 0;
+        foreach ($aRegions as $region) {
+            $result += $mRegions->deleteByPrimaryKey($region['pk_i_id']);
+        }
+        Item::newInstance()->deleteByCountry($pk);
+        CountryStats::newInstance()->delete(array('fk_c_country_code' => $pk));
+        User::newInstance()->update(array('fk_c_country_code' => null, 's_country' => ''), array('fk_c_country_code' => $pk));
+        if (!$this->delete(array('pk_c_code' => $pk))) {
+            $result++;
+        }
+        return $result;
+    }
+
+    /**
+     * Find a location by its slug
+     *
+     * @access public
+     * @since 3.2.1
+     * @param $slug
+     * @return array
+     */
+    public function findBySlug($slug)
+    {
+        $this->dao->select();
+        $this->dao->from($this->getTableName());
+        $this->dao->where('s_slug', $slug);
+        $result = $this->dao->get();
+
+        if ($result == false) {
+            return array();
+        }
+        return $result->row();
+    }
+
+    /**
+     * Find a locations with no slug
+     *
+     * @access public
+     * @since 3.2.1
+     * @return array
+     */
+    public function listByEmptySlug()
+    {
+        $this->dao->select();
+        $this->dao->from($this->getTableName());
+        $this->dao->where('s_slug', '');
+        $result = $this->dao->get();
+
+        if ($result == false) {
+            return array();
+        }
+        return $result->result();
+    }
+}
 
     /* file end: ./oc-includes/osclass/model/Country.php */

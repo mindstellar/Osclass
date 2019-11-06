@@ -5,18 +5,19 @@
  *
  * @since 3.1.1
  */
-class Styles {
+class Styles
+{
 
     public $styles = array();
 
     private static $instance;
 
-	/**
-	 * @return \Styles
-	 */
-	public static function newInstance()
+    /**
+     * @return \Styles
+     */
+    public static function newInstance()
     {
-        if(!self::$instance instanceof self) {
+        if (!self::$instance instanceof self) {
             self::$instance = new self;
         }
         return self::$instance;
@@ -61,7 +62,7 @@ class Styles {
      */
     public function printStyles()
     {
-        foreach($this->styles as $css) {
+        foreach ($this->styles as $css) {
             echo '<link href="' . osc_apply_filter('style_url', $css) . '" rel="stylesheet" type="text/css" />' . PHP_EOL;
         }
     }

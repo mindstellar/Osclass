@@ -1,4 +1,6 @@
-<?php if ( ! defined('OC_ADMIN')) exit('Direct access is not allowed.');
+<?php if (! defined('OC_ADMIN')) {
+    exit('Direct access is not allowed.');
+}
 /*
  * Copyright 2014 Osclass
  *
@@ -20,15 +22,16 @@
 
     $aCountries = __get('aCountries');
     //customize Head
-    function customHead(){
-        ?>
+function customHead()
+{
+    ?>
        <script type="text/javascript">
             $(document).ready(function(){
                 // dialog delete
                 $("#dialog-location-delete").dialog({
                     autoOpen: false,
                     modal: true,
-                    title: '<?php echo osc_esc_js( __('Delete location') ); ?>'
+                    title: '<?php echo osc_esc_js(__('Delete location')); ?>'
                 });
 
                 $(".trc").on("mouseenter", function() {
@@ -145,25 +148,29 @@
             }
         </script>
         <?php
-    }
-    osc_add_hook('admin_header','customHead', 10);
+}
+    osc_add_hook('admin_header', 'customHead', 10);
 
-    function addHelp() {
-        echo '<p>' . __("Add, edit or delete the countries, regions and cities installed on your Osclass. <strong>Be careful</strong>: modifying locations can cause your statistics to be incorrect until they're recalculated. Modify only if you're sure what you're doing!") . '</p>';
-    }
-    osc_add_hook('help_box','addHelp');
+function addHelp()
+{
+    echo '<p>' . __("Add, edit or delete the countries, regions and cities installed on your Osclass. <strong>Be careful</strong>: modifying locations can cause your statistics to be incorrect until they're recalculated. Modify only if you're sure what you're doing!") . '</p>';
+}
+    osc_add_hook('help_box', 'addHelp');
 
-    osc_add_hook('admin_page_header','customPageHeader');
-    function customPageHeader(){ ?>
+    osc_add_hook('admin_page_header', 'customPageHeader');
+function customPageHeader()
+{
+    ?>
         <h1><?php _e('Settings'); ?>
             <a href="#" class="btn ico ico-32 ico-help float-right"></a>
         </h1>
-<?php
-    }
+    <?php
+}
 
-    function customPageTitle($string) {
-        return sprintf(__('Locations &raquo; %s'), $string);
-    }
+function customPageTitle($string)
+{
+    return sprintf(__('Locations &raquo; %s'), $string);
+}
     osc_add_filter('admin_title', 'customPageTitle');
     osc_current_admin_theme_path('parts/header.php'); ?>
 <!-- container -->
@@ -354,7 +361,7 @@
                 </div>
                 <div class="widget-box-content">
                     <div id="l_countries">
-                        <?php foreach( $aCountries as $country ) { ?>
+                        <?php foreach ($aCountries as $country) { ?>
                         <div>
                             <div class="float-left">
                                 <div class="trc">
@@ -409,7 +416,7 @@
             <div class="form-actions">
                 <div class="wrapper">
                 <a class="btn" href="javascript:void(0);" onclick="$('#dialog-location-delete').dialog('close');"><?php _e('Cancel'); ?></a>
-                <input id="location-delete-submit" type="submit" value="<?php echo osc_esc_html( __('Delete') ); ?>" class="btn btn-red" />
+                <input id="location-delete-submit" type="submit" value="<?php echo osc_esc_html(__('Delete')); ?>" class="btn btn-red" />
                 </div>
             </div>
         </div>
@@ -428,11 +435,13 @@
                         <td><?php _e('Import a location'); ?>: </td>
                         <td>
                             <?php $locations = View::newInstance()->_get('aLocations'); ?>
-                            <?php if(count($locations)) { ?>
+                            <?php if (count($locations)) { ?>
                                 <select name="location" required>
                                     <option value=""><?php _e("Select an option"); ?>
-                                    <?php foreach($locations as $location) { ?>
-                                        <?php /* BUG: */ if($location['name'] == '') continue; ?>
+                                    <?php foreach ($locations as $location) { ?>
+                                        <?php /* BUG: */ if ($location['name'] == '') {
+                                            continue;
+                                        } ?>
                                         <option value="<?php echo $location['file']; ?>"><?php echo $location['name']; ?></option>
                                     <?php } ?>
                                 </select>
@@ -446,16 +455,16 @@
             <div class="form-actions">
                 <div class="wrapper">
                     <a class="btn" href="javascript:void(0);" onclick="$('#dialog-location-import').dialog('close');"><?php _e('Cancel'); ?></a>
-                    <button type="submit" class="btn btn-submit"><?php echo osc_esc_html( __('Import') ); ?></button>
+                    <button type="submit" class="btn btn-submit"><?php echo osc_esc_html(__('Import')); ?></button>
                 </div>
             </div>
         </div>
     </form>
     <script type="text/javascript">
-    <?php if(Params::getParam('country')!='' && Params::getParam('country_code')!='') { ?>
+    <?php if (Params::getParam('country')!='' && Params::getParam('country_code')!='') { ?>
         show_region('<?php echo osc_esc_js(Params::getParam('country_code')); ?>', '<?php echo osc_esc_js(Params::getParam('country')); ?>');
         function hook_load_cities() {
-            <?php if(Params::getParam('region')!='') { ?>
+            <?php if (Params::getParam('region')!='') { ?>
             show_city(<?php echo osc_esc_js(Params::getParam('region')); ?>);
             hook_load_cities = function() { };
             <?php }; ?>

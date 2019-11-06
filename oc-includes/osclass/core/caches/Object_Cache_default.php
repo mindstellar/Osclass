@@ -2,7 +2,8 @@
 /**
  * Object_Cache_default class
  */
-class Object_Cache_default implements iObject_Cache{
+class Object_Cache_default implements iObject_Cache
+{
 
     /**
      * Holds the cached objects
@@ -50,15 +51,16 @@ class Object_Cache_default implements iObject_Cache{
      * @param int $expire When to expire the cache contents
      * @return bool False if cache key and group already exist, true on success
      */
-    public function add( $key, $data, $expire = 0) {
+    public function add($key, $data, $expire = 0)
+    {
         $id = $key;
-	    if ( $this->multisite ) {
-		    $id = $this->site_prefix . $key;
-	    }
+        if ($this->multisite) {
+            $id = $this->site_prefix . $key;
+        }
 
-	    if ( $this->_exists( $id ) ) {
-		    return false;
-	    }
+        if ($this->_exists($id)) {
+            return false;
+        }
 
         return $this->set($key, $data, $expire);
     }
@@ -70,17 +72,18 @@ class Object_Cache_default implements iObject_Cache{
      * @param int|string $key What the contents in the cache are called
      * @return bool False if the contents weren't deleted and true on success
      */
-    public function delete($key) {
+    public function delete($key)
+    {
 
-	    if ( $this->multisite ) {
-		    $key = $this->site_prefix . $key;
-	    }
+        if ($this->multisite) {
+            $key = $this->site_prefix . $key;
+        }
 
-	    if ( ! $this->_exists( $key ) ) {
-		    return false;
-	    }
+        if (! $this->_exists($key)) {
+            return false;
+        }
 
-        unset( $this->cache[$key] );
+        unset($this->cache[$key]);
         return true;
     }
 
@@ -90,7 +93,8 @@ class Object_Cache_default implements iObject_Cache{
      *
      * @return bool Always returns true
      */
-    public function flush() {
+    public function flush()
+    {
         $this->cache = array ();
 
         return true;
@@ -103,25 +107,26 @@ class Object_Cache_default implements iObject_Cache{
      * @param int|string $key What the contents in the cache are called
      * @param bool $found if can be retrieved from cache
      * @return bool|mixed False on failure to retrieve contents or the cache
-     *		contents on success
+     *      contents on success
      */
-    public function get( $key, &$found = null ) {
+    public function get($key, &$found = null)
+    {
 
-	    if ( $this->multisite ) {
-		    $key = $this->site_prefix . $key;
-	    }
+        if ($this->multisite) {
+            $key = $this->site_prefix . $key;
+        }
 
-        if ( $this->_exists( $key ) ) {
+        if ($this->_exists($key)) {
             $found = true;
-	        ++ $this->cache_hits;
-	        if ( is_object( $this->cache[ $key ] ) ) {
-		        return clone $this->cache[ $key ];
-	        } else {
-		        return $this->cache[ $key ];
-	        }
+            ++ $this->cache_hits;
+            if (is_object($this->cache[ $key ])) {
+                return clone $this->cache[ $key ];
+            } else {
+                return $this->cache[ $key ];
+            }
         }
         $found = false;
-	    ++ $this->cache_misses;
+        ++ $this->cache_misses;
         return false;
     }
 
@@ -134,14 +139,15 @@ class Object_Cache_default implements iObject_Cache{
      * @param int $expire Not Used
      * @return bool Always returns true
      */
-    public function set($key, $data, $expire = 0) {
-	    if ( $this->multisite ) {
-		    $key = $this->site_prefix . $key;
-	    }
+    public function set($key, $data, $expire = 0)
+    {
+        if ($this->multisite) {
+            $key = $this->site_prefix . $key;
+        }
 
-	    if ( is_object( $data ) ) {
-		    $data = clone $data;
-	    }
+        if (is_object($data)) {
+            $data = clone $data;
+        }
 
         $this->cache[$key] = $data;
         return true;
@@ -153,7 +159,8 @@ class Object_Cache_default implements iObject_Cache{
      *
      * @since 3.4
      */
-    public function stats() {
+    public function stats()
+    {
         echo "<div style='position:absolute; width:200px;top:0px;'><div style='float:right;margin-right:30px;margin-top:15px;border: 1px red solid;
 border-radius: 17px;
 padding: 1em;'><h2>Default(dummy) stats</h2>";
@@ -164,36 +171,39 @@ padding: 1em;'><h2>Default(dummy) stats</h2>";
         echo '</div></div>';
     }
 
-	/**
-	 * Utility function to determine whether a key exists in the cache.
-	 * @since  3.4
-	 *
-	 * @access protected
-	 *
-	 * @param $key
-	 *
-	 * @return bool
-	 */
-    protected function _exists( $key ) {
-        return isset( $this->cache[ $key ] );
+    /**
+     * Utility function to determine whether a key exists in the cache.
+     * @since  3.4
+     *
+     * @access protected
+     *
+     * @param $key
+     *
+     * @return bool
+     */
+    protected function _exists($key)
+    {
+        return isset($this->cache[ $key ]);
     }
 
-	/**
-	 * Return hash of a given key
-	 *
-	 * @param $key
-	 *
-	 * @return string
-	 */
-    protected function _getKey( $key ) {
-        return md5( $key );
+    /**
+     * Return hash of a given key
+     *
+     * @param $key
+     *
+     * @return string
+     */
+    protected function _getKey($key)
+    {
+        return md5($key);
     }
     /**
      * Sets up object properties
      *
      * @since 2.4
      */
-    public function __construct() {
+    public function __construct()
+    {
 
         $this->multisite = false;
 //        if(SiteInfo::newInstance()->siteInfo!=array()) {
@@ -215,17 +225,19 @@ padding: 1em;'><h2>Default(dummy) stats</h2>";
         return true;
     }
 
-	/**
-	 *
-	 */
-	public function __destruct() {
+    /**
+     *
+     */
+    public function __destruct()
+    {
         return true;
     }
 
-	/**
-	 * @return string
-	 */
-	public function _get_cache() {
+    /**
+     * @return string
+     */
+    public function _get_cache()
+    {
         return 'default';
     }
 }

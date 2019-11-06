@@ -23,5 +23,3 @@ define('DB_TABLE_PREFIX', 'oc_');
 define('REL_WEB_URL', 'rel_here');
 
 define('WEB_PATH', 'http://localhost');
-
-?>

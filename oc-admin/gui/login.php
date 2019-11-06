@@ -39,22 +39,28 @@
                 <p>
                     <label for="user_login">
                         <span><?php _e('Username'); ?></span>
-                        <input type="text" name="user" id="user_login" class="input" value="<?php if( defined('DEMO') ){ echo 'admin'; } ?>" size="20"/>
+                        <input type="text" name="user" id="user_login" class="input" value="<?php if (defined('DEMO')) {
+                            echo 'admin';
+                                                                                            } ?>" size="20"/>
                     </label>
                 </p>
                 <p>
                     <label for="user_pass">
                         <span><?php _e('Password'); ?></span>
-                        <input type="password" name="password" id="user_pass" class="input" value="<?php if( defined('DEMO') ) { echo 'admin'; }?>" size="20" autocomplete="off"/>
+                        <input type="password" name="password" id="user_pass" class="input" value="<?php if (defined('DEMO')) {
+                            echo 'admin';
+                                                                                                   }?>" size="20" autocomplete="off"/>
                     </label>
                 </p>
                 <?php osc_run_hook('login_admin_form'); ?>
                 <?php $locales = osc_all_enabled_locales_for_admin(); ?>
-                <?php if(count($locales) > 1) { ?>
+                <?php if (count($locales) > 1) { ?>
                     <p>
                         <select name="locale" id="user_language">
-                        <?php foreach($locales as $locale) { ?>
-                            <option value="<?php echo $locale ['pk_c_code']; ?>" <?php if(osc_admin_language() == $locale['pk_c_code']) echo 'selected="selected"'; ?>><?php echo $locale['s_name']; ?></option>
+                        <?php foreach ($locales as $locale) { ?>
+                            <option value="<?php echo $locale ['pk_c_code']; ?>" <?php if (osc_admin_language() == $locale['pk_c_code']) {
+                                echo 'selected="selected"';
+                                           } ?>><?php echo $locale['s_name']; ?></option>
                         <?php } ?>
                         </select>
                     </p>
@@ -65,15 +71,15 @@
                     <label>
                         <input name="remember" type="checkbox" id="remember" value="1"/> <?php _e('Remember me'); ?>
                     </label>
-                        <a href="<?php echo osc_admin_base_url(true); ?>?page=login&amp;action=recover" title="<?php echo osc_esc_html( __('Forgot your password?')); ?>" class="forgot"><?php _e('Forgot your password?'); ?></a>
+                        <a href="<?php echo osc_admin_base_url(true); ?>?page=login&amp;action=recover" title="<?php echo osc_esc_html(__('Forgot your password?')); ?>" class="forgot"><?php _e('Forgot your password?'); ?></a>
                 </p>
                 <p class="submit">
-                    <input type="submit" name="submit" id="submit" value="<?php echo osc_esc_html( __('Log in')); ?>"/>
+                    <input type="submit" name="submit" id="submit" value="<?php echo osc_esc_html(__('Log in')); ?>"/>
                 </p>
             </form>
 
         </div>
-        <p id="backtoblog"><a href="<?php echo osc_base_url(); ?>" title="<?php echo osc_esc_html( sprintf( __('Back to %s'), osc_page_title() )); ?>">&larr; <?php printf( __('Back to %s'), osc_page_title() ); ?></a></p>
+        <p id="backtoblog"><a href="<?php echo osc_base_url(); ?>" title="<?php echo osc_esc_html(sprintf(__('Back to %s'), osc_page_title())); ?>">&larr; <?php printf(__('Back to %s'), osc_page_title()); ?></a></p>
         <script type="text/javascript">
             $(document).ready(function() {
                 function placeholder(input_form) {

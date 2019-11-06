@@ -1,4 +1,6 @@
-<?php if ( ! defined('OC_ADMIN')) exit('Direct access is not allowed.');
+<?php if (! defined('OC_ADMIN')) {
+    exit('Direct access is not allowed.');
+}
 /*
  * Copyright 2014 Osclass
  *
@@ -15,30 +17,35 @@
  * limitations under the License.
  */
 
-    function render_offset(){
-        return 'row-offset';
-    }
-    osc_add_hook('admin_page_header','customPageHeader');
+function render_offset()
+{
+    return 'row-offset';
+}
+    osc_add_hook('admin_page_header', 'customPageHeader');
 
-    function addHelp() {
-        /* xgettext:no-php-format */
-        echo '<p>' . __("Upload registers from other Osclass installations or upload new geographic information to your site. <strong>Be careful</strong>: don’t use this option if you're not 100% sure what you're doing.") . '</p>';
-    }
-    osc_add_hook('help_box','addHelp');
+function addHelp()
+{
+    /* xgettext:no-php-format */
+    echo '<p>' . __("Upload registers from other Osclass installations or upload new geographic information to your site. <strong>Be careful</strong>: don’t use this option if you're not 100% sure what you're doing.") . '</p>';
+}
+    osc_add_hook('help_box', 'addHelp');
 
-    function customPageHeader(){ ?>
+function customPageHeader()
+{
+    ?>
         <h1><?php _e('Tools'); ?>
             <a href="#" class="btn ico ico-32 ico-help float-right"></a>
         </h1>
     <?php
-    }
+}
 
-    function customPageTitle($string) {
-        return sprintf(__('Import &raquo; %s'), $string);
-    }
+function customPageTitle($string)
+{
+    return sprintf(__('Import &raquo; %s'), $string);
+}
     osc_add_filter('admin_title', 'customPageTitle');
 
-    osc_current_admin_theme_path( 'parts/header.php' ); ?>
+    osc_current_admin_theme_path('parts/header.php'); ?>
     <!-- settings form -->
                     <div id="backup-settings">
                         <h2 class="render-title"><?php _e('Import'); ?></h2>
@@ -54,11 +61,11 @@
                                 </div>
                             </div>
                             <div class="form-actions">
-                                <input type="submit" value="<?php echo osc_esc_html( __('Import data') ); ?>" class="btn btn-submit" />
+                                <input type="submit" value="<?php echo osc_esc_html(__('Import data')); ?>" class="btn btn-submit" />
                             </div>
                         </div>
                         </fieldset>
                     </form>
                 </div>
                 <!-- /settings form -->
-<?php osc_current_admin_theme_path( 'parts/footer.php' ); ?>
+<?php osc_current_admin_theme_path('parts/footer.php'); ?>

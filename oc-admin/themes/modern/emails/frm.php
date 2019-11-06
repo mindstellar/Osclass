@@ -1,4 +1,6 @@
-<?php if ( ! defined('OC_ADMIN')) exit('Direct access is not allowed.');
+<?php if (! defined('OC_ADMIN')) {
+    exit('Direct access is not allowed.');
+}
 /*
  * Copyright 2014 Osclass
  *
@@ -17,13 +19,17 @@
 
     osc_enqueue_script('tiny_mce');
 
-    function customPageHeader(){ ?>
+function customPageHeader()
+{
+    ?>
         <h1><?php _e('Settings'); ?></h1>
-<?php
-    }
-    osc_add_hook('admin_page_header','customPageHeader');
+    <?php
+}
+    osc_add_hook('admin_page_header', 'customPageHeader');
     //customize Head
-    function customHead() { ?>
+function customHead()
+{
+    ?>
         <script type="text/javascript">
             tinyMCE.init({
                 mode : "textareas",
@@ -55,7 +61,7 @@
                     modal: true,
                     width: 360,
                     minHeight: 42,
-                    title: '<?php echo osc_esc_js( __('Send email') ); ?>'
+                    title: '<?php echo osc_esc_js(__('Send email')); ?>'
                 });
                 $('#btn-display-test-it').click(function(){
                     $('#dialog-test-it').dialog('open');
@@ -85,16 +91,17 @@
 
         </script>
         <?php
-    }
-    osc_add_hook('admin_header','customHead', 10);
+}
+    osc_add_hook('admin_header', 'customHead', 10);
 
-    function customPageTitle($string) {
-        return sprintf(__('Edit email template &raquo; %s'), $string);
-    }
+function customPageTitle($string)
+{
+    return sprintf(__('Edit email template &raquo; %s'), $string);
+}
     osc_add_filter('admin_title', 'customPageTitle');
 
     $email      = __get("email");
-    $aEmailVars = EmailVariables::newInstance()->getVariables( $email );
+    $aEmailVars = EmailVariables::newInstance()->getVariables($email);
 
     $locales = OSCLocale::newInstance()->listAllEnabled();
 
@@ -139,7 +146,7 @@
                 <div id="right-side">
                     <div class="well ui-rounded-corners">
                         <h3 style="margin: 0;margin-bottom: 10px;text-align: center; color: #616161;"><?php _e('Legend'); ?></h3>
-                        <?php foreach($aEmailVars as $key => $value) { ?>
+                        <?php foreach ($aEmailVars as $key => $value) { ?>
                         <label><b><?php echo $key; ?></b><br/><?php echo $value;?></label><hr/>
                         <?php } ?>
                     </div>

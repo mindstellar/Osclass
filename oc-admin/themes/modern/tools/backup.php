@@ -1,4 +1,6 @@
-<?php if ( ! defined('OC_ADMIN')) exit('Direct access is not allowed.');
+<?php if (! defined('OC_ADMIN')) {
+    exit('Direct access is not allowed.');
+}
 /*
  * Copyright 2014 Osclass
  *
@@ -16,41 +18,47 @@
  */
 
     //customize Head
-    function customHead(){
-        ?>
+function customHead()
+{
+    ?>
         <script type="text/javascript">
             function submitForm(frm, type) {
                 frm.action.value = 'backup-' + type;
                 frm.submit();
             }
         </script>
-        <?php
-    }
-    osc_add_hook('admin_header','customHead', 10);
+    <?php
+}
+    osc_add_hook('admin_header', 'customHead', 10);
 
-    function render_offset(){
-        return 'row-offset';
-    }
+function render_offset()
+{
+    return 'row-offset';
+}
 
-    function addHelp() {
-        echo '<p>' . __("Save a backup of all of your site's information: listings, users and configuration. You can save a backup on your server or on your computer.") . '</p>';
-    }
-    osc_add_hook('help_box','addHelp');
+function addHelp()
+{
+    echo '<p>' . __("Save a backup of all of your site's information: listings, users and configuration. You can save a backup on your server or on your computer.") . '</p>';
+}
+    osc_add_hook('help_box', 'addHelp');
 
-    osc_add_hook('admin_page_header','customPageHeader');
-    function customPageHeader(){ ?>
+    osc_add_hook('admin_page_header', 'customPageHeader');
+function customPageHeader()
+{
+    ?>
         <h1><?php _e('Tools'); ?>
             <a href="#" class="btn ico ico-32 ico-help float-right"></a>
         </h1>
     <?php
-    }
+}
 
-    function customPageTitle($string) {
-        return sprintf(__('Backup &raquo; %s'), $string);
-    }
+function customPageTitle($string)
+{
+    return sprintf(__('Backup &raquo; %s'), $string);
+}
     osc_add_filter('admin_title', 'customPageTitle');
 
-    osc_current_admin_theme_path( 'parts/header.php' ); ?>
+    osc_current_admin_theme_path('parts/header.php'); ?>
 <div id="backup-setting">
     <!-- settings form -->
                     <div id="backup-settings">
@@ -72,9 +80,9 @@
                                 </div>
                             </div>
                             <div class="form-actions">
-                                <input type="button" id="backup_sql" onclick="javascript:submitForm(this.form, 'sql');" value="<?php echo osc_esc_html( __('Backup SQL (store on server)') ); ?>" class="btn btn-submit" />
-                                <input type="button" id="backup_sql_file" onclick="javascript:submitForm(this.form, 'sql_file');" value="<?php echo osc_esc_html( __('Backup SQL (download file)') ); ?>" class="btn btn-submit" />
-                                <input type="button" id="backup_zip" onclick="javascript:submitForm(this.form, 'zip');" value="<?php echo osc_esc_html( __('Backup files (store on server)') ); ?>" class="btn btn-submit" />
+                                <input type="button" id="backup_sql" onclick="javascript:submitForm(this.form, 'sql');" value="<?php echo osc_esc_html(__('Backup SQL (store on server)')); ?>" class="btn btn-submit" />
+                                <input type="button" id="backup_sql_file" onclick="javascript:submitForm(this.form, 'sql_file');" value="<?php echo osc_esc_html(__('Backup SQL (download file)')); ?>" class="btn btn-submit" />
+                                <input type="button" id="backup_zip" onclick="javascript:submitForm(this.form, 'zip');" value="<?php echo osc_esc_html(__('Backup files (store on server)')); ?>" class="btn btn-submit" />
                             </div>
                         </div>
                         </fieldset>
@@ -82,4 +90,4 @@
                 </div>
                 <!-- /settings form -->
 </div>
-<?php osc_current_admin_theme_path( 'parts/footer.php' ); ?>
+<?php osc_current_admin_theme_path('parts/footer.php'); ?>

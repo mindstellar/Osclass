@@ -20,7 +20,7 @@
         <link rel="apple-touch-icon-precomposed" href="../images/favicon-57.png">
         <style>
         #content{
-        	margin:0;
+            margin:0;
         }
         </style>
     </head>
@@ -30,15 +30,15 @@
 
     <div id="content">
         <div id="content-render">
-			<div id="content-head">
-			    <h1 class="guideline">Osclass Guideline</h1>
-			</div>
+            <div id="content-head">
+                <h1 class="guideline">Osclass Guideline</h1>
+            </div>
             <?php include "parts/menu.php"; ?>
-			<div id="content-page">
+            <div id="content-page">
                     <?php include 'parts/layout.php'; ?>
                     <?php include "parts/grid.php"; ?>
-			</div>
-    	</div><!-- #content-render -->
+            </div>
+        </div><!-- #content-render -->
         <div id="footer">
         </div>
     </div><!-- #content -->

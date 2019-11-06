@@ -2,90 +2,94 @@
 
     require_once '../../vendor/autoload.php';
 
-	/**
-	 * @param $value
-	 * @param $xss_check
-	 *
-	 * @return mixed
-	 */
-	function _purify( $value , $xss_check ) {
-		if ( ! $xss_check ) {
-			return $value;
-		}
+    /**
+     * @param $value
+     * @param $xss_check
+     *
+     * @return mixed
+     */
+function _purify($value, $xss_check)
+{
+    if (! $xss_check) {
+        return $value;
+    }
 
-		$_config = HTMLPurifier_Config::createDefault();
-		$_config->set( 'HTML.Allowed' , '' );
-		$_config->set( 'Cache.SerializerPath' , dirname( dirname( dirname( __DIR__ ) ) ) . '/oc-content/uploads/' );
+    $_config = HTMLPurifier_Config::createDefault();
+    $_config->set('HTML.Allowed', '');
+    $_config->set('Cache.SerializerPath', dirname(dirname(dirname(__DIR__))) . '/oc-content/uploads/');
 
-		$_purifier = new HTMLPurifier( $_config );
-
-
-		if ( is_array( $value ) ) {
-			foreach ( $value as $k => &$v ) {
-				$v = _purify( $v , $xss_check ); // recursive
-			}
-		} else {
-			$value = $_purifier->purify( $value );
-		}
-
-		return $value;
-	}
+    $_purifier = new HTMLPurifier($_config);
 
 
-	/**
-	 * @param      $param
-	 * @param bool $htmlencode
-	 * @param bool $xss_check
-	 * @param bool $quotes_encode
-	 *
-	 * @return string
-	 */
-	function getServerParam( $param , $htmlencode = false , $xss_check = true , $quotes_encode = true ) {
-		if ( $param == '' ) {
-			return '';
-		}
-		if ( ! isset( $_SERVER[ $param ] ) ) {
-			return '';
-		}
-		$value = _purify( $_SERVER[ $param ] , $xss_check );
-		if ( $htmlencode ) {
-			if ( $quotes_encode ) {
-				return htmlspecialchars( stripslashes( $value ) , ENT_QUOTES );
-			} else {
-				return htmlspecialchars( stripslashes( $value ) , ENT_NOQUOTES );
-			}
-		}
+    if (is_array($value)) {
+        foreach ($value as $k => &$v) {
+            $v = _purify($v, $xss_check); // recursive
+        }
+    } else {
+        $value = $_purifier->purify($value);
+    }
 
-		if ( get_magic_quotes_gpc() ) {
-			$value = strip_slashes_extended( $value );
-		}
-
-		return $value;
-	}
+    return $value;
+}
 
 
-	/**
-	 * @return bool|string
-	 */
-	function osc_getRelativeWebURL() {
-		$url = getServerParam( 'REQUEST_URI' , false , false );
-		$pos = strpos( $url , '/oc-includes' );
+    /**
+     * @param      $param
+     * @param bool $htmlencode
+     * @param bool $xss_check
+     * @param bool $quotes_encode
+     *
+     * @return string
+     */
+function getServerParam($param, $htmlencode = false, $xss_check = true, $quotes_encode = true)
+{
+    if ($param == '') {
+        return '';
+    }
+    if (! isset($_SERVER[ $param ])) {
+        return '';
+    }
+    $value = _purify($_SERVER[ $param ], $xss_check);
+    if ($htmlencode) {
+        if ($quotes_encode) {
+            return htmlspecialchars(stripslashes($value), ENT_QUOTES);
+        } else {
+            return htmlspecialchars(stripslashes($value), ENT_NOQUOTES);
+        }
+    }
 
-		return substr( $url , 0 , strpos( $url , '/oc-includes' ) );
-	}
+    if (get_magic_quotes_gpc()) {
+        $value = strip_slashes_extended($value);
+    }
+
+    return $value;
+}
 
 
-	/**
-	 * @return string
-	 */
-	function osc_getAbsoluteWebURL() {
-		$protocol = 'http';
-		if ( ( isset( $_SERVER[ 'HTTP_X_FORWARDED_PROTO' ] ) && strtolower( $_SERVER[ 'HTTP_X_FORWARDED_PROTO' ] ) === 'https' ) || ( isset( $_SERVER[ 'HTTPS' ] ) && ( $_SERVER[ 'HTTPS' ] === 'on' || $_SERVER[ 'HTTPS' ] == 1 ) ) ) {
-			$protocol = 'https';
-		}
+    /**
+     * @return bool|string
+     */
+function osc_getRelativeWebURL()
+{
+    $url = getServerParam('REQUEST_URI', false, false);
+    $pos = strpos($url, '/oc-includes');
 
-		return $protocol . '://' . getServerParam( 'HTTP_HOST' ) . osc_getRelativeWebURL();
-	}
+    return substr($url, 0, strpos($url, '/oc-includes'));
+}
+
+
+    /**
+     * @return string
+     */
+function osc_getAbsoluteWebURL()
+{
+    $protocol = 'http';
+    if (( isset($_SERVER[ 'HTTP_X_FORWARDED_PROTO' ]) && strtolower($_SERVER[ 'HTTP_X_FORWARDED_PROTO' ]) === 'https' ) || ( isset($_SERVER[ 'HTTPS' ]) && ( $_SERVER[ 'HTTPS' ] === 'on' || $_SERVER[ 'HTTPS' ] == 1 ) )) {
+        $protocol = 'https';
+    }
+
+    return $protocol . '://' . getServerParam('HTTP_HOST') . osc_getRelativeWebURL();
+}
 
 
 ?>

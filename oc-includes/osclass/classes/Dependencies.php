@@ -4,7 +4,8 @@
  *
  * @since 3.1.1
  */
-class Dependencies {
+class Dependencies
+{
 
     public $registered   = array();
     public $queue        = array();
@@ -26,8 +27,9 @@ class Dependencies {
      * @param $url
      * @param $dependencies mixed, it could be an array or a string
      */
-    public function register($id, $url, $dependencies) {
-        if($id!='' && $url!='') {
+    public function register($id, $url, $dependencies)
+    {
+        if ($id!='' && $url!='') {
             $this->registered[$id] = array(
                 'key' => $id
             ,'url' => $url
@@ -55,10 +57,10 @@ class Dependencies {
         $this->unresolved   = array();
         $this->error        = array();
 
-        foreach($this->queue as $queue) {
-            if(isset($this->registered[$queue])) {
+        foreach ($this->queue as $queue) {
+            if (isset($this->registered[$queue])) {
                 $node = $this->registered[$queue];
-                if($node['dependencies']==null) {
+                if ($node['dependencies']==null) {
                     $this->resolved[$node['key']] = $node['key'];
                 } else {
                     $this->solveDeps($node);
@@ -67,8 +69,8 @@ class Dependencies {
                 $this->error[$queue] = $queue;
             }
         }
-        if(!empty($this->error)) {
-            echo sprintf(__('ERROR: Some dependencies could not be loaded (%s)'), implode( ', ' , $this->error));
+        if (!empty($this->error)) {
+            echo sprintf(__('ERROR: Some dependencies could not be loaded (%s)'), implode(', ', $this->error));
         }
     }
 
@@ -80,17 +82,17 @@ class Dependencies {
     private function solveDeps($node)
     {
         $error = false;
-        if(!isset($this->resolved[$node['key']])) {
+        if (!isset($this->resolved[$node['key']])) {
             $this->unresolved[$node['key']] = $node['key'];
-            if($node['dependencies']!=null) {
-                if(is_array($node['dependencies'])) {
-                    foreach($node['dependencies'] as $dep) {
-                        if(!in_array($dep, $this->resolved)) {
-                            if(in_array($dep, $this->unresolved)) {
+            if ($node['dependencies']!=null) {
+                if (is_array($node['dependencies'])) {
+                    foreach ($node['dependencies'] as $dep) {
+                        if (!in_array($dep, $this->resolved)) {
+                            if (in_array($dep, $this->unresolved)) {
                                 $this->error[$dep] = $dep;
                                 $error = true;
                             } else {
-                                if(isset($this->registered[$dep])) {
+                                if (isset($this->registered[$dep])) {
                                     $this->solveDeps($this->registered[$dep]);
                                 } else {
                                     $this->error[$dep] = $dep;
@@ -99,12 +101,12 @@ class Dependencies {
                         }
                     }
                 } else {
-                    if(!in_array($node['dependencies'], $this->resolved)) {
-                        if(in_array($node['dependencies'], $this->unresolved)) {
+                    if (!in_array($node['dependencies'], $this->resolved)) {
+                        if (in_array($node['dependencies'], $this->unresolved)) {
                             $this->error[$node['dependencies']] = $node['dependencies'];
                             $error = true;
                         } else {
-                            if(isset($this->registered[$node['dependencies']])) {
+                            if (isset($this->registered[$node['dependencies']])) {
                                 $this->solveDeps($this->registered[$node['dependencies']]);
                             } else {
                                 $this->error[$node['dependencies']] = $node['dependencies'];
@@ -113,7 +115,7 @@ class Dependencies {
                     }
                 }
             }
-            if(!$error) {
+            if (!$error) {
                 $this->resolved[$node['key']] = $node['key'];
                 unset($this->unresolved[$node['key']]);
             }

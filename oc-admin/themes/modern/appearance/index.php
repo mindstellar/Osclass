@@ -1,4 +1,6 @@
-<?php if ( ! defined('OC_ADMIN')) exit('Direct access is not allowed.');
+<?php if (! defined('OC_ADMIN')) {
+    exit('Direct access is not allowed.');
+}
 /*
  * Copyright 2014 Osclass
  *
@@ -22,14 +24,16 @@
     $info   = WebThemes::newInstance()->loadThemeInfo(osc_theme());
 
     //customize Head
-    function customHead() { ?>
+function customHead()
+{
+    ?>
         <script type="text/javascript">
             $(document).ready(function() {
                 // dialog delete
                 $("#dialog-delete-theme").dialog({
                     autoOpen: false,
                     modal: true,
-                    title: '<?php echo osc_esc_js( __('Delete theme') ); ?>'
+                    title: '<?php echo osc_esc_js(__('Delete theme')); ?>'
                 });
             });
 
@@ -41,29 +45,33 @@
             }
         </script>
         <?php
-    }
-    osc_add_hook('admin_header','customHead', 10);
+}
+    osc_add_hook('admin_header', 'customHead', 10);
 
-    function addHelp() {
-        echo '<p>' . __("Change your site's look and feel by activating a theme among those available. <strong>Be careful</strong>: if your theme has been customized, you'll lose all changes if you change to a new theme."). '</p>';
-    }
-    osc_add_hook('help_box','addHelp');
+function addHelp()
+{
+    echo '<p>' . __("Change your site's look and feel by activating a theme among those available. <strong>Be careful</strong>: if your theme has been customized, you'll lose all changes if you change to a new theme."). '</p>';
+}
+    osc_add_hook('help_box', 'addHelp');
 
-    osc_add_hook('admin_page_header','customPageHeader');
-    function customPageHeader(){ ?>
+    osc_add_hook('admin_page_header', 'customPageHeader');
+function customPageHeader()
+{
+    ?>
         <h1><?php _e('Appearance'); ?>
             <a href="#" class="btn ico ico-32 ico-help float-right"></a>
             <a href="<?php echo osc_admin_base_url(true); ?>?page=appearance&amp;action=add" class="btn btn-green ico ico-32 ico-add-white float-right"><?php _e('Add theme'); ?></a>
         </h1>
     <?php
-    }
+}
 
-    function customPageTitle($string) {
-        return sprintf(__('Appearance &raquo; %s'), $string);
-    }
+function customPageTitle($string)
+{
+    return sprintf(__('Appearance &raquo; %s'), $string);
+}
     osc_add_filter('admin_title', 'customPageTitle');
 
-    osc_current_admin_theme_path( 'parts/header.php' ); ?>
+    osc_current_admin_theme_path('parts/header.php'); ?>
 <div id="appearance-page">
     <!-- themes list -->
     <div class="appearance">
@@ -87,16 +95,16 @@
                 </div>
                 <h2 class="render-title"><?php _e('Available themes'); ?></h2>
                 <div class="available-theme">
-                    <?php $aThemesToUpdate = json_decode( osc_get_preference('themes_to_update') );
+                    <?php $aThemesToUpdate = json_decode(osc_get_preference('themes_to_update'));
                     $bThemesToUpdate = (is_array($aThemesToUpdate))?true:false;
                     $csrf_token = osc_csrf_token_url();
-                    foreach($themes as $theme) { ?>
-                    <?php
-                            if( $theme == osc_theme() ) {
-                                continue;
-                            }
+                    foreach ($themes as $theme) { ?>
+                        <?php
+                        if ($theme == osc_theme()) {
+                            continue;
+                        }
                             $info = WebThemes::newInstance()->loadThemeInfo($theme);
-                    ?>
+                        ?>
                     <div class="theme">
                         <div class="theme-stage">
                             <img src="<?php echo osc_base_url(); ?>/oc-content/themes/<?php echo $theme; ?>/screenshot.png" title="<?php echo $info['name']; ?>" alt="<?php echo $info['name']; ?>" />
@@ -105,11 +113,11 @@
                                 <a target="_blank" href="<?php echo osc_base_url(true); ?>?theme=<?php echo $theme; ?>" class="btn btn-mini btn-blue"><?php _e('Preview'); ?></a>
                                 <a onclick="return delete_dialog('<?php echo $theme; ?>');" href="<?php echo osc_admin_base_url(true); ?>?page=appearance&amp;action=delete&amp;webtheme=<?php echo $theme; ?>&amp;<?php echo $csrf_token; ?>" class="btn btn-mini float-right delete"><?php _e('Delete'); ?></a>
                                 <?php
-                                if($bThemesToUpdate) {
-                                    if(in_array($theme,$aThemesToUpdate )){
-                                    ?>
+                                if ($bThemesToUpdate) {
+                                    if (in_array($theme, $aThemesToUpdate)) {
+                                        ?>
                                     <a href='#<?php echo htmlentities(@$info['theme_update_uri']); ?>' class="btn btn-mini btn-orange market-popup"><?php _e("Update"); ?></a>
-                                <?php };
+                                    <?php };
                                 }; ?>
                             </div>
                         </div>
@@ -174,7 +182,7 @@
         <div class="form-actions">
             <div class="wrapper">
             <a class="btn" href="javascript:void(0);" onclick="$('#dialog-delete-theme').dialog('close');"><?php _e('Cancel'); ?></a>
-            <input id="delete-theme-submit" type="submit" value="<?php echo osc_esc_html( __('Uninstall') ); ?>" class="btn btn-red" />
+            <input id="delete-theme-submit" type="submit" value="<?php echo osc_esc_html(__('Uninstall')); ?>" class="btn btn-red" />
             </div>
         </div>
     </div>
@@ -224,11 +232,11 @@
                     $("#market_author").text(data.s_contact_name);
                     $("#market_url").attr('href',data.s_source_file);
 
-                    $('#market_install').text("<?php echo osc_esc_js( __('Update') ); ?>");
+                    $('#market_install').text("<?php echo osc_esc_js(__('Update')); ?>");
 
                     $('#market_installer').dialog({
                         modal:true,
-                        title: '<?php echo osc_esc_js( __('Osclass Market') ); ?>',
+                        title: '<?php echo osc_esc_js(__('Osclass Market')); ?>',
                         width:485
                     });
                 }
@@ -238,4 +246,4 @@
         return false;
     });
 </script>
-<?php osc_current_admin_theme_path( 'parts/footer.php' ); ?>
+<?php osc_current_admin_theme_path('parts/footer.php'); ?>

@@ -1,4 +1,6 @@
-<?php if ( ! defined('OC_ADMIN')) exit('Direct access is not allowed.');
+<?php if (! defined('OC_ADMIN')) {
+    exit('Direct access is not allowed.');
+}
 /*
  * Copyright 2014 Osclass
  *
@@ -21,21 +23,25 @@
     $categories = __get('categories');
     $selected   = __get('default_selected');
 
-    function addHelp() {
-        echo '<p>' . __('Create new fields for users to fill out when they publish a listing. You can require extra  information such as the number of bedrooms in real estate listings or fuel type in car listings, for example.') . '</p>';
-    }
-    osc_add_hook('help_box','addHelp');
+function addHelp()
+{
+    echo '<p>' . __('Create new fields for users to fill out when they publish a listing. You can require extra  information such as the number of bedrooms in real estate listings or fuel type in car listings, for example.') . '</p>';
+}
+    osc_add_hook('help_box', 'addHelp');
 
-    function customPageHeader(){ ?>
+function customPageHeader()
+{
+    ?>
         <h1><?php _e('Listing'); ?>
             <a href="#" class="btn ico ico-32 ico-help float-right"></a>
             <a href="#" class="btn btn-green ico ico-32 ico-add-white float-right" id="add-button"><?php _e('Add custom field'); ?></a>
         </h1>
-<?php
+    <?php
 }
-osc_add_hook('admin_page_header','customPageHeader');
+osc_add_hook('admin_page_header', 'customPageHeader');
 //customize Head
-function customHead() {
+function customHead()
+{
     $csrf_token = osc_csrf_token_url(); ?>
 <script type="text/javascript">
     function show_iframe(class_name, id) {
@@ -112,7 +118,7 @@ function customHead() {
                 },
                 error: function(){
                     $(".jsMessage").css('display', 'block');
-                    $(".jsMessage p").html('<?php echo osc_esc_js( __("Ajax error, try again.") ); ?>');
+                    $(".jsMessage p").html('<?php echo osc_esc_js(__("Ajax error, try again.")); ?>');
                 }
             });
             $('#dialog-delete-field').dialog('close');
@@ -175,11 +181,12 @@ function customHead() {
 </script>
     <?php
 }
-    osc_add_hook('admin_header','customHead', 10);
+    osc_add_hook('admin_header', 'customHead', 10);
 
-    function customPageTitle($string) {
-        return sprintf(__('Custom fields &raquo; %s'), $string);
-    }
+function customPageTitle($string)
+{
+    return sprintf(__('Custom fields &raquo; %s'), $string);
+}
     osc_add_filter('admin_title', 'customPageTitle');
 
     osc_current_admin_theme_path('parts/header.php');
@@ -193,10 +200,10 @@ function customHead() {
     <div class="list-fields">
         <ul id="ul_fields">
         <?php $even = true;
-        if( count($fields) == 0 ) { ?>
+        if (count($fields) == 0) { ?>
             <span id="fields-empty"><?php _e("You don't have any custom fields yet"); ?></span>
         <?php } else {
-            foreach($fields as $field) { ?>
+            foreach ($fields as $field) { ?>
                 <li id="list_<?php echo $field['pk_i_id']; ?>" class="field_li <?php echo ( $even ? 'even' : 'odd' ); ?>">
                     <div class="cfield-div" field_id="<?php echo $field['pk_i_id']; ?>" >
                         <div class="name-edit-cfield" id="<?php echo "quick_edit_" . $field['pk_i_id']; ?>">
@@ -210,7 +217,8 @@ function customHead() {
                         <div class="edit content_list_<?php echo $field['pk_i_id']; ?>"></div>
                     </div>
                 </li>
-                <?php $even = !$even; }
+                <?php $even = !$even;
+            }
         } ?>
         </ul>
     </div>
@@ -226,7 +234,7 @@ function customHead() {
         <div class="form-actions">
             <div class="wrapper">
                 <a class="btn" href="javascript:void(0);" onclick="$('#dialog-delete-field').dialog('close');"><?php _e('Cancel'); ?></a>
-                <a id="field-delete-submit" href="javascript:void(0);" class="btn btn-red" ><?php echo osc_esc_html( __('Delete') ); ?></a>
+                <a id="field-delete-submit" href="javascript:void(0);" class="btn btn-red" ><?php echo osc_esc_html(__('Delete')); ?></a>
                 <div class="clear"></div>
             </div>
         </div>

@@ -1,4 +1,6 @@
-<?php if ( ! defined('OC_ADMIN')) exit('Direct access is not allowed.');
+<?php if (! defined('OC_ADMIN')) {
+    exit('Direct access is not allowed.');
+}
 /*
  * Copyright 2014 Osclass
  *
@@ -15,27 +17,33 @@
  * limitations under the License.
  */
 
-    function addHelp() {
-        echo '<p>' . __("Add new currencies or edit existing currencies so users can publish listings in their country's currency.") . '</p>';
-    }
-    osc_add_hook('help_box','addHelp');
+function addHelp()
+{
+    echo '<p>' . __("Add new currencies or edit existing currencies so users can publish listings in their country's currency.") . '</p>';
+}
+    osc_add_hook('help_box', 'addHelp');
 
-    function customPageHeader(){ ?>
+function customPageHeader()
+{
+    ?>
         <h1><?php _e('Settings'); ?>
             <a href="#" class="btn ico ico-32 ico-help float-right"></a>
             <a href="<?php echo osc_admin_base_url(true).'?page=settings&action=currencies&type=add'; ?>" class="btn btn-green ico ico-32 ico-add-white float-right"><?php _e('Add'); ?></a>
         </h1>
-<?php
-    }
-    osc_add_hook('admin_page_header','customPageHeader');
+    <?php
+}
+    osc_add_hook('admin_page_header', 'customPageHeader');
 
-    function customPageTitle($string) {
-        return sprintf(__('Currencies &raquo; %s'), $string);
-    }
+function customPageTitle($string)
+{
+    return sprintf(__('Currencies &raquo; %s'), $string);
+}
     osc_add_filter('admin_title', 'customPageTitle');
 
     //customize Head
-    function customHead() { ?>
+function customHead()
+{
+    ?>
         <script type="text/javascript">
 
             $(document).ready(function(){
@@ -96,27 +104,27 @@
             }
         </script>
         <?php
-    }
-    osc_add_hook('admin_header','customHead', 10);
+}
+    osc_add_hook('admin_header', 'customHead', 10);
 
     $aCurrencies = __get('aCurrencies');
 
     $aData = array();
-    foreach($aCurrencies as $currency) {
-        $row = array();
-        $row[] = '<input type="checkbox" name="code[]" value="' . osc_esc_html($currency['pk_c_code']) . '" />';
+foreach ($aCurrencies as $currency) {
+    $row = array();
+    $row[] = '<input type="checkbox" name="code[]" value="' . osc_esc_html($currency['pk_c_code']) . '" />';
 
-        $options   = array();
-        $options[] = '<a onclick="return delete_dialog(\'' . $currency['pk_c_code'] . '\');" href="' . osc_admin_base_url(true) . '?page=settings&amp;action=currencies&amp;type=delete&amp;code=' . $currency['pk_c_code'] . '">' . __('Delete') . '</a>';
-        $options[] = '<a href="' . osc_admin_base_url(true) . '?page=settings&amp;action=currencies&amp;type=edit&amp;code=' . $currency['pk_c_code'] . '">' . __('Edit') . '</a>';
+    $options   = array();
+    $options[] = '<a onclick="return delete_dialog(\'' . $currency['pk_c_code'] . '\');" href="' . osc_admin_base_url(true) . '?page=settings&amp;action=currencies&amp;type=delete&amp;code=' . $currency['pk_c_code'] . '">' . __('Delete') . '</a>';
+    $options[] = '<a href="' . osc_admin_base_url(true) . '?page=settings&amp;action=currencies&amp;type=edit&amp;code=' . $currency['pk_c_code'] . '">' . __('Edit') . '</a>';
 
-        $row[] = $currency['pk_c_code'] . ' (' . implode(' &middot; ', $options) . ')';
-        $row[] = $currency['s_name'];
-        $row[] = $currency['s_description'];
-        $aData[] = $row;
-    }
+    $row[] = $currency['pk_c_code'] . ' (' . implode(' &middot; ', $options) . ')';
+    $row[] = $currency['s_name'];
+    $row[] = $currency['s_description'];
+    $aData[] = $row;
+}
 
-    osc_current_admin_theme_path( 'parts/header.php' ); ?>
+    osc_current_admin_theme_path('parts/header.php'); ?>
 <h2 class="render-title"><?php _e('Currencies'); ?> <a href="<?php echo osc_admin_base_url(true); ?>?page=settings&action=currencies&type=add" class="btn btn-mini"><?php _e('Add new'); ?></a></h2>
 <div class="relative">
     <div id="currencies-toolbar" class="table-toolbar">
@@ -130,7 +138,7 @@
                 <select id="bulk_actions" name="bulk_actions" class="select-box-extra">
                     <option value=""><?php _e('Bulk actions'); ?></option>
                     <option value="delete_all" data-dialog-content="<?php printf(__('Are you sure you want to %s the selected currencies?'), strtolower(__('Delete'))); ?>"><?php _e('Delete'); ?></option>
-                </select> <input type="submit" id="bulk_apply" class="btn" value="<?php echo osc_esc_html( __('Apply') ); ?>" />
+                </select> <input type="submit" id="bulk_apply" class="btn" value="<?php echo osc_esc_html(__('Apply')); ?>" />
             </label>
         </div>
         <table class="table" cellpadding="0" cellspacing="0">
@@ -143,10 +151,10 @@
                 </tr>
             </thead>
             <tbody>
-            <?php foreach( $aData as $array ) { ?>
+            <?php foreach ($aData as $array) { ?>
                 <tr>
-                <?php foreach( $array as $key => $value ) { ?>
-                    <?php if( $key == 0 ) { ?>
+                <?php foreach ($array as $key => $value) { ?>
+                    <?php if ($key == 0) { ?>
                     <td class="col-bulkactions">
                     <?php } else { ?>
                     <td>
@@ -172,7 +180,7 @@
         <div class="form-actions">
             <div class="wrapper">
             <a class="btn" href="javascript:void(0);" onclick="$('#dialog-currency-delete').dialog('close');"><?php _e('Cancel'); ?></a>
-            <input id="currency-delete-submit" type="submit" value="<?php echo osc_esc_html( __('Delete') ); ?>" class="btn btn-red" />
+            <input id="currency-delete-submit" type="submit" value="<?php echo osc_esc_html(__('Delete')); ?>" class="btn btn-red" />
             </div>
         </div>
     </div>
@@ -183,10 +191,10 @@
         <div class="form-actions">
             <div class="wrapper">
                 <a id="bulk-actions-cancel" class="btn" href="javascript:void(0);"><?php _e('Cancel'); ?></a>
-                <a id="bulk-actions-submit" href="javascript:void(0);" class="btn btn-red" ><?php echo osc_esc_html( __('Delete') ); ?></a>
+                <a id="bulk-actions-submit" href="javascript:void(0);" class="btn btn-red" ><?php echo osc_esc_html(__('Delete')); ?></a>
                 <div class="clear"></div>
             </div>
         </div>
     </div>
 </div>
-<?php osc_current_admin_theme_path( 'parts/footer.php' ); ?>
+<?php osc_current_admin_theme_path('parts/footer.php'); ?>
