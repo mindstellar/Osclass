@@ -9,8 +9,6 @@
 
 	<arg value="ps" />
 	<arg name="report" value="summary" />
-	<arg name="report-full" value="./logs/phpcs-full.txt" />
-	<arg name="report-checkstyle" value="./xsl-template/phpcs-checkstyle.xml" />
 	<arg name="extensions" value="php,inc,js,css,lib/php" />
 	<ini name="memory_limit" value="128M" />
 
