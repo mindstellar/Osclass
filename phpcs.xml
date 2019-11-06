@@ -5,7 +5,7 @@
 
 	<!-- Exclude Composer vendor directory. -->
 	<exclude-pattern>*/vendor/*</exclude-pattern>
-	<exclude-pattern phpcbf-only="true">*/3rdparty/*</exclude-pattern>
+	<exclude-pattern>*/oc-content/*</exclude-pattern>
 
 	<arg value="ps" />
 	<arg name="report" value="summary" />
