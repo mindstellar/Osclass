@@ -26,13 +26,13 @@ $> git clone --recursive git@github.com:navjottomer/Osclass.git
 Want to help create a pull request from you clone, just make sure of few things
 
 * Never target master-branch
-* Target develop branch if you wan't to merger your fixes.
+* Target develop branch if you wan't to merge your fixes.
 * Request a feature branch if your pull request change the functionality of our project.
 * Create a new issue before making any pull request.  
 
 ## Project info
 
-* Documentation: [Documentation] [documentation]
+* Documentation: [Documentation][documentation]
 * License: [Apache License V2.0][license]
 
 
