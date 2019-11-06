@@ -18,8 +18,6 @@ matrix:
         - php: '7.0'
         # aliased to a recent 7.1 version
         - php: '7.1'
-        # Disable for now.
-        #- env: SNIFF=1
         # aliased to a recent 7.2 version
         - php: '7.2'
         # aliased to a recent 7.3 version
