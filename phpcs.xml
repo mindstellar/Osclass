@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 
 <ruleset name="MyProject">
-	<description>Coding Standard for MyProject.</description>
+	<description>Coding Standard for PSR OSClass.</description>
 
 	<!-- Exclude Composer vendor directory. -->
 	<exclude-pattern>*/vendor/*</exclude-pattern>
@@ -22,12 +22,12 @@
 	<config name="testVersion" value="5.3-99.0"/>
 	<rule ref="PHPCompatibility">
 		<!-- Verified correct usage. -->
-		<exclude name="PHPCompatibility.PHP.DeprecatedIniDirectives.safe_modeRemoved">
+		<exclude name="PHPCompatibility.PHP.DeprecatedIniDirectives.safe_modeRemoved" />
 	</rule>
 
 	<!-- Verified correct usage. -->
 	<rule ref="PHPCompatibility.PHP.DeprecatedIniDirectives.magic_quotes_runtimeRemoved">
-		<exclude-pattern>*/MyFile.php</exclude-pattern>
+		<!-- <exclude-pattern>*/MyFile.php</exclude-pattern> -->
 	</rule>
 
 	<rule ref="Generic.Metrics.NestingLevelSniff" />
