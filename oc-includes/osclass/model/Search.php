@@ -1105,7 +1105,7 @@
             }
 
 	        if ( $extended ) {
-                return Item::newInstance()->extendData($items);
+                return Item::newInstance()->extendData($items,true);
             } else {
                 return $items;
             }
@@ -1135,7 +1135,7 @@
                 foreach($items as $item) {
                     $mStat->increase('i_num_premium_views', $item['pk_i_id']);
                 }
-                return Item::newInstance()->extendData($items);
+                return Item::newInstance()->extendData($items,true);
             } else {
                 return array();
             }
