@@ -25,11 +25,6 @@
 		<exclude name="PHPCompatibility.PHP.DeprecatedIniDirectives.safe_modeRemoved" />
 	</rule>
 
-	<!-- Verified correct usage. -->
-	<rule ref="PHPCompatibility.PHP.DeprecatedIniDirectives.magic_quotes_runtimeRemoved">
-		<!-- <exclude-pattern>*/MyFile.php</exclude-pattern> -->
-	</rule>
-
 	<rule ref="Generic.Metrics.NestingLevelSniff" />
 	
 	<rule ref="PEAR.Commenting" />
