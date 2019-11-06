@@ -9,7 +9,7 @@
 
 	<arg value="ps" />
 	<arg name="report" value="summary" />
-	<arg name="extensions" value="php,inc,js,css,lib/php" />
+	<arg name="extensions" value="php,lib/php" />
 	<ini name="memory_limit" value="128M" />
 
 	<rule ref="PSR1" />
