@@ -19,7 +19,7 @@ body.has-searchbox #header{
     width: 728px;
     margin-left: auto;
     margin-right: auto;
-    padding:10px 0px 10px 0px;
+    padding:10px 0;
 }
 #header #logo{
     $contrasted-lightness-threshold:65%;
@@ -68,7 +68,7 @@ body.has-searchbox #header{
     border: solid 1px #989393;
     margin:0 auto;
 
-    box-shadow: inset 0px 1px 1px 0px #ffffff,0px 2px 2px 0px rgba( black, .2 );
+    box-shadow: inset 0 1px 1px 0 #ffffff,0 2px 2px 0 rgba( black, .2 );
 
     position: relative;
     margin-top:15px;
@@ -89,7 +89,7 @@ body.has-searchbox #header{
     padding-right:12px;
 }
 .main-search .reset-padding{
-    padding-left:0px;
+    padding-left:0;
 }
 .main-search .ui-button{
     //@include button- (red);
@@ -141,7 +141,7 @@ body.has-searchbox #header{
     height: 42px;
 }
 .main-search .select-box-icon{
-    top:0px;
+    top:0;
 }
 
 

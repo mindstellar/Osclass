@@ -26,7 +26,7 @@
     width: 100%;
     padding-left:0;
     padding-right:0;
-    border-width: 0 0 1px 0;
+    border-width: 0 0 1px;
     @include border-bottom-radius(0);
     @include border-top-radius(0);
     display:none;
@@ -51,7 +51,7 @@
     display:none;
   }
   .main-search .reset-padding{
-      padding-left:0px;
+      padding-left:0;
   }
   #header .nav{
     top:0;

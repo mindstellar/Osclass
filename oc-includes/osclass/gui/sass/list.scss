@@ -1,6 +1,6 @@
 .r-list{
     display:none;
-    margin:0px 40px 0 0;
+    margin:0 40px 0 0;
     padding: 0;
     list-style: none;
 
@@ -56,7 +56,7 @@ div.first_cel ul{
 ul.r-list{
     li{
         h1{
-            margin:25px 0 10px 0;
+            margin:25px 0 10px;
             padding:0;
             font-size: 1em;
             overflow: hidden;
@@ -169,7 +169,7 @@ li.listing-card.premium{
 }
 .listing-grid{
     .last{
-        margin-right:0px;
+        margin-right:0;
     }
     .listing-card{
         float: left;
@@ -233,7 +233,7 @@ li.listing-card.premium{
 }
 
 body.search .listing-grid .last{
-    margin-right:0px;
+    margin-right:0;
 }
 body.search .listing-grid .listing-card{
     width: 161px;
