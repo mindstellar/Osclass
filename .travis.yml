@@ -1,0 +1,51 @@
+# Travis CI (MIT License) configuration file
+# @link https://travis-ci.org/
+
+# Use new container based environment
+sudo: false
+
+# Declare project language.
+# @link http://about.travis-ci.org/docs/user/languages/php/
+language: php
+
+# Declare versions of PHP to use. Use one decimal max.
+# @link http://docs.travis-ci.com/user/build-configuration/
+matrix:
+    fast_finish: true
+
+    include:
+        # Should upgrade if you are using this version
+        - php: '5.6'
+        # aliased to a recent 7.0 version
+        - php: '7.0'
+        # aliased to a recent 7.1 version
+        - php: '7.1'
+        # aliased to a recent 7.2 version
+        - php: '7.2'
+        # aliased to a recent 7.3 version
+        - php: '7.3'
+
+before_install:
+  - if [[ "$SNIFF" == "1" ]]; then export PHPCS_DIR=/tmp/phpcs; fi
+  - if [[ "$SNIFF" == "1" ]]; then export PHPCOMPAT_DIR=/tmp/PHPCompatibility; fi
+  # Install PHP CodeSniffer.
+  - if [[ "$SNIFF" == "1" ]]; then git clone -b master --depth 1 https://github.com/squizlabs/PHP_CodeSniffer.git $PHPCS_DIR; fi
+  # Install PHP Compatibility Standard.
+  - if [[ "$SNIFF" == "1" ]]; then git clone -b master --depth 1 https://github.com/wimg/PHPCompatibility.git $PHPCOMPAT_DIR; fi
+  # Set install path for PHP Compatibility Standard.
+  # @link https://github.com/squizlabs/PHP_CodeSniffer/wiki/Configuration-Options#setting-the-installed-standard-paths
+  - if [[ "$SNIFF" == "1" ]]; then $PHPCS_DIR/bin/phpcs --config-set installed_paths $PHPCOMPAT_DIR; fi
+  # After CodeSniffer install you should refresh your path.
+  - if [[ "$SNIFF" == "1" ]]; then phpenv rehash; fi
+
+
+# Run test script commands.
+# All commands must exit with code 0 on success. Anything else is considered failure.
+script:
+  # Search for PHP syntax errors.
+  - find -L . -name '*.php' -print0 | xargs -0 -n 1 -P 4 php -l
+  # Run PHPCS.
+  # If the custom ruleset is named `.phpcs.xml`, `phpcs.xml`, `.phpcs.xml.dist` or `phpcs.xml.dist`
+  # and, like the travis script, is in the root of the project, you can leave
+  # out the `--standard=` part of the command.
+  - if [[ "$SNIFF" == "1" ]]; then $PHPCS_DIR/bin/phpcs . ; fi
