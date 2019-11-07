@@ -1207,14 +1207,17 @@
          * @param $items
          * @return array with description extended with all available locales
          */
-        public function extendData($items)
+        public function extendData($items, $single = false)
         {
             if( OC_ADMIN ) {
                 $prefLocale = osc_current_admin_locale();
             } else {
                 $prefLocale = osc_current_user_locale();
             }
-
+            
+            if($single) {
+                return $this->singleItemsDescription($items, $prefLocale);
+            }
             $results = array();
 
             foreach ($items as $item) {
@@ -1274,6 +1277,53 @@
             }
             return $results;
         }
+            /**
+     * Extends the given array $items with description in selected locales
+     *
+     * @access public
+     * @since 3.9.0
+     * @param type $items
+     * @param type $prefLocale
+     * @return array with description extended with all selected locales
+     */
+    public function singleItemsDescription($items, $prefLocale) 
+    {
+        $results = array();
+        foreach ($items as $item) {
+            // populate locations and category_name
+            $this->dao->select(DB_TABLE_PREFIX . 't_item_location.*,id.s_title as s_title,id.s_description as s_description, cd.s_name as s_category_name');
+            // select sum item_stats
+            $this->dao->select('SUM(`s`.`i_num_views`) as `i_num_views`');
+            $this->dao->select('SUM(`s`.`i_num_spam`) as `i_num_spam`');
+            $this->dao->select('SUM(`s`.`i_num_bad_classified`) as `i_num_bad_classified`');
+            $this->dao->select('SUM(`s`.`i_num_repeated`) as `i_num_repeated`');
+            $this->dao->select('SUM(`s`.`i_num_offensive`) as `i_num_offensive`');
+            $this->dao->select('SUM(`s`.`i_num_expired`) as `i_num_expired` ');
+            $this->dao->select('SUM(`s`.`i_num_premium_views`) as `i_num_premium_views` ');
+            $this->dao->from(DB_TABLE_PREFIX . 't_item_location');
+            $this->dao->from(DB_TABLE_PREFIX . 't_category_description as cd');
+            $this->dao->from(DB_TABLE_PREFIX . 't_item_description as id');
+            $this->dao->from(DB_TABLE_PREFIX . 't_item_stats as s');
+            $this->dao->where(DB_TABLE_PREFIX . 't_item_location.fk_i_item_id', $item['pk_i_id']);
+//                $this->dao->where(DB_TABLE_PREFIX.'t_item_stats.fk_i_item_id', $item['pk_i_id']);
+            $this->dao->where('s.fk_i_item_id', $item['pk_i_id']);
+            $this->dao->where('cd.fk_i_category_id', $item['fk_i_category_id']);
+            $this->dao->where('cd.fk_c_locale_code', $prefLocale);
+            $this->dao->where('id.fk_i_item_id', $item['pk_i_id']);
+            $this->dao->where('id.fk_c_locale_code', $prefLocale);
+            // group by item_id
+            $this->dao->groupBy('fk_i_item_id');
+            $result = $this->dao->get();
+            $extraFields = $result->row();
+            $item['locale'][$prefLocale]['s_title'] = $extraFields['s_title'];
+            $item['locale'][$prefLocale]['s_description'] = $extraFields['s_description'];
+            foreach ($extraFields as $key => $value) {
+                $item[$key] = $value;
+            }
+            $results[] = $item;
+        }
+        return $results;
+    }
     }
 
     /* file end: ./oc-includes/osclass/model/Item.php */

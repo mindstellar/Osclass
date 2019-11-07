@@ -1105,7 +1105,7 @@
             }
 
 	        if ( $extended ) {
-                return Item::newInstance()->extendData($items);
+                return Item::newInstance()->extendData($items,true);
             } else {
                 return $items;
             }
