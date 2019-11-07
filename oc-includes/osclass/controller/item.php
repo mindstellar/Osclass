@@ -639,7 +639,7 @@
 
                     // redirect to the correct url just in case it has changed
                     $itemURI = str_replace(osc_base_url(), '', osc_item_url());
-                    $URI = preg_replace('|^' . REL_WEB_URL . '|', '', Params::getServerParam('REQUEST_URI', false, false));
+                    $URI = Rewrite::newInstance()->get_raw_request_uri ();
                     // do not clean QUERY_STRING if permalink is not enabled
                     if( osc_rewrite_enabled () ) {
                         $URI = str_replace('?' . Params::getServerParam('QUERY_STRING', false, false), '', $URI);
