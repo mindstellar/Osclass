@@ -856,7 +856,7 @@ CONFIG;
 
 	function display_target() {
 		require_once LIB_PATH . 'osclass/helpers/hUtils.php';
-		$country_list = osc_file_get_contents(osc_get_locations_json());
+		$country_list = osc_file_get_contents(osc_get_locations_json_url());
 		$country_list = json_decode($country_list, true);
 		$country_list = $country_list['children'];
 
