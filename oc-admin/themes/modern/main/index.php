@@ -1,4 +1,6 @@
-<?php if ( ! defined('OC_ADMIN')) exit('Direct access is not allowed.');
+<?php if ( ! defined('OC_ADMIN')) {
+    exit('Direct access is not allowed.');
+}
 /*
  * Copyright 2014 Osclass
  *
@@ -25,34 +27,40 @@
     osc_enqueue_script('fancybox');
     osc_enqueue_style('fancybox', osc_assets_url('js/fancybox/jquery.fancybox.css'));
 
-    osc_add_filter('render-wrapper','render_offset');
-    function render_offset() {
-        return 'row-offset';
-    }
-
-    osc_add_filter('admin_body_class','addBodyClass');
-    if(!function_exists('addBodyClass')){
-        function addBodyClass($array){
-            $array[] = 'dashboard';
-            return $array;
-        }
+    osc_add_filter('render-wrapper', 'render_offset');
+function render_offset()
+{
+    return 'row-offset';
 }
 
-    osc_add_hook('admin_page_header','customPageHeader');
-    function customPageHeader() { ?>
+    osc_add_filter('admin_body_class', 'addBodyClass');
+if (!function_exists('addBodyClass')) {
+    function addBodyClass($array)
+    {
+        $array[] = 'dashboard';
+        return $array;
+    }
+}
+
+    osc_add_hook('admin_page_header', 'customPageHeader');
+function customPageHeader()
+{
+    ?>
         <h1><?php _e('Dashboard'); ?></h1>
     <?php
-    }
+}
 
-    function customPageTitle($string) {
-        return sprintf(__('Dashboard &raquo; %s'), $string);
-    }
+function customPageTitle($string)
+{
+    return sprintf(__('Dashboard &raquo; %s'), $string);
+}
     osc_add_filter('admin_title', 'customPageTitle');
 
-    function customHead() {
-        $items = __get('item_stats');
-        $users = __get('user_stats');
-        ?>
+function customHead()
+{
+    $items = __get('item_stats');
+    $users = __get('user_stats');
+    ?>
         <script type="text/javascript" src="https://www.google.com/jsapi"></script>
         <script type="text/javascript">
             google.load('visualization', '1', {'packages':['corechart']});
@@ -64,15 +72,15 @@
                 data.addColumn('string', '<?php _e('Date'); ?>');
                 data.addColumn('number', '<?php _e('Listings'); ?>');
                 data.addColumn({type:'boolean',role:'certainty'});
-                <?php $k = 0;
-                echo "data.addRows(" . count($items) . ");";
-                foreach($items as $date => $num) {
-                    echo "data.setValue(" . $k . ', 0, "' . $date . '");';
-                    echo "data.setValue(" . $k . ", 1, " . $num . ");";
-                    $k++;
-                }
-                $k = 0;
-                ?>
+            <?php $k = 0;
+            echo "data.addRows(" . count($items) . ");";
+            foreach ($items as $date => $num) {
+                echo "data.setValue(" . $k . ', 0, "' . $date . '");';
+                echo "data.setValue(" . $k . ", 1, " . $num . ");";
+                $k++;
+            }
+            $k = 0;
+            ?>
 
                 // Instantiate and draw our chart, passing in some options.
                 var chart = new google.visualization.AreaChart(document.getElementById('placeholder-listing'));
@@ -121,7 +129,7 @@
                 data.addColumn({type:'boolean',role:'certainty'});
                 <?php $k = 0;
                 echo "data.addRows(" . count($users) . ");";
-                foreach($users as $date => $num) {
+                foreach ($users as $date => $num) {
                     echo "data.setValue(" . $k . ', 0, "' . $date . '");';
                     echo "data.setValue(" . $k . ", 1, " . $num . ");";
                     $k++;
@@ -181,8 +189,8 @@
                 });
             });
         </script>
-<?php
-    }
+    <?php
+}
     osc_add_hook('admin_header', 'customHead', 10);
 
     osc_current_admin_theme_path( 'parts/header.php' ); ?>
@@ -195,27 +203,39 @@
                 <div class="widget-box-content">
                     <?php
                     $countEvent = 1;
-                    if( !empty($numItemsPerCategory) ) { ?>
+                    if ( !empty($numItemsPerCategory) ) { ?>
                     <table class="table" cellpadding="0" cellspacing="0">
                         <tbody>
                         <?php
                         $even = false;
-                        foreach($numItemsPerCategory as $c) {?>
-                            <tr<?php if($even == true){ $even = false; echo ' class="even"'; } else { $even = true; } if($countEvent == 1){ echo ' class="table-first-row"';} ?>>
+                        foreach ($numItemsPerCategory as $c) {?>
+                            <tr<?php if ($even == true) {
+                                $even = false;
+                                echo ' class="even"';
+                               } else {
+                                   $even = true;
+                               } if ($countEvent == 1) {
+                                   echo ' class="table-first-row"';
+                               } ?>>
                                 <td><a href="<?php echo osc_admin_base_url(true); ?>?page=items&amp;catId=<?php echo $c['pk_i_id']; ?>"><?php echo $c['s_name']; ?></a></td>
                                 <td><?php echo $c['i_num_items'] . "&nbsp;" . ( ( $c['i_num_items'] == 1 ) ? __('Listing') : __('Listings') ); ?></td>
                             </tr>
-                            <?php foreach($c['categories'] as $subc) {?>
-                                <tr<?php if($even == true){ $even = false; echo ' class="even"'; } else { $even = true; } ?>>
+                            <?php foreach ($c['categories'] as $subc) {?>
+                                <tr<?php if ($even == true) {
+                                    $even = false;
+                                    echo ' class="even"';
+                                   } else {
+                                       $even = true;
+                                   } ?>>
                                     <td class="children-cat"><a href="<?php echo osc_admin_base_url(true); ?>?page=items&amp;catId=<?php echo $subc['pk_i_id'];?>"><?php echo $subc['s_name']; ?></a></td>
                                     <td><?php echo $subc['i_num_items'] . " " . ( ( $subc['i_num_items'] == 1 ) ? __('Listing') : __('Listings') ); ?></td>
                                 </tr>
-                            <?php
-                            $countEvent++;
+                                <?php
+                                $countEvent++;
                             }
                             ?>
-                        <?php
-                        $countEvent++;
+                            <?php
+                            $countEvent++;
                         }
                         ?>
                         </tbody>

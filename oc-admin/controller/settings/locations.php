@@ -221,8 +221,8 @@ class CAdminSettingsLocations extends AdminSecBaseModel
                                 }
                             }
 
-                            $mRegions->update(array('s_name' => $newRegion, 's_slug' => $slug)
-                                , array('pk_i_id' => $regionId));
+                            $mRegions->update(array('s_name' => $newRegion, 's_slug' => $slug),
+                                 array('pk_i_id' => $regionId));
                             ItemLocation::newInstance()->update(
                                 array('s_region' => $newRegion),
                                 array('fk_i_region_id' => $regionId)
@@ -369,8 +369,8 @@ class CAdminSettingsLocations extends AdminSecBaseModel
                             }
                         }
 
-                        $mCities->update(array('s_name' => $newCity, 's_slug' => $slug)
-                            , array('pk_i_id' => $cityId));
+                        $mCities->update(array('s_name' => $newCity, 's_slug' => $slug),
+                             array('pk_i_id' => $cityId));
                         ItemLocation::newInstance()->update(
                             array('s_city' => $newCity),
                             array('fk_i_city_id' => $cityId)

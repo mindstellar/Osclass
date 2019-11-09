@@ -31,12 +31,12 @@
      * @param string $domain
      * @return string
      */
-    function __($key, $domain = 'core')
-    {
-        $gt = Translation::newInstance()->_get();
-        $string = $gt->dgettext($domain, $key);
-        return osc_apply_filter('gettext', $string);
-    }
+function __($key, $domain = 'core')
+{
+    $gt = Translation::newInstance()->_get();
+    $string = $gt->dgettext($domain, $key);
+    return osc_apply_filter('gettext', $string);
+}
 
     /**
      * Translate strings and echo them
@@ -46,10 +46,10 @@
      * @param string $key
      * @param string $domain
      */
-    function _e($key, $domain = 'core')
-    {
-        echo __($key, $domain);
-    }
+function _e($key, $domain = 'core')
+{
+    echo __($key, $domain);
+}
 
     /**
      * Translate string (flash messages)
@@ -59,10 +59,10 @@
      * @param string $key
      * @return string
      */
-    function _m($key)
-    {
-        return __($key, 'messages');
-    }
+function _m($key)
+{
+    return __($key, 'messages');
+}
 
     /**
      * Retrieve the singular or plural translation of the string.
@@ -75,12 +75,12 @@
      * @param string $domain
      * @return string
      */
-    function _n($single_key, $plural_key, $count, $domain = 'core')
-    {
-        $gt = Translation::newInstance()->_get();
-        $string = $gt->dngettext($domain, $single_key, $plural_key, $count);
-        return osc_apply_filter('ngettext', $string);
-    }
+function _n($single_key, $plural_key, $count, $domain = 'core')
+{
+    $gt = Translation::newInstance()->_get();
+    $string = $gt->dngettext($domain, $single_key, $plural_key, $count);
+    return osc_apply_filter('ngettext', $string);
+}
 
     /**
      * Retrieve the singular or plural translation of the string.
@@ -92,9 +92,9 @@
      * @param int $count
      * @return string
      */
-    function _mn($single_key, $plural_key, $count)
-    {
-        return _n($single_key, $plural_key, $count, 'messages');
-    }
+function _mn($single_key, $plural_key, $count)
+{
+    return _n($single_key, $plural_key, $count, 'messages');
+}
 
     /* file end: ./oc-includes/osclass/helpers/hTranslations.php */

@@ -27,14 +27,16 @@ class Plugins {
     static $plugins_infos = array();
     private static $installed;
     private static $enabled;
-    public function __construct() {
+    public function __construct()
+    {
         
     }
 
     /**
      * @param $hook
      */
-    public static function runHook($hook) {
+    public static function runHook($hook)
+    {
         $args = func_get_args();
         array_shift($args);
         if (isset(self::$hooks[$hook])) {
@@ -55,7 +57,8 @@ class Plugins {
      *
      * @return mixed|string
      */
-    public static function applyFilter($hook) {
+    public static function applyFilter($hook)
+    {
         $args = func_get_args();
         $hook = array_shift($args);
         $content = '';
@@ -83,7 +86,8 @@ class Plugins {
      *
      * @return bool
      */
-    static function isInstalled($plugin) {
+    static function isInstalled($plugin)
+    {
         if (!isset(self::$installed)) {
             self::$installed = self::listInstalled();
         }
@@ -99,7 +103,8 @@ class Plugins {
      *
      * @return bool
      */
-   static function isEnabled($plugin) {
+    static function isEnabled($plugin)
+    {
         if (!isset(self::$enabled)) {
             self::$enabled = self::listEnabled();
         }
@@ -115,7 +120,8 @@ class Plugins {
      *
      * @return array
      */
-    public static function listAll($sort = true) {
+    public static function listAll($sort = true)
+    {
         $plugins = array();
         $pluginsPath = osc_plugins_path();
         $dir = opendir($pluginsPath);
@@ -170,17 +176,18 @@ class Plugins {
      *
      * @return int
      */
-    public static function strnatcmpCustom($a, $b) {
+    public static function strnatcmpCustom($a, $b)
+    {
         return strnatcasecmp($a['plugin_name'], $b['plugin_name']);
     }
 
-   static function loadActive() {
+    static function loadActive()
+    {
 
         $plugins_list = self::listEnabled();
         
         if (is_array($plugins_list) && count($plugins_list)>0) {
             foreach ($plugins_list as $plugin_name) {
-               
                 $pluginPath = PLUGINS_PATH . $plugin_name;
                 if (file_exists($pluginPath)) {
                     //This should include the file and adds the hooks
@@ -193,7 +200,8 @@ class Plugins {
     /**
      * @return array
      */
-    static function listInstalled() {
+    static function listInstalled()
+    {
         if (isset(self::$installed)) {
             return self::$installed;
         }
@@ -209,7 +217,8 @@ class Plugins {
     /**
      * @return array
      */
-    static function listEnabled() {
+    static function listEnabled()
+    {
         if (isset(self::$enabled)) {
             return self::$enabled;
         }
@@ -227,7 +236,8 @@ class Plugins {
      *
      * @return bool|mixed
      */
-    public static function findByUpdateURI($uri) {
+    public static function findByUpdateURI($uri)
+    {
         $plugins = self::listAll();
         foreach ($plugins as $p) {
             $info = self::getInfo($p);
@@ -243,7 +253,8 @@ class Plugins {
      *
      * @return bool|string
      */
-    public static function resource($path) {
+    public static function resource($path)
+    {
         $fullPath = PLUGINS_PATH . $path;
         return file_exists($fullPath) ? $fullPath : false;
     }
@@ -252,7 +263,8 @@ class Plugins {
      * @param $path
      * @param $function
      */
-    public static function register($path, $function) {
+    public static function register($path, $function)
+    {
         $path = str_replace(PLUGINS_PATH, '', $path);
         $tmp = explode('oc-content/plugins/', $path);
         if (count($tmp) == 2) {
@@ -266,10 +278,11 @@ class Plugins {
      *
      * @return array|bool
      */
-    public static function install($path) {
+    public static function install($path)
+    {
         osc_run_hook('before_plugin_install');
 
-       $plugins_list = unserialize(osc_installed_plugins());
+        $plugins_list = unserialize(osc_installed_plugins());
 
         if (is_array($plugins_list) && in_array($path, $plugins_list)) {
             return array('error_code' => 'error_installed');
@@ -309,7 +322,8 @@ class Plugins {
      *
      * @return bool
      */
-    public static function uninstall($path) {
+    public static function uninstall($path)
+    {
         osc_run_hook('before_plugin_uninstall');
 
         $plugins_list = unserialize(osc_installed_plugins());
@@ -349,7 +363,8 @@ class Plugins {
      *
      * @return bool
      */
-    public static function activate($path) {
+    public static function activate($path)
+    {
         osc_run_hook('before_plugin_activate');
 
         $plugins_list = unserialize(osc_active_plugins());
@@ -375,7 +390,8 @@ class Plugins {
      *
      * @return bool
      */
-    public static function deactivate($path) {
+    public static function deactivate($path)
+    {
         osc_run_hook('before_plugin_deactivate');
 
         $plugins_list = unserialize(osc_active_plugins());
@@ -411,7 +427,8 @@ class Plugins {
      *
      * @return mixed
      */
-    public static function isThisCategory($name, $id) {
+    public static function isThisCategory($name, $id)
+    {
         return PluginCategory::newInstance()->isThisCategory($name, $id);
     }
 
@@ -420,10 +437,11 @@ class Plugins {
      *
      * @return array
      */
-    public static function getInfo($plugin) {
-        if(isset(self::$plugins_infos[$plugin])){
+    public static function getInfo($plugin)
+    {
+        if (isset(self::$plugins_infos[$plugin])) {
              return self::$plugins_infos[$plugin];
-         }
+        }
         $s_info = file_get_contents(osc_plugins_path() . $plugin);
         $info = array();
         if (preg_match('|Plugin Name:([^\\r\\t\\n]*)|i', $s_info, $match)) {
@@ -490,7 +508,8 @@ class Plugins {
      *
      * @return bool
      */
-    public static function checkUpdate($plugin) {
+    public static function checkUpdate($plugin)
+    {
         $info = self::getInfo($plugin);
         return osc_check_plugin_update($info['plugin_update_uri'], $info['version']);
     }
@@ -498,9 +517,10 @@ class Plugins {
     /**
      * @param $path
      */
-    public static function configureView($path) {
+    public static function configureView($path)
+    {
         $plugin = str_replace(PLUGINS_PATH, '', $path);
-        if (stripos($plugin, '.php') === FALSE) {
+        if (stripos($plugin, '.php') === false) {
             $plugins_list = unserialize(osc_active_plugins());
             if (is_array($plugins_list)) {
                 foreach ($plugins_list as $p) {
@@ -518,7 +538,8 @@ class Plugins {
     /**
      * @param $plugin
      */
-    public static function cleanCategoryFromPlugin($plugin) {
+    public static function cleanCategoryFromPlugin($plugin)
+    {
         $dao_pluginCategory = new PluginCategory();
         $dao_pluginCategory->delete(array('s_plugin_name' => $plugin));
         unset($dao_pluginCategory);
@@ -528,7 +549,8 @@ class Plugins {
      * @param $categories
      * @param $plugin
      */
-    public static function addToCategoryPlugin($categories, $plugin) {
+    public static function addToCategoryPlugin($categories, $plugin)
+    {
         $dao_pluginCategory = new PluginCategory();
         $dao_category = new Category();
         if (!empty($categories)) {
@@ -561,7 +583,8 @@ class Plugins {
      * @param     $function
      * @param int $priority
      */
-    public static function addHook($hook, $function, $priority = 5) {
+    public static function addHook($hook, $function, $priority = 5)
+    {
         $hook = preg_replace('|/+|', '/', str_replace('\\', '/', $hook));
         $plugin_path = str_replace('\\', '/', osc_plugins_path());
         $hook = str_replace($plugin_path, '', $hook);
@@ -587,7 +610,8 @@ class Plugins {
      * @param $hook
      * @param $function
      */
-    public static function removeHook($hook, $function) {
+    public static function removeHook($hook, $function)
+    {
         for ($priority = 0; $priority <= 10; $priority++) {
             if (isset(self::$hooks[$hook][$priority])) {
                 foreach (self::$hooks[$hook][$priority] as $k => $v) {
@@ -599,16 +623,19 @@ class Plugins {
         }
     }
 
-    public static function getActive() {
+    public static function getActive()
+    {
         return self::$hooks;
     }
 
-    public static function reload() {
+    public static function reload()
+    {
         osc_reset_preferences();
         self::init();
     }
 
-    public static function init() {
+    public static function init()
+    {
         self::loadActive();
     }
 

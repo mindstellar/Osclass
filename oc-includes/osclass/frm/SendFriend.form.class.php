@@ -1,5 +1,5 @@
 <?php if ( ! defined( 'ABS_PATH' ) ) {
-	exit( 'ABS_PATH is not loaded. Direct access is not allowed.' );
+    exit( 'ABS_PATH is not loaded. Direct access is not allowed.' );
 }
 
 /*
@@ -18,84 +18,90 @@
  * limitations under the License.
  */
 
-	/**
-	 * Class SendFriendForm
-	 */
-	class SendFriendForm extends Form {
+    /**
+     * Class SendFriendForm
+     */
+class SendFriendForm extends Form {
 
-        /*static public function primary_input_hidden($page) {
-            parent::generic_input_hidden("id", $page["pk_i_id"]);
-        }*/
+    /*static public function primary_input_hidden($page) {
+        parent::generic_input_hidden("id", $page["pk_i_id"]);
+    }*/
 
-		/**
-		 * @return bool
-		 */
-		public static function your_name() {
+    /**
+     * @return bool
+     */
+    public static function your_name()
+    {
 
-            if( Session::newInstance()->_getForm( 'yourName' ) != '' ){
-                $yourName = Session::newInstance()->_getForm( 'yourName' );
-                parent::generic_input_text( 'yourName' , $yourName);
-            } else {
-                parent::generic_input_text( 'yourName' , '');
-            }
-            return true;
+        if ( Session::newInstance()->_getForm( 'yourName' ) != '' ) {
+            $yourName = Session::newInstance()->_getForm( 'yourName' );
+            parent::generic_input_text( 'yourName', $yourName);
+        } else {
+            parent::generic_input_text( 'yourName', '');
         }
+        return true;
+    }
 
-		/**
-		 * @return bool
-		 */
-		public static function your_email() {
+    /**
+     * @return bool
+     */
+    public static function your_email()
+    {
 
-            if( Session::newInstance()->_getForm( 'yourEmail' ) != '' ){
-                $yourEmail = Session::newInstance()->_getForm( 'yourEmail' );
-                parent::generic_input_text( 'yourEmail' , $yourEmail);
-            } else {
-                parent::generic_input_text( 'yourEmail' , '');
-            }
-            return true;
+        if ( Session::newInstance()->_getForm( 'yourEmail' ) != '' ) {
+            $yourEmail = Session::newInstance()->_getForm( 'yourEmail' );
+            parent::generic_input_text( 'yourEmail', $yourEmail);
+        } else {
+            parent::generic_input_text( 'yourEmail', '');
         }
+        return true;
+    }
 
-		/**
-		 * @return bool
-		 */
-		public static function friend_name() {
-            if( Session::newInstance()->_getForm( 'friendName' ) != '' ){
-                $friendName = Session::newInstance()->_getForm( 'friendName' );
-                parent::generic_input_text( 'friendName' , $friendName);
-            } else {
-                parent::generic_input_text( 'friendName' , '');
-            }
-            return true;
+    /**
+     * @return bool
+     */
+    public static function friend_name()
+    {
+        if ( Session::newInstance()->_getForm( 'friendName' ) != '' ) {
+            $friendName = Session::newInstance()->_getForm( 'friendName' );
+            parent::generic_input_text( 'friendName', $friendName);
+        } else {
+            parent::generic_input_text( 'friendName', '');
         }
+        return true;
+    }
 
-		/**
-		 * @return bool
-		 */
-		public static function friend_email() {
-            if( Session::newInstance()->_getForm( 'friendEmail' ) != '' ){
-                $friendEmail = Session::newInstance()->_getForm( 'friendEmail' );
-                parent::generic_input_text( 'friendEmail' , $friendEmail);
-            } else {
-                parent::generic_input_text( 'friendEmail' , '');
-            }
-            return true;
+    /**
+     * @return bool
+     */
+    public static function friend_email()
+    {
+        if ( Session::newInstance()->_getForm( 'friendEmail' ) != '' ) {
+            $friendEmail = Session::newInstance()->_getForm( 'friendEmail' );
+            parent::generic_input_text( 'friendEmail', $friendEmail);
+        } else {
+            parent::generic_input_text( 'friendEmail', '');
         }
+        return true;
+    }
 
-		/**
-		 * @return bool
-		 */
-		public static function your_message() {
-            if( Session::newInstance()->_getForm( 'message_body' ) != '' ){
-                $message_body = Session::newInstance()->_getForm( 'message_body' );
-	            parent::generic_textarea( 'message' , $message_body );
-            } else {
-                parent::generic_textarea( 'message' , '' );
-            }
-            return true;
+    /**
+     * @return bool
+     */
+    public static function your_message()
+    {
+        if ( Session::newInstance()->_getForm( 'message_body' ) != '' ) {
+            $message_body = Session::newInstance()->_getForm( 'message_body' );
+            parent::generic_textarea( 'message', $message_body );
+        } else {
+            parent::generic_textarea( 'message', '' );
         }
+        return true;
+    }
 
-        public static function js_validation() {
-?>
+    public static function js_validation()
+    {
+        ?>
 <script type="text/javascript">
     $(document).ready(function(){
         // Code for form validation
@@ -150,9 +156,9 @@
         });
     });
 </script>
-<?php
-        }
-
+        <?php
     }
+
+}
 
 ?>

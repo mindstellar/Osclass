@@ -1,4 +1,6 @@
-<?php if ( ! defined('OC_ADMIN')) exit('Direct access is not allowed.');
+<?php if ( ! defined('OC_ADMIN')) {
+    exit('Direct access is not allowed.');
+}
 /*
  * Copyright 2014 Osclass
  *
@@ -25,7 +27,9 @@
     $freeType      = array_key_exists('FreeType Support', $aGD);
 
     //customize Head
-    function customHead() { ?>
+function customHead()
+{
+    ?>
         <link rel="stylesheet" media="screen" type="text/css" href="<?php echo osc_assets_url('js/colorpicker/css/colorpicker.css'); ?>" />
         <script type="text/javascript">
             $(document).ready(function(){
@@ -136,29 +140,34 @@
             });
         </script>
         <?php
-    }
-    osc_add_hook('admin_header','customHead', 10);
+}
+    osc_add_hook('admin_header', 'customHead', 10);
 
-    function render_offset(){
-        return 'row-offset';
-    }
+function render_offset()
+{
+    return 'row-offset';
+}
 
-    function addHelp() {
-        echo '<p>' . __('Manage the options for the images users can upload along with their listings. You can limit their size, the number of images per ad, include a watermark, etc.') . '</p>';
-    }
-    osc_add_hook('help_box','addHelp');
+function addHelp()
+{
+    echo '<p>' . __('Manage the options for the images users can upload along with their listings. You can limit their size, the number of images per ad, include a watermark, etc.') . '</p>';
+}
+    osc_add_hook('help_box', 'addHelp');
 
-    osc_add_hook('admin_page_header','customPageHeader');
-    function customPageHeader(){ ?>
+    osc_add_hook('admin_page_header', 'customPageHeader');
+function customPageHeader()
+{
+    ?>
         <h1><?php _e('Settings'); ?>
             <a href="#" class="btn ico ico-32 ico-help float-right"></a>
         </h1>
     <?php
-    }
+}
 
-    function customPageTitle($string) {
-        return sprintf(__('Media Settings &raquo; %s'), $string);
-    }
+function customPageTitle($string)
+{
+    return sprintf(__('Media Settings &raquo; %s'), $string);
+}
     osc_add_filter('admin_title', 'customPageTitle');
 
     osc_current_admin_theme_path( 'parts/header.php' ); ?>
@@ -230,10 +239,12 @@
                     <div class="form-label"><?php _e('ImageMagick'); ?></div>
                     <div class="form-controls">
                         <div class="form-label-checkbox">
-                            <input type="checkbox" name="use_imagick" value="1" <?php echo ( ($imagickLoaded && osc_use_imagick())?'checked="checked"':'' ); ?> <?php if( !$imagickLoaded ) echo 'disabled="disabled"'; ?> />
+                            <input type="checkbox" name="use_imagick" value="1" <?php echo ( ($imagickLoaded && osc_use_imagick())?'checked="checked"':'' ); ?> <?php if ( !$imagickLoaded ) {
+                                echo 'disabled="disabled"';
+                                                                                } ?> />
                             <label for="use_imagick"><?php _e('Use ImageMagick instead of GD library'); ?></label>
                         </div>
-                        <?php if( !$imagickLoaded ) { ?>
+                        <?php if ( !$imagickLoaded ) { ?>
                         <div class="flashmessage flashmessage-error flashmessage-inline">
                             <p><?php _e('ImageMagick library is not loaded'); ?></p>
                         </div>
@@ -252,9 +263,9 @@
                         <div class="form-label-checkbox">
                             <input type="radio" id="watermark_text" name="watermark_type" value="text" <?php echo ( osc_is_watermark_text() ? 'checked="checked"' : '' ); ?> <?php echo ( $freeType ? '' : 'disabled="disabled"' ); ?> />
                             <label for="watermark_text"><?php _e('Text'); ?></label>
-                            <?php if( !$freeType ) { ?>
+                            <?php if ( !$freeType ) { ?>
                             <div class="flashmessage flashmessage-inline error">
-                                <p><?php printf( __('Freetype library is required. How to <a target="_blank" href="%s">install/configure</a>') , 'http://www.php.net/manual/en/image.installation.php' ); ?></p>
+                                <p><?php printf( __('Freetype library is required. How to <a target="_blank" href="%s">install/configure</a>'), 'http://www.php.net/manual/en/image.installation.php' ); ?></p>
                             </div>
                             <?php } ?>
                         </div>
@@ -297,7 +308,7 @@
                         <div class="form-label"><?php _e('Image'); ?></div>
                         <div class="form-controls">
                             <input type="file" name="watermark_image" id="watermark_image_file"/>
-                            <?php if(osc_is_watermark_image()!='') { ?>
+                            <?php if (osc_is_watermark_image()!='') { ?>
                                 <div class="help-box"><img width="100px" src="<?php echo osc_base_url() . str_replace(osc_base_path(), '', osc_uploads_path()) . "watermark.png" ?>" /></div>
                             <?php }; ?>
                             <div class="help-box"><?php _e("It has to be a .PNG image"); ?></div>

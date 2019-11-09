@@ -1,5 +1,5 @@
 <?php if ( ! defined( 'ABS_PATH' ) ) {
-	exit( 'ABS_PATH is not loaded. Direct access is not allowed.' );
+    exit( 'ABS_PATH is not loaded. Direct access is not allowed.' );
 }
 
 /*
@@ -18,26 +18,29 @@
  * limitations under the License.
  */
 
-	/**
-	 * Class AdminBaseModel
-	 */
-	class AdminBaseModel extends BaseModel
+    /**
+     * Class AdminBaseModel
+     */
+class AdminBaseModel extends BaseModel
+{
+    public function __construct()
     {
-        public function __construct()
-        {
-            parent::__construct();
-            // @deprecated: to be removed
-            osc_run_hook( 'init_admin' );
-            osc_run_hook( 'init_admin_insecure' );
-        }
-
-        public function doModel() {}
-
-		/**
-		 * @param $file
-		 */
-		public function doView( $file ) {
-		}
+        parent::__construct();
+        // @deprecated: to be removed
+        osc_run_hook( 'init_admin' );
+        osc_run_hook( 'init_admin_insecure' );
     }
+
+    public function doModel()
+    {
+    }
+
+    /**
+     * @param $file
+     */
+    public function doView($file)
+    {
+    }
+}
 
     /* file end: ./oc-includes/osclass/core/AdminBaseModel.php */

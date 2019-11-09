@@ -1,4 +1,6 @@
-<?php if ( ! defined('OC_ADMIN')) exit('Direct access is not allowed.');
+<?php if ( ! defined('OC_ADMIN')) {
+    exit('Direct access is not allowed.');
+}
 /*
  * Copyright 2014 Osclass
  *
@@ -34,7 +36,7 @@
                             <?php CategoryForm::expiration_days_input_text($category); ?>
                             <p class="help-inline"><?php _e("If the value is zero, it means this category doesn't have an expiration"); ?></p>
                             <label><?php CategoryForm::price_enabled_for_category($category); ?><span><?php _e('Enable / Disable the price field'); ?></span></label>
-                            <?php if($has_subcats) { ?>
+                            <?php if ($has_subcats) { ?>
                                 <br />
                                 <br />
                                 <label><?php CategoryForm::apply_changes_to_subcategories($category); ?><span><?php _e('Apply the expiration date and price field changes to children categories'); ?></span></label>

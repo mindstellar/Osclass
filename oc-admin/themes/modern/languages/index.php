@@ -1,4 +1,6 @@
-<?php if ( ! defined('OC_ADMIN')) exit('Direct access is not allowed.');
+<?php if ( ! defined('OC_ADMIN')) {
+    exit('Direct access is not allowed.');
+}
 /*
  * Copyright 2014 Osclass
  *
@@ -15,27 +17,33 @@
  * limitations under the License.
  */
 
-    function addHelp() {
-        echo '<p>' . __("Add, edit or delete the language in which your Osclass is displayed, both the part that's viewable by users and the admin panel.") . '</p>';
-    }
-    osc_add_hook('help_box','addHelp');
+function addHelp()
+{
+    echo '<p>' . __("Add, edit or delete the language in which your Osclass is displayed, both the part that's viewable by users and the admin panel.") . '</p>';
+}
+    osc_add_hook('help_box', 'addHelp');
 
-    function customPageHeader(){ ?>
+function customPageHeader()
+{
+    ?>
         <h1><?php _e('Settings'); ?>
             <a href="#" class="btn ico ico-32 ico-help float-right"></a>
             <a href="<?php echo osc_admin_base_url(true); ?>?page=languages&amp;action=add" class="btn btn-green ico ico-32 ico-add-white float-right" ><?php _e('Add language'); ?></a>
         </h1>
-<?php
-    }
-    osc_add_hook('admin_page_header','customPageHeader');
+    <?php
+}
+    osc_add_hook('admin_page_header', 'customPageHeader');
 
-    function customPageTitle($string) {
-        return sprintf(__('Languages &raquo; %s'), $string);
-    }
+function customPageTitle($string)
+{
+    return sprintf(__('Languages &raquo; %s'), $string);
+}
     osc_add_filter('admin_title', 'customPageTitle');
 
     //customize Head
-    function customHead() { ?>
+function customHead()
+{
+    ?>
         <script type="text/javascript">
             $(document).ready(function(){
                 // check_all bulkactions
@@ -95,8 +103,8 @@
             }
         </script>
         <?php
-    }
-    osc_add_hook('admin_header','customHead', 10);
+}
+    osc_add_hook('admin_header', 'customHead', 10);
 
     $iDisplayLength = __get('iDisplayLength');
     $aData          = __get('aLanguages');
@@ -131,20 +139,20 @@
                     </tr>
                 </thead>
                 <tbody>
-                <?php if(count($aData['aaData'])>0) { ?>
-                <?php foreach( $aData['aaData'] as $array) { ?>
+                <?php if (count($aData['aaData'])>0) { ?>
+                    <?php foreach ( $aData['aaData'] as $array) { ?>
                     <tr>
-                    <?php foreach($array as $key => $value) { ?>
-                        <?php if( $key==0 ) { ?>
+                        <?php foreach ($array as $key => $value) { ?>
+                            <?php if ( $key==0 ) { ?>
                         <td class="col-bulkactions">
-                        <?php } else { ?>
+                            <?php } else { ?>
                         <td>
-                        <?php } ?>
-                        <?php echo $value; ?>
+                            <?php } ?>
+                            <?php echo $value; ?>
                         </td>
-                    <?php } ?>
+                        <?php } ?>
                     </tr>
-                <?php } ?>
+                    <?php } ?>
                 <?php } else { ?>
                 <tr>
                     <td colspan="6" class="text-center">

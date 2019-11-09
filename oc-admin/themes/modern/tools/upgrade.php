@@ -1,27 +1,27 @@
 <?php
-    if (!defined('OC_ADMIN')) {
-        exit('Direct access is not allowed.');
-    }
+if (!defined('OC_ADMIN')) {
+    exit('Direct access is not allowed.');
+}
 
     $perms = osc_save_permissions();
     $ok    = osc_change_permissions();
 
     //customize Head
-    function customHead()
-    {
-        ?>
+function customHead()
+{
+    ?>
         <script>
             $(document).ready(function () {
                 $("#steps_div").hide();
             });
-            <?php
+        <?php
 
-            $perms = osc_save_permissions();
-            $ok = osc_change_permissions();
-            foreach ($perms as $k => $v) {
-                chmod($k, $v);
-            }
-            if ($ok) {
+        $perms = osc_save_permissions();
+        $ok = osc_change_permissions();
+        foreach ($perms as $k => $v) {
+            chmod($k, $v);
+        }
+        if ($ok) {
             ?>
             $(function () {
                 var steps_div = document.getElementById('steps_div');
@@ -37,7 +37,7 @@
                     } else {
                         steps.innerHTML += '<?php echo osc_esc_js(__('New version to update:')); ?> ' + oscEscapeHTML(data.version);
                         +"<br />";
-                        <?php if (Params::getParam('confirm') == 'true') {?>
+                    <?php if (Params::getParam('confirm') == 'true') {?>
                         steps.innerHTML += '<img id="loading_image" src="<?php echo osc_current_admin_theme_url('images/loading.gif'); ?>" /><?php echo osc_esc_js(__('Upgrading your Osclass installation (this could take a while):')); ?>';
 
                         var tempAr = data.url.split('/');
@@ -51,52 +51,53 @@
                             steps.innerHTML += $("<div>").text(data.message).html();
                             +"<br />";
                         });
-                        <?php } else { ?>
+                    <?php } else { ?>
                         steps.innerHTML += '<input type="button" value="<?php echo osc_esc_html(__('Upgrade')); ?>" onclick="window.location.href=\'<?php echo osc_admin_base_url(true); ?>?page=tools&action=upgrade&confirm=true\';" />';
-                        <?php } ?>
+                    <?php } ?>
                     }
                 });
             });
             <?php
-            } ?>
+        } ?>
         </script>
         <?php
-    }
+}
 
 
     //TODO Not using it right now
     //osc_add_hook('admin_header', 'customHead', 10);
 
-    function render_offset()
-    {
-        return 'row-offset';
-    }
+function render_offset()
+{
+    return 'row-offset';
+}
 
 
-    function addHelp()
-    {
-        echo '<p>'
-            . __("Check to see if you're using the latest version of Osclass. If you're not, the system will let you know so you can update and use the newest features.")
-            . '</p>';
-    }
+function addHelp()
+{
+    echo '<p>'
+        . __("Check to see if you're using the latest version of Osclass. If you're not, the system will let you know so you can update and use the newest features.")
+        . '</p>';
+}
 
 
     osc_add_hook('help_box', 'addHelp');
 
     osc_add_hook('admin_page_header', 'customPageHeader');
-    function customPageHeader()
-    { ?>
+function customPageHeader()
+{
+    ?>
         <h1><?php _e('Tools'); ?>
             <a href="#" class="btn ico ico-32 ico-help float-right"></a>
         </h1>
         <?php
-    }
+}
 
 
-    function customPageTitle($string)
-    {
-        return sprintf(__('Upgrade &raquo; %s'), $string);
-    }
+function customPageTitle($string)
+{
+    return sprintf(__('Upgrade &raquo; %s'), $string);
+}
 
 
     osc_add_filter('admin_title', 'customPageTitle');
