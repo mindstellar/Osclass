@@ -372,7 +372,7 @@
 
                     $location = Params::getParam('location');
                     if($location != '') {
-                        $sql = osc_file_get_contents(osc_get_locations_sql($location));
+                        $sql = osc_file_get_contents(osc_get_locations_sql_url($location));
                         if($sql != '') {
                             $conn = DBConnectionClass::newInstance();
                             $c_db = $conn->getOsclassDb();
@@ -397,7 +397,7 @@
             $this->_exportVariableToView('aCountries', $aCountries);
 
             $existing_locations = $mCountries->listNames();
-            $json_locations = osc_file_get_contents(osc_get_locations_json());
+            $json_locations = osc_file_get_contents(osc_get_locations_json_url());
             $json_locations = json_decode($json_locations, true);
             $json_locations = $json_locations['children'];
             // IDEA: This probably can be improved.
