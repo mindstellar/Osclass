@@ -461,25 +461,22 @@ class CAdminSettingsLocations extends AdminSecBaseModel
                 return false;
                 break;
         }
-
         $aCountries = $mCountries->listAll();
         $this->_exportVariableToView('aCountries', $aCountries);
 
         $existing_locations = $mCountries->listNames();
-        $json_locations     = osc_file_get_contents(osc_get_locations_json_url());
-        $json_locations     = json_decode($json_locations, true);
-        $json_locations     = $json_locations['children'];
+        $a_external_locations_list         =
+            json_decode(osc_file_get_contents(osc_get_locations_json_url()), true);
+        $a_external_locations_list         = $a_external_locations_list['children'];
         // IDEA: This probably can be improved.
-        foreach ($json_locations as $key => $location) {
-            if (in_array($location['name'], $existing_locations)) {
-                unset($json_locations[$key]);
+        foreach ($a_external_locations_list as $key => $location) {
+            if (in_array($location['name'], $existing_locations, false)) {
+                unset($a_external_locations_list[$key]);
             }
         }
-
-        if (!isset($json_locations[0]) || !isset($json_locations[0]['name'])) {
-            $json_locations = array();
+        if (is_array($a_external_locations_list) && count($a_external_locations_list) > 0) {
+            $this->_exportVariableToView('aLocations', $a_external_locations_list);
         }
-        $this->_exportVariableToView('aLocations', $json_locations);
 
         $this->doView('settings/locations.php');
     }
