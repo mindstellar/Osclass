@@ -1,6 +1,7 @@
 <?php
-if (!defined('OC_ADMIN'))
+if (!defined('OC_ADMIN')) {
     exit('Direct access is not allowed.');
+}
 /*
  * Copyright 2014 Osclass
  *
@@ -25,17 +26,20 @@ if ($current_host === null) {
 }
 
 //customize Head
-function customHead() {
+function customHead()
+{
 
 }
 
 osc_add_hook('admin_header', 'customHead', 10);
 
-function render_offset() {
+function render_offset()
+{
     return 'row-offset';
 }
 
-function addHelp() {
+function addHelp()
+{
     echo '<p>' . __("Change advanced configuration of your Osclass. <strong>Be careful</strong> when modifying default values if you're not sure what you're doing!") . '</p>';
 }
 
@@ -43,7 +47,8 @@ osc_add_hook('help_box', 'addHelp');
 
 osc_add_hook('admin_page_header', 'customPageHeader');
 
-function customPageHeader() {
+function customPageHeader()
+{
     ?>
     <h1><?php _e('Settings'); ?>
         <a href="#" class="btn ico ico-32 ico-help float-right"></a>
@@ -51,7 +56,8 @@ function customPageHeader() {
     <?php
 }
 
-function customPageTitle($string) {
+function customPageTitle($string)
+{
     return sprintf(__('Advanced Settings &raquo; %s'), $string);
 }
 
@@ -64,7 +70,7 @@ osc_current_admin_theme_path('parts/header.php');
     <div id="general-settings">
         <?php
         $cache_type = Object_Cache_Factory::newInstance()->_get_cache();
-        if( $cache_type != 'default' ) { ?>
+        if ( $cache_type != 'default' ) { ?>
         <!--    Cache flush    -->
         <h2 class="render-title"><?php _e('Flush cache'); ?></h2>
         <form id="cache_flush" name="cache_flush" action="<?php echo osc_admin_base_url(true); ?>" method="post">
@@ -93,12 +99,24 @@ osc_current_admin_theme_path('parts/header.php');
                         <div class="form-label"><?php _e('Subdomain type'); ?></div>
                         <div class="form-controls">
                             <select name="e_type" id="e_type">
-                                <option value="" <?php if (osc_subdomain_type() == '') { ?>selected="selected"<?php } ?>><?php _e('No subdomains'); ?></option>
-                                <option value="category" <?php if (osc_subdomain_type() == 'category') { ?>selected="selected"<?php } ?>><?php _e('Category based'); ?></option>
-                                <option value="country" <?php if (osc_subdomain_type() == 'country') { ?>selected="selected"<?php } ?>><?php _e('Country based'); ?></option>
-                                <option value="region" <?php if (osc_subdomain_type() == 'region') { ?>selected="selected"<?php } ?>><?php _e('Region based'); ?></option>
-                                <option value="city" <?php if (osc_subdomain_type() == 'city') { ?>selected="selected"<?php } ?>><?php _e('City based'); ?></option>
-                                <option value="user" <?php if (osc_subdomain_type() == 'user') { ?>selected="selected"<?php } ?>><?php _e('User based'); ?></option>
+                                <option value="" <?php if (osc_subdomain_type() == '') {
+                                    ?>selected="selected"<?php
+                                                 } ?>><?php _e('No subdomains'); ?></option>
+                                <option value="category" <?php if (osc_subdomain_type() == 'category') {
+                                    ?>selected="selected"<?php
+                                                         } ?>><?php _e('Category based'); ?></option>
+                                <option value="country" <?php if (osc_subdomain_type() == 'country') {
+                                    ?>selected="selected"<?php
+                                                        } ?>><?php _e('Country based'); ?></option>
+                                <option value="region" <?php if (osc_subdomain_type() == 'region') {
+                                    ?>selected="selected"<?php
+                                                       } ?>><?php _e('Region based'); ?></option>
+                                <option value="city" <?php if (osc_subdomain_type() == 'city') {
+                                    ?>selected="selected"<?php
+                                                     } ?>><?php _e('City based'); ?></option>
+                                <option value="user" <?php if (osc_subdomain_type() == 'user') {
+                                    ?>selected="selected"<?php
+                                                     } ?>><?php _e('User based'); ?></option>
                             </select>
                         </div>
                     </div>

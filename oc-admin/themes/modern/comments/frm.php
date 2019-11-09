@@ -1,4 +1,6 @@
-<?php if ( ! defined('OC_ADMIN')) exit('Direct access is not allowed.');
+<?php if ( ! defined('OC_ADMIN')) {
+    exit('Direct access is not allowed.');
+}
 
 /*
  * Copyright 2014 Osclass
@@ -20,34 +22,38 @@
 
     $comment = __get('comment');
 
-    if(isset($comment['pk_i_id'])) {
-        //editing...
-        $title = __("Edit comment");
-        $action_frm = "comment_edit_post";
-        $btn_text = osc_esc_html( __("Update comment"));
-    } else {
-        //adding...
-        $title = __("Add comment");
-        $action_frm = "add_comment_post";
-        $btn_text = osc_esc_html( __('Add'));
-    }
+if (isset($comment['pk_i_id'])) {
+    //editing...
+    $title = __("Edit comment");
+    $action_frm = "comment_edit_post";
+    $btn_text = osc_esc_html( __("Update comment"));
+} else {
+    //adding...
+    $title = __("Add comment");
+    $action_frm = "add_comment_post";
+    $btn_text = osc_esc_html( __('Add'));
+}
 
-    function customPageHeader() { ?>
+function customPageHeader()
+{
+    ?>
         <h1><?php _e('Listing'); ?></h1>
-<?php
-    }
-    osc_add_hook('admin_page_header','customPageHeader');
+    <?php
+}
+    osc_add_hook('admin_page_header', 'customPageHeader');
 
-    function customPageTitle($string) {
-        return sprintf(__('Edit comment &raquo; %s'), $string);
-    }
+function customPageTitle($string)
+{
+    return sprintf(__('Edit comment &raquo; %s'), $string);
+}
     osc_add_filter('admin_title', 'customPageTitle');
 
     //customize Head
-    function customHead() {
-        CommentForm::js_validation(true);
-    }
-    osc_add_hook('admin_header','customHead', 10);
+function customHead()
+{
+    CommentForm::js_validation(true);
+}
+    osc_add_hook('admin_header', 'customHead', 10);
 
     $comment = __get('comment');
 ?>
@@ -70,8 +76,8 @@
                 <div class="form-label"><?php _e('Author'); ?></div>
                 <div class="form-controls">
                     <?php CommentForm::author_input_text($comment); ?>
-                    <?php if(isset($comment['fk_i_user_id']) && $comment['fk_i_user_id']!='') {
-                    _e("Registered user"); ?>
+                    <?php if (isset($comment['fk_i_user_id']) && $comment['fk_i_user_id']!='') {
+                        _e("Registered user"); ?>
                     <a href="<?php echo osc_admin_base_url(true); ?>?page=users&action=edit&id=<?php echo $comment['fk_i_user_id']; ?>"><?php _e('Edit user'); ?></a>
                     <?php }?>
                 </div>

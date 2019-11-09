@@ -1,5 +1,5 @@
 <?php if ( ! defined( 'ABS_PATH' ) ) {
-	exit( 'ABS_PATH is not loaded. Direct access is not allowed.' );
+    exit( 'ABS_PATH is not loaded. Direct access is not allowed.' );
 }
 
 /*
@@ -18,54 +18,54 @@
  * limitations under the License.
  */
 
-	/**
-	 * Class Logger
-	 */
-	abstract class Logger
-    {
+    /**
+     * Class Logger
+     */
+abstract class Logger
+{
 
-		/**
-		 * Log a message with the INFO level.
-		 *
-		 * @param string $message
-		 *
-		 * @param null   $caller
-		 *
-		 */
-        abstract public function info($message = '', $caller = null );
+    /**
+     * Log a message with the INFO level.
+     *
+     * @param string $message
+     *
+     * @param null   $caller
+     *
+     */
+    abstract public function info($message = '', $caller = null);
 
-		/**
-		 * Log a message with the WARN level.
-		 *
-		 * @param string $message
-		 *
-		 * @param null   $caller
-		 *
-		 */
-        abstract public function warn($message = '', $caller = null );
+    /**
+     * Log a message with the WARN level.
+     *
+     * @param string $message
+     *
+     * @param null   $caller
+     *
+     */
+    abstract public function warn($message = '', $caller = null);
 
-		/**
-		 * Log a message with the ERROR level.
-		 *
-		 * @param string $message
-		 *
-		 * @param null   $caller
-		 */
-        abstract public function error($message = '', $caller = null );
+    /**
+     * Log a message with the ERROR level.
+     *
+     * @param string $message
+     *
+     * @param null   $caller
+     */
+    abstract public function error($message = '', $caller = null);
 
-		/**
-		 * Log a message with the DEBUG level.
-		 * @param string $message
-		 * @param null   $caller
-		 */
-        abstract public function debug($message = '', $caller = null );
+    /**
+     * Log a message with the DEBUG level.
+     * @param string $message
+     * @param null   $caller
+     */
+    abstract public function debug($message = '', $caller = null);
 
-		/**
-		 * Log a message object with the FATAL level including the caller.
-		 * @param string $message
-		 * @param null   $caller
-		 */
-        abstract public function fatal($message = '', $caller = null );
-    }
+    /**
+     * Log a message object with the FATAL level including the caller.
+     * @param string $message
+     * @param null   $caller
+     */
+    abstract public function fatal($message = '', $caller = null);
+}
 
     /* file end: ./oc-includes/osclass/Logger/Logger.php */

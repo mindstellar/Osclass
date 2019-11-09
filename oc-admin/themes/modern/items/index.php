@@ -1,4 +1,6 @@
-<?php if ( ! defined('OC_ADMIN')) exit('Direct access is not allowed.');
+<?php if ( ! defined('OC_ADMIN')) {
+    exit('Direct access is not allowed.');
+}
 /*
  * Copyright 2014 Osclass
  *
@@ -17,29 +19,34 @@
 
     osc_enqueue_script('jquery-validate');
 
-    function addHelp() {
-        echo '<p>' . __('Manage all the listings on your site: edit, delete or block the latest listings published. You can also filter by several parameters: user, region, city, etc.') . '</p>';
-    }
-    osc_add_hook('help_box','addHelp');
+function addHelp()
+{
+    echo '<p>' . __('Manage all the listings on your site: edit, delete or block the latest listings published. You can also filter by several parameters: user, region, city, etc.') . '</p>';
+}
+    osc_add_hook('help_box', 'addHelp');
 
-    function customPageHeader() { ?>
+function customPageHeader()
+{
+    ?>
         <h1><?php _e('Listings'); ?>
             <a href="<?php echo osc_admin_base_url(true); ?>?page=items&amp;action=settings" class="btn ico ico-32 ico-engine float-right"></a>
             <a href="#" class="btn ico ico-32 ico-help float-right"></a>
             <a href="<?php echo osc_admin_base_url(true) . '?page=items&action=post'; ?>" class="btn btn-green ico ico-32 ico-add-white float-right"><?php _e('Add listing'); ?></a>
     </h1>
-<?php
-    }
-    osc_add_hook('admin_page_header','customPageHeader');
+    <?php
+}
+    osc_add_hook('admin_page_header', 'customPageHeader');
 
-    function customPageTitle($string) {
-        return sprintf(__('Manage listings &raquo; %s'), $string);
-    }
+function customPageTitle($string)
+{
+    return sprintf(__('Manage listings &raquo; %s'), $string);
+}
     osc_add_filter('admin_title', 'customPageTitle');
 
     //customize Head
-    function customHead() {
-        ItemForm::location_javascript_new('admin'); ?>
+function customHead()
+{
+    ItemForm::location_javascript_new('admin'); ?>
         <script type="text/javascript">
             // autocomplete users
             $(document).ready(function(){
@@ -150,8 +157,8 @@
             }
         </script>
         <?php
-    }
-    osc_add_hook('admin_header','customHead', 10);
+}
+    osc_add_hook('admin_header', 'customHead', 10);
 
     $categories  = __get('categories');
     $withFilters = __get('withFilters');
@@ -295,34 +302,60 @@
     <div id="listing-toolbar">
         <div class="float-right">
             <form method="get" action="<?php echo osc_admin_base_url(true); ?>"  class="inline nocsrf">
-                <?php foreach( Params::getParamsAsArray('get') as $key => $value ) { ?>
-                <?php if( $key != 'iDisplayLength' ) { ?>
+                <?php foreach ( Params::getParamsAsArray('get') as $key => $value ) { ?>
+                    <?php if ( $key != 'iDisplayLength' ) { ?>
                 <input type="hidden" name="<?php echo osc_esc_html($key); ?>" value="<?php echo osc_esc_html($value); ?>" />
-                <?php } } ?>
+                    <?php }
+                } ?>
                 <select name="iDisplayLength" class="select-box-extra select-box-medium float-left" onchange="this.form.submit();" >
                     <option value="10"><?php printf(__('%d Listings'), 10); ?></option>
-                    <option value="25" <?php if( Params::getParam('iDisplayLength') == 25 ) echo 'selected'; ?> ><?php printf(__('%d Listings'), 25); ?></option>
-                    <option value="50" <?php if( Params::getParam('iDisplayLength') == 50 ) echo 'selected'; ?> ><?php printf(__('%d Listings'), 50); ?></option>
-                    <option value="100" <?php if( Params::getParam('iDisplayLength') == 100 ) echo 'selected'; ?> ><?php printf(__('%d Listings'), 100); ?></option>
+                    <option value="25" <?php if ( Params::getParam('iDisplayLength') == 25 ) {
+                        echo 'selected';
+                                       } ?> ><?php printf(__('%d Listings'), 25); ?></option>
+                    <option value="50" <?php if ( Params::getParam('iDisplayLength') == 50 ) {
+                        echo 'selected';
+                                       } ?> ><?php printf(__('%d Listings'), 50); ?></option>
+                    <option value="100" <?php if ( Params::getParam('iDisplayLength') == 100 ) {
+                        echo 'selected';
+                                        } ?> ><?php printf(__('%d Listings'), 100); ?></option>
                 </select>
             </form>
             <form method="get" action="<?php echo osc_admin_base_url(true); ?>" id="shortcut-filters" class="inline">
                 <input type="hidden" name="page" value="items" />
                 <input type="hidden" name="iDisplayLength" value="<?php echo $iDisplayLength;?>" />
-                <?php if($withFilters) { ?>
+                <?php if ($withFilters) { ?>
                 <a id="btn-hide-filters" class="btn" href="<?php echo osc_admin_base_url(true).'?page=items'; ?>"><?php _e('Reset filters'); ?></a>
                 <?php } ?>
-                <a id="btn-display-filters" href="#" class="btn <?php if($withFilters) { echo 'btn-red'; } ?>"><?php _e('Show filters'); ?></a>
+                <a id="btn-display-filters" href="#" class="btn <?php if ($withFilters) {
+                    echo 'btn-red';
+                                                                } ?>"><?php _e('Show filters'); ?></a>
 
-                <?php $opt = "oPattern"; if(Params::getParam('shortcut-filter') != '') { $opt = Params::getParam('shortcut-filter'); } ?>
-                <?php $classPattern = 'hide'; $classUser = 'hide'; $classItemId = 'hide'; ?>
-                <?php if($opt == 'oUser') { $classUser = ''; } ?>
-                <?php if($opt == 'oPattern') { $classPattern = ''; } ?>
-                <?php if($opt == 'oItemId') { $classItemId = ''; } ?>
+                <?php $opt = "oPattern";
+                if (Params::getParam('shortcut-filter') != '') {
+                    $opt = Params::getParam('shortcut-filter');
+                } ?>
+                <?php $classPattern = 'hide';
+                $classUser = 'hide';
+                $classItemId = 'hide'; ?>
+                <?php if ($opt == 'oUser') {
+                    $classUser = '';
+                } ?>
+                <?php if ($opt == 'oPattern') {
+                    $classPattern = '';
+                } ?>
+                <?php if ($opt == 'oItemId') {
+                    $classItemId = '';
+                } ?>
                 <select id="filter-select" name="shortcut-filter" class="select-box-extra select-box-input">
-                    <option value="oPattern" <?php if($opt == 'oPattern'){ echo 'selected="selected"'; } ?>><?php _e('Pattern'); ?></option>
-                    <option value="oUser" <?php if($opt == 'oUser'){ echo 'selected="selected"'; } ?>><?php _e('Email'); ?></option>
-                    <option value="oItemId" <?php if($opt == 'oItemId'){ echo 'selected="selected"'; } ?>><?php _e('Item ID'); ?></option>
+                    <option value="oPattern" <?php if ($opt == 'oPattern') {
+                        echo 'selected="selected"';
+                                             } ?>><?php _e('Pattern'); ?></option>
+                    <option value="oUser" <?php if ($opt == 'oUser') {
+                        echo 'selected="selected"';
+                                          } ?>><?php _e('Email'); ?></option>
+                    <option value="oItemId" <?php if ($opt == 'oItemId') {
+                        echo 'selected="selected"';
+                                            } ?>><?php _e('Item ID'); ?></option>
                 </select><input
                     id="fPattern" type="text" name="sSearch"
                     value="<?php echo osc_esc_html(Params::getParam('sSearch')); ?>"
@@ -353,16 +386,16 @@
             <table class="table" cellpadding="0" cellspacing="0">
                 <thead>
                     <tr>
-                        <?php foreach($columns as $k => $v) {
+                        <?php foreach ($columns as $k => $v) {
                             echo '<th class="col-'.$k.' '.($sort==$k?($direction=='desc'?'sorting_desc':'sorting_asc'):'').'">'.$v.'</th>';
                         }; ?>
                     </tr>
                 </thead>
                 <tbody>
-                <?php if( count($rows) > 0 ) { ?>
-                    <?php foreach($rows as $key => $row) { ?>
+                <?php if ( count($rows) > 0 ) { ?>
+                    <?php foreach ($rows as $key => $row) { ?>
                         <tr class="<?php echo implode(' ', osc_apply_filter('datatable_listing_class', array(), $aRawRows[$key], $row)); ?>">
-                            <?php foreach($row as $k => $v) { ?>
+                            <?php foreach ($row as $k => $v) { ?>
                                 <td class="col-<?php echo $k; ?>"><?php echo $v; ?></td>
                             <?php }; ?>
                         </tr>
@@ -381,11 +414,12 @@
     </form>
 </div>
 <?php
-    function showingResults(){
-        $aData = __get("aData");
-        echo '<ul class="showing-results"><li><span>'.osc_pagination_showing((Params::getParam('iPage')-1)*$aData['iDisplayLength']+1, ((Params::getParam('iPage')-1)*$aData['iDisplayLength'])+count($aData['aRows']), $aData['iTotalDisplayRecords'], $aData['iTotalRecords']).'</span></li></ul>';
-    }
-    osc_add_hook('before_show_pagination_admin','showingResults');
+function showingResults()
+{
+    $aData = __get("aData");
+    echo '<ul class="showing-results"><li><span>'.osc_pagination_showing((Params::getParam('iPage')-1)*$aData['iDisplayLength']+1, ((Params::getParam('iPage')-1)*$aData['iDisplayLength'])+count($aData['aRows']), $aData['iTotalDisplayRecords'], $aData['iTotalRecords']).'</span></li></ul>';
+}
+    osc_add_hook('before_show_pagination_admin', 'showingResults');
     osc_show_pagination_admin($aData);
 ?>
 <form id="dialog-item-delete" method="get" action="<?php echo osc_admin_base_url(true); ?>" class="has-form-actions hide">

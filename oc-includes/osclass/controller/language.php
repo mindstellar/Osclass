@@ -1,5 +1,5 @@
 <?php if ( ! defined( 'ABS_PATH' ) ) {
-	exit( 'ABS_PATH is not loaded. Direct access is not allowed.' );
+    exit( 'ABS_PATH is not loaded. Direct access is not allowed.' );
 }
 
 /*
@@ -18,45 +18,46 @@
  * limitations under the License.
  */
 
-	/**
-	 * Class CWebLanguage
-	 */
-	class CWebLanguage extends BaseModel
+    /**
+     * Class CWebLanguage
+     */
+class CWebLanguage extends BaseModel
+{
+    public function __construct()
     {
-        public function __construct()
-        {
-            parent::__construct();
-            osc_run_hook( 'init_language' );
-        }
-
-        // business layer...
-        public function doModel()
-        {
-            $locale = Params::getParam('locale');
-
-            if(preg_match('/.{2}_.{2}/', $locale)) {
-                Session::newInstance()->_set( 'userLocale', $locale);
-            }
-
-            $redirect_url = '';
-            if(Params::getServerParam('HTTP_REFERER', false, false) != '') {
-                $redirect_url = Params::getServerParam('HTTP_REFERER', false, false);
-            } else {
-                $redirect_url = osc_base_url(true);
-            }
-
-            $this->redirectTo($redirect_url);
-        }
-
-        // hopefully generic...
-
-		/**
-		 * @param $file
-		 *
-		 * @return mixed|void
-		 */
-		public function doView( $file ) {
-		}
+        parent::__construct();
+        osc_run_hook( 'init_language' );
     }
+
+    // business layer...
+    public function doModel()
+    {
+        $locale = Params::getParam('locale');
+
+        if (preg_match('/.{2}_.{2}/', $locale)) {
+            Session::newInstance()->_set( 'userLocale', $locale);
+        }
+
+        $redirect_url = '';
+        if (Params::getServerParam('HTTP_REFERER', false, false) != '') {
+            $redirect_url = Params::getServerParam('HTTP_REFERER', false, false);
+        } else {
+            $redirect_url = osc_base_url(true);
+        }
+
+        $this->redirectTo($redirect_url);
+    }
+
+    // hopefully generic...
+
+    /**
+     * @param $file
+     *
+     * @return mixed|void
+     */
+    public function doView($file)
+    {
+    }
+}
 
     /* file end: ./language.php */

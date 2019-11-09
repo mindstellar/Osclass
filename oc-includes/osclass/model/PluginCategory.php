@@ -1,5 +1,5 @@
 <?php if ( ! defined( 'ABS_PATH' ) ) {
-	exit( 'ABS_PATH is not loaded. Direct access is not allowed.' );
+    exit( 'ABS_PATH is not loaded. Direct access is not allowed.' );
 }
 
 /*
@@ -21,120 +21,120 @@
     /**
      *
      */
-    class PluginCategory extends DAO
+class PluginCategory extends DAO
+{
+    /**
+     *
+     * @var
+     */
+    private static $instance;
+
+    /**
+     *
+     * @return \PluginCategory
+     */
+    public static function newInstance()
     {
-        /**
-         *
-         * @var
-         */
-        private static $instance;
-
-	    /**
-	     *
-	     * @return \PluginCategory
-	     */
-        public static function newInstance()
-        {
-            if( !self::$instance instanceof self ) {
-                self::$instance = new self;
-            }
-            return self::$instance;
+        if ( !self::$instance instanceof self ) {
+            self::$instance = new self;
         }
-
-        /**
-         *
-         */
-        public function __construct()
-        {
-            parent::__construct();
-            $this->setTableName('t_plugin_category');
-            /* $this->setPrimaryKey('pk_i_id'); */
-            $this->setFields( array('s_plugin_name', 'fk_i_category_id') );
-        }
-
-	    /**
-	     * Return all information given a category id
-	     *
-	     * @access public
-	     * @since  unknown
-	     *
-	     * @param $categoryId
-	     *
-	     * @return array
-	     */
-        public function findByCategoryId($categoryId)
-        {
-            $this->dao->select( $this->getFields() );
-            $this->dao->from( $this->getTableName() );
-            $this->dao->where('fk_i_category_id', $categoryId);
-
-            $result = $this->dao->get();
-
-            if( $result == false ) {
-                return array();
-            }
-
-            return $result->result();
-        }
-
-        /**
-         * Return list of categories asociated with a plugin
-         *
-         * @access public
-         * @since unknown
-         * @param string $plugin
-         * @return array
-         */
-        public function listSelected($plugin)
-        {
-            $this->dao->select( $this->getFields() );
-            $this->dao->from( $this->getTableName() );
-            $this->dao->where('s_plugin_name', $plugin);
-
-            $result = $this->dao->get();
-
-            if( $result == false ) {
-                return array();
-            }
-
-            $list = array();
-            foreach($result->result() as $sel) {
-                $list[] = $sel['fk_i_category_id'];
-            }
-
-            return $list;
-        }
-
-        /**
-         * Check if a category is asociated with a plugin
-         *
-         * @access public
-         * @since unknown
-         * @param string $pluginName
-         * @param int $categoryId
-         * @return bool
-         */
-        public function isThisCategory($pluginName, $categoryId)
-        {
-            $this->dao->select('COUNT(*) AS numrows');
-            $this->dao->from( $this->getTableName() );
-            $this->dao->where('fk_i_category_id', $categoryId);
-            $this->dao->where('s_plugin_name', $pluginName);
-
-            $result = $this->dao->get();
-
-            if( $result == false ) {
-                return false;
-            }
-
-            if( $result->numRows() == 0 ) {
-                return false;
-            }
-
-            $row = $result->row();
-
-	        return ! ( $row[ 'numrows' ] == 0 );
-        }
+        return self::$instance;
     }
+
+    /**
+     *
+     */
+    public function __construct()
+    {
+        parent::__construct();
+        $this->setTableName('t_plugin_category');
+        /* $this->setPrimaryKey('pk_i_id'); */
+        $this->setFields( array('s_plugin_name', 'fk_i_category_id') );
+    }
+
+    /**
+     * Return all information given a category id
+     *
+     * @access public
+     * @since  unknown
+     *
+     * @param $categoryId
+     *
+     * @return array
+     */
+    public function findByCategoryId($categoryId)
+    {
+        $this->dao->select( $this->getFields() );
+        $this->dao->from( $this->getTableName() );
+        $this->dao->where('fk_i_category_id', $categoryId);
+
+        $result = $this->dao->get();
+
+        if ( $result == false ) {
+            return array();
+        }
+
+        return $result->result();
+    }
+
+    /**
+     * Return list of categories asociated with a plugin
+     *
+     * @access public
+     * @since unknown
+     * @param string $plugin
+     * @return array
+     */
+    public function listSelected($plugin)
+    {
+        $this->dao->select( $this->getFields() );
+        $this->dao->from( $this->getTableName() );
+        $this->dao->where('s_plugin_name', $plugin);
+
+        $result = $this->dao->get();
+
+        if ( $result == false ) {
+            return array();
+        }
+
+        $list = array();
+        foreach ($result->result() as $sel) {
+            $list[] = $sel['fk_i_category_id'];
+        }
+
+        return $list;
+    }
+
+    /**
+     * Check if a category is asociated with a plugin
+     *
+     * @access public
+     * @since unknown
+     * @param string $pluginName
+     * @param int $categoryId
+     * @return bool
+     */
+    public function isThisCategory($pluginName, $categoryId)
+    {
+        $this->dao->select('COUNT(*) AS numrows');
+        $this->dao->from( $this->getTableName() );
+        $this->dao->where('fk_i_category_id', $categoryId);
+        $this->dao->where('s_plugin_name', $pluginName);
+
+        $result = $this->dao->get();
+
+        if ( $result == false ) {
+            return false;
+        }
+
+        if ( $result->numRows() == 0 ) {
+            return false;
+        }
+
+        $row = $result->row();
+
+        return ! ( $row[ 'numrows' ] == 0 );
+    }
+}
 
     /* file end: ./oc-includes/osclass/model/PluginCategory.php */

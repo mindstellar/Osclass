@@ -1,4 +1,6 @@
-<?php if ( ! defined('OC_ADMIN')) exit('Direct access is not allowed.');
+<?php if ( ! defined('OC_ADMIN')) {
+    exit('Direct access is not allowed.');
+}
 /*
  * Copyright 2014 Osclass
  *
@@ -15,19 +17,22 @@
  * limitations under the License.
  */
 
-    function addHelp() {
-        echo '<p>' . __("Install or uninstall the plugins available in your installation. In some cases, you'll have to configure the plugin in order to get it to work.") . '</p>';
-    }
-    osc_add_hook('help_box','addHelp');
+function addHelp()
+{
+    echo '<p>' . __("Install or uninstall the plugins available in your installation. In some cases, you'll have to configure the plugin in order to get it to work.") . '</p>';
+}
+    osc_add_hook('help_box', 'addHelp');
 
-    function customPageHeader() { ?>
+function customPageHeader()
+{
+    ?>
             <h1><?php _e('Manage Plugins'); ?>
                 <a href="#" class="btn ico ico-32 ico-help float-right"></a>
                 <a href="<?php echo osc_admin_base_url(true); ?>?page=plugins&amp;action=add" class="btn btn-green ico ico-32 ico-add-white float-right"><?php _e('Add plugin'); ?></a>
             </h1>
         </div>
         <?php osc_show_flash_message('admin'); ?>
-        <?php if( Params::getParam('error') != '' ) { ?>
+        <?php if ( Params::getParam('error') != '' ) { ?>
             <!-- flash message -->
             <div class="flashmessage flashmessage-error" style="display:block">
                 <?php _e("Plugin couldn't be installed because it triggered a <strong>fatal error</strong>"); ?>
@@ -35,17 +40,20 @@
                 <iframe style="border:0;" width="100%" height="60" src="<?php echo osc_admin_base_url(true); ?>?page=plugins&amp;action=error_plugin&amp;plugin=<?php echo Params::getParam('error'); ?>"></iframe>
             <!-- /flash message -->
         <?php } ?>
-<?php
-    }
-    osc_add_hook('admin_page_header','customPageHeader');
+    <?php
+}
+    osc_add_hook('admin_page_header', 'customPageHeader');
 
-    function customPageTitle($string) {
-        return sprintf(__('Plugins &raquo; %s'), $string);
-    }
+function customPageTitle($string)
+{
+    return sprintf(__('Plugins &raquo; %s'), $string);
+}
     osc_add_filter('admin_title', 'customPageTitle');
 
     //customize Head
-    function customHead() { ?>
+function customHead()
+{
+    ?>
         <script type="text/javascript">
             $(document).ready(function(){
                 $('input:hidden[name="installed"]').each(function() {
@@ -84,8 +92,8 @@
             }
         </script>
         <?php
-    }
-    osc_add_hook('admin_header','customHead', 10);
+}
+    osc_add_hook('admin_header', 'customHead', 10);
 
     $iDisplayLength = __get('iDisplayLength');
     $aData          = __get('aPlugins');
@@ -98,9 +106,9 @@
         <?php
             $aPluginsToUpdate = json_decode( osc_get_preference('plugins_to_update') );
             $bPluginsToUpdate = is_array($aPluginsToUpdate)?true:false;
-            if($bPluginsToUpdate && count($aPluginsToUpdate) > 0) {
-                $tab_index = 0;
-        ?>
+        if ($bPluginsToUpdate && count($aPluginsToUpdate) > 0) {
+            $tab_index = 0;
+            ?>
         <li><a href="#update-plugins"><?php _e('Updates'); ?></a></li>
         <?php } ?>
         <li><a href="#upload-plugins"><?php _e('Available plugins'); ?></a></li>
@@ -119,16 +127,16 @@
                 </tr>
             </thead>
             <tbody>
-            <?php if(count($aData['aaData'])>0) : ?>
-            <?php foreach( $aData['aaData'] as $array) : ?>
+            <?php if (count($aData['aaData'])>0) : ?>
+                <?php foreach ( $aData['aaData'] as $array) : ?>
                 <tr>
-                <?php foreach($array as $key => $value) : ?>
+                    <?php foreach ($array as $key => $value) : ?>
                     <td>
-                    <?php echo $value; ?>
+                        <?php echo $value; ?>
                     </td>
-                <?php endforeach; ?>
+                    <?php endforeach; ?>
                 </tr>
-            <?php endforeach;?>
+                <?php endforeach;?>
             <?php else : ?>
             <tr>
                 <td colspan="6" class="text-center">
@@ -139,45 +147,55 @@
             </tbody>
         </table>
         <?php
-            function showingResults(){
-                $aData = __get('aPlugins');
-                echo '<ul class="showing-results"><li><span>'.osc_pagination_showing((Params::getParam('iPage')-1)*$aData['iDisplayLength']+1, ((Params::getParam('iPage')-1)*$aData['iDisplayLength'])+count($aData['aaData']), $aData['iTotalDisplayRecords']).'</span></li></ul>';
-            }
-            osc_add_hook('before_show_pagination_admin','showingResults');
+        function showingResults()
+        {
+            $aData = __get('aPlugins');
+            echo '<ul class="showing-results"><li><span>'.osc_pagination_showing((Params::getParam('iPage')-1)*$aData['iDisplayLength']+1, ((Params::getParam('iPage')-1)*$aData['iDisplayLength'])+count($aData['aaData']), $aData['iTotalDisplayRecords']).'</span></li></ul>';
+        }
+            osc_add_hook('before_show_pagination_admin', 'showingResults');
             osc_show_pagination_admin($aData);
         ?>
 
         <div class="display-select-bottom">
             <form method="get" action="<?php echo osc_admin_base_url(true); ?>"  class="inline nocsrf">
-                <?php foreach( Params::getParamsAsArray('get') as $key => $value ) { ?>
-                    <?php if( $key != 'iDisplayLength' ) { ?>
+                <?php foreach ( Params::getParamsAsArray('get') as $key => $value ) { ?>
+                    <?php if ( $key != 'iDisplayLength' ) { ?>
                         <input type="hidden" name="<?php echo osc_esc_html($key); ?>" value="<?php echo osc_esc_html($value); ?>" />
-                    <?php } } ?>
+                    <?php }
+                } ?>
                 <select name="iDisplayLength" class="select-box-extra select-box-medium float-left" onchange="this.form.submit();" >
-                    <option value="10" <?php if( Params::getParam('iDisplayLength') == 10 ) echo 'selected'; ?> ><?php printf(__('%d plugins'), 10); ?></option>
-                    <option value="25" <?php if( Params::getParam('iDisplayLength') == 25 ) echo 'selected'; ?> ><?php printf(__('%d plugins'), 25); ?></option>
-                    <option value="50" <?php if( Params::getParam('iDisplayLength') == 50 ) echo 'selected'; ?> ><?php printf(__('%d plugins'), 50); ?></option>
-                    <option value="100" <?php if( Params::getParam('iDisplayLength') == 100 ) echo 'selected'; ?> ><?php printf(__('%d plugins'), 100); ?></option>
+                    <option value="10" <?php if ( Params::getParam('iDisplayLength') == 10 ) {
+                        echo 'selected';
+                                       } ?> ><?php printf(__('%d plugins'), 10); ?></option>
+                    <option value="25" <?php if ( Params::getParam('iDisplayLength') == 25 ) {
+                        echo 'selected';
+                                       } ?> ><?php printf(__('%d plugins'), 25); ?></option>
+                    <option value="50" <?php if ( Params::getParam('iDisplayLength') == 50 ) {
+                        echo 'selected';
+                                       } ?> ><?php printf(__('%d plugins'), 50); ?></option>
+                    <option value="100" <?php if ( Params::getParam('iDisplayLength') == 100 ) {
+                        echo 'selected';
+                                        } ?> ><?php printf(__('%d plugins'), 100); ?></option>
                 </select>
             </form>
         </div>
 
 
     </div>
-    <?php if($bPluginsToUpdate && count($aPluginsToUpdate) > 0) { ?>
+    <?php if ($bPluginsToUpdate && count($aPluginsToUpdate) > 0) { ?>
     <div id="update-plugins">
         <?php
             $aIndex = array();
-            if($bPluginsToUpdate) {
-                $array_aux  = array_keys($aData['aaInfo']);
+        if ($bPluginsToUpdate) {
+            $array_aux  = array_keys($aData['aaInfo']);
 
-                foreach($aPluginsToUpdate as $slug) {
-                    $key = array_search($slug, $array_aux, true);
-                    if($key!==false) {
-                        $aIndex[]   = $aData['aaData'][$key];
-                    }
+            foreach ($aPluginsToUpdate as $slug) {
+                $key = array_search($slug, $array_aux, true);
+                if ($key!==false) {
+                    $aIndex[]   = $aData['aaData'][$key];
                 }
             }
+        }
         ?>
         <table class="table" cellpadding="0" cellspacing="0">
             <thead>
@@ -191,16 +209,16 @@
                 </tr>
             </thead>
             <tbody>
-            <?php if(count($aIndex)>0) : ?>
-            <?php foreach( $aIndex as $array) : ?>
+            <?php if (count($aIndex)>0) : ?>
+                <?php foreach ( $aIndex as $array) : ?>
                 <tr>
-                <?php foreach($array as $key => $value) : ?>
+                    <?php foreach ($array as $key => $value) : ?>
                     <td>
-                    <?php echo $value; ?>
+                        <?php echo $value; ?>
                     </td>
-                <?php endforeach; ?>
+                    <?php endforeach; ?>
                 </tr>
-            <?php endforeach;?>
+                <?php endforeach;?>
             <?php else : ?>
             <tr>
                 <td colspan="6" class="text-center">
