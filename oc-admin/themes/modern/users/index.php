@@ -1,4 +1,6 @@
-<?php if ( ! defined('OC_ADMIN')) exit('Direct access is not allowed.');
+<?php if ( ! defined('OC_ADMIN')) {
+    exit('Direct access is not allowed.');
+}
 /*
  * Copyright 2014 Osclass
  *
@@ -15,28 +17,34 @@
  * limitations under the License.
  */
 
-    function addHelp() {
-        echo '<p>' . __('Add, edit or delete information associated to registered users. Keep in mind that deleting a user also deletes all the listings the user published.') . '</p>';
-    }
-    osc_add_hook('help_box','addHelp');
+function addHelp()
+{
+    echo '<p>' . __('Add, edit or delete information associated to registered users. Keep in mind that deleting a user also deletes all the listings the user published.') . '</p>';
+}
+    osc_add_hook('help_box', 'addHelp');
 
-    function customPageHeader(){ ?>
+function customPageHeader()
+{
+    ?>
         <h1><?php _e('Users'); ?>
             <a href="<?php echo osc_admin_base_url(true) . '?page=users&action=settings'; ?>" class="btn ico ico-32 ico-engine float-right"></a>
             <a href="#" class="btn ico ico-32 ico-help float-right"></a>
             <a href="<?php echo osc_admin_base_url(true) . '?page=users&action=create'; ?>" class="btn btn-green ico ico-32 ico-add-white float-right"><?php _e('Add'); ?></a>
         </h1>
-<?php
-    }
-    osc_add_hook('admin_page_header','customPageHeader');
+    <?php
+}
+    osc_add_hook('admin_page_header', 'customPageHeader');
 
-    function customPageTitle($string) {
-        return sprintf(__('Manage users &raquo; %s'), $string);
-    }
+function customPageTitle($string)
+{
+    return sprintf(__('Manage users &raquo; %s'), $string);
+}
     osc_add_filter('admin_title', 'customPageTitle');
 
     //customize Head
-    function customHead() { ?>
+function customHead()
+{
+    ?>
         <script type="text/javascript">
             $(document).ready(function(){
                 // users autocomplete
@@ -127,8 +135,8 @@
             }
         </script>
         <?php
-    }
-    osc_add_hook('admin_header','customHead', 10);
+}
+    osc_add_hook('admin_header', 'customHead', 10);
 
     $aData      = __get('aData');
     $aRawRows   = __get('aRawRows');
@@ -246,23 +254,32 @@
     <div id="users-toolbar" class="table-toolbar">
         <div class="float-right">
             <form method="get" action="<?php echo osc_admin_base_url(true); ?>"  class="inline nocsrf">
-                <?php foreach( Params::getParamsAsArray('get') as $key => $value ) { ?>
-                <?php if( $key != 'iDisplayLength' ) { ?>
+                <?php foreach ( Params::getParamsAsArray('get') as $key => $value ) { ?>
+                    <?php if ( $key != 'iDisplayLength' ) { ?>
                 <input type="hidden" name="<?php echo osc_esc_html($key); ?>" value="<?php echo osc_esc_html($value); ?>" />
-                <?php } } ?>
+                    <?php }
+                } ?>
                 <select name="iDisplayLength" class="select-box-extra select-box-medium float-left" onchange="this.form.submit();" >
                     <option value="10"><?php printf(__('%d Users'), 10); ?></option>
-                    <option value="25" <?php if( Params::getParam('iDisplayLength') == 25 ) echo 'selected'; ?> ><?php printf(__('%d Users'), 25); ?></option>
-                    <option value="50" <?php if( Params::getParam('iDisplayLength') == 50 ) echo 'selected'; ?> ><?php printf(__('%d Users'), 50); ?></option>
-                    <option value="100" <?php if( Params::getParam('iDisplayLength') == 100 ) echo 'selected'; ?> ><?php printf(__('%d Users'), 100); ?></option>
+                    <option value="25" <?php if ( Params::getParam('iDisplayLength') == 25 ) {
+                        echo 'selected';
+                                       } ?> ><?php printf(__('%d Users'), 25); ?></option>
+                    <option value="50" <?php if ( Params::getParam('iDisplayLength') == 50 ) {
+                        echo 'selected';
+                                       } ?> ><?php printf(__('%d Users'), 50); ?></option>
+                    <option value="100" <?php if ( Params::getParam('iDisplayLength') == 100 ) {
+                        echo 'selected';
+                                        } ?> ><?php printf(__('%d Users'), 100); ?></option>
                 </select>
             </form>
             <form method="get" action="<?php echo osc_admin_base_url(true); ?>" id="shortcut-filters" class="inline nocsrf">
                 <input type="hidden" name="page" value="users" />
-                <?php if($withFilters) { ?>
+                <?php if ($withFilters) { ?>
                 <a id="btn-hide-filters" href="<?php echo osc_admin_base_url(true).'?page=users'; ?>" class="btn"><?php _e('Reset filters'); ?></a>
                 <?php } ?>
-                <a id="btn-display-filters" href="#" class="btn <?php if($withFilters) { echo 'btn-red'; } ?>"><?php _e('Show filters'); ?></a>
+                <a id="btn-display-filters" href="#" class="btn <?php if ($withFilters) {
+                    echo 'btn-red';
+                                                                } ?>"><?php _e('Show filters'); ?></a>
                 <input id="fUser" name="user" type="text" class="fUser input-text input-actions" value="<?php echo osc_esc_html(Params::getParam('user')); ?>" />
                 <input id="fUserId" name="userId" type="hidden" value="<?php echo osc_esc_html(Params::getParam('userId')); ?>" />
                 <input type="submit" class="btn submit-right" value="<?php echo osc_esc_html( __('Find') ); ?>">
@@ -282,16 +299,16 @@
             <table class="table" cellpadding="0" cellspacing="0">
                 <thead>
                     <tr>
-                        <?php foreach($columns as $k => $v) {
+                        <?php foreach ($columns as $k => $v) {
                             echo '<th class="col-'.$k.' '.($sort==$k?($direction=='desc'?'sorting_desc':'sorting_asc'):'').'">'.$v.'</th>';
                         }; ?>
                     </tr>
                 </thead>
                 <tbody>
-                <?php if( count($rows) > 0 ) { ?>
-                    <?php foreach($rows as $key => $row) { ?>
+                <?php if ( count($rows) > 0 ) { ?>
+                    <?php foreach ($rows as $key => $row) { ?>
                         <tr class="<?php echo implode(' ', osc_apply_filter('datatable_user_class', array(), $aRawRows[$key], $row)); ?>">
-                            <?php foreach($row as $k => $v) { ?>
+                            <?php foreach ($row as $k => $v) { ?>
                                 <td class="col-<?php echo $k; ?>"><?php echo $v; ?></td>
                             <?php }; ?>
                         </tr>
@@ -310,11 +327,12 @@
     </form>
 </div>
 <?php
-    function showingResults(){
-        $aData = __get("aData");
-        echo '<ul class="showing-results"><li><span>'.osc_pagination_showing((Params::getParam('iPage')-1)*$aData['iDisplayLength']+1, ((Params::getParam('iPage')-1)*$aData['iDisplayLength'])+count($aData['aRows']), $aData['iTotalDisplayRecords'], $aData['iTotalRecords']).'</span></li></ul>';
-    }
-    osc_add_hook('before_show_pagination_admin','showingResults');
+function showingResults()
+{
+    $aData = __get("aData");
+    echo '<ul class="showing-results"><li><span>'.osc_pagination_showing((Params::getParam('iPage')-1)*$aData['iDisplayLength']+1, ((Params::getParam('iPage')-1)*$aData['iDisplayLength'])+count($aData['aRows']), $aData['iTotalDisplayRecords'], $aData['iTotalRecords']).'</span></li></ul>';
+}
+    osc_add_hook('before_show_pagination_admin', 'showingResults');
     osc_show_pagination_admin($aData);
 ?>
 <form id="dialog-user-delete" method="get" action="<?php echo osc_admin_base_url(true); ?>" class="has-form-actions hide" title="<?php echo osc_esc_html(__('Delete user')); ?>">

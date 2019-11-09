@@ -1,4 +1,6 @@
-<?php if ( ! defined('OC_ADMIN')) exit('Direct access is not allowed.');
+<?php if ( ! defined('OC_ADMIN')) {
+    exit('Direct access is not allowed.');
+}
 /*
  * Copyright 2014 Osclass
  *
@@ -15,27 +17,33 @@
  * limitations under the License.
  */
 
-    function addHelp() {
-        echo '<p>' . __('With Osclass you can create static pages on which information can be stored, such as "About Us" or "Info" pages. From here you can create, edit or delete your site\'s static pages.') . '</p>';
-    }
-    osc_add_hook('help_box','addHelp');
+function addHelp()
+{
+    echo '<p>' . __('With Osclass you can create static pages on which information can be stored, such as "About Us" or "Info" pages. From here you can create, edit or delete your site\'s static pages.') . '</p>';
+}
+    osc_add_hook('help_box', 'addHelp');
 
-    function customPageHeader() { ?>
+function customPageHeader()
+{
+    ?>
         <h1><?php _e('Pages'); ?>
             <a href="#" class="btn ico ico-32 ico-help float-right"></a>
             <a href="<?php echo osc_admin_base_url(true); ?>?page=pages&amp;action=add" class="btn btn-green ico ico-32 ico-add-white float-right"><?php _e('Create page'); ?></a>
         </h1>
-<?php
-    }
-    osc_add_hook('admin_page_header','customPageHeader');
+    <?php
+}
+    osc_add_hook('admin_page_header', 'customPageHeader');
 
-    function customPageTitle($string) {
-        return sprintf(__('Pages &raquo; %s'), $string);
-    }
+function customPageTitle($string)
+{
+    return sprintf(__('Pages &raquo; %s'), $string);
+}
     osc_add_filter('admin_title', 'customPageTitle');
 
     //customize Head
-    function customHead() { ?>
+function customHead()
+{
+    ?>
         <script type="text/javascript">
             function order_up(id) {
                 $('#datatables_list_processing').show();
@@ -125,8 +133,8 @@
             }
         </script>
         <?php
-    }
-    osc_add_hook('admin_header','customHead', 10);
+}
+    osc_add_hook('admin_header', 'customHead', 10);
 
     $aData      = __get('aData');
     $aRawRows   = __get('aRawRows');
@@ -154,16 +162,16 @@
             <table class="table" cellpadding="0" cellspacing="0">
                 <thead>
                     <tr>
-                        <?php foreach($columns as $k => $v) {
+                        <?php foreach ($columns as $k => $v) {
                             echo '<th class="col-'.$k.' '.($sort==$k?($direction=='desc'?'sorting_desc':'sorting_asc'):'').'">'.$v.'</th>';
                         }; ?>
                     </tr>
                 </thead>
                 <tbody>
-                <?php if( count($rows) > 0 ) { ?>
-                    <?php foreach($rows as $key => $row) { ?>
+                <?php if ( count($rows) > 0 ) { ?>
+                    <?php foreach ($rows as $key => $row) { ?>
                         <tr>
-                            <?php foreach($row as $k => $v) { ?>
+                            <?php foreach ($row as $k => $v) { ?>
                                 <td class="col-<?php echo $k; ?>"><?php echo $v; ?></td>
                             <?php }; ?>
                         </tr>
@@ -182,11 +190,12 @@
     </form>
 </div>
 <?php
-    function showingResults(){
-        $aData = __get('aData');
-        echo '<ul class="showing-results"><li><span>'.osc_pagination_showing((Params::getParam('iPage')-1)*$aData['iDisplayLength']+1, ((Params::getParam('iPage')-1)*$aData['iDisplayLength'])+count($aData['aRows']), $aData['iTotalDisplayRecords'], $aData['iTotalRecords']).'</span></li></ul>';
-    }
-    osc_add_hook('before_show_pagination_admin','showingResults');
+function showingResults()
+{
+    $aData = __get('aData');
+    echo '<ul class="showing-results"><li><span>'.osc_pagination_showing((Params::getParam('iPage')-1)*$aData['iDisplayLength']+1, ((Params::getParam('iPage')-1)*$aData['iDisplayLength'])+count($aData['aRows']), $aData['iTotalDisplayRecords'], $aData['iTotalRecords']).'</span></li></ul>';
+}
+    osc_add_hook('before_show_pagination_admin', 'showingResults');
     osc_show_pagination_admin($aData);
 ?>
 <form id="dialog-page-delete" method="get" action="<?php echo osc_admin_base_url(true); ?>" class="has-form-actions hide" title="<?php echo osc_esc_html(__('Delete page')); ?>">

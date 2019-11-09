@@ -1,4 +1,6 @@
-<?php if ( ! defined('OC_ADMIN')) exit('Direct access is not allowed.'); ?>
+<?php if ( ! defined('OC_ADMIN')) {
+    exit('Direct access is not allowed.');
+} ?>
 <!DOCTYPE html>
 <html lang="<?php echo substr(osc_current_admin_locale(), 0, 2); ?>">
 <head>
@@ -23,10 +25,10 @@
     );
     $locales = osc_get_locales();
     $codes   = array();
-    foreach($locales as $locale) {
+    foreach ($locales as $locale) {
         $codes[] = '\''. osc_esc_js($locale['pk_c_code']) . '\'';
     }
-?>
+    ?>
         osc.locales = {};
         osc.locales._default = '<?php echo osc_language(); ?>';
         osc.locales.current = '<?php echo osc_current_admin_locale(); ?>';
@@ -36,7 +38,7 @@
     </script>
     <?php osc_run_hook('admin_header'); ?>
 </head>
-<body class="<?php echo implode(' ',osc_apply_filter('admin_body_class', array())); ?>">
+<body class="<?php echo implode(' ', osc_apply_filter('admin_body_class', array())); ?>">
     <?php AdminToolbar::newInstance()->render(); ?>
     </div>
     <div id="content">

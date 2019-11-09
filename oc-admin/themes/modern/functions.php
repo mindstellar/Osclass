@@ -1,18 +1,22 @@
-<?php if ( ! defined('OC_ADMIN')) exit('Direct access is not allowed.');
+<?php if ( ! defined('OC_ADMIN')) {
+    exit('Direct access is not allowed.');
+}
 
 osc_add_filter('admin_body_class', 'admin_modeCompact_class');
-function admin_modeCompact_class($args){
-    $compactMode = osc_get_preference('compact_mode','modern_admin_theme');
-    if($compactMode == true){
+function admin_modeCompact_class($args)
+{
+    $compactMode = osc_get_preference('compact_mode', 'modern_admin_theme');
+    if ($compactMode == true) {
         $args[] = 'compact';
     }
     return $args;
 }
-osc_add_hook('ajax_admin_compactmode','modern_compactmode_actions');
-function modern_compactmode_actions(){
-    $compactMode = osc_get_preference('compact_mode','modern_admin_theme');
+osc_add_hook('ajax_admin_compactmode', 'modern_compactmode_actions');
+function modern_compactmode_actions()
+{
+    $compactMode = osc_get_preference('compact_mode', 'modern_admin_theme');
     $modeStatus  = array('compact_mode'=>true);
-    if($compactMode == true){
+    if ($compactMode == true) {
         $modeStatus['compact_mode'] = false;
     }
     osc_set_preference('compact_mode', $modeStatus['compact_mode'], 'modern_admin_theme');
@@ -20,7 +24,8 @@ function modern_compactmode_actions(){
 }
 
 // favicons
-function admin_header_favicons() {
+function admin_header_favicons()
+{
     $favicons   = array();
     $favicons[] = array(
         'rel'   => 'shortcut icon',
@@ -50,14 +55,20 @@ function admin_header_favicons() {
 
     $favicons = osc_apply_filter('admin_favicons', $favicons);
 
-    foreach($favicons as $f) { ?>
-        <link <?php if($f['rel'] !== '') { ?>rel="<?php echo $f['rel']; ?>" <?php } if($f['sizes'] !== '') { ?>sizes="<?php echo $f['sizes']; ?>" <?php } ?>href="<?php echo $f['href']; ?>">
+    foreach ($favicons as $f) { ?>
+        <link <?php if ($f['rel'] !== '') {
+            ?>rel="<?php echo $f['rel']; ?>" <?php
+              } if ($f['sizes'] !== '') {
+                    ?>sizes="<?php echo $f['sizes']; ?>" <?php
+              } ?>href="<?php echo $f['href']; ?>">
     <?php }
 }
 osc_add_hook('admin_header', 'admin_header_favicons');
 
 // admin footer
-function admin_footer_html() { ?>
+function admin_footer_html()
+{
+    ?>
     <div class="float-left">
         <?php printf(__('Thank you for using <a href="%s" target="_blank">Osclass</a>'), 'https://github.com/navjottomer/Osclass/'); ?> -
         <a title="<?php _e('Forums'); ?>" href="https://osclass.discourse.group" target="_blank"><?php _e('Forums'); ?></a> &middot;
@@ -71,39 +82,49 @@ function admin_footer_html() { ?>
 osc_add_hook('admin_content_footer', 'admin_footer_html');
 
 // scripts
-function admin_theme_js() {
+function admin_theme_js()
+{
     osc_load_scripts();
 }
 osc_add_hook('admin_header', 'admin_theme_js', 9);
 
 // css
-function admin_theme_css() {
+function admin_theme_css()
+{
     osc_load_styles();
 }
 osc_add_hook('admin_header', 'admin_theme_css', 9);
 
-function printLocaleTabs($locales = null) {
-    if($locales==null) { $locales = osc_get_locales(); }
+function printLocaleTabs($locales = null)
+{
+    if ($locales==null) {
+        $locales = osc_get_locales();
+    }
     $num_locales = count($locales);
-    if($num_locales>1) {
-    echo '<div id="language-tab" class="ui-osc-tabs ui-tabs ui-widget ui-widget-content ui-corner-all"><ul class="ui-tabs-nav ui-helper-reset ui-helper-clearfix ui-widget-header ui-corner-all">';
-        foreach($locales as $locale) {
+    if ($num_locales>1) {
+        echo '<div id="language-tab" class="ui-osc-tabs ui-tabs ui-widget ui-widget-content ui-corner-all"><ul class="ui-tabs-nav ui-helper-reset ui-helper-clearfix ui-widget-header ui-corner-all">';
+        foreach ($locales as $locale) {
             echo '<li class="ui-state-default ui-corner-top"><a href="#'.$locale['pk_c_code'].'">'.$locale['s_name'].'</a></li>';
         }
-    echo '</ul></div>';
+        echo '</ul></div>';
     };
 }
 
-function printLocaleTitle($locales = null, $item = null) {
-    if($locales==null) { $locales = osc_get_locales(); }
-    if($item==null) { $item = osc_item(); }
+function printLocaleTitle($locales = null, $item = null)
+{
+    if ($locales==null) {
+        $locales = osc_get_locales();
+    }
+    if ($item==null) {
+        $item = osc_item();
+    }
     $num_locales = count($locales);
-    foreach($locales as $locale) {
+    foreach ($locales as $locale) {
         echo '<div class="input-has-placeholder input-title-wide"><label for="title">' . __('Enter title here') . ' *</label>';
         $title = (isset($item) && isset($item['locale'][$locale['pk_c_code']]) && isset($item['locale'][$locale['pk_c_code']]['s_title'])) ? $item['locale'][$locale['pk_c_code']]['s_title'] : '';
-        if( Session::newInstance()->_getForm('title') != "" ) {
+        if ( Session::newInstance()->_getForm('title') != "" ) {
             $title_ = Session::newInstance()->_getForm('title');
-            if( $title_[$locale['pk_c_code']] != "" ){
+            if ( $title_[$locale['pk_c_code']] != "" ) {
                 $title = $title_[$locale['pk_c_code']];
             }
         }
@@ -115,18 +136,21 @@ function printLocaleTitle($locales = null, $item = null) {
     }
 }
 
-function printLocaleTitlePage($locales = null,$page = null) {
-    if($locales==null) { $locales = osc_get_locales(); }
+function printLocaleTitlePage($locales = null, $page = null)
+{
+    if ($locales==null) {
+        $locales = osc_get_locales();
+    }
     $aFieldsDescription = Session::newInstance()->_getForm("aFieldsDescription");
     $num_locales = count($locales);
     echo '<label for="title">' . __('Title') . ' *</label>';
 
-    foreach($locales as $locale) {
+    foreach ($locales as $locale) {
         $title = '';
-        if(isset($page['locale'][$locale['pk_c_code']])) {
+        if (isset($page['locale'][$locale['pk_c_code']])) {
             $title = $page['locale'][$locale['pk_c_code']]['s_title'];
         }
-        if( isset($aFieldsDescription[$locale['pk_c_code']]) && isset($aFieldsDescription[$locale['pk_c_code']]['s_title']) &&$aFieldsDescription[$locale['pk_c_code']]['s_title'] != '' ) {
+        if ( isset($aFieldsDescription[$locale['pk_c_code']]) && isset($aFieldsDescription[$locale['pk_c_code']]['s_title']) &&$aFieldsDescription[$locale['pk_c_code']]['s_title'] != '' ) {
             $title = $aFieldsDescription[$locale['pk_c_code']]['s_title'];
         }
         $name = $locale['pk_c_code'] . '#s_title';
@@ -139,19 +163,24 @@ function printLocaleTitlePage($locales = null,$page = null) {
     }
 }
 
-function printLocaleDescription($locales = null, $item = null) {
-    if($locales==null) { $locales = osc_get_locales(); }
-    if($item==null) { $item = osc_item(); }
+function printLocaleDescription($locales = null, $item = null)
+{
+    if ($locales==null) {
+        $locales = osc_get_locales();
+    }
+    if ($item==null) {
+        $item = osc_item();
+    }
     $num_locales = count($locales);
-    foreach($locales as $locale) {
+    foreach ($locales as $locale) {
         $name = 'description'. '[' . $locale['pk_c_code'] . ']';
 
         echo '<div><label for="description">' . __('Description') . ' *</label>';
         $description = (isset($item) && isset($item['locale'][$locale['pk_c_code']]) && isset($item['locale'][$locale['pk_c_code']]['s_description'])) ? $item['locale'][$locale['pk_c_code']]['s_description'] : '';
 
-        if( Session::newInstance()->_getForm('description') != "" ) {
+        if ( Session::newInstance()->_getForm('description') != "" ) {
             $description_ = Session::newInstance()->_getForm('description');
-            if( $description_[$locale['pk_c_code']] != "" ){
+            if ( $description_[$locale['pk_c_code']] != "" ) {
                 $description = $description_[$locale['pk_c_code']];
             }
         }
@@ -162,17 +191,20 @@ function printLocaleDescription($locales = null, $item = null) {
     }
 }
 
-function printLocaleDescriptionPage($locales = null, $page = null) {
-    if($locales==null) { $locales = osc_get_locales(); }
+function printLocaleDescriptionPage($locales = null, $page = null)
+{
+    if ($locales==null) {
+        $locales = osc_get_locales();
+    }
     $aFieldsDescription = Session::newInstance()->_getForm("aFieldsDescription");
     $num_locales = count($locales);
 
-    foreach($locales as $locale) {
+    foreach ($locales as $locale) {
         $description = '';
-        if(isset($page['locale'][$locale['pk_c_code']])) {
+        if (isset($page['locale'][$locale['pk_c_code']])) {
             $description = $page['locale'][$locale['pk_c_code']]['s_text'];
         }
-        if( isset($aFieldsDescription[$locale['pk_c_code']]) && isset($aFieldsDescription[$locale['pk_c_code']]['s_text']) &&$aFieldsDescription[$locale['pk_c_code']]['s_text'] != '' ) {
+        if ( isset($aFieldsDescription[$locale['pk_c_code']]) && isset($aFieldsDescription[$locale['pk_c_code']]['s_text']) &&$aFieldsDescription[$locale['pk_c_code']]['s_text'] != '' ) {
             $description = $aFieldsDescription[$locale['pk_c_code']]['s_text'];
         }
 
@@ -184,26 +216,29 @@ function printLocaleDescriptionPage($locales = null, $page = null) {
     }
 }
 
-function check_market_language_compatibility($slug, $language_version) {
+function check_market_language_compatibility($slug, $language_version)
+{
     return osc_check_language_update($slug);
 }
 
-function check_market_compatibility($versions) {
-    $versions = explode(',',$versions);
+function check_market_compatibility($versions)
+{
+    $versions = explode(',', $versions);
     $current_version = OSCLASS_VERSION;
 
-    foreach($versions as $_version) {
+    foreach ($versions as $_version) {
         $result = version_compare2(OSCLASS_VERSION, $_version);
 
-        if( $result == 0 || $result == -1 ) {
+        if ( $result == 0 || $result == -1 ) {
             return true;
         }
     }
     return false;
 }
 
-function check_version_admin_footer() {
-    if( (time() - osc_last_version_check()) > (24 * 3600) ) {
+function check_version_admin_footer()
+{
+    if ( (time() - osc_last_version_check()) > (24 * 3600) ) {
         ?>
         <script type="text/javascript">
             $(document).ready(function() {
@@ -219,7 +254,8 @@ function check_version_admin_footer() {
 }
 osc_add_hook('admin_footer', 'check_version_admin_footer');
 
-function check_languages_admin_footer() {
+function check_languages_admin_footer()
+{
     ?>
     <script type="text/javascript">
         $(document).ready(function() {
@@ -230,10 +266,11 @@ function check_languages_admin_footer() {
             );
         });
     </script>
-<?php
+    <?php
 }
 
-function check_themes_admin_footer() {
+function check_themes_admin_footer()
+{
     ?>
     <script type="text/javascript">
         $(document).ready(function() {
@@ -244,10 +281,11 @@ function check_themes_admin_footer() {
             );
         });
     </script>
-<?php
+    <?php
 }
 
-function check_plugins_admin_footer() {
+function check_plugins_admin_footer()
+{
     ?>
     <script type="text/javascript">
         $(document).ready(function() {
@@ -258,7 +296,7 @@ function check_plugins_admin_footer() {
             );
         });
     </script>
-<?php
+    <?php
 }
 
 /* end of file */

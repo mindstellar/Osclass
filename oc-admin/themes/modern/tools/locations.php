@@ -1,4 +1,6 @@
-<?php if ( ! defined('OC_ADMIN')) exit('Direct access is not allowed.');
+<?php if ( ! defined('OC_ADMIN')) {
+    exit('Direct access is not allowed.');
+}
 /*
  * Copyright 2014 Osclass
  *
@@ -18,15 +20,19 @@
     $all        = osc_get_preference('location_todo');
     $worktodo   = LocationsTmp::newInstance()->count();
 
-    function render_offset(){
-        return 'row-offset';
-    }
+function render_offset()
+{
+    return 'row-offset';
+}
 
-    function customHead() {
-        $all = osc_get_preference('location_todo');
-        if( $all == '' ) $all = 0;
-        $worktodo   = LocationsTmp::newInstance()->count();
-        ?>
+function customHead()
+{
+    $all = osc_get_preference('location_todo');
+    if ( $all == '' ) {
+        $all = 0;
+    }
+    $worktodo   = LocationsTmp::newInstance()->count();
+    ?>
         <script type="text/javascript">
             function reload() {
                 window.location = '<?php echo osc_admin_base_url(true).'?page=tools&action=locations'; ?>';
@@ -58,18 +64,21 @@
             });
         </script>
         <?php
-    }
-    osc_add_hook('admin_header','customHead', 10);
+}
+    osc_add_hook('admin_header', 'customHead', 10);
 
-    osc_add_hook('admin_page_header','customPageHeader');
-    function customPageHeader(){ ?>
+    osc_add_hook('admin_page_header', 'customPageHeader');
+function customPageHeader()
+{
+    ?>
         <h1><?php _e('Tools'); ?></h1>
     <?php
-    }
+}
 
-    function customPageTitle($string) {
-        return sprintf(__('Location stats &raquo; %s'), $string);
-    }
+function customPageTitle($string)
+{
+    return sprintf(__('Location stats &raquo; %s'), $string);
+}
     osc_add_filter('admin_title', 'customPageTitle');
 
     osc_current_admin_theme_path( 'parts/header.php' ); ?>
@@ -77,7 +86,7 @@
     <!-- settings form -->
     <div id="">
         <h2 class="render-title"><?php _e('Locations stats'); ?></h2>
-        <?php if($worktodo > 0) { ?>
+        <?php if ($worktodo > 0) { ?>
         <p>
             <span id="percent">0</span> % <?php _e("Complete"); ?>
         </p>

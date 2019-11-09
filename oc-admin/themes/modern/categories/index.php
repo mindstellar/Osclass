@@ -1,4 +1,6 @@
-<?php if ( ! defined('OC_ADMIN')) exit('Direct access is not allowed.');
+<?php if ( ! defined('OC_ADMIN')) {
+    exit('Direct access is not allowed.');
+}
 /*
  * Copyright 2014 Osclass
  *
@@ -20,27 +22,33 @@
 
     $categories = __get('categories');
 
-    function addHelp() {
-        echo '<p>' . __('Add, edit or delete the categories or subcategories in which users can post listings. Reorder sections by dragging and dropping, or nest a subcategory in an expanded category. <strong>Be careful</strong>: If you delete a category, all listings associated will also be deleted!') . '</p>';
-    }
-    osc_add_hook('help_box','addHelp');
+function addHelp()
+{
+    echo '<p>' . __('Add, edit or delete the categories or subcategories in which users can post listings. Reorder sections by dragging and dropping, or nest a subcategory in an expanded category. <strong>Be careful</strong>: If you delete a category, all listings associated will also be deleted!') . '</p>';
+}
+    osc_add_hook('help_box', 'addHelp');
 
-    function customPageHeader() { ?>
+function customPageHeader()
+{
+    ?>
         <h1><?php _e('Categories'); ?>
             <a href="#" class="btn ico ico-32 ico-help float-right"></a>
             <a href="<?php echo osc_admin_base_url(true); ?>?page=categories&amp;action=add_post_default&<?php echo osc_csrf_token_url(); ?>" class="btn btn-green ico ico-32 ico-add-white float-right"><?php _e('Add'); ?></a>
     </h1>
-<?php
-    }
-    osc_add_hook('admin_page_header','customPageHeader');
+    <?php
+}
+    osc_add_hook('admin_page_header', 'customPageHeader');
 
-    function customPageTitle($string) {
-        return sprintf(__('Categories &raquo; %s'), $string);
-    }
+function customPageTitle($string)
+{
+    return sprintf(__('Categories &raquo; %s'), $string);
+}
     osc_add_filter('admin_title', 'customPageTitle');
 
     //customize Head
-    function customHead() { ?>
+function customHead()
+{
+    ?>
         <script type="text/javascript">
             document.write('<style type="text/css">.tabber{ display:none; }</style>');
         </script>
@@ -310,24 +318,29 @@
             }
         </script>
         <?php
-    }
-    osc_add_hook('admin_header','customHead', 10);
+}
+    osc_add_hook('admin_header', 'customHead', 10);
 
-function drawCategory($category){
-    if( count($category['categories']) > 0 ) { $has_subcategories = true; } else { $has_subcategories = false; }
-?>
+function drawCategory($category)
+{
+    if ( count($category['categories']) > 0 ) {
+        $has_subcategories = true;
+    } else {
+        $has_subcategories = false;
+    }
+    ?>
 <li id="list_<?php echo $category['pk_i_id']; ?>" class="category_li <?php echo ( $category['b_enabled'] == 1 ? 'enabled' : 'disabled' ); ?> " >
     <div class="category_div <?php echo ( $category['b_enabled'] == 1 ? 'enabled' : 'disabled' ); ?>" category_id="<?php echo $category['pk_i_id']; ?>" >
         <div class="category_row">
             <div class="handle ico ico-32 ico-droppable"></div>
             <div class="ico-childrens">
                 <?php
-                if( $has_subcategories ) {
+                if ( $has_subcategories ) {
                     echo '<span class="toggle status-collapsed">+</span>';
                 } else {
                     echo '<span class="toggle status-expanded">-</span>';
                 }
-            ?>
+                ?>
             </div>
             <div class="name-cat" id="<?php echo 'quick_edit_' . $category['pk_i_id']; ?>">
                 <?php echo '<span class="name">'.$category['s_name'].'</span>'; ?>
@@ -342,15 +355,15 @@ function drawCategory($category){
         </div>
         <div class="edit content_list_<?php echo $category['pk_i_id']; ?>"></div>
     </div>
-    <?php if($has_subcategories) { ?>
+    <?php if ($has_subcategories) { ?>
         <ul class="subcategory subcategories-<?php echo $category['pk_i_id']; ?> " style="display: none;">
-            <?php foreach($category['categories'] as $subcategory) {
+            <?php foreach ($category['categories'] as $subcategory) {
                 drawCategory($subcategory);
             } ?>
         </ul>
     <?php } ?>
 </li>
-<?php
+    <?php
 } //End drawCategory
 ?>
 <?php osc_current_admin_theme_path( 'parts/header.php' ); ?>
@@ -364,8 +377,12 @@ function drawCategory($category){
                     </div>
                     <div class="list-categories">
                         <ul class="sortable">
-                        <?php foreach($categories as $category) {
-                            if( count($category['categories']) > 0 ) { $has_subcategories = true; } else { $has_subcategories = false; }
+                        <?php foreach ($categories as $category) {
+                            if ( count($category['categories']) > 0 ) {
+                                $has_subcategories = true;
+                            } else {
+                                $has_subcategories = false;
+                            }
                             drawCategory($category);
                         } ?>
                         </ul>

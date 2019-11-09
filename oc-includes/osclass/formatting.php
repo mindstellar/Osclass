@@ -21,13 +21,14 @@
  * @param array $array Array used to apply addslashes.
  * @return array $array after apply addslashes.
  */
-function add_slashes_extended( $array ) {
-    if(get_magic_quotes_gpc()) {
+function add_slashes_extended($array)
+{
+    if (get_magic_quotes_gpc()) {
         return $array;
     }
     
     foreach ( (array) $array as $k => $v ) {
-        if( is_array($v) ) {
+        if ( is_array($v) ) {
             $array[$k] = add_slashes_extended($v);
         } else {
             $array[$k] = addslashes($v);
@@ -38,12 +39,13 @@ function add_slashes_extended( $array ) {
 }
 
 
-	/**
-	 * @param $string
-	 *
-	 * @return mixed|null|string|string[]
-	 */
-	function osc_sanitizeString( $string ) {
+    /**
+     * @param $string
+     *
+     * @return mixed|null|string|string[]
+     */
+function osc_sanitizeString($string)
+{
     $string = strip_tags($string);
     $string = preg_replace('/%([a-fA-F0-9][a-fA-F0-9])/', '--$1--', $string);
     $string = str_replace('%', '', $string);
@@ -53,14 +55,14 @@ function add_slashes_extended( $array ) {
 
     //$string = strtolower($string);
     // @TODO  retrieve $arr_stop_words from Locale user custom list. as editable in /oc-admin/index.php?page=languages
-    //        and do a 
+    //        and do a
     //        str_replace($arr_stop_words, '', $string);
     $string = preg_replace('/&.+?;/', '', $string);
     $string = str_replace(array('.','\'','--'), '-', $string);
     $string = preg_replace('/\s+/', '-', $string);
     $string = preg_replace('|[\p{Ps}\p{Pe}\p{Pi}\p{Pf}\p{Po}\p{S}\p{Z}\p{C}\p{No}]+|u', '', $string);
 
-    if( is_utf8($string) ) {
+    if ( is_utf8($string) ) {
         $string = urlencode($string);
         // mdash & ndash
         $string = str_replace(array('%e2%80%93', '%e2%80%94'), '-', strtolower($string));
@@ -73,13 +75,14 @@ function add_slashes_extended( $array ) {
 }
 
 
-	/**
-	 * @param $string
-	 *
-	 * @return mixed|null|string|string[]
-	 */
-	
-	function remove_accents( $string ) {
+    /**
+     * @param $string
+     *
+     * @return mixed|null|string|string[]
+     */
+    
+function remove_accents($string)
+{
     if ( ! preg_match( '/[\x80-\xff]/', $string ) ) {
         return $string;
     }
@@ -468,12 +471,13 @@ function add_slashes_extended( $array ) {
 
 
 
-	/**
-	 * @param $string
-	 *
-	 * @return false|int
-	 */
-	function is_utf8( $string ) {
+    /**
+     * @param $string
+     *
+     * @return false|int
+     */
+function is_utf8($string)
+{
     return preg_match('%^(?:
           [\x09\x0A\x0D\x20-\x7E]            # ASCII
         | [\xC2-\xDF][\x80-\xBF]             # non-overlong 2-byte

@@ -9,12 +9,12 @@ class Scripts extends Dependencies {
 
     private static $instance;
 
-	/**
-	 * @return \Scripts
-	 */
-	public static function newInstance()
+    /**
+     * @return \Scripts
+     */
+    public static function newInstance()
     {
-        if(!self::$instance instanceof self) {
+        if (!self::$instance instanceof self) {
             self::$instance = new self;
         }
         return self::$instance;
@@ -74,8 +74,8 @@ class Scripts extends Dependencies {
     {
         $scripts = array();
         parent::order();
-        foreach($this->resolved as $id) {
-            if( isset($this->registered[$id]['url']) ) {
+        foreach ($this->resolved as $id) {
+            if ( isset($this->registered[$id]['url']) ) {
                 $scripts[] = $this->registered[$id]['url'];
             }
         }
@@ -87,8 +87,8 @@ class Scripts extends Dependencies {
      */
     public function printScripts()
     {
-        foreach($this->getScripts() as $script) {
-            if($script!=='') {
+        foreach ($this->getScripts() as $script) {
+            if ($script!=='') {
                 echo '<script type="text/javascript" src="' . osc_apply_filter('theme_url', $script) . '"></script>' . PHP_EOL;
             }
         }
