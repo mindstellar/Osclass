@@ -311,7 +311,7 @@ function osc_get_subdomain_params() {
  *
  * @return string
  */
-function osc_get_locations_json() {
+function osc_get_locations_json_url() {
     return 'https://raw.githubusercontent.com/navjottomer/Osclass-Extras/master/locations/list.json';
 }
 
@@ -321,7 +321,7 @@ function osc_get_locations_json() {
  * @param string $location
  * @return string
  */
-function osc_get_locations_sql($location) {
+function osc_get_locations_sql_url($location) {
     $location = rawurlencode($location);
     return 'https://raw.githubusercontent.com/navjottomer/Osclass-Extras/master/locations/'.$location;
 }
