@@ -1723,8 +1723,11 @@
      *
      * @return bool
      */
-    function osc_check_language_update($update_uri, $version = null)
+    function osc_check_language_update($update_uri, $version = null, $disable = true)
     {
+        if ($disable){
+            return false;
+        }
         $uri = _get_market_url('languages', $update_uri);
         if ($uri != false) {
             if (false === ($json = @osc_file_get_contents($uri))) {
@@ -1755,8 +1758,11 @@
      *
      * @return bool|string
      */
-    function _get_market_url($type, $update_uri)
+    function _get_market_url($type, $update_uri, $disable = true)
     {
+        if ($disable){
+            return false;
+        }
         if ($update_uri == null) {
             return false;
         }
@@ -1785,8 +1791,11 @@
      *
      * @return bool
      */
-    function _need_update($uri, $version)
+    function _need_update($uri, $version, $disable = true)
     {
+        if($disable){
+            return false;
+        }
         if (false === ($json = osc_file_get_contents($uri))) {
             return false;
         }
@@ -2397,8 +2406,11 @@
     }
 
 
-    function osc_do_auto_upgrade()
+    function osc_do_auto_upgrade($disable = true)
     {
+        if ($disable){
+            return true;
+        }
         $data = osc_file_get_contents('https://example.org/latest_version_v1.php?callback=?');
         $data = preg_replace('|^\?\((.*?)\);$|', '$01', $data);
         /** @var object $json */
