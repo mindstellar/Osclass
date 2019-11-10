@@ -2525,10 +2525,7 @@ function osc_do_auto_upgrade($disable = true)
         osc_set_preference('update_core_json');
     }
     osc_set_preference('last_version_check', time());
-}
-
-
-else {
+} else {
     osc_set_preference('update_core_json');
     osc_set_preference('last_version_check', time() - 23 * 3600);
 }
