@@ -1832,10 +1832,6 @@ function _get_market_url($type, $update_uri, $disable = true)
 }
 
 
-return false;
-}
-
-
 /**
  * @param $uri
  * @param $version
