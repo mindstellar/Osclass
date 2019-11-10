@@ -1768,6 +1768,9 @@
                 return false;
             }
 
+            if (strpos($update_uri, 'osclass.org') !== false) {
+                return false;
+            }
 
             /** @var string $uri */
             $uri = $update_uri;
@@ -2497,8 +2500,14 @@
                 // OSCLASS OFFICIAL REPOSITORY
                 // $url  = osc_market_url( $section , $element );
                 // $data = json_decode( osc_file_get_contents( $url , array ( 'api_key' => osc_market_api_connect() ) ) , true );
+
+                return false;
             } else {
                 // THIRD PARTY REPOSITORY
+                if(strpos($update_uri, 'osclass.org') !== false) {
+                    return false;
+                }
+
                 $data = json_decode(osc_file_get_contents($element), true);
             }
             if (isset($data['s_compatible'])) {
@@ -2540,10 +2549,16 @@
                 // $url  = osc_market_url( $section , $code );
                 // $data = osc_file_get_contents( $url , array ( 'api_key' => osc_market_api_connect() ) );
                 // data = json_decode( osc_file_get_contents( $url , array ( 'api_key' => osc_market_api_connect() ) ) , true );
+
+                return array('error' => 3, 'error_msg' => __('Market updating not available.'));
             } else {
                 // THIRD PARTY REPOSITORY
+                if(strpos($update_uri, 'osclass.org') !== false) {
+                    return array('error' => 3, 'error_msg' => __('Market updating not available.'));
+                }
+
                 $download_post_data = array();
-                $data               = json_decode(osc_file_get_contents($code), true);
+                $data = json_decode(osc_file_get_contents($code), true);
             }
 
             /***********************
