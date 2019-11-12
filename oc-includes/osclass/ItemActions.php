@@ -449,11 +449,11 @@ class ItemActions
 
                     $status = '';
                     $status = $akismet->isCommentSpam() ? 'SPAM' : $status;
-                    if ($status === 'SPAM') {
-                        $spam = true;
-                        break;
-                    }
+                if ($status === 'SPAM') {
+                    $spam = true;
+                    break;
                 }
+            }
         }
 
         return $spam;
