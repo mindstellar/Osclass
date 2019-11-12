@@ -433,26 +433,27 @@ class ItemActions
     private function _akismet_text($title, $description, $author, $email)
     {
         $spam = false;
-        foreach ($title as $k => $_data) {
-            $_title       = $title[ $k ];
-            $_description = $description[ $k ];
-            $content      = $_title . ' ' . $_description;
-            if (osc_akismet_key()) {
-                require_once LIB_PATH . 'Akismet.class.php';
-                $akismet = new Akismet(osc_base_url(), osc_akismet_key());
+        if (osc_akismet_key()) {
+            foreach ($title as $k => $_data) {
+                $_title       = $title[ $k ];
+                $_description = $description[ $k ];
+                $content      = $_title . ' ' . $_description;
 
-                $akismet->setCommentContent($content);
-                $akismet->setCommentAuthor($author);
-                $akismet->setCommentAuthorEmail($email);
-                $akismet->setUserIP(get_ip());
+                    require_once LIB_PATH . 'Akismet.class.php';
+                    $akismet = new Akismet(osc_base_url(), osc_akismet_key());
 
-                $status = '';
-                $status = $akismet->isCommentSpam() ? 'SPAM' : $status;
-                if ($status === 'SPAM') {
-                    $spam = true;
-                    break;
+                    $akismet->setCommentContent($content);
+                    $akismet->setCommentAuthor($author);
+                    $akismet->setCommentAuthorEmail($email);
+                    $akismet->setUserIP(get_ip());
+
+                    $status = '';
+                    $status = $akismet->isCommentSpam() ? 'SPAM' : $status;
+                    if ($status === 'SPAM') {
+                        $spam = true;
+                        break;
+                    }
                 }
-            }
         }
 
         return $spam;
