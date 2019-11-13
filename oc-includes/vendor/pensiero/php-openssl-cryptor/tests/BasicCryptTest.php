@@ -1,6 +1,8 @@
 <?php
 
-use ioncube\phpOpensslCryptor\Cryptor;
+require __DIR__ . '../vendor/autoload.php';
+
+use OpensslCryptor\Cryptor;
 
 $data = 'Good things come in small packages.';
 $key = '9901:io=[<>602vV03&Whb>9J&M~Oq';

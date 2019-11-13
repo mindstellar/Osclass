@@ -1,0 +1,5 @@
+/vendor/
+/build/
+/.idea/
+composer.lock
+composer.phar

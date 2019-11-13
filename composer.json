@@ -1,6 +1,6 @@
 {
   "name": "navjottomer/osclass",
-  "type": "package",
+  "type": "project",
   "description": "With Osclass, get your own  classifieds site for free. Build your own Osclass installation and start advertising real estate, jobs or whatever you want- in minutes! ",
   "keywords": ["osclass","classified","open-source","php-classified","cms"],
   "homepage": "https://github.com/navjottomer/osclass",
@@ -12,14 +12,9 @@
         }
     ],
   "config": {
-       "vendor-dir": "oc-includes/vendor"
+       "vendor-dir": "oc-includes/vendor",
+       "optimize-autoloader": true
     },
-  "repositories": [
-    {
-      "url": "https://github.com/ioncube/php-openssl-cryptor",
-      "type": "git"
-    }
-  ],
   "require": {
     "php": ">=5.6.20",
     "ext-json": "*",
@@ -33,7 +28,7 @@
     "phpmailer/phpmailer": "5.2.x",
     "pclzip/pclzip": "2.8.2",
     "phpseclib/phpseclib": "2.0.x",
-    "ioncube/php-openssl-cryptor": "dev-master#f62397b",
+    "pensiero/php-openssl-cryptor": "0.1.0",
     "google/recaptcha": "1.1.x",
     "gettext/gettext": "4.6.x"    
   },
