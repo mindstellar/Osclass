@@ -23,7 +23,7 @@
     * @author Osclass
     */
 
-	use ioncube\phpOpensslCryptor\Cryptor;
+	use OpensslCryptor\Cryptor;
 
 	if(!defined( 'BCRYPT_COST')) { define( 'BCRYPT_COST', 15); }
 
@@ -296,11 +296,12 @@
     }
 
 
-	/**
-	 * @param $string
-	 *
-	 * @return string
-	 */
+    /**
+    * @param $string
+    *
+    * @return string
+    * @throws \Exception
+    */
 	function osc_decrypt_alert( $string ) {
         $key = hash( 'sha256' , osc_get_alert_private_key(), true);
 

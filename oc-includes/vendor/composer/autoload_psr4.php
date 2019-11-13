@@ -7,8 +7,8 @@ $baseDir = dirname(dirname($vendorDir));
 
 return array(
     'phpseclib\\' => array($vendorDir . '/phpseclib/phpseclib/phpseclib'),
-    'ioncube\\phpOpensslCryptor\\' => array($vendorDir . '/ioncube/php-openssl-cryptor/src'),
     'ReCaptcha\\' => array($vendorDir . '/google/recaptcha/src/ReCaptcha'),
+    'OpensslCryptor\\' => array($vendorDir . '/pensiero/php-openssl-cryptor/src'),
     'Gettext\\Languages\\' => array($vendorDir . '/gettext/languages/src'),
     'Gettext\\' => array($vendorDir . '/gettext/gettext/src'),
 );
