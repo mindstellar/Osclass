@@ -1,11 +1,10 @@
 {
   "name": "navjottomer/osclass",
-  "type": "project",
+  "type": "package",
   "description": "With Osclass, get your own  classifieds site for free. Build your own Osclass installation and start advertising real estate, jobs or whatever you want- in minutes! ",
   "keywords": ["osclass","classified","open-source","php-classified","cms"],
   "homepage": "https://github.com/navjottomer/osclass",
   "license": "Apache-2.0",
-  "version": "v3.9.0-RC",
   "authors": [
         {
             "name": "Osclass Community",
