@@ -33,4 +33,3 @@ function locale_ru_RU_info() {
     );
 }
 
-?>

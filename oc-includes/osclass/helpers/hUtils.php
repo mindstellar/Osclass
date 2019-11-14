@@ -341,4 +341,4 @@ function osc_get_locations_sql_url($location)
     $location = rawurlencode($location);
     return 'https://raw.githubusercontent.com/navjottomer/Osclass-Extras/master/locations/'.$location;
 }
-?>
+

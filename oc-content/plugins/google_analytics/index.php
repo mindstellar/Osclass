@@ -73,4 +73,3 @@ Plugin update URI: http://www.osclass.org/files/plugins/google_analytics/update.
     osc_add_hook('footer', 'google_analytics_footer');
     osc_add_hook('admin_menu_init', 'google_admin_menu');
 
-?>

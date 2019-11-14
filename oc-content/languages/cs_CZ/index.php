@@ -33,4 +33,3 @@ function locale_cs_CZ_info() {
     );
 }
 
-?>

@@ -53,4 +53,3 @@ class CAdminUpgrade extends AdminSecBaseModel
     }
 }
 
-?>

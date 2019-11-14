@@ -33,4 +33,3 @@ function locale_el_GR_info() {
     );
 }
 
-?>

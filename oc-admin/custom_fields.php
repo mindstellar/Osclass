@@ -66,4 +66,3 @@ class CAdminCFields extends AdminSecBaseModel
 }
 
     /* file end: ./oc-admin/custom_fields.php */
-?>

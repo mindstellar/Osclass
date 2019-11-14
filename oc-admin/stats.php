@@ -275,4 +275,3 @@ class CAdminStats extends AdminSecBaseModel
 }
 
     /* file end: ./oc-admin/stats.php */
-?>

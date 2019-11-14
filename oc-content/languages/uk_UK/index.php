@@ -33,4 +33,3 @@ function locale_uk_UK_info() {
     );
 }
 
-?>

@@ -303,4 +303,4 @@ class CAdminPages extends AdminSecBaseModel
 }
 
     /* file end: ./oc-admin/pages.php */
-?>
+

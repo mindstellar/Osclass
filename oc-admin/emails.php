@@ -184,4 +184,3 @@ class CAdminEmails extends AdminSecBaseModel
 }
 
     /* file end: ./oc-admin/emails.php */
-?>

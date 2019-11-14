@@ -1136,4 +1136,4 @@ function _aux_search_category_slug($paramCat)
     return isset($category['s_slug'])?$category['s_slug']:'';
 }
 
-?>
+

@@ -33,4 +33,3 @@ function locale_da_DK_info() {
     );
 }
 
-?>

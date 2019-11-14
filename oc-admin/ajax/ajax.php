@@ -648,4 +648,4 @@ class CAdminAjax extends AdminSecBaseModel {
     }
 }
 
-?>
+

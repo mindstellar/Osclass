@@ -33,4 +33,3 @@ function locale_fa_IR_info() {
     );
 }
 
-?>

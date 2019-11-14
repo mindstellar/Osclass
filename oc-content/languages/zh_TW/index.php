@@ -33,4 +33,3 @@ function locale_zh_TW_info() {
     );
 }
 
-?>

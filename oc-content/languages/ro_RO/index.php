@@ -33,4 +33,3 @@ function locale_ro_RO_info() {
     );
 }
 
-?>

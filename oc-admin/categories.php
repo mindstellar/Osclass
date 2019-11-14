@@ -81,4 +81,4 @@ class CAdminCategories extends AdminSecBaseModel
 }
 
     /* file end: ./oc-admin/categories.php */
-?>
+

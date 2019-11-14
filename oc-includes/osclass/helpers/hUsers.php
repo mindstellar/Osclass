@@ -674,4 +674,4 @@ function osc_prepare_user_info()
 }
 
 
-?>
+
