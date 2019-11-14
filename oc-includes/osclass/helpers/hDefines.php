@@ -195,7 +195,7 @@ function osc_current_admin_theme_url($file = '')
      * Gets the complete path of a given admin's file
      *
      * @param string $file the admin's file
-     * @return string
+     * @return void
      */
 function osc_current_admin_theme_path($file = '')
 {
@@ -253,7 +253,7 @@ function osc_current_web_theme_url($file = '')
      * Gets the complete path of a given file using the theme path as a root
      *
      * @param string $file
-     * @return string
+     * @return void
      */
 function osc_current_web_theme_path($file = '')
 {

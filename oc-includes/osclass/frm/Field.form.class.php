@@ -332,7 +332,7 @@ FB;
     /**
      * @param null $catId
      *
-     * @return bool
+     * @return bool|void
      */
     public static function meta_fields_search($catId = null)
     {

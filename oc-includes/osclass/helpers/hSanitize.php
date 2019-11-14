@@ -125,7 +125,7 @@ function osc_sanitize_int($value)
 function osc_sanitize_phone($value)
 {
     if ( empty( $value ) ) {
-        return;
+        return '';
     }
 
     // Remove strings that aren't letter and number.
@@ -145,7 +145,7 @@ function osc_sanitize_phone($value)
     // Add dashes: ___-___-____
     if ( strlen( $value ) == 7 ) {
         $value = preg_replace( '/([0-9]{3})([0-9]{4})/', '$1-$2', $value );
-    } else if ( strlen( $value ) == 10 ) {
+    } elseif ( strlen( $value ) == 10 ) {
         $value = preg_replace( '/([0-9]{3})([0-9]{3})([0-9]{4})/', '$1-$2-$3', $value );
     }
 

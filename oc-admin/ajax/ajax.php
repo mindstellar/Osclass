@@ -25,7 +25,7 @@
  */
 class CAdminAjax extends AdminSecBaseModel {
 
-    function __construct()
+    public function __construct()
     {
         parent::__construct();
         $this->ajax = true;
@@ -37,7 +37,7 @@ class CAdminAjax extends AdminSecBaseModel {
     }
 
     //Business Layer...
-    function doModel()
+    public function doModel()
     {
         //specific things for this class
         switch ($this->action) {
@@ -89,7 +89,7 @@ class CAdminAjax extends AdminSecBaseModel {
                 }
                 break;
             case 'categories_order': // Save the order of the categories
-                osc_csrf_check(false);
+                osc_csrf_check();
                 $aIds        = json_decode(Params::getParam('list'), true);
                 $order       = array();
                 $error       = 0;
@@ -111,7 +111,7 @@ class CAdminAjax extends AdminSecBaseModel {
                     );
                     if ( is_bool($res) && !$res ) {
                         $error = 1;
-                    } else if ($res==1) {
+                    } elseif ($res==1) {
                         $aRecountCat[] = $cat['c'];
                     }
                     $order[$cat['p']] = $order[$cat['p']]+1;
@@ -153,7 +153,7 @@ class CAdminAjax extends AdminSecBaseModel {
                 $this->doView("fields/iframe.php");
                 break;
             case 'field_categories_post':
-                osc_csrf_check(false);
+                osc_csrf_check();
                 $error = 0;
                 $field = Field::newInstance()->findByName(Params::getParam("s_name"));
 
@@ -169,10 +169,10 @@ class CAdminAjax extends AdminSecBaseModel {
                             $field = Field::newInstance()->findBySlug($slug);
                             if (!$field || $field['pk_i_id']==Params::getParam("id")) {
                                 break;
-                            } else {
-                                $slug_k++;
-                                $slug = $slug_tmp."_".$slug_k;
                             }
+
+                            $slug_k++;
+                            $slug = $slug_tmp."_".$slug_k;
                         }
 
                         // trim options
@@ -230,7 +230,7 @@ class CAdminAjax extends AdminSecBaseModel {
 
                 break;
             case 'delete_field':
-                osc_csrf_check(false);
+                osc_csrf_check();
                 $res = Field::newInstance()->deleteByPrimaryKey(Params::getParam('id'));
 
                 if ( $res > 0 ) {
@@ -242,7 +242,7 @@ class CAdminAjax extends AdminSecBaseModel {
                 echo json_encode($result);
                 break;
             case 'add_field':
-                osc_csrf_check(false);
+                osc_csrf_check();
                 $s_name = __('NEW custom field');
                 $slug_tmp = $slug = preg_replace('|([-]+)|', '-', preg_replace('|[^a-z0-9_-]|', '-', strtolower($s_name)));
                 $slug_k = 0;
@@ -264,7 +264,7 @@ class CAdminAjax extends AdminSecBaseModel {
                 }
                 break;
             case 'enable_category':
-                osc_csrf_check(false);
+                osc_csrf_check();
                 $id       = strip_tags( Params::getParam('id') );
                 $enabled  = (Params::getParam('enabled') != '') ? Params::getParam('enabled') : 0;
                 $error    = 0;
@@ -333,7 +333,7 @@ class CAdminAjax extends AdminSecBaseModel {
 
                 break;
             case 'delete_category':
-                osc_csrf_check(false);
+                osc_csrf_check();
                 $id = Params::getParam("id");
                 $error = 0;
 
@@ -356,7 +356,7 @@ class CAdminAjax extends AdminSecBaseModel {
 
                 break;
             case 'edit_category_post':
-                osc_csrf_check(false);
+                osc_csrf_check();
                 $id = Params::getParam("id");
                 $fields['i_expiration_days'] = (Params::getParam("i_expiration_days") != '') ? Params::getParam("i_expiration_days") : 0;
                 $fields['b_price_enabled'] = (Params::getParam('b_price_enabled') != '') ? 1 : 0;
@@ -367,7 +367,7 @@ class CAdminAjax extends AdminSecBaseModel {
                 $postParams = Params::getParamsAsArray();
                 foreach ($postParams as $k => $v) {
                     if (preg_match('|(.+?)#(.+)|', $k, $m)) {
-                        if ($m[2] == 's_name') {
+                        if ($m[2] === 's_name') {
                             if ($v != "") {
                                 $has_one_title = 1;
                                 $aFieldsDescription[$m[1]][$m[2]] = $v;
@@ -397,14 +397,14 @@ class CAdminAjax extends AdminSecBaseModel {
 
                 if ($error==0) {
                     $msg = __("Category updated correctly");
-                } else if ($error==1) {
+                } elseif ($error==1) {
                     if ($has_one_title==1) {
                         $error = 4;
                         $msg = __('Category updated correctly, but some titles are empty');
                     } else {
                         $msg = __('Sorry, including at least a title is mandatory');
                     }
-                } else if ($error==2) {
+                } elseif ($error==2) {
                     $msg = __('An error occurred while updating');
                 }
                 echo json_encode(array('error' => $error, 'msg' => $msg, 'text' => $aFieldsDescription[$l]['s_name']));
@@ -483,7 +483,7 @@ class CAdminAjax extends AdminSecBaseModel {
                 echo json_encode($array);
                 break;
             case 'order_pages':
-                osc_csrf_check(false);
+                osc_csrf_check();
                 $order = Params::getParam("order");
                 $id    = Params::getParam("id");
                 if ($order != '' && $id != '') {
@@ -495,9 +495,9 @@ class CAdminAjax extends AdminSecBaseModel {
                     $condition = array();
                     $new_order = $actual_order;
 
-                    if ($order == 'up') {
+                    if ($order === 'up') {
                         $page = $mPages->findPrevPage($actual_order);
-                    } else if ($order == 'down') {
+                    } elseif ($order === 'down') {
                         $page = $mPages->findNextPage($actual_order);
                     }
                     if (isset($page['i_order'])) {
@@ -551,7 +551,7 @@ class CAdminAjax extends AdminSecBaseModel {
                     if (!defined('__FROM_CRON__') || !__FROM_CRON__) {
                         if ($result['error'] == 0) {
                             osc_add_flash_ok_message($result['message'], 'admin');
-                        } else if ($result['error'] == 6) {
+                        } elseif ($result['error'] == 6) {
                             osc_add_flash_warning_message($result['message'], 'admin');
                         }
                     }
@@ -563,7 +563,7 @@ class CAdminAjax extends AdminSecBaseModel {
              ** COMPLETE MARKET PROCESS **
              *******************************/
             case 'market': // AT THIS POINT WE KNOW IF THERE'S AN UPDATE OR NOT
-                osc_csrf_check(false);
+                osc_csrf_check();
                 $result = osc_market(Params::getParam('section'), Params::getParam('code'));
                 echo json_encode($result);
                 break;
@@ -597,7 +597,7 @@ class CAdminAjax extends AdminSecBaseModel {
                 echo json_encode($data);
                 break;
             case 'location_stats':
-                osc_csrf_check(false);
+                osc_csrf_check();
                 $workToDo = osc_update_location_stats();
                 if ( $workToDo > 0 ) {
                     $array['status']  = 'more';
@@ -651,7 +651,7 @@ class CAdminAjax extends AdminSecBaseModel {
      *
      * @return mixed|void
      */
-    function doView($file)
+    public function doView($file)
     {
         osc_current_admin_theme_path($file);
     }

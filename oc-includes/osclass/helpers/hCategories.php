@@ -342,7 +342,7 @@ function osc_get_category($by, $what)
 
 
     /**
-     * @return bool|int
+     * @return bool|int|void
      */
 function osc_category_move_to_children()
 {

@@ -29,7 +29,7 @@
      *
      * @param $msg
      * @param $section
-     * @return string
+     * @return void
      */
 function osc_add_flash_message($msg, $section = 'pubMessages')
 {
@@ -41,7 +41,7 @@ function osc_add_flash_message($msg, $section = 'pubMessages')
      *
      * @param $msg
      * @param $section
-     * @return string
+     * @return void
      */
 function osc_add_flash_ok_message($msg, $section = 'pubMessages')
 {
@@ -53,7 +53,7 @@ function osc_add_flash_ok_message($msg, $section = 'pubMessages')
      *
      * @param $msg
      * @param $section
-     * @return string
+     * @return void
      */
 function osc_add_flash_error_message($msg, $section = 'pubMessages')
 {
@@ -65,7 +65,7 @@ function osc_add_flash_error_message($msg, $section = 'pubMessages')
      *
      * @param $msg
      * @param $section
-     * @return string
+     * @return void
      */
 function osc_add_flash_info_message($msg, $section = 'pubMessages')
 {
@@ -77,7 +77,7 @@ function osc_add_flash_info_message($msg, $section = 'pubMessages')
      *
      * @param $msg
      * @param $section
-     * @return string
+     * @return void
      */
 function osc_add_flash_warning_message($msg, $section = 'pubMessages')
 {
@@ -103,7 +103,7 @@ function osc_show_flash_message($section = 'pubMessages', $class = 'flashmessage
                 echo '<div id="' . $id . '" class="' . strtolower($class) . ' ' . strtolower($class) . '-' .$message['type'] . '"><a class="btn ico btn-mini ico-close">x</a>';
                 echo osc_apply_filter('flash_message_text', $message['msg']);
                 echo '</div>';
-            } else if ($message!='') {
+            } elseif ($message!='') {
                 echo '<div id="' . $id . '" class="' . $class . '">';
                 echo osc_apply_filter('flash_message_text', $message);
                 echo '</div>';

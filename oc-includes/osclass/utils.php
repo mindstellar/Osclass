@@ -1014,6 +1014,8 @@ function download_fsockopen($sourceFile, $fileout = null, $post_data = null)
 
         return $body;
     }
+
+    return false;
 }
 
 
@@ -2413,7 +2415,7 @@ function osc_do_upgrade()
 /**
  * @param bool $disable
  *
- * @return bool
+ * @return bool|void
  */
 function osc_do_auto_upgrade($disable = true)
 {

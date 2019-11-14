@@ -356,14 +356,14 @@ return array();
         $this->toTree();
         if ($category==null) {
             return array();
-        } else {
-            if (isset($this->_relation[$category])) {
-                $tree = $this->sideTree($this->_relation[$category], $this->_categories, $this->_relation);
-                return $tree;
-            } else {
-                array();
-            }
         }
+
+        if (isset($this->_relation[$category])) {
+            $tree = $this->sideTree($this->_relation[$category], $this->_categories, $this->_relation);
+            return $tree;
+        }
+
+        return array();
     }
 
     /**

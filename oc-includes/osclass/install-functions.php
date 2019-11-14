@@ -573,7 +573,7 @@ function oc_install_example_data()
     $mItem = new ItemActions( true );
 
     foreach ( $item as $k => $v ) {
-        if ( $k == 'description' || $k == 'title' ) {
+        if ( $k === 'description' || $k === 'title' ) {
             Params::setParam( $k, array ( osc_current_admin_locale() => $v ) );
         } else {
             Params::setParam( $k, $v );

@@ -100,7 +100,7 @@ class CAdminItems extends AdminSecBaseModel
                                     $numSuccess++;
                                 }
                             }
-                            osc_add_flash_ok_message( sprintf(_m('%d listing has been deactivated', '%d listings have been deactivated', $numSuccess), $numSuccess), 'admin');
+                            osc_add_flash_ok_message( sprintf(_mn('%d listing has been deactivated', '%d listings have been deactivated', $numSuccess), $numSuccess), 'admin');
                         }
                                             break;
                     case 'premium_all':

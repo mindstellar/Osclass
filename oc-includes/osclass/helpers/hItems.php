@@ -744,12 +744,11 @@ function osc_item_total_comments()
 function osc_item_comments_page()
 {
     $page = Params::getParam('comments-page');
-    if ($page=='') {
-        return 0;
-    }
+
     if ($page>0) {
         return (int) $page-1;
     }
+    return 0;
 }
 
     ///////////////////////
