@@ -49,7 +49,7 @@ function customPageHeader()
      *
      * @return string
      */
-    function customPageTitle($string)
+function customPageTitle($string)
 {
     return sprintf(__('Plugins &raquo; %s'), $string);
 }
