@@ -492,7 +492,7 @@ function osc_premium_is_spam()
      */
 function osc_premium_total_comments()
 {
-    return premiumComment::newInstance()->total_comments(osc_premium_id());
+    return ItemComment::newInstance()->totalComments(osc_premium_id());
 }
 
 

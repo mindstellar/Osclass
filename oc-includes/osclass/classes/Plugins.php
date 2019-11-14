@@ -205,7 +205,7 @@ class Plugins {
         if (isset(self::$installed)) {
             return self::$installed;
         }
-        $plugins_list = unserialize(osc_installed_plugins);
+        $plugins_list = unserialize(osc_installed_plugins());
         if (is_array($plugins_list)) {
             self::$installed = $plugins_list;
             return self::$installed;

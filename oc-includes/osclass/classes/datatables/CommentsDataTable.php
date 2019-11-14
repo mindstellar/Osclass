@@ -32,6 +32,10 @@ class CommentsDataTable extends DataTable
     private $resourceID;
     private $order_by;
     private $showAll;
+    /**
+     * @var bool|int
+     */
+    private $total_filtered;
 
     public function __construct()
     {

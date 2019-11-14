@@ -31,6 +31,7 @@ class AlertsDataTable extends DataTable
         
     private $search;
     private $order_by;
+    private $total_filtered;
 
     /**
      * @param $params

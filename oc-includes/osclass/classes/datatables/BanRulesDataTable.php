@@ -30,6 +30,13 @@ class BanRulesDataTable extends DataTable
 {
 
     private $order_by;
+    private $column_names;
+    private $userId;
+    /**
+     * @var bool
+     */
+    private $withUserId;
+    private $search;
 
 
     /**

@@ -56,6 +56,10 @@ class WebThemes extends Themes
                             'user-recover',
                             'user-register',
                             );
+    /**
+     * @var string
+     */
+    private $path;
 
     /**
      * @return \WebThemes

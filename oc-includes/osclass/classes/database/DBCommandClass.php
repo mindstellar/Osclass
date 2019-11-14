@@ -145,6 +145,10 @@ class DBCommandClass
      * @var LogDatabase
      */
     public $log;
+    /**
+     * @var array
+     */
+    private $a_from;
 
     /**
      * Initializate variables

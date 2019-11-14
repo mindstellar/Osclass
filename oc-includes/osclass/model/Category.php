@@ -35,6 +35,10 @@ class Category extends DAO
     private $_relation;
     private $_emptyTree;
     private $_slugs;
+    /**
+     * @var bool
+     */
+    private $_empty_tree;
 
     public static function newInstance($l = '')
     {
