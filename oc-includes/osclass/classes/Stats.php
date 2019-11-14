@@ -23,7 +23,7 @@ class Stats
 {
     /**
      *
-     * @var type
+     * @var \Stats
      */
     private static $instance;
     private $conn;
@@ -40,7 +40,7 @@ class Stats
     }
 
     /**
-     *
+     * Stats constructor.
      */
     public function __construct()
     {

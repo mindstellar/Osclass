@@ -88,7 +88,7 @@ class AdminToolbar
     /**
      * Add a submenu to the menu.
      *
-     * @param array $args - The arguments for each subitem.
+     * @param $array $args - The arguments for each subitem.
      * - id         - string    - The ID of the mainitem.
      * - parentid   - string    - The ID of the parent item.
      * - title      - string    - The title of the node.

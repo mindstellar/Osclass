@@ -25,12 +25,12 @@ class LatestSearches extends DAO
 {
     /**
      *
-     * @var type
+     * @var \LatestSearches
      */
     private static $instance;
 
     /**
-     * @return \LatestSearches|\type
+     * @return \LatestSearches
      */
     public static function newInstance()
     {

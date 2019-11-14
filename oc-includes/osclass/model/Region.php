@@ -29,12 +29,12 @@ class Region extends DAO
 {
     /**
      *
-     * @var
+     * @var \Region
      */
     private static $instance;
 
     /**
-     * @return \Region|\type
+     * @return \Region
      */
     public static function newInstance()
     {
@@ -45,7 +45,7 @@ class Region extends DAO
     }
 
     /**
-     *
+     * Region constructor.
      */
     public function __construct()
     {

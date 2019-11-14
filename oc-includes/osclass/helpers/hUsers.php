@@ -463,7 +463,7 @@ function osc_user_city_area_id()
     /**
      * Gets address of current user
      *
-     * @return address
+     * @return string
      */
 function osc_user_address()
 {
@@ -663,7 +663,7 @@ function osc_alert_is_active()
     /**
      * Gets next user in users array
      *
-     * @return <type>
+     * @return array
      */
 function osc_prepare_user_info()
 {

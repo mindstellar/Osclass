@@ -87,7 +87,7 @@ class View
     /**
      * @param $key
      *
-     * @return bool
+     * @return mixed
      */
     public function _next($key)
     {

@@ -25,12 +25,12 @@ class BanRule extends DAO
 {
     /**
      *
-     * @var type
+     * @var \BanRule
      */
     private static $instance;
 
     /**
-     * @return \BanRule|\type
+     * @return \BanRule
      */
     public static function newInstance()
     {

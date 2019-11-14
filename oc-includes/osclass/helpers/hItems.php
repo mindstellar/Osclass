@@ -72,15 +72,15 @@ function osc_resource()
         $resource = View::newInstance()->_get('resource');
     }
 
-    return($resource);
+    return $resource;
 }
 
     /**
     * Gets a specific field from current item
     *
-    * @param type $field
-    * @param type $locale
-    * @return field_type
+    * @param string $field
+    * @param string $locale
+    * @return string
     */
 function osc_item_field($field, $locale = "")
 {
@@ -90,9 +90,9 @@ function osc_item_field($field, $locale = "")
     /**
     * Gets a specific field from current comment
     *
-    * @param type $field
-    * @param type $locale
-    * @return field_type
+    * @param string $field
+    * @param string $locale
+    * @return string
     */
 function osc_comment_field($field, $locale = '')
 {
@@ -102,9 +102,9 @@ function osc_comment_field($field, $locale = '')
     /**
     * Gets a specific field from current resource
     *
-    * @param type $field
-    * @param type $locale
-    * @return field_type
+    * @param string $field
+    * @param string $locale
+    * @return string
     */
 function osc_resource_field($field, $locale = '')
 {
@@ -212,7 +212,7 @@ function osc_item_category($locale = "")
     /**
      * Gets category description from current item, if $locale is unspecified $locale is current user locale
      *
-     * @param type $locale
+     * @param string $locale
      * @return string
      */
 function osc_item_category_description($locale = "")
@@ -703,7 +703,7 @@ function osc_list_total_pages()
     /**
      * Gets number of items per page for current pagination
      *
-     * @return <type>
+     * @return int
      */
 function osc_list_items_per_page()
 {
@@ -723,7 +723,7 @@ function osc_item_total_comments()
     /**
      * Gets page of comments in current pagination
      *
-     * @return <type>
+     * @return int
      */
 function osc_item_comments_page()
 {

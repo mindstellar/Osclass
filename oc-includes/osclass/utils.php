@@ -807,7 +807,7 @@ function testCurl()
 /**
  * Returns true if there is fsockopen on system environment
  *
- * @return bool|\type
+ * @return bool
  */
 function testFsockopen()
 {
@@ -880,9 +880,9 @@ function is_hex($hex)
 /**
  * Process response and return headers and body
  *
- * @param type $content
+ * @param string $content
  *
- * @return array|\type
+ * @return array
  * @since 3.0
  */
 function processResponse($content)
@@ -904,7 +904,7 @@ function processResponse($content)
  *
  * @param string $headers
  *
- * @return array|\type
+ * @return array
  */
 function processHeaders($headers)
 {

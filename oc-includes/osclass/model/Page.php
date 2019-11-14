@@ -25,12 +25,12 @@ class Page extends DAO
 {
     /**
      *
-     * @var type
+     * @var Page
      */
     private static $instance;
 
     /**
-     * @return \Page|\type
+     * @return \Page
      */
     public static function newInstance()
     {

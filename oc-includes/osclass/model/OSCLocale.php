@@ -25,12 +25,12 @@ class OSCLocale extends DAO
 {
     /**
      *
-     * @var type
+     * @var \OSCLocale
      */
     private static $instance;
 
     /**
-     * @return \OSCLocale|\type
+     * @return \OSCLocale
      */
     public static function newInstance()
     {

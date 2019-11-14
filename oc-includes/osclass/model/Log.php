@@ -25,12 +25,12 @@ class Log extends DAO
 {
     /**
      *
-     * @var type
+     * @var \Log
      */
     private static $instance;
 
     /**
-     * @return \Log|\type
+     * @return \Log
      */
     public static function newInstance()
     {

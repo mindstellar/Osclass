@@ -18,19 +18,17 @@
  * limitations under the License.
  */
 
-    /**
-     *
-     */
+
 class Cron extends DAO
 {
     /**
      *
-     * @var type
+     * @var Cron
      */
     private static $instance;
 
     /**
-     * @return \Cron|\type
+     * @return \Cron
      */
     public static function newInstance()
     {

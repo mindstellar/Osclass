@@ -25,7 +25,7 @@ class Category extends DAO
 {
     /**
      *
-     * @var type
+     * @var \Category
      */
     private static $instance;
     private $_language;
@@ -47,7 +47,7 @@ class Category extends DAO
     /**
      * Set data related to t_category table
      */
-    function __construct($l = '')
+    public function __construct($l = '')
     {
         parent::__construct();
         $this->setTableName('t_category');

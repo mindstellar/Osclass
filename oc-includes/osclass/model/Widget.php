@@ -18,19 +18,20 @@
  * limitations under the License.
  */
 
-    /**
-     *
-     */
+
+/**
+ * Class Widget
+ */
 class Widget extends DAO
 {
     /**
      *
-     * @var type
+     * @var \Widget
      */
     private static $instance;
 
     /**
-     * @return \type|\Widget
+     * @return \Widget
      */
     public static function newInstance()
     {
@@ -41,7 +42,7 @@ class Widget extends DAO
     }
 
     /**
-     *
+     * Widget constructor.
      */
     public function __construct()
     {

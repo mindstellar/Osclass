@@ -25,12 +25,12 @@ class User extends DAO
 {
     /**
      *
-     * @var type
+     * @var \User
      */
     private static $instance;
 
     /**
-     * @return \type|\User
+     * @return \User
      */
     public static function newInstance()
     {
@@ -41,7 +41,7 @@ class User extends DAO
     }
 
     /**
-     *
+     * User constructor.
      */
     public function __construct()
     {

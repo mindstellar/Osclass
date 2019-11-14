@@ -18,14 +18,15 @@
  * limitations under the License.
  */
 
-    /**
-     *
-     */
+
+/**
+ * Class Preference
+ */
 class Preference extends DAO
 {
     /**
      *
-     * @var
+     * @var \Preference
      */
     private static $instance;
     /**
@@ -35,7 +36,7 @@ class Preference extends DAO
     private $pref;
 
     /**
-     * @return \Preference|\type
+     * @return \Preference
      */
     public static function newInstance()
     {

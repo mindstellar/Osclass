@@ -52,7 +52,7 @@ function osc_apply_filter($hook, $content)
      * Add a hook
      *
      * @param string $hook
-     * @param string $function
+     * @param callable $function
      * @param int $priority
      * @return void
      */

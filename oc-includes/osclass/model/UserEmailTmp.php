@@ -25,12 +25,12 @@ class UserEmailTmp extends DAO
 {
     /**
      *
-     * @var
+     * @var \UserEmailTmp
      */
     private static $instance;
 
     /**
-     * @return \type|\UserEmailTmp
+     * @return \UserEmailTmp
      */
     public static function newInstance()
     {

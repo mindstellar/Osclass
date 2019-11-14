@@ -25,12 +25,12 @@ class Alerts extends DAO
 {
     /**
      *
-     * @var type
+     * @var \Alerts
      */
     private static $instance;
 
     /**
-     * @return \Alerts|\type
+     * @return \Alerts
      */
     public static function newInstance()
     {
