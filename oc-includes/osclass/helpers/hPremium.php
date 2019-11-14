@@ -571,7 +571,7 @@ function osc_count_premium_resources()
     if ( !View::newInstance()->_exists('resources') ) {
         View::newInstance()->_exportVariableToView('resources', ItemResource::newInstance()->getAllResourcesFromItem( osc_premium_id() ) );
     }
-    return osc_priv_count_item_resources();
+    return (int) View::newInstance()->_count('resources');;
 }
 
 
