@@ -1,4 +1,4 @@
-<?php if ( ! defined('OC_ADMIN')) {
+<?php if (!defined('OC_ADMIN')) {
     exit('Direct access is not allowed.');
 }
 /*
@@ -17,27 +17,39 @@
  * limitations under the License.
  */
 
-    osc_add_hook('admin_page_header', 'customPageHeader');
-function customPageHeader()
-{
-    ?>
-        <h1><?php printf(__('Osclass %s'), OSCLASS_VERSION); ?>
-            <a href="#" class="btn ico ico-32 ico-help float-right"></a>
-        </h1>
+
+$customPageHeader = static function () { ?>
+    <h1><?php printf(__('Osclass %s'), OSCLASS_VERSION); ?>
+        <a href="#" class="btn ico ico-32 ico-help float-right"></a>
+    </h1>
     <?php
-}
+};
+osc_add_hook('admin_page_header', $customPageHeader);
 
-
-/**
- * @param $string
- *
- * @return string
- */
-function customPageTitle($string)
-{
+$customPageTitle = static function ($string) {
     return sprintf(__('Osclass %s &raquo; %s'), OSCLASS_VERSION, $string);
-}
-    osc_add_filter('admin_title', 'customPageTitle');
-    osc_current_admin_theme_path( 'parts/header.php' );
-    include osc_lib_path()."osclass/assets/release.notes.php";
-    osc_current_admin_theme_path( 'parts/footer.php' ); ?>
+};
+osc_add_filter('admin_title', $customPageTitle);
+
+unset($customPageTitle, $customPageHeader);
+
+osc_current_admin_theme_path('parts/header.php');
+?>
+    <div class="row-wrapper">
+        <div class="widget-box">
+            <div class="widget-box-title">
+                <h3>Osclass <?php echo OSCLASS_VERSION; ?></h3>
+            </div>
+            <div class="widget-box-content">
+                <b class="stats-title">Changelog</b>
+                <ul style="list-style-type: disc !important;">
+                    <?php
+                    echo preg_replace('/.+/', '<li>$0</li>',
+                        file_get_contents(ABS_PATH . 'CHANGELOG.txt'));
+                    ?>
+                </ul>
+            </div>
+        </div>
+    </div>
+<?php
+osc_current_admin_theme_path('parts/footer.php'); ?>
