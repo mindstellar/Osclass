@@ -5,7 +5,6 @@
   "keywords": ["osclass","classified","open-source","php-classified","cms"],
   "homepage": "https://github.com/navjottomer/osclass",
   "license": "Apache-2.0",
-  "version": "v3.9.0-RC",
   "authors": [
         {
             "name": "Osclass Community",
@@ -13,14 +12,9 @@
         }
     ],
   "config": {
-       "vendor-dir": "oc-includes/vendor"
+       "vendor-dir": "oc-includes/vendor",
+       "optimize-autoloader": true
     },
-  "repositories": [
-    {
-      "url": "https://github.com/ioncube/php-openssl-cryptor",
-      "type": "git"
-    }
-  ],
   "require": {
     "php": ">=5.6.20",
     "ext-json": "*",
@@ -34,7 +28,7 @@
     "phpmailer/phpmailer": "5.2.x",
     "pclzip/pclzip": "2.8.2",
     "phpseclib/phpseclib": "2.0.x",
-    "ioncube/php-openssl-cryptor": "dev-master#f62397b",
+    "pensiero/php-openssl-cryptor": "0.1.0",
     "google/recaptcha": "1.1.x",
     "gettext/gettext": "4.6.x"    
   },

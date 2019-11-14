@@ -114,29 +114,29 @@
     },
     {
         "name": "gettext/languages",
-        "version": "2.5.0",
-        "version_normalized": "2.5.0.0",
+        "version": "2.6.0",
+        "version_normalized": "2.6.0.0",
         "source": {
             "type": "git",
-            "url": "https://github.com/mlocati/cldr-to-gettext-plural-rules.git",
-            "reference": "78db2d17933f0765a102f368a6663f057162ddbd"
+            "url": "https://github.com/php-gettext/Languages.git",
+            "reference": "38ea0482f649e0802e475f0ed19fa993bcb7a618"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/mlocati/cldr-to-gettext-plural-rules/zipball/78db2d17933f0765a102f368a6663f057162ddbd",
-            "reference": "78db2d17933f0765a102f368a6663f057162ddbd",
+            "url": "https://api.github.com/repos/php-gettext/Languages/zipball/38ea0482f649e0802e475f0ed19fa993bcb7a618",
+            "reference": "38ea0482f649e0802e475f0ed19fa993bcb7a618",
             "shasum": ""
         },
         "require": {
             "php": ">=5.3"
         },
         "require-dev": {
-            "phpunit/phpunit": "^4"
+            "friendsofphp/php-cs-fixer": "^2.16.0",
+            "phpunit/phpunit": "^4.8 || ^5.7 || ^6.5 || ^7.5 || ^8.4"
         },
-        "time": "2018-11-13T22:06:07+00:00",
+        "time": "2019-11-13T10:30:21+00:00",
         "bin": [
-            "bin/export-plural-rules",
-            "bin/export-plural-rules.php"
+            "bin/export-plural-rules"
         ],
         "type": "library",
         "installation-source": "dist",
@@ -157,7 +157,7 @@
             }
         ],
         "description": "gettext languages with plural rules",
-        "homepage": "https://github.com/mlocati/cldr-to-gettext-plural-rules",
+        "homepage": "https://github.com/php-gettext/Languages",
         "keywords": [
             "cldr",
             "i18n",
@@ -223,31 +223,6 @@
         ]
     },
     {
-        "name": "ioncube/php-openssl-cryptor",
-        "version": "dev-master",
-        "version_normalized": "9999999-dev",
-        "source": {
-            "type": "git",
-            "url": "https://github.com/ioncube/php-openssl-cryptor",
-            "reference": "f62397b"
-        },
-        "require": {
-            "ext-openssl": "*"
-        },
-        "time": "2017-12-05T17:15:57+00:00",
-        "type": "library",
-        "installation-source": "source",
-        "autoload": {
-            "psr-4": {
-                "ioncube\\phpOpensslCryptor\\": "src/"
-            }
-        },
-        "license": [
-            "MIT"
-        ],
-        "description": "Simple to use class for encrypting/decrypting using the PHP Openssl library."
-    },
-    {
         "name": "pclzip/pclzip",
         "version": "2.8.2",
         "version_normalized": "2.8.2.0",
@@ -285,6 +260,39 @@
             "php",
             "zip"
         ]
+    },
+    {
+        "name": "pensiero/php-openssl-cryptor",
+        "version": "v0.1.0",
+        "version_normalized": "0.1.0.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/pensiero/php-openssl-cryptor.git",
+            "reference": "85f81646a9ec5046a42b9c2259147d98525ce526"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/pensiero/php-openssl-cryptor/zipball/85f81646a9ec5046a42b9c2259147d98525ce526",
+            "reference": "85f81646a9ec5046a42b9c2259147d98525ce526",
+            "shasum": ""
+        },
+        "require": {
+            "ext-openssl": "*",
+            "php": ">=5.6"
+        },
+        "time": "2017-12-30T01:09:54+00:00",
+        "type": "library",
+        "installation-source": "dist",
+        "autoload": {
+            "psr-4": {
+                "OpensslCryptor\\": "src/"
+            }
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "MIT"
+        ],
+        "description": "Simple to use class for encrypting/decrypting using the PHP Openssl library."
     },
     {
         "name": "phpmailer/phpmailer",
