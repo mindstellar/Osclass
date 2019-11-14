@@ -67,6 +67,9 @@ function customHead()
     //TODO Not using it right now
     //osc_add_hook('admin_header', 'customHead', 10);
 
+/**
+ * @return string
+ */
 function render_offset()
 {
     return 'row-offset';
@@ -94,6 +97,11 @@ function customPageHeader()
 }
 
 
+/**
+ * @param $string
+ *
+ * @return string
+ */
 function customPageTitle($string)
 {
     return sprintf(__('Upgrade &raquo; %s'), $string);

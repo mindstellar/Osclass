@@ -265,11 +265,13 @@ function osc_search_category()
     return($category);
 }
 
-    /**
-     * Gets current search category id
-     *
-     * @return int
-     */
+
+/**
+ * Gets current search category id
+ *
+ * @return array
+ * @throws \Exception
+ */
 function osc_search_category_id()
 {
     $categories = osc_search_category();
@@ -295,11 +297,16 @@ function osc_search_category_id()
     return $category;
 }
 
-    /**
-     * Update the search url with new options
-     *
-     * @return string
-     */
+
+/**
+ * Update the search url with new options
+ *
+ * @param array $params
+ * @param bool  $forced
+ *
+ * @return string
+ * @throws \Exception
+ */
 function osc_update_search_url($params = array(), $forced = false)
 {
     $request = Params::getParamsAsArray();
@@ -353,23 +360,28 @@ function osc_search_alert()
     return View::newInstance()->_get('search_alert');
 }
 
-    /**
-     * Gets for a default search (all categories, noother option)
-     *
-     * @return string
-     */
+
+/**
+ * Gets for a default search (all categories, noother option)
+ *
+ * @param array $params
+ * @return string
+ */
 function osc_search_show_all_url($params = array())
 {
     $params['page'] = 'search';
     return osc_update_search_url($params);
 }
 
-    /**
-     * Gets search url given params
-     *
-     * @params array $params
-     * @return string
-     */
+
+/**
+ * Gets search url given params
+ *
+ * @params array $params
+ * @param null $params
+ * @return string
+ * @throws \Exception
+ */
 function osc_search_url($params = null)
 {
     if (is_array($params)) {
@@ -683,6 +695,12 @@ function osc_search_url($params = null)
     return str_replace('%2C', ',', $url);
 }
 
+
+/**
+ * @param $var
+ *
+ * @return array|mixed
+ */
 function osc_remove_slash($var)
 {
     if (is_array($var)) {
@@ -737,11 +755,12 @@ function osc_list_city()
     }
 }
 
-    /**
-     * Gets the next country in the list_countries list
-     *
-     * @return array
-     */
+
+/**
+ * Gets the next country in the list_countries list
+ *
+ * @return array
+ */
 function osc_has_list_countries()
 {
     if ( !View::newInstance()->_exists('list_countries') ) {
@@ -754,12 +773,14 @@ function osc_has_list_countries()
     return $result;
 }
 
-    /**
-     * Gets the next region in the list_regions list
-     *
-     * @param string $country
-     * @return array
-     */
+
+/**
+ * Gets the next region in the list_regions list
+ *
+ * @param string $country
+ * @return array
+ * @throws \Exception
+ */
 function osc_has_list_regions($country = '%%%%')
 {
     if ( !View::newInstance()->_exists('list_regions') ) {
@@ -772,12 +793,14 @@ function osc_has_list_regions($country = '%%%%')
     return $result;
 }
 
-    /**
-     * Gets the next city in the list_cities list
-     *
-     * @param string $region
-     * @return array
-     */
+
+/**
+ * Gets the next city in the list_cities list
+ *
+ * @param string $region
+ * @return array
+ * @throws \Exception
+ */
 function osc_has_list_cities($region = '%%%%')
 {
     if ( !View::newInstance()->_exists('list_cities') ) {
@@ -1004,11 +1027,12 @@ function osc_count_latest_searches()
     return View::newInstance()->_count('latest_searches');
 }
 
-    /**
-     * Gets the next latest search
-     *
-     * @return array
-     */
+
+/**
+ * Gets the next latest search
+ *
+ * @return array
+ */
 function osc_has_latest_searches()
 {
     if ( !View::newInstance()->_exists('latest_searches') ) {
@@ -1060,6 +1084,10 @@ function osc_latest_search_total()
     return osc_field(osc_latest_search(), 'i_total', '');
 }
 
+
+/**
+ * @return array|mixed|string
+ */
 function osc_get_canonical()
 {
     if ( View::newInstance()->_exists('canonical') ) {
@@ -1069,6 +1097,11 @@ function osc_get_canonical()
 }
 
 
+/**
+ * @param $conditions
+ *
+ * @return mixed
+ */
 function osc_get_raw_search($conditions)
 {
     $keys = array("aCategories", "countries", "regions", "cities", "city_areas");
@@ -1114,6 +1147,13 @@ function osc_get_raw_search($conditions)
     return $conditions;
 }
 
+
+/**
+ * @param $paramCat
+ *
+ * @return string
+ * @throws \Exception
+ */
 function _aux_search_category_slug($paramCat)
 {
     if (is_array($paramCat)) {

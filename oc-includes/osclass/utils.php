@@ -1721,6 +1721,8 @@ function osc_check_theme_update($update_uri, $version = null)
  * @param string $update_uri
  * @param null   $version
  *
+ * @param bool   $disable
+ *
  * @return bool
  */
 function osc_check_language_update($update_uri, $version = null, $disable = true)
@@ -1753,9 +1755,10 @@ function osc_check_language_update($update_uri, $version = null, $disable = true
 
 
 /**
- * @param $type
- * @param $update_uri
+ * @param      $type
+ * @param      $update_uri
  *
+ * @param bool $disable
  * @return bool|string
  */
 function _get_market_url($type, $update_uri, $disable = true)
@@ -1786,9 +1789,10 @@ function _get_market_url($type, $update_uri, $disable = true)
 
 
 /**
- * @param $uri
- * @param $version
+ * @param      $uri
+ * @param      $version
  *
+ * @param bool $disable
  * @return bool
  */
 function _need_update($uri, $version, $disable = true)
@@ -2406,6 +2410,11 @@ function osc_do_upgrade()
 }
 
 
+/**
+ * @param bool $disable
+ *
+ * @return bool
+ */
 function osc_do_auto_upgrade($disable = true)
 {
     if ($disable) {

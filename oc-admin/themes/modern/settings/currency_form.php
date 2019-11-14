@@ -77,6 +77,11 @@ function customPageHeader()
 }
 
     $typeForm = __get('typeForm');
+/**
+ * @param string $return
+ *
+ * @return mixed
+ */
 function customText($return = 'title')
 {
     $typeForm = __get('typeForm');
@@ -95,6 +100,12 @@ function customText($return = 'title')
     return $text[$return];
 }
 
+
+/**
+ * @param $string
+ *
+ * @return string
+ */
 function customPageTitle($string)
 {
     return sprintf('%s &raquo; %s', customText('title'), $string);

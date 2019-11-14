@@ -125,11 +125,14 @@ function osc_logged_user_phone()
     return (string) Session::newInstance()->_get('userPhone');
 }
 
-    /**
-     * Gets user's profile url
-     *
-     * @return string
-     */
+
+/**
+ * Gets user's profile url
+ *
+ * @param null $id
+ *
+ * @return string
+ */
 function osc_user_public_profile_url($id = null)
 {
     if ($id==null) {
@@ -148,12 +151,14 @@ function osc_user_public_profile_url($id = null)
     return $path;
 }
 
-    /**
-     * Gets current items page from public profile
-     *
-     * @param int $page
-     * @return string
-     */
+
+/**
+ * Gets current items page from public profile
+ *
+ * @param string $page
+ * @param bool   $itemsPerPage
+ * @return string
+ */
 function osc_user_list_items_pub_profile_url($page = '', $itemsPerPage = false)
 {
     $path  = osc_user_public_profile_url();
@@ -325,11 +330,13 @@ function osc_user_website()
     return (string) osc_user_field("s_website");
 }
 
-    /**
-     * Gets description/information of current user
-     *
-     * @return string
-     */
+
+/**
+ * Gets description/information of current user
+ *
+ * @param string $locale
+ * @return string
+ */
 function osc_user_info($locale = "")
 {
     $userId = osc_user_id();
@@ -530,11 +537,13 @@ function osc_user_comments_validated()
     return osc_user_field("i_comments");
 }
 
-    /**
-     * Gets number of users
-     *
-     * @return int
-     */
+
+/**
+ * Gets number of users
+ *
+ * @param string $condition
+ * @return int
+ */
 function osc_total_users($condition = '')
 {
     switch ($condition) {
@@ -564,11 +573,12 @@ function osc_alert_field($field)
     return osc_field(View::newInstance()->_current('alerts'), $field, '');
 }
 
-    /**
-     * Gets next alert if there is, else return null
-     *
-     * @return array
-     */
+
+/**
+ * Gets next alert if there is, else return null
+ *
+ * @return array
+ */
 function osc_has_alerts()
 {
     $result = View::newInstance()->_next('alerts');

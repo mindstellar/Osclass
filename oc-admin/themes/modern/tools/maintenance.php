@@ -19,6 +19,9 @@
 
     $maintenance = file_exists( osc_base_path() . '.maintenance');
 
+/**
+ * @return string
+ */
 function render_offset()
 {
     return 'row-offset';
@@ -40,6 +43,12 @@ function customPageHeader()
     <?php
 }
 
+
+/**
+ * @param $string
+ *
+ * @return string
+ */
 function customPageTitle($string)
 {
     return sprintf(__('Maintenance &raquo; %s'), $string);

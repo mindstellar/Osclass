@@ -18,6 +18,9 @@
  * limitations under the License.
  */
 
+/**
+ * Class CAdminSettingsComments
+ */
 class CAdminSettingsComments extends AdminSecBaseModel
 {
     //Business Layer...

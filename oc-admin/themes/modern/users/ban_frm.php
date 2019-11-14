@@ -21,6 +21,9 @@
 
     $rule      = __get('rule');
 
+/**
+ * @return array
+ */
 function customFrmText()
 {
     $rule = __get('rule');
@@ -47,6 +50,11 @@ function customPageHeader()
 }
     osc_add_hook('admin_page_header', 'customPageHeader');
 
+/**
+ * @param $string
+ *
+ * @return string
+ */
 function customPageTitle($string)
 {
     $aux = customFrmText();

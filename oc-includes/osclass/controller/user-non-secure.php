@@ -34,6 +34,10 @@ class CWebUserNonSecure extends BaseModel
     }
 
     //Business Layer...
+
+    /**
+     * @return bool|void
+     */
     public function doModel()
     {
         switch ( $this->action ) {

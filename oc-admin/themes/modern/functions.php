@@ -3,6 +3,11 @@
 }
 
 osc_add_filter('admin_body_class', 'admin_modeCompact_class');
+/**
+ * @param $args
+ *
+ * @return array
+ */
 function admin_modeCompact_class($args)
 {
     $compactMode = osc_get_preference('compact_mode', 'modern_admin_theme');
@@ -95,6 +100,9 @@ function admin_theme_css()
 }
 osc_add_hook('admin_header', 'admin_theme_css', 9);
 
+/**
+ * @param null $locales
+ */
 function printLocaleTabs($locales = null)
 {
     if ($locales==null) {
@@ -110,6 +118,11 @@ function printLocaleTabs($locales = null)
     };
 }
 
+
+/**
+ * @param null $locales
+ * @param null $item
+ */
 function printLocaleTitle($locales = null, $item = null)
 {
     if ($locales==null) {
@@ -136,6 +149,11 @@ function printLocaleTitle($locales = null, $item = null)
     }
 }
 
+
+/**
+ * @param null $locales
+ * @param null $page
+ */
 function printLocaleTitlePage($locales = null, $page = null)
 {
     if ($locales==null) {
@@ -163,6 +181,11 @@ function printLocaleTitlePage($locales = null, $page = null)
     }
 }
 
+
+/**
+ * @param null $locales
+ * @param null $item
+ */
 function printLocaleDescription($locales = null, $item = null)
 {
     if ($locales==null) {
@@ -191,6 +214,11 @@ function printLocaleDescription($locales = null, $item = null)
     }
 }
 
+
+/**
+ * @param null $locales
+ * @param null $page
+ */
 function printLocaleDescriptionPage($locales = null, $page = null)
 {
     if ($locales==null) {
@@ -216,11 +244,24 @@ function printLocaleDescriptionPage($locales = null, $page = null)
     }
 }
 
+
+/**
+ * @param $slug
+ * @param $language_version
+ *
+ * @return bool
+ */
 function check_market_language_compatibility($slug, $language_version)
 {
     return osc_check_language_update($slug);
 }
 
+
+/**
+ * @param $versions
+ *
+ * @return bool
+ */
 function check_market_compatibility($versions)
 {
     $versions = explode(',', $versions);

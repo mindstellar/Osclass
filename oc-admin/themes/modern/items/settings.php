@@ -47,6 +47,9 @@ function customHead()
 }
     osc_add_hook('admin_header', 'customHead', 10);
 
+/**
+ * @return string
+ */
 function render_offset()
 {
     return 'row-offset';
@@ -61,6 +64,12 @@ function customPageHeader()
     <?php
 }
 
+
+/**
+ * @param $string
+ *
+ * @return string
+ */
 function customPageTitle($string)
 {
     return sprintf(__('Listing Settings &raquo; %s'), $string);

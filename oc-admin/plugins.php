@@ -18,6 +18,9 @@
  * limitations under the License.
  */
 
+/**
+ * Class CAdminPlugins
+ */
 class CAdminPlugins extends AdminSecBaseModel
 {
     function __construct()
@@ -403,6 +406,12 @@ class CAdminPlugins extends AdminSecBaseModel
     }
 
     //hopefully generic...
+
+    /**
+     * @param $file
+     *
+     * @return mixed|void
+     */
     function doView($file)
     {
         osc_run_hook("before_admin_html");

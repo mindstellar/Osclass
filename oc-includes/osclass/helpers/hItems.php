@@ -75,37 +75,41 @@ function osc_resource()
     return $resource;
 }
 
-    /**
-    * Gets a specific field from current item
-    *
-    * @param string $field
-    * @param string $locale
-    * @return string
-    */
+
+/**
+ * Gets a specific field from current item
+ *
+ * @param string $field
+ * @param string $locale
+ *
+ * @return string
+ */
 function osc_item_field($field, $locale = "")
 {
     return osc_field(osc_item(), $field, $locale);
 }
 
-    /**
-    * Gets a specific field from current comment
-    *
-    * @param string $field
-    * @param string $locale
-    * @return string
-    */
+
+/**
+ * Gets a specific field from current comment
+ *
+ * @param string $field
+ * @param string $locale
+ * @return string
+ */
 function osc_comment_field($field, $locale = '')
 {
     return osc_field(osc_comment(), $field, $locale);
 }
 
-    /**
-    * Gets a specific field from current resource
-    *
-    * @param string $field
-    * @param string $locale
-    * @return string
-    */
+
+/**
+ * Gets a specific field from current resource
+ *
+ * @param string $field
+ * @param string $locale
+ * @return string
+ */
 function osc_resource_field($field, $locale = '')
 {
     return osc_field(osc_resource(), $field, $locale);
@@ -209,12 +213,14 @@ function osc_item_category($locale = "")
     return (string) osc_field($category, "s_name", $locale);
 }
 
-    /**
-     * Gets category description from current item, if $locale is unspecified $locale is current user locale
-     *
-     * @param string $locale
-     * @return string
-     */
+
+/**
+ * Gets category description from current item, if $locale is unspecified $locale is current user locale
+ *
+ * @param string $locale
+ * @return string
+ * @throws \Exception
+ */
 function osc_item_category_description($locale = "")
 {
     if ( !View::newInstance()->_exists('item_category') ) {
@@ -234,12 +240,14 @@ function osc_item_category_id()
     return (int) osc_item_field("fk_i_category_id");
 }
 
-    /**
-     * Checks to see if the price is enabled for this category.
-     *
-     * @param string $locale
-     * @return string
-     */
+
+/**
+ * Checks to see if the price is enabled for this category.
+ *
+ * @param null $catId
+ * @return string
+ * @throws \Exception
+ */
 function osc_item_category_price_enabled($catId = null)
 {
     if ($catId == null) {
@@ -513,11 +521,13 @@ function osc_item_is_premium()
     }
 }
 
-    /**
-     * return number of views of current item
-     *
-     * @return int
-     */
+
+/**
+ * return number of views of current item
+ *
+ * @param bool $viewAll
+ * @return int
+ */
 function osc_item_views($viewAll = false)
 {
     $item = osc_item();
@@ -689,12 +699,18 @@ function osc_item_link_expired()
 }
 
     // DEPRECATED: This function will be removed in version 4.0
+/**
+ * @return int
+ */
 function osc_list_page()
 {
     return osc_search_page();
 }
 
     // DEPRECATED: This function will be removed in version 4.0
+/**
+ * @return int
+ */
 function osc_list_total_pages()
 {
     return osc_search_total_pages();
@@ -944,11 +960,11 @@ function osc_reset_resources()
     // DETAILS //
     /////////////
 
-    /**
-     * Gets next item if there is, else return null
-     *
-     * @return array
-     */
+/**
+ * Gets next item if there is, else return null
+ *
+ * @return array
+ */
 function osc_has_items()
 {
     if ( View::newInstance()->_exists('resources') ) {
@@ -1022,11 +1038,13 @@ function osc_count_item_resources()
     return (int) View::newInstance()->_count('resources');
 }
 
-    /**
-     * Gets next item resource if there is, else return null
-     *
-     * @return array
-     */
+
+/**
+ * Gets next item resource if there is, else return null
+ *
+ * @return array
+ * @throws \Exception
+ */
 function osc_has_item_resources()
 {
     if ( !View::newInstance()->_exists('resources') ) {
@@ -1061,11 +1079,12 @@ function osc_count_item_comments()
     return View::newInstance()->_count('comments');
 }
 
-    /**
-     * Gets next comment of current item comments
-     *
-     * @return array
-     */
+
+/**
+ * Gets next comment of current item comments
+ *
+ * @return array
+ */
 function osc_has_item_comments()
 {
     if ( !View::newInstance()->_exists('comments') ) {
@@ -1078,11 +1097,15 @@ function osc_has_item_comments()
     // HOME //
     //////////
 
-    /**
-     * Gets next item of latest items query
-     *
-     * @return boolean It returns true if there is another item available or false if there isn't
-     */
+/**
+ * Gets next item of latest items query
+ *
+ * @param null  $total_latest_items
+ * @param array $options
+ * @param bool  $withPicture
+ * @return boolean It returns true if there is another item available or false if there isn't
+ * @throws \Exception
+ */
 function osc_has_latest_items($total_latest_items = null, $options = array(), $withPicture = false)
 {
     // if we don't have the latest items loaded, do the query
@@ -1127,11 +1150,15 @@ function osc_has_latest_items($total_latest_items = null, $options = array(), $w
     return $item;
 }
 
-    /**
-     * Gets number of latest items
-     *
-     * @return int
-     */
+
+/**
+ * Gets number of latest items
+ *
+ * @param null  $total_latest_items
+ * @param array $options
+ * @return int
+ * @throws \Exception
+ */
 function osc_count_latest_items($total_latest_items = null, $options = array())
 {
     if ( !View::newInstance()->_exists('latestItems') ) {
@@ -1153,11 +1180,11 @@ function osc_count_latest_items($total_latest_items = null, $options = array())
     // END HOME //
     //////////////
 
-    /**
-     * Gets next item of custom items
-     *
-     * @return array
-     */
+/**
+ * Gets next item of custom items
+ *
+ * @return array
+ */
 function osc_has_custom_items()
 {
     if ( View::newInstance()->_exists('resources') ) {
@@ -1206,12 +1233,14 @@ function osc_reset_custom_items()
     return View::newInstance()->_reset('customItems');
 }
 
-    /**
-     * Formats the price using the appropiate currency.
-     *
-     * @param float $price
-     * @return string
-     */
+
+/**
+ * Formats the price using the appropiate currency.
+ *
+ * @param float $price
+ * @param null  $symbol
+ * @return string
+ */
 function osc_format_price($price, $symbol = null)
 {
     if ($price === null) {
@@ -1274,11 +1303,12 @@ function osc_count_item_meta()
     return View::newInstance()->_count('metafields');
 }
 
-    /**
-     * Gets next item meta field if there is, else return null
-     *
-     * @return array
-     */
+
+/**
+ * Gets next item meta field if there is, else return null
+ *
+ * @return array
+ */
 function osc_has_item_meta()
 {
     if ( !View::newInstance()->_exists('metafields') ) {

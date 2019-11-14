@@ -200,14 +200,17 @@ function osc_validate_category($value)
     return false;
 }
 
-    /**
-     * Validate if $value url is a valid url.
-     * Check header response to validate.
-     *
-     * @param string $value
-     * @param boolean $required
-     * @return boolean
-     */
+
+/**
+ * Validate if $value url is a valid url.
+ * Check header response to validate.
+ *
+ * @param string  $value
+ * @param boolean $required
+ * @param bool    $get_headers
+ *
+ * @return boolean
+ */
 function osc_validate_url($value, $required = false, $get_headers = false)
 {
     if ($required || mb_strlen($value, 'UTF-8') > 0) {

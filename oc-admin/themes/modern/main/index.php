@@ -28,6 +28,9 @@
     osc_enqueue_style('fancybox', osc_assets_url('js/fancybox/jquery.fancybox.css'));
 
     osc_add_filter('render-wrapper', 'render_offset');
+/**
+ * @return string
+ */
 function render_offset()
 {
     return 'row-offset';
@@ -35,6 +38,11 @@ function render_offset()
 
     osc_add_filter('admin_body_class', 'addBodyClass');
 if (!function_exists('addBodyClass')) {
+    /**
+     * @param $array
+     *
+     * @return array
+     */
     function addBodyClass($array)
     {
         $array[] = 'dashboard';
@@ -50,6 +58,12 @@ function customPageHeader()
     <?php
 }
 
+
+/**
+ * @param $string
+ *
+ * @return string
+ */
 function customPageTitle($string)
 {
     return sprintf(__('Dashboard &raquo; %s'), $string);

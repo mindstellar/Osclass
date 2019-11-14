@@ -23,6 +23,11 @@ function addHelp()
 }
     osc_add_hook('help_box', 'addHelp');
 
+/**
+ * @param $string
+ *
+ * @return string
+ */
 function customPageTitle($string)
 {
     return sprintf(__('Admins &raquo; %s'), $string);

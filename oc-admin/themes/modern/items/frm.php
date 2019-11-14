@@ -25,6 +25,11 @@
     $categories = Category::newInstance()->toTree();
 
     $new_item = __get('new_item');
+/**
+ * @param string $return
+ *
+ * @return mixed
+ */
 function customText($return = 'title')
 {
     $new_item = __get('new_item');
@@ -55,6 +60,11 @@ function customPageHeader()
 }
     osc_add_hook('admin_page_header', 'customPageHeader');
 
+/**
+ * @param $string
+ *
+ * @return string
+ */
 function customPageTitle($string)
 {
     return sprintf('%s &raquo; %s', customText('subtitle'), $string);
@@ -133,6 +143,9 @@ function customHead()
     $actions    = __get('actions');
 
     osc_add_filter('render-wrapper', 'render_offset');
+/**
+ * @return string
+ */
 function render_offset()
 {
     return 'row-offset';

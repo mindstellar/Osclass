@@ -18,6 +18,9 @@
  * limitations under the License.
  */
 
+/**
+ * Class CAdminSettingsLatestSearches
+ */
 class CAdminSettingsLatestSearches extends AdminSecBaseModel
 {
     //Business Layer...

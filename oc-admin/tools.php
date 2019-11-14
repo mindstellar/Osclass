@@ -18,6 +18,9 @@
  * limitations under the License.
  */
 
+/**
+ * Class CAdminTools
+ */
 class CAdminTools extends AdminSecBaseModel
 {
     function __construct()
@@ -261,6 +264,12 @@ break;
     }
 
     //hopefully generic...
+
+    /**
+     * @param $file
+     *
+     * @return mixed|void
+     */
     function doView($file)
     {
         osc_run_hook("before_admin_html");

@@ -65,6 +65,9 @@ $(document).ready(function(){
 }
     osc_add_hook('admin_header', 'customHead', 10);
 
+/**
+ * @return string
+ */
 function render_offset()
 {
     return 'row-offset';
@@ -86,6 +89,12 @@ function customPageHeader()
     <?php
 }
 
+
+/**
+ * @param $string
+ *
+ * @return string
+ */
 function customPageTitle($string)
 {
     return sprintf(__('Latest searches Settings &raquo; %s'), $string);

@@ -18,6 +18,9 @@
  * limitations under the License.
  */
 
+/**
+ * Class CAdminSettingsCurrencies
+ */
 class CAdminSettingsCurrencies extends AdminSecBaseModel
 {
     //Business Layer...

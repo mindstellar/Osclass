@@ -33,6 +33,12 @@ function customPageHeader()
     <?php
 }
 
+
+/**
+ * @param $string
+ *
+ * @return string
+ */
 function customPageTitle($string)
 {
     return sprintf(__('User Settings &raquo; %s'), $string);

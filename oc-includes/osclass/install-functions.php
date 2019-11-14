@@ -651,11 +651,17 @@ CONFIG;
 }
 
 
-    /**
-     * Create config from config-sample.php file
-     *
-     * @since 1.2
-     */
+/**
+ * Create config from config-sample.php file
+ *
+ * @param $dbname
+ * @param $username
+ * @param $password
+ * @param $dbhost
+ * @param $tableprefix
+ *
+ * @since 1.2
+ */
 function copy_config_file($dbname, $username, $password, $dbhost, $tableprefix)
 {
     $password      = addslashes( $password );
@@ -698,6 +704,9 @@ function copy_config_file($dbname, $username, $password, $dbhost, $tableprefix)
 }
 
 
+/**
+ * @return bool
+ */
 function is_osclass_installed()
 {
     if ( ! file_exists( ABS_PATH . 'config.php' ) ) {
@@ -723,6 +732,11 @@ function is_osclass_installed()
 }
 
 
+/**
+ * @param $password
+ *
+ * @return array
+ */
 function finish_installation($password)
 {
     require_once LIB_PATH . 'osclass/model/Admin.php';
@@ -972,6 +986,10 @@ function display_target()
 }
 
 
+/**
+ * @param $error
+ * @param $step
+ */
 function display_database_error($error, $step)
 {
     ?>
@@ -986,6 +1004,11 @@ function display_database_error($error, $step)
 }
 
 
+/**
+ * @param $bool
+ *
+ * @throws \Exception
+ */
 function ping_search_engines($bool)
 {
     $mPreference = Preference::newInstance();
@@ -1023,6 +1046,9 @@ function ping_search_engines($bool)
 }
 
 
+/**
+ * @param $password
+ */
 function display_finish($password)
 {
     $data = finish_installation( $password );

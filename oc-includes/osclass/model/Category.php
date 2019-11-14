@@ -40,6 +40,11 @@ class Category extends DAO
      */
     private $_empty_tree;
 
+    /**
+     * @param string $l
+     *
+     * @return \Category
+     */
     public static function newInstance($l = '')
     {
         if ( !self::$instance instanceof self ) {
@@ -50,6 +55,8 @@ class Category extends DAO
 
     /**
      * Set data related to t_category table
+     *
+     * @param string $l
      */
     public function __construct($l = '')
     {
@@ -363,7 +370,8 @@ return array();
      * List all categories
      *
      * @access public
-     * @since unknown
+     * @since  unknown
+     * @param bool $description
      * @return array
      */
     public function listAll($description = true)
@@ -409,9 +417,10 @@ return array();
      * Given a category, return the branch from the root to the category
      *
      * @access public
-     * @since unknown
-     * @param integer$category
+     * @since  unknown
+     * @param null $cat
      * @return array
+     * @throws \Exception
      */
     public function toRootTree($cat = null)
     {
@@ -502,8 +511,8 @@ return array();
      * Check if it's a root category
      *
      * @access public
-     * @since unknown
-     * @param integer$category_id
+     * @since  unknown
+     * @param $categoryID
      * @return boolean
      */
     public function isRoot($categoryID)
@@ -557,9 +566,11 @@ return array();
      * categories on an array for the tree and it's faster than a SQL query
      *
      * @access public
-     * @since unknown
-     * @param int $categoryID primary key
+     * @since  unknown
+     * @param int    $categoryID primary key
+     * @param string $locale
      * @return array
+     * @throws \Exception
      */
     public function findByPrimaryKey($categoryID, $locale = "")
     {
@@ -728,9 +739,8 @@ return array();
      * Update a category
      *
      * @access public
-     * @since unknown
-     * @param array $fields
-     * @param array $aFieldsDescriptions
+     * @since  unknown
+     * @param     $data
      * @param int $pk primary key
      * @return mixed bool if there is an error, affectedRows if there isn't errors
      */
@@ -820,9 +830,10 @@ return array();
      * Inser a new category
      *
      * @access public
-     * @since unknown
+     * @since  unknown
      * @param array $fields
-     * @param array $aFieldsDescriptions
+     * @param null  $aFieldsDescription
+     * @return mixed
      */
     public function insert($fields, $aFieldsDescription = null)
     {
@@ -952,6 +963,8 @@ return array();
 
     /**
      * Formats a value before being inserted in DB.
+     * @param $value
+     * @return string
      */
     public function formatValue($value)
     {

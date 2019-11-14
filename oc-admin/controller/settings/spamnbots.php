@@ -18,6 +18,9 @@
  * limitations under the License.
  */
 
+/**
+ * Class CAdminSettingsSpamnBots
+ */
 class CAdminSettingsSpamnBots extends AdminSecBaseModel
 {
     function __construct()

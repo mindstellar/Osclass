@@ -30,6 +30,10 @@ class CWebContact extends BaseModel
     }
 
     //Business Layer...
+
+    /**
+     * @return bool
+     */
     public function doModel()
     {
         switch ($this->action) {

@@ -18,6 +18,9 @@
  * limitations under the License.
  */
 
+/**
+ * Class CAdminItems
+ */
 class CAdminItems extends AdminSecBaseModel
 {
     //specific for this class
@@ -32,6 +35,11 @@ class CAdminItems extends AdminSecBaseModel
     }
 
     //Business Layer...
+
+    /**
+     * @return bool|void
+     * @throws \Exception
+     */
     function doModel()
     {
         parent::doModel();
@@ -856,6 +864,12 @@ class CAdminItems extends AdminSecBaseModel
     }
 
     //hopefully generic...
+
+    /**
+     * @param $file
+     *
+     * @return mixed|void
+     */
     function doView($file)
     {
         osc_run_hook("before_admin_html");

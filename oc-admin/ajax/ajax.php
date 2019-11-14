@@ -20,6 +20,9 @@
 
     define('IS_AJAX', true);
 
+/**
+ * Class CAdminAjax
+ */
 class CAdminAjax extends AdminSecBaseModel {
 
     function __construct()
@@ -642,6 +645,12 @@ class CAdminAjax extends AdminSecBaseModel {
     }
 
     //hopefully generic...
+
+    /**
+     * @param $file
+     *
+     * @return mixed|void
+     */
     function doView($file)
     {
         osc_current_admin_theme_path($file);

@@ -20,6 +20,9 @@
     $all        = osc_get_preference('location_todo');
     $worktodo   = LocationsTmp::newInstance()->count();
 
+/**
+ * @return string
+ */
 function render_offset()
 {
     return 'row-offset';
@@ -75,6 +78,12 @@ function customPageHeader()
     <?php
 }
 
+
+/**
+ * @param $string
+ *
+ * @return string
+ */
 function customPageTitle($string)
 {
     return sprintf(__('Location stats &raquo; %s'), $string);

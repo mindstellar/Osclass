@@ -18,6 +18,9 @@
  * limitations under the License.
  */
 
+/**
+ * Class CAdminCategories
+ */
 class CAdminCategories extends AdminSecBaseModel
 {
     //specific for this class
@@ -71,6 +74,12 @@ class CAdminCategories extends AdminSecBaseModel
     }
 
     //hopefully generic...
+
+    /**
+     * @param $file
+     *
+     * @return mixed|void
+     */
     function doView($file)
     {
         osc_run_hook("before_admin_html");

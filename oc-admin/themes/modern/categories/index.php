@@ -39,6 +39,11 @@ function customPageHeader()
 }
     osc_add_hook('admin_page_header', 'customPageHeader');
 
+/**
+ * @param $string
+ *
+ * @return string
+ */
 function customPageTitle($string)
 {
     return sprintf(__('Categories &raquo; %s'), $string);
@@ -321,6 +326,9 @@ function customHead()
 }
     osc_add_hook('admin_header', 'customHead', 10);
 
+/**
+ * @param $category
+ */
 function drawCategory($category)
 {
     if ( count($category['categories']) > 0 ) {

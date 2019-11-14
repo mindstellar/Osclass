@@ -26,6 +26,11 @@
     $template_selected = (isset($meta['template']) && $meta['template']!='')?$meta['template']:'default';
     $locales = OSCLocale::newInstance()->listAllEnabled();
 
+/**
+ * @param string $return
+ *
+ * @return mixed
+ */
 function customFrmText($return = 'title')
 {
     $page = __get('page');
@@ -53,6 +58,11 @@ function customPageHeader()
 }
     osc_add_hook('admin_page_header', 'customPageHeader');
 
+/**
+ * @param $string
+ *
+ * @return string
+ */
 function customPageTitle($string)
 {
     return sprintf('%s &raquo; %s', customFrmText('title'), $string);

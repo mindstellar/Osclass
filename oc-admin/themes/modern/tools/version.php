@@ -27,6 +27,12 @@ function customPageHeader()
     <?php
 }
 
+
+/**
+ * @param $string
+ *
+ * @return string
+ */
 function customPageTitle($string)
 {
     return sprintf(__('Osclass %s &raquo; %s'), OSCLASS_VERSION, $string);

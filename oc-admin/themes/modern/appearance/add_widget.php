@@ -45,6 +45,13 @@ function customPageHeader()
         <h1><?php echo $title; ?></h1>
     <?php
 }
+
+
+/**
+ * @param $string
+ *
+ * @return string
+ */
 function customPageTitle($string)
 {
     return sprintf(__('Appearance &raquo; %s'), $string);

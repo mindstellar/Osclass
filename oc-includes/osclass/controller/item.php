@@ -18,6 +18,9 @@
  * limitations under the License.
  */
 
+/**
+ * Class CWebItem
+ */
 class CWebItem extends BaseModel
 {
     private $itemManager;
@@ -41,6 +44,11 @@ class CWebItem extends BaseModel
     }
 
     //Business Layer...
+
+    /**
+     * @return bool|void
+     * @throws \Exception
+     */
     function doModel()
     {
         //calling the view...
@@ -667,6 +675,12 @@ class CWebItem extends BaseModel
     }
 
     //hopefully generic...
+
+    /**
+     * @param $file
+     *
+     * @return mixed|void
+     */
     function doView($file)
     {
         osc_run_hook("before_html");

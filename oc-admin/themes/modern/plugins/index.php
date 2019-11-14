@@ -44,7 +44,12 @@ function customPageHeader()
 }
     osc_add_hook('admin_page_header', 'customPageHeader');
 
-function customPageTitle($string)
+    /**
+     * @param $string
+     *
+     * @return string
+     */
+    function customPageTitle($string)
 {
     return sprintf(__('Plugins &raquo; %s'), $string);
 }

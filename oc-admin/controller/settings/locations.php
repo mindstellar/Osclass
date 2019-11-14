@@ -18,9 +18,16 @@
  * limitations under the License.
  */
 
+/**
+ * Class CAdminSettingsLocations
+ */
 class CAdminSettingsLocations extends AdminSecBaseModel
 {
     //Business Layer...
+    /**
+     * @return bool|void
+     * @throws \Exception
+     */
     function doModel()
     {
         // calling the locations settings view

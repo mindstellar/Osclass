@@ -18,6 +18,9 @@
  * limitations under the License.
  */
 
+/**
+ * Class CAdminSettingsPermalinks
+ */
 class CAdminSettingsPermalinks extends AdminSecBaseModel
 {
     function __construct()

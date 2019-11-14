@@ -18,6 +18,9 @@
  * limitations under the License.
  */
 
+/**
+ * Class CAdminSettingsMailserver
+ */
 class CAdminSettingsMailserver extends AdminSecBaseModel
 {
     //Business Layer...

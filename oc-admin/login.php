@@ -18,6 +18,9 @@
  * limitations under the License.
  */
 
+/**
+ * Class CAdminLogin
+ */
 class CAdminLogin extends AdminBaseModel
 {
     function __construct()
@@ -26,6 +29,11 @@ class CAdminLogin extends AdminBaseModel
     }
 
     //Business Layer...
+
+    /**
+     * @return bool|void
+     * @throws \Exception
+     */
     function doModel()
     {
         switch ( $this->action ) {
@@ -184,6 +192,12 @@ class CAdminLogin extends AdminBaseModel
     }
 
     //in this case, this function is prepared for the "recover your password" form
+
+    /**
+     * @param $file
+     *
+     * @return mixed|void
+     */
     function doView($file)
     {
         $login_admin_title = osc_apply_filter('login_admin_title', 'Osclass');

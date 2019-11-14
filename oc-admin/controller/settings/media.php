@@ -18,6 +18,9 @@
  * limitations under the License.
  */
 
+/**
+ * Class CAdminSettingsMedia
+ */
 class CAdminSettingsMedia extends AdminSecBaseModel
 {
     function __construct()
@@ -227,6 +230,11 @@ class CAdminSettingsMedia extends AdminSecBaseModel
         }
     }
 
+    /**
+     * @param $sSize
+     *
+     * @return int
+     */
     function _sizeToKB($sSize)
     {
         $sSuffix = strtoupper(substr($sSize, -1));

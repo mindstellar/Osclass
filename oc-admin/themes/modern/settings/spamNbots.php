@@ -17,6 +17,9 @@
  * limitations under the License.
  */
 
+/**
+ * @return string
+ */
 function render_offset()
 {
     return 'row-offset';
@@ -38,6 +41,12 @@ function customPageHeader()
     <?php
 }
 
+
+/**
+ * @param $string
+ *
+ * @return string
+ */
 function customPageTitle($string)
 {
     return sprintf(__('Spam and bots &raquo; %s'), $string);

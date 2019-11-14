@@ -19,6 +19,9 @@
  */
 
 
+/**
+ * Class Cron
+ */
 class Cron extends DAO
 {
     /**

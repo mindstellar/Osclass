@@ -25,6 +25,9 @@
     $cities    = __get('cities');
     $locales   = __get('locales');
 
+/**
+ * @return array
+ */
 function customFrmText()
 {
     $user      = __get('user');
@@ -53,6 +56,11 @@ function customPageHeader()
 }
     osc_add_hook('admin_page_header', 'customPageHeader');
 
+/**
+ * @param $string
+ *
+ * @return string
+ */
 function customPageTitle($string)
 {
     $aux = customFrmText();

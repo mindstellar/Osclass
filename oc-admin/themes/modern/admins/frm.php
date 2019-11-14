@@ -20,6 +20,9 @@
     osc_enqueue_script('jquery-validate');
 
     $admin = __get("admin");
+/**
+ * @return array
+ */
 function customFrmText()
 {
     $admin = __get("admin");
@@ -47,6 +50,11 @@ function customPageHeader()
 
     $aux = customFrmText();
 
+/**
+ * @param $string
+ *
+ * @return string
+ */
 function customPageTitle($string)
 {
     $aux = customFrmText();

@@ -18,6 +18,9 @@
  * limitations under the License.
  */
 
+/**
+ * Class CAdminItemComments
+ */
 class CAdminItemComments extends AdminSecBaseModel
 {
     private $itemCommentManager;
@@ -31,6 +34,11 @@ class CAdminItemComments extends AdminSecBaseModel
     }
 
     //Business Layer...
+
+    /**
+     * @return bool|void
+     * @throws \Exception
+     */
     function doModel()
     {
         parent::doModel();
@@ -279,6 +287,12 @@ class CAdminItemComments extends AdminSecBaseModel
     }
 
     //hopefully generic...
+
+    /**
+     * @param $file
+     *
+     * @return mixed|void
+     */
     function doView($file)
     {
         osc_run_hook("before_admin_html");
@@ -287,6 +301,11 @@ class CAdminItemComments extends AdminSecBaseModel
         osc_run_hook("after_admin_html");
     }
 
+    /**
+     * @param $commentId
+     *
+     * @throws \Exception
+     */
     function sendCommentActivated($commentId)
     {
         $aComment = $this->itemCommentManager->findByPrimaryKey($commentId);

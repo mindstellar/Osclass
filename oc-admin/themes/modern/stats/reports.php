@@ -31,6 +31,9 @@ switch ($type) {
 }
 
     osc_add_filter('render-wrapper', 'render_offset');
+/**
+ * @return string
+ */
 function render_offset()
 {
     return 'row-offset';
@@ -52,6 +55,12 @@ function customPageHeader()
     <?php
 }
 
+
+/**
+ * @param $string
+ *
+ * @return string
+ */
 function customPageTitle($string)
 {
     return sprintf(__('Report Statistics &raquo; %s'), $string);

@@ -18,6 +18,9 @@
  * limitations under the License.
  */
 
+/**
+ * Class CAdminSettings
+ */
 class CAdminSettings extends AdminSecBaseModel
 {
     //Business Layer...

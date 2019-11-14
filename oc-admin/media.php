@@ -18,6 +18,9 @@
  * limitations under the License.
  */
 
+/**
+ * Class CAdminMedia
+ */
 class CAdminMedia extends AdminSecBaseModel
 {
     private $resourcesManager;
@@ -147,6 +150,12 @@ class CAdminMedia extends AdminSecBaseModel
     }
 
     //hopefully generic...
+
+    /**
+     * @param $file
+     *
+     * @return mixed|void
+     */
     function doView($file)
     {
         osc_run_hook("before_admin_html");
