@@ -1,5 +1,5 @@
 [![CodeFactor](https://www.codefactor.io/repository/github/navjottomer/osclass/badge)](https://www.codefactor.io/repository/github/navjottomer/osclass)
-
+[![Build Status](https://travis-ci.com/navjottomer/Osclass.svg?branch=master)](https://travis-ci.com/navjottomer/Osclass)
 # Osclass
 
 **This repo is a fork of official [Osclass][original-code] repository.**
