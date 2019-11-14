@@ -23,7 +23,7 @@
     * @author Osclass
     */
 
-	use OpensslCryptor\Cryptor;
+    use OpensslCryptor\Cryptor;
 
 if (!defined( 'BCRYPT_COST')) {
     define( 'BCRYPT_COST', 15);
