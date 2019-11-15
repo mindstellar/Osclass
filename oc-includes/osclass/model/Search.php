@@ -668,7 +668,7 @@ class Search extends DAO
      */
     public function notFromUser($id)
     {
-        $this->dao->where(sprintf( '(%st_item.fk_i_user_id != %d || %st_item.fk_i_user_id IS NULL) ' ,
+        $this->dao->where(sprintf( '(%st_item.fk_i_user_id != %d || %st_item.fk_i_user_id IS NULL) ',
                                        DB_TABLE_PREFIX,
                                        $id,
                                        DB_TABLE_PREFIX));
