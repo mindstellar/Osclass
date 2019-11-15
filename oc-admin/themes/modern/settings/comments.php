@@ -1,4 +1,6 @@
-<?php if ( ! defined('OC_ADMIN')) exit('Direct access is not allowed.');
+<?php if ( ! defined('OC_ADMIN')) {
+    exit('Direct access is not allowed.');
+}
 /*
  * Copyright 2014 Osclass
  *
@@ -18,7 +20,9 @@
     osc_enqueue_script('jquery-validate');
 
     //customize Head
-    function customHead() { ?>
+function customHead()
+{
+    ?>
 <script type="text/javascript">
 $(document).ready(function(){
     // Code for form validation
@@ -68,29 +72,43 @@ $(document).ready(function(){
 });
 </script>
         <?php
-    }
-    osc_add_hook('admin_header','customHead', 10);
+}
+    osc_add_hook('admin_header', 'customHead', 10);
 
-    function render_offset(){
-        return 'row-offset';
-    }
+/**
+ * @return string
+ */
+function render_offset()
+{
+    return 'row-offset';
+}
 
-    function addHelp() {
-        echo '<p>' . __("Modify the options that allow your users to publish comments on your site's listings.") . '</p>';
-    }
-    osc_add_hook('help_box','addHelp');
+function addHelp()
+{
+    echo '<p>' . __("Modify the options that allow your users to publish comments on your site's listings.") . '</p>';
+}
+    osc_add_hook('help_box', 'addHelp');
 
-    osc_add_hook('admin_page_header','customPageHeader');
-    function customPageHeader(){ ?>
+    osc_add_hook('admin_page_header', 'customPageHeader');
+function customPageHeader()
+{
+    ?>
         <h1><?php _e('Settings'); ?>
             <a href="#" class="btn ico ico-32 ico-help float-right"></a>
         </h1>
     <?php
-    }
+}
 
-    function customPageTitle($string) {
-        return sprintf(__('Comment Settings &raquo; %s'), $string);
-    }
+
+/**
+ * @param $string
+ *
+ * @return string
+ */
+function customPageTitle($string)
+{
+    return sprintf(__('Comment Settings &raquo; %s'), $string);
+}
     osc_add_filter('admin_title', 'customPageTitle');
 
     osc_current_admin_theme_path( 'parts/header.php' ); ?>

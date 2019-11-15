@@ -1,4 +1,6 @@
-<?php if ( ! defined('ABS_PATH')) exit('ABS_PATH is not loaded. Direct access is not allowed.');
+<?php if ( ! defined('ABS_PATH')) {
+    exit('ABS_PATH is not loaded. Direct access is not allowed.');
+}
 
 /*
  * Copyright 2014 Osclass
@@ -16,163 +18,289 @@
  * limitations under the License.
  */
 
-    class UserForm extends Form {
+/**
+ * Class UserForm
+ */
+class UserForm extends Form {
 
-        static public function primary_input_hidden($user) {
-            parent::generic_input_hidden("id", (isset($user["pk_i_id"]) ? $user['pk_i_id'] : '') );
+    /**
+     * @param $user
+     */
+    static public function primary_input_hidden($user)
+    {
+        parent::generic_input_hidden("id", (isset($user["pk_i_id"]) ? $user['pk_i_id'] : '') );
+    }
+
+    /**
+     * @param null $user
+     */
+    static public function name_text($user = null)
+    {
+        if ( Session::newInstance()->_getForm('user_s_name') != '' ) {
+            $user['s_name'] = Session::newInstance()->_getForm('user_s_name');
         }
+        parent::generic_input_text("s_name", isset($user['s_name'])? $user['s_name'] : '', null, false);
+    }
 
-        static public function name_text($user = null) {
-            if( Session::newInstance()->_getForm('user_s_name') != '' ) {
-                $user['s_name'] = Session::newInstance()->_getForm('user_s_name');
+    /**
+     * @param null $user
+     */
+    static public function username_text($user = null)
+    {
+        if ( Session::newInstance()->_getForm('user_s_username') != '' ) {
+            $user['s_username'] = Session::newInstance()->_getForm('user_s_username');
+        }
+        parent::generic_input_text("s_username", isset($user['s_username'])? $user['s_username'] : '', null, false);
+    }
+
+    /**
+     * @param null $user
+     */
+    static public function email_login_text($user = null)
+    {
+        parent::generic_input_text("email", isset($user['s_email'])? $user['s_email'] : '', null, false);
+    }
+
+    /**
+     * @param null $user
+     */
+    static public function password_login_text($user = null)
+    {
+        parent::generic_password("password", '', null, false);
+    }
+
+    /**
+     * @param null $user
+     */
+    static public function rememberme_login_checkbox($user = null)
+    {
+        parent::generic_input_checkbox("remember", '1', false);
+    }
+
+    /**
+     * @param null $user
+     */
+    static public function old_password_text($user = null)
+    {
+        parent::generic_password("old_password", '', null, false);
+    }
+
+    /**
+     * @param null $user
+     */
+    static public function password_text($user = null)
+    {
+        parent::generic_password("s_password", '', null, false);
+    }
+
+    /**
+     * @param null $user
+     */
+    static public function check_password_text($user = null)
+    {
+        parent::generic_password("s_password2", '', null, false);
+    }
+
+    /**
+     * @param null $user
+     */
+    static public function email_text($user = null)
+    {
+        if ( Session::newInstance()->_getForm('user_s_email') != '' ) {
+            $user['s_email'] = Session::newInstance()->_getForm('user_s_email');
+        }
+        parent::generic_input_text("s_email", isset($user['s_email'])? $user['s_email'] : '', null, false);
+    }
+
+    /**
+     * @param null $user
+     */
+    static public function website_text($user = null)
+    {
+        parent::generic_input_text("s_website", isset($user['s_website'])? $user['s_website'] : '', null, false);
+    }
+
+    /**
+     * @param null $user
+     */
+    static public function mobile_text($user = null)
+    {
+        if ( Session::newInstance()->_getForm('user_s_phone_mobile') != '' ) {
+            $user['s_phone_mobile'] = Session::newInstance()->_getForm('user_s_phone_mobile');
+        }
+        parent::generic_input_text("s_phone_mobile", isset($user['s_phone_mobile'])? $user['s_phone_mobile'] : '', null, false);
+    }
+
+    /**
+     * @param null $user
+     */
+    static public function phone_land_text($user = null)
+    {
+        if ( Session::newInstance()->_getForm('user_s_phone_land') != '' ) {
+            $user['s_phone_land'] = Session::newInstance()->_getForm('user_s_phone_land');
+        }
+        parent::generic_input_text("s_phone_land", isset($user['s_phone_land'])? $user['s_phone_land'] : '', null, false);
+    }
+
+    /**
+     * @param        $name
+     * @param string $locale
+     * @param string $value
+     */
+    static public function info_textarea($name, $locale = 'en_US', $value = '')
+    {
+        parent::generic_textarea($name . '[' . $locale . ']', $value);
+    }
+
+    /**
+     * @param      $locales
+     * @param null $user
+     */
+    static public function multilanguage_info($locales, $user = null)
+    {
+        $num_locales = count($locales);
+        if ($num_locales > 1) {
+            echo '<div class="tabber">';
+        }
+        foreach ($locales as $locale) {
+            if ($num_locales>1) {
+                echo '<div class="tabbertab">';
+            };
+            if ($num_locales > 1) {
+                echo '<h2>' . $locale['s_name'] . '</h2>';
             }
-            parent::generic_input_text("s_name", isset($user['s_name'])? $user['s_name'] : '', null, false);
-        }
-
-        static public function username_text($user = null) {
-            if( Session::newInstance()->_getForm('user_s_username') != '' ) {
-                $user['s_username'] = Session::newInstance()->_getForm('user_s_username');
-            }
-            parent::generic_input_text("s_username", isset($user['s_username'])? $user['s_username'] : '', null, false);
-        }
-
-        static public function email_login_text($user = null) {
-            parent::generic_input_text("email", isset($user['s_email'])? $user['s_email'] : '', null, false);
-        }
-
-        static public function password_login_text($user = null) {
-            parent::generic_password("password", '', null, false);
-        }
-
-        static public function rememberme_login_checkbox($user = null) {
-            parent::generic_input_checkbox("remember", '1', false);
-        }
-
-        static public function old_password_text($user = null) {
-            parent::generic_password("old_password", '', null, false);
-        }
-
-        static public function password_text($user = null) {
-            parent::generic_password("s_password", '', null, false);
-        }
-
-        static public function check_password_text($user = null) {
-            parent::generic_password("s_password2", '', null, false);
-        }
-
-        static public function email_text($user = null) {
-            if( Session::newInstance()->_getForm('user_s_email') != '' ) {
-                $user['s_email'] = Session::newInstance()->_getForm('user_s_email');
-            }
-            parent::generic_input_text("s_email", isset($user['s_email'])? $user['s_email'] : '', null, false);
-        }
-
-        static public function website_text($user = null) {
-            parent::generic_input_text("s_website", isset($user['s_website'])? $user['s_website'] : '', null, false);
-        }
-
-        static public function mobile_text($user = null) {
-            if( Session::newInstance()->_getForm('user_s_phone_mobile') != '' ) {
-                $user['s_phone_mobile'] = Session::newInstance()->_getForm('user_s_phone_mobile');
-            }
-            parent::generic_input_text("s_phone_mobile", isset($user['s_phone_mobile'])? $user['s_phone_mobile'] : '', null, false);
-        }
-
-        static public function phone_land_text($user = null) {
-            if( Session::newInstance()->_getForm('user_s_phone_land') != '' ) {
-                $user['s_phone_land'] = Session::newInstance()->_getForm('user_s_phone_land');
-            }
-            parent::generic_input_text("s_phone_land", isset($user['s_phone_land'])? $user['s_phone_land'] : '', null, false);
-        }
-
-        static public function info_textarea($name, $locale = 'en_US', $value = '') {
-            parent::generic_textarea($name . '[' . $locale . ']', $value);
-        }
-
-        static public function multilanguage_info($locales, $user = null) {
-            $num_locales = count($locales);
-            if($num_locales > 1) { echo '<div class="tabber">'; }
-            foreach($locales as $locale) {
-                if($num_locales>1) { echo '<div class="tabbertab">'; };
-                    if($num_locales > 1) { echo '<h2>' . $locale['s_name'] . '</h2>'; }
-                    $info = '';
-                    if( is_array($user) ) {
-                        if( isset($user['locale'][$locale['pk_c_code']])) {
-                            if(isset($user['locale'][$locale['pk_c_code']]['s_info'])) {
-                                $info = $user['locale'][$locale['pk_c_code']]['s_info'];
-                            }
-                        }
+                $info = '';
+            if ( is_array($user) ) {
+                if ( isset($user['locale'][$locale['pk_c_code']])) {
+                    if (isset($user['locale'][$locale['pk_c_code']]['s_info'])) {
+                        $info = $user['locale'][$locale['pk_c_code']]['s_info'];
                     }
-                    self::info_textarea('s_info', $locale['pk_c_code'], $info);
-                if($num_locales>1) { echo '</div>'; };
+                }
             }
-            if($num_locales>1) { echo '</div>'; };
+                self::info_textarea('s_info', $locale['pk_c_code'], $info);
+            if ($num_locales>1) {
+                echo '</div>';
+            };
         }
+        if ($num_locales>1) {
+            echo '</div>';
+        };
+    }
 
-        static public function country_select($countries, $user = null) {
-            if( count($countries) > 1 ) {
-                parent::generic_select('countryId', $countries, 'pk_c_code', 's_name', __('Select a country...'), (isset($user['fk_c_country_code'])) ? $user['fk_c_country_code'] : null);
-            } else {
-                parent::generic_input_text('country', ( ! empty($user['s_country']) ? $user['s_country'] : @$countries[0]['s_name']));
-                parent::generic_input_hidden('countryId', '');
-            }
+    /**
+     * @param      $countries
+     * @param null $user
+     */
+    static public function country_select($countries, $user = null)
+    {
+        if ( count($countries) > 1 ) {
+            parent::generic_select('countryId', $countries, 'pk_c_code', 's_name', __('Select a country...'), (isset($user['fk_c_country_code'])) ? $user['fk_c_country_code'] : null);
+        } else {
+            parent::generic_input_text('country', ( ! empty($user['s_country']) ? $user['s_country'] : @$countries[0]['s_name']));
+            parent::generic_input_hidden('countryId', '');
         }
+    }
 
-        static public function country_text($user = null) {
-            parent::generic_input_text('country', (isset($user['s_country'])) ? $user['s_country'] : null);
-        }
+    /**
+     * @param null $user
+     */
+    static public function country_text($user = null)
+    {
+        parent::generic_input_text('country', (isset($user['s_country'])) ? $user['s_country'] : null);
+    }
 
-        static public function region_select($regions, $user = null) {
-            if( count($regions) >= 1 ) {
-                parent::generic_select('regionId', $regions, 'pk_i_id', 's_name', __('Select a region...'), (isset($user['fk_i_region_id'])) ? $user['fk_i_region_id'] : null);
-            } else {
-                parent::generic_input_text('region', (isset($user['s_region'])) ? $user['s_region'] : null);
-            }
-        }
-
-        static public function region_text($user = null) {
+    /**
+     * @param      $regions
+     * @param null $user
+     */
+    static public function region_select($regions, $user = null)
+    {
+        if ( count($regions) >= 1 ) {
+            parent::generic_select('regionId', $regions, 'pk_i_id', 's_name', __('Select a region...'), (isset($user['fk_i_region_id'])) ? $user['fk_i_region_id'] : null);
+        } else {
             parent::generic_input_text('region', (isset($user['s_region'])) ? $user['s_region'] : null);
         }
+    }
 
-        static public function city_select($cities, $user = null) {
-            if( count($cities) >= 1 ) {
-                parent::generic_select('cityId', $cities, 'pk_i_id', 's_name', __('Select a city...'), (isset($user['fk_i_city_id'])) ? $user['fk_i_city_id'] : null);
-            } else {
-                parent::generic_input_text('city', (isset($user['s_city'])) ? $user['s_city'] : null);
-            }
-        }
+    /**
+     * @param null $user
+     */
+    static public function region_text($user = null)
+    {
+        parent::generic_input_text('region', (isset($user['s_region'])) ? $user['s_region'] : null);
+    }
 
-        static public function city_text($user = null) {
+    /**
+     * @param      $cities
+     * @param null $user
+     */
+    static public function city_select($cities, $user = null)
+    {
+        if ( count($cities) >= 1 ) {
+            parent::generic_select('cityId', $cities, 'pk_i_id', 's_name', __('Select a city...'), (isset($user['fk_i_city_id'])) ? $user['fk_i_city_id'] : null);
+        } else {
             parent::generic_input_text('city', (isset($user['s_city'])) ? $user['s_city'] : null);
         }
+    }
 
-        static public function city_area_text($user = null) {
-            parent::generic_input_text('cityArea', (isset($user['s_city_area'])) ? $user['s_city_area'] : null);
-        }
+    /**
+     * @param null $user
+     */
+    static public function city_text($user = null)
+    {
+        parent::generic_input_text('city', (isset($user['s_city'])) ? $user['s_city'] : null);
+    }
 
-        static public function address_text($user = null) {
-            parent::generic_input_text('address', (isset($user['s_address'])) ? $user['s_address'] : null);
-        }
+    /**
+     * @param null $user
+     */
+    static public function city_area_text($user = null)
+    {
+        parent::generic_input_text('cityArea', (isset($user['s_city_area'])) ? $user['s_city_area'] : null);
+    }
 
-        static public function zip_text($user = null) {
-            parent::generic_input_text('zip', (isset($user['s_zip'])) ? $user['s_zip'] : null);
-        }
+    /**
+     * @param null $user
+     */
+    static public function address_text($user = null)
+    {
+        parent::generic_input_text('address', (isset($user['s_address'])) ? $user['s_address'] : null);
+    }
 
-        static public function is_company_select($user = null, $user_label = null, $company_label = null) {
-            $options = array(
-                array( 'i_value' => '0', 's_text' => ($user_label?$user_label:__('User')) )
-                ,array( 'i_value' => '1', 's_text' => ($company_label?$company_label:__('Company')) )
-            );
+    /**
+     * @param null $user
+     */
+    static public function zip_text($user = null)
+    {
+        parent::generic_input_text('zip', (isset($user['s_zip'])) ? $user['s_zip'] : null);
+    }
 
-            parent::generic_select( 'b_company', $options, 'i_value', 's_text', null, (isset($user['b_company'])) ? $user['b_company'] : null );
-        }
+    /**
+     * @param null $user
+     * @param null $user_label
+     * @param null $company_label
+     */
+    static public function is_company_select($user = null, $user_label = null, $company_label = null)
+    {
+        $options = array(
+            array( 'i_value' => '0', 's_text' => ($user_label?$user_label:__('User')) )
+            ,array( 'i_value' => '1', 's_text' => ($company_label?$company_label:__('Company')) )
+        );
 
-        static public function user_select($users){
-            Form::generic_select('userId', $users, 'pk_i_id', 's_name',  __('All') , NULL );
-        }
+        parent::generic_select( 'b_company', $options, 'i_value', 's_text', null, (isset($user['b_company'])) ? $user['b_company'] : null );
+    }
 
-        static public function js_validation() {
-?>
+    /**
+     * @param $users
+     */
+    static public function user_select($users)
+    {
+        Form::generic_select('userId', $users, 'pk_i_id', 's_name', __('All'), null );
+    }
+
+    static public function js_validation()
+    {
+        ?>
 <script type="text/javascript">
     $(document).ready(function(){
         // Code for form validation
@@ -225,11 +353,12 @@
         });
     });
 </script>
-<?php
-        }
+        <?php
+    }
 
-        static public function js_validation_old() {
-?>
+    static public function js_validation_old()
+    {
+        ?>
 <script type="text/javascript">
 $(document).ready(function(){
     $('#s_name').focus(function(){
@@ -280,11 +409,12 @@ function checkForm() {
     return true;
 }
 </script>
-<?php
-        }
+        <?php
+    }
 
-        static public function js_validation_edit() {
-?>
+    static public function js_validation_edit()
+    {
+        ?>
 <script type="text/javascript">
     $(document).ready(function(){
         // Code for form validation
@@ -333,20 +463,24 @@ function checkForm() {
         });
     });
 </script>
-<?php
-        }
+        <?php
+    }
 
-        static public function location_javascript($path = 'front') {
-?>
+    /**
+     * @param string $path
+     */
+    static public function location_javascript($path = 'front')
+    {
+        ?>
 <script type="text/javascript">
     $(document).ready(function(){
         $("#countryId").on("change",function(){
             var pk_c_code = $(this).val();
-            <?php if($path=="admin") { ?>
+        <?php if ($path=="admin") { ?>
                 var url = '<?php echo osc_admin_base_url(true)."?page=ajax&action=regions&countryId="; ?>' + pk_c_code;
-            <?php } else { ?>
+        <?php } else { ?>
                 var url = '<?php echo osc_base_url(true)."?page=ajax&action=regions&countryId="; ?>' + pk_c_code;
-            <?php }; ?>
+        <?php }; ?>
             var result = '';
 
             if(pk_c_code != '') {
@@ -410,11 +544,11 @@ function checkForm() {
 
         $("#regionId").on("change",function(){
             var pk_c_code = $(this).val();
-            <?php if($path=="admin") { ?>
+        <?php if ($path=="admin") { ?>
                 var url = '<?php echo osc_admin_base_url(true)."?page=ajax&action=cities&regionId="; ?>' + pk_c_code;
-            <?php } else { ?>
+        <?php } else { ?>
                 var url = '<?php echo osc_base_url(true)."?page=ajax&action=cities&regionId="; ?>' + pk_c_code;
-            <?php }; ?>
+        <?php }; ?>
 
             var result = '';
 
@@ -459,9 +593,9 @@ function checkForm() {
         }
     });
 </script>
-    <?php
-        }
+        <?php
     }
+}
 
     /* file end: ./oc-includes/osclass/frm/User.form.class.php */
 ?>

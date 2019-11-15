@@ -1,4 +1,6 @@
-<?php if ( ! defined('OC_ADMIN')) exit('Direct access is not allowed.');
+<?php if ( ! defined('OC_ADMIN')) {
+    exit('Direct access is not allowed.');
+}
 /*
  * Copyright 2014 Osclass
  *
@@ -17,45 +19,60 @@
 
     $reports = __get("reports");
     $type    = Params::getParam('type_stat');
-    switch($type){
-        case 'week':
-            $type_stat = __('Last 10 weeks');
-            break;
-        case 'month':
-            $type_stat = __('Last 10 months');
-            break;
-        default:
-            $type_stat = __('Last 10 days');
-    }
+switch ($type) {
+    case 'week':
+        $type_stat = __('Last 10 weeks');
+        break;
+    case 'month':
+        $type_stat = __('Last 10 months');
+        break;
+    default:
+        $type_stat = __('Last 10 days');
+}
 
-    osc_add_filter('render-wrapper','render_offset');
-    function render_offset(){
-        return 'row-offset';
-    }
+    osc_add_filter('render-wrapper', 'render_offset');
+/**
+ * @return string
+ */
+function render_offset()
+{
+    return 'row-offset';
+}
 
-    function addHelp() {
-        echo '<p>' . __('See how many listings from your site have been reported as spam, expired, duplicate, etc.') . '</p>';
-    }
-    osc_add_hook('help_box','addHelp');
+function addHelp()
+{
+    echo '<p>' . __('See how many listings from your site have been reported as spam, expired, duplicate, etc.') . '</p>';
+}
+    osc_add_hook('help_box', 'addHelp');
 
-    osc_add_hook('admin_page_header','customPageHeader');
-    function customPageHeader(){ ?>
+    osc_add_hook('admin_page_header', 'customPageHeader');
+function customPageHeader()
+{
+    ?>
         <h1><?php _e('Statistics'); ?>
             <a href="#" class="btn ico ico-32 ico-help float-right"></a>
         </h1>
     <?php
-    }
+}
 
-    function customPageTitle($string) {
-        return sprintf(__('Report Statistics &raquo; %s'), $string);
-    }
+
+/**
+ * @param $string
+ *
+ * @return string
+ */
+function customPageTitle($string)
+{
+    return sprintf(__('Report Statistics &raquo; %s'), $string);
+}
     osc_add_filter('admin_title', 'customPageTitle');
 
-    function customHead() {
-        $reports = __get("reports");
-?>
+function customHead()
+{
+    $reports = __get("reports");
+    ?>
     <script type="text/javascript" src="https://www.google.com/jsapi"></script>
-    <?php if(count($reports)>0) { ?>
+    <?php if (count($reports)>0) { ?>
     <script type="text/javascript">
         // Load the Visualization API and the piechart package.
         google.load('visualization', '1', {'packages':['corechart']});
@@ -76,7 +93,7 @@
             data.addColumn('number', '<?php echo osc_esc_js(__('Expired')); ?>');
             <?php $k = 0;
             echo "data.addRows(".count($reports).");";
-            foreach($reports as $date => $data) {
+            foreach ($reports as $date => $data) {
                 echo "data.setValue(" . $k . ', 0, "' . $date . '");';
                 echo "data.setValue(" . $k . ", 1, " . $data['spam'] . ");";
                 echo "data.setValue(" . $k . ", 2, " . $data['repeated'] . ");";
@@ -127,8 +144,8 @@
                     });
         }
         </script>
-<?php }
-    }
+    <?php }
+}
     osc_add_hook('admin_header', 'customHead', 10);
 ?>
 <?php osc_current_admin_theme_path( 'parts/header.php' ); ?>
@@ -140,9 +157,15 @@
     </div>
     <div class="grid-row grid-50 no-bottom-margin">
         <div class="row-wrapper">
-            <a id="monthly" class="btn float-right <?php if($type=='month') echo 'btn-green';?>" href="<?php echo osc_admin_base_url(true); ?>?page=stats&amp;action=reports&amp;type_stat=month"><?php _e('Last 10 months'); ?></a>
-            <a id="weekly"  class="btn float-right <?php if($type=='week') echo 'btn-green';?>" href="<?php echo osc_admin_base_url(true); ?>?page=stats&amp;action=reports&amp;type_stat=week"><?php _e('Last 10 weeks'); ?></a>
-            <a id="daily"   class="btn float-right <?php if($type==''||$type=='day') echo 'btn-green';?>" href="<?php echo osc_admin_base_url(true); ?>?page=stats&amp;action=reports&amp;type_stat=day"><?php _e('Last 10 days'); ?></a>
+            <a id="monthly" class="btn float-right <?php if ($type=='month') {
+                echo 'btn-green';
+                                                   }?>" href="<?php echo osc_admin_base_url(true); ?>?page=stats&amp;action=reports&amp;type_stat=month"><?php _e('Last 10 months'); ?></a>
+            <a id="weekly"  class="btn float-right <?php if ($type=='week') {
+                echo 'btn-green';
+                                                   }?>" href="<?php echo osc_admin_base_url(true); ?>?page=stats&amp;action=reports&amp;type_stat=week"><?php _e('Last 10 weeks'); ?></a>
+            <a id="daily"   class="btn float-right <?php if ($type==''||$type=='day') {
+                echo 'btn-green';
+                                                   }?>" href="<?php echo osc_admin_base_url(true); ?>?page=stats&amp;action=reports&amp;type_stat=day"><?php _e('Last 10 days'); ?></a>
         </div>
     </div>
     <div class="grid-row grid-100 clear">
@@ -154,7 +177,7 @@
                 <div class="widget-box-content">
                     <b class="stats-title"></b>
                     <div id="placeholder" class="graph-placeholder" style="height:150px">
-                        <?php if( count($reports) == 0 ) {
+                        <?php if ( count($reports) == 0 ) {
                             _e("There are no statistics yet");
                         } ?>
                     </div>

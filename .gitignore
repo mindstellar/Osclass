@@ -50,3 +50,4 @@ oc-includes/simpletest/test/osclass/custom_config.php
 composer.phar
 osclass_latest.zip
 .php_cs.cache
+robots.txt

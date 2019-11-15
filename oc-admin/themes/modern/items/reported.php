@@ -1,4 +1,6 @@
-<?php if ( ! defined('OC_ADMIN')) exit('Direct access is not allowed.');
+<?php if ( ! defined('OC_ADMIN')) {
+    exit('Direct access is not allowed.');
+}
 /*
  * Copyright 2014 Osclass
  *
@@ -15,26 +17,37 @@
  * limitations under the License.
  */
 
-    function addHelp() {
-        echo '<p>' . __('From here, you can edit or delete the listings reported by users (spam, misclassified, duplicate, expired, offensive). You can also delete the report if you consider it mistaken.') . '</p>';
-    }
-    osc_add_hook('help_box','addHelp');
+function addHelp()
+{
+    echo '<p>' . __('From here, you can edit or delete the listings reported by users (spam, misclassified, duplicate, expired, offensive). You can also delete the report if you consider it mistaken.') . '</p>';
+}
+    osc_add_hook('help_box', 'addHelp');
 
-    function customPageHeader(){ ?>
+function customPageHeader()
+{
+    ?>
         <h1><?php _e('Listings'); ?>
             <a href="#" class="btn ico ico-32 ico-help float-right"></a>
        </h1>
-<?php
-    }
-    osc_add_hook('admin_page_header','customPageHeader');
+    <?php
+}
+    osc_add_hook('admin_page_header', 'customPageHeader');
 
-    function customPageTitle($string) {
-        return sprintf(__('Reported listings &raquo; %s'), $string);
-    }
+/**
+ * @param $string
+ *
+ * @return string
+ */
+function customPageTitle($string)
+{
+    return sprintf(__('Reported listings &raquo; %s'), $string);
+}
     osc_add_filter('admin_title', 'customPageTitle');
 
     //customize Head
-    function customHead() { ?>
+function customHead()
+{
+    ?>
         <script type="text/javascript">
             // autocomplete users
             $(document).ready(function(){
@@ -96,8 +109,8 @@
             }
         </script>
         <?php
-    }
-    osc_add_hook('admin_header','customHead', 10);
+}
+    osc_add_hook('admin_header', 'customHead', 10);
 
 
     $aData      = __get('aData');
@@ -113,18 +126,25 @@
     <div id="listing-toolbar">
         <div class="float-right">
             <form method="get" action="<?php echo osc_admin_base_url(true); ?>"  class="inline">
-                <?php foreach( Params::getParamsAsArray('get') as $key => $value ) { ?>
-                <?php if( $key != 'iDisplayLength' ) { ?>
+                <?php foreach ( Params::getParamsAsArray('get') as $key => $value ) { ?>
+                    <?php if ( $key != 'iDisplayLength' ) { ?>
                 <input type="hidden" name="<?php echo osc_esc_html($key); ?>" value="<?php echo osc_esc_html($value); ?>" />
-                <?php } } ?>
+                    <?php }
+                } ?>
                 <select name="iDisplayLength" class="select-box-extra select-box-medium float-left" onchange="this.form.submit();" >
                     <option value="10"><?php printf(__('%d Listings'), 10); ?></option>
-                    <option value="25" <?php if( Params::getParam('iDisplayLength') == 25 ) echo 'selected'; ?> ><?php printf(__('%d Listings'), 25); ?></option>
-                    <option value="50" <?php if( Params::getParam('iDisplayLength') == 50 ) echo 'selected'; ?> ><?php printf(__('%d Listings'), 50); ?></option>
-                    <option value="100" <?php if( Params::getParam('iDisplayLength') == 100 ) echo 'selected'; ?> ><?php printf(__('%d Listings'), 100); ?></option>
+                    <option value="25" <?php if ( Params::getParam('iDisplayLength') == 25 ) {
+                        echo 'selected';
+                                       } ?> ><?php printf(__('%d Listings'), 25); ?></option>
+                    <option value="50" <?php if ( Params::getParam('iDisplayLength') == 50 ) {
+                        echo 'selected';
+                                       } ?> ><?php printf(__('%d Listings'), 50); ?></option>
+                    <option value="100" <?php if ( Params::getParam('iDisplayLength') == 100 ) {
+                        echo 'selected';
+                                        } ?> ><?php printf(__('%d Listings'), 100); ?></option>
                 </select>
             </form>
-            <?php if($sort!='date') { ?>
+            <?php if ($sort!='date') { ?>
             <a id="btn-reset-filters" class="btn btn-red" href="<?php echo osc_admin_base_url(true); ?>?page=items&action=items_reported"><?php _e('Reset filters'); ?></a>
             <?php } ?>
         </div>
@@ -150,16 +170,16 @@
             <table class="table" cellpadding="0" cellspacing="0">
                 <thead>
                     <tr>
-                        <?php foreach($columns as $k => $v) {
+                        <?php foreach ($columns as $k => $v) {
                             echo '<th class="col-'.$k.' '.($sort==$k?($direction=='desc'?'sorting_desc':'sorting_asc'):'').'">'.$v.'</th>';
                         }; ?>
                     </tr>
                 </thead>
                 <tbody>
-                <?php if( count($rows) > 0 ) { ?>
-                    <?php foreach($rows as $key => $row) { ?>
+                <?php if ( count($rows) > 0 ) { ?>
+                    <?php foreach ($rows as $key => $row) { ?>
                         <tr>
-                            <?php foreach($row as $k => $v) { ?>
+                            <?php foreach ($row as $k => $v) { ?>
                                 <td class="col-<?php echo $k; ?>"><?php echo $v; ?></td>
                             <?php }; ?>
                         </tr>

@@ -1,4 +1,6 @@
-<?php if ( ! defined('OC_ADMIN')) exit('Direct access is not allowed.');
+<?php if ( ! defined('OC_ADMIN')) {
+    exit('Direct access is not allowed.');
+}
 /*
  * Copyright 2014 Osclass
  *
@@ -15,15 +17,24 @@
  * limitations under the License.
  */
 
-    osc_add_hook('admin_page_header','customPageHeader');
-    function customPageHeader(){ ?>
+    osc_add_hook('admin_page_header', 'customPageHeader');
+function customPageHeader()
+{
+    ?>
         <h1><?php _e('Settings'); ?></h1>
-<?php
-    }
+    <?php
+}
 
-    function customPageTitle($string) {
-        return sprintf(__('Add language &raquo; %s'), $string);
-    }
+
+/**
+ * @param $string
+ *
+ * @return string
+ */
+function customPageTitle($string)
+{
+    return sprintf(__('Add language &raquo; %s'), $string);
+}
     osc_add_filter('admin_title', 'customPageTitle');
 
     osc_current_admin_theme_path('parts/header.php'); ?>
@@ -31,7 +42,7 @@
     <h2 class="render-title"><?php _e('Add language'); ?></h2>
     <div id="upload-language">
         <div class="form-horizontal">
-        <?php if( is_writable( osc_translations_path() ) ) { ?>
+        <?php if ( is_writable( osc_translations_path() ) ) { ?>
             <form class="separate-top" action="<?php echo osc_admin_base_url(true); ?>" method="post" enctype="multipart/form-data">
                 <input type="hidden" name="action" value="add_post" />
                 <input type="hidden" name="page" value="languages" />

@@ -1,4 +1,6 @@
-<?php if ( ! defined('OC_ADMIN')) exit('Direct access is not allowed.');
+<?php if ( ! defined('OC_ADMIN')) {
+    exit('Direct access is not allowed.');
+}
 /*
  * Copyright 2014 Osclass
  *
@@ -15,27 +17,38 @@
  * limitations under the License.
  */
 
-    function addHelp() {
-        echo '<p>' . __('Manage the images that users have uploaded along with their listings. You can delete them without deleting the whole listing if the image is inappropriate or doesn’t match the listing.') . '</p>';
-    }
-    osc_add_hook('help_box','addHelp');
+function addHelp()
+{
+    echo '<p>' . __('Manage the images that users have uploaded along with their listings. You can delete them without deleting the whole listing if the image is inappropriate or doesn’t match the listing.') . '</p>';
+}
+    osc_add_hook('help_box', 'addHelp');
 
-    function customPageHeader(){ ?>
+function customPageHeader()
+{
+    ?>
         <h1><?php _e('Manage Media'); ?>
             <a href="<?php echo osc_admin_base_url(true) . '?page=settings&action=media'; ?>" class="btn ico ico-32 ico-engine float-right"></a>
             <a href="#" class="btn ico ico-32 ico-help float-right"></a>
         </h1>
-<?php
-    }
-    osc_add_hook('admin_page_header','customPageHeader');
+    <?php
+}
+    osc_add_hook('admin_page_header', 'customPageHeader');
 
-    function customPageTitle($string) {
-        return sprintf(__('Media &raquo; %s'), $string);
-    }
+/**
+ * @param $string
+ *
+ * @return string
+ */
+function customPageTitle($string)
+{
+    return sprintf(__('Media &raquo; %s'), $string);
+}
     osc_add_filter('admin_title', 'customPageTitle');
 
     //customize Head
-    function customHead() { ?>
+function customHead()
+{
+    ?>
         <script type="text/javascript">
             $(document).ready(function(){
                 // check_all bulkactions
@@ -95,8 +108,8 @@
             }
         </script>
         <?php
-    }
-    osc_add_hook('admin_header','customHead', 10);
+}
+    osc_add_hook('admin_header', 'customHead', 10);
 
     $aData      = __get('aData');
     $aRawRows   = __get('aRawRows');
@@ -122,16 +135,16 @@
         <table class="table" cellpadding="0" cellspacing="0">
             <thead>
                 <tr>
-                    <?php foreach($columns as $k => $v) {
+                    <?php foreach ($columns as $k => $v) {
                         echo '<th class="col-'.$k.' '.($sort==$k?($direction=='desc'?'sorting_desc':'sorting_asc'):'').'">'.$v.'</th>';
                     }; ?>
                 </tr>
             </thead>
             <tbody>
-            <?php if( count($rows) > 0 ) { ?>
-                <?php foreach($rows as $key => $row) { ?>
+            <?php if ( count($rows) > 0 ) { ?>
+                <?php foreach ($rows as $key => $row) { ?>
                     <tr>
-                        <?php foreach($row as $k => $v) { ?>
+                        <?php foreach ($row as $k => $v) { ?>
                             <td class="col-<?php echo $k; ?>"><?php echo $v; ?></td>
                         <?php }; ?>
                     </tr>
@@ -148,11 +161,12 @@
     </form>
 </div>
 <?php
-    function showingResults(){
-        $aData = __get('aData');
-        echo '<ul class="showing-results"><li><span>'.osc_pagination_showing((Params::getParam('iPage')-1)*$aData['iDisplayLength']+1, ((Params::getParam('iPage')-1)*$aData['iDisplayLength'])+count($aData['aRows']), $aData['iTotalDisplayRecords'], $aData['iTotalRecords']).'</span></li></ul>';
-    }
-    osc_add_hook('before_show_pagination_admin','showingResults');
+function showingResults()
+{
+    $aData = __get('aData');
+    echo '<ul class="showing-results"><li><span>'.osc_pagination_showing((Params::getParam('iPage')-1)*$aData['iDisplayLength']+1, ((Params::getParam('iPage')-1)*$aData['iDisplayLength'])+count($aData['aRows']), $aData['iTotalDisplayRecords'], $aData['iTotalRecords']).'</span></li></ul>';
+}
+    osc_add_hook('before_show_pagination_admin', 'showingResults');
     osc_show_pagination_admin($aData);
 ?>
 <form id="dialog-media-delete" method="get" action="<?php echo osc_admin_base_url(true); ?>" class="has-form-actions hide">

@@ -109,6 +109,11 @@ FUNCTIONS
     }
 
     if(!function_exists('bender_add_body_class_construct')) {
+        /**
+         * @param $classes
+         *
+         * @return array
+         */
         function bender_add_body_class_construct($classes){
             $benderBodyClass = benderBodyClass::newInstance();
             $classes = array_merge($classes, $benderBodyClass->get());

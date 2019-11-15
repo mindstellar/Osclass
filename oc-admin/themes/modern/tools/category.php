@@ -1,4 +1,6 @@
-<?php if ( ! defined('OC_ADMIN')) exit('Direct access is not allowed.');
+<?php if ( ! defined('OC_ADMIN')) {
+    exit('Direct access is not allowed.');
+}
 /*
  * Copyright 2014 Osclass
  *
@@ -15,19 +17,32 @@
  * limitations under the License.
  */
 
-    function render_offset(){
-        return 'row-offset';
-    }
+/**
+ * @return string
+ */
+function render_offset()
+{
+    return 'row-offset';
+}
 
-    osc_add_hook('admin_page_header','customPageHeader');
-    function customPageHeader(){ ?>
+    osc_add_hook('admin_page_header', 'customPageHeader');
+function customPageHeader()
+{
+    ?>
         <h1><?php _e('Tools'); ?></h1>
     <?php
-    }
+}
 
-    function customPageTitle($string) {
-        return sprintf(__('Category stats &raquo; %s'), $string);
-    }
+
+/**
+ * @param $string
+ *
+ * @return string
+ */
+function customPageTitle($string)
+{
+    return sprintf(__('Category stats &raquo; %s'), $string);
+}
     osc_add_filter('admin_title', 'customPageTitle');
 
     osc_current_admin_theme_path( 'parts/header.php' ); ?>

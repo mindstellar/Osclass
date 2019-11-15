@@ -1,4 +1,6 @@
-<?php if ( ! defined('OC_ADMIN')) exit('Direct access is not allowed.');
+<?php if ( ! defined('OC_ADMIN')) {
+    exit('Direct access is not allowed.');
+}
 /*
  * Copyright 2014 Osclass
  *
@@ -19,21 +21,26 @@
 
     $info = __get("info");
 
-    function addHelp() {
-        echo '<p>' . __("Modify your site's header or footer here.") . '</p>';
-    }
-    osc_add_hook('help_box','addHelp');
+function addHelp()
+{
+    echo '<p>' . __("Modify your site's header or footer here.") . '</p>';
+}
+    osc_add_hook('help_box', 'addHelp');
 
-    osc_add_hook('admin_page_header','customPageHeader');
-    function customPageHeader(){ ?>
+    osc_add_hook('admin_page_header', 'customPageHeader');
+function customPageHeader()
+{
+    ?>
         <h1><?php _e('Appearance'); ?>
             <a href="#" class="btn ico ico-32 ico-help float-right"></a>
         </h1>
     <?php
-    }
+}
 
     //customize Head
-    function customHead() { ?>
+function customHead()
+{
+    ?>
         <script type="text/javascript">
             $(document).ready(function() {
                 $("#dialog-widget-delete").dialog({
@@ -52,12 +59,18 @@
 
         </script>
         <?php
-    }
-    osc_add_hook('admin_header','customHead', 10);
+}
+    osc_add_hook('admin_header', 'customHead', 10);
 
-    function customPageTitle($string) {
-        return sprintf(__('Appearance &raquo; %s'), $string);
-    }
+/**
+ * @param $string
+ *
+ * @return string
+ */
+function customPageTitle($string)
+{
+    return sprintf(__('Appearance &raquo; %s'), $string);
+}
     osc_add_filter('admin_title', 'customPageTitle');
 
     osc_current_admin_theme_path( 'parts/header.php' ); ?>
@@ -66,20 +79,24 @@
         <h2 class="render-title"><?php _e('Manage Widgets'); ?> </h2>
     </div></div></div> <!-- -->
         <div class="grid-system">
-            <?php if(isset($info['locations']) && is_array($info['locations'])) { ?>
-                <?php foreach($info['locations'] as $location) { ?>
+            <?php if (isset($info['locations']) && is_array($info['locations'])) { ?>
+                <?php foreach ($info['locations'] as $location) { ?>
                     <div class="grid-row grid-50">
                         <div class="row-wrapper">
                             <div class="widget-box">
                                 <div class="widget-box-title"><h3><?php printf( __('Section: %s'), $location ); ?> &middot; <a id="add_widget_<?php echo $location;?>" href="<?php echo osc_admin_base_url(true); ?>?page=appearance&amp;action=add_widget&amp;location=<?php echo $location; ?>" class="btn float-right"><?php _e('Add HTML widget'); ?></a></h3></div>
                                 <div class="widget-box-content">
                                     <?php $widgets = Widget::newInstance()->findByLocation($location); ?>
-                                    <?php if( count($widgets) > 0 ) {
+                                    <?php if ( count($widgets) > 0 ) {
                                         $countEvent = 1; ?>
                                         <table class="table" cellpadding="0" cellspacing="0">
                                             <tbody>
-                                            <?php foreach($widgets as $w) { ?>
-                                                <tr<?php if($countEvent%2 == 0){ echo ' class="even"';} if($countEvent == 1){ echo ' class="table-first-row"';} ?>>
+                                            <?php foreach ($widgets as $w) { ?>
+                                                <tr<?php if ($countEvent%2 == 0) {
+                                                    echo ' class="even"';
+                                                   } if ($countEvent == 1) {
+                                                       echo ' class="table-first-row"';
+                                                   } ?>>
                                                     <td><?php echo __('Widget'). ' ' . $w['pk_i_id']; ?></td>
                                                     <td><?php printf( __('Description: %s'), $w['s_description'] ); ?></td>
                                                     <td>
@@ -87,13 +104,13 @@
                                                         <a href="<?php printf('%s?page=appearance&amp;action=delete_widget&amp;id=%d"', osc_admin_base_url(true), $w['pk_i_id']);?>" onclick="return delete_dialog('<?php echo $w['pk_i_id']; ?>');"><?php _e('Delete');?></a>
                                                     </td>
                                                 </tr>
-                                            <?php
-                                            $countEvent++;
+                                                <?php
+                                                $countEvent++;
                                             }
                                             ?>
                                             </tbody>
                                         </table>
-                                        <?php } ?>
+                                    <?php } ?>
                                 </div>
                             </div>
                         </div>

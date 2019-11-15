@@ -3,8 +3,8 @@
     "en-US": {
       "identity": {
         "version": {
-          "_number": "$Revision: 13869 $",
-          "_cldrVersion": "34"
+          "_number": "$Revision$",
+          "_cldrVersion": "36"
         },
         "language": "en",
         "territory": "US"
@@ -200,14 +200,14 @@
           "MF": "St. Martin",
           "MG": "Madagascar",
           "MH": "Marshall Islands",
-          "MK": "Macedonia",
-          "MK-alt-variant": "Macedonia (FYROM)",
+          "MK": "North Macedonia",
+          "MK-alt-variant": "MK",
           "ML": "Mali",
           "MM": "Myanmar (Burma)",
           "MM-alt-short": "Myanmar",
           "MN": "Mongolia",
-          "MO": "Macau SAR China",
-          "MO-alt-short": "Macau",
+          "MO": "Macao SAR China",
+          "MO-alt-short": "Macao",
           "MP": "Northern Mariana Islands",
           "MQ": "Martinique",
           "MR": "Mauritania",
@@ -274,7 +274,8 @@
           "SV": "El Salvador",
           "SX": "Sint Maarten",
           "SY": "Syria",
-          "SZ": "Swaziland",
+          "SZ": "Eswatini",
+          "SZ-alt-variant": "Swaziland",
           "TA": "Tristan da Cunha",
           "TC": "Turks & Caicos Islands",
           "TD": "Chad",

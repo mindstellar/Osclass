@@ -26,11 +26,10 @@ function locale_he_HE_info() {
         ,'description'     => 'Hebrew translation'
         ,'version'         => '3.1.0'
         ,'author_name'     => 'Osclass'
-        ,'author_url'      => 'http://osclass.org/'
+        ,'author_url'      => 'https://github.com/navjottomer/osclass/'
         ,'currency_format' => '{NUMBER} {CURRENCY}'
         ,'date_format'     => 'm/d/Y'
         ,'stop_words'      => ''
     );
 }
 
-?>

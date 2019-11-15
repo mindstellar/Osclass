@@ -119,12 +119,12 @@ msgid "Footer link"
 msgstr "Ссылка нижнего колонтитула"
 
 #: admin/settings.php:67
-msgid "I want to help Osclass by linking to <a href=\"http://osclass.org/\" target=\"_blank\">osclass.org</a> from my site with the following text:"
-msgstr "Я хочу помочь Osclass, установив ссылку<a href=\"http://osclass.org/\" target=\"_blank\">osclass.org</a> с моего сайта со следующим текстом:"
+msgid "I want to help Osclass by linking to <a href=\"https://github.com/navjottomer/osclass/\" target=\"_blank\">osclass.org</a> from my site with the following text:"
+msgstr "Я хочу помочь Osclass, установив ссылку<a href=\"https://github.com/navjottomer/osclass/\" target=\"_blank\">osclass.org</a> с моего сайта со следующим текстом:"
 
 #: admin/settings.php:68
-msgid "This website is proudly using the <a title=\"Osclass web\" href=\"http://osclass.org/\">classifieds scripts</a> software <strong>Osclass</strong>"
-msgstr "Этот вебсайт использует <a title=\"Osclass web\" href=\"http://osclass.org/\">classifieds scripts</a> ПО <strong>Osclass</strong>"
+msgid "This website is proudly using the <a title=\"Osclass web\" href=\"https://github.com/navjottomer/osclass/\">classifieds scripts</a> software <strong>Osclass</strong>"
+msgstr "Этот вебсайт использует <a title=\"Osclass web\" href=\"https://github.com/navjottomer/osclass/\">classifieds scripts</a> ПО <strong>Osclass</strong>"
 
 #: admin/settings.php:124
 msgid "Save changes"
@@ -798,8 +798,8 @@ msgstr "%1$d - %2$d из %3$d объявлений"
 msgid "Premium listings"
 msgstr "Премиум объявления"
 
-msgid "http://osclass.org/"
-msgstr "http://osclass.org/"
+msgid "https://github.com/navjottomer/osclass/"
+msgstr "https://github.com/navjottomer/osclass/"
 
 msgid "Bender theme"
 msgstr "Тема Bender"

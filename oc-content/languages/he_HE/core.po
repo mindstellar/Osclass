@@ -4214,8 +4214,8 @@ msgid "Your Osclass installation at %s is up and running. You can access the adm
 msgstr "התקנת Osclass ב%s היא ולהפעלתו. אתה יכול לגשת לפנל ניהול עם הפרטים הבאים:"
 
 #: /var/www/osclass-git/oc-includes/osclass/install-location.php:102
-msgid "The <a href=\"http://osclass.org/\">Osclass</a> team"
-msgstr "קבוצת <a href=\"http://osclass.org/\">Osclass</a> "
+msgid "The <a href=\"https://github.com/navjottomer/osclass/\">Osclass</a> team"
+msgstr "קבוצת <a href=\"https://github.com/navjottomer/osclass/\">Osclass</a> "
 
 #: /var/www/osclass-git/oc-includes/osclass/install.php:86
 msgid "Looks like you've already installed Osclass. To reinstall please clear your old database tables first."
@@ -4238,8 +4238,8 @@ msgid "We've encountered some problems while updating the database structure. Th
 msgstr "נתקלנו כמה בעיות בעת עדכון מבנה מסד הנתונים. השאילתות הבאות נכשלו:"
 
 #: /var/www/osclass-git/oc-includes/osclass/upgrade-funcs.php:47
-msgid "These errors could be false-positive errors. If you're sure that is the case, you can <a href=\"%s\">continue with the upgrade</a>, or <a href=\"http://forums.osclass.org/\">ask in our forums</a>."
-msgstr "תקלות אלו יכולות להיות שגיאות חיוביות. אם אתה בטוח שזה המצב ניתן <a href=\"%s\">להמשיך בשדרוג</a>, או <a href=\"http://forums.osclass.org/\">לברר בפורום שלנו</a>."
+msgid "These errors could be false-positive errors. If you're sure that is the case, you can <a href=\"%s\">continue with the upgrade</a>, or <a href=\"https://osclass.discourse.group/\">ask in our forums</a>."
+msgstr "תקלות אלו יכולות להיות שגיאות חיוביות. אם אתה בטוח שזה המצב ניתן <a href=\"%s\">להמשיך בשדרוג</a>, או <a href=\"https://osclass.discourse.group/\">לברר בפורום שלנו</a>."
 
 #: /var/www/osclass-git/oc-includes/osclass/upgrade-funcs.php:286
 msgid "You need to calculate location stats, please go to admin panel, tools, recalculate location stats or click"
@@ -4250,8 +4250,8 @@ msgid "Osclass &raquo; Updated correctly"
 msgstr "Osclass &raquo; שודרג בהצלחה"
 
 #: /var/www/osclass-git/oc-includes/osclass/upgrade-funcs.php:392
-msgid "Osclass has been updated successfully. <a href=\"http://forums.osclass.org/\">Need more help?</a>"
-msgstr "Osclass עודכנה בהצלחה. <a href=\"http://forums.osclass.org/\">צריך עזרה נוספת?</a>"
+msgid "Osclass has been updated successfully. <a href=\"https://osclass.discourse.group/\">Need more help?</a>"
+msgstr "Osclass עודכנה בהצלחה. <a href=\"https://osclass.discourse.group/\">צריך עזרה נוספת?</a>"
 
 #: /var/www/osclass-git/oc-load.php:207
 msgid "The website is currently undergoing maintenance"

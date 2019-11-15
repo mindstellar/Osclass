@@ -1,0 +1,38 @@
+{
+  "name": "navjottomer/osclass",
+  "type": "project",
+  "description": "With Osclass, get your own  classifieds site for free. Build your own Osclass installation and start advertising real estate, jobs or whatever you want- in minutes! ",
+  "keywords": ["osclass","classified","open-source","php-classified","cms"],
+  "homepage": "https://github.com/navjottomer/osclass",
+  "license": "Apache-2.0",
+  "authors": [
+        {
+            "name": "Osclass Community",
+            "homepage": "https://github.com/navjottomer/Osclass/graphs/contributors"
+        }
+    ],
+  "config": {
+       "vendor-dir": "oc-includes/vendor",
+       "optimize-autoloader": true
+    },
+  "require": {
+    "php": ">=5.6.20",
+    "ext-json": "*",
+    "ext-openssl": "*",
+    "ext-mysqli": "*",
+    "ext-zip": "*",
+    "ext-curl": "*",
+    "ext-posix": "*",
+    "ext-fileinfo": "*",
+    "ezyang/htmlpurifier": "4.11.x",
+    "phpmailer/phpmailer": "5.2.x",
+    "pclzip/pclzip": "2.8.2",
+    "phpseclib/phpseclib": "2.0.x",
+    "pensiero/php-openssl-cryptor": "0.1.0",
+    "google/recaptcha": "1.1.x",
+    "gettext/gettext": "4.6.x"    
+  },
+  "require-dev": {
+    "roave/security-advisories": "dev-master"
+  }
+}

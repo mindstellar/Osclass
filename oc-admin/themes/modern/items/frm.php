@@ -1,4 +1,6 @@
-<?php if ( ! defined('OC_ADMIN')) exit('Direct access is not allowed.');
+<?php if ( ! defined('OC_ADMIN')) {
+    exit('Direct access is not allowed.');
+}
 /*
  * Copyright 2014 Osclass
  *
@@ -23,40 +25,55 @@
     $categories = Category::newInstance()->toTree();
 
     $new_item = __get('new_item');
-    function customText($return = 'title'){
-        $new_item = __get('new_item');
-        $text = array();
-        if( $new_item ) {
-            $text['title']    = __('Listing');
-            $text['subtitle'] = __('Add listing');
-            $text['button']   = __('Add listing');
-        } else {
-            $text['title']    = __('Listing');
-            $text['subtitle'] = __('Edit listing');
-            $text['button']   = __('Update listing');
-        }
-        return $text[$return];
-    }
-
-    if($new_item) {
-        $options = array(0,1,3,5,7,10,15,30);
+/**
+ * @param string $return
+ *
+ * @return mixed
+ */
+function customText($return = 'title')
+{
+    $new_item = __get('new_item');
+    $text = array();
+    if ( $new_item ) {
+        $text['title']    = __('Listing');
+        $text['subtitle'] = __('Add listing');
+        $text['button']   = __('Add listing');
     } else {
-        $options = array(-1,0,1,3,5,7,10,15,30);
+        $text['title']    = __('Listing');
+        $text['subtitle'] = __('Edit listing');
+        $text['button']   = __('Update listing');
     }
+    return $text[$return];
+}
 
-function customPageHeader() { ?>
+if ($new_item) {
+    $options = array(0,1,3,5,7,10,15,30);
+} else {
+    $options = array(-1,0,1,3,5,7,10,15,30);
+}
+
+function customPageHeader()
+{
+    ?>
         <h1><?php echo customText('title'); ?></h1>
-<?php
-    }
-    osc_add_hook('admin_page_header','customPageHeader');
+    <?php
+}
+    osc_add_hook('admin_page_header', 'customPageHeader');
 
-    function customPageTitle($string) {
-        return sprintf('%s &raquo; %s', customText('subtitle'), $string);
-    }
+/**
+ * @param $string
+ *
+ * @return string
+ */
+function customPageTitle($string)
+{
+    return sprintf('%s &raquo; %s', customText('subtitle'), $string);
+}
     osc_add_filter('admin_title', 'customPageTitle');
 
     //customize Head
-    function customHead() {
+function customHead()
+{
     ?>
         <script type="text/javascript">
 
@@ -79,15 +96,15 @@ function customPageHeader() { ?>
 
                 $('.ui-autocomplete').css('zIndex', 10000);
 
-                <?php if(osc_locale_thousands_sep()!='' || osc_locale_dec_point() != '') { ?>
+            <?php if (osc_locale_thousands_sep()!='' || osc_locale_dec_point() != '') { ?>
                 $("#price").on("blur", function(event) {
                     var price = $("#price").prop("value");
-                    <?php if(osc_locale_thousands_sep()!='') { ?>
+                    <?php if (osc_locale_thousands_sep()!='') { ?>
                     while(price.indexOf('<?php echo osc_esc_js(osc_locale_thousands_sep());  ?>')!=-1) {
                         price = price.replace('<?php echo osc_esc_js(osc_locale_thousands_sep());  ?>', '');
                     }
                     <?php }; ?>
-                    <?php if(osc_locale_dec_point()!='') { ?>
+                    <?php if (osc_locale_dec_point()!='') { ?>
                     var tmp = price.split('<?php echo osc_esc_js(osc_locale_dec_point())?>');
                     if(tmp.length>2) {
                         price = tmp[0]+'<?php echo osc_esc_js(osc_locale_dec_point())?>'+tmp[1];
@@ -96,7 +113,7 @@ function customPageHeader() { ?>
                     $("#price").prop("value", price);
 
                 });
-                <?php } ?>
+            <?php } ?>
 
                 $('#update_expiration').change( function() {
                     if($(this).attr("checked")) {
@@ -114,19 +131,25 @@ function customPageHeader() { ?>
 
             });
         </script>
-        <?php ItemForm::location_javascript_new('admin'); ?>
-        <?php if( osc_images_enabled_at_items() ) ItemForm::photos_javascript(); ?>
-        <?php
-    }
-    osc_add_hook('admin_header','customHead', 10);
+    <?php ItemForm::location_javascript_new('admin'); ?>
+    <?php if ( osc_images_enabled_at_items() ) {
+        ItemForm::photos_javascript();
+    } ?>
+    <?php
+}
+    osc_add_hook('admin_header', 'customHead', 10);
 
     $new_item   = __get('new_item');
     $actions    = __get('actions');
 
-    osc_add_filter('render-wrapper','render_offset');
-    function render_offset(){
-        return 'row-offset';
-    }
+    osc_add_filter('render-wrapper', 'render_offset');
+/**
+ * @return string
+ */
+function render_offset()
+{
+    return 'row-offset';
+}
     osc_current_admin_theme_path( 'parts/header.php' ); ?>
 <div id="pretty-form">
 <div class="grid-row no-bottom-margin">
@@ -136,9 +159,9 @@ function customPageHeader() { ?>
 </div>
 <div class="grid-row no-bottom-margin float-right">
     <div class="row-wrapper">
-        <?php if( !$new_item ) { ?>
+        <?php if ( !$new_item ) { ?>
         <ul id="item-action-list">
-            <?php foreach($actions as $aux) { ?>
+            <?php foreach ($actions as $aux) { ?>
             <li>
                 <?php echo $aux; ?>
             </li>
@@ -155,7 +178,7 @@ function customPageHeader() { ?>
                 <?php printLocaleTabs(); ?>
                 <form action="<?php echo osc_admin_base_url(true); ?>" method="post" enctype="multipart/form-data" name="item">
                     <input type="hidden" name="page" value="items" />
-                    <?php if( $new_item ) { ?>
+                    <?php if ( $new_item ) { ?>
                         <input type="hidden" name="action" value="post_item" />
                     <?php } else { ?>
                         <input type="hidden" name="action" value="item_edit_post" />
@@ -171,7 +194,7 @@ function customPageHeader() { ?>
                         <div class="input-description-wide">
                             <?php printLocaleDescription(osc_get_locales()); ?>
                         </div>
-                        <?php if(osc_price_enabled_at_items()) { ?>
+                        <?php if (osc_price_enabled_at_items()) { ?>
                             <div>
                                 <label><?php _e('Price'); ?></label>
                                 <?php ItemForm::price_input_text(); ?>
@@ -179,12 +202,12 @@ function customPageHeader() { ?>
                             </div>
                         <?php } ?>
 
-                        <?php if( osc_images_enabled_at_items() ) { ?>
+                        <?php if ( osc_images_enabled_at_items() ) { ?>
                         <div class="photo_container">
                             <label><?php _e('Photos'); ?></label>
                             <?php ItemForm::photos(); ?>
                             <div id="photos">
-                                <?php if( osc_max_images_per_item() == 0 || ( osc_max_images_per_item() != 0 && osc_count_item_resources() < osc_max_images_per_item() ) ) { ?>
+                                <?php if ( osc_max_images_per_item() == 0 || ( osc_max_images_per_item() != 0 && osc_count_item_resources() < osc_max_images_per_item() ) ) { ?>
                                 <div>
                                     <input type="file" name="photos[]" /> (<?php _e('optional'); ?>)
                                 </div>
@@ -193,11 +216,11 @@ function customPageHeader() { ?>
                             <p><a href="#" onclick="addNewPhoto(); return false;"><?php _e('Add new photo'); ?></a></p>
                         </div>
                         <?php } ?>
-                        <?php if( $new_item ) {
+                        <?php if ( $new_item ) {
                                 ItemForm::plugin_post_item();
-                            } else {
-                                ItemForm::plugin_edit_item();
-                            }
+                        } else {
+                            ItemForm::plugin_edit_item();
+                        }
                         ?>
                     </div>
                     <div id="right-side">
@@ -212,7 +235,7 @@ function customPageHeader() { ?>
                                     <label><?php _e('E-mail'); ?></label>
                                     <?php ItemForm::contact_email_text(); ?>
                                 </div>
-                                <?php if(!$new_item) { ?>
+                                <?php if (!$new_item) { ?>
                                 <div class="input-has-placeholder input-separate-top">
                                     <label><?php _e('Ip Address'); ?></label>
                                     <input id="ipAddress" type="text" name="ipAddress" value="<?php echo osc_item_ip(); ?>" class="valid" readonly="readonly">
@@ -254,12 +277,12 @@ function customPageHeader() { ?>
 
                         <div class="well ui-rounded-corners input-separate-top">
                             <h3 class="label"><?php _e('Expiration'); ?></h3>
-                            <?php if( $new_item ) { ?>
+                            <?php if ( $new_item ) { ?>
                                 <div class="input-has-placeholder input-separate-top">
                                     <?php ItemForm::expiration_input('add'); ?>
                                 </div>
                                 <label><?php _e('It could be an integer (days from original publishing date it will be expired, 0 to never expire) or a date in the format "yyyy-mm-dd hh:mm:ss"'); ?></label>
-                            <?php } else if( !$new_item ) { ?>
+                            <?php } else if ( !$new_item ) { ?>
                                 <div class="input-separate-top">
                                     <label><input type="checkbox" id="update_expiration" name="update_expiration" style="width: inherit!important;"/> <?php _e('Update expiration?'); ?></label>
                                     <div class="hide update_expiration">
@@ -275,7 +298,7 @@ function customPageHeader() { ?>
                     </div>
                     <div class="clear"></div>
                     <div class="form-actions">
-                        <?php if( !$new_item ) { ?>
+                        <?php if ( !$new_item ) { ?>
                         <a href="javascript:history.go(-1)" class="btn"><?php _e('Cancel'); ?></a>
                         <?php } ?>
                         <input type="submit" value="<?php echo osc_esc_html(customText('button')); ?>" class="btn btn-submit" />

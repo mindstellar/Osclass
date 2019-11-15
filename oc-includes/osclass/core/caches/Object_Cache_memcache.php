@@ -13,7 +13,7 @@ class Object_Cache_memcache implements iObject_Cache{
      */
     private $_memcached;
 
-    protected $_memcache_conf 	= array(
+    protected $_memcache_conf   = array(
         'default' => array(
             'default_host' => '127.0.0.1',
             'default_port' => 11211,
@@ -59,7 +59,8 @@ class Object_Cache_memcache implements iObject_Cache{
      * @param int $expire When to expire the cache contents
      * @return bool False if cache key and group already exist, true on success
      */
-    public function add( $key, $data, $expire = 0 ) {
+    public function add($key, $data, $expire = 0)
+    {
         $id = $key;
         if ( $this->multisite ) {
             $id = $this->site_prefix . $key;
@@ -91,7 +92,8 @@ class Object_Cache_memcache implements iObject_Cache{
      * @param int|string $key What the contents in the cache are called
      * @return bool False if the contents weren't deleted and true on success
      */
-    public function delete($key) {
+    public function delete($key)
+    {
 
         if ( $this->multisite ) {
             $key = $this->site_prefix . $key;
@@ -110,7 +112,8 @@ class Object_Cache_memcache implements iObject_Cache{
      *
      * @return bool Always returns true
      */
-    public function flush() {
+    public function flush()
+    {
         $this->cache = array ();
         return $this->_memcached->flush();
     }
@@ -122,13 +125,14 @@ class Object_Cache_memcache implements iObject_Cache{
      * @param int|string $key What the contents in the cache are called
      * @param bool $found if can be retrieved from cache
      * @return bool|mixed False on failure to retrieve contents or the cache
-     *		contents on success
+     *      contents on success
      */
-    public function get( $key, &$found = null ) {
+    public function get($key, &$found = null)
+    {
         $found = false;
-	    if ( $this->multisite ) {
-		    $key = $this->site_prefix . $key;
-	    }
+        if ( $this->multisite ) {
+            $key = $this->site_prefix . $key;
+        }
 
         if ( isset($this->cache[$key]) ) {
             $found = true;
@@ -137,7 +141,7 @@ class Object_Cache_memcache implements iObject_Cache{
             } else {
                 $value = $this->cache[$key];
             }
-	        ++ $this->cache_hits;
+            ++ $this->cache_hits;
             $return = $value;
         } else {
             $found = true;
@@ -145,21 +149,19 @@ class Object_Cache_memcache implements iObject_Cache{
             if ( is_object( $value ) && 'ArrayObject' === get_class( $value ) ) {
                 $value = $value->getArrayCopy();
             }
-            if ( NULL === $value ) {
+            if ( null === $value ) {
                 $found = false;
                 $value = false;
             }
 
             $this->cache[$key] = is_object( $value ) ? clone $value : $value;
-            if($found) {
-	            ++ $this->cache_hits;
+            if ($found) {
+                ++ $this->cache_hits;
                 $return = $this->cache[$key];
             } else {
-	            ++ $this->cache_misses;
+                ++ $this->cache_misses;
                 $return = false;
             }
-
-
         }
         return $return;
 
@@ -174,26 +176,27 @@ class Object_Cache_memcache implements iObject_Cache{
      * @param int $expire Not Used
      * @return bool Always returns true on success, false on failure
      */
-    public function set($key, $data, $expire = 0) {
-	    if ( $this->multisite ) {
-		    $key = $this->site_prefix . $key;
-	    }
+    public function set($key, $data, $expire = 0)
+    {
+        if ( $this->multisite ) {
+            $key = $this->site_prefix . $key;
+        }
 
-	    if ( is_object( $data ) ) {
-		    $data = clone $data;
-	    }
+        if ( is_object( $data ) ) {
+            $data = clone $data;
+        }
 
         $store_data = $data;
 
-	    if ( is_array( $data ) ) {
-		    $store_data = new ArrayObject( $data );
-	    }
+        if ( is_array( $data ) ) {
+            $store_data = new ArrayObject( $data );
+        }
 
         $this->cache[$key] = $data;
 
         $expire = ( $expire == 0 ) ? $this->default_expiration : $expire;
 
-	    return $this->_memcached->set( $key , $store_data , 0 , $expire );
+        return $this->_memcached->set( $key, $store_data, 0, $expire );
     }
 
     /**
@@ -202,7 +205,8 @@ class Object_Cache_memcache implements iObject_Cache{
      *
      * @since 3.4
      */
-    public function stats() {
+    public function stats()
+    {
         echo "<div style='position:absolute; width:200px;top:0px;'><div style='float:right;margin-right:30px;margin-top:15px;border: 1px red solid;
 border-radius: 17px;
 padding: 1em;'><h2>Memcache stats</h2>";
@@ -214,18 +218,19 @@ padding: 1em;'><h2>Memcache stats</h2>";
         echo '</ul></div></div>';
     }
 
-	/**
-	 * Utility function to determine whether a key exists in the cache.
-	 *
-	 * @since  3.4.0
-	 *
-	 * @access protected
-	 *
-	 * @param $key
-	 *
-	 * @return bool
-	 */
-    protected function _exists( $key ) {
+    /**
+     * Utility function to determine whether a key exists in the cache.
+     *
+     * @since  3.4.0
+     *
+     * @access protected
+     *
+     * @param $key
+     *
+     * @return bool
+     */
+    protected function _exists($key)
+    {
         return isset( $this->cache[ $key ] );
     }
 
@@ -234,7 +239,8 @@ padding: 1em;'><h2>Memcache stats</h2>";
      *
      * @since 3.4
      */
-    public function __construct() {
+    public function __construct()
+    {
 
         $this->multisite = false;
 //        if(SiteInfo::newInstance()->siteInfo!=array()) {
@@ -247,13 +253,13 @@ padding: 1em;'><h2>Memcache stats</h2>";
         $this->site_prefix =  $this->multisite ? $site_id . ':' : '';
         $cache_server = array();
         global $_cache_config;
-        if( !isset($_cache_config) && !is_array($_cache_config) ) {
+        if ( !isset($_cache_config) && !is_array($_cache_config) ) {
             $_t['hostname'] = $this->_memcache_conf['default']['default_host'];
             $_t['port']     = $this->_memcache_conf['default']['default_port'];
             $_t['weight']   = $this->_memcache_conf['default']['default_weight'];
             $cache_server[] = $_t;
         } else {
-            foreach($_cache_config as $_server) {
+            foreach ($_cache_config as $_server) {
                 $_array = array(
                     'hostname' => $_server['default_host'],
                     'port'     => $_server['default_port'],
@@ -264,7 +270,7 @@ padding: 1em;'><h2>Memcache stats</h2>";
         }
 
         $this->_memcached = new Memcache();
-        foreach($cache_server as $_config) {
+        foreach ($cache_server as $_config) {
             $this->_memcached->addServer($_config['hostname'], $_config['port'], $_config['weight']);
         }
     }
@@ -274,7 +280,8 @@ padding: 1em;'><h2>Memcache stats</h2>";
      *
      * Check to see if Memcache is available on this system, bail if it isn't.
      */
-    public static function is_supported() {
+    public static function is_supported()
+    {
         if ( !class_exists('Memcache') ) {
             error_log('The Memcached Extension must be loaded to use Memcached Cache.');
             return false;
@@ -282,17 +289,19 @@ padding: 1em;'><h2>Memcache stats</h2>";
         return true;
     }
 
-	/**
-	 *
-	 */
-	public function __destruct() {
+    /**
+     *
+     */
+    public function __destruct()
+    {
         return true;
     }
 
-	/**
-	 * @return string
-	 */
-	public function _get_cache() {
+    /**
+     * @return string
+     */
+    public function _get_cache()
+    {
         return 'memcache';
     }
 }

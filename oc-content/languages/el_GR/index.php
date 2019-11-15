@@ -26,11 +26,10 @@ function locale_el_GR_info() {
         ,'description'     => 'Greek translation'
         ,'version'         => 'Dev version'
         ,'author_name'     => 'Osclass'
-        ,'author_url'      => 'http://osclass.org/'
+        ,'author_url'      => 'https://github.com/navjottomer/osclass/'
         ,'currency_format' => '{NUMBER} {CURRENCY}'
         ,'date_format'     => 'm/d/Y'
         ,'stop_words'      => ''
     );
 }
 
-?>

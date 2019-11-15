@@ -15,9 +15,9 @@
      * limitations under the License.
      */
 
-    if ( ! defined('ABS_PATH')) {
-        define('ABS_PATH', str_replace('\\', '/', dirname(__FILE__) . '/'));
-    }
+if ( ! defined('ABS_PATH')) {
+    define('ABS_PATH', str_replace('\\', '/', dirname(__FILE__) . '/'));
+}
 
     define('LIB_PATH', ABS_PATH . 'oc-includes/');
     define('CONTENT_PATH', ABS_PATH . 'oc-content/');
@@ -25,32 +25,32 @@
     define('PLUGINS_PATH', CONTENT_PATH . 'plugins/');
     define('TRANSLATIONS_PATH', CONTENT_PATH . 'languages/');
 
-    if ( ! file_exists(ABS_PATH . 'config.php')) {
-        require_once LIB_PATH . 'osclass/helpers/hErrors.php';
+if ( ! file_exists(ABS_PATH . 'config.php')) {
+    require_once LIB_PATH . 'osclass/helpers/hErrors.php';
 
-        $title   = 'Osclass &raquo; Error';
-        $message = 'There doesn\'t seem to be a <code>config.php</code> file. Osclass isn\'t installed. <a href="http://forums.osclass.org/">Need more help?</a></p>';
-        $message .= '<p><a class="button" href="' . osc_get_absolute_url() . 'oc-includes/osclass/install.php">Install</a></p>';
-        osc_die($title, $message);
-    }
+    $title   = 'Osclass &raquo; Error';
+    $message = 'There doesn\'t seem to be a <code>config.php</code> file. Osclass isn\'t installed. <a href="https://osclass.discourse.group/">Need more help?</a></p>';
+    $message .= '<p><a class="button" href="' . osc_get_absolute_url() . 'oc-includes/osclass/install.php">Install</a></p>';
+    osc_die($title, $message);
+}
 
 // load database configuration
     require_once ABS_PATH . 'config.php';
     require_once LIB_PATH . 'osclass/default-constants.php';
 
 // Sets PHP error handling
-    if (OSC_DEBUG) {
-        ini_set('display_errors', 1);
-        error_reporting(E_ALL | E_STRICT);
+if (OSC_DEBUG) {
+    ini_set('display_errors', 1);
+    error_reporting(E_ALL | E_STRICT);
 
-        if (OSC_DEBUG_LOG) {
-            ini_set('display_errors', 0);
-            ini_set('log_errors', 1);
-            ini_set('error_log', CONTENT_PATH . 'debug.log');
-        }
-    } else {
-        error_reporting(E_CORE_ERROR | E_CORE_WARNING | E_COMPILE_ERROR | E_ERROR | E_WARNING | E_PARSE | E_USER_ERROR | E_USER_WARNING);
+    if (OSC_DEBUG_LOG) {
+        ini_set('display_errors', 0);
+        ini_set('log_errors', 1);
+        ini_set('error_log', CONTENT_PATH . 'debug.log');
     }
+} else {
+    error_reporting(E_CORE_ERROR | E_CORE_WARNING | E_COMPILE_ERROR | E_ERROR | E_WARNING | E_PARSE | E_USER_ERROR | E_USER_WARNING);
+}
 //Include Composer's autoloader
     require_once LIB_PATH . 'vendor/autoload.php';
 
@@ -66,18 +66,18 @@
     require_once LIB_PATH . 'osclass/helpers/hPreference.php';
 
 // check if Osclass is installed
-    if ( ! getBoolPreference('osclass_installed') && MULTISITE) {
-        header('Location: ' . WEB_PATH);
-        die;
-    } elseif ( ! getBoolPreference('osclass_installed')) {
-        require_once LIB_PATH . 'osclass/helpers/hErrors.php';
+if ( ! getBoolPreference('osclass_installed') && MULTISITE) {
+    header('Location: ' . WEB_PATH);
+    die;
+} elseif ( ! getBoolPreference('osclass_installed')) {
+    require_once LIB_PATH . 'osclass/helpers/hErrors.php';
 
-        $title   = 'Osclass &raquo; Error';
-        $message = 'Osclass isn\'t installed. <a href="http://forums.osclass.org/">Need more help?</a></p>';
-        $message .= '<p><a class="button" href="' . osc_get_absolute_url() . 'oc-includes/osclass/install.php">Install</a></p>';
+    $title   = 'Osclass &raquo; Error';
+    $message = 'Osclass isn\'t installed. <a href="https://osclass.discourse.group/">Need more help?</a></p>';
+    $message .= '<p><a class="button" href="' . osc_get_absolute_url() . 'oc-includes/osclass/install.php">Install</a></p>';
 
-        osc_die($title, $message);
-    }
+    osc_die($title, $message);
+}
 
     require_once LIB_PATH . 'osclass/helpers/hDefines.php';
     require_once LIB_PATH . 'osclass/helpers/hLocale.php';
@@ -194,9 +194,9 @@
     require_once LIB_PATH . 'osclass/compatibility.php';
 
 
-    if ( ! defined('OSC_CRYPT_KEY')) {
-        define('OSC_CRYPT_KEY', osc_get_preference('crypt_key'));
-    }
+if ( ! defined('OSC_CRYPT_KEY')) {
+    define('OSC_CRYPT_KEY', osc_get_preference('crypt_key'));
+}
 
     osc_cache_init();
 
@@ -205,13 +205,13 @@
     Params::init();
     Session::newInstance()->session_start();
 
-    if (osc_timezone() != '') {
-        date_default_timezone_set(osc_timezone());
-    }
+if (osc_timezone() != '') {
+    date_default_timezone_set(osc_timezone());
+}
 
-    function osc_show_maintenance()
-    {
-        if (defined('__OSC_MAINTENANCE__')) { ?>
+function osc_show_maintenance()
+{
+    if (defined('__OSC_MAINTENANCE__')) { ?>
             <div id="maintenance" name="maintenance">
                 <?php _e("The website is currently undergoing maintenance"); ?>
             </div>
@@ -229,14 +229,14 @@
                     color: #fefefe;
                 }
             </style>
-        <?php }
-    }
+    <?php }
+}
 
 
-    function osc_meta_generator()
-    {
-        echo '<meta name="generator" content="Osclass ' . OSCLASS_VERSION . '" />';
-    }
+function osc_meta_generator()
+{
+    echo '<meta name="generator" content="Osclass ' . OSCLASS_VERSION . '" />';
+}
 
 
     osc_add_hook('header', 'osc_show_maintenance');
@@ -264,13 +264,13 @@
     Translation::init();
     osc_csrfguard_start();
 
-    if (OC_ADMIN) {
-        // init admin menu
-        AdminMenu::newInstance()->init();
-        $functions_path = AdminThemes::newInstance()->getCurrentThemePath() . 'functions.php';
-        if (file_exists($functions_path)) {
-            require_once $functions_path;
-        }
-    } else {
-        Rewrite::newInstance()->init();
+if (OC_ADMIN) {
+    // init admin menu
+    AdminMenu::newInstance()->init();
+    $functions_path = AdminThemes::newInstance()->getCurrentThemePath() . 'functions.php';
+    if (file_exists($functions_path)) {
+        require_once $functions_path;
     }
+} else {
+    Rewrite::newInstance()->init();
+}

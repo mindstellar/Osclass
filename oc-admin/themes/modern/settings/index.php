@@ -1,4 +1,6 @@
-<?php if ( ! defined('OC_ADMIN')) exit('Direct access is not allowed.');
+<?php if ( ! defined('OC_ADMIN')) {
+    exit('Direct access is not allowed.');
+}
 /*
  * Copyright 2014 Osclass
  *
@@ -24,7 +26,9 @@
     $aCurrencies = __get('aCurrencies');
 
     //customize Head
-    function customHead() { ?>
+function customHead()
+{
+    ?>
 <script type="text/javascript">
     $(document).ready(function(){
         // Code for form validation
@@ -115,29 +119,43 @@
     }
 </script>
         <?php
-    }
-    osc_add_hook('admin_header','customHead', 10);
+}
+    osc_add_hook('admin_header', 'customHead', 10);
 
-    function render_offset(){
-        return 'row-offset';
-    }
+/**
+ * @return string
+ */
+function render_offset()
+{
+    return 'row-offset';
+}
 
-    function addHelp() {
-        echo '<p>' . __("Change the basic configuration of your Osclass. From here, you can modify variables such as the site’s name, the default currency or how lists of listings are displayed. <strong>Be careful</strong> when modifying default values if you're not sure what you're doing!") . '</p>';
-    }
-    osc_add_hook('help_box','addHelp');
+function addHelp()
+{
+    echo '<p>' . __("Change the basic configuration of your Osclass. From here, you can modify variables such as the site’s name, the default currency or how lists of listings are displayed. <strong>Be careful</strong> when modifying default values if you're not sure what you're doing!") . '</p>';
+}
+    osc_add_hook('help_box', 'addHelp');
 
-    osc_add_hook('admin_page_header','customPageHeader');
-    function customPageHeader(){ ?>
+    osc_add_hook('admin_page_header', 'customPageHeader');
+function customPageHeader()
+{
+    ?>
         <h1><?php _e('Settings'); ?>
             <a href="#" class="btn ico ico-32 ico-help float-right"></a>
         </h1>
     <?php
-    }
+}
 
-    function customPageTitle($string) {
-        return sprintf(__('General Settings &raquo; %s'), $string);
-    }
+
+/**
+ * @param $string
+ *
+ * @return string
+ */
+function customPageTitle($string)
+{
+    return sprintf(__('General Settings &raquo; %s'), $string);
+}
     osc_add_filter('admin_title', 'customPageTitle');
 
     osc_current_admin_theme_path( 'parts/header.php' ); ?>
@@ -165,7 +183,7 @@
                         <div class="form-label"><?php _e('Default language'); ?></div>
                         <div class="form-controls">
                             <select name="language">
-                            <?php foreach( $aLanguages as $lang ) { ?>
+                            <?php foreach ( $aLanguages as $lang ) { ?>
                             <option value="<?php echo $lang['pk_c_code']; ?>" <?php echo ((osc_language() == $lang['pk_c_code']) ? 'selected="selected"' : ''); ?>><?php echo $lang['s_name']; ?></option>
                             <?php } ?>
                             </select>
@@ -175,7 +193,7 @@
                         <div class="form-label"><?php _e('Default currency'); ?></div>
                         <div class="form-controls">
                             <select name="currency" id="currency_admin">
-                            <?php foreach($aCurrencies as $currency) { ?>
+                            <?php foreach ($aCurrencies as $currency) { ?>
                             <option value="<?php echo osc_esc_html($currency['pk_c_code']); ?>" <?php echo ((osc_currency() == $currency['pk_c_code']) ? 'selected="selected"' : ''); ?>><?php echo $currency['pk_c_code'] ?></option>
                             <?php } ?>
                             </select>
@@ -185,13 +203,27 @@
                         <div class="form-label"><?php _e('Week starts on'); ?></div>
                         <div class="form-controls">
                             <select name="weekStart" id="weekStart">
-                            <option value="0" <?php if(osc_week_starts_at() == '0') { ?>selected="selected"<?php } ?>><?php _e('Sunday'); ?></option>
-                            <option value="1" <?php if(osc_week_starts_at() == '1') { ?>selected="selected"<?php } ?>><?php _e('Monday'); ?></option>
-                            <option value="2" <?php if(osc_week_starts_at() == '2') { ?>selected="selected"<?php } ?>><?php _e('Tuesday'); ?></option>
-                            <option value="3" <?php if(osc_week_starts_at() == '3') { ?>selected="selected"<?php } ?>><?php _e('Wednesday'); ?></option>
-                            <option value="4" <?php if(osc_week_starts_at() == '4') { ?>selected="selected"<?php } ?>><?php _e('Thursday'); ?></option>
-                            <option value="5" <?php if(osc_week_starts_at() == '5') { ?>selected="selected"<?php } ?>><?php _e('Friday'); ?></option>
-                            <option value="6" <?php if(osc_week_starts_at() == '6') { ?>selected="selected"<?php } ?>><?php _e('Saturday'); ?></option>
+                            <option value="0" <?php if (osc_week_starts_at() == '0') {
+                                ?>selected="selected"<?php
+                                              } ?>><?php _e('Sunday'); ?></option>
+                            <option value="1" <?php if (osc_week_starts_at() == '1') {
+                                ?>selected="selected"<?php
+                                              } ?>><?php _e('Monday'); ?></option>
+                            <option value="2" <?php if (osc_week_starts_at() == '2') {
+                                ?>selected="selected"<?php
+                                              } ?>><?php _e('Tuesday'); ?></option>
+                            <option value="3" <?php if (osc_week_starts_at() == '3') {
+                                ?>selected="selected"<?php
+                                              } ?>><?php _e('Wednesday'); ?></option>
+                            <option value="4" <?php if (osc_week_starts_at() == '4') {
+                                ?>selected="selected"<?php
+                                              } ?>><?php _e('Thursday'); ?></option>
+                            <option value="5" <?php if (osc_week_starts_at() == '5') {
+                                ?>selected="selected"<?php
+                                              } ?>><?php _e('Friday'); ?></option>
+                            <option value="6" <?php if (osc_week_starts_at() == '6') {
+                                ?>selected="selected"<?php
+                                              } ?>><?php _e('Saturday'); ?></option>
                             </select>
                         </div>
                     </div>
@@ -203,7 +235,9 @@
                             <?php $selected_tz = osc_timezone(); ?>
                             <option value="" selected="selected"><?php _e('Select a timezone...'); ?></option>
                             <?php foreach ($timezone as $tz) { ?>
-                            <option value="<?php echo $tz; ?>" <?php if($selected_tz == $tz) { ?> selected="selected" <?php } ?>><?php echo $tz; ?></option>
+                            <option value="<?php echo $tz; ?>" <?php if ($selected_tz == $tz) {
+                                ?> selected="selected" <?php
+                                           } ?>><?php echo $tz; ?></option>
                             <?php } ?>
                             </select>
                         </div>
@@ -215,12 +249,12 @@
                                 <div id="date">
                                     <?php
                                     $custom_checked = true;
-                                    foreach( $dateFormats as $df ) {
-                                    $checked = false;
-                                    if( $df == osc_date_format() ) {
-                                    $custom_checked = false;
-                                    $checked        = true;
-                                    } ?>
+                                    foreach ( $dateFormats as $df ) {
+                                        $checked = false;
+                                        if ( $df == osc_date_format() ) {
+                                            $custom_checked = false;
+                                            $checked        = true;
+                                        } ?>
                                     <div>
                                         <input type="radio" name="df" id="<?php echo $df; ?>" value="<?php echo $df; ?>" <?php echo ( $checked ? 'checked="checked"' : '' ); ?> onclick="javascript:document.getElementById('dateFormat').value = '<?php echo $df; ?>';" />
                                         <?php echo date($df); ?>
@@ -235,13 +269,13 @@
                                 <div id="time">
                                     <?php
                                     $custom_checked = true;
-                                    foreach( $timeFormats as $tf ) {
-                                    $checked = false;
-                                    if( $tf == osc_time_format() ) {
-                                    $custom_checked = false;
-                                    $checked        = true;
-                                    }
-                                    ?>
+                                    foreach ( $timeFormats as $tf ) {
+                                        $checked = false;
+                                        if ( $tf == osc_time_format() ) {
+                                            $custom_checked = false;
+                                            $checked        = true;
+                                        }
+                                        ?>
                                     <div>
                                         <input type="radio" name="tf" id="<?php echo $tf; ?>" value="<?php echo $tf; ?>" <?php echo ( $checked ? 'checked="checked"' : '' ); ?> onclick="javascript:document.getElementById('timeFormat').value = '<?php echo $tf; ?>';" />
                                         <?php echo date($tf); ?>
@@ -315,6 +349,8 @@
                             <span class="help-box"><?php _e('It is <b>recommended</b> to have this option enabled, because some features require it.'); ?></span>
                         </div>
                     </div>
+                    <?php
+                    /**
                     <h2 class="render-title separate-top"><?php _e('Software updates'); ?></h2>
                     <div class="form-row">
                         <div class="form-label"><?php _e('Core updates'); ?></div>
@@ -366,6 +402,8 @@
                             <?php printf(__('Last checked on %s'), osc_format_date( date('d-m-Y h:i:s', osc_get_preference('themes_last_version_check')) )); ?> <a class="btn btn-mini" href="<?php echo osc_admin_base_url(true); ?>?page=settings&action=check_updates"><?php _e('Check updates');?></a>
                         </div>
                     </div>
+                     * */
+                    ?>
                     <div class="clear"></div>
                     <div class="form-actions">
                         <input type="submit" id="save_changes" value="<?php echo osc_esc_html( __('Save changes') ); ?>" class="btn btn-submit" />

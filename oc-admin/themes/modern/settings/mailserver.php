@@ -1,4 +1,6 @@
-<?php if ( ! defined('OC_ADMIN')) exit('Direct access is not allowed.');
+<?php if ( ! defined('OC_ADMIN')) {
+    exit('Direct access is not allowed.');
+}
 /*
  * Copyright 2014 Osclass
  *
@@ -16,7 +18,9 @@
  */
 
     //customize Head
-    function customHead() { ?>
+function customHead()
+{
+    ?>
         <script type="text/javascript">
             jQuery(document).ready(function(){
                 $('select[name="mailserver_type"]').bind('change', function(){
@@ -54,29 +58,43 @@
             });
         </script>
         <?php
-    }
-    osc_add_hook('admin_header','customHead', 10);
+}
+    osc_add_hook('admin_header', 'customHead', 10);
 
-    function render_offset() {
-        return 'row-offset';
-    }
+/**
+ * @return string
+ */
+function render_offset()
+{
+    return 'row-offset';
+}
 
-    function addHelp() {
-        echo '<p>' . __("Modify the settings of the mail server from which your site's emails are sent. <strong>Be careful</strong>: these settings can vary depending on your hosting or server. If you run into any issues, check your hosting's help section.") . '</p>';
-    }
-    osc_add_hook('help_box','addHelp');
+function addHelp()
+{
+    echo '<p>' . __("Modify the settings of the mail server from which your site's emails are sent. <strong>Be careful</strong>: these settings can vary depending on your hosting or server. If you run into any issues, check your hosting's help section.") . '</p>';
+}
+    osc_add_hook('help_box', 'addHelp');
 
-    osc_add_hook('admin_page_header','customPageHeader');
-    function customPageHeader(){ ?>
+    osc_add_hook('admin_page_header', 'customPageHeader');
+function customPageHeader()
+{
+    ?>
         <h1><?php _e('Settings'); ?>
             <a href="#" class="btn ico ico-32 ico-help float-right"></a>
         </h1>
     <?php
-    }
+}
 
-    function customPageTitle($string) {
-        return sprintf(__('Mail Settings &raquo; %s'), $string);
-    }
+
+/**
+ * @param $string
+ *
+ * @return string
+ */
+function customPageTitle($string)
+{
+    return sprintf(__('Mail Settings &raquo; %s'), $string);
+}
     osc_add_filter('admin_title', 'customPageTitle');
 
     osc_current_admin_theme_path( 'parts/header.php' ); ?>
@@ -140,11 +158,11 @@
                                 <div class="form-controls">
                                     <input type="text" class="input-medium" name="mailserver_ssl" value="<?php echo osc_esc_html(osc_mailserver_ssl()); ?>" />
                                     <?php _e('Options: blank, ssl or tls'); ?>
-                                    <?php if( php_sapi_name() == 'cgi-fcgi' || php_sapi_name() == 'cgi' ) { ?>
+                                    <?php if ( php_sapi_name() == 'cgi-fcgi' || php_sapi_name() == 'cgi' ) { ?>
                                     <div class="flashmessage flashmessage-inline warning">
                                         <p><?php _e("Cannot be sure that Apache Module <b>mod_ssl</b> is loaded."); ?></p>
                                     </div>
-                                    <?php } else if( !@apache_mod_loaded('mod_ssl') ) { ?>
+                                    <?php } else if ( !@apache_mod_loaded('mod_ssl') ) { ?>
                                     <div class="flashmessage flashmessage-inline warning">
                                         <p><?php _e("Apache Module <b>mod_ssl</b> is not loaded"); ?></p>
                                     </div>

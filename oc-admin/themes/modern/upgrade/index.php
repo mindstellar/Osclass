@@ -1,4 +1,6 @@
-<?php if ( ! defined('OC_ADMIN')) exit('Direct access is not allowed.');
+<?php if ( ! defined('OC_ADMIN')) {
+    exit('Direct access is not allowed.');
+}
 /*
  * Copyright 2014 Osclass
  *
@@ -15,26 +17,37 @@
  * limitations under the License.
  */
 
-    osc_add_hook('admin_page_header','customPageHeader');
-    function customPageHeader(){ ?>
+    osc_add_hook('admin_page_header', 'customPageHeader');
+function customPageHeader()
+{
+    ?>
         <h1><?php _e('Tools'); ?></h1>
     <?php
-    }
+}
 
-    function customPageTitle($string) {
-        return __('Upgrade');
-    }
+
+/**
+ * @param $string
+ *
+ * @return string
+ */
+function customPageTitle($string)
+{
+    return __('Upgrade');
+}
     osc_add_filter('admin_title', 'customPageTitle');
 
     //customize Head
-    function customHead(){ ?>
+function customHead()
+{
+    ?>
         <script type="text/javascript">
             $(document).ready(function(){
                 if (typeof $.uniform != 'undefined') {
                     $('textarea, button,select, input:file').uniform();
                 }
 
-                <?php if(Params::getParam('confirm')=='true') {?>
+                <?php if (Params::getParam('confirm')=='true') {?>
                     $('#output').show();
                     $('#tohide').hide();
 
@@ -45,9 +58,9 @@
                 <?php } ?>
             });
         </script>
-    <?php }
+<?php }
 
-    osc_add_hook('admin_header','customHead', 10);
+    osc_add_hook('admin_header', 'customHead', 10);
 
     osc_current_admin_theme_path( 'parts/header.php' ); ?>
 

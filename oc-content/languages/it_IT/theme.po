@@ -30,8 +30,8 @@ msgstr "%1$d - %2$d di %3$d annunci"
 msgid "Premium listings"
 msgstr "Annunci Premium"
 
-msgid "http://osclass.org/"
-msgstr "http://osclass.org/ "
+msgid "https://github.com/navjottomer/osclass/"
+msgstr "https://github.com/navjottomer/osclass/ "
 
 msgid "Bender theme"
 msgstr "Tema Bender"
@@ -148,12 +148,12 @@ msgid "Footer link"
 msgstr "Link piè di pagina"
 
 #: admin/settings.php:45
-msgid "I want to help Osclass by linking to <a href=\"http://osclass.org/\" target=\"_blank\">osclass.org</a> from my site with the following text:"
-msgstr "Voglio aiutare Osclass collegando ad <a href=\"http://osclass.org/\" target=\"_blank\">osclass.org</a> dal mio sito con il seguente testo:"
+msgid "I want to help Osclass by linking to <a href=\"https://github.com/navjottomer/osclass/\" target=\"_blank\">osclass.org</a> from my site with the following text:"
+msgstr "Voglio aiutare Osclass collegando ad <a href=\"https://github.com/navjottomer/osclass/\" target=\"_blank\">osclass.org</a> dal mio sito con il seguente testo:"
 
 #: admin/settings.php:46
-msgid "This website is proudly using the <a title=\"Osclass web\" href=\"http://osclass.org/\">classifieds scripts</a> software <strong>Osclass</strong>"
-msgstr "Questo sito è orgogliosamente usando il <a title=\"Osclass web\" href=\"http://osclass.org/\">script di annunci</a>  <strong>Osclass</strong>"
+msgid "This website is proudly using the <a title=\"Osclass web\" href=\"https://github.com/navjottomer/osclass/\">classifieds scripts</a> software <strong>Osclass</strong>"
+msgstr "Questo sito è orgogliosamente usando il <a title=\"Osclass web\" href=\"https://github.com/navjottomer/osclass/\">script di annunci</a>  <strong>Osclass</strong>"
 
 #: admin/settings.php:50
 msgid "Save changes"

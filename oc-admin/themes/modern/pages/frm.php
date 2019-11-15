@@ -1,4 +1,6 @@
-<?php if ( ! defined('OC_ADMIN')) exit('Direct access is not allowed.');
+<?php if ( ! defined('OC_ADMIN')) {
+    exit('Direct access is not allowed.');
+}
 /*
  * Copyright 2014 Osclass
  *
@@ -24,37 +26,53 @@
     $template_selected = (isset($meta['template']) && $meta['template']!='')?$meta['template']:'default';
     $locales = OSCLocale::newInstance()->listAllEnabled();
 
-    function customFrmText($return = 'title') {
-        $page = __get('page');
-        $text = array();
-        if( isset($page['pk_i_id']) ) {
-            $text['edit']       = true;
-            $text['title']      = __('Edit page');
-            $text['action_frm'] = 'edit_post';
-            $text['btn_text']   = __('Save changes');
-        } else {
-            $text['edit']       = false;
-            $text['title']      = __('Add page');
-            $text['action_frm'] = 'add_post';
-            $text['btn_text']   = __('Add page');
-        }
-
-        return $text[$return];
+/**
+ * @param string $return
+ *
+ * @return mixed
+ */
+function customFrmText($return = 'title')
+{
+    $page = __get('page');
+    $text = array();
+    if ( isset($page['pk_i_id']) ) {
+        $text['edit']       = true;
+        $text['title']      = __('Edit page');
+        $text['action_frm'] = 'edit_post';
+        $text['btn_text']   = __('Save changes');
+    } else {
+        $text['edit']       = false;
+        $text['title']      = __('Add page');
+        $text['action_frm'] = 'add_post';
+        $text['btn_text']   = __('Add page');
     }
 
-    function customPageHeader() { ?>
+    return $text[$return];
+}
+
+function customPageHeader()
+{
+    ?>
         <h1><?php _e('Pages'); ?></h1>
-<?php
-    }
-    osc_add_hook('admin_page_header','customPageHeader');
+    <?php
+}
+    osc_add_hook('admin_page_header', 'customPageHeader');
 
-    function customPageTitle($string) {
-        return sprintf('%s &raquo; %s', customFrmText('title'), $string);
-    }
+/**
+ * @param $string
+ *
+ * @return string
+ */
+function customPageTitle($string)
+{
+    return sprintf('%s &raquo; %s', customFrmText('title'), $string);
+}
     osc_add_filter('admin_title', 'customPageTitle');
 
     //customize Head
-    function customHead() { ?>
+function customHead()
+{
+    ?>
         <script type="text/javascript">
             tinyMCE.init({
                 mode : "textareas",
@@ -80,8 +98,8 @@
 
         </script>
         <?php
-    }
-    osc_add_hook('admin_header','customHead', 10);
+}
+    osc_add_hook('admin_header', 'customHead', 10);
 
     osc_current_admin_theme_path('parts/header.php'); ?>
 <h2 class="render-title"><?php echo customFrmText('title'); ?></h2>
@@ -100,13 +118,17 @@
             </div>
             <span class="help"></span>
         </div>
-        <?php if(count($templates)>0) { ?>
+        <?php if (count($templates)>0) { ?>
             <div>
                 <label><?php _e('Page template'); ?></label>
                 <select name="meta[template]">
-                    <option value="default" <?php if($template_selected=='default') { echo 'selected="selected"'; }; ?>><?php _e('Default template'); ?></option>
-                    <?php foreach($templates as $template) { ?>
-                        <option value="<?php echo $template?>" <?php if($template_selected==$template) { echo 'selected="selected"'; }; ?>><?php echo $template; ?></option>
+                    <option value="default" <?php if ($template_selected=='default') {
+                        echo 'selected="selected"';
+                                            }; ?>><?php _e('Default template'); ?></option>
+                    <?php foreach ($templates as $template) { ?>
+                        <option value="<?php echo $template?>" <?php if ($template_selected==$template) {
+                            echo 'selected="selected"';
+                                       }; ?>><?php echo $template; ?></option>
                     <?php }; ?>
                 </select>
             </div>
@@ -124,7 +146,7 @@
         </div>
         <div class="clear"></div>
         <div class="form-actions">
-            <?php if( customFrmText('edit') ) { ?>
+            <?php if ( customFrmText('edit') ) { ?>
             <a href="javascript:history.go(-1)" class="btn"><?php _e('Cancel'); ?></a>
             <?php } ?>
             <input type="submit" value="<?php echo osc_esc_html(customFrmText('btn_text')); ?>" class="btn btn-submit" />

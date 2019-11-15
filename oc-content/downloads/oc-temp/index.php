@@ -1,1 +1,1 @@
-<?php /* NOTHING BUT THE RAIN */ ?>
+<?php /* NOTHING BUT THE RAIN */
