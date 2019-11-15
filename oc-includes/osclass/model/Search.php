@@ -656,7 +656,6 @@ class Search extends DAO
     {
         $this->_loadUserTable();
         $this->dao->where(sprintf('%st_user.pk_i_id = %st_item.fk_i_user_id', DB_TABLE_PREFIX, DB_TABLE_PREFIX));
-
         if (is_array($this->user_ids)) {
             $this->dao->where( ' ( ' . implode( ' || ', $this->user_ids) . ' ) ' );
         } else {
@@ -669,14 +668,10 @@ class Search extends DAO
      */
     public function notFromUser($id)
     {
-        $this->_loadUserTable();
-
-        $this->dao->where(sprintf( '((%st_user.pk_i_id = %st_item.fk_i_user_id AND %st_item.fk_i_user_id != %d) || %st_item.fk_i_user_id IS NULL) ',
-                                   DB_TABLE_PREFIX,
-                                   DB_TABLE_PREFIX,
-                                   DB_TABLE_PREFIX,
-                                   $id,
-                                   DB_TABLE_PREFIX));
+        $this->dao->where(sprintf( '(%st_item.fk_i_user_id != %d || %st_item.fk_i_user_id IS NULL) ',
+                                       DB_TABLE_PREFIX,
+                                       $id,
+                                       DB_TABLE_PREFIX));
     }
 
     private function _loadUserTable()
