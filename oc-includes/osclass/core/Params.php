@@ -20,6 +20,13 @@ class Params
     {
         self::$_request = array_merge($_GET, $_POST);
         self::$_server  = $_SERVER;
+        self::$_config = HTMLPurifier_Config::createDefault();
+        self::$_config->set('HTML.Allowed', '');
+        self::$_config->set('Cache.SerializerPath', osc_uploads_path());
+
+        if (!isset(self::$_purifier)) {
+            self::$_purifier = new HTMLPurifier(self::$_config);
+        }
     }
 
     /**
@@ -68,13 +75,7 @@ class Params
             return $value;
         }
 
-        self::$_config = HTMLPurifier_Config::createDefault();
-        self::$_config->set('HTML.Allowed', '');
-        self::$_config->set('Cache.SerializerPath', osc_uploads_path());
-
-        if (!isset(self::$_purifier)) {
-            self::$_purifier = new HTMLPurifier(self::$_config);
-        }
+        
 
         if (is_array($value)) {
             foreach ($value as $k => &$v) {
