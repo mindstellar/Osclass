@@ -257,24 +257,25 @@ function osc_current_web_theme_url($file = '')
      */
 function osc_current_web_theme_path($file = '')
 {
-    $info = WebThemes::newInstance()->loadThemeInfo(WebThemes::newInstance()->getCurrentTheme());
-
-    if ( file_exists(WebThemes::newInstance()->getCurrentThemePath() . $file) ) {
+    if (file_exists(WebThemes::newInstance()->getCurrentThemePath() . $file)) {
         require WebThemes::newInstance()->getCurrentThemePath() . $file;
-    } elseif ($info['template'] != '') {
-        WebThemes::newInstance()->setParentTheme();
-        if ( file_exists(WebThemes::newInstance()->getCurrentThemePath() . $file) ) {
-            require WebThemes::newInstance()->getCurrentThemePath() . $file;
+    } else {
+        $info = WebThemes::newInstance()->loadThemeInfo(WebThemes::newInstance()->getCurrentTheme());
+        if ($info['template'] != '') {
+            WebThemes::newInstance()->setParentTheme();
+            if (file_exists(WebThemes::newInstance()->getCurrentThemePath() . $file)) {
+                require WebThemes::newInstance()->getCurrentThemePath() . $file;
+            } else {
+                WebThemes::newInstance()->setGuiTheme();
+                if (file_exists(WebThemes::newInstance()->getCurrentThemePath() . $file)) {
+                    require WebThemes::newInstance()->getCurrentThemePath() . $file;
+                }
+            }
         } else {
             WebThemes::newInstance()->setGuiTheme();
-            if ( file_exists(WebThemes::newInstance()->getCurrentThemePath() . $file) ) {
+            if (file_exists(WebThemes::newInstance()->getCurrentThemePath() . $file)) {
                 require WebThemes::newInstance()->getCurrentThemePath() . $file;
             }
-        }
-    } else {
-        WebThemes::newInstance()->setGuiTheme();
-        if ( file_exists(WebThemes::newInstance()->getCurrentThemePath() . $file) ) {
-            require WebThemes::newInstance()->getCurrentThemePath() . $file;
         }
     }
 }
