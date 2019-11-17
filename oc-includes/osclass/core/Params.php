@@ -24,11 +24,16 @@ class Params
         self::$_config->set('HTML.Allowed', '');
         self::$_config->set('Cache.SerializerPath', osc_uploads_path());
 
+       
+    }
+
+    private static function getPurifier(){
         if (!isset(self::$_purifier)) {
             self::$_purifier = new HTMLPurifier(self::$_config);
         }
+        return self::$_purifier;
     }
-
+    
     /**
      * @param      $param
      * @param bool $htmlencode
@@ -82,7 +87,7 @@ class Params
                 $v = self::_purify($v, $xss_check); // recursive
             }
         } else {
-            $value = self::$_purifier->purify($value);
+            $value = self::getPurifier()->purify($value);
         }
 
         return $value;
