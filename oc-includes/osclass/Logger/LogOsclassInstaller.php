@@ -7,21 +7,20 @@
      */
 class LogOsclassInstaller extends Logger
 {
-    private static $_instance;
+    private static $instance;
 
     private $os;
     private $component = 'INSTALLER';
 
     /**
-     * @return mixed
+     * @return \LogOsclassInstaller
      */
-    public static function instance()
+    public static function newInstance()
     {
-        if (!isset(self::$_instance)) {
-            $c = __CLASS__;
-            self::$_instance = new $c;
+        if (!isset(self::$instance)) {
+            self::$instance = new self;
         }
-        return self::$_instance;
+        return self::$instance;
     }
 
     public function __construct()
