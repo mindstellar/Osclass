@@ -59,7 +59,7 @@ class WebThemes extends Themes
     /**
      * @var string
      */
-    private $path; 
+    private $path;
     private $theme_info = array();
 
     /**
@@ -287,9 +287,10 @@ class WebThemes extends Themes
     /**
      *@param  string $theme
      *@param  array $info
-     * 
+     *
      */
-    private function setThemeInfo ($theme,$info){
+    private function setThemeInfo($theme, $info)
+    {
         $this->theme_info[$theme] = $info ;
     }
     
