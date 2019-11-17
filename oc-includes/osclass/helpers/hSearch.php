@@ -387,7 +387,7 @@ function osc_search_url($params = null)
     if (is_array($params)) {
         osc_prune_array($params);
     }
-    $countP = count($params);
+     $countP = (is_array($params ))?count($params):0;
     if ($countP == 0) {
         $params['page'] = 'search';
     }
@@ -496,7 +496,7 @@ function osc_search_url($params = null)
     $countP = count($params);
     if ($countP == 0) {
         return $base_url;
-    };
+    }
     unset($params['page']);
     $countP = count($params);
 
