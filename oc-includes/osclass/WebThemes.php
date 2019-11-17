@@ -59,7 +59,8 @@ class WebThemes extends Themes
     /**
      * @var string
      */
-    private $path;
+    private $path; 
+    private $theme_info = array();
 
     /**
      * @return \WebThemes
@@ -203,7 +204,10 @@ class WebThemes extends Themes
         if ( !file_exists($path) ) {
             return false;
         }
-
+ 
+        if (isset($this->theme_info[$theme])) {
+            return $this->theme_info[$theme];
+        }
         // NEW CODE FOR THEME INFO
         $s_info = file_get_contents($path);
         $info   = array();
@@ -262,7 +266,8 @@ class WebThemes extends Themes
         }
         $info['filename'] = $path;
         $info['int_name'] = $theme;
-
+        
+        $this->setThemeInfo($theme, $info);
         if ($info['name']!='') {
             return $info;
         }
@@ -275,9 +280,20 @@ class WebThemes extends Themes
         }
         $result             = $fxName();
         $result['int_name'] = $theme;
-
+        $this->setThemeInfo($theme, $result);
         return $result;
     }
+    
+    /**
+     *@param  string $theme
+     *@param  array $info
+     * 
+     */
+    private function setThemeInfo ($theme,$info){
+        $this->theme_info[$theme] = $info ;
+    }
+    
+   
 
     /**
      * @param $internal_name
