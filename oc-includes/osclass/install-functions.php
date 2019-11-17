@@ -1089,7 +1089,7 @@ function display_target()
                                     ) == $country_ip
                                 ) {
                                     echo 'selected="selected"';
-                                }; ?>><?php echo $c['name']; ?></option>
+                                               }; ?>><?php echo $c['name']; ?></option>
                             <?php }; ?>
                         </select>
                     </div>
@@ -1197,13 +1197,13 @@ function display_finish($password)
     <div class="error-location">
         <?php _e('The selected location could not been installed'); ?>
     </div>
-<?php } ?>
+    <?php } ?>
     <h2 class="target"><?php _e('Congratulations!'); ?></h2>
     <p class="space-left-10"><?php _e("Osclass has been installed. Were you expecting more steps? Sorry to disappoint you!"); ?></p>
     <p class="space-left-10"><?php echo sprintf(
             __('An e-mail with the password for oc-admin has been sent to: %s'),
             $data['s_email']
-        ); ?></p>
+                             ); ?></p>
     <div style="clear:both;"></div>
     <div class="form-table finish">
         <table>
