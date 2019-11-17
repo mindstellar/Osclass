@@ -27,7 +27,8 @@ class Params
        
     }
 
-    private static function getPurifier(){
+    private static function getPurifier()
+    {
         if (!isset(self::$_purifier)) {
             self::$_purifier = new HTMLPurifier(self::$_config);
         }
