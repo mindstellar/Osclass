@@ -6,21 +6,16 @@
  * Time: 22:07
  */
 
-namespace osclass\Logger;
-
-use Logger;
-use Params;
-use RuntimeException;
 
 /**
  * Class LogOsclass
  *
- * @package osclass\Logger
+ * @package osclass
  */
 class LogOsclass extends Logger
 {
     /**
-     * @var \osclass\Logger\LogOsclass
+     * @var LogOsclass
      */
     private static $instance;
     /**
