@@ -15,8 +15,8 @@
      * limitations under the License.
      */
 
-if ( ! defined('ABS_PATH')) {
-    define('ABS_PATH', str_replace('\\', '/', dirname(__FILE__) . '/'));
+if (! defined('ABS_PATH')) {
+    define('ABS_PATH', str_replace('\\', '/', __DIR__ . '/'));
 }
 
     define('LIB_PATH', ABS_PATH . 'oc-includes/');
@@ -25,7 +25,7 @@ if ( ! defined('ABS_PATH')) {
     define('PLUGINS_PATH', CONTENT_PATH . 'plugins/');
     define('TRANSLATIONS_PATH', CONTENT_PATH . 'languages/');
 
-if ( ! file_exists(ABS_PATH . 'config.php')) {
+if (! file_exists(ABS_PATH . 'config.php')) {
     require_once LIB_PATH . 'osclass/helpers/hErrors.php';
 
     $title   = 'Osclass &raquo; Error';
@@ -49,13 +49,17 @@ if (OSC_DEBUG) {
         ini_set('error_log', CONTENT_PATH . 'debug.log');
     }
 } else {
-    error_reporting(E_CORE_ERROR | E_CORE_WARNING | E_COMPILE_ERROR | E_ERROR | E_WARNING | E_PARSE | E_USER_ERROR | E_USER_WARNING);
+    error_reporting(
+        E_CORE_ERROR | E_CORE_WARNING | E_COMPILE_ERROR | E_ERROR | E_WARNING | E_PARSE | E_USER_ERROR | E_USER_WARNING
+    );
 }
 //Include Composer's autoloader
     require_once LIB_PATH . 'vendor/autoload.php';
 
     require_once LIB_PATH . 'osclass/db.php';
+    require_once LIB_PATH . 'osclass/Logger/Logger.php';
     require_once LIB_PATH . 'osclass/Logger/LogDatabase.php';
+    require_once LIB_PATH . 'osclass/Logger/LogOsclass.php';
     require_once LIB_PATH . 'osclass/classes/database/DBConnectionClass.php';
     require_once LIB_PATH . 'osclass/classes/database/DBCommandClass.php';
     require_once LIB_PATH . 'osclass/classes/database/DBRecordsetClass.php';
@@ -66,10 +70,10 @@ if (OSC_DEBUG) {
     require_once LIB_PATH . 'osclass/helpers/hPreference.php';
 
 // check if Osclass is installed
-if ( ! getBoolPreference('osclass_installed') && MULTISITE) {
+if (! getBoolPreference('osclass_installed') && MULTISITE) {
     header('Location: ' . WEB_PATH);
     die;
-} elseif ( ! getBoolPreference('osclass_installed')) {
+} elseif (! getBoolPreference('osclass_installed')) {
     require_once LIB_PATH . 'osclass/helpers/hErrors.php';
 
     $title   = 'Osclass &raquo; Error';
@@ -194,7 +198,7 @@ if ( ! getBoolPreference('osclass_installed') && MULTISITE) {
     require_once LIB_PATH . 'osclass/compatibility.php';
 
 
-if ( ! defined('OSC_CRYPT_KEY')) {
+if (! defined('OSC_CRYPT_KEY')) {
     define('OSC_CRYPT_KEY', osc_get_preference('crypt_key'));
 }
 
