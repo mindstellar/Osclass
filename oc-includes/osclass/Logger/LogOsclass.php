@@ -20,6 +20,10 @@ use RuntimeException;
 class LogOsclass extends Logger
 {
     /**
+     * @var \osclass\Logger\LogOsclass
+     */
+    private static $instance;
+    /**
      * $debug_enabled - boolean
      *
      * @var bool
@@ -56,7 +60,6 @@ class LogOsclass extends Logger
      * @param string $log_file - path and filename of log
      * @param array  $params
      *
-     * @throws \Exception
      */
     public function __construct($params = array())
     {
@@ -67,6 +70,16 @@ class LogOsclass extends Logger
         $this->params   = array_merge($this->options, $params);
     }
 
+    /**
+     * @return LogOsclass
+     */
+    public static function newInstance()
+    {
+        if (!isset(self::$instance)) {
+            self::$instance = new self;
+        }
+        return self::$instance;
+    }
     /**
      * Write to log file
      *
