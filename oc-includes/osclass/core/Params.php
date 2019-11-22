@@ -102,7 +102,7 @@ class Params
      *                              structure: Namespace.Directive => Value
      *                              http://htmlpurifier.org/live/configdoc/plain.html
      */
-    private static function setHTMLPurifierInstance($config_options = null)
+    public static function setHTMLPurifierInstance($config_options = null)
     {
         if ($config_options !== null && is_array($config_options)) {
             $config       = HTMLPurifier_Config::create($config_options);
