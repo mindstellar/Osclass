@@ -597,5 +597,5 @@ function checkForm() {
     }
 }
 
-    /* file end: ./oc-includes/osclass/frm/User.form.class.php */
+    /* file end: ./oc-includes/osclass/frm/UserForm.php */
 ?>

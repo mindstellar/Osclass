@@ -100,5 +100,5 @@ class CWebPage extends BaseModel
     }
 }
 
-    /* file end: ./page.php */
+    /* file end: ./CWebPage.php */
 

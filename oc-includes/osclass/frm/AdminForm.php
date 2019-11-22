@@ -166,5 +166,5 @@ class AdminForm extends Form {
 
 }
 
-    /* file end: ./oc-includes/osclass/frm/Admin.form.class.php */
+    /* file end: ./oc-includes/osclass/frm/AdminForm.php */
 ?>

@@ -210,5 +210,5 @@ class CWebUserNonSecure extends BaseModel
     }
 }
 
-    /* file end: ./user-non-secure.php */
+    /* file end: ./CWebUserNonSecure.php */
 

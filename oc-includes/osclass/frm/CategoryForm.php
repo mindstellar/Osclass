@@ -169,5 +169,5 @@ class CategoryForm extends Form
     }
 }
 
-    /* file end: ./oc-includes/osclass/frm/Category.form.class.php */
+    /* file end: ./oc-includes/osclass/frm/CategoryForm.php */
 

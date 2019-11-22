@@ -67,4 +67,4 @@ class CWebMain extends BaseModel
     }
 }
 
-    /* file end: ./main.php */
+    /* file end: ./CWebMain.php */

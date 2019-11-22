@@ -290,5 +290,5 @@ class CWebLogin extends BaseModel
     }
 }
 
-    /* file end: ./login.php */
+    /* file end: ./CWebLogin.php */
 

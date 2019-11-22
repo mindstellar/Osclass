@@ -91,4 +91,4 @@ class CWebCustom extends BaseModel
     }
 }
 
-    /* file end: ./custom.php */
+    /* file end: ./CWebCustom.php */

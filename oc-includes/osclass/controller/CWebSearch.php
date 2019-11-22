@@ -672,4 +672,4 @@ class CWebSearch extends BaseModel
     }
 }
 
-/* file end: ./search.php */
+/* file end: ./CWebSearch.php */

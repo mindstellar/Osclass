@@ -60,4 +60,4 @@ class CWebLanguage extends BaseModel
     }
 }
 
-    /* file end: ./language.php */
+    /* file end: ./CWebLanguage.php */

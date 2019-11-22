@@ -191,5 +191,5 @@ MESSAGE;
     }
 }
 
-    /* file end: ./contact.php */
+    /* file end: ./CWebContact.php */
 

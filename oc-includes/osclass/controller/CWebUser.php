@@ -310,5 +310,5 @@ class CWebUser extends WebSecBaseModel
     }
 }
 
-    /* file end: ./user.php */
+    /* file end: ./CWebUser.php */
 

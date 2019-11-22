@@ -374,4 +374,4 @@ class CWebAjax extends BaseModel
     }
 }
 
-    /* file end: ./ajax.php */
+    /* file end: ./CWebAjax.php */

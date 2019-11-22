@@ -443,7 +443,7 @@ class CWebItem extends BaseModel
                     }
 
                     if ( osc_reg_user_can_contact() && osc_is_web_user_logged_in() || !osc_reg_user_can_contact() ) {
-                        $this->doView('item-contact.php');
+                        $this->doView('item-CWebContact.php');
                     } else {
                         osc_add_flash_warning_message( _m("You can't contact the seller, only registered users can").'. <br />'.sprintf( _m("<a href=\"%s\">Click here to sign-in</a>"), osc_user_login_url() ) );
                         $this->redirectTo( osc_item_url() );
@@ -690,5 +690,5 @@ class CWebItem extends BaseModel
     }
 }
 
-    /* file end: ./item.php */
+    /* file end: ./CWebItem.php */
 
