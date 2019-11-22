@@ -27,8 +27,8 @@ function add_slashes_extended($array)
         return $array;
     }
     
-    foreach ( (array) $array as $k => $v ) {
-        if ( is_array($v) ) {
+    foreach ((array) $array as $k => $v) {
+        if (is_array($v)) {
             $array[$k] = add_slashes_extended($v);
         } else {
             $array[$k] = addslashes($v);
@@ -62,7 +62,7 @@ function osc_sanitizeString($string)
     $string = preg_replace('/\s+/', '-', $string);
     $string = preg_replace('|[\p{Ps}\p{Pe}\p{Pi}\p{Pf}\p{Po}\p{S}\p{Z}\p{C}\p{No}]+|u', '', $string);
 
-    if ( is_utf8($string) ) {
+    if (is_utf8($string)) {
         $string = urlencode($string);
         // mdash & ndash
         $string = str_replace(array('%e2%80%93', '%e2%80%94'), '-', strtolower($string));
@@ -83,11 +83,11 @@ function osc_sanitizeString($string)
     
 function remove_accents($string)
 {
-    if ( ! preg_match( '/[\x80-\xff]/', $string ) ) {
+    if (! preg_match('/[\x80-\xff]/', $string)) {
         return $string;
     }
  
-    if ( is_utf8( $string ) ) {
+    if (is_utf8($string)) {
         $chars = array(
             // Decompositions for Latin-1 Supplement
             'ª' => 'a',
@@ -420,7 +420,8 @@ function remove_accents($string)
         // Used for locale-specific rules
         $locale = osc_current_user_locale();
  
-        if ( 'de_DE' == $locale || 'de_DE_formal' == $locale || 'de_CH' == $locale || 'de_CH_informal' == $locale ) {
+        if ('de_DE' === $locale || 'de_DE_formal' === $locale || 'de_CH' === $locale || 'de_CH_informal'
+            === $locale ) {
             $chars['Ä'] = 'Ae';
             $chars['ä'] = 'ae';
             $chars['Ö'] = 'Oe';
@@ -428,21 +429,21 @@ function remove_accents($string)
             $chars['Ü'] = 'Ue';
             $chars['ü'] = 'ue';
             $chars['ß'] = 'ss';
-        } elseif ( 'da_DK' === $locale ) {
+        } elseif ('da_DK' === $locale) {
             $chars['Æ'] = 'Ae';
             $chars['æ'] = 'ae';
             $chars['Ø'] = 'Oe';
             $chars['ø'] = 'oe';
             $chars['Å'] = 'Aa';
             $chars['å'] = 'aa';
-        } elseif ( 'ca' === $locale ) {
+        } elseif ('ca' === $locale) {
             $chars['l·l'] = 'll';
-        } elseif ( 'sr_RS' === $locale || 'bs_BA' === $locale ) {
+        } elseif ('sr_RS' === $locale || 'bs_BA' === $locale) {
             $chars['Đ'] = 'DJ';
             $chars['đ'] = 'dj';
         }
  
-        $string = strtr( $string, $chars );
+        $string = strtr($string, $chars);
     } else {
         $chars = array();
         // Assume ISO-8859-1 if not UTF-8
@@ -459,11 +460,11 @@ function remove_accents($string)
  
         $chars['out'] = 'EfSZszYcYuAAAAAACEEEEIIIINOOOOOOUUUUYaaaaaaceeeeiiiinoooooouuuuyy';
  
-        $string              = strtr( $string, $chars['in'], $chars['out'] );
+        $string              = strtr($string, $chars['in'], $chars['out']);
         $double_chars        = array();
         $double_chars['in']  = array( "\x8c", "\x9c", "\xc6", "\xd0", "\xde", "\xdf", "\xe6", "\xf0", "\xfe" );
         $double_chars['out'] = array( 'OE', 'oe', 'AE', 'DH', 'TH', 'ss', 'ae', 'dh', 'th' );
-        $string              = str_replace( $double_chars['in'], $double_chars['out'], $string );
+        $string              = str_replace($double_chars['in'], $double_chars['out'], $string);
     }
  
     return $string;
@@ -488,7 +489,4 @@ function is_utf8($string)
         | [\xF1-\xF3][\x80-\xBF]{3}          # planes 4-15
         |  \xF4[\x80-\x8F][\x80-\xBF]{2}     # plane 16
     )*$%xs', $string);
-
 }
-
-
