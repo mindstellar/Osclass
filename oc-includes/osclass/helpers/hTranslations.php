@@ -15,86 +15,98 @@
  * limitations under the License.
  */
 
-    /**
-     * Helper Translation
-     * @package Osclass
-     * @subpackage Helpers
-     * @author Osclass
-     */
+/**
+ * Helper Translation
+ *
+ * @package    Osclass
+ * @subpackage Helpers
+ * @author     Osclass
+ */
 
-    /**
-     * Translate strings
-     *
-     * @since unknown
-     *
-     * @param string $key
-     * @param string $domain
-     * @return string
-     */
+/**
+ * Translate strings
+ *
+ * @param string $key
+ * @param string $domain
+ *
+ * @return string
+ * @since unknown
+ *
+ */
 function __($key, $domain = 'core')
 {
-    $gt = Translation::newInstance()->_get();
+    $gt     = Translation::newInstance()->_get();
     $string = $gt->dgettext($domain, $key);
+
     return osc_apply_filter('gettext', $string);
 }
 
-    /**
-     * Translate strings and echo them
-     *
-     * @since unknown
-     *
-     * @param string $key
-     * @param string $domain
-     */
+
+/**
+ * Translate strings and echo them
+ *
+ * @param string $key
+ * @param string $domain
+ *
+ * @since unknown
+ *
+ */
 function _e($key, $domain = 'core')
 {
     echo __($key, $domain);
 }
 
-    /**
-     * Translate string (flash messages)
-     *
-     * @since unknown
-     *
-     * @param string $key
-     * @return string
-     */
+
+/**
+ * Translate string (flash messages)
+ *
+ * @param string $key
+ *
+ * @return string
+ * @since unknown
+ *
+ */
 function _m($key)
 {
     return __($key, 'messages');
 }
 
-    /**
-     * Retrieve the singular or plural translation of the string.
-     *
-     * @since 2.2
-     *
-     * @param string $single_key
-     * @param string $plural_key
-     * @param int $count
-     * @param string $domain
-     * @return string
-     */
+
+/**
+ * Retrieve the singular or plural translation of the string.
+ *
+ * @param string $single_key
+ * @param string $plural_key
+ * @param int    $count
+ * @param string $domain
+ *
+ * @return string
+ * @since 2.2
+ *
+ */
 function _n($single_key, $plural_key, $count, $domain = 'core')
 {
-    $gt = Translation::newInstance()->_get();
+    $gt     = Translation::newInstance()->_get();
     $string = $gt->dngettext($domain, $single_key, $plural_key, $count);
+
     return osc_apply_filter('ngettext', $string);
 }
 
-    /**
-     * Retrieve the singular or plural translation of the string.
-     *
-     * @since 2.2
-     *
-     * @param string $single_key
-     * @param string $plural_key
-     * @param int $count
-     * @return string
-     */
+
+/**
+ * Retrieve the singular or plural translation of the string.
+ *
+ * @param string $single_key
+ * @param string $plural_key
+ * @param int    $count
+ *
+ * @return string
+ * @since 2.2
+ *
+ */
 function _mn($single_key, $plural_key, $count)
 {
     return _n($single_key, $plural_key, $count, 'messages');
 }
 
-    /* file end: ./oc-includes/osclass/helpers/hTranslations.php */
+/* file end: ./oc-includes/osclass/helpers/hTranslations.php */

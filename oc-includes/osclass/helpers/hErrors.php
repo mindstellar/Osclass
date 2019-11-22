@@ -15,62 +15,66 @@
  * limitations under the License.
  */
 
-    /**
-    * Helper Error
-    * @package Osclass
-    * @subpackage Helpers
-    * @author Osclass
-    */
+/**
+ * Helper Error
+ *
+ * @package    Osclass
+ * @subpackage Helpers
+ * @author     Osclass
+ */
 
-    /**
-     * Kill Osclass with an error message
-     *
-     * @since 1.2
-     *
-     * @param string $message Error message
-     * @param string $title Error title
-     */
+/**
+ * Kill Osclass with an error message
+ *
+ * @param string $message Error message
+ * @param string $title   Error title
+ *
+ * @since 1.2
+ *
+ */
 function osc_die($title, $message)
 {
     ?>
-        <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-        <html xmlns="http://www.w3.org/1999/xhtml" dir="ltr" lang="en-US" xml:lang="en-US">
-            <head>
-                <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-                <title><?php echo $title; ?></title>
-                <link rel="stylesheet" type="text/css" media="all" href="<?php echo osc_get_absolute_url(); ?>oc-includes/osclass/installer/install.css" />
-            </head>
-            <body class="page-error">
-                <h1><?php echo $title; ?></h1>
-                <p><?php echo $message; ?></p>
-            </body>
-        </html>
-        <?php die(); ?>
+    <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+            "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+    <html xmlns="http://www.w3.org/1999/xhtml" dir="ltr" lang="en-US" xml:lang="en-US">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+        <title><?php echo $title; ?></title>
+        <link rel="stylesheet" type="text/css" media="all"
+              href="<?php echo osc_get_absolute_url(); ?>oc-includes/osclass/installer/install.css"/>
+    </head>
+    <body class="page-error">
+    <h1><?php echo $title; ?></h1>
+    <p><?php echo $message; ?></p>
+    </body>
+    </html>
+    <?php die(); ?>
 <?php }
 
 
-    /**
-     * @param      $param
-     * @param bool $htmlencode
-     * @param bool $quotes_encode
-     *
-     * @return string
-     */
+/**
+ * @param      $param
+ * @param bool $htmlencode
+ * @param bool $quotes_encode
+ *
+ * @return string
+ */
 function getErrorParam($param, $htmlencode = false, $quotes_encode = true)
 {
-    if ( $param == '' ) {
+    if ($param == '') {
         return '';
     }
-    if ( ! isset( $_SERVER[ $param ] ) ) {
+    if (!isset($_SERVER[$param])) {
         return '';
     }
     $value = $_SERVER[$param];
     if ($htmlencode) {
         if ($quotes_encode) {
             return htmlspecialchars(stripslashes($value), ENT_QUOTES);
-        } else {
-            return htmlspecialchars(stripslashes($value), ENT_NOQUOTES);
         }
+
+        return htmlspecialchars(stripslashes($value), ENT_NOQUOTES);
     }
 
     if (get_magic_quotes_gpc()) {
@@ -81,11 +85,11 @@ function getErrorParam($param, $htmlencode = false, $quotes_encode = true)
 }
 
 
-    /**
-     * @param $array
-     *
-     * @return string
-     */
+/**
+ * @param $array
+ *
+ * @return string
+ */
 function strip_slashes_extended_e($array)
 {
     if (is_array($array)) {
@@ -95,15 +99,23 @@ function strip_slashes_extended_e($array)
     } else {
         $array = stripslashes($array);
     }
+
     return $array;
 }
 
 
-    /**
-     * @return string
-     */
+/**
+ * @return string
+ */
 function osc_get_absolute_url()
 {
-    $protocol = ( getErrorParam('HTTPS') === 'on' || getErrorParam( 'HTTPS') == 1 || getErrorParam( 'HTTP_X_FORWARDED_PROTO') === 'https')? 'https' : 'http';
-    return $protocol . '://' . getErrorParam('HTTP_HOST') . preg_replace('/((oc-admin)|(oc-includes)|(oc-content)|([a-z]+\.php)|(\?.*)).*/i', '', getErrorParam('REQUEST_URI', false, false));
+    $protocol = (getErrorParam('HTTPS') === 'on' || getErrorParam('HTTPS') == 1
+        || getErrorParam('HTTP_X_FORWARDED_PROTO') === 'https') ? 'https' : 'http';
+
+    return $protocol . '://' . getErrorParam('HTTP_HOST')
+        . preg_replace(
+            '/((oc-admin)|(oc-includes)|(oc-content)|([a-z]+\.php)|(\?.*)).*/i',
+            '',
+            getErrorParam('REQUEST_URI', false, false)
+        );
 }
