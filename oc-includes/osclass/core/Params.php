@@ -7,19 +7,27 @@
      */
 class Params
 {
-    private static $_purifier;
-    private static $_config;
-    private static $_request;
-    private static $_server;
+    private static  $_purifier;
+    private static  $_config;
+    private  $_request;
+    private  $_server;
+    private static $instance;
 
     public function __construct()
     {
+        $this->_request = array_merge($_GET, $_POST);
+        $this->_server  = $_SERVER;
     }
 
-    public static function init()
+    /**
+     * @return \Params Singleton
+     */
+    public static function newInstance()
     {
-        self::$_request = array_merge($_GET, $_POST);
-        self::$_server  = $_SERVER;
+        if (!isset(self::$instance)) {
+            self::$instance = new self;
+        }
+        return self::$instance;
     }
 
     /**
@@ -35,11 +43,11 @@ class Params
         if ($param === '') {
             return '';
         }
-        if (!isset(self::$_request[$param])) {
+        if (!isset(self::newInstance()->_request[$param])) {
             return '';
         }
 
-        $value = self::_purify(self::$_request[$param], $xss_check);
+        $value = self::_purify(self::newInstance()->_request[$param], $xss_check);
 
         if ($htmlencode) {
             if ($quotes_encode) {
@@ -57,6 +65,26 @@ class Params
     }
 
     /**
+     * Get HTML Purifier Instance, create new if not already exists
+     * @param array $config_options Loads configuration values from an array with the following structure:
+     * Namespace.Directive => Value http://htmlpurifier.org/live/configdoc/plain.html
+     */
+    private static function setHTMLPurifierInstance($config_options = null ){
+        if ($config_options !== null && is_array($config_options)){
+            $config = HTMLPurifier_Config::create($config_options);
+            self::$_config = $config;
+        }elseif(!isset(self::$_config)){
+            $config = HTMLPurifier_Config::createDefault();
+            $config->set('HTML.Allowed', '');
+            $config->set('Cache.SerializerPath', osc_uploads_path());
+            self::$_config = $config;
+        }
+        if (self::$_purifier === null) {
+            self::$_purifier = new HTMLPurifier(self::$_config);
+        }
+    }
+
+    /**
      * @param $value
      * @param $xss_check
      *
@@ -68,9 +96,7 @@ class Params
             return $value;
         }
 
-        self::$_config = HTMLPurifier_Config::createDefault();
-        self::$_config->set('HTML.Allowed', '');
-        self::$_config->set('Cache.SerializerPath', osc_uploads_path());
+        self::setHTMLPurifierInstance();
 
         if (!isset(self::$_purifier)) {
             self::$_purifier = new HTMLPurifier(self::$_config);
@@ -97,7 +123,7 @@ class Params
         if ($param === '') {
             return false;
         }
-        if (!isset(self::$_request[$param])) {
+        if (!isset(self::newInstance()->_request[$param])) {
             return false;
         }
 
@@ -117,11 +143,11 @@ class Params
         if ($param === '') {
             return '';
         }
-        if (!isset(self::$_server[$param])) {
+        if (!isset(self::newInstance()->_server[$param])) {
             return '';
         }
 
-        $value = self::_purify(self::$_server[$param], $xss_check);
+        $value = self::_purify(self::newInstance()->_server[$param], $xss_check);
 
         if ($htmlencode) {
             if ($quotes_encode) {
@@ -148,7 +174,7 @@ class Params
         if ($param === '') {
             return false;
         }
-        if (!isset(self::$_server[$param])) {
+        if (!isset(self::newInstance()->_server[$param])) {
             return false;
         }
 
@@ -162,7 +188,7 @@ class Params
      */
     public static function getServerParamsAsArray($xss_check = true)
     {
-        $value = self::_purify(self::$_server, $xss_check);
+        $value = self::_purify(self::newInstance()->_server, $xss_check);
 
         if (get_magic_quotes_gpc()) {
             return strip_slashes_extended($value);
@@ -191,7 +217,7 @@ class Params
      */
     public static function setParam($key, $value)
     {
-        self::$_request[$key] = $value;
+        self::newInstance()->_request[$key] = $value;
     }
 
     /**
@@ -199,7 +225,7 @@ class Params
      */
     public static function unsetParam($key)
     {
-        unset(self::$_request[$key]);
+        unset(self::newInstance()->_request[$key]);
     }
 
     /**
@@ -237,7 +263,7 @@ class Params
                 return $_REQUEST;
                 break;
             default:
-                $value = self::$_request;
+                $value = self::newInstance()->_request;
                 break;
         }
 

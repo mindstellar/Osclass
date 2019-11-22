@@ -206,7 +206,6 @@ if (! defined('OSC_CRYPT_KEY')) {
 
     define('__OSC_LOADED__', true);
 
-    Params::init();
     Session::newInstance()->session_start();
 
 if (osc_timezone() != '') {
