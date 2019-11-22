@@ -26,7 +26,7 @@
  * Getting from View the $key index
  *
  * @param string $key
- * @return array
+ * @return mixed
  */
 function __get($key)
 {
