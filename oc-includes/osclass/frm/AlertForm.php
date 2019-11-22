@@ -1,5 +1,5 @@
-<?php if ( ! defined( 'ABS_PATH' ) ) {
-    exit( 'ABS_PATH is not loaded. Direct access is not allowed.' );
+<?php if (!defined('ABS_PATH')) {
+    exit('ABS_PATH is not loaded. Direct access is not allowed.');
 }
 
 /*
@@ -18,17 +18,19 @@
  * limitations under the License.
  */
 
-    /**
-     * Class AlertForm
-     */
-class AlertForm extends Form {
+/**
+ * Class AlertForm
+ */
+class AlertForm extends Form
+{
 
     /**
      * @return bool
      */
     public static function user_id_hidden()
     {
-        parent::generic_input_hidden('alert_userId', osc_logged_user_id() );
+        parent::generic_input_hidden('alert_userId', osc_logged_user_id());
+
         return true;
     }
 
@@ -37,7 +39,8 @@ class AlertForm extends Form {
      */
     public static function email_hidden()
     {
-        parent::generic_input_hidden('alert_email', osc_logged_user_email() );
+        parent::generic_input_hidden('alert_email', osc_logged_user_email());
+
         return true;
     }
 
@@ -55,10 +58,11 @@ class AlertForm extends Form {
     public static function email_text()
     {
         $value = '';
-        if ( osc_logged_user_email() == '' ) {
+        if (osc_logged_user_email() == '') {
             $value = self::default_email_text();
         }
-        parent::generic_input_text('alert_email', $value );
+        parent::generic_input_text('alert_email', $value);
+
         return true;
     }
 
@@ -68,6 +72,7 @@ class AlertForm extends Form {
     public static function page_hidden()
     {
         parent::generic_input_hidden('page', 'search');
+
         return true;
     }
 
@@ -76,8 +81,8 @@ class AlertForm extends Form {
      */
     public static function alert_hidden()
     {
-        parent::generic_input_hidden('alert', osc_search_alert() );
+        parent::generic_input_hidden('alert', osc_search_alert());
+
         return true;
     }
 }
-

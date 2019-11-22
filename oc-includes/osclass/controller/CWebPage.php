@@ -1,5 +1,5 @@
-<?php if ( ! defined( 'ABS_PATH' ) ) {
-    exit( 'ABS_PATH is not loaded. Direct access is not allowed.' );
+<?php if (!defined('ABS_PATH')) {
+    exit('ABS_PATH is not loaded. Direct access is not allowed.');
 }
 
 /*
@@ -18,9 +18,9 @@
  * limitations under the License.
  */
 
-    /**
-     * Class CWebPage
-     */
+/**
+ * Class CWebPage
+ */
 class CWebPage extends BaseModel
 {
     public $pageManager;
@@ -30,53 +30,66 @@ class CWebPage extends BaseModel
         parent::__construct();
 
         $this->pageManager = Page::newInstance();
-        osc_run_hook( 'init_page' );
+        osc_run_hook('init_page');
     }
 
     public function doModel()
     {
-        $id   = Params::getParam('id');
+        $id = Params::getParam('id');
         $page = false;
 
-        if ( is_numeric($id) ) {
+        if (is_numeric($id)) {
             $page = $this->pageManager->findByPrimaryKey($id);
         } else {
             $page = $this->pageManager->findByInternalName(Params::getParam('slug'));
         }
 
         // page not found
-        if ( $page == false ) {
+        if ($page == false) {
             $this->do404();
+
             return;
         }
 
         // this page shouldn't be shown (i.e.: e-mail templates)
-        if ( $page['b_indelible'] == 1 ) {
+        if ($page['b_indelible'] == 1) {
             $this->do404();
+
             return;
         }
 
         $kwords = array('{WEB_URL}', '{WEB_TITLE}');
         $rwords = array(osc_base_url(), osc_page_title());
         foreach ($page['locale'] as $k => $v) {
-            $page['locale'][$k]['s_title'] = str_ireplace($kwords, $rwords, osc_apply_filter('email_description', $v['s_title']));
-            $page['locale'][$k]['s_text'] = str_ireplace($kwords, $rwords, osc_apply_filter('email_description', $v['s_text']));
+            $page['locale'][$k]['s_title'] = str_ireplace(
+                $kwords,
+                $rwords,
+                osc_apply_filter('email_description', $v['s_title'])
+            );
+            $page['locale'][$k]['s_text']  =
+                str_ireplace($kwords, $rwords, osc_apply_filter('email_description', $v['s_text']));
         }
 
         // export $page content to View
         $this->_exportVariableToView('page', $page);
-        if ( Params::getParam('lang') != '' ) {
+        if (Params::getParam('lang') != '') {
             Session::newInstance()->_set('userLocale', Params::getParam('lang'));
         }
 
         $meta = json_decode($page['s_meta'], true);
 
         // load the right template file
-        if ( file_exists(osc_themes_path() . osc_theme() . '/page-' . $page['s_internal_name'] . '.php') ) {
+        if (file_exists(osc_themes_path() . osc_theme() . '/page-' . $page['s_internal_name']
+            . '.php')
+        ) {
             $this->doView('page-' . $page['s_internal_name'] . '.php');
-        } else if ( isset($meta['template']) && file_exists(osc_themes_path() . osc_theme() . '/' . $meta['template']) ) {
+        } elseif (isset($meta['template'])
+            && file_exists(osc_themes_path() . osc_theme() . '/' . $meta['template'])
+        ) {
             $this->doView($meta['template']);
-        } else if ( isset($meta['template']) && file_exists(osc_plugins_path() . '/' . $meta['template']) ) {
+        } elseif (isset($meta['template'])
+            && file_exists(osc_plugins_path() . '/' . $meta['template'])
+        ) {
             osc_run_hook('before_html');
             require osc_plugins_path() . '/' . $meta['template'];
             Session::newInstance()->_clearVariables();
@@ -100,5 +113,4 @@ class CWebPage extends BaseModel
     }
 }
 
-    /* file end: ./CWebPage.php */
-
+/* file end: ./CWebPage.php */

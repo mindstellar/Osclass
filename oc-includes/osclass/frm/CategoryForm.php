@@ -1,5 +1,5 @@
-<?php if ( ! defined( 'ABS_PATH' ) ) {
-    exit( 'ABS_PATH is not loaded. Direct access is not allowed.' );
+<?php if (!defined('ABS_PATH')) {
+    exit('ABS_PATH is not loaded. Direct access is not allowed.');
 }
 
 /*
@@ -18,9 +18,9 @@
  * limitations under the License.
  */
 
-    /**
-     * Class CategoryForm
-     */
+/**
+ * Class CategoryForm
+ */
 class CategoryForm extends Form
 {
     /**
@@ -28,7 +28,7 @@ class CategoryForm extends Form
      */
     public static function primary_input_hidden($category)
     {
-        parent::generic_input_hidden( 'id', $category[ 'pk_i_id' ]);
+        parent::generic_input_hidden('id', $category['pk_i_id']);
     }
 
     /**
@@ -37,16 +37,21 @@ class CategoryForm extends Form
      * @param null   $default_item
      * @param string $name
      */
-    public static function category_select($categories, $category, $default_item = null, $name = 'sCategory')
-    {
+    public static function category_select(
+        $categories,
+        $category,
+        $default_item = null,
+        $name = 'sCategory'
+    ) {
         echo '<select name="' . $name . '" id="' . $name . '">';
         if (isset($default_item)) {
             echo '<option value="">' . $default_item . '</option>';
         }
         foreach ($categories as $c) {
-            echo '<option value="' . $c['pk_i_id'] . '"' . ( ($category['pk_i_id'] == $c['pk_i_id']) ? 'selected="selected"' : '' ) . '>' . $c['s_name'] . '</option>';
+            echo '<option value="' . $c['pk_i_id'] . '"' . (($category['pk_i_id'] == $c['pk_i_id'])
+                    ? 'selected="selected"' : '') . '>' . $c['s_name'] . '</option>';
             if (isset($c['categories']) && is_array($c['categories'])) {
-                self::subcategory_select( $c[ 'categories' ], $category, $default_item, 1 );
+                self::subcategory_select($c['categories'], $category, $default_item, 1);
             }
         }
         echo '</select>';
@@ -58,17 +63,22 @@ class CategoryForm extends Form
      * @param null $default_item
      * @param int  $deep
      */
-    public static function subcategory_select($categories, $category, $default_item = null, $deep = 0)
-    {
+    public static function subcategory_select(
+        $categories,
+        $category,
+        $default_item = null,
+        $deep = 0
+    ) {
         $deep_string = '';
-        for ($var = 0; $var<$deep; $var++) {
+        for ($var = 0; $var < $deep; $var++) {
             $deep_string .= '&nbsp;&nbsp;';
         }
         $deep++;
         foreach ($categories as $c) {
-            echo '<option value="' . $c['pk_i_id'] . '"' . ( ($category['pk_i_id'] == $c['pk_i_id']) ? 'selected="selected"' : '' ) . '>' . $deep_string.$c['s_name'] . '</option>';
+            echo '<option value="' . $c['pk_i_id'] . '"' . (($category['pk_i_id'] == $c['pk_i_id'])
+                    ? 'selected="selected"' : '') . '>' . $deep_string . $c['s_name'] . '</option>';
             if (isset($c['categories']) && is_array($c['categories'])) {
-                self::subcategory_select( $c[ 'categories' ], $category, $default_item, $deep );
+                self::subcategory_select($c['categories'], $category, $default_item, $deep);
             }
         }
     }
@@ -80,7 +90,7 @@ class CategoryForm extends Form
      */
     public static function categories_tree($categories = null, $selected = null, $depth = 0)
     {
-        if ( ( $categories != null ) && is_array($categories) ) {
+        if (($categories != null) && is_array($categories)) {
             echo '<ul id="cat' . $categories[0]['fk_i_parent_id'] . '">';
 
             $d_string = '';
@@ -90,8 +100,12 @@ class CategoryForm extends Form
 
             foreach ($categories as $c) {
                 echo '<li>';
-                echo $d_string . '<input type="checkbox" name="categories[]" value="' . $c['pk_i_id'] . '" onclick="javascript:checkCat(\'' . $c['pk_i_id'] . '\', this.checked);" ' . ( in_array($c['pk_i_id'], $selected) ? 'checked="checked"' : '' ) . ' />' . ( ( $depth == 0 ) ? '<span>' : '' ) . $c['s_name'] . ( ( $depth == 0 ) ? '</span>' : '' );
-                self::categories_tree( $c[ 'categories' ], $selected, $depth + 1 );
+                echo $d_string . '<input type="checkbox" name="categories[]" value="'
+                    . $c['pk_i_id'] . '" onclick="javascript:checkCat(\'' . $c['pk_i_id']
+                    . '\', this.checked);" ' . (in_array($c['pk_i_id'], $selected)
+                        ? 'checked="checked"' : '') . ' />' . (($depth == 0) ? '<span>' : '')
+                    . $c['s_name'] . (($depth == 0) ? '</span>' : '');
+                self::categories_tree($c['categories'], $selected, $depth + 1);
                 echo '</li>';
             }
             echo '</ul>';
@@ -103,7 +117,9 @@ class CategoryForm extends Form
      */
     public static function expiration_days_input_text($category = null)
     {
-        parent::generic_input_text( 'i_expiration_days', ( isset($category) && isset($category['i_expiration_days'])) ? $category[ 'i_expiration_days' ] : '', 3);
+        parent::generic_input_text('i_expiration_days',
+            (isset($category) && isset($category['i_expiration_days']))
+                ? $category['i_expiration_days'] : '', 3);
     }
 
     /**
@@ -111,7 +127,8 @@ class CategoryForm extends Form
      */
     public static function position_input_text($category = null)
     {
-        parent::generic_input_text( 'i_position', ( isset($category) && isset($category['i_position'])) ? $category[ 'i_position' ] : '', 3);
+        parent::generic_input_text('i_position',
+            (isset($category) && isset($category['i_position'])) ? $category['i_position'] : '', 3);
     }
 
     /**
@@ -119,7 +136,8 @@ class CategoryForm extends Form
      */
     public static function enabled_input_checkbox($category = null)
     {
-        parent::generic_input_checkbox( 'b_enabled', '1', ( isset( $category ) && isset( $category[ 'b_enabled' ] ) && $category[ 'b_enabled' ] == 1 ) );
+        parent::generic_input_checkbox('b_enabled', '1',
+            (isset($category) && isset($category['b_enabled']) && $category['b_enabled'] == 1));
     }
 
     /**
@@ -127,8 +145,8 @@ class CategoryForm extends Form
      */
     public static function apply_changes_to_subcategories($category = null)
     {
-        if ($category['fk_i_parent_id']==null) {
-            parent::generic_input_checkbox( 'apply_changes_to_subcategories', '1', true);
+        if ($category['fk_i_parent_id'] == null) {
+            parent::generic_input_checkbox('apply_changes_to_subcategories', '1', true);
         }
     }
 
@@ -137,7 +155,9 @@ class CategoryForm extends Form
      */
     public static function price_enabled_for_category($category = null)
     {
-        parent::generic_input_checkbox( 'b_price_enabled', '1', ( isset( $category ) && isset( $category[ 'b_price_enabled' ] ) && $category[ 'b_price_enabled' ] == 1 ) );
+        parent::generic_input_checkbox('b_price_enabled', '1',
+            (isset($category) && isset($category['b_price_enabled'])
+                && $category['b_price_enabled'] == 1));
     }
 
     /**
@@ -146,28 +166,36 @@ class CategoryForm extends Form
      */
     public static function multilanguage_name_description($locales, $category = null)
     {
-        $tabs = array();
+        $tabs    = array();
         $content = array();
         foreach ($locales as $locale) {
-                $value = isset($category['locale'][$locale['pk_c_code']]) ? $category['locale'][$locale['pk_c_code']]['s_name'] : '';
-                $name = $locale['pk_c_code'] . '#s_name';
-                $nameTextarea = $locale['pk_c_code'] . '#s_description';
-                $valueTextarea = isset($category['locale'][$locale['pk_c_code']]) ? $category['locale'][$locale['pk_c_code']]['s_description'] : '';
+            $value         = isset($category['locale'][$locale['pk_c_code']])
+                ? $category['locale'][$locale['pk_c_code']]['s_name'] : '';
+            $name          = $locale['pk_c_code'] . '#s_name';
+            $nameTextarea  = $locale['pk_c_code'] . '#s_description';
+            $valueTextarea = isset($category['locale'][$locale['pk_c_code']])
+                ? $category['locale'][$locale['pk_c_code']]['s_description'] : '';
 
-                $contentTemp  = '<div id="'.$category['pk_i_id'].'-'.$locale['pk_c_code'].'" class="category-details-form">';
-                $contentTemp .= '<div class="FormElement"><label>' . __('Name') . '</label><input id="' . $name .'" type="text" name="' . $name .'" value="' . osc_esc_html(htmlentities( $value, ENT_COMPAT, 'UTF-8' )) . '"/></div>';
-                $contentTemp .= '<div class="FormElement"><label>' . __('Description') . '</label>';
-                $contentTemp .= '<textarea id="' . $nameTextarea . '" name="' . $nameTextarea . '" rows="10">' . $valueTextarea . '</textarea>';
-                $contentTemp .= '</div></div>';
-                $tabs[] = '<li><a href="#'.$category['pk_i_id'].'-'.$locale['pk_c_code'].'">' . $locale['s_name'] . '</a></li>';
-                $content[] = $contentTemp;
+            $contentTemp = '<div id="' . $category['pk_i_id'] . '-' . $locale['pk_c_code']
+                . '" class="category-details-form">';
+            $contentTemp .= '<div class="FormElement"><label>' . __('Name') . '</label><input id="'
+                . $name . '" type="text" name="' . $name . '" value="'
+                . osc_esc_html(htmlentities($value, ENT_COMPAT, 'UTF-8')) . '"/></div>';
+            $contentTemp .= '<div class="FormElement"><label>' . __('Description') . '</label>';
+            $contentTemp .= '<textarea id="' . $nameTextarea . '" name="' . $nameTextarea
+                . '" rows="10">' . $valueTextarea . '</textarea>';
+            $contentTemp .= '</div></div>';
+            $tabs[]      =
+                '<li><a href="#' . $category['pk_i_id'] . '-' . $locale['pk_c_code'] . '">'
+                . $locale['s_name'] . '</a></li>';
+            $content[]   = $contentTemp;
         }
-         echo '<div class="ui-osc-tabs osc-tab">';
-         echo '<ul>' . implode( '', $tabs) . '</ul>';
-         echo implode( '', $content);
-         echo '</div>';
+        echo '<div class="ui-osc-tabs osc-tab">';
+        echo '<ul>' . implode('', $tabs) . '</ul>';
+        echo implode('', $content);
+        echo '</div>';
     }
 }
 
-    /* file end: ./oc-includes/osclass/frm/CategoryForm.php */
+/* file end: ./oc-includes/osclass/frm/CategoryForm.php */
 

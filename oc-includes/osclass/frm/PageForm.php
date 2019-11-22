@@ -1,5 +1,5 @@
-<?php if ( ! defined( 'ABS_PATH' ) ) {
-    exit( 'ABS_PATH is not loaded. Direct access is not allowed.' );
+<?php if (!defined('ABS_PATH')) {
+    exit('ABS_PATH is not loaded. Direct access is not allowed.');
 }
 
 /*
@@ -18,10 +18,11 @@
  * limitations under the License.
  */
 
-    /**
-     * Class PageForm
-     */
-class PageForm extends Form {
+/**
+ * Class PageForm
+ */
+class PageForm extends Form
+{
 
     /**
      * @param null $page
@@ -29,7 +30,7 @@ class PageForm extends Form {
     public static function primary_input_hidden($page = null)
     {
         if (isset($page['pk_i_id'])) {
-            parent::generic_input_hidden( 'id', $page[ 'pk_i_id' ]);
+            parent::generic_input_hidden('id', $page['pk_i_id']);
         }
     }
 
@@ -39,13 +40,14 @@ class PageForm extends Form {
     public static function internal_name_input_text($page = null)
     {
         $internal_name = '';
-        if ( is_array($page) && isset($page['s_internal_name']) ) {
+        if (is_array($page) && isset($page['s_internal_name'])) {
             $internal_name = $page['s_internal_name'];
         }
-        if ( Session::newInstance()->_getForm('s_internal_name') != '' ) {
+        if (Session::newInstance()->_getForm('s_internal_name') != '') {
             $internal_name = Session::newInstance()->_getForm('s_internal_name');
         }
-        parent::generic_input_text( 's_internal_name', $internal_name, null, ( isset( $page[ 'b_indelible' ] ) && $page[ 'b_indelible' ] == 1 ) );
+        parent::generic_input_text('s_internal_name', $internal_name, null,
+            (isset($page['b_indelible']) && $page['b_indelible'] == 1));
     }
 
     /**
@@ -54,11 +56,11 @@ class PageForm extends Form {
     public static function link_checkbox($page = null)
     {
         $checked = true;
-        if ( is_array($page) && isset($page['b_link']) && $page['b_link']==0 ) {
+        if (is_array($page) && isset($page['b_link']) && $page['b_link'] == 0) {
             $checked = false;
         }
 
-        parent::generic_input_checkbox( 'b_link', '1', $checked);
+        parent::generic_input_checkbox('b_link', '1', $checked);
     }
 
     /**
@@ -68,10 +70,10 @@ class PageForm extends Form {
     public static function multilanguage_name_description($locales, $page = null)
     {
         $num_locales = count($locales);
-        if ( $num_locales > 1 ) {
+        if ($num_locales > 1) {
             echo '<div class="tabber">';
         }
-        $aFieldsDescription = Session::newInstance()->_getForm( 'aFieldsDescription' );
+        $aFieldsDescription = Session::newInstance()->_getForm('aFieldsDescription');
         foreach ($locales as $locale) {
             if ($num_locales > 1) {
                 echo '<div class="tabbertab">';
@@ -84,7 +86,10 @@ class PageForm extends Form {
             if (isset($page['locale'][$locale['pk_c_code']])) {
                 $title = $page['locale'][$locale['pk_c_code']]['s_title'];
             }
-            if ( isset($aFieldsDescription[$locale['pk_c_code']]) && isset($aFieldsDescription[$locale['pk_c_code']]['s_title']) &&$aFieldsDescription[$locale['pk_c_code']]['s_title'] != '' ) {
+            if (isset($aFieldsDescription[$locale['pk_c_code']])
+                && isset($aFieldsDescription[$locale['pk_c_code']]['s_title'])
+                && $aFieldsDescription[$locale['pk_c_code']]['s_title'] != ''
+            ) {
                 $title = $aFieldsDescription[$locale['pk_c_code']]['s_title'];
             }
             parent::generic_input_text($locale['pk_c_code'] . '#s_title', $title);
@@ -97,7 +102,10 @@ class PageForm extends Form {
             if (isset($page['locale'][$locale['pk_c_code']])) {
                 $description = $page['locale'][$locale['pk_c_code']]['s_text'];
             }
-            if ( isset($aFieldsDescription[$locale['pk_c_code']]) && isset($aFieldsDescription[$locale['pk_c_code']]['s_text']) &&$aFieldsDescription[$locale['pk_c_code']]['s_text'] != '' ) {
+            if (isset($aFieldsDescription[$locale['pk_c_code']])
+                && isset($aFieldsDescription[$locale['pk_c_code']]['s_text'])
+                && $aFieldsDescription[$locale['pk_c_code']]['s_text'] != ''
+            ) {
                 $description = $aFieldsDescription[$locale['pk_c_code']]['s_text'];
             }
             parent::generic_textarea($locale['pk_c_code'] . '#s_text', $description);
@@ -108,7 +116,7 @@ class PageForm extends Form {
             }
         }
         if ($num_locales > 1) {
-               echo '</div>';
+            echo '</div>';
         }
     }
 }

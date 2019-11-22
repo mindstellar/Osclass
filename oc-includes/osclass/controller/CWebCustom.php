@@ -1,5 +1,5 @@
-<?php if ( ! defined( 'ABS_PATH' ) ) {
-    exit( 'ABS_PATH is not loaded. Direct access is not allowed.' );
+<?php if (!defined('ABS_PATH')) {
+    exit('ABS_PATH is not loaded. Direct access is not allowed.');
 }
 
 /*
@@ -18,16 +18,16 @@
  * limitations under the License.
  */
 
-    /**
-     * Class CWebCustom
-     */
+/**
+ * Class CWebCustom
+ */
 class CWebCustom extends BaseModel
 {
     public function __construct()
     {
         parent::__construct();
         //specific things for this class
-        osc_run_hook( 'init_custom' );
+        osc_run_hook('init_custom');
     }
 
     //Business Layer...
@@ -36,9 +36,9 @@ class CWebCustom extends BaseModel
         $user_menu = false;
         if (Params::existParam('route')) {
             $routes = Rewrite::newInstance()->getRoutes();
-            $rid = Params::getParam('route');
-            $file = '../';
-            if (isset($routes[$rid]) && isset($routes[$rid]['file'])) {
+            $rid    = Params::getParam('route');
+            $file   = '../';
+            if (isset($routes[$rid], $routes[$rid]['file'])) {
                 $file = $routes[$rid]['file'];
                 $user_menu = $routes[$rid]['user_menu'];
             }
@@ -49,14 +49,20 @@ class CWebCustom extends BaseModel
         }
 
         // valid file?
-        if ( strpos($file, '../') !== false || strpos($file, '..\\') !==false || stripos($file, '/admin/') !== false ) { //If the file is inside an "admin" folder, it should NOT be opened in frontend
+        if (strpos($file, '../') !== false || strpos($file, '..\\') !== false
+            || stripos($file, '/admin/') !== false
+        ) { //If the file is inside an "admin" folder, it should NOT be opened in frontend
             $this->do404();
+
             return;
         }
 
         // check if the file exists
-        if ( !file_exists(osc_plugins_path() . $file) && !file_exists(osc_themes_path() . osc_theme() . '/plugins/' . $file) ) {
+        if (!file_exists(osc_plugins_path() . $file)
+            && !file_exists(osc_themes_path() . osc_theme() . '/plugins/' . $file)
+        ) {
             $this->do404();
+
             return;
         }
 
@@ -84,11 +90,11 @@ class CWebCustom extends BaseModel
      */
     public function doView($file)
     {
-        osc_run_hook( 'before_html' );
+        osc_run_hook('before_html');
         osc_current_web_theme_path($file);
         Session::newInstance()->_clearVariables();
-        osc_run_hook( 'after_html' );
+        osc_run_hook('after_html');
     }
 }
 
-    /* file end: ./CWebCustom.php */
+/* file end: ./CWebCustom.php */
