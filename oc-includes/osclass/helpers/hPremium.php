@@ -620,7 +620,8 @@ function osc_count_premium_resources()
             ItemResource::newInstance()->getAllResourcesFromItem(osc_premium_id()));
     }
 
-    return (int)View::newInstance()->_count('resources');;
+    return (int)View::newInstance()->_count('resources');
+    ;
 }
 
 
