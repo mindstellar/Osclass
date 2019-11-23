@@ -56,7 +56,7 @@ class LogOsclass extends Logger
      * @param array  $params
      *
      */
-    public function __construct($params)
+    public function __construct($params = array())
     {
         if (defined(OSC_DEBUG) && OSC_DEBUG === true) {
             $this->debug_enabled = true;
@@ -68,7 +68,7 @@ class LogOsclass extends Logger
     /**
      * @return LogOsclass
      */
-    public static function newInstance($params)
+    public static function newInstance($params = array())
     {
         if (!isset(self::$instance)) {
             self::$instance = new self($params);
