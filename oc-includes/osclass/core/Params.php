@@ -1,22 +1,22 @@
 <?php
+
 /**
  * Class Params
  */
 class Params
 {
-    private static $purifier;
-    private static $config;
-    private static $instance;
-    private $request;
-    private $server;
+    private static $HTMLPurifier;
+    private static $request;
+    private static $server;
 
-    public function __construct()
+    public static function init()
     {
-        $this->request = array_merge($_GET, $_POST);
-        $this->server  = $_SERVER;
+        self::$request = array_merge($_GET, $_POST);
+        self::$server  = $_SERVER;
     }
 
     /**
+     * Return HTMLPurified param
      * @param      $param
      * @param bool $html_encode
      * @param bool $xss_check
@@ -24,98 +24,67 @@ class Params
      *
      * @return mixed
      */
-    public static function getParam(
-        $param,
-        $html_encode = false,
-        $xss_check = true,
-        $quotes_encode = true
-    ) {
+    public static function getParam($param, $html_encode = false, $xss_check = true, $quotes_encode = true)
+    {
         if ($param === '') {
             return '';
         }
-        if (!isset(self::newInstance()->request[$param])) {
+        if (!isset(self::$request[$param])) {
             return '';
         }
 
-        $value = self::purify(self::newInstance()->request[$param], $xss_check);
+        $value = self::purify(self::$request[$param], $html_encode, $xss_check, $quotes_encode);
 
-        if ($html_encode) {
-            if ($quotes_encode) {
-                return htmlspecialchars(stripslashes($value), ENT_QUOTES);
-            }
-
-            return htmlspecialchars(stripslashes($value), ENT_NOQUOTES);
-        }
-
-        if (get_magic_quotes_gpc()) {
-            $value = strip_slashes_extended($value);
-        }
 
         return $value;
     }
 
     /**
-     * @return \Params Singleton
-     */
-    public static function newInstance()
-    {
-        if (!isset(self::$instance)) {
-            self::$instance = new self;
-        }
-
-        return self::$instance;
-    }
-
-    /**
-     * @param $value
-     * @param $xss_check
+     * Function to purify given string or array
+     * Should be moved to separate class
+     * @param      $value
+     *
+     * @param bool $html_encode
+     * @param bool $xss_check
+     * @param bool $quotes_encode
      *
      * @return string
      */
-    private static function purify($value, $xss_check)
+    private static function purify($value, $html_encode = false, $xss_check = true, $quotes_encode = true)
     {
-        if (!$xss_check) {
+        if ($html_encode === false && $xss_check === false && $quotes_encode === false) {
             return $value;
-        }
-
-        self::setHTMLPurifierInstance();
-
-        if (!isset(self::$purifier)) {
-            self::$purifier = new HTMLPurifier(self::$config);
         }
 
         if (is_array($value)) {
             foreach ($value as $k => &$v) {
-                $v = self::purify($v, $xss_check); // recursive
+                $v = self::purify($v, $html_encode, $xss_check, $quotes_encode); // recursive
             }
         } else {
-            $value = self::$purifier->purify($value);
+            if ($xss_check === true) {
+                if (self::$HTMLPurifier === null) {
+                    $purifier_config = HTMLPurifier_Config::createDefault();
+                    $purifier_config->set('HTML.Allowed', '');
+                    $purifier_config->set('Cache.SerializerPath', osc_uploads_path());
+                    self::$HTMLPurifier = new HTMLPurifier($purifier_config);
+                }
+
+                $value = self::$HTMLPurifier->purify($value);
+            }
+
+            if ($html_encode === true) {
+                if ($quotes_encode === true) {
+                    return htmlspecialchars(stripslashes($value), ENT_QUOTES);
+                }
+                return htmlspecialchars(stripslashes($value), ENT_NOQUOTES);
+            }
+
+            if (get_magic_quotes_gpc()) {
+                $value = strip_slashes_extended($value);
+            }
         }
 
         return $value;
-    }
-
-    /**
-     * Get HTML Purifier Instance, create new if not already exists
-     *
-     * @param array $config_options Loads configuration values from an array with the following
-     *                              structure: Namespace.Directive => Value
-     *                              http://htmlpurifier.org/live/configdoc/plain.html
-     */
-    public static function setHTMLPurifierInstance($config_options = null)
-    {
-        if ($config_options !== null && is_array($config_options)) {
-            $config       = HTMLPurifier_Config::create($config_options);
-            self::$config = $config;
-        } elseif (!isset(self::$config)) {
-            $config = HTMLPurifier_Config::createDefault();
-            $config->set('HTML.Allowed', '');
-            $config->set('Cache.SerializerPath', osc_uploads_path());
-            self::$config = $config;
-        }
-        if (self::$purifier === null) {
-            self::$purifier = new HTMLPurifier(self::$config);
-        }
     }
 
     /**
@@ -128,7 +97,7 @@ class Params
         if ($param === '') {
             return false;
         }
-        if (!isset(self::newInstance()->request[$param])) {
+        if (!isset(self::$request[$param])) {
             return false;
         }
 
@@ -143,32 +112,19 @@ class Params
      *
      * @return string
      */
-    public static function getServerParam(
-        $param,
-        $html_encode = false,
-        $xss_check = true,
-        $quotes_encode = true
-    ) {
+    public static function getServerParam($param, $html_encode = false, $xss_check = true, $quotes_encode = true)
+    {
         if ($param === '') {
             return '';
         }
-        if (!isset(self::newInstance()->server[$param])) {
+        if (!isset(self::$server[$param])) {
             return '';
         }
 
-        $value = self::purify(self::newInstance()->server[$param], $xss_check);
+        $value = self::$server[$param];
 
-        if ($html_encode) {
-            if ($quotes_encode) {
-                return htmlspecialchars(stripslashes($value), ENT_QUOTES);
-            }
+        $value = self::purify($value, $html_encode, $xss_check, $quotes_encode);
 
-            return htmlspecialchars(stripslashes($value), ENT_NOQUOTES);
-        }
-
-        if (get_magic_quotes_gpc()) {
-            $value = strip_slashes_extended($value);
-        }
 
         return $value;
     }
@@ -183,7 +139,7 @@ class Params
         if ($param === '') {
             return false;
         }
-        if (!isset(self::newInstance()->server[$param])) {
+        if (!isset(self::$server[$param])) {
             return false;
         }
 
@@ -197,11 +153,9 @@ class Params
      */
     public static function getServerParamsAsArray($xss_check = true)
     {
-        $value = self::purify(self::newInstance()->server, $xss_check);
+        $value = self::$server;
 
-        if (get_magic_quotes_gpc()) {
-            return strip_slashes_extended($value);
-        }
+        $value = self::purify($value, false, $xss_check, false);
 
         return $value;
     }
@@ -226,7 +180,7 @@ class Params
      */
     public static function setParam($key, $value)
     {
-        self::newInstance()->request[$key] = $value;
+        self::$request[$key] = $value;
     }
 
     /**
@@ -234,10 +188,12 @@ class Params
      */
     public static function unsetParam($key)
     {
-        unset(self::newInstance()->request[$key]);
+        unset(self::$request[$key]);
     }
 
     /**
+     * Will be removed do not use this
+     * @deprecated 4.0
      * return void
      */
     public static function _view()
@@ -247,9 +203,7 @@ class Params
 
     /**
      * @param string $what
-     * @param bool   $html_encode
      * @param bool   $xss_check
-     * @param bool   $quotes_encode
      *
      * @return array|string
      */
@@ -272,15 +226,11 @@ class Params
                 return $_REQUEST;
                 break;
             default:
-                $value = self::newInstance()->request;
+                $value = self::$request;
                 break;
         }
 
-        $value = self::purify($value, $xss_check);
-
-        if (get_magic_quotes_gpc()) {
-            return strip_slashes_extended($value);
-        }
+        $value = self::purify($value, false, $xss_check, false); // $xss_check, $quotes_encode );
 
         return $value;
     }

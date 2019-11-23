@@ -212,7 +212,7 @@ if (!defined('OSC_CRYPT_KEY')) {
 osc_cache_init();
 
 define('__OSC_LOADED__', true);
-
+Params::init();
 Session::newInstance()->session_start();
 
 if (osc_timezone() != '') {

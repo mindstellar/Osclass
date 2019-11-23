@@ -33,6 +33,7 @@
     require_once LIB_PATH . 'osclass/core/Translation.php';
     require_once LIB_PATH . 'osclass/classes/Plugins.php';
 
+    Params::init();
 if ( is_osclass_installed() ) {
     die();
 }

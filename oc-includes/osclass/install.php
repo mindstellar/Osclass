@@ -57,7 +57,7 @@ if ( extension_loaded( 'mysqli' ) ) {
     require_once LIB_PATH . 'osclass/classes/Plugins.php';
     require_once LIB_PATH . 'osclass/locales.php';
 
-
+    Params::init();
     Session::newInstance()->session_start();
 
     $locales = osc_listLocales();
