@@ -2,14 +2,14 @@
 
 // Theses classes were adapted from qqUploader
 
-    /**
-     * Class AjaxUploader
-     */
+/**
+ * Class AjaxUploader
+ */
 class AjaxUploader
 {
-    private $_allowedExtensions;
-    private $_sizeLimit;
-    private $_file;
+    private $allowedExtensions;
+    private $sizeLimit;
+    private $file;
 
     /**
      * AjaxUploader constructor.
@@ -25,15 +25,15 @@ class AjaxUploader
         if ($sizeLimit === null) {
             $sizeLimit = 1024 * osc_max_size_kb();
         }
-        $this->_allowedExtensions = $allowedExtensions;
-        $this->_sizeLimit         = $sizeLimit;
+        $this->allowedExtensions = $allowedExtensions;
+        $this->sizeLimit         = $sizeLimit;
 
         if (!Params::existServerParam('CONTENT_TYPE')) {
-            $this->_file = false;
-        } elseif (strpos(strtolower(Params::getServerParam('CONTENT_TYPE')), 'multipart/') === 0) {
-            $this->_file = new AjaxUploadedFileForm();
+            $this->file = false;
+        } elseif (stripos(Params::getServerParam('CONTENT_TYPE'), 'multipart/') === 0) {
+            $this->file = new AjaxUploadedFileForm();
         } else {
-            $this->_file = new AjaxUploadedFileXhr();
+            $this->file = new AjaxUploadedFileXhr();
         }
     }
 
@@ -42,7 +42,7 @@ class AjaxUploader
      */
     public function getOriginalName()
     {
-        return $this->_file->getOriginalName();
+        return $this->file->getOriginalName();
     }
 
     /**
@@ -57,37 +57,47 @@ class AjaxUploader
         if (!is_writable(dirname($uploadFilename))) {
             return array('error' => __("Server error. Upload directory isn't writable."));
         }
-        if (!$this->_file) {
+        if (!$this->file) {
             return array('error' => __('No files were uploaded.'));
         }
-        $size = $this->_file->getSize();
+        $size = $this->file->getSize();
         if ($size == 0) {
             return array('error' => __('File is empty'));
         }
-        if ($size > $this->_sizeLimit) {
+        if ($size > $this->sizeLimit) {
             return array('error' => __('File is too large'));
         }
 
-        $pathinfo = pathinfo($this->_file->getOriginalName());
+        $pathinfo = pathinfo($this->file->getOriginalName());
         $ext      = @$pathinfo['extension'];
         $uuid     = pathinfo($uploadFilename);
 
-        if ($this->_allowedExtensions && stripos($this->_allowedExtensions, strtolower($ext)) === false) {
+        if ($this->allowedExtensions && stripos($this->allowedExtensions, strtolower($ext)) === false) {
             @unlink($uploadFilename); // Wrong extension, remove it for security reasons
 
-            return array('error' => sprintf(__('File has an invalid extension, it should be one of %s.'), $this->_allowedExtensions));
+            return array(
+                'error' => sprintf(
+                    __('File has an invalid extension, it should be one of %s.'),
+                    $this->allowedExtensions
+                )
+            );
         }
 
         if (!$replace && file_exists($uploadFilename)) {
             return array('error' => 'Could not save uploaded file. File already exists');
         }
 
-        if ($this->_file->save($uploadFilename)) {
+        if ($this->file->save($uploadFilename)) {
             $result = $this->checkAllowedExt($uploadFilename);
             if (!$result) {
                 @unlink($uploadFilename); // Wrong extension, remove it for security reasons
 
-                return array('error' => sprintf(__('File has an invalid extension, it should be one of %s.'), $this->_allowedExtensions));
+                return array(
+                    'error' => sprintf(
+                        __('File has an invalid extension, it should be one of %s.'),
+                        $this->allowedExtensions
+                    )
+                );
             }
             $files = Session::newInstance()->_get('ajax_files');
             if (!is_array($files)) {
@@ -134,21 +144,20 @@ class AjaxUploader
             } elseif (function_exists('mime_content_type')) {
                 $fileMime = mime_content_type($file);
             } else {
-                // *WARNING* There's no way check the mime type of the file, you should not blindly trust on your users' input!
+                // *WARNING* There's no way check the mime type of the file,
+                // you should not blindly trust on your users' input!
                 $ftmp     = Params::getFiles('qqfile');
                 $fileMime = @$ftmp['type'];
             }
 
-            if (stripos($fileMime, 'image/') !== false) {
-                if (function_exists('getimagesize')) {
-                    $info = getimagesize($file);
-                    if (isset($info['mime'])) {
-                        $fileMime = $info['mime'];
-                    } else {
-                        $fileMime = '';
-                    }
-                };
-            };
+            if (function_exists('getimagesize') && (stripos($fileMime, 'image/') !== false)) {
+                $info = getimagesize($file);
+                if (isset($info['mime'])) {
+                    $fileMime = $info['mime'];
+                } else {
+                    $fileMime = '';
+                }
+            }
 
             if (in_array($fileMime, $aMimesAllowed, false)) {
                 return true;
@@ -159,9 +168,9 @@ class AjaxUploader
     }
 }
 
-    /**
-     * Class AjaxUploadedFileXhr
-     */
+/**
+ * Class AjaxUploadedFileXhr
+ */
 class AjaxUploadedFileXhr
 {
     public function __construct()
@@ -213,16 +222,16 @@ class AjaxUploadedFileXhr
     }
 }
 
-    /**
-     * Class AjaxUploadedFileForm
-     */
+/**
+ * Class AjaxUploadedFileForm
+ */
 class AjaxUploadedFileForm
 {
-    private $_file;
+    private $file;
 
     public function __construct()
     {
-        $this->_file = Params::getFiles('qqfile');
+        $this->file = Params::getFiles('qqfile');
     }
 
     /**
@@ -232,7 +241,7 @@ class AjaxUploadedFileForm
      */
     public function save($path)
     {
-        return move_uploaded_file($this->_file['tmp_name'], $path);
+        return move_uploaded_file($this->file['tmp_name'], $path);
     }
 
     /**
@@ -240,7 +249,7 @@ class AjaxUploadedFileForm
      */
     public function getOriginalName()
     {
-        return $this->_file['name'];
+        return $this->file['name'];
     }
 
     /**
@@ -248,6 +257,6 @@ class AjaxUploadedFileForm
      */
     public function getSize()
     {
-        return $this->_file['size'];
+        return $this->file['size'];
     }
 }

@@ -116,7 +116,7 @@ function osc_admin_base_path()
 
 
 /**
- * Gets the librarieas path
+ * Gets the libraries path
  *
  * @return string
  */

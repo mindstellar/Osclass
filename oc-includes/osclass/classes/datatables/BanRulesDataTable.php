@@ -1,6 +1,4 @@
-<?php if ( ! defined( 'ABS_PATH' ) ) {
-    exit( 'ABS_PATH is not loaded. Direct access is not allowed.' );
-}
+<?php
 
 /*
  * Copyright 2014 Osclass
@@ -50,7 +48,12 @@ class BanRulesDataTable extends DataTable
         $this->addTableHeader();
         $this->getDBParams($params);
 
-        $list_rules  = BanRule::newInstance()->search($this->start, $this->limit, $this->order_by['column_name'], $this->order_by['type'] );
+        $list_rules  = BanRule::newInstance()->search(
+            $this->start,
+            $this->limit,
+            $this->order_by['column_name'],
+            $this->order_by['type']
+        );
             
         $this->processData($list_rules['rules']);
         $this->totalFiltered = $list_rules['rows'];
@@ -68,7 +71,7 @@ class BanRulesDataTable extends DataTable
         $this->addColumn('email', __('E-mail rule'));
 
         $dummy = &$this;
-        osc_run_hook( 'admin_rules_table', $dummy);
+        osc_run_hook('admin_rules_table', $dummy);
     }
 
     /**
@@ -90,7 +93,7 @@ class BanRulesDataTable extends DataTable
                 $options_more = osc_apply_filter('more_actions_manage_rules', $options_more, $aRow);
                 // more actions
                 $moreOptions = '<li class="show-more">'.PHP_EOL.'<a href="#" class="show-more-trigger">'. __('Show more') .'...</a>'. PHP_EOL .'<ul>'. PHP_EOL;
-                foreach ( $options_more as $actual ) {
+                foreach ($options_more as $actual) {
                     $moreOptions .= '<li>'.$actual . '</li>' . PHP_EOL;
                 }
                 $moreOptions .= '</ul>'. PHP_EOL .'</li>'.PHP_EOL;
@@ -98,7 +101,7 @@ class BanRulesDataTable extends DataTable
                 $options = osc_apply_filter('actions_manage_rules', $options, $aRow);
                 // create list of actions
                 $auxOptions = '<ul>'.PHP_EOL;
-                foreach ( $options as $actual ) {
+                foreach ($options as $actual) {
                     $auxOptions .= '<li>'.$actual.'</li>'.PHP_EOL;
                 }
                 $auxOptions  .= $moreOptions;
@@ -125,12 +128,12 @@ class BanRulesDataTable extends DataTable
     private function getDBParams($_get)
     {
             
-        if ( !isset($_get['iDisplayStart']) ) {
+        if (!isset($_get['iDisplayStart'])) {
             $_get['iDisplayStart'] = 0;
         }
         $p_iPage      = 1;
-        if ( !is_numeric(Params::getParam('iPage')) || Params::getParam('iPage') < 1 ) {
-            Params::setParam('iPage', $p_iPage );
+        if (!is_numeric(Params::getParam('iPage')) || Params::getParam('iPage') < 1) {
+            Params::setParam('iPage', $p_iPage);
             $this->iPage = $p_iPage;
         } else {
             $this->iPage = Params::getParam('iPage');
@@ -139,19 +142,19 @@ class BanRulesDataTable extends DataTable
         $this->order_by['column_name'] = 'pk_i_id';
         $this->order_by['type'] = 'DESC';
         foreach ($_get as $k => $v) {
-            if ( $k === 'user') {
+            if ($k === 'user') {
                 $this->search = $v;
             }
-            if ( $k === 'userId' && $v != '') {
+            if ($k === 'userId' && $v != '') {
                 $this->withUserId = true;
                 $this->userId = $v;
             }
 
             /* for sorting */
-            if ( $k === 'iSortCol_0' ) {
+            if ($k === 'iSortCol_0') {
                 $this->order_by['column_name'] = $this->column_names[$v];
             }
-            if ( $k === 'sSortDir_0' ) {
+            if ($k === 'sSortDir_0') {
                 $this->order_by['type'] = $v;
             }
         }
@@ -160,9 +163,5 @@ class BanRulesDataTable extends DataTable
 
         $this->start = (int) $start;
         $this->limit = (int) $_get[ 'iDisplayLength' ];
-
-            
     }
-        
 }
-

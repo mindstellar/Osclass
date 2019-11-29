@@ -65,7 +65,6 @@ class CAdminUsers extends AdminSecBaseModel
                 break;
             case('create_post'):    // creating the user...
                                     osc_csrf_check();
-                                    require_once LIB_PATH . 'osclass/UserActions.php';
                                     $userActions = new UserActions(true);
                                     $success     = $userActions->add();
 
@@ -123,7 +122,6 @@ class CAdminUsers extends AdminSecBaseModel
                 break;
             case('edit_post'):      // edit post
                                     osc_csrf_check();
-                                    require_once LIB_PATH . 'osclass/UserActions.php';
                                     $userActions = new UserActions(true);
                                     $success = $userActions->edit( Params::getParam("id") );
                 if ($success==1) {
@@ -139,7 +137,6 @@ class CAdminUsers extends AdminSecBaseModel
             case('resend_activation'):
                                     //activate
                                     osc_csrf_check();
-                                    require_once LIB_PATH . 'osclass/UserActions.php';
                                     $iUpdated = 0;
                                     $userId   = Params::getParam('id');
                 if (!is_array($userId)) {
@@ -162,7 +159,6 @@ class CAdminUsers extends AdminSecBaseModel
                 break;
             case('activate'):       //activate
                                     osc_csrf_check();
-                                    require_once LIB_PATH . 'osclass/UserActions.php';
                                     $iUpdated = 0;
                                     $userId   = Params::getParam('id');
                 if ( !is_array($userId) ) {
@@ -186,7 +182,6 @@ class CAdminUsers extends AdminSecBaseModel
                 break;
             case('deactivate'):     //deactivate
                                     osc_csrf_check();
-                                    require_once LIB_PATH . 'osclass/UserActions.php';
                                     $iUpdated = 0;
                                     $userId   = Params::getParam('id');
 
@@ -211,7 +206,6 @@ class CAdminUsers extends AdminSecBaseModel
                 break;
             case('enable'):
                                     osc_csrf_check();
-                                    require_once LIB_PATH . 'osclass/UserActions.php';
                                     $iUpdated = 0;
                                     $userId   = Params::getParam('id');
                 if ( !is_array($userId) ) {
@@ -235,7 +229,6 @@ class CAdminUsers extends AdminSecBaseModel
                 break;
             case('disable'):
                                     osc_csrf_check();
-                                    require_once LIB_PATH . 'osclass/UserActions.php';
                                     $iUpdated = 0;
                                     $userId   = Params::getParam('id');
                 if ( !is_array($userId) ) {

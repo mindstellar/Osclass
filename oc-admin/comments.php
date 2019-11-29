@@ -213,8 +213,6 @@ class CAdminItemComments extends AdminSecBaseModel
                                         $this->redirectTo( osc_admin_base_url(true) . "?page=comments" );
                 break;
             default:
-                                        require_once osc_lib_path()."osclass/classes/datatables/CommentsDataTable.php";
-
                                         // set default iDisplayLength
                 if ( Params::getParam('iDisplayLength') != '' ) {
                     Cookie::newInstance()->push('listing_iDisplayLength', Params::getParam('iDisplayLength'));

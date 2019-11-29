@@ -1,5 +1,5 @@
-<?php if ( ! defined( 'ABS_PATH' ) ) {
-    exit( 'ABS_PATH is not loaded. Direct access is not allowed.' );
+<?php if (!defined('ABS_PATH')) {
+    exit('ABS_PATH is not loaded. Direct access is not allowed.');
 }
 
 /*
@@ -18,18 +18,19 @@
  * limitations under the License.
  */
 
-    /**
-     * PagesDataTable class
-     *
-     * @since 3.1
-     * @package Osclass
-     * @subpackage classes
-     * @author Osclass
-     */
+/**
+ * PagesDataTable class
+ *
+ * @since      3.1
+ * @package    Osclass
+ * @subpackage classes
+ * @author     Osclass
+ */
 class PagesDataTable extends DataTable
 {
 
     private $pages;
+    private $total_filtered;
 
     /**
      * @param $params
@@ -39,20 +40,20 @@ class PagesDataTable extends DataTable
      */
     public function table($params)
     {
-            
+
         $this->addTableHeader();
 
-        $start = ((int)$params['iPage']-1) * $params['iDisplayLength'];
+        $start = ((int)$params['iPage'] - 1) * $params['iDisplayLength'];
 
-        $this->start = (int) $start;
-        $this->limit = (int) $params[ 'iDisplayLength' ];
-            
+        $this->start = (int)$start;
+        $this->limit = (int)$params['iDisplayLength'];
+
         $pages = Page::newInstance()->listAll(0, null, null, $this->start, $this->limit);
         $this->processData($pages);
-            
-        $this->total = Page::newInstance()->count(0);
+
+        $this->total          = Page::newInstance()->count(0);
         $this->total_filtered = $this->total;
-            
+
         return $this->getData();
     }
 
@@ -65,7 +66,7 @@ class PagesDataTable extends DataTable
         $this->addColumn('order', __('Order'));
 
         $dummy = &$this;
-        osc_run_hook( 'admin_pages_table', $dummy);
+        osc_run_hook('admin_pages_table', $dummy);
     }
 
     /**
@@ -81,31 +82,40 @@ class PagesDataTable extends DataTable
                 $row     = array();
                 $content = array();
 
-                if ( isset($aRow['locale'][$prefLocale]) && !empty($aRow['locale'][$prefLocale]['s_title']) ) {
+                if (isset($aRow['locale'][$prefLocale]) && !empty($aRow['locale'][$prefLocale]['s_title'])) {
                     $content = $aRow['locale'][$prefLocale];
                 } else {
                     $content = current($aRow['locale']);
                 }
 
                 // -- options --
-                $options   = array();
-                View::newInstance()->_exportVariableToView('page', $aRow );
+                $options = array();
+                View::newInstance()->_exportVariableToView('page', $aRow);
                 $options[] = '<a href="' . osc_static_page_url() . '" target="_blank">' . __('View page') . '</a>';
-                $options[] = '<a href="' . osc_admin_base_url(true) . '?page=pages&amp;action=edit&amp;id=' . $aRow['pk_i_id'] . '">' . __('Edit') . '</a>';
-                if ( !$aRow['b_indelible'] ) {
-                    $options[] = '<a onclick="return delete_dialog(\'' . $aRow['pk_i_id'] . '\');" href="' . osc_admin_base_url(true) . '?page=pages&amp;action=delete&amp;id=' . $aRow['pk_i_id'] . '&amp;' . osc_csrf_token_url() . '">' . __('Delete') . '</a>';
+                $options[] =
+                    '<a href="' . osc_admin_base_url(true) . '?page=pages&amp;action=edit&amp;id=' . $aRow['pk_i_id']
+                    . '">' . __('Edit') . '</a>';
+                if (!$aRow['b_indelible']) {
+                    $options[] = '<a onclick="return delete_dialog(\'' . $aRow['pk_i_id'] . '\');" href="'
+                        . osc_admin_base_url(true) . '?page=pages&amp;action=delete&amp;id=' . $aRow['pk_i_id']
+                        . '&amp;' . osc_csrf_token_url() . '">' . __('Delete') . '</a>';
                 }
 
-                $auxOptions = '<ul>'.PHP_EOL;
-                foreach ( $options as $actual ) {
-                    $auxOptions .= '<li>'.$actual.'</li>'.PHP_EOL;
+                $auxOptions = '<ul>' . PHP_EOL;
+                foreach ($options as $actual) {
+                    $auxOptions .= '<li>' . $actual . '</li>' . PHP_EOL;
                 }
-                $actions = '<div class="actions">'.$auxOptions.'</div>'.PHP_EOL;
+                $actions = '<div class="actions">' . $auxOptions . '</div>' . PHP_EOL;
 
-                $row['bulkactions'] = '<input type="checkbox" name="id[]"" value="' . $aRow['pk_i_id'] . '"" />';
+                $row['bulkactions']   = '<input type="checkbox" name="id[]"" value="' . $aRow['pk_i_id'] . '"" />';
                 $row['internal_name'] = $aRow['s_internal_name'] . $actions;
-                $row['title'] = $content['s_title'];
-                $row['order'] = '<div class="order-box">' . $aRow['i_order'] . ' <img class="up" onclick="order_up(' . $aRow['pk_i_id'] . ');" src="' . osc_current_admin_theme_url('images/arrow_up.png') . '" alt="' . __('Up') . '" title="' . __('Up') . '" />  <img class="down" onclick="order_down(' . $aRow['pk_i_id'] . ');" src="' . osc_current_admin_theme_url('images/arrow_down.png') .'" alt="' . __('Down') . '" title="' . __('Down') . '" /></div>';
+                $row['title']         = $content['s_title'];
+                $row['order']         =
+                    '<div class="order-box">' . $aRow['i_order'] . ' <img class="up" onclick="order_up('
+                    . $aRow['pk_i_id'] . ');" src="' . osc_current_admin_theme_url('images/arrow_up.png') . '" alt="'
+                    . __('Up') . '" title="' . __('Up') . '" />  <img class="down" onclick="order_down('
+                    . $aRow['pk_i_id'] . ');" src="' . osc_current_admin_theme_url('images/arrow_down.png') . '" alt="'
+                    . __('Down') . '" title="' . __('Down') . '" /></div>';
 
                 $row = osc_apply_filter('pages_processing_row', $row, $aRow);
 
@@ -114,7 +124,5 @@ class PagesDataTable extends DataTable
             }
         }
     }
-        
+
 }
-
-

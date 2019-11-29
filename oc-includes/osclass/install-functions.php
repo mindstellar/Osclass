@@ -463,14 +463,14 @@ function oc_install()
             }
 
             return array('error' => __("config-sample.php doesn't exist. Check if everything is "
-                ."decompressed correctly."));
+                . 'decompressed correctly.'));
         }
         if (!is_writable(ABS_PATH)) {
             if (reportToOsclass()) {
                 LogOsclassInstaller::newInstance()
                     ->error(
                         __('Can\'t copy config-sample.php. Check if the root directory is writable.'),
-                        __FILE__ . "::" . __LINE__
+                        __FILE__ . '::' . __LINE__
                     );
             }
 
@@ -514,7 +514,6 @@ function oc_install()
         }
     }
 
-    require_once LIB_PATH . 'osclass/model/OSCLocale.php';
     $localeManager = OSCLocale::newInstance();
 
     $locales = osc_listLocales();
@@ -555,9 +554,9 @@ function oc_install()
             }
 
             return array('error' => sprintf(__('The file %s doesn\'t exist'), $file));
-        } else {
-            $sql .= file_get_contents($file);
         }
+
+        $sql .= file_get_contents($file);
     }
 
     $comm->importSQL($sql);
@@ -570,23 +569,22 @@ function oc_install()
                 ->error(sprintf(
                     __("Can't insert basic configuration. Error number: %s"),
                     $error_num
-                ), __FILE__ . "::" . __LINE__);
+                ), __FILE__ . '::' . __LINE__);
         }
 
-        switch ($error_num) {
-            case 1471:
-                return array('error' => __("Can't insert basic configuration. "
-                    ."This user has no privileges to 'INSERT' into the database."));
-                break;
-            default:
-                return array(
-                    'error' => sprintf(
-                        __("Can't insert basic configuration. Error number: %s"),
-                        $error_num
-                    )
-                );
-                break;
+        if ($error_num === 1471) {
+            return array(
+                'error' => __("Can't insert basic configuration. "
+                    . "This user has no privileges to 'INSERT' into the database.")
+            );
         }
+
+        return array(
+            'error' => sprintf(
+                __("Can't insert basic configuration. Error number: %s"),
+                $error_num
+            )
+        );
     }
 
     osc_set_preference('language', osc_current_admin_locale());
@@ -616,7 +614,9 @@ function oc_install_example_data()
 {
     require_once LIB_PATH . 'osclass/formatting.php';
     require LIB_PATH . 'osclass/installer/basic_data.php';
-    require_once LIB_PATH . 'osclass/model/Category.php';
+    require_once LIB_PATH . 'osclass/helpers/hSecurity.php';
+    require_once LIB_PATH . 'osclass/helpers/hValidate.php';
+    require_once LIB_PATH . 'osclass/helpers/hUsers.php';
     $mCat = Category::newInstance();
 
     if (!function_exists('osc_apply_filter')) {
@@ -644,30 +644,6 @@ function oc_install_example_data()
 
         $mCat->insert($fields, $aFieldsDescription);
     }
-
-    require_once LIB_PATH . 'osclass/model/Item.php';
-    require_once LIB_PATH . 'osclass/model/ItemComment.php';
-    require_once LIB_PATH . 'osclass/model/ItemLocation.php';
-    require_once LIB_PATH . 'osclass/model/ItemResource.php';
-    require_once LIB_PATH . 'osclass/model/ItemStats.php';
-    require_once LIB_PATH . 'osclass/model/User.php';
-    require_once LIB_PATH . 'osclass/model/Country.php';
-    require_once LIB_PATH . 'osclass/model/Region.php';
-    require_once LIB_PATH . 'osclass/model/City.php';
-    require_once LIB_PATH . 'osclass/model/CityArea.php';
-    require_once LIB_PATH . 'osclass/model/Field.php';
-    require_once LIB_PATH . 'osclass/model/Page.php';
-    require_once LIB_PATH . 'osclass/model/Log.php';
-
-    require_once LIB_PATH . 'osclass/model/CategoryStats.php';
-    require_once LIB_PATH . 'osclass/model/CountryStats.php';
-    require_once LIB_PATH . 'osclass/model/RegionStats.php';
-    require_once LIB_PATH . 'osclass/model/CityStats.php';
-
-    require_once LIB_PATH . 'osclass/helpers/hSecurity.php';
-    require_once LIB_PATH . 'osclass/helpers/hValidate.php';
-    require_once LIB_PATH . 'osclass/helpers/hUsers.php';
-    require_once LIB_PATH . 'osclass/ItemActions.php';
 
     $mItem = new ItemActions(true);
 
@@ -841,11 +817,7 @@ function is_osclass_installed()
  */
 function finish_installation($password)
 {
-    require_once LIB_PATH . 'osclass/model/Admin.php';
-    require_once LIB_PATH . 'osclass/model/Category.php';
-    require_once LIB_PATH . 'osclass/model/Item.php';
     require_once LIB_PATH . 'osclass/helpers/hPlugins.php';
-    require_once LIB_PATH . 'osclass/classes/Plugins.php';
 
     $data = array();
 
