@@ -1,6 +1,6 @@
 <?php use Gettext\Translator;
 
-if (! defined('ABS_PATH')) {
+if (!defined('ABS_PATH')) {
     exit('ABS_PATH is not loaded. Direct access is not allowed.');
 }
 
@@ -20,35 +20,13 @@ if (! defined('ABS_PATH')) {
  * limitations under the License.
  */
 
-    /**
-     * Class Translation
-     */
+/**
+ * Class Translation
+ */
 class Translation
 {
-    private $translator;
     private static $instance;
-
-    /**
-     * @param bool $install
-     *
-     * @return \Translation
-     */
-    public static function newInstance($install = false)
-    {
-        if (!self::$instance instanceof self) {
-            self::$instance = new self($install);
-        }
-        return self::$instance;
-    }
-
-    /**
-     * @return \Translation
-     */
-    public static function init()
-    {
-        self::$instance = new self();
-        return self::$instance;
-    }
+    private $translator;
 
     /**
      * Translation constructor.
@@ -71,16 +49,32 @@ class Translation
             $this->_load($core_file, 'core');
 
             // load messages
-            $domain = osc_apply_filter('theme', osc_theme());
-            $messages_file = osc_apply_filter('mo_theme_messages_path', osc_themes_path() . $domain . '/languages/' . $locale . '/messages.mo', $locale, $domain);
+            $domain        = osc_apply_filter('theme', osc_theme());
+            $messages_file = osc_apply_filter(
+                'mo_theme_messages_path',
+                osc_themes_path() . $domain . '/languages/' . $locale . '/messages.mo',
+                $locale,
+                $domain
+            );
 
             if (!file_exists($messages_file)) {
-                $messages_file = osc_apply_filter('mo_core_messages_path', osc_translations_path() . $locale . '/messages.mo', $locale);
+                $messages_file =
+                    osc_apply_filter(
+                        'mo_core_messages_path',
+                        osc_translations_path() . $locale . '/messages.mo',
+                        $locale
+                    );
             }
             $this->_load($messages_file, 'messages');
 
             // load theme
-            $theme_file = osc_apply_filter('mo_theme_path', osc_themes_path() . $domain . '/languages/' . $locale . '/theme.mo', $locale, $domain);
+            $theme_file =
+                osc_apply_filter(
+                    'mo_theme_path',
+                    osc_themes_path() . $domain . '/languages/' . $locale . '/theme.mo',
+                    $locale,
+                    $domain
+                );
             if (!file_exists($theme_file)) {
                 if (!file_exists(osc_themes_path() . $domain)) {
                     $domain = osc_theme();
@@ -92,8 +86,13 @@ class Translation
             // load plugins
             $aPlugins = Plugins::listEnabled();
             foreach ($aPlugins as $plugin) {
-                $domain = preg_replace('|/.*|', '', $plugin);
-                $plugin_file = osc_apply_filter('mo_plugin_path', osc_plugins_path() . $domain . '/languages/' . $locale . '/messages.mo', $locale, $domain);
+                $domain      = preg_replace('|/.*|', '', $plugin);
+                $plugin_file = osc_apply_filter(
+                    'mo_plugin_path',
+                    osc_plugins_path() . $domain . '/languages/' . $locale . '/messages.mo',
+                    $locale,
+                    $domain
+                );
                 if (file_exists($plugin_file)) {
                     $this->_load($plugin_file, $domain);
                 }
@@ -104,13 +103,6 @@ class Translation
         }
     }
 
-    /**
-     * @return \Gettext\Translator
-     */
-    public function _get()
-    {
-        return $this->translator;
-    }
     /**
      * @param $file
      * @param $domain
@@ -131,5 +123,37 @@ class Translation
         $this->translator->loadTranslations($translations);
 
         return $this;
+    }
+
+    /**
+     * @param bool $install
+     *
+     * @return \Translation
+     */
+    public static function newInstance($install = false)
+    {
+        if (!self::$instance instanceof self) {
+            self::$instance = new self($install);
+        }
+
+        return self::$instance;
+    }
+
+    /**
+     * @return \Translation
+     */
+    public static function init()
+    {
+        self::$instance = new self();
+
+        return self::$instance;
+    }
+
+    /**
+     * @return \Gettext\Translator
+     */
+    public function _get()
+    {
+        return $this->translator;
     }
 }

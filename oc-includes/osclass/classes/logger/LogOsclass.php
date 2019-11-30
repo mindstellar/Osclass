@@ -73,8 +73,22 @@ class LogOsclass extends Logger
         if (!isset(self::$instance)) {
             self::$instance = new self($params);
         }
+
         return self::$instance;
     }
+
+    /**
+     * Info method (write info message)
+     *
+     * @param string $message
+     *
+     * @return void
+     */
+    public function info($message = '', $caller = null)
+    {
+        $this->writeLog($message, 'INFO', $caller);
+    }
+
     /**
      * Write to log file
      *
@@ -126,18 +140,6 @@ class LogOsclass extends Logger
         // append new log
         $this->file = fopen($openFile, 'ab')
         or exit("Can't open $openFile! Please check permissions in oc-content directory");
-    }
-
-    /**
-     * Info method (write info message)
-     *
-     * @param string $message
-     *
-     * @return void
-     */
-    public function info($message = '', $caller = null)
-    {
-        $this->writeLog($message, 'INFO', $caller);
     }
 
     /**

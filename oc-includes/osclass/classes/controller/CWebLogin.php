@@ -195,9 +195,9 @@ class CWebLogin extends BaseModel
                 $this->redirectTo(osc_user_login_url());
                 break;
             case ('resend'):
-                $id = Params::getParam('id');
+                $id    = Params::getParam('id');
                 $email = Params::getParam('email');
-                $user = User::newInstance()->findByPrimaryKey($id);
+                $user  = User::newInstance()->findByPrimaryKey($id);
                 if ($id == '' || $email == '' || !isset($user) || $user['b_active'] == 1
                     || $email != $user['s_email']
                 ) {

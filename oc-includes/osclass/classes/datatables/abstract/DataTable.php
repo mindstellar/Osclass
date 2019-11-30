@@ -184,7 +184,4 @@ abstract class DataTable
     {
         return $this->rawRows;
     }
-
-
 }
-

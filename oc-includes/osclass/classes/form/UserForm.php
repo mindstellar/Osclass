@@ -27,7 +27,7 @@ class UserForm extends Form
     /**
      * @param $user
      */
-    static public function primary_input_hidden($user)
+    public static function primary_input_hidden($user)
     {
         parent::generic_input_hidden("id", (isset($user["pk_i_id"]) ? $user['pk_i_id'] : ''));
     }
@@ -35,40 +35,52 @@ class UserForm extends Form
     /**
      * @param null $user
      */
-    static public function name_text($user = null)
+    public static function name_text($user = null)
     {
         if (Session::newInstance()->_getForm('user_s_name') != '') {
             $user['s_name'] = Session::newInstance()->_getForm('user_s_name');
         }
-        parent::generic_input_text("s_name", isset($user['s_name']) ? $user['s_name'] : '', null,
-            false);
+        parent::generic_input_text(
+            "s_name",
+            isset($user['s_name']) ? $user['s_name'] : '',
+            null,
+            false
+        );
     }
 
     /**
      * @param null $user
      */
-    static public function username_text($user = null)
+    public static function username_text($user = null)
     {
         if (Session::newInstance()->_getForm('user_s_username') != '') {
             $user['s_username'] = Session::newInstance()->_getForm('user_s_username');
         }
-        parent::generic_input_text("s_username",
-            isset($user['s_username']) ? $user['s_username'] : '', null, false);
+        parent::generic_input_text(
+            "s_username",
+            isset($user['s_username']) ? $user['s_username'] : '',
+            null,
+            false
+        );
     }
 
     /**
      * @param null $user
      */
-    static public function email_login_text($user = null)
+    public static function email_login_text($user = null)
     {
-        parent::generic_input_text("email", isset($user['s_email']) ? $user['s_email'] : '', null,
-            false);
+        parent::generic_input_text(
+            "email",
+            isset($user['s_email']) ? $user['s_email'] : '',
+            null,
+            false
+        );
     }
 
     /**
      * @param null $user
      */
-    static public function password_login_text($user = null)
+    public static function password_login_text($user = null)
     {
         parent::generic_password("password", '', null, false);
     }
@@ -76,7 +88,7 @@ class UserForm extends Form
     /**
      * @param null $user
      */
-    static public function rememberme_login_checkbox($user = null)
+    public static function rememberme_login_checkbox($user = null)
     {
         parent::generic_input_checkbox("remember", '1', false);
     }
@@ -84,7 +96,7 @@ class UserForm extends Form
     /**
      * @param null $user
      */
-    static public function old_password_text($user = null)
+    public static function old_password_text($user = null)
     {
         parent::generic_password("old_password", '', null, false);
     }
@@ -92,7 +104,7 @@ class UserForm extends Form
     /**
      * @param null $user
      */
-    static public function password_text($user = null)
+    public static function password_text($user = null)
     {
         parent::generic_password("s_password", '', null, false);
     }
@@ -100,7 +112,7 @@ class UserForm extends Form
     /**
      * @param null $user
      */
-    static public function check_password_text($user = null)
+    public static function check_password_text($user = null)
     {
         parent::generic_password("s_password2", '', null, false);
     }
@@ -108,63 +120,69 @@ class UserForm extends Form
     /**
      * @param null $user
      */
-    static public function email_text($user = null)
+    public static function email_text($user = null)
     {
         if (Session::newInstance()->_getForm('user_s_email') != '') {
             $user['s_email'] = Session::newInstance()->_getForm('user_s_email');
         }
-        parent::generic_input_text("s_email", isset($user['s_email']) ? $user['s_email'] : '', null,
-            false);
+        parent::generic_input_text(
+            "s_email",
+            isset($user['s_email']) ? $user['s_email'] : '',
+            null,
+            false
+        );
     }
 
     /**
      * @param null $user
      */
-    static public function website_text($user = null)
+    public static function website_text($user = null)
     {
-        parent::generic_input_text("s_website", isset($user['s_website']) ? $user['s_website'] : '',
-            null, false);
+        parent::generic_input_text(
+            "s_website",
+            isset($user['s_website']) ? $user['s_website'] : '',
+            null,
+            false
+        );
     }
 
     /**
      * @param null $user
      */
-    static public function mobile_text($user = null)
+    public static function mobile_text($user = null)
     {
         if (Session::newInstance()->_getForm('user_s_phone_mobile') != '') {
             $user['s_phone_mobile'] = Session::newInstance()->_getForm('user_s_phone_mobile');
         }
-        parent::generic_input_text("s_phone_mobile",
-            isset($user['s_phone_mobile']) ? $user['s_phone_mobile'] : '', null, false);
+        parent::generic_input_text(
+            "s_phone_mobile",
+            isset($user['s_phone_mobile']) ? $user['s_phone_mobile'] : '',
+            null,
+            false
+        );
     }
 
     /**
      * @param null $user
      */
-    static public function phone_land_text($user = null)
+    public static function phone_land_text($user = null)
     {
         if (Session::newInstance()->_getForm('user_s_phone_land') != '') {
             $user['s_phone_land'] = Session::newInstance()->_getForm('user_s_phone_land');
         }
-        parent::generic_input_text("s_phone_land",
-            isset($user['s_phone_land']) ? $user['s_phone_land'] : '', null, false);
-    }
-
-    /**
-     * @param        $name
-     * @param string $locale
-     * @param string $value
-     */
-    static public function info_textarea($name, $locale = 'en_US', $value = '')
-    {
-        parent::generic_textarea($name . '[' . $locale . ']', $value);
+        parent::generic_input_text(
+            "s_phone_land",
+            isset($user['s_phone_land']) ? $user['s_phone_land'] : '',
+            null,
+            false
+        );
     }
 
     /**
      * @param      $locales
      * @param null $user
      */
-    static public function multilanguage_info($locales, $user = null)
+    public static function multilanguage_info($locales, $user = null)
     {
         $num_locales = count($locales);
         if ($num_locales > 1) {
@@ -196,18 +214,35 @@ class UserForm extends Form
     }
 
     /**
+     * @param        $name
+     * @param string $locale
+     * @param string $value
+     */
+    public static function info_textarea($name, $locale = 'en_US', $value = '')
+    {
+        parent::generic_textarea($name . '[' . $locale . ']', $value);
+    }
+
+    /**
      * @param      $countries
      * @param null $user
      */
-    static public function country_select($countries, $user = null)
+    public static function country_select($countries, $user = null)
     {
         if (count($countries) > 1) {
-            parent::generic_select('countryId', $countries, 'pk_c_code', 's_name',
+            parent::generic_select(
+                'countryId',
+                $countries,
+                'pk_c_code',
+                's_name',
                 __('Select a country...'),
-                (isset($user['fk_c_country_code'])) ? $user['fk_c_country_code'] : null);
+                (isset($user['fk_c_country_code'])) ? $user['fk_c_country_code'] : null
+            );
         } else {
-            parent::generic_input_text('country',
-                (!empty($user['s_country']) ? $user['s_country'] : @$countries[0]['s_name']));
+            parent::generic_input_text(
+                'country',
+                (!empty($user['s_country']) ? $user['s_country'] : @$countries[0]['s_name'])
+            );
             parent::generic_input_hidden('countryId', '');
         }
     }
@@ -215,32 +250,41 @@ class UserForm extends Form
     /**
      * @param null $user
      */
-    static public function country_text($user = null)
+    public static function country_text($user = null)
     {
-        parent::generic_input_text('country',
-            (isset($user['s_country'])) ? $user['s_country'] : null);
+        parent::generic_input_text(
+            'country',
+            (isset($user['s_country'])) ? $user['s_country'] : null
+        );
     }
 
     /**
      * @param      $regions
      * @param null $user
      */
-    static public function region_select($regions, $user = null)
+    public static function region_select($regions, $user = null)
     {
         if (count($regions) >= 1) {
-            parent::generic_select('regionId', $regions, 'pk_i_id', 's_name',
+            parent::generic_select(
+                'regionId',
+                $regions,
+                'pk_i_id',
+                's_name',
                 __('Select a region...'),
-                (isset($user['fk_i_region_id'])) ? $user['fk_i_region_id'] : null);
+                (isset($user['fk_i_region_id'])) ? $user['fk_i_region_id'] : null
+            );
         } else {
-            parent::generic_input_text('region',
-                (isset($user['s_region'])) ? $user['s_region'] : null);
+            parent::generic_input_text(
+                'region',
+                (isset($user['s_region'])) ? $user['s_region'] : null
+            );
         }
     }
 
     /**
      * @param null $user
      */
-    static public function region_text($user = null)
+    public static function region_text($user = null)
     {
         parent::generic_input_text('region', (isset($user['s_region'])) ? $user['s_region'] : null);
     }
@@ -249,11 +293,17 @@ class UserForm extends Form
      * @param      $cities
      * @param null $user
      */
-    static public function city_select($cities, $user = null)
+    public static function city_select($cities, $user = null)
     {
         if (count($cities) >= 1) {
-            parent::generic_select('cityId', $cities, 'pk_i_id', 's_name', __('Select a city...'),
-                (isset($user['fk_i_city_id'])) ? $user['fk_i_city_id'] : null);
+            parent::generic_select(
+                'cityId',
+                $cities,
+                'pk_i_id',
+                's_name',
+                __('Select a city...'),
+                (isset($user['fk_i_city_id'])) ? $user['fk_i_city_id'] : null
+            );
         } else {
             parent::generic_input_text('city', (isset($user['s_city'])) ? $user['s_city'] : null);
         }
@@ -262,7 +312,7 @@ class UserForm extends Form
     /**
      * @param null $user
      */
-    static public function city_text($user = null)
+    public static function city_text($user = null)
     {
         parent::generic_input_text('city', (isset($user['s_city'])) ? $user['s_city'] : null);
     }
@@ -270,25 +320,29 @@ class UserForm extends Form
     /**
      * @param null $user
      */
-    static public function city_area_text($user = null)
+    public static function city_area_text($user = null)
     {
-        parent::generic_input_text('cityArea',
-            (isset($user['s_city_area'])) ? $user['s_city_area'] : null);
+        parent::generic_input_text(
+            'cityArea',
+            (isset($user['s_city_area'])) ? $user['s_city_area'] : null
+        );
     }
 
     /**
      * @param null $user
      */
-    static public function address_text($user = null)
+    public static function address_text($user = null)
     {
-        parent::generic_input_text('address',
-            (isset($user['s_address'])) ? $user['s_address'] : null);
+        parent::generic_input_text(
+            'address',
+            (isset($user['s_address'])) ? $user['s_address'] : null
+        );
     }
 
     /**
      * @param null $user
      */
-    static public function zip_text($user = null)
+    public static function zip_text($user = null)
     {
         parent::generic_input_text('zip', (isset($user['s_zip'])) ? $user['s_zip'] : null);
     }
@@ -298,7 +352,7 @@ class UserForm extends Form
      * @param null $user_label
      * @param null $company_label
      */
-    static public function is_company_select(
+    public static function is_company_select(
         $user = null,
         $user_label = null,
         $company_label = null
@@ -309,19 +363,25 @@ class UserForm extends Form
             array('i_value' => '1', 's_text' => ($company_label ? $company_label : __('Company')))
         );
 
-        parent::generic_select('b_company', $options, 'i_value', 's_text', null,
-            (isset($user['b_company'])) ? $user['b_company'] : null);
+        parent::generic_select(
+            'b_company',
+            $options,
+            'i_value',
+            's_text',
+            null,
+            (isset($user['b_company'])) ? $user['b_company'] : null
+        );
     }
 
     /**
      * @param $users
      */
-    static public function user_select($users)
+    public static function user_select($users)
     {
         Form::generic_select('userId', $users, 'pk_i_id', 's_name', __('All'), null);
     }
 
-    static public function js_validation()
+    public static function js_validation()
     {
         ?>
         <script type="text/javascript">
@@ -382,7 +442,7 @@ class UserForm extends Form
         <?php
     }
 
-    static public function js_validation_old()
+    public static function js_validation_old()
     {
         ?>
         <script type="text/javascript">
@@ -438,7 +498,7 @@ class UserForm extends Form
         <?php
     }
 
-    static public function js_validation_edit()
+    public static function js_validation_edit()
     {
         ?>
         <script type="text/javascript">
@@ -498,7 +558,7 @@ class UserForm extends Form
     /**
      * @param string $path
      */
-    static public function location_javascript($path = 'front')
+    public static function location_javascript($path = 'front')
     {
         ?>
         <script type="text/javascript">

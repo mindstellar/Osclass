@@ -1,5 +1,5 @@
-<?php if ( ! defined( 'ABS_PATH' ) ) {
-    exit( 'ABS_PATH is not loaded. Direct access is not allowed.' );
+<?php if (!defined('ABS_PATH')) {
+    exit('ABS_PATH is not loaded. Direct access is not allowed.');
 }
 
 /*
@@ -18,11 +18,13 @@
  * limitations under the License.
  */
 
-    /**
-     * This class takes items descriptions and generates a RSS feed from that information.
-     * @author Osclass
-     */
-class RSSFeed {
+/**
+ * This class takes items descriptions and generates a RSS feed from that information.
+ *
+ * @author Osclass
+ */
+class RSSFeed
+{
     private $title;
     private $link;
     private $description;
@@ -81,8 +83,9 @@ class RSSFeed {
 
             echo '<description><![CDATA[';
             if (@$item['image']) {
-                echo '<a href="'.$item['image']['link'].'" title="'.$item['image']['title'].'" rel="nofollow">';
-                echo '<img style="float:left;border:0px;" src="'.$item['image']['url'].'" alt="'.$item['image']['title'].'"/> </a>';
+                echo '<a href="' . $item['image']['link'] . '" title="' . $item['image']['title'] . '" rel="nofollow">';
+                echo '<img style="float:left;border:0px;" src="' . $item['image']['url'] . '" alt="'
+                    . $item['image']['title'] . '"/> </a>';
             }
             echo $item['description'], ']]>';
             echo '</description>', PHP_EOL;
@@ -93,8 +96,8 @@ class RSSFeed {
             echo '<cityArea><![CDATA[', $item['city_area'], ']]></cityArea>', PHP_EOL;
             echo '<category><![CDATA[', $item['category'], ']]></category>', PHP_EOL;
 
-            echo '<pubDate>', date('r', strtotime($item['dt_pub_date'])) , '</pubDate>', PHP_EOL;
-                
+            echo '<pubDate>', date('r', strtotime($item['dt_pub_date'])), '</pubDate>', PHP_EOL;
+
             echo '</item>', PHP_EOL;
         }
         echo '</channel>', PHP_EOL;

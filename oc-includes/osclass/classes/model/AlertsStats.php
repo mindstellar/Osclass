@@ -1,5 +1,5 @@
-<?php if ( ! defined( 'ABS_PATH' ) ) {
-    exit( 'ABS_PATH is not loaded. Direct access is not allowed.' );
+<?php if (!defined('ABS_PATH')) {
+    exit('ABS_PATH is not loaded. Direct access is not allowed.');
 }
 
 /*
@@ -18,13 +18,13 @@
  * limitations under the License.
  */
 
-    /**
-     * Model database for AlertsStats table
-     *
-     * @package Osclass
-     * @subpackage Model
-     * @since 3.1
-     */
+/**
+ * Model database for AlertsStats table
+ *
+ * @package    Osclass
+ * @subpackage Model
+ * @since      3.1
+ */
 class AlertsStats extends DAO
 {
     /**
@@ -32,26 +32,10 @@ class AlertsStats extends DAO
      * It is used as a singleton
      *
      * @access private
-     * @since 3.1
+     * @since  3.1
      * @var AlertsStats
      */
     private static $instance;
-
-    /**
-     * It creates a new AlertsStats object class ir if it has been created
-     * before, it return the previous object
-     *
-     * @access public
-     * @since 3.1
-     * @return AlertsStats
-     */
-    public static function newInstance()
-    {
-        if ( !self::$instance instanceof self ) {
-            self::$instance = new self;
-        }
-        return self::$instance;
-    }
 
     /**
      * Set data related to t_alerts_sent table
@@ -61,39 +45,62 @@ class AlertsStats extends DAO
         parent::__construct();
         $this->setTableName('t_alerts_sent');
         $this->setPrimaryKey('d_date');
-        $this->setFields( array('d_date', 'i_num_alerts_sent') );
+        $this->setFields(array('d_date', 'i_num_alerts_sent'));
+    }
+
+    /**
+     * It creates a new AlertsStats object class ir if it has been created
+     * before, it return the previous object
+     *
+     * @access public
+     * @return AlertsStats
+     * @since  3.1
+     */
+    public static function newInstance()
+    {
+        if (!self::$instance instanceof self) {
+            self::$instance = new self;
+        }
+
+        return self::$instance;
     }
 
     /**
      * Increase the stat column given column name and item id
      *
      * @access public
-     * @since 3.1
+     *
      * @param string $date
+     *
      * @return bool
+     * @since  3.1
      */
     public function increase($date)
     {
         // check the date it's ok
-        if ( !preg_match('|^[0-9]{4}-[0-9]{2}-[0-9]{2}$|', $date) ) {
+        if (!preg_match('|^[0-9]{4}-[0-9]{2}-[0-9]{2}$|', $date)) {
             return false;
         }
 
         // first we try to insert
-        if ( $this->insert(array('d_date' => $date, 'i_num_alerts_sent' => '1')) ) {
+        if ($this->insert(array('d_date' => $date, 'i_num_alerts_sent' => '1'))) {
             return true;
         }
 
         // duplicate key?
-        if ( $this->getErrorLevel() != 1062 ) {
+        if ($this->getErrorLevel() != 1062) {
             return false;
         }
 
-        $sql = sprintf("UPDATE %s SET i_num_alerts_sent = i_num_alerts_sent + 1 WHERE d_date = '%s'", $this->getTableName(), $date);
+        $sql = sprintf(
+            "UPDATE %s SET i_num_alerts_sent = i_num_alerts_sent + 1 WHERE d_date = '%s'",
+            $this->getTableName(),
+            $date
+        );
         $this->dao->query($sql);
 
         return true;
     }
 }
 
-    /* file end: ./oc-includes/osclass/model/AlertsStats.php */
+/* file end: ./oc-includes/osclass/model/AlertsStats.php */

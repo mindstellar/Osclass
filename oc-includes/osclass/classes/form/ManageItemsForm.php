@@ -128,11 +128,16 @@ class ManageItemsForm extends Form
             $item['fk_c_country_code'] = Params::getParam('countryId');
         }
 
-        parent::generic_input_text('countryName',
-            isset($item['s_country']) ? $item['s_country'] : null, false);
-        parent::generic_input_hidden('countryId',
+        parent::generic_input_text(
+            'countryName',
+            isset($item['s_country']) ? $item['s_country'] : null,
+            false
+        );
+        parent::generic_input_hidden(
+            'countryId',
             (isset($item['fk_c_country_code']) && $item['fk_c_country_code'] != null)
-                ? $item['fk_c_country_code'] : '');
+            ? $item['fk_c_country_code'] : ''
+        );
 
         return true;
     }
@@ -147,11 +152,16 @@ class ManageItemsForm extends Form
             $item['s_region']       = Params::getParam('region');
             $item['fk_i_region_id'] = Params::getParam('regionId');
         }
-        parent::generic_input_text('region', isset($item['s_region']) ? $item['s_region'] : null,
-            false);
-        parent::generic_input_hidden('regionId',
+        parent::generic_input_text(
+            'region',
+            isset($item['s_region']) ? $item['s_region'] : null,
+            false
+        );
+        parent::generic_input_hidden(
+            'regionId',
             (isset($item['fk_i_region_id']) && $item['fk_i_region_id'] != null)
-                ? $item['fk_i_region_id'] : '');
+            ? $item['fk_i_region_id'] : ''
+        );
 
         return true;
     }
@@ -167,9 +177,11 @@ class ManageItemsForm extends Form
             $item['fk_i_city_id'] = Params::getParam('cityId');
         }
         parent::generic_input_text('city', isset($item['s_city']) ? $item['s_city'] : null, false);
-        parent::generic_input_hidden('cityId',
+        parent::generic_input_hidden(
+            'cityId',
             (isset($item['fk_i_city_id']) && $item['fk_i_city_id'] != null) ? $item['fk_i_city_id']
-                : '');
+            : ''
+        );
 
         return true;
     }

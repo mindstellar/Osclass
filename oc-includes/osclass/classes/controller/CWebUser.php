@@ -37,7 +37,7 @@ class CWebUser extends WebSecBaseModel
     public function doModel()
     {
         switch ($this->action) {
-            case('dashboard'):      //dashboard...
+            case ('dashboard'):      //dashboard...
                 $max_items =
                     (Params::getParam('max_items') != '') ? Params::getParam('max_items') : 5;
                 $aItems    =
@@ -47,7 +47,7 @@ class CWebUser extends WebSecBaseModel
                 $this->_exportVariableToView('max_items', $max_items);
                 $this->doView('user-dashboard.php');
                 break;
-            case('profile'):        //profile...
+            case ('profile'):        //profile...
                 $aUser      = User::newInstance()->findByPrimaryKey(osc_logged_user_id());
                 $aCountries = Country::newInstance()->listAll();
                 $aRegions   = array();
@@ -67,8 +67,12 @@ class CWebUser extends WebSecBaseModel
                 $aLocale = $aUser['locale'];
                 foreach ($aLocale as $locale => $aInfo) {
                     $aUser['locale'][$locale]['s_info'] =
-                        osc_apply_filter('user_profile_info', $aInfo['s_info'], $aUser['pk_i_id'],
-                            $aInfo['fk_c_locale_code']);
+                        osc_apply_filter(
+                            'user_profile_info',
+                            $aInfo['s_info'],
+                            $aUser['pk_i_id'],
+                            $aInfo['fk_c_locale_code']
+                        );
                 }
 
                 //calling the view...
@@ -80,7 +84,7 @@ class CWebUser extends WebSecBaseModel
 
                 $this->doView('user-profile.php');
                 break;
-            case('profile_post'):   //profile post...
+            case ('profile_post'):   //profile post...
                 osc_csrf_check();
                 $userId = Session::newInstance()->_get('userId');
 
@@ -93,7 +97,7 @@ class CWebUser extends WebSecBaseModel
                 }
                 $this->redirectTo(osc_user_profile_url());
                 break;
-            case('alerts'):         //alerts
+            case ('alerts'):         //alerts
                 $aAlerts =
                     Alerts::newInstance()->findByUser(Session::newInstance()->_get('userId'));
                 $user    =
@@ -114,10 +118,10 @@ class CWebUser extends WebSecBaseModel
                 $this->_exportVariableToView('user', $user);
                 $this->doView('user-alerts.php');
                 break;
-            case('change_email'):           //change email
+            case ('change_email'):           //change email
                 $this->doView('user-change_email.php');
                 break;
-            case('change_email_post'):      //change email post
+            case ('change_email_post'):      //change email post
                 osc_csrf_check();
                 if (osc_validate_email(Params::getParam('new_email'))) {
                     $user = User::newInstance()->findByEmail(Params::getParam('new_email'));
@@ -146,8 +150,11 @@ class CWebUser extends WebSecBaseModel
 
                         $validation_url = osc_change_user_email_confirm_url(Session::newInstance()
                             ->_get('userId'), $code);
-                        osc_run_hook('hook_email_new_email', Params::getParam('new_email'),
-                            $validation_url);
+                        osc_run_hook(
+                            'hook_email_new_email',
+                            Params::getParam('new_email'),
+                            $validation_url
+                        );
                         $this->redirectTo(osc_user_profile_url());
                     }
                 } else {
@@ -155,14 +162,17 @@ class CWebUser extends WebSecBaseModel
                     $this->redirectTo(osc_change_user_email_url());
                 }
                 break;
-            case('change_username'):        //change username
+            case ('change_username'):        //change username
                 $this->doView('user-change_username.php');
                 break;
-            case('change_username_post'):   //change username
+            case ('change_username_post'):   //change username
                 osc_csrf_check();
                 $username = osc_sanitize_username(Params::getParam('s_username'));
-                osc_run_hook('before_username_change', Session::newInstance()->_get('userId'),
-                    $username);
+                osc_run_hook(
+                    'before_username_change',
+                    Session::newInstance()->_get('userId'),
+                    $username
+                );
                 if ($username != '') {
                     $user = User::newInstance()->findByUsername($username);
                     if (isset($user['s_username'])) {
@@ -173,11 +183,14 @@ class CWebUser extends WebSecBaseModel
                         } else {
                             User::newInstance()->update(
                                 array('s_username' => $username),
-                                array('pk_i_id' => Session::newInstance()->_get('userId')));
+                                array('pk_i_id' => Session::newInstance()->_get('userId'))
+                            );
                             osc_add_flash_ok_message(_m('The username was updated'));
-                            osc_run_hook('after_username_change',
+                            osc_run_hook(
+                                'after_username_change',
                                 Session::newInstance()->_get('userId'),
-                                Params::getParam('s_username'));
+                                Params::getParam('s_username')
+                            );
                             $this->redirectTo(osc_user_profile_url());
                         }
                     }
@@ -186,7 +199,7 @@ class CWebUser extends WebSecBaseModel
                 }
                 $this->redirectTo(osc_change_user_username_url());
                 break;
-            case('change_password'):        //change password
+            case ('change_password'):        //change password
                 $this->doView('user-change_password.php');
                 break;
             case 'change_password_post':    //change password post
@@ -202,8 +215,10 @@ class CWebUser extends WebSecBaseModel
                     $this->redirectTo(osc_change_user_password_url());
                 }
 
-                if (!osc_verify_password(Params::getParam('password', false, false),
-                    $user['s_password'])
+                if (!osc_verify_password(
+                    Params::getParam('password', false, false),
+                    $user['s_password']
+                )
                 ) {
                     osc_add_flash_error_message(_m("Current password doesn't match"));
                     $this->redirectTo(osc_change_user_password_url());
@@ -221,11 +236,16 @@ class CWebUser extends WebSecBaseModel
                     $this->redirectTo(osc_change_user_password_url());
                 }
 
-                User::newInstance()->update(array(
-                    's_password' => osc_hash_password(Params::getParam('new_password', false,
-                        false))
-                ),
-                    array('pk_i_id' => Session::newInstance()->_get('userId')));
+                User::newInstance()->update(
+                    array(
+                    's_password' => osc_hash_password(Params::getParam(
+                        'new_password',
+                        false,
+                        false
+                    ))
+                    ),
+                    array('pk_i_id' => Session::newInstance()->_get('userId'))
+                );
 
                 osc_add_flash_ok_message(_m('Password has been changed'));
                 $this->redirectTo(osc_user_profile_url());
@@ -240,8 +260,12 @@ class CWebUser extends WebSecBaseModel
                     Item::newInstance()->countItemTypesByUserID(osc_logged_user_id(), $itemType);
                 $total_pages  = ceil($total_items / $itemsPerPage);
                 $items        = Item::newInstance()
-                    ->findItemTypesByUserID(osc_logged_user_id(), $page * $itemsPerPage,
-                        $itemsPerPage, $itemType);
+                    ->findItemTypesByUserID(
+                        osc_logged_user_id(),
+                        $page * $itemsPerPage,
+                        $itemsPerPage,
+                        $itemType
+                    );
 
                 $this->_exportVariableToView('items', $items);
                 $this->_exportVariableToView('search_total_pages', $total_pages);
@@ -345,4 +369,3 @@ class CWebUser extends WebSecBaseModel
 }
 
 /* file end: ./CWebUser.php */
-

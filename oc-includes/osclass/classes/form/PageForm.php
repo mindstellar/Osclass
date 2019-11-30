@@ -46,8 +46,12 @@ class PageForm extends Form
         if (Session::newInstance()->_getForm('s_internal_name') != '') {
             $internal_name = Session::newInstance()->_getForm('s_internal_name');
         }
-        parent::generic_input_text('s_internal_name', $internal_name, null,
-            (isset($page['b_indelible']) && $page['b_indelible'] == 1));
+        parent::generic_input_text(
+            's_internal_name',
+            $internal_name,
+            null,
+            (isset($page['b_indelible']) && $page['b_indelible'] == 1)
+        );
     }
 
     /**
@@ -120,5 +124,3 @@ class PageForm extends Form
         }
     }
 }
-
-

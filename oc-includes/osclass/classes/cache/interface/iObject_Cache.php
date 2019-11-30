@@ -5,6 +5,8 @@
  */
 interface iObject_Cache
 {
+    public static function is_supported();
+
     /**
      * @param     $key
      * @param     $data
@@ -37,11 +39,12 @@ interface iObject_Cache
      * @return mixed
      */
     public function delete($key);
-    public function flush();
-    public function stats();
-    public function _get_cache(); // return string
-    public static function is_supported();
 
+    public function flush();
+
+    public function stats(); // return string
+
+    public function _get_cache();
 
     public function __destruct();
 }

@@ -1,16 +1,21 @@
-<?php if (! defined('ABS_PATH')) {
+<?php if (!defined('ABS_PATH')) {
     exit('ABS_PATH is not loaded. Direct access is not allowed.');
 }
 
-    /**
-     * Class LogOsclassInstaller
-     */
+/**
+ * Class LogOsclassInstaller
+ */
 class LogOsclassInstaller extends Logger
 {
     private static $instance;
 
     private $os;
     private $component = 'INSTALLER';
+
+    public function __construct()
+    {
+        $this->os = PHP_OS;
+    }
 
     /**
      * @return \LogOsclassInstaller
@@ -20,12 +25,8 @@ class LogOsclassInstaller extends Logger
         if (!isset(self::$instance)) {
             self::$instance = new self;
         }
-        return self::$instance;
-    }
 
-    public function __construct()
-    {
-        $this->os = PHP_OS;
+        return self::$instance;
     }
 
     /**
@@ -37,6 +38,32 @@ class LogOsclassInstaller extends Logger
     public function info($message = '', $caller = null)
     {
         $this->sendOsclass('INFO', $message, $caller);
+    }
+
+    /**
+     * @param $type
+     * @param $message
+     * @param $caller
+     *
+     * @return bool
+     * @todo Creating another target to receive logs.
+     */
+    private function sendOsclass($type, $message, $caller)
+    {
+        return true;
+        /** TODO
+         * osc_doRequest(
+         * 'http://admin.osclass.org/logger.php',
+         * array(
+         * 'type' => $type
+         * ,'component' => $this->component
+         * ,'os' => $this->os
+         * ,'message' => base64_encode($message)
+         * ,'fileLine' => base64_encode($caller)
+         * )
+         * );
+         *
+         */
     }
 
     /**
@@ -63,6 +90,7 @@ class LogOsclassInstaller extends Logger
 
     /**
      * Log a message with the DEBUG level.
+     *
      * @param string $message
      * @param null   $caller
      */
@@ -73,6 +101,7 @@ class LogOsclassInstaller extends Logger
 
     /**
      * Log a message object with the FATAL level including the caller.
+     *
      * @param string $message
      * @param null   $caller
      */
@@ -80,31 +109,6 @@ class LogOsclassInstaller extends Logger
     {
         $this->sendOsclass('FATAL', $message, $caller);
     }
-
-    /**
-     * @todo Creating another target to receive logs.
-     * @param $type
-     * @param $message
-     * @param $caller
-     * @return bool
-     */
-    private function sendOsclass($type, $message, $caller)
-    {
-        return true;
-        /** TODO
-        osc_doRequest(
-            'http://admin.osclass.org/logger.php',
-            array(
-                    'type' => $type
-                    ,'component' => $this->component
-                    ,'os' => $this->os
-                    ,'message' => base64_encode($message)
-                    ,'fileLine' => base64_encode($caller)
-                )
-        );
-         *
-         */
-    }
 }
 
-    /* file end: ./oc-includes/osclass/logger/LogOsclassInstaller.php */
+/* file end: ./oc-includes/osclass/logger/LogOsclassInstaller.php */

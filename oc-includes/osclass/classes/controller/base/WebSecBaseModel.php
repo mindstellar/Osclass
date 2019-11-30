@@ -1,5 +1,5 @@
-<?php if ( ! defined( 'ABS_PATH' ) ) {
-    exit( 'ABS_PATH is not loaded. Direct access is not allowed.' );
+<?php if (!defined('ABS_PATH')) {
+    exit('ABS_PATH is not loaded. Direct access is not allowed.');
 }
 
 /*
@@ -18,9 +18,9 @@
  * limitations under the License.
  */
 
-    /**
-     * Class WebSecBaseModel
-     */
+/**
+ * Class WebSecBaseModel
+ */
 class WebSecBaseModel extends SecBaseModel
 {
     public function __construct()
@@ -47,7 +47,7 @@ class WebSecBaseModel extends SecBaseModel
         Session::newInstance()->_drop('userEmail');
         Session::newInstance()->_drop('userPhone');
         Session::newInstance()->session_start();
-        Session::newInstance()->_set( 'userLocale', $locale);
+        Session::newInstance()->_set('userLocale', $locale);
 
         Cookie::newInstance()->pop('oc_userId');
         Cookie::newInstance()->pop('oc_userSecret');
@@ -56,14 +56,14 @@ class WebSecBaseModel extends SecBaseModel
 
     public function showAuthFailPage()
     {
-        if ( Params::getParam('page') === 'ajax') {
+        if (Params::getParam('page') === 'ajax') {
             echo json_encode(array('error' => 1, 'msg' => __('Session timed out')));
             exit;
         } else {
-            $this->redirectTo( osc_user_login_url() );
+            $this->redirectTo(osc_user_login_url());
             exit;
         }
     }
 }
 
-    /* file end: ./oc-includes/osclass/core/WebSecBaseModel.php */
+/* file end: ./oc-includes/osclass/core/WebSecBaseModel.php */

@@ -1,5 +1,5 @@
-<?php if ( ! defined( 'ABS_PATH' ) ) {
-    exit( 'ABS_PATH is not loaded. Direct access is not allowed.' );
+<?php if (!defined('ABS_PATH')) {
+    exit('ABS_PATH is not loaded. Direct access is not allowed.');
 }
 
 /*
@@ -31,35 +31,37 @@ class Cron extends DAO
     private static $instance;
 
     /**
-     * @return \Cron
-     */
-    public static function newInstance()
-    {
-        if ( !self::$instance instanceof self ) {
-            self::$instance = new self;
-        }
-        return self::$instance;
-    }
-
-    /**
      *
      */
     public function __construct()
     {
         parent::__construct();
         $this->setTableName('t_cron');
-        $this->setFields( array('e_type', 'd_last_exec', 'd_next_exec') );
+        $this->setFields(array('e_type', 'd_last_exec', 'd_next_exec'));
+    }
+
+    /**
+     * @return \Cron
+     */
+    public static function newInstance()
+    {
+        if (!self::$instance instanceof self) {
+            self::$instance = new self;
+        }
+
+        return self::$instance;
     }
 
     /**
      * Return crons by type
      *
      * @access public
-     * @since unknown
      *
      * @param string $type
      *
      * @return array|bool
+     * @since  unknown
+     *
      */
     public function getCronByType($type)
     {
@@ -68,7 +70,7 @@ class Cron extends DAO
         $this->dao->where('e_type', $type);
         $result = $this->dao->get();
 
-        if ( $result->numRows == 0 ) {
+        if ($result->numRows == 0) {
             return false;
         }
 
@@ -76,4 +78,4 @@ class Cron extends DAO
     }
 }
 
-    /* file end: ./oc-includes/osclass/model/Cron.php */
+/* file end: ./oc-includes/osclass/model/Cron.php */

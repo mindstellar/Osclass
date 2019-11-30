@@ -45,14 +45,6 @@ class AlertForm extends Form
     }
 
     /**
-     * @return string
-     */
-    public static function default_email_text()
-    {
-        return __('Enter your e-mail');
-    }
-
-    /**
      * @return bool
      */
     public static function email_text()
@@ -64,6 +56,14 @@ class AlertForm extends Form
         parent::generic_input_text('alert_email', $value);
 
         return true;
+    }
+
+    /**
+     * @return string
+     */
+    public static function default_email_text()
+    {
+        return __('Enter your e-mail');
     }
 
     /**

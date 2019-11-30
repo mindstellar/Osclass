@@ -112,9 +112,9 @@ class PagesDataTable extends DataTable
                 $row['title']         = $content['s_title'];
                 $row['order']         =
                     '<div class="order-box">' . $aRow['i_order'] . ' <img class="up" onclick="order_up('
-                    . $aRow['pk_i_id'] . ');" src="' . osc_current_admin_theme_url('images/arrow_up.png') . '" alt="'
+                    . $aRow['pk_i_id'] . ')" src="' . osc_current_admin_theme_url('images/arrow_up.png') . '" alt="'
                     . __('Up') . '" title="' . __('Up') . '" />  <img class="down" onclick="order_down('
-                    . $aRow['pk_i_id'] . ');" src="' . osc_current_admin_theme_url('images/arrow_down.png') . '" alt="'
+                    . $aRow['pk_i_id'] . ')" src="' . osc_current_admin_theme_url('images/arrow_down.png') . '" alt="'
                     . __('Down') . '" title="' . __('Down') . '" /></div>';
 
                 $row = osc_apply_filter('pages_processing_row', $row, $aRow);

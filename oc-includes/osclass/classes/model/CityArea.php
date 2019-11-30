@@ -1,5 +1,5 @@
-<?php if ( ! defined( 'ABS_PATH' ) ) {
-    exit( 'ABS_PATH is not loaded. Direct access is not allowed.' );
+<?php if (!defined('ABS_PATH')) {
+    exit('ABS_PATH is not loaded. Direct access is not allowed.');
 }
 
 /*
@@ -18,13 +18,13 @@
  * limitations under the License.
  */
 
-    /**
-     * Model database for CityArea table
-     *
-     * @package Osclass
-     * @subpackage Model
-     * @since unknown
-     */
+/**
+ * Model database for CityArea table
+ *
+ * @package    Osclass
+ * @subpackage Model
+ * @since      unknown
+ */
 class CityArea extends DAO
 {
     /**
@@ -32,26 +32,10 @@ class CityArea extends DAO
      * It is used as a singleton
      *
      * @access private
-     * @since unknown
+     * @since  unknown
      * @var CityArea
      */
     private static $instance;
-
-    /**
-     * It creates a new CityArea object class ir if it has been created
-     * before, it return the previous object
-     *
-     * @access public
-     * @since unknown
-     * @return CityArea
-     */
-    public static function newInstance()
-    {
-        if ( !self::$instance instanceof self ) {
-            self::$instance = new self;
-        }
-        return self::$instance;
-    }
 
     /**
      * Set data related to t_city_area table
@@ -61,19 +45,37 @@ class CityArea extends DAO
         parent::__construct();
         $this->setTableName('t_city_area');
         $this->setPrimaryKey('pk_i_id');
-        $this->setFields( array('pk_i_id', 'fk_i_city_id', 's_name') );
+        $this->setFields(array('pk_i_id', 'fk_i_city_id', 's_name'));
+    }
+
+    /**
+     * It creates a new CityArea object class ir if it has been created
+     * before, it return the previous object
+     *
+     * @access public
+     * @return CityArea
+     * @since  unknown
+     */
+    public static function newInstance()
+    {
+        if (!self::$instance instanceof self) {
+            self::$instance = new self;
+        }
+
+        return self::$instance;
     }
 
     /**
      * Get the cityArea by its name and city
      *
      * @access public
-     * @since  unknown
      *
      * @param     $cityAreaName
      * @param int $cityId
      *
      * @return array
+     * @since  unknown
+     *
      */
     public function findByName($cityAreaName, $cityId = null)
     {
@@ -81,13 +83,13 @@ class CityArea extends DAO
         $this->dao->from($this->getTableName());
         $this->dao->where('s_name', $cityAreaName);
         $this->dao->limit(1);
-        if ( $cityId != null ) {
+        if ($cityId != null) {
             $this->dao->where('fk_i_city_id', $cityId);
         }
 
         $result = $this->dao->get();
 
-        if ( $result == false ) {
+        if ($result == false) {
             return array();
         }
 
@@ -98,9 +100,11 @@ class CityArea extends DAO
      * Return city areas of a given city ID
      *
      * @access public
-     * @since 2.4
+     *
      * @param $cityId
+     *
      * @return array
+     * @since  2.4
      */
     public function findByCity($cityId)
     {
@@ -110,7 +114,7 @@ class CityArea extends DAO
 
         $result = $this->dao->get();
 
-        if ( $result == false ) {
+        if ($result == false) {
             return array();
         }
 
@@ -121,24 +125,27 @@ class CityArea extends DAO
      *  Delete a city area
      *
      * @access public
-     * @since  3.1
      *
      * @param $pk
      *
      * @return int number of failed deletions or 0 in case of none
      * @throws \Exception
+     * @since  3.1
+     *
      */
     public function deleteByPrimaryKey($pk)
     {
         Item::newInstance()->deleteByCityArea($pk);
-        User::newInstance()->update(array('fk_i_city_area_id' => null, 's_city_area' => ''), array('fk_i_city_area_id' => $pk));
+        User::newInstance()->update(
+            array('fk_i_city_area_id' => null, 's_city_area' => ''),
+            array('fk_i_city_area_id' => $pk)
+        );
         if (!$this->delete(array('pk_i_id' => $pk))) {
             return 1;
         }
+
         return 0;
     }
-
-
 }
 
-    /* file end: ./oc-includes/osclass/model/CityArea.php */
+/* file end: ./oc-includes/osclass/model/CityArea.php */

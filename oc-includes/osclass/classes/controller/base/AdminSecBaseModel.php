@@ -16,9 +16,9 @@
  * limitations under the License.
  */
 
-    /**
-     * Class AdminSecBaseModel
-     */
+/**
+ * Class AdminSecBaseModel
+ */
 class AdminSecBaseModel extends SecBaseModel
 {
     public function __construct()
@@ -27,16 +27,17 @@ class AdminSecBaseModel extends SecBaseModel
 
         // check if is moderator and can enter to this page
         if ($this->isModerator()
-             && ! in_array($this->page, osc_apply_filter('moderator_access', array (
-                'items' ,
-                'comments' ,
-                'media' ,
-                'login' ,
-                'admins' ,
-                'ajax' ,
-                'stats' ,
+            && !in_array($this->page, osc_apply_filter('moderator_access', array(
+                'items',
+                'comments',
+                'media',
+                'login',
+                'admins',
+                'ajax',
+                'stats',
                 ''
-             )), false)) {
+            )), false)
+        ) {
             osc_add_flash_error_message(_m("You don't have enough permissions"), 'admin');
             $this->redirectTo(osc_admin_base_url());
         }
@@ -46,7 +47,7 @@ class AdminSecBaseModel extends SecBaseModel
         $config_version = str_replace('.', '', OSCLASS_VERSION);
         $config_version = preg_replace('|-.*|', '', $config_version);
 
-        if ($config_version > osc_get_preference('version') && MULTISITE==0) {
+        if ($config_version > osc_get_preference('version') && MULTISITE == 0) {
             if (get_class($this) === 'CAdminTools') {
             } else {
                 if (get_class($this) !== 'CAdminUpgrade') {
@@ -70,17 +71,17 @@ class AdminSecBaseModel extends SecBaseModel
     /**
      * @return bool
      */
-    public function isLogged()
+    public function isModerator()
     {
-        return osc_is_admin_user_logged_in();
+        return osc_is_moderator();
     }
 
     /**
      * @return bool
      */
-    public function isModerator()
+    public function isLogged()
     {
-        return osc_is_moderator();
+        return osc_is_admin_user_logged_in();
     }
 
     public function logout()
@@ -102,6 +103,17 @@ class AdminSecBaseModel extends SecBaseModel
         Cookie::newInstance()->set();
     }
 
+    /**
+     * @param $file
+     */
+    public function doView($file)
+    {
+        osc_run_hook('before_admin_html');
+        osc_current_admin_theme_path($file);
+        Session::newInstance()->_clearVariables();
+        osc_run_hook('after_admin_html');
+    }
+
     public function showAuthFailPage()
     {
         if (Params::getParam('page') === 'ajax') {
@@ -117,17 +129,6 @@ class AdminSecBaseModel extends SecBaseModel
         header('Location: ' . osc_admin_base_url(true) . '?page=login');
         exit;
     }
-
-    /**
-     * @param $file
-     */
-    public function doView($file)
-    {
-        osc_run_hook('before_admin_html');
-        osc_current_admin_theme_path($file);
-        Session::newInstance()->_clearVariables();
-        osc_run_hook('after_admin_html');
-    }
 }
 
-    /* file end: ./oc-includes/osclass/core/AdminSecBaseModel.php */
+/* file end: ./oc-includes/osclass/core/AdminSecBaseModel.php */

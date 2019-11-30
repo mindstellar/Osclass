@@ -183,7 +183,6 @@ class Object_Cache_apcu implements iObject_Cache
         }
 
         return $return;
-
     }
 
     /**

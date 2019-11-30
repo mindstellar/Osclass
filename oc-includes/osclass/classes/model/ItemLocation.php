@@ -1,5 +1,5 @@
-<?php if ( ! defined( 'ABS_PATH' ) ) {
-    exit( 'ABS_PATH is not loaded. Direct access is not allowed.' );
+<?php if (!defined('ABS_PATH')) {
+    exit('ABS_PATH is not loaded. Direct access is not allowed.');
 }
 
 /*
@@ -18,13 +18,13 @@
  * limitations under the License.
  */
 
-    /**
-     * Model database for ItemLocation table
-     *
-     * @package Osclass
-     * @subpackage Model
-     * @since unknown
-     */
+/**
+ * Model database for ItemLocation table
+ *
+ * @package    Osclass
+ * @subpackage Model
+ * @since      unknown
+ */
 class ItemLocation extends DAO
 {
     /**
@@ -32,26 +32,10 @@ class ItemLocation extends DAO
      * It is used as a singleton
      *
      * @access private
-     * @since unknown
+     * @since  unknown
      * @var ItemResource
      */
     private static $instance;
-
-    /**
-     * It creates a new ItemLocation object class ir if it has been created
-     * before, it return the previous object
-     *
-     * @access public
-     * @since unknown
-     * @return ItemLocation
-     */
-    public static function newInstance()
-    {
-        if ( !self::$instance instanceof self ) {
-            self::$instance = new self;
-        }
-        return self::$instance;
-    }
 
     /**
      * Set data related to t_item_location table
@@ -75,9 +59,26 @@ class ItemLocation extends DAO
             's_city_area',
             'd_coord_lat',
             'd_coord_long'
-            );
+        );
         $this->setFields($array_fields);
+    }
+
+    /**
+     * It creates a new ItemLocation object class ir if it has been created
+     * before, it return the previous object
+     *
+     * @access public
+     * @return ItemLocation
+     * @since  unknown
+     */
+    public static function newInstance()
+    {
+        if (!self::$instance instanceof self) {
+            self::$instance = new self;
+        }
+
+        return self::$instance;
     }
 }
 
-    /* file end: ./oc-includes/osclass/model/ItemLocation.php */
+/* file end: ./oc-includes/osclass/model/ItemLocation.php */

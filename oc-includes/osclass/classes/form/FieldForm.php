@@ -51,64 +51,6 @@ class FieldForm extends Form
     }
 
     /**
-     * @param        $id_field
-     * @param        $dateFormat
-     * @param        $value
-     * @param string $type
-     */
-    public static function initDatePicker($id_field, $dateFormat, $value, $type = 'none')
-    {
-
-        if ($value == '') {
-            $value = 0;
-        }
-        $aux = <<<FB
-            <script type="text/javascript">
-            $(document).ready(function(){
-                $('.$id_field').datepicker({
-                    onSelect: function() {
-                        // format to unix timestamp
-                        var fecha = $(this).datepicker('getDate');
-                        if('$type'=='from') {
-                            fecha.setHours('0');
-                            fecha.setMinutes('0');
-                            fecha.setSeconds('0');
-                        } else if('$type'=='to') {
-                            fecha.setHours('23');
-                            fecha.setMinutes('59');
-                            fecha.setSeconds('59');
-                        }
-
-                        // new date format
-                        var new_date = date('$dateFormat', fecha.getTime()/1000 );
-                        // hack - same dateformat as php date function
-                        $('.$id_field').prop('value', new_date);
-                        $('#$id_field').prop('value', fecha.getTime()/1000);
-                    },
-                    inline: true,
-                    navigationAsDateFormat: true,
-                    dateFormat: '@' // javascript timestamp
-                });
-                $.datepicker.setDefaults($.datepicker.regional['custom']);
-
-                if($value>0 && $value!='';) {
-                    // hack - same dateformat as php date function
-                    $('.$id_field').prop('value', date('$dateFormat', $value);)
-                    $('#$id_field').prop('value', '$value');
-                }
-
-                $(".$id_field").change( function () {
-                    if($(".$id_field").prop('value') == '') {
-                        $('#$id_field').prop('value', '');
-                    }
-                });
-                });
-            </script>
-FB;
-        echo $aux;
-    }
-
-    /**
      * @param null $field
      */
     public static function primary_input_hidden($field = null)
@@ -125,8 +67,10 @@ FB;
      */
     public static function name_input_text($field = null)
     {
-        parent::generic_input_text('s_name',
-            (isset($field) && isset($field['s_name'])) ? $field['s_name'] : '');
+        parent::generic_input_text(
+            's_name',
+            (isset($field) && isset($field['s_name'])) ? $field['s_name'] : ''
+        );
 
         return true;
     }
@@ -138,9 +82,11 @@ FB;
      */
     public static function options_input_text($field = null)
     {
-        parent::generic_input_text('s_options',
+        parent::generic_input_text(
+            's_options',
             (isset($field) && isset($field['s_options'])) ? html_entity_decode($field['s_options'])
-                : '');
+            : ''
+        );
 
         return true;
     }
@@ -150,8 +96,11 @@ FB;
      */
     public static function required_checkbox($field = null)
     {
-        parent::generic_input_checkbox('field_required', 1,
-            ($field != null && isset($field['b_required']) && $field['b_required'] == 1));
+        parent::generic_input_checkbox(
+            'field_required',
+            1,
+            ($field != null && isset($field['b_required']) && $field['b_required'] == 1)
+        );
     }
 
     /**
@@ -159,8 +108,11 @@ FB;
      */
     public static function searchable_checkbox($field = null)
     {
-        parent::generic_input_checkbox('field_searchable', 1,
-            ($field != null && isset($field['b_searchable']) && $field['b_searchable'] == 1));
+        parent::generic_input_checkbox(
+            'field_searchable',
+            1,
+            ($field != null && isset($field['b_searchable']) && $field['b_searchable'] == 1)
+        );
     }
 
     /**
@@ -199,6 +151,48 @@ FB;
         </select>
         <?php
         return true;
+    }
+
+    /**
+     * @param null $catId
+     *
+     * @return bool|void
+     */
+    public static function meta_fields_search($catId = null)
+    {
+        // we received the categoryID
+        if ($catId == null) {
+            return false;
+        }
+
+        $aCustomFields = array();
+        // we check if the category is the same as our plugin
+        foreach ($catId as $id) {
+            $aTemp = Field::newInstance()->findByCategory($id);
+            foreach ($aTemp as $field) {
+                if ($field['b_searchable'] == 1) {
+                    $aCustomFields[$field['pk_i_id']] = $field;
+                }
+            }
+        }
+
+        if (count($aCustomFields) > 0) {
+            echo '<fieldset>';
+            foreach ($aCustomFields as $field) {
+                if ($field['e_type'] === 'DATEINTERVAL') {
+                    echo '<div class="row two_input">';
+                } elseif ($field['e_type'] === 'CHECKBOX') {
+                    echo '<div class="row checkbox">';
+                } elseif ($field['e_type'] === 'RADIO') {
+                    echo '<div class="row radio">';
+                } else {
+                    echo '<div class="row one_input">';
+                }
+                self::meta($field, true);
+                echo '</div>';
+            }
+            echo '</fieldset>';
+        }
     }
 
     /**
@@ -251,8 +245,11 @@ FB;
                 } else {
                     $field_textarea_value = isset($field['s_value']) ? $field['s_value'] : '';
                     $field_textarea_value =
-                        osc_apply_filter('osc_item_edit_meta_textarea_value_filter',
-                            $field_textarea_value, $field);
+                        osc_apply_filter(
+                            'osc_item_edit_meta_textarea_value_filter',
+                            $field_textarea_value,
+                            $field
+                        );
                     echo '<label for="meta_' . $field['s_slug'] . '">' . $field['s_name']
                         . ': </label>';
                     echo '<textarea id="meta_' . $field['s_slug'] . '" name="meta['
@@ -341,8 +338,11 @@ FB;
                     . $field['pk_i_id'] . ']" value="" />';
                 echo '<input type="text" id="" class="meta_' . $field['s_slug']
                     . ' cf_date" value="" />';
-                self::initDatePicker('meta_' . $field['s_slug'], osc_date_format(),
-                    $field['s_value']);
+                self::initDatePicker(
+                    'meta_' . $field['s_slug'],
+                    osc_date_format(),
+                    $field['s_value']
+                );
             } elseif ($field['e_type'] === 'DATEINTERVAL') {
                 if ($search) {
                     echo '<h6>' . $field['s_name'] . '</h6>';
@@ -356,16 +356,24 @@ FB;
                     . $field['pk_i_id'] . '][from]" value="' . $field['s_value']['from'] . '" />';
                 echo '<input type="text" id="" class="meta_' . $field['s_slug']
                     . '_from cf_date_interval" value="" />';
-                self::initDatePicker('meta_' . $field['s_slug'] . '_from', osc_date_format(),
-                    $field['s_value']['from'], 'from');
+                self::initDatePicker(
+                    'meta_' . $field['s_slug'] . '_from',
+                    osc_date_format(),
+                    $field['s_value']['from'],
+                    'from'
+                );
 
                 echo ' ' . __('to') . ' ';
                 echo '<input type="hidden" id="meta_' . $field['s_slug'] . '_to" name="meta['
                     . $field['pk_i_id'] . '][to]" value="' . $field['s_value']['to'] . '" />';
                 echo '<input type="text" id="" class="meta_' . $field['s_slug']
                     . '_to cf_date_interval" value="" />';
-                self::initDatePicker('meta_' . $field['s_slug'] . '_to', osc_date_format(),
-                    $field['s_value']['to'], 'to');
+                self::initDatePicker(
+                    'meta_' . $field['s_slug'] . '_to',
+                    osc_date_format(),
+                    $field['s_value']['to'],
+                    'to'
+                );
             } else {
                 if ($search) {
                     echo '<h6>' . $field['s_name'] . '</h6>';
@@ -381,45 +389,61 @@ FB;
     }
 
     /**
-     * @param null $catId
-     *
-     * @return bool|void
+     * @param        $id_field
+     * @param        $dateFormat
+     * @param        $value
+     * @param string $type
      */
-    public static function meta_fields_search($catId = null)
+    public static function initDatePicker($id_field, $dateFormat, $value, $type = 'none')
     {
-        // we received the categoryID
-        if ($catId == null) {
-            return false;
-        }
 
-        $aCustomFields = array();
-        // we check if the category is the same as our plugin
-        foreach ($catId as $id) {
-            $aTemp = Field::newInstance()->findByCategory($id);
-            foreach ($aTemp as $field) {
-                if ($field['b_searchable'] == 1) {
-                    $aCustomFields[$field['pk_i_id']] = $field;
-                }
-            }
+        if ($value == '') {
+            $value = 0;
         }
+        $aux = <<<FB
+            <script type="text/javascript">
+            $(document).ready(function(){
+                $('.$id_field').datepicker({
+                    onSelect: function() {
+                        // format to unix timestamp
+                        var fecha = $(this).datepicker('getDate');
+                        if('$type'=='from') {
+                            fecha.setHours('0');
+                            fecha.setMinutes('0');
+                            fecha.setSeconds('0');
+                        } else if('$type'=='to') {
+                            fecha.setHours('23');
+                            fecha.setMinutes('59');
+                            fecha.setSeconds('59');
+                        }
 
-        if (count($aCustomFields) > 0) {
-            echo '<fieldset>';
-            foreach ($aCustomFields as $field) {
-                if ($field['e_type'] === 'DATEINTERVAL') {
-                    echo '<div class="row two_input">';
-                } elseif ($field['e_type'] === 'CHECKBOX') {
-                    echo '<div class="row checkbox">';
-                } elseif ($field['e_type'] === 'RADIO') {
-                    echo '<div class="row radio">';
-                } else {
-                    echo '<div class="row one_input">';
+                        // new date format
+                        var new_date = date('$dateFormat', fecha.getTime()/1000 );
+                        // hack - same dateformat as php date function
+                        $('.$id_field').prop('value', new_date);
+                        $('#$id_field').prop('value', fecha.getTime()/1000);
+                    },
+                    inline: true,
+                    navigationAsDateFormat: true,
+                    dateFormat: '@' // javascript timestamp
+                });
+                $.datepicker.setDefaults($.datepicker.regional['custom']);
+
+                if($value>0 && $value!='';) {
+                    // hack - same dateformat as php date function
+                    $('.$id_field').prop('value', date('$dateFormat', $value);)
+                    $('#$id_field').prop('value', '$value');
                 }
-                self::meta($field, true);
-                echo '</div>';
-            }
-            echo '</fieldset>';
-        }
+
+                $(".$id_field").change( function () {
+                    if($(".$id_field").prop('value') == '') {
+                        $('#$id_field').prop('value', '');
+                    }
+                });
+                });
+            </script>
+FB;
+        echo $aux;
     }
 
     /**
@@ -439,7 +463,6 @@ FB;
             echo '</div>';
         }
     }
-
 }
 
 ?>

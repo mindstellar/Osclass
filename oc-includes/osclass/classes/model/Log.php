@@ -1,5 +1,5 @@
-<?php if ( ! defined( 'ABS_PATH' ) ) {
-    exit( 'ABS_PATH is not loaded. Direct access is not allowed.' );
+<?php if (!defined('ABS_PATH')) {
+    exit('ABS_PATH is not loaded. Direct access is not allowed.');
 }
 
 /*
@@ -18,9 +18,9 @@
  * limitations under the License.
  */
 
-    /**
-     * Log DAO
-     */
+/**
+ * Log DAO
+ */
 class Log extends DAO
 {
     /**
@@ -28,17 +28,6 @@ class Log extends DAO
      * @var \Log
      */
     private static $instance;
-
-    /**
-     * @return \Log
-     */
-    public static function newInstance()
-    {
-        if ( !self::$instance instanceof self ) {
-            self::$instance = new self;
-        }
-        return self::$instance;
-    }
 
     /**
      *
@@ -61,10 +50,21 @@ class Log extends DAO
     }
 
     /**
+     * @return \Log
+     */
+    public static function newInstance()
+    {
+        if (!self::$instance instanceof self) {
+            self::$instance = new self;
+        }
+
+        return self::$instance;
+    }
+
+    /**
      * Insert a log row.
      *
      * @access public
-     * @since  unknown
      *
      * @param string  $section
      * @param string  $action
@@ -74,26 +74,29 @@ class Log extends DAO
      * @param         $whoId
      *
      * @return boolean
+     * @since  unknown
+     *
      */
     public function insertLog($section, $action, $id, $data, $who, $whoId)
     {
-        if ( Params::getServerParam('REMOTE_ADDR') == '' ) {
+        if (Params::getServerParam('REMOTE_ADDR') == '') {
             // CRON.
-            $_SERVER['REMOTE_ADDR']= '127.0.0.1';
+            $_SERVER['REMOTE_ADDR'] = '127.0.0.1';
         }
 
         $array_set = array(
-            'dt_date'       => date('Y-m-d H:i:s'),
-            's_section'     => $section,
-            's_action'      => $action,
-            'fk_i_id'       => $id,
-            's_data'        => $data,
-            's_ip'          => Params::getServerParam('REMOTE_ADDR'),
-            's_who'         => $who,
-            'fk_i_who_id'   => $whoId
+            'dt_date'     => date('Y-m-d H:i:s'),
+            's_section'   => $section,
+            's_action'    => $action,
+            'fk_i_id'     => $id,
+            's_data'      => $data,
+            's_ip'        => Params::getServerParam('REMOTE_ADDR'),
+            's_who'       => $who,
+            'fk_i_who_id' => $whoId
         );
+
         return $this->dao->insert($this->getTableName(), $array_set);
     }
 }
 
-    /* file end: ./oc-includes/osclass/model/Log.php */
+/* file end: ./oc-includes/osclass/model/Log.php */

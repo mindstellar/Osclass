@@ -1,5 +1,5 @@
-<?php if ( ! defined( 'ABS_PATH' ) ) {
-    exit( 'ABS_PATH is not loaded. Direct access is not allowed.' );
+<?php if (!defined('ABS_PATH')) {
+    exit('ABS_PATH is not loaded. Direct access is not allowed.');
 }
 
 /*
@@ -18,9 +18,9 @@
  * limitations under the License.
  */
 
-    /**
-     * BanRule DAO
-     */
+/**
+ * BanRule DAO
+ */
 class BanRule extends DAO
 {
     /**
@@ -28,17 +28,6 @@ class BanRule extends DAO
      * @var \BanRule
      */
     private static $instance;
-
-    /**
-     * @return \BanRule
-     */
-    public static function newInstance()
-    {
-        if ( !self::$instance instanceof self ) {
-            self::$instance = new self;
-        }
-        return self::$instance;
-    }
 
     /**
      *
@@ -58,10 +47,21 @@ class BanRule extends DAO
     }
 
     /**
+     * @return \BanRule
+     */
+    public static function newInstance()
+    {
+        if (!self::$instance instanceof self) {
+            self::$instance = new self;
+        }
+
+        return self::$instance;
+    }
+
+    /**
      * Return list of ban rules
      *
      * @access public
-     * @since  3.1
      *
      * @param int    $start
      * @param int    $end
@@ -71,11 +71,13 @@ class BanRule extends DAO
      *
      * @return array
      * @parma  string $name
+     * @since  3.1
+     *
      */
     public function search($start = 0, $end = 10, $order_column = 'pk_i_id', $order_direction = 'DESC', $name = '')
     {
         // SET data, so we always return a valid object
-        $rules = array();
+        $rules                  = array();
         $rules['rows']          = 0;
         $rules['total_results'] = 0;
         $rules['rules']         = array();
@@ -84,12 +86,12 @@ class BanRule extends DAO
         $this->dao->from($this->getTableName());
         $this->dao->orderBy($order_column, $order_direction);
         $this->dao->limit($start, $end);
-        if ( $name != '' ) {
+        if ($name != '') {
             $this->dao->like('s_name', $name);
         }
         $rs = $this->dao->get();
 
-        if ( $rs == false ) {
+        if ($rs == false) {
             return $rules;
         }
 
@@ -97,13 +99,13 @@ class BanRule extends DAO
 
         $rsRows = $this->dao->query('SELECT FOUND_ROWS() as total');
         $data   = $rsRows->row();
-        if ( $data['total'] ) {
+        if ($data['total']) {
             $rules['total_results'] = $data['total'];
         }
 
-        $rsTotal = $this->dao->query('SELECT COUNT(*) as total FROM '.$this->getTableName());
-        $data   = $rsTotal->row();
-        if ( $data['total'] ) {
+        $rsTotal = $this->dao->query('SELECT COUNT(*) as total FROM ' . $this->getTableName());
+        $data    = $rsTotal->row();
+        if ($data['total']) {
             $rules['rows'] = $data['total'];
         }
 
@@ -113,23 +115,22 @@ class BanRule extends DAO
     /**
      * Return number of ban rules
      *
-     * @since 3.1
      * @return int
+     * @since 3.1
      */
     public function countRules()
     {
-        $this->dao->select( 'COUNT(*) as i_total' );
+        $this->dao->select('COUNT(*) as i_total');
         $this->dao->from($this->getTableName());
 
         $result = $this->dao->get();
 
-        if ( $result == false || $result->numRows() == 0) {
+        if ($result == false || $result->numRows() == 0) {
             return 0;
         }
 
         $row = $result->row();
+
         return $row['i_total'];
     }
-
 }
-

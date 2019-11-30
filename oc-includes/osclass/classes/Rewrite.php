@@ -141,7 +141,7 @@ class Rewrite
     public function init()
     {
         if (Params::existServerParam('REQUEST_URI')) {
-            $server_params = Params::getServerParam('REQUEST_URI', false, false);
+            $server_params            = Params::getServerParam('REQUEST_URI', false, false);
             $urldecoded_server_params = urldecode($server_params);
             if (preg_match(
                 '|[\?&]{1}http_referer=(.*)$|',
@@ -252,21 +252,6 @@ class Rewrite
     }
 
     /**
-     * @param string $uri
-     *
-     * @return bool|string
-     */
-    private function extractURL($uri = '')
-    {
-        $uri_array = explode('?', str_replace('index.php', '', $uri));
-        if ($uri_array[0][0] === '/') {
-            return substr($uri_array[0], 1);
-        }
-
-        return $uri_array[0];
-    }
-
-    /**
      * @param $regexp
      */
     public function removeRule($regexp)
@@ -334,5 +319,20 @@ class Rewrite
     public function get_http_referer()
     {
         return $this->http_referer;
+    }
+
+    /**
+     * @param string $uri
+     *
+     * @return bool|string
+     */
+    private function extractURL($uri = '')
+    {
+        $uri_array = explode('?', str_replace('index.php', '', $uri));
+        if ($uri_array[0][0] === '/') {
+            return substr($uri_array[0], 1);
+        }
+
+        return $uri_array[0];
     }
 }

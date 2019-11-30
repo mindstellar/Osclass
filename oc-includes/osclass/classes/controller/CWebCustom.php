@@ -39,7 +39,7 @@ class CWebCustom extends BaseModel
             $rid    = Params::getParam('route');
             $file   = '../';
             if (isset($routes[$rid], $routes[$rid]['file'])) {
-                $file = $routes[$rid]['file'];
+                $file      = $routes[$rid]['file'];
                 $user_menu = $routes[$rid]['user_menu'];
             }
         } else {

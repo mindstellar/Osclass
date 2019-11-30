@@ -1,5 +1,5 @@
-<?php if ( ! defined( 'ABS_PATH' ) ) {
-    exit( 'ABS_PATH is not loaded. Direct access is not allowed.' );
+<?php if (!defined('ABS_PATH')) {
+    exit('ABS_PATH is not loaded. Direct access is not allowed.');
 }
 
 /*
@@ -18,9 +18,9 @@
  * limitations under the License.
  */
 
-    /**
-     * LastestSearches DAO
-     */
+/**
+ * LastestSearches DAO
+ */
 class LatestSearches extends DAO
 {
     /**
@@ -28,17 +28,6 @@ class LatestSearches extends DAO
      * @var \LatestSearches
      */
     private static $instance;
-
-    /**
-     * @return \LatestSearches
-     */
-    public static function newInstance()
-    {
-        if ( !self::$instance instanceof self ) {
-            self::$instance = new self;
-        }
-        return self::$instance;
-    }
 
     /**
      *
@@ -55,14 +44,27 @@ class LatestSearches extends DAO
     }
 
     /**
+     * @return \LatestSearches
+     */
+    public static function newInstance()
+    {
+        if (!self::$instance instanceof self) {
+            self::$instance = new self;
+        }
+
+        return self::$instance;
+    }
+
+    /**
      * Get last searches, given a limit.
      *
      * @access public
-     * @since unknown
      *
      * @param int $limit
      *
      * @return array|bool
+     * @since  unknown
+     *
      */
     public function getSearches($limit = 20)
     {
@@ -73,7 +75,7 @@ class LatestSearches extends DAO
         $this->dao->limit($limit);
         $result = $this->dao->get();
 
-        if ( $result == false ) {
+        if ($result == false) {
             return false;
         }
 
@@ -84,16 +86,17 @@ class LatestSearches extends DAO
      * Get last searches, given since time.
      *
      * @access public
-     * @since unknown
      *
      * @param int $time
      *
      * @return array|bool
+     * @since  unknown
+     *
      */
     public function getSearchesByDate($time = null)
     {
-        if ($time==null) {
-            $time = time() - (7*24*3600);
+        if ($time == null) {
+            $time = time() - (7 * 24 * 3600);
         }
 
         $this->dao->select('d_date, s_search, COUNT(s_search) as i_total');
@@ -104,7 +107,7 @@ class LatestSearches extends DAO
         $this->dao->limit($limit);
         $result = $this->dao->get();
 
-        if ( $result == false ) {
+        if ($result == false) {
             return false;
         }
 
@@ -112,35 +115,18 @@ class LatestSearches extends DAO
     }
 
     /**
-     * Purge all searches by date.
-     *
-     * @access public
-     * @since unknown
-     * @param string $date
-     * @return bool
-     */
-    public function purgeDate($date = null)
-    {
-        if ($date == null) {
-            return false;
-        }
-
-        $this->dao->from( $this->getTableName() );
-        $this->dao->where( 'd_date <= ' . $this->dao->escape($date) );
-        return $this->dao->delete();
-    }
-
-    /**
      * Purge n last searches.
      *
      * @access public
-     * @since unknown
+     *
      * @param int $number
+     *
      * @return bool
+     * @since  unknown
      */
     public function purgeNumber($number = null)
     {
-        if ( $number == null ) {
+        if ($number == null) {
             return false;
         }
 
@@ -152,16 +138,38 @@ class LatestSearches extends DAO
         $result = $this->dao->get();
         $last   = $result->row();
 
-        if ( $result == false ) {
+        if ($result == false) {
             return false;
         }
 
-        if ( $result->numRows() == 0 ) {
+        if ($result->numRows() == 0) {
             return false;
         }
 
-        return $this->purgeDate( $last['d_date'] );
+        return $this->purgeDate($last['d_date']);
+    }
+
+    /**
+     * Purge all searches by date.
+     *
+     * @access public
+     *
+     * @param string $date
+     *
+     * @return bool
+     * @since  unknown
+     */
+    public function purgeDate($date = null)
+    {
+        if ($date == null) {
+            return false;
+        }
+
+        $this->dao->from($this->getTableName());
+        $this->dao->where('d_date <= ' . $this->dao->escape($date));
+
+        return $this->dao->delete();
     }
 }
 
-    /* file end: ./oc-includes/osclass/model/LatestSearches.php */
+/* file end: ./oc-includes/osclass/model/LatestSearches.php */

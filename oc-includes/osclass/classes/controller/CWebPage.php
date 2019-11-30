@@ -35,7 +35,7 @@ class CWebPage extends BaseModel
 
     public function doModel()
     {
-        $id = Params::getParam('id');
+        $id   = Params::getParam('id');
         $page = false;
 
         if (is_numeric($id)) {

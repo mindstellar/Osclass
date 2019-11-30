@@ -1,4 +1,4 @@
-<?php if (! defined('ABS_PATH')) {
+<?php if (!defined('ABS_PATH')) {
     exit('ABS_PATH is not loaded. Direct access is not allowed.');
 }
 
@@ -18,9 +18,9 @@
  * limitations under the License.
  */
 
-    /**
-     * OSCLocale DAO
-     */
+/**
+ * OSCLocale DAO
+ */
 class OSCLocale extends DAO
 {
     /**
@@ -28,17 +28,6 @@ class OSCLocale extends DAO
      * @var \OSCLocale
      */
     private static $instance;
-
-    /**
-     * @return \OSCLocale
-     */
-    public static function newInstance()
-    {
-        if (!self::$instance instanceof self) {
-            self::$instance = new self;
-        }
-        return self::$instance;
-    }
 
     /**
      *
@@ -69,15 +58,28 @@ class OSCLocale extends DAO
     }
 
     /**
+     * @return \OSCLocale
+     */
+    public static function newInstance()
+    {
+        if (!self::$instance instanceof self) {
+            self::$instance = new self;
+        }
+
+        return self::$instance;
+    }
+
+    /**
      * Return all locales enabled.
      *
      * @access public
-     * @since  unknown
      *
      * @param bool $isBo
      * @param bool $indexedByPk
      *
      * @return array
+     * @since  unknown
+     *
      */
     public function listAllEnabled($isBo = false, $indexedByPk = false)
     {
@@ -99,7 +101,7 @@ class OSCLocale extends DAO
 
         if ($indexedByPk) {
             $aTmp = array();
-            for ($i = 0 , $iMax = count($aResults); $i < $iMax; $i ++) {
+            for ($i = 0, $iMax = count($aResults); $i < $iMax; $i++) {
                 $aTmp[(string)$aResults[$i][$this->getPrimaryKey()]] = $aResults[$i];
             }
             $aResults = $aTmp;
@@ -112,9 +114,11 @@ class OSCLocale extends DAO
      * Return all locales by code
      *
      * @access public
-     * @since 2.3
+     *
      * @param string $code
+     *
      * @return array
+     * @since  2.3
      */
     public function findByCode($code)
     {
@@ -134,22 +138,25 @@ class OSCLocale extends DAO
      * Delete all related to locale code.
      *
      * @access public
-     * @since unknown
+     *
      * @param string $locale
+     *
      * @return bool
+     * @since  unknown
      */
     public function deleteLocale($locale)
     {
         osc_run_hook('delete_locale', $locale);
 
-        $array_where = array('fk_c_locale_code' => $locale );
-        $this->dao->delete(DB_TABLE_PREFIX.'t_category_description', $array_where);
-        $this->dao->delete(DB_TABLE_PREFIX.'t_item_description', $array_where);
-        $this->dao->delete(DB_TABLE_PREFIX.'t_keywords', $array_where);
-        $this->dao->delete(DB_TABLE_PREFIX.'t_user_description', $array_where);
-        $this->dao->delete(DB_TABLE_PREFIX.'t_pages_description', $array_where);
-        return $this->dao->delete($this->getTableName(), array('pk_c_code' => $locale ));
+        $array_where = array('fk_c_locale_code' => $locale);
+        $this->dao->delete(DB_TABLE_PREFIX . 't_category_description', $array_where);
+        $this->dao->delete(DB_TABLE_PREFIX . 't_item_description', $array_where);
+        $this->dao->delete(DB_TABLE_PREFIX . 't_keywords', $array_where);
+        $this->dao->delete(DB_TABLE_PREFIX . 't_user_description', $array_where);
+        $this->dao->delete(DB_TABLE_PREFIX . 't_pages_description', $array_where);
+
+        return $this->dao->delete($this->getTableName(), array('pk_c_code' => $locale));
     }
 }
 
-    /* file end: ./oc-includes/osclass/model/OSCLocale.php */
+/* file end: ./oc-includes/osclass/model/OSCLocale.php */

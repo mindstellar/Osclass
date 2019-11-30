@@ -1,5 +1,5 @@
-<?php if ( ! defined( 'ABS_PATH' ) ) {
-    exit( 'ABS_PATH is not loaded. Direct access is not allowed.' );
+<?php if (!defined('ABS_PATH')) {
+    exit('ABS_PATH is not loaded. Direct access is not allowed.');
 }
 
 /*
@@ -31,17 +31,6 @@ class Widget extends DAO
     private static $instance;
 
     /**
-     * @return \Widget
-     */
-    public static function newInstance()
-    {
-        if ( !self::$instance instanceof self ) {
-            self::$instance = new self;
-        }
-        return self::$instance;
-    }
-
-    /**
      * Widget constructor.
      */
     public function __construct()
@@ -49,15 +38,29 @@ class Widget extends DAO
         parent::__construct();
         $this->setTableName('t_widget');
         $this->setPrimaryKey('pk_i_id');
-        $this->setFields( array('pk_i_id','s_description','s_location','e_kind','s_content') );
+        $this->setFields(array('pk_i_id', 's_description', 's_location', 'e_kind', 's_content'));
+    }
+
+    /**
+     * @return \Widget
+     */
+    public static function newInstance()
+    {
+        if (!self::$instance instanceof self) {
+            self::$instance = new self;
+        }
+
+        return self::$instance;
     }
 
     /**
      *
      * @access public
-     * @since unknown
+     *
      * @param string $location
+     *
      * @return array
+     * @since  unknown
      */
     public function findByLocation($location)
     {
@@ -66,7 +69,7 @@ class Widget extends DAO
         $this->dao->where('s_location', $location);
         $result = $this->dao->get();
 
-        if ( $result == false ) {
+        if ($result == false) {
             return array();
         }
 
@@ -76,9 +79,11 @@ class Widget extends DAO
     /**
      *
      * @access public
-     * @since 3.3.3+
+     *
      * @param string $description
+     *
      * @return array
+     * @since  3.3.3+
      */
     public function findByDescription($description)
     {
@@ -87,7 +92,7 @@ class Widget extends DAO
         $this->dao->where('s_description', $description);
         $result = $this->dao->get();
 
-        if ( $result == false ) {
+        if ($result == false) {
             return array();
         }
 
@@ -95,5 +100,4 @@ class Widget extends DAO
     }
 }
 
-    /* file end: ./oc-includes/osclass/model/Widget.php */
-
+/* file end: ./oc-includes/osclass/model/Widget.php */

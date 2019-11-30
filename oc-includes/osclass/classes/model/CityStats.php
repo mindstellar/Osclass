@@ -1,5 +1,5 @@
-<?php if ( ! defined( 'ABS_PATH' ) ) {
-    exit( 'ABS_PATH is not loaded. Direct access is not allowed.' );
+<?php if (!defined('ABS_PATH')) {
+    exit('ABS_PATH is not loaded. Direct access is not allowed.');
 }
 
 /*
@@ -18,13 +18,13 @@
  * limitations under the License.
  */
 
-    /**
-     * Model database for CityStats table
-     *
-     * @package Osclass
-     * @subpackage Model
-     * @since 2.4
-     */
+/**
+ * Model database for CityStats table
+ *
+ * @package    Osclass
+ * @subpackage Model
+ * @since      2.4
+ */
 class CityStats extends DAO
 {
     /**
@@ -32,64 +32,74 @@ class CityStats extends DAO
      * It is used as a singleton
      *
      * @access private
-     * @since 2.4
+     * @since  2.4
      * @var CityStats
      */
     private static $instance;
 
     /**
-     * It creates a new CityStats object class if it has been created
-     * before, it return the previous object
-     *
-     * @access public
-     * @since  2.4
-     * @return \CityStats
-     */
-    public static function newInstance()
-    {
-        if ( !self::$instance instanceof self ) {
-            self::$instance = new self;
-        }
-        return self::$instance;
-    }
-
-    /**
      * Set data related to t_city_stats table
      *
      * @access public
-     * @since 2.4
+     * @since  2.4
      */
     public function __construct()
     {
         parent::__construct();
         $this->setTableName('t_city_stats');
         $this->setPrimaryKey('fk_i_city_id');
-        $this->setFields( array('fk_i_city_id', 'i_num_items') );
+        $this->setFields(array('fk_i_city_id', 'i_num_items'));
+    }
+
+    /**
+     * It creates a new CityStats object class if it has been created
+     * before, it return the previous object
+     *
+     * @access public
+     * @return \CityStats
+     * @since  2.4
+     */
+    public static function newInstance()
+    {
+        if (!self::$instance instanceof self) {
+            self::$instance = new self;
+        }
+
+        return self::$instance;
     }
 
     /**
      * Increase number of city items, given a city id
      *
      * @access public
-     * @since 2.4
+     *
      * @param int $cityId City id
+     *
      * @return int number of affected rows, id error occurred return false
+     * @since  2.4
      */
     public function increaseNumItems($cityId)
     {
         if (!is_numeric($cityId)) {
             return false;
         }
-        return $this->dao->query(sprintf('INSERT INTO %s (fk_i_city_id, i_num_items) VALUES (%d, 1) ON DUPLICATE KEY UPDATE i_num_items = i_num_items + 1', $this->getTableName(), $cityId));
+
+        return $this->dao->query(sprintf(
+            'INSERT INTO %s (fk_i_city_id, i_num_items) VALUES (%d, 1) ON DUPLICATE KEY UPDATE i_num_items = i_num_items + 1',
+            $this->getTableName(),
+            $cityId
+        ));
     }
 
     /**
      * Increase number of city items, given a city id
      *
      * @access public
-     * @since 2.4
+     *
      * @param int $cityId City id
+     *
      * @return int number of affected rows, id error occurred return false
+     * @since  2.4
      */
     public function decreaseNumItems($cityId)
     {
@@ -97,17 +107,17 @@ class CityStats extends DAO
             return false;
         }
 
-        $this->dao->select( 'i_num_items' );
-        $this->dao->from( $this->getTableName() );
-        $this->dao->where( $this->getPrimaryKey(), $cityId );
-        $result       = $this->dao->get();
+        $this->dao->select('i_num_items');
+        $this->dao->from($this->getTableName());
+        $this->dao->where($this->getPrimaryKey(), $cityId);
+        $result   = $this->dao->get();
         $cityStat = $result->row();
 
-        if ( isset( $cityStat['i_num_items'] ) ) {
-            $this->dao->from( $this->getTableName() );
-            $this->dao->set( 'i_num_items', 'i_num_items - 1', false );
-            $this->dao->where( 'i_num_items > 0' );
-            $this->dao->where( 'fk_i_city_id', $cityId );
+        if (isset($cityStat['i_num_items'])) {
+            $this->dao->from($this->getTableName());
+            $this->dao->set('i_num_items', 'i_num_items - 1', false);
+            $this->dao->where('i_num_items > 0');
+            $this->dao->where('fk_i_city_id', $cityId);
 
             return $this->dao->update();
         }
@@ -119,25 +129,30 @@ class CityStats extends DAO
      * Set i_num_items, given a city id
      *
      * @access public
-     * @since  2.4
      *
      * @param int $cityID
      * @param int $numItems
      *
      * @return mixed
+     * @since  2.4
+     *
      */
     public function setNumItems($cityID, $numItems)
     {
-        return $this->dao->query( 'INSERT INTO ' . $this->getTableName() . " (fk_i_city_id, i_num_items) VALUES ($cityID, $numItems) ON DUPLICATE KEY UPDATE i_num_items = " . $numItems);
+        return $this->dao->query('INSERT INTO ' . $this->getTableName()
+            . " (fk_i_city_id, i_num_items) VALUES ($cityID, $numItems) ON DUPLICATE KEY UPDATE i_num_items = "
+            . $numItems);
     }
 
     /**
      * Find stats by city id
      *
      * @access public
-     * @since 2.4
+     *
      * @param int $cityId city id
+     *
      * @return array
+     * @since  2.4
      */
     public function findByCityId($cityId)
     {
@@ -152,7 +167,9 @@ class CityStats extends DAO
      */
     public function deleteByRegion($regionId)
     {
-        return $this->dao->query('DELETE FROM '.DB_TABLE_PREFIX.'t_city_stats WHERE fk_i_city_id IN (SELECT pk_i_id FROM '.DB_TABLE_PREFIX.'t_city WHERE fk_i_region_id = '.$regionId.');');
+        return $this->dao->query('DELETE FROM ' . DB_TABLE_PREFIX
+            . 't_city_stats WHERE fk_i_city_id IN (SELECT pk_i_id FROM ' . DB_TABLE_PREFIX
+            . 't_city WHERE fk_i_region_id = ' . $regionId . ');');
     }
 
     /**
@@ -170,16 +187,22 @@ class CityStats extends DAO
      */
     public function listCities($region = null, $zero = '>', $order = 'city_name ASC')
     {
-        $key    = md5(osc_base_url().(string)$region.(string)$zero.(string)$order);
-        $found  = null;
-        $cache  = osc_cache_get($key, $found);
-        if ($cache===false) {
-            $this->dao->select($this->getTableName().'.fk_i_city_id as city_id, '.$this->getTableName().'.i_num_items as items, '.DB_TABLE_PREFIX.'t_city.s_name as city_name, '.DB_TABLE_PREFIX.'t_city.s_slug as city_slug');
-            $this->dao->from( $this->getTableName() );
-            $this->dao->join(DB_TABLE_PREFIX.'t_city', $this->getTableName().'.fk_i_city_id = '.DB_TABLE_PREFIX.'t_city.pk_i_id', 'LEFT');
-            $this->dao->where('i_num_items '.$zero.' 0' );
-            if ( is_numeric($region) ) {
-                $this->dao->where(DB_TABLE_PREFIX.'t_city.fk_i_region_id = '.$region);
+        $key   = md5(osc_base_url() . (string)$region . (string)$zero . (string)$order);
+        $found = null;
+        $cache = osc_cache_get($key, $found);
+        if ($cache === false) {
+            $this->dao->select($this->getTableName() . '.fk_i_city_id as city_id, ' . $this->getTableName()
+                . '.i_num_items as items, ' . DB_TABLE_PREFIX . 't_city.s_name as city_name, ' . DB_TABLE_PREFIX
+                . 't_city.s_slug as city_slug');
+            $this->dao->from($this->getTableName());
+            $this->dao->join(
+                DB_TABLE_PREFIX . 't_city',
+                $this->getTableName() . '.fk_i_city_id = ' . DB_TABLE_PREFIX . 't_city.pk_i_id',
+                'LEFT'
+            );
+            $this->dao->where('i_num_items ' . $zero . ' 0');
+            if (is_numeric($region)) {
+                $this->dao->where(DB_TABLE_PREFIX . 't_city.fk_i_region_id = ' . $region);
             }
             $this->dao->orderBy($order);
 
@@ -190,6 +213,7 @@ class CityStats extends DAO
             }
             $return = $rs->result();
             osc_cache_set($key, $return, OSC_CACHE_TTL);
+
             return $return;
         } else {
             return $cache;
@@ -205,13 +229,16 @@ class CityStats extends DAO
      */
     public function calculateNumItems($cityId)
     {
-        $sql  = 'SELECT count(*) as total FROM '.DB_TABLE_PREFIX.'t_item_location, '.DB_TABLE_PREFIX.'t_item, '.DB_TABLE_PREFIX.'t_category ';
-        $sql .= 'WHERE '.DB_TABLE_PREFIX.'t_item_location.fk_i_city_id = '.$cityId.' AND ';
-        $sql .= DB_TABLE_PREFIX.'t_item.pk_i_id = '.DB_TABLE_PREFIX.'t_item_location.fk_i_item_id AND ';
-        $sql .= DB_TABLE_PREFIX.'t_category.pk_i_id = '.DB_TABLE_PREFIX.'t_item.fk_i_category_id AND ';
-        $sql .= DB_TABLE_PREFIX.'t_item.b_active = 1 AND '.DB_TABLE_PREFIX.'t_item.b_enabled = 1 AND '.DB_TABLE_PREFIX.'t_item.b_spam = 0 AND ';
-        $sql .= '('.DB_TABLE_PREFIX.'t_item.b_premium = 1 || '.DB_TABLE_PREFIX.'t_item.dt_expiration >= \''.date('Y-m-d H:i:s').'\' ) AND ';
-        $sql .= DB_TABLE_PREFIX.'t_category.b_enabled = 1 ';
+        $sql = 'SELECT count(*) as total FROM ' . DB_TABLE_PREFIX . 't_item_location, ' . DB_TABLE_PREFIX . 't_item, '
+            . DB_TABLE_PREFIX . 't_category ';
+        $sql .= 'WHERE ' . DB_TABLE_PREFIX . 't_item_location.fk_i_city_id = ' . $cityId . ' AND ';
+        $sql .= DB_TABLE_PREFIX . 't_item.pk_i_id = ' . DB_TABLE_PREFIX . 't_item_location.fk_i_item_id AND ';
+        $sql .= DB_TABLE_PREFIX . 't_category.pk_i_id = ' . DB_TABLE_PREFIX . 't_item.fk_i_category_id AND ';
+        $sql .= DB_TABLE_PREFIX . 't_item.b_active = 1 AND ' . DB_TABLE_PREFIX . 't_item.b_enabled = 1 AND '
+            . DB_TABLE_PREFIX . 't_item.b_spam = 0 AND ';
+        $sql .= '(' . DB_TABLE_PREFIX . 't_item.b_premium = 1 || ' . DB_TABLE_PREFIX . 't_item.dt_expiration >= \''
+            . date('Y-m-d H:i:s') . '\' ) AND ';
+        $sql .= DB_TABLE_PREFIX . 't_category.b_enabled = 1 ';
 
         $return = $this->dao->query($sql);
         if ($return === false) {
@@ -220,6 +247,7 @@ class CityStats extends DAO
 
         if ($return->numRows() > 0) {
             $aux = $return->result();
+
             return $aux[0]['total'];
         }
 
@@ -227,4 +255,4 @@ class CityStats extends DAO
     }
 }
 
-    /* file end: ./oc-includes/osclass/model/CityStats.php */
+/* file end: ./oc-includes/osclass/model/CityStats.php */

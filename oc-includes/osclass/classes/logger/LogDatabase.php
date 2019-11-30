@@ -1,4 +1,4 @@
-<?php if (! defined('ABS_PATH')) {
+<?php if (!defined('ABS_PATH')) {
     exit('ABS_PATH is not loaded. Direct access is not allowed.');
 }
 
@@ -18,9 +18,9 @@
  * limitations under the License.
  */
 
-    /**
-     *
-     */
+/**
+ *
+ */
 class LogDatabase
 {
     /**
@@ -41,6 +41,15 @@ class LogDatabase
 
     /**
      *
+     */
+    public function __construct()
+    {
+        $this->messages         = array();
+        $this->explain_messages = array();
+    }
+
+    /**
+     *
      * @return \LogDatabase
      */
     public static function newInstance()
@@ -48,16 +57,8 @@ class LogDatabase
         if (!self::$instance instanceof self) {
             self::$instance = new self;
         }
-        return self::$instance;
-    }
 
-    /**
-     *
-     */
-    public function __construct()
-    {
-        $this->messages         = array();
-        $this->explain_messages = array();
+        return self::$instance;
     }
 
     /**
@@ -79,7 +80,7 @@ class LogDatabase
 
     /**
      *
-     * @param $sql
+     * @param      $sql
      * @param      $results
      */
     public function addExplainMessage($sql, $results)
@@ -95,9 +96,13 @@ class LogDatabase
      */
     public function printMessages()
     {
-        echo '<fieldset style="border:1px solid black; padding:6px 10px 10px 10px; margin: 20px; width: 95%; background-color: #FFFFFF;" >' . PHP_EOL;
-        echo '<legend style="font-size: 16px;">&nbsp;&nbsp;Database queries (Total queries: ' . $this->getTotalNumberQueries() .' - Total queries time: ' . $this->getTotalQueriesTime() . ')&nbsp;&nbsp;</legend>' . PHP_EOL;
-        echo '<table style="border-collapse: separate; *border-collapse: collapse; width: 100%; font-size: 13px; padding: 15px; border-spacing: 0;">' . PHP_EOL;
+        echo '<fieldset style="border:1px solid black; padding:6px 10px 10px 10px; margin: 20px; width: 95%; background-color: #FFFFFF;" >'
+            . PHP_EOL;
+        echo '<legend style="font-size: 16px;">&nbsp;&nbsp;Database queries (Total queries: '
+            . $this->getTotalNumberQueries() . ' - Total queries time: ' . $this->getTotalQueriesTime()
+            . ')&nbsp;&nbsp;</legend>' . PHP_EOL;
+        echo '<table style="border-collapse: separate; *border-collapse: collapse; width: 100%; font-size: 13px; padding: 15px; border-spacing: 0;">'
+            . PHP_EOL;
         if (count($this->messages) == 0) {
             echo '<tr><td>No queries</td></tr>' . PHP_EOL;
         } else {
@@ -107,7 +112,8 @@ class LogDatabase
                     $row_style = 'style="background-color: #FFC2C2;"';
                 }
                 echo '<tr ' . $row_style . '>' . PHP_EOL;
-                echo '<td style="padding: 10px 10px 9px; text-align: left; vertical-align: top; border: 1px solid #ddd;">' . $msg['query_time'] . '</td>' . PHP_EOL;
+                echo '<td style="padding: 10px 10px 9px; text-align: left; vertical-align: top; border: 1px solid #ddd;">'
+                    . $msg['query_time'] . '</td>' . PHP_EOL;
                 echo '<td style="padding: 10px 10px 9px; text-align: left; vertical-align: top; border: 1px solid #ddd;">';
                 if ($msg['errno'] != 0) {
                     echo '<strong>Error number:</strong> ' . $msg['errno'] . '<br/>';
@@ -123,14 +129,40 @@ class LogDatabase
     }
 
     /**
+     * @return int
+     */
+    public function getTotalNumberQueries()
+    {
+        return count($this->messages);
+    }
+
+    /**
+     * @return int
+     */
+    public function getTotalQueriesTime()
+    {
+        $time = 0;
+        foreach ($this->messages as $m) {
+            $time += $m['query_time'];
+        }
+
+        return $time;
+    }
+
+    /**
      * @return bool
      */
     public function writeMessages()
     {
         $filename = CONTENT_PATH . 'queries.log';
 
-        if ((!file_exists($filename) && !is_writable(CONTENT_PATH)) || (file_exists($filename) && !is_writable($filename))) {
-            error_log('Can not write explain_queries.log file in "'.CONTENT_PATH.'", please check directory/file permissions.');
+        if ((!file_exists($filename) && !is_writable(CONTENT_PATH))
+            || (file_exists($filename)
+                && !is_writable($filename))
+        ) {
+            error_log('Can not write explain_queries.log file in "' . CONTENT_PATH
+                . '", please check directory/file permissions.');
+
             return false;
         }
 
@@ -142,12 +174,21 @@ class LogDatabase
 
         fwrite($fp, '==================================================' . PHP_EOL);
         if (MULTISITE) {
-            fwrite($fp, '=' . str_pad('Date: ' . date('Y-m-d').' '.date('H:i:s'), 48, ' ', STR_PAD_BOTH) . '=' . PHP_EOL);
+            fwrite(
+                $fp,
+                '=' . str_pad('Date: ' . date('Y-m-d') . ' ' . date('H:i:s'), 48, ' ', STR_PAD_BOTH) . '=' . PHP_EOL
+            );
         } else {
-            fwrite($fp, '=' . str_pad('Date: ' . date(osc_date_format()!=''?osc_date_format():'Y-m-d').' '.date(osc_time_format()!=''?osc_date_format():'H:i:s'), 48, ' ', STR_PAD_BOTH) . '=' . PHP_EOL);
+            fwrite($fp, '=' . str_pad('Date: ' . date(osc_date_format() != '' ? osc_date_format() : 'Y-m-d') . ' '
+                    . date(osc_time_format() != '' ? osc_date_format() : 'H:i:s'), 48, ' ', STR_PAD_BOTH) . '='
+                . PHP_EOL);
         }
-        fwrite($fp, '=' . str_pad('Total queries: ' . $this->getTotalNumberQueries(), 48, ' ', STR_PAD_BOTH) . '=' . PHP_EOL);
-        fwrite($fp, '=' . str_pad('Total queries time: ' . $this->getTotalQueriesTime(), 48, ' ', STR_PAD_BOTH) . '=' . PHP_EOL);
+        fwrite(
+            $fp,
+            '=' . str_pad('Total queries: ' . $this->getTotalNumberQueries(), 48, ' ', STR_PAD_BOTH) . '=' . PHP_EOL
+        );
+        fwrite($fp, '=' . str_pad('Total queries time: ' . $this->getTotalQueriesTime(), 48, ' ', STR_PAD_BOTH) . '='
+            . PHP_EOL);
         fwrite($fp, '==================================================' . PHP_EOL . PHP_EOL);
 
         foreach ($this->messages as $msg) {
@@ -161,8 +202,9 @@ class LogDatabase
             fwrite($fp, '--------------------------------------------------' . PHP_EOL);
         }
 
-        fwrite($fp, PHP_EOL . PHP_EOL. PHP_EOL);
+        fwrite($fp, PHP_EOL . PHP_EOL . PHP_EOL);
         fclose($fp);
+
         return true;
     }
 
@@ -173,8 +215,13 @@ class LogDatabase
     {
         $filename = CONTENT_PATH . 'explain_queries.log';
 
-        if ((!file_exists($filename) && !is_writable(CONTENT_PATH)) || (file_exists($filename) && !is_writable($filename))) {
-            error_log('Can not write explain_queries.log file in "'.CONTENT_PATH.'", please check directory/file permissions.');
+        if ((!file_exists($filename) && !is_writable(CONTENT_PATH))
+            || (file_exists($filename)
+                && !is_writable($filename))
+        ) {
+            error_log('Can not write explain_queries.log file in "' . CONTENT_PATH
+                . '", please check directory/file permissions.');
+
             return false;
         }
 
@@ -186,13 +233,24 @@ class LogDatabase
 
         fwrite($fp, '==================================================' . PHP_EOL);
         if (MULTISITE) {
-            fwrite($fp, '=' . str_pad('Date: ' . date('Y-m-d').' '.date('H:i:s'), 48, ' ', STR_PAD_BOTH) . '=' . PHP_EOL);
+            fwrite(
+                $fp,
+                '=' . str_pad('Date: ' . date('Y-m-d') . ' ' . date('H:i:s'), 48, ' ', STR_PAD_BOTH) . '=' . PHP_EOL
+            );
         } else {
-            fwrite($fp, '=' . str_pad('Date: ' . date(osc_date_format() ?: 'Y-m-d') . ' ' . date(osc_time_format() ?: 'H:i:s'), 48, ' ', STR_PAD_BOTH) . '=' . PHP_EOL);
+            fwrite(
+                $fp,
+                '=' . str_pad(
+                    'Date: ' . date(osc_date_format() ?: 'Y-m-d') . ' ' . date(osc_time_format() ?: 'H:i:s'),
+                    48,
+                    ' ',
+                    STR_PAD_BOTH
+                ) . '=' . PHP_EOL
+            );
         }
         fwrite($fp, '==================================================' . PHP_EOL . PHP_EOL);
 
-        $title  = '|' . str_pad('id', 3, ' ', STR_PAD_BOTH) . '|';
+        $title = '|' . str_pad('id', 3, ' ', STR_PAD_BOTH) . '|';
         $title .= str_pad('select_type', 20, ' ', STR_PAD_BOTH) . '|';
         $title .= str_pad('table', 20, ' ', STR_PAD_BOTH) . '|';
         $title .= str_pad('type', 8, ' ', STR_PAD_BOTH) . '|';
@@ -203,13 +261,13 @@ class LogDatabase
         $title .= str_pad('rows', 8, ' ', STR_PAD_BOTH) . '|';
         $title .= str_pad('Extra', 38, ' ', STR_PAD_BOTH) . '|';
 
-        for ($i = 0 , $iMax = count($this->explain_messages); $i < $iMax; $i ++) {
+        for ($i = 0, $iMax = count($this->explain_messages); $i < $iMax; $i++) {
             fwrite($fp, $this->explain_messages[$i]['query'] . PHP_EOL);
             fwrite($fp, str_pad('', 211, '-', STR_PAD_BOTH) . PHP_EOL);
             fwrite($fp, $title . PHP_EOL);
             fwrite($fp, str_pad('', 211, '-', STR_PAD_BOTH) . PHP_EOL);
             foreach ($this->explain_messages[$i]['explain'] as $explain) {
-                $row  = '|' . str_pad($explain['id'], 3, ' ', STR_PAD_BOTH) . '|';
+                $row = '|' . str_pad($explain['id'], 3, ' ', STR_PAD_BOTH) . '|';
                 $row .= str_pad($explain['select_type'], 20, ' ', STR_PAD_BOTH) . '|';
                 $row .= str_pad($explain['table'], 20, ' ', STR_PAD_BOTH) . '|';
                 $row .= str_pad($explain['type'], 8, ' ', STR_PAD_BOTH) . '|';
@@ -229,29 +287,9 @@ class LogDatabase
 
         fwrite($fp, PHP_EOL . PHP_EOL);
         fclose($fp);
+
         return true;
-    }
-
-    /**
-     * @return int
-     */
-    public function getTotalQueriesTime()
-    {
-        $time = 0;
-        foreach ($this->messages as $m) {
-            $time += $m[ 'query_time' ];
-        }
-
-        return $time;
-    }
-
-    /**
-     * @return int
-     */
-    public function getTotalNumberQueries()
-    {
-        return count($this->messages);
     }
 }
 
-    /* file end: ./oc-includes/osclass/logger/LogDatabase.php */
+/* file end: ./oc-includes/osclass/logger/LogDatabase.php */

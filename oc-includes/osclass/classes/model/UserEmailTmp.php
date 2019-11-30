@@ -1,5 +1,5 @@
-<?php if ( ! defined( 'ABS_PATH' ) ) {
-    exit( 'ABS_PATH is not loaded. Direct access is not allowed.' );
+<?php if (!defined('ABS_PATH')) {
+    exit('ABS_PATH is not loaded. Direct access is not allowed.');
 }
 
 /*
@@ -18,9 +18,9 @@
  * limitations under the License.
  */
 
-    /**
-     *
-     */
+/**
+ *
+ */
 class UserEmailTmp extends DAO
 {
     /**
@@ -30,17 +30,6 @@ class UserEmailTmp extends DAO
     private static $instance;
 
     /**
-     * @return \UserEmailTmp
-     */
-    public static function newInstance()
-    {
-        if ( !self::$instance instanceof self ) {
-            self::$instance = new self;
-        }
-        return self::$instance;
-    }
-
-    /**
      *
      */
     public function __construct()
@@ -48,27 +37,49 @@ class UserEmailTmp extends DAO
         parent::__construct();
         $this->setTableName('t_user_email_tmp');
         $this->setPrimaryKey('fk_i_user_id');
-        $this->setFields( array('fk_i_user_id','s_new_email','dt_date') );
+        $this->setFields(array('fk_i_user_id', 's_new_email', 'dt_date'));
+    }
+
+    /**
+     * @return \UserEmailTmp
+     */
+    public static function newInstance()
+    {
+        if (!self::$instance instanceof self) {
+            self::$instance = new self;
+        }
+
+        return self::$instance;
     }
 
     /**
      *
      * @access public
-     * @since unknown
      *
      * @param $userEmailTmp
      *
      * @return array|bool
+     * @since  unknown
+     *
      */
     public function insertOrUpdate($userEmailTmp)
     {
 
-        $status = $this->dao->insert($this->getTableName(), array('fk_i_user_id' => $userEmailTmp['fk_i_user_id'], 's_new_email' => $userEmailTmp['s_new_email'], 'dt_date' => date('Y-m-d H:i:s')));
+        $status = $this->dao->insert($this->getTableName(), array(
+            'fk_i_user_id' => $userEmailTmp['fk_i_user_id'],
+            's_new_email'  => $userEmailTmp['s_new_email'],
+            'dt_date'      => date('Y-m-d H:i:s')
+        ));
         if (!$status) {
-            return $this->dao->update($this->getTableName(), array('s_new_email' => $userEmailTmp['s_new_email'], 'dt_date' => date('Y-m-d H:i:s')), array('fk_i_user_id' => $userEmailTmp['fk_i_user_id']));
+            return $this->dao->update(
+                $this->getTableName(),
+                array('s_new_email' => $userEmailTmp['s_new_email'], 'dt_date' => date('Y-m-d H:i:s')),
+                array('fk_i_user_id' => $userEmailTmp['fk_i_user_id'])
+            );
         }
+
         return false;
     }
 }
 
-    /* file end: ./oc-includes/osclass/model/UserEmailTmp.php */
+/* file end: ./oc-includes/osclass/model/UserEmailTmp.php */

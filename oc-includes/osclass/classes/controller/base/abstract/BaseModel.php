@@ -16,9 +16,9 @@
  * limitations under the License.
  */
 
-    /**
-     * Class BaseModel
-     */
+/**
+ * Class BaseModel
+ */
 abstract class BaseModel
 {
     protected $page;
@@ -59,13 +59,106 @@ abstract class BaseModel
             $this->subdomain_params($current_host);
         } catch (Exception $e) {
         }
-        $this->page   = Params::getParam('page');
+        $this->page = Params::getParam('page');
         $this->action = Params::getParam('action');
-        $this->ajax   = false;
-        $this->time   = microtime(true);
+        $this->ajax = false;
+        $this->time = microtime(true);
         WebThemes::newInstance();
         osc_run_hook('init');
     }
+
+    /**
+     * @param      $url
+     * @param null $code
+     */
+    public function redirectTo($url, $code = null)
+    {
+        osc_redirect_to($url, $code);
+    }
+
+    //to export variables at the business layer
+
+    /**
+     * @param $host
+     *
+     * @throws \Exception
+     */
+    private function subdomain_params($host)
+    {
+        $subdomain_type = osc_subdomain_type();
+        $subhost        = osc_subdomain_host();
+        // strpos is used to check if the domain is different, useful when accessing the website by diferent domains
+        if ($subdomain_type != '' && $subhost != '' && strpos($host, $subhost) !== false
+            && preg_match('|^(www\.)?(.+)\.' . $subhost . '$|i', $host, $match)
+        ) {
+            $subdomain = $match[2];
+            if ($subdomain != '' && $subdomain !== 'www') {
+                if ($subdomain_type === 'category') {
+                    $category = Category::newInstance()->findBySlug($subdomain);
+                    if (isset($category['pk_i_id'])) {
+                        View::newInstance()->_exportVariableToView('subdomain_name', $category['s_name']);
+                        View::newInstance()->_exportVariableToView('subdomain_slug', $category['s_slug']);
+                        Params::setParam('sCategory', $category['pk_i_id']);
+                        if (Params::getParam('page') == '') {
+                            Params::setParam('page', 'search');
+                        }
+                    } else {
+                        $this->do400();
+                    }
+                } elseif ($subdomain_type === 'country') {
+                    $country = Country::newInstance()->findBySlug($subdomain);
+                    if (isset($country['pk_c_code'])) {
+                        View::newInstance()->_exportVariableToView('subdomain_name', $country['s_name']);
+                        View::newInstance()->_exportVariableToView('subdomain_slug', $country['s_slug']);
+                        Params::setParam('sCountry', $country['pk_c_code']);
+                    } else {
+                        $this->do400();
+                    }
+                } elseif ($subdomain_type === 'region') {
+                    $region = Region::newInstance()->findBySlug($subdomain);
+                    if (isset($region['pk_i_id'])) {
+                        View::newInstance()->_exportVariableToView('subdomain_name', $region['s_name']);
+                        View::newInstance()->_exportVariableToView('subdomain_slug', $region['s_slug']);
+                        Params::setParam('sRegion', $region['pk_i_id']);
+                    } else {
+                        $this->do400();
+                    }
+                } elseif ($subdomain_type === 'city') {
+                    $city = City::newInstance()->findBySlug($subdomain);
+                    if (isset($city['pk_i_id'])) {
+                        View::newInstance()->_exportVariableToView('subdomain_name', $city['s_name']);
+                        View::newInstance()->_exportVariableToView('subdomain_slug', $city['s_slug']);
+                        Params::setParam('sCity', $city['pk_i_id']);
+                    } else {
+                        $this->do400();
+                    }
+                } elseif ($subdomain_type === 'user') {
+                    $user = User::newInstance()->findByUsername($subdomain);
+                    if (isset($user['pk_i_id'])) {
+                        View::newInstance()->_exportVariableToView('subdomain_name', $user['s_name']);
+                        View::newInstance()->_exportVariableToView('subdomain_slug', $user['s_username']);
+                        Params::setParam('sUser', $user['pk_i_id']);
+                    } else {
+                        $this->do400();
+                    }
+                } else {
+                    $this->do400();
+                }
+            }
+        }
+    }
+
+    //only for debug (deprecated, all inside View.php)
+
+    public function do400()
+    {
+        Rewrite::newInstance()->set_location('error');
+        header('HTTP/1.1 400 Bad Request');
+        osc_current_web_theme_path('404.php');
+        exit;
+    }
+
+    //Funciones que se tendran que reescribir en la clase que extienda de esta
 
     public function __destruct()
     {
@@ -74,7 +167,15 @@ abstract class BaseModel
         }
     }
 
-    //to export variables at the business layer
+    /**
+     * @return mixed
+     */
+    public function getTime()
+    {
+        $timeEnd = microtime(true);
+
+        return $timeEnd - $this->time;
+    }
 
     /**
      * @param $key
@@ -85,32 +186,12 @@ abstract class BaseModel
         View::newInstance()->_exportVariableToView($key, $value);
     }
 
-    //only for debug (deprecated, all inside View.php)
-
     /**
      * @param null $key
      */
     public function _view($key = null)
     {
         View::newInstance()->_view($key);
-    }
-
-    //Funciones que se tendran que reescribir en la clase que extienda de esta
-    abstract protected function doModel();
-
-    /**
-     * @param $file
-     *
-     * @return mixed
-     */
-    abstract protected function doView($file);
-
-    public function do400()
-    {
-        Rewrite::newInstance()->set_location('error');
-        header('HTTP/1.1 400 Bad Request');
-        osc_current_web_theme_path('404.php');
-        exit;
     }
 
     public function do404()
@@ -129,91 +210,14 @@ abstract class BaseModel
         exit;
     }
 
-    /**
-     * @param      $url
-     * @param null $code
-     */
-    public function redirectTo($url, $code = null)
-    {
-        osc_redirect_to($url, $code);
-    }
+    abstract protected function doModel();
 
     /**
+     * @param $file
+     *
      * @return mixed
      */
-    public function getTime()
-    {
-        $timeEnd = microtime(true);
-        return $timeEnd - $this->time;
-    }
-
-    /**
-     * @param $host
-     *
-     * @throws \Exception
-     */
-    private function subdomain_params($host)
-    {
-        $subdomain_type = osc_subdomain_type();
-        $subhost = osc_subdomain_host();
-        // strpos is used to check if the domain is different, useful when accessing the website by diferent domains
-        if ($subdomain_type != '' && $subhost != '' && strpos($host, $subhost) !== false && preg_match('|^(www\.)?(.+)\.' . $subhost . '$|i', $host, $match)) {
-            $subdomain = $match[ 2 ];
-            if ($subdomain != '' && $subdomain !== 'www') {
-                if ($subdomain_type === 'category') {
-                    $category = Category::newInstance()->findBySlug($subdomain);
-                    if (isset($category[ 'pk_i_id' ])) {
-                        View::newInstance()->_exportVariableToView('subdomain_name', $category[ 's_name' ]);
-                        View::newInstance()->_exportVariableToView('subdomain_slug', $category[ 's_slug' ]);
-                        Params::setParam('sCategory', $category[ 'pk_i_id' ]);
-                        if (Params::getParam('page') == '') {
-                            Params::setParam('page', 'search');
-                        }
-                    } else {
-                        $this->do400();
-                    }
-                } elseif ($subdomain_type === 'country') {
-                    $country = Country::newInstance()->findBySlug($subdomain);
-                    if (isset($country[ 'pk_c_code' ])) {
-                        View::newInstance()->_exportVariableToView('subdomain_name', $country[ 's_name' ]);
-                        View::newInstance()->_exportVariableToView('subdomain_slug', $country[ 's_slug' ]);
-                        Params::setParam('sCountry', $country[ 'pk_c_code' ]);
-                    } else {
-                        $this->do400();
-                    }
-                } elseif ($subdomain_type === 'region') {
-                    $region = Region::newInstance()->findBySlug($subdomain);
-                    if (isset($region[ 'pk_i_id' ])) {
-                        View::newInstance()->_exportVariableToView('subdomain_name', $region[ 's_name' ]);
-                        View::newInstance()->_exportVariableToView('subdomain_slug', $region[ 's_slug' ]);
-                        Params::setParam('sRegion', $region[ 'pk_i_id' ]);
-                    } else {
-                        $this->do400();
-                    }
-                } elseif ($subdomain_type === 'city') {
-                    $city = City::newInstance()->findBySlug($subdomain);
-                    if (isset($city[ 'pk_i_id' ])) {
-                        View::newInstance()->_exportVariableToView('subdomain_name', $city[ 's_name' ]);
-                        View::newInstance()->_exportVariableToView('subdomain_slug', $city[ 's_slug' ]);
-                        Params::setParam('sCity', $city[ 'pk_i_id' ]);
-                    } else {
-                        $this->do400();
-                    }
-                } elseif ($subdomain_type === 'user') {
-                    $user = User::newInstance()->findByUsername($subdomain);
-                    if (isset($user[ 'pk_i_id' ])) {
-                        View::newInstance()->_exportVariableToView('subdomain_name', $user[ 's_name' ]);
-                        View::newInstance()->_exportVariableToView('subdomain_slug', $user[ 's_username' ]);
-                        Params::setParam('sUser', $user[ 'pk_i_id' ]);
-                    } else {
-                        $this->do400();
-                    }
-                } else {
-                    $this->do400();
-                }
-            }
-        }
-    }
+    abstract protected function doView($file);
 }
 
-    /* file end: ./oc-includes/osclass/core/BaseModel.php */
+/* file end: ./oc-includes/osclass/core/BaseModel.php */

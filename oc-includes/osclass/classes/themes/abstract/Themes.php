@@ -1,5 +1,5 @@
-<?php if ( ! defined( 'ABS_PATH' ) ) {
-    exit( 'ABS_PATH is not loaded. Direct access is not allowed.' );
+<?php if (!defined('ABS_PATH')) {
+    exit('ABS_PATH is not loaded. Direct access is not allowed.');
 }
 
 /*
@@ -18,9 +18,9 @@
  * limitations under the License.
  */
 
-    /**
-     * Class Themes
-     */
+/**
+ * Class Themes
+ */
 abstract class Themes
 {
     private static $instance;
@@ -43,10 +43,6 @@ abstract class Themes
         $this->styles  = array();
     }
 
-    abstract protected function setCurrentThemeUrl();
-    abstract protected function setCurrentThemePath();
-
-    /* PUBLIC */
     /**
      * @param $theme
      */
@@ -56,6 +52,12 @@ abstract class Themes
         $this->setCurrentThemePath();
         $this->setCurrentThemeUrl();
     }
+
+    abstract protected function setCurrentThemePath();
+
+    /* PUBLIC */
+
+    abstract protected function setCurrentThemeUrl();
 
     public function getCurrentTheme()
     {
@@ -89,4 +91,4 @@ abstract class Themes
     }
 }
 
-    /* file end: ./oc-includes/osclass/Themes.php */
+/* file end: ./oc-includes/osclass/Themes.php */

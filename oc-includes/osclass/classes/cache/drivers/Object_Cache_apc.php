@@ -1,23 +1,24 @@
 <?php
+
 /**
  * Object_Cache_apc class
  */
 class Object_Cache_apc implements iObject_Cache
 {
 
-   /**
+    /**
      * Holds the cached objects
      *
      * @var array
      * @access private
-     * @since 3.4
+     * @since  3.4
      */
-    public $cache = array ();
+    public $cache = array();
 
     /**
      * The amount of times the cache data was already stored in the cache.
      *
-     * @since 3.4
+     * @since  3.4
      * @access private
      * @var int
      */
@@ -28,7 +29,7 @@ class Object_Cache_apc implements iObject_Cache
      *
      * @var int
      * @access public
-     * @since 3.4
+     * @since  3.4
      */
     public $cache_misses = 0;
 
@@ -37,20 +38,40 @@ class Object_Cache_apc implements iObject_Cache
      *
      * @var int
      * @access private
-     * @since 3.4
+     * @since  3.4
      */
     public $site_prefix;
     public $multisite;
     public $default_expiration = 60;
 
     /**
+     * Sets up object properties; PHP 5 style constructor
+     *
+     * @since 3.4
+     */
+    public function __construct()
+    {
+
+        $this->multisite = false;
+//        if(SiteInfo::newInstance()->siteInfo!=array()) {
+//            $info       = SiteInfo::newInstance()->siteInfo;
+//            $site_id    = osc_sanitizeString($info);
+//            $this->multisite = true;
+//        }
+        $site_id           = '';
+        $this->site_prefix = $this->multisite ? $site_id . ':' : '';
+    }
+
+    /**
      * Adds data to the cache if it doesn't already exist.
+     *
+     * @param int|string $key    What to call the contents in the cache
+     * @param mixed      $data   The contents to store in the cache
+     * @param int        $expire When to expire the cache contents
+     *
+     * @return bool False if cache key and group already exist, true on success
      * @since 3.4
      *
-     * @param int|string $key What to call the contents in the cache
-     * @param mixed $data The contents to store in the cache
-     * @param int $expire When to expire the cache contents
-     * @return bool False if cache key and group already exist, true on success
      */
     public function add($key, $data, $expire = 0)
     {
@@ -60,7 +81,7 @@ class Object_Cache_apc implements iObject_Cache
         }
 
         if (is_object($data)) {
-                $data = clone $data;
+            $data = clone $data;
         }
 
         $store_data = $data;
@@ -69,10 +90,10 @@ class Object_Cache_apc implements iObject_Cache
             $store_data = new ArrayObject($data);
         }
 
-        $expire = ( $expire == 0 ) ? $this->default_expiration : $expire;
+        $expire = ($expire == 0) ? $this->default_expiration : $expire;
         $result = apc_add($id, $store_data, $expire);
         if (false !== $result) {
-                $this->cache[$key] = $data;
+            $this->cache[$key] = $data;
         }
 
         return $result;
@@ -80,10 +101,12 @@ class Object_Cache_apc implements iObject_Cache
 
     /**
      * Remove the contents of the cache key in the group
-     * @since 3.4
      *
      * @param int|string $key What the contents in the cache are called
+     *
      * @return bool False if the contents weren't deleted and true on success
+     * @since 3.4
+     *
      */
     public function delete($key)
     {
@@ -94,20 +117,22 @@ class Object_Cache_apc implements iObject_Cache
 
         $result = apc_delete($key);
         if (false !== $result) {
-                unset($this->cache[$key]);
+            unset($this->cache[$key]);
         }
+
         return $result;
     }
 
     /**
      * Clears the object cache of all data
-     * @since 3.4
      *
      * @return bool Always returns true
+     * @since 3.4
+     *
      */
     public function flush()
     {
-        $this->cache = array ();
+        $this->cache = array();
         if (extension_loaded('apcu')) {
             return apc_clear_cache();
         }
@@ -117,12 +142,14 @@ class Object_Cache_apc implements iObject_Cache
 
     /**
      * Retrieves the cache contents, if it exists
-     * @since 3.4
      *
-     * @param int|string $key What the contents in the cache are called
-     * @param bool $found if can be retrieved from cache
+     * @param int|string $key   What the contents in the cache are called
+     * @param bool       $found if can be retrieved from cache
+     *
      * @return bool|mixed False on failure to retrieve contents or the cache
      *      contents on success
+     * @since 3.4
+     *
      */
     public function get($key, &$found = null)
     {
@@ -137,7 +164,7 @@ class Object_Cache_apc implements iObject_Cache
             } else {
                 $value = $this->cache[$key];
             }
-            ++ $this->cache_hits;
+            ++$this->cache_hits;
             $return = $value;
         } else {
             $value = apc_fetch($key, $found);
@@ -150,35 +177,27 @@ class Object_Cache_apc implements iObject_Cache
             }
             $this->cache[$key] = is_object($value) ? clone $value : $value;
             if ($found) {
-                ++ $this->cache_hits;
+                ++$this->cache_hits;
                 $return = $this->cache[$key];
             } else {
-                ++ $this->cache_misses;
+                ++$this->cache_misses;
                 $return = false;
             }
         }
+
         return $return;
     }
 
     /**
-     * Reset keys
-     *
-     * @since 3.0.0
-     * @deprecated 3.5.0
-     */
-    public function reset()
-    {
-        $this->cache = array();
-    }
-
-    /**
      * Sets the data contents into the cache
+     *
+     * @param int|string $key    What to call the contents in the cache
+     * @param mixed      $data   The contents to store in the cache
+     * @param int        $expire Not Used
+     *
+     * @return bool Always returns true on success, false on failure
      * @since 3.4
      *
-     * @param int|string $key What to call the contents in the cache
-     * @param mixed $data The contents to store in the cache
-     * @param int $expire Not Used
-     * @return bool Always returns true on success, false on failure
      */
     public function set($key, $data, $expire = 0)
     {
@@ -198,7 +217,7 @@ class Object_Cache_apc implements iObject_Cache
 
         $this->cache[$key] = $data;
 
-        $expire = ( $expire == 0 ) ? $this->default_expiration : $expire;
+        $expire = ($expire == 0) ? $this->default_expiration : $expire;
 
         return apc_store($key, $store_data, $expire);
     }
@@ -223,49 +242,18 @@ padding: 1em;'><h2>APC stats</h2>";
     }
 
     /**
-     * Utility function to determine whether a key exists in the cache.
-     * @since  3.4
-     *
-     * @access protected
-     *
-     * @param $key
-     *
-     * @return bool
-     */
-    protected function _exists($key)
-    {
-        return isset($this->cache[ $key ]);
-    }
-
-    /**
-     * Sets up object properties; PHP 5 style constructor
-     *
-     * @since 3.4
-     */
-    public function __construct()
-    {
-
-        $this->multisite = false;
-//        if(SiteInfo::newInstance()->siteInfo!=array()) {
-//            $info       = SiteInfo::newInstance()->siteInfo;
-//            $site_id    = osc_sanitizeString($info);
-//            $this->multisite = true;
-//        }
-        $site_id = '';
-        $this->site_prefix =  $this->multisite ? $site_id . ':' : '';
-    }
-
-    /**
      * is_supported()
      *
      * Check to see if APC is available on this system, bail if it isn't.
      */
     public static function is_supported()
     {
-        if (! extension_loaded('apc') or ini_get('apc.enabled') != '1') {
+        if (!extension_loaded('apc') or ini_get('apc.enabled') != '1') {
             error_log('The APC PHP extension must be loaded to use APC Cache.');
+
             return false;
         }
+
         return true;
     }
 
@@ -283,5 +271,32 @@ padding: 1em;'><h2>APC stats</h2>";
     public function _get_cache()
     {
         return 'apc';
+    }
+
+    /**
+     * Reset keys
+     *
+     * @since      3.0.0
+     * @deprecated 3.5.0
+     */
+    public function reset()
+    {
+        $this->cache = array();
+    }
+
+    /**
+     * Utility function to determine whether a key exists in the cache.
+     *
+     * @param $key
+     *
+     * @return bool
+     * @since  3.4
+     *
+     * @access protected
+     *
+     */
+    protected function _exists($key)
+    {
+        return isset($this->cache[$key]);
     }
 }

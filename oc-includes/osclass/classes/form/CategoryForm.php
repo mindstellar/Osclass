@@ -117,9 +117,12 @@ class CategoryForm extends Form
      */
     public static function expiration_days_input_text($category = null)
     {
-        parent::generic_input_text('i_expiration_days',
+        parent::generic_input_text(
+            'i_expiration_days',
             (isset($category) && isset($category['i_expiration_days']))
-                ? $category['i_expiration_days'] : '', 3);
+            ? $category['i_expiration_days'] : '',
+            3
+        );
     }
 
     /**
@@ -127,8 +130,11 @@ class CategoryForm extends Form
      */
     public static function position_input_text($category = null)
     {
-        parent::generic_input_text('i_position',
-            (isset($category) && isset($category['i_position'])) ? $category['i_position'] : '', 3);
+        parent::generic_input_text(
+            'i_position',
+            (isset($category) && isset($category['i_position'])) ? $category['i_position'] : '',
+            3
+        );
     }
 
     /**
@@ -136,8 +142,11 @@ class CategoryForm extends Form
      */
     public static function enabled_input_checkbox($category = null)
     {
-        parent::generic_input_checkbox('b_enabled', '1',
-            (isset($category) && isset($category['b_enabled']) && $category['b_enabled'] == 1));
+        parent::generic_input_checkbox(
+            'b_enabled',
+            '1',
+            (isset($category) && isset($category['b_enabled']) && $category['b_enabled'] == 1)
+        );
     }
 
     /**
@@ -155,9 +164,12 @@ class CategoryForm extends Form
      */
     public static function price_enabled_for_category($category = null)
     {
-        parent::generic_input_checkbox('b_price_enabled', '1',
+        parent::generic_input_checkbox(
+            'b_price_enabled',
+            '1',
             (isset($category) && isset($category['b_price_enabled'])
-                && $category['b_price_enabled'] == 1));
+            && $category['b_price_enabled'] == 1)
+        );
     }
 
     /**
@@ -198,4 +210,3 @@ class CategoryForm extends Form
 }
 
 /* file end: ./oc-includes/osclass/form/CategoryForm.php */
-

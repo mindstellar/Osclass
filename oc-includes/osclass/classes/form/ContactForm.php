@@ -178,8 +178,6 @@ class ContactForm extends Form
         </script>
         <?php
     }
-
-
 }
 
 ?>

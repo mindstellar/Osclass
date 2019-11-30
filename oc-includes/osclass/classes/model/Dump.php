@@ -1,5 +1,5 @@
-<?php if ( ! defined( 'ABS_PATH' ) ) {
-    exit( 'ABS_PATH is not loaded. Direct access is not allowed.' );
+<?php if (!defined('ABS_PATH')) {
+    exit('ABS_PATH is not loaded. Direct access is not allowed.');
 }
 
 /*
@@ -18,13 +18,13 @@
  * limitations under the License.
  */
 
-    /**
-     * Model database for Dump database tables
-     *
-     * @package Osclass
-     * @subpackage Model
-     * @since unknown
-     */
+/**
+ * Model database for Dump database tables
+ *
+ * @package    Osclass
+ * @subpackage Model
+ * @since      unknown
+ */
 class Dump extends DAO
 {
     /**
@@ -32,21 +32,10 @@ class Dump extends DAO
      * It is used as a singleton
      *
      * @access private
-     * @since unknown
+     * @since  unknown
      * @var Dump
      */
     private static $instance;
-
-    /**
-     * @return \Dump
-     */
-    public static function newInstance()
-    {
-        if ( !self::$instance instanceof self ) {
-            self::$instance = new self;
-        }
-        return self::$instance;
-    }
 
     /**
      * Set data
@@ -56,7 +45,19 @@ class Dump extends DAO
         parent::__construct();
     }
 
-     /**
+    /**
+     * @return \Dump
+     */
+    public static function newInstance()
+    {
+        if (!self::$instance instanceof self) {
+            self::$instance = new self;
+        }
+
+        return self::$instance;
+    }
+
+    /**
      * Return all tables from database
      *
      * @return array
@@ -76,11 +77,12 @@ class Dump extends DAO
      *
      * @param string $path
      * @param string $table
+     *
      * @return bool
      */
     public function table_structure($path, $table)
     {
-        if ( ! is_writable( $path ) ) {
+        if (!is_writable($path)) {
             return false;
         }
 
@@ -90,9 +92,9 @@ class Dump extends DAO
 
         $result = $this->dao->query($sql);
         if ($result) {
-            $result =  $result->result();
+            $result = $result->result();
         } else {
-            $result =  array();
+            $result = array();
         }
 
         foreach ($result as $_line) {
@@ -100,7 +102,7 @@ class Dump extends DAO
             $_str .= "\n\n";
         }
 
-        $f = fopen( $path, 'ab' );
+        $f = fopen($path, 'ab');
         fwrite($f, $_str);
         fclose($f);
 
@@ -117,15 +119,15 @@ class Dump extends DAO
      */
     public function table_data($path, $table)
     {
-        if ( ! is_writable( $path ) ) {
+        if (!is_writable($path)) {
             return false;
         }
 
         $this->dao->select();
         $this->dao->from($table);
         $res    = $this->dao->get();
-        $result = array ();
-        if ( $res ) {
+        $result = array();
+        if ($res) {
             $result = $res->result();
         }
 
@@ -135,12 +137,12 @@ class Dump extends DAO
             $num_fields = $res->numFields();
             $fields     = $res->resultId->fetch_fields();
 
-            if ( $num_rows > 0 ) {
+            if ($num_rows > 0) {
                 $_str .= '/* dumping data for table `' . $table . '` */';
                 $_str .= "\n";
 
                 $field_type = array();
-                $i = 0;
+                $i          = 0;
 
                 while ($meta = $res->resultId->fetch_field()) {
                     $field_type[] = $meta->type;
@@ -150,25 +152,25 @@ class Dump extends DAO
                 $_str .= "\n";
 
                 $index = 0;
-                if ($table==DB_TABLE_PREFIX.'t_category') {
+                if ($table == DB_TABLE_PREFIX . 't_category') {
                     $this->_dump_table_category($result, $num_fields, $field_type, $fields, $index, $num_rows, $_str);
                 } else {
                     foreach ($result as $row) {
                         $_str .= '(';
-                        for ( $i = 0; $i < $num_fields; $i++ ) {
+                        for ($i = 0; $i < $num_fields; $i++) {
                             $v = $row[$fields[$i]->name];
-                            if ( null === $v ) {
+                            if (null === $v) {
                                 $_str .= 'null';
                             } else {
                                 $this->_quotes($fields[$i]->type, $_str, $row[$fields[$i]->name]);
                             }
-                            if ($i < $num_fields-1) {
+                            if ($i < $num_fields - 1) {
                                 $_str .= ',';
                             }
                         }
                         $_str .= ')';
 
-                        if ($index < $num_rows-1) {
+                        if ($index < $num_rows - 1) {
                             $_str .= ',';
                         } else {
                             $_str .= ';';
@@ -183,7 +185,7 @@ class Dump extends DAO
 
         $_str .= "\n";
 
-        $f = fopen( $path, 'ab' );
+        $f = fopen($path, 'ab');
         fwrite($f, $_str);
         fclose($f);
 
@@ -203,10 +205,10 @@ class Dump extends DAO
      */
     private function _dump_table_category($result, $num_fields, $field_type, $fields, $index, $num_rows, &$_str)
     {
-        $short_rows = array();
+        $short_rows   = array();
         $unshort_rows = array();
         foreach ($result as $row) {
-            if ( $row['fk_i_parent_id'] == null) {
+            if ($row['fk_i_parent_id'] == null) {
                 $short_rows[] = $row;
             } else {
                 $unshort_rows[$row['pk_i_id']] = $row;
@@ -216,7 +218,7 @@ class Dump extends DAO
         while (!empty($unshort_rows)) {
             foreach ($unshort_rows as $k => $v) {
                 foreach ($short_rows as $r) {
-                    if ($r['pk_i_id']==$v['fk_i_parent_id']) {
+                    if ($r['pk_i_id'] == $v['fk_i_parent_id']) {
                         unset($unshort_rows[$k]);
                         $short_rows[] = $v;
                     }
@@ -226,20 +228,20 @@ class Dump extends DAO
 
         foreach ($short_rows as $row) {
             $_str .= '(';
-            for ( $i = 0; $i < $num_fields; $i++ ) {
+            for ($i = 0; $i < $num_fields; $i++) {
                 $v = $row[$fields[$i]->name];
-                if ( null === $v ) {
+                if (null === $v) {
                     $_str .= 'null';
                 } else {
                     $this->_quotes($fields[$i]->type, $_str, $v);
                 }
-                if ($i < $num_fields-1) {
+                if ($i < $num_fields - 1) {
                     $_str .= ',';
                 }
             }
             $_str .= ')';
 
-            if ($index < $num_rows-1) {
+            if ($index < $num_rows - 1) {
                 $_str .= ',';
             } else {
                 $_str .= ';';
@@ -273,17 +275,17 @@ class Dump extends DAO
 //            VARBINARY: 253 - TINYBLOB: 252 - BLOB: 252 - MEDIUMBLOB: 252
 //            TINYTEXT: 252 - TEXT: 252 - MEDIUMTEXT: 252 - LONGTEXT: 252
 
-        $aNumeric = array(16, 1, 2, 9, 3, 8, 4, 5, 246 );
-        $aDates   = array(10, 12, 7, 11, 13 );
-        $aString  = array ( 254 , 253 , 252 );
+        $aNumeric = array(16, 1, 2, 9, 3, 8, 4, 5, 246);
+        $aDates   = array(10, 12, 7, 11, 13);
+        $aString  = array(254, 253, 252);
 
-        if ( in_array( $type, $aNumeric, true ) ) {
+        if (in_array($type, $aNumeric, true)) {
             $_str .= $value;
-        } else if ( in_array( $type, $aDates, true ) ) {
-            $_str .= '\'' . $this->dao->connId->real_escape_string( $value ) . '\'';
-        } else if ( in_array( $type, $aString, true ) ) {
+        } elseif (in_array($type, $aDates, true)) {
+            $_str .= '\'' . $this->dao->connId->real_escape_string($value) . '\'';
+        } elseif (in_array($type, $aString, true)) {
             $_str .= '\'' . $this->dao->connId->real_escape_string($value) . '\'';
         }
     }
 }
-    /* file end: ./oc-includes/osclass/model/Dump.php */
+/* file end: ./oc-includes/osclass/model/Dump.php */

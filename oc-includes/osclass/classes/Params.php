@@ -17,6 +17,7 @@ class Params
 
     /**
      * Return HTMLPurified param
+     *
      * @param      $param
      * @param bool $html_encode
      * @param bool $xss_check
@@ -42,6 +43,7 @@ class Params
     /**
      * Function to purify given string or array
      * Should be moved to separate class
+     *
      * @param      $value
      *
      * @param bool $html_encode
@@ -76,6 +78,7 @@ class Params
                 if ($quotes_encode === true) {
                     return htmlspecialchars(stripslashes($value), ENT_QUOTES);
                 }
+
                 return htmlspecialchars(stripslashes($value), ENT_NOQUOTES);
             }
 
@@ -193,6 +196,7 @@ class Params
 
     /**
      * Will be removed do not use this
+     *
      * @deprecated 4.0
      * return void
      */

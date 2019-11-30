@@ -75,8 +75,10 @@ class LanguageForm extends Form
      */
     public static function currency_format_input_text($locale = null)
     {
-        parent::generic_input_text('s_currency_format',
-            isset($locale) ? $locale['s_currency_format'] : '');
+        parent::generic_input_text(
+            's_currency_format',
+            isset($locale) ? $locale['s_currency_format'] : ''
+        );
 
         return true;
     }
@@ -112,8 +114,10 @@ class LanguageForm extends Form
      */
     public static function thousands_sep_input_text($locale = null)
     {
-        parent::generic_input_text('s_thousands_sep',
-            isset($locale) ? $locale['s_thousands_sep'] : '');
+        parent::generic_input_text(
+            's_thousands_sep',
+            isset($locale) ? $locale['s_thousands_sep'] : ''
+        );
 
         return true;
     }
@@ -261,7 +265,6 @@ class LanguageForm extends Form
         </script>
         <?php
     }
-
 }
 
 ?>

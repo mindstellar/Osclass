@@ -1,5 +1,5 @@
-<?php if ( ! defined( 'ABS_PATH' ) ) {
-    exit( 'ABS_PATH is not loaded. Direct access is not allowed.' );
+<?php if (!defined('ABS_PATH')) {
+    exit('ABS_PATH is not loaded. Direct access is not allowed.');
 }
 
 /*
@@ -18,13 +18,13 @@
  * limitations under the License.
  */
 
-    /**
-     * Model database for Region table
-     *
-     * @package Osclass
-     * @subpackage Model
-     * @since unknown
-     */
+/**
+ * Model database for Region table
+ *
+ * @package    Osclass
+ * @subpackage Model
+ * @since      unknown
+ */
 class Region extends DAO
 {
     /**
@@ -34,17 +34,6 @@ class Region extends DAO
     private static $instance;
 
     /**
-     * @return \Region
-     */
-    public static function newInstance()
-    {
-        if ( !self::$instance instanceof self ) {
-            self::$instance = new self;
-        }
-        return self::$instance;
-    }
-
-    /**
      * Region constructor.
      */
     public function __construct()
@@ -52,18 +41,32 @@ class Region extends DAO
         parent::__construct();
         $this->setTableName('t_region');
         $this->setPrimaryKey('pk_i_id');
-        $this->setFields( array('pk_i_id', 'fk_c_country_code', 's_name', 'b_active', 's_slug') );
+        $this->setFields(array('pk_i_id', 'fk_c_country_code', 's_name', 'b_active', 's_slug'));
+    }
+
+    /**
+     * @return \Region
+     */
+    public static function newInstance()
+    {
+        if (!self::$instance instanceof self) {
+            self::$instance = new self;
+        }
+
+        return self::$instance;
     }
 
     /**
      * Gets all regions from a country
      *
-     * @access public
-     * @since unknown
-     * @deprecated since 2.3
-     * @see Region::findByCountry
+     * @access     public
+     *
      * @param $countryId
+     *
      * @return array
+     * @see        Region::findByCountry
+     * @since      unknown
+     * @deprecated since 2.3
      */
     public function getByCountry($countryId)
     {
@@ -74,9 +77,11 @@ class Region extends DAO
      * Gets all regions from a country
      *
      * @access public
-     * @since unknown
+     *
      * @param $countryId
+     *
      * @return array
+     * @since  unknown
      */
     public function findByCountry($countryId)
     {
@@ -97,17 +102,19 @@ class Region extends DAO
      * Find a region by its name and country
      *
      * @access public
-     * @since unknown
+     *
      * @param string $name
      * @param string $country
+     *
      * @return array
+     * @since  unknown
      */
     public function findByName($name, $country = null)
     {
         $this->dao->select();
         $this->dao->from($this->getTableName());
         $this->dao->where('s_name', $name);
-        if ($country!=null) {
+        if ($country != null) {
             $this->dao->where('fk_c_country_code', $country);
         }
         $this->dao->limit(1);
@@ -124,12 +131,13 @@ class Region extends DAO
      * Function to deal with ajax queries
      *
      * @access public
-     * @since  unknown
      *
-     * @param $query
+     * @param      $query
      * @param null $country
      *
      * @return array
+     * @since  unknown
+     *
      */
     public function ajax($query, $country = null)
     {
@@ -137,11 +145,15 @@ class Region extends DAO
         $this->dao->select('a.pk_i_id as id, a.s_name as label, a.s_name as value');
         $this->dao->from($this->getTableName() . ' as a');
         $this->dao->like('a.s_name', $query, 'after');
-        if ($country != null ) {
-            if (strlen($country)==2) {
+        if ($country != null) {
+            if (strlen($country) == 2) {
                 $this->dao->where('a.fk_c_country_code', strtolower($country));
             } else {
-                $this->dao->join(Country::newInstance()->getTableName().' as aux', 'aux.pk_c_code = a.fk_c_country_code', 'LEFT');
+                $this->dao->join(
+                    Country::newInstance()->getTableName() . ' as aux',
+                    'aux.pk_c_code = a.fk_c_country_code',
+                    'LEFT'
+                );
                 $this->dao->where('aux.s_name', $country);
             }
         }
@@ -159,18 +171,19 @@ class Region extends DAO
      *  Delete a region with its cities and city areas
      *
      * @access public
-     * @since  3.1
      *
      * @param $pk
      *
      * @return int number of failed deletions or 0 in case of none
      * @throws \Exception
+     * @since  3.1
+     *
      */
     public function deleteByPrimaryKey($pk)
     {
         $mCities = City::newInstance();
         $aCities = $mCities->findByRegion($pk);
-        $result = 0;
+        $result  = 0;
         foreach ($aCities as $city) {
             $result += $mCities->deleteByPrimaryKey($city['pk_i_id']);
         }
@@ -180,6 +193,7 @@ class Region extends DAO
         if (!$this->delete(array('pk_i_id' => $pk))) {
             $result++;
         }
+
         return $result;
     }
 
@@ -187,9 +201,11 @@ class Region extends DAO
      * Find a location by its slug
      *
      * @access public
-     * @since 3.2.1
+     *
      * @param $slug
+     *
      * @return array
+     * @since  3.2.1
      */
     public function findBySlug($slug)
     {
@@ -201,6 +217,7 @@ class Region extends DAO
         if ($result == false) {
             return array();
         }
+
         return $result->row();
     }
 
@@ -208,8 +225,8 @@ class Region extends DAO
      * Find a locations with no slug
      *
      * @access public
-     * @since 3.2.1
      * @return array
+     * @since  3.2.1
      */
     public function listByEmptySlug()
     {
@@ -221,11 +238,9 @@ class Region extends DAO
         if ($result == false) {
             return array();
         }
+
         return $result->result();
     }
-
-
 }
 
-    /* file end: ./oc-includes/osclass/model/Region.php */
-
+/* file end: ./oc-includes/osclass/model/Region.php */

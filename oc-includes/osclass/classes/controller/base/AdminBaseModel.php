@@ -16,9 +16,9 @@
  * limitations under the License.
  */
 
-    /**
-     * Class AdminBaseModel
-     */
+/**
+ * Class AdminBaseModel
+ */
 class AdminBaseModel extends BaseModel
 {
     public function __construct()
@@ -41,4 +41,4 @@ class AdminBaseModel extends BaseModel
     }
 }
 
-    /* file end: ./oc-includes/osclass/core/AdminBaseModel.php */
+/* file end: ./oc-includes/osclass/core/AdminBaseModel.php */

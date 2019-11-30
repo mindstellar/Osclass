@@ -1,5 +1,5 @@
-<?php if ( ! defined( 'ABS_PATH' ) ) {
-    exit( 'ABS_PATH is not loaded. Direct access is not allowed.' );
+<?php if (!defined('ABS_PATH')) {
+    exit('ABS_PATH is not loaded. Direct access is not allowed.');
 }
 
 /*
@@ -18,14 +18,19 @@
  * limitations under the License.
  */
 
-    /**
-     * Class View
-     */
+/**
+ * Class View
+ */
 class View
 {
+    private static $instance;
     private $aExported;
     private $aCurrent;
-    private static $instance;
+
+    public function __construct()
+    {
+        $this->aExported = array();
+    }
 
     /**
      * @return \View
@@ -35,12 +40,8 @@ class View
         if (!self::$instance instanceof self) {
             self::$instance = new self;
         }
-        return self::$instance;
-    }
 
-    public function __construct()
-    {
-        $this->aExported = array();
+        return self::$instance;
     }
 
     //to export variables at the business layer
@@ -73,6 +74,16 @@ class View
     //only for debug
 
     /**
+     * @param $key
+     *
+     * @return bool
+     */
+    public function _exists($key)
+    {
+        return (isset($this->aExported[$key]) ? true : false);
+    }
+
+    /**
      * @param null $key
      */
     public function _view($key = null)
@@ -87,33 +98,18 @@ class View
     /**
      * @param $key
      *
-     * @return mixed
-     */
-    public function _next($key)
-    {
-        if (is_array($this->aExported[$key])) {
-            $this->aCurrent[$key] = current( $this->aExported[$key] );
-            if ( $this->aCurrent[$key] ) {
-                next( $this->aExported[$key] );
-                return true;
-            }
-        }
-        return false;
-    }
-
-    /**
-     * @param $key
-     *
      * @return string|array
      */
     public function _current($key)
     {
         if (is_array($this->aExported[$key])) {
-            if (!isset($this->aCurrent[$key]) ) {
-                $this->aCurrent[$key] = current( $this->aExported[$key] );
+            if (!isset($this->aCurrent[$key])) {
+                $this->aCurrent[$key] = current($this->aExported[$key]);
             }
+
             return $this->aCurrent[$key];
         }
+
         return '';
     }
 
@@ -124,13 +120,15 @@ class View
      */
     public function _key($key)
     {
-        if ( is_array($this->aExported[$key]) ) {
-            $_key = key( $this->aExported[$key] ) -1;
-            if ($_key==-1) {
-                $_key = count($this->aExported[$key]) -1;
+        if (is_array($this->aExported[$key])) {
+            $_key = key($this->aExported[$key]) - 1;
+            if ($_key == -1) {
+                $_key = count($this->aExported[$key]) - 1;
             }
+
             return $_key;
         }
+
         return false;
     }
 
@@ -142,16 +140,18 @@ class View
      */
     public function _seek($key, $position)
     {
-        if ( is_array($this->aExported[$key]) ) {
+        if (is_array($this->aExported[$key])) {
             $this->_reset($key);
-            for ($k = 0; $k<=$position; $k++) {
+            for ($k = 0; $k <= $position; $k++) {
                 $res = $this->_next($key);
                 if (!$res) {
                     return false;
                 }
             }
+
             return true;
         }
+
         return false;
     }
 
@@ -162,23 +162,33 @@ class View
      */
     public function _reset($key)
     {
-        if ( !array_key_exists($key, $this->aExported) ) {
+        if (!array_key_exists($key, $this->aExported)) {
             return array();
         }
-        if ( !is_array( $this->aExported[$key] ) ) {
+        if (!is_array($this->aExported[$key])) {
             return array();
         }
+
         return reset($this->aExported[$key]);
     }
 
     /**
      * @param $key
      *
-     * @return bool
+     * @return mixed
      */
-    public function _exists($key)
+    public function _next($key)
     {
-        return ( isset($this->aExported[$key]) ? true : false );
+        if (is_array($this->aExported[$key])) {
+            $this->aCurrent[$key] = current($this->aExported[$key]);
+            if ($this->aCurrent[$key]) {
+                next($this->aExported[$key]);
+
+                return true;
+            }
+        }
+
+        return false;
     }
 
     /**
@@ -191,6 +201,7 @@ class View
         if (isset($this->aExported[$key]) && is_array($this->aExported[$key])) {
             return count($this->aExported[$key]);
         }
+
         return -1; // @TOFIX @FIXME ?? why ? why not 0 ?
     }
 
@@ -199,8 +210,6 @@ class View
      */
     public function _erase($key)
     {
-        unset( $this->aExported[ $key ], $this->aCurrent[ $key ] );
+        unset($this->aExported[$key], $this->aCurrent[$key]);
     }
 }
-
-

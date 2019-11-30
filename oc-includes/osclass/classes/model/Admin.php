@@ -1,5 +1,5 @@
-<?php if ( ! defined( 'ABS_PATH' ) ) {
-    exit( 'ABS_PATH is not loaded. Direct access is not allowed.' );
+<?php if (!defined('ABS_PATH')) {
+    exit('ABS_PATH is not loaded. Direct access is not allowed.');
 }
 
 /*
@@ -18,13 +18,13 @@
  * limitations under the License.
  */
 
-    /**
-     * Model database for Admin table
-     *
-     * @package Osclass
-     * @subpackage Model
-     * @since unknown
-     */
+/**
+ * Model database for Admin table
+ *
+ * @package    Osclass
+ * @subpackage Model
+ * @since      unknown
+ */
 class Admin extends DAO
 {
     /**
@@ -32,27 +32,17 @@ class Admin extends DAO
      * It is used as a singleton
      *
      * @access private
-     * @since unknown
+     * @since  unknown
      * @var Admin
      */
     private static $instance;
 
     /**
      * array for save currencies
+     *
      * @var array
      */
     private $cachedAdmin;
-
-    /**
-     * @return \Admin
-     */
-    public static function newInstance()
-    {
-        if ( !self::$instance instanceof self ) {
-            self::$instance = new self;
-        }
-        return self::$instance;
-    }
 
     /**
      * Set data from t_admin table
@@ -65,11 +55,31 @@ class Admin extends DAO
 
         $return = $this->dao->query('SHOW COLUMNS FROM ' . $this->getTableName() . ' where Field = "b_moderator" ');
 
-        if ( $return->numRows() > 0 ) {
-            $this->setFields( array('pk_i_id', 's_name', 's_username', 's_password', 's_email', 's_secret', 'b_moderator') );
+        if ($return->numRows() > 0) {
+            $this->setFields(array(
+                'pk_i_id',
+                's_name',
+                's_username',
+                's_password',
+                's_email',
+                's_secret',
+                'b_moderator'
+            ));
         } else {
-            $this->setFields( array('pk_i_id', 's_name', 's_username', 's_password', 's_email', 's_secret') );
+            $this->setFields(array('pk_i_id', 's_name', 's_username', 's_password', 's_email', 's_secret'));
         }
+    }
+
+    /**
+     * @return \Admin
+     */
+    public static function newInstance()
+    {
+        if (!self::$instance instanceof self) {
+            self::$instance = new self;
+        }
+
+        return self::$instance;
     }
 
     /**
@@ -80,13 +90,14 @@ class Admin extends DAO
      */
     public function findByPrimaryKey($id, $locale = null)
     {
-        if ( $id == '' ) {
+        if ($id == '') {
             return '';
         }
         if (isset($this->cachedAdmin[$id])) {
             return $this->cachedAdmin[$id];
         }
-        $this->cachedAdmin[ $id ] = parent::findByPrimaryKey( $id );
+        $this->cachedAdmin[$id] = parent::findByPrimaryKey($id);
+
         return $this->cachedAdmin[$id];
     }
 
@@ -95,11 +106,12 @@ class Admin extends DAO
      * If email not exist return false.
      *
      * @access public
-     * @since unknown
      *
      * @param string $email
      *
      * @return array|bool
+     * @since  unknown
+     *
      */
     public function findByEmail($email)
     {
@@ -108,32 +120,7 @@ class Admin extends DAO
         $this->dao->where('s_email', $email);
         $result = $this->dao->get();
 
-        if ( $result->numRows == 0 ) {
-            return false;
-        }
-
-        return $result->row();
-    }
-
-    /**
-     * Searches for admin information, given a username.
-     * If admin not exist return false.
-     *
-     * @access public
-     * @since unknown
-     *
-     * @param string $username
-     *
-     * @return array|bool
-     */
-    public function findByUsername($username)
-    {
-        $this->dao->select();
-        $this->dao->from($this->getTableName());
-        $this->dao->where('s_username', $username);
-        $result = $this->dao->get();
-
-        if ( $result->numRows == 0 ) {
+        if ($result->numRows == 0) {
             return false;
         }
 
@@ -145,20 +132,48 @@ class Admin extends DAO
      * If credential don't match return false.
      *
      * @access public
-     * @since unknown
      *
      * @param string $userName
      * @param string $password
      *
      * @return array|bool
+     * @since  unknown
+     *
      */
     public function findByCredentials($userName, $password)
     {
-        $user = $this->findByUsername( $userName );
-        if ( $user !== false && isset( $user[ 's_password' ] ) && osc_verify_password( $password, $user[ 's_password' ] ) ) {
+        $user = $this->findByUsername($userName);
+        if ($user !== false && isset($user['s_password']) && osc_verify_password($password, $user['s_password'])) {
             return $user;
         }
+
         return false;
+    }
+
+    /**
+     * Searches for admin information, given a username.
+     * If admin not exist return false.
+     *
+     * @access public
+     *
+     * @param string $username
+     *
+     * @return array|bool
+     * @since  unknown
+     *
+     */
+    public function findByUsername($username)
+    {
+        $this->dao->select();
+        $this->dao->from($this->getTableName());
+        $this->dao->where('s_username', $username);
+        $result = $this->dao->get();
+
+        if ($result->numRows == 0) {
+            return false;
+        }
+
+        return $result->row();
     }
 
     /**
@@ -166,23 +181,26 @@ class Admin extends DAO
      * If credential don't match return false.
      *
      * @access public
-     * @since unknown
      *
      * @param integer $id
      * @param string  $secret
      *
      * @return array|bool
+     * @since  unknown
+     *
      */
     public function findByIdSecret($id, $secret)
     {
         $this->dao->select();
         $this->dao->from($this->getTableName());
-        $conditions = array( 'pk_i_id'  => $id,
-                             's_secret' => $secret);
+        $conditions = array(
+            'pk_i_id'  => $id,
+            's_secret' => $secret
+        );
         $this->dao->where($conditions);
         $result = $this->dao->get();
 
-        if ( $result->numRows == 0 ) {
+        if ($result->numRows == 0) {
             return false;
         }
 
@@ -194,23 +212,26 @@ class Admin extends DAO
      * If credential don't match return false.
      *
      * @access public
-     * @since unknown
      *
      * @param integer $id
      * @param string  $password
      *
      * @return array|bool
+     * @since  unknown
+     *
      */
     public function findByIdPassword($id, $password)
     {
         $this->dao->select();
         $this->dao->from($this->getTableName());
-        $conditions = array( 'pk_i_id'  => $id,
-                             's_password' => $password);
+        $conditions = array(
+            'pk_i_id'    => $id,
+            's_password' => $password
+        );
         $this->dao->where($conditions);
         $result = $this->dao->get();
 
-        if ( $result->numRows == 0 ) {
+        if ($result->numRows == 0) {
             return false;
         }
 
@@ -221,16 +242,19 @@ class Admin extends DAO
      * Perform a batch delete (for more than one admin ID)
      *
      * @access public
-     * @since 2.3.4
+     *
      * @param array $id
+     *
      * @return boolean
+     * @since  2.3.4
      */
     public function deleteBatch($id)
     {
-        $this->dao->from( $this->getTableName() );
-        $this->dao->whereIn( 'pk_i_id', $id );
+        $this->dao->from($this->getTableName());
+        $this->dao->whereIn('pk_i_id', $id);
+
         return $this->dao->delete();
     }
 }
 
-    /* file end: ./oc-includes/osclass/model/Admin.php */
+/* file end: ./oc-includes/osclass/model/Admin.php */

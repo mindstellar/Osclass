@@ -1,5 +1,5 @@
-<?php if ( ! defined( 'ABS_PATH' ) ) {
-    exit( 'ABS_PATH is not loaded. Direct access is not allowed.' );
+<?php if (!defined('ABS_PATH')) {
+    exit('ABS_PATH is not loaded. Direct access is not allowed.');
 }
 
 /*
@@ -18,9 +18,9 @@
  * limitations under the License.
  */
 
-    /**
-     * Alerts DAO
-     */
+/**
+ * Alerts DAO
+ */
 class Alerts extends DAO
 {
     /**
@@ -28,17 +28,6 @@ class Alerts extends DAO
      * @var \Alerts
      */
     private static $instance;
-
-    /**
-     * @return \Alerts
-     */
-    public static function newInstance()
-    {
-        if ( !self::$instance instanceof self ) {
-            self::$instance = new self;
-        }
-        return self::$instance;
-    }
 
     /**
      *
@@ -50,16 +39,36 @@ class Alerts extends DAO
         $this->setPrimaryKey('pk_i_id');
         $array_fields = array(
             'pk_i_id'
-            ,'s_email'
-            ,'fk_i_user_id'
-            ,'s_search'
-            ,'s_secret'
-            ,'b_active'
-            ,'e_type'
-            ,'dt_date'
-            ,'dt_unsub_date'
+            ,
+            's_email'
+            ,
+            'fk_i_user_id'
+            ,
+            's_search'
+            ,
+            's_secret'
+            ,
+            'b_active'
+            ,
+            'e_type'
+            ,
+            'dt_date'
+            ,
+            'dt_unsub_date'
         );
         $this->setFields($array_fields);
+    }
+
+    /**
+     * @return \Alerts
+     */
+    public static function newInstance()
+    {
+        if (!self::$instance instanceof self) {
+            self::$instance = new self;
+        }
+
+        return self::$instance;
     }
 
     /**
@@ -67,12 +76,13 @@ class Alerts extends DAO
      * If user id not exist return empty array.
      *
      * @access public
-     * @since  unknown
      *
      * @param string $userId
      * @param bool   $unsub
      *
      * @return array
+     * @since  unknown
+     *
      */
     public function findByUser($userId, $unsub = false)
     {
@@ -87,6 +97,7 @@ class Alerts extends DAO
         if ($result == false) {
             return array();
         }
+
         return $result->result();
     }
 
@@ -95,12 +106,13 @@ class Alerts extends DAO
      * If user id not exist return empty array.
      *
      * @access public
-     * @since  unknown
      *
      * @param string $email
      * @param bool   $unsub
      *
      * @return array
+     * @since  unknown
+     *
      */
     public function findByEmail($email, $unsub = false)
     {
@@ -115,6 +127,7 @@ class Alerts extends DAO
         if ($result == false) {
             return array();
         }
+
         return $result->result();
     }
 
@@ -123,12 +136,14 @@ class Alerts extends DAO
      * If type don't match return empty array.
      *
      * @access public
-     * @since  unknown
+     *
      * @param string $type
      * @param bool   $active
      * @param bool   $unsub
+     *
      * @return array
-*/
+     * @since  unknown
+     */
     public function findByType($type, $active = false, $unsub = false)
     {
         $this->dao->select();
@@ -137,7 +152,7 @@ class Alerts extends DAO
         if (!$unsub) {
             $this->dao->where('dt_unsub_date IS NULL');
         }
-        if ( $active ) {
+        if ($active) {
             $this->dao->where('b_active', 1);
         }
         $result = $this->dao->get();
@@ -145,6 +160,7 @@ class Alerts extends DAO
         if ($result == false) {
             return array();
         }
+
         return $result->result();
     }
 
@@ -153,12 +169,14 @@ class Alerts extends DAO
      * If type don't match return empty array.
      *
      * @access public
-     * @since  unknown
+     *
      * @param string $type
      * @param bool   $active
      * @param bool   $unsub
+     *
      * @return array
-*/
+     * @since  unknown
+     */
     public function findByTypeGroup($type, $active = false, $unsub = false)
     {
         $this->dao->select();
@@ -176,6 +194,7 @@ class Alerts extends DAO
         if ($result == false) {
             return array();
         }
+
         return $result->result();
     }
 
@@ -184,14 +203,16 @@ class Alerts extends DAO
      * If type don't match return empty array.
      *
      * @access public
-     * @since  unknown
+     *
      * @param string $search
      * @param string $user
      * @param bool   $unsub
+     *
      * @return array
      *
      * WARNIGN doble where!
-*/
+     * @since  unknown
+     */
     public function findBySearchAndUser($search, $user, $unsub = false)
     {
         $this->dao->select();
@@ -206,6 +227,7 @@ class Alerts extends DAO
         if ($result == false) {
             return array();
         }
+
         return $result->result();
     }
 
@@ -214,14 +236,16 @@ class Alerts extends DAO
      * If type don't match return empty array.
      *
      * @access public
-     * @since  unknown
+     *
      * @param string $search
      * @param string $type
      * @param bool   $unsub
+     *
      * @return array
      *
      * WARNIGN doble where!
-*/
+     * @since  unknown
+     */
     public function findBySearchAndType($search, $type, $unsub = false)
     {
         $this->dao->select();
@@ -236,6 +260,7 @@ class Alerts extends DAO
         if ($result == false) {
             return array();
         }
+
         return $result->result();
     }
 
@@ -246,13 +271,15 @@ class Alerts extends DAO
      * If type don't match return empty array.
      *
      * @access public
-     * @since  unknown
+     *
      * @param string $search
      * @param string $type
      * @param bool   $active
      * @param bool   $unsub
+     *
      * @return array
-*/
+     * @since  unknown
+     */
     public function findUsersBySearchAndType($search, $type, $active = false, $unsub = false)
     {
         $this->dao->select();
@@ -265,12 +292,13 @@ class Alerts extends DAO
         if ($active) {
             $this->dao->where('b_active', 1);
         }
-            
+
         $result = $this->dao->get();
 
         if ($result == false) {
             return array();
         }
+
         return $result->result();
     }
 
@@ -279,18 +307,22 @@ class Alerts extends DAO
      * If type don't match return empty array.
      *
      * @access public
-     * @since  unknown
+     *
      * @param int    $userId
      * @param string $type
      * @param bool   $unsub
+     *
      * @return array
-*/
+     * @since  unknown
+     */
     public function findByUserByType($userId, $type, $unsub = false)
     {
         $this->dao->select();
         $this->dao->from($this->getTableName());
-        $conditions = array('e_type'        => $type,
-                            'fk_i_user_id'  => $userId);
+        $conditions = array(
+            'e_type'       => $type,
+            'fk_i_user_id' => $userId
+        );
         $this->dao->where($conditions);
         if (!$unsub) {
             $this->dao->where('dt_unsub_date IS NULL');
@@ -300,6 +332,7 @@ class Alerts extends DAO
         if ($result == false) {
             return array();
         }
+
         return $result->result();
     }
 
@@ -308,18 +341,22 @@ class Alerts extends DAO
      * If type don't match return empty array.
      *
      * @access public
-     * @since  unknown
+     *
      * @param string $email
      * @param string $type
      * @param bool   $unsub
+     *
      * @return array
-*/
+     * @since  unknown
+     */
     public function findByEmailByType($email, $type, $unsub = false)
     {
         $this->dao->select();
         $this->dao->from($this->getTableName());
-        $conditions = array('e_type'   => $type,
-                            's_email'  => $email);
+        $conditions = array(
+            'e_type'  => $type,
+            's_email' => $email
+        );
         if (!$unsub) {
             $this->dao->where('dt_unsub_date IS NULL');
         }
@@ -329,6 +366,7 @@ class Alerts extends DAO
         if ($result == false) {
             return array();
         }
+
         return $result->result();
     }
 
@@ -336,13 +374,15 @@ class Alerts extends DAO
      * Create a new alert
      *
      * @access public
-     * @since unknown
-     * @param int $userid
+     *
+     * @param int    $userid
      * @param string $email
      * @param string $alert
      * @param string $secret
      * @param string $type
+     *
      * @return bool on success
+     * @since  unknown
      */
     public function createAlert($userid, $email, $alert, $secret, $type = 'DAILY')
     {
@@ -350,9 +390,9 @@ class Alerts extends DAO
         $this->dao->select();
         $this->dao->from($this->getTableName());
         $this->dao->where('s_search', $alert);
-            
+
         $this->dao->where('dt_unsub_date IS NULL');
-            
+
         if ($userid == 0 || $userid == null) {
             $this->dao->where('fk_i_user_id', 0);
             $this->dao->where('s_email', $email);
@@ -364,13 +404,21 @@ class Alerts extends DAO
         if ($results->numRows() == 0) {
             $this->dao->insert($this->getTableName(), array(
                 'fk_i_user_id' => $userid
-                ,'s_email' => $email
-                ,'s_search' => $alert
-                ,'e_type' => $type
-                ,'s_secret' => $secret
-                ,'dt_date' => date('Y-m-d H:i:s')));
+                ,
+                's_email'      => $email
+                ,
+                's_search'     => $alert
+                ,
+                'e_type'       => $type
+                ,
+                's_secret'     => $secret
+                ,
+                'dt_date'      => date('Y-m-d H:i:s')
+            ));
+
             return $this->dao->insertedId();
         }
+
         return false;
     }
 
@@ -378,9 +426,11 @@ class Alerts extends DAO
      * Activate an alert
      *
      * @access public
-     * @since unknown
+     *
      * @param string $id
+     *
      * @return mixed false on fail, int of num. of affected rows
+     * @since  unknown
      */
     public function activate($id)
     {
@@ -391,9 +441,11 @@ class Alerts extends DAO
      * Dectivate an alert
      *
      * @access public
-     * @since 3.1
+     *
      * @param string $id
+     *
      * @return mixed false on fail, int of num. of affected rows
+     * @since  3.1
      */
     public function deactivate($id)
     {
@@ -404,13 +456,19 @@ class Alerts extends DAO
      * Unsub from an alert
      *
      * @access public
-     * @since 3.1
+     *
      * @param string $id
+     *
      * @return mixed false on fail, int of num. of affected rows
+     * @since  3.1
      */
     public function unsub($id)
     {
-        return $this->dao->update( $this->getTableName(), array('dt_unsub_date' => date( 'Y-m-d H:i:s' )), array( 'pk_i_id' => $id ) );
+        return $this->dao->update(
+            $this->getTableName(),
+            array('dt_unsub_date' => date('Y-m-d H:i:s')),
+            array('pk_i_id' => $id)
+        );
     }
 
 
@@ -418,32 +476,34 @@ class Alerts extends DAO
      * Search alerts
      *
      * @access public
-     * @since  3.1
+     *
      * @param int    $start
      * @param int    $end
      * @param string $order_column
      * @param string $order_direction
      * @param string $name
+     *
      * @return array
-*/
+     * @since  3.1
+     */
     public function search($start = 0, $end = 10, $order_column = 'dt_date', $order_direction = 'DESC', $name = '')
     {
         // SET data, so we always return a valid object
-        $alerts = array();
-        $alerts['rows']             = 0;
-        $alerts['total_results']    = 0;
-        $alerts['alerts']           = array();
+        $alerts                  = array();
+        $alerts['rows']          = 0;
+        $alerts['total_results'] = 0;
+        $alerts['alerts']        = array();
 
         $this->dao->select('SQL_CALC_FOUND_ROWS *');
         $this->dao->from($this->getTableName());
         $this->dao->orderBy($order_column, $order_direction);
         $this->dao->limit($start, $end);
-        if ( $name != '' ) {
+        if ($name != '') {
             $this->dao->like('s_email', $name);
         }
         $rs = $this->dao->get();
 
-        if ( !$rs ) {
+        if (!$rs) {
             return $alerts;
         }
 
@@ -451,24 +511,18 @@ class Alerts extends DAO
 
         $rsRows = $this->dao->query('SELECT FOUND_ROWS() as total');
         $data   = $rsRows->row();
-        if ( $data['total'] ) {
+        if ($data['total']) {
             $alerts['total_results'] = $data['total'];
         }
 
-        $rsTotal = $this->dao->query('SELECT COUNT(*) as total FROM '.$this->getTableName());
-        $data   = $rsTotal->row();
-        if ( $data['total'] ) {
+        $rsTotal = $this->dao->query('SELECT COUNT(*) as total FROM ' . $this->getTableName());
+        $data    = $rsTotal->row();
+        if ($data['total']) {
             $alerts['rows'] = $data['total'];
         }
 
         return $alerts;
-
     }
-
-
-
-
 }
 
-    /* file end: ./oc-includes/osclass/model/Alerts.php */
-
+/* file end: ./oc-includes/osclass/model/Alerts.php */

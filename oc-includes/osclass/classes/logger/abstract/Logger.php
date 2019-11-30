@@ -1,5 +1,5 @@
-<?php if ( ! defined( 'ABS_PATH' ) ) {
-    exit( 'ABS_PATH is not loaded. Direct access is not allowed.' );
+<?php if (!defined('ABS_PATH')) {
+    exit('ABS_PATH is not loaded. Direct access is not allowed.');
 }
 
 /*
@@ -18,9 +18,9 @@
  * limitations under the License.
  */
 
-    /**
-     * Class logger
-     */
+/**
+ * Class logger
+ */
 abstract class Logger
 {
 
@@ -55,6 +55,7 @@ abstract class Logger
 
     /**
      * Log a message with the DEBUG level.
+     *
      * @param string $message
      * @param null   $caller
      */
@@ -62,10 +63,11 @@ abstract class Logger
 
     /**
      * Log a message object with the FATAL level including the caller.
+     *
      * @param string $message
      * @param null   $caller
      */
     abstract public function fatal($message = '', $caller = null);
 }
 
-    /* file end: ./oc-includes/osclass/logger/logger.php */
+/* file end: ./oc-includes/osclass/logger/logger.php */

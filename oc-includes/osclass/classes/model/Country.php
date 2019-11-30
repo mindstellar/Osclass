@@ -1,5 +1,5 @@
-<?php if ( ! defined( 'ABS_PATH' ) ) {
-    exit( 'ABS_PATH is not loaded. Direct access is not allowed.' );
+<?php if (!defined('ABS_PATH')) {
+    exit('ABS_PATH is not loaded. Direct access is not allowed.');
 }
 
 /*
@@ -18,13 +18,13 @@
  * limitations under the License.
  */
 
-    /**
-     * Model database for Country table
-     *
-     * @package Osclass
-     * @subpackage Model
-     * @since unknown
-     */
+/**
+ * Model database for Country table
+ *
+ * @package    Osclass
+ * @subpackage Model
+ * @since      unknown
+ */
 class Country extends DAO
 {
     /**
@@ -34,17 +34,6 @@ class Country extends DAO
     private static $instance;
 
     /**
-     * @return \Country
-     */
-    public static function newInstance()
-    {
-        if ( !self::$instance instanceof self ) {
-            self::$instance = new self;
-        }
-        return self::$instance;
-    }
-
-    /**
      *
      */
     public function __construct()
@@ -52,16 +41,30 @@ class Country extends DAO
         parent::__construct();
         $this->setTableName('t_country');
         $this->setPrimaryKey('pk_c_code');
-        $this->setFields( array('pk_c_code', 's_name', 's_slug') );
+        $this->setFields(array('pk_c_code', 's_name', 's_slug'));
+    }
+
+    /**
+     * @return \Country
+     */
+    public static function newInstance()
+    {
+        if (!self::$instance instanceof self) {
+            self::$instance = new self;
+        }
+
+        return self::$instance;
     }
 
     /**
      * Find a country by its ISO code
      *
      * @access public
-     * @since unknown
+     *
      * @param $code
+     *
      * @return array
+     * @since  unknown
      */
     public function findByCode($code)
     {
@@ -73,6 +76,7 @@ class Country extends DAO
         if ($result == false) {
             return array();
         }
+
         return $result->row();
     }
 
@@ -80,9 +84,11 @@ class Country extends DAO
      * Find a country by its name
      *
      * @access public
-     * @since unknown
+     *
      * @param $name
+     *
      * @return array
+     * @since  unknown
      */
     public function findByName($name)
     {
@@ -93,6 +99,7 @@ class Country extends DAO
         if ($result == false) {
             return array();
         }
+
         return $result->row();
     }
 
@@ -100,8 +107,8 @@ class Country extends DAO
      * List all the countries
      *
      * @access public
-     * @since  unknown
      * @return array
+     * @since  unknown
      */
     public function listAll()
     {
@@ -109,15 +116,49 @@ class Country extends DAO
         if ($result == false) {
             return array();
         }
+
         return $result->result();
+    }
+
+    /**
+     *  Delete a country with its regions, cities,..
+     *
+     * @access public
+     *
+     * @param $pk
+     *
+     * @return int number of failed deletions or 0 in case of none
+     * @throws \Exception
+     * @since  2.4
+     *
+     */
+    public function deleteByPrimaryKey($pk)
+    {
+        $mRegions = Region::newInstance();
+        $aRegions = $mRegions->findByCountry($pk);
+        $result   = 0;
+        foreach ($aRegions as $region) {
+            $result += $mRegions->deleteByPrimaryKey($region['pk_i_id']);
+        }
+        Item::newInstance()->deleteByCountry($pk);
+        CountryStats::newInstance()->delete(array('fk_c_country_code' => $pk));
+        User::newInstance()->update(
+            array('fk_c_country_code' => null, 's_country' => ''),
+            array('fk_c_country_code' => $pk)
+        );
+        if (!$this->delete(array('pk_c_code' => $pk))) {
+            $result++;
+        }
+
+        return $result;
     }
 
     /**
      * List names of all the countries. Used for location import.
      *
      * @access public
-     * @since  unknown
      * @return array
+     * @since  unknown
      */
     public function listNames()
     {
@@ -125,6 +166,7 @@ class Country extends DAO
         if ($result == false) {
             return array();
         }
+
         return array_column($result->result(), 's_name');
     }
 
@@ -132,9 +174,11 @@ class Country extends DAO
      * Function that work with the ajax file
      *
      * @access public
-     * @since unknown
+     *
      * @param $query
+     *
      * @return array
+     * @since  unknown
      */
     public function ajax($query)
     {
@@ -146,45 +190,19 @@ class Country extends DAO
         if ($result == false) {
             return array();
         }
+
         return $result->result();
-    }
-
-
-    /**
-     *  Delete a country with its regions, cities,..
-     *
-     * @access public
-     * @since  2.4
-     *
-     * @param $pk
-     *
-     * @return int number of failed deletions or 0 in case of none
-     * @throws \Exception
-     */
-    public function deleteByPrimaryKey($pk)
-    {
-        $mRegions = Region::newInstance();
-        $aRegions = $mRegions->findByCountry($pk);
-        $result = 0;
-        foreach ($aRegions as $region) {
-            $result += $mRegions->deleteByPrimaryKey($region['pk_i_id']);
-        }
-        Item::newInstance()->deleteByCountry($pk);
-        CountryStats::newInstance()->delete(array('fk_c_country_code' => $pk));
-        User::newInstance()->update(array('fk_c_country_code' => null, 's_country' => ''), array('fk_c_country_code' => $pk));
-        if (!$this->delete(array('pk_c_code' => $pk))) {
-            $result++;
-        }
-        return $result;
     }
 
     /**
      * Find a location by its slug
      *
      * @access public
-     * @since 3.2.1
+     *
      * @param $slug
+     *
      * @return array
+     * @since  3.2.1
      */
     public function findBySlug($slug)
     {
@@ -196,6 +214,7 @@ class Country extends DAO
         if ($result == false) {
             return array();
         }
+
         return $result->row();
     }
 
@@ -203,8 +222,8 @@ class Country extends DAO
      * Find a locations with no slug
      *
      * @access public
-     * @since 3.2.1
      * @return array
+     * @since  3.2.1
      */
     public function listByEmptySlug()
     {
@@ -216,10 +235,9 @@ class Country extends DAO
         if ($result == false) {
             return array();
         }
+
         return $result->result();
     }
-
-
 }
 
-    /* file end: ./oc-includes/osclass/model/Country.php */
+/* file end: ./oc-includes/osclass/model/Country.php */

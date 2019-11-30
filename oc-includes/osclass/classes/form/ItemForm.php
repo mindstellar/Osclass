@@ -102,6 +102,40 @@ class ItemForm extends Form
     }
 
     /**
+     * @param      $categories
+     * @param      $item
+     * @param null $default_item
+     * @param int  $deep
+     */
+    public static function subcategory_select($categories, $item, $default_item = null, $deep = 0)
+    {
+        // Did user select a specific category to post in?
+        $catId = Params::getParam('catId');
+        if (Session::newInstance()->_getForm('catId') != '') {
+            $catId = Session::newInstance()->_getForm('catId');
+        }
+        // How many indents to add?
+        $deep_string = '';
+        for ($var = 0; $var < $deep; $var++) {
+            $deep_string .= '&nbsp;&nbsp;';
+        }
+        $deep++;
+
+        foreach ($categories as $c) {
+            $selected =
+                ((isset($item['fk_i_category_id']) && $item['fk_i_category_id'] == $c['pk_i_id'])
+                    || (isset($catId) && $catId == $c['pk_i_id']));
+
+            echo '<option value="' . $c['pk_i_id'] . '"' . ($selected ? ' selected="selected'
+                    . $item['fk_i_category_id'] . '"' : '') . '>' . $deep_string . $c['s_name']
+                . '</option>';
+            if (isset($c['categories']) && is_array($c['categories'])) {
+                self::subcategory_select($c['categories'], $item, $default_item, $deep);
+            }
+        }
+    }
+
+    /**
      * @param null $categories
      * @param null $item
      * @param null $default_item
@@ -223,7 +257,6 @@ class ItemForm extends Form
                             options += '<option value="' + value[0] + '">' + value[1] + '</option>';
                         });
                     }
-                    ;
                     $('#catId').html(options);
                     $("#catId").next("a").find(".select-box-label").text(osc.langs.select_subcategory);
                     $("#catId").change();
@@ -317,9 +350,9 @@ class ItemForm extends Form
                 draw_select(1, 0);
                 <?php } else { ?>
                 draw_select(1, 0);
-                    <?php for ($i = 0; $i < count($categories_tree) - 1; $i++) { ?>
+                <?php for ($i = 0; $i < count($categories_tree) - 1; $i++) { ?>
                 draw_select(<?php echo($i + 2); ?> ,<?php echo $categories_tree[$i]; ?>);
-                    <?php } ?>
+                <?php } ?>
                 <?php } ?>
                 $('body').on("change", '[name^="select_"]', function () {
                     var depth = parseInt($(this).attr("depth"));
@@ -360,46 +393,9 @@ class ItemForm extends Form
                     $('#select_' + select).next("a").find(".select-box-label").text(osc.langs.select_subcategory);
                     $('#select_' + select).trigger("created");
                 }
-                ;
-
             }
         </script>
         <?php
-    }
-
-
-    /**
-     * @param      $categories
-     * @param      $item
-     * @param null $default_item
-     * @param int  $deep
-     */
-    public static function subcategory_select($categories, $item, $default_item = null, $deep = 0)
-    {
-        // Did user select a specific category to post in?
-        $catId = Params::getParam('catId');
-        if (Session::newInstance()->_getForm('catId') != '') {
-            $catId = Session::newInstance()->_getForm('catId');
-        }
-        // How many indents to add?
-        $deep_string = '';
-        for ($var = 0; $var < $deep; $var++) {
-            $deep_string .= '&nbsp;&nbsp;';
-        }
-        $deep++;
-
-        foreach ($categories as $c) {
-            $selected =
-                ((isset($item['fk_i_category_id']) && $item['fk_i_category_id'] == $c['pk_i_id'])
-                    || (isset($catId) && $catId == $c['pk_i_id']));
-
-            echo '<option value="' . $c['pk_i_id'] . '"' . ($selected ? ' selected="selected'
-                    . $item['fk_i_category_id'] . '"' : '') . '>' . $deep_string . $c['s_name']
-                . '</option>';
-            if (isset($c['categories']) && is_array($c['categories'])) {
-                self::subcategory_select($c['categories'], $item, $default_item, $deep);
-            }
-        }
     }
 
     /**
@@ -487,7 +483,7 @@ class ItemForm extends Form
         $categories = Category::newInstance()->listEnabled();
         ?>
         <script type="text/javascript">
-            var exp_days = new Array();
+            var exp_days = [];
             <?php foreach ($categories as $c) {
                 echo 'exp_days[' . $c['pk_i_id'] . '] = ' . $c['i_expiration_days'] . ';';
             }?>
@@ -520,51 +516,23 @@ class ItemForm extends Form
                 $('#dt_expiration').html("");
                 var options = '';
                 <?php foreach ($options as $o) {
-                    if ($o == -1) {?>
+                if ($o == -1) {?>
                 options += '<option value="-1" >' + (osc.langs.nochange_expiration != null ? osc.langs.nochange_expiration : '<?php echo osc_esc_js(__('No change expiration')); ?>') + '</option>';
-                    <?php } elseif ($o == 0) { ?>
+                <?php } elseif ($o == 0) { ?>
                 options += '<option value="" >' + (osc.langs.without_expiration != null ? osc.langs.without_expiration : '<?php echo osc_esc_js(__('Without expiration')); ?>') + '</option>';
-                    <?php } elseif ($o == 1) { ?>
+                <?php } elseif ($o == 1) { ?>
                 options += '<option value="1" >' + (osc.langs.expiration_day != null ? osc.langs.expiration_day : '<?php echo osc_esc_js(__('1 day')); ?>') + '</option>';
-                    <?php } else { ?>
+                <?php } else { ?>
                 if (max_exp == 0 || max_exp >=<?php echo $o; ?>) {
                     options += '<option value="<?php echo $o; ?>" >' + (osc.langs.expiration_days != null ? osc.langs.expiration_days : '<?php echo osc_esc_js(__('%d days')); ?>').replace("%d", <?php echo $o; ?>) + '</option>';
                 }
-                    <?php }
+                <?php }
                 } ?>
                 $('#dt_expiration').html(options);
                 $('#dt_expiration').change();
             }
         </script>
         <?php
-        return true;
-    }
-
-    /**
-     * @param        $name
-     * @param string $locale
-     * @param string $value
-     *
-     * @return bool
-     */
-    public static function title_input($name, $locale = 'en_US', $value = '')
-    {
-        parent::generic_input_text($name . '[' . $locale . ']', $value);
-
-        return true;
-    }
-
-    /**
-     * @param        $name
-     * @param string $locale
-     * @param string $value
-     *
-     * @return bool
-     */
-    public static function description_textarea($name, $locale = 'en_US', $value = '')
-    {
-        parent::generic_textarea($name . '[' . $locale . ']', $value);
-
         return true;
     }
 
@@ -625,6 +593,34 @@ class ItemForm extends Form
         if ($num_locales > 1) {
             echo '</div>';
         }
+    }
+
+    /**
+     * @param        $name
+     * @param string $locale
+     * @param string $value
+     *
+     * @return bool
+     */
+    public static function title_input($name, $locale = 'en_US', $value = '')
+    {
+        parent::generic_input_text($name . '[' . $locale . ']', $value);
+
+        return true;
+    }
+
+    /**
+     * @param        $name
+     * @param string $locale
+     * @param string $value
+     *
+     * @return bool
+     */
+    public static function description_textarea($name, $locale = 'en_US', $value = '')
+    {
+        parent::generic_textarea($name . '[' . $locale . ']', $value);
+
+        return true;
     }
 
     /**
@@ -740,9 +736,9 @@ class ItemForm extends Form
         if (!isset($item['s_country'])) {
             $countries = osc_get_countries();
             if (count($countries) == 1) {
-                $item['s_country'] = $countries[0]['s_name'];
+                $item['s_country']         = $countries[0]['s_name'];
                 $item['fk_c_country_code'] = $countries[0]['pk_c_code'];
-                $only_one = true;
+                $only_one                  = true;
             }
         }
         parent::generic_input_text(
@@ -754,7 +750,7 @@ class ItemForm extends Form
         parent::generic_input_hidden(
             'countryId',
             (isset($item['fk_c_country_code']) && $item['fk_c_country_code'] != null)
-            ? $item['fk_c_country_code'] : ''
+                ? $item['fk_c_country_code'] : ''
         );
 
         return true;
@@ -873,7 +869,7 @@ class ItemForm extends Form
         parent::generic_input_hidden(
             'regionId',
             (isset($item['fk_i_region_id']) && $item['fk_i_region_id'] != null)
-            ? $item['fk_i_region_id'] : ''
+                ? $item['fk_i_region_id'] : ''
         );
 
         return true;
@@ -896,7 +892,7 @@ class ItemForm extends Form
         parent::generic_input_hidden(
             'cityId',
             (isset($item['fk_i_city_id']) && $item['fk_i_city_id'] != null) ? $item['fk_i_city_id']
-            : ''
+                : ''
         );
 
         return true;
@@ -922,7 +918,7 @@ class ItemForm extends Form
         parent::generic_input_hidden(
             'cityAreaId',
             (isset($item['fk_i_city_area_id']) && $item['fk_i_city_area_id'] != null)
-            ? $item['fk_i_city_area_id'] : ''
+                ? $item['fk_i_city_area_id'] : ''
         );
 
         return true;
@@ -1596,10 +1592,10 @@ class ItemForm extends Form
                          fkid="<?php echo $_r['fk_i_item_id']; ?>"
                          name="<?php echo $_r['s_name']; ?>">
                         <img src="<?php echo osc_apply_filter(
-                            'resource_path',
-                            osc_base_url() . $_r['s_path']
-                                  ) . $_r['pk_i_id'] . '_thumbnail.'
-                                  . $_r['s_extension']; ?>"/><a
+                                'resource_path',
+                                osc_base_url() . $_r['s_path']
+                            ) . $_r['pk_i_id'] . '_thumbnail.'
+                            . $_r['s_extension']; ?>"/><a
                                 href="javascript:delete_image(<?php echo $_r['pk_i_id'] . ', '
                                     . $_r['fk_i_item_id'] . ", '" . $_r['s_name'] . "', '"
                                     . Params::getParam('secret') . "'"; ?>);"
@@ -1687,6 +1683,11 @@ class ItemForm extends Form
         <?php
     }
 
+    public static function plugin_edit_item()
+    {
+        self::plugin_post_item('edit&itemId=' . osc_item_id());
+    }
+
     /**
      * @param string $case
      */
@@ -1767,12 +1768,6 @@ class ItemForm extends Form
         <?php
     }
 
-    public static function plugin_edit_item()
-    {
-        self::plugin_post_item('edit&itemId=' . osc_item_id());
-    }
-
-
     /**
      * @param null $resources
      *
@@ -1815,10 +1810,10 @@ class ItemForm extends Form
                        style="display: inline; cursor:pointer;"><?php _e('Delete'); ?></a>
                     <div class="ajax_preview_img"><img
                                 src="<?php echo osc_apply_filter(
-                                    'resource_path',
-                                    osc_base_url() . $_r['s_path']
-                                     ) . $_r['pk_i_id']
-                                     . '_thumbnail.' . $_r['s_extension']; ?>"
+                                        'resource_path',
+                                        osc_base_url() . $_r['s_path']
+                                    ) . $_r['pk_i_id']
+                                    . '_thumbnail.' . $_r['s_extension']; ?>"
                                 alt="<?php echo osc_esc_html($img); ?>"></div>
                 </li>
             <?php } ?>
@@ -1835,7 +1830,7 @@ class ItemForm extends Form
                 </li>
             <?php } ?>
         </ul>
-        <?php } ?>
+    <?php } ?>
         <div style="clear:both;"></div>
         <?php
 
@@ -2030,7 +2025,7 @@ class ItemForm extends Form
                     });
                     var json = JSON.parse(strReturn);
                     var total = parseInt(json.count) + $("#restricted-fine-uploader input[name='ajax_photos[]']").size() + (numUpload);
-                        <?php if ($maxImages > 0) { ?>
+                    <?php if ($maxImages > 0) { ?>
                     if (total <=<?php echo $maxImages;?>) {
                         json.success = true;
                     } else {
@@ -2040,15 +2035,15 @@ class ItemForm extends Form
                             $maxImages
                         )); ?></div>'));
                     }
-                        <?php } else { ?>
+                    <?php } else { ?>
                     json.success = true;
-                        <?php } ?>
+                    <?php } ?>
                     return json;
                 }
 
-                    <?php } else { ?>
+                <?php } else { ?>
             });
-                    <?php } ?>
+            <?php } ?>
             })
 
 

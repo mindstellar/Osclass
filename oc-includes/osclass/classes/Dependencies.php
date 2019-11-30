@@ -1,17 +1,19 @@
 <?php
+
 /**
  * Enqueued dependiences class.
  *
  * @since 3.1.1
  */
-class Dependencies {
+class Dependencies
+{
 
-    public $registered   = array();
-    public $queue        = array();
+    public $registered = array();
+    public $queue = array();
 
-    public $resolved     = array();
-    public $unresolved   = array();
-    public $error        = array();
+    public $resolved = array();
+    public $unresolved = array();
+    public $error = array();
 
     public function __construct()
     {
@@ -28,11 +30,13 @@ class Dependencies {
      */
     public function register($id, $url, $dependencies)
     {
-        if ($id!='' && $url!='') {
+        if ($id != '' && $url != '') {
             $this->registered[$id] = array(
-                'key' => $id
-            ,'url' => $url
-            ,'dependencies' => $dependencies
+                'key'          => $id
+                ,
+                'url'          => $url
+                ,
+                'dependencies' => $dependencies
             );
         }
     }
@@ -52,14 +56,14 @@ class Dependencies {
      */
     public function order()
     {
-        $this->resolved     = array();
-        $this->unresolved   = array();
-        $this->error        = array();
+        $this->resolved   = array();
+        $this->unresolved = array();
+        $this->error      = array();
 
         foreach ($this->queue as $queue) {
             if (isset($this->registered[$queue])) {
                 $node = $this->registered[$queue];
-                if ($node['dependencies']==null) {
+                if ($node['dependencies'] == null) {
                     $this->resolved[$node['key']] = $node['key'];
                 } else {
                     $this->solveDeps($node);
@@ -69,7 +73,7 @@ class Dependencies {
             }
         }
         if (!empty($this->error)) {
-            echo sprintf(__('ERROR: Some dependencies could not be loaded (%s)'), implode( ', ', $this->error));
+            echo sprintf(__('ERROR: Some dependencies could not be loaded (%s)'), implode(', ', $this->error));
         }
     }
 
@@ -83,13 +87,13 @@ class Dependencies {
         $error = false;
         if (!isset($this->resolved[$node['key']])) {
             $this->unresolved[$node['key']] = $node['key'];
-            if ($node['dependencies']!=null) {
+            if ($node['dependencies'] != null) {
                 if (is_array($node['dependencies'])) {
                     foreach ($node['dependencies'] as $dep) {
                         if (!in_array($dep, $this->resolved)) {
                             if (in_array($dep, $this->unresolved)) {
                                 $this->error[$dep] = $dep;
-                                $error = true;
+                                $error             = true;
                             } else {
                                 if (isset($this->registered[$dep])) {
                                     $this->solveDeps($this->registered[$dep]);
@@ -103,7 +107,7 @@ class Dependencies {
                     if (!in_array($node['dependencies'], $this->resolved)) {
                         if (in_array($node['dependencies'], $this->unresolved)) {
                             $this->error[$node['dependencies']] = $node['dependencies'];
-                            $error = true;
+                            $error                              = true;
                         } else {
                             if (isset($this->registered[$node['dependencies']])) {
                                 $this->solveDeps($this->registered[$node['dependencies']]);
