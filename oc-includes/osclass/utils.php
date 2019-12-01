@@ -83,11 +83,14 @@ function osc_deleteResource($id, $admin)
             $admin ? osc_logged_admin_id() : osc_logged_user_id()
         );
 
-        @unlink(osc_base_path() . $resource['s_path'] . $resource['pk_i_id'] . '.' . $resource['s_extension']);
-        @unlink(osc_base_path() . $resource['s_path'] . $resource['pk_i_id'] . '_original.' . $resource['s_extension']);
-        @unlink(osc_base_path() . $resource['s_path'] . $resource['pk_i_id'] . '_thumbnail.'
-            . $resource['s_extension']);
-        @unlink(osc_base_path() . $resource['s_path'] . $resource['pk_i_id'] . '_preview.' . $resource['s_extension']);
+        @unlink(osc_base_path() . $resource['s_path'] . $resource['pk_i_id']
+            . '.' . $resource['s_extension']);
+        @unlink(osc_base_path() . $resource['s_path'] . $resource['pk_i_id']
+            . '_original.' . $resource['s_extension']);
+        @unlink(osc_base_path() . $resource['s_path'] . $resource['pk_i_id']
+            . '_thumbnail.' . $resource['s_extension']);
+        @unlink(osc_base_path() . $resource['s_path'] . $resource['pk_i_id']
+            . '_preview.' . $resource['s_extension']);
         osc_run_hook('delete_resource', $resource);
     }
 }
@@ -200,7 +203,8 @@ function osc_plugin_url($file)
 {
     // Sanitize windows paths and duplicated slashes
     $dir = preg_replace('|/+|', '/', str_replace('\\', '/', dirname($file)));
-    $dir = osc_base_url() . 'oc-content/plugins/' . preg_replace('#^.*oc-content\/plugins\/#', '', $dir) . '/';
+    $dir = osc_base_url() . 'oc-content/plugins/'
+        . preg_replace('#^.*oc-content\/plugins\/#', '', $dir) . '/';
 
     return $dir;
 }
@@ -732,7 +736,10 @@ function osc_dbdump($path, $file)
     }
 
     $_str =
-        '/* OSCLASS MYSQL Autobackup (' . date(osc_date_format() ?: 'Y-m-d') . ' ' . date(osc_time_format() ?: 'H:i:s')
+        '/* OSCLASS MYSQL Autobackup ('
+        . date(osc_date_format() ?: 'Y-m-d')
+        . ' '
+        . date(osc_time_format() ?: 'H:i:s')
         . ') */' . "\n";
 
     $f = fopen($path, 'ab');
@@ -841,7 +848,11 @@ if (!function_exists('http_chunked_decode')) {
         $len     = strlen($chunk);
         $dechunk = null;
         while (($pos < $len)
-            && ($chunkLenHex = substr($chunk, $pos, ($newlineAt = strpos($chunk, "\n", $pos + 1)) - $pos))) {
+            && ($chunkLenHex = substr(
+                $chunk,
+                $pos,
+                ($newlineAt = strpos($chunk, "\n", $pos + 1)) - $pos
+            ))) {
             if (!is_hex($chunkLenHex)) {
                 trigger_error('Value is not properly chunk encoded', E_USER_WARNING);
 
@@ -1656,7 +1667,12 @@ function osc_save_permissions($dir = ABS_PATH)
  */
 function osc_prepare_price($price)
 {
-    return number_format($price / 1000000, osc_locale_num_dec(), osc_locale_dec_point(), osc_locale_thousands_sep());
+    return number_format(
+        $price / 1000000,
+        osc_locale_num_dec(),
+        osc_locale_dec_point(),
+        osc_locale_thousands_sep()
+    );
 }
 
 
@@ -2062,7 +2078,9 @@ function osc_translate_categories($locale)
             $fieldsDescription['s_description']    = '';
             $fieldsDescription['fk_i_category_id'] = $category['pk_i_id'];
             $fieldsDescription['fk_c_locale_code'] = $locale;
-            $slug                                  = osc_sanitizeString(osc_apply_filter('slug', $fieldsDescription['s_name']));
+            $slug                                  = osc_sanitizeString(
+                osc_apply_filter('slug', $fieldsDescription['s_name'])
+            );
             $slug_tmp                              = $slug;
             $slug_unique                           = 1;
             while (true) {
@@ -2304,7 +2322,7 @@ function osc_do_upgrade()
     $data        = osc_file_get_contents('https://example.org/latest_version_v1.php');
     $data        = json_decode(substr($data, 1, -2), true);
     $source_file = $data['url'];
-    if ($source_file != '') {
+    if ($source_file) {
         $tmp      = explode('/', $source_file);
         $filename = end($tmp);
         $result   = osc_downloadFile($source_file, $filename);
@@ -2430,7 +2448,7 @@ function osc_do_upgrade()
     } else {
         $message = __('Missing download URL');
         $error   = 1; // Missing download URL
-        $deleted = @unlink(ABS_PATH . '.maintenance');
+        @unlink(ABS_PATH . '.maintenance');
     }
 
     if ($error == 5) {
@@ -2729,22 +2747,24 @@ function osc_market($section, $code)
                                 $error   = 0;
                             } else {
                                 $message =
-                                    __('Nearly everything looks good! but there were some errors removing temporary files. Please manually remove the \"oc-content/downloads/oc-temp\" folder');
+                                    __('Nearly everything looks good! '
+                                        . 'but there were some errors removing temporary files.'
+                                        . ' Please manually remove the \"oc-content/downloads/oc-temp\" folder');
                                 $error   = 6; // Some errors removing files
                             }
                         } else {
                             $message = __('Problems when copying files. Please check your permissions. ');
 
-                            if ($current_user['uid'] != $ownerFolder['uid']) {
-                                if (function_exists('posix_getgrgid')) {
-                                    $current_group = posix_getgrgid($current_user['gid']);
-                                    $message       .= '<p><strong>' . sprintf(
-                                        __('NOTE: Web user and destination folder user is not the same, you might have an issue there. <br/>Do this in your console:<br/>chown -R %s:%s %s'),
-                                        $current_user['name'],
-                                        $current_group['name'],
-                                        $folder_dest
-                                    ) . '</strong></p>';
-                                }
+                            if (($current_user['uid'] !== $ownerFolder['uid']) && function_exists('posix_getgrgid')) {
+                                $current_group = posix_getgrgid($current_user['gid']);
+                                $message       .= '<p><strong>' . sprintf(
+                                    __('NOTE: Web user and destination folder user is not the same, '
+                                            . 'you might have an issue there. '
+                                            . '<br/>Do this in your console:<br/>chown -R %s:%s %s'),
+                                    $current_user['name'],
+                                    $current_group['name'],
+                                    $folder_dest
+                                ) . '</strong></p>';
                             }
                             $error = 4; // Problems copying files. Maybe permissions are not correct
                         }
@@ -2792,11 +2812,11 @@ function osc_is_ssl()
 
 
 if (!function_exists('hex2b64')) {
-    /*
- * Used to encode a field for Amazon Auth
- * (taken from the Amazon S3 PHP example library)
- */
+
     /**
+     * Used to encode a field for Amazon Auth
+     * (taken from the Amazon S3 PHP example library)
+     *
      * @param $str
      *
      * @return string
@@ -2813,11 +2833,10 @@ if (!function_exists('hex2b64')) {
 }
 
 if (!function_exists('hmacsha1')) {
-    /*
- * Calculate HMAC-SHA1 according to RFC2104
- * See http://www.faqs.org/rfcs/rfc2104.html
- */
     /**
+     * Calculate HMAC-SHA1 according to RFC2104
+     * See http://www.faqs.org/rfcs/rfc2104.html
+     *
      * @param $key
      * @param $data
      *

@@ -140,34 +140,41 @@ class ItemActions
         $flash_error .= $desc_message;
 
         // akismet check spam ...
-        if ($this->_akismet_text($aItem['title'], $aItem['description'], $contactName, $contactEmail)) {
+        if ($this->akismetText($aItem['title'], $aItem['description'], $contactName, $contactEmail)) {
             $is_spam = 1;
         }
 
         $flash_error .= ((!osc_validate_category($aItem['catId'])) ? _m('Category invalid.') . PHP_EOL : '');
         $flash_error .= ((!osc_validate_number($aItem['price'])) ? _m('Price must be a number.') . PHP_EOL : '');
-        $flash_error .= ((!osc_validate_max(number_format($aItem['price'], 0, '', ''), 15)) ? _m('Price too long.')
+        $flash_error .= ((!osc_validate_max(number_format($aItem['price'], 0, '', ''), 15))
+            ? _m('Price too long.')
             . PHP_EOL : '');
         $flash_error .= (($aItem['price'] !== null && (int)$aItem['price'] < 0)
             ? _m('Price must be positive number.') . PHP_EOL : '');
         $flash_error .= ((!osc_validate_max($contactName, 35)) ? _m('Name too long.') . PHP_EOL : '');
         $flash_error .= ((!osc_validate_email($contactEmail)) ? _m('Email invalid.') . PHP_EOL : '');
-        $flash_error .= ((!osc_validate_text($aItem['countryName'], 2, false)) ? _m('Country too short.') . PHP_EOL
+        $flash_error .= ((!osc_validate_text($aItem['countryName'], 2, false))
+            ? _m('Country too short.') . PHP_EOL
             : '');
         $flash_error .= ((!osc_validate_max($aItem['countryName'], 50)) ? _m('Country too long.') . PHP_EOL : '');
-        $flash_error .= ((!osc_validate_text($aItem['regionName'], 2, false)) ? _m('Region too short.') . PHP_EOL
+        $flash_error .= ((!osc_validate_text($aItem['regionName'], 2, false))
+            ? _m('Region too short.') . PHP_EOL
             : '');
         $flash_error .= ((!osc_validate_max($aItem['regionName'], 50)) ? _m('Region too long.') . PHP_EOL : '');
-        $flash_error .= ((!osc_validate_text($aItem['cityName'], 2, false)) ? _m('City too short.') . PHP_EOL : '');
+        $flash_error .= ((!osc_validate_text($aItem['cityName'], 2, false))
+            ? _m('City too short.') . PHP_EOL : '');
         $flash_error .= ((!osc_validate_max($aItem['cityName'], 50)) ? _m('City too long.') . PHP_EOL : '');
-        $flash_error .= ((!osc_validate_text($aItem['cityArea'], 2, false)) ? _m('Municipality too short.')
+        $flash_error .= ((!osc_validate_text($aItem['cityArea'], 2, false))
+            ? _m('Municipality too short.')
             . PHP_EOL : '');
         $flash_error .= ((!osc_validate_max($aItem['cityArea'], 50)) ? _m('Municipality too long.') . PHP_EOL : '');
-        $flash_error .= ((!osc_validate_text($aItem['address'], 3, false)) ? _m('Address too short.') . PHP_EOL
+        $flash_error .= ((!osc_validate_text($aItem['address'], 3, false))
+            ? _m('Address too short.') . PHP_EOL
             : '');
         $flash_error .= ((!osc_validate_max($aItem['address'], 100)) ? _m('Address too long.') . PHP_EOL : '');
         $flash_error .= ((((time() - (int)Session::newInstance()->_get('last_submit_item')) < osc_items_wait_time())
-            && !$this->is_admin) ? _m('Too fast. You should wait a little to publish your ad.')
+            && !$this->is_admin)
+            ? _m('Too fast. You should wait a little to publish your ad.')
             . PHP_EOL : '');
 
         $_meta = Field::newInstance()->findByCategory($aItem['catId']);
@@ -305,7 +312,7 @@ class ItemActions
                 );
                 // if is_spam not increase stats
                 if ($is_spam == 0) {
-                    $this->_increaseStats($aAux);
+                    $this->increaseStats($aAux);
                 }
                 $success = 2;
             }
@@ -413,6 +420,7 @@ class ItemActions
         return $success;
     }
 
+
     /**
      * @param array  $title
      * @param array  $description
@@ -422,16 +430,7 @@ class ItemActions
      * @return bool
      * @throws \exception
      */
-    /**
-     * @param array  $title
-     * @param array  $description
-     * @param string $author
-     * @param string $email
-     *
-     * @return bool
-     * @throws \exception
-     */
-    private function _akismet_text($title, $description, $author, $email)
+    private function akismetText($title, $description, $author, $email)
     {
         $spam = false;
         if (osc_akismet_key()) {
@@ -440,7 +439,6 @@ class ItemActions
                 $_description = $description[$k];
                 $content      = $_title . ' ' . $_description;
 
-                require_once LIB_PATH . 'Akismet.class.php';
                 $akismet = new Akismet(osc_base_url(), osc_akismet_key());
 
                 $akismet->setCommentContent($content);
@@ -547,10 +545,8 @@ class ItemActions
                         ));
                         $resourceId = $itemResourceManager->dao->insertedId();
 
-                        if (!is_dir($folder)) {
-                            if (!@mkdir($folder, 0755, true)) {
-                                return 3; // PATH CAN NOT BE CREATED
-                            }
+                        if (!is_dir($folder) && !mkdir($folder, 0755, true) && !is_dir($folder)) {
+                            return 3; // PATH CAN NOT BE CREATED
                         }
                         osc_copy($tmpName . '_normal', $folder . $resourceId . '.' . $extension);
                         osc_copy($tmpName . '_preview', $folder . $resourceId . '_preview.' . $extension);
@@ -595,14 +591,16 @@ class ItemActions
         $item = $aItem['item'];
         View::newInstance()->_exportVariableToView('item', $item);
 
+        $userId = Session::newInstance()->_get('userId');
+        $itemActive = $aItem['active'];
         /**
          * Send email to non-reg user requesting item activation
          */
-        if ($aItem['active'] === 'INACTIVE' && Session::newInstance()->_get('userId') === '') {
+        if ($itemActive && !$userId) {
             osc_run_hook('hook_email_item_validation_non_register_user', $item);
-        } elseif ($aItem['active'] === 'INACTIVE') { //  USER IS REGISTERED
+        } elseif ($itemActive === 'INACTIVE') { //  USER IS REGISTERED
             osc_run_hook('hook_email_item_validation', $item);
-        } elseif (Session::newInstance()->_get('userId') === '') { // USER IS NOT REGISTERED
+        } elseif (!$userId) { // USER IS NOT REGISTERED
             osc_run_hook('hook_email_new_item_non_register_user', $item);
         }
 
@@ -622,7 +620,7 @@ class ItemActions
      *
      * @throws \Exception
      */
-    private function _increaseStats($item)
+    private function increaseStats($item)
     {
         if ($item['fk_i_user_id'] !== null) {
             User::newInstance()->increaseNumItems($item['fk_i_user_id']);
@@ -693,34 +691,45 @@ class ItemActions
 
         $flash_error .= ((!osc_validate_category($aItem['catId'])) ? _m('Category invalid.') . PHP_EOL : '');
         $flash_error .= ((!osc_validate_number($aItem['price'])) ? _m('Price must be a number.') . PHP_EOL : '');
-        $flash_error .= ((!osc_validate_max(number_format($aItem['price'], 0, '', ''), 15)) ? _m('Price too long.')
+        $flash_error .= ((!osc_validate_max(number_format($aItem['price'], 0, '', ''), 15))
+            ? _m('Price too long.')
             . PHP_EOL : '');
         $flash_error .= (($aItem['price'] !== null && (int)$aItem['price'] < 0)
             ? _m('Price must be positive number.') . PHP_EOL : '');
-        $flash_error .= ((!osc_validate_text($aItem['countryName'], 3, false)) ? _m('Country too short.') . PHP_EOL
+        $flash_error .= ((!osc_validate_text($aItem['countryName'], 3, false))
+            ? _m('Country too short.') . PHP_EOL
             : '');
-        $flash_error .= ((!osc_validate_max($aItem['countryName'], 50)) ? _m('Country too long.') . PHP_EOL : '');
-        $flash_error .= ((!osc_validate_text($aItem['regionName'], 2, false)) ? _m('Region too short.') . PHP_EOL
+        $flash_error .= ((!osc_validate_max($aItem['countryName'], 50))
+            ? _m('Country too long.') . PHP_EOL : '');
+        $flash_error .= ((!osc_validate_text($aItem['regionName'], 2, false))
+            ? _m('Region too short.') . PHP_EOL
             : '');
-        $flash_error .= ((!osc_validate_max($aItem['regionName'], 50)) ? _m('Region too long.') . PHP_EOL : '');
-        $flash_error .= ((!osc_validate_text($aItem['cityName'], 2, false)) ? _m('City too short.') . PHP_EOL : '');
-        $flash_error .= ((!osc_validate_max($aItem['cityName'], 50)) ? _m('City too long.') . PHP_EOL : '');
-        $flash_error .= ((!osc_validate_text($aItem['cityArea'], 3, false)) ? _m('Municipality too short.')
+        $flash_error .= ((!osc_validate_max($aItem['regionName'], 50))
+            ? _m('Region too long.') . PHP_EOL : '');
+        $flash_error .= ((!osc_validate_text($aItem['cityName'], 2, false))
+            ? _m('City too short.') . PHP_EOL : '');
+        $flash_error .= ((!osc_validate_max($aItem['cityName'], 50))
+            ? _m('City too long.') . PHP_EOL : '');
+        $flash_error .= ((!osc_validate_text($aItem['cityArea'], 3, false))
+            ? _m('Municipality too short.')
             . PHP_EOL : '');
-        $flash_error .= ((!osc_validate_max($aItem['cityArea'], 50)) ? _m('Municipality too long.') . PHP_EOL : '');
-        $flash_error .= ((!osc_validate_text($aItem['address'], 3, false)) ? _m('Address too short.') . PHP_EOL
+        $flash_error .= ((!osc_validate_max($aItem['cityArea'], 50))
+            ? _m('Municipality too long.') . PHP_EOL : '');
+        $flash_error .= ((!osc_validate_text($aItem['address'], 3, false))
+            ? _m('Address too short.') . PHP_EOL
             : '');
-        $flash_error .= ((!osc_validate_max($aItem['address'], 100)) ? _m('Address too long.') . PHP_EOL : '');
+        $flash_error .= ((!osc_validate_max($aItem['address'], 100))
+            ? _m('Address too long.') . PHP_EOL : '');
 
         $_meta = Field::newInstance()->findByCategory($aItem['catId']);
         $meta  = Params::getParam('meta');
         foreach ($_meta as $_m) {
             $meta[$_m['pk_i_id']] = isset($meta[$_m['pk_i_id']]) ? $meta[$_m['pk_i_id']] : '';
         }
-        if ($meta != '' && count($meta) > 0) {
+        if ($meta && count($meta) > 0) {
             $mField = Field::newInstance();
             foreach ($meta as $k => $v) {
-                if ($v == '') {
+                if (!$v) {
                     $field = $mField->findByPrimaryKey($k);
                     if ($field['b_required'] == 1) {
                         $flash_error .= sprintf(_m('%s field is required.'), $field['s_name']) . PHP_EOL;
@@ -731,7 +740,7 @@ class ItemActions
 
         // hook pre add or edit
         // DEPRECATED : preitem_psot will be removed in 3.4
-        osc_run_hook('pre_item_post');
+        // osc_run_hook('pre_item_post');
         osc_run_hook('pre_item_edit', $aItem, $flash_error);
         $flash_error = osc_apply_filter('pre_item_edit_error', $flash_error, $aItem);
 
@@ -760,7 +769,7 @@ class ItemActions
 
             $old_item = $this->manager->findByPrimaryKey($aItem['idItem']);
 
-            if ($aItem['userId'] != '') {
+            if ($aItem['userId']) {
                 $user                  = User::newInstance()->findByPrimaryKey($aItem['userId']);
                 $aItem['contactName']  = $user['s_name'];
                 $aItem['contactEmail'] = $user['s_email'];
@@ -809,7 +818,7 @@ class ItemActions
             /**
              * META FIELDS
              */
-            if ($meta != '' && count($meta) > 0) {
+            if ($meta && count($meta) > 0) {
                 $mField = Field::newInstance();
                 foreach ($meta as $k => $v) {
                     // if dateinterval
@@ -830,7 +839,7 @@ class ItemActions
             $newIsExpired = osc_isExpired($dt_expiration);
 
             // Recalculate stats related with items
-            $this->_updateStats(
+            $this->updateStats(
                 $result,
                 $old_item,
                 $oldIsExpired,
@@ -866,7 +875,7 @@ class ItemActions
      *
      * @throws \Exception
      */
-    private function _updateStats(
+    private function updateStats(
         $result,
         $old_item,
         $oldIsExpired,
@@ -967,7 +976,7 @@ class ItemActions
                 osc_run_hook('activate_item', $id);
                 // b_enabled == 1 && b_active == 1
                 if ($item[0]['b_spam'] == 0 && !osc_isExpired($item[0]['dt_expiration'])) {
-                    $this->_increaseStats($item[0]);
+                    $this->increaseStats($item[0]);
                 }
 
                 return true;
@@ -1050,7 +1059,7 @@ class ItemActions
             osc_run_hook('enable_item', $id);
             $item = $this->manager->findByPrimaryKey($id);
             if ($item['b_active'] == 1 && $item['b_spam'] == 0 && !osc_isExpired($item['dt_expiration'])) {
-                $this->_increaseStats($item);
+                $this->increaseStats($item);
             }
 
             return true;
@@ -1158,14 +1167,20 @@ class ItemActions
                 osc_run_hook('item_spam_off', $id);
             }
 
-            if ($item['b_active'] == 1 && $item['b_enabled'] == 1 && $item['b_spam'] == 0
-                && !osc_isExpired($item['dt_expiration'])
+            $b_active = $item['b_active'];
+            $b_enabled = $item['b_enabled'];
+            $b_spam = $item['b_spam'];
+            $isExpired = osc_isExpired($item['dt_expiration']);
+
+
+            if ($b_active == 1 && $b_enabled == 1 && $b_spam == 0
+                && !$isExpired
             ) {
                 $this->_decreaseStats($item);
-            } elseif ($item['b_active'] == 1 && $item['b_enabled'] == 1 && $item['b_spam'] == 1
-                && !osc_isExpired($item['dt_expiration'])
+            } elseif ($b_active == 1 && $b_enabled == 1 && $b_spam == 1
+                && !$isExpired
             ) {
-                $this->_increaseStats($item);
+                $this->increaseStats($item);
             }
 
             return true;
@@ -1456,7 +1471,7 @@ class ItemActions
             $akismet->setPermalink($itemURL);
 
             $status = $akismet->isCommentSpam() ? 'SPAM' : $status;
-            if ($status == 'SPAM') {
+            if ($status === 'SPAM') {
                 $status_num = 5;
             }
         }
