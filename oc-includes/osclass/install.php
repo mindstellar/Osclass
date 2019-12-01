@@ -15,7 +15,7 @@
  * limitations under the License.
  */
 
-error_reporting(E_ERROR | E_CORE_ERROR | E_COMPILE_ERROR | E_PARSE);
+error_reporting(E_ALL);
 
 define('ABS_PATH', dirname(dirname(__DIR__)) . '/');
 define('LIB_PATH', ABS_PATH . 'oc-includes/');
@@ -191,7 +191,7 @@ switch ($step) {
                         <?php if (count($locales) > 1) { ?>
                             <div>
                                 <label for="install_locale"><?php _e('Choose language'); ?></label>
-                                <select name="install_locale" id="install_locale"
+                                <select id="install_locale" name="install_locale"
                                         onchange="window.location.href='?install_locale='+document.getElementById(this.id).value">
                                     <?php foreach ($locales as $k => $locale) { ?>
                                         <option value="<?php echo osc_esc_html($k); ?>" <?php if ($k
@@ -214,7 +214,7 @@ switch ($step) {
                                         <?php } ?>
                                     <?php } ?>
                                     <li>
-                                        <a href="https://example.org/page/hosting?utm_source=installation-hosting-page&utm_medium=installation&utm_campaign=hosting_page"
+                                        <a href="https://osclass.discourse.group"
                                            hreflang="en"><?php _e('Need more help?'); ?></a></li>
                                 </ul>
                             </div>

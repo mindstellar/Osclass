@@ -26,13 +26,13 @@
     $locales = osc_get_locales();
     $codes   = array();
     foreach ($locales as $locale) {
-        $codes[] = '\''. osc_esc_js($locale['pk_c_code']) . '\'';
+        $codes[] = osc_esc_js($locale['pk_c_code']);
     }
     ?>
         osc.locales = {};
         osc.locales._default = '<?php echo osc_language(); ?>';
         osc.locales.current = '<?php echo osc_current_admin_locale(); ?>';
-        osc.locales.codes   = new Array(<?php echo join(',', $codes); ?>);
+        osc.locales.codes   = <?php echo json_encode($codes); ?>;
         osc.locales.string  = '[name*="' + osc.locales.codes.join('"],[name*="') + '"],.' + osc.locales.codes.join(',.');
         osc.langs = <?php echo json_encode($lang); ?>;
     </script>
