@@ -358,11 +358,6 @@ function osc_assets_url($file = '', $assets_base_url = null)
     return $assets_base_url . $file;
 }
 
-
-/////////////////////////////////////
-//functions for the public website //
-/////////////////////////////////////
-
 /**
  *  Create automatically the contact url
  *

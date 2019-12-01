@@ -125,11 +125,10 @@ function osc__auto($class_name)
         'WebSecBaseModel'       => '/osclass/classes/controller/base/WebSecBaseModel.php',
         'WebThemes'             => '/osclass/classes/themes/WebThemes.php',
         'Widget'                => '/osclass/classes/model/Widget.php',
-        'iObjectCache'          => '/osclass/classes/cache/interface/iObject_Cache.php'
+        'iObject_Cache'          => '/osclass/classes/cache/interface/iObject_Cache.php'
     ];
     // special cases
     osc__loadIfExists($osc_autoload_map[$class_name]);
-
 }
 
 
@@ -145,7 +144,7 @@ function osc__loadIfExists($filename)
     $fullFile = __DIR__ . '/' . $filename; // its relative to this path
 
     if ((@include $fullFile) === false) {
-        throw  new RuntimeException('AutoLoadOne Error: No file found.');
+        throw  new RuntimeException("AutoLoad Error: No file found. $fullFile");
     }
 }
 

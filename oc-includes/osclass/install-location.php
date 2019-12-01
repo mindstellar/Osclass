@@ -134,9 +134,9 @@ function basic_info()
 function install_locations()
 {
     $location = Params::getParam('locationsql');
-    if (!$location) {
+    if ($location) {
         $sql = osc_file_get_contents(osc_get_locations_sql_url($location));
-        if (!$sql) {
+        if ($sql) {
             $conn = DBConnectionClass::newInstance();
             $c_db = $conn->getOsclassDb();
             $comm = new DBCommandClass($c_db);
