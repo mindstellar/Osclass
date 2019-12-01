@@ -31,7 +31,7 @@ function _purify($value, $xss_check)
     $_config->set('HTML.Allowed', '');
     $_config->set(
         'Cache.SerializerPath',
-        dirname(dirname(dirname(dirname(__FILE__)))) . '/oc-content/uploads/'
+        dirname(dirname(__DIR__)) . '/oc-content/uploads/'
     );
 
     $_purifier = new HTMLPurifier($_config);
@@ -337,7 +337,7 @@ function oc_install()
                     ->error(sprintf(
                         __('Cannot connect to the database. Error number: %s'),
                         $error_num
-                    ), __FILE__ . "::" . __LINE__);
+                    ), __FILE__ . '::' . __LINE__);
             }
 
             switch ($error_num) {
@@ -409,7 +409,7 @@ function oc_install()
             LogOsclassInstaller::newInstance()
                 ->error(
                     sprintf(__('Cannot connect to the database. Error number: %s'), $error_num),
-                    __FILE__ . "::" . __LINE__
+                    __FILE__ . '::' . __LINE__
                 );
         }
 
@@ -445,7 +445,7 @@ function oc_install()
                 LogOsclassInstaller::newInstance()
                     ->error(
                         __("Can't write in config.php file. Check if the file is writable."),
-                        __FILE__ . "::" . __LINE__
+                        __FILE__ . '::' . __LINE__
                     );
             }
 
@@ -458,7 +458,7 @@ function oc_install()
                 LogOsclassInstaller::newInstance()
                     ->error(
                         __("config-sample.php doesn't exist. Check if everything is decompressed correctly."),
-                        __FILE__ . "::" . __LINE__
+                        __FILE__ . '::' . __LINE__
                     );
             }
 
@@ -495,23 +495,22 @@ function oc_install()
                 ->error(sprintf(
                     __("Can't create the database structure. Error number: %s"),
                     $error_num
-                ), __FILE__ . "::" . __LINE__);
+                ), __FILE__ . '::' . __LINE__);
         }
 
-        switch ($error_num) {
-            case 1050:
-                return array('error' => __('There are tables with the same name in the database. '
-                    .'Change the table prefix or the database and try again.'));
-                break;
-            default:
-                return array(
-                    'error' => sprintf(
-                        __("Can't create the database structure. Error number: %s"),
-                        $error_num
-                    )
-                );
-                break;
+        if ($error_num === 1050) {
+            return array(
+                'error' => __('There are tables with the same name in the database. '
+                    . 'Change the table prefix or the database and try again.')
+            );
         }
+
+        return array(
+            'error' => sprintf(
+                __("Can't create the database structure. Error number: %s"),
+                $error_num
+            )
+        );
     }
 
     $localeManager = OSCLocale::newInstance();
@@ -697,7 +696,6 @@ function create_config_file($dbname, $username, $password, $dbhost, $tableprefix
 /**
  * The base MySQL settings of Osclass
  */
-define('MULTISITE', 0);
 
 /** MySQL database name for Osclass */
 define('DB_NAME', '$dbname');
@@ -970,6 +968,7 @@ function display_database_config()
 
 function display_target()
 {
+    $internet_error = false;
     require_once LIB_PATH . 'osclass/helpers/hUtils.php';
     $country_list = osc_file_get_contents(osc_get_locations_json_url());
     $country_list = json_decode($country_list, true);

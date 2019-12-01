@@ -15,7 +15,7 @@
  * limitations under the License.
  */
 
-error_reporting(E_ALL);
+error_reporting(E_ERROR | E_CORE_ERROR | E_COMPILE_ERROR | E_PARSE);
 
 define('ABS_PATH', dirname(dirname(__DIR__)) . '/');
 define('LIB_PATH', ABS_PATH . 'oc-includes/');
@@ -253,7 +253,14 @@ switch ($step) {
             } elseif ($step == 4) {
                 // ping engines
 
-                ping_search_engines($_COOKIE['osclass_ping_engines']);
+                if (isset($_COOKIE['osclass_ping_engines'])) {
+                    try {
+                        ping_search_engines($_COOKIE['osclass_ping_engines']);
+                    } catch (Exception $e) {
+                        LogOsclassInstaller::newInstance()->error($e->getMessage(), $e->getFile().' at line: '
+                            .$e->getLine());
+                    }
+                }
 
                 setcookie('osclass_save_stats', '', time() - 3600);
                 setcookie('osclass_ping_engines', '', time() - 3600);

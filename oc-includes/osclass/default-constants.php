@@ -36,7 +36,7 @@ if (!defined('CONTENT_PATH')) {
     define('CONTENT_PATH', ABS_PATH . 'oc-content/');
 }
 
-if (!defined('CONTENT_WEB_PATH')) {
+if (!defined('CONTENT_WEB_PATH') && defined('WEB_PATH')) {
     define('CONTENT_WEB_PATH', WEB_PATH . 'oc-content/');
 }
 
@@ -44,7 +44,7 @@ if (!defined('THEMES_PATH')) {
     define('THEMES_PATH', CONTENT_PATH . 'themes/');
 }
 
-if (!defined('THEMES_WEB_PATH')) {
+if (!defined('THEMES_WEB_PATH') && defined('CONTENT_WEB_PATH')) {
     define('THEMES_WEB_PATH', CONTENT_WEB_PATH . 'themes/');
 }
 
@@ -52,7 +52,7 @@ if (!defined('PLUGINS_PATH')) {
     define('PLUGINS_PATH', CONTENT_PATH . 'plugins/');
 }
 
-if (!defined('PLUGINS_WEB_PATH')) {
+if (!defined('PLUGINS_WEB_PATH') && defined('CONTENT_WEB_PATH')) {
     define('PLUGINS_WEB_PATH', CONTENT_WEB_PATH . 'plugins/');
 }
 
@@ -60,7 +60,7 @@ if (!defined('TRANSLATIONS_PATH')) {
     define('TRANSLATIONS_PATH', CONTENT_PATH . 'languages/');
 }
 
-if (!defined('TRANSLATIONS_WEB_PATH')) {
+if (!defined('TRANSLATIONS_WEB_PATH') && defined('CONTENT_WEB_PATH')) {
     define('TRANSLATIONS_WEB_PATH', CONTENT_WEB_PATH . 'languages/');
 }
 
@@ -68,7 +68,7 @@ if (!defined('UPLOADS_PATH')) {
     define('UPLOADS_PATH', CONTENT_PATH . 'uploads/');
 }
 
-if (!defined('UPLOADS_WEB_PATH')) {
+if (!defined('UPLOADS_WEB_PATH') && defined('CONTENT_WEB_PATH')) {
     define('UPLOADS_WEB_PATH', CONTENT_WEB_PATH . 'uploads/');
 }
 
