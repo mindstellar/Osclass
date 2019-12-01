@@ -16,7 +16,7 @@
  */
 
 if (!defined('ABS_PATH')) {
-    define('ABS_PATH', str_replace('\\', '/', __DIR__ . '/'));
+    define('ABS_PATH', __DIR__ . '/');
 }
 
 define('LIB_PATH', ABS_PATH . 'oc-includes/');
