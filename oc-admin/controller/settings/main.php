@@ -54,7 +54,7 @@ class CAdminSettingsMain extends AdminSecBaseModel
                 $contactAttachment = Params::getParam('enabled_attachment');
                 $selectableParent  = Params::getParam('selectable_parent_categories');
                 $bAutoCron         = Params::getParam('auto_cron');
-                $sAutoUpdate       = join("|", Params::getParam('auto_update'));
+                // $sAutoUpdate       = join("|", Params::getParam('auto_update'));
 
                 // preparing parameters
                 $sPageTitle        = trim(strip_tags($sPageTitle));
@@ -105,7 +105,7 @@ class CAdminSettingsMain extends AdminSecBaseModel
                 $iUpdated += osc_set_preference('weekStart', $sWeekStart);
                 $iUpdated += osc_set_preference('timeFormat', $sTimeFormat);
                 $iUpdated += osc_set_preference('timezone', $sTimezone);
-                $iUpdated += osc_set_preference('auto_update', $sAutoUpdate);
+                // $iUpdated += osc_set_preference('auto_update', $sAutoUpdate);
                 if (is_int($sNumRssItems)) {
                     $iUpdated += osc_set_preference('num_rss_items', $sNumRssItems);
                 } else {
