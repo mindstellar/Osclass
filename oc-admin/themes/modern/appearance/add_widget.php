@@ -147,14 +147,14 @@ osc_current_admin_theme_path('parts/header.php'); ?>
                         <div class="input">
                             <input type="text" class="large" name="description" value="<?php if ($edit) {
                                 echo osc_esc_html($widget['s_description']);
-                            } ?>"/>
+                                                                                       } ?>"/>
                         </div>
                     </div>
                     <div class="input-description-wide">
                         <label><?php _e('HTML Code for the Widget'); ?></label>
                         <textarea name="content" id="body"><?php if ($edit) {
                                 echo osc_esc_html($widget['s_content']);
-                            } ?></textarea>
+                                                           } ?></textarea>
                     </div>
                     <div class="form-actions">
                         <input type="submit" value="<?php echo $button; ?>" class="btn btn-submit"/>

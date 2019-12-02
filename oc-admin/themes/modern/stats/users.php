@@ -159,10 +159,10 @@ function customHead()
             data_country.addColumn('number', '<?php _e('Users per country'); ?>');
             data_country.addRows(<?php echo count($users_by_country); ?>);
             <?php foreach ($users_by_country as $k => $v) {
-            echo "data_country.setValue(" . $k . ", 0, '" . (($v['s_country'] == null) ? __('Unknown')
+                echo "data_country.setValue(" . $k . ", 0, '" . (($v['s_country'] == null) ? __('Unknown')
                     : $v['s_country']) . "');";
-            echo "data_country.setValue(" . $k . ", 1, " . $v['num'] . ");";
-        } ?>
+                echo "data_country.setValue(" . $k . ", 1, " . $v['num'] . ");";
+            } ?>
 
             // Create and draw the visualization.
             new google.visualization.PieChart(document.getElementById('by_country')).draw(data_country, {
@@ -175,10 +175,10 @@ function customHead()
             data_region.addColumn('number', '<?php _e('Users per region'); ?>');
             data_region.addRows(<?php echo count($users_by_region); ?>);
             <?php foreach ($users_by_region as $k => $v) {
-            echo "data_region.setValue(" . $k . ", 0, '" . (($v['s_region'] == null) ? __('Unknown') : $v['s_region'])
+                echo "data_region.setValue(" . $k . ", 0, '" . (($v['s_region'] == null) ? __('Unknown') : $v['s_region'])
                 . "');";
-            echo "data_region.setValue(" . $k . ", 1, " . $v['num'] . ");";
-        } ?>
+                echo "data_region.setValue(" . $k . ", 1, " . $v['num'] . ");";
+            } ?>
 
             // Create and draw the visualization.
             new google.visualization.PieChart(document.getElementById('by_region')).draw(data_region, {
@@ -187,7 +187,7 @@ function customHead()
             });
         }
     </script>
-<?php }
+    <?php }
 }
 
 
@@ -205,15 +205,15 @@ osc_add_hook('admin_header', 'customHead', 10);
             <div class="row-wrapper">
                 <a id="monthly" class="btn float-right <?php if ($type == 'month') {
                     echo 'btn-green';
-                } ?>"
+                                                       } ?>"
                    href="<?php echo osc_admin_base_url(true); ?>?page=stats&amp;action=users&amp;type_stat=month"><?php _e('Last 10 months'); ?></a>
                 <a id="weekly" class="btn float-right <?php if ($type == 'week') {
                     echo 'btn-green';
-                } ?>"
+                                                      } ?>"
                    href="<?php echo osc_admin_base_url(true); ?>?page=stats&amp;action=users&amp;type_stat=week"><?php _e('Last 10 weeks'); ?></a>
                 <a id="daily" class="btn float-right <?php if ($type == '' || $type == 'day') {
                     echo 'btn-green';
-                } ?>"
+                                                     } ?>"
                    href="<?php echo osc_admin_base_url(true); ?>?page=stats&amp;action=users&amp;type_stat=day"><?php _e('Last 10 days'); ?></a>
             </div>
         </div>

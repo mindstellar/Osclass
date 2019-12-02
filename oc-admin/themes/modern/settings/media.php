@@ -273,7 +273,7 @@ osc_current_admin_theme_path('parts/header.php'); ?>
                             <input type="checkbox" name="use_imagick" value="1" <?php echo(($imagickLoaded
                                 && osc_use_imagick()) ? 'checked="checked"' : ''); ?> <?php if (!$imagickLoaded) {
                                 echo 'disabled="disabled"';
-                            } ?> />
+                                } ?> />
                             <label for="use_imagick"><?php _e('Use ImageMagick instead of GD library'); ?></label>
                         </div>
                         <?php if (!$imagickLoaded) { ?>
@@ -291,13 +291,13 @@ osc_current_admin_theme_path('parts/header.php'); ?>
                         <div class="form-label-checkbox">
                             <input type="radio" id="watermark_none" name="watermark_type"
                                    value="none" <?php echo((!osc_is_watermark_image() && !osc_is_watermark_text())
-                                ? 'checked="checked"' : ''); ?> />
+                                    ? 'checked="checked"' : ''); ?> />
                             <label for="watermark_none"><?php _e('None'); ?></label>
                         </div>
                         <div class="form-label-checkbox">
                             <input type="radio" id="watermark_text" name="watermark_type"
                                    value="text" <?php echo(osc_is_watermark_text() ? 'checked="checked"'
-                                : ''); ?> <?php echo($freeType ? '' : 'disabled="disabled"'); ?> />
+                                    : ''); ?> <?php echo($freeType ? '' : 'disabled="disabled"'); ?> />
                             <label for="watermark_text"><?php _e('Text'); ?></label>
                             <?php if (!$freeType) { ?>
                                 <div class="flashmessage flashmessage-inline error">

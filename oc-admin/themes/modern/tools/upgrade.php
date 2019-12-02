@@ -22,7 +22,7 @@ function customHead()
             chmod($k, $v);
         }
         if ($ok) {
-        ?>
+            ?>
         $(function () {
             var steps_div = document.getElementById('steps_div');
             steps_div.style.display = '';
@@ -58,7 +58,7 @@ function customHead()
                 }
             });
         });
-        <?php
+            <?php
         } ?>
     </script>
     <?php

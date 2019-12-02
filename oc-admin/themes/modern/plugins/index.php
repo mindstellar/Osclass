@@ -29,25 +29,25 @@ osc_add_hook('help_box', 'addHelp');
 
 function customPageHeader()
 {
-?>
+    ?>
 <h1><?php _e('Manage Plugins'); ?>
     <a href="#" class="btn ico ico-32 ico-help float-right"></a>
     <a href="<?php echo osc_admin_base_url(true); ?>?page=plugins&amp;action=add"
        class="btn btn-green ico ico-32 ico-add-white float-right"><?php _e('Add plugin'); ?></a>
 </h1>
 </div>
-<?php osc_show_flash_message('admin'); ?>
-<?php if (Params::getParam('error') != '') { ?>
+    <?php osc_show_flash_message('admin'); ?>
+    <?php if (Params::getParam('error') != '') { ?>
 <!-- flash message -->
 <div class="flashmessage flashmessage-error" style="display:block">
-    <?php _e("Plugin couldn't be installed because it triggered a <strong>fatal error</strong>"); ?>
+        <?php _e("Plugin couldn't be installed because it triggered a <strong>fatal error</strong>"); ?>
     <a class="btn ico btn-mini ico-close">x</a>
     <iframe style="border:0;" width="100%" height="60"
             src="<?php echo osc_admin_base_url(true); ?>?page=plugins&amp;action=error_plugin&amp;plugin=<?php echo Params::getParam('error'); ?>"></iframe>
     <!-- /flash message -->
     <?php } ?>
     <?php
-    }
+}
     osc_add_hook('admin_page_header', 'customPageHeader');
 
     /**
@@ -55,18 +55,18 @@ function customPageHeader()
      *
      * @return string
      */
-    function customPageTitle($string)
-    {
-        return sprintf(__('Plugins &raquo; %s'), $string);
-    }
+function customPageTitle($string)
+{
+    return sprintf(__('Plugins &raquo; %s'), $string);
+}
 
 
     osc_add_filter('admin_title', 'customPageTitle');
 
     //customize Head
-    function customHead()
-    {
-        ?>
+function customHead()
+{
+    ?>
         <script type="text/javascript">
             $(document).ready(function () {
                 $('input:hidden[name="installed"]').each(function () {
@@ -108,7 +108,7 @@ function customPageHeader()
             }
         </script>
         <?php
-    }
+}
 
 
     osc_add_hook('admin_header', 'customHead', 10);
@@ -117,7 +117,7 @@ function customPageHeader()
     $aData          = __get('aPlugins');
 
     $tab_index = 2;
-    ?>
+?>
     <?php osc_current_admin_theme_path('parts/header.php'); ?>
     <div id="tabs" class="ui-osc-tabs ui-tabs-right">
         <ul>
@@ -191,16 +191,16 @@ function customPageHeader()
                             onchange="this.form.submit();">
                         <option value="10" <?php if (Params::getParam('iDisplayLength') == 10) {
                             echo 'selected';
-                        } ?> ><?php printf(__('%d plugins'), 10); ?></option>
+                                           } ?> ><?php printf(__('%d plugins'), 10); ?></option>
                         <option value="25" <?php if (Params::getParam('iDisplayLength') == 25) {
                             echo 'selected';
-                        } ?> ><?php printf(__('%d plugins'), 25); ?></option>
+                                           } ?> ><?php printf(__('%d plugins'), 25); ?></option>
                         <option value="50" <?php if (Params::getParam('iDisplayLength') == 50) {
                             echo 'selected';
-                        } ?> ><?php printf(__('%d plugins'), 50); ?></option>
+                                           } ?> ><?php printf(__('%d plugins'), 50); ?></option>
                         <option value="100" <?php if (Params::getParam('iDisplayLength') == 100) {
                             echo 'selected';
-                        } ?> ><?php printf(__('%d plugins'), 100); ?></option>
+                                            } ?> ><?php printf(__('%d plugins'), 100); ?></option>
                     </select>
                 </form>
             </div>
