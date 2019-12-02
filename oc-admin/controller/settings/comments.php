@@ -1,4 +1,4 @@
-<?php if ( ! defined('ABS_PATH')) {
+<?php if (!defined('ABS_PATH')) {
     exit('ABS_PATH is not loaded. Direct access is not allowed.');
 }
 
@@ -34,15 +34,15 @@ class CAdminSettingsComments extends AdminSecBaseModel
             case('comments_post'):
                 // updating comment
                 osc_csrf_check();
-                $iUpdated         = 0;
-                $enabledComments  = Params::getParam('enabled_comments');
-                $enabledComments  = (($enabledComments != '') ? true : false);
-                $moderateComments = Params::getParam('moderate_comments');
-                $moderateComments = (($moderateComments != '') ? true : false);
-                $numModerateComments = Params::getParam('num_moderate_comments');
-                $commentsPerPage  = Params::getParam('comments_per_page');
-                $notifyNewComment = Params::getParam('notify_new_comment');
-                $notifyNewComment = (($notifyNewComment != '') ? true : false);
+                $iUpdated             = 0;
+                $enabledComments      = Params::getParam('enabled_comments');
+                $enabledComments      = (($enabledComments != '') ? true : false);
+                $moderateComments     = Params::getParam('moderate_comments');
+                $moderateComments     = (($moderateComments != '') ? true : false);
+                $numModerateComments  = Params::getParam('num_moderate_comments');
+                $commentsPerPage      = Params::getParam('comments_per_page');
+                $notifyNewComment     = Params::getParam('notify_new_comment');
+                $notifyNewComment     = (($notifyNewComment != '') ? true : false);
                 $notifyNewCommentUser = Params::getParam('notify_new_comment_user');
                 $notifyNewCommentUser = (($notifyNewCommentUser != '') ? true : false);
                 $regUserPostComments  = Params::getParam('reg_user_post_comments');
@@ -50,13 +50,13 @@ class CAdminSettingsComments extends AdminSecBaseModel
 
                 $msg = '';
                 if (!osc_validate_int(Params::getParam("num_moderate_comments"))) {
-                    $msg .= _m("Number of moderate comments must only contain numeric characters")."<br/>";
+                    $msg .= _m("Number of moderate comments must only contain numeric characters") . "<br/>";
                 }
                 if (!osc_validate_int(Params::getParam("comments_per_page"))) {
-                    $msg .= _m("Comments per page must only contain numeric characters")."<br/>";
+                    $msg .= _m("Comments per page must only contain numeric characters") . "<br/>";
                 }
-                if ($msg!='') {
-                    osc_add_flash_error_message( $msg, 'admin');
+                if ($msg != '') {
+                    osc_add_flash_error_message($msg, 'admin');
                     $this->redirectTo(osc_admin_base_url(true) . '?page=settings&action=comments');
                 }
 
@@ -73,7 +73,7 @@ class CAdminSettingsComments extends AdminSecBaseModel
                 $iUpdated += osc_set_preference('reg_user_post_comments', $regUserPostComments);
 
                 if ($iUpdated > 0) {
-                    osc_add_flash_ok_message( _m("Comment settings have been updated"), 'admin');
+                    osc_add_flash_ok_message(_m("Comment settings have been updated"), 'admin');
                 }
                 $this->redirectTo(osc_admin_base_url(true) . '?page=settings&action=comments');
                 break;
@@ -81,4 +81,4 @@ class CAdminSettingsComments extends AdminSecBaseModel
     }
 }
 
-    // EOF: ./oc-admin/controller/settings/comments.php
+// EOF: ./oc-admin/controller/settings/comments.php

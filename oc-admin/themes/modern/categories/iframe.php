@@ -1,4 +1,4 @@
-<?php if ( ! defined('OC_ADMIN')) {
+<?php if (!defined('OC_ADMIN')) {
     exit('Direct access is not allowed.');
 }
 /*
@@ -17,15 +17,15 @@
  * limitations under the License.
  */
 
-    $category = __get("category");
-    $has_subcats = __get("has_subcategories");
-    $locales  = OSCLocale::newInstance()->listAllEnabled();
+$category    = __get("category");
+$has_subcats = __get("has_subcategories");
+$locales     = OSCLocale::newInstance()->listAllEnabled();
 ?>
 <div class="iframe-category">
     <h3><?php _e('Edit category'); ?></h3>
     <form action="<?php echo osc_admin_base_url(true); ?>" method="post">
-        <input type="hidden" name="page" value="ajax" />
-        <input type="hidden" name="action" value="edit_category_post" />
+        <input type="hidden" name="page" value="ajax"/>
+        <input type="hidden" name="action" value="edit_category_post"/>
         <?php CategoryForm::primary_input_hidden($category); ?>
         <fieldset>
             <div class="grid-system">
@@ -35,11 +35,13 @@
                         <div class="input micro">
                             <?php CategoryForm::expiration_days_input_text($category); ?>
                             <p class="help-inline"><?php _e("If the value is zero, it means this category doesn't have an expiration"); ?></p>
-                            <label><?php CategoryForm::price_enabled_for_category($category); ?><span><?php _e('Enable / Disable the price field'); ?></span></label>
+                            <label><?php CategoryForm::price_enabled_for_category($category); ?>
+                                <span><?php _e('Enable / Disable the price field'); ?></span></label>
                             <?php if ($has_subcats) { ?>
-                                <br />
-                                <br />
-                                <label><?php CategoryForm::apply_changes_to_subcategories($category); ?><span><?php _e('Apply the expiration date and price field changes to children categories'); ?></span></label>
+                                <br/>
+                                <br/>
+                                <label><?php CategoryForm::apply_changes_to_subcategories($category); ?>
+                                    <span><?php _e('Apply the expiration date and price field changes to children categories'); ?></span></label>
                             <?php }; ?>
                         </div>
                     </div>
@@ -52,27 +54,29 @@
                 <div class="clear"></div>
             </div>
             <div class="form-vertical">
-                    <div class="form-actions">
-                        <input type="submit" class="btn btn-submit" value="<?php echo osc_esc_html( __('Save changes') ); ?>" />
-                        <input type="button" class="btn btn-red" onclick="$('.iframe-category').remove();" value="<?php echo osc_esc_html( __('Cancel') ); ?>" />
-                    </div>
+                <div class="form-actions">
+                    <input type="submit" class="btn btn-submit"
+                           value="<?php echo osc_esc_html(__('Save changes')); ?>"/>
+                    <input type="button" class="btn btn-red" onclick="$('.iframe-category').remove();"
+                           value="<?php echo osc_esc_html(__('Cancel')); ?>"/>
+                </div>
             </div>
         </fieldset>
     </form>
 </div>
 <script type="text/javascript">
-    $(document).ready(function() {
-        $('.iframe-category form').submit(function() {
+    $(document).ready(function () {
+        $('.iframe-category form').submit(function () {
             $(".jsMessage").hide();
             $.ajax({
                 type: 'POST',
                 url: $(this).attr('action'),
                 data: $(this).serialize(),
-                success: function(data) {
-                    var ret = eval( "(" + data + ")");
+                success: function (data) {
+                    var ret = eval("(" + data + ")");
                     var message = "";
-                    if( ret.error == 0 || ret.error == 4 ) {
-                        $('.iframe-category').fadeOut('fast', function(){
+                    if (ret.error == 0 || ret.error == 4) {
+                        $('.iframe-category').fadeOut('fast', function () {
                             $('.iframe-category').remove();
                         });
                         $(".jsMessage p").attr('class', 'ok');
@@ -87,7 +91,7 @@
                     $(".jsMessage p").html(message);
                     $('div.content_list_<?php echo osc_category_id(); ?>').html('');
                 },
-                error: function(){
+                error: function () {
                     $(".jsMessage").fadeIn("fast");
                     $(".jsMessage p").attr('class', '');
                     $(".jsMessage p").html('<?php echo osc_esc_js(__('Ajax error, please try again.')); ?>');
@@ -95,6 +99,6 @@
             })
             return false;
         });
-    oscTab();
+        oscTab();
     });
 </script>

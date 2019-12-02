@@ -1,4 +1,4 @@
-<?php if ( ! defined('ABS_PATH')) {
+<?php if (!defined('ABS_PATH')) {
     exit('ABS_PATH is not loaded. Direct access is not allowed.');
 }
 
@@ -40,7 +40,7 @@ class CAdminCFields extends AdminSecBaseModel
         parent::doModel();
 
         //specific things for this class
-        switch ( $this->action ) {
+        switch ($this->action) {
             default:
                 $categories = Category::newInstance()->toTreeAll();
                 $selected   = array();
@@ -74,4 +74,4 @@ class CAdminCFields extends AdminSecBaseModel
     }
 }
 
-    /* file end: ./oc-admin/custom_fields.php */
+/* file end: ./oc-admin/custom_fields.php */

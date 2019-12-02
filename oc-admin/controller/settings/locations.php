@@ -229,7 +229,7 @@ class CAdminSettingsLocations extends AdminSecBaseModel
                             }
 
                             $mRegions->update(array('s_name' => $newRegion, 's_slug' => $slug),
-                                 array('pk_i_id' => $regionId));
+                                array('pk_i_id' => $regionId));
                             ItemLocation::newInstance()->update(
                                 array('s_region' => $newRegion),
                                 array('fk_i_region_id' => $regionId)
@@ -377,7 +377,7 @@ class CAdminSettingsLocations extends AdminSecBaseModel
                         }
 
                         $mCities->update(array('s_name' => $newCity, 's_slug' => $slug),
-                             array('pk_i_id' => $cityId));
+                            array('pk_i_id' => $cityId));
                         ItemLocation::newInstance()->update(
                             array('s_city' => $newCity),
                             array('fk_i_city_id' => $cityId)
@@ -471,10 +471,10 @@ class CAdminSettingsLocations extends AdminSecBaseModel
         $aCountries = $mCountries->listAll();
         $this->_exportVariableToView('aCountries', $aCountries);
 
-        $existing_locations = $mCountries->listNames();
-        $a_external_locations_list         =
+        $existing_locations        = $mCountries->listNames();
+        $a_external_locations_list =
             json_decode(osc_file_get_contents(osc_get_locations_json_url()), true);
-        $a_external_locations_list         = $a_external_locations_list['children'];
+        $a_external_locations_list = $a_external_locations_list['children'];
         // IDEA: This probably can be improved.
         foreach ($a_external_locations_list as $key => $location) {
             if (in_array($location['name'], $existing_locations, false)) {

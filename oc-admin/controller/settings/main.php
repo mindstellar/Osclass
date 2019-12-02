@@ -63,28 +63,28 @@ class CAdminSettingsMain extends AdminSecBaseModel
                 $sCurrency         = trim(strip_tags($sCurrency));
                 $sWeekStart        = trim(strip_tags($sWeekStart));
                 $sTimeFormat       = trim(strip_tags($sTimeFormat));
-                $sNumRssItems      = (int) trim(strip_tags($sNumRssItems));
-                $maxLatestItems    = (int) trim(strip_tags($maxLatestItems));
-                $numItemsSearch    = (int) $numItemsSearch;
+                $sNumRssItems      = (int)trim(strip_tags($sNumRssItems));
+                $maxLatestItems    = (int)trim(strip_tags($maxLatestItems));
+                $numItemsSearch    = (int)$numItemsSearch;
                 $contactAttachment = ($contactAttachment ? true : false);
                 $bAutoCron         = ($bAutoCron ? true : false);
-                $error = '';
+                $error             = '';
 
                 $msg = '';
                 if (!osc_validate_text($sPageTitle)) {
-                    $msg .= _m("Page title field is required")."<br/>";
+                    $msg .= _m("Page title field is required") . "<br/>";
                 }
                 if (!osc_validate_text($sContactEmail)) {
-                    $msg .= _m("Contact email field is required")."<br/>";
+                    $msg .= _m("Contact email field is required") . "<br/>";
                 }
                 if (!osc_validate_int($sNumRssItems)) {
-                    $msg .= _m("Number of listings in the RSS has to be a numeric value")."<br/>";
+                    $msg .= _m("Number of listings in the RSS has to be a numeric value") . "<br/>";
                 }
                 if (!osc_validate_int($maxLatestItems)) {
-                    $msg .= _m("Max latest listings has to be a numeric value")."<br/>";
+                    $msg .= _m("Max latest listings has to be a numeric value") . "<br/>";
                 }
                 if (!osc_validate_int($numItemsSearch)) {
-                    $msg .= _m("Number of listings on search has to be a numeric value")."<br/>";
+                    $msg .= _m("Number of listings on search has to be a numeric value") . "<br/>";
                 }
                 if ($msg) {
                     osc_add_flash_error_message($msg, 'admin');
@@ -142,7 +142,7 @@ class CAdminSettingsMain extends AdminSecBaseModel
                 break;
             default:
                 // calling the view
-                $aLanguages = OSCLocale::newInstance()->listAllEnabled();
+                $aLanguages  = OSCLocale::newInstance()->listAllEnabled();
                 $aCurrencies = Currency::newInstance()->listAll();
 
                 $this->_exportVariableToView('aLanguages', $aLanguages);
@@ -154,4 +154,4 @@ class CAdminSettingsMain extends AdminSecBaseModel
     }
 }
 
-    // EOF: ./oc-admin/controller/settings/main.php
+// EOF: ./oc-admin/controller/settings/main.php

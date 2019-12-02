@@ -1,4 +1,4 @@
-<?php if ( ! defined('ABS_PATH')) {
+<?php if (!defined('ABS_PATH')) {
     exit('ABS_PATH is not loaded. Direct access is not allowed.');
 }
 
@@ -34,9 +34,9 @@ class CAdminSettingsMedia extends AdminSecBaseModel
         switch ($this->action) {
             case('media'):
                 // calling the media view
-                $max_upload   = $this->_sizeToKB( ini_get('upload_max_filesize') );
-                $max_post     = $this->_sizeToKB( ini_get('post_max_size') );
-                $memory_limit = $this->_sizeToKB( ini_get('memory_limit') );
+                $max_upload   = $this->_sizeToKB(ini_get('upload_max_filesize'));
+                $max_post     = $this->_sizeToKB(ini_get('post_max_size'));
+                $memory_limit = $this->_sizeToKB(ini_get('memory_limit'));
                 $upload_mb    = min($max_upload, $max_post, $memory_limit);
 
                 $this->_exportVariableToView('max_size_upload', $upload_mb);
@@ -76,24 +76,24 @@ class CAdminSettingsMedia extends AdminSecBaseModel
                     case 'image':
                         // upload image & move to path
                         $watermark_file = Params::getFiles('watermark_image');
-                        if ($watermark_file['tmp_name']!='' && $watermark_file['size']>0) {
+                        if ($watermark_file['tmp_name'] != '' && $watermark_file['size'] > 0) {
                             if ($watermark_file['error'] == UPLOAD_ERR_OK) {
-                                if ($watermark_file['type']=='image/png') {
+                                if ($watermark_file['type'] == 'image/png') {
                                     $tmpName = $watermark_file['tmp_name'];
-                                    $path    = osc_uploads_path().'/watermark.png';
-                                    if ( move_uploaded_file($tmpName, $path) ) {
+                                    $path    = osc_uploads_path() . '/watermark.png';
+                                    if (move_uploaded_file($tmpName, $path)) {
                                         $iUpdated += osc_set_preference('watermark_image', $path);
                                     } else {
                                         $status = 'error';
-                                        $error .= _m('There was a problem uploading the watermark image')."<br />";
+                                        $error  .= _m('There was a problem uploading the watermark image') . "<br />";
                                     }
                                 } else {
                                     $status = 'error';
-                                    $error .= _m('The watermark image has to be a .PNG file')."<br />";
+                                    $error  .= _m('The watermark image has to be a .PNG file') . "<br />";
                                 }
                             } else {
                                 $status = 'error';
-                                $error .= _m('There was a problem uploading the watermark image')."<br />";
+                                $error  .= _m('There was a problem uploading the watermark image') . "<br />";
                             }
                         }
                         $iUpdated += osc_set_preference('watermark_text_color', '');
@@ -115,32 +115,33 @@ class CAdminSettingsMedia extends AdminSecBaseModel
                 $use_imagick       = ($use_imagick != '' ? true : false);
 
                 if (!preg_match('|([0-9]+)x([0-9]+)|', $dimThumbnail, $match)) {
-                    $dimThumbnail = is_numeric($dimThumbnail)?$dimThumbnail."x".$dimThumbnail:"100x100";
+                    $dimThumbnail = is_numeric($dimThumbnail) ? $dimThumbnail . "x" . $dimThumbnail : "100x100";
                 }
                 if (!preg_match('|([0-9]+)x([0-9]+)|', $dimPreview, $match)) {
-                    $dimPreview = is_numeric($dimPreview)?$dimPreview."x".$dimPreview:"100x100";
+                    $dimPreview = is_numeric($dimPreview) ? $dimPreview . "x" . $dimPreview : "100x100";
                 }
                 if (!preg_match('|([0-9]+)x([0-9]+)|', $dimNormal, $match)) {
-                    $dimNormal = is_numeric($dimNormal)?$dimNormal."x".$dimNormal:"100x100";
+                    $dimNormal = is_numeric($dimNormal) ? $dimNormal . "x" . $dimNormal : "100x100";
                 }
 
                 // is imagick extension loaded?
-                if ( !@extension_loaded('imagick') ) {
+                if (!@extension_loaded('imagick')) {
                     $use_imagick = false;
                 }
 
                 // max size allowed by PHP configuration?
-                $max_upload   = (int)( ini_get('upload_max_filesize') );
-                $max_post     = (int)( ini_get('post_max_size') );
-                $memory_limit = (int)( ini_get('memory_limit') );
+                $max_upload   = (int)(ini_get('upload_max_filesize'));
+                $max_post     = (int)(ini_get('post_max_size'));
+                $memory_limit = (int)(ini_get('memory_limit'));
                 $upload_mb    = min($max_upload, $max_post, $memory_limit) * 1024;
 
                 // set maxSizeKB equals to PHP configuration if it's bigger
-                if ( $maxSizeKb > $upload_mb ) {
+                if ($maxSizeKb > $upload_mb) {
                     $status    = 'warning';
                     $maxSizeKb = $upload_mb;
                     // flash message text warning
-                    $error     .= sprintf( _m("You cannot set a maximum file size higher than the one allowed in the PHP configuration: <b>%d KB</b>"), $upload_mb );
+                    $error .= sprintf(_m("You cannot set a maximum file size higher than the one allowed in the PHP configuration: <b>%d KB</b>"),
+                        $upload_mb);
                 }
 
                 $iUpdated += osc_set_preference('maxSizeKb', $maxSizeKb);
@@ -152,7 +153,7 @@ class CAdminSettingsMedia extends AdminSecBaseModel
                 $iUpdated += osc_set_preference('force_jpeg', $forceJPEG);
                 $iUpdated += osc_set_preference('use_imagick', $use_imagick);
 
-                if ( $error != '' ) {
+                if ($error != '') {
                     switch ($status) {
                         case('error'):
                             osc_add_flash_error_message($error, 'admin');
@@ -168,27 +169,36 @@ class CAdminSettingsMedia extends AdminSecBaseModel
                     osc_add_flash_ok_message(_m('Media config has been updated'), 'admin');
                 }
 
-                $this->redirectTo(osc_admin_base_url(true).'?page=settings&action=media');
+                $this->redirectTo(osc_admin_base_url(true) . '?page=settings&action=media');
                 break;
             case('images_post'):
-                if ( defined('DEMO') ) {
-                    osc_add_flash_warning_message( _m("This action can't be done because it's a demo site"), 'admin');
-                    $this->redirectTo(osc_admin_base_url(true).'?page=settings&action=media');
+                if (defined('DEMO')) {
+                    osc_add_flash_warning_message(_m("This action can't be done because it's a demo site"), 'admin');
+                    $this->redirectTo(osc_admin_base_url(true) . '?page=settings&action=media');
                 }
                 osc_csrf_check();
 
                 $aResources = ItemResource::newInstance()->getAllResources();
                 foreach ($aResources as $resource) {
                     osc_run_hook('regenerate_image', $resource);
-                    if (strpos($resource['s_content_type'], 'image')!==false) {
-                        if (file_exists(osc_base_path().$resource['s_path'].$resource['pk_i_id']."_original.".$resource['s_extension'])) {
-                            $image_tmp = osc_base_path().$resource['s_path'].$resource['pk_i_id']."_original.".$resource['s_extension'];
+                    if (strpos($resource['s_content_type'], 'image') !== false) {
+                        if (file_exists(osc_base_path() . $resource['s_path'] . $resource['pk_i_id'] . "_original."
+                            . $resource['s_extension'])
+                        ) {
+                            $image_tmp    = osc_base_path() . $resource['s_path'] . $resource['pk_i_id'] . "_original."
+                                . $resource['s_extension'];
                             $use_original = true;
-                        } else if (file_exists(osc_base_path().$resource['s_path'].$resource['pk_i_id'].".".$resource['s_extension'])) {
-                            $image_tmp = osc_base_path().$resource['s_path'].$resource['pk_i_id'].".".$resource['s_extension'];
+                        } elseif (file_exists(osc_base_path() . $resource['s_path'] . $resource['pk_i_id'] . "."
+                            . $resource['s_extension'])
+                        ) {
+                            $image_tmp    = osc_base_path() . $resource['s_path'] . $resource['pk_i_id'] . "."
+                                . $resource['s_extension'];
                             $use_original = false;
-                        } else if (file_exists(osc_base_path().$resource['s_path'].$resource['pk_i_id']."_preview.".$resource['s_extension'])) {
-                            $image_tmp = osc_base_path().$resource['s_path'].$resource['pk_i_id']."_preview.".$resource['s_extension'];
+                        } elseif (file_exists(osc_base_path() . $resource['s_path'] . $resource['pk_i_id'] . "_preview."
+                            . $resource['s_extension'])
+                        ) {
+                            $image_tmp    = osc_base_path() . $resource['s_path'] . $resource['pk_i_id'] . "_preview."
+                                . $resource['s_extension'];
                             $use_original = false;
                         } else {
                             $use_original = false;
@@ -196,36 +206,40 @@ class CAdminSettingsMedia extends AdminSecBaseModel
                         };
 
                         // Create normal size
-                        $path_normal = $path = osc_base_path().$resource['s_path'].$resource['pk_i_id'].'.'.$resource['s_extension'];
-                        $size = explode('x', osc_normal_dimensions());
-                        $img = ImageProcessing::fromFile($image_tmp)->resizeTo($size[0], $size[1]);
+                        $path_normal = $path = osc_base_path() . $resource['s_path'] . $resource['pk_i_id'] . '.'
+                            . $resource['s_extension'];
+                        $size        = explode('x', osc_normal_dimensions());
+                        $img         = ImageProcessing::fromFile($image_tmp)->resizeTo($size[0], $size[1]);
                         if ($use_original) {
-                            if ( osc_is_watermark_text() ) {
+                            if (osc_is_watermark_text()) {
                                 $img->doWatermarkText(osc_watermark_text(), osc_watermark_text_color());
-                            } elseif ( osc_is_watermark_image() ) {
+                            } elseif (osc_is_watermark_image()) {
                                 $img->doWatermarkImage();
                             }
                         }
                         $img->saveToFile($path);
 
                         // Create preview
-                        $path = osc_base_path().$resource['s_path'].$resource['pk_i_id'].'_preview.'.$resource['s_extension'];
+                        $path = osc_base_path() . $resource['s_path'] . $resource['pk_i_id'] . '_preview.'
+                            . $resource['s_extension'];
                         $size = explode('x', osc_preview_dimensions());
                         ImageProcessing::fromFile($path_normal)->resizeTo($size[0], $size[1])->saveToFile($path);
 
                         // Create thumbnail
-                        $path = osc_base_path().$resource['s_path'].$resource['pk_i_id'].'_thumbnail.'.$resource['s_extension'];
+                        $path = osc_base_path() . $resource['s_path'] . $resource['pk_i_id'] . '_thumbnail.'
+                            . $resource['s_extension'];
                         $size = explode('x', osc_thumbnail_dimensions());
                         ImageProcessing::fromFile($path_normal)->resizeTo($size[0], $size[1])->saveToFile($path);
 
-                        osc_run_hook('regenerated_image', ItemResource::newInstance()->findByPrimaryKey($resource['pk_i_id']));
+                        osc_run_hook('regenerated_image',
+                            ItemResource::newInstance()->findByPrimaryKey($resource['pk_i_id']));
                     } else {
                         // no es imagen o imagen sin extesión
                     }
                 }
 
-                osc_add_flash_ok_message( _m('Re-generation complete'), 'admin');
-                $this->redirectTo(osc_admin_base_url(true).'?page=settings&action=media');
+                osc_add_flash_ok_message(_m('Re-generation complete'), 'admin');
+                $this->redirectTo(osc_admin_base_url(true) . '?page=settings&action=media');
                 break;
         }
     }
@@ -238,7 +252,7 @@ class CAdminSettingsMedia extends AdminSecBaseModel
     function _sizeToKB($sSize)
     {
         $sSuffix = strtoupper(substr($sSize, -1));
-        if (!in_array($sSuffix, array('P','T','G','M','K'))) {
+        if (!in_array($sSuffix, array('P', 'T', 'G', 'M', 'K'))) {
             return (int)$sSize;
         }
         $iValue = substr($sSize, 0, -1);
@@ -253,8 +267,9 @@ class CAdminSettingsMedia extends AdminSecBaseModel
                 $iValue *= 1024;
                 break;
         }
+
         return (int)$iValue;
     }
 }
 
-    // EOF: ./oc-admin/controller/settings/media.php
+// EOF: ./oc-admin/controller/settings/media.php

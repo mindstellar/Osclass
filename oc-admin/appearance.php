@@ -1,4 +1,4 @@
-<?php if (! defined('ABS_PATH')) {
+<?php if (!defined('ABS_PATH')) {
     exit('ABS_PATH is not loaded. Direct access is not allowed.');
 }
 
@@ -39,9 +39,9 @@ class CAdminAppearance extends AdminSecBaseModel
                 }
                 osc_csrf_check();
                 $filePackage = Params::getFiles('package');
-                if (isset($filePackage['size']) && $filePackage['size']!==0) {
-                    $path = osc_themes_path();
-                     $status = (int) osc_unzip_file($filePackage['tmp_name'], $path);
+                if (isset($filePackage['size']) && $filePackage['size'] !== 0) {
+                    $path   = osc_themes_path();
+                    $status = (int)osc_unzip_file($filePackage['tmp_name'], $path);
                     @unlink($filePackage['tmp_name']);
                 } else {
                     $status = 3;
@@ -50,25 +50,25 @@ class CAdminAppearance extends AdminSecBaseModel
                 switch ($status) {
                     case (0):
                         $msg = _m('The theme folder is not writable');
-                               osc_add_flash_error_message($msg, 'admin');
+                        osc_add_flash_error_message($msg, 'admin');
                         break;
                     case (1):
                         $msg = _m('The theme has been installed correctly');
-                               osc_add_flash_ok_message($msg, 'admin');
+                        osc_add_flash_ok_message($msg, 'admin');
                         break;
                     case (2):
                         $msg = _m('The zip file is not valid');
-                               osc_add_flash_error_message($msg, 'admin');
+                        osc_add_flash_error_message($msg, 'admin');
                         break;
                     case (3):
                         $msg = _m('No file was uploaded');
-                               osc_add_flash_error_message($msg, 'admin');
-                               $this->redirectTo(osc_admin_base_url(true). '?page=appearance&action=add');
+                        osc_add_flash_error_message($msg, 'admin');
+                        $this->redirectTo(osc_admin_base_url(true) . '?page=appearance&action=add');
                         break;
                     case (-1):
                     default:
                         $msg = _m('There was a problem adding the theme');
-                               osc_add_flash_error_message($msg, 'admin');
+                        osc_add_flash_error_message($msg, 'admin');
                         break;
                 }
 
@@ -81,13 +81,13 @@ class CAdminAppearance extends AdminSecBaseModel
                 }
                 osc_csrf_check();
                 $theme = Params::getParam('webtheme');
-                if ($theme!='') {
-                    if ($theme!=  osc_current_web_theme()) {
+                if ($theme != '') {
+                    if ($theme != osc_current_web_theme()) {
                         if (file_exists(osc_content_path() . 'themes/' . $theme . '/functions.php')) {
                             include osc_content_path() . 'themes/' . $theme . '/functions.php';
                         }
-                        osc_run_hook('theme_delete_' .$theme);
-                        if (osc_deleteDir(osc_content_path(). 'themes/' .$theme. '/')) {
+                        osc_run_hook('theme_delete_' . $theme);
+                        if (osc_deleteDir(osc_content_path() . 'themes/' . $theme . '/')) {
                             osc_add_flash_ok_message(_m('Theme removed successfully'), 'admin');
                         } else {
                             osc_add_flash_error_message(_m('There was a problem removing the theme'), 'admin');
@@ -123,7 +123,7 @@ class CAdminAppearance extends AdminSecBaseModel
             case ('delete_widget'):
                 osc_csrf_check();
                 Widget::newInstance()->delete(
-                    array('pk_i_id' => Params::getParam('id') )
+                    array('pk_i_id' => Params::getParam('id'))
                 );
                 osc_add_flash_ok_message(_m('Widget removed correctly'), 'admin');
                 $this->redirectTo(osc_admin_base_url(true) . '?page=appearance&action=widgets');
@@ -138,9 +138,9 @@ class CAdminAppearance extends AdminSecBaseModel
                 $res = Widget::newInstance()->update(
                     array(
                         's_description' => Params::getParam('description'),
-                        's_content' => Params::getParam('content', false, false)
+                        's_content'     => Params::getParam('content', false, false)
                     ),
-                    array('pk_i_id' => Params::getParam('id') )
+                    array('pk_i_id' => Params::getParam('id'))
                 );
 
                 if ($res) {
@@ -159,10 +159,10 @@ class CAdminAppearance extends AdminSecBaseModel
 
                 Widget::newInstance()->insert(
                     array(
-                        's_location' => Params::getParam('location'),
-                        'e_kind' => 'html',
+                        's_location'    => Params::getParam('location'),
+                        'e_kind'        => 'html',
                         's_description' => Params::getParam('description'),
-                        's_content' => Params::getParam('content', false, false)
+                        's_content'     => Params::getParam('content', false, false)
                     )
                 );
                 osc_add_flash_ok_message(_m('Widget added correctly'), 'admin');
@@ -179,8 +179,8 @@ class CAdminAppearance extends AdminSecBaseModel
             case ('render'):
                 if (Params::existParam('route')) {
                     $routes = Rewrite::newInstance()->getRoutes();
-                    $rid = Params::getParam('route');
-                    $file = '../';
+                    $rid    = Params::getParam('route');
+                    $file   = '../';
                     if (isset($routes[$rid]['file'])) {
                         $file = $routes[$rid]['file'];
                     }
@@ -191,8 +191,8 @@ class CAdminAppearance extends AdminSecBaseModel
                     // We pass the GET variables (in case we have somes)
                     if (preg_match('|(.+?)\?(.*)|', $file, $match)) {
                         $file = $match[1];
-                        if (preg_match_all('|&([^=]+)=([^&]*)|', urldecode('&'.$match[2].'&'), $get_vars)) {
-                            for ($var_k=0; $var_k<count($get_vars[1]); $var_k++) {
+                        if (preg_match_all('|&([^=]+)=([^&]*)|', urldecode('&' . $match[2] . '&'), $get_vars)) {
+                            for ($var_k = 0; $var_k < count($get_vars[1]); $var_k++) {
                                 Params::setParam($get_vars[1][$var_k], $get_vars[2][$var_k]);
                             }
                         }
@@ -201,8 +201,8 @@ class CAdminAppearance extends AdminSecBaseModel
                     }
                 }
 
-                if (strpos($file, '../')!==false
-                    || strpos($file, '..\\')!==false
+                if (strpos($file, '../') !== false
+                    || strpos($file, '..\\') !== false
                     || !file_exists(osc_base_path() . $file)
                 ) {
                     osc_add_flash_warning_message(__('Error loading theme custom file'), 'admin');
@@ -241,4 +241,4 @@ class CAdminAppearance extends AdminSecBaseModel
     }
 }
 
-    /* file end: ./oc-admin/appearance.php */
+/* file end: ./oc-admin/appearance.php */
