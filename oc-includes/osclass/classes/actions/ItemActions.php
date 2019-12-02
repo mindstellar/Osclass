@@ -329,11 +329,6 @@ class ItemActions
      *
      * @return bool
      */
-    /**
-     * @param $aResources
-     *
-     * @return bool
-     */
     private function checkAllowedExt($aResources)
     {
         $success = true;
@@ -462,12 +457,6 @@ class ItemActions
      * @param $description
      * @param $itemId
      */
-    /**
-     * @param $type
-     * @param $title
-     * @param $description
-     * @param $itemId
-     */
     public function insertItemLocales($type, $title, $description, $itemId)
     {
         foreach ($title as $k => $_data) {
@@ -481,13 +470,6 @@ class ItemActions
         }
     }
 
-    /**
-     * @param $aResources
-     * @param $itemId
-     *
-     * @return int
-     * @throws \Exception
-     */
     /**
      * @param $aResources
      * @param $itemId
@@ -1351,10 +1333,6 @@ class ItemActions
      * @return string | void
      * @throws \Exception
      */
-    /**
-     * @return string | void
-     * @throws \Exception
-     */
     public function contact()
     {
         $aItem       = $this->prepareDataForFunction('contact');
@@ -1378,10 +1356,6 @@ class ItemActions
         osc_run_hook('hook_email_item_inquiry', $aItem);
     }
 
-    /**
-     * @return int
-     * @throws \Exception
-     */
     /**
      * @return int
      * @throws \Exception
@@ -1782,22 +1756,11 @@ if (osc_force_jpeg()) {
      *
      * @return string
      */
-    /**
-     * @param $content
-     *
-     * @return string
-     */
     function osc_force_jpeg_extension($content)
     {
         return 'jpg';
     }
 
-
-    /**
-     * @param $content
-     *
-     * @return string
-     */
     /**
      * @param $content
      *
