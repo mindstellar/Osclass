@@ -23,13 +23,13 @@
  */
 class CAdminSettingsSpamnBots extends AdminSecBaseModel
 {
-    function __construct()
+    public function __construct()
     {
         parent::__construct();
     }
 
     //Business Layer...
-    function doModel()
+    public function doModel()
     {
         switch ($this->action) {
             case('spamNbots'):

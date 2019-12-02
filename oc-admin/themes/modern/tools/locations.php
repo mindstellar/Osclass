@@ -105,7 +105,7 @@ osc_current_admin_theme_path('parts/header.php'); ?>
             <h2 class="render-title"><?php _e('Locations stats'); ?></h2>
             <?php if ($worktodo > 0) { ?>
                 <p>
-                    <span id="percent">0</span> % <?php _e("Complete"); ?>
+                    <span id="percent">0</span> % <?php _e('Complete'); ?>
                 </p>
             <?php } ?>
             <p>

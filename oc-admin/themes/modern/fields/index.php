@@ -126,7 +126,7 @@ function customHead()
                     },
                     error: function () {
                         $(".jsMessage").css('display', 'block');
-                        $(".jsMessage p").html('<?php echo osc_esc_js(__("Ajax error, try again.")); ?>');
+                        $(".jsMessage p").html('<?php echo osc_esc_js(__('Ajax error, try again.')); ?>');
                     }
                 });
                 $('#dialog-delete-field').dialog('close');
@@ -226,7 +226,7 @@ osc_current_admin_theme_path('parts/header.php');
                         <li id="list_<?php echo $field['pk_i_id']; ?>"
                             class="field_li <?php echo($even ? 'even' : 'odd'); ?>">
                             <div class="cfield-div" field_id="<?php echo $field['pk_i_id']; ?>">
-                                <div class="name-edit-cfield" id="<?php echo "quick_edit_" . $field['pk_i_id']; ?>">
+                                <div class="name-edit-cfield" id="<?php echo 'quick_edit_' . $field['pk_i_id']; ?>">
                                     <?php echo $field['s_name']; ?>
                                 </div>
                                 <div class="actions-edit-cfield">

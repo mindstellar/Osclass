@@ -111,7 +111,7 @@ function customPageTitle($string)
 
 osc_add_filter('admin_title', 'customPageTitle');
 
-$email      = __get("email");
+$email      = __get('email');
 $aEmailVars = EmailVariables::newInstance()->getVariables($email);
 
 $locales = OSCLocale::newInstance()->listAllEnabled();

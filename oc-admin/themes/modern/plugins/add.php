@@ -20,10 +20,10 @@
 function addHelp()
 {
     echo '<p>'
-        . __('Manually upload Osclass plugins in .zip format. If you prefer, you can manually upload the decompressed plugin to <em>oc-content/plugins</em>.')
+        . __('Manually upload Osclass plugins in .zip format. If you prefer, '
+            . 'you can manually upload the decompressed plugin to <em>oc-content/plugins</em>.')
         . '</p>';
 }
-
 
 osc_add_hook('help_box', 'addHelp');
 
@@ -78,7 +78,9 @@ osc_current_admin_theme_path('parts/header.php'); ?>
                     <p><?php _e('Cannot install new plugin'); ?></p>
                 </div>
                 <p class="text">
-                    <?php _e('The plugin folder is not writable on your server so you cannot upload plugins from the administration panel. Please make the folder writable and try again.'); ?>
+                    <?php _e('The plugin folder is not writable on your server so you cannot upload '
+                        .'plugins from the administration panel. Please make the folder writable and try again.');
+                    ?>
                 </p>
                 <p class="text">
                     <?php _e('To make the directory writable under UNIX execute this command from the shell:'); ?>

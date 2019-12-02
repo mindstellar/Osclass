@@ -424,7 +424,7 @@ class CAdminLanguages extends AdminSecBaseModel
                         $sUpdate =
                             '<a class="btn-market-update btn-market-popup" href="#' . htmlentities($l['pk_c_code'])
                             . '">' . __(
-                                "Update here"
+                                'Update here'
                             ) . '</a>';
                     }
 

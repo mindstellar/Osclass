@@ -19,13 +19,13 @@
 
 osc_enqueue_script('jquery-validate');
 
-$admin = __get("admin");
+$admin = __get('admin');
 /**
  * @return array
  */
 function customFrmText()
 {
-    $admin = __get("admin");
+    $admin = __get('admin');
     $return = array();
     if (isset($admin['pk_i_id'])) {
         $return['admin_edit'] = true;

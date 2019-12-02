@@ -57,24 +57,24 @@ function customHead()
                 },
                 messages: {
                     pageTitle: {
-                        required: '<?php echo osc_esc_js(__("Page title: this field is required")); ?>.',
-                        minlength: '<?php echo osc_esc_js(__("Page title: this field is required")); ?>.'
+                        required: '<?php echo osc_esc_js(__('Page title: this field is required')); ?>.',
+                        minlength: '<?php echo osc_esc_js(__('Page title: this field is required')); ?>.'
                     },
                     contactEmail: {
-                        required: '<?php echo osc_esc_js(__("Email: this field is required")); ?>.',
-                        email: '<?php echo osc_esc_js(__("Invalid email address")); ?>.'
+                        required: '<?php echo osc_esc_js(__('Email: this field is required')); ?>.',
+                        email: '<?php echo osc_esc_js(__('Invalid email address')); ?>.'
                     },
                     num_rss_items: {
-                        required: '<?php echo osc_esc_js(__("Listings shown in RSS feed: this field is required")); ?>.',
-                        digits: '<?php echo osc_esc_js(__("Listings shown in RSS feed: this field must only contain numeric characters")); ?>.'
+                        required: '<?php echo osc_esc_js(__('Listings shown in RSS feed: this field is required')); ?>.',
+                        digits: '<?php echo osc_esc_js(__('Listings shown in RSS feed: this field must only contain numeric characters')); ?>.'
                     },
                     max_latest_items_at_home: {
-                        required: '<?php echo osc_esc_js(__("Latest listings shown: this field is required")); ?>.',
-                        digits: '<?php echo osc_esc_js(__("Latest listings shown: this field must only contain numeric characters")); ?>.'
+                        required: '<?php echo osc_esc_js(__('Latest listings shown: this field is required')); ?>.',
+                        digits: '<?php echo osc_esc_js(__('Latest listings shown: this field must only contain numeric characters')); ?>.'
                     },
                     default_results_per_page: {
-                        required: '<?php echo osc_esc_js(__("The search page shows: this field is required")); ?>.',
-                        digits: '<?php echo osc_esc_js(__("The search page shows: this field must only contain numeric characters")); ?>.'
+                        required: '<?php echo osc_esc_js(__('The search page shows: this field is required')); ?>.',
+                        digits: '<?php echo osc_esc_js(__('The search page shows: this field must only contain numeric characters')); ?>.'
                     }
                 },
                 wrapper: "li",

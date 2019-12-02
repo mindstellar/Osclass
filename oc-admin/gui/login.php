@@ -70,7 +70,7 @@
                 </select>
             </p>
         <?php } else { ?>
-            <input type="hidden" name="locale" value="<?php echo $locales[0]["pk_c_code"]; ?>"/>
+            <input type="hidden" name="locale" value="<?php echo $locales[0]['pk_c_code']; ?>"/>
         <?php } ?>
         <p class="forgetmenot">
             <label>

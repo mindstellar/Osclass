@@ -17,12 +17,12 @@
  * limitations under the License.
  */
 
-$users            = __get("users");
-$max              = __get("max");
-$item             = __get("item");
-$users_by_country = __get("users_by_country");
-$users_by_region  = __get("users_by_region");
-$latest_users     = __get("latest_users");
+$users            = __get('users');
+$max              = __get('max');
+$item             = __get('item');
+$users_by_country = __get('users_by_country');
+$users_by_region  = __get('users_by_region');
+$latest_users     = __get('latest_users');
 $type             = Params::getParam('type_stat');
 
 switch ($type) {
@@ -82,12 +82,12 @@ osc_add_filter('admin_title', 'customPageTitle');
 
 function customHead()
 {
-    $users            = __get("users");
-    $max              = __get("max");
-    $item             = __get("item");
-    $users_by_country = __get("users_by_country");
-    $users_by_region  = __get("users_by_region");
-    $latest_users     = __get("latest_users");
+    $users            = __get('users');
+    $max              = __get('max');
+    $item             = __get('item');
+    $users_by_country = __get('users_by_country');
+    $users_by_region  = __get('users_by_region');
+    $latest_users     = __get('latest_users');
     ?>
     <script type="text/javascript" src="https://www.google.com/jsapi"></script>
     <?php if (count($users) > 0) { ?>
@@ -107,10 +107,10 @@ function customHead()
             data.addColumn('string', '<?php echo osc_esc_js(__('Date')); ?>', 0, 1);
             data.addColumn('number', '<?php echo osc_esc_js(__('New users')); ?>');
             <?php $k = 0;
-            echo "data.addRows(" . count($users) . ");";
+            echo 'data.addRows(' . count($users) . ');';
             foreach ($users as $date => $num) {
-                echo "data.setValue(" . $k . ', 0, "' . $date . '");';
-                echo "data.setValue(" . $k . ", 1, " . $num . ");";
+                echo 'data.setValue(' . $k . ', 0, "' . $date . '");';
+                echo 'data.setValue(' . $k . ', 1, ' . $num . ');';
                 $k++;
             }
             ?>
@@ -299,7 +299,7 @@ osc_add_hook('admin_header', 'customHead', 10);
                                 </tbody>
                             </table>
                         <?php } else { ?>
-                            <p><?php _e("There are no statistics yet"); ?></p>
+                            <p><?php _e('There are no statistics yet'); ?></p>
                         <?php } ?>
 
 

@@ -39,12 +39,12 @@ function customHead()
                 },
                 messages: {
                     num_moderate_comments: {
-                        required: '<?php echo osc_esc_js(__("Moderated comments: this field is required")); ?>.',
-                        digits: '<?php echo osc_esc_js(__("Moderated comments: this field must only contain numeric characters")); ?>.'
+                        required: '<?php echo osc_esc_js(__('Moderated comments: this field is required')); ?>.',
+                        digits: '<?php echo osc_esc_js(__('Moderated comments: this field must only contain numeric characters')); ?>.'
                     },
                     comments_per_page: {
-                        required: '<?php echo osc_esc_js(__("Comments per page: this field is required")); ?>.',
-                        digits: '<?php echo osc_esc_js(__("Comments per page: this field must only contain numeric characters")); ?>.'
+                        required: '<?php echo osc_esc_js(__('Comments per page: this field is required')); ?>.',
+                        digits: '<?php echo osc_esc_js(__('Comments per page: this field must only contain numeric characters')); ?>.'
                     }
                 },
                 wrapper: "li",
@@ -180,7 +180,7 @@ osc_current_admin_theme_path('parts/header.php'); ?>
                             <label>
                                 <input type="checkbox" <?php echo(osc_notify_new_comment() ? 'checked="checked"'
                                     : ''); ?> name="notify_new_comment"
-                                       value="1"/> <?php _e("A new comment is posted"); ?>
+                                       value="1"/> <?php _e('A new comment is posted'); ?>
                             </label>
                         </div>
                     </div>

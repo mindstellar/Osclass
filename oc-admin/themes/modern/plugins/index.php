@@ -264,20 +264,20 @@ function customHead()
                         <tbody>
                         <tr class="table-first-row">
                             <td><?php _e('Name'); ?></td>
-                            <td><span id="market_name"><?php _e("Loading data"); ?></span></td>
+                            <td><span id="market_name"><?php _e('Loading data'); ?></span></td>
                         </tr>
                         <tr class="even">
                             <td><?php _e('Version'); ?></td>
-                            <td><span id="market_version"><?php _e("Loading data"); ?></span></td>
+                            <td><span id="market_version"><?php _e('Loading data'); ?></span></td>
                         </tr>
                         <tr>
                             <td><?php _e('Author'); ?></td>
-                            <td><span id="market_author"><?php _e("Loading data"); ?></span></td>
+                            <td><span id="market_author"><?php _e('Loading data'); ?></span></td>
                         </tr>
                         <tr class="even">
                             <td><?php _e('URL'); ?></td>
                             <td><span id="market_url_span"><a id="market_url"
-                                                              href="#"><?php _e("Download manually"); ?></a></span></td>
+                                                              href="#"><?php _e('Download manually'); ?></a></span></td>
                         </tr>
                         </tbody>
                     </table>

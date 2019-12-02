@@ -17,16 +17,16 @@
  * limitations under the License.
  */
 
-$items        = __get("items");
-$max          = __get("max");
-$reports      = __get("reports");
-$max_views    = __get("max_views");
-$latest_items = __get("latest_items");
+$items        = __get('items');
+$max          = __get('max');
+$reports      = __get('reports');
+$max_views    = __get('max_views');
+$latest_items = __get('latest_items');
 
-$alerts      = __get("alerts");
-$max_alerts  = __get("max_alerts");
-$subscribers = __get("subscribers");
-$max_subs    = __get("max_subs");
+$alerts      = __get('alerts');
+$max_alerts  = __get('max_alerts');
+$subscribers = __get('subscribers');
+$max_subs    = __get('max_subs');
 
 $type = Params::getParam('type_stat');
 
@@ -87,16 +87,16 @@ osc_add_filter('admin_title', 'customPageTitle');
 
 function customHead()
 {
-    $items        = __get("items");
-    $max          = __get("max");
-    $reports      = __get("reports");
-    $max_views    = __get("max_views");
-    $latest_items = __get("latest_items");
+    $items        = __get('items');
+    $max          = __get('max');
+    $reports      = __get('reports');
+    $max_views    = __get('max_views');
+    $latest_items = __get('latest_items');
 
-    $alerts      = __get("alerts");
-    $max_alerts  = __get("max_alerts");
-    $subscribers = __get("subscribers");
-    $max_subs    = __get("max_subs");
+    $alerts      = __get('alerts');
+    $max_alerts  = __get('max_alerts');
+    $subscribers = __get('subscribers');
+    $max_subs    = __get('max_subs');
 
     ?>
     <script type="text/javascript" src="https://www.google.com/jsapi"></script>
@@ -130,33 +130,33 @@ function customHead()
 
             <?php /*ITEMS */
             $k = 0;
-            echo "data.addRows(" . count($items) . ");";
+            echo 'data.addRows(' . count($items) . ');';
             foreach ($items as $date => $num) {
-                echo "data.setValue(" . $k . ', 0, "' . $date . '");';
-                echo "data.setValue(" . $k . ", 1, " . $num . ");";
+                echo 'data.setValue(' . $k . ', 0, "' . $date . '");';
+                echo 'data.setValue(' . $k . ', 1, ' . $num . ');';
                 $k++;
             }
             $k = 0;
-            echo "data2.addRows(" . count($reports) . ");";
+            echo 'data2.addRows(' . count($reports) . ');';
             foreach ($reports as $date => $data) {
-                echo "data2.setValue(" . $k . ', 0, "' . $date . '");';
-                echo "data2.setValue(" . $k . ", 1, " . $data['views'] . ");";
+                echo 'data2.setValue(' . $k . ', 0, "' . $date . '");';
+                echo 'data2.setValue(' . $k . ', 1, ' . $data['views'] . ');';
                 $k++;
             }
 
             /* ALERTS */
             $k = 0;
-            echo "data3.addRows(" . count($alerts) . ");";
+            echo 'data3.addRows(' . count($alerts) . ');';
             foreach ($alerts as $date => $num) {
-                echo "data3.setValue(" . $k . ', 0, "' . $date . '");';
-                echo "data3.setValue(" . $k . ", 1, " . $num . ");";
+                echo 'data3.setValue(' . $k . ', 0, "' . $date . '");';
+                echo 'data3.setValue(' . $k . ', 1, ' . $num . ');';
                 $k++;
             }
             $k = 0;
-            echo "data4.addRows(" . count($subscribers) . ");";
+            echo 'data4.addRows(' . count($subscribers) . ');';
             foreach ($subscribers as $date => $num) {
-                echo "data4.setValue(" . $k . ', 0, "' . $date . '");';
-                echo "data4.setValue(" . $k . ", 1, " . $num . ");";
+                echo 'data4.setValue(' . $k . ', 0, "' . $date . '");';
+                echo 'data4.setValue(' . $k . ', 1, ' . $num . ');';
                 $k++;
             }
             ?>
@@ -404,7 +404,7 @@ osc_add_hook('admin_header', 'customHead', 10);
                         <h3><?php _e('New subscribers'); ?></h3>
                     </div>
                     <div class="widget-box-content">
-                        <b class="stats-title"><?php _e("Number of new subscribers"); ?></b>
+                        <b class="stats-title"><?php _e('Number of new subscribers'); ?></b>
                         <div id="placeholder_subscribers" class="graph-placeholder" style="height:150px">
                             <?php if (count($subscribers) == 0) {
                                 _e("There're no statistics yet");

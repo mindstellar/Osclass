@@ -91,10 +91,10 @@ function customHead()
             data.addColumn('number', '<?php _e('Listings'); ?>');
             data.addColumn({type: 'boolean', role: 'certainty'});
             <?php $k = 0;
-            echo "data.addRows(" . count($items) . ");";
+            echo 'data.addRows(' . count($items) . ');';
             foreach ($items as $date => $num) {
-                echo "data.setValue(" . $k . ', 0, "' . $date . '");';
-                echo "data.setValue(" . $k . ", 1, " . $num . ");";
+                echo 'data.setValue(' . $k . ', 0, "' . $date . '");';
+                echo 'data.setValue(' . $k . ', 1, ' . $num . ');';
                 $k++;
             }
             $k = 0;
@@ -146,10 +146,10 @@ function customHead()
             data.addColumn('number', '<?php _e('Users'); ?>');
             data.addColumn({type: 'boolean', role: 'certainty'});
             <?php $k = 0;
-            echo "data.addRows(" . count($users) . ");";
+            echo 'data.addRows(' . count($users) . ');';
             foreach ($users as $date => $num) {
-                echo "data.setValue(" . $k . ', 0, "' . $date . '");';
-                echo "data.setValue(" . $k . ", 1, " . $num . ");";
+                echo 'data.setValue(' . $k . ', 0, "' . $date . '");';
+                echo 'data.setValue(' . $k . ', 1, ' . $num . ');';
                 $k++;
             }
             $k = 0;
@@ -241,7 +241,7 @@ osc_current_admin_theme_path('parts/header.php'); ?>
                                         <td>
                                             <a href="<?php echo osc_admin_base_url(true); ?>?page=items&amp;catId=<?php echo $c['pk_i_id']; ?>"><?php echo $c['s_name']; ?></a>
                                         </td>
-                                        <td><?php echo $c['i_num_items'] . "&nbsp;" . (($c['i_num_items'] == 1)
+                                        <td><?php echo $c['i_num_items'] . '&nbsp;' . (($c['i_num_items'] == 1)
                                                     ? __('Listing') : __('Listings')); ?></td>
                                     </tr>
                                     <?php foreach ($c['categories'] as $subc) { ?>
@@ -254,7 +254,7 @@ osc_current_admin_theme_path('parts/header.php'); ?>
                                             <td class="children-cat"><a
                                                         href="<?php echo osc_admin_base_url(true); ?>?page=items&amp;catId=<?php echo $subc['pk_i_id']; ?>"><?php echo $subc['s_name']; ?></a>
                                             </td>
-                                            <td><?php echo $subc['i_num_items'] . " " . (($subc['i_num_items'] == 1)
+                                            <td><?php echo $subc['i_num_items'] . ' ' . (($subc['i_num_items'] == 1)
                                                         ? __('Listing') : __('Listings')); ?></td>
                                         </tr>
                                         <?php

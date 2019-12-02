@@ -28,7 +28,6 @@ if ($current_host === null) {
 //customize Head
 function customHead()
 {
-
 }
 
 
@@ -46,7 +45,8 @@ function render_offset()
 function addHelp()
 {
     echo '<p>'
-        . __("Change advanced configuration of your Osclass. <strong>Be careful</strong> when modifying default values if you're not sure what you're doing!")
+        . __("Change advanced configuration of your Osclass. "
+            ."<strong>Be careful</strong> when modifying default values if you're not sure what you're doing!")
         . '</p>';
 }
 
@@ -85,7 +85,7 @@ osc_current_admin_theme_path('parts/header.php');
     <div id="general-settings">
         <?php
         $cache_type = Object_Cache_Factory::newInstance()->_get_cache();
-        if ($cache_type != 'default') { ?>
+        if ($cache_type !== 'default') { ?>
             <!--    Cache flush    -->
             <h2 class="render-title"><?php _e('Flush cache'); ?></h2>
             <form id="cache_flush" name="cache_flush" action="<?php echo osc_admin_base_url(true); ?>" method="post">
@@ -94,7 +94,7 @@ osc_current_admin_theme_path('parts/header.php');
                 <fieldset>
                     <div class="form-horizontal">
                         <div class="form-row">
-                            <div class="form-label"><?php __('Flush cache'); ?></div>
+                            <div class="form-label"><?php _e('Flush cache'); ?></div>
                             <div class="form-controls"><input type="submit"
                                                               value="<?php echo osc_esc_html(__('Flush cache')); ?>"
                                                               class="btn btn-submit"/>
@@ -117,22 +117,22 @@ osc_current_admin_theme_path('parts/header.php');
                         <div class="form-label"><?php _e('Subdomain type'); ?></div>
                         <div class="form-controls">
                             <select name="e_type" id="e_type">
-                                <option value="" <?php if (osc_subdomain_type() == '') {
+                                <option value="" <?php if (osc_subdomain_type()) {
                                     ?>selected="selected"<?php
                                                  } ?>><?php _e('No subdomains'); ?></option>
-                                <option value="category" <?php if (osc_subdomain_type() == 'category') {
+                                <option value="category" <?php if (osc_subdomain_type() === 'category') {
                                     ?>selected="selected"<?php
                                                          } ?>><?php _e('Category based'); ?></option>
-                                <option value="country" <?php if (osc_subdomain_type() == 'country') {
+                                <option value="country" <?php if (osc_subdomain_type() === 'country') {
                                     ?>selected="selected"<?php
                                                         } ?>><?php _e('Country based'); ?></option>
-                                <option value="region" <?php if (osc_subdomain_type() == 'region') {
+                                <option value="region" <?php if (osc_subdomain_type() === 'region') {
                                     ?>selected="selected"<?php
                                                        } ?>><?php _e('Region based'); ?></option>
-                                <option value="city" <?php if (osc_subdomain_type() == 'city') {
+                                <option value="city" <?php if (osc_subdomain_type() === 'city') {
                                     ?>selected="selected"<?php
                                                      } ?>><?php _e('City based'); ?></option>
-                                <option value="user" <?php if (osc_subdomain_type() == 'user') {
+                                <option value="user" <?php if (osc_subdomain_type() === 'user') {
                                     ?>selected="selected"<?php
                                                      } ?>><?php _e('User based'); ?></option>
                             </select>
@@ -142,8 +142,11 @@ osc_current_admin_theme_path('parts/header.php');
                         <div class="form-label"><?php _e('Host'); ?></div>
                         <div class="form-controls"><input type="text" class="xlarge" name="s_host"
                                                           value="<?php echo osc_esc_html(osc_subdomain_host()); ?>"/>
-                            <div class="help-box"><?php _e('Your host is required to know the subdomain.'); ?><?php printf(__('Your current host is "%s". Add it without "www".'),
-                                    $current_host); ?><?php _e('Remember to enable cookies for the subdomains too.'); ?></div>
+                            <div class="help-box"><?php _e('Your host is required to know the subdomain.'); ?>
+                                <?php printf(
+                                    __('Your current host is "%s". Add it without "www".'),
+                                    $current_host
+                                ); ?><?php _e('Remember to enable cookies for the subdomains too.'); ?></div>
                         </div>
                     </div>
                     <div class="clear"></div>

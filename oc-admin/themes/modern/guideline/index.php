@@ -33,10 +33,10 @@
         <div id="content-head">
             <h1 class="guideline">Osclass Guideline</h1>
         </div>
-        <?php include "parts/menu.php"; ?>
+        <?php include 'parts/menu.php'; ?>
         <div id="content-page">
             <?php include 'parts/layout.php'; ?>
-            <?php include "parts/grid.php"; ?>
+            <?php include 'parts/grid.php'; ?>
         </div>
     </div><!-- #content-render -->
     <div id="footer">

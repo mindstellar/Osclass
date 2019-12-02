@@ -25,7 +25,7 @@ class CAdminItemComments extends AdminSecBaseModel
 {
     private $itemCommentManager;
 
-    function __construct()
+    public function __construct()
     {
         parent::__construct();
 
@@ -39,7 +39,7 @@ class CAdminItemComments extends AdminSecBaseModel
      * @return bool|void
      * @throws \Exception
      */
-    function doModel()
+    public function doModel()
     {
         parent::doModel();
 
@@ -58,7 +58,7 @@ class CAdminItemComments extends AdminSecBaseModel
                                 $iUpdated = $this->itemCommentManager->delete(array(
                                     'pk_i_id' => $_id
                                 ));
-                                osc_run_hook("delete_comment", $_id);
+                                osc_run_hook('delete_comment', $_id);
                             }
                             osc_add_flash_ok_message(_m('The comments have been deleted'), 'admin');
                             break;
@@ -71,7 +71,7 @@ class CAdminItemComments extends AdminSecBaseModel
                                 if ($iUpdated) {
                                     $this->sendCommentActivated($_id);
                                 }
-                                osc_run_hook("activate_comment", $_id);
+                                osc_run_hook('activate_comment', $_id);
                             }
                             osc_add_flash_ok_message(_m('The comments have been approved'), 'admin');
                             break;
@@ -81,7 +81,7 @@ class CAdminItemComments extends AdminSecBaseModel
                                     array('b_active' => 0),
                                     array('pk_i_id' => $_id)
                                 );
-                                osc_run_hook("deactivate_comment", $_id);
+                                osc_run_hook('deactivate_comment', $_id);
                             }
                             osc_add_flash_ok_message(_m('The comments have been disapproved'), 'admin');
                             break;
@@ -94,7 +94,7 @@ class CAdminItemComments extends AdminSecBaseModel
                                 if ($iUpdated) {
                                     $this->sendCommentActivated($_id);
                                 }
-                                osc_run_hook("enable_comment", $_id);
+                                osc_run_hook('enable_comment', $_id);
                             }
                             osc_add_flash_ok_message(_m('The comments have been unblocked'), 'admin');
                             break;
@@ -104,18 +104,18 @@ class CAdminItemComments extends AdminSecBaseModel
                                     array('b_enabled' => 0),
                                     array('pk_i_id' => $_id)
                                 );
-                                osc_run_hook("disable_comment", $_id);
+                                osc_run_hook('disable_comment', $_id);
                             }
                             osc_add_flash_ok_message(_m('The comments have been blocked'), 'admin');
                             break;
                         default:
-                            if (Params::getParam("bulk_actions") != "") {
-                                osc_run_hook("item_bulk_" . Params::getParam("bulk_actions"), Params::getParam('id'));
+                            if (Params::getParam('bulk_actions') != '') {
+                                osc_run_hook('item_bulk_' . Params::getParam('bulk_actions'), Params::getParam('id'));
                             }
                             break;
                     }
                 }
-                $this->redirectTo(osc_admin_base_url(true) . "?page=comments");
+                $this->redirectTo(osc_admin_base_url(true) . '?page=comments');
                 break;
             case('status'):
                 osc_csrf_check();
@@ -141,32 +141,32 @@ class CAdminItemComments extends AdminSecBaseModel
                     if ($iUpdated) {
                         $this->sendCommentActivated($id);
                     }
-                    osc_run_hook("activate_comment", $id);
+                    osc_run_hook('activate_comment', $id);
                     osc_add_flash_ok_message(_m('The comment has been approved'), 'admin');
                 } elseif ($value == 'INACTIVE') {
                     $iUpdated = $this->itemCommentManager->update(
                         array('b_active' => 0),
                         array('pk_i_id' => $id)
                     );
-                    osc_run_hook("deactivate_comment", $id);
+                    osc_run_hook('deactivate_comment', $id);
                     osc_add_flash_ok_message(_m('The comment has been disapproved'), 'admin');
                 } elseif ($value == 'ENABLE') {
                     $iUpdated = $this->itemCommentManager->update(
                         array('b_enabled' => 1),
                         array('pk_i_id' => $id)
                     );
-                    osc_run_hook("enable_comment", $id);
+                    osc_run_hook('enable_comment', $id);
                     osc_add_flash_ok_message(_m('The comment has been enabled'), 'admin');
                 } elseif ($value == 'DISABLE') {
                     $iUpdated = $this->itemCommentManager->update(
                         array('b_enabled' => 0),
                         array('pk_i_id' => $id)
                     );
-                    osc_run_hook("disable_comment", $id);
+                    osc_run_hook('disable_comment', $id);
                     osc_add_flash_ok_message(_m('The comment has been disabled'), 'admin');
                 }
 
-                $this->redirectTo(osc_admin_base_url(true) . "?page=comments");
+                $this->redirectTo(osc_admin_base_url(true) . '?page=comments');
                 break;
             case('comment_edit'):
                 $comment = ItemComment::newInstance()->findByPrimaryKey(Params::getParam('id'));
@@ -179,15 +179,15 @@ class CAdminItemComments extends AdminSecBaseModel
 
                 $msg = '';
                 if (!osc_validate_email(Params::getParam('authorEmail'), true)) {
-                    $msg .= _m('Email is not correct') . "<br/>";
+                    $msg .= _m('Email is not correct') . '<br/>';
                 }
                 if (!osc_validate_text(Params::getParam('body'), 1, true)) {
-                    $msg .= _m('Comment is required') . "<br/>";
+                    $msg .= _m('Comment is required') . '<br/>';
                 }
 
                 if ($msg != '') {
                     osc_add_flash_error_message($msg, 'admin');
-                    $this->redirectTo(osc_admin_base_url(true) . "?page=comments&action=comment_edit&id="
+                    $this->redirectTo(osc_admin_base_url(true) . '?page=comments&action=comment_edit&id='
                         . Params::getParam('id'));
                 }
 
@@ -206,27 +206,24 @@ class CAdminItemComments extends AdminSecBaseModel
                 osc_run_hook('edit_comment', Params::getParam('id'));
 
                 osc_add_flash_ok_message(_m('Great! We just updated your comment'), 'admin');
-                $this->redirectTo(osc_admin_base_url(true) . "?page=comments");
+                $this->redirectTo(osc_admin_base_url(true) . '?page=comments');
                 break;
             case('delete'):
                 osc_csrf_check();
                 $this->itemCommentManager->deleteByPrimaryKey(Params::getParam('id'));
                 osc_add_flash_ok_message(_m('The comment has been deleted'), 'admin');
                 osc_run_hook('delete_comment', Params::getParam('id'));
-                $this->redirectTo(osc_admin_base_url(true) . "?page=comments");
+                $this->redirectTo(osc_admin_base_url(true) . '?page=comments');
                 break;
             default:
                 // set default iDisplayLength
                 if (Params::getParam('iDisplayLength') != '') {
                     Cookie::newInstance()->push('listing_iDisplayLength', Params::getParam('iDisplayLength'));
                     Cookie::newInstance()->set();
+                } elseif (Cookie::newInstance()->get_value('listing_iDisplayLength') != '') {
+                    Params::setParam('iDisplayLength', Cookie::newInstance()->get_value('listing_iDisplayLength'));
                 } else {
-                    // set a default value if it's set in the cookie
-                    if (Cookie::newInstance()->get_value('listing_iDisplayLength') != '') {
-                        Params::setParam('iDisplayLength', Cookie::newInstance()->get_value('listing_iDisplayLength'));
-                    } else {
-                        Params::setParam('iDisplayLength', 10);
-                    }
+                    Params::setParam('iDisplayLength', 10);
                 }
                 $this->_exportVariableToView('iDisplayLength', Params::getParam('iDisplayLength'));
 
@@ -241,7 +238,7 @@ class CAdminItemComments extends AdminSecBaseModel
                 $page = (int)Params::getParam('iPage');
                 if ($page == 0) {
                     $page = 1;
-                };
+                }
                 Params::setParam('iPage', $page);
 
                 $params = Params::getParamsAsArray();
@@ -299,7 +296,7 @@ class CAdminItemComments extends AdminSecBaseModel
                           'label'               => __('Unblock')
                     )
                 );
-                $bulk_options = osc_apply_filter("comment_bulk_filter", $bulk_options);
+                $bulk_options = osc_apply_filter('comment_bulk_filter', $bulk_options);
                 $this->_exportVariableToView('bulk_options', $bulk_options);
 
                 $this->doView('comments/index.php');
@@ -314,7 +311,7 @@ class CAdminItemComments extends AdminSecBaseModel
      *
      * @throws \Exception
      */
-    function sendCommentActivated($commentId)
+    public function sendCommentActivated($commentId)
     {
         $aComment = $this->itemCommentManager->findByPrimaryKey($commentId);
         $aItem    = Item::newInstance()->findByPrimaryKey($aComment['fk_i_item_id']);
@@ -328,12 +325,12 @@ class CAdminItemComments extends AdminSecBaseModel
      *
      * @return mixed|void
      */
-    function doView($file)
+    public function doView($file)
     {
-        osc_run_hook("before_admin_html");
+        osc_run_hook('before_admin_html');
         osc_current_admin_theme_path($file);
         Session::newInstance()->_clearVariables();
-        osc_run_hook("after_admin_html");
+        osc_run_hook('after_admin_html');
     }
 }
 

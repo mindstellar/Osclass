@@ -20,8 +20,8 @@
 osc_enqueue_script('jquery-validate');
 osc_enqueue_script('tiny_mce');
 
-$info   = __get("info");
-$widget = __get("widget");
+$info   = __get('info');
+$widget = __get('widget');
 
 if (Params::getParam('action') == 'edit_widget') {
     $title  = __('Edit widget');
@@ -61,8 +61,8 @@ function customPageTitle($string)
 osc_add_filter('admin_title', 'customPageTitle');
 function customHead()
 {
-    $info   = __get("info");
-    $widget = __get("widget");
+    $info   = __get('info');
+    $widget = __get('widget');
     if (Params::getParam('action') == 'edit_widget') {
         $title  = __('Edit widget');
         $edit   = true;
@@ -109,7 +109,7 @@ function customHead()
                 },
                 messages: {
                     description: {
-                        required: '<?php echo osc_esc_js(__("Description: this field is required")); ?>.'
+                        required: '<?php echo osc_esc_js(__('Description: this field is required')); ?>.'
                     }
                 },
                 errorLabelContainer: "#error_list",

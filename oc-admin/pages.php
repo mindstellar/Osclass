@@ -26,7 +26,7 @@ class CAdminPages extends AdminSecBaseModel
     //specific for this class
     private $pageManager;
 
-    function __construct()
+    public function __construct()
     {
         parent::__construct();
 
@@ -35,15 +35,15 @@ class CAdminPages extends AdminSecBaseModel
     }
 
     //Business Layer...
-    function doModel()
+    public function doModel()
     {
         parent::doModel();
 
         //specific things for this class
         switch ($this->action) {
             case 'edit':
-                if (Params::getParam("id") == '') {
-                    $this->redirectTo(osc_admin_base_url(true) . "?page=pages");
+                if (Params::getParam('id') == '') {
+                    $this->redirectTo(osc_admin_base_url(true) . '?page=pages');
                 }
 
                 $form     = count(Session::newInstance()->_getForm());
@@ -54,14 +54,14 @@ class CAdminPages extends AdminSecBaseModel
 
                 $templates = osc_apply_filter('page_templates', WebThemes::newInstance()->getAvailableTemplates());
                 $this->_exportVariableToView('templates', $templates);
-                $this->_exportVariableToView("page", $this->pageManager->findByPrimaryKey(Params::getParam("id")));
-                $this->doView("pages/frm.php");
+                $this->_exportVariableToView('page', $this->pageManager->findByPrimaryKey(Params::getParam('id')));
+                $this->doView('pages/frm.php');
                 break;
             case 'edit_post':
                 osc_csrf_check();
-                $id              = Params::getParam("id");
-                $b_link          = (Params::getParam("b_link") != '') ? 1 : 0;
-                $s_internal_name = Params::getParam("s_internal_name");
+                $id              = Params::getParam('id');
+                $b_link          = (Params::getParam('b_link') != '') ? 1 : 0;
+                $s_internal_name = Params::getParam('s_internal_name');
                 $s_internal_name = osc_sanitizeString($s_internal_name);
 
                 $meta = Params::getParam('meta');
@@ -74,7 +74,7 @@ class CAdminPages extends AdminSecBaseModel
                     if (preg_match('|(.+?)#(.+)|', $k, $m)) {
                         if ($m[2] == 's_title' && $v != '') {
                             $not_empty = true;
-                        };
+                        }
                         $aFieldsDescription[$m[1]][$m[2]] = $v;
                     }
                 }
@@ -82,12 +82,12 @@ class CAdminPages extends AdminSecBaseModel
 
                 if ($s_internal_name == '') {
                     osc_add_flash_error_message(_m('You have to set an internal name'), 'admin');
-                    $this->redirectTo(osc_admin_base_url(true) . "?page=pages&action=edit&id=" . $id);
+                    $this->redirectTo(osc_admin_base_url(true) . '?page=pages&action=edit&id=' . $id);
                 }
 
                 if (!WebThemes::newInstance()->isValidPage($s_internal_name)) {
                     osc_add_flash_error_message(_m('You have to set a different internal name'), 'admin');
-                    $this->redirectTo(osc_admin_base_url(true) . "?page=pages&action=edit&id=" . $id);
+                    $this->redirectTo(osc_admin_base_url(true) . '?page=pages&action=edit&id=' . $id);
                 }
                 Session::newInstance()->_setForm('s_internal_name', $s_internal_name);
 
@@ -104,14 +104,14 @@ class CAdminPages extends AdminSecBaseModel
                         osc_run_hook('edit_page', $id);
                         Session::newInstance()->_clearVariables();
                         osc_add_flash_ok_message(_m('The page has been updated'), 'admin');
-                        $this->redirectTo(osc_admin_base_url(true) . "?page=pages");
+                        $this->redirectTo(osc_admin_base_url(true) . '?page=pages');
                     }
                     osc_add_flash_error_message(_m("You can't repeat internal name"), 'admin');
                 } else {
                     osc_add_flash_error_message(_m("The page couldn't be updated, at least one title should not be empty"),
                         'admin');
                 }
-                $this->redirectTo(osc_admin_base_url(true) . "?page=pages&action=edit&id=" . $id);
+                $this->redirectTo(osc_admin_base_url(true) . '?page=pages&action=edit&id=' . $id);
                 break;
             case 'add':
                 $form     = count(Session::newInstance()->_getForm());
@@ -122,13 +122,13 @@ class CAdminPages extends AdminSecBaseModel
 
                 $templates = osc_apply_filter('page_templates', WebThemes::newInstance()->getAvailableTemplates());
                 $this->_exportVariableToView('templates', $templates);
-                $this->_exportVariableToView("page", array());
-                $this->doView("pages/frm.php");
+                $this->_exportVariableToView('page', array());
+                $this->doView('pages/frm.php');
                 break;
             case 'add_post':
                 osc_csrf_check();
-                $s_internal_name = Params::getParam("s_internal_name");
-                $b_link          = (Params::getParam("b_link") != '') ? 1 : 0;
+                $s_internal_name = Params::getParam('s_internal_name');
+                $b_link          = (Params::getParam('b_link') != '') ? 1 : 0;
                 $s_internal_name = osc_sanitizeString($s_internal_name);
 
                 $meta = Params::getParam('meta');
@@ -148,12 +148,12 @@ class CAdminPages extends AdminSecBaseModel
 
                 if ($s_internal_name == '') {
                     osc_add_flash_error_message(_m('You have to set an internal name'), 'admin');
-                    $this->redirectTo(osc_admin_base_url(true) . "?page=pages&action=add");
+                    $this->redirectTo(osc_admin_base_url(true) . '?page=pages&action=add');
                 }
 
                 if (!WebThemes::newInstance()->isValidPage($s_internal_name)) {
                     osc_add_flash_error_message(_m('You have to set a different internal name'), 'admin');
-                    $this->redirectTo(osc_admin_base_url(true) . "?page=pages&action=add");
+                    $this->redirectTo(osc_admin_base_url(true) . '?page=pages&action=add');
                 }
                 $aFields = array(
                     's_internal_name' => $s_internal_name,
@@ -169,7 +169,7 @@ class CAdminPages extends AdminSecBaseModel
                         $result = $this->pageManager->insert($aFields, $aFieldsDescription);
                         Session::newInstance()->_clearVariables();
                         osc_add_flash_ok_message(_m('The page has been added'), 'admin');
-                        $this->redirectTo(osc_admin_base_url(true) . "?page=pages");
+                        $this->redirectTo(osc_admin_base_url(true) . '?page=pages');
                     } else {
                         osc_add_flash_error_message(_m("The page couldn't be added, at least one title should not be empty"),
                             'admin');
@@ -178,11 +178,11 @@ class CAdminPages extends AdminSecBaseModel
                     osc_add_flash_error_message(_m("Oops! That internal name is already in use. We can't make the changes"),
                         'admin');
                 }
-                $this->redirectTo(osc_admin_base_url(true) . "?page=pages&action=add");
+                $this->redirectTo(osc_admin_base_url(true) . '?page=pages&action=add');
                 break;
             case 'delete':
                 osc_csrf_check();
-                $id                    = Params::getParam("id");
+                $id                    = Params::getParam('id');
                 $page_deleted_correcty = 0;
                 $page_deleted_error    = 0;
                 $page_indelible        = 0;
@@ -229,15 +229,15 @@ class CAdminPages extends AdminSecBaseModel
                             $page_deleted_correcty), 'admin');
                     }
                 }
-                $this->redirectTo(osc_admin_base_url(true) . "?page=pages");
+                $this->redirectTo(osc_admin_base_url(true) . '?page=pages');
                 break;
             default:
 
-                if (Params::getParam("action") != "") {
-                    osc_run_hook("page_bulk_" . Params::getParam("action"), Params::getParam('id'));
+                if (Params::getParam('action') != '') {
+                    osc_run_hook('page_bulk_' . Params::getParam('action'), Params::getParam('id'));
                 }
 
-                require_once osc_lib_path() . "osclass/classes/datatables/PagesDataTable.php";
+                require_once osc_lib_path() . 'osclass/classes/datatables/PagesDataTable.php';
 
                 // set default iDisplayLength
                 if (Params::getParam('iDisplayLength') != '') {
@@ -264,7 +264,7 @@ class CAdminPages extends AdminSecBaseModel
                 $page = (int)Params::getParam('iPage');
                 if ($page == 0) {
                     $page = 1;
-                };
+                }
                 Params::setParam('iPage', $page);
 
                 $params = Params::getParamsAsArray();
@@ -303,10 +303,10 @@ class CAdminPages extends AdminSecBaseModel
                         'label'               => __('Delete')
                     )
                 );
-                $bulk_options = osc_apply_filter("page_bulk_filter", $bulk_options);
+                $bulk_options = osc_apply_filter('page_bulk_filter', $bulk_options);
                 $this->_exportVariableToView('bulk_options', $bulk_options);
 
-                $this->doView("pages/index.php");
+                $this->doView('pages/index.php');
                 break;
         }
     }
@@ -318,12 +318,12 @@ class CAdminPages extends AdminSecBaseModel
      *
      * @return mixed|void
      */
-    function doView($file)
+    public function doView($file)
     {
-        osc_run_hook("before_admin_html");
+        osc_run_hook('before_admin_html');
         osc_current_admin_theme_path($file);
         Session::newInstance()->_clearVariables();
-        osc_run_hook("after_admin_html");
+        osc_run_hook('after_admin_html');
     }
 }
 

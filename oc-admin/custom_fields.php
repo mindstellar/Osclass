@@ -26,7 +26,7 @@ class CAdminCFields extends AdminSecBaseModel
     //specific for this class
     private $fieldManager;
 
-    function __construct()
+    public function __construct()
     {
         parent::__construct();
 
@@ -35,7 +35,7 @@ class CAdminCFields extends AdminSecBaseModel
     }
 
     //Business Layer...
-    function doModel()
+    public function doModel()
     {
         parent::doModel();
 
@@ -53,7 +53,7 @@ class CAdminCFields extends AdminSecBaseModel
                 $this->_exportVariableToView('categories', $categories);
                 $this->_exportVariableToView('default_selected', $selected);
                 $this->_exportVariableToView('fields', $this->fieldManager->listAll());
-                $this->doView("fields/index.php");
+                $this->doView('fields/index.php');
                 break;
         }
     }
@@ -65,12 +65,12 @@ class CAdminCFields extends AdminSecBaseModel
      *
      * @return mixed|void
      */
-    function doView($file)
+    public function doView($file)
     {
-        osc_run_hook("before_admin_html");
+        osc_run_hook('before_admin_html');
         osc_current_admin_theme_path($file);
         Session::newInstance()->_clearVariables();
-        osc_run_hook("after_admin_html");
+        osc_run_hook('after_admin_html');
     }
 }
 

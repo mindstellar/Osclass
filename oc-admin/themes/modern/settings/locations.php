@@ -42,13 +42,11 @@ function customHead()
                 if (!$(this).find(".checkboxc input").is(':checked')) {
                     $(this).find(".checkboxc").css({'visibility': 'hidden'});
                 }
-                ;
                 if ($(".checkboxc input:checked").size() > 0) {
                     $("#b_remove_country").show();
                 } else {
                     $("#b_remove_country").hide();
                 }
-                ;
             });
 
             $("#b_remove_country").on("click", function () {
@@ -76,7 +74,9 @@ function customHead()
             $("#b_remove_city").on("click", function () {
                 $("#dialog-location-delete input[name='id[]']").remove();
                 $(".checkboxct input:checked").each(function () {
-                    $("#dialog-location-delete").append('<input type="hidden" name="id[]" value="' + $(this).attr("value") + '" />');
+                    $("#dialog-location-delete").append(
+                        '<input type="hidden" name="id[]" value="' + $(this).attr("value") + '" />'
+                    );
                 });
                 $("#dialog-location-delete input[name='type']").attr('value', 'delete_city');
                 $("#dialog-location-delete").dialog('open');
@@ -158,7 +158,9 @@ osc_add_hook('admin_header', 'customHead', 10);
 function addHelp()
 {
     echo '<p>'
-        . __("Add, edit or delete the countries, regions and cities installed on your Osclass. <strong>Be careful</strong>: modifying locations can cause your statistics to be incorrect until they're recalculated. Modify only if you're sure what you're doing!")
+        . __("Add, edit or delete the countries, regions and cities installed on your Osclass. "
+            . '<strong>Be careful</strong>: modifying locations can cause your statistics to be incorrect '
+            ."until they're recalculated. Modify only if you're sure what you're doing!")
         . '</p>';
 }
 
@@ -396,8 +398,8 @@ osc_current_admin_theme_path('parts/header.php'); ?>
                                                value="<?php echo $country['pk_c_code']; ?>">
                                     </span>
                                             <a class="close"
-                                               onclick="return delete_dialog('<?php echo $country['pk_c_code']; ?>', 'delete_country');"
-                                               href="<?php echo osc_admin_base_url(true); ?>?page=settings&action=locations&type=delete_country&id[]=<?php echo $country['pk_c_code']; ?>">
+                                               href="<?php echo osc_admin_base_url(true); ?>?page=settings&action=locations&type=delete_country&id[]=<?php echo $country['pk_c_code']; ?>"
+                                               onclick="return delete_dialog('<?php echo $country['pk_c_code']; ?>', 'delete_country');">
                                                 <img src="<?php echo osc_admin_base_url(); ?>images/close.png"
                                                      alt="<?php echo osc_esc_html(__('Close')); ?>"
                                                      title="<?php echo osc_esc_html(__('Close')); ?>"/>
@@ -406,12 +408,17 @@ osc_current_admin_theme_path('parts/header.php'); ?>
                                                onclick="edit_countries($(this));"
                                                data="<?php echo osc_esc_html($country['s_name']); ?>"
                                                code="<?php echo $country['pk_c_code']; ?>"
-                                               slug="<?php echo $country['s_slug']; ?>"><?php echo $country['s_name']; ?></a>
+                                               slug="<?php echo $country['s_slug']; ?>"><?php echo $country['s_name']; ?>
+                                            </a>
                                         </div>
                                     </div>
                                     <div class="float-right">
-                                        <a class="view-more" href="javascript:void(0)"
-                                           onclick="show_region('<?php echo osc_esc_js($country['pk_c_code']); ?>', '<?php echo osc_esc_js($country['s_name']); ?>')"><?php _e('View more'); ?>
+                                        <a
+                                                class="view-more"
+                                                href="javascript:void(0)"
+                                                onclick="show_region('<?php echo osc_esc_js($country['pk_c_code']); ?>',
+                                                        '<?php echo osc_esc_js($country['s_name']); ?>')">
+                                            <?php _e('View more'); ?>
                                             &raquo;</a>
                                     </div>
                                     <div class="clear"></div>
@@ -425,9 +432,10 @@ osc_current_admin_theme_path('parts/header.php'); ?>
         <div class="grid-row grid-first-row grid-33">
             <div class="row-wrapper">
                 <div class="widget-box">
-                    <div class="widget-box-title"><h3><?php _e('Regions'); ?><a id="b_new_region"
-                                                                                href="javascript:void(0);"
-                                                                                class="btn float-right hide"><?php _e('Add new'); ?></a>
+                    <div class="widget-box-title"><h3><?php _e('Regions'); ?>
+                            <a class="btn float-right hide"
+                               href="javascript:void(0);"
+                               id="b_new_region"><?php _e('Add new'); ?></a>
                             <a id="b_remove_region" style="display:none;" class="btn float-right"
                                href="javascript:void(0);"><?php _e('Remove selected'); ?></a></h3></div>
                     <div class="widget-box-content">
@@ -439,9 +447,10 @@ osc_current_admin_theme_path('parts/header.php'); ?>
         <div class="grid-row grid-first-row grid-33">
             <div class="row-wrapper">
                 <div class="widget-box">
-                    <div class="widget-box-title"><h3><?php _e('Cities'); ?><a id="b_new_city"
-                                                                               href="javascript:void(0);"
-                                                                               class="btn float-right hide"><?php _e('Add new'); ?></a>
+                    <div class="widget-box-title"><h3><?php _e('Cities'); ?>
+                            <a class="btn float-right hide"
+                               href="javascript:void(0);"
+                               id="b_new_city"><?php _e('Add new'); ?></a>
                             <a id="b_remove_city" style="display:none;" class="btn float-right"
                                href="javascript:void(0);"><?php _e('Remove selected'); ?></a></h3></div>
                     <div class="widget-box-content">
@@ -459,7 +468,8 @@ osc_current_admin_theme_path('parts/header.php'); ?>
             <input type="hidden" name="id[]" value=""/>
             <div class="form-horizontal">
                 <div class="form-row">
-                    <?php _e("This action can't be undone. Items associated to this location will be deleted. Users from this location will be unlinked, but not deleted. Are you sure you want to continue?"); ?>
+                    <?php _e("This action can't be undone. Items associated to this location will be deleted. "
+                        . 'Users from this location will be unlinked, but not deleted. Are you sure you want to continue?'); ?>
                 </div>
                 <div class="form-actions">
                     <div class="wrapper">
@@ -478,7 +488,8 @@ osc_current_admin_theme_path('parts/header.php'); ?>
             <input type="hidden" name="type" value="locations_import"/>
             <div class="form-horizontal">
                 <div class="form-row">
-                    <?php _e("Import a country with it's regions and cities from our database. Already imported countries aren't shown."); ?>
+                    <?php _e("Import a country with it's regions and cities from our database. "
+                        . "Already imported countries aren't shown."); ?>
                 </div>
                 <div class="form-row">
                     <table>
@@ -488,19 +499,17 @@ osc_current_admin_theme_path('parts/header.php'); ?>
                                 <?php $locations = View::newInstance()->_get('aLocations'); ?>
                                 <?php if (count($locations)) { ?>
                                     <select name="location" required>
-                                        <option value=""><?php _e("Select an option"); ?>
-                                            <?php foreach ($locations
-
-                                            as $location) { ?>
-                                            <?php /* BUG: */
-                                            if ($location['name'] == '') {
-                                                continue;
-                                            } ?>
+                                        <option value=""><?php _e('Select an option'); ?>
+                                            <?php foreach ($locations as $location) { ?>
+                                                <?php /* BUG: */
+                                                if ($location['name'] == '') {
+                                                    continue;
+                                                } ?>
                                         <option value="<?php echo $location['file']; ?>"><?php echo $location['name']; ?></option>
                                             <?php } ?>
                                     </select>
                                 <?php } else { ?>
-                                    <p><?php _e("No locations available."); ?></p>
+                                    <p><?php _e('No locations available.'); ?></p>
                                 <?php } ?>
                             </td>
                         </tr>
@@ -515,19 +524,21 @@ osc_current_admin_theme_path('parts/header.php'); ?>
                 </div>
             </div>
         </form>
-        <script type="text/javascript">
+        <script>
             <?php if (Params::getParam('country') != '' && Params::getParam('country_code') != '') { ?>
-            show_region('<?php echo osc_esc_js(Params::getParam('country_code')); ?>', '<?php echo osc_esc_js(Params::getParam('country')); ?>');
+            show_region('<?php echo osc_esc_js(Params::getParam('country_code')); ?>',
+                '<?php echo osc_esc_js(Params::getParam('country')); ?>'
+            );
 
             function hook_load_cities() {
-                <?php if (Params::getParam('region') != '') { ?>
+                <?php if (Params::getParam('region')) { ?>
                 show_city(<?php echo osc_esc_js(Params::getParam('region')); ?>);
                 hook_load_cities = function () {
                 };
-                <?php }; ?>
-            };
+                <?php } ?>
+            }
             <?php } else {
                 echo 'function hook_load_cities() { };';
-            }; ?>
+            } ?>
         </script>
         <?php osc_current_admin_theme_path('parts/footer.php'); ?>

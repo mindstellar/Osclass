@@ -143,7 +143,7 @@ osc_current_admin_theme_path('parts/header.php'); ?>
                             <?php osc_show_recaptcha(); ?>
                         </div>
                     </div>
-                <?php }; ?>
+                <?php } ?>
                 <div class="form-actions">
                     <input type="submit" id="submit_recaptcha" value="<?php echo osc_esc_html(__('Save changes')); ?>"
                            class="btn btn-submit"/>

@@ -17,9 +17,9 @@
  * limitations under the License.
  */
 
-$comments        = __get("comments");
-$max             = __get("max");
-$latest_comments = __get("latest_comments");
+$comments        = __get('comments');
+$max             = __get('max');
+$latest_comments = __get('latest_comments');
 $type            = Params::getParam('type_stat');
 
 switch ($type) {
@@ -77,9 +77,9 @@ osc_add_filter('admin_title', 'customPageTitle');
 
 function customHead()
 {
-    $comments        = __get("comments");
-    $max             = __get("max");
-    $latest_comments = __get("latest_comments");
+    $comments        = __get('comments');
+    $max             = __get('max');
+    $latest_comments = __get('latest_comments');
     ?>
     <script type="text/javascript" src="https://www.google.com/jsapi"></script>
     <?php if (count($comments) > 0) { ?>
@@ -98,10 +98,10 @@ function customHead()
             data.addColumn('string', '<?php echo osc_esc_js(__('Date')); ?>');
             data.addColumn('number', '<?php echo osc_esc_js(__('Comments')); ?>');
             <?php $k = 0;
-            echo "data.addRows(" . count($comments) . ");";
+            echo 'data.addRows(' . count($comments) . ');';
             foreach ($comments as $date => $num) {
-                echo "data.setValue(" . $k . ", 0, \"" . $date . "\");";
-                echo "data.setValue(" . $k . ", 1, " . $num . ");";
+                echo 'data.setValue(' . $k . ', 0, "' . $date . '");';
+                echo 'data.setValue(' . $k . ', 1, ' . $num . ');';
                 $k++;
             }
             ?>
@@ -185,7 +185,7 @@ osc_add_hook('admin_header', 'customHead', 10);
                         <b class="stats-title"></b>
                         <div id="placeholder" class="graph-placeholder" style="height:150px">
                             <?php if (count($comments) == 0) {
-                                _e("There are no statistics yet");
+                                _e('There are no statistics yet');
                             } ?>
                         </div>
                     </div>
@@ -218,12 +218,12 @@ osc_add_hook('admin_header', 'customHead', 10);
                                         </td>
                                         <td>
                                             <a href="<?php echo osc_admin_base_url(true); ?>?page=comments&amp;action=comment_edit&amp;id=<?php echo $c['pk_i_id']; ?>"><?php echo $c['s_author_name']
-                                                    . " - " . $c['s_author_email']; ?></a></td>
+                                                    . ' - ' . $c['s_author_email']; ?></a></td>
                                         <td>
                                             <a href="<?php echo osc_admin_base_url(true); ?>?page=comments&amp;action=comment_edit&amp;id=<?php echo $c['pk_i_id']; ?>"><?php echo $c['s_body']; ?></a>
                                         </td>
                                     </tr>
-                                <?php }; ?>
+                                <?php } ?>
                                 </tbody>
                             </table>
                         <?php } else { ?>

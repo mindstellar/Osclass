@@ -1,4 +1,6 @@
-<?php if (!defined('OC_ADMIN')) {
+<?php /** @noinspection ALL */
+/** @noinspection ALL */
+if (!defined('OC_ADMIN')) {
     exit('Direct access is not allowed.');
 }
 /*
@@ -153,7 +155,7 @@ function customHead()
                         }, {});
                         $.ajax({
                             type: 'POST',
-                            url: "<?php echo osc_admin_base_url(true) . "?page=ajax&action=categories_order&"
+                            url: "<?php echo osc_admin_base_url(true) . '?page=ajax&action=categories_order&'
                                 . osc_csrf_token_url(); ?>",
                             data: {'list': JSON.stringify(plist)},
                             context: document.body,

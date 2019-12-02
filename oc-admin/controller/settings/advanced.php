@@ -24,7 +24,7 @@
 class CAdminSettingsAdvanced extends AdminSecBaseModel
 {
     //Business Layer...
-    function doModel()
+    public function doModel()
     {
         switch ($this->action) {
             case('advanced'):
@@ -46,14 +46,14 @@ class CAdminSettingsAdvanced extends AdminSecBaseModel
                 $iUpdated += osc_set_preference('subdomain_host', Params::getParam('s_host'));
 
                 if ($iUpdated > 0) {
-                    osc_add_flash_ok_message(_m("Advanced settings have been updated"), 'admin');
+                    osc_add_flash_ok_message(_m('Advanced settings have been updated'), 'admin');
                 }
                 osc_calculate_location_slug(osc_subdomain_type());
                 $this->redirectTo(osc_admin_base_url(true) . '?page=settings&action=advanced');
                 break;
             case('advanced_cache_flush'):
                 osc_cache_flush();
-                osc_add_flash_ok_message(_m("Cache flushed correctly"), 'admin');
+                osc_add_flash_ok_message(_m('Cache flushed correctly'), 'admin');
                 $this->redirectTo(osc_admin_base_url(true) . '?page=settings&action=advanced');
                 break;
         }

@@ -23,13 +23,13 @@
  */
 class CAdminTools extends AdminSecBaseModel
 {
-    function __construct()
+    public function __construct()
     {
         parent::__construct();
     }
 
     //Business Layer...
-    function doModel()
+    public function doModel()
     {
         parent::doModel();
 
@@ -39,7 +39,7 @@ class CAdminTools extends AdminSecBaseModel
                 break;
             case('import_post'):
                 if (defined('DEMO')) {
-                    osc_add_flash_warning_message(_m("This action cannot be done because it is a demo site"), 'admin');
+                    osc_add_flash_warning_message(_m('This action cannot be done because it is a demo site'), 'admin');
                     $this->redirectTo(osc_admin_base_url(true) . '?page=tools&action=import');
                 }
                 // calling
@@ -68,11 +68,11 @@ class CAdminTools extends AdminSecBaseModel
                 break;
             case('category_post'):
                 if (defined('DEMO')) {
-                    osc_add_flash_warning_message(_m("This action cannot be done because it is a demo site"), 'admin');
+                    osc_add_flash_warning_message(_m('This action cannot be done because it is a demo site'), 'admin');
                     $this->redirectTo(osc_admin_base_url(true) . '?page=tools&action=category');
                 }
                 osc_update_cat_stats();
-                osc_add_flash_ok_message(_m("Recount category stats has been successful"), 'admin');
+                osc_add_flash_ok_message(_m('Recount category stats has been successful'), 'admin');
                 $this->redirectTo(osc_admin_base_url(true) . '?page=tools&action=category');
                 break;
             case('locations'):
@@ -80,7 +80,7 @@ class CAdminTools extends AdminSecBaseModel
                 break;
             case('locations_post'):
                 if (defined('DEMO')) {
-                    osc_add_flash_warning_message(_m("This action cannot be done because it is a demo site"), 'admin');
+                    osc_add_flash_warning_message(_m('This action cannot be done because it is a demo site'), 'admin');
                     $this->redirectTo(osc_admin_base_url(true) . '?page=tools&action=locations');
                 }
 
@@ -90,7 +90,7 @@ class CAdminTools extends AdminSecBaseModel
                 break;
             case('upgrade'):
                 if (defined('DEMO')) {
-                    osc_add_flash_warning_message(_m("This action cannot be done because it is a demo site"), 'admin');
+                    osc_add_flash_warning_message(_m('This action cannot be done because it is a demo site'), 'admin');
                     $this->redirectTo(osc_admin_base_url(true));
                 }
                 $this->doView('tools/upgrade.php');
@@ -103,14 +103,14 @@ class CAdminTools extends AdminSecBaseModel
                 break;
             case('backup-sql'):
                 if (defined('DEMO')) {
-                    osc_add_flash_warning_message(_m("This action cannot be done because it is a demo site"), 'admin');
+                    osc_add_flash_warning_message(_m('This action cannot be done because it is a demo site'), 'admin');
                     $this->redirectTo(osc_admin_base_url(true) . '?page=tools&action=backup');
                 }
                 osc_csrf_check();
                 //databasse dump...
                 if (Params::getParam('bck_dir') != '') {
                     $path = trim(Params::getParam('bck_dir'));
-                    if (substr($path, -1, 1) != "/") {
+                    if (substr($path, -1, 1) != '/') {
                         $path .= '/';
                     }
                 } else {
@@ -144,13 +144,13 @@ class CAdminTools extends AdminSecBaseModel
                 break;
             case('backup-sql_file'):
                 if (defined('DEMO')) {
-                    osc_add_flash_warning_message(_m("This action cannot be done because it is a demo site"), 'admin');
+                    osc_add_flash_warning_message(_m('This action cannot be done because it is a demo site'), 'admin');
                     $this->redirectTo(osc_admin_base_url(true) . '?page=tools&action=backup');
                 }
                 //databasse dump...
 
                 $filename = 'Osclass_mysqlbackup.' . date('YmdHis') . '.sql';
-                $path     = sys_get_temp_dir() . "/";
+                $path     = sys_get_temp_dir() . '/';
 
                 switch (osc_dbdump($path, $filename)) {
                     case(-1):
@@ -193,11 +193,11 @@ class CAdminTools extends AdminSecBaseModel
                 break;
             case('backup-zip_file'):
                 if (defined('DEMO')) {
-                    osc_add_flash_warning_message(_m("This action cannot be done because it is a demo site"), 'admin');
+                    osc_add_flash_warning_message(_m('This action cannot be done because it is a demo site'), 'admin');
                     $this->redirectTo(osc_admin_base_url(true) . '?page=tools&action=backup');
                 }
-                $filename = "Osclass_backup." . date('YmdHis') . ".zip";
-                $path     = sys_get_temp_dir() . "/";
+                $filename = 'Osclass_backup.' . date('YmdHis') . '.zip';
+                $path     = sys_get_temp_dir() . '/';
 
                 if (osc_zip_folder(osc_base_path(), $path . $filename)) {
                     $msg = _m('Archived successfully!');
@@ -221,19 +221,19 @@ class CAdminTools extends AdminSecBaseModel
                 break;
             case('backup-zip'):
                 if (defined('DEMO')) {
-                    osc_add_flash_warning_message(_m("This action cannot be done because it is a demo site"), 'admin');
+                    osc_add_flash_warning_message(_m('This action cannot be done because it is a demo site'), 'admin');
                     $this->redirectTo(osc_admin_base_url(true) . '?page=tools&action=backup');
                 }
                 //zip of the code just to back it up
                 osc_csrf_check();
                 if (Params::getParam('bck_dir') != '') {
                     $archive_name = trim(Params::getParam('bck_dir'));
-                    if (substr(trim($archive_name), -1, 1) != "/") {
+                    if (substr(trim($archive_name), -1, 1) != '/') {
                         $archive_name .= '/';
                     }
                     $archive_name = Params::getParam('bck_dir') . '/Osclass_backup.' . date('YmdHis') . '.zip';
                 } else {
-                    $archive_name = osc_base_path() . "Osclass_backup." . date('YmdHis') . ".zip";
+                    $archive_name = osc_base_path() . 'Osclass_backup.' . date('YmdHis') . '.zip';
                 }
                 $archive_folder = osc_base_path();
 
@@ -251,7 +251,7 @@ class CAdminTools extends AdminSecBaseModel
                 break;
             case('maintenance'):
                 if (defined('DEMO')) {
-                    osc_add_flash_warning_message(_m("This action cannot be done because it is a demo site"), 'admin');
+                    osc_add_flash_warning_message(_m('This action cannot be done because it is a demo site'), 'admin');
                     $this->doView('tools/maintenance.php');
                     break;
                 }
@@ -259,7 +259,7 @@ class CAdminTools extends AdminSecBaseModel
                 if ($mode == 'on') {
                     osc_csrf_check();
                     $maintenance_file = osc_base_path() . '.maintenance';
-                    $fileHandler      = @fopen($maintenance_file, 'w');
+                    $fileHandler      = @fopen($maintenance_file, 'wb');
                     if ($fileHandler) {
                         osc_add_flash_ok_message(_m('Maintenance mode is ON'), 'admin');
                     } else {
@@ -292,12 +292,12 @@ class CAdminTools extends AdminSecBaseModel
      *
      * @return mixed|void
      */
-    function doView($file)
+    public function doView($file)
     {
-        osc_run_hook("before_admin_html");
+        osc_run_hook('before_admin_html');
         osc_current_admin_theme_path($file);
         Session::newInstance()->_clearVariables();
-        osc_run_hook("after_admin_html");
+        osc_run_hook('after_admin_html');
     }
 }
 

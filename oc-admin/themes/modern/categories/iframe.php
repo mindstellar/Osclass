@@ -17,8 +17,8 @@
  * limitations under the License.
  */
 
-$category    = __get("category");
-$has_subcats = __get("has_subcategories");
+$category    = __get('category');
+$has_subcats = __get('has_subcategories');
 $locales     = OSCLocale::newInstance()->listAllEnabled();
 ?>
 <div class="iframe-category">
@@ -42,7 +42,7 @@ $locales     = OSCLocale::newInstance()->listAllEnabled();
                                 <br/>
                                 <label><?php CategoryForm::apply_changes_to_subcategories($category); ?>
                                     <span><?php _e('Apply the expiration date and price field changes to children categories'); ?></span></label>
-                            <?php }; ?>
+                            <?php } ?>
                         </div>
                     </div>
                 </div>

@@ -82,7 +82,7 @@ osc_current_admin_theme_path('parts/header.php'); ?>
                                value="<?php echo($maintenance ? osc_esc_html(__('Disable maintenance mode'))
                                    : osc_esc_html(__('Enable maintenance mode'))); ?>"
                                onclick="window.location.href='<?php echo osc_admin_base_url(true); ?>?page=tools&amp;action=maintenance&amp;mode=<?php echo ($maintenance
-                                       ? 'off' : 'on') . "&amp;" . osc_csrf_token_url(); ?>';" class="btn btn-submit"/>
+                                       ? 'off' : 'on') . '&amp;' . osc_csrf_token_url(); ?>';" class="btn btn-submit"/>
                     </div>
                 </div>
             </fieldset>

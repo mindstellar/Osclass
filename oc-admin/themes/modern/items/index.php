@@ -371,7 +371,7 @@ osc_current_admin_theme_path('parts/header.php'); ?>
                     echo 'btn-red';
                                                                 } ?>"><?php _e('Show filters'); ?></a>
 
-                <?php $opt = "oPattern";
+                <?php $opt = 'oPattern';
                 if (Params::getParam('shortcut-filter') != '') {
                     $opt = Params::getParam('shortcut-filter');
                 } ?>
@@ -432,7 +432,7 @@ osc_current_admin_theme_path('parts/header.php'); ?>
                     <?php foreach ($columns as $k => $v) {
                         echo '<th class="col-' . $k . ' ' . ($sort == $k ? ($direction == 'desc' ? 'sorting_desc'
                                 : 'sorting_asc') : '') . '">' . $v . '</th>';
-                    }; ?>
+                    } ?>
                 </tr>
                 </thead>
                 <tbody>
@@ -442,9 +442,9 @@ osc_current_admin_theme_path('parts/header.php'); ?>
                             osc_apply_filter('datatable_listing_class', array(), $aRawRows[$key], $row)); ?>">
                             <?php foreach ($row as $k => $v) { ?>
                                 <td class="col-<?php echo $k; ?>"><?php echo $v; ?></td>
-                            <?php }; ?>
+                            <?php } ?>
                         </tr>
-                    <?php }; ?>
+                    <?php } ?>
                 <?php } else { ?>
                     <tr>
                         <td colspan="<?php echo count($columns); ?>" class="text-center">
@@ -461,7 +461,7 @@ osc_current_admin_theme_path('parts/header.php'); ?>
 <?php
 function showingResults()
 {
-    $aData = __get("aData");
+    $aData = __get('aData');
     echo '<ul class="showing-results"><li><span>' . osc_pagination_showing((Params::getParam('iPage') - 1)
             * $aData['iDisplayLength'] + 1,
             ((Params::getParam('iPage') - 1) * $aData['iDisplayLength']) + count($aData['aRows']),

@@ -26,7 +26,7 @@ class CAdminEmails extends AdminSecBaseModel
     //specific for this class
     private $emailManager;
 
-    function __construct()
+    public function __construct()
     {
         parent::__construct();
 
@@ -35,15 +35,15 @@ class CAdminEmails extends AdminSecBaseModel
     }
 
     //Business Layer...
-    function doModel()
+    public function doModel()
     {
         parent::doModel();
 
         //specific things for this class
         switch ($this->action) {
             case 'edit':
-                if (Params::getParam("id") == '') {
-                    $this->redirectTo(osc_admin_base_url(true) . "?page=emails");
+                if (Params::getParam('id') == '') {
+                    $this->redirectTo(osc_admin_base_url(true) . '?page=emails');
                 }
 
                 $form     = count(Session::newInstance()->_getForm());
@@ -52,13 +52,13 @@ class CAdminEmails extends AdminSecBaseModel
                     Session::newInstance()->_dropKeepForm();
                 }
 
-                $this->_exportVariableToView("email", $this->emailManager->findByPrimaryKey(Params::getParam("id")));
-                $this->doView("emails/frm.php");
+                $this->_exportVariableToView('email', $this->emailManager->findByPrimaryKey(Params::getParam('id')));
+                $this->doView('emails/frm.php');
                 break;
             case 'edit_post':
                 osc_csrf_check();
-                $id              = Params::getParam("id");
-                $s_internal_name = Params::getParam("s_internal_name");
+                $id              = Params::getParam('id');
+                $s_internal_name = Params::getParam('s_internal_name');
 
                 $aFieldsDescription = array();
                 $postParams         = Params::getParamsAsArray('', false);
@@ -67,7 +67,7 @@ class CAdminEmails extends AdminSecBaseModel
                     if (preg_match('|(.+?)#(.+)|', $k, $m)) {
                         if ($m[2] == 's_title' && $v != '') {
                             $not_empty = true;
-                        };
+                        }
                         $aFieldsDescription[$m[1]][$m[2]] = $v;
                     }
                 }
@@ -86,14 +86,14 @@ class CAdminEmails extends AdminSecBaseModel
                         }
                         Session::newInstance()->_clearVariables();
                         osc_add_flash_ok_message(_m('The email/alert has been updated'), 'admin');
-                        $this->redirectTo(osc_admin_base_url(true) . "?page=emails");
+                        $this->redirectTo(osc_admin_base_url(true) . '?page=emails');
                     }
                     osc_add_flash_error_message(_m('You can\'t repeat internal name'), 'admin');
                 } else {
                     osc_add_flash_error_message(_m('The email couldn\'t be updated, at least one title should not be empty'),
                         'admin');
                 }
-                $this->redirectTo(osc_admin_base_url(true) . "?page=emails&action=edit&id=" . $id);
+                $this->redirectTo(osc_admin_base_url(true) . '?page=emails&action=edit&id=' . $id);
                 break;
             default:
                 //-
@@ -135,7 +135,7 @@ class CAdminEmails extends AdminSecBaseModel
                     }
                     $options   = array();
                     $options[] = '<a href="' . osc_admin_base_url(true) . '?page=emails&amp;action=edit&amp;id='
-                        . $email["pk_i_id"] . '">' . __('Edit') . '</a>';
+                        . $email['pk_i_id'] . '">' . __('Edit') . '</a>';
 
                     $auxOptions = '<ul>' . PHP_EOL;
                     foreach ($options as $actual) {
@@ -174,7 +174,7 @@ class CAdminEmails extends AdminSecBaseModel
 
                 $this->_exportVariableToView('aEmails', $array);
 
-                $this->doView("emails/index.php");
+                $this->doView('emails/index.php');
         }
     }
 
@@ -185,12 +185,12 @@ class CAdminEmails extends AdminSecBaseModel
      *
      * @return mixed|void
      */
-    function doView($file)
+    public function doView($file)
     {
-        osc_run_hook("before_admin_html");
+        osc_run_hook('before_admin_html');
         osc_current_admin_theme_path($file);
         Session::newInstance()->_clearVariables();
-        osc_run_hook("after_admin_html");
+        osc_run_hook('after_admin_html');
     }
 }
 

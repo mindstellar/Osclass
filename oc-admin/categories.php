@@ -26,7 +26,7 @@ class CAdminCategories extends AdminSecBaseModel
     //specific for this class
     private $categoryManager;
 
-    function __construct()
+    public function __construct()
     {
         parent::__construct();
 
@@ -35,7 +35,7 @@ class CAdminCategories extends AdminSecBaseModel
     }
 
     //Business Layer...
-    function doModel()
+    public function doModel()
     {
         parent::doModel();
 
@@ -50,7 +50,7 @@ class CAdminCategories extends AdminSecBaseModel
                 $fields['b_price_enabled']   = 1;
 
                 $default_locale                                = osc_language();
-                $aFieldsDescription[$default_locale]['s_name'] = "NEW CATEGORY, EDIT ME!";
+                $aFieldsDescription[$default_locale]['s_name'] = 'NEW CATEGORY, EDIT ME!';
 
                 $categoryId = $this->categoryManager->insert($fields, $aFieldsDescription);
 
@@ -68,8 +68,8 @@ class CAdminCategories extends AdminSecBaseModel
                 $this->redirectTo(osc_admin_base_url(true) . '?page=categories');
                 break;
             default:                //
-                $this->_exportVariableToView("categories", $this->categoryManager->toTreeAll());
-                $this->doView("categories/index.php");
+                $this->_exportVariableToView('categories', $this->categoryManager->toTreeAll());
+                $this->doView('categories/index.php');
         }
     }
 
@@ -80,12 +80,12 @@ class CAdminCategories extends AdminSecBaseModel
      *
      * @return mixed|void
      */
-    function doView($file)
+    public function doView($file)
     {
-        osc_run_hook("before_admin_html");
+        osc_run_hook('before_admin_html');
         osc_current_admin_theme_path($file);
         Session::newInstance()->_clearVariables();
-        osc_run_hook("after_admin_html");
+        osc_run_hook('after_admin_html');
     }
 }
 

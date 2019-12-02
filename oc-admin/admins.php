@@ -26,7 +26,7 @@ class CAdminAdmins extends AdminSecBaseModel
     //specific for this class
     private $adminManager;
 
-    function __construct()
+    public function __construct()
     {
         parent::__construct();
 
@@ -45,7 +45,7 @@ class CAdminAdmins extends AdminSecBaseModel
     }
 
     //Business Layer...
-    function doModel()
+    public function doModel()
     {
         parent::doModel();
 
@@ -82,38 +82,38 @@ class CAdminAdmins extends AdminSecBaseModel
 
                 // Checks for legit data
                 if (!osc_validate_email($sEmail, true)) {
-                    osc_add_flash_warning_message(_m("Email invalid"), 'admin');
+                    osc_add_flash_warning_message(_m('Email invalid'), 'admin');
                     $this->redirectTo(osc_admin_base_url(true) . '?page=admins&action=add');
                 }
                 if (!osc_validate_username($sUserName)) {
-                    osc_add_flash_warning_message(_m("Username invalid"), 'admin');
+                    osc_add_flash_warning_message(_m('Username invalid'), 'admin');
                     $this->redirectTo(osc_admin_base_url(true) . '?page=admins&action=add');
                 }
                 if ($sName == '') {
-                    osc_add_flash_warning_message(_m("Name invalid"), 'admin');
+                    osc_add_flash_warning_message(_m('Name invalid'), 'admin');
                     $this->redirectTo(osc_admin_base_url(true) . '?page=admins&action=add');
                 }
                 if ($sPassword == '') {
-                    osc_add_flash_warning_message(_m("Password invalid"), 'admin');
+                    osc_add_flash_warning_message(_m('Password invalid'), 'admin');
                     $this->redirectTo(osc_admin_base_url(true) . '?page=admins&action=add');
                 }
                 $admin = $this->adminManager->findByEmail($sEmail);
                 if ($admin) {
-                    osc_add_flash_warning_message(_m("Email already in use"), 'admin');
+                    osc_add_flash_warning_message(_m('Email already in use'), 'admin');
                     $this->redirectTo(osc_admin_base_url(true) . '?page=admins&action=add');
                 }
                 $admin = $this->adminManager->findByUsername($sUserName);
                 if ($admin) {
-                    osc_add_flash_warning_message(_m("Username already in use"), 'admin');
+                    osc_add_flash_warning_message(_m('Username already in use'), 'admin');
                     $this->redirectTo(osc_admin_base_url(true) . '?page=admins&action=add');
                 }
 
 
                 $currentAdmin = $this->adminManager->findByPrimaryKey(osc_logged_admin_id());
-                if ($sCurrentPassword == "" || !isset($currentAdmin["s_password"]) || $currentAdmin["s_password"] == ""
+                if ($sCurrentPassword == '' || !isset($currentAdmin['s_password']) || $currentAdmin['s_password'] == ''
                     || !osc_verify_password($sCurrentPassword, $currentAdmin['s_password'])
                 ) {
-                    osc_add_flash_warning_message(_m("Incorrent current password"), 'admin');
+                    osc_add_flash_warning_message(_m('Incorrent current password'), 'admin');
                     $this->redirectTo(osc_admin_base_url(true) . '?page=admins&action=add');
                 }
 
@@ -158,7 +158,7 @@ class CAdminAdmins extends AdminSecBaseModel
                     $this->redirectTo(osc_admin_base_url(true) . '?page=admins');
                 }
 
-                $this->_exportVariableToView("admin", $adminEdit);
+                $this->_exportVariableToView('admin', $adminEdit);
                 $this->doView('admins/frm.php');
                 break;
             case('edit_post'):
@@ -193,15 +193,15 @@ class CAdminAdmins extends AdminSecBaseModel
 
                 // Checks for legit data
                 if (!osc_validate_email($sEmail, true)) {
-                    osc_add_flash_warning_message(_m("Email invalid"), 'admin');
+                    osc_add_flash_warning_message(_m('Email invalid'), 'admin');
                     $this->redirectTo(osc_admin_base_url(true) . '?page=admins&action=edit&id=' . $adminId);
                 }
                 if (!osc_validate_username($sUserName)) {
-                    osc_add_flash_warning_message(_m("Username invalid"), 'admin');
+                    osc_add_flash_warning_message(_m('Username invalid'), 'admin');
                     $this->redirectTo(osc_admin_base_url(true) . '?page=admins&action=edit&id=' . $adminId);
                 }
                 if ($sName == '') {
-                    osc_add_flash_warning_message(_m("Name invalid"), 'admin');
+                    osc_add_flash_warning_message(_m('Name invalid'), 'admin');
                     $this->redirectTo(osc_admin_base_url(true) . '?page=admins&action=edit&id=' . $adminId);
                 }
 
@@ -212,18 +212,14 @@ class CAdminAdmins extends AdminSecBaseModel
                     $this->redirectTo(osc_admin_base_url(true) . '?page=admins');
                 }
 
-                if ($aAdmin['s_email'] != $sEmail) {
-                    if ($this->adminManager->findByEmail($sEmail)) {
-                        osc_add_flash_warning_message(_m('Existing email'), 'admin');
-                        $this->redirectTo(osc_admin_base_url(true) . '?page=admins&action=edit&id=' . $adminId);
-                    }
+                if (($aAdmin['s_email'] != $sEmail) && $this->adminManager->findByEmail($sEmail)) {
+                    osc_add_flash_warning_message(_m('Existing email'), 'admin');
+                    $this->redirectTo(osc_admin_base_url(true) . '?page=admins&action=edit&id=' . $adminId);
                 }
 
-                if ($aAdmin['s_username'] != $sUserName) {
-                    if ($this->adminManager->findByUsername($sUserName)) {
-                        osc_add_flash_warning_message(_m('Existing username'), 'admin');
-                        $this->redirectTo(osc_admin_base_url(true) . '?page=admins&action=edit&id=' . $adminId);
-                    }
+                if (($aAdmin['s_username'] != $sUserName) && $this->adminManager->findByUsername($sUserName)) {
+                    osc_add_flash_warning_message(_m('Existing username'), 'admin');
+                    $this->redirectTo(osc_admin_base_url(true) . '?page=admins&action=edit&id=' . $adminId);
                 }
 
                 $conditions = array('pk_i_id' => $adminId);
@@ -241,10 +237,10 @@ class CAdminAdmins extends AdminSecBaseModel
 
 
                 $currentAdmin = $this->adminManager->findByPrimaryKey(osc_logged_admin_id());
-                if ($sOldPassword == "" || !isset($currentAdmin["s_password"]) || $currentAdmin["s_password"] == ""
+                if ($sOldPassword == '' || !isset($currentAdmin['s_password']) || $currentAdmin['s_password'] == ''
                     || !osc_verify_password($sOldPassword, $currentAdmin['s_password'])
                 ) {
-                    osc_add_flash_warning_message(_m("Incorrent current password"), 'admin');
+                    osc_add_flash_warning_message(_m('Incorrent current password'), 'admin');
                     $this->redirectTo(osc_admin_base_url(true) . '?page=admins&action=edit&id=' . $adminId);
                 }
 
@@ -303,8 +299,8 @@ class CAdminAdmins extends AdminSecBaseModel
                 break;
             default:
 
-                if (Params::getParam("action") != "") {
-                    osc_run_hook("admin_bulk_" . Params::getParam("action"), Params::getParam('id'));
+                if (Params::getParam('action') != '') {
+                    osc_run_hook('admin_bulk_' . Params::getParam('action'), Params::getParam('id'));
                 }
 
                 if (Params::getParam('iDisplayLength') == '') {
@@ -390,7 +386,7 @@ class CAdminAdmins extends AdminSecBaseModel
                         'label'               => __('Delete')
                     )
                 );
-                $bulk_options = osc_apply_filter("admin_bulk_filter", $bulk_options);
+                $bulk_options = osc_apply_filter('admin_bulk_filter', $bulk_options);
                 $this->_exportVariableToView('bulk_options', $bulk_options);
 
                 $this->_exportVariableToView('aAdmins', $array);
@@ -407,12 +403,12 @@ class CAdminAdmins extends AdminSecBaseModel
      *
      * @return mixed|void
      */
-    function doView($file)
+    public function doView($file)
     {
-        osc_run_hook("before_admin_html");
+        osc_run_hook('before_admin_html');
         osc_current_admin_theme_path($file);
         Session::newInstance()->_clearVariables();
-        osc_run_hook("after_admin_html");
+        osc_run_hook('after_admin_html');
     }
 }
 

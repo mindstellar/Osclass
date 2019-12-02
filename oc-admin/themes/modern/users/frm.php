@@ -86,7 +86,7 @@ function customHead()
     } else {
         UserForm::js_validation();
     } ?>
-    <?php UserForm::location_javascript("admin"); ?>
+    <?php UserForm::location_javascript('admin'); ?>
 
     <?php
 }
@@ -137,7 +137,7 @@ $aux = customFrmText();
 
         });
     </script>
-<?php }; ?>
+<?php } ?>
 <script type="text/javascript">
     $(document).ready(function () {
         $('form#register').validate({
@@ -148,7 +148,7 @@ $aux = customFrmText();
             },
             messages: {
                 s_username: {
-                    required: '<?php echo osc_esc_js(__("Username: this field is required", "modern")); ?>.'
+                    required: '<?php echo osc_esc_js(__('Username: this field is required', 'modern')); ?>.'
                 }
             },
             errorLabelContainer: "#error_list",
@@ -173,11 +173,11 @@ $aux = customFrmText();
                         function (data) {
                             clearInterval(cInterval);
                             if (data.exists == 0) {
-                                $("#available").text('<?php echo osc_esc_js(__("The username is available",
-                                    "modern")); ?>');
+                                $("#available").text('<?php echo osc_esc_js(__('The username is available',
+                                    'modern')); ?>');
                             } else {
-                                $("#available").text('<?php echo osc_esc_js(__("The username is NOT available",
-                                    "modern")); ?>');
+                                $("#available").text('<?php echo osc_esc_js(__('The username is NOT available',
+                                    'modern')); ?>');
                             }
                         }
                     );
@@ -229,11 +229,11 @@ $aux = customFrmText();
                         <div class="form-label"><?php _e('Last access'); ?></div>
                         <div class="form-controls">
                             <div class='form-label-checkbox'>
-                                <?php echo sprintf(__("%s on %s"), $user['s_access_ip'], $user['dt_access_date']); ?>
+                                <?php echo sprintf(__('%s on %s'), $user['s_access_ip'], $user['dt_access_date']); ?>
                             </div>
                         </div>
                     </div>
-                <?php }; ?>
+                <?php } ?>
                 <div class="form-row">
                     <div class="form-label"><?php _e('Name'); ?></div>
                     <div class="form-controls">
@@ -345,7 +345,7 @@ $aux = customFrmText();
                 } else {
                     osc_run_hook('user_profile_form', $user);
                     osc_run_hook('user_form', $user);
-                }; ?>
+                } ?>
 
                 <div class="clear"></div>
                 <div class="form-actions">
@@ -376,8 +376,8 @@ $aux = customFrmText();
                             <?php echo sprintf(__('Alert #%d'), ($k + 1)); ?>
                             <br/>
                             <?php if (isset($raw_data['sPattern']) && $raw_data['sPattern'] != '') { ?>
-                                <?php echo sprintf(__("<b>Pattern:</b> %s"), $raw_data['sPattern']); ?><br/>
-                            <?php }; ?>
+                                <?php echo sprintf(__('<b>Pattern:</b> %s'), $raw_data['sPattern']); ?><br/>
+                            <?php } ?>
 
                             <?php if (isset($raw_data['aCategories']) && !empty($raw_data['aCategories'])) {
                                 $l         = min(count($raw_data['aCategories']), 2);
@@ -387,38 +387,38 @@ $aux = customFrmText();
                                 }
                                 if (count($raw_data['aCategories']) > $l) {
                                     $cat_array[] =
-                                        '<a href="#" class="more-tooltip" categories="' . osc_esc_html(implode(", ",
-                                            $raw_data['aCategories'])) . '" >' . __("...More") . '</a>';
+                                        '<a href="#" class="more-tooltip" categories="' . osc_esc_html(implode(', ',
+                                            $raw_data['aCategories'])) . '" >' . __('...More') . '</a>';
                                 }
                                 ?>
-                                <?php echo sprintf(__("<b>Categories:</b> %s"), implode(", ", $cat_array)); ?><br/>
-                            <?php }; ?>
+                                <?php echo sprintf(__('<b>Categories:</b> %s'), implode(', ', $cat_array)); ?><br/>
+                            <?php } ?>
 
-                            <a href="javascript:delete_alert('<?php echo $aux['alerts'][$k]['pk_i_id']; ?>');"><?php _e("Delete"); ?></a>
+                            <a href="javascript:delete_alert('<?php echo $aux['alerts'][$k]['pk_i_id']; ?>');"><?php _e('Delete'); ?></a>
                             &nbsp;|&nbsp;
                             <?php if ($aux['alerts'][$k]['b_active'] == 1) { ?>
-                                <a href="<?php echo osc_admin_base_url(true) . "?page=users&action=status_alerts&id[]="
-                                    . $aux['alerts'][$k]['pk_i_id'] . "&status=0&user_id="
-                                    . $user['pk_i_id']; ?>"><?php _e("Disable"); ?></a>
+                                <a href="<?php echo osc_admin_base_url(true) . '?page=users&action=status_alerts&id[]='
+                                    . $aux['alerts'][$k]['pk_i_id'] . '&status=0&user_id='
+                                    . $user['pk_i_id']; ?>"><?php _e('Disable'); ?></a>
                             <?php } else { ?>
-                                <a href="<?php echo osc_admin_base_url(true) . "?page=users&action=status_alerts&id[]="
-                                    . $aux['alerts'][$k]['pk_i_id'] . "&status=1&user_id="
-                                    . $user['pk_i_id']; ?>"><?php _e("Enable"); ?></a>
-                            <?php }; ?>
+                                <a href="<?php echo osc_admin_base_url(true) . '?page=users&action=status_alerts&id[]='
+                                    . $aux['alerts'][$k]['pk_i_id'] . '&status=1&user_id='
+                                    . $user['pk_i_id']; ?>"><?php _e('Enable'); ?></a>
+                            <?php } ?>
                         </div>
                         <div class="form-controls">
                             <?php if (!empty($results)) {
                                 foreach ($results as $r) { ?>
                                     <label><b><?php echo $r['s_title']; ?></b></label>
                                     <p><?php echo $r['s_description']; ?></p>
-                                <?php };
+                                <?php }
                             } else { ?>
                                 <label>&nbsp;</label>
                                 <p>&nbsp;</p>
-                            <?php }; ?>
+                            <?php } ?>
                         </div>
                         <div class="clear"></div>
-                    <?php }; ?>
+                    <?php } ?>
                 </div>
                 <div class="clear"></div>
             </div>
@@ -447,6 +447,6 @@ $aux = customFrmText();
         </div>
     </form>
     <div id="more-tooltip"></div>
-<?php }; ?>
+<?php } ?>
 <!-- /add user form -->
 <?php osc_current_admin_theme_path('parts/footer.php'); ?>

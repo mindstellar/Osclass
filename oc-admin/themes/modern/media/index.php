@@ -150,7 +150,7 @@ $rows    = $aData['aRows'];
                     <?php foreach ($columns as $k => $v) {
                         echo '<th class="col-' . $k . ' ' . ($sort == $k ? ($direction == 'desc' ? 'sorting_desc'
                                 : 'sorting_asc') : '') . '">' . $v . '</th>';
-                    }; ?>
+                    } ?>
                 </tr>
                 </thead>
                 <tbody>
@@ -159,9 +159,9 @@ $rows    = $aData['aRows'];
                         <tr>
                             <?php foreach ($row as $k => $v) { ?>
                                 <td class="col-<?php echo $k; ?>"><?php echo $v; ?></td>
-                            <?php }; ?>
+                            <?php } ?>
                         </tr>
-                    <?php }; ?>
+                    <?php } ?>
                 <?php } else { ?>
                     <tr>
                         <td colspan="5" class="text-center">

@@ -29,7 +29,7 @@ class CAdminSettingsMain extends AdminSecBaseModel
                 osc_admin_toolbar_update_themes(true);
                 osc_admin_toolbar_update_plugins(true);
 
-                osc_add_flash_ok_message(_m('Last check') . ':   ' . date("Y-m-d H:i"), 'admin');
+                osc_add_flash_ok_message(_m('Last check') . ':   ' . date('Y-m-d H:i'), 'admin');
 
                 $this->redirectTo(osc_admin_base_url(true) . '?page=settings');
                 break;
@@ -72,19 +72,19 @@ class CAdminSettingsMain extends AdminSecBaseModel
 
                 $msg = '';
                 if (!osc_validate_text($sPageTitle)) {
-                    $msg .= _m("Page title field is required") . "<br/>";
+                    $msg .= _m('Page title field is required') . '<br/>';
                 }
                 if (!osc_validate_text($sContactEmail)) {
-                    $msg .= _m("Contact email field is required") . "<br/>";
+                    $msg .= _m('Contact email field is required') . '<br/>';
                 }
                 if (!osc_validate_int($sNumRssItems)) {
-                    $msg .= _m("Number of listings in the RSS has to be a numeric value") . "<br/>";
+                    $msg .= _m('Number of listings in the RSS has to be a numeric value') . '<br/>';
                 }
                 if (!osc_validate_int($maxLatestItems)) {
-                    $msg .= _m("Max latest listings has to be a numeric value") . "<br/>";
+                    $msg .= _m('Max latest listings has to be a numeric value') . '<br/>';
                 }
                 if (!osc_validate_int($numItemsSearch)) {
-                    $msg .= _m("Number of listings on search has to be a numeric value") . "<br/>";
+                    $msg .= _m('Number of listings on search has to be a numeric value') . '<br/>';
                 }
                 if ($msg) {
                     osc_add_flash_error_message($msg, 'admin');
@@ -117,7 +117,7 @@ class CAdminSettingsMain extends AdminSecBaseModel
                     $iUpdated += osc_set_preference('maxLatestItems@home', $maxLatestItems);
                 } else {
                     if ($error != '') {
-                        $error .= "</p><p>";
+                        $error .= '</p><p>';
                     }
                     $error .= _m('Number of recent listings displayed at home must be an integer');
                 }

@@ -120,8 +120,14 @@ osc_current_admin_theme_path('parts/header.php'); ?>
                 </div>
                 <div class="form-row">
                     <div class="form-controls">
-                        <div class="form-label-checkbox"><?php LanguageForm::enabled_input_checkbox($aLocale); ?><?php _e('Enabled for the public website'); ?></div>
-                        <div class="form-label-checkbox"><?php LanguageForm::enabled_bo_input_checkbox($aLocale); ?><?php _e('Enabled for the backoffice (oc-admin)'); ?></div>
+                        <div class="form-label-checkbox">
+                            <?php LanguageForm::enabled_input_checkbox($aLocale); ?>
+                            <?php _e('Enabled for the public website'); ?>
+                        </div>
+                        <div class="form-label-checkbox">
+                            <?php LanguageForm::enabled_bo_input_checkbox($aLocale); ?>
+                            <?php _e('Enabled for the backoffice (oc-admin)'); ?>
+                        </div>
                     </div>
                 </div>
             </div>

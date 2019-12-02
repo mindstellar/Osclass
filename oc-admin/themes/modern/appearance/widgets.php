@@ -19,7 +19,7 @@
 
 osc_enqueue_script('jquery-validate');
 
-$info = __get("info");
+$info = __get('info');
 
 function addHelp()
 {
@@ -136,9 +136,9 @@ osc_current_admin_theme_path('parts/header.php'); ?>
         <div class="grid-row grid-50">
             <div class="row-wrapper">
                 <div class="widget-box">
-                    <div class="widget-box-title"><h3><?php _("Current theme does not support widgets"); ?></h3></div>
+                    <div class="widget-box-title"><h3><?php _('Current theme does not support widgets'); ?></h3></div>
                     <div class="widget-box-content">
-                        <?php _e("Current theme does not support widgets"); ?>
+                        <?php _e('Current theme does not support widgets'); ?>
                     </div>
                 </div>
             </div>

@@ -157,9 +157,9 @@ function printLocaleTitle($locales = null, $item = null)
         $title = (isset($item) && isset($item['locale'][$locale['pk_c_code']])
             && isset($item['locale'][$locale['pk_c_code']]['s_title']))
             ? $item['locale'][$locale['pk_c_code']]['s_title'] : '';
-        if (Session::newInstance()->_getForm('title') != "") {
+        if (Session::newInstance()->_getForm('title') != '') {
             $title_ = Session::newInstance()->_getForm('title');
-            if ($title_[$locale['pk_c_code']] != "") {
+            if ($title_[$locale['pk_c_code']] != '') {
                 $title = $title_[$locale['pk_c_code']];
             }
         }
@@ -169,7 +169,7 @@ function printLocaleTitle($locales = null, $item = null)
         echo '<input id="' . $name . '" type="text" name="' . $name . '" value="' . osc_esc_html(htmlentities(
             $title,
             ENT_COMPAT,
-            "UTF-8"
+                'UTF-8'
         )) . '"  />';
         echo '</div>';
     }
@@ -185,7 +185,7 @@ function printLocaleTitlePage($locales = null, $page = null)
     if ($locales == null) {
         $locales = osc_get_locales();
     }
-    $aFieldsDescription = Session::newInstance()->_getForm("aFieldsDescription");
+    $aFieldsDescription = Session::newInstance()->_getForm('aFieldsDescription');
     $num_locales        = count($locales);
     echo '<label for="title">' . __('Title') . ' *</label>';
 
@@ -209,7 +209,7 @@ function printLocaleTitlePage($locales = null, $page = null)
         echo '<input id="' . $name . '" type="text" name="' . $name . '" value="' . osc_esc_html(htmlentities(
             $title,
             ENT_COMPAT,
-            "UTF-8"
+                'UTF-8'
         )) . '"  />';
         echo '</div>';
     }
@@ -237,9 +237,9 @@ function printLocaleDescription($locales = null, $item = null)
             && isset($item['locale'][$locale['pk_c_code']]['s_description']))
             ? $item['locale'][$locale['pk_c_code']]['s_description'] : '';
 
-        if (Session::newInstance()->_getForm('description') != "") {
+        if (Session::newInstance()->_getForm('description') != '') {
             $description_ = Session::newInstance()->_getForm('description');
-            if ($description_[$locale['pk_c_code']] != "") {
+            if ($description_[$locale['pk_c_code']] != '') {
                 $description = $description_[$locale['pk_c_code']];
             }
         }
@@ -260,7 +260,7 @@ function printLocaleDescriptionPage($locales = null, $page = null)
     if ($locales == null) {
         $locales = osc_get_locales();
     }
-    $aFieldsDescription = Session::newInstance()->_getForm("aFieldsDescription");
+    $aFieldsDescription = Session::newInstance()->_getForm('aFieldsDescription');
     $num_locales        = count($locales);
 
     foreach ($locales as $locale) {

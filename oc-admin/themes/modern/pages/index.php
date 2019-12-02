@@ -184,7 +184,7 @@ osc_current_admin_theme_path('parts/header.php');
                         <?php foreach ($columns as $k => $v) {
                             echo '<th class="col-' . $k . ' ' . ($sort == $k ? ($direction == 'desc' ? 'sorting_desc'
                                     : 'sorting_asc') : '') . '">' . $v . '</th>';
-                        }; ?>
+                        } ?>
                     </tr>
                     </thead>
                     <tbody>
@@ -193,9 +193,9 @@ osc_current_admin_theme_path('parts/header.php');
                             <tr>
                                 <?php foreach ($row as $k => $v) { ?>
                                     <td class="col-<?php echo $k; ?>"><?php echo $v; ?></td>
-                                <?php }; ?>
+                                <?php } ?>
                             </tr>
-                        <?php }; ?>
+                        <?php } ?>
                     <?php } else { ?>
                         <tr>
                             <td colspan="4" class="text-center">

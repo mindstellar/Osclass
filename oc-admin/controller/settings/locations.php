@@ -28,7 +28,7 @@ class CAdminSettingsLocations extends AdminSecBaseModel
      * @return bool|void
      * @throws \Exception
      */
-    function doModel()
+    public function doModel()
     {
         // calling the locations settings view
         $location_action = Params::getParam('type');
@@ -74,15 +74,18 @@ class CAdminSettingsLocations extends AdminSecBaseModel
                     $name = Params::getParam('e_country');
                     $slug = Params::getParam('e_country_slug');
                     if ($slug == '') {
-                        $slug_tmp = $slug = osc_sanitizeString($name);
+                        $slug     = osc_sanitizeString($name);
+                        $slug_tmp = $slug;
                     } else {
                         $exists = $mCountries->findBySlug($slug);
                         if (isset($exists['s_slug'])
                             && $exists['pk_c_code'] != Params::getParam('country_code')
                         ) {
-                            $slug_tmp = $slug = osc_sanitizeString($name);
+                            $slug     = osc_sanitizeString($name);
+                            $slug_tmp = $slug;
                         } else {
-                            $slug_tmp = $slug = osc_sanitizeString($slug);
+                            $slug     = osc_sanitizeString($slug);
+                            $slug_tmp = $slug;
                         }
                     }
                     $slug_unique = 1;
@@ -179,7 +182,7 @@ class CAdminSettingsLocations extends AdminSecBaseModel
                 osc_calculate_location_slug('region');
                 osc_calculate_location_slug('city');
                 $this->redirectTo(osc_admin_base_url(true)
-                    . '?page=settings&action=locations&country_code=' . @$countryCode . "&country="
+                    . '?page=settings&action=locations&country_code=' . @$countryCode . '&country='
                     . @$country['s_name']);
                 break;
             case('edit_region'):    // edit region
@@ -206,13 +209,16 @@ class CAdminSettingsLocations extends AdminSecBaseModel
                             $name = $newRegion;
                             $slug = Params::getParam('e_region_slug');
                             if ($slug == '') {
-                                $slug_tmp = $slug = osc_sanitizeString($name);
+                                $slug     = osc_sanitizeString($name);
+                                $slug_tmp = $slug;
                             } else {
                                 $exists = $mRegions->findBySlug($slug);
                                 if (isset($exists['s_slug']) && $exists['pk_i_id'] != $regionId) {
-                                    $slug_tmp = $slug = osc_sanitizeString($name);
+                                    $slug     = osc_sanitizeString($name);
+                                    $slug_tmp = $slug;
                                 } else {
-                                    $slug_tmp = $slug = osc_sanitizeString($slug);
+                                    $slug     = osc_sanitizeString($slug);
+                                    $slug_tmp = $slug;
                                 }
                             }
                             $slug_unique = 1;
@@ -244,7 +250,7 @@ class CAdminSettingsLocations extends AdminSecBaseModel
                 }
                 $this->redirectTo(osc_admin_base_url(true)
                     . '?page=settings&action=locations&country_code=' . @$country['pk_c_code']
-                    . "&country=" . @$country['s_name']);
+                    . '&country=' . @$country['s_name']);
                 break;
             case('delete_region'):  // delete region
                 if (defined('DEMO')) {
@@ -286,7 +292,7 @@ class CAdminSettingsLocations extends AdminSecBaseModel
                 }
                 $this->redirectTo(osc_admin_base_url(true)
                     . '?page=settings&action=locations&country_code=' . @$country['pk_c_code']
-                    . "&country=" . @$country['s_name']);
+                    . '&country=' . @$country['s_name']);
                 break;
             case('add_city'):       // add city
                 if (defined('DEMO')) {
@@ -328,7 +334,7 @@ class CAdminSettingsLocations extends AdminSecBaseModel
                 osc_calculate_location_slug('city');
                 $this->redirectTo(osc_admin_base_url(true)
                     . '?page=settings&action=locations&country_code=' . @$country['pk_c_code']
-                    . "&country=" . @$country['s_name'] . "&region=" . $regionId);
+                    . '&country=' . @$country['s_name'] . '&region=' . $regionId);
                 break;
             case('edit_city'):      // edit city
                 if (defined('DEMO')) {
@@ -354,13 +360,16 @@ class CAdminSettingsLocations extends AdminSecBaseModel
                         $name = $newCity;
                         $slug = Params::getParam('e_country_slug');
                         if ($slug == '') {
-                            $slug_tmp = $slug = osc_sanitizeString($name);
+                            $slug     = osc_sanitizeString($name);
+                            $slug_tmp = $slug;
                         } else {
                             $exists = $mCities->findBySlug($slug);
                             if (isset($exists['s_slug']) && $exists['pk_i_id'] != $cityId) {
-                                $slug_tmp = $slug = osc_sanitizeString($name);
+                                $slug     = osc_sanitizeString($name);
+                                $slug_tmp = $slug;
                             } else {
-                                $slug_tmp = $slug = osc_sanitizeString($slug);
+                                $slug     = osc_sanitizeString($slug);
+                                $slug_tmp = $slug;
                             }
                         }
                         $slug_unique = 1;
@@ -391,7 +400,7 @@ class CAdminSettingsLocations extends AdminSecBaseModel
                 }
                 $this->redirectTo(osc_admin_base_url(true)
                     . '?page=settings&action=locations&country_code=' . @$country['pk_c_code']
-                    . "&country=" . @$country['s_name'] . "&region=" . @$region['pk_i_id']);
+                    . '&country=' . @$country['s_name'] . '&region=' . @$region['pk_i_id']);
                 break;
             case('delete_city'):    // delete city
                 if (defined('DEMO')) {
@@ -432,7 +441,7 @@ class CAdminSettingsLocations extends AdminSecBaseModel
                 }
                 $this->redirectTo(osc_admin_base_url(true)
                     . '?page=settings&action=locations&country_code=' . @$country['pk_c_code']
-                    . "&country=" . @$country['s_name'] . "&region=" . @$region['pk_i_id']);
+                    . '&country=' . @$country['s_name'] . '&region=' . @$region['pk_i_id']);
                 break;
             case('locations_import'): // import locations
                 if (defined('DEMO')) {

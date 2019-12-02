@@ -24,13 +24,13 @@ $comment = __get('comment');
 
 if (isset($comment['pk_i_id'])) {
     //editing...
-    $title      = __("Edit comment");
-    $action_frm = "comment_edit_post";
-    $btn_text   = osc_esc_html(__("Update comment"));
+    $title      = __('Edit comment');
+    $action_frm = 'comment_edit_post';
+    $btn_text   = osc_esc_html(__('Update comment'));
 } else {
     //adding...
-    $title      = __("Add comment");
-    $action_frm = "add_comment_post";
+    $title      = __('Add comment');
+    $action_frm = 'add_comment_post';
     $btn_text   = osc_esc_html(__('Add'));
 }
 
@@ -89,7 +89,7 @@ $comment = __get('comment');
                     <div class="form-controls">
                         <?php CommentForm::author_input_text($comment); ?>
                         <?php if (isset($comment['fk_i_user_id']) && $comment['fk_i_user_id'] != '') {
-                            _e("Registered user"); ?>
+                            _e('Registered user'); ?>
                             <a href="<?php echo osc_admin_base_url(true); ?>?page=users&action=edit&id=<?php echo $comment['fk_i_user_id']; ?>"><?php _e('Edit user'); ?></a>
                         <?php } ?>
                     </div>

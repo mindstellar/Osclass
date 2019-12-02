@@ -24,7 +24,7 @@
 class CAdminSettingsMailserver extends AdminSecBaseModel
 {
     //Business Layer...
-    function doModel()
+    public function doModel()
     {
         switch ($this->action) {
             case('mailserver'):

@@ -65,11 +65,7 @@ function customHead()
             $("#check_all").change(function () {
                 var isChecked = $(this).prop("checked");
                 $('.col-bulkactions input').each(function () {
-                    if (isChecked == 1) {
-                        this.checked = true;
-                    } else {
-                        this.checked = false;
-                    }
+                    this.checked = isChecked == 1;
                 });
             });
 
@@ -160,8 +156,11 @@ osc_current_admin_theme_path('parts/header.php'); ?>
                     <select id="bulk_actions" name="bulk_actions" class="select-box-extra">
                         <option value=""><?php _e('Bulk actions'); ?></option>
                         <option value="delete_all"
-                                data-dialog-content="<?php printf(__('Are you sure you want to %s the selected currencies?'),
-                                    strtolower(__('Delete'))); ?>"><?php _e('Delete'); ?></option>
+                                data-dialog-content="<?php printf(
+                                    __('Are you sure you want to %s the selected currencies?'),
+                                    strtolower(__('Delete'))
+                                ); ?>"><?php _e('Delete'); ?>
+                        </option>
                     </select> <input type="submit" id="bulk_apply" class="btn"
                                      value="<?php echo osc_esc_html(__('Apply')); ?>"/>
                 </label>

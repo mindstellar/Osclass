@@ -23,21 +23,21 @@
  */
 class CAdminPlugins extends AdminSecBaseModel
 {
-    function __construct()
+    public function __construct()
     {
         parent::__construct();
         //specific things for this class
     }
 
     // Business layer...
-    function doModel()
+    public function doModel()
     {
         parent::doModel();
 
         //specific things for this class
         switch ($this->action) {
             case 'add':
-                $this->doView("plugins/add.php");
+                $this->doView('plugins/add.php');
                 break;
             case 'add_post':
                 if (defined('DEMO')) {
@@ -46,7 +46,7 @@ class CAdminPlugins extends AdminSecBaseModel
                 }
                 osc_csrf_check();
 
-                $package = Params::getFiles("package");
+                $package = Params::getFiles('package');
                 if (isset($package['size']) && $package['size'] != 0) {
                     $path = osc_plugins_path();
                     (int)$status = osc_unzip_file($package['tmp_name'], $path);
@@ -70,7 +70,7 @@ class CAdminPlugins extends AdminSecBaseModel
                     case(3):
                         $msg = _m('No file was uploaded');
                         osc_add_flash_error_message($msg, 'admin');
-                        $this->redirectTo(osc_admin_base_url(true) . "?page=plugins&action=add");
+                        $this->redirectTo(osc_admin_base_url(true) . '?page=plugins&action=add');
                         break;
                     case(-1):
                     default:
@@ -79,7 +79,7 @@ class CAdminPlugins extends AdminSecBaseModel
                         break;
                 }
 
-                $this->redirectTo(osc_admin_base_url(true) . "?page=plugins");
+                $this->redirectTo(osc_admin_base_url(true) . '?page=plugins');
                 break;
             case 'install':
                 if (defined('DEMO')) {
@@ -90,7 +90,7 @@ class CAdminPlugins extends AdminSecBaseModel
                 $pn = Params::getParam('plugin');
 
                 // set header just in case it's triggered some fatal error
-                header("Location: " . osc_admin_base_url(true) . "?page=plugins&error=" . $pn, true, '302');
+                header('Location: ' . osc_admin_base_url(true) . '?page=plugins&error=' . $pn, true, '302');
 
                 $installed = Plugins::install($pn);
                 if (is_array($installed)) {
@@ -127,7 +127,7 @@ class CAdminPlugins extends AdminSecBaseModel
                 }
                 osc_csrf_check();
 
-                if (Plugins::uninstall(Params::getParam("plugin"))) {
+                if (Plugins::uninstall(Params::getParam('plugin'))) {
                     osc_add_flash_ok_message(_m('Plugin uninstalled'), 'admin');
                 } else {
                     osc_add_flash_error_message(_m("Plugin couldn't be uninstalled"), 'admin');
@@ -166,8 +166,8 @@ class CAdminPlugins extends AdminSecBaseModel
                 $this->redirectTo(osc_admin_base_url(true) . '?page=plugins');
                 break;
             case 'admin':
-                $plugin = Params::getParam("plugin");
-                if ($plugin != "") {
+                $plugin = Params::getParam('plugin');
+                if ($plugin != '') {
                     osc_run_hook($plugin . '_configure');
                 }
                 break;
@@ -197,39 +197,39 @@ class CAdminPlugins extends AdminSecBaseModel
                         }
                     } else {
                         $file = Params::getParam('file');
-                    };
+                    }
                 }
                 osc_run_hook('renderplugin_controller');
-                if (stripos($file, '../') === false && stripos($file, '..\\') === false && $file != "") {
-                    $this->_exportVariableToView("file", osc_plugins_path() . $file);
-                    $this->doView("plugins/view.php");
+                if (stripos($file, '../') === false && stripos($file, '..\\') === false && $file != '') {
+                    $this->_exportVariableToView('file', osc_plugins_path() . $file);
+                    $this->doView('plugins/view.php');
                 }
                 break;
             case 'configure':
-                $plugin = Params::getParam("plugin");
+                $plugin = Params::getParam('plugin');
                 if ($plugin != '') {
                     $plugin_data = Plugins::getInfo($plugin);
-                    $this->_exportVariableToView("categories", Category::newInstance()->toTreeAll());
-                    $this->_exportVariableToView("selected",
+                    $this->_exportVariableToView('categories', Category::newInstance()->toTreeAll());
+                    $this->_exportVariableToView('selected',
                         PluginCategory::newInstance()->listSelected($plugin_data['short_name']));
-                    $this->_exportVariableToView("plugin_data", $plugin_data);
-                    $this->doView("plugins/configuration.php");
+                    $this->_exportVariableToView('plugin_data', $plugin_data);
+                    $this->doView('plugins/configuration.php');
                 } else {
-                    $this->redirectTo(osc_admin_base_url(true) . "?page=plugins");
+                    $this->redirectTo(osc_admin_base_url(true) . '?page=plugins');
                 }
                 break;
             case 'configure_post':
                 osc_csrf_check();
-                $plugin_short_name = Params::getParam("plugin_short_name");
-                $categories        = Params::getParam("categories");
-                if ($plugin_short_name != "") {
+                $plugin_short_name = Params::getParam('plugin_short_name');
+                $categories        = Params::getParam('categories');
+                if ($plugin_short_name != '') {
                     Plugins::cleanCategoryFromPlugin($plugin_short_name);
                     if (isset($categories)) {
                         Plugins::addToCategoryPlugin($categories, $plugin_short_name);
                     }
                     osc_run_hook('plugin_categories_' . Params::getParam('plugin'), $categories);
                     osc_add_flash_ok_message(_m('Configuration was saved'), 'admin');
-                    $this->redirectTo(osc_admin_base_url(true) . "?page=plugins");
+                    $this->redirectTo(osc_admin_base_url(true) . '?page=plugins');
                 }
 
                 osc_add_flash_error_message(_m('No plugin selected'), 'admin');
@@ -237,18 +237,18 @@ class CAdminPlugins extends AdminSecBaseModel
                 break;
             case 'delete':
                 osc_csrf_check();
-                $plugin = str_replace('/index.php', '', Params::getParam("plugin"));
+                $plugin = str_replace('/index.php', '', Params::getParam('plugin'));
                 $path   = preg_replace('([\/]+)', '/', CONTENT_PATH . 'plugins/' . $plugin);
-                if ($plugin != "" && strpos($plugin, '../') === false && strpos($plugin, '..\\') === false
+                if ($plugin != '' && strpos($plugin, '../') === false && strpos($plugin, '..\\') === false
                     && $path != CONTENT_PATH . 'plugins/'
                 ) {
                     if (osc_deleteDir($path)) {
                         osc_add_flash_ok_message(_m('The files were deleted'), 'admin');
                     } else {
                         osc_add_flash_error_message(sprintf(_m('There were an error deleting the files, please check the permissions of the files in %s'),
-                            $path . "/"), 'admin');
+                            $path . '/'), 'admin');
                     }
-                    $this->redirectTo(osc_admin_base_url(true) . "?page=plugins");
+                    $this->redirectTo(osc_admin_base_url(true) . '?page=plugins');
                 }
 
                 osc_add_flash_error_message(_m('No plugin selected'), 'admin');
@@ -259,7 +259,7 @@ class CAdminPlugins extends AdminSecBaseModel
                 $plugin = Params::getParam('plugin');
                 if (strpos($plugin, '../') !== false || strpos($plugin, '..\\') !== false) {
                     osc_add_flash_error_message(_m('Invalid plugin file'), 'admin');
-                    $this->redirectTo(osc_admin_base_url(true) . "?page=plugins");
+                    $this->redirectTo(osc_admin_base_url(true) . '?page=plugins');
                 }
                 if (!OSC_DEBUG) {
                     error_reporting(E_ALL | E_STRICT);
@@ -326,19 +326,17 @@ class CAdminPlugins extends AdminSecBaseModel
                     // prepare row 2
                     $sUpdate = '';
                     // get plugins to update from t_preference
-                    if ($bPluginsToUpdate) {
-                        if (in_array(@$pInfo['plugin_update_uri'], $aPluginsToUpdate)) {
-                            $sUpdate = '<a class="market_update market-popup" href="#'
-                                . htmlentities($pInfo['plugin_update_uri']) . '">'
-                                . __("There's a new update available") . '</a>';
-                        }
+                    if ($bPluginsToUpdate && in_array(@$pInfo['plugin_update_uri'], $aPluginsToUpdate)) {
+                        $sUpdate = '<a class="market_update market-popup" href="#'
+                            . htmlentities($pInfo['plugin_update_uri']) . '">'
+                            . __("There's a new update available") . '</a>';
                     }
                     // prepare row 4
                     $sConfigure = '';
                     if (isset($active_plugins[$plugin . '_configure'])) {
                         $sConfigure =
                             '<a href="' . osc_admin_base_url(true) . '?page=plugins&amp;action=admin&amp;plugin='
-                            . $pInfo['filename'] . "&amp;" . osc_csrf_token_url() . '">' . __('Configure') . '</a>';
+                            . $pInfo['filename'] . '&amp;' . osc_csrf_token_url() . '">' . __('Configure') . '</a>';
                     }
                     // prepare row 5
                     $sEnable = '';
@@ -346,23 +344,23 @@ class CAdminPlugins extends AdminSecBaseModel
                         if ($enabled) {
                             $sEnable =
                                 '<a href="' . osc_admin_base_url(true) . '?page=plugins&amp;action=disable&amp;plugin='
-                                . $pInfo['filename'] . "&amp;" . osc_csrf_token_url() . '">' . __('Disable') . '</a>';
+                                . $pInfo['filename'] . '&amp;' . osc_csrf_token_url() . '">' . __('Disable') . '</a>';
                         } else {
                             $sEnable =
                                 '<a href="' . osc_admin_base_url(true) . '?page=plugins&amp;action=enable&amp;plugin='
-                                . $pInfo['filename'] . "&amp;" . osc_csrf_token_url() . '">' . __('Enable') . '</a>';
+                                . $pInfo['filename'] . '&amp;' . osc_csrf_token_url() . '">' . __('Enable') . '</a>';
                         }
                     }
                     // prepare row 6
                     if ($installed) {
                         $sInstall = '<a onclick="javascript:return uninstall_dialog(\'' . $pInfo['filename'] . '\', \''
                             . $pInfo['plugin_name'] . '\');" href="' . osc_admin_base_url(true)
-                            . '?page=plugins&amp;action=uninstall&amp;plugin=' . $pInfo['filename'] . "&amp;"
+                            . '?page=plugins&amp;action=uninstall&amp;plugin=' . $pInfo['filename'] . '&amp;'
                             . osc_csrf_token_url() . '">' . __('Uninstall') . '</a>';
                     } else {
                         $sInstall =
                             '<a href="' . osc_admin_base_url(true) . '?page=plugins&amp;action=install&amp;plugin='
-                            . $pInfo['filename'] . "&amp;" . osc_csrf_token_url() . '">' . __('Install') . '</a>';
+                            . $pInfo['filename'] . '&amp;' . osc_csrf_token_url() . '">' . __('Install') . '</a>';
                     }
                     $sDelete = '';
                     if (!$installed) {
@@ -436,7 +434,7 @@ class CAdminPlugins extends AdminSecBaseModel
 
 
                 $this->_exportVariableToView('aPlugins', $array);
-                $this->doView("plugins/index.php");
+                $this->doView('plugins/index.php');
                 break;
         }
     }
@@ -448,12 +446,12 @@ class CAdminPlugins extends AdminSecBaseModel
      *
      * @return mixed|void
      */
-    function doView($file)
+    public function doView($file)
     {
-        osc_run_hook("before_admin_html");
+        osc_run_hook('before_admin_html');
         osc_current_admin_theme_path($file);
         Session::newInstance()->_clearVariables();
-        osc_run_hook("after_admin_html");
+        osc_run_hook('after_admin_html');
     }
 }
 

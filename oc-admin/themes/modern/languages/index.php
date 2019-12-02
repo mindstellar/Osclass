@@ -20,7 +20,8 @@
 function addHelp()
 {
     echo '<p>'
-        . __("Add, edit or delete the language in which your Osclass is displayed, both the part that's viewable by users and the admin panel.")
+        . __("Add, edit or delete the language in which your Osclass is displayed, "
+            ."both the part that's viewable by users and the admin panel.")
         . '</p>';
 }
 

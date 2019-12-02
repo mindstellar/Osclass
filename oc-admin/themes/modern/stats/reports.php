@@ -17,7 +17,7 @@
  * limitations under the License.
  */
 
-$reports = __get("reports");
+$reports = __get('reports');
 $type    = Params::getParam('type_stat');
 switch ($type) {
     case 'week':
@@ -75,7 +75,7 @@ osc_add_filter('admin_title', 'customPageTitle');
 
 function customHead()
 {
-    $reports = __get("reports");
+    $reports = __get('reports');
     ?>
     <script type="text/javascript" src="https://www.google.com/jsapi"></script>
     <?php if (count($reports) > 0) { ?>
@@ -98,14 +98,14 @@ function customHead()
             data.addColumn('number', '<?php echo osc_esc_js(__('Offensive')); ?>');
             data.addColumn('number', '<?php echo osc_esc_js(__('Expired')); ?>');
             <?php $k = 0;
-            echo "data.addRows(" . count($reports) . ");";
+            echo 'data.addRows(' . count($reports) . ');';
             foreach ($reports as $date => $data) {
-                echo "data.setValue(" . $k . ', 0, "' . $date . '");';
-                echo "data.setValue(" . $k . ", 1, " . $data['spam'] . ");";
-                echo "data.setValue(" . $k . ", 2, " . $data['repeated'] . ");";
-                echo "data.setValue(" . $k . ", 3, " . $data['bad_classified'] . ");";
-                echo "data.setValue(" . $k . ", 4, " . $data['offensive'] . ");";
-                echo "data.setValue(" . $k . ", 5, " . $data['expired'] . ");";
+                echo 'data.setValue(' . $k . ', 0, "' . $date . '");';
+                echo 'data.setValue(' . $k . ', 1, ' . $data['spam'] . ');';
+                echo 'data.setValue(' . $k . ', 2, ' . $data['repeated'] . ');';
+                echo 'data.setValue(' . $k . ', 3, ' . $data['bad_classified'] . ');';
+                echo 'data.setValue(' . $k . ', 4, ' . $data['offensive'] . ');';
+                echo 'data.setValue(' . $k . ', 5, ' . $data['expired'] . ');';
                 $k++;
             }
             ?>
@@ -189,7 +189,7 @@ osc_add_hook('admin_header', 'customHead', 10);
                         <b class="stats-title"></b>
                         <div id="placeholder" class="graph-placeholder" style="height:150px">
                             <?php if (count($reports) == 0) {
-                                _e("There are no statistics yet");
+                                _e('There are no statistics yet');
                             } ?>
                         </div>
                     </div>

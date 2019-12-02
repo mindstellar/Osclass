@@ -20,7 +20,7 @@
 function addHelp()
 {
     echo '<p>'
-        . __("Manage the options related to users on your site. Here, you can decide if users must register or if email confirmation is necessary, among other options.")
+        . __('Manage the options related to users on your site. Here, you can decide if users must register or if email confirmation is necessary, among other options.')
         . '</p>';
 }
 

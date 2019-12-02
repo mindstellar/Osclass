@@ -346,7 +346,7 @@ $withFilters = __get('withFilters');
                         <?php foreach ($columns as $k => $v) {
                             echo '<th class="col-' . $k . ' ' . ($sort == $k ? ($direction == 'desc' ? 'sorting_desc'
                                     : 'sorting_asc') : '') . '">' . $v . '</th>';
-                        }; ?>
+                        } ?>
                     </tr>
                     </thead>
                     <tbody>
@@ -356,9 +356,9 @@ $withFilters = __get('withFilters');
                                 osc_apply_filter('datatable_user_class', array(), $aRawRows[$key], $row)); ?>">
                                 <?php foreach ($row as $k => $v) { ?>
                                     <td class="col-<?php echo $k; ?>"><?php echo $v; ?></td>
-                                <?php }; ?>
+                                <?php } ?>
                             </tr>
-                        <?php }; ?>
+                        <?php } ?>
                     <?php } else { ?>
                         <tr>
                             <td colspan="9" class="text-center">
@@ -375,7 +375,7 @@ $withFilters = __get('withFilters');
 <?php
 function showingResults()
 {
-    $aData = __get("aData");
+    $aData = __get('aData');
     echo '<ul class="showing-results"><li><span>' . osc_pagination_showing((Params::getParam('iPage') - 1)
             * $aData['iDisplayLength'] + 1,
             ((Params::getParam('iPage') - 1) * $aData['iDisplayLength']) + count($aData['aRows']),

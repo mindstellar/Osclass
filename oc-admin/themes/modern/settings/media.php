@@ -60,20 +60,20 @@ function customHead()
                 },
                 messages: {
                     dimThumbnail: {
-                        required: '<?php echo osc_esc_js(__("Thumbnail size: this field is required")); ?>',
-                        regexp: '<?php echo osc_esc_js(__("Thumbnail size: is not in the correct format")); ?>'
+                        required: '<?php echo osc_esc_js(__('Thumbnail size: this field is required')); ?>',
+                        regexp: '<?php echo osc_esc_js(__('Thumbnail size: is not in the correct format')); ?>'
                     },
                     dimPreview: {
-                        required: '<?php echo osc_esc_js(__("Preview size: this field is required")); ?>',
-                        regexp: '<?php echo osc_esc_js(__("Preview size: is not in the correct format")); ?>'
+                        required: '<?php echo osc_esc_js(__('Preview size: this field is required')); ?>',
+                        regexp: '<?php echo osc_esc_js(__('Preview size: is not in the correct format')); ?>'
                     },
                     dimNormal: {
-                        required: '<?php echo osc_esc_js(__("Normal size: this field is required")); ?>',
-                        regexp: '<?php echo osc_esc_js(__("Normal size: is not in the correct format")); ?>'
+                        required: '<?php echo osc_esc_js(__('Normal size: this field is required')); ?>',
+                        regexp: '<?php echo osc_esc_js(__('Normal size: is not in the correct format')); ?>'
                     },
                     maxSizeKb: {
-                        required: '<?php echo osc_esc_js(__("Maximum size: this field is required")); ?>',
-                        digits: '<?php echo osc_esc_js(__("Maximum size: this field must only contain numeric characters")); ?>'
+                        required: '<?php echo osc_esc_js(__('Maximum size: this field is required')); ?>',
+                        digits: '<?php echo osc_esc_js(__('Maximum size: this field must only contain numeric characters')); ?>'
                     }
                 },
                 wrapper: "li",
@@ -358,9 +358,9 @@ osc_current_admin_theme_path('parts/header.php'); ?>
                             <?php if (osc_is_watermark_image() != '') { ?>
                                 <div class="help-box"><img width="100px"
                                                            src="<?php echo osc_base_url() . str_replace(osc_base_path(),
-                                                                   '', osc_uploads_path()) . "watermark.png" ?>"/></div>
-                            <?php }; ?>
-                            <div class="help-box"><?php _e("It has to be a .PNG image"); ?></div>
+                                                                   '', osc_uploads_path()) . 'watermark.png' ?>"/></div>
+                            <?php } ?>
+                            <div class="help-box"><?php _e('It has to be a .PNG image'); ?></div>
                             <div class="help-box"><?php _e("Osclass doesn't check the watermark image size"); ?></div>
                         </div>
                     </div>
@@ -386,7 +386,7 @@ osc_current_admin_theme_path('parts/header.php'); ?>
                 <div class="form-row">
                     <div class="form-controls">
                         <p>
-                            <?php _e("You can regenerate different image dimensions. If you have changed the dimension of thumbnails, preview or normal images, you might want to regenerate your images."); ?>
+                            <?php _e('You can regenerate different image dimensions. If you have changed the dimension of thumbnails, preview or normal images, you might want to regenerate your images.'); ?>
                         </p>
                         <a class="btn"
                            href="<?php echo osc_admin_base_url(true) . '?page=settings&action=images_post' . '&'

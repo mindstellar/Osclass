@@ -24,7 +24,7 @@
 class CAdminSettingsCurrencies extends AdminSecBaseModel
 {
     //Business Layer...
-    function doModel()
+    public function doModel()
     {
         switch (Params::getParam('type')) {
             case('add'):

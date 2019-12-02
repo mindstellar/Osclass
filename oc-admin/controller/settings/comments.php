@@ -24,7 +24,7 @@
 class CAdminSettingsComments extends AdminSecBaseModel
 {
     //Business Layer...
-    function doModel()
+    public function doModel()
     {
         switch ($this->action) {
             case('comments'):
@@ -49,11 +49,11 @@ class CAdminSettingsComments extends AdminSecBaseModel
                 $regUserPostComments  = (($regUserPostComments != '') ? true : false);
 
                 $msg = '';
-                if (!osc_validate_int(Params::getParam("num_moderate_comments"))) {
-                    $msg .= _m("Number of moderate comments must only contain numeric characters") . "<br/>";
+                if (!osc_validate_int(Params::getParam('num_moderate_comments'))) {
+                    $msg .= _m('Number of moderate comments must only contain numeric characters') . '<br/>';
                 }
-                if (!osc_validate_int(Params::getParam("comments_per_page"))) {
-                    $msg .= _m("Comments per page must only contain numeric characters") . "<br/>";
+                if (!osc_validate_int(Params::getParam('comments_per_page'))) {
+                    $msg .= _m('Comments per page must only contain numeric characters') . '<br/>';
                 }
                 if ($msg != '') {
                     osc_add_flash_error_message($msg, 'admin');
@@ -73,7 +73,7 @@ class CAdminSettingsComments extends AdminSecBaseModel
                 $iUpdated += osc_set_preference('reg_user_post_comments', $regUserPostComments);
 
                 if ($iUpdated > 0) {
-                    osc_add_flash_ok_message(_m("Comment settings have been updated"), 'admin');
+                    osc_add_flash_ok_message(_m('Comment settings have been updated'), 'admin');
                 }
                 $this->redirectTo(osc_admin_base_url(true) . '?page=settings&action=comments');
                 break;

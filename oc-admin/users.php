@@ -26,7 +26,7 @@ class CAdminUsers extends AdminSecBaseModel
     //specific for this class
     private $userManager;
 
-    function __construct()
+    public function __construct()
     {
         parent::__construct();
 
@@ -35,7 +35,7 @@ class CAdminUsers extends AdminSecBaseModel
     }
 
     //Business Layer...
-    function doModel()
+    public function doModel()
     {
         parent::doModel();
 
@@ -61,7 +61,7 @@ class CAdminUsers extends AdminSecBaseModel
                 $this->_exportVariableToView('cities', $aCities);
                 $this->_exportVariableToView('locales', OSCLocale::newInstance()->listAllEnabled());
 
-                $this->doView("users/frm.php");
+                $this->doView('users/frm.php');
                 break;
             case('create_post'):    // creating the user...
                 osc_csrf_check();
@@ -84,7 +84,7 @@ class CAdminUsers extends AdminSecBaseModel
                 $this->redirectTo(osc_admin_base_url(true) . '?page=users');
                 break;
             case('edit'):           // calling the edit view
-                $aUser      = $this->userManager->findByPrimaryKey(Params::getParam("id"));
+                $aUser      = $this->userManager->findByPrimaryKey(Params::getParam('id'));
                 $aCountries = Country::newInstance()->listAll();
                 $aRegions   = array();
                 if ($aUser['fk_c_country_code'] != '') {
@@ -125,19 +125,19 @@ class CAdminUsers extends AdminSecBaseModel
                             $aInfo['fk_c_locale_code']);
                 }
 
-                $this->_exportVariableToView("actions", $actions);
+                $this->_exportVariableToView('actions', $actions);
 
-                $this->_exportVariableToView("user", $aUser);
-                $this->_exportVariableToView("countries", $aCountries);
-                $this->_exportVariableToView("regions", $aRegions);
-                $this->_exportVariableToView("cities", $aCities);
-                $this->_exportVariableToView("locales", OSCLocale::newInstance()->listAllEnabled());
-                $this->doView("users/frm.php");
+                $this->_exportVariableToView('user', $aUser);
+                $this->_exportVariableToView('countries', $aCountries);
+                $this->_exportVariableToView('regions', $aRegions);
+                $this->_exportVariableToView('cities', $aCities);
+                $this->_exportVariableToView('locales', OSCLocale::newInstance()->listAllEnabled());
+                $this->doView('users/frm.php');
                 break;
             case('edit_post'):      // edit post
                 osc_csrf_check();
                 $userActions = new UserActions(true);
-                $success     = $userActions->edit(Params::getParam("id"));
+                $success     = $userActions->edit(Params::getParam('id'));
                 if ($success == 1) {
                     osc_add_flash_ok_message(_m('The user has been updated'), 'admin');
                 } elseif ($success == 2) {
@@ -336,7 +336,7 @@ class CAdminUsers extends AdminSecBaseModel
                 break;
             case('status_alerts'):         //delete
 
-                $status   = Params::getParam("status");
+                $status   = Params::getParam('status');
                 $iUpdated = 0;
                 $alertId  = Params::getParam('alert_id');
 
@@ -367,14 +367,12 @@ class CAdminUsers extends AdminSecBaseModel
                         $msg = sprintf(_mn('One alert has been activated', '%s alerts have been activated', $iUpdated),
                             $iUpdated);
                     }
+                } elseif ($iUpdated == 0) {
+                    $msg = _m('No alerts have been deactivated');
                 } else {
-                    if ($iUpdated == 0) {
-                        $msg = _m('No alerts have been deactivated');
-                    } else {
-                        $msg =
-                            sprintf(_mn('One alert has been deactivated', '%s alerts have been deactivated', $iUpdated),
-                                $iUpdated);
-                    }
+                    $msg =
+                        sprintf(_mn('One alert has been deactivated', '%s alerts have been deactivated', $iUpdated),
+                            $iUpdated);
                 }
 
                 osc_add_flash_ok_message($msg, 'admin');
@@ -399,11 +397,11 @@ class CAdminUsers extends AdminSecBaseModel
                 $enabledUsers            = (($enabledUsers != '') ? true : false);
                 $notifyNewUser           = Params::getParam('notify_new_user');
                 $notifyNewUser           = (($notifyNewUser != '') ? true : false);
-                $usernameBlacklistTmp    = explode(",", Params::getParam('username_blacklist'));
+                $usernameBlacklistTmp    = explode(',', Params::getParam('username_blacklist'));
                 foreach ($usernameBlacklistTmp as $k => $v) {
                     $usernameBlacklistTmp[$k] = strtolower(trim($v));
                 }
-                $usernameBlacklist = implode(",", $usernameBlacklistTmp);
+                $usernameBlacklist = implode(',', $usernameBlacklistTmp);
 
                 $iUpdated += osc_set_preference('enabled_user_validation', $enabledUserValidation);
                 $iUpdated += osc_set_preference('enabled_user_registration', $enabledUserRegistration);
@@ -412,24 +410,21 @@ class CAdminUsers extends AdminSecBaseModel
                 $iUpdated += osc_set_preference('username_blacklist', $usernameBlacklist);
 
                 if ($iUpdated > 0) {
-                    osc_add_flash_ok_message(_m("User settings have been updated"), 'admin');
+                    osc_add_flash_ok_message(_m('User settings have been updated'), 'admin');
                 }
                 $this->redirectTo(osc_admin_base_url(true) . '?page=users&action=settings');
                 break;
             case('alerts'):                // manage alerts view
-                require_once osc_lib_path() . "osclass/classes/datatables/AlertsDataTable.php";
+                require_once osc_lib_path() . 'osclass/classes/datatables/AlertsDataTable.php';
 
                 // set default iDisplayLength
                 if (Params::getParam('iDisplayLength') != '') {
                     Cookie::newInstance()->push('listing_iDisplayLength', Params::getParam('iDisplayLength'));
                     Cookie::newInstance()->set();
+                } elseif (Cookie::newInstance()->get_value('listing_iDisplayLength') != '') {
+                    Params::setParam('iDisplayLength', Cookie::newInstance()->get_value('listing_iDisplayLength'));
                 } else {
-                    // set a default value if it's set in the cookie
-                    if (Cookie::newInstance()->get_value('listing_iDisplayLength') != '') {
-                        Params::setParam('iDisplayLength', Cookie::newInstance()->get_value('listing_iDisplayLength'));
-                    } else {
-                        Params::setParam('iDisplayLength', 10);
-                    }
+                    Params::setParam('iDisplayLength', 10);
                 }
                 $this->_exportVariableToView('iDisplayLength', Params::getParam('iDisplayLength'));
 
@@ -444,7 +439,7 @@ class CAdminUsers extends AdminSecBaseModel
                 $page = (int)Params::getParam('iPage');
                 if ($page == 0) {
                     $page = 1;
-                };
+                }
                 Params::setParam('iPage', $page);
 
                 $params = Params::getParamsAsArray();
@@ -474,27 +469,24 @@ class CAdminUsers extends AdminSecBaseModel
                 $this->_exportVariableToView('aData', $aData);
                 $this->_exportVariableToView('aRawRows', $alertsDataTable->rawRows());
 
-                $this->doView("users/alerts.php");
+                $this->doView('users/alerts.php');
                 break;
             case('ban'):             // manage ban rules view
 
-                if (Params::getParam("action") != "") {
-                    osc_run_hook("ban_rules_bulk_" . Params::getParam("action"), Params::getParam('id'));
+                if (Params::getParam('action') != '') {
+                    osc_run_hook('ban_rules_bulk_' . Params::getParam('action'), Params::getParam('id'));
                 }
 
-                require_once osc_lib_path() . "osclass/classes/datatables/BanRulesDataTable.php";
+                require_once osc_lib_path() . 'osclass/classes/datatables/BanRulesDataTable.php';
 
                 // set default iDisplayLength
                 if (Params::getParam('iDisplayLength') != '') {
                     Cookie::newInstance()->push('listing_iDisplayLength', Params::getParam('iDisplayLength'));
                     Cookie::newInstance()->set();
+                } elseif (Cookie::newInstance()->get_value('listing_iDisplayLength') != '') {
+                    Params::setParam('iDisplayLength', Cookie::newInstance()->get_value('listing_iDisplayLength'));
                 } else {
-                    // set a default value if it's set in the cookie
-                    if (Cookie::newInstance()->get_value('listing_iDisplayLength') != '') {
-                        Params::setParam('iDisplayLength', Cookie::newInstance()->get_value('listing_iDisplayLength'));
-                    } else {
-                        Params::setParam('iDisplayLength', 10);
-                    }
+                    Params::setParam('iDisplayLength', 10);
                 }
                 $this->_exportVariableToView('iDisplayLength', Params::getParam('iDisplayLength'));
 
@@ -509,7 +501,7 @@ class CAdminUsers extends AdminSecBaseModel
                 $page = (int)Params::getParam('iPage');
                 if ($page == 0) {
                     $page = 1;
-                };
+                }
                 Params::setParam('iPage', $page);
 
                 $params = Params::getParamsAsArray();
@@ -549,7 +541,7 @@ class CAdminUsers extends AdminSecBaseModel
                     )
                 );
 
-                $bulk_options = osc_apply_filter("ban_rule_bulk_filter", $bulk_options);
+                $bulk_options = osc_apply_filter('ban_rule_bulk_filter', $bulk_options);
                 $this->_exportVariableToView('bulk_options', $bulk_options);
 
 
@@ -563,7 +555,7 @@ class CAdminUsers extends AdminSecBaseModel
             case('edit_ban_rule_post'):
                 osc_csrf_check();
                 if (Params::getParam('s_ip') == '' && Params::getParam('s_email') == '') {
-                    osc_add_flash_warning_message(_m("Both rules can not be empty"), 'admin');
+                    osc_add_flash_warning_message(_m('Both rules can not be empty'), 'admin');
                     $this->redirectTo(osc_admin_base_url(true) . '?page=users&action=ban');
                 }
 
@@ -582,7 +574,7 @@ class CAdminUsers extends AdminSecBaseModel
             case('create_ban_rule_post'):
                 osc_csrf_check();
                 if (Params::getParam('s_ip') == '' && Params::getParam('s_email') == '') {
-                    osc_add_flash_warning_message(_m("Both rules can not be empty"), 'admin');
+                    osc_add_flash_warning_message(_m('Both rules can not be empty'), 'admin');
                     $this->redirectTo(osc_admin_base_url(true) . '?page=users&action=ban');
                 }
 
@@ -623,23 +615,20 @@ class CAdminUsers extends AdminSecBaseModel
                 break;
             default:                // manage users view
 
-                if (Params::getParam("action") != "") {
-                    osc_run_hook("user_bulk_" . Params::getParam("action"), Params::getParam('id'));
+                if (Params::getParam('action') != '') {
+                    osc_run_hook('user_bulk_' . Params::getParam('action'), Params::getParam('id'));
                 }
 
-                require_once osc_lib_path() . "osclass/classes/datatables/UsersDataTable.php";
+                require_once osc_lib_path() . 'osclass/classes/datatables/UsersDataTable.php';
 
                 // set default iDisplayLength
                 if (Params::getParam('iDisplayLength') != '') {
                     Cookie::newInstance()->push('listing_iDisplayLength', Params::getParam('iDisplayLength'));
                     Cookie::newInstance()->set();
+                } elseif (Cookie::newInstance()->get_value('listing_iDisplayLength') != '') {
+                    Params::setParam('iDisplayLength', Cookie::newInstance()->get_value('listing_iDisplayLength'));
                 } else {
-                    // set a default value if it's set in the cookie
-                    if (Cookie::newInstance()->get_value('listing_iDisplayLength') != '') {
-                        Params::setParam('iDisplayLength', Cookie::newInstance()->get_value('listing_iDisplayLength'));
-                    } else {
-                        Params::setParam('iDisplayLength', 10);
-                    }
+                    Params::setParam('iDisplayLength', 10);
                 }
                 $this->_exportVariableToView('iDisplayLength', Params::getParam('iDisplayLength'));
 
@@ -654,7 +643,7 @@ class CAdminUsers extends AdminSecBaseModel
                 $page = (int)Params::getParam('iPage');
                 if ($page == 0) {
                     $page = 1;
-                };
+                }
                 Params::setParam('iPage', $page);
 
                 $params = Params::getParamsAsArray();
@@ -727,7 +716,7 @@ class CAdminUsers extends AdminSecBaseModel
                     );
                 }
 
-                $bulk_options = osc_apply_filter("user_bulk_filter", $bulk_options);
+                $bulk_options = osc_apply_filter('user_bulk_filter', $bulk_options);
                 $this->_exportVariableToView('bulk_options', $bulk_options);
 
 
@@ -744,12 +733,12 @@ class CAdminUsers extends AdminSecBaseModel
      *
      * @return mixed|void
      */
-    function doView($file)
+    public function doView($file)
     {
-        osc_run_hook("before_admin_html");
+        osc_run_hook('before_admin_html');
         osc_current_admin_theme_path($file);
         Session::newInstance()->_clearVariables();
-        osc_run_hook("after_admin_html");
+        osc_run_hook('after_admin_html');
     }
 }
 

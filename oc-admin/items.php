@@ -26,7 +26,7 @@ class CAdminItems extends AdminSecBaseModel
     //specific for this class
     private $itemManager;
 
-    function __construct()
+    public function __construct()
     {
         parent::__construct();
 
@@ -40,12 +40,12 @@ class CAdminItems extends AdminSecBaseModel
      * @return bool|void
      * @throws \Exception
      */
-    function doModel()
+    public function doModel()
     {
         parent::doModel();
 
-        if (osc_is_moderator() && ($this->action == 'settings' || $this->action == 'settings_post')) {
-            osc_add_flash_error_message(_m("You don't have enough permissions"), "admin");
+        if (osc_is_moderator() && ($this->action === 'settings' || $this->action === 'settings_post')) {
+            osc_add_flash_error_message(_m("You don't have enough permissions"), 'admin');
             $this->redirectTo(osc_admin_base_url());
         }
 
@@ -289,8 +289,8 @@ class CAdminItems extends AdminSecBaseModel
                         }
                         break;
                     default:
-                        if (Params::getParam("bulk_actions") != "") {
-                            osc_run_hook("item_bulk_" . Params::getParam("bulk_actions"), Params::getParam('id'));
+                        if (Params::getParam('bulk_actions') != '') {
+                            osc_run_hook('item_bulk_' . Params::getParam('bulk_actions'), Params::getParam('id'));
                         }
                         break;
                 }
@@ -479,7 +479,7 @@ class CAdminItems extends AdminSecBaseModel
 
                 $item = Item::newInstance()->findByPrimaryKey($id);
                 if (count($item) <= 0) {
-                    $this->redirectTo(osc_admin_base_url(true) . "?page=items");
+                    $this->redirectTo(osc_admin_base_url(true) . '?page=items');
                 }
 
                 $csrf_token = osc_csrf_token_url();
@@ -520,7 +520,7 @@ class CAdminItems extends AdminSecBaseModel
                         . '&amp;value=1">' . __('Mark as spam') . '</a>';
                 }
 
-                $this->_exportVariableToView("actions", $actions);
+                $this->_exportVariableToView('actions', $actions);
 
                 $form     = count(Session::newInstance()->_getForm());
                 $keepForm = count(Session::newInstance()->_getKeepForm());
@@ -545,10 +545,10 @@ class CAdminItems extends AdminSecBaseModel
                     }
                 }
 
-                $this->_exportVariableToView("item", $item);
-                $this->_exportVariableToView("new_item", false);
+                $this->_exportVariableToView('item', $item);
+                $this->_exportVariableToView('new_item', false);
 
-                osc_run_hook("before_item_edit", $item);
+                osc_run_hook('before_item_edit', $item);
                 $this->doView('items/frm.php');
                 break;
             case 'item_edit_post':
@@ -573,7 +573,7 @@ class CAdminItems extends AdminSecBaseModel
 
                 if ($success == 1) {
                     osc_add_flash_ok_message(_m('Changes saved correctly'), 'admin');
-                    $url = osc_admin_base_url(true) . "?page=items";
+                    $url = osc_admin_base_url(true) . '?page=items';
                     // if Referer is saved that means referer is ManageListings or ReportListings
                     if (Session::newInstance()->_get('osc_admin_referer') != '') {
                         $url = Session::newInstance()->_get('osc_admin_referer');
@@ -588,7 +588,7 @@ class CAdminItems extends AdminSecBaseModel
                     $this->redirectTo($url);
                 } else {
                     osc_add_flash_error_message($success, 'admin');
-                    $this->redirectTo(osc_admin_base_url(true) . "?page=items&action=item_edit&id="
+                    $this->redirectTo(osc_admin_base_url(true) . '?page=items&action=item_edit&id='
                         . Params::getParam('id'));
                 }
                 break;
@@ -612,7 +612,7 @@ class CAdminItems extends AdminSecBaseModel
                 } else {
                     osc_add_flash_ok_message(_m('Resource deleted'), 'admin');
                 }
-                $this->redirectTo(osc_admin_base_url(true) . "?page=items");
+                $this->redirectTo(osc_admin_base_url(true) . '?page=items');
                 break;
             case 'post':            // add item
                 $form     = count(Session::newInstance()->_getForm());
@@ -621,7 +621,7 @@ class CAdminItems extends AdminSecBaseModel
                     Session::newInstance()->_dropKeepForm();
                 }
 
-                $this->_exportVariableToView("new_item", true);
+                $this->_exportVariableToView('new_item', true);
                 osc_run_hook('post_item');
                 $this->doView('items/frm.php');
                 break;
@@ -647,7 +647,7 @@ class CAdminItems extends AdminSecBaseModel
                 $success = $mItem->add();
 
                 if ($success == 1 || $success == 2) {
-                    $url = osc_admin_base_url(true) . "?page=items";
+                    $url = osc_admin_base_url(true) . '?page=items';
                     // if Referer is saved that means referer is ManageListings or ReportListings
                     if (Session::newInstance()->_get('osc_admin_referer') != '') {
                         $url = Session::newInstance()->_get('osc_admin_referer');
@@ -664,7 +664,7 @@ class CAdminItems extends AdminSecBaseModel
                     $this->redirectTo($url);
                 } else {
                     osc_add_flash_error_message($success, 'admin');
-                    $this->redirectTo(osc_admin_base_url(true) . "?page=items&action=post");
+                    $this->redirectTo(osc_admin_base_url(true) . '?page=items&action=post');
                 }
                 break;
             case('settings'):          // calling the items settings view
@@ -708,25 +708,25 @@ class CAdminItems extends AdminSecBaseModel
 
 
                 $msg = '';
-                if (!osc_validate_int(Params::getParam("items_wait_time"))) {
-                    $msg .= _m("Wait time must only contain numeric characters") . "<br/>";
+                if (!osc_validate_int(Params::getParam('items_wait_time'))) {
+                    $msg .= _m('Wait time must only contain numeric characters') . '<br/>';
                 }
-                if (Params::getParam("num_moderate_items") != ''
-                    && !osc_validate_int(Params::getParam("num_moderate_items"))
+                if (Params::getParam('num_moderate_items') != ''
+                    && !osc_validate_int(Params::getParam('num_moderate_items'))
                 ) {
-                    $msg .= _m("Number of moderated listings must only contain numeric characters") . "<br/>";
+                    $msg .= _m('Number of moderated listings must only contain numeric characters') . '<br/>';
                 }
                 if (!osc_validate_int($numImagesItems)) {
-                    $msg .= _m("Images per listing must only contain numeric characters") . "<br/>";
+                    $msg .= _m('Images per listing must only contain numeric characters') . '<br/>';
                 }
                 if (!osc_validate_int($warnExpiration)) {
-                    $msg .= _m("Number of expiration days has to be a numeric value") . "<br/>";
+                    $msg .= _m('Number of expiration days has to be a numeric value') . '<br/>';
                 }
                 if (!osc_validate_int($titleLength)) {
-                    $msg .= _m("Title Length has to be a numeric value") . "<br/>";
+                    $msg .= _m('Title Length has to be a numeric value') . '<br/>';
                 }
                 if (!osc_validate_int($descriptionLength)) {
-                    $msg .= _m("Description Length has to be a numeric value") . "<br/>";
+                    $msg .= _m('Description Length has to be a numeric value') . '<br/>';
                 }
                 if ($msg != '') {
                     osc_add_flash_error_message($msg, 'admin');
@@ -762,19 +762,16 @@ class CAdminItems extends AdminSecBaseModel
                 break;
             case('items_reported'):
 
-                require_once osc_lib_path() . "osclass/classes/datatables/ItemsDataTable.php";
+                require_once osc_lib_path() . 'osclass/classes/datatables/ItemsDataTable.php';
 
                 // set default iDisplayLength
                 if (Params::getParam('iDisplayLength') != '') {
                     Cookie::newInstance()->push('listing_iDisplayLength', Params::getParam('iDisplayLength'));
                     Cookie::newInstance()->set();
+                } elseif (Cookie::newInstance()->get_value('listing_iDisplayLength') != '') {
+                    Params::setParam('iDisplayLength', Cookie::newInstance()->get_value('listing_iDisplayLength'));
                 } else {
-                    // set a default value if it's set in the cookie
-                    if (Cookie::newInstance()->get_value('listing_iDisplayLength') != '') {
-                        Params::setParam('iDisplayLength', Cookie::newInstance()->get_value('listing_iDisplayLength'));
-                    } else {
-                        Params::setParam('iDisplayLength', 10);
-                    }
+                    Params::setParam('iDisplayLength', 10);
                 }
                 $this->_exportVariableToView('iDisplayLength', Params::getParam('iDisplayLength'));
 
@@ -789,7 +786,7 @@ class CAdminItems extends AdminSecBaseModel
                 $page = (int)Params::getParam('iPage');
                 if ($page == 0) {
                     $page = 1;
-                };
+                }
                 Params::setParam('iPage', $page);
 
                 $params = Params::getParamsAsArray();
@@ -824,19 +821,16 @@ class CAdminItems extends AdminSecBaseModel
                 break;
             default:                // default
 
-                require_once osc_lib_path() . "osclass/classes/datatables/ItemsDataTable.php";
+                require_once osc_lib_path() . 'osclass/classes/datatables/ItemsDataTable.php';
 
                 // set default iDisplayLength
                 if (Params::getParam('iDisplayLength') != '') {
                     Cookie::newInstance()->push('listing_iDisplayLength', Params::getParam('iDisplayLength'));
                     Cookie::newInstance()->set();
+                } elseif (Cookie::newInstance()->get_value('listing_iDisplayLength') != '') {
+                    Params::setParam('iDisplayLength', Cookie::newInstance()->get_value('listing_iDisplayLength'));
                 } else {
-                    // set a default value if it's set in the cookie
-                    if (Cookie::newInstance()->get_value('listing_iDisplayLength') != '') {
-                        Params::setParam('iDisplayLength', Cookie::newInstance()->get_value('listing_iDisplayLength'));
-                    } else {
-                        Params::setParam('iDisplayLength', 10);
-                    }
+                    Params::setParam('iDisplayLength', 10);
                 }
                 $this->_exportVariableToView('iDisplayLength', Params::getParam('iDisplayLength'));
 
@@ -851,7 +845,7 @@ class CAdminItems extends AdminSecBaseModel
                 $page = (int)Params::getParam('iPage');
                 if ($page == 0) {
                     $page = 1;
-                };
+                }
                 Params::setParam('iPage', $page);
 
                 $params = Params::getParamsAsArray();
@@ -938,7 +932,7 @@ class CAdminItems extends AdminSecBaseModel
                         'label'               => __('Unmark as spam')
                     )
                 );
-                $bulk_options = osc_apply_filter("item_bulk_filter", $bulk_options);
+                $bulk_options = osc_apply_filter('item_bulk_filter', $bulk_options);
                 $this->_exportVariableToView('bulk_options', $bulk_options);
 
                 //calling the view...
@@ -953,12 +947,12 @@ class CAdminItems extends AdminSecBaseModel
      *
      * @return mixed|void
      */
-    function doView($file)
+    public function doView($file)
     {
-        osc_run_hook("before_admin_html");
+        osc_run_hook('before_admin_html');
         osc_current_admin_theme_path($file);
         Session::newInstance()->_clearVariables();
-        osc_run_hook("after_admin_html");
+        osc_run_hook('after_admin_html');
     }
 }
 

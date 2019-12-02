@@ -91,11 +91,11 @@ function customText($return = 'title')
     $typeForm = __get('typeForm');
     $text     = array();
     switch ($typeForm) {
-        case('add_post'):
+        case ('add_post'):
             $text['title']  = __('Add currency');
             $text['button'] = __('Add currency');
             break;
-        case('edit_post'):
+        case ('edit_post'):
             $text['title']  = __('Edit currency');
             $text['button'] = __('Update currency');
             break;
@@ -128,7 +128,7 @@ osc_current_admin_theme_path('parts/header.php'); ?>
             <input type="hidden" name="page" value="settings"/>
             <input type="hidden" name="action" value="currencies"/>
             <input type="hidden" name="type" value="<?php echo $typeForm; ?>"/>
-            <?php if ($typeForm == 'edit_post') { ?>
+            <?php if ($typeForm === 'edit_post') { ?>
                 <input type="hidden" name="pk_c_code" value="<?php echo osc_esc_html($aCurrency['pk_c_code']); ?>"/>
             <?php } ?>
             <fieldset>
@@ -136,14 +136,24 @@ osc_current_admin_theme_path('parts/header.php'); ?>
                     <div class="form-row">
                         <div class="form-label"><?php _e('Currency Code'); ?></div>
                         <div class="form-controls">
-                            <input type="text" class="input-small" name="pk_c_code"
-                                   value="<?php echo osc_esc_html($aCurrency['pk_c_code']); ?>" <?php if ($typeForm
-                                    == 'edit_post'
+                            <input
+                                    class="input-small"
+                                    name="pk_c_code"
+                                    type="text"
+                                    value="<?php echo osc_esc_html($aCurrency['pk_c_code']); ?>"
+                                <?php if ($typeForm
+                                    === 'edit_post'
                             ) {
-                                                    echo 'disabled="disabled"';
-                                          } ?> />
-                            <span class="help-box"><?php printf(__('Must be a three-character code according to the <a href="%s" target="_blank">ISO 4217</a>'),
-                                    'http://en.wikipedia.org/wiki/ISO_4217'); ?></span>
+                                               echo 'disabled="disabled"';
+                                }
+                                ?>
+                            />
+                            <span class="help-box">
+                                <?php printf(
+                                    __('Must be a three-character code according to the <a href="%s" target="_blank">ISO 4217</a>'),
+                                    'http://en.wikipedia.org/wiki/ISO_4217'
+                                ); ?>
+                            </span>
                         </div>
                     </div>
                     <div class="form-row">
