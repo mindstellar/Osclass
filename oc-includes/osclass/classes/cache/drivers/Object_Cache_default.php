@@ -190,9 +190,9 @@ class Object_Cache_default implements iObject_Cache
             ++$this->cache_hits;
             if (is_object($this->cache[$key])) {
                 return clone $this->cache[$key];
-            } else {
-                return $this->cache[$key];
             }
+
+            return $this->cache[$key];
         }
         $found = false;
         ++$this->cache_misses;
@@ -233,7 +233,6 @@ padding: 1em;'><h2>Default(dummy) stats</h2>";
      */
     public function __destruct()
     {
-        return true;
     }
 
     /**

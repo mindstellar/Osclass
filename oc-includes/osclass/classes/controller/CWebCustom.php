@@ -36,7 +36,7 @@ class CWebCustom extends BaseModel
             $routes = Rewrite::newInstance()->getRoutes();
             $rid    = Params::getParam('route');
             $file   = '../';
-            if (isset($routes[$rid], $routes[$rid]['file'])) {
+            if (isset($routes[$rid]['file'])) {
                 $file      = $routes[$rid]['file'];
                 $user_menu = $routes[$rid]['user_menu'];
             }

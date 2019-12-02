@@ -22,7 +22,7 @@
 class Plugins
 {
 
-    static $plugins_infos = array();
+    public static $plugins_infos = array();
     private static $hooks;
     private static $installed;
     private static $enabled;
@@ -66,7 +66,7 @@ class Plugins
      *
      * @return bool
      */
-    static function isInstalled($plugin)
+    public static function isInstalled($plugin)
     {
         if (!isset(self::$installed)) {
             self::$installed = self::listInstalled();
@@ -81,7 +81,7 @@ class Plugins
     /**
      * @return array
      */
-    static function listInstalled()
+    public static function listInstalled()
     {
         if (isset(self::$installed)) {
             return self::$installed;
@@ -101,7 +101,7 @@ class Plugins
      *
      * @return bool
      */
-    static function isEnabled($plugin)
+    public static function isEnabled($plugin)
     {
         if (!isset(self::$enabled)) {
             self::$enabled = self::listEnabled();
@@ -116,7 +116,7 @@ class Plugins
     /**
      * @return array
      */
-    static function listEnabled()
+    public static function listEnabled()
     {
         if (isset(self::$enabled)) {
             return self::$enabled;
@@ -443,7 +443,7 @@ class Plugins
         self::loadActive();
     }
 
-    static function loadActive()
+    public static function loadActive()
     {
 
         $plugins_list = self::listEnabled();

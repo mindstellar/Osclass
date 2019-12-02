@@ -185,7 +185,7 @@ class AlertsDataTable extends DataTable
                     $pieces[] = sprintf(__('<b>Categories:</b> %s'), implode(', ', $cat_array));
                 }
 
-                $row['alert'] = implode($pieces, ', ');
+                $row['alert'] = implode(', ', $pieces);
                 // fourth row
                 $row['date'] = osc_format_date($aRow['dt_date']);
 

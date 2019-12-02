@@ -191,7 +191,9 @@ class User extends DAO
 
         if ($result == false) {
             return false;
-        } elseif ($result->numRows() == 1) {
+        }
+
+        if ($result->numRows() == 1) {
             return $this->extendData($result->row(), $locale);
         } else {
             return array();
@@ -241,7 +243,9 @@ class User extends DAO
 
         if ($result == false) {
             return false;
-        } elseif ($result->numRows() == 1) {
+        }
+
+        if ($result->numRows() == 1) {
             return $this->extendData($result->row(), $locale);
         } else {
             return array();
@@ -275,7 +279,9 @@ class User extends DAO
 
         if ($result == false) {
             return false;
-        } elseif ($result->numRows() == 1) {
+        }
+
+        if ($result->numRows() == 1) {
             return $this->extendData($result->row(), $locale);
         } else {
             return array();
@@ -313,7 +319,9 @@ class User extends DAO
 
         if ($result == false) {
             return false;
-        } elseif ($result->numRows() == 1) {
+        }
+
+        if ($result->numRows() == 1) {
             return $this->extendData($result->row(), $locale);
         } else {
             return array();

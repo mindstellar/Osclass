@@ -27,7 +27,7 @@ class UserForm extends Form
      */
     public static function primary_input_hidden($user)
     {
-        parent::generic_input_hidden("id", (isset($user["pk_i_id"]) ? $user['pk_i_id'] : ''));
+        parent::generic_input_hidden('id', (isset($user['pk_i_id']) ? $user['pk_i_id'] : ''));
     }
 
     /**
@@ -39,7 +39,7 @@ class UserForm extends Form
             $user['s_name'] = Session::newInstance()->_getForm('user_s_name');
         }
         parent::generic_input_text(
-            "s_name",
+            's_name',
             isset($user['s_name']) ? $user['s_name'] : '',
             null,
             false
@@ -55,7 +55,7 @@ class UserForm extends Form
             $user['s_username'] = Session::newInstance()->_getForm('user_s_username');
         }
         parent::generic_input_text(
-            "s_username",
+            's_username',
             isset($user['s_username']) ? $user['s_username'] : '',
             null,
             false
@@ -68,7 +68,7 @@ class UserForm extends Form
     public static function email_login_text($user = null)
     {
         parent::generic_input_text(
-            "email",
+            'email',
             isset($user['s_email']) ? $user['s_email'] : '',
             null,
             false
@@ -80,7 +80,7 @@ class UserForm extends Form
      */
     public static function password_login_text($user = null)
     {
-        parent::generic_password("password", '', null, false);
+        parent::generic_password('password', '', null, false);
     }
 
     /**
@@ -88,7 +88,7 @@ class UserForm extends Form
      */
     public static function rememberme_login_checkbox($user = null)
     {
-        parent::generic_input_checkbox("remember", '1', false);
+        parent::generic_input_checkbox('remember', '1', false);
     }
 
     /**
@@ -96,7 +96,7 @@ class UserForm extends Form
      */
     public static function old_password_text($user = null)
     {
-        parent::generic_password("old_password", '', null, false);
+        parent::generic_password('old_password', '', null, false);
     }
 
     /**
@@ -104,7 +104,7 @@ class UserForm extends Form
      */
     public static function password_text($user = null)
     {
-        parent::generic_password("s_password", '', null, false);
+        parent::generic_password('s_password', '', null, false);
     }
 
     /**
@@ -112,7 +112,7 @@ class UserForm extends Form
      */
     public static function check_password_text($user = null)
     {
-        parent::generic_password("s_password2", '', null, false);
+        parent::generic_password('s_password2', '', null, false);
     }
 
     /**
@@ -124,7 +124,7 @@ class UserForm extends Form
             $user['s_email'] = Session::newInstance()->_getForm('user_s_email');
         }
         parent::generic_input_text(
-            "s_email",
+            's_email',
             isset($user['s_email']) ? $user['s_email'] : '',
             null,
             false
@@ -137,7 +137,7 @@ class UserForm extends Form
     public static function website_text($user = null)
     {
         parent::generic_input_text(
-            "s_website",
+            's_website',
             isset($user['s_website']) ? $user['s_website'] : '',
             null,
             false
@@ -153,7 +153,7 @@ class UserForm extends Form
             $user['s_phone_mobile'] = Session::newInstance()->_getForm('user_s_phone_mobile');
         }
         parent::generic_input_text(
-            "s_phone_mobile",
+            's_phone_mobile',
             isset($user['s_phone_mobile']) ? $user['s_phone_mobile'] : '',
             null,
             false
@@ -169,7 +169,7 @@ class UserForm extends Form
             $user['s_phone_land'] = Session::newInstance()->_getForm('user_s_phone_land');
         }
         parent::generic_input_text(
-            "s_phone_land",
+            's_phone_land',
             isset($user['s_phone_land']) ? $user['s_phone_land'] : '',
             null,
             false
@@ -189,26 +189,24 @@ class UserForm extends Form
         foreach ($locales as $locale) {
             if ($num_locales > 1) {
                 echo '<div class="tabbertab">';
-            };
+            }
             if ($num_locales > 1) {
                 echo '<h2>' . $locale['s_name'] . '</h2>';
             }
             $info = '';
-            if (is_array($user)) {
-                if (isset($user['locale'][$locale['pk_c_code']])) {
-                    if (isset($user['locale'][$locale['pk_c_code']]['s_info'])) {
-                        $info = $user['locale'][$locale['pk_c_code']]['s_info'];
-                    }
+            if (is_array($user) && isset($user['locale'][$locale['pk_c_code']])) {
+                if (isset($user['locale'][$locale['pk_c_code']]['s_info'])) {
+                    $info = $user['locale'][$locale['pk_c_code']]['s_info'];
                 }
             }
             self::info_textarea('s_info', $locale['pk_c_code'], $info);
             if ($num_locales > 1) {
                 echo '</div>';
-            };
+            }
         }
         if ($num_locales > 1) {
             echo '</div>';
-        };
+        }
     }
 
     /**
@@ -356,9 +354,8 @@ class UserForm extends Form
         $company_label = null
     ) {
         $options = array(
-            array('i_value' => '0', 's_text' => ($user_label ? $user_label : __('User')))
-            ,
-            array('i_value' => '1', 's_text' => ($company_label ? $company_label : __('Company')))
+            array('i_value' => '0', 's_text' => ($user_label ?: __('User'))),
+            array('i_value' => '1', 's_text' => ($company_label ?: __('Company')))
         );
 
         parent::generic_select(
@@ -406,19 +403,19 @@ class UserForm extends Form
                     },
                     messages: {
                         s_name: {
-                            required: "<?php _e("Name: this field is required"); ?>."
+                            required: "<?php _e('Name: this field is required'); ?>."
                         },
                         s_email: {
-                            required: "<?php _e("Email: this field is required"); ?>.",
-                            email: "<?php _e("Invalid email address"); ?>."
+                            required: "<?php _e('Email: this field is required'); ?>.",
+                            email: "<?php _e('Invalid email address'); ?>."
                         },
                         s_password: {
-                            required: "<?php _e("Password: this field is required"); ?>.",
-                            minlength: "<?php _e("Password: enter at least 5 characters"); ?>."
+                            required: "<?php _e('Password: this field is required'); ?>.",
+                            minlength: "<?php _e('Password: enter at least 5 characters'); ?>."
                         },
                         s_password2: {
-                            required: "<?php _e("Second password: this field is required"); ?>.",
-                            minlength: "<?php _e("Second password: enter at least 5 characters"); ?>.",
+                            required: "<?php _e('Second password: this field is required'); ?>.",
+                            minlength: "<?php _e('Second password: enter at least 5 characters'); ?>.",
                             equalTo: "<?php _e("Passwords don't match"); ?>."
                         }
                     },
@@ -443,7 +440,7 @@ class UserForm extends Form
     public static function js_validation_old()
     {
         ?>
-        <script type="text/javascript">
+        <script>
             $(document).ready(function () {
                 $('#s_name').focus(function () {
                     $('#s_name').css('border', '');
@@ -499,7 +496,7 @@ class UserForm extends Form
     public static function js_validation_edit()
     {
         ?>
-        <script type="text/javascript">
+        <script>
             $(document).ready(function () {
                 // Code for form validation
                 $("form[name=register]").validate({
@@ -521,17 +518,17 @@ class UserForm extends Form
                     },
                     messages: {
                         s_name: {
-                            required: "<?php _e("Name: this field is required"); ?>."
+                            required: "<?php _e('Name: this field is required'); ?>."
                         },
                         s_email: {
-                            required: "<?php _e("Email: this field is required"); ?>.",
-                            email: "<?php _e("Invalid email address"); ?>."
+                            required: "<?php _e('Email: this field is required'); ?>.",
+                            email: "<?php _e('Invalid email address'); ?>."
                         },
                         s_password: {
-                            minlength: "<?php _e("Password: enter at least 5 characters"); ?>."
+                            minlength: "<?php _e('Password: enter at least 5 characters'); ?>."
                         },
                         s_password2: {
-                            minlength: "<?php _e("Second password: enter at least 5 characters"); ?>.",
+                            minlength: "<?php _e('Second password: enter at least 5 characters'); ?>.",
                             equalTo: "<?php _e("Passwords don't match"); ?>."
                         }
                     },
@@ -559,17 +556,17 @@ class UserForm extends Form
     public static function location_javascript($path = 'front')
     {
         ?>
-        <script type="text/javascript">
+        <script>
             $(document).ready(function () {
                 $("#countryId").on("change", function () {
                     var pk_c_code = $(this).val();
-                    <?php if ($path == "admin") { ?>
+                    <?php if ($path == 'admin') { ?>
                     var url = '<?php echo osc_admin_base_url(true)
-                        . "?page=ajax&action=regions&countryId="; ?>' + pk_c_code;
+                        . '?page=ajax&action=regions&countryId='; ?>' + pk_c_code;
                     <?php } else { ?>
                     var url = '<?php echo osc_base_url(true)
-                        . "?page=ajax&action=regions&countryId="; ?>' + pk_c_code;
-                    <?php }; ?>
+                        . '?page=ajax&action=regions&countryId='; ?>' + pk_c_code;
+                    <?php } ?>
                     var result = '';
 
                     if (pk_c_code != '') {
@@ -583,7 +580,7 @@ class UserForm extends Form
                             success: function (data) {
                                 var length = data.length;
                                 if (length > 0) {
-                                    result += '<option value=""><?php _e("Select a region..."); ?></option>';
+                                    result += '<option value=""><?php _e('Select a region...'); ?></option>';
                                     for (key in data) {
                                         result += '<option value="' + data[key].pk_i_id + '">' + data[key].s_name + '</option>';
                                     }
@@ -602,27 +599,27 @@ class UserForm extends Form
                                     $("#cityId").remove();
                                 }
                                 $("#regionId").html(result);
-                                $("#cityId").html('<option selected value=""><?php _e("Select a city..."); ?></option>');
+                                $("#cityId").html('<option selected value=""><?php _e('Select a city...'); ?></option>');
                             }
                         });
                     } else {
                         // add empty select
-                        $("#region").before('<select name="regionId" id="regionId" ><option value=""><?php _e("Select a region..."); ?></option></select>');
+                        $("#region").before('<select name="regionId" id="regionId" ><option value=""><?php _e('Select a region...'); ?></option></select>');
                         $("#region").remove();
 
-                        $("#city").before('<select name="cityId" id="cityId" ><option value=""><?php _e("Select a city..."); ?></option></select>');
+                        $("#city").before('<select name="cityId" id="cityId" ><option value=""><?php _e('Select a city...'); ?></option></select>');
                         $("#city").remove();
 
                         if ($("#regionId").length > 0) {
-                            $("#regionId").html('<option value=""><?php _e("Select a region..."); ?></option>');
+                            $("#regionId").html('<option value=""><?php _e('Select a region...'); ?></option>');
                         } else {
-                            $("#region").before('<select name="regionId" id="regionId" ><option value=""><?php _e("Select a region..."); ?></option></select>');
+                            $("#region").before('<select name="regionId" id="regionId" ><option value=""><?php _e('Select a region...'); ?></option></select>');
                             $("#region").remove();
                         }
                         if ($("#cityId").length > 0) {
-                            $("#cityId").html('<option value=""><?php _e("Select a city..."); ?></option>');
+                            $("#cityId").html('<option value=""><?php _e('Select a city...'); ?></option>');
                         } else {
-                            $("#city").before('<select name="cityId" id="cityId" ><option value=""><?php _e("Select a city..."); ?></option></select>');
+                            $("#city").before('<select name="cityId" id="cityId" ><option value=""><?php _e('Select a city...'); ?></option></select>');
                             $("#city").remove();
                         }
 
@@ -633,13 +630,13 @@ class UserForm extends Form
 
                 $("#regionId").on("change", function () {
                     var pk_c_code = $(this).val();
-                    <?php if ($path == "admin") { ?>
+                    <?php if ($path == 'admin') { ?>
                     var url = '<?php echo osc_admin_base_url(true)
-                        . "?page=ajax&action=cities&regionId="; ?>' + pk_c_code;
+                        . '?page=ajax&action=cities&regionId='; ?>' + pk_c_code;
                     <?php } else { ?>
                     var url = '<?php echo osc_base_url(true)
-                        . "?page=ajax&action=cities&regionId="; ?>' + pk_c_code;
-                    <?php }; ?>
+                        . '?page=ajax&action=cities&regionId='; ?>' + pk_c_code;
+                    <?php } ?>
 
                     var result = '';
 
@@ -653,7 +650,7 @@ class UserForm extends Form
                             success: function (data) {
                                 var length = data.length;
                                 if (length > 0) {
-                                    result += '<option selected value=""><?php _e("Select a city..."); ?></option>';
+                                    result += '<option selected value=""><?php _e('Select a city...'); ?></option>';
                                     for (key in data) {
                                         result += '<option value="' + data[key].pk_i_id + '">' + data[key].s_name + '</option>';
                                     }
@@ -689,4 +686,3 @@ class UserForm extends Form
 }
 
 /* file end: ./oc-includes/osclass/form/UserForm.php */
-?>

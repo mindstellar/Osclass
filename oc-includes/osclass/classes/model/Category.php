@@ -64,9 +64,6 @@ class Category extends DAO
         }
 
         $this->_language   = $l;
-        $this->_tree       = null;
-        $this->_relation   = null;
-        $this->_categories = null;
         $this->_emptyTree  = true;
         $this->toTree();
     }
@@ -126,15 +123,15 @@ class Category extends DAO
             osc_cache_set($key, $cache, OSC_CACHE_TTL);
 
             return $this->_tree;
-        } else {
-            $this->_tree              = $cache['tree'];
-            $this->_empty_tree        = $cache['empty_tree'];
-            $this->_relation          = $cache['relation'];
-            $this->_categories        = $cache['categories'];
-            $this->_categoriesEnabled = $cache['categoriesEnabled'];
-
-            return $this->_tree;
         }
+
+        $this->_tree              = $cache['tree'];
+        $this->_empty_tree        = $cache['empty_tree'];
+        $this->_relation          = $cache['relation'];
+        $this->_categories        = $cache['categories'];
+        $this->_categoriesEnabled = $cache['categoriesEnabled'];
+
+        return $this->_tree;
     }
 
     /**
@@ -186,7 +183,7 @@ class Category extends DAO
                 break;
         }
 
-        $this->dao->select("a.*, b.*, c.i_num_items");
+        $this->dao->select('a.*, b.*, c.i_num_items');
         $this->dao->from($this->getTableName() . ' as a');
         $this->dao->join(
             DB_TABLE_PREFIX . 't_category_description as b',
@@ -215,7 +212,7 @@ class Category extends DAO
 
         // (missing translations #mariadb)
         // get all category IDs
-        $this->dao->select("a.pk_i_id, a.i_position, b.*");
+        $this->dao->select('a.pk_i_id, a.i_position, b.*');
         $this->dao->from($this->getTableName() . ' as a');
         $this->dao->join(DB_TABLE_PREFIX . 't_category_description as b', 'a.pk_i_id = b.fk_i_category_id', 'INNER');
         if ($sql != null) {
@@ -228,12 +225,10 @@ class Category extends DAO
         $_categories = array();
         if ($rs === false) {
             $_categories = array();
+        } elseif ($rs->numRows() == 0) {
+            $_categories = array();
         } else {
-            if ($rs->numRows() == 0) {
-                $_categories = array();
-            } else {
-                $_categories = $rs->result();
-            }
+            $_categories = $rs->result();
         }
         // END - get all category IDs
 
@@ -247,7 +242,7 @@ class Category extends DAO
                     $finalArray[$key] = $aux[$index];
                 } else { // current category doesn't exist in the current category array, (missing translation)
                     $finalArray[$key] = array();
-                    $this->dao->select("a.*, b.*, c.i_num_items");
+                    $this->dao->select('a.*, b.*, c.i_num_items');
                     $this->dao->from($this->getTableName() . ' as a');
                     $this->dao->join(
                         DB_TABLE_PREFIX . 't_category_description as b',
@@ -266,14 +261,12 @@ class Category extends DAO
                     $rs = $this->dao->get();
                     if ($rs === false) {
                         $_categoryInfo = array();
+                    } elseif ($rs->numRows() == 0) {
+                        $_categoryInfo = array();
                     } else {
-                        if ($rs->numRows() == 0) {
-                            $_categoryInfo = array();
-                        } else {
-                            $category_element_array                     = $rs->row();
-                            $category_element_array['fk_c_locale_code'] = $this->_language;
-                            $_categoryInfo                              = $category_element_array;
-                        }
+                        $category_element_array                     = $rs->row();
+                        $category_element_array['fk_c_locale_code'] = $this->_language;
+                        $_categoryInfo                              = $category_element_array;
                     }
                     $finalArray[$key] = $_categoryInfo;
                 }
@@ -473,11 +466,11 @@ class Category extends DAO
      * @param int    $categoryID primary key
      * @param string $locale
      *
-     * @return array
+     * @return array|bool
      * @throws \Exception
      * @since  unknown
      */
-    public function findByPrimaryKey($categoryID, $locale = "")
+    public function findByPrimaryKey($categoryID, $locale = '')
     {
         if ($categoryID == null) {
             return false;
@@ -492,7 +485,7 @@ class Category extends DAO
                 $category = $this->_categories[$categoryID];
 
                 // if we already have locale data, we return the category
-                if ($locale == "" || ($locale != "" && isset($category['locale']))) {
+                if ($locale == '' || ($locale != '' && isset($category['locale']))) {
                     if ($locale != '' && isset($category['locale'][$locale])) {
                         $category['s_name']        = $category['locale'][$locale]['s_name'];
                         $category['s_description'] = $category['locale'][$locale]['s_description'];
@@ -541,9 +534,9 @@ class Category extends DAO
             osc_cache_set($key, $category, OSC_CACHE_TTL);
 
             return $category;
-        } else {
-            return $cache;
         }
+
+        return $cache;
     }
 
     /**
@@ -561,13 +554,13 @@ class Category extends DAO
         $subcats = $this->findSubcategories((int)($pk));
         if (count($subcats) > 0) {
             foreach ($subcats as $s) {
-                $this->deleteByPrimaryKey((int)($s["pk_i_id"]));
+                $this->deleteByPrimaryKey((int)($s['pk_i_id']));
             }
         }
 
         if (count($items) > 0) {
             foreach ($items as $item) {
-                Item::newInstance()->deleteByPrimaryKey($item["pk_i_id"]);
+                Item::newInstance()->deleteByPrimaryKey($item['pk_i_id']);
             }
         }
 
@@ -644,42 +637,43 @@ class Category extends DAO
                 //UPDATE for description of categories
                 $fieldsDescription['fk_i_category_id'] = $pk;
                 $fieldsDescription['fk_c_locale_code'] = $k;
-                $slug_tmp                              = $slug = osc_sanitizeString(osc_apply_filter(
+                $slug                                  = osc_sanitizeString(osc_apply_filter(
                     'slug',
                     isset($fieldsDescription['s_name']) ? $fieldsDescription['s_name'] : ''
                 ));
+                $slug_tmp                              = $slug;
                 $slug_unique                           = 1;
                 while (true) {
                     $cat_slug = $this->findBySlug($slug);
                     if (!isset($cat_slug['pk_i_id']) || $cat_slug['pk_i_id'] == $pk) {
                         break;
-                    } else {
-                        $slug = $slug_tmp . "_" . $slug_unique;
-                        $slug_unique++;
                     }
+
+                    $slug = $slug_tmp . '_' . $slug_unique;
+                    $slug_unique++;
                 }
                 $fieldsDescription['s_slug'] = $slug;
                 $array_where                 = array(
                     'fk_i_category_id' => $pk,
-                    'fk_c_locale_code' => $fieldsDescription["fk_c_locale_code"]
+                    'fk_c_locale_code' => $fieldsDescription['fk_c_locale_code']
                 );
 
                 $rs = $this->dao->update(DB_TABLE_PREFIX . 't_category_description', $fieldsDescription, $array_where);
                 if ($rs == 0) {
                     $this->dao->select();
-                    $this->dao->from($this->tableName . " as a");
+                    $this->dao->from($this->tableName . ' as a');
                     $this->dao->join(
-                        sprintf("%st_category_description as b", DB_TABLE_PREFIX),
-                        "a.pk_i_id = b.fk_i_category_id",
-                        "INNER"
+                        sprintf('%st_category_description as b', DB_TABLE_PREFIX),
+                        'a.pk_i_id = b.fk_i_category_id',
+                        'INNER'
                     );
-                    $this->dao->where("a.pk_i_id", $pk);
-                    $this->dao->where("b.fk_c_locale_code", $k);
+                    $this->dao->where('a.pk_i_id', $pk);
+                    $this->dao->where('b.fk_c_locale_code', $k);
                     $result = $this->dao->get();
                     $rows   = $result->result();
                     if ($result->numRows == 0) {
                         $res_insert   = $this->insertDescription($fieldsDescription);
-                        $affectedRows += 1;
+                        ++$affectedRows;
                     }
                 } elseif ($rs > 0) {
                     $affectedRows += $rs;
@@ -695,9 +689,9 @@ class Category extends DAO
 
         if ($return) {
             return $affectedRows;
-        } else {
-            return $return;
         }
+
+        return $return;
     }
 
     /**
@@ -735,16 +729,19 @@ class Category extends DAO
         foreach ($aFieldsDescription as $k => $fieldsDescription) {
             $fieldsDescription['fk_i_category_id'] = $category_id;
             $fieldsDescription['fk_c_locale_code'] = $k;
-            $slug_tmp                              =
-            $slug = osc_sanitizeString(osc_apply_filter('slug', $fieldsDescription['s_name']));
+            $slug                                  = osc_sanitizeString(osc_apply_filter(
+                'slug',
+                $fieldsDescription['s_name']
+            ));
+            $slug_tmp                              = $slug;
             $slug_unique                           = 1;
             while (true) {
                 if (!$this->findBySlug($slug)) {
                     break;
-                } else {
-                    $slug = $slug_tmp . "_" . $slug_unique;
-                    $slug_unique++;
                 }
+
+                $slug = $slug_tmp . '_' . $slug_unique;
+                $slug_unique++;
             }
             $fieldsDescription['s_slug'] = $slug;
             $this->dao->insert(DB_TABLE_PREFIX . 't_category_description', $fieldsDescription);
@@ -851,11 +848,7 @@ class Category extends DAO
 
         $results = $this->listWhere('a.fk_i_parent_id IS NULL AND a.pk_i_id = %d', (int)$categoryID);
 
-        if (count($results) > 0) {
-            return true;
-        }
-
-        return false;
+        return count($results) > 0;
     }
 
     /**
@@ -896,7 +889,7 @@ class Category extends DAO
         if (array_key_exists($categoryID, $this->_categories)) {
             $category = $this->_categories[$categoryID];
         } else {
-            $this->dao->select("s_name");
+            $this->dao->select('s_name');
             $this->dao->from($this->getTablePrefix() . 't_category_description');
             $this->dao->where('fk_i_category_id', $categoryID);
             $result = $this->dao->get();
@@ -910,9 +903,9 @@ class Category extends DAO
 
         if (isset($category['s_name'])) {
             return $category['s_name'];
-        } else {
-            return __('Non-Existent Category');
         }
+
+        return __('Non-Existent Category');
     }
 
     /**
@@ -922,7 +915,7 @@ class Category extends DAO
      *
      * @param string $locale
      *
-     * @return array
+     * @return array|bool
      * @since  3.2.1
      */
     public function _findNameIDByLocale($locale = null)
@@ -931,7 +924,7 @@ class Category extends DAO
             return false;
         }
 
-        $this->dao->select("s_name, fk_i_category_id as pk_i_id");
+        $this->dao->select('s_name, fk_i_category_id as pk_i_id');
         $this->dao->from($this->getTablePrefix() . 't_category_description');
         $this->dao->where('fk_c_locale_code', $locale);
         $result = $this->dao->get();
@@ -1057,11 +1050,11 @@ class Category extends DAO
      */
     public function formatValue($value)
     {
-        if (is_null($value)) {
+        if ($value === null) {
             return DB_CONST_NULL;
-        } else {
-            $value = trim($value);
         }
+
+        $value = trim($value);
         switch ($value) {
             case DB_FUNC_NOW:
             case DB_CONST_TRUE:

@@ -48,11 +48,9 @@ class AdminSecBaseModel extends SecBaseModel
         $config_version = preg_replace('|-.*|', '', $config_version);
 
         if ($config_version > osc_get_preference('version') && MULTISITE == 0) {
-            if (get_class($this) === 'CAdminTools') {
-            } else {
-                if (get_class($this) !== 'CAdminUpgrade') {
-                    $this->redirectTo(osc_admin_base_url(true) . '?page=upgrade');
-                }
+            if ($this instanceof CAdminTools) {
+            } elseif (!$this instanceof CAdminUpgrade) {
+                $this->redirectTo(osc_admin_base_url(true) . '?page=upgrade');
             }
         }
 

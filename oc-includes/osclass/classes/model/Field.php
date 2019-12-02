@@ -165,9 +165,9 @@ class Field extends DAO
         }
         if (empty($where)) {
             return array();
-        } else {
-            $this->dao->where('( ' . implode(' OR ', $where) . ' )');
         }
+
+        $this->dao->where('( ' . implode(' OR ', $where) . ' )');
         $this->dao->where('f.pk_i_id = c.fk_i_field_id');
         $this->dao->where('f.b_searchable', 1);
 
@@ -333,10 +333,10 @@ class Field extends DAO
         while (true) {
             if (!$this->findBySlug($slug)) {
                 break;
-            } else {
-                $slug_k++;
-                $slug = $slug_tmp . '_' . $slug_k;
             }
+
+            $slug_k++;
+            $slug = $slug_tmp . '_' . $slug_k;
         }
         $this->dao->insert($this->getTableName(), array(
             's_name'     => $name,

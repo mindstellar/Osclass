@@ -58,6 +58,7 @@ abstract class BaseModel
         try {
             $this->subdomain_params($current_host);
         } catch (Exception $e) {
+            LogOsclass::newInstance()->error($e->getMessage(), $e->getFile().' at line:'.$e->getLine());
         }
         $this->page = Params::getParam('page');
         $this->action = Params::getParam('action');

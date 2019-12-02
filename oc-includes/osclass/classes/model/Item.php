@@ -485,10 +485,8 @@ class Item extends DAO
         $this->dao->orderBy('i.pk_i_id', 'DESC');
         if ($end != null) {
             $this->dao->limit($start, $end);
-        } else {
-            if ($start > 0) {
-                $this->dao->limit($start);
-            }
+        } elseif ($start > 0) {
+            $this->dao->limit($start);
         }
 
         $result = $this->dao->get();
@@ -1166,9 +1164,9 @@ class Item extends DAO
 
         if (null !== $item) {
             return $this->extendDataSingle($item);
-        } else {
-            return array();
         }
+
+        return array();
     }
 
     /**

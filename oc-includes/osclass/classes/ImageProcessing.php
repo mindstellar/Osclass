@@ -104,8 +104,6 @@ class ImageProcessing
                 }
                 break;
         }
-
-        return $this;
     }
 
     /**
@@ -328,52 +326,50 @@ class ImageProcessing
                     // DO NOTHING, THE IMAGE IS OK OR WE DON'T KNOW IF IT'S ROTATED
                     break;
             }
-        } else {
-            if (isset($this->_exif['Orientation'])) {
-                switch ($this->_exif['Orientation']) {
-                    case 1:
-                    default:
-                        // DO NOTHING, THE IMAGE IS OK OR WE DON'T KNOW IF IT'S ROTATED
-                        break;
-                    case 2:
-                        imageflip($this->im, IMG_FLIP_HORIZONTAL);
-                        break;
-                    case 3:
-                        $this->im = imagerotate($this->im, 180, 0);
-                        break;
-                    case 4:
-                        $this->im = imagerotate($this->im, 180, 0);
-                        imageflip($this->im, IMG_FLIP_HORIZONTAL);
-                        break;
-                    case 5:
-                        $this->im = imagerotate($this->im, 270, 0);
-                        imageflip($this->im, IMG_FLIP_HORIZONTAL);
-                        $aux           = $this->_height;
-                        $this->_height = $this->_width;
-                        $this->_width  = $aux;
-                        break;
-                    case 6:
-                        $this->im      = imagerotate($this->im, -90, 0);
-                        $aux           = $this->_height;
-                        $this->_height = $this->_width;
-                        $this->_width  = $aux;
-                        break;
-                    case 7:
-                        $this->im = imagerotate($this->im, 90, 0);
-                        imageflip($this->im, IMG_FLIP_HORIZONTAL);
-                        $aux           = $this->_height;
-                        $this->_height = $this->_width;
-                        $this->_width  = $aux;
-                        break;
-                    case 8:
-                        $this->im      = imagerotate($this->im, 90, 0);
-                        $aux           = $this->_height;
-                        $this->_height = $this->_width;
-                        $this->_width  = $aux;
-                        break;
-                }
-                $this->_exif['Orientation'] = 1;
+        } elseif (isset($this->_exif['Orientation'])) {
+            switch ($this->_exif['Orientation']) {
+                case 1:
+                default:
+                    // DO NOTHING, THE IMAGE IS OK OR WE DON'T KNOW IF IT'S ROTATED
+                    break;
+                case 2:
+                    imageflip($this->im, IMG_FLIP_HORIZONTAL);
+                    break;
+                case 3:
+                    $this->im = imagerotate($this->im, 180, 0);
+                    break;
+                case 4:
+                    $this->im = imagerotate($this->im, 180, 0);
+                    imageflip($this->im, IMG_FLIP_HORIZONTAL);
+                    break;
+                case 5:
+                    $this->im = imagerotate($this->im, 270, 0);
+                    imageflip($this->im, IMG_FLIP_HORIZONTAL);
+                    $aux           = $this->_height;
+                    $this->_height = $this->_width;
+                    $this->_width  = $aux;
+                    break;
+                case 6:
+                    $this->im      = imagerotate($this->im, -90, 0);
+                    $aux           = $this->_height;
+                    $this->_height = $this->_width;
+                    $this->_width  = $aux;
+                    break;
+                case 7:
+                    $this->im = imagerotate($this->im, 90, 0);
+                    imageflip($this->im, IMG_FLIP_HORIZONTAL);
+                    $aux           = $this->_height;
+                    $this->_height = $this->_width;
+                    $this->_width  = $aux;
+                    break;
+                case 8:
+                    $this->im      = imagerotate($this->im, 90, 0);
+                    $aux           = $this->_height;
+                    $this->_height = $this->_width;
+                    $this->_width  = $aux;
+                    break;
             }
+            $this->_exif['Orientation'] = 1;
         }
 
         return $this;

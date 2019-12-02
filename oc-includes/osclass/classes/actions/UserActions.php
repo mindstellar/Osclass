@@ -290,11 +290,11 @@ class UserActions
             $error[]     = 10;
         }
 
-        if ($this->is_admin) {
-            if (Params::getParam('s_password', false, false) != Params::getParam('s_password2', false, false)) {
-                $flash_error .= _m("Passwords don't match") . PHP_EOL;
-                $error[]     = 7;
-            }
+        if ($this->is_admin
+            && Params::getParam('s_password', false, false) != Params::getParam('s_password2', false, false)
+        ) {
+            $flash_error .= _m("Passwords don't match") . PHP_EOL;
+            $error[]     = 7;
         }
 
         $flash_error = osc_apply_filter('user_edit_flash_error', $flash_error, $userId);

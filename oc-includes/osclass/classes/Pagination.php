@@ -82,9 +82,9 @@ class Pagination
             $links = $this->get_links();
             if ($this->listClass !== false) {
                 return '<ul class="' . $this->listClass . '">' . implode($this->delimiter, $links) . '</ul>';
-            } else {
-                return '<ul>' . implode($this->delimiter, $links) . '</ul>';
             }
+
+            return '<ul>' . implode($this->delimiter, $links) . '</ul>';
         } else {
             return '';
         }

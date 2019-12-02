@@ -214,9 +214,9 @@ class RegionStats extends DAO
             osc_cache_set($key, $return, OSC_CACHE_TTL);
 
             return $return;
-        } else {
-            return $cache;
         }
+
+        return $cache;
     }
 
     /**

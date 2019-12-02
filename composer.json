@@ -33,7 +33,10 @@
     "phpseclib/phpseclib": "2.0.x",
     "pensiero/php-openssl-cryptor": "0.1.0",
     "google/recaptcha": "1.1.x",
-    "gettext/gettext": "4.6.x"
+    "gettext/gettext": "4.6.x",
+    "ext-gd": "*",
+    "ext-imagick": "*",
+    "ext-memcache": "*"
   },
   "require-dev": {
     "roave/security-advisories": "dev-master"

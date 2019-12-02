@@ -36,14 +36,6 @@ class Dump extends DAO
     private static $instance;
 
     /**
-     * Set data
-     */
-    public function __construct()
-    {
-        parent::__construct();
-    }
-
-    /**
      * @return \Dump
      */
     public static function newInstance()
@@ -65,9 +57,9 @@ class Dump extends DAO
         $res = $this->dao->query('SHOW TABLES;');
         if ($res) {
             return $res->result();
-        } else {
-            return array();
         }
+
+        return array();
     }
 
     /**

@@ -44,7 +44,7 @@ class Session
             $currentCookieParams['domain'] = COOKIE_DOMAIN;
         }
         if (isset($_SERVER['HTTPS'])) {
-            $currentCookieParams["secure"] = true;
+            $currentCookieParams['secure'] = true;
         }
         session_set_cookie_params(
             $currentCookieParams['lifetime'],

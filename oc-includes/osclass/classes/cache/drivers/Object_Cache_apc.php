@@ -262,7 +262,6 @@ padding: 1em;'><h2>APC stats</h2>";
      */
     public function __destruct()
     {
-        return true;
     }
 
     /**

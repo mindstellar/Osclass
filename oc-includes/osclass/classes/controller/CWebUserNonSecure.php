@@ -202,20 +202,18 @@ class CWebUserNonSecure extends BaseModel
             case 'contact_post':
                 $user = User::newInstance()->findByPrimaryKey(Params::getParam('id'));
                 View::newInstance()->_exportVariableToView('user', $user);
-                if (osc_recaptcha_private_key() != '') {
-                    if (!osc_check_recaptcha()) {
-                        osc_add_flash_error_message(_m('The Recaptcha code is wrong'));
-                        Session::newInstance()
-                            ->_setForm('yourEmail', Params::getParam('yourEmail'));
-                        Session::newInstance()->_setForm('yourName', Params::getParam('yourName'));
-                        Session::newInstance()
-                            ->_setForm('phoneNumber', Params::getParam('phoneNumber'));
-                        Session::newInstance()
-                            ->_setForm('message_body', Params::getParam('message'));
-                        $this->redirectTo(osc_user_public_profile_url());
+                if ((osc_recaptcha_private_key() != '') && !osc_check_recaptcha()) {
+                    osc_add_flash_error_message(_m('The Recaptcha code is wrong'));
+                    Session::newInstance()
+                        ->_setForm('yourEmail', Params::getParam('yourEmail'));
+                    Session::newInstance()->_setForm('yourName', Params::getParam('yourName'));
+                    Session::newInstance()
+                        ->_setForm('phoneNumber', Params::getParam('phoneNumber'));
+                    Session::newInstance()
+                        ->_setForm('message_body', Params::getParam('message'));
+                    $this->redirectTo(osc_user_public_profile_url());
 
-                        return false; // BREAK THE PROCESS, THE RECAPTCHA IS WRONG
-                    }
+                    return false; // BREAK THE PROCESS, THE RECAPTCHA IS WRONG
                 }
                 $banned = osc_is_banned(Params::getParam('yourEmail'));
                 if ($banned == 1) {

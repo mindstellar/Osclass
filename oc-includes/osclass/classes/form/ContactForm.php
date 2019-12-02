@@ -135,7 +135,7 @@ class ContactForm extends Form
     public static function js_validation()
     {
         ?>
-        <script type="text/javascript">
+        <script>
             $(document).ready(function () {
                 // Code for form validation
                 $("form[name=contact_form]").validate({
@@ -177,5 +177,3 @@ class ContactForm extends Form
         <?php
     }
 }
-
-?>

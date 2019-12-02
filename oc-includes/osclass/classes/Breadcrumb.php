@@ -84,8 +84,10 @@ class Breadcrumb
 
     public function init()
     {
-        if (in_array($this->getLocation(),
-            array('item', 'page', 'search', 'login', 'register', 'user', 'contact', 'custom'))
+        if (in_array(
+            $this->getLocation(),
+            array('item', 'page', 'search', 'login', 'register', 'user', 'contact', 'custom')
+        )
         ) {
             $l = array(
                 'url'   => osc_base_url(),
@@ -95,7 +97,7 @@ class Breadcrumb
         }
 
         switch ($this->getLocation()) {
-            case('item'):
+            case ('item'):
                 if ($this->getSection() === 'item_add') {
                     $l = array('title' => $this->title['item_add']);
                     $this->addLevel($l);
@@ -105,6 +107,10 @@ class Breadcrumb
                 try {
                     $aCategory = osc_get_category('id', osc_item_category_id());
                 } catch (Exception $e) {
+                    LogOsclass::newInstance()->error(
+                        $e->getMessage(),
+                        $e->getFile().' at line:'.$e->getLine()
+                    );
                 }
                 // remove
                 View::newInstance()->_erase('categories');
@@ -117,38 +123,54 @@ class Breadcrumb
                         'title' => osc_category_name()
                     );
                 } catch (Exception $e) {
+                    LogOsclass::newInstance()->error(
+                        $e->getMessage(),
+                        $e->getFile().' at line:'.$e->getLine()
+                    );
                 }
                 $this->addLevel($l);
 
                 switch ($this->getSection()) {
-                    case('item_edit'):
+                    case ('item_edit'):
                         try {
                             $l = array('url' => osc_item_url(), 'title' => osc_item_title());
                         } catch (Exception $e) {
+                            LogOsclass::newInstance()->error(
+                                $e->getMessage(),
+                                $e->getFile().' at line:'.$e->getLine()
+                            );
                         }
                         $this->addLevel($l);
                         $l = array('title' => $this->title['item_edit']);
                         $this->addLevel($l);
                         break;
-                    case('send_friend'):
+                    case ('send_friend'):
                         try {
                             $l = array('url' => osc_item_url(), 'title' => osc_item_title());
                         } catch (Exception $e) {
+                            LogOsclass::newInstance()->error(
+                                $e->getMessage(),
+                                $e->getFile().' at line:'.$e->getLine()
+                            );
                         }
                         $this->addLevel($l);
                         $l = array('title' => $this->title['item_send_friend']);
                         $this->addLevel($l);
                         break;
-                    case('contact'):
+                    case ('contact'):
                         try {
                             $l = array('url' => osc_item_url(), 'title' => osc_item_title());
                         } catch (Exception $e) {
+                            LogOsclass::newInstance()->error(
+                                $e->getMessage(),
+                                $e->getFile().' at line:'.$e->getLine()
+                            );
                         }
                         $this->addLevel($l);
                         $l = array('title' => $this->title['item_contact']);
                         $this->addLevel($l);
                         break;
-                    case(''):
+                    case (''):
                         $l = array('title' => osc_item_title());
                         $this->addLevel($l);
                         break;
@@ -158,13 +180,17 @@ class Breadcrumb
                         break;
                 }
                 break;
-            case('search'):
+            case ('search'):
                 $region  = osc_search_region();
                 $city    = osc_search_city();
                 $pattern = osc_search_pattern();
                 try {
                     $category = osc_search_category_id();
                 } catch (Exception $e) {
+                    LogOsclass::newInstance()->error(
+                        $e->getMessage(),
+                        $e->getFile().' at line:'.$e->getLine()
+                    );
                 }
                 $category = ((count($category) == 1) ? $category[0] : '');
 
@@ -187,6 +213,10 @@ class Breadcrumb
                     try {
                         $aCategories = Category::newInstance()->toRootTree($category);
                     } catch (Exception $e) {
+                        LogOsclass::newInstance()->error(
+                            $e->getMessage(),
+                            $e->getFile().' at line:'.$e->getLine()
+                        );
                     }
                     foreach ($aCategories as $c) {
                         View::newInstance()->_erase('categories');
@@ -230,6 +260,10 @@ class Breadcrumb
                                     'title' => $city
                                 );
                             } catch (Exception $e) {
+                                LogOsclass::newInstance()->error(
+                                    $e->getMessage(),
+                                    $e->getFile().' at line:'.$e->getLine()
+                                );
                             }
                             $this->addLevel($l);
                         } else {
@@ -242,6 +276,10 @@ class Breadcrumb
                                     'title' => $aRegion['s_name']
                                 );
                             } catch (Exception $e) {
+                                LogOsclass::newInstance()->error(
+                                    $e->getMessage(),
+                                    $e->getFile().' at line:'.$e->getLine()
+                                );
                             }
                             $this->addLevel($l);
 
@@ -252,6 +290,10 @@ class Breadcrumb
                                     'title' => $aCity['s_name']
                                 );
                             } catch (Exception $e) {
+                                LogOsclass::newInstance()->error(
+                                    $e->getMessage(),
+                                    $e->getFile().' at line:'.$e->getLine()
+                                );
                             }
                             $this->addLevel($l);
                         }
@@ -263,6 +305,10 @@ class Breadcrumb
                                 'title' => $region
                             );
                         } catch (Exception $e) {
+                            LogOsclass::newInstance()->error(
+                                $e->getMessage(),
+                                $e->getFile().' at line:'.$e->getLine()
+                            );
                         }
                         $this->addLevel($l);
                     }
@@ -276,14 +322,12 @@ class Breadcrumb
 
                 // remove url from the last node
                 $nodes = $this->getaLevel();
-                if ($nodes > 0) {
-                    if (array_key_exists('url', $nodes[count($nodes) - 1])) {
-                        unset($nodes[count($nodes) - 1]['url']);
-                    }
+                if (($nodes > 0) && array_key_exists('url', $nodes[count($nodes) - 1])) {
+                    unset($nodes[count($nodes) - 1]['url']);
                 }
                 $this->setaLevel($nodes);
                 break;
-            case('user'):
+            case ('user'):
                 // use dashboard without url if you're in the dashboards
                 if ($this->getSection() === 'dashboard') {
                     $l = array('title' => $this->title['user_dashboard']);
@@ -305,27 +349,27 @@ class Breadcrumb
                 $this->addLevel($l);
 
                 switch ($this->getSection()) {
-                    case('items'):
+                    case ('items'):
                         $l = array('title' => $this->title['user_items']);
                         $this->addLevel($l);
                         break;
-                    case('alerts'):
+                    case ('alerts'):
                         $l = array('title' => $this->title['user_alerts']);
                         $this->addLevel($l);
                         break;
-                    case('profile'):
+                    case ('profile'):
                         $l = array('title' => $this->title['user_profile']);
                         $this->addLevel($l);
                         break;
-                    case('change_email'):
+                    case ('change_email'):
                         $l = array('title' => $this->title['user_change_email']);
                         $this->addLevel($l);
                         break;
-                    case('change_password'):
+                    case ('change_password'):
                         $l = array('title' => $this->title['user_change_password']);
                         $this->addLevel($l);
                         break;
-                    case('change_username'):
+                    case ('change_username'):
                         $l = array('title' => $this->title['user_change_username']);
                         $this->addLevel($l);
                         break;
@@ -335,35 +379,35 @@ class Breadcrumb
                         break;
                 }
                 break;
-            case('login'):
+            case ('login'):
                 switch ($this->getSection()) {
-                    case('recover'):
+                    case ('recover'):
                         $l = array('title' => $this->title['login_recover']);
                         $this->addLevel($l);
                         break;
-                    case('forgot'):
+                    case ('forgot'):
                         $l = array('title' => $this->title['login_forgot']);
                         $this->addLevel($l);
                         break;
-                    case(''):
+                    case (''):
                         $l = array('title' => $this->title['login']);
                         $this->addLevel($l);
                         break;
                 }
                 break;
-            case('register'):
+            case ('register'):
                 $l = array('title' => $this->title['register']);
                 $this->addLevel($l);
                 break;
-            case('page'):
+            case ('page'):
                 $l = array('title' => osc_static_page_title());
                 $this->addLevel($l);
                 break;
-            case('contact'):
+            case ('contact'):
                 $l = array('title' => $this->title['contact']);
                 $this->addLevel($l);
                 break;
-            case('custom'):
+            case ('custom'):
                 $l = array('title' => Rewrite::newInstance()->get_title());
                 $this->addLevel($l);
                 break;
@@ -441,7 +485,7 @@ class Breadcrumb
         }
 
         $node = array();
-        for ($i = 0, $iMax = count($this->aLevel); $i < $iMax; $i++) {
+        foreach ($this->aLevel as $i => $iValue) {
             $text = '<li ';
             // set a class style for first and last <li>
             if ($i == 0) {
@@ -456,9 +500,9 @@ class Breadcrumb
                 $text .= ' ' . $separator . ' ';
             }
             // create span tag
-            $title = '<span itemprop="title">' . $this->aLevel[$i]['title'] . '</span>';
-            if (array_key_exists('url', $this->aLevel[$i])) {
-                $title = '<a href="' . osc_esc_html($this->aLevel[$i]['url']) . '" itemprop="url">' . $title . '</a>';
+            $title = '<span itemprop="title">' . $iValue['title'] . '</span>';
+            if (array_key_exists('url', $iValue)) {
+                $title = '<a href="' . osc_esc_html($iValue['url']) . '" itemprop="url">' . $title . '</a>';
             }
             $node[] = $text . $title . '</li>' . PHP_EOL;
         }

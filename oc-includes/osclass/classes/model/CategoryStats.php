@@ -88,14 +88,12 @@ class CategoryStats extends DAO
             );
         $return = $this->dao->query($sql);
         $result = Category::newInstance()->findByPrimaryKey($categoryId);
-        if ($return !== false) {
-            if ($result['fk_i_parent_id'] != null) {
-                $parent_res = $this->increaseNumItems($result['fk_i_parent_id']);
-                if ($parent_res !== false) {
-                    $return += $parent_res;
-                } else {
-                    $return = false;
-                }
+        if (($return !== false) && $result['fk_i_parent_id'] != null) {
+            $parent_res = $this->increaseNumItems($result['fk_i_parent_id']);
+            if ($parent_res !== false) {
+                $return += $parent_res;
+            } else {
+                $return = false;
             }
         }
 
@@ -206,9 +204,9 @@ class CategoryStats extends DAO
         $data   = $result->row();
         if ($data == null) {
             return 0;
-        } else {
-            return $data['i_num_items'];
         }
+
+        return $data['i_num_items'];
     }
 
     /**
@@ -232,11 +230,13 @@ class CategoryStats extends DAO
         }
         if (isset($numItemsMap['parent'][$cat['pk_i_id']])) {
             return $numItemsMap['parent'][$cat['pk_i_id']]['numItems'];
-        } elseif (isset($numItemsMap['subcategories'][$cat['pk_i_id']])) {
-            return $numItemsMap['subcategories'][$cat['pk_i_id']]['numItems'];
-        } else {
-            return 0;
         }
+
+        if (isset($numItemsMap['subcategories'][$cat['pk_i_id']])) {
+            return $numItemsMap['subcategories'][$cat['pk_i_id']]['numItems'];
+        }
+
+        return 0;
     }
 
     /**

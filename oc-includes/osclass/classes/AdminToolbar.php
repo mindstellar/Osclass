@@ -97,7 +97,7 @@ class AdminToolbar
      *               title, tabindex.
      *               - target     - string    - _blank
      */
-    function add_submenu($array)
+    public function add_submenu($array)
     {
         if (isset($array['parentid']) && isset($array['id'])) {
             $this->nodes[$array['parentid']]->submenu[$array['id']] = (object)$array;
@@ -120,7 +120,7 @@ class AdminToolbar
      * @param string $parentid
      * @param string $id
      */
-    function remove_submenu($parentid, $id)
+    public function remove_submenu($parentid, $id)
     {
         if (isset($this->nodes[$parentid]) && isset($this->nodes[$parentid]->submenu[$id])) {
             unset($this->nodes[$parentid]->submenu[$id]);
@@ -140,7 +140,7 @@ class AdminToolbar
             echo '<div id="header" class="navbar"><div class="header-wrapper">';
 
             foreach ($this->nodes as $value) {
-                $meta = "";
+                $meta = '';
                 if (isset($value->meta)) {
                     foreach ($value->meta as $k => $v) {
                         $meta .= $k . '="' . $v . '" ';
@@ -153,7 +153,7 @@ class AdminToolbar
                     echo '<nav class="osc_admin_submenu" id="osc_toolbar_sub_' . $value->id . '"><ul>';
                     foreach ($value->submenu as $subvalue) {
                         if (isset($subvalue->subid)) {
-                            $submeta = "";
+                            $submeta = '';
                             if (isset($subvalue->meta)) {
                                 foreach ($subvalue->meta as $sk => $sv) {
                                     $submeta .= $sk . '="' . $sv . '" ';

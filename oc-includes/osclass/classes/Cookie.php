@@ -41,11 +41,11 @@ class Cookie
 
             foreach ($vars as $key => $var) {
                 if ($var != '' && isset($vals[$key])) {
-                    $this->val["$var"] = $vals[$key];
-                    $_COOKIE["$var"]   = $vals[$key];
+                    $this->val[(string)$var] = $vals[$key];
+                    $_COOKIE[(string)$var]   = $vals[$key];
                 } else {
-                    $this->val["$var"] = '';
-                    $_COOKIE["$var"]   = '';
+                    $this->val[(string)$var] = '';
+                    $_COOKIE[(string)$var]   = '';
                 }
             }
         }
@@ -69,8 +69,8 @@ class Cookie
      */
     public function push($var, $value)
     {
-        $this->val["$var"] = $value;
-        $_COOKIE["$var"]   = $value;
+        $this->val[(string)$var] = $value;
+        $_COOKIE[(string)$var]   = $value;
     }
 
     /**
@@ -91,7 +91,8 @@ class Cookie
         $cookie_val = '';
         if (is_array($this->val) && count($this->val) > 0) {
             $cookie_val = '';
-            $vars       = $vals = array();
+            $vals       = array();
+            $vars       = $vals;
 
             foreach ($this->val as $key => $curr) {
                 if ($curr !== '') {

@@ -269,18 +269,14 @@ class Search extends DAO
         if (is_array($conditions)) {
             foreach ($conditions as $condition) {
                 $condition = trim($condition);
-                if ($condition != '') {
-                    if (!in_array($condition, $this->conditions)) {
-                        $this->conditions[] = $condition;
-                    }
+                if (($condition != '') && !in_array($condition, $this->conditions)) {
+                    $this->conditions[] = $condition;
                 }
             }
         } else {
             $conditions = trim($conditions);
-            if ($conditions != '') {
-                if (!in_array($conditions, $this->conditions)) {
-                    $this->conditions[] = $conditions;
-                }
+            if (($conditions != '') && !in_array($conditions, $this->conditions)) {
+                $this->conditions[] = $conditions;
             }
         }
     }
@@ -302,10 +298,8 @@ class Search extends DAO
                     $this->locale_code[$l] = $l;
                 }
             }
-        } else {
-            if ($locale != '') {
-                $this->locale_code[$locale] = $locale;
-            }
+        } elseif ($locale != '') {
+            $this->locale_code[$locale] = $locale;
         }
     }
 
@@ -323,18 +317,14 @@ class Search extends DAO
         if (is_array($tables)) {
             foreach ($tables as $table) {
                 $table = trim($table);
-                if ($table != '') {
-                    if (!in_array($table, $this->tables)) {
-                        $this->tables[] = $table;
-                    }
+                if (($table != '') && !in_array($table, $this->tables)) {
+                    $this->tables[] = $table;
                 }
             }
         } else {
             $tables = trim($tables);
-            if ($tables != '') {
-                if (!in_array($tables, $this->tables)) {
-                    $this->tables[] = $tables;
-                }
+            if (($tables != '') && !in_array($tables, $this->tables)) {
+                $this->tables[] = $tables;
             }
         }
     }
@@ -588,9 +578,9 @@ class Search extends DAO
 
         if ($extended) {
             return Item::newInstance()->extendData($items);
-        } else {
-            return $items;
         }
+
+        return $items;
     }
 
     /**
@@ -903,9 +893,9 @@ class Search extends DAO
             }
 
             return Item::newInstance()->extendData($items);
-        } else {
-            return array();
         }
+
+        return array();
     }
 
     /**
@@ -1075,9 +1065,9 @@ class Search extends DAO
             osc_cache_set($key, $return, OSC_CACHE_TTL);
 
             return $return;
-        } else {
-            return $latestItems;
         }
+
+        return $latestItems;
     }
 
     /**
@@ -1500,9 +1490,9 @@ class Search extends DAO
         $result = $this->dao->get();
         if ($result) {
             return $result->result();
-        } else {
-            return array();
         }
+
+        return array();
     }
 
     /**

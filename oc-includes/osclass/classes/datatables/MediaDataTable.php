@@ -29,6 +29,10 @@ class MediaDataTable extends DataTable
     private $order_by;
     private $resourceID;
     private $total_filtered;
+    /**
+     * @var int
+     */
+    private $sEcho;
 
     /**
      * @param $params
@@ -65,16 +69,12 @@ class MediaDataTable extends DataTable
     {
 
         $arg_date = '&sort=date';
-        if (Params::getParam('sort') === 'date') {
-            if (Params::getParam('direction') === 'desc') {
-                $arg_date .= '&direction=asc';
-            }
+        if ((Params::getParam('sort') === 'date') && Params::getParam('direction') === 'desc') {
+            $arg_date .= '&direction=asc';
         }
         $arg_item = '&sort=attached_to';
-        if (Params::getParam('sort') === 'attached_to') {
-            if (Params::getParam('direction') === 'desc') {
-                $arg_item .= '&direction=asc';
-            }
+        if ((Params::getParam('sort') === 'attached_to') && Params::getParam('direction') === 'desc') {
+            $arg_item .= '&direction=asc';
         }
 
         Rewrite::newInstance()->init();
@@ -124,7 +124,8 @@ class MediaDataTable extends DataTable
         }
 
 
-        $this->order_by['type'] = $direction = $_get['direction'];
+        $direction              = $_get['direction'];
+        $this->order_by['type'] = $direction;
         $arrayDirection         = array('desc', 'asc');
         if (!in_array($direction, $arrayDirection)) {
             Params::setParam('direction', 'desc');

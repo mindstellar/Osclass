@@ -175,22 +175,20 @@ class CWebUser extends WebSecBaseModel
                     $user = User::newInstance()->findByUsername($username);
                     if (isset($user['s_username'])) {
                         osc_add_flash_error_message(_m('The specified username is already in use'));
+                    } elseif (osc_is_username_blacklisted($username)) {
+                        osc_add_flash_error_message(_m('The specified username is not valid, it contains some invalid words'));
                     } else {
-                        if (osc_is_username_blacklisted($username)) {
-                            osc_add_flash_error_message(_m('The specified username is not valid, it contains some invalid words'));
-                        } else {
-                            User::newInstance()->update(
-                                array('s_username' => $username),
-                                array('pk_i_id' => Session::newInstance()->_get('userId'))
-                            );
-                            osc_add_flash_ok_message(_m('The username was updated'));
-                            osc_run_hook(
-                                'after_username_change',
-                                Session::newInstance()->_get('userId'),
-                                Params::getParam('s_username')
-                            );
-                            $this->redirectTo(osc_user_profile_url());
-                        }
+                        User::newInstance()->update(
+                            array('s_username' => $username),
+                            array('pk_i_id' => Session::newInstance()->_get('userId'))
+                        );
+                        osc_add_flash_ok_message(_m('The username was updated'));
+                        osc_run_hook(
+                            'after_username_change',
+                            Session::newInstance()->_get('userId'),
+                            Params::getParam('s_username')
+                        );
+                        $this->redirectTo(osc_user_profile_url());
                     }
                 } else {
                     osc_add_flash_error_message(_m('The specified username could not be empty'));
@@ -325,6 +323,7 @@ class CWebUser extends WebSecBaseModel
                         try {
                             User::newInstance()->deleteUser(osc_logged_user_id());
                         } catch (Exception $e) {
+                            LogOsclass::newInstance()->error($e->getMessage(), $e->getFile().' at line:'.$e->getLine());
                         }
 
                         Session::newInstance()->_drop('userId');

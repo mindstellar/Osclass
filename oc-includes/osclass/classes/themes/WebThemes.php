@@ -86,16 +86,6 @@ class WebThemes extends Themes
         }
     }
 
-    /**
-     * @param $theme
-     */
-    public function setCurrentTheme($theme)
-    {
-        $this->theme = $theme;
-        $this->setCurrentThemePath();
-        $this->setCurrentThemeUrl();
-    }
-
     public function setCurrentThemePath()
     {
         if (file_exists($this->path . $this->theme . '/')) {

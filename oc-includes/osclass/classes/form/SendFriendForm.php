@@ -166,5 +166,3 @@ class SendFriendForm extends Form
         <?php
     }
 }
-
-?>

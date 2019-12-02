@@ -25,18 +25,68 @@ class FieldForm extends Form
     public static function i18n_datePicker()
     {
         ?>
-        <script type="text/javascript">
+        <script>
 
             $.datepicker.regional['custom'] = { // Default regional settings
                 closeText: '<?php echo osc_esc_js(__('Done')); ?>', // Display text for close link
                 prevText: '<?php echo osc_esc_js(__('Prev')); ?>', // Display text for previous month link
                 nextText: '<?php echo osc_esc_js(__('Next')); ?>', // Display text for next month link
                 currentText: '<?php echo osc_esc_js(__('Today')); ?>', // Display text for current month link
-                monthNames: ['<?php echo osc_esc_js(__('January')); ?>', '<?php echo osc_esc_js(__('February')); ?>', '<?php echo osc_esc_js(__('March')); ?>', '<?php echo osc_esc_js(__('April')); ?>', '<?php echo osc_esc_js(__('May')); ?>', '<?php echo osc_esc_js(__('June')); ?>', '<?php echo osc_esc_js(__('July')); ?>', '<?php echo osc_esc_js(__('August')); ?>', '<?php echo osc_esc_js(__('September')); ?>', '<?php echo osc_esc_js(__('October')); ?>', '<?php echo osc_esc_js(__('November')); ?>', '<?php echo osc_esc_js(__('December')); ?>'], // Names of months for drop-down and formatting
-                monthNamesShort: ['<?php _e('Jan'); ?>', '<?php _e('Feb'); ?>', '<?php _e('Mar'); ?>', '<?php _e('Apr'); ?>', '<?php _e('May'); ?>', '<?php _e('Jun'); ?>', '<?php _e('Jul'); ?>', '<?php _e('Aug'); ?>', '<?php _e('Sep'); ?>', '<?php _e('Oct'); ?>', '<?php _e('Nov'); ?>', '<?php _e('Dec'); ?>'], // For formatting
-                dayNames: ['<?php echo osc_esc_js(__('Sunday')); ?>', '<?php echo osc_esc_js(__('Monday')); ?>', '<?php echo osc_esc_js(__('Tuesday')); ?>', '<?php echo osc_esc_js(__('Wednesday')); ?>', '<?php echo osc_esc_js(__('Thursday')); ?>', '<?php echo osc_esc_js(__('Friday')); ?>', '<?php echo osc_esc_js(__('Saturday')); ?>'], // For formatting
-                dayNamesShort: ['<?php _e('Sun'); ?>', '<?php _e('Mon'); ?>', '<?php _e('Tue'); ?>', '<?php _e('Wed'); ?>', '<?php _e('Thu'); ?>', '<?php _e('Fri'); ?>', '<?php _e('Sat'); ?>'], // For formatting
-                dayNamesMin: ['<?php _e('Su'); ?>', '<?php _e('Mo'); ?>', '<?php _e('Tu'); ?>', '<?php _e('We'); ?>', '<?php _e('Th'); ?>', '<?php _e('Fr'); ?>', '<?php _e('Sa'); ?>'], // Column headings for days starting at Sunday
+                monthNames: [
+                    '<?php echo osc_esc_js(__('January')); ?>',
+                    '<?php echo osc_esc_js(__('February')); ?>',
+                    '<?php echo osc_esc_js(__('March')); ?>',
+                    '<?php echo osc_esc_js(__('April')); ?>',
+                    '<?php echo osc_esc_js(__('May')); ?>',
+                    '<?php echo osc_esc_js(__('June')); ?>',
+                    '<?php echo osc_esc_js(__('July')); ?>',
+                    '<?php echo osc_esc_js(__('August')); ?>',
+                    '<?php echo osc_esc_js(__('September')); ?>',
+                    '<?php echo osc_esc_js(__('October')); ?>',
+                    '<?php echo osc_esc_js(__('November')); ?>',
+                    '<?php echo osc_esc_js(__('December')); ?>'
+                ], // Names of months for drop-down and formatting
+                monthNamesShort: [
+                    '<?php _e('Jan'); ?>',
+                    '<?php _e('Feb'); ?>',
+                    '<?php _e('Mar'); ?>',
+                    '<?php _e('Apr'); ?>',
+                    '<?php _e('May'); ?>',
+                    '<?php _e('Jun'); ?>',
+                    '<?php _e('Jul'); ?>',
+                    '<?php _e('Aug'); ?>',
+                    '<?php _e('Sep'); ?>',
+                    '<?php _e('Oct'); ?>',
+                    '<?php _e('Nov'); ?>',
+                    '<?php _e('Dec'); ?>'
+                ], // For formatting
+                dayNames: [
+                    '<?php echo osc_esc_js(__('Sunday')); ?>',
+                    '<?php echo osc_esc_js(__('Monday')); ?>',
+                    '<?php echo osc_esc_js(__('Tuesday')); ?>',
+                    '<?php echo osc_esc_js(__('Wednesday')); ?>',
+                    '<?php echo osc_esc_js(__('Thursday')); ?>',
+                    '<?php echo osc_esc_js(__('Friday')); ?>',
+                    '<?php echo osc_esc_js(__('Saturday')); ?>'
+                ], // For formatting
+                dayNamesShort: [
+                    '<?php _e('Sun'); ?>',
+                    '<?php _e('Mon'); ?>',
+                    '<?php _e('Tue'); ?>',
+                    '<?php _e('Wed'); ?>',
+                    '<?php _e('Thu'); ?>',
+                    '<?php _e('Fri'); ?>',
+                    '<?php _e('Sat'); ?>'
+                ], // For formatting
+                dayNamesMin: [
+                    '<?php _e('Su'); ?>',
+                    '<?php _e('Mo'); ?>',
+                    '<?php _e('Tu'); ?>',
+                    '<?php _e('We'); ?>',
+                    '<?php _e('Th'); ?>',
+                    '<?php _e('Fr'); ?>',
+                    '<?php _e('Sa'); ?>'
+                ], // Column headings for days starting at Sunday
                 weekHeader: '<?php _e('Wk'); ?>', // Column header for week of the year
                 dateFormat: 'dd/mm/yy', // See format options on parseDate
                 firstDay: 0, // The first day of the week, Sun = 0, Mon = 1, ...
@@ -83,7 +133,7 @@ class FieldForm extends Form
         parent::generic_input_text(
             's_options',
             (isset($field) && isset($field['s_options'])) ? html_entity_decode($field['s_options'])
-            : ''
+                : ''
         );
 
         return true;
@@ -268,7 +318,7 @@ class FieldForm extends Form
                         echo '<select name="meta[' . $field['pk_i_id'] . ']" id="meta_'
                             . $field['s_slug'] . '">';
                         if ($search) {
-                            echo '<option value="">' . __('Select', 'osclass') . " "
+                            echo '<option value="">' . __('Select', 'osclass') . ' '
                                 . $field['s_name'] . '</option>';
                         }
                         foreach ($options as $option) {
@@ -399,7 +449,7 @@ class FieldForm extends Form
             $value = 0;
         }
         $aux = <<<FB
-            <script type="text/javascript">
+            <script>
             $(document).ready(function(){
                 $('.$id_field').datepicker({
                     onSelect: function() {
@@ -462,5 +512,3 @@ FB;
         }
     }
 }
-
-?>

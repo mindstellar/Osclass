@@ -85,8 +85,7 @@ class AdminForm extends Form
     public static function type_select($admin = null)
     {
         $options = array(
-            array('i_value' => '0', 's_text' => __('Administrator'))
-            ,
+            array('i_value' => '0', 's_text' => __('Administrator')),
             array('i_value' => '1', 's_text' => __('Moderator'))
         );
 
@@ -97,7 +96,7 @@ class AdminForm extends Form
     public static function js_validation()
     {
         ?>
-        <script type="text/javascript">
+        <script>
             $(document).ready(function () {
                 // Code for form validation
                 $("form[name=admin_form]").validate({
@@ -168,8 +167,6 @@ class AdminForm extends Form
         </script>
         <?php
     }
-
 }
 
 /* file end: ./oc-includes/osclass/form/AdminForm.php */
-?>

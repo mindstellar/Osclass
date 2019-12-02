@@ -1422,8 +1422,11 @@ class DBCommandClass
      */
     public function importSQL($sql)
     {
-        $sql     = str_replace('/*TABLE_PREFIX*/', DB_TABLE_PREFIX, $sql);
-        $sql     = str_replace('/*OSCLASS_VERSION*/', strtr(OSCLASS_VERSION, array('.' => '')), $sql);
+        $sql     = str_replace(
+            array('/*TABLE_PREFIX*/', '/*OSCLASS_VERSION*/'),
+            array(DB_TABLE_PREFIX, strtr(OSCLASS_VERSION, array('.' => ''))),
+            $sql
+        );
         $sql     = preg_replace('#/\*(?:[^*]*(?:\*(?!/))*)*\*/#', '', $sql);
         $queries = $this->splitSQL($sql, ';');
 
@@ -1509,7 +1512,9 @@ class DBCommandClass
             $table = current($v);
             if ($this->existTableIntoStruct($table, $struct_queries)) {
                 $lastTable     = null;
-                $normal_fields = $indexes = $constrains = array();
+                $constrains    = array();
+                $indexes       = $constrains;
+                $normal_fields = $indexes;
                 $fields        = $this->getTableFieldsFromStruct($table, $struct_queries);
                 if ($fields) {
                     // classify fields (into sql file)
@@ -1657,7 +1662,7 @@ class DBCommandClass
                     case '':
                     case 'on':
                         if ($lastTable) {
-                            $constrains[$lastTable] = $constrains[$lastTable] . ' ' . trim($field);
+                            $constrains[$lastTable] .= ' ' . trim($field);
                         }
                         break;
                     case 'foreign':
@@ -1763,14 +1768,10 @@ class DBCommandClass
                                 'ALTER TABLE ' . $table . ' ALTER COLUMN ' . $tbl_field['Field'] . ' SET DEFAULT '
                                 . $default_match[1];
                         }
-                    } else {
-                        // check NULL default values
-                        // if new default value is diferent, alter column ...
-                        if ($default_match[1] !== 'NULL') {
-                            $struct_queries[] =
-                                'ALTER TABLE ' . $table . ' ALTER COLUMN ' . $tbl_field['Field'] . ' SET DEFAULT '
-                                . $default_match[1];
-                        }
+                    } elseif ($default_match[1] !== 'NULL') {
+                        $struct_queries[] =
+                            'ALTER TABLE ' . $table . ' ALTER COLUMN ' . $tbl_field['Field'] . ' SET DEFAULT '
+                            . $default_match[1];
                     }
                 }
                 // Remove it from the list, so it will not be added
@@ -1807,11 +1808,9 @@ class DBCommandClass
             foreach ($indexes_array as $k => $v) {
                 // if PRIMARY KEY already exist
                 $exist_primary = false;
-                if ($k === 'PRIMARY') {
-                    if (isset($indexes_array['PRIMARY'])) {
-                        if (count($indexes_array['PRIMARY']['columns']) > 0) {
-                            $exist_primary = true;
-                        }
+                if (($k === 'PRIMARY') && isset($indexes_array['PRIMARY'])) {
+                    if (count($indexes_array['PRIMARY']['columns']) > 0) {
+                        $exist_primary = true;
                     }
                 }
 
@@ -1822,14 +1821,12 @@ class DBCommandClass
                     $string .= 'UNIQUE KEY ';
                 } elseif ($v['index_type'] === 'FULLTEXT') {  // FULLTEXT INDEX MUST HAVE KEY_NAME
                     $string .= 'FULLTEXT ' . $k . ' ';
+                } elseif ((count($v['columns']) == 1 && $v['columns'][0]['fieldname'] != $k)
+                    || (preg_match('/^idx/', $k, $coincidencias) > 0)
+                ) {
+                    $string .= 'INDEX ' . $k . ' ';
                 } else {
-                    if ((count($v['columns']) == 1 && $v['columns'][0]['fieldname'] != $k)
-                        || (preg_match('/^idx/', $k, $coincidencias) > 0)
-                    ) {
-                        $string .= 'INDEX ' . $k . ' ';
-                    } else {
-                        $string .= 'INDEX ' . $v['Key_name'] . ' ';
-                    }
+                    $string .= 'INDEX ' . $v['Key_name'] . ' ';
                 }
 
                 $columns = '';
@@ -1880,7 +1877,8 @@ class DBCommandClass
      */
     private function createForeignKey($tbl_constraint, $table, &$struct_queries, $constrains)
     {
-        $constrainsDB = $foreignRepited = array();
+        $foreignRepited = array();
+        $constrainsDB   = $foreignRepited;
         if (preg_match_all(
             "| CONSTRAINT\s+(.*)\s+FOREIGN KEY\s+(.*)\s+REFERENCES\s+(.*),?\n|i",
             $tbl_constraint['Create Table'],

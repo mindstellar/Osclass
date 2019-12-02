@@ -32,6 +32,7 @@ class UsersDataTable extends DataTable
     private $order_by;
     private $conditions;
     private $withFilters = false;
+    private $column_names;
 
     public function __construct()
     {

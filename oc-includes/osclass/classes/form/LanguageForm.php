@@ -264,5 +264,3 @@ class LanguageForm extends Form
         <?php
     }
 }
-
-?>

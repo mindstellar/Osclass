@@ -21,11 +21,6 @@
  */
 class WebSecBaseModel extends SecBaseModel
 {
-    public function __construct()
-    {
-        parent::__construct();
-    }
-
     /**
      * @return bool
      */
@@ -57,10 +52,10 @@ class WebSecBaseModel extends SecBaseModel
         if (Params::getParam('page') === 'ajax') {
             echo json_encode(array('error' => 1, 'msg' => __('Session timed out')));
             exit;
-        } else {
-            $this->redirectTo(osc_user_login_url());
-            exit;
         }
+
+        $this->redirectTo(osc_user_login_url());
+        exit;
     }
 }
 

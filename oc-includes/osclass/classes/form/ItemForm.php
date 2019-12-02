@@ -472,15 +472,13 @@ class ItemForm extends Form
             if ($options == null) {
                 $options = array(-1, 0, 1, 3, 5, 7, 10, 15, 30);
             }
-        } else {
-            if ($options == null) {
-                $options = array(0, 1, 3, 5, 7, 10, 15, 30);
-            }
+        } elseif ($options == null) {
+            $options = array(0, 1, 3, 5, 7, 10, 15, 30);
         }
         echo '<select name="dt_expiration" id="dt_expiration"></select>';
         $categories = Category::newInstance()->listEnabled();
         ?>
-        <script type="text/javascript">
+        <script>
             var exp_days = [];
             <?php foreach ($categories as $c) {
                 echo 'exp_days[' . $c['pk_i_id'] . '] = ' . $c['i_expiration_days'] . ';';
@@ -704,17 +702,17 @@ class ItemForm extends Form
             );
 
             return true;
-        } else {
-            if (Session::newInstance()->_getForm('country') != '') {
-                $item['s_country'] = Session::newInstance()->_getForm('country');
-            }
-            parent::generic_input_text(
-                'country',
-                isset($item['s_country']) ? $item['s_country'] : null
-            );
-
-            return true;
         }
+
+        if (Session::newInstance()->_getForm('country') != '') {
+            $item['s_country'] = Session::newInstance()->_getForm('country');
+        }
+        parent::generic_input_text(
+            'country',
+            isset($item['s_country']) ? $item['s_country'] : null
+        );
+
+        return true;
     }
 
     /**
@@ -788,17 +786,17 @@ class ItemForm extends Form
             );
 
             return true;
-        } else {
-            if (Session::newInstance()->_getForm('region') != '') {
-                $item['s_region'] = Session::newInstance()->_getForm('region');
-            }
-            parent::generic_input_text(
-                'region',
-                isset($item['s_region']) ? $item['s_region'] : null
-            );
-
-            return true;
         }
+
+        if (Session::newInstance()->_getForm('region') != '') {
+            $item['s_region'] = Session::newInstance()->_getForm('region');
+        }
+        parent::generic_input_text(
+            'region',
+            isset($item['s_region']) ? $item['s_region'] : null
+        );
+
+        return true;
     }
 
 
@@ -836,14 +834,14 @@ class ItemForm extends Form
             );
 
             return true;
-        } else {
-            if (Session::newInstance()->_getForm('city') != '') {
-                $item['s_city'] = Session::newInstance()->_getForm('city');
-            }
-            parent::generic_input_text('city', isset($item['s_city']) ? $item['s_city'] : null);
-
-            return true;
         }
+
+        if (Session::newInstance()->_getForm('city') != '') {
+            $item['s_city'] = Session::newInstance()->_getForm('city');
+        }
+        parent::generic_input_text('city', isset($item['s_city']) ? $item['s_city'] : null);
+
+        return true;
     }
 
     /**
@@ -1015,9 +1013,9 @@ class ItemForm extends Form
             parent::generic_input_hidden('contactEmail', $user['s_email']);
 
             return true;
-        } else {
-            return false;
         }
+
+        return false;
     }
 
     /**
@@ -1048,7 +1046,7 @@ class ItemForm extends Form
     public static function location_javascript_new($path = 'front')
     {
         ?>
-        <script type="text/javascript">
+        <script>
             $(document).ready(function () {
 
                 $('#countryName').attr("autocomplete", "off");
@@ -1268,7 +1266,7 @@ class ItemForm extends Form
     public static function location_javascript($path = 'front')
     {
         ?>
-        <script type="text/javascript">
+        <script>
             $(document).ready(function () {
                 $("#countryId").on("change", function () {
                     var pk_c_code = $(this).val();
@@ -1589,10 +1587,12 @@ class ItemForm extends Form
                     <div id="<?php echo $_r['pk_i_id']; ?>"
                          fkid="<?php echo $_r['fk_i_item_id']; ?>"
                          name="<?php echo $_r['s_name']; ?>">
-                        <img src="<?php echo osc_apply_filter(
+                        <img src="
+                        <?php echo osc_apply_filter(
                                 'resource_path',
                                 osc_base_url() . $_r['s_path']
-                            ) . $_r['pk_i_id'] . '_thumbnail.'
+                            )
+                            . $_r['pk_i_id'] . '_thumbnail.'
                             . $_r['s_extension']; ?>"/><a
                                 href="javascript:delete_image(<?php echo $_r['pk_i_id'] . ', '
                                     . $_r['fk_i_item_id'] . ", '" . $_r['s_name'] . "', '"
@@ -1607,7 +1607,7 @@ class ItemForm extends Form
     public static function photos_javascript()
     {
         ?>
-        <script type="text/javascript">
+        <script>
             var photoIndex = 0;
 
             function gebi(id) {
@@ -1692,7 +1692,7 @@ class ItemForm extends Form
     public static function plugin_post_item($case = 'form')
     {
         ?>
-        <script type="text/javascript">
+        <script>
             var catPriceEnabled = [];
             <?php
             $categories = Category::newInstance()->listAll(false);
@@ -2038,16 +2038,11 @@ class ItemForm extends Form
                     <?php } ?>
                     return json;
                 }
-
                 <?php } else { ?>
             });
             <?php } ?>
             })
-
-
         </script>
         <?php
     }
 }
-
-?>

@@ -191,7 +191,9 @@ class ItemComment extends DAO
 
         if ($result == false) {
             return false;
-        } elseif ($result->numRows() === 0) {
+        }
+
+        if ($result->numRows() === 0) {
             return 0;
         } else {
             $total = $result->row();
@@ -450,7 +452,9 @@ class ItemComment extends DAO
 
         if ($result == false) {
             return false;
-        } elseif ($result->numRows() === 0) {
+        }
+
+        if ($result->numRows() === 0) {
             return 0;
         } else {
             $total = $result->row();

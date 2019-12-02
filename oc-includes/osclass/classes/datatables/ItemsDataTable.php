@@ -65,10 +65,8 @@ class ItemsDataTable extends DataTable
             $arg_date .= '&direction=asc';
         }
         $arg_expiration = '&sort=expiration';
-        if (Params::getParam('sort') === 'expiration') {
-            if (Params::getParam('direction') === 'desc') {
-                $arg_expiration .= '&direction=asc';
-            }
+        if ((Params::getParam('sort') === 'expiration') && Params::getParam('direction') === 'desc') {
+            $arg_expiration .= '&direction=asc';
         }
 
         Rewrite::newInstance()->init();
@@ -696,14 +694,6 @@ class ItemsDataTable extends DataTable
     public function withFilters()
     {
         return $this->withFilters;
-    }
-
-    /**
-     * @return array
-     */
-    public function rawRows()
-    {
-        return $this->rawRows;
     }
 
     /**

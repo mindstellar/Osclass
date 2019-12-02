@@ -42,17 +42,15 @@ class CWebContact extends BaseModel
                 $subject   = Params::getParam('subject');
                 $message   = Params::getParam('message');
 
-                if (osc_recaptcha_private_key() != '') {
-                    if (!osc_check_recaptcha()) {
-                        osc_add_flash_error_message(_m('The Recaptcha code is wrong'));
-                        Session::newInstance()->_setForm('yourName', $yourName);
-                        Session::newInstance()->_setForm('yourEmail', $yourEmail);
-                        Session::newInstance()->_setForm('subject', $subject);
-                        Session::newInstance()->_setForm('message_body', $message);
-                        $this->redirectTo(osc_contact_url());
+                if ((osc_recaptcha_private_key() != '') && !osc_check_recaptcha()) {
+                    osc_add_flash_error_message(_m('The Recaptcha code is wrong'));
+                    Session::newInstance()->_setForm('yourName', $yourName);
+                    Session::newInstance()->_setForm('yourEmail', $yourEmail);
+                    Session::newInstance()->_setForm('subject', $subject);
+                    Session::newInstance()->_setForm('message_body', $message);
+                    $this->redirectTo(osc_contact_url());
 
-                        return false; // BREAK THE PROCESS, THE RECAPTCHA IS WRONG
-                    }
+                    return false; // BREAK THE PROCESS, THE RECAPTCHA IS WRONG
                 }
 
                 $banned = osc_is_banned($yourEmail);

@@ -105,7 +105,7 @@ class CommentForm extends Form
     public static function js_validation($admin = false)
     {
         ?>
-        <script type="text/javascript">
+        <script>
             $(document).ready(function () {
                 // Code for form validation
                 $("form[name=comment_form]").validate({
@@ -160,8 +160,4 @@ class CommentForm extends Form
         </script>
         <?php
     }
-
-
 }
-
-?>

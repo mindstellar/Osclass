@@ -150,11 +150,11 @@ class ItemStats extends DAO
         $result = $this->dao->get();
         if (!$result) {
             return 0;
-        } else {
-            $res = $result->result();
-
-            return $res[0]['i_num_views'];
         }
+
+        $res = $result->result();
+
+        return $res[0]['i_num_views'];
     }
 
     /**
@@ -171,11 +171,11 @@ class ItemStats extends DAO
         $result = $this->dao->get();
         if (!$result) {
             return 0;
-        } else {
-            $res = $result->result();
-
-            return $res[0]['i_num_views'];
         }
+
+        $res = $result->result();
+
+        return $res[0]['i_num_views'];
     }
 }
 

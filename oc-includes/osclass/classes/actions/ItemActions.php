@@ -363,14 +363,12 @@ class ItemActions
                 if ($error == UPLOAD_ERR_OK) {
                     // check mime file
                     $fileMime = $aResources['type'][$key];
-                    if (stripos($fileMime, 'image/') !== false) {
-                        if (function_exists('getimagesize')) {
-                            $info = getimagesize($aResources['tmp_name'][$key]);
-                            if (isset($info['mime'])) {
-                                $fileMime = $info['mime'];
-                            } else {
-                                $fileMime = '';
-                            }
+                    if ((stripos($fileMime, 'image/') !== false) && function_exists('getimagesize')) {
+                        $info = getimagesize($aResources['tmp_name'][$key]);
+                        if (isset($info['mime'])) {
+                            $fileMime = $info['mime'];
+                        } else {
+                            $fileMime = '';
                         }
                     }
 
@@ -514,7 +512,8 @@ class ItemActions
                         $mime      = osc_apply_filter('upload_image_mime', $imgres->getMime());
 
                         // Create normal size
-                        $normal_path = $path = $tmpName . '_normal';
+                        $path        = $tmpName . '_normal';
+                        $normal_path = $path;
                         $size        = explode('x', osc_normal_dimensions());
                         $img         = $imgres->autoRotate();
 
@@ -1573,16 +1572,14 @@ class ItemActions
             } elseif (osc_moderate_items() > 0) { // HAS TO VALIDATE
                 if (!osc_is_web_user_logged_in()) { // NO USER IS LOGGED, VALIDATE
                     $active = 'INACTIVE';
-                } else { // USER IS LOGGED
-                    if (osc_logged_user_item_validation()) { //USER IS LOGGED, BUT NO NEED TO VALIDATE
+                } elseif (osc_logged_user_item_validation()) { //USER IS LOGGED, BUT NO NEED TO VALIDATE
+                    $active = 'ACTIVE';
+                } else { // USER IS LOGGED, NEED TO VALIDATE, CHECK NUMBER OF PREVIOUS ITEMS
+                    $user = User::newInstance()->findByPrimaryKey(osc_logged_user_id());
+                    if ($user['i_items'] < osc_moderate_items()) {
+                        $active = 'INACTIVE';
+                    } else {
                         $active = 'ACTIVE';
-                    } else { // USER IS LOGGED, NEED TO VALIDATE, CHECK NUMBER OF PREVIOUS ITEMS
-                        $user = User::newInstance()->findByPrimaryKey(osc_logged_user_id());
-                        if ($user['i_items'] < osc_moderate_items()) {
-                            $active = 'INACTIVE';
-                        } else {
-                            $active = 'ACTIVE';
-                        }
                     }
                 }
             } elseif (osc_moderate_items() == 0) {

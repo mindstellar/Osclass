@@ -132,9 +132,9 @@ class Object_Cache_apcu implements iObject_Cache
         $this->cache = array();
         if (extension_loaded('apcu')) {
             return apcu_clear_cache();
-        } else {
-            return true;
         }
+
+        return true;
     }
 
     /**
@@ -257,7 +257,6 @@ class Object_Cache_apcu implements iObject_Cache
      */
     public function __destruct()
     {
-        return true;
     }
 
     /**

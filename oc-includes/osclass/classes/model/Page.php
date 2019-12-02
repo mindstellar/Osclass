@@ -339,9 +339,9 @@ class Page extends DAO
             }
 
             return $resultPages;
-        } else {
-            return array();
         }
+
+        return array();
     }
 
     /**
@@ -367,9 +367,9 @@ class Page extends DAO
             $aPages = $result->result();
 
             return $aPages[0]['total'];
-        } else {
-            return 0;
         }
+
+        return 0;
     }
 
     /**
@@ -399,10 +399,8 @@ class Page extends DAO
             $aFields['b_link'] = 0;
         }
 
-        if ($aFields['b_link'] == '') {
-            if ($aFields['b_indelible'] == 1) {
-                $aFields['b_link'] = 0;
-            }
+        if (($aFields['b_link'] == '') && $aFields['b_indelible'] == 1) {
+            $aFields['b_link'] = 0;
         }
 
         $this->dao->insert($this->tableName, array(

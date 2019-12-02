@@ -126,6 +126,7 @@ class CWebAjax extends BaseModel
                 try {
                     $aItem = Item::newInstance()->findByPrimaryKey($item);
                 } catch (Exception $e) {
+                    LogOsclass::newInstance()->error($e->getMessage(), $e->getFile().' at line:'.$e->getLine());
                 }
 
                 // Check if the item exists
@@ -252,15 +253,15 @@ class CWebAjax extends BaseModel
                                 echo '-1';
 
                                 return false;
-                            } else {
-                                $aAlert = Alerts::newInstance()->findByPrimaryKey($alertID);
-                                osc_run_hook(
-                                    'hook_email_alert_validation',
-                                    $aAlert,
-                                    $email,
-                                    $secret
-                                );
                             }
+
+                            $aAlert = Alerts::newInstance()->findByPrimaryKey($alertID);
+                            osc_run_hook(
+                                'hook_email_alert_validation',
+                                $aAlert,
+                                $email,
+                                $secret
+                            );
 
                             echo '1';
                         } else {
@@ -305,7 +306,7 @@ class CWebAjax extends BaseModel
                     $routes = Rewrite::newInstance()->getRoutes();
                     $rid    = Params::getParam('route');
                     $file   = '../';
-                    if (isset($routes[$rid], $routes[$rid]['file'])) {
+                    if (isset($routes[$rid]['file'])) {
                         $file = $routes[$rid]['file'];
                     }
                 } else {
@@ -373,6 +374,7 @@ class CWebAjax extends BaseModel
                     echo htmlspecialchars(json_encode($result), ENT_NOQUOTES);
                 } catch (Exception $e) {
                     echo '';
+                    LogOsclass::newInstance()->error($e->getMessage(), $e->getFile().' at line:'.$e->getLine());
                 }
                 break;
             case 'ajax_validate':
@@ -385,6 +387,7 @@ class CWebAjax extends BaseModel
                 try {
                     $item = Item::newInstance()->findByPrimaryKey($id);
                 } catch (Exception $e) {
+                    LogOsclass::newInstance()->error($e->getMessage(), $e->getFile().' at line:'.$e->getLine());
                 }
                 if ($item['s_secret'] != $secret) {
                     echo json_encode(array('success' => false));

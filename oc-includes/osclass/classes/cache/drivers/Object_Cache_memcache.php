@@ -46,7 +46,8 @@ class Object_Cache_memcache implements iObject_Cache
      * @access private
      * @since  3.4
      */
-    private $_memcached;
+    private $memcached;
+    private $cache;
 
     /**
      * Sets up object properties; PHP 5 style constructor
@@ -83,9 +84,9 @@ class Object_Cache_memcache implements iObject_Cache
             }
         }
 
-        $this->_memcached = new Memcache();
+        $this->memcached = new Memcache();
         foreach ($cache_server as $_config) {
-            $this->_memcached->addServer($_config['hostname'], $_config['port'], $_config['weight']);
+            $this->memcached->addServer($_config['hostname'], $_config['port'], $_config['weight']);
         }
     }
 
@@ -118,7 +119,7 @@ class Object_Cache_memcache implements iObject_Cache
         }
 
         $expire = ($expire == 0) ? $this->default_expiration : $expire;
-        $result = $this->_memcached->add($key, array($store_data, time(), $expire), 0, $expire);
+        $result = $this->memcached->add($key, array($store_data, time(), $expire), 0, $expire);
         if (false !== $result) {
             $this->cache[$key] = $data;
         }
@@ -142,7 +143,7 @@ class Object_Cache_memcache implements iObject_Cache
             $key = $this->site_prefix . $key;
         }
 
-        $result = $this->_memcached->delete($key);
+        $result = $this->memcached->delete($key);
         if (false !== $result) {
             unset($this->cache[$key]);
         }
@@ -161,7 +162,7 @@ class Object_Cache_memcache implements iObject_Cache
     {
         $this->cache = array();
 
-        return $this->_memcached->flush();
+        return $this->memcached->flush();
     }
 
     /**
@@ -193,7 +194,7 @@ class Object_Cache_memcache implements iObject_Cache
             $return = $value;
         } else {
             $found = true;
-            $value = $this->_memcached->get($key);
+            $value = $this->memcached->get($key);
             if (is_object($value) && 'ArrayObject' === get_class($value)) {
                 $value = $value->getArrayCopy();
             }
@@ -246,7 +247,7 @@ class Object_Cache_memcache implements iObject_Cache
 
         $expire = ($expire == 0) ? $this->default_expiration : $expire;
 
-        return $this->_memcached->set($key, $store_data, 0, $expire);
+        return $this->memcached->set($key, $store_data, 0, $expire);
     }
 
     /**
@@ -257,7 +258,9 @@ class Object_Cache_memcache implements iObject_Cache
      */
     public function stats()
     {
-        echo "<div style='position:absolute; width:200px;top:0px;'><div style='float:right;margin-right:30px;margin-top:15px;border: 1px red solid;
+        echo "<div style='position:absolute;width:200px;top:0px;'>
+<div style='float:right;
+ margin-right:30px;margin-top:15px;border: 1px red solid;
 border-radius: 17px;
 padding: 1em;'><h2>Memcache stats</h2>";
         echo '<p>';
@@ -289,7 +292,6 @@ padding: 1em;'><h2>Memcache stats</h2>";
      */
     public function __destruct()
     {
-        return true;
     }
 
     /**
