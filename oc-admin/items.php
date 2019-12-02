@@ -179,7 +179,7 @@ class CAdminItems extends AdminSecBaseModel
                                 '%d listings have been deleted', $numSuccess), $numSuccess), 'admin');
                         }
                         break;
-                    case 'clear_spam_all';
+                    case 'clear_spam_all':
                         $id      = Params::getParam('id');
                         $success = false;
 
@@ -197,7 +197,7 @@ class CAdminItems extends AdminSecBaseModel
                                 '%d listings have been unmarked as spam', $numSuccess), $numSuccess), 'admin');
                         }
                         break;
-                    case 'clear_bad_all';
+                    case 'clear_bad_all':
                         $id      = Params::getParam('id');
                         $success = false;
 
@@ -216,7 +216,7 @@ class CAdminItems extends AdminSecBaseModel
                                 'admin');
                         }
                         break;
-                    case 'clear_dupl_all';
+                    case 'clear_dupl_all':
                         $id      = Params::getParam('id');
                         $success = false;
 
@@ -234,7 +234,7 @@ class CAdminItems extends AdminSecBaseModel
                                 '%d listings have been unmarked as duplicated', $numSuccess), $numSuccess), 'admin');
                         }
                         break;
-                    case 'clear_expi_all';
+                    case 'clear_expi_all':
                         $id      = Params::getParam('id');
                         $success = false;
 
@@ -252,7 +252,7 @@ class CAdminItems extends AdminSecBaseModel
                                 '%d listings have been unmarked as expired', $numSuccess), $numSuccess), 'admin');
                         }
                         break;
-                    case 'clear_offe_all';
+                    case 'clear_offe_all':
                         $id      = Params::getParam('id');
                         $success = false;
 
@@ -270,7 +270,7 @@ class CAdminItems extends AdminSecBaseModel
                                 '%d listings have been unmarked as offensive', $numSuccess), $numSuccess), 'admin');
                         }
                         break;
-                    case 'clear_all';
+                    case 'clear_all':
                         $id      = Params::getParam('id');
                         $success = false;
 
@@ -535,7 +535,7 @@ class CAdminItems extends AdminSecBaseModel
                     $referer = Params::getServerParam('HTTP_REFERER', false, false);
                     if (preg_match('/page=items/', $referer)) {
                         if (preg_match("/action=([\p{L}|_|-]+)/u", $referer, $matches)) {
-                            if ($matches[1] == 'items_reported') {
+                            if ($matches[1] === 'items_reported') {
                                 Session::newInstance()->_set('osc_admin_referer', $referer);
                             }
                         } else {
