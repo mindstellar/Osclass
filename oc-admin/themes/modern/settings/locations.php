@@ -491,7 +491,7 @@ osc_current_admin_theme_path('parts/header.php'); ?>
                                         <option value=""><?php _e("Select an option"); ?>
                                             <?php foreach ($locations
 
-                                            as $location) { ?>
+ as $location) { ?>
                                             <?php /* BUG: */
                                             if ($location['name'] == '') {
                                                 continue;
