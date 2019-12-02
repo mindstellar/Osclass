@@ -93,7 +93,8 @@ osc_current_admin_theme_path('parts/header.php'); ?>
                                     $alert_type = 'warning';
                                     $alert_msg  =
                                         sprintf(__('Akismet is disabled, please enter an API key. <a href="%s" target="_blank">(Get your key)</a>'),
-                                            'http://akismet.com/get/');;
+                                            'http://akismet.com/get/');
+                                    ;
                                     break;
                             }
                             ?>

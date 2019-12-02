@@ -424,7 +424,7 @@ osc_current_admin_theme_path('parts/header.php'); ?>
                         </div>
                         <div id="custom_rules" <?php if (!osc_rewrite_enabled()) {
                             echo 'class="hide"';
-                        } ?>>
+                                               } ?>>
                             <div id="show_hide"><a href="#"
                                                    onclick="javascript:showhide();"><?php _e('Show rules'); ?></a></div>
                             <div id="inner_rules" class="hide">
@@ -718,7 +718,7 @@ osc_current_admin_theme_path('parts/header.php'); ?>
                                     <pre><?php
                                         $htaccess_content = file_get_contents(osc_base_path() . '.htaccess');
                                         echo htmlentities($htaccess_content);
-                                        ?></pre>
+                                    ?></pre>
                                 </div>
                                 <div class="form-row">
                                     <h3 class="separate-top"><?php _e('What your .htaccess file should look like'); ?></h3>
@@ -735,7 +735,7 @@ RewriteRule . {$rewrite_base}index.php [L]
 </IfModule>
 HTACCESS;
                                         echo htmlentities($htaccess);
-                                        ?></pre>
+                                    ?></pre>
                                 </div>
                             <?php } ?>
                         <?php } ?>

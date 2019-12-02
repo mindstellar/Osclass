@@ -302,13 +302,13 @@ $withFilters = __get('withFilters');
                         <option value="10"><?php printf(__('%d Users'), 10); ?></option>
                         <option value="25" <?php if (Params::getParam('iDisplayLength') == 25) {
                             echo 'selected';
-                        } ?> ><?php printf(__('%d Users'), 25); ?></option>
+                                           } ?> ><?php printf(__('%d Users'), 25); ?></option>
                         <option value="50" <?php if (Params::getParam('iDisplayLength') == 50) {
                             echo 'selected';
-                        } ?> ><?php printf(__('%d Users'), 50); ?></option>
+                                           } ?> ><?php printf(__('%d Users'), 50); ?></option>
                         <option value="100" <?php if (Params::getParam('iDisplayLength') == 100) {
                             echo 'selected';
-                        } ?> ><?php printf(__('%d Users'), 100); ?></option>
+                                            } ?> ><?php printf(__('%d Users'), 100); ?></option>
                     </select>
                 </form>
                 <form method="get" action="<?php echo osc_admin_base_url(true); ?>" id="shortcut-filters"
@@ -320,7 +320,7 @@ $withFilters = __get('withFilters');
                     <?php } ?>
                     <a id="btn-display-filters" href="#" class="btn <?php if ($withFilters) {
                         echo 'btn-red';
-                    } ?>"><?php _e('Show filters'); ?></a>
+                                                                    } ?>"><?php _e('Show filters'); ?></a>
                     <input id="fUser" name="user" type="text" class="fUser input-text input-actions"
                            value="<?php echo osc_esc_html(Params::getParam('user')); ?>"/>
                     <input id="fUserId" name="userId" type="hidden"

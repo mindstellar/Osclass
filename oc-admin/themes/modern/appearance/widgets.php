@@ -105,10 +105,10 @@ osc_current_admin_theme_path('parts/header.php'); ?>
                                     <?php foreach ($widgets as $w) { ?>
                                         <tr<?php if ($countEvent % 2 == 0) {
                                             echo ' class="even"';
-                                        }
-                                        if ($countEvent == 1) {
-                                            echo ' class="table-first-row"';
-                                        } ?>>
+                                           }
+                                           if ($countEvent == 1) {
+                                               echo ' class="table-first-row"';
+                                           } ?>>
                                             <td><?php echo __('Widget') . ' ' . $w['pk_i_id']; ?></td>
                                             <td><?php printf(__('Description: %s'), $w['s_description']); ?></td>
                                             <td>

@@ -138,48 +138,48 @@ osc_current_admin_theme_path('parts/header.php'); ?>
                             <div>
                                 <input type="radio" name="purge_searches"
                                        value="hour" <?php echo((osc_purge_latest_searches() == 'hour')
-                                    ? 'checked="checked"' : ''); ?>
+                                        ? 'checked="checked"' : ''); ?>
                                        onclick="javascript:document.getElementById('customPurge').value = 'hour';"/>
                                 <?php _e('One hour'); ?>
                             </div>
                             <div>
                                 <input type="radio" name="purge_searches"
                                        value="day" <?php echo((osc_purge_latest_searches() == 'day')
-                                    ? 'checked="checked"' : ''); ?>
+                                        ? 'checked="checked"' : ''); ?>
                                        onclick="javascript:document.getElementById('customPurge').value = 'day';"/>
                                 <?php _e('One day'); ?>
                             </div>
                             <div>
                                 <input type="radio" name="purge_searches"
                                        value="week" <?php echo((osc_purge_latest_searches() == 'week')
-                                    ? 'checked="checked"' : ''); ?>
+                                        ? 'checked="checked"' : ''); ?>
                                        onclick="javascript:document.getElementById('customPurge').value = 'week';"/>
                                 <?php _e('One week'); ?>
                             </div>
                             <div>
                                 <input type="radio" name="purge_searches"
                                        value="forever" <?php echo((osc_purge_latest_searches() == 'forever')
-                                    ? 'checked="checked"' : ''); ?>
+                                        ? 'checked="checked"' : ''); ?>
                                        onclick="javascript:document.getElementById('customPurge').value = 'forever';"/>
                                 <?php _e('Forever'); ?>
                             </div>
                             <div>
                                 <input type="radio" name="purge_searches"
                                        value="1000" <?php echo((osc_purge_latest_searches() == '1000')
-                                    ? 'checked="checked"' : ''); ?>
+                                        ? 'checked="checked"' : ''); ?>
                                        onclick="javascript:document.getElementById('customPurge').value = '1000';"/>
                                 <?php _e('Store 1000 queries'); ?>
                             </div>
                             <div>
                                 <input type="radio" name="purge_searches" id="purge_searches"
                                        value="custom" <?php echo(!in_array(osc_purge_latest_searches(),
-                                    array('hour', 'day', 'week', 'forever', '1000')) ? 'checked="checked"' : ''); ?> />
+                                        array('hour', 'day', 'week', 'forever', '1000')) ? 'checked="checked"' : ''); ?> />
                                 <?php printf(__('Store %s queries'),
                                     '<input name="custom_queries" id="custom_queries" type="text" class="input-small" '
                                     . (!in_array(osc_purge_latest_searches(),
                                         array('hour', 'day', 'week', 'forever', '1000')) ? 'value="'
                                         . osc_esc_html(osc_purge_latest_searches()) . '"' : '')
-                                    . ' onkeyup="javascript:document.getElementById(\'customPurge\').value = this.value;" />'); ?>
+                                                      . ' onkeyup="javascript:document.getElementById(\'customPurge\').value = this.value;" />'); ?>
                                 <div class="help-box">
                                     <?php _e("This feature can generate a lot of data. It's recommended to purge this data periodically."); ?>
                                 </div>

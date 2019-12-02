@@ -44,7 +44,7 @@
                 <span><?php _e('Username'); ?></span>
                 <input type="text" name="user" id="user_login" class="input" value="<?php if (defined('DEMO')) {
                     echo 'admin';
-                } ?>" size="20"/>
+                                                                                    } ?>" size="20"/>
             </label>
         </p>
         <p>
@@ -52,7 +52,7 @@
                 <span><?php _e('Password'); ?></span>
                 <input type="password" name="password" id="user_pass" class="input" value="<?php if (defined('DEMO')) {
                     echo 'admin';
-                } ?>" size="20" autocomplete="off"/>
+                                                                                           } ?>" size="20" autocomplete="off"/>
             </label>
         </p>
         <?php osc_run_hook('login_admin_form'); ?>
@@ -65,7 +65,7 @@
                             == $locale['pk_c_code']
                         ) {
                             echo 'selected="selected"';
-                        } ?>><?php echo $locale['s_name']; ?></option>
+                                       } ?>><?php echo $locale['s_name']; ?></option>
                     <?php } ?>
                 </select>
             </p>

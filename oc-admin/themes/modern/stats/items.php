@@ -316,7 +316,7 @@ function customHead()
 
         }
     </script>
-<?php }
+    <?php }
 }
 
 
@@ -333,15 +333,15 @@ osc_add_hook('admin_header', 'customHead', 10);
             <div class="row-wrapper">
                 <a id="monthly" class="btn float-right <?php if ($type == 'month') {
                     echo 'btn-green';
-                } ?>"
+                                                       } ?>"
                    href="<?php echo osc_admin_base_url(true); ?>?page=stats&amp;action=items&amp;type_stat=month"><?php _e('Last 10 months'); ?></a>
                 <a id="weekly" class="btn float-right <?php if ($type == 'week') {
                     echo 'btn-green';
-                } ?>"
+                                                      } ?>"
                    href="<?php echo osc_admin_base_url(true); ?>?page=stats&amp;action=items&amp;type_stat=week"><?php _e('Last 10 weeks'); ?></a>
                 <a id="daily" class="btn float-right <?php if ($type == '' || $type == 'day') {
                     echo 'btn-green';
-                } ?>"
+                                                     } ?>"
                    href="<?php echo osc_admin_base_url(true); ?>?page=stats&amp;action=items&amp;type_stat=day"><?php _e('Last 10 days'); ?></a>
             </div>
         </div>
