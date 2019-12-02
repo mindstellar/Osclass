@@ -89,7 +89,7 @@ function osc_csrf_check()
 {
     $error     = false;
     $str_error = '';
-    if (Params::getParam('CSRFName') == '' || Params::getParam('CSRFToken') == '') {
+    if (!Params::getParam('CSRFName') || !Params::getParam('CSRFToken')) {
         $str_error = _m('Probable invalid request.');
         $error     = true;
     } else {
@@ -120,7 +120,7 @@ function osc_csrf_check()
         $url = osc_get_http_referer();
         // drop session referer
         Session::newInstance()->_dropReferer();
-        if ($url != '') {
+        if ($url) {
             osc_redirect_to($url);
         }
 
@@ -144,12 +144,12 @@ function osc_csrf_check()
  */
 function osc_is_banned($email = '', $ip = null)
 {
-    if ($ip == null) {
+    if ($ip === null) {
         $ip = Params::getServerParam('REMOTE_ADDR');
     }
     $rules = BanRule::newInstance()->listAll();
     if (!osc_is_ip_banned($ip, $rules)) {
-        if ($email != '') {
+        if ($email) {
             return osc_is_email_banned($email, $rules) ? 1 : 0; // 1:Email is banned, 0:not banned
         }
 
@@ -171,7 +171,7 @@ function osc_is_banned($email = '', $ip = null)
  */
 function osc_is_ip_banned($ip, $rules = null)
 {
-    if ($rules == null) {
+    if ($rules === null) {
         $rules = BanRule::newInstance()->listAll();
     }
     $ip_blocks = explode('.', $ip);
@@ -220,10 +220,7 @@ function osc_is_email_banned($email, $rules = null)
     }
     $email = strtolower($email);
     foreach ($rules as $rule) {
-        $rule = str_replace(array('*', '|'), array(
-            '.*',
-            "\\"
-        ), str_replace('.', "\.", strtolower($rule['s_email'])));
+        $rule = str_replace(array('*', '|'), array('.*', "\\"), str_replace('.', "\.", strtolower($rule['s_email'])));
         if ($rule != '') {
             if ($rule[0] === '!') {
                 $rule = '|^((?' . $rule . ').*)$|';

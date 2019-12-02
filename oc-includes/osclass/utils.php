@@ -1169,7 +1169,7 @@ function apache_mod_loaded($mod)
  */
 function osc_changeVersionTo($version = null)
 {
-    if ($version != null) {
+    if ($version) {
         osc_set_preference('version', $version);
         osc_reset_preferences();
     }

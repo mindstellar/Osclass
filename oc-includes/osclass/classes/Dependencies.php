@@ -8,8 +8,8 @@
 class Dependencies
 {
 
-    public $registered = array();
-    public $queue = array();
+    public $registered;
+    public $queue;
 
     public $resolved = array();
     public $unresolved = array();
@@ -17,8 +17,8 @@ class Dependencies
 
     public function __construct()
     {
-        $registered = array();
-        $queue      = array();
+        $this->registered = array();
+        $this->queue      = array();
     }
 
     /**
@@ -30,12 +30,10 @@ class Dependencies
      */
     public function register($id, $url, $dependencies)
     {
-        if ($id != '' && $url != '') {
+        if ($id && $url) {
             $this->registered[$id] = array(
-                'key'          => $id
-                ,
-                'url'          => $url
-                ,
+                'key'          => $id,
+                'url'          => $url,
                 'dependencies' => $dependencies
             );
         }
@@ -94,27 +92,21 @@ class Dependencies
                             if (in_array($dep, $this->unresolved)) {
                                 $this->error[$dep] = $dep;
                                 $error             = true;
+                            } elseif (isset($this->registered[$dep])) {
+                                $this->solveDeps($this->registered[$dep]);
                             } else {
-                                if (isset($this->registered[$dep])) {
-                                    $this->solveDeps($this->registered[$dep]);
-                                } else {
-                                    $this->error[$dep] = $dep;
-                                }
+                                $this->error[$dep] = $dep;
                             }
                         }
                     }
-                } else {
-                    if (!in_array($node['dependencies'], $this->resolved)) {
-                        if (in_array($node['dependencies'], $this->unresolved)) {
-                            $this->error[$node['dependencies']] = $node['dependencies'];
-                            $error                              = true;
-                        } else {
-                            if (isset($this->registered[$node['dependencies']])) {
-                                $this->solveDeps($this->registered[$node['dependencies']]);
-                            } else {
-                                $this->error[$node['dependencies']] = $node['dependencies'];
-                            }
-                        }
+                } elseif (!in_array($node['dependencies'], $this->resolved)) {
+                    if (in_array($node['dependencies'], $this->unresolved)) {
+                        $this->error[$node['dependencies']] = $node['dependencies'];
+                        $error                              = true;
+                    } elseif (isset($this->registered[$node['dependencies']])) {
+                        $this->solveDeps($this->registered[$node['dependencies']]);
+                    } else {
+                        $this->error[$node['dependencies']] = $node['dependencies'];
                     }
                 }
             }

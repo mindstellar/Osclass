@@ -17,6 +17,8 @@
     },
   "require": {
     "php": ">=5.6.20",
+    "ext-apcu": "*",
+    "ext-ctype": "*",
     "ext-json": "*",
     "ext-openssl": "*",
     "ext-mysqli": "*",
@@ -31,9 +33,7 @@
     "phpseclib/phpseclib": "2.0.x",
     "pensiero/php-openssl-cryptor": "0.1.0",
     "google/recaptcha": "1.1.x",
-    "gettext/gettext": "4.6.x",
-    "ext-apcu": "*",
-    "ext-ctype": "*"
+    "gettext/gettext": "4.6.x"
   },
   "require-dev": {
     "roave/security-advisories": "dev-master"

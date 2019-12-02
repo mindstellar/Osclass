@@ -10,11 +10,6 @@ class Scripts extends Dependencies
 
     private static $instance;
 
-    public function __construct()
-    {
-        parent::__construct();
-    }
-
     /**
      * @return \Scripts
      */

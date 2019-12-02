@@ -275,7 +275,10 @@ class WebThemes extends Themes
         $themes = array();
         $dir    = opendir($this->path);
         while ($file = readdir($dir)) {
-            if (preg_match('/^[a-zA-Z0-9_]+$/', $file)) {
+            if (preg_match('/^[a-zA-Z0-9_]+$/', $file)
+                && file_exists($this->path . '/' . $file . '/index.php')
+                && $this->loadThemeInfo($file)
+            ) {
                 $themes[] = $file;
             }
         }
