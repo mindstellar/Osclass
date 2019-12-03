@@ -17,7 +17,6 @@
     },
   "require": {
     "php": ">=5.6.20",
-    "ext-apcu": "*",
     "ext-ctype": "*",
     "ext-json": "*",
     "ext-openssl": "*",
@@ -27,6 +26,7 @@
     "ext-posix": "*",
     "ext-fileinfo": "*",
     "ext-mbstring": "*",
+    "ext-gd": "*",
     "ezyang/htmlpurifier": "4.11.x",
     "phpmailer/phpmailer": "5.2.x",
     "pclzip/pclzip": "2.8.2",
@@ -34,9 +34,12 @@
     "pensiero/php-openssl-cryptor": "0.1.0",
     "google/recaptcha": "1.1.x",
     "gettext/gettext": "4.6.x",
-    "ext-gd": "*",
-    "ext-imagick": "*",
-    "ext-memcache": "*"
+    "phpseclib/mcrypt_compat": "^1.0"
+  },
+  "suggest": {
+    "ext-apcu": "Fast PHP user cache",
+    "ext-imagick": "A Faster image manipulation library",
+    "ext-memcache": "Will enable to communicate with memcached server"
   },
   "require-dev": {
     "roave/security-advisories": "dev-master"
