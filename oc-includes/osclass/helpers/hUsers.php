@@ -53,29 +53,25 @@ function osc_is_web_user_logged_in()
 {
     if (View::newInstance()->_exists('_loggedUser')) {
         $user = View::newInstance()->_get('_loggedUser');
-        if (isset($user['b_enabled']) && $user['b_enabled'] == 1) {
-            return true;
-        }
 
-        return false;
+        return isset($user['b_enabled']) && $user['b_enabled'] == 1;
     }
 
     if (Session::newInstance()->_get('userId') != '') {
         $user = User::newInstance()->findByPrimaryKey(Session::newInstance()->_get('userId'));
         View::newInstance()->_exportVariableToView('_loggedUser', $user);
-        if (isset($user['b_enabled']) && $user['b_enabled'] == 1) {
-            return true;
-        }
 
-        return false;
+        return isset($user['b_enabled']) && $user['b_enabled'] == 1;
     }
 
     //can already be a logged user or not, we'll take a look into the cookie
     if (Cookie::newInstance()->get_value('oc_userId') != ''
         && Cookie::newInstance()->get_value('oc_userSecret') != ''
     ) {
-        $user = User::newInstance()->findByIdSecret(Cookie::newInstance()->get_value('oc_userId'),
-            Cookie::newInstance()->get_value('oc_userSecret'));
+        $user = User::newInstance()->findByIdSecret(
+            Cookie::newInstance()->get_value('oc_userId'),
+            Cookie::newInstance()->get_value('oc_userSecret')
+        );
         View::newInstance()->_exportVariableToView('_loggedUser', $user);
         if (isset($user['b_enabled']) && $user['b_enabled'] == 1) {
             Session::newInstance()->_set('userId', $user['pk_i_id']);
@@ -211,8 +207,10 @@ function osc_is_admin_user_logged_in()
     if (Cookie::newInstance()->get_value('oc_adminId') != ''
         && Cookie::newInstance()->get_value('oc_adminSecret') != ''
     ) {
-        $admin = Admin::newInstance()->findByIdSecret(Cookie::newInstance()->get_value('oc_adminId'),
-            Cookie::newInstance()->get_value('oc_adminSecret'));
+        $admin = Admin::newInstance()->findByIdSecret(
+            Cookie::newInstance()->get_value('oc_adminId'),
+            Cookie::newInstance()->get_value('oc_adminSecret')
+        );
         if (isset($admin['pk_i_id'])) {
             Session::newInstance()->_set('adminId', $admin['pk_i_id']);
             Session::newInstance()->_set('adminUserName', $admin['s_username']);
@@ -760,6 +758,3 @@ function osc_prepare_user_info()
 
     return View::newInstance()->_next('users');
 }
-
-
-

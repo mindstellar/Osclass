@@ -1,24 +1,24 @@
 <?php
-    /*
-     * Copyright 2014 Osclass
-     *
-     * Licensed under the Apache License, Version 2.0 (the "License");
-     * you may not use this file except in compliance with the License.
-     * You may obtain a copy of the License at
-     *
-     *     http://www.apache.org/licenses/LICENSE-2.0
-     *
-     * Unless required by applicable law or agreed to in writing, software
-     * distributed under the License is distributed on an "AS IS" BASIS,
-     * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-     * See the License for the specific language governing permissions and
-     * limitations under the License.
-     */
+/*
+ * Copyright 2014 Osclass
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 
-    /**
-     * @param null $type
-     * @param null $last_exec
-     */
+/**
+ * @param null $type
+ * @param null $last_exec
+ */
 function osc_runAlert($type = null, $last_exec = null)
 {
     $mUser = User::newInstance();
@@ -30,7 +30,7 @@ function osc_runAlert($type = null, $last_exec = null)
         $cron      = Cron::newInstance()->getCronByType($type);
         $last_exec = '0000-00-00 00:00:00';
         if (is_array($cron)) {
-            $last_exec = $cron[ 'd_last_exec' ];
+            $last_exec = $cron['d_last_exec'];
         }
     }
 
@@ -56,7 +56,7 @@ function osc_runAlert($type = null, $last_exec = null)
 
     foreach ($searches as $s_search) {
         // Get if there're new ads on this search
-        $json             = $s_search[ 's_search' ];
+        $json             = $s_search['s_search'];
         $array_conditions = (array)json_decode($json);
 
         $new_search = Search::newInstance();
@@ -70,23 +70,23 @@ function osc_runAlert($type = null, $last_exec = null)
         if (count($items) > 0) {
             // If we have new items from last check
             // Catch the user subscribed to this search
-            $alerts = Alerts::newInstance()->findUsersBySearchAndType($s_search[ 's_search' ], $type, $active);
+            $alerts = Alerts::newInstance()->findUsersBySearchAndType($s_search['s_search'], $type, $active);
 
             if (count($alerts) > 0) {
                 $ads = '';
                 foreach ($items as $item) {
-                    $ads .= '<a href="' . osc_item_url_ns($item[ 'pk_i_id' ]) . '">' . $item[ 's_title' ] . '</a><br/>';
+                    $ads .= '<a href="' . osc_item_url_ns($item['pk_i_id']) . '">' . $item['s_title'] . '</a><br/>';
                 }
 
                 foreach ($alerts as $alert) {
                     $user = array();
-                    if ($alert[ 'fk_i_user_id' ] != 0) {
-                        $user = $mUser->findByPrimaryKey($alert[ 'fk_i_user_id' ]);
+                    if ($alert['fk_i_user_id'] != 0) {
+                        $user = $mUser->findByPrimaryKey($alert['fk_i_user_id']);
                     }
-                    if (!isset($user[ 's_name' ])) {
+                    if (!isset($user['s_name'])) {
                         $user = array(
-                            's_name'  => $alert[ 's_email' ],
-                            's_email' => $alert[ 's_email' ]
+                            's_name'  => $alert['s_email'],
+                            's_email' => $alert['s_email']
                         );
                     }
                     if (count($alert) > 0) {

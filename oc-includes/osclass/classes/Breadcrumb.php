@@ -15,22 +15,22 @@
  * limitations under the License.
  */
 
-    /**
-     * Class Breadcrumb
-     */
+/**
+ * Class Breadcrumb
+ */
 class Breadcrumb
 {
+    protected $aLevel;
     private $location;
     private $section;
     private $title;
-    protected $aLevel;
 
     /**
      * Breadcrumb constructor.
      *
      * @param array $lang
      */
-    public function __construct($lang = array ())
+    public function __construct($lang = array())
     {
         $this->location = Rewrite::newInstance()->get_location();
         $this->section  = Rewrite::newInstance()->get_section();
@@ -38,339 +38,13 @@ class Breadcrumb
         $this->setTitles($lang);
     }
 
-    public function init()
-    {
-        if ( in_array($this->getLocation(), array('item', 'page', 'search', 'login', 'register', 'user', 'contact', 'custom')) ) {
-            $l = array(
-                'url'   => osc_base_url(),
-                'title' => osc_page_title()
-            );
-            $this->addLevel($l);
-        }
-
-        switch ($this->getLocation()) {
-            case('item'):
-                if ( $this->getSection() === 'item_add' ) {
-                    $l = array('title' => $this->title['item_add']);
-                    $this->addLevel($l);
-                    break;
-                }
-
-                try {
-                    $aCategory = osc_get_category( 'id', osc_item_category_id() );
-                } catch ( Exception $e ) {
-                }
-                // remove
-                View::newInstance()->_erase('categories');
-                View::newInstance()->_erase('subcategories');
-                View::newInstance()->_exportVariableToView('category', $aCategory);
-
-                try {
-                    $l = array (
-                        'url'   => osc_search_category_url() ,
-                        'title' => osc_category_name()
-                    );
-                } catch ( Exception $e ) {
-                }
-                $this->addLevel($l);
-
-                switch ($this->getSection()) {
-                    case('item_edit'):
-                        try {
-                            $l = array ( 'url' => osc_item_url() , 'title' => osc_item_title() );
-                        } catch ( Exception $e ) {
-                        }
-                        $this->addLevel($l);
-                        $l = array('title' => $this->title['item_edit']);
-                        $this->addLevel($l);
-                        break;
-                    case('send_friend'):
-                        try {
-                            $l = array ( 'url' => osc_item_url() , 'title' => osc_item_title() );
-                        } catch ( Exception $e ) {
-                        }
-                        $this->addLevel($l);
-                        $l = array('title' => $this->title['item_send_friend']);
-                        $this->addLevel($l);
-                        break;
-                    case('contact'):
-                        try {
-                            $l = array ( 'url' => osc_item_url() , 'title' => osc_item_title() );
-                        } catch ( Exception $e ) {
-                        }
-                        $this->addLevel($l);
-                        $l = array('title' => $this->title['item_contact']);
-                        $this->addLevel($l);
-                        break;
-                    case(''):
-                        $l = array('title' => osc_item_title());
-                        $this->addLevel($l);
-                        break;
-                    default:
-                        $l = array('title' => Rewrite::newInstance()->get_title());
-                        $this->addLevel($l);
-                        break;
-                }
-                break;
-            case('search'):
-                    $region     = osc_search_region();
-                    $city       = osc_search_city();
-                    $pattern    = osc_search_pattern();
-                try {
-                    $category = osc_search_category_id();
-                } catch ( Exception $e ) {
-                }
-                $category   = ((count($category) == 1) ? $category[0] : '');
-
-                    $b_show_all = ($pattern == '' && $category == '' && $region == '' && $city == '');
-                    $b_category = ($category != '');
-                    $b_pattern  = ($pattern != '');
-                    $b_region   = ($region != '');
-                    $b_city     = ($city != '');
-                    $b_location = ($b_region || $b_city);
-
-                    // show all
-                if ( $b_show_all ) {
-                    $l = array('title' => $this->title['search']);
-                    $this->addLevel($l);
-                    break;
-                }
-
-                    // category
-                if ( $b_category ) {
-                    try {
-                        $aCategories = Category::newInstance()->toRootTree( $category );
-                    } catch ( Exception $e ) {
-                    }
-                    foreach ( $aCategories as $c ) {
-                        View::newInstance()->_erase('categories');
-                        View::newInstance()->_erase('subcategories');
-                        View::newInstance()->_exportVariableToView('category', $c);
-
-                        try {
-                            $l = array (
-                                'url'   => osc_search_category_url() ,
-                                'title' => osc_category_name()
-                            );
-                        } catch ( Exception $e ) {
-                        }
-                        $this->addLevel($l);
-                    }
-                }
-
-                    // location
-                if ( $b_location ) {
-                    $params = array();
-                    if ( $b_category ) {
-                        $params['sCategory'] = $category;
-                    }
-
-                    if ( $b_city ) {
-                        $aCity = array();
-                        if ($b_region) {
-                            $_region = Region::newInstance()->findByName($region);
-                            if (isset($_region['pk_i_id'])) {
-                                $aCity = City::newInstance()->findByName($city, $_region['pk_i_id']);
-                            }
-                        } else {
-                            $aCity = City::newInstance()->findByName($city);
-                        }
-
-                        if ( count($aCity) == 0 ) {
-                            $params['sCity'] = $city;
-                            try {
-                                $l = array (
-                                    'url'   => osc_search_url( $params ) ,
-                                    'title' => $city
-                                );
-                            } catch ( Exception $e ) {
-                            }
-                            $this->addLevel($l);
-                        } else {
-                            $aRegion = Region::newInstance()->findByPrimaryKey($aCity['fk_i_region_id']);
-
-                            $params['sRegion'] = $aRegion['s_name'];
-                            try {
-                                $l = array (
-                                    'url'   => osc_search_url( $params ) ,
-                                    'title' => $aRegion[ 's_name' ]
-                                );
-                            } catch ( Exception $e ) {
-                            }
-                            $this->addLevel($l);
-
-                            $params['sCity'] = $aCity['s_name'];
-                            try {
-                                $l = array (
-                                    'url'   => osc_search_url( $params ) ,
-                                    'title' => $aCity[ 's_name' ]
-                                );
-                            } catch ( Exception $e ) {
-                            }
-                            $this->addLevel($l);
-                        }
-                    } else if ( $b_region ) {
-                        $params['sRegion'] = $region;
-                        try {
-                            $l = array (
-                                'url'   => osc_search_url( $params ) ,
-                                'title' => $region
-                            );
-                        } catch ( Exception $e ) {
-                        }
-                        $this->addLevel($l);
-                    }
-                }
-
-                    // pattern
-                if ( $b_pattern ) {
-                    $l = array('title' => sprintf($this->title['search_pattern'], $pattern));
-                    $this->addLevel($l);
-                }
-
-                    // remove url from the last node
-                    $nodes = $this->getaLevel();
-                if ( $nodes > 0 ) {
-                    if ( array_key_exists('url', $nodes[count($nodes) - 1]) ) {
-                        unset($nodes[count($nodes) - 1]['url']);
-                    }
-                }
-                    $this->setaLevel($nodes);
-                break;
-            case('user'):
-                // use dashboard without url if you're in the dashboards
-                if ( $this->getSection() === 'dashboard' ) {
-                    $l = array('title' => $this->title['user_dashboard']);
-                    $this->addLevel($l);
-                    break;
-                }
-
-                // use dashboard without url if you're in the dashboards
-                if ( $this->getSection() === 'pub_profile' ) {
-                    $l = array('title' => sprintf($this->title['user_dashboard_profile'], osc_user_name()));
-                    $this->addLevel($l);
-                    break;
-                }
-
-                $l = array(
-                    'url'   => osc_user_dashboard_url(),
-                    'title' => $this->title['user_account']
-                );
-                $this->addLevel($l);
-
-                switch ($this->getSection()) {
-                    case('items'):
-                        $l = array('title' => $this->title['user_items']);
-                        $this->addLevel($l);
-                        break;
-                    case('alerts'):
-                        $l = array('title' => $this->title['user_alerts']);
-                        $this->addLevel($l);
-                        break;
-                    case('profile'):
-                        $l = array('title' => $this->title['user_profile']);
-                        $this->addLevel($l);
-                        break;
-                    case('change_email'):
-                        $l = array('title' => $this->title['user_change_email']);
-                        $this->addLevel($l);
-                        break;
-                    case('change_password'):
-                        $l = array('title' => $this->title['user_change_password']);
-                        $this->addLevel($l);
-                        break;
-                    case('change_username'):
-                        $l = array('title' => $this->title['user_change_username']);
-                        $this->addLevel($l);
-                        break;
-                    default:
-                        $l = array('title' => Rewrite::newInstance()->get_title());
-                        $this->addLevel($l);
-                        break;
-                }
-                break;
-            case('login'):
-                switch ($this->getSection()) {
-                    case('recover'):
-                        $l = array('title' => $this->title['login_recover']);
-                        $this->addLevel($l);
-                        break;
-                    case('forgot'):
-                        $l = array('title' => $this->title['login_forgot']);
-                        $this->addLevel($l);
-                        break;
-                    case(''):
-                        $l = array('title' => $this->title['login']);
-                        $this->addLevel($l);
-                        break;
-                }
-                break;
-            case('register'):
-                $l = array('title' => $this->title['register']);
-                $this->addLevel($l);
-                break;
-            case('page'):
-                $l = array('title' => osc_static_page_title());
-                $this->addLevel($l);
-                break;
-            case('contact'):
-                $l = array('title' => $this->title['contact']);
-                $this->addLevel($l);
-                break;
-            case('custom'):
-                $l = array('title' => Rewrite::newInstance()->get_title());
-                $this->addLevel($l);
-                break;
-        }
-    }
-
-    /**
-     * @param string $separator
-     *
-     * @return string
-     */
-    public function render($separator = '&raquo;')
-    {
-        if ( count($this->aLevel) == 0 ) {
-            return '';
-        }
-
-        $node = array();
-        for ( $i = 0 , $iMax = count( $this->aLevel ); $i < $iMax; $i ++ ) {
-            $text = '<li ';
-            // set a class style for first and last <li>
-            if ( $i == 0 ) {
-                $text .= 'class="first-child" ';
-            }
-            if ( ($i == (count($this->aLevel) - 1)) && ($i != 0) ) {
-                $text .= 'class="last-child" ';
-            }
-            $text .='itemscope itemtype="http://data-vocabulary.org/Breadcrumb" >';
-            // set separator
-            if ( $i > 0 ) {
-                $text .= ' ' . $separator . ' ';
-            }
-            // create span tag
-            $title = '<span itemprop="title">' . $this->aLevel[$i]['title'] . '</span>';
-            if ( array_key_exists('url', $this->aLevel[$i]) ) {
-                $title = '<a href="' . osc_esc_html($this->aLevel[$i]['url']) . '" itemprop="url">' . $title . '</a>';
-            }
-            $node[] = $text . $title . '</li>' . PHP_EOL;
-        }
-
-        $result  = '<ul class="breadcrumb">' . PHP_EOL;
-        $result .= implode(PHP_EOL, $node);
-        $result .= '</ul>' . PHP_EOL;
-
-        return $result;
-    }
-
     /**
      * Set the texts for the breadcrumb
      *
+     * @param $lang
+     *
      * @since 3.1
      *
-     * @param $lang
      */
     public function setTitles($lang)
     {
@@ -397,15 +71,390 @@ class Breadcrumb
         $this->title['contact']                = __('Contact');
 
 
-        if ( !is_array($lang) ) {
+        if (!is_array($lang)) {
             return;
         }
 
         foreach ($lang as $k => $v) {
-            if ( array_key_exists($k, $this->title) ) {
+            if (array_key_exists($k, $this->title)) {
                 $this->title[$k] = $v;
             }
         }
+    }
+
+    public function init()
+    {
+        if (in_array(
+            $this->getLocation(),
+            array('item', 'page', 'search', 'login', 'register', 'user', 'contact', 'custom')
+        )
+        ) {
+            $l = array(
+                'url'   => osc_base_url(),
+                'title' => osc_page_title()
+            );
+            $this->addLevel($l);
+        }
+
+        switch ($this->getLocation()) {
+            case ('item'):
+                if ($this->getSection() === 'item_add') {
+                    $l = array('title' => $this->title['item_add']);
+                    $this->addLevel($l);
+                    break;
+                }
+
+                try {
+                    $aCategory = osc_get_category('id', osc_item_category_id());
+                } catch (Exception $e) {
+                    LogOsclass::newInstance()->error(
+                        $e->getMessage(),
+                        $e->getFile().' at line:'.$e->getLine()
+                    );
+                }
+                // remove
+                View::newInstance()->_erase('categories');
+                View::newInstance()->_erase('subcategories');
+                View::newInstance()->_exportVariableToView('category', $aCategory);
+
+                try {
+                    $l = array(
+                        'url'   => osc_search_category_url(),
+                        'title' => osc_category_name()
+                    );
+                } catch (Exception $e) {
+                    LogOsclass::newInstance()->error(
+                        $e->getMessage(),
+                        $e->getFile().' at line:'.$e->getLine()
+                    );
+                }
+                $this->addLevel($l);
+
+                switch ($this->getSection()) {
+                    case ('item_edit'):
+                        try {
+                            $l = array('url' => osc_item_url(), 'title' => osc_item_title());
+                        } catch (Exception $e) {
+                            LogOsclass::newInstance()->error(
+                                $e->getMessage(),
+                                $e->getFile().' at line:'.$e->getLine()
+                            );
+                        }
+                        $this->addLevel($l);
+                        $l = array('title' => $this->title['item_edit']);
+                        $this->addLevel($l);
+                        break;
+                    case ('send_friend'):
+                        try {
+                            $l = array('url' => osc_item_url(), 'title' => osc_item_title());
+                        } catch (Exception $e) {
+                            LogOsclass::newInstance()->error(
+                                $e->getMessage(),
+                                $e->getFile().' at line:'.$e->getLine()
+                            );
+                        }
+                        $this->addLevel($l);
+                        $l = array('title' => $this->title['item_send_friend']);
+                        $this->addLevel($l);
+                        break;
+                    case ('contact'):
+                        try {
+                            $l = array('url' => osc_item_url(), 'title' => osc_item_title());
+                        } catch (Exception $e) {
+                            LogOsclass::newInstance()->error(
+                                $e->getMessage(),
+                                $e->getFile().' at line:'.$e->getLine()
+                            );
+                        }
+                        $this->addLevel($l);
+                        $l = array('title' => $this->title['item_contact']);
+                        $this->addLevel($l);
+                        break;
+                    case (''):
+                        $l = array('title' => osc_item_title());
+                        $this->addLevel($l);
+                        break;
+                    default:
+                        $l = array('title' => Rewrite::newInstance()->get_title());
+                        $this->addLevel($l);
+                        break;
+                }
+                break;
+            case ('search'):
+                $region  = osc_search_region();
+                $city    = osc_search_city();
+                $pattern = osc_search_pattern();
+                try {
+                    $category = osc_search_category_id();
+                } catch (Exception $e) {
+                    LogOsclass::newInstance()->error(
+                        $e->getMessage(),
+                        $e->getFile().' at line:'.$e->getLine()
+                    );
+                }
+                $category = ((count($category) == 1) ? $category[0] : '');
+
+                $b_show_all = ($pattern == '' && $category == '' && $region == '' && $city == '');
+                $b_category = ($category != '');
+                $b_pattern  = ($pattern != '');
+                $b_region   = ($region != '');
+                $b_city     = ($city != '');
+                $b_location = ($b_region || $b_city);
+
+                // show all
+                if ($b_show_all) {
+                    $l = array('title' => $this->title['search']);
+                    $this->addLevel($l);
+                    break;
+                }
+
+                // category
+                if ($b_category) {
+                    try {
+                        $aCategories = Category::newInstance()->toRootTree($category);
+                    } catch (Exception $e) {
+                        LogOsclass::newInstance()->error(
+                            $e->getMessage(),
+                            $e->getFile().' at line:'.$e->getLine()
+                        );
+                    }
+                    foreach ($aCategories as $c) {
+                        View::newInstance()->_erase('categories');
+                        View::newInstance()->_erase('subcategories');
+                        View::newInstance()->_exportVariableToView('category', $c);
+
+                        try {
+                            $l = array(
+                                'url'   => osc_search_category_url(),
+                                'title' => osc_category_name()
+                            );
+                        } catch (Exception $e) {
+                        }
+                        $this->addLevel($l);
+                    }
+                }
+
+                // location
+                if ($b_location) {
+                    $params = array();
+                    if ($b_category) {
+                        $params['sCategory'] = $category;
+                    }
+
+                    if ($b_city) {
+                        $aCity = array();
+                        if ($b_region) {
+                            $_region = Region::newInstance()->findByName($region);
+                            if (isset($_region['pk_i_id'])) {
+                                $aCity = City::newInstance()->findByName($city, $_region['pk_i_id']);
+                            }
+                        } else {
+                            $aCity = City::newInstance()->findByName($city);
+                        }
+
+                        if (count($aCity) == 0) {
+                            $params['sCity'] = $city;
+                            try {
+                                $l = array(
+                                    'url'   => osc_search_url($params),
+                                    'title' => $city
+                                );
+                            } catch (Exception $e) {
+                                LogOsclass::newInstance()->error(
+                                    $e->getMessage(),
+                                    $e->getFile().' at line:'.$e->getLine()
+                                );
+                            }
+                            $this->addLevel($l);
+                        } else {
+                            $aRegion = Region::newInstance()->findByPrimaryKey($aCity['fk_i_region_id']);
+
+                            $params['sRegion'] = $aRegion['s_name'];
+                            try {
+                                $l = array(
+                                    'url'   => osc_search_url($params),
+                                    'title' => $aRegion['s_name']
+                                );
+                            } catch (Exception $e) {
+                                LogOsclass::newInstance()->error(
+                                    $e->getMessage(),
+                                    $e->getFile().' at line:'.$e->getLine()
+                                );
+                            }
+                            $this->addLevel($l);
+
+                            $params['sCity'] = $aCity['s_name'];
+                            try {
+                                $l = array(
+                                    'url'   => osc_search_url($params),
+                                    'title' => $aCity['s_name']
+                                );
+                            } catch (Exception $e) {
+                                LogOsclass::newInstance()->error(
+                                    $e->getMessage(),
+                                    $e->getFile().' at line:'.$e->getLine()
+                                );
+                            }
+                            $this->addLevel($l);
+                        }
+                    } elseif ($b_region) {
+                        $params['sRegion'] = $region;
+                        try {
+                            $l = array(
+                                'url'   => osc_search_url($params),
+                                'title' => $region
+                            );
+                        } catch (Exception $e) {
+                            LogOsclass::newInstance()->error(
+                                $e->getMessage(),
+                                $e->getFile().' at line:'.$e->getLine()
+                            );
+                        }
+                        $this->addLevel($l);
+                    }
+                }
+
+                // pattern
+                if ($b_pattern) {
+                    $l = array('title' => sprintf($this->title['search_pattern'], $pattern));
+                    $this->addLevel($l);
+                }
+
+                // remove url from the last node
+                $nodes = $this->getaLevel();
+                if (($nodes > 0) && array_key_exists('url', $nodes[count($nodes) - 1])) {
+                    unset($nodes[count($nodes) - 1]['url']);
+                }
+                $this->setaLevel($nodes);
+                break;
+            case ('user'):
+                // use dashboard without url if you're in the dashboards
+                if ($this->getSection() === 'dashboard') {
+                    $l = array('title' => $this->title['user_dashboard']);
+                    $this->addLevel($l);
+                    break;
+                }
+
+                // use dashboard without url if you're in the dashboards
+                if ($this->getSection() === 'pub_profile') {
+                    $l = array('title' => sprintf($this->title['user_dashboard_profile'], osc_user_name()));
+                    $this->addLevel($l);
+                    break;
+                }
+
+                $l = array(
+                    'url'   => osc_user_dashboard_url(),
+                    'title' => $this->title['user_account']
+                );
+                $this->addLevel($l);
+
+                switch ($this->getSection()) {
+                    case ('items'):
+                        $l = array('title' => $this->title['user_items']);
+                        $this->addLevel($l);
+                        break;
+                    case ('alerts'):
+                        $l = array('title' => $this->title['user_alerts']);
+                        $this->addLevel($l);
+                        break;
+                    case ('profile'):
+                        $l = array('title' => $this->title['user_profile']);
+                        $this->addLevel($l);
+                        break;
+                    case ('change_email'):
+                        $l = array('title' => $this->title['user_change_email']);
+                        $this->addLevel($l);
+                        break;
+                    case ('change_password'):
+                        $l = array('title' => $this->title['user_change_password']);
+                        $this->addLevel($l);
+                        break;
+                    case ('change_username'):
+                        $l = array('title' => $this->title['user_change_username']);
+                        $this->addLevel($l);
+                        break;
+                    default:
+                        $l = array('title' => Rewrite::newInstance()->get_title());
+                        $this->addLevel($l);
+                        break;
+                }
+                break;
+            case ('login'):
+                switch ($this->getSection()) {
+                    case ('recover'):
+                        $l = array('title' => $this->title['login_recover']);
+                        $this->addLevel($l);
+                        break;
+                    case ('forgot'):
+                        $l = array('title' => $this->title['login_forgot']);
+                        $this->addLevel($l);
+                        break;
+                    case (''):
+                        $l = array('title' => $this->title['login']);
+                        $this->addLevel($l);
+                        break;
+                }
+                break;
+            case ('register'):
+                $l = array('title' => $this->title['register']);
+                $this->addLevel($l);
+                break;
+            case ('page'):
+                $l = array('title' => osc_static_page_title());
+                $this->addLevel($l);
+                break;
+            case ('contact'):
+                $l = array('title' => $this->title['contact']);
+                $this->addLevel($l);
+                break;
+            case ('custom'):
+                $l = array('title' => Rewrite::newInstance()->get_title());
+                $this->addLevel($l);
+                break;
+        }
+    }
+
+    /**
+     * @return string
+     */
+    public function getLocation()
+    {
+        return $this->location;
+    }
+
+    /**
+     * @param $location
+     */
+    public function setLocation($location)
+    {
+        $this->location = $location;
+    }
+
+    /**
+     * @param $level
+     */
+    public function addLevel($level)
+    {
+        if (!is_array($level)) {
+            return;
+        }
+        $this->aLevel[] = $level;
+    }
+
+    /**
+     * @return string
+     */
+    public function getSection()
+    {
+        return $this->section;
+    }
+
+    /**
+     * @param $section
+     */
+    public function setSection($section)
+    {
+        $this->section = $section;
     }
 
     /**
@@ -425,47 +474,45 @@ class Breadcrumb
     }
 
     /**
-     * @param $location
-     */
-    public function setLocation($location)
-    {
-        $this->location = $location;
-    }
-
-    /**
+     * @param string $separator
+     *
      * @return string
      */
-    public function getLocation()
+    public function render($separator = '&raquo;')
     {
-        return $this->location;
-    }
-
-    /**
-     * @param $section
-     */
-    public function setSection($section)
-    {
-        $this->section = $section;
-    }
-
-    /**
-     * @return string
-     */
-    public function getSection()
-    {
-        return $this->section;
-    }
-
-    /**
-     * @param $level
-     */
-    public function addLevel($level)
-    {
-        if ( !is_array($level) ) {
-            return;
+        if (count($this->aLevel) == 0) {
+            return '';
         }
-        $this->aLevel[] = $level;
+
+        $node = array();
+        foreach ($this->aLevel as $i => $iValue) {
+            $text = '<li ';
+            // set a class style for first and last <li>
+            if ($i == 0) {
+                $text .= 'class="first-child" ';
+            }
+            if (($i == (count($this->aLevel) - 1)) && ($i != 0)) {
+                $text .= 'class="last-child" ';
+            }
+            $text .= 'itemscope itemtype="http://data-vocabulary.org/Breadcrumb" >';
+            // set separator
+            if ($i > 0) {
+                $text .= ' ' . $separator . ' ';
+            }
+            // create span tag
+            $title = '<span itemprop="title">' . $iValue['title'] . '</span>';
+            if (array_key_exists('url', $iValue)) {
+                $title = '<a href="' . osc_esc_html($iValue['url']) . '" itemprop="url">' . $title . '</a>';
+            }
+            $node[] = $text . $title . '</li>' . PHP_EOL;
+        }
+
+        $result = '<ul class="breadcrumb">' . PHP_EOL;
+        $result .= implode(PHP_EOL, $node);
+        $result .= '</ul>' . PHP_EOL;
+
+        return $result;
     }
 }
 
-    /* file end: ./oc-includes/osclass/classes/Breadcrumb.php */
+/* file end: ./oc-includes/osclass/classes/Breadcrumb.php */

@@ -1,28 +1,28 @@
 <?php
 
-    /*
-     * Copyright 2014 Osclass
-     *
-     * Licensed under the Apache License, Version 2.0 (the "License");
-     * you may not use this file except in compliance with the License.
-     * You may obtain a copy of the License at
-     *
-     *     http://www.apache.org/licenses/LICENSE-2.0
-     *
-     * Unless required by applicable law or agreed to in writing, software
-     * distributed under the License is distributed on an "AS IS" BASIS,
-     * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-     * See the License for the specific language governing permissions and
-     * limitations under the License.
-     */
+/*
+ * Copyright 2014 Osclass
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 
-    /**
-     * Database command object
-     *
-     * @package    Osclass
-     * @subpackage Database
-     * @since      2.3
-     */
+/**
+ * Database command object
+ *
+ * @package    Osclass
+ * @subpackage Database
+ * @since      2.3
+ */
 class DBCommandClass
 {
     private static $instance;
@@ -983,7 +983,11 @@ class DBCommandClass
      */
     public function isWriteType($sql)
     {
-        if (!preg_match('/^\s*"?(SET|INSERT|UPDATE|DELETE|REPLACE|CREATE|DROP|TRUNCATE|LOAD DATA|COPY|ALTER|GRANT|REVOKE|LOCK|UNLOCK|RENAME)\s+/i', $sql)) {
+        if (!preg_match(
+            '/^\s*"?(SET|INSERT|UPDATE|DELETE|REPLACE|CREATE|DROP|TRUNCATE|LOAD DATA|COPY|ALTER|GRANT|REVOKE|LOCK|UNLOCK|RENAME)\s+/i',
+            $sql
+        )
+        ) {
             return false;
         }
 
@@ -1418,8 +1422,11 @@ class DBCommandClass
      */
     public function importSQL($sql)
     {
-        $sql     = str_replace('/*TABLE_PREFIX*/', DB_TABLE_PREFIX, $sql);
-        $sql     = str_replace('/*OSCLASS_VERSION*/', strtr(OSCLASS_VERSION, array('.' => '')), $sql);
+        $sql     = str_replace(
+            array('/*TABLE_PREFIX*/', '/*OSCLASS_VERSION*/'),
+            array(DB_TABLE_PREFIX, strtr(OSCLASS_VERSION, array('.' => ''))),
+            $sql
+        );
         $sql     = preg_replace('#/\*(?:[^*]*(?:\*(?!/))*)*\*/#', '', $sql);
         $queries = $this->splitSQL($sql, ';');
 
@@ -1505,7 +1512,9 @@ class DBCommandClass
             $table = current($v);
             if ($this->existTableIntoStruct($table, $struct_queries)) {
                 $lastTable     = null;
-                $normal_fields = $indexes = $constrains = array();
+                $constrains    = array();
+                $indexes       = $constrains;
+                $normal_fields = $indexes;
                 $fields        = $this->getTableFieldsFromStruct($table, $struct_queries);
                 if ($fields) {
                     // classify fields (into sql file)
@@ -1653,7 +1662,7 @@ class DBCommandClass
                     case '':
                     case 'on':
                         if ($lastTable) {
-                            $constrains[$lastTable] = $constrains[$lastTable] . ' ' . trim($field);
+                            $constrains[$lastTable] .= ' ' . trim($field);
                         }
                         break;
                     case 'foreign':
@@ -1705,39 +1714,64 @@ class DBCommandClass
             //Every field should we on the definition, so else SHOULD never happen, unless a very aggressive plugin modify our tables
             if (array_key_exists(strtolower($tbl_field['Field']), $normal_fields)) {
                 // Take the of the field
-                if (preg_match('|' . $tbl_field['Field'] . " (ENUM\s*\(([^\)]*)\))|i", $normal_fields[strtolower($tbl_field['Field'])], $match)
-                    || preg_match('|' . $tbl_field['Field'] . ' ([^ ]*( unsigned)?)|i', $normal_fields[strtolower($tbl_field['Field'])], $match)
+                if (preg_match(
+                    '|' . $tbl_field['Field'] . " (ENUM\s*\(([^\)]*)\))|i",
+                    $normal_fields[strtolower($tbl_field['Field'])],
+                    $match
+                )
+                    || preg_match(
+                        '|' . $tbl_field['Field'] . ' ([^ ]*( unsigned)?)|i',
+                        $normal_fields[strtolower($tbl_field['Field'])],
+                        $match
+                    )
                 ) {
                     $field_type = $match[1];
                     // Are they the same?
                     if (strtolower($field_type) != strtolower($tbl_field['Type'])
-                        && str_replace(' ', '', strtolower($field_type)) != str_replace(' ', '', strtolower($tbl_field['Type']))
+                        && str_replace(' ', '', strtolower($field_type)) != str_replace(
+                            ' ',
+                            '',
+                            strtolower($tbl_field['Type'])
+                        )
                     ) {
                         $struct_queries[] =
-                            'ALTER TABLE ' . $table . ' CHANGE COLUMN ' . $tbl_field['Field'] . ' ' . $normal_fields[strtolower($tbl_field['Field'])];
+                            'ALTER TABLE ' . $table . ' CHANGE COLUMN ' . $tbl_field['Field'] . ' '
+                            . $normal_fields[strtolower($tbl_field['Field'])];
                     }
                 }
                 error_log(' --- ' . $normal_fields[strtolower($tbl_field['Field'])]);
 
                 // Have we changed the default value? [with quotes]
-                if (preg_match("| DEFAULT\s+'(.*)'|i", $normal_fields[strtolower($tbl_field['Field'])], $default_match)) {
+                if (preg_match(
+                    "| DEFAULT\s+'(.*)'|i",
+                    $normal_fields[strtolower($tbl_field['Field'])],
+                    $default_match
+                )
+                ) {
                     // alter column only if default value has been changed
                     if ($tbl_field['Default'] != $default_match[1]) {
-                        $struct_queries[] = 'ALTER TABLE ' . $table . ' ALTER COLUMN ' . $tbl_field['Field'] . " SET DEFAULT '" . $default_match[1] . "'";
+                        $struct_queries[] =
+                            'ALTER TABLE ' . $table . ' ALTER COLUMN ' . $tbl_field['Field'] . " SET DEFAULT '"
+                            . $default_match[1] . "'";
                     }
                     // Have we changed the default value? [without quotes]
-                } elseif (preg_match("| DEFAULT\s+(.*)|i", $normal_fields[strtolower($tbl_field['Field'])], $default_match)) {
+                } elseif (preg_match(
+                    "| DEFAULT\s+(.*)|i",
+                    $normal_fields[strtolower($tbl_field['Field'])],
+                    $default_match
+                )
+                ) {
                     if (isset($tbl_field['Default'])) {
                         // alter column only if default value has been changed
                         if ($tbl_field['Default'] != $default_match[1]) {
-                            $struct_queries[] = 'ALTER TABLE ' . $table . ' ALTER COLUMN ' . $tbl_field['Field'] . ' SET DEFAULT ' . $default_match[1];
+                            $struct_queries[] =
+                                'ALTER TABLE ' . $table . ' ALTER COLUMN ' . $tbl_field['Field'] . ' SET DEFAULT '
+                                . $default_match[1];
                         }
-                    } else {
-                        // check NULL default values
-                        // if new default value is diferent, alter column ...
-                        if ($default_match[1] !== 'NULL') {
-                            $struct_queries[] = 'ALTER TABLE ' . $table . ' ALTER COLUMN ' . $tbl_field['Field'] . ' SET DEFAULT ' . $default_match[1];
-                        }
+                    } elseif ($default_match[1] !== 'NULL') {
+                        $struct_queries[] =
+                            'ALTER TABLE ' . $table . ' ALTER COLUMN ' . $tbl_field['Field'] . ' SET DEFAULT '
+                            . $default_match[1];
                     }
                 }
                 // Remove it from the list, so it will not be added
@@ -1764,7 +1798,8 @@ class DBCommandClass
         if ($tbl_indexes) {
             unset($indexes_array);
             foreach ($tbl_indexes as $tbl_index) {
-                $indexes_array[$tbl_index['Key_name']]['columns'][]  = array('fieldname' => $tbl_index['Column_name'], 'subpart' => $tbl_index['Sub_part']);
+                $indexes_array[$tbl_index['Key_name']]['columns'][]  =
+                    array('fieldname' => $tbl_index['Column_name'], 'subpart' => $tbl_index['Sub_part']);
                 $indexes_array[$tbl_index['Key_name']]['unique']     = $tbl_index['Non_unique'] == 0;
                 $indexes_array[$tbl_index['Key_name']]['index_type'] = $tbl_index['Index_type'];
                 $indexes_array[$tbl_index['Key_name']]['Key_name']   = $tbl_index['Key_name'];
@@ -1773,11 +1808,9 @@ class DBCommandClass
             foreach ($indexes_array as $k => $v) {
                 // if PRIMARY KEY already exist
                 $exist_primary = false;
-                if ($k === 'PRIMARY') {
-                    if (isset($indexes_array['PRIMARY'])) {
-                        if (count($indexes_array['PRIMARY']['columns']) > 0) {
-                            $exist_primary = true;
-                        }
+                if (($k === 'PRIMARY') && isset($indexes_array['PRIMARY'])) {
+                    if (count($indexes_array['PRIMARY']['columns']) > 0) {
+                        $exist_primary = true;
                     }
                 }
 
@@ -1788,12 +1821,12 @@ class DBCommandClass
                     $string .= 'UNIQUE KEY ';
                 } elseif ($v['index_type'] === 'FULLTEXT') {  // FULLTEXT INDEX MUST HAVE KEY_NAME
                     $string .= 'FULLTEXT ' . $k . ' ';
+                } elseif ((count($v['columns']) == 1 && $v['columns'][0]['fieldname'] != $k)
+                    || (preg_match('/^idx/', $k, $coincidencias) > 0)
+                ) {
+                    $string .= 'INDEX ' . $k . ' ';
                 } else {
-                    if ((count($v['columns']) == 1 && $v['columns'][0]['fieldname'] != $k) || (preg_match('/^idx/', $k, $coincidencias) > 0)) {
-                        $string .= 'INDEX ' . $k . ' ';
-                    } else {
-                        $string .= 'INDEX ' . $v['Key_name'] . ' ';
-                    }
+                    $string .= 'INDEX ' . $v['Key_name'] . ' ';
                 }
 
                 $columns = '';
@@ -1844,8 +1877,14 @@ class DBCommandClass
      */
     private function createForeignKey($tbl_constraint, $table, &$struct_queries, $constrains)
     {
-        $constrainsDB = $foreignRepited = array();
-        if (preg_match_all("| CONSTRAINT\s+(.*)\s+FOREIGN KEY\s+(.*)\s+REFERENCES\s+(.*),?\n|i", $tbl_constraint['Create Table'], $default_match)) {
+        $foreignRepited = array();
+        $constrainsDB   = $foreignRepited;
+        if (preg_match_all(
+            "| CONSTRAINT\s+(.*)\s+FOREIGN KEY\s+(.*)\s+REFERENCES\s+(.*),?\n|i",
+            $tbl_constraint['Create Table'],
+            $default_match
+        )
+        ) {
             $aKeyName = $default_match[1];
             $aTables  = $default_match[2];
             $aRefere  = $default_match[3];
@@ -1931,4 +1970,4 @@ class DBCommandClass
     }
 }
 
-    /* file end: ./oc-includes/osclass/classes/database/DBCommandClass.php */
+/* file end: ./oc-includes/osclass/classes/database/DBCommandClass.php */

@@ -1,6 +1,4 @@
-<?php if ( ! defined('ABS_PATH')) {
-    exit('ABS_PATH is not loaded. Direct access is not allowed.');
-}
+<?php
 
 /*
  * Copyright 2014 Osclass
@@ -24,18 +22,18 @@
 class CAdminSettingsMain extends AdminSecBaseModel
 {
     //Business Layer...
-    function doModel()
+    public function doModel()
     {
         switch ($this->action) {
-            case('check_updates'):
+            case ('check_updates'):
                 osc_admin_toolbar_update_themes(true);
                 osc_admin_toolbar_update_plugins(true);
 
-                osc_add_flash_ok_message( _m('Last check') . ':   ' . date("Y-m-d H:i"), 'admin');
+                osc_add_flash_ok_message(_m('Last check') . ':   ' . date('Y-m-d H:i'), 'admin');
 
                 $this->redirectTo(osc_admin_base_url(true) . '?page=settings');
                 break;
-            case('update'):
+            case ('update'):
                 // update index view
                 osc_csrf_check();
                 $iUpdated          = 0;
@@ -54,7 +52,7 @@ class CAdminSettingsMain extends AdminSecBaseModel
                 $contactAttachment = Params::getParam('enabled_attachment');
                 $selectableParent  = Params::getParam('selectable_parent_categories');
                 $bAutoCron         = Params::getParam('auto_cron');
-                $sAutoUpdate       = join("|", Params::getParam('auto_update'));
+                //$sAutoUpdate       = implode('|', Params::getParam('auto_update'));
 
                 // preparing parameters
                 $sPageTitle        = trim(strip_tags($sPageTitle));
@@ -65,38 +63,38 @@ class CAdminSettingsMain extends AdminSecBaseModel
                 $sCurrency         = trim(strip_tags($sCurrency));
                 $sWeekStart        = trim(strip_tags($sWeekStart));
                 $sTimeFormat       = trim(strip_tags($sTimeFormat));
-                $sNumRssItems      = (int) trim(strip_tags($sNumRssItems));
-                $maxLatestItems    = (int) trim(strip_tags($maxLatestItems));
-                $numItemsSearch    = (int) $numItemsSearch;
-                $contactAttachment = ($contactAttachment != '' ? true : false);
-                $bAutoCron         = ($bAutoCron != '' ? true : false);
-                $error = "";
+                $sNumRssItems      = (int)trim(strip_tags($sNumRssItems));
+                $maxLatestItems    = (int)trim(strip_tags($maxLatestItems));
+                $numItemsSearch    = (int)$numItemsSearch;
+                $contactAttachment = ($contactAttachment ? true : false);
+                $bAutoCron         = ($bAutoCron ? true : false);
+                $error             = '';
 
                 $msg = '';
                 if (!osc_validate_text($sPageTitle)) {
-                    $msg .= _m("Page title field is required")."<br/>";
+                    $msg .= _m('Page title field is required') . '<br/>';
                 }
                 if (!osc_validate_text($sContactEmail)) {
-                    $msg .= _m("Contact email field is required")."<br/>";
+                    $msg .= _m('Contact email field is required') . '<br/>';
                 }
                 if (!osc_validate_int($sNumRssItems)) {
-                    $msg .= _m("Number of listings in the RSS has to be a numeric value")."<br/>";
+                    $msg .= _m('Number of listings in the RSS has to be a numeric value') . '<br/>';
                 }
                 if (!osc_validate_int($maxLatestItems)) {
-                    $msg .= _m("Max latest listings has to be a numeric value")."<br/>";
+                    $msg .= _m('Max latest listings has to be a numeric value') . '<br/>';
                 }
                 if (!osc_validate_int($numItemsSearch)) {
-                    $msg .= _m("Number of listings on search has to be a numeric value")."<br/>";
+                    $msg .= _m('Number of listings on search has to be a numeric value') . '<br/>';
                 }
-                if ($msg!='') {
-                    osc_add_flash_error_message( $msg, 'admin');
+                if ($msg) {
+                    osc_add_flash_error_message($msg, 'admin');
                     $this->redirectTo(osc_admin_base_url(true) . '?page=settings');
                 }
 
                 $iUpdated += osc_set_preference('pageTitle', $sPageTitle);
                 $iUpdated += osc_set_preference('pageDesc', $sPageDesc);
 
-                if ( !defined('DEMO') ) {
+                if (!defined('DEMO')) {
                     $iUpdated += osc_set_preference('contactEmail', $sContactEmail);
                 }
                 $iUpdated += osc_set_preference('language', $sLanguage);
@@ -105,12 +103,12 @@ class CAdminSettingsMain extends AdminSecBaseModel
                 $iUpdated += osc_set_preference('weekStart', $sWeekStart);
                 $iUpdated += osc_set_preference('timeFormat', $sTimeFormat);
                 $iUpdated += osc_set_preference('timezone', $sTimezone);
-                $iUpdated += osc_set_preference('auto_update', $sAutoUpdate);
+                //$iUpdated += osc_set_preference('auto_update', $sAutoUpdate);
                 if (is_int($sNumRssItems)) {
                     $iUpdated += osc_set_preference('num_rss_items', $sNumRssItems);
                 } else {
-                    if ($error != '') {
-                        $error .= "</p><p>";
+                    if ($error) {
+                        $error .= '</p><p>';
                     }
                     $error .= _m('Number of listings in the RSS must be an integer');
                 }
@@ -119,7 +117,7 @@ class CAdminSettingsMain extends AdminSecBaseModel
                     $iUpdated += osc_set_preference('maxLatestItems@home', $maxLatestItems);
                 } else {
                     if ($error != '') {
-                        $error .= "</p><p>";
+                        $error .= '</p><p>';
                     }
                     $error .= _m('Number of recent listings displayed at home must be an integer');
                 }
@@ -129,21 +127,22 @@ class CAdminSettingsMain extends AdminSecBaseModel
                 $iUpdated += osc_set_preference('auto_cron', $bAutoCron);
                 $iUpdated += osc_set_preference('selectable_parent_categories', $selectableParent);
 
-                if ( $iUpdated > 0 ) {
-                    if ( $error != '' ) {
-                        osc_add_flash_error_message( $error . "</p><p>" . _m('General settings have been updated'), 'admin');
+                if ($iUpdated > 0) {
+                    if ($error) {
+                        osc_add_flash_error_message($error . '</p><p>'
+                            . _m('General settings have been updated'), 'admin');
                     } else {
-                        osc_add_flash_ok_message( _m('General settings have been updated'), 'admin');
+                        osc_add_flash_ok_message(_m('General settings have been updated'), 'admin');
                     }
-                } else if ($error != '') {
-                    osc_add_flash_error_message( $error, 'admin');
+                } elseif ($error) {
+                    osc_add_flash_error_message($error, 'admin');
                 }
 
                 $this->redirectTo(osc_admin_base_url(true) . '?page=settings');
                 break;
             default:
                 // calling the view
-                $aLanguages = OSCLocale::newInstance()->listAllEnabled();
+                $aLanguages  = OSCLocale::newInstance()->listAllEnabled();
                 $aCurrencies = Currency::newInstance()->listAll();
 
                 $this->_exportVariableToView('aLanguages', $aLanguages);
@@ -155,4 +154,4 @@ class CAdminSettingsMain extends AdminSecBaseModel
     }
 }
 
-    // EOF: ./oc-admin/controller/settings/main.php
+// EOF: ./oc-admin/controller/settings/main.php

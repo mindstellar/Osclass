@@ -16,7 +16,7 @@
  */
 
 if (!defined('ABS_PATH')) {
-    define('ABS_PATH', str_replace('\\', '/', __DIR__ . '/'));
+    define('ABS_PATH', __DIR__ . '/');
 }
 
 define('LIB_PATH', ABS_PATH . 'oc-includes/');
@@ -60,16 +60,8 @@ if (OSC_DEBUG) {
 }
 //Include Composer's autoloader
 require_once LIB_PATH . 'vendor/autoload.php';
-require_once LIB_PATH . 'osclass/Logger/Logger.php';
-require_once LIB_PATH . 'osclass/Logger/LogDatabase.php';
-require_once LIB_PATH . 'osclass/Logger/LogOsclass.php';
-require_once LIB_PATH . 'osclass/classes/database/DBConnectionClass.php';
-require_once LIB_PATH . 'osclass/classes/database/DBCommandClass.php';
-require_once LIB_PATH . 'osclass/classes/database/DBRecordsetClass.php';
-require_once LIB_PATH . 'osclass/classes/database/DAO.php';
-require_once LIB_PATH . 'osclass/model/SiteInfo.php';
+require_once LIB_PATH . 'osclass_autoloader.php';
 require_once LIB_PATH . 'osclass/helpers/hDatabaseInfo.php';
-require_once LIB_PATH . 'osclass/model/Preference.php';
 require_once LIB_PATH . 'osclass/helpers/hPreference.php';
 
 // check if Osclass is installed
@@ -108,99 +100,18 @@ require_once LIB_PATH . 'osclass/helpers/hPagination.php';
 require_once LIB_PATH . 'osclass/helpers/hPremium.php';
 require_once LIB_PATH . 'osclass/helpers/hTheme.php';
 require_once LIB_PATH . 'osclass/helpers/hLocation.php';
-require_once LIB_PATH . 'osclass/core/Params.php';
-require_once LIB_PATH . 'osclass/core/Cookie.php';
-require_once LIB_PATH . 'osclass/core/Session.php';
-require_once LIB_PATH . 'osclass/core/View.php';
-require_once LIB_PATH . 'osclass/core/BaseModel.php';
-require_once LIB_PATH . 'osclass/core/AdminBaseModel.php';
-require_once LIB_PATH . 'osclass/core/SecBaseModel.php';
-require_once LIB_PATH . 'osclass/core/WebSecBaseModel.php';
-require_once LIB_PATH . 'osclass/core/AdminSecBaseModel.php';
-require_once LIB_PATH . 'osclass/core/Translation.php';
 
-require_once LIB_PATH . 'osclass/Themes.php';
-require_once LIB_PATH . 'osclass/AdminThemes.php';
-require_once LIB_PATH . 'osclass/WebThemes.php';
 require_once LIB_PATH . 'osclass/utils.php';
 require_once LIB_PATH . 'osclass/formatting.php';
 require_once LIB_PATH . 'osclass/locales.php';
-require_once LIB_PATH . 'osclass/classes/Plugins.php';
 require_once LIB_PATH . 'osclass/helpers/hPlugins.php';
-require_once LIB_PATH . 'osclass/ItemActions.php';
 require_once LIB_PATH . 'osclass/emails.php';
-require_once LIB_PATH . 'osclass/model/Admin.php';
-require_once LIB_PATH . 'osclass/model/Alerts.php';
-require_once LIB_PATH . 'osclass/model/AlertsStats.php';
-require_once LIB_PATH . 'osclass/model/Cron.php';
-require_once LIB_PATH . 'osclass/model/Category.php';
-require_once LIB_PATH . 'osclass/model/CategoryStats.php';
-require_once LIB_PATH . 'osclass/model/City.php';
-require_once LIB_PATH . 'osclass/model/CityArea.php';
-require_once LIB_PATH . 'osclass/model/Country.php';
-require_once LIB_PATH . 'osclass/model/Currency.php';
-require_once LIB_PATH . 'osclass/model/OSCLocale.php';
-require_once LIB_PATH . 'osclass/model/Item.php';
-require_once LIB_PATH . 'osclass/model/ItemComment.php';
-require_once LIB_PATH . 'osclass/model/ItemResource.php';
-require_once LIB_PATH . 'osclass/model/ItemStats.php';
-require_once LIB_PATH . 'osclass/model/Page.php';
-require_once LIB_PATH . 'osclass/model/PluginCategory.php';
-require_once LIB_PATH . 'osclass/model/Region.php';
-require_once LIB_PATH . 'osclass/model/User.php';
-require_once LIB_PATH . 'osclass/model/UserEmailTmp.php';
-require_once LIB_PATH . 'osclass/model/ItemLocation.php';
-require_once LIB_PATH . 'osclass/model/Widget.php';
-require_once LIB_PATH . 'osclass/model/Search.php';
-require_once LIB_PATH . 'osclass/model/LatestSearches.php';
-require_once LIB_PATH . 'osclass/model/Field.php';
-require_once LIB_PATH . 'osclass/model/Log.php';
-require_once LIB_PATH . 'osclass/model/CountryStats.php';
-require_once LIB_PATH . 'osclass/model/RegionStats.php';
-require_once LIB_PATH . 'osclass/model/CityStats.php';
-require_once LIB_PATH . 'osclass/model/BanRule.php';
 
-require_once LIB_PATH . 'osclass/model/LocationsTmp.php';
-
-require_once LIB_PATH . 'osclass/classes/Cache.php';
-require_once LIB_PATH . 'osclass/classes/ImageProcessing.php';
-require_once LIB_PATH . 'osclass/classes/RSSFeed.php';
-require_once LIB_PATH . 'osclass/classes/Sitemap.php';
-require_once LIB_PATH . 'osclass/classes/Pagination.php';
-require_once LIB_PATH . 'osclass/classes/Rewrite.php';
-require_once LIB_PATH . 'osclass/classes/Stats.php';
-require_once LIB_PATH . 'osclass/classes/AdminMenu.php';
-require_once LIB_PATH . 'osclass/classes/datatables/DataTable.php';
-require_once LIB_PATH . 'osclass/classes/AdminToolbar.php';
-require_once LIB_PATH . 'osclass/classes/Breadcrumb.php';
-require_once LIB_PATH . 'osclass/classes/EmailVariables.php';
 require_once LIB_PATH . 'osclass/alerts.php';
-
-require_once LIB_PATH . 'osclass/classes/Dependencies.php';
-require_once LIB_PATH . 'osclass/classes/Scripts.php';
-require_once LIB_PATH . 'osclass/classes/Styles.php';
-
-require_once LIB_PATH . 'osclass/frm/Form.php';
-require_once LIB_PATH . 'osclass/frm/PageForm.php';
-require_once LIB_PATH . 'osclass/frm/CategoryForm.php';
-require_once LIB_PATH . 'osclass/frm/ItemForm.php';
-require_once LIB_PATH . 'osclass/frm/ContactForm.php';
-require_once LIB_PATH . 'osclass/frm/CommentForm.php';
-require_once LIB_PATH . 'osclass/frm/UserForm.php';
-require_once LIB_PATH . 'osclass/frm/LanguageForm.php';
-require_once LIB_PATH . 'osclass/frm/SendFriendForm.php';
-require_once LIB_PATH . 'osclass/frm/AlertForm.php';
-require_once LIB_PATH . 'osclass/frm/FieldForm.php';
-require_once LIB_PATH . 'osclass/frm/AdminForm.php';
-require_once LIB_PATH . 'osclass/frm/ManageItemsForm.php';
-require_once LIB_PATH . 'osclass/frm/BanRuleForm.php';
 
 require_once LIB_PATH . 'osclass/functions.php';
 require_once LIB_PATH . 'osclass/helpers/hAdminMenu.php';
 
-
-require_once LIB_PATH . 'osclass/core/iObject_Cache.php';
-require_once LIB_PATH . 'osclass/core/Object_Cache_Factory.php';
 require_once LIB_PATH . 'osclass/helpers/hCache.php';
 require_once LIB_PATH . 'osclass/compatibility.php';
 

@@ -1,4 +1,4 @@
-<?php if ( ! defined('ABS_PATH')) {
+<?php if (!defined('ABS_PATH')) {
     exit('ABS_PATH is not loaded. Direct access is not allowed.');
 }
 
@@ -18,21 +18,22 @@
  * limitations under the License.
  */
 
-    define('IS_AJAX', true);
+define('IS_AJAX', true);
 
 /**
  * Class CAdminAjax
  */
-class CAdminAjax extends AdminSecBaseModel {
+class CAdminAjax extends AdminSecBaseModel
+{
 
     public function __construct()
     {
         parent::__construct();
         $this->ajax = true;
-        if ( $this->isModerator() ) {
-            if ( !in_array($this->action, array('items', 'media', 'comments', 'custom', 'runhook')) ) {
-                $this->action = 'error_permissions';
-            }
+        if ($this->isModerator()
+            && !in_array($this->action, array('items', 'media', 'comments', 'custom', 'runhook'))
+        ) {
+            $this->action = 'error_permissions';
         }
     }
 
@@ -44,27 +45,36 @@ class CAdminAjax extends AdminSecBaseModel {
             case 'bulk_actions':
                 break;
             case 'regions': //Return regions given a countryId
-                $regions = Region::newInstance()->findByCountry(Params::getParam("countryId"));
+                $regions = Region::newInstance()->findByCountry(Params::getParam('countryId'));
                 echo json_encode($regions);
                 break;
             case 'cities': //Returns cities given a regionId
-                $cities = City::newInstance()->findByRegion(Params::getParam("regionId"));
+                $cities = City::newInstance()->findByRegion(Params::getParam('regionId'));
                 echo json_encode($cities);
                 break;
             case 'location': // This is the autocomplete AJAX
-                $cities = City::newInstance()->ajax(Params::getParam("term"));
+                $cities = City::newInstance()->ajax(Params::getParam('term'));
                 echo json_encode($cities);
                 break;
             case 'userajax': // This is the autocomplete AJAX
-                $users = User::newInstance()->ajax(Params::getParam("term"));
-                if (count($users)==0) {
-                    echo json_encode(array(0 => array('id'=> '', 'label' => __('No results'), 'value' => __('No results')) ));
+                $users = User::newInstance()->ajax(Params::getParam('term'));
+                if (count($users) == 0) {
+                    echo json_encode(array(
+                        0 => array(
+                            'id'    => '',
+                            'label' => __('No results'),
+                            'value' => __('No results')
+                        )
+                    ));
                 } else {
                     echo json_encode($users);
                 }
                 break;
             case 'date_format':
-                echo json_encode(array('format' => Params::getParam('format'), 'str_formatted' => osc_format_date(date('Y-m-d H:i:s'), Params::getParam('format'))));
+                echo json_encode(array(
+                    'format'        => Params::getParam('format'),
+                    'str_formatted' => osc_format_date(date('Y-m-d H:i:s'), Params::getParam('format'))
+                ));
                 break;
             case 'runhook': // run hooks
                 $hook = Params::getParam('hook');
@@ -79,9 +89,9 @@ class CAdminAjax extends AdminSecBaseModel {
                         osc_run_hook('item_form', Params::getParam('catId'));
                         break;
                     case 'item_edit':
-                        $catId  = Params::getParam("catId");
-                        $itemId = Params::getParam("itemId");
-                        osc_run_hook("item_edit", $catId, $itemId);
+                        $catId  = Params::getParam('catId');
+                        $itemId = Params::getParam('itemId');
+                        osc_run_hook('item_edit', $catId, $itemId);
                         break;
                     default:
                         osc_run_hook('ajax_admin_' . $hook);
@@ -90,9 +100,9 @@ class CAdminAjax extends AdminSecBaseModel {
                 break;
             case 'categories_order': // Save the order of the categories
                 osc_csrf_check();
-                $aIds        = json_decode(Params::getParam('list'), true);
-                $order       = array();
-                $error       = 0;
+                $aIds  = json_decode(Params::getParam('list'), true);
+                $order = array();
+                $error = 0;
 
                 $catManager  = Category::newInstance();
                 $aRecountCat = array();
@@ -104,17 +114,17 @@ class CAdminAjax extends AdminSecBaseModel {
 
                     $res = $catManager->update(
                         array(
-                            'fk_i_parent_id' => ($cat['p']=='root'?null:$cat['p']),
-                            'i_position' => $order[$cat['p']]
+                            'fk_i_parent_id' => ($cat['p'] === 'root' ? null : $cat['p']),
+                            'i_position'     => $order[$cat['p']]
                         ),
                         array('pk_i_id' => $cat['c'])
                     );
-                    if ( is_bool($res) && !$res ) {
+                    if (is_bool($res) && !$res) {
                         $error = 1;
-                    } elseif ($res==1) {
+                    } elseif ($res == 1) {
                         $aRecountCat[] = $cat['c'];
                     }
-                    $order[$cat['p']] = $order[$cat['p']]+1;
+                    ++$order[$cat['p']];
                 }
 
                 // update category stats
@@ -122,10 +132,10 @@ class CAdminAjax extends AdminSecBaseModel {
                     osc_update_cat_stats_id($rId);
                 }
 
-                if ( $error ) {
-                    $result = array( 'error' => __("An error occurred") );
+                if ($error) {
+                    $result = array('error' => __('An error occurred'));
                 } else {
-                    $result = array( 'ok' => __("Order saved"));
+                    $result = array('ok' => __('Order saved'));
                 }
 
                 osc_run_hook('edited_category_order', $error);
@@ -133,52 +143,59 @@ class CAdminAjax extends AdminSecBaseModel {
                 echo json_encode($result);
                 break;
             case 'category_edit_iframe':
-                $this->_exportVariableToView('category', Category::newInstance()->findByPrimaryKey(Params::getParam("id"), 'all'));
-                if (count(Category::newInstance()->findSubcategories( Params::getParam("id") ) )>0) {
-                    $this->_exportVariableToView( 'has_subcategories', true);
+                $this->_exportVariableToView('category',
+                    Category::newInstance()->findByPrimaryKey(Params::getParam('id'), 'all'));
+                if (count(Category::newInstance()->findSubcategories(Params::getParam('id'))) > 0) {
+                    $this->_exportVariableToView('has_subcategories', true);
                 } else {
-                    $this->_exportVariableToView( 'has_subcategories', false);
-                };
-                $this->_exportVariableToView( 'languages', OSCLocale::newInstance()->listAllEnabled() );
-                $this->doView("categories/iframe.php");
+                    $this->_exportVariableToView('has_subcategories', false);
+                }
+                $this->_exportVariableToView('languages', OSCLocale::newInstance()->listAllEnabled());
+                $this->doView('categories/iframe.php');
                 break;
             case 'field_categories_iframe':
-                $selected = Field::newInstance()->categories(Params::getParam("id"));
+                $selected = Field::newInstance()->categories(Params::getParam('id'));
                 if ($selected == null) {
                     $selected = array();
-                };
-                $this->_exportVariableToView("selected", $selected);
-                $this->_exportVariableToView("field", Field::newInstance()->findByPrimaryKey(Params::getParam("id")));
-                $this->_exportVariableToView("categories", Category::newInstance()->toTreeAll());
-                $this->doView("fields/iframe.php");
+                }
+                $this->_exportVariableToView('selected', $selected);
+                $this->_exportVariableToView('field', Field::newInstance()->findByPrimaryKey(Params::getParam('id')));
+                $this->_exportVariableToView('categories', Category::newInstance()->toTreeAll());
+                $this->doView('fields/iframe.php');
                 break;
             case 'field_categories_post':
                 osc_csrf_check();
                 $error = 0;
-                $field = Field::newInstance()->findByName(Params::getParam("s_name"));
+                $field = Field::newInstance()->findByName(Params::getParam('s_name'));
 
-                if (!isset($field['pk_i_id']) || (isset($field['pk_i_id']) && $field['pk_i_id'] == Params::getParam("id"))) {
+                if (!isset($field['pk_i_id'])
+                    || (isset($field['pk_i_id'])
+                        && $field['pk_i_id'] == Params::getParam('id'))
+                ) {
                     // remove categories from a field
-                    Field::newInstance()->cleanCategoriesFromField(Params::getParam("id"));
+                    Field::newInstance()->cleanCategoriesFromField(Params::getParam('id'));
                     // no error... continue updating fields
                     if ($error == 0) {
-                        $slug = Params::getParam("field_slug") != '' ? Params::getParam("field_slug") : Params::getParam("s_name");
-                        $slug_tmp = $slug = preg_replace('|([-]+)|', '-', preg_replace('|[^a-z0-9_-]|', '-', strtolower($slug)));
-                        $slug_k = 0;
+                        $slug     = Params::getParam('field_slug') != '' ? Params::getParam('field_slug')
+                            : Params::getParam('s_name');
+                        $slug     =
+                            preg_replace('|([-]+)|', '-', preg_replace('|[^a-z0-9_-]|', '-', strtolower($slug)));
+                        $slug_tmp = $slug;
+                        $slug_k   = 0;
                         while (true) {
                             $field = Field::newInstance()->findBySlug($slug);
-                            if (!$field || $field['pk_i_id']==Params::getParam("id")) {
+                            if (!$field || $field['pk_i_id'] == Params::getParam('id')) {
                                 break;
                             }
 
                             $slug_k++;
-                            $slug = $slug_tmp."_".$slug_k;
+                            $slug = $slug_tmp . '_' . $slug_k;
                         }
 
                         // trim options
                         $s_options = '';
-                        $aux  = Params::getParam('s_options');
-                        $aAux = explode(',', $aux);
+                        $aux       = Params::getParam('s_options');
+                        $aAux      = explode(',', $aux);
 
                         foreach ($aAux as &$option) {
                             $option = trim($option);
@@ -187,15 +204,16 @@ class CAdminAjax extends AdminSecBaseModel {
                         $s_options = implode(',', $aAux);
 
                         $res = Field::newInstance()->update(
-                                array(
-                                    's_name'        => Params::getParam("s_name"),
-                                    'e_type'        => Params::getParam("field_type"),
-                                    's_slug'        => $slug,
-                                    'b_required'    => Params::getParam("field_required") == "1" ? 1 : 0,
-                                    'b_searchable'  => Params::getParam("field_searchable") == "1" ? 1 : 0,
-                                    's_options'     => $s_options),
-                                array('pk_i_id' => Params::getParam("id"))
-                                );
+                            array(
+                                's_name'       => Params::getParam('s_name'),
+                                'e_type'       => Params::getParam('field_type'),
+                                's_slug'       => $slug,
+                                'b_required'   => Params::getParam('field_required') == '1' ? 1 : 0,
+                                'b_searchable' => Params::getParam('field_searchable') == '1' ? 1 : 0,
+                                's_options'    => $s_options
+                            ),
+                            array('pk_i_id' => Params::getParam('id'))
+                        );
 
                         if (is_bool($res) && !$res) {
                             $error = 1;
@@ -203,9 +221,9 @@ class CAdminAjax extends AdminSecBaseModel {
                     }
                     // no error... continue inserting categories-field
                     if ($error == 0) {
-                        $aCategories = Params::getParam("categories");
-                        if ( is_array($aCategories) && count($aCategories) > 0) {
-                            $res = Field::newInstance()->insertCategories(Params::getParam("id"), $aCategories);
+                        $aCategories = Params::getParam('categories');
+                        if (is_array($aCategories) && count($aCategories) > 0) {
+                            $res = Field::newInstance()->insertCategories(Params::getParam('id'), $aCategories);
                             if (!$res) {
                                 $error = 1;
                             }
@@ -213,17 +231,21 @@ class CAdminAjax extends AdminSecBaseModel {
                     }
                     // error while updating?
                     if ($error == 1) {
-                        $message = __("An error occurred while updating.");
+                        $message = __('An error occurred while updating.');
                     }
                 } else {
-                    $error = 1;
-                    $message = __("Sorry, you already have a field with that name");
+                    $error   = 1;
+                    $message = __('Sorry, you already have a field with that name');
                 }
 
                 if ($error) {
-                    $result = array( 'error' => $message);
+                    $result = array('error' => $message);
                 } else {
-                    $result = array( 'ok' => __("Saved") , 'text' => Params::getParam("s_name"), 'field_id' => Params::getParam("id") );
+                    $result = array(
+                        'ok'       => __('Saved'),
+                        'text'     => Params::getParam('s_name'),
+                        'field_id' => Params::getParam('id')
+                    );
                 }
 
                 echo json_encode($result);
@@ -233,7 +255,7 @@ class CAdminAjax extends AdminSecBaseModel {
                 osc_csrf_check();
                 $res = Field::newInstance()->deleteByPrimaryKey(Params::getParam('id'));
 
-                if ( $res > 0 ) {
+                if ($res > 0) {
                     $result = array('ok' => __('The custom field has been deleted'));
                 } else {
                     $result = array('error' => __('An error occurred while deleting'));
@@ -243,60 +265,65 @@ class CAdminAjax extends AdminSecBaseModel {
                 break;
             case 'add_field':
                 osc_csrf_check();
-                $s_name = __('NEW custom field');
-                $slug_tmp = $slug = preg_replace('|([-]+)|', '-', preg_replace('|[^a-z0-9_-]|', '-', strtolower($s_name)));
-                $slug_k = 0;
+                $s_name   = __('NEW custom field');
+                $slug     = preg_replace('|([-]+)|', '-', preg_replace('|[^a-z0-9_-]|', '-', strtolower($s_name)));
+                $slug_tmp = $slug;
+                $slug_k   = 0;
                 while (true) {
                     $field = Field::newInstance()->findBySlug($slug);
-                    if (!$field || $field['pk_i_id']==Params::getParam("id")) {
+                    if (!$field || $field['pk_i_id'] == Params::getParam('id')) {
                         break;
                     } else {
                         $slug_k++;
-                        $slug = $slug_tmp."_".$slug_k;
+                        $slug = $slug_tmp . '_' . $slug_k;
                     }
                 }
                 $fieldManager = Field::newInstance();
-                $result = $fieldManager->insertField($s_name, 'TEXT', $slug, 0, '', array());
+                $result       = $fieldManager->insertField($s_name, 'TEXT', $slug, 0, '', array());
                 if ($result) {
-                    echo json_encode(array('error' => 0, 'field_id' => $fieldManager->dao->insertedId(), 'field_name' => $s_name));
+                    echo json_encode(array(
+                        'error'      => 0,
+                        'field_id'   => $fieldManager->dao->insertedId(),
+                        'field_name' => $s_name
+                    ));
                 } else {
                     echo json_encode(array('error' => 1));
                 }
                 break;
             case 'enable_category':
                 osc_csrf_check();
-                $id       = strip_tags( Params::getParam('id') );
+                $id       = strip_tags(Params::getParam('id'));
                 $enabled  = (Params::getParam('enabled') != '') ? Params::getParam('enabled') : 0;
                 $error    = 0;
                 $result   = array();
                 $aUpdated = array();
 
                 $mCategory = Category::newInstance();
-                $aCategory = $mCategory->findByPrimaryKey( $id );
+                $aCategory = $mCategory->findByPrimaryKey($id);
 
-                if ( $aCategory == false ) {
-                    $result = array( 'error' => sprintf( __("No category with id %d exists"), $id) );
+                if ($aCategory == false) {
+                    $result = array('error' => sprintf(__('No category with id %d exists'), $id));
                     echo json_encode($result);
                     break;
                 }
 
                 // root category
-                if ( $aCategory['fk_i_parent_id'] == '' ) {
-                    $mCategory->update( array('b_enabled' => $enabled), array('pk_i_id'        => $id) );
-                    $mCategory->update( array('b_enabled' => $enabled), array('fk_i_parent_id' => $id) );
+                if ($aCategory['fk_i_parent_id'] == '') {
+                    $mCategory->update(array('b_enabled' => $enabled), array('pk_i_id' => $id));
+                    $mCategory->update(array('b_enabled' => $enabled), array('fk_i_parent_id' => $id));
 
-                    $subCategories = $mCategory->findSubcategories( $id );
+                    $subCategories = $mCategory->findSubcategories($id);
 
-                    $aIds = array($id);
+                    $aIds       = array($id);
                     $aUpdated[] = array('id' => $id);
-                    foreach ( $subCategories as $subcategory ) {
+                    foreach ($subCategories as $subcategory) {
                         $aIds[]     = $subcategory['pk_i_id'];
-                        $aUpdated[] = array( 'id' => $subcategory['pk_i_id'] );
+                        $aUpdated[] = array('id' => $subcategory['pk_i_id']);
                     }
 
                     Item::newInstance()->enableByCategory($enabled, $aIds);
 
-                    if ( $enabled ) {
+                    if ($enabled) {
                         $result = array(
                             'ok' => __('The category as well as its subcategories have been enabled')
                         );
@@ -311,15 +338,15 @@ class CAdminAjax extends AdminSecBaseModel {
                 }
 
                 // subcategory
-                $parentCategory = $mCategory->findRootCategory( $id );
-                if ( !$parentCategory['b_enabled'] ) {
-                    $result = array( 'error' => __('Parent category is disabled, you can not enable that category') );
-                    echo json_encode( $result );
+                $parentCategory = $mCategory->findRootCategory($id);
+                if (!$parentCategory['b_enabled']) {
+                    $result = array('error' => __('Parent category is disabled, you can not enable that category'));
+                    echo json_encode($result);
                     break;
                 }
 
-                $mCategory->update( array('b_enabled' => $enabled), array('pk_i_id' => $id) );
-                if ( $enabled ) {
+                $mCategory->update(array('b_enabled' => $enabled), array('pk_i_id' => $id));
+                if ($enabled) {
                     $result = array(
                         'ok' => __('The subcategory has been enabled')
                     );
@@ -328,53 +355,55 @@ class CAdminAjax extends AdminSecBaseModel {
                         'ok' => __('The subcategory has been disabled')
                     );
                 }
-                $result['affectedIds'] = array( array('id' => $id) );
+                $result['affectedIds'] = array(array('id' => $id));
                 echo json_encode($result);
 
                 break;
             case 'delete_category':
                 osc_csrf_check();
-                $id = Params::getParam("id");
+                $id    = Params::getParam('id');
                 $error = 0;
 
                 $categoryManager = Category::newInstance();
-                $res = $categoryManager->deleteByPrimaryKey($id);
+                $res             = $categoryManager->deleteByPrimaryKey($id);
 
                 if ($res > 0) {
                     $message = __('The categories have been deleted');
                 } else {
-                    $error = 1;
+                    $error   = 1;
                     $message = __('An error occurred while deleting');
                 }
 
                 if ($error) {
-                    $result = array( 'error' => $message);
+                    $result = array('error' => $message);
                 } else {
-                    $result = array( 'ok' => $message );
+                    $result = array('ok' => $message);
                 }
                 echo json_encode($result);
 
                 break;
             case 'edit_category_post':
                 osc_csrf_check();
-                $id = Params::getParam("id");
-                $fields['i_expiration_days'] = (Params::getParam("i_expiration_days") != '') ? Params::getParam("i_expiration_days") : 0;
-                $fields['b_price_enabled'] = (Params::getParam('b_price_enabled') != '') ? 1 : 0;
-                $apply_changes_to_subcategories = Params::getParam('apply_changes_to_subcategories')==1?true:false;
+                $id                             = Params::getParam('id');
+                $fields['i_expiration_days']    =
+                    (Params::getParam('i_expiration_days') != '') ? Params::getParam('i_expiration_days') : 0;
+                $fields['b_price_enabled']      = (Params::getParam('b_price_enabled') != '') ? 1 : 0;
+                $apply_changes_to_subcategories =
+                    Params::getParam('apply_changes_to_subcategories') == 1 ? true : false;
 
-                $error = 0;
+                $error         = 0;
                 $has_one_title = 0;
-                $postParams = Params::getParamsAsArray();
+                $postParams    = Params::getParamsAsArray();
                 foreach ($postParams as $k => $v) {
                     if (preg_match('|(.+?)#(.+)|', $k, $m)) {
                         if ($m[2] === 's_name') {
-                            if ($v != "") {
-                                $has_one_title = 1;
+                            if ($v != '') {
+                                $has_one_title                    = 1;
                                 $aFieldsDescription[$m[1]][$m[2]] = $v;
-                                $s_text = $v;
+                                $s_text                           = $v;
                             } else {
                                 $aFieldsDescription[$m[1]][$m[2]] = null;
-                                $error = 1;
+                                $error                            = 1;
                             }
                         } else {
                             $aFieldsDescription[$m[1]][$m[2]] = $v;
@@ -383,28 +412,33 @@ class CAdminAjax extends AdminSecBaseModel {
                 }
 
                 $l = osc_language();
-                if ($error==0 || ($error==1 && $has_one_title==1)) {
+                if ($error == 0 || ($error == 1 && $has_one_title == 1)) {
                     $categoryManager = Category::newInstance();
-                    $res = $categoryManager->updateByPrimaryKey(array('fields' => $fields, 'aFieldsDescription' => $aFieldsDescription), $id);
-                    $categoryManager->updateExpiration($id, $fields['i_expiration_days'], $apply_changes_to_subcategories);
-                    $categoryManager->updatePriceEnabled($id, $fields['b_price_enabled'], $apply_changes_to_subcategories);
-                    if ( is_bool($res) ) {
+                    $res             = $categoryManager->updateByPrimaryKey(array(
+                        'fields'             => $fields,
+                        'aFieldsDescription' => $aFieldsDescription
+                    ), $id);
+                    $categoryManager->updateExpiration($id, $fields['i_expiration_days'],
+                        $apply_changes_to_subcategories);
+                    $categoryManager->updatePriceEnabled($id, $fields['b_price_enabled'],
+                        $apply_changes_to_subcategories);
+                    if (is_bool($res)) {
                         $error = 2;
                     }
                 }
 
                 osc_run_hook('edited_category', (int)($id), $error);
 
-                if ($error==0) {
-                    $msg = __("Category updated correctly");
-                } elseif ($error==1) {
-                    if ($has_one_title==1) {
+                if ($error == 0) {
+                    $msg = __('Category updated correctly');
+                } elseif ($error == 1) {
+                    if ($has_one_title == 1) {
                         $error = 4;
-                        $msg = __('Category updated correctly, but some titles are empty');
+                        $msg   = __('Category updated correctly, but some titles are empty');
                     } else {
                         $msg = __('Sorry, including at least a title is mandatory');
                     }
-                } elseif ($error==2) {
+                } elseif ($error == 2) {
                     $msg = __('An error occurred while updating');
                 }
                 echo json_encode(array('error' => $error, 'msg' => $msg, 'text' => $aFieldsDescription[$l]['s_name']));
@@ -413,13 +447,13 @@ class CAdminAjax extends AdminSecBaseModel {
             case 'custom': // Execute via AJAX custom file
                 if (Params::existParam('route')) {
                     $routes = Rewrite::newInstance()->getRoutes();
-                    $rid = Params::getParam('route');
-                    $file = '../';
+                    $rid    = Params::getParam('route');
+                    $file   = '../';
                     if (isset($routes[$rid]) && isset($routes[$rid]['file'])) {
                         $file = $routes[$rid]['file'];
                     }
                 } else {
-                    $file = Params::getParam("ajaxfile");
+                    $file = Params::getParam('ajaxfile');
                 }
 
                 if ($file == '') {
@@ -428,12 +462,12 @@ class CAdminAjax extends AdminSecBaseModel {
                 }
 
                 // valid file?
-                if ( stripos($file, '../') !== false || stripos($file, '..\\') !== false ) {
+                if (stripos($file, '../') !== false || stripos($file, '..\\') !== false) {
                     echo json_encode(array('error' => 'no valid file'));
                     break;
                 }
 
-                if ( !file_exists(osc_plugins_path() . $file) ) {
+                if (!file_exists(osc_plugins_path() . $file)) {
                     echo json_encode(array('error' => "file doesn't exist"));
                     break;
                 }
@@ -441,8 +475,8 @@ class CAdminAjax extends AdminSecBaseModel {
                 require_once osc_plugins_path() . $file;
                 break;
             case 'test_mail':
-                $title = sprintf( __('Test email, %s'), osc_page_title() );
-                $body  = __("Test email") . "<br><br>" . osc_page_title();
+                $title = sprintf(__('Test email, %s'), osc_page_title());
+                $body  = __('Test email') . '<br><br>' . osc_page_title();
 
                 $emailParams = array(
                     'subject'  => $title,
@@ -453,18 +487,18 @@ class CAdminAjax extends AdminSecBaseModel {
                 );
 
                 $array = array();
-                if ( osc_sendMail($emailParams) ) {
-                    $array = array('status' => '1', 'html' => __('Email sent successfully') );
+                if (osc_sendMail($emailParams)) {
+                    $array = array('status' => '1', 'html' => __('Email sent successfully'));
                 } else {
-                    $array = array('status' => '0', 'html' => __('An error occurred while sending email') );
+                    $array = array('status' => '0', 'html' => __('An error occurred while sending email'));
                 }
                 echo json_encode($array);
                 break;
             case 'test_mail_template':
                 // replace por valores por defecto
-                $email = Params::getParam("email");
-                $title = Params::getParam("title");
-                $body  = Params::getParam("body", false, false);
+                $email = Params::getParam('email');
+                $title = Params::getParam('title');
+                $body  = Params::getParam('body', false, false);
 
                 $emailParams = array(
                     'subject'  => $title,
@@ -475,19 +509,19 @@ class CAdminAjax extends AdminSecBaseModel {
                 );
 
                 $array = array();
-                if ( osc_sendMail($emailParams) ) {
-                    $array = array('status' => '1', 'html' => __('Email sent successfully') );
+                if (osc_sendMail($emailParams)) {
+                    $array = array('status' => '1', 'html' => __('Email sent successfully'));
                 } else {
-                    $array = array('status' => '0', 'html' => __('An error occurred while sending email') );
+                    $array = array('status' => '0', 'html' => __('An error occurred while sending email'));
                 }
                 echo json_encode($array);
                 break;
             case 'order_pages':
                 osc_csrf_check();
-                $order = Params::getParam("order");
-                $id    = Params::getParam("id");
+                $order = Params::getParam('order');
+                $id    = Params::getParam('id');
                 if ($order != '' && $id != '') {
-                    $mPages = Page::newInstance();
+                    $mPages       = Page::newInstance();
                     $actual_page  = $mPages->findByPrimaryKey($id);
                     $actual_order = $actual_page['i_order'];
 
@@ -508,6 +542,7 @@ class CAdminAjax extends AdminSecBaseModel {
                 break;
             case 'check_version':
                 echo json_encode(array('error' => 1, 'msg' => __('Version could not be checked')));
+
                 return;
                 // $json = json_decode($data);
                 // if(isset($json->version)) {
@@ -542,10 +577,10 @@ class CAdminAjax extends AdminSecBaseModel {
              ******************************/
             case 'upgrade': // AT THIS POINT WE KNOW IF THERE'S AN UPDATE OR NOT
                 osc_csrf_check();
-                if ( defined('DEMO') ) {
-                    $msg = __("This action cannot be done because it is a demo site");
-                    $result = array("error" => 6, "message" => $msg);
-                    osc_add_flash_warning_message( $msg, 'admin');
+                if (defined('DEMO')) {
+                    $msg    = __('This action cannot be done because it is a demo site');
+                    $result = array('error' => 6, 'message' => $msg);
+                    osc_add_flash_warning_message($msg, 'admin');
                 } else {
                     $result = osc_do_upgrade();
                     if (!defined('__FROM_CRON__') || !__FROM_CRON__) {
@@ -569,26 +604,23 @@ class CAdminAjax extends AdminSecBaseModel {
                 break;
             case 'check_market': // AT THIS POINT WE KNOW IF THERE'S AN UPDATE OR NOT
                 $section = Params::getParam('section');
-                $code = Params::getParam('code');
-                $data = array();
+                $code    = Params::getParam('code');
+                $data    = array();
                 /************************
                  *** CHECK VALID CODE ***
                  ************************/
                 if ($code != '' && $section != '') {
-                    if (stripos($code, "http://")===false && stripos($code, "https://")===false) {
+                    if (stripos($code, 'http://') === false && stripos($code, 'https://') === false) {
                         // OSCLASS OFFICIAL REPOSITORY
                         // Disable Osclass Market update checking.
                         // $data = json_decode(osc_file_get_contents(osc_market_url($section, $code), array('api_key' => osc_market_api_connect())), true);
+                    } elseif (osc_market_external_sources()) {
+                        $data = json_decode(osc_file_get_contents($code), true);
                     } else {
-                        // THIRD PARTY REPOSITORY
-                        if (osc_market_external_sources()) {
-                            $data = json_decode(osc_file_get_contents($code), true);
-                        } else {
-                            echo json_encode(array('error' => 3, 'error_msg' => __('No external sources are allowed')));
-                            break;
-                        }
+                        echo json_encode(array('error' => 3, 'error_msg' => __('No external sources are allowed')));
+                        break;
                     }
-                    if ( !isset($data['s_source_file']) || !isset($data['s_update_url'])) {
+                    if (!isset($data['s_source_file']) || !isset($data['s_update_url'])) {
                         //$data = array('error' => 2, 'error_msg' => __('Invalid code'));
                     }
                 } else {
@@ -599,12 +631,12 @@ class CAdminAjax extends AdminSecBaseModel {
             case 'location_stats':
                 osc_csrf_check();
                 $workToDo = osc_update_location_stats();
-                if ( $workToDo > 0 ) {
+                if ($workToDo > 0) {
                     $array['status']  = 'more';
                     $array['pending'] = $workToDo;
                     echo json_encode($array);
                 } else {
-                    $array['status']  = 'done';
+                    $array['status'] = 'done';
                     echo json_encode($array);
                 }
                 break;

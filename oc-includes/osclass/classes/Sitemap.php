@@ -1,6 +1,4 @@
-<?php if ( ! defined( 'ABS_PATH' ) ) {
-    exit( 'ABS_PATH is not loaded. Direct access is not allowed.' );
-}
+<?php
 
 /*
  * Copyright 2014 Osclass
@@ -18,11 +16,13 @@
  * limitations under the License.
  */
 
-    /**
-     * This class dynamically creates a XML Sitemap ready to send to Google, Yahoo and others.
-     * @author  Osclass
-     */
-class Sitemap {
+/**
+ * This class dynamically creates a XML Sitemap ready to send to Google, Yahoo and others.
+ *
+ * @author  Osclass
+ */
+class Sitemap
+{
 
     private $urls;
     private $validFrequencies = array('always', 'hourly', 'daily', 'weekly', 'monthly', 'yearly', 'never');
@@ -41,10 +41,10 @@ class Sitemap {
     public function addURL($loc, $changeFreq = 'daily', $priority = 0.7, $lastMod = null)
     {
         $this->urls[] = array(
-            'loc' => $loc,
-            'lastMod' => $lastMod,
+            'loc'        => $loc,
+            'lastMod'    => $lastMod,
             'changeFreq' => $changeFreq,
-            'priority' => $priority
+            'priority'   => $priority
         );
     }
 
@@ -66,4 +66,3 @@ class Sitemap {
         echo '</urlset>', PHP_EOL;
     }
 }
-

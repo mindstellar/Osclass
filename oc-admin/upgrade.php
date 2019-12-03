@@ -1,4 +1,4 @@
-<?php if ( ! defined('ABS_PATH')) {
+<?php if (!defined('ABS_PATH')) {
     exit('ABS_PATH is not loaded. Direct access is not allowed.');
 }
 
@@ -23,26 +23,27 @@
  */
 class CAdminUpgrade extends AdminSecBaseModel
 {
-    function __construct()
+    public function __construct()
     {
         parent::__construct();
     }
 
     //Business Layer...
-    function doModel()
+    public function doModel()
     {
         parent::doModel();
 
         //specific things for this class
         switch ($this->action) {
             case 'upgrade-funcs':
-                if ( defined('DEMO') ) {
-                    osc_add_flash_warning_message( _m("This action cannot be done because it is a demo site"), 'admin');
+                if (defined('DEMO')) {
+                    osc_add_flash_warning_message(_m('This action cannot be done because it is a demo site'), 'admin');
                     $this->redirectTo(osc_admin_base_url(true));
                 }
-                require(LIB_PATH.'osclass/upgrade-funcs.php');
+                require(LIB_PATH . 'osclass/upgrade-funcs.php');
                 break;
-            default:                $this->doView('upgrade/index.php');
+            default:
+                $this->doView('upgrade/index.php');
         }
     }
 
@@ -53,12 +54,12 @@ class CAdminUpgrade extends AdminSecBaseModel
      *
      * @return mixed|void
      */
-    function doView($file)
+    public function doView($file)
     {
-        osc_run_hook("before_admin_html");
+        osc_run_hook('before_admin_html');
         osc_current_admin_theme_path($file);
         Session::newInstance()->_clearVariables();
-        osc_run_hook("after_admin_html");
+        osc_run_hook('after_admin_html');
     }
 }
 

@@ -1,6 +1,4 @@
-<?php if ( ! defined( 'ABS_PATH' ) ) {
-    exit( 'ABS_PATH is not loaded. Direct access is not allowed.' );
-}
+<?php
 
 /*
  * Copyright 2014 Osclass
@@ -18,14 +16,14 @@
  * limitations under the License.
  */
 
-    /**
-     * AdminToolbar class
-     *
-     * @since 3.0
-     * @package Osclass
-     * @subpackage classes
-     * @author Osclass
-     */
+/**
+ * AdminToolbar class
+ *
+ * @since      3.0
+ * @package    Osclass
+ * @subpackage classes
+ * @author     Osclass
+ */
 class AdminToolbar
 {
     private static $instance;
@@ -43,6 +41,7 @@ class AdminToolbar
         if (!self::$instance instanceof self) {
             self::$instance = new self;
         }
+
         return self::$instance;
     }
 
@@ -56,32 +55,33 @@ class AdminToolbar
     public function add_menus()
     {
         // User related, aligned right.
-        osc_add_hook( 'add_admin_toolbar_menus', 'osc_admin_toolbar_menu', 0 );
-        osc_add_hook( 'add_admin_toolbar_menus', 'osc_admin_toolbar_comments', 0 );
-        osc_add_hook( 'add_admin_toolbar_menus', 'osc_admin_toolbar_spam', 0 );
+        osc_add_hook('add_admin_toolbar_menus', 'osc_admin_toolbar_menu', 0);
+        osc_add_hook('add_admin_toolbar_menus', 'osc_admin_toolbar_comments', 0);
+        osc_add_hook('add_admin_toolbar_menus', 'osc_admin_toolbar_spam', 0);
 
-        osc_add_hook( 'add_admin_toolbar_menus', 'osc_admin_toolbar_update_core', 0 );
+        osc_add_hook('add_admin_toolbar_menus', 'osc_admin_toolbar_update_core', 0);
 
-        osc_add_hook( 'add_admin_toolbar_menus', 'osc_admin_toolbar_update_themes', 0 );
-        osc_add_hook( 'add_admin_toolbar_menus', 'osc_admin_toolbar_update_plugins', 0 );
-        osc_add_hook( 'add_admin_toolbar_menus', 'osc_admin_toolbar_update_languages', 0 );
+        osc_add_hook('add_admin_toolbar_menus', 'osc_admin_toolbar_update_themes', 0);
+        osc_add_hook('add_admin_toolbar_menus', 'osc_admin_toolbar_update_plugins', 0);
+        osc_add_hook('add_admin_toolbar_menus', 'osc_admin_toolbar_update_languages', 0);
 
-        osc_add_hook( 'add_admin_toolbar_menus', 'osc_admin_toolbar_logout', 0 );
+        osc_add_hook('add_admin_toolbar_menus', 'osc_admin_toolbar_logout', 0);
 
-        osc_run_hook( 'add_admin_toolbar_menus' );
+        osc_run_hook('add_admin_toolbar_menus');
     }
 
     /**
      * Add a node to the menu.
      *
+     * @param $array
+     *
      * @todo implement parent nodes
      *
-     * @param $array
      */
     public function add_menu($array)
     {
         if (isset($array['id'])) {
-            $this->nodes[ $array['id'] ] = (object) $array;
+            $this->nodes[$array['id']] = (object)$array;
         }
     }
 
@@ -89,14 +89,15 @@ class AdminToolbar
      * Add a submenu to the menu.
      *
      * @param $array $args - The arguments for each subitem.
-     * - id         - string    - The ID of the mainitem.
-     * - parentid   - string    - The ID of the parent item.
-     * - title      - string    - The title of the node.
-     * - href       - string    - The link for the item. Optional.
-     * - meta       - array     - Meta data including the following keys: html, class, onclick, target, title, tabindex.
-     * - target     - string    - _blank
+     *               - id         - string    - The ID of the mainitem.
+     *               - parentid   - string    - The ID of the parent item.
+     *               - title      - string    - The title of the node.
+     *               - href       - string    - The link for the item. Optional.
+     *               - meta       - array     - Meta data including the following keys: html, class, onclick, target,
+     *               title, tabindex.
+     *               - target     - string    - _blank
      */
-    function add_submenu($array)
+    public function add_submenu($array)
     {
         if (isset($array['parentid']) && isset($array['id'])) {
             $this->nodes[$array['parentid']]->submenu[$array['id']] = (object)$array;
@@ -110,7 +111,7 @@ class AdminToolbar
      */
     public function remove_menu($id)
     {
-        unset( $this->nodes[ $id ] );
+        unset($this->nodes[$id]);
     }
 
     /**
@@ -119,7 +120,7 @@ class AdminToolbar
      * @param string $parentid
      * @param string $id
      */
-    function remove_submenu($parentid, $id)
+    public function remove_submenu($parentid, $id)
     {
         if (isset($this->nodes[$parentid]) && isset($this->nodes[$parentid]->submenu[$id])) {
             unset($this->nodes[$parentid]->submenu[$id]);
@@ -139,25 +140,27 @@ class AdminToolbar
             echo '<div id="header" class="navbar"><div class="header-wrapper">';
 
             foreach ($this->nodes as $value) {
-                $meta = "";
+                $meta = '';
                 if (isset($value->meta)) {
                     foreach ($value->meta as $k => $v) {
-                        $meta .= $k.'="'.$v.'" ';
+                        $meta .= $k . '="' . $v . '" ';
                     }
                 }
-                echo '<div id="osc_toolbar_'.$value->id.'" ><a '.$meta.' href="'.$value->href.'" ' . ((isset($value->target)) ? 'target="' . $value->target . '"' : '') . '>'.$value->title.'</a>';
+                echo '<div id="osc_toolbar_' . $value->id . '" ><a ' . $meta . ' href="' . $value->href . '" '
+                    . ((isset($value->target)) ? 'target="' . $value->target . '"' : '') . '>' . $value->title . '</a>';
 
                 if (isset($value->submenu) && is_array($value->submenu)) {
-                    echo '<nav class="osc_admin_submenu" id="osc_toolbar_sub_'.$value->id.'"><ul>';
+                    echo '<nav class="osc_admin_submenu" id="osc_toolbar_sub_' . $value->id . '"><ul>';
                     foreach ($value->submenu as $subvalue) {
                         if (isset($subvalue->subid)) {
-                            $submeta = "";
+                            $submeta = '';
                             if (isset($subvalue->meta)) {
                                 foreach ($subvalue->meta as $sk => $sv) {
-                                    $submeta .= $sk.'="'.$sv.'" ';
+                                    $submeta .= $sk . '="' . $sv . '" ';
                                 }
                             }
-                            echo '<li><a '.$submeta.' href="'.$subvalue->href.'" ' . ((isset($subvalue->target)) ? 'target="' . $subvalue->target . '"' : '') . '>'.$subvalue->title.'</a><li>';
+                            echo '<li><a ' . $submeta . ' href="' . $subvalue->href . '" ' . ((isset($subvalue->target))
+                                    ? 'target="' . $subvalue->target . '"' : '') . '>' . $subvalue->title . '</a><li>';
                         }
                     }
                     echo '</ul></nav>';

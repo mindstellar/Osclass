@@ -1,2 +1,8 @@
-Osclass Dev
+Osclass Dev Changelog
 - Added New class for logging errors in osclass.
+- Fix bug of listing invalid themes in Admin Appearance
+- Fix PHP notices while saving Admin settings.
+- Restructured whole osclass core.
+- Core osclass now using autoloader for classes and external libraries.
+For old changelog history visit https://raw.githubusercontent.com/navjottomer/Osclass/autoload/ChangelogHistory.txt
+Source: https://github.com/navjottomer/Osclass/commits/autoload

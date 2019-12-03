@@ -1,6 +1,4 @@
-<?php if (!defined('ABS_PATH')) {
-    exit('ABS_PATH is not loaded. Direct access is not allowed.');
-}
+<?php
 
 /*
  * Copyright 2014 Osclass
@@ -58,10 +56,6 @@ class Rewrite
     public function setRules()
     {
         osc_set_preference('rewrite_rules', osc_serialize($this->rules));
-    }
-
-    public function getTableName()
-    {
     }
 
     /**
@@ -145,9 +139,11 @@ class Rewrite
     public function init()
     {
         if (Params::existServerParam('REQUEST_URI')) {
+            $server_params            = Params::getServerParam('REQUEST_URI', false, false);
+            $urldecoded_server_params = urldecode($server_params);
             if (preg_match(
                 '|[\?&]{1}http_referer=(.*)$|',
-                urldecode(Params::getServerParam('REQUEST_URI', false, false)),
+                $urldecoded_server_params,
                 $ref_match
             )
             ) {
@@ -155,11 +151,11 @@ class Rewrite
                 $_SERVER['REQUEST_URI'] = preg_replace(
                     '|[\?&]{1}http_referer=(.*)$|',
                     '',
-                    urldecode(Params::getServerParam('REQUEST_URI', false, false))
+                    $urldecoded_server_params
                 );
             }
             $request_uri           =
-                preg_replace('@^' . REL_WEB_URL . '@', '', Params::getServerParam('REQUEST_URI', false, false));
+                preg_replace('@^' . REL_WEB_URL . '@', '', $server_params);
             $this->raw_request_uri = $request_uri;
             $route_used            = false;
             foreach ($this->routes as $id => $route) {
@@ -241,7 +237,7 @@ class Rewrite
     /**
      * @param string $uri
      */
-    public function extractParams($uri = '')
+    private function extractParams($uri = '')
     {
         $uri_array = explode('?', $uri);
         $length_i  = count($uri_array);
@@ -250,21 +246,6 @@ class Rewrite
             foreach ($parsedVars as $k => $v) {
                 Params::setParam($k, urldecode($v));
             }
-        }
-    }
-
-    /**
-     * @param string $uri
-     *
-     * @return bool|string
-     */
-    public function extractURL($uri = '')
-    {
-        $uri_array = explode('?', str_replace('index.php', '', $uri));
-        if ($uri_array[0][0] === '/') {
-            return substr($uri_array[0], 1);
-        } else {
-            return $uri_array[0];
         }
     }
 
@@ -336,5 +317,20 @@ class Rewrite
     public function get_http_referer()
     {
         return $this->http_referer;
+    }
+
+    /**
+     * @param string $uri
+     *
+     * @return bool|string
+     */
+    private function extractURL($uri = '')
+    {
+        $uri_array = explode('?', str_replace('index.php', '', $uri));
+        if ($uri_array[0][0] === '/') {
+            return substr($uri_array[0], 1);
+        }
+
+        return $uri_array[0];
     }
 }

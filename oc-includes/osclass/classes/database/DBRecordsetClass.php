@@ -16,20 +16,20 @@
  * limitations under the License.
  */
 
-    /**
-     * Database recordset object
-     *
-     * @package Osclass
-     * @subpackage Database
-     * @since 2.3
-     */
+/**
+ * Database recordset object
+ *
+ * @package    Osclass
+ * @subpackage Database
+ * @since      2.3
+ */
 class DBRecordsetClass
 {
     /**
      * Database connection object to Osclass database
      *
      * @access public
-     * @since 2.3
+     * @since  2.3
      * @var mysqli
      */
     public $connId;
@@ -37,7 +37,7 @@ class DBRecordsetClass
      * Database result object
      *
      * @access public
-     * @since 2.3
+     * @since  2.3
      * @var MySQLi_Result
      */
     public $resultId;
@@ -45,7 +45,7 @@ class DBRecordsetClass
      * Result array
      *
      * @access private
-     * @since 2.3
+     * @since  2.3
      * @var array
      */
     public $resultArray;
@@ -53,31 +53,31 @@ class DBRecordsetClass
      * Result object
      *
      * @access private
-     * @since 2.3
+     * @since  2.3
      * @var object
      */
     public $resultObject;
     /**
-     * Current row
-     *
-     * @access private
-     * @since 2.3
-     * @var int
-     */
-    protected $currentRow;
-    /**
      * Number of rows
      *
      * @access public
-     * @since 2.3
+     * @since  2.3
      * @var int
      */
     public $numRows;
+    /**
+     * Current row
+     *
+     * @access private
+     * @since  2.3
+     * @var int
+     */
+    protected $currentRow;
 
     /**
      * Initialize Recordset Class
      *
-     * @param mysqli $connId
+     * @param mysqli        $connId
      * @param MySQLi_Result $resultId
      */
     public function __construct($connId = null, $resultId = null)
@@ -91,32 +91,61 @@ class DBRecordsetClass
     }
 
     /**
-     * Get the results of MySQLi_Result object
+     * Get a result row as an array or object
      *
-     * @access public
-     * @since 2.3
+     * @param int    $n
      * @param string $type
-     * @return mixed It can be an array or an object
+     *
+     * @return mixed
      */
-    public function result($type = 'array')
+    public function row($n = 0, $type = 'array')
     {
-        if ( $type === 'array') {
-            return $this->resultArray();
+        if (!is_numeric($n)) {
+            $n = 0;
         }
 
-        return $this->resultObject();
+        if ($type === 'array') {
+            return $this->rowArray($n);
+        }
+
+        return $this->rowObject($n);
+    }
+
+    /**
+     * Get a result row as an array
+     *
+     * @access public
+     *
+     * @param int $n
+     *
+     * @return array
+     * @since  2.3
+     */
+    public function rowArray($n = 0)
+    {
+        $result = $this->resultArray();
+
+        if (count($result) == 0) {
+            return $result;
+        }
+
+        if ($n != $this->currentRow && isset($result[$n])) {
+            $this->currentRow = $n;
+        }
+
+        return $result[$this->currentRow];
     }
 
     /**
      * Get the results of MySQLi_Result object in array format
      *
      * @access public
-     * @since 2.3
      * @return array
+     * @since  2.3
      */
     public function resultArray()
     {
-        if ( count($this->resultArray) > 0 ) {
+        if (count($this->resultArray) > 0) {
             return $this->resultArray;
         }
 
@@ -129,33 +158,14 @@ class DBRecordsetClass
     }
 
     /**
-     * Get the results of MySQLi_Result object in object format
-     *
-     * @access public
-     * @since 2.3
-     * @return object|countable
-     */
-    public function resultObject()
-    {
-        if ( count($this->resultObject) > 0 ) {
-            return $this->resultObject;
-        }
-
-        $this->_dataSeek();
-        while ( $row = $this->_fetchObject() ) {
-            $this->resultObject[] = $row;
-        }
-
-        return $this->resultObject;
-    }
-
-    /**
      * Adjust resultId pointer to the selected row
      *
      * @access private
-     * @since 2.3
+     *
      * @param int $offset Must be between zero and the total number of rows minus one
+     *
      * @return bool true on success or false on failure
+     * @since  2.3
      */
     public function _dataSeek($offset = 0)
     {
@@ -163,23 +173,11 @@ class DBRecordsetClass
     }
 
     /**
-     * Returns the current row of a result set as an object
-     *
-     * @access private
-     * @since 2.3
-     * @return object
-     */
-    public function _fetchObject()
-    {
-        return $this->resultId->fetch_object();
-    }
-
-    /**
      * Returns the current row of a result set as an array
      *
      * @access private
-     * @since 2.3
      * @return array
+     * @since  2.3
      */
     public function _fetchArray()
     {
@@ -187,42 +185,24 @@ class DBRecordsetClass
     }
 
     /**
-     * Get a result row as an array or object
-     *
-     * @param int $n
-     * @param string $type
-     * @return mixed
-     */
-    public function row($n = 0, $type = 'array')
-    {
-        if ( !is_numeric($n) ) {
-            $n = 0;
-        }
-
-        if ( $type === 'array' ) {
-            return $this->rowArray($n);
-        }
-
-        return $this->rowObject($n);
-    }
-
-    /**
      * Get a result row as an object
      *
      * @access public
-     * @since 2.3
+     *
      * @param int $n
+     *
      * @return object
+     * @since  2.3
      */
     public function rowObject($n = 0)
     {
         $result = $this->resultObject();
 
-        if ( count($result) == 0) {
+        if (count($result) == 0) {
             return $result;
         }
 
-        if ( $n != $this->currentRow && isset($result[$n]) ) {
+        if ($n != $this->currentRow && isset($result[$n])) {
             $this->currentRow = $n;
         }
 
@@ -230,41 +210,53 @@ class DBRecordsetClass
     }
 
     /**
-     * Get a result row as an array
+     * Get the results of MySQLi_Result object in object format
      *
      * @access public
-     * @since 2.3
-     * @param int $n
-     * @return array
+     * @return object|countable
+     * @since  2.3
      */
-    public function rowArray($n = 0)
+    public function resultObject()
     {
-        $result = $this->resultArray();
-
-        if ( count($result) == 0) {
-            return $result;
+        if (count($this->resultObject) > 0) {
+            return $this->resultObject;
         }
 
-        if ( $n != $this->currentRow && isset($result[$n]) ) {
-            $this->currentRow = $n;
+        $this->_dataSeek();
+        while ($row = $this->_fetchObject()) {
+            $this->resultObject[] = $row;
         }
 
-        return $result[$this->currentRow];
+        return $this->resultObject;
+    }
+
+    /**
+     * Returns the current row of a result set as an object
+     *
+     * @access private
+     * @return object
+     * @since  2.3
+     */
+    public function _fetchObject()
+    {
+        return $this->resultId->fetch_object();
     }
 
     /**
      * Get the first row as an array or object
      *
      * @access public
-     * @since 2.3
+     *
      * @param string $type
+     *
      * @return mixed
+     * @since  2.3
      */
     public function firstRow($type = 'array')
     {
         $result = $this->result($type);
 
-        if ( count($result) == 0 ) {
+        if (count($result) == 0) {
             return $result;
         }
 
@@ -272,18 +264,39 @@ class DBRecordsetClass
     }
 
     /**
+     * Get the results of MySQLi_Result object
+     *
+     * @access public
+     *
+     * @param string $type
+     *
+     * @return mixed It can be an array or an object
+     * @since  2.3
+     */
+    public function result($type = 'array')
+    {
+        if ($type === 'array') {
+            return $this->resultArray();
+        }
+
+        return $this->resultObject();
+    }
+
+    /**
      * Get the last row as an array or object
      *
      * @access public
-     * @since 2.3
+     *
      * @param string $type
+     *
      * @return mixed
+     * @since  2.3
      */
     public function lastRow($type = 'array')
     {
         $result = $this->result($type);
 
-        if ( count($result) == 0 ) {
+        if (count($result) == 0) {
             return $result;
         }
 
@@ -294,19 +307,21 @@ class DBRecordsetClass
      * Get next row as an array or object
      *
      * @access public
-     * @since 2.3
+     *
      * @param string $type
+     *
      * @return mixed
+     * @since  2.3
      */
     public function nextRow($type = 'array')
     {
         $result = $this->result($type);
 
-        if ( count($result) == 0 ) {
+        if (count($result) == 0) {
             return $result;
         }
 
-        if ( isset($result[$this->currentRow + 1]) ) {
+        if (isset($result[$this->currentRow + 1])) {
             $this->currentRow++;
         }
 
@@ -317,19 +332,21 @@ class DBRecordsetClass
      * Get previous row as an array or object
      *
      * @access public
-     * @since 2.3
+     *
      * @param string $type
+     *
      * @return mixed
+     * @since  2.3
      */
     public function previousRow($type = 'array')
     {
         $result = $this->result($type);
 
-        if ( count($result) == 0 ) {
+        if (count($result) == 0) {
             return $result;
         }
 
-        if ( isset($result[$this->currentRow - 1]) ) {
+        if (isset($result[$this->currentRow - 1])) {
             $this->currentRow--;
         }
 
@@ -340,8 +357,8 @@ class DBRecordsetClass
      * Get number of rows
      *
      * @access public
-     * @since 2.3
      * @return int
+     * @since  2.3
      */
     public function numRows()
     {
@@ -352,8 +369,8 @@ class DBRecordsetClass
      * Get the number of fields in a result
      *
      * @access public
-     * @since 2.3
      * @return int
+     * @since  2.3
      */
     public function numFields()
     {
@@ -364,13 +381,13 @@ class DBRecordsetClass
      * Get the name of the fields in an array
      *
      * @access public
-     * @since 2.3
      * @return array
+     * @since  2.3
      */
     public function listFields()
     {
         $fieldNames = array();
-        while ( $field = $this->resultId->fetch_field() ) {
+        while ($field = $this->resultId->fetch_field()) {
             $fieldNames[] = $field->name;
         }
 
@@ -378,4 +395,4 @@ class DBRecordsetClass
     }
 }
 
-    /* file end: ./oc-includes/osclass/classes/database/DBRecordsetClass.php */
+/* file end: ./oc-includes/osclass/classes/database/DBRecordsetClass.php */

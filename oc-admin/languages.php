@@ -2,25 +2,25 @@
     exit('ABS_PATH is not loaded. Direct access is not allowed.');
 }
 
-    /*
-     * Copyright 2014 Osclass
-     *
-     * Licensed under the Apache License, Version 2.0 (the "License");
-     * you may not use this file except in compliance with the License.
-     * You may obtain a copy of the License at
-     *
-     *     http://www.apache.org/licenses/LICENSE-2.0
-     *
-     * Unless required by applicable law or agreed to in writing, software
-     * distributed under the License is distributed on an "AS IS" BASIS,
-     * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-     * See the License for the specific language governing permissions and
-     * limitations under the License.
-     */
+/*
+ * Copyright 2014 Osclass
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 
-    /**
-     * Class CAdminLanguages
-     */
+/**
+ * Class CAdminLanguages
+ */
 class CAdminLanguages extends AdminSecBaseModel
 {
     //specific for this class
@@ -227,7 +227,8 @@ class CAdminLanguages extends AdminSecBaseModel
 
                 foreach ($id as $i) {
                     if (osc_language() == $i) {
-                        $msg_warning = sprintf(_m("%s can't be disabled because it's the default language"), osc_language());
+                        $msg_warning =
+                            sprintf(_m("%s can't be disabled because it's the default language"), osc_language());
                         continue;
                     }
                     $iUpdated += $this->localeManager->update($aValues, array('pk_c_code' => $i));
@@ -285,7 +286,8 @@ class CAdminLanguages extends AdminSecBaseModel
 
                 foreach ($id as $i) {
                     if (osc_language() == $i) {
-                        $msg_warning = sprintf(_m("%s can't be disabled because it's the default language"), osc_language());
+                        $msg_warning =
+                            sprintf(_m("%s can't be disabled because it's the default language"), osc_language());
                         continue;
                     }
                     $iUpdated += $this->localeManager->update($aValues, array('pk_c_code' => $i));
@@ -311,7 +313,8 @@ class CAdminLanguages extends AdminSecBaseModel
                         if ($default_lang != $code) {
                             if ($this->localeManager->deleteLocale($code)) {
                                 if (!osc_deleteDir(osc_translations_path() . $code)) {
-                                    osc_add_flash_error_message(sprintf(_m("Directory '%s' couldn't be removed"), $code), 'admin');
+                                    osc_add_flash_error_message(sprintf(_m("Directory '%s' couldn't be removed"),
+                                        $code), 'admin');
                                 } else {
                                     osc_add_flash_ok_message(
                                         sprintf(_m('Directory "%s" has been successfully removed'), $code),
@@ -319,7 +322,8 @@ class CAdminLanguages extends AdminSecBaseModel
                                     );
                                 }
                             } else {
-                                osc_add_flash_error_message(sprintf(_m("Directory '%s' couldn't be removed;)"), $code), 'admin');
+                                osc_add_flash_error_message(sprintf(_m("Directory '%s' couldn't be removed;)"), $code),
+                                    'admin');
                             }
                         } else {
                             osc_add_flash_error_message(
@@ -386,17 +390,25 @@ class CAdminLanguages extends AdminSecBaseModel
                     $row[] = '<input type="checkbox" name="id[]" value="' . $l['pk_c_code'] . '" />';
 
                     $options   = array();
-                    $options[] = '<a href="' . osc_admin_base_url(true) . '?page=languages&amp;action=edit&amp;id=' . $l['pk_c_code']
+                    $options[] = '<a href="' . osc_admin_base_url(true) . '?page=languages&amp;action=edit&amp;id='
+                        . $l['pk_c_code']
                         . '">' . __('Edit') . '</a>';
-                    $options[] = '<a href="' . osc_admin_base_url(true) . '?page=languages&amp;action=' . ($l['b_enabled'] == 1
-                            ? 'disable_selected' : 'enable_selected') . '&amp;id[]=' . $l['pk_c_code'] . '&amp;' . osc_csrf_token_url()
+                    $options[] =
+                        '<a href="' . osc_admin_base_url(true) . '?page=languages&amp;action=' . ($l['b_enabled'] == 1
+                            ? 'disable_selected' : 'enable_selected') . '&amp;id[]=' . $l['pk_c_code'] . '&amp;'
+                        . osc_csrf_token_url()
                         . '">' . ($l['b_enabled'] == 1 ? __('Disable (website)') : __('Enable (website)')) . '</a> ';
-                    $options[] = '<a href="' . osc_admin_base_url(true) . '?page=languages&amp;action=' . ($l['b_enabled_bo'] == 1
+                    $options[] =
+                        '<a href="' . osc_admin_base_url(true) . '?page=languages&amp;action=' . ($l['b_enabled_bo']
+                        == 1
                             ? 'disable_bo_selected' : 'enable_bo_selected') . '&amp;id[]=' . $l['pk_c_code'] . '&amp;'
-                        . osc_csrf_token_url() . '">' . ($l['b_enabled_bo'] == 1 ? __('Disable (oc-admin)') : __('Enable (oc-admin)'))
+                        . osc_csrf_token_url() . '">' . ($l['b_enabled_bo'] == 1 ? __('Disable (oc-admin)')
+                            : __('Enable (oc-admin)'))
                         . '</a>';
-                    $options[] = '<a onclick="return delete_dialog(\'' . $l['pk_c_code'] . '\');"  href="' . osc_admin_base_url(true)
-                        . '?page=languages&amp;action=delete&amp;id[]=' . $l['pk_c_code'] . '&amp;' . osc_csrf_token_url() . '">' . __(
+                    $options[] = '<a onclick="return delete_dialog(\'' . $l['pk_c_code'] . '\');"  href="'
+                        . osc_admin_base_url(true)
+                        . '?page=languages&amp;action=delete&amp;id[]=' . $l['pk_c_code'] . '&amp;'
+                        . osc_csrf_token_url() . '">' . __(
                             'Delete'
                         ) . '</a>';
 
@@ -409,8 +421,10 @@ class CAdminLanguages extends AdminSecBaseModel
                     $sUpdate = '';
                     // get languages to update from t_preference
                     if ($bLanguagesToUpdate && in_array($l['pk_c_code'], $aLanguagesToUpdate)) {
-                        $sUpdate = '<a class="btn-market-update btn-market-popup" href="#' . htmlentities($l['pk_c_code']) . '">' . __(
-                                "Update here"
+                        $sUpdate =
+                            '<a class="btn-market-update btn-market-popup" href="#' . htmlentities($l['pk_c_code'])
+                            . '">' . __(
+                                'Update here'
                             ) . '</a>';
                     }
 
@@ -511,4 +525,4 @@ class CAdminLanguages extends AdminSecBaseModel
     }
 }
 
-    /* file end: ./oc-admin/languages.php */
+/* file end: ./oc-admin/languages.php */

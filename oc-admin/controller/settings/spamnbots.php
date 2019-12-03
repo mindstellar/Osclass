@@ -1,4 +1,4 @@
-<?php if ( ! defined('ABS_PATH')) {
+<?php if (!defined('ABS_PATH')) {
     exit('ABS_PATH is not loaded. Direct access is not allowed.');
 }
 
@@ -23,24 +23,24 @@
  */
 class CAdminSettingsSpamnBots extends AdminSecBaseModel
 {
-    function __construct()
+    public function __construct()
     {
         parent::__construct();
     }
 
     //Business Layer...
-    function doModel()
+    public function doModel()
     {
         switch ($this->action) {
             case('spamNbots'):
                 // calling the spam and bots view
                 $akismet_key    = osc_akismet_key();
                 $akismet_status = 3;
-                if ( $akismet_key != '' ) {
-                    require_once( osc_lib_path() . 'Akismet.class.php' );
+                if ($akismet_key != '') {
+                    require_once(osc_lib_path() . 'Akismet.class.php');
                     $akismet_obj    = new Akismet(osc_base_url(), $akismet_key);
                     $akismet_status = 2;
-                    if ( $akismet_obj->isKeyValid() ) {
+                    if ($akismet_obj->isKeyValid()) {
                         $akismet_status = 1;
                     }
                 }
@@ -57,7 +57,7 @@ class CAdminSettingsSpamnBots extends AdminSecBaseModel
 
                 $updated = osc_set_preference('akismetKey', $akismetKey);
 
-                if ( $akismetKey == '' ) {
+                if ($akismetKey == '') {
                     osc_add_flash_info_message(_m('Your Akismet key has been cleared'), 'admin');
                 } else {
                     osc_add_flash_ok_message(_m('Your Akismet key has been updated'), 'admin');
@@ -67,7 +67,7 @@ class CAdminSettingsSpamnBots extends AdminSecBaseModel
             case('recaptcha_post'):
                 // updating spam and bots option
                 osc_csrf_check();
-                $iUpdated = 0;
+                $iUpdated         = 0;
                 $recaptchaPrivKey = Params::getParam('recaptchaPrivKey');
                 $recaptchaPrivKey = trim($recaptchaPrivKey);
                 $recaptchaPubKey  = Params::getParam('recaptchaPubKey');
@@ -79,10 +79,10 @@ class CAdminSettingsSpamnBots extends AdminSecBaseModel
                 $iUpdated += osc_set_preference('recaptchaPubKey', $recaptchaPubKey);
                 $iUpdated += osc_set_preference('recaptcha_version', $recaptchaVersion);
 
-                if ( $recaptchaPubKey == '' ) {
+                if ($recaptchaPubKey == '') {
                     osc_add_flash_info_message(_m('Your reCAPTCHA key has been cleared'), 'admin');
                 } else {
-                    osc_add_flash_ok_message( _m('Your reCAPTCHA key has been updated'), 'admin');
+                    osc_add_flash_ok_message(_m('Your reCAPTCHA key has been updated'), 'admin');
                 }
                 $this->redirectTo(osc_admin_base_url(true) . '?page=settings&action=spamNbots');
                 break;
@@ -90,4 +90,4 @@ class CAdminSettingsSpamnBots extends AdminSecBaseModel
     }
 }
 
-    // EOF: ./oc-admin/controller/settings/spamnbots.php
+// EOF: ./oc-admin/controller/settings/spamnbots.php

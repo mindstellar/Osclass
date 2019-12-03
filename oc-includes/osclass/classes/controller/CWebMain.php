@@ -1,0 +1,68 @@
+<?php
+
+/*
+ * Copyright 2014 Osclass
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+/**
+ * Class CWebMain
+ */
+class CWebMain extends BaseModel
+{
+    public function __construct()
+    {
+        parent::__construct();
+        osc_run_hook('init_main');
+    }
+
+    //Business Layer...
+    public function doModel()
+    {
+        $i = $this->action;
+        if ($i === 'logout') {         // unset only the required parameters in Session
+            osc_run_hook('logout');
+
+            Session::newInstance()->_drop('userId');
+            Session::newInstance()->_drop('userName');
+            Session::newInstance()->_drop('userEmail');
+            Session::newInstance()->_drop('userPhone');
+
+            Cookie::newInstance()->pop('oc_userId');
+            Cookie::newInstance()->pop('oc_userSecret');
+            Cookie::newInstance()->set();
+
+            $this->redirectTo(osc_base_url());
+        } else {
+            $this->doView('main.php');
+        }
+    }
+
+    //hopefully generic...
+
+    /**
+     * @param $file
+     *
+     * @return mixed|void
+     */
+    public function doView($file)
+    {
+        osc_run_hook('before_html');
+        osc_current_web_theme_path($file);
+        Session::newInstance()->_clearVariables();
+        osc_run_hook('after_html');
+    }
+}
+
+/* file end: ./CWebMain.php */

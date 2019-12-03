@@ -1,4 +1,4 @@
-<?php if ( ! defined('ABS_PATH')) {
+<?php if (!defined('ABS_PATH')) {
     exit('ABS_PATH is not loaded. Direct access is not allowed.');
 }
 
@@ -26,7 +26,7 @@ class CAdminEmails extends AdminSecBaseModel
     //specific for this class
     private $emailManager;
 
-    function __construct()
+    public function __construct()
     {
         parent::__construct();
 
@@ -35,15 +35,15 @@ class CAdminEmails extends AdminSecBaseModel
     }
 
     //Business Layer...
-    function doModel()
+    public function doModel()
     {
         parent::doModel();
 
         //specific things for this class
         switch ($this->action) {
             case 'edit':
-                if (Params::getParam("id")=='') {
-                    $this->redirectTo(osc_admin_base_url(true)."?page=emails");
+                if (Params::getParam('id') == '') {
+                    $this->redirectTo(osc_admin_base_url(true) . '?page=emails');
                 }
 
                 $form     = count(Session::newInstance()->_getForm());
@@ -52,22 +52,22 @@ class CAdminEmails extends AdminSecBaseModel
                     Session::newInstance()->_dropKeepForm();
                 }
 
-                $this->_exportVariableToView("email", $this->emailManager->findByPrimaryKey(Params::getParam("id")));
-                $this->doView("emails/frm.php");
+                $this->_exportVariableToView('email', $this->emailManager->findByPrimaryKey(Params::getParam('id')));
+                $this->doView('emails/frm.php');
                 break;
             case 'edit_post':
                 osc_csrf_check();
-                $id = Params::getParam("id");
-                $s_internal_name = Params::getParam("s_internal_name");
+                $id              = Params::getParam('id');
+                $s_internal_name = Params::getParam('s_internal_name');
 
                 $aFieldsDescription = array();
-                $postParams = Params::getParamsAsArray('', false);
-                $not_empty = false;
+                $postParams         = Params::getParamsAsArray('', false);
+                $not_empty          = false;
                 foreach ($postParams as $k => $v) {
                     if (preg_match('|(.+?)#(.+)|', $k, $m)) {
-                        if ($m[2]=='s_title' && $v!='') {
+                        if ($m[2] == 's_title' && $v != '') {
                             $not_empty = true;
-                        };
+                        }
                         $aFieldsDescription[$m[1]][$m[2]] = $v;
                     }
                 }
@@ -85,23 +85,24 @@ class CAdminEmails extends AdminSecBaseModel
                             $this->emailManager->updateInternalName($id, $s_internal_name);
                         }
                         Session::newInstance()->_clearVariables();
-                        osc_add_flash_ok_message( _m('The email/alert has been updated'), 'admin' );
-                        $this->redirectTo(osc_admin_base_url(true)."?page=emails");
+                        osc_add_flash_ok_message(_m('The email/alert has been updated'), 'admin');
+                        $this->redirectTo(osc_admin_base_url(true) . '?page=emails');
                     }
-                    osc_add_flash_error_message( _m('You can\'t repeat internal name'), 'admin');
+                    osc_add_flash_error_message(_m('You can\'t repeat internal name'), 'admin');
                 } else {
-                    osc_add_flash_error_message( _m('The email couldn\'t be updated, at least one title should not be empty'), 'admin');
+                    osc_add_flash_error_message(_m('The email couldn\'t be updated, at least one title should not be empty'),
+                        'admin');
                 }
-                $this->redirectTo(osc_admin_base_url(true)."?page=emails&action=edit&id=" . $id);
+                $this->redirectTo(osc_admin_base_url(true) . '?page=emails&action=edit&id=' . $id);
                 break;
             default:
                 //-
-                if ( Params::getParam('iDisplayLength') == '' ) {
-                    Params::setParam('iDisplayLength', 10 );
+                if (Params::getParam('iDisplayLength') == '') {
+                    Params::setParam('iDisplayLength', 10);
                 }
 
-                $p_iPage      = 1;
-                if ( is_numeric(Params::getParam('iPage')) && Params::getParam('iPage') >= 1 ) {
+                $p_iPage = 1;
+                if (is_numeric(Params::getParam('iPage')) && Params::getParam('iPage') >= 1) {
                     $p_iPage = Params::getParam('iPage');
                 }
                 Params::setParam('iPage', $p_iPage);
@@ -110,17 +111,17 @@ class CAdminEmails extends AdminSecBaseModel
                 $emails     = $this->emailManager->listAll(1);
 
                 // pagination
-                $start = ($p_iPage-1) * Params::getParam('iDisplayLength');
+                $start = ($p_iPage - 1) * Params::getParam('iDisplayLength');
                 $limit = Params::getParam('iDisplayLength');
-                $count = count( $emails );
+                $count = count($emails);
 
                 $displayRecords = $limit;
-                if ( ($start+$limit ) > $count ) {
-                    $displayRecords = ($start+$limit) - $count;
+                if (($start + $limit) > $count) {
+                    $displayRecords = ($start + $limit) - $count;
                 }
                 // ----
                 $aData = array();
-                $max = ($start+$limit);
+                $max   = ($start + $limit);
                 if ($max > $count) {
                     $max = $count;
                 }
@@ -132,47 +133,48 @@ class CAdminEmails extends AdminSecBaseModel
                     } else {
                         $title = current($email['locale']);
                     }
-                    $options = array();
-                    $options[] = '<a href="' . osc_admin_base_url(true) . '?page=emails&amp;action=edit&amp;id=' . $email["pk_i_id"] . '">' . __('Edit') . '</a>';
+                    $options   = array();
+                    $options[] = '<a href="' . osc_admin_base_url(true) . '?page=emails&amp;action=edit&amp;id='
+                        . $email['pk_i_id'] . '">' . __('Edit') . '</a>';
 
-                    $auxOptions = '<ul>'.PHP_EOL;
-                    foreach ( $options as $actual ) {
-                        $auxOptions .= '<li>'.$actual.'</li>'.PHP_EOL;
+                    $auxOptions = '<ul>' . PHP_EOL;
+                    foreach ($options as $actual) {
+                        $auxOptions .= '<li>' . $actual . '</li>' . PHP_EOL;
                     }
-                    $actions = '<div class="actions">'.$auxOptions.'</div>'.PHP_EOL;
+                    $actions = '<div class="actions">' . $auxOptions . '</div>' . PHP_EOL;
 
-                    $row = array();
-                    $row[] = $email['s_internal_name'] . $actions;
-                    $row[] = $title['s_title'];
+                    $row     = array();
+                    $row[]   = $email['s_internal_name'] . $actions;
+                    $row[]   = $title['s_title'];
                     $aData[] = $row;
                 }
                 // ----
-                $array['iTotalRecords']         = $displayRecords;
-                $array['iTotalDisplayRecords']  = count($emails);
-                $array['iDisplayLength']        = $limit;
-                $array['aaData'] = $aData;
+                $array['iTotalRecords']        = $displayRecords;
+                $array['iTotalDisplayRecords'] = count($emails);
+                $array['iDisplayLength']       = $limit;
+                $array['aaData']               = $aData;
 
-                $page  = (int)Params::getParam('iPage');
-                if (count($array['aaData']) == 0 && $page!=1) {
-                    $total = (int)$array['iTotalDisplayRecords'];
-                    $maxPage = ceil( $total / (int)$array['iDisplayLength'] );
+                $page = (int)Params::getParam('iPage');
+                if (count($array['aaData']) == 0 && $page != 1) {
+                    $total   = (int)$array['iTotalDisplayRecords'];
+                    $maxPage = ceil($total / (int)$array['iDisplayLength']);
 
-                    $url = osc_admin_base_url(true).'?'.Params::getServerParam('QUERY_STRING', false, false);
+                    $url = osc_admin_base_url(true) . '?' . Params::getServerParam('QUERY_STRING', false, false);
 
-                    if ($maxPage==0) {
+                    if ($maxPage == 0) {
                         $url = preg_replace('/&iPage=(\d)+/', '&iPage=1', $url);
                         $this->redirectTo($url);
                     }
 
                     if ($page > 1) {
-                        $url = preg_replace('/&iPage=(\d)+/', '&iPage='.$maxPage, $url);
+                        $url = preg_replace('/&iPage=(\d)+/', '&iPage=' . $maxPage, $url);
                         $this->redirectTo($url);
                     }
                 }
 
                 $this->_exportVariableToView('aEmails', $array);
 
-                $this->doView("emails/index.php");
+                $this->doView('emails/index.php');
         }
     }
 
@@ -183,13 +185,13 @@ class CAdminEmails extends AdminSecBaseModel
      *
      * @return mixed|void
      */
-    function doView($file)
+    public function doView($file)
     {
-        osc_run_hook("before_admin_html");
+        osc_run_hook('before_admin_html');
         osc_current_admin_theme_path($file);
         Session::newInstance()->_clearVariables();
-        osc_run_hook("after_admin_html");
+        osc_run_hook('after_admin_html');
     }
 }
 
-    /* file end: ./oc-admin/emails.php */
+/* file end: ./oc-admin/emails.php */
