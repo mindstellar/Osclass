@@ -139,11 +139,11 @@ class Rewrite
     public function init()
     {
         if (Params::existServerParam('REQUEST_URI')) {
-            $server_params            = Params::getServerParam('REQUEST_URI', false, false);
-            $urldecoded_server_params = urldecode($server_params);
+            $request_uri            = Params::getRequestURI(false, false, false);
+            $urldecoded_request_uri = urldecode($request_uri);
             if (preg_match(
                 '|[\?&]{1}http_referer=(.*)$|',
-                $urldecoded_server_params,
+                $urldecoded_request_uri,
                 $ref_match
             )
             ) {
@@ -151,11 +151,10 @@ class Rewrite
                 $_SERVER['REQUEST_URI'] = preg_replace(
                     '|[\?&]{1}http_referer=(.*)$|',
                     '',
-                    $urldecoded_server_params
+                    $urldecoded_request_uri
                 );
             }
-            $request_uri           =
-                preg_replace('@^' . REL_WEB_URL . '@', '', $server_params);
+
             $this->raw_request_uri = $request_uri;
             $route_used            = false;
             foreach ($this->routes as $id => $route) {

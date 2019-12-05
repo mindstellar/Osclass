@@ -588,11 +588,9 @@ function osc_search_url($params = null)
             $url = $base_url . $seo_prefix . $url;
         } elseif (isset($params['sRegion']) && is_string($params['sRegion'])
             && strpos($params['sRegion'], ',') === false
-            && ($countP == 1
-                || ($countP == 2
-                    && (isset($params['iPage'])
-                        || isset($params['sCategory'])))
-                || (isset($params['iPage'], $params['sCategory']) && $countP == 3))
+            && ($countP == 1 || ($countP == 2 && (isset($params['iPage']) || isset($params['sCategory'])))
+                || (isset($params['iPage'], $params['sCategory']) && $countP == 3)
+            )
         ) {
             $url = $base_url;
             if (osc_get_preference('seo_url_search_prefix') != '') {

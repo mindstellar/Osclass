@@ -298,6 +298,11 @@ class Session
 
     public function _dropReferer()
     {
-        unset($_SESSION['osc_http_referer'], $this->session['osc_http_referer'], $_SESSION['osc_http_referer_state'], $this->session['osc_http_referer_state']);
+        unset(
+            $_SESSION['osc_http_referer'],
+            $this->session['osc_http_referer'],
+            $_SESSION['osc_http_referer_state'],
+            $this->session['osc_http_referer_state']
+        );
     }
 }

@@ -484,7 +484,9 @@ class CWebItem extends BaseModel
                     $this->_exportVariableToView('item', $item);
 
                     if (osc_item_is_expired()) {
-                        osc_add_flash_error_message(_m("We're sorry, but the listing has expired. You can't contact the seller"));
+                        osc_add_flash_error_message(
+                            _m("We're sorry, but the listing has expired. You can't contact the seller")
+                        );
                         $this->redirectTo(osc_item_url());
                     }
 
@@ -535,7 +537,9 @@ class CWebItem extends BaseModel
                 }
 
                 if (osc_isExpired($item['dt_expiration'])) {
-                    osc_add_flash_error_message(_m("We're sorry, but the listing has expired. You can't contact the seller"));
+                    osc_add_flash_error_message(
+                        _m("We're sorry, but the listing has expired. You can't contact the seller")
+                    );
                     $this->redirectTo(osc_item_url());
                 }
 
@@ -612,8 +616,8 @@ class CWebItem extends BaseModel
                 osc_run_hook('pre_item_delete_comment_post', $item, $commentId);
 
                 $mItem  = new ItemActions(false);
-                $status =
-                    $mItem->add_comment(); // @TOFIX @FIXME $status never used + ?? need to add_comment() before deleting it??
+
+                $mItem->add_comment();
 
                 if (count($item) == 0) {
                     osc_add_flash_error_message(_m("This listing doesn't exist"));
@@ -676,7 +680,9 @@ class CWebItem extends BaseModel
                     if ((($this->userId == $item['fk_i_user_id']) && ($this->userId != ''))
                         || osc_is_admin_user_logged_in()
                     ) {
-                        osc_add_flash_warning_message(_m("The listing hasn't been validated. Please validate it in order to make it public"));
+                        osc_add_flash_warning_message(
+                            _m("The listing hasn't been validated. Please validate it in order to make it public")
+                        );
                     } else {
                         $this->do400();
 
@@ -684,11 +690,15 @@ class CWebItem extends BaseModel
                     }
                 } elseif ($item['b_enabled'] == 0) {
                     if (osc_is_admin_user_logged_in()) {
-                        osc_add_flash_warning_message(_m("The listing hasn't been enabled. Please enable it in order to make it public"));
+                        osc_add_flash_warning_message(
+                            _m("The listing hasn't been enabled. Please enable it in order to make it public")
+                        );
                     } elseif (osc_is_web_user_logged_in()
                         && osc_logged_user_id() == $item['fk_i_user_id']
                     ) {
-                        osc_add_flash_warning_message(_m('The listing has been blocked or is awaiting moderation from the admin'));
+                        osc_add_flash_warning_message(
+                            _m('The listing has been blocked or is awaiting moderation from the admin')
+                        );
                     } else {
                         $this->do400();
 
@@ -732,11 +742,7 @@ class CWebItem extends BaseModel
 
                 // redirect to the correct url just in case it has changed
                 $itemURI = str_replace(osc_base_url(), '', osc_item_url());
-                $URI     = preg_replace(
-                    '|^' . REL_WEB_URL . '|',
-                    '',
-                    Params::getServerParam('REQUEST_URI', false, false)
-                );
+                $URI     = Params::getRequestURI(false, false, false);
                 // do not clean QUERY_STRING if permalink is not enabled
                 if (osc_rewrite_enabled()) {
                     $URI =

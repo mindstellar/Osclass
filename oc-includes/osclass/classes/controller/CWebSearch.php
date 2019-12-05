@@ -29,15 +29,13 @@ class CWebSearch extends BaseModel
         parent::__construct();
 
         $this->mSearch = Search::newInstance();
-        $this->uri     = preg_replace(
-            '|^' . REL_WEB_URL . '|',
-            '',
-            Params::getServerParam('REQUEST_URI', false, false)
-        );
-        if (preg_match('/^index\.php/', $this->uri) > 0) {
-            // search url without permalinks params
-        } else {
-            $this->uri = preg_replace('|/$|', '', $this->uri);
+        $this->uri     = Params::getRequestURI();
+
+        //Check if request is not having index.php
+        if (!(stripos($this->uri, 'index.php') === 0)) {
+            // remove ending '/'
+            $this->uri = rtrim($this->uri, '/');
+
             // redirect if it ends with a slash NOT NEEDED ANYMORE, SINCE WE CHECK WITH osc_search_url
             if (($this->uri != osc_get_preference('rewrite_search_url')
                     && stripos($this->uri, osc_get_preference('rewrite_search_url') . '/')
@@ -91,28 +89,22 @@ class CWebSearch extends BaseModel
                             '/',
                             preg_replace('|/$|', '', Params::getParam('sCategory'))
                         );
-                        try {
-                            $category =
-                                Category::newInstance()->findBySlug($tmp[count($tmp) - 1]);
-                        } catch (Exception $e) {
-                        }
+
+                        $category = Category::newInstance()->findBySlug($tmp[count($tmp) - 1]);
+
                         Params::setParam('sCategory', $tmp[count($tmp) - 1]);
                     } else {
-                        try {
-                            $category = Category::newInstance()
-                                ->findBySlug(Params::getParam('sCategory'));
-                        } catch (Exception $e) {
-                        }
+                        $category = Category::newInstance()
+                            ->findBySlug(Params::getParam('sCategory'));
+
                         Params::setParam('sCategory', Params::getParam('sCategory'));
                     }
                     if (count($category) === 0) {
                         $this->do404();
                     }
                 } else {
-                    try {
-                        $category = Category::newInstance()->findBySlug($search_uri);
-                    } catch (Exception $e) {
-                    }
+                    $category = Category::newInstance()->findBySlug($search_uri);
+
                     if (count($category) === 0) {
                         $this->do404();
                     }
@@ -189,21 +181,14 @@ class CWebSearch extends BaseModel
 
 
         $uriParams = Params::getParamsAsArray();
-        try {
-            $searchUri = osc_search_url($uriParams);
-        } catch (Exception $e) {
-            LogOsclass::newInstance()->error($e->getMessage(), $e->getFile().' at line:'.$e->getLine());
-        }
+        $searchUri = osc_search_url($uriParams);
         if ($this->uri !== 'feed') {
             $_base_url = WEB_PATH;
             if (MULTISITE == 1) {
                 $_base_url = osc_multisite_url();
             }
-            if (str_replace('%20', '+', $searchUri) != str_replace(
-                '%20',
-                '+',
-                $_base_url . $this->uri
-            )
+            if (str_replace('%20', '+', $searchUri)
+                !== str_replace('%20', '+', $_base_url . $this->uri)
             ) {
                 $this->redirectTo($searchUri, 301);
             }
@@ -354,7 +339,7 @@ class CWebSearch extends BaseModel
                 try {
                     $successCat = ($this->mSearch->addCategory($category) || $successCat);
                 } catch (Exception $e) {
-                    LogOsclass::newInstance()->error($e->getMessage(), $e->getFile().' at line:'.$e->getLine());
+                    LogOsclass::newInstance()->error($e->getMessage(), $e->getFile() . ' at line:' . $e->getLine());
                 }
             }
         } else {
@@ -389,10 +374,10 @@ class CWebSearch extends BaseModel
         if ($p_sPattern != '') {
             $this->mSearch->addPattern($p_sPattern);
             $osc_request['sPattern'] = $p_sPattern;
-        } elseif ($p_sOrder == 'relevance') {
+        } elseif ($p_sOrder === 'relevance') {
             $p_sOrder = 'dt_pub_date';
             foreach ($allowedTypesForSorting as $k => $v) {
-                if ($p_iOrderType == 'desc') {
+                if ($p_iOrderType === 'desc') {
                     $orderType = $k;
                     break;
                 }
@@ -425,7 +410,7 @@ class CWebSearch extends BaseModel
         $this->mSearch->order($p_sOrder, $allowedTypesForSorting[$p_iOrderType]);
 
         //SET PAGE
-        if ($p_sFeed == 'rss') {
+        if ($p_sFeed === 'rss') {
             // If param sFeed=rss, just output last 'osc_num_rss_items()'
             $this->mSearch->page(0, osc_num_rss_items());
         } else {
@@ -434,11 +419,9 @@ class CWebSearch extends BaseModel
 
         // CUSTOM FIELDS
         $custom_fields = Params::getParam('meta');
-        try {
-            $fields = Field::newInstance()->findIDSearchableByCategories($p_sCategory);
-        } catch (Exception $e) {
-            LogOsclass::newInstance()->error($e->getMessage(), $e->getFile().' at line:'.$e->getLine());
-        }
+
+        $fields = Field::newInstance()->findIDSearchableByCategories($p_sCategory);
+
         $table = DB_TABLE_PREFIX . 't_item_meta';
         if (is_array($custom_fields)) {
             foreach ($custom_fields as $key => $aux) {
@@ -523,14 +506,9 @@ class CWebSearch extends BaseModel
         osc_run_hook('search_conditions', Params::getParamsAsArray());
 
         // RETRIEVE ITEMS AND TOTAL
-        $key   = md5(osc_base_url() . $this->mSearch->toJson());
-        $found = null;
-        try {
-            $cache = osc_cache_get($key, $found);
-        } catch (Exception $e) {
-            LogOsclass::newInstance()->error($e->getMessage(), $e->getFile().' at line:'.$e->getLine());
-        }
-
+        $key         = md5(osc_base_url() . $this->mSearch->toJson());
+        $found       = null;
+        $cache       = osc_cache_get($key, $found);
         $aItems      = null;
         $iTotalItems = null;
         if ($cache) {
@@ -541,11 +519,8 @@ class CWebSearch extends BaseModel
             $iTotalItems           = $this->mSearch->count();
             $_cache['aItems']      = $aItems;
             $_cache['iTotalItems'] = $iTotalItems;
-            try {
-                osc_cache_set($key, $_cache, OSC_CACHE_TTL);
-            } catch (Exception $e) {
-                LogOsclass::newInstance()->error($e->getMessage(), $e->getFile().' at line:'.$e->getLine());
-            }
+
+            osc_cache_set($key, $_cache, OSC_CACHE_TTL);
         }
 
         $aItems = osc_apply_filter('pre_show_items', $aItems);
@@ -642,46 +617,32 @@ class CWebSearch extends BaseModel
 
                 if (osc_count_items() > 0) {
                     while (osc_has_items()) {
-                        try {
-                            $itemArray = array(
-                                'title'       => osc_item_title(),
-                                'link'        => htmlentities(osc_item_url(), ENT_COMPAT, 'UTF-8'),
-                                'description' => osc_item_description(),
-                                'country'     => osc_item_country(),
-                                'region'      => osc_item_region(),
-                                'city'        => osc_item_city(),
-                                'city_area'   => osc_item_city_area(),
-                                'category'    => osc_item_category(),
-                                'dt_pub_date' => osc_item_pub_date()
+                        $itemArray = array(
+                            'title'       => osc_item_title(),
+                            'link'        => htmlentities(osc_item_url(), ENT_COMPAT, 'UTF-8'),
+                            'description' => osc_item_description(),
+                            'country'     => osc_item_country(),
+                            'region'      => osc_item_region(),
+                            'city'        => osc_item_city(),
+                            'city_area'   => osc_item_city_area(),
+                            'category'    => osc_item_category(),
+                            'dt_pub_date' => osc_item_pub_date()
+                        );
+
+                        if (osc_count_item_resources() > 0) {
+                            osc_has_item_resources();
+
+                            $itemArray['image'] = array(
+                                'url'   => htmlentities(
+                                    osc_resource_thumbnail_url(),
+                                    ENT_COMPAT,
+                                    'UTF-8'
+                                ),
+                                'title' => osc_item_title(),
+                                'link'  => htmlentities(osc_item_url(), ENT_COMPAT, 'UTF-8')
                             );
-                        } catch (Exception $e) {
-                            LogOsclass::newInstance()->error($e->getMessage(), $e->getFile().' at line:'.$e->getLine());
                         }
 
-                        try {
-                            if (osc_count_item_resources() > 0) {
-                                try {
-                                    osc_has_item_resources();
-                                } catch (Exception $e) {
-                                    LogOsclass::newInstance()->error($e->getMessage(), $e->getFile().' at line:'.$e->getLine());
-                                }
-                                try {
-                                    $itemArray['image'] = array(
-                                        'url'   => htmlentities(
-                                            osc_resource_thumbnail_url(),
-                                            ENT_COMPAT,
-                                            'UTF-8'
-                                        ),
-                                        'title' => osc_item_title(),
-                                        'link'  => htmlentities(osc_item_url(), ENT_COMPAT, 'UTF-8')
-                                    );
-                                } catch (Exception $e) {
-                                    LogOsclass::newInstance()->error($e->getMessage(), $e->getFile().' at line:'.$e->getLine());
-                                }
-                            }
-                        } catch (Exception $e) {
-                            LogOsclass::newInstance()->error($e->getMessage(), $e->getFile().' at line:'.$e->getLine());
-                        }
                         $feed->addItem($itemArray);
                     }
                 }

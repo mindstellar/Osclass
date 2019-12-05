@@ -28,7 +28,7 @@ class Alerts extends DAO
     private static $instance;
 
     /**
-     *
+     * Alerts constructor.
      */
     public function __construct()
     {
@@ -36,22 +36,14 @@ class Alerts extends DAO
         $this->setTableName('t_alerts');
         $this->setPrimaryKey('pk_i_id');
         $array_fields = array(
-            'pk_i_id'
-            ,
-            's_email'
-            ,
-            'fk_i_user_id'
-            ,
-            's_search'
-            ,
-            's_secret'
-            ,
-            'b_active'
-            ,
-            'e_type'
-            ,
-            'dt_date'
-            ,
+            'pk_i_id',
+            's_email',
+            'fk_i_user_id',
+            's_search',
+            's_secret',
+            'b_active',
+            'e_type',
+            'dt_date',
             'dt_unsub_date'
         );
         $this->setFields($array_fields);

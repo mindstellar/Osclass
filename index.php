@@ -14,12 +14,12 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-define('ABS_PATH', __DIR__ . '/');
+
 if (PHP_SAPI === 'cli') {
     define('CLI', true);
 }
 
-require_once ABS_PATH . 'oc-load.php';
+require_once __DIR__ . '/oc-load.php';
 
 if (CLI) {
     $cli_params = getopt('p:t:');

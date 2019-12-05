@@ -384,11 +384,9 @@ class CWebAjax extends BaseModel
                     die();
                 }
                 $secret = Params::getParam('secret');
-                try {
-                    $item = Item::newInstance()->findByPrimaryKey($id);
-                } catch (Exception $e) {
-                    LogOsclass::newInstance()->error($e->getMessage(), $e->getFile().' at line:'.$e->getLine());
-                }
+
+                $item = Item::newInstance()->findByPrimaryKey($id);
+
                 if ($item['s_secret'] != $secret) {
                     echo json_encode(array('success' => false));
                     die();

@@ -55,11 +55,7 @@ abstract class BaseModel
             $this->redirectTo($url);
         }
 
-        try {
-            $this->subdomain_params($current_host);
-        } catch (Exception $e) {
-            LogOsclass::newInstance()->error($e->getMessage(), $e->getFile().' at line:'.$e->getLine());
-        }
+        $this->subdomain_params($current_host);
         $this->page = Params::getParam('page');
         $this->action = Params::getParam('action');
         $this->ajax = false;
@@ -81,8 +77,6 @@ abstract class BaseModel
 
     /**
      * @param $host
-     *
-     * @throws \Exception
      */
     private function subdomain_params($host)
     {

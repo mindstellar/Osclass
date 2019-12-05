@@ -119,11 +119,10 @@ class AdminSecBaseModel extends SecBaseModel
             exit;
         }
 
-        Session::newInstance()->_setReferer(osc_base_url() . preg_replace(
-            '|^' . REL_WEB_URL . '|',
-            '',
-            Params::getServerParam('REQUEST_URI', false, false)
-        ));
+        Session::newInstance()->_setReferer(
+            osc_base_url()
+            . Params::getRequestURI(false, false, false)
+        );
         header('Location: ' . osc_admin_base_url(true) . '?page=login');
         exit;
     }
