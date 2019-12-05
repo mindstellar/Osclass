@@ -54,7 +54,6 @@ function osc_category()
  * </code>
  *
  * @return mixed|string <array>
- * @throws \Exception
  */
 function osc_get_categories()
 {
@@ -106,7 +105,6 @@ function osc_priv_count_subcategories()
  * Gets the total of categories. If categories are not loaded, this function will load them.
  *
  * @return int
- * @throws \Exception
  */
 function osc_count_categories()
 {
@@ -122,7 +120,6 @@ function osc_count_categories()
  * Let you know if there are more categories in the list. If categories are not loaded, this function will load them.
  *
  * @return boolean
- * @throws \Exception
  */
 function osc_has_categories()
 {
@@ -311,7 +308,6 @@ function osc_goto_first_category()
  * Gets list of non-empty categories
  *
  * @return array
- * @throws \Exception
  */
 function osc_get_non_empty_categories()
 {
@@ -330,7 +326,6 @@ function osc_get_non_empty_categories()
  * @param null   $default_str
  *
  * @return void
- * @throws \Exception
  */
 function osc_categories_select($name = 'sCategory', $category = null, $default_str = null)
 {
@@ -348,7 +343,6 @@ function osc_categories_select($name = 'sCategory', $category = null, $default_s
  * @param $what //the id or slug category we're looking for
  *
  * @return array|bool
- * @throws \Exception
  * @since 3.0
  *
  */
@@ -396,7 +390,6 @@ function osc_category_move_to_children()
 
 /**
  * @return bool|int
- * @throws \Exception
  */
 function osc_category_move_to_parent()
 {
@@ -458,7 +451,6 @@ function osc_count_subcategories2()
 /**
  * @param null $categories
  *
- * @throws \Exception
  */
 function osc_export_categories($categories = null)
 {

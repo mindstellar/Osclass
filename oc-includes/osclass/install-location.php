@@ -44,7 +44,6 @@ echo json_encode($json_message);
 
 /**
  * @return array
- * @throws \Exception
  */
 function basic_info()
 {

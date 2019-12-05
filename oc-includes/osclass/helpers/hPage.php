@@ -179,7 +179,6 @@ function osc_static_page_meta($field = null)
  * @param string $locale
  *
  * @return string
- * @throws \Exception
  */
 function osc_static_page_url($locale = '')
 {

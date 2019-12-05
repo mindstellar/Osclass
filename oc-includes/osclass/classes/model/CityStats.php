@@ -181,7 +181,6 @@ class CityStats extends DAO
      * @param string $order
      *
      * @return array
-     * @throws \Exception
      */
     public function listCities($region = null, $zero = '>', $order = 'city_name ASC')
     {

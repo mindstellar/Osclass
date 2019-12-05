@@ -40,7 +40,6 @@ class ItemForm extends Form
      * @param bool $parent_selectable
      *
      * @return bool
-     * @throws \Exception
      */
     public static function category_select(
         $categories = null,
@@ -139,7 +138,6 @@ class ItemForm extends Form
      * @param null $default_item
      * @param bool $parent_selectable
      *
-     * @throws \Exception
      */
     public static function category_two_selects(
         $categories = null,
@@ -272,7 +270,6 @@ class ItemForm extends Form
      * @param null $default_item
      * @param bool $parent_selectable
      *
-     * @throws \Exception
      */
     public static function category_multiple_selects(
         $categories = null,
@@ -1574,7 +1571,6 @@ class ItemForm extends Form
     /**
      * @param null $resources
      *
-     * @throws \Exception
      */
     public static function photos($resources = null)
     {
@@ -1769,7 +1765,6 @@ class ItemForm extends Form
     /**
      * @param null $resources
      *
-     * @throws \Exception
      */
     public static function ajax_photos($resources = null)
     {

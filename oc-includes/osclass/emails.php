@@ -502,7 +502,6 @@ osc_add_hook('hook_alert_email_instant', 'fn_alert_email_instant');
 /**
  * @param $aComment
  *
- * @throws \Exception
  */
 function fn_email_comment_validated($aComment)
 {
@@ -571,8 +570,6 @@ osc_add_hook('hook_email_comment_validated', 'fn_email_comment_validated');
 
 /**
  * @param $item
- *
- * @throws \Exception
  */
 function fn_email_new_item_non_register_user($item)
 {
@@ -933,7 +930,6 @@ osc_add_hook('hook_email_user_validation', 'fn_email_user_validation');
 /**
  * @param $aItem
  *
- * @throws \Exception
  */
 function fn_email_send_friend($aItem)
 {
@@ -1018,7 +1014,6 @@ osc_add_hook('hook_email_send_friend', 'fn_email_send_friend');
 /**
  * @param $aItem
  *
- * @throws \Exception
  */
 function fn_email_item_inquiry($aItem)
 {
@@ -1136,7 +1131,6 @@ osc_add_hook('hook_email_item_inquiry', 'fn_email_item_inquiry');
 /**
  * @param $aItem
  *
- * @throws \Exception
  */
 function fn_email_new_comment_admin($aItem)
 {
@@ -1227,7 +1221,6 @@ osc_add_hook('hook_email_new_comment_admin', 'fn_email_new_comment_admin');
 /**
  * @param $item
  *
- * @throws \Exception
  */
 function fn_email_item_validation($item)
 {
@@ -1337,7 +1330,6 @@ osc_add_hook('hook_email_item_validation', 'fn_email_item_validation');
 /**
  * @param $item
  *
- * @throws \Exception
  */
 function fn_email_admin_new_item($item)
 {
@@ -1458,7 +1450,6 @@ osc_add_hook('hook_email_admin_new_item', 'fn_email_admin_new_item');
 /**
  * @param $item
  *
- * @throws \Exception
  */
 function fn_email_item_validation_non_register_user($item)
 {
@@ -1749,7 +1740,6 @@ osc_add_hook('hook_email_contact_user', 'fn_email_contact_user');
 /**
  * @param $aItem
  *
- * @throws \Exception
  */
 function fn_email_new_comment_user($aItem)
 {
@@ -1905,7 +1895,6 @@ osc_add_hook('hook_email_new_admin', 'fn_email_new_admin');
 /**
  * @param $aItem
  *
- * @throws \Exception
  */
 function fn_email_warn_expiration($aItem)
 {

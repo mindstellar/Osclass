@@ -126,7 +126,6 @@ class Country extends DAO
      * @param $pk
      *
      * @return int number of failed deletions or 0 in case of none
-     * @throws \Exception
      * @since  2.4
      *
      */

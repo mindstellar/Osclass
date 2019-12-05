@@ -105,7 +105,6 @@ function osc_has_countries()
  * @param string $country
  *
  * @return bool
- * @throws \Exception
  */
 function osc_has_regions($country = '%%%%')
 {
@@ -123,7 +122,6 @@ function osc_has_regions($country = '%%%%')
  * @param string $region
  *
  * @return bool
- * @throws \Exception
  */
 function osc_has_cities($region = '%%%%')
 {
@@ -187,7 +185,6 @@ function osc_count_countries()
  * @param string $country
  *
  * @return int
- * @throws \Exception
  */
 function osc_count_regions($country = '%%%%')
 {
@@ -208,7 +205,6 @@ function osc_count_regions($country = '%%%%')
  * @param string $region
  *
  * @return int
- * @throws \Exception
  */
 function osc_count_cities($region = '%%%%')
 {
@@ -332,7 +328,6 @@ function osc_city_area_items()
  * Gets country's url
  *
  * @return string
- * @throws \Exception
  */
 function osc_country_url()
 {
@@ -344,7 +339,6 @@ function osc_country_url()
  * Gets region's url
  *
  * @return string
- * @throws \Exception
  */
 function osc_region_url()
 {
@@ -356,7 +350,6 @@ function osc_region_url()
  * Gets city's url
  *
  * @return string
- * @throws \Exception
  */
 function osc_city_url()
 {
@@ -368,7 +361,6 @@ function osc_city_url()
  * Gets city area's url
  *
  * @return string
- * @throws \Exception
  */
 function osc_city_area_url()
 {

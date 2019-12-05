@@ -1033,7 +1033,6 @@ class Search extends DAO
      * @param bool  $withPicture
      *
      * @return array
-     * @throws \Exception
      */
     public function getLatestItems($numItems = 10, $options = array(), $withPicture = false)
     {
@@ -1106,7 +1105,6 @@ class Search extends DAO
      * @param mixed $category
      *
      * @return bool
-     * @throws \Exception
      * @since  unknown
      *
      */
@@ -1401,7 +1399,6 @@ class Search extends DAO
      * @param string $order
      *
      * @return array
-     * @throws \Exception
      * @since  unknown
      *
      * @deprecated
@@ -1424,7 +1421,6 @@ class Search extends DAO
      * @param string $order
      *
      * @return array
-     * @throws \Exception
      * @since  unknown
      *
      * @deprecated

@@ -41,8 +41,6 @@ class ItemActions
      *
      * @param int  $itemId
      * @param bool $is_admin
-     *
-     * @throws \Exception
      */
     public static function deleteResourcesFromHD($itemId, $is_admin = false)
     {
@@ -73,7 +71,6 @@ class ItemActions
 
     /**
      * @return boolean
-     * @throws \Exception
      */
     public function add()
     {
@@ -421,7 +418,7 @@ class ItemActions
      * @param string $email
      *
      * @return bool
-     * @throws \exception
+     *
      */
     private function akismetText($title, $description, $author, $email)
     {
@@ -440,7 +437,13 @@ class ItemActions
                 $akismet->setUserIP(get_ip());
 
                 $status = '';
-                $status = $akismet->isCommentSpam() ? 'SPAM' : $status;
+                try {
+                    if ($akismet->isCommentSpam()) {
+                        $status = 'SPAM';
+                    }
+                } catch (exception $e) {
+                    LogOsclass::newInstance()->debug($e->getMessage(), $e->getFile().' '.$e->getLine());
+                }
                 if ($status === 'SPAM') {
                     $spam = true;
                     break;
@@ -475,7 +478,7 @@ class ItemActions
      * @param $itemId
      *
      * @return int
-     * @throws \Exception
+     *
      */
     public function uploadItemResources($aResources, $itemId)
     {
@@ -599,7 +602,6 @@ class ItemActions
      *
      * @param array item
      *
-     * @throws \Exception
      */
     private function increaseStats($item)
     {
@@ -615,11 +617,9 @@ class ItemActions
 
     /**
      * @return bool|mixed
-     * @throws \Exception
      */
     /**
      * @return bool|mixed
-     * @throws \Exception
      */
     public function edit()
     {
@@ -854,7 +854,6 @@ class ItemActions
      * @param bool         $newIsExpired
      * @param array        $location
      *
-     * @throws \Exception
      */
     private function updateStats(
         $result,
@@ -932,7 +931,6 @@ class ItemActions
      * @param string | null $secret
      *
      * @return bool
-     * @throws \Exception
      */
     public function activate($id, $secret = null)
     {
@@ -976,7 +974,6 @@ class ItemActions
      * @param int $id
      *
      * @return bool
-     * @throws \Exception
      */
     public function deactivate($id)
     {
@@ -1005,7 +1002,6 @@ class ItemActions
      *
      * @param array item
      *
-     * @throws \Exception
      */
     private function _decreaseStats($item)
     {
@@ -1026,7 +1022,6 @@ class ItemActions
      * @param int $id
      *
      * @return bool
-     * @throws \Exception
      */
     public function enable($id)
     {
@@ -1056,7 +1051,6 @@ class ItemActions
      * @param int $id
      *
      * @return bool
-     * @throws \Exception
      */
     public function disable($id)
     {
@@ -1123,7 +1117,6 @@ class ItemActions
      * @param bool $on
      *
      * @return bool
-     * @throws \Exception
      */
     public function spam($id, $on = true)
     {
@@ -1177,7 +1170,6 @@ class ItemActions
      * @param int    $itemId
      *
      * @return bool
-     * @throws \Exception
      */
     public function delete($secret, $itemId)
     {
@@ -1241,7 +1233,6 @@ class ItemActions
      * Send listed item details to friend
      *
      * @return bool
-     * @throws \Exception
      */
     public function send_friend()
     {
@@ -1266,7 +1257,6 @@ class ItemActions
      * @param string $action
      *
      * @return array
-     * @throws \Exception
      */
     private function prepareDataForFunction($action)
     {
@@ -1331,7 +1321,6 @@ class ItemActions
 
     /**
      * @return string | void
-     * @throws \Exception
      */
     public function contact()
     {
@@ -1358,7 +1347,6 @@ class ItemActions
 
     /**
      * @return int
-     * @throws \Exception
      */
     public function add_comment()
     {

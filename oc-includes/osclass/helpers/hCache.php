@@ -21,7 +21,6 @@
  * @param int $expire
  *
  * @return bool
- * @throws \Exception
  */
 function osc_cache_add($key, $data, $expire = 0)
 {
@@ -33,7 +32,6 @@ function osc_cache_add($key, $data, $expire = 0)
 
 /**
  * @return mixed
- * @throws \Exception
  */
 function osc_cache_close()
 {
@@ -45,7 +43,6 @@ function osc_cache_close()
  * @param $key
  *
  * @return bool
- * @throws \Exception
  */
 function osc_cache_delete($key)
 {
@@ -57,7 +54,6 @@ function osc_cache_delete($key)
 
 /**
  * @return bool
- * @throws \Exception
  */
 function osc_cache_flush()
 {
@@ -65,12 +61,12 @@ function osc_cache_flush()
 }
 
 
+/**
+ * Initialize Cache factory instance using singleton
+ */
 function osc_cache_init()
 {
-    try {
-        Object_Cache_Factory::newInstance();
-    } catch (Exception $e) {
-    }
+    Object_Cache_Factory::newInstance();
 }
 
 
@@ -79,7 +75,6 @@ function osc_cache_init()
  * @param $found
  *
  * @return bool|mixed
- * @throws \Exception
  */
 function osc_cache_get($key, &$found)
 {
@@ -95,7 +90,6 @@ function osc_cache_get($key, &$found)
  * @param int $expire
  *
  * @return bool
- * @throws \Exception
  */
 function osc_cache_set($key, $data, $expire = 0)
 {

@@ -127,7 +127,6 @@ class CityArea extends DAO
      * @param $pk
      *
      * @return int number of failed deletions or 0 in case of none
-     * @throws \Exception
      * @since  3.1
      *
      */

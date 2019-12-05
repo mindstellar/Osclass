@@ -606,7 +606,6 @@ function oc_install()
  * Insert the example data (categories and emails) on all available locales
  *
  * @return mixed Error messages of the installation
- * @throws \Exception
  * @since 2.4
  */
 function oc_install_example_data()
@@ -1110,7 +1109,6 @@ function display_database_error($error, $step)
 /**
  * @param $bool
  *
- * @throws \Exception
  */
 function ping_search_engines($bool)
 {

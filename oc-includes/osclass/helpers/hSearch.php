@@ -296,7 +296,6 @@ function osc_search_category()
  * Gets current search category id
  *
  * @return array
- * @throws \Exception
  */
 function osc_search_category_id()
 {
@@ -330,7 +329,6 @@ function osc_search_category_id()
  * @param bool  $forced
  *
  * @return string
- * @throws \Exception
  */
 function osc_update_search_url($params = array(), $forced = false)
 {
@@ -392,7 +390,6 @@ function osc_search_alert()
  * @param array $params
  *
  * @return string
- * @throws \Exception
  */
 function osc_search_show_all_url($params = array())
 {
@@ -409,7 +406,6 @@ function osc_search_show_all_url($params = array())
  * @param null $params
  *
  * @return string
- * @throws \Exception
  */
 function osc_search_url($params = null)
 {
@@ -838,7 +834,6 @@ function osc_has_list_countries()
  * @param string $country
  *
  * @return array
- * @throws \Exception
  */
 function osc_has_list_regions($country = '%%%%')
 {
@@ -863,7 +858,6 @@ function osc_has_list_regions($country = '%%%%')
  * @param string $region
  *
  * @return array
- * @throws \Exception
  */
 function osc_has_list_cities($region = '%%%%')
 {
@@ -902,7 +896,6 @@ function osc_count_list_countries()
  * @param string $country
  *
  * @return int
- * @throws \Exception
  */
 function osc_count_list_regions($country = '%%%%')
 {
@@ -923,7 +916,6 @@ function osc_count_list_regions($country = '%%%%')
  * @param string $region
  *
  * @return int
- * @throws \Exception
  */
 function osc_count_list_cities($region = '%%%%')
 {
@@ -974,7 +966,6 @@ function osc_list_country_items()
  * Gets the url of current "list country"
  *
  * @return string
- * @throws \Exception
  */
 function osc_list_country_url()
 {
@@ -1272,7 +1263,6 @@ function osc_get_raw_search($conditions)
  * @param $paramCat
  *
  * @return string
- * @throws \Exception
  */
 function _aux_search_category_slug($paramCat)
 {

@@ -105,7 +105,7 @@ class ItemResource extends DAO
      * @param int $itemId Item id
      *
      * @return array of resources
-     * @throws \Exception
+     *
      * @since  2.3.7
      *
      */

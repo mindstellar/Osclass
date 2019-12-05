@@ -28,7 +28,6 @@
  * Gets the pagination links of search pagination
  *
  * @return string pagination links
- * @throws \Exception
  */
 function osc_search_pagination()
 {
@@ -49,7 +48,6 @@ function osc_search_pagination()
  * Gets the pagination links of comments pagination
  *
  * @return string pagination links
- * @throws \Exception
  */
 function osc_comments_pagination()
 {

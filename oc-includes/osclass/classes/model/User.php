@@ -336,7 +336,6 @@ class User extends DAO
      * @param int $id
      *
      * @return bool
-     * @throws \Exception
      * @since  unknown
      *
      */

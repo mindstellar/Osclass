@@ -59,7 +59,6 @@ osc_add_hook('search_form', 'osc_meta_search');
 
 /**
  * @return string
- * @throws \Exception
  */
 function search_title()
 {
@@ -100,7 +99,6 @@ function search_title()
 
 /**
  * @return bool|mixed
- * @throws \Exception
  */
 function meta_title()
 {
@@ -255,7 +253,6 @@ function meta_title()
 
 /**
  * @return bool|mixed
- * @throws \Exception
  */
 function meta_description()
 {
@@ -286,7 +283,6 @@ function meta_description()
 
 /**
  * @return bool|mixed
- * @throws \Exception
  */
 function meta_keywords()
 {
@@ -337,7 +333,6 @@ function meta_keywords()
 
 /**
  * @return array
- * @throws \Exception
  */
 function osc_search_footer_links()
 {
@@ -407,7 +402,6 @@ function osc_search_footer_links()
  * @param null $f
  *
  * @return string
- * @throws \Exception
  */
 function osc_footer_link_url($f = null)
 {
@@ -440,7 +434,6 @@ function osc_footer_link_url($f = null)
  * @param null $f
  *
  * @return string
- * @throws \Exception
  */
 function osc_footer_link_title($f = null)
 {

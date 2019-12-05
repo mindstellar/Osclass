@@ -10,7 +10,6 @@ class Object_Cache_Factory
 
     /**
      * @return null|\Object_Cache_default
-     * @throws \Exception
      */
     public static function newInstance()
     {

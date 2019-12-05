@@ -34,7 +34,6 @@ class CWebAjax extends BaseModel
 
     /**
      * @return bool | string
-     * @throws \Exception
      */
     public function doModel()
     {
@@ -123,11 +122,8 @@ class CWebAjax extends BaseModel
                     return false;
                 }
 
-                try {
-                    $aItem = Item::newInstance()->findByPrimaryKey($item);
-                } catch (Exception $e) {
-                    LogOsclass::newInstance()->error($e->getMessage(), $e->getFile().' at line:'.$e->getLine());
-                }
+
+                $aItem = Item::newInstance()->findByPrimaryKey($item);
 
                 // Check if the item exists
                 if (count($aItem) == 0) {
@@ -357,25 +353,28 @@ class CWebAjax extends BaseModel
                     $uploader->handleUpload(osc_content_path() . 'uploads/temp/' . $filename);
 
                 // auto rotate
+
+                $img = ImageProcessing::fromFile(osc_content_path() . 'uploads/temp/' . $filename);
+                $img->autoRotate();
                 try {
-                    $img =
-                        ImageProcessing::fromFile(osc_content_path() . 'uploads/temp/' . $filename);
-                    $img->autoRotate();
                     $img->saveToFile(
                         osc_content_path() . 'uploads/temp/auto_' . $filename,
                         $original['extension']
                     );
+                } catch (Exception $e) {
+                    LogOsclass::newInstance()->debug($e->getMessage(), $e->getFile().' '.$e->getLine());
+                }
+                try {
                     $img->saveToFile(
                         osc_content_path() . 'uploads/temp/' . $filename,
                         $original['extension']
                     );
-
-                    $result['uploadName'] = 'auto_' . $filename;
-                    echo htmlspecialchars(json_encode($result), ENT_NOQUOTES);
                 } catch (Exception $e) {
-                    echo '';
-                    LogOsclass::newInstance()->error($e->getMessage(), $e->getFile().' at line:'.$e->getLine());
+                    LogOsclass::newInstance()->debug($e->getMessage(), $e->getFile().' '.$e->getLine());
                 }
+
+                $result['uploadName'] = 'auto_' . $filename;
+                echo htmlspecialchars(json_encode($result), ENT_NOQUOTES);
                 break;
             case 'ajax_validate':
                 $id = Params::getParam('id');

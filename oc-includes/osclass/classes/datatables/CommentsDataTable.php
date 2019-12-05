@@ -44,7 +44,6 @@ class CommentsDataTable extends DataTable
      * @param $params
      *
      * @return array
-     * @throws \Exception
      */
     public function table($params)
     {
@@ -126,7 +125,6 @@ class CommentsDataTable extends DataTable
     /**
      * @param $comments
      *
-     * @throws \Exception
      */
     private function processData($comments)
     {

@@ -51,7 +51,6 @@ function osc_base_url($with_index = false)
  * @param array $params
  *
  * @return string
- * @throws \Exception
  */
 function osc_subdomain_base_url($params = array())
 {
@@ -417,7 +416,6 @@ function osc_item_post_url()
  * Create automatically the url of a category
  *
  * @return string the url
- * @throws \Exception
  */
 function osc_search_category_url()
 {
@@ -532,7 +530,6 @@ function osc_user_resend_activation_link($id, $email)
  * @param string $locale
  *
  * @return string
- * @throws \Exception
  */
 function osc_item_comments_url($page = 'all', $locale = '')
 {
@@ -550,7 +547,6 @@ function osc_item_comments_url($page = 'all', $locale = '')
  * @param string $locale
  *
  * @return string
- * @throws \Exception
  */
 function osc_comment_url($locale = '')
 {
@@ -564,7 +560,6 @@ function osc_comment_url($locale = '')
  * @param string $locale
  *
  * @return string
- * @throws \Exception
  */
 function osc_item_url($locale = '')
 {
@@ -579,7 +574,6 @@ function osc_item_url($locale = '')
  * @param string $locale
  *
  * @return string
- * @throws \Exception
  * @since 3.3
  *
  */
@@ -628,7 +622,6 @@ function osc_item_url_from_item($item, $locale = '')
  * @param string $locale
  *
  * @return string
- * @throws \Exception
  */
 function osc_premium_url($locale = '')
 {

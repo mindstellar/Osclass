@@ -171,7 +171,7 @@ class Item extends DAO
             $this->dao->from(DB_TABLE_PREFIX . 't_category_description as cd');
             $this->dao->from(DB_TABLE_PREFIX . 't_item_stats as s');
             $this->dao->where(DB_TABLE_PREFIX . 't_item_location.fk_i_item_id', $item['pk_i_id']);
-//                $this->dao->where(DB_TABLE_PREFIX.'t_item_stats.fk_i_item_id', $item['pk_i_id']);
+            //$this->dao->where(DB_TABLE_PREFIX.'t_item_stats.fk_i_item_id', $item['pk_i_id']);
             $this->dao->where('s.fk_i_item_id', $item['pk_i_id']);
             $this->dao->where('cd.fk_i_category_id', $item['fk_i_category_id']);
             $this->dao->where('cd.fk_c_locale_code', $prefLocale);
@@ -871,7 +871,7 @@ class Item extends DAO
      * @param bool  $do_stats
      *
      * @return string new date expiration, false if error occurs
-     * @throws \Exception
+     *
      */
     public function updateExpirationDate($id, $expiration_time, $do_stats = true)
     {
@@ -1062,7 +1062,7 @@ class Item extends DAO
      * @param int $cityAreaId city area id
      *
      * @return bool
-     * @throws \Exception
+     *
      * @since  3.1
      *
      */
@@ -1089,7 +1089,7 @@ class Item extends DAO
      * @param int $id Item id
      *
      * @return bool
-     * @throws \Exception
+     *
      * @since  unknown
      */
     public function deleteByPrimaryKey($id)
@@ -1135,7 +1135,6 @@ class Item extends DAO
      * @param int $id Item id
      *
      * @return array|bool
-     * @throws \Exception
      * @since  unknown
      *
      */
@@ -1177,7 +1176,7 @@ class Item extends DAO
      * @param array $item
      *
      * @return array item array with description in available locales
-     * @throws \Exception
+     *
      * @since  unknown
      *
      */
@@ -1229,7 +1228,7 @@ class Item extends DAO
      * @param int $cityId city id
      *
      * @return bool
-     * @throws \Exception
+     *
      * @since  unknown
      */
     public function deleteByCity($cityId)
@@ -1255,7 +1254,7 @@ class Item extends DAO
      * @param int $regionId region id
      *
      * @return bool
-     * @throws \Exception
+     *
      * @since  unknown
      */
     public function deleteByRegion($regionId)
@@ -1281,7 +1280,7 @@ class Item extends DAO
      * @param int $countryId country id
      *
      * @return bool
-     * @throws \Exception
+     *
      * @since  unknown
      */
     public function deleteByCountry($countryId)

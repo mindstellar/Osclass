@@ -240,7 +240,6 @@ function osc_item_category($locale = '')
  * @param string $locale
  *
  * @return string
- * @throws \Exception
  */
 function osc_item_category_description($locale = '')
 {
@@ -273,7 +272,6 @@ function osc_item_category_id()
  * @param null $catId
  *
  * @return string
- * @throws \Exception
  */
 function osc_item_category_price_enabled($catId = null)
 {
@@ -1079,7 +1077,7 @@ function osc_has_items()
     if (View::newInstance()->_exists('metafields')) {
         View::newInstance()->_erase('metafields');
     }
-    if (View::newInstance()->_get('itemLoop') != 'items') {
+    if (View::newInstance()->_get('itemLoop') !== 'items') {
         View::newInstance()->_exportVariableToView('oldItem', View::newInstance()->_get('item'));
         View::newInstance()->_exportVariableToView('itemLoop', 'items');
     }
@@ -1155,7 +1153,6 @@ function osc_count_item_resources()
  * Gets next item resource if there is, else return null
  *
  * @return array
- * @throws \Exception
  */
 function osc_has_item_resources()
 {
@@ -1232,7 +1229,6 @@ function osc_has_item_comments()
  * @param bool  $withPicture
  *
  * @return boolean It returns true if there is another item available or false if there isn't
- * @throws \Exception
  */
 function osc_has_latest_items($total_latest_items = null, $options = array(), $withPicture = false)
 {
@@ -1289,7 +1285,6 @@ function osc_has_latest_items($total_latest_items = null, $options = array(), $w
  * @param array $options
  *
  * @return int
- * @throws \Exception
  */
 function osc_count_latest_items($total_latest_items = null, $options = array())
 {

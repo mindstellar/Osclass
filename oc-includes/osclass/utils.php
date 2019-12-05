@@ -1942,7 +1942,6 @@ function osc_update_cat_stats()
  *
  * @param int $id
  *
- * @throws \Exception
  */
 function osc_update_cat_stats_id($id)
 {

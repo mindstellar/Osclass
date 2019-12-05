@@ -411,7 +411,6 @@ class UserActions
      * @param $user_id
      *
      * @return bool
-     * @throws \Exception
      */
     public function activate($user_id)
     {
@@ -466,7 +465,6 @@ class UserActions
      * @param $user_id
      *
      * @return bool
-     * @throws \Exception
      */
     public function deactivate($user_id)
     {
@@ -504,7 +502,6 @@ class UserActions
      * @param $user_id
      *
      * @return bool
-     * @throws \Exception
      */
     public function enable($user_id)
     {
@@ -541,7 +538,6 @@ class UserActions
      * @param $user_id
      *
      * @return bool
-     * @throws \Exception
      */
     public function disable($user_id)
     {

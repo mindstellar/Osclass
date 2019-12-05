@@ -30,7 +30,6 @@ class ManageItemsForm extends Form
      * @param bool $parent_selectable
      *
      * @return bool
-     * @throws \Exception
      */
     public static function category_select(
         $categories = null,

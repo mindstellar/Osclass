@@ -40,7 +40,6 @@ class ItemsDataTable extends DataTable
      * @param $params
      *
      * @return array
-     * @throws \Exception
      */
     public function table($params)
     {
@@ -101,7 +100,6 @@ class ItemsDataTable extends DataTable
     /**
      * @param $_get
      *
-     * @throws \Exception
      */
     private function getDBParams($_get)
     {
@@ -223,8 +221,6 @@ class ItemsDataTable extends DataTable
 
     /**
      * @param $items
-     *
-     * @throws \Exception
      */
     private function processData($items)
     {
@@ -444,7 +440,6 @@ class ItemsDataTable extends DataTable
      * @param $params
      *
      * @return array
-     * @throws \Exception
      */
     public function tableReported($params)
     {
@@ -601,7 +596,6 @@ class ItemsDataTable extends DataTable
     /**
      * @param $items
      *
-     * @throws \Exception
      */
     private function processDataReported($items)
     {

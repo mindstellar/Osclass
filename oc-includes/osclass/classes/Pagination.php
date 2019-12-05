@@ -45,7 +45,6 @@ class Pagination
      *
      * @param null $params
      *
-     * @throws \Exception
      */
     public function __construct($params = null)
     {

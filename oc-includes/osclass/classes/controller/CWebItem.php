@@ -45,7 +45,6 @@ class CWebItem extends BaseModel
 
     /**
      * @return bool|void
-     * @throws \Exception
      */
     public function doModel()
     {

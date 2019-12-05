@@ -26,17 +26,17 @@ class Category extends DAO
      * @var \Category
      */
     private static $instance;
-    private $_language;
-    private $_tree;
-    private $_categories;
-    private $_categoriesEnabled;
-    private $_relation;
-    private $_emptyTree;
-    private $_slugs;
+    private $language;
+    private $tree;
+    private $categories;
+    private $categoriesEnabled;
+    private $relation;
+    private $emptyTree;
+    private $slugs;
     /**
      * @var bool
      */
-    private $_empty_tree;
+    private $empty_tree;
 
     /**
      * Set data related to t_category table
@@ -63,8 +63,8 @@ class Category extends DAO
             $l = osc_current_user_locale();
         }
 
-        $this->_language   = $l;
-        $this->_emptyTree  = true;
+        $this->language  = $l;
+        $this->emptyTree = true;
         $this->toTree();
     }
 
@@ -80,58 +80,58 @@ class Category extends DAO
      */
     public function toTree($empty = true)
     {
-        $key   = md5(osc_base_url() . (string)$this->_language . (string)$empty);
+        $key   = md5(osc_base_url() . (string)$this->language . (string)$empty);
         $found = null;
         $cache = osc_cache_get($key, $found);
         if ($cache === false) {
-            if ($empty == $this->_emptyTree && $this->_tree != null) {
-                return $this->_tree;
+            if ($empty == $this->emptyTree && $this->tree != null) {
+                return $this->tree;
             }
-            $this->_empty_tree = $empty;
+            $this->empty_tree = $empty;
             // if listEnabled has been called before, don't redo the query
-            if ($this->_categoriesEnabled) {
-                $categories = $this->_categoriesEnabled;
+            if ($this->categoriesEnabled) {
+                $categories = $this->categoriesEnabled;
             } else {
-                $this->_categoriesEnabled = $this->listEnabled();
-                $categories               = $this->_categoriesEnabled;
+                $this->categoriesEnabled = $this->listEnabled();
+                $categories              = $this->categoriesEnabled;
             }
-            $this->_categories = array();
-            $this->_relation   = array();
+            $this->categories = array();
+            $this->relation   = array();
             foreach ($categories as $c) {
                 if ($empty || (!$empty && $c['i_num_items'] > 0)) {
-                    $this->_categories[$c['pk_i_id']] = $c;
+                    $this->categories[$c['pk_i_id']] = $c;
                     if ($c['fk_i_parent_id'] == null) {
-                        $this->_tree[]        = $c;
-                        $this->_relation[0][] = $c['pk_i_id'];
+                        $this->tree[]        = $c;
+                        $this->relation[0][] = $c['pk_i_id'];
                     } else {
-                        $this->_relation[$c['fk_i_parent_id']][] = $c['pk_i_id'];
+                        $this->relation[$c['fk_i_parent_id']][] = $c['pk_i_id'];
                     }
                 }
             }
 
-            if (count($this->_relation) == 0 || !isset($this->_relation[0])) {
+            if (count($this->relation) == 0 || !isset($this->relation[0])) {
                 return array();
             }
 
-            $this->_tree = $this->sideTree($this->_relation[0], $this->_categories, $this->_relation);
+            $this->tree = $this->sideTree($this->relation[0], $this->categories, $this->relation);
 
-            $cache['tree']              = $this->_tree;
-            $cache['empty_tree']        = $this->_emptyTree;
-            $cache['relation']          = $this->_relation;
-            $cache['categories']        = $this->_categories;
-            $cache['categoriesEnabled'] = $this->_categoriesEnabled;
+            $cache['tree']              = $this->tree;
+            $cache['empty_tree']        = $this->emptyTree;
+            $cache['relation']          = $this->relation;
+            $cache['categories']        = $this->categories;
+            $cache['categoriesEnabled'] = $this->categoriesEnabled;
             osc_cache_set($key, $cache, OSC_CACHE_TTL);
 
-            return $this->_tree;
+            return $this->tree;
         }
 
-        $this->_tree              = $cache['tree'];
-        $this->_empty_tree        = $cache['empty_tree'];
-        $this->_relation          = $cache['relation'];
-        $this->_categories        = $cache['categories'];
-        $this->_categoriesEnabled = $cache['categoriesEnabled'];
+        $this->tree              = $cache['tree'];
+        $this->empty_tree        = $cache['empty_tree'];
+        $this->relation          = $cache['relation'];
+        $this->categories        = $cache['categories'];
+        $this->categoriesEnabled = $cache['categoriesEnabled'];
 
-        return $this->_tree;
+        return $this->tree;
     }
 
     /**
@@ -189,7 +189,7 @@ class Category extends DAO
             DB_TABLE_PREFIX . 't_category_description as b',
             sprintf(
                 '(a.pk_i_id = b.fk_i_category_id AND b.fk_c_locale_code = "%s")',
-                $this->dao->connId->real_escape_string($this->_language)
+                $this->dao->connId->real_escape_string($this->language)
             ),
             'INNER'
         );
@@ -265,7 +265,7 @@ class Category extends DAO
                         $_categoryInfo = array();
                     } else {
                         $category_element_array                     = $rs->row();
-                        $category_element_array['fk_c_locale_code'] = $this->_language;
+                        $category_element_array['fk_c_locale_code'] = $this->language;
                         $_categoryInfo                              = $category_element_array;
                     }
                     $finalArray[$key] = $_categoryInfo;
@@ -371,8 +371,8 @@ class Category extends DAO
             return array();
         }
 
-        if (isset($this->_relation[$category])) {
-            $tree = $this->sideTree($this->_relation[$category], $this->_categories, $this->_relation);
+        if (isset($this->relation[$category])) {
+            $tree = $this->sideTree($this->relation[$category], $this->categories, $this->relation);
 
             return $tree;
         }
@@ -467,7 +467,7 @@ class Category extends DAO
      * @param string $locale
      *
      * @return array|bool
-     * @throws \Exception
+     *
      * @since  unknown
      */
     public function findByPrimaryKey($categoryID, $locale = '')
@@ -481,8 +481,8 @@ class Category extends DAO
         if ($cache === false) {
             $category = array();
 
-            if (isset($this->_categories[$categoryID])) {
-                $category = $this->_categories[$categoryID];
+            if (isset($this->categories[$categoryID])) {
+                $category = $this->categories[$categoryID];
 
                 // if we already have locale data, we return the category
                 if ($locale == '' || ($locale != '' && isset($category['locale']))) {
@@ -524,8 +524,8 @@ class Category extends DAO
             $category['locale'] = $row;
 
             // if it exists in the $categories array, we copy the row data
-            if (array_key_exists($categoryID, $this->_categories)) {
-                $this->_categories[$categoryID] = $category;
+            if (array_key_exists($categoryID, $this->categories)) {
+                $this->categories[$categoryID] = $category;
             }
             if ($locale != '' && isset($category['locale'][$locale])) {
                 $category['s_name']        = $category['locale'][$locale]['s_name'];
@@ -542,11 +542,12 @@ class Category extends DAO
     /**
      * delete a category and all information linked to it
      *
-     * @access public
+     * @access       public
      *
      * @param integer $pk primary key
      *
-     * @since  unknown
+     * @return mixed
+     * @since        unknown
      */
     public function deleteByPrimaryKey($pk)
     {
@@ -773,7 +774,6 @@ class Category extends DAO
      * @param null $cat
      *
      * @return array
-     * @throws \Exception
      * @since  unknown
      */
     public function toRootTree($cat = null)
@@ -811,8 +811,8 @@ class Category extends DAO
     {
         $slug = trim($slug);
         if ($slug != '') {
-            if (isset($this->_slugs[$slug])) {
-                return $this->findByPrimaryKey($this->_slugs[$slug]);
+            if (isset($this->slugs[$slug])) {
+                return $this->findByPrimaryKey($this->slugs[$slug]);
             }
             $slug = urlencode($slug);
             // $this->dao->where('b.s_slug', $slug);
@@ -820,7 +820,7 @@ class Category extends DAO
 
             $results = $this->listWhere('b.s_slug = %s', $slug);
             if (count($results) > 0) {
-                $this->_slugs[$slug] = $results[0]['pk_i_id'];
+                $this->slugs[$slug] = $results[0]['pk_i_id'];
 
                 return $results[0];
             }
@@ -886,8 +886,8 @@ class Category extends DAO
 
         $category = array();
 
-        if (array_key_exists($categoryID, $this->_categories)) {
-            $category = $this->_categories[$categoryID];
+        if (array_key_exists($categoryID, $this->categories)) {
+            $category = $this->categories[$categoryID];
         } else {
             $this->dao->select('s_name');
             $this->dao->from($this->getTablePrefix() . 't_category_description');

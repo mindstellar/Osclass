@@ -140,7 +140,6 @@ class Field extends DAO
      * @param mixed $ids
      *
      * @return array Fields' id
-     * @throws \Exception
      * @since  unknown
      *
      */

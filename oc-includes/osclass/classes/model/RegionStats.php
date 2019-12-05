@@ -174,7 +174,6 @@ class RegionStats extends DAO
      * @param string $order
      *
      * @return array
-     * @throws \Exception
      * @since  2.4
      *
      */

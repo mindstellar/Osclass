@@ -181,7 +181,6 @@ function osc_premium_title($locale = '')
  * @param string $locale
  *
  * @return string
- * @throws \Exception
  */
 function osc_premium_category($locale = '')
 {
@@ -207,7 +206,6 @@ function osc_premium_category($locale = '')
  * @param string $locale
  *
  * @return string
- * @throws \Exception
  */
 function osc_premium_category_description($locale = '')
 {
@@ -614,7 +612,6 @@ function osc_count_premiums()
  * Gets number of resources in array resources of current premium
  *
  * @return int
- * @throws \Exception
  */
 function osc_count_premium_resources()
 {
@@ -633,7 +630,6 @@ function osc_count_premium_resources()
  * Gets next premium resource if there is, else return null
  *
  * @return bool
- * @throws \Exception
  */
 function osc_has_premium_resources()
 {
@@ -652,7 +648,6 @@ function osc_has_premium_resources()
  * Gets current resource of current array resources of current premium
  *
  * @return array
- * @throws \Exception
  */
 function osc_get_premium_resources()
 {

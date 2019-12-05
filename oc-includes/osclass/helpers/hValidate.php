@@ -206,7 +206,6 @@ function osc_validate_location($city, $sCity, $region, $sRegion, $country, $sCou
  * @param string $value
  *
  * @return boolean
- * @throws \Exception
  */
 function osc_validate_category($value)
 {

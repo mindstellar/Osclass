@@ -34,7 +34,6 @@ class PagesDataTable extends DataTable
      * @param $params
      *
      * @return array
-     * @throws \Exception
      */
     public function table($params)
     {
@@ -70,7 +69,6 @@ class PagesDataTable extends DataTable
     /**
      * @param $pages
      *
-     * @throws \Exception
      */
     private function processData($pages)
     {

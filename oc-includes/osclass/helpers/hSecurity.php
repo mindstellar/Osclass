@@ -269,14 +269,14 @@ function osc_is_username_blacklisted($username)
  * @param $hash
  *
  * @return bool
- * @throws \Exception
+ *
  * @hash  bcrypt/sha1
  * @since 3.3
  */
 function osc_verify_password($password, $hash)
 {
 
-    return password_verify($password, $hash) ? true : (sha1($password) == $hash);
+    return password_verify($password, $hash) ? true : (sha1($password) === $hash);
 }
 
 
@@ -286,7 +286,7 @@ function osc_verify_password($password, $hash)
  * @param $password plain-text
  *
  * @return string hashed password
- * @throws \Exception
+ *
  * @since 3.3
  */
 function osc_hash_password($password)
@@ -336,7 +336,6 @@ function osc_encrypt_alert($alert)
  * @param $string
  *
  * @return string
- * @throws \Exception
  */
 function osc_decrypt_alert($string)
 {
@@ -346,7 +345,11 @@ function osc_decrypt_alert($string)
         && in_array('aes-256-ctr', openssl_get_cipher_methods(true))
         && in_array('sha256', openssl_get_md_methods(true))
     ) {
-        return trim(substr(Cryptor::Decrypt($string, $key, 0), 32));
+        try {
+            return trim(substr(Cryptor::Decrypt($string, $key, 0), 32));
+        } catch (Exception $e) {
+            LogOsclass::newInstance()->debug($e->getMessage(), $e->getFile().' '.$e->getLine());
+        }
     }
 
     // COMPATIBILITY

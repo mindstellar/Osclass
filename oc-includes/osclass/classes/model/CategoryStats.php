@@ -71,7 +71,7 @@ class CategoryStats extends DAO
      * @param int $categoryId Category id
      *
      * @return int number of affected rows, id error occurred return false
-     * @throws \Exception
+     *
      * @since  unknown
      *
      */
@@ -108,7 +108,7 @@ class CategoryStats extends DAO
      * @param int $categoryId Category id
      *
      * @return int number of affected rows, id error occurred return false
-     * @throws \Exception
+     *
      * @since  unknown
      *
      */
@@ -217,7 +217,7 @@ class CategoryStats extends DAO
      * @param array $cat category array
      *
      * @return int
-     * @throws \Exception
+     *
      * @since     unknown
      * @staticvar string $numItemsMap
      *
@@ -243,7 +243,6 @@ class CategoryStats extends DAO
      *
      * @access public
      * @return array
-     * @throws \Exception
      * @since  unknown
      */
     public function toNumItemsMap()
