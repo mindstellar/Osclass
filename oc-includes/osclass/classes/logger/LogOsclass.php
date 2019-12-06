@@ -58,10 +58,10 @@ class LogOsclass extends Logger
      */
     public function __construct($params = array())
     {
-        if (defined(OSC_DEBUG) && OSC_DEBUG === true) {
-            $this->debug_enabled = true;
+        if (defined('OSC_DEBUG')) {
+            $this->debug_enabled = OSC_DEBUG;
         }
-        $this->log_file = osc_content_path() . 'osclass_debug.txt';
+        $this->log_file = CONTENT_PATH . 'osclass_debug.log';
         $this->params   = array_merge($this->options, $params);
     }
 
@@ -100,11 +100,9 @@ class LogOsclass extends Logger
     private function writeLog($message, $severity, $caller)
     {
         if ($this->debug_enabled) {
-            $this->prepareLogFile();
             // open log file
-            if (!is_resource($this->file)) {
-                $this->openLog();
-            }
+            $this->openLog();
+
             $path = Params::getServerParam('SERVER_NAME') . Params::getServerParam('REQUEST_URI');
             $time = date($this->params['dateFormat']);
             // Write time, url, & message to end of file
@@ -113,33 +111,26 @@ class LogOsclass extends Logger
     }
 
     /**
-     * Prepare log file
+     * Open log file
+     *
+     * @return
      */
-    private function prepareLogFile()
+    private function openLog()
     {
         //Create log file if it doesn't exist.
         if (!file_exists($this->log_file)) {
-            fopen($this->log_file, 'wb') or exit("Can't create " . basename($this->log_file) . '!');
+            $this->file = fopen($this->log_file, 'wb') or exit("Can't create " . basename($this->log_file) . '!');
         }
         //Check permissions of file.
         if (!is_writable($this->log_file)) {
             //throw exception if not writable
             throw new RuntimeException('ERROR: Unable to write to file!', 1);
         }
-    }
-
-    /**
-     * Open log file
-     *
-     * @return void
-     */
-    private function openLog()
-    {
-        $this->prepareLogFile();
-        $openFile = $this->log_file;
-        // append new log
-        $this->file = fopen($openFile, 'ab')
-        or exit("Can't open $openFile! Please check permissions in oc-content directory");
+        if ($this->file === null) {
+            $openFile = $this->log_file;
+            // append new log
+            return $this->file = fopen($openFile, 'ab') or exit("Can't open $openFile! Check permissions");
+        }
     }
 
     /**

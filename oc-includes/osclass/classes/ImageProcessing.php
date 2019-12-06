@@ -20,25 +20,23 @@
  */
 class ImageProcessing
 {
-
+   /** @var \Imagick  */
     private $im;
     private $image_info;
     private $ext;
     private $mime;
-    private $_font;
-    private $_color;
-    private $_width;
-    private $_height;
-    private $_exif;
-    private $_watermarked = false;
-    private $_use_imagick = false;
+    private $font;
+    private $width;
+    private $height;
+    private $exif;
+    private $watermarked = false;
+    private $use_imagick = false;
 
     /**
      * ImageProcessing constructor.
      *
      * @param $imagePath
      *
-     * @throws \Exception
      */
     private function __construct($imagePath)
     {
@@ -50,41 +48,51 @@ class ImageProcessing
             throw new RuntimeException(sprintf(__('%s is not readable!'), $imagePath));
         }
 
-        if (filesize($imagePath) == 0) {
+        if (filesize($imagePath) === 0) {
             throw new RuntimeException(sprintf(__('%s is corrupt or broken!'), $imagePath));
         }
 
-        $this->image_info = @getimagesize($imagePath);
+        $this->image_info = getimagesize($imagePath);
 
         if (extension_loaded('imagick') && osc_use_imagick()) {
-            $this->_use_imagick = true;
+            $this->use_imagick = true;
         }
 
-        if ($this->_use_imagick) {
-            $this->im = new Imagick($imagePath);
-            // animated GIF set frame 0
+        if ($this->use_imagick) {
+            try {
+                $this->im = new Imagick($imagePath);
+            } catch (ImagickException $e) {
+                LogOsclass::newInstance()->fatal($e->getMessage(), $e->getFile() . ' ' . $e->getLine());
+            }
+            /**
+             * Check if image have more frames and get the first frame if it has.
+             * First identified by @dev101
+             * Improvement on previous method from @dev101
+             */
             if ($this->im->getNumberImages() > 1) {
-                foreach ($this->im as $frame) {
-                    $frame = $this->im;
-                    break;
+                try {
+                    $this->im = new Imagick($imagePath . '[0]');
+                } catch (ImagickException $e) {
+                    LogOsclass::newInstance()->fatal($e->getMessage(), $e->getFile() . ' ' . $e->getLine());
                 }
             }
-            $geometry      = $this->im->getImageGeometry();
-            $this->_width  = $geometry['width'];
-            $this->_height = $geometry['height'];
-        } else {
-            $content       = file_get_contents($imagePath);
-            $this->im      = imagecreatefromstring($content);
-            $this->_width  = imagesx($this->im);
-            $this->_height = imagesy($this->im);
 
-            $this->_exif = array();
-            if (@$this->image_info['mime'] === 'image/jpeg' && function_exists('exif_read_data')) {
-                $this->_exif = @exif_read_data($imagePath);
+            $geometry     = $this->im->getImageGeometry();
+            $this->width  = $geometry['width'];
+            $this->height = $geometry['height'];
+        } else {
+            $content      = file_get_contents($imagePath);
+            $this->im     = imagecreatefromstring($content);
+            $this->width  = imagesx($this->im);
+            $this->height = imagesy($this->im);
+
+            $this->exif = array();
+            if ($this->image_info['mime'] === 'image/jpeg' && function_exists('exif_read_data')) {
+                $this->exif = exif_read_data($imagePath);
             }
         }
 
-        switch (@$this->image_info['mime']) {
+        switch ($this->image_info['mime']) {
             case 'image/gif':
             case 'image/png':
                 $this->ext  = 'png';
@@ -93,12 +101,12 @@ class ImageProcessing
             default:
                 $this->ext  = 'jpg';
                 $this->mime = 'image/jpeg';
-                if (!$this->_use_imagick) {
-                    $bg = imagecreatetruecolor($this->_width, $this->_height);
+                if (!$this->use_imagick) {
+                    $bg = imagecreatetruecolor($this->width, $this->height);
                     imagefill($bg, 0, 0, imagecolorallocatealpha($bg, 255, 255, 255, 127));
                     imagesavealpha($bg, true);
                     imagealphablending($bg, true);
-                    imagecopy($bg, $this->im, 0, 0, 0, 0, $this->_width, $this->_height);
+                    imagecopy($bg, $this->im, 0, 0, 0, 0, $this->width, $this->height);
                     imagedestroy($this->im);
                     $this->im = $bg;
                 }
@@ -110,7 +118,7 @@ class ImageProcessing
      * @param $imagePath
      *
      * @return \ImageProcessing
-     * @throws \Exception
+     *
      */
     public static function fromFile($imagePath)
     {
@@ -119,7 +127,7 @@ class ImageProcessing
 
     public function __destruct()
     {
-        if ($this->_use_imagick) {
+        if ($this->use_imagick) {
             $this->im->destroy();
         } else {
             imagedestroy($this->im);
@@ -147,7 +155,7 @@ class ImageProcessing
      */
     public function getWidth()
     {
-        return $this->_width;
+        return $this->width;
     }
 
     /**
@@ -155,7 +163,7 @@ class ImageProcessing
      */
     public function getHeight()
     {
-        return $this->_height;
+        return $this->height;
     }
 
     /**
@@ -168,17 +176,17 @@ class ImageProcessing
      */
     public function resizeTo($width, $height, $force_aspect = null, $upscale = true)
     {
-        if ($force_aspect == null) {
+        if ($force_aspect === null) {
             $force_aspect = osc_force_aspect_image();
         }
 
-        if (($this->_width / $this->_height) >= ($width / $height)) {
+        if (($this->width / $this->height) >= ($width / $height)) {
             if ($upscale) {
                 $newW = $width;
             } else {
-                $newW = ($this->_width > $width) ? $width : $this->_width;
+                $newW = ($this->width > $width) ? $width : $this->width;
             }
-            $newH = ceil($this->_height * ($newW / $this->_width));
+            $newH = ceil($this->height * ($newW / $this->width));
             if ($force_aspect) {
                 $height = $newH;
             }
@@ -186,15 +194,15 @@ class ImageProcessing
             if ($upscale) {
                 $newH = $height;
             } else {
-                $newH = ($this->_height > $height) ? $height : $this->_height;
+                $newH = ($this->height > $height) ? $height : $this->height;
             }
-            $newW = ceil($this->_width * ($newH / $this->_height));
+            $newW = ceil($this->width * ($newH / $this->height));
             if ($force_aspect) {
                 $width = $newW;
             }
         }
 
-        if ($this->_use_imagick) {
+        if ($this->use_imagick) {
             $bg = new Imagick();
             if ($this->ext === 'jpg') {
                 $bg->newImage($width, $height, 'white');
@@ -224,14 +232,14 @@ class ImageProcessing
                 0,
                 $newW,
                 $newH,
-                $this->_width,
-                $this->_height
+                $this->width,
+                $this->height
             );
             imagedestroy($this->im);
             $this->im = $newIm;
         }
-        $this->_width  = $width;
-        $this->_height = $height;
+        $this->width  = $width;
+        $this->height = $height;
 
         return $this;
     }
@@ -240,7 +248,7 @@ class ImageProcessing
      * @param      $imagePath
      * @param null $ext
      *
-     * @throws \Exception
+     * @throws \ImagickException
      */
     public function saveToFile($imagePath, $ext = null)
     {
@@ -248,7 +256,7 @@ class ImageProcessing
             throw new RuntimeException("$imagePath is not writable!");
         }
 
-        if ($ext == null) {
+        if ($ext === null) {
             $ext = $this->ext;
         }
 
@@ -256,11 +264,11 @@ class ImageProcessing
             $ext = 'jpeg';
         }
 
-        if ($this->_use_imagick) {
+        if ($this->use_imagick) {
             if ($ext === 'jpeg' && ($this->ext !== 'jpeg' && $this->ext !== 'jpg')) {
                 $bg = new Imagick();
-                $bg->newImage($this->_width, $this->_height, 'white');
-                $this->im->thumbnailImage($this->_width, $this->_height, true);
+                $bg->newImage($this->width, $this->height, 'white');
+                $this->im->thumbnailImage($this->width, $this->height, true);
                 $bg->compositeImage($this->im, imagick::COMPOSITE_OVER, 0, 0);
                 $this->im  = $bg;
                 $this->ext = 'jpeg';
@@ -276,7 +284,7 @@ class ImageProcessing
                     imagepng($this->im, $imagePath, 0);
                     break;
                 default:
-                    if (($ext === 'jpeg' && ($this->ext !== 'jpeg' && $this->ext !== 'jpg')) || $this->_watermarked) {
+                    if (($ext === 'jpeg' && ($this->ext !== 'jpeg' && $this->ext !== 'jpg')) || $this->watermarked) {
                         $this->ext = 'jpeg';
                     }
                     imagejpeg($this->im, $imagePath);
@@ -290,7 +298,7 @@ class ImageProcessing
      */
     public function autoRotate()
     {
-        if ($this->_use_imagick) {
+        if ($this->use_imagick) {
             switch ($this->im->getImageOrientation()) {
                 case imagick::ORIENTATION_TOPRIGHT:
                     $this->im->flopImage();
@@ -326,8 +334,8 @@ class ImageProcessing
                     // DO NOTHING, THE IMAGE IS OK OR WE DON'T KNOW IF IT'S ROTATED
                     break;
             }
-        } elseif (isset($this->_exif['Orientation'])) {
-            switch ($this->_exif['Orientation']) {
+        } elseif (isset($this->exif['Orientation'])) {
+            switch ($this->exif['Orientation']) {
                 case 1:
                 default:
                     // DO NOTHING, THE IMAGE IS OK OR WE DON'T KNOW IF IT'S ROTATED
@@ -345,31 +353,31 @@ class ImageProcessing
                 case 5:
                     $this->im = imagerotate($this->im, 270, 0);
                     imageflip($this->im, IMG_FLIP_HORIZONTAL);
-                    $aux           = $this->_height;
-                    $this->_height = $this->_width;
-                    $this->_width  = $aux;
+                    $aux          = $this->height;
+                    $this->height = $this->width;
+                    $this->width  = $aux;
                     break;
                 case 6:
-                    $this->im      = imagerotate($this->im, -90, 0);
-                    $aux           = $this->_height;
-                    $this->_height = $this->_width;
-                    $this->_width  = $aux;
+                    $this->im     = imagerotate($this->im, -90, 0);
+                    $aux          = $this->height;
+                    $this->height = $this->width;
+                    $this->width  = $aux;
                     break;
                 case 7:
                     $this->im = imagerotate($this->im, 90, 0);
                     imageflip($this->im, IMG_FLIP_HORIZONTAL);
-                    $aux           = $this->_height;
-                    $this->_height = $this->_width;
-                    $this->_width  = $aux;
+                    $aux          = $this->height;
+                    $this->height = $this->width;
+                    $this->width  = $aux;
                     break;
                 case 8:
-                    $this->im      = imagerotate($this->im, 90, 0);
-                    $aux           = $this->_height;
-                    $this->_height = $this->_width;
-                    $this->_width  = $aux;
+                    $this->im     = imagerotate($this->im, 90, 0);
+                    $aux          = $this->height;
+                    $this->height = $this->width;
+                    $this->width  = $aux;
                     break;
             }
-            $this->_exif['Orientation'] = 1;
+            $this->exif['Orientation'] = 1;
         }
 
         return $this;
@@ -379,7 +387,7 @@ class ImageProcessing
     {
         header('Content-Disposition: Attachment;filename=image.' . $this->ext);
         header('Content-type: ' . $this->mime);
-        if ($this->_use_imagick) {
+        if ($this->use_imagick) {
         } else {
             switch ($this->ext) {
                 case 'gif':
@@ -402,14 +410,17 @@ class ImageProcessing
      */
     public function doWatermarkText($text, $color = 'ff0000', $fontsize = '30')
     {
-        $this->_watermarked = true;
-        $this->_font        = osc_apply_filter('watermark_font_path', LIB_PATH . 'osclass/assets/fonts/Arial.ttf');
-        $text               = osc_apply_filter('watermark_text_value', $text);
-        $fontsize           = osc_apply_filter('watermark_font_size', $fontsize);
-        if ($this->_use_imagick) {
+        $this->watermarked = true;
+        $this->font        = osc_apply_filter(
+            'watermark_font_path',
+            LIB_PATH . 'osclass/assets/fonts/LiberationSans-Regular.ttf'
+        );
+        $text              = osc_apply_filter('watermark_text_value', $text);
+        $fontsize          = osc_apply_filter('watermark_font_size', $fontsize);
+        if ($this->use_imagick) {
             $draw = new ImagickDraw();
             $draw->setFillColor('#' . $color);
-            $draw->setFont($this->_font);
+            $draw->setFont($this->font);
             $draw->setFontSize($fontsize);
             $metrics = $this->im->queryFontMetrics($draw, $text);
             switch (osc_watermark_place()) {
@@ -418,20 +429,20 @@ class ImageProcessing
                     $offset['y'] = $metrics['ascender'] + 1;
                     break;
                 case 'tr':
-                    $offset['x'] = $this->_width - $metrics['textWidth'] - 1;
+                    $offset['x'] = $this->width - $metrics['textWidth'] - 1;
                     $offset['y'] = $metrics['ascender'] + 1;
                     break;
                 case 'bl':
                     $offset['x'] = 1;
-                    $offset['y'] = $this->_height - 1;
+                    $offset['y'] = $this->height - 1;
                     break;
                 case 'br':
-                    $offset['x'] = $this->_width - $metrics['textWidth'] - 1;
-                    $offset['y'] = $this->_height - 1;
+                    $offset['x'] = $this->width - $metrics['textWidth'] - 1;
+                    $offset['y'] = $this->height - 1;
                     break;
                 default:
-                    $offset['x'] = ($this->_width / 2) - ($metrics['textWidth'] / 2);
-                    $offset['y'] = ($this->_height / 2) - ($metrics['ascender'] / 2);
+                    $offset['x'] = ($this->width / 2) - ($metrics['textWidth'] / 2);
+                    $offset['y'] = ($this->height / 2) - ($metrics['ascender'] / 2);
                     break;
             }
             $this->im->annotateImage($draw, $offset['x'], $offset['y'], 0, $text);
@@ -451,7 +462,7 @@ class ImageProcessing
                 $offset['x'],
                 $offset['y'],
                 $color,
-                $this->_font,
+                $this->font,
                 html_entity_decode($text, null, 'UTF-8')
             );
         }
@@ -491,20 +502,20 @@ class ImageProcessing
                 $offset['y'] = $bbox['height'] * 1.5;
                 break;
             case 'tr':
-                $offset['x'] = $this->_width - ($bbox['width'] + $bbox['height']);
+                $offset['x'] = $this->width - ($bbox['width'] + $bbox['height']);
                 $offset['y'] = $bbox['height'] * 1.5;
                 break;
             case 'bl':
                 $offset['x'] = $bbox['height'];
-                $offset['y'] = $this->_height - $bbox['height'];
+                $offset['y'] = $this->height - $bbox['height'];
                 break;
             case 'br':
-                $offset['x'] = $this->_width - ($bbox['width'] + $bbox['height']);
-                $offset['y'] = $this->_height - $bbox['height'];
+                $offset['x'] = $this->width - ($bbox['width'] + $bbox['height']);
+                $offset['y'] = $this->height - $bbox['height'];
                 break;
             default:
-                $offset['x'] = ($this->_width / 2) - ($bbox['top_right']['x'] / 2);
-                $offset['y'] = ($this->_height / 2) - ($bbox['top_right']['y'] / 2);
+                $offset['x'] = ($this->width / 2) - ($bbox['top_right']['x'] / 2);
+                $offset['y'] = ($this->height / 2) - ($bbox['top_right']['y'] / 2);
                 break;
         }
 
@@ -521,7 +532,7 @@ class ImageProcessing
         $bbox = imagettfbbox(
             20,
             0,
-            $this->_font,
+            $this->font,
             $text
         );
 
@@ -555,9 +566,9 @@ class ImageProcessing
      */
     public function doWatermarkImage()
     {
-        $this->_watermarked = true;
-        $path_watermark     = osc_uploads_path() . 'watermark.png';
-        if ($this->_use_imagick) {
+        $this->watermarked = true;
+        $path_watermark    = osc_uploads_path() . 'watermark.png';
+        if ($this->use_imagick) {
             $wm   = new Imagick($path_watermark);
             $wgeo = $wm->getImageGeometry();
 
@@ -567,20 +578,20 @@ class ImageProcessing
                     $dest_y = 0;
                     break;
                 case 'tr':
-                    $dest_x = $this->_width - $wgeo['width'];
+                    $dest_x = $this->width - $wgeo['width'];
                     $dest_y = 0;
                     break;
                 case 'bl':
                     $dest_x = 0;
-                    $dest_y = $this->_height - $wgeo['height'];
+                    $dest_y = $this->height - $wgeo['height'];
                     break;
                 case 'br':
-                    $dest_x = $this->_width - $wgeo['width'];
-                    $dest_y = $this->_height - $wgeo['height'];
+                    $dest_x = $this->width - $wgeo['width'];
+                    $dest_y = $this->height - $wgeo['height'];
                     break;
                 default:
-                    $dest_x = ($this->_width - $wgeo['width']) / 2;
-                    $dest_y = ($this->_height - $wgeo['height']) / 2;
+                    $dest_x = ($this->width - $wgeo['width']) / 2;
+                    $dest_y = ($this->height - $wgeo['height']) / 2;
                     break;
             }
 
@@ -598,20 +609,20 @@ class ImageProcessing
                     $dest_y = 0;
                     break;
                 case 'tr':
-                    $dest_x = $this->_width - $watermark_width;
+                    $dest_x = $this->width - $watermark_width;
                     $dest_y = 0;
                     break;
                 case 'bl':
                     $dest_x = 0;
-                    $dest_y = $this->_height - $watermark_height;
+                    $dest_y = $this->height - $watermark_height;
                     break;
                 case 'br':
-                    $dest_x = $this->_width - $watermark_width;
-                    $dest_y = $this->_height - $watermark_height;
+                    $dest_x = $this->width - $watermark_width;
+                    $dest_y = $this->height - $watermark_height;
                     break;
                 default:
-                    $dest_x = ($this->_width - $watermark_width) / 2;
-                    $dest_y = ($this->_height - $watermark_height) / 2;
+                    $dest_x = ($this->width - $watermark_width) / 2;
+                    $dest_y = ($this->height - $watermark_height) / 2;
                     break;
             }
 
