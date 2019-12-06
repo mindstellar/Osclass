@@ -31,33 +31,30 @@ class Plugins
     {
     }
 
-    /**
-     * @param $hook
-     *
-     * @return mixed|string
-     */
-    public static function applyFilter($hook)
-    {
-        $args    = func_get_args();
-        $hook    = array_shift($args);
-        $content = '';
-        if (isset($args[0])) {
-            $content = $args[0];
-        }
 
+    /**
+     * @param       $hook
+     * @param       $content
+     * @param mixed ...$args
+     *
+     * @return mixed
+     */
+    public static function applyFilter($hook, $content, ...$args)
+    {
         if (isset(self::$hooks[$hook])) {
             for ($priority = 0; $priority <= 10; $priority++) {
                 if (isset(self::$hooks[$hook][$priority]) && is_array(self::$hooks[$hook][$priority])) {
                     foreach (self::$hooks[$hook][$priority] as $fxName) {
                         if (is_callable($fxName)) {
-                            $content = call_user_func_array($fxName, $args);
+                            $content = $fxName($content, ...$args);
                             $args[0] = $content;
+                        } else {
+                            LogOsclass::newInstance()->fatal('Unknown filter '.$fxName);
                         }
                     }
                 }
             }
         }
-
         return $content;
     }
 
@@ -152,7 +149,7 @@ class Plugins
         $plugins = self::listAll();
         foreach ($plugins as $p) {
             $info = self::getInfo($p);
-            if ($info['plugin_update_uri'] == $uri) {
+            if ($info['plugin_update_uri'] === $uri) {
                 return $p;
             }
         }
@@ -315,7 +312,7 @@ class Plugins
 
     /**
      * @param     $hook
-     * @param     $function
+     * @param callable    $function
      * @param int $priority
      */
     public static function addHook($hook, $function, $priority = 5)
@@ -328,7 +325,7 @@ class Plugins
             for ($_priority = 0; $_priority <= 10; $_priority++) {
                 if (isset(self::$hooks[$hook][$_priority])) {
                     foreach (self::$hooks[$hook][$_priority] as $fxName) {
-                        if ($fxName == $function) {
+                        if ($fxName === $function) {
                             $found_plugin = true;
                             break;
                         }
@@ -385,19 +382,21 @@ class Plugins
         return true;
     }
 
+
     /**
-     * @param $hook
+     * @param       $hook
+     * @param mixed ...$args
      */
-    public static function runHook($hook)
+    public static function runHook($hook, ...$args)
     {
-        $args = func_get_args();
-        array_shift($args);
         if (isset(self::$hooks[$hook])) {
             for ($priority = 0; $priority <= 10; $priority++) {
                 if (isset(self::$hooks[$hook][$priority]) && is_array(self::$hooks[$hook][$priority])) {
                     foreach (self::$hooks[$hook][$priority] as $fxName) {
                         if (is_callable($fxName)) {
-                            call_user_func_array($fxName, $args);
+                            $fxName(...$args);
+                        } else {
+                            LogOsclass::newInstance()->fatal('Unknown function '.$fxName);
                         }
                     }
                 }

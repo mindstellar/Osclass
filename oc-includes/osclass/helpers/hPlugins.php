@@ -26,31 +26,26 @@
 
 /**
  * Run a hook
- *
- * @param string $hook
- *
- * @return void
+ * @param       $hook
+ * @param mixed ...$args
  */
-function osc_run_hook($hook)
+function osc_run_hook($hook, ...$args)
 {
-    $args = func_get_args();
-    call_user_func_array(array('Plugins', 'runHook'), $args);
+    Plugins::runHook($hook, ...$args);
 }
 
 
 /**
  * Apply a filter to a text
+ * @param       $hook
+ * @param       $content
+ * @param mixed ...$args
  *
- * @param string $hook
- * @param string $content
- *
- * @return boolean
+ * @return mixed
  */
-function osc_apply_filter($hook, $content)
+function osc_apply_filter($hook, $content, ...$args)
 {
-    $args = func_get_args();
-
-    return call_user_func_array(array('Plugins', 'applyFilter'), $args);
+    return Plugins::applyFilter($hook, $content, ...$args);
 }
 
 
@@ -212,7 +207,7 @@ function osc_plugin_is_enabled($plugin)
  */
 function osc_plugin_configure_view($plugin)
 {
-    return Plugins::configureView($plugin);
+    Plugins::configureView($plugin);
 }
 
 
