@@ -29,7 +29,7 @@ class CWebSearch extends BaseModel
         parent::__construct();
 
         $this->mSearch = Search::newInstance();
-        $this->uri     = Params::getRequestURI();
+        $this->uri     = Params::getRequestURI(false, false, false);
 
         //Check if request is not having index.php
         if (!(stripos($this->uri, 'index.php') === 0)) {
@@ -187,8 +187,7 @@ class CWebSearch extends BaseModel
             if (MULTISITE == 1) {
                 $_base_url = osc_multisite_url();
             }
-            if (str_replace('%20', '+', $searchUri)
-                !== str_replace('%20', '+', $_base_url . $this->uri)
+            if (str_replace('%20', '+', $searchUri) !== str_replace('%20', '+', $_base_url . $this->uri)
             ) {
                 $this->redirectTo($searchUri, 301);
             }
