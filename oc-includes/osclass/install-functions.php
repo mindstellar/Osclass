@@ -316,7 +316,7 @@ function oc_install()
     $createdb    = false;
     require_once LIB_PATH . 'osclass/helpers/hSecurity.php';
 
-    if ($tableprefix == '') {
+    if (!$tableprefix) {
         $tableprefix = 'oc_';
     }
 
@@ -392,9 +392,7 @@ function oc_install()
             );
         }
 
-        unset($conn);
-        unset($comm);
-        unset($master_conn);
+        unset($conn, $comm, $master_conn);
     }
 
     $conn      = new DBConnectionClass($dbhost, $username, $password, $dbname);
