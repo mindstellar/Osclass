@@ -75,7 +75,7 @@ if (is_array($cron)) {
     }
 }
 
-// Daily crons
+// Daily cron
 $cron = Cron::newInstance()->getCronByType('DAILY');
 if (is_array($cron)) {
     $i_next = strtotime($cron['d_next_exec']);
@@ -113,7 +113,7 @@ if (is_array($cron)) {
     }
 }
 
-// Weekly crons
+// Weekly cron
 $cron = Cron::newInstance()->getCronByType('WEEKLY');
 if (is_array($cron)) {
     $i_next = strtotime($cron['d_next_exec']);

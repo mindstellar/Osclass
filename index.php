@@ -23,8 +23,10 @@ require_once __DIR__ . '/oc-load.php';
 
 if (CLI) {
     $cli_params = getopt('p:t:');
-    Params::setParam('page', $cli_params['p']);
-    Params::setParam('cron-type', $cli_params['t']);
+    if ($cli_params) {
+        Params::setParam('page', $cli_params['p']);
+        Params::setParam('cron-type', $cli_params['t']);
+    }
     if (Params::getParam('page') === 'upgrade') {
         require_once(osc_lib_path() . 'osclass/upgrade-funcs.php');
         exit(1);
