@@ -37,7 +37,7 @@ class CWebSearch extends BaseModel
             $this->uri = rtrim($this->uri, '/');
 
             // redirect if it ends with a slash NOT NEEDED ANYMORE, SINCE WE CHECK WITH osc_search_url
-            if (($this->uri != osc_get_preference('rewrite_search_url')
+            if (($this->uri !== osc_get_preference('rewrite_search_url')
                     && stripos($this->uri, osc_get_preference('rewrite_search_url') . '/')
                     === false)
                 && osc_rewrite_enabled()

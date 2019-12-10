@@ -77,7 +77,7 @@ class Log extends DAO
      */
     public function insertLog($section, $action, $id, $data, $who, $whoId)
     {
-        if (Params::getServerParam('REMOTE_ADDR') == '') {
+        if (!Params::getServerParam('REMOTE_ADDR')) {
             // CRON.
             $_SERVER['REMOTE_ADDR'] = '127.0.0.1';
         }

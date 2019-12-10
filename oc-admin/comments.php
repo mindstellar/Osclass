@@ -45,12 +45,12 @@ class CAdminItemComments extends AdminSecBaseModel
 
         //specific things for this class
         switch ($this->action) {
-            case('bulk_actions'):
+            case ('bulk_actions'):
                 osc_csrf_check();
                 $id = Params::getParam('id');
                 if ($id) {
                     switch (Params::getParam('bulk_actions')) {
-                        case('delete_all'):
+                        case ('delete_all'):
                             $this->itemCommentManager->delete(array(
                                 DB_CUSTOM_COND => 'pk_i_id IN (' . implode(', ', $id) . ')'
                             ));
@@ -62,7 +62,7 @@ class CAdminItemComments extends AdminSecBaseModel
                             }
                             osc_add_flash_ok_message(_m('The comments have been deleted'), 'admin');
                             break;
-                        case('activate_all'):
+                        case ('activate_all'):
                             foreach ($id as $_id) {
                                 $iUpdated = $this->itemCommentManager->update(
                                     array('b_active' => 1),
@@ -75,7 +75,7 @@ class CAdminItemComments extends AdminSecBaseModel
                             }
                             osc_add_flash_ok_message(_m('The comments have been approved'), 'admin');
                             break;
-                        case('deactivate_all'):
+                        case ('deactivate_all'):
                             foreach ($id as $_id) {
                                 $this->itemCommentManager->update(
                                     array('b_active' => 0),
@@ -85,7 +85,7 @@ class CAdminItemComments extends AdminSecBaseModel
                             }
                             osc_add_flash_ok_message(_m('The comments have been disapproved'), 'admin');
                             break;
-                        case('enable_all'):
+                        case ('enable_all'):
                             foreach ($id as $_id) {
                                 $iUpdated = $this->itemCommentManager->update(
                                     array('b_enabled' => 1),
@@ -98,7 +98,7 @@ class CAdminItemComments extends AdminSecBaseModel
                             }
                             osc_add_flash_ok_message(_m('The comments have been unblocked'), 'admin');
                             break;
-                        case('disable_all'):
+                        case ('disable_all'):
                             foreach ($id as $_id) {
                                 $this->itemCommentManager->update(
                                     array('b_enabled' => 0),
@@ -117,7 +117,7 @@ class CAdminItemComments extends AdminSecBaseModel
                 }
                 $this->redirectTo(osc_admin_base_url(true) . '?page=comments');
                 break;
-            case('status'):
+            case ('status'):
                 osc_csrf_check();
                 $id    = Params::getParam('id');
                 $value = Params::getParam('value');
@@ -133,7 +133,7 @@ class CAdminItemComments extends AdminSecBaseModel
                     return false;
                 }
 
-                if ($value == 'ACTIVE') {
+                if ($value === 'ACTIVE') {
                     $iUpdated = $this->itemCommentManager->update(
                         array('b_active' => 1),
                         array('pk_i_id' => $id)
@@ -143,21 +143,21 @@ class CAdminItemComments extends AdminSecBaseModel
                     }
                     osc_run_hook('activate_comment', $id);
                     osc_add_flash_ok_message(_m('The comment has been approved'), 'admin');
-                } elseif ($value == 'INACTIVE') {
+                } elseif ($value === 'INACTIVE') {
                     $iUpdated = $this->itemCommentManager->update(
                         array('b_active' => 0),
                         array('pk_i_id' => $id)
                     );
                     osc_run_hook('deactivate_comment', $id);
                     osc_add_flash_ok_message(_m('The comment has been disapproved'), 'admin');
-                } elseif ($value == 'ENABLE') {
+                } elseif ($value === 'ENABLE') {
                     $iUpdated = $this->itemCommentManager->update(
                         array('b_enabled' => 1),
                         array('pk_i_id' => $id)
                     );
                     osc_run_hook('enable_comment', $id);
                     osc_add_flash_ok_message(_m('The comment has been enabled'), 'admin');
-                } elseif ($value == 'DISABLE') {
+                } elseif ($value === 'DISABLE') {
                     $iUpdated = $this->itemCommentManager->update(
                         array('b_enabled' => 0),
                         array('pk_i_id' => $id)
@@ -168,13 +168,13 @@ class CAdminItemComments extends AdminSecBaseModel
 
                 $this->redirectTo(osc_admin_base_url(true) . '?page=comments');
                 break;
-            case('comment_edit'):
+            case ('comment_edit'):
                 $comment = ItemComment::newInstance()->findByPrimaryKey(Params::getParam('id'));
 
                 $this->_exportVariableToView('comment', $comment);
                 $this->doView('comments/frm.php');
                 break;
-            case('comment_edit_post'):
+            case ('comment_edit_post'):
                 osc_csrf_check();
 
                 $msg = '';
@@ -208,7 +208,7 @@ class CAdminItemComments extends AdminSecBaseModel
                 osc_add_flash_ok_message(_m('Great! We just updated your comment'), 'admin');
                 $this->redirectTo(osc_admin_base_url(true) . '?page=comments');
                 break;
-            case('delete'):
+            case ('delete'):
                 osc_csrf_check();
                 $this->itemCommentManager->deleteByPrimaryKey(Params::getParam('id'));
                 osc_add_flash_ok_message(_m('The comment has been deleted'), 'admin');
@@ -271,28 +271,38 @@ class CAdminItemComments extends AdminSecBaseModel
                 $bulk_options = array(
                     array('value' => '', 'data-dialog-content' => '', 'label' => __('Bulk actions')),
                     array('value'               => 'delete_all',
-                          'data-dialog-content' => sprintf(__('Are you sure you want to %s the selected comments?'),
-                              strtolower(__('Delete'))),
+                          'data-dialog-content' => sprintf(
+                              __('Are you sure you want to %s the selected comments?'),
+                              strtolower(__('Delete'))
+                          ),
                           'label'               => __('Delete')
                     ),
                     array('value'               => 'activate_all',
-                          'data-dialog-content' => sprintf(__('Are you sure you want to %s the selected comments?'),
-                              strtolower(__('Activate'))),
+                          'data-dialog-content' => sprintf(
+                              __('Are you sure you want to %s the selected comments?'),
+                              strtolower(__('Activate'))
+                          ),
                           'label'               => __('Activate')
                     ),
                     array('value'               => 'deactivate_all',
-                          'data-dialog-content' => sprintf(__('Are you sure you want to %s the selected comments?'),
-                              strtolower(__('Deactivate'))),
+                          'data-dialog-content' => sprintf(
+                              __('Are you sure you want to %s the selected comments?'),
+                              strtolower(__('Deactivate'))
+                          ),
                           'label'               => __('Deactivate')
                     ),
                     array('value'               => 'disable_all',
-                          'data-dialog-content' => sprintf(__('Are you sure you want to %s the selected comments?'),
-                              strtolower(__('Block'))),
+                          'data-dialog-content' => sprintf(
+                              __('Are you sure you want to %s the selected comments?'),
+                              strtolower(__('Block'))
+                          ),
                           'label'               => __('Block')
                     ),
                     array('value'               => 'enable_all',
-                          'data-dialog-content' => sprintf(__('Are you sure you want to %s the selected comments?'),
-                              strtolower(__('Unblock'))),
+                          'data-dialog-content' => sprintf(
+                              __('Are you sure you want to %s the selected comments?'),
+                              strtolower(__('Unblock'))
+                          ),
                           'label'               => __('Unblock')
                     )
                 );
