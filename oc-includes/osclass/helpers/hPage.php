@@ -225,7 +225,7 @@ function osc_get_static_page($internal_name, $locale = '')
     $page = Page::newInstance()->findByInternalName($internal_name, $locale);
     View::newInstance()->_exportVariableToView('page_meta', json_decode(@$page['s_meta'], true));
 
-    return View::newInstance()->_exportVariableToView('page', $page);
+    View::newInstance()->_exportVariableToView('page', $page);
 }
 
 
@@ -255,8 +255,17 @@ function osc_has_static_pages()
     if (!View::newInstance()->_exists('pages')) {
         View::newInstance()->_exportVariableToView('pages', Page::newInstance()->listAll(false, 1));
     }
-
+    if (View::newInstance()->_get('pageLoop') !== 'pages') {
+        View::newInstance()->_exportVariableToView('oldPage', View::newInstance()->_get('page'));
+        View::newInstance()->_exportVariableToView('pageLoop', 'pages');
+    }
     $page = View::newInstance()->_next('pages');
+    if (!$page) {
+        View::newInstance()->_exportVariableToView('page', View::newInstance()->_get('oldPage'));
+        View::newInstance()->_exportVariableToView('pageLoop', '');
+    } else {
+        View::newInstance()->_exportVariableToView('page', View::newInstance()->_current('pages'));
+    }
     View::newInstance()->_exportVariableToView('page_meta', json_decode($page['s_meta'], true));
 
     return $page;
@@ -272,5 +281,11 @@ function osc_has_static_pages()
  */
 function osc_reset_static_pages()
 {
-    return View::newInstance()->_erase('pages');
+    if (View::newInstance()->_exists('oldPage')) {
+        View::newInstance()->_exportVariableToView('page', View::newInstance()->_get('oldPage'));
+    }
+    if (View::newInstance()->_exists('pagLoop')) {
+        View::newInstance()->_exportVariableToView('pageLoop', '');
+    }
+    return View::newInstance()->_reset('pages');
 }
