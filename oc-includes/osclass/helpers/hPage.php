@@ -284,7 +284,7 @@ function osc_reset_static_pages()
     if (View::newInstance()->_exists('oldPage')) {
         View::newInstance()->_exportVariableToView('page', View::newInstance()->_get('oldPage'));
     }
-    if (View::newInstance()->_exists('pagLoop')) {
+    if (View::newInstance()->_exists('pageLoop')) {
         View::newInstance()->_exportVariableToView('pageLoop', '');
     }
     return View::newInstance()->_reset('pages');
