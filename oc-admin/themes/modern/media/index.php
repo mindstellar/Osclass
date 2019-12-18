@@ -159,7 +159,7 @@ $rows    = $aData['aRows'];
                         }
                     };
                     foreach ($columns as $k => $v) {
-                            $create_table_head($direction,$sort,$k,$v);
+                            $create_table_head($direction, $sort, $k, $v);
                     } ?>
                 </tr>
                 </thead>

@@ -305,7 +305,7 @@ osc_current_admin_theme_path('parts/header.php'); ?>
                                     <p><?php printf(
                                         __('Freetype library is required. How to <a target="_blank" href="%s">install/configure</a>'),
                                         'http://www.php.net/manual/en/image.installation.php'
-                                    ); ?></p>
+                                       ); ?></p>
                                 </div>
                             <?php } ?>
                         </div>
