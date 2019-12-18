@@ -83,7 +83,7 @@ function osc_add_filter($hook, $function, $priority = 5)
  * Remove a hook's function
  *
  * @param string $hook
- * @param string $function
+ * @param callable $function
  *
  * @return void
  */
@@ -97,7 +97,7 @@ function osc_remove_hook($hook, $function)
  * Remove a filter's function
  *
  * @param string $hook
- * @param string $function
+ * @param callable $function
  *
  * @return void
  */
@@ -151,7 +151,7 @@ function osc_plugin_check_update($plugin)
  * Register a plugin file to be loaded
  *
  * @param string $path
- * @param string $function
+ * @param callable $function
  *
  * @return void
  */
