@@ -1,6 +1,5 @@
 <?php
 /*
- * Copyright 2014 Osclass
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -20,7 +19,7 @@
  */
 class ImageProcessing
 {
-   /** @var \Imagick  */
+    /** @var \Imagick */
     private $im;
     private $image_info;
     private $ext;
@@ -38,7 +37,7 @@ class ImageProcessing
      * @param $imagePath
      *
      */
-    private function __construct($imagePath)
+    public function __construct($imagePath)
     {
         if (!file_exists($imagePath)) {
             throw new RuntimeException(sprintf(__('%s does not exist!'), $imagePath));
@@ -70,6 +69,7 @@ class ImageProcessing
              * Improvement on previous method from @dev101
              */
             if ($this->im->getNumberImages() > 1) {
+                $this->im->destroy();
                 try {
                     $this->im = new Imagick($imagePath . '[0]');
                 } catch (ImagickException $e) {
@@ -87,7 +87,7 @@ class ImageProcessing
             $this->height = imagesy($this->im);
 
             $this->exif = array();
-            if ($this->image_info['mime'] === 'image/jpeg' && function_exists('exif_read_data')) {
+            if ($this->image_info['mime'] === 'image/jpeg') {
                 $this->exif = exif_read_data($imagePath);
             }
         }
@@ -388,6 +388,7 @@ class ImageProcessing
         header('Content-Disposition: Attachment;filename=image.' . $this->ext);
         header('Content-type: ' . $this->mime);
         if ($this->use_imagick) {
+            $this->im->getImageBlob();
         } else {
             switch ($this->ext) {
                 case 'gif':
@@ -402,231 +403,110 @@ class ImageProcessing
     }
 
     /**
-     * @param        $text
-     * @param string $color
-     * @param string $fontsize
+     * Apply Text Watermark
+     * @param string $watermark_text
+     * @param string $font_color
+     * @param int $font_size
+     * @param null   $a_watermark_options
      *
      * @return $this
      */
-    public function doWatermarkText($text, $color = 'ff0000', $fontsize = '30')
+    public function doWatermarkText($watermark_text, $font_color = null, $font_size = null, $a_watermark_options = null)
     {
-        $this->watermarked = true;
-        $this->font        = osc_apply_filter(
-            'watermark_font_path',
-            LIB_PATH . 'osclass/assets/fonts/LiberationSans-Regular.ttf'
-        );
-        $text              = osc_apply_filter('watermark_text_value', $text);
-        $fontsize          = osc_apply_filter('watermark_font_size', $fontsize);
-        if ($this->use_imagick) {
-            $draw = new ImagickDraw();
-            $draw->setFillColor('#' . $color);
-            $draw->setFont($this->font);
-            $draw->setFontSize($fontsize);
-            $metrics = $this->im->queryFontMetrics($draw, $text);
-            switch (osc_watermark_place()) {
-                case 'tl':
-                    $offset['x'] = 1;
-                    $offset['y'] = $metrics['ascender'] + 1;
-                    break;
-                case 'tr':
-                    $offset['x'] = $this->width - $metrics['textWidth'] - 1;
-                    $offset['y'] = $metrics['ascender'] + 1;
-                    break;
-                case 'bl':
-                    $offset['x'] = 1;
-                    $offset['y'] = $this->height - 1;
-                    break;
-                case 'br':
-                    $offset['x'] = $this->width - $metrics['textWidth'] - 1;
-                    $offset['y'] = $this->height - 1;
-                    break;
-                default:
-                    $offset['x'] = ($this->width / 2) - ($metrics['textWidth'] / 2);
-                    $offset['y'] = ($this->height / 2) - ($metrics['ascender'] / 2);
-                    break;
-            }
-            $this->im->annotateImage($draw, $offset['x'], $offset['y'], 0, $text);
-        } else {
-            imagealphablending($this->im, true);
-            imagesavealpha($this->im, true);
-            if ($this->ext !== 'jpg') {
-                $white = imagecolorallocatealpha($this->im, 255, 255, 255, 127);
-                imagefill($this->im, 0, 0, $white);
-            }
-            $color  = $this->_imageColorAllocateHex($color);
-            $offset = $this->_calculateOffset($text);
-            imagettftext(
-                $this->im,
-                20,
-                0,
-                $offset['x'],
-                $offset['y'],
-                $color,
-                $this->font,
-                html_entity_decode($text, null, 'UTF-8')
-            );
+        try {
+            $this->doWatermark($watermark_text, $font_color, $font_size, $a_watermark_options);
+        } catch (ImagickException $e) {
+            LogOsclass::newInstance()->error($e->getMessage(), $e->getFile().' '.$e->getLine());
         }
-
         return $this;
     }
 
-
     /**
-     * @param $hexstr
+     * Allocate a hex color for an image
      *
-     * @return int
-     */
-    private function _imageColorAllocateHex($hexstr)
-    {
-        $red   = hexdec(substr($hexstr, 0, 2));
-        $green = hexdec(substr($hexstr, 2, 2));
-        $blue  = hexdec(substr($hexstr, 4, 2));
-
-
-        return imagecolorallocate($this->im, $red, $green, $blue);
-    }
-
-    /**
-     * @param $text
+     * @param string   $hex_string
+     * @param resource $image
      *
-     * @return array
+     * @return bool|int allocate color or return false
      */
-    private function _calculateOffset($text)
-    {
-        $offset = array('x' => 0, 'y' => 0);
-        $bbox   = $this->_calculateBBox($text);
 
-        switch (osc_watermark_place()) {
-            case 'tl':
-                $offset['x'] = $bbox['height'];
-                $offset['y'] = $bbox['height'] * 1.5;
-                break;
-            case 'tr':
-                $offset['x'] = $this->width - ($bbox['width'] + $bbox['height']);
-                $offset['y'] = $bbox['height'] * 1.5;
-                break;
-            case 'bl':
-                $offset['x'] = $bbox['height'];
-                $offset['y'] = $this->height - $bbox['height'];
-                break;
-            case 'br':
-                $offset['x'] = $this->width - ($bbox['width'] + $bbox['height']);
-                $offset['y'] = $this->height - $bbox['height'];
-                break;
-            default:
-                $offset['x'] = ($this->width / 2) - ($bbox['top_right']['x'] / 2);
-                $offset['y'] = ($this->height / 2) - ($bbox['top_right']['y'] / 2);
-                break;
+    private static function imageColorAllocateHex($hex_string, $image)
+    {
+        $hex_string = ltrim($hex_string, '#');
+        //Check if color has 8, 6 or 3 characters and get values
+        if (strlen($hex_string) === 8) {
+            $r = hexdec($hex_string[0] . $hex_string[1]);
+            $g = hexdec($hex_string[2] . $hex_string[3]);
+            $b = hexdec($hex_string[4] . $hex_string[5]);
+            //convert hex to decimal than 8 bit to 7 as supported in GD library
+            $a      = ((~((int)hexdec($hex_string[6] . $hex_string[7]))) & 0xff) >> 1;
+            $output = imagecolorallocatealpha($image, $r, $g, $b, $a);
+        } elseif (strlen($hex_string) === 6) {
+            $r      = hexdec($hex_string[0] . $hex_string[1]);
+            $g      = hexdec($hex_string[2] . $hex_string[3]);
+            $b      = hexdec($hex_string[4] . $hex_string[5]);
+            $output = imagecolorallocate($image, $r, $g, $b);
+        } elseif (strlen($hex_string) === 3) {
+            $r      = hexdec($hex_string[0] . $hex_string[0]);
+            $g      = hexdec($hex_string[1] . $hex_string[1]);
+            $b      = hexdec($hex_string[2] . $hex_string[2]);
+            $output = imagecolorallocate($image, $r, $g, $b);
+        }
+        if (isset($output)) {
+            return $output;
         }
 
-        return $offset;
+        return false;
     }
 
     /**
-     * @param $text
+     * Apply watermark on image from text watermark or image watermark
+     * @param string $watermark_text
+     * @param string $font_color
+     * @param int $font_size
+     * @param null $aOptions
      *
-     * @return array
-     */
-    private function _calculateBBox($text)
-    {
-        $bbox = imagettfbbox(
-            20,
-            0,
-            $this->font,
-            $text
-        );
-
-        $bbox = array(
-            'bottom_left'  => array(
-                'x' => $bbox[0],
-                'y' => $bbox[1]
-            ),
-            'bottom_right' => array(
-                'x' => $bbox[2],
-                'y' => $bbox[3]
-            ),
-            'top_right'    => array(
-                'x' => $bbox[4],
-                'y' => $bbox[5]
-            ),
-            'top_left'     => array(
-                'x' => $bbox[6],
-                'y' => $bbox[7]
-            )
-        );
-
-        $bbox['width']  = $bbox['top_right']['x'] - $bbox['top_left']['x'];
-        $bbox['height'] = $bbox['bottom_left']['y'] - $bbox['top_left']['y'];
-
-        return $bbox;
-    }
-
-    /**
      * @return $this
+     * @throws \ImagickException
      */
-    public function doWatermarkImage()
-    {
+    private function doWatermark(
+        $watermark_text = null,
+        $font_color = null,
+        $font_size = null,
+        $aOptions = null
+    ) {
         $this->watermarked = true;
-        $path_watermark    = osc_uploads_path() . 'watermark.png';
+        if ($watermark_text !== null && $watermark_text) {
+            $path_watermark = osc_uploads_path() . Preference::newInstance()->get('watermark_text_image_name');
+            if (!file_exists($path_watermark)) {
+                $path_watermark = self::createWatermarkImageFromText(
+                    $watermark_text,
+                    $font_color,
+                    $font_size,
+                    $aOptions
+                );
+            }
+        } else {
+            $path_watermark = osc_uploads_path() . 'watermark.png';
+        }
+
         if ($this->use_imagick) {
             $wm   = new Imagick($path_watermark);
-            $wgeo = $wm->getImageGeometry();
+            $watermark_geometry = $wm->getImageGeometry();
+            $watermark_height = $watermark_geometry['height'];
+            $watermark_width = $watermark_geometry['width'];
 
-            switch (osc_watermark_place()) {
-                case 'tl':
-                    $dest_x = 0;
-                    $dest_y = 0;
-                    break;
-                case 'tr':
-                    $dest_x = $this->width - $wgeo['width'];
-                    $dest_y = 0;
-                    break;
-                case 'bl':
-                    $dest_x = 0;
-                    $dest_y = $this->height - $wgeo['height'];
-                    break;
-                case 'br':
-                    $dest_x = $this->width - $wgeo['width'];
-                    $dest_y = $this->height - $wgeo['height'];
-                    break;
-                default:
-                    $dest_x = ($this->width - $wgeo['width']) / 2;
-                    $dest_y = ($this->height - $wgeo['height']) / 2;
-                    break;
-            }
-
+            $this->calculateWatermarkPosition($watermark_width, $watermark_height, $dest_x, $dest_y);
             $this->im->compositeImage($wm, imagick::COMPOSITE_OVER, $dest_x, $dest_y);
+
             $wm->destroy();
         } else {
             $watermark = imagecreatefrompng($path_watermark);
-
             $watermark_width  = imagesx($watermark);
             $watermark_height = imagesy($watermark);
 
-            switch (osc_watermark_place()) {
-                case 'tl':
-                    $dest_x = 0;
-                    $dest_y = 0;
-                    break;
-                case 'tr':
-                    $dest_x = $this->width - $watermark_width;
-                    $dest_y = 0;
-                    break;
-                case 'bl':
-                    $dest_x = 0;
-                    $dest_y = $this->height - $watermark_height;
-                    break;
-                case 'br':
-                    $dest_x = $this->width - $watermark_width;
-                    $dest_y = $this->height - $watermark_height;
-                    break;
-                default:
-                    $dest_x = ($this->width - $watermark_width) / 2;
-                    $dest_y = ($this->height - $watermark_height) / 2;
-                    break;
-            }
-
-            $this->_imagecopymerge_alpha(
+            $this->calculateWatermarkPosition($watermark_width, $watermark_height, $dest_x, $dest_y);
+            $this->imageCopyMergeAlpha(
                 $this->im,
                 $watermark,
                 $dest_x,
@@ -642,7 +522,148 @@ class ImageProcessing
 
         return $this;
     }
+    /**
+     * Apply watermark on image from uploaded image
+     * @return $this
+     */
+    public function doWatermarkImage()
+    {
+        try {
+            $this->doWatermark();
+        } catch (ImagickException $e) {
+            LogOsclass::newInstance()->error($e->getMessage(), $e->getFile().' '.$e->getLine());
+        }
+        return $this;
+    }
 
+    /**
+     * Create and return watermark image from text
+     *
+     * @param string $watermark_text
+     * @param string $font_color
+     * @param int    $font_size
+     * @param array  $aOptions See below
+     *                         array[]
+     *                         ['watermark_width']  int value for watermark width
+     *                         ['watermark_height'] int value for watermark height
+     *                         ['text_offset_x']    int x position of text
+     *                         ['text_offset_y']    int y position of text
+     *                         ['text_angle']       int angle for text
+     *                         ['background_color'] string hexadecimal color value
+     *
+     * @return string Return PNG image path
+     * @throws \ImagickException
+     */
+    public static function createWatermarkImageFromText(
+        $watermark_text,
+        $font_color = null,
+        $font_size = null,
+        $aOptions = null
+    ) {
+        $font_path      =
+            Plugins::applyFilter('watermark_font_path', LIB_PATH . 'osclass/assets/fonts/LiberationSans-Regular.ttf');
+        $watermark_text = Plugins::applyFilter('watermark_text_value', $watermark_text);
+        if ($font_size === null) {
+            $font_size = Plugins::applyFilter('watermark_font_size', 30);
+        }
+        if ($font_color === null) {
+            $font_color = 'ff0000';
+        }
+
+        if ($aOptions === null) {
+            $aOptions = json_decode(Preference::newInstance()->get('watermark_text_options'), true);
+        }
+
+        $validate_option = static function ($options_array, $option_name, $default_value) {
+            if (isset($options_array[$option_name]) && $options_array[$option_name]) {
+                return $options_array[$option_name];
+            }
+            return $default_value;
+        };
+
+        $watermark_width = (int)$validate_option($aOptions, 'watermark_width', 200);
+        $watermark_height = (int)$validate_option($aOptions, 'watermark_height', $font_size);
+        $text_offset_x = (int)$validate_option($aOptions, 'text_offset_x', 0);
+        $text_offset_y = (int)$validate_option($aOptions, 'text_offset_y', $watermark_height);
+        $text_angle = (int)$validate_option($aOptions, 'text_angle', 0);
+        $background_color = ltrim($validate_option($aOptions, 'background_color', '#000000'), '#');
+
+        $imagickLoaded = extension_loaded('imagick');
+        $use_imagick = Preference::newInstance()->get('use_imagick');
+
+        $watermark_settings_md5 = md5($watermark_text . $font_color . $font_size . json_encode($aOptions) .
+            $use_imagick);
+        $watermark_filename = 'watermark_text_' . $watermark_settings_md5 . '.png';
+
+        //Check if image is already generated with same settings (In case it is not saved in preference)
+        if (file_exists(osc_uploads_path() . $watermark_filename)) {
+            // Image found return image path
+            return osc_uploads_path() . $watermark_filename;
+        }
+
+        //Check if any image saved in preference
+        $pref_watermark_text_image_name = Preference::newInstance()->get('watermark_text_image_name');
+        if ($pref_watermark_text_image_name && file_exists(osc_uploads_path() . $pref_watermark_text_image_name)) {
+            //Remove it because we will generate a new one.
+            unlink(osc_uploads_path().$pref_watermark_text_image_name);
+        }
+
+        // No image is generated create a new one
+        // Check if Imagick enabled and loaded or create image with GD library
+        if ($imagickLoaded && $use_imagick) {
+            // Create some objects
+            $imagick    = new Imagick();
+            $draw       = new ImagickDraw();
+            $background = new ImagickPixel('#' . $background_color);
+
+            $imagick->newImage($watermark_width, $watermark_height, $background);
+
+            $draw->setFillColor('#' . $font_color);
+            $draw->setFont($font_path);
+            $draw->setFontSize($font_size * 1.33);
+            $imagick->annotateImage($draw, $text_offset_x, $text_offset_y, $text_angle, $watermark_text);
+            $imagick->setImageFormat('png');
+
+            //Save Image
+            $imagick->writeImage(osc_uploads_path().$watermark_filename);
+
+            // Clean Memory
+            $imagick->destroy();
+            $draw->destroy();
+            $background->destroy();
+        } else {
+            $image = imagecreatetruecolor($watermark_width, $watermark_height);
+            imagealphablending($image, true);
+            imagesavealpha($image, true);
+            $background_color_index = self::imageColorAllocateHex($background_color, $image);
+            imagefill($image, 0, 0, $background_color_index);
+            $text_color_index = self::imageColorAllocateHex($font_color, $image);
+            imagettftext(
+                $image,
+                $font_size,
+                $text_angle,
+                $text_offset_x,
+                $text_offset_y,
+                $text_color_index,
+                $font_path,
+                html_entity_decode($watermark_text, null, 'UTF-8')
+            );
+
+            //Write Image
+            imagepng($image, osc_uploads_path().$watermark_filename);
+
+            // Clean memory
+            imagedestroy($image);
+        }
+
+        // save new image name to preference
+        Preference::newInstance()->replace('watermark_text_image_name', $watermark_filename);
+        // Reset preferences
+        Preference::newInstance()->toArray();
+
+        // return path of new image
+        return osc_uploads_path().$watermark_filename;
+    }
 
     /**
      * @param      $dst_im
@@ -658,7 +679,7 @@ class ImageProcessing
      *
      * @return bool
      */
-    private function _imagecopymerge_alpha(
+    private function imageCopyMergeAlpha(
         &$dst_im,
         $src_im,
         $dst_x,
@@ -692,7 +713,7 @@ class ImageProcessing
                 $srccolor = imagecolorsforindex($src_im, imagecolorat($src_im, $src_x + $x_offset, $src_y + $y_offset));
                 $dstcolor = imagecolorsforindex($dst_im, imagecolorat($dst_im, $dst_x + $x_offset, $dst_y + $y_offset));
 
-                if (null === $trans || ($srccolor !== $trans)) {
+                if ($trans === null || ($srccolor !== $trans)) {
                     $src_a = $srccolor['alpha'] * $pct / 100;
                     // blend
                     $src_a = 127 - $src_a;
@@ -713,47 +734,36 @@ class ImageProcessing
 
         return true;
     }
-}
 
-
-if (!function_exists('imageflip')) {
     /**
-     * @param      $image
-     * @param int  $x
-     * @param int  $y
-     * @param null $width
-     * @param null $height
-     *
-     * @return mixed
+     * @param int $watermark_width
+     * @param int $watermark_height
+     * @param int|float $dest_x
+     * @param int|float $dest_y
      */
-    function imageflip(&$image, $x = 0, $y = 0, $width = null, $height = null)
+    private function calculateWatermarkPosition($watermark_width, $watermark_height, &$dest_x, &$dest_y)
     {
-        if ($width < 1) {
-            $width = imagesx($image);
+        switch (osc_watermark_place()) {
+            case 'tl':
+                $dest_x = 0;
+                $dest_y = 0;
+                break;
+            case 'tr':
+                $dest_x = $this->width - $watermark_width;
+                $dest_y = 0;
+                break;
+            case 'bl':
+                $dest_x = 0;
+                $dest_y = $this->height - $watermark_height;
+                break;
+            case 'br':
+                $dest_x = $this->width - $watermark_width;
+                $dest_y = $this->height - $watermark_height;
+                break;
+            default:
+                $dest_x = ($this->width - $watermark_width) / 2;
+                $dest_y = ($this->height - $watermark_height) / 2;
+                break;
         }
-        if ($height < 1) {
-            $height = imagesy($image);
-        }
-        // Truecolor provides better results, if possible.
-        if (function_exists('imageistruecolor') && imageistruecolor($image)) {
-            $tmp = imagecreatetruecolor(1, $height);
-        } else {
-            $tmp = imagecreate(1, $height);
-        }
-        $x2 = $x + $width - 1;
-        for ($i = (int)floor(($width - 1) / 2); $i >= 0; $i--) {
-            // Backup right stripe.
-            imagecopy($tmp, $image, 0, 0, $x2 - $i, $y, 1, $height);
-            // Copy left stripe to the right.
-            imagecopy($image, $image, $x2 - $i, $y, $x + $i, $y, 1, $height);
-            // Copy backuped right stripe to the left.
-            imagecopy($image, $tmp, $x + $i, $y, 0, 0, 1, $height);
-        }
-        imagedestroy($tmp);
-
-        return $image;
     }
-
-
-    define('IMG_FLIP_HORIZONTAL', 0);
 }
