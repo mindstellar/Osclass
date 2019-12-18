@@ -122,8 +122,8 @@ function customHead()
 
 osc_add_hook('admin_header', 'customHead', 10);
 
-$aData     = __get('aData');
-$aRawRows  = __get('aRawRows');
+$aData     = View::newInstance()->_get('aData');
+$aRawRows  = View::newInstance()->_get('aRawRows');
 $sort      = Params::getParam('sort');
 $direction = Params::getParam('direction');
 
@@ -147,9 +147,19 @@ $rows    = $aData['aRows'];
             <table class="table" cellpadding="0" cellspacing="0">
                 <thead>
                 <tr>
-                    <?php foreach ($columns as $k => $v) {
-                        echo '<th class="col-' . $k . ' ' . ($sort == $k ? ($direction == 'desc' ? 'sorting_desc'
-                                : 'sorting_asc') : '') . '">' . $v . '</th>';
+                    <?php
+                    $create_table_head = static function ($direction, $sort, $class, $value) {
+                        if (($direction !== 'desc')) {
+                            $direction = 'asc';
+                        }
+                        if ($sort === $class) {
+                            echo '<th class="col-' . $class . ' ' . 'sorting_' . $direction . '">' . $value . '</th>';
+                        } else {
+                            echo '<th class="col-' . $class . ' ' . '">' . $value . '</th>';
+                        }
+                    };
+                    foreach ($columns as $k => $v) {
+                            $create_table_head($direction,$sort,$k,$v);
                     } ?>
                 </tr>
                 </thead>

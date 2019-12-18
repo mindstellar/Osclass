@@ -21,17 +21,14 @@ osc_enqueue_script('jquery-validate');
 osc_enqueue_script('colorpicker');
 osc_enqueue_style('colorpicker', osc_assets_url('js/colorpicker/css/colorpicker.css'));
 
-$maxPHPsize = View::newInstance()->_get('max_size_upload');
+$maxPHPsize    = View::newInstance()->_get('max_size_upload');
 $imagickLoaded = extension_loaded('imagick');
-$aGD = @gd_info();
-$freeType = array_key_exists('FreeType Support', $aGD);
+$aGD           = @gd_info();
+$freeType      = array_key_exists('FreeType Support', $aGD);
 
 //customize Head
-function customHead()
-{
+$media_js = static function () {
     ?>
-    <link rel="stylesheet" media="screen" type="text/css"
-          href="<?php echo osc_assets_url('js/colorpicker/css/colorpicker.css'); ?>"/>
     <script type="text/javascript">
         $(document).ready(function () {
             // Code for form validation
@@ -87,11 +84,14 @@ function customHead()
                 }
             });
 
-            $('#colorpickerField').ColorPicker({
-                onSubmit: function (hsb, hex, rgb, el) {
-                },
-                onChange: function (hsb, hex, rgb) {
-                    $('#colorpickerField').val(hex);
+            $('#colorpickerField1').ColorPicker({
+                onChange: function (hsb, hex, rgb, el) {
+                    $('#colorpickerField1').val(hex);
+                }
+            });
+            $('#colorpickerField2').ColorPicker({
+                onChange: function (hsb, hex, rgb, el) {
+                    $('#colorpickerField2').val(hex);
                 }
             });
 
@@ -142,10 +142,9 @@ function customHead()
         });
     </script>
     <?php
-}
+};
 
-
-osc_add_hook('admin_header', 'customHead', 10);
+osc_add_hook('admin_footer', $media_js, 10);
 
 /**
  * @return string
@@ -281,7 +280,9 @@ osc_current_admin_theme_path('parts/header.php'); ?>
                                 <p><?php _e('ImageMagick library is not loaded'); ?></p>
                             </div>
                         <?php } ?>
-                        <div class="help-box"><?php _e("It's faster and consumes less resources than GD library."); ?></div>
+                        <div class="help-box">
+                            <?php _e("It's faster and consumes less resources than GD library."); ?>
+                        </div>
                     </div>
                 </div>
                 <h2 class="render-title"><?php _e('Watermark'); ?></h2>
@@ -301,8 +302,10 @@ osc_current_admin_theme_path('parts/header.php'); ?>
                             <label for="watermark_text"><?php _e('Text'); ?></label>
                             <?php if (!$freeType) { ?>
                                 <div class="flashmessage flashmessage-inline error">
-                                    <p><?php printf(__('Freetype library is required. How to <a target="_blank" href="%s">install/configure</a>'),
-                                            'http://www.php.net/manual/en/image.installation.php'); ?></p>
+                                    <p><?php printf(
+                                        __('Freetype library is required. How to <a target="_blank" href="%s">install/configure</a>'),
+                                        'http://www.php.net/manual/en/image.installation.php'
+                                    ); ?></p>
                                 </div>
                             <?php } ?>
                         </div>
@@ -317,33 +320,132 @@ osc_current_admin_theme_path('parts/header.php'); ?>
                     : 'style="display:none;"'); ?>>
                     <h2 class="render-title"><?php _e('Watermark Text Settings'); ?></h2>
                     <div class="form-row">
-                        <div class="form-label"><?php _e('Text'); ?></div>
+                        <div class="form-label"><?php _e('Watermark Text'); ?></div>
                         <div class="form-controls">
                             <input type="text" class="large" name="watermark_text"
                                    value="<?php echo osc_esc_html(osc_watermark_text()); ?>"/>
                         </div>
                     </div>
+                    <?php
+                    if (Preference::newInstance()->get('watermark_text_options')) {
+                        $watermark_options = json_decode(
+                            Preference::newInstance()->get('watermark_text_options'),
+                            true
+                        );
+                        if (isset($watermark_options['watermark_width']) && $watermark_options['watermark_width']) {
+                            $watermark_width = (int)$watermark_options['watermark_width'];
+                        } else {
+                            $watermark_width = 200;
+                        }
+                        if (isset($watermark_options['watermark_height']) && $watermark_options['watermark_height']) {
+                            $watermark_height = (int)$watermark_options['watermark_height'];
+                        } else {
+                            $watermark_height = 30;
+                        }
+                        if (isset($watermark_options['text_offset_x']) && $watermark_options['text_offset_x']) {
+                            $text_offset_x = (int)$watermark_options['text_offset_x'];
+                        } else {
+                            $text_offset_x = 0;
+                        }
+                        if (isset($watermark_options['text_offset_y']) && $watermark_options['text_offset_y']) {
+                            $text_offset_y = (int)$watermark_options['text_offset_y'];
+                        } else {
+                            $text_offset_y = $watermark_height;
+                        }
+                        if (isset($watermark_options['text_angle']) && $watermark_options['text_angle']) {
+                            $text_angle = (int)$watermark_options['text_angle'];
+                        } else {
+                            $text_angle = 0;
+                        }
+                        if (isset($watermark_options['background_color']) && $watermark_options['background_color']) {
+                            $background_color = ltrim($watermark_options['background_color'], '#');
+                        } else {
+                            $background_color = '000000';
+                        }
+
+                        ?>
                     <div class="form-row">
-                        <div class="form-label"><?php _e('Color'); ?></div>
+                        <div class="form-label"><?php _e('Watermark Width'); ?></div>
                         <div class="form-controls">
-                            <input type="text" maxlength="6" id="colorpickerField" class="small"
+                            <input type="number" class="large" name="watermark_width" step="1"
+                                   value="<?php echo $watermark_width; ?>"/>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-label"><?php _e('Watermark Height'); ?></div>
+                        <div class="form-controls">
+                            <input type="number" class="large" name="watermark_height" step="1"
+                                   value="<?php echo $watermark_height; ?>"/>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-label"><?php _e('Text offset_x'); ?></div>
+                        <div class="form-controls">
+                            <input type="number" class="large" name="text_offset_x" step="1"
+                                   value="<?php echo $text_offset_x; ?>"/>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-label"><?php _e('Text offset_y'); ?></div>
+                        <div class="form-controls">
+                            <input type="number" class="large" name="text_offset_y" step="1"
+                                   value="<?php echo $text_offset_y; ?>"/>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-label"><?php _e('Text Color'); ?></div>
+                        <div class="form-controls">
+                            <input type="text" maxlength="8" id="colorpickerField1" class="small"
                                    name="watermark_text_color"
                                    value="<?php echo osc_esc_html(osc_watermark_text_color()); ?>"/>
                         </div>
                     </div>
                     <div class="form-row">
+                        <div class="form-label"><?php _e('Background Color'); ?></div>
+                        <div class="form-controls">
+                            <input type="text" maxlength="8" id="colorpickerField2" class="small"
+                                   name="background_color"
+                                   value="<?php echo $background_color;
+                                    ?>"/>
+                            <div class="help-box">
+                                <?php _e('Background Hexadecimal color value'); ?>
+                            </div>
+                        </div>
+                    </div>
+                    <?php } ?>
+                    <?php if (osc_is_watermark_text() && osc_watermark_text_color()) { ?>
+                        <div class="form-row">
+                            <div class="form-label"><?php _e('Preview Watermark'); ?></div>
+                            <div class="form-controls">
+                                <div class="help-box">
+                                    <?php if (!file_exists(Preference::newInstance()->get('watermark_text_options'))) {
+                                        ImageProcessing::createWatermarkImageFromText(
+                                            osc_watermark_text(),
+                                            osc_watermark_text_color()
+                                        );
+                                    }
+                                    ?>
+                                    <img src="<?php
+                                    echo osc_base_url()
+                                        . str_replace(osc_base_path(), '', osc_uploads_path())
+                                        . Preference::newInstance()->get('watermark_text_image_name') ?>"/>
+                                </div>
+                            </div>
+                        </div>
+                    <?php } ?>
+                    <div class="form-row">
                         <div class="form-label"><?php _e('Position'); ?></div>
                         <div class="form-controls">
                             <select name="watermark_text_place" id="watermark_text_place">
-                                <option value="centre" <?php echo (osc_watermark_place() == 'centre')
+                                <option value="centre" <?php echo (osc_watermark_place() === 'centre')
                                     ? 'selected="true"' : ''; ?>><?php _e('Centre'); ?></option>
-                                <option value="tl" <?php echo (osc_watermark_place() == 'tl') ? 'selected="true"'
+                                <option value="tl" <?php echo (osc_watermark_place() === 'tl') ? 'selected="true"'
                                     : ''; ?>><?php _e('Top Left'); ?></option>
-                                <option value="tr" <?php echo (osc_watermark_place() == 'tr') ? 'selected="true"'
+                                <option value="tr" <?php echo (osc_watermark_place() === 'tr') ? 'selected="true"'
                                     : ''; ?>><?php _e('Top Right'); ?></option>
-                                <option value="bl" <?php echo (osc_watermark_place() == 'bl') ? 'selected="true"'
+                                <option value="bl" <?php echo (osc_watermark_place() === 'bl') ? 'selected="true"'
                                     : ''; ?>><?php _e('Bottom Left'); ?></option>
-                                <option value="br" <?php echo (osc_watermark_place() == 'br') ? 'selected="true"'
+                                <option value="br" <?php echo (osc_watermark_place() === 'br') ? 'selected="true"'
                                     : ''; ?>><?php _e('Bottom Right'); ?></option>
                             </select>
                         </div>
@@ -357,8 +459,11 @@ osc_current_admin_theme_path('parts/header.php'); ?>
                             <input type="file" name="watermark_image" id="watermark_image_file"/>
                             <?php if (osc_is_watermark_image() != '') { ?>
                                 <div class="help-box"><img width="100px"
-                                                           src="<?php echo osc_base_url() . str_replace(osc_base_path(),
-                                                                   '', osc_uploads_path()) . 'watermark.png' ?>"/></div>
+                                                           src="<?php echo osc_base_url() . str_replace(
+                                                               osc_base_path(),
+                                                               '',
+                                                               osc_uploads_path()
+                                                                ) . 'watermark.png' ?>"/></div>
                             <?php } ?>
                             <div class="help-box"><?php _e('It has to be a .PNG image'); ?></div>
                             <div class="help-box"><?php _e("Osclass doesn't check the watermark image size"); ?></div>
@@ -368,15 +473,15 @@ osc_current_admin_theme_path('parts/header.php'); ?>
                         <div class="form-label"><?php _e('Position'); ?></div>
                         <div class="form-controls">
                             <select name="watermark_image_place" id="watermark_image_place">
-                                <option value="centre" <?php echo (osc_watermark_place() == 'centre')
+                                <option value="centre" <?php echo (osc_watermark_place() === 'centre')
                                     ? 'selected="true"' : ''; ?>><?php _e('Centre'); ?></option>
-                                <option value="tl" <?php echo (osc_watermark_place() == 'tl') ? 'selected="true"'
+                                <option value="tl" <?php echo (osc_watermark_place() === 'tl') ? 'selected="true"'
                                     : ''; ?>><?php _e('Top Left'); ?></option>
-                                <option value="tr" <?php echo (osc_watermark_place() == 'tr') ? 'selected="true"'
+                                <option value="tr" <?php echo (osc_watermark_place() === 'tr') ? 'selected="true"'
                                     : ''; ?>><?php _e('Top Right'); ?></option>
-                                <option value="bl" <?php echo (osc_watermark_place() == 'bl') ? 'selected="true"'
+                                <option value="bl" <?php echo (osc_watermark_place() === 'bl') ? 'selected="true"'
                                     : ''; ?>><?php _e('Bottom Left'); ?></option>
-                                <option value="br" <?php echo (osc_watermark_place() == 'br') ? 'selected="true"'
+                                <option value="br" <?php echo (osc_watermark_place() === 'br') ? 'selected="true"'
                                     : ''; ?>><?php _e('Bottom Right'); ?></option>
                             </select>
                         </div>
