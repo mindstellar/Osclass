@@ -195,9 +195,9 @@ class User extends DAO
 
         if ($result->numRows() == 1) {
             return $this->extendData($result->row(), $locale);
-        } else {
-            return array();
         }
+
+        return array();
     }
 
     /**
@@ -247,9 +247,9 @@ class User extends DAO
 
         if ($result->numRows() == 1) {
             return $this->extendData($result->row(), $locale);
-        } else {
-            return array();
         }
+
+        return array();
     }
 
     /**
@@ -283,9 +283,9 @@ class User extends DAO
 
         if ($result->numRows() == 1) {
             return $this->extendData($result->row(), $locale);
-        } else {
-            return array();
         }
+
+        return array();
     }
 
     /**
@@ -323,9 +323,9 @@ class User extends DAO
 
         if ($result->numRows() == 1) {
             return $this->extendData($result->row(), $locale);
-        } else {
-            return array();
         }
+
+        return array();
     }
 
     /**
@@ -596,11 +596,11 @@ class User extends DAO
     /**
      * Insert last access data
      *
-     * @param int      $userId
-     * @param datetime $date
-     * @param string   $ip
+     * @param int    $userId
+     * @param string $date
+     * @param string $ip
      *
-     * @param null     $time
+     * @param null   $time
      *
      * @return boolean on success
      */

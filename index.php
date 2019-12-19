@@ -89,12 +89,12 @@ switch (Params::getParam('page')) {
         require_once(osc_lib_path() . 'osclass/cron.php');
         break;
     case ('user'):      // user pages (with security)
-        $action = Params::getParam('action');
-        if (Params::getParam('action') === 'change_email_confirm'
-            || Params::getParam('action') === 'activate_alert'
-            || Params::getParam('action') === 'contact_post'
-            || Params::getParam('action') === 'pub_profile'
-            || (Params::getParam('action') === 'unsub_alert' && !osc_is_web_user_logged_in())
+        $osclass_action = Params::getParam('action');
+        if ($osclass_action === 'change_email_confirm'
+            || $osclass_action === 'activate_alert'
+            || $osclass_action === 'contact_post'
+            || $osclass_action === 'pub_profile'
+            || ($osclass_action === 'unsub_alert' && !osc_is_web_user_logged_in())
 
         ) {
             $do = new CWebUserNonSecure();
