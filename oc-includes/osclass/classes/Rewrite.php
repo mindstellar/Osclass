@@ -134,7 +134,18 @@
         {
             return $this->routes;
         }
-
+/** 
+ * Get single Route
+ * @param        $id
+ * @return  mixed 
+ */
+	public function getRoute($id)
+        {
+            if(isset($this->routes[$id])){
+                return $this->routes[$id];
+                }
+            return '';
+        }
         public function init()
         {
             if(Params::existServerParam('REQUEST_URI')) {
