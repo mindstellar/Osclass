@@ -35,12 +35,13 @@
         {
             $user_menu = false;
             if(Params::existParam('route')) {
-                $routes = Rewrite::newInstance()->getRoutes();
+                
                 $rid = Params::getParam('route');
+                $route = Rewrite::newInstance()->getRoute($rid);
                 $file = '../';
-                if(isset($routes[$rid]) && isset($routes[$rid]['file'])) {
-                    $file = $routes[$rid]['file'];
-                    $user_menu = $routes[$rid]['user_menu'];
+                if(!empty($route) && isset($route['file'])) {
+                    $file = $route['file'];
+                    $user_menu = $route['user_menu'];
                 }
             } else {
                 // DEPRECATED: Disclosed path in URL is deprecated, use routes instead

@@ -143,7 +143,7 @@
         {
             if(isset($this->routes[$id])){
                 return $this->routes[$id];
-                }
+            }
             return '';
         }
         public function init()

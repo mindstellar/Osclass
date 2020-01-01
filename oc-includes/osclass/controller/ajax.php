@@ -254,11 +254,11 @@
                 break;
                 case 'custom': // Execute via AJAX custom file
                     if(Params::existParam('route')) {
-                        $routes = Rewrite::newInstance()->getRoutes();
                         $rid = Params::getParam('route');
+                        $route = Rewrite::newInstance()->getRoute($rid);
                         $file = '../';
-                        if(isset($routes[$rid]) && isset($routes[$rid]['file'])) {
-                            $file = $routes[$rid]['file'];
+                        if(!empty($route) && isset($route['file'])) {
+                            $file = $route['file'];
                         }
                     } else {
                         // DEPRECATED: Disclosed path in URL is deprecated, use routes instead

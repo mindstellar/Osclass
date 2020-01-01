@@ -883,10 +883,10 @@
 	 * @return string
 	 */
     function osc_route_url($id, $args = array()) {
-        $routes = Rewrite::newInstance()->getRoutes();
-        if(!isset($routes[$id])) { return ''; }
+        $route = Rewrite::newInstance()->getRoute($id);
+        if(empty($route)) { return ''; }
 	    if ( osc_rewrite_enabled() ) {
-            $uri = $routes[$id]['url'];
+            $uri = $route['url'];
             $params_url = '';
             foreach($args as $k => $v) {
                 $old_uri = $uri;
@@ -914,8 +914,8 @@
 	 * @return string
 	 */
     function osc_route_admin_url($id, $args = array()) {
-        $routes = Rewrite::newInstance()->getRoutes();
-        if(!isset($routes[$id])) { return ''; }
+        $route = Rewrite::newInstance()->getRoute($id);
+        if(empty($route)) { return ''; }
 	    $params_url = '';
         foreach($args as $k => $v) {
             $params_url .= '&'.$k.'='.$v;
@@ -932,8 +932,8 @@
 	 * @return string
 	 */
     function osc_route_ajax_url($id, $args = array()) {
-        $routes = Rewrite::newInstance()->getRoutes();
-        if(!isset($routes[$id])) { return ''; }
+        $route = Rewrite::newInstance()->getRoute($id);
+        if(empty($route)) { return ''; }
 	    $params_url = '';
         foreach($args as $k => $v) {
             $params_url .= '&'.$k.'='.$v;
@@ -950,8 +950,8 @@
 	 * @return string
 	 */
     function osc_route_admin_ajax_url($id, $args = array()) {
-        $routes = Rewrite::newInstance()->getRoutes();
-        if(!isset($routes[$id])) { return ''; }
+        $route = Rewrite::newInstance()->getRoute($id);
+        if(empty($route)) { return ''; }
 	    $params_url = '';
         foreach($args as $k => $v) {
             $params_url .= '&'.$k.'='.$v;
