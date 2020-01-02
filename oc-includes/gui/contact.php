@@ -20,7 +20,7 @@
      */
 
     // meta tag robots
-    osc_add_hook('header','bender_nofollow_construct');
+    osc_add_hook('header', 'bender_nofollow_construct');
 
     bender_add_body_class('contact');
     osc_enqueue_script('jquery-validate');
@@ -65,7 +65,7 @@
                 <div class="controls">
                     <?php osc_run_hook('contact_form'); ?>
                     <?php osc_show_recaptcha(); ?>
-                    <button type="submit" class="ui-button ui-button-middle ui-button-main"><?php _e( 'Send' , 'bender');?></button>
+                    <button type="submit" class="ui-button ui-button-middle ui-button-main"><?php _e( 'Send', 'bender');?></button>
                     <?php osc_run_hook('admin_contact_form'); ?>
                 </div>
             </div>

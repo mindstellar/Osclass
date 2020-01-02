@@ -30,17 +30,18 @@ Widgets:  header, footer
 Theme update URI: bender
 */
 
-	/**
-	 * @return array
-	 */
-	function bender_theme_info() {
-        return array(
-             'name'        => 'bender'
-            ,'version'     => '3.1.5'
-            ,'description' => 'Bender theme'
-            ,'author_name' => 'Osclass'
-            ,'author_url'  => 'https://github.com/navjottomer/osclass'
-            ,'locations'   => array()
-        );
-    }
+    /**
+     * @return array
+     */
+function bender_theme_info()
+{
+    return array(
+         'name'        => 'bender'
+        ,'version'     => '3.1.5'
+        ,'description' => 'Bender theme'
+        ,'author_name' => 'Osclass'
+        ,'author_url'  => 'https://github.com/navjottomer/osclass'
+        ,'locations'   => array()
+    );
+}
 

@@ -20,22 +20,24 @@
      */
 
     // meta tag robots
-    osc_add_hook('header','bender_nofollow_construct');
+    osc_add_hook('header', 'bender_nofollow_construct');
 
     bender_add_body_class('user user-profile');
-    osc_add_hook('before-main','sidebar');
-    function sidebar(){
-        osc_current_web_theme_path('user-sidebar.php');
-    }
-    osc_add_filter('meta_title_filter','custom_meta_title');
-	/**
-	 * @param $data
-	 *
-	 * @return string
-	 */
-	function custom_meta_title( $data ) {
-        return __('Update account', 'bender');
-    }
+    osc_add_hook('before-main', 'sidebar');
+function sidebar()
+{
+    osc_current_web_theme_path('user-sidebar.php');
+}
+    osc_add_filter('meta_title_filter', 'custom_meta_title');
+    /**
+     * @param $data
+     *
+     * @return string
+     */
+function custom_meta_title($data)
+{
+    return __('Update account', 'bender');
+}
     osc_current_web_theme_path('header.php') ;
     $osc_user = osc_user();
 ?>
@@ -117,7 +119,7 @@
             <?php osc_run_hook('user_profile_form', osc_user()); ?>
             <div class="control-group">
                 <div class="controls">
-                    <button type="submit" class="ui-button ui-button-middle ui-button-main"><?php _e( 'Update' , 'bender');?></button>
+                    <button type="submit" class="ui-button ui-button-middle ui-button-main"><?php _e( 'Update', 'bender');?></button>
                 </div>
             </div>
             <div class="control-group">
