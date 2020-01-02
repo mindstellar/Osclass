@@ -200,7 +200,7 @@ class RegionStats extends DAO
             $this->dao->where('i_num_items ' . $zero . ' 0');
             if ($country !== '%%%%') {
                 $this->dao->where(DB_TABLE_PREFIX . 't_region.fk_c_country_code = \''
-                    . $this->dao->connId->real_escape_string($country) . '\' ');
+                    . $this->dao->escape($country) . '\' ');
             }
             $this->dao->orderBy($order);
 

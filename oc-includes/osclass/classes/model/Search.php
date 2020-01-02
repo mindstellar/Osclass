@@ -180,13 +180,13 @@ class Search extends DAO
         if (is_array($conditions)) {
             foreach ($conditions as $condition) {
                 $condition = trim($condition);
-                if (($condition != '') && !in_array($condition, $this->itemConditions)) {
+                if (($condition) && !in_array($condition, $this->itemConditions)) {
                     $this->itemConditions[] = $condition;
                 }
             }
         } else {
             $conditions = trim($conditions);
-            if (($conditions != '') && !in_array($conditions, $this->itemConditions)) {
+            if (($conditions) && !in_array($conditions, $this->itemConditions)) {
                 $this->itemConditions[] = $conditions;
             }
         }
@@ -206,13 +206,13 @@ class Search extends DAO
         if (is_array($fields)) {
             foreach ($fields as $field) {
                 $field = trim($field);
-                if (($field != '') && !in_array($field, $this->fields)) {
+                if (($field) && !in_array($field, $this->fields)) {
                     $this->search_fields[] = $field;
                 }
             }
         } else {
             $fields = trim($fields);
-            if (($fields != '') && !in_array($fields, $this->fields)) {
+            if (($fields) && !in_array($fields, $this->fields)) {
                 $this->search_fields[] = $fields;
             }
         }
@@ -237,7 +237,7 @@ class Search extends DAO
      */
     public static function getAllowedColumnsForSorting()
     {
-        return array('i_price', 'dt_pub_date', 'dt_expiration');
+        return array('i_price', 'dt_pub_date', 'dt_expiration', 'relevance');
     }
 
     /**
@@ -248,11 +248,6 @@ class Search extends DAO
     public static function getAllowedTypesForSorting()
     {
         return array(0 => 'asc', 1 => 'desc');
-    }
-
-    public function reconnect()
-    {
-        //   $this->conn = getConnection();
     }
 
     /**
@@ -269,13 +264,13 @@ class Search extends DAO
         if (is_array($conditions)) {
             foreach ($conditions as $condition) {
                 $condition = trim($condition);
-                if (($condition != '') && !in_array($condition, $this->conditions)) {
+                if (($condition) && !in_array($condition, $this->conditions)) {
                     $this->conditions[] = $condition;
                 }
             }
         } else {
             $conditions = trim($conditions);
-            if (($conditions != '') && !in_array($conditions, $this->conditions)) {
+            if (($conditions) && !in_array($conditions, $this->conditions)) {
                 $this->conditions[] = $conditions;
             }
         }
@@ -286,20 +281,20 @@ class Search extends DAO
      *
      * @access public
      *
-     * @param string $locale
+     * @param array|string $locales
      *
      * @since  3.2
      */
-    public function addLocale($locale)
+    public function addLocale($locales)
     {
-        if (is_array($locale)) {
-            foreach ($locale as $l) {
-                if ($l != '') {
-                    $this->locale_code[$l] = $l;
+        if (is_array($locales)) {
+            foreach ($locales as $locale) {
+                if ($locale) {
+                    $this->locale_code[$locale] = $locale;
                 }
             }
-        } elseif ($locale != '') {
-            $this->locale_code[$locale] = $locale;
+        } elseif ($locales) {
+            $this->locale_code[$locales] = $locales;
         }
     }
 
@@ -317,13 +312,13 @@ class Search extends DAO
         if (is_array($tables)) {
             foreach ($tables as $table) {
                 $table = trim($table);
-                if (($table != '') && !in_array($table, $this->tables)) {
+                if (($table) && !in_array($table, $this->tables)) {
                     $this->tables[] = $table;
                 }
             }
         } else {
             $tables = trim($tables);
-            if (($tables != '') && !in_array($tables, $this->tables)) {
+            if (($tables) && !in_array($tables, $this->tables)) {
                 $this->tables[] = $tables;
             }
         }
@@ -356,7 +351,7 @@ class Search extends DAO
      */
     public function page($p = 0, $r_p_p = null)
     {
-        if ($r_p_p != null) {
+        if ($r_p_p !== null) {
             $this->results_per_page = $r_p_p;
         }
         $this->limit_init = $this->results_per_page * $p;
@@ -376,40 +371,40 @@ class Search extends DAO
         if (is_array($city_area)) {
             foreach ($city_area as $c) {
                 $c = trim($c);
-                if ($c != '') {
+                if ($c) {
                     if (is_numeric($c)) {
                         $this->city_areas[] =
                             sprintf(
                                 '%st_item_location.fk_i_city_area_id = %d ',
                                 DB_TABLE_PREFIX,
-                                $this->dao->escapeStr($c)
+                                $this->dao->escape($c)
                             );
                     } else {
                         $this->city_areas[] =
                             sprintf(
                                 "%st_item_location.s_city_area LIKE '%s' ",
                                 DB_TABLE_PREFIX,
-                                $this->dao->escapeStr($c)
+                                $this->dao->escape($c)
                             );
                     }
                 }
             }
         } else {
             $city_area = trim($city_area);
-            if ($city_area != '') {
+            if ($city_area) {
                 if (is_numeric($city_area)) {
                     $this->city_areas[] =
                         sprintf(
                             '%st_item_location.fk_i_city_area_id = %d ',
                             DB_TABLE_PREFIX,
-                            $this->dao->escapeStr($city_area)
+                            $this->dao->escape($city_area)
                         );
                 } else {
                     $this->city_areas[] =
                         sprintf(
                             "%st_item_location.s_city_area LIKE '%s' ",
                             DB_TABLE_PREFIX,
-                            $this->dao->escapeStr($city_area)
+                            $this->dao->escape($city_area)
                         );
                 }
             }
@@ -552,10 +547,10 @@ class Search extends DAO
      */
     public function doSearch($extended = true, $count = true)
     {
-        $sql    = $this->_makeSQL();
+        $sql    = $this->makeSQL();
         $result = $this->dao->query($sql);
         if ($count) {
-            $sql     = $this->_makeSQL(true);
+            $sql     = $this->makeSQL(true);
             $datatmp = $this->dao->query($sql);
 
             if ($datatmp == false) {
@@ -596,9 +591,9 @@ class Search extends DAO
      * @since  unknown
      *
      */
-    private function _makeSQL($count = false, $premium = false)
+    private function makeSQL($count = false, $premium = false)
     {
-        $arrayConditions = $this->_conditions();
+        $arrayConditions = $this->conditions();
         $extraFields     = $arrayConditions['extraFields'];
         $conditionsSQL   = $arrayConditions['conditionsSQL'];
 
@@ -664,7 +659,7 @@ class Search extends DAO
                     . implode(', ', $this->categories) . ')');
             }
             if ($this->withUserId) {
-                $this->_fromUser();
+                $this->addFromUser();
             }
             if ($this->withLocations || OC_ADMIN) {
                 $this->dao->join(
@@ -676,7 +671,7 @@ class Search extends DAO
                     ),
                     'LEFT'
                 );
-                $this->_addLocations();
+                $this->addLocations();
             }
             if ($this->withPicture) {
                 $this->dao->join(
@@ -697,10 +692,10 @@ class Search extends DAO
             if ($this->onlyPremium) {
                 $this->dao->where(sprintf('%st_item.b_premium = 1', DB_TABLE_PREFIX));
             }
-            $this->_priceRange();
+            $this->addPriceRange();
 
             // add joinTables
-            $this->_joinTable();
+            $this->joinTable();
 
             // PLUGINS TABLES !!
             if (!empty($this->tables)) {
@@ -713,11 +708,11 @@ class Search extends DAO
             }
             // ---------------------------------------------------------
             // groupBy
-            if ($this->groupBy != '') {
+            if ($this->groupBy) {
                 $this->dao->groupBy($this->groupBy);
             }
             // having
-            if ($this->having != '') {
+            if ($this->having) {
                 $this->dao->having($this->having);
             }
             // ---------------------------------------------------------
@@ -744,7 +739,7 @@ class Search extends DAO
      *
      * @return array with extraFields & conditions strings
      */
-    private function _conditions()
+    private function conditions()
     {
         if (count($this->city_areas) > 0) {
             $this->withLocations = true;
@@ -787,9 +782,9 @@ class Search extends DAO
         );
     }
 
-    private function _fromUser()
+    private function addFromUser()
     {
-        $this->_loadUserTable();
+        $this->loadUserTable();
         $this->dao->where(sprintf(
             '%st_user.pk_i_id = %st_item.fk_i_user_id',
             DB_TABLE_PREFIX,
@@ -806,7 +801,7 @@ class Search extends DAO
         }
     }
 
-    private function _loadUserTable()
+    private function loadUserTable()
     {
         if (!$this->userTableLoaded) {
             $this->dao->from(sprintf('%st_user', DB_TABLE_PREFIX));
@@ -814,7 +809,7 @@ class Search extends DAO
         }
     }
 
-    private function _addLocations()
+    private function addLocations()
     {
         if (count($this->city_areas) > 0) {
             $this->dao->where('( ' . implode(' || ', $this->city_areas) . ' )');
@@ -830,7 +825,7 @@ class Search extends DAO
         }
     }
 
-    private function _priceRange()
+    private function addPriceRange()
     {
         if (is_numeric($this->price_min) && $this->price_min != 0) {
             $this->dao->where(sprintf('i_price >= %0.0f', $this->price_min));
@@ -845,7 +840,7 @@ class Search extends DAO
      *
      * @since 2.4
      */
-    private function _joinTable()
+    private function joinTable()
     {
         foreach ($this->tables_join as $tJoin) {
             $this->dao->join($tJoin[0], $tJoin[1], $tJoin[2]);
@@ -881,7 +876,7 @@ class Search extends DAO
      */
     public function getPremiums($max = 2)
     {
-        $premium_sql = $this->_makeSQLPremium($max); // make premium sql
+        $premium_sql = $this->makeSQLPremium($max); // make premium sql
 
         $result = $this->dao->query($premium_sql);
         if ($result) {
@@ -905,9 +900,9 @@ class Search extends DAO
      *
      * @return string
      */
-    private function _makeSQLPremium($num = 2)
+    private function makeSQLPremium($num = 2)
     {
-        $arrayConditions = $this->_conditions();
+        $arrayConditions = $this->conditions();
 
         if ($this->withPattern) {
             // sub select for JOIN ----------------------
@@ -961,7 +956,7 @@ class Search extends DAO
                     ),
                     'LEFT'
                 );
-                $this->_addLocations();
+                $this->addLocations();
             }
             if ($this->withCategoryId && (count($this->categories) > 0)) {
                 $this->dao->where(sprintf('%st_item.fk_i_category_id', DB_TABLE_PREFIX) . ' IN ('
@@ -1001,7 +996,7 @@ class Search extends DAO
                     ),
                     'LEFT'
                 );
-                $this->_addLocations();
+                $this->addLocations();
             }
             if ($this->withCategoryId && (count($this->categories) > 0)) {
                 $this->dao->where(sprintf('%st_item.fk_i_category_id', DB_TABLE_PREFIX) . ' IN ('
@@ -1168,46 +1163,32 @@ class Search extends DAO
      */
     public function addCountry($country = array())
     {
-        if (is_array($country)) {
-            foreach ($country as $c) {
-                $c = trim($c);
-                if ($c != '') {
-                    if (strlen($c) == 2) {
-                        $this->countries[] =
-                            sprintf(
-                                "%st_item_location.fk_c_country_code = '%s' ",
-                                DB_TABLE_PREFIX,
-                                strtolower($this->dao->escapeStr($c))
-                            );
-                    } else {
-                        $this->countries[] =
-                            sprintf(
-                                "%st_item_location.s_country LIKE '%s' ",
-                                DB_TABLE_PREFIX,
-                                $this->dao->escapeStr($c)
-                            );
-                    }
-                }
-            }
-        } else {
+        $prepareConditions = function ($country) {
             $country = trim($country);
-            if ($country != '') {
-                if (strlen($country) == 2) {
+            if ($country) {
+                if (strlen($country) === 2) {
                     $this->countries[] =
                         sprintf(
                             "%st_item_location.fk_c_country_code = '%s' ",
                             DB_TABLE_PREFIX,
-                            strtolower($this->dao->escapeStr($country))
+                            strtolower($this->dao->escape($country))
                         );
                 } else {
                     $this->countries[] =
                         sprintf(
                             "%st_item_location.s_country LIKE '%s' ",
                             DB_TABLE_PREFIX,
-                            $this->dao->escapeStr($country)
+                            $this->dao->escape($country)
                         );
                 }
             }
+        };
+        if (is_array($country)) {
+            foreach ($country as $c) {
+                $prepareConditions($c);
+            }
+        } else {
+            $prepareConditions($country);
         }
     }
 
@@ -1222,46 +1203,32 @@ class Search extends DAO
      */
     public function addRegion($region = array())
     {
-        if (is_array($region)) {
-            foreach ($region as $r) {
-                $r = trim($r);
-                if ($r != '') {
-                    if (is_numeric($r)) {
-                        $this->regions[] =
-                            sprintf(
-                                '%st_item_location.fk_i_region_id = %d ',
-                                DB_TABLE_PREFIX,
-                                $this->dao->escapeStr($r)
-                            );
-                    } else {
-                        $this->regions[] =
-                            sprintf(
-                                "%st_item_location.s_region LIKE '%s' ",
-                                DB_TABLE_PREFIX,
-                                $this->dao->escapeStr($r)
-                            );
-                    }
-                }
-            }
-        } else {
+        $prepareConditions = function ($region) {
             $region = trim($region);
-            if ($region != '') {
+            if ($region) {
                 if (is_numeric($region)) {
                     $this->regions[] =
                         sprintf(
                             '%st_item_location.fk_i_region_id = %d ',
                             DB_TABLE_PREFIX,
-                            $this->dao->escapeStr($region)
+                            $this->dao->escape($region)
                         );
                 } else {
                     $this->regions[] =
                         sprintf(
                             "%st_item_location.s_region LIKE '%s' ",
                             DB_TABLE_PREFIX,
-                            $this->dao->escapeStr($region)
+                            $this->dao->escape($region)
                         );
                 }
             }
+        };
+        if (is_array($region)) {
+            foreach ($region as $r) {
+                $prepareConditions($r);
+            }
+        } else {
+            $prepareConditions($region);
         }
     }
 
@@ -1270,52 +1237,38 @@ class Search extends DAO
      *
      * @access public
      *
-     * @param mixed $city
+     * @param array|string|int $city
      *
      * @since  unknown
      */
     public function addCity($city = array())
     {
-        if (is_array($city)) {
-            foreach ($city as $c) {
-                $c = trim($c);
-                if ($c != '') {
-                    if (is_numeric($c)) {
-                        $this->cities[] =
-                            sprintf(
-                                '%st_item_location.fk_i_city_id = %d ',
-                                DB_TABLE_PREFIX,
-                                $this->dao->escapeStr($c)
-                            );
-                    } else {
-                        $this->cities[] =
-                            sprintf(
-                                "%st_item_location.s_city LIKE '%s' ",
-                                DB_TABLE_PREFIX,
-                                $this->dao->escapeStr($c)
-                            );
-                    }
-                }
-            }
-        } else {
+        $prepareConditions = function ($city) {
             $city = trim($city);
-            if ($city != '') {
+            if ($city) {
                 if (is_numeric($city)) {
                     $this->cities[] =
                         sprintf(
                             '%st_item_location.fk_i_city_id = %d ',
                             DB_TABLE_PREFIX,
-                            $this->dao->escapeStr($city)
+                            $this->dao->escape($city)
                         );
                 } else {
                     $this->cities[] =
                         sprintf(
                             "%st_item_location.s_city LIKE '%s' ",
                             DB_TABLE_PREFIX,
-                            $this->dao->escapeStr($city)
+                            $this->dao->escape($city)
                         );
                 }
             }
+        };
+        if (is_array($city)) {
+            foreach ($city as $c) {
+                $prepareConditions($c);
+            }
+        } else {
+            $prepareConditions($city);
         }
     }
 
@@ -1324,7 +1277,7 @@ class Search extends DAO
      *
      * @access public
      *
-     * @param mixed $id
+     * @param array|string|int $id
      *
      * @since  unknown
      */
@@ -1340,7 +1293,7 @@ class Search extends DAO
                         $ids[] = sprintf(
                             '%st_item.fk_i_user_id = %d ',
                             DB_TABLE_PREFIX,
-                            $this->dao->escapeStr($user['pk_i_id'])
+                            $this->dao->escape($user['pk_i_id'])
                         );
                     }
                 } else {
@@ -1353,23 +1306,13 @@ class Search extends DAO
             if (!is_numeric($id)) {
                 $user = User::newInstance()->findByUsername($id);
                 if (isset($user['pk_i_id'])) {
-                    $this->user_ids = $this->dao->escapeStr($user['pk_i_id']);
+                    $this->user_ids = $this->dao->escape($user['pk_i_id']);
                 }
             } else {
-                $this->user_ids = $this->dao->escapeStr($id);
+                $this->user_ids = $this->dao->escape($id);
             }
         }
     }
-
-    /**
-     * Return premium ads related to the search
-     *
-     * @access public
-     *
-     * @param int $max
-     *
-     * @since  unknown
-     */
 
     /**
      * Returns number of ads from each country
@@ -1449,17 +1392,28 @@ class Search extends DAO
         $aOrder = explode(' ', $order);
         $nOrder = count($aOrder);
 
-        if ($nOrder == 2) {
+        if ($nOrder === 2) {
             $this->dao->orderBy($aOrder[0], $aOrder[1]);
-        } elseif ($nOrder == 1) {
+        } elseif ($nOrder === 1) {
             $this->dao->orderBy($aOrder[0], 'DESC');
         } else {
             $this->dao->orderBy('item', 'DESC');
         }
 
-        $this->dao->select('fk_i_city_area_id as city_area_id, s_city_area as city_area_name, fk_i_city_id , s_city as city_name, fk_i_region_id as region_id, s_region as region_name, fk_c_country_code as pk_c_code, s_country as country_name, count(*) as items');
-        $this->dao->from(DB_TABLE_PREFIX . 't_item, ' . DB_TABLE_PREFIX . 't_item_location, '
-            . DB_TABLE_PREFIX . 't_category, ' . DB_TABLE_PREFIX . 't_country');
+        $this->dao->select('fk_i_city_area_id as city_area_id');
+        $this->dao->select('s_city_area as city_area_name');
+        $this->dao->select('fk_i_city_id');
+        $this->dao->select('s_city as city_name');
+        $this->dao->select('fk_i_region_id as region_id');
+        $this->dao->select('s_region as region_name');
+        $this->dao->select('fk_c_country_code as pk_c_code');
+        $this->dao->select('s_country as country_name');
+        $this->dao->select('count(*) as items');
+
+        $this->dao->from(DB_TABLE_PREFIX . 't_item');
+        $this->dao->from(DB_TABLE_PREFIX . 't_item_location');
+        $this->dao->from(DB_TABLE_PREFIX . 't_category');
+        $this->dao->from(DB_TABLE_PREFIX . 't_country');
         $this->dao->where(DB_TABLE_PREFIX . 't_item.pk_i_id = ' . DB_TABLE_PREFIX
             . 't_item_location.fk_i_item_id');
         $this->dao->where(DB_TABLE_PREFIX . 't_item.b_enabled = 1');
@@ -1501,7 +1455,7 @@ class Search extends DAO
     public function toJson($convert = false)
     {
         if ($convert) {
-            $aData = $this->_getConditions();
+            $aData = $this->getConditions();
         } else {
             $aData['price_min']   = $this->price_min / 1000000;
             $aData['price_max']   = $this->price_max / 1000000;
@@ -1546,7 +1500,7 @@ class Search extends DAO
      *
      * @return array
      */
-    private function _getConditions()
+    private function getConditions()
     {
         $aData = array();
 
@@ -1606,13 +1560,6 @@ class Search extends DAO
             )
             ) {
                 $aData['price_max'] = ((double)$matches[2] / 1000000);
-            } elseif (preg_match(
-                '/' . DB_TABLE_PREFIX . 't_category.b_enabled/',
-                $condition,
-                $matches
-            )
-            ) {
-                // t_category.b_enabled is not longer needed
             } elseif (preg_match_all(
                 '/(' . DB_TABLE_PREFIX
                 . 't_item_location.s_city_area\s*LIKE\s*\'%([\s\p{L}\p{N}]*)%\'\s*)/u',
@@ -1696,19 +1643,6 @@ class Search extends DAO
             ) { // OJO
                 $aData['sPattern']    = $matches[1];
                 $aData['withPattern'] = true;
-            } elseif (preg_match("/$item_id\s*=\s*$item_description_id/", $condition, $matches_1)
-                || preg_match("/$item_description_id\s*=\s*$item_id/", $condition, $matches_2)
-            ) {
-            } elseif (preg_match("/$category_id\s*=\s*$item_category_id/", $condition, $matches_1)
-                || preg_match("/$item_id\s*=\s*$item_category_id/", $condition, $matches_2)
-            ) {
-            } elseif (preg_match("/$item_location_id\s*=\s*$item_id/", $condition, $matches_1)
-                || preg_match("/$item_id\s*=\s*$item_location_id/", $condition, $matches_2)
-            ) {
-            } elseif (preg_match("/$item_id\s*=\s*$item_resource_id/", $condition, $matches_1)
-                || preg_match("/$item_resource_id\s*=\s*$item_id/", $condition, $matches_2)
-            ) {
-                // nothing to do, catch table
             } elseif (preg_match_all(
                 '/(' . DB_TABLE_PREFIX . 't_item\.fk_i_category_id = (\d*))/',
                 $condition,
@@ -1723,18 +1657,7 @@ class Search extends DAO
 
         // get tables
         foreach ($this->tables as $table) {
-            if (preg_match('/(' . DB_TABLE_PREFIX . 't_item$)/', $table, $matches)) {
-                // t_item is allways included
-            } elseif (preg_match(
-                '/(' . DB_TABLE_PREFIX . 't_item_description( as d)?)/',
-                $table,
-                $matches
-            )
-            ) {
-                // t_item_description is allways included
-            } elseif (preg_match('/' . DB_TABLE_PREFIX . 't_category/', $table, $matches)) {
-                // t_category is allways included
-            } elseif (preg_match(
+            if (preg_match(
                 '/(' . DB_TABLE_PREFIX . 't_category_description( as cd)?)/',
                 $table,
                 $matches
@@ -1808,7 +1731,7 @@ class Search extends DAO
     public function addPattern($pattern)
     {
         $this->withPattern = true;
-        $this->sPattern    = $this->dao->escapeStr($pattern);
+        $this->sPattern    = $this->dao->escape($pattern);
     }
 
     /**

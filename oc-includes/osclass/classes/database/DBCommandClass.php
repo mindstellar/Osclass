@@ -33,7 +33,7 @@ class DBCommandClass
      * @since  2.3
      * @var mysqli
      */
-    public $connId;
+    private $connId;
     /**
      * Database result object
      *
@@ -150,9 +150,9 @@ class DBCommandClass
      */
     private $a_from;
 
+
     /**
-     * Initializate variables
-     *
+     * DBCommandClass constructor.
      * @param mysqli $connId
      */
     public function __construct(&$connId)
@@ -295,7 +295,7 @@ class DBCommandClass
      * @return DBCommandClass
      * @since  2.3
      */
-    public function _where($key, $value = null, $type = 'AND ')
+    private function _where($key, $value = null, $type = 'AND ')
     {
         if (!is_array($key)) {
             $key = array($key => $value);
@@ -328,7 +328,7 @@ class DBCommandClass
      * @return bool
      * @since  2.3
      */
-    public function _hasOperator($str)
+    private function _hasOperator($str)
     {
         $str = trim($str);
 
@@ -340,11 +340,11 @@ class DBCommandClass
     }
 
     /**
-     * Add the apostrophe if it's an string; 0 or 1 if it's a number; NULL
+     * Add the apostrophe if it's an string; 0 or 1 if it's a bool ;  NULL
      *
      * @access private
      *
-     * @param string $str
+     * @param string|bool|int $str
      *
      * @return string
      * @since  2.3
@@ -373,7 +373,7 @@ class DBCommandClass
      * @return string
      * @since  2.3
      */
-    public function escapeStr($str, $like = false)
+    private function escapeStr($str, $like = false)
     {
         if (is_object($this->connId)) {
             $str = $this->connId->real_escape_string($str);
@@ -411,13 +411,13 @@ class DBCommandClass
      *
      * @param mixed  $key
      * @param mixed  $values
-     * @param bool   $not
+     * @param string   $not
      * @param string $type
      *
      * @return DBCommandClass
      * @since  2.3
      */
-    public function _whereIn($key = null, $values = null, $not = false, $type = 'AND ')
+    private function _whereIn($key = null, $values = null, $not = false, $type = 'AND ')
     {
         if (!is_array($values)) {
             $values = array($values);
@@ -508,7 +508,7 @@ class DBCommandClass
      *
      * @access private
      *
-     * @param string $field
+     * @param string|array $field
      * @param string $match
      * @param string $type Types: AND, OR
      * @param string $side Options: before, after, both
@@ -517,7 +517,7 @@ class DBCommandClass
      * @return DBCommandClass
      * @since  2.3
      */
-    public function _like($field, $match = '', $type = 'AND ', $side = 'both', $not = '')
+    private function _like($field, $match = '', $type = 'AND ', $side = 'both', $not = '')
     {
         $likeStatement = '';
 
@@ -526,7 +526,7 @@ class DBCommandClass
         }
 
         foreach ($field as $k => $v) {
-            $prefix = (count($this->aLike) == 0) ? '' : $type;
+            $prefix = (count($this->aLike) === 0) ? '' : $type;
             $v      = $this->escapeStr($v, true);
 
             switch ($side) {
@@ -644,7 +644,7 @@ class DBCommandClass
      * @param string $value
      * @param string $type $type
      */
-    public function _having($key, $value = '', $type = 'AND ')
+    private function _having($key, $value = '', $type = 'AND ')
     {
         if (!is_array($key)) {
             $key = array($key => $value);
@@ -691,7 +691,7 @@ class DBCommandClass
     {
         if (strtolower($direction) === 'random') {
             $direction = ' RAND()';
-        } elseif (trim($direction) != '') {
+        } elseif (trim($direction)) {
             $direction = in_array(strtoupper(trim($direction)), array('ASC', 'DESC')) ? ' ' . $direction : ' ASC';
         }
 
@@ -737,11 +737,11 @@ class DBCommandClass
             $this->set($set);
         }
 
-        if (count($this->aSet) == 0) {
+        if (count($this->aSet) === 0) {
             return false;
         }
 
-        if ($table == '') {
+        if (!$table) {
             if (!isset($this->aFrom[0])) {
                 return false;
             }
@@ -796,7 +796,7 @@ class DBCommandClass
      * @return string
      * @since  2.3
      */
-    public function _insert($table, $keys, $values)
+    private function _insert($table, $keys, $values)
     {
         return 'INSERT INTO ' . $table . ' (' . implode(', ', $keys) . ') VALUES (' . implode(', ', $values) . ')';
     }
@@ -807,7 +807,7 @@ class DBCommandClass
      * @access private
      * @since  2.3
      */
-    public function _resetWrite()
+    private function _resetWrite()
     {
         $aReset = array(
             'aSet'     => array(),
@@ -831,7 +831,7 @@ class DBCommandClass
      *
      * @since  2.3
      */
-    public function _resetRun($aReset)
+    private function _resetRun($aReset)
     {
         foreach ($aReset as $item => $defaultValue) {
             $this->$item = $defaultValue;
@@ -861,7 +861,7 @@ class DBCommandClass
         $this->queries[] = $sql;
         $timeStart       = microtime(true);
 
-        $this->resultId = $this->_execute($sql);
+        $this->resultId = $this->execute($sql);
 
         $this->errorReport();
         if (false === $this->resultId) {
@@ -924,7 +924,7 @@ class DBCommandClass
         }
 
         $sql  = 'EXPLAIN ' . $sql;
-        $rsID = $this->_execute($sql);
+        $rsID = $this->execute($sql);
 
         if (false === $rsID) {
             return false;
@@ -954,7 +954,7 @@ class DBCommandClass
      * @return mixed
      * @since  2.3
      */
-    public function _execute($sql)
+    private function execute($sql)
     {
         return $this->connId->query($sql);
     }
@@ -965,7 +965,7 @@ class DBCommandClass
      * @access private
      * @since  2.3
      */
-    public function errorReport()
+    private function errorReport()
     {
         $this->errorLevel = $this->connId->errno;
         $this->errorDesc  = $this->connId->error;
@@ -981,7 +981,7 @@ class DBCommandClass
      * @return bool
      * @since  2.3
      */
-    public function isWriteType($sql)
+    private function isWriteType($sql)
     {
         if (!preg_match(
             '/^\s*"?(SET|INSERT|UPDATE|DELETE|REPLACE|CREATE|DROP|TRUNCATE|LOAD DATA|COPY|ALTER|GRANT|REVOKE|LOCK|UNLOCK|RENAME)\s+/i',
@@ -1041,7 +1041,7 @@ class DBCommandClass
      * @return string
      * @since  2.3
      */
-    public function _replace($table, $keys, $values)
+    private function _replace($table, $keys, $values)
     {
         return 'REPLACE INTO ' . $table . ' (' . implode(', ', $keys) . ') VALUES (' . implode(', ', $values) . ')';
     }
@@ -1120,7 +1120,7 @@ class DBCommandClass
      * @return string
      * @since  2.3
      */
-    public function _update($table, $values, $where)
+    private function _update($table, $values, $where)
     {
         foreach ($values as $k => $v) {
             $valstr[] = $k . ' = ' . $v;
@@ -1153,7 +1153,7 @@ class DBCommandClass
      * @param mixed $table
      * @param mixed $where
      *
-     * @return mixed
+     * @return bool|int
      * @since  2.3
      */
     public function delete($table = '', $where = '')
@@ -1198,7 +1198,7 @@ class DBCommandClass
      * @return string
      * @since  2.3
      */
-    public function _delete($table, $where, $like)
+    private function _delete($table, $where, $like)
     {
         $conditions = '';
 
@@ -1486,9 +1486,9 @@ class DBCommandClass
      *
      * ______endpseudocode______
      *
-     * @param mixed array or string with the SQL queries.
+     * @param array|string array or string with the SQL queries.
      *
-     * @return array true on success, false on fail
+     * @return bool|array true on success, false on fail
      */
     public function updateDB($queries = '')
     {
@@ -1528,10 +1528,8 @@ class DBCommandClass
                     $result      = $this->query('SHOW INDEX FROM ' . $table);
                     $tbl_indexes = $result->result();
 
-
                     // compare table index and struct.sql index for the same table, and only add the new ones
                     $this->createNewIndex($tbl_indexes, $indexes, $table, $struct_queries);
-
 
                     // show create table TABLE_NAME constrains
                     $result         = $this->query('SHOW CREATE TABLE ' . $table);
@@ -1540,10 +1538,6 @@ class DBCommandClass
                     $this->createForeignKey($tbl_constraint, $table, $struct_queries, $constrains);
                     // No need to create the table, so we delete it SQL
                     unset($struct_queries[strtolower($table)]);
-//                        error_log(' --- struct_queries ---');
-                    //foreach($struct_queries as $q) {
-//                            error_log(' --- ' . $q );
-                    //}
                 }
             }
         }
@@ -1711,7 +1705,8 @@ class DBCommandClass
     private function createAlterTable($tbl_fields, $table, &$normal_fields, &$struct_queries)
     {
         foreach ($tbl_fields as $tbl_field) {
-            //Every field should we on the definition, so else SHOULD never happen, unless a very aggressive plugin modify our tables
+            //Every field should we on the definition, so else SHOULD never happen,
+            // unless a very aggressive plugin modify our tables
             if (array_key_exists(strtolower($tbl_field['Field']), $normal_fields)) {
                 // Take the of the field
                 if (preg_match(

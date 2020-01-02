@@ -33,9 +33,10 @@ class DBConnectionClass
      * @var DBConnectionClass
      */
     private static $instance;
+
     /** A list of incompatible SQL modes.
      *
-     * @since  @TODO <-----
+     * @since  2.3
      * @access protected
      * @var array
      */
@@ -128,7 +129,7 @@ class DBConnectionClass
     private $connErrorDesc = 0;
 
     /**
-     * Initializate database connection
+     * Initialize database connection
      *
      * @param string $server   Host name where it's located the mysql server
      * @param string $user     MySQL user name
@@ -154,7 +155,7 @@ class DBConnectionClass
      */
     public function connectToOsclassDb()
     {
-        $conn = $this->_connectToDb($this->dbHost, $this->dbUser, $this->dbPassword, $this->db);
+        $conn = $this->connectToDb($this->dbHost, $this->dbUser, $this->dbPassword, $this->db);
 
         if ($conn == false) {
             $this->errorConnection();
@@ -171,10 +172,10 @@ class DBConnectionClass
             osc_die($title, $message);
         }
 
-        $this->_setCharset('utf8', $this->db);
+        $this->setCharset('utf8', $this->db);
 
 
-        if ($this->dbName == '') {
+        if (!$this->dbName) {
             return true;
         }
 
@@ -207,7 +208,7 @@ class DBConnectionClass
      *
      * @return boolean It returns true if the connection
      */
-    public function _connectToDb($host, $user, $password, &$connId)
+    private function connectToDb($host, $user, $password, &$connId)
     {
         if (OSC_DEBUG) {
             $connId = new mysqli($host, $user, $password);
@@ -218,18 +219,17 @@ class DBConnectionClass
         if ($connId->connect_errno) {
             return false;
         }
-        $this->set_sql_mode(array(), $connId);
+        $this->setSQLMode($connId, array());
 
         return true;
     }
 
     /**
-     *
-     *
+     * Set sql_mode
      * @param array $modes
      * @param       $connId
      */
-    public function set_sql_mode($modes = array(), &$connId)
+    public function setSQLMode(&$connId, $modes = array())
     {
         if (empty($modes)) {
             $res = mysqli_query($connId, 'SELECT @@SESSION.sql_mode');
@@ -270,7 +270,7 @@ class DBConnectionClass
      * @access private
      * @since  2.3
      */
-    public function errorConnection()
+    private function errorConnection()
     {
         if (OSC_DEBUG) {
             $this->connErrorLevel = $this->db->connect_errno;
@@ -288,9 +288,9 @@ class DBConnectionClass
      * @return boolean
      * @since  2.3
      */
-    public function releaseOsclassDb()
+    private function releaseOsclassDb()
     {
-        $release = $this->_releaseDb($this->db);
+        $release = $this->releaseDb($this->db);
 
         if (!$release) {
             $this->errorReport();
@@ -309,7 +309,7 @@ class DBConnectionClass
      * @since  2.3
      * @access private
      */
-    public function _releaseDb(&$connId)
+    private function releaseDb(&$connId)
     {
         if (!$connId) {
             return true;
@@ -344,7 +344,7 @@ class DBConnectionClass
      * @since  2.3
      * @access private
      */
-    public function _setCharset($charset, &$connId)
+    private function setCharset($charset, &$connId)
     {
         if (OSC_DEBUG) {
             $connId->set_charset($charset);
@@ -360,9 +360,9 @@ class DBConnectionClass
      * @return boolean It returns true if the database has been selected sucessfully or false if not
      * @since  2.3
      */
-    public function selectOsclassDb()
+    private function selectOsclassDb()
     {
-        return $this->_selectDb($this->dbName, $this->db);
+        return $this->selectDb($this->dbName, $this->db);
     }
 
     /**
@@ -376,7 +376,7 @@ class DBConnectionClass
      * @since  2.3
      * @access private
      */
-    public function _selectDb($dbName, &$connId)
+    private function selectDb($dbName, &$connId)
     {
         if ($connId->connect_errno) {
             return false;
@@ -437,7 +437,7 @@ class DBConnectionClass
      */
     public function releaseMetadataDb()
     {
-        return $this->_releaseDb($this->metadataDb);
+        return $this->releaseDb($this->metadataDb);
     }
 
     /**
@@ -533,7 +533,7 @@ class DBConnectionClass
      * @access private
      * @since  2.3
      */
-    public function reconnectOsclassDb()
+    private function reconnectOsclassDb()
     {
         $this->releaseOsclassDb();
         $this->connectToOsclassDb();
@@ -545,7 +545,7 @@ class DBConnectionClass
      * @access private
      * @since  2.3
      */
-    public function reconnectMetadataDb()
+    private function reconnectMetadataDb()
     {
         $this->releaseMetadataDb();
         $this->connectToMetadataDb();
@@ -560,7 +560,7 @@ class DBConnectionClass
      */
     public function connectToMetadataDb()
     {
-        $conn = $this->_connectToDb(DB_HOST, DB_USER, DB_PASSWORD, $this->metadataDb);
+        $conn = $this->connectToDb(DB_HOST, DB_USER, DB_PASSWORD, $this->metadataDb);
 
         if ($conn == false) {
             $this->releaseMetadataDb();
@@ -568,9 +568,9 @@ class DBConnectionClass
             return false;
         }
 
-        $this->_setCharset('utf8', $this->metadataDb);
+        $this->setCharset('utf8', $this->metadataDb);
 
-        if (DB_NAME == '') {
+        if (!DB_NAME) {
             return true;
         }
 
@@ -591,9 +591,9 @@ class DBConnectionClass
      * @return boolean It returns true if the database has been selected sucessfully or false if not
      * @since  2.3
      */
-    public function selectMetadataDb()
+    private function selectMetadataDb()
     {
-        return $this->_selectDb(DB_NAME, $this->metadataDb);
+        return $this->selectDb(DB_NAME, $this->metadataDb);
     }
 
     /**
@@ -604,7 +604,7 @@ class DBConnectionClass
      */
     public function getOsclassDb()
     {
-        return $this->_getDb($this->db);
+        return $this->getDb($this->db);
     }
 
     /**
@@ -612,12 +612,12 @@ class DBConnectionClass
      *
      * @param mysqli $connId Database connector link
      *
-     * @return mixed mysqli link connector if it's correct, or false if the dabase connection
+     * @return \mysqli|bool mysqli link connector if it's correct, or false if the dabase connection
      * hasn't been done.
      */
-    public function _getDb(&$connId)
+    private function getDb(&$connId)
     {
-        if ($connId != false) {
+        if ($connId) {
             return $connId;
         }
 
@@ -632,7 +632,7 @@ class DBConnectionClass
      */
     public function getMetadataDb()
     {
-        return $this->_getDb($this->metadataDb);
+        return $this->getDb($this->metadataDb);
     }
 }
 

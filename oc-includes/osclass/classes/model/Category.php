@@ -188,8 +188,8 @@ class Category extends DAO
         $this->dao->join(
             DB_TABLE_PREFIX . 't_category_description as b',
             sprintf(
-                '(a.pk_i_id = b.fk_i_category_id AND b.fk_c_locale_code = "%s")',
-                $this->dao->connId->real_escape_string($this->language)
+                '(a.pk_i_id = b.fk_i_category_id AND b.fk_c_locale_code = %s)',
+                $this->dao->escape($this->language)
             ),
             'INNER'
         );
@@ -202,13 +202,11 @@ class Category extends DAO
 
         if ($rs === false) {
             $aux = array();
-        }
-
-        if ($rs->numRows() == 0) {
+        } elseif ($rs->numRows() === 0) {
             $aux = array();
+        } else {
+            $aux = $rs->result();
         }
-
-        $aux = $rs->result();
 
         // (missing translations #mariadb)
         // get all category IDs
@@ -372,9 +370,7 @@ class Category extends DAO
         }
 
         if (isset($this->relation[$category])) {
-            $tree = $this->sideTree($this->relation[$category], $this->categories, $this->relation);
-
-            return $tree;
+            return $this->sideTree($this->relation[$category], $this->categories, $this->relation);
         }
 
         return array();
@@ -615,7 +611,7 @@ class Category extends DAO
         //UPDATE for category
         $res = $this->dao->update($this->getTableName(), $fields, array('pk_i_id' => $pk));
         if ($res >= 0) {
-            // update dt_expiration (tablel t_item) using category.i_expiration_days
+            // update dt_expiration (table t_item) using category.i_expiration_days
             if ($fields['i_expiration_days'] > 0) {
                 $update_dt_expiration = sprintf('update %st_item as a
                         left join %st_category  as b on b.pk_i_id = a.fk_i_category_id
@@ -972,10 +968,11 @@ class Category extends DAO
         $this->dao->from(DB_TABLE_PREFIX . 't_item');
         $this->dao->where(sprintf('fk_i_category_id = %d', $pk_i_id));
         $result = $this->dao->get();
-        if ($result == false) {
+        if ($result === false) {
             $items = array();
+        } else {
+            $items = $result->result();
         }
-        $items = $result->result();
         foreach ($items as $item) {
             $itemManager->updateExpirationDate($item['pk_i_id'], $expiration);
         }
