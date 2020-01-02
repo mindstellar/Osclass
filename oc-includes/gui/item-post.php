@@ -20,26 +20,26 @@
      */
 
     // meta tag robots
-    osc_add_hook('header','bender_nofollow_construct');
+    osc_add_hook('header', 'bender_nofollow_construct');
 
     osc_enqueue_script('jquery-validate');
     bender_add_body_class('item item-post');
     $action = 'item_add_post';
     $edit = false;
-    if( Params::getParam('action') === 'item_edit') {
-        $action = 'item_edit_post';
-        $edit = true;
-    }
+if ( Params::getParam('action') === 'item_edit') {
+    $action = 'item_edit_post';
+    $edit = true;
+}
 
-    ?>
+?>
 <?php osc_current_web_theme_path('header.php') ; ?>
         <?php
-    if ( bender_default_location_show_as() === 'dropdown') {
-        ItemForm::location_javascript();
-    } else {
-        ItemForm::location_javascript_new();
-    }
-    ?>
+        if ( bender_default_location_show_as() === 'dropdown') {
+            ItemForm::location_javascript();
+        } else {
+            ItemForm::location_javascript_new();
+        }
+        ?>
     <div class="form-container form-horizontal">
         <div class="resp-wrapper">
             <div class="header">
@@ -50,7 +50,7 @@
                     <fieldset>
                     <input type="hidden" name="action" value="<?php echo $action; ?>" />
                         <input type="hidden" name="page" value="item" />
-                    <?php if($edit){ ?>
+                    <?php if ($edit) { ?>
                         <input type="hidden" name="id" value="<?php echo osc_item_id();?>" />
                         <input type="hidden" name="secret" value="<?php echo osc_item_secret();?>" />
                     <?php } ?>
@@ -59,7 +59,7 @@
                             <label class="control-label" for="select_1"><?php _e('Category', 'bender'); ?></label>
                             <div class="controls">
                                 <?php try {
-	                                ItemForm::category_select( null , null , __( 'Select a category' , 'bender' ) );
+                                    ItemForm::category_select( null, null, __( 'Select a category', 'bender' ) );
                                 } catch ( Exception $e ) {
                                 } ?>
                             </div>
@@ -67,16 +67,16 @@
                         <div class="control-group">
                             <label class="control-label" for="title[<?php echo osc_current_user_locale(); ?>]"><?php _e('Title', 'bender'); ?></label>
                             <div class="controls">
-                                <?php ItemForm::title_input('title',osc_current_user_locale(), osc_esc_html( bender_item_title() )); ?>
+                                <?php ItemForm::title_input('title', osc_current_user_locale(), osc_esc_html( bender_item_title() )); ?>
                             </div>
                         </div>
                         <div class="control-group">
                             <label class="control-label" for="description[<?php echo osc_current_user_locale(); ?>]"><?php _e('Description', 'bender'); ?></label>
                             <div class="controls">
-                                <?php ItemForm::description_textarea('description',osc_current_user_locale(), osc_esc_html( bender_item_description() )); ?>
+                                <?php ItemForm::description_textarea('description', osc_current_user_locale(), osc_esc_html( bender_item_description() )); ?>
                             </div>
                         </div>
-                        <?php if( osc_price_enabled_at_items() ) { ?>
+                        <?php if ( osc_price_enabled_at_items() ) { ?>
                         <div class="control-group control-group-price">
                             <label class="control-label" for="price"><?php _e('Price', 'bender'); ?></label>
                             <div class="controls">
@@ -85,15 +85,15 @@
                             </div>
                         </div>
                         <?php } ?>
-                        <?php if( osc_images_enabled_at_items() ) {
-	                        try {
-		                        ItemForm::ajax_photos();
-	                        } catch ( Exception $e ) {
-	                        }
+                        <?php if ( osc_images_enabled_at_items() ) {
+                            try {
+                                ItemForm::ajax_photos();
+                            } catch ( Exception $e ) {
+                            }
                         } ?>
                         <div class="box location">
                             <h2><?php _e('Listing Location', 'bender'); ?></h2>
-                            <?php if(count(osc_get_countries()) > 1) { ?>
+                            <?php if (count(osc_get_countries()) > 1) { ?>
                             <div class="control-group">
                                 <label class="control-label" for="country"><?php _e('Country', 'bender'); ?></label>
                                 <div class="controls">
@@ -105,13 +105,13 @@
                                 <div class="controls">
                                     <?php
                                     if ( bender_default_location_show_as() === 'dropdown') {
-                                        if($edit) {
+                                        if ($edit) {
                                             ItemForm::region_select(osc_get_regions(osc_item_country_code()), osc_item());
                                         } else {
                                             ItemForm::region_select(osc_get_regions(osc_user_field('fk_c_country_code')), osc_user());
                                         }
                                     } else {
-                                        if($edit) {
+                                        if ($edit) {
                                             ItemForm::region_text(osc_item());
                                         } else {
                                             ItemForm::region_text(osc_user());
@@ -120,12 +120,12 @@
                                     ?>
                                 </div>
                             </div>
-                            <?php
+                                <?php
                             } else {
                                 $aRegions = array();
                                 $_countryCode = '';
                                 $aCountries = osc_get_countries();
-                                if(count($aCountries)>0) {
+                                if (count($aCountries)>0) {
                                     $_countryCode = $aCountries[0]['pk_c_code'];
                                     $aRegions = osc_get_regions($_countryCode);
                                 }
@@ -136,13 +136,13 @@
                                 <div class="controls">
                                   <?php
                                     if ( bender_default_location_show_as() === 'dropdown') {
-                                        if($edit) {
+                                        if ($edit) {
                                             ItemForm::region_select($aRegions, osc_item());
                                         } else {
                                             ItemForm::region_select($aRegions, osc_user());
                                         }
                                     } else {
-                                        if($edit) {
+                                        if ($edit) {
                                             ItemForm::region_text(osc_item());
                                         } else {
                                             ItemForm::region_text(osc_user());
@@ -158,7 +158,7 @@
                                 <div class="controls">
                                     <?php
                                     if ( bender_default_location_show_as() === 'dropdown') {
-                                        if($edit) {
+                                        if ($edit) {
                                             ItemForm::city_select(null, osc_item());
                                         } else { // add new item
                                             ItemForm::city_select(osc_get_cities(osc_user_region_id()), osc_user());
@@ -183,7 +183,7 @@
                             </div>
                         </div>
                         <!-- seller info -->
-                        <?php if(!osc_is_web_user_logged_in() ) { ?>
+                        <?php if (!osc_is_web_user_logged_in() ) { ?>
                         <div class="box seller_info">
                             <h2><?php _e("Seller's information", 'bender'); ?></h2>
                             <div class="control-group">
@@ -204,22 +204,26 @@
                                 </div>
                             </div>
                         </div>
-                        <?php
+                            <?php
                         }
-                        if($edit) {
+                        if ($edit) {
                             ItemForm::plugin_edit_item();
                         } else {
                             ItemForm::plugin_post_item();
                         }
                         ?>
                         <div class="control-group">
-                            <?php if( osc_recaptcha_items_enabled() ) { ?>
+                            <?php if ( osc_recaptcha_items_enabled() ) { ?>
                                 <div class="controls">
                                     <?php osc_show_recaptcha(); ?>
                                 </div>
                             <?php }?>
                             <div class="controls">
-                                <button type="submit" class="ui-button ui-button-middle ui-button-main"><?php if($edit) { _e( 'Update' , 'bender'); } else { _e( 'Publish' , 'bender'); } ?></button>
+                                <button type="submit" class="ui-button ui-button-middle ui-button-main"><?php if ($edit) {
+                                    _e( 'Update', 'bender');
+                                                                                                        } else {
+                                                                                                            _e( 'Publish', 'bender');
+                                                                                                        } ?></button>
                             </div>
                         </div>
                     </fieldset>
@@ -240,16 +244,16 @@
             <?php } ?>
 
 
-    <?php if(osc_locale_thousands_sep()!='' || osc_locale_dec_point() != '') { ?>
+    <?php if (osc_locale_thousands_sep()!='' || osc_locale_dec_point() != '') { ?>
     $().ready(function(){
         $("#price").blur(function(event) {
             var price = $("#price").prop("value");
-            <?php if(osc_locale_thousands_sep()!='') { ?>
+            <?php if (osc_locale_thousands_sep()!='') { ?>
             while(price.indexOf('<?php echo osc_esc_js(osc_locale_thousands_sep());  ?>')!=-1) {
                 price = price.replace('<?php echo osc_esc_js(osc_locale_thousands_sep());  ?>', '');
             }
             <?php } ?>
-            <?php if(osc_locale_dec_point()!='') { ?>
+            <?php if (osc_locale_dec_point()!='') { ?>
             var tmp = price.split('<?php echo osc_esc_js(osc_locale_dec_point())?>');
             if(tmp.length>2) {
                 price = tmp[0]+'<?php echo osc_esc_js(osc_locale_dec_point())?>'+tmp[1];

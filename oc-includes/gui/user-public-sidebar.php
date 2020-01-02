@@ -20,10 +20,10 @@
      */
 ?>
 <div id="sidebar">
-    <?php if(osc_logged_user_id() !=  osc_user_id()) { ?>
-	    <?php if ( ( osc_reg_user_can_contact() && osc_is_web_user_logged_in() ) || ! osc_reg_user_can_contact() ) { ?>
+    <?php if (osc_logged_user_id() !=  osc_user_id()) { ?>
+        <?php if ( ( osc_reg_user_can_contact() && osc_is_web_user_logged_in() ) || ! osc_reg_user_can_contact() ) { ?>
         <div id="contact" class="widget-box form-container form-vertical">
-            <h2><?php _e( 'Contact' , 'bender'); ?></h2>
+            <h2><?php _e( 'Contact', 'bender'); ?></h2>
                 <ul id="error_list"></ul>
                 <form action="<?php echo osc_base_url(true); ?>" method="post" name="contact_form" id="contact_form">
                     <input type="hidden" name="action" value="contact_post" />
@@ -51,13 +51,13 @@
                         <div class="controls">
                             <?php osc_run_hook('item_contact_form', osc_item_id()); ?>
                             <?php osc_show_recaptcha(); ?>
-                            <button type="submit" class="ui-button ui-button-middle ui-button-main"><?php _e( 'Send' , 'bender');?></button>
+                            <button type="submit" class="ui-button ui-button-middle ui-button-main"><?php _e( 'Send', 'bender');?></button>
                         </div>
                     </div>
                 </form>
                 <?php ContactForm::js_validation(); ?>
         </div>
-        <?php
+            <?php
         }
     }
     ?>

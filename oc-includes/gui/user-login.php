@@ -20,7 +20,7 @@
      */
 
     // meta tag robots
-    osc_add_hook('header','bender_nofollow_construct');
+    osc_add_hook('header', 'bender_nofollow_construct');
 
     bender_add_body_class('login');
     osc_current_web_theme_path('header.php');
@@ -51,11 +51,11 @@
                     <?php UserForm::rememberme_login_checkbox();?> <label for="remember"><?php _e('Remember me', 'bender'); ?></label>
                 </div>
                 <div class="controls">
-                    <button type="submit" class="ui-button ui-button-middle ui-button-main"><?php _e( 'Log in' , 'bender');?></button>
+                    <button type="submit" class="ui-button ui-button-middle ui-button-main"><?php _e( 'Log in', 'bender');?></button>
                 </div>
             </div>
             <div class="actions">
-                <a href="<?php echo osc_register_account_url(); ?>"><?php _e( 'Register for a free account' , 'bender'); ?></a><br /><a href="<?php echo osc_recover_user_password_url(); ?>"><?php _e( 'Forgot password?' , 'bender'); ?></a>
+                <a href="<?php echo osc_register_account_url(); ?>"><?php _e( 'Register for a free account', 'bender'); ?></a><br /><a href="<?php echo osc_recover_user_password_url(); ?>"><?php _e( 'Forgot password?', 'bender'); ?></a>
             </div>
         </form>
     </div>

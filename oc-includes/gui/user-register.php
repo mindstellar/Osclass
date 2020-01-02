@@ -20,7 +20,7 @@
      */
 
     // meta tag robots
-    osc_add_hook('header','bender_nofollow_construct');
+    osc_add_hook('header', 'bender_nofollow_construct');
 
     bender_add_body_class('register');
     osc_enqueue_script('jquery-validate');
@@ -40,7 +40,7 @@
                 <div class="controls">
                     <?php
                     $user_s_name = '';
-                    if( Session::newInstance()->_getForm('user_s_name') != '' ) {
+                    if ( Session::newInstance()->_getForm('user_s_name') != '' ) {
                         $user_s_name = Session::newInstance()->_getForm('user_s_name');
                     }
                     UserForm::name_text(array('s_name' => $user_s_name)); ?>
@@ -49,9 +49,9 @@
             <div class="control-group">
                 <label class="control-label" for="email"><?php _e('E-mail', 'bender'); ?></label>
                 <div class="controls">
-                    <?php 
+                    <?php
                     $user_s_email = '';
-                    if( Session::newInstance()->_getForm('user_s_email') != '' ) {
+                    if ( Session::newInstance()->_getForm('user_s_email') != '' ) {
                         $user_s_email = Session::newInstance()->_getForm('user_s_email');
                     }
                     UserForm::email_text(array('s_email' => $user_s_email)); ?>
@@ -80,7 +80,7 @@
             </div>
             <div class="control-group">
                 <div class="controls">
-                    <button type="submit" class="ui-button ui-button-middle ui-button-main"><?php _e( 'Create' , 'bender'); ?></button>
+                    <button type="submit" class="ui-button ui-button-middle ui-button-main"><?php _e( 'Create', 'bender'); ?></button>
                 </div>
             </div>
         </form>

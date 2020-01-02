@@ -47,15 +47,15 @@
     <fieldset class="main">
         <input type="text" name="sPattern"  id="query" value="<?php echo osc_esc_html( ( osc_search_pattern() != '' ) ? osc_search_pattern() : $sQuery ); ?>" />
         <?php try {
-	        if ( osc_count_categories() ) { ?>
-		        <?php try {
-			        osc_categories_select( 'sCategory' , null , __( 'Select a category' , 'modern' ) );
-		        } catch ( Exception $e ) {
-		        } ?>
-	        <?php }
+            if ( osc_count_categories() ) { ?>
+                <?php try {
+                    osc_categories_select( 'sCategory', null, __( 'Select a category', 'modern' ) );
+                } catch ( Exception $e ) {
+                } ?>
+            <?php }
         } catch ( Exception $e ) {
         } ?>
-    	<button type="submit"><?php _e('Search', 'modern'); ?></button>
+        <button type="submit"><?php _e('Search', 'modern'); ?></button>
     </fieldset>
     <div id="search-example"></div>
 </form>
