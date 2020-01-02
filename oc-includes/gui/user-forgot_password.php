@@ -20,7 +20,7 @@
      */
 
     // meta tag robots
-    osc_add_hook('header','bender_nofollow_construct');
+    osc_add_hook('header', 'bender_nofollow_construct');
 
     bender_add_body_class('forgot');
     osc_current_web_theme_path('header.php');
@@ -49,7 +49,7 @@
             </div>
             <div class="control-group">
                 <div class="controls">
-                    <button type="submit" class="ui-button ui-button-middle ui-button-main"><?php _e( 'Change password' , 'bender');?></button>
+                    <button type="submit" class="ui-button ui-button-middle ui-button-main"><?php _e( 'Change password', 'bender');?></button>
                 </div>
             </div>
         </form>

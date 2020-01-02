@@ -18,34 +18,34 @@
     <meta http-equiv="Content-type" content="text/html; charset=utf-8" />
 
     <title><?php try {
-		    echo meta_title();
-	    } catch ( Exception $e ) {
-	    } ?></title>
+            echo meta_title();
+           } catch ( Exception $e ) {
+           } ?></title>
     <meta name="title" content="<?php try {
-	    echo osc_esc_html( meta_title() );
-    } catch ( Exception $e ) {
-    } ?>" />
+        echo osc_esc_html( meta_title() );
+                                } catch ( Exception $e ) {
+                                } ?>" />
 <?php try {
-	if ( meta_description() != '' ) { ?>
+    if ( meta_description() != '' ) { ?>
         <meta name="description" content="<?php try {
-			echo osc_esc_html( meta_description() );
-		} catch ( Exception $e ) {
-		} ?>"/>
-	<?php }
+            echo osc_esc_html( meta_description() );
+                                          } catch ( Exception $e ) {
+                                          } ?>"/>
+    <?php }
 } catch ( Exception $e ) {
 } ?>
-<?php if( function_exists('meta_keywords') ) { ?>
+<?php if ( function_exists('meta_keywords') ) { ?>
     <?php try {
-		if ( meta_keywords() != '' ) { ?>
+        if ( meta_keywords() != '' ) { ?>
             <meta name="keywords" content="<?php try {
-				echo osc_esc_html( meta_keywords() );
-			} catch ( Exception $e ) {
-			} ?>"/>
-		<?php }
-	} catch ( Exception $e ) {
-	} ?>
+                echo osc_esc_html( meta_keywords() );
+                                           } catch ( Exception $e ) {
+                                           } ?>"/>
+        <?php }
+    } catch ( Exception $e ) {
+    } ?>
 <?php } ?>
-<?php if( osc_get_canonical() != '' ) { ?>
+<?php if ( osc_get_canonical() != '' ) { ?>
     <link rel="canonical" href="<?php echo osc_get_canonical(); ?>"/>
 <?php } ?>
     <meta http-equiv="Cache-Control" content="no-cache" />

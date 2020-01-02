@@ -20,23 +20,25 @@
      */
 
     // meta tag robots
-    osc_add_hook('header','bender_nofollow_construct');
+    osc_add_hook('header', 'bender_nofollow_construct');
 
     osc_enqueue_script('jquery-validate');
     bender_add_body_class('user user-profile');
-    osc_add_hook('before-main','sidebar');
-    function sidebar(){
-        osc_current_web_theme_path('user-sidebar.php');
-    }
-    osc_add_filter('meta_title_filter','custom_meta_title');
-	/**
-	 * @param $data
-	 *
-	 * @return string
-	 */
-	function custom_meta_title( $data ) {
-        return __('Change e-mail', 'bender');
-    }
+    osc_add_hook('before-main', 'sidebar');
+function sidebar()
+{
+    osc_current_web_theme_path('user-sidebar.php');
+}
+    osc_add_filter('meta_title_filter', 'custom_meta_title');
+    /**
+     * @param $data
+     *
+     * @return string
+     */
+function custom_meta_title($data)
+{
+    return __('Change e-mail', 'bender');
+}
     osc_current_web_theme_path('header.php') ;
     $osc_user = osc_user();
 ?>
@@ -61,7 +63,7 @@
             </div>
             <div class="control-group">
                 <div class="controls">
-                    <button type="submit" class="ui-button ui-button-middle ui-button-main"><?php _e( 'Update' , 'bender');?></button>
+                    <button type="submit" class="ui-button ui-button-middle ui-button-main"><?php _e( 'Update', 'bender');?></button>
                 </div>
             </div>
         </form>
@@ -78,8 +80,8 @@
             },
             messages: {
                 new_email: {
-                    required: '<?php echo osc_esc_js(__( 'Email: this field is required' , 'bender' )); ?>.',
-                    email: '<?php echo osc_esc_js(__( 'Invalid email address' , 'bender' )); ?>.'
+                    required: '<?php echo osc_esc_js(__( 'Email: this field is required', 'bender' )); ?>.',
+                    email: '<?php echo osc_esc_js(__( 'Invalid email address', 'bender' )); ?>.'
                 }
             },
             errorLabelContainer: "#error_list",

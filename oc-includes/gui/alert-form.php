@@ -56,7 +56,7 @@ $(document).ready(function(){
 </script>
 
 <div class="alert_form">
-    <?php if(function_exists('osc_search_alert_subscribed') && osc_search_alert_subscribed()) { ?>
+    <?php if (function_exists('osc_search_alert_subscribed') && osc_search_alert_subscribed()) { ?>
         <h3>
             <strong><?php _e('Already subscribed to this search', 'bender'); ?></strong>
         </h3>
@@ -68,7 +68,7 @@ $(document).ready(function(){
                 <?php AlertForm::page_hidden(); ?>
                 <?php AlertForm::alert_hidden(); ?>
 
-                <?php if(osc_is_web_user_logged_in()) { ?>
+                <?php if (osc_is_web_user_logged_in()) { ?>
                     <?php AlertForm::user_id_hidden(); ?>
                     <?php AlertForm::email_hidden(); ?>
 

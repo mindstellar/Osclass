@@ -21,12 +21,12 @@
 ?>
 
 <?php if ( ! defined( 'ABS_PATH' ) ) {
-	exit( 'ABS_PATH is not loaded. Direct access is not allowed.' );
+    exit( 'ABS_PATH is not loaded. Direct access is not allowed.' );
 } ?>
 <?php if ( ! OC_ADMIN ) {
-	exit( 'User access is not allowed.' );
+    exit( 'User access is not allowed.' );
 } ?>
-<?php if( (!defined('MULTISITE') || MULTISITE==0)&& !osc_get_preference('footer_link', 'bender') && !osc_get_preference('donation', 'bender') ) { ?>
+<?php if ( (!defined('MULTISITE') || MULTISITE==0)&& !osc_get_preference('footer_link', 'bender') && !osc_get_preference('donation', 'bender') ) { ?>
 <form name="_xclick" action="https://www.paypal.com/in/cgi-bin/webscr" method="post" class="nocsrf">
     <input type="hidden" name="cmd" value="_donations">
     <input type="hidden" name="rm" value="2">
@@ -60,12 +60,16 @@
                 <div class="form-label"><?php _e('Show lists as:', 'bender'); ?></div>
                 <div class="form-controls">
                     <select name="defaultShowAs@all">
-                        <option value="gallery" <?php if( bender_default_show_as() === 'gallery'){ echo 'selected="selected"' ; } ?>><?php _e( 'Gallery', 'bender'); ?></option>
-                        <option value="list" <?php if( bender_default_show_as() === 'list'){ echo 'selected="selected"' ; } ?>><?php _e( 'List', 'bender'); ?></option>
+                        <option value="gallery" <?php if ( bender_default_show_as() === 'gallery') {
+                            echo 'selected="selected"' ;
+                                                } ?>><?php _e( 'Gallery', 'bender'); ?></option>
+                        <option value="list" <?php if ( bender_default_show_as() === 'list') {
+                            echo 'selected="selected"' ;
+                                             } ?>><?php _e( 'List', 'bender'); ?></option>
                     </select>
                 </div>
             </div>
-            <?php if(!defined('MULTISITE') || MULTISITE==0) { ?>
+            <?php if (!defined('MULTISITE') || MULTISITE==0) { ?>
             <div class="form-row">
                 <div class="form-label"><?php _e('Footer link', 'bender'); ?></div>
                 <div class="form-controls">
@@ -84,8 +88,12 @@
                 <div class="form-label"><?php _e('Show location input as:', 'bender'); ?></div>
                 <div class="form-controls">
                     <select name="defaultLocationShowAs">
-                        <option value="dropdown" <?php if( bender_default_location_show_as() === 'dropdown'){ echo 'selected="selected"' ; } ?>><?php _e( 'Dropdown', 'bender'); ?></option>
-                        <option value="autocomplete" <?php if( bender_default_location_show_as() === 'autocomplete'){ echo 'selected="selected"' ; } ?>><?php _e( 'Autocomplete', 'bender'); ?></option>
+                        <option value="dropdown" <?php if ( bender_default_location_show_as() === 'dropdown') {
+                            echo 'selected="selected"' ;
+                                                 } ?>><?php _e( 'Dropdown', 'bender'); ?></option>
+                        <option value="autocomplete" <?php if ( bender_default_location_show_as() === 'autocomplete') {
+                            echo 'selected="selected"' ;
+                                                     } ?>><?php _e( 'Autocomplete', 'bender'); ?></option>
                     </select>
                 </div>
             </div>
