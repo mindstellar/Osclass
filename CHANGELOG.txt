@@ -4,5 +4,6 @@ Osclass Dev Changelog
 - Fix PHP notices while saving Admin settings.
 - Restructured whole osclass core.
 - Core osclass now using autoloader for classes and external libraries.
+- More option in image text watermark in media settings.
 For old changelog history visit https://raw.githubusercontent.com/navjottomer/Osclass/autoload/ChangelogHistory.txt
 Source: https://github.com/navjottomer/Osclass/commits/autoload

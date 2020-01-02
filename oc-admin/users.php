@@ -41,7 +41,7 @@ class CAdminUsers extends AdminSecBaseModel
 
         //specific things for this class
         switch ($this->action) {
-            case('create'):         // calling create view
+            case ('create'):         // calling create view
                 $aRegions = array();
                 $aCities  = array();
 
@@ -63,15 +63,17 @@ class CAdminUsers extends AdminSecBaseModel
 
                 $this->doView('users/frm.php');
                 break;
-            case('create_post'):    // creating the user...
+            case ('create_post'):    // creating the user...
                 osc_csrf_check();
                 $userActions = new UserActions(true);
                 $success     = $userActions->add();
 
                 switch ($success) {
                     case 1:
-                        osc_add_flash_ok_message(_m("The user has been created. We've sent an activation e-mail"),
-                            'admin');
+                        osc_add_flash_ok_message(
+                            _m("The user has been created. We've sent an activation e-mail"),
+                            'admin'
+                        );
                         break;
                     case 2:
                         osc_add_flash_ok_message(_m('The user has been created successfully'), 'admin');
@@ -83,7 +85,7 @@ class CAdminUsers extends AdminSecBaseModel
 
                 $this->redirectTo(osc_admin_base_url(true) . '?page=users');
                 break;
-            case('edit'):           // calling the edit view
+            case ('edit'):           // calling the edit view
                 $aUser      = $this->userManager->findByPrimaryKey(Params::getParam('id'));
                 $aCountries = Country::newInstance()->listAll();
                 $aRegions   = array();
@@ -121,8 +123,12 @@ class CAdminUsers extends AdminSecBaseModel
                 $aLocale = $aUser['locale'];
                 foreach ($aLocale as $locale => $aInfo) {
                     $aUser['locale'][$locale]['s_info'] =
-                        osc_apply_filter('admin_user_profile_info', $aInfo['s_info'], $aUser['pk_i_id'],
-                            $aInfo['fk_c_locale_code']);
+                        osc_apply_filter(
+                            'admin_user_profile_info',
+                            $aInfo['s_info'],
+                            $aUser['pk_i_id'],
+                            $aInfo['fk_c_locale_code']
+                        );
                 }
 
                 $this->_exportVariableToView('actions', $actions);
@@ -134,7 +140,7 @@ class CAdminUsers extends AdminSecBaseModel
                 $this->_exportVariableToView('locales', OSCLocale::newInstance()->listAllEnabled());
                 $this->doView('users/frm.php');
                 break;
-            case('edit_post'):      // edit post
+            case ('edit_post'):      // edit post
                 osc_csrf_check();
                 $userActions = new UserActions(true);
                 $success     = $userActions->edit(Params::getParam('id'));
@@ -149,7 +155,7 @@ class CAdminUsers extends AdminSecBaseModel
                 }
                 $this->redirectTo(osc_admin_base_url(true) . '?page=users');
                 break;
-            case('resend_activation'):
+            case ('resend_activation'):
                 //activate
                 osc_csrf_check();
                 $iUpdated = 0;
@@ -167,13 +173,16 @@ class CAdminUsers extends AdminSecBaseModel
                 if ($iUpdated == 0) {
                     osc_add_flash_error_message(_m('No users have been selected'), 'admin');
                 } else {
-                    osc_add_flash_ok_message(sprintf(_mn('Activation email sent to one user',
-                        'Activation email sent to %s users', $iUpdated), $iUpdated), 'admin');
+                    osc_add_flash_ok_message(sprintf(_mn(
+                        'Activation email sent to one user',
+                        'Activation email sent to %s users',
+                        $iUpdated
+                    ), $iUpdated), 'admin');
                 }
 
                 $this->redirectTo(osc_admin_base_url(true) . '?page=users');
                 break;
-            case('activate'):       //activate
+            case ('activate'):       //activate
                 osc_csrf_check();
                 $iUpdated = 0;
                 $userId   = Params::getParam('id');
@@ -190,14 +199,16 @@ class CAdminUsers extends AdminSecBaseModel
                 if ($iUpdated == 0) {
                     $msg = _m('No users have been activated');
                 } else {
-                    $msg = sprintf(_mn('One user has been activated', '%s users have been activated', $iUpdated),
-                        $iUpdated);
+                    $msg = sprintf(
+                        _mn('One user has been activated', '%s users have been activated', $iUpdated),
+                        $iUpdated
+                    );
                 }
 
                 osc_add_flash_ok_message($msg, 'admin');
                 $this->redirectTo(Params::getServerParam('HTTP_REFERER', false, false));
                 break;
-            case('deactivate'):     //deactivate
+            case ('deactivate'):     //deactivate
                 osc_csrf_check();
                 $iUpdated = 0;
                 $userId   = Params::getParam('id');
@@ -215,14 +226,16 @@ class CAdminUsers extends AdminSecBaseModel
                 if ($iUpdated == 0) {
                     $msg = _m('No users have been deactivated');
                 } else {
-                    $msg = sprintf(_mn('One user has been deactivated', '%s users have been deactivated', $iUpdated),
-                        $iUpdated);
+                    $msg = sprintf(
+                        _mn('One user has been deactivated', '%s users have been deactivated', $iUpdated),
+                        $iUpdated
+                    );
                 }
 
                 osc_add_flash_ok_message($msg, 'admin');
                 $this->redirectTo(Params::getServerParam('HTTP_REFERER', false, false));
                 break;
-            case('enable'):
+            case ('enable'):
                 osc_csrf_check();
                 $iUpdated = 0;
                 $userId   = Params::getParam('id');
@@ -239,14 +252,16 @@ class CAdminUsers extends AdminSecBaseModel
                 if ($iUpdated == 0) {
                     $msg = _m('No users have been enabled');
                 } else {
-                    $msg = sprintf(_mn('One user has been unblocked', '%s users have been unblocked', $iUpdated),
-                        $iUpdated);
+                    $msg = sprintf(
+                        _mn('One user has been unblocked', '%s users have been unblocked', $iUpdated),
+                        $iUpdated
+                    );
                 }
 
                 osc_add_flash_ok_message($msg, 'admin');
                 $this->redirectTo(Params::getServerParam('HTTP_REFERER', false, false));
                 break;
-            case('disable'):
+            case ('disable'):
                 osc_csrf_check();
                 $iUpdated = 0;
                 $userId   = Params::getParam('id');
@@ -270,7 +285,7 @@ class CAdminUsers extends AdminSecBaseModel
                 osc_add_flash_ok_message($msg, 'admin');
                 $this->redirectTo(Params::getServerParam('HTTP_REFERER', false, false));
                 break;
-            case('delete'):         //delete
+            case ('delete'):         //delete
                 osc_csrf_check();
                 $iDeleted = 0;
                 $userId   = Params::getParam('id');
@@ -299,8 +314,7 @@ class CAdminUsers extends AdminSecBaseModel
                 osc_add_flash_ok_message($msg, 'admin');
                 $this->redirectTo(osc_admin_base_url(true) . '?page=users');
                 break;
-            case('delete_alerts'):         //delete
-
+            case ('delete_alerts'):
                 $iDeleted = 0;
                 $alertId  = Params::getParam('alert_id');
                 if (!is_array($alertId)) {
@@ -334,8 +348,7 @@ class CAdminUsers extends AdminSecBaseModel
                         . Params::getParam('user_id'));
                 }
                 break;
-            case('status_alerts'):         //delete
-
+            case ('status_alerts'):
                 $status   = Params::getParam('status');
                 $iUpdated = 0;
                 $alertId  = Params::getParam('alert_id');
@@ -364,15 +377,19 @@ class CAdminUsers extends AdminSecBaseModel
                     if ($iUpdated == 0) {
                         $msg = _m('No alerts have been activated');
                     } else {
-                        $msg = sprintf(_mn('One alert has been activated', '%s alerts have been activated', $iUpdated),
-                            $iUpdated);
+                        $msg = sprintf(
+                            _mn('One alert has been activated', '%s alerts have been activated', $iUpdated),
+                            $iUpdated
+                        );
                     }
                 } elseif ($iUpdated == 0) {
                     $msg = _m('No alerts have been deactivated');
                 } else {
                     $msg =
-                        sprintf(_mn('One alert has been deactivated', '%s alerts have been deactivated', $iUpdated),
-                            $iUpdated);
+                        sprintf(
+                            _mn('One alert has been deactivated', '%s alerts have been deactivated', $iUpdated),
+                            $iUpdated
+                        );
                 }
 
                 osc_add_flash_ok_message($msg, 'admin');
@@ -383,10 +400,10 @@ class CAdminUsers extends AdminSecBaseModel
                         . Params::getParam('user_id'));
                 }
                 break;
-            case('settings'):       // calling the users settings view
+            case ('settings'):       // calling the users settings view
                 $this->doView('users/settings.php');
                 break;
-            case('settings_post'):  // updating users
+            case ('settings_post'):  // updating users
                 osc_csrf_check();
                 $iUpdated                = 0;
                 $enabledUserValidation   = Params::getParam('enabled_user_validation');
@@ -414,7 +431,7 @@ class CAdminUsers extends AdminSecBaseModel
                 }
                 $this->redirectTo(osc_admin_base_url(true) . '?page=users&action=settings');
                 break;
-            case('alerts'):                // manage alerts view
+            case ('alerts'):                // manage alerts view
                 require_once osc_lib_path() . 'osclass/classes/datatables/AlertsDataTable.php';
 
                 // set default iDisplayLength
@@ -471,8 +488,7 @@ class CAdminUsers extends AdminSecBaseModel
 
                 $this->doView('users/alerts.php');
                 break;
-            case('ban'):             // manage ban rules view
-
+            case ('ban'):
                 if (Params::getParam('action') != '') {
                     osc_run_hook('ban_rules_bulk_' . Params::getParam('action'), Params::getParam('id'));
                 }
@@ -535,8 +551,10 @@ class CAdminUsers extends AdminSecBaseModel
                     array('value' => '', 'data-dialog-content' => '', 'label' => __('Bulk actions')),
                     array(
                         'value'               => 'delete_ban_rule',
-                        'data-dialog-content' => sprintf(__('Are you sure you want to %s the selected ban rules?'),
-                            strtolower(__('Delete'))),
+                        'data-dialog-content' => sprintf(
+                            __('Are you sure you want to %s the selected ban rules?'),
+                            strtolower(__('Delete'))
+                        ),
                         'label'               => __('Delete')
                     )
                 );
@@ -548,11 +566,11 @@ class CAdminUsers extends AdminSecBaseModel
                 //calling the view...
                 $this->doView('users/ban.php');
                 break;
-            case('edit_ban_rule'):
+            case ('edit_ban_rule'):
                 $this->_exportVariableToView('rule', BanRule::newInstance()->findByPrimaryKey(Params::getParam('id')));
                 $this->doView('users/ban_frm.php');
                 break;
-            case('edit_ban_rule_post'):
+            case ('edit_ban_rule_post'):
                 osc_csrf_check();
                 if (Params::getParam('s_ip') == '' && Params::getParam('s_email') == '') {
                     osc_add_flash_warning_message(_m('Both rules can not be empty'), 'admin');
@@ -567,11 +585,11 @@ class CAdminUsers extends AdminSecBaseModel
                 osc_add_flash_ok_message(_m('Rule updated correctly'), 'admin');
                 $this->redirectTo(osc_admin_base_url(true) . '?page=users&action=ban');
                 break;
-            case('create_ban_rule'):
+            case ('create_ban_rule'):
                 $this->_exportVariableToView('rule', null);
                 $this->doView('users/ban_frm.php');
                 break;
-            case('create_ban_rule_post'):
+            case ('create_ban_rule_post'):
                 osc_csrf_check();
                 if (Params::getParam('s_ip') == '' && Params::getParam('s_email') == '') {
                     osc_add_flash_warning_message(_m('Both rules can not be empty'), 'admin');
@@ -586,7 +604,7 @@ class CAdminUsers extends AdminSecBaseModel
                 osc_add_flash_ok_message(_m('Rule saved correctly'), 'admin');
                 $this->redirectTo(osc_admin_base_url(true) . '?page=users&action=ban');
                 break;
-            case('delete_ban_rule'):         //delete ban rules
+            case ('delete_ban_rule'):         //delete ban rules
                 osc_csrf_check();
                 $iDeleted = 0;
                 $ruleId   = Params::getParam('id');
@@ -606,15 +624,16 @@ class CAdminUsers extends AdminSecBaseModel
                 if ($iDeleted == 0) {
                     $msg = _m('No rules have been deleted');
                 } else {
-                    $msg = sprintf(_mn('One ban rule has been deleted', '%s ban rules have been deleted', $iDeleted),
-                        $iDeleted);
+                    $msg = sprintf(
+                        _mn('One ban rule has been deleted', '%s ban rules have been deleted', $iDeleted),
+                        $iDeleted
+                    );
                 }
 
                 osc_add_flash_ok_message($msg, 'admin');
                 $this->redirectTo(osc_admin_base_url(true) . '?page=users&action=ban');
                 break;
-            default:                // manage users view
-
+            default:
                 if (Params::getParam('action') != '') {
                     osc_run_hook('user_bulk_' . Params::getParam('action'), Params::getParam('id'));
                 }
@@ -678,40 +697,52 @@ class CAdminUsers extends AdminSecBaseModel
                     array('value' => '', 'data-dialog-content' => '', 'label' => __('Bulk actions')),
                     array(
                         'value'               => 'activate',
-                        'data-dialog-content' => sprintf(__('Are you sure you want to %s the selected users?'),
-                            strtolower(__('Activate'))),
+                        'data-dialog-content' => sprintf(
+                            __('Are you sure you want to %s the selected users?'),
+                            strtolower(__('Activate'))
+                        ),
                         'label'               => __('Activate')
                     ),
                     array(
                         'value'               => 'deactivate',
-                        'data-dialog-content' => sprintf(__('Are you sure you want to %s the selected users?'),
-                            strtolower(__('Deactivate'))),
+                        'data-dialog-content' => sprintf(
+                            __('Are you sure you want to %s the selected users?'),
+                            strtolower(__('Deactivate'))
+                        ),
                         'label'               => __('Deactivate')
                     ),
                     array(
                         'value'               => 'enable',
-                        'data-dialog-content' => sprintf(__('Are you sure you want to %s the selected users?'),
-                            strtolower(__('Unblock'))),
+                        'data-dialog-content' => sprintf(
+                            __('Are you sure you want to %s the selected users?'),
+                            strtolower(__('Unblock'))
+                        ),
                         'label'               => __('Unblock')
                     ),
                     array(
                         'value'               => 'disable',
-                        'data-dialog-content' => sprintf(__('Are you sure you want to %s the selected users?'),
-                            strtolower(__('Block'))),
+                        'data-dialog-content' => sprintf(
+                            __('Are you sure you want to %s the selected users?'),
+                            strtolower(__('Block'))
+                        ),
                         'label'               => __('Block')
                     ),
                     array(
                         'value'               => 'delete',
-                        'data-dialog-content' => sprintf(__('Are you sure you want to %s the selected users?'),
-                            strtolower(__('Delete'))),
+                        'data-dialog-content' => sprintf(
+                            __('Are you sure you want to %s the selected users?'),
+                            strtolower(__('Delete'))
+                        ),
                         'label'               => __('Delete')
                     )
                 );
                 if (osc_user_validation_enabled()) {
                     $bulk_options[] = array(
                         'value'               => 'resend_activation',
-                        'data-dialog-content' => sprintf(__('Are you sure you want to %s the selected users?'),
-                            strtolower(__('Resend the activation to'))),
+                        'data-dialog-content' => sprintf(
+                            __('Are you sure you want to %s the selected users?'),
+                            strtolower(__('Resend the activation to'))
+                        ),
                         'label'               => __('Resend activation')
                     );
                 }
@@ -743,4 +774,3 @@ class CAdminUsers extends AdminSecBaseModel
 }
 
 /* file end: ./oc-admin/users.php */
-
