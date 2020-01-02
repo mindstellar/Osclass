@@ -23,7 +23,9 @@
         function __construct()
         {
             parent::__construct();
-
+            
+            Plugins::runHook('c_admin_item_comments');  
+            
             //specific things for this class
             $this->itemCommentManager = ItemComment::newInstance();
         }

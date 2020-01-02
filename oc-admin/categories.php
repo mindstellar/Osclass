@@ -24,7 +24,9 @@
         function __construct()
         {
             parent::__construct();
-
+            
+            Plugins::runHook('c_admin_categories');
+            
             //specific things for this class
             $this->categoryManager = Category::newInstance( osc_current_admin_locale() );
         }

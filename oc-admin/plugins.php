@@ -22,6 +22,7 @@
         {
             parent::__construct();
             //specific things for this class
+             Plugins::runHook('c_admin_plugins');
         }
 
         // Business layer...
@@ -184,9 +185,7 @@
                                     Params::setParam($get_vars[1][$var_k], $get_vars[2][$var_k]);
                                 }
                             }
-                        } else {
-                            $file = Params::getParam('file');
-                        };
+                        } 
                     }
                     osc_run_hook('renderplugin_controller');
                     if(stripos($file, '../')===false && stripos($file, '..\\')===false && $file!="") {

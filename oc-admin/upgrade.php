@@ -18,8 +18,11 @@
 
     class CAdminUpgrade extends AdminSecBaseModel
     {
-        function __construct() {
+        function __construct() 
+        {
             parent::__construct();
+            
+            Plugins::runHook('c_admin_upgrade');
         }
 
         //Business Layer...

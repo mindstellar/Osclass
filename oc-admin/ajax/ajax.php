@@ -23,7 +23,8 @@
         function __construct()
         {
             parent::__construct();
-            $this->ajax = true;
+            $this->ajax = true; 
+            Plugins::runHook('c_admin_ajax');
             if( $this->isModerator() ) {
                 if( !in_array($this->action, array('items', 'media', 'comments', 'custom', 'runhook')) ) {
                     $this->action = 'error_permissions';
@@ -504,7 +505,7 @@
                     break;
                 case 'check_version':
                     echo json_encode(array('error' => 1, 'msg' => __('Version could not be checked')));
-                    return;
+                   // return;
                     // $json = json_decode($data);
                     // if(isset($json->version)) {
                     //     if ($json->version > osc_version()) {
@@ -572,6 +573,7 @@
                      ************************/
                     if ($code != '' && $section != '') {
                         if(stripos($code, "http://")===FALSE && stripos($code, "https://")===FALSE) {
+                             $data = array();
                             // OSCLASS OFFICIAL REPOSITORY
                             // Disable Osclass Market update checking.
                             // $data = json_decode(osc_file_get_contents(osc_market_url($section, $code), array('api_key' => osc_market_api_connect())), true);
@@ -585,6 +587,7 @@
                             }
                         }
                         if( !isset($data['s_source_file']) || !isset($data['s_update_url'])) {
+                            
                             //$data = array('error' => 2, 'error_msg' => __('Invalid code'));
                         }
                     } else {

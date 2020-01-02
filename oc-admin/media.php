@@ -23,7 +23,9 @@
         function __construct()
         {
             parent::__construct();
-
+            
+            Plugins::runHook('c_admin_media');
+            
             //specific things for this class
             $this->resourcesManager = ItemResource::newInstance();
         }

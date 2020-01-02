@@ -24,7 +24,9 @@
         function __construct()
         {
             parent::__construct();
-
+            
+            Plugins::runHook('c_admin_admins');
+            
             if( $this->isModerator() ) {
                 if(($this->action!='edit' && $this->action!='edit_post') || Params::getParam('id')!='' && Params::getParam('id') != osc_logged_admin_id()) {
                     osc_add_flash_error_message(_m("You don't have enough permissions"), 'admin');

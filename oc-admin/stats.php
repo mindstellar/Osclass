@@ -22,8 +22,9 @@
         function __construct()
         {
             parent::__construct();
-
-            //specific things for this class
+            
+            Plugins::runHook('c_admin_stats');  
+              
         }
 
         //Business Layer...

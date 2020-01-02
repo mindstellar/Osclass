@@ -115,6 +115,7 @@
 	                try {
 		                $aItem = Item::newInstance()->findByPrimaryKey( $item );
 	                } catch ( Exception $e ) {
+                            // not found for various reasons
 	                }
 
 	                // Check if the item exists
@@ -172,7 +173,7 @@
                     }
 
                     echo json_encode($json);
-                    return true;
+                 //   return true;
                 break;
                 case 'alerts': // Allow to register to an alert given (not sure it's used on admin)
                     $encoded_alert  = Params::getParam( 'alert' );
@@ -200,8 +201,8 @@
                     if($alert!='' && $email!='') {
                         if(osc_validate_email($email)) {
                             $secret = osc_genRandomPassword();
-
-                            if( $alertID = Alerts::newInstance()->createAlert($userid, $email, $alert, $secret) ) {
+                            $alertID = Alerts::newInstance()->createAlert($userid, $email, $alert, $secret);
+                            if($alertID)  {
                                 if( (int)$userid > 0 ) {
                                     $user = User::newInstance()->findByPrimaryKey($userid);
                                     if($user['b_active']==1 && $user['b_enabled']==1) {
@@ -228,7 +229,7 @@
                         }
                     }
                     echo '0';
-                    return false;
+                  //  return false;
                 break;
                 case 'runhook': // run hooks
                     $hook = Params::getParam('hook');
@@ -315,6 +316,7 @@
                         $result['uploadName'] = 'auto_' . $filename;
                         echo htmlspecialchars(json_encode($result), ENT_NOQUOTES);
                     } catch (Exception $e) {
+                        // cannot upload
                         echo '';
                     }
                     break;

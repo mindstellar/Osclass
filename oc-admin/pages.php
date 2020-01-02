@@ -24,7 +24,9 @@
         function __construct()
         {
             parent::__construct();
-
+            
+            Plugins::runHook('c_admin_pages'); 
+            
             //specific things for this class
             $this->pageManager = Page::newInstance();
         }

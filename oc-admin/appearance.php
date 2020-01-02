@@ -21,6 +21,7 @@
         function __construct()
         {
             parent::__construct();
+            Plugins::runHook('c_admin_appearance');
         }
 
         //Business Layer...
@@ -172,6 +173,8 @@
                     $this->redirectTo( osc_admin_base_url(true) . "?page=appearance" );
                 break;
                 case('render'):
+                    
+                    
                     if(Params::existParam('route')) {
                        
                         $rid = Params::getParam('route');
@@ -192,14 +195,12 @@
                                     Params::setParam($get_vars[1][$var_k], $get_vars[2][$var_k]);
                                 }
                             }
-                        } else {
-                            $file = Params::getParam('file');
-                        };
+                        }  
                     }
 
                     if(strpos($file, '../')!==false || strpos($file, '..\\')!==false || !file_exists(osc_base_path() . $file)) {
                         osc_add_flash_warning_message(__('Error loading theme custom file'), 'admin');
-                    };
+                    }
                     $this->_exportVariableToView('file', osc_base_path() . $file);
                     $this->doView('appearance/view.php');
                 break;

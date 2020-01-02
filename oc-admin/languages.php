@@ -29,7 +29,9 @@
         public function __construct()
         {
             parent::__construct();
-
+            
+            Plugins::runHook('c_admin_languages');
+            
             //specific things for this class
             $this->localeManager = OSCLocale::newInstance();
         }

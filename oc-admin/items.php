@@ -24,7 +24,9 @@
         function __construct()
         {
             parent::__construct();
-
+            
+            Plugins::runHook('c_admin_items');   
+            
             //specific things for this class
             $this->itemManager = Item::newInstance();
         }

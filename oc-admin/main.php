@@ -21,6 +21,9 @@
         function __construct()
         {
             parent::__construct();
+            
+            Plugins::runHook('c_admin_main');
+            
         }
 
         //Business Layer...
