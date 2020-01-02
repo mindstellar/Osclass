@@ -110,7 +110,7 @@ class ItemActions
         }
 
         $title_message = '';
-        foreach (@$aItem['title'] as $key => $value) {
+        foreach ($aItem['title'] as $key => $value) {
             if (osc_validate_text($value) && osc_validate_max($value, osc_max_characters_per_title())) {
                 $title_message = '';
                 break;
@@ -123,7 +123,7 @@ class ItemActions
         $flash_error .= $title_message;
 
         $desc_message = '';
-        foreach (@$aItem['description'] as $key => $value) {
+        foreach ($aItem['description'] as $key => $value) {
             if (osc_validate_text($value, 3) && osc_validate_max($value, osc_max_characters_per_description())) {
                 $desc_message = '';
                 break;
@@ -216,7 +216,7 @@ class ItemActions
                 's_contact_name'     => $contactName,
                 's_contact_email'    => $contactEmail,
                 's_secret'           => $code,
-                'b_active'           => $active == 'ACTIVE' ? 1 : 0,
+                'b_active'           => $active === 'ACTIVE' ? 1 : 0,
                 'b_enabled'          => $enabled,
                 'b_show_email'       => $aItem['showEmail'],
                 'b_spam'             => $is_spam,
@@ -478,7 +478,7 @@ class ItemActions
      * @param $itemId
      *
      * @return int
-     *
+     * @throws \ImagickException
      */
     public function uploadItemResources($aResources, $itemId)
     {
@@ -539,10 +539,10 @@ class ItemActions
                             $path = $folder . $resourceId . '_original.' . $extension;
                             osc_copy($tmpName, $path);
                         }
-                        @unlink($tmpName . '_normal');
-                        @unlink($tmpName . '_preview');
-                        @unlink($tmpName . '_thumbnail');
-                        @unlink($tmpName);
+                        unlink($tmpName . '_normal');
+                        unlink($tmpName . '_preview');
+                        unlink($tmpName . '_thumbnail');
+                        unlink($tmpName);
 
                         $s_path = str_replace(osc_base_path(), '', $folder);
                         $itemResourceManager->update(
@@ -615,9 +615,6 @@ class ItemActions
         osc_run_hook('item_increase_stat', $item);
     }
 
-    /**
-     * @return bool|mixed
-     */
     /**
      * @return bool|mixed
      */
@@ -1105,10 +1102,6 @@ class ItemActions
 
         return false;
     }
-
-    /*
-     *
-     */
 
     /**
      * Set spam value depending on $on, for a given item id
