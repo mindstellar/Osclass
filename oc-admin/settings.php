@@ -23,6 +23,10 @@
  */
 class CAdminSettings extends AdminSecBaseModel
 {
+    public function __construct()
+    {
+        osc_run_hook('c_admin_settings');
+    }
     //Business Layer...
     public function doModel()
     {
