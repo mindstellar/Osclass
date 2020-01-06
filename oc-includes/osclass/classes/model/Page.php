@@ -385,13 +385,13 @@ class Page extends DAO
                 return array();
             }
             $ret = array();
-            foreach ($aPages as $key => $val) {
-                if (!isset($ret[$val['pk_i_id']])) {
-                    $ret[$val['pk_i_id']] = $aPages[$key];
+            foreach ($aPages as $key => $v) {
+                if (!isset($ret[$v['pk_i_id']])) {
+                    $ret[$v['pk_i_id']] = $aPages[$key];
                 }
-                $ret[$val['pk_i_id']]['locale'][$val['fk_c_locale_code']]['fk_i_pages_id'] = $val['fk_i_pages_id'];
-                $ret[$val['pk_i_id']]['locale'][$val['fk_c_locale_code']]['fk_c_locale_code'] = $val['fk_c_locale_code'];
-                $ret[$val['pk_i_id']]['locale'][$val['fk_c_locale_code']]['s_title'] = $val['s_title'];
+                $ret[$v['pk_i_id']]['locale'][$v['fk_c_locale_code']]['fk_i_pages_id'] = $v['fk_i_pages_id'];
+                $ret[$v['pk_i_id']]['locale'][$v['fk_c_locale_code']]['fk_c_locale_code'] = $v['fk_c_locale_code'];
+                $ret[$v['pk_i_id']]['locale'][$v['fk_c_locale_code']]['s_title'] = $v['s_title'];
             }
 
             return $ret;
