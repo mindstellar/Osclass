@@ -370,7 +370,7 @@ class Page extends DAO
         $this->dao->where('a.b_link', 1);
         if ($locale !== null) {
             $this->dao->where('d.fk_c_locale_code', $locale);
-        } 
+        }
 
         //  $this->dao->groupBy('d.fk_i_pages_id');
         $this->dao->orderBy('i_order', 'ASC');
