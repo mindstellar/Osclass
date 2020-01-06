@@ -344,6 +344,60 @@ class Page extends DAO
         return array();
     }
 
+    
+    /**
+     * Get all the pages with  title only.
+     *
+     * @access public
+     * @since  unknown
+     *
+     * @param bool   $indelible true if the page is indelible
+     * @param null   $b_link
+     * @param string $locale
+     * @param int    $start
+     * @param int    $limit
+     *
+     * @return array Return all the pages that have been found with the criteria selected. If there's no pages, the
+     *                          result is an empty array.
+     */
+    public function listStaticPages($locale = null, $start = null, $limit = null)
+    {
+        $this->dao->select('a.*,d.fk_i_pages_id,d.fk_c_locale_code,d.s_title');
+        $this->dao->from($this->getTableName() . ' as a');
+        $this->dao->join($this->getDescriptionTableName() . ' as d', 'a.pk_i_id=d.fk_i_pages_id', 'INNER');
+
+        $this->dao->where('a.b_indelible', 0);
+        $this->dao->where('a.b_link', 1);
+        if ($locale !== null) {
+            $this->dao->where('d.fk_c_locale_code', $locale);
+        } 
+
+        //  $this->dao->groupBy('d.fk_i_pages_id');
+        $this->dao->orderBy('i_order', 'ASC');
+        if (null !== $limit) {
+            $this->dao->limit($limit, $start);
+        }
+        $result = $this->dao->get();
+        if ($result) {
+            $aPages = $result->result();
+
+            if (count($aPages) == 0) {
+                return array();
+            }
+            $retval = array();
+            foreach ($aPages as $key => $value) {
+                if (!isset($retval[$value['pk_i_id']])) {
+                    $retval[$value['pk_i_id']] = $aPages[$key];
+                }
+                $retval[$value['pk_i_id']]['locale'][$value['fk_c_locale_code']]['fk_i_pages_id'] = $value['fk_i_pages_id'];
+                $retval[$value['pk_i_id']]['locale'][$value['fk_c_locale_code']]['fk_c_locale_code'] = $value['fk_c_locale_code'];
+                $retval[$value['pk_i_id']]['locale'][$value['fk_c_locale_code']]['s_title'] = $value['s_title'];
+            }
+
+            return $retval;
+        }
+        return array();
+    }
     /**
      * Return number of all pages, or only number of indelible pages
      *

@@ -237,7 +237,7 @@ function osc_get_static_page($internal_name, $locale = '')
 function osc_count_static_pages()
 {
     if (!View::newInstance()->_exists('pages')) {
-        View::newInstance()->_exportVariableToView('pages', Page::newInstance()->listAll(false));
+        View::newInstance()->_exportVariableToView('pages', Page::newInstance()->listStaticPages());
     }
 
     return View::newInstance()->_count('pages');
@@ -253,7 +253,7 @@ function osc_count_static_pages()
 function osc_has_static_pages()
 {
     if (!View::newInstance()->_exists('pages')) {
-        View::newInstance()->_exportVariableToView('pages', Page::newInstance()->listAll(false, 1));
+        View::newInstance()->_exportVariableToView('pages', Page::newInstance()->listStaticPages());
     }
     if (View::newInstance()->_get('pageLoop') !== 'pages') {
         View::newInstance()->_exportVariableToView('oldPage', View::newInstance()->_get('page'));
