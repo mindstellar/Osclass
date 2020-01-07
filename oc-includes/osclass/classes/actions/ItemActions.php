@@ -265,7 +265,11 @@ class ItemActions
             $locationManager = ItemLocation::newInstance();
             $locationManager->insert($location);
 
-            $this->uploadItemResources($aItem['photos'], $itemId);
+            try {
+                $this->uploadItemResources($aItem['photos'], $itemId);
+            } catch (ImagickException $e) {
+                LogOsclass::newInstance()->error($e->getMessage(),$e->getFile());
+            }
 
             // update dt_expiration at t_item
             Item::newInstance()->updateExpirationDate($itemId, $aItem['dt_expiration']);
@@ -273,7 +277,7 @@ class ItemActions
             /**
              * META FIELDS
              */
-            if ($meta != '' && count($meta) > 0) {
+            if ($meta && count($meta) > 0) {
                 $mField = Field::newInstance();
                 foreach ($meta as $k => $v) {
                     // if dateinterval
