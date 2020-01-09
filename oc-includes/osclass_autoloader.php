@@ -141,10 +141,12 @@ function osc__auto($class_name)
  */
 function osc__loadIfExists($filename)
 {
-    $fullFile = __DIR__ . '/' . $filename; // its relative to this path
+    if ($filename !== null) {
+        $fullFile = __DIR__ . '/' . $filename; // its relative to this path
 
-    if ((@include $fullFile) === false) {
-        throw  new RuntimeException("AutoLoad Error: No file found. $fullFile");
+        if ((@include $fullFile) === false) {
+            throw  new RuntimeException("AutoLoad Error: No file found. $fullFile");
+        }
     }
 }
 
