@@ -268,7 +268,7 @@ class ItemActions
             try {
                 $this->uploadItemResources($aItem['photos'], $itemId);
             } catch (ImagickException $e) {
-                LogOsclass::newInstance()->error($e->getMessage(),$e->getFile());
+                LogOsclass::newInstance()->error($e->getMessage(), $e->getFile());
             }
 
             // update dt_expiration at t_item
