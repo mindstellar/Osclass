@@ -81,10 +81,6 @@ class Params
 
                 return htmlspecialchars(stripslashes($value), ENT_NOQUOTES);
             }
-
-            if (get_magic_quotes_gpc()) {
-                $value = strip_slashes_extended($value);
-            }
         }
 
         return $value;
