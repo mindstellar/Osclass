@@ -30,7 +30,7 @@ class CWebContact extends BaseModel
     //Business Layer...
 
     /**
-     * @return void
+     * @return bool|void
      */
     public function doModel()
     {
@@ -42,7 +42,7 @@ class CWebContact extends BaseModel
                 $subject   = Params::getParam('subject');
                 $message   = Params::getParam('message');
 
-                if ((osc_recaptcha_private_key() != '') && !osc_check_recaptcha()) {
+                if (osc_recaptcha_private_key() && !osc_check_recaptcha()) {
                     osc_add_flash_error_message(_m('The Recaptcha code is wrong'));
                     Session::newInstance()->_setForm('yourName', $yourName);
                     Session::newInstance()->_setForm('yourEmail', $yourEmail);
@@ -106,9 +106,12 @@ MESSAGE;
 
 
                 $error = false;
-                if (osc_contact_attachment()) {
+                if (osc_contact_attachment() && Params::getParam('attachment')) {
                     $attachment = Params::getFiles('attachment');
-                    if (isset($attachment['error']) && $attachment['error'] == UPLOAD_ERR_OK) {
+                    if (isset($attachment['error'])
+                        && $attachment['error'] ==
+                        UPLOAD_ERR_OK
+                    ) {
                         $mime_array   = array(
                             'text/php',
                             'text/x-php',
