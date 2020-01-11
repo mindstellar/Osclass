@@ -22,6 +22,19 @@ Clone the repository and the submodules.
 ```
 $> git clone --recursive git@github.com:navjottomer/Osclass.git
 ```
+
+In case you don't have a Database running in your laptop, you can use the following to start a mysql locally via docker:
+```
+$> docker-compose up -d
+```
+
+To run a basic web server locally (disconsider if you already use MAMP, XAMP, or other web servers)
+In the project root, run:
+```
+$> php -S localhost:8000 -t .
+```
+Now just open your browser http://localhost:8000
+
 ## Pull Request
 Want to help create a pull request from you clone, just make sure of few things
 
