@@ -266,7 +266,9 @@ function osc_has_static_pages()
     } else {
         View::newInstance()->_exportVariableToView('page', View::newInstance()->_current('pages'));
     }
-    View::newInstance()->_exportVariableToView('page_meta', json_decode($page['s_meta'], true));
+    if (isset($page['s_meta'])) {
+        View::newInstance()->_exportVariableToView('page_meta', json_decode($page['s_meta'], true));
+    }
 
     return $page;
 }
