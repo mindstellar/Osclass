@@ -36,6 +36,7 @@ require_once LIB_PATH . 'osclass/helpers/hErrors.php';
 require_once LIB_PATH . 'osclass/helpers/hLocale.php';
 require_once LIB_PATH . 'osclass/helpers/hSearch.php';
 require_once LIB_PATH . 'osclass/helpers/hPlugins.php';
+require_once LIB_PATH . 'osclass/helpers/hUtils.php';
 require_once LIB_PATH . 'osclass/helpers/hTranslations.php';
 require_once LIB_PATH . 'osclass/helpers/hSanitize.php';
 require_once LIB_PATH . 'osclass/default-constants.php';
@@ -46,25 +47,36 @@ require_once LIB_PATH . 'osclass/locales.php';
 Params::init();
 Session::newInstance()->session_start();
 
-$locales = osc_listLocales();
-
-if (Params::getParam('install_locale') != '') {
-    Session::newInstance()->_set('userLocale', Params::getParam('install_locale'));
-    Session::newInstance()->_set('adminLocale', Params::getParam('install_locale'));
-}
-
-if (Session::newInstance()->_get('adminLocale') != ''
-    && array_key_exists(Session::newInstance()->_get('adminLocale'), $locales)
-) {
-    $current_locale = Session::newInstance()->_get('adminLocale');
-} elseif (isset($locales['en_US'])) {
-    $current_locale = 'en_US';
-} else {
-    $current_locale = key($locales);
-}
-
-Session::newInstance()->_set('userLocale', $current_locale);
-Session::newInstance()->_set('adminLocale', $current_locale);
+Session::newInstance()->_set('userLocale', 'en_US');
+Session::newInstance()->_set('adminLocale', 'en_US');
+var_dump(file_get_contents(osc_get_languages_json_url())); // <-- works
+var_dump(osc_file_get_contents(osc_get_languages_json_url())); // <-- "Osclass database server is not available."
+// $existing_lang = osc_listLocales();
+// $json_lang = osc_file_get_contents(osc_get_languages_json_url());
+// $json_lang = json_decode($json_lang, true);
+// $install_lang = Params::getParam('install_lang');
+//
+// if($install_lang != '') {
+//     if(array_key_exists($install_lang, $existing_lang)) {
+//         // nothing
+//     } else if(array_key_exists($install_lang, $json_lang)) {
+//         $folder_lang = osc_translations_path().$install_lang;
+//         mkdir($folder_lang, 0755, true);
+//
+//         $files = osc_get_language_files_urls($install_lang);
+//         $dummy = file_put_contents($folder_lang.'/index.php', '');
+//         foreach($files as $file => $url) {
+//             $content = osc_file_get_contents($url);
+//             file_put_contents($folder_lang, $content);
+//         }
+//     }
+//
+//     $existing_lang = osc_listLocales();
+//     if(array_key_exists($install_lang, $existing_lang)) {
+//         Session::newInstance()->_set('userLocale', $install_lang);
+//         Session::newInstance()->_set('adminLocale', $install_lang);
+//     }
+// }
 
 
 $translation = Translation::newInstance(true);
