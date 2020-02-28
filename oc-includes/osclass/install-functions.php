@@ -533,6 +533,7 @@ function oc_install()
     }
     $localeManager->insert($values);
 
+    $error_num = $comm->getErrorLevel();
 
     $required_files = array(
         ABS_PATH . 'oc-includes/osclass/installer/basic_data.sql',

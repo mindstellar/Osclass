@@ -47,44 +47,39 @@ require_once LIB_PATH . 'osclass/locales.php';
 Params::init();
 Session::newInstance()->session_start();
 
-Session::newInstance()->_set('userLocale', 'en_US');
-Session::newInstance()->_set('adminLocale', 'en_US');
-var_dump(file_get_contents(osc_get_languages_json_url())); // <-- works
-var_dump(osc_file_get_contents(osc_get_languages_json_url())); // <-- "Osclass database server is not available."
-// $existing_lang = osc_listLocales();
-// $json_lang = osc_file_get_contents(osc_get_languages_json_url());
-// $json_lang = json_decode($json_lang, true);
-// $install_lang = Params::getParam('install_lang');
-//
-// if($install_lang != '') {
-//     if(array_key_exists($install_lang, $existing_lang)) {
-//         // nothing
-//     } else if(array_key_exists($install_lang, $json_lang)) {
-//         $folder_lang = osc_translations_path().$install_lang;
-//         mkdir($folder_lang, 0755, true);
-//
-//         $files = osc_get_language_files_urls($install_lang);
-//         $dummy = file_put_contents($folder_lang.'/index.php', '');
-//         foreach($files as $file => $url) {
-//             $content = osc_file_get_contents($url);
-//             file_put_contents($folder_lang, $content);
-//         }
-//     }
-//
-//     $existing_lang = osc_listLocales();
-//     if(array_key_exists($install_lang, $existing_lang)) {
-//         Session::newInstance()->_set('userLocale', $install_lang);
-//         Session::newInstance()->_set('adminLocale', $install_lang);
-//     }
-// }
-
-
-$translation = Translation::newInstance(true);
-
 $step = Params::getParam('step');
 if (!is_numeric($step)) {
     $step = '1';
 }
+
+$existing_lang = osc_listLocales();
+$json_lang = osc_file_get_contents(osc_get_languages_json_url());
+$json_lang = json_decode($json_lang, true);
+$install_lang = Params::getParam('install_locale');
+
+if($step == 1 && $install_lang != '') {
+    if(!array_key_exists($install_lang, $existing_lang) && array_key_exists($install_lang, $json_lang)) {
+        $folder_lang = osc_translations_path().$install_lang;
+        mkdir($folder_lang, 0755, true);
+
+        $files = osc_get_language_files_urls($install_lang);
+        foreach($files as $file => $url) {
+            $content = osc_file_get_contents($url);
+            file_put_contents($folder_lang.'/'.$file, $content);
+        }
+    }
+
+    $existing_lang = osc_listLocales();
+    if(array_key_exists($install_lang, $existing_lang)) {
+        Session::newInstance()->_set('userLocale', $install_lang);
+        Session::newInstance()->_set('adminLocale', $install_lang);
+    }
+} elseif($step == 1) {
+    Session::newInstance()->_set('userLocale', 'en_US');
+    Session::newInstance()->_set('adminLocale', 'en_US');
+}
+
+$translation = Translation::newInstance(true);
 
 if (is_osclass_installed()) {
     $message =
@@ -200,17 +195,17 @@ switch ($step) {
                 <form action="install.php" method="post">
                     <input type="hidden" name="step" value="2"/>
                     <div class="form-table">
-                        <?php if (count($locales) > 1) { ?>
+                        <?php if (count($json_lang) > 1) { ?>
                             <div>
                                 <label for="install_locale"><?php _e('Choose language'); ?></label>
                                 <select id="install_locale" name="install_locale"
                                         onchange="window.location.href='?install_locale='+document.getElementById(this.id).value">
-                                    <?php foreach ($locales as $k => $locale) { ?>
+                                    <?php foreach ($json_lang as $k => $locale) { ?>
                                         <option value="<?php echo osc_esc_html($k); ?>" <?php if ($k
-                                            == $current_locale
+                                            == Session::newInstance()->_get('userLocale')
                                         ) {
                                             echo 'selected="selected"';
-                                                       } ?>><?php echo $locale['name']; ?></option>
+                                                       } ?>><?php echo $locale; ?></option>
                                     <?php } ?>
                                 </select>
                             </div>
