@@ -79,6 +79,38 @@ class OSCLocale extends DAO
      * @since  unknown
      *
      */
+    public function listAllCodes()
+    {
+        $this->dao->select('pk_c_code');
+        $this->dao->from($this->getTableName());
+        $result = $this->dao->get();
+
+        if ($result == false) {
+            return array();
+        }
+
+        $aResults = $result->result();
+        $aCodes = array();
+
+        foreach($aResults as $result) {
+            $aCodes[] = $result['pk_c_code'];
+        }
+
+        return $aCodes;
+    }
+
+    /**
+     * Return all locales enabled.
+     *
+     * @access public
+     *
+     * @param bool $isBo
+     * @param bool $indexedByPk
+     *
+     * @return array
+     * @since  unknown
+     *
+     */
     public function listAllEnabled($isBo = false, $indexedByPk = false)
     {
         $this->dao->select();
