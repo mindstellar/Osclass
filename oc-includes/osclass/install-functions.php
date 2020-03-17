@@ -538,7 +538,6 @@ function oc_install()
     $required_files = array(
         ABS_PATH . 'oc-includes/osclass/installer/basic_data.sql',
         ABS_PATH . 'oc-includes/osclass/installer/pages.sql',
-        ABS_PATH . 'oc-content/languages/' . osc_current_admin_locale() . '/mail.sql',
     );
 
     $sql = '';
@@ -555,6 +554,14 @@ function oc_install()
         }
 
         $sql .= file_get_contents($file);
+    }
+
+    $install_lang_sql = ABS_PATH . 'oc-content/languages/' . osc_current_admin_locale() . '/mail.sql';
+    $default_lang_sql = ABS_PATH . 'oc-includes/osclass/installer/mail.sql';
+    if (file_exists($file)) {
+        $sql .= file_get_contents($installLangSql);
+    } else {
+        $sql .= file_get_contents($default_lang_sql);
     }
 
     $comm->importSQL($sql);

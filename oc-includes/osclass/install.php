@@ -52,31 +52,44 @@ if (!is_numeric($step)) {
     $step = '1';
 }
 
-$existing_lang = osc_listLocales();
-$json_lang = osc_file_get_contents(osc_get_languages_json_url());
-$json_lang = json_decode($json_lang, true);
-$install_lang = Params::getParam('install_locale');
+$existingLangs = osc_listLocales();
+$jsonLangs = osc_file_get_contents(osc_get_languages_json_url());
+$jsonLangs = json_decode($jsonLangs, true);
+$installLang = Params::getParam('install_locale');
 
-if($step == 1 && $install_lang != '') {
-    if(!array_key_exists($install_lang, $existing_lang) && array_key_exists($install_lang, $json_lang)) {
-        $folder_lang = osc_translations_path().$install_lang;
-        mkdir($folder_lang, 0755, true);
+if($step == 1 && $installLang != '') {
+    if(!array_key_exists($installLang, $existingLangs) && array_key_exists($installLang, $jsonLangs)) {
+        $langFolder = osc_translations_path().$installLang;
+        mkdir($langFolder, 0755, true);
 
-        $files = osc_get_language_files_urls($install_lang);
+        $files = osc_get_language_files_urls($installLang);
         foreach($files as $file => $url) {
             $content = osc_file_get_contents($url);
-            file_put_contents($folder_lang.'/'.$file, $content);
+            file_put_contents($langFolder.'/'.$file, $content);
         }
     }
 
-    $existing_lang = osc_listLocales();
-    if(array_key_exists($install_lang, $existing_lang)) {
-        Session::newInstance()->_set('userLocale', $install_lang);
-        Session::newInstance()->_set('adminLocale', $install_lang);
+    $existingLangs = osc_listLocales();
+    if(array_key_exists($installLang, $existingLangs)) {
+        Session::newInstance()->_set('userLocale', $installLang);
+        Session::newInstance()->_set('adminLocale', $installLang);
     }
 } elseif($step == 1) {
-    Session::newInstance()->_set('userLocale', 'en_US');
-    Session::newInstance()->_set('adminLocale', 'en_US');
+    $defaultLang = 'en_US';
+    $langFolder = osc_translations_path().$defaultLang;
+
+    if(!is_dir($langFolder)) {
+        mkdir($langFolder, 0755, true);
+
+        $files = osc_get_language_files_urls($defaultLang);
+        foreach($files as $file => $url) {
+            $content = osc_file_get_contents($url);
+            file_put_contents($langFolder.'/'.$file, $content);
+        }
+    }
+
+    Session::newInstance()->_set('userLocale', $defaultLang);
+    Session::newInstance()->_set('adminLocale', $defaultLang);
 }
 
 $translation = Translation::newInstance(true);
@@ -195,12 +208,12 @@ switch ($step) {
                 <form action="install.php" method="post">
                     <input type="hidden" name="step" value="2"/>
                     <div class="form-table">
-                        <?php if (count($json_lang) > 1) { ?>
+                        <?php if (count($jsonLangs) > 1) { ?>
                             <div>
                                 <label for="install_locale"><?php _e('Choose language'); ?></label>
                                 <select id="install_locale" name="install_locale"
                                         onchange="window.location.href='?install_locale='+document.getElementById(this.id).value">
-                                    <?php foreach ($json_lang as $k => $locale) { ?>
+                                    <?php foreach ($jsonLangs as $k => $locale) { ?>
                                         <option value="<?php echo osc_esc_html($k); ?>" <?php if ($k
                                             == Session::newInstance()->_get('userLocale')
                                         ) {
