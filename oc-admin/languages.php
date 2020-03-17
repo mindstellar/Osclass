@@ -100,12 +100,12 @@ class CAdminLanguages extends AdminSecBaseModel
                 if ($language != '') {
                     $aExistingLanguages = OSCLocale::newInstance()->listAllCodes();
                     $aJsonLanguages = json_decode(osc_file_get_contents(osc_get_languages_json_url()), true);
-                    if(!array_key_exists($language, $aExistingLanguages) && array_key_exists($language, $aJsonLanguages)) {
+                    if (!array_key_exists($language, $aExistingLanguages) && array_key_exists($language, $aJsonLanguages)) {
                         $folder = osc_translations_path().$language;
                         mkdir($folder, 0755, true);
 
                         $files = osc_get_language_files_urls($language);
-                        foreach($files as $file => $url) {
+                        foreach ($files as $file => $url) {
                             $content = osc_file_get_contents($url);
                             file_put_contents($folder.'/'.$file, $content);
                         }

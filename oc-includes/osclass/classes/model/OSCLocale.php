@@ -92,7 +92,7 @@ class OSCLocale extends DAO
         $aResults = $result->result();
         $aCodes = array();
 
-        foreach($aResults as $result) {
+        foreach ($aResults as $result) {
             $aCodes[] = $result['pk_c_code'];
         }
 
