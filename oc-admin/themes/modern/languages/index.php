@@ -156,7 +156,9 @@ osc_current_admin_theme_path('parts/header.php');
                         <?php foreach ($aData['aaData'] as $array) { ?>
                             <tr>
                                 <?php foreach ($array as $key => $value) { ?>
-                                    <td <?php if ($key == 0) { ?> class="col-bulkactions" <?php } ?>>
+                                    <td <?php if ($key == 0) {
+                                        ?> class="col-bulkactions" <?php
+                                        } ?>>
                                         <?php echo $value; ?>
                                     </td>
                                 <?php } ?>

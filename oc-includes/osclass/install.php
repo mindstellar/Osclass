@@ -57,32 +57,32 @@ $jsonLangs = osc_file_get_contents(osc_get_languages_json_url());
 $jsonLangs = json_decode($jsonLangs, true);
 $installLang = Params::getParam('install_locale');
 
-if($step == 1 && $installLang != '') {
-    if(!array_key_exists($installLang, $existingLangs) && array_key_exists($installLang, $jsonLangs)) {
+if ($step == 1 && $installLang != '') {
+    if (!array_key_exists($installLang, $existingLangs) && array_key_exists($installLang, $jsonLangs)) {
         $langFolder = osc_translations_path().$installLang;
         mkdir($langFolder, 0755, true);
 
         $files = osc_get_language_files_urls($installLang);
-        foreach($files as $file => $url) {
+        foreach ($files as $file => $url) {
             $content = osc_file_get_contents($url);
             file_put_contents($langFolder.'/'.$file, $content);
         }
     }
 
     $existingLangs = osc_listLocales();
-    if(array_key_exists($installLang, $existingLangs)) {
+    if (array_key_exists($installLang, $existingLangs)) {
         Session::newInstance()->_set('userLocale', $installLang);
         Session::newInstance()->_set('adminLocale', $installLang);
     }
-} elseif($step == 1) {
+} elseif ($step == 1) {
     $defaultLang = 'en_US';
     $langFolder = osc_translations_path().$defaultLang;
 
-    if(!is_dir($langFolder)) {
+    if (!is_dir($langFolder)) {
         mkdir($langFolder, 0755, true);
 
         $files = osc_get_language_files_urls($defaultLang);
-        foreach($files as $file => $url) {
+        foreach ($files as $file => $url) {
             $content = osc_file_get_contents($url);
             file_put_contents($langFolder.'/'.$file, $content);
         }
