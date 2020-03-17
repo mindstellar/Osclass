@@ -78,7 +78,7 @@ if ($step == 1 && $installLang != '') {
     $defaultLang = 'en_US';
     $langFolder = osc_translations_path().$defaultLang;
 
-    if(!is_dir($langFolder) && count($jsonLangs)) {
+    if (!is_dir($langFolder) && count($jsonLangs)) {
         mkdir($langFolder, 0755, true);
 
         $files = osc_get_language_files_urls($defaultLang);
