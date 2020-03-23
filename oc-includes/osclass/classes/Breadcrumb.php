@@ -486,24 +486,31 @@ class Breadcrumb
 
         $node = array();
         foreach ($this->aLevel as $i => $iValue) {
-            $text = '<li ';
             // set a class style for first and last <li>
+            $class = '';
             if ($i == 0) {
-                $text .= 'class="first-child" ';
+                $class .= 'class="first-child" ';
             }
             if (($i == (count($this->aLevel) - 1)) && ($i != 0)) {
-                $text .= 'class="last-child" ';
+                $class .= 'class="last-child" ';
             }
-            $text .= 'itemscope itemtype="http://data-vocabulary.org/Breadcrumb" >';
+
+            $text = '<li '.$class.' itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem">';
+
             // set separator
             if ($i > 0) {
                 $text .= ' ' . $separator . ' ';
             }
-            // create span tag
-            $title = '<span itemprop="title">' . $iValue['title'] . '</span>';
+
+            // create anchor/span tag
             if (array_key_exists('url', $iValue)) {
-                $title = '<a href="' . osc_esc_html($iValue['url']) . '" itemprop="url">' . $title . '</a>';
+                $title = '<a itemprop="item" href="'.osc_esc_html($iValue['url']).'">';
+                $title .= '<span itemprop="name">' . $iValue['title'] . '</span>';
+                $title .= '</a>';
+            } else {
+                $title = '<span itemprop="name">' . $iValue['title'] . '</span>';
             }
+
             $node[] = $text . $title . '</li>' . PHP_EOL;
         }
 
