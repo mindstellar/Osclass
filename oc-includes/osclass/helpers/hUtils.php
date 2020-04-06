@@ -446,3 +446,45 @@ function osc_get_locations_sql_url($location)
 
     return 'https://raw.githubusercontent.com/navjottomer/Osclass-Extras/master/locations/' . $location;
 }
+
+/**
+ * Get URL of language files JSON.
+ *
+ * @return string
+ */
+function osc_get_languages_json_url()
+{
+    return 'https://raw.githubusercontent.com/navjottomer/osclass-languages/master/src/list.json';
+}
+/**
+ * Get URL of language folder.
+ *
+ * @param string $language
+ *
+ * @return string
+ */
+function osc_get_language_folder_url($language)
+{
+    return 'https://raw.githubusercontent.com/navjottomer/osclass-languages/master/src/' . $language;
+}
+/**
+ * Get required language files and their URLs.
+ *
+ * @param string $language
+ *
+ * @return array
+ */
+function osc_get_language_files_urls($language)
+{
+    $base_url = osc_get_language_folder_url($language);
+    return array(
+        'index.php' => $base_url.'/index.php',
+        'core.mo' => $base_url.'/core.mo',
+        'core.po' => $base_url.'/core.po',
+        'mail.sql' => $base_url.'/mail.sql',
+        'messages.po' => $base_url.'/messages.po',
+        'messages.mo' => $base_url.'/messages.mo',
+        'theme.po' => $base_url.'/theme.po',
+        'theme.mo' => $base_url.'/theme.mo',
+    );
+}

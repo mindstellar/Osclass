@@ -89,6 +89,59 @@ class CAdminLanguages extends AdminSecBaseModel
 
                 $this->redirectTo(osc_admin_base_url(true) . '?page=languages');
                 break;
+            case('import_official'): // import official languages
+                if (defined('DEMO')) {
+                    osc_add_flash_warning_message(_m("This action can't be done because it's a demo site"), 'admin');
+                    $this->redirectTo(osc_admin_base_url(true) . '?page=languages');
+                }
+                osc_csrf_check();
+
+                $language = Params::getParam('language');
+                if ($language != '') {
+                    $aExistingLanguages = OSCLocale::newInstance()->listAllCodes();
+                    $aJsonLanguages = json_decode(osc_file_get_contents(osc_get_languages_json_url()), true);
+                    if (!array_key_exists($language, $aExistingLanguages) && array_key_exists($language, $aJsonLanguages)) {
+                        $folder = osc_translations_path().$language;
+                        mkdir($folder, 0755, true);
+
+                        $files = osc_get_language_files_urls($language);
+                        foreach ($files as $file => $url) {
+                            $content = osc_file_get_contents($url);
+                            file_put_contents($folder.'/'.$file, $content);
+                        }
+
+                        $locales = osc_listLocales();
+                        $values  = array(
+                            'pk_c_code'         => $locales[$language]['code'],
+                            's_name'            => $locales[$language]['name'],
+                            's_short_name'      => $locales[$language]['short_name'],
+                            's_description'     => $locales[$language]['description'],
+                            's_version'         => $locales[$language]['version'],
+                            's_author_name'     => $locales[$language]['author_name'],
+                            's_author_url'      => $locales[$language]['author_url'],
+                            's_currency_format' => $locales[$language]['currency_format'],
+                            's_date_format'     => $locales[$language]['date_format'],
+                            'b_enabled'         => 1,
+                            'b_enabled_bo'      => 1
+                        );
+
+                        if (isset($locales[$language]['stop_words'])) {
+                            $values['s_stop_words'] = $locales[$language]['stop_words'];
+                        }
+                        OSCLocale::newInstance()->insert($values);
+
+                        osc_add_flash_ok_message(_m('Language imported successfully'), 'admin');
+                        $this->redirectTo(osc_admin_base_url(true) . '?page=languages');
+
+                        return true;
+                    }
+                }
+
+                osc_add_flash_error_message(_m('There was a problem importing the selected language'), 'admin');
+                $this->redirectTo(osc_admin_base_url(true) . '?page=languages');
+
+                return false;
+                break;
             case('edit'):               // editing a language
                 $sLocale = Params::getParam('id');
                 if (!preg_match('/.{2}_.{2}/', $sLocale)) {
@@ -507,6 +560,18 @@ class CAdminLanguages extends AdminSecBaseModel
                 );
                 $bulk_options = osc_apply_filter('language_bulk_filter', $bulk_options);
                 $this->_exportVariableToView('bulk_options', $bulk_options);
+
+                $aExistingLanguages = OSCLocale::newInstance()->listAllCodes();
+                $aJsonLanguages = json_decode(osc_file_get_contents(osc_get_languages_json_url()), true);
+                // IDEA: This probably can be improved.
+                foreach ($aJsonLanguages as $code => $name) {
+                    if (in_array($code, $aExistingLanguages, false)) {
+                        unset($aJsonLanguages[$code]);
+                    }
+                }
+                if (is_array($aJsonLanguages) && count($aJsonLanguages) > 0) {
+                    $this->_exportVariableToView('aOfficialLanguages', $aJsonLanguages);
+                }
 
                 $this->doView('languages/index.php');
                 break;

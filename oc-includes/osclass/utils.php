@@ -346,7 +346,7 @@ function osc_doRequest($url, $_data)
     $data              = http_build_query($_data);
     $out               = 'POST ' . $path . ' HTTP/1.1' . PHP_EOL;
     $out               .= 'Host: ' . $url['host'] . PHP_EOL;
-    $out               .= 'Referer: Osclass ' . osc_version() . PHP_EOL;
+    $out               .= 'Referer: Osclass ' . OSCLASS_VERSION . PHP_EOL;
     $out               .= 'Content-type: application/x-www-form-urlencoded' . PHP_EOL;
     $out               .= 'Content-Length: ' . strlen($data) . PHP_EOL;
     $out               .= 'Connection: close' . PHP_EOL . PHP_EOL;
@@ -969,7 +969,7 @@ function download_fsockopen($sourceFile, $fileout = null, $post_data = null)
         return false;
     }
 
-    $ua  = Params::getServerParam('HTTP_USER_AGENT') . ' Osclass (v.' . osc_version() . ')';
+    $ua  = Params::getServerParam('HTTP_USER_AGENT') . ' Osclass (v.' . OSCLASS_VERSION . ')';
     $out = ($post_data != null && is_array($post_data) ? 'POST' : 'GET') . " $link HTTP/1.1\r\n";
     $out .= "Host: $host\r\n";
     $out .= "User-Agent: $ua\r\n";
@@ -1055,7 +1055,7 @@ function osc_downloadFile($sourceFile, $downloadedFile, $post_data = null)
             curl_setopt(
                 $ch,
                 CURLOPT_USERAGENT,
-                Params::getServerParam('HTTP_USER_AGENT') . ' Osclass (v.' . osc_version() . ')'
+                Params::getServerParam('HTTP_USER_AGENT') . ' Osclass (v.' . OSCLASS_VERSION . ')'
             );
             curl_setopt($ch, CURLOPT_FILE, $fp);
             @curl_setopt($ch, CURLOPT_FOLLOWLOCATION, true);
@@ -1107,7 +1107,7 @@ function osc_file_get_contents($url, $post_data = null)
         curl_setopt(
             $ch,
             CURLOPT_USERAGENT,
-            Params::getServerParam('HTTP_USER_AGENT') . ' Osclass (v.' . osc_version() . ')'
+            Params::getServerParam('HTTP_USER_AGENT') . ' Osclass (v.' . OSCLASS_VERSION . ')'
         );
         if (!defined('CURLOPT_RETURNTRANSFER')) {
             define('CURLOPT_RETURNTRANSFER', 1);
