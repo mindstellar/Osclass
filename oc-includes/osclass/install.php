@@ -311,7 +311,7 @@ switch ($step) {
                        hreflang="en"><?php _e('Documentation'); ?></a>
                 </li>
                 <li>
-                    <a href="https://github.com/navjottomer/Osclass/" target="_blank"
+                    <a href="https://github.com/mindstellar/Osclass/" target="_blank"
                        hreflang="en"><?php _e('Feedback'); ?></a>
                 </li>
                 <li>

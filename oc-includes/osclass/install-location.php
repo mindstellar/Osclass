@@ -98,7 +98,7 @@ function basic_info()
         'https://osclass.gitbook.io/osclass-docs/'
     );
     $body .= __('Cheers,') . '<br/>';
-    $body .= __('The <a href="https://github.com/navjottomer/osclass">Osclass</a> team');
+    $body .= __('The <a href="https://github.com/mindstellar/osclass">Osclass</a> team');
 
     $sitename = strtolower(Params::getServerParam('SERVER_NAME'));
     if (0 === strpos($sitename, 'www.')) {
