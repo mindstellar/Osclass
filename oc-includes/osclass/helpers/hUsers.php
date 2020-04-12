@@ -334,7 +334,7 @@ function osc_user_id()
  */
 function osc_user_access_date()
 {
-    return (int)osc_user_field('dt_access_date');
+    return (string)osc_user_field('dt_access_date');
 }
 
 
@@ -345,7 +345,7 @@ function osc_user_access_date()
  */
 function osc_user_access_ip()
 {
-    return (int)osc_user_field('s_access_ip');
+    return (string)osc_user_field('s_access_ip');
 }
 
 
