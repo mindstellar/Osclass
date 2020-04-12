@@ -83,11 +83,11 @@ function admin_footer_html()
     <div class="float-left">
         <?php printf(
             __('Thank you for using <a href="%s" target="_blank">Osclass</a>'),
-            'https://github.com/navjottomer/Osclass/'
+            'https://github.com/mindstellar/Osclass/'
         ); ?> -
         <a title="<?php _e('Forums'); ?>" href="https://osclass.discourse.group"
            target="_blank"><?php _e('Forums'); ?></a> &middot;
-        <a title="<?php _e('Report Issue'); ?>" href="https://github.com/navjottomer/Osclass/issues/"
+        <a title="<?php _e('Report Issue'); ?>" href="https://github.com/mindstellar/Osclass/issues/"
            target="_blank"><?php _e('Report Issue'); ?></a>
     </div>
     <div class="float-right">

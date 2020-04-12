@@ -21,11 +21,11 @@
 
 /*
 Theme Name: bender
-Theme URI: https://github.com/navjottomer/osclass/
+Theme URI: https://github.com/mindstellar/osclass/
 Description: Bender theme
 Version: 3.1.5
 Author: Osclass
-Author URI: https://github.com/navjottomer/osclass/
+Author URI: https://github.com/mindstellar/osclass/
 Widgets:  header, footer
 Theme update URI: bender
 */
@@ -40,7 +40,7 @@ function bender_theme_info()
         ,'version'     => '3.1.5'
         ,'description' => 'Bender theme'
         ,'author_name' => 'Osclass'
-        ,'author_url'  => 'https://github.com/navjottomer/osclass'
+        ,'author_url'  => 'https://github.com/mindstellar/osclass'
         ,'locations'   => array()
     );
 }
