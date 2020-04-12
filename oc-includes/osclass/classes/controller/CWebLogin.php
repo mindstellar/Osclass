@@ -225,6 +225,8 @@ class CWebLogin extends BaseModel
             case ('recover_post'):   //post execution to recover the password
                 osc_csrf_check();
 
+                osc_run_hook('before_user_recover');
+
                 // e-mail is incorrect
                 if (!osc_validate_email(Params::getParam('s_email'))) {
                     osc_add_flash_error_message(_m('Invalid email address'));
