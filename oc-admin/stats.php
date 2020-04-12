@@ -299,6 +299,23 @@ class CAdminStats extends AdminSecBaseModel
                 $this->_exportVariableToView('max', $max);
                 $this->doView('stats/users.php');
                 break;
+            case('google'):
+                $this->doView('stats/google.php');
+            break;
+            case('google_post'):
+                // updating google analytics settings
+                if (defined('DEMO')) {
+                    osc_add_flash_warning_message(_m("This action can't be done because it's a demo site"), 'admin');
+                    $this->redirectTo(osc_admin_base_url(true) . '?page=settings&action=advanced');
+                }
+                osc_csrf_check();
+
+                if (osc_set_preference('ganalytics_id', Params::getParam('tracking_id'))) {
+                    osc_add_flash_ok_message(_m('Google Analytics settings have been updated'), 'admin');
+                }
+                $this->redirectTo(osc_admin_base_url(true) . '?page=stats&action=google');
+                break;
+                break;
         }
     }
 

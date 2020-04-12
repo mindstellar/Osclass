@@ -151,6 +151,13 @@ class AdminMenu
             'stats_comments',
             'moderator'
         );
+        $this->add_submenu(
+            'stats',
+            __('Google Analytics'),
+            osc_admin_base_url(true) . '?page=stats&action=google',
+            'stats_google',
+            'administrator'
+        );
 
         $this->add_menu(__('Settings'), osc_admin_base_url(true) . '?page=settings', 'settings', 'administrator');
         $this->add_submenu(

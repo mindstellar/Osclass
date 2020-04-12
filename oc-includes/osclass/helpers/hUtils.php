@@ -421,6 +421,14 @@ function osc_get_subdomain_params()
     return $options;
 }
 
+/**
+ * Get Google Analytics tracking ID.
+ *
+ * @return string
+ */
+function osc_ganalytics_id() {
+    return osc_get_preference('ganalytics_id');
+}
 
 /**
  * Get URL of location files JSON.
