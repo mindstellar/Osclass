@@ -80,7 +80,7 @@ osc_add_hook('admin_page_header', 'customPageHeader');
 function customPageHeader()
 {
     ?>
-    <h1><?php _e('Tools'); ?></h1>
+    <h1><?php _e('Statistics'); ?></h1>
     <?php
 }
 
@@ -109,8 +109,7 @@ osc_current_admin_theme_path('parts/header.php'); ?>
                 </p>
             <?php } ?>
             <p>
-                <?php _e('You can recalculate your location stats. This is useful if you upgrade from versions older than Osclass 2.4'); ?>
-                .
+                <?php _e('You can recalculate your location stats if they are incorrect.'); ?>
             </p>
             <form action="<?php echo osc_admin_base_url(true); ?>" method="post">
                 <input type="hidden" name="action" value="locations_post"/>

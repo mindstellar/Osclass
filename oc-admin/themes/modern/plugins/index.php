@@ -120,7 +120,7 @@ function customHead()
 ?>
     <?php osc_current_admin_theme_path('parts/header.php'); ?>
     <div id="tabs" class="ui-osc-tabs ui-tabs-right">
-        <ul>
+        <ul style="display: none;">
             <?php
             $aPluginsToUpdate = json_decode(osc_get_preference('plugins_to_update'));
             $bPluginsToUpdate = is_array($aPluginsToUpdate) ? true : false;
