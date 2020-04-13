@@ -93,9 +93,6 @@ osc_current_admin_theme_path('parts/header.php'); ?>
     <!-- themes list -->
     <div class="appearance">
         <div id="tabs" class="ui-osc-tabs ui-tabs-right">
-            <ul>
-                <li><a href="#available-themes"><?php _e('Available themes'); ?></a></li>
-            </ul>
             <div id="available-themes" class="ui-osc-tabs-panel">
                 <h2 class="render-title"><?php _e('Current theme'); ?> <a
                             href="<?php echo osc_admin_base_url(true); ?>?page=appearance&amp;action=add"
