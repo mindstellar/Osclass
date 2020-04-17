@@ -32,7 +32,7 @@
     <input type="hidden" name="rm" value="2">
     <input type="hidden" name="business" value="info@osclass.org">
     <input type="hidden" name="item_name" value="Osclass project">
-    <input type="hidden" name="return" value="https://github.com/navjottomer/osclass/paypal/">
+    <input type="hidden" name="return" value="https://github.com/mindstellar/osclass/paypal/">
     <input type="hidden" name="currency_code" value="USD">
     <input type="hidden" name="lc" value="US" />
     <input type="hidden" name="custom" value="<?php echo osc_admin_render_theme_url('oc-content/themes/bender/admin/settings.php'); ?>&donation=successful&source=bender">
@@ -73,8 +73,8 @@
             <div class="form-row">
                 <div class="form-label"><?php _e('Footer link', 'bender'); ?></div>
                 <div class="form-controls">
-                    <div class="form-label-checkbox"><input type="checkbox" name="footer_link" value="1" <?php echo (osc_get_preference('footer_link', 'bender') ? 'checked' : ''); ?> > <?php _e('I want to help Osclass by linking to <a href="https://github.com/navjottomer/osclass/" target="_blank">osclass.org</a> from my site with the following text:', 'bender'); ?></div>
-                    <span class="help-box"><?php _e('This website is proudly using the <a title="Osclass web" href="https://github.com/navjottomer/osclass/">classifieds scripts</a> software <strong>Osclass</strong>', 'bender'); ?></span>
+                    <div class="form-label-checkbox"><input type="checkbox" name="footer_link" value="1" <?php echo (osc_get_preference('footer_link', 'bender') ? 'checked' : ''); ?> > <?php _e('I want to help Osclass by linking to <a href="https://github.com/mindstellar/osclass/" target="_blank">osclass.org</a> from my site with the following text:', 'bender'); ?></div>
+                    <span class="help-box"><?php _e('This website is proudly using the <a title="Osclass web" href="https://github.com/mindstellar/osclass/">classifieds scripts</a> software <strong>Osclass</strong>', 'bender'); ?></span>
                 </div>
             </div>
             <?php } ?>

@@ -158,6 +158,20 @@ class AdminMenu
             'stats_google',
             'administrator'
         );
+        $this->add_submenu(
+            'stats',
+            __('Renew location stats'),
+            osc_admin_base_url(true) . '?page=tools&action=locations',
+            'tools_location',
+            'administrator'
+        );
+        $this->add_submenu(
+            'stats',
+            __('Renew category stats'),
+            osc_admin_base_url(true) . '?page=tools&action=category',
+            'tools_category',
+            'administrator'
+        );
 
         $this->add_menu(__('Settings'), osc_admin_base_url(true) . '?page=settings', 'settings', 'administrator');
         $this->add_submenu(
@@ -318,20 +332,6 @@ class AdminMenu
             __('Upgrade Osclass'),
             osc_admin_base_url(true) . '?page=tools&action=upgrade',
             'tools_upgrade',
-            'administrator'
-        );
-        $this->add_submenu(
-            'tools',
-            __('Location stats'),
-            osc_admin_base_url(true) . '?page=tools&action=locations',
-            'tools_location',
-            'administrator'
-        );
-        $this->add_submenu(
-            'tools',
-            __('Category stats'),
-            osc_admin_base_url(true) . '?page=tools&action=category',
-            'tools_category',
             'administrator'
         );
         $this->add_submenu(

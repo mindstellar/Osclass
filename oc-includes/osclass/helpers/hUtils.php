@@ -437,7 +437,7 @@ function osc_ganalytics_id() {
  */
 function osc_get_locations_json_url()
 {
-    return 'https://raw.githubusercontent.com/navjottomer/Osclass-Extras/master/locations/list.json';
+    return 'https://raw.githubusercontent.com/mindstellar/Osclass-Extras/master/locations/list.json';
 }
 
 
@@ -452,7 +452,7 @@ function osc_get_locations_sql_url($location)
 {
     $location = rawurlencode($location);
 
-    return 'https://raw.githubusercontent.com/navjottomer/Osclass-Extras/master/locations/' . $location;
+    return 'https://raw.githubusercontent.com/mindstellar/Osclass-Extras/master/locations/' . $location;
 }
 
 /**
@@ -462,7 +462,7 @@ function osc_get_locations_sql_url($location)
  */
 function osc_get_languages_json_url()
 {
-    return 'https://raw.githubusercontent.com/navjottomer/osclass-languages/master/src/list.json';
+    return 'https://raw.githubusercontent.com/mindstellar/osclass-languages/master/src/list.json';
 }
 /**
  * Get URL of language folder.
@@ -473,7 +473,7 @@ function osc_get_languages_json_url()
  */
 function osc_get_language_folder_url($language)
 {
-    return 'https://raw.githubusercontent.com/navjottomer/osclass-languages/master/src/' . $language;
+    return 'https://raw.githubusercontent.com/mindstellar/osclass-languages/master/src/' . $language;
 }
 /**
  * Get required language files and their URLs.

@@ -213,7 +213,7 @@ class CAdminLogin extends AdminBaseModel
     public function doView($file)
     {
         $login_admin_title = osc_apply_filter('login_admin_title', 'Osclass');
-        $login_admin_url   = osc_apply_filter('login_admin_url', 'https://github.com/navjottomer/osclass/');
+        $login_admin_url   = osc_apply_filter('login_admin_url', 'https://github.com/mindstellar/osclass/');
         $login_admin_image = osc_apply_filter('login_admin_image', osc_admin_base_url() . 'images/osclass-logo.gif');
 
         View::newInstance()->_exportVariableToView('login_admin_title', $login_admin_title);
