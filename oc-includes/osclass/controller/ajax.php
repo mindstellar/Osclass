@@ -278,7 +278,7 @@
                     }
 
                    $plugin = osc_plugins_path() . $file;
-                   $themes = osc_content_path() .'themes/'. $file;
+                   $themes = osc_themes_path() . $file;
 
                     if(file_exists($plugin)) {
                         require_once $plugin;
