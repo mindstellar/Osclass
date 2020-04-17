@@ -277,12 +277,17 @@
                         break;
                     }
 
-                    if( !file_exists(osc_plugins_path() . $file) ) {
+                   $plugin = osc_plugins_path() . $file;
+                   $themes = osc_content_path() .'themes/'. $file;
+
+                    if(file_exists($plugin)) {
+                        require_once $plugin;
+                    } else if(file_exists($themes)) {
+                        require_once $themes;
+                    } else {
                         echo json_encode(array('error' => "ajaxFile doesn't exist"));
                         break;
                     }
-
-                    require_once osc_plugins_path() . $file;
                 break;
                 case 'check_username_availability':
                     $username = osc_sanitize_username(Params::getParam('s_username'));
