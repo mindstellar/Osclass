@@ -315,7 +315,6 @@ class CAdminStats extends AdminSecBaseModel
                 }
                 $this->redirectTo(osc_admin_base_url(true) . '?page=stats&action=google');
                 break;
-                break;
         }
     }
 
