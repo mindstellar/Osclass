@@ -153,6 +153,13 @@ class AdminMenu
         );
         $this->add_submenu(
             'stats',
+            __('Google Analytics'),
+            osc_admin_base_url(true) . '?page=stats&action=google',
+            'stats_google',
+            'administrator'
+        );
+        $this->add_submenu(
+            'stats',
             __('Renew location stats'),
             osc_admin_base_url(true) . '?page=tools&action=locations',
             'tools_location',

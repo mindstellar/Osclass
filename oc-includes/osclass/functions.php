@@ -810,3 +810,19 @@ function osc_admin_toolbar_update_languages($force = false)
         }
     }
 }
+
+function osc_ganalytics_footer() {
+    $id = osc_ganalytics_id();
+    if($id != '') {
+        ?>
+        <script async src="https://www.googletagmanager.com/gtag/js?id=<?php echo osc_esc_html($id); ?>"></script>
+        <script>
+            window.dataLayer = window.dataLayer || [];
+            function gtag() { dataLayer.push(arguments); }
+            gtag('js', new Date());
+            gtag('config', '<?php echo osc_esc_js($id); ?>');
+        </script>
+        <?php
+    }
+}
+osc_add_hook('footer', 'osc_ganalytics_footer');
