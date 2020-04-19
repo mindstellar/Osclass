@@ -997,6 +997,27 @@ class ItemForm extends Form
 
         return true;
     }
+
+    /**
+     * @param null $item
+     *
+     * @return bool
+     */
+    public static function contact_phone_text($item = null)
+    {
+        if ($item == null) {
+            $item = osc_item();
+        }
+        if (Session::newInstance()->_getForm('contactPhone') != '') {
+            $item['s_contact_phone'] = Session::newInstance()->_getForm('contactPhone');
+        }
+        parent::generic_input_text(
+            'contactPhone',
+            isset($item['s_contact_phone']) ? $item['s_contact_phone'] : null
+        );
+
+        return true;
+    }
     // NOTHING TO DO
 
     /**

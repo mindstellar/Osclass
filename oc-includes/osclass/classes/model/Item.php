@@ -54,6 +54,7 @@ class Item extends DAO
             'fk_c_currency_code',
             's_contact_name',
             's_contact_email',
+            's_contact_phone',
             'b_premium',
             's_ip',
             'b_enabled',
@@ -304,6 +305,22 @@ class Item extends DAO
         $items = $result->result();
 
         return $this->extendData($items);
+    }
+
+    /**
+     * Find items belong to a phone number
+     *
+     * @access public
+     *
+     * @param $phone
+     *
+     * @return array
+     * @since  unknown
+     *
+     */
+    public function findByPhone($phone)
+    {
+        return $this->listWhere('s_contact_phone = %s', $phone);
     }
 
     /**
@@ -1346,4 +1363,3 @@ class Item extends DAO
 }
 
 /* file end: ./oc-includes/osclass/model/Item.php */
-
