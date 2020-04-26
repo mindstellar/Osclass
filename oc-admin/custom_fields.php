@@ -32,6 +32,7 @@ class CAdminCFields extends AdminSecBaseModel
 
         //specific things for this class
         $this->fieldManager = Field::newInstance();
+        osc_run_hook('init_admin_fields');
     }
 
     //Business Layer...

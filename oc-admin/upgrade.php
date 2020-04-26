@@ -26,6 +26,7 @@ class CAdminUpgrade extends AdminSecBaseModel
     public function __construct()
     {
         parent::__construct();
+        osc_run_hook('init_admin_upgrade');
     }
 
     //Business Layer...

@@ -26,6 +26,7 @@ class CAdminMain extends AdminSecBaseModel
     public function __construct()
     {
         parent::__construct();
+        osc_run_hook('init_admin_main');
     }
 
     //Business Layer...

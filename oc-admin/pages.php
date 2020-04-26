@@ -32,6 +32,7 @@ class CAdminPages extends AdminSecBaseModel
 
         //specific things for this class
         $this->pageManager = Page::newInstance();
+        osc_run_hook('init_admin_pages');
     }
 
     //Business Layer...

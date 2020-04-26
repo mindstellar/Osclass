@@ -32,6 +32,7 @@ class CAdminItems extends AdminSecBaseModel
 
         //specific things for this class
         $this->itemManager = Item::newInstance();
+        osc_run_hook('init_admin_items');
     }
 
     //Business Layer...

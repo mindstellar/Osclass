@@ -29,6 +29,7 @@ class CAdminStats extends AdminSecBaseModel
         parent::__construct();
 
         //specific things for this class
+        osc_run_hook('init_admin_stats');
     }
 
     //Business Layer...
