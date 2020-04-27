@@ -32,6 +32,7 @@ class CAdminEmails extends AdminSecBaseModel
 
         //specific things for this class
         $this->emailManager = Page::newInstance();
+        osc_run_hook('init_admin_emails');
     }
 
     //Business Layer...

@@ -31,6 +31,7 @@ class CAdminMedia extends AdminSecBaseModel
 
         //specific things for this class
         $this->resourcesManager = ItemResource::newInstance();
+        osc_run_hook('init_admin_media');
     }
 
     //Business Layer...

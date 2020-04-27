@@ -42,6 +42,7 @@ class CAdminAdmins extends AdminSecBaseModel
 
         //specific things for this class
         $this->adminManager = Admin::newInstance();
+        osc_run_hook('init_admin_admins');
     }
 
     //Business Layer...

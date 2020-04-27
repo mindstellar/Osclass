@@ -32,6 +32,7 @@ class CAdminUsers extends AdminSecBaseModel
 
         //specific things for this class
         $this->userManager = User::newInstance();
+        osc_run_hook('init_admin_users');
     }
 
     //Business Layer...
