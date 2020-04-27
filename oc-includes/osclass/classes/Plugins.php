@@ -22,6 +22,7 @@
 class Plugins
 {
 
+    private static $used_hook = array();
     public static $plugins_infos = array();
     private static $hooks;
     private static $installed;
@@ -389,6 +390,12 @@ class Plugins
      */
     public static function runHook($hook, ...$args)
     {
+        $used_hook = self::$used_hook;
+        if (in_array($hook, $used_hook, true)) {
+            LogOsclass::newInstance()->warn($hook.': This hook/filter name is already used.', $_SERVER['QUERY_STRING']);
+            return;
+        }
+        self::$used_hook[]=$hook;
         if (isset(self::$hooks[$hook])) {
             for ($priority = 0; $priority <= 10; $priority++) {
                 if (isset(self::$hooks[$hook][$priority]) && is_array(self::$hooks[$hook][$priority])) {
