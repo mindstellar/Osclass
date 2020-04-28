@@ -391,7 +391,7 @@ class Plugins
     public static function runHook($hook, ...$args)
     {
        if (isset(self::$hooks[$hook])) {
-            self::$used_hook[$hook]= true;
+            self::$used_hooks[$hook]= true;
             for ($priority = 0; $priority <= 10; $priority++) {
                 if (isset(self::$hooks[$hook][$priority]) && is_array(self::$hooks[$hook][$priority])) {
                     foreach (self::$hooks[$hook][$priority] as $fxName) {
