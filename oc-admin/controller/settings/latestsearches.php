@@ -1,4 +1,6 @@
-<?php if (!defined('ABS_PATH')) {
+<?php
+
+if (!defined('ABS_PATH')) {
     exit('ABS_PATH is not loaded. Direct access is not allowed.');
 }
 
@@ -23,6 +25,13 @@
  */
 class CAdminSettingsLatestSearches extends AdminSecBaseModel
 {
+
+    public function __construct()
+    {
+        parent::__construct();
+        osc_run_hook('init_admin_settings_latest');
+    }
+
     //Business Layer...
     public function doModel()
     {
@@ -52,6 +61,7 @@ class CAdminSettingsLatestSearches extends AdminSecBaseModel
                 break;
         }
     }
+
 }
 
 // EOF: ./oc-admin/controller/settings/latestsearches.php

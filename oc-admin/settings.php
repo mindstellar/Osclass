@@ -1,4 +1,6 @@
-<?php if (!defined('ABS_PATH')) {
+<?php
+
+if (!defined('ABS_PATH')) {
     exit('ABS_PATH is not loaded. Direct access is not allowed.');
 }
 
@@ -23,6 +25,12 @@
  */
 class CAdminSettings extends AdminSecBaseModel
 {
+
+    public function __construct()
+    {
+       
+    }
+
     //Business Layer...
     public function doModel()
     {
@@ -83,6 +91,7 @@ class CAdminSettings extends AdminSecBaseModel
 
         $do->doModel();
     }
+
 }
 
 /* file end: ./oc-admin/settings.php */
