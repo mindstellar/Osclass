@@ -30,6 +30,7 @@ class CAdminSettings extends AdminSecBaseModel
     {
         $this->setParams();
         $this->init();
+         osc_run_hook('init_admin_settings');
     }
 
     //Business Layer...
