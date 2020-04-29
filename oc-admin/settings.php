@@ -28,7 +28,8 @@ class CAdminSettings extends AdminSecBaseModel
 
     public function __construct()
     {
-       
+        $this->setParams();
+        $this->init();
     }
 
     //Business Layer...
