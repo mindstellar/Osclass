@@ -27,15 +27,19 @@ class SecBaseModel extends BaseModel
     {
         parent::__construct();
 
-        //Checking granting...
+       //Checking granting...
+        $this->init();
+    }
+
+    protected function init()
+    {
         if (!$this->isLogged()) {
             //If we are not logged or we do not have permissions -> go to the login page
             $this->logout();
             $this->showAuthFailPage();
         }
     }
-
-    //granting methods
+    
 
     public function logout()
     {

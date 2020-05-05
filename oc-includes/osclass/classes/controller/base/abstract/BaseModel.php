@@ -56,14 +56,21 @@ abstract class BaseModel
         }
 
         $this->subdomain_params($current_host);
-        $this->page = Params::getParam('page');
-        $this->action = Params::getParam('action');
+        $this->setParams();
         $this->ajax = false;
         $this->time = microtime(true);
         WebThemes::newInstance();
         osc_run_hook('init');
     }
-
+     
+    /**
+     * 
+     * @since 3.9.0 -develop
+     */
+    protected function setParams(){
+        $this->page = Params::getParam('page');
+        $this->action = Params::getParam('action');
+    }
     /**
      * @param      $url
      * @param null $code
