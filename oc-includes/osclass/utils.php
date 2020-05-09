@@ -310,7 +310,7 @@ function is_serialized($data)
  *
  * @param $url   string
  * @param $_data array
- *
+ * @deprecated since 4.0.0
  * @return bool false on error or number of bytes sent.
  */
 function osc_doRequest($url, $_data)
@@ -580,7 +580,7 @@ function osc_mailBeauty($text, $params)
  * @param      $dir
  * @param int  $mode
  * @param bool $recursive
- *
+ * @deprecated since 4.0.0
  * @return bool
  */
 function osc_mkdir($dir, $mode = 0755, $recursive = true)
@@ -603,7 +603,7 @@ function osc_mkdir($dir, $mode = 0755, $recursive = true)
  * @param       $source
  * @param       $dest
  * @param array $options
- *
+ * @deprecated since 4.0.0
  * @return bool
  */
 function osc_copy($source, $dest, $options = array('folderPermission' => 0755, 'filePermission' => 0755))
@@ -680,6 +680,7 @@ function osc_copy($source, $dest, $options = array('folderPermission' => 0755, '
  * @param $file2
  *
  * @return bool
+ * @deprecated since 4.0.0
  */
 function osc_copyemz($file1, $file2)
 {
@@ -807,6 +808,7 @@ function osc_dbdump($path, $file)
  * Returns true if there is curl on system environment
  *
  * @return bool
+ * @deprecated since 4.0.0
  */
 function testCurl()
 {
@@ -816,7 +818,7 @@ function testCurl()
 
 /**
  * Returns true if there is fsockopen on system environment
- *
+ * @deprecated  since 4.0.0
  * @return bool
  */
 function testFsockopen()
@@ -919,6 +921,7 @@ function processResponse($content)
  * @param string $headers
  *
  * @return array
+ * @deprecated since 4.0.0
  */
 function processHeaders($headers)
 {
@@ -943,11 +946,11 @@ function processHeaders($headers)
  *
  * @param string $sourceFile
  * @param mixed  $fileout
- *
  * @param null   $post_data
  *
  * @return bool|string
  * @since 3.0
+ * @deprecated since 4.0.0
  */
 function download_fsockopen($sourceFile, $fileout = null, $post_data = null)
 {
@@ -1141,6 +1144,7 @@ function osc_file_get_contents($url, $post_data = null)
  * @param string $mod
  *
  * @return bool
+ * @deprecated since 4.0.0
  */
 function apache_mod_loaded($mod)
 {
@@ -1166,6 +1170,7 @@ function apache_mod_loaded($mod)
  * Change version to param number
  *
  * @param mixed version
+ * @deprecated since 4.0.0
  */
 function osc_changeVersionTo($version = null)
 {
@@ -1177,6 +1182,7 @@ function osc_changeVersionTo($version = null)
 
 
 /**
+ * @deprecated since 4.0.0
  * @param $array
  *
  * @return string
@@ -1206,6 +1212,7 @@ function strip_slashes_extended($array)
  *  1 - everything was OK
  *  2 - zip is empty
  *  -1 : file could not be created (or error reading the file from the zip)
+ * @deprecated since 4.0.0
  */
 function osc_unzip_file($file, $to)
 {
@@ -1239,6 +1246,7 @@ function osc_unzip_file($file, $to)
  * @param string $to   Full path where it is going to be unzipped
  *
  * @return int
+ * @deprecated since 4.0.0
  */
 function _unzip_file_ziparchive($file, $to)
 {
@@ -1306,6 +1314,7 @@ function _unzip_file_ziparchive($file, $to)
  * @param string $to       Full path where it is going to be unzipped
  *
  * @return int
+ * @deprecated since 4.0.0
  */
 function _unzip_file_pclzip($zip_file, $to)
 {
@@ -1361,6 +1370,7 @@ function _unzip_file_pclzip($zip_file, $to)
  * @param string $archive_name   full path of the destination zip file
  *
  * @return int
+ * @deprecated since 4.0.0
  */
 function osc_zip_folder($archive_folder, $archive_name)
 {
@@ -1385,7 +1395,7 @@ function osc_zip_folder($archive_folder, $archive_name)
  *
  * @param string $archive_folder full path of the folder
  * @param string $archive_name   full path of the destination zip file
- *
+ * @deprecated since 4.0.0
  * @return int
  */
 function _zip_folder_ziparchive($archive_folder, $archive_name)
@@ -1433,7 +1443,7 @@ function _zip_folder_ziparchive($archive_folder, $archive_name)
  *
  * @param string $archive_folder full path of the folder
  * @param string $archive_name   full path of the destination zip file
- *
+ * @deprecated since 4.0.0
  * @return int
  */
 function _zip_folder_pclzip($archive_folder, $archive_name)
@@ -1488,7 +1498,7 @@ function osc_check_recaptcha()
  * replace double slash with single slash
  *
  * @param $path
- *
+ * @deprecated since 4.0.0
  * @return string
  */
 function osc_replace_double_slash($path)
@@ -1501,6 +1511,7 @@ function osc_replace_double_slash($path)
  * @param mixed|string $dir
  *
  * @return bool
+ * @deprecated since 4.0.0
  */
 function osc_check_dir_writable($dir = ABS_PATH)
 {
@@ -1558,7 +1569,7 @@ function osc_check_dir_writable($dir = ABS_PATH)
 
 /**
  * @param mixed|string $dir
- *
+ * @deprecated since 4.0.0
  * @return bool
  */
 function osc_change_permissions($dir = ABS_PATH)
@@ -1629,6 +1640,7 @@ function osc_change_permissions($dir = ABS_PATH)
  * @param mixed|string $dir
  *
  * @return array|bool
+ * @deprecated since 4.0.0
  */
 function osc_save_permissions($dir = ABS_PATH)
 {
@@ -1664,6 +1676,7 @@ function osc_save_permissions($dir = ABS_PATH)
  * @param $price
  *
  * @return string
+ * @deprecated since 4.0.0
  */
 function osc_prepare_price($price)
 {
@@ -1721,7 +1734,7 @@ function rglob($pattern, $flags = 0, $path = '')
  *
  * @param      $update_uri
  * @param null $version
- *
+ * @deprecated since 4.0.0
  * @return bool
  */
 function osc_check_plugin_update($update_uri, $version = null)
@@ -1738,7 +1751,7 @@ function osc_check_plugin_update($update_uri, $version = null)
 /**
  * @param string $update_uri
  * @param null   $version
- *
+ * @deprecated since 4.0.0
  * @return bool
  */
 function osc_check_theme_update($update_uri, $version = null)
@@ -1757,7 +1770,7 @@ function osc_check_theme_update($update_uri, $version = null)
  * @param null   $version
  *
  * @param bool   $disable
- *
+ * @deprecated since 4.0.0
  * @return bool
  */
 function osc_check_language_update($update_uri, $version = null, $disable = true)
@@ -1794,7 +1807,7 @@ function osc_check_language_update($update_uri, $version = null, $disable = true
  * @param      $update_uri
  *
  * @param bool $disable
- *
+ * @deprecated since 4.0.0
  * @return bool|string
  */
 function _get_market_url($type, $update_uri, $disable = true)
@@ -1829,7 +1842,7 @@ function _get_market_url($type, $update_uri, $disable = true)
  * @param      $version
  *
  * @param bool $disable
- *
+ * @deprecated since 4.0.0
  * @return bool
  */
 function _need_update($uri, $version, $disable = true)
@@ -1861,7 +1874,7 @@ function _need_update($uri, $version, $disable = true)
  *
  * @param string $a -> from market
  * @param string $b -> installed version
- *
+ * @deprecated since 4.0.0
  * @return int
  */
 function version_compare2($a, $b)
@@ -1893,6 +1906,7 @@ function version_compare2($a, $b)
  * @param $categoryTotal
  *
  * @return int
+ * @deprecated since 4.0.0
  */
 function _recursive_category_stats(&$aux, &$categoryTotal)
 {
@@ -1913,6 +1927,7 @@ function _recursive_category_stats(&$aux, &$categoryTotal)
  * Update category stats
  *
  * @return void
+ * @deprecated since 4.0.0
  */
 function osc_update_cat_stats()
 {
@@ -1941,7 +1956,7 @@ function osc_update_cat_stats()
  * Recount items for a given a category id
  *
  * @param int $id
- *
+ * @deprecated since 4.0.0
  */
 function osc_update_cat_stats_id($id)
 {
@@ -1978,7 +1993,7 @@ function osc_update_cat_stats_id($id)
  *
  * @param bool $force
  * @param int  $limit
- *
+ * @deprecated since 4.0.0
  * @return int
  * @since 3.1
  */
@@ -2056,7 +2071,7 @@ function osc_update_location_stats($force = false, $limit = 1000)
 /** Translate current categories to new locale
  *
  * @param $locale
- *
+ * @deprecated since 4.0.0
  * @since 3.2.1
  */
 function osc_translate_categories($locale)
@@ -2099,6 +2114,7 @@ function osc_translate_categories($locale)
 
 
 /**
+ * @deprecated since 4.0.0
  * @return string
  */
 function get_ip()
@@ -2150,12 +2166,6 @@ function osc_csrfguard_generate_token()
 }
 
 
-/**
- * @param $unique_form_name
- * @param $token_value
- *
- * @return bool
- */
 /**
  * @param $unique_form_name
  * @param $token_value
@@ -2216,10 +2226,7 @@ function osc_csrfguard_start()
 
 
 /**
- * @param      $url
- * @param null $code
- */
-/**
+ * @deprecated since 4.0.0
  * @param      $url
  * @param null $code
  */
@@ -2238,6 +2245,7 @@ function osc_redirect_to($url, $code = null)
 
 
 /**
+ * @deprecated since 4.0.0
  * @param $type
  *
  * @return bool|int|mixed
@@ -2282,6 +2290,7 @@ function osc_calculate_location_slug($type)
 
 
 /**
+ * @deprecated since 4.0.0
  * @param $input
  */
 function osc_prune_array(&$input)
@@ -2800,6 +2809,7 @@ function osc_market($section, $code)
 
 
 /**
+ * @deprecated since 4.0.0
  * @return bool
  */
 function osc_is_ssl()
@@ -2815,7 +2825,7 @@ if (!function_exists('hex2b64')) {
     /**
      * Used to encode a field for Amazon Auth
      * (taken from the Amazon S3 PHP example library)
-     *
+     * @deprecated since 4.0.0
      * @param $str
      *
      * @return string
@@ -2835,7 +2845,7 @@ if (!function_exists('hmacsha1')) {
     /**
      * Calculate HMAC-SHA1 according to RFC2104
      * See http://www.faqs.org/rfcs/rfc2104.html
-     *
+     * @deprecated since 4.0.0
      * @param $key
      * @param $data
      *
