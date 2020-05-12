@@ -156,19 +156,16 @@ class Upgrade
         if (($is_compatible !== -1) && $is_upgradable !== -1
             && $extracted_package_path = $this->downloadPackageAndExtract()
         ) {
-            $this->FileSystem->remove($extracted_package_path .'/'.$this->package_directory_name. '/oc-content');
-
-            //Double check oc-content is deleted
-            if (!$this->FileSystem->exists($extracted_package_path .'/'.$this->package_directory_name. '/oc-content')) {
-                try {
-                    $this->FileSystem->sync(
-                        $extracted_package_path . '/' . $this->package_directory_name,
-                        ABS_PATH
-                    );
-                    $this->FileSystem->remove($extracted_package_path);
-                } catch (Exception $e) {
-                    LogOsclass::newInstance()->error($e->getMessage(), $e->getFile());
-                }
+            try {
+                $this->FileSystem->sync(
+                    $extracted_package_path . '/' . $this->package_directory_name,
+                    ABS_PATH,
+                    null,
+                    ['oc-content'] //Don't overwrite 'oc-content' directory while upgrading Osclass
+                );
+                $this->FileSystem->remove($extracted_package_path);
+            } catch (Exception $e) {
+                LogOsclass::newInstance()->error($e->getMessage(), $e->getFile());
             }
         }
     }
