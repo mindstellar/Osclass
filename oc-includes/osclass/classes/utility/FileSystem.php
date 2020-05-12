@@ -14,6 +14,7 @@ use FilesystemIterator;
 use InvalidArgumentException;
 use LengthException;
 use Params;
+use RecursiveCallbackFilterIterator;
 use RecursiveDirectoryIterator;
 use RecursiveIteratorIterator;
 use RuntimeException;
@@ -27,6 +28,14 @@ use Traversable;
 class FileSystem
 {
     private static $lastError;
+
+    /**
+     * @internal
+     */
+    private static function handleError($type, $msg)
+    {
+        self::$lastError = $msg;
+    }
 
     /**
      * Sets access and modification time of file.
@@ -175,21 +184,22 @@ class FileSystem
      *
      * @param                   $originDir
      * @param                   $targetDir
-     * @param \Traversable|null $iterator Iterator that filters which files and directories to copy, if null a recursive
-     *                                    iterator is created
-     * @param array             $options  An array of boolean options
-     *                                    Valid options are:
-     *                                    - $options['override'] If true, target files newer than origin files are
-     *                                    overwritten (see copy(), defaults to false)
-     *                                    - $options['copy_on_windows'] Whether to copy files instead of links on
-     *                                    Windows (see symlink(), defaults to false)
-     *                                    - $options['delete'] Whether to delete files that are not in the source
-     *                                    directory (defaults to false)
-     * @param array             $excluded_files excluded files/directory given in array
+     * @param array             $options        An array of boolean options
+     *                                          Valid options are:
+     *                                          - $options['override'] If true, target files newer than origin files
+     *                                          are
+     *                                          overwritten (see copy(), defaults to false)
+     *                                          - $options['copy_on_windows'] Whether to copy files instead of links on
+     *                                          Windows (see symlink(), defaults to false)
+     *                                          - $options['delete'] Whether to delete files that are not in the source
+     *                                          directory (defaults to false)
+     * @param array             $filter         Files/Directory name in array get filtered
+     *
      * @throws \Exception
      */
-    public function sync($originDir, $targetDir, $iterator = null, $options = [], $excluded_files = [])
+    public function sync($originDir, $targetDir, $options = [], $filter = [])
     {
+        $iterator     = null;
         $targetDir    = rtrim($targetDir, '/\\');
         $originDir    = rtrim($originDir, '/\\');
         $originDirLen = strlen($originDir);
@@ -199,7 +209,7 @@ class FileSystem
         }
 
         // Iterate in destination folder to remove obsolete entries
-        if (isset($options['delete']) &&  $options['delete'] && $this->exists($targetDir)) {
+        if (isset($options['delete']) && $options['delete'] && $this->exists($targetDir)) {
             $deleteIterator = $iterator;
             if (null === $deleteIterator) {
                 $flags          = FilesystemIterator::SKIP_DOTS;
@@ -220,10 +230,22 @@ class FileSystem
         $copyOnWindows = isset($options['copy_on_windows']) ? $options['copy_on_windows'] : false;
 
         if (null === $iterator) {
-            $flags    = $copyOnWindows ? FilesystemIterator::SKIP_DOTS | FilesystemIterator::FOLLOW_SYMLINKS
+            $flags = $copyOnWindows ? FilesystemIterator::SKIP_DOTS | FilesystemIterator::FOLLOW_SYMLINKS
                 : FilesystemIterator::SKIP_DOTS;
+            /**
+             * $iterator = new RecursiveIteratorIterator(
+             * new RecursiveDirectoryIterator($originDir, $flags),
+             * RecursiveIteratorIterator::SELF_FIRST
+             * );
+             */
             $iterator = new RecursiveIteratorIterator(
-                new RecursiveDirectoryIterator($originDir, $flags),
+                new RecursiveCallbackFilterIterator(
+                    new RecursiveDirectoryIterator($originDir, $flags),
+                    static function ($filterIterator) use ($filter) {
+                        /** @var FilesystemIterator $filterIterator */
+                        return !in_array($filterIterator->getBaseName(), $filter, false);
+                    }
+                ),
                 RecursiveIteratorIterator::SELF_FIRST
             );
         }
@@ -231,6 +253,7 @@ class FileSystem
         $this->mkdir($targetDir);
         $filesCreatedWhileMirroring = [];
 
+        /** @var FilesystemIterator $file */
         foreach ($iterator as $file) {
             if ($file->getPathname() === $targetDir || $file->getRealPath() === $targetDir
                 || isset($filesCreatedWhileMirroring[$file->getRealPath()])
@@ -280,16 +303,6 @@ class FileSystem
         return true;
     }
 
-    /**
-     * @param string $prefix
-     * @param bool   $more_entropy
-     *
-     * @return string
-     */
-    public function generateUniqueId($prefix = 'osc_', $more_entropy = false)
-    {
-        return uniqid($prefix, $more_entropy);
-    }
     /**
      * Removes files or directories.
      *
@@ -476,6 +489,17 @@ class FileSystem
     }
 
     /**
+     * @param string $prefix
+     * @param bool   $more_entropy
+     *
+     * @return string
+     */
+    public function generateUniqueId($prefix = 'osc_', $more_entropy = false)
+    {
+        return uniqid($prefix, $more_entropy);
+    }
+
+    /**
      * Renames a file or a directory.
      *
      * @param      $origin
@@ -536,7 +560,7 @@ class FileSystem
         $dir = dirname($filename);
 
         if (!is_dir($dir)) {
-                $this->mkdir($dir);
+            $this->mkdir($dir);
         }
 
         if (!is_writable($dir)) {
@@ -549,21 +573,13 @@ class FileSystem
 
         fwrite($fp, $content);
         fclose($fp);
+
         return true;
     }
 
     /**
-     * Returns true if there is curl on system environment
-     *
-     * @return bool
-     */
-    private function testCurl()
-    {
-        return (function_exists('curl_init') || function_exists('curl_exec'));
-    }
-
-    /**
      * Get content implementation
+     *
      * @param      $url
      * @param null $post_data
      *
@@ -603,17 +619,28 @@ class FileSystem
             throw new RuntimeException(sprintf('Unable to get content from "%s". CURL not initializes. 
             Is PHP-curl extension installed?', $url));
         }
+
         return $data;
     }
 
     /**
-     * Download Files in osclass download directory
+     * Returns true if there is curl on system environment
+     *
+     * @return bool
+     */
+    private function testCurl()
+    {
+        return (function_exists('curl_init') || function_exists('curl_exec'));
+    }
+
+    /**
+     * Download Files from given url
      * try to overwrite existing file.
      *
-     * @param      $sourceURL
+     * @param        $sourceURL
      * @param string $filename
-     * @param null $post_data
-     * @param bool $verify_ssl
+     * @param null   $post_data
+     * @param bool   $verify_ssl
      *
      * @return bool|string
      * @throws \Exception
@@ -666,12 +693,5 @@ class FileSystem
 
         throw new RuntimeException(sprintf('Unable to download content from "%s". CURL not initializes. 
         Is PHP-curl extension installed?', $sourceURL));
-    }
-    /**
-     * @internal
-     */
-    private static function handleError($type, $msg)
-    {
-        self::$lastError = $msg;
     }
 }
