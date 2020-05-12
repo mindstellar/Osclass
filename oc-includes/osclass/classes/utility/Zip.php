@@ -9,9 +9,7 @@
 
 namespace mindstellar\osclass\classes\utility;
 
-use Exception;
 use PclZip;
-use RuntimeException;
 use ZipArchive;
 
 /**
