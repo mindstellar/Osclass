@@ -32,11 +32,15 @@ class Upgrade
     /**
      * @var string new version of theme, plugin or osclass
      */
-    private $package_version;
+    private $package_new_version;
     /**
      * @var string last compatible version of theme, plugin or osclass
      */
     private $package_compatible_version;
+    /**
+     * @var string last current version of theme, plugin or osclass
+     */
+    private $package_current_version;
     /**
      * @var string name of theme or plugin
      */
@@ -67,7 +71,8 @@ class Upgrade
      *                            $package_info['directory_name'],
      *                            $package_info['compatible_version'],
      *                            $package_info['download_url'],
-     *                            $package_info['version'];
+     *                            $package_info['new_version'];
+     *                            $package_info['current_version'];
      *
      */
     public function __construct($package_type = 'self', $package_info = null)
@@ -91,8 +96,11 @@ class Upgrade
             if (isset($package_info['download_url'])) {
                 $this->package_download_url = $package_info['download_url'];
             }
-            if (isset($package_info['version'])) {
-                $this->package_version = $package_info['version'];
+            if (isset($package_info['new_version'])) {
+                $this->package_new_version = $package_info['new_version'];
+            }
+            if (isset($package_info['current_version'])) {
+                $this->package_current_version = $package_info['current_version'];
             }
 
             if ($this->package_name !== null
@@ -100,7 +108,8 @@ class Upgrade
                 || $this->package_directory_name !== null
                 || $this->package_compatible_version !== null
                 || $this->package_download_url !== null
-                || $this->package_version !== null
+                || $this->package_new_version !== null
+                || $this->package_current_version !== null
             ) {
                 $this->package_info_valid = true;
             }
@@ -149,9 +158,9 @@ class Upgrade
     private function upgradeSelf()
     {
         //Check current version is not lower than compatible version
-        $is_compatible = Utils::versionCompare($this->package_compatible_version, OSCLASS_VERSION);
+        $is_compatible = Utils::versionCompare($this->package_compatible_version, $this->package_current_version);
         //Check current version is not higher than new version
-        $is_upgradable = Utils::versionCompare(OSCLASS_VERSION, $this->package_version);
+        $is_upgradable = Utils::versionCompare($this->package_current_version, $this->package_new_version);
        // echo $is_compatible.' '.$is_upgradable;
         if (($is_compatible !== -1) && $is_upgradable !== -1
             && $extracted_package_path = $this->downloadPackageAndExtract()
@@ -215,10 +224,20 @@ class Upgrade
                 $this->package_download_url = $download_url;
             }
             if (isset($aSelf_package['version'])) {
-                $this->package_version = str_replace('v', '', $aSelf_package['tag_name']);
+                $this->package_new_version = str_replace('v', '', $aSelf_package['tag_name']);
             }
+            $this->package_current_version = OSCLASS_VERSION;
             $this->package_directory_name = 'osclass';
             $this->package_info_valid = true;
         }
+    }
+
+    /**
+     * Check if upgrade is available, by default it check Osclass upgrade
+     * @return bool
+     */
+    public function isUpgradeAvailable()
+    {
+        return Utils::versionCompare($this->package_current_version, $this->package_new_version, 'lt');
     }
 }
