@@ -183,7 +183,7 @@ class Utils
      *                         The possible operators are: <, lt, <=, le, >, gt, >=, ge, ==, =, eq, !=, <>, ne
      *                         respectively.
      *
-     * @return int
+     * @return int|bool
      *@link https://www.php.net/manual/en/function.version-compare.php
      */
     public static function versionCompare($a, $b, $operator = null)
