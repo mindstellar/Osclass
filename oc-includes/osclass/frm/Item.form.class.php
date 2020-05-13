@@ -793,6 +793,19 @@
             return true;
         }
 
+        /**
+         * @param String $id
+         * @param String $value
+         *
+         * @return bool
+         */
+        static public function add_hidden_field($id, $value) {
+            if($id == null || $value == null) return false;
+
+            parent::generic_input_hidden($id, $value);
+            return true;
+        }
+
 		/**
 		 * @param string $path
 		 */
