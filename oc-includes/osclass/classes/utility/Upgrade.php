@@ -233,11 +233,14 @@ class Upgrade
     }
 
     /**
-     * Check if upgrade is available, by default it check Osclass upgrade
+     * Check if upgrade is available, by default it check Osclass upgrade availability.
      * @return bool
      */
     public function isUpgradeAvailable()
     {
-        return Utils::versionCompare($this->package_current_version, $this->package_new_version, 'lt');
+        if ($this->package_info_valid === true) {
+            return Utils::versionCompare($this->package_current_version, $this->package_new_version, 'lt');
+        }
+        return false;
     }
 }
