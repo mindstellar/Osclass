@@ -1018,6 +1018,18 @@
     }
 
     /**
+     * @param string $region
+     * @return array
+     */
+    function osc_get_cities_by_region($region = '') {
+        if($region=='') {
+            return City::newInstance()->listAll();
+        } else {
+            return City::newInstance()->findByRegion($region);
+        }
+    }
+
+    /**
      * Gets list of currencies
      *
      * @return string
