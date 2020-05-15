@@ -11,4 +11,5 @@ return array(
     'OpensslCryptor\\' => array($vendorDir . '/pensiero/php-openssl-cryptor/src'),
     'Gettext\\Languages\\' => array($vendorDir . '/gettext/languages/src'),
     'Gettext\\' => array($vendorDir . '/gettext/gettext/src'),
+    'Facebook\\' => array($vendorDir . '/facebook/graph-sdk/src/Facebook'),
 );

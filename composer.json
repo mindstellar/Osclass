@@ -30,7 +30,8 @@
     "phpseclib/phpseclib": "2.0.x",
     "pensiero/php-openssl-cryptor": "0.1.0",
     "google/recaptcha": "1.1.x",
-    "gettext/gettext": "4.6.x"    
+    "gettext/gettext": "4.6.x",
+    "facebook/graph-sdk": "^5.7"    
   },
   "require-dev": {
     "roave/security-advisories": "dev-master"
