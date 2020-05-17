@@ -127,8 +127,39 @@ function osc__auto($class_name)
         'Widget'               => LIB_PATH . '/osclass/classes/model/Widget.php',
         'iObject_Cache'         => LIB_PATH . '/osclass/classes/cache/interface/iObject_Cache.php'
     ];
-    // special cases
-    osc__loadIfExists($osc_autoload_map[$class_name]);
+    if (isset($osc_autoload_map[$class_name])) {
+        // special cases
+        osc__loadIfExists($osc_autoload_map[$class_name]);
+        return;
+    }
+
+    /**
+     * From PSR4 autoloader example.
+     */
+    // project-specific namespace prefix. Will only kicks in for mindstellar's namespace.
+    $psr_prefix = 'mindstellar\\';
+
+    // base directory for the namespace prefix.
+    $psr_base_dir = LIB_PATH;
+    // You may change this path if having trouble detecting the path to
+    // the source files.
+
+    // does the class use the our namespace prefix?
+    $len = strlen($psr_prefix);
+    if (strncmp($psr_prefix, $class_name, $len) !== 0) {
+        // no, move to the next registered autoloader.
+        return;
+    }
+
+    // get the relative class name.
+    $relative_class = substr($class_name, $len);
+
+    // replace the namespace prefix with the base directory, replace namespace
+    // separators with directory separators in the relative class name, append
+    // with .php
+    $file = $psr_base_dir.DIRECTORY_SEPARATOR.str_replace('\\', DIRECTORY_SEPARATOR, $relative_class).'.php';
+
+    osc__loadIfExists($file);
 }
 
 
@@ -137,15 +168,11 @@ function osc__auto($class_name)
  *
  * @param string $filename
  *
- * @throws Exception
+ * @return bool
  */
 function osc__loadIfExists($filename)
 {
-    if ($filename !== null) {
-          if ((@include $filename) !== false) {
-          return true ;
-        }
-    }
+    return ($filename !== null) && (@include $filename) !== false;
 }
 
 
