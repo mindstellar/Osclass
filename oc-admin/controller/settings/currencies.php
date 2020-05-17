@@ -32,7 +32,7 @@ class CAdminSettingsCurrencies extends AdminSecBaseModel
     public function doModel()
     {
         switch (Params::getParam('type')) {
-            case('add'):
+            case ('add'):
                 // calling add currency view
                 $aCurrency = array(
                     'pk_c_code'     => '',
@@ -44,7 +44,7 @@ class CAdminSettingsCurrencies extends AdminSecBaseModel
 
                 $this->doView('settings/currency_form.php');
                 break;
-            case('add_post'):
+            case ('add_post'):
                 // adding a new currency
                 osc_csrf_check();
                 $currencyCode        = Params::getParam('pk_c_code');
@@ -76,22 +76,26 @@ class CAdminSettingsCurrencies extends AdminSecBaseModel
                 }
                 $this->redirectTo(osc_admin_base_url(true) . '?page=settings&action=currencies');
                 break;
-            case('edit'):
+            case ('edit'):
                 // calling edit currency view
                 $currencyCode = Params::getParam('code');
                 $currencyCode = trim(strip_tags($currencyCode));
 
                 if ($currencyCode == '') {
-                    osc_add_flash_warning_message(sprintf(_m("The currency code '%s' doesn't exist"), $currencyCode),
-                        'admin');
+                    osc_add_flash_warning_message(
+                        sprintf(_m("The currency code '%s' doesn't exist"), $currencyCode),
+                        'admin'
+                    );
                     $this->redirectTo(osc_admin_base_url(true) . '?page=settings&action=currencies');
                 }
 
                 $aCurrency = Currency::newInstance()->findByPrimaryKey($currencyCode);
 
                 if (!$aCurrency) {
-                    osc_add_flash_warning_message(sprintf(_m("The currency code '%s' doesn't exist"), $currencyCode),
-                        'admin');
+                    osc_add_flash_warning_message(
+                        sprintf(_m("The currency code '%s' doesn't exist"), $currencyCode),
+                        'admin'
+                    );
                     $this->redirectTo(osc_admin_base_url(true) . '?page=settings&action=currencies');
                 }
 
@@ -100,7 +104,7 @@ class CAdminSettingsCurrencies extends AdminSecBaseModel
 
                 $this->doView('settings/currency_form.php');
                 break;
-            case('edit_post'):
+            case ('edit_post'):
                 // updating currency
                 osc_csrf_check();
                 $currencyName        = Params::getParam('s_name');
@@ -132,7 +136,7 @@ class CAdminSettingsCurrencies extends AdminSecBaseModel
                 }
                 $this->redirectTo(osc_admin_base_url(true) . '?page=settings&action=currencies');
                 break;
-            case('delete'):
+            case ('delete'):
                 // deleting a currency
                 osc_csrf_check();
                 $rowChanged    = 0;
@@ -161,11 +165,11 @@ class CAdminSettingsCurrencies extends AdminSecBaseModel
                 $msg    = '';
                 $status = '';
                 switch ($rowChanged) {
-                    case('0'):
+                    case ('0'):
                         $msg    = _m('No currencies have been deleted');
                         $status = 'error';
                         break;
-                    case('1'):
+                    case ('1'):
                         $msg    = _m('One currency has been deleted');
                         $status = 'ok';
                         break;
@@ -180,13 +184,13 @@ class CAdminSettingsCurrencies extends AdminSecBaseModel
                 }
 
                 switch ($status) {
-                    case('error'):
+                    case ('error'):
                         osc_add_flash_error_message($msg . $msg_current, 'admin');
                         break;
-                    case('warning'):
+                    case ('warning'):
                         osc_add_flash_warning_message($msg . $msg_current, 'admin');
                         break;
-                    case('ok'):
+                    case ('ok'):
                         osc_add_flash_ok_message($msg, 'admin');
                         break;
                 }

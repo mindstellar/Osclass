@@ -37,63 +37,62 @@ class CAdminSettings extends AdminSecBaseModel
     public function doModel()
     {
         switch ($this->action) {
-            case('advanced'):
-            case('advanced_post'):
-            case('advanced_cache_flush'):
-                require_once(osc_admin_base_path() . 'controller/settings/advanced.php');
+            case ('advanced'):
+            case ('advanced_post'):
+            case ('advanced_cache_flush'):
+                require_once('settings/advanced.php');
                 $do = new CAdminSettingsAdvanced();
                 break;
-            case('comments'):
-            case('comments_post'):
-                require_once(osc_admin_base_path() . 'controller/settings/comments.php');
+            case ('comments'):
+            case ('comments_post'):
+                require_once('settings/comments.php');
                 $do = new CAdminSettingsComments();
                 break;
             case ('locations'):
-                require_once(osc_admin_base_path() . 'controller/settings/locations.php');
+                require_once('settings/locations.php');
                 $do = new CAdminSettingsLocations();
                 break;
-            case('permalinks'):
-            case('permalinks_post'):
-                require_once(osc_admin_base_path() . 'controller/settings/permalinks.php');
+            case ('permalinks'):
+            case ('permalinks_post'):
+                require_once('settings/permalinks.php');
                 $do = new CAdminSettingsPermalinks();
                 break;
-            case('spamNbots'):
-            case('akismet_post'):
-            case('recaptcha_post'):
-                require_once(osc_admin_base_path() . 'controller/settings/spamnbots.php');
+            case ('spamNbots'):
+            case ('akismet_post'):
+            case ('recaptcha_post'):
+                require_once('settings/spamnbots.php');
                 $do = new CAdminSettingsSpamnBots();
                 break;
-            case('currencies'):
-                require_once(osc_admin_base_path() . 'controller/settings/currencies.php');
+            case ('currencies'):
+                require_once('settings/currencies.php');
                 $do = new CAdminSettingsCurrencies();
                 break;
-            case('mailserver'):
-            case('mailserver_post'):
-                require_once(osc_admin_base_path() . 'controller/settings/mailserver.php');
+            case ('mailserver'):
+            case ('mailserver_post'):
+                require_once('settings/mailserver.php');
                 $do = new CAdminSettingsMailserver();
                 break;
-            case('media'):
-            case('media_post'):
-            case('images_post'):
-                require_once(osc_admin_base_path() . 'controller/settings/media.php');
+            case ('media'):
+            case ('media_post'):
+            case ('images_post'):
+                require_once('settings/media.php');
                 $do = new CAdminSettingsMedia();
                 break;
-            case('latestsearches'):
-            case('latestsearches_post'):
-                require_once(osc_admin_base_path() . 'controller/settings/latestsearches.php');
+            case ('latestsearches'):
+            case ('latestsearches_post'):
+                require_once('settings/latestsearches.php');
                 $do = new CAdminSettingsLatestSearches();
                 break;
-            case('update'):
-            case('check_updates'):
+            case ('update'):
+            case ('check_updates'):
             default:
-                require_once(osc_admin_base_path() . 'controller/settings/main.php');
+                require_once('settings/main.php');
                 $do = new CAdminSettingsMain();
                 break;
         }
 
         $do->doModel();
     }
-
 }
 
 /* file end: ./oc-admin/settings.php */

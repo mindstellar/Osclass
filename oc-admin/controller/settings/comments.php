@@ -36,11 +36,11 @@ class CAdminSettingsComments extends AdminSecBaseModel
     public function doModel()
     {
         switch ($this->action) {
-            case('comments'):
+            case ('comments'):
                 //calling the comments settings view
                 $this->doView('settings/comments.php');
                 break;
-            case('comments_post'):
+            case ('comments_post'):
                 // updating comment
                 osc_csrf_check();
                 $iUpdated = 0;
@@ -88,7 +88,6 @@ class CAdminSettingsComments extends AdminSecBaseModel
                 break;
         }
     }
-
 }
 
 // EOF: ./oc-admin/controller/settings/comments.php

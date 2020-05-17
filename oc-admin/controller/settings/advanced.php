@@ -36,11 +36,11 @@ class CAdminSettingsAdvanced extends AdminSecBaseModel
     public function doModel()
     {
         switch ($this->action) {
-            case('advanced'):
+            case ('advanced'):
                 //calling the advanced settings view
                 $this->doView('settings/advanced.php');
                 break;
-            case('advanced_post'):
+            case ('advanced_post'):
                 // updating advanced settings
                 if (defined('DEMO')) {
                     osc_add_flash_warning_message(_m("This action can't be done because it's a demo site"), 'admin');
@@ -60,14 +60,13 @@ class CAdminSettingsAdvanced extends AdminSecBaseModel
                 osc_calculate_location_slug(osc_subdomain_type());
                 $this->redirectTo(osc_admin_base_url(true) . '?page=settings&action=advanced');
                 break;
-            case('advanced_cache_flush'):
+            case ('advanced_cache_flush'):
                 osc_cache_flush();
                 osc_add_flash_ok_message(_m('Cache flushed correctly'), 'admin');
                 $this->redirectTo(osc_admin_base_url(true) . '?page=settings&action=advanced');
                 break;
         }
     }
-
 }
 
 // EOF: ./oc-admin/controller/settings/main.php

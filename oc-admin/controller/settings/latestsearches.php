@@ -36,14 +36,14 @@ class CAdminSettingsLatestSearches extends AdminSecBaseModel
     public function doModel()
     {
         switch ($this->action) {
-            case('latestsearches'):
+            case ('latestsearches'):
                 //calling the comments settings view
                 $this->doView('settings/searches.php');
                 break;
-            case('latestsearches_post'):
+            case ('latestsearches_post'):
                 // updating comment
                 osc_csrf_check();
-                if (Params::getParam('save_latest_searches') == 'on') {
+                if (Params::getParam('save_latest_searches') === 'on') {
                     osc_set_preference('save_latest_searches', 1);
                 } else {
                     osc_set_preference('save_latest_searches', 0);
@@ -61,7 +61,6 @@ class CAdminSettingsLatestSearches extends AdminSecBaseModel
                 break;
         }
     }
-
 }
 
 // EOF: ./oc-admin/controller/settings/latestsearches.php

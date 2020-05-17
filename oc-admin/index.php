@@ -43,98 +43,97 @@ osc_enqueue_style('admin-css', osc_current_admin_theme_styles_url('main.css'));
 
 switch (Params::getParam('page')) {
     case ('items'):
-        require_once(osc_admin_base_path() . 'items.php');
+        require_once('controller/items.php');
         $do = new CAdminItems();
         $do->doModel();
         break;
     case ('comments'):
-        require_once(osc_admin_base_path() . 'comments.php');
+        require_once('controller/comments.php');
         $do = new CAdminItemComments();
         $do->doModel();
         break;
     case ('media'):
-        require_once(osc_admin_base_path() . 'media.php');
+        require_once('controller/media.php');
         $do = new CAdminMedia();
         $do->doModel();
         break;
     case ('login'):
-        require_once(osc_admin_base_path() . 'login.php');
+        require_once('controller/login.php');
         $do = new CAdminLogin();
         $do->doModel();
         break;
     case ('categories'):
-        require_once(osc_admin_base_path() . 'categories.php');
+        require_once('controller/categories.php');
         $do = new CAdminCategories();
         $do->doModel();
         break;
     case ('emails'):
-        require_once(osc_admin_base_path() . 'emails.php');
+        require_once('controller/emails.php');
         $do = new CAdminEmails();
         $do->doModel();
         break;
     case ('pages'):
-        require_once(osc_admin_base_path() . 'pages.php');
+        require_once('controller/pages.php');
         $do = new CAdminPages();
         $do->doModel();
         break;
     case ('settings'):
-        require_once(osc_admin_base_path() . 'settings.php');
+        require_once('controller/settings.php');
         $do = new CAdminSettings();
         $do->doModel();
         break;
     case ('plugins'):
-        require_once(osc_admin_base_path() . 'plugins.php');
+        require_once('controller/plugins.php');
         $do = new CAdminPlugins();
         $do->doModel();
         break;
     case ('languages'):
-        require_once(osc_admin_base_path() . 'languages.php');
+        require_once('controller/languages.php');
         $do = new CAdminLanguages();
         $do->doModel();
         break;
     case ('admins'):
-        require_once(osc_admin_base_path() . 'admins.php');
+        require_once('controller/admins.php');
         $do = new CAdminAdmins();
         $do->doModel();
         break;
     case ('users'):
-        require_once(osc_admin_base_path() . 'users.php');
+        require_once('controller/users.php');
         $do = new CAdminUsers();
         $do->doModel();
         break;
     case ('ajax'):
-        require_once(osc_admin_base_path() . 'ajax/ajax.php');
+        require_once('controller/ajax/ajax.php');
         $do = new CAdminAjax();
         $do->doModel();
         break;
     case ('appearance'):
-        require_once(osc_admin_base_path() . 'appearance.php');
+        require_once('controller/appearance.php');
         $do = new CAdminAppearance();
         $do->doModel();
         break;
     case ('tools'):
-        require_once(osc_admin_base_path() . 'tools.php');
+        require_once('controller/tools.php');
         $do = new CAdminTools();
         $do->doModel();
         break;
     case ('stats'):
-        require_once(osc_admin_base_path() . 'stats.php');
+        require_once('controller/stats.php');
         $do = new CAdminStats();
         $do->doModel();
         break;
     case ('cfields'):
-        require_once(osc_admin_base_path() . 'custom_fields.php');
+        require_once('controller/custom_fields.php');
         $do = new CAdminCFields();
         $do->doModel();
         break;
     case ('upgrade'):
-        require_once(osc_admin_base_path() . 'upgrade.php');
+        require_once('controller/upgrade.php');
         $do = new CAdminUpgrade();
         $do->doModel();
         break;
-        break;
     default:            //login of oc-admin
-        require_once(osc_admin_base_path() . 'main.php');
+        require_once('controller/main.php');
         $do = new CAdminMain();
         $do->doModel();
 }

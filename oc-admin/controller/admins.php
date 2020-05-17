@@ -31,7 +31,7 @@ class CAdminAdmins extends AdminSecBaseModel
         parent::__construct();
 
         if ($this->isModerator()) {
-            if (($this->action != 'edit' && $this->action != 'edit_post')
+            if (($this->action !== 'edit' && $this->action !== 'edit_post')
                 || Params::getParam('id') != ''
                 && Params::getParam('id') != osc_logged_admin_id()
             ) {
@@ -51,11 +51,11 @@ class CAdminAdmins extends AdminSecBaseModel
         parent::doModel();
 
         switch ($this->action) {
-            case('add'):        // callin add view
+            case ('add'):        // callin add view
                 $this->_exportVariableToView('admin', null);
                 $this->doView('admins/frm.php');
                 break;
-            case('add_post'):
+            case ('add_post'):
                 if (defined('DEMO')) {
                     osc_add_flash_warning_message(_m("This action can't be done because it's a demo site"), 'admin');
                     $this->redirectTo(osc_admin_base_url(true) . '?page=admins');
@@ -136,15 +136,14 @@ class CAdminAdmins extends AdminSecBaseModel
                             's_username' => $sUserName,
                             's_password' => $sPassword,
                             's_email'    => $sEmail
-                        )
-                    );
+                        ));
                     osc_add_flash_ok_message(_m('The admin has been added'), 'admin');
                 } else {
                     osc_add_flash_error_message(_m('There has been an error adding a new admin'), 'admin');
                 }
                 $this->redirectTo(osc_admin_base_url(true) . '?page=admins');
                 break;
-            case('edit'):       // calling edit admin view
+            case ('edit'):       // calling edit admin view
                 $adminEdit = null;
                 $adminId   = Params::getParam('id');
 
@@ -162,7 +161,7 @@ class CAdminAdmins extends AdminSecBaseModel
                 $this->_exportVariableToView('admin', $adminEdit);
                 $this->doView('admins/frm.php');
                 break;
-            case('edit_post'):
+            case ('edit_post'):
                 if (defined('DEMO')) {
                     osc_add_flash_warning_message(_m("This action can't be done because it's a demo site"), 'admin');
                     $this->redirectTo(osc_admin_base_url(true) . '?page=admins');
@@ -230,8 +229,10 @@ class CAdminAdmins extends AdminSecBaseModel
                     if ($sPassword == $sPassword2) {
                         $array['s_password'] = osc_hash_password($sPassword);
                     } else {
-                        osc_add_flash_warning_message(_m("The password couldn't be updated. Passwords don't match"),
-                            'admin');
+                        osc_add_flash_warning_message(
+                            _m("The password couldn't be updated. Passwords don't match"),
+                            'admin'
+                        );
                         $this->redirectTo(osc_admin_base_url(true) . '?page=admins&action=edit&id=' . $adminId);
                     }
                 }
@@ -267,7 +268,7 @@ class CAdminAdmins extends AdminSecBaseModel
                     $this->redirectTo(osc_admin_base_url(true) . '?page=admins');
                 }
                 break;
-            case('delete'):
+            case ('delete'):
                 if (defined('DEMO')) {
                     osc_add_flash_warning_message(_m("This action can't be done because it's a demo site"), 'admin');
                     $this->redirectTo(osc_admin_base_url(true) . '?page=admins');
@@ -284,8 +285,10 @@ class CAdminAdmins extends AdminSecBaseModel
 
                 // Verification to avoid an administrator trying to remove to itself
                 if (in_array(Session::newInstance()->_get('adminId'), $adminId)) {
-                    osc_add_flash_error_message(_m("The operation hasn't been completed. You're trying to remove yourself!"),
-                        'admin');
+                    osc_add_flash_error_message(
+                        _m("The operation hasn't been completed. You're trying to remove yourself!"),
+                        'admin'
+                    );
                     $this->redirectTo(osc_admin_base_url(true) . '?page=admins');
                 }
 
@@ -299,7 +302,6 @@ class CAdminAdmins extends AdminSecBaseModel
                 $this->redirectTo(osc_admin_base_url(true) . '?page=admins');
                 break;
             default:
-
                 if (Params::getParam('action') != '') {
                     osc_run_hook('admin_bulk_' . Params::getParam('action'), Params::getParam('id'));
                 }
@@ -382,8 +384,10 @@ class CAdminAdmins extends AdminSecBaseModel
                     array('value' => '', 'data-dialog-content' => '', 'label' => __('Bulk actions')),
                     array(
                         'value'               => 'delete',
-                        'data-dialog-content' => sprintf(__('Are you sure you want to %s the selected admins?'),
-                            strtolower(__('Delete'))),
+                        'data-dialog-content' => sprintf(
+                            __('Are you sure you want to %s the selected admins?'),
+                            strtolower(__('Delete'))
+                        ),
                         'label'               => __('Delete')
                     )
                 );

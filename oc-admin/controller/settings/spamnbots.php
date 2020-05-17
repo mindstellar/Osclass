@@ -33,7 +33,7 @@ class CAdminSettingsSpamnBots extends AdminSecBaseModel
     public function doModel()
     {
         switch ($this->action) {
-            case('spamNbots'):
+            case ('spamNbots'):
                 // calling the spam and bots view
                 $akismet_key    = osc_akismet_key();
                 $akismet_status = 3;
@@ -49,7 +49,7 @@ class CAdminSettingsSpamnBots extends AdminSecBaseModel
                 View::newInstance()->_exportVariableToView('akismet_status', $akismet_status);
                 $this->doView('settings/spamNbots.php');
                 break;
-            case('akismet_post'):
+            case ('akismet_post'):
                 // updating spam and bots option
                 osc_csrf_check();
                 $updated    = 0;
@@ -65,7 +65,7 @@ class CAdminSettingsSpamnBots extends AdminSecBaseModel
                 }
                 $this->redirectTo(osc_admin_base_url(true) . '?page=settings&action=spamNbots');
                 break;
-            case('recaptcha_post'):
+            case ('recaptcha_post'):
                 // updating spam and bots option
                 osc_csrf_check();
                 $iUpdated         = 0;

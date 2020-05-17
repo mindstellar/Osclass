@@ -36,11 +36,11 @@ class CAdminSettingsMailserver extends AdminSecBaseModel
     public function doModel()
     {
         switch ($this->action) {
-            case('mailserver'):
+            case ('mailserver'):
                 // calling the mailserver view
                 $this->doView('settings/mailserver.php');
                 break;
-            case('mailserver_post'):
+            case ('mailserver_post'):
                 if (defined('DEMO')) {
                     osc_add_flash_warning_message(_m("This action can't be done because it's a demo site"), 'admin');
                     $this->redirectTo(osc_admin_base_url(true) . '?page=settings&action=mailserver');
@@ -85,7 +85,6 @@ class CAdminSettingsMailserver extends AdminSecBaseModel
                 break;
         }
     }
-
 }
 
 // EOF: ./oc-admin/controller/settings/mailserver.php

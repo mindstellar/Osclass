@@ -45,10 +45,12 @@ class CAdminSettingsLocations extends AdminSecBaseModel
         $mCountries = new Country();
 
         switch ($location_action) {
-            case('add_country'):    // add country
+            case ('add_country'):    // add country
                 if (defined('DEMO')) {
-                    osc_add_flash_warning_message(_m("This action can't be done because it's a demo site"),
-                            'admin');
+                    osc_add_flash_warning_message(
+                        _m("This action can't be done because it's a demo site"),
+                        'admin'
+                    );
                     $this->redirectTo(osc_admin_base_url(true) . '?page=settings&action=locations');
                 }
                 osc_csrf_check();
@@ -56,25 +58,31 @@ class CAdminSettingsLocations extends AdminSecBaseModel
                 $countryName = Params::getParam('country');
                 $exists = $mCountries->findByCode($countryCode);
                 if (isset($exists['s_name'])) {
-                    osc_add_flash_error_message(sprintf(_m('%s already was in the database'),
-                                    $countryName), 'admin');
+                    osc_add_flash_error_message(sprintf(
+                        _m('%s already was in the database'),
+                        $countryName
+                    ), 'admin');
                 } else {
                     $mCountries->insert(array(
                         'pk_c_code' => $countryCode,
                         's_name' => $countryName
                     ));
-                    osc_add_flash_ok_message(sprintf(_m('%s has been added as a new country'),
-                                    $countryName), 'admin');
+                    osc_add_flash_ok_message(sprintf(
+                        _m('%s has been added as a new country'),
+                        $countryName
+                    ), 'admin');
                 }
                 osc_calculate_location_slug('country');
                 osc_calculate_location_slug('region');
                 osc_calculate_location_slug('city');
                 $this->redirectTo(osc_admin_base_url(true) . '?page=settings&action=locations');
                 break;
-            case('edit_country'):   // edit country
+            case ('edit_country'):   // edit country
                 if (defined('DEMO')) {
-                    osc_add_flash_warning_message(_m("This action can't be done because it's a demo site"),
-                            'admin');
+                    osc_add_flash_warning_message(
+                        _m("This action can't be done because it's a demo site"),
+                        'admin'
+                    );
                     $this->redirectTo(osc_admin_base_url(true) . '?page=settings&action=locations');
                 }
                 osc_csrf_check();
@@ -109,22 +117,28 @@ class CAdminSettingsLocations extends AdminSecBaseModel
                         }
                     }
 
-                    $ok = $mCountries->update(array('s_name' => $name, 's_slug' => $slug),
-                            array('pk_c_code' => Params::getParam('country_code')));
+                    $ok = $mCountries->update(
+                        array('s_name' => $name, 's_slug' => $slug),
+                        array('pk_c_code' => Params::getParam('country_code'))
+                    );
 
                     if ($ok) {
                         osc_add_flash_ok_message(_m('Country has been edited'), 'admin');
                     } else {
-                        osc_add_flash_error_message(_m('There were some problems editing the country'),
-                                'admin');
+                        osc_add_flash_error_message(
+                            _m('There were some problems editing the country'),
+                            'admin'
+                        );
                     }
                 }
                 $this->redirectTo(osc_admin_base_url(true) . '?page=settings&action=locations');
                 break;
-            case('delete_country'): // delete country
+            case ('delete_country'): // delete country
                 if (defined('DEMO')) {
-                    osc_add_flash_warning_message(_m("This action can't be done because it's a demo site"),
-                            'admin');
+                    osc_add_flash_warning_message(
+                        _m("This action can't be done because it's a demo site"),
+                        'admin'
+                    );
                     $this->redirectTo(osc_admin_base_url(true) . '?page=settings&action=locations');
                 }
                 osc_csrf_check();
@@ -142,22 +156,31 @@ class CAdminSettingsLocations extends AdminSecBaseModel
                         $locations += $ok;
                     }
                     if ($locations == 0) {
-                        osc_add_flash_ok_message(sprintf(_n('One location has been deleted',
-                                                '%s locations have been deleted', $del_locations), $del_locations),
-                                'admin');
+                        osc_add_flash_ok_message(
+                            sprintf(_n(
+                                'One location has been deleted',
+                                '%s locations have been deleted',
+                                $del_locations
+                            ), $del_locations),
+                            'admin'
+                        );
                     } else {
-                        osc_add_flash_error_message(_m('There was a problem deleting locations'),
-                                'admin');
+                        osc_add_flash_error_message(
+                            _m('There was a problem deleting locations'),
+                            'admin'
+                        );
                     }
                 } else {
                     osc_add_flash_error_message(_m('No country was selected'), 'admin');
                 }
                 $this->redirectTo(osc_admin_base_url(true) . '?page=settings&action=locations');
                 break;
-            case('add_region'):     // add region
+            case ('add_region'):     // add region
                 if (defined('DEMO')) {
-                    osc_add_flash_warning_message(_m("This action can't be done because it's a demo site"),
-                            'admin');
+                    osc_add_flash_warning_message(
+                        _m("This action can't be done because it's a demo site"),
+                        'admin'
+                    );
                     $this->redirectTo(osc_admin_base_url(true) . '?page=settings&action=locations');
                 }
                 osc_csrf_check();
@@ -180,11 +203,15 @@ class CAdminSettingsLocations extends AdminSecBaseModel
                         $id = $mRegions->dao->insertedId();
                         RegionStats::newInstance()->setNumItems($id, 0);
 
-                        osc_add_flash_ok_message(sprintf(_m('%s has been added as a new region'),
-                                        $regionName), 'admin');
+                        osc_add_flash_ok_message(sprintf(
+                            _m('%s has been added as a new region'),
+                            $regionName
+                        ), 'admin');
                     } else {
-                        osc_add_flash_error_message(sprintf(_m('%s already was in the database'),
-                                        $regionName), 'admin');
+                        osc_add_flash_error_message(sprintf(
+                            _m('%s already was in the database'),
+                            $regionName
+                        ), 'admin');
                     }
                 }
                 osc_calculate_location_slug('region');
@@ -193,10 +220,12 @@ class CAdminSettingsLocations extends AdminSecBaseModel
                         . '?page=settings&action=locations&country_code=' . @$countryCode . '&country='
                         . @$country['s_name']);
                 break;
-            case('edit_region'):    // edit region
+            case ('edit_region'):    // edit region
                 if (defined('DEMO')) {
-                    osc_add_flash_warning_message(_m("This action can't be done because it's a demo site"),
-                            'admin');
+                    osc_add_flash_warning_message(
+                        _m("This action can't be done because it's a demo site"),
+                        'admin'
+                    );
                     $this->redirectTo(osc_admin_base_url(true) . '?page=settings&action=locations');
                 }
                 osc_csrf_check();
@@ -240,28 +269,36 @@ class CAdminSettingsLocations extends AdminSecBaseModel
                                 }
                             }
 
-                            $mRegions->update(array('s_name' => $newRegion, 's_slug' => $slug),
-                                    array('pk_i_id' => $regionId));
-                            ItemLocation::newInstance()->update(
-                                    array('s_region' => $newRegion),
-                                    array('fk_i_region_id' => $regionId)
+                            $mRegions->update(
+                                array('s_name' => $newRegion, 's_slug' => $slug),
+                                array('pk_i_id' => $regionId)
                             );
-                            osc_add_flash_ok_message(sprintf(_m('%s has been edited'), $newRegion),
-                                    'admin');
+                            ItemLocation::newInstance()->update(
+                                array('s_region' => $newRegion),
+                                array('fk_i_region_id' => $regionId)
+                            );
+                            osc_add_flash_ok_message(
+                                sprintf(_m('%s has been edited'), $newRegion),
+                                'admin'
+                            );
                         }
                     } else {
-                        osc_add_flash_error_message(sprintf(_m('%s already was in the database'),
-                                        $newRegion), 'admin');
+                        osc_add_flash_error_message(sprintf(
+                            _m('%s already was in the database'),
+                            $newRegion
+                        ), 'admin');
                     }
                 }
                 $this->redirectTo(osc_admin_base_url(true)
                         . '?page=settings&action=locations&country_code=' . @$country['pk_c_code']
                         . '&country=' . @$country['s_name']);
                 break;
-            case('delete_region'):  // delete region
+            case ('delete_region'):  // delete region
                 if (defined('DEMO')) {
-                    osc_add_flash_warning_message(_m("This action can't be done because it's a demo site"),
-                            'admin');
+                    osc_add_flash_warning_message(
+                        _m("This action can't be done because it's a demo site"),
+                        'admin'
+                    );
                     $this->redirectTo(osc_admin_base_url(true) . '?page=settings&action=locations');
                 }
                 osc_csrf_check();
@@ -286,12 +323,19 @@ class CAdminSettingsLocations extends AdminSecBaseModel
                         }
                     }
                     if ($locations == 0) {
-                        osc_add_flash_ok_message(sprintf(_n('One location has been deleted',
-                                                '%s locations have been deleted', $del_locations), $del_locations),
-                                'admin');
+                        osc_add_flash_ok_message(
+                            sprintf(_n(
+                                'One location has been deleted',
+                                '%s locations have been deleted',
+                                $del_locations
+                            ), $del_locations),
+                            'admin'
+                        );
                     } else {
-                        osc_add_flash_error_message(_m('There was a problem deleting locations'),
-                                'admin');
+                        osc_add_flash_error_message(
+                            _m('There was a problem deleting locations'),
+                            'admin'
+                        );
                     }
                 } else {
                     osc_add_flash_error_message(_m('No region was selected'), 'admin');
@@ -300,10 +344,12 @@ class CAdminSettingsLocations extends AdminSecBaseModel
                         . '?page=settings&action=locations&country_code=' . @$country['pk_c_code']
                         . '&country=' . @$country['s_name']);
                 break;
-            case('add_city'):       // add city
+            case ('add_city'):       // add city
                 if (defined('DEMO')) {
-                    osc_add_flash_warning_message(_m("This action can't be done because it's a demo site"),
-                            'admin');
+                    osc_add_flash_warning_message(
+                        _m("This action can't be done because it's a demo site"),
+                        'admin'
+                    );
                     $this->redirectTo(osc_admin_base_url(true) . '?page=settings&action=locations');
                 }
                 osc_csrf_check();
@@ -330,11 +376,15 @@ class CAdminSettingsLocations extends AdminSecBaseModel
                         $id = $mCities->dao->insertedId();
                         CityStats::newInstance()->setNumItems($id, 0);
 
-                        osc_add_flash_ok_message(sprintf(_m('%s has been added as a new city'),
-                                        $newCity), 'admin');
+                        osc_add_flash_ok_message(sprintf(
+                            _m('%s has been added as a new city'),
+                            $newCity
+                        ), 'admin');
                     } else {
-                        osc_add_flash_error_message(sprintf(_m('%s already was in the database'),
-                                        $newCity), 'admin');
+                        osc_add_flash_error_message(sprintf(
+                            _m('%s already was in the database'),
+                            $newCity
+                        ), 'admin');
                     }
                 }
                 osc_calculate_location_slug('city');
@@ -342,10 +392,12 @@ class CAdminSettingsLocations extends AdminSecBaseModel
                         . '?page=settings&action=locations&country_code=' . @$country['pk_c_code']
                         . '&country=' . @$country['s_name'] . '&region=' . $regionId);
                 break;
-            case('edit_city'):      // edit city
+            case ('edit_city'):      // edit city
                 if (defined('DEMO')) {
-                    osc_add_flash_warning_message(_m("This action can't be done because it's a demo site"),
-                            'admin');
+                    osc_add_flash_warning_message(
+                        _m("This action can't be done because it's a demo site"),
+                        'admin'
+                    );
                     $this->redirectTo(osc_admin_base_url(true) . '?page=settings&action=locations');
                 }
                 osc_csrf_check();
@@ -390,27 +442,35 @@ class CAdminSettingsLocations extends AdminSecBaseModel
                             }
                         }
 
-                        $mCities->update(array('s_name' => $newCity, 's_slug' => $slug),
-                                array('pk_i_id' => $cityId));
-                        ItemLocation::newInstance()->update(
-                                array('s_city' => $newCity),
-                                array('fk_i_city_id' => $cityId)
+                        $mCities->update(
+                            array('s_name' => $newCity, 's_slug' => $slug),
+                            array('pk_i_id' => $cityId)
                         );
-                        osc_add_flash_ok_message(sprintf(_m('%s has been edited'), $newCity),
-                                'admin');
+                        ItemLocation::newInstance()->update(
+                            array('s_city' => $newCity),
+                            array('fk_i_city_id' => $cityId)
+                        );
+                        osc_add_flash_ok_message(
+                            sprintf(_m('%s has been edited'), $newCity),
+                            'admin'
+                        );
                     } else {
-                        osc_add_flash_error_message(sprintf(_m('%s already was in the database'),
-                                        $newCity), 'admin');
+                        osc_add_flash_error_message(sprintf(
+                            _m('%s already was in the database'),
+                            $newCity
+                        ), 'admin');
                     }
                 }
                 $this->redirectTo(osc_admin_base_url(true)
                         . '?page=settings&action=locations&country_code=' . @$country['pk_c_code']
                         . '&country=' . @$country['s_name'] . '&region=' . @$region['pk_i_id']);
                 break;
-            case('delete_city'):    // delete city
+            case ('delete_city'):    // delete city
                 if (defined('DEMO')) {
-                    osc_add_flash_warning_message(_m("This action can't be done because it's a demo site"),
-                            'admin');
+                    osc_add_flash_warning_message(
+                        _m("This action can't be done because it's a demo site"),
+                        'admin'
+                    );
                     $this->redirectTo(osc_admin_base_url(true) . '?page=settings&action=locations');
                 }
                 osc_csrf_check();
@@ -432,12 +492,19 @@ class CAdminSettingsLocations extends AdminSecBaseModel
                         }
                     }
                     if ($locations == 0) {
-                        osc_add_flash_ok_message(sprintf(_n('One location has been deleted',
-                                                '%d locations have been deleted', $del_locations), $del_locations),
-                                'admin');
+                        osc_add_flash_ok_message(
+                            sprintf(_n(
+                                'One location has been deleted',
+                                '%d locations have been deleted',
+                                $del_locations
+                            ), $del_locations),
+                            'admin'
+                        );
                     } else {
-                        osc_add_flash_error_message(_m('There was a problem deleting locations'),
-                                'admin');
+                        osc_add_flash_error_message(
+                            _m('There was a problem deleting locations'),
+                            'admin'
+                        );
                     }
                 } else {
                     osc_add_flash_error_message(_m('No city was selected'), 'admin');
@@ -446,10 +513,12 @@ class CAdminSettingsLocations extends AdminSecBaseModel
                         . '?page=settings&action=locations&country_code=' . @$country['pk_c_code']
                         . '&country=' . @$country['s_name'] . '&region=' . @$region['pk_i_id']);
                 break;
-            case('locations_import'): // import locations
+            case ('locations_import'): // import locations
                 if (defined('DEMO')) {
-                    osc_add_flash_warning_message(_m("This action can't be done because it's a demo site"),
-                            'admin');
+                    osc_add_flash_warning_message(
+                        _m("This action can't be done because it's a demo site"),
+                        'admin'
+                    );
                     $this->redirectTo(osc_admin_base_url(true) . '?page=settings&action=locations');
                 }
                 osc_csrf_check();
@@ -473,8 +542,10 @@ class CAdminSettingsLocations extends AdminSecBaseModel
                     }
                 }
 
-                osc_add_flash_error_message(_m('There was a problem importing the selected location'),
-                        'admin');
+                osc_add_flash_error_message(
+                    _m('There was a problem importing the selected location'),
+                    'admin'
+                );
                 $this->redirectTo(osc_admin_base_url(true) . '?page=settings&action=locations');
 
                 return false;
@@ -498,7 +569,6 @@ class CAdminSettingsLocations extends AdminSecBaseModel
 
         $this->doView('settings/locations.php');
     }
-
 }
 
 // EOF: ./oc-admin/controller/settings/locations.php

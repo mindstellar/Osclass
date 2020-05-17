@@ -158,7 +158,6 @@ class CAdminSettingsMain extends AdminSecBaseModel
                 break;
         }
     }
-
 }
 
 // EOF: ./oc-admin/controller/settings/main.php
