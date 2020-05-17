@@ -1,5 +1,5 @@
-[![CodeFactor](https://www.codefactor.io/repository/github/navjottomer/osclass/badge)](https://www.codefactor.io/repository/github/navjottomer/osclass)
-[![Build Status](https://travis-ci.com/navjottomer/Osclass.svg?branch=master)](https://travis-ci.com/navjottomer/Osclass)
+[![CodeFactor](https://www.codefactor.io/repository/github/mindstellar/osclass/badge)](https://www.codefactor.io/repository/github/mindstellar/osclass)
+[![Build Status](https://travis-ci.com/mindstellar/Osclass.svg?branch=master)](https://travis-ci.com/mindstellar/Osclass)
 # Osclass
 
 **This repo is a fork of official [Osclass][original-code] repository.**
@@ -20,7 +20,7 @@ For any support related query, please visit our official support forum.
 Clone the repository and the submodules.
 
 ```
-$> git clone --recursive git@github.com:navjottomer/Osclass.git
+$> git clone --recursive git@github.com:mindstellar/Osclass.git
 ```
 
 In case you don't have a Database running in your laptop, you can use the following to start a mysql locally via docker:
@@ -50,10 +50,10 @@ Want to help create a pull request from you clone, just make sure of few things
 
 
 ## Installation
-* Visit our documentation : https://osclass.gitbook.io/osclass-docs/beginners/install
+* Visit our documentation : https://docs.mindstellar.com/osclass-docs/beginners/install
 
-[documentation]: https://osclass.gitbook.io/osclass-docs/
+[documentation]: https://docs.mindstellar.com/
 [support-forum]: https://osclass.discourse.group
 [original-code]: https://github.com/osclass/Osclass
-[code]: https://github.com/navjottomer/Osclass
+[code]: https://github.com/mindstellar/Osclass
 [license]: http://www.apache.org/licenses/LICENSE-2.0
