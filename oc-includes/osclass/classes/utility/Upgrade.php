@@ -9,6 +9,7 @@
 
 namespace mindstellar\osclass\classes\utility;
 
+use RuntimeException;
 use Session;
 
 /**
@@ -152,12 +153,10 @@ class Upgrade
     public function doUpgrade()
     {
         if ($this->package_info_valid === false) {
-            Session::newInstance()->_setMessage('admin', sprintf(
+            throw new RuntimeException(sprintf(
                 __('Unable to follow %s upgrade, invalid package info'),
                 $this->package_type
-            ), 'error');
-
-            return;
+            ));
         }
         switch ($this->package_type) {
             case ('theme'):
