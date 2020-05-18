@@ -28,6 +28,7 @@ class CAdminSettingsCurrencies extends AdminSecBaseModel
         parent::__construct();
         osc_run_hook('init_admin_settings_currencies');
     }
+
     //Business Layer...
     public function doModel()
     {

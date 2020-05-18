@@ -43,19 +43,19 @@ class CAdminSettingsComments extends AdminSecBaseModel
             case ('comments_post'):
                 // updating comment
                 osc_csrf_check();
-                $iUpdated = 0;
-                $enabledComments = Params::getParam('enabled_comments');
-                $enabledComments = (($enabledComments != '') ? true : false);
-                $moderateComments = Params::getParam('moderate_comments');
-                $moderateComments = (($moderateComments != '') ? true : false);
-                $numModerateComments = Params::getParam('num_moderate_comments');
-                $commentsPerPage = Params::getParam('comments_per_page');
-                $notifyNewComment = Params::getParam('notify_new_comment');
-                $notifyNewComment = (($notifyNewComment != '') ? true : false);
+                $iUpdated             = 0;
+                $enabledComments      = Params::getParam('enabled_comments');
+                $enabledComments      = (($enabledComments != '') ? true : false);
+                $moderateComments     = Params::getParam('moderate_comments');
+                $moderateComments     = (($moderateComments != '') ? true : false);
+                $numModerateComments  = Params::getParam('num_moderate_comments');
+                $commentsPerPage      = Params::getParam('comments_per_page');
+                $notifyNewComment     = Params::getParam('notify_new_comment');
+                $notifyNewComment     = (($notifyNewComment != '') ? true : false);
                 $notifyNewCommentUser = Params::getParam('notify_new_comment_user');
                 $notifyNewCommentUser = (($notifyNewCommentUser != '') ? true : false);
-                $regUserPostComments = Params::getParam('reg_user_post_comments');
-                $regUserPostComments = (($regUserPostComments != '') ? true : false);
+                $regUserPostComments  = Params::getParam('reg_user_post_comments');
+                $regUserPostComments  = (($regUserPostComments != '') ? true : false);
 
                 $msg = '';
                 if (!osc_validate_int(Params::getParam('num_moderate_comments'))) {

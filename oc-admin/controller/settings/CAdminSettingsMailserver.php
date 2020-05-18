@@ -48,17 +48,17 @@ class CAdminSettingsMailserver extends AdminSecBaseModel
 
                 osc_csrf_check();
                 // updating mailserver
-                $iUpdated = 0;
-                $mailserverAuth = Params::getParam('mailserver_auth');
-                $mailserverAuth = ($mailserverAuth != '' ? true : false);
-                $mailserverPop = Params::getParam('mailserver_pop');
-                $mailserverPop = ($mailserverPop != '' ? true : false);
-                $mailserverType = Params::getParam('mailserver_type');
-                $mailserverHost = Params::getParam('mailserver_host');
-                $mailserverPort = Params::getParam('mailserver_port');
+                $iUpdated           = 0;
+                $mailserverAuth     = Params::getParam('mailserver_auth');
+                $mailserverAuth     = ($mailserverAuth != '' ? true : false);
+                $mailserverPop      = Params::getParam('mailserver_pop');
+                $mailserverPop      = ($mailserverPop != '' ? true : false);
+                $mailserverType     = Params::getParam('mailserver_type');
+                $mailserverHost     = Params::getParam('mailserver_host');
+                $mailserverPort     = Params::getParam('mailserver_port');
                 $mailserverUsername = Params::getParam('mailserver_username');
                 $mailserverPassword = Params::getParam('mailserver_password', false, false);
-                $mailserverSsl = Params::getParam('mailserver_ssl');
+                $mailserverSsl      = Params::getParam('mailserver_ssl');
                 $mailserverMailFrom = Params::getParam('mailserver_mail_from');
                 $mailserverNameFrom = Params::getParam('mailserver_name_from');
 

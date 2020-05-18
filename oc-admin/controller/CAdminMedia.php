@@ -139,10 +139,11 @@ class CAdminMedia extends AdminSecBaseModel
 
                 $bulk_options = array(
                     array('value' => '', 'data-dialog-content' => '', 'label' => __('Bulk actions')),
-                    array('value'               => 'delete',
-                          'data-dialog-content' => sprintf(__('Are you sure you want to %s the selected media files?'),
-                              strtolower(__('Delete'))),
-                          'label'               => __('Delete')
+                    array(
+                        'value'               => 'delete',
+                        'data-dialog-content' => sprintf(__('Are you sure you want to %s the selected media files?'),
+                            strtolower(__('Delete'))),
+                        'label'               => __('Delete')
                     )
                 );
                 $bulk_options = osc_apply_filter('media_bulk_filter', $bulk_options);

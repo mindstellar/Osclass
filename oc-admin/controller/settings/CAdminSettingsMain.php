@@ -43,38 +43,38 @@ class CAdminSettingsMain extends AdminSecBaseModel
             case ('update'):
                 // update index view
                 osc_csrf_check();
-                $iUpdated = 0;
-                $sPageTitle = Params::getParam('pageTitle');
-                $sPageDesc = Params::getParam('pageDesc');
-                $sContactEmail = Params::getParam('contactEmail');
-                $sLanguage = Params::getParam('language');
-                $sDateFormat = Params::getParam('dateFormat');
-                $sCurrency = Params::getParam('currency');
-                $sWeekStart = Params::getParam('weekStart');
-                $sTimeFormat = Params::getParam('timeFormat');
-                $sTimezone = Params::getParam('timezone');
-                $sNumRssItems = Params::getParam('num_rss_items');
-                $maxLatestItems = Params::getParam('max_latest_items_at_home');
-                $numItemsSearch = Params::getParam('default_results_per_page');
+                $iUpdated          = 0;
+                $sPageTitle        = Params::getParam('pageTitle');
+                $sPageDesc         = Params::getParam('pageDesc');
+                $sContactEmail     = Params::getParam('contactEmail');
+                $sLanguage         = Params::getParam('language');
+                $sDateFormat       = Params::getParam('dateFormat');
+                $sCurrency         = Params::getParam('currency');
+                $sWeekStart        = Params::getParam('weekStart');
+                $sTimeFormat       = Params::getParam('timeFormat');
+                $sTimezone         = Params::getParam('timezone');
+                $sNumRssItems      = Params::getParam('num_rss_items');
+                $maxLatestItems    = Params::getParam('max_latest_items_at_home');
+                $numItemsSearch    = Params::getParam('default_results_per_page');
                 $contactAttachment = Params::getParam('enabled_attachment');
-                $selectableParent = Params::getParam('selectable_parent_categories');
-                $bAutoCron = Params::getParam('auto_cron');
+                $selectableParent  = Params::getParam('selectable_parent_categories');
+                $bAutoCron         = Params::getParam('auto_cron');
                 //$sAutoUpdate       = implode('|', Params::getParam('auto_update'));
                 // preparing parameters
-                $sPageTitle = trim(strip_tags($sPageTitle));
-                $sPageDesc = trim(strip_tags($sPageDesc));
-                $sContactEmail = trim(strip_tags($sContactEmail));
-                $sLanguage = trim(strip_tags($sLanguage));
-                $sDateFormat = trim(strip_tags($sDateFormat));
-                $sCurrency = trim(strip_tags($sCurrency));
-                $sWeekStart = trim(strip_tags($sWeekStart));
-                $sTimeFormat = trim(strip_tags($sTimeFormat));
-                $sNumRssItems = (int) trim(strip_tags($sNumRssItems));
-                $maxLatestItems = (int) trim(strip_tags($maxLatestItems));
-                $numItemsSearch = (int) $numItemsSearch;
+                $sPageTitle        = trim(strip_tags($sPageTitle));
+                $sPageDesc         = trim(strip_tags($sPageDesc));
+                $sContactEmail     = trim(strip_tags($sContactEmail));
+                $sLanguage         = trim(strip_tags($sLanguage));
+                $sDateFormat       = trim(strip_tags($sDateFormat));
+                $sCurrency         = trim(strip_tags($sCurrency));
+                $sWeekStart        = trim(strip_tags($sWeekStart));
+                $sTimeFormat       = trim(strip_tags($sTimeFormat));
+                $sNumRssItems      = (int)trim(strip_tags($sNumRssItems));
+                $maxLatestItems    = (int)trim(strip_tags($maxLatestItems));
+                $numItemsSearch    = (int)$numItemsSearch;
                 $contactAttachment = ($contactAttachment ? true : false);
-                $bAutoCron = ($bAutoCron ? true : false);
-                $error = '';
+                $bAutoCron         = ($bAutoCron ? true : false);
+                $error             = '';
 
                 $msg = '';
                 if (!osc_validate_text($sPageTitle)) {
@@ -136,7 +136,7 @@ class CAdminSettingsMain extends AdminSecBaseModel
                 if ($iUpdated > 0) {
                     if ($error) {
                         osc_add_flash_error_message($error . '</p><p>'
-                                . _m('General settings have been updated'), 'admin');
+                            . _m('General settings have been updated'), 'admin');
                     } else {
                         osc_add_flash_ok_message(_m('General settings have been updated'), 'admin');
                     }
@@ -148,7 +148,7 @@ class CAdminSettingsMain extends AdminSecBaseModel
                 break;
             default:
                 // calling the view
-                $aLanguages = OSCLocale::newInstance()->listAllEnabled();
+                $aLanguages  = OSCLocale::newInstance()->listAllEnabled();
                 $aCurrencies = Currency::newInstance()->listAll();
 
                 $this->_exportVariableToView('aLanguages', $aLanguages);

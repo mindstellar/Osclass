@@ -302,7 +302,7 @@ class CAdminStats extends AdminSecBaseModel
                 break;
             case('google'):
                 $this->doView('stats/google.php');
-            break;
+                break;
             case('google_post'):
                 // updating google analytics settings
                 if (defined('DEMO')) {
