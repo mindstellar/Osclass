@@ -308,7 +308,8 @@ HTACCESS;
                     if (!osc_validate_text($rewrite_user_change_email)) {
                         ++$errors;
                     } else {
-                        osc_set_preference('rewrite_user_change_email', $rewrite_user_change_email);;
+                        osc_set_preference('rewrite_user_change_email', $rewrite_user_change_email);
+                        ;
                     }
                     $rewrite_user_change_username =
                         substr(str_replace('//', '/', Params::getParam('rewrite_user_change_username') . '/'), 0, -1);
