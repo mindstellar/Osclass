@@ -278,6 +278,11 @@
             if (trim($domain, " \t\n\r\0\x0B.") !== $domain) {
                 return false;
             }
+            // Validate domain as per RFC 1035
+            if(!checkdnsrr($domain, "MX")) {
+                return false;
+            }
+
             // Split the domain into subs
             $subs = explode('.', $domain);
             // Assume the domain will have at least two subs
