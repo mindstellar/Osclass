@@ -241,4 +241,4 @@ class CAdminAppearance extends AdminSecBaseModel
     }
 }
 
-/* file end: ./oc-admin/appearance.php */
+/* file end: ./oc-admin/CAdminAppearance.php */

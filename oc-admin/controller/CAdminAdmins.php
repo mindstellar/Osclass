@@ -417,4 +417,4 @@ class CAdminAdmins extends AdminSecBaseModel
     }
 }
 
-/* file end: ./oc-admin/admins.php */
+/* file end: ./oc-admin/CAdminAdmins.php */

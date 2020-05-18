@@ -90,4 +90,4 @@ class CAdminSettingsComments extends AdminSecBaseModel
     }
 }
 
-// EOF: ./oc-admin/controller/settings/comments.php
+// EOF: ./oc-admin/controller/settings/CAdminSettingsComments.php

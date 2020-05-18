@@ -456,5 +456,5 @@ class CAdminPlugins extends AdminSecBaseModel
     }
 }
 
-/* file end: ./oc-admin/plugins.php */
+/* file end: ./oc-admin/CAdminPlugins.php */
 

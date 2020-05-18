@@ -64,10 +64,11 @@ abstract class BaseModel
     }
      
     /**
-     * 
+     *
      * @since 3.9.0 -develop
      */
-    protected function setParams(){
+    protected function setParams()
+    {
         $this->page = Params::getParam('page');
         $this->action = Params::getParam('action');
     }

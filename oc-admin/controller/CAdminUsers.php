@@ -774,4 +774,4 @@ class CAdminUsers extends AdminSecBaseModel
     }
 }
 
-/* file end: ./oc-admin/users.php */
+/* file end: ./oc-admin/CAdminUsers.php */

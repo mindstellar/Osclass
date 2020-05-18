@@ -87,4 +87,4 @@ class CAdminSettingsMailserver extends AdminSecBaseModel
     }
 }
 
-// EOF: ./oc-admin/controller/settings/mailserver.php
+// EOF: ./oc-admin/controller/settings/CAdminSettingsMailserver.php

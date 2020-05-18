@@ -63,4 +63,4 @@ class CAdminSettingsLatestSearches extends AdminSecBaseModel
     }
 }
 
-// EOF: ./oc-admin/controller/settings/latestsearches.php
+// EOF: ./oc-admin/controller/settings/CAdminSettingsLatestSearches.php

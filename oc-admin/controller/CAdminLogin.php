@@ -227,4 +227,4 @@ class CAdminLogin extends AdminBaseModel
     }
 }
 
-/* file end: ./oc-admin/login.php */
+/* file end: ./oc-admin/CAdminLogin.php */

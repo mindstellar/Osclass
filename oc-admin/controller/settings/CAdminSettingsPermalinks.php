@@ -735,4 +735,4 @@ HTACCESS;
     }
 }
 
-// EOF: ./oc-admin/controller/settings/permalinks.php
+// EOF: ./oc-admin/controller/settings/CAdminSettingsPermalinks.php

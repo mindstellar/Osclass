@@ -40,53 +40,53 @@ class CAdminSettings extends AdminSecBaseModel
             case ('advanced'):
             case ('advanced_post'):
             case ('advanced_cache_flush'):
-                require_once('settings/advanced.php');
+                require_once('settings/CAdminSettingsAdvanced.php');
                 $do = new CAdminSettingsAdvanced();
                 break;
             case ('comments'):
             case ('comments_post'):
-                require_once('settings/comments.php');
+                require_once('settings/CAdminSettingsComments.php');
                 $do = new CAdminSettingsComments();
                 break;
             case ('locations'):
-                require_once('settings/locations.php');
+                require_once('settings/CAdminSettingsLocations.php');
                 $do = new CAdminSettingsLocations();
                 break;
             case ('permalinks'):
             case ('permalinks_post'):
-                require_once('settings/permalinks.php');
+                require_once('settings/CAdminSettingsPermalinks.php');
                 $do = new CAdminSettingsPermalinks();
                 break;
             case ('spamNbots'):
             case ('akismet_post'):
             case ('recaptcha_post'):
-                require_once('settings/spamnbots.php');
+                require_once('settings/CAdminSettingsSpamnBots.php');
                 $do = new CAdminSettingsSpamnBots();
                 break;
             case ('currencies'):
-                require_once('settings/currencies.php');
+                require_once('settings/CAdminSettingsCurrencies.php');
                 $do = new CAdminSettingsCurrencies();
                 break;
             case ('mailserver'):
             case ('mailserver_post'):
-                require_once('settings/mailserver.php');
+                require_once('settings/CAdminSettingsMailserver.php');
                 $do = new CAdminSettingsMailserver();
                 break;
             case ('media'):
             case ('media_post'):
             case ('images_post'):
-                require_once('settings/media.php');
+                require_once('settings/CAdminSettingsMedia.php');
                 $do = new CAdminSettingsMedia();
                 break;
             case ('latestsearches'):
             case ('latestsearches_post'):
-                require_once('settings/latestsearches.php');
+                require_once('settings/CAdminSettingsLatestSearches.php');
                 $do = new CAdminSettingsLatestSearches();
                 break;
             case ('update'):
             case ('check_updates'):
             default:
-                require_once('settings/main.php');
+                require_once('settings/CAdminSettingsMain.php');
                 $do = new CAdminSettingsMain();
                 break;
         }
@@ -95,4 +95,4 @@ class CAdminSettings extends AdminSecBaseModel
     }
 }
 
-/* file end: ./oc-admin/settings.php */
+/* file end: ./oc-admin/CAdminSettings.php */

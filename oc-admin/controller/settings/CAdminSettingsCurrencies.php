@@ -208,4 +208,4 @@ class CAdminSettingsCurrencies extends AdminSecBaseModel
     }
 }
 
-// EOF: ./oc-admin/controller/settings/currencies.php
+// EOF: ./oc-admin/controller/settings/CAdminSettingsCurrencies.php

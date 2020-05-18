@@ -91,4 +91,4 @@ class CAdminSettingsSpamnBots extends AdminSecBaseModel
     }
 }
 
-// EOF: ./oc-admin/controller/settings/spamnbots.php
+// EOF: ./oc-admin/controller/settings/CAdminSettingsSpamnBots.php

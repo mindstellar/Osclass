@@ -349,4 +349,4 @@ class CAdminItemComments extends AdminSecBaseModel
 
 }
 
-/* file end: ./oc-admin/comments.php */
+/* file end: ./oc-admin/CAdminItemComments.php */

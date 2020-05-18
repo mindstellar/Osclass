@@ -169,4 +169,4 @@ class CAdminMedia extends AdminSecBaseModel
     }
 }
 
-/* file end: ./oc-admin/media.php */
+/* file end: ./oc-admin/CAdminSettingsMedia.php */

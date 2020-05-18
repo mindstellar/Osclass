@@ -957,5 +957,5 @@ class CAdminItems extends AdminSecBaseModel
     }
 }
 
-/* file end: ./oc-admin/items.php */
+/* file end: ./oc-admin/CAdminItems.php */
 

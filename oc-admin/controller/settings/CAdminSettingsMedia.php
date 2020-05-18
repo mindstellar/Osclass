@@ -285,4 +285,4 @@ class CAdminSettingsMedia extends AdminSecBaseModel
     }
 }
 
-// EOF: ./oc-admin/controller/settings/media.php
+// EOF: ./oc-admin/controller/settings/CAdminSettingsMedia.php

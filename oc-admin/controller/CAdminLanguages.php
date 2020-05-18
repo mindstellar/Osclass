@@ -591,4 +591,4 @@ class CAdminLanguages extends AdminSecBaseModel
     }
 }
 
-/* file end: ./oc-admin/languages.php */
+/* file end: ./oc-admin/CAdminLanguages.php */

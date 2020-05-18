@@ -69,4 +69,4 @@ class CAdminSettingsAdvanced extends AdminSecBaseModel
     }
 }
 
-// EOF: ./oc-admin/controller/settings/main.php
+// EOF: ./oc-admin/controller/settings/CAdminSettingsMain.php

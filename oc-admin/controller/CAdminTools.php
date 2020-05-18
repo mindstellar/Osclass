@@ -302,4 +302,4 @@ class CAdminTools extends AdminSecBaseModel
     }
 }
 
-/* file end: ./oc-admin/tools.php */
+/* file end: ./oc-admin/CAdminTools.php */

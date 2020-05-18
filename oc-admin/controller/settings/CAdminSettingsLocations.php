@@ -571,4 +571,4 @@ class CAdminSettingsLocations extends AdminSecBaseModel
     }
 }
 
-// EOF: ./oc-admin/controller/settings/locations.php
+// EOF: ./oc-admin/controller/settings/CAdminSettingsLocations.php

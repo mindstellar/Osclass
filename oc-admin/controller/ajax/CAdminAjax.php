@@ -143,8 +143,10 @@ class CAdminAjax extends AdminSecBaseModel
                 echo json_encode($result);
                 break;
             case 'category_edit_iframe':
-                $this->_exportVariableToView('category',
-                    Category::newInstance()->findByPrimaryKey(Params::getParam('id'), 'all'));
+                $this->_exportVariableToView(
+                    'category',
+                    Category::newInstance()->findByPrimaryKey(Params::getParam('id'), 'all')
+                );
                 if (count(Category::newInstance()->findSubcategories(Params::getParam('id'))) > 0) {
                     $this->_exportVariableToView('has_subcategories', true);
                 } else {
@@ -418,10 +420,16 @@ class CAdminAjax extends AdminSecBaseModel
                         'fields'             => $fields,
                         'aFieldsDescription' => $aFieldsDescription
                     ), $id);
-                    $categoryManager->updateExpiration($id, $fields['i_expiration_days'],
-                        $apply_changes_to_subcategories);
-                    $categoryManager->updatePriceEnabled($id, $fields['b_price_enabled'],
-                        $apply_changes_to_subcategories);
+                    $categoryManager->updateExpiration(
+                        $id,
+                        $fields['i_expiration_days'],
+                        $apply_changes_to_subcategories
+                    );
+                    $categoryManager->updatePriceEnabled(
+                        $id,
+                        $fields['b_price_enabled'],
+                        $apply_changes_to_subcategories
+                    );
                     if (is_bool($res)) {
                         $error = 2;
                     }
@@ -688,5 +696,3 @@ class CAdminAjax extends AdminSecBaseModel
         osc_current_admin_theme_path($file);
     }
 }
-
-
