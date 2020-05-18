@@ -71,7 +71,8 @@
                                         $userActions = new UserActions(false);
                                         $success = $userActions->add();
                                         if($success==1) {
-                                            osc_add_flash_ok_message( _m('The user has been created. An activation email has been sent'));
+                                            //osc_add_flash_ok_message( _m('The user has been created. An activation email has been sent'));
+                                            osc_add_flash_ok_message( 'El usuario ha sido creado, ahora puedes comenzar a publicar tus anuncios.');
                                             $this->redirectTo(osc_base_url());
                                         } else if($success==2) {
                                             osc_add_flash_ok_message( _m('Your account has been created successfully'));
