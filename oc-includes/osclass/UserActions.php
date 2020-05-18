@@ -107,7 +107,8 @@
             // hook pre add or edit
             osc_run_hook('pre_user_post');
 
-
+            //TODO Meanwhile the email functionality is not working all the users will be activated after register
+            $input['b_active']=1;
             $this->manager->insert($input);
             $userId = $this->manager->dao->insertedId();
 
