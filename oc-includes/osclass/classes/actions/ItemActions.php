@@ -95,6 +95,7 @@ class ItemActions
         $aItem['price']    = $aItem['price'] !== null ? strip_tags(trim($aItem['price'])) : $aItem['price'];
         $contactName       = strip_tags(trim($aItem['contactName']));
         $contactEmail      = strip_tags(trim($aItem['contactEmail']));
+        $contactPhone      = strip_tags(trim($aItem['contactPhone']));
         $aItem['cityArea'] = osc_sanitize_name(strip_tags(trim($aItem['cityArea'])));
         $aItem['address']  = osc_sanitize_name(strip_tags(trim($aItem['address'])));
 
@@ -150,6 +151,7 @@ class ItemActions
             ? _m('Price must be positive number.') . PHP_EOL : '');
         $flash_error .= ((!osc_validate_max($contactName, 35)) ? _m('Name too long.') . PHP_EOL : '');
         $flash_error .= ((!osc_validate_email($contactEmail)) ? _m('Email invalid.') . PHP_EOL : '');
+        $flash_error .= ((!osc_validate_phone($contactPhone)) ? _m('Phone invalid.') . PHP_EOL : '');
         $flash_error .= ((!osc_validate_text($aItem['countryName'], 2, false))
             ? _m('Country too short.') . PHP_EOL
             : '');
@@ -215,6 +217,7 @@ class ItemActions
                 'fk_c_currency_code' => $aItem['currency'],
                 's_contact_name'     => $contactName,
                 's_contact_email'    => $contactEmail,
+                's_contact_phone'    => $contactPhone,
                 's_secret'           => $code,
                 'b_active'           => $active === 'ACTIVE' ? 1 : 0,
                 'b_enabled'          => $enabled,
@@ -755,6 +758,7 @@ class ItemActions
                 $user                  = User::newInstance()->findByPrimaryKey($aItem['userId']);
                 $aItem['contactName']  = $user['s_name'];
                 $aItem['contactEmail'] = $user['s_email'];
+                $aItem['contactPhone'] = ($user['s_phone_mobile'] != '') ? $user['s_phone_mobile'] : $user['s_phone_land'];
             } else {
                 $aItem['userId'] = null;
             }
@@ -776,6 +780,7 @@ class ItemActions
                 $aUpdate['fk_i_user_id']    = $aItem['userId'];
                 $aUpdate['s_contact_name']  = $aItem['contactName'];
                 $aUpdate['s_contact_email'] = $aItem['contactEmail'];
+                $aUpdate['s_contact_phone'] = $aItem['contactPhone'];
             } else {
                 $aUpdate['s_ip'] = $aItem['s_ip'];
             }
@@ -1517,11 +1522,14 @@ class ItemActions
         if ($userId != null) {
             $aItem['contactName']  = $data['s_name'];
             $aItem['contactEmail'] = $data['s_email'];
+            $aItem['contactPhone'] = ($data['s_phone_mobile'] != '') ? $data['s_phone_mobile'] : $data['s_phone_land'];
             Params::setParam('contactName', $data['s_name']);
             Params::setParam('contactEmail', $data['s_email']);
+            Params::setParam('contactPhone', $aItem['contactPhone']);
         } else {
             $aItem['contactName']  = Params::getParam('contactName');
             $aItem['contactEmail'] = Params::getParam('contactEmail');
+            $aItem['contactPhone'] = Params::getParam('contactPhone');
         }
         $aItem['userId'] = $userId;
 

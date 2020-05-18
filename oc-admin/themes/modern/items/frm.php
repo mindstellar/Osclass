@@ -251,6 +251,10 @@ osc_current_admin_theme_path('parts/header.php'); ?>
                                     <label><?php _e('E-mail'); ?></label>
                                     <?php ItemForm::contact_email_text(); ?>
                                 </div>
+                                <div class="input-has-placeholder input-separate-top">
+                                    <label><?php _e('Phone'); ?></label>
+                                    <?php ItemForm::contact_phone_text(); ?>
+                                </div>
                                 <?php if (!$new_item) { ?>
                                     <div class="input-has-placeholder input-separate-top">
                                         <label><?php _e('Ip Address'); ?></label>
