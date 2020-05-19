@@ -288,18 +288,6 @@ class CAdminTools extends AdminSecBaseModel
 
     //hopefully generic...
 
-    /**
-     * @param $file
-     *
-     * @return mixed|void
-     */
-    public function doView($file)
-    {
-        osc_run_hook('before_admin_html');
-        osc_current_admin_theme_path($file);
-        Session::newInstance()->_clearVariables();
-        osc_run_hook('after_admin_html');
-    }
 }
 
 /* file end: ./oc-admin/CAdminTools.php */
