@@ -49,8 +49,8 @@ class CAdminPlugins extends AdminSecBaseModel
 
                 $package = Params::getFiles('package');
                 if (isset($package['size']) && $package['size'] != 0) {
-                    $path = osc_plugins_path();
-                    (int)$status = osc_unzip_file($package['tmp_name'], $path);
+                    $path   = osc_plugins_path();
+                    $status = osc_unzip_file($package['tmp_name'], $path);
                     @unlink($package['tmp_name']);
                 } else {
                     $status = 3;
@@ -187,7 +187,7 @@ class CAdminPlugins extends AdminSecBaseModel
                     $routes = Rewrite::newInstance()->getRoutes();
                     $rid    = Params::getParam('route');
                     $file   = '../';
-                    if (isset($routes[$rid]) && isset($routes[$rid]['file'])) {
+                    if (isset($routes[$rid], $routes[$rid]['file'])) {
                         $file = $routes[$rid]['file'];
                     }
                 } else {
@@ -207,7 +207,7 @@ class CAdminPlugins extends AdminSecBaseModel
                     }
                 }
                 osc_run_hook('renderplugin_controller');
-                if (stripos($file, '../') === false && stripos($file, '..\\') === false && $file != '') {
+                if (strpos($file, '../') === false && strpos($file, '..\\') === false && $file != '') {
                     $this->_exportVariableToView('file', osc_plugins_path() . $file);
                     $this->doView('plugins/view.php');
                 }
@@ -426,7 +426,7 @@ class CAdminPlugins extends AdminSecBaseModel
                 // --------------------------------------------------------
                 $page = (int)Params::getParam('iPage');
                 if (count($array['aaData']) == 0 && $page != 1) {
-                    $total   = (int)$array['iTotalDisplayRecords'];
+                    $total   = $array['iTotalDisplayRecords'];
                     $maxPage = ceil($total / (int)$array['iDisplayLength']);
 
                     $url = osc_admin_base_url(true) . '?' . Params::getServerParam('QUERY_STRING', false, false);
@@ -450,7 +450,6 @@ class CAdminPlugins extends AdminSecBaseModel
     }
 
     //hopefully generic...
-
 }
 
 /* file end: ./oc-admin/CAdminPlugins.php */

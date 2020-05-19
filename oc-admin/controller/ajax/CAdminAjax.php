@@ -275,10 +275,10 @@ class CAdminAjax extends AdminSecBaseModel
                     $field = Field::newInstance()->findBySlug($slug);
                     if (!$field || $field['pk_i_id'] == Params::getParam('id')) {
                         break;
-                    } else {
-                        $slug_k++;
-                        $slug = $slug_tmp . '_' . $slug_k;
                     }
+
+                    $slug_k++;
+                    $slug = $slug_tmp . '_' . $slug_k;
                 }
                 $fieldManager = Field::newInstance();
                 $result       = $fieldManager->insertField($s_name, 'TEXT', $slug, 0, '', array());
@@ -457,7 +457,7 @@ class CAdminAjax extends AdminSecBaseModel
                     $routes = Rewrite::newInstance()->getRoutes();
                     $rid    = Params::getParam('route');
                     $file   = '../';
-                    if (isset($routes[$rid]) && isset($routes[$rid]['file'])) {
+                    if (isset($routes[$rid], $routes[$rid]['file'])) {
                         $file = $routes[$rid]['file'];
                     }
                 } else {
@@ -470,7 +470,7 @@ class CAdminAjax extends AdminSecBaseModel
                 }
 
                 // valid file?
-                if (stripos($file, '../') !== false || stripos($file, '..\\') !== false) {
+                if (strpos($file, '../') !== false || strpos($file, '..\\') !== false) {
                     echo json_encode(array('error' => 'no valid file'));
                     break;
                 }
@@ -628,7 +628,7 @@ class CAdminAjax extends AdminSecBaseModel
                         echo json_encode(array('error' => 3, 'error_msg' => __('No external sources are allowed')));
                         break;
                     }
-                    if (!isset($data['s_source_file']) || !isset($data['s_update_url'])) {
+                    if (!isset($data['s_source_file'], $data['s_update_url'])) {
                         //$data = array('error' => 2, 'error_msg' => __('Invalid code'));
                     }
                 } else {

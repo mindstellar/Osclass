@@ -100,6 +100,7 @@ class CAdminTools extends AdminSecBaseModel
                 $this->doView('tools/version.php');
                 break;
             case ('backup'):
+            case ('backup_post'):
                 $this->doView('tools/backup.php');
                 break;
             case ('backup-sql'):
@@ -214,10 +215,10 @@ class CAdminTools extends AdminSecBaseModel
                     flush();
                     readfile($path . $filename);
                     exit;
-                } else {
-                    $msg = _m('Error, the zip file was not created in the specified directory');
-                    osc_add_flash_error_message($msg, 'admin');
                 }
+
+                $msg = _m('Error, the zip file was not created in the specified directory');
+                osc_add_flash_error_message($msg, 'admin');
                 $this->redirectTo(osc_admin_base_url(true) . '?page=tools&action=backup');
                 break;
             case ('backup-zip'):
@@ -246,9 +247,6 @@ class CAdminTools extends AdminSecBaseModel
                     osc_add_flash_error_message($msg, 'admin');
                 }
                 $this->redirectTo(osc_admin_base_url(true) . '?page=tools&action=backup');
-                break;
-            case ('backup_post'):
-                $this->doView('tools/backup.php');
                 break;
             case ('maintenance'):
                 if (defined('DEMO')) {
@@ -291,7 +289,6 @@ class CAdminTools extends AdminSecBaseModel
     }
 
     //hopefully generic...
-
 }
 
 /* file end: ./oc-admin/CAdminTools.php */

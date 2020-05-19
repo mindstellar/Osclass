@@ -364,7 +364,7 @@ class CAdminAdmins extends AdminSecBaseModel
 
                 $page = (int)Params::getParam('iPage');
                 if (count($array['aaData']) == 0 && $page != 1) {
-                    $total   = (int)$array['iTotalDisplayRecords'];
+                    $total   = $array['iTotalDisplayRecords'];
                     $maxPage = ceil($total / (int)$array['iDisplayLength']);
 
                     $url = osc_admin_base_url(true) . '?' . Params::getServerParam('QUERY_STRING', false, false);

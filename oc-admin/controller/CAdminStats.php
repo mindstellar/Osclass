@@ -91,7 +91,7 @@ class CAdminStats extends AdminSecBaseModel
                         $reports[date(
                             'Y-m-d',
                             mktime(0, 0, 0, date('m'), date('d') - $k, date('Y'))
-                        )]['bad_classified']               = 0;
+                        )]['bad_classified']                                                                        = 0;
                         $reports[date('Y-m-d', mktime(0, 0, 0, date('m'), date('d') - $k, date('Y')))]['offensive'] = 0;
                         $reports[date('Y-m-d', mktime(0, 0, 0, date('m'), date('d') - $k, date('Y')))]['expired']   = 0;
                     }
@@ -366,7 +366,6 @@ class CAdminStats extends AdminSecBaseModel
     }
 
     //hopefully generic...
-
 }
 
 /* file end: ./oc-admin/CAdminStats.php */

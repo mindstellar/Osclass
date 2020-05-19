@@ -35,7 +35,11 @@ class CAdminLanguages extends AdminSecBaseModel
         osc_run_hook('init_admin_languages');
     }
 
-    //Business Layer...
+    /**
+     * Business Layer...
+     *
+     * @return bool|void
+     */
     public function doModel()
     {
         switch ($this->action) {
@@ -585,7 +589,6 @@ class CAdminLanguages extends AdminSecBaseModel
                 break;
         }
     }
-
 }
 
 /* file end: ./oc-admin/CAdminLanguages.php */
