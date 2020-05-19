@@ -43,6 +43,7 @@ class Plugins
     public static function applyFilter($hook, $content, ...$args)
     {
         if (isset(self::$hooks[$hook])) {
+            self::$used_hooks[$hook]= true;
             for ($priority = 0; $priority <= 10; $priority++) {
                 if (isset(self::$hooks[$hook][$priority]) && is_array(self::$hooks[$hook][$priority])) {
                     foreach (self::$hooks[$hook][$priority] as $fxName) {
@@ -407,6 +408,7 @@ class Plugins
     }
 
     /**
+     * Check if hook had run previously
      * @param $hook
      * @return bool
      * @since 3.9.0 -develop
@@ -414,6 +416,19 @@ class Plugins
     public static function hadRun($hook)
     {
         return isset(self::$used_hooks[$hook]);
+    }
+
+
+    /**
+     * Check if hook is registered
+     * @param $hook
+     *
+     * @return bool
+     * @since 4.0.0
+     */
+    public static function hasHook($hook)
+    {
+        return isset(self::$hooks[$hook]);
     }
     /**
      * @param $path
@@ -566,8 +581,6 @@ class Plugins
     {
         return PluginCategory::newInstance()->isThisCategory($name, $id);
     }
-
-    // Add a hook
 
     /**
      * @param $plugin
