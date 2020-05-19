@@ -42,7 +42,7 @@ class CAdminCategories extends AdminSecBaseModel
 
         //specific things for this class
         switch ($this->action) {
-            case('add_post_default'): // add default category and reorder parent categories
+            case ('add_post_default'): // add default category and reorder parent categories
                 osc_csrf_check();
                 $fields['fk_i_parent_id']    = null;
                 $fields['i_expiration_days'] = 0;

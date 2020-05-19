@@ -308,7 +308,7 @@ HTACCESS;
                     if (!osc_validate_text($rewrite_user_change_email)) {
                         ++$errors;
                     } else {
-                        osc_set_preference('rewrite_user_change_email', $rewrite_user_change_email);;
+                        osc_set_preference('rewrite_user_change_email', $rewrite_user_change_email);
                     }
                     $rewrite_user_change_username =
                         substr(str_replace('//', '/', Params::getParam('rewrite_user_change_username') . '/'), 0, -1);
@@ -447,14 +447,14 @@ HTACCESS;
                         'index.php?page=item&id=$1&comments-page=$2'
                     );
                     $rewrite->addRule('^([a-z]{2})_([A-Z]{2})/' . str_replace(
-                            '{ITEM_CITY}',
+                        '{ITEM_CITY}',
+                        '.*',
+                        str_replace(
+                            '{CATEGORIES}',
                             '.*',
-                            str_replace(
-                                '{CATEGORIES}',
-                                '.*',
-                                str_replace('{ITEM_TITLE}', '.*', str_replace('{ITEM_ID}', '([0-9]+)', $item_url))
-                            )
+                            str_replace('{ITEM_TITLE}', '.*', str_replace('{ITEM_ID}', '([0-9]+)', $item_url))
                         )
+                    )
                         . '$', 'index.php?page=item&id=$3&lang=$1_$2');
                     $rewrite->addRule(
                         '^' . str_replace('{ITEM_CITY}', '.*', str_replace(
@@ -573,10 +573,10 @@ HTACCESS;
                             'index.php?page=page&slug=$1'
                         );
                         $rewrite->addRule('^([a-z]{2})_([A-Z]{2})/' . str_replace(
-                                '{PAGE_SLUG}',
-                                '([\p{L}\p{N}_\-,]+)',
-                                $page_url
-                            ) . '/?$', 'index.php?page=page&lang=$1_$2&slug=$3');
+                            '{PAGE_SLUG}',
+                            '([\p{L}\p{N}_\-,]+)',
+                            $page_url
+                        ) . '/?$', 'index.php?page=page&lang=$1_$2&slug=$3');
                     }
 
                     // Clean archive files

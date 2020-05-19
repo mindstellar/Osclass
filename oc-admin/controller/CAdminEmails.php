@@ -91,8 +91,10 @@ class CAdminEmails extends AdminSecBaseModel
                     }
                     osc_add_flash_error_message(_m('You can\'t repeat internal name'), 'admin');
                 } else {
-                    osc_add_flash_error_message(_m('The email couldn\'t be updated, at least one title should not be empty'),
-                        'admin');
+                    osc_add_flash_error_message(
+                        _m('The email couldn\'t be updated, at least one title should not be empty'),
+                        'admin'
+                    );
                 }
                 $this->redirectTo(osc_admin_base_url(true) . '?page=emails&action=edit&id=' . $id);
                 break;

@@ -109,8 +109,10 @@ class CAdminPages extends AdminSecBaseModel
                     }
                     osc_add_flash_error_message(_m("You can't repeat internal name"), 'admin');
                 } else {
-                    osc_add_flash_error_message(_m("The page couldn't be updated, at least one title should not be empty"),
-                        'admin');
+                    osc_add_flash_error_message(
+                        _m("The page couldn't be updated, at least one title should not be empty"),
+                        'admin'
+                    );
                 }
                 $this->redirectTo(osc_admin_base_url(true) . '?page=pages&action=edit&id=' . $id);
                 break;
@@ -172,12 +174,16 @@ class CAdminPages extends AdminSecBaseModel
                         osc_add_flash_ok_message(_m('The page has been added'), 'admin');
                         $this->redirectTo(osc_admin_base_url(true) . '?page=pages');
                     } else {
-                        osc_add_flash_error_message(_m("The page couldn't be added, at least one title should not be empty"),
-                            'admin');
+                        osc_add_flash_error_message(
+                            _m("The page couldn't be added, at least one title should not be empty"),
+                            'admin'
+                        );
                     }
                 } else {
-                    osc_add_flash_error_message(_m("Oops! That internal name is already in use. We can't make the changes"),
-                        'admin');
+                    osc_add_flash_error_message(
+                        _m("Oops! That internal name is already in use. We can't make the changes"),
+                        'admin'
+                    );
                 }
                 $this->redirectTo(osc_admin_base_url(true) . '?page=pages&action=add');
                 break;
@@ -210,30 +216,35 @@ class CAdminPages extends AdminSecBaseModel
                     if ($page_indelible == 1) {
                         osc_add_flash_error_message(_m("One page can't be deleted because it is indelible"), 'admin');
                     } else {
-                        osc_add_flash_error_message(sprintf(_m("%s pages couldn't be deleted because they are indelible"),
-                            $page_indelible), 'admin');
+                        osc_add_flash_error_message(sprintf(
+                            _m("%s pages couldn't be deleted because they are indelible"),
+                            $page_indelible
+                        ), 'admin');
                     }
                 }
                 if ($page_deleted_error > 0) {
                     if ($page_deleted_error == 1) {
                         osc_add_flash_error_message(_m("One page couldn't be deleted"), 'admin');
                     } else {
-                        osc_add_flash_error_message(sprintf(_m("%s pages couldn't be deleted"), $page_deleted_error),
-                            'admin');
+                        osc_add_flash_error_message(
+                            sprintf(_m("%s pages couldn't be deleted"), $page_deleted_error),
+                            'admin'
+                        );
                     }
                 }
                 if ($page_deleted_correcty > 0) {
                     if ($page_deleted_correcty == 1) {
                         osc_add_flash_ok_message(_m('One page has been deleted correctly'), 'admin');
                     } else {
-                        osc_add_flash_ok_message(sprintf(_m('%s pages have been deleted correctly'),
-                            $page_deleted_correcty), 'admin');
+                        osc_add_flash_ok_message(sprintf(
+                            _m('%s pages have been deleted correctly'),
+                            $page_deleted_correcty
+                        ), 'admin');
                     }
                 }
                 $this->redirectTo(osc_admin_base_url(true) . '?page=pages');
                 break;
             default:
-
                 if (Params::getParam('action') != '') {
                     osc_run_hook('page_bulk_' . Params::getParam('action'), Params::getParam('id'));
                 }
@@ -299,8 +310,10 @@ class CAdminPages extends AdminSecBaseModel
                     array('value' => '', 'data-dialog-content' => '', 'label' => __('Bulk actions')),
                     array(
                         'value'               => 'delete',
-                        'data-dialog-content' => sprintf(__('Are you sure you want to %s the selected pages?'),
-                            strtolower(__('Delete'))),
+                        'data-dialog-content' => sprintf(
+                            __('Are you sure you want to %s the selected pages?'),
+                            strtolower(__('Delete'))
+                        ),
                         'label'               => __('Delete')
                     )
                 );
@@ -329,4 +342,3 @@ class CAdminPages extends AdminSecBaseModel
 }
 
 /* file end: ./oc-admin/CAdminPages.php */
-

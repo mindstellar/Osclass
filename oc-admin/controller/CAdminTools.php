@@ -35,10 +35,10 @@ class CAdminTools extends AdminSecBaseModel
         parent::doModel();
 
         switch ($this->action) {
-            case('import'):         // calling import view
+            case ('import'):         // calling import view
                 $this->doView('tools/import.php');
                 break;
-            case('import_post'):
+            case ('import_post'):
                 if (defined('DEMO')) {
                     osc_add_flash_warning_message(_m('This action cannot be done because it is a demo site'), 'admin');
                     $this->redirectTo(osc_admin_base_url(true) . '?page=tools&action=import');
@@ -64,10 +64,10 @@ class CAdminTools extends AdminSecBaseModel
                 @unlink($sql['tmp_name']);
                 $this->redirectTo(osc_admin_base_url(true) . '?page=tools&action=import');
                 break;
-            case('category'):
+            case ('category'):
                 $this->doView('tools/category.php');
                 break;
-            case('category_post'):
+            case ('category_post'):
                 if (defined('DEMO')) {
                     osc_add_flash_warning_message(_m('This action cannot be done because it is a demo site'), 'admin');
                     $this->redirectTo(osc_admin_base_url(true) . '?page=tools&action=category');
@@ -76,10 +76,10 @@ class CAdminTools extends AdminSecBaseModel
                 osc_add_flash_ok_message(_m('Recount category stats has been successful'), 'admin');
                 $this->redirectTo(osc_admin_base_url(true) . '?page=tools&action=category');
                 break;
-            case('locations'):
+            case ('locations'):
                 $this->doView('tools/locations.php');
                 break;
-            case('locations_post'):
+            case ('locations_post'):
                 if (defined('DEMO')) {
                     osc_add_flash_warning_message(_m('This action cannot be done because it is a demo site'), 'admin');
                     $this->redirectTo(osc_admin_base_url(true) . '?page=tools&action=locations');
@@ -89,7 +89,7 @@ class CAdminTools extends AdminSecBaseModel
 
                 $this->redirectTo(osc_admin_base_url(true) . '?page=tools&action=locations');
                 break;
-            case('upgrade'):
+            case ('upgrade'):
                 if (defined('DEMO')) {
                     osc_add_flash_warning_message(_m('This action cannot be done because it is a demo site'), 'admin');
                     $this->redirectTo(osc_admin_base_url(true));
@@ -99,10 +99,10 @@ class CAdminTools extends AdminSecBaseModel
             case 'version':
                 $this->doView('tools/version.php');
                 break;
-            case('backup'):
+            case ('backup'):
                 $this->doView('tools/backup.php');
                 break;
-            case('backup-sql'):
+            case ('backup-sql'):
                 if (defined('DEMO')) {
                     osc_add_flash_warning_message(_m('This action cannot be done because it is a demo site'), 'admin');
                     $this->redirectTo(osc_admin_base_url(true) . '?page=tools&action=backup');
@@ -120,19 +120,19 @@ class CAdminTools extends AdminSecBaseModel
                 $filename = 'Osclass_mysqlbackup.' . date('YmdHis') . '.sql';
 
                 switch (osc_dbdump($path, $filename)) {
-                    case(-1):
+                    case (-1):
                         $msg = _m('Path is empty');
                         osc_add_flash_error_message($msg, 'admin');
                         break;
-                    case(-2):
+                    case (-2):
                         $msg = sprintf(_m('Could not connect with the database. Error: %s'), mysql_error());
                         osc_add_flash_error_message($msg, 'admin');
                         break;
-                    case(-3):
+                    case (-3):
                         $msg = _m('There are no tables to back up');
                         osc_add_flash_error_message($msg, 'admin');
                         break;
-                    case(-4):
+                    case (-4):
                         $msg = _m('The folder is not writable');
                         osc_add_flash_error_message($msg, 'admin');
                         break;
@@ -143,7 +143,7 @@ class CAdminTools extends AdminSecBaseModel
                 }
                 $this->redirectTo(osc_admin_base_url(true) . '?page=tools&action=backup');
                 break;
-            case('backup-sql_file'):
+            case ('backup-sql_file'):
                 if (defined('DEMO')) {
                     osc_add_flash_warning_message(_m('This action cannot be done because it is a demo site'), 'admin');
                     $this->redirectTo(osc_admin_base_url(true) . '?page=tools&action=backup');
@@ -154,23 +154,23 @@ class CAdminTools extends AdminSecBaseModel
                 $path     = sys_get_temp_dir() . '/';
 
                 switch (osc_dbdump($path, $filename)) {
-                    case(-1):
+                    case (-1):
                         $msg = _m('Path is empty');
                         osc_add_flash_error_message($msg, 'admin');
                         break;
-                    case(-2):
+                    case (-2):
                         $msg = sprintf(_m('Could not connect with the database. Error: %s'), mysql_error());
                         osc_add_flash_error_message($msg, 'admin');
                         break;
-                    case(-3):
+                    case (-3):
                         $msg = sprintf(_m('Could not select the database. Error: %s'), mysql_error());
                         osc_add_flash_error_message($msg, 'admin');
                         break;
-                    case(-4):
+                    case (-4):
                         $msg = _m('There are no tables to back up');
                         osc_add_flash_error_message($msg, 'admin');
                         break;
-                    case(-5):
+                    case (-5):
                         $msg = _m('The folder is not writable');
                         osc_add_flash_error_message($msg, 'admin');
                         break;
@@ -192,7 +192,7 @@ class CAdminTools extends AdminSecBaseModel
                 }
                 $this->redirectTo(osc_admin_base_url(true) . '?page=tools&action=backup');
                 break;
-            case('backup-zip_file'):
+            case ('backup-zip_file'):
                 if (defined('DEMO')) {
                     osc_add_flash_warning_message(_m('This action cannot be done because it is a demo site'), 'admin');
                     $this->redirectTo(osc_admin_base_url(true) . '?page=tools&action=backup');
@@ -220,7 +220,7 @@ class CAdminTools extends AdminSecBaseModel
                 }
                 $this->redirectTo(osc_admin_base_url(true) . '?page=tools&action=backup');
                 break;
-            case('backup-zip'):
+            case ('backup-zip'):
                 if (defined('DEMO')) {
                     osc_add_flash_warning_message(_m('This action cannot be done because it is a demo site'), 'admin');
                     $this->redirectTo(osc_admin_base_url(true) . '?page=tools&action=backup');
@@ -247,10 +247,10 @@ class CAdminTools extends AdminSecBaseModel
                 }
                 $this->redirectTo(osc_admin_base_url(true) . '?page=tools&action=backup');
                 break;
-            case('backup_post'):
+            case ('backup_post'):
                 $this->doView('tools/backup.php');
                 break;
-            case('maintenance'):
+            case ('maintenance'):
                 if (defined('DEMO')) {
                     osc_add_flash_warning_message(_m('This action cannot be done because it is a demo site'), 'admin');
                     $this->doView('tools/maintenance.php');
@@ -264,8 +264,10 @@ class CAdminTools extends AdminSecBaseModel
                     if ($fileHandler) {
                         osc_add_flash_ok_message(_m('Maintenance mode is ON'), 'admin');
                     } else {
-                        osc_add_flash_error_message(_m('There was an error creating the .maintenance file, please create it manually at the root folder'),
-                            'admin');
+                        osc_add_flash_error_message(
+                            _m('There was an error creating the .maintenance file, please create it manually at the root folder'),
+                            'admin'
+                        );
                     }
                     fclose($fileHandler);
                     $this->redirectTo(osc_admin_base_url(true) . '?page=tools&action=maintenance');
@@ -275,8 +277,10 @@ class CAdminTools extends AdminSecBaseModel
                     if ($deleted) {
                         osc_add_flash_ok_message(_m('Maintenance mode is OFF'), 'admin');
                     } else {
-                        osc_add_flash_error_message(_m('There was an error removing the .maintenance file, please remove it manually from the root folder'),
-                            'admin');
+                        osc_add_flash_error_message(
+                            _m('There was an error removing the .maintenance file, please remove it manually from the root folder'),
+                            'admin'
+                        );
                     }
                     $this->redirectTo(osc_admin_base_url(true) . '?page=tools&action=maintenance');
                 }

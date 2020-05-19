@@ -223,7 +223,7 @@ class Category extends DAO
         $_categories = array();
         if ($rs === false) {
             $_categories = array();
-        } elseif ($rs->numRows() == 0) {
+        } elseif ($rs->numRows() === 0) {
             $_categories = array();
         } else {
             $_categories = $rs->result();
@@ -259,7 +259,7 @@ class Category extends DAO
                     $rs = $this->dao->get();
                     if ($rs === false) {
                         $_categoryInfo = array();
-                    } elseif ($rs->numRows() == 0) {
+                    } elseif ($rs->numRows() === 0) {
                         $_categoryInfo = array();
                     } else {
                         $category_element_array                     = $rs->row();

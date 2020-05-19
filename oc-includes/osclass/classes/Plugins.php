@@ -390,7 +390,7 @@ class Plugins
      */
     public static function runHook($hook, ...$args)
     {
-       if (isset(self::$hooks[$hook])) {
+        if (isset(self::$hooks[$hook])) {
             self::$used_hooks[$hook]= true;
             for ($priority = 0; $priority <= 10; $priority++) {
                 if (isset(self::$hooks[$hook][$priority]) && is_array(self::$hooks[$hook][$priority])) {
@@ -411,8 +411,9 @@ class Plugins
      * @return bool
      * @since 3.9.0 -develop
      */
-    public static function hadRun ($hook){
-        return isset( self::$used_hooks[$hook]);
+    public static function hadRun($hook)
+    {
+        return isset(self::$used_hooks[$hook]);
     }
     /**
      * @param $path

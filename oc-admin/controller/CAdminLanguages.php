@@ -39,10 +39,10 @@ class CAdminLanguages extends AdminSecBaseModel
     public function doModel()
     {
         switch ($this->action) {
-            case('add'):                // caliing add view
+            case ('add'):                // caliing add view
                 $this->doView('languages/add.php');
                 break;
-            case('add_post'):           // adding a new language
+            case ('add_post'):           // adding a new language
                 if (defined('DEMO')) {
                     osc_add_flash_warning_message(_m("This action can't be done because it's a demo site"), 'admin');
                     $this->redirectTo(osc_admin_base_url(true) . '?page=languages');
@@ -59,11 +59,11 @@ class CAdminLanguages extends AdminSecBaseModel
                 }
 
                 switch ($status) {
-                    case(0):
+                    case (0):
                         $msg = _m('The translation folder is not writable');
                         osc_add_flash_error_message($msg, 'admin');
                         break;
-                    case(1):
+                    case (1):
                         if (osc_checkLocales()) {
                             $msg = _m('The language has been installed correctly');
                             osc_add_flash_ok_message($msg, 'admin');
@@ -72,16 +72,16 @@ class CAdminLanguages extends AdminSecBaseModel
                             osc_add_flash_error_message($msg, 'admin');
                         }
                         break;
-                    case(2):
+                    case (2):
                         $msg = _m('The zip file is not valid');
                         osc_add_flash_error_message($msg, 'admin');
                         break;
-                    case(3):
+                    case (3):
                         $msg = _m('No file was uploaded');
                         osc_add_flash_warning_message($msg, 'admin');
                         $this->redirectTo(osc_admin_base_url(true) . '?page=languages&action=add');
                         break;
-                    case(-1):
+                    case (-1):
                     default:
                         $msg = _m('There was a problem adding the language');
                         osc_add_flash_error_message($msg, 'admin');
@@ -90,7 +90,7 @@ class CAdminLanguages extends AdminSecBaseModel
 
                 $this->redirectTo(osc_admin_base_url(true) . '?page=languages');
                 break;
-            case('import_official'): // import official languages
+            case ('import_official'): // import official languages
                 if (defined('DEMO')) {
                     osc_add_flash_warning_message(_m("This action can't be done because it's a demo site"), 'admin');
                     $this->redirectTo(osc_admin_base_url(true) . '?page=languages');
@@ -105,7 +105,9 @@ class CAdminLanguages extends AdminSecBaseModel
                         && array_key_exists($language, $aJsonLanguages)
                     ) {
                         $folder = osc_translations_path() . $language;
-                        mkdir($folder, 0755, true);
+                        if (!mkdir($folder, 0755, true) && !is_dir($folder)) {
+                            throw new \RuntimeException(sprintf('Directory "%s" was not created', $folder));
+                        }
 
                         $files = osc_get_language_files_urls($language);
                         foreach ($files as $file => $url) {
@@ -145,7 +147,7 @@ class CAdminLanguages extends AdminSecBaseModel
 
                 return false;
                 break;
-            case('edit'):               // editing a language
+            case ('edit'):               // editing a language
                 $sLocale = Params::getParam('id');
                 if (!preg_match('/.{2}_.{2}/', $sLocale)) {
                     osc_add_flash_error_message(_m('Language id isn\'t in the correct format'), 'admin');
@@ -162,7 +164,7 @@ class CAdminLanguages extends AdminSecBaseModel
                 $this->_exportVariableToView('aLocale', $aLocale);
                 $this->doView('languages/frm.php');
                 break;
-            case('edit_post'):          // edit language post
+            case ('edit_post'):          // edit language post
                 osc_csrf_check();
                 $iUpdated               = 0;
                 $languageCode           = Params::getParam('pk_c_code');
@@ -243,7 +245,7 @@ class CAdminLanguages extends AdminSecBaseModel
                 }
                 $this->redirectTo(osc_admin_base_url(true) . '?page=languages');
                 break;
-            case('enable_selected'):
+            case ('enable_selected'):
                 osc_csrf_check();
                 $msg      = _m('Selected languages have been enabled for the website');
                 $iUpdated = 0;
@@ -267,7 +269,7 @@ class CAdminLanguages extends AdminSecBaseModel
 
                 $this->redirectTo(osc_admin_base_url(true) . '?page=languages');
                 break;
-            case('disable_selected'):
+            case ('disable_selected'):
                 osc_csrf_check();
                 $msg         = _m('Selected languages have been disabled for the website');
                 $msg_warning = '';
@@ -302,7 +304,7 @@ class CAdminLanguages extends AdminSecBaseModel
 
                 $this->redirectTo(osc_admin_base_url(true) . '?page=languages');
                 break;
-            case('enable_bo_selected'):
+            case ('enable_bo_selected'):
                 osc_csrf_check();
                 $msg      = _m('Selected languages have been enabled for the backoffice (oc-admin)');
                 $iUpdated = 0;
@@ -326,7 +328,7 @@ class CAdminLanguages extends AdminSecBaseModel
 
                 $this->redirectTo(osc_admin_base_url(true) . '?page=languages');
                 break;
-            case('disable_bo_selected'):
+            case ('disable_bo_selected'):
                 osc_csrf_check();
                 $msg         = _m('Selected languages have been disabled for the backoffice (oc-admin)');
                 $msg_warning = '';
@@ -361,7 +363,7 @@ class CAdminLanguages extends AdminSecBaseModel
 
                 $this->redirectTo(osc_admin_base_url(true) . '?page=languages');
                 break;
-            case('delete'):
+            case ('delete'):
                 osc_csrf_check();
                 if (is_array(Params::getParam('id'))) {
                     $default_lang = osc_language();
@@ -369,8 +371,10 @@ class CAdminLanguages extends AdminSecBaseModel
                         if ($default_lang != $code) {
                             if ($this->localeManager->deleteLocale($code)) {
                                 if (!osc_deleteDir(osc_translations_path() . $code)) {
-                                    osc_add_flash_error_message(sprintf(_m("Directory '%s' couldn't be removed"),
-                                        $code), 'admin');
+                                    osc_add_flash_error_message(sprintf(
+                                        _m("Directory '%s' couldn't be removed"),
+                                        $code
+                                    ), 'admin');
                                 } else {
                                     osc_add_flash_ok_message(
                                         sprintf(_m('Directory "%s" has been successfully removed'), $code),
@@ -378,8 +382,10 @@ class CAdminLanguages extends AdminSecBaseModel
                                     );
                                 }
                             } else {
-                                osc_add_flash_error_message(sprintf(_m("Directory '%s' couldn't be removed;)"), $code),
-                                    'admin');
+                                osc_add_flash_error_message(
+                                    sprintf(_m("Directory '%s' couldn't be removed;)"), $code),
+                                    'admin'
+                                );
                             }
                         } else {
                             osc_add_flash_error_message(
@@ -398,7 +404,6 @@ class CAdminLanguages extends AdminSecBaseModel
                 $this->redirectTo(osc_admin_base_url(true) . '?page=languages');
                 break;
             default:
-
                 if (Params::getParam('checkUpdated') != '') {
                     osc_admin_toolbar_update_languages(true);
                 }
@@ -432,7 +437,7 @@ class CAdminLanguages extends AdminSecBaseModel
                     $displayRecords = ($start + $limit) - $count;
                 }
                 // ----
-                $aLanguagesToUpdate = json_decode(osc_get_preference('languages_to_update'));
+                $aLanguagesToUpdate = json_decode(osc_get_preference('languages_to_update'), true);
                 $bLanguagesToUpdate = is_array($aLanguagesToUpdate) ? true : false;
                 // ----
                 $aData = array();

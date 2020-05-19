@@ -1225,7 +1225,7 @@ class DBCommandClass
      * @param mixed $limit
      * @param mixed $offset
      *
-     * @return mixed
+     * @return \DBRecordsetClass
      * @since  2.3
      */
     public function get($table = '', $limit = null, $offset = null)

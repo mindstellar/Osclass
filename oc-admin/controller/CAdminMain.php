@@ -33,7 +33,7 @@ class CAdminMain extends AdminSecBaseModel
     public function doModel()
     {
         switch ($this->action) {
-            case('logout'):     // unset only the required parameters in Session
+            case ('logout'):     // unset only the required parameters in Session
                 osc_run_hook('logout_admin');
                 $this->logout();
                 $this->redirectTo(osc_admin_base_url(true));
@@ -46,8 +46,10 @@ class CAdminMain extends AdminSecBaseModel
 
                 // stats
                 $items       = array();
-                $stats_items = Stats::newInstance()->new_items_count(date('Y-m-d H:i:s',
-                    mktime(0, 0, 0, date('m'), date('d') - 10, date('Y'))), 'day');
+                $stats_items = Stats::newInstance()->new_items_count(date(
+                    'Y-m-d H:i:s',
+                    mktime(0, 0, 0, date('m'), date('d') - 10, date('Y'))
+                ), 'day');
                 for ($k = 10; $k >= 0; $k--) {
                     $items[date('Y-m-d', mktime(0, 0, 0, date('m'), date('d') - $k, date('Y')))] = 0;
                 }
@@ -55,8 +57,10 @@ class CAdminMain extends AdminSecBaseModel
                     $items[$item['d_date']] = $item['num'];
                 }
                 $users       = array();
-                $stats_users = Stats::newInstance()->new_users_count(date('Y-m-d H:i:s',
-                    mktime(0, 0, 0, date('m'), date('d') - 10, date('Y'))), 'day');
+                $stats_users = Stats::newInstance()->new_users_count(date(
+                    'Y-m-d H:i:s',
+                    mktime(0, 0, 0, date('m'), date('d') - 10, date('Y'))
+                ), 'day');
                 for ($k = 10; $k >= 0; $k--) {
                     $users[date('Y-m-d', mktime(0, 0, 0, date('m'), date('d') - $k, date('Y')))] = 0;
                 }
@@ -67,8 +71,10 @@ class CAdminMain extends AdminSecBaseModel
                 if (function_exists('disk_free_space')) {
                     $freedisk = @disk_free_space(osc_uploads_path());
                     if ($freedisk !== false && $freedisk < 52428800) { //52428800 = 50*1024*1024
-                        osc_add_flash_error_message(_m('You have very few free space left, users will not be able to upload pictures'),
-                            'admin');
+                        osc_add_flash_error_message(
+                            _m('You have very few free space left, users will not be able to upload pictures'),
+                            'admin'
+                        );
                     }
                 }
 

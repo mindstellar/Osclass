@@ -65,8 +65,11 @@ class CAdminItems extends AdminSecBaseModel
                                     $numSuccess++;
                                 }
                             }
-                            osc_add_flash_ok_message(sprintf(_mn('%d listing has been enabled',
-                                '%d listings have been enabled', $numSuccess), $numSuccess), 'admin');
+                            osc_add_flash_ok_message(sprintf(_mn(
+                                '%d listing has been enabled',
+                                '%d listings have been enabled',
+                                $numSuccess
+                            ), $numSuccess), 'admin');
                         }
                         break;
                     case 'disable_all':
@@ -78,8 +81,11 @@ class CAdminItems extends AdminSecBaseModel
                                     $numSuccess++;
                                 }
                             }
-                            osc_add_flash_ok_message(sprintf(_mn('%d listing has been disabled',
-                                '%d listings have been disabled', $numSuccess), $numSuccess), 'admin');
+                            osc_add_flash_ok_message(sprintf(_mn(
+                                '%d listing has been disabled',
+                                '%d listings have been disabled',
+                                $numSuccess
+                            ), $numSuccess), 'admin');
                         }
                         break;
                     case 'activate_all':
@@ -91,8 +97,11 @@ class CAdminItems extends AdminSecBaseModel
                                     $numSuccess++;
                                 }
                             }
-                            osc_add_flash_ok_message(sprintf(_mn('%d listing has been activated',
-                                '%d listings have been activated', $numSuccess), $numSuccess), 'admin');
+                            osc_add_flash_ok_message(sprintf(_mn(
+                                '%d listing has been activated',
+                                '%d listings have been activated',
+                                $numSuccess
+                            ), $numSuccess), 'admin');
                         }
                         break;
                     case 'deactivate_all':
@@ -104,8 +113,11 @@ class CAdminItems extends AdminSecBaseModel
                                     $numSuccess++;
                                 }
                             }
-                            osc_add_flash_ok_message(sprintf(_mn('%d listing has been deactivated',
-                                '%d listings have been deactivated', $numSuccess), $numSuccess), 'admin');
+                            osc_add_flash_ok_message(sprintf(_mn(
+                                '%d listing has been deactivated',
+                                '%d listings have been deactivated',
+                                $numSuccess
+                            ), $numSuccess), 'admin');
                         }
                         break;
                     case 'premium_all':
@@ -117,8 +129,11 @@ class CAdminItems extends AdminSecBaseModel
                                     $numSuccess++;
                                 }
                             }
-                            osc_add_flash_ok_message(sprintf(_mn('%d listing has been marked as premium',
-                                '%d listings have been marked as premium', $numSuccess), $numSuccess), 'admin');
+                            osc_add_flash_ok_message(sprintf(_mn(
+                                '%d listing has been marked as premium',
+                                '%d listings have been marked as premium',
+                                $numSuccess
+                            ), $numSuccess), 'admin');
                         }
                         break;
                     case 'depremium_all':
@@ -130,8 +145,11 @@ class CAdminItems extends AdminSecBaseModel
                                     $numSuccess++;
                                 }
                             }
-                            osc_add_flash_ok_message(sprintf(_mn('%d change has been made', '%d changes have been made',
-                                $numSuccess), $numSuccess), 'admin');
+                            osc_add_flash_ok_message(sprintf(_mn(
+                                '%d change has been made',
+                                '%d changes have been made',
+                                $numSuccess
+                            ), $numSuccess), 'admin');
                         }
                         break;
                     case 'spam_all':
@@ -143,8 +161,11 @@ class CAdminItems extends AdminSecBaseModel
                                     $numSuccess++;
                                 }
                             }
-                            osc_add_flash_ok_message(sprintf(_mn('%d listing has been marked as spam',
-                                '%d listings have been marked as spam', $numSuccess), $numSuccess), 'admin');
+                            osc_add_flash_ok_message(sprintf(_mn(
+                                '%d listing has been marked as spam',
+                                '%d listings have been marked as spam',
+                                $numSuccess
+                            ), $numSuccess), 'admin');
                         }
                         break;
                     case 'despam_all':
@@ -157,8 +178,11 @@ class CAdminItems extends AdminSecBaseModel
                                 }
                             }
 
-                            osc_add_flash_ok_message(sprintf(_mn('%d change has been made', '%d changes have been made',
-                                $numSuccess), $numSuccess), 'admin');
+                            osc_add_flash_ok_message(sprintf(_mn(
+                                '%d change has been made',
+                                '%d changes have been made',
+                                $numSuccess
+                            ), $numSuccess), 'admin');
                         }
                         break;
                     case 'delete_all':
@@ -176,8 +200,11 @@ class CAdminItems extends AdminSecBaseModel
                                     }
                                 }
                             }
-                            osc_add_flash_ok_message(sprintf(_mn('%d listing has been deleted',
-                                '%d listings have been deleted', $numSuccess), $numSuccess), 'admin');
+                            osc_add_flash_ok_message(sprintf(_mn(
+                                '%d listing has been deleted',
+                                '%d listings have been deleted',
+                                $numSuccess
+                            ), $numSuccess), 'admin');
                         }
                         break;
                     case 'clear_spam_all':
@@ -194,8 +221,11 @@ class CAdminItems extends AdminSecBaseModel
                                     }
                                 }
                             }
-                            osc_add_flash_ok_message(sprintf(_mn('%d listing has been unmarked as spam',
-                                '%d listings have been unmarked as spam', $numSuccess), $numSuccess), 'admin');
+                            osc_add_flash_ok_message(sprintf(_mn(
+                                '%d listing has been unmarked as spam',
+                                '%d listings have been unmarked as spam',
+                                $numSuccess
+                            ), $numSuccess), 'admin');
                         }
                         break;
                     case 'clear_bad_all':
@@ -212,9 +242,14 @@ class CAdminItems extends AdminSecBaseModel
                                     }
                                 }
                             }
-                            osc_add_flash_ok_message(sprintf(_mn('%d listing has been unmarked as missclassified',
-                                '%d listings have been unmarked as missclassified', $numSuccess), $numSuccess),
-                                'admin');
+                            osc_add_flash_ok_message(
+                                sprintf(_mn(
+                                    '%d listing has been unmarked as missclassified',
+                                    '%d listings have been unmarked as missclassified',
+                                    $numSuccess
+                                ), $numSuccess),
+                                'admin'
+                            );
                         }
                         break;
                     case 'clear_dupl_all':
@@ -231,8 +266,11 @@ class CAdminItems extends AdminSecBaseModel
                                     }
                                 }
                             }
-                            osc_add_flash_ok_message(sprintf(_mn('%d listing has been unmarked as duplicated',
-                                '%d listings have been unmarked as duplicated', $numSuccess), $numSuccess), 'admin');
+                            osc_add_flash_ok_message(sprintf(_mn(
+                                '%d listing has been unmarked as duplicated',
+                                '%d listings have been unmarked as duplicated',
+                                $numSuccess
+                            ), $numSuccess), 'admin');
                         }
                         break;
                     case 'clear_expi_all':
@@ -249,8 +287,11 @@ class CAdminItems extends AdminSecBaseModel
                                     }
                                 }
                             }
-                            osc_add_flash_ok_message(sprintf(_mn('%d listing has been unmarked as expired',
-                                '%d listings have been unmarked as expired', $numSuccess), $numSuccess), 'admin');
+                            osc_add_flash_ok_message(sprintf(_mn(
+                                '%d listing has been unmarked as expired',
+                                '%d listings have been unmarked as expired',
+                                $numSuccess
+                            ), $numSuccess), 'admin');
                         }
                         break;
                     case 'clear_offe_all':
@@ -267,8 +308,11 @@ class CAdminItems extends AdminSecBaseModel
                                     }
                                 }
                             }
-                            osc_add_flash_ok_message(sprintf(_mn('%d listing has been unmarked as offensive',
-                                '%d listings have been unmarked as offensive', $numSuccess), $numSuccess), 'admin');
+                            osc_add_flash_ok_message(sprintf(_mn(
+                                '%d listing has been unmarked as offensive',
+                                '%d listings have been unmarked as offensive',
+                                $numSuccess
+                            ), $numSuccess), 'admin');
                         }
                         break;
                     case 'clear_all':
@@ -285,8 +329,11 @@ class CAdminItems extends AdminSecBaseModel
                                     }
                                 }
                             }
-                            osc_add_flash_ok_message(sprintf(_mn('%d listing has been unmarked',
-                                '%d listings have been unmarked', $numSuccess), $numSuccess), 'admin');
+                            osc_add_flash_ok_message(sprintf(_mn(
+                                '%d listing has been unmarked',
+                                '%d listings have been unmarked',
+                                $numSuccess
+                            ), $numSuccess), 'admin');
                         }
                         break;
                     default:
@@ -342,20 +389,20 @@ class CAdminItems extends AdminSecBaseModel
 
                 switch ($value) {
                     case 'ACTIVE':
-
                         $success = $mItems->activate($id);
                         if ($success && $success > 0) {
                             osc_add_flash_ok_message(_m('The listing has been activated'), 'admin');
                         } elseif (!$success) {
                             osc_add_flash_error_message(_m('An error has occurred'), 'admin');
                         } else {
-                            osc_add_flash_error_message(_m("The listing can't be activated because it's blocked"),
-                                'admin');
+                            osc_add_flash_error_message(
+                                _m("The listing can't be activated because it's blocked"),
+                                'admin'
+                            );
                         }
 
                         break;
                     case 'INACTIVE':
-
                         $success = $mItems->deactivate($id);
                         if ($success && $success > 0) {
                             osc_add_flash_ok_message(_m('The listing has been deactivated'), 'admin');
@@ -365,7 +412,6 @@ class CAdminItems extends AdminSecBaseModel
 
                         break;
                     case 'ENABLE':
-
                         $success = $mItems->enable($id);
                         if ($success && $success > 0) {
                             osc_add_flash_ok_message(_m('The listing has been enabled'), 'admin');
@@ -375,7 +421,6 @@ class CAdminItems extends AdminSecBaseModel
 
                         break;
                     case 'DISABLE':
-
                         $success = $mItems->disable($id);
                         if ($success && $success > 0) {
                             osc_add_flash_ok_message(_m('The listing has been disabled'), 'admin');
@@ -668,10 +713,10 @@ class CAdminItems extends AdminSecBaseModel
                     $this->redirectTo(osc_admin_base_url(true) . '?page=items&action=post');
                 }
                 break;
-            case('settings'):          // calling the items settings view
+            case ('settings'):          // calling the items settings view
                 $this->doView('items/settings.php');
                 break;
-            case('settings_post'):     // update item settings
+            case ('settings_post'):     // update item settings
                 osc_csrf_check();
                 $iUpdated                 = 0;
                 $enabledRecaptchaItems    = Params::getParam('enabled_recaptcha_items');
@@ -761,8 +806,7 @@ class CAdminItems extends AdminSecBaseModel
                 }
                 $this->redirectTo(osc_admin_base_url(true) . '?page=items&action=settings');
                 break;
-            case('items_reported'):
-
+            case ('items_reported'):
                 require_once osc_lib_path() . 'osclass/classes/datatables/ItemsDataTable.php';
 
                 // set default iDisplayLength
@@ -820,8 +864,7 @@ class CAdminItems extends AdminSecBaseModel
                 //calling the view...
                 $this->doView('items/reported.php');
                 break;
-            default:                // default
-
+            default:
                 require_once osc_lib_path() . 'osclass/classes/datatables/ItemsDataTable.php';
 
                 // set default iDisplayLength
@@ -880,56 +923,74 @@ class CAdminItems extends AdminSecBaseModel
                     array('value' => '', 'data-dialog-content' => '', 'label' => __('Bulk actions')),
                     array(
                         'value'               => 'delete_all',
-                        'data-dialog-content' => sprintf(__('Are you sure you want to %s the selected listings?'),
-                            strtolower(__('Delete'))),
+                        'data-dialog-content' => sprintf(
+                            __('Are you sure you want to %s the selected listings?'),
+                            strtolower(__('Delete'))
+                        ),
                         'label'               => __('Delete')
                     ),
                     array(
                         'value'               => 'activate_all',
-                        'data-dialog-content' => sprintf(__('Are you sure you want to %s the selected listings?'),
-                            strtolower(__('Activate'))),
+                        'data-dialog-content' => sprintf(
+                            __('Are you sure you want to %s the selected listings?'),
+                            strtolower(__('Activate'))
+                        ),
                         'label'               => __('Activate')
                     ),
                     array(
                         'value'               => 'deactivate_all',
-                        'data-dialog-content' => sprintf(__('Are you sure you want to %s the selected listings?'),
-                            strtolower(__('Deactivate'))),
+                        'data-dialog-content' => sprintf(
+                            __('Are you sure you want to %s the selected listings?'),
+                            strtolower(__('Deactivate'))
+                        ),
                         'label'               => __('Deactivate')
                     ),
                     array(
                         'value'               => 'disable_all',
-                        'data-dialog-content' => sprintf(__('Are you sure you want to %s the selected listings?'),
-                            strtolower(__('Block'))),
+                        'data-dialog-content' => sprintf(
+                            __('Are you sure you want to %s the selected listings?'),
+                            strtolower(__('Block'))
+                        ),
                         'label'               => __('Block')
                     ),
                     array(
                         'value'               => 'enable_all',
-                        'data-dialog-content' => sprintf(__('Are you sure you want to %s the selected listings?'),
-                            strtolower(__('Unblock'))),
+                        'data-dialog-content' => sprintf(
+                            __('Are you sure you want to %s the selected listings?'),
+                            strtolower(__('Unblock'))
+                        ),
                         'label'               => __('Unblock')
                     ),
                     array(
                         'value'               => 'premium_all',
-                        'data-dialog-content' => sprintf(__('Are you sure you want to %s the selected listings?'),
-                            strtolower(__('Mark as premium'))),
+                        'data-dialog-content' => sprintf(
+                            __('Are you sure you want to %s the selected listings?'),
+                            strtolower(__('Mark as premium'))
+                        ),
                         'label'               => __('Mark as premium')
                     ),
                     array(
                         'value'               => 'depremium_all',
-                        'data-dialog-content' => sprintf(__('Are you sure you want to %s the selected listings?'),
-                            strtolower(__('Unmark as premium'))),
+                        'data-dialog-content' => sprintf(
+                            __('Are you sure you want to %s the selected listings?'),
+                            strtolower(__('Unmark as premium'))
+                        ),
                         'label'               => __('Unmark as premium')
                     ),
                     array(
                         'value'               => 'spam_all',
-                        'data-dialog-content' => sprintf(__('Are you sure you want to %s the selected listings?'),
-                            strtolower(__('Mark as spam'))),
+                        'data-dialog-content' => sprintf(
+                            __('Are you sure you want to %s the selected listings?'),
+                            strtolower(__('Mark as spam'))
+                        ),
                         'label'               => __('Mark as spam')
                     ),
                     array(
                         'value'               => 'despam_all',
-                        'data-dialog-content' => sprintf(__('Are you sure you want to %s the selected listings?'),
-                            strtolower(__('Unmark as spam'))),
+                        'data-dialog-content' => sprintf(
+                            __('Are you sure you want to %s the selected listings?'),
+                            strtolower(__('Unmark as spam'))
+                        ),
                         'label'               => __('Unmark as spam')
                     )
                 );

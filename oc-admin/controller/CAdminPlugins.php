@@ -56,24 +56,24 @@ class CAdminPlugins extends AdminSecBaseModel
                     $status = 3;
                 }
                 switch ($status) {
-                    case(0):
+                    case (0):
                         $msg = _m('The plugin folder is not writable');
                         osc_add_flash_error_message($msg, 'admin');
                         break;
-                    case(1):
+                    case (1):
                         $msg = _m('The plugin has been uploaded correctly');
                         osc_add_flash_ok_message($msg, 'admin');
                         break;
-                    case(2):
+                    case (2):
                         $msg = _m('The zip file is not valid');
                         osc_add_flash_error_message($msg, 'admin');
                         break;
-                    case(3):
+                    case (3):
                         $msg = _m('No file was uploaded');
                         osc_add_flash_error_message($msg, 'admin');
                         $this->redirectTo(osc_admin_base_url(true) . '?page=plugins&action=add');
                         break;
-                    case(-1):
+                    case (-1):
                     default:
                         $msg = _m('There was a problem adding the plugin');
                         osc_add_flash_error_message($msg, 'admin');
@@ -96,20 +96,27 @@ class CAdminPlugins extends AdminSecBaseModel
                 $installed = Plugins::install($pn);
                 if (is_array($installed)) {
                     switch ($installed['error_code']) {
-                        case('error_output'):
-                            osc_add_flash_error_message(sprintf(_m('The plugin generated %d characters of <strong>unexpected output</strong> during the installation. Output: "%s"'),
-                                strlen($installed['output']), $installed['output']), 'admin');
+                        case ('error_output'):
+                            osc_add_flash_error_message(sprintf(
+                                _m('The plugin generated %d characters of <strong>unexpected output</strong> during the installation. Output: "%s"'),
+                                strlen($installed['output']),
+                                $installed['output']
+                            ), 'admin');
                             break;
-                        case('error_installed'):
+                        case ('error_installed'):
                             osc_add_flash_error_message(_m('Plugin is already installed'), 'admin');
                             break;
-                        case('error_file'):
-                            osc_add_flash_error_message(_m("Plugin couldn't be installed because their files are missing"),
-                                'admin');
+                        case ('error_file'):
+                            osc_add_flash_error_message(
+                                _m("Plugin couldn't be installed because their files are missing"),
+                                'admin'
+                            );
                             break;
-                        case('custom_error'):
-                            osc_add_flash_error_message(sprintf(_m("Plugin couldn't be installed because of: %s"),
-                                $installed['msg']), 'admin');
+                        case ('custom_error'):
+                            osc_add_flash_error_message(sprintf(
+                                _m("Plugin couldn't be installed because of: %s"),
+                                $installed['msg']
+                            ), 'admin');
                             break;
                         default:
                             osc_add_flash_error_message(_m("Plugin couldn't be installed"), 'admin');
@@ -176,7 +183,6 @@ class CAdminPlugins extends AdminSecBaseModel
                 osc_run_hook('admin_post');
                 break;
             case 'renderplugin':
-
                 if (Params::existParam('route')) {
                     $routes = Rewrite::newInstance()->getRoutes();
                     $rid    = Params::getParam('route');
@@ -211,8 +217,10 @@ class CAdminPlugins extends AdminSecBaseModel
                 if ($plugin != '') {
                     $plugin_data = Plugins::getInfo($plugin);
                     $this->_exportVariableToView('categories', Category::newInstance()->toTreeAll());
-                    $this->_exportVariableToView('selected',
-                        PluginCategory::newInstance()->listSelected($plugin_data['short_name']));
+                    $this->_exportVariableToView(
+                        'selected',
+                        PluginCategory::newInstance()->listSelected($plugin_data['short_name'])
+                    );
                     $this->_exportVariableToView('plugin_data', $plugin_data);
                     $this->doView('plugins/configuration.php');
                 } else {
@@ -239,15 +247,17 @@ class CAdminPlugins extends AdminSecBaseModel
             case 'delete':
                 osc_csrf_check();
                 $plugin = str_replace('/index.php', '', Params::getParam('plugin'));
-                $path   = preg_replace('([\/]+)', '/', CONTENT_PATH . 'plugins/' . $plugin);
+                $path   = preg_replace('([/]+)', '/', CONTENT_PATH . 'plugins/' . $plugin);
                 if ($plugin != '' && strpos($plugin, '../') === false && strpos($plugin, '..\\') === false
                     && $path != CONTENT_PATH . 'plugins/'
                 ) {
                     if (osc_deleteDir($path)) {
                         osc_add_flash_ok_message(_m('The files were deleted'), 'admin');
                     } else {
-                        osc_add_flash_error_message(sprintf(_m('There were an error deleting the files, please check the permissions of the files in %s'),
-                            $path . '/'), 'admin');
+                        osc_add_flash_error_message(sprintf(
+                            _m('There were an error deleting the files, please check the permissions of the files in %s'),
+                            $path . '/'
+                        ), 'admin');
                     }
                     $this->redirectTo(osc_admin_base_url(true) . '?page=plugins');
                 }
@@ -272,7 +282,6 @@ class CAdminPlugins extends AdminSecBaseModel
                 exit;
                 break;
             default:
-
                 if (Params::getParam('checkUpdated') != '') {
                     osc_admin_toolbar_update_plugins(true);
                 }
@@ -308,7 +317,7 @@ class CAdminPlugins extends AdminSecBaseModel
                 if ($max > $count) {
                     $max = $count;
                 }
-                $aPluginsToUpdate = json_decode(osc_get_preference('plugins_to_update'));
+                $aPluginsToUpdate = json_decode(osc_get_preference('plugins_to_update'), true);
                 $bPluginsToUpdate = is_array($aPluginsToUpdate) ? true : false;
                 for ($i = $start; $i < $max; $i++) {
                     $plugin = $aPlugin[$i];

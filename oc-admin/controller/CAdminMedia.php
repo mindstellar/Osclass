@@ -41,7 +41,7 @@ class CAdminMedia extends AdminSecBaseModel
 
         //specific things for this class
         switch ($this->action) {
-            case('bulk_actions'):
+            case ('bulk_actions'):
                 osc_csrf_check();
                 switch (Params::getParam('bulk_actions')) {
                     case 'delete':
@@ -58,7 +58,6 @@ class CAdminMedia extends AdminSecBaseModel
                         osc_add_flash_ok_message(_m('Resource deleted'), 'admin');
                         break;
                     default:
-
                         if (Params::getParam('bulk_actions') != '') {
                             osc_run_hook('media_bulk_' . Params::getParam('bulk_actions'), Params::getParam('id'));
                         }
@@ -67,7 +66,7 @@ class CAdminMedia extends AdminSecBaseModel
                 }
                 $this->redirectTo(osc_admin_base_url(true) . '?page=media');
                 break;
-            case('delete'):
+            case ('delete'):
                 osc_csrf_check();
                 $ids = Params::getParam('id');
                 if (is_array($ids)) {
@@ -141,8 +140,10 @@ class CAdminMedia extends AdminSecBaseModel
                     array('value' => '', 'data-dialog-content' => '', 'label' => __('Bulk actions')),
                     array(
                         'value'               => 'delete',
-                        'data-dialog-content' => sprintf(__('Are you sure you want to %s the selected media files?'),
-                            strtolower(__('Delete'))),
+                        'data-dialog-content' => sprintf(
+                            __('Are you sure you want to %s the selected media files?'),
+                            strtolower(__('Delete'))
+                        ),
                         'label'               => __('Delete')
                     )
                 );

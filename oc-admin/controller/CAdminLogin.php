@@ -44,7 +44,7 @@ class CAdminLogin extends AdminBaseModel
                 $url_redirect  = osc_get_http_referer();
                 $page_redirect = '';
                 $password      = Params::getParam('password', false, false);
-                if (preg_match('|[\?&]page=([^&]+)|', $url_redirect . '&', $match)) {
+                if (preg_match('|[?&]page=([^&]+)|', $url_redirect . '&', $match)) {
                     $page_redirect = $match[1];
                 }
                 if ($page_redirect == '' || $page_redirect == 'login' || $url_redirect == '') {
