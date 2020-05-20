@@ -811,9 +811,10 @@ function osc_admin_toolbar_update_languages($force = false)
     }
 }
 
-function osc_ganalytics_footer() {
+function osc_ganalytics_footer()
+{
     $id = osc_ganalytics_id();
-    if($id != '') {
+    if ($id != '') {
         ?>
         <script async src="https://www.googletagmanager.com/gtag/js?id=<?php echo osc_esc_html($id); ?>"></script>
         <script>
