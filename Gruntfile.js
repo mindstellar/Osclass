@@ -78,7 +78,8 @@ module.exports = function (grunt) {
                 files: [{
                     expand: true,
                     src: [
-                        nodeDir + '/jquery-validation/dist/jquery-validate.min.js',
+                        nodeDir + '/jquery-validation/dist/jquery.validate.min.js',
+                        nodeDir + '/jquery-validation/dist/additional-methods.min.js',
                         nodeDir + '/jquery-validation/README.md',
                         nodeDir + '/jquery-validation/LICENSE.md'
                     ],
