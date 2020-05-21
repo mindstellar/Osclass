@@ -35,9 +35,8 @@ class Cookie
         if (isset($_COOKIE[$this->name])) {
             $tmp  = explode('&', $_COOKIE[$this->name]);
             $vars = $tmp[0];
-            $vals = isset($tmp[1]) ? $tmp[1] : array();
+            $vals = isset($tmp[1]) ? explode('._.', $tmp[1]) : array();
             $vars = explode('._.', $vars);
-            $vals = explode('._.', $vals);
 
             foreach ($vars as $key => $var) {
                 if ($var != '' && isset($vals[$key])) {
