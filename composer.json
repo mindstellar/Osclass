@@ -1,14 +1,14 @@
 {
-  "name": "navjottomer/osclass",
+  "name": "mindstellar/osclass",
   "type": "project",
   "description": "With Osclass, get your own  classifieds site for free. Build your own Osclass installation and start advertising real estate, jobs or whatever you want- in minutes! ",
   "keywords": ["osclass","classified","open-source","php-classified","cms"],
-  "homepage": "https://github.com/navjottomer/osclass",
+  "homepage": "https://github.com/mindstellar/osclass",
   "license": "Apache-2.0",
   "authors": [
         {
             "name": "Osclass Community",
-            "homepage": "https://github.com/navjottomer/Osclass/graphs/contributors"
+            "homepage": "https://github.com/mindstellar/Osclass/graphs/contributors"
         }
     ],
   "config": {

@@ -6,6 +6,7 @@
 	<!-- Exclude Composer vendor directory. -->
 	<exclude-pattern>*/vendor/*</exclude-pattern>
 	<exclude-pattern>*/oc-content/*</exclude-pattern>
+	<exclude-pattern>*/oc-includes/osclass/assets/*</exclude-pattern>
 	<exclude-pattern>*/oc-includes/osclass/gui/*</exclude-pattern>
 
 	<arg value="ps" />
@@ -28,7 +29,7 @@
 		<properties>
 			<property phpcs-only="true" name="lineLimit" value="140"/>
 			<property phpcbf-only="true" name="lineLimit" value="140"/>
-			<property name="absoluteLineLimit" value="120"/>
+			<property name="absoluteLineLimit" value="140"/>
 		</properties>
 	</rule>
 	<rule ref="Generic.PHP.ForbiddenFunctions">

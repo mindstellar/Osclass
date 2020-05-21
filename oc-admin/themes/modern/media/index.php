@@ -139,8 +139,12 @@ $rows    = $aData['aRows'];
             <input type="hidden" name="action" value="bulk_actions"/>
             <div id="bulk-actions">
                 <label>
-                    <?php osc_print_bulk_actions('bulk_actions', 'bulk_actions', __get('bulk_options'),
-                        'select-box-extra'); ?>
+                    <?php osc_print_bulk_actions(
+                        'bulk_actions',
+                        'bulk_actions',
+                        __get('bulk_options'),
+                        'select-box-extra'
+                    ); ?>
                     <input type="submit" id="bulk_apply" class="btn" value="<?php echo osc_esc_html(__('Apply')); ?>"/>
                 </label>
             </div>
@@ -187,10 +191,13 @@ $rows    = $aData['aRows'];
 function showingResults()
 {
     $aData = __get('aData');
-    echo '<ul class="showing-results"><li><span>' . osc_pagination_showing((Params::getParam('iPage') - 1)
+    echo '<ul class="showing-results"><li><span>' . osc_pagination_showing(
+        (Params::getParam('iPage') - 1)
             * $aData['iDisplayLength'] + 1,
-            ((Params::getParam('iPage') - 1) * $aData['iDisplayLength']) + count($aData['aRows']),
-            $aData['iTotalDisplayRecords'], $aData['iTotalRecords']) . '</span></li></ul>';
+        ((Params::getParam('iPage') - 1) * $aData['iDisplayLength']) + count($aData['aRows']),
+        $aData['iTotalDisplayRecords'],
+        $aData['iTotalRecords']
+    ) . '</span></li></ul>';
 }
 
 
