@@ -351,7 +351,7 @@ function osc_assets_url($file = '', $assets_base_url = null)
     }
 
     if ($assets_base_url === null) {
-        return osc_base_url() . 'oc-includes/osclass/assets/' . $file;
+        return osc_base_url() . 'oc-includes/assets/' . $file;
     }
 
     return $assets_base_url . $file;
