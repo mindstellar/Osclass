@@ -1,4 +1,4 @@
 [submodule "oc-content/themes/bender"]
 	path = oc-content/themes/bender
-	url = https://github.com/navjottomer/theme-bender.git
+url=https://github.com/mindstellar/theme-bender.git
 
