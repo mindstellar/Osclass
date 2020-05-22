@@ -6,7 +6,7 @@
 	<!-- Exclude Composer vendor directory. -->
 	<exclude-pattern>*/vendor/*</exclude-pattern>
 	<exclude-pattern>*/oc-content/*</exclude-pattern>
-	<exclude-pattern>*/oc-includes/osclass/assets/*</exclude-pattern>
+	<exclude-pattern>*/oc-includes/assets/*</exclude-pattern>
 	<exclude-pattern>*/oc-includes/osclass/gui/*</exclude-pattern>
 
 	<arg value="ps" />
