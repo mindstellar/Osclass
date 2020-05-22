@@ -91,8 +91,8 @@ module.exports = function (grunt) {
                 files: [{
                     expand: true,
                     src: [
-                        nodeDir + '/nestedSortable/jquery.mjs.nestedSortable.js',
-                        nodeDir + '/nestedSortable/README.md'
+                        nodeDir + '/jquery-ui-nested/jquery-ui-nested.js',
+                        nodeDir + '/jquery-ui-nested/README.md'
                     ],
                     dest: assetsDir + '/js/jquery-ui-nested',
                     flatten: true

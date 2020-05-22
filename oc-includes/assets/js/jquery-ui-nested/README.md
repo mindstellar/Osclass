@@ -1,13 +1,13 @@
-# nestedSortable jQuery plugin
+# jquery-ui-nested jQuery plugin
 
-**nestedSortable** is a jQuery plugin that extends jQuery Sortable UI functionalities to nested lists.  
+**jquery-ui-nested** is a jQuery plugin that extends jQuery Sortable UI functionalities to nested lists.  
 
-## Meteor Installation
-    meteor add ilikenwf:nested-sortable
+## Installation
+    npm install jquery-ui-nested --save
 
 ## What's new in version 2.0
 
-The biggest change is that your nested list can now behave as a tree with expand/collapse funcionality. Simply set `isTree` to **true** in the options and you are good to go! Check the [demo](http://ilikenwf.github.io/example.html) out to see what can be done with nestedSortable and a little CSS. (Note that all **nestedSortable** does is to assign/remove classes on the fly)  
+The biggest change is that your nested list can now behave as a tree with expand/collapse funcionality. Simply set `isTree` to **true** in the options and you are good to go! Check the [demo](http://ilikenwf.github.io/example.html) out to see what can be done with jquery-ui-nested and a little CSS. (Note that all **jquery-ui-nested** does is to assign/remove classes on the fly)  
 Also:
 - **isAllowed** function finally works as expected, see the docs below
 - Fixed: a small bug in the **protectRoot** function
@@ -46,6 +46,7 @@ Also:
 
 		$('.sortable').nestedSortable({
 			handle: 'div',
+			listType: "ol",
 			items: 'li',
 			toleranceElement: '> div'
 		});
@@ -57,7 +58,7 @@ Please note: every `<li>` must have either one or two direct children, the first
 
 Also, the default list type is `<ol>`.
 
-*This is the bare minimum to have a working nestedSortable. Check the [demo](http://ilikenwf.github.io/example.html) out to see what can be accomplished with a little more.*
+*This is the bare minimum to have a working jquery-ui-nested. Check the [demo](http://ilikenwf.github.io/example.html) out to see what can be accomplished with a little more.*
 
 ## Custom Options
 
@@ -162,7 +163,7 @@ Also, the default list type is `<ol>`.
 
 ## Known Bugs
 
-*nestedSortable* doesn't work properly with connected draggables, because of the way Draggable simulates Sortable `mouseStart` and `mouseStop` events. This bug might or might not be fixed some time in the future (it's not specific to this plugin).
+*jquery-ui-nested* doesn't work properly with connected draggables, because of the way Draggable simulates Sortable `mouseStart` and `mouseStop` events. This bug might or might not be fixed some time in the future (it's not specific to this plugin).
 
 ## Requirements
 
