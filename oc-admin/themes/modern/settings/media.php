@@ -19,7 +19,7 @@
 
 osc_enqueue_script('jquery-validate');
 osc_enqueue_script('colorpicker');
-osc_enqueue_style('colorpicker', osc_assets_url('js/colorpicker/css/colorpicker.css'));
+osc_enqueue_style('colorpicker', osc_assets_url('js/osclass-legacy/js/colorpicker/css/colorpicker.css'));
 
 $maxPHPsize    = View::newInstance()->_get('max_size_upload');
 $imagickLoaded = extension_loaded('imagick');

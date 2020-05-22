@@ -20,7 +20,7 @@ if (!defined('OC_ADMIN')) {
  */
 
 osc_enqueue_script('jquery-nested');
-osc_enqueue_script('tabber');
+//osc_enqueue_script('tabber');
 
 $categories = __get('categories');
 

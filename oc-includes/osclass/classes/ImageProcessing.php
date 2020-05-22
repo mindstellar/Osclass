@@ -561,7 +561,7 @@ class ImageProcessing
         $aOptions = null
     ) {
         $font_path      =
-            Plugins::applyFilter('watermark_font_path', LIB_PATH . 'osclass/assets/fonts/LiberationSans-Regular.ttf');
+            Plugins::applyFilter('watermark_font_path', LIB_PATH . 'assets/fonts/open-sans/OpenSans-Regular.ttf');
         $watermark_text = Plugins::applyFilter('watermark_text_value', $watermark_text);
         if ($font_size === null) {
             $font_size = Plugins::applyFilter('watermark_font_size', 30);

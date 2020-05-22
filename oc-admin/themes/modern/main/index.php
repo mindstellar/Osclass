@@ -24,9 +24,6 @@ $numUsers            = __get('numUsers');
 
 $aFeatured = __get('aFeatured');
 
-osc_enqueue_script('fancybox');
-osc_enqueue_style('fancybox', osc_assets_url('js/fancybox/jquery.fancybox.css'));
-
 osc_add_filter('render-wrapper', 'render_offset');
 /**
  * @return string

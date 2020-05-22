@@ -38,7 +38,7 @@ osc_enqueue_script('admin-ui-osc');
 osc_add_hook('admin_footer', array('FieldForm', 'i18n_datePicker'));
 
 // enqueue css styles
-osc_enqueue_style('jquery-ui', osc_assets_url('css/jquery-ui/jquery-ui.css'));
+osc_enqueue_style('jquery-ui', osc_assets_url('css/jquery-ui/jquery-ui.min.css'));
 osc_enqueue_style('admin-css', osc_current_admin_theme_styles_url('main.css'));
 
 switch (Params::getParam('page')) {
