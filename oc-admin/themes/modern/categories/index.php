@@ -150,9 +150,10 @@ function customHead()
                     }
                     if (list_original != list) {
                         var plist = array_list.reduce(function (total, current, index) {
-                            total[index] = {'c': current.item_id, 'p': current.parent_id};
+                            total[index] = {'c': current.id, 'p': current.parent_id};
                             return total;
                         }, {});
+                        console.log(plist);
                         $.ajax({
                             type: 'POST',
                             url: "<?php echo osc_admin_base_url(true) . '?page=ajax&action=categories_order&'

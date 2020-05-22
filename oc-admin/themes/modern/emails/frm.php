@@ -43,7 +43,7 @@ function customHead()
             plugins: [
                 "advlist autolink lists link image charmap preview anchor",
                 "searchreplace visualblocks code fullscreen",
-                "insertdatetime media table contextmenu paste"
+                "insertdatetime media table paste"
             ],
             entity_encoding: "raw",
             theme_advanced_buttons1_add: "forecolorpicker,fontsizeselect",

@@ -106,25 +106,26 @@ class CAdminAjax extends AdminSecBaseModel
 
                 $catManager  = Category::newInstance();
                 $aRecountCat = array();
-
                 foreach ($aIds as $cat) {
-                    if (!isset($order[$cat['p']])) {
-                        $order[$cat['p']] = 0;
-                    }
+                    if (isset($cat['c'])) {
+                        if (!isset($order[$cat['p']])) {
+                            $order[$cat['p']] = 0;
+                        }
 
-                    $res = $catManager->update(
-                        array(
-                            'fk_i_parent_id' => ($cat['p'] === 'root' ? null : $cat['p']),
-                            'i_position'     => $order[$cat['p']]
-                        ),
-                        array('pk_i_id' => $cat['c'])
-                    );
-                    if (is_bool($res) && !$res) {
-                        $error = 1;
-                    } elseif ($res == 1) {
-                        $aRecountCat[] = $cat['c'];
+                        $res = $catManager->update(
+                            array(
+                                'fk_i_parent_id' => ($cat['p'] === 'root' ? null : $cat['p']),
+                                'i_position'     => $order[$cat['p']]
+                            ),
+                            array('pk_i_id' => $cat['c'])
+                        );
+                        if (is_bool($res) && !$res) {
+                            $error = 1;
+                        } elseif ($res == 1) {
+                            $aRecountCat[] = $cat['c'];
+                        }
+                        ++$order[$cat['p']];
                     }
-                    ++$order[$cat['p']];
                 }
 
                 // update category stats

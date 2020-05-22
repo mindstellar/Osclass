@@ -1642,7 +1642,7 @@ class ItemForm extends Form
 
             function addNewPhoto() {
                 var max = <?php echo osc_max_images_per_item(); ?>;
-                var num_img = $('input[name="photos[]"]').size() + $("a.delete").size();
+                var num_img = $('input[name="photos[]"]').length + $("a.delete").length;
                 if ((max != 0 && num_img < max) || max == 0) {
                     var id = 'p-' + photoIndex++;
 
@@ -1689,7 +1689,7 @@ class ItemForm extends Form
                     }
                 });
                 var max = <?php echo osc_max_images_per_item(); ?>;
-                var num_img = $('input[name="photos[]"]').size() + $("a.delete").size();
+                var num_img = $('input[name="photos[]"]').length + $("a.delete").length;
                 if (count == 0 && (max == 0 || (max != 0 && num_img < max))) {
                     addNewPhoto();
                 }
