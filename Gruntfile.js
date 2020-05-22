@@ -157,7 +157,7 @@ module.exports = function (grunt) {
                     expand: true,
                     cwd: nodeDir+'/osclass-legacy-assets/src',
                     src: '**/*',
-                    dest: assetsDir + '/js/osclass-legacy/',
+                    dest: assetsDir + '/osclass-legacy/',
                     flatten: false
                 }]
             }

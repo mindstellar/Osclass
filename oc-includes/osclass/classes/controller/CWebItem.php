@@ -492,7 +492,7 @@ class CWebItem extends BaseModel
                     if ((osc_reg_user_can_contact() && osc_is_web_user_logged_in())
                         || !osc_reg_user_can_contact()
                     ) {
-                        $this->doView('item-CWebContact.php');
+                        $this->doView('item-contact.php');
                     } else {
                         osc_add_flash_warning_message(_m("You can't contact the seller, only registered users can")
                             . '. <br />' . sprintf(

@@ -42,7 +42,7 @@ function customHead()
                 if (!$(this).find(".checkboxc input").is(':checked')) {
                     $(this).find(".checkboxc").css({'visibility': 'hidden'});
                 }
-                if ($(".checkboxc input:checked").size() > 0) {
+                if ($(".checkboxc input:checked").length > 0) {
                     $("#b_remove_country").show();
                 } else {
                     $("#b_remove_country").hide();

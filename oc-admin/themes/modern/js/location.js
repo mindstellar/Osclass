@@ -98,7 +98,7 @@ function show_region(c_code, s_country)
                 if (!$(this).find(".checkboxr input").is(':checked')) {
                     $(this).find(".checkboxr").css({ 'visibility': 'hidden'});
                 }
-                if ($(".checkboxr input:checked").size()>0) {
+                if ($(".checkboxr input:checked").length>0) {
                     $("#b_remove_region").show();
                 } else {
                     $("#b_remove_region").hide();
@@ -142,7 +142,7 @@ function show_city(id_region)
                 if (!$(this).find(".checkboxct input").is(':checked')) {
                     $(this).find(".checkboxct").css({ 'visibility': 'hidden'});
                 }
-                if ($(".checkboxct input:checked").size()>0) {
+                if ($(".checkboxct input:checked").length>0) {
                     $("#b_remove_city").show();
                 } else {
                     $("#b_remove_city").hide();

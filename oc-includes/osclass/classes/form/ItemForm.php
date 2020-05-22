@@ -2013,7 +2013,7 @@ class ItemForm extends Form
                     <?php if (Params::getParam('action') === 'item_edit') { ?>
                 }).on('validateBatch', function (event, fileOrBlobDataArray) {
                     // clear alert messages
-                    if ($('#restricted-fine-uploader .alert-error').size() > 0) {
+                    if ($('#restricted-fine-uploader .alert-error').length > 0) {
                         $('#restricted-fine-uploader .alert-error').remove();
                     }
 
@@ -2038,7 +2038,7 @@ class ItemForm extends Form
                         async: false
                     });
                     var json = JSON.parse(strReturn);
-                    var total = parseInt(json.count) + $("#restricted-fine-uploader input[name='ajax_photos[]']").size() + (numUpload);
+                    var total = parseInt(json.count) + $("#restricted-fine-uploader input[name='ajax_photos[]']").length + (numUpload);
                         <?php if ($maxImages > 0) { ?>
                     if (total <=<?php echo $maxImages;?>) {
                         json.success = true;
