@@ -16,6 +16,8 @@
  * limitations under the License.
  */
 
+use mindstellar\osclass\classes\utility\Deprecate;
+
 /**
  * Class AdminBaseModel
  */
@@ -24,8 +26,11 @@ class AdminBaseModel extends BaseModel
     public function __construct()
     {
         parent::__construct();
-        // @deprecated: to be removed
-        osc_run_hook('init_admin');
+        /**
+         * @deprecated use init_admin_insecure instead.
+         */
+        Deprecate::deprecatedRunHook('init_admin', '4.0.0', 'init_admin_insecure');
+
         osc_run_hook('init_admin_insecure');
     }
 
