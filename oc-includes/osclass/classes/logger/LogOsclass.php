@@ -56,22 +56,26 @@ class LogOsclass extends Logger
      * @param array  $params
      *
      */
-    public function __construct($params = array())
+    public function __construct($log_file = null, $params = array())
     {
         if (defined('OSC_DEBUG')) {
             $this->debug_enabled = OSC_DEBUG;
         }
-        $this->log_file = CONTENT_PATH . 'osclass_debug.log';
+        if ($log_file === null) {
+            $this->log_file = CONTENT_PATH . 'osclass_debug.log';
+        } else {
+            $this->log_file = $log_file;
+        }
         $this->params   = array_merge($this->options, $params);
     }
 
     /**
      * @return LogOsclass
      */
-    public static function newInstance($params = array())
+    public static function newInstance($log_file = null, $params = array())
     {
         if (!isset(self::$instance)) {
-            self::$instance = new self($params);
+            self::$instance = new self($log_file, $params);
         }
 
         return self::$instance;
@@ -112,8 +116,6 @@ class LogOsclass extends Logger
 
     /**
      * Open log file
-     *
-     * @return
      */
     private function openLog()
     {
@@ -129,7 +131,7 @@ class LogOsclass extends Logger
         if ($this->file === null) {
             $openFile = $this->log_file;
             // append new log
-            return $this->file = fopen($openFile, 'ab') or exit("Can't open $openFile! Check permissions");
+            $this->file = fopen($openFile, 'ab') or exit("Can't open $openFile! Check permissions");
         }
     }
 
