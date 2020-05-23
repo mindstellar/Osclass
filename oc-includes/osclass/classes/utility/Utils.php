@@ -15,6 +15,7 @@ use City;
 use CityStats;
 use Country;
 use CountryStats;
+use DateTimeZone;
 use Item;
 use LocationsTmp;
 use Params;
@@ -272,6 +273,14 @@ class Utils
         }
     }
 
+    /**
+     * Return indexed array fo php supported timezone
+     * @return array
+     */
+    public static function timezoneList()
+    {
+        return DateTimeZone::listIdentifiers();
+    }
     /**
      * Update locations stats.
      *

@@ -15,6 +15,11 @@
  * limitations under the License.
  */
 
+use mindstellar\osclass\classes\utility\Deprecate;
+
+Deprecate::deprecatedFile(__FILE__, '4.0.0', null, __('Use native php function for timezones list.'));
+
+/** @deprecated  $timezone */
 $timezone = array(
     'Africa/Abidjan',
     'Africa/Accra',

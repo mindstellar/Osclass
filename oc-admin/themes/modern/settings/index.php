@@ -1,4 +1,6 @@
-<?php if (!defined('OC_ADMIN')) {
+<?php use mindstellar\osclass\classes\utility\Utils;
+
+if (!defined('OC_ADMIN')) {
     exit('Direct access is not allowed.');
 }
 /*
@@ -136,7 +138,9 @@ function render_offset()
 function addHelp()
 {
     echo '<p>'
-        . __("Change the basic configuration of your Osclass. From here, you can modify variables such as the site’s name, the default currency or how lists of listings are displayed. <strong>Be careful</strong> when modifying default values if you're not sure what you're doing!")
+        . __("Change the basic configuration of your Osclass. From here, you can modify variables such as the site’s name, 
+the default currency or how lists of listings are displayed. <strong>Be careful</strong> when modifying default values 
+if you're not sure what you're doing!")
         . '</p>';
 }
 
@@ -201,7 +205,7 @@ osc_current_admin_theme_path('parts/header.php'); ?>
                             <select name="language">
                                 <?php foreach ($aLanguages as $lang) { ?>
                                     <option value="<?php echo $lang['pk_c_code']; ?>" <?php echo((osc_language()
-                                        == $lang['pk_c_code']) ? 'selected="selected"'
+                                        === $lang['pk_c_code']) ? 'selected="selected"'
                                         : ''); ?>><?php echo $lang['s_name']; ?></option>
                                 <?php } ?>
                             </select>
@@ -213,7 +217,7 @@ osc_current_admin_theme_path('parts/header.php'); ?>
                             <select name="currency" id="currency_admin">
                                 <?php foreach ($aCurrencies as $currency) { ?>
                                     <option value="<?php echo osc_esc_html($currency['pk_c_code']); ?>" <?php echo((osc_currency()
-                                        == $currency['pk_c_code']) ? 'selected="selected"'
+                                        === $currency['pk_c_code']) ? 'selected="selected"'
                                         : ''); ?>><?php echo $currency['pk_c_code'] ?></option>
                                 <?php } ?>
                             </select>
@@ -250,12 +254,13 @@ osc_current_admin_theme_path('parts/header.php'); ?>
                     <div class="form-row">
                         <div class="form-label"><?php _e('Timezone'); ?></div>
                         <div class="form-controls">
-                            <?php require osc_lib_path() . 'osclass/timezones.php'; ?>
                             <select name="timezone" id="timezone">
                                 <?php $selected_tz = osc_timezone(); ?>
                                 <option value="" selected="selected"><?php _e('Select a timezone...'); ?></option>
-                                <?php foreach ($timezone as $tz) { ?>
-                                    <option value="<?php echo $tz; ?>" <?php if ($selected_tz == $tz) {
+                                <?php
+                                $timezone = Utils::timezoneList();
+                                foreach ($timezone as $tz) { ?>
+                                    <option value="<?php echo $tz; ?>" <?php if ($selected_tz === $tz) {
                                         ?> selected="selected" <?php
                                                    } ?>><?php echo $tz; ?></option>
                                 <?php } ?>
@@ -271,7 +276,7 @@ osc_current_admin_theme_path('parts/header.php'); ?>
                                     $custom_checked = true;
                                     foreach ($dateFormats as $df) {
                                         $checked = false;
-                                        if ($df == osc_date_format()) {
+                                        if ($df === osc_date_format()) {
                                             $custom_checked = false;
                                             $checked        = true;
                                         } ?>
@@ -279,7 +284,7 @@ osc_current_admin_theme_path('parts/header.php'); ?>
                                             <input type="radio" name="df" id="<?php echo $df; ?>"
                                                    value="<?php echo $df; ?>" <?php echo($checked ? 'checked="checked"'
                                                     : ''); ?>
-                                                   onclick="javascript:document.getElementById('dateFormat').value = '<?php echo $df; ?>';"/>
+                                                   onclick="document.getElementById('dateFormat').value = '<?php echo $df; ?>';"/>
                                             <?php echo date($df); ?>
                                         </div>
                                     <?php } ?>
@@ -289,8 +294,8 @@ osc_current_admin_theme_path('parts/header.php'); ?>
                                     <input type="text" name="df_custom_text" id="df_custom_text"
                                            class="input-medium" <?php echo($custom_checked ? 'value="'
                                             . osc_esc_html(osc_date_format()) . '"' : ''); ?>
-                                           onchange="javascript:document.getElementById('dateFormat').value = this.value;"
-                                           onkeyup="javascript:custom_date(this.value);"/>
+                                           onchange="document.getElementById('dateFormat').value = this.value;"
+                                           onkeyup="custom_date(this.value);"/>
                                     <br/>
                                     <span id="custom_date"></span>
                                     <input type="hidden" name="dateFormat" id="dateFormat"
@@ -301,7 +306,7 @@ osc_current_admin_theme_path('parts/header.php'); ?>
                                     $custom_checked = true;
                                     foreach ($timeFormats as $tf) {
                                         $checked = false;
-                                        if ($tf == osc_time_format()) {
+                                        if ($tf === osc_time_format()) {
                                             $custom_checked = false;
                                             $checked        = true;
                                         }
@@ -310,7 +315,7 @@ osc_current_admin_theme_path('parts/header.php'); ?>
                                             <input type="radio" name="tf" id="<?php echo $tf; ?>"
                                                    value="<?php echo $tf; ?>" <?php echo($checked ? 'checked="checked"'
                                                     : ''); ?>
-                                                   onclick="javascript:document.getElementById('timeFormat').value = '<?php echo $tf; ?>';"/>
+                                                   onclick="document.getElementById('timeFormat').value = '<?php echo $tf; ?>';"/>
                                             <?php echo date($tf); ?>
                                         </div>
                                     <?php } ?>
@@ -319,16 +324,16 @@ osc_current_admin_theme_path('parts/header.php'); ?>
                                             : ''); ?> />
                                     <input type="text" class="input-medium" <?php echo($custom_checked ? 'value="'
                                         . osc_esc_html(osc_time_format()) . '"' : ''); ?>
-                                           onchange="javascript:document.getElementById('timeFormat').value = this.value;"
-                                           onkeyup="javascript:custom_time(this.value);"/>
+                                           onchange="document.getElementById('timeFormat').value = this.value;"
+                                           onkeyup="custom_time(this.value);"/>
                                     <br/>
                                     <span id="custom_time"></span>
                                     <input type="hidden" name="timeFormat" id="timeFormat"
                                            value="<?php echo osc_esc_html(osc_time_format()); ?>"/>
                                 </div>
                             </div>
-                            <div class="help-box" style="clear:both; float:none;"><a href="http://php.net/date"
-                                                                                     target="_blank"><?php _e('Documentation on date and time formatting'); ?></a>
+                            <div class="help-box" style="clear:both; float:none;">
+                                <a href="http://php.net/date" target="_blank"><?php _e('Documentation on date and time formatting'); ?></a>
                             </div>
                         </div>
                     </div>
@@ -364,7 +369,8 @@ osc_current_admin_theme_path('parts/header.php'); ?>
                                 <label>
                                     <input type="checkbox" <?php echo(osc_selectable_parent_categories()
                                         ? 'checked="checked"' : ''); ?> name="selectable_parent_categories" value="1"/>
-                                    <?php _e('Allow users to select a parent category as a category when inserting or editing a listing '); ?>
+                                    <?php _e('Allow users to select a parent category as a category 
+                                    when inserting or editing a listing '); ?>
                                 </label>
                             </div>
                         </div>
@@ -390,11 +396,16 @@ osc_current_admin_theme_path('parts/header.php'); ?>
                                 <label>
                                     <input type="checkbox" <?php echo(osc_auto_cron() ? 'checked="checked"' : ''); ?>
                                            name="auto_cron"/>
-                                    <?php printf(__('Allow Osclass to run a built-in <a href="%s" target="_blank">cron</a> automatically without setting crontab'),
-                                        'http://en.wikipedia.org/wiki/Cron'); ?>
+                                    <?php printf(
+                                        __('Allow Osclass to run a built-in <a href="%s" target="_blank">cron</a> 
+automatically without setting crontab'),
+                                        'http://en.wikipedia.org/wiki/Cron'
+                                    ); ?>
                                 </label>
                             </div>
-                            <span class="help-box"><?php _e('It is <b>recommended</b> to have this option enabled, because some features require it.'); ?></span>
+                            <span class="help-box">
+                                <?php _e('It is <b>recommended</b> to have this option enabled, because some features require it.'); ?>
+                            </span>
                         </div>
                     </div>
                     <?php
