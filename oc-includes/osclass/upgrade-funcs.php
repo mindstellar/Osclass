@@ -1,6 +1,13 @@
-<?php if (!defined('ABS_PATH')) {
+<?php
+/*
+ * @deprecated
+ */
+use mindstellar\osclass\classes\utility\Deprecate;
+
+if (!defined('ABS_PATH')) {
     exit('ABS_PATH is not loaded. Direct access is not allowed.');
 }
+Deprecate::deprecatedFile(__FILE__, '4.0.0', null, __('Use new Upgrade class methods.'));
 /**
  * @todo Need removal of legacy code.
  */
@@ -34,11 +41,11 @@ if (!defined('AUTO_UPGRADE')) {
             . 'The following queries failed:');
         $message      .= '<br/><br/>' . implode('<br>', $error_queries[2]);
         $message      .= '<br/><br/>' . sprintf(
-                __('These errors could be false-positive errors. '
+            __('These errors could be false-positive errors. '
                     . "If you're sure that is the case, you can <a href=\"%s\">continue with the upgrade</a>, or "
                     . '<a href="https://osclass.discourse.group">ask in our forums</a>.'),
-                $skip_db_link
-            );
+            $skip_db_link
+        );
         osc_die($title, $message);
     }
 }
