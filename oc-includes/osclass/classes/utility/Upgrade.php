@@ -9,8 +9,9 @@
 
 namespace mindstellar\osclass\classes\utility;
 
+use DBCommandClass;
+use DBConnectionClass;
 use RuntimeException;
-use Session;
 
 /**
  * Class upgrade
@@ -183,6 +184,7 @@ class Upgrade
 
     /**
      * Upgrade osclass
+     *
      * @throws \Exception
      */
     private function upgradeSelf()
@@ -203,6 +205,54 @@ class Upgrade
             );
             $this->FileSystem->remove($extracted_package_path);
         }
+    }
+
+    /**
+     * @param bool $skip_db
+     *
+     * @return false|string
+     */
+    public static function selfDbUpgrade($skip_db = false)
+    {
+        set_time_limit(0);
+
+        $error_queries = array();
+        if (file_exists(osc_lib_path() . 'osclass/installer/struct.sql')) {
+            $sql = file_get_contents(osc_lib_path() . 'osclass/installer/struct.sql');
+
+            $conn = DBConnectionClass::newInstance();
+            $c_db = $conn->getOsclassDb();
+            $comm = new DBCommandClass($c_db);
+
+            $error_queries = $comm->updateDB(str_replace('/*TABLE_PREFIX*/', DB_TABLE_PREFIX, $sql));
+        }
+
+        if (!$skip_db && count($error_queries)) {
+            $skip_db_link = osc_admin_base_url(true) . '?page=upgrade&action=upgrade-funcs&skipdb=true';
+            $message      = __('Osclass &raquo; Has some errors').PHP_EOL;
+            $message     .= __('We\'ve encountered some problems while updating the database structure. 
+            The following queries failed:'.PHP_EOL);
+            $message     .= implode(PHP_EOL, $error_queries[2]).PHP_EOL;
+            $message     .= sprintf(
+                __('These errors could be false-positive errors. If you\'re sure that is the case, you can 
+                    <a href="%s">continue with the upgrade</a>, or <a href="https://osclass.discourse.group">ask 
+            in our forums</a>.'),
+                $skip_db_link
+            );
+
+            return json_encode(array('status' => 'error', 'message' =>$message));
+        }
+
+        if (osc_version() < 390) {
+            osc_delete_preference('marketAllowExternalSources');
+            osc_delete_preference('marketURL');
+            osc_delete_preference('marketAPIConnect');
+            osc_delete_preference('marketCategories');
+            osc_delete_preference('marketDataUpdate');
+        }
+
+        Utils::changeOsclassVersionTo(strtr(OSCLASS_VERSION, array('.' => '')));
+        return json_encode(['status' => 'success']);
     }
 
     /**
