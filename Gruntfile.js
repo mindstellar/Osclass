@@ -119,22 +119,39 @@ module.exports = function (grunt) {
                     }
                 ]
             },
-            'material-icons-font': {
-                files: [{
-                    expand: true,
-                    src: [
-                        nodeDir + '/material-design-icons/iconfont/**/*',
-                        nodeDir + '/material-design-icons/README.md',
-                        nodeDir + '/material-design-icons/LICENSE'
-                    ],
-                    dest: assetsDir + '/fonts/material-icons',
-                    flatten: true
-                }]
+            'fontawesome-free': {
+                files: [
+                    {
+                        expand: true,
+                        src: nodeDir + '/@fortawesome/fontawesome-free/css/all.min.css',
+                        dest: assetsDir + '/fonts/fontawesome5/css',
+                        flatten: true
+                    },
+                    {
+                        expand: true,
+                        src: nodeDir + '/@fortawesome/fontawesome-free/js/all.min.js',
+                        dest: assetsDir + '/fonts/fontawesome5/js',
+                        flatten: true
+                    },
+                    {
+                        expand: true,
+                        cwd: nodeDir + '/@fortawesome/fontawesome-free/webfonts',
+                        src: '**/*',
+                        dest: assetsDir + '/fonts/fontawesome5/webfonts',
+                        flatten: false
+                    },
+                    {
+                        expand: true,
+                        src: nodeDir + '/@fortawesome/fontawesome-free/LICENSE.txt',
+                        dest: assetsDir + '/fonts/fontawesome5',
+                        flatten: true
+                    }
+                ]
             },
             'tinymce': {
                 files: [{
                     expand: true,
-                    cwd: nodeDir+'/tinymce',
+                    cwd: nodeDir + '/tinymce',
                     src: '**/*',
                     dest: assetsDir + '/js/tinymce',
                     flatten: false
@@ -155,7 +172,7 @@ module.exports = function (grunt) {
             'osclass-legacy': {
                 files: [{
                     expand: true,
-                    cwd: nodeDir+'/osclass-legacy-assets/src',
+                    cwd: nodeDir + '/osclass-legacy-assets/src',
                     src: '**/*',
                     dest: assetsDir + '/osclass-legacy/',
                     flatten: false
