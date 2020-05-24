@@ -49,19 +49,22 @@ function customHead()
                 $('textarea, button,select, input:file').uniform();
             }
 
-            <?php if (Params::getParam('confirm') == 'true') {?>
+            <?php if (Params::getParam('confirm') === 'true') {?>
             $('#output').show();
             $('#tohide').hide();
 
             $.get('<?php echo osc_admin_base_url(true); ?>?page=upgrade&action=upgrade-funcs', function (data) {
-                $('#loading_immage').hide();
-                $('#result').append(data + "<br/>");
+                $('#loading_image').hide();
+                if(data.status) {
+                        $("#result").append("Success: " + data.message + "<br />");
+                } else {
+                        $("#result").append("Error: " + data.message.replace(/\n/g,"<br />") + "<br />");
+                }
             });
             <?php } ?>
         });
     </script>
 <?php }
-
 
 osc_add_hook('admin_header', 'customHead', 10);
 
@@ -71,8 +74,7 @@ osc_current_admin_theme_path('parts/header.php'); ?>
     <h2 class="render-title"><?php _e('Upgrade'); ?></h2>
     <div id="result">
         <div id="output" style="display:none">
-            <img id="loading_immage" src="<?php echo osc_current_admin_theme_url('images/loading.gif'); ?>" title=""
-                 alt=""/>
+            <i id="loading_image" class="fas fa-spinner fa-spin"></i>
             <?php _e('Upgrading your Osclass installation (this could take a while): ', 'admin'); ?>
         </div>
         <div id="tohide">

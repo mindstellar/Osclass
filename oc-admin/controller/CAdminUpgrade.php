@@ -1,6 +1,4 @@
-<?php if (!defined('ABS_PATH')) {
-    exit('ABS_PATH is not loaded. Direct access is not allowed.');
-}
+<?php use mindstellar\osclass\classes\utility\Upgrade;
 
 /*
  * Copyright 2014 Osclass
@@ -41,7 +39,10 @@ class CAdminUpgrade extends AdminSecBaseModel
                     osc_add_flash_warning_message(_m('This action cannot be done because it is a demo site'), 'admin');
                     $this->redirectTo(osc_admin_base_url(true));
                 }
-                require(LIB_PATH . 'osclass/upgrade-funcs.php');
+                $this->ajax = true;
+                $upgrade_result = Upgrade::selfDbUpgrade(Params::getParam('skipdb'));
+                header('Content-Type: application/json');
+                echo $upgrade_result;
                 break;
             default:
                 $this->doView('upgrade/index.php');

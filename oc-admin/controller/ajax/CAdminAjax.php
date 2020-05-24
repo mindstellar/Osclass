@@ -1,4 +1,6 @@
-<?php if (!defined('ABS_PATH')) {
+<?php use mindstellar\osclass\classes\utility\Upgrade;
+
+if (!defined('ABS_PATH')) {
     exit('ABS_PATH is not loaded. Direct access is not allowed.');
 }
 
@@ -591,13 +593,18 @@ class CAdminAjax extends AdminSecBaseModel
                     $result = array('error' => 6, 'message' => $msg);
                     osc_add_flash_warning_message($msg, 'admin');
                 } else {
-                    $result = osc_do_upgrade();
-                    if (!defined('__FROM_CRON__') || !__FROM_CRON__) {
-                        if ($result['error'] == 0) {
-                            osc_add_flash_ok_message($result['message'], 'admin');
-                        } elseif ($result['error'] == 6) {
-                            osc_add_flash_warning_message($result['message'], 'admin');
-                        }
+                    $upgradeSelf = new Upgrade();
+                    try {
+                        $upgradeSelf->doUpgrade();
+                        $db_upgrade_result = json_decode($upgradeSelf::selfDbUpgrade(), true);
+                        $result = ['error' => 0, 'message'=>__('Osclass upgraded successfully.')];
+                    } catch (Exception $e) {
+                        $result = ['error'=> 1, 'message'=> $e->getMessage()];
+                        osc_add_flash_error_message($e->getMessage(), 'admin');
+                    }
+                    if (isset($db_upgrade_result) && $db_upgrade_result['status']!==true) {
+                        $result = ['error' => 5, 'message'=>$db_upgrade_result['message']];
+                        osc_add_flash_warning_message(__('Error occurred while upgrading osclass Database.'), 'admin');
                     }
                 }
                 echo json_encode($result);

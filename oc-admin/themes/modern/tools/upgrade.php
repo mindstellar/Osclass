@@ -1,10 +1,10 @@
 <?php
+
+use mindstellar\osclass\classes\utility\Upgrade;
+
 if (!defined('OC_ADMIN')) {
     exit('Direct access is not allowed.');
 }
-
-$perms = osc_save_permissions();
-$ok    = osc_change_permissions();
 
 //customize Head
 function customHead()
@@ -15,58 +15,51 @@ function customHead()
             $("#steps_div").hide();
         });
         <?php
-
-        $perms = osc_save_permissions();
-        $ok = osc_change_permissions();
-        foreach ($perms as $k => $v) {
-            chmod($k, $v);
-        }
-        if ($ok) {
-            ?>
+        $upgrade = new Upgrade();
+        $is_upgrade_available = $upgrade->isUpgradeAvailable();
+        ?>
         $(function () {
-            var steps_div = document.getElementById('steps_div');
-            steps_div.style.display = '';
-            var steps = document.getElementById('steps');
-            var version = <?php echo osc_version(); ?>;
-            var fileToUnzip = '';
-            steps.innerHTML += '<?php echo osc_esc_js(sprintf(__('Checking for updates (Current version %s)'),
-                osc_version())); ?> ';
+            let steps;
+            let remoteVersion;
+            const stepsDiv = document.getElementById('steps_div');
+            stepsDiv.style.display = '';
+            remoteVersion = '<?php echo osc_esc_js($upgrade->getPackageNewVersion()); ?>';
+            steps = document.getElementById('steps');
 
-            $.getJSON("https://example.org/latest_version_v1.php?callback=?", function (data) {
-                if (data.version <= version) {
-                    steps.innerHTML += '<?php echo osc_esc_js(__('Congratulations! Your Osclass installation is up to date!')); ?>';
-                } else {
-                    steps.innerHTML += '<?php echo osc_esc_js(__('New version to update:')); ?> ' + oscEscapeHTML(data.version);
-                    +"<br />";
-                    <?php if (Params::getParam('confirm') == 'true') {?>
-                    steps.innerHTML += '<img id="loading_image" src="<?php echo osc_current_admin_theme_url('images/loading.gif'); ?>" /><?php echo osc_esc_js(__('Upgrading your Osclass installation (this could take a while):')); ?>';
+            <?php if ($is_upgrade_available && Params::getParam('confirm') !== 'true') { ?>
+            steps.append('<?php echo osc_esc_js(sprintf(
+                __('Upgrade is available for (Current version %s)'),
+                osc_version()
+            )); ?> ');
+            steps.append('<?php echo osc_esc_js(__('New version to update:')); ?> ' + remoteVersion);
+            steps.append('<input type="button" value="<?php echo osc_esc_html(__('Upgrade')); ?>" onclick="window"' +
+                '".location.href=\'<?php echo osc_admin_base_url(true); ?>?page=tools&action=upgrade&confirm=true\';" />');
 
-                    var tempAr = data.url.split('/');
-                    fileToUnzip = tempAr.pop();
-                    $.getJSON('<?php echo osc_admin_base_url(true); ?>?page=ajax&action=upgrade&<?php echo osc_csrf_token_url(); ?>', function (data) {
-                        if (data.error == 0 || data.error == 6) {
-                            window.location = "<?php echo osc_admin_base_url(true); ?>?page=tools&action=version";
-                        }
-                        var loading_image = document.getElementById('loading_image');
-                        loading_image.style.display = "none";
-                        steps.innerHTML += $("<div>").text(data.message).html();
-                        +"<br />";
-                    });
-                    <?php } else { ?>
-                    steps.innerHTML += '<input type="button" value="<?php echo osc_esc_html(__('Upgrade')); ?>" onclick="window.location.href=\'<?php echo osc_admin_base_url(true); ?>?page=tools&action=upgrade&confirm=true\';" />';
-                    <?php } ?>
+            <?php } elseif ($is_upgrade_available && Params::getParam('confirm') === 'true') { ?>
+            steps.append(`<i id="loading_image" class="fas fa-spinner fa-spin"></i> <?php
+            echo osc_esc_js(__('Upgrading your Osclass installation (this could take a while):'));
+            ?>`);
+            $.getJSON('<?php
+                echo osc_admin_base_url(true) . '?page=ajax&action=upgrade&' . osc_csrf_token_url();
+            ?>', function (data) {
+                if (data.error == 0 || data.error == 6) {
+                    window.location = "<?php echo osc_admin_base_url(true); ?>?page=tools&action=version";
                 }
+                var loading_image = document.getElementById('loading_image');
+                loading_image.style.display = "none";
+                steps.append(text(data.message).html() + "<br />");
             });
-        });
-            <?php
-        } ?>
+            <?php } else { ?>
+            steps.append('<?php echo osc_esc_js(__('Congratulations! Your Osclass installation is up to date!')); ?>');
+            <?php } ?>
+        })
     </script>
     <?php
 }
 
 
 //TODO Not using it right now
-//osc_add_hook('admin_header', 'customHead', 10);
+osc_add_hook('admin_footer', 'customHead', 10);
 
 /**
  * @return string
@@ -80,7 +73,8 @@ function render_offset()
 function addHelp()
 {
     echo '<p>'
-        . __("Check to see if you're using the latest version of Osclass. If you're not, the system will let you know so you can update and use the newest features.")
+        . __("Check to see if you're using the latest version of Osclass. If you're not, 
+        the system will let you know so you can update and use the newest features.")
         . '</p>';
 }
 
@@ -121,13 +115,17 @@ osc_current_admin_theme_path('parts/header.php'); ?>
                     <div class="form-horizontal">
                         <div class="form-row">
                             <div class="tools upgrade">
-                                <p class="text">
-                                    <?php
-                                    _e('Your Osclass installation can\'t be auto-upgraded, we are working on this feature. Please, back up your database, the folder oc-content and follow our Step-by-Step');
-                                    echo '<a href="https://osclass.gitbook.io/osclass-docs//"> '
-                                        . __('Osclass Documentation') . '</a>.';
-                                    ?>
-                                </p>
+                                    <p class="text">
+                                        <?php
+                                        printf(
+                                            __('Your Osclass installation can be auto-upgraded. 
+                                        Please, back up your database and the folder oc-content before attempting to 
+                                        upgrade your Osclass installation. 
+                                        You can also upgrade Osclass manually, more information in the %s'),
+                                            '<a href="https://docs.mindstellar.com/">Documentation</a>'
+                                        );
+                                        ?>
+                                    </p>
                                 <div id="steps_div">
                                     <div id="steps">
 

@@ -227,7 +227,7 @@ class Upgrade
             $error_queries = $comm->updateDB(str_replace('/*TABLE_PREFIX*/', DB_TABLE_PREFIX, $sql));
         }
 
-        if (!$skip_db && count($error_queries)) {
+        if (!$skip_db && count($error_queries[2]) > 0) {
             $skip_db_link = osc_admin_base_url(true) . '?page=upgrade&action=upgrade-funcs&skipdb=true';
             $message      = __('Osclass &raquo; Has some errors').PHP_EOL;
             $message     .= __('We\'ve encountered some problems while updating the database structure. 
@@ -235,12 +235,11 @@ class Upgrade
             $message     .= implode(PHP_EOL, $error_queries[2]).PHP_EOL;
             $message     .= sprintf(
                 __('These errors could be false-positive errors. If you\'re sure that is the case, you can 
-                    <a href="%s">continue with the upgrade</a>, or <a href="https://osclass.discourse.group">ask 
-            in our forums</a>.'),
+                    <a href="%s">continue with the upgrade</a>, or <a href="https://osclass.discourse.group">ask in our forums</a>.'),
                 $skip_db_link
             );
 
-            return json_encode(array('status' => 'error', 'message' =>$message));
+            return json_encode(['status' => false, 'message' =>$message]);
         }
 
         if (osc_version() < 390) {
@@ -252,7 +251,7 @@ class Upgrade
         }
 
         Utils::changeOsclassVersionTo(strtr(OSCLASS_VERSION, array('.' => '')));
-        return json_encode(['status' => 'success']);
+        return json_encode(['status' => true, 'message' => __('Osclass DB Upgraded Successfully')]);
     }
 
     /**
@@ -295,5 +294,13 @@ class Upgrade
         }
 
         return false;
+    }
+
+    /**
+     * @return string
+     */
+    public function getPackageNewVersion()
+    {
+        return $this->package_new_version;
     }
 }
