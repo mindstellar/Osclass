@@ -116,13 +116,15 @@ class Utils
      * Change current osclass version to given param number
      *
      * @param mixed version
+     *
+     * @return bool
      */
     public static function changeOsclassVersionTo($version = null)
     {
         if ($version) {
-            Preference::newInstance()->set('version', $version);
-            Preference::newInstance()->toArray();
+            return Preference::newInstance()->replace('version', $version);
         }
+        return false;
     }
 
     /**
