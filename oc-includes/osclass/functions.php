@@ -574,13 +574,11 @@ function osc_admin_toolbar_spam()
 function osc_admin_toolbar_update_core($force = false)
 {
     if (!osc_is_moderator()) {
-        $data = json_decode(osc_update_core_json(), true);
-
         if ($force) {
             AdminToolbar::newInstance()->remove_menu('update_core');
         }
-        if (isset($data['version']) && $data['version'] > 0) {
-            $title = sprintf(__('Osclass %s is available'), $data['s_name']);
+        if (getPreference('update_core_available')) {
+            $title = sprintf(__('Osclass update %s is available'), getPreference('update_core_available'));
             AdminToolbar::newInstance()->add_menu(
                 array(
                     'id'    => 'update_core',

@@ -142,7 +142,7 @@ class Upgrade
             if (isset($aSelf_package['version'])) {
                 $this->package_new_version = str_replace('v', '', $aSelf_package['tag_name']);
             }
-            $this->package_current_version = OSCLASS_VERSION;
+            $this->package_current_version = osc_version();
             $this->package_directory_name  = 'osclass';
             $this->package_info_valid      = true;
         }
@@ -197,6 +197,7 @@ class Upgrade
         if (($is_compatible !== -1) && $is_upgradable !== -1
             && $extracted_package_path = $this->downloadPackageAndExtract()
         ) {
+            $this->FileSystem->touch(ABS_PATH.'.maintenance');
             $this->FileSystem->sync(
                 $extracted_package_path . '/' . $this->package_directory_name,
                 ABS_PATH,
@@ -204,6 +205,8 @@ class Upgrade
                 ['oc-content'] //Don't overwrite 'oc-content' directory while upgrading Osclass
             );
             $this->FileSystem->remove($extracted_package_path);
+            $this->FileSystem->remove(ABS_PATH.'.maintenance');
+            osc_set_preference('update_core_available');
         }
     }
 
@@ -250,7 +253,7 @@ class Upgrade
             osc_delete_preference('marketDataUpdate');
         }
 
-        Utils::changeOsclassVersionTo(strtr(OSCLASS_VERSION, array('.' => '')));
+        Utils::changeOsclassVersionTo(OSCLASS_VERSION);
         return json_encode(['status' => true, 'message' => __('Osclass DB Upgraded Successfully')]);
     }
 

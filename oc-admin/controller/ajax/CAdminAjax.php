@@ -552,23 +552,18 @@ class CAdminAjax extends AdminSecBaseModel
                 }
                 break;
             case 'check_version':
-                echo json_encode(array('error' => 1, 'msg' => __('Version could not be checked')));
+                $upgradeSelf = new Upgrade();
+                $upgrade_available = $upgradeSelf->isUpgradeAvailable();
 
-                return;
-                // $json = json_decode($data);
-                // if(isset($json->version)) {
-                //     if ($json->version > osc_version()) {
-                //         osc_set_preference('update_core_json', $data);
-                //         echo json_encode(array('error' => 0, 'msg' => __('Update available')));
-                //     } else {
-                //         osc_set_preference('update_core_json', '');
-                //         echo json_encode(array('error' => 0, 'msg' => __('No update available')));
-                //     }
-                //     osc_set_preference( 'last_version_check', time() );
-                // } else { // Latest version couldn't be checked (site down?)
-                //     osc_set_preference( 'last_version_check', time()-82800 ); // 82800 = 23 hours, so repeat check in one hour
-                //     echo json_encode(array('error' => 1, 'msg' => __('Version could not be checked')));
-                // }
+                if ($upgrade_available) {
+                    osc_set_preference('update_core_available', $upgradeSelf->getPackageNewVersion());
+                    echo json_encode(array('error' => 0, 'msg' => __('Update available')));
+                } else {
+                    osc_set_preference('update_core_available', '');
+                    echo json_encode(array('error' => 0, 'msg' => __('No update available')));
+                }
+                osc_set_preference('last_version_check', time());
+
                 break;
             case 'check_languages':
                 $total = _osc_check_languages_update();
@@ -608,41 +603,6 @@ class CAdminAjax extends AdminSecBaseModel
                     }
                 }
                 echo json_encode($result);
-                break;
-
-            /*******************************
-             ** COMPLETE MARKET PROCESS **
-             *******************************/
-            case 'market': // AT THIS POINT WE KNOW IF THERE'S AN UPDATE OR NOT
-                osc_csrf_check();
-                $result = osc_market(Params::getParam('section'), Params::getParam('code'));
-                echo json_encode($result);
-                break;
-            case 'check_market': // AT THIS POINT WE KNOW IF THERE'S AN UPDATE OR NOT
-                $section = Params::getParam('section');
-                $code    = Params::getParam('code');
-                $data    = array();
-                /************************
-                 *** CHECK VALID CODE ***
-                 ************************/
-                if ($code != '' && $section != '') {
-                    if (stripos($code, 'http://') === false && stripos($code, 'https://') === false) {
-                        // OSCLASS OFFICIAL REPOSITORY
-                        // Disable Osclass Market update checking.
-                        // $data = json_decode(osc_file_get_contents(osc_market_url($section, $code), array('api_key' => osc_market_api_connect())), true);
-                    } elseif (osc_market_external_sources()) {
-                        $data = json_decode(osc_file_get_contents($code), true);
-                    } else {
-                        echo json_encode(array('error' => 3, 'error_msg' => __('No external sources are allowed')));
-                        break;
-                    }
-                    if (!isset($data['s_source_file'], $data['s_update_url'])) {
-                        //$data = array('error' => 2, 'error_msg' => __('Invalid code'));
-                    }
-                } else {
-                    $data = array('error' => 1, 'error_msg' => __('No code was submitted'));
-                }
-                echo json_encode($data);
                 break;
             case 'location_stats':
                 osc_csrf_check();

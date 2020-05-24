@@ -16,6 +16,8 @@
  * limitations under the License.
  */
 
+use mindstellar\osclass\classes\utility\Utils;
+
 /**
  * Class AdminSecBaseModel
  */
@@ -44,10 +46,9 @@ class AdminSecBaseModel extends SecBaseModel
 
         osc_run_hook('init_admin');
 
-        $config_version = str_replace('.', '', OSCLASS_VERSION);
-        $config_version = preg_replace('|-.*|', '', $config_version);
+        $config_version = OSCLASS_VERSION;
 
-        if ($config_version > osc_get_preference('version') && MULTISITE == 0) {
+        if (Utils::versionCompare($config_version, osc_get_preference('version'), 'gt') && MULTISITE == 0) {
             if ($this instanceof CAdminTools) {
             } elseif (!$this instanceof CAdminUpgrade) {
                 $this->redirectTo(osc_admin_base_url(true) . '?page=upgrade');
