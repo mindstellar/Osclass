@@ -1424,7 +1424,7 @@ class DBCommandClass
     {
         $sql     = str_replace(
             array('/*TABLE_PREFIX*/', '/*OSCLASS_VERSION*/'),
-            array(DB_TABLE_PREFIX, strtr(OSCLASS_VERSION, array('.' => ''))),
+            array(DB_TABLE_PREFIX, OSCLASS_VERSION),
             $sql
         );
         $sql     = preg_replace('#/\*(?:[^*]*(?:\*(?!/))*)*\*/#', '', $sql);
