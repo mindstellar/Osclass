@@ -860,8 +860,10 @@ class Search extends DAO
                     'select count(*) as total from %st_item',
                     DB_TABLE_PREFIX
                 ));
-            $row                       = $result->row();
-            $this->total_results_table = $row['total'];
+            if ($result instanceof DBRecordsetClass) {
+                $row                       = $result->row();
+                $this->total_results_table = $row['total'];
+            }
         }
 
         return $this->total_results_table;
