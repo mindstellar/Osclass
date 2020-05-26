@@ -73,8 +73,11 @@ class Stats
         $this->conn->orderBy('dt_reg_date', 'DESC');
 
         $result = $this->conn->get();
+        if ($result instanceof DBRecordsetClass) {
+            return $result->result();
+        }
 
-        return $result->result();
+        return array();
     }
 
     /**
@@ -88,7 +91,11 @@ class Stats
 
         $result = $this->conn->get();
 
-        return $result->result();
+        if ($result instanceof DBRecordsetClass) {
+            return $result->result();
+        }
+
+        return array();
     }
 
     /**
@@ -102,7 +109,11 @@ class Stats
 
         $result = $this->conn->get();
 
-        return $result->result();
+        if ($result instanceof DBRecordsetClass) {
+            return $result->result();
+        }
+
+        return array();
     }
 
     /**
@@ -114,7 +125,11 @@ class Stats
             $this->conn->query('SELECT AVG( num ) as avg FROM (SELECT COUNT( pk_i_id ) AS num FROM ' . DB_TABLE_PREFIX
                 . 't_item GROUP BY s_contact_email ) AS dummy_table');
 
-        return $result->result();
+        if ($result instanceof DBRecordsetClass) {
+            return $result->result();
+        }
+
+        return array();
     }
 
     /**
@@ -129,7 +144,11 @@ class Stats
 
         $result = $this->conn->get();
 
-        return $result->result();
+        if ($result instanceof DBRecordsetClass) {
+            return $result->result();
+        }
+
+        return array();
     }
 
     /**
@@ -156,7 +175,7 @@ class Stats
         $this->conn->orderBy('dt_pub_date', 'DESC');
 
         $result = $this->conn->get();
-        if ($result) {
+        if ($result instanceof DBRecordsetClass) {
             return $result->result();
         }
 
@@ -178,7 +197,11 @@ class Stats
 
         $result = $this->conn->get();
 
-        return $result->result();
+        if ($result instanceof DBRecordsetClass) {
+            return $result->result();
+        }
+
+        return array();
     }
 
     /**
@@ -206,7 +229,11 @@ class Stats
 
         $result = $this->conn->get();
 
-        return $result->result();
+        if ($result instanceof DBRecordsetClass) {
+            return $result->result();
+        }
+
+        return array();
     }
 
     /**
@@ -222,7 +249,10 @@ class Stats
 
         $result = $this->conn->get();
 
-        return $result->result();
+        if ($result instanceof DBRecordsetClass) {
+            return $result->result();
+        }
+        return false;
     }
 
     /**
@@ -249,7 +279,11 @@ class Stats
 
         $result = $this->conn->get();
 
-        return $result->result();
+        if ($result instanceof DBRecordsetClass) {
+            return $result->result();
+        }
+
+        return array();
     }
 
     /**
@@ -278,7 +312,11 @@ class Stats
 
         $result = $this->conn->get();
 
-        return $result->result();
+        if ($result instanceof DBRecordsetClass) {
+            return $result->result();
+        }
+
+        return array();
     }
 
     /**
@@ -307,6 +345,10 @@ class Stats
 
         $result = $this->conn->get();
 
-        return $result->result();
+        if ($result instanceof DBRecordsetClass) {
+            return $result->result();
+        }
+
+        return array();
     }
 }
