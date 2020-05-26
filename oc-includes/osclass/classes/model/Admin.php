@@ -52,19 +52,22 @@ class Admin extends DAO
         $this->setPrimaryKey('pk_i_id');
 
         $return = $this->dao->query('SHOW COLUMNS FROM ' . $this->getTableName() . ' where Field = "b_moderator" ');
-
-        if ($return->numRows() > 0) {
-            $this->setFields(array(
-                'pk_i_id',
-                's_name',
-                's_username',
-                's_password',
-                's_email',
-                's_secret',
-                'b_moderator'
-            ));
+        if ($return instanceof DBRecordsetClass) {
+            if ($return->numRows() > 0) {
+                $this->setFields(array(
+                    'pk_i_id',
+                    's_name',
+                    's_username',
+                    's_password',
+                    's_email',
+                    's_secret',
+                    'b_moderator'
+                ));
+            } else {
+                $this->setFields(array('pk_i_id', 's_name', 's_username', 's_password', 's_email', 's_secret'));
+            }
         } else {
-            $this->setFields(array('pk_i_id', 's_name', 's_username', 's_password', 's_email', 's_secret'));
+            throw new mysqli_sql_exception($this->dao->errorDesc);
         }
     }
 
