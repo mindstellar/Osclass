@@ -15,7 +15,7 @@ services:
       - "5000:80"
 
   php-fpm:
-    build: .docker/php-fpm
+    image: mindstellar/osclass-php-fpm
     container_name: osclass-php-fpm
     working_dir: /application
     volumes:
