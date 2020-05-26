@@ -28,8 +28,10 @@ oc-content/themes/*
 # plugins
 oc-content/plugins/*
 !oc-content/plugins/index.php
-!oc-content/plugins/google_analytics/
 !oc-content/plugins/google_maps/
+
+# languages
+oc-content/languages/*
 
 # Intellij IDEA
 .idea/*
@@ -52,3 +54,4 @@ osclass_latest.zip
 .php_cs.cache
 robots.txt
 /scratch.php
+/error.log
