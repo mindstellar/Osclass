@@ -142,13 +142,11 @@ switch ($step) {
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <title><?php _e('Osclass Installation'); ?></title>
-    <script src="<?php echo get_absolute_url(); ?>oc-includes/osclass/assets/js/jquery.min.js"
+    <script src="<?php echo get_absolute_url(); ?>oc-includes/assets/js/jquery/jquery.min.js"
             type="text/javascript"></script>
-    <script src="<?php echo get_absolute_url(); ?>oc-includes/osclass/assets/js/jquery-ui.min.js"
+    <script src="<?php echo get_absolute_url(); ?>oc-includes/assets/js/jquery-ui/jquery-ui.min.js"
             type="text/javascript"></script>
     <script src="<?php echo get_absolute_url(); ?>oc-includes/osclass/installer/vtip/vtip.js"
-            type="text/javascript"></script>
-    <script src="<?php echo get_absolute_url(); ?>oc-includes/osclass/assets/js/jquery.json.js"
             type="text/javascript"></script>
     <script src="<?php echo get_absolute_url(); ?>oc-includes/osclass/installer/install.js"
             type="text/javascript"></script>
@@ -307,7 +305,7 @@ switch ($step) {
         <div id="footer">
             <ul>
                 <li>
-                    <a href="https://osclass.gitbook.io/osclass-docs/" target="_blank"
+                    <a href="https://docs.mindstellar.com/osclass-docs/" target="_blank"
                        hreflang="en"><?php _e('Documentation'); ?></a>
                 </li>
                 <li>
