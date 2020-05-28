@@ -24,7 +24,7 @@ services:
 
   mysql:
     env_file:
-      - db.env
+      - .env
     image: mysql:5.7
     container_name: osclass-mysql
     working_dir: /application
@@ -50,7 +50,7 @@ services:
 
   phpmyadmin:
     env_file:
-      - db.env
+      - .env
     image: phpmyadmin/phpmyadmin
     container_name: osclass-phpmyadmin
     ports:
