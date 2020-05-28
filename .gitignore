@@ -11,14 +11,13 @@ sftp-config*
 # Config Osclass
 /config.php
 /_config.php
-oc-includes/osclass/t/config.php
 .maintenance
 
 # oc-content
-/oc-content/debug*.log
-/oc-content/queries.log
-/oc-content/explain_queries.log
-/oc-content/uploads/*
+oc-content/debug*.log
+oc-content/queries.log
+oc-content/explain_queries.log
+oc-content/uploads/*
 
 # themes
 oc-content/themes/*
@@ -46,6 +45,9 @@ package-lock.json
 # npm
 node_modules
 
+#dotenv
+.env
+
 # test
 oc-includes/osclass/t/config.php
 oc-includes/simpletest/test/osclass/custom_config.php
@@ -55,3 +57,4 @@ osclass_latest.zip
 robots.txt
 /scratch.php
 /error.log
+
