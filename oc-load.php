@@ -167,7 +167,7 @@ osc_add_hook('header', 'osc_load_scripts', 10);
 
 // register scripts
 osc_register_script('jquery', osc_assets_url('js/jquery/jquery.min.js'));
-osc_register_script('jquery-migrate', osc_assets_url('js/jquery-migrate/jquery-migrate.min.js'), array('jquery'));
+osc_register_script('jquery-migrate', osc_assets_url('js/jquery-migrate/jquery-migrate.min.js'), 'jquery');
 osc_register_script('jquery-ui', osc_assets_url('js/jquery-ui/jquery-ui.min.js'), 'jquery');
 
 //osc_register_script('jquery-json', osc_assets_url('js/jquery.json.js'), 'jquery');
