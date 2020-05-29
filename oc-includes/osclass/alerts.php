@@ -28,7 +28,7 @@ function osc_runAlert($type = null, $last_exec = null)
 
     if ($last_exec == null) {
         $cron      = Cron::newInstance()->getCronByType($type);
-        $last_exec = '0000-00-00 00:00:00';
+        $last_exec = '1000-01-01 00:00:00';
         if (is_array($cron)) {
             $last_exec = $cron['d_last_exec'];
         }
