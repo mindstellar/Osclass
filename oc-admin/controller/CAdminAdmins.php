@@ -32,8 +32,8 @@ class CAdminAdmins extends AdminSecBaseModel
 
         if ($this->isModerator()) {
             if (($this->action !== 'edit' && $this->action !== 'edit_post')
-                || Params::getParam('id') != ''
-                && Params::getParam('id') != osc_logged_admin_id()
+                || (Params::getParam('id') != ''
+                && Params::getParam('id') != osc_logged_admin_id())
             ) {
                 osc_add_flash_error_message(_m("You don't have enough permissions"), 'admin');
                 $this->redirectTo(osc_admin_base_url());

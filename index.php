@@ -28,7 +28,7 @@ if (CLI) {
         Params::setParam('cron-type', $cli_params['t']);
     }
     if (Params::getParam('page') === 'upgrade') {
-        require_once(osc_lib_path() . 'osclass/upgrade-funcs.php');
+        require_once(LIB_PATH . 'osclass/upgrade-funcs.php');
         exit(1);
     }
 

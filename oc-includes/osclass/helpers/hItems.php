@@ -345,7 +345,7 @@ function osc_item_formatted_price()
 
 
 /**
- * DEPRECATED: incorrect spelling of "formatted." Kept for legacy purposes
+ * @DEPRECATED: incorrect spelling of "formatted." Kept for legacy purposes
  *
  * Calls osc_item_formatted_price
  *

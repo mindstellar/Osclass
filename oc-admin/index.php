@@ -15,10 +15,9 @@
  * limitations under the License.
  */
 
-define('ABS_PATH', str_replace('\\', '/', dirname(dirname($_SERVER['SCRIPT_FILENAME'])) . '/'));
 define('OC_ADMIN', true);
 
-require_once ABS_PATH . 'oc-load.php';
+require_once dirname(__DIR__) . '/oc-load.php';
 
 if (file_exists(ABS_PATH . '.maintenance')) {
     define('__OSC_MAINTENANCE__', true);
