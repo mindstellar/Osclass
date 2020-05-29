@@ -57,7 +57,7 @@ function osc_runAlert($type = null, $last_exec = null)
     foreach ($searches as $s_search) {
         // Get if there're new ads on this search
         $json             = $s_search['s_search'];
-        $array_conditions = (array)json_decode($json);
+        $array_conditions = json_decode($json, true);
 
         $new_search = Search::newInstance();
         $new_search->setJsonAlert($array_conditions);
