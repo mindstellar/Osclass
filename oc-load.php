@@ -34,8 +34,10 @@ if (!file_exists(ABS_PATH . 'config.php')) {
     osc_die($title, $message);
 }
 
-// load database configuration
+// load osclass configuration
 require_once ABS_PATH . 'config.php';
+
+// load default constants
 require_once LIB_PATH . 'osclass/default-constants.php';
 
 // Sets PHP error handling
@@ -54,19 +56,19 @@ if (OSC_DEBUG) {
         | E_USER_ERROR | E_USER_WARNING
     );
 }
-//Include Composer's autoloader
+//Load Autoloader
 require_once LIB_PATH . 'vendor/autoload.php';
 require_once LIB_PATH . 'osclass_autoloader.php';
 require_once LIB_PATH . 'osclass/helpers/hDatabaseInfo.php';
 require_once LIB_PATH . 'osclass/helpers/hPreference.php';
 
 // check if Osclass is installed
-if (!getBoolPreference('osclass_installed') && MULTISITE) {
+if (!Preference::newInstance()->get('osclass_installed') && MULTISITE) {
     header('Location: ' . WEB_PATH);
     die;
 }
 
-if (!getBoolPreference('osclass_installed')) {
+if (!Preference::newInstance()->get('osclass_installed')) {
     require_once LIB_PATH . 'osclass/helpers/hErrors.php';
 
     $title   = 'Osclass &raquo; Error';
@@ -77,7 +79,6 @@ if (!getBoolPreference('osclass_installed')) {
 
     osc_die($title, $message);
 }
-
 require_once LIB_PATH . 'osclass/helpers/hDefines.php';
 require_once LIB_PATH . 'osclass/helpers/hLocale.php';
 require_once LIB_PATH . 'osclass/helpers/hMessages.php';
@@ -85,7 +86,6 @@ require_once LIB_PATH . 'osclass/helpers/hUsers.php';
 require_once LIB_PATH . 'osclass/helpers/hItems.php';
 require_once LIB_PATH . 'osclass/helpers/hSearch.php';
 require_once LIB_PATH . 'osclass/helpers/hUtils.php';
-
 require_once LIB_PATH . 'osclass/helpers/hCategories.php';
 require_once LIB_PATH . 'osclass/helpers/hTranslations.php';
 require_once LIB_PATH . 'osclass/helpers/hSecurity.php';
@@ -96,18 +96,14 @@ require_once LIB_PATH . 'osclass/helpers/hPagination.php';
 require_once LIB_PATH . 'osclass/helpers/hPremium.php';
 require_once LIB_PATH . 'osclass/helpers/hTheme.php';
 require_once LIB_PATH . 'osclass/helpers/hLocation.php';
-
 require_once LIB_PATH . 'osclass/utils.php';
 require_once LIB_PATH . 'osclass/formatting.php';
 require_once LIB_PATH . 'osclass/locales.php';
 require_once LIB_PATH . 'osclass/helpers/hPlugins.php';
 require_once LIB_PATH . 'osclass/emails.php';
-
 require_once LIB_PATH . 'osclass/alerts.php';
-
 require_once LIB_PATH . 'osclass/functions.php';
 require_once LIB_PATH . 'osclass/helpers/hAdminMenu.php';
-
 require_once LIB_PATH . 'osclass/helpers/hCache.php';
 require_once LIB_PATH . 'osclass/compatibility.php';
 
