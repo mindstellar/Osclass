@@ -533,12 +533,20 @@ function oc_install()
     }
     $localeManager->insert($values);
 
-    $error_num = $comm->getErrorLevel();
-
     $required_files = array(
         ABS_PATH . 'oc-includes/osclass/installer/basic_data.sql',
         ABS_PATH . 'oc-includes/osclass/installer/pages.sql',
+
     );
+
+    $install_lang_sql = ABS_PATH . 'oc-content/languages/' . osc_current_admin_locale() . '/mail.sql';
+    $default_lang_sql = ABS_PATH . 'oc-includes/osclass/installer/mail.sql';
+
+    if (file_exists($install_lang_sql)) {
+        $required_files[] = $install_lang_sql;
+    } else {
+        $required_files[] = $default_lang_sql;
+    }
 
     $sql = '';
     foreach ($required_files as $file) {
@@ -547,21 +555,13 @@ function oc_install()
                 LogOsclassInstaller::newInstance()->error(sprintf(
                     __('The file %s doesn\'t exist'),
                     $file
-                ), __FILE__ . "::" . __LINE__);
+                ), __FILE__ . '::' . __LINE__);
             }
 
             return array('error' => sprintf(__('The file %s doesn\'t exist'), $file));
         }
 
         $sql .= file_get_contents($file);
-    }
-
-    $install_lang_sql = ABS_PATH . 'oc-content/languages/' . osc_current_admin_locale() . '/mail.sql';
-    $default_lang_sql = ABS_PATH . 'oc-includes/osclass/installer/mail.sql';
-    if (file_exists($file)) {
-        $sql .= file_get_contents($installLangSql);
-    } else {
-        $sql .= file_get_contents($default_lang_sql);
     }
 
     $comm->importSQL($sql);
