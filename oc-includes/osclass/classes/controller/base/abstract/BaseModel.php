@@ -161,7 +161,7 @@ abstract class BaseModel
         exit;
     }
 
-    //Funciones que se tendran que reescribir en la clase que extienda de esta
+    // Functions that will have to be rewritten in the class that extends from this
 
     public function __destruct()
     {

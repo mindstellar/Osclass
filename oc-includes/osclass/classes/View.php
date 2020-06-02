@@ -42,9 +42,8 @@ class View
         return self::$instance;
     }
 
-    //to export variables at the business layer
-
     /**
+     * to export variables at the business layer
      * @param $key
      * @param $value
      */
@@ -53,9 +52,8 @@ class View
         $this->aExported[$key] = $value;
     }
 
-    //to get the exported variables for the view
-
     /**
+     * to get the exported variables for the view
      * @param $key
      *
      * @return mixed|string|array
