@@ -58,7 +58,7 @@ if (OSC_DEBUG) {
 }
 //Load Autoloader
 require_once LIB_PATH . 'vendor/autoload.php';
-require_once LIB_PATH . 'osclass_autoloader.php';
+
 require_once LIB_PATH . 'osclass/helpers/hDatabaseInfo.php';
 require_once LIB_PATH . 'osclass/helpers/hPreference.php';
 

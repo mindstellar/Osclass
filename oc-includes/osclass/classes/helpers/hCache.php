@@ -25,7 +25,7 @@ use Object_Cache_Factory;
  *
  * @package mindstellar\osclass\classes\helpers
  */
-class Cache
+class hCache
 {
     /**
      * @param     $key

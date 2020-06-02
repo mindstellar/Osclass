@@ -27,7 +27,7 @@ use SiteInfo;
  * @subpackage Helpers
  * @author     Osclass
  */
-class DatabaseInfo
+class hDatabaseInfo
 {
     /**
      * Gets database name

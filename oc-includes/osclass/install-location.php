@@ -7,7 +7,7 @@ define('LIB_PATH', ABS_PATH . 'oc-includes/');
 
 require_once ABS_PATH . 'config.php';
 require_once LIB_PATH . 'vendor/autoload.php';
-require_once LIB_PATH . 'osclass_autoloader.php';
+
 require_once LIB_PATH . 'osclass/helpers/hDatabaseInfo.php';
 require_once LIB_PATH . 'osclass/helpers/hDefines.php';
 require_once LIB_PATH . 'osclass/helpers/hErrors.php';

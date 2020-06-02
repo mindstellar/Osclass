@@ -24,7 +24,7 @@ namespace mindstellar\osclass\classes\helpers;
  * @subpackage Helpers
  * @author     Osclass
  */
-class Errors
+class hErrors
 {
     /**
      * Kill Osclass with an error message

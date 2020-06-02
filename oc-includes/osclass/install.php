@@ -24,7 +24,6 @@ define('TRANSLATIONS_PATH', CONTENT_PATH . 'languages/');
 define('OSC_INSTALLING', 1);
 
 require_once LIB_PATH . 'vendor/autoload.php';
-require_once LIB_PATH . 'osclass_autoloader.php';
 
 if (extension_loaded('mysqli')) {
     require_once LIB_PATH . 'osclass/helpers/hPreference.php';

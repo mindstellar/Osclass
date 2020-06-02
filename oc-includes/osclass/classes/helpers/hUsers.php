@@ -19,7 +19,7 @@ use View;
  *
  * @package mindstellar\osclass\classes\helpers
  */
-class Users
+class hUsers
 {
     /**
      * Gets a specific field from current user

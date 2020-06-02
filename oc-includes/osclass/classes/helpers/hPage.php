@@ -28,7 +28,7 @@ use View;
  * @subpackage Helpers
  * @author     Osclass
  */
-class Page
+class hPage
 {
     /**
      * Gets current page object

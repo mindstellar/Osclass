@@ -2,19 +2,32 @@
   "name": "mindstellar/osclass",
   "type": "project",
   "description": "With Osclass, get your own  classifieds site for free. Build your own Osclass installation and start advertising real estate, jobs or whatever you want- in minutes! ",
-  "keywords": ["osclass","classified","open-source","php-classified","cms"],
+  "keywords": [
+    "osclass",
+    "classified",
+    "open-source",
+    "php-classified",
+    "cms"
+  ],
   "homepage": "https://github.com/mindstellar/osclass",
   "license": "Apache-2.0",
   "authors": [
-        {
-            "name": "Osclass Community",
-            "homepage": "https://github.com/mindstellar/Osclass/graphs/contributors"
-        }
-    ],
+    {
+      "name": "Osclass Community",
+      "homepage": "https://github.com/mindstellar/Osclass/graphs/contributors"
+    }
+  ],
+  "autoload": {
+    "classmap": [
+      "oc-includes/osclass",
+      "oc-includes/AjaxUploader.php",
+      "oc-includes/Akismet.class.php"
+    ]
+  },
   "config": {
-       "vendor-dir": "oc-includes/vendor",
-       "optimize-autoloader": true
-    },
+    "vendor-dir": "oc-includes/vendor",
+    "optimize-autoloader": true
+  },
   "require": {
     "php": ">=5.6.20",
     "ext-ctype": "*",
@@ -36,12 +49,12 @@
     "gettext/gettext": "4.6.x",
     "phpseclib/mcrypt_compat": "^1.0"
   },
+  "require-dev": {
+    "roave/security-advisories": "dev-master"
+  },
   "suggest": {
     "ext-apcu": "Fast PHP user cache",
     "ext-imagick": "A Faster image manipulation library",
     "ext-memcache": "Will enable to communicate with memcached server"
-  },
-  "require-dev": {
-    "roave/security-advisories": "dev-master"
   }
 }

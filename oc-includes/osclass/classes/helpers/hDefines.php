@@ -37,7 +37,7 @@ use WebThemes;
  * @subpackage Helpers
  * @author     Osclass
  */
-class Defines
+class hDefines
 {
     /**
      * Gets the root url for your installation

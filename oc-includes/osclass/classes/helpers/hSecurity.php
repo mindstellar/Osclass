@@ -43,7 +43,7 @@ use View;
  *
  * @package mindstellar\osclass\classes\helpers
  */
-class Security
+class hSecurity
 {
 
 

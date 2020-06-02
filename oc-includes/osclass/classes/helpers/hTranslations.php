@@ -26,7 +26,7 @@ use Translation;
  * @subpackage Helpers
  * @author     Osclass
  */
-class Translations
+class hTranslations
 {
     /**
      * Translate strings and echo them
