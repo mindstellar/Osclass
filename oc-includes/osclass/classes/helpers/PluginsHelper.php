@@ -27,7 +27,7 @@ use Plugins;
  * @subpackage Helpers
  * @author     Osclass
  */
-class hPlugins
+class PluginsHelper
 {
     /**
      * Run a hook

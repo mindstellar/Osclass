@@ -29,7 +29,7 @@ use View;
  * @subpackage Helpers
  * @author     Osclass
  */
-class hPagination
+class PaginationHelper
 {
     /**
      * Gets the pagination links of search pagination

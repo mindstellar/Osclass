@@ -29,7 +29,7 @@ use Region;
  * @subpackage Helpers
  * @author     Osclass
  */
-class hValidate
+class ValidateHelper
 {
     /**
      * Validate the text with a minimum of non-punctuation characters (international)

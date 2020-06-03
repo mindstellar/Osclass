@@ -31,7 +31,7 @@ use View;
  * @subpackage Helpers
  * @author     Osclass
  */
-class hLocation
+class LocationHelper
 {
     /**
      * Gets current country

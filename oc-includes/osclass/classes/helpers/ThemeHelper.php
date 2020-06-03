@@ -27,7 +27,7 @@ use Styles;
  *
  * @package mindstellar\osclass\classes\helpers
  */
-class hTheme
+class ThemeHelper
 {
     /**
      * Gets urls for current theme administrations options

@@ -27,7 +27,7 @@ use View;
  * @subpackage Helpers
  * @author     Osclass
  */
-class hLocale
+class LocaleHelper
 {
     /**
      * Gets locale generic field

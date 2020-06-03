@@ -34,7 +34,7 @@ use View;
  * @subpackage premiums
  * @author     Osclass
  */
-class hPremium
+class PremiumHelper
 {
 ////////////////////////////////////////////////////////////////
 // FUNCTIONS THAT RETURNS OBJECT FROM THE STATIC CLASS (VIEW) //

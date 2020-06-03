@@ -25,7 +25,7 @@ namespace mindstellar\osclass\classes\helpers;
  * @subpackage Helpers
  * @author     Osclass
  */
-class hMessages
+class MessagesHelper
 {
     /**
      * Adds an ephemeral message to the session. (error style)

@@ -24,7 +24,7 @@ namespace mindstellar\osclass\classes\helpers;
  * @subpackage Helpers
  * @author     Osclass
  */
-class hSanitize
+class SanitizeHelper
 {
     /**
      * Sanitize a website URL.

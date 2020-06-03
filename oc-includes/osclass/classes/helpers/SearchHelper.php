@@ -36,7 +36,7 @@ use View;
  * @subpackage Helpers
  * @author     Osclass
  */
-class hSearch
+class SearchHelper
 {
     /**
      * Gets search object

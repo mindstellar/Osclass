@@ -29,7 +29,7 @@ use Widget;
  * @subpackage Helpers
  * @author     Osclass
  */
-class hUtils
+class UtilsHelper
 {
     /**
      * Get variable from $_GET or $_POST

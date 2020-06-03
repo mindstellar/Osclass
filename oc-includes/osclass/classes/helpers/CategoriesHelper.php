@@ -27,7 +27,7 @@ use View;
  * @subpackage Helpers
  * @author     Osclass
  */
-class hCategories
+class CategoriesHelper
 {
     /**
      * Gets current category

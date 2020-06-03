@@ -31,7 +31,6 @@ if (!defined('BCRYPT_COST')) {
  */
 
 use BanRule;
-use LogOsclass;
 use OpensslCryptor\Cryptor;
 use Params;
 use phpseclib\Crypt\Rijndael;
@@ -43,7 +42,7 @@ use View;
  *
  * @package mindstellar\osclass\classes\helpers
  */
-class hSecurity
+class SecurityHelper
 {
 
 
@@ -368,7 +367,7 @@ class hSecurity
             try {
                 return trim(substr(Cryptor::Decrypt($string, $key, 0), 32));
             } catch (Exception $e) {
-                LogOsclass::newInstance()->debug($e->getMessage(), $e->getFile() . ' ' . $e->getLine());
+                trigger_error($e->getMessage(), E_USER_NOTICE);
             }
         }
 

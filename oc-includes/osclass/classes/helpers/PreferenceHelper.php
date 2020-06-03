@@ -27,7 +27,7 @@ use Preference;
  * @subpackage Helpers
  * @author     Osclass
  */
-class hPreference
+class PreferenceHelper
 {
     /**
      * Gets cookie's life

@@ -28,7 +28,7 @@ use Params;
  * @subpackage Helpers
  * @author     Osclass
  */
-class hAdminMenu
+class AdminMenuHelper
 {
     /**
      * Draws menu with sections and subsections
