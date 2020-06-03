@@ -271,7 +271,7 @@ class ItemActions
             try {
                 $this->uploadItemResources($aItem['photos'], $itemId);
             } catch (ImagickException $e) {
-                LogOsclass::newInstance()->error($e->getMessage(), $e->getFile());
+                trigger_error($e->getMessage(), E_USER_WARNING);
             }
 
             // update dt_expiration at t_item
@@ -449,7 +449,7 @@ class ItemActions
                         $status = 'SPAM';
                     }
                 } catch (exception $e) {
-                    LogOsclass::newInstance()->debug($e->getMessage(), $e->getFile().' '.$e->getLine());
+                    trigger_error($e->getMessage(), E_USER_NOTICE);
                 }
                 if ($status === 'SPAM') {
                     $spam = true;

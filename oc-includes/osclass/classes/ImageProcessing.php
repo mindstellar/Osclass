@@ -61,19 +61,17 @@ class ImageProcessing
             try {
                 $this->im = new Imagick($imagePath);
             } catch (ImagickException $e) {
-                LogOsclass::newInstance()->fatal($e->getMessage(), $e->getFile() . ' ' . $e->getLine());
+                trigger_error($e->getMessage(), E_USER_WARNING);
             }
             /**
              * Check if image have more frames and get the first frame if it has.
-             * First identified by @dev101
-             * Improvement on previous method from @dev101
              */
             if ($this->im->getNumberImages() > 1) {
                 $this->im->destroy();
                 try {
                     $this->im = new Imagick($imagePath . '[0]');
                 } catch (ImagickException $e) {
-                    LogOsclass::newInstance()->fatal($e->getMessage(), $e->getFile() . ' ' . $e->getLine());
+                    trigger_error($e->getMessage(), E_USER_WARNING);
                 }
             }
 
@@ -416,7 +414,7 @@ class ImageProcessing
         try {
             $this->doWatermark($watermark_text, $font_color, $font_size, $a_watermark_options);
         } catch (ImagickException $e) {
-            LogOsclass::newInstance()->error($e->getMessage(), $e->getFile().' '.$e->getLine());
+            trigger_error($e->getMessage(), E_USER_WARNING);
         }
         return $this;
     }
@@ -531,7 +529,7 @@ class ImageProcessing
         try {
             $this->doWatermark();
         } catch (ImagickException $e) {
-            LogOsclass::newInstance()->error($e->getMessage(), $e->getFile().' '.$e->getLine());
+            trigger_error($e->getMessage(), E_USER_WARNING);
         }
         return $this;
     }

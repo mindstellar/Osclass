@@ -51,7 +51,7 @@ class Plugins
                             $content = $fxName($content, ...$args);
                             $args[0] = $content;
                         } else {
-                            LogOsclass::newInstance()->fatal('Unknown filter '.$fxName);
+                            trigger_error('Unknown filter '.$fxName,E_USER_WARNING);
                         }
                     }
                 }
@@ -399,7 +399,7 @@ class Plugins
                         if (is_callable($fxName)) {
                             $fxName(...$args);
                         } else {
-                            LogOsclass::newInstance()->fatal('Unknown function '.$fxName);
+                            trigger_error('Invalid Osclass Hook '.$fxName.' '.$hook, E_USER_WARNING);
                         }
                     }
                 }

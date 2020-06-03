@@ -107,10 +107,7 @@ class Breadcrumb
                 try {
                     $aCategory = osc_get_category('id', osc_item_category_id());
                 } catch (Exception $e) {
-                    LogOsclass::newInstance()->error(
-                        $e->getMessage(),
-                        $e->getFile().' at line:'.$e->getLine()
-                    );
+                    trigger_error($e->getMessage(), E_USER_WARNING);
                 }
                 // remove
                 View::newInstance()->_erase('categories');
@@ -123,10 +120,7 @@ class Breadcrumb
                         'title' => osc_category_name()
                     );
                 } catch (Exception $e) {
-                    LogOsclass::newInstance()->error(
-                        $e->getMessage(),
-                        $e->getFile().' at line:'.$e->getLine()
-                    );
+                    trigger_error($e->getMessage(), E_USER_WARNING);
                 }
                 $this->addLevel($l);
 
@@ -135,10 +129,7 @@ class Breadcrumb
                         try {
                             $l = array('url' => osc_item_url(), 'title' => osc_item_title());
                         } catch (Exception $e) {
-                            LogOsclass::newInstance()->error(
-                                $e->getMessage(),
-                                $e->getFile().' at line:'.$e->getLine()
-                            );
+                            trigger_error($e->getMessage(), E_USER_WARNING);
                         }
                         $this->addLevel($l);
                         $l = array('title' => $this->title['item_edit']);
@@ -148,10 +139,7 @@ class Breadcrumb
                         try {
                             $l = array('url' => osc_item_url(), 'title' => osc_item_title());
                         } catch (Exception $e) {
-                            LogOsclass::newInstance()->error(
-                                $e->getMessage(),
-                                $e->getFile().' at line:'.$e->getLine()
-                            );
+                            trigger_error($e->getMessage(), E_USER_WARNING);
                         }
                         $this->addLevel($l);
                         $l = array('title' => $this->title['item_send_friend']);
@@ -161,10 +149,7 @@ class Breadcrumb
                         try {
                             $l = array('url' => osc_item_url(), 'title' => osc_item_title());
                         } catch (Exception $e) {
-                            LogOsclass::newInstance()->error(
-                                $e->getMessage(),
-                                $e->getFile().' at line:'.$e->getLine()
-                            );
+                            trigger_error($e->getMessage(), E_USER_WARNING);
                         }
                         $this->addLevel($l);
                         $l = array('title' => $this->title['item_contact']);
@@ -187,10 +172,7 @@ class Breadcrumb
                 try {
                     $category = osc_search_category_id();
                 } catch (Exception $e) {
-                    LogOsclass::newInstance()->error(
-                        $e->getMessage(),
-                        $e->getFile().' at line:'.$e->getLine()
-                    );
+                    trigger_error($e->getMessage(), E_USER_WARNING);
                 }
                 $category = ((count($category) == 1) ? $category[0] : '');
 
@@ -213,10 +195,7 @@ class Breadcrumb
                     try {
                         $aCategories = Category::newInstance()->toRootTree($category);
                     } catch (Exception $e) {
-                        LogOsclass::newInstance()->error(
-                            $e->getMessage(),
-                            $e->getFile().' at line:'.$e->getLine()
-                        );
+                        trigger_error($e->getMessage(), E_USER_WARNING);
                     }
                     foreach ($aCategories as $c) {
                         View::newInstance()->_erase('categories');
@@ -260,10 +239,7 @@ class Breadcrumb
                                     'title' => $city
                                 );
                             } catch (Exception $e) {
-                                LogOsclass::newInstance()->error(
-                                    $e->getMessage(),
-                                    $e->getFile().' at line:'.$e->getLine()
-                                );
+                                trigger_error($e->getMessage(), E_USER_WARNING);
                             }
                             $this->addLevel($l);
                         } else {
@@ -276,10 +252,7 @@ class Breadcrumb
                                     'title' => $aRegion['s_name']
                                 );
                             } catch (Exception $e) {
-                                LogOsclass::newInstance()->error(
-                                    $e->getMessage(),
-                                    $e->getFile().' at line:'.$e->getLine()
-                                );
+                                trigger_error($e->getMessage(), E_USER_WARNING);
                             }
                             $this->addLevel($l);
 
@@ -290,10 +263,7 @@ class Breadcrumb
                                     'title' => $aCity['s_name']
                                 );
                             } catch (Exception $e) {
-                                LogOsclass::newInstance()->error(
-                                    $e->getMessage(),
-                                    $e->getFile().' at line:'.$e->getLine()
-                                );
+                                trigger_error($e->getMessage(), E_USER_WARNING);
                             }
                             $this->addLevel($l);
                         }
@@ -305,10 +275,7 @@ class Breadcrumb
                                 'title' => $region
                             );
                         } catch (Exception $e) {
-                            LogOsclass::newInstance()->error(
-                                $e->getMessage(),
-                                $e->getFile().' at line:'.$e->getLine()
-                            );
+                            trigger_error($e->getMessage(), E_USER_WARNING);
                         }
                         $this->addLevel($l);
                     }

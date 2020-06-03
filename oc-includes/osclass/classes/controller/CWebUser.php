@@ -323,7 +323,7 @@ class CWebUser extends WebSecBaseModel
                         try {
                             User::newInstance()->deleteUser(osc_logged_user_id());
                         } catch (Exception $e) {
-                            LogOsclass::newInstance()->error($e->getMessage(), $e->getFile().' at line:'.$e->getLine());
+                            trigger_error($e->getMessage(), E_USER_WARNING);
                         }
 
                         Session::newInstance()->_drop('userId');

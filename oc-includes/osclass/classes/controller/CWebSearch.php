@@ -338,7 +338,7 @@ class CWebSearch extends BaseModel
                 try {
                     $successCat = ($this->mSearch->addCategory($category) || $successCat);
                 } catch (Exception $e) {
-                    LogOsclass::newInstance()->error($e->getMessage(), $e->getFile() . ' at line:' . $e->getLine());
+                    trigger_error($e->getMessage(), E_USER_WARNING);
                 }
             }
         } else {
