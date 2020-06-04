@@ -11,6 +11,7 @@ namespace mindstellar\osclass\classes\helpers;
 
 use Admin;
 use Cookie;
+use Session;
 use User;
 use View;
 

@@ -21,6 +21,7 @@ namespace mindstellar\osclass\classes\helpers;
 use Admin;
 use AdminThemes;
 use Breadcrumb;
+use Category;
 use City;
 use Country;
 use Currency;

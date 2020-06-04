@@ -18,6 +18,7 @@
 namespace mindstellar\osclass\classes\helpers;
 
 use OSCLocale;
+use Session;
 use View;
 
 /**

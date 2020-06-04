@@ -18,6 +18,8 @@
 
 namespace mindstellar\osclass\classes\helpers;
 
+use Session;
+
 /**
  * Helper Flash Messages
  *

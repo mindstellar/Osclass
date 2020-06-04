@@ -17,10 +17,12 @@
 
 namespace mindstellar\osclass\classes\helpers;
 
+use Category;
 use City;
 use Cookie;
 use Country;
 use Region;
+use Session;
 
 /**
  * Helper Validation

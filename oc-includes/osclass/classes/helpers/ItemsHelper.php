@@ -18,6 +18,7 @@ namespace mindstellar\osclass\classes\helpers;
  * limitations under the License.
  */
 
+use Category;
 use Currency;
 use Item;
 use ItemComment;

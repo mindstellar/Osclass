@@ -18,6 +18,7 @@
 
 namespace mindstellar\osclass\classes\helpers;
 
+use Category;
 use Currency;
 use Item;
 use ItemComment;

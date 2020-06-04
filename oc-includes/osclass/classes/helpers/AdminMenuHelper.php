@@ -124,7 +124,7 @@ class AdminMenuHelper
         foreach ($aMenu as $key => $value) {
             $sSubmenu   = '';
             $credential = $value[3];
-            if (!$is_moderator || ($is_moderator && $credential == 'moderator')) { // show
+            if (!$is_moderator || ($is_moderator && $credential === 'moderator')) { // show
                 $class = '';
                 if (array_key_exists('sub', $value)) {
                     // submenu
@@ -133,7 +133,7 @@ class AdminMenuHelper
                         $sSubmenu .= '<ul>' . PHP_EOL;
                         foreach ($aSubmenu as $aSub) {
                             $credential_sub = isset($aSub[4]) ? $aSub[4] : $aSub[3];
-                            if (!$is_moderator || ($is_moderator && $credential_sub == 'moderator')) { // show
+                            if (!$is_moderator || ($is_moderator && $credential_sub === 'moderator')) { // show
                                 if (strpos($aSub[1], 'divider_') === 0) {
                                     $sSubmenu .= '<li class="submenu-divide">' . $aSub[0] . '</li>' . PHP_EOL;
                                 } else {
@@ -143,7 +143,7 @@ class AdminMenuHelper
                             }
                         }
                         // hardcoded plugins/themes under menu plugins
-                        if ($key == 'plugins' && !$is_moderator) {
+                        if ($key === 'plugins' && !$is_moderator) {
                             $sSubmenu .= $plugins_out;
                         }
 
