@@ -795,13 +795,13 @@ class DefinesHelper
             $typeItem = $typeItem != '' ? '&itemType=' . $typeItem : '';
 
             return osc_base_url() . osc_get_preference('rewrite_user_items') . '?iPage=' . $page . $typeItem;
-        } else {
-            if ($page == '') {
-                return osc_base_url(true) . '?page=user&action=items';
-            }
-
-            return osc_base_url(true) . '?page=user&action=items&iPage=' . $page;
         }
+
+        if ($page == '') {
+            return osc_base_url(true) . '?page=user&action=items';
+        }
+
+        return osc_base_url(true) . '?page=user&action=items&iPage=' . $page;
     }
 
 
@@ -941,7 +941,7 @@ class DefinesHelper
      * Gets url for editing an item
      *
      * @param string $secret
-     * @param string $id
+     * @param string|int $id
      *
      * @return string
      */

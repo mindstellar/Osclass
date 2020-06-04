@@ -142,8 +142,8 @@ class PremiumHelper
             $desc = osc_premium_field('s_description', osc_language());
             if ($desc == '') {
                 $aLocales = osc_get_locales();
-                foreach ($aLocales as $locale) {
-                    $desc = osc_premium_field('s_description', $locale);
+                foreach ($aLocales as $locale2) {
+                    $desc = osc_premium_field('s_description', $locale2);
                     if ($desc != '') {
                         break;
                     }
@@ -172,8 +172,8 @@ class PremiumHelper
             $title = osc_premium_field('s_title', osc_language());
             if ($title == '') {
                 $aLocales = osc_get_locales();
-                foreach ($aLocales as $locale) {
-                    $title = osc_premium_field('s_title', $locale);
+                foreach ($aLocales as $locale2) {
+                    $title = osc_premium_field('s_title', $locale2);
                     if ($title != '') {
                         break;
                     }

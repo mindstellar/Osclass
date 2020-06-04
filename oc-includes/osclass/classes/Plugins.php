@@ -51,7 +51,7 @@ class Plugins
                             $content = $fxName($content, ...$args);
                             $args[0] = $content;
                         } else {
-                            trigger_error('Unknown filter '.$fxName,E_USER_WARNING);
+                            trigger_error('Unknown filter '.$fxName, E_USER_WARNING);
                         }
                     }
                 }

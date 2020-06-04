@@ -34,7 +34,7 @@ class CacheHelper
      *
      * @return bool
      */
-    static function osc_cache_add($key, $data, $expire = 0)
+    public static function osc_cache_add($key, $data, $expire = 0)
     {
         $key .= osc_current_user_locale();
 
@@ -45,7 +45,7 @@ class CacheHelper
     /**
      * @return mixed
      */
-    static function osc_cache_close()
+    public static function osc_cache_close()
     {
         return Object_Cache_Factory::newInstance()->close();
     }
@@ -56,7 +56,7 @@ class CacheHelper
      *
      * @return bool
      */
-    static function osc_cache_delete($key)
+    public static function osc_cache_delete($key)
     {
         $key .= osc_current_user_locale();
 
@@ -67,7 +67,7 @@ class CacheHelper
     /**
      * @return bool
      */
-    static function osc_cache_flush()
+    public static function osc_cache_flush()
     {
         return Object_Cache_Factory::newInstance()->flush();
     }
@@ -76,7 +76,7 @@ class CacheHelper
     /**
      * Initialize Cache factory instance using singleton
      */
-    static function osc_cache_init()
+    public static function osc_cache_init()
     {
         Object_Cache_Factory::newInstance();
     }
@@ -88,7 +88,7 @@ class CacheHelper
      *
      * @return bool|mixed
      */
-    static function osc_cache_get($key, &$found)
+    public static function osc_cache_get($key, &$found)
     {
         $key .= osc_current_user_locale();
 
@@ -103,7 +103,7 @@ class CacheHelper
      *
      * @return bool
      */
-    static function osc_cache_set($key, $data, $expire = 0)
+    public static function osc_cache_set($key, $data, $expire = 0)
     {
         $key .= osc_current_user_locale();
 

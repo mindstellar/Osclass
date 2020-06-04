@@ -60,7 +60,7 @@ class CategoriesHelper
      *
      * @return mixed|string <array>
      */
-    static function osc_get_categories()
+    public static function osc_get_categories()
     {
         if (!View::newInstance()->_exists('categories')) {
             osc_export_categories(Category::newInstance()->toTree());
@@ -78,7 +78,7 @@ class CategoriesHelper
      *
      * @return string <array>
      */
-    static function osc_category_field($field, $locale = '')
+    public static function osc_category_field($field, $locale = '')
     {
         return osc_field(osc_category(), $field, '');
     }
@@ -89,7 +89,7 @@ class CategoriesHelper
      *
      * @return int
      */
-    static function osc_priv_count_categories()
+    public static function osc_priv_count_categories()
     {
         return View::newInstance()->_count('categories');
     }
@@ -100,7 +100,7 @@ class CategoriesHelper
      *
      * @return int
      */
-    static function osc_priv_count_subcategories()
+    public static function osc_priv_count_subcategories()
     {
         return View::newInstance()->_count('subcategories');
     }
@@ -111,7 +111,7 @@ class CategoriesHelper
      *
      * @return int
      */
-    static function osc_count_categories()
+    public static function osc_count_categories()
     {
         if (!View::newInstance()->_exists('categories')) {
             View::newInstance()->_exportVariableToView('categories', Category::newInstance()->toTree());
@@ -127,7 +127,7 @@ class CategoriesHelper
      *
      * @return boolean
      */
-    static function osc_has_categories()
+    public static function osc_has_categories()
     {
         if (!View::newInstance()->_exists('categories')) {
             View::newInstance()->_exportVariableToView('categories', Category::newInstance()->toTree());
@@ -143,7 +143,7 @@ class CategoriesHelper
      *
      * @return int
      */
-    static function osc_count_subcategories()
+    public static function osc_count_subcategories()
     {
         $category = View::newInstance()->_current('categories');
         if ($category == '') {
@@ -172,7 +172,7 @@ class CategoriesHelper
      *
      * @return boolean
      */
-    static function osc_has_subcategories()
+    public static function osc_has_subcategories()
     {
         $category = View::newInstance()->_current('categories');
         if ($category == '') {
@@ -202,7 +202,7 @@ class CategoriesHelper
      *
      * @return string
      */
-    static function osc_category_name($locale = '')
+    public static function osc_category_name($locale = '')
     {
         if ($locale == '') {
             $locale = osc_current_user_locale();
@@ -219,7 +219,7 @@ class CategoriesHelper
      *
      * @return string
      */
-    static function osc_category_description($locale = '')
+    public static function osc_category_description($locale = '')
     {
         if ($locale == '') {
             $locale = osc_current_user_locale();
@@ -236,7 +236,7 @@ class CategoriesHelper
      *
      * @return string
      */
-    static function osc_category_id($locale = '')
+    public static function osc_category_id($locale = '')
     {
         if ($locale == '') {
             $locale = osc_current_user_locale();
@@ -254,7 +254,7 @@ class CategoriesHelper
      *
      * @return string
      */
-    static function osc_category_slug($locale = '')
+    public static function osc_category_slug($locale = '')
     {
         if ($locale == '') {
             $locale = osc_current_user_locale();
@@ -269,7 +269,7 @@ class CategoriesHelper
      *
      * @return boolean
      */
-    static function osc_category_price_enabled()
+    public static function osc_category_price_enabled()
     {
         return (boolean)osc_category_field('b_price_enabled');
     }
@@ -280,7 +280,7 @@ class CategoriesHelper
      *
      * @return int
      */
-    static function osc_category_parent_id()
+    public static function osc_category_parent_id()
     {
         return osc_category_field('fk_i_parent_id');
     }
@@ -291,7 +291,7 @@ class CategoriesHelper
      *
      * @return int
      */
-    static function osc_category_total_items()
+    public static function osc_category_total_items()
     {
         return osc_category_field('i_num_items');
         //$category = osc_category();
@@ -304,7 +304,7 @@ class CategoriesHelper
      *
      * @return void
      */
-    static function osc_goto_first_category()
+    public static function osc_goto_first_category()
     {
         View::newInstance()->_reset('categories');
     }
@@ -315,7 +315,7 @@ class CategoriesHelper
      *
      * @return array
      */
-    static function osc_get_non_empty_categories()
+    public static function osc_get_non_empty_categories()
     {
         $aCategories = Category::newInstance()->toTree(false);
         View::newInstance()->_exportVariableToView('categories', $aCategories);
@@ -333,7 +333,7 @@ class CategoriesHelper
      *
      * @return void
      */
-    static function osc_categories_select($name = 'sCategory', $category = null, $default_str = null)
+    public static function osc_categories_select($name = 'sCategory', $category = null, $default_str = null)
     {
         if ($default_str == null) {
             $default_str = __('Select a category');
@@ -352,20 +352,19 @@ class CategoriesHelper
      * @since 3.0
      *
      */
-    static function osc_get_category($by, $what)
+    public static function osc_get_category($by, $what)
     {
         if (!in_array($by, array('slug', 'id'))) {
-
-
-        switch ($by) {
-            case 'slug':
-                return Category::newInstance()->findBySlug($what);
-                break;
-            case 'id':
-                return Category::newInstance()->findByPrimaryKey($what);
-                break;
+            switch ($by) {
+                case 'slug':
+                    return Category::newInstance()->findBySlug($what);
+                    break;
+                case 'id':
+                    return Category::newInstance()->findByPrimaryKey($what);
+                    break;
+            }
         }
-        }
+
         return false;
     }
 
@@ -373,7 +372,7 @@ class CategoriesHelper
     /**
      * @return bool|int|void
      */
-    static function osc_category_move_to_children()
+    public static function osc_category_move_to_children()
     {
         $category = View::newInstance()->_current('categories');
         if ($category == '') {
@@ -398,7 +397,7 @@ class CategoriesHelper
     /**
      * @return bool|int
      */
-    static function osc_category_move_to_parent()
+    public static function osc_category_move_to_parent()
     {
         $category = View::newInstance()->_get('categories');
         $category = end($category);
@@ -438,7 +437,7 @@ class CategoriesHelper
      *
      * @return int
      */
-    static function osc_count_subcategories2()
+    public static function osc_count_subcategories2()
     {
         $category = View::newInstance()->_current('categories');
         if ($category == '') {
@@ -459,7 +458,7 @@ class CategoriesHelper
      * @param null $categories
      *
      */
-    static function osc_export_categories($categories = null)
+    public static function osc_export_categories($categories = null)
     {
         if ($categories == null) {
             $categories = Category::newInstance()->toTree();

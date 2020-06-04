@@ -18,6 +18,7 @@
 
 namespace mindstellar\osclass\classes\helpers;
 
+use Category;
 use Page;
 use View;
 
@@ -203,12 +204,10 @@ class PageHelper
             } else {
                 $path = osc_base_url() . $url;
             }
+        } elseif ($locale != '') {
+            $path = osc_base_url(true) . '?page=page&id=' . osc_static_page_id() . '&lang=' . $locale;
         } else {
-            if ($locale != '') {
-                $path = osc_base_url(true) . '?page=page&id=' . osc_static_page_id() . '&lang=' . $locale;
-            } else {
-                $path = osc_base_url(true) . '?page=page&id=' . osc_static_page_id();
-            }
+            $path = osc_base_url(true) . '?page=page&id=' . osc_static_page_id();
         }
 
         return $path;

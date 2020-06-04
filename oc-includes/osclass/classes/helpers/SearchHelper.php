@@ -17,6 +17,7 @@
 
 namespace mindstellar\osclass\classes\helpers;
 
+use Category;
 use City;
 use CityStats;
 use Country;

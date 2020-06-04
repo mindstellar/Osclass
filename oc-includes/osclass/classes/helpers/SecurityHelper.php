@@ -31,6 +31,7 @@ if (!defined('BCRYPT_COST')) {
  */
 
 use BanRule;
+use Exception;
 use OpensslCryptor\Cryptor;
 use Params;
 use phpseclib\Crypt\Rijndael;
@@ -239,7 +240,7 @@ class SecurityHelper
             $rule =
                 str_replace(array('*', '|'), array('.*', "\\"), str_replace('.', "\.", strtolower($rule['s_email'])));
             if ($rule != '') {
-                if ($rule[0] === '!') {
+                if (strpos($rule, '!') === 0) {
                     $rule = '|^((?' . $rule . ').*)$|';
                 } else {
                     $rule = '|^' . $rule . '$|';

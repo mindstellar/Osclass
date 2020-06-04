@@ -19,6 +19,7 @@ namespace mindstellar\osclass\classes\helpers;
 
 use Params;
 use Rewrite;
+use Session;
 use View;
 use Widget;
 
@@ -68,9 +69,9 @@ class UtilsHelper
                 }
 
                 if (isset($item['locale'])) {
-                    foreach ($item['locale'] as $locale => $data) {
-                        if (isset($item['locale'][$locale][$field])) {
-                            return $item['locale'][$locale][$field];
+                    foreach ($item['locale'] as $locale2 => $data) {
+                        if (isset($item['locale'][$locale2][$field])) {
+                            return $item['locale'][$locale2][$field];
                         }
                     }
                 }
@@ -340,12 +341,14 @@ class UtilsHelper
             return $ref;
         }
 
-        if (Session::newInstance()->_getReferer() != '') {
+        if (Session::newInstance()->_getReferer()) {
             return Session::newInstance()->_getReferer();
-        } elseif (Params::existServerParam('HTTP_REFERER')) {
-            if (filter_var(Params::getServerParam('HTTP_REFERER', false, false), FILTER_VALIDATE_URL)) {
-                return Params::getServerParam('HTTP_REFERER', false, false);
-            }
+        }
+
+        if (Params::existServerParam('HTTP_REFERER')
+            && filter_var(Params::getServerParam('HTTP_REFERER', false, false), FILTER_VALIDATE_URL)
+        ) {
+            return Params::getServerParam('HTTP_REFERER', false, false);
         }
 
         return '';
@@ -487,7 +490,7 @@ class UtilsHelper
      *
      * @return mixed
      */
-    public static function __get($key)
+    public static function _get($key)
     {
         return View::newInstance()->_get($key);
     }

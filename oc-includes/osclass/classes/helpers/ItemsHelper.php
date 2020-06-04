@@ -182,8 +182,8 @@ class ItemsHelper
             $desc = osc_item_field('s_description', osc_language());
             if ($desc == '') {
                 $aLocales = osc_get_locales();
-                foreach ($aLocales as $locale) {
-                    $desc = osc_item_field('s_description', @$locale['pk_c_code']);
+                foreach ($aLocales as $locale2) {
+                    $desc = osc_item_field('s_description', @$locale2['pk_c_code']);
                     if ($desc != '') {
                         break;
                     }
@@ -212,8 +212,8 @@ class ItemsHelper
             $title = osc_item_field('s_title', osc_language());
             if ($title == '') {
                 $aLocales = osc_get_locales();
-                foreach ($aLocales as $locale) {
-                    $title = osc_item_field('s_title', @$locale['pk_c_code']);
+                foreach ($aLocales as $locale2) {
+                    $title = osc_item_field('s_title', @$locale2['pk_c_code']);
                     if ($title != '') {
                         break;
                     }
@@ -1534,7 +1534,7 @@ class ItemsHelper
         $meta  = osc_item_meta();
         $value = osc_field($meta, 's_value', '');
         $value = osc_apply_filter('osc_item_meta_value_pre_filter', $value, $meta);
-        if ($meta['e_type'] == 'DATEINTERVAL' || $meta['e_type'] == 'DATE') {
+        if ($meta['e_type'] === 'DATEINTERVAL' || $meta['e_type'] === 'DATE') {
             if (is_array($value)) {
                 // from [date_from] to [date_to]
                 if (isset($value['from']) && $value['from'] != '' && is_numeric($value['from']) && isset($value['to'])
@@ -1553,20 +1553,24 @@ class ItemsHelper
                 }
 
                 return '';
-            } else {
-                if ($value != '' && is_numeric($value)) {
-                    return htmlentities(date(osc_date_format(), $value), ENT_COMPAT, 'UTF-8');
-                }
-
-                return '';
             }
-        } elseif ($meta['e_type'] == 'CHECKBOX') {
+
+            if ($value != '' && is_numeric($value)) {
+                return htmlentities(date(osc_date_format(), $value), ENT_COMPAT, 'UTF-8');
+            }
+
+            return '';
+        }
+
+        if ($meta['e_type'] === 'CHECKBOX') {
             if ($value == 1) {
                 return '<img src="' . osc_current_web_theme_url('images/tick.png') . '" alt="" title=""/>';
             }
 
             return '<img src="' . osc_current_web_theme_url('images/cross.png') . '" alt="" title=""/>';
-        } elseif ($meta['e_type'] == 'URL') {
+        }
+
+        if ($meta['e_type'] === 'URL') {
             if ($value != '') {
                 if (stripos($value, 'http://') !== false || stripos($value, 'https://') !== false) {
                     return '<a href="' . html_entity_decode($value, ENT_COMPAT, 'UTF-8') . '" >'
@@ -1575,22 +1579,26 @@ class ItemsHelper
 
                 return '<a href="http://' . html_entity_decode($value, ENT_COMPAT, 'UTF-8') . '" >'
                     . html_entity_decode($value, ENT_COMPAT, 'UTF-8') . '</a>';
-            } else {
-                return '';
             }
-        } elseif ($meta['e_type'] == 'TEXTAREA') {
+
+            return '';
+        }
+
+        if ($meta['e_type'] === 'TEXTAREA') {
             $value = nl2br(htmlentities($value));
             $value = osc_apply_filter('osc_item_meta_textarea_value_filter', $value, $meta);
 
             return $value;
-        } elseif ($meta['e_type'] == 'DROPDOWN' || $meta['e_type'] == 'RADIO') {
-            return osc_field(osc_item_meta(), 's_value', '');
-        } else {
-            $value = nl2br(htmlentities($value));
-            $value = osc_apply_filter('osc_item_meta_value_filter', $value, $meta);
-
-            return $value;
         }
+
+        if ($meta['e_type'] === 'DROPDOWN' || $meta['e_type'] === 'RADIO') {
+            return osc_field(osc_item_meta(), 's_value', '');
+        }
+
+        $value = nl2br(htmlentities($value));
+        $value = osc_apply_filter('osc_item_meta_value_filter', $value, $meta);
+
+        return $value;
     }
 
 
@@ -1787,7 +1795,7 @@ class ItemsHelper
                     break;
 
                 case 'premium':
-                    $mSearch->onlyPremium(($value == 1 ? true : false));
+                    $mSearch->onlyPremium(($value == 1));
                     break;
 
                 case 'page':
