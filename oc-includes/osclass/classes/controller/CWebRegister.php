@@ -75,7 +75,6 @@ class CWebRegister extends BaseModel
                     Params::setParam('action', 'login_post');
                     Params::setParam('email', Params::getParam('s_email'));
                     Params::setParam('password', Params::getParam('s_password', false, false));
-                    require_once osc_lib_path() . 'osclass/controller/CWebLogin.php';
                     $do = new CWebLogin();
                     $do->doModel();
                 } else {
