@@ -39,7 +39,7 @@ class CAdminUpgrade extends AdminSecBaseModel
                     osc_add_flash_warning_message(_m('This action cannot be done because it is a demo site'), 'admin');
                     $this->redirectTo(osc_admin_base_url(true));
                 }
-                $this->ajax = true;
+                $this->ajax     = true;
                 $upgrade_result = Upgrade::selfDbUpgrade(Params::getParam('skipdb'));
                 header('Content-Type: application/json');
                 echo $upgrade_result;

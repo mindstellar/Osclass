@@ -669,7 +669,7 @@ class Category extends DAO
                     $result = $this->dao->get();
                     $rows   = $result->result();
                     if ($result->numRows == 0) {
-                        $res_insert   = $this->insertDescription($fieldsDescription);
+                        $res_insert = $this->insertDescription($fieldsDescription);
                         ++$affectedRows;
                     }
                 } elseif ($rs > 0) {
@@ -689,6 +689,38 @@ class Category extends DAO
         }
 
         return $return;
+    }
+
+    /**
+     * Find a category find its slug
+     *
+     * @access public
+     *
+     * @param string $slug
+     *
+     * @return array
+     * @since  unknown
+     */
+    public function findBySlug($slug)
+    {
+        $slug = trim($slug);
+        if ($slug != '') {
+            if (isset($this->slugs[$slug])) {
+                return $this->findByPrimaryKey($this->slugs[$slug]);
+            }
+            $slug = urlencode($slug);
+            // $this->dao->where('b.s_slug', $slug);
+            // end specific condition
+
+            $results = $this->listWhere('b.s_slug = %s', $slug);
+            if (count($results) > 0) {
+                $this->slugs[$slug] = $results[0]['pk_i_id'];
+
+                return $results[0];
+            }
+        }
+
+        return array();
     }
 
     /**
@@ -791,38 +823,6 @@ class Category extends DAO
         }
 
         return $tree;
-    }
-
-    /**
-     * Find a category find its slug
-     *
-     * @access public
-     *
-     * @param string $slug
-     *
-     * @return array
-     * @since  unknown
-     */
-    public function findBySlug($slug)
-    {
-        $slug = trim($slug);
-        if ($slug != '') {
-            if (isset($this->slugs[$slug])) {
-                return $this->findByPrimaryKey($this->slugs[$slug]);
-            }
-            $slug = urlencode($slug);
-            // $this->dao->where('b.s_slug', $slug);
-            // end specific condition
-
-            $results = $this->listWhere('b.s_slug = %s', $slug);
-            if (count($results) > 0) {
-                $this->slugs[$slug] = $results[0]['pk_i_id'];
-
-                return $results[0];
-            }
-        }
-
-        return array();
     }
 
     /**

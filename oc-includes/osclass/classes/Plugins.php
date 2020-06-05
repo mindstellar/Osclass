@@ -22,8 +22,8 @@
 class Plugins
 {
 
-    private static $used_hooks = array();
     public static $plugins_infos = array();
+    private static $used_hooks = array();
     private static $hooks;
     private static $installed;
     private static $enabled;
@@ -43,7 +43,7 @@ class Plugins
     public static function applyFilter($hook, $content, ...$args)
     {
         if (isset(self::$hooks[$hook])) {
-            self::$used_hooks[$hook]= true;
+            self::$used_hooks[$hook] = true;
             for ($priority = 0; $priority <= 10; $priority++) {
                 if (isset(self::$hooks[$hook][$priority]) && is_array(self::$hooks[$hook][$priority])) {
                     foreach (self::$hooks[$hook][$priority] as $fxName) {
@@ -51,12 +51,13 @@ class Plugins
                             $content = $fxName($content, ...$args);
                             $args[0] = $content;
                         } else {
-                            trigger_error('Unknown filter '.$fxName, E_USER_WARNING);
+                            trigger_error('Unknown filter ' . $fxName, E_USER_WARNING);
                         }
                     }
                 }
             }
         }
+
         return $content;
     }
 
@@ -313,9 +314,9 @@ class Plugins
     }
 
     /**
-     * @param     $hook
-     * @param callable    $function
-     * @param int $priority
+     * @param          $hook
+     * @param callable $function
+     * @param int      $priority
      */
     public static function addHook($hook, $function, $priority = 5)
     {
@@ -392,14 +393,14 @@ class Plugins
     public static function runHook($hook, ...$args)
     {
         if (isset(self::$hooks[$hook])) {
-            self::$used_hooks[$hook]= true;
+            self::$used_hooks[$hook] = true;
             for ($priority = 0; $priority <= 10; $priority++) {
                 if (isset(self::$hooks[$hook][$priority]) && is_array(self::$hooks[$hook][$priority])) {
                     foreach (self::$hooks[$hook][$priority] as $fxName) {
                         if (is_callable($fxName)) {
                             $fxName(...$args);
                         } else {
-                            trigger_error('Invalid Osclass Hook '.$fxName.' '.$hook, E_USER_WARNING);
+                            trigger_error('Invalid Osclass Hook ' . $fxName . ' ' . $hook, E_USER_WARNING);
                         }
                     }
                 }
@@ -407,29 +408,6 @@ class Plugins
         }
     }
 
-    /**
-     * Check if hook had run previously
-     * @param $hook
-     * @return bool
-     * @since 3.9.0 -develop
-     */
-    public static function hadRun($hook)
-    {
-        return isset(self::$used_hooks[$hook]);
-    }
-
-
-    /**
-     * Check if hook is registered
-     * @param $hook
-     *
-     * @return bool
-     * @since 4.0.0
-     */
-    public static function hasHook($hook)
-    {
-        return isset(self::$hooks[$hook]);
-    }
     /**
      * @param $path
      *
@@ -482,6 +460,32 @@ class Plugins
                 }
             }
         }
+    }
+
+    /**
+     * Check if hook had run previously
+     *
+     * @param $hook
+     *
+     * @return bool
+     * @since 3.9.0 -develop
+     */
+    public static function hadRun($hook)
+    {
+        return isset(self::$used_hooks[$hook]);
+    }
+
+    /**
+     * Check if hook is registered
+     *
+     * @param $hook
+     *
+     * @return bool
+     * @since 4.0.0
+     */
+    public static function hasHook($hook)
+    {
+        return isset(self::$hooks[$hook]);
     }
 
     /**

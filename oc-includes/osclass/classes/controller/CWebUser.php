@@ -234,11 +234,11 @@ class CWebUser extends WebSecBaseModel
 
                 User::newInstance()->update(
                     array(
-                    's_password' => osc_hash_password(Params::getParam(
-                        'new_password',
-                        false,
-                        false
-                    ))
+                        's_password' => osc_hash_password(Params::getParam(
+                            'new_password',
+                            false,
+                            false
+                        ))
                     ),
                     array('pk_i_id' => Session::newInstance()->_get('userId'))
                 );

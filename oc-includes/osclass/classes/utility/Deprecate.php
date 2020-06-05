@@ -14,6 +14,7 @@ use Plugins;
 /**
  * Class Deprecated
  * Provides common static method to deprecate functions,class,file,hooks,filters
+ *
  * @package mindstellar\osclass\classes\utility
  */
 class Deprecate
@@ -21,8 +22,9 @@ class Deprecate
     /**
      * Deprecate Function
      * Fire a 'd_function_run' hook when deprecated function is called.
-     * @param string $function Deprecated function name
-     * @param string $version The version of Osclass that deprecated the file.
+     *
+     * @param string      $function    Deprecated function name
+     * @param string      $version     The version of Osclass that deprecated the file.
      * @param string|null $replacement The function that should have been used.
      */
     public static function deprecatedFunction(
@@ -63,8 +65,34 @@ class Deprecate
     }
 
     /**
+     * Deprecate Hook
+     *
+     * @param string      $hook        Hook name to run
+     * @param string      $version     The version of Osclass that deprecated this Hook
+     * @param string|null $replacement Replacement Hook name if available
+     * @param string|null $message     A message regarding the change.
+     * @param mixed       $args,...    hook arguments
+     */
+    public static function deprecatedRunHook(
+        $hook,
+        $version,
+        $replacement = null,
+        $message = null,
+        ...$args
+    ) {
+        if (!Plugins::hasHook($hook)) {
+            return;
+        }
+
+        self::deprecatedHook($hook, $version, $replacement, $message);
+
+        Plugins::runHook($hook, ...$args);
+    }
+
+    /**
      * For internal use only
      * run when a deprecated hook/filter is used.
+     *
      * @param      $hook
      * @param      $version
      * @param null $replacement
@@ -108,38 +136,14 @@ class Deprecate
     }
 
     /**
-     * Deprecate Hook
-     * @param string $hook Hook name to run
-     * @param string $version The version of Osclass that deprecated this Hook
-     * @param string|null  $replacement Replacement Hook name if available
-     * @param string|null  $message A message regarding the change.
-     * @param mixed $args,... hook arguments
-     */
-    public static function deprecatedRunHook(
-        $hook,
-        $version,
-        $replacement = null,
-        $message = null,
-        ...$args
-    ) {
-        if (! Plugins::hasHook($hook)) {
-            return;
-        }
-
-        self::deprecatedHook($hook, $version, $replacement, $message);
-
-        Plugins::runHook($hook, ...$args);
-    }
-
-    /**
      * Deprecate Filter
      *
-     * @param string $filter Filter name to run
-     * @param mixed $content Content to filter
-     * @param string $version The version of Osclass that deprecated this Filter
+     * @param string      $filter      Filter name to run
+     * @param mixed       $content     Content to filter
+     * @param string      $version     The version of Osclass that deprecated this Filter
      * @param null|string $replacement Replacement Filter name if available.
-     * @param null|string $message A messaged regarding the change.
-     * @param mixed $args,... filter arguments.
+     * @param null|string $message     A messaged regarding the change.
+     * @param mixed       $args,...    filter arguments.
      */
     public static function deprecatedApplyFilter(
         $filter,
@@ -160,6 +164,7 @@ class Deprecate
 
     /**
      * Deprecate File
+     *
      * @param string $file        The file that was called.
      * @param string $replacement The file that should have been included based on ABS_PATH.
      * @param string $version     The version of Osclass that deprecated the file.
@@ -181,15 +186,15 @@ class Deprecate
             $message = empty($message) ? '' : ' ' . $message;
 
             if ($replacement !== null) {
-                    trigger_error(
-                        sprintf(
-                            __('%1$s is <strong>deprecated</strong> since version %2$s! Use %3$s instead.'),
-                            $file,
-                            $version,
-                            $replacement
-                        ) . $message,
-                        E_USER_DEPRECATED
-                    );
+                trigger_error(
+                    sprintf(
+                        __('%1$s is <strong>deprecated</strong> since version %2$s! Use %3$s instead.'),
+                        $file,
+                        $version,
+                        $replacement
+                    ) . $message,
+                    E_USER_DEPRECATED
+                );
             } else {
                 trigger_error(
                     sprintf(

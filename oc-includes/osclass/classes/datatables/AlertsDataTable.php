@@ -177,9 +177,9 @@ class AlertsDataTable extends DataTable
                     }
                     if (count($conditions['aCategories']) > $l) {
                         $cat_array[] = '<a href="#" class="more-tooltip" categories="' . osc_esc_html(implode(
-                            ', ',
-                            $conditions['aCategories']
-                        )) . '" >' . __('...More') . '</a>';
+                                ', ',
+                                $conditions['aCategories']
+                            )) . '" >' . __('...More') . '</a>';
                     }
 
                     $pieces[] = sprintf(__('<b>Categories:</b> %s'), implode(', ', $cat_array));

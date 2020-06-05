@@ -133,7 +133,7 @@ class ManageItemsForm extends Form
         parent::generic_input_hidden(
             'countryId',
             (isset($item['fk_c_country_code']) && $item['fk_c_country_code'] != null)
-            ? $item['fk_c_country_code'] : ''
+                ? $item['fk_c_country_code'] : ''
         );
 
         return true;
@@ -157,7 +157,7 @@ class ManageItemsForm extends Form
         parent::generic_input_hidden(
             'regionId',
             (isset($item['fk_i_region_id']) && $item['fk_i_region_id'] != null)
-            ? $item['fk_i_region_id'] : ''
+                ? $item['fk_i_region_id'] : ''
         );
 
         return true;
@@ -177,7 +177,7 @@ class ManageItemsForm extends Form
         parent::generic_input_hidden(
             'cityId',
             (isset($item['fk_i_city_id']) && $item['fk_i_city_id'] != null) ? $item['fk_i_city_id']
-            : ''
+                : ''
         );
 
         return true;

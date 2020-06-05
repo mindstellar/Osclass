@@ -1545,10 +1545,10 @@ class ItemsHelper
                     $return =
                         __('From') . ' ' . htmlentities(date(osc_date_format(), $value['from']), ENT_COMPAT, 'UTF-8');
                     $return .= ' ' . __('to') . ' ' . htmlentities(
-                        date(osc_date_format(), $value['to']),
-                        ENT_COMPAT,
-                        'UTF-8'
-                    );
+                            date(osc_date_format(), $value['to']),
+                            ENT_COMPAT,
+                            'UTF-8'
+                        );
 
                     return $return;
                 }

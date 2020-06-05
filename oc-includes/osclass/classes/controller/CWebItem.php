@@ -614,7 +614,7 @@ class CWebItem extends BaseModel
 
                 osc_run_hook('pre_item_delete_comment_post', $item, $commentId);
 
-                $mItem  = new ItemActions(false);
+                $mItem = new ItemActions(false);
 
                 $mItem->add_comment();
 

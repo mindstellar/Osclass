@@ -104,6 +104,44 @@ class Params
     }
 
     /**
+     * Return REQUEST_URI from $_SERVER params
+     *
+     * @param bool $html_encode
+     * @param bool $xss_check
+     * @param bool $quotes_encode
+     *
+     * @return string|string[]|null
+     */
+    public static function getRequestURI($html_encode = false, $xss_check = true, $quotes_encode = true)
+    {
+        if (self::existServerParam('REQUEST_URI')) {
+            $raw_request_uri = self::getServerParam('REQUEST_URI', $html_encode, $xss_check, $quotes_encode);
+
+            //make this to osclass installation specific
+            return preg_replace('|^' . REL_WEB_URL . '|', '', $raw_request_uri);
+        }
+
+        return '';
+    }
+
+    /**
+     * @param $param
+     *
+     * @return bool
+     */
+    public static function existServerParam($param)
+    {
+        if ($param === '') {
+            return false;
+        }
+        if (!isset(self::$server[$param])) {
+            return false;
+        }
+
+        return true;
+    }
+
+    /**
      * @param      $param
      * @param bool $html_encode
      * @param bool $xss_check
@@ -126,43 +164,6 @@ class Params
 
 
         return $value;
-    }
-
-    /**
-     * Return REQUEST_URI from $_SERVER params
-     *
-     * @param bool $html_encode
-     * @param bool $xss_check
-     * @param bool $quotes_encode
-     *
-     * @return string|string[]|null
-     */
-    public static function getRequestURI($html_encode = false, $xss_check = true, $quotes_encode = true)
-    {
-        if (self::existServerParam('REQUEST_URI')) {
-            $raw_request_uri = self::getServerParam('REQUEST_URI', $html_encode, $xss_check, $quotes_encode);
-
-            //make this to osclass installation specific
-            return preg_replace('|^' . REL_WEB_URL . '|', '', $raw_request_uri);
-        }
-        return '';
-    }
-
-    /**
-     * @param $param
-     *
-     * @return bool
-     */
-    public static function existServerParam($param)
-    {
-        if ($param === '') {
-            return false;
-        }
-        if (!isset(self::$server[$param])) {
-            return false;
-        }
-
-        return true;
     }
 
     /**

@@ -462,7 +462,7 @@ class Breadcrumb
                 $class .= 'class="last-child" ';
             }
 
-            $text = '<li '.$class.' itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem">';
+            $text = '<li ' . $class . ' itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem">';
 
             // set separator
             if ($i > 0) {
@@ -471,7 +471,7 @@ class Breadcrumb
 
             // create anchor/span tag
             if (array_key_exists('url', $iValue)) {
-                $title = '<a itemprop="item" href="'.osc_esc_html($iValue['url']).'">';
+                $title = '<a itemprop="item" href="' . osc_esc_html($iValue['url']) . '">';
                 $title .= '<span itemprop="name">' . $iValue['title'] . '</span>';
                 $title .= '</a>';
             } else {

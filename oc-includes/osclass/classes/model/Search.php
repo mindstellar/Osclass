@@ -855,7 +855,7 @@ class Search extends DAO
     public function countAll()
     {
         if (null === $this->total_results_table) {
-            $result                    =
+            $result =
                 $this->dao->query(sprintf(
                     'select count(*) as total from %st_item',
                     DB_TABLE_PREFIX

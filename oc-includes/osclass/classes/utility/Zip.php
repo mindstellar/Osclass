@@ -31,17 +31,6 @@ class Zip
     }
 
     /**
-     * check given path validity, it shouldn't start with ../
-     * @param $path
-     *
-     * @return bool
-     */
-    private function isPathValid($path)
-    {
-        return !(strpos($path, '../') !== 0 || strpos($path, "..\\") !== 0);
-    }
-
-    /**
      * Unzip's a specified ZIP file to a location
      *
      * @param string $file Full path of the zip file
@@ -78,6 +67,17 @@ class Zip
         return $this->unzipFilePclZip($file, $to);
     }
 
+    /**
+     * check given path validity, it shouldn't start with ../
+     *
+     * @param $path
+     *
+     * @return bool
+     */
+    private function isPathValid($path)
+    {
+        return !(strpos($path, '../') !== 0 || strpos($path, "..\\") !== 0);
+    }
 
     /**
      * We assume that the $to path is correct and can be written. It unzips an archive using the PclZip library.
@@ -121,7 +121,7 @@ class Zip
             }
 
             if (substr($file['name'], -1) === '/') {
-                $this->FileSystem->mkdir($concurrentDirectory = $to .'/'. $file['name'], 0755);
+                $this->FileSystem->mkdir($concurrentDirectory = $to . '/' . $file['name'], 0755);
                 continue;
             }
 
@@ -130,7 +130,7 @@ class Zip
                 return -1;
             }
 
-            $this->FileSystem->writeToFile($to .'/'. $file['name'], $content);
+            $this->FileSystem->writeToFile($to . '/' . $file['name'], $content);
         }
 
         $zip->close();
@@ -175,11 +175,11 @@ class Zip
             }
 
             if ($file['folder']) {
-                $this->FileSystem->mkdir($concurrentDirectory = $to .'/'. $file['filename'], 0755);
+                $this->FileSystem->mkdir($concurrentDirectory = $to . '/' . $file['filename'], 0755);
                 continue;
             }
 
-            $this->FileSystem->writeToFile($to .'/'. $file['filename'], $file['content']);
+            $this->FileSystem->writeToFile($to . '/' . $file['filename'], $file['content']);
         }
 
         return 1;

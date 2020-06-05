@@ -118,7 +118,7 @@ class CategoryForm extends Form
         parent::generic_input_text(
             'i_expiration_days',
             (isset($category) && isset($category['i_expiration_days']))
-            ? $category['i_expiration_days'] : '',
+                ? $category['i_expiration_days'] : '',
             3
         );
     }
@@ -166,7 +166,7 @@ class CategoryForm extends Form
             'b_price_enabled',
             '1',
             (isset($category) && isset($category['b_price_enabled'])
-            && $category['b_price_enabled'] == 1)
+                && $category['b_price_enabled'] == 1)
         );
     }
 

@@ -205,6 +205,18 @@ class LogDatabase
     }
 
     /**
+     * @param $filename
+     *
+     * @return bool
+     */
+    private function isFileWritableExists($filename)
+    {
+        return (!file_exists($filename) && !is_writable(CONTENT_PATH))
+            || (file_exists($filename)
+                && !is_writable($filename));
+    }
+
+    /**
      * @return bool
      */
     public function writeExplainMessages()
@@ -284,17 +296,6 @@ class LogDatabase
 
         return true;
     }
-
-    /**
-     * @param $filename
-     *
-     * @return bool
-     */
-    private function isFileWritableExists($filename)
-    {
-        return (!file_exists($filename) && !is_writable(CONTENT_PATH)) || (file_exists($filename)
-                && !is_writable($filename));
-}
 }
 
 /* file end: ./oc-includes/osclass/logger/LogDatabase.php */

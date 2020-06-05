@@ -252,6 +252,7 @@ class Stats
         if ($result instanceof DBRecordsetClass) {
             return $result->result();
         }
+
         return false;
     }
 

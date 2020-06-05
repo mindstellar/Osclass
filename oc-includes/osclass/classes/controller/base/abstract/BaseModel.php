@@ -62,16 +62,7 @@ abstract class BaseModel
         WebThemes::newInstance();
         osc_run_hook('init');
     }
-     
-    /**
-     *
-     * @since 3.9.0 -develop
-     */
-    protected function setParams()
-    {
-        $this->page = Params::getParam('page');
-        $this->action = Params::getParam('action');
-    }
+
     /**
      * @param      $url
      * @param null $code
@@ -80,8 +71,6 @@ abstract class BaseModel
     {
         osc_redirect_to($url, $code);
     }
-
-    //to export variables at the business layer
 
     /**
      * @param $host
@@ -151,7 +140,7 @@ abstract class BaseModel
         }
     }
 
-    //only for debug (deprecated, all inside View.php)
+    //to export variables at the business layer
 
     public function do400()
     {
@@ -159,6 +148,18 @@ abstract class BaseModel
         header('HTTP/1.1 400 Bad Request');
         osc_current_web_theme_path('404.php');
         exit;
+    }
+
+    //only for debug (deprecated, all inside View.php)
+
+    /**
+     *
+     * @since 3.9.0 -develop
+     */
+    protected function setParams()
+    {
+        $this->page   = Params::getParam('page');
+        $this->action = Params::getParam('action');
     }
 
     // Functions that will have to be rewritten in the class that extends from this

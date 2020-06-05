@@ -941,7 +941,7 @@ class DefinesHelper
     /**
      * Gets url for editing an item
      *
-     * @param string $secret
+     * @param string     $secret
      * @param string|int $id
      *
      * @return string
