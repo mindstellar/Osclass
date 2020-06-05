@@ -33,7 +33,8 @@ class CWebAjax extends BaseModel
     //Business Layer...
 
     /**
-     * @return bool | string
+     * @return bool
+     * @throws \Exception
      */
     public function doModel()
     {
