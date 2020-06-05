@@ -463,7 +463,7 @@ class AdminMenuHelper
             $url_actual = $matches[1];
         } elseif (preg_match('/(^.*page=\w+)/', $url_actual, $matches)) {
             $url_actual = $matches[1];
-        } elseif ($url_actual == '?') {
+        } elseif ($url_actual === '?') {
             $url_actual = '';
         }
 
