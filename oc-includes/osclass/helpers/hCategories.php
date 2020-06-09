@@ -24,6 +24,8 @@
  * @author     Osclass
  */
 
+use mindstellar\osclass\classes\helpers\CategoriesHelper;
+
 /**
  * Gets current category
  *
@@ -31,16 +33,7 @@
  */
 function osc_category()
 {
-    $category = null;
-    if (View::newInstance()->_exists('subcategories')) {
-        $category = View::newInstance()->_current('subcategories');
-    } elseif (View::newInstance()->_exists('categories')) {
-        $category = View::newInstance()->_current('categories');
-    } elseif (View::newInstance()->_exists('category')) {
-        $category = View::newInstance()->_get('category');
-    }
-
-    return $category;
+    return CategoriesHelper::osc_category();
 }
 
 
@@ -57,11 +50,7 @@ function osc_category()
  */
 function osc_get_categories()
 {
-    if (!View::newInstance()->_exists('categories')) {
-        osc_export_categories(Category::newInstance()->toTree());
-    }
-
-    return View::newInstance()->_get('categories');
+    return CategoriesHelper::osc_get_categories();
 }
 
 
@@ -75,7 +64,7 @@ function osc_get_categories()
  */
 function osc_category_field($field, $locale = '')
 {
-    return osc_field(osc_category(), $field, '');
+    return CategoriesHelper::osc_category_field($field, $locale);
 }
 
 
@@ -86,7 +75,7 @@ function osc_category_field($field, $locale = '')
  */
 function osc_priv_count_categories()
 {
-    return View::newInstance()->_count('categories');
+    return CategoriesHelper::osc_priv_count_categories();
 }
 
 
@@ -97,7 +86,7 @@ function osc_priv_count_categories()
  */
 function osc_priv_count_subcategories()
 {
-    return View::newInstance()->_count('subcategories');
+    return CategoriesHelper::osc_priv_count_subcategories();
 }
 
 
@@ -108,11 +97,7 @@ function osc_priv_count_subcategories()
  */
 function osc_count_categories()
 {
-    if (!View::newInstance()->_exists('categories')) {
-        View::newInstance()->_exportVariableToView('categories', Category::newInstance()->toTree());
-    }
-
-    return osc_priv_count_categories();
+    return CategoriesHelper::osc_count_categories();
 }
 
 
@@ -123,11 +108,7 @@ function osc_count_categories()
  */
 function osc_has_categories()
 {
-    if (!View::newInstance()->_exists('categories')) {
-        View::newInstance()->_exportVariableToView('categories', Category::newInstance()->toTree());
-    }
-
-    return View::newInstance()->_next('categories');
+    return CategoriesHelper::osc_has_categories();
 }
 
 
@@ -139,24 +120,7 @@ function osc_has_categories()
  */
 function osc_count_subcategories()
 {
-    $category = View::newInstance()->_current('categories');
-    if ($category == '') {
-        return -1;
-    }
-    if (!isset($category['categories'])) {
-        return 0;
-    }
-    if (!is_array($category['categories'])) {
-        return 0;
-    }
-    if (count($category['categories']) == 0) {
-        return 0;
-    }
-    if (!View::newInstance()->_exists('subcategories')) {
-        View::newInstance()->_exportVariableToView('subcategories', $category['categories']);
-    }
-
-    return osc_priv_count_subcategories();
+    return CategoriesHelper::osc_count_subcategories();
 }
 
 
@@ -168,24 +132,7 @@ function osc_count_subcategories()
  */
 function osc_has_subcategories()
 {
-    $category = View::newInstance()->_current('categories');
-    if ($category == '') {
-        return -1;
-    }
-    if (!isset($category['categories'])) {
-        return false;
-    }
-
-    if (!View::newInstance()->_exists('subcategories')) {
-        View::newInstance()->_exportVariableToView('subcategories', $category['categories']);
-    }
-    $ret = View::newInstance()->_next('subcategories');
-    //we have to delete for next iteration
-    if (!$ret) {
-        View::newInstance()->_erase('subcategories');
-    }
-
-    return $ret;
+    return CategoriesHelper::osc_has_subcategories();
 }
 
 
@@ -198,11 +145,7 @@ function osc_has_subcategories()
  */
 function osc_category_name($locale = '')
 {
-    if ($locale == '') {
-        $locale = osc_current_user_locale();
-    }
-
-    return osc_category_field('s_name', $locale);
+    return CategoriesHelper::osc_category_name($locale);
 }
 
 
@@ -215,11 +158,7 @@ function osc_category_name($locale = '')
  */
 function osc_category_description($locale = '')
 {
-    if ($locale == '') {
-        $locale = osc_current_user_locale();
-    }
-
-    return osc_category_field('s_description', $locale);
+    return CategoriesHelper::osc_category_description($locale = '');
 }
 
 
@@ -232,11 +171,7 @@ function osc_category_description($locale = '')
  */
 function osc_category_id($locale = '')
 {
-    if ($locale == '') {
-        $locale = osc_current_user_locale();
-    }
-
-    return osc_category_field('pk_i_id', $locale);
+    return CategoriesHelper::osc_category_id($locale);
 }
 
 

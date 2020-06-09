@@ -15,6 +15,8 @@
  * limitations under the License.
  */
 
+use mindstellar\osclass\classes\helpers\CacheHelper;
+
 /**
  * @param     $key
  * @param     $data
@@ -24,9 +26,7 @@
  */
 function osc_cache_add($key, $data, $expire = 0)
 {
-    $key .= osc_current_user_locale();
-
-    return Object_Cache_Factory::newInstance()->add($key, $data, $expire);
+    return CacheHelper::osc_cache_add($key, $data, $expire);
 }
 
 
@@ -35,7 +35,7 @@ function osc_cache_add($key, $data, $expire = 0)
  */
 function osc_cache_close()
 {
-    return Object_Cache_Factory::newInstance()->close();
+    return CacheHelper::osc_cache_close();
 }
 
 
@@ -46,9 +46,7 @@ function osc_cache_close()
  */
 function osc_cache_delete($key)
 {
-    $key .= osc_current_user_locale();
-
-    return Object_Cache_Factory::newInstance()->delete($key);
+    return CacheHelper::osc_cache_delete($key);
 }
 
 
@@ -57,7 +55,7 @@ function osc_cache_delete($key)
  */
 function osc_cache_flush()
 {
-    return Object_Cache_Factory::newInstance()->flush();
+    return CacheHelper::osc_cache_flush();
 }
 
 
@@ -66,7 +64,7 @@ function osc_cache_flush()
  */
 function osc_cache_init()
 {
-    Object_Cache_Factory::newInstance();
+    CacheHelper::osc_cache_init();
 }
 
 
@@ -78,9 +76,7 @@ function osc_cache_init()
  */
 function osc_cache_get($key, &$found)
 {
-    $key .= osc_current_user_locale();
-
-    return Object_Cache_Factory::newInstance()->get($key, $found);
+    return CacheHelper::osc_cache_get($key, $found);
 }
 
 
@@ -93,7 +89,5 @@ function osc_cache_get($key, &$found)
  */
 function osc_cache_set($key, $data, $expire = 0)
 {
-    $key .= osc_current_user_locale();
-
-    return Object_Cache_Factory::newInstance()->set($key, $data, $expire);
+    return CacheHelper::osc_cache_set($key, $data, $expire);
 }
