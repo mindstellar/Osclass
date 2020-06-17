@@ -348,7 +348,7 @@ function osc_decrypt_alert($string)
         try {
             return trim(substr(Cryptor::Decrypt($string, $key, 0), 32));
         } catch (Exception $e) {
-            LogOsclass::newInstance()->debug($e->getMessage(), $e->getFile().' '.$e->getLine());
+            trigger_error($e->getMessage().' in '.$e->getFile().' at line '.$e->getLine(), E_USER_WARNING);
         }
     }
 
