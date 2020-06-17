@@ -41,7 +41,6 @@ class Object_Cache_default implements iObject_Cache
      * @since  3.4
      */
     public $site_prefix;
-    public $multisite;
 
     /**
      * Sets up object properties
@@ -50,15 +49,7 @@ class Object_Cache_default implements iObject_Cache
      */
     public function __construct()
     {
-
-        $this->multisite = false;
-//        if(SiteInfo::newInstance()->siteInfo!=array()) {
-//            $info       = SiteInfo::newInstance()->siteInfo;
-//            $site_id    = osc_sanitizeString($info);
-//            $this->multisite = true;
-//        }
-        $site_id           = '';
-        $this->site_prefix = $this->multisite ? $site_id . ':' : '';
+        $this->site_prefix = '';
     }
 
     /**
@@ -75,9 +66,6 @@ class Object_Cache_default implements iObject_Cache
     public function add($key, $data, $expire = 0)
     {
         $id = $key;
-        if ($this->multisite) {
-            $id = $this->site_prefix . $key;
-        }
 
         if ($this->_exists($id)) {
             return false;
@@ -115,9 +103,6 @@ class Object_Cache_default implements iObject_Cache
      */
     public function set($key, $data, $expire = 0)
     {
-        if ($this->multisite) {
-            $key = $this->site_prefix . $key;
-        }
 
         if (is_object($data)) {
             $data = clone $data;
@@ -139,11 +124,6 @@ class Object_Cache_default implements iObject_Cache
      */
     public function delete($key)
     {
-
-        if ($this->multisite) {
-            $key = $this->site_prefix . $key;
-        }
-
         if (!$this->_exists($key)) {
             return false;
         }
@@ -180,11 +160,6 @@ class Object_Cache_default implements iObject_Cache
      */
     public function get($key, &$found = null)
     {
-
-        if ($this->multisite) {
-            $key = $this->site_prefix . $key;
-        }
-
         if ($this->_exists($key)) {
             $found = true;
             ++$this->cache_hits;
