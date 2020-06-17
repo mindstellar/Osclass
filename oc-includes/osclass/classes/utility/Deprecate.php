@@ -42,8 +42,7 @@ class Deprecate
             if ($replacement !== null) {
                 trigger_error(
                     sprintf(
-                    /* translators: 1: PHP function name, 2: Version number, 3: Alternative function name. */
-                        __('%1$s is <strong>deprecated</strong> since version %2$s! Use %3$s instead.'),
+                        '%1$s is <strong>deprecated</strong> since version %2$s! Use %3$s instead.',
                         $function,
                         $version,
                         $replacement
@@ -53,8 +52,7 @@ class Deprecate
             } else {
                 trigger_error(
                     sprintf(
-                    /* translators: 1: PHP function name, 2: Version number. */
-                        __('%1$s is <strong>deprecated</strong> since version %2$s with no alternative available.'),
+                        '%1$s is <strong>deprecated</strong> since version %2$s with no alternative available.',
                         $function,
                         $version
                     ),
@@ -115,7 +113,7 @@ class Deprecate
             if ($replacement !== null) {
                 trigger_error(
                     sprintf(
-                        __('%1$s is <strong>deprecated</strong> since version %2$s! Use %3$s instead.'),
+                        '%1$s is <strong>deprecated</strong> since version %2$s! Use %3$s instead.',
                         $hook,
                         $version,
                         $replacement
@@ -125,7 +123,7 @@ class Deprecate
             } else {
                 trigger_error(
                     sprintf(
-                        __('%1$s is <strong>deprecated</strong> since version %2$s with no alternative available.'),
+                        '%1$s is <strong>deprecated</strong> since version %2$s with no alternative available.',
                         $hook,
                         $version
                     ) . $message,
@@ -188,7 +186,7 @@ class Deprecate
             if ($replacement !== null) {
                 trigger_error(
                     sprintf(
-                        __('%1$s is <strong>deprecated</strong> since version %2$s! Use %3$s instead.'),
+                        '%1$s is <strong>deprecated</strong> since version %2$s! Use %3$s instead.',
                         $file,
                         $version,
                         $replacement
@@ -198,7 +196,7 @@ class Deprecate
             } else {
                 trigger_error(
                     sprintf(
-                        __('%1$s is <strong>deprecated</strong> since version %2$s with no alternative available.'),
+                        '%1$s is <strong>deprecated</strong> since version %2$s with no alternative available.',
                         $file,
                         $version
                     ) . $message,
