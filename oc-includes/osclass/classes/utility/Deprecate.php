@@ -32,9 +32,6 @@ class Deprecate
         $version,
         $replacement = null
     ) {
-
-        $debug_backtrace = debug_backtrace();
-        $caller = next($debug_backtrace);
         /**
          * Fires when a deprecated function is called.
          */
@@ -42,12 +39,9 @@ class Deprecate
 
         if (OSC_DEBUG) {
             if ($replacement !== null) {
-                trigger_error(
+                self::triggerError(
                     sprintf(
-                        '%1$s is <strong>deprecated</strong> since version %2$s! Use %3$s instead.'
-                        .'</strong> in <strong>'
-                        .$caller['file'].'</strong> on line <strong>'
-                        .$caller['line'].'</strong>'."\n<br /> error handled",
+                        '%1$s is <strong>deprecated</strong> since version %2$s! Use %3$s instead.',
                         $function,
                         $version,
                         $replacement
@@ -55,12 +49,9 @@ class Deprecate
                     E_USER_DEPRECATED
                 );
             } else {
-                trigger_error(
+                self::triggerError(
                     sprintf(
-                        '%1$s is <strong>deprecated</strong> since version %2$s with no alternative available.'
-                        .'</strong> in <strong>'
-                        .$caller['file'].'</strong> on line <strong>'
-                        .$caller['line'].'</strong>'."\n<br /> error handled",
+                        '%1$s is <strong>deprecated</strong> since version %2$s with no alternative available.',
                         $function,
                         $version
                     ),
@@ -119,7 +110,7 @@ class Deprecate
             $message = empty($message) ? '' : ' ' . $message;
 
             if ($replacement !== null) {
-                trigger_error(
+                self::triggerError(
                     sprintf(
                         '%1$s is <strong>deprecated</strong> since version %2$s! Use %3$s instead.',
                         $hook,
@@ -129,7 +120,7 @@ class Deprecate
                     E_USER_DEPRECATED
                 );
             } else {
-                trigger_error(
+                self::triggerError(
                     sprintf(
                         '%1$s is <strong>deprecated</strong> since version %2$s with no alternative available.',
                         $hook,
@@ -192,7 +183,7 @@ class Deprecate
             $message = empty($message) ? '' : ' ' . $message;
 
             if ($replacement !== null) {
-                trigger_error(
+                self::triggerError(
                     sprintf(
                         '%1$s is <strong>deprecated</strong> since version %2$s! Use %3$s instead.',
                         $file,
@@ -202,7 +193,7 @@ class Deprecate
                     E_USER_DEPRECATED
                 );
             } else {
-                trigger_error(
+                self::triggerError(
                     sprintf(
                         '%1$s is <strong>deprecated</strong> since version %2$s with no alternative available.',
                         $file,
@@ -212,5 +203,25 @@ class Deprecate
                 );
             }
         }
+    }
+
+    /**
+     * Private error_trigger
+     * @param string $message
+     * @param int $level [optional] <p>
+     * The designated error type for this error. It only works with the E_USER
+     * family of constants, and will default to <b>E_USER_NOTICE</b>.
+     * @return void
+     */
+    private static function triggerError($message = null, $level = E_USER_DEPRECATED)
+    {
+        if ($message === null) {
+            throw(new \InvalidArgumentException("Invalid error message."));
+        }
+        $debug_backtrace = debug_backtrace();
+        $caller = next($debug_backtrace);
+        $message .= '</strong> in <strong>' . $caller['file'] . '</strong> on line <strong>' . $caller['line']
+            . '</strong>' . "\n<br /> error handled";
+        trigger_error($message, $level);
     }
 }
