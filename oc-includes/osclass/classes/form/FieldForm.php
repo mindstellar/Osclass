@@ -174,28 +174,28 @@ class FieldForm extends Form
         <select name="field_type" id="field_type">
             <option value="TEXT" <?php if ($field['e_type'] === 'TEXT') {
                 echo 'selected="selected"';
-            } ?>><?php _e('TEXT'); ?></option>
+                                 } ?>><?php _e('TEXT'); ?></option>
             <option value="TEXTAREA" <?php if ($field['e_type'] === 'TEXTAREA') {
                 echo 'selected="selected"';
-            } ?>><?php _e('TEXTAREA'); ?></option>
+                                     } ?>><?php _e('TEXTAREA'); ?></option>
             <option value="DROPDOWN" <?php if ($field['e_type'] === 'DROPDOWN') {
                 echo 'selected="selected"';
-            } ?>><?php _e('DROPDOWN'); ?></option>
+                                     } ?>><?php _e('DROPDOWN'); ?></option>
             <option value="RADIO" <?php if ($field['e_type'] === 'RADIO') {
                 echo 'selected="selected"';
-            } ?>><?php _e('RADIO'); ?></option>
+                                  } ?>><?php _e('RADIO'); ?></option>
             <option value="CHECKBOX" <?php if ($field['e_type'] === 'CHECKBOX') {
                 echo 'selected="selected"';
-            } ?>><?php _e('CHECKBOX'); ?></option>
+                                     } ?>><?php _e('CHECKBOX'); ?></option>
             <option value="URL" <?php if ($field['e_type'] === 'URL') {
                 echo 'selected="selected"';
-            } ?>><?php _e('URL'); ?></option>
+                                } ?>><?php _e('URL'); ?></option>
             <option value="DATE" <?php if ($field['e_type'] === 'DATE') {
                 echo 'selected="selected"';
-            } ?>><?php _e('DATE'); ?></option>
+                                 } ?>><?php _e('DATE'); ?></option>
             <option value="DATEINTERVAL" <?php if ($field['e_type'] === 'DATEINTERVAL') {
                 echo 'selected="selected"';
-            } ?>><?php _e('DATE INTERVAL'); ?></option>
+                                         } ?>><?php _e('DATE INTERVAL'); ?></option>
         </select>
         <?php
         return true;
