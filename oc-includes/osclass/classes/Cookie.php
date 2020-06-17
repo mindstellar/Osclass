@@ -29,7 +29,7 @@ class Cookie
     public function __construct()
     {
         $this->val     = array();
-        $web_path      = MULTISITE ? osc_multisite_url() : WEB_PATH;
+        $web_path      = WEB_PATH;
         $this->name    = md5($web_path);
         $this->expires = time() + 3600; // 1 hour by default
         if (isset($_COOKIE[$this->name])) {

@@ -40,9 +40,6 @@ abstract class BaseModel
             if (osc_is_ssl()) {
                 $url = 'https://';
             }
-            if (MULTISITE) {
-                $url = parse_url(osc_base_url(), PHP_URL_SCHEME) . '://';
-            }
             // append the domain
             $url .= parse_url(osc_base_url(), PHP_URL_HOST);
             // append the port number if it's necessary

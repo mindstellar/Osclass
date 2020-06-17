@@ -26,7 +26,7 @@
 <?php if ( ! OC_ADMIN ) {
     exit( 'User access is not allowed.' );
 } ?>
-<?php if ( (!defined('MULTISITE') || MULTISITE==0)&& !osc_get_preference('footer_link', 'bender') && !osc_get_preference('donation', 'bender') ) { ?>
+<?php if ( !osc_get_preference('footer_link', 'bender') && !osc_get_preference('donation', 'bender') ) { ?>
 <form name="_xclick" action="https://www.paypal.com/in/cgi-bin/webscr" method="post" class="nocsrf">
     <input type="hidden" name="cmd" value="_donations">
     <input type="hidden" name="rm" value="2">
@@ -69,7 +69,6 @@
                     </select>
                 </div>
             </div>
-            <?php if (!defined('MULTISITE') || MULTISITE==0) { ?>
             <div class="form-row">
                 <div class="form-label"><?php _e('Footer link', 'bender'); ?></div>
                 <div class="form-controls">
@@ -77,7 +76,6 @@
                     <span class="help-box"><?php _e('This website is proudly using the <a title="Osclass web" href="https://github.com/mindstellar/osclass/">classifieds scripts</a> software <strong>Osclass</strong>', 'bender'); ?></span>
                 </div>
             </div>
-            <?php } ?>
         </div>
     </fieldset>
 

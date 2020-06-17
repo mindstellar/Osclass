@@ -35,9 +35,6 @@
 function osc_base_url($with_index = false)
 {
     $path = WEB_PATH;
-    if (MULTISITE) {
-        $path = osc_multisite_url();
-    }
     // add the index.php if it's true
     if ($with_index) {
         $path .= 'index.php';
@@ -176,10 +173,6 @@ function osc_translations_path()
  */
 function osc_uploads_path()
 {
-    if (MULTISITE && osc_multisite_upload_path() !== '') {
-        return osc_multisite_upload_path();
-    }
-
     return UPLOADS_PATH;
 }
 

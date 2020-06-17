@@ -42,6 +42,7 @@ class SiteInfo extends DAO
      */
     public function __construct()
     {
+        parent::__construct();
         $this->setTableName('tbl_sites');
         $this->setPrimaryKey('s_site');
         $this->setFields(array(

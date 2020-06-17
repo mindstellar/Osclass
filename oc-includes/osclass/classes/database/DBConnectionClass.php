@@ -161,10 +161,6 @@ class DBConnectionClass
             $this->errorConnection();
             $this->releaseOsclassDb();
 
-            if (MULTISITE) {
-                return false;
-            }
-
             require_once LIB_PATH . 'osclass/helpers/hErrors.php';
             $title   = 'Osclass &raquo; Error';
             $message =
@@ -183,10 +179,6 @@ class DBConnectionClass
         if ($selectDb == false) {
             $this->errorReport();
             $this->releaseOsclassDb();
-
-            if (MULTISITE) {
-                return false;
-            }
 
             require_once LIB_PATH . 'osclass/helpers/hErrors.php';
             $title   = 'Osclass &raquo; Error';

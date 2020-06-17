@@ -63,11 +63,6 @@ require_once LIB_PATH . 'osclass/helpers/hDatabaseInfo.php';
 require_once LIB_PATH . 'osclass/helpers/hPreference.php';
 
 // check if Osclass is installed
-if (!Preference::newInstance()->get('osclass_installed') && MULTISITE) {
-    header('Location: ' . WEB_PATH);
-    die;
-}
-
 if (!Preference::newInstance()->get('osclass_installed')) {
     require_once LIB_PATH . 'osclass/helpers/hErrors.php';
 

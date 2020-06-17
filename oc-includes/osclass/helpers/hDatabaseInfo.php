@@ -24,14 +24,19 @@
  * @author     Osclass
  */
 
+use mindstellar\osclass\classes\utility\Deprecate;
+
 /**
  * Gets database name
  *
  * @return string
+ * @deprecated 4.0.0
  */
 function osc_db_name()
 {
-    return getSiteInfo('s_db_name', DB_NAME);
+    Deprecate::deprecatedFunction(__FUNCTION__, '4.0.0', 'DB_NAME constant');
+
+    return DB_NAME;
 }
 
 
@@ -39,10 +44,13 @@ function osc_db_name()
  * Gets database host
  *
  * @return string
+ * @deprecated 4.0.0
  */
 function osc_db_host()
 {
-    return getSiteInfo('s_db_host', DB_HOST);
+    Deprecate::deprecatedFunction(__FUNCTION__, '4.0.0', 'DB_HOST constant');
+
+    return DB_HOST;
 }
 
 
@@ -50,10 +58,13 @@ function osc_db_host()
  * Gets database user
  *
  * @return string
+ * @deprecated 4.0.0
  */
 function osc_db_user()
 {
-    return getSiteInfo('s_db_user', DB_USER);
+    Deprecate::deprecatedFunction(__FUNCTION__, '4.0.0', 'DB_USER constant');
+
+    return DB_USER;
 }
 
 
@@ -61,55 +72,11 @@ function osc_db_user()
  * Gets database password
  *
  * @return string
+ * @deprecated 4.0.0
  */
 function osc_db_password()
 {
-    return getSiteInfo('s_db_password', DB_PASSWORD);
-}
+    Deprecate::deprecatedFunction(__FUNCTION__, '4.0.0', 'DB_PASSWORD constant');
 
-
-/**
- * Gets multisite url
- *
- * @return string
- */
-function osc_multisite_url()
-{
-    if (getSiteInfo('s_site_mapping', '') !== '') {
-        return getSiteInfo('s_site_mapping', '');
-    }
-
-    return getSiteInfo('s_site', '');
-}
-
-
-/**
- * Gets multisite url
- *
- * @return string
- */
-function osc_multisite_upload_path()
-{
-    return getSiteInfo('s_upload_path', '');
-}
-
-
-//PRIVATE FUNCTION FOR GETTING NO BOOLEAN INFORMATION (if there was a class :P)
-/**
- * Gets site info
- *
- * @param string $key
- * @param string $default_value
- *
- * @return string
- */
-function getSiteInfo($key, $default_value)
-{
-    if (MULTISITE) {
-        $_P = SiteInfo::newInstance();
-
-        return $_P->get($key);
-    }
-
-    return $default_value;
+    return DB_PASSWORD;
 }
