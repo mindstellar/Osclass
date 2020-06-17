@@ -27,14 +27,6 @@ class DBCommandClass
 {
     private static $instance;
     /**
-     * Database connection object to Osclass database
-     *
-     * @access private
-     * @since  2.3
-     * @var mysqli
-     */
-    private $connId;
-    /**
      * Database result object
      *
      * @access public
@@ -42,7 +34,6 @@ class DBCommandClass
      * @var MySQLi_Result
      */
     public $resultId;
-
     /**
      *
      * @var array
@@ -58,7 +49,6 @@ class DBCommandClass
      * @var int
      */
     public $queryCount;
-
     /**
      *
      * @var int
@@ -69,18 +59,17 @@ class DBCommandClass
      * @var string
      */
     public $errorDesc;
-
     /**
      *
      * @var array
      */
     public $aSelect;
-    /*var $aDistinct; */
     /**
      *
      * @var array
      */
     public $aFrom;
+    /*var $aDistinct; */
     /**
      *
      * @var array
@@ -106,12 +95,12 @@ class DBCommandClass
      * @var array
      */
     public $aHaving;
-    /* var $aKeys; */
     /**
      *
      * @var mixed
      */
     public $aLimit;
+    /* var $aKeys; */
     /**
      *
      * @var mixed
@@ -137,14 +126,21 @@ class DBCommandClass
      * @var array
      */
     public $aWherein;
-    /* var $aAliasedTables; */
-    /* var $aStoreArray; */
-
     /**
      *
      * @var LogDatabase
      */
     public $log;
+    /* var $aAliasedTables; */
+    /* var $aStoreArray; */
+    /**
+     * Database connection object to Osclass database
+     *
+     * @access private
+     * @since  2.3
+     * @var mysqli
+     */
+    private $connId;
     /**
      * @var array
      */
@@ -153,6 +149,7 @@ class DBCommandClass
 
     /**
      * DBCommandClass constructor.
+     *
      * @param mysqli $connId
      */
     public function __construct(&$connId)
@@ -411,7 +408,7 @@ class DBCommandClass
      *
      * @param mixed  $key
      * @param mixed  $values
-     * @param string   $not
+     * @param string $not
      * @param string $type
      *
      * @return DBCommandClass
@@ -509,10 +506,10 @@ class DBCommandClass
      * @access private
      *
      * @param string|array $field
-     * @param string $match
-     * @param string $type Types: AND, OR
-     * @param string $side Options: before, after, both
-     * @param string $not  Two possibilities: blank or NOT
+     * @param string       $match
+     * @param string       $type Types: AND, OR
+     * @param string       $side Options: before, after, both
+     * @param string       $not  Two possibilities: blank or NOT
      *
      * @return DBCommandClass
      * @since  2.3
@@ -1710,10 +1707,10 @@ class DBCommandClass
             if (array_key_exists(strtolower($tbl_field['Field']), $normal_fields)) {
                 // Take the of the field
                 if (preg_match(
-                    '|' . $tbl_field['Field'] . " (ENUM\s*\(([^\)]*)\))|i",
-                    $normal_fields[strtolower($tbl_field['Field'])],
-                    $match
-                )
+                        '|' . $tbl_field['Field'] . " (ENUM\s*\(([^\)]*)\))|i",
+                        $normal_fields[strtolower($tbl_field['Field'])],
+                        $match
+                    )
                     || preg_match(
                         '|' . $tbl_field['Field'] . ' ([^ ]*( unsigned)?)|i',
                         $normal_fields[strtolower($tbl_field['Field'])],

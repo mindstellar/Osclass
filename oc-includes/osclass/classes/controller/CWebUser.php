@@ -234,11 +234,11 @@ class CWebUser extends WebSecBaseModel
 
                 User::newInstance()->update(
                     array(
-                    's_password' => osc_hash_password(Params::getParam(
-                        'new_password',
-                        false,
-                        false
-                    ))
+                        's_password' => osc_hash_password(Params::getParam(
+                            'new_password',
+                            false,
+                            false
+                        ))
                     ),
                     array('pk_i_id' => Session::newInstance()->_get('userId'))
                 );
@@ -323,7 +323,7 @@ class CWebUser extends WebSecBaseModel
                         try {
                             User::newInstance()->deleteUser(osc_logged_user_id());
                         } catch (Exception $e) {
-                            LogOsclass::newInstance()->error($e->getMessage(), $e->getFile().' at line:'.$e->getLine());
+                            trigger_error($e->getMessage(), E_USER_WARNING);
                         }
 
                         Session::newInstance()->_drop('userId');

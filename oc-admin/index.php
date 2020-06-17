@@ -43,97 +43,78 @@ osc_enqueue_style('fontawesome5', osc_assets_url('fonts/fontawesome5/css/all.min
 
 switch (Params::getParam('page')) {
     case ('items'):
-        require_once('controller/CAdminItems.php');
         $do = new CAdminItems();
         $do->doModel();
         break;
     case ('comments'):
-        require_once('controller/CAdminItemComments.php');
         $do = new CAdminItemComments();
         $do->doModel();
         break;
     case ('media'):
-        require_once('controller/CAdminMedia.php');
         $do = new CAdminMedia();
         $do->doModel();
         break;
     case ('login'):
-        require_once('controller/CAdminLogin.php');
         $do = new CAdminLogin();
         $do->doModel();
         break;
     case ('categories'):
-        require_once('controller/CAdminCategories.php');
         $do = new CAdminCategories();
         $do->doModel();
         break;
     case ('emails'):
-        require_once('controller/CAdminEmails.php');
         $do = new CAdminEmails();
         $do->doModel();
         break;
     case ('pages'):
-        require_once('controller/CAdminPages.php');
         $do = new CAdminPages();
         $do->doModel();
         break;
     case ('settings'):
-        require_once('controller/CAdminSettings.php');
         $do = new CAdminSettings();
         $do->doModel();
         break;
     case ('plugins'):
-        require_once('controller/CAdminPlugins.php');
         $do = new CAdminPlugins();
         $do->doModel();
         break;
     case ('languages'):
-        require_once('controller/CAdminLanguages.php');
         $do = new CAdminLanguages();
         $do->doModel();
         break;
     case ('admins'):
-        require_once('controller/CAdminAdmins.php');
         $do = new CAdminAdmins();
         $do->doModel();
         break;
     case ('users'):
-        require_once('controller/CAdminUsers.php');
         $do = new CAdminUsers();
         $do->doModel();
         break;
     case ('ajax'):
-        require_once('controller/ajax/CAdminAjax.php');
         $do = new CAdminAjax();
         $do->doModel();
         break;
     case ('appearance'):
-        require_once('controller/CAdminAppearance.php');
         $do = new CAdminAppearance();
         $do->doModel();
         break;
     case ('tools'):
-        require_once('controller/CAdminTools.php');
         $do = new CAdminTools();
         $do->doModel();
         break;
     case ('stats'):
-        require_once('controller/CAdminStats.php');
         $do = new CAdminStats();
         $do->doModel();
         break;
     case ('cfields'):
-        require_once('controller/CAdminCFields.php');
         $do = new CAdminCFields();
         $do->doModel();
         break;
     case ('upgrade'):
-        require_once('controller/CAdminUpgrade.php');
         $do = new CAdminUpgrade();
         $do->doModel();
         break;
     default:            //login of oc-admin
-        require_once('controller/CAdminMain.php');
         $do = new CAdminMain();
         $do->doModel();
 }

@@ -226,6 +226,7 @@ class DBConnectionClass
 
     /**
      * Set sql_mode
+     *
      * @param array $modes
      * @param       $connId
      */
@@ -528,6 +529,45 @@ class DBConnectionClass
     }
 
     /**
+     * It returns the osclass database link connection
+     *
+     * @access public
+     * @since  2.3
+     */
+    public function getOsclassDb()
+    {
+        return $this->getDb($this->db);
+    }
+
+    /**
+     * It returns database link connection
+     *
+     * @param mysqli $connId Database connector link
+     *
+     * @return \mysqli|bool mysqli link connector if it's correct, or false if the dabase connection
+     * hasn't been done.
+     */
+    private function getDb(&$connId)
+    {
+        if ($connId) {
+            return $connId;
+        }
+
+        return false;
+    }
+
+    /**
+     * It returns the metadata database link connection
+     *
+     * @access public
+     * @since  2.3
+     */
+    public function getMetadataDb()
+    {
+        return $this->getDb($this->metadataDb);
+    }
+
+    /**
      * It reconnects to Osclass database. First, it releases the database link connection and it connects again
      *
      * @access private
@@ -594,45 +634,6 @@ class DBConnectionClass
     private function selectMetadataDb()
     {
         return $this->selectDb(DB_NAME, $this->metadataDb);
-    }
-
-    /**
-     * It returns the osclass database link connection
-     *
-     * @access public
-     * @since  2.3
-     */
-    public function getOsclassDb()
-    {
-        return $this->getDb($this->db);
-    }
-
-    /**
-     * It returns database link connection
-     *
-     * @param mysqli $connId Database connector link
-     *
-     * @return \mysqli|bool mysqli link connector if it's correct, or false if the dabase connection
-     * hasn't been done.
-     */
-    private function getDb(&$connId)
-    {
-        if ($connId) {
-            return $connId;
-        }
-
-        return false;
-    }
-
-    /**
-     * It returns the metadata database link connection
-     *
-     * @access public
-     * @since  2.3
-     */
-    public function getMetadataDb()
-    {
-        return $this->getDb($this->metadataDb);
     }
 }
 

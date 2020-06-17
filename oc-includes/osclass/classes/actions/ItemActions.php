@@ -271,7 +271,7 @@ class ItemActions
             try {
                 $this->uploadItemResources($aItem['photos'], $itemId);
             } catch (ImagickException $e) {
-                LogOsclass::newInstance()->error($e->getMessage(), $e->getFile());
+                trigger_error($e->getMessage(), E_USER_WARNING);
             }
 
             // update dt_expiration at t_item
@@ -449,7 +449,7 @@ class ItemActions
                         $status = 'SPAM';
                     }
                 } catch (exception $e) {
-                    LogOsclass::newInstance()->debug($e->getMessage(), $e->getFile().' '.$e->getLine());
+                    trigger_error($e->getMessage(), E_USER_NOTICE);
                 }
                 if ($status === 'SPAM') {
                     $spam = true;
@@ -582,7 +582,7 @@ class ItemActions
         $item = $aItem['item'];
         View::newInstance()->_exportVariableToView('item', $item);
 
-        $userId = Session::newInstance()->_get('userId');
+        $userId     = Session::newInstance()->_get('userId');
         $itemActive = $aItem['active'];
         /**
          * Send email to non-reg user requesting item activation
@@ -758,7 +758,8 @@ class ItemActions
                 $user                  = User::newInstance()->findByPrimaryKey($aItem['userId']);
                 $aItem['contactName']  = $user['s_name'];
                 $aItem['contactEmail'] = $user['s_email'];
-                $aItem['contactPhone'] = ($user['s_phone_mobile'] != '') ? $user['s_phone_mobile'] : $user['s_phone_land'];
+                $aItem['contactPhone'] =
+                    ($user['s_phone_mobile'] != '') ? $user['s_phone_mobile'] : $user['s_phone_land'];
             } else {
                 $aItem['userId'] = null;
             }
@@ -1143,9 +1144,9 @@ class ItemActions
                 osc_run_hook('item_spam_off', $id);
             }
 
-            $b_active = $item['b_active'];
+            $b_active  = $item['b_active'];
             $b_enabled = $item['b_enabled'];
-            $b_spam = $item['b_spam'];
+            $b_spam    = $item['b_spam'];
             $isExpired = osc_isExpired($item['dt_expiration']);
 
 
@@ -1753,6 +1754,7 @@ if (osc_force_jpeg()) {
     {
         return 'jpg';
     }
+
 
     /**
      * @param $content

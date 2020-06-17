@@ -552,7 +552,7 @@ class CAdminAjax extends AdminSecBaseModel
                 }
                 break;
             case 'check_version':
-                $upgradeSelf = new Upgrade();
+                $upgradeSelf       = new Upgrade();
                 $upgrade_available = $upgradeSelf->isUpgradeAvailable();
 
                 if ($upgrade_available) {
@@ -592,13 +592,13 @@ class CAdminAjax extends AdminSecBaseModel
                     try {
                         $upgradeSelf->doUpgrade();
                         $db_upgrade_result = json_decode($upgradeSelf::selfDbUpgrade(), true);
-                        $result = ['error' => 0, 'message'=>__('Osclass upgraded successfully.')];
+                        $result            = ['error' => 0, 'message' => __('Osclass upgraded successfully.')];
                     } catch (Exception $e) {
-                        $result = ['error'=> 1, 'message'=> $e->getMessage()];
+                        $result = ['error' => 1, 'message' => $e->getMessage()];
                         osc_add_flash_error_message($e->getMessage(), 'admin');
                     }
-                    if (isset($db_upgrade_result) && $db_upgrade_result['status']!==true) {
-                        $result = ['error' => 5, 'message'=>$db_upgrade_result['message']];
+                    if (isset($db_upgrade_result) && $db_upgrade_result['status'] !== true) {
+                        $result = ['error' => 5, 'message' => $db_upgrade_result['message']];
                         osc_add_flash_warning_message(__('Error occurred while upgrading osclass Database.'), 'admin');
                     }
                 }

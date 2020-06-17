@@ -33,7 +33,8 @@ class CWebAjax extends BaseModel
     //Business Layer...
 
     /**
-     * @return bool | string
+     * @return bool
+     * @throws \Exception
      */
     public function doModel()
     {
@@ -362,7 +363,7 @@ class CWebAjax extends BaseModel
                         $original['extension']
                     );
                 } catch (Exception $e) {
-                    LogOsclass::newInstance()->debug($e->getMessage(), $e->getFile().' '.$e->getLine());
+                    trigger_error($e->getMessage(), E_USER_NOTICE);
                 }
                 try {
                     $img->saveToFile(
@@ -370,7 +371,7 @@ class CWebAjax extends BaseModel
                         $original['extension']
                     );
                 } catch (Exception $e) {
-                    LogOsclass::newInstance()->debug($e->getMessage(), $e->getFile().' '.$e->getLine());
+                    trigger_error($e->getMessage(), E_USER_NOTICE);
                 }
 
                 $result['uploadName'] = 'auto_' . $filename;

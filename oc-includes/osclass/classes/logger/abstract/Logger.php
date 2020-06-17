@@ -58,14 +58,6 @@ abstract class Logger
      * @param null   $caller
      */
     abstract public function debug($message = '', $caller = null);
-
-    /**
-     * Log a message object with the FATAL level including the caller.
-     *
-     * @param string $message
-     * @param null   $caller
-     */
-    abstract public function fatal($message = '', $caller = null);
 }
 
 /* file end: ./oc-includes/osclass/logger/logger.php */

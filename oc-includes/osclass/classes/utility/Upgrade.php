@@ -149,6 +149,54 @@ class Upgrade
     }
 
     /**
+     * @param bool $skip_db
+     *
+     * @return false|string
+     */
+    public static function selfDbUpgrade($skip_db = false)
+    {
+        set_time_limit(0);
+
+        $error_queries = array();
+        if (file_exists(osc_lib_path() . 'osclass/installer/struct.sql')) {
+            $sql = file_get_contents(osc_lib_path() . 'osclass/installer/struct.sql');
+
+            $conn = DBConnectionClass::newInstance();
+            $c_db = $conn->getOsclassDb();
+            $comm = new DBCommandClass($c_db);
+
+            $error_queries = $comm->updateDB(str_replace('/*TABLE_PREFIX*/', DB_TABLE_PREFIX, $sql));
+        }
+
+        if (!$skip_db && count($error_queries[2]) > 0) {
+            $skip_db_link = osc_admin_base_url(true) . '?page=upgrade&action=upgrade-funcs&skipdb=true';
+            $message      = __('Osclass &raquo; Has some errors') . PHP_EOL;
+            $message      .= __('We\'ve encountered some problems while updating the database structure. 
+            The following queries failed:' . PHP_EOL);
+            $message      .= implode(PHP_EOL, $error_queries[2]) . PHP_EOL;
+            $message      .= sprintf(
+                __('These errors could be false-positive errors. If you\'re sure that is the case, you can 
+                    <a href="%s">continue with the upgrade</a>, or <a href="https://osclass.discourse.group">ask in our forums</a>.'),
+                $skip_db_link
+            );
+
+            return json_encode(['status' => false, 'message' => $message]);
+        }
+
+        if (osc_version() < 390) {
+            osc_delete_preference('marketAllowExternalSources');
+            osc_delete_preference('marketURL');
+            osc_delete_preference('marketAPIConnect');
+            osc_delete_preference('marketCategories');
+            osc_delete_preference('marketDataUpdate');
+        }
+
+        Utils::changeOsclassVersionTo(OSCLASS_VERSION);
+
+        return json_encode(['status' => true, 'message' => __('Osclass DB Upgraded Successfully')]);
+    }
+
+    /**
      * @throws \Exception
      */
     public function doUpgrade()
@@ -197,7 +245,7 @@ class Upgrade
         if (($is_compatible !== -1) && $is_upgradable !== -1
             && $extracted_package_path = $this->downloadPackageAndExtract()
         ) {
-            $this->FileSystem->touch(ABS_PATH.'.maintenance');
+            $this->FileSystem->touch(ABS_PATH . '.maintenance');
             $this->FileSystem->sync(
                 $extracted_package_path . '/' . $this->package_directory_name,
                 ABS_PATH,
@@ -205,56 +253,9 @@ class Upgrade
                 ['oc-content'] //Don't overwrite 'oc-content' directory while upgrading Osclass
             );
             $this->FileSystem->remove($extracted_package_path);
-            $this->FileSystem->remove(ABS_PATH.'.maintenance');
+            $this->FileSystem->remove(ABS_PATH . '.maintenance');
             osc_set_preference('update_core_available');
         }
-    }
-
-    /**
-     * @param bool $skip_db
-     *
-     * @return false|string
-     */
-    public static function selfDbUpgrade($skip_db = false)
-    {
-        set_time_limit(0);
-
-        $error_queries = array();
-        if (file_exists(osc_lib_path() . 'osclass/installer/struct.sql')) {
-            $sql = file_get_contents(osc_lib_path() . 'osclass/installer/struct.sql');
-
-            $conn = DBConnectionClass::newInstance();
-            $c_db = $conn->getOsclassDb();
-            $comm = new DBCommandClass($c_db);
-
-            $error_queries = $comm->updateDB(str_replace('/*TABLE_PREFIX*/', DB_TABLE_PREFIX, $sql));
-        }
-
-        if (!$skip_db && count($error_queries[2]) > 0) {
-            $skip_db_link = osc_admin_base_url(true) . '?page=upgrade&action=upgrade-funcs&skipdb=true';
-            $message      = __('Osclass &raquo; Has some errors').PHP_EOL;
-            $message     .= __('We\'ve encountered some problems while updating the database structure. 
-            The following queries failed:'.PHP_EOL);
-            $message     .= implode(PHP_EOL, $error_queries[2]).PHP_EOL;
-            $message     .= sprintf(
-                __('These errors could be false-positive errors. If you\'re sure that is the case, you can 
-                    <a href="%s">continue with the upgrade</a>, or <a href="https://osclass.discourse.group">ask in our forums</a>.'),
-                $skip_db_link
-            );
-
-            return json_encode(['status' => false, 'message' =>$message]);
-        }
-
-        if (osc_version() < 390) {
-            osc_delete_preference('marketAllowExternalSources');
-            osc_delete_preference('marketURL');
-            osc_delete_preference('marketAPIConnect');
-            osc_delete_preference('marketCategories');
-            osc_delete_preference('marketDataUpdate');
-        }
-
-        Utils::changeOsclassVersionTo(OSCLASS_VERSION);
-        return json_encode(['status' => true, 'message' => __('Osclass DB Upgraded Successfully')]);
     }
 
     /**

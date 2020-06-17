@@ -30,6 +30,7 @@ use Translation;
  * Class Utils
  * Utility class contains some useful static methods
  * Most functions derived from old Utils file, some of them may have been tweaked
+ *
  * @package mindstellar\osclass\classes\utility
  */
 class Utils
@@ -39,8 +40,8 @@ class Utils
      * Perform a POST request, so we could launch fake-cron calls and other core-system calls without annoying the user
      *
      * @param $target_url   string
-     * @param $query_data array http_build_query compatible query_data
-     *                    https://www.php.net/manual/en/function.http-build-query.php
+     * @param $query_data   array http_build_query compatible query_data
+     *                      https://www.php.net/manual/en/function.http-build-query.php
      *
      * @return bool false on error or number of bytes sent.
      */
@@ -124,12 +125,15 @@ class Utils
         if ($version) {
             return Preference::newInstance()->replace('version', $version);
         }
+
         return false;
     }
 
     /**
      * Un-quotes a quoted string
+     *
      * @param string|array $data
+     *
      * @return string|array a string or array of string with backslashes stripped off.
      * (\' becomes ' and so on.)
      * Double backslashes (\\) are made into a single
@@ -147,6 +151,7 @@ class Utils
 
         return $data;
     }
+
     /**
      * replace double slash with single slash
      *
@@ -158,8 +163,10 @@ class Utils
     {
         return str_replace('//', '/', $path);
     }
+
     /**
      * Prepare Price for osclass
+     *
      * @param $price
      *
      * @return string
@@ -173,6 +180,7 @@ class Utils
             osc_locale_thousands_sep()
         );
     }
+
     /**
      * Compare version
      * Returns
@@ -187,33 +195,13 @@ class Utils
      *                         respectively.
      *
      * @return int|bool
-     *@link https://www.php.net/manual/en/function.version-compare.php
+     * @link https://www.php.net/manual/en/function.version-compare.php
      */
     public static function versionCompare($a, $b, $operator = null)
     {
         return version_compare($a, $b, $operator);
     }
 
-    /**
-     * Return Category Stats in array
-     * @param $aux
-     * @param $categoryTotal
-     *
-     * @return int
-     */
-    public static function recursiveCategoryStats(&$aux, &$categoryTotal)
-    {
-        $count_items = Item::newInstance()->numItems($aux);
-        if (is_array($aux['categories'])) {
-            foreach ($aux['categories'] as &$cat) {
-                $count_items += self::recursiveCategoryStats($cat, $categoryTotal);
-            }
-            unset($cat);
-        }
-        $categoryTotal[$aux['pk_i_id']] = $count_items;
-
-        return $count_items;
-    }
     /**
      * Update category stats
      *
@@ -240,6 +228,29 @@ class Utils
 
         CategoryStats::newInstance()->dao->query($sql);
     }
+
+    /**
+     * Return Category Stats in array
+     *
+     * @param $aux
+     * @param $categoryTotal
+     *
+     * @return int
+     */
+    public static function recursiveCategoryStats(&$aux, &$categoryTotal)
+    {
+        $count_items = Item::newInstance()->numItems($aux);
+        if (is_array($aux['categories'])) {
+            foreach ($aux['categories'] as &$cat) {
+                $count_items += self::recursiveCategoryStats($cat, $categoryTotal);
+            }
+            unset($cat);
+        }
+        $categoryTotal[$aux['pk_i_id']] = $count_items;
+
+        return $count_items;
+    }
+
     /**
      * Recount items for a given a category id
      *
@@ -277,12 +288,14 @@ class Utils
 
     /**
      * Return indexed array fo php supported timezone
+     *
      * @return array
      */
     public static function timezoneList()
     {
         return DateTimeZone::listIdentifiers();
     }
+
     /**
      * Update locations stats.
      *
@@ -420,16 +433,19 @@ class Utils
 
         if ($http_x_forward_for = (Params::getServerParam('HTTP_X_FORWARDED_FOR') !== '')) {
             $ip_array = explode(',', $http_x_forward_for);
-            $ip = trim($ip_array[0]);
+            $ip       = trim($ip_array[0]);
             if (filter_var($ip, FILTER_VALIDATE_IP)) {
                 return $ip;
             }
         }
+
         //Most Reliable
         return Params::getServerParam('REMOTE_ADDR');
     }
+
     /**
      * Prune null or empty array element
+     *
      * @param $input
      */
     public static function pruneArray(&$input)
@@ -467,6 +483,7 @@ class Utils
 
     /**
      * Calculate location slug
+     *
      * @param string $type
      *
      * @return bool|int|mixed
@@ -511,15 +528,17 @@ class Utils
 
     /**
      * Check if protocol is ssl
+     *
      * @return bool
      */
     public static function isSsl()
     {
         return ((isset($_SERVER['HTTP_X_FORWARDED_PROTO'])
                 && strtolower($_SERVER['HTTP_X_FORWARDED_PROTO']) === 'https')
-                || (isset($_SERVER['HTTPS'])
+            || (isset($_SERVER['HTTPS'])
                 && ($_SERVER['HTTPS'] === 'on' || $_SERVER['HTTPS'] == 1)));
     }
+
     /**
      * Used to encode a field for Amazon Auth
      * (taken from the Amazon S3 PHP example library)
@@ -537,6 +556,7 @@ class Utils
 
         return base64_encode($raw);
     }
+
     /**
      * Calculate HMAC-SHA1 according to RFC2104
      * See http://www.faqs.org/rfcs/rfc2104.html

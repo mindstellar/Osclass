@@ -9,7 +9,7 @@ class Object_Cache_Factory
     private static $instance;
 
     /**
-     * @return null|\Object_Cache_default
+     * @return \Object_Cache_default
      */
     public static function newInstance()
     {
@@ -39,7 +39,8 @@ class Object_Cache_Factory
                     self::$instance = new $cache_class();
                 } else {
                     self::$instance = new Object_Cache_default();
-                    error_log('Cache ' . $cache . ' NOT SUPPORTED - loaded Object_Cache_default cache');
+                    trigger_error('Cache ' . $cache . ' NOT SUPPORTED - loaded Object_Cache_default cache',
+                        E_USER_NOTICE);
                 }
 
                 return self::$instance;

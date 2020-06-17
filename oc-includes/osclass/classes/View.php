@@ -44,6 +44,7 @@ class View
 
     /**
      * to export variables at the business layer
+     *
      * @param $key
      * @param $value
      */
@@ -54,6 +55,7 @@ class View
 
     /**
      * to get the exported variables for the view
+     *
      * @param $key
      *
      * @return mixed|string|array

@@ -27,7 +27,7 @@ class SecBaseModel extends BaseModel
     {
         parent::__construct();
 
-       //Checking granting...
+        //Checking granting...
         $this->init();
     }
 
@@ -39,7 +39,7 @@ class SecBaseModel extends BaseModel
             $this->showAuthFailPage();
         }
     }
-    
+
 
     public function logout()
     {
