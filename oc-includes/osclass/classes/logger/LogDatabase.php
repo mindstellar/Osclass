@@ -156,22 +156,22 @@ class LogDatabase
 
         if ($this->isFileWritableExists($filename)
         ) {
-            error_log('Can not write explain_queries.log file in "' . CONTENT_PATH
-                . '", please check directory/file permissions.');
+            trigger_error('Can not write explain_queries.log file in "' . CONTENT_PATH
+                . '", please check directory/file permissions.', E_USER_WARNING);
 
             return false;
         }
 
         $fp = fopen($filename, 'ab');
 
-        if ($fp == false) {
+        if ($fp === false) {
             return false;
         }
 
         fwrite($fp, '==================================================' . PHP_EOL);
 
-        fwrite($fp, '=' . str_pad('Date: ' . date(osc_date_format() != '' ? osc_date_format() : 'Y-m-d') . ' '
-                    . date(osc_time_format() != '' ? osc_date_format() : 'H:i:s'), 48, ' ', STR_PAD_BOTH) . '='
+        fwrite($fp, '=' . str_pad('Date: ' . date(osc_date_format() ?: 'Y-m-d') . ' '
+                    . date(osc_time_format() ?: 'H:i:s'), 48, ' ', STR_PAD_BOTH) . '='
                 . PHP_EOL);
 
         fwrite(
@@ -256,12 +256,12 @@ class LogDatabase
         $title .= str_pad('rows', 8, ' ', STR_PAD_BOTH) . '|';
         $title .= str_pad('Extra', 38, ' ', STR_PAD_BOTH) . '|';
 
-        for ($i = 0, $iMax = count($this->explain_messages); $i < $iMax; $i++) {
-            fwrite($fp, $this->explain_messages[$i]['query'] . PHP_EOL);
+        foreach ($this->explain_messages as $i => $iValue) {
+            fwrite($fp, $iValue['query'] . PHP_EOL);
             fwrite($fp, str_pad('', 211, '-', STR_PAD_BOTH) . PHP_EOL);
             fwrite($fp, $title . PHP_EOL);
             fwrite($fp, str_pad('', 211, '-', STR_PAD_BOTH) . PHP_EOL);
-            foreach ($this->explain_messages[$i]['explain'] as $explain) {
+            foreach ($iValue['explain'] as $explain) {
                 $row = '|' . str_pad($explain['id'], 3, ' ', STR_PAD_BOTH) . '|';
                 $row .= str_pad($explain['select_type'], 20, ' ', STR_PAD_BOTH) . '|';
                 $row .= str_pad($explain['table'], 20, ' ', STR_PAD_BOTH) . '|';
