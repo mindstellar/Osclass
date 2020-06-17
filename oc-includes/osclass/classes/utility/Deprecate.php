@@ -33,6 +33,8 @@ class Deprecate
         $replacement = null
     ) {
 
+        $debug_backtrace = debug_backtrace();
+        $caller = next($debug_backtrace);
         /**
          * Fires when a deprecated function is called.
          */
@@ -42,7 +44,10 @@ class Deprecate
             if ($replacement !== null) {
                 trigger_error(
                     sprintf(
-                        '%1$s is <strong>deprecated</strong> since version %2$s! Use %3$s instead.',
+                        '%1$s is <strong>deprecated</strong> since version %2$s! Use %3$s instead.'
+                        .'</strong> in <strong>'
+                        .$caller['file'].'</strong> on line <strong>'
+                        .$caller['line'].'</strong>'."\n<br /> error handled",
                         $function,
                         $version,
                         $replacement
@@ -52,7 +57,10 @@ class Deprecate
             } else {
                 trigger_error(
                     sprintf(
-                        '%1$s is <strong>deprecated</strong> since version %2$s with no alternative available.',
+                        '%1$s is <strong>deprecated</strong> since version %2$s with no alternative available.'
+                        .'</strong> in <strong>'
+                        .$caller['file'].'</strong> on line <strong>'
+                        .$caller['line'].'</strong>'."\n<br /> error handled",
                         $function,
                         $version
                     ),
