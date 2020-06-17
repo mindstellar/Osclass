@@ -142,7 +142,6 @@ class DBConnectionClass
         $this->dbName     = $database;
         $this->dbUser     = $user;
         $this->dbPassword = $password;
-
         $this->connectToOsclassDb();
     }
 
@@ -396,13 +395,8 @@ class DBConnectionClass
      * @return DBConnectionClass
      * @since  2.3
      */
-    public static function newInstance($server = '', $user = '', $password = '', $database = '')
+    public static function newInstance($server = DB_HOST, $user = DB_USER, $password = DB_PASSWORD, $database = DB_NAME)
     {
-        $server   = ($server == '') ? osc_db_host() : $server;
-        $user     = ($user == '') ? osc_db_user() : $user;
-        $password = ($password == '') ? osc_db_password() : $password;
-        $database = ($database == '') ? osc_db_name() : $database;
-
         if (!self::$instance instanceof self) {
             self::$instance = new self($server, $user, $password, $database);
         }
