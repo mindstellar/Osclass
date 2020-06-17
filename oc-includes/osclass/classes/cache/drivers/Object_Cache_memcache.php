@@ -30,7 +30,6 @@ class Object_Cache_memcache implements iObject_Cache
      * @since  3.4
      */
     public $site_prefix;
-    public $multisite;
     public $default_expiration = 60;
     protected $_memcache_conf = array(
         'default' => array(
@@ -56,16 +55,7 @@ class Object_Cache_memcache implements iObject_Cache
      */
     public function __construct()
     {
-
-        $this->multisite = false;
-//        if(SiteInfo::newInstance()->siteInfo!=array()) {
-//            $info       = SiteInfo::newInstance()->siteInfo;
-//            $site_id    = osc_sanitizeString($info);
-//            $this->multisite = true;
-//        }
-
-        $site_id           = '';
-        $this->site_prefix = $this->multisite ? $site_id . ':' : '';
+        $this->site_prefix = '';
         $cache_server      = array();
         global $_cache_config;
         if (!isset($_cache_config) && !is_array($_cache_config)) {
@@ -104,9 +94,6 @@ class Object_Cache_memcache implements iObject_Cache
     public function add($key, $data, $expire = 0)
     {
         $id = $key;
-        if ($this->multisite) {
-            $id = $this->site_prefix . $key;
-        }
 
         if (is_object($data)) {
             $data = clone $data;
@@ -138,11 +125,6 @@ class Object_Cache_memcache implements iObject_Cache
      */
     public function delete($key)
     {
-
-        if ($this->multisite) {
-            $key = $this->site_prefix . $key;
-        }
-
         $result = $this->memcached->delete($key);
         if (false !== $result) {
             unset($this->cache[$key]);
@@ -179,10 +161,6 @@ class Object_Cache_memcache implements iObject_Cache
     public function get($key, &$found = null)
     {
         $found = false;
-        if ($this->multisite) {
-            $key = $this->site_prefix . $key;
-        }
-
         if (isset($this->cache[$key])) {
             $found = true;
             if (is_object($this->cache[$key])) {
@@ -229,10 +207,6 @@ class Object_Cache_memcache implements iObject_Cache
      */
     public function set($key, $data, $expire = 0)
     {
-        if ($this->multisite) {
-            $key = $this->site_prefix . $key;
-        }
-
         if (is_object($data)) {
             $data = clone $data;
         }

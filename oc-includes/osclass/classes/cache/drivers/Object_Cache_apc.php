@@ -41,7 +41,6 @@ class Object_Cache_apc implements iObject_Cache
      * @since  3.4
      */
     public $site_prefix;
-    public $multisite;
     public $default_expiration = 60;
 
     /**
@@ -51,15 +50,7 @@ class Object_Cache_apc implements iObject_Cache
      */
     public function __construct()
     {
-
-        $this->multisite = false;
-//        if(SiteInfo::newInstance()->siteInfo!=array()) {
-//            $info       = SiteInfo::newInstance()->siteInfo;
-//            $site_id    = osc_sanitizeString($info);
-//            $this->multisite = true;
-//        }
-        $site_id           = '';
-        $this->site_prefix = $this->multisite ? $site_id . ':' : '';
+        $this->site_prefix = '';
     }
 
     /**
@@ -76,9 +67,6 @@ class Object_Cache_apc implements iObject_Cache
     public function add($key, $data, $expire = 0)
     {
         $id = $key;
-        if ($this->multisite) {
-            $id = $this->site_prefix . $key;
-        }
 
         if (is_object($data)) {
             $data = clone $data;
@@ -110,10 +98,6 @@ class Object_Cache_apc implements iObject_Cache
      */
     public function delete($key)
     {
-
-        if ($this->multisite) {
-            $key = $this->site_prefix . $key;
-        }
 
         $result = apc_delete($key);
         if (false !== $result) {
@@ -153,11 +137,6 @@ class Object_Cache_apc implements iObject_Cache
      */
     public function get($key, &$found = null)
     {
-
-        if ($this->multisite) {
-            $key = $this->site_prefix . $key;
-        }
-
         if (isset($this->cache[$key])) {
             if (is_object($this->cache[$key])) {
                 $value = clone $this->cache[$key];
@@ -201,10 +180,6 @@ class Object_Cache_apc implements iObject_Cache
      */
     public function set($key, $data, $expire = 0)
     {
-        if ($this->multisite) {
-            $key = $this->site_prefix . $key;
-        }
-
         if (is_object($data)) {
             $data = clone $data;
         }

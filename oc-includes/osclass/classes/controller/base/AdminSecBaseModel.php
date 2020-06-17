@@ -48,7 +48,7 @@ class AdminSecBaseModel extends SecBaseModel
 
         $config_version = OSCLASS_VERSION;
 
-        if (Utils::versionCompare($config_version, osc_get_preference('version'), 'gt') && MULTISITE == 0) {
+        if (Utils::versionCompare($config_version, osc_get_preference('version'), 'gt')) {
             if ($this instanceof CAdminTools) {
             } elseif (!$this instanceof CAdminUpgrade) {
                 $this->redirectTo(osc_admin_base_url(true) . '?page=upgrade');
