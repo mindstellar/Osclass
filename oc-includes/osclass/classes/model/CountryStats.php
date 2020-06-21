@@ -226,7 +226,6 @@ class CountryStats extends DAO
             . ')');
         $this->dao->where(DB_TABLE_PREFIX.'t_category.b_enabled', 1);
         $sql = $this->dao->_getSelect();
-        echo $sql;
         $return = $this->dao->query($sql);
         if ($return === false) {
             return 0;
