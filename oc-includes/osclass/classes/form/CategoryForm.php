@@ -46,8 +46,12 @@ class CategoryForm extends Form
             echo '<option value="">' . $default_item . '</option>';
         }
         foreach ($categories as $c) {
-            echo '<option value="' . $c['pk_i_id'] . '"' . (($category['pk_i_id'] == $c['pk_i_id'])
-                    ? 'selected="selected"' : '') . '>' . $c['s_name'] . '</option>';
+            if ((isset($category['pk_i_id']) && $category['pk_i_id'] == $c['pk_i_id'])) {
+                echo '<option value="' . $c['pk_i_id'] . '"' . ('selected="selected"') . '>' . $c['s_name']
+                    . '</option>';
+            } else {
+                echo '<option value="' . $c['pk_i_id'] . '"' . ('') . '>' . $c['s_name'] . '</option>';
+            }
             if (isset($c['categories']) && is_array($c['categories'])) {
                 self::subcategory_select($c['categories'], $category, $default_item, 1);
             }
@@ -73,8 +77,12 @@ class CategoryForm extends Form
         }
         $deep++;
         foreach ($categories as $c) {
-            echo '<option value="' . $c['pk_i_id'] . '"' . (($category['pk_i_id'] == $c['pk_i_id'])
-                    ? 'selected="selected"' : '') . '>' . $deep_string . $c['s_name'] . '</option>';
+            if ((isset($category['pk_i_id']) && $category['pk_i_id'] === $c['pk_i_id'])) {
+                echo '<option value="' . $c['pk_i_id'] . '"' . ('selected="selected"') . '>' . $deep_string
+                    . $c['s_name'] . '</option>';
+            } else {
+                echo '<option value="' . $c['pk_i_id'] . '"' . ('') . '>' . $deep_string . $c['s_name'] . '</option>';
+            }
             if (isset($c['categories']) && is_array($c['categories'])) {
                 self::subcategory_select($c['categories'], $category, $default_item, $deep);
             }
