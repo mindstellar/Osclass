@@ -200,9 +200,9 @@ function osc_item_title($locale = '')
         $title = osc_item_field('s_title', osc_language());
         if ($title == '') {
             $aLocales = osc_get_locales();
-            foreach ($aLocales as $locale) {
-                $title = osc_item_field('s_title', @$locale['pk_c_code']);
-                if ($title != '') {
+            foreach ($aLocales as $locale2) {
+                $title = osc_item_field('s_title', @$locale2['pk_c_code']);
+                if ($title) {
                     break;
                 }
             }
@@ -222,6 +222,9 @@ function osc_item_title($locale = '')
  */
 function osc_item_category($locale = '')
 {
+    if (osc_item_field('s_category_name')) {
+        return (string)osc_item_field('s_category_name');
+    }
     if (!View::newInstance()->_exists('item_category')) {
         View::newInstance()->_exportVariableToView(
             'item_category',
@@ -1520,7 +1523,7 @@ function osc_item_meta_value()
                 $return .= ' ' . __('to') . ' ' . htmlentities(
                     date(osc_date_format(), $value['to']),
                     ENT_COMPAT,
-                        'UTF-8'
+                    'UTF-8'
                 );
 
                 return $return;
