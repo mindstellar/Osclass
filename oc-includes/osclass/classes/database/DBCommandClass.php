@@ -390,8 +390,8 @@ class DBCommandClass
      *
      * @access public
      *
-     * @param mixed $key
-     * @param mixed $values
+     * @param string $key
+     * @param array|string $values
      *
      * @return DBCommandClass
      * @since  2.3
@@ -842,7 +842,7 @@ class DBCommandClass
      *
      * @param string $sql
      *
-     * @return mixed
+     * @return bool|DBRecordsetClass
      * @since  2.3
      */
     public function query($sql)
@@ -1246,7 +1246,7 @@ class DBCommandClass
     /**
      * Set FROM clause
      *
-     * @param mixed $from It can be a string or array
+     * @param string|array $from It can be a string or array
      *
      * @return DBCommandClass
      */
