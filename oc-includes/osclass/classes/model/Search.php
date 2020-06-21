@@ -44,6 +44,7 @@ class Search extends DAO
     private $groupBy;
     private $having;
     private $locale_code;
+    private $userLocaleCode;
     private $withPattern;
     private $withPicture;
     private $withLocations;
@@ -114,6 +115,11 @@ class Search extends DAO
         }
         $this->total_results       = null;
         $this->total_results_table = null;
+        if (OC_ADMIN) {
+            $this->userLocaleCode = osc_current_admin_locale();
+        } else {
+            $this->userLocaleCode = osc_current_user_locale();
+        }
 
         // get all item_location data
         if (OC_ADMIN) {
@@ -553,7 +559,7 @@ class Search extends DAO
             $sql     = $this->makeSQL(true);
             $datatmp = $this->dao->query($sql);
 
-            if ($datatmp == false) {
+            if ($datatmp === false) {
                 $this->total_results = 0;
             } else {
                 $this->total_results = $datatmp->numRows();
@@ -562,16 +568,16 @@ class Search extends DAO
             $this->total_results = 0;
         }
 
-        if ($result == false) {
+        if ($result === false) {
             return array();
         }
 
         $items = array();
-        if ($result) {
+        if ($result instanceof DBRecordsetClass) {
             $items = $result->result();
         }
 
-        if ($extended) {
+        if (($extended === true) && !empty($items)) {
             return Item::newInstance()->extendData($items);
         }
 
@@ -630,15 +636,11 @@ class Search extends DAO
                     'LEFT'
                 );
                 $this->dao->where(sprintf(
-                    "MATCH(d.s_title, d.s_description) AGAINST('%s' IN BOOLEAN MODE)",
+                    "MATCH(d.s_title, d.s_description) AGAINST(%s IN BOOLEAN MODE)",
                     $this->sPattern
                 ));
                 if (empty($this->locale_code)) {
-                    if (OC_ADMIN) {
-                        $this->locale_code[osc_current_admin_locale()] = osc_current_admin_locale();
-                    } else {
-                        $this->locale_code[osc_current_user_locale()] = osc_current_user_locale();
-                    }
+                    $this->locale_code[$this->userLocaleCode] = $this->userLocaleCode;
                 }
                 $this->dao->where(sprintf(
                     "( d.fk_c_locale_code LIKE '%s' )",
@@ -881,15 +883,15 @@ class Search extends DAO
         $premium_sql = $this->makeSQLPremium($max); // make premium sql
 
         $result = $this->dao->query($premium_sql);
-        if ($result) {
+        if ($result instanceof DBRecordsetClass) {
             $items = $result->result();
-
-            $mStat = ItemStats::newInstance();
-            foreach ($items as $item) {
-                $mStat->increase('i_num_premium_views', $item['pk_i_id']);
+            if (!empty($items)) {
+                $mStat = ItemStats::newInstance();
+                foreach ($items as $item) {
+                    $mStat->increase('i_num_premium_views', $item['pk_i_id']);
+                }
+                return Item::newInstance()->extendData($items);
             }
-
-            return Item::newInstance()->extendData($items);
         }
 
         return array();
@@ -913,7 +915,7 @@ class Search extends DAO
             $this->dao->from(DB_TABLE_PREFIX . 't_item as ti');
             $this->dao->where('ti.pk_i_id = d.fk_i_item_id');
             $this->dao->where(sprintf(
-                "MATCH(d.s_title, d.s_description) AGAINST('%s' IN BOOLEAN MODE)",
+                "MATCH(d.s_title, d.s_description) AGAINST(%s IN BOOLEAN MODE)",
                 $this->sPattern
             ));
             $this->dao->where('ti.b_premium = 1');
