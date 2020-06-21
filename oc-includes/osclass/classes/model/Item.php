@@ -16,8 +16,6 @@
  * limitations under the License.
  */
 
-use mindstellar\osclass\classes\utility\Deprecate;
-
 /**
  * Model database for Item table
  *
@@ -70,7 +68,7 @@ class Item extends DAO
     }
 
     /**
-     * It creates a new Item object class ir if it has been created
+     * It creates a new Item object class if it has been created
      * before, it return the previous object
      *
      * @access public
@@ -131,9 +129,13 @@ class Item extends DAO
             $prefLocale = OC_ADMIN ? osc_current_admin_locale() : osc_current_user_locale();
             $itemIds    = array_column($items, 'pk_i_id');
 
-            // populate locations and category name
-            $this->dao->select('cd.s_name as s_category_name, l.*');
-            // select sum item_stats
+            // Set ids
+            $this->dao->from($this->getTableName() . ' as i');
+            $this->dao->whereIn('i.pk_i_id', $itemIds);
+            $this->dao->groupBy('i.pk_i_id');
+
+            // select sum of item_stats
+
             $this->dao->select('SUM(`s`.`i_num_views`) as `i_num_views`');
             $this->dao->select('SUM(`s`.`i_num_spam`) as `i_num_spam`');
             $this->dao->select('SUM(`s`.`i_num_bad_classified`) as `i_num_bad_classified`');
@@ -141,23 +143,32 @@ class Item extends DAO
             $this->dao->select('SUM(`s`.`i_num_offensive`) as `i_num_offensive`');
             $this->dao->select('SUM(`s`.`i_num_expired`) as `i_num_expired` ');
             $this->dao->select('SUM(`s`.`i_num_premium_views`) as `i_num_premium_views` ');
+            $this->dao->join(DB_TABLE_PREFIX . 't_item_stats as s', 'i.pk_i_id = s.fk_i_item_id');
 
-            $this->dao->from(DB_TABLE_PREFIX . 't_item_location as l');
-            $this->dao->join(DB_TABLE_PREFIX . 't_item as i', 'l.fk_i_item_id = i.pk_i_id');
-            $this->dao->join(DB_TABLE_PREFIX . 't_item_stats as s', 'l.fk_i_item_id = s.fk_i_item_id');
+
+            // populate locations
+
+            $this->dao->select('l.*');
+            $this->dao->join(DB_TABLE_PREFIX . 't_item_location as l', 'i.pk_i_id = l.fk_i_item_id');
+
+
+            // populate categories
+
+            $this->dao->select('cd.s_name as s_category_name');
             $this->dao->join(
                 DB_TABLE_PREFIX . 't_category_description as cd',
                 'i.fk_i_category_id = cd.fk_i_category_id'
             );
-            $this->dao->whereIn('l.fk_i_item_id', $itemIds);
             $this->dao->where('cd.fk_c_locale_code', $prefLocale);
-            $this->dao->groupBy('l.fk_i_item_id');
+
 
             $result      = $this->dao->get();
             $extraFields = $result->result();
             unset($result);
 
+
             //get description
+
             $this->dao->select('d.fk_i_item_id, d.fk_c_locale_code, d.s_title, d.s_description');
             $this->dao->from(DB_TABLE_PREFIX . 't_item_description as d');
             $this->dao->whereIn('d.fk_i_item_id', $itemIds);
@@ -166,34 +177,43 @@ class Item extends DAO
             $descriptions = $result->result();
             unset($result);
 
+
+            //Merge all data to given $items array
             foreach ($items as $itemKey => $aItem) {
                 $aItem['locale'] = array();
-                foreach ($descriptions as $itemDesc) {
-                    if ($itemDesc['fk_i_item_id'] === $aItem['pk_i_id']) {
-                        if ($itemDesc['s_title'] || $itemDesc['s_description']) {
-                            $aItem['locale'][$itemDesc['fk_c_locale_code']] = $itemDesc;
+                if (isset($descriptions)) {
+                    foreach ($descriptions as $itemDesc) {
+                        if ($itemDesc['fk_i_item_id'] === $aItem['pk_i_id']) {
+                            if ($itemDesc['s_title'] || $itemDesc['s_description']) {
+                                $aItem['locale'][$itemDesc['fk_c_locale_code']] = $itemDesc;
+                            }
+                            unset($itemDesc);
                         }
-                        unset($itemDesc);
+                    }
+
+                    if (isset($aItem['locale'][$prefLocale])) {
+                        $aItem['s_title']       = $aItem['locale'][$prefLocale]['s_title'];
+                        $aItem['s_description'] = $aItem['locale'][$prefLocale]['s_description'];
+                    } else {
+                        $data                   = current($aItem['locale']);
+                        $aItem['s_title']       = $data['s_title'];
+                        $aItem['s_description'] = $data['s_description'];
+                        unset($data);
                     }
                 }
-                if (isset($aItem['locale'][$prefLocale])) {
-                    $aItem['s_title']       = $aItem['locale'][$prefLocale]['s_title'];
-                    $aItem['s_description'] = $aItem['locale'][$prefLocale]['s_description'];
-                } else {
-                    $data                   = current($aItem['locale']);
-                    $aItem['s_title']       = $data['s_title'];
-                    $aItem['s_description'] = $data['s_description'];
-                    unset($data);
-                }
 
-                foreach ($extraFields as $key => $extraField) {
-                    if ($aItem['pk_i_id'] === $extraField['fk_i_item_id']) {
-                        $items[$itemKey] = array_merge($aItem, $extraField);
-                        unset($extraFields[$key]);
+
+                if (isset($extraFields)) {
+                    foreach ($extraFields as $key => $extraField) {
+                        if ($aItem['pk_i_id'] === $extraField['fk_i_item_id']) {
+                            $items[$itemKey] = array_merge($aItem, $extraField);
+                            unset($extraFields[$key]);
+                        }
                     }
                 }
             }
         }
+
         return $items;
     }
 
@@ -245,15 +265,7 @@ class Item extends DAO
      */
     public function findLocationByID($id)
     {
-        $this->dao->select();
-        $this->dao->from(DB_TABLE_PREFIX . 't_item_location');
-        $this->dao->where('fk_i_item_id', $id);
-        $result = $this->dao->get();
-        if ($result == false) {
-            return array();
-        }
-
-        return $result->row();
+        return ItemLocation::newInstance()->findByPrimaryKey($id);
     }
 
     /**
@@ -365,6 +377,29 @@ class Item extends DAO
             $this->dao->where('i.fk_i_category_id', $categoryId);
         }
 
+        $this->addWhereByOptions($options);
+
+        $result = $this->dao->get();
+        if ($result == false) {
+            return 0;
+        }
+        $total_ads = $result->row();
+
+        return $total_ads['total'];
+    }
+
+    /**
+     * Add where condition by options
+     * $options  ['ACTIVE|INACTIVE|ENABLED|DISABLED|SPAM|NOTSPAM|EXPIRED|NOTEXPIRED|PREMIUM|TODAY']
+     *
+     * @access  private
+     *
+     * @param string | array $options could be a string with | separator or an array with the options
+     *
+     * @since   4.0.0
+     */
+    private function addWhereByOptions($options)
+    {
         if (!is_array($options)) {
             $options = explode('|', $options);
         }
@@ -403,19 +438,12 @@ class Item extends DAO
                 default:
             }
         }
-
-        $result = $this->dao->get();
-        if ($result == false) {
-            return 0;
-        }
-        $total_ads = $result->row();
-
-        return $total_ads['total'];
     }
 
     /**
      * LEAVE THIS FOR COMPATIBILITIES ISSUES (ONLY SITEMAP GENERATOR)
      * BUT REMEMBER TO DELETE IN ANYTHING > 2.1.x THANKS
+     *
      * @param      $category
      * @param bool $enabled
      * @param bool $active
@@ -497,27 +525,106 @@ class Item extends DAO
      */
     public function findByUserID($userId, $start = 0, $end = null)
     {
-        $this->dao->select('l.*, i.*');
-        $this->dao->from($this->getTableName() . ' i, ' . DB_TABLE_PREFIX . 't_item_location l');
-        $this->dao->where('l.fk_i_item_id = i.pk_i_id');
-        $array_where = array(
-            'i.fk_i_user_id' => $userId
-        );
-        $this->dao->where($array_where);
-        $this->dao->orderBy('i.pk_i_id', 'DESC');
-        if ($end != null) {
-            $this->dao->limit($start, $end);
-        } elseif ($start > 0) {
-            $this->dao->limit($start);
+        $condition = "fk_i_user_id = $userId";
+
+        return $this->findItemByTypes($condition, 'all', false, $start, $end);
+    }
+
+    /**
+     * Find enabled items or count of items by types with given where condition
+     *
+     * @access public
+     *
+     * @param string | array $conditions Where condition on t_item table i.e "pk_i_id = 3"
+     * @param int            $limit      beginning from $start
+     * @param int            $offset     ending
+     * @param bool           $itemType   item(active, expired, pending, pending validate, premium, all, enabled,
+     *                                   blocked)
+     *
+     * @return array | int array of items or count of item
+     * @since  unknown
+     *
+     */
+    public function findItemByTypes($conditions = null, $itemType = false, $count = false, $limit = 0, $offset = null)
+    {
+        $this->dao->from($this->getTableName());
+        if ($conditions !== null) {
+            if (is_array($conditions)) {
+                foreach ($conditions as $condition) {
+                    $this->dao->where($condition);
+                }
+            } else {
+                $this->dao->where($conditions);
+            }
+        }
+
+        $this->addWhereByType($itemType);
+
+        if ($count === true) {
+            $this->dao->select('count(pk_i_id) as total');
+            $result = $this->dao->get();
+            if ($result === false) {
+                return 0;
+            }
+            $items = $result->row();
+
+            return $items['total'];
+        }
+
+        $this->dao->orderBy('dt_pub_date', 'DESC');
+
+        if ($offset !== null) {
+            $this->dao->limit($limit, $offset);
+        } elseif ($limit > 0) {
+            $this->dao->limit($limit);
         }
 
         $result = $this->dao->get();
-        if ($result == false) {
+        if ($result === false) {
             return array();
         }
         $items = $result->result();
 
         return $this->extendData($items);
+    }
+
+    /**
+     * add conditions by type
+     *
+     * @param $itemType
+     */
+    private function addWhereByType($itemType)
+    {
+        switch ($itemType) {
+            case 'blocked':
+                $this->addWhereByOptions(['DISABLED']);
+
+                return;
+            case 'active':
+                $this->addWhereByOptions(['ACTIVE', 'NOTEXPIRED']);
+
+                return;
+            case 'nospam':
+                $this->addWhereByOptions(['ACTIVE', 'NOSPAM', 'NOTEXPIRED']);
+
+                return;
+            case 'expired':
+                $this->addWhereByOptions(['EXPIRED']);
+
+                return;
+            case 'pending' || 'pending_validate':
+                $this->addWhereByOptions(['INACTIVE']);
+
+                return;
+            case 'premium':
+                $this->addWhereByOptions(['PREMIUM']);
+
+                return;
+            case 'all':
+                return;
+            default:
+                $this->addWhereByOptions(['ENABLED']);
+        }
     }
 
     /**
@@ -549,43 +656,9 @@ class Item extends DAO
      */
     public function countItemTypesByUserID($userId, $itemType = false, $cond = '')
     {
-        $this->dao->select('count(pk_i_id) as total');
-        $this->dao->from($this->getTableName());
-        $this->dao->where("fk_i_user_id = $userId");
-        //$this->dao->orderBy('pk_i_id', 'DESC');
+        $condition = "fk_i_user_id = $userId";
 
-        if ($itemType === 'blocked') {
-            $this->dao->where('b_enabled', 0);
-        } elseif ($itemType !== 'all') {
-            $this->dao->where('b_enabled', 1);
-        }
-
-        if ($itemType === 'active') {
-            $this->dao->where('b_active', 1);
-            $this->dao->where("dt_expiration > '" . date('Y-m-d H:i:s') . "'");
-        } elseif ($itemType === 'nospam') {
-            $this->dao->where('b_spam', 0);
-            $this->dao->where('b_active', 1);
-            $this->dao->where("dt_expiration > '" . date('Y-m-d H:i:s') . "'");
-        } elseif ($itemType === 'expired') {
-            $this->dao->where("dt_expiration <= '" . date('Y-m-d H:i:s') . "'");
-        } elseif ($itemType === 'pending_validate') {
-            $this->dao->where('b_active', 0);
-        } elseif ($itemType === 'premium') {
-            $this->dao->where('b_premium', 1);
-        }
-
-        if ($cond != '') {
-            $this->dao->where($cond);
-        }
-
-        $result = $this->dao->get();
-        if ($result == false) {
-            return 0;
-        }
-        $items = $result->row();
-
-        return $items['total'];
+        return $this->findItemByTypes($condition, $itemType, true);
     }
 
     /**
@@ -602,28 +675,9 @@ class Item extends DAO
      */
     public function findByUserIDEnabled($userId, $start = 0, $end = null)
     {
-        $this->dao->select('l.*, i.*');
-        $this->dao->from($this->getTableName() . ' i, ' . DB_TABLE_PREFIX . 't_item_location l');
-        $this->dao->where('l.fk_i_item_id = i.pk_i_id');
-        $array_where = array(
-            'i.b_enabled'    => 1,
-            'i.fk_i_user_id' => $userId
-        );
-        $this->dao->where($array_where);
-        $this->dao->orderBy('i.pk_i_id', 'DESC');
-        if ($end != null) {
-            $this->dao->limit($start, $end);
-        } elseif ($start > 0) {
-            $this->dao->limit($start);
-        }
+        $condition = "fk_i_user_id = $userId";
 
-        $result = $this->dao->get();
-        if ($result == false) {
-            return array();
-        }
-        $items = $result->result();
-
-        return $this->extendData($items);
+        return $this->findItemByTypes($condition, false, false, $start, $end);
     }
 
     /**
@@ -638,23 +692,9 @@ class Item extends DAO
      */
     public function findByHourExpiration($hours = 24)
     {
-        $this->dao->select('l.*, i.*');
+        $conditions = ['TIMESTAMPDIFF(HOUR, NOW(), dt_expiration) = ' . $hours, 'b_active = 1', 'b_spam = 0'];
 
-        $this->dao->where('i.b_enabled = 1 ');
-        $this->dao->where('i.b_active = 1 ');
-        $this->dao->where('i.b_spam = 0');
-
-        $this->dao->from($this->getTableName() . ' i, ' . DB_TABLE_PREFIX . 't_item_location l');
-        $this->dao->where('l.fk_i_item_id = i.pk_i_id');
-        $this->dao->where('TIMESTAMPDIFF(HOUR, NOW(), i.dt_expiration) = ' . $hours);
-
-        $result = $this->dao->get();
-        if ($result == false) {
-            return array();
-        }
-        $items = $result->result();
-
-        return $this->extendData($items);
+        return $this->findItemByTypes($conditions);
     }
 
     /**
@@ -669,24 +709,9 @@ class Item extends DAO
      */
     public function findByDayExpiration($days = 1)
     {
-        $this->dao->select('l.*, i.*');
+        $conditions = ['TIMESTAMPDIFF(DAY, NOW(), dt_expiration) = ' . $days, 'b_active = 1', 'b_spam = 0'];
 
-        $this->dao->where('i.b_enabled = 1 ');
-        $this->dao->where('i.b_active = 1 ');
-        $this->dao->where('i.b_spam = 0');
-
-        $this->dao->from($this->getTableName() . ' i, ' . DB_TABLE_PREFIX . 't_item_location l');
-        $this->dao->where('l.fk_i_item_id = i.pk_i_id');
-        $this->dao->where('TIMESTAMPDIFF(DAY, NOW(), i.dt_expiration) = ' . $days);
-
-        $result = $this->dao->get();
-        if ($result == false) {
-            return array();
-        }
-
-        $items = $result->result();
-
-        return $this->extendData($items);
+        return $this->findItemByTypes($conditions);
     }
 
     /**
@@ -712,7 +737,7 @@ class Item extends DAO
      * @param int  $userId   User id
      * @param int  $start    beginning from $start
      * @param int  $end      ending
-     * @param bool $itemType item(active, expired, pending validate, premium, all, enabled, blocked)
+     * @param bool $itemType item(active, expired, pending, premium, all, enabled, blocked)
      *
      * @return array of items
      * @since  unknown
@@ -720,44 +745,7 @@ class Item extends DAO
      */
     public function findItemTypesByUserID($userId, $start = 0, $end = null, $itemType = false)
     {
-        $this->dao->from($this->getTableName());
-        $this->dao->where("fk_i_user_id = $userId");
-
-        if ($itemType === 'blocked') {
-            $this->dao->where('b_enabled', 0);
-        } elseif ($itemType !== 'all') {
-            $this->dao->where('b_enabled', 1);
-        }
-
-        if ($itemType === 'active') {
-            $this->dao->where('b_active', 1);
-            $this->dao->where('dt_expiration > \'' . date('Y-m-d H:i:s') . '\'');
-        } elseif ($itemType === 'nospam') {
-            $this->dao->where('b_spam', 0);
-            $this->dao->where('b_active', 1);
-            $this->dao->where('dt_expiration > \'' . date('Y-m-d H:i:s') . '\'');
-        } elseif ($itemType === 'expired') {
-            $this->dao->where('dt_expiration < \'' . date('Y-m-d H:i:s') . '\'');
-        } elseif ($itemType === 'pending_validate') {
-            $this->dao->where('b_active', 0);
-        } elseif ($itemType === 'premium') {
-            $this->dao->where('b_premium', 1);
-        }
-
-        $this->dao->orderBy('dt_pub_date', 'DESC');
-        if ($end != null) {
-            $this->dao->limit($start, $end);
-        } elseif ($start > 0) {
-            $this->dao->limit($start);
-        }
-
-        $result = $this->dao->get();
-        if ($result == false) {
-            return array();
-        }
-        $items = $result->result();
-
-        return $this->extendData($items);
+        return $this->findItemByTypes("fk_i_item_id = $userId", $itemType, false, $start, $end);
     }
 
     /**
@@ -775,42 +763,14 @@ class Item extends DAO
      */
     public function countItemTypesByEmail($email, $itemType = false, $cond = '')
     {
-        $this->dao->select('count(pk_i_id) as total');
-        $this->dao->from($this->getTableName());
-        $this->dao->where("s_contact_email = '" . $email . "'");
-
-        if ($itemType === 'blocked') {
-            $this->dao->where('b_enabled', 0);
-        } elseif ($itemType !== 'all') {
-            $this->dao->where('b_enabled', 1);
+        $where_email = "s_contact_email = " . $this->dao->escape((string)$email);
+        if ($cond) {
+            $conditions = array($where_email, $cond);
+        } else {
+            $conditions = $where_email;
         }
 
-        if ($itemType === 'active') {
-            $this->dao->where('b_active', 1);
-            $this->dao->where("dt_expiration > '" . date('Y-m-d H:i:s') . "'");
-        } elseif ($itemType === 'nospam') {
-            $this->dao->where('b_spam', 0);
-            $this->dao->where('b_active', 1);
-            $this->dao->where("dt_expiration > '" . date('Y-m-d H:i:s') . "'");
-        } elseif ($itemType === 'expired') {
-            $this->dao->where("dt_expiration <= '" . date('Y-m-d H:i:s') . "'");
-        } elseif ($itemType === 'pending_validate') {
-            $this->dao->where('b_active', 0);
-        } elseif ($itemType === 'premium') {
-            $this->dao->where('b_premium', 1);
-        }
-
-        if ($cond != '') {
-            $this->dao->where($cond);
-        }
-
-        $result = $this->dao->get();
-        if ($result == false) {
-            return 0;
-        }
-        $items = $result->row();
-
-        return $items['total'];
+        return $this->findItemByTypes($conditions, $itemType, true);
     }
 
     /**
@@ -857,7 +817,9 @@ class Item extends DAO
         }
         $array_conditions = array('fk_i_item_id' => $id);
 
-        return $this->dao->update(DB_TABLE_PREFIX . 't_item_stats', $array_set, $array_conditions);
+        if (isset($array_set)) {
+            return $this->dao->update(DB_TABLE_PREFIX . 't_item_stats', $array_set, $array_conditions);
+        }
     }
 
     /**
@@ -969,10 +931,12 @@ class Item extends DAO
     }
 
     /**
-     * @param $enable
-     * @param $aIds
+     * Enable all items by given category ids
      *
-     * @return mixed
+     * @param int 0|1 $enable
+     * @param array $aIds
+     *
+     * @return \DBRecordsetClass
      */
     public function enableByCategory($enable, $aIds)
     {
@@ -1021,7 +985,7 @@ class Item extends DAO
         }
 
         $result = $this->dao->get();
-        if ($result == false) {
+        if ($result === false) {
             return 0;
         }
         $total_ads = $result->row();
@@ -1041,7 +1005,8 @@ class Item extends DAO
      */
     public function metaFields($id)
     {
-        $this->dao->select('im.s_value as s_value,mf.pk_i_id as pk_i_id, mf.s_name as s_name, mf.e_type as e_type, im.s_multi as s_multi, mf.s_slug as s_slug ');
+        $this->dao->select('im.s_value as s_value,mf.pk_i_id as pk_i_id, mf.s_name as s_name');
+        $this->dao->select('mf.e_type as e_type, im.s_multi as s_multi, mf.s_slug as s_slug');
         $this->dao->from($this->getTableName() . ' i, ' . DB_TABLE_PREFIX . 't_item_meta im, ' . DB_TABLE_PREFIX
             . 't_meta_categories mc, ' . DB_TABLE_PREFIX . 't_meta_fields mf');
         $this->dao->where('mf.pk_i_id = im.fk_i_field_id');
@@ -1094,7 +1059,7 @@ class Item extends DAO
     {
         $this->dao->select('fk_i_item_id');
         $this->dao->from(DB_TABLE_PREFIX . 't_item_location');
-        $this->dao->where('fk_i_city__area_id', $cityAreaId);
+        $this->dao->where('fk_i_city_area_id', $cityAreaId);
         $result = $this->dao->get();
         $items  = $result->result();
         $arows  = 0;
@@ -1145,7 +1110,7 @@ class Item extends DAO
         $this->dao->delete(DB_TABLE_PREFIX . 't_item_stats', "fk_i_item_id = $id");
         $this->dao->delete(DB_TABLE_PREFIX . 't_item_meta', "fk_i_item_id = $id");
 
-        osc_run_hook('delete_item', $id);
+        Plugins::runHook('delete_item', $id);
 
         return parent::deleteByPrimaryKey($id);
     }
@@ -1296,11 +1261,7 @@ class Item extends DAO
      */
     public function extendCategoryName($items)
     {
-        if (OC_ADMIN) {
-            $prefLocale = osc_current_admin_locale();
-        } else {
-            $prefLocale = osc_current_user_locale();
-        }
+        $prefLocale = OC_ADMIN ? osc_current_admin_locale() : osc_current_user_locale();
 
         $results = array();
         foreach ($items as $item) {
