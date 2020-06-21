@@ -212,17 +212,21 @@ class CountryStats extends DAO
      */
     public function calculateNumItems($countryCode)
     {
-        $sql = 'SELECT count(*) as total FROM ' . DB_TABLE_PREFIX . 't_item_location, ' . DB_TABLE_PREFIX . 't_item, '
-            . DB_TABLE_PREFIX . 't_category ';
-        $sql .= 'WHERE ' . DB_TABLE_PREFIX . 't_item_location.fk_c_country_code = \'' . $countryCode . '\' AND ';
-        $sql .= DB_TABLE_PREFIX . 't_item.pk_i_id = ' . DB_TABLE_PREFIX . 't_item_location.fk_i_item_id AND ';
-        $sql .= DB_TABLE_PREFIX . 't_category.pk_i_id = ' . DB_TABLE_PREFIX . 't_item.fk_i_category_id AND ';
-        $sql .= DB_TABLE_PREFIX . 't_item.b_active = 1 AND ' . DB_TABLE_PREFIX . 't_item.b_enabled = 1 AND '
-            . DB_TABLE_PREFIX . 't_item.b_spam = 0 AND ';
-        $sql .= '(' . DB_TABLE_PREFIX . 't_item.b_premium = 1 || ' . DB_TABLE_PREFIX . 't_item.dt_expiration >= \''
-            . date('Y-m-d H:i:s') . '\' ) AND ';
-        $sql .= DB_TABLE_PREFIX . 't_category.b_enabled = 1 ';
-
+        $this->dao->select('count(*) as total');
+        $this->dao->from(sprintf('%1$st_item_location, %1$st_item,%1$st_category', DB_TABLE_PREFIX));
+        $this->dao->where(DB_TABLE_PREFIX.'t_item_location.fk_c_country_code', $countryCode);
+        $this->dao->where(DB_TABLE_PREFIX.'t_item.pk_i_id', DB_TABLE_PREFIX.'t_item_location.fk_i_item_id');
+        $this->dao->where(DB_TABLE_PREFIX.'t_category.pk_i_id', DB_TABLE_PREFIX.'t_item.fk_i_category_id');
+        $this->dao->where(DB_TABLE_PREFIX.'t_item.b_active', 1);
+        $this->dao->where(DB_TABLE_PREFIX.'t_item.b_enabled', 1);
+        $this->dao->where(DB_TABLE_PREFIX.'t_item.b_spam', 0);
+        $this->dao->where('('
+            . DB_TABLE_PREFIX . 't_item.b_premium = 1 || '
+            . DB_TABLE_PREFIX . 't_item.dt_expiration >= ' . date('Y-m-d H:i:s')
+            . ')');
+        $this->dao->where(DB_TABLE_PREFIX.'t_category.b_enabled', 1);
+        $sql = $this->dao->_getSelect();
+        echo $sql;
         $return = $this->dao->query($sql);
         if ($return === false) {
             return 0;
