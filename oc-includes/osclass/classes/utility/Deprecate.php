@@ -219,6 +219,7 @@ class Deprecate
             throw(new \InvalidArgumentException("Invalid error message."));
         }
         $debug_backtrace = debug_backtrace();
+        next($debug_backtrace);
         $caller = next($debug_backtrace);
         $message .= '</strong> in <strong>' . $caller['file'] . '</strong> on line <strong>' . $caller['line']
             . '</strong>' . "\n<br /> error handled";
