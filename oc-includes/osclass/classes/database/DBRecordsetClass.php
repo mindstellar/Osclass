@@ -96,7 +96,7 @@ class DBRecordsetClass
      * @param int    $n
      * @param string $type
      *
-     * @return mixed
+     * @return array|object
      */
     public function row($n = 0, $type = 'array')
     {
@@ -270,7 +270,7 @@ class DBRecordsetClass
      *
      * @param string $type
      *
-     * @return mixed It can be an array or an object
+     * @return array | object It can be an array or an object
      * @since  2.3
      */
     public function result($type = 'array')
