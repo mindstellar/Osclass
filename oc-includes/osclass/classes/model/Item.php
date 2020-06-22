@@ -660,7 +660,7 @@ class Item extends DAO
     public function countItemTypesByUserID($userId, $itemType = false, $cond = '')
     {
         $condition[] = "fk_i_user_id = $userId";
-        if($cond){
+        if ($cond) {
             $condition[] = $cond;
         }
 
