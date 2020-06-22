@@ -612,7 +612,8 @@ class Item extends DAO
                 $this->addWhereByOptions(['EXPIRED']);
 
                 return;
-            case 'pending' || 'pending_validate':
+            case 'pending':
+            case 'pending_validate':
                 $this->addWhereByOptions(['INACTIVE']);
 
                 return;
