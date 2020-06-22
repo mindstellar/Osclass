@@ -345,9 +345,9 @@ class ItemForm extends Form
                 draw_select(1, 0);
                 <?php } else { ?>
                 draw_select(1, 0);
-                <?php for ($i = 0; $i < count($categories_tree) - 1; $i++) { ?>
+                    <?php for ($i = 0; $i < count($categories_tree) - 1; $i++) { ?>
                 draw_select(<?php echo($i + 2); ?> ,<?php echo $categories_tree[$i]; ?>);
-                <?php } ?>
+                    <?php } ?>
                 <?php } ?>
                 $('body').on("change", '[name^="select_"]', function () {
                     var depth = parseInt($(this).attr("depth"));
@@ -514,28 +514,28 @@ class ItemForm extends Form
                 $('#dt_expiration').html("");
                 var options = '';
                 <?php foreach ($options as $o) {
-                if ($o === -1) {?>
+                    if ($o === -1) {?>
                 options += '<option value="-1" >'
                     + (osc.langs.nochange_expiration != null ? osc.langs.nochange_expiration :
                         '<?php echo osc_esc_js(__('No change expiration')); ?>')
                     + '</option>';
-                <?php } elseif ($o == 0) { ?>
+                    <?php } elseif ($o == 0) { ?>
                 options += '<option value="" >'
                     + (osc.langs.without_expiration != null ? osc.langs.without_expiration :
                         '<?php echo osc_esc_js(__('Without expiration')); ?>')
                     + '</option>';
-                <?php } elseif ($o == 1) { ?>
+                    <?php } elseif ($o == 1) { ?>
                 options += '<option value="1" >'
                     + (osc.langs.expiration_day != null ? osc.langs.expiration_day : '<?php echo osc_esc_js(__('1 day')); ?>')
                     + '</option>';
-                <?php } else { ?>
+                    <?php } else { ?>
                 if (max_exp == 0 || max_exp >=<?php echo $o; ?>) {
                     options += '<option value="<?php echo $o; ?>" >'
                         + (osc.langs.expiration_days != null ? osc.langs.expiration_days :
                             '<?php echo osc_esc_js(__('%d days')); ?>').replace("%d", <?php echo $o; ?>)
                         + '</option>';
                 }
-                <?php }
+                    <?php }
                 } ?>
                 $('#dt_expiration').html(options);
                 $('#dt_expiration').change();
@@ -1375,17 +1375,17 @@ class ItemForm extends Form
                         } else {
                             $("#region").before('<select name="regionId" id="regionId" ><option value=""><?php
                                 echo osc_esc_js(__('Select a region...'));
-                                ?></option></select>');
+                            ?></option></select>');
                             $("#region").remove();
                         }
                         if ($("#cityId").length > 0) {
                             $("#cityId").html('<option value=""><?php
                                 echo osc_esc_js(__('Select a city...'));
-                                ?></option>');
+                            ?></option>');
                         } else {
                             $("#city").before('<select name="cityId" id="cityId" ><option value=""><?php
                                 echo osc_esc_js(__('Select a city...'));
-                                ?></option></select>');
+                            ?></option></select>');
                             $("#city").remove();
                         }
                         $("#regionId").attr('disabled', true);
@@ -1853,8 +1853,8 @@ class ItemForm extends Form
                                 src="<?php echo osc_apply_filter(
                                         'resource_path',
                                         osc_base_url() . $_r['s_path']
-                                    ) . $_r['pk_i_id']
-                                    . '_thumbnail.' . $_r['s_extension']; ?>"
+                                     ) . $_r['pk_i_id']
+                                     . '_thumbnail.' . $_r['s_extension']; ?>"
                                 alt="<?php echo osc_esc_html($img); ?>"></div>
                 </li>
             <?php } ?>
@@ -1871,7 +1871,7 @@ class ItemForm extends Form
                 </li>
             <?php } ?>
         </ul>
-    <?php } ?>
+        <?php } ?>
         <div style="clear:both;"></div>
         <?php
 
@@ -2036,15 +2036,15 @@ class ItemForm extends Form
                         } else {
                             $(li).append('<div class="primary_image"><a title="<?php
                                 echo osc_esc_js(osc_esc_html(__('Make primary image')));
-                                ?>"><?php
+                            ?>"><?php
                                 echo osc_esc_js(osc_esc_html(__('Make primary image')));
-                                ?></a></div>');
+?></a></div>');
                         }
                         <?php }
                         // @TOFIX @FIXME escape $responseJSON_uploadName below
                         // need a js function similar to osc_esc_js(osc_esc_html()) ?>
                         $(li).append('<div class="ajax_preview_img"><img src="<?php echo osc_base_url();
-                            ?>oc-content/uploads/temp/' + responseJSON.uploadName + '" alt="' + responseJSON.uploadName + '"></div>');
+                        ?>oc-content/uploads/temp/' + responseJSON.uploadName + '" alt="' + responseJSON.uploadName + '"></div>');
                         $(li).append('<input type="hidden" name="ajax_photos[]" value="' + responseJSON.uploadName + '"></input>');
                     }
                     <?php if (Params::getParam('action') === 'item_edit') { ?>
@@ -2077,7 +2077,7 @@ class ItemForm extends Form
                     var json = JSON.parse(strReturn);
                     var total = parseInt(json.count)
                         + $("#restricted-fine-uploader input[name='ajax_photos[]']").length + (numUpload);
-                    <?php if ($maxImages > 0) { ?>
+                        <?php if ($maxImages > 0) { ?>
                     if (total <=<?php echo $maxImages;?>) {
                         json.success = true;
                     } else {
@@ -2088,14 +2088,14 @@ class ItemForm extends Form
                                 $maxImages
                             )); ?></div>'));
                     }
-                    <?php } else { ?>
+                        <?php } else { ?>
                     json.success = true;
-                    <?php } ?>
+                        <?php } ?>
                     return json;
                 }
-                <?php } else { ?>
+                    <?php } else { ?>
             });
-            <?php } ?>
+                    <?php } ?>
             })
         </script>
         <?php
