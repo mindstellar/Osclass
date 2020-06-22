@@ -1185,7 +1185,7 @@ function osc_get_cities($region = '')
 /**
  * Gets list of currencies
  *
- * @return string
+ * @return array
  */
 function osc_get_currencies()
 {

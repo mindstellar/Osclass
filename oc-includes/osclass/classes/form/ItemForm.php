@@ -225,16 +225,16 @@ class ItemForm extends Form
             }
             ?>
 
-            if (osc == undefined) {
+            if (osc === undefined) {
                 var osc = {};
             }
-            if (osc.langs == undefined) {
+            if (osc.langs === undefined) {
                 osc.langs = {};
             }
-            if (osc.langs.select_subcategory == undefined) {
+            if (osc.langs.select_subcategory === undefined) {
                 osc.langs.select_subcategory = '<?php echo osc_esc_js(__('Select Subcategory')); ?>';
             }
-            if (osc.langs.no_subcategory == undefined) {
+            if (osc.langs.no_subcategory === undefined) {
                 osc.langs.no_subcategory = '<?php echo osc_esc_js(__('No Subcategory')); ?>';
             }
 
@@ -345,9 +345,9 @@ class ItemForm extends Form
                 draw_select(1, 0);
                 <?php } else { ?>
                 draw_select(1, 0);
-                    <?php for ($i = 0; $i < count($categories_tree) - 1; $i++) { ?>
+                <?php for ($i = 0; $i < count($categories_tree) - 1; $i++) { ?>
                 draw_select(<?php echo($i + 2); ?> ,<?php echo $categories_tree[$i]; ?>);
-                    <?php } ?>
+                <?php } ?>
                 <?php } ?>
                 $('body').on("change", '[name^="select_"]', function () {
                     var depth = parseInt($(this).attr("depth"));
@@ -373,7 +373,9 @@ class ItemForm extends Form
             function draw_select(select, categoryID) {
                 tmp_categories = window['categories_' + categoryID];
                 if (tmp_categories != null && $.isArray(tmp_categories)) {
-                    $("#select_holder").before('<select id="select_' + select + '" name="select_' + select + '" depth="' + select + '"></select>');
+                    $("#select_holder").before(
+                        '<select id="select_' + select + '" name="select_' + select + '" depth="' + select + '"></select>'
+                    );
 
                     if (categoryID == 0) {
                         var options = '<option value="' + categoryID + '" >' + osc.langs.select_category + '</option>';
@@ -381,7 +383,10 @@ class ItemForm extends Form
                         var options = '<option value="' + categoryID + '" >' + osc.langs.select_subcategory + '</option>';
                     }
                     $.each(tmp_categories, function (index, value) {
-                        options += '<option value="' + value[0] + '" ' + (value[0] == osc.item_post.category_tree_id[select - 1] ? 'selected="selected"' : '') + '>' + value[1] + '</option>';
+                        options +=
+                            '<option value="' + value[0] + '" ' +
+                            (value[0] === osc.item_post.category_tree_id[select - 1] ? 'selected="selected"' : '')
+                            + '>' + value[1] + '</option>';
                     });
                     osc.item_post.category_tree_id[select - 1] = null;
                     $('#select_' + select).html(options);
@@ -409,7 +414,7 @@ class ItemForm extends Form
             $item = osc_item();
         }
         $userId = '';
-        if (Session::newInstance()->_getForm('userId') != '') {
+        if (Session::newInstance()->_getForm('userId')) {
             $userId = Session::newInstance()->_getForm('userId');
         }
         echo '<select name="userId" id="userId">';
@@ -418,10 +423,10 @@ class ItemForm extends Form
         }
         foreach ($users as $user) {
             $bool = false;
-            if ($userId != '' && $userId == $user['pk_i_id']) {
+            if ($userId && $userId === $user['pk_i_id']) {
                 $bool = true;
             }
-            if (isset($item['fk_i_user_id']) && $item['fk_i_user_id'] == $user['pk_i_id']) {
+            if (isset($item['fk_i_user_id']) && $item['fk_i_user_id'] === $user['pk_i_id']) {
                 $bool = true;
             }
             echo '<option value="' . $user['pk_i_id'] . '"' . ($bool ? ' selected="selected"' : '')
@@ -509,17 +514,28 @@ class ItemForm extends Form
                 $('#dt_expiration').html("");
                 var options = '';
                 <?php foreach ($options as $o) {
-                    if ($o == -1) {?>
-                options += '<option value="-1" >' + (osc.langs.nochange_expiration != null ? osc.langs.nochange_expiration : '<?php echo osc_esc_js(__('No change expiration')); ?>') + '</option>';
-                    <?php } elseif ($o == 0) { ?>
-                options += '<option value="" >' + (osc.langs.without_expiration != null ? osc.langs.without_expiration : '<?php echo osc_esc_js(__('Without expiration')); ?>') + '</option>';
-                    <?php } elseif ($o == 1) { ?>
-                options += '<option value="1" >' + (osc.langs.expiration_day != null ? osc.langs.expiration_day : '<?php echo osc_esc_js(__('1 day')); ?>') + '</option>';
-                    <?php } else { ?>
+                if ($o === -1) {?>
+                options += '<option value="-1" >'
+                    + (osc.langs.nochange_expiration != null ? osc.langs.nochange_expiration :
+                        '<?php echo osc_esc_js(__('No change expiration')); ?>')
+                    + '</option>';
+                <?php } elseif ($o == 0) { ?>
+                options += '<option value="" >'
+                    + (osc.langs.without_expiration != null ? osc.langs.without_expiration :
+                        '<?php echo osc_esc_js(__('Without expiration')); ?>')
+                    + '</option>';
+                <?php } elseif ($o == 1) { ?>
+                options += '<option value="1" >'
+                    + (osc.langs.expiration_day != null ? osc.langs.expiration_day : '<?php echo osc_esc_js(__('1 day')); ?>')
+                    + '</option>';
+                <?php } else { ?>
                 if (max_exp == 0 || max_exp >=<?php echo $o; ?>) {
-                    options += '<option value="<?php echo $o; ?>" >' + (osc.langs.expiration_days != null ? osc.langs.expiration_days : '<?php echo osc_esc_js(__('%d days')); ?>').replace("%d", <?php echo $o; ?>) + '</option>';
+                    options += '<option value="<?php echo $o; ?>" >'
+                        + (osc.langs.expiration_days != null ? osc.langs.expiration_days :
+                            '<?php echo osc_esc_js(__('%d days')); ?>').replace("%d", <?php echo $o; ?>)
+                        + '</option>';
                 }
-                    <?php }
+                <?php }
                 } ?>
                 $('#dt_expiration').html(options);
                 $('#dt_expiration').change();
@@ -535,10 +551,10 @@ class ItemForm extends Form
      */
     public static function multilanguage_title_description($locales = null, $item = null)
     {
-        if ($locales == null) {
+        if ($locales === null) {
             $locales = osc_get_locales();
         }
-        if ($item == null) {
+        if ($item === null) {
             $item = osc_item();
         }
         $num_locales = count($locales);
@@ -1255,16 +1271,19 @@ class ItemForm extends Form
                 if (result) {
                     $.ajax({
                         type: "POST",
-                        url: '<?php echo osc_base_url(true); ?>?page=ajax&action=delete_image&id=' + id + '&item=' + item_id + '&code=' + name + '&secret=' + secret,
+                        url: '<?php echo osc_base_url(true); ?>?page=ajax&action=delete_image&id='
+                            + id + '&item=' + item_id + '&code=' + name + '&secret=' + secret,
                         dataType: 'json',
                         success: function (data) {
+                            var flash;
+                            var message;
                             var class_type = "error";
                             if (data.success) {
                                 $("div[name=" + name + "]").remove();
                                 class_type = "ok";
                             }
-                            var flash = $("#flash_js");
-                            var message = $('<div>').addClass('pubMessages').addClass(class_type).attr('id', 'flashmessage').html(data.msg);
+                            flash = $("#flash_js");
+                            message = $('<div>').addClass('pubMessages').addClass(class_type).attr('id', 'flashmessage').html(data.msg);
                             flash.html(message);
                             $("#flashmessage").slideDown('slow').delay(3000).slideUp('slow');
                         }
@@ -1342,24 +1361,31 @@ class ItemForm extends Form
                         });
 
                     } else {
-
                         // add empty select
-                        $("#region").before('<select name="regionId" id="regionId" ><option value=""><?php echo osc_esc_js(__('Select a region...')); ?></option></select>');
+                        $("#region").before('<select name="regionId" id="regionId" ><option value=""><?php
+                            echo osc_esc_js(__('Select a region...')); ?></option></select>');
                         $("#region").remove();
 
-                        $("#city").before('<select name="cityId" id="cityId" ><option value=""><?php echo osc_esc_js(__('Select a city...')); ?></option></select>');
+                        $("#city").before('<select name="cityId" id="cityId" ><option value=""><?php
+                            echo osc_esc_js(__('Select a city...')); ?></option></select>');
                         $("#city").remove();
 
                         if ($("#regionId").length > 0) {
                             $("#regionId").html('<option value=""><?php echo osc_esc_js(__('Select a region...')); ?></option>');
                         } else {
-                            $("#region").before('<select name="regionId" id="regionId" ><option value=""><?php echo osc_esc_js(__('Select a region...')); ?></option></select>');
+                            $("#region").before('<select name="regionId" id="regionId" ><option value=""><?php
+                                echo osc_esc_js(__('Select a region...'));
+                                ?></option></select>');
                             $("#region").remove();
                         }
                         if ($("#cityId").length > 0) {
-                            $("#cityId").html('<option value=""><?php echo osc_esc_js(__('Select a city...')); ?></option>');
+                            $("#cityId").html('<option value=""><?php
+                                echo osc_esc_js(__('Select a city...'));
+                                ?></option>');
                         } else {
-                            $("#city").before('<select name="cityId" id="cityId" ><option value=""><?php echo osc_esc_js(__('Select a city...')); ?></option></select>');
+                            $("#city").before('<select name="cityId" id="cityId" ><option value=""><?php
+                                echo osc_esc_js(__('Select a city...'));
+                                ?></option></select>');
                             $("#city").remove();
                         }
                         $("#regionId").attr('disabled', true);
@@ -1566,7 +1592,8 @@ class ItemForm extends Form
                 if (result) {
                     $.ajax({
                         type: "POST",
-                        url: '<?php echo osc_base_url(true); ?>?page=ajax&action=delete_image&id=' + id + '&item=' + item_id + '&code=' + name + '&secret=' + secret,
+                        url: '<?php echo osc_base_url(true); ?>?page=ajax&action=delete_image&id='
+                            + id + '&item=' + item_id + '&code=' + name + '&secret=' + secret,
                         dataType: 'json',
                         success: function (data) {
                             var class_type = "error";
@@ -1826,8 +1853,8 @@ class ItemForm extends Form
                                 src="<?php echo osc_apply_filter(
                                         'resource_path',
                                         osc_base_url() . $_r['s_path']
-                                     ) . $_r['pk_i_id']
-                                     . '_thumbnail.' . $_r['s_extension']; ?>"
+                                    ) . $_r['pk_i_id']
+                                    . '_thumbnail.' . $_r['s_extension']; ?>"
                                 alt="<?php echo osc_esc_html($img); ?>"></div>
                 </li>
             <?php } ?>
@@ -1844,7 +1871,7 @@ class ItemForm extends Form
                 </li>
             <?php } ?>
         </ul>
-        <?php } ?>
+    <?php } ?>
         <div style="clear:both;"></div>
         <?php
 
@@ -1870,7 +1897,9 @@ class ItemForm extends Form
                     if ($(this).attr('ajaxfile') != undefined) {
                         urlrequest = 'ajax_photo=' + $(this).attr('ajaxfile');
                     } else {
-                        urlrequest = 'id=' + $(this).attr('photoid') + '&item=' + $(this).attr('itemid') + '&code=' + $(this).attr('photoname') + '&secret=' + $(this).attr('photosecret');
+                        urlrequest = 'id=' + $(this).attr('photoid')
+                            + '&item=' + $(this).attr('itemid')
+                            + '&code=' + $(this).attr('photoname') + '&secret=' + $(this).attr('photosecret');
                     }
                     if (result) {
                         $.ajax({
@@ -1962,8 +1991,10 @@ class ItemForm extends Form
                         itemLimit: <?php echo $maxImages; ?>
                     },
                     messages: {
-                        tooManyItemsError: '<?php echo osc_esc_js(__('Too many items ({netItems}) would be uploaded. Item limit is {itemLimit}.'));?>',
-                        onLeave: '<?php echo osc_esc_js(__('The files are being uploaded, if you leave now the upload will be cancelled.'));?>',
+                        tooManyItemsError:
+                            '<?php echo osc_esc_js(__('Too many items ({netItems}) would be uploaded. Item limit is {itemLimit}.'));?>',
+                        onLeave:
+                            '<?php echo osc_esc_js(__('The files are being uploaded, if you leave now the upload will be cancelled.'));?>',
                         typeError: '<?php echo osc_esc_js(__('{file} has an invalid extension. Valid extension(s): {extensions}.'));?>',
                         sizeError: '<?php echo osc_esc_js(__('{file} is too large, maximum file size is {sizeLimit}.'));?>',
                         emptyError: '<?php echo osc_esc_js(__('{file} is empty, please select files again without it.'));?>'
@@ -1991,7 +2022,8 @@ class ItemForm extends Form
                     }
                 }).on('error', function (event, id, name, errorReason, xhrOrXdr) {
                     $('#restricted-fine-uploader .flashmessage-error').remove();
-                    $('#restricted-fine-uploader').append('<div class="flashmessage flashmessage-error">' + errorReason + '<a class="close" onclick="$(\'.flashmessage-error\').remove();" >X</a></div>');
+                    $('#restricted-fine-uploader').append('<div class="flashmessage flashmessage-error">'
+                        + errorReason + '<a class="close" onclick="$(\'.flashmessage-error\').remove();" >X</a></div>');
                 }).on('statusChange', function (event, id, old_status, new_status) {
                     $(".alert.alert-error").remove();
                 }).on('complete', function (event, id, fileName, responseJSON) {
@@ -2002,12 +2034,17 @@ class ItemForm extends Form
                         if (parseInt(new_id) == 0) {
                             $(li).append('<div class="primary_image primary"></div>');
                         } else {
-                            $(li).append('<div class="primary_image"><a title="<?php echo osc_esc_js(osc_esc_html(__('Make primary image'))); ?>"><?php echo osc_esc_js(osc_esc_html(__('Make primary image'))); ?></a></div>');
+                            $(li).append('<div class="primary_image"><a title="<?php
+                                echo osc_esc_js(osc_esc_html(__('Make primary image')));
+                                ?>"><?php
+                                echo osc_esc_js(osc_esc_html(__('Make primary image')));
+                                ?></a></div>');
                         }
                         <?php }
                         // @TOFIX @FIXME escape $responseJSON_uploadName below
                         // need a js function similar to osc_esc_js(osc_esc_html()) ?>
-                        $(li).append('<div class="ajax_preview_img"><img src="<?php echo osc_base_url(); ?>oc-content/uploads/temp/' + responseJSON.uploadName + '" alt="' + responseJSON.uploadName + '"></div>');
+                        $(li).append('<div class="ajax_preview_img"><img src="<?php echo osc_base_url();
+                            ?>oc-content/uploads/temp/' + responseJSON.uploadName + '" alt="' + responseJSON.uploadName + '"></div>');
                         $(li).append('<input type="hidden" name="ajax_photos[]" value="' + responseJSON.uploadName + '"></input>');
                     }
                     <?php if (Params::getParam('action') === 'item_edit') { ?>
@@ -2038,25 +2075,27 @@ class ItemForm extends Form
                         async: false
                     });
                     var json = JSON.parse(strReturn);
-                    var total = parseInt(json.count) + $("#restricted-fine-uploader input[name='ajax_photos[]']").length + (numUpload);
-                        <?php if ($maxImages > 0) { ?>
+                    var total = parseInt(json.count)
+                        + $("#restricted-fine-uploader input[name='ajax_photos[]']").length + (numUpload);
+                    <?php if ($maxImages > 0) { ?>
                     if (total <=<?php echo $maxImages;?>) {
                         json.success = true;
                     } else {
                         json.success = false;
-                        $('#restricted-fine-uploader .qq-uploader').after($('<div class="alert alert-error"><?php echo osc_esc_js(sprintf(
-                            __('Too many items were uploaded. Item limit is %d.'),
-                            $maxImages
-                        )); ?></div>'));
+                        $('#restricted-fine-uploader .qq-uploader').after($('<div class="alert alert-error"><?php
+                            echo osc_esc_js(sprintf(
+                                __('Too many items were uploaded. Item limit is %d.'),
+                                $maxImages
+                            )); ?></div>'));
                     }
-                        <?php } else { ?>
+                    <?php } else { ?>
                     json.success = true;
-                        <?php } ?>
+                    <?php } ?>
                     return json;
                 }
-                    <?php } else { ?>
+                <?php } else { ?>
             });
-                    <?php } ?>
+            <?php } ?>
             })
         </script>
         <?php
