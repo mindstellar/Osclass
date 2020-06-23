@@ -660,7 +660,7 @@ class Item extends DAO
     public function countItemTypesByUserID($userId, $itemType = false, $cond = '')
     {
         $condition[] = "fk_i_user_id = $userId";
-        if($cond){
+        if ($cond) {
             $condition[] = $cond;
         }
 
@@ -756,7 +756,7 @@ class Item extends DAO
 
     /**
      * Count items by Email according the
-     * Usefull for counting item that posted by unregistered user
+     * Useful for counting item that posted by unregistered user
      *
      * @access public
      *

@@ -61,11 +61,11 @@
             <p>
                 <select name="locale" id="user_language">
                     <?php foreach ($locales as $locale) { ?>
-                        <option value="<?php echo $locale ['pk_c_code']; ?>" <?php if (osc_admin_language()
-                            == $locale['pk_c_code']
+                        <option value="<?php echo $locale ['pk_c_code']; ?>" <?php
+                        if (osc_admin_language() === $locale['pk_c_code']
                         ) {
                             echo 'selected="selected"';
-                                       } ?>><?php echo $locale['s_name']; ?></option>
+                        } ?>><?php echo $locale['s_name']; ?></option>
                     <?php } ?>
                 </select>
             </p>
@@ -86,8 +86,10 @@
     </form>
 
 </div>
-<p id="backtoblog"><a href="<?php echo osc_base_url(); ?>" title="<?php echo osc_esc_html(sprintf(__('Back to %s'),
-        osc_page_title())); ?>">&larr; <?php printf(__('Back to %s'), osc_page_title()); ?></a></p>
+<p id="backtoblog"><a href="<?php echo osc_base_url(); ?>" title="<?php echo osc_esc_html(sprintf(
+    __('Back to %s'),
+    osc_page_title()
+)); ?>">&larr; <?php printf(__('Back to %s'), osc_page_title()); ?></a></p>
 <script type="text/javascript">
     $(document).ready(function () {
         function placeholder(input_form) {

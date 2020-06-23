@@ -807,7 +807,6 @@ class CAdminItems extends AdminSecBaseModel
                 $this->redirectTo(osc_admin_base_url(true) . '?page=items&action=settings');
                 break;
             case ('items_reported'):
-                require_once osc_lib_path() . 'osclass/classes/datatables/ItemsDataTable.php';
 
                 // set default iDisplayLength
                 if (Params::getParam('iDisplayLength') != '') {
@@ -865,7 +864,6 @@ class CAdminItems extends AdminSecBaseModel
                 $this->doView('items/reported.php');
                 break;
             default:
-                require_once osc_lib_path() . 'osclass/classes/datatables/ItemsDataTable.php';
 
                 // set default iDisplayLength
                 if (Params::getParam('iDisplayLength') != '') {

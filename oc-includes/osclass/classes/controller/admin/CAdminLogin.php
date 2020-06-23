@@ -47,7 +47,7 @@ class CAdminLogin extends AdminBaseModel
                 if (preg_match('|[?&]page=([^&]+)|', $url_redirect . '&', $match)) {
                     $page_redirect = $match[1];
                 }
-                if ($page_redirect == '' || $page_redirect == 'login' || $url_redirect == '') {
+                if ($page_redirect == '' || $page_redirect === 'login' || $url_redirect == '') {
                     $url_redirect = osc_admin_base_url();
                 }
 
@@ -95,8 +95,6 @@ class CAdminLogin extends AdminBaseModel
                 }
 
                 if (Params::getParam('remember')) {
-                    // this include contains de osc_genRandomPassword function
-                    require_once osc_lib_path() . 'osclass/helpers/hSecurity.php';
                     $secret = osc_genRandomPassword();
 
                     Admin::newInstance()->update(
