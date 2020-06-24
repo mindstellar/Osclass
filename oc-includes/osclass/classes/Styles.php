@@ -63,8 +63,24 @@ class Styles
     public function printStyles()
     {
         foreach ($this->styles as $css) {
-            echo '<link href="' . osc_apply_filter('style_url', $css) . '" rel="stylesheet" type="text/css" />'
+            echo '<link href="' . Plugins::applyFilter('style_url', $css) . '" rel="stylesheet" type="text/css" />'
                 . PHP_EOL;
+        }
+    }
+
+    /**
+     * Initialize Scripts class
+     */
+    public static function init()
+    {
+        $print_styles = static function () {
+            self::newInstance()->printStyles();
+        };
+
+        if (OC_ADMIN) {
+            Plugins::addHook('admin_header', $print_styles, 9);
+        } else {
+            Plugins::addHook('header', $print_styles, 9);
         }
     }
 }
