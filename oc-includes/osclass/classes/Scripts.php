@@ -71,12 +71,12 @@ class Scripts extends Dependencies
         };
 
         if (OC_ADMIN) {
-            if (Preference::newInstance()->get('enqueue_scripts_in_footer')) {
+            if (!Preference::newInstance()->get('enqueue_scripts_in_footer')) {
                 Plugins::addHook('admin_header', $print_header_scripts, 10);
             }
             Plugins::addHook('admin_footer', $print_footer_scripts, 10);
         } else {
-            if (Preference::newInstance()->get('enqueue_scripts_in_footer')) {
+            if (!Preference::newInstance()->get('enqueue_scripts_in_footer')) {
                 Plugins::addHook('header', $print_header_scripts, 10);
             }
             Plugins::addHook('footer', $print_footer_scripts, 10);
