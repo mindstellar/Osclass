@@ -41,7 +41,7 @@ class CAdminStats extends AdminSecBaseModel
         switch ($this->action) {
             case ('reports'):        // manage stats view
                 $reports = array();
-                if (Params::getParam('type_stat') == 'week') {
+                if (Params::getParam('type_stat') === 'week') {
                     $stats_reports = Stats::newInstance()->new_reports_count(date(
                         'Y-m-d',
                         mktime(0, 0, 0, date('m'), date('d') - 70, date('Y'))
@@ -60,7 +60,7 @@ class CAdminStats extends AdminSecBaseModel
                         $reports[date('W', mktime(0, 0, 0, date('m'), date('d'), date('Y'))) - $k]['expired']        =
                             0;
                     }
-                } elseif (Params::getParam('type_stat') == 'month') {
+                } elseif (Params::getParam('type_stat') === 'month') {
                     $stats_reports = Stats::newInstance()->new_reports_count(date(
                         'Y-m-d',
                         mktime(0, 0, 0, date('m') - 10, date('d'), date('Y'))
@@ -131,7 +131,7 @@ class CAdminStats extends AdminSecBaseModel
                 break;
             case ('comments'):       // manage stats view
                 $comments = array();
-                if (Params::getParam('type_stat') == 'week') {
+                if (Params::getParam('type_stat') === 'week') {
                     $stats_comments = Stats::newInstance()->new_comments_count(date(
                         'Y-m-d H:i:s',
                         mktime(0, 0, 0, date('m'), date('d') - 70, date('Y'))
@@ -139,7 +139,7 @@ class CAdminStats extends AdminSecBaseModel
                     for ($k = 10; $k >= 0; $k--) {
                         $comments[date('W', mktime(0, 0, 0, date('m'), date('d'), date('Y'))) - $k] = 0;
                     }
-                } elseif (Params::getParam('type_stat') == 'month') {
+                } elseif (Params::getParam('type_stat') === 'month') {
                     $stats_comments = Stats::newInstance()->new_comments_count(date(
                         'Y-m-d H:i:s',
                         mktime(0, 0, 0, date('m') - 10, date('d'), date('Y'))
@@ -172,7 +172,7 @@ class CAdminStats extends AdminSecBaseModel
             case ('items'):          // manage stats view
                 $items   = array();
                 $reports = array();
-                if (Params::getParam('type_stat') == 'week') {
+                if (Params::getParam('type_stat') === 'week') {
                     $stats_items   = Stats::newInstance()->new_items_count(date(
                         'Y-m-d H:i:s',
                         mktime(0, 0, 0, date('m'), date('d') - 70, date('Y'))
@@ -185,7 +185,7 @@ class CAdminStats extends AdminSecBaseModel
                         $reports[date('W', mktime(0, 0, 0, date('m'), date('d'), date('Y'))) - $k]['views'] = 0;
                         $items[date('W', mktime(0, 0, 0, date('m'), date('d'), date('Y'))) - $k]            = 0;
                     }
-                } elseif (Params::getParam('type_stat') == 'month') {
+                } elseif (Params::getParam('type_stat') === 'month') {
                     $stats_items   = Stats::newInstance()->new_items_count(date(
                         'Y-m-d H:i:s',
                         mktime(0, 0, 0, date('m') - 10, date('d'), date('Y'))
@@ -230,7 +230,7 @@ class CAdminStats extends AdminSecBaseModel
 
                 $alerts      = array();
                 $subscribers = array();
-                if (Params::getParam('type_stat') == 'week') {
+                if (Params::getParam('type_stat') === 'week') {
                     $stats_alerts      = Stats::newInstance()->new_alerts_count(date(
                         'Y-m-d H:i:s',
                         mktime(0, 0, 0, date('m'), date('d') - 70, date('Y'))
@@ -243,7 +243,7 @@ class CAdminStats extends AdminSecBaseModel
                         $subscribers[date('W', mktime(0, 0, 0, date('m'), date('d'), date('Y'))) - $k] = 0;
                         $alerts[date('W', mktime(0, 0, 0, date('m'), date('d'), date('Y'))) - $k]      = 0;
                     }
-                } elseif (Params::getParam('type_stat') == 'month') {
+                } elseif (Params::getParam('type_stat') === 'month') {
                     $stats_alerts      = Stats::newInstance()->new_alerts_count(date(
                         'Y-m-d H:i:s',
                         mktime(0, 0, 0, date('m') - 10, date('d'), date('Y'))
@@ -302,7 +302,7 @@ class CAdminStats extends AdminSecBaseModel
                 break;
             case ('users'):          // manage stats view
                 $users = array();
-                if (Params::getParam('type_stat') == 'week') {
+                if (Params::getParam('type_stat') === 'week') {
                     $stats_users = Stats::newInstance()->new_users_count(date(
                         'Y-m-d H:i:s',
                         mktime(0, 0, 0, date('m'), date('d') - 70, date('Y'))
@@ -310,7 +310,7 @@ class CAdminStats extends AdminSecBaseModel
                     for ($k = 10; $k >= 0; $k--) {
                         $users[date('W', mktime(0, 0, 0, date('m'), date('d'), date('Y'))) - $k] = 0;
                     }
-                } elseif (Params::getParam('type_stat') == 'month') {
+                } elseif (Params::getParam('type_stat') === 'month') {
                     $stats_users = Stats::newInstance()->new_users_count(date(
                         'Y-m-d H:i:s',
                         mktime(0, 0, 0, date('m') - 10, date('d'), date('Y'))
