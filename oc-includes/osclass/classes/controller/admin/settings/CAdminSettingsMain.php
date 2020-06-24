@@ -132,6 +132,7 @@ class CAdminSettingsMain extends AdminSecBaseModel
                 $iUpdated += osc_set_preference('contact_attachment', $contactAttachment);
                 $iUpdated += osc_set_preference('auto_cron', $bAutoCron);
                 $iUpdated += osc_set_preference('selectable_parent_categories', $selectableParent);
+                $iUpdated += osc_set_preference('ga_tracking_id', Params::getParam('ga_tracking_id'));
 
                 if ($iUpdated > 0) {
                     if ($error) {

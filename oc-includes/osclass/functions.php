@@ -809,10 +809,10 @@ function osc_admin_toolbar_update_languages($force = false)
     }
 }
 
-function osc_gAnalytics_footer()
+function osc_ga_analytics_footer()
 {
-    $id = osc_ganalytics_id();
-    if ($id != '') {
+    $id = osc_google_analytics_id();
+    if ($id) {
         ?>
         <script async src="https://www.googletagmanager.com/gtag/js?id=<?php echo osc_esc_html($id); ?>"></script>
         <script>
@@ -824,7 +824,10 @@ function osc_gAnalytics_footer()
         <?php
     }
 }
-osc_add_hook('footer', 'osc_gAnalytics_footer');
+
+if (osc_google_analytics_id()) {
+    osc_add_hook('footer', 'osc_ga_analytics_footer');
+}
 
 function osc_show_maintenance()
 {

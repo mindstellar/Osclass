@@ -333,7 +333,8 @@ osc_current_admin_theme_path('parts/header.php'); ?>
                                 </div>
                             </div>
                             <div class="help-box" style="clear:both; float:none;">
-                                <a href="http://php.net/date" target="_blank"><?php _e('Documentation on date and time formatting'); ?></a>
+                                <a href="http://php.net/date"
+                                   target="_blank"><?php _e('Documentation on date and time formatting'); ?></a>
                             </div>
                         </div>
                     </div>
@@ -397,8 +398,8 @@ osc_current_admin_theme_path('parts/header.php'); ?>
                                     <input type="checkbox" <?php echo(osc_auto_cron() ? 'checked="checked"' : ''); ?>
                                            name="auto_cron"/>
                                     <?php printf(
-                                        __('Allow Osclass to run a built-in <a href="%s" target="_blank">cron</a> 
-automatically without setting crontab'),
+                                        __('Allow Osclass to run a built-in <a href="%s" target="_blank">cron</a>'.' '
+                                            .'automatically without setting crontab'),
                                         'http://en.wikipedia.org/wiki/Cron'
                                     ); ?>
                                 </label>
@@ -408,6 +409,19 @@ automatically without setting crontab'),
                             </span>
                         </div>
                     </div>
+                    <h2 class="render-title"><?php _e('Google Analytics'); ?></h2>
+                    <div class="form-row">
+                        <div class="form-label"><?php _e('Google Tracking ID'); ?></div>
+                        <div class="form-controls">
+                            <input type="text" class="xlarge" name="ga_tracking_id"
+                                   value="<?php echo osc_esc_html(osc_google_analytics_id()); ?>"/>
+                            <div class="help-box">
+                                <?php _e('Add your google analytics tracking id. Example: UA-12345678-0'); ?>
+                            </div>
+                        </div>
+                    </div>
+
+
                     <?php
                     /**
                      * <h2 class="render-title separate-top"><?php _e('Software updates'); ?></h2>

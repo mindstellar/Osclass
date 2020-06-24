@@ -426,9 +426,9 @@ function osc_get_subdomain_params()
  *
  * @return string
  */
-function osc_ganalytics_id()
+function osc_google_analytics_id()
 {
-    return osc_get_preference('ganalytics_id');
+    return osc_get_preference('ga_tracking_id');
 }
 
 /**
