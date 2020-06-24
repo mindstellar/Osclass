@@ -64,7 +64,16 @@ class WebThemes extends Themes
     {
         parent::__construct();
         $this->path = osc_themes_path();
+    }
+    public static function init()
+    {
+        Plugins::runHook('before_init_web_theme');
+        self::newInstance()->loadActive();
+        Plugins::runHook('after_init_web_theme');
+    }
 
+    private function loadActive()
+    {
         if (Params::getParam('theme') != '' && Session::newInstance()->_get('adminId') != '') {
             $this->setCurrentTheme(Params::getParam('theme'));
         } else {
@@ -85,7 +94,6 @@ class WebThemes extends Themes
             }
         }
     }
-
     /**
      *
      * @param  $theme
