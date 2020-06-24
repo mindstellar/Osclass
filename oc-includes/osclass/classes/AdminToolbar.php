@@ -99,7 +99,7 @@ class AdminToolbar
      */
     public function add_submenu($array)
     {
-        if (isset($array['parentid']) && isset($array['id'])) {
+        if (isset($array['parentid'], $array['id'])) {
             $this->nodes[$array['parentid']]->submenu[$array['id']] = (object)$array;
         }
     }
@@ -122,7 +122,7 @@ class AdminToolbar
      */
     public function remove_submenu($parentid, $id)
     {
-        if (isset($this->nodes[$parentid]) && isset($this->nodes[$parentid]->submenu[$id])) {
+        if (isset($this->nodes[$parentid], $this->nodes[$parentid]->submenu[$id])) {
             unset($this->nodes[$parentid]->submenu[$id]);
         }
     }
