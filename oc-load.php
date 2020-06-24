@@ -113,44 +113,13 @@ define('__OSC_LOADED__', true);
 Params::init();
 Session::newInstance()->session_start();
 
-if (osc_timezone() != '') {
+if (osc_timezone()) {
     date_default_timezone_set(osc_timezone());
 }
 
-function osc_show_maintenance()
-{
-    if (defined('__OSC_MAINTENANCE__')) { ?>
-        <div id="maintenance" name="maintenance">
-            <?php _e('The website is currently undergoing maintenance'); ?>
-        </div>
-        <style>
-            #maintenance {
-                position: static;
-                top: 0px;
-                right: 0px;
-                background-color: #bc0202;
-                width: 100%;
-                height: 20px;
-                text-align: center;
-                padding: 5px 0;
-                font-size: 14px;
-                color: #fefefe;
-            }
-        </style>
-    <?php }
-}
 
-
-function osc_meta_generator()
-{
-    echo '<meta name="generator" content="Osclass ' . OSCLASS_VERSION . '" />';
-}
-
-
-osc_add_hook('header', 'osc_show_maintenance');
-osc_add_hook('header', 'osc_meta_generator');
-osc_add_hook('header', 'osc_load_styles', 9);
-osc_add_hook('header', 'osc_load_scripts', 10);
+Scripts::init();
+Styles::init();
 
 // register scripts
 osc_register_script('jquery', osc_assets_url('js/jquery/jquery.min.js'));
@@ -174,10 +143,6 @@ osc_register_script('colorpicker', osc_assets_url('osclass-legacy/js/colorpicker
 osc_register_script('php-date', osc_assets_url('osclass-legacy/js/date.js'));
 osc_register_script('jquery-fineuploader', osc_assets_url('osclass-legacy/js/fineuploader/jquery.fineuploader.min.js'), 'jquery');
 
-Plugins::init();
-Translation::init();
-osc_csrfguard_start();
-
 if (OC_ADMIN) {
     // init admin menu
     AdminMenu::newInstance()->init();
@@ -185,6 +150,12 @@ if (OC_ADMIN) {
     if (file_exists($functions_path)) {
         require_once $functions_path;
     }
-} else {
+}
+Plugins::init();
+WebThemes::init();
+Translation::init();
+osc_csrfguard_start();
+
+if (!OC_ADMIN) {
     Rewrite::newInstance()->init();
 }

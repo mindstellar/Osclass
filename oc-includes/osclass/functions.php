@@ -809,7 +809,7 @@ function osc_admin_toolbar_update_languages($force = false)
     }
 }
 
-function osc_ganalytics_footer()
+function osc_gAnalytics_footer()
 {
     $id = osc_ganalytics_id();
     if ($id != '') {
@@ -824,4 +824,34 @@ function osc_ganalytics_footer()
         <?php
     }
 }
-osc_add_hook('footer', 'osc_ganalytics_footer');
+osc_add_hook('footer', 'osc_gAnalytics_footer');
+
+function osc_show_maintenance()
+{
+    if (defined('__OSC_MAINTENANCE__')) { ?>
+        <div id="maintenance" name="maintenance">
+            <?php _e('The website is currently undergoing maintenance'); ?>
+        </div>
+        <style>
+            #maintenance {
+                position: static;
+                top: 0px;
+                right: 0px;
+                background-color: #bc0202;
+                width: 100%;
+                height: 20px;
+                text-align: center;
+                padding: 5px 0;
+                font-size: 14px;
+                color: #fefefe;
+            }
+        </style>
+    <?php }
+}
+osc_add_hook('header', 'osc_show_maintenance');
+
+function osc_meta_generator()
+{
+    echo '<meta name="generator" content="Osclass ' . OSCLASS_VERSION . '" />';
+}
+osc_add_hook('header', 'osc_meta_generator');
