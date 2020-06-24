@@ -1,5 +1,7 @@
 <?php
 
+use mindstellar\osclass\classes\utility\Deprecate;
+
 /**
  * Scripts enqueue class.
  *
@@ -9,6 +11,37 @@ class Scripts extends Dependencies
 {
 
     private static $instance;
+    /**
+     * Keep an array of loaded scripts
+     *
+     * @var array
+     */
+    private $scriptsLoaded;
+
+    public function __construct()
+    {
+        parent::__construct();
+        $this->scriptsLoaded = array();
+    }
+
+    /**
+     * Enqueue Script Code to footer_scripts_loaded hook
+     *
+     * @param string $code         javascript code string with script tag
+     * @param array  $dependencies ids array of registered js libraries (not script code) this code depends on
+     */
+    public static function enqueueScriptCode($code, $dependencies = null)
+    {
+        $print_code = static function () use ($code) {
+            echo $code;
+        };
+        Plugins::addHook('footer_scripts_loaded', $print_code, 10);
+        if ($dependencies !== null && is_array($dependencies)) {
+            foreach ($dependencies as $script) {
+                self::newInstance()->enqueueScript($script);
+            }
+        }
+    }
 
     /**
      * @return \Scripts
@@ -20,6 +53,63 @@ class Scripts extends Dependencies
         }
 
         return self::$instance;
+    }
+
+    /**
+     * Initialize Scripts
+     */
+    public static function init()
+    {
+        $print_header_scripts = static function () {
+            self::newInstance()->printScripts();
+            Plugins::runHook('scripts_loaded');
+        };
+
+        $print_footer_scripts = static function () {
+            self::newInstance()->printScripts();
+            Plugins::runHook('footer_scripts_loaded');
+        };
+
+        if (OC_ADMIN) {
+            if (Preference::newInstance()->get('enqueue_scripts_in_footer')) {
+                Plugins::addHook('admin_header', $print_header_scripts, 10);
+            }
+            Plugins::addHook('admin_footer', $print_footer_scripts, 10);
+        } else {
+            if (Preference::newInstance()->get('enqueue_scripts_in_footer')) {
+                Plugins::addHook('header', $print_header_scripts, 10);
+            }
+            Plugins::addHook('footer', $print_footer_scripts, 10);
+        }
+    }
+
+    /**
+     *  Print the HTML tags to load the scripts
+     */
+    public function printScripts()
+    {
+        foreach ($this->getScripts() as $script) {
+            if ($script && !in_array($script, $this->scriptsLoaded, false)) {
+                echo '<script src="' . Plugins::applyFilter('theme_url', $script) . '"></script>' . PHP_EOL;
+                $this->scriptsLoaded[] = $script;
+            }
+        }
+    }
+
+    /**
+     *  Get the scripts urls
+     */
+    public function getScripts()
+    {
+        $scripts = array();
+        $this->order();
+        foreach ($this->resolved as $id) {
+            if (isset($this->registered[$id]['url'])) {
+                $scripts[] = $this->registered[$id]['url'];
+            }
+        }
+
+        return $scripts;
     }
 
     /**
@@ -51,6 +141,17 @@ class Scripts extends Dependencies
      */
     public function enqueuScript($id)
     {
+        Deprecate::deprecatedFunction(__METHOD__, '4.0.0', 'Scripts::enqueueScript()');
+        $this->enqueueScript($id);
+    }
+
+    /**
+     * Enqueue script to be loaded
+     *
+     * @param $id
+     */
+    public function enqueueScript($id)
+    {
         $this->queue[$id] = $id;
     }
 
@@ -62,34 +163,5 @@ class Scripts extends Dependencies
     public function removeScript($id)
     {
         unset($this->queue[$id]);
-    }
-
-    /**
-     *  Print the HTML tags to load the scripts
-     */
-    public function printScripts()
-    {
-        foreach ($this->getScripts() as $script) {
-            if ($script !== '') {
-                echo '<script type="text/javascript" src="' . osc_apply_filter('theme_url', $script) . '"></script>'
-                    . PHP_EOL;
-            }
-        }
-    }
-
-    /**
-     *  Get the scripts urls
-     */
-    public function getScripts()
-    {
-        $scripts = array();
-        parent::order();
-        foreach ($this->resolved as $id) {
-            if (isset($this->registered[$id]['url'])) {
-                $scripts[] = $this->registered[$id]['url'];
-            }
-        }
-
-        return $scripts;
     }
 }
