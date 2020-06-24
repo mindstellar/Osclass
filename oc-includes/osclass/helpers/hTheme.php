@@ -104,7 +104,7 @@ function osc_resend_flash_messages($section = 'pubMessages')
  */
 function osc_enqueue_script($id)
 {
-    Scripts::newInstance()->enqueuScript($id);
+    Scripts::newInstance()->enqueueScript($id);
 }
 
 
