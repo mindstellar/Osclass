@@ -106,7 +106,7 @@ function admin_theme_js()
 }
 
 
-osc_add_hook('admin_header', 'admin_theme_js', 9);
+//osc_add_hook('admin_header', 'admin_theme_js', 9);
 
 // css
 function admin_theme_css()
@@ -115,7 +115,7 @@ function admin_theme_css()
 }
 
 
-osc_add_hook('admin_header', 'admin_theme_css', 9);
+//osc_add_hook('admin_header', 'admin_theme_css', 9);
 
 /**
  * @param null $locales
