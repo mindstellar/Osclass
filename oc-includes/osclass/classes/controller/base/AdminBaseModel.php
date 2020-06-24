@@ -26,10 +26,6 @@ class AdminBaseModel extends BaseModel
     public function __construct()
     {
         parent::__construct();
-        /**
-         * @deprecated use init_admin_insecure instead.
-         */
-        Deprecate::deprecatedRunHook('init_admin', '4.0.0', 'init_admin_insecure');
 
         osc_run_hook('init_admin_insecure');
     }
