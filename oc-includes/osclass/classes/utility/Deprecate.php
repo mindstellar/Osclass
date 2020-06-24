@@ -38,8 +38,11 @@ class Deprecate
         Plugins::runHook('d_function_run', $function, $replacement, $version);
 
         if (OSC_DEBUG) {
+            $debug_backtrace = debug_backtrace();
+            $caller          = next($debug_backtrace);
             if ($replacement !== null) {
                 self::triggerError(
+                    $caller,
                     sprintf(
                         '%1$s is <strong>deprecated</strong> since version %2$s! Use %3$s instead.',
                         $function,
@@ -50,6 +53,7 @@ class Deprecate
                 );
             } else {
                 self::triggerError(
+                    $caller,
                     sprintf(
                         '%1$s is <strong>deprecated</strong> since version %2$s with no alternative available.',
                         $function,
@@ -59,6 +63,27 @@ class Deprecate
                 );
             }
         }
+    }
+
+    /**
+     * Private error_trigger
+     *
+     * @param array  $caller
+     * @param string $message
+     * @param int    $level [optional] <p>
+     *                      The designated error type for this error. It only works with the E_USER
+     *                      family of constants, and will default to <b>E_USER_NOTICE</b>.
+     *
+     * @return void
+     */
+    private static function triggerError($caller, $message = null, $level = E_USER_DEPRECATED)
+    {
+        if ($message === null) {
+            throw(new \InvalidArgumentException("Invalid error message."));
+        }
+        $message .= '</strong> in <strong>' . $caller['file'] . '</strong> on line <strong>' . $caller['line']
+            . '</strong>' . "\n<br /> error handled";
+        trigger_error($message, $level);
     }
 
     /**
@@ -107,10 +132,13 @@ class Deprecate
         Plugins::runHook('d_hook_run', $hook, $replacement, $version, $message);
 
         if (OSC_DEBUG) {
-            $message = empty($message) ? '' : ' ' . $message;
+            $message         = empty($message) ? '' : ' ' . $message;
+            $debug_backtrace = debug_backtrace();
 
+            $caller = next($debug_backtrace);
             if ($replacement !== null) {
                 self::triggerError(
+                    $caller,
                     sprintf(
                         '%1$s is <strong>deprecated</strong> since version %2$s! Use %3$s instead.',
                         $hook,
@@ -121,6 +149,7 @@ class Deprecate
                 );
             } else {
                 self::triggerError(
+                    $caller,
                     sprintf(
                         '%1$s is <strong>deprecated</strong> since version %2$s with no alternative available.',
                         $hook,
@@ -182,8 +211,12 @@ class Deprecate
         if (OSC_DEBUG) {
             $message = empty($message) ? '' : ' ' . $message;
 
+            $debug_backtrace = debug_backtrace();
+
+            $caller = next($debug_backtrace);
             if ($replacement !== null) {
                 self::triggerError(
+                    $caller,
                     sprintf(
                         '%1$s is <strong>deprecated</strong> since version %2$s! Use %3$s instead.',
                         $file,
@@ -194,6 +227,7 @@ class Deprecate
                 );
             } else {
                 self::triggerError(
+                    $caller,
                     sprintf(
                         '%1$s is <strong>deprecated</strong> since version %2$s with no alternative available.',
                         $file,
@@ -203,26 +237,5 @@ class Deprecate
                 );
             }
         }
-    }
-
-    /**
-     * Private error_trigger
-     * @param string $message
-     * @param int $level [optional] <p>
-     * The designated error type for this error. It only works with the E_USER
-     * family of constants, and will default to <b>E_USER_NOTICE</b>.
-     * @return void
-     */
-    private static function triggerError($message = null, $level = E_USER_DEPRECATED)
-    {
-        if ($message === null) {
-            throw(new \InvalidArgumentException("Invalid error message."));
-        }
-        $debug_backtrace = debug_backtrace();
-        next($debug_backtrace);
-        $caller = next($debug_backtrace);
-        $message .= '</strong> in <strong>' . $caller['file'] . '</strong> on line <strong>' . $caller['line']
-            . '</strong>' . "\n<br /> error handled";
-        trigger_error($message, $level);
     }
 }
