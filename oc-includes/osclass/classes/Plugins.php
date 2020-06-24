@@ -468,7 +468,7 @@ class Plugins
      * @param $hook
      *
      * @return bool
-     * @since 3.9.0 -develop
+     * @since 4.0.0
      */
     public static function hadRun($hook)
     {
