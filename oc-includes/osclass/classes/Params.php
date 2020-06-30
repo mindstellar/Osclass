@@ -34,12 +34,66 @@ class Params
             return '';
         }
 
-        $value = self::purify(self::$request[$param], $html_encode, $xss_check, $quotes_encode);
+        return self::purify(self::$request[$param], $html_encode, $xss_check, $quotes_encode);
+    }
+    /**
+     * filterParam
+     * Faster way to get sanitized param from $_GET and $_POST
+     * Validate before using these values, this will only sanitize the requested param
+     * @param string $param  name of param
+     * @param string $type   What type is the variable (string, email, int, float, encoded, url, email)
+     * @param array  $option Options for filter_var
+     *
+     * @return mixed will return false on failure
+     */
+    public static function filterParam($param, $type = 'string', $options = array())
+    {
+        if (isset(self::$request[$param])) {
+            return false;
+        }
 
-
-        return $value;
+        return filter_var(self::$request[$param], self::getFilter($type), $options);
     }
 
+    /**
+     * Private function to get filter type
+     * @param $type
+     *
+     * @return int
+     */
+    private static function getFilter($type)
+    {
+        switch (strtolower($type)) {
+            case 'string':
+                $filter = FILTER_SANITIZE_STRING;
+                break;
+
+            case 'int':
+                $filter = FILTER_SANITIZE_NUMBER_INT;
+                break;
+
+            case 'float':
+                $filter = FILTER_SANITIZE_NUMBER_FLOAT;
+                break;
+
+            case 'encoded':
+                $filter = FILTER_SANITIZE_ENCODED;
+                break;
+
+            case 'url':
+                $filter = FILTER_SANITIZE_URL;
+                break;
+
+            case 'email':
+                $filter = FILTER_SANITIZE_EMAIL;
+                break;
+
+            default:
+                $filter = FILTER_SANITIZE_STRING;
+        }
+
+        return $filter;
+    }
     /**
      * Function to purify given string or array
      * Should be moved to separate class
