@@ -16,6 +16,8 @@
  * limitations under the License.
  */
 
+use mindstellar\osclass\classes\utility\Utils;
+
 /**
  * Class BaseModel
  */
@@ -37,7 +39,7 @@ abstract class BaseModel
         if (parse_url(osc_base_url(), PHP_URL_HOST) !== $current_host) {
             // first check if it's http or https
             $url = 'http://';
-            if (osc_is_ssl()) {
+            if (Utils::isSsl()) {
                 $url = 'https://';
             }
             // append the domain
@@ -66,7 +68,7 @@ abstract class BaseModel
      */
     public function redirectTo($url, $code = null)
     {
-        osc_redirect_to($url, $code);
+        Utils::redirectTo($url, $code);
     }
 
     /**
