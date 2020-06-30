@@ -661,7 +661,7 @@ class CWebItem extends BaseModel
                 }
 
                 if (Params::getParam('lang') != '') {
-                    Session::newInstance()->_set('userLocale', Params::getParam('lang'));
+                    Session::newInstance()->_set('userLocale', Params::filterParam('lang'));
                 }
 
                 $item = osc_apply_filter(

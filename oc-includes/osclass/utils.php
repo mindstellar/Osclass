@@ -16,6 +16,8 @@
 * limitations under the License.
 */
 
+use mindstellar\osclass\classes\utility\Deprecate;
+use mindstellar\osclass\classes\utility\Utils;
 use ReCaptcha\ReCaptcha;
 
 /**
@@ -1960,31 +1962,8 @@ function osc_update_cat_stats()
  */
 function osc_update_cat_stats_id($id)
 {
-    // get sub categorias
-    $aCategories   = Category::newInstance()->findSubcategories($id);
-    $categoryTotal = 0;
-    $category      = Category::newInstance()->findByPrimaryKey($id);
-
-    if (count($aCategories) > 0) {
-        // sumar items de la categoría
-        foreach ($aCategories as $subcategory) {
-            $total         = Item::newInstance()->numItems($subcategory);
-            $categoryTotal += $total;
-        }
-        $categoryTotal += Item::newInstance()->numItems($category);
-    } else {
-        $total         = Item::newInstance()->numItems($category);
-        $categoryTotal += $total;
-    }
-
-    $sql = 'REPLACE INTO ' . DB_TABLE_PREFIX . 't_category_stats (fk_i_category_id, i_num_items) VALUES ';
-    $sql .= ' (' . $id . ', ' . $categoryTotal . ')';
-
-    CategoryStats::newInstance()->dao->query($sql);
-
-    if ($category['fk_i_parent_id'] != 0) {
-        osc_update_cat_stats_id($category['fk_i_parent_id']);
-    }
+    Deprecate::deprecatedFunction(__FUNCTION__, '4.0.0', 'Utils::updateCategoryStatsById()');
+    Utils::updateCategoryStatsById($id);
 }
 
 

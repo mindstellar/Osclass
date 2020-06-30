@@ -71,7 +71,7 @@ class CWebPage extends BaseModel
         // export $page content to View
         $this->_exportVariableToView('page', $page);
         if (Params::getParam('lang') != '') {
-            Session::newInstance()->_set('userLocale', Params::getParam('lang'));
+            Session::newInstance()->_set('userLocale', Params::filterParam('lang'));
         }
 
         $meta = json_decode($page['s_meta'], true);

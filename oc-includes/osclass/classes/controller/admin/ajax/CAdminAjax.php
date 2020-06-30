@@ -1,4 +1,5 @@
 <?php use mindstellar\osclass\classes\utility\Upgrade;
+use mindstellar\osclass\classes\utility\Utils;
 
 if (!defined('ABS_PATH')) {
     exit('ABS_PATH is not loaded. Direct access is not allowed.');
@@ -132,7 +133,7 @@ class CAdminAjax extends AdminSecBaseModel
 
                 // update category stats
                 foreach ($aRecountCat as $rId) {
-                    osc_update_cat_stats_id($rId);
+                    Utils::updateCategoryStatsById($rId);
                 }
 
                 if ($error) {
