@@ -48,7 +48,13 @@ class Params
      */
     public static function filterParam($param, $type = 'string', $options = array())
     {
-        if (isset(self::$request[$param])) {
+        if (!isset($param)) {
+            return false;
+        }
+        if ($param === '') {
+            return false;
+        }
+        if (!isset(self::$request[$param])) {
             return false;
         }
 
