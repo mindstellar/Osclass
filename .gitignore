@@ -21,8 +21,6 @@ oc-content/uploads/*
 
 # themes
 oc-content/themes/*
-!oc-content/themes/modern/
-!oc-content/themes/bender
 
 # plugins
 oc-content/plugins/*
@@ -57,4 +55,4 @@ osclass_latest.zip
 robots.txt
 /scratch.php
 /error.log
-
+/oc-includes/vendor/*
