@@ -1,9 +1,6 @@
-<?php use mindstellar\osclass\classes\utility\Upgrade;
+<?php
+use mindstellar\osclass\classes\utility\Upgrade;
 use mindstellar\osclass\classes\utility\Utils;
-
-if (!defined('ABS_PATH')) {
-    exit('ABS_PATH is not loaded. Direct access is not allowed.');
-}
 
 /*
  * Copyright 2014 Osclass

@@ -87,7 +87,7 @@ if (osc_is_web_user_logged_in()) {
 switch (Params::getParam('page')) {
     case ('cron'):      // cron system
         define('__FROM_CRON__', true);
-        require_once(osc_lib_path() . 'osclass/cron.php');
+        require_once(LIB_PATH . 'osclass/cron.php');
         break;
     case ('user'):      // user pages (with security)
         $osclass_action = Params::getParam('action');

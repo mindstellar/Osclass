@@ -16,6 +16,8 @@
  * limitations under the License.
  */
 
+use mindstellar\osclass\classes\utility\Validate;
+
 /**
  * Class CWebPage
  */
@@ -70,8 +72,8 @@ class CWebPage extends BaseModel
 
         // export $page content to View
         $this->_exportVariableToView('page', $page);
-        if (Params::getParam('lang') != '') {
-            Session::newInstance()->_set('userLocale', Params::filterParam('lang'));
+        if (Params::getParam('lang') && (new Validate())->localeCode(Params::getParam('lang'))) {
+            Session::newInstance()->_set('userLocale', Params::getParam('lang'));
         }
 
         $meta = json_decode($page['s_meta'], true);

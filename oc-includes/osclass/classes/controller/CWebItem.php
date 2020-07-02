@@ -16,6 +16,8 @@
  * limitations under the License.
  */
 
+use mindstellar\osclass\classes\utility\Validate;
+
 /**
  * Class CWebItem
  */
@@ -660,8 +662,8 @@ class CWebItem extends BaseModel
                     return;
                 }
 
-                if (Params::getParam('lang') != '') {
-                    Session::newInstance()->_set('userLocale', Params::filterParam('lang'));
+                if (Params::getParam('lang') && (new Validate())->localeCode(Params::getParam('lang'))) {
+                    Session::newInstance()->_set('userLocale', Params::getParam('lang'));
                 }
 
                 $item = osc_apply_filter(

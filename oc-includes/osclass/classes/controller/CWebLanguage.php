@@ -16,6 +16,8 @@
  * limitations under the License.
  */
 
+use mindstellar\osclass\classes\utility\Validate;
+
 /**
  * Class CWebLanguage
  */
@@ -30,14 +32,12 @@ class CWebLanguage extends BaseModel
     // business layer...
     public function doModel()
     {
-        $locale = Params::getParam('locale');
-
-        if (preg_match('/.{2}_.{2}/', $locale)) {
-            Session::newInstance()->_set('userLocale', $locale);
+        if (Params::getParam('locale') && (new Validate())->localeCode(Params::getParam('locale'))) {
+            Session::newInstance()->_set('userLocale', Params::getParam('locale'));
         }
 
         $redirect_url = '';
-        if (Params::getServerParam('HTTP_REFERER', false, false) != '') {
+        if (Params::getServerParam('HTTP_REFERER', false, false)) {
             $redirect_url = Params::getServerParam('HTTP_REFERER', false, false);
         } else {
             $redirect_url = osc_base_url(true);
