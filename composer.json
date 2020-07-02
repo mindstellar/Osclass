@@ -48,8 +48,7 @@
     "pensiero/php-openssl-cryptor": "0.1.0",
     "google/recaptcha": "1.1.x",
     "gettext/gettext": "4.6.x",
-    "phpseclib/mcrypt_compat": "^1.0",
-    "mindstellar/theme-bender": "^3.2.1"
+    "phpseclib/mcrypt_compat": "^1.0"
   }
   ,
   "require-dev": {
