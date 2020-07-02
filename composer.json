@@ -42,14 +42,16 @@
     "ext-mbstring": "*",
     "ext-gd": "*",
     "ezyang/htmlpurifier": "4.12.x",
-    "phpmailer/phpmailer": "5.2.x",
+    "phpmailer/phpmailer": "6.1.x",
     "pclzip/pclzip": "2.8.2",
     "phpseclib/phpseclib": "2.0.x",
     "pensiero/php-openssl-cryptor": "0.1.0",
     "google/recaptcha": "1.1.x",
     "gettext/gettext": "4.6.x",
-    "phpseclib/mcrypt_compat": "^1.0"
-  },
+    "phpseclib/mcrypt_compat": "^1.0",
+    "mindstellar/theme-bender": "^3.2.1"
+  }
+  ,
   "require-dev": {
     "roave/security-advisories": "dev-master"
   },

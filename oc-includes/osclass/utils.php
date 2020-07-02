@@ -18,6 +18,8 @@
 
 use mindstellar\osclass\classes\utility\Deprecate;
 use mindstellar\osclass\classes\utility\Utils;
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\POP3;
 use ReCaptcha\ReCaptcha;
 
 /**
@@ -381,7 +383,7 @@ function osc_sendMail($params)
     $mail->clearCustomHeaders();
     $mail->clearReplyTos();
 
-    /** @var \PHPMailer $mail */
+    /** @var \PHPMailer\PHPMailer\PHPMailer $mail */
     $mail = osc_apply_filter('init_send_mail', $mail, $params);
 
     if (osc_mailserver_pop()) {
@@ -517,14 +519,14 @@ function osc_sendMail($params)
                 if (isset($attachment['path']) && isset($attachment['name'])) {
                     try {
                         $mail->addAttachment($attachment['path'], $attachment['name']);
-                    } catch (phpmailerException $e) {
+                    } catch (\PHPMailer\PHPMailer\Exception $e) {
                         continue;
                     }
                 }
             } else {
                 try {
                     $mail->addAttachment($attachment);
-                } catch (phpmailerException $e) {
+                } catch (\PHPMailer\PHPMailer\Exception $e) {
                     continue;
                 }
             }
@@ -539,7 +541,7 @@ function osc_sendMail($params)
     // send email!
     try {
         $mail->send();
-    } catch (phpmailerException $e) {
+    } catch (\PHPMailer\PHPMailer\Exception $e) {
         return false;
     }
 
