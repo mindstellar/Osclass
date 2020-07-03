@@ -6,7 +6,6 @@ $vendorDir = dirname(dirname(__FILE__));
 $baseDir = dirname(dirname($vendorDir));
 
 return array(
-    'EasyPeasyICS' => $vendorDir . '/phpmailer/phpmailer/extras/EasyPeasyICS.php',
     'Gettext\\BaseTranslator' => $vendorDir . '/gettext/gettext/src/BaseTranslator.php',
     'Gettext\\Extractors\\Blade' => $vendorDir . '/gettext/gettext/src/Extractors/Blade.php',
     'Gettext\\Extractors\\Csv' => $vendorDir . '/gettext/gettext/src/Extractors/Csv.php',
@@ -306,10 +305,11 @@ return array(
     'OpensslCryptor\\Exception\\ProcessException' => $vendorDir . '/pensiero/php-openssl-cryptor/src/Exception/ProcessException.php',
     'OpensslCryptor\\Exception\\UnexpectedResultException' => $vendorDir . '/pensiero/php-openssl-cryptor/src/Exception/UnexpectedResultException.php',
     'OpensslCryptor\\Exception\\UnknownAlgoException' => $vendorDir . '/pensiero/php-openssl-cryptor/src/Exception/UnknownAlgoException.php',
-    'PHPMailer' => $vendorDir . '/phpmailer/phpmailer/class.phpmailer.php',
-    'PHPMailerOAuth' => $vendorDir . '/phpmailer/phpmailer/class.phpmaileroauth.php',
-    'PHPMailerOAuthGoogle' => $vendorDir . '/phpmailer/phpmailer/class.phpmaileroauthgoogle.php',
-    'POP3' => $vendorDir . '/phpmailer/phpmailer/class.pop3.php',
+    'PHPMailer\\PHPMailer\\Exception' => $vendorDir . '/phpmailer/phpmailer/src/Exception.php',
+    'PHPMailer\\PHPMailer\\OAuth' => $vendorDir . '/phpmailer/phpmailer/src/OAuth.php',
+    'PHPMailer\\PHPMailer\\PHPMailer' => $vendorDir . '/phpmailer/phpmailer/src/PHPMailer.php',
+    'PHPMailer\\PHPMailer\\POP3' => $vendorDir . '/phpmailer/phpmailer/src/POP3.php',
+    'PHPMailer\\PHPMailer\\SMTP' => $vendorDir . '/phpmailer/phpmailer/src/SMTP.php',
     'PclZip' => $vendorDir . '/pclzip/pclzip/pclzip.lib.php',
     'ReCaptcha\\ReCaptcha' => $vendorDir . '/google/recaptcha/src/ReCaptcha/ReCaptcha.php',
     'ReCaptcha\\RequestMethod' => $vendorDir . '/google/recaptcha/src/ReCaptcha/RequestMethod.php',
@@ -320,9 +320,6 @@ return array(
     'ReCaptcha\\RequestMethod\\SocketPost' => $vendorDir . '/google/recaptcha/src/ReCaptcha/RequestMethod/SocketPost.php',
     'ReCaptcha\\RequestParameters' => $vendorDir . '/google/recaptcha/src/ReCaptcha/RequestParameters.php',
     'ReCaptcha\\Response' => $vendorDir . '/google/recaptcha/src/ReCaptcha/Response.php',
-    'SMTP' => $vendorDir . '/phpmailer/phpmailer/class.smtp.php',
-    'ntlm_sasl_client_class' => $vendorDir . '/phpmailer/phpmailer/extras/ntlm_sasl_client.php',
-    'phpmailerException' => $vendorDir . '/phpmailer/phpmailer/class.phpmailer.php',
     'phpseclib\\Crypt\\AES' => $vendorDir . '/phpseclib/phpseclib/phpseclib/Crypt/AES.php',
     'phpseclib\\Crypt\\Base' => $vendorDir . '/phpseclib/phpseclib/phpseclib/Crypt/Base.php',
     'phpseclib\\Crypt\\Blowfish' => $vendorDir . '/phpseclib/phpseclib/phpseclib/Crypt/Blowfish.php',

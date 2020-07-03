@@ -1,6 +1,8 @@
 <?php
 
-	error_reporting( E_ERROR | E_CORE_ERROR | E_COMPILE_ERROR | E_PARSE );
+use PHPMailer\PHPMailer\PHPMailer;
+
+error_reporting( E_ERROR | E_CORE_ERROR | E_COMPILE_ERROR | E_PARSE );
 
 	define( 'ABS_PATH' , dirname( dirname( __DIR__ ) ) . '/' );
 	define( 'LIB_PATH' , ABS_PATH . 'oc-includes/' );
@@ -53,9 +55,10 @@
 
 	echo json_encode( $json_message );
 
-	/**
-	 * @return array
-	 */
+/**
+ * @return array
+ * @throws \Exception
+ */
 	function basic_info() {
 		require_once LIB_PATH . 'osclass/model/Admin.php';
 		require_once LIB_PATH . 'osclass/helpers/hSecurity.php';
@@ -140,7 +143,7 @@
 			}
 
 			return array ( 'email_status' => '' , 's_password' => $password );
-		} catch ( phpmailerException $exception ) {
+		} catch ( \PHPMailer\PHPMailer\Exception $exception ) {
 			return array (
 				'email_status' => Params::getParam( 'email' ) . '<br>' . $exception->errorMessage() ,
 				's_password'   => $password

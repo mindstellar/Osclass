@@ -16,7 +16,9 @@
  * limitations under the License.
  */
 
-    use ReCaptcha\ReCaptcha;
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\POP3;
+use ReCaptcha\ReCaptcha;
 
     /**
      * check if the item is expired
@@ -352,11 +354,12 @@
     }
 
 
-    /**
-     * @param $params
-     *
-     * @return bool
-     */
+/**
+ * @param $params
+ *
+ * @return bool
+ * @throws \PHPMailer\PHPMailer\Exception
+ */
     function osc_sendMail($params)
     {
         // DO NOT send mail if it's a demo
@@ -373,7 +376,7 @@
         $mail->clearCustomHeaders();
         $mail->clearReplyTos();
 
-        /** @var \PHPMailer $mail */
+        /** @var PHPMailer $mail */
         $mail = osc_apply_filter('init_send_mail', $mail, $params);
 
         if (osc_mailserver_pop()) {
@@ -509,14 +512,16 @@
                     if (isset($attachment['path']) && isset($attachment['name'])) {
                         try {
                             $mail->addAttachment($attachment['path'], $attachment['name']);
-                        } catch (phpmailerException $e) {
+                        } catch (\PHPMailer\PHPMailer\Exception $e) {
+                            trigger_error($e->getMessage() ,E_USER_WARNING);
                             continue;
                         }
                     }
                 } else {
                     try {
                         $mail->addAttachment($attachment);
-                    } catch (phpmailerException $e) {
+                    } catch (\PHPMailer\PHPMailer\Exception $e) {
+                        trigger_error($e->getMessage() ,E_USER_WARNING);
                         continue;
                     }
                 }
@@ -531,7 +536,8 @@
         // send email!
         try {
             $mail->send();
-        } catch (phpmailerException $e) {
+        } catch (\PHPMailer\PHPMailer\Exception $e) {
+            trigger_error($e->getMessage() ,E_USER_WARNING);
             return false;
         }
 
