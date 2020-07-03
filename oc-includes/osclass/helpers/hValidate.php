@@ -315,4 +315,18 @@
     }
 
 
+   /**
+    * Validate locale code
+    * @param $string
+    *
+    * @return bool
+    */
+    function osc_validate_locale_code($string){
+        if (strlen($string) === 5) {
+            return (bool) OSCLocale::newInstance()->findByCode($string);
+        }
+        return false;
+    }
+
+
 

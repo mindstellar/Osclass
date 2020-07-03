@@ -1909,13 +1909,16 @@ use ReCaptcha\ReCaptcha;
      */
     function osc_update_cat_stats_id($id)
     {
-        // get sub categorias
+        if (!is_numeric($id)) {
+            throw new \InvalidArgumentException(__('Category id is not a valid integer'));
+        }
+        // get sub categories
         $aCategories   = Category::newInstance()->findSubcategories($id);
         $categoryTotal = 0;
         $category      = Category::newInstance()->findByPrimaryKey($id);
 
         if (count($aCategories) > 0) {
-            // sumar items de la categoría
+            // sum items in category
             foreach ($aCategories as $subcategory) {
                 $total         = Item::newInstance()->numItems($subcategory);
                 $categoryTotal += $total;
@@ -1926,10 +1929,11 @@ use ReCaptcha\ReCaptcha;
             $categoryTotal += $total;
         }
 
-        $sql = 'REPLACE INTO ' . DB_TABLE_PREFIX . 't_category_stats (fk_i_category_id, i_num_items) VALUES ';
-        $sql .= ' (' . $id . ', ' . $categoryTotal . ')';
-
-        CategoryStats::newInstance()->dao->query($sql);
+        $aSet = [
+            'fk_i_category_id' => $id,
+            'i_num_items' => $categoryTotal
+        ];
+        CategoryStats::newInstance()->dao->replace(DB_TABLE_PREFIX . 't_category_stats', $aSet);
 
         if ($category['fk_i_parent_id'] != 0) {
             osc_update_cat_stats_id($category['fk_i_parent_id']);

@@ -34,7 +34,7 @@
         {
             $locale = Params::getParam('locale');
 
-            if(preg_match('/.{2}_.{2}/', $locale)) {
+            if(osc_validate_locale_code($locale)) {
                 Session::newInstance()->_set( 'userLocale', $locale);
             }
 
