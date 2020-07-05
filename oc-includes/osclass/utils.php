@@ -145,40 +145,6 @@ function osc_deleteDir($path)
 
 
 /**
- * Unpack a ZIP file into the specific path in the second parameter.
- *
- * @DEPRECATED : TO BE REMOVED IN 3.3
- *
- * @param $zipPath
- * @param $path
- *
- * @return true on success.
- */
-function osc_packageExtract($zipPath, $path)
-{
-    if (strpos($path, '../') !== false || strpos($path, "..\\") !== false) {
-        return false;
-    }
-
-    if (!file_exists($path) && !mkdir($path, 0666) && !is_dir($path)) {
-        return false;
-    }
-
-    @chmod($path, 0755);
-
-    $zip = new ZipArchive;
-    if ($zip->open($zipPath) === true) {
-        $zip->extractTo($path);
-        $zip->close();
-
-        return true;
-    }
-
-    return false;
-}
-
-
-/**
  * Fix the problem of symbolics links in the path of the file
  *
  * @param string $file The filename of plugin.
