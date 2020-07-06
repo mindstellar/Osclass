@@ -26,6 +26,7 @@
 
 /**
  * Run a hook
+ *
  * @param       $hook
  * @param mixed ...$args
  */
@@ -37,6 +38,7 @@ function osc_run_hook($hook, ...$args)
 
 /**
  * Apply a filter to a text
+ *
  * @param       $hook
  * @param       $content
  * @param mixed ...$args
@@ -82,7 +84,7 @@ function osc_add_filter($hook, $function, $priority = 5)
 /**
  * Remove a hook's function
  *
- * @param string $hook
+ * @param string   $hook
  * @param callable $function
  *
  * @return void
@@ -96,7 +98,7 @@ function osc_remove_hook($hook, $function)
 /**
  * Remove a filter's function
  *
- * @param string $hook
+ * @param string   $hook
  * @param callable $function
  *
  * @return void
@@ -150,7 +152,7 @@ function osc_plugin_check_update($plugin)
 /**
  * Register a plugin file to be loaded
  *
- * @param string $path
+ * @param string   $path
  * @param callable $function
  *
  * @return void
@@ -364,4 +366,57 @@ function osc_admin_render_plugin_url($file = '')
 function osc_admin_render_plugin($file = '')
 {
     osc_redirect_to(osc_admin_render_plugin_url($file));
+}
+
+
+/**
+ * Fix the problem of symbolics links in the path of the file
+ *
+ * @param string $file The filename of plugin.
+ *
+ * @return string The fixed path of a plugin.
+ */
+function osc_plugin_path($file)
+{
+    // Sanitize windows paths and duplicated slashes
+    $file        = preg_replace('|/+|', '/', str_replace('\\', '/', $file));
+    $plugin_path = preg_replace('|/+|', '/', str_replace('\\', '/', osc_plugins_path()));
+    $file        = $plugin_path . preg_replace('#^.*oc-content\/plugins\/#', '', $file);
+
+    return $file;
+}
+
+
+/**
+ * Fix the problem of symbolics links in the path of the file
+ *
+ * @param string $file The filename of plugin.
+ *
+ * @return string The fixed path of a plugin.
+ */
+function osc_plugin_url($file)
+{
+    // Sanitize windows paths and duplicated slashes
+    $dir = preg_replace('|/+|', '/', str_replace('\\', '/', dirname($file)));
+    $dir = osc_base_url() . 'oc-content/plugins/'
+        . preg_replace('#^.*oc-content\/plugins\/#', '', $dir) . '/';
+
+    return $dir;
+}
+
+
+/**
+ * Fix the problem of symbolics links in the path of the file
+ *
+ * @param string $file The filename of plugin.
+ *
+ * @return string The fixed path of a plugin.
+ */
+function osc_plugin_folder($file)
+{
+    // Sanitize windows paths and duplicated slashes
+    $dir = preg_replace('|/+|', '/', str_replace('\\', '/', dirname($file)));
+    $dir = preg_replace('#^.*oc-content\/plugins\/#', '', $dir) . '/';
+
+    return $dir;
 }
