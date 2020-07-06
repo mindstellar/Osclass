@@ -30,11 +30,8 @@ class CWebAjax extends BaseModel
         osc_run_hook('init_ajax');
     }
 
-    //Business Layer...
-
     /**
-     * @return bool
-     * @throws \Exception
+     * Business Layer...
      */
     public function doModel()
     {
@@ -350,8 +347,14 @@ class CWebAjax extends BaseModel
                 $uploader = new AjaxUploader();
                 $original = pathinfo($uploader->getOriginalName());
                 $filename = uniqid('qqfile_', true) . '.' . $original['extension'];
-                $result   =
-                    $uploader->handleUpload(osc_content_path() . 'uploads/temp/' . $filename);
+                try {
+                    $result =
+                        $uploader->handleUpload(osc_content_path() . 'uploads/temp/' . $filename);
+                } catch (Exception $e) {
+                    trigger_error($e->getMessage(), E_USER_WARNING);
+                    echo json_encode(array('success' => false));
+                    break;
+                }
 
                 // auto rotate
 
@@ -364,6 +367,8 @@ class CWebAjax extends BaseModel
                     );
                 } catch (Exception $e) {
                     trigger_error($e->getMessage(), E_USER_NOTICE);
+                    echo json_encode(array('success' => false));
+                    break;
                 }
                 try {
                     $img->saveToFile(
@@ -372,6 +377,8 @@ class CWebAjax extends BaseModel
                     );
                 } catch (Exception $e) {
                     trigger_error($e->getMessage(), E_USER_NOTICE);
+                    echo json_encode(array('success' => false));
+                    break;
                 }
 
                 $result['uploadName'] = 'auto_' . $filename;
