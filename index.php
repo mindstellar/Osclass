@@ -148,7 +148,7 @@ switch (Params::getParam('page')) {
 }
 
 if (!defined('__FROM_CRON__') && osc_auto_cron()) {
-    osc_doRequest(osc_base_url(), array('page' => 'cron'));
+    \mindstellar\osclass\classes\utility\Utils::doRequest(osc_base_url(), array('page' => 'cron'));
 }
 
 /* file end: ./index.php */
