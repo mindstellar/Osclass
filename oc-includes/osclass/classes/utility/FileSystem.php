@@ -344,6 +344,29 @@ class FileSystem
     }
 
     /**
+     * Remove directory
+     * @param $path
+     *
+     * @return bool
+     */
+    public function deleteDir($path)
+    {
+        if (strpos($path, '../') !== false || strpos($path, "..\\") !== false) {
+            return false;
+        }
+
+        if (!is_dir($path)) {
+            return false;
+        }
+        try {
+            $this->remove($path);
+            return true;
+        } catch (Exception $e) {
+            trigger_error($e->getMessage(), E_USER_NOTICE);
+            return false;
+        }
+    }
+    /**
      * @param callable $func
      *
      * @return mixed
@@ -555,7 +578,7 @@ class FileSystem
      * @return bool
      * @throws \Exception
      */
-    public function writeToFile($filename, $content)
+    public function writeToFile($filename, $content, $append = false)
     {
         $dir = dirname($filename);
 
@@ -566,7 +589,11 @@ class FileSystem
         if (!is_writable($dir)) {
             throw new RuntimeException(sprintf('Unable to write to the "%s" directory.', $dir));
         }
-        $fp = fopen($filename, 'wb');
+        if ($append === true) {
+            $fp = fopen($filename, 'ab');
+        } else {
+            $fp = fopen($filename, 'wb');
+        }
         if ($fp === false) {
             throw new RuntimeException(sprintf('Unable to write file "%s".', $filename));
         }
