@@ -91,10 +91,7 @@ class Dump extends DAO
             $_str .= str_replace('CREATE TABLE', 'CREATE TABLE IF NOT EXISTS', $_line['Create Table'] . ';');
             $_str .= "\n\n";
         }
-
-        $f = fopen($path, 'ab');
-        fwrite($f, $_str);
-        fclose($f);
+        $this->appendFile($path, $_str);
 
         return true;
     }
@@ -175,9 +172,7 @@ class Dump extends DAO
 
         $_str .= "\n";
 
-        $f = fopen($path, 'ab');
-        fwrite($f, $_str);
-        fclose($f);
+        $this->appendFile($path, $_str);
 
         return true;
     }
@@ -272,9 +267,22 @@ class Dump extends DAO
         if (in_array($type, $aNumeric, true)) {
             $_str .= $value;
         } elseif (in_array($type, $aDates, true)) {
-            $_str .= '\'' . $this->dao->connId->real_escape_string($value) . '\'';
+            $_str .= $this->dao->escape($value);
         } elseif (in_array($type, $aString, true)) {
-            $_str .= '\'' . $this->dao->connId->real_escape_string($value) . '\'';
+            $_str .= $this->dao->escape($value);
+        }
+    }
+
+    /**
+     * @param $file
+     * @param $content
+     */
+    private function appendFile($file, $content)
+    {
+        try {
+            (new \mindstellar\osclass\classes\utility\FileSystem())->writeToFile($file, $content, true);
+        } catch (Exception $e) {
+            trigger_error($e->getMessage(), E_USER_WARNING);
         }
     }
 }
