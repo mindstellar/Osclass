@@ -581,7 +581,7 @@ class CWebSearch extends BaseModel
 
         // Create the HMAC signature and convert the resulting hex hash into base64
         $stringToSign = osc_get_alert_public_key() . $encoded_alert;
-        $signature    = hex2b64(hmacsha1(osc_get_alert_private_key(), $stringToSign));
+        $signature    = \mindstellar\osclass\classes\utility\Utils::hmacSha1B64(osc_get_alert_private_key(), $stringToSign);
         Session::newInstance()->_set('alert_signature', $signature);
 
         $this->_exportVariableToView('search_alert', $encoded_alert);

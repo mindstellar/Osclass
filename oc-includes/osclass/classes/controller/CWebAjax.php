@@ -213,7 +213,7 @@ class CWebAjax extends BaseModel
 
                 // check alert integrity / signature
                 $stringToSign     = osc_get_alert_public_key() . $encoded_alert;
-                $signature        = hex2b64(hmacsha1(osc_get_alert_private_key(), $stringToSign));
+                $signature        = \mindstellar\osclass\classes\utility\Utils::hmacSha1B64(osc_get_alert_private_key(), $stringToSign);
                 $server_signature = Session::newInstance()->_get('alert_signature');
 
                 if ($server_signature != $signature) {
