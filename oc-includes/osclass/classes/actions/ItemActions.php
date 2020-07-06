@@ -180,7 +180,9 @@ class ItemActions
         $meta  = Params::getParam('meta');
 
         foreach ($_meta as $_m) {
-            $meta[$_m['pk_i_id']] = isset($meta[$_m['pk_i_id']]) ? $meta[$_m['pk_i_id']] : '';
+            if (!isset($meta[$_m['pk_i_id']])) {
+                $meta[$_m['pk_i_id']] = '';
+            }
         }
 
         if ($meta != '' && count($meta) > 0) {
