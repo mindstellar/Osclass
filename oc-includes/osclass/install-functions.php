@@ -15,6 +15,8 @@
  * limitations under the License.
  */
 
+use mindstellar\osclass\classes\utility\Utils;
+
 /**
  * @param $value
  * @param $xss_check
@@ -1132,13 +1134,13 @@ function ping_search_engines($bool)
             )
         );
         // GOOGLE
-        osc_doRequest('http://www.google.com/webmasters/sitemaps/ping?sitemap='
+        Utils::doRequest('http://www.google.com/webmasters/sitemaps/ping?sitemap='
             . urlencode(osc_search_url(array('sFeed' => 'rss'))), array());
         // BING
-        osc_doRequest('http://www.bing.com/webmaster/ping.aspx?siteMap='
+        Utils::doRequest('http://www.bing.com/webmaster/ping.aspx?siteMap='
             . urlencode(osc_search_url(array('sFeed' => 'rss'))), array());
         // YAHOO!
-        osc_doRequest('http://search.yahooapis.com/SiteExplorerService/V1/ping?sitemap='
+        Utils::doRequest('http://search.yahooapis.com/SiteExplorerService/V1/ping?sitemap='
             . urlencode(osc_search_url(array('sFeed' => 'rss'))), array());
     } else {
         $mPreference->insert(
