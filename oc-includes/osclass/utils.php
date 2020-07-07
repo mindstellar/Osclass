@@ -96,7 +96,7 @@ function osc_deleteResource($id, $admin)
                 osc_base_path() . $resource['s_path'] . $resource['pk_i_id'] . '_preview.' . $resource['s_extension']
             ]);
         } catch (Exception $e) {
-            trigger_error($e->getMessage(),E_USER_WARNING);
+            trigger_error($e->getMessage(), E_USER_WARNING);
         }
         osc_run_hook('delete_resource', $resource);
     }
@@ -917,7 +917,7 @@ function osc_unzip_file($file, $to)
     try {
         return (new \mindstellar\osclass\classes\utility\Zip())->unzipFile($file, $to);
     } catch (Exception $e) {
-        trigger_error($e->getMessage(),E_USER_WARNING);
+        trigger_error($e->getMessage(), E_USER_WARNING);
         return 0;
     }
 }
@@ -932,7 +932,7 @@ function osc_unzip_file($file, $to)
  */
 function osc_zip_folder($archive_folder, $archive_name)
 {
-    return (new \mindstellar\osclass\classes\utility\Zip())->zipFolder($archive_folder,$archive_name);
+    return (new \mindstellar\osclass\classes\utility\Zip())->zipFolder($archive_folder, $archive_name);
 }
 
 /**
@@ -1331,7 +1331,7 @@ function _need_update($uri, $version, $disable = true)
  */
 function version_compare2($a, $b)
 {
-    Deprecate::deprecatedFunction(__FUNCTION__,'4.0.0', 'Utils::versionCompare()');
+    Deprecate::deprecatedFunction(__FUNCTION__, '4.0.0', 'Utils::versionCompare()');
     $aA = explode('.', rtrim($a, '.0')); //Split version into pieces and remove trailing .0
     $aB = explode('.', rtrim($b, '.0')); //Split version into pieces and remove trailing .0
     foreach ($aA as $depth => $aVal) { //Iterate over each piece of A
@@ -1586,7 +1586,7 @@ if (!function_exists('hex2b64')) {
      */
     function hex2b64($str)
     {
-        Deprecate::deprecatedFunction(__FUNCTION__,'4.0.0','Utils::hex2b64()');
+        Deprecate::deprecatedFunction(__FUNCTION__, '4.0.0', 'Utils::hex2b64()');
         return Utils::hex2b64($str);
     }
 }
@@ -1603,7 +1603,7 @@ if (!function_exists('hmacsha1')) {
      */
     function hmacsha1($key, $data)
     {
-        Deprecate::deprecatedFunction(__FUNCTION__,'4.0.0','Utils::hmacsha1()');
+        Deprecate::deprecatedFunction(__FUNCTION__, '4.0.0', 'Utils::hmacsha1()');
         return Utils::hmacsha1($key, $data);
     }
 }
