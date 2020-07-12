@@ -22,6 +22,7 @@ use Params;
 use Preference;
 use Region;
 use RegionStats;
+use Rewrite;
 use RuntimeException;
 use Session;
 use Translation;
@@ -581,5 +582,28 @@ class Utils
     public static function hmacSha1B64($key, $data)
     {
         return base64_encode(hash_hmac('sha1', $data, $key, true));
+    }
+
+    /**
+     * @return string
+     */
+    public static function getHttpReferer()
+    {
+        $ref = Rewrite::newInstance()->get_http_referer();
+        if ($ref !== '') {
+            return $ref;
+        }
+
+        if (Session::newInstance()->_getReferer() !== '') {
+            return Session::newInstance()->_getReferer();
+        }
+
+        if (Params::existServerParam('HTTP_REFERER')
+            && filter_var(Params::getServerParam('HTTP_REFERER', false, false), FILTER_VALIDATE_URL)
+        ) {
+            return Params::getServerParam('HTTP_REFERER', false, false);
+        }
+
+        return '';
     }
 }

@@ -15,6 +15,8 @@
  * limitations under the License.
  */
 
+use mindstellar\osclass\classes\Csrf;
+
 if (!defined('ABS_PATH')) {
     define('ABS_PATH', __DIR__ . '/');
 }
@@ -151,11 +153,9 @@ if (OC_ADMIN) {
         require_once $functions_path;
     }
 }
+
 Plugins::init();
 WebThemes::init();
 Translation::init();
-osc_csrfguard_start();
-
-if (!OC_ADMIN) {
-    Rewrite::newInstance()->init();
-}
+Csrf::init();
+Rewrite::newInstance()->init();

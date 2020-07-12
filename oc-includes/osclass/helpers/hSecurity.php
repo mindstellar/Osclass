@@ -24,6 +24,7 @@
  * @author     Osclass
  */
 
+use mindstellar\osclass\classes\Csrf;
 use OpensslCryptor\Cryptor;
 
 if (!defined('BCRYPT_COST')) {
@@ -50,22 +51,6 @@ function osc_genRandomPassword($length = 8)
     return $pass;
 }
 
-
-/**
- * Create a CSRF token to be placed in a form
- *
- * @return string
- * @since 3.1
- */
-function osc_csrf_token_form()
-{
-    list($name, $token) = osc_csrfguard_generate_token();
-
-    return "<input type='hidden' name='CSRFName' value='" . $name . "' />
-        <input type='hidden' name='CSRFToken' value='" . $token . "' />";
-}
-
-
 /**
  * Create a CSRF token to be placed in a url
  *
@@ -74,9 +59,7 @@ function osc_csrf_token_form()
  */
 function osc_csrf_token_url()
 {
-    list($name, $token) = osc_csrfguard_generate_token();
-
-    return 'CSRFName=' . $name . '&CSRFToken=' . $token;
+    return (new Csrf())->tokenUrl();
 }
 
 
@@ -87,49 +70,7 @@ function osc_csrf_token_url()
  */
 function osc_csrf_check()
 {
-    $error     = false;
-    $str_error = '';
-    if (!Params::getParam('CSRFName') || !Params::getParam('CSRFToken')) {
-        $str_error = _m('Probable invalid request.');
-        $error     = true;
-    } else {
-        $name  = Params::getParam('CSRFName');
-        $token = Params::getParam('CSRFToken');
-        if (!osc_csrfguard_validate_token($name, $token)) {
-            $str_error = _m('Invalid CSRF token.');
-            $error     = true;
-        }
-    }
-
-    if (defined('IS_AJAX') && $error && IS_AJAX === true) {
-        echo json_encode(array(
-            'error' => 1,
-            'msg'   => $str_error
-        ));
-        exit;
-    }
-
-    // check ajax request
-    if ($error) {
-        if (OC_ADMIN) {
-            osc_add_flash_error_message($str_error, 'admin');
-        } else {
-            osc_add_flash_error_message($str_error);
-        }
-
-        $url = osc_get_http_referer();
-        // drop session referer
-        Session::newInstance()->_dropReferer();
-        if ($url) {
-            osc_redirect_to($url);
-        }
-
-        if (OC_ADMIN) {
-            osc_redirect_to(osc_admin_base_url(true));
-        } else {
-            osc_redirect_to(osc_base_url(true));
-        }
-    }
+    (new Csrf())->check();
 }
 
 
