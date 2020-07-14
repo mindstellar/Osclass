@@ -60,27 +60,15 @@ class Scripts extends Dependencies
      */
     public static function init()
     {
-        $print_header_scripts = static function () {
-            self::newInstance()->printScripts();
-            Plugins::runHook('scripts_loaded');
-        };
-
-        $print_footer_scripts = static function () {
-            self::newInstance()->printScripts();
-            Plugins::runHook('footer_scripts_loaded');
-        };
-
+        $admin_prefix = '';
         if (OC_ADMIN) {
-            if (!Preference::newInstance()->get('enqueue_scripts_in_footer')) {
-                Plugins::addHook('admin_header', $print_header_scripts, 10);
-            }
-            Plugins::addHook('admin_footer', $print_footer_scripts, 10);
-        } else {
-            if (!Preference::newInstance()->get('enqueue_scripts_in_footer')) {
-                Plugins::addHook('header', $print_header_scripts, 10);
-            }
-            Plugins::addHook('footer', $print_footer_scripts, 10);
+            $admin_prefix = 'admin_';
         }
+
+        if (!Preference::newInstance()->get('enqueue_scripts_in_footer')) {
+            self::printScriptRunLoadHook($admin_prefix.'header');
+        }
+        self::printScriptRunLoadHook($admin_prefix.'footer');
     }
 
     /**
@@ -113,6 +101,19 @@ class Scripts extends Dependencies
     }
 
     /**
+     * Print enqueued scripts and run a 'scripts_loaded' hook after scripts print
+     * @param string $hook_name
+     */
+    private static function printScriptRunLoadHook($hook_name)
+    {
+
+        Plugins::addHook($hook_name, static function () use ($hook_name) {
+            Scripts::newInstance()->printScripts();
+            Plugins::runHook($hook_name.'_scripts_loaded');
+        }, 10);
+    }
+
+    /**
      * Add script to be loaded
      *
      * @param $id
@@ -136,7 +137,7 @@ class Scripts extends Dependencies
 
     /**
      * Enqueu script to be loaded
-     *
+     * @deprecated since 4.0.0
      * @param $id
      */
     public function enqueuScript($id)
