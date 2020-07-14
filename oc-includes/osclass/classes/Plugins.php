@@ -400,7 +400,7 @@ class Plugins
                         if (is_callable($fxName)) {
                             $fxName(...$args);
                         } else {
-                            trigger_error('Invalid Osclass Hook ' . $fxName . ' ' . $hook, E_USER_WARNING);
+                            trigger_error('Invalid callable ' . $fxName . ' on hook ' . $hook, E_USER_WARNING);
                         }
                     }
                 }
