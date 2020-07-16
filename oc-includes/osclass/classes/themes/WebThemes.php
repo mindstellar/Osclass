@@ -110,10 +110,18 @@ class WebThemes extends Themes
         // NEW CODE FOR THEME INFO
         $s_info = file_get_contents($path);
         $info   = array();
+
+        //For compatibility use theme_name
         if (preg_match('|Theme Name:([^\\r\\t\\n]*)|i', $s_info, $match)) {
             $info['name'] = trim($match[1]);
         } else {
             $info['name'] = '';
+        }
+
+        if (preg_match('|Theme Name:([^\\r\\t\\n]*)|i', $s_info, $match)) {
+            $info['theme_name'] = trim($match[1]);
+        } else {
+            $info['theme_name'] = '';
         }
 
         if (preg_match('|Parent Theme:([^\\r\\t\\n]*)|i', $s_info, $match)) {
