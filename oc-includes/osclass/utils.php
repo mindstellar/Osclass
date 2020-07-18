@@ -1163,7 +1163,7 @@ function rglob($pattern, $flags = 0, $path = '')
     foreach ($paths as $p) {
         $filelist[] = rglob($pattern, $flags, $p . '/');
     }
-    $files = array_merge($files,...$filelist);
+    $files = array_merge($files, ...$filelist);
     return $files;
 }
 
