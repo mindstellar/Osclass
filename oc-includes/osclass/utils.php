@@ -1160,10 +1160,11 @@ function rglob($pattern, $flags = 0, $path = '')
     }
     $paths = glob($path . '*', GLOB_ONLYDIR | GLOB_NOSORT);
     $files = glob($path . $pattern, $flags);
+    $fileList = [];
     foreach ($paths as $p) {
-        $filelist[] = rglob($pattern, $flags, $p . '/');
+        $fileList[] = rglob($pattern, $flags, $p . '/');
     }
-    $files = array_merge($files,...$filelist);
+    $files = array_merge($files,...$fileList);
     return $files;
 }
 
