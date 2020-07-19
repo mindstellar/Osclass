@@ -17,6 +17,7 @@ use Params;
 use RecursiveCallbackFilterIterator;
 use RecursiveDirectoryIterator;
 use RecursiveIteratorIterator;
+use RegexIterator;
 use RuntimeException;
 use Traversable;
 
@@ -55,6 +56,7 @@ class FileSystem
     }
 
     /**
+     * Return an array if isn't.
      * @param $files
      *
      * @return array|\Traversable
@@ -344,29 +346,6 @@ class FileSystem
     }
 
     /**
-     * Remove directory
-     * @param $path
-     *
-     * @return bool
-     */
-    public function deleteDir($path)
-    {
-        if (strpos($path, '../') !== false || strpos($path, "..\\") !== false) {
-            return false;
-        }
-
-        if (!is_dir($path)) {
-            return false;
-        }
-        try {
-            $this->remove($path);
-            return true;
-        } catch (Exception $e) {
-            trigger_error($e->getMessage(), E_USER_NOTICE);
-            return false;
-        }
-    }
-    /**
      * @param callable $func
      *
      * @return mixed
@@ -383,6 +362,7 @@ class FileSystem
 
             return $result;
         } catch (Exception $e) {
+            trigger_error($e->getMessage(), E_USER_NOTICE);
         }
         restore_error_handler();
 
@@ -509,6 +489,33 @@ class FileSystem
             $origin,
             $target
         ));
+    }
+
+    /**
+     * Remove directory
+     *
+     * @param $path
+     *
+     * @return bool
+     */
+    public function deleteDir($path)
+    {
+        if (strpos($path, '../') !== false || strpos($path, "..\\") !== false) {
+            return false;
+        }
+
+        if (!is_dir($path)) {
+            return false;
+        }
+        try {
+            $this->remove($path);
+
+            return true;
+        } catch (Exception $e) {
+            trigger_error($e->getMessage(), E_USER_NOTICE);
+
+            return false;
+        }
     }
 
     /**
@@ -661,6 +668,43 @@ class FileSystem
     }
 
     /**
+     * Return directory structure of given root directory
+     *
+     * @param string $root_dir
+     * @param string $pattern preg_match supported regex pattern
+     * @param bool   $follow_symlinks
+     *
+     * @return array
+     */
+    public function rSearch($root_dir, $pattern = null, $follow_symlinks = false)
+    {
+        $dirIterator = new RecursiveDirectoryIterator($root_dir, RecursiveDirectoryIterator::SKIP_DOTS);
+
+        if ($follow_symlinks === true) {
+            $dirIterator->setFlags(RecursiveDirectoryIterator::SKIP_DOTS | RecursiveDirectoryIterator::FOLLOW_SYMLINKS);
+        }
+
+        $iterator = new RecursiveIteratorIterator(
+            $dirIterator,
+            RecursiveIteratorIterator::SELF_FIRST,
+            RecursiveIteratorIterator::CATCH_GET_CHILD // Ignore "Permission denied"
+        );
+
+        if ($pattern !== null) {
+            $iterator = new RegexIterator($iterator, $pattern);
+        }
+
+        $fileList = array();
+        /** @var RecursiveDirectoryIterator $iterator */
+        foreach ($iterator as $file) {
+            $pathname   = $file->getPathname();
+            $fileList[] = $file->isDir() ? $pathname . '/' : $pathname;
+        }
+
+        return $fileList;
+    }
+
+    /**
      * Download Files from given url
      * try to overwrite existing file.
      *
@@ -703,7 +747,7 @@ class FileSystem
                     curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, $verify_ssl);
                     curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, 2);
                 }
-                if ($post_data != null) {
+                if ($post_data !== null) {
                     curl_setopt($ch, CURLOPT_POST, 1);
                     curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($post_data));
                 }
