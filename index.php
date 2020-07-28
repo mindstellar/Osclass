@@ -28,7 +28,7 @@ if (CLI) {
         Params::setParam('cron-type', $cli_params['t']);
     }
     if (Params::getParam('page') === 'upgrade') {
-        echo \mindstellar\osclass\classes\utility\Upgrade::selfDbUpgrade();
+        echo \mindstellar\osclass\classes\upgrade\Osclass::upgradeDB();
 
         exit(1);
     }

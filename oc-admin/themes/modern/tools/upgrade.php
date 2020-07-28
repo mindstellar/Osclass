@@ -1,6 +1,6 @@
 <?php
 
-use mindstellar\osclass\classes\utility\Upgrade;
+use mindstellar\osclass\classes\upgrade\Osclass;
 
 if (!defined('OC_ADMIN')) {
     exit('Direct access is not allowed.');
@@ -15,25 +15,25 @@ function customHead()
             $("#steps_div").hide();
         });
         <?php
-        $upgrade = new Upgrade();
-        $is_upgrade_available = $upgrade->isUpgradeAvailable();
+        $osclassUpgrade = new Osclass(Osclass::getPackageInfo());
+        $is_upgrade_available = $osclassUpgrade->isUpgradable();
         ?>
         $(function () {
             let steps;
             let remoteVersion;
             const stepsDiv = document.getElementById('steps_div');
             stepsDiv.style.display = '';
-            remoteVersion = '<?php echo osc_esc_js($upgrade->getPackageNewVersion()); ?>';
-            steps = document.getElementById('steps');
+            remoteVersion = '<?php echo osc_esc_js($osclassUpgrade->getNewVersion()); ?>';
+            steps = $('#steps');
 
             <?php if ($is_upgrade_available && Params::getParam('confirm') !== 'true') { ?>
-            steps.append('<?php echo osc_esc_js(sprintf(
+            steps.append('<li><?php echo osc_esc_js(sprintf(
                 __('Upgrade is available for (Current version %s)'),
-                osc_version()
-            )); ?> ');
-            steps.append('<?php echo osc_esc_js(__('New version to update:')); ?> ' + remoteVersion);
-            steps.append('<input type="button" value="<?php echo osc_esc_html(__('Upgrade')); ?>" onclick="window"' +
-                '".location.href=\'<?php echo osc_admin_base_url(true); ?>?page=tools&action=upgrade&confirm=true\';" />');
+                osc_get_preference('version')
+            )); ?> </li>');
+            steps.append('<li><?php echo osc_esc_js(__('New version to update:')); ?> ' + remoteVersion + '<\/li>');
+            steps.append(`<input type="button" value="<?php echo osc_esc_html(__('Upgrade')); ?>"
+            onclick="window.location.href='<?php echo osc_admin_base_url(true) .'?page=tools&action=upgrade&confirm=true';?> ';" />`);
 
             <?php } elseif ($is_upgrade_available && Params::getParam('confirm') === 'true') { ?>
             steps.append(`<i id="loading_image" class="fas fa-spinner fa-spin"></i> <?php

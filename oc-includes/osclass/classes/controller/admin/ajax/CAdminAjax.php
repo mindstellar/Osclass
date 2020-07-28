@@ -1,22 +1,8 @@
 <?php
-use mindstellar\osclass\classes\utility\Upgrade;
-use mindstellar\osclass\classes\utility\Utils;
 
-/*
- * Copyright 2014 Osclass
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *     http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- */
+use mindstellar\osclass\classes\upgrade\Osclass;
+use mindstellar\osclass\classes\upgrade\Upgrade;
+use mindstellar\osclass\classes\utility\Utils;
 
 define('IS_AJAX', true);
 
@@ -550,11 +536,11 @@ class CAdminAjax extends AdminSecBaseModel
                 }
                 break;
             case 'check_version':
-                $upgradeSelf       = new Upgrade();
-                $upgrade_available = $upgradeSelf->isUpgradeAvailable();
+                $upgradeOsclass       = new Osclass(Osclass::getPackageInfo());
+                $upgrade_available = $upgradeOsclass->isUpgradable();
 
                 if ($upgrade_available) {
-                    osc_set_preference('update_core_available', $upgradeSelf->getPackageNewVersion());
+                    osc_set_preference('update_core_available', $upgradeOsclass->isUpgradable());
                     echo json_encode(array('error' => 0, 'msg' => __('Update available')));
                 } else {
                     osc_set_preference('update_core_available', '');
@@ -586,10 +572,35 @@ class CAdminAjax extends AdminSecBaseModel
                     $result = array('error' => 6, 'message' => $msg);
                     osc_add_flash_warning_message($msg, 'admin');
                 } else {
-                    $upgradeSelf = new Upgrade();
+                    $osclassUpgradeObj = new Osclass(Osclass::getPackageInfo());
+                    $upgradeOsclass = new Upgrade($osclassUpgradeObj);
                     try {
-                        $upgradeSelf->doUpgrade();
-                        $db_upgrade_result = json_decode($upgradeSelf::selfDbUpgrade(), true);
+                        $upgradeOsclass->doUpgrade();
+                        $db_upgrade_result = json_decode($osclassUpgradeObj::upgradeDB(), true);
+                        $result            = ['error' => 0, 'message' => __('Osclass upgraded successfully.')];
+                    } catch (Exception $e) {
+                        $result = ['error' => 1, 'message' => $e->getMessage()];
+                        osc_add_flash_error_message($e->getMessage(), 'admin');
+                    }
+                    if (isset($db_upgrade_result) && $db_upgrade_result['status'] !== true) {
+                        $result = ['error' => 5, 'message' => $db_upgrade_result['message']];
+                        osc_add_flash_warning_message(__('Error occurred while upgrading osclass Database.'), 'admin');
+                    }
+                }
+                echo json_encode($result);
+                break;
+            case 'reinstall_osclass': // We are forcing an update
+                osc_csrf_check();
+                if (defined('DEMO')) {
+                    $msg    = __('This action cannot be done because it is a demo site');
+                    $result = array('error' => 6, 'message' => $msg);
+                    osc_add_flash_warning_message($msg, 'admin');
+                } else {
+                    $osclassUpgradeObj = new Osclass(Osclass::getPackageInfo(), true);
+                    $upgradeOsclass = new Upgrade($osclassUpgradeObj);
+                    try {
+                        $upgradeOsclass->doUpgrade();
+                        $db_upgrade_result = json_decode($osclassUpgradeObj::upgradeDB(), true);
                         $result            = ['error' => 0, 'message' => __('Osclass upgraded successfully.')];
                     } catch (Exception $e) {
                         $result = ['error' => 1, 'message' => $e->getMessage()];
