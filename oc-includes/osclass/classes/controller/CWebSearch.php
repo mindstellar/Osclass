@@ -43,21 +43,25 @@ class CWebSearch extends BaseModel
                 && osc_rewrite_enabled()
                 && !Params::existParam('sFeed')
             ) {
-                // clean GET html params
-                $this->uri  = preg_replace('/(\/?)\?.*$/', '', $this->uri);
-                $search_uri = preg_replace('|/\d+$|', '', $this->uri);
-                $this->_exportVariableToView('search_uri', $search_uri);
-                $iPage = preg_replace('|.*/(\d+)$|', '$01', $this->uri);
+                if (!is_numeric($this->uri)) {
+                    // clean GET html params
+                    $this->uri  = preg_replace('/(\/?)\?.*$/', '', $this->uri);
+                    $search_uri = preg_replace('|/\d+$|', '', $this->uri);
+                    $this->_exportVariableToView('search_uri', $search_uri);
+                    $iPage = preg_replace('|.*/(\d+)$|', '$01', $this->uri);
 
-                if (is_numeric($iPage) && $iPage > 0) {
-                    Params::setParam('iPage', $iPage);
-                    // redirect without number of pages
-                    if ($iPage == 1) {
-                        $this->redirectTo(osc_base_url() . $search_uri);
+                    if (is_numeric($iPage) && $iPage > 0) {
+                        Params::setParam('iPage', $iPage);
+                        // redirect without number of pages
+                        if ($iPage == 1) {
+                            $this->redirectTo(osc_base_url() . $search_uri);
+                        }
                     }
-                }
-                if (Params::getParam('iPage') > 1) {
-                    $this->_exportVariableToView('canonical', osc_base_url() . $search_uri);
+                    if (Params::getParam('iPage') > 1) {
+                        $this->_exportVariableToView('canonical', osc_base_url() . $search_uri);
+                    }
+                } else {
+                    $search_uri = $this->uri;
                 }
 
                 // get only the last segment
