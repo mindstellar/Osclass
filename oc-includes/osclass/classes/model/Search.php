@@ -138,8 +138,15 @@ class Search extends DAO
      *
      * @since  unknown
      */
-    public function order($o_c = 'dt_pub_date', $o_d = 'DESC', $table = null)
+    public function order($o_c = '', $o_d = 'DESC', $table = null)
     {
+        if ($o_c === '') {
+            if ($this->withPattern) {
+                $o_c = 'relevance';
+            } else {
+                $o_c = 'dt_pub_date';
+            }
+        }
         if ($table == '') {
             $this->order_column = $o_c;
         } elseif ($table != '') {
@@ -639,6 +646,12 @@ class Search extends DAO
                     "MATCH(d.s_title, d.s_description) AGAINST(%s IN BOOLEAN MODE)",
                     $this->sPattern
                 ));
+                if ($this->order_column === 'relevance') {
+                    $this->dao->select(sprintf(
+                        "MATCH(d.s_title, d.s_description) AGAINST(%s IN BOOLEAN MODE) as relevance",
+                        $this->sPattern
+                    ));
+                }
                 if (empty($this->locale_code)) {
                     $this->locale_code[$this->userLocaleCode] = $this->userLocaleCode;
                 }

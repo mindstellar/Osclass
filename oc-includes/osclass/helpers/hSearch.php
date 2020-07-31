@@ -48,19 +48,19 @@ function osc_search()
  */
 function osc_list_orders()
 {
+    if (osc_search_pattern() !== '') {
+        $list_order[__('Relevance')] = ['sOrder' => 'relevance', 'iOrderType' => 'desc'];
+    }
+    
+    $list_order[__('Newly listed')] = ['sOrder' => 'dt_pub_date', 'iOrderType' => 'desc'];
+
     if (osc_price_enabled_at_items()) {
-        return array(
-            __('Newly listed')       => array('sOrder' => 'dt_pub_date', 'iOrderType' => 'desc')
-            ,
-            __('Lower price first')  => array('sOrder' => 'i_price', 'iOrderType' => 'asc')
-            ,
-            __('Higher price first') => array('sOrder' => 'i_price', 'iOrderType' => 'desc')
-        );
+        $list_order[__('Lower price first')] = ['sOrder' => 'i_price', 'iOrderType' => 'asc'];
+
+        $list_order[__('Higher price first')] = ['sOrder' => 'i_price', 'iOrderType' => 'desc'];
     }
 
-    return array(
-        __('Newly listed') => array('sOrder' => 'dt_pub_date', 'iOrderType' => 'desc')
-    );
+    return $list_order;
 }
 
 
