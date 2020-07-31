@@ -36,7 +36,7 @@ class Upgrade
     private $FileSystem;
 
     /**
-     * @var \mindstellar\osclass\classes\upgrade\PackageInterface
+     * @var \mindstellar\osclass\classes\upgrade\UpgradePackage
      */
     private $objPackage;
 
@@ -44,7 +44,7 @@ class Upgrade
     /**
      * Upgrade constructor.
      *
-     * @param \mindstellar\osclass\classes\upgrade\PackageInterface $packageObj
+     * @param \mindstellar\osclass\classes\upgrade\UpgradePackage $packageObj
      */
     public function __construct(UpgradePackage $packageObj)
     {
@@ -61,8 +61,8 @@ class Upgrade
     private function validatePackageInfo()
     {
         $this->packageInfoValid = false;
-        if (is_array($this->objPackage->getFilteredFiles()
-            && filter_var($this->objPackage->getSourceUrl(), FILTER_VALIDATE_URL))
+        if (is_array($this->objPackage->getFilteredFiles())
+            && filter_var($this->objPackage->getSourceUrl(), FILTER_VALIDATE_URL)
         ) {
             $this->packageInfoValid = true;
         }
