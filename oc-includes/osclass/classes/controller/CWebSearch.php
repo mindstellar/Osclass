@@ -45,11 +45,10 @@ class CWebSearch extends BaseModel
             ) {
                 // clean GET html params
                 $this->uri  = preg_replace('/(\/?)\?.*$/', '', $this->uri);
-                $search_uri = preg_replace('|/[0-9]+$|', '', $this->uri);
+                $search_uri = preg_replace('|/\d+$|', '', $this->uri);
                 $this->_exportVariableToView('search_uri', $search_uri);
+                $iPage = preg_replace('|.*/(\d+)$|', '$01', $this->uri);
 
-                // get page if it's set in the url
-                $iPage = preg_replace('|.*/([0-9]+)$|', '$01', $this->uri);
                 if (is_numeric($iPage) && $iPage > 0) {
                     Params::setParam('iPage', $iPage);
                     // redirect without number of pages
@@ -63,24 +62,24 @@ class CWebSearch extends BaseModel
 
                 // get only the last segment
                 $search_uri = preg_replace('|.*?/|', '', $search_uri);
-                if (preg_match('|-r([0-9]+)$|', $search_uri, $r)) {
+                if (preg_match('|-r(\d+)$|', $search_uri, $r)) {
                     $region = Region::newInstance()->findByPrimaryKey($r[1]);
                     if (!$region) {
                         $this->do404();
                     }
                     Params::setParam('sRegion', $region['pk_i_id']);
                     Params::unsetParam('sCategory');
-                    if (preg_match('|(.*?)_.*?-r[0-9]+|', $search_uri, $match)) {
+                    if (preg_match('|(.*?)_.*?-r\d+|', $search_uri, $match)) {
                         Params::setParam('sCategory', $match[1]);
                     }
-                } elseif (preg_match('|-c([0-9]+)$|', $search_uri, $c)) {
+                } elseif (preg_match('|-c(\d+)$|', $search_uri, $c)) {
                     $city = City::newInstance()->findByPrimaryKey($c[1]);
                     if (!$city) {
                         $this->do404();
                     }
                     Params::setParam('sCity', $city['pk_i_id']);
                     Params::unsetParam('sCategory');
-                    if (preg_match('|(.*?)_.*?-c[0-9]+|', $search_uri, $match)) {
+                    if (preg_match('|(.*?)_.*?-c\d+|', $search_uri, $match)) {
                         Params::setParam('sCategory', $match[1]);
                     }
                 } elseif (Params::existParam('sCategory')) {
@@ -117,13 +116,12 @@ class CWebSearch extends BaseModel
     //Business Layer...
     public function doModel()
     {
-
         osc_run_hook('before_search');
 
         if (osc_rewrite_enabled()) {
             // IF rewrite is not enabled, skip this part, preg_match is always time&resources consuming task
             $p_sParams = '/' . Params::getParam('sParams', false, false);
-            if (preg_match_all('|\/([^,]+),([^\/]*)|', $p_sParams, $m)) {
+            if (preg_match_all('|/([^,]+),([^/]*)|', $p_sParams, $m)) {
                 $l = count($m[0]);
                 for ($k = 0; $k < $l; $k++) {
                     switch ($m[1][$k]) {
@@ -178,7 +176,6 @@ class CWebSearch extends BaseModel
                 Params::unsetParam('sParams');
             }
         }
-
 
         $uriParams = Params::getParamsAsArray();
         $searchUri = osc_search_url($uriParams);
