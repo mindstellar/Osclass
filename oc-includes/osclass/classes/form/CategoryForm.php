@@ -191,6 +191,11 @@ class CategoryForm extends Form
             $value         = isset($category['locale'][$locale['pk_c_code']])
                 ? $category['locale'][$locale['pk_c_code']]['s_name'] : '';
             $name          = $locale['pk_c_code'] . '#s_name';
+
+            $nameSlug      = $locale['pk_c_code'] . '#s_slug';
+            $valueSlug     = isset($category['locale'][$locale['pk_c_code']])
+                ? $category['locale'][$locale['pk_c_code']]['s_slug'] : '';
+
             $nameTextarea  = $locale['pk_c_code'] . '#s_description';
             $valueTextarea = isset($category['locale'][$locale['pk_c_code']])
                 ? $category['locale'][$locale['pk_c_code']]['s_description'] : '';
@@ -204,6 +209,11 @@ class CategoryForm extends Form
             $contentTemp .= '<div class="FormElement"><label>' . __('Name') . '</label><input id="'
                 . $name . '" type="text" name="' . $name . '" value="'
                 . osc_esc_html(htmlentities($value, ENT_COMPAT, 'UTF-8')) . '"/></div>';
+
+            $contentTemp .= '<div class="FormElement"><label>' . __('Slug') . '</label><input id="'
+                . $name . '" type="text" name="' . $nameSlug . '" value="'
+                . urldecode($valueSlug) . '" /></div>';
+
             $contentTemp .= '<div class="FormElement"><label>' . __('Description') . '</label>';
             $contentTemp .= '<textarea id="' . $nameTextarea . '" name="' . $nameTextarea
                 . '" rows="10">' . $valueTextarea . '</textarea>';

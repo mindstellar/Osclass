@@ -634,10 +634,14 @@ class Category extends DAO
                 //UPDATE for description of categories
                 $fieldsDescription['fk_i_category_id'] = $pk;
                 $fieldsDescription['fk_c_locale_code'] = $k;
-                $slug                                  = osc_sanitizeString(osc_apply_filter(
-                    'slug',
-                    isset($fieldsDescription['s_name']) ? $fieldsDescription['s_name'] : ''
-                ));
+                if (isset($fieldsDescription['s_slug']) && trim($fieldsDescription['s_slug']) !== '') {
+                    $slug = osc_sanitizeString(osc_apply_filter('slug', trim($fieldsDescription['s_slug'])));
+                } else {
+                    $slug = osc_sanitizeString(osc_apply_filter(
+                        'slug',
+                        isset($fieldsDescription['s_name']) ? $fieldsDescription['s_name'] : ''
+                    ));
+                }
                 $slug_tmp                              = $slug;
                 $slug_unique                           = 1;
                 while (true) {
