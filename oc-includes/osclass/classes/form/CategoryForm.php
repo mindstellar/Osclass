@@ -186,6 +186,7 @@ class CategoryForm extends Form
     {
         $tabs    = array();
         $content = array();
+        $current_locale_code = OC_ADMIN?osc_current_admin_locale():osc_current_user_locale();
         foreach ($locales as $locale) {
             $value         = isset($category['locale'][$locale['pk_c_code']])
                 ? $category['locale'][$locale['pk_c_code']]['s_name'] : '';
@@ -193,7 +194,11 @@ class CategoryForm extends Form
             $nameTextarea  = $locale['pk_c_code'] . '#s_description';
             $valueTextarea = isset($category['locale'][$locale['pk_c_code']])
                 ? $category['locale'][$locale['pk_c_code']]['s_description'] : '';
-
+            if ($current_locale_code === $locale['pk_c_code']) {
+                $active_class = ' class="ui-tabs-active ui-state-active"';
+            } else {
+                $active_class = '';
+            }
             $contentTemp = '<div id="' . $category['pk_i_id'] . '-' . $locale['pk_c_code']
                 . '" class="category-details-form">';
             $contentTemp .= '<div class="FormElement"><label>' . __('Name') . '</label><input id="'
@@ -204,7 +209,7 @@ class CategoryForm extends Form
                 . '" rows="10">' . $valueTextarea . '</textarea>';
             $contentTemp .= '</div></div>';
             $tabs[]      =
-                '<li><a href="#' . $category['pk_i_id'] . '-' . $locale['pk_c_code'] . '">'
+                '<li'.$active_class.'><a href="#' . $category['pk_i_id'] . '-' . $locale['pk_c_code'] . '">'
                 . $locale['s_name'] . '</a></li>';
             $content[]   = $contentTemp;
         }

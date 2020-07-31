@@ -51,7 +51,7 @@ function osc_list_orders()
     if (osc_search_pattern() !== '') {
         $list_order[__('Relevance')] = ['sOrder' => 'relevance', 'iOrderType' => 'desc'];
     }
-    
+
     $list_order[__('Newly listed')] = ['sOrder' => 'dt_pub_date', 'iOrderType' => 'desc'];
 
     if (osc_price_enabled_at_items()) {
