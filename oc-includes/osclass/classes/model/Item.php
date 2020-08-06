@@ -288,21 +288,18 @@ class Item extends DAO
      *
      * @access public
      * @return array of items
-     * @since  unknown
+     * @since  3.x.x
      */
-    public function listWhere()
+    public function listWhere(...$args)
     {
-        $argv = func_get_args();
         $sql  = null;
         switch (func_num_args()) {
             case 0:
                 return array();
-                break;
             case 1:
-                $sql = $argv[0];
+                $sql = $args[0];
                 break;
             default:
-                $args   = func_get_args();
                 $format = array_shift($args);
                 foreach ($args as $k => $v) {
                     $args[$k] = $this->dao->escape($v);
