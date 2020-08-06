@@ -648,7 +648,7 @@ class Search extends DAO
                 ));
                 if ($this->order_column === 'relevance') {
                     $this->dao->select(sprintf(
-                        "MATCH(d.s_title, d.s_description) AGAINST(%s IN BOOLEAN MODE) as relevance",
+                        "MATCH(d.s_title, d.s_description) AGAINST(%s) as relevance",
                         $this->sPattern
                     ));
                 }
