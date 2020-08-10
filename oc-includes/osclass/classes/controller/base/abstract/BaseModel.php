@@ -87,8 +87,8 @@ abstract class BaseModel
                 if ($subdomain_type === 'category') {
                     $category = Category::newInstance()->findBySlug($subdomain);
                     if (isset($category['pk_i_id'])) {
-                        View::newInstance()->_exportVariableToView('subdomain_name', $category['s_name']);
-                        View::newInstance()->_exportVariableToView('subdomain_slug', $category['s_slug']);
+                        $this->_exportVariableToView('subdomain_name', $category['s_name']);
+                        $this->_exportVariableToView('subdomain_slug', $category['s_slug']);
                         Params::setParam('sCategory', $category['pk_i_id']);
                         if (Params::getParam('page') == '') {
                             Params::setParam('page', 'search');
@@ -99,8 +99,8 @@ abstract class BaseModel
                 } elseif ($subdomain_type === 'country') {
                     $country = Country::newInstance()->findBySlug($subdomain);
                     if (isset($country['pk_c_code'])) {
-                        View::newInstance()->_exportVariableToView('subdomain_name', $country['s_name']);
-                        View::newInstance()->_exportVariableToView('subdomain_slug', $country['s_slug']);
+                        $this->_exportVariableToView('subdomain_name', $country['s_name']);
+                        $this->_exportVariableToView('subdomain_slug', $country['s_slug']);
                         Params::setParam('sCountry', $country['pk_c_code']);
                     } else {
                         $this->do400();
@@ -108,8 +108,8 @@ abstract class BaseModel
                 } elseif ($subdomain_type === 'region') {
                     $region = Region::newInstance()->findBySlug($subdomain);
                     if (isset($region['pk_i_id'])) {
-                        View::newInstance()->_exportVariableToView('subdomain_name', $region['s_name']);
-                        View::newInstance()->_exportVariableToView('subdomain_slug', $region['s_slug']);
+                        $this->_exportVariableToView('subdomain_name', $region['s_name']);
+                        $this->_exportVariableToView('subdomain_slug', $region['s_slug']);
                         Params::setParam('sRegion', $region['pk_i_id']);
                     } else {
                         $this->do400();
@@ -117,8 +117,8 @@ abstract class BaseModel
                 } elseif ($subdomain_type === 'city') {
                     $city = City::newInstance()->findBySlug($subdomain);
                     if (isset($city['pk_i_id'])) {
-                        View::newInstance()->_exportVariableToView('subdomain_name', $city['s_name']);
-                        View::newInstance()->_exportVariableToView('subdomain_slug', $city['s_slug']);
+                        $this->_exportVariableToView('subdomain_name', $city['s_name']);
+                        $this->_exportVariableToView('subdomain_slug', $city['s_slug']);
                         Params::setParam('sCity', $city['pk_i_id']);
                     } else {
                         $this->do400();
@@ -126,8 +126,8 @@ abstract class BaseModel
                 } elseif ($subdomain_type === 'user') {
                     $user = User::newInstance()->findByUsername($subdomain);
                     if (isset($user['pk_i_id'])) {
-                        View::newInstance()->_exportVariableToView('subdomain_name', $user['s_name']);
-                        View::newInstance()->_exportVariableToView('subdomain_slug', $user['s_username']);
+                        $this->_exportVariableToView('subdomain_name', $user['s_name']);
+                        $this->_exportVariableToView('subdomain_slug', $user['s_username']);
                         Params::setParam('sUser', $user['pk_i_id']);
                     } else {
                         $this->do400();
@@ -212,7 +212,6 @@ abstract class BaseModel
         osc_current_web_theme_path('404.php');
         exit;
     }
-
     abstract protected function doModel();
 
     /**
