@@ -348,6 +348,10 @@ class DBCommandClass
      */
     public function escape($str)
     {
+        if (is_numeric($str)) {
+            return $str;
+        }
+
         if (is_string($str)) {
             $str = "'" . $this->escapeStr($str) . "'";
         } elseif (is_bool($str)) {
