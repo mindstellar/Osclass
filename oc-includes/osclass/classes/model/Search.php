@@ -1233,7 +1233,7 @@ class Search extends DAO
                 } else {
                     $this->regions[] =
                         sprintf(
-                            "%st_item_location.s_region LIKE '%s' ",
+                            "%st_item_location.s_region LIKE %s ",
                             DB_TABLE_PREFIX,
                             $this->dao->escape($region)
                         );
