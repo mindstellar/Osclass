@@ -395,7 +395,7 @@ class Search extends DAO
                     } else {
                         $this->city_areas[] =
                             sprintf(
-                                "%st_item_location.s_city_area LIKE '%s' ",
+                                "%st_item_location.s_city_area LIKE %s ",
                                 DB_TABLE_PREFIX,
                                 $this->dao->escape($c)
                             );
@@ -415,7 +415,7 @@ class Search extends DAO
                 } else {
                     $this->city_areas[] =
                         sprintf(
-                            "%st_item_location.s_city_area LIKE '%s' ",
+                            "%st_item_location.s_city_area LIKE %s ",
                             DB_TABLE_PREFIX,
                             $this->dao->escape($city_area)
                         );
@@ -1186,14 +1186,14 @@ class Search extends DAO
                 if (strlen($country) === 2) {
                     $this->countries[] =
                         sprintf(
-                            "%st_item_location.fk_c_country_code = '%s' ",
+                            "%st_item_location.fk_c_country_code = %s ",
                             DB_TABLE_PREFIX,
                             strtolower($this->dao->escape($country))
                         );
                 } else {
                     $this->countries[] =
                         sprintf(
-                            "%st_item_location.s_country LIKE '%s' ",
+                            "%st_item_location.s_country LIKE %s ",
                             DB_TABLE_PREFIX,
                             $this->dao->escape($country)
                         );
@@ -1273,7 +1273,7 @@ class Search extends DAO
                 } else {
                     $this->cities[] =
                         sprintf(
-                            "%st_item_location.s_city LIKE '%s' ",
+                            "%st_item_location.s_city LIKE %s ",
                             DB_TABLE_PREFIX,
                             $this->dao->escape($city)
                         );

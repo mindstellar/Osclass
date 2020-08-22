@@ -122,7 +122,7 @@ class UsersDataTable extends DataTable
             // escape value
             $esc_email                                             =
                 User::newInstance()->dao->escape(str_replace('*', '%', $_get['s_email']));
-            $this->conditions["s_email LIKE '" . $esc_email . "'"] = null;
+            $this->conditions["s_email LIKE " . $esc_email ] = null;
             $this->withFilters                                     = true;
         }
         if (@$_get['s_name'] != '') {
@@ -133,7 +133,7 @@ class UsersDataTable extends DataTable
                 // escape value
                 $esc_user                                                                                =
                     User::newInstance()->dao->escape(str_replace('*', '%', $_get['user']));
-                $this->conditions["s_email LIKE '" . $esc_user . "' OR s_name LIKE '" . $esc_user . "'"] = null;
+                $this->conditions["s_email LIKE " . $esc_user . " OR s_name LIKE " . $esc_user ] = null;
             } else {
                 $this->conditions['s_name'] = str_replace('*', '%', $_get['user']);
             }
