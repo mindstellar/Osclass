@@ -574,7 +574,10 @@ class CWebSearch extends BaseModel
         $this->_exportVariableToView('search_total_items', $iTotalItems);
         $this->_exportVariableToView('items', $aItems);
         $this->_exportVariableToView('search_show_as', $p_sShowAs);
-        $this->_exportVariableToView('search', $this->mSearch);
+
+        if(OSC_DEBUG) {
+            $this->_exportVariableToView('search', $this->mSearch);
+        }
 
         // json
         $json          = $this->mSearch->toJson();
