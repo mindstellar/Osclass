@@ -322,6 +322,24 @@ function osc_search_category_id()
 }
 
 
+function osc_search_category_description($locale = '')
+{
+    $a_search_category_id = osc_search_category_id();
+    $text              = '';
+    if (!empty($a_search_category_id)) {
+        list($search_category_id) = $a_search_category_id;
+        if (is_numeric($search_category_id)) {
+            $mCat = Category::newInstance();
+            $tmp = $mCat->findByPrimaryKey($search_category_id, $locale);
+            if (isset($tmp['s_description'])) {
+                $text = $tmp['s_description'];
+            }
+        }
+    }
+
+    return $text;
+}
+
 /**
  * Update the search url with new options
  *
