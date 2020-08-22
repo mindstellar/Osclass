@@ -267,7 +267,6 @@ function meta_description()
     }
     // search
     if (osc_is_search_page()) {
-
         // search category
         if (osc_is_search_category_page() && osc_search_category_description()) {
             $text = osc_search_category_description();
