@@ -380,9 +380,9 @@ function osc_user_info($locale = '')
         $info = osc_apply_filter('user_info', $info, $userId, osc_language());
         if ($info == '') {
             $aLocales = osc_get_locales();
-            foreach ($aLocales as $locale) {
-                $info = osc_user_field('s_info', $locale['pk_c_code']);
-                $info = osc_apply_filter('user_info', $info, $userId, $locale['pk_c_code']);
+            foreach ($aLocales as $locale2) {
+                $info = osc_user_field('s_info', $locale2['pk_c_code']);
+                $info = osc_apply_filter('user_info', $info, $userId, $locale2['pk_c_code']);
                 if ($info != '') {
                     break;
                 }
@@ -620,7 +620,7 @@ function osc_total_users($condition = '')
 /**
  * Gets a specific field from current alert
  *
- * @param array $field
+ * @param string $field
  *
  * @return mixed
  */

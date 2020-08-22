@@ -74,9 +74,9 @@ function osc_field($item, $field, $locale)
             }
 
             if (isset($item['locale'])) {
-                foreach ($item['locale'] as $locale => $data) {
-                    if (isset($item['locale'][$locale][$field])) {
-                        return $item['locale'][$locale][$field];
+                foreach ($item['locale'] as $locale2 => $data) {
+                    if (isset($item['locale'][$locale2][$field])) {
+                        return $item['locale'][$locale2][$field];
                     }
                 }
             }
@@ -240,7 +240,7 @@ function osc_format_date($date, $dateformat = null)
  */
 function osc_escape_string($string)
 {
-    $string = preg_replace('/^([0-9])/', '\\\\\\\\\1', $string);
+    $string = preg_replace('/^(\d)/', '\\\\\\\\\1', $string);
     $string = preg_replace('/([a-z])/i', '\\\\\1', $string);
 
     return $string;
