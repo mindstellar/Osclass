@@ -544,9 +544,7 @@ class Item extends DAO
      */
     public function findItemByTypes($conditions = null, $itemType = false, $count = false, $limit = 0, $offset = null)
     {
-        if ($count === false) {
-            $this->dao->from($this->getTableName());
-        }
+        $this->dao->from($this->getTableName().' i');
         if ($conditions !== null) {
             if (is_array($conditions)) {
                 foreach ($conditions as $condition) {
@@ -748,7 +746,7 @@ class Item extends DAO
      */
     public function findItemTypesByUserID($userId, $start = 0, $end = null, $itemType = false)
     {
-        return $this->findItemByTypes("fk_i_item_id = $userId", $itemType, false, $start, $end);
+        return $this->findItemByTypes("fk_i_user_id = $userId", $itemType, false, $start, $end);
     }
 
     /**
