@@ -1235,6 +1235,33 @@ function osc_is_search_page()
 
 
 /**
+ * Get if user is on search category page
+ * @return bool
+ * @since 4.0.0
+ */
+function osc_is_search_category_page()
+{
+    if (osc_is_search_page()) {
+        $params = Params::getParamsAsArray();
+        unset($params['page']);
+        $countP = count($params);
+
+        if (isset($params['sCategory']) && !is_array($params['sCategory'])
+            && (
+                $countP === 1
+                || (isset($params['iPage']) && $countP === 2)
+                || (isset($params['sOrder'], $params['iOrderType']) && $countP === 4)
+            )
+            && strpos($params['sCategory'], ',') === false
+        ) {
+            return true;
+        }
+    }
+
+    return false;
+}
+
+/**
  * Get if user is on a static page
  *
  * @return boolean
