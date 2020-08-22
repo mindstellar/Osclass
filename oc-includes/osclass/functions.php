@@ -140,21 +140,21 @@ function meta_title()
             $s_page   = '';
             $i_page   = Params::getParam('iPage');
 
-            if ($i_page != '' && $i_page > 1) {
-                $s_page = ' - ' . __('page') . ' ' . $i_page;
+            if ($i_page && $i_page > 1) {
+                $s_page = __('Page') . ' ' . $i_page . ': ';
             }
 
-            $b_show_all = ($region == '' && $city == '' && $pattern == '' && empty($category));
+            $b_show_all = (!$region && !$city && !$pattern && empty($category));
             $b_category = !empty($category);
-            $b_pattern  = ($pattern != '');
-            $b_city     = ($city != '');
-            $b_region   = ($region != '');
-
-            if ($b_show_all) {
-                $text = __('Show all listings') . ' - ' . $s_page . osc_page_title();
-            }
+            $b_pattern  = ($pattern);
+            $b_city     = ($city);
+            $b_region   = ($region);
 
             $result = '';
+            if ($b_show_all) {
+                $result = __('Show all listings');
+            }
+
             if ($b_pattern) {
                 $result .= $pattern . ' &raquo; ';
             }
@@ -174,15 +174,15 @@ function meta_title()
 
             $result = preg_replace('|\s?&raquo;\s$|', '', $result);
 
-            if ($result == '') {
+            if (!$result) {
                 $result = __('Search results');
             }
 
             $text = '';
-            if (osc_get_preference('seo_title_keyword') != '') {
+            if (osc_get_preference('seo_title_keyword')) {
                 $text .= osc_get_preference('seo_title_keyword') . ' ';
             }
-            $text .= $result . $s_page;
+            $text .= $s_page . $result;
             break;
         case ('login'):
             switch ($section) {
@@ -267,10 +267,14 @@ function meta_description()
     }
     // search
     if (osc_is_search_page()) {
-        if (osc_has_items()) {
+
+        // search category
+        if (osc_is_search_category_page() && osc_search_category_description()) {
+            $text = osc_search_category_description();
+        } elseif (osc_has_items()) {
             $text = osc_item_category() . ' ' . osc_item_city() . ', ' . osc_highlight(osc_item_description(), 120);
+            osc_reset_items();
         }
-        osc_reset_items();
     }
     // listing
     if (osc_is_ad_page()) {
