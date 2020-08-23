@@ -1,4 +1,6 @@
-<?php if (!defined('ABS_PATH')) {
+<?php
+
+if (!defined('ABS_PATH')) {
     exit('ABS_PATH is not loaded. Direct access is not allowed.');
 }
 
@@ -25,6 +27,7 @@
  */
 class CAdminLogin extends AdminBaseModel
 {
+
     public function __construct()
     {
         parent::__construct();
@@ -43,9 +46,9 @@ class CAdminLogin extends AdminBaseModel
             case ('login_post'):     //post execution for the login
                 osc_csrf_check();
                 osc_run_hook('before_login_admin');
-                $url_redirect  = osc_get_http_referer();
+                $url_redirect = osc_get_http_referer();
                 $page_redirect = '';
-                $password      = Params::getParam('password', false, false);
+                $password = Params::getParam('password', false, false);
                 if (preg_match('|[?&]page=([^&]+)|', $url_redirect . '&', $match)) {
                     $page_redirect = $match[1];
                 }
@@ -68,46 +71,52 @@ class CAdminLogin extends AdminBaseModel
 
                 if (!$admin) {
                     osc_add_flash_error_message(sprintf(
-                        _m('Sorry, incorrect username. <a href="%s">Have you lost your password?</a>'),
-                        osc_admin_base_url(true) . '?page=login&amp;action=recover'
-                    ), 'admin');
+                                    _m('Sorry, incorrect username. <a href="%s">Have you lost your password?</a>'),
+                                    osc_admin_base_url(true) . '?page=login&amp;action=recover'
+                            ), 'admin');
                     $this->redirectTo(osc_admin_base_url(true) . '?page=login');
                 }
 
                 if (!osc_verify_password($password, $admin['s_password'])) {
                     osc_add_flash_error_message(sprintf(
-                        _m('Sorry, incorrect password. <a href="%s">Have you lost your password?</a>'),
-                        osc_admin_base_url(true) . '?page=login&amp;action=recover'
-                    ), 'admin');
+                                    _m('Sorry, incorrect password. <a href="%s">Have you lost your password?</a>'),
+                                    osc_admin_base_url(true) . '?page=login&amp;action=recover'
+                            ), 'admin');
                     $this->redirectTo(osc_admin_base_url(true) . '?page=login');
                 } elseif (@$admin['s_password'] != '') {
                     if (preg_match('|\$2y\$([0-9]{2})\$|', $admin['s_password'], $cost)) {
                         if ($cost[1] != BCRYPT_COST) {
                             Admin::newInstance()->update(
-                                array('s_password' => osc_hash_password($password)),
-                                array('pk_i_id' => $admin['pk_i_id'])
+                                    array('s_password' => osc_hash_password($password)),
+                                    array('pk_i_id' => $admin['pk_i_id'])
                             );
                         }
                     } else {
                         Admin::newInstance()->update(
-                            array('s_password' => osc_hash_password($password)),
-                            array('pk_i_id' => $admin['pk_i_id'])
+                                array('s_password' => osc_hash_password($password)),
+                                array('pk_i_id' => $admin['pk_i_id'])
                         );
                     }
                 }
-
+                $locale = Params::getParam('locale');
+                $is_valid_locale = osc_validate_locale($locale, true);
                 if (Params::getParam('remember')) {
                     $secret = osc_genRandomPassword();
 
                     Admin::newInstance()->update(
-                        array('s_secret' => $secret),
-                        array('pk_i_id' => $admin['pk_i_id'])
+                            array('s_secret' => $secret),
+                            array('pk_i_id' => $admin['pk_i_id'])
                     );
+
 
                     Cookie::newInstance()->set_expires(osc_time_cookie());
                     Cookie::newInstance()->push('oc_adminId', $admin['pk_i_id']);
                     Cookie::newInstance()->push('oc_adminSecret', $secret);
-                    Cookie::newInstance()->push('oc_adminLocale', Params::getParam('locale'));
+                    if ($is_valid_locale === true) {
+                        Cookie::newInstance()->push('oc_adminLocale', Params::getParam('locale'));
+                    } else {
+                        Cookie::newInstance()->push('oc_adminLocale', osc_admin_language());
+                    }
                     Cookie::newInstance()->set();
                 }
 
@@ -116,8 +125,11 @@ class CAdminLogin extends AdminBaseModel
                 Session::newInstance()->_set('adminUserName', $admin['s_username']);
                 Session::newInstance()->_set('adminName', $admin['s_name']);
                 Session::newInstance()->_set('adminEmail', $admin['s_email']);
-                Session::newInstance()->_set('adminLocale', Params::getParam('locale'));
-
+                if ($is_valid_locale === true) {
+                    Session::newInstance()->_set('adminLocale', $locale);
+                } else {
+                    Session::newInstance()->_set('adminLocale', osc_admin_language());
+                }
                 osc_run_hook('login_admin', $admin);
 
                 $this->redirectTo($url_redirect);
@@ -149,8 +161,8 @@ class CAdminLogin extends AdminBaseModel
                     $newPassword = osc_genRandomPassword(40);
 
                     Admin::newInstance()->update(
-                        array('s_secret' => $newPassword),
-                        array('pk_i_id' => $admin['pk_i_id'])
+                            array('s_secret' => $newPassword),
+                            array('pk_i_id' => $admin['pk_i_id'])
                     );
                     $password_url = osc_forgot_admin_password_confirm_url($admin['pk_i_id'], $newPassword);
 
@@ -179,20 +191,20 @@ class CAdminLogin extends AdminBaseModel
 
                 if (Params::getParam('new_password', false, false) == Params::getParam('new_password2', false, false)) {
                     Admin::newInstance()->update(
-                        array(
-                            's_secret'   => osc_genRandomPassword()
-                            ,
-                            's_password' => osc_hash_password(Params::getParam('new_password', false, false))
-                        ),
-                        array('pk_i_id' => $admin['pk_i_id'])
+                            array(
+                                's_secret' => osc_genRandomPassword()
+                                ,
+                                's_password' => osc_hash_password(Params::getParam('new_password', false, false))
+                            ),
+                            array('pk_i_id' => $admin['pk_i_id'])
                     );
                     osc_add_flash_ok_message(_m('The password has been changed'), 'admin');
                     $this->redirectTo(osc_admin_base_url(true) . '?page=login');
                 } else {
                     osc_add_flash_error_message(_m("Error, the passwords don't match"), 'admin');
                     $this->redirectTo(osc_forgot_admin_password_confirm_url(
-                        Params::getParam('adminId'),
-                        Params::getParam('code')
+                                    Params::getParam('adminId'),
+                                    Params::getParam('code')
                     ));
                 }
                 break;
@@ -214,7 +226,7 @@ class CAdminLogin extends AdminBaseModel
     public function doView($file)
     {
         $login_admin_title = osc_apply_filter('login_admin_title', 'Osclass');
-        $login_admin_url   = osc_apply_filter('login_admin_url', 'https://github.com/mindstellar/osclass/');
+        $login_admin_url = osc_apply_filter('login_admin_url', 'https://github.com/mindstellar/osclass/');
         $login_admin_image = osc_apply_filter('login_admin_image', osc_admin_base_url() . 'images/osclass-logo.gif');
 
         View::newInstance()->_exportVariableToView('login_admin_title', $login_admin_title);
@@ -225,6 +237,7 @@ class CAdminLogin extends AdminBaseModel
         require osc_admin_base_path() . $file;
         osc_run_hook('after_admin_html');
     }
+
 }
 
 /* file end: ./oc-admin/CAdminLogin.php */

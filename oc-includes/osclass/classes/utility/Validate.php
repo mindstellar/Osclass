@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Created by Mindstellar Community.
  * User: navjottomer
@@ -24,6 +25,7 @@ use Session;
  */
 class Validate
 {
+
     /**
      * Validate using filter_var
      * common method to validate value
@@ -172,7 +174,7 @@ class Validate
                 $filter = FILTER_VALIDATE_BOOLEAN;
         }
 
-            return $filter;
+        return $filter;
     }
 
     /**
@@ -195,7 +197,6 @@ class Validate
         return true;
     }
 
-
     /**
      * Validate one or more numbers (no periods), must be more than 0.
      *
@@ -208,7 +209,6 @@ class Validate
         return $this->filterInt($value) && $value > 0;
     }
 
-
     /**
      * Validate $value is a number or a numeric string
      *
@@ -219,9 +219,8 @@ class Validate
      */
     public function number($value)
     {
-            return is_numeric($value);
+        return is_numeric($value);
     }
-
 
     /**
      * Validate $value is a number phone,
@@ -244,7 +243,6 @@ class Validate
         return true;
     }
 
-
     /**
      * Validate if $value is more than $min
      *
@@ -257,7 +255,6 @@ class Validate
     {
         return !(mb_strlen($value, 'UTF-8') < $min);
     }
-
 
     /**
      * Validate if $value is less than $max
@@ -272,7 +269,6 @@ class Validate
         return !(mb_strlen($value, 'UTF-8') > $max);
     }
 
-
     /**
      * Validate if $value belongs at range between min to max
      *
@@ -286,7 +282,6 @@ class Validate
     {
         return mb_strlen($value, 'UTF-8') >= $min && mb_strlen($value, 'UTF-8') <= $max;
     }
-
 
     /**
      * Validate if exist $city, $region, $country in db
@@ -303,15 +298,14 @@ class Validate
     public function location($city, $sCity, $region, $sRegion, $country, $sCountry)
     {
         if ($this->nozero($city) && $this->nozero($region) && $this->text($country, 2)) {
-            $data      = Country::newInstance()->findByCode($country);
+            $data = Country::newInstance()->findByCode($country);
             $countryId = $data['pk_c_code'];
             if ($countryId) {
-                $data     = Region::newInstance()->findByPrimaryKey($region);
+                $data = Region::newInstance()->findByPrimaryKey($region);
                 $regionId = $data['pk_i_id'];
                 if ($data['b_active'] === 1) {
                     $data = City::newInstance()->findByPrimaryKey($city);
-                    if ($data['b_active'] === 1 && $data['fk_i_region_id'] === $regionId
-                        && strtolower($data['fk_c_country_code']) === strtolower($countryId)
+                    if ($data['b_active'] === 1 && $data['fk_i_region_id'] === $regionId && strtolower($data['fk_c_country_code']) === strtolower($countryId)
                     ) {
                         return true;
                     }
@@ -327,7 +321,6 @@ class Validate
 
         return false;
     }
-
 
     /**
      * Validate if exist category $value and is enabled in db
@@ -354,7 +347,6 @@ class Validate
         return false;
     }
 
-
     /**
      * Validate if $value url is a valid url.
      * Check header response to validate.
@@ -370,7 +362,7 @@ class Validate
         if ($required || $value !== '') {
             $sanitizedValue = (new Sanitize())->filterURL($value);
 
-                $success = $this->filterURL($sanitizedValue);
+            $success = $this->filterURL($sanitizedValue);
 
             if ($success) {
                 if ($get_headers) {
@@ -387,7 +379,6 @@ class Validate
         return true;
     }
 
-
     /**
      * Validate time between two items added/comments
      *
@@ -398,16 +389,15 @@ class Validate
     public function delay($type = 'item')
     {
         if ($type === 'item') {
-            $delay    = osc_item_spam_delay();
+            $delay = osc_item_spam_delay();
             $saved_as = 'last_submit_item';
         } else {
-            $delay    = osc_comment_spam_delay();
+            $delay = osc_comment_spam_delay();
             $saved_as = 'last_submit_comment';
         }
 
         // check $_SESSION
-        return !((Session::newInstance()->_get($saved_as) + $delay) > time()
-            || (Cookie::newInstance()->get_value($saved_as) + $delay) > time());
+        return !((Session::newInstance()->_get($saved_as) + $delay) > time() || (Cookie::newInstance()->get_value($saved_as) + $delay) > time());
     }
 
     /**
@@ -417,10 +407,13 @@ class Validate
      *
      * @return bool
      */
-    public function localeCode($string)
+    public function localeCode($string, $admin = false)
     {
         if (strlen($string) === 5) {
-            return (bool) OSCLocale::newInstance()->findByCode($string);
+            if ($admin) {
+                return array_search($locale, array_column(osc_get_admin_locales(), 'pk_c_code')) !== false;
+            }
+            return array_search($locale, array_column(osc_get_locales(), 'pk_c_code')) !== false;
         }
         return false;
     }
@@ -490,7 +483,6 @@ class Validate
         return true;
     }
 
-
     /**
      * validate username, accept letters plus underline, without separators
      *
@@ -503,4 +495,5 @@ class Validate
     {
         return mb_strlen($value, 'UTF-8') >= $min && preg_match('/^\w+$/', $value);
     }
+
 }
