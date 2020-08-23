@@ -34,7 +34,7 @@ class CWebLanguage extends BaseModel
     // business layer...
     public function doModel()
     {
-        if (Params::getParam('locale') && (new Validate())->localeCode(Params::getParam('locale'))) {
+        if (Params::getParam('locale') && osc_validate_locale(Params::getParam('locale'))) {
             Session::newInstance()->_set('userLocale', Params::getParam('locale'));
         }
 
