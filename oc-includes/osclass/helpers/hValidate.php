@@ -377,6 +377,7 @@ function osc_validate_username($value, $min = 1)
  * @since 4.0
  * @author maddrid <https://github.com/maddrid>
  */
-function osc_validate_locale ($locale){
+function osc_validate_locale($locale)
+{
     return array_search( $locale, array_column(osc_get_locales(), 'pk_c_code')) !== false ;
 }
