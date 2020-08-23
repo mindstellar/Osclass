@@ -411,9 +411,9 @@ class Validate
     {
         if (strlen($string) === 5) {
             if ($admin) {
-                return array_search($locale, array_column(osc_get_admin_locales(), 'pk_c_code')) !== false;
+                return array_search($string, array_column(osc_get_admin_locales(), 'pk_c_code')) !== false;
             }
-            return array_search($locale, array_column(osc_get_locales(), 'pk_c_code')) !== false;
+            return array_search($string, array_column(osc_get_locales(), 'pk_c_code')) !== false;
         }
         return false;
     }
