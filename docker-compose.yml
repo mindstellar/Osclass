@@ -23,8 +23,6 @@ services:
       - ./.docker/php-fpm/php-ini-overrides.ini:/etc/php/7.3/fpm/conf.d/99-overrides.ini
 
   mysql:
-    env_file:
-      - .env
     image: mysql:5.7
     container_name: osclass-mysql
     working_dir: /application
@@ -49,8 +47,6 @@ services:
       - "5003:8025"
 
   phpmyadmin:
-    env_file:
-      - .env
     image: phpmyadmin/phpmyadmin
     container_name: osclass-phpmyadmin
     ports:
