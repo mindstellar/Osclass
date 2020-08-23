@@ -233,9 +233,10 @@ function osc_locale_num_dec()
     return $cLocale['i_num_dec'];
 }
 /**
- * Gets list of  admin locales
+ * Gets list of enabled admin locales
  *
  * @return array
+ * @since 4.0.0
  */
 function osc_get_admin_locales()
 {
