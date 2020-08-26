@@ -14,7 +14,6 @@ use Category;
 use City;
 use Cookie;
 use Country;
-use OSCLocale;
 use Region;
 use Session;
 
@@ -45,6 +44,7 @@ class Validate
 
     /**
      * Validate bool using filter_var
+     *
      * @param       $value
      * @param array $options
      *
@@ -57,6 +57,7 @@ class Validate
 
     /**
      * Validate domain using filter_var
+     *
      * @param       $value
      * @param array $options
      *
@@ -69,6 +70,7 @@ class Validate
 
     /**
      * Validate email using filter_var
+     *
      * @param       $value
      * @param array $options
      *
@@ -81,6 +83,7 @@ class Validate
 
     /**
      * Validate float using filter_var
+     *
      * @param       $value
      * @param array $options
      *
@@ -93,6 +96,7 @@ class Validate
 
     /**
      * Validate int using filter_var
+     *
      * @param       $value
      * @param array $options
      *
@@ -105,6 +109,7 @@ class Validate
 
     /**
      * Validate IP using filter_var
+     *
      * @param       $value
      * @param array $options
      *
@@ -117,6 +122,7 @@ class Validate
 
     /**
      * Validate URL using filter_var
+     *
      * @param       $value
      * @param array $options
      *
@@ -298,14 +304,15 @@ class Validate
     public function location($city, $sCity, $region, $sRegion, $country, $sCountry)
     {
         if ($this->nozero($city) && $this->nozero($region) && $this->text($country, 2)) {
-            $data = Country::newInstance()->findByCode($country);
+            $data      = Country::newInstance()->findByCode($country);
             $countryId = $data['pk_c_code'];
             if ($countryId) {
-                $data = Region::newInstance()->findByPrimaryKey($region);
+                $data     = Region::newInstance()->findByPrimaryKey($region);
                 $regionId = $data['pk_i_id'];
                 if ($data['b_active'] === 1) {
                     $data = City::newInstance()->findByPrimaryKey($city);
-                    if ($data['b_active'] === 1 && $data['fk_i_region_id'] === $regionId && strtolower($data['fk_c_country_code']) === strtolower($countryId)
+                    if ($data['b_active'] === 1 && $data['fk_i_region_id'] === $regionId
+                        && strtolower($data['fk_c_country_code']) === strtolower($countryId)
                     ) {
                         return true;
                     }
@@ -389,15 +396,16 @@ class Validate
     public function delay($type = 'item')
     {
         if ($type === 'item') {
-            $delay = osc_item_spam_delay();
+            $delay    = osc_item_spam_delay();
             $saved_as = 'last_submit_item';
         } else {
-            $delay = osc_comment_spam_delay();
+            $delay    = osc_comment_spam_delay();
             $saved_as = 'last_submit_comment';
         }
 
         // check $_SESSION
-        return !((Session::newInstance()->_get($saved_as) + $delay) > time() || (Cookie::newInstance()->get_value($saved_as) + $delay) > time());
+        return !((Session::newInstance()->_get($saved_as) + $delay) > time()
+            || (Cookie::newInstance()->get_value($saved_as) + $delay) > time());
     }
 
     /**
@@ -411,10 +419,12 @@ class Validate
     {
         if (strlen($string) === 5) {
             if ($admin) {
-                return array_search($string, array_column(osc_get_admin_locales(), 'pk_c_code')) !== false;
+                return array_search($string, array_column(osc_get_admin_locales(), 'pk_c_code'), true) !== false;
             }
-            return array_search($string, array_column(osc_get_locales(), 'pk_c_code')) !== false;
+
+            return array_search($string, array_column(osc_get_locales(), 'pk_c_code'), true) !== false;
         }
+
         return false;
     }
 
@@ -495,5 +505,4 @@ class Validate
     {
         return mb_strlen($value, 'UTF-8') >= $min && preg_match('/^\w+$/', $value);
     }
-
 }
