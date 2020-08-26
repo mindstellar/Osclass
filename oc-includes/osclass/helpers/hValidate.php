@@ -369,6 +369,8 @@ function osc_validate_username($value, $min = 1)
 {
     return mb_strlen($value, 'UTF-8') >= $min && preg_match('/^[A-Za-z0-9_]+$/', $value);
 }
+
+
 /**
  * Validate locale  string. Check against available locale list
  *
@@ -379,8 +381,5 @@ function osc_validate_username($value, $min = 1)
  */
 function osc_validate_locale($locale, $admin = false)
 {
-    if ($admin) {
-         return array_search( $locale, array_column(osc_get_admin_locales(), 'pk_c_code')) !== false ;
-    }
-    return array_search( $locale, array_column(osc_get_locales(), 'pk_c_code')) !== false ;
+    return (new \mindstellar\osclass\classes\utility\Validate())->localeCode($locale, $admin);
 }
