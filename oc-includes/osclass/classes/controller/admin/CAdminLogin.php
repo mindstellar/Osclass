@@ -189,7 +189,7 @@ class CAdminLogin extends AdminBaseModel
                     $this->redirectTo(osc_admin_base_url());
                 }
 
-                if (Params::getParam('new_password', false, false) === Params::getParam('new_password2', false, 
+                if (Params::getParam('new_password', false, false) === Params::getParam('new_password2', false,
                         false)) {
                     Admin::newInstance()->update(
                         array(
