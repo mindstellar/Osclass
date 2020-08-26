@@ -1,4 +1,6 @@
-<?php if (!defined('ABS_PATH')) {
+<?php
+
+if (!defined('ABS_PATH')) {
     exit('ABS_PATH is not loaded. Direct access is not allowed.');
 }
 
@@ -25,6 +27,7 @@
  */
 class CAdminLogin extends AdminBaseModel
 {
+
     public function __construct()
     {
         parent::__construct();
@@ -95,7 +98,8 @@ class CAdminLogin extends AdminBaseModel
                         );
                     }
                 }
-
+                $locale          = Params::getParam('locale');
+                $is_valid_locale = osc_validate_locale($locale, true);
                 if (Params::getParam('remember')) {
                     $secret = osc_genRandomPassword();
 
@@ -104,10 +108,15 @@ class CAdminLogin extends AdminBaseModel
                         array('pk_i_id' => $admin['pk_i_id'])
                     );
 
+
                     Cookie::newInstance()->set_expires(osc_time_cookie());
                     Cookie::newInstance()->push('oc_adminId', $admin['pk_i_id']);
                     Cookie::newInstance()->push('oc_adminSecret', $secret);
-                    Cookie::newInstance()->push('oc_adminLocale', Params::getParam('locale'));
+                    if ($is_valid_locale === true) {
+                        Cookie::newInstance()->push('oc_adminLocale', Params::getParam('locale'));
+                    } else {
+                        Cookie::newInstance()->push('oc_adminLocale', osc_admin_language());
+                    }
                     Cookie::newInstance()->set();
                 }
 
@@ -116,8 +125,11 @@ class CAdminLogin extends AdminBaseModel
                 Session::newInstance()->_set('adminUserName', $admin['s_username']);
                 Session::newInstance()->_set('adminName', $admin['s_name']);
                 Session::newInstance()->_set('adminEmail', $admin['s_email']);
-                Session::newInstance()->_set('adminLocale', Params::getParam('locale'));
-
+                if ($is_valid_locale === true) {
+                    Session::newInstance()->_set('adminLocale', $locale);
+                } else {
+                    Session::newInstance()->_set('adminLocale', osc_admin_language());
+                }
                 osc_run_hook('login_admin', $admin);
 
                 $this->redirectTo($url_redirect);
@@ -177,11 +189,11 @@ class CAdminLogin extends AdminBaseModel
                     $this->redirectTo(osc_admin_base_url());
                 }
 
-                if (Params::getParam('new_password', false, false) == Params::getParam('new_password2', false, false)) {
+                if (Params::getParam('new_password', false, false) === Params::getParam('new_password2', false,
+                        false)) {
                     Admin::newInstance()->update(
                         array(
-                            's_secret'   => osc_genRandomPassword()
-                            ,
+                            's_secret'   => osc_genRandomPassword(),
                             's_password' => osc_hash_password(Params::getParam('new_password', false, false))
                         ),
                         array('pk_i_id' => $admin['pk_i_id'])
@@ -225,6 +237,7 @@ class CAdminLogin extends AdminBaseModel
         require osc_admin_base_path() . $file;
         osc_run_hook('after_admin_html');
     }
+
 }
 
 /* file end: ./oc-admin/CAdminLogin.php */

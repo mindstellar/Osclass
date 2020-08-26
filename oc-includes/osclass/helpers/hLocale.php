@@ -232,7 +232,23 @@ function osc_locale_num_dec()
 
     return $cLocale['i_num_dec'];
 }
+/**
+ * Gets list of enabled admin locales
+ *
+ * @return array
+ * @since 4.0.0
+ */
+function osc_get_admin_locales()
+{
+    if (!View::newInstance()->_exists('adminLocales')) {
+        $locale = OSCLocale::newInstance()->listAllEnabled(true);
+        View::newInstance()->_exportVariableToView('adminLocales', $locale);
+    } else {
+        $locale = View::newInstance()->_get('adminLocales');
+    }
 
+    return $locale;
+}
 
 /**
  * Gets list of enabled locales

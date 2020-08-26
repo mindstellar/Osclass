@@ -34,8 +34,9 @@ class CWebLanguage extends BaseModel
     // business layer...
     public function doModel()
     {
-        if (Params::getParam('locale') && (new Validate())->localeCode(Params::getParam('locale'))) {
-            Session::newInstance()->_set('userLocale', Params::getParam('locale'));
+        $locale = Params::getParam('locale');
+        if ($locale && (new Validate())->localeCode($locale)) {
+            Session::newInstance()->_set('userLocale', $locale);
         }
 
         $redirect_url = '';

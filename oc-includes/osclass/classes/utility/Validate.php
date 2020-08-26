@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Created by Mindstellar Community.
  * User: navjottomer
@@ -13,7 +14,6 @@ use Category;
 use City;
 use Cookie;
 use Country;
-use OSCLocale;
 use Region;
 use Session;
 
@@ -24,6 +24,7 @@ use Session;
  */
 class Validate
 {
+
     /**
      * Validate using filter_var
      * common method to validate value
@@ -43,6 +44,7 @@ class Validate
 
     /**
      * Validate bool using filter_var
+     *
      * @param       $value
      * @param array $options
      *
@@ -55,6 +57,7 @@ class Validate
 
     /**
      * Validate domain using filter_var
+     *
      * @param       $value
      * @param array $options
      *
@@ -67,6 +70,7 @@ class Validate
 
     /**
      * Validate email using filter_var
+     *
      * @param       $value
      * @param array $options
      *
@@ -79,6 +83,7 @@ class Validate
 
     /**
      * Validate float using filter_var
+     *
      * @param       $value
      * @param array $options
      *
@@ -91,6 +96,7 @@ class Validate
 
     /**
      * Validate int using filter_var
+     *
      * @param       $value
      * @param array $options
      *
@@ -103,6 +109,7 @@ class Validate
 
     /**
      * Validate IP using filter_var
+     *
      * @param       $value
      * @param array $options
      *
@@ -115,6 +122,7 @@ class Validate
 
     /**
      * Validate URL using filter_var
+     *
      * @param       $value
      * @param array $options
      *
@@ -172,7 +180,7 @@ class Validate
                 $filter = FILTER_VALIDATE_BOOLEAN;
         }
 
-            return $filter;
+        return $filter;
     }
 
     /**
@@ -195,7 +203,6 @@ class Validate
         return true;
     }
 
-
     /**
      * Validate one or more numbers (no periods), must be more than 0.
      *
@@ -208,7 +215,6 @@ class Validate
         return $this->filterInt($value) && $value > 0;
     }
 
-
     /**
      * Validate $value is a number or a numeric string
      *
@@ -219,9 +225,8 @@ class Validate
      */
     public function number($value)
     {
-            return is_numeric($value);
+        return is_numeric($value);
     }
-
 
     /**
      * Validate $value is a number phone,
@@ -244,7 +249,6 @@ class Validate
         return true;
     }
 
-
     /**
      * Validate if $value is more than $min
      *
@@ -257,7 +261,6 @@ class Validate
     {
         return !(mb_strlen($value, 'UTF-8') < $min);
     }
-
 
     /**
      * Validate if $value is less than $max
@@ -272,7 +275,6 @@ class Validate
         return !(mb_strlen($value, 'UTF-8') > $max);
     }
 
-
     /**
      * Validate if $value belongs at range between min to max
      *
@@ -286,7 +288,6 @@ class Validate
     {
         return mb_strlen($value, 'UTF-8') >= $min && mb_strlen($value, 'UTF-8') <= $max;
     }
-
 
     /**
      * Validate if exist $city, $region, $country in db
@@ -328,7 +329,6 @@ class Validate
         return false;
     }
 
-
     /**
      * Validate if exist category $value and is enabled in db
      *
@@ -354,7 +354,6 @@ class Validate
         return false;
     }
 
-
     /**
      * Validate if $value url is a valid url.
      * Check header response to validate.
@@ -370,7 +369,7 @@ class Validate
         if ($required || $value !== '') {
             $sanitizedValue = (new Sanitize())->filterURL($value);
 
-                $success = $this->filterURL($sanitizedValue);
+            $success = $this->filterURL($sanitizedValue);
 
             if ($success) {
                 if ($get_headers) {
@@ -386,7 +385,6 @@ class Validate
 
         return true;
     }
-
 
     /**
      * Validate time between two items added/comments
@@ -417,11 +415,16 @@ class Validate
      *
      * @return bool
      */
-    public function localeCode($string)
+    public function localeCode($string, $admin = false)
     {
         if (strlen($string) === 5) {
-            return (bool) OSCLocale::newInstance()->findByCode($string);
+            if ($admin) {
+                return array_search($string, array_column(osc_get_admin_locales(), 'pk_c_code'), true) !== false;
+            }
+
+            return array_search($string, array_column(osc_get_locales(), 'pk_c_code'), true) !== false;
         }
+
         return false;
     }
 
@@ -489,7 +492,6 @@ class Validate
 
         return true;
     }
-
 
     /**
      * validate username, accept letters plus underline, without separators

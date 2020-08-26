@@ -369,3 +369,17 @@ function osc_validate_username($value, $min = 1)
 {
     return mb_strlen($value, 'UTF-8') >= $min && preg_match('/^[A-Za-z0-9_]+$/', $value);
 }
+
+
+/**
+ * Validate locale  string. Check against available locale list
+ *
+ * @param $locale
+ * @return bool
+ * @since 4.0
+ * @author maddrid <https://github.com/maddrid>
+ */
+function osc_validate_locale($locale, $admin = false)
+{
+    return (new \mindstellar\osclass\classes\utility\Validate())->localeCode($locale, $admin);
+}
