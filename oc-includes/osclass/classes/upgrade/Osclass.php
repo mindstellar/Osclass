@@ -14,7 +14,7 @@ use DBConnectionClass;
 use mindstellar\osclass\classes\utility\FileSystem;
 use mindstellar\osclass\classes\utility\Utils;
 use Plugins;
-use RuntimeException;
+use Preference;
 
 /**
  * Class Osclass
@@ -74,16 +74,6 @@ class Osclass extends UpgradePackage
         return json_encode(['status' => true, 'message' => __('Osclass DB Upgraded Successfully')]);
     }
 
-
-    /**
-     * Extra actions after upgradeProcess is done
-     * @return bool
-     */
-    public function afterProcessUpgrade()
-    {
-        return osc_set_preference('update_core_available');
-    }
-
     /**
      * prepare osclass upgrade package info
      *                           [
@@ -99,36 +89,55 @@ class Osclass extends UpgradePackage
      *                           's_prerelease' => true or false (Optional)
      *                           ]
      */
-    public static function getPackageInfo()
+    public static function getPackageInfo($force = true)
     {
-        $json_url               = 'https://api.github.com/repos/mindstellar/osclass/releases/latest';
-        $osclass_package_info_json = (new FileSystem())->getContents($json_url);
-        if ($osclass_package_info_json) {
-            $aSelfPackage = json_decode($osclass_package_info_json, true);
-            if (!$aSelfPackage['draft']) {
-                if (isset($aSelfPackage['name'])) {
-                    $package_info['s_title'] = $aSelfPackage['name'];
+        $preference = Preference::newInstance();
+        if ($force === true
+            || (!$preference->get('update_core_json') && (time() - $preference->get('last_version_check')) > (24 * 3600)
+            )
+        ) {
+            $json_url                  = 'https://api.github.com/repos/mindstellar/osclass/releases/latest';
+            $osclass_package_info_json = (new FileSystem())->getContents($json_url);
+            if ($osclass_package_info_json) {
+                $aSelfPackage = json_decode($osclass_package_info_json, true);
+                if (!$aSelfPackage['draft']) {
+                    if (isset($aSelfPackage['name'])) {
+                        $package_info['s_title'] = $aSelfPackage['name'];
+                    }
+                    if (isset($aSelfPackage['assets'][0]['browser_download_url'])) {
+                        $download_url                 = $aSelfPackage['assets'][0]['browser_download_url'];
+                        $package_info['s_source_url'] = $download_url;
+                    }
+                    if (isset($aSelfPackage['tag_name'])) {
+                        $package_info['s_new_version'] = ltrim(trim($aSelfPackage['tag_name']), 'v');
+                    }
+                    $package_info['s_installed_version'] = OSCLASS_VERSION;
+                    $package_info['s_short_name']        = 'osclass';
+
+                    $package_info['s_target_directory'] = ABS_PATH;
+
+                    $package_info['a_filtered_files'] = ['oc-content', 'config.php'];
+
+                    $package_info['s_prerelease'] = $aSelfPackage['prerelease'];
                 }
-                if (isset($aSelfPackage['assets'][0]['browser_download_url'])) {
-                    $download_url        = $aSelfPackage['assets'][0]['browser_download_url'];
-                    $package_info['s_source_url'] = $download_url;
-                }
-                if (isset($aSelfPackage['tag_name'])) {
-                    $package_info['s_new_version'] = ltrim(trim($aSelfPackage['tag_name']), 'v');
-                }
-                $package_info['s_installed_version'] = OSCLASS_VERSION;
-                $package_info['s_short_name'] = 'osclass';
-
-                $package_info['s_target_directory'] = ABS_PATH;
-
-                $package_info['a_filtered_files'] = ['oc-content','config.php'];
-
-                $package_info['s_prerelease'] = $aSelfPackage['prerelease'];
-
-                return Plugins::applyFilter('osclass_upgrade_package', $package_info);
             }
         }
+        if (!isset($package_info) || empty($package_info)) {
+            $package_info = json_decode($preference->get('update_core_json'), true);
+        }
+        return Plugins::applyFilter('osclass_upgrade_package', $package_info);
+    }
 
-        throw new RuntimeException(__('Unable to get osclass upgrade package info from remote url'));
+    /**
+     * Extra actions after upgradeProcess is done
+     *
+     * @return true
+     */
+    public function afterProcessUpgrade()
+    {
+        osc_set_preference('update_core_available');
+        osc_set_preference('update_core_json');
+
+        return true;
     }
 }

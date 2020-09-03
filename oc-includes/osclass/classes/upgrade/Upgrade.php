@@ -48,12 +48,8 @@ class Upgrade
      */
     public function __construct(UpgradePackage $packageObj)
     {
-        if ($packageObj instanceof UpgradePackage) {
-            $this->objPackage = $packageObj;
-            $this->validatePackageInfo();
-        } else {
-            throw new RuntimeException('Invalid package object.');
-        }
+        $this->objPackage = $packageObj;
+        $this->validatePackageInfo();
         $this->Zip        = new Zip();
         $this->FileSystem = new FileSystem();
     }

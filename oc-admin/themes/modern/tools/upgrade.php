@@ -1,5 +1,4 @@
 <?php
-
 use mindstellar\osclass\classes\upgrade\Osclass;
 
 if (!defined('OC_ADMIN')) {
@@ -15,15 +14,15 @@ function customHead()
             $("#steps_div").hide();
         });
         <?php
-        $osclassUpgrade = new Osclass(Osclass::getPackageInfo());
-        $is_upgrade_available = $osclassUpgrade->isUpgradable();
+        $update_core_json = osc_get_preference('update_core_json');
+        $is_upgrade_available = $update_core_json?(new Osclass(json_decode($update_core_json, true)))->isUpgradable()
+            :false;
         ?>
         $(function () {
             let steps;
             let remoteVersion;
             const stepsDiv = document.getElementById('steps_div');
             stepsDiv.style.display = '';
-            remoteVersion = '<?php echo osc_esc_js($osclassUpgrade->getNewVersion()); ?>';
             steps = $('#steps');
 
             <?php if ($is_upgrade_available && Params::getParam('confirm') !== 'true') { ?>
@@ -31,6 +30,7 @@ function customHead()
                 __('Upgrade is available for (Current version %s)'),
                 osc_get_preference('version')
             )); ?> </li>');
+            remoteVersion = '<?php echo osc_esc_js((new Osclass(json_decode($update_core_json, true)))->getNewVersion()); ?>';
             steps.append('<li><?php echo osc_esc_js(__('New version to update:')); ?> ' + remoteVersion + '<\/li>');
             steps.append(`<input type="button" value="<?php echo osc_esc_html(__('Upgrade')); ?>"
             onclick="window.location.href='<?php echo osc_admin_base_url(true) .'?page=tools&action=upgrade&confirm=true';?> ';" />`);

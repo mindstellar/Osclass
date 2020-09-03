@@ -536,17 +536,23 @@ class CAdminAjax extends AdminSecBaseModel
                 }
                 break;
             case 'check_version':
-                $upgradeOsclass       = new Osclass(Osclass::getPackageInfo());
-                $upgrade_available = $upgradeOsclass->isUpgradable();
+                try {
+                    $package_json = Osclass::getPackageInfo(true);
+                    $upgradeOsclass    = new Osclass($package_json);
+                    $upgrade_available = $upgradeOsclass->isUpgradable();
 
-                if ($upgrade_available) {
-                    osc_set_preference('update_core_available', $upgradeOsclass->isUpgradable());
-                    echo json_encode(array('error' => 0, 'msg' => __('Update available')));
-                } else {
-                    osc_set_preference('update_core_available', '');
-                    echo json_encode(array('error' => 0, 'msg' => __('No update available')));
+                    if ($upgrade_available) {
+                        osc_set_preference('update_core_available', $upgradeOsclass->isUpgradable());
+                        echo json_encode(array('error' => 0, 'msg' => __('Update available')));
+                    } else {
+                        osc_set_preference('update_core_available', '');
+                        echo json_encode(array('error' => 0, 'msg' => __('No update available')));
+                    }
+                    osc_set_preference('update_core_json', json_encode($package_json));
+                    osc_set_preference('last_version_check', time());
+                } catch (Exception $e) {
+                        echo json_encode(array('error' => 1, 'msg' => $e->getMessage()));
                 }
-                osc_set_preference('last_version_check', time());
 
                 break;
             case 'check_languages':
