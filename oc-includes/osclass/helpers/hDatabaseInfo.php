@@ -26,7 +26,7 @@
  * @author     Osclass
  */
 
-use mindstellar\osclass\classes\utility\Deprecate;
+use mindstellar\utility\Deprecate;
 
 /**
  * Gets database name

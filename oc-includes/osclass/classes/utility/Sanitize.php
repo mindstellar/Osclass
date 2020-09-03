@@ -7,13 +7,13 @@
  * License is provided in root directory.
  */
 
-namespace mindstellar\osclass\classes\utility;
+namespace mindstellar\utility;
 
 /**
  * Class Sanitize
  * Provide common sanitization methods
  *
- * @package mindstellar\osclass\classes\utility
+ * @package mindstellar\utility
  */
 class Sanitize
 {

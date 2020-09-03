@@ -7,7 +7,7 @@
  * License is provided in root directory.
  */
 
-namespace mindstellar\osclass\classes\utility;
+namespace mindstellar\utility;
 
 use Plugins;
 
@@ -15,7 +15,7 @@ use Plugins;
  * Class Deprecated
  * Provides common static method to deprecate functions,class,file,hooks,filters
  *
- * @package mindstellar\osclass\classes\utility
+ * @package mindstellar\utility
  */
 class Deprecate
 {

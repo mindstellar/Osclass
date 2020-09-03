@@ -30,7 +30,7 @@ if (CLI) {
         Params::setParam('cron-type', $cli_params['t']);
     }
     if (Params::getParam('page') === 'upgrade') {
-        echo \mindstellar\osclass\classes\upgrade\Osclass::upgradeDB();
+        echo \mindstellar\upgrade\Osclass::upgradeDB();
 
         exit(1);
     }
@@ -150,7 +150,7 @@ switch (Params::getParam('page')) {
 }
 
 if (!defined('__FROM_CRON__') && osc_auto_cron()) {
-    \mindstellar\osclass\classes\utility\Utils::doRequest(osc_base_url(), array('page' => 'cron'));
+    \mindstellar\utility\Utils::doRequest(osc_base_url(), array('page' => 'cron'));
 }
 
 /* file end: ./index.php */

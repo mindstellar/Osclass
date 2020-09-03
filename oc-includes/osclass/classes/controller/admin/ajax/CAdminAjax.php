@@ -1,8 +1,8 @@
 <?php
 
-use mindstellar\osclass\classes\upgrade\Osclass;
-use mindstellar\osclass\classes\upgrade\Upgrade;
-use mindstellar\osclass\classes\utility\Utils;
+use mindstellar\upgrade\Osclass;
+use mindstellar\upgrade\Upgrade;
+use mindstellar\utility\Utils;
 
 define('IS_AJAX', true);
 

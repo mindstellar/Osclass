@@ -282,7 +282,7 @@ class Dump extends DAO
     private function appendFile($file, $content)
     {
         try {
-            (new \mindstellar\osclass\classes\utility\FileSystem())->writeToFile($file, $content, true);
+            (new \mindstellar\utility\FileSystem())->writeToFile($file, $content, true);
         } catch (Exception $e) {
             trigger_error($e->getMessage(), E_USER_WARNING);
         }

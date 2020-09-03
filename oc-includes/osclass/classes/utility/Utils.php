@@ -7,7 +7,7 @@
  * License is provided in root directory.
  */
 
-namespace mindstellar\osclass\classes\utility;
+namespace mindstellar\utility;
 
 use Category;
 use CategoryStats;
@@ -32,7 +32,7 @@ use Translation;
  * Utility class contains some useful static methods
  * Most functions derived from old Utils file, some of them may have been tweaked
  *
- * @package mindstellar\osclass\classes\utility
+ * @package mindstellar\utility
  */
 class Utils
 {

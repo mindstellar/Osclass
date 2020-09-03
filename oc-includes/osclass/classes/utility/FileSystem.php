@@ -7,7 +7,7 @@
  * License is provided in root directory.
  */
 
-namespace mindstellar\osclass\classes\utility;
+namespace mindstellar\utility;
 
 use Exception;
 use FilesystemIterator;
@@ -24,7 +24,7 @@ use Traversable;
 /**
  * Class FileSystem
  *
- * @package mindstellar\osclass\classes\utility
+ * @package mindstellar\utility
  */
 class FileSystem
 {

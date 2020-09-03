@@ -7,14 +7,14 @@
  * License is provided in root directory.
  */
 
-namespace mindstellar\osclass\classes\upgrade;
+namespace mindstellar\upgrade;
 
 use RuntimeException;
 
 /**
  * Class Osclass
  *
- * @package mindstellar\osclass\classes\upgrade
+ * @package mindstellar\upgrade
  */
 abstract class UpgradePackage
 {

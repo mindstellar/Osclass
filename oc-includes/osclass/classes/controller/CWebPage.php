@@ -18,7 +18,7 @@
  * limitations under the License.
  */
 
-use mindstellar\osclass\classes\utility\Validate;
+use mindstellar\utility\Validate;
 
 /**
  * Class CWebPage

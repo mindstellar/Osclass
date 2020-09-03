@@ -9,7 +9,7 @@
 
 namespace mindstellar\osclass\classes;
 
-use mindstellar\osclass\classes\utility\Utils;
+use mindstellar\utility\Utils;
 use Params;
 use Plugins;
 use Preference;

@@ -7,10 +7,10 @@
  * License is provided in root directory.
  */
 
-namespace mindstellar\osclass\classes\upgrade;
+namespace mindstellar\upgrade;
 
-use mindstellar\osclass\classes\utility\FileSystem;
-use mindstellar\osclass\classes\utility\Zip;
+use mindstellar\utility\FileSystem;
+use mindstellar\utility\Zip;
 use RuntimeException;
 
 /**
@@ -26,17 +26,17 @@ class Upgrade
     private $packageInfoValid;
 
     /**
-     * @var \mindstellar\osclass\classes\utility\Zip
+     * @var \mindstellar\utility\Zip
      */
     private $Zip;
 
     /**
-     * @var \mindstellar\osclass\classes\utility\FileSystem
+     * @var \mindstellar\utility\FileSystem
      */
     private $FileSystem;
 
     /**
-     * @var \mindstellar\osclass\classes\upgrade\UpgradePackage
+     * @var \mindstellar\upgrade\UpgradePackage
      */
     private $objPackage;
 
@@ -44,7 +44,7 @@ class Upgrade
     /**
      * Upgrade constructor.
      *
-     * @param \mindstellar\osclass\classes\upgrade\UpgradePackage $packageObj
+     * @param \mindstellar\upgrade\UpgradePackage $packageObj
      */
     public function __construct(UpgradePackage $packageObj)
     {

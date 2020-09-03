@@ -18,7 +18,7 @@
  * limitations under the License.
  */
 
-use mindstellar\osclass\classes\utility\Deprecate;
+use mindstellar\utility\Deprecate;
 
 /**
  * Class AdminBaseModel

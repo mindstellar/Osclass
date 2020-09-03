@@ -17,7 +17,7 @@
  * limitations under the License.
  */
 
-use mindstellar\osclass\classes\utility\Deprecate;
+use mindstellar\utility\Deprecate;
 
 Deprecate::deprecatedFile(__FILE__, '4.0.0', null, __('Use native php function for timezones list.'));
 

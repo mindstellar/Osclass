@@ -381,5 +381,5 @@ function osc_validate_username($value, $min = 1)
  */
 function osc_validate_locale($locale, $admin = false)
 {
-    return (new \mindstellar\osclass\classes\utility\Validate())->localeCode($locale, $admin);
+    return (new \mindstellar\utility\Validate())->localeCode($locale, $admin);
 }

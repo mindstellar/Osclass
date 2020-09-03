@@ -17,7 +17,7 @@
  * limitations under the License.
  */
 
-use mindstellar\osclass\classes\utility\Utils;
+use mindstellar\utility\Utils;
 
 /**
  * @param $value

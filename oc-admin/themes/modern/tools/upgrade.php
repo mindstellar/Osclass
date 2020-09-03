@@ -1,5 +1,5 @@
 <?php
-use mindstellar\osclass\classes\upgrade\Osclass;
+use mindstellar\upgrade\Osclass;
 
 if (!defined('OC_ADMIN')) {
     exit('Direct access is not allowed.');

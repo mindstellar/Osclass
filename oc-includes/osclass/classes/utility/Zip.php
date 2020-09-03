@@ -7,7 +7,7 @@
  * License is provided in root directory.
  */
 
-namespace mindstellar\osclass\classes\utility;
+namespace mindstellar\utility;
 
 use PclZip;
 use ZipArchive;
@@ -15,13 +15,13 @@ use ZipArchive;
 /**
  * Class Zip
  *
- * @package mindstellar\osclass\classes\utility
+ * @package mindstellar\utility
  */
 class Zip
 {
 
     /**
-     * @var \mindstellar\osclass\classes\utility\FileSystem
+     * @var \mindstellar\utility\FileSystem
      */
     private $FileSystem;
 

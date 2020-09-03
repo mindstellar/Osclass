@@ -8,7 +8,7 @@
  * License is provided in root directory.
  */
 
-namespace mindstellar\osclass\classes\utility;
+namespace mindstellar\utility;
 
 use Category;
 use City;
@@ -20,7 +20,7 @@ use Session;
 /**
  * Class Validate
  *
- * @package mindstellar\osclass\classes\utility
+ * @package mindstellar\utility
  */
 class Validate
 {

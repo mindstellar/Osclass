@@ -26,7 +26,7 @@
  * @author     Osclass
  */
 
-use mindstellar\osclass\classes\Csrf;
+use mindstellar\Csrf;
 use OpensslCryptor\Cryptor;
 
 if (!defined('BCRYPT_COST')) {

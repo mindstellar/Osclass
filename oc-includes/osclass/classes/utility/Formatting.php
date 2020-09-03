@@ -7,12 +7,12 @@
  * License is provided in root directory.
  */
 
-namespace mindstellar\osclass\classes\utility;
+namespace mindstellar\utility;
 
 /**
  * Class Formatting
  *
- * @package mindstellar\osclass\classes\utility
+ * @package mindstellar\utility
  */
 class Formatting
 {

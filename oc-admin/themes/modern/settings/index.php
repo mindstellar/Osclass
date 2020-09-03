@@ -1,4 +1,4 @@
-<?php use mindstellar\osclass\classes\utility\Utils;
+<?php use mindstellar\utility\Utils;
 
 if (!defined('OC_ADMIN')) {
     exit('Direct access is not allowed.');

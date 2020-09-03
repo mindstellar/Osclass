@@ -1,6 +1,6 @@
 <?php
 
-use mindstellar\osclass\classes\utility\Deprecate;
+use mindstellar\utility\Deprecate;
 
 /**
  * Scripts enqueue class.

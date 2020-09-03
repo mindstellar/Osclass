@@ -7,19 +7,19 @@
  * License is provided in root directory.
  */
 
-namespace mindstellar\osclass\classes\upgrade;
+namespace mindstellar\upgrade;
 
 use DBCommandClass;
 use DBConnectionClass;
-use mindstellar\osclass\classes\utility\FileSystem;
-use mindstellar\osclass\classes\utility\Utils;
+use mindstellar\utility\FileSystem;
+use mindstellar\utility\Utils;
 use Plugins;
 use Preference;
 
 /**
  * Class Osclass
  *
- * @package mindstellar\osclass\classes\upgrade
+ * @package mindstellar\upgrade
  */
 class Osclass extends UpgradePackage
 {

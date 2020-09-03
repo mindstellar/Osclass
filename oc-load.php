@@ -17,7 +17,7 @@
  * limitations under the License.
  */
 
-use mindstellar\osclass\classes\Csrf;
+use mindstellar\Csrf;
 
 if (!defined('ABS_PATH')) {
     define('ABS_PATH', __DIR__ . '/');

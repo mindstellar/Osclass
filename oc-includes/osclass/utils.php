@@ -18,9 +18,9 @@
 * limitations under the License.
 */
 
-use mindstellar\osclass\classes\utility\Deprecate;
-use mindstellar\osclass\classes\utility\FileSystem;
-use mindstellar\osclass\classes\utility\Utils;
+use mindstellar\utility\Deprecate;
+use mindstellar\utility\FileSystem;
+use mindstellar\utility\Utils;
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\POP3;
 use ReCaptcha\ReCaptcha;
@@ -917,7 +917,7 @@ function strip_slashes_extended($array)
 function osc_unzip_file($file, $to)
 {
     try {
-        return (new \mindstellar\osclass\classes\utility\Zip())->unzipFile($file, $to);
+        return (new \mindstellar\utility\Zip())->unzipFile($file, $to);
     } catch (Exception $e) {
         trigger_error($e->getMessage(), E_USER_WARNING);
         return 0;
@@ -934,7 +934,7 @@ function osc_unzip_file($file, $to)
  */
 function osc_zip_folder($archive_folder, $archive_name)
 {
-    return (new \mindstellar\osclass\classes\utility\Zip())->zipFolder($archive_folder, $archive_name);
+    return (new \mindstellar\utility\Zip())->zipFolder($archive_folder, $archive_name);
 }
 
 /**

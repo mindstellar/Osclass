@@ -19,7 +19,7 @@ class ComposerStaticInit1fcba07043a631f012853cd02fe384cd
         ),
         'm' => 
         array (
-            'mindstellar\\osclass\\' => 20,
+            'mindstellar\\' => 12,
         ),
         'R' => 
         array (
@@ -45,7 +45,7 @@ class ComposerStaticInit1fcba07043a631f012853cd02fe384cd
         array (
             0 => __DIR__ . '/..' . '/phpseclib/phpseclib/phpseclib',
         ),
-        'mindstellar\\osclass\\' => 
+        'mindstellar\\' => 
         array (
             0 => __DIR__ . '/../../..' . '/oc-includes/osclass',
         ),
@@ -539,13 +539,17 @@ class ComposerStaticInit1fcba07043a631f012853cd02fe384cd
         'WebThemes' => __DIR__ . '/../../..' . '/oc-includes/osclass/classes/themes/WebThemes.php',
         'Widget' => __DIR__ . '/../../..' . '/oc-includes/osclass/classes/model/Widget.php',
         'iObject_Cache' => __DIR__ . '/../../..' . '/oc-includes/osclass/classes/cache/interface/iObject_Cache.php',
-        'mindstellar\\osclass\\classes\\AdminDashboard' => __DIR__ . '/../../..' . '/oc-includes/osclass/classes/AdminDashboard.php',
+        'mindstellar\\osclass\\classes\\Csrf' => __DIR__ . '/../../..' . '/oc-includes/osclass/classes/Csrf.php',
+        'mindstellar\\osclass\\classes\\upgrade\\Osclass' => __DIR__ . '/../../..' . '/oc-includes/osclass/classes/upgrade/Osclass.php',
+        'mindstellar\\osclass\\classes\\upgrade\\Plugin' => __DIR__ . '/../../..' . '/oc-includes/osclass/classes/upgrade/Plugin.php',
+        'mindstellar\\osclass\\classes\\upgrade\\Theme' => __DIR__ . '/../../..' . '/oc-includes/osclass/classes/upgrade/Theme.php',
+        'mindstellar\\osclass\\classes\\upgrade\\Upgrade' => __DIR__ . '/../../..' . '/oc-includes/osclass/classes/upgrade/Upgrade.php',
+        'mindstellar\\osclass\\classes\\upgrade\\UpgradePackage' => __DIR__ . '/../../..' . '/oc-includes/osclass/classes/upgrade/UpgradePackage.php',
         'mindstellar\\osclass\\classes\\utility\\Deprecate' => __DIR__ . '/../../..' . '/oc-includes/osclass/classes/utility/Deprecate.php',
         'mindstellar\\osclass\\classes\\utility\\Escape' => __DIR__ . '/../../..' . '/oc-includes/osclass/classes/utility/Escape.php',
         'mindstellar\\osclass\\classes\\utility\\FileSystem' => __DIR__ . '/../../..' . '/oc-includes/osclass/classes/utility/FileSystem.php',
         'mindstellar\\osclass\\classes\\utility\\Formatting' => __DIR__ . '/../../..' . '/oc-includes/osclass/classes/utility/Formatting.php',
         'mindstellar\\osclass\\classes\\utility\\Sanitize' => __DIR__ . '/../../..' . '/oc-includes/osclass/classes/utility/Sanitize.php',
-        'mindstellar\\osclass\\classes\\utility\\Upgrade' => __DIR__ . '/../../..' . '/oc-includes/osclass/classes/utility/Upgrade.php',
         'mindstellar\\osclass\\classes\\utility\\Utils' => __DIR__ . '/../../..' . '/oc-includes/osclass/classes/utility/Utils.php',
         'mindstellar\\osclass\\classes\\utility\\Validate' => __DIR__ . '/../../..' . '/oc-includes/osclass/classes/utility/Validate.php',
         'mindstellar\\osclass\\classes\\utility\\Zip' => __DIR__ . '/../../..' . '/oc-includes/osclass/classes/utility/Zip.php',

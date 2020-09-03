@@ -7,16 +7,16 @@
  * License is provided in root directory.
  */
 
-namespace mindstellar\osclass\classes\upgrade;
+namespace mindstellar\upgrade;
 
-use mindstellar\osclass\classes\utility\FileSystem;
+use mindstellar\utility\FileSystem;
 use WebThemes;
 use RuntimeException;
 
 /**
  * Class Theme
  *
- * @package mindstellar\osclass\classes\upgrade
+ * @package mindstellar\upgrade
  */
 class Theme extends UpgradePackage
 {
