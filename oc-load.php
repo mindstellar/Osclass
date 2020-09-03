@@ -147,6 +147,9 @@ osc_register_script('colorpicker', osc_assets_url('osclass-legacy/js/colorpicker
 osc_register_script('php-date', osc_assets_url('osclass-legacy/js/date.js'));
 osc_register_script('jquery-fineuploader', osc_assets_url('osclass-legacy/js/fineuploader/jquery.fineuploader.min.js'), 'jquery');
 
+
+
+Plugins::init();
 if (OC_ADMIN) {
     // init admin menu
     AdminMenu::newInstance()->init();
@@ -155,8 +158,6 @@ if (OC_ADMIN) {
         require_once $functions_path;
     }
 }
-
-Plugins::init();
 WebThemes::init();
 Translation::init();
 Csrf::init();
