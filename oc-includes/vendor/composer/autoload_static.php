@@ -47,7 +47,7 @@ class ComposerStaticInit1fcba07043a631f012853cd02fe384cd
         ),
         'mindstellar\\' => 
         array (
-            0 => __DIR__ . '/../../..' . '/oc-includes/osclass',
+            0 => __DIR__ . '/../../..' . '/oc-includes/osclass/classes',
         ),
         'ReCaptcha\\' => 
         array (
@@ -539,7 +539,7 @@ class ComposerStaticInit1fcba07043a631f012853cd02fe384cd
         'WebThemes' => __DIR__ . '/../../..' . '/oc-includes/osclass/classes/themes/WebThemes.php',
         'Widget' => __DIR__ . '/../../..' . '/oc-includes/osclass/classes/model/Widget.php',
         'iObject_Cache' => __DIR__ . '/../../..' . '/oc-includes/osclass/classes/cache/interface/iObject_Cache.php',
-        'mindstellar\\osclass\\classes\\Csrf' => __DIR__ . '/../../..' . '/oc-includes/osclass/classes/Csrf.php',
+        'mindstellar\\Csrf' => __DIR__ . '/../../..' . '/oc-includes/osclass/classes/Csrf.php',
         'mindstellar\\upgrade\\Osclass' => __DIR__ . '/../../..' . '/oc-includes/osclass/classes/upgrade/Osclass.php',
         'mindstellar\\upgrade\\Plugin' => __DIR__ . '/../../..' . '/oc-includes/osclass/classes/upgrade/Plugin.php',
         'mindstellar\\upgrade\\Theme' => __DIR__ . '/../../..' . '/oc-includes/osclass/classes/upgrade/Theme.php',

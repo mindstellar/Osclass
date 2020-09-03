@@ -463,7 +463,7 @@ return array(
     'WebThemes' => $baseDir . '/oc-includes/osclass/classes/themes/WebThemes.php',
     'Widget' => $baseDir . '/oc-includes/osclass/classes/model/Widget.php',
     'iObject_Cache' => $baseDir . '/oc-includes/osclass/classes/cache/interface/iObject_Cache.php',
-    'mindstellar\\osclass\\classes\\Csrf' => $baseDir . '/oc-includes/osclass/classes/Csrf.php',
+    'mindstellar\\Csrf' => $baseDir . '/oc-includes/osclass/classes/Csrf.php',
     'mindstellar\\upgrade\\Osclass' => $baseDir . '/oc-includes/osclass/classes/upgrade/Osclass.php',
     'mindstellar\\upgrade\\Plugin' => $baseDir . '/oc-includes/osclass/classes/upgrade/Plugin.php',
     'mindstellar\\upgrade\\Theme' => $baseDir . '/oc-includes/osclass/classes/upgrade/Theme.php',

@@ -7,7 +7,7 @@
  * License is provided in root directory.
  */
 
-namespace mindstellar\osclass\classes;
+namespace mindstellar;
 
 use mindstellar\utility\Utils;
 use Params;
