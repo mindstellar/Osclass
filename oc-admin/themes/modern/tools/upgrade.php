@@ -26,11 +26,8 @@ function customHead()
             steps = $('#steps');
 
             <?php if ($is_upgrade_available && Params::getParam('confirm') !== 'true') { ?>
-            steps.append('<li><?php echo osc_esc_js(sprintf(
-                __('Upgrade is available for (Current version %s)'),
-                osc_get_preference('version')
-            )); ?> </li>');
             remoteVersion = '<?php echo osc_esc_js((new Osclass(json_decode($update_core_json, true)))->getNewVersion()); ?>';
+            steps.append('<?php echo osc_esc_js('<li>'.sprintf(__('Upgrade is available for (Current version %s)'), osc_get_preference('version')).'</li>'); ?>');
             steps.append('<li><?php echo osc_esc_js(__('New version to update:')); ?> ' + remoteVersion + '<\/li>');
             steps.append(`<input type="button" value="<?php echo osc_esc_html(__('Upgrade')); ?>"
             onclick="window.location.href='<?php echo osc_admin_base_url(true) .'?page=tools&action=upgrade&confirm=true';?> ';" />`);
