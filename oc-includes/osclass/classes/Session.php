@@ -120,7 +120,7 @@ class Session
      */
     public function _has($key)
     {
-         return isset($this->session[$key]); 
+         return isset($this->session[$key]);
            
     }
     /**
