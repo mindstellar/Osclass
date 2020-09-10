@@ -114,6 +114,17 @@ class Session
 
     /**
      * @param $key
+     *
+     * @return bool
+     * @since 4.0.0
+     */
+    public function _has($key)
+    {
+         return isset($this->session[$key]);
+           
+    }
+    /**
+     * @param $key
      * @param $value
      */
     public function _set($key, $value)
