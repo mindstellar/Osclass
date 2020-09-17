@@ -3,7 +3,7 @@ if (!defined('OC_ADMIN')) {
     exit('Direct access is not allowed.');
 }
 /*
- *  Copyright 2020 Osclass
+ *  Copyright 2020 Mindstellar Osclass
  *  Maintained and supported by Mindstellar Community
  *  https://github.com/mindstellar/Osclass
  *

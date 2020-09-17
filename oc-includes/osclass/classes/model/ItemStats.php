@@ -1,7 +1,7 @@
 <?php
 
 /*
- *  Copyright 2020 Osclass
+ *  Copyright 2020 Mindstellar Osclass
  *  Maintained and supported by Mindstellar Community
  *  https://github.com/mindstellar/Osclass
  *
