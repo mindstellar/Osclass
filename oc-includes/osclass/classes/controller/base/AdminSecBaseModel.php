@@ -51,7 +51,7 @@ class AdminSecBaseModel extends SecBaseModel
         $config_version = OSCLASS_VERSION;
 
         if (Utils::versionCompare($config_version, osc_get_preference('version'), 'gt')) {
-            if ($this instanceof CAdminTools) {
+            if ($this instanceof CAdminTools || IS_AJAX) {
             } elseif (!$this instanceof CAdminUpgrade) {
                 $this->redirectTo(osc_admin_base_url(true) . '?page=upgrade');
             }
