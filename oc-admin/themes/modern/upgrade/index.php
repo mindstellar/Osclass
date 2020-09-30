@@ -55,7 +55,7 @@ function customHead()
             $('#output').show();
             $('#tohide').hide();
 
-            $.get('<?php echo osc_admin_base_url(true); ?>?page=upgrade&action=upgrade-funcs', function (data) {
+            $.get('<?php echo osc_admin_base_url(true); ?>?page=ajax&action=upgrade-db', function (data) {
                 $('#loading_image').hide();
                 if(data.status) {
                         $("#result").append("Success: " + data.message + "<br />");
