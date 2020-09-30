@@ -78,11 +78,6 @@ function getErrorParam($param, $htmlencode = false, $quotes_encode = true)
 
         return htmlspecialchars(stripslashes($value), ENT_NOQUOTES);
     }
-
-    if (get_magic_quotes_gpc()) {
-        $value = strip_slashes_extended_e($value);
-    }
-
     return $value;
 }
 
