@@ -1,9 +1,22 @@
-Osclass Dev Changelog
+Osclass 5.0.0-dev Dev Changelog
+- Osclass Multisite is removed a better alternative will be provided in future.
 - Added New class for logging errors in osclass.
 - Fix bug of listing invalid themes in Admin Appearance
 - Fix PHP notices while saving Admin settings.
 - Restructured whole osclass core.
 - Core osclass now using autoloader for classes and external libraries.
 - More option in image text watermark in media settings.
-For old changelog history visit https://raw.githubusercontent.com/mindstellar/Osclass/autoload/ChangelogHistory.txt
-Source: https://github.com/mindstellar/Osclass/commits/autoload
+- Significant MySql queries reduction in Search Modal.
+- New order by relevance option in search.
+- Multiple security vulnerabilities are fixed.
+- PHP 7.4 compatibility
+- Updated breadcrumb Schema
+- Now languages can be imported in via our repositories.
+- jQuery updated to latest 3.5.x branch with other JS libraries, TinyMCE is updated to 5.x branch.
+- One click osclass update is available now.
+- New PHP classes for osclass core functionality for better performance, security and compatibility.
+- JS enqueue methods now load your script in footer if enqueued after header hook.
+
+
+Source: https://github.com/mindstellar/Osclass/commits/develop
+
