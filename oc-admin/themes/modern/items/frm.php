@@ -21,6 +21,7 @@
 
 osc_enqueue_script('jquery-validate');
 osc_enqueue_script('php-date');
+osc_enqueue_script('tiny_mce');
 
 
 // cateogry js
@@ -334,4 +335,14 @@ osc_current_admin_theme_path('parts/header.php'); ?>
         </div>
     </div>
 </div>
+<script>
+    tinyMCE.init({
+        mode: 'textareas',
+        theme_advanced_toolbar_align: 'left',
+        theme_advanced_toolbar_location: 'top',
+        theme_advanced_buttons1_add: 'forecolorpicker,fontsizeselect',
+        theme_advanced_buttons2_add: 'media',
+        plugins: 'advlist autolink lists link image charmap preview anchor searchreplace visualblocks code fullscreen insertdatetime media table paste'
+    });
+</script>
 <?php osc_current_admin_theme_path('parts/footer.php'); ?>

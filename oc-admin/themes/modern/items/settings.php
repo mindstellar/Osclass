@@ -226,6 +226,18 @@ osc_current_admin_theme_path('parts/header.php'); ?>
                         </div>
                     </div>
                     <div class="form-row">
+                        <div class="form-label"> <?php _e('Rich Edit'); ?></div>
+                        <div class="form-controls">
+                            <div class="form-label-checkbox">
+                                <label>
+                                    <input type="checkbox" <?php echo(osc_tinymce_frontend() ? 'checked="checked"'
+                                        : ''); ?> name="tinymce" value="1"/>
+                                    <?php _e('Enable TinyMCE on frontend'); ?>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-row">
                         <div class="form-label"> <?php _e('Optional fields'); ?></div>
                         <div class="form-controls">
                             <div class="form-label-checkbox">

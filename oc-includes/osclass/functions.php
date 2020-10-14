@@ -834,6 +834,37 @@ if (osc_google_analytics_id()) {
     osc_add_hook('footer', 'osc_ga_analytics_footer');
 }
 
+function osc_item_tinymce_header()
+{
+    osc_enqueue_script('tiny_mce');
+}
+
+function osc_item_tinymce_footer()
+{
+    ?>
+    <script>
+        tinyMCE.init({
+            mode: 'none',
+            theme_advanced_toolbar_align: 'left',
+            theme_advanced_toolbar_location: 'top',
+            theme_advanced_buttons1_add: 'forecolorpicker,fontsizeselect',
+            theme_advanced_buttons2_add: 'media',
+            plugins: 'advlist autolink lists link image charmap preview anchor searchreplace visualblocks code fullscreen insertdatetime media table paste'
+        });
+        $(function() {
+            $('textarea[id^=description]').each(function(){
+                tinyMCE.execCommand('mceAddEditor', true, this.id);
+            });
+        });
+    </script>
+    <?php
+}
+
+if (osc_tinymce_frontend() && (osc_is_publish_page() || osc_is_edit_page())) {
+    osc_add_hook('header', 'osc_item_tinymce_header');
+    osc_add_hook('footer', 'osc_item_tinymce_footer');
+}
+
 function osc_show_maintenance()
 {
     if (defined('__OSC_MAINTENANCE__')) { ?>
