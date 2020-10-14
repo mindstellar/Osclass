@@ -123,6 +123,9 @@ class CAdminUsers extends AdminSecBaseModel
                         . '?page=users&action=enable&id[]=' . $aUser['pk_i_id'] . '&' . $csrf_token . '&value=ENABLE">'
                         . __('Unblock') . '</a>';
                 }
+                $actions[] = '<a class="btn btn-green float-left" href="' . osc_admin_base_url(true)
+                    . '?page=users&action=login&amp;id=' . $aUser['pk_i_id'] . '&amp;' . $csrf_token . '" target="_blank">'
+                    . __('Log in') . '</a>';
                 $aLocale = $aUser['locale'];
                 foreach ($aLocale as $locale => $aInfo) {
                     $aUser['locale'][$locale]['s_info'] =
@@ -316,6 +319,27 @@ class CAdminUsers extends AdminSecBaseModel
 
                 osc_add_flash_ok_message($msg, 'admin');
                 $this->redirectTo(osc_admin_base_url(true) . '?page=users');
+                break;
+            case ('login'):
+                osc_csrf_check();
+                $userId = Params::getParam('id');
+                $user = User::newInstance()->findByPrimaryKey($userId);
+
+                if(!$user) {
+                    osc_add_flash_error_message(_m('The user doesn\'t exist'), 'admin');
+                    $this->redirectTo(osc_admin_base_url(true) . '?page=users');
+                }
+
+                Session::newInstance()->_set('userId', $user['pk_i_id']);
+                Session::newInstance()->_set('userName', $user['s_name']);
+                Session::newInstance()->_set('userEmail', $user['s_email']);
+                $phone = ($user['s_phone_mobile']) ? $user['s_phone_mobile'] : $user['s_phone_land'];
+                Session::newInstance()->_set('userPhone', $phone);
+
+                osc_run_hook('after_login', $user, osc_user_dashboard_url());
+
+                osc_add_flash_ok_message(sprintf(_m('Logged in as %s successfully'), $user['s_name']));
+                $this->redirectTo(osc_apply_filter('correct_login_url_redirect', osc_user_dashboard_url()));
                 break;
             case ('delete_alerts'):
                 $iDeleted = 0;
