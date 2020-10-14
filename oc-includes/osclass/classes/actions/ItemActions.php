@@ -268,6 +268,7 @@ class ItemActions
                 'd_coord_long'      => $aItem['d_coord_long'],
                 's_zip'             => $aItem['s_zip']
             );
+            $location = array_merge($location, $this->getItemCoordinates($location));
 
             $locationManager = ItemLocation::newInstance();
             $locationManager->insert($location);
@@ -750,6 +751,7 @@ class ItemActions
                 'd_coord_long'      => $aItem['d_coord_long'],
                 's_zip'             => $aItem['s_zip']
             );
+            $location = array_merge($location, $this->getItemCoordinates($location));
 
             $locationManager   = ItemLocation::newInstance();
             $old_item_location = $locationManager->findByPrimaryKey($aItem['idItem']);
@@ -1745,6 +1747,39 @@ class ItemActions
 
         $aItem      = osc_apply_filter('item_prepare_data', $aItem);
         $this->data = $aItem;
+    }
+
+    /**
+     * Return item location array with geocoded coords if maps are enabled and coords data isn't already filled.
+     *
+     * @param array $location
+     *
+     * @return array
+     */
+    private function getItemCoordinates($location) {
+        if($location['d_coord_lat'] != '' && $location['d_coord_long'] != '') return array();
+        $mapType = osc_item_map_type();
+        if(!$mapType) return array();
+
+        $address = sprintf('%s, %s, %s, %s', $location['s_address'], $location['s_city'], $location['s_region'], $location['s_country']);
+
+        if($mapType == 'google') {
+            $res = json_decode(osc_file_get_contents(osc_google_maps_geocode_url($address)));
+            if(isset($res->results[0]->geometry->location) && count($res->results[0]->geometry->location)) {
+                 $coords = $res->results[0]->geometry->location;
+                 $location['d_coord_lat'] = $coords->lat;
+                 $location['d_coord_long'] = $coords->lng;
+             }
+        } else if($mapType == 'openstreet') {
+            $res = json_decode(osc_file_get_contents(osc_openstreet_geocode_url($address)));
+            if(isset($res->results[0]->locations[0]->latLng) && count($res->results[0]->locations[0]->latLng)) {
+                 $coords = $res->results[0]->locations[0]->latLng;
+                 $location['d_coord_lat'] = $coords->lat;
+                 $location['d_coord_long'] = $coords->lng;
+             }
+        }
+
+        return $location;
     }
 }
 

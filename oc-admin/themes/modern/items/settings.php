@@ -250,6 +250,20 @@ osc_current_admin_theme_path('parts/header.php'); ?>
                             </div>
                         </div>
                     </div>
+                    <div class="form-row">
+                        <div class="form-label"> <?php _e('Maps'); ?></div>
+                        <div class="separate-top-medium">
+                            <div class="form-controls">
+                                <?php $map_type = osc_item_map_type(); ?>
+                                <select class="input-small" name="map_type">
+                                    <option value="0" <?php if(!$map_type) echo 'selected'; ?>><?php _e('None'); ?></option>
+                                    <option value="google" <?php if($map_type == 'google') echo 'selected'; ?>><?php _e('Google Maps'); ?></option>
+                                    <option value="openstreet" <?php if($map_type == 'openstreet') echo 'selected'; ?>><?php _e('OpenStreetMaps'); ?></option>
+                                </select>
+                                <div class="help-box"><?php _e('Set the API key in Settings -> General.'); ?></div>
+                            </div>
+                        </div>
+                    </div>
                     <div class="form-actions">
                         <input type="submit" id="save_changes" value="<?php echo osc_esc_html(__('Save changes')); ?>"
                                class="btn btn-submit"/>

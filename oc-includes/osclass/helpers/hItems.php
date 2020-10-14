@@ -1784,3 +1784,13 @@ function osc_query_item($params = null)
     }
     View::newInstance()->_exportVariableToView('customItems', $mSearch->doSearch());
 }
+
+/**
+ * Get selected map type.
+ *
+ * @return string
+ */
+function osc_item_map_type()
+{
+    return osc_get_preference('map_type');
+}

@@ -753,7 +753,7 @@ class CAdminItems extends AdminSecBaseModel
                 $warnExpiration        = (int)$warnExpiration;
                 $titleLength           = Params::getParam('max_chars_per_title');
                 $descriptionLength     = Params::getParam('max_chars_per_description');
-
+                $mapType               = Params::getParam('map_type');
 
                 $msg = '';
                 if (!osc_validate_int(Params::getParam('items_wait_time'))) {
@@ -802,6 +802,7 @@ class CAdminItems extends AdminSecBaseModel
                 $iUpdated += osc_set_preference('warn_expiration', $warnExpiration);
                 $iUpdated += osc_set_preference('title_character_length', $titleLength);
                 $iUpdated += osc_set_preference('description_character_length', $descriptionLength);
+                $iUpdated += osc_set_preference('map_type', $mapType);
 
                 if ($iUpdated > 0) {
                     osc_add_flash_ok_message(_m("Listings' settings have been updated"), 'admin');
