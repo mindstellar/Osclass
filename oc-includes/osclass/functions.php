@@ -599,6 +599,30 @@ function osc_admin_toolbar_update_core($force = false)
 
 /**
  * @param bool $force
+ */
+function osc_admin_toolbar_update_db($force = false)
+{
+    if (!osc_is_moderator()) {
+        if ($force) {
+            AdminToolbar::newInstance()->remove_menu('update_db');
+        }
+        if (osc_version() < OSCLASS_VERSION) {
+            $title = __('Database update is available');
+            AdminToolbar::newInstance()->add_menu(
+                array(
+                    'id'    => 'update_db',
+                    'title' => $title,
+                    'href'  => osc_admin_base_url(true) . '?page=upgrade&action=upgrade-db&confirm=true',
+                    'meta'  => array('class' => 'action-btn action-btn-black')
+                )
+            );
+        }
+    }
+}
+
+
+/**
+ * @param bool $force
  *
  * @return int|string
  */

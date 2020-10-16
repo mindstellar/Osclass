@@ -62,6 +62,7 @@ class AdminToolbar
         osc_add_hook('add_admin_toolbar_menus', 'osc_admin_toolbar_spam', 0);
 
         osc_add_hook('add_admin_toolbar_menus', 'osc_admin_toolbar_update_core', 0);
+        osc_add_hook('add_admin_toolbar_menus', 'osc_admin_toolbar_update_db', 0);
 
         osc_add_hook('add_admin_toolbar_menus', 'osc_admin_toolbar_update_themes', 0);
         osc_add_hook('add_admin_toolbar_menus', 'osc_admin_toolbar_update_plugins', 0);
