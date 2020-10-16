@@ -56,11 +56,14 @@ function customHead()
             $('#tohide').hide();
 
             $.get('<?php echo osc_admin_base_url(true); ?>?page=ajax&action=upgrade-db', function (data) {
-                $('#loading_image').hide();
+                $('#loading_image').removeClass('fa-spinner fa-spin');
+                data = JSON.parse(data);
                 if(data.status) {
-                        $("#result").append("Success: " + data.message + "<br />");
+                    $('#loading_image').addClass('fa-check-circle');
+                    $('#message').html('Success: ' + data.message);
                 } else {
-                        $("#result").append("Error: " + data.message.replace(/\n/g,"<br />") + "<br />");
+                    $('#loading_image').addClass('fa-exclamation-circle');
+                    $('#message').html('Error: ' + data.message.replace(/\n/g, '<br>'));
                 }
             });
             <?php } ?>
@@ -74,10 +77,10 @@ osc_current_admin_theme_path('parts/header.php'); ?>
 
 <div id="backup-settings">
     <h2 class="render-title"><?php _e('Upgrade'); ?></h2>
-    <div id="result">
+    <div>
         <div id="output" style="display:none">
             <i id="loading_image" class="fas fa-spinner fa-spin"></i>
-            <?php _e('Upgrading your Osclass installation (this could take a while): ', 'admin'); ?>
+            <span id="message"><?php _e('Upgrading your Osclass installation (this could take a while): ', 'admin'); ?></span>
         </div>
         <div id="tohide">
             <p>
