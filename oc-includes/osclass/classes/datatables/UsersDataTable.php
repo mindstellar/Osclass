@@ -209,7 +209,7 @@ class UsersDataTable extends DataTable
                     . '?page=users&action=delete&amp;id[]=' . $aRow['pk_i_id'] . '">' . __('Delete') . '</a>';
                 $options[] = '<a href="' . osc_user_public_profile_url($aRow['pk_i_id']) . '" target="_blank">'
                     . __('Public profile') . '</a>';
-                $options[] = '<a href="' . osc_admin_base_url(true) . '?page=users&action=login&amp;id='
+                $options[] = '<a href="' . osc_admin_base_url(true) . '?page=users&action=login_as_user&amp;id='
                     . $aRow['pk_i_id'] . '&amp;' . $csrf_token_url . '" target="_blank">'
                     . __('Log in') . '</a>';
                 if ($aRow['b_active'] == 1) {
