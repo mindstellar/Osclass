@@ -405,6 +405,17 @@ function osc_max_characters_per_description()
 
 
 /**
+ * Gets if TinyMCE is enabled on frontend.
+ *
+ * @return boolean
+ */
+function osc_tinymce_frontend()
+{
+    return getBoolPreference('tinymce_frontend');
+}
+
+
+/**
  * Gets if notification are sent to admin when a send-a-friend message is sent
  *
  * @return boolean

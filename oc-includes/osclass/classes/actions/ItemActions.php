@@ -1591,7 +1591,7 @@ class ItemActions
         $aItem['currency']     = Params::getParam('currency');
         $aItem['showEmail']    = Params::getParam('showEmail') ? 1 : 0;
         $aItem['title']        = Params::getParam('title');
-        $aItem['description']  = Params::getParam('description');
+        $aItem['description']  = (osc_tinymce_frontend() || OC_ADMIN) ? Params::getParam('description', false, false) : Params::getParam('description');
         $aItem['photos']       = Params::getFiles('photos');
         $ajax_photos           = Params::getParam('ajax_photos');
         $aItem['s_ip']         = get_ip();
