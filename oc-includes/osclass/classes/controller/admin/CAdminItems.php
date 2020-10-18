@@ -753,6 +753,8 @@ class CAdminItems extends AdminSecBaseModel
                 $warnExpiration        = (int)$warnExpiration;
                 $titleLength           = Params::getParam('max_chars_per_title');
                 $descriptionLength     = Params::getParam('max_chars_per_description');
+                $moderatePost          = Params::getParam('moderate_admin_post');
+                $moderateEdit          = Params::getParam('moderate_admin_edit');
                 $tinymce               = Params::getParam('tinymce');
 
 
@@ -803,8 +805,10 @@ class CAdminItems extends AdminSecBaseModel
                 $iUpdated += osc_set_preference('warn_expiration', $warnExpiration);
                 $iUpdated += osc_set_preference('title_character_length', $titleLength);
                 $iUpdated += osc_set_preference('description_character_length', $descriptionLength);
+                $iUpdated += osc_set_preference('moderate_admin_post', $moderatePost);
+                $iUpdated += osc_set_preference('moderate_admin_edit', $moderateEdit);
                 $iUpdated += osc_set_preference('tinymce_frontend', $tinymce);
-
+            
                 if ($iUpdated > 0) {
                     osc_add_flash_ok_message(_m("Listings' settings have been updated"), 'admin');
                 }

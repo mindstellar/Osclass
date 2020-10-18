@@ -118,6 +118,18 @@ osc_current_admin_theme_path('parts/header.php'); ?>
                             </div>
                             <div class="separate-top-medium">
                                 <label>
+                                    <input type="checkbox" name="moderate_admin_post" value="1"  <?php if(osc_moderate_admin_post()) echo 'checked'; ?> />
+                                    <?php _e('Hold new listings for admin moderation'); ?>
+                                </label>
+                            </div>
+                            <div class="separate-top-medium">
+                                <label>
+                                    <input type="checkbox" name="moderate_admin_edit" value="1"  <?php if(osc_moderate_admin_edit()) echo 'checked'; ?>/>
+                                    <?php _e('Hold edited listings for admin moderation'); ?>
+                                </label>
+                            </div>
+                            <div class="separate-top-medium">
+                                <label>
                                     <input type="checkbox" <?php echo((osc_moderate_items() == -1) ? ''
                                         : 'checked="checked"'); ?> name="moderate_items" value="1"/>
                                     <?php _e('Users have to validate their listings'); ?>
