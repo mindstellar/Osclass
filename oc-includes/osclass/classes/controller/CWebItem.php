@@ -177,6 +177,8 @@ class CWebItem extends BaseModel
                     Session::newInstance()->_clearVariables();
                     if ($success == 1) {
                         osc_add_flash_ok_message(_m('Check your inbox to validate your listing'));
+                    } else if(osc_moderate_admin_post()) {
+                        osc_add_flash_ok_message(_m('Your listing will be published after an admin approves it.'));
                     } else {
                         osc_add_flash_ok_message(_m('Your listing has been published'));
                     }
@@ -273,7 +275,11 @@ class CWebItem extends BaseModel
                             }
                         }
                         Session::newInstance()->_clearVariables();
-                        osc_add_flash_ok_message(_m("Great! We've just updated your listing"));
+                        if(osc_moderate_admin_edit()) {
+                            osc_add_flash_ok_message(_m('Your listing will be published after an admin approves the changes.'));
+                        } else {
+                            osc_add_flash_ok_message(_m("Great! We've just updated your listing"));
+                        }
                         View::newInstance()->_exportVariableToView(
                             'item',
                             Item::newInstance()->findByPrimaryKey($id)
