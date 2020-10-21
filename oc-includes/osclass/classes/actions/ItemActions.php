@@ -326,6 +326,10 @@ class ItemActions
                 $success = 2;
             }
 
+            if (!$this->is_admin && osc_moderate_admin_post()) {
+                $this->disable($item['pk_i_id']);
+            }
+
             // THIS HOOK IS FINE, YAY!
             osc_run_hook('posted_item', $item);
         }
@@ -844,6 +848,10 @@ class ItemActions
             );
 
             unset($old_item);
+
+            if (!$this->is_admin && osc_moderate_admin_edit()) {
+                $this->disable($aItem['idItem']);
+            }
 
             // THIS HOOK IS FINE, YAY!
             osc_run_hook('edited_item', Item::newInstance()->findByPrimaryKey($aItem['idItem']));
@@ -1585,7 +1593,7 @@ class ItemActions
         $aItem['currency']     = Params::getParam('currency');
         $aItem['showEmail']    = Params::getParam('showEmail') ? 1 : 0;
         $aItem['title']        = Params::getParam('title');
-        $aItem['description']  = Params::getParam('description');
+        $aItem['description']  = (osc_tinymce_frontend() || OC_ADMIN) ? Params::getParam('description', false, false) : Params::getParam('description');
         $aItem['photos']       = Params::getFiles('photos');
         $ajax_photos           = Params::getParam('ajax_photos');
         $aItem['s_ip']         = get_ip();
