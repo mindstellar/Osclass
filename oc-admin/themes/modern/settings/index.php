@@ -140,8 +140,8 @@ function render_offset()
 function addHelp()
 {
     echo '<p>'
-        . __("Change the basic configuration of your Osclass. From here, you can modify variables such as the site’s name, 
-the default currency or how lists of listings are displayed. <strong>Be careful</strong> when modifying default values 
+        . __("Change the basic configuration of your Osclass. From here, you can modify variables such as the site’s name,
+the default currency or how lists of listings are displayed. <strong>Be careful</strong> when modifying default values
 if you're not sure what you're doing!")
         . '</p>';
 }
@@ -372,7 +372,7 @@ osc_current_admin_theme_path('parts/header.php'); ?>
                                 <label>
                                     <input type="checkbox" <?php echo(osc_selectable_parent_categories()
                                         ? 'checked="checked"' : ''); ?> name="selectable_parent_categories" value="1"/>
-                                    <?php _e('Allow users to select a parent category as a category 
+                                    <?php _e('Allow users to select a parent category as a category
                                     when inserting or editing a listing '); ?>
                                 </label>
                             </div>
@@ -413,16 +413,36 @@ osc_current_admin_theme_path('parts/header.php'); ?>
                     </div>
                     <h2 class="render-title"><?php _e('Google Analytics'); ?></h2>
                     <div class="form-row">
-                        <div class="form-label"><?php _e('Google Tracking ID'); ?></div>
+                        <div class="form-label"><?php _e('Tracking ID'); ?></div>
                         <div class="form-controls">
                             <input type="text" class="xlarge" name="ga_tracking_id"
                                    value="<?php echo osc_esc_html(osc_google_analytics_id()); ?>"/>
                             <div class="help-box">
-                                <?php _e('Add your google analytics tracking id. Example: UA-12345678-0'); ?>
+                                <?php _e('Add your Google Analytics tracking ID. Example: UA-12345678-0'); ?>
                             </div>
                         </div>
                     </div>
-
+                    <h2 class="render-title"><?php _e('Maps'); ?></h2>
+                    <div class="form-row">
+                        <div class="form-label"><?php _e('Google Maps key'); ?></div>
+                        <div class="form-controls">
+                            <input type="text" class="xlarge" name="googlemaps_api_key"
+                                   value="<?php echo osc_esc_html(osc_google_maps_api_key()); ?>"/>
+                            <div class="help-box">
+                                <?php _e('Add your Google Maps JavaScript API key.'); ?>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-label"><?php _e('OpenStreetMaps key'); ?></div>
+                        <div class="form-controls">
+                            <input type="text" class="xlarge" name="openstreet_api_key"
+                                   value="<?php echo osc_esc_html(osc_openstreet_api_key()); ?>"/>
+                            <div class="help-box">
+                                <?php _e('Add your Mapquest Consumer key.'); ?>
+                            </div>
+                        </div>
+                    </div>
 
                     <?php
                     /**

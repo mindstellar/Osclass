@@ -756,7 +756,7 @@ class CAdminItems extends AdminSecBaseModel
                 $moderatePost          = Params::getParam('moderate_admin_post');
                 $moderateEdit          = Params::getParam('moderate_admin_edit');
                 $tinymce               = Params::getParam('tinymce');
-
+                $mapType               = Params::getParam('map_type');
 
                 $msg = '';
                 if (!osc_validate_int(Params::getParam('items_wait_time'))) {
@@ -808,7 +808,8 @@ class CAdminItems extends AdminSecBaseModel
                 $iUpdated += osc_set_preference('moderate_admin_post', $moderatePost);
                 $iUpdated += osc_set_preference('moderate_admin_edit', $moderateEdit);
                 $iUpdated += osc_set_preference('tinymce_frontend', $tinymce);
-            
+                $iUpdated += osc_set_preference('map_type', $mapType);
+
                 if ($iUpdated > 0) {
                     osc_add_flash_ok_message(_m("Listings' settings have been updated"), 'admin');
                 }
