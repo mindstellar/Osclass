@@ -153,7 +153,7 @@ class ItemActions
             ? _m('Price must be positive number.') . PHP_EOL : '');
         $flash_error .= ((!osc_validate_max($contactName, 35)) ? _m('Name too long.') . PHP_EOL : '');
         $flash_error .= ((!osc_validate_email($contactEmail)) ? _m('Email invalid.') . PHP_EOL : '');
-        $flash_error .= ((!osc_validate_phone($contactPhone)) ? _m('Phone invalid.') . PHP_EOL : '');
+        $flash_error .= ((!osc_validate_phone($contactPhone, 4)) ? _m('Phone invalid.') . PHP_EOL : '');
         $flash_error .= ((!osc_validate_text($aItem['countryName'], 2, false))
             ? _m('Country too short.') . PHP_EOL
             : '');
@@ -644,9 +644,10 @@ class ItemActions
             $aItem['title'][$key] = strip_tags(trim($value));
         }
 
-        $aItem['price']    = $aItem['price'] !== null ? strip_tags(trim($aItem['price'])) : $aItem['price'];
+        $aItem['price'] = $aItem['price'] !== null ? strip_tags(trim($aItem['price'])) : $aItem['price'];
         $aItem['cityArea'] = osc_sanitize_name(strip_tags(trim($aItem['cityArea'])));
-        $aItem['address']  = osc_sanitize_name(strip_tags(trim($aItem['address'])));
+        $aItem['address'] = osc_sanitize_name(strip_tags(trim($aItem['address'])));
+        $aItem['contactPhone'] = strip_tags(trim($aItem['contactPhone']));
 
         // Validate
         if (!$this->checkAllowedExt($aItem['photos'])) {
@@ -713,6 +714,7 @@ class ItemActions
             : '');
         $flash_error .= ((!osc_validate_max($aItem['address'], 100))
             ? _m('Address too long.') . PHP_EOL : '');
+        $flash_error .= ((!osc_validate_phone($aItem['s_contact_phone'], 4)) ? _m('Phone invalid.') . PHP_EOL : '');
 
         $_meta = Field::newInstance()->findByCategory($aItem['catId']);
         $meta  = Params::getParam('meta');
@@ -766,8 +768,6 @@ class ItemActions
                 $user                  = User::newInstance()->findByPrimaryKey($aItem['userId']);
                 $aItem['contactName']  = $user['s_name'];
                 $aItem['contactEmail'] = $user['s_email'];
-                $aItem['contactPhone'] =
-                    ($user['s_phone_mobile'] != '') ? $user['s_phone_mobile'] : $user['s_phone_land'];
             } else {
                 $aItem['userId'] = null;
             }
@@ -781,7 +781,8 @@ class ItemActions
                 'fk_i_category_id'   => $aItem['catId'],
                 'i_price'            => $aItem['price'],
                 'fk_c_currency_code' => $aItem['currency'],
-                'b_show_email'       => $aItem['showEmail']
+                'b_show_email'       => $aItem['showEmail'],
+                's_contact_phone'    => $aItem['contactPhone'],
             );
 
             // only can change the user if you're an admin
@@ -789,7 +790,6 @@ class ItemActions
                 $aUpdate['fk_i_user_id']    = $aItem['userId'];
                 $aUpdate['s_contact_name']  = $aItem['contactName'];
                 $aUpdate['s_contact_email'] = $aItem['contactEmail'];
-                $aUpdate['s_contact_phone'] = $aItem['contactPhone'];
             } else {
                 $aUpdate['s_ip'] = $aItem['s_ip'];
             }
@@ -1535,14 +1535,11 @@ class ItemActions
         if ($userId != null) {
             $aItem['contactName']  = $data['s_name'];
             $aItem['contactEmail'] = $data['s_email'];
-            $aItem['contactPhone'] = ($data['s_phone_mobile'] != '') ? $data['s_phone_mobile'] : $data['s_phone_land'];
             Params::setParam('contactName', $data['s_name']);
             Params::setParam('contactEmail', $data['s_email']);
-            Params::setParam('contactPhone', $aItem['contactPhone']);
         } else {
             $aItem['contactName']  = Params::getParam('contactName');
             $aItem['contactEmail'] = Params::getParam('contactEmail');
-            $aItem['contactPhone'] = Params::getParam('contactPhone');
         }
         $aItem['userId'] = $userId;
 
@@ -1598,6 +1595,7 @@ class ItemActions
         $aItem['d_coord_lat']  = Params::getParam('d_coord_lat') ?: null;
         $aItem['d_coord_long'] = Params::getParam('d_coord_long') ?: null;
         $aItem['s_zip']        = Params::getParam('zip') ?: null;
+        $aItem['contactPhone'] = Params::getParam('contactPhone');
 
         // $ajax_photos is an array of filenames of the photos uploaded by ajax to a temporary folder
         // fake insert them into the array of the form-uploaded photos
