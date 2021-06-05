@@ -21,7 +21,7 @@ module.exports = function (grunt) {
                         nodeDir + '/jquery/README.md',
                         nodeDir + '/jquery/LICENSE.txt'
                     ],
-                    dest: assetsDir + '/js/jquery',
+                    dest: assetsDir + '/jquery',
                     flatten: true
                 }]
             },
@@ -33,7 +33,7 @@ module.exports = function (grunt) {
                         nodeDir + '/jquery-migrate/README.md',
                         nodeDir + '/jquery-migrate/LICENSE.txt'
                     ],
-                    dest: assetsDir + '/js/jquery-migrate',
+                    dest: assetsDir + '/jquery-migrate',
                     flatten: true
                 }]
             },
@@ -43,23 +43,16 @@ module.exports = function (grunt) {
                         expand: true,
                         src: [
                             nodeDir + '/jquery-ui-dist/*.min.js',
+                            nodeDir + '/jquery-ui-dist/*.min.css',
                             nodeDir + '/jquery-ui-dist/README.md',
                             nodeDir + '/jquery-ui-dist/LICENSE.txt'
                         ],
-                        dest: assetsDir + '/js/jquery-ui',
-                        flatten: true
-                    },
-                    {
-                        expand: true, src: [
-                            nodeDir + '/jquery-ui-dist/*.css',
-                            nodeDir + '/jquery-ui-dist/LICENSE.txt'
-                        ],
-                        dest: assetsDir + '/css/jquery-ui',
+                        dest: assetsDir + '/jquery-ui',
                         flatten: true
                     },
                     {
                         expand: true, src: nodeDir + '/jquery-ui-dist/images/*',
-                        dest: assetsDir + '/css/jquery-ui/images',
+                        dest: assetsDir + '/jquery-ui/images',
                         flatten: true
                     }]
             },
@@ -70,7 +63,7 @@ module.exports = function (grunt) {
                         nodeDir + '/jquery-treeview/jquery.treeview.js',
                         nodeDir + '/jquery-treeview/README.md'
                     ],
-                    dest: assetsDir + '/js/jquery-treeview',
+                    dest: assetsDir + '/jquery-treeview',
                     flatten: true
                 }]
             },
@@ -83,7 +76,7 @@ module.exports = function (grunt) {
                         nodeDir + '/jquery-validation/README.md',
                         nodeDir + '/jquery-validation/LICENSE.md'
                     ],
-                    dest: assetsDir + '/js/jquery-validation',
+                    dest: assetsDir + '/jquery-validation',
                     flatten: true
                 }]
             },
@@ -94,7 +87,7 @@ module.exports = function (grunt) {
                         nodeDir + '/jquery-ui-nested/jquery-ui-nested.js',
                         nodeDir + '/jquery-ui-nested/README.md'
                     ],
-                    dest: assetsDir + '/js/jquery-ui-nested',
+                    dest: assetsDir + '/jquery-ui-nested',
                     flatten: true
                 }]
             },
@@ -105,45 +98,38 @@ module.exports = function (grunt) {
                         src: [
                             nodeDir + '/spectrum-colorpicker/spectrum.js',
                             nodeDir + '/spectrum-colorpicker/README.md',
-                            nodeDir + '/spectrum-colorpicker/LICENSE'
-                        ],
-                        dest: assetsDir + '/js/spectrum',
-                        flatten: true
-                    },
-                    {
-                        expand: true, src: [
+                            nodeDir + '/spectrum-colorpicker/LICENSE',
                             nodeDir + '/spectrum-colorpicker/spectrum.css'
                         ],
-                        dest: assetsDir + '/css/spectrum',
+                        dest: assetsDir + '/spectrum-colorpicker',
                         flatten: true
-                    }
-                ]
+                    }]
             },
-            'fontawesome-free': {
+            'fontawesome5-free': {
                 files: [
                     {
                         expand: true,
                         src: nodeDir + '/@fortawesome/fontawesome-free/css/all.min.css',
-                        dest: assetsDir + '/fonts/fontawesome5/css',
+                        dest: assetsDir + '/fontawesome5/css',
                         flatten: true
                     },
                     {
                         expand: true,
                         src: nodeDir + '/@fortawesome/fontawesome-free/js/all.min.js',
-                        dest: assetsDir + '/fonts/fontawesome5/js',
+                        dest: assetsDir + '/fontawesome5/js',
                         flatten: true
                     },
                     {
                         expand: true,
                         cwd: nodeDir + '/@fortawesome/fontawesome-free/webfonts',
                         src: '**/*',
-                        dest: assetsDir + '/fonts/fontawesome5/webfonts',
+                        dest: assetsDir + '/fontawesome5/webfonts',
                         flatten: false
                     },
                     {
                         expand: true,
                         src: nodeDir + '/@fortawesome/fontawesome-free/LICENSE.txt',
-                        dest: assetsDir + '/fonts/fontawesome5',
+                        dest: assetsDir + '/fontawesome5',
                         flatten: true
                     }
                 ]
@@ -153,7 +139,7 @@ module.exports = function (grunt) {
                     expand: true,
                     cwd: nodeDir + '/tinymce',
                     src: '**/*',
-                    dest: assetsDir + '/js/tinymce',
+                    dest: assetsDir + '/tinymce',
                     flatten: false
                 }]
             },
@@ -168,6 +154,19 @@ module.exports = function (grunt) {
                     dest: assetsDir + '/fonts/open-sans',
                     flatten: true
                 }]
+            },
+            'bootstrap': {
+                files: [{
+                        expand: true,
+                        src: [
+                            nodeDir + '/bootstrap/dist/css/bootstrap.min.*',
+                            nodeDir + '/bootstrap/dist/js/bootstrap.min.*',
+                            nodeDir + '/bootstrap/README.md',
+                            nodeDir + '/bootstrap/LICENSE'
+                        ],
+                        dest: assetsDir + '/bootstrap',
+                        flatten: true
+                    }]
             },
             'osclass-legacy': {
                 files: [{

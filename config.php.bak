@@ -1,0 +1,30 @@
+<?php
+
+/**
+ * The base MySQL settings of Osclass
+ */
+
+/** MySQL database name for Osclass */
+define('DB_NAME', 'osclass1');
+
+/** MySQL database username */
+define('DB_USER', 'root');
+
+/** MySQL database password */
+define('DB_PASSWORD', '1988');
+
+/** MySQL hostname */
+define('DB_HOST', '127.0.0.1');
+
+/** Database Table prefix */
+define('DB_TABLE_PREFIX', 'oc_');
+
+define('REL_WEB_URL', '/experimental/');
+
+define('WEB_PATH', 'http://127.0.0.1:8080/experimental/');
+
+define('OSC_DEBUG', true) ;
+define('OSC_DEBUG_LOG', true);
+define('OSC_DEBUG_DB', true);
+//define('OSC_DEBUG_DB_LOG', true) ;
+//define('OSC_DEBUG_DB_EXPLAIN', true) ;
