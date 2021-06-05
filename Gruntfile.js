@@ -105,34 +105,21 @@ module.exports = function (grunt) {
                         flatten: true
                     }]
             },
-            'fontawesome5-free': {
+            'bootstrap-icons': {
                 files: [
                     {
                         expand: true,
-                        src: nodeDir + '/@fortawesome/fontawesome-free/css/all.min.css',
-                        dest: assetsDir + '/fontawesome5/css',
+                        src: nodeDir + '/bootstrap-icons/LICENSE.md',
+                        dest: assetsDir + '/bootstrap-icons',
                         flatten: true
                     },
                     {
                         expand: true,
-                        src: nodeDir + '/@fortawesome/fontawesome-free/js/all.min.js',
-                        dest: assetsDir + '/fontawesome5/js',
-                        flatten: true
-                    },
-                    {
-                        expand: true,
-                        cwd: nodeDir + '/@fortawesome/fontawesome-free/webfonts',
+                        cwd: nodeDir + '/bootstrap-icons/font',
                         src: '**/*',
-                        dest: assetsDir + '/fontawesome5/webfonts',
+                        dest: assetsDir + '/bootstrap-icons',
                         flatten: false
-                    },
-                    {
-                        expand: true,
-                        src: nodeDir + '/@fortawesome/fontawesome-free/LICENSE.txt',
-                        dest: assetsDir + '/fontawesome5',
-                        flatten: true
-                    }
-                ]
+                    }]
             },
             'tinymce': {
                 files: [{
@@ -157,16 +144,16 @@ module.exports = function (grunt) {
             },
             'bootstrap': {
                 files: [{
-                        expand: true,
-                        src: [
-                            nodeDir + '/bootstrap/dist/css/bootstrap.min.*',
-                            nodeDir + '/bootstrap/dist/js/bootstrap.min.*',
-                            nodeDir + '/bootstrap/README.md',
-                            nodeDir + '/bootstrap/LICENSE'
-                        ],
-                        dest: assetsDir + '/bootstrap',
-                        flatten: true
-                    }]
+                    expand: true,
+                    src: [
+                        nodeDir + '/bootstrap/dist/css/bootstrap.min.*',
+                        nodeDir + '/bootstrap/dist/js/bootstrap.min.*',
+                        nodeDir + '/bootstrap/README.md',
+                        nodeDir + '/bootstrap/LICENSE'
+                    ],
+                    dest: assetsDir + '/bootstrap',
+                    flatten: true
+                }]
             },
             'osclass-legacy': {
                 files: [{
