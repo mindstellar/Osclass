@@ -30,7 +30,7 @@ oc-content/plugins/*
 
 # languages
 oc-content/languages/*
-
+!oc-content/languages/en_US
 # Intellij IDEA
 .idea/*
 *.iml

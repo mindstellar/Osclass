@@ -69,10 +69,11 @@ if (Session::newInstance()->_get('adminLocale')
     $current_locale = Session::newInstance()->_get('adminLocale');
 } elseif (isset($locales['en_US'])) {
     $current_locale = 'en_US';
-} else {
+} elseif (key($locales)) {
     $current_locale = key($locales);
+} else {
+    $current_locale = 'en_US';
 }
-
 Session::newInstance()->_set('userLocale', $current_locale);
 Session::newInstance()->_set('adminLocale', $current_locale);
 
