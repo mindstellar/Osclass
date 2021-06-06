@@ -32,7 +32,7 @@ if (!file_exists(ABS_PATH . 'config.php')) {
     $message =
         'There doesn\'t seem to be a <code>config.php</code> file. Osclass isn\'t installed. '
         . '<a href="https://osclass.discourse.group/">Need more help?</a></p>';
-    $message .= '<p><a class="button" href="' . osc_get_absolute_url()
+    $message .= '<p><a class="btn btn-primary" href="' . osc_get_absolute_url()
         . 'oc-includes/osclass/install.php">'
         . 'Install</a></p>';
     osc_die($title, $message);
