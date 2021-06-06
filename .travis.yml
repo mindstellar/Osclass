@@ -24,12 +24,15 @@ matrix:
         - php: '7.2'
         # aliased to a recent 7.3 version
         - php: '7.3'
-        # php 7.4
+        # aliased to a recent 7.4 version
         - php: '7.4'
+        # aliased to a recent 8.0 version
+        - php: '8.0'
         # php nightly
         - php: 'nightly'
 
     allow_failures:
+        - php: '8.0'
         - php: 'nightly'
 
 before_install:
