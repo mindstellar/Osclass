@@ -303,6 +303,23 @@ switch ($step) {
                             }
                         }
                         display_finish($password);
+
+                        // Install bender theme for first time.
+                        if(!is_dir(CONTENT_PATH.'themes/bender')) {
+                            $fileSystem = new \mindstellar\utility\FileSystem();
+                            $bender_filename       = 'bender.zip';
+                            $download_path   = CONTENT_PATH . 'downloads/';
+                            if ($downloaded = $fileSystem->downloadFile(
+                                'https://github.com/mindstellar/theme-bender/releases/download/v3.2.3/bender_3.2.3.zip',
+                                $download_path . 'bender.zip'
+                            )
+                            ) {
+                                $zip = new \mindstellar\utility\Zip();
+                                $resultCode =$zip->unzipFile($downloaded, CONTENT_PATH . 'themes/');
+                                $fileSystem->remove($downloaded);
+                            }
+
+                        }
                     }
                     ?>
                 </div>

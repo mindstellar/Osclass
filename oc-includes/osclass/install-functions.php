@@ -1092,9 +1092,9 @@ function display_target()
         </div>
     </form>
     <div id="lightbox" style="display:none;">
-        <div class="center">
-            <img src="<?php echo get_absolute_url(); ?>oc-includes/images/loading.gif"
-                 alt="<?php echo osc_esc_html(__("Loading...")); ?>" title=""/>
+        <div class="progress">
+            <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="100"
+                 aria-valuemin="0" aria-valuemax="100" style="width: 100%"></div>
         </div>
     </div>
     <?php
@@ -1186,7 +1186,6 @@ function display_finish($password)
             __('An e-mail with the password for oc-admin has been sent to: %s'),
             $data['s_email']
         ); ?></p>
-    <div style="clear:both;"></div>
     <div class="form-table finish">
         <table>
             <tbody>
