@@ -21,7 +21,7 @@ oc-content/uploads/*
 
 # themes
 oc-content/themes/*
-!oc-content/themes/bender
+!oc-content/themes/index.php
 
 # plugins
 oc-content/plugins/*
