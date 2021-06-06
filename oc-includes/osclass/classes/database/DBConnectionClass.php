@@ -208,12 +208,10 @@ class DBConnectionClass
         } else {
             $connId = @new mysqli($host, $user, $password);
         }
-
         if ($connId->connect_errno) {
             return false;
         }
         $this->setSQLMode($connId, array());
-
         return true;
     }
 

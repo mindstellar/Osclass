@@ -48,52 +48,35 @@ require_once LIB_PATH . 'osclass/locales.php';
 Params::init();
 Session::newInstance()->session_start();
 
-$step = Params::getParam('step');
-if (!is_numeric($step)) {
-    $step = '1';
+$step = (int)Params::getParam('step');
+if ($step < 1) {
+    $step = 1;
 }
 
-$existingLangs = osc_listLocales();
-$jsonLangs = osc_file_get_contents(osc_get_languages_json_url());
-$jsonLangs = json_decode($jsonLangs, true);
-$installLang = Params::getParam('install_locale');
+$locales = osc_listLocales();
+$jsonLocales = osc_file_get_contents(osc_get_languages_json_url());
+$jsonLocales = json_decode($jsonLocales, true);
+$install_locale = Params::getParam('install_locale');
 
-if ($step == 1 && $installLang != '') {
-    if (!array_key_exists($installLang, $existingLangs) && array_key_exists($installLang, $jsonLangs)) {
-        $langFolder = osc_translations_path() . $installLang;
-        mkdir($langFolder, 0755, true);
-
-        $files = osc_get_language_files_urls($installLang);
-        foreach ($files as $file => $url) {
-            $content = osc_file_get_contents($url);
-            file_put_contents($langFolder . '/' . $file, $content);
-        }
-    }
-
-    $existingLangs = osc_listLocales();
-    if (array_key_exists($installLang, $existingLangs)) {
-        Session::newInstance()->_set('userLocale', $installLang);
-        Session::newInstance()->_set('adminLocale', $installLang);
-    }
-} elseif ($step == 1) {
-    $defaultLang = 'en_US';
-    $langFolder  = osc_translations_path() . $defaultLang;
-
-    if (!is_dir($langFolder) && count($jsonLangs)) {
-        mkdir($langFolder, 0755, true);
-
-        $files = osc_get_language_files_urls($defaultLang);
-        foreach ($files as $file => $url) {
-            $content = osc_file_get_contents($url);
-            file_put_contents($langFolder . '/' . $file, $content);
-        }
-    }
-
-    Session::newInstance()->_set('userLocale', $defaultLang);
-    Session::newInstance()->_set('adminLocale', $defaultLang);
+if (Params::getParam('install_locale') && !(strlen($install_locale) > 5)) {
+    Session::newInstance()->_set('userLocale', Params::getParam('install_locale'));
+    Session::newInstance()->_set('adminLocale', Params::getParam('install_locale'));
 }
 
-$translation = Translation::newInstance(true);
+if (Session::newInstance()->_get('adminLocale')
+    && array_key_exists(Session::newInstance()->_get('adminLocale'), $locales)
+) {
+    $current_locale = Session::newInstance()->_get('adminLocale');
+} elseif (isset($locales['en_US'])) {
+    $current_locale = 'en_US';
+} else {
+    $current_locale = key($locales);
+}
+
+Session::newInstance()->_set('userLocale', $current_locale);
+Session::newInstance()->_set('adminLocale', $current_locale);
+
+Translation::newInstance(true);
 
 if (is_osclass_installed()) {
     $message =
@@ -105,6 +88,20 @@ switch ($step) {
     case 1:
         $requirements = get_requirements();
         $error        = check_requirements($requirements);
+        if ($error === false && $install_locale && !array_key_exists($install_locale, $locales)
+            && array_key_exists($install_locale, $jsonLocales)
+        ) {
+            $langFolder = osc_translations_path() . $install_locale;
+            mkdir($langFolder, 0755, true);
+
+            $files = osc_get_language_files_urls($install_locale);
+            foreach ($files as $file => $url) {
+                $content = osc_file_get_contents($url);
+                file_put_contents($langFolder . '/' . $file, $content);
+            }
+            header('Location: ' . $_SERVER['REQUEST_URI']);
+            die;
+        }
         break;
     case 2:
         if (Params::getParam('save_stats') == '1' || isset($_COOKIE['osclass_save_stats'])) {
@@ -174,58 +171,48 @@ switch ($step) {
                              title="Osclass"/>
                     </div>
                     <?php if (in_array($step, array(2, 3))) { ?>
-                        <ul id="nav">
-                            <li class="<?php if ($step == 2) {
-                                ?>actual<?php
-                            } elseif ($step < 2) {
-                                ?>next<?php
-                            } else {
-                                ?>past<?php
-                            } ?>">
-                                1 - Database
+                        <?php if ($step === 2) {
+                            $databaseStep = 'text-info';
+                            $targetStep   = 'text-muted';
+                        } elseif ($step === 3) {
+                            $databaseStep = 'text-muted';
+                            $targetStep   = 'text-info';
+                        } ?>
+                        <ul class="nav nav-pills nav-fill justify-content-center">
+                            <li class="nav-item border-bottom">
+                                <div class="nav-link <?php echo $databaseStep; ?>"><strong>1 - Database</strong></div>
                             </li>
-                            <li class="<?php if ($step == 3) {
-                                ?>actual<?php
-                            } elseif ($step < 3) {
-                                ?>next<?php
-                            } else {
-                                ?>past<?php
-                            } ?>">
-                                2 - Target
+                            <li class="nav-item border-bottom">
+                                <div class="nav-link <?php echo $targetStep; ?>"><strong>2 - Target</strong></div>
                             </li>
                         </ul>
-                        <div class="clear"></div>
                     <?php } ?>
                 </div>
-                <div class="card-body" id="content">
-                    <?php if ($step == 1) { ?>
-                        <h2 class="card-title text-center"><?php _e('Welcome'); ?></h2>
-                        <?php if ($error) { ?>
-                            <div class="alert alert-secondary shadow-sm" role="alert">
-                                <h3 style="font-weight: 400;font-size: 1.2rem;margin: 0;margin-bottom: .5em;">
-                                    <?php _e('Oops! You need a compatible Hosting'); ?>
-                                </h3>
-                                <span class="text-error">
-                            <?php _e('Your hosting seems to be not compatible, check your settings.'); ?>
-                        </span>
+                <div class="card-body bg-light" id="content">
+                    <?php if ($step === 1) { ?>
+                        <h2 class="card-title text-center display-6"><?php _e('Welcome'); ?></h2>
+                        <?php if (isset($error) && $error) { ?>
+                            <div class="alert alert-danger shadow-sm" role="alert">
+                                <h4><?php _e('Oops! You need a compatible Hosting'); ?></h4>
+                                <?php _e('Your hosting seems to be not compatible, check your settings.'); ?>
                             </div>
                             <br>
                         <?php } ?>
 
-                        <form class="form-control p-3" action="install.php" method="post">
+                        <form class="p-3" action="install.php" method="post">
                             <input type="hidden" name="step" value="2"/>
                             <div class="form-table">
-                                <?php if (count($jsonLangs) > 1) { ?>
+                                <?php if (count($jsonLocales) > 1) { ?>
                                     <div>
                                         <div class="row mb-3">
                                             <label for="install_locale" class="col-md-3 col-sm-6
-                                                col-form-label"><?php _e('Choose language'); ?></label>
+                                                col-form-label"><strong><?php _e('Choose language'); ?></strong></label>
                                             <div class="col-md-3 col-sm-6">
                                                 <select class="form-control"
                                                         aria-label="<?php _e('Choose language'); ?>" id="install_locale"
                                                         name="install_locale"
                                                         onchange="window.location.href='?install_locale='+document.getElementById(this.id).value">
-                                                    <?php foreach ($jsonLangs as $k => $locale) { ?>
+                                                    <?php foreach ($jsonLocales as $k => $locale) { ?>
                                                         <option value="<?php echo osc_esc_html($k); ?>" <?php if ($k
                                                             === Session::newInstance()->_get('userLocale')
                                                         ) {
@@ -278,13 +265,13 @@ switch ($step) {
                         </form>
                     <?php } elseif ($step == 2) {
                         display_database_config();
-                    } elseif ($step == 3) {
+                    } elseif ($step === 3) {
                         if (!isset($error['error'])) {
                             display_target();
                         } else {
                             display_database_error($error, $step - 1);
                         }
-                    } elseif ($step == 4) {
+                    } elseif ($step === 4) {
                         // ping engines
 
                         if (isset($_COOKIE['osclass_ping_engines'])) {
@@ -320,12 +307,15 @@ switch ($step) {
                     ?>
                 </div>
                 <div class="card-footer" id="footer">
-                    <a href="https://docs.mindstellar.com/osclass-docs/" target="_blank"
-                       hreflang="en"><?php _e('Documentation'); ?></a>
-                    <a href="https://github.com/mindstellar/Osclass/" target="_blank"
-                       hreflang="en"><?php _e('Feedback'); ?></a>
-                    <a href="https://osclass.discourse.group/" target="_blank"
-                       hreflang="en"><?php _e('Forums'); ?></a>
+                    <ul class="list-inline">
+                        <li class="list-inline-item"><a href="https://docs.mindstellar.com/osclass-docs/"
+                                                        target="_blank"
+                                                        hreflang="en"><?php _e('Documentation'); ?></a></li>
+                        <li class="list-inline-item"><a href="https://github.com/mindstellar/Osclass/" target="_blank"
+                                                        hreflang="en"><?php _e('Feedback'); ?></a></li>
+                        <li class="list-inline-item"><a href="https://osclass.discourse.group/" target="_blank"
+                                                        hreflang="en"><?php _e('Forums'); ?></a></li>
+                    </ul>
                 </div>
             </div>
         </div>
