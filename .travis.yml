@@ -65,6 +65,7 @@ deploy:
     skip_cleanup: true
     draft: true
     prerelease: true
+    name: Osclass "${LATEST_GIT_TAG}"
     on:
       branch: release-5.0.0
       tags: on
