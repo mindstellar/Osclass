@@ -42,8 +42,7 @@ osc_add_filter('admin_title', 'customPageTitle');
 // Fix for phpinfo CSS messing with page.
 ob_start();
 phpinfo();
-$phpinfo = ob_get_contents();
-ob_end_clean();
+$phpinfo = ob_get_clean();
 $phpinfo = preg_replace('%^.*<body>(.*)</body>.*$%ms', '$1', $phpinfo);
 
 osc_current_admin_theme_path('parts/header.php'); ?>
