@@ -4,9 +4,11 @@
 /.github export-ignore
 /.travis.yml export-ignore
 /.package.json export-ignore
+/.gitmodules export-ignore
+/.build.sh export-ignore
+/Releases export-ignore
 /Gruntfile.js export-ignore
 /composer.json export-ignore
 /composer.lock export-ignore
-/.gitmodules export-ignore
 /package.json export-ignore
 /package-lock.json export-ignore
