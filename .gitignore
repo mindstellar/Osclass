@@ -41,6 +41,9 @@ nbproject/
 .sass-cache
 package-lock.json
 
+# Release
+release
+
 # npm
 node_modules
 
