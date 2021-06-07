@@ -16,24 +16,6 @@ matrix:
     include:
         # Should upgrade if you are using this version
         - php: '5.6'
-        # aliased to a recent 7.0 version
-        - php: '7.0'
-        # aliased to a recent 7.1 version
-        - php: '7.1'
-        # aliased to a recent 7.2 version
-        - php: '7.2'
-        # aliased to a recent 7.3 version
-        - php: '7.3'
-        # aliased to a recent 7.4 version
-        - php: '7.4'
-        # aliased to a recent 8.0 version
-        - php: '8.0'
-        # php nightly
-        - php: 'nightly'
-
-    allow_failures:
-        - php: '8.0'
-        - php: 'nightly'
 
 before_install:
   - if [[ "$SNIFF" == "1" ]]; then export PHPCS_DIR=/tmp/phpcs; fi
@@ -59,3 +41,30 @@ script:
   # and, like the travis script, is in the root of the project, you can leave
   # out the `--standard=` part of the command.
   - if [[ "$SNIFF" == "1" ]]; then $PHPCS_DIR/bin/phpcs . ; fi
+before_deploy:
+  - export LATEST_GIT_TAG=$(git describe --tags --abbrev=0)
+  - bash .build.sh
+deploy:
+  # GitHub - Add zip to release
+  - provider: releases
+    api_key:
+      secure: d/4s0U4tiX2MM+zfuFZOYZOKDt3oivRA81QrFYDKONXUb4n/o4dHdWMQ3Si0qKtYBCUT8M7Oq7FTWoqDJzSCJNLQYqawl20BBR1ilORWDdeReF5NxZoV1kY3iSEY6CV7irfhg2YPJxib69Ei/wOith8Se+6sHYNpDS8EQ/NUNyl39KTkqIbtOvg8wl61u4tp5e447y+eJLU0GrfaY49qva1KCz62Y1+HwZJ7AYZQ3Mn+Wz/jnhKsH9zwEPyC8XThs2fnDvJYGuQ2cYsIpgt15PsTMXVS0DSQQXH25cOeau1RVuDcDzv2jbCitBCETo99grV/idrxDt8V32dNhJh6flgxL1UKkmxTWUAAaEa8+/2FuxbgOi2+cdm7XUM9zhXwMXX7TCe1JsnYSN7gc6y1sRzSwv4O1UE7xKDr/5l1s3u2IQkuh6ZEqlJOpvo6RLquHwXxes7bESY6cuXjt6NFpSCZUaekATneXumVu7J+GiXBxCPamgsEbMSE8vNhaw4PNN/nhI6GOcXEiegNxpdqsLWRYVdkOhAomk/60XQIXQKAAGwxRrxZS+NAZhSsgXpfgoYsq0IAFaeABWUmTbRzvlNbX6wU+tuEwMyFIpE1kPCYZojpLPAzj9GCbjZtVuCg3U79Ki8bPUdgMCg0bf5Y0YH7N9T/MDQV5wv175UILwY=
+    file_glob: true
+    file: release/osclass_v"${LATEST_GIT_TAG}".zip
+    skip_cleanup: true
+    draft: true
+    on:
+      branch: master
+      tags: on
+  # GitHub - Add zip to release
+  - provider: releases
+    api_key:
+      secure: d/4s0U4tiX2MM+zfuFZOYZOKDt3oivRA81QrFYDKONXUb4n/o4dHdWMQ3Si0qKtYBCUT8M7Oq7FTWoqDJzSCJNLQYqawl20BBR1ilORWDdeReF5NxZoV1kY3iSEY6CV7irfhg2YPJxib69Ei/wOith8Se+6sHYNpDS8EQ/NUNyl39KTkqIbtOvg8wl61u4tp5e447y+eJLU0GrfaY49qva1KCz62Y1+HwZJ7AYZQ3Mn+Wz/jnhKsH9zwEPyC8XThs2fnDvJYGuQ2cYsIpgt15PsTMXVS0DSQQXH25cOeau1RVuDcDzv2jbCitBCETo99grV/idrxDt8V32dNhJh6flgxL1UKkmxTWUAAaEa8+/2FuxbgOi2+cdm7XUM9zhXwMXX7TCe1JsnYSN7gc6y1sRzSwv4O1UE7xKDr/5l1s3u2IQkuh6ZEqlJOpvo6RLquHwXxes7bESY6cuXjt6NFpSCZUaekATneXumVu7J+GiXBxCPamgsEbMSE8vNhaw4PNN/nhI6GOcXEiegNxpdqsLWRYVdkOhAomk/60XQIXQKAAGwxRrxZS+NAZhSsgXpfgoYsq0IAFaeABWUmTbRzvlNbX6wU+tuEwMyFIpE1kPCYZojpLPAzj9GCbjZtVuCg3U79Ki8bPUdgMCg0bf5Y0YH7N9T/MDQV5wv175UILwY=
+    file_glob: true
+    file: release/osclass*.zip
+    skip_cleanup: true
+    draft: true
+    prerelease: true
+    on:
+      branch: release-5.0.0
+      tags: on
