@@ -213,7 +213,7 @@ class WebThemes extends Themes
             $this->theme_path   = $this->path . $this->theme . '/';
         } else {
             $this->theme_exists = false;
-            $this->theme_path   = osc_lib_path() . 'gui/';
+            $this->theme_path   = osc_content_path() . 'themes/bender/';
         }
     }
 
@@ -223,7 +223,7 @@ class WebThemes extends Themes
             $this->theme_url =
                 osc_apply_filter('theme_url', osc_base_url() . str_replace(osc_base_path(), '', $this->theme_path));
         } else {
-            $this->theme_url = osc_apply_filter('theme_url', osc_base_url() . 'oc-includes/gui/');
+            $this->theme_url = osc_apply_filter('theme_url', osc_base_url() . 'oc-content/themes/bender/');
         }
     }
 
@@ -248,8 +248,8 @@ class WebThemes extends Themes
         $this->theme = '';
 
         $this->theme_exists = false;
-        $this->theme_path   = osc_lib_path() . 'gui/';
-        $this->theme_url    = osc_base_url() . 'oc-includes/gui/';
+        $this->theme_path   = osc_content_path() . 'themes/bender/';
+        $this->theme_url    = osc_base_url() . 'oc-content/themes/bender/';
 
         $functions_path = $this->getCurrentThemePath() . 'functions.php';
         if (file_exists($functions_path)) {
