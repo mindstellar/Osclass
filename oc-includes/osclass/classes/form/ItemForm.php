@@ -1193,6 +1193,12 @@ class ItemForm extends Form
                             email: true
                         },
                         <?php } ?>
+                        city: {
+                            maxlength: 60
+                        },
+                        region: {
+                            maxlength: 60
+                        },
                         address: {
                             minlength: 3,
                             maxlength: 100
