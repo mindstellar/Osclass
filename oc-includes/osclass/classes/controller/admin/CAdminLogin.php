@@ -135,7 +135,9 @@ class CAdminLogin extends AdminBaseModel
                 $this->redirectTo($url_redirect);
                 break;
             case ('recover'):        // form to recover the password (in this case we have the form in /gui/)
-                $this->doView('gui/recover.php');
+                View::newInstance()->_exportVariableToView('login_admin_page_title', osc_page_title().' &raquo;'. __('Lost your password'));
+                View::newInstance()->_exportVariableToView('login_admin_form', 'gui/recover.php');
+                $this->doView();
                 break;
             case ('recover_post'):
                 if (defined('DEMO')) {
@@ -178,8 +180,9 @@ class CAdminLogin extends AdminBaseModel
                     osc_add_flash_error_message(_m('Sorry, the link is not valid'), 'admin');
                     $this->redirectTo(osc_admin_base_url());
                 }
-
-                $this->doView('gui/forgot_password.php');
+                View::newInstance()->_exportVariableToView('login_admin_page_title', osc_page_title().' &raquo;'. __('Change your password'));
+                View::newInstance()->_exportVariableToView('login_admin_form', 'gui/forgot_password.php');
+                $this->doView();
                 break;
             case ('forgot_post'):
                 osc_csrf_check();
@@ -210,8 +213,10 @@ class CAdminLogin extends AdminBaseModel
                 break;
             default:
                 //osc_run_hook( 'init_admin' );
+                View::newInstance()->_exportVariableToView('login_admin_page_title', osc_page_title().' &raquo;'. __('Log in'));
+                View::newInstance()->_exportVariableToView('login_admin_form', 'gui/login.php');
                 Session::newInstance()->_setReferer(osc_get_http_referer());
-                $this->doView('gui/login.php');
+                $this->doView();
                 break;
         }
     }
@@ -223,11 +228,11 @@ class CAdminLogin extends AdminBaseModel
      *
      * @return mixed|void
      */
-    public function doView($file)
+    public function doView($file = 'gui/main.php')
     {
         $login_admin_title = osc_apply_filter('login_admin_title', 'Osclass');
         $login_admin_url   = osc_apply_filter('login_admin_url', 'https://github.com/mindstellar/osclass/');
-        $login_admin_image = osc_apply_filter('login_admin_image', osc_admin_base_url() . 'images/osclass-logo.gif');
+        $login_admin_image = osc_apply_filter('login_admin_image', osc_admin_base_url() . 'images/osclass-logo.png');
 
         View::newInstance()->_exportVariableToView('login_admin_title', $login_admin_title);
         View::newInstance()->_exportVariableToView('login_admin_url', $login_admin_url);
@@ -239,5 +244,4 @@ class CAdminLogin extends AdminBaseModel
     }
 
 }
-
 /* file end: ./oc-admin/CAdminLogin.php */
