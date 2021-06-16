@@ -161,12 +161,10 @@ class DBConnectionClass
         if ($conn == false) {
             $this->errorConnection();
             $this->releaseOsclassDb();
-
-            require_once LIB_PATH . 'osclass/helpers/hErrors.php';
-            $title   = 'Osclass &raquo; Error';
-            $message =
-                'Osclass database server is not available. <a href="https://osclass.discourse.group/">Need more help?</a></p>';
-            osc_die($title, $message);
+            $this->handleDbError(
+                'Osclass &raquo; Error',
+                'Osclass database server is not available. <a href="https://osclass.discourse.group/">Need more help?</a></p>'
+            );
         }
 
         $this->setCharset('utf8', $this->db);
@@ -180,12 +178,10 @@ class DBConnectionClass
         if ($selectDb == false) {
             $this->errorReport();
             $this->releaseOsclassDb();
-
-            require_once LIB_PATH . 'osclass/helpers/hErrors.php';
-            $title   = 'Osclass &raquo; Error';
-            $message =
-                'Osclass database is not available. <a href="https://osclass.discourse.group/">Need more help?</a></p>';
-            osc_die($title, $message);
+            $this->handleDbError(
+                'Osclass &raquo; Error',
+                'Osclass database is not available. <a href="https://osclass.discourse.group/">Need more help?</a></p>'
+            );
         }
 
         return true;
@@ -551,6 +547,19 @@ class DBConnectionClass
     public function getMetadataDb()
     {
         return $this->getDb($this->metadataDb);
+    }
+
+    /**
+     * This handle database error and show error page with given title,message.
+     * @param $title
+     * @param $message
+     */
+    private function handleDbError($title, $message)
+    {
+        if (OSC_INSTALLING !== 1) {
+            require_once LIB_PATH . 'osclass/helpers/hErrors.php';
+            osc_die($title, $message);
+        }
     }
 
     /**
