@@ -14,8 +14,26 @@ matrix:
     fast_finish: true
 
     include:
-        # Should upgrade if you are using this version
-        - php: '5.6'
+      # Should upgrade if you are using this version
+      - php: '5.6'
+      # aliased to a recent 7.0 version
+      - php: '7.0'
+      # aliased to a recent 7.1 version
+      - php: '7.1'
+      # aliased to a recent 7.2 version
+      - php: '7.2'
+      # aliased to a recent 7.3 version
+      - php: '7.3'
+      # aliased to a recent 7.4 version
+      - php: '7.4'
+      # aliased to a recent 8.0 version
+      - php: '8.0'
+      # php nightly
+      - php: 'nightly'
+
+    allow_failures:
+      - php: '8.0'
+      - php: 'nightly'
 
 before_install:
   - if [[ "$SNIFF" == "1" ]]; then export PHPCS_DIR=/tmp/phpcs; fi
@@ -35,7 +53,7 @@ before_install:
 # All commands must exit with code 0 on success. Anything else is considered failure.
 script:
   # Search for PHP syntax errors.
-  - find -L . -name '*.php' -print0 | xargs -0 -n 1 -P 4 php -l
+  - find -L . ! -name 'HTMLPurifierExtras.autoload-legacy.php' -name '*.php' -print0 | xargs -0 -n 1 -P 4 php -l
   # Run PHPCS.
   # If the custom ruleset is named `.phpcs.xml`, `phpcs.xml`, `.phpcs.xml.dist` or `phpcs.xml.dist`
   # and, like the travis script, is in the root of the project, you can leave
