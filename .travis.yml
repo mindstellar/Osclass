@@ -61,7 +61,7 @@ deploy:
     api_key:
       secure: d/4s0U4tiX2MM+zfuFZOYZOKDt3oivRA81QrFYDKONXUb4n/o4dHdWMQ3Si0qKtYBCUT8M7Oq7FTWoqDJzSCJNLQYqawl20BBR1ilORWDdeReF5NxZoV1kY3iSEY6CV7irfhg2YPJxib69Ei/wOith8Se+6sHYNpDS8EQ/NUNyl39KTkqIbtOvg8wl61u4tp5e447y+eJLU0GrfaY49qva1KCz62Y1+HwZJ7AYZQ3Mn+Wz/jnhKsH9zwEPyC8XThs2fnDvJYGuQ2cYsIpgt15PsTMXVS0DSQQXH25cOeau1RVuDcDzv2jbCitBCETo99grV/idrxDt8V32dNhJh6flgxL1UKkmxTWUAAaEa8+/2FuxbgOi2+cdm7XUM9zhXwMXX7TCe1JsnYSN7gc6y1sRzSwv4O1UE7xKDr/5l1s3u2IQkuh6ZEqlJOpvo6RLquHwXxes7bESY6cuXjt6NFpSCZUaekATneXumVu7J+GiXBxCPamgsEbMSE8vNhaw4PNN/nhI6GOcXEiegNxpdqsLWRYVdkOhAomk/60XQIXQKAAGwxRrxZS+NAZhSsgXpfgoYsq0IAFaeABWUmTbRzvlNbX6wU+tuEwMyFIpE1kPCYZojpLPAzj9GCbjZtVuCg3U79Ki8bPUdgMCg0bf5Y0YH7N9T/MDQV5wv175UILwY=
     file_glob: true
-    file: release/osclass*.zip
+    file: release/osclass_v"${LATEST_GIT_TAG}".zip
     skip_cleanup: true
     draft: true
     prerelease: true
