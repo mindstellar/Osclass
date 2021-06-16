@@ -151,7 +151,12 @@ function get_requirements()
             'solution'    => __('GD extension is required. How to '
                 . '<a target="_blank" href="http://www.php.net/manual/en/image.setup.php">install/configure</a>.')
         ),
-
+        'cURL extension for PHP' => array(
+            'requirement' => __('cURL extension for PHP'),
+            'fn'          => extension_loaded('curl'),
+            'solution'    => __('cURL extension is required. How to '
+                . '<a target="_blank" href="https://www.php.net/manual/en/curl.setup.php">install/configure</a>.')
+        ),
         'Folder <code>oc-content/uploads</code> exists' => array(
             'requirement' => __('Folder <code>oc-content/uploads</code> exists'),
             'fn'          => file_exists(ABS_PATH . 'oc-content/uploads/'),
@@ -350,25 +355,18 @@ function oc_install()
                         'error' => __("The database doesn't exist. You should check the \"Create DB\" "
                             . 'checkbox and fill in a username and password with the right privileges')
                     );
-                    break;
                 case 1045:
                     return array('error' => __('Cannot connect to the database. Check if the user has privileges.'));
-                    break;
                 case 1044:
                     return array(
-                        'error' => __('Cannot connect to the database. Check if the username and '
-                            . 'password are correct.')
+                        'error' => __('Cannot connect to the database. Check if the username and password are correct.')
                     );
-                    break;
                 case 2005:
                     return array('error' => __("Can't resolve MySQL host. Check if the host is correct."));
-                    break;
                 default:
                     return array(
-                        'error' => sprintf(__('Cannot connect to the database. Error number: %s')),
-                        $error_num
+                        'error' => sprintf(__('Cannot connect to the database. Error number: %s'),$error_num),
                     );
-                    break;
             }
         }
 
@@ -1034,9 +1032,9 @@ function display_target()
             </div>
             <div class="admin-user mb-3">
                 <?php _e('A password will be automatically generated for you if you leave this blank.'); ?>
-                <img src="<?php echo get_absolute_url() ?>oc-includes/images/question.png"
-                     class="question-skip vtip"
-                     title="<?php echo osc_esc_html(__('You can modify username and password if you like, just change the input value.')); ?>"/>
+                <i class="bi bi-question-circle-fill vtip"
+                   title="<?php echo osc_esc_html(__('You can modify username and password if you like, just change the input value.')); ?>">
+                </i>
             </div>
             <h4 class="title"><?php _e('Contact information'); ?></h4>
             <div class="contact-info">
@@ -1176,42 +1174,30 @@ function display_finish($password)
             $('.error-location').fadeOut('slow');
         }, 2500);
     </script>
-    <div class="alert alert-warning shadow">
+    <div class="alert alert-warning shadow-sm mb-3">
         <?php _e('The selected location could not been installed'); ?>
     </div>
 <?php } ?>
     <h2 class="display-6 text-success"><?php _e('Congratulations!'); ?></h2>
-    <p><?php _e("Osclass has been installed. Were you expecting more steps? Sorry to disappoint you!"); ?></p>
-    <p><?php echo sprintf(
+    <div class="alert alert-success shadow-sm mb3"><?php _e("Osclass has been installed. Were you expecting more steps? Sorry to disappoint you!");
+    ?></div>
+    <div class="alert alert-info shadow-sm mb-3"><?php echo sprintf(
             __('An e-mail with the password for oc-admin has been sent to: %s'),
             $data['s_email']
-        ); ?></p>
-    <div class="form-table finish">
-        <table>
-            <tbody>
-            <tr>
-                <th><span class="label-like"><?php _e('Username'); ?></span></th>
-                <td>
-                    <div class="s_name">
-                        <span style="float:left;"><?php echo $data['admin_user']; ?></span>
-                    </div>
-                </td>
-            </tr>
-            <tr>
-                <th><span class="label-like"><?php _e('Password'); ?></span></th>
-                <td>
-                    <div class="s_passwd">
-                        <span style="float: left;"><?php echo osc_esc_html($data['password']); ?></span>
-                    </div>
-                </td>
-            </tr>
-            </tbody>
-        </table>
+        ); ?></div>
+    <div class="finish">
+        <div class="row mb-3">
+            <span class="col-md-3 col-sm-6 h6"><?php _e('Username'); ?>: </span>
+            <span class="col-md-4 col-sm-6"><?php echo $data['admin_user']; ?></span>
+        </div>
+        <div class="row mb-3">
+            <span class="col-md-3 col-sm-6 h6"><?php _e('Password'); ?>: </span>
+            <span class="col-md-4 col-sm-6"><?php echo osc_esc_html($data['password']); ?></span>
+        </div>
+        <div class="row mb-3">
+            <a target="_blank" href="<?php echo get_absolute_url() ?>oc-admin/index.php"
+               class="btn btn-primary"><?php _e('Finish and go to the administration panel'); ?></a>
+        </div>
     </div>
-
-    <p>
-        <a target="_blank" href="<?php echo get_absolute_url() ?>oc-admin/index.php"
-           class="btn btn-primary"><?php _e('Finish and go to the administration panel'); ?></a>
-    </p>
     <?php
 }

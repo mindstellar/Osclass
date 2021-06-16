@@ -245,9 +245,9 @@ switch ($step) {
                                 <?php } ?>
                                 <ul>
                                     <?php foreach ($requirements as $k => $v) { ?>
-                                        <li><?php echo $v['requirement']; ?><i
+                                        <li><?php echo $v['requirement']; ?> <i
                                                     class="bi <?php echo $v['fn'] ? 'text-success bi-check'
-                                                        : 'text-danger bi-cross'; ?>"></i></li>
+                                                        : 'text-danger bi-x-circle-fill'; ?>"></i></li>
                                     <?php } ?>
                                 </ul>
                             </div>
