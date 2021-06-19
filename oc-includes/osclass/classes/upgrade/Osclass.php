@@ -115,31 +115,38 @@ class Osclass extends UpgradePackage
             || (!$preference->get('update_core_json') && (time() - $preference->get('last_version_check')) > (24 * 3600)
             )
         ) {
-            $json_url                  = 'https://api.github.com/repos/mindstellar/osclass/releases/latest';
-            $osclass_package_info_json = (new FileSystem())->getContents($json_url);
-            if ($osclass_package_info_json) {
-                $aSelfPackage = json_decode($osclass_package_info_json, true);
-                if (!$aSelfPackage['draft']) {
+
+            if(defined('ENABLE_PRERELEASE') && ENABLE_PRERELEASE === true ){
+                $json_url              = 'https://api.github.com/repos/mindstellar/osclass/releases';
+                $osclass_package_info_json = (new FileSystem())->getContents($json_url);
+                if ($osclass_package_info_json) {
+                    $aSelfPackage = json_decode($osclass_package_info_json, true)[0];
+                }
+            } else {
+                $json_url                  = 'https://api.github.com/repos/mindstellar/osclass/releases/latest';
+                $osclass_package_info_json = (new FileSystem())->getContents($json_url);
+                if ($osclass_package_info_json) {
+                    $aSelfPackage = json_decode($osclass_package_info_json, true);
+                }
+            }
+
+            if (!$aSelfPackage['draft']) {
                     if (isset($aSelfPackage['name'])) {
                         $package_info['s_title'] = $aSelfPackage['name'];
                     }
                     if (isset($aSelfPackage['assets'][0]['browser_download_url'])) {
-                        $download_url                 = $aSelfPackage['assets'][0]['browser_download_url'];
-                        $package_info['s_source_url'] = $download_url;
+                        $package_info['s_source_url'] = $aSelfPackage['assets'][0]['browser_download_url'];
                     }
                     if (isset($aSelfPackage['tag_name'])) {
                         $package_info['s_new_version'] = ltrim(trim($aSelfPackage['tag_name']), 'v');
                     }
                     $package_info['s_installed_version'] = OSCLASS_VERSION;
                     $package_info['s_short_name']        = 'osclass';
-
                     $package_info['s_target_directory'] = ABS_PATH;
-
                     $package_info['a_filtered_files'] = ['oc-content', 'config.php'];
-
                     $package_info['s_prerelease'] = $aSelfPackage['prerelease'];
                 }
-            }
+
         }
         if (!isset($package_info) || empty($package_info)) {
             $package_info = json_decode($preference->get('update_core_json'), true);

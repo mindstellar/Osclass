@@ -583,7 +583,8 @@ function osc_admin_toolbar_update_core($force = false)
             AdminToolbar::newInstance()->remove_menu('update_core');
         }
         if (getPreference('update_core_available')) {
-            $title = __('Osclass update is available');
+            $update_json = json_decode(Preference::newInstance()->get('update_core_json'), false);
+            $title = __('Osclass ').$update_json->s_new_version.__(' is available');
             AdminToolbar::newInstance()->add_menu(
                 array(
                     'id'    => 'update_core',
