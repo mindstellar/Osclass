@@ -42,7 +42,7 @@ if (!defined('ABS_PATH')) {
                    title="<?php echo View::newInstance()->_get('login_admin_title'); ?>">
                     <img class="img-fluid" src="<?php echo View::newInstance()->_get('login_admin_image'); ?>"
                          title="<?php echo
-                         View::newInstance()->_get('login_admin_title'); ?>"
+                            View::newInstance()->_get('login_admin_title'); ?>"
                          alt="<?php echo View::newInstance()->_get('login_admin_title'); ?>"/>
                 </a>
             </h1>

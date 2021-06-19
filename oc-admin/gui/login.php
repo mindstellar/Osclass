@@ -26,15 +26,15 @@ if (!defined('ABS_PATH')) {
     <div class="form-floating mb-3">
         <input type="text" name="user" class="form-control" id="user_login"
                value="<?php if (defined('DEMO')) {
-                   echo 'admin';
-               } ?>" size="20" placeholder="Enter your username">
+                    echo 'admin';
+                      } ?>" size="20" placeholder="Enter your username">
         <label for="user_login"><?php _e('Username'); ?></label>
     </div>
     <div class="form-floating mb-3">
         <input type="password" name="password" id="user_pass" class="form-control" placeholder="Password"
                value="<?php if (defined('DEMO')) {
-                   echo 'admin';
-               } ?>" size="20" autocomplete="off">
+                    echo 'admin';
+                      } ?>" size="20" autocomplete="off">
         <label for="user_pass"><?php _e('Password'); ?></label>
     </div>
     <?php osc_run_hook('login_admin_form'); ?>
@@ -67,17 +67,17 @@ if (!defined('ABS_PATH')) {
     <?php osc_run_hook('admin_login_form'); ?>
     <button class="w-100 btn btn-lg btn-primary" type="submit" name="submit"
             id="submit"><?php echo osc_esc_html
-        (__('Log in')); ?></button>
+            (__('Log in')); ?></button>
     <div class="mt-5 mb-3"><a href="<?php echo osc_base_url(); ?>"
                               title="<?php echo osc_esc_html(sprintf(__('Back to %s'), osc_page_title())); ?>">
             <i class="text-dark bi bi-arrow-left"></i> <?php printf(__('Back to %s'), osc_page_title()); ?></a>
     </div>
 </form>
-<?php $login_js = static function() { ?><script type="text/javascript">
+<?php $login_js = static function () { ?><script type="text/javascript">
     $(document).ready(function () {
         $(".ico-close").click(function () {
             $(this).parent().hide();
         });
     });
-</script><?php };
-osc_add_hook('admin_login_footer',$login_js); ?>
+<?php };
+osc_add_hook('admin_login_footer', $login_js); ?>

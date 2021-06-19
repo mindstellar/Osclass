@@ -365,7 +365,7 @@ function oc_install()
                     return array('error' => __("Can't resolve MySQL host. Check if the host is correct."));
                 default:
                     return array(
-                        'error' => sprintf(__('Cannot connect to the database. Error number: %s'),$error_num),
+                        'error' => sprintf(__('Cannot connect to the database. Error number: %s'), $error_num),
                     );
             }
         }
@@ -882,16 +882,16 @@ function display_database_config()
             </div>
             <div class="row mb-3">
                 <label for="dbname" class="col-md-3 col-sm-6 col-form-label"><strong><?php _e('Database name');
-                        ?></strong></label>
+                ?></strong></label>
                 <div class="col-md-3 col-sm-6">
                     <input class="form-control" type="text" id="dbname" name="dbname" value="osclass" size="25"/>
                 </div>
                 <div class="small"><?php _e('The name of the database you want to run Osclass in');
-                    ?></div>
+                ?></div>
             </div>
             <div class="row mb-3">
                 <label for="username" class="col-md-3 col-sm-6 col-form-label"><strong><?php _e('User Name');
-                        ?></strong></label>
+                ?></strong></label>
                 <div class="col-md-3 col-sm-6">
                     <input class="form-control" type="text" id="username" name="username" size="25"/>
                 </div>
@@ -899,7 +899,7 @@ function display_database_config()
             </div>
             <div class="row mb-3">
                 <label for="password" class="col-md-3 col-sm-6 col-form-label"><strong><?php _e('Password');
-                        ?></strong></label>
+                ?></strong></label>
                 <div class="col-md-3 col-sm-6">
                     <input class="form-control" type="password" id="password" name="password"
                            value="" size="25" autocomplete="off"/>
@@ -908,7 +908,7 @@ function display_database_config()
             </div>
             <div class="row mb-3">
                 <label for="tableprefix" class="col-md-3 col-sm-6 col-form-label"><strong><?php _e('Table prefix');
-                        ?></strong></label>
+                ?></strong></label>
                 <div class="col-md-3 col-sm-6">
                     <input class="form-control" type="text" id="tableprefix" name="tableprefix"
                            value="oc_" size="25"/>
@@ -1072,7 +1072,7 @@ function display_target()
                                 } ?>
                                 <option value="<?php echo $c['file']; ?>" <?php if (strpos($c['file'], $country_ip) === 0) {
                                     echo 'selected="selected"';
-                                } ?>><?php echo $c['name']; ?></option>
+                                               } ?>><?php echo $c['name']; ?></option>
                             <?php }; ?>
                         </select>
                     </div>
@@ -1177,14 +1177,14 @@ function display_finish($password)
     <div class="alert alert-warning shadow-sm mb-3">
         <?php _e('The selected location could not been installed'); ?>
     </div>
-<?php } ?>
+    <?php } ?>
     <h2 class="display-6 text-success"><?php _e('Congratulations!'); ?></h2>
     <div class="alert alert-success shadow-sm mb3"><?php _e("Osclass has been installed. Were you expecting more steps? Sorry to disappoint you!");
     ?></div>
     <div class="alert alert-info shadow-sm mb-3"><?php echo sprintf(
             __('An e-mail with the password for oc-admin has been sent to: %s'),
             $data['s_email']
-        ); ?></div>
+                                                 ); ?></div>
     <div class="finish">
         <div class="row mb-3">
             <span class="col-md-3 col-sm-6 h6"><?php _e('Username'); ?>: </span>

@@ -218,7 +218,7 @@ switch ($step) {
                                                             === Session::newInstance()->_get('userLocale')
                                                         ) {
                                                             echo 'selected="selected"';
-                                                        } ?>><?php echo $locale; ?></option>
+                                                                       } ?>><?php echo $locale; ?></option>
                                                     <?php } ?>
                                                 </select>
                                             </div>
@@ -306,7 +306,7 @@ switch ($step) {
                         display_finish($password);
 
                         // Install bender theme for first time.
-                        if(!is_dir(CONTENT_PATH.'themes/bender')) {
+                        if (!is_dir(CONTENT_PATH.'themes/bender')) {
                             $fileSystem = new \mindstellar\utility\FileSystem();
                             $bender_filename       = 'bender.zip';
                             $download_path   = CONTENT_PATH . 'downloads/';
@@ -319,7 +319,6 @@ switch ($step) {
                                 $resultCode =$zip->unzipFile($downloaded, CONTENT_PATH . 'themes/');
                                 $fileSystem->remove($downloaded);
                             }
-
                         }
                     }
                     ?>

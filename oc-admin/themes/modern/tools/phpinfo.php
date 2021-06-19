@@ -19,12 +19,14 @@
  * limitations under the License.
  */
 
-function addHelp() {
+function addHelp()
+{
     echo '<p>' . __('Show PHP info.') . '</p>';
 }
 osc_add_hook('help_box', 'addHelp');
 
-function customPageHeader() {
+function customPageHeader()
+{
     ?>
     <h1>
         <?php _e('Tools'); ?>
@@ -34,7 +36,8 @@ function customPageHeader() {
 }
 osc_add_hook('admin_page_header', 'customPageHeader');
 
-function customPageTitle($string) {
+function customPageTitle($string)
+{
     return sprintf(__('PHP info &raquo; %s'), $string);
 }
 osc_add_filter('admin_title', 'customPageTitle');
