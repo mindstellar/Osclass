@@ -836,13 +836,17 @@ if (osc_google_analytics_id()) {
 
 function osc_item_tinymce_header()
 {
-    if(!osc_is_publish_page() && !osc_is_edit_page()) return;
+    if (!osc_is_publish_page() && !osc_is_edit_page()) {
+        return;
+    }
     osc_enqueue_script('tiny_mce');
 }
 
 function osc_item_tinymce_footer()
 {
-    if(!osc_is_publish_page() && !osc_is_edit_page()) return;
+    if (!osc_is_publish_page() && !osc_is_edit_page()) {
+        return;
+    }
     ?>
     <script>
         tinyMCE.init({
