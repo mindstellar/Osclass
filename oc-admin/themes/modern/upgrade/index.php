@@ -60,9 +60,9 @@ function customHead()
                 if(data.status) {
                         $("#result").append("Success: " + data.message + "<br />");
                 } else {
-                        $("#result").append("Error: " + data.message.replace(/\n/g,"<br />") + "<br />");
+                        $("#result").append("Error: " + data.message.replace(/\n/g,"<br />"));
                 }
-            });
+            },'json');
             <?php } ?>
         });
     </script>
