@@ -85,5 +85,6 @@ deploy:
     prerelease: true
     name: Osclass ${LATEST_GIT_TAG}
     on:
-      branch: release-5.0.0
+      all_branches: true
+      condition: ${$TRAVIS_BRANCH} =~ ^release[-|_].*$
       tags: on
