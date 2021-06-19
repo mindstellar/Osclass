@@ -118,6 +118,18 @@ osc_current_admin_theme_path('parts/header.php'); ?>
                             </div>
                             <div class="separate-top-medium">
                                 <label>
+                                    <input type="checkbox" name="moderate_admin_post" value="1"  <?php if(osc_moderate_admin_post()) echo 'checked'; ?> />
+                                    <?php _e('Hold new listings for admin moderation'); ?>
+                                </label>
+                            </div>
+                            <div class="separate-top-medium">
+                                <label>
+                                    <input type="checkbox" name="moderate_admin_edit" value="1"  <?php if(osc_moderate_admin_edit()) echo 'checked'; ?>/>
+                                    <?php _e('Hold edited listings for admin moderation'); ?>
+                                </label>
+                            </div>
+                            <div class="separate-top-medium">
+                                <label>
                                     <input type="checkbox" <?php echo((osc_moderate_items() == -1) ? ''
                                         : 'checked="checked"'); ?> name="moderate_items" value="1"/>
                                     <?php _e('Users have to validate their listings'); ?>
@@ -226,6 +238,18 @@ osc_current_admin_theme_path('parts/header.php'); ?>
                         </div>
                     </div>
                     <div class="form-row">
+                        <div class="form-label"> <?php _e('Rich Edit'); ?></div>
+                        <div class="form-controls">
+                            <div class="form-label-checkbox">
+                                <label>
+                                    <input type="checkbox" <?php echo(osc_tinymce_frontend() ? 'checked="checked"'
+                                        : ''); ?> name="tinymce" value="1"/>
+                                    <?php _e('Enable TinyMCE on frontend'); ?>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-row">
                         <div class="form-label"> <?php _e('Optional fields'); ?></div>
                         <div class="form-controls">
                             <div class="form-label-checkbox">
@@ -247,6 +271,20 @@ osc_current_admin_theme_path('parts/header.php'); ?>
                                         . osc_max_images_per_item() . '" />'); ?>
                                     <div class="help-box"><?php _e('If the value is zero, it means an unlimited number of images is allowed'); ?></div>
                                 </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-label"> <?php _e('Maps'); ?></div>
+                        <div class="separate-top-medium">
+                            <div class="form-controls">
+                                <?php $map_type = osc_item_map_type(); ?>
+                                <select class="input-small" name="map_type">
+                                    <option value="0" <?php if(!$map_type) echo 'selected'; ?>><?php _e('None'); ?></option>
+                                    <option value="google" <?php if($map_type == 'google') echo 'selected'; ?>><?php _e('Google Maps'); ?></option>
+                                    <option value="openstreet" <?php if($map_type == 'openstreet') echo 'selected'; ?>><?php _e('OpenStreetMaps'); ?></option>
+                                </select>
+                                <div class="help-box"><?php _e('Set the API key in Settings -> General.'); ?></div>
                             </div>
                         </div>
                     </div>

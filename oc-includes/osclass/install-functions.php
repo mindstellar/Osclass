@@ -151,7 +151,12 @@ function get_requirements()
             'solution'    => __('GD extension is required. How to '
                 . '<a target="_blank" href="http://www.php.net/manual/en/image.setup.php">install/configure</a>.')
         ),
-
+        'cURL extension for PHP' => array(
+            'requirement' => __('cURL extension for PHP'),
+            'fn'          => extension_loaded('curl'),
+            'solution'    => __('cURL extension is required. How to '
+                . '<a target="_blank" href="https://www.php.net/manual/en/curl.setup.php">install/configure</a>.')
+        ),
         'Folder <code>oc-content/uploads</code> exists' => array(
             'requirement' => __('Folder <code>oc-content/uploads</code> exists'),
             'fn'          => file_exists(ABS_PATH . 'oc-content/uploads/'),
@@ -166,7 +171,7 @@ function get_requirements()
             'fn'          => is_writable(ABS_PATH . 'oc-content/uploads/'),
             'solution'    => sprintf(
                 __('<code>uploads</code> folder has to be writable, i.e.: '
-                    .'<code>chmod 0755 %soc-content/uploads/</code>'),
+                    . '<code>chmod 0755 %soc-content/uploads/</code>'),
                 ABS_PATH
             )
         ),
@@ -176,7 +181,7 @@ function get_requirements()
             'fn'          => file_exists(ABS_PATH . 'oc-content/downloads/'),
             'solution'    => sprintf(
                 __('You have to create <code>downloads</code> folder, i.e.: '
-                    .'<code>mkdir %soc-content/downloads/</code>'),
+                    . '<code>mkdir %soc-content/downloads/</code>'),
                 ABS_PATH
             )
         ),
@@ -186,7 +191,7 @@ function get_requirements()
             'fn'          => is_writable(ABS_PATH . 'oc-content/downloads/'),
             'solution'    => sprintf(
                 __('<code>downloads</code> folder has to be writable, i.e.: '
-                    .'<code>chmod 0755 %soc-content/downloads/</code>'),
+                    . '<code>chmod 0755 %soc-content/downloads/</code>'),
                 ABS_PATH
             )
         ),
@@ -196,7 +201,7 @@ function get_requirements()
             'fn'          => file_exists(ABS_PATH . 'oc-content/languages/'),
             'solution'    => sprintf(
                 __('You have to create the <code>languages</code> folder, i.e.: '
-                    .'<code>mkdir %soc-content/languages/</code>'),
+                    . '<code>mkdir %soc-content/languages/</code>'),
                 ABS_PATH
             )
         ),
@@ -206,7 +211,7 @@ function get_requirements()
             'fn'          => is_writable(ABS_PATH . 'oc-content/languages/'),
             'solution'    => sprintf(
                 __('<code>languages</code> folder has to be writable, i.e.: '
-                    .'<code>chmod 0755 %soc-content/languages/</code>'),
+                    . '<code>chmod 0755 %soc-content/languages/</code>'),
                 ABS_PATH
             )
         ),
@@ -346,25 +351,22 @@ function oc_install()
 
             switch ($error_num) {
                 case 1049:
-                    return array('error' => __("The database doesn't exist. You should check the \"Create DB\" "
-                        . 'checkbox and fill in a username and password with the right privileges'));
-                    break;
+                    return array(
+                        'error' => __("The database doesn't exist. You should check the \"Create DB\" "
+                            . 'checkbox and fill in a username and password with the right privileges')
+                    );
                 case 1045:
                     return array('error' => __('Cannot connect to the database. Check if the user has privileges.'));
-                    break;
                 case 1044:
-                    return array('error' => __('Cannot connect to the database. Check if the username and '
-                        .'password are correct.'));
-                    break;
+                    return array(
+                        'error' => __('Cannot connect to the database. Check if the username and password are correct.')
+                    );
                 case 2005:
                     return array('error' => __("Can't resolve MySQL host. Check if the host is correct."));
-                    break;
                 default:
                     return array(
-                        'error' => sprintf(__('Cannot connect to the database. Error number: %s')),
-                        $error_num
+                        'error' => sprintf(__('Cannot connect to the database. Error number: %s'), $error_num),
                     );
-                    break;
             }
         }
 
@@ -387,8 +389,10 @@ function oc_install()
             }
 
             if (in_array($error_num, array(1006, 1044, 1045))) {
-                return array('error' => __("Can't create the database. Check if the admin username "
-                    . 'and password are correct.'));
+                return array(
+                    'error' => __("Can't create the database. Check if the admin username "
+                        . 'and password are correct.')
+                );
             }
 
             return array(
@@ -417,15 +421,19 @@ function oc_install()
 
         switch ($error_num) {
             case 1049:
-                return array('error' => __("The database doesn't exist. You should check the \"Create DB\" "
-                    ."checkbox and fill in a username and password with the right privileges"));
+                return array(
+                    'error' => __("The database doesn't exist. You should check the \"Create DB\" "
+                        . "checkbox and fill in a username and password with the right privileges")
+                );
                 break;
             case 1045:
                 return array('error' => __('Cannot connect to the database. Check if the user has privileges.'));
                 break;
             case 1044:
-                return array('error' => __('Cannot connect to the database. Check if the username and password '
-                    .'are correct.'));
+                return array(
+                    'error' => __('Cannot connect to the database. Check if the username and password '
+                        . 'are correct.')
+                );
                 break;
             case 2005:
                 return array('error' => __("Can't resolve MySQL host. Check if the host is correct."));
@@ -464,8 +472,10 @@ function oc_install()
                     );
             }
 
-            return array('error' => __("config-sample.php doesn't exist. Check if everything is "
-                . 'decompressed correctly.'));
+            return array(
+                'error' => __("config-sample.php doesn't exist. Check if everything is "
+                    . 'decompressed correctly.')
+            );
         }
         if (!is_writable(ABS_PATH)) {
             if (reportToOsclass()) {
@@ -859,116 +869,116 @@ function finish_installation($password)
 function display_database_config()
 {
     ?>
-    <form action="install.php" method="post">
+    <form class="p-3" action="install.php" method="post">
         <input type="hidden" name="step" value="3"/>
-        <h2 class="target"><?php _e('Database information'); ?></h2>
+        <h2 class="display-6 mb-3"><?php _e('Database information'); ?></h2>
         <div class="form-table">
-            <table>
-                <tbody>
-                <tr>
-                    <th align="left"><label for="dbhost"><?php _e('Host'); ?></label></th>
-                    <td><input type="text" id="dbhost" name="dbhost" value="localhost" size="25"/>
-                    </td>
-                    <td class="small"><?php _e('Server name or IP where the database engine resides'); ?></td>
-                </tr>
-                <tr>
-                    <th align="left"><label for="dbname"><?php _e('Database name'); ?></label></th>
-                    <td><input type="text" id="dbname" name="dbname" value="osclass" size="25"/>
-                    </td>
-                    <td class="small"><?php _e('The name of the database you want to run Osclass in'); ?></td>
-                </tr>
-                <tr>
-                    <th align="left"><label for="username"><?php _e('User Name'); ?></label></th>
-                    <td><input type="text" id="username" name="username" size="25"/></td>
-                    <td class="small"><?php _e('Your MySQL username'); ?></td>
-                </tr>
-                <tr>
-                    <th align="left"><label for="password"><?php _e('Password'); ?></label></th>
-                    <td><input type="password" id="password" name="password" value="" size="25"
-                               autocomplete="off"/>
-                    </td>
-                    <td class="small"><?php _e('Your MySQL password'); ?></td>
-                </tr>
-                <tr>
-                    <th align="left"><label for="tableprefix"><?php _e('Table prefix'); ?></label>
-                    </th>
-                    <td><input type="text" id="tableprefix" name="tableprefix" value="oc_"
-                               size="25"/></td>
-                    <td class="small"><?php _e('If you want to run multiple Osclass installations in a single database, change this'); ?></td>
-                </tr>
-                </tbody>
-            </table>
-            <div id="advanced_install" class="shrink">
-                <div class="text">
-                    <span><?php _e('Advanced'); ?></span>
+            <div class="row mb-3">
+                <label for="dbhost" class="col-md-3 col-sm-6 col-form-label text"><strong><?php _e('Host'); ?></strong></label>
+                <div class="col-md-3 col-sm-6">
+                    <input class="form-control" type="text" id="dbhost" name="dbhost" value="localhost" size="25"/>
+                </div>
+                <div class="small"><?php _e('Server name or IP where the database engine resides'); ?></div>
+            </div>
+            <div class="row mb-3">
+                <label for="dbname" class="col-md-3 col-sm-6 col-form-label"><strong><?php _e('Database name');
+                ?></strong></label>
+                <div class="col-md-3 col-sm-6">
+                    <input class="form-control" type="text" id="dbname" name="dbname" value="osclass" size="25"/>
+                </div>
+                <div class="small"><?php _e('The name of the database you want to run Osclass in');
+                ?></div>
+            </div>
+            <div class="row mb-3">
+                <label for="username" class="col-md-3 col-sm-6 col-form-label"><strong><?php _e('User Name');
+                ?></strong></label>
+                <div class="col-md-3 col-sm-6">
+                    <input class="form-control" type="text" id="username" name="username" size="25"/>
+                </div>
+                <div class="small"><?php _e('Your MySQL username'); ?></div>
+            </div>
+            <div class="row mb-3">
+                <label for="password" class="col-md-3 col-sm-6 col-form-label"><strong><?php _e('Password');
+                ?></strong></label>
+                <div class="col-md-3 col-sm-6">
+                    <input class="form-control" type="password" id="password" name="password"
+                           value="" size="25" autocomplete="off"/>
+                </div>
+                <div class="small"><?php _e('Your MySQL password'); ?></div>
+            </div>
+            <div class="row mb-3">
+                <label for="tableprefix" class="col-md-3 col-sm-6 col-form-label"><strong><?php _e('Table prefix');
+                ?></strong></label>
+                <div class="col-md-3 col-sm-6">
+                    <input class="form-control" type="text" id="tableprefix" name="tableprefix"
+                           value="oc_" size="25"/>
+                </div>
+                <div class="small"><?php _e('If you want to run multiple Osclass installations in a single database, change this'); ?></div>
+            </div>
+            <div class="accordion mb-3" id="accordianAdvance">
+                <div class="accordion-item">
+                    <h2 class="accordion-header" id="headingAdvance">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                                data-bs-target="#collapseAdvance" aria-expanded="false"
+                                aria-controls="accordianAdvance">
+                            <?php _e('Advanced'); ?>
+                        </button>
+                    </h2>
+                    <div id="collapseAdvance" class="accordion-collapse collapse hide" aria-labelledby="headingAdvance"
+                         data-bs-parent="#accordianAdvance">
+                        <div class="accordion-body">
+                            <div class="row mb-3">
+                                <div class="col-md-8 col-sm-12">
+                                    <input type="checkbox" id="createdb" name="createdb" onclick="db_admin();"
+                                           value="1"/>
+                                    <label for="createdb"><strong><?php _e('Create DB'); ?></strong></label>
+                                    <div class="small"><?php _e('Check here if the database is not created and you want to create it now'); ?></div>
+                                </div>
+                            </div>
+                            <div id="admin_username_row" class="row mb-3">
+                                <label class="col-md-3 col-sm-6 col-form-label"
+                                       for="admin_username"><strong><?php _e('DB admin username'); ?></strong></label>
+                                <div class="col-md-4 col-sm-6">
+                                    <input class="form-control" type="text" id="admin_username" name="admin_username"
+                                           size="25"
+                                           disabled="disabled"/>
+                                </div>
+                            </div>
+                            <div id="admin_password_row" class="row mb-3">
+                                <label class="col-md-3 col-sm-6 col-form-label"
+                                       for="admin_password"><strong><?php _e('DB admin password'); ?></strong></label>
+                                <div class="col-md-4 col-sm-6">
+                                    <input class="form-control" type="password" id="admin_password"
+                                           name="admin_password" value=""
+                                           size="25" disabled="disabled" autocomplete="off"/>
+                                    <span id="password_copied"><?php _e('Password copied from above'); ?></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
             <script type="text/javascript">
                 $(document).ready(function () {
-                    $('#advanced_install').click(function () {
-                        $('#more-options').toggle();
-                        if ($('#advanced_install').attr('class') == 'shrink') {
-                            $('#advanced_install').removeClass('shrink');
-                            $('#advanced_install').addClass('expanded');
-                        } else {
-                            $('#advanced_install').addClass('shrink');
-                            $('#advanced_install').removeClass('expanded');
-                        }
-                    });
+                    var username =
                     $('#createdb').on('click', function () {
                         if ($("#createdb").is(':checked')) {
-                            if ($("#admin_username").attr("value") == '') {
-                                $("#admin_username").attr("value", $("#username").attr("value"));
+                            if ($("#admin_username").val() == '') {
+                                $("#admin_username").val($("#username").val());
                             }
-                            ;
-                            if ($("#admin_password").attr("value") == '') {
-                                $("#admin_password").attr("value", $("#password").attr("value"));
+                            if ($("#admin_password").val() == '') {
+                                $("#admin_password").val( $("#password").val());
                                 $("#password_copied").show();
                             }
-                            ;
                         } else {
                             $("#password_copied").hide();
                         }
-                        ;
                     });
                     $("#password_copied").hide();
                 });
             </script>
-            <div style="clear:both;"></div>
-            <table id="more-options" style="display:none;">
-                <tbody>
-                <tr>
-                    <th></th>
-                    <td><input type="checkbox" id="createdb" name="createdb" onclick="db_admin();"
-                               value="1"/><label
-                                for="createdb"><?php _e('Create DB'); ?></label></td>
-                    <td class="small"><?php _e('Check here if the database is not created and you want to create it now'); ?></td>
-                </tr>
-                <tr id="admin_username_row">
-                    <th align="left"><label
-                                for="admin_username"><?php _e('DB admin username'); ?></label></th>
-                    <td><input type="text" id="admin_username" name="admin_username" size="25"
-                               disabled="disabled"/>
-                    </td>
-                    <td></td>
-                </tr>
-                <tr id="admin_password_row">
-                    <th align="left"><label
-                                for="admin_password"><?php _e('DB admin password'); ?></label></th>
-                    <td><input type="password" id="admin_password" name="admin_password" value=""
-                               size="25"
-                               disabled="disabled" autocomplete="off"/> <span
-                                id="password_copied"><?php _e('Password copied from above'); ?></span>
-                    </td>
-                    <td></td>
-                </tr>
-                </tbody>
-            </table>
         </div>
-        <div class="clear"></div>
-        <p class="margin20">
-            <input type="submit" class="button" name="submit" value="Next"/>
-        </p>
+        <input type="submit" class="btn btn-primary" name="submit" value="Next"/>
         <div class="clear"></div>
     </form>
     <?php
@@ -997,64 +1007,62 @@ function display_target()
         $internet_error = true;
     }
     ?>
-    <form id="target_form" name="target_form" action="#" method="post" onsubmit="return false;">
-        <h2 class="target"><?php _e('Information needed'); ?></h2>
+    <form class="p-3" id="target_form" name="target_form" action="#" method="post" onsubmit="return false;">
+        <h2 class="display-6"><?php _e('Information needed'); ?></h2>
         <div class="form-table">
-            <h2 class="title"><?php _e('Admin user'); ?></h2>
-            <table class="admin-user">
-                <tbody>
-                <tr>
-                    <th><label for="admin_user"><?php _e('Username'); ?></label></th>
-                    <td>
-                        <input size="25" id="admin_user" name="s_name" type="text" value="admin"/>
-                    </td>
-                    <td>
+            <h4 class="title"><?php _e('Admin user'); ?></h4>
+            <div class="admin-user mb-3">
+                <div class="row mb-3">
+                    <label class="col-md-3 col-sm-6 col-form-label" for="admin_user"><?php _e('Username'); ?></label>
+                    <div class="col-md-4 col-sm-6">
+                        <input class="form-control" size="25" id="admin_user" name="s_name" type="text" value="admin"/>
                         <span id="admin-user-error" class="error" aria-hidden="true"
                               style="display:none;"><?php _e('Admin user is required'); ?></span>
-                    </td>
-                </tr>
-                <tr>
-                    <th><label for="s_passwd"><?php _e('Password'); ?></label></th>
-                    <td>
-                        <input size="25" class="password_test" name="s_passwd" id="s_passwd"
+                    </div>
+                </div>
+                <div class="row mb-3">
+                    <label class="col-md-3 col-sm-6 col-form-label" for="s_passwd"><?php _e('Password'); ?></label>
+                    <div class="col-md-4 col-sm-6">
+                        <input size="25" class=" form-control password_test" name="s_passwd"
+                               id="s_passwd"
                                type="password" value="" autocomplete="off"/>
-                    </td>
+                    </div>
                     <td></td>
-                </tr>
-                </tbody>
-            </table>
-            <div class="admin-user">
-                <?php _e('A password will be automatically generated for you if you leave this blank.'); ?>
-                <img src="<?php echo get_absolute_url() ?>oc-includes/images/question.png"
-                     class="question-skip vtip"
-                     title="<?php echo osc_esc_html(__('You can modify username and password if you like, just change the input value.')); ?>"/>
+                </div>
             </div>
-            <h2 class="title"><?php _e('Contact information'); ?></h2>
-            <table class="contact-info">
-                <tbody>
-                <tr>
-                    <th><label for="webtitle"><?php _e('Web title'); ?></label></th>
-                    <td><input type="text" id="webtitle" name="webtitle" size="25"/></td>
+            <div class="admin-user mb-3">
+                <?php _e('A password will be automatically generated for you if you leave this blank.'); ?>
+                <i class="bi bi-question-circle-fill vtip"
+                   title="<?php echo osc_esc_html(__('You can modify username and password if you like, just change the input value.')); ?>">
+                </i>
+            </div>
+            <h4 class="title"><?php _e('Contact information'); ?></h4>
+            <div class="contact-info">
+                <div class="row mb-3">
+                    <label class="col-md-3 col-sm-6 col-form-label" for="webtitle"><?php _e('Web title'); ?></label>
+                    <div class="col-md-4 col-sm-6"><input class="form-control" type="text" id="webtitle" name="webtitle" size="25"/></div>
                     <td></td>
-                </tr>
-                <tr>
-                    <th><label for="email"><?php _e('Contact e-mail'); ?></label></th>
-                    <td><input type="text" id="email" name="email" size="25"/></td>
-                    <td><span id="email-error" class="error"
-                              style="display:none;"><?php _e('Put your e-mail here'); ?></span></td>
-                </tr>
-                </tbody>
-            </table>
-            <h2 class="title"><?php _e('Location'); ?></h2>
+                </div>
+                <div class="row mb-3">
+                    <label class="col-md-3 col-sm-6 col-form-label" for="email"><?php _e('Contact e-mail'); ?></label>
+                    <div class="col-md-4 col-sm-6">
+                        <input class="form-control" type="text" id="email" name="email" size="25"/>
+                        <span id="email-error" class="error"
+                              style="display:none;"><?php _e('Put your e-mail here'); ?></span>
+                    </div>
+                    <span id="email-error" class="error"
+                              style="display:none;"><?php _e('Put your e-mail here'); ?></span>
+                </div>
+            </div>
+            <h4 class="title"><?php _e('Location'); ?></h4>
             <p class="space-left-25 left no-bottom"><?php _e('Choose a country where your target users are located'); ?>
                 .</p>
-            <div class="clear"></div>
             <div id="location">
                 <?php if (!$internet_error) { ?>
                     <input type="hidden" id="skip-location-input" name="skip-location-input"
                            value="0"/>
-                    <div id="country-box">
-                        <select name="locationsql" id="locationsql">
+                    <div class="col-md-3 col-sm-6" id="country-box">
+                        <select  class="form-select" name="locationsql" id="locationsql">
                             <option value="skip"><?php _e("Skip location"); ?></option>
                             <!-- <option value="all"><?php _e("International"); ?></option> -->
                             <?php foreach ($country_list as $c) { ?>
@@ -1062,14 +1070,9 @@ function display_target()
                                 if ($c['name'] == '') {
                                     continue;
                                 } ?>
-                                <option value="<?php echo $c['file']; ?>" <?php if (substr(
-                                        $c['file'],
-                                        0,
-                                        2
-                                    ) == $country_ip
-                                ) {
+                                <option value="<?php echo $c['file']; ?>" <?php if (strpos($c['file'], $country_ip) === 0) {
                                     echo 'selected="selected"';
-                                               }; ?>><?php echo $c['name']; ?></option>
+                                               } ?>><?php echo $c['name']; ?></option>
                             <?php }; ?>
                         </select>
                     </div>
@@ -1082,16 +1085,14 @@ function display_target()
                 <?php }; ?>
             </div>
         </div>
-        <div class="clear"></div>
-        <p class="margin20">
-            <a href="#" class="button" onclick="validate_form();">Next</a>
-        </p>
-        <div class="clear"></div>
+        <div class="mt-3">
+            <a href="#" class="btn btn-primary" onclick="validate_form();">Next</a>
+        </div>
     </form>
     <div id="lightbox" style="display:none;">
-        <div class="center">
-            <img src="<?php echo get_absolute_url(); ?>oc-includes/images/loading.gif"
-                 alt="<?php echo osc_esc_html(__("Loading...")); ?>" title=""/>
+        <div class="progress">
+            <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="100"
+                 aria-valuemin="0" aria-valuemax="100" style="width: 100%"></div>
         </div>
     </div>
     <?php
@@ -1105,12 +1106,12 @@ function display_target()
 function display_database_error($error, $step)
 {
     ?>
-    <h2 class="target"><?php _e('Error'); ?></h2>
-    <p class="bottom space-left-10">
+    <h2 class="target display-6"><?php _e('Error'); ?></h2>
+    <div class="alert alert-danger shadow">
         <?php echo $error['error'] ?>
-    </p>
+    </div>
     <a href="<?php echo get_absolute_url(); ?>oc-includes/osclass/install.php?step=<?php echo $step; ?>"
-       class="button"><?php _e('Go back'); ?></a>
+       class="btn btn-warning"><?php _e('Go back'); ?></a>
     <div class="clear bottom"></div>
     <?php
 }
@@ -1173,43 +1174,30 @@ function display_finish($password)
             $('.error-location').fadeOut('slow');
         }, 2500);
     </script>
-    <div class="error-location">
+    <div class="alert alert-warning shadow-sm mb-3">
         <?php _e('The selected location could not been installed'); ?>
     </div>
     <?php } ?>
-    <h2 class="target"><?php _e('Congratulations!'); ?></h2>
-    <p class="space-left-10"><?php _e("Osclass has been installed. Were you expecting more steps? Sorry to disappoint you!"); ?></p>
-    <p class="space-left-10"><?php echo sprintf(
+    <h2 class="display-6 text-success"><?php _e('Congratulations!'); ?></h2>
+    <div class="alert alert-success shadow-sm mb3"><?php _e("Osclass has been installed. Were you expecting more steps? Sorry to disappoint you!");
+    ?></div>
+    <div class="alert alert-info shadow-sm mb-3"><?php echo sprintf(
             __('An e-mail with the password for oc-admin has been sent to: %s'),
             $data['s_email']
-                             ); ?></p>
-    <div style="clear:both;"></div>
-    <div class="form-table finish">
-        <table>
-            <tbody>
-            <tr>
-                <th><span class="label-like"><?php _e('Username'); ?></span></th>
-                <td>
-                    <div class="s_name">
-                        <span style="float:left;"><?php echo $data['admin_user']; ?></span>
-                    </div>
-                </td>
-            </tr>
-            <tr>
-                <th><span class="label-like"><?php _e('Password'); ?></span></th>
-                <td>
-                    <div class="s_passwd">
-                        <span style="float: left;"><?php echo osc_esc_html($data['password']); ?></span>
-                    </div>
-                </td>
-            </tr>
-            </tbody>
-        </table>
+                                                 ); ?></div>
+    <div class="finish">
+        <div class="row mb-3">
+            <span class="col-md-3 col-sm-6 h6"><?php _e('Username'); ?>: </span>
+            <span class="col-md-4 col-sm-6"><?php echo $data['admin_user']; ?></span>
+        </div>
+        <div class="row mb-3">
+            <span class="col-md-3 col-sm-6 h6"><?php _e('Password'); ?>: </span>
+            <span class="col-md-4 col-sm-6"><?php echo osc_esc_html($data['password']); ?></span>
+        </div>
+        <div class="row mb-3">
+            <a target="_blank" href="<?php echo get_absolute_url() ?>oc-admin/index.php"
+               class="btn btn-primary"><?php _e('Finish and go to the administration panel'); ?></a>
+        </div>
     </div>
-
-    <p class="margin20">
-        <a target="_blank" href="<?php echo get_absolute_url() ?>oc-admin/index.php"
-           class="button"><?php _e('Finish and go to the administration panel'); ?></a>
-    </p>
     <?php
 }

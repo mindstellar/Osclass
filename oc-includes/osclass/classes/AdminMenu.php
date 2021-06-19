@@ -336,6 +336,13 @@ class AdminMenu
             'tools_category',
             'administrator'
         );
+        $this->add_submenu(
+            'tools',
+            __('PHP info'),
+            osc_admin_base_url(true) . '?page=tools&action=phpinfo',
+            'tools_phpinfo',
+            'administrator'
+        );
         osc_run_hook('admin_menu_init');
     }
 

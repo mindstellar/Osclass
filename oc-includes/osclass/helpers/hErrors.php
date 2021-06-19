@@ -37,22 +37,34 @@
 function osc_die($title, $message)
 {
     ?>
-    <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
-            "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-    <html xmlns="http://www.w3.org/1999/xhtml" dir="ltr" lang="en-US" xml:lang="en-US">
+    <html lang="en">
     <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
         <title><?php echo $title; ?></title>
         <link rel="stylesheet" type="text/css" media="all"
-              href="<?php echo osc_get_absolute_url(); ?>oc-includes/osclass/installer/install.css"/>
+              href="<?php echo osc_get_absolute_url(); ?>oc-includes/assets/bootstrap/bootstrap.min.css"/>
+        <link rel="stylesheet" type="text/css" media="all"
+              href="<?php echo osc_get_absolute_url(); ?>oc-includes/assets/bootstrap-icons/bootstrap-icons.css"/>
+        <script src="<?php echo osc_get_absolute_url(); ?>oc-includes/assets/bootstrap/bootstrap.min.js"
+                type="text/javascript"></script>
     </head>
-    <body class="page-error">
-    <h1><?php echo $title; ?></h1>
-    <p><?php echo $message; ?></p>
-    </body>
+    <body>
+    <div id="wrapper" class="container-md">
+        <div class="row">
+            <div class="offset-md-1 col-md-10 col-sm-12 align-self-center p-5" id="container">
+                <div class="card rounded-3" tabindex="-1">
+                    <div class="card-body bg-light" id="content">
+                        <h1 class="display-6"><i class="small bi bi-info-circle"></i> <?php echo $title; ?></h1>
+                        <p class="alert alert-danger shadow"><?php echo $message; ?></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
     </html>
-    <?php die(); ?>
-<?php }
+    <?php die();
+}
 
 
 /**
@@ -78,11 +90,6 @@ function getErrorParam($param, $htmlencode = false, $quotes_encode = true)
 
         return htmlspecialchars(stripslashes($value), ENT_NOQUOTES);
     }
-
-    if (get_magic_quotes_gpc()) {
-        $value = strip_slashes_extended_e($value);
-    }
-
     return $value;
 }
 

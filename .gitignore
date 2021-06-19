@@ -21,7 +21,7 @@ oc-content/uploads/*
 
 # themes
 oc-content/themes/*
-!oc-content/themes/bender
+!oc-content/themes/index.php
 
 # plugins
 oc-content/plugins/*
@@ -30,7 +30,7 @@ oc-content/plugins/*
 
 # languages
 oc-content/languages/*
-
+!oc-content/languages/en_US
 # Intellij IDEA
 .idea/*
 *.iml
@@ -40,6 +40,9 @@ oc-content/languages/*
 nbproject/
 .sass-cache
 package-lock.json
+
+# Release
+release
 
 # npm
 node_modules
@@ -56,4 +59,5 @@ osclass_latest.zip
 robots.txt
 /scratch.php
 /error.log
-/release/
+/.php-cs-fixer.cache
+

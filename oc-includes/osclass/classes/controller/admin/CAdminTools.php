@@ -287,6 +287,9 @@ class CAdminTools extends AdminSecBaseModel
                 $this->doView('tools/maintenance.php');
                 break;
             default:
+            case ('phpinfo'):
+                $this->doView('tools/phpinfo.php');
+                break;
         }
     }
 

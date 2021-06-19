@@ -32,7 +32,7 @@ if (!file_exists(ABS_PATH . 'config.php')) {
     $message =
         'There doesn\'t seem to be a <code>config.php</code> file. Osclass isn\'t installed. '
         . '<a href="https://osclass.discourse.group/">Need more help?</a></p>';
-    $message .= '<p><a class="button" href="' . osc_get_absolute_url()
+    $message .= '<p><a class="btn btn-primary" href="' . osc_get_absolute_url()
         . 'oc-includes/osclass/install.php">'
         . 'Install</a></p>';
     osc_die($title, $message);
@@ -126,20 +126,20 @@ Scripts::init();
 Styles::init();
 
 // register scripts
-osc_register_script('jquery', osc_assets_url('js/jquery/jquery.min.js'));
-osc_register_script('jquery-migrate', osc_assets_url('js/jquery-migrate/jquery-migrate.min.js'), 'jquery');
-osc_register_script('jquery-ui', osc_assets_url('js/jquery-ui/jquery-ui.min.js'), 'jquery');
+osc_register_script('jquery', osc_assets_url('jquery/jquery.min.js'));
+osc_register_script('jquery-migrate', osc_assets_url('jquery-migrate/jquery-migrate.min.js'), 'jquery');
+osc_register_script('jquery-ui', osc_assets_url('jquery-ui/jquery-ui.min.js'), 'jquery');
 
 //osc_register_script('jquery-json', osc_assets_url('js/jquery.json.js'), 'jquery');
 //Not used in osclass core, removed.
 //osc_register_script('fancybox', osc_assets_url('js/fancybox/jquery.fancybox.pack.js'), array('jquery'));
 
-osc_register_script('jquery-treeview', osc_assets_url('js/jquery-treeview/jquery.treeview.js'), 'jquery');
-osc_register_script('jquery-nested', osc_assets_url('js/jquery-ui-nested/jquery-ui-nested.js'), 'jquery-ui');
-osc_register_script('jquery-validate', osc_assets_url('js/jquery-validation/jquery.validate.min.js'), 'jquery');
-osc_register_script('jquery-validate-additional', osc_assets_url('js/jquery-validation/additional-methods.min.js'), 'jquery-validate');
-osc_register_script('jquery-spectrum', osc_assets_url('js/spectrum/spectrum.js'), 'jquery');
-osc_register_script('tiny_mce', osc_assets_url('js/tinymce/tinymce.min.js'));
+osc_register_script('jquery-treeview', osc_assets_url('jquery-treeview/jquery.treeview.js'), 'jquery');
+osc_register_script('jquery-nested', osc_assets_url('jquery-ui-nested/jquery-ui-nested.js'), 'jquery-ui');
+osc_register_script('jquery-validate', osc_assets_url('jquery-validation/jquery.validate.min.js'), 'jquery');
+osc_register_script('jquery-validate-additional', osc_assets_url('jquery-validation/additional-methods.min.js'), 'jquery-validate');
+osc_register_script('jquery-spectrum', osc_assets_url('spectrum-colorpicker/spectrum.js'), 'jquery');
+osc_register_script('tiny_mce', osc_assets_url('tinymce/tinymce.min.js'));
 
 //Legacy js libraries
 osc_register_script('tabber', osc_assets_url('osclass-legacy/js/tabber-minimized.js'), 'jquery');

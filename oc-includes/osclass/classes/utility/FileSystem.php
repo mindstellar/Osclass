@@ -616,6 +616,7 @@ class FileSystem
      *
      * @param      $url
      * @param null $post_data
+     * @param bool $verify_ssl
      *
      * @return mixed|null $data
      */

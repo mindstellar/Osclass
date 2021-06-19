@@ -1,4 +1,4 @@
-Osclass 5.0.0-dev Dev Changelog
+Osclass 5.0.0 Beta Changelog
 - Osclass Multisite is removed a better alternative will be provided in future.
 - Added New class for logging errors in osclass.
 - Fix bug of listing invalid themes in Admin Appearance

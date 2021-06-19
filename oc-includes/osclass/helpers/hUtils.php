@@ -434,6 +434,49 @@ function osc_google_analytics_id()
 }
 
 /**
+ * Get Google Maps API key.
+ *
+ * @return string
+ */
+function osc_google_maps_api_key()
+{
+    return osc_get_preference('googlemaps_api_key');
+}
+
+/**
+ * Get Open Street Maps API key.
+ *
+ * @return string
+ */
+function osc_openstreet_api_key()
+{
+    return osc_get_preference('openstreet_api_key');
+}
+
+/**
+ * Get Google Maps geocode URL.
+ *
+ * @return string
+ */
+function osc_google_maps_geocode_url($address)
+{
+    return 'https://maps.googleapis.com/maps/api/geocode/json?address='
+        . urlencode($address) . '&sensor=false&key='.osc_google_maps_api_key();
+}
+
+/**
+ * Get OpenStreetMaps geocode URL.
+ *
+ * @return string
+ */
+function osc_openstreet_geocode_url($address)
+{
+    return 'https://www.mapquestapi.com/geocoding/v1/address?location='
+        . urlencode($address) . '&key='.osc_openstreet_api_key();
+}
+
+
+/**
  * Get URL of location files JSON.
  *
  * @return string

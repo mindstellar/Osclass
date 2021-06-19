@@ -313,6 +313,28 @@ function osc_moderate_items()
 
 
 /**
+ * Gets if admin needs to moderate newly posted items.
+ *
+ * @return int
+ */
+function osc_moderate_admin_post()
+{
+    return getBoolPreference('moderate_admin_post');
+}
+
+
+/**
+ * Gets if admin needs to moderate edited items.
+ *
+ * @return int
+ */
+function osc_moderate_admin_edit()
+{
+    return getBoolPreference('moderate_admin_edit');
+}
+
+
+/**
  * Gets if only registered users can publish new items or anyone could
  *
  * @return boolean
@@ -379,6 +401,17 @@ function osc_max_characters_per_description()
     $value = getPreference('description_character_length');
 
     return (!empty($value) ? (int)$value : 4096);
+}
+
+
+/**
+ * Gets if TinyMCE is enabled on frontend.
+ *
+ * @return boolean
+ */
+function osc_tinymce_frontend()
+{
+    return getBoolPreference('tinymce_frontend');
 }
 
 

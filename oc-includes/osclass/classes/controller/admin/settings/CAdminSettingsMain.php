@@ -62,6 +62,9 @@ class CAdminSettingsMain extends AdminSecBaseModel
                 $selectableParent  = Params::getParam('selectable_parent_categories');
                 $bAutoCron         = Params::getParam('auto_cron');
                 //$sAutoUpdate       = implode('|', Params::getParam('auto_update'));
+                $gaTrackingId      = Params::getParam('ga_tracking_id');
+                $gMapsKey          = Params::getParam('googlemaps_api_key');
+                $osMapsKey         = Params::getParam('openstreet_api_key');
                 // preparing parameters
                 $sPageTitle        = trim(strip_tags($sPageTitle));
                 $sPageDesc         = trim(strip_tags($sPageDesc));
@@ -134,7 +137,9 @@ class CAdminSettingsMain extends AdminSecBaseModel
                 $iUpdated += osc_set_preference('contact_attachment', $contactAttachment);
                 $iUpdated += osc_set_preference('auto_cron', $bAutoCron);
                 $iUpdated += osc_set_preference('selectable_parent_categories', $selectableParent);
-                $iUpdated += osc_set_preference('ga_tracking_id', Params::getParam('ga_tracking_id'));
+                $iUpdated += osc_set_preference('ga_tracking_id', $gaTrackingId);
+                $iUpdated += osc_set_preference('googlemaps_api_key', $gMapsKey);
+                $iUpdated += osc_set_preference('openstreet_api_key', $osMapsKey);
 
                 if ($iUpdated > 0) {
                     if ($error) {
