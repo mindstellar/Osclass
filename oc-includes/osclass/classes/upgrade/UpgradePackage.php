@@ -193,7 +193,7 @@ abstract class UpgradePackage
     public function isCompatible()
     {
         if ($this->a_compatible !== null && !$this->forceUpgrade) {
-            in_array($this->osclass_version, $this->a_compatible, false);
+            return in_array($this->osclass_version, $this->a_compatible, false);
         }
         return true;
     }
@@ -218,7 +218,6 @@ abstract class UpgradePackage
         if ($this->forceUpgrade) {
             return true;
         }
-
         return version_compare($this->s_installed_version, $this->s_new_version, 'lt');
     }
 

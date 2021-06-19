@@ -45,16 +45,16 @@ class AdminSecBaseModel extends SecBaseModel
             osc_add_flash_error_message(_m("You don't have enough permissions"), 'admin');
             $this->redirectTo(osc_admin_base_url());
         }
-
         osc_run_hook('init_admin');
 
         $config_version = OSCLASS_VERSION;
+        if (!defined('IS_AJAX')
+            && !$this instanceof CAdminUpgrade
+            && !$this instanceof CAdminTools
+            && Utils::versionCompare($config_version, osc_get_preference('version'), 'gt')
+        ) {
 
-        if (Utils::versionCompare($config_version, osc_get_preference('version'), 'gt')) {
-            if ($this instanceof CAdminTools || IS_AJAX) {
-            } elseif (!$this instanceof CAdminUpgrade) {
-                $this->redirectTo(osc_admin_base_url(true) . '?page=upgrade');
-            }
+            $this->redirectTo(osc_admin_base_url(true) . '?page=upgrade');
         }
 
         // show donation successful

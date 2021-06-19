@@ -634,11 +634,10 @@ class CAdminAjax extends AdminSecBaseModel
                 if ($workToDo > 0) {
                     $array['status']  = 'more';
                     $array['pending'] = $workToDo;
-                    echo json_encode($array);
                 } else {
                     $array['status'] = 'done';
-                    echo json_encode($array);
                 }
+                echo json_encode($array);
                 break;
             case 'country_slug':
                 $exists = Country::newInstance()->findBySlug(Params::getParam('slug'));

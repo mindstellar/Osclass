@@ -25,6 +25,25 @@ class Osclass extends UpgradePackage
 {
 
     /**
+     * Osclass constructor.
+     *
+     * @param array $package_info
+     * @param bool  $force_upgrade
+     * @param bool  $enable_prerelease
+     */
+    public function __construct(
+        $package_info,
+        $force_upgrade = false,
+        $enable_prerelease = false
+    )
+    {
+        if(defined('ENABLE_PRERELEASE') && ENABLE_PRERELEASE === true ){
+            $enable_prerelease = true;
+        }
+        parent::__construct($package_info, $force_upgrade, $enable_prerelease);
+    }
+
+    /**
      * Upgrade Osclass Database
      *
      * @param bool $skip_db
