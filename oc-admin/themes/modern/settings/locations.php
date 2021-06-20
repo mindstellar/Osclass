@@ -401,10 +401,10 @@ osc_current_admin_theme_path('parts/header.php'); ?>
                                     </span>
                                             <a class="close"
                                                href="<?php
-                                               echo osc_admin_base_url(true);
-                                               ?>?page=settings&action=locations&type=delete_country&id[]=<?php
+                                                echo osc_admin_base_url(true);
+                                                ?>?page=settings&action=locations&type=delete_country&id[]=<?php
                                                echo $country['pk_c_code'];
-                                               ?>"
+?>"
                                                onclick="return delete_dialog('<?php echo $country['pk_c_code']; ?>', 'delete_country');">
                                                 <img src="<?php echo osc_admin_base_url(); ?>images/close.png"
                                                      alt="<?php echo osc_esc_html(__('Close')); ?>"
@@ -514,7 +514,7 @@ osc_current_admin_theme_path('parts/header.php'); ?>
                                                 continue;
                                             } ?>
                                         <option value="<?php echo $location['file']; ?>"><?php echo $location['name']; ?></option>
-                                        <?php } ?>
+                                            <?php } ?>
                                     </select>
                                 <?php } else { ?>
                                     <p><?php _e('No locations available.'); ?></p>

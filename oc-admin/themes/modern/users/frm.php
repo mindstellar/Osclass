@@ -327,7 +327,7 @@ $aux = customFrmText();
                 <div class="form-row">
                     <div class="form-label"><?php _e('New password'); ?><?php if (!$aux['edit']) {
                             printf('<br/><em>%s</em>', __('(twice, required)'));
-                        } ?></div>
+                                            } ?></div>
                     <div class="form-controls">
                         <?php UserForm::password_text($user); ?>
                         <?php if ($aux['edit']) { ?>

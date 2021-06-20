@@ -133,11 +133,11 @@ osc_current_admin_theme_path('parts/header.php'); ?>
                 <select name="meta[template]">
                     <option value="default" <?php if ($template_selected == 'default') {
                         echo 'selected="selected"';
-                    } ?>><?php _e('Default template'); ?></option>
+                                            } ?>><?php _e('Default template'); ?></option>
                     <?php foreach ($templates as $template) { ?>
                         <option value="<?php echo $template ?>" <?php if ($template_selected == $template) {
                             echo 'selected="selected"';
-                        } ?>><?php echo $template; ?></option>
+                                       } ?>><?php echo $template; ?></option>
                     <?php } ?>
                 </select>
             </div>

@@ -142,8 +142,8 @@ function customHead()
     </script>
     <?php ItemForm::location_javascript_new('admin'); ?>
     <?php if (osc_images_enabled_at_items()) {
-    ItemForm::photos_javascript();
-} ?>
+        ItemForm::photos_javascript();
+    } ?>
     <?php
 }
 

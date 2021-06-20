@@ -170,7 +170,7 @@ osc_current_admin_theme_path('parts/header.php');
                             <?php foreach ($array as $key => $value) { ?>
                                 <td <?php if ($key == 0) {
                                     ?> class="col-bulkactions" <?php
-                                } ?>>
+                                    } ?>>
                                     <?php echo $value; ?>
                                 </td>
                             <?php } ?>
@@ -203,7 +203,7 @@ osc_current_admin_theme_path('parts/header.php');
         <div class="form-actions">
             <div class="wrapper">
                 <a class="btn" href="javascript:void(0);" onclick="$('#dialog-language-delete').dialog('close');"><?php _e('Cancel');
-                    ?></a>
+                ?></a>
                 <input id="language-delete-submit" type="submit" value="<?php echo osc_esc_html(__('Delete')); ?>" class="btn
                 btn-red"/>
             </div>
@@ -218,7 +218,7 @@ osc_current_admin_theme_path('parts/header.php');
             <div class="wrapper">
                 <a id="bulk-actions-cancel" class="btn" href="javascript:void(0);"><?php _e('Cancel'); ?></a>
                 <a id="bulk-actions-submit" href="javascript:void(0);" class="btn btn-red"><?php echo osc_esc_html(__('Delete'));
-                    ?></a>
+                ?></a>
                 <div class="clear"></div>
             </div>
         </div>
@@ -245,7 +245,7 @@ osc_current_admin_theme_path('parts/header.php');
 
                                     as $code => $name) { ?>
                                 <option value="<?php echo $code; ?>"><?php echo $name; ?></option>
-                                <?php } ?>
+                                    <?php } ?>
                             </select>
                         <?php } else { ?>
                             <p><?php _e('No official languages available.'); ?></p>
@@ -257,7 +257,7 @@ osc_current_admin_theme_path('parts/header.php');
         <div class="form-actions">
             <div class="wrapper">
                 <a class="btn" href="javascript:void(0);" onclick="$('#dialog-add-official').dialog('close');"><?php _e('Cancel');
-                    ?></a>
+                ?></a>
                 <button type="submit" class="btn btn-submit"><?php echo osc_esc_html(__('Import')); ?></button>
             </div>
         </div>

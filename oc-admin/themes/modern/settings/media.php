@@ -299,13 +299,13 @@ osc_current_admin_theme_path('parts/header.php'); ?>
                         <div class="form-label-checkbox">
                             <input type="radio" id="watermark_none" name="watermark_type"
                                    value="none" <?php echo((!osc_is_watermark_image() && !osc_is_watermark_text())
-                                ? 'checked="checked"' : ''); ?> />
+                                    ? 'checked="checked"' : ''); ?> />
                             <label for="watermark_none"><?php _e('None'); ?></label>
                         </div>
                         <div class="form-label-checkbox">
                             <input type="radio" id="watermark_text" name="watermark_type"
                                    value="text" <?php echo(osc_is_watermark_text() ? 'checked="checked"'
-                                : ''); ?> <?php echo($freeType ? '' : 'disabled="disabled"'); ?> />
+                                    : ''); ?> <?php echo($freeType ? '' : 'disabled="disabled"'); ?> />
                             <label for="watermark_text"><?php _e('Text'); ?></label>
                             <?php if (!$freeType) { ?>
                                 <div class="flashmessage flashmessage-inline error">
@@ -413,7 +413,7 @@ osc_current_admin_theme_path('parts/header.php'); ?>
                                 <input type="text" maxlength="8" id="colorpickerField2" class="small"
                                        name="background_color"
                                        value="<?php echo $background_color;
-                                       ?>"/>
+                                        ?>"/>
                                 <div class="help-box">
                                     <?php _e('Background Hexadecimal color value'); ?>
                                 </div>
@@ -470,7 +470,7 @@ osc_current_admin_theme_path('parts/header.php'); ?>
                                                                    osc_base_path(),
                                                                    '',
                                                                    osc_uploads_path()
-                                                               ) . 'watermark.png' ?>"/></div>
+                                                                ) . 'watermark.png' ?>"/></div>
                             <?php } ?>
                             <div class="help-box"><?php _e('It has to be a .PNG image'); ?></div>
                             <div class="help-box"><?php _e("Osclass doesn't check the watermark image size"); ?></div>
