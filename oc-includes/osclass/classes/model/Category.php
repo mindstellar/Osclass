@@ -544,7 +544,7 @@ class Category extends DAO
      *
      * @param integer $pk primary key
      *
-     * @return mixed
+     * @return bool|int
      * @since        unknown
      */
     public function deleteByPrimaryKey($pk)

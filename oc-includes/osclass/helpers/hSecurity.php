@@ -208,7 +208,7 @@ function osc_is_username_blacklisted($username)
 /**
  * Verify an user's password
  *
- * @param $password plain-text
+ * @param $password string
  * @param $hash
  *
  * @return bool

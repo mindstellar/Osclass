@@ -302,7 +302,7 @@ class DAO
      *
      * @param array $where
      *
-     * @return mixed It returns the number of affected rows if the delete has been
+     * @return bool|int It returns the number of affected rows if the delete has been
      * correct or false if an error happended
      * @since  unknown
      */

@@ -40,7 +40,7 @@ class CAdminLanguages extends AdminSecBaseModel
     /**
      * Business Layer...
      *
-     * @return bool|void
+     * @return bool
      */
     public function doModel()
     {

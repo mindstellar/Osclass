@@ -1,4 +1,4 @@
-<?php use mindstellar\upgrade\Osclass;
+<?php
 
 /**
  * Class CAdminUpgrade

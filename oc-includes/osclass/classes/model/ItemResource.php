@@ -303,7 +303,7 @@ class ItemResource extends DAO
      *
      * @param array $ids
      *
-     * @return mixed
+     * @return bool|int
      */
     public function deleteResourcesIds($ids)
     {

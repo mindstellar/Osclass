@@ -56,7 +56,7 @@ class Stats
      * @param        $from_date
      * @param string $date
      *
-     * @return mixed
+     * @return array|\countable|object
      */
     public function new_users_count($from_date, $date = 'day')
     {
@@ -83,7 +83,7 @@ class Stats
     }
 
     /**
-     * @return mixed
+     * @return array|\countable|object
      */
     public function users_by_country()
     {
@@ -101,7 +101,7 @@ class Stats
     }
 
     /**
-     * @return mixed
+     * @return array|\countable|object
      */
     public function users_by_region()
     {
@@ -119,7 +119,7 @@ class Stats
     }
 
     /**
-     * @return mixed
+     * @return array|\countable|object
      */
     public function items_by_user()
     {
@@ -135,7 +135,7 @@ class Stats
     }
 
     /**
-     * @return mixed
+     * @return array|\countable|object
      */
     public function latest_users()
     {
@@ -185,7 +185,7 @@ class Stats
     }
 
     /**
-     * @return mixed
+     * @return array|\countable|object
      */
     public function latest_items()
     {
@@ -210,7 +210,7 @@ class Stats
      * @param        $from_date
      * @param string $date
      *
-     * @return mixed
+     * @return array|\countable|object
      */
     public function new_comments_count($from_date, $date = 'day')
     {
@@ -239,7 +239,7 @@ class Stats
     }
 
     /**
-     * @return mixed
+     * @return array|\countable|false|object
      */
     public function latest_comments()
     {
@@ -262,7 +262,7 @@ class Stats
      * @param        $from_date
      * @param string $date
      *
-     * @return mixed
+     * @return array|\countable|object
      */
     public function new_reports_count($from_date, $date = 'day')
     {
@@ -293,7 +293,7 @@ class Stats
      * @param        $from_date
      * @param string $date
      *
-     * @return mixed
+     * @return array|\countable|object
      */
     public function new_alerts_count($from_date, $date = 'day')
     {
@@ -326,7 +326,7 @@ class Stats
      * @param        $from_date
      * @param string $date
      *
-     * @return mixed
+     * @return array|\countable|object
      */
     public function new_subscribers_count($from_date, $date = 'day')
     {

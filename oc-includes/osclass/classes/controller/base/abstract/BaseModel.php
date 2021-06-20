@@ -173,7 +173,7 @@ abstract class BaseModel
     }
 
     /**
-     * @return mixed
+     * @return float
      */
     public function getTime()
     {

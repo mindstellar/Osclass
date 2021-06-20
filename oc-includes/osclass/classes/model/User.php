@@ -629,7 +629,7 @@ class User extends DAO
      *
      * @param int $id user id
      *
-     * @return int number of affected rows, id error occurred return false
+     * @return bool|\DBRecordsetClass number of affected rows, id error occurred return false
      * @since  unknown
      */
     public function increaseNumItems($id)
@@ -650,7 +650,7 @@ class User extends DAO
      *
      * @param int $id user id
      *
-     * @return int number of affected rows, id error occurred return false
+     * @return bool|\DBRecordsetClass number of affected rows, id error occurred return false
      * @since  unknown
      */
     public function decreaseNumItems($id)

@@ -441,7 +441,7 @@ class Field extends DAO
      * @param int    $field
      * @param string $value
      *
-     * @return mixed false on fail, int of num. of affected rows
+     * @return bool|\DBRecordsetClass false on fail, int of num. of affected rows
      * @since  unknown
      */
     public function replace($itemId, $field, $value)

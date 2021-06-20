@@ -581,7 +581,7 @@ class Plugins
      * @param $name
      * @param $id
      *
-     * @return mixed
+     * @return bool
      */
     public static function isThisCategory($name, $id)
     {

@@ -86,7 +86,7 @@ class CWebCustom extends BaseModel
     /**
      * @param $file
      *
-     * @return mixed|void
+     * @return void
      */
     public function doView($file)
     {

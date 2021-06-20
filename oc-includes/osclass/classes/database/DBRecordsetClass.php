@@ -215,7 +215,7 @@ class DBRecordsetClass
      * Get the results of MySQLi_Result object in object format
      *
      * @access public
-     * @return object|countable
+     * @return array|object
      * @since  2.3
      */
     public function resultObject()

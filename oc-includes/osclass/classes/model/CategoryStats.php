@@ -163,7 +163,7 @@ class CategoryStats extends DAO
      * @param $categoryID
      * @param $numItems
      *
-     * @return mixed
+     * @return bool|\DBRecordsetClass
      */
     public function setNumItems($categoryID, $numItems)
     {

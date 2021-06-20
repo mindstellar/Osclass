@@ -75,7 +75,7 @@ class CityStats extends DAO
      *
      * @param int $cityId City id
      *
-     * @return int number of affected rows, id error occurred return false
+     * @return bool|\DBRecordsetClass number of affected rows, id error occurred return false
      * @since  2.4
      */
     public function increaseNumItems($cityId)
@@ -133,7 +133,7 @@ class CityStats extends DAO
      * @param int $cityID
      * @param int $numItems
      *
-     * @return mixed
+     * @return bool|\DBRecordsetClass
      * @since  2.4
      *
      */
@@ -163,7 +163,7 @@ class CityStats extends DAO
      *
      * @param int $regionId
      *
-     * @return mixed
+     * @return bool|\DBRecordsetClass
      */
     public function deleteByRegion($regionId)
     {

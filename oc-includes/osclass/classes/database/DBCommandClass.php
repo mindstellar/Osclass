@@ -576,7 +576,7 @@ class DBCommandClass
      * @param string $match
      * @param string $side
      *
-     * @return string
+     * @return \DBCommandClass
      * @since  2.3
      *
      */
@@ -954,7 +954,7 @@ class DBCommandClass
      *
      * @param string $sql
      *
-     * @return mixed
+     * @return bool|\mysqli_result
      * @since  2.3
      */
     private function execute($sql)
@@ -1058,7 +1058,7 @@ class DBCommandClass
      * @param mixed $set
      * @param mixed $where
      *
-     * @return mixed
+     * @return false|int
      * @since  2.3
      */
     public function update($table = '', $set = null, $where = null)
@@ -1491,7 +1491,7 @@ class DBCommandClass
      *
      * @param array|string array or string with the SQL queries.
      *
-     * @return bool|array true on success, false on fail
+     * @return array true on success, false on fail
      */
     public function updateDB($queries = '')
     {
@@ -1935,7 +1935,7 @@ class DBCommandClass
      * Get the ID generated from the previous INSERT operation
      *
      * @access public
-     * @return mixed
+     * @return int|string
      * @since  2.3
      */
     public function insertedId()

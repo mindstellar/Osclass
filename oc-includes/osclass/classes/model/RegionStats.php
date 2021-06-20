@@ -75,7 +75,7 @@ class RegionStats extends DAO
      *
      * @param int $regionId Region id
      *
-     * @return int number of affected rows, id error occurred return false
+     * @return bool|\DBRecordsetClass number of affected rows, id error occurred return false
      * @since  2.4
      */
     public function increaseNumItems($regionId)
@@ -134,7 +134,7 @@ class RegionStats extends DAO
      * @param int $regionID
      * @param int $numItems
      *
-     * @return mixed
+     * @return bool|\DBRecordsetClass
      * @since  2.4
      *
      */

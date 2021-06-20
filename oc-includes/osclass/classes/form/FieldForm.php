@@ -206,7 +206,7 @@ class FieldForm extends Form
     /**
      * @param null $catId
      *
-     * @return bool|void
+     * @return bool|false
      */
     public static function meta_fields_search($catId = null)
     {

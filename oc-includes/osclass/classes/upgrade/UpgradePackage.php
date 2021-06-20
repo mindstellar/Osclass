@@ -208,7 +208,7 @@ abstract class UpgradePackage
     /**
      * Is package upgradable
      *
-     * @return string
+     * @return bool|int
      */
     public function isUpgradable()
     {

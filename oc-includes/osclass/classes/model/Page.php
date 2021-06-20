@@ -202,7 +202,7 @@ class Page extends DAO
      *
      * @param int $id Page id which is going to be deleted
      *
-     * @return mixed @return mixed It return the number of affected rows if the delete has been
+     * @return bool|int @return mixed It return the number of affected rows if the delete has been
      *                correct or false if nothing has been modified
      * @since  unknown
      */

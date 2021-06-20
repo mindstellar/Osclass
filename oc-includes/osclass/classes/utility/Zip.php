@@ -215,7 +215,7 @@ class Zip
      * @param string $archive_folder full path of the folder
      * @param string $archive_name   full path of the destination zip file
      *
-     * @return int
+     * @return bool
      */
     private function zipFolderZipArchive($archive_folder, $archive_name)
     {
@@ -256,7 +256,7 @@ class Zip
      * @param string $archive_folder full path of the folder
      * @param string $archive_name   full path of the destination zip file
      *
-     * @return int
+     * @return bool
      */
     private function zipFolderPclZip($archive_folder, $archive_name)
     {

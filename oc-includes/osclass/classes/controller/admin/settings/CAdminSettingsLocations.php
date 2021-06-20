@@ -37,7 +37,7 @@ class CAdminSettingsLocations extends AdminSecBaseModel
     //Business Layer...
 
     /**
-     * @return bool|void
+     * @return bool
      * @throws \Exception
      */
     public function doModel()

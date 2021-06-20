@@ -86,7 +86,7 @@ class LocationsTmp extends DAO
     /**
      * @param array $where
      *
-     * @return mixed
+     * @return bool|int
      */
     public function delete($where)
     {
@@ -97,7 +97,7 @@ class LocationsTmp extends DAO
      * @param $ids
      * @param $type
      *
-     * @return bool|mixed
+     * @return bool|\DBRecordsetClass
      */
     public function batchInsert($ids, $type)
     {

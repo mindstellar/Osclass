@@ -75,7 +75,7 @@ class CountryStats extends DAO
      *
      * @param int $countryCode Country code
      *
-     * @return int number of affected rows, id error occurred return false
+     * @return bool|\DBRecordsetClass number of affected rows, id error occurred return false
      * @since  2.4
      */
     public function increaseNumItems($countryCode)
@@ -138,7 +138,7 @@ class CountryStats extends DAO
      * @param string $countryCode
      * @param int    $numItems
      *
-     * @return mixed
+     * @return bool|\DBRecordsetClass
      * @since  2.4
      *
      */

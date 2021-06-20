@@ -37,7 +37,7 @@ class CAdminLogin extends AdminBaseModel
     //Business Layer...
 
     /**
-     * @return bool|void
+     * @return bool|false
      * @throws \Exception
      */
     public function doModel()
@@ -226,7 +226,7 @@ class CAdminLogin extends AdminBaseModel
     /**
      * @param $file
      *
-     * @return mixed|void
+     * @return void
      */
     public function doView($file = 'gui/main.php')
     {

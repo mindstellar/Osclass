@@ -23,7 +23,7 @@ class Params
      * @param bool $xss_check
      * @param bool $quotes_encode
      *
-     * @return mixed
+     * @return string
      */
     public static function getParam($param, $html_encode = false, $xss_check = true, $quotes_encode = true)
     {

@@ -1337,7 +1337,7 @@ class ItemActions
     }
 
     /**
-     * @return string | void
+     * @return string
      */
     public function contact()
     {

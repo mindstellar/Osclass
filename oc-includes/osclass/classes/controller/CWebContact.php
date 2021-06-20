@@ -32,7 +32,7 @@ class CWebContact extends BaseModel
     //Business Layer...
 
     /**
-     * @return bool|void
+     * @return bool|false
      */
     public function doModel()
     {

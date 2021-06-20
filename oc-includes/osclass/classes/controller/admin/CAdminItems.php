@@ -40,7 +40,7 @@ class CAdminItems extends AdminSecBaseModel
     //Business Layer...
 
     /**
-     * @return bool|void
+     * @return bool|false
      * @throws \Exception
      */
     public function doModel()
