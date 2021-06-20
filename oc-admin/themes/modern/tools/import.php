@@ -34,8 +34,9 @@ function addHelp()
 {
     /* xgettext:no-php-format */
     echo '<p>'
-        . __("Upload registers from other Osclass installations or upload new geographic information to your site. <strong>Be careful</strong>: don’t use this option if you're not 100% sure what you're doing.")
-        . '</p>';
+         . __("Upload registers from other Osclass installations or upload new geographic information to your site. "
+              . "<strong>Be careful</strong>: don’t use this option if you're not 100% sure what you're doing.")
+         . '</p>';
 }
 
 

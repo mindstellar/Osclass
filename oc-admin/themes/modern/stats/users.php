@@ -51,8 +51,9 @@ function render_offset()
 function addHelp()
 {
     echo '<p>'
-        . __('Stay up-to-date on the number of users registered on your site. You can also see a breakdown of the countries and regions where users live among those available on your site.')
-        . '</p>';
+         . __('Stay up-to-date on the number of users registered on your site. You can also see a breakdown of the '
+              . 'countries and regions where users live among those available on your site.')
+         . '</p>';
 }
 
 
@@ -161,10 +162,10 @@ function customHead()
             data_country.addColumn('number', '<?php _e('Users per country'); ?>');
             data_country.addRows(<?php echo count($users_by_country); ?>);
             <?php foreach ($users_by_country as $k => $v) {
-                echo "data_country.setValue(" . $k . ", 0, '" . (($v['s_country'] == null) ? __('Unknown')
+            echo "data_country.setValue(" . $k . ", 0, '" . (($v['s_country'] == null) ? __('Unknown')
                     : $v['s_country']) . "');";
-                echo "data_country.setValue(" . $k . ", 1, " . $v['num'] . ");";
-            } ?>
+            echo "data_country.setValue(" . $k . ", 1, " . $v['num'] . ");";
+        } ?>
 
             // Create and draw the visualization.
             new google.visualization.PieChart(document.getElementById('by_country')).draw(data_country, {
@@ -177,10 +178,10 @@ function customHead()
             data_region.addColumn('number', '<?php _e('Users per region'); ?>');
             data_region.addRows(<?php echo count($users_by_region); ?>);
             <?php foreach ($users_by_region as $k => $v) {
-                echo "data_region.setValue(" . $k . ", 0, '" . (($v['s_region'] == null) ? __('Unknown') : $v['s_region'])
-                . "');";
-                echo "data_region.setValue(" . $k . ", 1, " . $v['num'] . ");";
-            } ?>
+            echo "data_region.setValue(" . $k . ", 0, '" . (($v['s_region'] == null) ? __('Unknown') : $v['s_region'])
+                 . "');";
+            echo "data_region.setValue(" . $k . ", 1, " . $v['num'] . ");";
+        } ?>
 
             // Create and draw the visualization.
             new google.visualization.PieChart(document.getElementById('by_region')).draw(data_region, {
@@ -189,7 +190,7 @@ function customHead()
             });
         }
     </script>
-    <?php }
+<?php }
 }
 
 
@@ -205,18 +206,23 @@ osc_add_hook('admin_header', 'customHead', 10);
         </div>
         <div class="grid-row grid-50 no-bottom-margin">
             <div class="row-wrapper">
-                <a id="monthly" class="btn float-right <?php if ($type == 'month') {
-                    echo 'btn-green';
-                                                       } ?>"
-                   href="<?php echo osc_admin_base_url(true); ?>?page=stats&amp;action=users&amp;type_stat=month"><?php _e('Last 10 months'); ?></a>
-                <a id="weekly" class="btn float-right <?php if ($type == 'week') {
-                    echo 'btn-green';
-                                                      } ?>"
-                   href="<?php echo osc_admin_base_url(true); ?>?page=stats&amp;action=users&amp;type_stat=week"><?php _e('Last 10 weeks'); ?></a>
-                <a id="daily" class="btn float-right <?php if ($type == '' || $type == 'day') {
-                    echo 'btn-green';
-                                                     } ?>"
-                   href="<?php echo osc_admin_base_url(true); ?>?page=stats&amp;action=users&amp;type_stat=day"><?php _e('Last 10 days'); ?></a>
+                <?php
+                $comments_stats_intervals = ['month', 'week', 'day'];
+                foreach ($comments_stats_intervals as $k => $v) {
+                    echo '<a id="' . $v . '" class="btn float-right';
+                    if ($type === $v) {
+                        echo ' btn-green';
+                    }
+                    echo '" href="' . osc_admin_base_url(true) . '?page=stats&amp;action=users&amp;type_stat=' . $v . '">';
+                    if ($v === 'month') {
+                        echo __('Last 10 months');
+                    } elseif ($v === 'week') {
+                        echo __('Last 10 weeks');
+                    } elseif ($v === 'day') {
+                        echo __('Last 10 days');
+                    }
+                    echo '</a>';
+                } ?>
             </div>
         </div>
         <div class="grid-row grid-50 clear">
@@ -288,13 +294,16 @@ osc_add_hook('admin_header', 'customHead', 10);
                                 <?php foreach ($latest_users as $u) { ?>
                                     <tr>
                                         <td>
-                                            <a href="<?php echo osc_admin_base_url(true); ?>?page=users&amp;action=edit&amp;id=<?php echo $u['pk_i_id']; ?>"><?php echo $u['pk_i_id']; ?></a>
+                                            <a href="<?php echo osc_admin_base_url(true); ?>?page=users&amp;action=edit&amp;id=<?php
+                                            echo $u['pk_i_id']; ?>"><?php echo $u['pk_i_id']; ?></a>
                                         </td>
                                         <td>
-                                            <a href="<?php echo osc_admin_base_url(true); ?>?page=users&amp;action=edit&amp;id=<?php echo $u['pk_i_id']; ?>"><?php echo $u['s_email']; ?></a>
+                                            <a href="<?php echo osc_admin_base_url(true); ?>?page=users&amp;action=edit&amp;id=<?php
+                                            echo $u['pk_i_id']; ?>"><?php echo $u['s_email']; ?></a>
                                         </td>
                                         <td>
-                                            <a href="<?php echo osc_admin_base_url(true); ?>?page=users&amp;action=edit&amp;id=<?php echo $u['pk_i_id']; ?>"><?php echo $u['s_name']; ?></a>
+                                            <a href="<?php echo osc_admin_base_url(true); ?>?page=users&amp;action=edit&amp;id=<?php
+                                            echo $u['pk_i_id']; ?>"><?php echo $u['s_name']; ?></a>
                                         </td>
                                     </tr>
                                 <?php } ?>
@@ -303,8 +312,6 @@ osc_add_hook('admin_header', 'customHead', 10);
                         <?php } else { ?>
                             <p><?php _e('There are no statistics yet'); ?></p>
                         <?php } ?>
-
-
                     </div>
                 </div>
             </div>

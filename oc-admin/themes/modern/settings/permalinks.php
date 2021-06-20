@@ -373,8 +373,9 @@ osc_add_hook('admin_page_header', 'customPageHeader');
 function addHelp()
 {
     echo '<p>'
-        . __("Activate this option if you want your site's URLs to be more attractive to search engines and intelligible for users. <strong>Be careful</strong>: depending on your hosting service, this might not work correctly.")
-        . '</p>';
+         . __("Activate this option if you want your site's URLs to be more attractive to search engines and intelligible for users."
+              . " <strong>Be careful</strong>: depending on your hosting service, this might not work correctly.")
+         . '</p>';
 }
 
 
@@ -408,7 +409,9 @@ osc_current_admin_theme_path('parts/header.php'); ?>
         <!-- settings form -->
         <div id="mail-settings">
             <h2 class="render-title"><?php _e('Permalinks'); ?></h2>
-            <?php _e('By default Osclass uses web URLs which have question marks and lots of numbers in them. However, Osclass offers you friendly urls. This can improve the aesthetics, usability, and forward-compatibility of your links'); ?>
+            <?php _e('By default Osclass uses web URLs which have question marks and lots of numbers in them. '
+                     . 'However, Osclass offers you friendly urls. This can improve the aesthetics, usability, '
+                     . 'and forward-compatibility of your links'); ?>
             <ul id="error_list"></ul>
             <form name="settings_form" action="<?php echo osc_admin_base_url(true); ?>" method="post">
                 <input type="hidden" name="page" value="settings"/>
@@ -426,7 +429,7 @@ osc_current_admin_theme_path('parts/header.php'); ?>
                         </div>
                         <div id="custom_rules" <?php if (!osc_rewrite_enabled()) {
                             echo 'class="hide"';
-                                               } ?>>
+                        } ?>>
                             <div id="show_hide"><a href="#"
                                                    onclick="javascript:showhide();"><?php _e('Show rules'); ?></a></div>
                             <div id="inner_rules" class="hide">
@@ -437,7 +440,7 @@ osc_current_admin_theme_path('parts/header.php'); ?>
                                                value="<?php echo osc_esc_html(osc_get_preference('rewrite_item_url')); ?>"/>
                                         <div class="help-box">
                                             <?php echo sprintf(__('Accepted keywords: %s'),
-                                                '{ITEM_ID},{ITEM_TITLE},{ITEM_CITY},{CATEGORIES}'); ?>
+                                                               '{ITEM_ID},{ITEM_TITLE},{ITEM_CITY},{CATEGORIES}'); ?>
                                         </div>
                                     </div>
                                 </div>
@@ -448,7 +451,7 @@ osc_current_admin_theme_path('parts/header.php'); ?>
                                                value="<?php echo osc_esc_html(osc_get_preference('rewrite_page_url')); ?>"/>
                                         <div class="help-box">
                                             <?php echo sprintf(__('Accepted keywords: %s'),
-                                                '{PAGE_ID}, {PAGE_SLUG}'); ?>
+                                                               '{PAGE_ID}, {PAGE_SLUG}'); ?>
                                         </div>
                                     </div>
                                 </div>
@@ -459,7 +462,7 @@ osc_current_admin_theme_path('parts/header.php'); ?>
                                                value="<?php echo osc_esc_html(osc_get_preference('rewrite_cat_url')); ?>"/>
                                         <div class="help-box">
                                             <?php echo sprintf(__('Accepted keywords: %s'),
-                                                '{CATEGORY_ID},{CATEGORY_NAME},{CATEGORIES}'); ?>
+                                                               '{CATEGORY_ID},{CATEGORY_NAME},{CATEGORIES}'); ?>
                                         </div>
                                     </div>
                                 </div>
@@ -720,7 +723,7 @@ osc_current_admin_theme_path('parts/header.php'); ?>
                                     <pre><?php
                                         $htaccess_content = file_get_contents(osc_base_path() . '.htaccess');
                                         echo htmlentities($htaccess_content);
-                                    ?></pre>
+                                        ?></pre>
                                 </div>
                                 <div class="form-row">
                                     <h3 class="separate-top"><?php _e('What your .htaccess file should look like'); ?></h3>
@@ -737,7 +740,7 @@ RewriteRule . {$rewrite_base}index.php [L]
 </IfModule>
 HTACCESS;
                                         echo htmlentities($htaccess);
-                                    ?></pre>
+                                        ?></pre>
                                 </div>
                             <?php } ?>
                         <?php } ?>

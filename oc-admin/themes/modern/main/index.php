@@ -229,14 +229,14 @@ osc_current_admin_theme_path('parts/header.php'); ?>
                                     <tr<?php if ($even == true) {
                                         $even = false;
                                         echo ' class="even"';
-                                       } else {
-                                           $even = true;
-                                       }
-                                       if ($countEvent == 1) {
-                                           echo ' class="table-first-row"';
-                                       } ?>>
-                                        <td>
-                                            <a href="<?php echo osc_admin_base_url(true); ?>?page=items&amp;catId=<?php echo $c['pk_i_id']; ?>"><?php echo $c['s_name']; ?></a>
+                                    } else {
+                                        $even = true;
+                                    }
+                                    if ($countEvent == 1) {
+                                        echo ' class="table-first-row"';
+                                    } ?>>
+                                        <td><a href="<?php echo osc_admin_base_url(true); ?>?page=items&amp;catId=<?php echo
+                                            $c['pk_i_id']; ?>"><?php echo $c['s_name']; ?></a>
                                         </td>
                                         <td><?php echo $c['i_num_items'] . '&nbsp;' . (($c['i_num_items'] == 1)
                                                     ? __('Listing') : __('Listings')); ?></td>
@@ -245,11 +245,11 @@ osc_current_admin_theme_path('parts/header.php'); ?>
                                         <tr<?php if ($even == true) {
                                             $even = false;
                                             echo ' class="even"';
-                                           } else {
-                                               $even = true;
-                                           } ?>>
-                                            <td class="children-cat"><a
-                                                        href="<?php echo osc_admin_base_url(true); ?>?page=items&amp;catId=<?php echo $subc['pk_i_id']; ?>"><?php echo $subc['s_name']; ?></a>
+                                        } else {
+                                            $even = true;
+                                        } ?>>
+                                            <td class="children-cat"><a href="<?php echo osc_admin_base_url(true); ?>?page=items&amp;
+                                            catId=<?php echo $subc['pk_i_id']; ?>"><?php echo $subc['s_name']; ?></a>
                                             </td>
                                             <td><?php echo $subc['i_num_items'] . ' ' . (($subc['i_num_items'] == 1)
                                                         ? __('Listing') : __('Listings')); ?></td>
@@ -285,7 +285,7 @@ osc_current_admin_theme_path('parts/header.php'); ?>
                         <div id="widget-box-stats-listings" class="widget-box-stats">
                             <b class="stats-title"><?php _e('New listings'); ?></b>
                             <div class="stats-detail"><?php printf(__('Total number of listings: %s'),
-                                    $numItems); ?></div>
+                                                                   $numItems); ?></div>
                             <div id="placeholder-listing" class="graph-placeholder"></div>
                             <a href="<?php echo osc_admin_base_url(true); ?>?page=stats&amp;action=items"
                                class="btn"><?php _e('Listing statistics'); ?></a>

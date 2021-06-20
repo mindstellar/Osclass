@@ -55,10 +55,10 @@ osc_add_hook('admin_header', 'customHead', 10);
 function addHelp()
 {
     echo '<p>'
-        . __("Change your site's look and feel by activating a theme among those available. "
-            . '<strong>Be careful</strong>: if your theme has been customized, '
-            . "you'll lose all changes if you change to a new theme.")
-        . '</p>';
+         . __("Change your site's look and feel by activating a theme among those available. "
+              . '<strong>Be careful</strong>: if your theme has been customized, '
+              . "you'll lose all changes if you change to a new theme.")
+         . '</p>';
 }
 
 
@@ -103,7 +103,7 @@ osc_current_admin_theme_path('parts/header.php'); ?>
                     <div class="theme">
                         <img
                                 src="<?php echo osc_base_url() . '/oc-content/themes/' . osc_theme()
-                                    . '/screenshot.png' ?>"
+                                                . '/screenshot.png' ?>"
                                 title="<?php echo $info['name']; ?>" alt="<?php echo $info['name']; ?>"
                         />
                         <div class="theme-info">
@@ -122,9 +122,10 @@ osc_current_admin_theme_path('parts/header.php'); ?>
                 </div>
                 <h2 class="render-title"><?php _e('Available themes'); ?></h2>
                 <div class="available-theme">
-                    <?php $aThemesToUpdate = json_decode(osc_get_preference('themes_to_update'), true);
-                    $bThemesToUpdate       = (is_array($aThemesToUpdate)) ? true : false;
-                    $csrf_token            = osc_csrf_token_url();
+                    <?php
+                    $aThemesToUpdate = json_decode(osc_get_preference('themes_to_update'), true);
+                    $bThemesToUpdate = (is_array($aThemesToUpdate)) ? true : false;
+                    $csrf_token      = osc_csrf_token_url();
                     foreach ($themes as $theme) { ?>
                         <?php
                         if ($theme === osc_theme()) {
@@ -137,17 +138,20 @@ osc_current_admin_theme_path('parts/header.php'); ?>
                                 <img src="<?php echo osc_base_url(); ?>/oc-content/themes/<?php echo $theme; ?>/screenshot.png"
                                      title="<?php echo $info['name']; ?>" alt="<?php echo $info['name']; ?>"/>
                                 <div class="theme-actions">
-                                    <a href="<?php echo osc_admin_base_url(true); ?>?page=appearance&amp;action=activate&amp;theme=<?php echo $theme; ?>&amp;<?php echo $csrf_token; ?>"
-                                       class="btn btn-mini btn-green"><?php _e('Activate'); ?></a>
+                                    <a href="<?php echo osc_admin_base_url(true);
+                                    ?>?page=appearance&amp;action=activate&amp;theme=<?php
+                                    echo $theme; ?>&amp;<?php echo $csrf_token;
+                                    ?>" class="btn btn-mini btn-green"><?php _e('Activate'); ?></a>
                                     <a target="_blank"
                                        href="<?php echo osc_base_url(true); ?>?theme=<?php echo $theme; ?>"
                                        class="btn btn-mini btn-blue"><?php _e('Preview'); ?></a>
                                     <a onclick="return delete_dialog('<?php echo $theme; ?>');"
-                                       href="<?php echo osc_admin_base_url(true); ?>?page=appearance&amp;action=delete&amp;webtheme=<?php echo $theme; ?>&amp;<?php echo $csrf_token; ?>"
+                                       href="<?php echo osc_admin_base_url(true);
+                                       ?>?page=appearance&amp;action=delete&amp;webtheme=<?php
+                                       echo $theme; ?>&amp;<?php echo $csrf_token; ?>"
                                        class="btn btn-mini float-right delete"><?php _e('Delete'); ?></a>
                                     <?php
-                                    if ($bThemesToUpdate && in_array($theme, $aThemesToUpdate)) {
-                                        ?>
+                                    if ($bThemesToUpdate && in_array($theme, $aThemesToUpdate)) { ?>
                                         <a href='#<?php echo htmlentities(@$info['theme_update_uri']); ?>'
                                            class="btn btn-mini btn-orange market-popup"><?php _e('Update'); ?></a>
                                     <?php } ?>

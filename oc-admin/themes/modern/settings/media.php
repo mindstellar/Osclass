@@ -160,8 +160,9 @@ function render_offset()
 function addHelp()
 {
     echo '<p>'
-        . __('Manage the options for the images users can upload along with their listings. You can limit their size, the number of images per ad, include a watermark, etc.')
-        . '</p>';
+         . __('Manage the options for the images users can upload along with their listings. You can limit their size, '
+              . 'the number of images per ad, include a watermark, etc.')
+         . '</p>';
 }
 
 
@@ -204,7 +205,9 @@ osc_current_admin_theme_path('parts/header.php'); ?>
             <div class="form-horizontal">
                 <h2 class="render-title"><?php _e('Image sizes'); ?></h2>
                 <div class="form-row">
-                    <p><?php _e('The sizes listed below determine the maximum dimensions in pixels to use when uploading a image. Format: <b>Width</b> x <b>Height</b>.'); ?></p>
+                    <p><?php _e('The sizes listed below determine the maximum dimensions in pixels to use when uploading a image.'
+                                . ' Format: <b>Width</b> x <b>Height</b>.'); ?>
+                    </p>
                     <div class="form-label"><?php _e('Thumbnail size'); ?></div>
                     <div class="form-controls"><input type="text" class="input-medium" name="dimThumbnail"
                                                       value="<?php echo osc_esc_html(osc_thumbnail_dimensions()); ?>"/>
@@ -241,7 +244,8 @@ osc_current_admin_theme_path('parts/header.php'); ?>
                             <input type="checkbox" id="force_jpeg" name="force_jpeg"
                                    value="1" <?php echo(osc_force_jpeg() ? 'checked="checked"' : ''); ?> />
                             <label for="force_jpeg"><?php _e('Force JPEG extension.'); ?></label>
-                            <span class="help-box"><?php _e('Uploaded images will be saved in JPG/JPEG format, it saves space but images will not have transparent background.'); ?></span>
+                            <span class="help-box"><?php _e('Uploaded images will be saved in JPG/JPEG format, '
+                                                            . 'it saves space but images will not have transparent background.'); ?></span>
                         </div>
                     </div>
                 </div>
@@ -271,10 +275,11 @@ osc_current_admin_theme_path('parts/header.php'); ?>
                     <div class="form-label"><?php _e('ImageMagick'); ?></div>
                     <div class="form-controls">
                         <div class="form-label-checkbox">
-                            <input type="checkbox" name="use_imagick" value="1" <?php echo(($imagickLoaded
-                                && osc_use_imagick()) ? 'checked="checked"' : ''); ?> <?php if (!$imagickLoaded) {
+                            <input type="checkbox" name="use_imagick" value="1" <?php
+                            echo(($imagickLoaded && osc_use_imagick()) ? 'checked="checked"' : '');
+                            if (!$imagickLoaded) {
                                 echo 'disabled="disabled"';
-                                } ?> />
+                            } ?> />
                             <label for="use_imagick"><?php _e('Use ImageMagick instead of GD library'); ?></label>
                         </div>
                         <?php if (!$imagickLoaded) { ?>
@@ -294,20 +299,20 @@ osc_current_admin_theme_path('parts/header.php'); ?>
                         <div class="form-label-checkbox">
                             <input type="radio" id="watermark_none" name="watermark_type"
                                    value="none" <?php echo((!osc_is_watermark_image() && !osc_is_watermark_text())
-                                    ? 'checked="checked"' : ''); ?> />
+                                ? 'checked="checked"' : ''); ?> />
                             <label for="watermark_none"><?php _e('None'); ?></label>
                         </div>
                         <div class="form-label-checkbox">
                             <input type="radio" id="watermark_text" name="watermark_type"
                                    value="text" <?php echo(osc_is_watermark_text() ? 'checked="checked"'
-                                    : ''); ?> <?php echo($freeType ? '' : 'disabled="disabled"'); ?> />
+                                : ''); ?> <?php echo($freeType ? '' : 'disabled="disabled"'); ?> />
                             <label for="watermark_text"><?php _e('Text'); ?></label>
                             <?php if (!$freeType) { ?>
                                 <div class="flashmessage flashmessage-inline error">
                                     <p><?php printf(
-                                        __('Freetype library is required. How to <a target="_blank" href="%s">install/configure</a>'),
-                                        'http://www.php.net/manual/en/image.installation.php'
-                                       ); ?></p>
+                                            __('Freetype library is required. How to <a target="_blank" href="%s">install/configure</a>'),
+                                            'http://www.php.net/manual/en/image.installation.php'
+                                        ); ?></p>
                                 </div>
                             <?php } ?>
                         </div>
@@ -366,54 +371,54 @@ osc_current_admin_theme_path('parts/header.php'); ?>
                         }
 
                         ?>
-                    <div class="form-row">
-                        <div class="form-label"><?php _e('Watermark Width'); ?></div>
-                        <div class="form-controls">
-                            <input type="number" class="large" name="watermark_width" step="1"
-                                   value="<?php echo $watermark_width; ?>"/>
-                        </div>
-                    </div>
-                    <div class="form-row">
-                        <div class="form-label"><?php _e('Watermark Height'); ?></div>
-                        <div class="form-controls">
-                            <input type="number" class="large" name="watermark_height" step="1"
-                                   value="<?php echo $watermark_height; ?>"/>
-                        </div>
-                    </div>
-                    <div class="form-row">
-                        <div class="form-label"><?php _e('Text offset_x'); ?></div>
-                        <div class="form-controls">
-                            <input type="number" class="large" name="text_offset_x" step="1"
-                                   value="<?php echo $text_offset_x; ?>"/>
-                        </div>
-                    </div>
-                    <div class="form-row">
-                        <div class="form-label"><?php _e('Text offset_y'); ?></div>
-                        <div class="form-controls">
-                            <input type="number" class="large" name="text_offset_y" step="1"
-                                   value="<?php echo $text_offset_y; ?>"/>
-                        </div>
-                    </div>
-                    <div class="form-row">
-                        <div class="form-label"><?php _e('Text Color'); ?></div>
-                        <div class="form-controls">
-                            <input type="text" maxlength="8" id="colorpickerField1" class="small"
-                                   name="watermark_text_color"
-                                   value="<?php echo osc_esc_html(osc_watermark_text_color()); ?>"/>
-                        </div>
-                    </div>
-                    <div class="form-row">
-                        <div class="form-label"><?php _e('Background Color'); ?></div>
-                        <div class="form-controls">
-                            <input type="text" maxlength="8" id="colorpickerField2" class="small"
-                                   name="background_color"
-                                   value="<?php echo $background_color;
-                                    ?>"/>
-                            <div class="help-box">
-                                <?php _e('Background Hexadecimal color value'); ?>
+                        <div class="form-row">
+                            <div class="form-label"><?php _e('Watermark Width'); ?></div>
+                            <div class="form-controls">
+                                <input type="number" class="large" name="watermark_width" step="1"
+                                       value="<?php echo $watermark_width; ?>"/>
                             </div>
                         </div>
-                    </div>
+                        <div class="form-row">
+                            <div class="form-label"><?php _e('Watermark Height'); ?></div>
+                            <div class="form-controls">
+                                <input type="number" class="large" name="watermark_height" step="1"
+                                       value="<?php echo $watermark_height; ?>"/>
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-label"><?php _e('Text offset_x'); ?></div>
+                            <div class="form-controls">
+                                <input type="number" class="large" name="text_offset_x" step="1"
+                                       value="<?php echo $text_offset_x; ?>"/>
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-label"><?php _e('Text offset_y'); ?></div>
+                            <div class="form-controls">
+                                <input type="number" class="large" name="text_offset_y" step="1"
+                                       value="<?php echo $text_offset_y; ?>"/>
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-label"><?php _e('Text Color'); ?></div>
+                            <div class="form-controls">
+                                <input type="text" maxlength="8" id="colorpickerField1" class="small"
+                                       name="watermark_text_color"
+                                       value="<?php echo osc_esc_html(osc_watermark_text_color()); ?>"/>
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-label"><?php _e('Background Color'); ?></div>
+                            <div class="form-controls">
+                                <input type="text" maxlength="8" id="colorpickerField2" class="small"
+                                       name="background_color"
+                                       value="<?php echo $background_color;
+                                       ?>"/>
+                                <div class="help-box">
+                                    <?php _e('Background Hexadecimal color value'); ?>
+                                </div>
+                            </div>
+                        </div>
                     <?php } ?>
                     <?php if (osc_is_watermark_text() && osc_watermark_text_color()) { ?>
                         <div class="form-row">
@@ -429,8 +434,8 @@ osc_current_admin_theme_path('parts/header.php'); ?>
                                     ?>
                                     <img src="<?php
                                     echo osc_base_url()
-                                        . str_replace(osc_base_path(), '', osc_uploads_path())
-                                        . Preference::newInstance()->get('watermark_text_image_name') ?>"/>
+                                         . str_replace(osc_base_path(), '', osc_uploads_path())
+                                         . Preference::newInstance()->get('watermark_text_image_name') ?>"/>
                                 </div>
                             </div>
                         </div>
@@ -462,10 +467,10 @@ osc_current_admin_theme_path('parts/header.php'); ?>
                             <?php if (osc_is_watermark_image() != '') { ?>
                                 <div class="help-box"><img width="100px"
                                                            src="<?php echo osc_base_url() . str_replace(
-                                                               osc_base_path(),
-                                                               '',
-                                                               osc_uploads_path()
-                                                                ) . 'watermark.png' ?>"/></div>
+                                                                   osc_base_path(),
+                                                                   '',
+                                                                   osc_uploads_path()
+                                                               ) . 'watermark.png' ?>"/></div>
                             <?php } ?>
                             <div class="help-box"><?php _e('It has to be a .PNG image'); ?></div>
                             <div class="help-box"><?php _e("Osclass doesn't check the watermark image size"); ?></div>
@@ -493,11 +498,12 @@ osc_current_admin_theme_path('parts/header.php'); ?>
                 <div class="form-row">
                     <div class="form-controls">
                         <p>
-                            <?php _e('You can regenerate different image dimensions. If you have changed the dimension of thumbnails, preview or normal images, you might want to regenerate your images.'); ?>
+                            <?php _e('You can regenerate different image dimensions. If you have changed the dimension of thumbnails, '
+                                     . 'preview or normal images, you might want to regenerate your images.'); ?>
                         </p>
                         <a class="btn"
                            href="<?php echo osc_admin_base_url(true) . '?page=settings&action=images_post' . '&'
-                               . osc_csrf_token_url(); ?>"><?php _e('Regenerate'); ?></a>
+                                            . osc_csrf_token_url(); ?>"><?php _e('Regenerate'); ?></a>
                     </div>
                 </div>
                 <div class="clear"></div>

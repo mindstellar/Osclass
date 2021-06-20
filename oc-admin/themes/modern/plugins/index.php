@@ -22,8 +22,9 @@
 function addHelp()
 {
     echo '<p>'
-        . __("Install or uninstall the plugins available in your installation. In some cases, you'll have to configure the plugin in order to get it to work.")
-        . '</p>';
+         . __("Install or uninstall the plugins available in your installation. In some cases, "
+              . "you'll have to configure the plugin in order to get it to work.")
+         . '</p>';
 }
 
 
@@ -31,25 +32,26 @@ osc_add_hook('help_box', 'addHelp');
 
 function customPageHeader()
 {
-    ?>
+?>
 <h1><?php _e('Manage Plugins'); ?>
     <a href="#" class="btn ico ico-32 ico-help float-right"></a>
     <a href="<?php echo osc_admin_base_url(true); ?>?page=plugins&amp;action=add"
        class="btn btn-green ico ico-32 ico-add-white float-right"><?php _e('Add plugin'); ?></a>
 </h1>
 </div>
-    <?php osc_show_flash_message('admin'); ?>
-    <?php if (Params::getParam('error') != '') { ?>
+<?php osc_show_flash_message('admin'); ?>
+<?php if (Params::getParam('error') != '') { ?>
 <!-- flash message -->
 <div class="flashmessage flashmessage-error" style="display:block">
-        <?php _e("Plugin couldn't be installed because it triggered a <strong>fatal error</strong>"); ?>
+    <?php _e("Plugin couldn't be installed because it triggered a <strong>fatal error</strong>"); ?>
     <a class="btn ico btn-mini ico-close">x</a>
     <iframe style="border:0;" width="100%" height="60"
-            src="<?php echo osc_admin_base_url(true); ?>?page=plugins&amp;action=error_plugin&amp;plugin=<?php echo Params::getParam('error'); ?>"></iframe>
+            src="<?php echo osc_admin_base_url(true); ?>?page=plugins&amp;action=error_plugin&amp;plugin=<?php
+            echo Params::getParam('error'); ?>"></iframe>
     <!-- /flash message -->
     <?php } ?>
     <?php
-}
+    }
     osc_add_hook('admin_page_header', 'customPageHeader');
 
     /**
@@ -57,18 +59,18 @@ function customPageHeader()
      *
      * @return string
      */
-function customPageTitle($string)
-{
-    return sprintf(__('Plugins &raquo; %s'), $string);
-}
+    function customPageTitle($string)
+    {
+        return sprintf(__('Plugins &raquo; %s'), $string);
+    }
 
 
     osc_add_filter('admin_title', 'customPageTitle');
 
     //customize Head
-function customHead()
-{
-    ?>
+    function customHead()
+    {
+        ?>
         <script type="text/javascript">
             $(document).ready(function () {
                 $('input:hidden[name="installed"]').each(function () {
@@ -110,7 +112,7 @@ function customHead()
             }
         </script>
         <?php
-}
+    }
 
 
     osc_add_hook('admin_header', 'customHead', 10);
@@ -119,7 +121,7 @@ function customHead()
     $aData          = __get('aPlugins');
 
     $tab_index = 2;
-?>
+    ?>
     <?php osc_current_admin_theme_path('parts/header.php'); ?>
     <div id="tabs" class="ui-osc-tabs ui-tabs-right">
         <ul style="display: none;">
@@ -171,9 +173,12 @@ function customHead()
             {
                 $aData = __get('aPlugins');
                 echo '<ul class="showing-results"><li><span>' . osc_pagination_showing((Params::getParam('iPage') - 1)
-                        * $aData['iDisplayLength'] + 1,
-                        ((Params::getParam('iPage') - 1) * $aData['iDisplayLength']) + count($aData['aaData']),
-                        $aData['iTotalDisplayRecords']) . '</span></li></ul>';
+                                                                                       * $aData['iDisplayLength'] + 1,
+                                                                                       ((Params::getParam('iPage') - 1)
+                                                                                        * $aData['iDisplayLength'])
+                                                                                       + count($aData['aaData']),
+                                                                                       $aData['iTotalDisplayRecords'])
+                     . '</span></li></ul>';
             }
 
 
@@ -184,7 +189,7 @@ function customHead()
             <div class="display-select-bottom">
                 <form method="get" action="<?php echo osc_admin_base_url(true); ?>" class="inline nocsrf">
                     <?php foreach (Params::getParamsAsArray('get') as $key => $value) { ?>
-                        <?php if ($key != 'iDisplayLength') { ?>
+                        <?php if ($key !== 'iDisplayLength') { ?>
                             <input type="hidden" name="<?php echo osc_esc_html($key); ?>"
                                    value="<?php echo osc_esc_html($value); ?>"/>
                         <?php }
@@ -193,21 +198,19 @@ function customHead()
                             onchange="this.form.submit();">
                         <option value="10" <?php if (Params::getParam('iDisplayLength') == 10) {
                             echo 'selected';
-                                           } ?> ><?php printf(__('%d plugins'), 10); ?></option>
+                        } ?> ><?php printf(__('%d plugins'), 10); ?></option>
                         <option value="25" <?php if (Params::getParam('iDisplayLength') == 25) {
                             echo 'selected';
-                                           } ?> ><?php printf(__('%d plugins'), 25); ?></option>
+                        } ?> ><?php printf(__('%d plugins'), 25); ?></option>
                         <option value="50" <?php if (Params::getParam('iDisplayLength') == 50) {
                             echo 'selected';
-                                           } ?> ><?php printf(__('%d plugins'), 50); ?></option>
+                        } ?> ><?php printf(__('%d plugins'), 50); ?></option>
                         <option value="100" <?php if (Params::getParam('iDisplayLength') == 100) {
                             echo 'selected';
-                                            } ?> ><?php printf(__('%d plugins'), 100); ?></option>
+                        } ?> ><?php printf(__('%d plugins'), 100); ?></option>
                     </select>
                 </form>
             </div>
-
-
         </div>
         <?php if ($bPluginsToUpdate && count($aPluginsToUpdate) > 0) { ?>
             <div id="update-plugins">
@@ -301,7 +304,8 @@ function customHead()
         <input type="hidden" name="plugin" value=""/>
         <div class="form-horizontal">
             <div class="form-row">
-                <?php _e('This action can not be undone. Uninstalling plugins may result in a permanent loss of data. Are you sure you want to continue?'); ?>
+                <?php _e('This action can not be undone. Uninstalling plugins may result in a permanent loss of data. '
+                         . 'Are you sure you want to continue?'); ?>
             </div>
             <div class="form-actions">
                 <div class="wrapper">
@@ -327,63 +331,13 @@ function customHead()
                 $(".ui-dialog-content").dialog("close");
                 return false;
             });
-
-            $("#market_install").on("click", function () {
-                $(".ui-dialog-content").dialog("close");
-                $('<div id="downloading"><div class="osc-modal-content"><?php _e('Please wait until the download is completed'); ?></div></div>').dialog({
-                    title: '<?php _e('Downloading'); ?>...',
-                    modal: true
-                });
-                $.getJSON(
-                    "<?php echo osc_admin_base_url(true); ?>?page=ajax&action=market&<?php echo osc_csrf_token_url(); ?>",
-                    {"code": $("#market_code").attr("value"), "section": 'plugins'},
-                    function (data) {
-                        var content = data.message;
-                        if (data.error == 0) { // no errors
-                            content += '<p><?php echo osc_esc_js(__('The plugin has been downloaded correctly, proceed to install and configure.')); ?></p>';
-                            content += "<p>";
-                            content += '<a class="btn btn-mini btn-green" href="<?php echo osc_admin_base_url(true); ?>?page=plugins&marketError=' + data.error + '&slug=' + oscEscapeHTML(data.data['s_update_url']) + '"><?php echo osc_esc_js(__('Close')); ?></a>';
-                            content += "</p>";
-                        } else {
-                            content += '<a class="btn btn-mini btn-green" onclick=\'$(".ui-dialog-content").dialog("close");\'><?php echo osc_esc_js(__('Close')); ?>...</a>';
-                        }
-                        $("#downloading .osc-modal-content").html(content);
-                    });
-                return false;
-            });
-        });
-
-        $('.market-popup').on('click', function () {
-            $.getJSON(
-                "<?php echo osc_admin_base_url(true); ?>?page=ajax&action=check_market",
-                {"code": $(this).attr('href').replace('#', ''), 'section': 'plugins'},
-                function (data) {
-                    if (data != null) {
-                        $("#market_thumb").attr('src', data.s_thumbnail);
-                        $("#market_code").attr("value", data.s_update_url);
-                        $("#market_name").text(data.s_title);
-                        $("#market_version").text(data.s_version);
-                        $("#market_author").text(data.s_contact_name);
-                        $("#market_url").attr('href', data.s_source_file);
-                        $('#market_install').text("<?php echo osc_esc_js(__('Update')); ?>");
-
-                        $('#market_installer').dialog({
-                            modal: true,
-                            title: '<?php echo osc_esc_js(__('Osclass Market')); ?>',
-                            width: 485
-                        });
-                    }
-                }
-            );
-
-            return false;
         });
 
         function delete_plugin(plugin) {
-            var x = confirm('<?php echo osc_esc_js(__('You are about to delete the files of the plugin. Do you want to continue?'))?>');
+            const x = confirm('<?php echo osc_esc_js(__('You are about to delete the files of the plugin. Do you want to continue?'))?>');
             if (x) {
                 window.location = '<?php echo osc_admin_base_url(true) . '?page=plugins&action=delete&'
-                    . osc_csrf_token_url() . '&plugin='; ?>' + plugin;
+                                              . osc_csrf_token_url() . '&plugin='; ?>' + plugin;
             }
         }
     </script>

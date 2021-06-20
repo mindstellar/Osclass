@@ -176,10 +176,10 @@ $aux = customFrmText();
                             clearInterval(cInterval);
                             if (data.exists == 0) {
                                 $("#available").text('<?php echo osc_esc_js(__('The username is available',
-                                    'modern')); ?>');
+                                                                               'modern')); ?>');
                             } else {
                                 $("#available").text('<?php echo osc_esc_js(__('The username is NOT available',
-                                    'modern')); ?>');
+                                                                               'modern')); ?>');
                             }
                         }
                     );
@@ -327,7 +327,7 @@ $aux = customFrmText();
                 <div class="form-row">
                     <div class="form-label"><?php _e('New password'); ?><?php if (!$aux['edit']) {
                             printf('<br/><em>%s</em>', __('(twice, required)'));
-                                            } ?></div>
+                        } ?></div>
                     <div class="form-controls">
                         <?php UserForm::password_text($user); ?>
                         <?php if ($aux['edit']) { ?>
@@ -366,7 +366,7 @@ $aux = customFrmText();
             <div class="form-horizontal">
                 <h3 class="render-title"><?php _e('Alerts'); ?></h3>
                 <div class="form-row">
-                    <?php for ($k = 0; $k < count($aux['alerts']); $k++) {
+                    <?php for ($k = 0, $kMax = count($aux['alerts']); $k < $kMax; $k++) {
                         $array_conditions = (array)json_decode($aux['alerts'][$k]['s_search'], true);
                         $raw_data         = osc_get_raw_search($array_conditions);
                         $new_search       = new Search();
@@ -390,7 +390,8 @@ $aux = customFrmText();
                                 if (count($raw_data['aCategories']) > $l) {
                                     $cat_array[] =
                                         '<a href="#" class="more-tooltip" categories="' . osc_esc_html(implode(', ',
-                                            $raw_data['aCategories'])) . '" >' . __('...More') . '</a>';
+                                                                                                               $raw_data['aCategories']))
+                                        . '" >' . __('...More') . '</a>';
                                 }
                                 ?>
                                 <?php echo sprintf(__('<b>Categories:</b> %s'), implode(', ', $cat_array)); ?><br/>
@@ -400,12 +401,12 @@ $aux = customFrmText();
                             &nbsp;|&nbsp;
                             <?php if ($aux['alerts'][$k]['b_active'] == 1) { ?>
                                 <a href="<?php echo osc_admin_base_url(true) . '?page=users&action=status_alerts&id[]='
-                                    . $aux['alerts'][$k]['pk_i_id'] . '&status=0&user_id='
-                                    . $user['pk_i_id']; ?>"><?php _e('Disable'); ?></a>
+                                                    . $aux['alerts'][$k]['pk_i_id'] . '&status=0&user_id='
+                                                    . $user['pk_i_id']; ?>"><?php _e('Disable'); ?></a>
                             <?php } else { ?>
                                 <a href="<?php echo osc_admin_base_url(true) . '?page=users&action=status_alerts&id[]='
-                                    . $aux['alerts'][$k]['pk_i_id'] . '&status=1&user_id='
-                                    . $user['pk_i_id']; ?>"><?php _e('Enable'); ?></a>
+                                                    . $aux['alerts'][$k]['pk_i_id'] . '&status=1&user_id='
+                                                    . $user['pk_i_id']; ?>"><?php _e('Enable'); ?></a>
                             <?php } ?>
                         </div>
                         <div class="form-controls">

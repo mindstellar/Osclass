@@ -69,8 +69,8 @@ osc_current_admin_theme_path('parts/header.php'); ?>
                 </div>
                 <p class="text">
                     <?php _e('The translations folder is not writable on your server '
-                        ."so you can't upload translations from the administration panel. "
-                        . 'Please make the translation folder writable and try again.'); ?>
+                             . "so you can't upload translations from the administration panel. "
+                             . 'Please make the translation folder writable and try again.'); ?>
                 </p>
                 <p class="text">
                     <?php _e('To make the directory writable under UNIX execute this command from the shell:'); ?>

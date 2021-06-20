@@ -22,8 +22,10 @@
 function addHelp()
 {
     echo '<p>'
-        . __("Modify the emails your site's users receive when they join your site, when someone shows interest in their ad, to recover their password... <strong>Be careful</strong>: don't modify any of the words that appear within brackets.")
-        . '</p>';
+         . __("Modify the emails your site's users receive when they join your site,"
+              . " when someone shows interest in their ad, to recover their password... "
+              . "<strong>Be careful</strong>: don't modify any of the words that appear within brackets.")
+         . '</p>';
 }
 
 

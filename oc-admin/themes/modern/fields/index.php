@@ -28,8 +28,10 @@ $selected   = __get('default_selected');
 function addHelp()
 {
     echo '<p>'
-        . __('Create new fields for users to fill out when they publish a listing. You can require extra  information such as the number of bedrooms in real estate listings or fuel type in car listings, for example.')
-        . '</p>';
+         . __('Create new fields for users to fill out when they publish a listing. '
+              . 'You can require extra  information such as the number of bedrooms in real estate listings or '
+              . 'fuel type in car listings, for example.')
+         . '</p>';
 }
 
 
@@ -58,7 +60,8 @@ function customHead()
                 $('.custom-field-frame').remove();
                 var name = 'frame_' + id;
                 var id_ = 'frame_' + id;
-                var url = '<?php echo osc_admin_base_url(true); ?>?page=ajax&action=field_categories_iframe&<?php echo $csrf_token; ?>&id=' + id;
+                var url = '<?php echo osc_admin_base_url(true); ?>?page=ajax&action=field_categories_iframe&<?php echo $csrf_token;
+                    ?>&id=' + id;
                 $.ajax({
                     url: url,
                     context: document.body,
@@ -106,7 +109,8 @@ function customHead()
             });
             $("#field-delete-submit").click(function () {
                 var id = $("#dialog-delete-field").attr('data-field-id');
-                var url = '<?php echo osc_admin_base_url(true); ?>?page=ajax&action=delete_field&<?php echo $csrf_token; ?>&id=' + id;
+                var url = '<?php echo osc_admin_base_url(true); ?>?page=ajax&action=delete_field&<?php echo $csrf_token;
+                    ?>&id=' + id;
                 $.ajax({
                     url: url,
                     context: document.body,
@@ -149,9 +153,13 @@ function customHead()
                             html += ret.field_name;
                             html += '</div>';
                             html += '<div class="actions-edit-cfield">';
-                            html += '<a href="javascript:void(0);"  onclick="show_iframe(\'content_list_' + ret.field_id + '\',\'' + ret.field_id + '\');"><?php echo osc_esc_js(__('Edit')); ?></a>';
+                            html += '<a href="javascript:void(0);"  onclick="show_iframe(\'content_list_'
+                                + ret.field_id + '\',\'' + ret.field_id
+                                + '\');"><?php echo osc_esc_js(__('Edit')); ?></a>';
                             html += ' &middot; ';
-                            html += '<a href="javascript:void(0);"  onclick="delete_field(\'' + ret.field_id + '\');"><?php echo osc_esc_js(__('Delete')); ?></a>';
+                            html += '<a href="javascript:void(0);"  onclick="delete_field(\''
+                                + ret.field_id
+                                + '\');"><?php echo osc_esc_js(__('Delete')); ?></a>';
                             html += '</div>';
                             html += '<div class="edit content_list_' + ret.field_id + '"></div>';
                             html += '</div>';
@@ -184,7 +192,10 @@ function customHead()
             });
 
             var field_type_new_value = $("select[name='field_type_new']").attr('value');
-            if (field_type_new_value == 'TEXT' || field_type_new_value == 'TEXTAREA' || field_type_new_value == 'CHECKBOX' || field_type_new_value == 'URL') {
+            if (field_type_new_value == 'TEXT'
+                || field_type_new_value == 'TEXTAREA'
+                || field_type_new_value == 'CHECKBOX'
+                || field_type_new_value == 'URL') {
                 $('#div_field_options').hide();
             }
         });
@@ -233,7 +244,8 @@ osc_current_admin_theme_path('parts/header.php');
                                 </div>
                                 <div class="actions-edit-cfield">
                                     <a href="javascript:void(0);"
-                                       onclick="javascript:show_iframe('content_list_<?php echo $field['pk_i_id']; ?>','<?php echo $field['pk_i_id']; ?>');"><?php _e('Edit'); ?></a>
+                                       onclick="javascript:show_iframe('content_list_<?php echo $field['pk_i_id']; ?>','<?php echo
+                                       $field['pk_i_id']; ?>');"><?php _e('Edit'); ?></a>
                                     &middot;
                                     <a href="javascript:void(0);"
                                        onclick="javascript:delete_field('<?php echo $field['pk_i_id']; ?>');"><?php _e('Delete'); ?></a>

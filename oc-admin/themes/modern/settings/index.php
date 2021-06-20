@@ -140,10 +140,10 @@ function render_offset()
 function addHelp()
 {
     echo '<p>'
-        . __("Change the basic configuration of your Osclass. From here, you can modify variables such as the site’s name,
-the default currency or how lists of listings are displayed. <strong>Be careful</strong> when modifying default values
-if you're not sure what you're doing!")
-        . '</p>';
+         . __("Change the basic configuration of your Osclass. From here, you can modify variables such as the site’s name, "
+              . "the default currency or how lists of listings are displayed. <strong>Be careful</strong> when modifying default "
+              . "values if you're not sure what you're doing!")
+         . '</p>';
 }
 
 
@@ -207,7 +207,8 @@ osc_current_admin_theme_path('parts/header.php'); ?>
                             <select name="language">
                                 <?php foreach ($aLanguages as $lang) { ?>
                                     <option value="<?php echo $lang['pk_c_code']; ?>" <?php echo((osc_language()
-                                        === $lang['pk_c_code']) ? 'selected="selected"'
+                                                                                                  === $lang['pk_c_code'])
+                                        ? 'selected="selected"'
                                         : ''); ?>><?php echo $lang['s_name']; ?></option>
                                 <?php } ?>
                             </select>
@@ -219,7 +220,8 @@ osc_current_admin_theme_path('parts/header.php'); ?>
                             <select name="currency" id="currency_admin">
                                 <?php foreach ($aCurrencies as $currency) { ?>
                                     <option value="<?php echo osc_esc_html($currency['pk_c_code']); ?>" <?php echo((osc_currency()
-                                        === $currency['pk_c_code']) ? 'selected="selected"'
+                                                                                                                    === $currency['pk_c_code'])
+                                        ? 'selected="selected"'
                                         : ''); ?>><?php echo $currency['pk_c_code'] ?></option>
                                 <?php } ?>
                             </select>
@@ -230,26 +232,26 @@ osc_current_admin_theme_path('parts/header.php'); ?>
                         <div class="form-controls">
                             <select name="weekStart" id="weekStart">
                                 <option value="0" <?php if (osc_week_starts_at() == '0') {
-                                    ?>selected="selected"<?php
-                                                  } ?>><?php _e('Sunday'); ?></option>
+                                ?>selected="selected"<?php
+                                } ?>><?php _e('Sunday'); ?></option>
                                 <option value="1" <?php if (osc_week_starts_at() == '1') {
-                                    ?>selected="selected"<?php
-                                                  } ?>><?php _e('Monday'); ?></option>
+                                ?>selected="selected"<?php
+                                } ?>><?php _e('Monday'); ?></option>
                                 <option value="2" <?php if (osc_week_starts_at() == '2') {
-                                    ?>selected="selected"<?php
-                                                  } ?>><?php _e('Tuesday'); ?></option>
+                                ?>selected="selected"<?php
+                                } ?>><?php _e('Tuesday'); ?></option>
                                 <option value="3" <?php if (osc_week_starts_at() == '3') {
-                                    ?>selected="selected"<?php
-                                                  } ?>><?php _e('Wednesday'); ?></option>
+                                ?>selected="selected"<?php
+                                } ?>><?php _e('Wednesday'); ?></option>
                                 <option value="4" <?php if (osc_week_starts_at() == '4') {
-                                    ?>selected="selected"<?php
-                                                  } ?>><?php _e('Thursday'); ?></option>
+                                ?>selected="selected"<?php
+                                } ?>><?php _e('Thursday'); ?></option>
                                 <option value="5" <?php if (osc_week_starts_at() == '5') {
-                                    ?>selected="selected"<?php
-                                                  } ?>><?php _e('Friday'); ?></option>
+                                ?>selected="selected"<?php
+                                } ?>><?php _e('Friday'); ?></option>
                                 <option value="6" <?php if (osc_week_starts_at() == '6') {
-                                    ?>selected="selected"<?php
-                                                  } ?>><?php _e('Saturday'); ?></option>
+                                ?>selected="selected"<?php
+                                } ?>><?php _e('Saturday'); ?></option>
                             </select>
                         </div>
                     </div>
@@ -264,7 +266,7 @@ osc_current_admin_theme_path('parts/header.php'); ?>
                                 foreach ($timezone as $tz) { ?>
                                     <option value="<?php echo $tz; ?>" <?php if ($selected_tz === $tz) {
                                         ?> selected="selected" <?php
-                                                   } ?>><?php echo $tz; ?></option>
+                                    } ?>><?php echo $tz; ?></option>
                                 <?php } ?>
                             </select>
                         </div>
@@ -285,17 +287,18 @@ osc_current_admin_theme_path('parts/header.php'); ?>
                                         <div>
                                             <input type="radio" name="df" id="<?php echo $df; ?>"
                                                    value="<?php echo $df; ?>" <?php echo($checked ? 'checked="checked"'
-                                                    : ''); ?>
+                                                : ''); ?>
                                                    onclick="document.getElementById('dateFormat').value = '<?php echo $df; ?>';"/>
                                             <?php echo date($df); ?>
                                         </div>
                                     <?php } ?>
                                     <input type="radio" name="df" id="df_custom"
                                            value="df_custom" <?php echo($custom_checked ? 'checked="checked"'
-                                            : ''); ?> />
+                                        : ''); ?> />
                                     <input type="text" name="df_custom_text" id="df_custom_text"
                                            class="input-medium" <?php echo($custom_checked ? 'value="'
-                                            . osc_esc_html(osc_date_format()) . '"' : ''); ?>
+                                                                                             . osc_esc_html(osc_date_format()) . '"'
+                                        : ''); ?>
                                            onchange="document.getElementById('dateFormat').value = this.value;"
                                            onkeyup="custom_date(this.value);"/>
                                     <br/>
@@ -316,16 +319,17 @@ osc_current_admin_theme_path('parts/header.php'); ?>
                                         <div>
                                             <input type="radio" name="tf" id="<?php echo $tf; ?>"
                                                    value="<?php echo $tf; ?>" <?php echo($checked ? 'checked="checked"'
-                                                    : ''); ?>
+                                                : ''); ?>
                                                    onclick="document.getElementById('timeFormat').value = '<?php echo $tf; ?>';"/>
                                             <?php echo date($tf); ?>
                                         </div>
                                     <?php } ?>
                                     <input type="radio" name="tf" id="tf_custom"
                                            value="tf_custom" <?php echo($custom_checked ? 'checked="checked"'
-                                            : ''); ?> />
+                                        : ''); ?> />
                                     <input type="text" class="input-medium" <?php echo($custom_checked ? 'value="'
-                                        . osc_esc_html(osc_time_format()) . '"' : ''); ?>
+                                                                                                         . osc_esc_html(osc_time_format())
+                                                                                                         . '"' : ''); ?>
                                            onchange="document.getElementById('timeFormat').value = this.value;"
                                            onkeyup="custom_time(this.value);"/>
                                     <br/>
@@ -400,8 +404,8 @@ osc_current_admin_theme_path('parts/header.php'); ?>
                                     <input type="checkbox" <?php echo(osc_auto_cron() ? 'checked="checked"' : ''); ?>
                                            name="auto_cron"/>
                                     <?php printf(
-                                        __('Allow Osclass to run a built-in <a href="%s" target="_blank">cron</a>'.' '
-                                            .'automatically without setting crontab'),
+                                        __('Allow Osclass to run a built-in <a href="%s" target="_blank">cron</a>' . ' '
+                                           . 'automatically without setting crontab'),
                                         'http://en.wikipedia.org/wiki/Cron'
                                     ); ?>
                                 </label>

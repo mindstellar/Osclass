@@ -22,8 +22,8 @@
 function addHelp()
 {
     echo '<p>'
-        . __('Add, edit or delete ban rules. Keep in mind that ban rules prevent users to register, publish or comment on listings.')
-        . '</p>';
+         . __('Add, edit or delete ban rules. Keep in mind that ban rules prevent users to register, publish or comment on listings.')
+         . '</p>';
 }
 
 
@@ -152,7 +152,7 @@ $rows    = $aData['aRows'];
             <div id="bulk-actions">
                 <label>
                     <?php osc_print_bulk_actions('bulk_actions', 'action', __get('bulk_options'),
-                        'select-box-extra'); ?>
+                                                 'select-box-extra'); ?>
                     <input type="submit" id="bulk_apply" class="btn" value="<?php echo osc_esc_html(__('Apply')); ?>"/>
                 </label>
             </div>
@@ -161,8 +161,11 @@ $rows    = $aData['aRows'];
                     <thead>
                     <tr>
                         <?php foreach ($columns as $k => $v) {
-                            echo '<th class="col-' . $k . ' ' . ($sort == $k ? ($direction == 'desc' ? 'sorting_desc'
-                                    : 'sorting_asc') : '') . '">' . $v . '</th>';
+                            if ($direction === 'desc') {
+                                echo '<th class="col-' . $k . ' ' . ($sort === $k ? ('sorting_desc') : '') . '">' . $v . '</th>';
+                            } else {
+                                echo '<th class="col-' . $k . ' ' . ($sort === $k ? ('sorting_asc') : '') . '">' . $v . '</th>';
+                            }
                         } ?>
                     </tr>
                     </thead>
@@ -192,10 +195,13 @@ $rows    = $aData['aRows'];
 function showingResults()
 {
     $aData = __get('aData');
-    echo '<ul class="showing-results"><li><span>' . osc_pagination_showing((Params::getParam('iPage') - 1)
-            * $aData['iDisplayLength'] + 1,
-            ((Params::getParam('iPage') - 1) * $aData['iDisplayLength']) + count($aData['aRows']),
-            $aData['iTotalDisplayRecords'], $aData['iTotalRecords']) . '</span></li></ul>';
+    echo '<ul class="showing-results"><li><span>'
+         . osc_pagination_showing((Params::getParam('iPage') - 1)
+                                  * $aData['iDisplayLength'] + 1,
+                                  ((Params::getParam('iPage') - 1) * $aData['iDisplayLength'])
+                                  + count($aData['aRows']),
+                                  $aData['iTotalDisplayRecords'], $aData['iTotalRecords'])
+         . '</span></li></ul>';
 }
 
 

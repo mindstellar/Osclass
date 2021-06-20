@@ -172,13 +172,13 @@ $rows    = $aData['aRows'];
                         <option value=""><?php _e('Bulk Actions'); ?></option>
                         <option value="activate"
                                 data-dialog-content="<?php printf(__('Are you sure you want to %s the selected alerts?'),
-                                    strtolower(__('Activate'))); ?>"><?php _e('Activate'); ?></option>
+                                                                  strtolower(__('Activate'))); ?>"><?php _e('Activate'); ?></option>
                         <option value="deactivate"
                                 data-dialog-content="<?php printf(__('Are you sure you want to %s the selected alerts?'),
-                                    strtolower(__('Deactivate'))); ?>"><?php _e('Deactivate'); ?></option>
+                                                                  strtolower(__('Deactivate'))); ?>"><?php _e('Deactivate'); ?></option>
                         <option value="delete"
                                 data-dialog-content="<?php printf(__('Are you sure you want to %s the selected alerts?'),
-                                    strtolower(__('Delete'))); ?>"><?php _e('Delete'); ?></option>
+                                                                  strtolower(__('Delete'))); ?>"><?php _e('Delete'); ?></option>
                     </select> <input type="submit" id="bulk_apply" class="btn"
                                      value="<?php echo osc_esc_html(__('Apply')); ?>"/>
                 </label>
@@ -188,8 +188,13 @@ $rows    = $aData['aRows'];
                     <thead>
                     <tr>
                         <?php foreach ($columns as $k => $v) {
-                            echo '<th class="col-' . $k . ' ' . ($sort == $k ? ($direction == 'desc' ? 'sorting_desc'
-                                    : 'sorting_asc') : '') . '">' . $v . '</th>';
+                            if ($direction === 'desc') {
+                                echo '<th class="col-' . $k . ' ' . ($sort === $k ? ('sorting_desc')
+                                        : '') . '">' . $v . '</th>';
+                            } else {
+                                echo '<th class="col-' . $k . ' ' . ($sort === $k ? ('sorting_asc')
+                                        : '') . '">' . $v . '</th>';
+                            }
                         } ?>
                     </tr>
                     </thead>
@@ -219,10 +224,13 @@ $rows    = $aData['aRows'];
 function showingResults()
 {
     $aData = __get('aData');
-    echo '<ul class="showing-results"><li><span>' . osc_pagination_showing((Params::getParam('iPage') - 1)
-            * $aData['iDisplayLength'] + 1,
-            ((Params::getParam('iPage') - 1) * $aData['iDisplayLength']) + count($aData['aRows']),
-            $aData['iTotalDisplayRecords'], $aData['iTotalRecords']) . '</span></li></ul>';
+    echo '<ul class="showing-results"><li><span>'
+         . osc_pagination_showing((Params::getParam('iPage') - 1)
+                                  * $aData['iDisplayLength'] + 1,
+                                  ((Params::getParam('iPage') - 1) * $aData['iDisplayLength'])
+                                  + count($aData['aRows']),
+                                  $aData['iTotalDisplayRecords'], $aData['iTotalRecords'])
+         . '</span></li></ul>';
 }
 
 

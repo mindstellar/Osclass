@@ -31,8 +31,9 @@ function render_offset()
 function addHelp()
 {
     echo '<p>'
-        . __('Keep spammers from publishing on your site by configuring reCAPTCHA and Akismet. Be careful: in order to use these services, you must register on their sites first and follow their instructions.')
-        . '</p>';
+         . __('Keep spammers from publishing on your site by configuring reCAPTCHA and Akismet. '
+              . 'Be careful: in order to use these services, you must register on their sites first and follow their instructions.')
+         . '</p>';
 }
 
 
@@ -67,7 +68,8 @@ osc_current_admin_theme_path('parts/header.php'); ?>
     <h2 class="render-title"><?php _e('Spam and bots'); ?></h2>
     <div id="akismet-settings">
         <h3 class="render-title"><?php _e('Akismet'); ?></h3>
-        <p><?php _e("Akismet is a hosted web service that saves you time by automatically detecting comment and trackback spam. It's hosted on our servers, but we give you access to it through plugins and our API."); ?></p>
+        <p><?php _e("Akismet is a hosted web service that saves you time by automatically detecting comment and trackback spam. "
+                    . "It's hosted on our servers, but we give you access to it through plugins and our API."); ?></p>
         <form name="settings_form" action="<?php echo osc_admin_base_url(true); ?>" method="post">
             <input type="hidden" name="page" value="settings"/>
             <input type="hidden" name="action" value="akismet_post"/>
@@ -95,8 +97,7 @@ osc_current_admin_theme_path('parts/header.php'); ?>
                                     $alert_type = 'warning';
                                     $alert_msg  =
                                         sprintf(__('Akismet is disabled, please enter an API key. <a href="%s" target="_blank">(Get your key)</a>'),
-                                            'http://akismet.com/get/');
-                                    ;
+                                                'http://akismet.com/get/');
                                     break;
                             }
                             ?>
@@ -115,8 +116,9 @@ osc_current_admin_theme_path('parts/header.php'); ?>
     </div>
     <div id="recaptcha-settings" class="separate-top">
         <h3 class="render-title"><?php _e('reCAPTCHA'); ?></h3>
-        <p><?php printf(__('reCAPTCHA helps prevent automated abuse of your site by using a CAPTCHA to ensure that only humans perform certain actions. <a href="%s" target="_blank">Get your key</a>'),
-                'https://www.google.com/recaptcha/admin#whyrecaptcha'); ?></p>
+        <p><?php printf(__('reCAPTCHA helps prevent automated abuse of your site by using a CAPTCHA to ensure that '
+                           . 'only humans perform certain actions. <a href="%s" target="_blank">Get your key</a>'),
+                        'https://www.google.com/recaptcha/admin#whyrecaptcha'); ?></p>
         <form name="settings_form" action="<?php echo osc_admin_base_url(true); ?>" method="post">
             <input type="hidden" name="page" value="settings"/>
             <input type="hidden" name="action" value="recaptcha_post"/>
@@ -140,7 +142,9 @@ osc_current_admin_theme_path('parts/header.php'); ?>
                 </div>
                 <?php if (osc_recaptcha_public_key() != '') { ?>
                     <div class="form-row">
-                        <div class="form-label"><?php _e('If you see the reCAPTCHA form it means that you have correctly entered the public key'); ?></div>
+                        <div class="form-label">
+                            <?php _e('If you see the reCAPTCHA form it means that you have correctly entered the public key'); ?>
+                        </div>
                         <div class="form-controls">
                             <?php osc_show_recaptcha(); ?>
                         </div>
@@ -150,9 +154,8 @@ osc_current_admin_theme_path('parts/header.php'); ?>
                     <input type="submit" id="submit_recaptcha" value="<?php echo osc_esc_html(__('Save changes')); ?>"
                            class="btn btn-submit"/>
                 </div>
+            </fieldset>
+        </form>
     </div>
-    </fieldset>
-    </form>
-</div>
 </div>
 <?php osc_current_admin_theme_path('parts/footer.php'); ?>

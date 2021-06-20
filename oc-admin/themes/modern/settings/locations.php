@@ -160,10 +160,10 @@ osc_add_hook('admin_header', 'customHead', 10);
 function addHelp()
 {
     echo '<p>'
-        . __("Add, edit or delete the countries, regions and cities installed on your Osclass. "
-            . '<strong>Be careful</strong>: modifying locations can cause your statistics to be incorrect '
-            ."until they're recalculated. Modify only if you're sure what you're doing!")
-        . '</p>';
+         . __("Add, edit or delete the countries, regions and cities installed on your Osclass. "
+              . '<strong>Be careful</strong>: modifying locations can cause your statistics to be incorrect '
+              . "until they're recalculated. Modify only if you're sure what you're doing!")
+         . '</p>';
 }
 
 
@@ -400,7 +400,11 @@ osc_current_admin_theme_path('parts/header.php'); ?>
                                                value="<?php echo $country['pk_c_code']; ?>">
                                     </span>
                                             <a class="close"
-                                               href="<?php echo osc_admin_base_url(true); ?>?page=settings&action=locations&type=delete_country&id[]=<?php echo $country['pk_c_code']; ?>"
+                                               href="<?php
+                                               echo osc_admin_base_url(true);
+                                               ?>?page=settings&action=locations&type=delete_country&id[]=<?php
+                                               echo $country['pk_c_code'];
+                                               ?>"
                                                onclick="return delete_dialog('<?php echo $country['pk_c_code']; ?>', 'delete_country');">
                                                 <img src="<?php echo osc_admin_base_url(); ?>images/close.png"
                                                      alt="<?php echo osc_esc_html(__('Close')); ?>"
@@ -471,7 +475,7 @@ osc_current_admin_theme_path('parts/header.php'); ?>
             <div class="form-horizontal">
                 <div class="form-row">
                     <?php _e("This action can't be undone. Items associated to this location will be deleted. "
-                        . 'Users from this location will be unlinked, but not deleted. Are you sure you want to continue?'); ?>
+                             . 'Users from this location will be unlinked, but not deleted. Are you sure you want to continue?'); ?>
                 </div>
                 <div class="form-actions">
                     <div class="wrapper">
@@ -491,7 +495,7 @@ osc_current_admin_theme_path('parts/header.php'); ?>
             <div class="form-horizontal">
                 <div class="form-row">
                     <?php _e("Import a country with it's regions and cities from our database. "
-                        . "Already imported countries aren't shown."); ?>
+                             . "Already imported countries aren't shown."); ?>
                 </div>
                 <div class="form-row">
                     <table>
@@ -502,13 +506,15 @@ osc_current_admin_theme_path('parts/header.php'); ?>
                                 <?php if (count($locations)) { ?>
                                     <select name="location" required>
                                         <option value=""><?php _e('Select an option'); ?>
-                                            <?php foreach ($locations as $location) { ?>
-                                                <?php /* BUG: */
-                                                if ($location['name'] == '') {
-                                                    continue;
-                                                } ?>
+                                            <?php foreach ($locations
+
+                                            as $location) { ?>
+                                            <?php /* BUG: */
+                                            if ($location['name'] == '') {
+                                                continue;
+                                            } ?>
                                         <option value="<?php echo $location['file']; ?>"><?php echo $location['name']; ?></option>
-                                            <?php } ?>
+                                        <?php } ?>
                                     </select>
                                 <?php } else { ?>
                                     <p><?php _e('No locations available.'); ?></p>

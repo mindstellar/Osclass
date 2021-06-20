@@ -27,7 +27,7 @@ $admin = __get('admin');
  */
 function customFrmText()
 {
-    $admin = __get('admin');
+    $admin  = __get('admin');
     $return = array();
     if (isset($admin['pk_i_id'])) {
         $return['admin_edit'] = true;
@@ -99,16 +99,18 @@ osc_current_admin_theme_path('parts/header.php'); ?>
                         <div class="form-controls"><?php AdminForm::email_text($admin); ?></div>
                     </div>
                     <?php if (!$aux['admin_edit']
-                        || ($aux['admin_edit']
-                            && Params::getParam('id') != osc_logged_admin_id()
-                            && Params::getParam('id') != '')
+                              || ($aux['admin_edit']
+                                  && Params::getParam('id') != osc_logged_admin_id()
+                                  && Params::getParam('id') != '')
                     ) { ?>
                         <div class="form-row">
                             <div class="form-label"><?php _e('Admin type <em>(required)</em>'); ?></div>
                             <div class="form-controls">
-                                                        <?php AdminForm::type_select($admin); ?>
+                                <?php AdminForm::type_select($admin); ?>
                                 <p class="help-inline">
-                                    <em><?php _e('Administrators have total control over all aspects of your installation, while moderators are only allowed to moderate listings, comments and media files'); ?></em>
+                                    <em><?php _e('Administrators have total control over all aspects of your installation, '
+                                                 . 'while moderators are only allowed to moderate listings, comments and media files');
+                                        ?></em>
                                 </p>
                             </div>
                         </div>

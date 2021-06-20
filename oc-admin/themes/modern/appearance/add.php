@@ -22,8 +22,9 @@
 function addHelp()
 {
     echo '<p>'
-        . __('Manually add Osclass themes in .zip format. If you prefer, you can manually upload the decompressed theme to <em>oc-content/themes</em>.')
-        . '</p>';
+         . __('Manually add Osclass themes in .zip format. If you prefer, '
+              . 'you can manually upload the decompressed theme to <em>oc-content/themes</em>.')
+         . '</p>';
 }
 
 
@@ -80,7 +81,8 @@ osc_current_admin_theme_path('parts/header.php'); ?>
                     <p><?php _e("Can't install a new theme"); ?></p>
                 </div>
                 <p class="text">
-                    <?php _e("The theme folder is not writable on your server so you can't upload themes from the administration panel. Please make the theme folder writable and try again."); ?>
+                    <?php _e("The theme folder is not writable on your server so you can't upload themes from "
+                             . "the administration panel. Please make the theme folder writable and try again."); ?>
                 </p>
                 <p class="text">
                     <?php _e('To make the directory writable under UNIX execute this command from the shell:'); ?>

@@ -22,8 +22,9 @@
 function addHelp()
 {
     echo '<p>'
-        . __('Manage the images that users have uploaded along with their listings. You can delete them without deleting the whole listing if the image is inappropriate or doesn’t match the listing.')
-        . '</p>';
+         . __('Manage the images that users have uploaded along with their listings. '
+              . 'You can delete them without deleting the whole listing if the image is inappropriate or doesn’t match the listing.')
+         . '</p>';
 }
 
 
@@ -165,7 +166,7 @@ $rows    = $aData['aRows'];
                         }
                     };
                     foreach ($columns as $k => $v) {
-                            $create_table_head($direction, $sort, $k, $v);
+                        $create_table_head($direction, $sort, $k, $v);
                     } ?>
                 </tr>
                 </thead>
@@ -194,12 +195,12 @@ function showingResults()
 {
     $aData = __get('aData');
     echo '<ul class="showing-results"><li><span>' . osc_pagination_showing(
-        (Params::getParam('iPage') - 1)
+            (Params::getParam('iPage') - 1)
             * $aData['iDisplayLength'] + 1,
-        ((Params::getParam('iPage') - 1) * $aData['iDisplayLength']) + count($aData['aRows']),
-        $aData['iTotalDisplayRecords'],
-        $aData['iTotalRecords']
-    ) . '</span></li></ul>';
+            ((Params::getParam('iPage') - 1) * $aData['iDisplayLength']) + count($aData['aRows']),
+            $aData['iTotalDisplayRecords'],
+            $aData['iTotalRecords']
+        ) . '</span></li></ul>';
 }
 
 

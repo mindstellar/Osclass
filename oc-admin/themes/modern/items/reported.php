@@ -22,8 +22,8 @@
 function addHelp()
 {
     echo '<p>'
-        . __('From here, you can edit or delete the listings reported by users (spam, misclassified, duplicate, expired, offensive). You can also delete the report if you consider it mistaken.')
-        . '</p>';
+         . __('From here, you can edit or delete the listings reported by users (spam, misclassified, duplicate, expired, offensive). You can also delete the report if you consider it mistaken.')
+         . '</p>';
 }
 
 
@@ -149,13 +149,13 @@ osc_current_admin_theme_path('parts/header.php'); ?>
                         <option value="10"><?php printf(__('%d Listings'), 10); ?></option>
                         <option value="25" <?php if (Params::getParam('iDisplayLength') == 25) {
                             echo 'selected';
-                                           } ?> ><?php printf(__('%d Listings'), 25); ?></option>
+                        } ?> ><?php printf(__('%d Listings'), 25); ?></option>
                         <option value="50" <?php if (Params::getParam('iDisplayLength') == 50) {
                             echo 'selected';
-                                           } ?> ><?php printf(__('%d Listings'), 50); ?></option>
+                        } ?> ><?php printf(__('%d Listings'), 50); ?></option>
                         <option value="100" <?php if (Params::getParam('iDisplayLength') == 100) {
                             echo 'selected';
-                                            } ?> ><?php printf(__('%d Listings'), 100); ?></option>
+                        } ?> ><?php printf(__('%d Listings'), 100); ?></option>
                     </select>
                 </form>
                 <?php if ($sort != 'date') { ?>
@@ -173,7 +173,7 @@ osc_current_admin_theme_path('parts/header.php'); ?>
                         <option value=""><?php _e('Bulk actions'); ?></option>
                         <option value="delete_all"
                                 data-dialog-content="<?php printf(__('Are you sure you want to %s the selected items?'),
-                                    strtolower(__('Delete'))); ?>"><?php _e('Delete'); ?></option>
+                                                                  strtolower(__('Delete'))); ?>"><?php _e('Delete'); ?></option>
                         <option value="clear_all"
                                 data-dialog-content="<?php _e('Are you sure you want to clear all the reportings of the selected items?'); ?>"><?php _e('Clear All'); ?></option>
                         <option value="clear_spam_all"

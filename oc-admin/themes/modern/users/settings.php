@@ -22,8 +22,9 @@
 function addHelp()
 {
     echo '<p>'
-        . __('Manage the options related to users on your site. Here, you can decide if users must register or if email confirmation is necessary, among other options.')
-        . '</p>';
+         . __('Manage the options related to users on your site. Here, you can decide if users must register or if '
+              . 'email confirmation is necessary, among other options.')
+         . '</p>';
 }
 
 
@@ -75,7 +76,7 @@ osc_current_admin_theme_path('parts/header.php'); ?>
                         <label id="enabled_user_registration">
                             <input type="checkbox" id="enabled_user_registration"
                                    name="enabled_user_registration" <?php echo(osc_user_registration_enabled()
-                                    ? 'checked="checked"' : ''); ?> value="1"/>
+                                ? 'checked="checked"' : ''); ?> value="1"/>
                             <?php _e('Anyone can register'); ?>
                         </label>
                     </div>
@@ -83,7 +84,7 @@ osc_current_admin_theme_path('parts/header.php'); ?>
                         <label id="enabled_user_validation">
                             <input type="checkbox" id="enabled_user_validation"
                                    name="enabled_user_validation" <?php echo(osc_user_validation_enabled()
-                                    ? 'checked="checked"' : ''); ?> value="1"/>
+                                ? 'checked="checked"' : ''); ?> value="1"/>
                             <?php _e('Users need to validate their account'); ?>
                         </label>
                     </div>
@@ -94,7 +95,7 @@ osc_current_admin_theme_path('parts/header.php'); ?>
                         <label id="notify_new_user" class="form-label-checkbox">
                             <input type="checkbox" id="notify_new_user"
                                    name="notify_new_user" <?php echo(osc_notify_new_user() ? 'checked="checked"'
-                                    : ''); ?> value="1"/>
+                                : ''); ?> value="1"/>
                             <?php _e('When a new user is registered'); ?>
                         </label>
                     </div>

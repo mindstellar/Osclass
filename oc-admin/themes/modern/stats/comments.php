@@ -148,7 +148,7 @@ function customHead()
             });
         }
     </script>
-    <?php }
+<?php }
 }
 
 
@@ -163,18 +163,23 @@ osc_add_hook('admin_header', 'customHead', 10);
         </div>
         <div class="grid-row grid-50 no-bottom-margin">
             <div class="row-wrapper">
-                <a id="monthly" class="btn float-right <?php if ($type == 'month') {
-                    echo 'btn-green';
-                                                       } ?>"
-                   href="<?php echo osc_admin_base_url(true); ?>?page=stats&amp;action=comments&amp;type_stat=month"><?php _e('Last 10 months'); ?></a>
-                <a id="weekly" class="btn float-right <?php if ($type == 'week') {
-                    echo 'btn-green';
-                                                      } ?>"
-                   href="<?php echo osc_admin_base_url(true); ?>?page=stats&amp;action=comments&amp;type_stat=week"><?php _e('Last 10 weeks'); ?></a>
-                <a id="daily" class="btn float-right <?php if ($type == '' || $type == 'day') {
-                    echo 'btn-green';
-                                                     } ?>"
-                   href="<?php echo osc_admin_base_url(true); ?>?page=stats&amp;action=comments&amp;type_stat=day"><?php _e('Last 10 days'); ?></a>
+                <?php
+                $comments_stats_intervals = ['month', 'week', 'day'];
+                foreach ($comments_stats_intervals as $k => $v) {
+                    echo '<a id="' . $v . '" class="btn float-right';
+                    if ($type === $v) {
+                        echo ' btn-green';
+                    }
+                    echo '" href="' . osc_admin_base_url(true) . '?page=stats&amp;action=comments&amp;type_stat=' . $v . '">';
+                    if ($v === 'month') {
+                        echo __('Last 10 months');
+                    } elseif ($v === 'week') {
+                        echo __('Last 10 weeks');
+                    } elseif ($v === 'day') {
+                        echo __('Last 10 days');
+                    }
+                    echo '</a>';
+                } ?>
             </div>
         </div>
         <div class="grid-row grid-50 clear">
@@ -220,7 +225,9 @@ osc_add_hook('admin_header', 'customHead', 10);
                                         </td>
                                         <td>
                                             <a href="<?php echo osc_admin_base_url(true); ?>?page=comments&amp;action=comment_edit&amp;id=<?php echo $c['pk_i_id']; ?>"><?php echo $c['s_author_name']
-                                                    . ' - ' . $c['s_author_email']; ?></a></td>
+                                                                                                                                                                                   . ' - '
+                                                                                                                                                                                   . $c['s_author_email']; ?></a>
+                                        </td>
                                         <td>
                                             <a href="<?php echo osc_admin_base_url(true); ?>?page=comments&amp;action=comment_edit&amp;id=<?php echo $c['pk_i_id']; ?>"><?php echo $c['s_body']; ?></a>
                                         </td>

@@ -57,16 +57,17 @@ function customHead()
 
             $.get('<?php echo osc_admin_base_url(true); ?>?page=ajax&action=upgrade-db', function (data) {
                 $('#loading_image').hide();
-                if(data.status) {
-                        $("#result").append("Success: " + data.message + "<br />");
+                if (data.status) {
+                    $("#result").append("Success: " + data.message + "<br />");
                 } else {
-                        $("#result").append("Error: " + data.message.replace(/\n/g,"<br />"));
+                    $("#result").append("Error: " + data.message.replace(/\n/g, "<br />"));
                 }
-            },'json');
+            }, 'json');
             <?php } ?>
         });
     </script>
 <?php }
+
 
 osc_add_hook('admin_header', 'customHead', 10);
 

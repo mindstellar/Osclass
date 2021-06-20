@@ -22,8 +22,8 @@
 function addHelp()
 {
     echo '<p>'
-        . __("Add new currencies or edit existing currencies so users can publish listings in their country's currency.")
-        . '</p>';
+         . __("Add new currencies or edit existing currencies so users can publish listings in their country's currency.")
+         . '</p>';
 }
 
 
@@ -134,7 +134,7 @@ foreach ($aCurrencies as $currency) {
         . '?page=settings&amp;action=currencies&amp;type=delete&amp;code=' . $currency['pk_c_code'] . '">'
         . __('Delete') . '</a>';
     $options[] = '<a href="' . osc_admin_base_url(true) . '?page=settings&amp;action=currencies&amp;type=edit&amp;code='
-        . $currency['pk_c_code'] . '">' . __('Edit') . '</a>';
+                 . $currency['pk_c_code'] . '">' . __('Edit') . '</a>';
 
     $row[]   = $currency['pk_c_code'] . ' (' . implode(' &middot; ', $options) . ')';
     $row[]   = $currency['s_name'];

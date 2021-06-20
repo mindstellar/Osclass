@@ -156,9 +156,9 @@ osc_current_admin_theme_path('parts/header.php'); ?>
                         </div>
                         <div class="form-label-checkbox-offset">
                             <?php printf(__('Before a comment appears, comment author must have at least %s previously approved comments'),
-                                '<input type="text" class="input-small" name="num_moderate_comments" value="'
-                                . ((osc_moderate_comments() == -1) ? '0' : osc_esc_html(osc_moderate_comments()))
-                                . '" />'); ?>
+                                         '<input type="text" class="input-small" name="num_moderate_comments" value="'
+                                         . ((osc_moderate_comments() == -1) ? '0' : osc_esc_html(osc_moderate_comments()))
+                                         . '" />'); ?>
                             <div class="help-box"><?php _e('If the value is zero, an administrator must always approve comments'); ?></div>
                         </div>
                     </div>
@@ -167,8 +167,8 @@ osc_current_admin_theme_path('parts/header.php'); ?>
                     <div class="form-label"><?php _e('Other comment settings'); ?></div>
                     <div class="form-controls">
                         <?php printf(__('Break comments into pages with %s comments per page'),
-                            '<input type="text" class="input-small" name="comments_per_page" value="'
-                            . osc_esc_html(osc_comments_per_page()) . '" />'); ?>
+                                     '<input type="text" class="input-small" name="comments_per_page" value="'
+                                     . osc_esc_html(osc_comments_per_page()) . '" />'); ?>
                         <div class="help-box"><?php _e('If the value is zero all comments are shown'); ?></div>
                     </div>
                 </div>

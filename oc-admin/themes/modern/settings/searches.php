@@ -49,7 +49,7 @@ function customHead()
                     custom_queries: {
                         digits: '<?php
                             echo osc_esc_js(__('Custom number: this field must only contain numeric characters'));
-                        ?>.',
+                            ?>.',
                         customrule: '<?php echo osc_esc_js(__('Custom number: this field cannot be left empty')); ?>.'
                     }
                 },
@@ -83,9 +83,9 @@ function render_offset()
 function addHelp()
 {
     echo '<p>'
-        . __("Save the searches users do on your site. In this way, you can get information on what they're most "
-            . 'interested in. From here, you can manage the options on how much information you want to save.')
-        . '</p>';
+         . __("Save the searches users do on your site. In this way, you can get information on what they're most "
+              . 'interested in. From here, you can manage the options on how much information you want to save.')
+         . '</p>';
 }
 
 
@@ -145,35 +145,35 @@ osc_current_admin_theme_path('parts/header.php'); ?>
                             <div>
                                 <input type="radio" name="purge_searches"
                                        value="hour" <?php echo((osc_purge_latest_searches() === 'hour')
-                                        ? 'checked="checked"' : ''); ?>
+                                    ? 'checked="checked"' : ''); ?>
                                        onclick="document.getElementById('customPurge').value = 'hour';"/>
                                 <?php _e('One hour'); ?>
                             </div>
                             <div>
                                 <input type="radio" name="purge_searches"
                                        value="day" <?php echo((osc_purge_latest_searches() === 'day')
-                                        ? 'checked="checked"' : ''); ?>
+                                    ? 'checked="checked"' : ''); ?>
                                        onclick="document.getElementById('customPurge').value = 'day';"/>
                                 <?php _e('One day'); ?>
                             </div>
                             <div>
                                 <input type="radio" name="purge_searches"
                                        value="week" <?php echo((osc_purge_latest_searches() === 'week')
-                                        ? 'checked="checked"' : ''); ?>
+                                    ? 'checked="checked"' : ''); ?>
                                        onclick="document.getElementById('customPurge').value = 'week';"/>
                                 <?php _e('One week'); ?>
                             </div>
                             <div>
                                 <input type="radio" name="purge_searches"
                                        value="forever" <?php echo((osc_purge_latest_searches() === 'forever')
-                                        ? 'checked="checked"' : ''); ?>
+                                    ? 'checked="checked"' : ''); ?>
                                        onclick="document.getElementById('customPurge').value = 'forever';"/>
                                 <?php _e('Forever'); ?>
                             </div>
                             <div>
                                 <input type="radio" name="purge_searches"
                                        value="1000" <?php echo((osc_purge_latest_searches() == '1000')
-                                        ? 'checked="checked"' : ''); ?>
+                                    ? 'checked="checked"' : ''); ?>
                                        onclick="document.getElementById('customPurge').value = '1000';"/>
                                 <?php _e('Store 1000 queries'); ?>
                             </div>

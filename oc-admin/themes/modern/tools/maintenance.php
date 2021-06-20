@@ -33,8 +33,8 @@ function render_offset()
 function addHelp()
 {
     echo '<p>'
-        . __('Show a "Site in maintenance mode" message to your users while you\'re updating your site or modifying its configuration.')
-        . '</p>';
+         . __('Show a "Site in maintenance mode" message to your users while you\'re updating your site or modifying its configuration.')
+         . '</p>';
 }
 
 
@@ -73,7 +73,8 @@ osc_current_admin_theme_path('parts/header.php'); ?>
             <fieldset>
                 <div class="form-horizontal">
                     <div class="form-row">
-                        <?php _e("While in maintenance mode, users can't access your website. Useful if you need to make changes on your website. Use the following button to toggle maintenance mode ON/OFF."); ?>
+                        <?php _e("While in maintenance mode, users can't access your website. Useful if you need to "
+                                 . "make changes on your website. Use the following button to toggle maintenance mode ON/OFF."); ?>
                         <div class="help-box">
                             <?php printf(__('Maintenance mode is: <strong>%s</strong>'),
                                 ($maintenance ? __('ON') : __('OFF'))); ?>
@@ -83,8 +84,10 @@ osc_current_admin_theme_path('parts/header.php'); ?>
                         <input type="button"
                                value="<?php echo($maintenance ? osc_esc_html(__('Disable maintenance mode'))
                                    : osc_esc_html(__('Enable maintenance mode'))); ?>"
-                               onclick="window.location.href='<?php echo osc_admin_base_url(true); ?>?page=tools&amp;action=maintenance&amp;mode=<?php echo ($maintenance
-                                       ? 'off' : 'on') . '&amp;' . osc_csrf_token_url(); ?>';" class="btn btn-submit"/>
+                               onclick="window.location.href='<?php echo osc_admin_base_url(true);
+                               ?>?page=tools&amp;action=maintenance&amp;mode=<?php
+                               echo ($maintenance ? 'off' : 'on') . '&amp;' . osc_csrf_token_url();
+                               ?>';" class="btn btn-submit"/>
                     </div>
                 </div>
             </fieldset>

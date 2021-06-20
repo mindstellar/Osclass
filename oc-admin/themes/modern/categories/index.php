@@ -29,8 +29,8 @@ $categories = __get('categories');
 function addHelp()
 {
     echo '<p>'
-        . __('Add, edit or delete the categories or subcategories in which users can post listings. Reorder sections by dragging and dropping, or nest a subcategory in an expanded category. <strong>Be careful</strong>: If you delete a category, all listings associated will also be deleted!')
-        . '</p>';
+         . __('Add, edit or delete the categories or subcategories in which users can post listings. Reorder sections by dragging and dropping, or nest a subcategory in an expanded category. <strong>Be careful</strong>: If you delete a category, all listings associated will also be deleted!')
+         . '</p>';
 }
 
 
@@ -159,7 +159,7 @@ function customHead()
                         $.ajax({
                             type: 'POST',
                             url: "<?php echo osc_admin_base_url(true) . '?page=ajax&action=categories_order&'
-                                . osc_csrf_token_url(); ?>",
+                                             . osc_csrf_token_url(); ?>",
                             data: {'list': JSON.stringify(plist)},
                             context: document.body,
                             success: function (res) {

@@ -22,8 +22,9 @@
 function addHelp()
 {
     echo '<p>'
-        . __('Manage the comments that users publish on the listings on your site. You can also edit, delete, activate or block comments.')
-        . '</p>';
+         . __('Manage the comments that users publish on the listings on your site.'
+              . ' You can also edit, delete, activate or block comments.')
+         . '</p>';
 }
 
 
@@ -154,7 +155,7 @@ osc_current_admin_theme_path('parts/header.php'); ?>
         <div id="bulk-actions">
             <label>
                 <?php osc_print_bulk_actions('bulk_actions', 'bulk_actions', __get('bulk_options'),
-                    'select-box-extra'); ?>
+                                             'select-box-extra'); ?>
                 <input type="submit" id="bulk_apply" class="btn" value="<?php echo osc_esc_html(__('Apply')); ?>"/>
             </label>
         </div>
@@ -163,8 +164,11 @@ osc_current_admin_theme_path('parts/header.php'); ?>
                 <thead>
                 <tr>
                     <?php foreach ($columns as $k => $v) {
-                        echo '<th class="col-' . $k . ' ' . ($sort == $k ? ($direction == 'desc' ? 'sorting_desc'
-                                : 'sorting_asc') : '') . '">' . $v . '</th>';
+                        if ($direction === 'desc') {
+                            echo '<th class="col-' . $k . ' ' . ($sort == $k ? ('sorting_desc') : '') . '">' . $v . '</th>';
+                        } else {
+                            echo '<th class="col-' . $k . ' ' . ($sort == $k ? ('sorting_asc') : '') . '">' . $v . '</th>';
+                        }
                     } ?>
                 </tr>
                 </thead>
@@ -172,7 +176,7 @@ osc_current_admin_theme_path('parts/header.php'); ?>
                 <?php if (count($rows) > 0) { ?>
                     <?php foreach ($rows as $key => $row) { ?>
                         <tr class="<?php echo implode(' ',
-                            osc_apply_filter('datatable_comment_class', array(), $aRawRows[$key], $row)); ?>">
+                                                      osc_apply_filter('datatable_comment_class', array(), $aRawRows[$key], $row)); ?>">
                             <?php foreach ($row as $k => $v) { ?>
                                 <td class="col-<?php echo $k; ?>"><?php echo $v; ?></td>
                             <?php } ?>
@@ -195,10 +199,13 @@ osc_current_admin_theme_path('parts/header.php'); ?>
 function showingResults()
 {
     $aData = __get('aData');
-    echo '<ul class="showing-results"><li><span>' . osc_pagination_showing((Params::getParam('iPage') - 1)
-            * $aData['iDisplayLength'] + 1,
-            ((Params::getParam('iPage') - 1) * $aData['iDisplayLength']) + count($aData['aRows']),
-            $aData['iTotalDisplayRecords'], $aData['iTotalRecords']) . '</span></li></ul>';
+    echo '<ul class="showing-results"><li><span>'
+         . osc_pagination_showing((Params::getParam('iPage') - 1)
+                                  * $aData['iDisplayLength'] + 1,
+                                  ((Params::getParam('iPage') - 1) * $aData['iDisplayLength'])
+                                  + count($aData['aRows']),
+                                  $aData['iTotalDisplayRecords'], $aData['iTotalRecords'])
+         . '</span></li></ul>';
 }
 
 

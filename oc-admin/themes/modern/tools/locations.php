@@ -101,32 +101,32 @@ function customPageTitle($string)
 osc_add_filter('admin_title', 'customPageTitle');
 
 osc_current_admin_theme_path('parts/header.php'); ?>
-    <div id="locations-stats-setting">
-        <!-- settings form -->
-        <div id="">
-            <h2 class="render-title"><?php _e('Locations stats'); ?></h2>
-            <?php if ($worktodo > 0) { ?>
-                <p>
-                    <span id="percent">0</span> % <?php _e('Complete'); ?>
-                </p>
-            <?php } ?>
+<div id="locations-stats-setting">
+    <!-- settings form -->
+    <div id="">
+        <h2 class="render-title"><?php _e('Locations stats'); ?></h2>
+        <?php if ($worktodo > 0) { ?>
             <p>
-                <?php _e('You can recalculate your location stats if they are incorrect.'); ?>
+                <span id="percent">0</span> % <?php _e('Complete'); ?>
             </p>
-            <form action="<?php echo osc_admin_base_url(true); ?>" method="post">
-                <input type="hidden" name="action" value="locations_post"/>
-                <input type="hidden" name="page" value="tools"/>
-                <fieldset>
-                    <div class="form-horizontal">
-                        <div class="form-actions">
-                            <input id="button_save" type="submit"
-                                   value="<?php echo osc_esc_html(__('Calculate location stats')); ?>"
-                                   class="btn btn-submit"/>
-                        </div>
+        <?php } ?>
+        <p>
+            <?php _e('You can recalculate your location stats if they are incorrect.'); ?>
+        </p>
+        <form action="<?php echo osc_admin_base_url(true); ?>" method="post">
+            <input type="hidden" name="action" value="locations_post"/>
+            <input type="hidden" name="page" value="tools"/>
+            <fieldset>
+                <div class="form-horizontal">
+                    <div class="form-actions">
+                        <input id="button_save" type="submit"
+                               value="<?php echo osc_esc_html(__('Calculate location stats')); ?>"
+                               class="btn btn-submit"/>
                     </div>
-                </fieldset>
-            </form>
-        </div>
-        <!-- /settings form -->
+                </div>
+            </fieldset>
+        </form>
     </div>
+    <!-- /settings form -->
+</div>
 <?php osc_current_admin_theme_path('parts/footer.php'); ?>

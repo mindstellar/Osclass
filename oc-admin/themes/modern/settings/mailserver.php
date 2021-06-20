@@ -27,10 +27,8 @@ function customHead()
         jQuery(document).ready(function () {
             $('select[name="mailserver_type"]').bind('change', function () {
                 if ($(this).val() == 'gmail') {
-                    $('input[name="mailserver_host"]').val('smtp.gmail.com');
-                    $('input[name="mailserver_host"]').attr('readonly', true);
-                    $('input[name="mailserver_port"]').val('465');
-                    $('input[name="mailserver_port"]').attr('readonly', true);
+                    $('input[name="mailserver_host"]').val('smtp.gmail.com').attr('readonly', true);
+                    $('input[name="mailserver_port"]').val('465').attr('readonly', true);
                     $('input[name="mailserver_username"]').val('');
                     $('input[name="mailserver_password"]').val('');
                     $('input[name="mailserver_ssl"]').val('ssl');
@@ -77,8 +75,10 @@ function render_offset()
 function addHelp()
 {
     echo '<p>'
-        . __("Modify the settings of the mail server from which your site's emails are sent. <strong>Be careful</strong>: these settings can vary depending on your hosting or server. If you run into any issues, check your hosting's help section.")
-        . '</p>';
+         . __("Modify the settings of the mail server from which your site's emails are sent. <strong>Be careful</strong>"
+              . ": these settings can vary depending on your hosting or server. If you run into any issues"
+              . ", check your hosting's help section.")
+         . '</p>';
 }
 
 
@@ -123,9 +123,9 @@ osc_current_admin_theme_path('parts/header.php'); ?>
                         <div class="form-label"><?php _e('Server type'); ?></div>
                         <div class="form-controls">
                             <select name="mailserver_type">
-                                <option value="custom" <?php echo (osc_mailserver_type() == 'custom')
+                                <option value="custom" <?php echo (osc_mailserver_type() === 'custom')
                                     ? 'selected="true"' : ''; ?>><?php _e('Custom Server'); ?></option>
-                                <option value="gmail" <?php echo (osc_mailserver_type() == 'gmail') ? 'selected="true"'
+                                <option value="gmail" <?php echo (osc_mailserver_type() === 'gmail') ? 'selected="true"'
                                     : ''; ?>><?php _e('GMail Server'); ?></option>
                             </select>
                         </div>
@@ -178,7 +178,7 @@ osc_current_admin_theme_path('parts/header.php'); ?>
                             <input type="text" class="input-medium" name="mailserver_ssl"
                                    value="<?php echo osc_esc_html(osc_mailserver_ssl()); ?>"/>
                             <?php _e('Options: blank, ssl or tls'); ?>
-                            <?php if (php_sapi_name() == 'cgi-fcgi' || php_sapi_name() == 'cgi') { ?>
+                            <?php if (php_sapi_name() === 'cgi-fcgi' || php_sapi_name() === 'cgi') { ?>
                                 <div class="flashmessage flashmessage-inline warning">
                                     <p><?php _e('Cannot be sure that Apache Module <b>mod_ssl</b> is loaded.'); ?></p>
                                 </div>

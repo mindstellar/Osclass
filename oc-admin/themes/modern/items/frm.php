@@ -142,8 +142,8 @@ function customHead()
     </script>
     <?php ItemForm::location_javascript_new('admin'); ?>
     <?php if (osc_images_enabled_at_items()) {
-        ItemForm::photos_javascript();
-    } ?>
+    ItemForm::photos_javascript();
+} ?>
     <?php
 }
 
@@ -223,8 +223,8 @@ osc_current_admin_theme_path('parts/header.php'); ?>
                                 <?php ItemForm::photos(); ?>
                                 <div id="photos">
                                     <?php if (osc_max_images_per_item() == 0
-                                        || (osc_max_images_per_item() != 0
-                                            && osc_count_item_resources() < osc_max_images_per_item())
+                                              || (osc_max_images_per_item() != 0
+                                                  && osc_count_item_resources() < osc_max_images_per_item())
                                     ) { ?>
                                         <div>
                                             <input type="file" name="photos[]"/> (<?php _e('optional'); ?>)
@@ -305,7 +305,8 @@ osc_current_admin_theme_path('parts/header.php'); ?>
                                 <div class="input-has-placeholder input-separate-top">
                                     <?php ItemForm::expiration_input('add'); ?>
                                 </div>
-                                <label><?php _e('It could be an integer (days from original publishing date it will be expired, 0 to never expire) or a date in the format "yyyy-mm-dd hh:mm:ss"'); ?></label>
+                                <label><?php _e('It could be an integer (days from original publishing date it will '
+                                                . 'be expired, 0 to never expire) or a date in the format "yyyy-mm-dd hh:mm:ss"'); ?></label>
                             <?php } elseif (!$new_item) { ?>
                                 <div class="input-separate-top">
                                     <label><input type="checkbox" id="update_expiration" name="update_expiration"
@@ -315,7 +316,9 @@ osc_current_admin_theme_path('parts/header.php'); ?>
                                         <div class="input-has-placeholder input-separate-top">
                                             <?php ItemForm::expiration_input('edit'); ?>
                                         </div>
-                                        <label><?php _e('It could be an integer (days from original publishing date it will be expired, 0 to never expire) or a date in the format "yyyy-mm-dd hh:mm:ss"'); ?></label>
+                                        <label><?php _e('It could be an integer (days from original publishing date '
+                                                        . 'it will be expired, 0 to never expire) or a date in the format '
+                                                        . '"yyyy-mm-dd hh:mm:ss"'); ?></label>
                                     </div>
                                 </div>
                             <?php } ?>
@@ -342,7 +345,8 @@ osc_current_admin_theme_path('parts/header.php'); ?>
         theme_advanced_toolbar_location: 'top',
         theme_advanced_buttons1_add: 'forecolorpicker,fontsizeselect',
         theme_advanced_buttons2_add: 'media',
-        plugins: 'advlist autolink lists link image charmap preview anchor searchreplace visualblocks code fullscreen insertdatetime media table paste'
+        plugins: 'advlist autolink lists link image charmap preview anchor searchreplace ' +
+            'visualblocks code fullscreen insertdatetime media table paste'
     });
 </script>
 <?php osc_current_admin_theme_path('parts/footer.php'); ?>

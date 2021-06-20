@@ -85,7 +85,8 @@ $selected   = __get('selected');
                     <div class="form-row">
                         <div class="form-label"></div>
                         <div class="form-controls">
-                            <label><?php FieldForm::searchable_checkbox($field); ?><?php _e('Tick to allow searches by this field'); ?></label>
+                            <label><?php FieldForm::searchable_checkbox($field); ?><?php
+                                _e('Tick to allow searches by this field'); ?></label>
                         </div>
                     </div>
                 </div>
@@ -118,7 +119,9 @@ $selected   = __get('selected');
         $('select[name="field_type"]').change();
 
         $('#edit-custom-field-frame form').submit(function () {
-            if (($('select[name="field_type"]').prop('value') == 'DROPDOWN' || $('select[name="field_type"]').prop('value') == 'RADIO') && $("#s_options").prop("value") == "") {
+            if (($('select[name="field_type"]').prop('value') == 'DROPDOWN'
+                || $('select[name="field_type"]').prop('value') == 'RADIO')
+                && $("#s_options").prop("value") == "") {
                 $(".jsMessage").fadeIn('fast');
                 $(".jsMessage p").html('<?php echo osc_esc_js(__('At least one option is required.')); ?>');
                 return false;

@@ -22,8 +22,9 @@
 function addHelp()
 {
     echo '<p>'
-        . __('Add users who can manage your page. You can add admins or moderators: admins have access to the whole admin panel while moderators can only modify listings and see stats.')
-        . '</p>';
+         . __('Add users who can manage your page. You can add admins or moderators: '
+              . 'admins have access to the whole admin panel while moderators can only modify listings and see stats.')
+         . '</p>';
 }
 
 
@@ -140,7 +141,7 @@ osc_current_admin_theme_path('parts/header.php'); ?>
             <div id="bulk-actions">
                 <label>
                     <?php osc_print_bulk_actions('bulk_actions', 'action', __get('bulk_options'),
-                        'select-box-extra'); ?>
+                                                 'select-box-extra'); ?>
                     <input type="submit" id="bulk_apply" class="btn" value="<?php echo osc_esc_html(__('Apply')); ?>"/>
                 </label>
             </div>
@@ -186,10 +187,12 @@ osc_current_admin_theme_path('parts/header.php'); ?>
 function showingResults()
 {
     $aData = __get('aAdmins');
-    echo '<ul class="showing-results"><li><span>' . osc_pagination_showing((Params::getParam('iPage') - 1)
-            * $aData['iDisplayLength'] + 1,
-            ((Params::getParam('iPage') - 1) * $aData['iDisplayLength']) + count($aData['aaData']),
-            $aData['iTotalDisplayRecords']) . '</span></li></ul>';
+    echo '<ul class="showing-results"><li><span>'
+         . osc_pagination_showing((Params::getParam('iPage') - 1)
+                                  * $aData['iDisplayLength'] + 1,
+                                  ((Params::getParam('iPage') - 1) * $aData['iDisplayLength'])
+                                  + count($aData['aaData']),
+                                  $aData['iTotalDisplayRecords']) . '</span></li></ul>';
 }
 
 

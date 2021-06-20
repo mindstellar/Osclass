@@ -47,8 +47,9 @@ function render_offset()
 function addHelp()
 {
     echo '<p>'
-        . __("Save a backup of all of your site's information: listings, users and configuration. You can save a backup on your server or on your computer.")
-        . '</p>';
+         . __("Save a backup of all of your site's information: listings, users and configuration."
+              . " You can save a backup on your server or on your computer.")
+         . '</p>';
 }
 
 
@@ -94,7 +95,8 @@ osc_current_admin_theme_path('parts/header.php'); ?>
                                 <input type="text" class="input-large" name="bck_dir"
                                        value="<?php echo osc_esc_html(osc_base_path()); ?>"/>
                                 <div class="help-box">
-                                    <?php _e("<strong>WARNING</strong>: If you don't specify a backup folder, the backup files will be created in the root of your Osclass installation."); ?>
+                                    <?php _e("<strong>WARNING</strong>: If you don't specify a backup folder, "
+                                             . "the backup files will be created in the root of your Osclass installation."); ?>
                                     <br/>
                                     <?php _e('This is the folder in which your backups will be created. We recommend that you choose a non-public path.'); ?>
                                 </div>
