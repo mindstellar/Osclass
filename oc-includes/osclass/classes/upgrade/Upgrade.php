@@ -72,9 +72,7 @@ class Upgrade
     public function doUpgrade()
     {
         if ($this->packageInfoValid !== true) {
-            throw new RuntimeException(sprintf(
-                __('Unable to follow upgrade, invalid package info')
-            ));
+            throw new RuntimeException(__('Unable to follow upgrade, invalid package info'));
         }
         if ($this->objPackage->isCompatible() && $this->objPackage->isUpgradable()) {
             $this->processUpgrade();

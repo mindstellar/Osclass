@@ -441,7 +441,7 @@ class ItemActions
         $spam = false;
         if (osc_akismet_key()) {
             foreach ($title as $k => $_data) {
-                $_title       = $title[$k];
+                $_title       = $_data;
                 $_description = $description[$k];
                 $content      = $_title . ' ' . $_description;
 
@@ -479,7 +479,7 @@ class ItemActions
     public function insertItemLocales($type, $title, $description, $itemId)
     {
         foreach ($title as $k => $_data) {
-            $_title       = $title[$k];
+            $_title       = $_data;
             $_description = $description[$k];
             if ($type === 'ADD') {
                 $this->manager->insertLocale($itemId, $k, $_title, $_description);

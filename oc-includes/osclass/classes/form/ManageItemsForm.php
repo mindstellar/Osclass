@@ -96,10 +96,7 @@ class ManageItemsForm extends Form
         // Did user select a specific category to post in?
         $catId = Params::getParam('catId');
         // How many indents to add?
-        $deep_string = '';
-        for ($var = 0; $var < $deep; $var++) {
-            $deep_string .= '&nbsp;&nbsp;';
-        }
+        $deep_string = str_repeat('&nbsp;&nbsp;', $deep);
         $deep++;
 
         foreach ($categories as $c) {

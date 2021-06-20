@@ -114,10 +114,7 @@ class ItemForm extends Form
             $catId = Session::newInstance()->_getForm('catId');
         }
         // How many indents to add?
-        $deep_string = '';
-        for ($var = 0; $var < $deep; $var++) {
-            $deep_string .= '&nbsp;&nbsp;';
-        }
+        $deep_string = str_repeat('&nbsp;&nbsp;', $deep);
         $deep++;
 
         foreach ($categories as $c) {

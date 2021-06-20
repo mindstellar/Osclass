@@ -100,7 +100,7 @@ class Category extends DAO
             $this->categories = array();
             $this->relation   = array();
             foreach ($categories as $c) {
-                if ($empty || (!$empty && $c['i_num_items'] > 0)) {
+                if ($empty || ($c['i_num_items'] > 0)) {
                     $this->categories[$c['pk_i_id']] = $c;
                     if ($c['fk_i_parent_id'] == null) {
                         $this->tree[]        = $c;

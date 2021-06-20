@@ -84,7 +84,7 @@ class CWebAjax extends BaseModel
 
                     foreach ($files as $uuid => $file) {
                         if ($file == $ajax_photo) {
-                            $filename = $files[$uuid];
+                            $filename = $file;
                             unset($files[$uuid]);
                             Session::newInstance()->_set('ajax_files', $files);
                             $success = @unlink(osc_content_path() . 'uploads/temp/' . $filename);

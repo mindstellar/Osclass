@@ -19,7 +19,7 @@
  */
 
 /**
- * LastestSearches DAO
+ * LatestSearches DAO
  */
 class LatestSearches extends DAO
 {
@@ -93,7 +93,7 @@ class LatestSearches extends DAO
      * @since  unknown
      *
      */
-    public function getSearchesByDate($time = null)
+    public function getSearchesByDate($time = null, $limit = 20)
     {
         if ($time == null) {
             $time = time() - (7 * 24 * 3600);

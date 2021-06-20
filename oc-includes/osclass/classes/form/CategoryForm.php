@@ -73,10 +73,7 @@ class CategoryForm extends Form
         $default_item = null,
         $deep = 0
     ) {
-        $deep_string = '';
-        for ($var = 0; $var < $deep; $var++) {
-            $deep_string .= '&nbsp;&nbsp;';
-        }
+        $deep_string = str_repeat('&nbsp;&nbsp;', $deep);
         $deep++;
         foreach ($categories as $c) {
             if ((isset($category['pk_i_id']) && $category['pk_i_id'] === $c['pk_i_id'])) {
@@ -101,10 +98,7 @@ class CategoryForm extends Form
         if (($categories != null) && is_array($categories)) {
             echo '<ul id="cat' . $categories[0]['fk_i_parent_id'] . '">';
 
-            $d_string = '';
-            for ($var_d = 0; $var_d < $depth; $var_d++) {
-                $d_string .= '&nbsp;&nbsp;&nbsp;&nbsp;';
-            }
+            $d_string = str_repeat('&nbsp;&nbsp;&nbsp;&nbsp;', $depth);
 
             foreach ($categories as $c) {
                 echo '<li>';
