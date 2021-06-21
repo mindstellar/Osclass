@@ -212,6 +212,9 @@ class DAO
      */
     public function update($values, $where)
     {
+        if (!is_array($values) || !is_array($where)) {
+            return false;
+        }
         if (!$this->checkFieldKeys(array_keys($values))) {
             return false;
         }
