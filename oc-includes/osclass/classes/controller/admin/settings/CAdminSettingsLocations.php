@@ -529,7 +529,6 @@ class CAdminSettingsLocations extends AdminSecBaseModel
                 if ($location != '') {
                     $result = osc_install_json_locations($location);
                     if ($result === true) {
-
                         osc_add_flash_ok_message(_m('Location imported successfully'), 'admin');
                         $this->redirectTo(osc_admin_base_url(true)
                                           . '?page=settings&action=locations');

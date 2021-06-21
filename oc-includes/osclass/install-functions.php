@@ -1069,7 +1069,7 @@ function display_target()
                             <?php foreach ($country_list as $c) { ?>
                                 <option value="<?php echo $c->s_file_name; ?>" <?php if (strpos($c->s_file_name, $country_ip) === 0) {
                                     echo 'selected="selected"';
-                                } ?>><?php echo $c->s_country_name; ?></option>
+                                               } ?>><?php echo $c->s_country_name; ?></option>
                             <?php } ?>
                         </select>
                     </div>

@@ -418,7 +418,6 @@ function osc_install_json_locations($location = null)
 
                     if (isset($regionObj->cities) && $region) {
                         foreach ($regionObj->cities as $cityObj) {
-
                             if (!$cities->findByName($cityObj->s_city_name, $region['pk_i_id'])) {
                                 $cityData = [
                                     'fk_i_region_id'    => $region['pk_i_id'],
