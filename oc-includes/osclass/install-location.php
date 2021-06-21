@@ -1,6 +1,21 @@
 <?php
-
-use PHPMailer\PHPMailer\PHPMailer;
+/*
+ *  Copyright 2020 Mindstellar Osclass
+ *  Maintained and supported by Mindstellar Community
+ *  https://github.com/mindstellar/Osclass
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 
 error_reporting(E_ERROR | E_CORE_ERROR | E_COMPILE_ERROR | E_PARSE);
 
@@ -14,6 +29,7 @@ require_once LIB_PATH . 'osclass/helpers/hDatabaseInfo.php';
 require_once LIB_PATH . 'osclass/helpers/hDefines.php';
 require_once LIB_PATH . 'osclass/helpers/hErrors.php';
 require_once LIB_PATH . 'osclass/helpers/hLocale.php';
+require_once LIB_PATH . 'osclass/helpers/hLocation.php';
 require_once LIB_PATH . 'osclass/helpers/hPreference.php';
 require_once LIB_PATH . 'osclass/helpers/hPlugins.php';
 require_once LIB_PATH . 'osclass/helpers/hTranslations.php';
@@ -37,118 +53,9 @@ $result                       = basic_info();
 $json_message['email_status'] = $result['email_status'];
 $json_message['password']     = $result['s_password'];
 
-if (!Params::getParam('skip-location-input') && Params::getParam('locationsql') !== 'skip') {
-    $msg                    = install_locations();
+if (Params::getParam('skip-location-input') !== 'skip' && Params::getParam('location-json')) {
+    $msg                    = osc_install_json_locations(Params::getParam('location-json'));
     $json_message['status'] = $msg;
 }
 
 echo json_encode($json_message);
-
-/**
- * @return array
- * @throws \PHPMailer\PHPMailer\Exception
- */
-function basic_info()
-{
-    $admin = Params::getParam('s_name');
-    if (!$admin) {
-        $admin = 'admin';
-    }
-
-    $password = Params::getParam('s_passwd', false, false);
-    if (!$password) {
-        $password = osc_genRandomPassword();
-    }
-
-    Admin::newInstance()->insert(
-        array(
-            's_name'     => 'Administrator',
-            's_username' => $admin,
-            's_password' => osc_hash_password($password),
-            's_email'    => Params::getParam('email')
-        )
-    );
-
-    $mPreference = Preference::newInstance();
-    $mPreference->insert(
-        array(
-            's_section' => 'osclass',
-            's_name'    => 'pageTitle',
-            's_value'   => Params::getParam('webtitle'),
-            'e_type'    => 'STRING'
-        )
-    );
-
-    $mPreference->insert(
-        array(
-            's_section' => 'osclass',
-            's_name'    => 'contactEmail',
-            's_value'   => Params::getParam('email'),
-            'e_type'    => 'STRING'
-        )
-    );
-
-    $body = sprintf(__('Hi %s,'), Params::getParam('webtitle')) . '<br/>';
-    $body .= sprintf(__('Your Osclass installation at %s is up and running.'
-        . ' ' . 'You can access the administration panel with these details:'), WEB_PATH);
-    $body .= '<br/>';
-    $body .= '<ul>';
-    $body .= '<li>' . sprintf(__('username: %s'), $admin) . '</li>';
-    $body .= '<li>' . sprintf(__('password: %s'), $password) . '</li>';
-    $body .= '</ul>';
-    $body .= sprintf(
-        __('Remember that for any doubts you might have you can consult our <a href="%1$s">documentation</a>'),
-        'https://osclass.gitbook.io/osclass-docs/'
-    );
-    $body .= __('Cheers,') . '<br/>';
-    $body .= __('The <a href="https://github.com/mindstellar/osclass">Osclass</a> team');
-
-    $sitename = strtolower(Params::getServerParam('SERVER_NAME'));
-    if (0 === strpos($sitename, 'www.')) {
-        $sitename = substr($sitename, 4);
-    }
-
-    $mail           = new PHPMailer(true);
-    $mail->CharSet  = 'utf-8';
-    $mail->Host     = 'localhost';
-    $mail->From     = 'osclass@' . $sitename;
-    $mail->FromName = 'Osclass';
-    $mail->Subject  = 'Osclass successfully installed!';
-    $mail->addAddress(Params::getParam('email'), 'Osclass administrator');
-    $mail->Body    = $body;
-    $mail->AltBody = $body;
-
-    try {
-        $mail->send();
-        return array('email_status' => '', 's_password' => $password);
-    } catch (\PHPMailer\PHPMailer\Exception $exception) {
-        return array(
-            'email_status' => Params::getParam('email') . '<br>' . $exception->errorMessage(),
-            's_password'   => $password
-        );
-    }
-}
-
-
-/**
- * @return bool
- */
-function install_locations()
-{
-    $location = Params::getParam('locationsql');
-    if ($location) {
-        $sql = osc_file_get_contents(osc_get_locations_sql_url($location));
-        if ($sql) {
-            $conn = DBConnectionClass::newInstance();
-            $c_db = $conn->getOsclassDb();
-            $comm = new DBCommandClass($c_db);
-            $comm->query('SET FOREIGN_KEY_CHECKS = 0');
-            $comm->importSQL($sql);
-            $comm->query('SET FOREIGN_KEY_CHECKS = 1');
-
-            return true;
-        }
-    }
-
-    return false;
-}

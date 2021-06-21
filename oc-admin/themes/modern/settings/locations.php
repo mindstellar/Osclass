@@ -502,23 +502,10 @@ osc_current_admin_theme_path('parts/header.php'); ?>
                         <tr>
                             <td><?php _e('Import a location'); ?>:</td>
                             <td>
-                                <?php $locations = View::newInstance()->_get('aLocations'); ?>
-                                <?php if (count($locations)) { ?>
-                                    <select name="location" required>
-                                        <option value=""><?php _e('Select an option'); ?>
-                                            <?php foreach ($locations
+                                <select name="location" id="imported-location" required>
+                                    <option value=""><?php _e('Select an option'); ?></option>
+                                </select>
 
-                                            as $location) { ?>
-                                            <?php /* BUG: */
-                                            if ($location['name'] == '') {
-                                                continue;
-                                            } ?>
-                                        <option value="<?php echo $location['file']; ?>"><?php echo $location['name']; ?></option>
-                                            <?php } ?>
-                                    </select>
-                                <?php } else { ?>
-                                    <p><?php _e('No locations available.'); ?></p>
-                                <?php } ?>
                             </td>
                         </tr>
                     </table>
@@ -548,5 +535,22 @@ osc_current_admin_theme_path('parts/header.php'); ?>
             <?php } else {
                 echo 'function hook_load_cities() { };';
             } ?>
+        </script>
+        <script>
+            const existingCountries = <?php echo json_encode(View::newInstance()->listNames())?>;
+            $.ajax({
+                type: "GET",
+                url: "<?php echo osc_get_locations_json_url()?>",
+                dataType: "json",
+                success: function (data) {
+                    $.each(data.locations, function (i, obj) {
+                        let countriesOptions;
+                        if (!existingCountries.includes(obj.s_country_name)) {
+                            countriesOptions = "<option value=" + obj.s_file_name + ">" + obj.s_country_name + "</option>";
+                            $(countriesOptions).appendTo('#imported-location');
+                        }
+                    });
+                }
+            });
         </script>
         <?php osc_current_admin_theme_path('parts/footer.php'); ?>

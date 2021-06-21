@@ -37,7 +37,6 @@ class CAdminSettingsLocations extends AdminSecBaseModel
     //Business Layer...
 
     /**
-     * @return bool
      * @throws \Exception
      */
     public function doModel()
@@ -528,18 +527,12 @@ class CAdminSettingsLocations extends AdminSecBaseModel
 
                 $location = Params::getParam('location');
                 if ($location != '') {
-                    $sql = osc_file_get_contents(osc_get_locations_sql_url($location));
-                    if ($sql != '') {
-                        $conn = DBConnectionClass::newInstance();
-                        $c_db = $conn->getOsclassDb();
-                        $comm = new DBCommandClass($c_db);
-                        $comm->query('SET FOREIGN_KEY_CHECKS = 0');
-                        $imported = $comm->importSQL($sql);
-                        $comm->query('SET FOREIGN_KEY_CHECKS = 1');
+                    $result = osc_install_json_locations($location);
+                    if ($result === true) {
 
                         osc_add_flash_ok_message(_m('Location imported successfully'), 'admin');
                         $this->redirectTo(osc_admin_base_url(true)
-                            . '?page=settings&action=locations');
+                                          . '?page=settings&action=locations');
 
                         return true;
                     }
@@ -554,22 +547,9 @@ class CAdminSettingsLocations extends AdminSecBaseModel
                 return false;
                 break;
         }
+
         $aCountries = $mCountries->listAll();
         $this->_exportVariableToView('aCountries', $aCountries);
-
-        $existing_locations        = $mCountries->listNames();
-        $a_external_locations_list = json_decode(osc_file_get_contents(osc_get_locations_json_url()), true);
-        $a_external_locations_list = $a_external_locations_list['children'];
-        // IDEA: This probably can be improved.
-        foreach ($a_external_locations_list as $key => $location) {
-            if (in_array($location['name'], $existing_locations, false)) {
-                unset($a_external_locations_list[$key]);
-            }
-        }
-        if (is_array($a_external_locations_list) && count($a_external_locations_list) > 0) {
-            $this->_exportVariableToView('aLocations', $a_external_locations_list);
-        }
-
         $this->doView('settings/locations.php');
     }
 }

@@ -483,7 +483,7 @@ function osc_openstreet_geocode_url($address)
  */
 function osc_get_locations_json_url()
 {
-    return 'https://raw.githubusercontent.com/mindstellar/Osclass-Extras/master/locations/list.json';
+    return 'https://raw.githubusercontent.com/mindstellar/geodata/master/src/json-list.json';
 }
 
 
