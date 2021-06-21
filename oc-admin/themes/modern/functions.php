@@ -66,9 +66,9 @@ function admin_header_favicons()
 
     foreach ($favicons as $f) { ?>
         <link <?php if ($f['rel'] !== '') {
-              ?>rel="<?php echo $f['rel']; ?>" <?php
+            ?>rel="<?php echo $f['rel']; ?>" <?php
               } if ($f['sizes'] !== '') {
-              ?>sizes="<?php echo $f['sizes']; ?>" <?php
+                    ?>sizes="<?php echo $f['sizes']; ?>" <?php
               } ?>href="<?php echo $f['href']; ?>">
     <?php }
 }

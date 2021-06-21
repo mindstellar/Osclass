@@ -61,7 +61,7 @@ function customHead()
                 var name = 'frame_' + id;
                 var id_ = 'frame_' + id;
                 var url = '<?php echo osc_admin_base_url(true); ?>?page=ajax&action=field_categories_iframe&<?php echo $csrf_token;
-                    ?>&id=' + id;
+                ?>&id=' + id;
                 $.ajax({
                     url: url,
                     context: document.body,
@@ -110,7 +110,7 @@ function customHead()
             $("#field-delete-submit").click(function () {
                 var id = $("#dialog-delete-field").attr('data-field-id');
                 var url = '<?php echo osc_admin_base_url(true); ?>?page=ajax&action=delete_field&<?php echo $csrf_token;
-                    ?>&id=' + id;
+                ?>&id=' + id;
                 $.ajax({
                     url: url,
                     context: document.body,
@@ -245,7 +245,7 @@ osc_current_admin_theme_path('parts/header.php');
                                 <div class="actions-edit-cfield">
                                     <a href="javascript:void(0);"
                                        onclick="javascript:show_iframe('content_list_<?php echo $field['pk_i_id']; ?>','<?php echo
-                                       $field['pk_i_id']; ?>');"><?php _e('Edit'); ?></a>
+                                        $field['pk_i_id']; ?>');"><?php _e('Edit'); ?></a>
                                     &middot;
                                     <a href="javascript:void(0);"
                                        onclick="javascript:delete_field('<?php echo $field['pk_i_id']; ?>');"><?php _e('Delete'); ?></a>

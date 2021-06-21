@@ -162,10 +162,10 @@ function customHead()
             data_country.addColumn('number', '<?php _e('Users per country'); ?>');
             data_country.addRows(<?php echo count($users_by_country); ?>);
             <?php foreach ($users_by_country as $k => $v) {
-            echo "data_country.setValue(" . $k . ", 0, '" . (($v['s_country'] == null) ? __('Unknown')
+                echo "data_country.setValue(" . $k . ", 0, '" . (($v['s_country'] == null) ? __('Unknown')
                     : $v['s_country']) . "');";
-            echo "data_country.setValue(" . $k . ", 1, " . $v['num'] . ");";
-        } ?>
+                echo "data_country.setValue(" . $k . ", 1, " . $v['num'] . ");";
+            } ?>
 
             // Create and draw the visualization.
             new google.visualization.PieChart(document.getElementById('by_country')).draw(data_country, {
@@ -178,10 +178,10 @@ function customHead()
             data_region.addColumn('number', '<?php _e('Users per region'); ?>');
             data_region.addRows(<?php echo count($users_by_region); ?>);
             <?php foreach ($users_by_region as $k => $v) {
-            echo "data_region.setValue(" . $k . ", 0, '" . (($v['s_region'] == null) ? __('Unknown') : $v['s_region'])
+                echo "data_region.setValue(" . $k . ", 0, '" . (($v['s_region'] == null) ? __('Unknown') : $v['s_region'])
                  . "');";
-            echo "data_region.setValue(" . $k . ", 1, " . $v['num'] . ");";
-        } ?>
+                echo "data_region.setValue(" . $k . ", 1, " . $v['num'] . ");";
+            } ?>
 
             // Create and draw the visualization.
             new google.visualization.PieChart(document.getElementById('by_region')).draw(data_region, {
@@ -190,7 +190,7 @@ function customHead()
             });
         }
     </script>
-<?php }
+    <?php }
 }
 
 

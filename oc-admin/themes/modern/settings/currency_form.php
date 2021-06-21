@@ -146,7 +146,7 @@ osc_current_admin_theme_path('parts/header.php'); ?>
                                 <?php if ($typeForm
                                           === 'edit_post'
                                 ) {
-                                    echo 'disabled="disabled"';
+                                               echo 'disabled="disabled"';
                                 }
                                 ?>
                             />
@@ -175,7 +175,7 @@ osc_current_admin_theme_path('parts/header.php'); ?>
                         <?php if ($typeForm == 'edit_post') { ?>
                             <input class="btn btn-red" type="button" value="<?php echo osc_esc_html(__('Cancel')); ?>"
                                    onclick="location.href='<?php echo osc_admin_base_url(true);
-                                   ?>?page=settings&amp;action=currencies'">
+                                    ?>?page=settings&amp;action=currencies'">
                         <?php } ?>
                         <input type="submit" value="<?php echo osc_esc_html(customText('button')); ?>"
                                class="btn btn-submit"/>

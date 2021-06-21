@@ -106,7 +106,7 @@ osc_current_admin_theme_path('parts/header.php'); ?>
                         <div class="form-row">
                             <div class="form-label"><?php _e('Admin type <em>(required)</em>'); ?></div>
                             <div class="form-controls">
-                                <?php AdminForm::type_select($admin); ?>
+                                                       <?php AdminForm::type_select($admin); ?>
                                 <p class="help-inline">
                                     <em><?php _e('Administrators have total control over all aspects of your installation, '
                                                  . 'while moderators are only allowed to moderate listings, comments and media files');
