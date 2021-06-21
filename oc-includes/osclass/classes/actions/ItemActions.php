@@ -84,7 +84,7 @@ class ItemActions
         $flash_error = '';
 
         // Requires email validation?
-        //$has_to_validate = osc_moderate_items() !== -1;
+        $has_to_validate = osc_moderate_items() !== -1;
 
         // Check status
         $active = $aItem['active'];
@@ -596,7 +596,7 @@ class ItemActions
         /**
          * Send email to non-reg user requesting item activation
          */
-        if ($itemActive && !$userId) {
+        if ($itemActive === 'INACTIVE' && !$userId) {
             osc_run_hook('hook_email_item_validation_non_register_user', $item);
         } elseif ($itemActive === 'INACTIVE') { //  USER IS REGISTERED
             osc_run_hook('hook_email_item_validation', $item);
