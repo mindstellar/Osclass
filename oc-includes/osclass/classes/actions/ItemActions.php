@@ -371,7 +371,7 @@ class ItemActions
                 if ($error == UPLOAD_ERR_OK) {
                     // check mime file
                     $fileMime = $aResources['type'][$key];
-                    if ((stripos($fileMime, 'image/') !== false) && function_exists('getimagesize')) {
+                    if (function_exists('getimagesize') && (stripos($fileMime, 'image/') !== false)) {
                         $info = getimagesize($aResources['tmp_name'][$key]);
                         if (isset($info['mime'])) {
                             $fileMime = $info['mime'];
