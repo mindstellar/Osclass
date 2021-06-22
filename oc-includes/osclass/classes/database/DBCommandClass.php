@@ -1741,7 +1741,6 @@ class DBCommandClass
                             'ALTER TABLE ' . $table . ' CHANGE COLUMN ' . $tbl_field['Field'] . ' '
                             . $normal_fields[strtolower($tbl_field['Field'])];
                     }
-
                 }
                 error_log(' --- ' . $normal_fields[strtolower($tbl_field['Field'])]);
 
