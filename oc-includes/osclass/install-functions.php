@@ -1216,7 +1216,7 @@ function basic_info()
     if (!$password) {
         $password = osc_genRandomPassword();
     }
-
+    Params::setParam('password', $password);
     Admin::newInstance()->insert(
         array(
             's_name'     => 'Administrator',
