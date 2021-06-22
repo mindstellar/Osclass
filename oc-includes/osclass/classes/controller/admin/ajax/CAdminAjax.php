@@ -582,7 +582,7 @@ class CAdminAjax extends AdminSecBaseModel
                     $upgradeOsclass = new Upgrade($osclassUpgradeObj);
                     try {
                         $upgradeOsclass->doUpgrade();
-                        $db_upgrade_result = json_decode($osclassUpgradeObj::upgradeDB(), true);
+                        $db_upgrade_result = json_decode($osclassUpgradeObj::upgradeDB(Params::getParam('skipdb')), true);
                         $result            = ['error' => 0, 'message' => __('Osclass upgraded successfully.')];
                     } catch (Exception $e) {
                         $result = ['error' => 1, 'message' => $e->getMessage()];

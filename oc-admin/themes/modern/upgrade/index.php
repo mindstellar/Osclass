@@ -55,14 +55,16 @@ function customHead()
             $('#output').show();
             $('#tohide').hide();
 
-            $.get('<?php echo osc_admin_base_url(true); ?>?page=ajax&action=upgrade-db', function (data) {
-                $('#loading_image').hide();
-                if (data.status) {
-                    $("#result").append("Success: " + data.message + "<br />");
-                } else {
-                    $("#result").append("Error: " + data.message.replace(/\n/g, "<br />"));
-                }
-            }, 'json');
+            $.get('<?php echo osc_admin_base_url(true); ?>?page=ajax&action=upgrade-db&skipdb=<?php echo Params::getParam('skipdb')?>',
+                function
+                    (data) {
+                    $('#loading_image').hide();
+                    if (data.status) {
+                        $("#result").append("Success: " + data.message + "<br />");
+                    } else {
+                        $("#result").append("Error: " + data.message.replace(/\n/g, "<br />"));
+                    }
+                }, 'json');
             <?php } ?>
         });
     </script>

@@ -65,7 +65,7 @@ class Osclass extends UpgradePackage
         }
 
         if (!$skip_db && count($error_queries[2]) > 0) {
-            $skip_db_link = osc_admin_base_url(true) . '?page=ajax&action=upgrade-db&skipdb=true';
+            $skip_db_link = osc_admin_base_url(true) . '?page=upgrade&confirm=true&skipdb=true';
             $message      = __('Osclass &raquo; Has some errors') . PHP_EOL;
             $message      .= __('We\'ve encountered some problems while updating the database structure. 
             The following queries failed:' . PHP_EOL);

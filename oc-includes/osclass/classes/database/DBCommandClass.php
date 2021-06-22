@@ -1726,22 +1726,22 @@ class DBCommandClass
                     $field_type = $match[1];
 
                     //HACK: DB upgrade issue on different version of MySQL ignore INT display width
-                    preg_match('/int\([\d]+\)/i', $tbl_field['Type'], $tbl_int_field);
-                    preg_match('/int\([\d]+\)/i', $field_type, $field_type_int);
-                    if (strtolower($field_type_int) !== strtolower($tbl_int_field)) {
-                        // Are they the same?
-                        if (strtolower($field_type) !== strtolower($tbl_field['Type'])
-                            && str_replace(' ', '', strtolower($field_type)) !== str_replace(
-                                ' ',
-                                '',
-                                strtolower($tbl_field['Type'])
-                            )
-                        ) {
-                            $struct_queries[] =
-                                'ALTER TABLE ' . $table . ' CHANGE COLUMN ' . $tbl_field['Field'] . ' '
-                                . $normal_fields[strtolower($tbl_field['Field'])];
-                        }
+                    $tbl_field['Type'] = preg_replace('/INT\([\d]+\)/i', 'int', strtolower($tbl_field['Type']));
+                    $field_type        = preg_replace('/INT\([\d]+\)/i', 'int', strtolower($field_type));
+
+                    // Are they the same?
+                    if ($field_type !== $tbl_field['Type']
+                        && str_replace(' ', '', strtolower($field_type)) !== str_replace(
+                            ' ',
+                            '',
+                            strtolower($tbl_field['Type'])
+                        )
+                    ) {
+                        $struct_queries[] =
+                            'ALTER TABLE ' . $table . ' CHANGE COLUMN ' . $tbl_field['Field'] . ' '
+                            . $normal_fields[strtolower($tbl_field['Field'])];
                     }
+
                 }
                 error_log(' --- ' . $normal_fields[strtolower($tbl_field['Field'])]);
 
