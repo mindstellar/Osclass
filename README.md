@@ -4,7 +4,7 @@
 ![Forks](https://img.shields.io/github/forks/mindstellar/osclass)
 ![Stars](https://img.shields.io/github/stars/mindstellar/osclass)
 [![Latest Release](https://img.shields.io/badge/dynamic/json?label=Latest%20Release&query=%24.tag_name&url=https%3A%2F%2Fapi.github.com%2Frepos%2Fmindstellar%2Fosclass%2Freleases%2Flatest)](https://github.com/mindstellar/Osclass/releases/latest)
-
+![Downloads](https://img.shields.io/github/downloads/mindstellar/Osclass/total)
 # Osclass <sub>by Mindstellar</sub>
 
 ## Why this new fork?
