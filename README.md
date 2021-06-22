@@ -1,4 +1,5 @@
 [![CodeFactor](https://www.codefactor.io/repository/github/mindstellar/osclass/badge)](https://www.codefactor.io/repository/github/mindstellar/osclass)
+[![FOSSA Status](https://app.fossa.com/api/projects/git%2Bgithub.com%2Fmindstellar%2FOsclass.svg?type=shield)](https://app.fossa.com/projects/git%2Bgithub.com%2Fmindstellar%2FOsclass?ref=badge_shield)
 
 # Osclass
 
@@ -44,3 +45,7 @@ Want to help create a pull request from you clone, just make sure of few things
 [original-code]: https://github.com/osclass/Osclass
 [code]: https://github.com/mindstellar/Osclass
 [license]: http://www.apache.org/licenses/LICENSE-2.0
+
+
+## License
+[![FOSSA Status](https://app.fossa.com/api/projects/git%2Bgithub.com%2Fmindstellar%2FOsclass.svg?type=large)](https://app.fossa.com/projects/git%2Bgithub.com%2Fmindstellar%2FOsclass?ref=badge_large)
