@@ -384,7 +384,7 @@ function osc_install_json_locations($location = null)
          *
          */
         $locationsObj = json_decode(
-            osc_file_get_contents('https://raw.githubusercontent.com/mindstellar/geodata/master/src/json/' . urlencode($location)), false
+            osc_file_get_contents('https://raw.githubusercontent.com/mindstellar/geodata/master/src/json/' . rawurlencode($location)), false
         );
         if ($locationsObj) {
             $countries = Country::newInstance();

@@ -537,16 +537,17 @@ osc_current_admin_theme_path('parts/header.php'); ?>
             } ?>
         </script>
         <script>
-            const existingCountries = <?php echo json_encode(View::newInstance()->listNames())?>;
+            const existingCountries = <?php echo json_encode(Country::newInstance()->listNames())?>;
             $.ajax({
                 type: "GET",
                 url: "<?php echo osc_get_locations_json_url()?>",
-                dataType: "json",
+                dataType: "text",
                 success: function (data) {
-                    $.each(data.locations, function (i, obj) {
+                    const jsonData = JSON.parse(data);
+                    $.each(jsonData.locations, function (i, obj) {
                         let countriesOptions;
                         if (!existingCountries.includes(obj.s_country_name)) {
-                            countriesOptions = "<option value=" + obj.s_file_name + ">" + obj.s_country_name + "</option>";
+                            countriesOptions = '<option value=\'' + obj.s_file_name + '\'>' + obj.s_country_name + '</option>';
                             $(countriesOptions).appendTo('#imported-location');
                         }
                     });
