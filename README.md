@@ -64,7 +64,7 @@ Once you're done, simply `cd` to Osclass directory and run `docker-compose up -d
   respond to any hostname, in case you want to add your own hostname on your `/etc/hosts`
 
   Service|Address outside containers
-          ------|---------
+  ------|---------
   Webserver|[localhost:5000](http://localhost:5000)
   PhpMyAdmin web interface|[localhost:5001](http://localhost:5001)
   MySQL|**host:** `localhost`; **port:** `5002`
@@ -75,7 +75,7 @@ Once you're done, simply `cd` to Osclass directory and run `docker-compose up -d
   You'll need to configure osclass to use enabled services:
 
   Service|Hostname|Port number
-          ------|---------|-----------
+  ------|---------|-----------
   php-fpm|php-fpm|9000
   MySQL|mysql|3306 (default)
   Memcached|memcached|11211 (default)
