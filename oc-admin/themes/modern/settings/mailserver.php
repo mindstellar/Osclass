@@ -178,7 +178,7 @@ osc_current_admin_theme_path('parts/header.php'); ?>
                             <input type="text" class="input-medium" name="mailserver_ssl"
                                    value="<?php echo osc_esc_html(osc_mailserver_ssl()); ?>"/>
                             <?php _e('Options: blank, ssl or tls'); ?>
-                            <?php if (php_sapi_name() === 'cgi-fcgi' || php_sapi_name() === 'cgi') { ?>
+                            <?php if (PHP_SAPI === 'cgi-fcgi' || PHP_SAPI === 'cgi') { ?>
                                 <div class="flashmessage flashmessage-inline warning">
                                     <p><?php _e('Cannot be sure that Apache Module <b>mod_ssl</b> is loaded.'); ?></p>
                                 </div>
