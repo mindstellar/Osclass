@@ -42,7 +42,7 @@
     "ext-mbstring": "*",
     "ext-gd": "*",
     "ezyang/htmlpurifier": "4.12.*",
-    "phpmailer/phpmailer": "6.1.*",
+    "phpmailer/phpmailer": "6.5.*",
     "pclzip/pclzip": "2.8.2",
     "phpseclib/phpseclib": "2.0.*",
     "pensiero/php-openssl-cryptor": "0.1.0",
