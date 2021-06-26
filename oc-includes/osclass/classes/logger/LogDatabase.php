@@ -20,11 +20,11 @@
  *
  *  Copyright (C) 2007 Free Software Foundation, Inc. <http://fsf.org/>
  *  Everyone is permitted to copy and distribute verbatim copies
- *  of this license document, but changing it is not allowed. 
- *  
+ *  of this license document, but changing it is not allowed.
+ *
  *  You should have received a copy of the GNU Affero General Public
  *  License along with this program. If not, see <http://www.gnu.org/licenses/>.
- *  
+ *
  */
 
 /**
