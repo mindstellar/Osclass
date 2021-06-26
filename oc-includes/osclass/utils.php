@@ -397,6 +397,7 @@ function osc_sendMail($params)
     try {
         $mail->send();
     } catch (\PHPMailer\PHPMailer\Exception $e) {
+        trigger_error($e->errorMessage(), E_USER_WARNING);
         return false;
     }
 
@@ -408,7 +409,7 @@ function osc_sendMail($params)
  * @param $text
  * @param $params
  *
- * @return mixed
+ * @return string
  */
 function osc_mailBeauty($text, $params)
 {
