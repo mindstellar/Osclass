@@ -55,8 +55,7 @@ osc_current_admin_theme_path('parts/header.php');
                 <b class="stats-title">Changelog</b>
                 <ul style="list-style-type: disc !important;">
                     <?php
-                    echo preg_replace('/.+/', '<li>$0</li>',
-                                      file_get_contents(ABS_PATH . 'CHANGELOG.txt'));
+                    echo nl2br(file_get_contents(ABS_PATH . 'CHANGELOG.md'));
                     ?>
                 </ul>
             </div>
