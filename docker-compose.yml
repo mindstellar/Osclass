@@ -1,0 +1,57 @@
+###############################################################################
+#                         Osclass Docker Config                               #
+###############################################################################
+version: "3.1"
+services:
+
+  webserver:
+    image: nginx:alpine
+    container_name: osclass-webserver
+    working_dir: /application
+    volumes:
+      - .:/application
+      - ./.docker/nginx/nginx.conf:/etc/nginx/conf.d/default.conf
+    ports:
+      - "5000:80"
+
+  php-fpm:
+    image: mindstellar/osclass-php-fpm
+    container_name: osclass-php-fpm
+    working_dir: /application
+    volumes:
+      - .:/application
+      - ./.docker/php-fpm/php-ini-overrides.ini:/etc/php/7.3/fpm/conf.d/99-overrides.ini
+
+  mysql:
+    image: mysql:5.7
+    container_name: osclass-mysql
+    working_dir: /application
+    volumes:
+      - .:/application
+    environment:
+      - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD:-root-password}
+      - MYSQL_DATABASE=${MYSQL_OSCLASS_DATABASE_NAME:-osclass-db}
+      - MYSQL_USER=${MYSQL_OSCLASS_DATABASE_USER:-osclass-db-user}
+      - MYSQL_PASSWORD=${MYSQL_OSCLASS_DATABASE_PASSWORD:-osclass-db-password}
+    ports:
+      - "5002:3306"
+
+  memcached:
+    image: memcached:alpine
+    container_name: osclass-memcached
+
+  mailhog:
+    image: mailhog/mailhog:latest
+    container_name: osclass-mailhog
+    ports:
+      - "5003:8025"
+
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    container_name: osclass-phpmyadmin
+    ports:
+      - "5001:80"
+    environment:
+      - PMA_HOST=mysql
+      - PMA_USER=root
+      - PMA_PASSWORD=${MYSQL_ROOT_PASSWORD:-root-password}

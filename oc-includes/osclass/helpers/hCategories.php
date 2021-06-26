@@ -1,418 +1,473 @@
 <?php
 /*
- * Copyright 2014 Osclass
+ * Osclass - software for creating and publishing online classified advertising platforms
+ * Maintained and supported by Mindstellar Community
+ * https://github.com/mindstellar/Osclass
+ * Copyright (c) 2021.  Mindstellar
  *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
  *
- *     http://www.apache.org/licenses/LICENSE-2.0
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
  *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
+ *                     GNU GENERAL PUBLIC LICENSE
+ *                        Version 3, 29 June 2007
+ *
+ *  Copyright (C) 2007 Free Software Foundation, Inc. <http://fsf.org/>
+ *  Everyone is permitted to copy and distribute verbatim copies
+ *  of this license document, but changing it is not allowed.
+ *
+ *  You should have received a copy of the GNU Affero General Public
+ *  License along with this program. If not, see <http://www.gnu.org/licenses/>.
+ *
  */
 
 
-    /**
-    * Helper Categories
-    * @package Osclass
-    * @subpackage Helpers
-    * @author Osclass
-    */
+/**
+ * Helper Categories
+ *
+ * @package    Osclass
+ * @subpackage Helpers
+ * @author     Osclass
+ */
 
-    /**
-     * Gets current category
-     *
-     * @return array
-     */
-    function osc_category() {
-	    $category = null;
-	    if ( View::newInstance()->_exists( 'subcategories' ) ) {
-            $category = View::newInstance()->_current('subcategories');
-        } elseif (View::newInstance()->_exists('categories')) {
-            $category = View::newInstance()->_current('categories');
-        } elseif (View::newInstance()->_exists('category')) {
-            $category = View::newInstance()->_get('category');
-        }
-
-	    return $category;
-    }
-
-
-	/**
-	 * Low level function: Gets the list of categories as a tree
-	 *
-	 * <code>
-	 * <?php
-	 *  $c = osc_get_categories();
-	 * ?>
-	 * </code>
-	 *
-	 * @return mixed|string <array>
-	 * @throws \Exception
-	 */
-    function osc_get_categories() {
-       if ( !View::newInstance()->_exists('categories') ) {
-           osc_export_categories(Category::newInstance()->toTree());
-        }
-        return  View::newInstance()->_get('categories');
-    }
-
-
-	/**
-	 * Low level function: Gets the value of the category attribute
-	 *
-	 * @param        $field
-	 * @param string $locale
-	 *
-	 * @return string <array>
-	 */
-    function osc_category_field($field, $locale = '') {
-        return osc_field( osc_category(), $field, '' );
-    }
-
-    /**
-     * Gets the number of categories
-     *
-     * @return int
-     */
-    function osc_priv_count_categories() {
-        return View::newInstance()->_count('categories');
-    }
-
-    /**
-     * Gets the number of subcategories
-     *
-     * @return int
-     */
-    function osc_priv_count_subcategories() {
-        return View::newInstance()->_count('subcategories');
-    }
-
-
-	/**
-	 * Gets the total of categories. If categories are not loaded, this function will load them.
-	 *
-	 * @return int
-	 * @throws \Exception
-	 */
-    function osc_count_categories() {
-        if ( !View::newInstance()->_exists('categories') ) {
-            View::newInstance()->_exportVariableToView('categories', Category::newInstance()->toTree() );
-        }
-        return osc_priv_count_categories();
-    }
-
-
-	/**
-	 * Let you know if there are more categories in the list. If categories are not loaded, this function will load them.
-	 *
-	 * @return boolean
-	 * @throws \Exception
-	 */
-    function osc_has_categories() {
-        if ( !View::newInstance()->_exists('categories') ) {
-            View::newInstance()->_exportVariableToView('categories', Category::newInstance()->toTree() );
-        }
-        return View::newInstance()->_next('categories');
-    }
-
-    /**
-     * Gets the total of subcategories for the current category. If subcategories are not loaded, this function will load them and
-     * it will prepare the the pointer to the first element
-     *
-     * @return int
-     */
-    function osc_count_subcategories() {
+/**
+ * Gets current category
+ *
+ * @return array
+ */
+function osc_category()
+{
+    $category = null;
+    if (View::newInstance()->_exists('subcategories')) {
+        $category = View::newInstance()->_current('subcategories');
+    } elseif (View::newInstance()->_exists('categories')) {
         $category = View::newInstance()->_current('categories');
-	    if ( $category == '' ) {
-		    return - 1;
-	    }
-	    if ( ! isset( $category[ 'categories' ] ) ) {
-		    return 0;
-	    }
-	    if ( ! is_array( $category[ 'categories' ] ) ) {
-		    return 0;
-	    }
-	    if ( count( $category[ 'categories' ] ) == 0 ) {
-		    return 0;
-	    }
-        if ( !View::newInstance()->_exists('subcategories') ) {
-            View::newInstance()->_exportVariableToView('subcategories', $category['categories']);
-        }
-        return osc_priv_count_subcategories();
+    } elseif (View::newInstance()->_exists('category')) {
+        $category = View::newInstance()->_get('category');
     }
 
-    /**
-     * Let you know if there are more subcategories for the current category in the list. If subcategories are not loaded, this
-     * function will load them and it will prepare the pointer to the first element
-     *
-     * @return boolean
-     */
-    function osc_has_subcategories() {
-        $category = View::newInstance()->_current('categories');
-	    if ( $category == '' ) {
-		    return - 1;
-	    }
-	    if ( ! isset( $category[ 'categories' ] ) ) {
-		    return false;
-	    }
+    return $category;
+}
 
-        if ( !View::newInstance()->_exists('subcategories') ) {
-            View::newInstance()->_exportVariableToView('subcategories', $category['categories']);
-        }
-        $ret = View::newInstance()->_next('subcategories');
-        //we have to delete for next iteration
-	    if ( ! $ret ) {
-		    View::newInstance()->_erase( 'subcategories' );
-	    }
-        return $ret;
+
+/**
+ * Low level function: Gets the list of categories as a tree
+ *
+ * <code>
+ * <?php
+ *  $c = osc_get_categories();
+ * ?>
+ * </code>
+ *
+ * @return mixed|string <array>
+ */
+function osc_get_categories()
+{
+    if (!View::newInstance()->_exists('categories')) {
+        osc_export_categories(Category::newInstance()->toTree());
     }
 
-    /**
-     * Gets the name of the current category
-     *
-     * @param string $locale
-     * @return string
-     */
-    function osc_category_name($locale = '' ) {
-	    if ( $locale == '' ) {
-		    $locale = osc_current_user_locale();
-	    }
-        return osc_category_field( 's_name' , $locale);
+    return View::newInstance()->_get('categories');
+}
+
+
+/**
+ * Low level function: Gets the value of the category attribute
+ *
+ * @param        $field
+ * @param string $locale
+ *
+ * @return string <array>
+ */
+function osc_category_field($field, $locale = '')
+{
+    return osc_field(osc_category(), $field, '');
+}
+
+
+/**
+ * Gets the number of categories
+ *
+ * @return int
+ */
+function osc_priv_count_categories()
+{
+    return View::newInstance()->_count('categories');
+}
+
+
+/**
+ * Gets the number of subcategories
+ *
+ * @return int
+ */
+function osc_priv_count_subcategories()
+{
+    return View::newInstance()->_count('subcategories');
+}
+
+
+/**
+ * Gets the total of categories. If categories are not loaded, this function will load them.
+ *
+ * @return int
+ */
+function osc_count_categories()
+{
+    if (!View::newInstance()->_exists('categories')) {
+        View::newInstance()->_exportVariableToView('categories', Category::newInstance()->toTree());
     }
 
-    /**
-     * Gets the description of the current category
-     *
-     * @param string $locale
-     * @return string
-     */
-    function osc_category_description($locale = '' ) {
-	    if ( $locale == '' ) {
-		    $locale = osc_current_user_locale();
-	    }
-        return osc_category_field( 's_description' , $locale);
+    return osc_priv_count_categories();
+}
+
+
+/**
+ * Let you know if there are more categories in the list. If categories are not loaded, this function will load them.
+ *
+ * @return boolean
+ */
+function osc_has_categories()
+{
+    if (!View::newInstance()->_exists('categories')) {
+        View::newInstance()->_exportVariableToView('categories', Category::newInstance()->toTree());
     }
 
-    /**
-     * Gets the id of the current category
-     *
-     * @param string $locale
-     * @return string
-     */
-    function osc_category_id($locale = '' ) {
-	    if ( $locale == '' ) {
-		    $locale = osc_current_user_locale();
-	    }
-        return osc_category_field( 'pk_i_id' , $locale);
+    return View::newInstance()->_next('categories');
+}
+
+
+/**
+ * Gets the total of subcategories for the current category. If subcategories are not loaded, this function will load
+ * them and it will prepare the the pointer to the first element
+ *
+ * @return int
+ */
+function osc_count_subcategories()
+{
+    $category = View::newInstance()->_current('categories');
+    if ($category == '') {
+        return -1;
+    }
+    if (!isset($category['categories'])) {
+        return 0;
+    }
+    if (!is_array($category['categories'])) {
+        return 0;
+    }
+    if (count($category['categories']) == 0) {
+        return 0;
+    }
+    if (!View::newInstance()->_exists('subcategories')) {
+        View::newInstance()->_exportVariableToView('subcategories', $category['categories']);
     }
 
-    /**
-     * Gets the slug of the current category. WARNING: This slug could NOT be used as a valid W3C HTML tag attribute as it could have other characters besides [A-Za-z0-9-_] We only did a urlencode to the variable
-     *
-     * @param string $locale
-     * @return string
-     */
-    function osc_category_slug($locale = '' ) {
-	    if ( $locale == '' ) {
-		    $locale = osc_current_user_locale();
-	    }
-        return osc_category_field( 's_slug' , $locale);
+    return osc_priv_count_subcategories();
+}
+
+
+/**
+ * Let you know if there are more subcategories for the current category in the list. If subcategories are not loaded,
+ * this function will load them and it will prepare the pointer to the first element
+ *
+ * @return boolean
+ */
+function osc_has_subcategories()
+{
+    $category = View::newInstance()->_current('categories');
+    if ($category == '') {
+        return -1;
+    }
+    if (!isset($category['categories'])) {
+        return false;
     }
 
-    /**
-     * Returns if the category has the prices enabled or not
-     *
-     * @return boolean
-     */
-    function osc_category_price_enabled() {
-        return (boolean)osc_category_field( 'b_price_enabled' );
+    if (!View::newInstance()->_exists('subcategories')) {
+        View::newInstance()->_exportVariableToView('subcategories', $category['categories']);
     }
-
-    /**
-     * Returns category's parent id
-     *
-     * @return int
-     */
-    function osc_category_parent_id() {
-        return osc_category_field( 'fk_i_parent_id' );
-    }
-
-    /**
-     * Gets the total items related with the current category
-     *
-     * @return int
-     */
-    function osc_category_total_items() {
-        return osc_category_field( 'i_num_items' );
-        //$category = osc_category();
-        //return CategoryStats::newInstance()->getNumItems($category);
-    }
-
-    /**
-     * Reset the pointer of the array to the first category
-     *
-     * @return void
-     */
-    function osc_goto_first_category() {
-        View::newInstance()->_reset('categories');
-    }
-
-
-	/**
-	 * Gets list of non-empty categories
-	 *
-	 * @return array
-	 * @throws \Exception
-	 */
-    function osc_get_non_empty_categories() {
-        $aCategories = Category::newInstance()->toTree(false);
-        View::newInstance()->_exportVariableToView('categories', $aCategories );
-        return  View::newInstance()->_get('categories');
-    }
-
-
-	/**
-	 * Prints category select
-	 *
-	 * @param string $name
-	 * @param null   $category
-	 * @param null   $default_str
-	 *
-	 * @return void
-	 * @throws \Exception
-	 */
-    function osc_categories_select($name = 'sCategory', $category = null, $default_str = null) {
-	    if ( $default_str == null ) {
-		    $default_str = __( 'Select a category' );
-	    }
-        CategoryForm::category_select(Category::newInstance()->toTree(), $category, $default_str, $name);
-    }
-
-
-	/**
-	 * Get th category by id or slug
-	 *
-	 * @since 3.0
-	 *
-	 * @param $by   //two possibilities: slug or id
-	 * @param $what //the id or slug category we're looking for
-	 *
-	 * @return array|bool
-	 * @throws \Exception
-	 */
-    function osc_get_category($by, $what) {
-        if( !in_array($by, array('slug', 'id')) ) {
-            return false;
-        }
-
-        switch ($by) {
-            case 'slug':
-                return Category::newInstance()->findBySlug($what);
-            break;
-            case 'id':
-                return Category::newInstance()->findByPrimaryKey($what);
-            break;
-        }
-    }
-
-
-	/**
-	 * @return bool|int
-	 */
-	function osc_category_move_to_children() {
-        $category = View::newInstance()->_current('categories');
-	    if ( $category == '' ) {
-		    return - 1;
-	    }
-	    if ( ! isset( $category[ 'categories' ] ) ) {
-		    return false;
-	    }
-
-        if(View::newInstance()->_exists('categoryTrail')) {
-            $catTrail = View::newInstance()->_get('categoryTrail');
-        } else {
-            $catTrail = array();
-        }
-        $catTrail[] = View::newInstance()->_key('categories');
-        View::newInstance()->_exportVariableToView('categoryTrail', $catTrail);
-        View::newInstance()->_exportVariableToView('categories', $category['categories']);
-        View::newInstance()->_reset('categories');
-	}
-
-
-	/**
-	 * @return bool|int
-	 * @throws \Exception
-	 */
-	function osc_category_move_to_parent() {
-        $category = View::newInstance()->_get('categories');
-        $category = end($category);
-
-	    if ( $category == '' ) {
-		    return - 1;
-	    }
-	    if ( ! isset( $category[ 'fk_i_parent_id' ] ) ) {
-		    return false;
-	    }
-
-        $keys = View::newInstance()->_get('categoryTrail');
-        $position = array_pop($keys);
-        View::newInstance()->_exportVariableToView('categoryTrail', $keys);
-        if(!View::newInstance()->_exists('categories_tree')) {
-            View::newInstance()->_exportVariableToView('categories_tree', Category::newInstance()->toTree());
-        }
-        $scats['categories'] = Category::newInstance()->toTree();
-        if(count($keys)>0) {
-            foreach($keys as $k) {
-                $scats = $scats['categories'][$k];
-            }
-        }
-
-        $scats = $scats['categories'];
-
-        View::newInstance()->_erase('categories');
+    $ret = View::newInstance()->_next('subcategories');
+    //we have to delete for next iteration
+    if (!$ret) {
         View::newInstance()->_erase('subcategories');
-        View::newInstance()->_exportVariableToView('categories', $scats);
-        View::newInstance()->_seek('categories', $position);
     }
 
-    /**
-     * Gets the total of subcategories for the current category. If subcategories are not loaded, this function will load them and
-     * it will prepare the the pointer to the first element
-     *
-     * @return int
-     */
-    function osc_count_subcategories2() {
-        $category = View::newInstance()->_current('categories');
-	    if ( $category == '' ) {
-		    return - 1;
-	    }
-	    if ( ! isset( $category[ 'categories' ] ) ) {
-		    return 0;
-	    }
-	    if ( ! is_array( $category[ 'categories' ] ) ) {
-		    return 0;
-	    }
-        return count($category['categories']);
+    return $ret;
+}
+
+
+/**
+ * Gets the name of the current category
+ *
+ * @param string $locale
+ *
+ * @return string
+ */
+function osc_category_name($locale = '')
+{
+    if ($locale == '') {
+        $locale = osc_current_user_locale();
     }
 
+    return osc_category_field('s_name', $locale);
+}
 
-	/**
-	 * @param null $categories
-	 *
-	 * @throws \Exception
-	 */
-	function osc_export_categories( $categories = null) {
-        if($categories==null) {
-            $categories = Category::newInstance()->toTree();
+
+/**
+ * Gets the description of the current category
+ *
+ * @param string $locale
+ *
+ * @return string
+ */
+function osc_category_description($locale = '')
+{
+    if ($locale == '') {
+        $locale = osc_current_user_locale();
+    }
+
+    return osc_category_field('s_description', $locale);
+}
+
+
+/**
+ * Gets the id of the current category
+ *
+ * @param string $locale
+ *
+ * @return string
+ */
+function osc_category_id($locale = '')
+{
+    if ($locale == '') {
+        $locale = osc_current_user_locale();
+    }
+
+    return osc_category_field('pk_i_id', $locale);
+}
+
+
+/**
+ * Gets the slug of the current category. WARNING: This slug could NOT be used as a valid W3C HTML tag attribute as it
+ * could have other characters besides [A-Za-z0-9-_] We only did a urlencode to the variable
+ *
+ * @param string $locale
+ *
+ * @return string
+ */
+function osc_category_slug($locale = '')
+{
+    if ($locale == '') {
+        $locale = osc_current_user_locale();
+    }
+
+    return osc_category_field('s_slug', $locale);
+}
+
+
+/**
+ * Returns if the category has the prices enabled or not
+ *
+ * @return boolean
+ */
+function osc_category_price_enabled()
+{
+    return (boolean)osc_category_field('b_price_enabled');
+}
+
+
+/**
+ * Returns category's parent id
+ *
+ * @return int
+ */
+function osc_category_parent_id()
+{
+    return osc_category_field('fk_i_parent_id');
+}
+
+
+/**
+ * Gets the total items related with the current category
+ *
+ * @return int
+ */
+function osc_category_total_items()
+{
+    return osc_category_field('i_num_items');
+    //$category = osc_category();
+    //return CategoryStats::newInstance()->getNumItems($category);
+}
+
+
+/**
+ * Reset the pointer of the array to the first category
+ *
+ * @return void
+ */
+function osc_goto_first_category()
+{
+    View::newInstance()->_reset('categories');
+}
+
+
+/**
+ * Gets list of non-empty categories
+ *
+ * @return array
+ */
+function osc_get_non_empty_categories()
+{
+    $aCategories = Category::newInstance()->toTree(false);
+    View::newInstance()->_exportVariableToView('categories', $aCategories);
+
+    return View::newInstance()->_get('categories');
+}
+
+
+/**
+ * Prints category select
+ *
+ * @param string $name
+ * @param null   $category
+ * @param null   $default_str
+ *
+ * @return void
+ */
+function osc_categories_select($name = 'sCategory', $category = null, $default_str = null)
+{
+    if ($default_str == null) {
+        $default_str = __('Select a category');
+    }
+    CategoryForm::category_select(Category::newInstance()->toTree(), $category, $default_str, $name);
+}
+
+
+/**
+ * Get th category by id or slug
+ *
+ * @param $by   //two possibilities: slug or id
+ * @param $what //the id or slug category we're looking for
+ *
+ * @return array|bool
+ * @since 3.0
+ *
+ */
+function osc_get_category($by, $what)
+{
+    if (!in_array($by, array('slug', 'id'))) {
+        return false;
+    }
+
+    switch ($by) {
+        case 'slug':
+            return Category::newInstance()->findBySlug($what);
+            break;
+        case 'id':
+            return Category::newInstance()->findByPrimaryKey($what);
+            break;
+    }
+}
+
+
+/**
+ * @return bool|int|void
+ */
+function osc_category_move_to_children()
+{
+    $category = View::newInstance()->_current('categories');
+    if ($category == '') {
+        return -1;
+    }
+    if (!isset($category['categories'])) {
+        return false;
+    }
+
+    if (View::newInstance()->_exists('categoryTrail')) {
+        $catTrail = View::newInstance()->_get('categoryTrail');
+    } else {
+        $catTrail = array();
+    }
+    $catTrail[] = View::newInstance()->_key('categories');
+    View::newInstance()->_exportVariableToView('categoryTrail', $catTrail);
+    View::newInstance()->_exportVariableToView('categories', $category['categories']);
+    View::newInstance()->_reset('categories');
+}
+
+
+/**
+ * @return bool|int
+ */
+function osc_category_move_to_parent()
+{
+    $category = View::newInstance()->_get('categories');
+    $category = end($category);
+
+    if ($category == '') {
+        return -1;
+    }
+    if (!isset($category['fk_i_parent_id'])) {
+        return false;
+    }
+
+    $keys     = View::newInstance()->_get('categoryTrail');
+    $position = array_pop($keys);
+    View::newInstance()->_exportVariableToView('categoryTrail', $keys);
+    if (!View::newInstance()->_exists('categories_tree')) {
+        View::newInstance()->_exportVariableToView('categories_tree', Category::newInstance()->toTree());
+    }
+    $scats['categories'] = Category::newInstance()->toTree();
+    if (count($keys) > 0) {
+        foreach ($keys as $k) {
+            $scats = $scats['categories'][$k];
         }
-        View::newInstance()->_exportVariableToView('categories', $categories);
-        View::newInstance()->_exportVariableToView('categories_tree', $categories);
     }
 
+    $scats = $scats['categories'];
 
+    View::newInstance()->_erase('categories');
+    View::newInstance()->_erase('subcategories');
+    View::newInstance()->_exportVariableToView('categories', $scats);
+    View::newInstance()->_seek('categories', $position);
+}
+
+
+/**
+ * Gets the total of subcategories for the current category. If subcategories are not loaded, this function will load
+ * them and it will prepare the the pointer to the first element
+ *
+ * @return int
+ */
+function osc_count_subcategories2()
+{
+    $category = View::newInstance()->_current('categories');
+    if ($category == '') {
+        return -1;
+    }
+    if (!isset($category['categories'])) {
+        return 0;
+    }
+    if (!is_array($category['categories'])) {
+        return 0;
+    }
+
+    return count($category['categories']);
+}
+
+
+/**
+ * @param null $categories
+ *
+ */
+function osc_export_categories($categories = null)
+{
+    if ($categories == null) {
+        $categories = Category::newInstance()->toTree();
+    }
+    View::newInstance()->_exportVariableToView('categories', $categories);
+    View::newInstance()->_exportVariableToView('categories_tree', $categories);
+}

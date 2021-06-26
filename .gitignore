@@ -11,26 +11,26 @@ sftp-config*
 # Config Osclass
 /config.php
 /_config.php
-oc-includes/osclass/t/config.php
 .maintenance
 
 # oc-content
-/oc-content/debug*.log
-/oc-content/queries.log
-/oc-content/explain_queries.log
-/oc-content/uploads/*
+oc-content/debug*.log
+oc-content/queries.log
+oc-content/explain_queries.log
+oc-content/uploads/*
 
 # themes
 oc-content/themes/*
-!oc-content/themes/modern/
-!oc-content/themes/bender
+!oc-content/themes/index.php
 
 # plugins
 oc-content/plugins/*
 !oc-content/plugins/index.php
-!oc-content/plugins/google_analytics/
 !oc-content/plugins/google_maps/
 
+# languages
+oc-content/languages/*
+!oc-content/languages/en_US
 # Intellij IDEA
 .idea/*
 *.iml
@@ -41,8 +41,14 @@ nbproject/
 .sass-cache
 package-lock.json
 
+# Release
+release
+
 # npm
 node_modules
+
+#dotenv
+.env
 
 # test
 oc-includes/osclass/t/config.php
@@ -51,3 +57,7 @@ composer.phar
 osclass_latest.zip
 .php_cs.cache
 robots.txt
+/scratch.php
+/error.log
+/.php-cs-fixer.cache
+

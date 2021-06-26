@@ -1,99 +1,93 @@
 <?php
 
 /*
- * Copyright 2014 Osclass
+ * Osclass - software for creating and publishing online classified advertising platforms
+ * Maintained and supported by Mindstellar Community
+ * https://github.com/mindstellar/Osclass
+ * Copyright (c) 2021.  Mindstellar
  *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
  *
- *     http://www.apache.org/licenses/LICENSE-2.0
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
  *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
+ *                     GNU GENERAL PUBLIC LICENSE
+ *                        Version 3, 29 June 2007
+ *
+ *  Copyright (C) 2007 Free Software Foundation, Inc. <http://fsf.org/>
+ *  Everyone is permitted to copy and distribute verbatim copies
+ *  of this license document, but changing it is not allowed.
+ *
+ *  You should have received a copy of the GNU Affero General Public
+ *  License along with this program. If not, see <http://www.gnu.org/licenses/>.
+ *
  */
 
-    /**
-    * Helper Database Info
-    * @package Osclass
-    * @subpackage Helpers
-    * @author Osclass
-    */
+/**
+ * Helper Database Info
+ *
+ * @package    Osclass
+ * @subpackage Helpers
+ * @author     Osclass
+ */
 
-    /**
-     * Gets database name
-     *
-     * @return string
-     */
-    function osc_db_name() {
-        return getSiteInfo('s_db_name', DB_NAME);
-    }
+use mindstellar\utility\Deprecate;
 
-    /**
-     * Gets database host
-     *
-     * @return string
-     */
-    function osc_db_host() {
-        return getSiteInfo('s_db_host', DB_HOST);
-    }
+/**
+ * Gets database name
+ *
+ * @return string
+ * @deprecated 4.0.0
+ */
+function osc_db_name()
+{
+    Deprecate::deprecatedFunction(__FUNCTION__, '4.0.0', 'DB_NAME constant');
 
-    /**
-     * Gets database user
-     *
-     * @return string
-     */
-    function osc_db_user() {
-        return getSiteInfo('s_db_user', DB_USER);
-    }
+    return DB_NAME;
+}
 
-    /**
-     * Gets database password
-     *
-     * @return string
-     */
-    function osc_db_password() {
-        return getSiteInfo('s_db_password', DB_PASSWORD);
-    }
 
-    /**
-     * Gets multisite url
-     *
-     * @return string
-     */
-    function osc_multisite_url() {
-        if( getSiteInfo('s_site_mapping', '') !== '' ) {
-            return getSiteInfo('s_site_mapping', '');
-        }
-        return getSiteInfo('s_site', '');
-    }
+/**
+ * Gets database host
+ *
+ * @return string
+ * @deprecated 4.0.0
+ */
+function osc_db_host()
+{
+    Deprecate::deprecatedFunction(__FUNCTION__, '4.0.0', 'DB_HOST constant');
 
-    /**
-     * Gets multisite url
-     *
-     * @return string
-     */
-    function osc_multisite_upload_path() {
-        return getSiteInfo('s_upload_path', '');
-    }
+    return DB_HOST;
+}
 
-    //PRIVATE FUNCTION FOR GETTING NO BOOLEAN INFORMATION (if there was a class :P)
-    /**
-     * Gets site info
-     *
-     * @param string $key
-     * @param string $default_value
-     * @return string
-     */
-    function getSiteInfo($key, $default_value) {
-        if (MULTISITE) {
-            $_P = SiteInfo::newInstance();
-            return $_P->get( $key);
-        }
 
-        return $default_value;
-    }
+/**
+ * Gets database user
+ *
+ * @return string
+ * @deprecated 4.0.0
+ */
+function osc_db_user()
+{
+    Deprecate::deprecatedFunction(__FUNCTION__, '4.0.0', 'DB_USER constant');
 
+    return DB_USER;
+}
+
+
+/**
+ * Gets database password
+ *
+ * @return string
+ * @deprecated 4.0.0
+ */
+function osc_db_password()
+{
+    Deprecate::deprecatedFunction(__FUNCTION__, '4.0.0', 'DB_PASSWORD constant');
+
+    return DB_PASSWORD;
+}

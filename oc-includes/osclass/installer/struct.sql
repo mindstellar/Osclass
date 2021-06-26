@@ -42,7 +42,7 @@ CREATE TABLE /*TABLE_PREFIX*/t_currency (
 ) ENGINE=InnoDB DEFAULT CHARACTER SET 'UTF8' COLLATE 'UTF8_GENERAL_CI';
 
 CREATE TABLE /*TABLE_PREFIX*/t_region (
-    pk_i_id INT(10) UNSIGNED NOT NULL AUTO_INCREMENT,
+    pk_i_id INT UNSIGNED NOT NULL AUTO_INCREMENT,
     fk_c_country_code CHAR(2) NOT NULL,
     s_name VARCHAR(60) NOT NULL,
     s_slug VARCHAR(60) NOT NULL DEFAULT '',
@@ -57,8 +57,8 @@ CREATE TABLE /*TABLE_PREFIX*/t_region (
 
 
 CREATE TABLE /*TABLE_PREFIX*/t_city (
-    pk_i_id INT(10) UNSIGNED NOT NULL AUTO_INCREMENT,
-    fk_i_region_id INT(10) UNSIGNED NOT NULL,
+    pk_i_id INT UNSIGNED NOT NULL AUTO_INCREMENT,
+    fk_i_region_id INT UNSIGNED NOT NULL,
     s_name VARCHAR(60) NOT NULL,
     s_slug VARCHAR(60) NOT NULL DEFAULT '',
     fk_c_country_code CHAR(2) NULL,
@@ -73,8 +73,8 @@ CREATE TABLE /*TABLE_PREFIX*/t_city (
 ) ENGINE=InnoDB DEFAULT CHARACTER SET 'UTF8' COLLATE 'UTF8_GENERAL_CI';
 
 CREATE TABLE /*TABLE_PREFIX*/t_city_area (
-    pk_i_id INT(10) UNSIGNED NOT NULL,
-    fk_i_city_id INT(10) UNSIGNED NOT NULL,
+    pk_i_id INT UNSIGNED NOT NULL,
+    fk_i_city_id INT UNSIGNED NOT NULL,
     s_name VARCHAR(255) NOT NULL,
 
         PRIMARY KEY (pk_i_id),
@@ -84,7 +84,7 @@ CREATE TABLE /*TABLE_PREFIX*/t_city_area (
 ) ENGINE=InnoDB DEFAULT CHARACTER SET 'UTF8' COLLATE 'UTF8_GENERAL_CI';
 
 CREATE TABLE /*TABLE_PREFIX*/t_widget (
-    pk_i_id INT(10) UNSIGNED NOT NULL AUTO_INCREMENT,
+    pk_i_id INT UNSIGNED NOT NULL AUTO_INCREMENT,
     s_description VARCHAR(40) NOT NULL,
     s_location VARCHAR(40) NOT NULL,
     e_kind ENUM('TEXT', 'HTML') NOT NULL,
@@ -94,7 +94,7 @@ CREATE TABLE /*TABLE_PREFIX*/t_widget (
 ) ENGINE=InnoDB DEFAULT CHARACTER SET 'UTF8' COLLATE 'UTF8_GENERAL_CI';
 
 CREATE TABLE /*TABLE_PREFIX*/t_admin (
-    pk_i_id INT(10) UNSIGNED NOT NULL AUTO_INCREMENT,
+    pk_i_id INT UNSIGNED NOT NULL AUTO_INCREMENT,
     s_name VARCHAR(100) NOT NULL,
     s_username VARCHAR(40) NOT NULL,
     s_password CHAR(60) NOT NULL,
@@ -108,7 +108,7 @@ CREATE TABLE /*TABLE_PREFIX*/t_admin (
 ) ENGINE=InnoDB DEFAULT CHARACTER SET 'UTF8' COLLATE 'UTF8_GENERAL_CI';
 
 CREATE TABLE /*TABLE_PREFIX*/t_user (
-    pk_i_id INT(10) UNSIGNED NOT NULL AUTO_INCREMENT,
+    pk_i_id INT UNSIGNED NOT NULL AUTO_INCREMENT,
     dt_reg_date DATETIME NOT NULL,
     dt_mod_date DATETIME NULL,
     s_name VARCHAR(100) NOT NULL,
@@ -128,18 +128,18 @@ CREATE TABLE /*TABLE_PREFIX*/t_user (
     s_country VARCHAR(40) NULL,
     s_address VARCHAR(100) NULL,
     s_zip VARCHAR(15) NULL,
-    fk_i_region_id INT(10) UNSIGNED NULL,
+    fk_i_region_id INT UNSIGNED NULL,
     s_region VARCHAR(100),
-    fk_i_city_id INT(10) UNSIGNED NULL,
+    fk_i_city_id INT UNSIGNED NULL,
     s_city VARCHAR(100) NULL,
-    fk_i_city_area_id INT(10) UNSIGNED NULL,
+    fk_i_city_area_id INT UNSIGNED NULL,
     s_city_area VARCHAR(200) NULL,
     d_coord_lat DECIMAL(10,6),
     d_coord_long DECIMAL(10,6),
     b_company TINYINT(1) NOT NULL DEFAULT 0,
-    i_items INT(10) UNSIGNED NULL DEFAULT 0,
-    i_comments INT(10) UNSIGNED NULL DEFAULT 0,
-    dt_access_date DATETIME NOT NULL DEFAULT  '0000-00-00 00:00:00',
+    i_items INT UNSIGNED NULL DEFAULT 0,
+    i_comments INT UNSIGNED NULL DEFAULT 0,
+    dt_access_date DATETIME NOT NULL DEFAULT  '1000-01-01 00:00:00',
     s_access_ip VARCHAR(15) NOT NULL DEFAULT '',
 
         PRIMARY KEY (pk_i_id),
@@ -153,7 +153,7 @@ CREATE TABLE /*TABLE_PREFIX*/t_user (
 ) ENGINE=InnoDB DEFAULT CHARACTER SET 'UTF8' COLLATE 'UTF8_GENERAL_CI';
 
 CREATE TABLE /*TABLE_PREFIX*/t_user_description (
-    fk_i_user_id INT(10) UNSIGNED NOT NULL,
+    fk_i_user_id INT UNSIGNED NOT NULL,
     fk_c_locale_code CHAR(5) NOT NULL,
     s_info TEXT NULL,
 
@@ -163,7 +163,7 @@ CREATE TABLE /*TABLE_PREFIX*/t_user_description (
 ) ENGINE=InnoDB DEFAULT CHARACTER SET 'UTF8' COLLATE 'UTF8_GENERAL_CI';
 
 CREATE TABLE /*TABLE_PREFIX*/t_user_email_tmp (
-    fk_i_user_id INT(10) UNSIGNED NOT NULL,
+    fk_i_user_id INT UNSIGNED NOT NULL,
     s_new_email VARCHAR(100) NOT NULL,
     dt_date DATETIME NOT NULL,
 
@@ -172,8 +172,8 @@ CREATE TABLE /*TABLE_PREFIX*/t_user_email_tmp (
 ) ENGINE=InnoDB DEFAULT CHARACTER SET 'UTF8' COLLATE 'UTF8_GENERAL_CI';
 
 CREATE TABLE /*TABLE_PREFIX*/t_category (
-    pk_i_id INT(10) UNSIGNED NOT NULL AUTO_INCREMENT,
-    fk_i_parent_id INT(10) UNSIGNED NULL,
+    pk_i_id INT UNSIGNED NOT NULL AUTO_INCREMENT,
+    fk_i_parent_id INT UNSIGNED NULL,
     i_expiration_days INT(3) UNSIGNED NOT NULL DEFAULT 0,
     i_position INT(2) UNSIGNED NOT NULL DEFAULT 0,
     b_enabled TINYINT(1) NOT NULL DEFAULT 1,
@@ -187,7 +187,7 @@ CREATE TABLE /*TABLE_PREFIX*/t_category (
 ) ENGINE=InnoDB DEFAULT CHARACTER SET 'UTF8' COLLATE 'UTF8_GENERAL_CI';
 
 CREATE TABLE /*TABLE_PREFIX*/t_category_description (
-    fk_i_category_id INT(10) UNSIGNED NOT NULL,
+    fk_i_category_id INT UNSIGNED NOT NULL,
     fk_c_locale_code CHAR(5) NOT NULL,
     s_name VARCHAR(100) NULL DEFAULT NULL,
     s_description TEXT NULL,
@@ -200,17 +200,17 @@ CREATE TABLE /*TABLE_PREFIX*/t_category_description (
 ) ENGINE=InnoDB DEFAULT CHARACTER SET 'UTF8' COLLATE 'UTF8_GENERAL_CI';
 
 CREATE TABLE /*TABLE_PREFIX*/t_category_stats (
-    fk_i_category_id INT(10) UNSIGNED NOT NULL,
-    i_num_items INT(10) UNSIGNED NOT NULL DEFAULT 0,
+    fk_i_category_id INT UNSIGNED NOT NULL,
+    i_num_items INT UNSIGNED NOT NULL DEFAULT 0,
 
         PRIMARY KEY (fk_i_category_id),
         FOREIGN KEY (fk_i_category_id) REFERENCES /*TABLE_PREFIX*/t_category (pk_i_id)
 ) ENGINE=InnoDB DEFAULT CHARACTER SET 'UTF8' COLLATE 'UTF8_GENERAL_CI';
 
 CREATE TABLE /*TABLE_PREFIX*/t_item (
-    pk_i_id INT(10) UNSIGNED NOT NULL AUTO_INCREMENT,
-    fk_i_user_id INT(10) UNSIGNED NULL,
-    fk_i_category_id INT(10) UNSIGNED NOT NULL,
+    pk_i_id INT UNSIGNED NOT NULL AUTO_INCREMENT,
+    fk_i_user_id INT UNSIGNED NULL,
+    fk_i_category_id INT UNSIGNED NOT NULL,
     dt_pub_date DATETIME NOT NULL,
     dt_mod_date DATETIME NULL,
     f_price FLOAT NULL,
@@ -218,6 +218,7 @@ CREATE TABLE /*TABLE_PREFIX*/t_item (
     fk_c_currency_code CHAR(3) NULL,
     s_contact_name VARCHAR(100) NULL,
     s_contact_email VARCHAR(140) NOT NULL,
+    s_contact_phone VARCHAR(40) NULL,
     s_ip VARCHAR(64) NOT NULL DEFAULT '',
     b_premium TINYINT(1) NOT NULL DEFAULT 0,
     b_enabled TINYINT(1) NOT NULL DEFAULT 1,
@@ -242,7 +243,7 @@ CREATE TABLE /*TABLE_PREFIX*/t_item (
 ) ENGINE=InnoDB DEFAULT CHARACTER SET 'UTF8' COLLATE 'UTF8_GENERAL_CI';
 
 CREATE TABLE /*TABLE_PREFIX*/t_item_description (
-    fk_i_item_id INT(10) UNSIGNED NOT NULL,
+    fk_i_item_id INT UNSIGNED NOT NULL,
     fk_c_locale_code CHAR(5) NOT NULL,
     s_title VARCHAR(100) NOT NULL,
     s_description MEDIUMTEXT NOT NULL,
@@ -252,16 +253,16 @@ CREATE TABLE /*TABLE_PREFIX*/t_item_description (
 
 
 CREATE TABLE /*TABLE_PREFIX*/t_item_location (
-    fk_i_item_id INT(10) UNSIGNED NOT NULL,
+    fk_i_item_id INT UNSIGNED NOT NULL,
     fk_c_country_code CHAR(2) NULL,
     s_country VARCHAR(40) NULL,
     s_address VARCHAR(100) NULL,
     s_zip VARCHAR(15) NULL,
-    fk_i_region_id INT(10) UNSIGNED NULL,
+    fk_i_region_id INT UNSIGNED NULL,
     s_region VARCHAR(100),
-    fk_i_city_id INT(10) UNSIGNED NULL,
+    fk_i_city_id INT UNSIGNED NULL,
     s_city VARCHAR(100) NULL,
-    fk_i_city_area_id INT(10) UNSIGNED NULL,
+    fk_i_city_area_id INT UNSIGNED NULL,
     s_city_area VARCHAR(200) NULL,
     d_coord_lat DECIMAL(10,6),
     d_coord_long DECIMAL(10,6),
@@ -275,14 +276,14 @@ CREATE TABLE /*TABLE_PREFIX*/t_item_location (
 ) ENGINE=InnoDB DEFAULT CHARACTER SET 'UTF8' COLLATE 'UTF8_GENERAL_CI';
 
 CREATE TABLE /*TABLE_PREFIX*/t_item_stats (
-    fk_i_item_id INT(10) UNSIGNED NOT NULL,
-    i_num_views INT(10) UNSIGNED NOT NULL DEFAULT 0,
-    i_num_spam INT(10) UNSIGNED NOT NULL DEFAULT 0,
-    i_num_repeated INT(10) UNSIGNED NOT NULL DEFAULT 0,
-    i_num_bad_classified INT(10) UNSIGNED NOT NULL DEFAULT 0,
-    i_num_offensive INT(10) UNSIGNED NOT NULL DEFAULT 0,
-    i_num_expired INT(10) UNSIGNED NOT NULL DEFAULT 0,
-    i_num_premium_views INT(10) UNSIGNED NOT NULL DEFAULT 0,
+    fk_i_item_id INT UNSIGNED NOT NULL,
+    i_num_views INT UNSIGNED NOT NULL DEFAULT 0,
+    i_num_spam INT UNSIGNED NOT NULL DEFAULT 0,
+    i_num_repeated INT UNSIGNED NOT NULL DEFAULT 0,
+    i_num_bad_classified INT UNSIGNED NOT NULL DEFAULT 0,
+    i_num_offensive INT UNSIGNED NOT NULL DEFAULT 0,
+    i_num_expired INT UNSIGNED NOT NULL DEFAULT 0,
+    i_num_premium_views INT UNSIGNED NOT NULL DEFAULT 0,
     dt_date DATE NOT NULL,
 
         PRIMARY KEY (fk_i_item_id, dt_date),
@@ -291,8 +292,8 @@ CREATE TABLE /*TABLE_PREFIX*/t_item_stats (
 ) ENGINE=InnoDB DEFAULT CHARACTER SET 'UTF8' COLLATE 'UTF8_GENERAL_CI';
 
 CREATE TABLE /*TABLE_PREFIX*/t_item_resource (
-    pk_i_id INT(10) UNSIGNED NOT NULL AUTO_INCREMENT,
-    fk_i_item_id INT(10) UNSIGNED NOT NULL,
+    pk_i_id INT UNSIGNED NOT NULL AUTO_INCREMENT,
+    fk_i_item_id INT UNSIGNED NOT NULL,
     s_name VARCHAR(60) NULL,
     s_extension VARCHAR(10) NULL,
     s_content_type VARCHAR(40) NULL,
@@ -305,8 +306,8 @@ CREATE TABLE /*TABLE_PREFIX*/t_item_resource (
 ) ENGINE=InnoDB DEFAULT CHARACTER SET 'UTF8' COLLATE 'UTF8_GENERAL_CI';
 
 CREATE TABLE /*TABLE_PREFIX*/t_item_comment (
-    pk_i_id INT(10) UNSIGNED NOT NULL AUTO_INCREMENT,
-    fk_i_item_id INT(10) UNSIGNED NOT NULL,
+    pk_i_id INT UNSIGNED NOT NULL AUTO_INCREMENT,
+    fk_i_item_id INT UNSIGNED NOT NULL,
     dt_pub_date DATETIME NOT NULL,
     s_title VARCHAR(200) NOT NULL,
     s_author_name VARCHAR(100) NOT NULL,
@@ -315,7 +316,7 @@ CREATE TABLE /*TABLE_PREFIX*/t_item_comment (
     b_enabled TINYINT(1) NOT NULL DEFAULT 1,
     b_active TINYINT(1) NOT NULL DEFAULT 0,
     b_spam TINYINT(1) NOT NULL DEFAULT 0,
-    fk_i_user_id INT(10) UNSIGNED NULL,
+    fk_i_user_id INT UNSIGNED NULL,
 
         PRIMARY KEY (pk_i_id),
         INDEX fk_i_item_id (fk_i_item_id),
@@ -333,7 +334,7 @@ CREATE TABLE /*TABLE_PREFIX*/t_preference (
 ) ENGINE=InnoDB DEFAULT CHARACTER SET 'UTF8' COLLATE 'UTF8_GENERAL_CI';
 
 CREATE TABLE /*TABLE_PREFIX*/t_pages (
-    pk_i_id INT(10) UNSIGNED NOT NULL AUTO_INCREMENT,
+    pk_i_id INT UNSIGNED NOT NULL AUTO_INCREMENT,
     s_internal_name VARCHAR(50) NULL,
     b_indelible TINYINT(1) NOT NULL DEFAULT 0,
     b_link TINYINT(1) NOT NULL DEFAULT 1,
@@ -346,7 +347,7 @@ CREATE TABLE /*TABLE_PREFIX*/t_pages (
 ) ENGINE=InnoDB DEFAULT CHARACTER SET 'UTF8' COLLATE 'UTF8_GENERAL_CI';
 
 CREATE TABLE /*TABLE_PREFIX*/t_pages_description (
-    fk_i_pages_id INT(10) UNSIGNED NOT NULL,
+    fk_i_pages_id INT UNSIGNED NOT NULL,
     fk_c_locale_code CHAR(5) NOT NULL,
     s_title VARCHAR(255) NOT NULL,
     s_text TEXT,
@@ -358,7 +359,7 @@ CREATE TABLE /*TABLE_PREFIX*/t_pages_description (
 
 CREATE TABLE /*TABLE_PREFIX*/t_plugin_category (
     s_plugin_name VARCHAR(40) NOT NULL,
-    fk_i_category_id INT(10) UNSIGNED NOT NULL,
+    fk_i_category_id INT UNSIGNED NOT NULL,
 
         INDEX fk_i_category_id (fk_i_category_id),
         FOREIGN KEY (fk_i_category_id) REFERENCES /*TABLE_PREFIX*/t_category (pk_i_id)
@@ -366,14 +367,14 @@ CREATE TABLE /*TABLE_PREFIX*/t_plugin_category (
 
 CREATE TABLE /*TABLE_PREFIX*/t_cron (
   e_type enum('INSTANT','HOURLY','DAILY','WEEKLY','CUSTOM') NOT NULL,
-  d_last_exec DATETIME NOT NULL,
-  d_next_exec DATETIME NOT NULL
+  d_last_exec DATETIME NOT NULL DEFAULT  '1000-01-01 00:00:00',
+  d_next_exec DATETIME NOT NULL DEFAULT  '1000-01-01 00:00:00'
 ) ENGINE=InnoDB DEFAULT CHARACTER SET 'UTF8' COLLATE 'UTF8_GENERAL_CI';
 
 CREATE TABLE /*TABLE_PREFIX*/t_alerts (
-    pk_i_id INT(10) UNSIGNED NOT NULL AUTO_INCREMENT,
+    pk_i_id INT UNSIGNED NOT NULL AUTO_INCREMENT,
     s_email VARCHAR(100) DEFAULT NULL,
-    fk_i_user_id INT(10) UNSIGNED DEFAULT NULL,
+    fk_i_user_id INT UNSIGNED DEFAULT NULL,
     s_search LONGTEXT,
     s_secret VARCHAR(40) NULL,
     b_active TINYINT(1) NOT NULL DEFAULT 0,
@@ -386,7 +387,7 @@ CREATE TABLE /*TABLE_PREFIX*/t_alerts (
 
 CREATE TABLE /*TABLE_PREFIX*/t_alerts_sent (
     d_date DATE NOT NULL,
-    i_num_alerts_sent INT(10) UNSIGNED NOT NULL DEFAULT 0,
+    i_num_alerts_sent INT UNSIGNED NOT NULL DEFAULT 0,
 
     PRIMARY KEY (d_date)
 ) ENGINE=InnoDB DEFAULT CHARACTER SET 'UTF8' COLLATE 'UTF8_GENERAL_CI';
@@ -397,8 +398,8 @@ CREATE TABLE /*TABLE_PREFIX*/t_keywords (
     s_original_text VARCHAR(255) NOT NULL,
     s_anchor_text VARCHAR(255) NOT NULL,
     s_normalized_text VARCHAR(255) NOT NULL,
-    fk_i_category_id INT(10) UNSIGNED NULL,
-    fk_i_city_id INT(10) UNSIGNED NULL,
+    fk_i_category_id INT UNSIGNED NULL,
+    fk_i_city_id INT UNSIGNED NULL,
 
         PRIMARY KEY (s_md5, fk_c_locale_code),
         INDEX fk_i_category_id (fk_i_category_id),
@@ -414,7 +415,7 @@ CREATE TABLE /*TABLE_PREFIX*/t_latest_searches (
 ) ENGINE=InnoDB DEFAULT CHARACTER SET 'UTF8' COLLATE 'UTF8_GENERAL_CI';
 
 CREATE TABLE /*TABLE_PREFIX*/t_meta_fields (
-    pk_i_id INT(10) UNSIGNED NOT NULL AUTO_INCREMENT,
+    pk_i_id INT UNSIGNED NOT NULL AUTO_INCREMENT,
     s_name VARCHAR(255) NOT NULL,
     s_slug VARCHAR(255) NOT NULL,
     e_type ENUM('TEXT','TEXTAREA','DROPDOWN','RADIO','CHECKBOX','URL', 'DATE', 'DATEINTERVAL') NOT NULL DEFAULT  'TEXT',
@@ -426,8 +427,8 @@ CREATE TABLE /*TABLE_PREFIX*/t_meta_fields (
 ) ENGINE=InnoDB DEFAULT CHARACTER SET 'UTF8' COLLATE 'UTF8_GENERAL_CI';
 
 CREATE TABLE /*TABLE_PREFIX*/t_meta_categories (
-    fk_i_category_id INT(10) UNSIGNED NOT NULL,
-    fk_i_field_id INT(10) UNSIGNED NOT NULL,
+    fk_i_category_id INT UNSIGNED NOT NULL,
+    fk_i_field_id INT UNSIGNED NOT NULL,
 
         PRIMARY KEY (fk_i_category_id, fk_i_field_id),
         FOREIGN KEY (fk_i_category_id) REFERENCES /*TABLE_PREFIX*/t_category (pk_i_id),
@@ -435,8 +436,8 @@ CREATE TABLE /*TABLE_PREFIX*/t_meta_categories (
 ) ENGINE=InnoDB DEFAULT CHARACTER SET 'UTF8' COLLATE 'UTF8_GENERAL_CI';
 
 CREATE TABLE /*TABLE_PREFIX*/t_item_meta (
-    fk_i_item_id INT(10) UNSIGNED NOT NULL,
-    fk_i_field_id INT(10) UNSIGNED NOT NULL,
+    fk_i_item_id INT UNSIGNED NOT NULL,
+    fk_i_field_id INT UNSIGNED NOT NULL,
     s_value TEXT NULL,
     s_multi VARCHAR(20) NOT NULL DEFAULT '',
 
@@ -450,16 +451,16 @@ CREATE TABLE /*TABLE_PREFIX*/t_log (
     dt_date DATETIME NOT NULL,
     s_section VARCHAR(50) NOT NULL,
     s_action VARCHAR(50) NOT NULL,
-    fk_i_id INT(10) UNSIGNED NOT NULL,
+    fk_i_id INT UNSIGNED NOT NULL,
     s_data VARCHAR(250) NOT NULL,
     s_ip VARCHAR(50) NOT NULL,
     s_who VARCHAR(50) NOT NULL,
-    fk_i_who_id INT(10) UNSIGNED NOT NULL
+    fk_i_who_id INT UNSIGNED NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARACTER SET 'UTF8' COLLATE 'UTF8_GENERAL_CI';
 
 CREATE TABLE /*TABLE_PREFIX*/t_city_stats (
-    fk_i_city_id INT(10) UNSIGNED NOT NULL,
-    i_num_items INT(10) UNSIGNED NOT NULL DEFAULT 0,
+    fk_i_city_id INT UNSIGNED NOT NULL,
+    i_num_items INT UNSIGNED NOT NULL DEFAULT 0,
 
         PRIMARY KEY (fk_i_city_id),
         INDEX idx_num_items (i_num_items),
@@ -467,8 +468,8 @@ CREATE TABLE /*TABLE_PREFIX*/t_city_stats (
 ) ENGINE=InnoDB DEFAULT CHARACTER SET 'UTF8' COLLATE 'UTF8_GENERAL_CI';
 
 CREATE TABLE /*TABLE_PREFIX*/t_region_stats (
-    fk_i_region_id INT(10) UNSIGNED NOT NULL,
-    i_num_items INT(10) UNSIGNED NOT NULL DEFAULT 0,
+    fk_i_region_id INT UNSIGNED NOT NULL,
+    i_num_items INT UNSIGNED NOT NULL DEFAULT 0,
 
         PRIMARY KEY (fk_i_region_id),
         INDEX idx_num_items (i_num_items),
@@ -477,7 +478,7 @@ CREATE TABLE /*TABLE_PREFIX*/t_region_stats (
 
 CREATE TABLE /*TABLE_PREFIX*/t_country_stats (
     fk_c_country_code CHAR(2) NOT NULL,
-    i_num_items INT(10) UNSIGNED NOT NULL DEFAULT 0,
+    i_num_items INT UNSIGNED NOT NULL DEFAULT 0,
 
         PRIMARY KEY (fk_c_country_code),
         INDEX idx_num_items (i_num_items),
@@ -491,7 +492,7 @@ CREATE TABLE /*TABLE_PREFIX*/t_locations_tmp (
 ) ENGINE=InnoDB DEFAULT CHARACTER SET 'UTF8' COLLATE 'UTF8_GENERAL_CI';
 
 CREATE TABLE /*TABLE_PREFIX*/t_ban_rule (
-  pk_i_id INT(10) UNSIGNED NOT NULL AUTO_INCREMENT,
+  pk_i_id INT UNSIGNED NOT NULL AUTO_INCREMENT,
   s_name VARCHAR(250) NOT NULL DEFAULT '',
   s_ip VARCHAR(50) NOT NULL DEFAULT '',
   s_email VARCHAR(250) NOT NULL DEFAULT '',

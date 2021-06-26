@@ -4,11 +4,12 @@
 
 namespace Composer\Autoload;
 
-class ComposerStaticInit8e5461a2624ed352a699afc310ff5573
+class ComposerStaticInit1fcba07043a631f012853cd02fe384cd
 {
     public static $files = array (
-        '2cffec82183ee1cea088009cef9a6fc3' => __DIR__ . '/..' . '/ezyang/htmlpurifier/library/HTMLPurifier.composer.php',
         'decc78cc4436b1292c6c0d151b19445c' => __DIR__ . '/..' . '/phpseclib/phpseclib/phpseclib/bootstrap.php',
+        '2cffec82183ee1cea088009cef9a6fc3' => __DIR__ . '/..' . '/ezyang/htmlpurifier/library/HTMLPurifier.composer.php',
+        'aa75ea0761a2f40c1f3b32ad314f86c4' => __DIR__ . '/..' . '/phpseclib/mcrypt_compat/lib/mcrypt.php',
     );
 
     public static $prefixLengthsPsr4 = array (
@@ -16,9 +17,17 @@ class ComposerStaticInit8e5461a2624ed352a699afc310ff5573
         array (
             'phpseclib\\' => 10,
         ),
+        'm' => 
+        array (
+            'mindstellar\\' => 12,
+        ),
         'R' => 
         array (
             'ReCaptcha\\' => 10,
+        ),
+        'P' => 
+        array (
+            'PHPMailer\\PHPMailer\\' => 20,
         ),
         'O' => 
         array (
@@ -36,9 +45,17 @@ class ComposerStaticInit8e5461a2624ed352a699afc310ff5573
         array (
             0 => __DIR__ . '/..' . '/phpseclib/phpseclib/phpseclib',
         ),
+        'mindstellar\\' => 
+        array (
+            0 => __DIR__ . '/../../..' . '/oc-includes/osclass/classes',
+        ),
         'ReCaptcha\\' => 
         array (
             0 => __DIR__ . '/..' . '/google/recaptcha/src/ReCaptcha',
+        ),
+        'PHPMailer\\PHPMailer\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/phpmailer/phpmailer/src',
         ),
         'OpensslCryptor\\' => 
         array (
@@ -65,7 +82,92 @@ class ComposerStaticInit8e5461a2624ed352a699afc310ff5573
     );
 
     public static $classMap = array (
-        'EasyPeasyICS' => __DIR__ . '/..' . '/phpmailer/phpmailer/extras/EasyPeasyICS.php',
+        'Admin' => __DIR__ . '/../../..' . '/oc-includes/osclass/classes/model/Admin.php',
+        'AdminBaseModel' => __DIR__ . '/../../..' . '/oc-includes/osclass/classes/controller/base/AdminBaseModel.php',
+        'AdminForm' => __DIR__ . '/../../..' . '/oc-includes/osclass/classes/form/AdminForm.php',
+        'AdminMenu' => __DIR__ . '/../../..' . '/oc-includes/osclass/classes/AdminMenu.php',
+        'AdminSecBaseModel' => __DIR__ . '/../../..' . '/oc-includes/osclass/classes/controller/base/AdminSecBaseModel.php',
+        'AdminThemes' => __DIR__ . '/../../..' . '/oc-includes/osclass/classes/themes/AdminThemes.php',
+        'AdminToolbar' => __DIR__ . '/../../..' . '/oc-includes/osclass/classes/AdminToolbar.php',
+        'AjaxUploadedFileForm' => __DIR__ . '/../../..' . '/oc-includes/AjaxUploader.php',
+        'AjaxUploadedFileXhr' => __DIR__ . '/../../..' . '/oc-includes/AjaxUploader.php',
+        'AjaxUploader' => __DIR__ . '/../../..' . '/oc-includes/AjaxUploader.php',
+        'Akismet' => __DIR__ . '/../../..' . '/oc-includes/Akismet.class.php',
+        'AlertForm' => __DIR__ . '/../../..' . '/oc-includes/osclass/classes/form/AlertForm.php',
+        'Alerts' => __DIR__ . '/../../..' . '/oc-includes/osclass/classes/model/Alerts.php',
+        'AlertsDataTable' => __DIR__ . '/../../..' . '/oc-includes/osclass/classes/datatables/AlertsDataTable.php',
+        'AlertsStats' => __DIR__ . '/../../..' . '/oc-includes/osclass/classes/model/AlertsStats.php',
+        'BanRule' => __DIR__ . '/../../..' . '/oc-includes/osclass/classes/model/BanRule.php',
+        'BanRuleForm' => __DIR__ . '/../../..' . '/oc-includes/osclass/classes/form/BanRuleForm.php',
+        'BanRulesDataTable' => __DIR__ . '/../../..' . '/oc-includes/osclass/classes/datatables/BanRulesDataTable.php',
+        'BaseModel' => __DIR__ . '/../../..' . '/oc-includes/osclass/classes/controller/base/abstract/BaseModel.php',
+        'Breadcrumb' => __DIR__ . '/../../..' . '/oc-includes/osclass/classes/Breadcrumb.php',
+        'CAdminAdmins' => __DIR__ . '/../../..' . '/oc-includes/osclass/classes/controller/admin/CAdminAdmins.php',
+        'CAdminAjax' => __DIR__ . '/../../..' . '/oc-includes/osclass/classes/controller/admin/ajax/CAdminAjax.php',
+        'CAdminAppearance' => __DIR__ . '/../../..' . '/oc-includes/osclass/classes/controller/admin/CAdminAppearance.php',
+        'CAdminCFields' => __DIR__ . '/../../..' . '/oc-includes/osclass/classes/controller/admin/CAdminCFields.php',
+        'CAdminCategories' => __DIR__ . '/../../..' . '/oc-includes/osclass/classes/controller/admin/CAdminCategories.php',
+        'CAdminEmails' => __DIR__ . '/../../..' . '/oc-includes/osclass/classes/controller/admin/CAdminEmails.php',
+        'CAdminItemComments' => __DIR__ . '/../../..' . '/oc-includes/osclass/classes/controller/admin/CAdminItemComments.php',
+        'CAdminItems' => __DIR__ . '/../../..' . '/oc-includes/osclass/classes/controller/admin/CAdminItems.php',
+        'CAdminLanguages' => __DIR__ . '/../../..' . '/oc-includes/osclass/classes/controller/admin/CAdminLanguages.php',
+        'CAdminLogin' => __DIR__ . '/../../..' . '/oc-includes/osclass/classes/controller/admin/CAdminLogin.php',
+        'CAdminMain' => __DIR__ . '/../../..' . '/oc-includes/osclass/classes/controller/admin/CAdminMain.php',
+        'CAdminMedia' => __DIR__ . '/../../..' . '/oc-includes/osclass/classes/controller/admin/CAdminMedia.php',
+        'CAdminPages' => __DIR__ . '/../../..' . '/oc-includes/osclass/classes/controller/admin/CAdminPages.php',
+        'CAdminPlugins' => __DIR__ . '/../../..' . '/oc-includes/osclass/classes/controller/admin/CAdminPlugins.php',
+        'CAdminSettings' => __DIR__ . '/../../..' . '/oc-includes/osclass/classes/controller/admin/CAdminSettings.php',
+        'CAdminSettingsAdvanced' => __DIR__ . '/../../..' . '/oc-includes/osclass/classes/controller/admin/settings/CAdminSettingsAdvanced.php',
+        'CAdminSettingsComments' => __DIR__ . '/../../..' . '/oc-includes/osclass/classes/controller/admin/settings/CAdminSettingsComments.php',
+        'CAdminSettingsCurrencies' => __DIR__ . '/../../..' . '/oc-includes/osclass/classes/controller/admin/settings/CAdminSettingsCurrencies.php',
+        'CAdminSettingsLatestSearches' => __DIR__ . '/../../..' . '/oc-includes/osclass/classes/controller/admin/settings/CAdminSettingsLatestSearches.php',
+        'CAdminSettingsLocations' => __DIR__ . '/../../..' . '/oc-includes/osclass/classes/controller/admin/settings/CAdminSettingsLocations.php',
+        'CAdminSettingsMailserver' => __DIR__ . '/../../..' . '/oc-includes/osclass/classes/controller/admin/settings/CAdminSettingsMailserver.php',
+        'CAdminSettingsMain' => __DIR__ . '/../../..' . '/oc-includes/osclass/classes/controller/admin/settings/CAdminSettingsMain.php',
+        'CAdminSettingsMedia' => __DIR__ . '/../../..' . '/oc-includes/osclass/classes/controller/admin/settings/CAdminSettingsMedia.php',
+        'CAdminSettingsPermalinks' => __DIR__ . '/../../..' . '/oc-includes/osclass/classes/controller/admin/settings/CAdminSettingsPermalinks.php',
+        'CAdminSettingsSpamnBots' => __DIR__ . '/../../..' . '/oc-includes/osclass/classes/controller/admin/settings/CAdminSettingsSpamnBots.php',
+        'CAdminStats' => __DIR__ . '/../../..' . '/oc-includes/osclass/classes/controller/admin/CAdminStats.php',
+        'CAdminTools' => __DIR__ . '/../../..' . '/oc-includes/osclass/classes/controller/admin/CAdminTools.php',
+        'CAdminUpgrade' => __DIR__ . '/../../..' . '/oc-includes/osclass/classes/controller/admin/CAdminUpgrade.php',
+        'CAdminUsers' => __DIR__ . '/../../..' . '/oc-includes/osclass/classes/controller/admin/CAdminUsers.php',
+        'CWebAjax' => __DIR__ . '/../../..' . '/oc-includes/osclass/classes/controller/CWebAjax.php',
+        'CWebContact' => __DIR__ . '/../../..' . '/oc-includes/osclass/classes/controller/CWebContact.php',
+        'CWebCustom' => __DIR__ . '/../../..' . '/oc-includes/osclass/classes/controller/CWebCustom.php',
+        'CWebItem' => __DIR__ . '/../../..' . '/oc-includes/osclass/classes/controller/CWebItem.php',
+        'CWebLanguage' => __DIR__ . '/../../..' . '/oc-includes/osclass/classes/controller/CWebLanguage.php',
+        'CWebLogin' => __DIR__ . '/../../..' . '/oc-includes/osclass/classes/controller/CWebLogin.php',
+        'CWebMain' => __DIR__ . '/../../..' . '/oc-includes/osclass/classes/controller/CWebMain.php',
+        'CWebPage' => __DIR__ . '/../../..' . '/oc-includes/osclass/classes/controller/CWebPage.php',
+        'CWebRegister' => __DIR__ . '/../../..' . '/oc-includes/osclass/classes/controller/CWebRegister.php',
+        'CWebSearch' => __DIR__ . '/../../..' . '/oc-includes/osclass/classes/controller/CWebSearch.php',
+        'CWebUser' => __DIR__ . '/../../..' . '/oc-includes/osclass/classes/controller/CWebUser.php',
+        'CWebUserNonSecure' => __DIR__ . '/../../..' . '/oc-includes/osclass/classes/controller/CWebUserNonSecure.php',
+        'Category' => __DIR__ . '/../../..' . '/oc-includes/osclass/classes/model/Category.php',
+        'CategoryForm' => __DIR__ . '/../../..' . '/oc-includes/osclass/classes/form/CategoryForm.php',
+        'CategoryStats' => __DIR__ . '/../../..' . '/oc-includes/osclass/classes/model/CategoryStats.php',
+        'City' => __DIR__ . '/../../..' . '/oc-includes/osclass/classes/model/City.php',
+        'CityArea' => __DIR__ . '/../../..' . '/oc-includes/osclass/classes/model/CityArea.php',
+        'CityStats' => __DIR__ . '/../../..' . '/oc-includes/osclass/classes/model/CityStats.php',
+        'CommentForm' => __DIR__ . '/../../..' . '/oc-includes/osclass/classes/form/CommentForm.php',
+        'CommentsDataTable' => __DIR__ . '/../../..' . '/oc-includes/osclass/classes/datatables/CommentsDataTable.php',
+        'ContactForm' => __DIR__ . '/../../..' . '/oc-includes/osclass/classes/form/ContactForm.php',
+        'Cookie' => __DIR__ . '/../../..' . '/oc-includes/osclass/classes/Cookie.php',
+        'Country' => __DIR__ . '/../../..' . '/oc-includes/osclass/classes/model/Country.php',
+        'CountryStats' => __DIR__ . '/../../..' . '/oc-includes/osclass/classes/model/CountryStats.php',
+        'Cron' => __DIR__ . '/../../..' . '/oc-includes/osclass/classes/model/Cron.php',
+        'Currency' => __DIR__ . '/../../..' . '/oc-includes/osclass/classes/model/Currency.php',
+        'DAO' => __DIR__ . '/../../..' . '/oc-includes/osclass/classes/database/DAO.php',
+        'DBCommandClass' => __DIR__ . '/../../..' . '/oc-includes/osclass/classes/database/DBCommandClass.php',
+        'DBConnectionClass' => __DIR__ . '/../../..' . '/oc-includes/osclass/classes/database/DBConnectionClass.php',
+        'DBRecordsetClass' => __DIR__ . '/../../..' . '/oc-includes/osclass/classes/database/DBRecordsetClass.php',
+        'DataTable' => __DIR__ . '/../../..' . '/oc-includes/osclass/classes/datatables/abstract/DataTable.php',
+        'Dependencies' => __DIR__ . '/../../..' . '/oc-includes/osclass/classes/Dependencies.php',
+        'Dump' => __DIR__ . '/../../..' . '/oc-includes/osclass/classes/model/Dump.php',
+        'EmailVariables' => __DIR__ . '/../../..' . '/oc-includes/osclass/classes/EmailVariables.php',
+        'Field' => __DIR__ . '/../../..' . '/oc-includes/osclass/classes/model/Field.php',
+        'FieldForm' => __DIR__ . '/../../..' . '/oc-includes/osclass/classes/form/FieldForm.php',
+        'Form' => __DIR__ . '/../../..' . '/oc-includes/osclass/classes/form/Form.php',
         'Gettext\\BaseTranslator' => __DIR__ . '/..' . '/gettext/gettext/src/BaseTranslator.php',
         'Gettext\\Extractors\\Blade' => __DIR__ . '/..' . '/gettext/gettext/src/Extractors/Blade.php',
         'Gettext\\Extractors\\Csv' => __DIR__ . '/..' . '/gettext/gettext/src/Extractors/Csv.php',
@@ -361,15 +463,49 @@ class ComposerStaticInit8e5461a2624ed352a699afc310ff5573
         'HTMLPurifier_VarParser_Flexible' => __DIR__ . '/..' . '/ezyang/htmlpurifier/library/HTMLPurifier/VarParser/Flexible.php',
         'HTMLPurifier_VarParser_Native' => __DIR__ . '/..' . '/ezyang/htmlpurifier/library/HTMLPurifier/VarParser/Native.php',
         'HTMLPurifier_Zipper' => __DIR__ . '/..' . '/ezyang/htmlpurifier/library/HTMLPurifier/Zipper.php',
+        'ImageProcessing' => __DIR__ . '/../../..' . '/oc-includes/osclass/classes/ImageProcessing.php',
+        'Item' => __DIR__ . '/../../..' . '/oc-includes/osclass/classes/model/Item.php',
+        'ItemActions' => __DIR__ . '/../../..' . '/oc-includes/osclass/classes/actions/ItemActions.php',
+        'ItemComment' => __DIR__ . '/../../..' . '/oc-includes/osclass/classes/model/ItemComment.php',
+        'ItemForm' => __DIR__ . '/../../..' . '/oc-includes/osclass/classes/form/ItemForm.php',
+        'ItemLocation' => __DIR__ . '/../../..' . '/oc-includes/osclass/classes/model/ItemLocation.php',
+        'ItemResource' => __DIR__ . '/../../..' . '/oc-includes/osclass/classes/model/ItemResource.php',
+        'ItemStats' => __DIR__ . '/../../..' . '/oc-includes/osclass/classes/model/ItemStats.php',
+        'ItemsDataTable' => __DIR__ . '/../../..' . '/oc-includes/osclass/classes/datatables/ItemsDataTable.php',
+        'LanguageForm' => __DIR__ . '/../../..' . '/oc-includes/osclass/classes/form/LanguageForm.php',
+        'LatestSearches' => __DIR__ . '/../../..' . '/oc-includes/osclass/classes/model/LatestSearches.php',
+        'LocationsTmp' => __DIR__ . '/../../..' . '/oc-includes/osclass/classes/model/LocationsTmp.php',
+        'Log' => __DIR__ . '/../../..' . '/oc-includes/osclass/classes/model/Log.php',
+        'LogDatabase' => __DIR__ . '/../../..' . '/oc-includes/osclass/classes/logger/LogDatabase.php',
+        'LogOsclassInstaller' => __DIR__ . '/../../..' . '/oc-includes/osclass/classes/logger/LogOsclassInstaller.php',
+        'Logger' => __DIR__ . '/../../..' . '/oc-includes/osclass/classes/logger/abstract/Logger.php',
+        'ManageItemsForm' => __DIR__ . '/../../..' . '/oc-includes/osclass/classes/form/ManageItemsForm.php',
+        'MediaDataTable' => __DIR__ . '/../../..' . '/oc-includes/osclass/classes/datatables/MediaDataTable.php',
+        'OSCLocale' => __DIR__ . '/../../..' . '/oc-includes/osclass/classes/model/OSCLocale.php',
+        'Object_Cache_Factory' => __DIR__ . '/../../..' . '/oc-includes/osclass/classes/cache/Object_Cache_Factory.php',
+        'Object_Cache_apc' => __DIR__ . '/../../..' . '/oc-includes/osclass/classes/cache/drivers/Object_Cache_apc.php',
+        'Object_Cache_apcu' => __DIR__ . '/../../..' . '/oc-includes/osclass/classes/cache/drivers/Object_Cache_apcu.php',
+        'Object_Cache_default' => __DIR__ . '/../../..' . '/oc-includes/osclass/classes/cache/drivers/Object_Cache_default.php',
+        'Object_Cache_memcache' => __DIR__ . '/../../..' . '/oc-includes/osclass/classes/cache/drivers/Object_Cache_memcache.php',
         'OpensslCryptor\\Cryptor' => __DIR__ . '/..' . '/pensiero/php-openssl-cryptor/src/Cryptor.php',
         'OpensslCryptor\\Exception\\ProcessException' => __DIR__ . '/..' . '/pensiero/php-openssl-cryptor/src/Exception/ProcessException.php',
         'OpensslCryptor\\Exception\\UnexpectedResultException' => __DIR__ . '/..' . '/pensiero/php-openssl-cryptor/src/Exception/UnexpectedResultException.php',
         'OpensslCryptor\\Exception\\UnknownAlgoException' => __DIR__ . '/..' . '/pensiero/php-openssl-cryptor/src/Exception/UnknownAlgoException.php',
-        'PHPMailer' => __DIR__ . '/..' . '/phpmailer/phpmailer/class.phpmailer.php',
-        'PHPMailerOAuth' => __DIR__ . '/..' . '/phpmailer/phpmailer/class.phpmaileroauth.php',
-        'PHPMailerOAuthGoogle' => __DIR__ . '/..' . '/phpmailer/phpmailer/class.phpmaileroauthgoogle.php',
-        'POP3' => __DIR__ . '/..' . '/phpmailer/phpmailer/class.pop3.php',
+        'PHPMailer\\PHPMailer\\Exception' => __DIR__ . '/..' . '/phpmailer/phpmailer/src/Exception.php',
+        'PHPMailer\\PHPMailer\\OAuth' => __DIR__ . '/..' . '/phpmailer/phpmailer/src/OAuth.php',
+        'PHPMailer\\PHPMailer\\PHPMailer' => __DIR__ . '/..' . '/phpmailer/phpmailer/src/PHPMailer.php',
+        'PHPMailer\\PHPMailer\\POP3' => __DIR__ . '/..' . '/phpmailer/phpmailer/src/POP3.php',
+        'PHPMailer\\PHPMailer\\SMTP' => __DIR__ . '/..' . '/phpmailer/phpmailer/src/SMTP.php',
+        'Page' => __DIR__ . '/../../..' . '/oc-includes/osclass/classes/model/Page.php',
+        'PageForm' => __DIR__ . '/../../..' . '/oc-includes/osclass/classes/form/PageForm.php',
+        'PagesDataTable' => __DIR__ . '/../../..' . '/oc-includes/osclass/classes/datatables/PagesDataTable.php',
+        'Pagination' => __DIR__ . '/../../..' . '/oc-includes/osclass/classes/Pagination.php',
+        'Params' => __DIR__ . '/../../..' . '/oc-includes/osclass/classes/Params.php',
         'PclZip' => __DIR__ . '/..' . '/pclzip/pclzip/pclzip.lib.php',
+        'PluginCategory' => __DIR__ . '/../../..' . '/oc-includes/osclass/classes/model/PluginCategory.php',
+        'Plugins' => __DIR__ . '/../../..' . '/oc-includes/osclass/classes/Plugins.php',
+        'Preference' => __DIR__ . '/../../..' . '/oc-includes/osclass/classes/model/Preference.php',
+        'RSSFeed' => __DIR__ . '/../../..' . '/oc-includes/osclass/classes/RSSFeed.php',
         'ReCaptcha\\ReCaptcha' => __DIR__ . '/..' . '/google/recaptcha/src/ReCaptcha/ReCaptcha.php',
         'ReCaptcha\\RequestMethod' => __DIR__ . '/..' . '/google/recaptcha/src/ReCaptcha/RequestMethod.php',
         'ReCaptcha\\RequestMethod\\Curl' => __DIR__ . '/..' . '/google/recaptcha/src/ReCaptcha/RequestMethod/Curl.php',
@@ -379,9 +515,44 @@ class ComposerStaticInit8e5461a2624ed352a699afc310ff5573
         'ReCaptcha\\RequestMethod\\SocketPost' => __DIR__ . '/..' . '/google/recaptcha/src/ReCaptcha/RequestMethod/SocketPost.php',
         'ReCaptcha\\RequestParameters' => __DIR__ . '/..' . '/google/recaptcha/src/ReCaptcha/RequestParameters.php',
         'ReCaptcha\\Response' => __DIR__ . '/..' . '/google/recaptcha/src/ReCaptcha/Response.php',
-        'SMTP' => __DIR__ . '/..' . '/phpmailer/phpmailer/class.smtp.php',
-        'ntlm_sasl_client_class' => __DIR__ . '/..' . '/phpmailer/phpmailer/extras/ntlm_sasl_client.php',
-        'phpmailerException' => __DIR__ . '/..' . '/phpmailer/phpmailer/class.phpmailer.php',
+        'Region' => __DIR__ . '/../../..' . '/oc-includes/osclass/classes/model/Region.php',
+        'RegionStats' => __DIR__ . '/../../..' . '/oc-includes/osclass/classes/model/RegionStats.php',
+        'Rewrite' => __DIR__ . '/../../..' . '/oc-includes/osclass/classes/Rewrite.php',
+        'Scripts' => __DIR__ . '/../../..' . '/oc-includes/osclass/classes/Scripts.php',
+        'Search' => __DIR__ . '/../../..' . '/oc-includes/osclass/classes/model/Search.php',
+        'SecBaseModel' => __DIR__ . '/../../..' . '/oc-includes/osclass/classes/controller/base/SecBaseModel.php',
+        'SendFriendForm' => __DIR__ . '/../../..' . '/oc-includes/osclass/classes/form/SendFriendForm.php',
+        'Session' => __DIR__ . '/../../..' . '/oc-includes/osclass/classes/Session.php',
+        'Sitemap' => __DIR__ . '/../../..' . '/oc-includes/osclass/classes/Sitemap.php',
+        'SocketWriteRead' => __DIR__ . '/../../..' . '/oc-includes/Akismet.class.php',
+        'Stats' => __DIR__ . '/../../..' . '/oc-includes/osclass/classes/Stats.php',
+        'Styles' => __DIR__ . '/../../..' . '/oc-includes/osclass/classes/Styles.php',
+        'Themes' => __DIR__ . '/../../..' . '/oc-includes/osclass/classes/themes/abstract/Themes.php',
+        'Translation' => __DIR__ . '/../../..' . '/oc-includes/osclass/classes/Translation.php',
+        'User' => __DIR__ . '/../../..' . '/oc-includes/osclass/classes/model/User.php',
+        'UserActions' => __DIR__ . '/../../..' . '/oc-includes/osclass/classes/actions/UserActions.php',
+        'UserEmailTmp' => __DIR__ . '/../../..' . '/oc-includes/osclass/classes/model/UserEmailTmp.php',
+        'UserForm' => __DIR__ . '/../../..' . '/oc-includes/osclass/classes/form/UserForm.php',
+        'UsersDataTable' => __DIR__ . '/../../..' . '/oc-includes/osclass/classes/datatables/UsersDataTable.php',
+        'View' => __DIR__ . '/../../..' . '/oc-includes/osclass/classes/View.php',
+        'WebSecBaseModel' => __DIR__ . '/../../..' . '/oc-includes/osclass/classes/controller/base/WebSecBaseModel.php',
+        'WebThemes' => __DIR__ . '/../../..' . '/oc-includes/osclass/classes/themes/WebThemes.php',
+        'Widget' => __DIR__ . '/../../..' . '/oc-includes/osclass/classes/model/Widget.php',
+        'iObject_Cache' => __DIR__ . '/../../..' . '/oc-includes/osclass/classes/cache/interface/iObject_Cache.php',
+        'mindstellar\\Csrf' => __DIR__ . '/../../..' . '/oc-includes/osclass/classes/Csrf.php',
+        'mindstellar\\upgrade\\Osclass' => __DIR__ . '/../../..' . '/oc-includes/osclass/classes/upgrade/Osclass.php',
+        'mindstellar\\upgrade\\Plugin' => __DIR__ . '/../../..' . '/oc-includes/osclass/classes/upgrade/Plugin.php',
+        'mindstellar\\upgrade\\Theme' => __DIR__ . '/../../..' . '/oc-includes/osclass/classes/upgrade/Theme.php',
+        'mindstellar\\upgrade\\Upgrade' => __DIR__ . '/../../..' . '/oc-includes/osclass/classes/upgrade/Upgrade.php',
+        'mindstellar\\upgrade\\UpgradePackage' => __DIR__ . '/../../..' . '/oc-includes/osclass/classes/upgrade/UpgradePackage.php',
+        'mindstellar\\utility\\Deprecate' => __DIR__ . '/../../..' . '/oc-includes/osclass/classes/utility/Deprecate.php',
+        'mindstellar\\utility\\Escape' => __DIR__ . '/../../..' . '/oc-includes/osclass/classes/utility/Escape.php',
+        'mindstellar\\utility\\FileSystem' => __DIR__ . '/../../..' . '/oc-includes/osclass/classes/utility/FileSystem.php',
+        'mindstellar\\utility\\Formatting' => __DIR__ . '/../../..' . '/oc-includes/osclass/classes/utility/Formatting.php',
+        'mindstellar\\utility\\Sanitize' => __DIR__ . '/../../..' . '/oc-includes/osclass/classes/utility/Sanitize.php',
+        'mindstellar\\utility\\Utils' => __DIR__ . '/../../..' . '/oc-includes/osclass/classes/utility/Utils.php',
+        'mindstellar\\utility\\Validate' => __DIR__ . '/../../..' . '/oc-includes/osclass/classes/utility/Validate.php',
+        'mindstellar\\utility\\Zip' => __DIR__ . '/../../..' . '/oc-includes/osclass/classes/utility/Zip.php',
         'phpseclib\\Crypt\\AES' => __DIR__ . '/..' . '/phpseclib/phpseclib/phpseclib/Crypt/AES.php',
         'phpseclib\\Crypt\\Base' => __DIR__ . '/..' . '/phpseclib/phpseclib/phpseclib/Crypt/Base.php',
         'phpseclib\\Crypt\\Blowfish' => __DIR__ . '/..' . '/phpseclib/phpseclib/phpseclib/Crypt/Blowfish.php',
@@ -411,10 +582,10 @@ class ComposerStaticInit8e5461a2624ed352a699afc310ff5573
     public static function getInitializer(ClassLoader $loader)
     {
         return \Closure::bind(function () use ($loader) {
-            $loader->prefixLengthsPsr4 = ComposerStaticInit8e5461a2624ed352a699afc310ff5573::$prefixLengthsPsr4;
-            $loader->prefixDirsPsr4 = ComposerStaticInit8e5461a2624ed352a699afc310ff5573::$prefixDirsPsr4;
-            $loader->prefixesPsr0 = ComposerStaticInit8e5461a2624ed352a699afc310ff5573::$prefixesPsr0;
-            $loader->classMap = ComposerStaticInit8e5461a2624ed352a699afc310ff5573::$classMap;
+            $loader->prefixLengthsPsr4 = ComposerStaticInit1fcba07043a631f012853cd02fe384cd::$prefixLengthsPsr4;
+            $loader->prefixDirsPsr4 = ComposerStaticInit1fcba07043a631f012853cd02fe384cd::$prefixDirsPsr4;
+            $loader->prefixesPsr0 = ComposerStaticInit1fcba07043a631f012853cd02fe384cd::$prefixesPsr0;
+            $loader->classMap = ComposerStaticInit1fcba07043a631f012853cd02fe384cd::$classMap;
 
         }, null, ClassLoader::class);
     }

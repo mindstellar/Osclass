@@ -128,7 +128,7 @@ msgstr ""
 
 #: admin/settings.php:68
 msgid ""
-"I want to help Osclass by linking to <a href=\"https://github.com/navjottomer/osclass/\" target="
+"I want to help Osclass by linking to <a href=\"http://osclass.org/\" target="
 "\"_blank\">osclass.org</a> from my site with the following text:"
 msgstr ""
 

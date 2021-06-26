@@ -3,7 +3,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Osclass\n"
-"Report-Msgid-Bugs-To: https://github.com/navjottomer/osclass/\n"
+"Report-Msgid-Bugs-To: http://osclass.org/\n"
 "POT-Creation-Date: 2016-12-12 15:46:28+00:00\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -6260,7 +6260,7 @@ msgstr ""
 
 #: oc-includes/osclass/install-functions.php:834
 msgid ""
-"(You agree to our <a href=\"https://example.org/page/legal-note\">Terms & "
+"(You agree to our <a href=\"https://osclass.org/page/legal-note\">Terms & "
 "Conditions</a>)"
 msgstr ""
 
@@ -6397,7 +6397,7 @@ msgid "Cheers,"
 msgstr ""
 
 #: oc-includes/osclass/install-location.php:121
-msgid "The <a href=\"https://github.com/navjottomer/osclass/\">Osclass</a> team"
+msgid "The <a href=\"http://osclass.org/\">Osclass</a> team"
 msgstr ""
 
 #: oc-includes/osclass/install.php:89
@@ -6902,7 +6902,7 @@ msgstr ""
 msgid ""
 "These errors could be false-positive errors. If you're sure that is the "
 "case, you can <a href=\"%s\">continue with the upgrade</a>, or <a href="
-"\"https://osclass.discourse.group/\">ask in our forums</a>."
+"\"http://forums.osclass.org/\">ask in our forums</a>."
 msgstr ""
 
 #: oc-includes/osclass/upgrade-funcs.php:286
@@ -6921,7 +6921,7 @@ msgstr ""
 
 #: oc-includes/osclass/upgrade-funcs.php:533
 msgid ""
-"Osclass has been updated successfully. <a href=\"https://osclass.discourse.group/"
+"Osclass has been updated successfully. <a href=\"http://forums.osclass.org/"
 "\">Need more help?</a>"
 msgstr ""
 
