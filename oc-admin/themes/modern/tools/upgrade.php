@@ -1,4 +1,5 @@
 <?php
+
 use mindstellar\upgrade\Osclass;
 
 if (!defined('OC_ADMIN')) {
@@ -15,8 +16,7 @@ function customHead()
         });
         <?php
         $update_core_json = osc_get_preference('update_core_json');
-        $is_upgrade_available = $update_core_json?(new Osclass(json_decode($update_core_json, true)))->isUpgradable()
-            :false;
+        $is_upgrade_available = $update_core_json && (new Osclass(json_decode($update_core_json, true)))->isUpgradable();
         ?>
         $(function () {
             let steps;
@@ -27,10 +27,12 @@ function customHead()
 
             <?php if ($is_upgrade_available && Params::getParam('confirm') !== 'true') { ?>
             remoteVersion = '<?php echo osc_esc_js((new Osclass(json_decode($update_core_json, true)))->getNewVersion()); ?>';
-            steps.append('<?php echo osc_esc_js('<li>'.sprintf(__('Upgrade is available for (Current version %s)'), osc_get_preference('version')).'</li>'); ?>');
+            steps.append('<?php
+                echo '<li>' . sprintf(__('Upgrade is available for (Current version %s)'), osc_get_preference('version')) . '<\/li>';
+            ?>');
             steps.append('<li><?php echo osc_esc_js(__('New version to update:')); ?> ' + remoteVersion + '<\/li>');
             steps.append(`<input type="button" value="<?php echo osc_esc_html(__('Upgrade')); ?>"
-            onclick="window.location.href='<?php echo osc_admin_base_url(true) .'?page=tools&action=upgrade&confirm=true';?> ';" />`);
+            onclick="window.location.href='<?php echo osc_admin_base_url(true) . '?page=tools&action=upgrade&confirm=true';?> ';" />`);
 
             <?php } elseif ($is_upgrade_available && Params::getParam('confirm') === 'true') { ?>
             steps.append(`<i id="loading_image" class="fas fa-spinner fa-spin"></i> <?php
@@ -70,9 +72,9 @@ function render_offset()
 function addHelp()
 {
     echo '<p>'
-        . __("Check to see if you're using the latest version of Osclass. If you're not, 
+         . __("Check to see if you're using the latest version of Osclass. If you're not, 
         the system will let you know so you can update and use the newest features.")
-        . '</p>';
+         . '</p>';
 }
 
 
@@ -112,17 +114,17 @@ osc_current_admin_theme_path('parts/header.php'); ?>
                     <div class="form-horizontal">
                         <div class="form-row">
                             <div class="tools upgrade">
-                                    <p class="text">
-                                        <?php
-                                        printf(
-                                            __('Your Osclass installation can be auto-upgraded. 
+                                <p class="text">
+                                    <?php
+                                    printf(
+                                        __('Your Osclass installation can be auto-upgraded. 
                                         Please, back up your database and the folder oc-content before attempting to 
                                         upgrade your Osclass installation. 
                                         You can also upgrade Osclass manually, more information in the %s'),
-                                            '<a href="https://docs.mindstellar.com/">Documentation</a>'
-                                        );
-                                        ?>
-                                    </p>
+                                        '<a href="https://docs.mindstellar.com/">Documentation</a>'
+                                    );
+                                    ?>
+                                </p>
                                 <div id="steps_div">
                                     <div id="steps">
 

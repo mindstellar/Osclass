@@ -2,21 +2,30 @@
     exit('Direct access is not allowed.');
 }
 /*
- *  Copyright 2020 Mindstellar Osclass
- *  Maintained and supported by Mindstellar Community
- *  https://github.com/mindstellar/Osclass
+ * Osclass - software for creating and publishing online classified advertising platforms
+ * Maintained and supported by Mindstellar Community
+ * https://github.com/mindstellar/Osclass
+ * Copyright (c) 2021.  Mindstellar
  *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
  *
- *     http://www.apache.org/licenses/LICENSE-2.0
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
  *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
+ *                     GNU GENERAL PUBLIC LICENSE
+ *                        Version 3, 29 June 2007
+ *
+ *  Copyright (C) 2007 Free Software Foundation, Inc. <http://fsf.org/>
+ *  Everyone is permitted to copy and distribute verbatim copies
+ *  of this license document, but changing it is not allowed.
+ *
+ *  You should have received a copy of the GNU Affero General Public
+ *  License along with this program. If not, see <http://www.gnu.org/licenses/>.
+ *
  */
 
 osc_enqueue_script('jquery-validate');
@@ -160,10 +169,10 @@ osc_add_hook('admin_header', 'customHead', 10);
 function addHelp()
 {
     echo '<p>'
-        . __("Add, edit or delete the countries, regions and cities installed on your Osclass. "
-            . '<strong>Be careful</strong>: modifying locations can cause your statistics to be incorrect '
-            ."until they're recalculated. Modify only if you're sure what you're doing!")
-        . '</p>';
+         . __("Add, edit or delete the countries, regions and cities installed on your Osclass. "
+              . '<strong>Be careful</strong>: modifying locations can cause your statistics to be incorrect '
+              . "until they're recalculated. Modify only if you're sure what you're doing!")
+         . '</p>';
 }
 
 
@@ -400,7 +409,11 @@ osc_current_admin_theme_path('parts/header.php'); ?>
                                                value="<?php echo $country['pk_c_code']; ?>">
                                     </span>
                                             <a class="close"
-                                               href="<?php echo osc_admin_base_url(true); ?>?page=settings&action=locations&type=delete_country&id[]=<?php echo $country['pk_c_code']; ?>"
+                                               href="<?php
+                                                echo osc_admin_base_url(true);
+                                                ?>?page=settings&action=locations&type=delete_country&id[]=<?php
+                                               echo $country['pk_c_code'];
+?>"
                                                onclick="return delete_dialog('<?php echo $country['pk_c_code']; ?>', 'delete_country');">
                                                 <img src="<?php echo osc_admin_base_url(); ?>images/close.png"
                                                      alt="<?php echo osc_esc_html(__('Close')); ?>"
@@ -471,7 +484,7 @@ osc_current_admin_theme_path('parts/header.php'); ?>
             <div class="form-horizontal">
                 <div class="form-row">
                     <?php _e("This action can't be undone. Items associated to this location will be deleted. "
-                        . 'Users from this location will be unlinked, but not deleted. Are you sure you want to continue?'); ?>
+                             . 'Users from this location will be unlinked, but not deleted. Are you sure you want to continue?'); ?>
                 </div>
                 <div class="form-actions">
                     <div class="wrapper">
@@ -491,28 +504,17 @@ osc_current_admin_theme_path('parts/header.php'); ?>
             <div class="form-horizontal">
                 <div class="form-row">
                     <?php _e("Import a country with it's regions and cities from our database. "
-                        . "Already imported countries aren't shown."); ?>
+                             . "Already imported countries aren't shown."); ?>
                 </div>
                 <div class="form-row">
                     <table>
                         <tr>
                             <td><?php _e('Import a location'); ?>:</td>
                             <td>
-                                <?php $locations = View::newInstance()->_get('aLocations'); ?>
-                                <?php if (count($locations)) { ?>
-                                    <select name="location" required>
-                                        <option value=""><?php _e('Select an option'); ?>
-                                            <?php foreach ($locations as $location) { ?>
-                                                <?php /* BUG: */
-                                                if ($location['name'] == '') {
-                                                    continue;
-                                                } ?>
-                                        <option value="<?php echo $location['file']; ?>"><?php echo $location['name']; ?></option>
-                                            <?php } ?>
-                                    </select>
-                                <?php } else { ?>
-                                    <p><?php _e('No locations available.'); ?></p>
-                                <?php } ?>
+                                <select name="location" id="imported-location" required>
+                                    <option value=""><?php _e('Select an option'); ?></option>
+                                </select>
+
                             </td>
                         </tr>
                     </table>
@@ -542,5 +544,23 @@ osc_current_admin_theme_path('parts/header.php'); ?>
             <?php } else {
                 echo 'function hook_load_cities() { };';
             } ?>
+        </script>
+        <script>
+            const existingCountries = <?php echo json_encode(Country::newInstance()->listNames())?>;
+            $.ajax({
+                type: "GET",
+                url: "<?php echo osc_get_locations_json_url()?>",
+                dataType: "text",
+                success: function (data) {
+                    const jsonData = JSON.parse(data);
+                    $.each(jsonData.locations, function (i, obj) {
+                        let countriesOptions;
+                        if (!existingCountries.includes(obj.s_country_name)) {
+                            countriesOptions = '<option value=\'' + obj.s_file_name + '\'>' + obj.s_country_name + '</option>';
+                            $(countriesOptions).appendTo('#imported-location');
+                        }
+                    });
+                }
+            });
         </script>
         <?php osc_current_admin_theme_path('parts/footer.php'); ?>

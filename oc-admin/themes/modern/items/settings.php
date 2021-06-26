@@ -2,28 +2,37 @@
     exit('Direct access is not allowed.');
 }
 /*
- *  Copyright 2020 Mindstellar Osclass
- *  Maintained and supported by Mindstellar Community
- *  https://github.com/mindstellar/Osclass
+ * Osclass - software for creating and publishing online classified advertising platforms
+ * Maintained and supported by Mindstellar Community
+ * https://github.com/mindstellar/Osclass
+ * Copyright (c) 2021.  Mindstellar
  *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
  *
- *     http://www.apache.org/licenses/LICENSE-2.0
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
  *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
+ *                     GNU GENERAL PUBLIC LICENSE
+ *                        Version 3, 29 June 2007
+ *
+ *  Copyright (C) 2007 Free Software Foundation, Inc. <http://fsf.org/>
+ *  Everyone is permitted to copy and distribute verbatim copies
+ *  of this license document, but changing it is not allowed.
+ *
+ *  You should have received a copy of the GNU Affero General Public
+ *  License along with this program. If not, see <http://www.gnu.org/licenses/>.
+ *
  */
 
 function addHelp()
 {
     echo '<p>'
-        . __('Modify the general settings for your listings. Decide if users have to register in order to publish something, the number of pictures allowed for each listing, etc.')
-        . '</p>';
+         . __('Modify the general settings for your listings. Decide if users have to register in order to publish something, the number of pictures allowed for each listing, etc.')
+         . '</p>';
 }
 
 
@@ -110,21 +119,25 @@ osc_current_admin_theme_path('parts/header.php'); ?>
                             </div>
                             <div>
                                 <?php printf(__('An user has to wait %s seconds between each listing added'),
-                                    '<input type="text" class="input-small" name="items_wait_time" value="'
-                                    . osc_items_wait_time() . '" />'); ?>
+                                             '<input type="text" class="input-small" name="items_wait_time" value="'
+                                             . osc_items_wait_time() . '" />'); ?>
                                 <div class="help-box">
                                     <?php _e('If the value is set to zero, there is no wait period'); ?>
                                 </div>
                             </div>
                             <div class="separate-top-medium">
                                 <label>
-                                    <input type="checkbox" name="moderate_admin_post" value="1"  <?php if(osc_moderate_admin_post()) echo 'checked'; ?> />
+                                    <input type="checkbox" name="moderate_admin_post" value="1" <?php if (osc_moderate_admin_post()) {
+                                        echo 'checked';
+                                                                                                } ?> />
                                     <?php _e('Hold new listings for admin moderation'); ?>
                                 </label>
                             </div>
                             <div class="separate-top-medium">
                                 <label>
-                                    <input type="checkbox" name="moderate_admin_edit" value="1"  <?php if(osc_moderate_admin_edit()) echo 'checked'; ?>/>
+                                    <input type="checkbox" name="moderate_admin_edit" value="1" <?php if (osc_moderate_admin_edit()) {
+                                        echo 'checked';
+                                                                                                } ?>/>
                                     <?php _e('Hold edited listings for admin moderation'); ?>
                                 </label>
                             </div>
@@ -138,8 +151,8 @@ osc_current_admin_theme_path('parts/header.php'); ?>
                             <div class="num-moderated-items">
                                 <div>
                                     <?php printf(__("After %s validated listings the user doesn't need to validate the listings any more"),
-                                        '<input type="text" class="input-small" name="num_moderate_items" value="'
-                                        . ((osc_moderate_items() == -1) ? '' : osc_moderate_items()) . '" />'); ?>
+                                                 '<input type="text" class="input-small" name="num_moderate_items" value="'
+                                                 . ((osc_moderate_items() == -1) ? '' : osc_moderate_items()) . '" />'); ?>
                                     <div class="help-box">
                                         <?php _e('If the value is zero, it means that each listing must be validated'); ?>
                                     </div>
@@ -222,8 +235,8 @@ osc_current_admin_theme_path('parts/header.php'); ?>
                         <div class="form-controls">
                             <div class="separate-top-medium">
                                 <?php printf(__('%s characters '),
-                                    '<input type="text" class="input-small" name="max_chars_per_title" value="'
-                                    . osc_max_characters_per_title() . '" />'); ?>
+                                             '<input type="text" class="input-small" name="max_chars_per_title" value="'
+                                             . osc_max_characters_per_title() . '" />'); ?>
                             </div>
                         </div>
                     </div>
@@ -232,8 +245,8 @@ osc_current_admin_theme_path('parts/header.php'); ?>
                         <div class="separate-top-medium">
                             <div class="form-controls">
                                 <?php printf(__('%s characters '),
-                                    '<input type="text" class="input-small" name="max_chars_per_description" value="'
-                                    . osc_max_characters_per_description() . '" />'); ?>
+                                             '<input type="text" class="input-small" name="max_chars_per_description" value="'
+                                             . osc_max_characters_per_description() . '" />'); ?>
                             </div>
                         </div>
                     </div>
@@ -267,8 +280,8 @@ osc_current_admin_theme_path('parts/header.php'); ?>
                                 </div>
                                 <div class="separate-top-medium">
                                     <?php printf(__('Attach %s images per listing'),
-                                        '<input type="text" class="input-small" name="numImages@items" value="'
-                                        . osc_max_images_per_item() . '" />'); ?>
+                                                 '<input type="text" class="input-small" name="numImages@items" value="'
+                                                 . osc_max_images_per_item() . '" />'); ?>
                                     <div class="help-box"><?php _e('If the value is zero, it means an unlimited number of images is allowed'); ?></div>
                                 </div>
                             </div>
@@ -280,9 +293,15 @@ osc_current_admin_theme_path('parts/header.php'); ?>
                             <div class="form-controls">
                                 <?php $map_type = osc_item_map_type(); ?>
                                 <select class="input-small" name="map_type">
-                                    <option value="0" <?php if(!$map_type) echo 'selected'; ?>><?php _e('None'); ?></option>
-                                    <option value="google" <?php if($map_type == 'google') echo 'selected'; ?>><?php _e('Google Maps'); ?></option>
-                                    <option value="openstreet" <?php if($map_type == 'openstreet') echo 'selected'; ?>><?php _e('OpenStreetMaps'); ?></option>
+                                    <option value="0" <?php if (!$map_type) {
+                                        echo 'selected';
+                                                      } ?>><?php _e('None'); ?></option>
+                                    <option value="google" <?php if ($map_type == 'google') {
+                                        echo 'selected';
+                                                           } ?>><?php _e('Google Maps'); ?></option>
+                                    <option value="openstreet" <?php if ($map_type == 'openstreet') {
+                                        echo 'selected';
+                                                               } ?>><?php _e('OpenStreetMaps'); ?></option>
                                 </select>
                                 <div class="help-box"><?php _e('Set the API key in Settings -> General.'); ?></div>
                             </div>

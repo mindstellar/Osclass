@@ -131,7 +131,7 @@ function printLocaleTabs($locales = null)
         echo '<ul class="ui-tabs-nav ui-helper-reset ui-helper-clearfix ui-widget-header ui-corner-all">';
         foreach ($locales as $locale) {
             echo '<li class="ui-state-default ui-corner-top"><a href="#' . $locale['pk_c_code'] . '">'
-                . $locale['s_name'] . '</a></li>';
+                 . $locale['s_name'] . '</a></li>';
         }
         echo '</ul></div>';
     }
@@ -153,9 +153,9 @@ function printLocaleTitle($locales = null, $item = null)
     $num_locales = count($locales);
     foreach ($locales as $locale) {
         echo '<div class="input-has-placeholder input-title-wide"><label for="title">' . __('Enter title here')
-            . ' *</label>';
+             . ' *</label>';
         $title = (isset($item) && isset($item['locale'][$locale['pk_c_code']])
-            && isset($item['locale'][$locale['pk_c_code']]['s_title']))
+                  && isset($item['locale'][$locale['pk_c_code']]['s_title']))
             ? $item['locale'][$locale['pk_c_code']]['s_title'] : '';
         if (Session::newInstance()->_getForm('title') != '') {
             $title_ = Session::newInstance()->_getForm('title');
@@ -167,10 +167,10 @@ function printLocaleTitle($locales = null, $item = null)
 
         $name = 'title' . '[' . $locale['pk_c_code'] . ']';
         echo '<input id="' . $name . '" type="text" name="' . $name . '" value="' . osc_esc_html(htmlentities(
-            $title,
-            ENT_COMPAT,
-                'UTF-8'
-        )) . '"  />';
+                                                                                                     $title,
+                                                                                                     ENT_COMPAT,
+                                                                                                     'UTF-8'
+                                                                                                 )) . '"  />';
         echo '</div>';
     }
 }
@@ -205,12 +205,12 @@ function printLocaleTitlePage($locales = null, $page = null)
         $title = osc_apply_filter('admin_page_title', $title, $page, $locale);
 
         echo '<div class="input-has-placeholder input-title-wide"><label for="title">' . __('Enter title here')
-            . ' *</label>';
+             . ' *</label>';
         echo '<input id="' . $name . '" type="text" name="' . $name . '" value="' . osc_esc_html(htmlentities(
-            $title,
-            ENT_COMPAT,
-                'UTF-8'
-        )) . '"  />';
+                                                                                                     $title,
+                                                                                                     ENT_COMPAT,
+                                                                                                     'UTF-8'
+                                                                                                 )) . '"  />';
         echo '</div>';
     }
 }
@@ -234,7 +234,7 @@ function printLocaleDescription($locales = null, $item = null)
 
         echo '<div><label for="description">' . __('Description') . ' *</label>';
         $description = (isset($item) && isset($item['locale'][$locale['pk_c_code']])
-            && isset($item['locale'][$locale['pk_c_code']]['s_description']))
+                        && isset($item['locale'][$locale['pk_c_code']]['s_description']))
             ? $item['locale'][$locale['pk_c_code']]['s_description'] : '';
 
         if (Session::newInstance()->_getForm('description') != '') {

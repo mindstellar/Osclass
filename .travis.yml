@@ -83,7 +83,7 @@ deploy:
     skip_cleanup: true
     draft: true
     prerelease: true
-    name: Osclass ${LATEST_GIT_TAG}
+    name: Osclass ${$TRAVIS_TAG}
     on:
       all_branches: true
       condition: ${$TRAVIS_BRANCH} =~ ^release[-|_].*$

@@ -2,21 +2,30 @@
     exit('Direct access is not allowed.');
 }
 /*
- *  Copyright 2020 Mindstellar Osclass
- *  Maintained and supported by Mindstellar Community
- *  https://github.com/mindstellar/Osclass
+ * Osclass - software for creating and publishing online classified advertising platforms
+ * Maintained and supported by Mindstellar Community
+ * https://github.com/mindstellar/Osclass
+ * Copyright (c) 2021.  Mindstellar
  *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
  *
- *     http://www.apache.org/licenses/LICENSE-2.0
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
  *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
+ *                     GNU GENERAL PUBLIC LICENSE
+ *                        Version 3, 29 June 2007
+ *
+ *  Copyright (C) 2007 Free Software Foundation, Inc. <http://fsf.org/>
+ *  Everyone is permitted to copy and distribute verbatim copies
+ *  of this license document, but changing it is not allowed.
+ *
+ *  You should have received a copy of the GNU Affero General Public
+ *  License along with this program. If not, see <http://www.gnu.org/licenses/>.
+ *
  */
 
 osc_enqueue_script('jquery-validate');
@@ -373,8 +382,9 @@ osc_add_hook('admin_page_header', 'customPageHeader');
 function addHelp()
 {
     echo '<p>'
-        . __("Activate this option if you want your site's URLs to be more attractive to search engines and intelligible for users. <strong>Be careful</strong>: depending on your hosting service, this might not work correctly.")
-        . '</p>';
+         . __("Activate this option if you want your site's URLs to be more attractive to search engines and intelligible for users."
+              . " <strong>Be careful</strong>: depending on your hosting service, this might not work correctly.")
+         . '</p>';
 }
 
 
@@ -408,7 +418,9 @@ osc_current_admin_theme_path('parts/header.php'); ?>
         <!-- settings form -->
         <div id="mail-settings">
             <h2 class="render-title"><?php _e('Permalinks'); ?></h2>
-            <?php _e('By default Osclass uses web URLs which have question marks and lots of numbers in them. However, Osclass offers you friendly urls. This can improve the aesthetics, usability, and forward-compatibility of your links'); ?>
+            <?php _e('By default Osclass uses web URLs which have question marks and lots of numbers in them. '
+                     . 'However, Osclass offers you friendly urls. This can improve the aesthetics, usability, '
+                     . 'and forward-compatibility of your links'); ?>
             <ul id="error_list"></ul>
             <form name="settings_form" action="<?php echo osc_admin_base_url(true); ?>" method="post">
                 <input type="hidden" name="page" value="settings"/>
@@ -437,7 +449,7 @@ osc_current_admin_theme_path('parts/header.php'); ?>
                                                value="<?php echo osc_esc_html(osc_get_preference('rewrite_item_url')); ?>"/>
                                         <div class="help-box">
                                             <?php echo sprintf(__('Accepted keywords: %s'),
-                                                '{ITEM_ID},{ITEM_TITLE},{ITEM_CITY},{CATEGORIES}'); ?>
+                                                               '{ITEM_ID},{ITEM_TITLE},{ITEM_CITY},{CATEGORIES}'); ?>
                                         </div>
                                     </div>
                                 </div>
@@ -448,7 +460,7 @@ osc_current_admin_theme_path('parts/header.php'); ?>
                                                value="<?php echo osc_esc_html(osc_get_preference('rewrite_page_url')); ?>"/>
                                         <div class="help-box">
                                             <?php echo sprintf(__('Accepted keywords: %s'),
-                                                '{PAGE_ID}, {PAGE_SLUG}'); ?>
+                                                               '{PAGE_ID}, {PAGE_SLUG}'); ?>
                                         </div>
                                     </div>
                                 </div>
@@ -459,7 +471,7 @@ osc_current_admin_theme_path('parts/header.php'); ?>
                                                value="<?php echo osc_esc_html(osc_get_preference('rewrite_cat_url')); ?>"/>
                                         <div class="help-box">
                                             <?php echo sprintf(__('Accepted keywords: %s'),
-                                                '{CATEGORY_ID},{CATEGORY_NAME},{CATEGORIES}'); ?>
+                                                               '{CATEGORY_ID},{CATEGORY_NAME},{CATEGORIES}'); ?>
                                         </div>
                                     </div>
                                 </div>

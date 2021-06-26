@@ -1,23 +1,33 @@
 <?php
 /*
- *  Copyright 2020 Mindstellar Osclass
- *  Maintained and supported by Mindstellar Community
- *  https://github.com/mindstellar/Osclass
+ * Osclass - software for creating and publishing online classified advertising platforms
+ * Maintained and supported by Mindstellar Community
+ * https://github.com/mindstellar/Osclass
+ * Copyright (c) 2021.  Mindstellar
  *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
  *
- *     http://www.apache.org/licenses/LICENSE-2.0
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
  *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
+ *                     GNU GENERAL PUBLIC LICENSE
+ *                        Version 3, 29 June 2007
+ *
+ *  Copyright (C) 2007 Free Software Foundation, Inc. <http://fsf.org/>
+ *  Everyone is permitted to copy and distribute verbatim copies
+ *  of this license document, but changing it is not allowed.
+ *
+ *  You should have received a copy of the GNU Affero General Public
+ *  License along with this program. If not, see <http://www.gnu.org/licenses/>.
+ *
  */
 
 use mindstellar\utility\Utils;
+use PHPMailer\PHPMailer\PHPMailer;
 
 /**
  * @param $value
@@ -990,8 +1000,8 @@ function display_target()
     $internet_error = false;
     require_once LIB_PATH . 'osclass/helpers/hUtils.php';
     $country_list = osc_file_get_contents(osc_get_locations_json_url());
-    $country_list = json_decode($country_list, true);
-    $country_list = $country_list['children'];
+    $country_list = json_decode($country_list, false);
+    $country_list = $country_list->locations;
 
     $country_ip = '';
     if (preg_match(
@@ -1003,7 +1013,7 @@ function display_target()
         $country_ip = $match[2];
     }
 
-    if (!isset($country_list[0]) || !isset($country_list[0]['name'])) {
+    if (!isset($country_list[0]->s_country_name)) {
         $internet_error = true;
     }
     ?>
@@ -1062,23 +1072,21 @@ function display_target()
                     <input type="hidden" id="skip-location-input" name="skip-location-input"
                            value="0"/>
                     <div class="col-md-3 col-sm-6" id="country-box">
-                        <select  class="form-select" name="locationsql" id="locationsql">
+                        <select class="form-select" name="location-json" id="location-json">
                             <option value="skip"><?php _e("Skip location"); ?></option>
                             <!-- <option value="all"><?php _e("International"); ?></option> -->
                             <?php foreach ($country_list as $c) { ?>
-                                <?php /* BUG: */
-                                if ($c['name'] == '') {
-                                    continue;
-                                } ?>
-                                <option value="<?php echo $c['file']; ?>" <?php if (strpos($c['file'], $country_ip) === 0) {
+                                <option value="<?php echo $c->s_file_name; ?>" <?php if (strpos($c->s_file_name, $country_ip) === 0) {
                                     echo 'selected="selected"';
-                                               } ?>><?php echo $c['name']; ?></option>
-                            <?php }; ?>
+                                               } ?>><?php echo $c->s_country_name; ?></option>
+                            <?php } ?>
                         </select>
                     </div>
                 <?php } else { ?>
                     <div id="location-error">
-                        <?php _e('No internet connection. You can continue the installation and insert countries later.'); ?>
+                        <div class="alert alert-danger">
+                            <?php _e('No internet connection. You can continue the installation and insert countries later.'); ?>
+                        </div>
                         <input type="hidden" id="skip-location-input" name="skip-location-input"
                                value="1"/>
                     </div>
@@ -1200,4 +1208,114 @@ function display_finish($password)
         </div>
     </div>
     <?php
+}
+
+
+/**
+ * @return array
+ */
+function basic_info()
+{
+    $admin = Params::getParam('s_name');
+    if (!$admin) {
+        $admin = 'admin';
+    }
+
+    $password = Params::getParam('s_passwd', false, false);
+    if (!$password) {
+        $password = osc_genRandomPassword();
+    }
+    Params::setParam('password', $password);
+    Admin::newInstance()->insert(
+        array(
+            's_name'     => 'Administrator',
+            's_username' => $admin,
+            's_password' => osc_hash_password($password),
+            's_email'    => Params::getParam('email')
+        )
+    );
+
+    $mPreference = Preference::newInstance();
+    $mPreference->insert(
+        array(
+            's_section' => 'osclass',
+            's_name'    => 'pageTitle',
+            's_value'   => Params::getParam('webtitle'),
+            'e_type'    => 'STRING'
+        )
+    );
+
+    $mPreference->insert(
+        array(
+            's_section' => 'osclass',
+            's_name'    => 'contactEmail',
+            's_value'   => Params::getParam('email'),
+            'e_type'    => 'STRING'
+        )
+    );
+
+    $body = sprintf(__('Hi %s,'), Params::getParam('webtitle')) . '<br/>';
+    $body .= sprintf(__('Your Osclass installation at %s is up and running.'
+                        . ' ' . 'You can access the administration panel with these details:'), WEB_PATH);
+    $body .= '<br/>';
+    $body .= '<ul>';
+    $body .= '<li>' . sprintf(__('username: %s'), $admin) . '</li>';
+    $body .= '<li>' . sprintf(__('password: %s'), $password) . '</li>';
+    $body .= '</ul>';
+    $body .= sprintf(
+        __('Remember that for any doubts you might have you can consult our <a href="%1$s">documentation</a>'),
+        'https://osclass.gitbook.io/osclass-docs/'
+    );
+    $body .= __('Cheers,') . '<br/>';
+    $body .= __('The <a href="https://github.com/mindstellar/osclass">Osclass</a> team');
+
+    $sitename = strtolower(Params::getServerParam('SERVER_NAME'));
+    if (0 === strpos($sitename, 'www.')) {
+        $sitename = substr($sitename, 4);
+    }
+
+    $mail           = new PHPMailer(true);
+    $mail->CharSet  = 'utf-8';
+    $mail->Host     = 'localhost';
+    $mail->From     = 'osclass@' . $sitename;
+    $mail->FromName = 'Osclass';
+    $mail->Subject  = 'Osclass successfully installed!';
+    $mail->addAddress(Params::getParam('email'), 'Osclass administrator');
+    $mail->Body    = $body;
+    $mail->AltBody = $body;
+
+    try {
+        $mail->send();
+
+        return array('email_status' => '', 's_password' => $password);
+    } catch (\PHPMailer\PHPMailer\Exception $exception) {
+        return array(
+            'email_status' => Params::getParam('email') . '<br>' . $exception->errorMessage(),
+            's_password'   => $password
+        );
+    }
+}
+
+
+/**
+ * @return bool
+ */
+function install_locations()
+{
+    $location = Params::getParam('locationsql');
+    if ($location) {
+        $sql = osc_file_get_contents(osc_get_locations_sql_url($location));
+        if ($sql) {
+            $conn = DBConnectionClass::newInstance();
+            $c_db = $conn->getOsclassDb();
+            $comm = new DBCommandClass($c_db);
+            $comm->query('SET FOREIGN_KEY_CHECKS = 0');
+            $comm->importSQL($sql);
+            $comm->query('SET FOREIGN_KEY_CHECKS = 1');
+
+            return true;
+        }
+    }
+
+    return false;
 }

@@ -411,7 +411,8 @@ class Validate
     /**
      * Validate locale code string
      *
-     * @param $string
+     * @param      $string
+     * @param bool $admin
      *
      * @return bool
      */

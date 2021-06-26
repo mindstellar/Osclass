@@ -4,21 +4,30 @@ if (!defined('OC_ADMIN')) {
     exit('Direct access is not allowed.');
 }
 /*
- *  Copyright 2020 Mindstellar Osclass
- *  Maintained and supported by Mindstellar Community
- *  https://github.com/mindstellar/Osclass
+ * Osclass - software for creating and publishing online classified advertising platforms
+ * Maintained and supported by Mindstellar Community
+ * https://github.com/mindstellar/Osclass
+ * Copyright (c) 2021.  Mindstellar
  *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
  *
- *     http://www.apache.org/licenses/LICENSE-2.0
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
  *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
+ *                     GNU GENERAL PUBLIC LICENSE
+ *                        Version 3, 29 June 2007
+ *
+ *  Copyright (C) 2007 Free Software Foundation, Inc. <http://fsf.org/>
+ *  Everyone is permitted to copy and distribute verbatim copies
+ *  of this license document, but changing it is not allowed.
+ *
+ *  You should have received a copy of the GNU Affero General Public
+ *  License along with this program. If not, see <http://www.gnu.org/licenses/>.
+ *
  */
 
 osc_enqueue_script('jquery-validate');
@@ -140,10 +149,10 @@ function render_offset()
 function addHelp()
 {
     echo '<p>'
-        . __("Change the basic configuration of your Osclass. From here, you can modify variables such as the site’s name,
-the default currency or how lists of listings are displayed. <strong>Be careful</strong> when modifying default values
-if you're not sure what you're doing!")
-        . '</p>';
+         . __("Change the basic configuration of your Osclass. From here, you can modify variables such as the site’s name, "
+              . "the default currency or how lists of listings are displayed. <strong>Be careful</strong> when modifying default "
+              . "values if you're not sure what you're doing!")
+         . '</p>';
 }
 
 
@@ -207,7 +216,8 @@ osc_current_admin_theme_path('parts/header.php'); ?>
                             <select name="language">
                                 <?php foreach ($aLanguages as $lang) { ?>
                                     <option value="<?php echo $lang['pk_c_code']; ?>" <?php echo((osc_language()
-                                        === $lang['pk_c_code']) ? 'selected="selected"'
+                                                                                                  === $lang['pk_c_code'])
+                                        ? 'selected="selected"'
                                         : ''); ?>><?php echo $lang['s_name']; ?></option>
                                 <?php } ?>
                             </select>
@@ -219,7 +229,8 @@ osc_current_admin_theme_path('parts/header.php'); ?>
                             <select name="currency" id="currency_admin">
                                 <?php foreach ($aCurrencies as $currency) { ?>
                                     <option value="<?php echo osc_esc_html($currency['pk_c_code']); ?>" <?php echo((osc_currency()
-                                        === $currency['pk_c_code']) ? 'selected="selected"'
+                                                                                                                    === $currency['pk_c_code'])
+                                        ? 'selected="selected"'
                                         : ''); ?>><?php echo $currency['pk_c_code'] ?></option>
                                 <?php } ?>
                             </select>
@@ -295,7 +306,8 @@ osc_current_admin_theme_path('parts/header.php'); ?>
                                             : ''); ?> />
                                     <input type="text" name="df_custom_text" id="df_custom_text"
                                            class="input-medium" <?php echo($custom_checked ? 'value="'
-                                            . osc_esc_html(osc_date_format()) . '"' : ''); ?>
+                                                                                             . osc_esc_html(osc_date_format()) . '"'
+                                            : ''); ?>
                                            onchange="document.getElementById('dateFormat').value = this.value;"
                                            onkeyup="custom_date(this.value);"/>
                                     <br/>
@@ -325,7 +337,8 @@ osc_current_admin_theme_path('parts/header.php'); ?>
                                            value="tf_custom" <?php echo($custom_checked ? 'checked="checked"'
                                             : ''); ?> />
                                     <input type="text" class="input-medium" <?php echo($custom_checked ? 'value="'
-                                        . osc_esc_html(osc_time_format()) . '"' : ''); ?>
+                                                                                                         . osc_esc_html(osc_time_format())
+                                                                                                         . '"' : ''); ?>
                                            onchange="document.getElementById('timeFormat').value = this.value;"
                                            onkeyup="custom_time(this.value);"/>
                                     <br/>
@@ -400,8 +413,8 @@ osc_current_admin_theme_path('parts/header.php'); ?>
                                     <input type="checkbox" <?php echo(osc_auto_cron() ? 'checked="checked"' : ''); ?>
                                            name="auto_cron"/>
                                     <?php printf(
-                                        __('Allow Osclass to run a built-in <a href="%s" target="_blank">cron</a>'.' '
-                                            .'automatically without setting crontab'),
+                                        __('Allow Osclass to run a built-in <a href="%s" target="_blank">cron</a>' . ' '
+                                           . 'automatically without setting crontab'),
                                         'http://en.wikipedia.org/wiki/Cron'
                                     ); ?>
                                 </label>

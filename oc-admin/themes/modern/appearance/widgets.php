@@ -2,21 +2,30 @@
     exit('Direct access is not allowed.');
 }
 /*
- *  Copyright 2020 Mindstellar Osclass
- *  Maintained and supported by Mindstellar Community
- *  https://github.com/mindstellar/Osclass
+ * Osclass - software for creating and publishing online classified advertising platforms
+ * Maintained and supported by Mindstellar Community
+ * https://github.com/mindstellar/Osclass
+ * Copyright (c) 2021.  Mindstellar
  *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
  *
- *     http://www.apache.org/licenses/LICENSE-2.0
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
  *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
+ *                     GNU GENERAL PUBLIC LICENSE
+ *                        Version 3, 29 June 2007
+ *
+ *  Copyright (C) 2007 Free Software Foundation, Inc. <http://fsf.org/>
+ *  Everyone is permitted to copy and distribute verbatim copies
+ *  of this license document, but changing it is not allowed.
+ *
+ *  You should have received a copy of the GNU Affero General Public
+ *  License along with this program. If not, see <http://www.gnu.org/licenses/>.
+ *
  */
 
 osc_enqueue_script('jquery-validate');
@@ -96,7 +105,8 @@ osc_current_admin_theme_path('parts/header.php'); ?>
                     <div class="widget-box">
                         <div class="widget-box-title"><h3><?php printf(__('Section: %s'), $location); ?> &middot; <a
                                         id="add_widget_<?php echo $location; ?>"
-                                        href="<?php echo osc_admin_base_url(true); ?>?page=appearance&amp;action=add_widget&amp;location=<?php echo $location; ?>"
+                                        href="<?php echo osc_admin_base_url(true); ?>?page=appearance&amp;action=add_widget&amp;
+                                        location=<?php echo $location; ?>"
                                         class="btn float-right"><?php _e('Add HTML widget'); ?></a></h3></div>
                         <div class="widget-box-content">
                             <?php $widgets = Widget::newInstance()->findByLocation($location); ?>
@@ -113,12 +123,12 @@ osc_current_admin_theme_path('parts/header.php'); ?>
                                            } ?>>
                                             <td><?php echo __('Widget') . ' ' . $w['pk_i_id']; ?></td>
                                             <td><?php printf(__('Description: %s'), $w['s_description']); ?></td>
-                                            <td>
-                                                <?php printf('<a href="%1$s?page=appearance&amp;action=edit_widget&amp;id=%2$s&amp;location=%3$s">'
+                                            <td><?php printf(
+                                                    '<a href="%1$s?page=appearance&amp;action=edit_widget&amp;id=%2$s&amp;location=%3$s">'
                                                     . __('Edit') . '</a>', osc_admin_base_url(true), $w['pk_i_id'],
                                                     $location); ?>
                                                 <a href="<?php printf('%s?page=appearance&amp;action=delete_widget&amp;id=%d"',
-                                                    osc_admin_base_url(true), $w['pk_i_id']); ?>"
+                                                                      osc_admin_base_url(true), $w['pk_i_id']); ?>"
                                                    onclick="return delete_dialog('<?php echo $w['pk_i_id']; ?>');"><?php _e('Delete'); ?></a>
                                             </td>
                                         </tr>
@@ -138,7 +148,7 @@ osc_current_admin_theme_path('parts/header.php'); ?>
         <div class="grid-row grid-50">
             <div class="row-wrapper">
                 <div class="widget-box">
-                    <div class="widget-box-title"><h3><?php _('Current theme does not support widgets'); ?></h3></div>
+                    <div class="widget-box-title"><h3><?php _e('Current theme does not support widgets'); ?></h3></div>
                     <div class="widget-box-content">
                         <?php _e('Current theme does not support widgets'); ?>
                     </div>

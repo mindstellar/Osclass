@@ -2,28 +2,38 @@
     exit('Direct access is not allowed.');
 }
 /*
- *  Copyright 2020 Mindstellar Osclass
- *  Maintained and supported by Mindstellar Community
- *  https://github.com/mindstellar/Osclass
+ * Osclass - software for creating and publishing online classified advertising platforms
+ * Maintained and supported by Mindstellar Community
+ * https://github.com/mindstellar/Osclass
+ * Copyright (c) 2021.  Mindstellar
  *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
  *
- *     http://www.apache.org/licenses/LICENSE-2.0
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
  *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
+ *                     GNU GENERAL PUBLIC LICENSE
+ *                        Version 3, 29 June 2007
+ *
+ *  Copyright (C) 2007 Free Software Foundation, Inc. <http://fsf.org/>
+ *  Everyone is permitted to copy and distribute verbatim copies
+ *  of this license document, but changing it is not allowed.
+ *
+ *  You should have received a copy of the GNU Affero General Public
+ *  License along with this program. If not, see <http://www.gnu.org/licenses/>.
+ *
  */
 
 function addHelp()
 {
     echo '<p>'
-        . __('Manage the comments that users publish on the listings on your site. You can also edit, delete, activate or block comments.')
-        . '</p>';
+         . __('Manage the comments that users publish on the listings on your site.'
+              . ' You can also edit, delete, activate or block comments.')
+         . '</p>';
 }
 
 
@@ -154,7 +164,7 @@ osc_current_admin_theme_path('parts/header.php'); ?>
         <div id="bulk-actions">
             <label>
                 <?php osc_print_bulk_actions('bulk_actions', 'bulk_actions', __get('bulk_options'),
-                    'select-box-extra'); ?>
+                                             'select-box-extra'); ?>
                 <input type="submit" id="bulk_apply" class="btn" value="<?php echo osc_esc_html(__('Apply')); ?>"/>
             </label>
         </div>
@@ -163,8 +173,11 @@ osc_current_admin_theme_path('parts/header.php'); ?>
                 <thead>
                 <tr>
                     <?php foreach ($columns as $k => $v) {
-                        echo '<th class="col-' . $k . ' ' . ($sort == $k ? ($direction == 'desc' ? 'sorting_desc'
-                                : 'sorting_asc') : '') . '">' . $v . '</th>';
+                        if ($direction === 'desc') {
+                            echo '<th class="col-' . $k . ' ' . ($sort == $k ? ('sorting_desc') : '') . '">' . $v . '</th>';
+                        } else {
+                            echo '<th class="col-' . $k . ' ' . ($sort == $k ? ('sorting_asc') : '') . '">' . $v . '</th>';
+                        }
                     } ?>
                 </tr>
                 </thead>
@@ -172,7 +185,7 @@ osc_current_admin_theme_path('parts/header.php'); ?>
                 <?php if (count($rows) > 0) { ?>
                     <?php foreach ($rows as $key => $row) { ?>
                         <tr class="<?php echo implode(' ',
-                            osc_apply_filter('datatable_comment_class', array(), $aRawRows[$key], $row)); ?>">
+                                                      osc_apply_filter('datatable_comment_class', array(), $aRawRows[$key], $row)); ?>">
                             <?php foreach ($row as $k => $v) { ?>
                                 <td class="col-<?php echo $k; ?>"><?php echo $v; ?></td>
                             <?php } ?>
@@ -195,10 +208,13 @@ osc_current_admin_theme_path('parts/header.php'); ?>
 function showingResults()
 {
     $aData = __get('aData');
-    echo '<ul class="showing-results"><li><span>' . osc_pagination_showing((Params::getParam('iPage') - 1)
-            * $aData['iDisplayLength'] + 1,
-            ((Params::getParam('iPage') - 1) * $aData['iDisplayLength']) + count($aData['aRows']),
-            $aData['iTotalDisplayRecords'], $aData['iTotalRecords']) . '</span></li></ul>';
+    echo '<ul class="showing-results"><li><span>'
+         . osc_pagination_showing((Params::getParam('iPage') - 1)
+                                  * $aData['iDisplayLength'] + 1,
+                                  ((Params::getParam('iPage') - 1) * $aData['iDisplayLength'])
+                                  + count($aData['aRows']),
+                                  $aData['iTotalDisplayRecords'], $aData['iTotalRecords'])
+         . '</span></li></ul>';
 }
 
 

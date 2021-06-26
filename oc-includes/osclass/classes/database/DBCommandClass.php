@@ -1,21 +1,30 @@
 <?php
 
 /*
- *  Copyright 2020 Mindstellar Osclass
- *  Maintained and supported by Mindstellar Community
- *  https://github.com/mindstellar/Osclass
+ * Osclass - software for creating and publishing online classified advertising platforms
+ * Maintained and supported by Mindstellar Community
+ * https://github.com/mindstellar/Osclass
+ * Copyright (c) 2021.  Mindstellar
  *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
  *
- *     http://www.apache.org/licenses/LICENSE-2.0
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
  *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
+ *                     GNU GENERAL PUBLIC LICENSE
+ *                        Version 3, 29 June 2007
+ *
+ *  Copyright (C) 2007 Free Software Foundation, Inc. <http://fsf.org/>
+ *  Everyone is permitted to copy and distribute verbatim copies
+ *  of this license document, but changing it is not allowed.
+ *
+ *  You should have received a copy of the GNU Affero General Public
+ *  License along with this program. If not, see <http://www.gnu.org/licenses/>.
+ *
  */
 
 /**
@@ -396,7 +405,7 @@ class DBCommandClass
      *
      * @access public
      *
-     * @param string $key
+     * @param string       $key
      * @param array|string $values
      *
      * @return DBCommandClass
@@ -576,7 +585,7 @@ class DBCommandClass
      * @param string $match
      * @param string $side
      *
-     * @return string
+     * @return \DBCommandClass
      * @since  2.3
      *
      */
@@ -954,7 +963,7 @@ class DBCommandClass
      *
      * @param string $sql
      *
-     * @return mixed
+     * @return bool|\mysqli_result
      * @since  2.3
      */
     private function execute($sql)
@@ -1058,7 +1067,7 @@ class DBCommandClass
      * @param mixed $set
      * @param mixed $where
      *
-     * @return mixed
+     * @return false|int
      * @since  2.3
      */
     public function update($table = '', $set = null, $where = null)
@@ -1491,7 +1500,7 @@ class DBCommandClass
      *
      * @param array|string array or string with the SQL queries.
      *
-     * @return bool|array true on success, false on fail
+     * @return array true on success, false on fail
      */
     public function updateDB($queries = '')
     {
@@ -1724,9 +1733,14 @@ class DBCommandClass
                     )
                 ) {
                     $field_type = $match[1];
+
+                    //HACK: DB upgrade issue on different version of MySQL ignore INT display width
+                    $tbl_field['Type'] = preg_replace('/INT\([\d]+\)/i', 'int', strtolower($tbl_field['Type']));
+                    $field_type        = preg_replace('/INT\([\d]+\)/i', 'int', strtolower($field_type));
+
                     // Are they the same?
-                    if (strtolower($field_type) != strtolower($tbl_field['Type'])
-                        && str_replace(' ', '', strtolower($field_type)) != str_replace(
+                    if ($field_type !== $tbl_field['Type']
+                        && str_replace(' ', '', strtolower($field_type)) !== str_replace(
                             ' ',
                             '',
                             strtolower($tbl_field['Type'])
@@ -1820,7 +1834,7 @@ class DBCommandClass
                 } elseif ($v['index_type'] === 'FULLTEXT') {  // FULLTEXT INDEX MUST HAVE KEY_NAME
                     $string .= 'FULLTEXT ' . $k . ' ';
                 } elseif ((count($v['columns']) == 1 && $v['columns'][0]['fieldname'] != $k)
-                    || (preg_match('/^idx/', $k, $coincidencias) > 0)
+                          || (preg_match('/^idx/', $k, $coincidencias) > 0)
                 ) {
                     $string .= 'INDEX ' . $k . ' ';
                 } else {
@@ -1935,7 +1949,7 @@ class DBCommandClass
      * Get the ID generated from the previous INSERT operation
      *
      * @access public
-     * @return mixed
+     * @return int|string
      * @since  2.3
      */
     public function insertedId()

@@ -2,21 +2,30 @@
     exit('Direct access is not allowed.');
 }
 /*
- *  Copyright 2020 Mindstellar Osclass
- *  Maintained and supported by Mindstellar Community
- *  https://github.com/mindstellar/Osclass
+ * Osclass - software for creating and publishing online classified advertising platforms
+ * Maintained and supported by Mindstellar Community
+ * https://github.com/mindstellar/Osclass
+ * Copyright (c) 2021.  Mindstellar
  *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
  *
- *     http://www.apache.org/licenses/LICENSE-2.0
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
  *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
+ *                     GNU GENERAL PUBLIC LICENSE
+ *                        Version 3, 29 June 2007
+ *
+ *  Copyright (C) 2007 Free Software Foundation, Inc. <http://fsf.org/>
+ *  Everyone is permitted to copy and distribute verbatim copies
+ *  of this license document, but changing it is not allowed.
+ *
+ *  You should have received a copy of the GNU Affero General Public
+ *  License along with this program. If not, see <http://www.gnu.org/licenses/>.
+ *
  */
 
 osc_enqueue_script('jquery-validate');
@@ -223,8 +232,8 @@ osc_current_admin_theme_path('parts/header.php'); ?>
                                 <?php ItemForm::photos(); ?>
                                 <div id="photos">
                                     <?php if (osc_max_images_per_item() == 0
-                                        || (osc_max_images_per_item() != 0
-                                            && osc_count_item_resources() < osc_max_images_per_item())
+                                              || (osc_max_images_per_item() != 0
+                                                  && osc_count_item_resources() < osc_max_images_per_item())
                                     ) { ?>
                                         <div>
                                             <input type="file" name="photos[]"/> (<?php _e('optional'); ?>)
@@ -305,7 +314,8 @@ osc_current_admin_theme_path('parts/header.php'); ?>
                                 <div class="input-has-placeholder input-separate-top">
                                     <?php ItemForm::expiration_input('add'); ?>
                                 </div>
-                                <label><?php _e('It could be an integer (days from original publishing date it will be expired, 0 to never expire) or a date in the format "yyyy-mm-dd hh:mm:ss"'); ?></label>
+                                <label><?php _e('It could be an integer (days from original publishing date it will '
+                                                . 'be expired, 0 to never expire) or a date in the format "yyyy-mm-dd hh:mm:ss"'); ?></label>
                             <?php } elseif (!$new_item) { ?>
                                 <div class="input-separate-top">
                                     <label><input type="checkbox" id="update_expiration" name="update_expiration"
@@ -315,7 +325,9 @@ osc_current_admin_theme_path('parts/header.php'); ?>
                                         <div class="input-has-placeholder input-separate-top">
                                             <?php ItemForm::expiration_input('edit'); ?>
                                         </div>
-                                        <label><?php _e('It could be an integer (days from original publishing date it will be expired, 0 to never expire) or a date in the format "yyyy-mm-dd hh:mm:ss"'); ?></label>
+                                        <label><?php _e('It could be an integer (days from original publishing date '
+                                                        . 'it will be expired, 0 to never expire) or a date in the format '
+                                                        . '"yyyy-mm-dd hh:mm:ss"'); ?></label>
                                     </div>
                                 </div>
                             <?php } ?>
@@ -342,7 +354,8 @@ osc_current_admin_theme_path('parts/header.php'); ?>
         theme_advanced_toolbar_location: 'top',
         theme_advanced_buttons1_add: 'forecolorpicker,fontsizeselect',
         theme_advanced_buttons2_add: 'media',
-        plugins: 'advlist autolink lists link image charmap preview anchor searchreplace visualblocks code fullscreen insertdatetime media table paste'
+        plugins: 'advlist autolink lists link image charmap preview anchor searchreplace ' +
+            'visualblocks code fullscreen insertdatetime media table paste'
     });
 </script>
 <?php osc_current_admin_theme_path('parts/footer.php'); ?>

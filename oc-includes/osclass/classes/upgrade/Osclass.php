@@ -1,4 +1,31 @@
 <?php
+/*
+ * Osclass - software for creating and publishing online classified advertising platforms
+ * Maintained and supported by Mindstellar Community
+ * https://github.com/mindstellar/Osclass
+ * Copyright (c) 2021.  Mindstellar
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+ *
+ *                     GNU GENERAL PUBLIC LICENSE
+ *                        Version 3, 29 June 2007
+ *
+ *  Copyright (C) 2007 Free Software Foundation, Inc. <http://fsf.org/>
+ *  Everyone is permitted to copy and distribute verbatim copies
+ *  of this license document, but changing it is not allowed.
+ *
+ *  You should have received a copy of the GNU Affero General Public
+ *  License along with this program. If not, see <http://www.gnu.org/licenses/>.
+ *
+ */
+
 /**
  * Created by Mindstellar Community.
  * User: navjottomer
@@ -25,6 +52,24 @@ class Osclass extends UpgradePackage
 {
 
     /**
+     * Osclass constructor.
+     *
+     * @param array $package_info
+     * @param bool  $force_upgrade
+     * @param bool  $enable_prerelease
+     */
+    public function __construct(
+        $package_info,
+        $force_upgrade = false,
+        $enable_prerelease = false
+    ) {
+        if (defined('ENABLE_PRERELEASE') && ENABLE_PRERELEASE === true ) {
+            $enable_prerelease = true;
+        }
+        parent::__construct($package_info, $force_upgrade, $enable_prerelease);
+    }
+
+    /**
      * Upgrade Osclass Database
      *
      * @param bool $skip_db
@@ -47,7 +92,7 @@ class Osclass extends UpgradePackage
         }
 
         if (!$skip_db && count($error_queries[2]) > 0) {
-            $skip_db_link = osc_admin_base_url(true) . '?page=ajax&action=upgrade-db&skipdb=true';
+            $skip_db_link = osc_admin_base_url(true) . '?page=upgrade&confirm=true&skipdb=true';
             $message      = __('Osclass &raquo; Has some errors') . PHP_EOL;
             $message      .= __('We\'ve encountered some problems while updating the database structure. 
             The following queries failed:' . PHP_EOL);
@@ -96,30 +141,35 @@ class Osclass extends UpgradePackage
             || (!$preference->get('update_core_json') && (time() - $preference->get('last_version_check')) > (24 * 3600)
             )
         ) {
-            $json_url                  = 'https://api.github.com/repos/mindstellar/osclass/releases/latest';
-            $osclass_package_info_json = (new FileSystem())->getContents($json_url);
-            if ($osclass_package_info_json) {
-                $aSelfPackage = json_decode($osclass_package_info_json, true);
-                if (!$aSelfPackage['draft']) {
-                    if (isset($aSelfPackage['name'])) {
-                        $package_info['s_title'] = $aSelfPackage['name'];
-                    }
-                    if (isset($aSelfPackage['assets'][0]['browser_download_url'])) {
-                        $download_url                 = $aSelfPackage['assets'][0]['browser_download_url'];
-                        $package_info['s_source_url'] = $download_url;
-                    }
-                    if (isset($aSelfPackage['tag_name'])) {
-                        $package_info['s_new_version'] = ltrim(trim($aSelfPackage['tag_name']), 'v');
-                    }
+            if (defined('ENABLE_PRERELEASE') && ENABLE_PRERELEASE === true ) {
+                $json_url              = 'https://api.github.com/repos/mindstellar/osclass/releases';
+                $osclass_package_info_json = (new FileSystem())->getContents($json_url);
+                if ($osclass_package_info_json) {
+                    $aSelfPackage = json_decode($osclass_package_info_json, true)[0];
+                }
+            } else {
+                $json_url                  = 'https://api.github.com/repos/mindstellar/osclass/releases/latest';
+                $osclass_package_info_json = (new FileSystem())->getContents($json_url);
+                if ($osclass_package_info_json) {
+                    $aSelfPackage = json_decode($osclass_package_info_json, true);
+                }
+            }
+
+            if (!$aSelfPackage['draft']) {
+                if (isset($aSelfPackage['name'])) {
+                    $package_info['s_title'] = $aSelfPackage['name'];
+                }
+                if (isset($aSelfPackage['assets'][0]['browser_download_url'])) {
+                    $package_info['s_source_url'] = $aSelfPackage['assets'][0]['browser_download_url'];
+                }
+                if (isset($aSelfPackage['tag_name'])) {
+                    $package_info['s_new_version'] = ltrim(trim($aSelfPackage['tag_name']), 'v');
+                }
                     $package_info['s_installed_version'] = OSCLASS_VERSION;
                     $package_info['s_short_name']        = 'osclass';
-
                     $package_info['s_target_directory'] = ABS_PATH;
-
                     $package_info['a_filtered_files'] = ['oc-content', 'config.php'];
-
                     $package_info['s_prerelease'] = $aSelfPackage['prerelease'];
-                }
             }
         }
         if (!isset($package_info) || empty($package_info)) {

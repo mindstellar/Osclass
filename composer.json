@@ -41,18 +41,18 @@
     "ext-fileinfo": "*",
     "ext-mbstring": "*",
     "ext-gd": "*",
-    "ezyang/htmlpurifier": "4.12.x",
-    "phpmailer/phpmailer": "6.1.x",
+    "ezyang/htmlpurifier": "4.12.*",
+    "phpmailer/phpmailer": "6.5.*",
     "pclzip/pclzip": "2.8.2",
-    "phpseclib/phpseclib": "2.0.x",
+    "phpseclib/phpseclib": "2.0.*",
     "pensiero/php-openssl-cryptor": "0.1.0",
-    "google/recaptcha": "1.1.x",
-    "gettext/gettext": "4.6.x",
+    "google/recaptcha": "1.1.*",
+    "gettext/gettext": "4.6.*",
     "phpseclib/mcrypt_compat": "^1.0"
   }
   ,
   "require-dev": {
-    "roave/security-advisories": "dev-master"
+    "roave/security-advisories": "dev-latest"
   },
   "suggest": {
     "ext-apcu": "Fast PHP user cache",

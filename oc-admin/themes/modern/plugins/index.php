@@ -2,28 +2,38 @@
     exit('Direct access is not allowed.');
 }
 /*
- *  Copyright 2020 Mindstellar Osclass
- *  Maintained and supported by Mindstellar Community
- *  https://github.com/mindstellar/Osclass
+ * Osclass - software for creating and publishing online classified advertising platforms
+ * Maintained and supported by Mindstellar Community
+ * https://github.com/mindstellar/Osclass
+ * Copyright (c) 2021.  Mindstellar
  *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
  *
- *     http://www.apache.org/licenses/LICENSE-2.0
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
  *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
+ *                     GNU GENERAL PUBLIC LICENSE
+ *                        Version 3, 29 June 2007
+ *
+ *  Copyright (C) 2007 Free Software Foundation, Inc. <http://fsf.org/>
+ *  Everyone is permitted to copy and distribute verbatim copies
+ *  of this license document, but changing it is not allowed.
+ *
+ *  You should have received a copy of the GNU Affero General Public
+ *  License along with this program. If not, see <http://www.gnu.org/licenses/>.
+ *
  */
 
 function addHelp()
 {
     echo '<p>'
-        . __("Install or uninstall the plugins available in your installation. In some cases, you'll have to configure the plugin in order to get it to work.")
-        . '</p>';
+         . __("Install or uninstall the plugins available in your installation. In some cases, "
+              . "you'll have to configure the plugin in order to get it to work.")
+         . '</p>';
 }
 
 
@@ -45,7 +55,8 @@ function customPageHeader()
         <?php _e("Plugin couldn't be installed because it triggered a <strong>fatal error</strong>"); ?>
     <a class="btn ico btn-mini ico-close">x</a>
     <iframe style="border:0;" width="100%" height="60"
-            src="<?php echo osc_admin_base_url(true); ?>?page=plugins&amp;action=error_plugin&amp;plugin=<?php echo Params::getParam('error'); ?>"></iframe>
+            src="<?php echo osc_admin_base_url(true); ?>?page=plugins&amp;action=error_plugin&amp;plugin=<?php
+            echo Params::getParam('error'); ?>"></iframe>
     <!-- /flash message -->
     <?php } ?>
     <?php
@@ -171,9 +182,12 @@ function customHead()
             {
                 $aData = __get('aPlugins');
                 echo '<ul class="showing-results"><li><span>' . osc_pagination_showing((Params::getParam('iPage') - 1)
-                        * $aData['iDisplayLength'] + 1,
-                        ((Params::getParam('iPage') - 1) * $aData['iDisplayLength']) + count($aData['aaData']),
-                        $aData['iTotalDisplayRecords']) . '</span></li></ul>';
+                                                                                       * $aData['iDisplayLength'] + 1,
+                                                                                       ((Params::getParam('iPage') - 1)
+                                                                                        * $aData['iDisplayLength'])
+                                                                                       + count($aData['aaData']),
+                                                                                       $aData['iTotalDisplayRecords'])
+                     . '</span></li></ul>';
             }
 
 
@@ -184,7 +198,7 @@ function customHead()
             <div class="display-select-bottom">
                 <form method="get" action="<?php echo osc_admin_base_url(true); ?>" class="inline nocsrf">
                     <?php foreach (Params::getParamsAsArray('get') as $key => $value) { ?>
-                        <?php if ($key != 'iDisplayLength') { ?>
+                        <?php if ($key !== 'iDisplayLength') { ?>
                             <input type="hidden" name="<?php echo osc_esc_html($key); ?>"
                                    value="<?php echo osc_esc_html($value); ?>"/>
                         <?php }
@@ -206,8 +220,6 @@ function customHead()
                     </select>
                 </form>
             </div>
-
-
         </div>
         <?php if ($bPluginsToUpdate && count($aPluginsToUpdate) > 0) { ?>
             <div id="update-plugins">
@@ -301,7 +313,8 @@ function customHead()
         <input type="hidden" name="plugin" value=""/>
         <div class="form-horizontal">
             <div class="form-row">
-                <?php _e('This action can not be undone. Uninstalling plugins may result in a permanent loss of data. Are you sure you want to continue?'); ?>
+                <?php _e('This action can not be undone. Uninstalling plugins may result in a permanent loss of data. '
+                         . 'Are you sure you want to continue?'); ?>
             </div>
             <div class="form-actions">
                 <div class="wrapper">
@@ -327,63 +340,13 @@ function customHead()
                 $(".ui-dialog-content").dialog("close");
                 return false;
             });
-
-            $("#market_install").on("click", function () {
-                $(".ui-dialog-content").dialog("close");
-                $('<div id="downloading"><div class="osc-modal-content"><?php _e('Please wait until the download is completed'); ?></div></div>').dialog({
-                    title: '<?php _e('Downloading'); ?>...',
-                    modal: true
-                });
-                $.getJSON(
-                    "<?php echo osc_admin_base_url(true); ?>?page=ajax&action=market&<?php echo osc_csrf_token_url(); ?>",
-                    {"code": $("#market_code").attr("value"), "section": 'plugins'},
-                    function (data) {
-                        var content = data.message;
-                        if (data.error == 0) { // no errors
-                            content += '<p><?php echo osc_esc_js(__('The plugin has been downloaded correctly, proceed to install and configure.')); ?></p>';
-                            content += "<p>";
-                            content += '<a class="btn btn-mini btn-green" href="<?php echo osc_admin_base_url(true); ?>?page=plugins&marketError=' + data.error + '&slug=' + oscEscapeHTML(data.data['s_update_url']) + '"><?php echo osc_esc_js(__('Close')); ?></a>';
-                            content += "</p>";
-                        } else {
-                            content += '<a class="btn btn-mini btn-green" onclick=\'$(".ui-dialog-content").dialog("close");\'><?php echo osc_esc_js(__('Close')); ?>...</a>';
-                        }
-                        $("#downloading .osc-modal-content").html(content);
-                    });
-                return false;
-            });
-        });
-
-        $('.market-popup').on('click', function () {
-            $.getJSON(
-                "<?php echo osc_admin_base_url(true); ?>?page=ajax&action=check_market",
-                {"code": $(this).attr('href').replace('#', ''), 'section': 'plugins'},
-                function (data) {
-                    if (data != null) {
-                        $("#market_thumb").attr('src', data.s_thumbnail);
-                        $("#market_code").attr("value", data.s_update_url);
-                        $("#market_name").text(data.s_title);
-                        $("#market_version").text(data.s_version);
-                        $("#market_author").text(data.s_contact_name);
-                        $("#market_url").attr('href', data.s_source_file);
-                        $('#market_install').text("<?php echo osc_esc_js(__('Update')); ?>");
-
-                        $('#market_installer').dialog({
-                            modal: true,
-                            title: '<?php echo osc_esc_js(__('Osclass Market')); ?>',
-                            width: 485
-                        });
-                    }
-                }
-            );
-
-            return false;
         });
 
         function delete_plugin(plugin) {
-            var x = confirm('<?php echo osc_esc_js(__('You are about to delete the files of the plugin. Do you want to continue?'))?>');
+            const x = confirm('<?php echo osc_esc_js(__('You are about to delete the files of the plugin. Do you want to continue?'))?>');
             if (x) {
                 window.location = '<?php echo osc_admin_base_url(true) . '?page=plugins&action=delete&'
-                    . osc_csrf_token_url() . '&plugin='; ?>' + plugin;
+                                              . osc_csrf_token_url() . '&plugin='; ?>' + plugin;
             }
         }
     </script>

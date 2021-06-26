@@ -2,21 +2,30 @@
     exit('Direct access is not allowed.');
 }
 /*
- *  Copyright 2020 Mindstellar Osclass
- *  Maintained and supported by Mindstellar Community
- *  https://github.com/mindstellar/Osclass
+ * Osclass - software for creating and publishing online classified advertising platforms
+ * Maintained and supported by Mindstellar Community
+ * https://github.com/mindstellar/Osclass
+ * Copyright (c) 2021.  Mindstellar
  *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
  *
- *     http://www.apache.org/licenses/LICENSE-2.0
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
  *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
+ *                     GNU GENERAL PUBLIC LICENSE
+ *                        Version 3, 29 June 2007
+ *
+ *  Copyright (C) 2007 Free Software Foundation, Inc. <http://fsf.org/>
+ *  Everyone is permitted to copy and distribute verbatim copies
+ *  of this license document, but changing it is not allowed.
+ *
+ *  You should have received a copy of the GNU Affero General Public
+ *  License along with this program. If not, see <http://www.gnu.org/licenses/>.
+ *
  */
 
 osc_enqueue_script('jquery-validate');
@@ -55,10 +64,10 @@ osc_add_hook('admin_header', 'customHead', 10);
 function addHelp()
 {
     echo '<p>'
-        . __("Change your site's look and feel by activating a theme among those available. "
-            . '<strong>Be careful</strong>: if your theme has been customized, '
-            . "you'll lose all changes if you change to a new theme.")
-        . '</p>';
+         . __("Change your site's look and feel by activating a theme among those available. "
+              . '<strong>Be careful</strong>: if your theme has been customized, '
+              . "you'll lose all changes if you change to a new theme.")
+         . '</p>';
 }
 
 
@@ -103,7 +112,7 @@ osc_current_admin_theme_path('parts/header.php'); ?>
                     <div class="theme">
                         <img
                                 src="<?php echo osc_base_url() . '/oc-content/themes/' . osc_theme()
-                                    . '/screenshot.png' ?>"
+                                                . '/screenshot.png' ?>"
                                 title="<?php echo $info['name']; ?>" alt="<?php echo $info['name']; ?>"
                         />
                         <div class="theme-info">
@@ -122,9 +131,10 @@ osc_current_admin_theme_path('parts/header.php'); ?>
                 </div>
                 <h2 class="render-title"><?php _e('Available themes'); ?></h2>
                 <div class="available-theme">
-                    <?php $aThemesToUpdate = json_decode(osc_get_preference('themes_to_update'), true);
-                    $bThemesToUpdate       = (is_array($aThemesToUpdate)) ? true : false;
-                    $csrf_token            = osc_csrf_token_url();
+                    <?php
+                    $aThemesToUpdate = json_decode(osc_get_preference('themes_to_update'), true);
+                    $bThemesToUpdate = (is_array($aThemesToUpdate)) ? true : false;
+                    $csrf_token      = osc_csrf_token_url();
                     foreach ($themes as $theme) { ?>
                         <?php
                         if ($theme === osc_theme()) {
@@ -137,17 +147,20 @@ osc_current_admin_theme_path('parts/header.php'); ?>
                                 <img src="<?php echo osc_base_url(); ?>/oc-content/themes/<?php echo $theme; ?>/screenshot.png"
                                      title="<?php echo $info['name']; ?>" alt="<?php echo $info['name']; ?>"/>
                                 <div class="theme-actions">
-                                    <a href="<?php echo osc_admin_base_url(true); ?>?page=appearance&amp;action=activate&amp;theme=<?php echo $theme; ?>&amp;<?php echo $csrf_token; ?>"
-                                       class="btn btn-mini btn-green"><?php _e('Activate'); ?></a>
+                                    <a href="<?php echo osc_admin_base_url(true);
+                                    ?>?page=appearance&amp;action=activate&amp;theme=<?php
+                                    echo $theme; ?>&amp;<?php echo $csrf_token;
+?>" class="btn btn-mini btn-green"><?php _e('Activate'); ?></a>
                                     <a target="_blank"
                                        href="<?php echo osc_base_url(true); ?>?theme=<?php echo $theme; ?>"
                                        class="btn btn-mini btn-blue"><?php _e('Preview'); ?></a>
                                     <a onclick="return delete_dialog('<?php echo $theme; ?>');"
-                                       href="<?php echo osc_admin_base_url(true); ?>?page=appearance&amp;action=delete&amp;webtheme=<?php echo $theme; ?>&amp;<?php echo $csrf_token; ?>"
+                                       href="<?php echo osc_admin_base_url(true);
+                                        ?>?page=appearance&amp;action=delete&amp;webtheme=<?php
+                                       echo $theme; ?>&amp;<?php echo $csrf_token; ?>"
                                        class="btn btn-mini float-right delete"><?php _e('Delete'); ?></a>
                                     <?php
-                                    if ($bThemesToUpdate && in_array($theme, $aThemesToUpdate)) {
-                                        ?>
+                                    if ($bThemesToUpdate && in_array($theme, $aThemesToUpdate)) { ?>
                                         <a href='#<?php echo htmlentities(@$info['theme_update_uri']); ?>'
                                            class="btn btn-mini btn-orange market-popup"><?php _e('Update'); ?></a>
                                     <?php } ?>

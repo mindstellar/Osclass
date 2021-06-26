@@ -581,6 +581,7 @@ class FileSystem
      *
      * @param                 $filename
      * @param string|resource $content The content to append
+     * @param bool            $append
      *
      * @return bool
      * @throws \Exception
@@ -618,7 +619,7 @@ class FileSystem
      * @param null $post_data
      * @param bool $verify_ssl
      *
-     * @return mixed|null $data
+     * @return bool|string $data
      */
     public function getContents($url, $post_data = null, $verify_ssl = true)
     {

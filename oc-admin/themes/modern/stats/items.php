@@ -2,21 +2,30 @@
     exit('Direct access is not allowed.');
 }
 /*
- *  Copyright 2020 Mindstellar Osclass
- *  Maintained and supported by Mindstellar Community
- *  https://github.com/mindstellar/Osclass
+ * Osclass - software for creating and publishing online classified advertising platforms
+ * Maintained and supported by Mindstellar Community
+ * https://github.com/mindstellar/Osclass
+ * Copyright (c) 2021.  Mindstellar
  *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
  *
- *     http://www.apache.org/licenses/LICENSE-2.0
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
  *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
+ *                     GNU GENERAL PUBLIC LICENSE
+ *                        Version 3, 29 June 2007
+ *
+ *  Copyright (C) 2007 Free Software Foundation, Inc. <http://fsf.org/>
+ *  Everyone is permitted to copy and distribute verbatim copies
+ *  of this license document, but changing it is not allowed.
+ *
+ *  You should have received a copy of the GNU Affero General Public
+ *  License along with this program. If not, see <http://www.gnu.org/licenses/>.
+ *
  */
 
 $items        = __get('items');
@@ -56,8 +65,8 @@ function render_offset()
 function addHelp()
 {
     echo '<p>'
-        . __('Quickly find out how many new listings have been published on your site and how many visits each of the listings gets.')
-        . '</p>';
+         . __('Quickly find out how many new listings have been published on your site and how many visits each of the listings gets.')
+         . '</p>';
 }
 
 
@@ -332,20 +341,23 @@ osc_add_hook('admin_header', 'customHead', 10);
             </div>
         </div>
         <div class="grid-row grid-50 no-bottom-margin">
-            <div class="row-wrapper">
-                <a id="monthly" class="btn float-right <?php if ($type == 'month') {
-                    echo 'btn-green';
-                                                       } ?>"
-                   href="<?php echo osc_admin_base_url(true); ?>?page=stats&amp;action=items&amp;type_stat=month"><?php _e('Last 10 months'); ?></a>
-                <a id="weekly" class="btn float-right <?php if ($type == 'week') {
-                    echo 'btn-green';
-                                                      } ?>"
-                   href="<?php echo osc_admin_base_url(true); ?>?page=stats&amp;action=items&amp;type_stat=week"><?php _e('Last 10 weeks'); ?></a>
-                <a id="daily" class="btn float-right <?php if ($type == '' || $type == 'day') {
-                    echo 'btn-green';
-                                                     } ?>"
-                   href="<?php echo osc_admin_base_url(true); ?>?page=stats&amp;action=items&amp;type_stat=day"><?php _e('Last 10 days'); ?></a>
-            </div>
+            <?php
+            $stats_intervals = ['month', 'week', 'day'];
+            foreach ($stats_intervals as $k => $v) {
+                echo '<a id="' . $v . '" class="btn float-right';
+                if ($type === $v) {
+                    echo ' btn-green';
+                }
+                echo '" href="' . osc_admin_base_url(true) . '?page=stats&amp;action=items&amp;type_stat=' . $v . '">';
+                if ($v === 'month') {
+                    echo __('Last 10 months');
+                } elseif ($v === 'week') {
+                    echo __('Last 10 weeks');
+                } elseif ($v === 'day') {
+                    echo __('Last 10 days');
+                }
+                echo '</a>';
+            } ?>
         </div>
         <div class="grid-row grid-50 clear">
             <div class="row-wrapper">

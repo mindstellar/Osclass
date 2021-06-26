@@ -1,21 +1,30 @@
 <?php
 
 /*
- *  Copyright 2020 Mindstellar Osclass
- *  Maintained and supported by Mindstellar Community
- *  https://github.com/mindstellar/Osclass
+ * Osclass - software for creating and publishing online classified advertising platforms
+ * Maintained and supported by Mindstellar Community
+ * https://github.com/mindstellar/Osclass
+ * Copyright (c) 2021.  Mindstellar
  *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
  *
- *     http://www.apache.org/licenses/LICENSE-2.0
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
  *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
+ *                     GNU GENERAL PUBLIC LICENSE
+ *                        Version 3, 29 June 2007
+ *
+ *  Copyright (C) 2007 Free Software Foundation, Inc. <http://fsf.org/>
+ *  Everyone is permitted to copy and distribute verbatim copies
+ *  of this license document, but changing it is not allowed.
+ *
+ *  You should have received a copy of the GNU Affero General Public
+ *  License along with this program. If not, see <http://www.gnu.org/licenses/>.
+ *
  */
 
 /**
@@ -367,4 +376,78 @@ function osc_city_url()
 function osc_city_area_url()
 {
     return osc_search_url(array('sCityArea' => osc_city_area_name()));
+}
+
+
+/**
+ * Install Json locations from official repositories
+ *
+ * @param string $location
+ *
+ *
+ */
+function osc_install_json_locations($location = null)
+{
+    if ($location !== null) {
+        /** @var object $locationsObj
+         *
+         */
+        $locationsObj = json_decode(
+            osc_file_get_contents('https://raw.githubusercontent.com/mindstellar/geodata/master/src/json/' . rawurlencode($location)), false
+        );
+        if ($locationsObj) {
+            $countries = Country::newInstance();
+            $regions   = Region::newInstance();
+            $cities    = City::newInstance();
+            if (!$countries->findByCode($locationsObj->s_country_code)) {
+                $countryData = [
+                    'pk_c_code' => $locationsObj->s_country_code,
+                    's_name'    => $locationsObj->s_country_name,
+                    's_slug'    => $locationsObj->s_country_slug
+                ];
+                $countries->insert($countryData);
+                unset($countryData);
+            }
+
+            if (isset($locationsObj->regions) && $countries->findByCode($locationsObj->s_country_code)) {
+                foreach ($locationsObj->regions as $regionObj) {
+                    if (!$regions->findByName($regionObj->s_region_name, strtolower($locationsObj->s_country_code))) {
+                        $regionData = [
+                            'fk_c_country_code' => strtolower($locationsObj->s_country_code),
+                            's_name'            => $regionObj->s_region_name,
+                            'b_active'          => 1,
+                            's_slug'            => $regionObj->s_region_slug
+                        ];
+
+                        $regions->insert($regionData);
+                        unset($regionData);
+                    }
+
+                    $region = $regions->findByName($regionObj->s_region_name, strtolower($locationsObj->s_country_code));
+
+                    if (isset($regionObj->cities) && $region) {
+                        foreach ($regionObj->cities as $cityObj) {
+                            if (!$cities->findByName($cityObj->s_city_name, $region['pk_i_id'])) {
+                                $cityData = [
+                                    'fk_i_region_id'    => $region['pk_i_id'],
+                                    's_name'            => $cityObj->s_city_name,
+                                    'fk_c_country_code' => strtolower($cityObj->s_country_code),
+                                    'b_active'          => 1,
+                                    's_slug'            => $cityObj->s_city_slug
+                                ];
+                                $cities->insert($cityData);
+                                unset($cityData);
+                            }
+                        }
+                        unset($regionObj);
+                    }
+                }
+                unset($locationsObj);
+            }
+
+            return true;
+        }
+    }
+
+    return false;
 }
