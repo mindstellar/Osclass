@@ -5,7 +5,7 @@
         'type' => 'project',
         'install_path' => __DIR__ . '/../../../',
         'aliases' => array(),
-        'reference' => 'cfd3b328ac9fdc30fb85af08ba0839908f9d71aa',
+        'reference' => '6b4bae8fb77ba35e996c97b60f86e496b1538260',
         'name' => 'mindstellar/osclass',
         'dev' => false,
     ),
@@ -52,7 +52,7 @@
             'type' => 'project',
             'install_path' => __DIR__ . '/../../../',
             'aliases' => array(),
-            'reference' => 'cfd3b328ac9fdc30fb85af08ba0839908f9d71aa',
+            'reference' => '6b4bae8fb77ba35e996c97b60f86e496b1538260',
             'dev_requirement' => false,
         ),
         'pclzip/pclzip' => array(
