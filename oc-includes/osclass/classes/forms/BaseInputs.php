@@ -35,8 +35,8 @@
 
 namespace mindstellar\forms;
 
-
 use mindstellar\utility\Escape;
+use mindstellar\utility\Sanitize;
 
 /**
  * Class BaseInputs
@@ -52,43 +52,49 @@ class BaseInputs
     private $escape;
 
     /**
+     * @var \mindstellar\utility\Sanitize
+     */
+    private $sanitize;
+
+    /**
      * BaseInputs constructor.
      *
-     * @param \mindstellar\utility\Escape $escape
+     * @param \mindstellar\utility\Escape   $escape
+     * @param \mindstellar\utility\Sanitize $sanitize
      */
-    public function __construct(Escape $escape)
+    public function __construct(Escape $escape, Sanitize $sanitize)
     {
-        $this->escape = $escape;
+        $this->escape   = $escape;
+        $this->sanitize = $sanitize;
     }
 
     /**
-     * @param       $name
-     * @param       $value
-     * @param array $attributes
+     * @param string $name
+     * @param string,int,float $value
+     * @param array  $attributes
      *
      * @return string
      */
-    public function text($name, $value, array $attributes = [])
+    public function text(string $name, $value, array $attributes = [])
     : string {
         $attributes['type'] = 'text';
 
-        return $this->generic($name, $value, $attributes);
+        return $this->generateInput($name, $value, $attributes);
     }
 
     /**
-     * Generate generic input with support for type argument
+     * Common method for generating all inputs type
      *
-     * @param       $name
-     * @param       $values
-     * @param array $attributes
+     * @param string $name
+     * @param mixed  $value
+     * @param array  $attributes
      *
      * @return string
      */
-    private function generic($name, $values, array $attributes = [])
+    private function generateInput(string $name, $values = null, array $attributes = [])
     : string {
-        $defaultInputValue = null;
-        $attributesString  = '';
         // remove defaultValue from $attributes and save it
+        $defaultInputValue = null;
         if (isset($attributes['defaultValue'])) {
             $defaultInputValue = $attributes['defaultValue'];
             unset($attributes['defaultValue']);
@@ -99,14 +105,20 @@ class BaseInputs
             $selectPlaceholder = $attributes['selectPlaceholder'];
             unset($attributes['selectPlaceholder']);
         }
+        $attributes = $this->handleAttributes($attributes);
 
-        if ($attributes !== null) {
-            $attributesString = $this->handleAttributes($attributes);
+        // Sanitize input values if needed
+
+        if ($values !== null) {
+            $values = $this->sanitizeInputValues($values, $attributes['sanitize']);
         }
+        // $attributes to String
+        $attributesString = $this->attributesToString($attributes);
 
         $input = '';
         // Generate input HTML with given $attributes['type']
         switch ($attributes['type']) {
+            // Generate boostrap5 input with type=radio or type=checkbox
             case 'radio':
             case 'checkbox':
                 $i = 0;
@@ -114,17 +126,22 @@ class BaseInputs
                     $checked = $defaultInputValue !== null && $value === $defaultInputValue ? ' checked' : '';
                     $i++;
                     $input .= sprintf('<div%s>', $attributesString);
-                    $input .= sprintf('<input class="form-check-input" type="radio" name="%s" id="%s" value=%s"%s>', $name,
-                                      $name . $i,
-                                      $value, $checked);
+                    $input .= sprintf(
+                        '<input class="form-check-input" type="radio" name="%s" id="%s" value=%s"%s>',
+                        $name,
+                        $name . $i,
+                        $value,
+                        $checked
+                    );
                     $input .= sprintf('<label class="form-check-label" for="%s">', $name . $i);
                     $input .= $label;
                     $input .= '</label>';
                     $input .= '</div>';
                 }
                 break;
+            // Generate bootstrap5 input with type=select
             case 'select':
-                $input .= sprintf('<select name="%s" %s>', $name, $attributesString);
+                $input .= sprintf('<select name="%s"%s>', $name, $attributesString);
                 // Add selectPlaceholder option or create a new placeholder if not set
                 if (isset($selectPlaceholder)) {
                     $input .= sprintf('<option value="%s">%s</option>', $selectPlaceholder, $selectPlaceholder);
@@ -138,9 +155,14 @@ class BaseInputs
                 }
                 $input .= '</select>';
                 break;
+            // Generate input with type=textarea
             case 'textarea':
                 $input .= sprintf('<textarea %s>%s</textarea>', $attributesString, $values);
                 break;
+            case 'submit':
+                $input .= sprintf('<button%s>%s</button>', $attributes, $values);
+                break;
+            // Generate default input
             default:
                 $input .= sprintf('<input%s value="%s">', $attributesString, $values);
                 break;
@@ -154,41 +176,57 @@ class BaseInputs
      *
      * @param array $attributes
      *
-     * @return string
+     * @return array
      */
     private function handleAttributes(array $attributes)
-    : string {
+    : array {
+        // set default input css class
+        $inputClass = 'form-control';
         // check if attributes['type'] is set than add set default class based on it's type
         if (isset($attributes['type'])) {
             switch ($attributes['type']) {
                 case 'radio':
                 case 'checkbox':
-                    $attributes['class'] = 'form-check-input';
+                    $inputClass = 'form-check-input';
                     break;
                 case 'select':
-                    $attributes['class'] = 'form-select';
+                    $inputClass = 'form-select';
                     break;
-                default:
-                    $attributes['class'] = 'form-control';
+                case 'submit':
+                    $inputClass = 'btn btn-primary';
             }
         }
         // default input attributes array
         $defaultAttributes = [
-            'class'      => 'form-control',
-            'type'       => 'text',
-            'id'         => null,
-            'name'       => null,
-            'escapeHtml' => true,
+            'class'      => $inputClass, // default input css class
+            'type'       => 'text', // default input type
+            'sanitize'   => 'string', // default sanitize method for values is string, Check /mindstellar/utility/Sanitize for more details
+            'escapeHTML' => true, // default escapeHTML is true
         ];
-        // if given attributes has class array then make it space seprated string
-        if (isset($attributes['class'])) {
-            $attributes['class'] = implode(' ', $attributes['class']);
+
+        // merge default attributes with given attributes if key doesn't exist and return
+        return array_merge($defaultAttributes, $attributes);
+    }
+
+    /**
+     * Sanitize input values
+     *
+     * @param mixed  $values
+     * @param string $sanitizeType Sanitize method name, See /mindstellar/utility/Sanitize.php for supported types
+     *
+     * @return mixed
+     */
+    private function sanitizeInputValues($values, string $sanitizeType)
+    {
+        if (is_array($values) && !empty($values)) {
+            foreach ($values as $key => $value) {
+                $values[$key] = $this->sanitize->$sanitizeType($value);
+            }
+        } else {
+            $values = $this->sanitize->$sanitizeType($values);
         }
-        // merge default attributes with given attributes
-        $attributes = array_merge($defaultAttributes, $attributes);
 
-
-        return $this->attributesToString($attributes);
+        return $values;
     }
 
     /**
@@ -213,15 +251,29 @@ class BaseInputs
     }
 
     /**
+     * Generate Custom Input
+     *
+     * @param callable $callable Callback function to generate input
+     * @param mixed    ...$args  Arguments to pass to callback function
+     *
+     * @return mixed
+     */
+    public function custom(callable $callable, ...$args)
+    {
+        // call callback function with given arguments
+        return $callable(...$args);
+    }
+
+    /**
      * Generate Text Area Input
      *
-     * @param      $name
-     * @param      $value
-     * @param null $attributes
+     * @param string $name
+     * @param string,int,float $value
+     * @param array  $attributes
      *
      * @return string
      */
-    public function textarea($name, $value, array $attributes = [])
+    public function textarea(string $name, $value, array $attributes = [])
     : string {
         $attributes['type'] = 'textarea';
 
@@ -231,99 +283,93 @@ class BaseInputs
     /**
      * Generate Checkbox Input
      *
-     * @param       $name
-     * @param       $value
-     * @param array $attributes
+     * @param string $name
+     * @param string,int,float $value
+     * @param array  $attributes
      *
      * @return string
      */
-    public function checkbox($name, $value, array $attributes = [])
+    public function checkbox(string $name, $value, array $attributes = [])
     : string {
         $attributes['type'] = 'checkbox';
 
-        return $this->generic($name, $value, $attributes);
+        return $this->generateInput($name, $value, $attributes);
     }
 
     /**
      * Generate Select Input
      *
-     * @param       $name
-     * @param array $values
-     * @param array $attributes
+     * @param string $name
+     * @param array  $values
+     * @param array  $attributes
      *
      * @return string
      */
-    public function select($name, array $values, array $attributes = [])
+    public function select(string $name, array $values, array $attributes = [])
     : string {
         $attributes['type'] = 'select';
 
-        return $this->generic($name, $values, $attributes);
+        return $this->generateInput($name, $values, $attributes);
     }
 
     /**
      * Generate Password Input
      *
-     * @param       $name
-     * @param       $value
-     * @param array $attributes
+     * @param string $name
+     * @param string $value
+     * @param array  $attributes
      *
      * @return string
      */
-    public function password($name, $value, array $attributes = [])
+    public function password(string $name, string $value, array $attributes = [])
     : string {
         $attributes['type'] = 'password';
 
-        return $this->generic($name, $value, $attributes);
+        return $this->generateInput($name, $value, $attributes);
     }
 
     /**
      * Generate radio input
      *
-     * @param       $name
-     * @param array $values
-     * @param array $attributes
+     * @param string $name
+     * @param string,int,float $value
+     * @param array  $attributes
      *
      * @return string
      */
-    public function radio($name, array $values, array $attributes = [])
+    public function radio(string $name, array $values, array $attributes = [])
     : string {
         $attributes['type'] = 'radio';
 
-        return $this->generic($name, $values, $attributes);
+        return $this->generateInput($name, $values, $attributes);
     }
 
     /**
      * Generate submit button
      *
-     * @param       $name
-     * @param array $attributes
+     * @param string $label
+     * @param array  $attributes
      *
      * @return string
      */
-    public function submit($name, array $attributes = [])
+    public function submit(string $label, array $attributes = [])
     : string {
-        $attributes['type'] = 'submit';
-        if ($attributes !== null) {
-            $this->handleAttributes($attributes);
-        }
-
-        return sprintf('<button%s>%s</button>', $attributes, $name);
+        return $this->generateInput($label, null, $attributes);
     }
 
     /**
      * Generate hidden input
      *
-     * @param       $name
-     * @param       $value
-     * @param array $attributes
+     * @param string $name
+     * @param string,int,float $value
+     * @param array  $attributes
      *
      * @return string
      */
-    public function hidden($name, $value, array $attributes = [])
+    public function hidden(string $name, $value, array $attributes = [])
     : string {
         $attributes['type'] = 'hidden';
 
-        return $this->generic($name, $value, $attributes);
+        return $this->generateInput($name, $value, $attributes);
     }
-
 }
