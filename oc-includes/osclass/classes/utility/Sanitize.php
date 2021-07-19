@@ -127,9 +127,7 @@ class Sanitize
      */
     public function html($value)
     {
-        $sanitizedValue = $this->filter($value, 'html', FILTER_FLAG_NO_ENCODE_QUOTES);
-
-        return htmlspecialchars($sanitizedValue);
+        return $this->filter($value, 'html', FILTER_FLAG_NO_ENCODE_QUOTES);
     }
 
     /**
