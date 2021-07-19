@@ -79,166 +79,127 @@ class FormInputs implements InputInterface
 
     /**
      * @param string $name
-     * @param string,int,float $value
+     * @param        $value
+     * @param array  $attributes
      * @param array  $options
      *
      * @return string
      * @throws \Exception
      */
-    public function text(string $name, $value, array $options = [])
+    public function text(string $name, $value, array $attributes = [], array $options = [])
     : string {
-        $this->setAttribute($options, 'type', 'text');
+        $attributes['type'] = 'text';
 
-        return $this->generateInput($name, $value, $options);
-    }
-
-    /**
-     * Set input attributes and pass reference
-     *
-     * @param array  $options
-     * @param string $key
-     * @param mixed  $value
-     *
-     */
-    private function setAttribute(array &$options, string $key, $value)
-    {
-        $options['attributes'][$key] = $value;
+        return $this->generateInput($name, $value, $attributes, $options);
     }
 
     /**
      * Common method for generating all inputs type
      *
      * @param string $name
-     * @param mixed  $value
-     * @param array  $options This contains flag and attributes for input
-     *                        Supported flag in $options array :
-     *                        'defaultValue' : default value for input
-     *                        'selectPlaceholder' : placeholder for select input
-     *                        'label' : label for input
-     *                        'divClass' : css class for input div container, default not set
-     *                        'escapeHtml' : escape html for input attributes, default is true
-     *                        'sanitize'   : sanitize method for input value, default is 'string'
-     *                        Throw exception if $name is not set
+     * @param null   $values
+     * @param array  $attributes input tag attributes
+     * @param array  $options    This contains flag for input
+     *                           Supported flag in $options array :
+     *                           'defaultValue' : default value for input
+     *                           'selectPlaceholder' : placeholder for select input
+     *                           'label' : label for input
+     *                           'divClass' : css class for input div container, default not set
+     *                           'escapeHtml' : escape html for input attributes, default is true
+     *                           'sanitize'   : sanitize method for input value, default is 'string'
+     *                           Throw exception if $name is not set
      *
      * @return string
      * @throws \Exception
      */
-    private function generateInput(string $name, $values = null, array $options = [])
+    private function generateInput(string $name, $values = null, array $attributes = [], array $options = [])
     : string {
         if (!isset($name)) {
             throw new Exception('Input Name is not set');
         }
-        // remove defaultValue from $options and save it
-        $defaultInputValue = null;
-        if (isset($options['defaultValue'])) {
-            $defaultInputValue = $options['defaultValue'];
-            unset($options['defaultValue']);
+
+        $this->handleOptions($options, $attributes);
+
+        // $attributes to String
+        $attributesString = $this->attributesToString($attributes);
+
+        $input = isset($options['divClass']) ? '<div class="' . $options['divClass'] . '">' : '';
+        //Add label if $options['label'] is set
+        if (isset($options['label'])) {
+            $input .= $this->label($options['label'], $name);
         }
 
-        // remove Select Placeholder from $options and save it for later
-        if (isset($options['selectPlaceholder'])) {
-            $selectPlaceholder = $options['selectPlaceholder'];
-            unset($options['selectPlaceholder']);
+        // Sanitize input values if needed
+        if ($values !== null) {
+            $values = $this->sanitizeInputValues($values, $options['sanitize']);
         }
 
-        // remove divClass from $options and save it for later
-        if (isset($options['divClass'])) {
-            $divClass = $options['divClass'];
-            unset($options['divClass']);
-        }
-
-        $options = $this->handleOptions($options);
-
-        // $options['attributes'] to String
-        $attributesString = $this->attributesToString($options['attributes']);
-
-        if (isset($divClass)) {
-            $divtag = '<div class="' . $divClass . '">';
-        } else {
-            $divtag = '';
-        }
-        $input = $divtag;
         // Generate input HTML with given $options['type']
-        switch ($options['attributes']['type']) {
+        switch ($attributes['type']) {
             // Generate input with type=radio or type=checkbox
             case 'radio':
             case 'checkbox':
-                // Sanitize input values if needed
-                if ($values !== null) {
-                    $values = $this->sanitizeInputValues($values, $options['sanitize']);
-                }
                 $i = 0;
-                foreach ($values as $label => $value) {
-                    $checked = $defaultInputValue !== null && $value === $defaultInputValue ? ' checked' : '';
+                if (is_string($values)) {
+                    $values = explode(',', $values);
+                    //rename $values array key to value
+                    foreach ($values as $k => $v) {
+                        $values[$v] = $v;
+                        unset($values[$k]);
+                    }
+                }
+                foreach ($values as $v => $l) {
+                    $checked = isset($options['defaultValue']) && $v === $options['defaultValue'] ? ' checked' : '';
                     $i++;
                     $input .= sprintf('<div%s>', $attributesString);
                     $input .= sprintf(
-                        '<input class="form-check-input" type="radio" name="%s" id="%s" value=%s"%s>',
+                        '<input class="form-check-input" type="radio" name="%s" id="%s" value="%s"%s>',
                         $name,
                         $name . $i,
-                        $value,
+                        $v,
                         $checked
                     );
                     //Add label if $label is set or use $name as $label
-                    if (!isset($label)) {
+                    if (!isset($l)) {
                         $label = $name;
                     }
-                    $input .= $this->label($label, $name . $i, 'form-check-label');
+                    $input .= $this->label($l, $name . $i, 'form-check-label');
                     $input .= '</div>';
                 }
                 break;
             // Generate input with type=select
             case 'select':
-                // Sanitize input values if needed
-                if ($values !== null) {
-                    $values = $this->sanitizeInputValues($values, $options['sanitize']);
-                }
-
-                //Add label if $options['label'] is set
-                if (isset($options['label'])) {
-                    $input .= $this->label($options['label'], $name);
-                }
 
                 $input .= sprintf('<select name="%s"%s>', $name, $attributesString);
                 // Add selectPlaceholder option or create a new placeholder if not set
-                if (isset($selectPlaceholder)) {
-                    $input .= sprintf('<option value="%s">%s</option>', $selectPlaceholder, $selectPlaceholder);
+                if (isset($options['selectPlaceholder'])) {
+                    $input .= sprintf('<option value="">%s</option>', $options['selectPlaceholder']);
                 } else {
                     $input .= sprintf('<option value="">%s</option>', 'Select Option');
                 }
-
-                // Check if $values is array or string, if string, convert csv to array
-                if (is_array($values)) {
-                    foreach ($values as $label => $value) {
-                        $input .= sprintf('<option value="%s">%s</option>', $value, $label);
-                    }
-                } else {
+                // if value is a string, Convert csv options to array and set value as label, make it a clousure
+                if (is_string($values)) {
                     $values = explode(',', $values);
-                    foreach ($values as $value) {
-                        $input .= sprintf('<option value="%s">%s</option>', $value, $value);
+                    //rename $values array key to value
+                    foreach ($values as $k => $v) {
+                        $values[$v] = $v;
+                        unset($values[$k]);
                     }
                 }
+
+                foreach ($values as $v => $l) {
+                    $selected = isset($options['defaultValue']) && $v === $options['defaultValue'] ? ' selected' : '';
+                    $input    .= sprintf('<option value="%s"%s>%s</option>', $v, $selected, $l);
+                }
+
                 $input .= '</select>';
                 break;
             // Generate input with type=textarea
             case 'textarea':
-                // Sanitize input values if needed
-                if ($values !== null) {
-                    $values = $this->sanitizeInputValues($values, $options['sanitize']);
-                }
-
-                if (isset($options['label'])) {
-                    $input .= $this->label($options['label'], $name);
-                }
-
                 $input .= sprintf('<textarea %s>%s</textarea>', $attributesString, $values);
                 break;
             // Generate input with type=file
             case 'file':
-                if (isset($options['label'])) {
-                    $input .= $this->label($options['label'], $name);
-                }
-
                 $input .= sprintf('<input name="%s"%s>', $name, $attributesString);
                 break;
             // Generate input with type=submit
@@ -247,21 +208,15 @@ class FormInputs implements InputInterface
                 break;
             // Generate default input
             default:
-                // Sanitize input values if needed
-                if ($values !== null) {
-                    $values = $this->sanitizeInputValues($values, $options['sanitize']);
-                }
-
-                if (isset($options['label'])) {
-                    $input .= $this->label($options['label'], $name);
-                }
                 $input .= sprintf('<input%s value="%s">', $attributesString, $values);
                 break;
         }
-        if ($divtag) {
-            $input .= '</div>';
+        if (isset($options['customHtml'])) {
+            $input .= $this->addHtml($options['customHtml']);
         }
-        unset($options, $attributesString, $defaultInputValue, $label, $selectPlaceholder);
+        $input .= isset($options['divClass']) ? '</div>' : '';
+
+        unset($attributesString, $defaultInputValue, $label, $selectPlaceholder);
 
         return $input;
     }
@@ -270,36 +225,35 @@ class FormInputs implements InputInterface
      * Handler for given input option array
      *
      * @param array $options
+     * @param array $attributes
      *
-     * @return array
      */
-    private function handleOptions(array $options)
-    : array {
+    private function handleOptions(array &$options, array &$attributes)
+    {
         // default input attributes array
-        $defaultAttributes = [
-            'attributes' => [
-                'class' => 'form-control', // default input css class
-                'type'  => 'text', // default input type
-            ],
-            'sanitize'   => 'string', // default sanitize method for values is string, Check /mindstellar/utility/Sanitize for more details
-            'escapeHTML' => true, // default escapeHTML is true
-        ];
-
-        // merge default attributes with given attributes if key doesn't exist and return
-        return array_merge($defaultAttributes, $options);
+        $attributes = array_merge([
+                                      'class' => 'form-control', // default input css class
+                                      'type'  => 'text', // default input type
+                                  ], $attributes);
+        $options    = array_merge([
+                                      'sanitize'   => 'string',
+                                      // default sanitize method for values is string, Check /mindstellar/utility/Sanitize for more details
+                                      'escapeHTML' => true,
+                                      // default escapeHTML is true
+                                  ], $options);
     }
 
     /**
      * Generate attributes string from given attributes array
      *
-     * @param array $options
+     * @param array $attributes
      *
      * @return string
      */
-    private function attributesToString(array $options)
+    private function attributesToString(array $attributes)
     : string {
         $attributesString = '';
-        foreach ($options as $key => $value) {
+        foreach ($attributes as $key => $value) {
             // escape html special chars if escapeHtml is true
             if ($value === true) {
                 $value = $this->escape::html($value);
@@ -311,15 +265,32 @@ class FormInputs implements InputInterface
     }
 
     /**
+     * Common method for generating label
+     *
+     * @param string $label
+     * @param string $for
+     * @param string $class
+     *
+     * @return string
+     */
+    private function label(string $label, string $for, string $class = 'form-label')
+    : string {
+        return '<label class="' . $class . '" for="' . $for . '">' . $this->escape::html($label) . '</label>';
+    }
+
+    /**
      * Sanitize input values
      *
-     * @param mixed  $values
-     * @param string $sanitizeType Sanitize method name, See /mindstellar/utility/Sanitize.php for supported types
+     * @param mixed       $values
+     * @param string|null $sanitizeType Sanitize method name, See /mindstellar/utility/Sanitize.php for supported types
      *
      * @return mixed
      */
-    private function sanitizeInputValues($values, string $sanitizeType)
+    private function sanitizeInputValues($values, string $sanitizeType = null)
     {
+        if ($sanitizeType === null) {
+            return $values;
+        }
         if (is_array($values)) {
             if (!empty($values)) {
                 foreach ($values as $key => $value) {
@@ -334,7 +305,7 @@ class FormInputs implements InputInterface
     }
 
     /**
-     * Common method for generating lables
+     * Common method for printing customHtml after input tag
      *
      * @param string $label
      * @param string $for
@@ -342,66 +313,59 @@ class FormInputs implements InputInterface
      *
      * @return string
      */
-    private function label(string $label, string $for, string $class = 'form-label')
+    private function addHtml(string $htmlContent)
     : string {
-        return '<label class="' . $class . '" for="' . $for . '">' . $this->escape::html($label) . '</label>';
-    }
-
-    /**
-     * Generate Custom Input
-     *
-     * @param callable $callable Callback function to generate input
-     * @param mixed    ...$args  Arguments to pass to callback function
-     *
-     * @return mixed
-     */
-    public function custom(callable $callable, ...$args)
-    {
-        // call callback function with given arguments
-        return $callable(...$args);
+        return $this->escape::html($htmlContent);
     }
 
     /**
      * Generate Text Area Input
      *
      * @param string $name
-     * @param string,int,float $value
+     * @param        $value
+     * @param array  $attributes
      * @param array  $options
      *
      * @return string
      * @throws \Exception
      */
-    public function textarea(string $name, $value, array $options = [])
-    : string
-    {
-        $this->setAttribute($options, 'type', 'textarea');
+    public function textarea(string $name, $value, array $attributes = [], array $options = [])
+    : string {
+        $attributes['type'] = 'textarea';
+
         if (!isset($options['sanitize'])) {
-            $this->setAttribute($options, 'sanitize', 'html');
+            $options['sanitize'] = 'html';
+        }
+        if (!isset($attributes['row'])) {
+            $attributes['rows'] = 10;
+        }
+        if (!isset($attributes['columns'])) {
+            $attributes['columns'] = 5;
         }
 
-        return $this->generateInput($name, $value, $options);
+        return $this->generateInput($name, $value, $attributes, $options);
     }
 
     /**
      * Generate Checkbox Input
      *
      * @param string $name
-     * @param string,int,float $value
+     * @param        $value
+     * @param array  $attributes
      * @param array  $options
      *
      * @return string
      * @throws \Exception
      */
-    public function checkbox(string $name, $value, array $options = [])
+    public function checkbox(string $name, $value, array $attributes = [], array $options = [])
     : string {
-        $this->setAttribute($options, 'type', 'checkbox');
-        $options['type'] = 'checkbox';
+        $attributes['type'] = 'checkbox';
         // add css class if not set
-        if (!isset($options['attributes']['class'])) {
-            $this->setAttribute($options, 'class', 'form-check-input');
+        if (!isset($attributes['class'])) {
+            $attributes['class'] = 'form-check';
         }
 
-        return $this->generateInput($name, $value, $options);
+        return $this->generateInput($name, $value, $attributes, $options);
     }
 
     /**
@@ -409,20 +373,21 @@ class FormInputs implements InputInterface
      *
      * @param string       $name
      * @param array|string $values array or csv string
+     * @param array        $attributes
      * @param array        $options
      *
      * @return string
      * @throws \Exception
      */
-    public function select(string $name, $values, array $options = [])
+    public function select(string $name, $values, array $attributes = [], array $options = [])
     : string {
-        $this->setAttribute($options, 'type', 'select');
+        $attributes['type'] = 'select';
         // add class if not set
-        if (!isset($options['attributes']['class'])) {
-            $this->setAttribute($options, 'class', 'form-select');
+        if (!isset($attributes['class'])) {
+            $attributes['class'] = 'form-select';
         }
 
-        return $this->generateInput($name, $values, $options);
+        return $this->generateInput($name, $values, $attributes, $options);
     }
 
     /**
@@ -430,95 +395,97 @@ class FormInputs implements InputInterface
      *
      * @param string $name
      * @param string $value
+     * @param array  $attributes
      * @param array  $options
      *
      * @return string
      * @throws \Exception
      */
-    public function password(string $name, string $value, array $options = [])
+    public function password(string $name, string $value, array $attributes = [], array $options = [])
     : string {
-        $this->setAttribute($options, 'type', 'password');
+        $attributes['type'] = 'password';
 
-        return $this->generateInput($name, $value, $options);
+        return $this->generateInput($name, $value, $attributes, $options);
     }
 
     /**
      * Generate radio input
      *
      * @param string $name
-     * @param string,int,float $value
+     * @param        $values
+     * @param array  $attributes
      * @param array  $options
      *
      * @return string
      * @throws \Exception
      */
-    public function radio(string $name, array $values, array $options = [])
+    public function radio(string $name, $values, array $attributes = [], array $options = [])
     : string {
-        $this->setAttribute($options, 'type', 'radio');
+        $attributes['type'] = 'radio';
         // add css class if not set
         if (!isset($options['class'])) {
-            $this->setAttribute($options, 'class', 'form-check-input');
+            $attributes['class'] = 'form-check';
         }
 
-        return $this->generateInput($name, $values, $options);
+        return $this->generateInput($name, $values, $attributes, $options);
     }
 
     /**
      * Generate hidden input
      *
      * @param string $name
-     * @param string,int,float $value
+     * @param        $value
+     * @param array  $attributes
      * @param array  $options
      *
      * @return string
      * @throws \Exception
      */
-    public function hidden(string $name, $value, array $options = [])
+    public function hidden(string $name, $value, array $attributes = [], array $options = [])
     : string {
-        $this->setAttribute($options, 'type', 'hidden');
+        $attributes['type'] = 'hidden';
 
-        return $this->generateInput($name, $value, $options);
+        return $this->generateInput($name, $value, $attributes, $options);
     }
 
     /**
      * Generate submit input
      *
      * @param string $name
+     * @param array  $attributes
      * @param array  $options
      *
      * @return string
      * @throws \Exception
      */
-    public function submit(string $name, array $options = [])
+    public function submit(string $name, array $attributes = [], array $options = [])
     : string {
-        $this->setAttribute($options, 'type', 'submit');
+        $attributes['type'] = 'submit';
         // add css class if not set
-        if (!isset($options['attributes']['class'])) {
-            $this->setAttribute($options, 'class', 'btn btn-primary');
+        if (!isset($attributes['class'])) {
+            $attributes['class'] = 'btn btn-primary';
         }
 
-        $options['escapeHTML'] = false;
-        $options['sanitize']   = null;
-
-        return $this->generateInput($name, $name, $options);
+        return $this->generateInput($name, $name, $attributes, $options);
     }
 
     /**
      * Generate file input
      *
      * @param string $name
+     * @param array  $attributes
      * @param array  $options
      *
      * @return string
      * @throws \Exception
      */
-    public function file(string $name, array $options = [])
+    public function file(string $name, array $attributes = [], array $options = [])
     : string {
-        $this->setAttribute($options, 'type', 'file');
+        $attributes['type'] = 'file';
 
         $options['escapeHTML'] = false;
         $options['sanitize']   = null;
 
-        return $this->generateInput($name, null, $options);
+        return $this->generateInput($name, null, $attributes, $options);
     }
 }

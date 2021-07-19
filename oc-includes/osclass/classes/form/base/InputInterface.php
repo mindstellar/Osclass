@@ -46,39 +46,33 @@ interface InputInterface
 {
     /**
      * @param string $name
-     * @param string,int,float $value
+     * @param        $value
+     * @param array  $attributes
      * @param array  $options
-     *
      */
-    public function text(string $name, $value, array $options = []);
-
-    /**
-     * Custom Input
-     *
-     * @param callable $callable Callback function to generate input
-     * @param mixed    ...$args  Arguments to pass to callback function
-     */
-    public function custom(callable $callable, ...$args);
+    public function text(string $name, $value, array $attributes = [], array $options = []);
 
     /**
      * TextArea
      *
      * @param string $name
-     * @param string,int,float $value
+     * @param        $value
+     * @param array  $attributes
      * @param array  $options
      */
-    public function textarea(string $name, $value, array $options = []);
+    public function textarea(string $name, $value, array $attributes = [], array $options = []);
 
     /**
      * Checkbox
      *
      * @param string $name
-     * @param string,int,float $value
+     * @param        $value
+     * @param array  $attributes
      * @param array  $options
      *
      * @return string
      */
-    public function checkbox(string $name, $value, array $options = [])
+    public function checkbox(string $name, $value, array $attributes = [], array $options = [])
     : string;
 
     /**
@@ -86,45 +80,47 @@ interface InputInterface
      *
      * @param string       $name
      * @param array|string $values
+     * @param array        $attributes
      * @param array        $options
-     *
      */
-    public function select(string $name, $values, array $options = []);
+    public function select(string $name, $values, array $attributes = [], array $options = []);
 
     /**
      * Password
      *
      * @param string $name
      * @param string $value
+     * @param array  $attributes
      * @param array  $options
-     *
      */
-    public function password(string $name, string $value, array $options = []);
+    public function password(string $name, string $value, array $attributes = [], array $options = []);
 
     /**
      * radio
      *
-     * @param string $name
-     * @param string,int,float $value
-     * @param array  $options
+     * @param string       $name
+     * @param array|string $values
+     * @param array        $attributes
+     * @param array        $options
      */
-    public function radio(string $name, array $values, array $options = []);
+    public function radio(string $name, $values, array $attributes = [], array $options = []);
 
     /**
      * hidden
      *
      * @param string $name
-     * @param string,int,float $value
+     * @param        $value
+     * @param array  $attributes
      * @param array  $options
-     *
      */
-    public function hidden(string $name, $value, array $options = []);
+    public function hidden(string $name, $value, array $attributes = [], array $options = []);
 
     /**
      * submit
      *
      * @param string $name
+     * @param array  $attributes
      * @param array  $options
      */
-    public function submit(string $name, array $options = []);
+    public function submit(string $name, array $attributes = [], array $options = []);
 }
