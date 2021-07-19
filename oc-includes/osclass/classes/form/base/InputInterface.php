@@ -33,7 +33,7 @@
  * License is provided in root directory.
  */
 
-namespace mindstellar\forms;
+namespace mindstellar\form\base;
 
 
 /**

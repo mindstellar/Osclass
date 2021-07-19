@@ -33,9 +33,10 @@
  * License is provided in root directory.
  */
 
-namespace mindstellar\forms;
+namespace mindstellar\form\base;
 
 
+use Exception;
 use mindstellar\Csrf;
 use Plugins;
 
@@ -47,7 +48,7 @@ use Plugins;
 class FormBuilder
 {
     /**
-     * @var \mindstellar\forms\formInputs
+     * @var \mindstellar\form\base\formInputs
      */
     private $formInputs;
 
@@ -64,8 +65,8 @@ class FormBuilder
     /**
      * Form constructor.
      *
-     * @param \mindstellar\forms\formInputs $input
-     * @param array                         $formSchema
+     * @param \mindstellar\form\base\formInputs $input
+     * @param array                             $formSchema
      *                                  $exampleFormSchema = [
      *                                  'csrf' => true // if csrf is required, default true
      *                                  'attributes' => [
@@ -99,7 +100,7 @@ class FormBuilder
      *
      *
      * inputSchema is a array list of inputs with it's own properties
-     * Please See mindstellar\forms\formInputs for more information and available inputs.
+     * Please See mindstellar\form\base\formInputs for more information and available inputs.
      */
     public function __construct(FormInputs $formInputs = null, array $formSchema = [])
     {
@@ -171,7 +172,7 @@ class FormBuilder
      * @param string $value
      * @param array  $options
      *
-     * @return \mindstellar\forms\FormBuilder
+     * @return \mindstellar\form\base\FormBuilder
      */
     public function addHiddenInput(string $name, string $value = '', array $options = [])
     : FormBuilder {
@@ -205,7 +206,7 @@ class FormBuilder
      * @param string $hookName
      * @param array  $hookParams
      *
-     * @return \mindstellar\forms\FormBuilder
+     * @return \mindstellar\form\base\FormBuilder
      */
     public function runHook(string $hookName, ...$hookParams)
     : FormBuilder {
@@ -223,7 +224,7 @@ class FormBuilder
      *
      * @param string $content
      *
-     * @return \mindstellar\forms\FormBuilder
+     * @return \mindstellar\form\base\FormBuilder
      */
     public function addHtml(string $content)
     : FormBuilder {
@@ -242,7 +243,7 @@ class FormBuilder
      * @param string $value
      * @param array  $options
      *
-     * @return \mindstellar\forms\FormBuilder
+     * @return \mindstellar\form\base\FormBuilder
      */
     public function addTextInput(string $name, string $value = '', array $options = [])
     : FormBuilder {
@@ -263,7 +264,7 @@ class FormBuilder
      * @param string $value
      * @param array  $options
      *
-     * @return \mindstellar\forms\FormBuilder
+     * @return \mindstellar\form\base\FormBuilder
      */
     public function addPasswordInput(string $name, string $value = '', array $options = [])
     : FormBuilder {
@@ -284,7 +285,7 @@ class FormBuilder
      * @param string $value
      * @param array  $options
      *
-     * @return \mindstellar\forms\FormBuilder
+     * @return \mindstellar\form\base\FormBuilder
      */
     public function addTextareaInput(string $name, string $value = '', array $options = [])
     : FormBuilder {
@@ -305,7 +306,7 @@ class FormBuilder
      * @param array|string $values
      * @param array        $options
      *
-     * @return \mindstellar\forms\FormBuilder
+     * @return \mindstellar\form\base\FormBuilder
      */
     public function addSelectInput(string $name, $values, array $options = [])
     : FormBuilder {
@@ -326,7 +327,7 @@ class FormBuilder
      * @param array  $value
      * @param array  $options
      *
-     * @return \mindstellar\forms\FormBuilder
+     * @return \mindstellar\form\base\FormBuilder
      */
     public function addCheckboxInput(string $name, array $value = [], array $options = [])
     : FormBuilder {
@@ -347,7 +348,7 @@ class FormBuilder
      * @param array  $value
      * @param array  $options
      *
-     * @return \mindstellar\forms\FormBuilder
+     * @return \mindstellar\form\base\FormBuilder
      */
     public function addRadioInput(string $name, array $value = [], array $options = [])
     : FormBuilder {
@@ -367,7 +368,7 @@ class FormBuilder
      * @param string $name
      * @param array  $options
      *
-     * @return \mindstellar\forms\FormBuilder
+     * @return \mindstellar\form\base\FormBuilder
      */
     public function addFileInput(string $name, array $options = [])
     : FormBuilder {
@@ -386,7 +387,7 @@ class FormBuilder
      * @param callable $callable
      * @param          ...$args
      *
-     * @return \mindstellar\forms\FormBuilder
+     * @return \mindstellar\form\base\FormBuilder
      */
     public function addCustomInput(callable $callable, ...$args)
     : FormBuilder {
@@ -410,7 +411,7 @@ class FormBuilder
     : string
     {
         if (!isset($this->formSchema['attributes']['name'])) {
-            throw new \Exception('Form name attribute is not set');
+            throw new Exception('Form name attribute is not set');
         }
         $str = '<form' . $this->formAttributesString() . '>';
         $str .= $this->renderInputs();

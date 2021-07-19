@@ -33,8 +33,9 @@
  * License is provided in root directory.
  */
 
-namespace mindstellar\forms;
+namespace mindstellar\form\base;
 
+use Exception;
 use mindstellar\utility\Escape;
 use mindstellar\utility\Sanitize;
 
@@ -125,7 +126,7 @@ class FormInputs implements InputInterface
     private function generateInput(string $name, $values = null, array $options = [])
     : string {
         if (!isset($name)) {
-            throw new \Exception('Input Name is not set');
+            throw new Exception('Input Name is not set');
         }
         // remove defaultValue from $options and save it
         $defaultInputValue = null;
@@ -371,8 +372,12 @@ class FormInputs implements InputInterface
      * @throws \Exception
      */
     public function textarea(string $name, $value, array $options = [])
-    : string {
+    : string
+    {
         $this->setAttribute($options, 'type', 'textarea');
+        if (!isset($options['sanitize'])) {
+            $this->setAttribute($options, 'sanitize', 'html');
+        }
 
         return $this->generateInput($name, $value, $options);
     }
