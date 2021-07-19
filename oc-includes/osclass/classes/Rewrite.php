@@ -37,7 +37,6 @@ class Rewrite
     private $routes;
     private $request_uri;
     private $raw_request_uri;
-    private $uri;
     private $location;
     private $section;
     private $title;
@@ -47,7 +46,6 @@ class Rewrite
     {
         $this->request_uri     = '';
         $this->raw_request_uri = '';
-        $this->uri             = '';
         $this->location        = '';
         $this->section         = '';
         $this->title           = '';
@@ -61,15 +59,17 @@ class Rewrite
      */
     public function getRules()
     {
-        return osc_unserialize(osc_rewrite_rules());
+        return unserialize(osc_rewrite_rules(), false);
     }
 
     public function setRules()
     {
-        osc_set_preference('rewrite_rules', osc_serialize($this->rules));
+        Preference::newInstance()->set('rewrite_rules', serialize($this->rules));
     }
 
     /**
+     * List all rules
+     *
      * @return array
      */
     public function listRules()
@@ -78,6 +78,8 @@ class Rewrite
     }
 
     /**
+     * add multiple rewrite rules
+     *
      * @param $rules
      */
     public function addRules($rules)
@@ -92,6 +94,8 @@ class Rewrite
     }
 
     /**
+     * Add rewrite rules
+     *
      * @param $regexp
      * @param $uri
      */
@@ -99,7 +103,7 @@ class Rewrite
     {
         $regexp = trim($regexp);
         $uri    = trim($uri);
-        if ($regexp != '' && $uri != '' && !in_array($regexp, $this->rules)) {
+        if ($regexp && $uri && !in_array($regexp, $this->rules, false)) {
             $this->rules[$regexp] = $uri;
         }
     }
@@ -126,7 +130,7 @@ class Rewrite
     ) {
         $regexp = trim($regexp);
         $file   = trim($file);
-        if ($regexp != '' && $file != '') {
+        if ($regexp && $file) {
             $this->routes[$id] = array(
                 'regexp'    => $regexp,
                 'url'       => $url,
@@ -140,6 +144,32 @@ class Rewrite
     }
 
     /**
+     * Run hook on given root
+     * $id will be used as hook name
+     *
+     * @param string   $id
+     * @param string   $regexp
+     * @param string   $url
+     * @param callable $callback
+     */
+    public function addRouteHook(
+        $id,
+        $regexp,
+        $url
+    ) {
+        $regexp = trim($regexp);
+        if ($id && $regexp) {
+            $this->routes[$id] = array(
+                'regexp'          => $regexp,
+                'url'             => $url,
+                'routeController' => true,
+            );
+        }
+    }
+
+    /**
+     * Get all registered routes
+     *
      * @return array
      */
     public function getRoutes()
@@ -147,20 +177,24 @@ class Rewrite
         return $this->routes;
     }
 
+    /**
+     * Init Rewrite Class
+     *
+     */
     public function init()
     {
         if (Params::existServerParam('REQUEST_URI')) {
             $request_uri            = Params::getRequestURI(false, false, false);
             $urldecoded_request_uri = urldecode($request_uri);
             if (preg_match(
-                '|[\?&]{1}http_referer=(.*)$|',
+                '|[?&]http_referer=(.*)$|',
                 $urldecoded_request_uri,
                 $ref_match
             )
             ) {
                 $this->http_referer     = $ref_match[1];
                 $_SERVER['REQUEST_URI'] = preg_replace(
-                    '|[\?&]{1}http_referer=(.*)$|',
+                    '|[?&]http_referer=(.*)$|',
                     '',
                     $urldecoded_request_uri
                 );
@@ -173,7 +207,7 @@ class Rewrite
                 //echo 'Request URI: '.$request_uri." # Match : ".$route['regexp']."
                 // # URI to go : ".$route['url']." <br />";
                 if (preg_match('#^' . $route['regexp'] . '#', $request_uri, $m)) {
-                    if (!preg_match_all('#\{([^\}]+)\}#', $route['url'], $args)) {
+                    if (!preg_match_all('#{([^}]+)}#', $route['url'], $args)) {
                         $args[1] = array();
                     }
                     $l = count($m);
@@ -184,18 +218,23 @@ class Rewrite
                             Params::setParam('route_param_' . $p, $m[$p]);
                         }
                     }
-
-                    Params::setParam('page', 'custom');
                     Params::setParam('route', $id);
-                    $route_used     = true;
-                    $this->location = $route['location'];
-                    $this->section  = $route['section'];
-                    $this->title    = $route['title'];
+                    $route_used = true;
+                    $break      = true;
+                    if (isset($route['routeController']) || $break) {
+                        Params::setParam('page', 'route');
+                    } else {
+                        Params::setParam('page', 'custom');
+
+                        $this->location = $route['location'];
+                        $this->section  = $route['section'];
+                        $this->title    = $route['title'];
+                    }
                     break;
                 }
             }
             if (!$route_used) {
-                if (osc_rewrite_enabled()) {
+                if (Preference::newInstance()->get('rewriteEnabled')) {
                     $tmp_ar      = explode('?', $request_uri);
                     $request_uri = $tmp_ar[0];
 
@@ -222,10 +261,10 @@ class Rewrite
                 }
                 $this->request_uri = $request_uri;
 
-                if (Params::getParam('page') != '') {
+                if (Params::getParam('page') !== '') {
                     $this->location = Params::getParam('page');
                 }
-                if (Params::getParam('action') != '') {
+                if (Params::getParam('action') !== '') {
                     $this->section = Params::getParam('action');
                 }
             }

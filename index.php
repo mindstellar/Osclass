@@ -110,11 +110,10 @@ switch (Params::getParam('page')) {
 
         ) {
             $do = new CWebUserNonSecure();
-            $do->doModel();
         } else {
             $do = new CWebUser();
-            $do->doModel();
         }
+        $do->doModel();
         break;
     case ('item'):      // item pages
         $do = new CWebItem();
@@ -151,6 +150,11 @@ switch (Params::getParam('page')) {
     case ('custom'):   //custom
         $do = new CWebCustom();
         $do->doModel();
+        break;
+    case ('route'):
+        if (Params::getParam('route')) {
+            osc_run_hook(Params::getParam('route'));
+        }
         break;
     default:            // home and static pages that are mandatory...
         $do = new CWebMain();
