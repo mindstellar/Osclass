@@ -154,6 +154,7 @@ class FormBuilder
      */
     protected function addCsrfToken()
     {
+        $this->formSchema['attributes']['nocsrf'] = 'true'; // prevent global csrf function adding duplicate token
         if ($this->formSchema['csrf'] === true) {
             $this->addHiddenInput('CSRFName', $this->csrf->getCsrfTokenName());
             $this->addHiddenInput('CSRFValue', $this->csrf->getCsrfTokenValue());
