@@ -26,9 +26,9 @@ class Sanitize
      * @return bool|string
      * @deprecated use Sanitize::string() instead will be removed in the next 6.x release
      */
-    public function filterString($value, $options = [])
+    public function filterString($value, ...$options)
     {
-        return $this->string($value, $options);
+        return $this->string($value, ...$options);
     }
 
     /**
@@ -39,9 +39,9 @@ class Sanitize
      *
      * @return bool|string
      */
-    public function string($value, $options = [])
+    public function string($value, ...$options)
     {
-        return $this->filter($value, 'string', $options);
+        return $this->filter($value, 'string', ...$options);
     }
 
     /**
@@ -55,9 +55,9 @@ class Sanitize
      *
      * @return false|int|float|string will return false on failure
      */
-    private function filter($value, $type = 'string', $options = [])
+    private function filter($value, $type = 'string', ...$options)
     {
-        return $this->filterVar($value, $this->getFilter($type), $options);
+        return $this->filterVar($value, $this->getFilter($type), ...$options);
     }
 
     /**
@@ -67,9 +67,9 @@ class Sanitize
      *
      * @return false|int|float|string will return false on failure
      */
-    private function filterVar($value, $type, $options = [])
+    private function filterVar($value, $type, ...$options)
     {
-        return filter_var($value, $type, $options);
+        return filter_var($value, $type, ...$options);
     }
 
     /**
@@ -82,9 +82,6 @@ class Sanitize
     private function getFilter($type)
     {
         switch (strtolower($type)) {
-            case 'string':
-                $filter = FILTER_SANITIZE_STRING;
-                break;
 
             case 'int':
                 $filter = FILTER_SANITIZE_NUMBER_INT;
@@ -110,8 +107,13 @@ class Sanitize
                 $filter = FILTER_SANITIZE_MAGIC_QUOTES;
                 break;
 
+            case 'html':
+                $filter = FILTER_SANITIZE_FULL_SPECIAL_CHARS;
+                break;
+
             default:
                 $filter = FILTER_SANITIZE_STRING;
+                break;
         }
 
         return $filter;
@@ -123,9 +125,9 @@ class Sanitize
      * @param string $value
      * @param array  $options filter_var() options
      */
-    public function stringHtmlSafe($value, $options = [])
+    public function html($value)
     {
-        $sanitizedValue = $this->filter($value, 'string', $options);
+        $sanitizedValue = $this->filter($value, 'html', FILTER_FLAG_NO_ENCODE_QUOTES);
 
         return htmlspecialchars($sanitizedValue);
     }
@@ -139,9 +141,9 @@ class Sanitize
      * @return bool|int
      * @deprecated use Sanitize::int() instead will be removed in the next 6.x release
      */
-    public function filterInt($value, $options = [])
+    public function filterInt($value, ...$options)
     {
-        return $this->int($value, $options);
+        return $this->int($value, ...$options);
     }
 
     /**
@@ -152,9 +154,9 @@ class Sanitize
      *
      * @return bool|int
      */
-    public function int($value, $options = [])
+    public function int($value, ...$options)
     {
-        return $this->filter($value, 'int', $options);
+        return $this->filter($value, 'int', ...$options);
     }
 
     /**
@@ -166,9 +168,9 @@ class Sanitize
      * @return bool|float
      * @deprecated use Sanitize::float() instead will be removed in the next major 6.x release
      */
-    public function filterFloat($value, $options = [])
+    public function filterFloat($value, ...$options)
     {
-        return $this->float($value, $options);
+        return $this->float($value, ...$options);
     }
 
     /**
@@ -179,9 +181,9 @@ class Sanitize
      *
      * @return bool|float
      */
-    public function float($value, $options = [])
+    public function float($value, ...$options)
     {
-        return $this->filter($value, 'float', $options);
+        return $this->filter($value, 'float', ...$options);
     }
 
     /**
@@ -193,9 +195,9 @@ class Sanitize
      * @return bool|string
      * @deprecated use Sanitize::encoded() instead will be removed in the next major 6.x release
      */
-    public function filterEncoded($value, $options = [])
+    public function filterEncoded($value, ...$options)
     {
-        return $this->encoded($value, $options);
+        return $this->encoded($value, ...$options);
     }
 
     /**
@@ -206,9 +208,9 @@ class Sanitize
      *
      * @return bool|string
      */
-    public function encoded($value, $options = [])
+    public function encoded($value, ...$options)
     {
-        return $this->filter($value, 'encoded', $options);
+        return $this->filter($value, 'encoded', ...$options);
     }
 
     /**
@@ -220,12 +222,12 @@ class Sanitize
      * @return bool|string
      * @deprecated use Sanitize::email() instead will be removed in the next major 6.x release
      */
-    public function filterEmail($value, $options = [])
+    public function filterEmail($value, ...$options)
     {
-        return $this->email($value, $options);
+        return $this->email($value, ...$options);
     }
 
-    /**
+    /**...$options
      * Sanitised Email
      *
      * @param       $value
@@ -234,9 +236,9 @@ class Sanitize
      * @return bool|string
      *
      */
-    public function email($value, $options = [])
+    public function email($value, ...$options)
     {
-        return $this->filter($value, 'email', $options);
+        return $this->filter($value, 'email', ...$options);
     }
 
     /**
@@ -248,9 +250,9 @@ class Sanitize
      * @return bool|string
      * @deprecated use Sanitize::quotes() instead will be removed in the next major 6.x release
      */
-    public function filterQuotes($value, $options = [])
+    public function filterQuotes($value, ...$options)
     {
-        return $this->quotes($value, $options);
+        return $this->quotes($value, ...$options);
     }
 
     /**
@@ -261,35 +263,22 @@ class Sanitize
      *
      * @return bool|string
      */
-    public function quotes($value, $options = [])
+    public function quotes($value, ...$options)
     {
-        return $this->filter($value, 'quotes', $options);
-    }
-
-    /**
-     * Sanitize a website URL.
-     *
-     * @param string $value value to sanitize
-     * @param array  $options
-     *
-     * @return string sanitized
-     */
-    public function websiteUrl($value)
-    {
-        return $this->filter($value, 'url', FILTER_FLAG_SCHEME_REQUIRED | FILTER_FLAG_HOST_REQUIRED);
+        return $this->filter($value, 'quotes', ...$options);
     }
 
     /**
      * Sanitize a URL.
      *
      * @param string $value value to sanitize
-     * @param array  $options
+     * @param        $options
      *
      * @return string sanitized
      */
-    public function url($value, $options = [])
+    public function url($value, ...$options)
     {
-        return $this->filter($value, 'url', $options);
+        return $this->filter($value, 'url', ...$options);
     }
 
 
@@ -302,9 +291,9 @@ class Sanitize
      * @return bool|string
      * @deprecated use Sanitize::url() instead will be removed in the next major 6.x release
      */
-    public function filterURL($value, $options = [])
+    public function filterURL($value, ...$options)
     {
-        return $this->url($value, $options);
+        return $this->url($value, ...$options);
     }
 
     /**
