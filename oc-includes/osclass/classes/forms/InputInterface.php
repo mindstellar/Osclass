@@ -53,7 +53,7 @@ interface InputInterface
     public function text(string $name, $value, array $options = []);
 
     /**
-     * Generate Custom Input
+     * Custom Input
      *
      * @param callable $callable Callback function to generate input
      * @param mixed    ...$args  Arguments to pass to callback function
@@ -61,7 +61,7 @@ interface InputInterface
     public function custom(callable $callable, ...$args);
 
     /**
-     * Generate Text Area Input
+     * TextArea
      *
      * @param string $name
      * @param string,int,float $value
@@ -70,7 +70,7 @@ interface InputInterface
     public function textarea(string $name, $value, array $options = []);
 
     /**
-     * Checkbox Input
+     * Checkbox
      *
      * @param string $name
      * @param string,int,float $value
@@ -82,7 +82,7 @@ interface InputInterface
     : string;
 
     /**
-     * Select Input
+     * Select
      *
      * @param string       $name
      * @param array|string $values
@@ -92,7 +92,7 @@ interface InputInterface
     public function select(string $name, $values, array $options = []);
 
     /**
-     * Password Input
+     * Password
      *
      * @param string $name
      * @param string $value

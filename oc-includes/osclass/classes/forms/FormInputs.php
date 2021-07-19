@@ -92,17 +92,16 @@ class FormInputs implements InputInterface
     }
 
     /**
-     * Common method for generating lables
+     * Set input attributes and pass reference
      *
-     * @param string $label
-     * @param string $for
-     * @param string $class
+     * @param array  $options
+     * @param string $key
+     * @param mixed  $value
      *
-     * @return string
      */
-    private function label(string $label, string $for, string $class = 'form-label')
-    : string {
-        return '<label class="' . $class . '" for="' . $for . '">' . $this->escape->html($label) . '</label>';
+    private function setAttribute(array &$options, string $key, $value)
+    {
+        $options['attributes'][$key] = $value;
     }
 
     /**
@@ -115,7 +114,7 @@ class FormInputs implements InputInterface
      *                        'defaultValue' : default value for input
      *                        'selectPlaceholder' : placeholder for select input
      *                        'label' : label for input
-     *                        'divClass' : css class for input div container
+     *                        'divClass' : css class for input div container, default not set
      *                        'escapeHtml' : escape html for input attributes, default is true
      *                        'sanitize'   : sanitize method for input value, default is 'string'
      *                        Throw exception if $name is not set
@@ -153,10 +152,11 @@ class FormInputs implements InputInterface
         $attributesString = $this->attributesToString($options['attributes']);
 
         if (isset($divClass)) {
-            $input = '<div class="' . $divClass . '">';
+            $divtag = '<div class="' . $divClass . '">';
         } else {
-            $input = '<div>';
+            $divtag = '';
         }
+        $input = $divtag;
         // Generate input HTML with given $options['type']
         switch ($options['attributes']['type']) {
             // Generate input with type=radio or type=checkbox
@@ -257,7 +257,9 @@ class FormInputs implements InputInterface
                 $input .= sprintf('<input%s value="%s">', $attributesString, $values);
                 break;
         }
-        $input .= '</div>';
+        if ($divtag) {
+            $input .= '</div>';
+        }
         unset($options, $attributesString, $defaultInputValue, $label, $selectPlaceholder);
 
         return $input;
@@ -287,6 +289,27 @@ class FormInputs implements InputInterface
     }
 
     /**
+     * Generate attributes string from given attributes array
+     *
+     * @param array $options
+     *
+     * @return string
+     */
+    private function attributesToString(array $options)
+    : string {
+        $attributesString = '';
+        foreach ($options as $key => $value) {
+            // escape html special chars if escapeHtml is true
+            if ($value === true) {
+                $value = $this->escape::html($value);
+            }
+            $attributesString .= sprintf(' %s="%s"', $key, $value);
+        }
+
+        return $attributesString;
+    }
+
+    /**
      * Sanitize input values
      *
      * @param mixed  $values
@@ -310,24 +333,17 @@ class FormInputs implements InputInterface
     }
 
     /**
-     * Generate attributes string from given attributes array
+     * Common method for generating lables
      *
-     * @param array $options
+     * @param string $label
+     * @param string $for
+     * @param string $class
      *
      * @return string
      */
-    private function attributesToString(array $options)
+    private function label(string $label, string $for, string $class = 'form-label')
     : string {
-        $attributesString = '';
-        foreach ($options as $key => $value) {
-            // escape html special chars if escapeHtml is true
-            if ($value === true) {
-                $value = $this->escape::html($value);
-            }
-            $attributesString .= sprintf(' %s="%s"', $key, $value);
-        }
-
-        return $attributesString;
+        return '<label class="' . $class . '" for="' . $for . '">' . $this->escape::html($label) . '</label>';
     }
 
     /**
@@ -362,19 +378,6 @@ class FormInputs implements InputInterface
     }
 
     /**
-     * Set input attributes and pass reference
-     *
-     * @param array  $options
-     * @param string $key
-     * @param mixed  $value
-     *
-     */
-    private function setAttribute(array &$options, string $key, $value)
-    {
-        $options['attributes'][$key] = $value;
-    }
-
-    /**
      * Generate Checkbox Input
      *
      * @param string $name
@@ -382,6 +385,7 @@ class FormInputs implements InputInterface
      * @param array  $options
      *
      * @return string
+     * @throws \Exception
      */
     public function checkbox(string $name, $value, array $options = [])
     : string {
@@ -403,6 +407,7 @@ class FormInputs implements InputInterface
      * @param array        $options
      *
      * @return string
+     * @throws \Exception
      */
     public function select(string $name, $values, array $options = [])
     : string {
@@ -471,25 +476,6 @@ class FormInputs implements InputInterface
     }
 
     /**
-     * Generate file input
-     *
-     * @param string $name
-     * @param array  $options
-     *
-     * @return string
-     * @throws \Exception
-     */
-    public function file(string $name, array $options = [])
-    : string {
-        $this->setAttribute($options, 'type', 'file');
-
-        $options['escapeHTML'] = false;
-        $options['sanitize']   = null;
-
-        return $this->generateInput($name, null, $options);
-    }
-
-    /**
      * Generate submit input
      *
      * @param string $name
@@ -510,5 +496,24 @@ class FormInputs implements InputInterface
         $options['sanitize']   = null;
 
         return $this->generateInput($name, $name, $options);
+    }
+
+    /**
+     * Generate file input
+     *
+     * @param string $name
+     * @param array  $options
+     *
+     * @return string
+     * @throws \Exception
+     */
+    public function file(string $name, array $options = [])
+    : string {
+        $this->setAttribute($options, 'type', 'file');
+
+        $options['escapeHTML'] = false;
+        $options['sanitize']   = null;
+
+        return $this->generateInput($name, null, $options);
     }
 }
