@@ -58,6 +58,27 @@ class FormInputs implements InputInterface
     private $sanitize;
 
     /**
+     * Default common attributes
+     *
+     * @var array
+     */
+    protected $attributes = [
+        'class' => 'form-control', // default input css class
+        'type'  => 'text', // default input type
+    ];
+    /**
+     * Default common options
+     *
+     * @var array
+     */
+    protected $options = [
+        'sanitize'   => 'string',
+        // default sanitize method for values is string, Check /mindstellar/utility/Sanitize for more details
+        'escapeHTML' => true,
+        // default escapeHTML is true
+    ];
+
+    /**
      * FormInputs constructor.
      *
      * @param \mindstellar\utility\Escape   $escape
@@ -87,8 +108,7 @@ class FormInputs implements InputInterface
      * @throws \Exception
      */
     public function text(string $name, $value, array $attributes = [], array $options = [])
-    : string
-    {
+    : string {
         $attributes['type'] = 'text';
 
         return $this->generateInput($name, $value, $attributes, $options);
@@ -114,8 +134,7 @@ class FormInputs implements InputInterface
      * @throws \Exception
      */
     private function generateInput(string $name, $values = null, array $attributes = [], array $options = [])
-    : string
-    {
+    : string {
         if (!isset($name)) {
             throw new Exception('Input Name is not set');
         }
@@ -238,16 +257,8 @@ class FormInputs implements InputInterface
     private function handleOptions(array &$options, array &$attributes)
     {
         // default input attributes array
-        $attributes = array_merge([
-                                      'class' => 'form-control', // default input css class
-                                      'type'  => 'text', // default input type
-                                  ], $attributes);
-        $options    = array_merge([
-                                      'sanitize'   => 'string',
-                                      // default sanitize method for values is string, Check /mindstellar/utility/Sanitize for more details
-                                      'escapeHTML' => true,
-                                      // default escapeHTML is true
-                                  ], $options);
+        $attributes = array_merge($this->attributes, $attributes);
+        $options    = array_merge($this->options, $options);
     }
 
     /**
@@ -258,8 +269,7 @@ class FormInputs implements InputInterface
      * @return string
      */
     private function attributesToString(array $attributes)
-    : string
-    {
+    : string {
         $attributesString = '';
         foreach ($attributes as $key => $value) {
             // escape html special chars if escapeHtml is true
@@ -282,8 +292,7 @@ class FormInputs implements InputInterface
      * @return string
      */
     private function label(string $label, string $for, string $class = 'form-label')
-    : string
-    {
+    : string {
         return '<label class="' . $class . '" for="' . $for . '">' . $this->escape::html($label) . '</label>';
     }
 
@@ -323,8 +332,7 @@ class FormInputs implements InputInterface
      * @return string
      */
     private function addHtml(string $htmlContent)
-    : string
-    {
+    : string {
         return $this->escape::html($htmlContent);
     }
 
@@ -340,8 +348,7 @@ class FormInputs implements InputInterface
      * @throws \Exception
      */
     public function textarea(string $name, $value, array $attributes = [], array $options = [])
-    : string
-    {
+    : string {
         $attributes['type'] = 'textarea';
 
         if (!isset($options['sanitize'])) {
@@ -369,8 +376,7 @@ class FormInputs implements InputInterface
      * @throws \Exception
      */
     public function checkbox(string $name, $value, array $attributes = [], array $options = [])
-    : string
-    {
+    : string {
         $attributes['type'] = 'checkbox';
         // add css class if not set
         if (!isset($attributes['class'])) {
@@ -393,8 +399,7 @@ class FormInputs implements InputInterface
      * @throws \Exception
      */
     public function select(string $name, $values, array $attributes = [], array $options = [])
-    : string
-    {
+    : string {
         $attributes['type'] = 'select';
         // add class if not set
         if (!isset($attributes['class'])) {
@@ -416,8 +421,7 @@ class FormInputs implements InputInterface
      * @throws \Exception
      */
     public function password(string $name, string $value, array $attributes = [], array $options = [])
-    : string
-    {
+    : string {
         $attributes['type'] = 'password';
 
         return $this->generateInput($name, $value, $attributes, $options);
@@ -435,8 +439,7 @@ class FormInputs implements InputInterface
      * @throws \Exception
      */
     public function radio(string $name, $values, array $attributes = [], array $options = [])
-    : string
-    {
+    : string {
         $attributes['type'] = 'radio';
         // add css class if not set
         if (!isset($options['class'])) {
@@ -458,8 +461,7 @@ class FormInputs implements InputInterface
      * @throws \Exception
      */
     public function hidden(string $name, $value, array $attributes = [], array $options = [])
-    : string
-    {
+    : string {
         $attributes['type'] = 'hidden';
 
         return $this->generateInput($name, $value, $attributes, $options);
@@ -476,8 +478,7 @@ class FormInputs implements InputInterface
      * @throws \Exception
      */
     public function submit(string $name, array $attributes = [], array $options = [])
-    : string
-    {
+    : string {
         $attributes['type'] = 'submit';
         // add css class if not set
         if (!isset($attributes['class'])) {
@@ -498,8 +499,7 @@ class FormInputs implements InputInterface
      * @throws \Exception
      */
     public function file(string $name, array $attributes = [], array $options = [])
-    : string
-    {
+    : string {
         $attributes['type'] = 'file';
 
         $options['escapeHTML'] = false;
