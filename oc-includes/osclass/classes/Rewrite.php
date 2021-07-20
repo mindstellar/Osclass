@@ -59,7 +59,7 @@ class Rewrite
      */
     public function getRules()
     {
-        return unserialize(osc_rewrite_rules(), false);
+        return unserialize(Preference::newInstance()->get('rewrite_rules'), ['allowed_classes' => false]);
     }
 
     public function setRules()
