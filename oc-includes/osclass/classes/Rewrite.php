@@ -220,8 +220,7 @@ class Rewrite
                     }
                     Params::setParam('route', $id);
                     $route_used = true;
-                    $break      = true;
-                    if (isset($route['routeController']) || $break) {
+                    if (isset($route['routeController'])) {
                         Params::setParam('page', 'route');
                     } else {
                         Params::setParam('page', 'custom');
