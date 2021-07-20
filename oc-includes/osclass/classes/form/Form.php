@@ -54,8 +54,8 @@ class Form
         $options['selectPlaceholder'] = $default_item;
         $values                       = [];
         foreach ($items as $i) {
-            if (isset($fld_key) && isset($fld_name)) {
-                $values[] = [$i[$fld_key], $i[$fld_name]];
+            if (isset($fld_key, $fld_name)) {
+                $values[$i[$fld_key]] = $i[$fld_name];
             }
         }
         echo self::formInputs()->select($name, $values, $attributes, $options);
