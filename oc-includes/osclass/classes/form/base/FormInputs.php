@@ -43,7 +43,7 @@ use mindstellar\utility\Sanitize;
  * Class BaseInputs
  * Generate Basic Form Inputs
  *
- * @package mindstellar\forms
+ * @package mindstellar\form
  */
 class FormInputs implements InputInterface
 {

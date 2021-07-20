@@ -40,7 +40,7 @@ namespace mindstellar\form\base;
  * Class BaseInputs
  * Generate Basic Form Inputs
  *
- * @package mindstellar\forms
+ * @package mindstellar\form
  */
 interface InputInterface
 {

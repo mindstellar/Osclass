@@ -38,12 +38,11 @@ namespace mindstellar\form\base;
 
 use Exception;
 use mindstellar\Csrf;
-use Plugins;
 
 /**
- * Class Form
+ * Class FormBuilder
  *
- * @package mindstellar\forms
+ * @package mindstellar\form
  */
 class FormBuilder
 {
