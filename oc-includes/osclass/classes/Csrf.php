@@ -49,6 +49,7 @@ use Session;
  */
 class Csrf
 {
+    private static $instance;
     /**
      * @var string
      */
@@ -78,6 +79,18 @@ class Csrf
     }
 
     /**
+     * @return \mindstellar\Csrf
+     */
+    public static function newInstance()
+    {
+        if (!self::$instance instanceof self) {
+            self::$instance = new self;
+        }
+
+        return self::$instance;
+    }
+
+    /**
      * Ger token from previous session if found or generate a new pair
      */
     private function setToken()
@@ -104,7 +117,7 @@ class Csrf
         ob_start();
         $injectCsrf = static function () {
             $data = ob_get_clean();
-            $data = (new self)->replaceForms($data);
+            $data = self::newInstance()->replaceForms($data);
             echo $data;
         };
         $functions  = Plugins::applyFilter('shutdown_functions', [$injectCsrf]);
@@ -140,7 +153,7 @@ class Csrf
      * @return string
      *
      */
-    private function tokenForm()
+    public function tokenForm()
     {
         return "<input type='hidden' name='CSRFName' value='" . $this->csrfTokenName . "' />
         <input type='hidden' name='CSRFToken' value='" . $this->csrfTokenValue . "' />";

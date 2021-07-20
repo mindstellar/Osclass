@@ -1,4 +1,3 @@
-[![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://github.com/mindstellar/Osclass/blob/master/LICENSE-2.0.txt)
 [![CodeFactor](https://www.codefactor.io/repository/github/mindstellar/osclass/badge)](https://www.codefactor.io/repository/github/mindstellar/osclass)
 [![Build Status](https://travis-ci.com/mindstellar/Osclass.svg?branch=master)](https://travis-ci.com/mindstellar/Osclass)
 ![Forks](https://img.shields.io/github/forks/mindstellar/osclass)
