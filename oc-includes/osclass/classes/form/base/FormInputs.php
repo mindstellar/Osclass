@@ -153,17 +153,22 @@ class FormInputs implements InputInterface
                     $i++;
                     $input .= sprintf('<div%s>', $attributesString);
                     $input .= sprintf(
-                        '<input class="form-check-input" type="radio" name="%s" id="%s" value="%s"%s>',
+                        '<input class="form-check-input" type="%s" name="%s" id="%s" value="%s"%s>',
+                        $attributes['type'],
                         $name,
                         $name . $i,
                         $v,
                         $checked
                     );
-                    //Add label if $label is set or use $name as $label
-                    if (!isset($l)) {
-                        $label = $name;
+                    // if $options['noCheckboxLabel'] is set, don't add label after checkbox]
+                    if (!isset($options['noCheckboxLabel'])) {
+                        //Add label if $label is set or use $name as $label
+                        if (!isset($l)) {
+                            $label = $name;
+                        }
+                        $input .= $this->label($l, $name . $i, 'form-check-label');
                     }
-                    $input .= $this->label($l, $name . $i, 'form-check-label');
+                    //Add label if $label is set or use $name as $label
                     $input .= '</div>';
                 }
                 break;
@@ -373,6 +378,7 @@ class FormInputs implements InputInterface
      *
      * @param string       $name
      * @param array|string $values array or csv string
+     *                             [['value' => 'label], ...]
      * @param array        $attributes
      * @param array        $options
      *
