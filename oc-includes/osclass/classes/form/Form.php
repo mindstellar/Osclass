@@ -31,11 +31,35 @@ use mindstellar\form\base\FormInputs;
 
 /**
  * Class Form
- * +@deprecated Use \mindstellar\form\base\FormInputs or \mindstellar\form\base\FormBuilder instead
+ *
+ * @deprecated Use \mindstellar\form\base\FormInputs or \mindstellar\form\base\FormBuilder instead
  */
 class Form
 {
     private static $FormInputs;
+
+    /**
+     * @param $name
+     * @param $items
+     * @param $fld_key
+     * @param $fld_name
+     * @param $default_item
+     * @param $id
+     */
+    protected static function generic_select($name, $items, $fld_key, $fld_name, $default_item, $id)
+    {
+        $name                         = osc_esc_html($name);
+        $attributes['id']             = preg_replace('|([^_a-zA-Z0-9-]+)|', '', $name);
+        $options['defaultValue']      = $id;
+        $options['selectPlaceholder'] = $default_item;
+        $values                       = [];
+        foreach ($items as $i) {
+            if (isset($fld_key) && isset($fld_name)) {
+                $values[] = [$i[$fld_key], $i[$fld_name]];
+            }
+        }
+        echo self::formInputs()->select($name, $values, $attributes, $options);
+    }
 
     /**
      * @return \mindstellar\form\base\FormInputs
@@ -47,28 +71,6 @@ class Form
         }
 
         return self::$FormInputs;
-    }
-    /**
-     * @param $name
-     * @param $items
-     * @param $fld_key
-     * @param $fld_name
-     * @param $default_item
-     * @param $id
-     */
-    protected static function generic_select($name, $items, $fld_key, $fld_name, $default_item, $id)
-    {
-        $name = osc_esc_html($name);
-        $attributes['id'] = preg_replace('|([^_a-zA-Z0-9-]+)|', '', $name);
-        $options['defaultValue'] = $id;
-        $options['selectPlaceholder'] = $default_item;
-        $values = [];
-        foreach ($items as $i) {
-            if (isset($fld_key) && isset($fld_name)) {
-                $values[] = [$i[$fld_key], $i[$fld_name]];
-            }
-        }
-        echo self::formInputs()->select($name, $values, $attributes, $options);
     }
 
     /**
@@ -85,7 +87,6 @@ class Form
         $readOnly = false,
         $autocomplete = true
     ) {
-        $name = $name;
         $attributes['id'] = preg_replace('|([^_a-zA-Z0-9-]+)|', '', $name);
         if (isset($maxLength)) {
             $attributes['maxlength'] = $maxLength;
@@ -94,7 +95,7 @@ class Form
             $attributes['readonly'] = 'readonly';
             $attributes['disabled'] = 'disabled';
         }
-        $attributes['readonly'] = $readOnly;
+
         if (!$autocomplete) {
             $attributes['autocomplete'] = 'off';
         }
@@ -109,7 +110,6 @@ class Form
      */
     protected static function generic_password($name, $value, $maxLength = null, $readOnly = false)
     {
-        $name = $name;
         $attributes['id'] = preg_replace('|([^_a-zA-Z0-9-]+)|', '', $name);
         if (isset($maxLength)) {
             $attributes['maxlength'] = $maxLength;
@@ -138,13 +138,13 @@ class Form
      */
     protected static function generic_input_checkbox($name, $value, $checked = false)
     {
-        $attributes['id'] = preg_replace('|([^_a-zA-Z0-9-]+)|', '', $name);
+        $attributes['id']           = preg_replace('|([^_a-zA-Z0-9-]+)|', '', $name);
         $options['noCheckboxLabel'] = true;
         if ($checked) {
             $attributes['checked'] = 'checked';
         }
         echo self::formInputs()->checkbox($name, $value, $attributes, $options);
-    
+
     }
 
     /**
@@ -153,7 +153,7 @@ class Form
      */
     protected static function generic_textarea($name, $value)
     {
-        $id = preg_replace('|([^_a-zA-Z0-9-]+)|', '', $name);
+        $id               = preg_replace('|([^_a-zA-Z0-9-]+)|', '', $name);
         $attributes['id'] = $id;
         echo self::formInputs()->textarea($name, $value, $attributes);
     }
