@@ -65,10 +65,10 @@ class Form
         $values = [];
         foreach ($items as $i) {
             if (isset($fld_key) && isset($fld_name)) {
-                $values[] = [$i[$fld_key], $i[$fld_name]]; 
+                $values[] = [$i[$fld_key], $i[$fld_name]];
             }
         }
-        echo self::formInputs()->select($name,$values,$attributes,$options);
+        echo self::formInputs()->select($name, $values, $attributes, $options);
     }
 
     /**
@@ -98,7 +98,7 @@ class Form
         if (!$autocomplete) {
             $attributes['autocomplete'] = 'off';
         }
-        echo self::formInputs()->text($name,$value,$attributes);
+        echo self::formInputs()->text($name, $value, $attributes);
     }
 
     /**
@@ -118,7 +118,7 @@ class Form
             $attributes['readonly'] = 'readonly';
             $attributes['disabled'] = 'disabled';
         }
-        echo self::formInputs()->password($name,$value,$attributes);
+        echo self::formInputs()->password($name, $value, $attributes);
     }
 
     /**
@@ -128,7 +128,7 @@ class Form
     protected static function generic_input_hidden($name, $value)
     {
         $attributes['id'] = preg_replace('|([^_a-zA-Z0-9-]+)|', '', $name);
-        echo self::formInputs()->hidden($name,$value,$attributes);
+        echo self::formInputs()->hidden($name, $value, $attributes);
     }
 
     /**
@@ -143,7 +143,7 @@ class Form
         if ($checked) {
             $attributes['checked'] = 'checked';
         }
-        echo self::formInputs()->checkbox($name,$value,$attributes,$options);
+        echo self::formInputs()->checkbox($name, $value, $attributes, $options);
     
     }
 
@@ -155,6 +155,6 @@ class Form
     {
         $id = preg_replace('|([^_a-zA-Z0-9-]+)|', '', $name);
         $attributes['id'] = $id;
-        echo self::formInputs()->textarea($name,$value,$attributes);
+        echo self::formInputs()->textarea($name, $value, $attributes);
     }
 }

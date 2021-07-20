@@ -82,7 +82,6 @@ class Sanitize
     private function getFilter($type)
     {
         switch (strtolower($type)) {
-
             case 'int':
                 $filter = FILTER_SANITIZE_NUMBER_INT;
                 break;

@@ -139,7 +139,8 @@ class FormBuilder
      * @return $this
      */
     public function addForm(string $name, bool $csrf = true, array $attributes = [], array $inputSchema = [])
-    : FormBuilder {
+    : FormBuilder
+    {
         $this->formSchema['attributes']['name'] = $name;
         $this->formSchema['csrf']               = $csrf;
         $this->formSchema['attributes']         = array_merge($this->formSchema['attributes'], $attributes);
@@ -176,7 +177,8 @@ class FormBuilder
      * @return \mindstellar\form\base\FormBuilder
      */
     public function addHidden(string $name, string $value = '', array $attributes = [], array $options = [])
-    : FormBuilder {
+    : FormBuilder
+    {
         $this->formSchema['inputSchema'][] = [
             'name'       => $name,
             'type'       => 'hidden',
@@ -196,7 +198,8 @@ class FormBuilder
      * @return $this
      */
     public function addCommonInputOptions(array $options = [])
-    : FormBuilder {
+    : FormBuilder
+    {
         $this->formSchema['commonInputOptions'] = array_merge($this->formSchema['commonInputOptions'], $options);
 
         return $this;
@@ -210,7 +213,8 @@ class FormBuilder
      * @return $this
      */
     public function addCommonInputAttributes(array $attributes = [])
-    : FormBuilder {
+    : FormBuilder
+    {
         $this->formSchema['commonInputAttributes'] = array_merge($this->formSchema['commonInputAttributes'], $attributes);
 
         return $this;
@@ -224,7 +228,8 @@ class FormBuilder
      * @return \mindstellar\form\base\FormBuilder
      */
     public function addHtmlContent(string $content)
-    : FormBuilder {
+    : FormBuilder
+    {
         $this->formSchema['inputSchema'][] = [
             'value' => $content,
             'type'  => 'html'
@@ -244,7 +249,8 @@ class FormBuilder
      * @return \mindstellar\form\base\FormBuilder
      */
     public function addText(string $name, string $value = '', array $attributes = [], array $options = [])
-    : FormBuilder {
+    : FormBuilder
+    {
         $this->formSchema['inputSchema'][] = [
             'name'       => $name,
             'type'       => 'text',
@@ -267,7 +273,8 @@ class FormBuilder
      * @return \mindstellar\form\base\FormBuilder
      */
     public function addPassword(string $name, string $value = '', array $attributes = [], array $options = [])
-    : FormBuilder {
+    : FormBuilder
+    {
         $this->formSchema['inputSchema'][] = [
             'name'       => $name,
             'type'       => 'password',
@@ -290,7 +297,8 @@ class FormBuilder
      * @return \mindstellar\form\base\FormBuilder
      */
     public function addTextarea(string $name, string $value = '', array $attributes = [], array $options = [])
-    : FormBuilder {
+    : FormBuilder
+    {
         $this->formSchema['inputSchema'][] = [
             'name'       => $name,
             'type'       => 'textarea',
@@ -313,7 +321,8 @@ class FormBuilder
      * @return \mindstellar\form\base\FormBuilder
      */
     public function addSelect(string $name, $values, array $attributes = [], array $options = [])
-    : FormBuilder {
+    : FormBuilder
+    {
         $this->formSchema['inputSchema'][] = [
             'name'       => $name,
             'type'       => 'select',
@@ -336,7 +345,8 @@ class FormBuilder
      * @return \mindstellar\form\base\FormBuilder
      */
     public function addCheckbox(string $name, array $value = [], array $attributes = [], array $options = [])
-    : FormBuilder {
+    : FormBuilder
+    {
         $this->formSchema['inputSchema'][] = [
             'name'       => $name,
             'type'       => 'checkbox',
@@ -359,7 +369,8 @@ class FormBuilder
      * @return \mindstellar\form\base\FormBuilder
      */
     public function addRadio(string $name, $value, array $attributes = [], array $options = [])
-    : FormBuilder {
+    : FormBuilder
+    {
         $this->formSchema['inputSchema'][] = [
             'name'       => $name,
             'type'       => 'radio',
@@ -381,7 +392,8 @@ class FormBuilder
      * @return \mindstellar\form\base\FormBuilder
      */
     public function addFile(string $name, array $attributes = [], array $options = [])
-    : FormBuilder {
+    : FormBuilder
+    {
         $this->formSchema['inputSchema'][] = [
             'name'       => $name,
             'type'       => 'file',
