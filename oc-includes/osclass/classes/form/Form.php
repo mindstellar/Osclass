@@ -48,7 +48,6 @@ class Form
      */
     protected static function generic_select($name, $items, $fld_key, $fld_name, $default_item, $id)
     {
-        $name                         = osc_esc_html($name);
         $attributes['id']             = preg_replace('|([^_a-zA-Z0-9-]+)|', '', $name);
         $options['defaultValue']      = $id;
         $options['selectPlaceholder'] = $default_item;
@@ -153,8 +152,7 @@ class Form
      */
     protected static function generic_textarea($name, $value)
     {
-        $id               = preg_replace('|([^_a-zA-Z0-9-]+)|', '', $name);
-        $attributes['id'] = $id;
+        $attributes['id'] = preg_replace('|([^_a-zA-Z0-9-]+)|', '', $name);
         echo self::formInputs()->textarea($name, $value, $attributes);
     }
 }
