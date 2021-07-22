@@ -96,7 +96,7 @@ class DBConnectionClass
      * @since  2.3
      * @var mysqli
      */
-    private $dbObj;
+    private $connId;
 
     /**
      * Database error number
@@ -195,10 +195,10 @@ class DBConnectionClass
     private function connectToDb()
     {
 
-        $this->dbObj = new mysqli($this->dbHost, $this->dbUser, $this->dbPassword);
+        $this->connId = new mysqli($this->dbHost, $this->dbUser, $this->dbPassword);
 
         $this->errorConnection();
-        if ($this->dbObj->connect_errno) {
+        if ($this->connId->connect_errno) {
             return false;
         }
         $this->setSQLMode();
@@ -215,8 +215,8 @@ class DBConnectionClass
     private function errorConnection()
     {
 
-        $this->connErrorLevel = $this->dbObj->connect_errno;
-        $this->connErrorDesc  = $this->dbObj->connect_error;
+        $this->connErrorLevel = $this->connId->connect_errno;
+        $this->connErrorDesc  = $this->connId->connect_error;
 
     }
 
@@ -228,7 +228,7 @@ class DBConnectionClass
     private function setSQLMode($modes = [])
     {
         if (empty($modes)) {
-            $res = $this->dbObj->query('SELECT @@SESSION.sql_mode');
+            $res = $this->connId->query('SELECT @@SESSION.sql_mode');
 
             if (empty($res)) {
                 return;
@@ -269,10 +269,10 @@ class DBConnectionClass
      */
     private function releaseDb()
     {
-        if (!$this->dbObj) {
+        if (!$this->connId) {
             return true;
         }
-        $release = $this->dbObj->close();
+        $release = $this->connId->close();
         if (!$release) {
             $this->errorReport();
         }
@@ -289,8 +289,8 @@ class DBConnectionClass
     public function errorReport()
     {
 
-        $this->errorLevel = $this->dbObj->errno;
-        $this->errorDesc  = $this->dbObj->error;
+        $this->errorLevel = $this->connId->errno;
+        $this->errorDesc  = $this->connId->error;
 
     }
 
@@ -319,7 +319,7 @@ class DBConnectionClass
      */
     private function setCharset($charset)
     {
-        $this->dbObj->set_charset($charset);
+        $this->connId->set_charset($charset);
     }
 
     /**
@@ -331,11 +331,11 @@ class DBConnectionClass
      */
     private function selectDb()
     {
-        if ($this->dbObj->connect_errno) {
+        if ($this->connId->connect_errno) {
             return false;
         }
 
-        return $this->dbObj->select_db($this->dbName);
+        return $this->connId->select_db($this->dbName);
 
     }
 
@@ -470,8 +470,8 @@ class DBConnectionClass
      */
     public function getOsclassDb()
     {
-        if ($this->dbObj) {
-            return $this->dbObj;
+        if ($this->connId) {
+            return $this->connId;
         }
 
         return false;
