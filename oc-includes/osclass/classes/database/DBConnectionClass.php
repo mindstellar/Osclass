@@ -256,7 +256,7 @@ class DBConnectionClass
         }
 
         $modes_str = implode(',', $modes);
-        $this->dbObj->query("SET SESSION sql_mode='$modes_str'");
+        $this->connId->query("SET SESSION sql_mode='$modes_str'");
     }
 
     /**
