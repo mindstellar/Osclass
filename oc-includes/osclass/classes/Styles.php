@@ -89,7 +89,8 @@ class Styles extends Dependencies
      * @return string
      */
     private function cssLinkTag(string $css)
-    : string {
+    : string
+    {
         return '<link href="' . Plugins::applyFilter('style_url', $css) . '" rel="stylesheet" type="text/css" />'
                . PHP_EOL;
     }
