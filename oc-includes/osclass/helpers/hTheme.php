@@ -203,8 +203,9 @@ function osc_enqueue_style($id, $url = null)
 {
     if ($url === null) {
         Styles::newInstance()->enqueue($id);
+    } else {
+        Styles::newInstance()->addStyle($id, $url);
     }
-    Styles::newInstance()->addStyle($id, $url);
 }
 
 

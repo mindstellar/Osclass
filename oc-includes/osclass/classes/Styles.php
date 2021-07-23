@@ -59,7 +59,8 @@ class Styles extends Dependencies
     public function printStyles()
     {
         // Keeping compatibility with old methods
-        foreach (array_merge($this->getStyles(), $this->styles) as $css) {
+        $styles = $this->getStyles();
+        foreach ($styles as $css) {
             echo $this->cssLinkTag($css);
         }
     }
@@ -74,7 +75,7 @@ class Styles extends Dependencies
         $this->order();
         foreach ($this->queue as $id) {
             if (isset($this->registered[$id]['url'])) {
-                $scripts[] = $this->registered[$id]['url'];
+                $styles[] = $this->registered[$id]['url'];
             }
         }
 
@@ -115,7 +116,9 @@ class Styles extends Dependencies
      */
     public function addStyle($id, $url)
     {
-        $this->styles[$id] = $url;
+        $this->register($id, $url, null);
+        $this->enqueue($id);
+
     }
 
     /**
