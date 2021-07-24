@@ -212,7 +212,9 @@ osc_add_hook('admin_header', 'customHead', 10);
 
 osc_current_admin_theme_path('parts/header.php'); ?>
 <div id="dashboard">
+    <?php osc_run_hook('dashboard'); ?>
     <div class="grid-system">
+         <?php osc_run_hook('dashboard_widget'); ?>
         <div class="grid-row grid-first-row grid-50">
             <div class="row-wrapper">
                 <div class="widget-box">
