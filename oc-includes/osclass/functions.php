@@ -516,22 +516,6 @@ function osc_draw_admin_toolbar()
     $adminToolbar->render();
 }
 
-
-/**
- * Add webtitle with link to frontend
- */
-function osc_admin_toolbar_menu()
-{
-    AdminToolbar::newInstance()->add_menu(array(
-        'id'     => 'home',
-        'title'  => '<span class="">' . osc_page_title() . '</span>',
-        'href'   => osc_base_url(),
-        'meta'   => array('class' => 'user-profile'),
-        'target' => '_blank'
-    ));
-}
-
-
 /**
  * Add logout link
  */

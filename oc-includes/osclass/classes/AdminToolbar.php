@@ -66,7 +66,7 @@ class AdminToolbar
     public function add_menus()
     {
         // User related, aligned right.
-        osc_add_hook('add_admin_toolbar_menus', 'osc_admin_toolbar_menu', 0);
+        //osc_add_hook('add_admin_toolbar_menus', 'osc_admin_toolbar_menu', 0);
         osc_add_hook('add_admin_toolbar_menus', 'osc_admin_toolbar_comments', 0);
         osc_add_hook('add_admin_toolbar_menus', 'osc_admin_toolbar_spam', 0);
 
@@ -147,21 +147,32 @@ class AdminToolbar
      */
     public function render()
     {
+        echo '<nav id="header" class="navbar navbar-expand-md navbar-dark bg-dark shadow-sm">';
+        echo '<div class="container-fluid">';
+        echo '<a id="osc_toolbar_home" class="navbar-brand"  target="_blank" href="' . osc_base_url()
+             . '"><i class="bi bi-house-fill"></i> '
+             . osc_page_title() . '</a>';
+        echo '<ul class="navbar-nav me-right mb-2 mb-md-0">';
         if (count($this->nodes) > 0) {
-            echo '<div id="header" class="navbar"><div class="header-wrapper">';
 
             foreach ($this->nodes as $value) {
                 $meta = '';
                 if (isset($value->meta)) {
                     foreach ($value->meta as $k => $v) {
+                        if ($k === 'class') {
+                            $v = "nav-link " . $v;
+                        }
                         $meta .= $k . '="' . $v . '" ';
                     }
                 }
-                echo '<div id="osc_toolbar_' . $value->id . '" ><a ' . $meta . ' href="' . $value->href . '" '
-                    . ((isset($value->target)) ? 'target="' . $value->target . '"' : '') . '>' . $value->title . '</a>';
+
+
+                //echo '<a class="navbar-brand" href="'.osc_admin_base_url().'">'.osc_page_title().'</a>';
+                echo '<li class="nav-item" id="osc_toolbar_' . $value->id . '" ><a ' . $meta . ' href="' . $value->href . '" '
+                     . ((isset($value->target)) ? 'target="' . $value->target . '"' : '') . '>' . $value->title . '</a>';
 
                 if (isset($value->submenu) && is_array($value->submenu)) {
-                    echo '<nav class="osc_admin_submenu" id="osc_toolbar_sub_' . $value->id . '"><ul>';
+                    echo '<div class="osc_admin_submenu" id="osc_toolbar_sub_' . $value->id . '"><ul>';
                     foreach ($value->submenu as $subvalue) {
                         if (isset($subvalue->subid)) {
                             $submeta = '';
@@ -174,12 +185,12 @@ class AdminToolbar
                                     ? 'target="' . $subvalue->target . '"' : '') . '>' . $subvalue->title . '</a><li>';
                         }
                     }
-                    echo '</ul></nav>';
+
                 }
-                echo '</div>';
+                echo '</li>';
             }
             osc_run_hook('render_admintoolbar');
-            echo '<div style="clear: both;"></div></div></div>';
         }
+        echo '</ul></div></nav>';
     }
 }

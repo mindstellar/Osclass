@@ -46,25 +46,13 @@ class AdminMenu
     }
 
     /**
-     * @return \AdminMenu
-     */
-    public static function newInstance()
-    {
-        if (!self::$instance instanceof self) {
-            self::$instance = new self;
-        }
-
-        return self::$instance;
-    }
-
-    /**
      *  Initialize menu representation.
      */
     public function init()
     {
-        $this->add_menu(__('Dashboard'), osc_admin_base_url(), 'dash', 'moderator');
+        $this->add_menu(__('Dashboard'), osc_admin_base_url(), 'dash', 'moderator', 'bi bi-speedometer');
 
-        $this->add_menu(__('Listings'), osc_admin_base_url(true) . '?page=items', 'items', 'moderator');
+        $this->add_menu(__('Listings'), osc_admin_base_url(true) . '?page=items', 'items', 'moderator', 'bi bi-list-ul');
         $this->add_submenu(
             'items',
             __('Manage listings'),
@@ -108,7 +96,8 @@ class AdminMenu
             'administrator'
         );
 
-        $this->add_menu(__('Appearance'), osc_admin_base_url(true) . '?page=appearance', 'appearance', 'administrator');
+        $this->add_menu(__('Appearance'), osc_admin_base_url(true) . '?page=appearance', 'appearance', 'administrator',
+                        'bi bi-palette-fill');
         $this->add_submenu(
             'appearance',
             __('Manage themes'),
@@ -124,7 +113,7 @@ class AdminMenu
             'administrator'
         );
 
-        $this->add_menu(__('Plugins'), osc_admin_base_url(true) . '?page=plugins', 'plugins', 'administrator');
+        $this->add_menu(__('Plugins'), osc_admin_base_url(true) . '?page=plugins', 'plugins', 'administrator', 'bi bi-plug-fill');
         $this->add_submenu(
             'plugins',
             __('Manage plugins'),
@@ -133,7 +122,8 @@ class AdminMenu
             'administrator'
         );
 
-        $this->add_menu(__('Statistics'), osc_admin_base_url(true) . '?page=stats&action=items', 'stats', 'moderator');
+        $this->add_menu(__('Statistics'), osc_admin_base_url(true) . '?page=stats&action=items', 'stats', 'moderator',
+                        'bi bi-bar-chart-fill');
         $this->add_submenu(
             'stats',
             __('Listings'),
@@ -163,7 +153,7 @@ class AdminMenu
             'moderator'
         );
 
-        $this->add_menu(__('Settings'), osc_admin_base_url(true) . '?page=settings', 'settings', 'administrator');
+        $this->add_menu(__('Settings'), osc_admin_base_url(true) . '?page=settings', 'settings', 'administrator', 'bi bi-gear-fill');
         $this->add_submenu(
             'settings',
             __('General'),
@@ -256,9 +246,10 @@ class AdminMenu
             'administrator'
         );
 
-        $this->add_menu(__('Pages'), osc_admin_base_url(true) . '?page=pages', 'pages', 'administrator');
+        $this->add_menu(__('Pages'), osc_admin_base_url(true) . '?page=pages', 'pages', 'administrator',
+                        'bi bi-file-earmark-richtext-fill');
 
-        $this->add_menu(__('Users'), osc_admin_base_url(true) . '?page=users', 'users', 'moderator');
+        $this->add_menu(__('Users'), osc_admin_base_url(true) . '?page=users', 'users', 'moderator', 'bi bi-people-fill');
         $this->add_submenu(
             'users',
             __('Users'),
@@ -302,7 +293,7 @@ class AdminMenu
             'administrator'
         );
 
-        $this->add_menu(__('Tools'), osc_admin_base_url(true) . '?page=tools&action=import', 'tools', 'administrator');
+        $this->add_menu(__('Tools'), osc_admin_base_url(true) . '?page=tools&action=import', 'tools', 'administrator', 'bi bi-tools');
         $this->add_submenu(
             'tools',
             __('Import data'),
@@ -402,6 +393,351 @@ class AdminMenu
     }
 
     /**
+     * Render Admin Menu
+     */
+    public function renderAdminMenu()
+    {
+        // actual url
+        $actual_url  = urldecode(Params::getServerParam('QUERY_STRING', false, false));
+        $actual_page = Params::getParam('page');
+
+        $adminMenu = AdminMenu::newInstance();
+        $aMenu     = $adminMenu->get_array_menu();
+
+        $is_moderator = osc_is_moderator();
+
+
+// find current menu section
+        $current_menu    = '';
+        $current_submenu = '';
+        $priority        = 0;
+        $urlLength       = 0;
+        foreach ($aMenu as $key => $value) {
+            // --- submenu section
+            if (array_key_exists('sub', $value)) {
+                $aSubmenu = $value['sub'];
+                foreach ($aSubmenu as $aSub) {
+                    $credential_sub = $aSub[4] ?? $aSub[3];
+
+                    if (!$is_moderator || ($credential_sub === 'moderator')) { // show
+                        $url_submenu = $aSub[1];
+                        $url_submenu = str_replace(array(
+                                                       osc_admin_base_url(true) . '?',
+                                                       osc_admin_base_url()
+                                                   ), '', $url_submenu);
+
+                        if ($priority <= 2 && $url_submenu && strpos($actual_url, $url_submenu) === 0) {
+                            if ($urlLength < strlen($url_submenu)) {
+                                $urlLength       = strlen($url_submenu);
+                                $current_submenu = $aSub['2'];
+                                $current_menu    = $value[2];
+                                $priority        = 2;
+                            }
+                        } elseif ($actual_page === $value[2] && $priority < 1) {
+                            $current_menu    = $value[2];
+                            $current_submenu = $aSub['2'];
+                            $priority        = 1;
+                        }
+                    }
+                }
+            }
+
+            // --- menu section
+            $url_menu = $value[1];
+            $url_menu = str_replace(array(
+                                        osc_admin_base_url(true) . '?',
+                                        osc_admin_base_url()
+                                    ), '', $url_menu);
+
+            if ($priority <= 2 && $url_menu && @strpos($actual_url, $url_menu) === 0) {
+                if ($urlLength < strlen($url_menu)) {
+                    $urlLength    = strlen($url_menu);
+                    $current_menu = $value[2];
+                    $priority     = 2;
+                }
+            } elseif ($actual_page === $value[2] && $priority < 1) {
+                $current_menu = $value[2];
+                $priority     = 1;
+            } elseif ($url_menu === $actual_page) {
+                $current_menu = $value[2];
+                $priority     = 0;
+            }
+        }
+
+        $currentMenuId = $current_menu;
+
+        $sMenu = '<!-- menu -->' . PHP_EOL;
+        $sMenu .= '<div class="col-auto col-md-3 col-xl-2 dashboard-sidebar">' .
+                  PHP_EOL;
+
+        $sMenu .= '<div class="d-flex flex-column align-items-center align-items-sm-start px-1 pt-2">' .
+                  PHP_EOL;
+        $sMenu .= '<ul id="dashboard-menu" class="oscmenu col-md-12 nav nav-pills flex-column mb-auto">' .
+                  PHP_EOL;
+
+
+        foreach ($aMenu as $key => $value) {
+            $menuId = $key;
+            $active = false;
+            if ($menuId === $currentMenuId) {
+                $active = true;
+            }
+            $sMenu .= $this->renderMenu($menuId, $value, $current_menu, $current_submenu);
+
+        }
+
+        $sMenu .= '</ul></div></div>' . PHP_EOL;
+        echo $sMenu;
+    }
+
+    /**
+     * @return \AdminMenu
+     */
+    public static function newInstance()
+    {
+        if (!self::$instance instanceof self) {
+            self::$instance = new self;
+        }
+
+        return self::$instance;
+    }
+
+    /**
+     * Return menu as array
+     *
+     * @return array
+     */
+    public function get_array_menu()
+    {
+        return $this->aMenu;
+    }
+
+    /**
+     * Render Menu in Admin Sidebar
+     *
+     * @param $menuId
+     * @param $value
+     * @param $activeMenu
+     * @param $activeSubmenu
+     *
+     * @return string
+     */
+    private function renderMenu($menuId, $value, $activeMenu, $activeSubmenu)
+    {
+        $is_moderator = osc_is_moderator();
+        $str          = '';
+        //If user is moderator and menu access is not available don't print menu
+        if (!$is_moderator || ($value[3] === 'moderator')) {
+            if (!$value[4] || strpos($value[4], "http") === 0) {
+                $menuTag = '<i class="bi bi-app"></i> ';
+            } else {
+                $menuTag = '<i class="' . $value[4] . '"></i> ';
+            }
+
+            $str .= '<li class="nav-item mb-1">';
+            $str .= '<div class="nav-link ' . ($activeMenu === $menuId ? 'active' : '') . '">';
+            $str .= '<a class="h6" href="' . $value[1] . '" >';
+            $str .= $menuTag . ' ' . $value[0] . '</a>';
+
+            if (isset($value['sub']) && !empty($value['sub'])) {
+                $str .= ' <i class="float-end bi bi-chevron-down ' . ($activeMenu !== $menuId ? 'collapsed ' : '')
+                        . ' mt-auto" data-bs-target="#'
+                        . $menuId . '-submenu" data-bs-toggle="collapse" role="button" ></i>';
+                $str .= '</div>';
+                $str .= $this->renderSubMenu($menuId, $value['sub'], $is_moderator, $activeMenu, $activeSubmenu);
+            } else {
+                $str .= '</div>';
+            }
+
+            $str .= '</li>' . PHP_EOL;
+        }
+
+        return $str;
+    }
+
+    /**
+     * Private function for rendering submenus
+     *
+     * @param $parentMenuId
+     * @param $subMenu
+     * @param $is_moderator
+     * @param $activeMenu
+     * @param $activeSubmenu
+     *
+     * @return string
+     */
+    private function renderSubMenu($parentMenuId, $subMenu, $is_moderator, $activeMenu, $activeSubmenu)
+    {
+        $str =
+            '<ul class="sidebar-submenu collapse list-unstyled ' . ($activeMenu === $parentMenuId ? 'show' : '') . '" id="' . $parentMenuId
+            . '-submenu">';
+        foreach ($subMenu as $key => $arrSubMenu) {
+            if (!$is_moderator || ($arrSubMenu['sub'][4] === 'moderator')) {
+                if (strpos($arrSubMenu[1], 'divider_') === 0) {
+                    $str .= '<li class="ps-3 submenu-divide align-middle">' . $arrSubMenu[0] . '</li>'
+                            . PHP_EOL;
+                } else {
+                    $str .= '<li class="mb-auto "><a class="nav-link py-1 ' . ($activeSubmenu === $arrSubMenu[2] ? 'sub-active' : '')
+                            . '" id="'
+                            . $arrSubMenu[2] . '" href="' . $arrSubMenu[1] . '">' .
+                            $arrSubMenu[0]
+                            . '</a></li>' . PHP_EOL;
+                }
+            }
+        }
+        $str .= '</ul>';
+
+        return $str;
+
+    }
+
+    /**
+     * Render Admin Menu
+     */
+    public function renderAdminMenu2()
+    {
+        // actual url
+        $actual_url  = urldecode(Params::getServerParam('QUERY_STRING', false, false));
+        $actual_page = Params::getParam('page');
+
+        $something_selected = false;
+        $adminMenu          = AdminMenu::newInstance();
+        $aMenu              = $adminMenu->get_array_menu();
+        $current_menu_id    = osc_current_menu();
+        $is_moderator       = osc_is_moderator();
+
+        $sub_current = false;
+        $sMenu       = '<!-- menu -->' . PHP_EOL;
+        $sMenu       .= '<div class="col-auto col-md-2 col-xl-2 px-sm-2 px-0 bg-dark min-vh-100">' .
+                        PHP_EOL;
+        $sMenu       .= '<div class="d-flex flex-column align-items-center align-items-sm-start px-3 pt-2 text-white">' .
+                        PHP_EOL;
+        $sMenu       .= '<ul id="dashboard-menu" class="oscmenu nav nav-pills flex-column mb-sm-auto mb-0 align-items-center align-items-sm-start">'
+                        .
+                        PHP_EOL;
+
+        // find current menu section
+        $current_menu = '';
+        $priority     = 0;
+        $urlLenght    = 0;
+        foreach ($aMenu as $key => $value) {
+            // --- submenu section
+            if (array_key_exists('sub', $value)) {
+                $aSubmenu = $value['sub'];
+                foreach ($aSubmenu as $aSub) {
+                    $credential_sub = $aSub[4] ?? $aSub[3];
+
+                    if (!$is_moderator || ($credential_sub === 'moderator')) { // show
+                        $url_submenu = $aSub[1];
+                        $url_submenu = str_replace(array(
+                                                       osc_admin_base_url(true) . '?',
+                                                       osc_admin_base_url()
+                                                   ), '', $url_submenu);
+
+                        if (strpos($actual_url, $url_submenu) === 0 && $priority <= 2 && $url_submenu != '') {
+                            if ($urlLenght < strlen($url_submenu)) {
+                                $urlLenght    = strlen($url_submenu);
+                                $sub_current  = true;
+                                $current_menu = $value[2];
+                                $priority     = 2;
+                            }
+                        } elseif ($actual_page == $value[2] && $priority < 1) {
+                            $sub_current  = true;
+                            $current_menu = $value[2];
+                            $priority     = 1;
+                        }
+                    }
+                }
+            }
+
+            // --- menu section
+            $url_menu = $value[1];
+            $url_menu = str_replace(array(
+                                        osc_admin_base_url(true) . '?',
+                                        osc_admin_base_url()
+                                    ), '', $url_menu);
+
+            if (@strpos($actual_url, $url_menu) === 0 && $priority <= 2 && $url_menu != '') {
+                if ($urlLenght < strlen($url_menu)) {
+                    $urlLenght    = strlen($url_menu);
+                    $sub_current  = true;
+                    $current_menu = $value[2];
+                    $priority     = 2;
+                }
+            } elseif ($actual_page == $value[2] && $priority < 1) {
+                $sub_current  = true;
+                $current_menu = $value[2];
+                $priority     = 1;
+            } elseif ($url_menu == $actual_page) {
+                $sub_current  = true;
+                $current_menu = $value[2];
+                $priority     = 0;
+            }
+        }
+        echo '<!--';
+        var_export($aMenu);
+        echo '-->';
+        $value = array();
+        foreach ($aMenu as $key => $value) {
+            $sSubmenu   = '';
+            $credential = $value[3];
+            if (!$is_moderator || ($credential === 'moderator')) { // show
+                $class = '';
+                if (array_key_exists('sub', $value)) {
+                    // submenu
+                    $aSubmenu = $value['sub'];
+                    if ($aSubmenu) {
+                        $sSubmenu .= '<ul>' . PHP_EOL;
+                        foreach ($aSubmenu as $aSub) {
+                            $credential_sub = $aSub[4] ?? $aSub[3];
+                            if (!$is_moderator || ($credential_sub === 'moderator')) { // show
+                                if (strpos($aSub[1], 'divider_') === 0) {
+                                    $sSubmenu .= '<li class="nav nav-pills flex-column mb-auto submenu-divide">' . $aSub[0] . '</li>'
+                                                 . PHP_EOL;
+                                } else {
+                                    $sSubmenu .= '<li class="nav nav-pills flex-column mb-auto"><a class="nav-link align-middle px-0" id="'
+                                                 . $aSub[2] . '" href="' . $aSub[1] . '">' .
+                                                 $aSub[0]
+                                                 . '</a></li>' . PHP_EOL;
+                                }
+                            }
+                        }
+                        // hardcoded plugins/themes under menu plugins
+                        $plugins_out = '';
+                        if ($key === 'plugins' && !$is_moderator) {
+                            $sSubmenu .= $plugins_out;
+                        }
+
+                        //$sSubmenu .= '<li class="arrow"></li>' . PHP_EOL;
+                        $sSubmenu .= '</ul>' . PHP_EOL;
+                    }
+                }
+
+                $class = osc_apply_filter('current_admin_menu_' . $value[2], $class);
+
+                $icon = '';
+                if (isset($value[4])) {
+                    $icon = '<div class="ico ico-48" style="background-image:url(\'' . $value[4] . '\');">';
+                } else {
+                    $icon = '<i class="bi bi-' . $value[2] . '">';
+                }
+
+                if ($current_menu == $value[2]) {
+                    $class = 'current';
+                }
+                $sMenu .= '<li id="menu_' . $value[2] . '" class="nav-item ' . $class . '">' . PHP_EOL;
+                $sMenu .= '<a class="nav-link align-middle px-0" id="' . $value[2] . '" href="' . $value[1] . '">' . $icon . '</i>'
+                          . $value[0]
+                          . '</a>' . PHP_EOL;
+                $sMenu .= $sSubmenu;
+                $sMenu .= '</li>' . PHP_EOL;
+            }
+        }
+        $sMenu .= '</ul></div></div>' . PHP_EOL;
+        echo $sMenu;
+    }
+
+    /**
      * Remove menu and submenus under menu with id $id_menu
      *
      * @param $menu_id
@@ -421,6 +757,8 @@ class AdminMenu
     {
         unset($this->aMenu[$menu_id]['sub'][$submenu_id]);
     }
+
+    // common functions
 
     /**
      * Add submenu under menu id $menu_id
@@ -455,18 +793,6 @@ class AdminMenu
     {
         unset($this->aMenu[$menu_id]['sub']['divider_' . $submenu_id]);
     }
-
-    /**
-     * Return menu as array
-     *
-     * @return array
-     */
-    public function get_array_menu()
-    {
-        return $this->aMenu;
-    }
-
-    // common functions
 
     /**
      * @param      $submenu_title
@@ -552,6 +878,10 @@ class AdminMenu
         $this->add_submenu('tools', $submenu_title, $url, $submenu_id, $capability, $icon_url);
     }
 
+    /*
+     * Empty the menu
+     */
+
     /**
      * @param      $submenu_title
      * @param      $url
@@ -576,9 +906,6 @@ class AdminMenu
         $this->add_submenu('stats', $submenu_title, $url, $submenu_id, $capability, $icon_url);
     }
 
-    /*
-     * Empty the menu
-     */
     public function clear_menu()
     {
         $this->aMenu = array();
