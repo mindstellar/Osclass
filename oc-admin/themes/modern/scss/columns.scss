@@ -6,9 +6,9 @@
     margin-bottom:30px;
 }
 .show-grid .row-wrapper{
-    background-color: @color-gray-light;
+    background-color: $color-gray-light;
     padding:10px 0;
-    .rounded-corners(5px);
+    @include rounded-corners(5px);
 }
     /*.grid-row .row-wrapper,
     .grid-first-row .grid-system .row-wrapper,

@@ -36,7 +36,7 @@
 #item-form label{
     display:block;
     font-size:14px;
-    color:@color-gray-dim;
+    color:$color-gray-dim;
     margin-top:10px;
     margin-bottom:5px;
 }
@@ -59,7 +59,7 @@
   font-weight: normal;
   font-size: 14px;
   margin: 0 0 10px;
-  color: @color-gray-dim;
+  color: $color-gray-dim;
 }
 #item-form .well input{
     width:194px;
@@ -75,9 +75,9 @@
 }
 #item-form #photos{
     padding:10px;
-    background-color:@color-gray-light;
-    border:solid 1px @color-gray-soft;
-    .rounded-corners;
+    background-color:$color-gray-light;
+    border:solid 1px $color-gray-soft;
+    @include rounded-corners;
 }
 #item-action-list {
   float: right;

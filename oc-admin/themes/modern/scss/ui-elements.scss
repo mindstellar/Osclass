@@ -1,0 +1,614 @@
+.clear {
+  clear: both;
+}
+
+.ico-48 {
+  width: 48px;
+  height: 48px;
+  display: block;
+  padding: 0;
+}
+
+.ico-20,
+a.ico-20 {
+  width: 20px;
+  height: 20px;
+  padding: 0;
+}
+
+.ico-32,
+a.ico-32 {
+  width: 32px;
+  height: 32px;
+  display: block;
+  padding: 0;
+}
+
+.action-btn {
+  padding: 9px 10px;
+  background-color: $color-gray-soft;
+  margin: 0 10px;
+  font-size: 14px;
+  line-height: 14px;
+  border: solid 1px $color-gray-dim;
+  @include rounded-corners;
+  text-decoration: none;
+}
+
+.action-btn-black {
+  background: $color-gray-hardblack;
+  border-color: $color-gray-dim;
+  color: $color-gray-ash;
+}
+
+.action-btn-black:hover {
+  background-color: $color-black;
+}
+
+.bg-black-light {
+  background-color: #2b2b2b;
+}
+
+.dashboard-sidebar {
+  @extend .px-sm-2, .px-0, .bg-black-light, .min-vh-100, .text-white;
+  min-width: 220px;
+  div {
+    &.nav-link {
+      color: $nav-pills-link-active-color;
+      background-color: $gray-800;
+      i {
+        &.collapsed {
+          transform: rotate(-90deg);
+        }
+        transition: ease 500ms;
+      }
+    }
+  }
+  .nav-link {
+    &.active {
+      & a {
+        color: $gray-200;
+
+        :hover {
+          color: $gray-100;
+        }
+      }
+    }
+
+    a {
+      color: $gray-500;
+
+      :hover {
+        color: $gray-200;
+        transition: $nav-link-transition;
+      }
+
+      @extend .text-decoration-none;
+    }
+  }
+}
+
+.sidebar-submenu {
+  background-color: $color-gray-black;
+  font-size: $font-size-sm;
+
+  a {
+    color: $gray-400;
+    font-size: $font-size-sm;
+
+    &.sub-active, &:hover {
+      color: $gray-200;
+    }
+  }
+}
+
+.circle {
+  @include rounded-corners(15px);
+  min-width: 18px;
+  height: 16px;
+  font-size: 12px;
+  padding-top: 2px;
+  float: left;
+  position: relative;
+  margin-top: -3px;
+  margin-left: -2px;
+  text-align: center;
+  margin-right: 8px;
+  font-style: normal;
+  background: $color-gray-ash;
+  color: $color-gray-dim;
+  border: solid 1px $color-gray-dim;
+}
+
+.circle-red {
+  @include error-color;
+}
+
+.circle-green {
+  @include submit-color;
+}
+
+.btn-black {
+  @extend .btn-dark;
+  background-color: $color-gray-hardblack;
+  border: solid 1px $color-gray-dim;
+
+  :hover {
+    @extend :hover;
+  }
+}
+
+/**
+.btn-black:hover {
+  background-color: $color-black;
+}
+ */
+
+.btn-dim {
+  @extend .btn-secondary;
+
+  :hover {
+    @extend :hover;
+  }
+}
+
+/**
+.btn-dim:hover {
+  background-color: $color-gray-hardblack;
+  border-color: $color-gray-hardblack;
+}
+
+ */
+
+.btn-green {
+  @extend .btn-success;
+
+  :hover {
+    @extend :hover;
+  }
+}
+
+.btn-text {
+  width: auto;
+}
+
+.btn-blue {
+  @extend .btn-primary;
+}
+
+.btn-red {
+  @extend .btn-danger;
+
+  :hover {
+    @extend :hover;
+  }
+}
+
+.btn-orange {
+  @extend .btn-warning;
+
+  :hover {
+    @extend :hover;
+  }
+}
+
+
+.btn-mini {
+  @extend .btn-sm;
+}
+
+input.ico-32 {
+  display: inline;
+  width: 34px !important;
+}
+
+.float-left {
+  @include float-l;
+}
+
+.float-right {
+  @include float-r;
+}
+
+/* Selectmenu
+----------------------------------*/
+.select-box {
+  z-index: 0;
+  position: relative;
+  display: inline-block;
+}
+
+#bulk-actions .select-box,
+#listing-toolbar .select-box {
+  float: left;
+}
+
+.select-box-big .select-box-trigger {
+  padding: 7px 45px 6px 12px;
+  font-size: 13px;
+}
+
+.select-box .select-box-label {
+  overflow: hidden;
+  display: block;
+  line-height: 16px;
+  float: left;
+}
+
+.select-box-big .select-box-icon {
+  height: 29px;
+  border-left: solid 1px $color-gray-soft;
+}
+
+.select-box-extra .select-box-trigger {
+  height: 16px;
+  padding: 9px 45px 7px 12px;
+  font-size: 13px;
+}
+
+.select-box-extra .select-box-icon {
+  height: 32px;
+  border-left: solid 1px $color-gray-soft;
+}
+
+.select-box-input .select-box-trigger {
+  width: 50px;
+  @include rounded-corners(4px 0 0 4px);
+}
+
+.select-box-medium .select-box-trigger {
+  width: 75px;
+}
+
+div.select-box-medium select {
+  width: 134px;
+}
+
+.select-box-big .select-box-trigger {
+  width: 125px;
+}
+
+div.select-box-big select {
+  width: 184px;
+}
+
+div.select-box-input select {
+  width: 109px;
+}
+
+.select-box-trigger {
+  background-color: $color-gray-light;
+  border: solid 1px $color-gray-soft;
+  @include rounded-corners;
+  text-decoration: none;
+
+  padding: 5px 45px 7px 10px;
+
+  font-size: 13px;
+  color: $color-gray-black;
+  overflow: hidden;
+  display: block;
+
+  background-image: linear-gradient(bottom, rgb(237, 237, 237) 0%, rgb(255, 255, 255) 100%);
+  background-image: -o-linear-gradient(bottom, rgb(237, 237, 237) 0%, rgb(255, 255, 255) 100%);
+  background-image: -moz-linear-gradient(bottom, rgb(237, 237, 237) 0%, rgb(255, 255, 255) 100%);
+  background-image: -webkit-linear-gradient(bottom, rgb(237, 237, 237) 0%, rgb(255, 255, 255) 100%);
+  background-image: -ms-linear-gradient(bottom, rgb(237, 237, 237) 0%, rgb(255, 255, 255) 100%);
+
+  background-image: -webkit-gradient(
+                  linear,
+                  left bottom,
+                  left top,
+                  color-stop(0, rgb(237, 237, 237)),
+                  color-stop(1, rgb(255, 255, 255))
+  );
+
+  @include rounded-corners;
+  width: 163px;
+}
+
+.select-box a:hover {
+  text-decoration: none;
+}
+
+.select-box select {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 222px;
+  height: 30px;
+  -webkit-appearance: none;
+  z-index: 1003;
+}
+
+.select-box-icon {
+  z-index: 0;
+  position: absolute;
+  right: 13px;
+  top: 1px;
+  right: 0;
+
+  height: 27px;
+  width: 32px;
+  text-decoration: none;
+  display: block;
+}
+
+.select-box-icon .ico {
+  margin-top: 5px;
+  margin-left: 5px;
+}
+
+.input-text,
+input[type="text"],
+.input-password,
+input[type="password"] {
+  display: inline-block;
+  width: 208px;
+  padding: 4px 6px;
+  font-size: 13px;
+  line-height: 18px;
+  color: #555;
+  background-color: $color-white;
+  border: 1px solid $color-gray-soft;
+  @include rounded-corners(3px);
+  @include box-shadow;
+  vertical-align: top;
+}
+
+input.input-small {
+  width: 50px;
+}
+
+input.input-medium {
+  width: 70px;
+}
+
+div.input-medium .select-box-trigger {
+  width: 101px;
+}
+
+input.input-large {
+  width: 280px;
+}
+
+input.input-actions {
+  height: 24px;
+}
+
+button {
+  @extend button;
+}
+
+input.input-has-select {
+  @include box-shadow(none);
+  @include rounded-corners(0px 3px 3px 0);
+  background-color: $color-gray-light;
+  border-left: 0;
+  margin-right: 5px;
+  margin-left: -5px;
+  *margin-top: -1px;
+}
+
+.btn-mini {
+  @extend .btn-sm;
+}
+
+input.btn-mini,
+.btn-submit {
+  @extend .btn-success;
+}
+
+.btn-submit:hover {
+  @extend .btn-success, :hover;
+}
+
+.well {
+  padding: 10px;
+  background-color: $color-gray-light;
+  border: solid 1px $color-gray-soft;
+}
+
+.input-has-placeholder {
+  position: relative;
+}
+
+.hide, input.hide {
+  display: none;
+}
+
+.input-has-placeholder {
+  position: relative;
+}
+
+.input-has-placeholder label {
+  position: absolute;
+  left: 8px;
+  top: 7px;
+  font-size: 13px;
+  color: $color-gray-dim;
+  margin-top: 0 !important;
+  margin-bottom: 0 !important;
+}
+
+textarea {
+  padding: 4px 6px;
+  font-size: 13px;
+  line-height: 18px;
+  color: $color-gray-black;
+  background-color: $color-white;
+  border: 1px solid $color-gray-soft;
+  @include rounded-corners(3px);
+  vertical-align: top;
+  width: 208px;
+}
+
+.ui-rounded-corners {
+  @include rounded-corners;
+}
+
+.input-separate-top {
+  margin-top: 15px;
+}
+
+
+.has-pagination {
+  text-align: right;
+}
+
+.has-pagination ul {
+  display: inline-block;
+  *display: inline;
+  /* IE7 inline-block hack */
+
+  *zoom: 1;
+  margin: 25px 0 0;
+  height: 36px;
+  @include rounded-corners;
+
+}
+
+.has-pagination li {
+  display: inline;
+}
+
+.has-pagination a,
+.has-pagination span {
+  float: left;
+  padding: 0 10px;
+  line-height: 30px;
+  text-decoration: none;
+  border: 1px solid #ddd;
+  border-left-width: 0;
+}
+
+.has-pagination a:hover,
+.has-pagination .active a {
+  background-color: #f5f5f5;
+}
+
+.pagination .active a {
+  color: #999999;
+  cursor: default;
+}
+
+.has-pagination .disabled span,
+.has-pagination .disabled a,
+.has-pagination .disabled a:hover {
+  color: #999999;
+  background-color: transparent;
+  cursor: default;
+}
+
+.has-pagination .list-first {
+  border-left-width: 1px;
+  @include rounded-corners(3px 0 0 3px);
+}
+
+.has-pagination .list-last {
+  @include rounded-corners(0 3px 3px 0);
+}
+
+ul.showing-results {
+  float: left;
+  padding: 0;
+  margin: 25px 0 0;
+}
+
+.showing-results span {
+  border-left-width: 1px;
+  @include rounded-corners(3px);
+}
+
+.pagination-centered {
+  text-align: center;
+}
+
+.pagination-right {
+  text-align: right;
+}
+
+.pagination-input {
+  float: left;
+  padding: 0;
+  line-height: 30px;
+  text-decoration: none;
+  border: 1px solid #ddd;
+  border-left-width: 0;
+
+  @include rounded-corners(0 3px 3px 0);
+}
+
+.pagination-input input {
+  height: 30px;
+  margin: 0;
+  border: 0;
+  padding: 0;
+  width: 40px;
+  text-align: center;
+  @include rounded-corners(0);
+  vertical-align: top;
+}
+
+.pagination-input button {
+  height: 30px;
+  background: white;
+  border: 0;
+  margin: 0;
+  padding: 0 10px;
+  border-left: solid 1px $color-gray-soft;
+  cursor: pointer;
+  color: #018BE3;
+  font-weight: bold;
+  vertical-align: top;
+  font-size: 13px;
+  @include rounded-corners(0 3px 3px 0);
+}
+
+.display-select-bottom {
+  float: left;
+  padding: 0;
+  margin: 25px 0 0 10px;
+}
+
+.inline {
+  display: inline;
+}
+
+#content-head .btn {
+  *margin-top: -27px;
+}
+
+.ui-autocomplete-loading {
+  display: block;
+  background: white url('../images/loading.gif') right center no-repeat;
+}
+
+.btn-disabled {
+  opacity: 0.7;
+  filter: alpha(opacity=70);
+}
+
+.btn-market-update,
+.btn-market-preview {
+  background-color: #2fbfd1;
+  @include rounded-corners(3px);
+  padding: 3px 10px;
+  color: #fff;
+  margin-top: 5px;
+  margin-left: 5px;
+}
+
+.btn-market-preview {
+  background-color: $color-gray-ash;
+  margin-left: 0;
+}
+
+.spinner {
+  width: 16px;
+  height: 16px;
+  display: block;
+  margin-right: 10px;
+  float: left;
+  background: url('../images/loading.gif');
+}

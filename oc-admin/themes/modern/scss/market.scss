@@ -35,12 +35,12 @@ body.market #content-head .tabs li a{
 
     background-color: #4f777f; color:#fff;
 
-    .border-radius(3px 3px 0 0);
+    @include border-radius(3px 3px 0 0);
 
     font-weight: 200; font-size:14px;
 }
 body.market #content-head .tabs li.active a{
-    background-color: #f9f9f9; color:@title-color;
+    background-color: #f9f9f9; color:$title-color;
 }
 body.market #content-head .tabs li.connect a{
     background-color: #ec8541;
@@ -68,8 +68,8 @@ body.market a.screenshot .last{
   margin-right: 0;
 }
 body.market .section-title{
-    font-size:20px; font-weight: 200; color:@title-color;
-    border-bottom:solid 1px @border-color;
+    font-size:20px; font-weight: 200; color:$title-color;
+    border-bottom:solid 1px $border-color;
     line-height: 34px;
     clear: both;
 }

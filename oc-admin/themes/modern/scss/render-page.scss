@@ -1,18 +1,17 @@
 #content-head{
-    border-bottom:    solid 1px @color-gray-soft;
-    background-color: @color-gray-light;
+    border-bottom:    solid 1px $color-gray-soft;
+    background-color: $color-gray-light;
     padding:          24px 30px;
-    height:           31px;
 }
 #content-head h1,
 #content-head h2{
     margin:           0;
-    color:            @color-gray-black;
+    color:            $color-gray-black;
     font-size:        30px;
     font-weight:      normal;
 }
 #content-page{
-    background-color: @color-white;
+    background-color: $color-white;
     padding:          22px 15px 60px;
     position:         relative;
 }
@@ -22,7 +21,7 @@
 }
 .render-title{
   margin: 0 0 20px;
-  color: @color-gray-dim;
+  color: $color-gray-dim;
   font-size: 21px;
   font-weight: normal;
 }
@@ -48,17 +47,17 @@ h3.render-title{
     font-size: 13px;
     line-height: 18px;
     color: #555;
-    background-color: @color-gray-light;
-    border: 1px solid @color-gray-soft;
-    .rounded-corners(4px 0 0 4px);
+    background-color: $color-gray-light;
+    border: 1px solid $color-gray-soft;
+    @include rounded-corners(4px 0 0 4px);
     outline:none;
     vertical-align:top;
 }
 .quick-search .ico-search{
     margin-left:0;
     border-left:0;
-    .rounded-corners(0px 4px 4px 0);
-    .rounded-corners(0px 4px 4px 0);
+    @include rounded-corners(0px 4px 4px 0);
+    @include rounded-corners(0px 4px 4px 0);
     width:34px !important;
     height:34px;
     display:block;

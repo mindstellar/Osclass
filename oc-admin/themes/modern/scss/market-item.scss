@@ -7,7 +7,7 @@ body.market .mk-item-parent{
     display: block;
 }
 .mk-item{
-    .border-radius(5px);
+    @include border-radius(5px);
     background-color: #fff;
 
     -webkit-box-shadow: 0 0 5px 0 #bababa;
@@ -15,7 +15,7 @@ body.market .mk-item-parent{
 
     width: 300px;
     height: 110px;
-    color: @title-color;
+    color: $title-color;
     margin-right: 0;
     margin-bottom: 30px;
     overflow: hidden;
@@ -36,7 +36,7 @@ a.has-update:hover .mk-item {
     height: 110px;
     position: absolute;
     background-color: #f2f2f2;
-    .border-radius(5px 0 0 5px);
+    @include border-radius(5px 0 0 5px);
     -webkit-background-size: cover;
     -moz-background-size: cover;
     -o-background-size: cover;
@@ -96,8 +96,8 @@ a.has-update:hover .mk-item {
 .mk-item .mk-info .download-btn,
 .mk-item .mk-info .buy-btn,
 .mk-item .mk-info .diag-buy{
-  background-color: @color-gray-dim;
-  .border-radius(3px);
+  background-color: $color-gray-dim;
+  @include border-radius(3px);
   padding:5px 8px;
   color:#fff;
   float:left;
@@ -138,7 +138,7 @@ a.has-update:hover .mk-item {
 .mk-item-theme .banner{
     width: 300px;
     height: 155px;
-    .border-radius(5px 5px 0 0);
+    @include border-radius(5px 5px 0 0);
 }
 .mk-item .flag{
     width: 30px;
@@ -150,11 +150,11 @@ a.has-update:hover .mk-item {
 
     display: none;
 
-    .border-radius(0 3px 0 0);
+    @include border-radius(0 3px 0 0);
 }
 .mk-item-theme .flag{
     top: 155px;
-    .border-radius(0);
+    @include border-radius(0);
 }
 .has-update .flag {
     display: block;
@@ -186,7 +186,7 @@ a.has-update:hover .mk-item {
     padding: 0;
     margin: 0;
     background-color: #fff;
-    .border-radius(~"5px/6px");
+    @include border-radius(unquote("5px/6px"));
     height: auto;
 
     -webkit-box-shadow: 0 0 5px 0 rgba(0, 0, 0, 0.5);
@@ -220,7 +220,7 @@ z-index: 88888;
 }
 .not-compatible .mk-item,
 .not-compatible .banner{
-    .border-radius(0);
+    @include border-radius(0);
 }
 .not-compatible a.ui-dialog-titlebar-close {
     margin-top: -10px;
@@ -311,7 +311,7 @@ z-index: 88888;
 }
 .market-dialog .mk-info .block{
     display: block;
-    color:@title-color;
+    color:$title-color;
 }
 
 .market-dialog .mk-info .manual,
@@ -323,13 +323,13 @@ z-index: 88888;
     clear:both;
 }
 .header-mkt-btn {
-    .border-radius(3px);
+    @include border-radius(3px);
     background-color:#2fbfd1!important;
      padding: 5px 8px;
     color: white;
 }
 .banner-market{
-    .border-radius(12px);
+    @include border-radius(12px);
     display:inline-block;
     float: left;
 }

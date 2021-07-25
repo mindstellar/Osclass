@@ -23,10 +23,10 @@
 }
 .list-categories .category_div,
 .list-fields .cfield-div{
-    background-color:@color-gray-light;
-    border:solid 1px @color-gray-soft;
+    background-color:$color-gray-light;
+    border:solid 1px $color-gray-soft;
     padding:5px;
-    .rounded-corners;
+    @include rounded-corners;
     position: relative;
 }
 .cfield-hover{
@@ -40,7 +40,7 @@
     position: absolute;
     left:1px;
     top:1px;
-    border-right:solid 1px @color-gray-soft;
+    border-right:solid 1px $color-gray-soft;
     width:34px;height:36px;
     margin-left:2px;
     cursor: move;
@@ -49,7 +49,7 @@
     position: absolute;
     left:36px;
     top:1px;
-    border-right:solid 1px @color-gray-soft;
+    border-right:solid 1px $color-gray-soft;
     width:38px;height:36px;
     margin-left:2px;
 }
@@ -80,9 +80,9 @@
     margin-right:8px;
     font-style:normal;
     font-weight:bold;
-    background-color: @color-gray-ash;
-    color:@color-white;
-    border:solid 1px @color-gray-ash;*/
+    background-color: $color-gray-ash;
+    color:$color-white;
+    border:solid 1px $color-gray-ash;*/
     width:10px; height:10px;
     display: block;
     float:left;
@@ -99,7 +99,7 @@
     padding-right:300px;
     font-size:15px;
     line-height:26px;
-    color: @color-gray-dim;
+    color: $color-gray-dim;
 }
 .list-fields .name-edit-cfield{
     padding-left:10px;
@@ -123,8 +123,8 @@ div.disabled .category_row,
     margin-top:5px;
     padding: 5px 10px;
     position: relative;
-    background:@color-white;
-    border-top:solid 1px @color-gray-soft;
+    background:$color-white;
+    border-top:solid 1px $color-gray-soft;
 }
 .iframe-category .input-line{
     float:left;
@@ -157,7 +157,7 @@ div.disabled .category_row,
     font-size:16px;
     font-weight:normal;
     position: relative;
-    border-bottom:solid 1px @color-gray-soft;
+    border-bottom:solid 1px $color-gray-soft;
     padding-bottom:5px;
     padding-left:15px;
     margin-bottom:10px;

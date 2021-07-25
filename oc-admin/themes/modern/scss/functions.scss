@@ -1,0 +1,29 @@
+@mixin rounded-corners($radius: 4px){
+    border-radius: $radius;
+    -webkit-border-radius: $radius;
+    -moz-border-radius: $radius;
+}
+@mixin box-shadow($value: inset 0 1px 1px rgba(0, 0, 0, 0.075)){
+    -webkit-box-shadow: $value;
+    -moz-box-shadow: $value;
+    box-shadow: $value;
+}
+@mixin error-color(){
+    background:$color-error-bg;
+    border:solid 1px $color-error-border;
+    color:$color-error-text;
+}
+@mixin submit-color(){
+    background:$color-submit-bg;
+    border:solid 1px $color-submit-border;
+    color:$color-submit-text;
+}
+@mixin float-l(){
+    float:left !important;
+}
+@mixin float-r(){
+    float:right !important;
+}
+@mixin border-radius($radius){
+    @include rounded-corners($radius);
+}

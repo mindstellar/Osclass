@@ -8,8 +8,8 @@
 .ui-osc-tabs .ui-tabs-nav{
     border:0;
     padding:4px 5px 0;
-    .rounded-corners(4px 4px 0 0);
-    border-bottom:solid 1px @color-gray-soft;
+    @include rounded-corners(4px 4px 0 0);
+    border-bottom:solid 1px $color-gray-soft;
 }
 /*.ui-tabs-right .ui-tabs-nav li.ui-state-default {float: right; }
 .ui-tabs-right .ui-tabs-nav li a { float: right; }*/
@@ -21,18 +21,18 @@
 }
 .ui-dialog .ui-dialog-content{
     padding:0;
-    border:solid 1px @color-blue-border;
-    .rounded-corners(0 0 4px 4px);
+    border:solid 1px $color-blue-border;
+    @include rounded-corners(0 0 4px 4px);
 
 }
 .ui-dialog .ui-dialog-titlebar{
-    .rounded-corners(4px 4px 0 0);
+    @include rounded-corners(4px 4px 0 0);
     border:none;
-    background-color:@color-blue;
-    color:@color-white;
+    background-color:$color-blue;
+    color:$color-white;
     font-weight:normal;
     font-size:16px;
-    border:solid 1px @color-blue-border;
+    border:solid 1px $color-blue-border;
     border-bottom:none;
 }
 .osc-modal-content{
@@ -41,24 +41,24 @@
 
 #downloading{
     font-size:15px;
-    color:@color-gray-dim;
+    color:$color-gray-dim;
     text-align:center;
 }*/
 .ui-dialog{
     border:0;
-    background:@color-gray-light;
+    background:$color-gray-light;
     padding:5px;
-    .rounded-corners;
+    @include rounded-corners;
 }
 .ui-dialog .ui-dialog-titlebar{
     margin:0;
     padding:7px 5px;
     font-size:18px;
-    color:@color-gray-black;
+    color:$color-gray-black;
     position: relative;
-    .rounded-corners(4px 4px 0 0);
+    @include rounded-corners(4px 4px 0 0);
     border:none;
-    .rounded-corners(4px 4px 0 0);
+    @include rounded-corners(4px 4px 0 0);
 }
 .ui-dialog .ui-dialog-title{
     margin:0;
@@ -66,13 +66,13 @@
     font-weight:normal;
 }
 .ui-dialog .ui-dialog-content{
-    background:@color-white;
+    background:$color-white;
     padding:15px;
-    .rounded-corners(0 0 4px 4px);
+    @include rounded-corners(0 0 4px 4px);
     position: relative;
 }
 .ui-dialog .form-actions{
-    .rounded-corners(0 0 4px 4px);
+    @include rounded-corners(0 0 4px 4px);
     margin-bottom: 0;
     padding: 0;
     bottom:0;
@@ -90,9 +90,9 @@
 .osc-modal-content-market img{
     float:left;
     max-height:106px;
-    border:solid 2px @color-gray-light;
+    border:solid 2px $color-gray-light;
     margin-right:20px;
-    .rounded-corners;
+    @include rounded-corners;
 }
 .osc-modal-content-market .table{
     float:left;

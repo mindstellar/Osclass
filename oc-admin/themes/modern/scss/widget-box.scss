@@ -1,13 +1,13 @@
 .widget-box{
-    background-color:@color-gray-light;
+    background-color:$color-gray-light;
     padding:5px;
-    .rounded-corners(7px 7px 9px 9px);
+    @include rounded-corners(7px 7px 9px 9px);
 }
 .widget-box-title{
     margin:0;
     padding:7px 5px;
     font-size:18px;
-    color:@color-gray-black;
+    color:$color-gray-black;
     position: relative;
 }
 .widget-box-title .btn{
@@ -30,12 +30,12 @@
   top: 0;
 }
 .widget-box-title .select-box-trigger{
-    background-color:@color-white;
+    background-color:$color-white;
 }
 .widget-box-content{
-    background-color:@color-white;
+    background-color:$color-white;
     padding:15px;
-    .rounded-corners(4px);
+    @include rounded-corners(4px);
     position: relative;
 }
 .widget-box-selector{
@@ -45,8 +45,8 @@
 .widget-box h4 {
     margin: 20px 0 10px;
     font-size: 16px;
-    color: @color-gray-dim;
-    border-bottom: 1px dotted @color-gray-dim;
+    color: $color-gray-dim;
+    border-bottom: 1px dotted $color-gray-dim;
 }
 .widget-box h4.first-title {
     margin: 0 0 10px;
@@ -54,11 +54,11 @@
 .stats-title{
     font-size:16px;
     line-height:20px;
-    color:@color-gray-dim;
+    color:$color-gray-dim;
 }
 .stats-detail{
     font-size:14px;
-    color:@color-gray-dim;
+    color:$color-gray-dim;
 }
 .widget-box .form-row{
     margin-bottom: 15px;
@@ -77,7 +77,7 @@ div.widget-box-content-no-wrapp,
 div.widget-box-content-no-wrapp h4,
 div.widget-box-content-no-wrapp .first-title{
     padding:5px 15px;
-    background:@color-gray-soft;
+    background:$color-gray-soft;
     border-bottom:0;
     margin:0;
 }

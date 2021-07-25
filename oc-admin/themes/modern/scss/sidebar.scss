@@ -1,6 +1,6 @@
 #sidebar,
 #sidebar a{
-    color:               @color-gray-black;
+    color:               $color-gray-black;
     text-decoration:     none;
 }
 #sidebar a#market_connect{
@@ -37,7 +37,7 @@
 #show-more li {
   width: 79px;
   height: 79px;
-  border-bottom: solid 1px @color-gray-soft;
+  border-bottom: solid 1px $color-gray-soft;
   list-style: 0;
   position: relative;
   list-style: none;
@@ -49,13 +49,13 @@
     max-height: 600%;
 }
 #sidebar .oscmenu .current {
-  background: @color-gray-soft;
-  -webkit-box-shadow: inset 0 0 10px 0 @color-gray-ash;
-  box-shadow: inset 0 0 10px 0 @color-gray-ash;
+  background: $color-gray-soft;
+  -webkit-box-shadow: inset 0 0 10px 0 $color-gray-ash;
+  box-shadow: inset 0 0 10px 0 $color-gray-ash;
   *margin-top: -5px;
 }
 body.compact #sidebar .oscmenu .current{
-    background:          @color-gray-hardblack;
+    background:          $color-gray-hardblack;
     -webkit-box-shadow: none;
     box-shadow: none;
 }
@@ -72,11 +72,11 @@ body.compact #sidebar .oscmenu .current{
       left: 70px;
       top: -1px;
       z-index: 3;
-      border: solid 1px @color-gray-soft;
-      background-color: @color-white;
-      .rounded-corners;
-      -webkit-box-shadow: 1px 1px 0 0 @color-gray-ash;
-      box-shadow: 1px 1px 0 0 @color-gray-ash;
+      border: solid 1px $color-gray-soft;
+      background-color: $color-white;
+      @include rounded-corners;
+      -webkit-box-shadow: 1px 1px 0 0 $color-gray-ash;
+      box-shadow: 1px 1px 0 0 $color-gray-ash;
       font-size: 12px;
       display: none;
     }
@@ -98,18 +98,18 @@ body.compact #sidebar .oscmenu .current{
         background:#eaeaea;
         padding:3px 15px;
         margin-top:3px;
-        color:@color-gray-hardblack;
+        color:$color-gray-hardblack;
     }
     #sidebar .oscmenu li li a,
     body.compact #sidebar .oscmenu li li a{
         display:         block;
         padding:         2px 15px;
-        color:           @color-gray-hardblack;
+        color:           $color-gray-hardblack;
 
     }
     #sidebar .oscmenu li li a:hover,
     body.compact #sidebar .oscmenu li li a:hover{
-        background:      @color-gray-light;
+        background:      $color-gray-light;
     }
     #sidebar .oscmenu li.hover ul,
     body.compact #sidebar .oscmenu li.hover ul{
@@ -133,11 +133,11 @@ body.compact #sidebar .oscmenu .current{
   left: 70px;
   top: 0;
   z-index: 3;
-  border: solid 1px @color-gray-soft;
-  background-color: @color-white;
-  .rounded-corners;
-  -webkit-box-shadow: 1px 1px 0 0 @color-gray-ash;
-  box-shadow: 1px 1px 0 0 @color-gray-ash;
+  border: solid 1px $color-gray-soft;
+  background-color: $color-white;
+  @include rounded-corners;
+  -webkit-box-shadow: 1px 1px 0 0 $color-gray-ash;
+  box-shadow: 1px 1px 0 0 $color-gray-ash;
 }
     #submenu-sidebar ul {
       list-style: none;
@@ -148,7 +148,7 @@ body.compact #sidebar .oscmenu .current{
 #show-more {
   width: 79px;
   height: 79px;
-  border-bottom: solid 1px @color-gray-soft;
+  border-bottom: solid 1px $color-gray-soft;
   list-style: 0;
   position: relative;
 }
@@ -172,11 +172,11 @@ body.compact #sidebar .oscmenu .current{
       left: /*-4px*/ -11px;
       margin-top: -15px;
       z-index: 3;
-      border: solid 1px @color-gray-soft;
-      background-color: @color-white;
-      .rounded-corners;
-      -webkit-box-shadow: 1px 1px 0 0 @color-gray-ash;
-      box-shadow: 1px 1px 0 0 @color-gray-ash;
+      border: solid 1px $color-gray-soft;
+      background-color: $color-white;
+      @include rounded-corners;
+      -webkit-box-shadow: 1px 1px 0 0 $color-gray-ash;
+      box-shadow: 1px 1px 0 0 $color-gray-ash;
       font-size: 12px;
     }
     #hidden-menus .hover ul li {
@@ -190,11 +190,11 @@ body.compact #sidebar .oscmenu .current{
     #hidden-menus ul li a{
         display:         block;
         padding:         2px 15px;
-        color:           @color-gray-hardblack;
+        color:           $color-gray-hardblack;
 
     }
     #hidden-menus .hover ul li a:hover{
-        background:      @color-gray-light;
+        background:      $color-gray-light;
     }
     #show-more ul li.arrow {
       height: 10px;
@@ -207,14 +207,14 @@ body.compact #sidebar .oscmenu .current{
       background: url('../images/arrow2.png');
     }
 body.compact #sidebar{
-    background-color:@color-gray-black;
+    background-color:$color-gray-black;
     width:50px;
 }
 body.compact #sidebar .oscmenu li,
 body.compact #show-more li{
     width:               50px;
     height:              50px;
-    border-bottom:       solid 1px @color-gray-hardblack;
+    border-bottom:       solid 1px $color-gray-hardblack;
 }
 body.compact #sidebar h3 {
   bottom: 6px;
