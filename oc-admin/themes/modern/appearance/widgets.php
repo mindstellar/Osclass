@@ -45,7 +45,8 @@ function customPageHeader()
 {
     ?>
     <h1><?php _e('Appearance'); ?>
-        <a href="#" class="btn ico ico-32 ico-help float-right"></a>
+        <a href="#" class="ms-1 bi bi-question-circle-fill float-right" data-bs-target="#help-box" data-bs-toggle="collapse"
+           href="#help-box"></a>
     </h1>
     <?php
 }
@@ -117,10 +118,10 @@ osc_current_admin_theme_path('parts/header.php'); ?>
                                     <?php foreach ($widgets as $w) { ?>
                                         <tr<?php if ($countEvent % 2 == 0) {
                                             echo ' class="even"';
-                                           }
-                                           if ($countEvent == 1) {
-                                               echo ' class="table-first-row"';
-                                           } ?>>
+                                        }
+                                        if ($countEvent == 1) {
+                                            echo ' class="table-first-row"';
+                                        } ?>>
                                             <td><?php echo __('Widget') . ' ' . $w['pk_i_id']; ?></td>
                                             <td><?php printf(__('Description: %s'), $w['s_description']); ?></td>
                                             <td><?php printf(

@@ -41,17 +41,18 @@
 <body class="<?php echo implode(' ', osc_apply_filter('admin_body_class', array())); ?>">
 <?php AdminToolbar::newInstance()->render(); ?>
 </div>
-<div id="content">
-    <?php osc_draw_admin_menu(); ?>
-    <div id="content-render">
-        <div id="content-head">
-            <?php osc_run_hook('admin_page_header'); ?>
-        </div>
-        <div id="help-box">
-            <a href="#" class="btn ico ico-20 ico-close">x</a>
-            <?php osc_run_hook('help_box'); ?>
-        </div>
-        <?php osc_show_flash_message('admin'); ?>
+<div id="content" class=" container-fluid">
+    <div class="row flex-nowrap">
+        <?php osc_draw_admin_menu(); ?>
+        <div id="content-render" class="px-0 col-auto col-lg-10">
+            <div id="content-head">
+                <?php osc_run_hook('admin_page_header'); ?>
+            </div>
+            <div id="help-box" class="alert alert-dismissible fade collapse">
+                <?php osc_run_hook('help_box'); ?>
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+            <?php osc_show_flash_message('admin'); ?>
         <div class="jsMessage flashmessage flashmessage-info hide">
             <a class="btn ico btn-mini ico-close">×</a>
             <p></p>

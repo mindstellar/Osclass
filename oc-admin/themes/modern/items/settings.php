@@ -78,7 +78,8 @@ function customPageHeader()
 {
     ?>
     <h1><?php _e('Listing'); ?>
-        <a href="#" class="btn ico ico-32 ico-help float-right"></a>
+        <a href="#" class="ms-1 bi bi-question-circle-fill float-right" data-bs-target="#help-box" data-bs-toggle="collapse"
+           href="#help-box"></a>
     </h1>
     <?php
 }
@@ -129,7 +130,7 @@ osc_current_admin_theme_path('parts/header.php'); ?>
                                 <label>
                                     <input type="checkbox" name="moderate_admin_post" value="1" <?php if (osc_moderate_admin_post()) {
                                         echo 'checked';
-                                                                                                } ?> />
+                                    } ?> />
                                     <?php _e('Hold new listings for admin moderation'); ?>
                                 </label>
                             </div>
@@ -137,7 +138,7 @@ osc_current_admin_theme_path('parts/header.php'); ?>
                                 <label>
                                     <input type="checkbox" name="moderate_admin_edit" value="1" <?php if (osc_moderate_admin_edit()) {
                                         echo 'checked';
-                                                                                                } ?>/>
+                                    } ?>/>
                                     <?php _e('Hold edited listings for admin moderation'); ?>
                                 </label>
                             </div>
@@ -295,13 +296,13 @@ osc_current_admin_theme_path('parts/header.php'); ?>
                                 <select class="input-small" name="map_type">
                                     <option value="0" <?php if (!$map_type) {
                                         echo 'selected';
-                                                      } ?>><?php _e('None'); ?></option>
+                                    } ?>><?php _e('None'); ?></option>
                                     <option value="google" <?php if ($map_type == 'google') {
                                         echo 'selected';
-                                                           } ?>><?php _e('Google Maps'); ?></option>
+                                    } ?>><?php _e('Google Maps'); ?></option>
                                     <option value="openstreet" <?php if ($map_type == 'openstreet') {
                                         echo 'selected';
-                                                               } ?>><?php _e('OpenStreetMaps'); ?></option>
+                                    } ?>><?php _e('OpenStreetMaps'); ?></option>
                                 </select>
                                 <div class="help-box"><?php _e('Set the API key in Settings -> General.'); ?></div>
                             </div>

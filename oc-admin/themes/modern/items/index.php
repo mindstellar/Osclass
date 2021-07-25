@@ -46,9 +46,11 @@ function customPageHeader()
     <h1><?php _e('Listings'); ?>
         <a href="<?php echo osc_admin_base_url(true); ?>?page=items&amp;action=settings"
            class="btn ico ico-32 ico-engine float-right"></a>
-        <a href="#" class="btn ico ico-32 ico-help float-right"></a>
+        <a href="#" class="ms-1 bi bi-question-circle-fill float-right" data-bs-target="#help-box" data-bs-toggle="collapse"
+           href="#help-box"></a>
         <a href="<?php echo osc_admin_base_url(true) . '?page=items&action=post'; ?>"
-           class="btn btn-green ico ico-32 ico-add-white float-right"><?php _e('Add listing'); ?></a>
+           class="ms-1 text-success float-end" data-bs-toggle="tooltip" data-bs-placement="bottom" title="<?php _e('Add listing'); ?>"><i
+                    class="bi bi-plus-circle-fill"></i></a>
     </h1>
     <?php
 }

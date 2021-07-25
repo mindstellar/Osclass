@@ -1,38 +1,15 @@
 {
-  "_from": "tinymce@5.8.1",
-  "_id": "tinymce@5.8.1",
-  "_inBundle": false,
-  "_integrity": "sha512-1zGXdZplWQafstlC7sri0ttCgMagsiXDc9N3I8JNrPOsWAeTfq4AAJWZoxsQBYn8gYcuPu/WzMKG5SoJjxI1VA==",
-  "_location": "/tinymce",
-  "_phantomChildren": {},
-  "_requested": {
-    "type": "version",
-    "registry": true,
-    "raw": "tinymce@5.8.1",
-    "name": "tinymce",
-    "escapedName": "tinymce",
-    "rawSpec": "5.8.1",
-    "saveSpec": null,
-    "fetchSpec": "5.8.1"
+  "name": "tinymce",
+  "version": "5.8.1",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/tinymce/tinymce-dist.git"
   },
-  "_requiredBy": [
-    "#USER",
-    "/"
-  ],
-  "_resolved": "https://registry.npmjs.org/tinymce/-/tinymce-5.8.1.tgz",
-  "_shasum": "f6ace70e47cf6b5b0a63f52cf38e4ae04a35ba58",
-  "_spec": "tinymce@5.8.1",
-  "_where": "/home/navjottomer/Osclass",
-  "author": {
-    "name": "Tiny Technologies, Inc"
-  },
-  "bugs": {
-    "url": "https://github.com/tinymce/tinymce/issues"
-  },
-  "bundleDependencies": false,
-  "deprecated": false,
   "description": "Web based JavaScript HTML WYSIWYG editor control.",
-  "homepage": "https://github.com/tinymce/tinymce-dist#readme",
+  "author": "Tiny Technologies, Inc",
+  "main": "tinymce.js",
+  "types": "tinymce.d.ts",
+  "license": "LGPL-2.1",
   "keywords": [
     "editor",
     "wysiwyg",
@@ -41,13 +18,7 @@
     "javascript",
     "html"
   ],
-  "license": "LGPL-2.1",
-  "main": "tinymce.js",
-  "name": "tinymce",
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/tinymce/tinymce-dist.git"
-  },
-  "types": "tinymce.d.ts",
-  "version": "5.8.1"
+  "bugs": {
+    "url": "https://github.com/tinymce/tinymce/issues"
+  }
 }

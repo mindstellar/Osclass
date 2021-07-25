@@ -50,9 +50,9 @@ function customPageHeader()
 {
     ?>
     <h1><?php _e('Listing'); ?>
-        <a href="#" class="btn ico ico-32 ico-help float-right"></a>
-        <a href="#" class="btn btn-green ico ico-32 ico-add-white float-right"
-           id="add-button"><?php _e('Add custom field'); ?></a>
+        <a href="#" class="ms-1 bi bi-question-circle-fill float-right" data-bs-target="#help-box" data-bs-toggle="collapse"></a>
+        <a href="#" class="text-success ms-1 float-end"
+           id="add-button" title="<?php _e('Add custom field'); ?>"><i class="bi bi-plus-circle-fill"></i></a>
     </h1>
     <?php
 }

@@ -45,7 +45,8 @@ function customPageHeader()
     <h1><?php _e('Manage Media'); ?>
         <a href="<?php echo osc_admin_base_url(true) . '?page=settings&action=media'; ?>"
            class="btn ico ico-32 ico-engine float-right"></a>
-        <a href="#" class="btn ico ico-32 ico-help float-right"></a>
+        <a href="#" class="ms-1 bi bi-question-circle-fill float-right" data-bs-target="#help-box" data-bs-toggle="collapse"
+           href="#help-box"></a>
     </h1>
     <?php
 }

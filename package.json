@@ -26,6 +26,7 @@
   "dependencies": {
     "bootstrap": "^5.0.*",
     "bootstrap-icons": "^1.5.0",
+    "grunt-contrib-sass": "^2.0.0",
     "jquery": "^3.6.0",
     "jquery-migrate": "^3.3.2",
     "jquery-treeview": "^1.4.*",

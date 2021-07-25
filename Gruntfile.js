@@ -10,7 +10,7 @@ module.exports = function (grunt) {
 
     grunt.initConfig({
         clean: {
-            vendors: [assetsDir]
+            vendors: [assetsDir, 'oc-admin/themes/modern/scss/bootstrap']
         },
         copy: {
             'jquery': {
@@ -163,16 +163,25 @@ module.exports = function (grunt) {
                     dest: assetsDir + '/osclass-legacy/',
                     flatten: false
                 }]
-            }
+            },
+            'bootstrap-scss': {
+                files: [{
+                    expand: true,
+                    cwd: nodeDir + '/bootstrap/scss',
+                    src: '**/*',
+                    dest: 'oc-admin/themes/modern/scss/bootstrap',
+                    flatten: false
+                }
+                ]
+            },
         },
-        less: {
-            compile: {
+        sass: {
+            dist: {
                 options: {
-                    paths: ['oc-admin/themes/modern/less'],
-                    compress: true
+                    style: 'expanded'
                 },
                 files: {
-                    'oc-admin/themes/modern/css/main.css': 'oc-admin/themes/modern/less/main.less'
+                    'oc-admin/themes/modern/css/main.css': 'oc-admin/themes/modern/scss/main.scss'
                 }
             }
         }
@@ -191,8 +200,9 @@ module.exports = function (grunt) {
         }
     });
 
-    grunt.registerTask('default', ['clean', 'createAssetsDir', 'copy', 'less']);
+    grunt.registerTask('default', ['clean', 'createAssetsDir', 'copy', 'sass']);
+    grunt.registerTask('compile', ['sass']);
     grunt.loadNpmTasks('grunt-contrib-clean');
     grunt.loadNpmTasks('grunt-contrib-copy');
-    grunt.loadNpmTasks('grunt-contrib-less');
+    grunt.loadNpmTasks('grunt-contrib-sass');
 };

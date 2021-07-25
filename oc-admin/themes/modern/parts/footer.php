@@ -4,7 +4,7 @@
 </div></div>
 <div class="clear"></div></div><!-- #grid-system -->
 </div><!-- #content-page -->
-<div class="clear"></div>
+<div class="clearfix"></div>
 <div id="footer-wrapper">
     <div id="footer">
         <?php osc_run_hook('admin_content_footer'); ?>

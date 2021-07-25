@@ -78,9 +78,12 @@ function customPageHeader()
 {
     ?>
     <h1><?php _e('Appearance'); ?>
-        <a href="#" class="btn ico ico-32 ico-help float-right"></a>
-        <a class="btn btn-green ico ico-32 ico-add-white float-right"
-           href="<?php echo osc_admin_base_url(true); ?>?page=appearance&amp;action=add"><?php _e('Add theme'); ?></a>
+        <a class="ms-1 bi bi-question-circle-fill float-right" data-bs-target="#help-box" data-bs-toggle="collapse" href="#help-box"></a>
+        <a class="text-success ms-1 float-end"
+           href="<?php echo osc_admin_base_url(true); ?>?page=appearance&amp;action=add"
+           title="<?php _e('Add theme'); ?>">
+            <i class="bi bi-plus-circle-fill"></i>
+        </a>
     </h1>
     <?php
 }
@@ -150,13 +153,13 @@ osc_current_admin_theme_path('parts/header.php'); ?>
                                     <a href="<?php echo osc_admin_base_url(true);
                                     ?>?page=appearance&amp;action=activate&amp;theme=<?php
                                     echo $theme; ?>&amp;<?php echo $csrf_token;
-?>" class="btn btn-mini btn-green"><?php _e('Activate'); ?></a>
+                                    ?>" class="btn btn-mini btn-green"><?php _e('Activate'); ?></a>
                                     <a target="_blank"
                                        href="<?php echo osc_base_url(true); ?>?theme=<?php echo $theme; ?>"
                                        class="btn btn-mini btn-blue"><?php _e('Preview'); ?></a>
                                     <a onclick="return delete_dialog('<?php echo $theme; ?>');"
                                        href="<?php echo osc_admin_base_url(true);
-                                        ?>?page=appearance&amp;action=delete&amp;webtheme=<?php
+                                       ?>?page=appearance&amp;action=delete&amp;webtheme=<?php
                                        echo $theme; ?>&amp;<?php echo $csrf_token; ?>"
                                        class="btn btn-mini float-right delete"><?php _e('Delete'); ?></a>
                                     <?php
