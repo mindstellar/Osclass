@@ -140,7 +140,6 @@ class FormInputs implements InputInterface
         if (!isset($name)) {
             throw new Exception('Input Name is not set');
         }
-
         $this->handleOptions($options, $attributes);
 
         // $attributes to String
@@ -199,6 +198,7 @@ class FormInputs implements InputInterface
             case 'select':
 
                 $input .= sprintf('<select name="%s"%s>', $name, $attributesString);
+
                 // Add selectPlaceholder option or create a new placeholder if not set
                 if (isset($options['selectPlaceholder'])) {
                     $input .= sprintf('<option value="">%s</option>', $options['selectPlaceholder']);
@@ -224,7 +224,7 @@ class FormInputs implements InputInterface
                 break;
             // Generate input with type=textarea
             case 'textarea':
-                $input .= sprintf('<textarea %s>%s</textarea>', $attributesString, $values);
+                $input .= sprintf('<textarea name="%s"%s>%s</textarea>',$name, $attributesString, $values);
                 break;
             // Generate input with type=file
             case 'file':
@@ -232,11 +232,11 @@ class FormInputs implements InputInterface
                 break;
             // Generate input with type=submit
             case 'submit':
-                $input .= sprintf('<input type="submit" value="%s"%s>', $values, $attributesString);
+                $input .= sprintf('<input type="submit"  value="%s"%s>', $values, $attributesString);
                 break;
             // Generate default input
             default:
-                $input .= sprintf('<input%s value="%s">', $attributesString, $values);
+                $input .= sprintf('<input name="%s" %s value="%s">',$name, $attributesString, $values);
                 break;
         }
         if (isset($options['customHtml'])) {
