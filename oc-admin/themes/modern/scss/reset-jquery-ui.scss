@@ -1,19 +1,24 @@
-.ui-osc-tabs{
-    border:0;
-    padding:0;
+.ui-osc-tabs {
+  border: 0;
+  padding: 0;
 }
+
 /*.ui-osc-tabs .ui-tabs-panel{
     padding:15px 0;
 }*/
-.ui-osc-tabs .ui-tabs-nav{
-    border:0;
-    padding:4px 5px 0;
-    @include rounded-corners(4px 4px 0 0);
-    border-bottom:solid 1px $color-gray-soft;
+.ui-osc-tabs .ui-tabs-nav {
+  border: 0;
+  padding: 4px 5px 0;
+  @include rounded-corners(4px 4px 0 0);
+  border-bottom: solid 1px $color-gray-soft;
 }
+
 /*.ui-tabs-right .ui-tabs-nav li.ui-state-default {float: right; }
 .ui-tabs-right .ui-tabs-nav li a { float: right; }*/
-.ui-osc-tabs .ui-tabs-nav li{ float: right; }
+.ui-osc-tabs .ui-tabs-nav li {
+  float: right;
+}
+
 /*
 .ui-dialog{
     padding:0;
@@ -44,61 +49,70 @@
     color:$color-gray-dim;
     text-align:center;
 }*/
-.ui-dialog{
-    border:0;
-    background:$color-gray-light;
-    padding:5px;
-    @include rounded-corners;
+.ui-dialog {
+  border: 0;
+  background: $color-gray-light;
+  padding: 5px;
+  @include rounded-corners;
 }
-.ui-dialog .ui-dialog-titlebar{
-    margin:0;
-    padding:7px 5px;
-    font-size:18px;
-    color:$color-gray-black;
-    position: relative;
-    @include rounded-corners(4px 4px 0 0);
-    border:none;
-    @include rounded-corners(4px 4px 0 0);
+
+.ui-dialog .ui-dialog-titlebar {
+  margin: 0;
+  padding: 7px 5px;
+  font-size: 18px;
+  color: $color-gray-black;
+  position: relative;
+  @include rounded-corners(4px 4px 0 0);
+  border: none;
+  @include rounded-corners(4px 4px 0 0);
 }
-.ui-dialog .ui-dialog-title{
-    margin:0;
-    font-size:18px;
-    font-weight:normal;
+
+.ui-dialog .ui-dialog-title {
+  margin: 0;
+  font-size: 18px;
+  font-weight: normal;
 }
-.ui-dialog .ui-dialog-content{
-    background:$color-white;
-    padding:15px;
-    @include rounded-corners(0 0 4px 4px);
-    position: relative;
+
+.ui-dialog .ui-dialog-content {
+  background: $color-white;
+  padding: 15px;
+  @include rounded-corners(0 0 4px 4px);
+  position: relative;
 }
-.ui-dialog .form-actions{
-    @include rounded-corners(0 0 4px 4px);
-    margin-bottom: 0;
-    padding: 0;
-    bottom:0;
-    width:100%;
-    left:0;
-    position: absolute;
+
+.ui-dialog .form-actions {
+  @include rounded-corners(0 0 4px 4px);
+  margin-bottom: 0;
+  padding: 0;
+  bottom: 0;
+  width: 100%;
+  left: 0;
+  position: absolute;
 }
-.ui-dialog .form-actions .wrapper{
-    padding:17px 20px 18px;
+
+.ui-dialog .form-actions .wrapper {
+  padding: 17px 20px 18px;
 }
-.ui-dialog .has-form-actions{
-    position: relative;
-    padding-bottom:85px !important;
+
+.ui-dialog .has-form-actions {
+  position: relative;
+  padding-bottom: 85px !important;
 }
-.osc-modal-content-market img{
-    float:left;
-    max-height:106px;
-    border:solid 2px $color-gray-light;
-    margin-right:20px;
-    @include rounded-corners;
+
+.osc-modal-content-market img {
+  float: left;
+  max-height: 106px;
+  border: solid 2px $color-gray-light;
+  margin-right: 20px;
+  @include rounded-corners;
 }
-.osc-modal-content-market .table{
-    float:left;
-    width:300px;
+
+.osc-modal-content-market .table {
+  float: left;
+  width: 300px;
 }
-.osc-modal-content-market .form-row .market-data{
-    padding-left:100px;
-    display: block;
+
+.osc-modal-content-market .form-row .market-data {
+  padding-left: 100px;
+  display: block;
 }

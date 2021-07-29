@@ -52,18 +52,22 @@ a.ico-32 {
 .dashboard-sidebar {
   @extend .px-sm-2, .px-0, .bg-black-light, .min-vh-100, .text-white;
   min-width: 220px;
+
   div {
     &.nav-link {
       color: $nav-pills-link-active-color;
       background-color: $gray-800;
+
       i {
         &.collapsed {
           transform: rotate(-90deg);
         }
+
         transition: ease 500ms;
       }
     }
   }
+
   .nav-link {
     &.active {
       & a {
@@ -89,15 +93,24 @@ a.ico-32 {
 }
 
 .sidebar-submenu {
+
   background-color: $color-gray-black;
   font-size: $font-size-sm;
+  margin-top: -.1rem;
+  padding-top: .1rem;
+  border: 0 $border-width solid transparent;
+  @include border-radius($navbar-toggler-border-radius);
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
 
   a {
     color: $gray-400;
     font-size: $font-size-sm;
+    margin-bottom: $border-width;
 
     &.sub-active, &:hover {
       color: $gray-200;
+      background-color: $gray-600;
     }
   }
 }
@@ -276,92 +289,27 @@ div.select-box-input select {
   width: 109px;
 }
 
-.select-box-trigger {
-  background-color: $color-gray-light;
-  border: solid 1px $color-gray-soft;
-  @include rounded-corners;
-  text-decoration: none;
-
-  padding: 5px 45px 7px 10px;
-
-  font-size: 13px;
-  color: $color-gray-black;
-  overflow: hidden;
-  display: block;
-
-  background-image: linear-gradient(bottom, rgb(237, 237, 237) 0%, rgb(255, 255, 255) 100%);
-  background-image: -o-linear-gradient(bottom, rgb(237, 237, 237) 0%, rgb(255, 255, 255) 100%);
-  background-image: -moz-linear-gradient(bottom, rgb(237, 237, 237) 0%, rgb(255, 255, 255) 100%);
-  background-image: -webkit-linear-gradient(bottom, rgb(237, 237, 237) 0%, rgb(255, 255, 255) 100%);
-  background-image: -ms-linear-gradient(bottom, rgb(237, 237, 237) 0%, rgb(255, 255, 255) 100%);
-
-  background-image: -webkit-gradient(
-                  linear,
-                  left bottom,
-                  left top,
-                  color-stop(0, rgb(237, 237, 237)),
-                  color-stop(1, rgb(255, 255, 255))
-  );
-
-  @include rounded-corners;
-  width: 163px;
-}
-
-.select-box a:hover {
-  text-decoration: none;
-}
-
-.select-box select {
-  position: absolute;
-  left: 0;
-  top: 0;
-  width: 222px;
-  height: 30px;
-  -webkit-appearance: none;
-  z-index: 1003;
-}
-
-.select-box-icon {
-  z-index: 0;
-  position: absolute;
-  right: 13px;
-  top: 1px;
-  right: 0;
-
-  height: 27px;
-  width: 32px;
-  text-decoration: none;
-  display: block;
-}
-
 .select-box-icon .ico {
   margin-top: 5px;
   margin-left: 5px;
 }
 
+input.xlarge,
 .input-text,
-input[type="text"],
 .input-password,
-input[type="password"] {
-  display: inline-block;
+{
+  @extend .form-control, .form-control-sm;
   width: 208px;
-  padding: 4px 6px;
-  font-size: 13px;
-  line-height: 18px;
-  color: #555;
-  background-color: $color-white;
-  border: 1px solid $color-gray-soft;
-  @include rounded-corners(3px);
-  @include box-shadow;
-  vertical-align: top;
 }
 
 input.input-small {
-  width: 50px;
+  @extend .form-control, .form-control-sm;
+  width: 70px;
 }
 
 input.input-medium {
-  width: 70px;
+  @extend .form-control, .form-control-sm;
+  width: 90px;
 }
 
 div.input-medium .select-box-trigger {
@@ -369,7 +317,8 @@ div.input-medium .select-box-trigger {
 }
 
 input.input-large {
-  width: 280px;
+  @extend .form-control, .form-control-sm;
+  width: 320px;
 }
 
 input.input-actions {
@@ -378,16 +327,6 @@ input.input-actions {
 
 button {
   @extend button;
-}
-
-input.input-has-select {
-  @include box-shadow(none);
-  @include rounded-corners(0px 3px 3px 0);
-  background-color: $color-gray-light;
-  border-left: 0;
-  margin-right: 5px;
-  margin-left: -5px;
-  *margin-top: -1px;
 }
 
 .btn-mini {

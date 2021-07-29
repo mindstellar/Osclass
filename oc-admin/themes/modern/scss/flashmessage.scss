@@ -1,30 +1,37 @@
-.flashmessage{
-    @extend .alert;
-    @extend .shadow-sm;
+.flashmessage {
+  @extend .alert;
+  @extend .shadow-sm;
 }
-.flashmessage-info{
-    @extend .alert-info;
+
+.flashmessage-info {
+  @extend .alert-info;
 }
+
 .flashmessage-error,
-.flashmessage-error td{
-    @extend .alert-danger;
+.flashmessage-error td {
+  @extend .alert-danger;
 }
-.flashmessage-ok{
-    @extend .alert-success;
+
+.flashmessage-ok {
+  @extend .alert-success;
 }
-.flashmessage-warning{
-    @extend .alert-warning;
+
+.flashmessage-warning {
+  @extend .alert-warning;
 }
-.flashmessage-inline{
-    display: inline-block;
-    padding: 0 10px;
-    min-height: 0;
-    @include rounded-corners;
+
+.flashmessage-inline {
+  display: inline-block;
+  padding: 0 10px;
+  min-height: 0;
+  @include rounded-corners;
 }
-.flashmessage-inline p{
-    margin:5px 0;
+
+.flashmessage-inline p {
+  margin: 5px 0;
 }
-#error_list{
+
+#error_list {
   padding: 15px;
   display: none;
   background: $error-bg;
@@ -33,29 +40,35 @@
   @include rounded-corners;
 
 }
-#content-page .flashmessage{
+
+#content-page {
+  .flashmessage {
     /*padding:15px;
     min-height:0;
     margin-bottom:15px;*/
     @include rounded-corners;
-}
+    /*
+    > p:first-child{
+      margin-top:0;
+    }
+    > p:last-child{
+      margin-bottom:0;
+    }*/
+  }
 
-/*
-#content-page .flashmessage > p:first-child{
-    margin-top:0;
-}
-#content-page .flashmessage > p:last-child{
-    margin-bottom:0;
-}*/
-#content-page .flashmessage-info{
-    border-top:solid 1px $info-border;
-}
-#content-page .flashmessage-error{
-    border-top:solid 1px $error-border;
-}
-#content-page .flashmessage-ok{
-    border-top:solid 1px $success-border;
-}
-#content-page .flashmessage-warning{
-    border-top:solid 1px $warning-border;
+  .flashmessage-info {
+    border-top: solid 1px $info-border;
+  }
+
+  .flashmessage-error {
+    border-top: solid 1px $error-border;
+  }
+
+  .flashmessage-ok {
+    border-top: solid 1px $success-border;
+  }
+
+  .flashmessage-warning {
+    border-top: solid 1px $warning-border;
+  }
 }

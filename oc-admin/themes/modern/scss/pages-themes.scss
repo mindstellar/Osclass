@@ -1,39 +1,44 @@
-#market-quick-search{
-    position:absolute;
-    right:30px;
-    top:30px;
-}
-.current-theme{
-    padding-top:20px;
-}
-.current-theme .theme{
-    float: none;
-    width: auto;
-    margin-right: 0;
-    height: auto !important;
-}
-.current-theme .theme img{
-    float:left;
+#market-quick-search {
+  position: absolute;
+  right: 30px;
+  top: 30px;
 }
 
-.theme{
-    margin-bottom:40px;
-    background-color:$color-gray-light;
-    padding:10px;
+.current-theme {
+  padding-top: 20px;
+}
 
-    @include rounded-corners;
-    float:left;
-    width:250px;
-    margin-right:20px;
-    font-size:12px;
+.current-theme .theme {
+  float: none;
+  width: auto;
+  margin-right: 0;
+  height: auto !important;
 }
-.theme img{
-    width:250px;
-    margin-right:20px;
-    border:solid 1px $color-gray-soft;
-    @include rounded-corners;
+
+.current-theme .theme img {
+  float: left;
 }
-.theme .theme-actions{
+
+.theme {
+  margin-bottom: 40px;
+  background-color: $color-gray-light;
+  padding: 10px;
+
+  @include rounded-corners;
+  float: left;
+  width: 250px;
+  margin-right: 20px;
+  font-size: 12px;
+}
+
+.theme img {
+  width: 250px;
+  margin-right: 20px;
+  border: solid 1px $color-gray-soft;
+  @include rounded-corners;
+}
+
+.theme .theme-actions {
   position: absolute;
   bottom: 4px;
   left: 1px;
@@ -43,38 +48,47 @@
   background-color: rgba(243, 243, 243, 0.9);
   *background-color: rgb(243, 243, 243);
 }
-.theme .theme-actions .btn{
-    padding-left:6px;
-    padding-right:6px;
-    margin-bottom:5px;
+
+.theme .theme-actions .btn {
+  padding-left: 6px;
+  padding-right: 6px;
+  margin-bottom: 5px;
 }
-.theme-actions a.delete{
-    color:$color-gray-dim;
+
+.theme-actions a.delete {
+  color: $color-gray-dim;
 }
+
 .theme .theme-info,
-.theme .theme-info h3{
-    font-weight:normal;
+.theme .theme-info h3 {
+  font-weight: normal;
 }
-.theme-stage{
-    position:relative;
+
+.theme-stage {
+  position: relative;
 }
-.appearance .theme{
-    height:285px;
+
+.appearance .theme {
+  height: 285px;
 }
-.appearance .theme img{
-    width:250px;
-    height:187px;
+
+.appearance .theme img {
+  width: 250px;
+  height: 187px;
 }
-tr.plugin td{
-    padding:10px;
+
+tr.plugin td {
+  padding: 10px;
 }
+
 tr.plugin h3,
-tr.plugin h3{
-    font-weight: bold;
-    color:$color-gray-hardblack;
-    margin:0;
+tr.plugin h3 {
+  font-weight: bold;
+  color: $color-gray-hardblack;
+  margin: 0;
 }
-.plugin-actions{
-    padding-top:10px;
+
+.plugin-actions {
+  padding-top: 10px;
 }
 
