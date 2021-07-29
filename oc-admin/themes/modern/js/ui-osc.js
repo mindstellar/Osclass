@@ -60,10 +60,6 @@ $(function () {
         $(this).parent().addClass('hover');
         return false;
     });
-    //Selects
-    $('select').each(function () {
-        selectUi($(this));
-    });
     //Set Layout
     $(window).resize(function () {
         resetLayout();
