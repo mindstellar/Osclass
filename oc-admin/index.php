@@ -52,10 +52,8 @@ osc_add_hook('admin_footer', array('FieldForm', 'i18n_datePicker'));
 osc_register_style('jquery-ui', osc_assets_url('jquery-ui/jquery-ui.min.css'));
 osc_register_style('admin-css', osc_current_admin_theme_styles_url('main.css'));
 osc_register_style('bootstrap-icons', osc_assets_url('bootstrap-icons/bootstrap-icons.css'));
-osc_register_style('bootstrap5', osc_assets_url('bootstrap/bootstrap.min.css'));
 
 // enqueue css styles
-osc_enqueue_style('bootstrap5');
 osc_enqueue_style('admin-css');
 osc_enqueue_style('jquery-ui');
 osc_enqueue_style('bootstrap-icons');
