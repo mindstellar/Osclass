@@ -152,7 +152,7 @@ function printLocaleTitle($locales = null, $item = null)
     }
     $num_locales = count($locales);
     foreach ($locales as $locale) {
-        echo '<div class="input-has-placeholder input-title-wide"><label for="title">' . __('Enter title here')
+        echo '<div class="input-title-wide"><label for="title">' . __('Enter title here')
              . ' *</label>';
         $title = (isset($item) && isset($item['locale'][$locale['pk_c_code']])
                   && isset($item['locale'][$locale['pk_c_code']]['s_title']))
@@ -166,11 +166,12 @@ function printLocaleTitle($locales = null, $item = null)
         $title = osc_apply_filter('admin_item_title', $title, $item, $locale);
 
         $name = 'title' . '[' . $locale['pk_c_code'] . ']';
-        echo '<input id="' . $name . '" type="text" name="' . $name . '" value="' . osc_esc_html(htmlentities(
-                                                                                                     $title,
-                                                                                                     ENT_COMPAT,
-                                                                                                     'UTF-8'
-                                                                                                 )) . '"  />';
+        echo '<input id="' . $name . '" class="form-control form-control-sm" type="text" name="' . $name . '" value="' . osc_esc_html
+            (htmlentities(
+                 $title,
+                 ENT_COMPAT,
+                 'UTF-8'
+             )) . '"  />';
         echo '</div>';
     }
 }

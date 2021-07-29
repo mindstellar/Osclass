@@ -314,7 +314,7 @@ class ItemForm extends Form
             $categories = Category::newInstance()->listEnabled();
         }
 
-        parent::generic_input_hidden('catId', $categoryID);
+        self::generic_input_hidden('catId', $categoryID);
 
         ?>
         <div id="select_holder"></div>
@@ -382,14 +382,15 @@ class ItemForm extends Form
                 tmp_categories = window['categories_' + categoryID];
                 if (tmp_categories != null && $.isArray(tmp_categories)) {
                     $("#select_holder").before(
-                        '<select id="select_' + select + '" name="select_' + select + '" depth="' + select + '"></select>'
+                        '<select id="select_' + select + '" class="form-select form-select-sm" name="select_' + select + '" ' +
+                        'depth="' + select +
+                        '"></select>'
                     );
 
-                    if (categoryID == 0) {
-                        var options = '<option value="' + categoryID + '" >' + osc.langs.select_category + '</option>';
-                    } else {
-                        var options = '<option value="' + categoryID + '" >' + osc.langs.select_subcategory + '</option>';
-                    }
+                    var options = '<option value="' + categoryID + '" >'
+                        + (categoryID == 0 ? osc.langs.select_category : osc.langs.select_category)
+                        + '</option>';
+
                     $.each(tmp_categories, function (index, value) {
                         options +=
                             '<option value="' + value[0] + '" ' +

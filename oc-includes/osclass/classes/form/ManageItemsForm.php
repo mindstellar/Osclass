@@ -59,7 +59,7 @@ class ManageItemsForm extends Form
             }
         }
 
-        echo '<select name="catId" id="catId">';
+        echo '<select class="form-select-sm form-select" name="catId" id="catId">';
         if (isset($default_item)) {
             echo '<option value="">' . $default_item . '</option>';
         } else {
