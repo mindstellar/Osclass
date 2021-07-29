@@ -353,9 +353,7 @@ osc_current_admin_theme_path('parts/header.php'); ?>
         theme_advanced_toolbar_align: 'left',
         theme_advanced_toolbar_location: 'top',
         theme_advanced_buttons1_add: 'forecolorpicker,fontsizeselect',
-        theme_advanced_buttons2_add: 'media',
-        plugins: 'advlist autolink lists link image charmap preview anchor searchreplace ' +
-            'visualblocks code fullscreen insertdatetime media table paste'
+        plugins:'advlist anchor autolink charmap code fullscreen insertdatetime link lists paste preview searchreplace table',
     });
 </script>
 <?php osc_current_admin_theme_path('parts/footer.php'); ?>

@@ -98,14 +98,12 @@ function customHead()
             theme_advanced_toolbar_align: "left",
             theme_advanced_toolbar_location: "top",
             plugins: [
-                "advlist autolink lists link image charmap preview anchor",
+                "advlist autolink lists link charmap preview anchor",
                 "searchreplace visualblocks code fullscreen",
-                "insertdatetime media table paste"
+                "insertdatetime table paste"
             ],
             entity_encoding: "raw",
             theme_advanced_buttons1_add: "forecolorpicker,fontsizeselect",
-            theme_advanced_buttons2_add: "media",
-            theme_advanced_buttons3: "",
             theme_advanced_disable: "styleselect,anchor",
             relative_urls: false,
             remove_script_host: false,
