@@ -44,7 +44,7 @@ function customPageHeader()
     ?>
     <h1><?php _e('Manage Media'); ?>
         <a href="<?php echo osc_admin_base_url(true) . '?page=settings&action=media'; ?>"
-           class="btn ico ico-32 ico-engine float-right"></a>
+           class="ms-1 text-dark float-end" title="<?php _e('Settings'); ?>"><i class="bi bi-gear-fill"></i></a>
         <a href="#" class="ms-1 bi bi-question-circle-fill float-right" data-bs-target="#help-box" data-bs-toggle="collapse"
            href="#help-box"></a>
     </h1>
@@ -151,15 +151,15 @@ $rows    = $aData['aRows'];
             <input type="hidden" name="page" value="media"/>
             <input type="hidden" name="action" value="bulk_actions"/>
             <div id="bulk-actions">
-                <label>
+                <div class="input-group input-group-sm">
                     <?php osc_print_bulk_actions(
                         'bulk_actions',
                         'bulk_actions',
                         __get('bulk_options'),
                         'select-box-extra'
                     ); ?>
-                    <input type="submit" id="bulk_apply" class="btn" value="<?php echo osc_esc_html(__('Apply')); ?>"/>
-                </label>
+                    <input type="submit" id="bulk_apply" class="btn btn-primary" value="<?php echo osc_esc_html(__('Apply')); ?>"/>
+                </div>
             </div>
             <table class="table" cellpadding="0" cellspacing="0">
                 <thead>
@@ -228,7 +228,7 @@ osc_show_pagination_admin($aData);
             </div>
             <div class="form-actions">
                 <div class="wrapper">
-                    <a class="btn" href="javascript:void(0);"
+                    <a class="btn btn-dim" href="javascript:void(0);"
                        onclick="$('#dialog-media-delete').dialog('close');"><?php _e('Cancel'); ?></a>
                     <input id="media-delete-submit" type="submit" value="<?php echo osc_esc_html(__('Delete')); ?>"
                            class="btn btn-red"/>
@@ -241,7 +241,7 @@ osc_show_pagination_admin($aData);
             <div class="form-row"></div>
             <div class="form-actions">
                 <div class="wrapper">
-                    <a id="bulk-actions-cancel" class="btn" href="javascript:void(0);"><?php _e('Cancel'); ?></a>
+                    <a id="bulk-actions-cancel" class="btn btn-dim" href="javascript:void(0);"><?php _e('Cancel'); ?></a>
                     <a id="bulk-actions-submit" href="javascript:void(0);"
                        class="btn btn-red"><?php echo osc_esc_html(__('Delete')); ?></a>
                     <div class="clear"></div>

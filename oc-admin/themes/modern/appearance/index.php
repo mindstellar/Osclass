@@ -110,7 +110,7 @@ osc_current_admin_theme_path('parts/header.php'); ?>
             <div id="available-themes">
                 <h2 class="render-title"><?php _e('Current theme'); ?> <a
                             href="<?php echo osc_admin_base_url(true); ?>?page=appearance&amp;action=add"
-                            class="btn btn-mini"><?php _e('Add new'); ?></a></h2>
+                            class="btn btn-sm btn-success"><?php _e('Add new'); ?></a></h2>
                 <div class="current-theme">
                     <div class="theme">
                         <img
@@ -161,7 +161,7 @@ osc_current_admin_theme_path('parts/header.php'); ?>
                                        href="<?php echo osc_admin_base_url(true);
                                        ?>?page=appearance&amp;action=delete&amp;webtheme=<?php
                                        echo $theme; ?>&amp;<?php echo $csrf_token; ?>"
-                                       class="btn btn-mini float-right delete"><?php _e('Delete'); ?></a>
+                                       class="btn btn-sm btn-success float-right delete"><?php _e('Delete'); ?></a>
                                     <?php
                                     if ($bThemesToUpdate && in_array($theme, $aThemesToUpdate)) { ?>
                                         <a href='#<?php echo htmlentities(@$info['theme_update_uri']); ?>'
@@ -199,7 +199,7 @@ osc_current_admin_theme_path('parts/header.php'); ?>
         </div>
         <div class="form-actions">
             <div class="wrapper">
-                <a class="btn" href="javascript:void(0);"
+                <a class="btn btn-dim" href="javascript:void(0);"
                    onclick="$('#dialog-delete-theme').dialog('close');"><?php _e('Cancel'); ?></a>
                 <input id="delete-theme-submit" type="submit" value="<?php echo osc_esc_html(__('Uninstall')); ?>"
                        class="btn btn-red"/>

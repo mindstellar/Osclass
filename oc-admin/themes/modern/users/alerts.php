@@ -177,8 +177,8 @@ $rows    = $aData['aRows'];
             <input type="hidden" name="status" id="status" value="0"/>
 
             <div id="bulk-actions">
-                <label>
-                    <select name="alert_action" id="bulk_actions" class="select-box-extra">
+                <div class="input-group input-group-sm">
+                    <select name="alert_action" id="bulk_actions" class="form-select select-box-extra">
                         <option value=""><?php _e('Bulk Actions'); ?></option>
                         <option value="activate"
                                 data-dialog-content="<?php printf(__('Are you sure you want to %s the selected alerts?'),
@@ -189,14 +189,14 @@ $rows    = $aData['aRows'];
                         <option value="delete"
                                 data-dialog-content="<?php printf(__('Are you sure you want to %s the selected alerts?'),
                                                                   strtolower(__('Delete'))); ?>"><?php _e('Delete'); ?></option>
-                    </select> <input type="submit" id="bulk_apply" class="btn"
+                    </select> <input type="submit" id="bulk_apply" class="btn btn-dim"
                                      value="<?php echo osc_esc_html(__('Apply')); ?>"/>
-                </label>
+                </div>
             </div>
-            <div class="table-contains-actions">
+            <div class="table-contains-actions shadow-sm">
                 <table class="table" cellpadding="0" cellspacing="0">
                     <thead>
-                    <tr>
+                    <tr class="table-secondary">
                         <?php foreach ($columns as $k => $v) {
                             if ($direction === 'desc') {
                                 echo '<th class="col-' . $k . ' ' . ($sort === $k ? ('sorting_desc')
@@ -259,7 +259,7 @@ osc_show_pagination_admin($aData);
             </div>
             <div class="form-actions">
                 <div class="wrapper">
-                    <a class="btn" href="javascript:void(0);"
+                    <a class="btn btn-dim" href="javascript:void(0);"
                        onclick="$('#dialog-alert-delete').dialog('close');"><?php _e('Cancel'); ?></a>
                     <input id="alert-delete-submit" type="submit" value="<?php echo osc_esc_html(__('Delete')); ?>"
                            class="btn btn-red"/>
@@ -272,7 +272,7 @@ osc_show_pagination_admin($aData);
             <div class="form-row"></div>
             <div class="form-actions">
                 <div class="wrapper">
-                    <a id="bulk-actions-cancel" class="btn" href="javascript:void(0);"><?php _e('Cancel'); ?></a>
+                    <a id="bulk-actions-cancel" class="btn btn-dim" href="javascript:void(0);"><?php _e('Cancel'); ?></a>
                     <a id="bulk-actions-submit" href="javascript:void(0);"
                        class="btn btn-red"><?php echo osc_esc_html(__('Delete')); ?></a>
                     <div class="clear"></div>

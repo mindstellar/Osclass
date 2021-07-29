@@ -142,17 +142,12 @@ function customHead()
                     $('div.update_expiration').hide();
                 }
             });
-
-            $('body').on("created", '[name^="select_"]', function (evt) {
-                selectUi($(this));
-            });
-
         });
     </script>
     <?php ItemForm::location_javascript_new('admin'); ?>
     <?php if (osc_images_enabled_at_items()) {
-        ItemForm::photos_javascript();
-    } ?>
+    ItemForm::photos_javascript();
+} ?>
     <?php
 }
 
@@ -212,7 +207,7 @@ osc_current_admin_theme_path('parts/header.php'); ?>
                     <div id="left-side">
                         <?php printLocaleTitle(osc_get_locales()); ?>
                         <div class="category">
-                            <label><?php _e('Category'); ?></label>
+                            <label><?php _e('Category'); ?> *</label>
                             <?php ItemForm::category_multiple_selects(); ?>
                         </div>
                         <div class="input-description-wide">
@@ -240,7 +235,10 @@ osc_current_admin_theme_path('parts/header.php'); ?>
                                         </div>
                                     <?php } ?>
                                 </div>
-                                <p><a href="#" onclick="addNewPhoto(); return false;"><?php _e('Add new photo'); ?></a>
+                                <p>
+                                    <a href="#" title="<?php _e('Add new photo'); ?>" onclick="addNewPhoto(); return false;">
+                                        <i class="h4 text-success bi bi-plus-circle-fill"></i>
+                                    </a>
                                 </p>
                             </div>
                         <?php } ?>
@@ -271,7 +269,9 @@ osc_current_admin_theme_path('parts/header.php'); ?>
                                     <div class="input-has-placeholder input-separate-top">
                                         <label><?php _e('Ip Address'); ?></label>
                                         <input id="ipAddress" type="text" name="ipAddress"
-                                               value="<?php echo osc_item_ip(); ?>" class="valid" readonly="readonly">
+                                               value="<?php echo osc_item_ip(); ?>"
+                                               class="form-control form-control-sm valid"
+                                               readonly="readonly">
                                     </div>
                                 <?php } ?>
                                 <div class="input-separate-top">
@@ -337,7 +337,7 @@ osc_current_admin_theme_path('parts/header.php'); ?>
                     <div class="clear"></div>
                     <div class="form-actions">
                         <?php if (!$new_item) { ?>
-                            <a href="javascript:history.go(-1)" class="btn"><?php _e('Cancel'); ?></a>
+                            <a href="javascript:history.go(-1)" class="btn btn-dim"><?php _e('Cancel'); ?></a>
                         <?php } ?>
                         <input type="submit" value="<?php echo osc_esc_html(customText('button')); ?>"
                                class="btn btn-submit"/>

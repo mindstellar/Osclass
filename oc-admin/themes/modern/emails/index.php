@@ -70,10 +70,10 @@ $aData = __get('aEmails');
 
 osc_current_admin_theme_path('parts/header.php'); ?>
     <h2 class="render-title"><?php _e('Emails templates'); ?></h2>
-    <div class="table-contains-actions">
+    <div class="table-contains-actions shadow-sm">
         <table class="table" cellpadding="0" cellspacing="0">
             <thead>
-            <tr>
+            <tr class="table-secondary">
                 <th class="col-name"><?php _e('Name'); ?></th>
                 <th class="col-title"><?php _e('Title'); ?></th>
             </tr>

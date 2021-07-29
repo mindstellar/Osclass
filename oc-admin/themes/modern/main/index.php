@@ -288,14 +288,14 @@ osc_current_admin_theme_path('parts/header.php'); ?>
                                                                    $numItems); ?></div>
                             <div id="placeholder-listing" class="graph-placeholder"></div>
                             <a href="<?php echo osc_admin_base_url(true); ?>?page=stats&amp;action=items"
-                               class="btn"><?php _e('Listing statistics'); ?></a>
+                               class="btn btn-dim"><?php _e('Listing statistics'); ?></a>
                         </div>
                         <div id="widget-box-stats-users" class="widget-box-stats" style="visibility: hidden;">
                             <b class="stats-title"><?php _e('New users'); ?></b>
                             <div class="stats-detail"><?php printf(__('Total number of users: %s'), $numUsers); ?></div>
                             <div id="placeholder-user" class="graph-placeholder"></div>
                             <a href="<?php echo osc_admin_base_url(true); ?>?page=stats&amp;action=users"
-                               class="btn"><?php _e('User statistics'); ?></a>
+                               class="btn btn-dim"><?php _e('User statistics'); ?></a>
                         </div>
                     </div>
                 </div>

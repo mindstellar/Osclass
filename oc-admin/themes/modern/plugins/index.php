@@ -320,7 +320,7 @@ function customPageHeader()
             </div>
             <div class="form-actions">
                 <div class="wrapper">
-                    <a class="btn" href="javascript:void(0);"
+                    <a class="btn btn-dim" href="javascript:void(0);"
                        onclick="$('#dialog-uninstall').dialog('close');"><?php _e('Cancel'); ?></a>
                     <input id="uninstall-submit" type="submit" value="<?php echo osc_esc_html(__('Uninstall')); ?>"
                            class="btn btn-red"/>

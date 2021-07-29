@@ -57,15 +57,25 @@ class FormInputs implements InputInterface
      */
     private $sanitize;
 
+    protected $textClass = 'form-control';
+    protected $selectClass = 'form-select';
+    protected $passwordClass = 'form-control';
+    protected $checkboxClass = 'form-check-input';
+    protected $radioClass = 'form-check-input';
+    protected $radioContainerClass = 'form-check';
+    protected $checkboxContainerClass = 'form-check';
+    protected $textareaClass = 'form-control';
+    protected $submitClass = 'btn btn-primary';
+    protected $fileClass = 'form-control';
+    protected $labelClass = 'form-label';
     /**
-     * Default common attributes
+     * Sanitize method available in /mindstellar/utility/Sanitize class
      *
-     * @var array
+     * @var string
      */
-    protected $attributes = [
-        'class' => 'form-control', // default input css class
-        'type'  => 'text', // default input type
-    ];
+    //protected $sanitizeType = 'string';
+    //protected $escapeHtml = true;
+    //protected $divClass;
     /**
      * Default common options
      *
@@ -108,9 +118,11 @@ class FormInputs implements InputInterface
      * @throws \Exception
      */
     public function text(string $name, $value, array $attributes = [], array $options = [])
-    : string
-    {
+    : string {
         $attributes['type'] = 'text';
+        if (!isset($attributes['class'])) {
+            $attributes['class'] = $this->textClass;
+        }
 
         return $this->generateInput($name, $value, $attributes, $options);
     }
@@ -135,17 +147,16 @@ class FormInputs implements InputInterface
      * @throws \Exception
      */
     private function generateInput(string $name, $values = null, array $attributes = [], array $options = [])
-    : string
-    {
+    : string {
         if (!isset($name)) {
             throw new Exception('Input Name is not set');
         }
-        $this->handleOptions($options, $attributes);
+        $this->handleOptions($options);
 
         // $attributes to String
         $attributesString = $this->attributesToString($attributes);
 
-        $input = isset($options['divClass']) ? '<div class="' . $options['divClass'] . '">' : '';
+        $input             = isset($options['divClass']) ? '<div class="' . $options['divClass'] . '">' : '';
         //Add label if $options['label'] is set
         if (isset($options['label'])) {
             $input .= $this->label($options['label'], $name);
@@ -175,7 +186,8 @@ class FormInputs implements InputInterface
                     $i++;
                     $input .= sprintf('<div%s>', $attributesString);
                     $input .= sprintf(
-                        '<input class="form-check-input" type="%s" name="%s" id="%s" value="%s"%s>',
+                        '<input class="%s" type="%s" name="%s" id="%s" value="%s"%s>',
+                        $attributes['type'] === 'radio' ? $this->radioClass : $this->checkboxClass,
                         $attributes['type'],
                         $name,
                         $name . $i,
@@ -190,19 +202,17 @@ class FormInputs implements InputInterface
                         }
                         $input .= $this->label($l, $name . $i, 'form-check-label');
                     }
-                    //Add label if $label is set or use $name as $label
                     $input .= '</div>';
                 }
                 break;
             // Generate input with type=select
             case 'select':
-
                 $input .= sprintf('<select name="%s"%s>', $name, $attributesString);
 
                 // Add selectPlaceholder option or create a new placeholder if not set
-                if (isset($options['selectPlaceholder'])) {
+                if (isset($options['selectPlaceholder']) && $options['selectPlaceholder']) {
                     $input .= sprintf('<option value="">%s</option>', $options['selectPlaceholder']);
-                } else {
+                } elseif ($options['selectPlaceholder'] !== false) {
                     $input .= sprintf('<option value="">%s</option>', 'Select Option');
                 }
                 // if value is a string, Convert csv options to array and set value as label, make it a clousure
@@ -224,7 +234,7 @@ class FormInputs implements InputInterface
                 break;
             // Generate input with type=textarea
             case 'textarea':
-                $input .= sprintf('<textarea name="%s"%s>%s</textarea>',$name, $attributesString, $values);
+                $input .= sprintf('<textarea name="%s"%s>%s</textarea>', $name, $attributesString, $values);
                 break;
             // Generate input with type=file
             case 'file':
@@ -236,7 +246,7 @@ class FormInputs implements InputInterface
                 break;
             // Generate default input
             default:
-                $input .= sprintf('<input name="%s" %s value="%s">',$name, $attributesString, $values);
+                $input .= sprintf('<input name="%s" %s value="%s">', $name, $attributesString, $values);
                 break;
         }
         if (isset($options['customHtml'])) {
@@ -256,11 +266,10 @@ class FormInputs implements InputInterface
      * @param array $attributes
      *
      */
-    private function handleOptions(array &$options, array &$attributes)
+    private function handleOptions(array &$options)
     {
-        // default input attributes array
-        $attributes = array_merge($this->attributes, $attributes);
-        $options    = array_merge($this->options, $options);
+        // Overwrite default options with given options
+        $options = array_merge($this->options, $options);
     }
 
     /**
@@ -271,8 +280,7 @@ class FormInputs implements InputInterface
      * @return string
      */
     private function attributesToString(array $attributes)
-    : string
-    {
+    : string {
         $attributesString = '';
         foreach ($attributes as $key => $value) {
             // escape html special chars if escapeHtml is true
@@ -294,9 +302,12 @@ class FormInputs implements InputInterface
      *
      * @return string
      */
-    private function label(string $label, string $for, string $class = 'form-label')
-    : string
-    {
+    private function label(string $label, string $for, string $class = null)
+    : string {
+        if ($class === null) {
+            $class = $this->labelClass;
+        }
+
         return '<label class="' . $class . '" for="' . $for . '">' . $this->escape::html($label) . '</label>';
     }
 
@@ -336,8 +347,7 @@ class FormInputs implements InputInterface
      * @return string
      */
     private function addHtml(string $htmlContent)
-    : string
-    {
+    : string {
         return $this->escape::html($htmlContent);
     }
 
@@ -353,10 +363,12 @@ class FormInputs implements InputInterface
      * @throws \Exception
      */
     public function textarea(string $name, $value, array $attributes = [], array $options = [])
-    : string
-    {
+    : string {
         $attributes['type'] = 'textarea';
 
+        if (isset($attributes['class'])) {
+            $attributes['class'] = $this->textareaClass;
+        }
         if (!isset($options['sanitize'])) {
             $options['sanitize'] = 'html';
         }
@@ -382,12 +394,11 @@ class FormInputs implements InputInterface
      * @throws \Exception
      */
     public function checkbox(string $name, $value, array $attributes = [], array $options = [])
-    : string
-    {
+    : string {
         $attributes['type'] = 'checkbox';
         // add css class if not set
         if (!isset($attributes['class'])) {
-            $attributes['class'] = 'form-check';
+            $attributes['class'] = $this->checkboxContainerClass;
         }
 
         return $this->generateInput($name, $value, $attributes, $options);
@@ -406,12 +417,11 @@ class FormInputs implements InputInterface
      * @throws \Exception
      */
     public function select(string $name, $values, array $attributes = [], array $options = [])
-    : string
-    {
+    : string {
         $attributes['type'] = 'select';
         // add class if not set
         if (!isset($attributes['class'])) {
-            $attributes['class'] = 'form-select';
+            $attributes['class'] = $this->selectClass;
         }
 
         return $this->generateInput($name, $values, $attributes, $options);
@@ -429,9 +439,12 @@ class FormInputs implements InputInterface
      * @throws \Exception
      */
     public function password(string $name, string $value, array $attributes = [], array $options = [])
-    : string
-    {
+    : string {
         $attributes['type'] = 'password';
+        // add class if not set
+        if (!isset($attributes['class'])) {
+            $attributes['class'] = $this->passwordClass;
+        }
 
         return $this->generateInput($name, $value, $attributes, $options);
     }
@@ -448,12 +461,11 @@ class FormInputs implements InputInterface
      * @throws \Exception
      */
     public function radio(string $name, $values, array $attributes = [], array $options = [])
-    : string
-    {
+    : string {
         $attributes['type'] = 'radio';
         // add css class if not set
         if (!isset($options['class'])) {
-            $attributes['class'] = 'form-check';
+            $attributes['class'] = $this->radioContainerClass;
         }
 
         return $this->generateInput($name, $values, $attributes, $options);
@@ -471,8 +483,7 @@ class FormInputs implements InputInterface
      * @throws \Exception
      */
     public function hidden(string $name, $value, array $attributes = [], array $options = [])
-    : string
-    {
+    : string {
         $attributes['type'] = 'hidden';
 
         return $this->generateInput($name, $value, $attributes, $options);
@@ -489,12 +500,11 @@ class FormInputs implements InputInterface
      * @throws \Exception
      */
     public function submit(string $name, array $attributes = [], array $options = [])
-    : string
-    {
+    : string {
         $attributes['type'] = 'submit';
         // add css class if not set
         if (!isset($attributes['class'])) {
-            $attributes['class'] = 'btn btn-primary';
+            $attributes['class'] = $this->submitClass;
         }
 
         return $this->generateInput($name, $name, $attributes, $options);
@@ -511,10 +521,11 @@ class FormInputs implements InputInterface
      * @throws \Exception
      */
     public function file(string $name, array $attributes = [], array $options = [])
-    : string
-    {
+    : string {
         $attributes['type'] = 'file';
-
+        if (!isset($attributes['class'])) {
+            $attributes['class'] = $this->fileClass;
+        }
         $options['escapeHTML'] = false;
         $options['sanitize']   = null;
 

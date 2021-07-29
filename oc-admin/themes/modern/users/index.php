@@ -44,7 +44,7 @@ function customPageHeader()
     ?>
     <h1><?php _e('Users'); ?>
         <a href="<?php echo osc_admin_base_url(true) . '?page=users&action=settings'; ?>"
-           class="btn ico ico-32 ico-engine float-right"></a>
+           class="ms-1 text-dark float-end" title="<?php _e('Settings'); ?>"><i class="bi bi-gear-fill"></i></a>
         <a class="ms-1 bi bi-question-circle-fill float-right" data-bs-target="#help-box" data-bs-toggle="collapse" href="#help-box"></a>
         <a href="<?php echo osc_admin_base_url(true) . '?page=users&action=create'; ?>"
            class="ms-1 text-success float-end" data-bs-toggle="tooltip" data-bs-placement="bottom" title="<?php _e('Add'); ?>"><i
@@ -292,14 +292,14 @@ $withFilters = __get('withFilters');
             <div class="wrapper">
                 <input id="show-filters" type="submit" value="<?php echo osc_esc_html(__('Apply filters')); ?>"
                        class="btn btn-submit"/>
-                <a class="btn"
+                <a class="btn btn-dim"
                    href="<?php echo osc_admin_base_url(true) . '?page=users'; ?>"><?php _e('Reset filters'); ?></a>
             </div>
         </div>
     </form>
     <h2 class="render-title"><?php _e('Manage users'); ?> <a
                 href="<?php echo osc_admin_base_url(true) . '?page=users&action=create'; ?>"
-                class="btn btn-mini"><?php _e('Add new'); ?></a></h2>
+                class="btn btn-sm btn-success"><?php _e('Add new'); ?></a></h2>
     <div class="relative">
         <div id="users-toolbar" class="table-toolbar">
             <div class="float-right">
@@ -329,7 +329,7 @@ $withFilters = __get('withFilters');
                     <input type="hidden" name="page" value="users"/>
                     <?php if ($withFilters) { ?>
                         <a id="btn-hide-filters" href="<?php echo osc_admin_base_url(true) . '?page=users'; ?>"
-                           class="btn"><?php _e('Reset filters'); ?></a>
+                           class="btn btn-dim"><?php _e('Reset filters'); ?></a>
                     <?php } ?>
                     <a id="btn-display-filters" href="#" class="btn <?php if ($withFilters) {
                         echo 'btn-red';
@@ -346,16 +346,16 @@ $withFilters = __get('withFilters');
             <input type="hidden" name="page" value="users"/>
 
             <div id="bulk-actions">
-                <label>
+                <div class="input-group input-group-sm">
                     <?php osc_print_bulk_actions('bulk_actions', 'action', __get('bulk_options'),
                                                  'select-box-extra'); ?>
-                    <input type="submit" id="bulk_apply" class="btn" value="<?php echo osc_esc_html(__('Apply')); ?>"/>
-                </label>
+                    <input type="submit" id="bulk_apply" class="btn btn-primary" value="<?php echo osc_esc_html(__('Apply')); ?>"/>
+                </div>
             </div>
-            <div class="table-contains-actions">
+            <div class="table-contains-actions shadow-sm">
                 <table class="table" cellpadding="0" cellspacing="0">
                     <thead>
-                    <tr>
+                    <tr class="table-secondary">
                         <?php foreach ($columns as $k => $v) {
                             if ($direction === 'desc') {
                                 echo '<th class="col-' . $k . ' ' . ($sort == $k ? ('sorting_desc') : '') . '">' . $v . '</th>';
@@ -415,7 +415,7 @@ osc_show_pagination_admin($aData);
             </div>
             <div class="form-actions">
                 <div class="wrapper">
-                    <a class="btn" href="javascript:void(0);"
+                    <a class="btn btn-dim" href="javascript:void(0);"
                        onclick="$('#dialog-user-delete').dialog('close');"><?php _e('Cancel'); ?></a>
                     <input id="user-delete-submit" type="submit" value="<?php echo osc_esc_html(__('Delete')); ?>"
                            class="btn btn-red"/>
@@ -428,7 +428,7 @@ osc_show_pagination_admin($aData);
             <div class="form-row"></div>
             <div class="form-actions">
                 <div class="wrapper">
-                    <a id="bulk-actions-cancel" class="btn" href="javascript:void(0);"><?php _e('Cancel'); ?></a>
+                    <a id="bulk-actions-cancel" class="btn btn-dim" href="javascript:void(0);"><?php _e('Cancel'); ?></a>
                     <a id="bulk-actions-submit" href="javascript:void(0);"
                        class="btn btn-red"><?php echo osc_esc_html(__('Delete')); ?></a>
                     <div class="clear"></div>

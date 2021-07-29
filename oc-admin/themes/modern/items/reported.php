@@ -149,26 +149,26 @@ osc_current_admin_theme_path('parts/header.php'); ?>
             <div class="float-right">
                 <form method="get" action="<?php echo osc_admin_base_url(true); ?>" class="inline">
                     <?php foreach (Params::getParamsAsArray('get') as $key => $value) { ?>
-                        <?php if ($key != 'iDisplayLength') { ?>
+                        <?php if ($key !== 'iDisplayLength') { ?>
                             <input type="hidden" name="<?php echo osc_esc_html($key); ?>"
                                    value="<?php echo osc_esc_html($value); ?>"/>
                         <?php }
                     } ?>
-                    <select name="iDisplayLength" class="select-box-extra select-box-medium float-left"
+                    <select name="iDisplayLength" class="form-select form-select-sm "
                             onchange="this.form.submit();">
                         <option value="10"><?php printf(__('%d Listings'), 10); ?></option>
                         <option value="25" <?php if (Params::getParam('iDisplayLength') == 25) {
                             echo 'selected';
-                                           } ?> ><?php printf(__('%d Listings'), 25); ?></option>
+                        } ?> ><?php printf(__('%d Listings'), 25); ?></option>
                         <option value="50" <?php if (Params::getParam('iDisplayLength') == 50) {
                             echo 'selected';
-                                           } ?> ><?php printf(__('%d Listings'), 50); ?></option>
+                        } ?> ><?php printf(__('%d Listings'), 50); ?></option>
                         <option value="100" <?php if (Params::getParam('iDisplayLength') == 100) {
                             echo 'selected';
-                                            } ?> ><?php printf(__('%d Listings'), 100); ?></option>
+                        } ?> ><?php printf(__('%d Listings'), 100); ?></option>
                     </select>
                 </form>
-                <?php if ($sort != 'date') { ?>
+                <?php if ($sort !== 'date') { ?>
                     <a id="btn-reset-filters" class="btn btn-red"
                        href="<?php echo osc_admin_base_url(true); ?>?page=items&action=items_reported"><?php _e('Reset filters'); ?></a>
                 <?php } ?>
@@ -178,8 +178,8 @@ osc_current_admin_theme_path('parts/header.php'); ?>
             <input type="hidden" name="page" value="items"/>
             <input type="hidden" name="action" value="bulk_actions"/>
             <div id="bulk-actions">
-                <label>
-                    <select id="bulk_actions" name="bulk_actions" class="select-box-extra">
+                <div class="input-group input-group-sm">
+                    <select id="bulk_actions" name="bulk_actions" class="select-box-extra form-select">
                         <option value=""><?php _e('Bulk actions'); ?></option>
                         <option value="delete_all"
                                 data-dialog-content="<?php printf(__('Are you sure you want to %s the selected items?'),
@@ -196,17 +196,21 @@ osc_current_admin_theme_path('parts/header.php'); ?>
                                 data-dialog-content="<?php _e('Are you sure you want to clear the expired reportings of the selected items?'); ?>"><?php _e('Clear Expired'); ?></option>
                         <option value="clear_offe_all"
                                 data-dialog-content="<?php _e('Are you sure you want to clear the offensive reportings of the selected items?'); ?>"><?php _e('Clear Offensive'); ?></option>
-                    </select> <input type="submit" id="bulk_apply" class="btn"
-                                     value="<?php echo osc_esc_html(__('Apply')); ?>"/>
-                </label>
+                    </select>
+                    <input type="submit" id="bulk_apply" class="btn btn-primary"
+                           value="<?php echo osc_esc_html(__('Apply')); ?>"/>
+                </div>
             </div>
-            <div class="table-contains-actions">
+            <div class="table-contains-actions shadow-sm">
                 <table class="table" cellpadding="0" cellspacing="0">
                     <thead>
                     <tr>
                         <?php foreach ($columns as $k => $v) {
-                            echo '<th class="col-' . $k . ' ' . ($sort == $k ? ($direction == 'desc' ? 'sorting_desc'
-                                    : 'sorting_asc') : '') . '">' . $v . '</th>';
+                            if ($direction === 'desc') {
+                                echo '<th class="col-' . $k . ' ' . ($sort === $k ? ('sorting_desc') : '') . '">' . $v . '</th>';
+                            } else {
+                                echo '<th class="col-' . $k . ' ' . ($sort === $k ? ('sorting_asc') : '') . '">' . $v . '</th>';
+                            }
                         } ?>
                     </tr>
                     </thead>
@@ -246,7 +250,7 @@ osc_show_pagination_admin($aData);
             </div>
             <div class="form-actions">
                 <div class="wrapper">
-                    <a class="btn" href="javascript:void(0);"
+                    <a class="btn btn-dim" href="javascript:void(0);"
                        onclick="$('#dialog-item-delete').dialog('close');"><?php _e('Cancel'); ?></a>
                     <input id="item-delete-submit" type="submit" value="<?php echo osc_esc_html(__('Delete')); ?>"
                            class="btn btn-red"/>
@@ -259,7 +263,7 @@ osc_show_pagination_admin($aData);
             <div class="form-row"></div>
             <div class="form-actions">
                 <div class="wrapper">
-                    <a id="bulk-actions-cancel" class="btn" href="javascript:void(0);"><?php _e('Cancel'); ?></a>
+                    <a id="bulk-actions-cancel" class="btn btn-dim" href="javascript:void(0);"><?php _e('Cancel'); ?></a>
                     <a id="bulk-actions-submit" href="javascript:void(0);"
                        class="btn btn-red"><?php echo osc_esc_html(__('Delete')); ?></a>
                     <div class="clear"></div>

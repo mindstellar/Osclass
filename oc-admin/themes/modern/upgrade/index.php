@@ -95,7 +95,7 @@ osc_current_admin_theme_path('parts/header.php'); ?>
             <p>
                 <?php _e('You have uploaded a new version of Osclass, you need to upgrade Osclass for it to work correctly.'); ?>
             </p>
-            <a class="btn"
+            <a class="btn btn-dim"
                href="<?php echo osc_admin_base_url(true); ?>?page=upgrade&confirm=true"><?php _e('Upgrade now'); ?></a>
         </div>
     </div>

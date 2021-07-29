@@ -32,12 +32,10 @@
  */
 class FieldForm extends Form
 {
-
     public static function i18n_datePicker()
     {
-        ?>
+?>
         <script>
-
             $.datepicker.regional['custom'] = { // Default regional settings
                 closeText: '<?php echo osc_esc_js(__('Done')); ?>', // Display text for close link
                 prevText: '<?php echo osc_esc_js(__('Prev')); ?>', // Display text for previous month link
@@ -115,39 +113,33 @@ class FieldForm extends Form
     public static function primary_input_hidden($field = null)
     {
         if (isset($field['pk_i_id'])) {
-            parent::generic_input_hidden('id', $field['pk_i_id']);
+            echo (new self)->hidden('id', $field['pk_i_id']);
         }
     }
 
     /**
      * @param null $field
      *
-     * @return bool
      */
     public static function name_input_text($field = null)
     {
-        parent::generic_input_text(
-            's_name',
-            (isset($field) && isset($field['s_name'])) ? $field['s_name'] : ''
-        );
-
-        return true;
+        $name                       = 's_name';
+        $value                      = $field['s_name'] ?? '';
+        $attributes['id']           = $name;
+        $attributes['autocomplete'] = 'off';
+        echo (new self())->text($name, $value, $attributes);
     }
 
     /**
      * @param null $field
      *
-     * @return bool
      */
     public static function options_input_text($field = null)
     {
-        parent::generic_input_text(
-            's_options',
-            (isset($field) && isset($field['s_options'])) ? html_entity_decode($field['s_options'])
-                : ''
-        );
-
-        return true;
+        $name             = 's_options';
+        $value            = (isset($field['s_options'])) ? html_entity_decode($field['s_options']) : '';
+        $attributes['id'] = $name;
+        echo (new self())->text($name, $value, $attributes);
     }
 
     /**
@@ -155,11 +147,13 @@ class FieldForm extends Form
      */
     public static function required_checkbox($field = null)
     {
-        parent::generic_input_checkbox(
-            'field_required',
-            1,
-            ($field != null && isset($field['b_required']) && $field['b_required'] == 1)
-        );
+        $name                       = 'field_required';
+        $attributes['id']           = $name;
+        $options['noCheckboxLabel'] = true;
+        if (($field !== null && isset($field['b_required']) && $field['b_required'] === 1)) {
+            $attributes['checked'] = 'checked';
+        }
+        echo (new self())->checkbox($name, 1, $attributes, $options);
     }
 
     /**
@@ -167,49 +161,27 @@ class FieldForm extends Form
      */
     public static function searchable_checkbox($field = null)
     {
-        parent::generic_input_checkbox(
-            'field_searchable',
-            1,
-            ($field != null && isset($field['b_searchable']) && $field['b_searchable'] == 1)
-        );
+        $name                       = 'field_searchable';
+        $attributes['id']           = $name;
+        $options['noCheckboxLabel'] = true;
+        if ($field !== null && isset($field['b_searchable']) && $field['b_searchable'] === 1) {
+            $attributes['checked'] = 'checked';
+        }
+        echo (new self())->checkbox($name, 1, $attributes, $options);
     }
 
     /**
      * @param null $field
      *
-     * @return bool
      */
     public static function type_select($field = null)
     {
-        ?>
-        <select name="field_type" id="field_type">
-            <option value="TEXT" <?php if ($field['e_type'] === 'TEXT') {
-                echo 'selected="selected"';
-                                 } ?>><?php _e('TEXT'); ?></option>
-            <option value="TEXTAREA" <?php if ($field['e_type'] === 'TEXTAREA') {
-                echo 'selected="selected"';
-                                     } ?>><?php _e('TEXTAREA'); ?></option>
-            <option value="DROPDOWN" <?php if ($field['e_type'] === 'DROPDOWN') {
-                echo 'selected="selected"';
-                                     } ?>><?php _e('DROPDOWN'); ?></option>
-            <option value="RADIO" <?php if ($field['e_type'] === 'RADIO') {
-                echo 'selected="selected"';
-                                  } ?>><?php _e('RADIO'); ?></option>
-            <option value="CHECKBOX" <?php if ($field['e_type'] === 'CHECKBOX') {
-                echo 'selected="selected"';
-                                     } ?>><?php _e('CHECKBOX'); ?></option>
-            <option value="URL" <?php if ($field['e_type'] === 'URL') {
-                echo 'selected="selected"';
-                                } ?>><?php _e('URL'); ?></option>
-            <option value="DATE" <?php if ($field['e_type'] === 'DATE') {
-                echo 'selected="selected"';
-                                 } ?>><?php _e('DATE'); ?></option>
-            <option value="DATEINTERVAL" <?php if ($field['e_type'] === 'DATEINTERVAL') {
-                echo 'selected="selected"';
-                                         } ?>><?php _e('DATE INTERVAL'); ?></option>
-        </select>
-        <?php
-        return true;
+        $name                         = 'field_type';
+        $values                       = ['TEXT', 'TEXTAREA', 'DROPDOWN', 'RADIO', 'CHECKBOX', 'URL', 'DATE', 'DATEINTERVAL'];
+        $attributes['id']             = $name;
+        $options['defaultValue']      = $field['e_type'] ?? '';
+        $options['selectPlaceholder'] = false;
+        echo (new self())->select($name, $values, $attributes, $options);
     }
 
     /**

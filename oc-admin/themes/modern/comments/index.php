@@ -44,7 +44,7 @@ function customPageHeader()
     ?>
     <h1><?php _e('Listing'); ?>
         <a href="<?php echo osc_admin_base_url(true) . '?page=settings&action=comments'; ?>"
-           class="btn ico ico-32 ico-engine float-right"><?php _e('Settings'); ?></a>
+           class="ms-1 text-dark float-end" title="<?php _e('Settings'); ?>"><i class="bi bi-gear-fill"></i></a>
         <a href="#" class="ms-1 bi bi-question-circle-fill float-right" data-bs-target="#help-box" data-bs-toggle="collapse"
            href="#help-box"></a>
     </h1>
@@ -149,7 +149,7 @@ osc_current_admin_theme_path('parts/header.php'); ?>
 <div class="relative">
     <div id="listing-toolbar">
         <div class="float-right">
-            <?php if (Params::getParam('showAll') != 'off') { ?>
+            <?php if (Params::getParam('showAll') !== 'off') { ?>
                 <a href="<?php echo osc_admin_base_url(true) . '?page=comments&showAll=off'; ?>"
                    class="btn btn-red"><?php _e('Hidden comments'); ?></a>
             <?php } else { ?>
@@ -163,16 +163,16 @@ osc_current_admin_theme_path('parts/header.php'); ?>
         <input type="hidden" name="page" value="comments"/>
         <input type="hidden" name="action" value="bulk_actions"/>
         <div id="bulk-actions">
-            <label>
+            <div class="input-group input-group-sm">
                 <?php osc_print_bulk_actions('bulk_actions', 'bulk_actions', __get('bulk_options'),
                                              'select-box-extra'); ?>
-                <input type="submit" id="bulk_apply" class="btn" value="<?php echo osc_esc_html(__('Apply')); ?>"/>
-            </label>
+                <input type="submit" id="bulk_apply" class="btn btn-primary" value="<?php echo osc_esc_html(__('Apply')); ?>"/>
+            </div>
         </div>
-        <div class="table-contains-actions">
+        <div class="table-contains-actions shadow-sm">
             <table class="table" cellpadding="0" cellspacing="0">
                 <thead>
-                <tr>
+                <tr class="table-secondary">
                     <?php foreach ($columns as $k => $v) {
                         if ($direction === 'desc') {
                             echo '<th class="col-' . $k . ' ' . ($sort == $k ? ('sorting_desc') : '') . '">' . $v . '</th>';
@@ -233,7 +233,7 @@ osc_show_pagination_admin($aData);
         </div>
         <div class="form-actions">
             <div class="wrapper">
-                <a class="btn" href="javascript:void(0);"
+                <a class="btn btn-dim" href="javascript:void(0);"
                    onclick="$('#dialog-comment-delete').dialog('close');"><?php _e('Cancel'); ?></a>
                 <input id="comment-delete-submit" type="submit" value="<?php echo osc_esc_html(__('Delete')); ?>"
                        class="btn btn-red"/>
@@ -246,7 +246,7 @@ osc_show_pagination_admin($aData);
         <div class="form-row"></div>
         <div class="form-actions">
             <div class="wrapper">
-                <a id="bulk-actions-cancel" class="btn" href="javascript:void(0);"><?php _e('Cancel'); ?></a>
+                <a id="bulk-actions-cancel" class="btn btn-dim" href="javascript:void(0);"><?php _e('Cancel'); ?></a>
                 <a id="bulk-actions-submit" href="javascript:void(0);"
                    class="btn btn-red"><?php echo osc_esc_html(__('Delete')); ?></a>
                 <div class="clear"></div>

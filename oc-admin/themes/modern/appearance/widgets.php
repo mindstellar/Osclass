@@ -172,7 +172,7 @@ osc_current_admin_theme_path('parts/header.php'); ?>
         </div>
         <div class="form-actions">
             <div class="wrapper">
-                <a class="btn" href="javascript:void(0);"
+                <a class="btn btn-dim" href="javascript:void(0);"
                    onclick="$('#dialog-widget-delete').dialog('close');"><?php _e('Cancel'); ?></a>
                 <input id="widget-delete-submit" type="submit" value="<?php echo osc_esc_html(__('Delete')); ?>"
                        class="btn btn-red"/>

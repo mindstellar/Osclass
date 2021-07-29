@@ -450,7 +450,7 @@ $aux = customFrmText();
             </div>
             <div class="form-actions">
                 <div class="wrapper">
-                    <a class="btn" href="javascript:void(0);"
+                    <a class="btn btn-dim" href="javascript:void(0);"
                        onclick="$('#dialog-alert-delete').dialog('close');"><?php _e('Cancel'); ?></a>
                     <input id="alert-delete-submit" type="submit" value="<?php echo osc_esc_html(__('Delete')); ?>"
                            class="btn btn-red"/>

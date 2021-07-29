@@ -146,8 +146,8 @@ osc_current_admin_theme_path('parts/header.php');
 ?>
 <h2 class="render-title">
     <?php _e('Manage Languages'); ?>
-    <a id="b_add_official" href="javascript:void(0)" class="btn btn-mini"><?php _e('Add new (official)'); ?></a>
-    <a href="<?php echo osc_admin_base_url(true); ?>?page=languages&amp;action=add" class="btn btn-mini"><?php
+    <a id="b_add_official" href="javascript:void(0)" class="btn btn-sm btn-success"><?php _e('Add new (official)'); ?></a>
+    <a href="<?php echo osc_admin_base_url(true); ?>?page=languages&amp;action=add" class="btn btn-sm btn-success"><?php
         _e('Add new (.zip)'); ?></a>
 </h2>
 <div class="relative">
@@ -157,15 +157,15 @@ osc_current_admin_theme_path('parts/header.php');
     <form id="datatablesForm" action="<?php echo osc_admin_base_url(true); ?>" method="post" data-dialog-open="false">
         <input type="hidden" name="page" value="languages"/>
         <div id="bulk-actions">
-            <label>
+            <div class="input-group input-group-sm">
                 <?php osc_print_bulk_actions('bulk_actions', 'action', __get('bulk_options'), 'select-box-extra'); ?>
-                <input type="submit" id="bulk_apply" class="btn" value="<?php echo osc_esc_html(__('Apply')); ?>"/>
-            </label>
+                <input type="submit" id="bulk_apply" class="btn btn-primary" value="<?php echo osc_esc_html(__('Apply')); ?>"/>
+            </div>
         </div>
-        <div class="table-contains-actions">
+        <div class="table-contains-actions shadow-sm">
             <table class="table" cellpadding="0" cellspacing="0">
                 <thead>
-                <tr>
+                <tr class="table-secondary">
                     <th class="col-bulkactions"><input id="check_all" type="checkbox"/></th>
                     <th><?php _e('Name'); ?></th>
                     <th><?php _e('Short name'); ?></th>
@@ -213,8 +213,9 @@ osc_current_admin_theme_path('parts/header.php');
         </div>
         <div class="form-actions">
             <div class="wrapper">
-                <a class="btn" href="javascript:void(0);" onclick="$('#dialog-language-delete').dialog('close');"><?php _e('Cancel');
-                ?></a>
+                <a class="btn btn-dim" href="javascript:void(0);"
+                   onclick="$('#dialog-language-delete').dialog('close');"><?php _e('Cancel');
+                    ?></a>
                 <input id="language-delete-submit" type="submit" value="<?php echo osc_esc_html(__('Delete')); ?>" class="btn
                 btn-red"/>
             </div>
@@ -227,9 +228,9 @@ osc_current_admin_theme_path('parts/header.php');
         <div class="form-row"></div>
         <div class="form-actions">
             <div class="wrapper">
-                <a id="bulk-actions-cancel" class="btn" href="javascript:void(0);"><?php _e('Cancel'); ?></a>
+                <a id="bulk-actions-cancel" class="btn btn-dim" href="javascript:void(0);"><?php _e('Cancel'); ?></a>
                 <a id="bulk-actions-submit" href="javascript:void(0);" class="btn btn-red"><?php echo osc_esc_html(__('Delete'));
-                ?></a>
+                    ?></a>
                 <div class="clear"></div>
             </div>
         </div>
@@ -267,8 +268,8 @@ osc_current_admin_theme_path('parts/header.php');
         </div>
         <div class="form-actions">
             <div class="wrapper">
-                <a class="btn" href="javascript:void(0);" onclick="$('#dialog-add-official').dialog('close');"><?php _e('Cancel');
-                ?></a>
+                <a class="btn btn-dim" href="javascript:void(0);" onclick="$('#dialog-add-official').dialog('close');"><?php _e('Cancel');
+                    ?></a>
                 <button type="submit" class="btn btn-submit"><?php echo osc_esc_html(__('Import')); ?></button>
             </div>
         </div>
