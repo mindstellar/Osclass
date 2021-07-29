@@ -849,7 +849,7 @@ function osc_item_tinymce_footer()
             theme_advanced_toolbar_location: 'top',
             theme_advanced_buttons1_add: 'forecolorpicker,fontsizeselect',
             theme_advanced_buttons2_add: 'media',
-            plugins: 'advlist autolink lists link image charmap preview anchor searchreplace visualblocks code fullscreen insertdatetime media table paste'
+            plugins: 'advlist autolink lists link charmap preview anchor searchreplace visualblocks code fullscreen table paste'
         });
         $(function() {
             $('textarea[id^=description]').each(function(){
