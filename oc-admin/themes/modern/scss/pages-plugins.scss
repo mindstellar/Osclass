@@ -1,3 +1,54 @@
 .plugin-support-icon {
   margin: 5px;
 }
+
+#upload-plugins {
+  .table {
+    border: none;
+    tr {
+      vertical-align: middle;
+      border-right: 0.05rem solid $gray-400;
+    }
+    thead {
+      tr {
+        border: .05rem solid $gray-400;
+        border-left-width: .2rem;
+      }
+    }
+
+    tbody {
+      tr {
+
+        a {
+          text-decoration-line: none;
+          font-weight: 500;
+          text-align: center;
+        }
+
+        i {
+          text-align: center;
+          font-size: 1.2rem;
+          color: $gray-800;
+        }
+      }
+    }
+  }
+
+  .plugin-active {
+    background: tint-color($success, 80%);
+    color: $gray-800;
+    border-left: .2rem solid $success;
+  }
+
+  .plugin-disabled {
+    background: tint-color($warning, 80%);
+    color: $gray-800;
+    border-left: .2rem solid $warning;
+  }
+
+  .plugin-uninstalled {
+    background: tint-color($danger, 80%);
+    color: $gray-800;
+    border-left: .2rem solid $danger;
+  }
+}
