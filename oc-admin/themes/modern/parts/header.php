@@ -53,11 +53,11 @@
                 <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
             </div>
             <?php osc_show_flash_message('admin'); ?>
-        <div class="jsMessage flashmessage flashmessage-info hide">
-            <a class="btn ico btn-mini ico-close">×</a>
-            <p></p>
-        </div>
-        <div id="content-page">
-            <div class="grid-system">
-                <div class="grid-row grid-first-row grid-100">
-                    <div class="row-wrapper <?php echo osc_apply_filter('render-wrapper', ''); ?>">
+            <div id="jsMessage" class="jsMessage flashmessage flashmessage-info hide">
+                <a class="btn ico btn-mini ico-close">×</a>
+                <p></p>
+            </div>
+            <div id="content-page">
+                <div class="grid-system">
+                    <div class="grid-row grid-first-row grid-100">
+                        <div class="row-wrapper <?php echo osc_apply_filter('render-wrapper', ''); ?>">
