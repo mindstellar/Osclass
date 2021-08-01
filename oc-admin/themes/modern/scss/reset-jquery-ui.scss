@@ -91,7 +91,10 @@
 }
 
 .ui-dialog .form-actions .wrapper {
-  padding: 17px 20px 18px;
+  @extend .card-footer;
+}
+.ui-dialog .btn a {
+  color: $white;
 }
 
 .ui-dialog .has-form-actions {
