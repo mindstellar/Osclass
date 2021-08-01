@@ -86,12 +86,6 @@ function customHead()
             return false;
         }
 
-        function delete_field(id) {
-            $("#dialog-delete-field").attr('data-field-id', id);
-            $("#dialog-delete-field").dialog('open');
-            return false;
-        }
-
         // check all the categories
         function checkAll(id, check) {
             aa = $('#' + id + ' input[type=checkbox]').each(function () {
@@ -106,42 +100,8 @@ function customHead()
         }
 
         $(document).ready(function () {
-            // dialog delete
-            $("#dialog-delete-field").dialog({
-                autoOpen: false,
-                modal: true
-            });
-            $("#field-delete-submit").click(function () {
-                var id = $("#dialog-delete-field").attr('data-field-id');
-                var url = '<?php echo osc_admin_base_url(true); ?>?page=ajax&action=delete_field&<?php echo $csrf_token;
-                    ?>&id=' + id;
-                $.ajax({
-                    url: url,
-                    context: document.body,
-                    success: function (res) {
-                        var ret = eval("(" + res + ")");
-                        var message = "";
-                        if (ret.error) {
-                            message += ret.error;
-                        }
-                        if (ret.ok) {
-                            message += ret.ok;
 
-                            $('#list_' + id).fadeOut("slow");
-                            $('#list_' + id).remove();
-                        }
 
-                        $(".jsMessage").css('display', 'block');
-                        $(".jsMessage p").html(message);
-                    },
-                    error: function () {
-                        $(".jsMessage").css('display', 'block');
-                        $(".jsMessage p").html('<?php echo osc_esc_js(__('Ajax error, try again.')); ?>');
-                    }
-                });
-                $('#dialog-delete-field').dialog('close');
-                return false;
-            });
 
             $("#add-button, .add-button").bind('click', function () {
                 $.ajax({
@@ -226,8 +186,8 @@ osc_add_filter('admin_title', 'customPageTitle');
 osc_current_admin_theme_path('parts/header.php');
 ?>
     <div class="header_title">
-        <h2 class="render-title"><?php _e('Custom fields'); ?>
-            <a href="javascript:void(0);" class="btn btn-sm btn-success add-button"><?php _e('Add new'); ?></a>
+        <h2 class="render-title">
+            <?php _e('Custom fields'); ?>
         </h2>
     </div>
     <!-- custom fields -->
@@ -285,4 +245,70 @@ osc_current_admin_theme_path('parts/header.php');
             </div>
         </div>
     </div>
+    <div id="deleteModal" method="get"
+         action="<?php echo osc_admin_base_url(true); ?>"
+         class="modal fade static"
+         data-field-id="">
+        <div class="modal-dialog modal-sm">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">
+                        <?php echo __('Delete custom field'); ?>
+                    </h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <?php _e('Are you sure you want to delete this custom field?'); ?>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-sm btn-secondary" data-bs-dismiss="modal"><?php _e('Cancel'); ?></button>
+                    <button id="deleteSubmit" data-bs-dismiss="modal" class="btn btn-sm btn-red" type="submit">
+                        <?php echo __('Delete'); ?>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        document.getElementById("deleteSubmit").onclick = function() {
+            let fieldId = document.getElementById(
+                "deleteModal"
+            ).dataset.fieldId;
+            let url = "<?php
+                echo osc_admin_base_url(true); ?>?page=ajax&action=delete_field&<?php echo osc_csrf_token_url();
+                ?>&id=" + fieldId;
+            fetch(url, {
+                credentials: "same-origin"
+            }).then(function(response) {
+                    if (!response.ok) {
+                        setJsMessage("error", response.statusText);
+                    }
+                    return response.json()
+                })
+                .then(function(jsonObj) {
+                    if (jsonObj.error) {
+                        setJsMessage("error", jsonObj.error);
+                    }
+                    if (jsonObj.ok) {
+                        setJsMessage("ok", jsonObj.ok);
+                        document.getElementById('list_' + fieldId).remove()
+                    }
+                }).catch(function(error) {
+                setJsMessage("error", "<?php echo osc_esc_js(__("Ajax error, try again.")); ?>:" + error);
+            });
+        };
+
+        function setJsMessage(alertClass, alertMessage) {
+            var pTag = document.getElementById("jsMessage").querySelector("p");
+            pTag.setAttribute("class", alertClass);
+            pTag.textContent = alertMessage;
+            document.getElementById("jsMessage").classList.remove('hide')
+        }
+        function delete_field(id) {
+            var deleteModal = document.getElementById("deleteModal");
+            deleteModal.setAttribute("data-field-id", id);
+            (new bootstrap.Modal(document.getElementById("deleteModal"))).toggle();
+            return false;
+        }
+    </script>
 <?php osc_current_admin_theme_path('parts/footer.php'); ?>
