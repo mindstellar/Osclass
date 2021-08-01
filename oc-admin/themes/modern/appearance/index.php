@@ -34,33 +34,6 @@ osc_enqueue_script('jquery-validate');
 $themes = __get('themes');
 $info   = WebThemes::newInstance()->loadThemeInfo(osc_theme());
 
-//customize Head
-function customHead()
-{
-    ?>
-    <script type="text/javascript">
-        $(document).ready(function () {
-            // dialog delete
-            $("#dialog-delete-theme").dialog({
-                autoOpen: false,
-                modal: true,
-                title: '<?php echo osc_esc_js(__('Delete theme')); ?>'
-            });
-        });
-
-        // dialog delete function
-        function delete_dialog(theme) {
-            $("#dialog-delete-theme input[name='webtheme']").attr('value', theme);
-            $("#dialog-delete-theme").dialog('open');
-            return false;
-        }
-    </script>
-    <?php
-}
-
-
-osc_add_hook('admin_header', 'customHead', 10);
-
 function addHelp()
 {
     echo '<p>'
@@ -188,23 +161,37 @@ osc_current_admin_theme_path('parts/header.php'); ?>
     </div>
     <!-- /themes list -->
 </div>
-<form id="dialog-delete-theme" method="get" action="<?php echo osc_admin_base_url(true); ?>"
-      class="has-form-actions hide">
+<form id="deleteModal" method="get" action="<?php echo osc_admin_base_url(true); ?>"
+      class="modal fade static">
     <input type="hidden" name="page" value="appearance"/>
     <input type="hidden" name="action" value="delete"/>
     <input type="hidden" name="webtheme" value=""/>
-    <div class="form-horizontal">
-        <div class="form-row">
-            <?php _e('This action can not be undone. Are you sure you want to delete the theme?'); ?>
-        </div>
-        <div class="form-actions">
-            <div class="wrapper">
-                <a class="btn btn-dim" href="javascript:void(0);"
-                   onclick="$('#dialog-delete-theme').dialog('close');"><?php _e('Cancel'); ?></a>
-                <input id="delete-theme-submit" type="submit" value="<?php echo osc_esc_html(__('Uninstall')); ?>"
-                       class="btn btn-red"/>
+    <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">
+                    <?php _e('Delete theme'); ?>
+                </h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <?php _e('This action can not be undone. Are you sure you want to delete the theme?'); ?>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-sm btn-secondary" data-bs-dismiss="modal"><?php _e('Cancel'); ?></button>
+                <button id="deleteSubmit" class="btn btn-sm btn-red" type="submit">
+                    <?php echo __('Uninstall'); ?>
+                </button>
             </div>
         </div>
     </div>
 </form>
+<script type="text/javascript">
+    function delete_dialog(id) {
+        var deleteModal = document.getElementById('deleteModal')
+        deleteModal.querySelector('input[name=\'webtheme\']').value = id;
+        (new bootstrap.Modal(document.getElementById('deleteModal'))).toggle()
+        return false;
+    }
+</script>
 <?php osc_current_admin_theme_path('parts/footer.php'); ?>
