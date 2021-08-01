@@ -126,14 +126,14 @@ module.exports = function (grunt) {
                         {
                             expand: true,
                             cwd: nodeDir + '/tinymce',
-                            src: ['license.txt', 'README.md', 'tinymce.min.js' ],
+                            src: ['license.txt', 'README.md', 'tinymce.min.js'],
                             dest: assetsDir + '/tinymce',
                             flatten: false
                         },
                         {
                             expand: true,
                             cwd: nodeDir + '/tinymce',
-                            src: ['icons/**', 'skins/ui/oxide/**','skins/content/default/**', 'themes/silver/**'],
+                            src: ['icons/**', 'skins/ui/oxide/**', 'skins/content/default/**', 'themes/silver/**'],
                             dest: assetsDir + '/tinymce',
                             flatten: false
                         },
