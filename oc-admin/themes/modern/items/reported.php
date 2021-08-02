@@ -216,15 +216,15 @@ osc_show_pagination_admin($aData);
     </div>
     <script>
         function delete_dialog(id) {
-            var deleteModal = document.getElementById('deleteModal')
-            deleteModal.querySelector('input[name=\'id[]\']').value = id;
-            (new bootstrap.Modal(document.getElementById('deleteModal'))).toggle()
+            var deleteModal = document.getElementById("deleteModal")
+            deleteModal.querySelector("input[name='id[]']").value = id;
+            (new bootstrap.Modal(document.getElementById("deleteModal"))).toggle()
             return false;
         }
 
         function toggleBulkActionsModal() {
-            var bulkSelect = document.getElementById('bulk_actions')
-            var bulkActionsModal = new bootstrap.Modal(document.getElementById('bulkActionsModal'))
+            var bulkSelect = document.getElementById("bulk_actions")
+            var bulkActionsModal = new bootstrap.Modal(document.getElementById("bulkActionsModal"))
             if (bulkSelect.options[bulkSelect.selectedIndex].value !== '') {
                 bulkActionsModal.toggle()
             }
@@ -233,17 +233,17 @@ osc_show_pagination_admin($aData);
         }
 
         function bulkActionsSubmit() {
-            document.getElementById('datatablesForm').submit()
+            document.getElementById("datatablesForm").submit()
         }
 
-        document.getElementById('datatablesForm').onsubmit = function () {
+        document.getElementById("datatablesForm").onsubmit = function () {
             toggleBulkActionsModal()
         };
-        var bulkActionsModal = document.getElementById('bulkActionsModal')
-        bulkActionsModal.addEventListener('show.bs.modal', function () {
-            var bulkSelect = document.getElementById('bulk_actions')
+        var bulkActionsModal = document.getElementById("bulkActionsModal")
+        bulkActionsModal.addEventListener("show.bs.modal", function () {
+            var bulkSelect = document.getElementById("bulk_actions")
             bulkActionsModal.querySelector('.modal-body p').textContent = bulkSelect.options[bulkSelect.selectedIndex]
-                .getAttribute('data-dialog-content')
+                .getAttribute("data-dialog-content")
             bulkActionsModal.querySelector('#bulkActionsSubmit').textContent = bulkSelect.options[bulkSelect.selectedIndex].text;
         })
     </script>
