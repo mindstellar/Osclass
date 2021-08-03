@@ -467,10 +467,8 @@ class AdminMenu
         $currentMenuId = $current_menu;
 
         $sMenu = '<!-- menu -->' . PHP_EOL;
-        $sMenu .= '<div class="col-auto col-md-3 col-xl-2 dashboard-sidebar">' .
-                  PHP_EOL;
 
-        $sMenu .= '<div class="d-flex flex-column align-items-center align-items-sm-start px-1 pt-2">' .
+        $sMenu .= '<div class="px-1 pt-2">' .
                   PHP_EOL;
         $sMenu .= '<ul id="dashboard-menu" class="oscmenu col-md-12 nav nav-pills flex-column mb-auto">' .
                   PHP_EOL;
@@ -486,7 +484,7 @@ class AdminMenu
 
         }
 
-        $sMenu .= '</ul></div></div>' . PHP_EOL;
+        $sMenu .= '</ul></div>' . PHP_EOL;
         echo $sMenu;
     }
 

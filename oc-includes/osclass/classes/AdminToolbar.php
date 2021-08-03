@@ -172,7 +172,7 @@ class AdminToolbar
                      . ((isset($value->target)) ? 'target="' . $value->target . '"' : '') . '>' . $value->title . '</a>';
 
                 if (isset($value->submenu) && is_array($value->submenu)) {
-                    echo '<div class="osc_admin_submenu" id="osc_toolbar_sub_' . $value->id . '"><ul>';
+                    echo '<ul class="osc_admin_submenu" id="osc_toolbar_sub_' . $value->id . '"></ul>';
                     foreach ($value->submenu as $subvalue) {
                         if (isset($subvalue->subid)) {
                             $submeta = '';
