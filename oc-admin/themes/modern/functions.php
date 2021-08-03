@@ -18,6 +18,36 @@ function admin_modeCompact_class($args)
     return $args;
 }
 
+function admin_js_lang_string(){
+    ?>
+    <script type="text/javascript">
+        var osc = window.osc || {};
+        <?php
+        $lang = array(
+            'nochange_expiration' => __('No change expiration'),
+            'without_expiration'  => __('Without expiration'),
+            'expiration_day'      => __('1 day'),
+            'expiration_days'     => __('%d days'),
+            'select_category'     => __('Select category'),
+            'no_subcategory'      => __('No subcategory'),
+            'select_subcategory'  => __('Select subcategory')
+        );
+        $locales = osc_get_locales();
+        $codes = array();
+        foreach ($locales as $locale) {
+            $codes[] = osc_esc_js($locale['pk_c_code']);
+        }
+        ?>
+        osc.locales = {};
+        osc.locales._default = '<?php echo osc_language(); ?>';
+        osc.locales.current = '<?php echo osc_current_admin_locale(); ?>';
+        osc.locales.codes = <?php echo json_encode($codes); ?>;
+        osc.locales.string = '[name*="' + osc.locales.codes.join('"],[name*="') + '"],.' + osc.locales.codes.join(',.');
+        osc.langs = <?php echo json_encode($lang); ?>;
+    </script>
+    <?php
+}
+osc_add_hook('admin_header','admin_js_lang_string');
 
 osc_add_hook('ajax_admin_compactmode', 'modern_compactmode_actions');
 function modern_compactmode_actions()
