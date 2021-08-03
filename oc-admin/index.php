@@ -37,7 +37,7 @@ if (file_exists(ABS_PATH . '.maintenance')) {
 // register admin scripts
 osc_register_script('admin-osc', osc_current_admin_theme_js_url('osc.js'), 'jquery');
 osc_register_script('admin-ui-osc', osc_current_admin_theme_js_url('ui-osc.js'), 'jquery');
-osc_register_script('admin-location', osc_current_admin_theme_js_url('location.js'), 'jquery');
+osc_register_script('admin-location', osc_current_admin_theme_js_url('location.min.js'), 'bootstrap5');
 osc_register_script('bootstrap5', osc_assets_url('bootstrap/bootstrap.min.js'), 'jquery');
 // enqueue scripts
 osc_enqueue_script('jquery');

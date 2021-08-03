@@ -9,205 +9,214 @@ module.exports = function (grunt) {
         nodeDir = 'node_modules';
 
     grunt.initConfig({
-            clean: {
-                vendors: [assetsDir, 'oc-admin/themes/modern/scss/bootstrap']
+        clean: {
+            vendors: [assetsDir, 'oc-admin/themes/modern/scss/bootstrap']
+        },
+        copy: {
+            'jquery': {
+                files: [{
+                    expand: true,
+                    src: [
+                        nodeDir + '/jquery/dist/jquery.min.js',
+                        nodeDir + '/jquery/README.md',
+                        nodeDir + '/jquery/LICENSE.txt'
+                    ],
+                    dest: assetsDir + '/jquery',
+                    flatten: true
+                }]
             },
-            copy: {
-                'jquery': {
-                    files: [{
+            'jquery-migrate': {
+                files: [{
+                    expand: true,
+                    src: [
+                        nodeDir + '/jquery-migrate/dist/jquery-migrate.min.js',
+                        nodeDir + '/jquery-migrate/README.md',
+                        nodeDir + '/jquery-migrate/LICENSE.txt'
+                    ],
+                    dest: assetsDir + '/jquery-migrate',
+                    flatten: true
+                }]
+            },
+            'jquery-ui': {
+                files: [
+                    {
                         expand: true,
                         src: [
-                            nodeDir + '/jquery/dist/jquery.min.js',
-                            nodeDir + '/jquery/README.md',
-                            nodeDir + '/jquery/LICENSE.txt'
+                            nodeDir + '/jquery-ui-dist/*.min.js',
+                            nodeDir + '/jquery-ui-dist/*.min.css',
+                            nodeDir + '/jquery-ui-dist/README.md',
+                            nodeDir + '/jquery-ui-dist/LICENSE.txt'
                         ],
-                        dest: assetsDir + '/jquery',
+                        dest: assetsDir + '/jquery-ui',
+                        flatten: true
+                    },
+                    {
+                        expand: true, src: nodeDir + '/jquery-ui-dist/images/*',
+                        dest: assetsDir + '/jquery-ui/images',
                         flatten: true
                     }]
-                },
-                'jquery-migrate': {
-                    files: [{
+            },
+            'jquery-treeview': {
+                files: [{
+                    expand: true,
+                    src: [
+                        nodeDir + '/jquery-treeview/jquery.treeview.js',
+                        nodeDir + '/jquery-treeview/README.md'
+                    ],
+                    dest: assetsDir + '/jquery-treeview',
+                    flatten: true
+                }]
+            },
+            'jquery-validation': {
+                files: [{
+                    expand: true,
+                    src: [
+                        nodeDir + '/jquery-validation/dist/jquery.validate.min.js',
+                        nodeDir + '/jquery-validation/dist/additional-methods.min.js',
+                        nodeDir + '/jquery-validation/README.md',
+                        nodeDir + '/jquery-validation/LICENSE.md'
+                    ],
+                    dest: assetsDir + '/jquery-validation',
+                    flatten: true
+                }]
+            },
+            'jquery-ui-nested': {
+                files: [{
+                    expand: true,
+                    src: [
+                        nodeDir + '/jquery-ui-nested/jquery-ui-nested.js',
+                        nodeDir + '/jquery-ui-nested/README.md'
+                    ],
+                    dest: assetsDir + '/jquery-ui-nested',
+                    flatten: true
+                }]
+            },
+            'spectrum-colorpicker': {
+                files: [
+                    {
                         expand: true,
                         src: [
-                            nodeDir + '/jquery-migrate/dist/jquery-migrate.min.js',
-                            nodeDir + '/jquery-migrate/README.md',
-                            nodeDir + '/jquery-migrate/LICENSE.txt'
+                            nodeDir + '/spectrum-colorpicker/spectrum.js',
+                            nodeDir + '/spectrum-colorpicker/README.md',
+                            nodeDir + '/spectrum-colorpicker/LICENSE',
+                            nodeDir + '/spectrum-colorpicker/spectrum.css'
                         ],
-                        dest: assetsDir + '/jquery-migrate',
+                        dest: assetsDir + '/spectrum-colorpicker',
                         flatten: true
                     }]
-                },
-                'jquery-ui': {
-                    files: [
-                        {
-                            expand: true,
-                            src: [
-                                nodeDir + '/jquery-ui-dist/*.min.js',
-                                nodeDir + '/jquery-ui-dist/*.min.css',
-                                nodeDir + '/jquery-ui-dist/README.md',
-                                nodeDir + '/jquery-ui-dist/LICENSE.txt'
-                            ],
-                            dest: assetsDir + '/jquery-ui',
-                            flatten: true
-                        },
-                        {
-                            expand: true, src: nodeDir + '/jquery-ui-dist/images/*',
-                            dest: assetsDir + '/jquery-ui/images',
-                            flatten: true
-                        }]
-                },
-                'jquery-treeview': {
-                    files: [{
+            },
+            'bootstrap-icons': {
+                files: [
+                    {
                         expand: true,
-                        src: [
-                            nodeDir + '/jquery-treeview/jquery.treeview.js',
-                            nodeDir + '/jquery-treeview/README.md'
-                        ],
-                        dest: assetsDir + '/jquery-treeview',
+                        src: nodeDir + '/bootstrap-icons/LICENSE.md',
+                        dest: assetsDir + '/bootstrap-icons',
                         flatten: true
-                    }]
-                },
-                'jquery-validation': {
-                    files: [{
+                    },
+                    {
                         expand: true,
-                        src: [
-                            nodeDir + '/jquery-validation/dist/jquery.validate.min.js',
-                            nodeDir + '/jquery-validation/dist/additional-methods.min.js',
-                            nodeDir + '/jquery-validation/README.md',
-                            nodeDir + '/jquery-validation/LICENSE.md'
-                        ],
-                        dest: assetsDir + '/jquery-validation',
-                        flatten: true
+                        cwd: nodeDir + '/bootstrap-icons/font',
+                        src: '**/*',
+                        dest: assetsDir + '/bootstrap-icons',
+                        flatten: false
                     }]
-                },
-                'jquery-ui-nested': {
-                    files: [{
+            },
+            'tinymce': {
+                files: [
+                    {
                         expand: true,
-                        src: [
-                            nodeDir + '/jquery-ui-nested/jquery-ui-nested.js',
-                            nodeDir + '/jquery-ui-nested/README.md'
+                        cwd: nodeDir + '/tinymce',
+                        src: ['license.txt', 'README.md', 'tinymce.min.js'],
+                        dest: assetsDir + '/tinymce',
+                        flatten: false
+                    },
+                    {
+                        expand: true,
+                        cwd: nodeDir + '/tinymce',
+                        src: ['icons/**', 'skins/ui/oxide/**', 'skins/content/default/**', 'themes/silver/**'],
+                        dest: assetsDir + '/tinymce',
+                        flatten: false
+                    },
+                    {
+                        expand: true,
+                        cwd: nodeDir + '/tinymce/plugins',
+                        src: ['advlist/**', 'anchor/**', 'autolink/**', 'charmap/**', 'code/**', 'fullscreen/**',
+                            'images/**', 'insertdatetime/**', 'link/**', 'lists/**', 'media/**', 'paste/**', 'preview/**',
+                            'searchreplace/**', 'table/**'
                         ],
-                        dest: assetsDir + '/jquery-ui-nested',
-                        flatten: true
-                    }]
-                },
-                'spectrum-colorpicker': {
-                    files: [
-                        {
-                            expand: true,
-                            src: [
-                                nodeDir + '/spectrum-colorpicker/spectrum.js',
-                                nodeDir + '/spectrum-colorpicker/README.md',
-                                nodeDir + '/spectrum-colorpicker/LICENSE',
-                                nodeDir + '/spectrum-colorpicker/spectrum.css'
-                            ],
-                            dest: assetsDir + '/spectrum-colorpicker',
-                            flatten: true
-                        }]
-                },
-                'bootstrap-icons': {
-                    files: [
-                        {
-                            expand: true,
-                            src: nodeDir + '/bootstrap-icons/LICENSE.md',
-                            dest: assetsDir + '/bootstrap-icons',
-                            flatten: true
-                        },
-                        {
-                            expand: true,
-                            cwd: nodeDir + '/bootstrap-icons/font',
-                            src: '**/*',
-                            dest: assetsDir + '/bootstrap-icons',
-                            flatten: false
-                        }]
-                },
-                'tinymce': {
-                    files: [
-                        {
-                            expand: true,
-                            cwd: nodeDir + '/tinymce',
-                            src: ['license.txt', 'README.md', 'tinymce.min.js'],
-                            dest: assetsDir + '/tinymce',
-                            flatten: false
-                        },
-                        {
-                            expand: true,
-                            cwd: nodeDir + '/tinymce',
-                            src: ['icons/**', 'skins/ui/oxide/**', 'skins/content/default/**', 'themes/silver/**'],
-                            dest: assetsDir + '/tinymce',
-                            flatten: false
-                        },
-                        {
-                            expand: true,
-                            cwd: nodeDir + '/tinymce/plugins',
-                            src: ['advlist/**', 'anchor/**', 'autolink/**', 'charmap/**', 'code/**', 'fullscreen/**',
-                                'images/**', 'insertdatetime/**', 'link/**', 'lists/**', 'media/**', 'paste/**', 'preview/**',
-                                'searchreplace/**', 'table/**'
-                            ],
-                            dest: assetsDir + '/tinymce/plugins',
-                        }
-                    ]
+                        dest: assetsDir + '/tinymce/plugins',
+                    }
+                ]
 
-                },
-                'opensans-regular-font': {
-                    files: [{
-                        expand: true,
-                        src: [
-                            nodeDir + '/npm-font-open-sans/fonts/Regular/OpenSans-Regular.ttf',
-                            nodeDir + '/npm-font-open-sans/LICENSE',
-                            nodeDir + '/npm-font-open-sans/README.md',
-                        ],
-                        dest: assetsDir + '/fonts/open-sans',
-                        flatten: true
-                    }]
-                },
-                'bootstrap': {
-                    files: [{
-                        expand: true,
-                        src: [
-                            nodeDir + '/bootstrap/dist/css/bootstrap.min.*',
-                            nodeDir + '/bootstrap/dist/js/bootstrap.min.*',
-                            nodeDir + '/bootstrap/README.md',
-                            nodeDir + '/bootstrap/LICENSE'
-                        ],
-                        dest: assetsDir + '/bootstrap',
-                        flatten: true
-                    }]
-                },
-                'osclass-legacy': {
-                    files: [{
-                        expand: true,
-                        cwd: nodeDir + '/osclass-legacy-assets/src',
-                        src: '**/*',
-                        dest: assetsDir + '/osclass-legacy/',
-                        flatten: false
-                    }]
-                },
-                'bootstrap-scss': {
-                    files: [{
-                        expand: true,
-                        cwd: nodeDir + '/bootstrap/scss',
-                        src: '**/*',
-                        dest: 'oc-admin/themes/modern/scss/bootstrap',
-                        flatten: false
-                    }
-                    ]
-                },
             },
-            sass:
-                {
-                    dist: {
-                        options: {
-                            style: 'nested'
-                        },
-                        files: {
-                            'oc-admin/themes/modern/css/main.css':
-                                'oc-admin/themes/modern/scss/main.scss'
-                        }
-                    }
+            'opensans-regular-font': {
+                files: [{
+                    expand: true,
+                    src: [
+                        nodeDir + '/npm-font-open-sans/fonts/Regular/OpenSans-Regular.ttf',
+                        nodeDir + '/npm-font-open-sans/LICENSE',
+                        nodeDir + '/npm-font-open-sans/README.md',
+                    ],
+                    dest: assetsDir + '/fonts/open-sans',
+                    flatten: true
+                }]
+            },
+            'bootstrap': {
+                files: [{
+                    expand: true,
+                    src: [
+                        nodeDir + '/bootstrap/dist/css/bootstrap.min.*',
+                        nodeDir + '/bootstrap/dist/js/bootstrap.min.*',
+                        nodeDir + '/bootstrap/README.md',
+                        nodeDir + '/bootstrap/LICENSE'
+                    ],
+                    dest: assetsDir + '/bootstrap',
+                    flatten: true
+                }]
+            },
+            'osclass-legacy': {
+                files: [{
+                    expand: true,
+                    cwd: nodeDir + '/osclass-legacy-assets/src',
+                    src: '**/*',
+                    dest: assetsDir + '/osclass-legacy/',
+                    flatten: false
+                }]
+            },
+            'bootstrap-scss': {
+                files: [{
+                    expand: true,
+                    cwd: nodeDir + '/bootstrap/scss',
+                    src: '**/*',
+                    dest: 'oc-admin/themes/modern/scss/bootstrap',
+                    flatten: false
                 }
+                ]
+            },
+        },
+        sass: {
+            dist: {
+                options: {
+                    style: 'nested'
+                },
+                files: {
+                    'oc-admin/themes/modern/css/main.css':
+                        'oc-admin/themes/modern/scss/main.scss'
+                }
+            }
+        },
+        uglify: {
+            dist: {
+                files: {
+                    'oc-admin/themes/modern/js/location.min.js': ['oc-admin/themes/modern/js/location.js']
+                },
+                options: {
+                    sourceMap: true
+                }
+            }
         }
-    );
+
+    });
 
     grunt.registerTask('createAssetsDir', 'Creates the necessary static assets directory', function () {
         // Create the assets dir when it doesn't exists.
@@ -222,9 +231,11 @@ module.exports = function (grunt) {
         }
     });
 
-    grunt.registerTask('default', ['clean', 'createAssetsDir', 'copy', 'sass']);
+    grunt.registerTask('default', ['clean', 'createAssetsDir', 'copy', 'sass', 'uglify']);
     grunt.registerTask('compile', ['sass']);
+    grunt.registerTask('uglify',['uglify']);
     grunt.loadNpmTasks('grunt-contrib-clean');
     grunt.loadNpmTasks('grunt-contrib-copy');
     grunt.loadNpmTasks('grunt-contrib-sass');
+    grunt.loadNpmTasks('grunt-contrib-uglify');
 };

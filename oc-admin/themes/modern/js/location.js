@@ -12,7 +12,6 @@
  * const jsonExistingCountries = json_encode(Country::newInstance()->listNames());
  * const locationJsonUrl = osc_get_locations_json_url();
  *
- * //common text vars
  // Location constant
  var baseUrl = "<?php echo osc_admin_base_url(); ?>";
  var jsonExistingCountries = <?php echo json_encode(Country::newInstance()->listNames()) ?>;
