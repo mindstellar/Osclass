@@ -31,8 +31,8 @@
 function addHelp()
 {
     echo '<p>'
-         . __('From here, you can edit or delete the listings reported by users (spam, misclassified, duplicate, expired, offensive). You can also delete the report if you consider it mistaken.')
-         . '</p>';
+        . __('From here, you can edit or delete the listings reported by users (spam, misclassified, duplicate, expired, offensive). You can also delete the report if you consider it mistaken.')
+        . '</p>';
 }
 
 
@@ -42,10 +42,9 @@ function customPageHeader()
 {
     ?>
     <h1><?php _e('Listings'); ?>
-        <a href="#" class="ms-1 bi bi-question-circle-fill float-right" data-bs-target="#help-box" data-bs-toggle="collapse"
-           href="#help-box"></a>
+        <a href="#" class="ms-1 bi bi-question-circle-fill float-right" data-bs-target="#help-box" data-bs-toggle="collapse" href="#help-box"></a>
     </h1>
-    <?php
+<?php
 }
 
 
@@ -75,67 +74,59 @@ $sort      = Params::getParam('sort');
 $direction = Params::getParam('direction');
 
 osc_current_admin_theme_path('parts/header.php'); ?>
-    <h2 class="render-title"><?php _e('Reported listings'); ?></h2>
-    <div class="relative">
-        <div id="listing-toolbar">
-            <div class="float-right">
-                <form method="get" action="<?php echo osc_admin_base_url(true); ?>" class="inline">
-                    <?php foreach (Params::getParamsAsArray('get') as $key => $value) { ?>
-                        <?php if ($key !== 'iDisplayLength') { ?>
-                            <input type="hidden" name="<?php echo osc_esc_html($key); ?>"
-                                   value="<?php echo osc_esc_html($value); ?>"/>
-                        <?php }
-                    } ?>
-                    <select name="iDisplayLength" class="form-select form-select-sm "
-                            onchange="this.form.submit();">
-                        <option value="10"><?php printf(__('%d Listings'), 10); ?></option>
-                        <option value="25" <?php if (Params::getParam('iDisplayLength') == 25) {
-                            echo 'selected';
-                        } ?> ><?php printf(__('%d Listings'), 25); ?></option>
-                        <option value="50" <?php if (Params::getParam('iDisplayLength') == 50) {
-                            echo 'selected';
-                        } ?> ><?php printf(__('%d Listings'), 50); ?></option>
-                        <option value="100" <?php if (Params::getParam('iDisplayLength') == 100) {
-                            echo 'selected';
-                        } ?> ><?php printf(__('%d Listings'), 100); ?></option>
-                    </select>
-                </form>
-                <?php if ($sort !== 'date') { ?>
-                    <a id="btn-reset-filters" class="btn btn-red"
-                       href="<?php echo osc_admin_base_url(true); ?>?page=items&action=items_reported"><?php _e('Reset filters'); ?></a>
-                <?php } ?>
+<h2 class="render-title"><?php _e('Reported listings'); ?></h2>
+<div class="relative">
+    <div id="listing-toolbar">
+        <div class="float-right">
+            <form method="get" action="<?php echo osc_admin_base_url(true); ?>" class="inline">
+                <?php foreach (Params::getParamsAsArray('get') as $key => $value) { ?>
+                    <?php if ($key !== 'iDisplayLength') { ?>
+                        <input type="hidden" name="<?php echo osc_esc_html($key); ?>" value="<?php echo osc_esc_html($value); ?>" />
+                <?php }
+                } ?>
+                <select name="iDisplayLength" class="form-select form-select-sm " onchange="this.form.submit();">
+                    <option value="10"><?php printf(__('%d Listings'), 10); ?></option>
+                    <option value="25" <?php if (Params::getParam('iDisplayLength') == 25) {
+                        echo 'selected';
+                } ?>><?php printf(__('%d Listings'), 25); ?></option>
+                    <option value="50" <?php if (Params::getParam('iDisplayLength') == 50) {
+                        echo 'selected';
+                } ?>><?php printf(__('%d Listings'), 50); ?></option>
+                    <option value="100" <?php if (Params::getParam('iDisplayLength') == 100) {
+                        echo 'selected';
+                } ?>><?php printf(__('%d Listings'), 100); ?></option>
+                </select>
+            </form>
+            <?php if ($sort !== 'date') { ?>
+                <a id="btn-reset-filters" class="btn btn-red" href="<?php
+                   echo osc_admin_base_url(true); ?>?page=items&action=items_reported"><?php _e('Reset filters'); ?></a>
+            <?php } ?>
+        </div>
+    </div>
+    <form class="" id="datatablesForm" action="<?php echo osc_admin_base_url(true); ?>" method="post">
+        <input type="hidden" name="page" value="items" />
+        <input type="hidden" name="action" value="bulk_actions" />
+        <div id="bulk-actions">
+            <div class="input-group input-group-sm">
+                <select id="bulk_actions" name="bulk_actions" class="select-box-extra form-select">
+                    <option value=""><?php _e('Bulk actions'); ?></option>
+                    <option value="delete_all" data-dialog-content="<?php printf(
+                        __('Are you sure you want to %s the selected items?'),
+                        strtolower(__('Delete'))
+                    ); ?>"><?php _e('Delete'); ?></option>
+                    <option value="clear_all" data-dialog-content="<?php _e('Are you sure you want to clear all the reportings of the selected items?'); ?>"><?php _e('Clear All'); ?></option>
+                    <option value="clear_spam_all" data-dialog-content="<?php _e('Are you sure you want to clear the spam reportings of the selected items?'); ?>"><?php _e('Clear Spam'); ?></option>
+                    <option value="clear_bad_all" data-dialog-content="<?php _e('Are you sure you want to clear the misclassified reportings of the selected items?'); ?>"><?php _e('Clear Missclassified'); ?></option>
+                    <option value="clear_dupl_all" data-dialog-content="<?php _e('Are you sure you want to clear the duplicated reportings of the selected items?'); ?>"><?php _e('Clear Duplicated'); ?></option>
+                    <option value="clear_expi_all" data-dialog-content="<?php _e('Are you sure you want to clear the expired reportings of the selected items?'); ?>"><?php _e('Clear Expired'); ?></option>
+                    <option value="clear_offe_all" data-dialog-content="<?php _e('Are you sure you want to clear the offensive reportings of the selected items?'); ?>"><?php _e('Clear Offensive'); ?></option>
+                </select>
+                <input type="submit" id="bulk_apply" class="btn btn-primary" value="<?php echo osc_esc_html(__('Apply')); ?>" />
             </div>
         </div>
-        <form class="" id="datatablesForm" action="<?php echo osc_admin_base_url(true); ?>" method="post">
-            <input type="hidden" name="page" value="items"/>
-            <input type="hidden" name="action" value="bulk_actions"/>
-            <div id="bulk-actions">
-                <div class="input-group input-group-sm">
-                    <select id="bulk_actions" name="bulk_actions" class="select-box-extra form-select">
-                        <option value=""><?php _e('Bulk actions'); ?></option>
-                        <option value="delete_all"
-                                data-dialog-content="<?php printf(__('Are you sure you want to %s the selected items?'),
-                                                                  strtolower(__('Delete'))); ?>"><?php _e('Delete'); ?></option>
-                        <option value="clear_all"
-                                data-dialog-content="<?php _e('Are you sure you want to clear all the reportings of the selected items?'); ?>"><?php _e('Clear All'); ?></option>
-                        <option value="clear_spam_all"
-                                data-dialog-content="<?php _e('Are you sure you want to clear the spam reportings of the selected items?'); ?>"><?php _e('Clear Spam'); ?></option>
-                        <option value="clear_bad_all"
-                                data-dialog-content="<?php _e('Are you sure you want to clear the misclassified reportings of the selected items?'); ?>"><?php _e('Clear Missclassified'); ?></option>
-                        <option value="clear_dupl_all"
-                                data-dialog-content="<?php _e('Are you sure you want to clear the duplicated reportings of the selected items?'); ?>"><?php _e('Clear Duplicated'); ?></option>
-                        <option value="clear_expi_all"
-                                data-dialog-content="<?php _e('Are you sure you want to clear the expired reportings of the selected items?'); ?>"><?php _e('Clear Expired'); ?></option>
-                        <option value="clear_offe_all"
-                                data-dialog-content="<?php _e('Are you sure you want to clear the offensive reportings of the selected items?'); ?>"><?php _e('Clear Offensive'); ?></option>
-                    </select>
-                    <input type="submit" id="bulk_apply" class="btn btn-primary"
-                           value="<?php echo osc_esc_html(__('Apply')); ?>"/>
-                </div>
-            </div>
-            <div class="table-contains-actions shadow-sm">
-                <table class="table" cellpadding="0" cellspacing="0">
-                    <thead>
+        <div class="table-contains-actions shadow-sm">
+            <table class="table" cellpadding="0" cellspacing="0">
+                <thead>
                     <tr>
                         <?php foreach ($columns as $k => $v) {
                             if ($direction === 'desc') {
@@ -145,8 +136,8 @@ osc_current_admin_theme_path('parts/header.php'); ?>
                             }
                         } ?>
                     </tr>
-                    </thead>
-                    <tbody>
+                </thead>
+                <tbody>
                     <?php if (count($rows) > 0) { ?>
                         <?php foreach ($rows as $key => $row) { ?>
                             <tr>
@@ -162,105 +153,103 @@ osc_current_admin_theme_path('parts/header.php'); ?>
                             </td>
                         </tr>
                     <?php } ?>
-                    </tbody>
-                </table>
-                <div id="table-row-actions"></div> <!-- used for table actions -->
-            </div>
-        </form>
-    </div>
+                </tbody>
+            </table>
+            <div id="table-row-actions"></div> <!-- used for table actions -->
+        </div>
+    </form>
+</div>
 <?php
 osc_show_pagination_admin($aData);
 ?>
-    <form id="deleteModal" method="get" action="<?php echo osc_admin_base_url(true); ?>"
-          class="modal fade static">
-        <input type="hidden" name="page" value="items"/>
-        <input type="hidden" name="action" value="delete"/>
-        <input type="hidden" name="id[]" value=""/>
-        <div class="modal-dialog modal-sm">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title">
-                        <?php _e('Delete listing'); ?>
-                    </h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <?php _e('Are you sure you want to delete this listing?'); ?>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-sm btn-secondary" data-bs-dismiss="modal"><?php _e('Cancel'); ?></button>
-                    <button id="deleteSubmit" class="btn btn-sm btn-red" type="submit">
-                        <?php echo __('Delete'); ?>
-                    </button>
-                </div>
+<form id="deleteModal" method="get" action="<?php echo osc_admin_base_url(true); ?>" class="modal fade static">
+    <input type="hidden" name="page" value="items" />
+    <input type="hidden" name="action" value="delete" />
+    <input type="hidden" name="id[]" value="" />
+    <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">
+                    <?php _e('Delete listing'); ?>
+                </h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-        </div>
-    </form>
-    <div id="bulkActionsModal" class="modal fade static" tabindex="-1" aria-labelledby="bulkActionsModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-sm">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="bulkActionsModalLabel"><?php _e('Bulk actions'); ?></h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <p></p>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-sm btn-secondary" data-bs-dismiss="modal"><?php _e('Cancel'); ?></button>
-                    <button id="bulkActionsSubmit" onclick="bulkActionsSubmit()"
-                            class="btn btn-sm btn-red"><?php echo osc_esc_html(__('Delete')); ?></button>
-                </div>
+            <div class="modal-body">
+                <?php _e('Are you sure you want to delete this listing?'); ?>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-sm btn-secondary" data-bs-dismiss="modal"><?php _e('Cancel'); ?></button>
+                <button id="deleteSubmit" class="btn btn-sm btn-red" type="submit">
+                    <?php echo __('Delete'); ?>
+                </button>
             </div>
         </div>
     </div>
-    <script>
-        function delete_dialog(id) {
-            var deleteModal = document.getElementById("deleteModal")
-            deleteModal.querySelector("input[name='id[]']").value = id;
-            (new bootstrap.Modal(document.getElementById("deleteModal"))).toggle()
-            return false;
-        }
+</form>
+<div id="bulkActionsModal" class="modal fade static" tabindex="-1" aria-labelledby="bulkActionsModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="bulkActionsModalLabel"><?php _e('Bulk actions'); ?></h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <p></p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-sm btn-secondary" data-bs-dismiss="modal"><?php _e('Cancel'); ?></button>
+                <button id="bulkActionsSubmit" onclick="bulkActionsSubmit()" class="btn btn-sm btn-red"><?php echo osc_esc_html(__('Delete')); ?></button>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    function delete_dialog(id) {
+        var deleteModal = document.getElementById('deleteModal')
+        deleteModal.querySelector('input[name=\'id[]\']').value = id;
+        (new bootstrap.Modal(document.getElementById('deleteModal'))).toggle()
+        return false;
+    }
 
-        function toggleBulkActionsModal() {
-            var bulkSelect = document.getElementById("bulk_actions")
-            var bulkActionsModal = new bootstrap.Modal(document.getElementById("bulkActionsModal"))
-            if (bulkSelect.options[bulkSelect.selectedIndex].value !== '') {
-                bulkActionsModal.toggle()
-            }
-            event.preventDefault()
-            return false
+    function toggleBulkActionsModal() {
+        var bulkSelect = document.getElementById('bulk_actions')
+        var bulkActionsModal = new bootstrap.Modal(document.getElementById('bulkActionsModal'))
+        if (bulkSelect.options[bulkSelect.selectedIndex].value !== '') {
+            bulkActionsModal.toggle()
         }
+        event.preventDefault()
+        return false
+    }
 
-        function bulkActionsSubmit() {
-            document.getElementById("datatablesForm").submit()
-        }
+    function bulkActionsSubmit() {
+        document.getElementById('datatablesForm').submit()
+    }
 
-        document.getElementById("datatablesForm").onsubmit = function () {
-            toggleBulkActionsModal()
-        };
-        var bulkActionsModal = document.getElementById("bulkActionsModal")
-        bulkActionsModal.addEventListener("show.bs.modal", function () {
-            var bulkSelect = document.getElementById("bulk_actions")
-            bulkActionsModal.querySelector('.modal-body p').textContent = bulkSelect.options[bulkSelect.selectedIndex]
-                .getAttribute("data-dialog-content")
-            bulkActionsModal.querySelector('#bulkActionsSubmit').textContent = bulkSelect.options[bulkSelect.selectedIndex].text;
-        })
-    </script>
-    <script type="text/javascript">
-        // autocomplete users
-        $(document).ready(function () {
-            // check_all bulkactions
-            $("#check_all").change(function () {
-                var isChecked = $(this).prop("checked");
-                $('.col-bulkactions input').each(function () {
-                    if (isChecked == 1) {
-                        this.checked = true;
-                    } else {
-                        this.checked = false;
-                    }
-                });
+    document.getElementById('datatablesForm').onsubmit = function() {
+        toggleBulkActionsModal()
+    };
+    var bulkActionsModal = document.getElementById('bulkActionsModal')
+    bulkActionsModal.addEventListener('show.bs.modal', function() {
+        var bulkSelect = document.getElementById('bulk_actions')
+        bulkActionsModal.querySelector('.modal-body p').textContent = bulkSelect.options[bulkSelect.selectedIndex]
+            .getAttribute('data-dialog-content')
+        bulkActionsModal.querySelector('#bulkActionsSubmit').textContent = bulkSelect.options[bulkSelect.selectedIndex].text;
+    })
+</script>
+<script type="text/javascript">
+    // autocomplete users
+    $(document).ready(function() {
+        // check_all bulkactions
+        $("#check_all").change(function() {
+            var isChecked = $(this).prop("checked");
+            $('.col-bulkactions input').each(function() {
+                if (isChecked == 1) {
+                    this.checked = true;
+                } else {
+                    this.checked = false;
+                }
             });
         });
-    </script>
+    });
+</script>
 <?php osc_current_admin_theme_path('parts/footer.php'); ?>
