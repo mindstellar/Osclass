@@ -18,7 +18,6 @@ module.exports = function (grunt) {
                     expand: true,
                     src: [
                         nodeDir + '/jquery/dist/jquery.min.js',
-                        nodeDir + '/jquery/README.md',
                         nodeDir + '/jquery/LICENSE.txt'
                     ],
                     dest: assetsDir + '/jquery',
@@ -30,7 +29,6 @@ module.exports = function (grunt) {
                     expand: true,
                     src: [
                         nodeDir + '/jquery-migrate/dist/jquery-migrate.min.js',
-                        nodeDir + '/jquery-migrate/README.md',
                         nodeDir + '/jquery-migrate/LICENSE.txt'
                     ],
                     dest: assetsDir + '/jquery-migrate',
@@ -44,7 +42,6 @@ module.exports = function (grunt) {
                         src: [
                             nodeDir + '/jquery-ui-dist/*.min.js',
                             nodeDir + '/jquery-ui-dist/*.min.css',
-                            nodeDir + '/jquery-ui-dist/README.md',
                             nodeDir + '/jquery-ui-dist/LICENSE.txt'
                         ],
                         dest: assetsDir + '/jquery-ui',
@@ -61,7 +58,6 @@ module.exports = function (grunt) {
                     expand: true,
                     src: [
                         nodeDir + '/jquery-treeview/jquery.treeview.js',
-                        nodeDir + '/jquery-treeview/README.md'
                     ],
                     dest: assetsDir + '/jquery-treeview',
                     flatten: true
@@ -73,7 +69,6 @@ module.exports = function (grunt) {
                     src: [
                         nodeDir + '/jquery-validation/dist/jquery.validate.min.js',
                         nodeDir + '/jquery-validation/dist/additional-methods.min.js',
-                        nodeDir + '/jquery-validation/README.md',
                         nodeDir + '/jquery-validation/LICENSE.md'
                     ],
                     dest: assetsDir + '/jquery-validation',
@@ -85,7 +80,6 @@ module.exports = function (grunt) {
                     expand: true,
                     src: [
                         nodeDir + '/jquery-ui-nested/jquery-ui-nested.js',
-                        nodeDir + '/jquery-ui-nested/README.md'
                     ],
                     dest: assetsDir + '/jquery-ui-nested',
                     flatten: true
@@ -97,7 +91,6 @@ module.exports = function (grunt) {
                         expand: true,
                         src: [
                             nodeDir + '/spectrum-colorpicker/spectrum.js',
-                            nodeDir + '/spectrum-colorpicker/README.md',
                             nodeDir + '/spectrum-colorpicker/LICENSE',
                             nodeDir + '/spectrum-colorpicker/spectrum.css'
                         ],
@@ -126,7 +119,7 @@ module.exports = function (grunt) {
                     {
                         expand: true,
                         cwd: nodeDir + '/tinymce',
-                        src: ['license.txt', 'README.md', 'tinymce.min.js'],
+                        src: ['license.txt', 'tinymce.min.js'],
                         dest: assetsDir + '/tinymce',
                         flatten: false
                     },
@@ -155,7 +148,6 @@ module.exports = function (grunt) {
                     src: [
                         nodeDir + '/npm-font-open-sans/fonts/Regular/OpenSans-Regular.ttf',
                         nodeDir + '/npm-font-open-sans/LICENSE',
-                        nodeDir + '/npm-font-open-sans/README.md',
                     ],
                     dest: assetsDir + '/fonts/open-sans',
                     flatten: true
@@ -167,7 +159,6 @@ module.exports = function (grunt) {
                     src: [
                         nodeDir + '/bootstrap/dist/css/bootstrap.min.*',
                         nodeDir + '/bootstrap/dist/js/bootstrap.min.*',
-                        nodeDir + '/bootstrap/README.md',
                         nodeDir + '/bootstrap/LICENSE'
                     ],
                     dest: assetsDir + '/bootstrap',
@@ -192,6 +183,17 @@ module.exports = function (grunt) {
                     flatten: false
                 }
                 ]
+            },
+            'chart-js': {
+                files: [{
+                    expand: true,
+                    src: [
+                        nodeDir + '/chart.js/dist/chart.min.js',
+                        nodeDir + '/chart.js/LICENSE.md',
+                    ],
+                    dest: assetsDir + '/chart-js',
+                    flatten: true
+                }]
             },
         },
         sass: {
