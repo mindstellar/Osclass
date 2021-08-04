@@ -31,7 +31,7 @@
 
 $customPageHeader = static function () { ?>
     <h1><?php printf(__('Osclass %s'), OSCLASS_VERSION); ?>
-        <a href="#" class="ms-1 bi bi-question-circle-fill float-right" data-bs-target="#help-box" data-bs-toggle="collapse"
+        <a class="ms-1 bi bi-question-circle-fill float-right" data-bs-target="#help-box" data-bs-toggle="collapse"
            href="#help-box"></a>
     </h1>
     <?php

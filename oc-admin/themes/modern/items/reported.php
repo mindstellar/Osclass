@@ -42,7 +42,7 @@ function customPageHeader()
 {
     ?>
     <h1><?php _e('Listings'); ?>
-        <a href="#" class="ms-1 bi bi-question-circle-fill float-right" data-bs-target="#help-box" data-bs-toggle="collapse" href="#help-box"></a>
+        <a class="ms-1 bi bi-question-circle-fill float-right" data-bs-target="#help-box" data-bs-toggle="collapse" href="#help-box"></a>
     </h1>
 <?php
 }
