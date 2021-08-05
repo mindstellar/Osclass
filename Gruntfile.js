@@ -126,16 +126,16 @@ module.exports = function (grunt) {
                     {
                         expand: true,
                         cwd: nodeDir + '/tinymce',
-                        src: ['icons/**', 'skins/ui/oxide/**', 'skins/content/default/**', 'themes/silver/**'],
+                        src: ['icons/**/**/*.min.*', 'skins/ui/oxide/**/*.min.*', 'skins/content/default/**/*.min.*', 'themes/silver/**/**/*.min.*'],
                         dest: assetsDir + '/tinymce',
                         flatten: false
                     },
                     {
                         expand: true,
                         cwd: nodeDir + '/tinymce/plugins',
-                        src: ['advlist/**', 'anchor/**', 'autolink/**', 'charmap/**', 'code/**', 'fullscreen/**',
-                            'images/**', 'insertdatetime/**', 'link/**', 'lists/**', 'media/**', 'paste/**', 'preview/**',
-                            'searchreplace/**', 'table/**'
+                        src: ['advlist/*.min.js', 'anchor/*.min.js', 'autolink/*.min.js', 'charmap/*.min.js', 'code/*.min.js', 'fullscreen/*.min.js',
+                            'images/*.min.js', 'insertdatetime/*.min.js', 'link/*.min.js', 'lists/*.min.js', 'media/*.min.js', 'paste/*.min.js', 'preview/*.min.js',
+                            'searchreplace/*.min.js', 'table/*.min.js', 'visualblocks/*.min.js'
                         ],
                         dest: assetsDir + '/tinymce/plugins',
                     }
