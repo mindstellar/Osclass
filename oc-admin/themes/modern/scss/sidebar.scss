@@ -1,1 +1,65 @@
+.dashboard-sidebar {
+  @extend .px-sm-2, .px-0, .bg-black-light, .min-vh-100, .text-white;
+  min-width: 220px;
 
+  div {
+    &.nav-link {
+      color: $nav-pills-link-active-color;
+      background-color: $gray-800;
+
+      i {
+        &.collapsed {
+          transform: rotate(-90deg);
+        }
+
+        transition: ease 500ms;
+      }
+    }
+  }
+
+  .nav-link {
+    &.active {
+      & a {
+        color: $gray-200;
+
+        :hover {
+          color: $gray-100;
+        }
+      }
+    }
+
+    a {
+      color: $gray-500;
+
+      :hover {
+        color: $gray-200;
+        transition: $nav-link-transition;
+      }
+
+      @extend .text-decoration-none;
+    }
+  }
+}
+
+.sidebar-submenu {
+
+  background-color: $color-gray-black;
+  font-size: $font-size-sm;
+  margin-top: -.1rem;
+  padding-top: .1rem;
+  border: 0 $border-width solid transparent;
+  @include border-radius($navbar-toggler-border-radius);
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
+
+  a {
+    color: $gray-400;
+    font-size: $font-size-sm;
+    margin-bottom: $border-width;
+
+    &.sub-active, &:hover {
+      color: $gray-200;
+      background-color: $gray-600;
+    }
+  }
+}

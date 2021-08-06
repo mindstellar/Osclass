@@ -26,21 +26,6 @@
   margin-left: 80px;
 }
 
-#item-form {
-
-}
-
-#item-form #left-side {
-  width: 530px;
-  margin-right: 60px;
-  float: left;
-}
-
-#item-form #right-side {
-  width: 240px;
-  float: left;
-}
-
 #item-form label {
   display: block;
   font-size: 14px;
@@ -99,19 +84,6 @@
   border: solid 1px $color-gray-soft;
   @include rounded-corners;
 }
-
-#item-action-list {
-  float: right;
-  height: 15px;
-  margin: -5px 0 0;
-  padding: 0;
-}
-
-#item-action-list li {
-  float: left;
-  list-style-type: none;
-}
-
 /*
 #plugin-hook .row{}
 #plugin-hook .row label{

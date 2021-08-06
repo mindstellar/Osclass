@@ -91,7 +91,7 @@
 }
 
 .ui-dialog .form-actions .wrapper {
-  @extend .card-footer;
+  border-radius:none;
 }
 .ui-dialog .btn a {
   color: $white;

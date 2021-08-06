@@ -16,6 +16,7 @@
   background-color: $color-white;
   padding: 22px 15px 60px;
   position: relative;
+  min-height: calc(100vh - 210px)
 }
 
 #content-head h1 .ico,
@@ -74,14 +75,6 @@ h3.render-title {
   margin-right: 10px;
 }
 
-#spam-setting {
-  width: 750px;
-}
-
 .locations img {
   vertical-align: bottom;
-}
-
-#pretty-form {
-  width: 860px
 }
