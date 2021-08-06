@@ -263,12 +263,8 @@ class Session
     public function _getForm($key = '')
     {
         $form = $this->_get('form');
-        if ($key != '') {
-            if (isset($form[$key])) {
-                return $form[$key];
-            }
-
-            return '';
+        if ($key !== '') {
+            return $form[$key] ?? '';
         }
 
         return $form;

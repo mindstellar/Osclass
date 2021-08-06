@@ -117,7 +117,7 @@ osc_current_admin_theme_path('parts/header.php'); ?>
                                                            } ?></textarea>
                     </div>
                     <div class="form-actions">
-                        <input type="submit" value="<?php echo $button; ?>" class="btn btn-submit"/>
+                        <button type="submit" class="btn btn-submit"><?php echo $button; ?></button>
                     </div>
                 </fieldset>
             </form>

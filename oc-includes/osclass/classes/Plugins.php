@@ -398,7 +398,7 @@ class Plugins
 
 
     /**
-     * @param       $hook
+     * @param callable-string  $hook
      * @param mixed ...$args
      */
     public static function runHook($hook, ...$args)

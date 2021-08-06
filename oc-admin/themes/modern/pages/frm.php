@@ -99,11 +99,11 @@ function customHead()
             theme_advanced_toolbar_location: "top",
             plugins: [
                 "advlist autolink lists link charmap preview anchor",
-                "searchreplace visualblocks code fullscreen",
+                "searchreplace visualblocks code fullscreen media image",
                 "insertdatetime table paste"
             ],
             entity_encoding: "raw",
-            theme_advanced_buttons1_add: "forecolorpicker,fontsizeselect",
+            theme_advanced_buttons1_add: "forecolorpicker,fontsizeselect,image",
             theme_advanced_disable: "styleselect,anchor",
             relative_urls: false,
             remove_script_host: false,
@@ -165,7 +165,7 @@ osc_current_admin_theme_path('parts/header.php'); ?>
             <?php if (customFrmText('edit')) { ?>
                 <a href="javascript:history.go(-1)" class="btn btn-dim"><?php _e('Cancel'); ?></a>
             <?php } ?>
-            <input type="submit" value="<?php echo osc_esc_html(customFrmText('btn_text')); ?>" class="btn btn-submit"/>
+            <button type="submit" class="btn btn-submit"><?php echo osc_esc_html(customFrmText('btn_text')); ?></button>
         </div>
     </form>
 </div>

@@ -119,7 +119,9 @@ class FormInputs implements InputInterface
      */
     public function text(string $name, $value, array $attributes = [], array $options = [])
     : string {
-        $attributes['type'] = 'text';
+        if (!isset($attributes['type'])) {
+            $attributes['type'] = 'text';
+        }
         if (!isset($attributes['class'])) {
             $attributes['class'] = $this->textClass;
         }

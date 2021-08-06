@@ -177,12 +177,16 @@ osc_add_hook('admin_header', 'customHead', 10);
         </div>
         <div class="grid-row grid-50 no-bottom-margin">
             <div class="row-wrapper">
+                <div class="btn-group btn-group-sm float-end">
                 <?php
                 $comments_stats_intervals = ['month', 'week', 'day'];
+                if(!$type){
+                    $type = 'day';
+                }
                 foreach ($comments_stats_intervals as $k => $v) {
-                    echo '<a id="' . $v . '" class="btn float-right';
-                    if ($type === $v) {
-                        echo ' btn-green';
+                    echo '<a id="' . $v . '" class="btn btn-outline-primary';
+                    if ($type === $v ) {
+                        echo ' active';
                     }
                     echo '" href="' . osc_admin_base_url(true) . '?page=stats&amp;action=reports&amp;type_stat=' . $v . '">';
                     if ($v === 'month') {
@@ -194,6 +198,7 @@ osc_add_hook('admin_header', 'customHead', 10);
                     }
                     echo '</a>';
                 } ?>
+                </div>
             </div>
         </div>
         <div class="grid-row grid-100 clear">

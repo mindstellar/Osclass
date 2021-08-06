@@ -159,8 +159,7 @@ osc_current_admin_theme_path('parts/header.php'); ?>
                         </div>
                         <div class="clear"></div>
                         <div class="form-actions form-inline">
-                            <input type="submit" value="<?php echo osc_esc_html(__('Save changes')); ?>"
-                                   class="btn btn-submit"/>
+                            <button type="submit" class="btn btn-submit"><?php echo osc_esc_html(__('Save changes')); ?></button>
                             <a id="btn-display-test-it" class="btn btn-submit"><?php _e('Test it'); ?></a>
                         </div>
                     </form>

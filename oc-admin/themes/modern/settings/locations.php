@@ -80,9 +80,9 @@ osc_current_admin_theme_path('parts/header.php'); ?>
                     <div class="widget-box">
                         <div class="widget-box-title">
                             <span><?php _e('Countries'); ?></span>
-                            <a id="b_new_country" class="mx-2 btn btn-sm btn-primary float-right" href="#" title="<?php _e('Add new'); ?>">
+                            <a id="b_new_country" class="mx-2 btn btn-sm btn-outline-primary float-right" href="#" title="<?php _e('Add new'); ?>">
                                 <i class="bi bi-plus-circle"></i></a>
-                            <a id="b_remove_country" class="btn btn-sm btn-danger float-right hide" href="#"
+                            <a id="b_remove_country" class="btn btn-sm btn-outline-danger float-right hide" href="#"
                                title="<?php _e('Remove selected'); ?>">
                                 <i class="bi bi-trash"></i></a>
                         </div>
@@ -119,10 +119,10 @@ osc_current_admin_theme_path('parts/header.php'); ?>
                     <div class="widget-box">
                         <div class="widget-box-title">
                             <span><?php _e('Regions'); ?></span>
-                            <a class="ms-2 btn btn-sm btn-primary float-right hide" id="b_new_region" href="#" title="<?php _e('Add new');
+                            <a class="ms-2 btn btn-sm btn-outline-primary float-right hide" id="b_new_region" href="#" title="<?php _e('Add new');
                             ?>">
                                 <i class="bi bi-plus-circle"></i></a>
-                            <a id="b_remove_region" class="btn btn-sm btn-danger float-right hide" href="#"
+                            <a id="b_remove_region" class="btn btn-sm btn-outline-danger float-right hide" href="#"
                                title="<?php _e('Remove selected'); ?>">
                                 <i class="bi bi-trash"></i></a>
                         </div>
@@ -137,9 +137,9 @@ osc_current_admin_theme_path('parts/header.php'); ?>
                     <div class="widget-box">
                         <div class="widget-box-title">
                             <span><?php _e('Cities'); ?></span>
-                            <a id="b_new_city" class="mx-2 btn btn-sm btn-primary float-end hide" href="#" title="<?php _e('Add new'); ?>">
+                            <a id="b_new_city" class="mx-2 btn btn-sm btn-outline-primary float-end hide" href="#" title="<?php _e('Add new'); ?>">
                                 <i class="bi bi-plus-circle"></i></a>
-                            <a id="b_remove_city" class="btn btn-sm btn-danger hide float-end"
+                            <a id="b_remove_city" class="btn btn-sm btn-outline-danger hide float-end"
                                href="#" title="<?php _e('Remove selected'); ?>">
                                 <i class="bi bi-trash"></i></a>
                         </div>
@@ -200,15 +200,15 @@ osc_current_admin_theme_path('parts/header.php'); ?>
         var stringImportLocations = '<?php echo osc_esc_js(__('Import locations')); ?>';
         var stringImportWarning = "<?php echo osc_esc_js(__("Import a country with it's regions and cities from our database. "
                                                             . "Already imported countries aren't shown.")); ?>";
-        var stringName = '<?php echo osc_esc_js(__('Name')); ?>';
-        var stringRegion = '<?php echo osc_esc_js(__('Region')); ?>';
-        var stringRegionName = '<?php echo osc_esc_js(__('Region name')); ?>';
-        var stringSave = '<?php echo osc_esc_js(__('Save')); ?>';
-        var stringSelectOption = '<?php echo osc_esc_js(__('Select option')); ?>';
-        var stringSlug = '<?php echo osc_esc_js(__('Slug')); ?>';
-        var stringSlugError = "<?php echo osc_esc_js(__('The slug is not unique.'));?>";
-        var stringSlugWarning = "<?php echo osc_esc_js(__('The slug has to be a unique string, could be left blank'));?>"
-        var stringViewMore = "<?php echo osc_esc_js(__('View more')); ?>";
+        var stringName = '<?php echo osc_esc_js(__("Name")); ?>';
+        var stringRegion = '<?php echo osc_esc_js(__("Region")); ?>';
+        var stringRegionName = '<?php echo osc_esc_js(__("Region name")); ?>';
+        var stringSave = '<?php echo osc_esc_js(__("Save")); ?>';
+        var stringSelectOption = '<?php echo osc_esc_js(__("Select option")); ?>';
+        var stringSlug = '<?php echo osc_esc_js(__("Slug")); ?>';
+        var stringSlugError = "<?php echo osc_esc_js(__("The slug is not unique."));?>";
+        var stringSlugWarning = "<?php echo osc_esc_js(__("The slug has to be a unique string, could be left blank"));?>"
+        var stringViewMore = "<?php echo osc_esc_js(__("View more")); ?>";
     </script>
 <?php
 osc_enqueue_script('admin-location');

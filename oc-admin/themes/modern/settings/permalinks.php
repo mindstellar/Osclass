@@ -348,9 +348,8 @@ function customHead()
 
         function showhide() {
             $("#inner_rules").toggle();
-            if ($("#show_hide a").html() == '<?php echo osc_esc_js(__('Show rules')); ?>') {
+            if ($("#show_hide a").html() === '<?php echo osc_esc_js(__('Show rules')); ?>') {
                 $("#show_hide a").html('<?php echo osc_esc_js(__('Hide rules')); ?>');
-                resetLayout();
             } else {
                 $("#show_hide a").html('<?php echo osc_esc_js(__('Show rules')); ?>')
             }
@@ -394,7 +393,7 @@ function customPageHeader()
 {
     ?>
     <h1><?php _e('Settings'); ?>
-        <a href="#" class="ms-1 bi bi-question-circle-fill float-right" data-bs-target="#help-box" data-bs-toggle="collapse"
+        <a class="ms-1 bi bi-question-circle-fill float-right" data-bs-target="#help-box" data-bs-toggle="collapse"
            href="#help-box"></a>
     </h1>
     <?php

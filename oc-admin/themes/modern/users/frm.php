@@ -360,7 +360,7 @@ $aux = customFrmText();
 
                 <div class="clear"></div>
                 <div class="form-actions">
-                    <input type="submit" value="<?php echo osc_esc_html($aux['btn_text']); ?>" class="btn btn-submit"/>
+                    <button type="submit" class="btn btn-submit"><?php echo osc_esc_html($aux['btn_text']); ?></button>
                 </div>
             </div>
         </fieldset>

@@ -20,10 +20,7 @@
 $numItemsPerCategory = __get('numItemsPerCategory');
 $numItems            = __get('numItems');
 $numUsers            = __get('numUsers');
-
-
-$aFeatured = __get('aFeatured');
-
+$aFeatured           = __get('aFeatured');
 osc_add_filter('render-wrapper', 'render_offset');
 /**
  * @return string
@@ -71,7 +68,7 @@ function customPageTitle($string)
 
 osc_add_filter('admin_title', 'customPageTitle');
 
-function customHead()
+function chartJs()
 {
     $items = __get('item_stats');
     $users = __get('user_stats');
@@ -192,23 +189,19 @@ function customHead()
             });
         }
 
-        $(document).ready(function () {
-            $("#widget-box-stats-select").bind('change', function () {
-                if ($(this).val() == 'users') {
-                    $('#widget-box-stats-listings').css('visibility', 'hidden');
-                    $('#widget-box-stats-users').css('visibility', 'visible');
-                } else {
-                    $('#widget-box-stats-users').css('visibility', 'hidden');
-                    $('#widget-box-stats-listings').css('visibility', 'visible');
-                }
-            });
-        });
+        function changeStats() {
+            if (document.getElementById('widget-box-stats-select').value === 'users') {
+                document.querySelector('#widget-box-stats-listings').classList.add('hide');
+                document.querySelector('#widget-box-stats-users').classList.remove('hide');
+            } else {
+                document.querySelector('#widget-box-stats-users').classList.add('hide');
+                document.querySelector('#widget-box-stats-listings').classList.remove('hide');
+            }
+        }
     </script>
     <?php
 }
-
-
-osc_add_hook('admin_header', 'customHead', 10);
+osc_add_hook('admin_footer', 'chartJs', 10);
 
 osc_current_admin_theme_path('parts/header.php'); ?>
 <div id="dashboard">
@@ -229,12 +222,12 @@ osc_current_admin_theme_path('parts/header.php'); ?>
                                     <tr<?php if ($even == true) {
                                         $even = false;
                                         echo ' class="even"';
-                                       } else {
-                                           $even = true;
-                                       }
-                                       if ($countEvent == 1) {
-                                           echo ' class="table-first-row"';
-                                       } ?>>
+                                    } else {
+                                        $even = true;
+                                    }
+                                    if ($countEvent == 1) {
+                                        echo ' class="table-first-row"';
+                                    } ?>>
                                         <td><a href="<?php echo osc_admin_base_url(true); ?>?page=items&amp;catId=<?php echo
                                             $c['pk_i_id']; ?>"><?php echo $c['s_name']; ?></a>
                                         </td>
@@ -245,9 +238,9 @@ osc_current_admin_theme_path('parts/header.php'); ?>
                                         <tr<?php if ($even == true) {
                                             $even = false;
                                             echo ' class="even"';
-                                           } else {
-                                               $even = true;
-                                           } ?>>
+                                        } else {
+                                            $even = true;
+                                        } ?>>
                                             <td class="children-cat"><a href="<?php echo osc_admin_base_url(true); ?>?page=items&amp;
                                             catId=<?php echo $subc['pk_i_id']; ?>"><?php echo $subc['s_name']; ?></a>
                                             </td>
@@ -275,25 +268,25 @@ osc_current_admin_theme_path('parts/header.php'); ?>
             <div class="row-wrapper">
                 <div class="widget-box">
                     <div class="widget-box-title">
-                        <h3><?php _e('Statistics'); ?> <select id="widget-box-stats-select"
+                        <h3><?php _e('Statistics'); ?> <select id="widget-box-stats-select" onchange="changeStats()"
                                                                class="widget-box-selector select-box-big input-medium">
                                 <option value="listing"><?php _e('New listings'); ?></option>
                                 <option value="users"><?php _e('New users'); ?></option>
                             </select></h3>
                     </div>
-                    <div class="widget-box-content widget-box-content-stats" style="overflow-y: visible;">
+                    <div class="widget-box-content widget-box-content-stats">
                         <div id="widget-box-stats-listings" class="widget-box-stats">
                             <b class="stats-title"><?php _e('New listings'); ?></b>
                             <div class="stats-detail"><?php printf(__('Total number of listings: %s'),
                                                                    $numItems); ?></div>
-                            <div id="placeholder-listing" class="graph-placeholder"></div>
+                            <div id="placeholder-listing" class="graph-placeholder" height="120"></div>
                             <a href="<?php echo osc_admin_base_url(true); ?>?page=stats&amp;action=items"
                                class="btn btn-dim"><?php _e('Listing statistics'); ?></a>
                         </div>
-                        <div id="widget-box-stats-users" class="widget-box-stats" style="visibility: hidden;">
+                        <div id="widget-box-stats-users" class="widget-box-stats hide">
                             <b class="stats-title"><?php _e('New users'); ?></b>
                             <div class="stats-detail"><?php printf(__('Total number of users: %s'), $numUsers); ?></div>
-                            <div id="placeholder-user" class="graph-placeholder"></div>
+                            <div id="placeholder-user" class="graph-placeholder" height="120"></div>
                             <a href="<?php echo osc_admin_base_url(true); ?>?page=stats&amp;action=users"
                                class="btn btn-dim"><?php _e('User statistics'); ?></a>
                         </div>

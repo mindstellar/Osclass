@@ -197,7 +197,7 @@ osc_current_admin_theme_path('parts/header.php'); ?>
                                 />
                                 <?php printf(
                                     __('Store %s queries'),
-                                    '<input name="custom_queries" id="custom_queries" type="text" class="input-small" '
+                                    '<input name="custom_queries" id="custom_queries" type="number" class="input-medium" '
                                     . (!in_array(
                                         osc_purge_latest_searches(),
                                         array('hour', 'day', 'week', 'forever', '1000')
