@@ -35,7 +35,6 @@ function addHelp()
         . '</p>';
 }
 
-
 osc_add_hook('help_box', 'addHelp');
 
 function customPageHeader()
@@ -46,7 +45,6 @@ function customPageHeader()
     </h1>
 <?php
 }
-
 
 osc_add_hook('admin_page_header', 'customPageHeader');
 
@@ -60,11 +58,7 @@ function customPageTitle($string)
     return sprintf(__('Reported listings &raquo; %s'), $string);
 }
 
-
 osc_add_filter('admin_title', 'customPageTitle');
-
-osc_add_hook('admin_header', 'customHead', 10);
-
 
 $aData = __get('aData');
 
@@ -78,7 +72,7 @@ osc_current_admin_theme_path('parts/header.php'); ?>
 <div class="relative">
     <div id="listing-toolbar">
         <div class="float-right">
-            <form method="get" action="<?php echo osc_admin_base_url(true); ?>" class="inline">
+            <form method="get" action="<?php echo osc_admin_base_url(true); ?>" class="inline" nocsrf>
                 <?php foreach (Params::getParamsAsArray('get') as $key => $value) { ?>
                     <?php if ($key !== 'iDisplayLength') { ?>
                         <input type="hidden" name="<?php echo osc_esc_html($key); ?>" value="<?php echo osc_esc_html($value); ?>" />

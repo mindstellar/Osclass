@@ -516,17 +516,18 @@ function osc_draw_admin_toolbar()
     $adminToolbar->render();
 }
 
+
 /**
  * Add logout link
  */
 function osc_admin_toolbar_logout()
 {
     AdminToolbar::newInstance()->add_menu(array(
-        'id'    => 'logout',
-        'title' => __('Logout'),
-        'href'  => osc_admin_base_url(true) . '?action=logout',
-        'meta'  => array('class' => 'btn btn-dim ico ico-32 ico-power float-right')
-    ));
+                                              'id'    => 'logout',
+                                              'title' => __('Logout'),
+                                              'href'  => osc_admin_base_url(true) . '?action=logout',
+                                              'meta'  => array('class' => 'bi bi-box-arrow-right')
+                                          ));
 }
 
 
@@ -577,7 +578,7 @@ function osc_admin_toolbar_update_core($force = false)
         }
         if (getPreference('update_core_available')) {
             $update_json = json_decode(Preference::newInstance()->get('update_core_json'), false);
-            $title = __('Osclass ').$update_json->s_new_version.__(' is available');
+            $title       = __('Osclass ') . $update_json->s_new_version . __(' is available');
             AdminToolbar::newInstance()->add_menu(
                 array(
                     'id'    => 'update_core',
@@ -808,6 +809,7 @@ function osc_admin_toolbar_update_languages($force = false)
     }
 }
 
+
 function osc_ga_analytics_footer()
 {
     $id = osc_google_analytics_id();
@@ -816,13 +818,18 @@ function osc_ga_analytics_footer()
         <script async src="https://www.googletagmanager.com/gtag/js?id=<?php echo osc_esc_html($id); ?>"></script>
         <script>
             window.dataLayer = window.dataLayer || [];
-            function gtag() { dataLayer.push(arguments); }
+
+            function gtag() {
+                dataLayer.push(arguments);
+            }
+
             gtag('js', new Date());
             gtag('config', '<?php echo osc_esc_js($id); ?>');
         </script>
         <?php
     }
 }
+
 
 if (osc_google_analytics_id()) {
     osc_add_hook('footer', 'osc_ga_analytics_footer');
@@ -835,6 +842,7 @@ function osc_item_tinymce_header()
     }
     osc_enqueue_script('tiny_mce');
 }
+
 
 function osc_item_tinymce_footer()
 {
@@ -851,14 +859,15 @@ function osc_item_tinymce_footer()
             theme_advanced_buttons2_add: 'media',
             plugins: 'advlist autolink lists link charmap preview anchor searchreplace visualblocks code fullscreen table paste'
         });
-        $(function() {
-            $('textarea[id^=description]').each(function(){
+        $(function () {
+            $('textarea[id^=description]').each(function () {
                 tinyMCE.execCommand('mceAddEditor', true, this.id);
             });
         });
     </script>
     <?php
 }
+
 
 if (osc_tinymce_frontend()) {
     osc_add_hook('header', 'osc_item_tinymce_header');
@@ -887,10 +896,14 @@ function osc_show_maintenance()
         </style>
     <?php }
 }
+
+
 osc_add_hook('header', 'osc_show_maintenance');
 
 function osc_meta_generator()
 {
     echo '<meta name="generator" content="Osclass ' . OSCLASS_VERSION . '" />';
 }
+
+
 osc_add_hook('header', 'osc_meta_generator');

@@ -52,7 +52,6 @@ function customPageHeader()
     <?php
 }
 
-
 osc_add_hook('admin_page_header', 'customPageHeader');
 
 /**
@@ -64,11 +63,7 @@ function customPageTitle($string)
 {
     return sprintf(__('Plugins &raquo; %s'), $string);
 }
-
-
 osc_add_filter('admin_title', 'customPageTitle');
-
-osc_add_hook('admin_header', 'customHead', 10);
 
 $iDisplayLength = __get('iDisplayLength');
 $aData          = __get('aPlugins');
@@ -94,11 +89,11 @@ $tab_index = 2;
         <tr>
             <th><?php _e('Name'); ?></th>
             <th colspan=""><?php _e('Description'); ?></th>
-            <th> &nbsp;</th>
-            <th> <?php _e('Configure'); ?></th>
-            <th> <?php _e('Activate'); ?>/<?php _e('Deactivate'); ?></th>
-            <th> <?php _e('Install'); ?>/<?php _e('Uninstall'); ?></th>
-            <th> <?php _e('Delete'); ?></th>
+            <th></th>
+            <th></th>
+            <th></th>
+            <th></th>
+            <th></th>
         </tr>
         </thead>
         <tbody>

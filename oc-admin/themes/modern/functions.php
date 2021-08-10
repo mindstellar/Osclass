@@ -1,4 +1,6 @@
-<?php if (!defined('OC_ADMIN')) {
+<?php
+
+if (!defined('OC_ADMIN')) {
     exit('Direct access is not allowed.');
 }
 
@@ -18,7 +20,9 @@ function admin_modeCompact_class($args)
     return $args;
 }
 
-function admin_js_lang_string(){
+
+function admin_js_lang_string()
+{
     ?>
     <script type="text/javascript">
         var osc = window.osc || {};
@@ -47,7 +51,9 @@ function admin_js_lang_string(){
     </script>
     <?php
 }
-osc_add_hook('admin_header','admin_js_lang_string');
+
+
+osc_add_hook('admin_header', 'admin_js_lang_string');
 
 osc_add_hook('ajax_admin_compactmode', 'modern_compactmode_actions');
 function modern_compactmode_actions()
@@ -96,9 +102,9 @@ function admin_header_favicons()
 
     foreach ($favicons as $f) { ?>
         <link <?php if ($f['rel'] !== '') {
-            ?>rel="<?php echo $f['rel']; ?>" <?php
+              ?>rel="<?php echo $f['rel']; ?>" <?php
               } if ($f['sizes'] !== '') {
-                    ?>sizes="<?php echo $f['sizes']; ?>" <?php
+              ?>sizes="<?php echo $f['sizes']; ?>" <?php
               } ?>href="<?php echo $f['href']; ?>">
     <?php }
 }
@@ -128,24 +134,6 @@ function admin_footer_html()
 
 
 osc_add_hook('admin_content_footer', 'admin_footer_html');
-
-// scripts
-function admin_theme_js()
-{
-    osc_load_scripts();
-}
-
-
-//osc_add_hook('admin_header', 'admin_theme_js', 9);
-
-// css
-function admin_theme_css()
-{
-    osc_load_styles();
-}
-
-
-//osc_add_hook('admin_header', 'admin_theme_css', 9);
 
 /**
  * @param null $locales

@@ -29,8 +29,6 @@
  */
 $aCountries = __get('aCountries');
 
-osc_add_hook('admin_header', 'customHead', 10);
-
 function addHelp()
 {
     echo '<p>'
@@ -39,7 +37,6 @@ function addHelp()
               . "until they're recalculated. Modify only if you're sure what you're doing!")
          . '</p>';
 }
-
 
 osc_add_hook('help_box', 'addHelp');
 
@@ -55,7 +52,6 @@ function customPageHeader()
     <?php
 }
 
-
 /**
  * @param $string
  *
@@ -66,7 +62,6 @@ function customPageTitle($string)
     return sprintf(__('Locations &raquo; %s'), $string);
 }
 
-
 osc_add_filter('admin_title', 'customPageTitle');
 osc_current_admin_theme_path('parts/header.php'); ?>
     <!-- container -->
@@ -75,7 +70,7 @@ osc_current_admin_theme_path('parts/header.php'); ?>
     <!-- settings form -->
     <div id="settings_form" class="locations">
         <div class="row g-1">
-            <div class="col-lg col-md-6">
+            <div class="col-md-4">
                 <div class="row-wrapper">
                     <div class="widget-box">
                         <div class="widget-box-title">
@@ -114,7 +109,7 @@ osc_current_admin_theme_path('parts/header.php'); ?>
                     </div>
                 </div>
             </div>
-            <div class="col-lg col-md-6">
+            <div class="col-md-4">
                 <div class="row-wrapper">
                     <div class="widget-box">
                         <div class="widget-box-title">
@@ -132,7 +127,7 @@ osc_current_admin_theme_path('parts/header.php'); ?>
                     </div>
                 </div>
             </div>
-            <div class="col-lg col-md-6">
+            <div class="col-md-4">
                 <div class="row-wrapper">
                     <div class="widget-box">
                         <div class="widget-box-title">

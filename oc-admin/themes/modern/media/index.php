@@ -36,7 +36,6 @@ function addHelp()
          . '</p>';
 }
 
-
 osc_add_hook('help_box', 'addHelp');
 
 function customPageHeader()
@@ -50,7 +49,6 @@ function customPageHeader()
     </h1>
     <?php
 }
-
 
 osc_add_hook('admin_page_header', 'customPageHeader');
 
@@ -66,8 +64,6 @@ function customPageTitle($string)
 
 
 osc_add_filter('admin_title', 'customPageTitle');
-
-osc_add_hook('admin_header', 'customHead', 10);
 
 $aData     = View::newInstance()->_get('aData');
 $aRawRows  = View::newInstance()->_get('aRawRows');
