@@ -134,7 +134,7 @@ module.exports = function (grunt) {
                         expand: true,
                         cwd: nodeDir + '/tinymce/plugins',
                         src: ['advlist/*.min.js', 'anchor/*.min.js', 'autolink/*.min.js', 'charmap/*.min.js', 'code/*.min.js', 'fullscreen/*.min.js',
-                            'images/*.min.js', 'insertdatetime/*.min.js', 'link/*.min.js', 'lists/*.min.js', 'media/*.min.js', 'paste/*.min.js', 'preview/*.min.js',
+                            'image/*.min.js', 'imagetools/*.min.js', 'insertdatetime/*.min.js', 'link/*.min.js', 'lists/*.min.js', 'media/*.min.js', 'paste/*.min.js', 'preview/*.min.js',
                             'searchreplace/*.min.js', 'table/*.min.js', 'visualblocks/*.min.js'
                         ],
                         dest: assetsDir + '/tinymce/plugins',
