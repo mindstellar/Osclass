@@ -255,7 +255,7 @@ osc_current_admin_theme_path('parts/header.php'); ?>
                             <input type="text" class="input-medium" name="maxSizeKb"
                                    value="<?php echo osc_esc_html(osc_max_size_kb()); ?>"/>
                             <span class="help-box"><?php _e('Size in KB'); ?></span>
-                            <div class="flashmessage flashmessage-warning flashmessage-inline">
+                            <div class="callout-warning">
                                 <p><?php printf(__('Maximum size PHP configuration allows: %d KB'), $maxPHPsize); ?></p>
                             </div>
                         </div>
@@ -272,7 +272,7 @@ osc_current_admin_theme_path('parts/header.php'); ?>
                                 <label for="use_imagick"><?php _e('Use ImageMagick instead of GD library'); ?></label>
                             </div>
                             <?php if (!$imagickLoaded) { ?>
-                                <div class="flashmessage flashmessage-error flashmessage-inline">
+                                <div class="callout-danger">
                                     <p><?php _e('ImageMagick library is not loaded'); ?></p>
                                 </div>
                             <?php } ?>
@@ -297,7 +297,7 @@ osc_current_admin_theme_path('parts/header.php'); ?>
                                     : ''); ?> <?php echo($freeType ? '' : 'disabled="disabled"'); ?> />
                                 <label for="watermark_text"><?php _e('Text'); ?></label>
                                 <?php if (!$freeType) { ?>
-                                    <div class="flashmessage flashmessage-inline error">
+                                    <div class="callout-danger">
                                         <p><?php printf(
                                                 __('Freetype library is required. How to <a target="_blank" href="%s">install/configure</a>'),
                                                 'https://www.php.net/manual/en/image.installation.php'

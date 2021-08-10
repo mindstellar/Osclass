@@ -464,7 +464,7 @@ class ItemForm extends Form
         if ($type === 'edit') {
             $value = '-1';  // default no change expiration date
         }
-        echo '<input id="dt_expiration" type="text" name="dt_expiration" value="'
+        echo '<input class="form-control form-control-sm" id="dt_expiration" type="text" name="dt_expiration" value="'
             . osc_esc_html(htmlentities($value, ENT_COMPAT, 'UTF-8'))
             . '" placeholder="yyyy-mm-dd HH:mm:ss" />';
 
@@ -500,22 +500,22 @@ class ItemForm extends Form
                 });
                 draw_expiration(exp_days[$("#catId").value]);
             });
-            if (osc == undefined) {
+            if (osc === undefined) {
                 var osc = {};
             }
-            if (osc.langs == undefined) {
+            if (osc.langs === undefined) {
                 osc.langs = {};
             }
-            if (osc.langs.nochange_expiration == undefined) {
+            if (osc.langs.nochange_expiration === undefined) {
                 osc.langs.nochange_expiration = '<?php echo osc_esc_js(__('No change expiration')); ?>';
             }
-            if (osc.langs.without_expiration == undefined) {
+            if (osc.langs.without_expiration === undefined) {
                 osc.langs.without_expiration = '<?php echo osc_esc_js(__('Without expiration')); ?>';
             }
-            if (osc.langs.expiration_day == undefined) {
+            if (osc.langs.expiration_day === undefined) {
                 osc.langs.expiration_day = '<?php echo osc_esc_js(__('1 day')); ?>';
             }
-            if (osc.langs.expiration_days == undefined) {
+            if (osc.langs.expiration_days === undefined) {
                 osc.langs.expiration_days = '<?php echo osc_esc_js(__('%d days')); ?>';
             }
 

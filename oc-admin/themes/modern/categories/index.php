@@ -393,7 +393,7 @@ function drawCategory($category)
     <div class="right">
         <!-- categories form -->
         <div class="categories">
-            <div class="flashmessage flashmessage-info">
+            <div class="callout-info callout-block">
                 <div class="info"><?php _e('Drag&drop the categories to reorder them the way you like. Click on edit link to edit the 
             category'); ?></div>
             </div>
@@ -414,7 +414,7 @@ function drawCategory($category)
         <!-- /categories form -->
     </div>
     <!-- right container -->
-    <div id="deleteModal" method="get" action="<?php echo osc_admin_base_url(true); ?>" class="modal fade static">
+    <form id="deleteModal" method="get" action="<?php echo osc_admin_base_url(true); ?>" class="modal fade static">
         <div class="modal-dialog modal-sm">
             <div class="modal-content">
                 <div class="modal-header">
@@ -436,7 +436,7 @@ function drawCategory($category)
                 </div>
             </div>
         </div>
-    </div>
+    </form>
     <script>
         function delete_category(id) {
             var deleteModal = document.getElementById('deleteModal');

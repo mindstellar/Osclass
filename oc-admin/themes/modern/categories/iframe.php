@@ -40,7 +40,7 @@ $locales     = OSCLocale::newInstance()->listAllEnabled();
         <?php CategoryForm::primary_input_hidden($category); ?>
         <fieldset>
             <div class="grid-system">
-                <div class="grid-row grid-first-row grid-30 no-bottom-margin">
+                <div class="grid-row grid-first-row grid-30 mb-0">
                     <div class="row-wrapper">
                         <label><?php _e('Expiration dates'); ?></label>
                         <div class="input micro">
@@ -57,7 +57,7 @@ $locales     = OSCLocale::newInstance()->listAllEnabled();
                         </div>
                     </div>
                 </div>
-                <div class="grid-row grid-70 no-bottom-margin">
+                <div class="grid-row grid-70 mb-0">
                     <div class="row-wrapper">
                         <?php CategoryForm::multilanguage_name_description($locales, $category); ?>
                     </div>

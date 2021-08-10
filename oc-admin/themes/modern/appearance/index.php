@@ -92,20 +92,17 @@ osc_current_admin_theme_path('parts/header.php'); ?>
                                 title="<?php echo $info['name']; ?>" alt="<?php echo $info['name']; ?>"
                         />
                         <div class="theme-info">
-                            <h3><?php echo $info['name']; ?> <?php echo $info['version']; ?> <?php _e('by'); ?>
-                                <a
-                                        href="<?php echo $info['author_url']; ?>"
-                                        target="_blank"><?php echo $info['author_name']; ?>
-                                </a>
-                            </h3>
-                        </div>
-                        <div class="theme-description">
-                            <?php echo $info['description']; ?>
+                            <h3><?php echo $info['name']; ?></h3>
+                            <p><?php _e('Version')?> : <?php echo $info['version']; ?></p>
+                            <p><?php _e('Author')?> : <a href="<?php echo $info['author_url']; ?>"
+                                                       target="_blank"><?php echo $info['author_name']; ?></a>
+                            </p>
+                            <p><?php _e('Description')?> : <?php echo $info['description']; ?></p>
                         </div>
                         <div class="clear"></div>
                     </div>
                 </div>
-                <h2 class="render-title"><?php _e('Available themes'); ?></h2>
+                <h2 class="render-title lead"><?php _e('Available themes'); ?></h2>
                 <div class="available-theme">
                     <?php
                     $aThemesToUpdate = json_decode(osc_get_preference('themes_to_update'), true);
@@ -119,9 +116,9 @@ osc_current_admin_theme_path('parts/header.php'); ?>
                         $info = WebThemes::newInstance()->loadThemeInfo($theme);
                         ?>
                         <div class="theme">
+                            <img class="card-img-top" src="<?php echo osc_base_url(); ?>/oc-content/themes/<?php echo $theme; ?>/screenshot.png"
+                                 title="<?php echo $info['name']; ?>" alt="<?php echo $info['name']; ?>"/>
                             <div class="theme-stage">
-                                <img src="<?php echo osc_base_url(); ?>/oc-content/themes/<?php echo $theme; ?>/screenshot.png"
-                                     title="<?php echo $info['name']; ?>" alt="<?php echo $info['name']; ?>"/>
                                 <div class="theme-actions">
                                     <a href="<?php echo osc_admin_base_url(true);
                                     ?>?page=appearance&amp;action=activate&amp;theme=<?php
@@ -188,9 +185,9 @@ osc_current_admin_theme_path('parts/header.php'); ?>
 </form>
 <script type="text/javascript">
     function delete_dialog(id) {
-        var deleteModal = document.getElementById('deleteModal')
-        deleteModal.querySelector('input[name=\'webtheme\']').value = id;
-        (new bootstrap.Modal(document.getElementById('deleteModal'))).toggle()
+        var deleteModal = document.getElementById("deleteModal")
+        deleteModal.querySelector("input[name='webtheme']").value = id;
+        (new bootstrap.Modal(document.getElementById("deleteModal"))).toggle()
         return false;
     }
 </script>

@@ -82,10 +82,10 @@ osc_current_admin_theme_path('parts/header.php'); ?>
         <div class="float-right">
             <?php if (Params::getParam('showAll') !== 'off') { ?>
                 <a href="<?php echo osc_admin_base_url(true) . '?page=comments&showAll=off'; ?>"
-                   class="btn btn-red"><?php _e('Hidden comments'); ?></a>
+                   class="btn btn-sm btn-red"><?php _e('Hidden comments'); ?></a>
             <?php } else { ?>
                 <a href="<?php echo osc_admin_base_url(true) . '?page=comments'; ?>"
-                   class="btn btn-blue"><?php _e('All comments'); ?></a>
+                   class="btn btn-sm btn-blue"><?php _e('All comments'); ?></a>
             <?php } ?>
         </div>
     </div>

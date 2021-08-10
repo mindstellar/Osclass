@@ -82,7 +82,7 @@ osc_current_admin_theme_path('parts/header.php'); ?>
                         </div>
                     </div>
                     <div class="form-actions">
-                        <input type="submit" value="<?php echo osc_esc_html(__('Upload')); ?>" class="btn btn-submit"/>
+                        <button type="submit" class="btn btn-submit"><?php echo osc_esc_html(__('Upload')); ?></button>
                     </div>
                 </form>
             <?php } else { ?>

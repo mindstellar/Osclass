@@ -157,7 +157,7 @@ osc_current_admin_theme_path('parts/header.php'); ?>
             <form method="get" action="<?php echo osc_admin_base_url(true); ?>" id="shortcut-filters">
                 <input type="hidden" name="page" value="items"/>
                 <input type="hidden" name="iDisplayLength" value="<?php echo $iDisplayLength; ?>"/>
-                <div class="input-group-sm input-group ms-2">
+                <div class="input-group-sm input-group">
                     <?php if ($withFilters) { ?>
                         <a id="btn-hide-filters" class="btn btn-dim"
                            href="<?php echo osc_admin_base_url(true) . '?page=items'; ?>"><?php _e('Reset filters'); ?></a>
@@ -287,7 +287,6 @@ osc_show_pagination_admin($aData);
       data-bs-backdrop="static"
       data-bs-keyboard="false" tabindex="-1">
     <div class="modal-dialog modal-lg">
-
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title" id="staticBackdropLabel"><?php _e('Filters') ?></h5>
@@ -424,8 +423,8 @@ osc_show_pagination_admin($aData);
             </div>
             <div class="modal-footer">
                 <input id="show-filters" type="submit" value="<?php echo osc_esc_html(__('Apply filters')); ?>"
-                       class="btn btn-success"/>
-                <a class="btn btn-warning"
+                       class="btn btn-success btn-sm"/>
+                <a class="btn btn-warning btn-sm"
                    href="<?php echo osc_admin_base_url(true) . '?page=items'; ?>"><?php _e('Reset filters'); ?></a>
             </div>
         </div>

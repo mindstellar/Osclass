@@ -198,12 +198,12 @@ $aux = customFrmText();
     });
 </script>
 
-<div class="grid-row no-bottom-margin">
+<div class="grid-row mb-0">
     <div class="row-wrapper">
         <h2 class="render-title"><?php echo $aux['title']; ?></h2>
     </div>
 </div>
-<div class="grid-row no-bottom-margin float-right">
+<div class="grid-row mb-0 float-right">
     <div class="row-wrapper">
         <?php if (__get('user') != '') {
             $actions = __get('actions'); ?>

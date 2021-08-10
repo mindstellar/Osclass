@@ -111,7 +111,7 @@ osc_current_admin_theme_path('parts/header.php'); ?>
                                     break;
                             }
                             ?>
-                            <div class="flashmessage flashmessage-inline flashmessage-<?php echo $alert_type; ?> separate-top-medium">
+                            <div class="callout-<?php echo $alert_type; ?> separate-top-medium">
                                 <p><?php echo $alert_msg; ?></p>
                             </div>
                         </div>

@@ -125,7 +125,7 @@ function customHead()
             // Instantiate and draw our chart, passing in some options.
             var chart = new google.visualization.ColumnChart(document.getElementById('placeholder'));
             chart.draw(data, {
-                colors: ['#058dc7', '#e6f4fa'],
+                colors: ['#0d6efd', '#e6f4fa'],
                 areaOpacity: 0.1,
                 lineWidth: 3,
                 hAxis: {
@@ -137,7 +137,7 @@ function customHead()
                     showTextEvery: 2,
                     slantedText: false,
                     textStyle: {
-                        color: '#058dc7',
+                        color: '#0d6efd',
                         fontSize: 10
                     }
                 },
@@ -170,12 +170,12 @@ osc_add_hook('admin_header', 'customHead', 10);
 ?>
 <?php osc_current_admin_theme_path('parts/header.php'); ?>
     <div class="grid-system" id="stats-page">
-        <div class="grid-row grid-50 no-bottom-margin">
+        <div class="grid-row grid-50 mb-0">
             <div class="row-wrapper">
                 <h2 class="render-title"><?php _e('Report Statistics'); ?></h2>
             </div>
         </div>
-        <div class="grid-row grid-50 no-bottom-margin">
+        <div class="grid-row grid-50 mb-0">
             <div class="row-wrapper">
                 <div class="btn-group btn-group-sm float-end">
                 <?php

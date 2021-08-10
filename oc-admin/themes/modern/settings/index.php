@@ -214,7 +214,7 @@ osc_current_admin_theme_path('parts/header.php'); ?>
                     <div class="form-row">
                         <div class="form-label"><?php _e('Default language'); ?></div>
                         <div class="form-controls">
-                            <select class="form-select form-select-sm w-25" name="language">
+                            <select class="form-select form-select-sm " name="language">
                                 <?php foreach ($aLanguages as $lang) { ?>
                                     <option value="<?php echo $lang['pk_c_code']; ?>" <?php echo((osc_language()
                                                                                                   === $lang['pk_c_code'])
@@ -227,7 +227,7 @@ osc_current_admin_theme_path('parts/header.php'); ?>
                     <div class="form-row">
                         <div class="form-label"><?php _e('Default currency'); ?></div>
                         <div class="form-controls">
-                            <select class="form-select form-select-sm w-25" name="currency" id="currency_admin">
+                            <select class="form-select form-select-sm " name="currency" id="currency_admin">
                                 <?php foreach ($aCurrencies as $currency) { ?>
                                     <option value="<?php echo osc_esc_html($currency['pk_c_code']); ?>" <?php echo((osc_currency()
                                                                                                                     === $currency['pk_c_code'])
@@ -240,7 +240,7 @@ osc_current_admin_theme_path('parts/header.php'); ?>
                     <div class="form-row">
                         <div class="form-label"><?php _e('Week starts on'); ?></div>
                         <div class="form-controls">
-                            <select class="form-select form-select-sm w-25" name="weekStart" id="weekStart">
+                            <select class="form-select form-select-sm " name="weekStart" id="weekStart">
                                 <option value="0" <?php if (osc_week_starts_at() == '0') {
                                 ?>selected="selected"<?php
                                 } ?>><?php _e('Sunday'); ?></option>
@@ -268,7 +268,7 @@ osc_current_admin_theme_path('parts/header.php'); ?>
                     <div class="form-row">
                         <div class="form-label"><?php _e('Timezone'); ?></div>
                         <div class="form-controls">
-                            <select class="form-select form-select-sm w-25" name="timezone" id="timezone">
+                            <select class="form-select form-select-sm " name="timezone" id="timezone">
                                 <?php $selected_tz = osc_timezone(); ?>
                                 <option value="" selected="selected"><?php _e('Select a timezone...'); ?></option>
                                 <?php

@@ -97,7 +97,7 @@ function chartJs()
             // Instantiate and draw our chart, passing in some options.
             var chart = new google.visualization.AreaChart(document.getElementById('placeholder-listing'));
             chart.draw(data, {
-                colors: ['#058dc7', '#e6f4fa'],
+                colors: ['#0d6efd', '#e6f4fa'],
                 areaOpacity: 0.1,
                 lineWidth: 3,
                 hAxis: {
@@ -109,7 +109,7 @@ function chartJs()
                     showTextEvery: 2,
                     slantedText: false,
                     textStyle: {
-                        color: '#058dc7',
+                        color: '#0d6efd',
                         fontSize: 10
                     }
                 },
@@ -152,7 +152,7 @@ function chartJs()
             // Instantiate and draw our chart, passing in some options.
             var chart = new google.visualization.AreaChart(document.getElementById('placeholder-user'));
             chart.draw(data, {
-                colors: ['#058dc7', '#e6f4fa'],
+                colors: ['#0d6efd', '#e6f4fa'],
                 areaOpacity: 0.1,
                 lineWidth: 3,
                 hAxis: {
@@ -164,7 +164,7 @@ function chartJs()
                     showTextEvery: 2,
                     slantedText: false,
                     textStyle: {
-                        color: '#058dc7',
+                        color: '#0d6efd',
                         fontSize: 10
                     }
                 },
@@ -201,100 +201,97 @@ function chartJs()
     </script>
     <?php
 }
+
+
 osc_add_hook('admin_footer', 'chartJs', 10);
 
 osc_current_admin_theme_path('parts/header.php'); ?>
 <div id="dashboard">
-    <div class="grid-system">
-        <div class="grid-row grid-first-row grid-50">
-            <div class="row-wrapper">
-                <div class="widget-box">
-                    <div class="widget-box-title"><h3><?php _e('Listings by category'); ?></h3></div>
-                    <div class="widget-box-content">
-                        <?php
-                        $countEvent = 1;
-                        if (!empty($numItemsPerCategory)) { ?>
-                            <table class="table" cellpadding="0" cellspacing="0">
-                                <tbody>
-                                <?php
-                                $even = false;
-                                foreach ($numItemsPerCategory as $c) { ?>
+    <div class="row row-col-lg-3 row-col-md-6 gap-3">
+        <div class="col">
+            <div class="widget-box h-100">
+                <div class="widget-box-title"><h3><?php _e('Listings by category'); ?></h3></div>
+                <div class="widget-box-content">
+                    <?php
+                    $countEvent = 1;
+                    if (!empty($numItemsPerCategory)) { ?>
+                        <table class="table" cellpadding="0" cellspacing="0">
+                            <tbody>
+                            <?php
+                            $even = false;
+                            foreach ($numItemsPerCategory as $c) { ?>
+                                <tr<?php if ($even == true) {
+                                    $even = false;
+                                    echo ' class="even"';
+                                } else {
+                                    $even = true;
+                                }
+                                if ($countEvent == 1) {
+                                    echo ' class="table-first-row"';
+                                } ?>>
+                                    <td><a href="<?php echo osc_admin_base_url(true); ?>?page=items&amp;catId=<?php echo
+                                        $c['pk_i_id']; ?>"><?php echo $c['s_name']; ?></a>
+                                    </td>
+                                    <td><?php echo $c['i_num_items'] . '&nbsp;' . (($c['i_num_items'] == 1)
+                                                ? __('Listing') : __('Listings')); ?></td>
+                                </tr>
+                                <?php foreach ($c['categories'] as $subc) { ?>
                                     <tr<?php if ($even == true) {
                                         $even = false;
                                         echo ' class="even"';
                                     } else {
                                         $even = true;
-                                    }
-                                    if ($countEvent == 1) {
-                                        echo ' class="table-first-row"';
                                     } ?>>
-                                        <td><a href="<?php echo osc_admin_base_url(true); ?>?page=items&amp;catId=<?php echo
-                                            $c['pk_i_id']; ?>"><?php echo $c['s_name']; ?></a>
+                                        <td class="children-cat"><a href="<?php echo osc_admin_base_url(true); ?>?page=items&amp;
+                                            catId=<?php echo $subc['pk_i_id']; ?>"><?php echo $subc['s_name']; ?></a>
                                         </td>
-                                        <td><?php echo $c['i_num_items'] . '&nbsp;' . (($c['i_num_items'] == 1)
+                                        <td><?php echo $subc['i_num_items'] . ' ' . (($subc['i_num_items'] == 1)
                                                     ? __('Listing') : __('Listings')); ?></td>
                                     </tr>
-                                    <?php foreach ($c['categories'] as $subc) { ?>
-                                        <tr<?php if ($even == true) {
-                                            $even = false;
-                                            echo ' class="even"';
-                                        } else {
-                                            $even = true;
-                                        } ?>>
-                                            <td class="children-cat"><a href="<?php echo osc_admin_base_url(true); ?>?page=items&amp;
-                                            catId=<?php echo $subc['pk_i_id']; ?>"><?php echo $subc['s_name']; ?></a>
-                                            </td>
-                                            <td><?php echo $subc['i_num_items'] . ' ' . (($subc['i_num_items'] == 1)
-                                                        ? __('Listing') : __('Listings')); ?></td>
-                                        </tr>
-                                        <?php
-                                        $countEvent++;
-                                    }
-                                    ?>
                                     <?php
                                     $countEvent++;
                                 }
                                 ?>
-                                </tbody>
-                            </table>
-                        <?php } else { ?>
-                            <?php _e("There aren't any uploaded listing yet"); ?>
-                        <?php } ?>
+                                <?php
+                                $countEvent++;
+                            }
+                            ?>
+                            </tbody>
+                        </table>
+                    <?php } else { ?>
+                        <?php _e("There aren't any uploaded listing yet"); ?>
+                    <?php } ?>
+                </div>
+            </div>
+        </div>
+        <div class="col">
+            <div class="widget-box h-100">
+                <div class="widget-box-title">
+                    <h3><?php _e('Statistics'); ?> <select id="widget-box-stats-select" onchange="changeStats()"
+                                                           class="widget-box-selector select-box-big input-medium">
+                            <option value="listing"><?php _e('New listings'); ?></option>
+                            <option value="users"><?php _e('New users'); ?></option>
+                        </select></h3>
+                </div>
+                <div class="widget-box-content widget-box-content-stats">
+                    <div id="widget-box-stats-listings" class="widget-box-stats">
+                        <b class="stats-title"><?php _e('New listings'); ?></b>
+                        <div class="stats-detail"><?php printf(__('Total number of listings: %s'),
+                                                               $numItems); ?></div>
+                        <div id="placeholder-listing" class="graph-placeholder" height="120"></div>
+                        <a href="<?php echo osc_admin_base_url(true); ?>?page=stats&amp;action=items"
+                           class="btn btn-sm btn-dim"><?php _e('Listing statistics'); ?></a>
+                    </div>
+                    <div id="widget-box-stats-users" class="widget-box-stats hide">
+                        <b class="stats-title"><?php _e('New users'); ?></b>
+                        <div class="stats-detail"><?php printf(__('Total number of users: %s'), $numUsers); ?></div>
+                        <div id="placeholder-user" class="graph-placeholder" height="120"></div>
+                        <a href="<?php echo osc_admin_base_url(true); ?>?page=stats&amp;action=users"
+                           class="btn btn-sm btn-dim"><?php _e('User statistics'); ?></a>
                     </div>
                 </div>
             </div>
         </div>
-        <div class="grid-row grid-50">
-            <div class="row-wrapper">
-                <div class="widget-box">
-                    <div class="widget-box-title">
-                        <h3><?php _e('Statistics'); ?> <select id="widget-box-stats-select" onchange="changeStats()"
-                                                               class="widget-box-selector select-box-big input-medium">
-                                <option value="listing"><?php _e('New listings'); ?></option>
-                                <option value="users"><?php _e('New users'); ?></option>
-                            </select></h3>
-                    </div>
-                    <div class="widget-box-content widget-box-content-stats">
-                        <div id="widget-box-stats-listings" class="widget-box-stats">
-                            <b class="stats-title"><?php _e('New listings'); ?></b>
-                            <div class="stats-detail"><?php printf(__('Total number of listings: %s'),
-                                                                   $numItems); ?></div>
-                            <div id="placeholder-listing" class="graph-placeholder" height="120"></div>
-                            <a href="<?php echo osc_admin_base_url(true); ?>?page=stats&amp;action=items"
-                               class="btn btn-dim"><?php _e('Listing statistics'); ?></a>
-                        </div>
-                        <div id="widget-box-stats-users" class="widget-box-stats hide">
-                            <b class="stats-title"><?php _e('New users'); ?></b>
-                            <div class="stats-detail"><?php printf(__('Total number of users: %s'), $numUsers); ?></div>
-                            <div id="placeholder-user" class="graph-placeholder" height="120"></div>
-                            <a href="<?php echo osc_admin_base_url(true); ?>?page=stats&amp;action=users"
-                               class="btn btn-dim"><?php _e('User statistics'); ?></a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="clear"></div>
     </div>
 </div>
 

@@ -132,7 +132,7 @@ osc_current_admin_theme_path('parts/header.php'); ?>
                     <div class="form-row">
                         <div class="form-label"><?php _e('Server type'); ?></div>
                         <div class="form-controls">
-                            <select class="form-select form-select-sm w-25" name="mailserver_type">
+                            <select class="form-select form-select-sm " name="mailserver_type">
                                 <option value="custom" <?php echo (osc_mailserver_type() === 'custom')
                                     ? 'selected="true"' : ''; ?>><?php _e('Custom Server'); ?></option>
                                 <option value="gmail" <?php echo (osc_mailserver_type() === 'gmail') ? 'selected="true"'
@@ -189,11 +189,11 @@ osc_current_admin_theme_path('parts/header.php'); ?>
                                    value="<?php echo osc_esc_html(osc_mailserver_ssl()); ?>"/>
                             <?php _e('Options: blank, ssl or tls'); ?>
                             <?php if (PHP_SAPI === 'cgi-fcgi' || PHP_SAPI === 'cgi') { ?>
-                                <div class="flashmessage bg-warning flashmessage-inline warning">
+                                <div class="callout-warning">
                                     <p><?php _e('Cannot be sure that Apache Module <b>mod_ssl</b> is loaded.'); ?></p>
                                 </div>
                             <?php } elseif (!@apache_mod_loaded('mod_ssl')) { ?>
-                                <div class="flashmessage bg-warning flashmessage-inline warning">
+                                <div class="callout-warning">
                                     <p><?php _e('Apache Module <b>mod_ssl</b> is not loaded'); ?></p>
                                 </div>
                             <?php } ?>
