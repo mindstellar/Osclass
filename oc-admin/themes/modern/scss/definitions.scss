@@ -1,6 +1,3 @@
-/* THEME ROLLER JQUERY UI
-http://jqueryui.com/themeroller/#ffDefault=Arial%2C+%22Helvetica+Neue%22%2C+Helvetica%2C+Verdana%2C+sans-serif%3B &fwDefault=normal &fsDefault=13px &cornerRadius=4px &bgColorHeader=f3f3f3 &bgTextureHeader=01_flat.png &bgImgOpacityHeader=0 &borderColorHeader=dddddd &fcHeader=222222 &iconColorHeader=222222 &bgColorContent=ffffff &bgTextureContent=01_flat.png &bgImgOpacityContent=0 &borderColorContent=dddddd &fcContent=222222 &iconColorContent=222222 &bgColorDefault=e6e6e6 &bgTextureDefault=01_flat.png &bgImgOpacityDefault=75 &borderColorDefault=dddddd &fcDefault=555555 &iconColorDefault=888888 &bgColorHover=dadada &bgTextureHover=01_flat.png &bgImgOpacityHover=75 &borderColorHover=dddddd &fcHover=212121 &iconColorHover=454545 &bgColorActive=ffffff &bgTextureActive=02_glass.png &bgImgOpacityActive=65 &borderColorActive=dddddd &fcActive=212121 &iconColorActive=454545 &bgColorHighlight=fbf9ee &bgTextureHighlight=02_glass.png &bgImgOpacityHighlight=55 &borderColorHighlight=fcefa1 &fcHighlight=363636 &iconColorHighlight=2e83ff &bgColorError=fef1ec &bgTextureError=05_inset_soft.png &bgImgOpacityError=95 &borderColorError=cd0a0a &fcError=cd0a0a &iconColorError=cd0a0a &bgColorOverlay=000000 &bgTextureOverlay=01_flat.png &bgImgOpacityOverlay=0 &opacityOverlay=30 &bgColorShadow=aaaaaa &bgTextureShadow=01_flat.png &bgImgOpacityShadow=0 &opacityShadow=30 &thicknessShadow=8px &offsetTopShadow=-8px &offsetLeftShadow=-8px &cornerRadiusShadow=8px
-*/
 /* Colors */
 /* $STANDARD */
 $color-blue: $primary;
@@ -41,26 +38,28 @@ $info-bg: #D9EDF7;
 $info-border: #BCE8F1;
 $info-text: #3A87AD;
 
-/* $TABLES */
-$status-spam: #F2DEDE;
-$status-premium: $warning-bg;
-$status-block: #f2f2f2;
-$status-activate: #F0FFE9;
-$status-spam-border: $error-border;
-$status-premium-border: $warning-border;
-$status-block-border: #bababa;
-$status-activate-border: $success-border;
-
 /* $GRAY */
-$color-gray-hardblack: #383838; /* K: 78.0%  */
-$color-gray-black: #474749; /* K: 72.0%  */
-$color-gray-dim: #616161; /* K: 62.0%  */
-$color-gray-ash: #bababa; /* K: 27.0%  */
-$color-gray-soft: #dddddd; /* K: 14.0%  */
-$color-gray-light: #f3f3f3; /* K: 04.5% */
+$color-gray-hardblack: $gray-800;
+$color-gray-black: $gray-700;
+$color-gray-dim: $gray-600;
+$color-gray-ash: $gray-300;
+$color-gray-soft: $gray-200;
+$color-gray-light: $gray-100;
 
 /* $MARKET */
-$softgray-color: #f6f6f7;
-$title-color: #3b3b3b;
-$border-color: #e0e0e0;
+$softgray-color: $color-gray-soft;
+$title-color: $color-gray-hardblack;
+$border-color: $color-gray-ash;
 
+$callout-colors: (
+        "primary": $primary,
+        "secondary": $secondary,
+        "success": $success,
+        "ok": $success,
+        "info": $info,
+        "warning": $warning,
+        "danger": $danger,
+        "error" : $danger,
+        "light": $light,
+        "dark": $dark
+) !default;

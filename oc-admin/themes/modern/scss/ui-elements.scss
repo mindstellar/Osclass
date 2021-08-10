@@ -48,6 +48,7 @@ a.ico-32 {
 .bg-black-light {
   background-color: #2b2b2b;
 }
+
 .circle {
   @include rounded-corners(15px);
   min-width: 18px;
@@ -149,11 +150,11 @@ input.ico-32 {
 }
 
 .float-left {
-  @include float-l;
+  @extend .float-start;
 }
 
 .float-right {
-  @include float-r;
+  @extend .float-end;
 }
 
 /* Selectmenu

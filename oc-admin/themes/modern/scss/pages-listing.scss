@@ -54,7 +54,7 @@
 }
 
 #item-form h3.label {
-  font-weight: normal;
+  font-weight: 500;
   font-size: 14px;
   margin: 0 0 10px;
   color: $color-gray-dim;
@@ -84,6 +84,7 @@
   border: solid 1px $color-gray-soft;
   @include rounded-corners;
 }
+
 /*
 #plugin-hook .row{}
 #plugin-hook .row label{

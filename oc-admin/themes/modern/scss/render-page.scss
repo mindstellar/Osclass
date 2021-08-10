@@ -1,7 +1,7 @@
 #content-head {
   border-bottom: solid 1px $color-gray-soft;
   background-color: $color-gray-light;
-  padding: 24px 30px;
+  padding: 10px 15px;
 }
 
 #content-head h1,
@@ -9,14 +9,14 @@
   margin: 0;
   color: $color-gray-black;
   font-size: 30px;
-  font-weight: normal;
+  font-weight: 300;
 }
 
 #content-page {
   background-color: $color-white;
   padding: 22px 15px 60px;
   position: relative;
-  min-height: calc(100vh - 210px)
+  min-height: calc(100vh - 9rem)
 }
 
 #content-head h1 .ico,

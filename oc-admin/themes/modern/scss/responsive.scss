@@ -1,0 +1,29 @@
+/*!Custom Responsive rules */
+
+@media (max-width: 576px) {
+  .form-horizontal {
+    .form-row {
+      .form-label {
+        float: none;
+        width: 100%;
+        padding-top: .5rem;
+        text-align: inherit;
+        font-weight: $font-weight-bold;
+      }
+      .form-controls {
+        margin-left: inherit
+      }
+    }
+    .form-actions {
+      padding: 1rem 1rem;
+    }
+  }
+}
+
+@media (max-width: 768px) {
+  #header {
+    .navbar-nav .dropdown-menu {
+      position: absolute;
+    }
+  }
+}

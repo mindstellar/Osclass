@@ -38,22 +38,13 @@
   border: 1px solid;
   color: $error-text;
   @include rounded-corners;
+  list-style-type: none
 
 }
 
 #content-page {
   .flashmessage {
-    /*padding:15px;
-    min-height:0;
-    margin-bottom:15px;*/
     @include rounded-corners;
-    /*
-    > p:first-child{
-      margin-top:0;
-    }
-    > p:last-child{
-      margin-bottom:0;
-    }*/
   }
 
   .flashmessage-info {
@@ -71,4 +62,26 @@
   .flashmessage-warning {
     border-top: solid 1px $warning-border;
   }
+}
+
+// scss-docs-end callout-variant-mixin
+@each $state, $value in $callout-colors {
+  $callout-background: shift-color($value, -90%);
+  $callout-border: shift-color($value, 10%);
+  $callout-color: $gray-800;
+  .callout-#{$state} {
+    @include callout-variant($callout-background, $callout-border, $callout-color);
+    border-left: .35rem solid $value;
+    padding: .35rem .50rem;
+    display: inline-block;
+    margin-top: .2rem;
+    font-size: .85rem;
+    font-style: italic;
+    border-radius: 4px;
+  }
+}
+
+.callout-block {
+  padding: 1rem .85rem;
+  display: block;
 }

@@ -5,10 +5,13 @@
 #upload-plugins {
   .table {
     border: none;
+
     tr {
       vertical-align: middle;
       border-right: 0.05rem solid $gray-400;
+      border-bottom:0.05rem solid $gray-200;
     }
+
     thead {
       tr {
         border: .05rem solid $gray-400;
