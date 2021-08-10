@@ -63,3 +63,4 @@ robots.txt
 
 /oc-admin/themes/modern/scss/bootstrap/
 /oc-admin/themes/template/
+.vscode/settings.json
