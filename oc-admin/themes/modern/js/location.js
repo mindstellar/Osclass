@@ -528,8 +528,10 @@ function showLocations(type, element = null) {
 
                     }
                 } else {
-                    document.getElementById("b_new_city").classList.add("hide");
-                    document.getElementById("b_new_region").classList.add("hide");
+                    if(type === 'region') {
+                        document.getElementById("b_new_region").classList.remove("hide");
+                        document.getElementById("b_new_city").classList.add("hide");
+                    }
                     listDiv.innerHTML = "<p class='text-center'>No " + type + " found</p>";
                 }
             }
