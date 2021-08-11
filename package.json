@@ -5,8 +5,7 @@
     "eslint": "^6.8.0",
     "grunt": "^1.4.1",
     "grunt-contrib-clean": "^2.0.0",
-    "grunt-contrib-copy": "^1.0.0",
-    "grunt-contrib-less": "^2.1.0"
+    "grunt-contrib-copy": "^1.0.0"
   },
   "description": "Osclass is a free and open script to create your advertisement or listings site. Best features: Plugins, themes, multi-language, CAPTCHA, dashboard, SEO friendly.",
   "scripts": {
