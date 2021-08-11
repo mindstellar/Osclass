@@ -134,16 +134,19 @@ class FormInputs implements InputInterface
      *
      * @param string $name
      * @param null   $values
-     * @param array  $attributes input tag attributes
-     * @param array  $options    This contains flag for input
-     *                           Supported flag in $options array :
-     *                           'defaultValue' : default value for input
-     *                           'selectPlaceholder' : placeholder for select input
-     *                           'label' : label for input
-     *                           'divClass' : css class for input div container, default not set
-     *                           'escapeHtml' : escape html for input attributes, default is true
-     *                           'sanitize'   : sanitize method for input value, default is 'string'
-     *                           Throw exception if $name is not set
+     * @param array  $attributes                    input tag attributes
+     * @param array  $options                       This contains flag for input
+     *                                              Supported flag in $options array :
+     *                                              'defaultValue' : default value for input
+     *                                              'selectPlaceholder' : placeholder for select input
+     *                                              'label' : label for input
+     *                                              'divClass' : css class for input div container, default not set
+     *                                              'escapeHtml' : escape html for input attributes, default is true
+     *                                              'sanitize'   : sanitize method for input value, default is 'string'
+     *                                              'optGroupLevel' :int $optgroupLevel -1 = no optgroup, 0 = first level, 1 = second
+     *                                              level, etc. for select box
+     *                                              'optGroupKey': SubOption key in array
+     *                                              Throw exception if $name is not set
      *
      * @return string
      * @throws \Exception
@@ -158,7 +161,7 @@ class FormInputs implements InputInterface
         // $attributes to String
         $attributesString = $this->attributesToString($attributes);
 
-        $input             = isset($options['divClass']) ? '<div class="' . $options['divClass'] . '">' : '';
+        $input = isset($options['divClass']) ? '<div class="' . $options['divClass'] . '">' : '';
         //Add label if $options['label'] is set
         if (isset($options['label'])) {
             $input .= $this->label($options['label'], $name);
@@ -210,29 +213,16 @@ class FormInputs implements InputInterface
             // Generate input with type=select
             case 'select':
                 $input .= sprintf('<select name="%s"%s>', $name, $attributesString);
-
                 // Add selectPlaceholder option or create a new placeholder if not set
                 if (isset($options['selectPlaceholder']) && $options['selectPlaceholder']) {
                     $input .= sprintf('<option value="">%s</option>', $options['selectPlaceholder']);
                 } elseif ($options['selectPlaceholder'] !== false) {
                     $input .= sprintf('<option value="">%s</option>', 'Select Option');
                 }
-                // if value is a string, Convert csv options to array and set value as label, make it a clousure
-                if (is_string($values)) {
-                    $values = explode(',', $values);
-                    //rename $values array key to value
-                    foreach ($values as $k => $v) {
-                        $values[$v] = $v;
-                        unset($values[$k]);
-                    }
-                }
 
-                foreach ($values as $v => $l) {
-                    $selected = isset($options['defaultValue']) && $v === $options['defaultValue'] ? ' selected' : '';
-                    $input    .= sprintf('<option value="%s"%s>%s</option>', $v, $selected, $l);
-                }
-
+                $input .= $this->getOptionsString($values, $options);
                 $input .= '</select>';
+                unset($defaultValue, $optGroupLevel);
                 break;
             // Generate input with type=textarea
             case 'textarea':
@@ -259,6 +249,59 @@ class FormInputs implements InputInterface
         unset($attributesString, $defaultInputValue, $label, $selectPlaceholder);
 
         return $input;
+    }
+
+    /**
+     * Private function for handling select options
+     *
+     * @param array|string $selectOptions
+     * @param              $options ['optgroupLevel'] -1 = no optgroup, 0 = first level, 1 = second level, etc
+     */
+    private function getOptionsString($selectOptions, $options)
+    : string {
+        // get defaultValue, optGroupLevel options if set or set default
+        $defaultValue  = $options['defaultValue'] ?? '';
+        $optGroupLevel = $options['optGroupLevel'] ?? -1;
+
+        // if $selectOptions is a csv string, Convert csv options to array
+        if (is_string($selectOptions)) {
+            $selectOptions = explode(',', $selectOptions);
+        }
+        $selectOptionsString = '';
+        // $selectOptions is an array, loop through it
+        if (is_array($selectOptions)) {
+            foreach ($selectOptions as $k => $v) {
+                // Check if this array is in multilevel format i.e. option and children are set
+                if (isset($v['option'])) {
+                    $optionValue = $v['option']['value']??'';
+                    $optionLabel = $v['option']['label']??'';
+                    // if $optgroupLevel is set, add optgroup
+                    if ($optGroupLevel === 0) {
+                        $selectOptionsString .= sprintf('<optgroup label="%s">', $optionLabel);
+                    } else {
+                        $selected = isset($defaultValue) && $defaultValue === $optionValue ? ' selected' : '';
+                        $selectOptionsString .= sprintf('<option value="%s"%s>%s</option>', $optionValue, $selected, $optionLabel) . PHP_EOL;
+                        unset($selected);
+                    }
+                    if (isset($v['children'])) {
+                        $selectOptionsString .= $this->getOptionsString($v['children'], $optGroupLevel - 1) . PHP_EOL;
+                    }
+                    // if $optgroupLevel is set, add optgroup
+                    if ($optGroupLevel === 0) {
+                        $selectOptionsString .= '</optgroup>';
+                    }
+                } else {
+                    $optionValue = $k;
+                    $optionLabel = $v;
+                    // check if default value is set and if it matches the current value
+                    $selected = isset($defaultValue) && $defaultValue === $optionValue ? ' selected' : '';
+                    $selectOptionsString .= sprintf('<option value="%s"%s>%s</option>', $optionValue, $selected, $optionLabel) . PHP_EOL;
+                    unset($selected);
+                }
+            }
+        }
+
+        return $selectOptionsString;
     }
 
     /**
@@ -327,10 +370,8 @@ class FormInputs implements InputInterface
             return $values;
         }
         if (is_array($values)) {
-            if (!empty($values)) {
-                foreach ($values as $key => $value) {
-                    $values[$key] = $this->sanitize->$sanitizeType($value);
-                }
+            foreach ($values as $value) {
+                $this->sanitizeInputValues($value);
             }
         } else {
             $values = $this->sanitize->$sanitizeType($values);
