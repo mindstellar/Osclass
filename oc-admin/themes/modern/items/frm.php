@@ -44,14 +44,13 @@ $new_item = __get('new_item');
  */
 function customText($return = 'title')
 {
-    $new_item = __get('new_item');
-    $text     = array();
+    $new_item      = __get('new_item');
+    $text          = array();
+    $text['title'] = __('Listing');
     if ($new_item) {
-        $text['title']    = __('Listing');
         $text['subtitle'] = __('Add listing');
         $text['button']   = __('Add listing');
     } else {
-        $text['title']    = __('Listing');
         $text['subtitle'] = __('Edit listing');
         $text['button']   = __('Update listing');
     }
@@ -59,7 +58,7 @@ function customText($return = 'title')
     return $text[$return];
 }
 
-
+// Expire Select Options
 if ($new_item) {
     $options = array(0, 1, 3, 5, 7, 10, 15, 30);
 } else {
@@ -94,8 +93,6 @@ function customHead()
 {
     ?>
     <script type="text/javascript">
-
-        document.write('<style type="text/css"> .tabber{ display:none; } </style>');
         $(document).ready(function () {
             $('input[name="user"]').attr("autocomplete", "off");
             $('#user,#fUser').autocomplete({
@@ -117,8 +114,8 @@ function customHead()
             <?php if (osc_locale_thousands_sep() != '' || osc_locale_dec_point() != '') { ?>
             $("#price").on("blur", function (event) {
                 var price = $("#price").prop("value");
-                <?php if (osc_locale_thousands_sep() != '') { ?>
-                while (price.indexOf('<?php echo osc_esc_js(osc_locale_thousands_sep());  ?>') != -1) {
+                <?php if (osc_locale_thousands_sep()) { ?>
+                while (price.indexOf('<?php echo osc_esc_js(osc_locale_thousands_sep());  ?>') !== -1) {
                     price = price.replace('<?php echo osc_esc_js(osc_locale_thousands_sep());  ?>', '');
                 }
                 <?php } ?>
@@ -168,33 +165,33 @@ function render_offset()
 
 
 osc_current_admin_theme_path('parts/header.php'); ?>
-<div id="pretty-form">
-    <div class="grid-row no-bottom-margin">
-        <div class="row-wrapper">
-            <h2 class="render-title"><?php echo customText('subtitle'); ?> <span style="font-size: small;"><a
-                            href="<?php echo osc_item_url(); ?>"><?php _e('View listing on front'); ?></a></span></h2>
+<div id="adminItemForm" class="col-xl-10">
+    <div class="row ">
+        <div class="col">
+                <h2 class="render-title"><?php echo customText('subtitle'); ?></h2>
+                <?php if(!$new_item){ ?>
+                    <a href="<?php echo osc_item_url(); ?>"><?php _e('View listing on front'); ?><i class="bi
+                    bi-arrow-up-right-square ms-1"></i></a>
+                <?php } ?>
         </div>
-    </div>
-    <div class="grid-row no-bottom-margin float-right">
-        <div class="row-wrapper">
-            <?php if (!$new_item) { ?>
-                <ul id="item-action-list">
-                    <?php foreach ($actions as $aux) { ?>
-                        <li>
+        <div class="col">
+                <?php if (!$new_item) { ?>
+                    <div id="item-action-list" class="btn-group btn-group-sm float-right">
+                        <?php foreach ($actions as $aux) { ?>
+
                             <?php echo $aux; ?>
-                        </li>
-                    <?php } ?>
-                </ul>
-                <div class="clear"></div>
-            <?php } ?>
+
+                        <?php } ?>
+                    </div>
+                    <div class="clear"></div>
+                <?php } ?>
         </div>
     </div>
-    <div class="grid-row grid-100">
-        <div class="row-wrapper">
+    <div class="row">
+        <div class="col">
+            <ul id="error_list"></ul>
             <div id="item-form">
-                <ul id="error_list"></ul>
-                <?php printLocaleTabs(); ?>
-                <form action="<?php echo osc_admin_base_url(true); ?>" method="post" enctype="multipart/form-data"
+                <form class="row" action="<?php echo osc_admin_base_url(true); ?>" method="post" enctype="multipart/form-data"
                       name="item">
                     <input type="hidden" name="page" value="items"/>
                     <?php if ($new_item) { ?>
@@ -204,23 +201,15 @@ osc_current_admin_theme_path('parts/header.php'); ?>
                         <input type="hidden" name="id" value="<?php echo osc_item_id(); ?>"/>
                         <input type="hidden" name="secret" value="<?php echo osc_item_secret(); ?>"/>
                     <?php } ?>
-                    <div id="left-side">
-                        <?php printLocaleTitle(osc_get_locales()); ?>
-                        <div class="category">
+                    <ul id="error_list"></ul>
+                    <div id="left-side" class="col">
+                        <?php \mindstellar\form\admin\Item::instance()->printMultiLangTab(); ?>
+                        <div class="category mb-3">
                             <label><?php _e('Category'); ?> *</label>
                             <?php ItemForm::category_multiple_selects(); ?>
                         </div>
-                        <div class="input-description-wide">
-                            <?php printLocaleDescription(osc_get_locales()); ?>
-                        </div>
-                        <?php if (osc_price_enabled_at_items()) { ?>
-                            <div>
-                                <label><?php _e('Price'); ?></label>
-                                <?php ItemForm::price_input_text(); ?>
-                                <span class="input-currency"><?php ItemForm::currency_select(); ?></span>
-                            </div>
-                        <?php } ?>
-
+                        <?php \mindstellar\form\admin\Item::instance()->printMultiLangTitleDesc(null, false); ?>
+                        <?php \mindstellar\form\admin\Item::instance()->itemPrice(); ?>
                         <?php if (osc_images_enabled_at_items()) { ?>
                             <div class="photo_container">
                                 <label><?php _e('Photos'); ?></label>
@@ -249,24 +238,24 @@ osc_current_admin_theme_path('parts/header.php'); ?>
                         }
                         ?>
                     </div>
-                    <div id="right-side">
-                        <div class="well ui-rounded-corners">
-                            <h3 class="label"><?php _e('User'); ?></h3>
-                            <div id="contact_info">
-                                <div class="input-has-placeholder input-separate-top">
+                    <div id="right-side" class="col-xl-4 col-lg-4">
+                        <div class="card mb-3">
+                            <div id="contact_info" class="card-body">
+                                <h3 class="label"><?php _e('User'); ?></h3>
+                                <div>
                                     <label><?php _e('Name'); ?></label>
                                     <?php ItemForm::contact_name_text(); ?>
                                 </div>
-                                <div class="input-has-placeholder input-separate-top">
+                                <div>
                                     <label><?php _e('E-mail'); ?></label>
                                     <?php ItemForm::contact_email_text(); ?>
                                 </div>
-                                <div class="input-has-placeholder input-separate-top">
+                                <div>
                                     <label><?php _e('Phone'); ?></label>
                                     <?php ItemForm::contact_phone_text(); ?>
                                 </div>
                                 <?php if (!$new_item) { ?>
-                                    <div class="input-has-placeholder input-separate-top">
+                                    <div>
                                         <label><?php _e('Ip Address'); ?></label>
                                         <input id="ipAddress" type="text" name="ipAddress"
                                                value="<?php echo osc_item_ip(); ?>"
@@ -274,73 +263,74 @@ osc_current_admin_theme_path('parts/header.php'); ?>
                                                readonly="readonly">
                                     </div>
                                 <?php } ?>
-                                <div class="input-separate-top">
+                                <div>
                                     <label><?php ItemForm::show_email_checkbox(); ?><?php _e('Show e-mail'); ?></label>
                                 </div>
                             </div>
                         </div>
 
-                        <div class="well ui-rounded-corners input-separate-top">
-                            <h3 class="label"><?php _e('Location'); ?></h3>
-                            <div class="input-has-placeholder input-separate-top">
-                                <label><?php _e('Country'); ?></label>
-                                <?php ItemForm::country_select(); ?>
-                            </div>
-                            <div class="input-has-placeholder input-separate-top">
-                                <label><?php _e('Region'); ?></label>
-                                <?php ItemForm::region_text(); ?>
-                            </div>
-                            <div class="input-has-placeholder input-separate-top">
-                                <label><?php _e('City'); ?></label>
-                                <?php ItemForm::city_text(); ?>
-                            </div>
-                            <div class="input-has-placeholder input-separate-top">
-                                <label><?php _e('City area'); ?></label>
-                                <?php ItemForm::city_area_text(); ?>
-                            </div>
-                            <div class="input-has-placeholder input-separate-top">
-                                <label><?php _e('Zip code'); ?></label>
-                                <?php ItemForm::zip_text(); ?>
-                            </div>
-                            <div class="input-has-placeholder input-separate-top">
-                                <label><?php _e('Address'); ?></label>
-                                <?php ItemForm::address_text(); ?>
+                        <div class="card mb-3">
+                            <div class="card-body">
+                                <h3 class="label"><?php _e('Location'); ?></h3>
+                                <div>
+                                    <label><?php _e('Country'); ?></label>
+                                    <?php ItemForm::country_select(); ?>
+                                </div>
+                                <div>
+                                    <label><?php _e('Region'); ?></label>
+                                    <?php ItemForm::region_text(); ?>
+                                </div>
+                                <div>
+                                    <label><?php _e('City'); ?></label>
+                                    <?php ItemForm::city_text(); ?>
+                                </div>
+                                <div>
+                                    <label><?php _e('City area'); ?></label>
+                                    <?php ItemForm::city_area_text(); ?>
+                                </div>
+                                <div>
+                                    <label><?php _e('Zip code'); ?></label>
+                                    <?php ItemForm::zip_text(); ?>
+                                </div>
+                                <div>
+                                    <label><?php _e('Address'); ?></label>
+                                    <?php ItemForm::address_text(); ?>
+                                </div>
                             </div>
                         </div>
 
-                        <div class="well ui-rounded-corners input-separate-top">
-                            <h3 class="label"><?php _e('Expiration'); ?></h3>
-                            <?php if ($new_item) { ?>
-                                <div class="input-has-placeholder input-separate-top">
-                                    <?php ItemForm::expiration_input('add'); ?>
-                                </div>
-                                <label><?php _e('It could be an integer (days from original publishing date it will '
-                                                . 'be expired, 0 to never expire) or a date in the format "yyyy-mm-dd hh:mm:ss"'); ?></label>
-                            <?php } elseif (!$new_item) { ?>
-                                <div class="input-separate-top">
-                                    <label><input type="checkbox" id="update_expiration" name="update_expiration"
-                                                  style="width: inherit!important;"/> <?php _e('Update expiration?'); ?>
-                                    </label>
-                                    <div class="hide update_expiration">
-                                        <div class="input-has-placeholder input-separate-top">
-                                            <?php ItemForm::expiration_input('edit'); ?>
-                                        </div>
-                                        <label><?php _e('It could be an integer (days from original publishing date '
-                                                        . 'it will be expired, 0 to never expire) or a date in the format '
-                                                        . '"yyyy-mm-dd hh:mm:ss"'); ?></label>
+                        <div class="card mb-3">
+                            <div class="card-body">
+                                <h3 class="label"><?php _e('Expiration'); ?></h3>
+                                <?php if ($new_item) { ?>
+                                    <div>
+                                        <?php ItemForm::expiration_input('add'); ?>
                                     </div>
-                                </div>
-                            <?php } ?>
+                                    <label><?php _e('It could be an integer (days from original publishing date it will '
+                                                    . 'be expired, 0 to never expire) or a date in the format "yyyy-mm-dd hh:mm:ss"'); ?></label>
+                                <?php } elseif (!$new_item) { ?>
+                                    <div>
+                                        <label><input type="checkbox" id="update_expiration" name="update_expiration"
+                                                      style="width: inherit!important;"/> <?php _e('Update expiration?'); ?>
+                                        </label>
+                                        <div class="hide update_expiration">
+                                            <div class="input-separate-top">
+                                                <?php ItemForm::expiration_input('edit'); ?>
+                                            </div>
+                                            <label><?php _e('It could be an integer (days from original publishing date '
+                                                            . 'it will be expired, 0 to never expire) or a date in the format '
+                                                            . '"yyyy-mm-dd hh:mm:ss"'); ?></label>
+                                        </div>
+                                    </div>
+                                <?php } ?>
+                            </div>
                         </div>
-
                     </div>
-                    <div class="clear"></div>
                     <div class="form-actions">
                         <?php if (!$new_item) { ?>
                             <a href="javascript:history.go(-1)" class="btn btn-dim"><?php _e('Cancel'); ?></a>
                         <?php } ?>
-                        <input type="submit" value="<?php echo osc_esc_html(customText('button')); ?>"
-                               class="btn btn-submit"/>
+                        <button type="submit" class="btn btn-submit"><?php echo osc_esc_html(customText('button')); ?></button>
                     </div>
                 </form>
             </div>
@@ -353,7 +343,7 @@ osc_current_admin_theme_path('parts/header.php'); ?>
         theme_advanced_toolbar_align: 'left',
         theme_advanced_toolbar_location: 'top',
         theme_advanced_buttons1_add: 'forecolorpicker,fontsizeselect',
-        plugins:'advlist anchor autolink charmap code fullscreen insertdatetime link lists paste preview searchreplace table',
+        plugins: 'advlist anchor autolink charmap code fullscreen insertdatetime link lists paste preview searchreplace table',
     });
 </script>
 <?php osc_current_admin_theme_path('parts/footer.php'); ?>

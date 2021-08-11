@@ -38,13 +38,11 @@ if (file_exists(ABS_PATH . '.maintenance')) {
 osc_register_script('admin-osc', osc_current_admin_theme_js_url('osc.js'), 'jquery');
 osc_register_script('admin-ui-osc', osc_current_admin_theme_js_url('ui-osc.js'), 'jquery');
 osc_register_script('admin-location', osc_current_admin_theme_js_url('location.min.js'), 'bootstrap5');
-osc_register_script('bootstrap5', osc_assets_url('bootstrap/bootstrap.min.js'), 'jquery');
+osc_register_script('bootstrap5', osc_assets_url('bootstrap/bootstrap.min.js'));
 // enqueue scripts
-osc_enqueue_script('jquery');
-osc_enqueue_script('jquery-ui');
 osc_enqueue_script('bootstrap5');
-//osc_enqueue_script('admin-osc');
-//osc_enqueue_script('admin-ui-osc');
+osc_enqueue_script('admin-osc');
+osc_enqueue_script('admin-ui-osc');
 
 osc_add_hook('admin_footer', array('FieldForm', 'i18n_datePicker'));
 

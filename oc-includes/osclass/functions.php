@@ -885,11 +885,10 @@ function osc_show_maintenance()
                 position: static;
                 top: 0px;
                 right: 0px;
-                background-color: #bc0202;
+                background-color: #ff5252;
                 width: 100%;
-                height: 20px;
                 text-align: center;
-                padding: 5px 0;
+                padding: 10px 0;
                 font-size: 14px;
                 color: #fefefe;
             }
