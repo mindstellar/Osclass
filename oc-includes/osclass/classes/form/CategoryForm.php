@@ -37,7 +37,8 @@ class CategoryForm extends Form
      */
     public static function primary_input_hidden($category)
     {
-        parent::generic_input_hidden('id', $category['pk_i_id']);
+        $attributes['id'] = 'id';
+        echo (new self())->hidden('id', $category['pk_i_id'], $attributes);
     }
 
     /**
@@ -52,22 +53,36 @@ class CategoryForm extends Form
         $default_item = null,
         $name = 'sCategory'
     ) {
-        echo '<select name="' . $name . '" id="' . $name . '">';
-        if (isset($default_item)) {
-            echo '<option value="">' . $default_item . '</option>';
-        }
-        foreach ($categories as $c) {
-            if ((isset($category['pk_i_id']) && $category['pk_i_id'] == $c['pk_i_id'])) {
-                echo '<option value="' . $c['pk_i_id'] . '"' . ('selected="selected"') . '>' . $c['s_name']
-                    . '</option>';
-            } else {
-                echo '<option value="' . $c['pk_i_id'] . '"' . ('') . '>' . $c['s_name'] . '</option>';
+        $value = self::prepareOptionsArray($categories,0);
+        $attribute['id'] = 'id';
+        $default_value = $category['pk_i_id'] ?? '';
+        $options['defaultValue'] = $default_value;
+        $options['selectPlaceholder'] = $default_item;
+        echo (new self())->select($name,$value,$attribute,$options);
+    }
+
+    /**
+     * @param $array
+     * @param $deep
+     *
+     * @return array
+     */
+    private static function prepareOptionsArray($array,$deep){
+        $deep_string = str_repeat('&nbsp;&nbsp;', $deep);
+        $deep++;
+        $values = [];
+        foreach ($array as $c) {
+            $option['option']['value'] = $c['pk_i_id'];
+            $option['option']['label'] = $deep_string.$c['s_name'];
+
+            if (isset($c['categories']) && is_array($c['categories']) && ! empty($c['categories'])) {
+                $option['children'] = self::prepareOptionsArray($c['categories'],$deep);
             }
-            if (isset($c['categories']) && is_array($c['categories'])) {
-                self::subcategory_select($c['categories'], $category, $default_item, 1);
-            }
+            $values[] = $option;
+            unset($option);
+
         }
-        echo '</select>';
+        return $values;
     }
 
     /**
@@ -128,12 +143,9 @@ class CategoryForm extends Form
      */
     public static function expiration_days_input_text($category = null)
     {
-        parent::generic_input_text(
-            'i_expiration_days',
-            (isset($category) && isset($category['i_expiration_days']))
-                ? $category['i_expiration_days'] : '',
-            3
-        );
+        $attributes['id'] ='i_expiration_days';
+        $attributes['maxlength'] = 3;
+        echo (new self())->text('i_expiration_days', $category['i_expiration_days'] ?? '', $attributes);
     }
 
     /**
@@ -141,11 +153,9 @@ class CategoryForm extends Form
      */
     public static function position_input_text($category = null)
     {
-        parent::generic_input_text(
-            'i_position',
-            (isset($category) && isset($category['i_position'])) ? $category['i_position'] : '',
-            3
-        );
+        $attributes['id'] = 'i_position';
+        $attributes['maxlength'] = 3;
+        echo (new self())->text('i_position', $category['i_position'] ?? '', $attributes);
     }
 
     /**
@@ -153,11 +163,12 @@ class CategoryForm extends Form
      */
     public static function enabled_input_checkbox($category = null)
     {
-        parent::generic_input_checkbox(
-            'b_enabled',
-            '1',
-            (isset($category) && isset($category['b_enabled']) && $category['b_enabled'] == 1)
-        );
+        $attributes['id']           = 'b_enabled';
+        $options['noCheckboxLabel'] = true;
+        if ((isset($category['b_enabled']) && $category['b_enabled'] === 1)) {
+            $attributes['checked'] = 'checked';
+        }
+        echo (new self())->checkbox('b_enabled', '1', $attributes, $options);
     }
 
     /**
@@ -165,8 +176,12 @@ class CategoryForm extends Form
      */
     public static function apply_changes_to_subcategories($category = null)
     {
-        if ($category['fk_i_parent_id'] == null) {
-            parent::generic_input_checkbox('apply_changes_to_subcategories', '1', true);
+        if ($category['fk_i_parent_id'] === null) {
+            $attributes['id']           = 'apply_changes_to_subcategories';
+            $options['noCheckboxLabel'] = true;
+            $attributes['checked'] = 'checked';
+
+            echo (new self())->checkbox('apply_changes_to_subcategories', '1', $attributes, $options);
         }
     }
 
@@ -175,12 +190,13 @@ class CategoryForm extends Form
      */
     public static function price_enabled_for_category($category = null)
     {
-        parent::generic_input_checkbox(
-            'b_price_enabled',
-            '1',
-            (isset($category) && isset($category['b_price_enabled'])
-                && $category['b_price_enabled'] == 1)
-        );
+        $attributes['id']           = 'b_price_enabled';
+        $options['noCheckboxLabel'] = true;
+        if ((isset($category['b_price_enabled']) && $category['b_price_enabled'] === 1)
+        ) {
+            $attributes['checked'] = 'checked';
+        }
+        echo (new self())->checkbox('b_price_enabled', '1', $attributes, $options);
     }
 
     /**
