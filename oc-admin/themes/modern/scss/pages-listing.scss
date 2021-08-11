@@ -5,9 +5,9 @@
 }
 
 #datatablesForm #bulk-actions {
+  left: 0;
   position: absolute;
-  top: 0;
-  left: 0
+  top: 0
 }
 
 .submit-right {
@@ -27,16 +27,16 @@
 }
 
 #item-form label {
+  color: $color-gray-dim;
   display: block;
   font-size: 14px;
-  color: $color-gray-dim;
-  margin-top: 10px;
   margin-bottom: 5px;
+  margin-top: 10px;
 }
 
 .input-title-wide input {
-  width: 516px;
   height: 22px;
+  width: 516px;
 }
 
 .input-title-wide label {
@@ -48,16 +48,16 @@
 }
 
 #item-form .input-currency {
-  vertical-align: bottom;
   font-size: 18px;
   line-height: 28px;
+  vertical-align: bottom;
 }
 
 #item-form h3.label {
-  font-weight: 500;
-  font-size: 14px;
-  margin: 0 0 10px;
   color: $color-gray-dim;
+  font-size: 14px;
+  font-weight: 500;
+  margin: 0 0 10px;
 }
 
 /*
@@ -79,9 +79,9 @@
 }
 
 #item-form #photos {
-  padding: 10px;
   background-color: $color-gray-light;
   border: solid 1px $color-gray-soft;
+  padding: 10px;
   @include rounded-corners;
 }
 

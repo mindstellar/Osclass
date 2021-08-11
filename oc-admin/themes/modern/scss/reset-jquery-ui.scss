@@ -3,9 +3,6 @@
   padding: 0;
 }
 
-/*.ui-osc-tabs .ui-tabs-panel{
-    padding:15px 0;
-}*/
 .ui-osc-tabs .ui-tabs-nav {
   border: 0;
   padding: 4px 5px 0;
@@ -13,64 +10,32 @@
   border-bottom: solid 1px $color-gray-soft;
 }
 
-/*.ui-tabs-right .ui-tabs-nav li.ui-state-default {float: right; }
-.ui-tabs-right .ui-tabs-nav li a { float: right; }*/
 .ui-osc-tabs .ui-tabs-nav li {
   float: right;
 }
 
-/*
-.ui-dialog{
-    padding:0;
-    border:0;
-}
-.ui-dialog .ui-dialog-content{
-    padding:0;
-    border:solid 1px $color-blue-border;
-    @include rounded-corners(0 0 4px 4px);
-
-}
-.ui-dialog .ui-dialog-titlebar{
-    @include rounded-corners(4px 4px 0 0);
-    border:none;
-    background-color:$color-blue;
-    color:$color-white;
-    font-weight:normal;
-    font-size:16px;
-    border:solid 1px $color-blue-border;
-    border-bottom:none;
-}
-.osc-modal-content{
-    padding:15px;
-}
-
-#downloading{
-    font-size:15px;
-    color:$color-gray-dim;
-    text-align:center;
-}*/
 .ui-dialog {
-  border: 0;
   background: $color-gray-light;
+  border: 0;
   padding: 5px;
   @include rounded-corners;
 }
 
 .ui-dialog .ui-dialog-titlebar {
+  border: none;
+  color: $color-gray-black;
+  font-size: 18px;
   margin: 0;
   padding: 7px 5px;
-  font-size: 18px;
-  color: $color-gray-black;
   position: relative;
   @include rounded-corners(4px 4px 0 0);
-  border: none;
   @include rounded-corners(4px 4px 0 0);
 }
 
 .ui-dialog .ui-dialog-title {
-  margin: 0;
   font-size: 18px;
   font-weight: normal;
+  margin: 0;
 }
 
 .ui-dialog .ui-dialog-content {
@@ -82,12 +47,12 @@
 
 .ui-dialog .form-actions {
   @include rounded-corners(0 0 4px 4px);
+  bottom: 0;
+  left: 0;
   margin-bottom: 0;
   padding: 0;
-  bottom: 0;
-  width: 100%;
-  left: 0;
   position: absolute;
+  width: 100%;
 }
 
 .ui-dialog .form-actions .wrapper {
@@ -99,15 +64,15 @@
 }
 
 .ui-dialog .has-form-actions {
-  position: relative;
   padding-bottom: 85px !important;
+  position: relative;
 }
 
 .osc-modal-content-market img {
-  float: left;
-  max-height: 106px;
   border: solid 2px $color-gray-light;
+  float: left;
   margin-right: 20px;
+  max-height: 106px;
   @include rounded-corners;
 }
 
@@ -117,6 +82,6 @@
 }
 
 .osc-modal-content-market .form-row .market-data {
-  padding-left: 100px;
   display: block;
+  padding-left: 100px;
 }

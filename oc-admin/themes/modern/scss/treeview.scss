@@ -1,7 +1,7 @@
 .treeview, .treeview ul {
-  padding: 0;
-  margin: 0;
   list-style: none;
+  margin: 0;
+  padding: 0;
 }
 
 .treeview ul {
@@ -9,15 +9,15 @@
 }
 
 .treeview .hitarea {
-  height: 12px;
-  width: 12px;
-  float: left;
   cursor: pointer;
+  float: left;
+  height: 12px;
   margin-right: 5px;
+  width: 12px;
 
   &:before {
-    font-family: 'bootstrap-icons';
     content: "\f2e5";
+    font-family: 'bootstrap-icons';
   }
 }
 
@@ -27,8 +27,8 @@
 }
 
 #treecontrol {
-  margin: 1em 0;
   display: none;
+  margin: 1em 0;
 }
 
 .treeview .hover {
@@ -39,16 +39,9 @@
   margin-right: 5px;
 
   &:before {
-    font-family: 'bootstrap-icons';
     content: "\f4f9";
+    font-family: 'bootstrap-icons';
   }
-}
-
-.treeview .placeholder {
-  background: url(../images/split.png) 0 0 no-repeat;
-  height: 12px;
-  width: 12px;
-  display: block;
 }
 
 form h3 {

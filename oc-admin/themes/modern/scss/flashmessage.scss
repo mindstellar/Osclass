@@ -22,8 +22,8 @@
 
 .flashmessage-inline {
   display: inline-block;
-  padding: 0 10px;
   min-height: 0;
+  padding: 0 10px;
   @include rounded-corners;
 }
 
@@ -32,11 +32,11 @@
 }
 
 #error_list {
-  padding: 15px;
-  display: none;
   background: $error-bg;
   border: 1px solid;
   color: $error-text;
+  display: none;
+  padding: 15px;
   @include rounded-corners;
   list-style-type: none
 
@@ -72,16 +72,16 @@
   .callout-#{$state} {
     @include callout-variant($callout-background, $callout-border, $callout-color);
     border-left: .35rem solid $value;
-    padding: .35rem .50rem;
+    border-radius: 4px;
     display: inline-block;
-    margin-top: .2rem;
     font-size: .85rem;
     font-style: italic;
-    border-radius: 4px;
+    margin-top: .2rem;
+    padding: .35rem .50rem;
   }
 }
 
 .callout-block {
-  padding: 1rem .85rem;
   display: block;
+  padding: 1rem .85rem;
 }

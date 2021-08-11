@@ -1,22 +1,28 @@
 #content-head {
-  border-bottom: solid 1px $color-gray-soft;
   background-color: $color-gray-light;
+  border-bottom: solid 1px $color-gray-soft;
   padding: 10px 15px;
 }
 
-#content-head h1,
-#content-head h2 {
-  margin: 0;
-  color: $color-gray-black;
-  font-size: 30px;
-  font-weight: 300;
+#content-head {
+  h1, h2 {
+    color: $color-gray-black;
+    font-size: 30px;
+    font-weight: 400;
+    margin: 0;
+  }
+
+  h2 {
+    font-size: 20px;
+    font-weight: 300;
+  }
 }
 
 #content-page {
   background-color: $color-white;
+  min-height: calc(100vh - 9rem);
   padding: 22px 15px 60px;
-  position: relative;
-  min-height: calc(100vh - 9rem)
+  position: relative
 }
 
 #content-head h1 .ico,
@@ -25,10 +31,10 @@
 }
 
 .render-title {
-  margin: 0 0 20px;
   color: $color-gray-dim;
   font-size: 21px;
   font-weight: normal;
+  margin: 0 0 20px;
 }
 
 h3.render-title {
@@ -36,43 +42,43 @@ h3.render-title {
 }
 
 .render-title a.btn-mini, .form-controls a.btn-mini {
-  height: 24px;
-  padding-top: 4px;
   float: none;
-  vertical-align: 4px;
+  height: 24px;
   padding-bottom: 5px;
+  padding-top: 4px;
+  vertical-align: 4px;
 }
 
 .form-controls a.btn-mini {
-  vertical-align: 2px;
   margin-left: 5px;
+  vertical-align: 2px;
 }
 
 .quick-search input.input-text {
-  display: inline-block;
-  width: 208px;
-  height: 24px;
-  padding: 4px 6px;
-  font-size: 13px;
-  line-height: 18px;
-  color: #555;
   background-color: $color-gray-light;
   border: 1px solid $color-gray-soft;
-  @include rounded-corners(4px 0 0 4px);
+  color: #555;
+  display: inline-block;
+  font-size: 13px;
+  height: 24px;
+  line-height: 18px;
   outline: none;
+  padding: 4px 6px;
+  width: 208px;
+  @include rounded-corners(4px 0 0 4px);
   vertical-align: top;
 }
 
 .quick-search .ico-search {
-  margin-left: 0;
   border-left: 0;
+  margin-left: 0;
   @include rounded-corners(0px 4px 4px 0);
   @include rounded-corners(0px 4px 4px 0);
-  width: 34px !important;
-  height: 34px;
   display: block;
-  padding: 0;
+  height: 34px;
   margin-right: 10px;
+  padding: 0;
+  width: 34px !important;
 }
 
 .locations img {

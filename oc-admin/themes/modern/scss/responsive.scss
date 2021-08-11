@@ -5,17 +5,44 @@
     .form-row {
       .form-label {
         float: none;
-        width: 100%;
+        font-weight: $font-weight-bold;
         padding-top: .5rem;
         text-align: inherit;
-        font-weight: $font-weight-bold;
+        width: 100%;
       }
+
       .form-controls {
         margin-left: inherit
       }
     }
+
     .form-actions {
       padding: 1rem 1rem;
+    }
+  }
+  #datatablesForm {
+    .table {
+      .col-location {
+        display: none;
+        visibility: hidden;
+      }
+
+      .col-exp {
+        display: none;
+      }
+
+      .col-date {
+        display: none;
+      }
+    }
+  }
+  #listing-toolbar, #admins-toolbar, #users-toolbar {
+    & + #datatablesForm #bulk-actions {
+      left: inherit;
+      max-width: 12rem;
+      position: absolute;
+      right: 0;
+      top: -3rem;
     }
   }
 }
@@ -24,6 +51,30 @@
   #header {
     .navbar-nav .dropdown-menu {
       position: absolute;
+    }
+  }
+  #content-page {
+    padding: .5rem .5rem 3rem;
+
+    & > div > div.row-wrapper {
+      padding: .1rem;
+    }
+  }
+  #datatablesForm .table {
+    .col-title {
+      min-width: 100px;
+    }
+
+    .col-expiration {
+      display: none;
+    }
+
+    .col-status-border {
+      display: none;
+    }
+
+    .col-status {
+      border-left: 1px solid rgba(0, 0, 0, 0.1);
     }
   }
 }

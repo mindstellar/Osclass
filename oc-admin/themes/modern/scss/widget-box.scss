@@ -9,8 +9,8 @@
 
 .widget-box-title {
   @extend .card-header;
-  font-size: 18px;
   color: $color-gray-black;
+  font-size: 18px;
   position: relative;
 }
 
@@ -19,15 +19,15 @@
 .widget-box-title h3,
 .widget-box-title h4,
 .widget-box-title h5 {
-  margin: 0;
   font-size: 18px;
   font-weight: normal;
+  margin: 0;
 }
 
 .widget-box-title .select-box {
-  widows: 50%;
   right: 0;
   top: 0;
+  widows: 50%;
 }
 
 .widget-box-title .select-box-trigger {
@@ -43,15 +43,15 @@
 }
 
 .widget-box-selector {
-  float: right;
   display: block;
+  float: right;
 }
 
 .widget-box h4 {
-  margin: 20px 0 10px;
-  font-size: 16px;
-  color: $color-gray-dim;
   border-bottom: 1px dotted $color-gray-dim;
+  color: $color-gray-dim;
+  font-size: 16px;
+  margin: 20px 0 10px;
 }
 
 .widget-box h4.first-title {
@@ -59,14 +59,14 @@
 }
 
 .stats-title {
+  color: $color-gray-dim;
   font-size: 16px;
   line-height: 20px;
-  color: $color-gray-dim;
 }
 
 .stats-detail {
-  font-size: 14px;
   color: $color-gray-dim;
+  font-size: 14px;
 }
 
 .widget-box .form-row {
@@ -75,23 +75,23 @@
 
 .widget-box .form-label {
   float: left;
-  padding-top: 5px;
   margin-left: 10px;
+  padding-top: 5px;
   text-align: right;
 }
 
 div.widget-box-content-no-wrapp,
 #dashboard div.widget-box-content-no-wrapp {
-  padding: 0;
   height: 250px;
+  padding: 0;
 }
 
 div.widget-box-content-no-wrapp h4,
 div.widget-box-content-no-wrapp .first-title {
-  padding: 5px 15px;
   background: $color-gray-soft;
   border-bottom: 0;
   margin: 0;
+  padding: 5px 15px;
 }
 
 div.widget-box-content-no-wrapp li {

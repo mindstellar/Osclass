@@ -1,9 +1,9 @@
 .table {
   @extend .shadow-sm, .table-striped;
-  width: 100%;
-  font-size: 14px;
-  border: 1px solid $gray-400;
   --#{$variable-prefix}table-striped-bg: #{$gray-300}33;
+  border: 1px solid $gray-400;
+  font-size: 14px;
+  width: 100%;
 
   thead {
     border-bottom: 1px solid $gray-400;
@@ -19,8 +19,8 @@
 
   tbody {
     .col-title {
-      font-weight: 500;
       font-size: ($font-size-base - .1);
+      font-weight: 500;
 
       a {
         text-decoration-line: none;
@@ -31,12 +31,12 @@
 
 .table th,
 .table td {
-  padding: 7px;
-  line-height: 18px;
-  border-left: 0;
-  border-top: 0;
   border-bottom: 0;
   border-left: 0;
+  border-left: 0;
+  border-top: 0;
+  line-height: 18px;
+  padding: 7px;
 }
 
 .table thead th,
@@ -51,10 +51,10 @@
 
 #table-row-actions {
   display: none;
-  position: absolute;
-  margin-top: -25px;
   font-size: 13px;
+  margin-top: -25px;
   padding: 0 6px;
+  position: absolute;
 
   a {
     text-decoration-line: none;
@@ -76,8 +76,8 @@
 
 #table-row-actions ul {
   list-style: none;
-  padding: 0;
   margin: 4px 0 0;
+  padding: 0;
 }
 
 #table-row-actions li {
@@ -133,23 +133,23 @@
 }
 
 .table td.col-status-border {
-  width: 1px;
-  margin: 0;
-  padding: 0;
-  border-top: 0;
   border-bottom: 0;
   border-right: 0;
+  border-top: 0;
+  margin: 0;
+  padding: 0;
+  width: 1px;
 }
 
 .table td.col-status {
-  border-top: 1px solid rgba(0, 0, 0, 0.1);
   border-bottom: 0;
-  width: 50px;
-  padding: 0 10px;
-  margin: 0;
-  font-weight: bold;
-  vertical-align: middle;
   border-left: 0;
+  border-top: 1px solid rgba(0, 0, 0, 0.1);
+  font-weight: bold;
+  margin: 0;
+  padding: 0 10px;
+  vertical-align: middle;
+  width: 50px;
 }
 
 .table .status-spam td.col-status-border {
@@ -215,25 +215,25 @@ table.table-small {
 }
 
 .order-box {
-  position: relative;
   padding-right: 20px;
+  position: relative;
 }
 
 .order-box img {
+  cursor: pointer;
+
+  filter: alpha(opacity=5);
+  height: 10px;
+  opacity: 0.5;
   position: absolute;
   right: 5px;
   width: 10px;
-  height: 10px;
-  cursor: pointer;
-  opacity: 0.5;
-
-  filter: alpha(opacity=5);
 }
 
 .order-box img:hover {
-  opacity: 1;
 
   filter: alpha(opacity=1);
+  opacity: 1;
 }
 
 .order-box .up {
@@ -248,8 +248,8 @@ table.table-small {
   padding-right: 30px;
 
   &:before {
-    font-family: 'bootstrap-icons';
     content: "\f229";
+    font-family: 'bootstrap-icons';
   }
 }
 
@@ -257,8 +257,8 @@ table.table-small {
   padding-right: 30px;
 
   &:before {
-    font-family: 'bootstrap-icons';
     content: "\f235";
+    font-family: 'bootstrap-icons';
   }
 }
 
@@ -283,7 +283,7 @@ table .icon-new-window {
   margin-left: 5px;
 
   &:before {
-    font-family: 'bootstrap-icons';
     content: "\f1c5";
+    font-family: 'bootstrap-icons';
   }
 }

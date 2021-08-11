@@ -4,20 +4,21 @@
   }
 
   @extend .px-sm-2, .px-0, .bg-black-light, .min-vh-100, .text-white;
-  min-width: 220px;
   max-width: 250px;
+  min-width: 220px;
 
   div {
     &.nav-link {
-      color: $nav-pills-link-active-color;
       background-color: $gray-800;
+      color: $nav-pills-link-active-color;
 
       i {
+
+        transition: ease 500ms;
+
         &.collapsed {
           transform: rotate(-90deg);
         }
-
-        transition: ease 500ms;
       }
     }
   }
@@ -49,13 +50,13 @@
 .sidebar-submenu {
 
   background-color: $color-gray-black;
+  border: 0 $border-width solid transparent;
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
   font-size: $font-size-sm;
   margin-top: -.1rem;
   padding-top: .1rem;
-  border: 0 $border-width solid transparent;
   @include border-radius($navbar-toggler-border-radius);
-  border-top-left-radius: 0;
-  border-top-right-radius: 0;
 
   a {
     color: $gray-400;
@@ -63,8 +64,8 @@
     margin-bottom: $border-width;
 
     &.sub-active, &:hover {
-      color: $gray-200;
       background-color: $gray-600;
+      color: $gray-200;
     }
   }
 }

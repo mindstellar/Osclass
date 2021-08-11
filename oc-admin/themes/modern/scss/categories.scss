@@ -4,8 +4,8 @@
 
 .category-details-form input,
 .category-details-form textarea {
-  width: 250px;
   margin-bottom: 20px;
+  width: 250px;
 }
 
 .ui-sortable {
@@ -51,24 +51,24 @@
 }
 
 .ico-droppable {
-  position: absolute;
-  left: 1px;
-  top: 1px;
   border-right: solid 1px $color-gray-soft;
-  width: 34px;
-  height: 36px;
-  margin-left: 2px;
   cursor: move;
+  height: 36px;
+  left: 1px;
+  margin-left: 2px;
+  position: absolute;
+  top: 1px;
+  width: 34px;
 }
 
 .ico-childrens {
-  position: absolute;
-  left: 36px;
-  top: 1px;
   border-right: solid 1px $color-gray-soft;
-  width: 38px;
   height: 36px;
+  left: 36px;
   margin-left: 2px;
+  position: absolute;
+  top: 1px;
+  width: 38px;
 }
 
 .ui-sortable li ul li ul li ul .category_row {
@@ -86,31 +86,14 @@
 }
 */
 .ico-childrens .toggle {
-  /*.rounded-corners(15px);
-  min-width:18px;
-  height:16px;
-  font-size:12px;
-  padding-top:2px;
-  float:left;
-  background:white;
-  position: relative;
-  margin-top:6px;
-  margin-left:7px;
-  text-align:center;
-  margin-right:8px;
-  font-style:normal;
-  font-weight:bold;
-  background-color: $color-gray-ash;
-  color:$color-white;
-  border:solid 1px $color-gray-ash;*/
-  width: 10px;
-  height: 10px;
   display: block;
   float: left;
-  text-indent: -99999px;
-  padding: 5px;
+  height: 10px;
   margin-left: 7px;
   margin-top: 7px;
+  padding: 5px;
+  text-indent: -99999px;
+  width: 10px;
 }
 
 /* categories */
@@ -120,9 +103,9 @@
 
 .list-categories .name-cat,
 .list-fields .name-edit-cfield {
+  color: $color-gray-dim;
   font-size: 15px;
   line-height: 26px;
-  color: $color-gray-dim;
 }
 
 .list-fields .name-edit-cfield {
@@ -132,7 +115,6 @@
 ul.subcategories {
   margin-left: 20px;
 }
-
 
 .list-categories li {
   margin-top: 10px;
@@ -178,21 +160,21 @@ div.disabled .category_row,
 }
 
 #advanced_fields_iframe {
+  border-bottom: solid 1px $color-gray-soft;
   font-size: 16px;
   font-weight: normal;
-  position: relative;
-  border-bottom: solid 1px $color-gray-soft;
+  margin-bottom: 10px;
   padding-bottom: 5px;
   padding-left: 15px;
-  margin-bottom: 10px;
+  position: relative;
 }
 
 .custom-field-shrink .icon-more:before {
-  font-family: "bootstrap-icons";
   content: "\f231";
+  font-family: "bootstrap-icons";
 }
 
 .custom-field-expanded .icon-more:before {
-  font-family: "bootstrap-icons";
   content: "\f229";
+  font-family: "bootstrap-icons";
 }
