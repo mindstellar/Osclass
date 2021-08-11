@@ -93,74 +93,7 @@ function customHead()
             });
 
             $('.ui-autocomplete').css('zIndex', 10000);
-
-            // check_all bulkactions
-            $("#check_all").change(function () {
-                var isChecked = $(this).prop("checked");
-                $('.col-bulkactions input').each(function () {
-                    if (isChecked == 1) {
-                        this.checked = true;
-                    } else {
-                        this.checked = false;
-                    }
-                });
-            });
-
-            // dialog delete
-            $("#dialog-user-delete").dialog({
-                autoOpen: false,
-                modal: true
-            });
-
-            // dialog filters
-            $('#display-filters').dialog({
-                autoOpen: false,
-                modal: true,
-                width: 700,
-                title: '<?php echo osc_esc_js(__('Filters')); ?>'
-            });
-            $('#btn-display-filters').click(function () {
-                $('#display-filters').dialog('open');
-                return false;
-            });
-
-            // dialog bulk actions
-            $("#dialog-bulk-actions").dialog({
-                autoOpen: false,
-                modal: true
-            });
-            $("#bulk-actions-submit").click(function () {
-                $("#datatablesForm").submit();
-            });
-            $("#bulk-actions-cancel").click(function () {
-                $("#datatablesForm").attr('data-dialog-open', 'false');
-                $('#dialog-bulk-actions').dialog('close');
-            });
-            // dialog bulk actions function
-            $("#datatablesForm").submit(function () {
-                if ($("#bulk_actions option:selected").val() == "") {
-                    return false;
-                }
-
-                if ($("#datatablesForm").attr('data-dialog-open') == "true") {
-                    return true;
-                }
-
-                $("#dialog-bulk-actions .form-row").html($("#bulk_actions option:selected").attr('data-dialog-content'));
-                $("#bulk-actions-submit").html($("#bulk_actions option:selected").text());
-                $("#datatablesForm").attr('data-dialog-open', 'true');
-                $("#dialog-bulk-actions").dialog('open');
-                return false;
-            });
-            // /dialog bulk actions
         });
-
-        // dialog delete function
-        function delete_dialog(item_id) {
-            $("#dialog-user-delete input[name='id[]']").attr('value', item_id);
-            $("#dialog-user-delete").dialog('open');
-            return false;
-        }
     </script>
     <?php
 }
@@ -179,170 +112,55 @@ $rows        = $aData['aRows'];
 $withFilters = __get('withFilters');
 ?>
 <?php osc_current_admin_theme_path('parts/header.php'); ?>
-    <form method="get" action="<?php echo osc_admin_base_url(true); ?>" id="display-filters"
-          class="has-form-actions hide nocsrf">
-        <input type="hidden" name="page" value="users"/>
-        <input type="hidden" name="iDisplayLength" value="<?php echo $iDisplayLength; ?>"/>
-        <input type="hidden" name="sort" value="<?php echo $sort; ?>"/>
-        <input type="hidden" name="direction" value="<?php echo $direction; ?>"/>
-        <div class="form-horizontal">
-            <div class="grid-system">
-                <div class="grid-row grid-50">
-                    <div class="row-wrapper">
-                        <div class="form-row">
-                            <div class="form-label">
-                                <?php _e('Email'); ?>
-                            </div>
-                            <div class="form-controls">
-                                <input id="s_email" name="s_email" type="text"
-                                       value="<?php echo osc_esc_html(Params::getParam('s_email')); ?>"/>
-                            </div>
-                        </div>
-                        <div class="form-row">
-                            <div class="form-label">
-                                <?php _e('Name'); ?>
-                            </div>
-                            <div class="form-controls">
-                                <input id="s_name" name="s_name" type="text"
-                                       value="<?php echo osc_esc_html(Params::getParam('s_name')); ?>"/>
-                            </div>
-                        </div>
-                        <div class="form-row">
-                            <div class="form-label">
-                                <?php _e('Username'); ?>
-                            </div>
-                            <div class="form-controls">
-                                <input id="s_username" name="s_username" type="text"
-                                       value="<?php echo osc_esc_html(Params::getParam('s_username')); ?>"/>
-                            </div>
-                        </div>
-                        <div class="form-row">
-                            <div class="form-label">
-                                <?php _e('Active'); ?>
-                            </div>
-                            <div class="form-controls">
-                                <select id="b_active" name="b_active">
-                                    <option value="" <?php echo((Params::getParam('b_active') == '')
-                                        ? 'selected="selected"' : '') ?>><?php _e('Choose an option'); ?></option>
-                                    <option value="1" <?php echo((Params::getParam('b_active') == '1')
-                                        ? 'selected="selected"' : '') ?>><?php _e('ON'); ?></option>
-                                    <option value="0" <?php echo((Params::getParam('b_active') == '0')
-                                        ? 'selected="selected"' : '') ?>><?php _e('OFF'); ?></option>
-                                </select>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="grid-row grid-50">
-                    <div class="row-wrapper">
-                        <div class="form-row">
-                            <div class="form-label">
-                                <?php _e('Country'); ?>
-                            </div>
-                            <div class="form-controls">
-                                <input id="countryName" name="countryName" type="text"
-                                       value="<?php echo osc_esc_html(Params::getParam('countryName')); ?>"/>
-                                <input id="countryId" name="countryId" type="hidden"
-                                       value="<?php echo osc_esc_html(Params::getParam('countryId')); ?>"/>
-                            </div>
-                        </div>
-                        <div class="form-row">
-                            <div class="form-label">
-                                <?php _e('Region'); ?>
-                            </div>
-                            <div class="form-controls">
-                                <input id="region" name="region" type="text"
-                                       value="<?php echo osc_esc_html(Params::getParam('region')); ?>"/>
-                                <input id="regionId" name="regionId" type="hidden"
-                                       value="<?php echo osc_esc_html(Params::getParam('regionId')); ?>"/>
-                            </div>
-                        </div>
-                        <div class="form-row">
-                            <div class="form-label">
-                                <?php _e('City'); ?>
-                            </div>
-                            <div class="form-controls">
-                                <input id="city" name="city" type="text"
-                                       value="<?php echo osc_esc_html(Params::getParam('city')); ?>"/>
-                                <input id="cityId" name="cityId" type="hidden"
-                                       value="<?php echo osc_esc_html(Params::getParam('cityId')); ?>"/>
-                            </div>
-                        </div>
-                        <div class="form-row">
-                            <div class="form-label">
-                                <?php _e('Block'); ?>
-                            </div>
-                            <div class="form-controls">
-                                <select id="b_enabled" name="b_enabled">
-                                    <option value="" <?php echo((Params::getParam('b_enabled') == '')
-                                        ? 'selected="selected"' : '') ?>><?php _e('Choose an option'); ?></option>
-                                    <option value="0" <?php echo((Params::getParam('b_enabled') == '0')
-                                        ? 'selected="selected"' : '') ?>><?php _e('ON'); ?></option>
-                                    <option value="1" <?php echo((Params::getParam('b_enabled') == '1')
-                                        ? 'selected="selected"' : '') ?>><?php _e('OFF'); ?></option>
-                                </select>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="clear"></div>
-            </div>
-        </div>
-        <div class="form-actions">
-            <div class="wrapper">
-                <input id="show-filters" type="submit" value="<?php echo osc_esc_html(__('Apply filters')); ?>"
-                       class="btn btn-submit"/>
-                <a class="btn btn-dim"
-                   href="<?php echo osc_admin_base_url(true) . '?page=users'; ?>"><?php _e('Reset filters'); ?></a>
-            </div>
-        </div>
-    </form>
     <h2 class="render-title"><?php _e('Manage users'); ?> <a
                 href="<?php echo osc_admin_base_url(true) . '?page=users&action=create'; ?>"
                 class="btn btn-sm btn-success"><?php _e('Add new'); ?></a></h2>
     <div class="relative">
-        <div id="users-toolbar" class="table-toolbar">
-            <div class="float-right">
-                <form method="get" action="<?php echo osc_admin_base_url(true); ?>" class="inline nocsrf">
-                    <?php foreach (Params::getParamsAsArray('get') as $key => $value) { ?>
-                        <?php if ($key !== 'iDisplayLength') { ?>
-                            <input type="hidden" name="<?php echo osc_esc_html($key); ?>"
-                                   value="<?php echo osc_esc_html($value); ?>"/>
-                        <?php }
-                    } ?>
-                    <select name="iDisplayLength" class="select-box-extra select-box-medium float-left"
-                            onchange="this.form.submit();">
-                        <option value="10"><?php printf(__('%d Users'), 10); ?></option>
-                        <option value="25" <?php if (Params::getParam('iDisplayLength') == 25) {
-                            echo 'selected';
-                                           } ?> ><?php printf(__('%d Users'), 25); ?></option>
-                        <option value="50" <?php if (Params::getParam('iDisplayLength') == 50) {
-                            echo 'selected';
-                                           } ?> ><?php printf(__('%d Users'), 50); ?></option>
-                        <option value="100" <?php if (Params::getParam('iDisplayLength') == 100) {
-                            echo 'selected';
-                                            } ?> ><?php printf(__('%d Users'), 100); ?></option>
-                    </select>
-                </form>
-                <form method="get" action="<?php echo osc_admin_base_url(true); ?>" id="shortcut-filters"
-                      class="inline nocsrf">
+        <div id="users-toolbar" class="table-toolbar d-flex justify-content-end">
+            <form method="get" action="<?php echo osc_admin_base_url(true); ?>" class="inline nocsrf">
+                <?php foreach (Params::getParamsAsArray('get') as $key => $value) { ?>
+                    <?php if ($key !== 'iDisplayLength') { ?>
+                        <input type="hidden" name="<?php echo osc_esc_html($key); ?>"
+                               value="<?php echo osc_esc_html($value); ?>"/>
+                    <?php }
+                } ?>
+                <select name="iDisplayLength" class="form-select form-select-sm"
+                        onchange="this.form.submit();">
+                    <option value="10"><?php printf(__('%d Listings'), 10); ?></option>
+                    <option value="25" <?php if (Params::getParam('iDisplayLength') == 25) {
+                        echo 'selected';
+                    } ?> ><?php printf(__('%d Listings'), 25); ?></option>
+                    <option value="50" <?php if (Params::getParam('iDisplayLength') == 50) {
+                        echo 'selected';
+                    } ?> ><?php printf(__('%d Listings'), 50); ?></option>
+                    <option value="100" <?php if (Params::getParam('iDisplayLength') == 100) {
+                        echo 'selected';
+                    } ?> ><?php printf(__('%d Listings'), 100); ?></option>
+                </select>
+            </form>
+            <form method="get" action="<?php echo osc_admin_base_url(true); ?>" id="shortcut-filters"
+                  class="inline nocsrf">
+                <fieldset class="input-group input-group-sm">
                     <input type="hidden" name="page" value="users"/>
-                    <?php if ($withFilters) { ?>
-                        <a id="btn-hide-filters" href="<?php echo osc_admin_base_url(true) . '?page=users'; ?>"
-                           class="btn btn-dim"><?php _e('Reset filters'); ?></a>
-                    <?php } ?>
-                    <a id="btn-display-filters" href="#" class="btn <?php if ($withFilters) {
-                        echo 'btn-red';
-                                                                    } ?>"><?php _e('Show filters'); ?></a>
                     <input id="fUser" name="user" type="text" class="fUser input-text input-actions"
                            value="<?php echo osc_esc_html(Params::getParam('user')); ?>"/>
                     <input id="fUserId" name="userId" type="hidden"
                            value="<?php echo osc_esc_html(Params::getParam('userId')); ?>"/>
-                    <input type="submit" class="btn submit-right" value="<?php echo osc_esc_html(__('Find')); ?>">
-                </form>
-            </div>
+                    <?php if ($withFilters) { ?>
+                        <a id="btn-hide-filters" href="<?php echo osc_admin_base_url(true) . '?page=users'; ?>"
+                           class="btn btn-dim"><?php _e('Reset filters'); ?></a>
+                    <?php } ?>
+                    <a data-bs-toggle="modal" data-bs-target="#display-filters" href="#" class="btn btn-dim <?php if ($withFilters) {
+                        echo 'btn-red';
+                    } ?>" title="<?php _e('Show filters'); ?>"><i class="bi bi-filter"></i>
+                    </a>
+                    <button type="submit" class="btn btn-primary" title="<?php echo osc_esc_html(__('Find')); ?>">
+                        <i class="bi bi-search"></i>
+                    </button>
+                </fieldset>
+            </form>
         </div>
-        <form class="" id="datatablesForm" action="<?php echo osc_admin_base_url(true); ?>" method="post">
+        <form id="datatablesForm" action="<?php echo osc_admin_base_url(true); ?>" method="post">
             <input type="hidden" name="page" value="users"/>
 
             <div id="bulk-actions">
@@ -404,38 +222,223 @@ function showingResults()
 osc_add_hook('before_show_pagination_admin', 'showingResults');
 osc_show_pagination_admin($aData);
 ?>
-    <form id="dialog-user-delete" method="get" action="<?php echo osc_admin_base_url(true); ?>"
-          class="has-form-actions hide" title="<?php echo osc_esc_html(__('Delete user')); ?>">
-        <input type="hidden" name="page" value="users"/>
-        <input type="hidden" name="action" value="delete"/>
-        <input type="hidden" name="id[]" value=""/>
-        <div class="form-horizontal">
-            <div class="form-row">
-                <?php _e('Are you sure you want to delete this user?'); ?>
-            </div>
-            <div class="form-actions">
-                <div class="wrapper">
-                    <a class="btn btn-dim" href="javascript:void(0);"
-                       onclick="$('#dialog-user-delete').dialog('close');"><?php _e('Cancel'); ?></a>
-                    <input id="user-delete-submit" type="submit" value="<?php echo osc_esc_html(__('Delete')); ?>"
-                           class="btn btn-red"/>
+    <form method="get" action="<?php echo osc_admin_base_url(true); ?>" id="display-filters"
+          class="modal fade nocsrf"
+          data-bs-backdrop="static"
+          data-bs-keyboard="false" tabindex="-1">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="staticBackdropLabel"><?php _e('Filters') ?></h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <input type="hidden" name="page" value="users"/>
+                    <input type="hidden" name="iDisplayLength" value="<?php echo $iDisplayLength; ?>"/>
+                    <input type="hidden" name="sort" value="<?php echo $sort; ?>"/>
+                    <input type="hidden" name="direction" value="<?php echo $direction; ?>"/>
+                    <div class="form-horizontal">
+                        <div class="row row-cols-lg-2">
+                            <div class="col">
+                                <div class="row-wrapper">
+                                    <div class="form-row">
+                                        <div class="form-label">
+                                            <?php _e('Email'); ?>
+                                        </div>
+                                        <div class="form-controls">
+                                            <input id="s_email" name="s_email" type="text"
+                                                   value="<?php echo osc_esc_html(Params::getParam('s_email')); ?>"/>
+                                        </div>
+                                    </div>
+                                    <div class="form-row">
+                                        <div class="form-label">
+                                            <?php _e('Name'); ?>
+                                        </div>
+                                        <div class="form-controls">
+                                            <input id="s_name" name="s_name" type="text"
+                                                   value="<?php echo osc_esc_html(Params::getParam('s_name')); ?>"/>
+                                        </div>
+                                    </div>
+                                    <div class="form-row">
+                                        <div class="form-label">
+                                            <?php _e('Username'); ?>
+                                        </div>
+                                        <div class="form-controls">
+                                            <input id="s_username" name="s_username" type="text"
+                                                   value="<?php echo osc_esc_html(Params::getParam('s_username')); ?>"/>
+                                        </div>
+                                    </div>
+                                    <div class="form-row">
+                                        <div class="form-label">
+                                            <?php _e('Active'); ?>
+                                        </div>
+                                        <div class="form-controls">
+                                            <select id="b_active" name="b_active">
+                                                <option value="" <?php echo((Params::getParam('b_active') == '')
+                                                    ? 'selected="selected"' : '') ?>><?php _e('Choose an option'); ?></option>
+                                                <option value="1" <?php echo((Params::getParam('b_active') == '1')
+                                                    ? 'selected="selected"' : '') ?>><?php _e('ON'); ?></option>
+                                                <option value="0" <?php echo((Params::getParam('b_active') == '0')
+                                                    ? 'selected="selected"' : '') ?>><?php _e('OFF'); ?></option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="row-wrapper">
+                                    <div class="form-row">
+                                        <div class="form-label">
+                                            <?php _e('Country'); ?>
+                                        </div>
+                                        <div class="form-controls">
+                                            <input id="countryName" name="countryName" type="text"
+                                                   value="<?php echo osc_esc_html(Params::getParam('countryName')); ?>"/>
+                                            <input id="countryId" name="countryId" type="hidden"
+                                                   value="<?php echo osc_esc_html(Params::getParam('countryId')); ?>"/>
+                                        </div>
+                                    </div>
+                                    <div class="form-row">
+                                        <div class="form-label">
+                                            <?php _e('Region'); ?>
+                                        </div>
+                                        <div class="form-controls">
+                                            <input id="region" name="region" type="text"
+                                                   value="<?php echo osc_esc_html(Params::getParam('region')); ?>"/>
+                                            <input id="regionId" name="regionId" type="hidden"
+                                                   value="<?php echo osc_esc_html(Params::getParam('regionId')); ?>"/>
+                                        </div>
+                                    </div>
+                                    <div class="form-row">
+                                        <div class="form-label">
+                                            <?php _e('City'); ?>
+                                        </div>
+                                        <div class="form-controls">
+                                            <input id="city" name="city" type="text"
+                                                   value="<?php echo osc_esc_html(Params::getParam('city')); ?>"/>
+                                            <input id="cityId" name="cityId" type="hidden"
+                                                   value="<?php echo osc_esc_html(Params::getParam('cityId')); ?>"/>
+                                        </div>
+                                    </div>
+                                    <div class="form-row">
+                                        <div class="form-label">
+                                            <?php _e('Block'); ?>
+                                        </div>
+                                        <div class="form-controls">
+                                            <select id="b_enabled" name="b_enabled">
+                                                <option value="" <?php echo((Params::getParam('b_enabled') == '')
+                                                    ? 'selected="selected"' : '') ?>><?php _e('Choose an option'); ?></option>
+                                                <option value="0" <?php echo((Params::getParam('b_enabled') == '0')
+                                                    ? 'selected="selected"' : '') ?>><?php _e('ON'); ?></option>
+                                                <option value="1" <?php echo((Params::getParam('b_enabled') == '1')
+                                                    ? 'selected="selected"' : '') ?>><?php _e('OFF'); ?></option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="clear"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <div class="wrapper">
+                        <input id="show-filters" type="submit" value="<?php echo osc_esc_html(__('Apply filters')); ?>"
+                               class="btn btn-success btn-sm"/>
+                        <a class="btn btn-warning btn-sm"
+                           href="<?php echo osc_admin_base_url(true) . '?page=users'; ?>"><?php _e('Reset filters'); ?></a>
+                    </div>
                 </div>
             </div>
         </div>
     </form>
-    <div id="dialog-bulk-actions" title="<?php _e('Bulk actions'); ?>" class="has-form-actions hide">
-        <div class="form-horizontal">
-            <div class="form-row"></div>
-            <div class="form-actions">
-                <div class="wrapper">
-                    <a id="bulk-actions-cancel" class="btn btn-dim" href="javascript:void(0);"><?php _e('Cancel'); ?></a>
-                    <a id="bulk-actions-submit" href="javascript:void(0);"
-                       class="btn btn-red"><?php echo osc_esc_html(__('Delete')); ?></a>
-                    <div class="clear"></div>
+    <form id="deleteModal" method="get" action="<?php echo osc_admin_base_url(true); ?>"
+          class="modal fade static">
+        <input type="hidden" name="page" value="users"/>
+        <input type="hidden" name="action" value="delete"/>
+        <input type="hidden" name="id[]" value=""/>
+        <div class="modal-dialog modal-sm">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">
+                        <?php echo osc_esc_html(__('Delete user')); ?>
+                    </h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <?php _e('Are you sure you want to delete this user?'); ?>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-sm btn-secondary" data-bs-dismiss="modal"><?php _e('Cancel'); ?></button>
+                    <button id="deleteSubmit" class="btn btn-sm btn-red" type="submit">
+                        <?php echo __('Delete'); ?>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </form>
+    <div id="bulkActionsModal" class="modal fade static" tabindex="-1" aria-labelledby="bulkActionsModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-sm">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="bulkActionsModalLabel"><?php _e('Bulk actions'); ?></h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <p></p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-sm btn-secondary" data-bs-dismiss="modal"><?php _e('Cancel'); ?></button>
+                    <button id="bulkActionsSubmit" onclick="bulkActionsSubmit()"
+                            class="btn btn-sm btn-red"><?php echo osc_esc_html(__('Delete')); ?></button>
                 </div>
             </div>
         </div>
     </div>
+    <script>
+        $(document).ready(function () {
+            // check_all bulkactions
+            $("#check_all").change(function () {
+                var isChecked = $(this).prop("checked");
+                $('.col-bulkactions input').each(function () {
+                    this.checked = isChecked == 1;
+                });
+            });
+
+        });
+
+        function delete_dialog(id) {
+            var deleteModal = document.getElementById("deleteModal")
+            deleteModal.querySelector("input[name='id[]']").value = id;
+            (new bootstrap.Modal(document.getElementById('deleteModal'))).toggle()
+            return false;
+        }
+
+        function toggleBulkActionsModal() {
+            var bulkSelect = document.getElementById('bulk_actions')
+            var bulkActionsModal = new bootstrap.Modal(document.getElementById('bulkActionsModal'))
+            if (bulkSelect.options[bulkSelect.selectedIndex].value !== '') {
+                bulkActionsModal.toggle()
+            }
+            event.preventDefault()
+            return false
+        }
+
+        function bulkActionsSubmit() {
+            document.getElementById('datatablesForm').submit()
+        }
+
+        document.getElementById('datatablesForm').onsubmit = function () {
+            toggleBulkActionsModal()
+        };
+        var bulkActionsModal = document.getElementById('bulkActionsModal')
+        bulkActionsModal.addEventListener('show.bs.modal', function () {
+            var bulkSelect = document.getElementById('bulk_actions')
+            bulkActionsModal.querySelector('.modal-body p').textContent = bulkSelect.options[bulkSelect.selectedIndex]
+                .getAttribute('data-dialog-content')
+            bulkActionsModal.querySelector('#bulkActionsSubmit').textContent = bulkSelect.options[bulkSelect.selectedIndex].text;
+        })
+    </script>
     <script type="text/javascript">
         $(document).ready(function () {
 
