@@ -70,6 +70,16 @@ class Scripts extends Dependencies
     }
 
     /**
+     * Enqueue script to be loaded
+     *
+     * @param $id
+     */
+    public function enqueueScript($id)
+    {
+        $this->queue[$id] = $id;
+    }
+
+    /**
      * @return \Scripts
      */
     public static function newInstance()
@@ -86,15 +96,31 @@ class Scripts extends Dependencies
      */
     public static function init()
     {
-        $admin_prefix = '';
         if (OC_ADMIN) {
-            $admin_prefix = 'admin_';
+            self::initPrintScriptsAdmin();
+        } else {
+            self::initPrintScripts();
         }
+    }
 
+    /**
+     * Print enqueued scripts and run a 'scripts_loaded' hook after scripts print
+     *
+     */
+    private static function initPrintScriptsAdmin()
+    {
+        $printScript = function () {
+            Scripts::newInstance()->printScripts();
+        };
         if (!Preference::newInstance()->get('enqueue_scripts_in_footer')) {
-            self::printScriptRunLoadHook($admin_prefix.'header');
+            Plugins::addHook('admin_header', $printScript, 10);
         }
-        self::printScriptRunLoadHook($admin_prefix.'footer');
+        Plugins::addHook('admin_footer', $printScript, 10);
+
+        Plugins::addHook('admin_footer',
+            function () {
+                Plugins::runHook('admin_scripts_loaded');
+            },20);
     }
 
     /**
@@ -126,17 +152,40 @@ class Scripts extends Dependencies
         return $scripts;
     }
 
+    private static function initPrintScripts()
+    {
+        $printScript = function () {
+            Scripts::newInstance()->printScripts();
+        };
+        if (!Preference::newInstance()->get('enqueue_scripts_in_footer')) {
+            Plugins::addHook('header', $printScript, 10);
+        }
+        Plugins::addHook('footer', $printScript, 10);
+
+        Plugins::addHook('footer',
+            function () {
+                Plugins::runHook('scripts_loaded');
+            },20);
+    }
+
     /**
      * Print enqueued scripts and run a 'scripts_loaded' hook after scripts print
-     * @param string $hook_name
+     *
+     * @param string $prefix
      */
-    private static function printScriptRunLoadHook($hook_name)
+    private static function printScriptRunLoadHook($prefix)
     {
-
-        Plugins::addHook($hook_name, static function () use ($hook_name) {
+        if ($prefix) {
+            osc_load_scripts();
+        }
+        $closure = static function () use ($prefix) {
             Scripts::newInstance()->printScripts();
-            Plugins::runHook($hook_name.'_scripts_loaded');
-        }, 10);
+            Plugins::runHook($prefix . '_scripts_loaded');
+        };
+        Plugins::addHook($prefix, $closure, 10);
+        if (!Preference::newInstance()->get('enqueue_scripts_in_footer')) {
+            Plugins::addHook($prefix, $closure, 10);
+        }
     }
 
     /**
@@ -163,23 +212,15 @@ class Scripts extends Dependencies
 
     /**
      * Enqueu script to be loaded
-     * @deprecated since 4.0.0
+     *
      * @param $id
+     *
+     * @deprecated since 4.0.0
      */
     public function enqueuScript($id)
     {
         Deprecate::deprecatedFunction(__METHOD__, '4.0.0', 'Scripts::enqueueScript()');
         $this->enqueueScript($id);
-    }
-
-    /**
-     * Enqueue script to be loaded
-     *
-     * @param $id
-     */
-    public function enqueueScript($id)
-    {
-        $this->queue[$id] = $id;
     }
 
     /**
