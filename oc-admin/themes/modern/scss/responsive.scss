@@ -12,7 +12,14 @@
       }
 
       .form-controls {
-        margin-left: inherit
+        margin-left: inherit;
+          select {
+            width: 100%;
+          }
+
+          input:not([type="checkbox"]):not([type="radio"]) {
+            width: 100%;
+          }
       }
     }
 

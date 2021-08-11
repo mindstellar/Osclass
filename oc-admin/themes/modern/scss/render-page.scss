@@ -16,10 +16,16 @@
     font-size: 20px;
     font-weight: 300;
   }
+  h3 {
+    font-size: 18px;
+    font-weight: 300;
+  }
 }
-
+#content-render{
+  background-color: $gray-200;
+}
 #content-page {
-  background-color: $color-white;
+  //background-color: $color-white;
   min-height: calc(100vh - 9rem);
   padding: 22px 15px 60px;
   position: relative
@@ -31,7 +37,6 @@
 }
 
 .render-title {
-  color: $color-gray-dim;
   font-size: 21px;
   font-weight: normal;
   margin: 0 0 20px;

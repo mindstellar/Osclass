@@ -1,8 +1,28 @@
-#market-quick-search {
-  position: absolute;
-  right: 30px;
-  top: 30px;
-}
+/*!
+ * OSClass – software for creating and publishing online classified advertising platforms
+ *
+ * Copyright (c) 2021.  Mindstellar
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+ *
+ *                     GNU GENERAL PUBLIC LICENSE
+ *                        Version 3, 29 June 2007
+ *
+ *  Copyright (C) 2007 Free Software Foundation, Inc. <http://fsf.org/>
+ *  Everyone is permitted to copy and distribute verbatim copies
+ *  of this license document, but changing it is not allowed.
+ *
+ *  You should have received a copy of the GNU Affero General Public
+ *  License along with this program. If not, see <http://www.gnu.org/licenses/>.
+ *
+ */
 
 .current-theme {
   padding-top: 20px;
@@ -22,7 +42,7 @@
 .theme {
   background-color: $color-gray-light;
   float: left;
-  font-size: 12px;
+  font-size: .95rem;
   margin-bottom: 40px;
   margin-right: 20px;
   padding: 10px;
@@ -40,7 +60,6 @@
 
 .theme .theme-actions {
   background-color: rgba(243, 243, 243, 0.9);
-  *background-color: rgb(243, 243, 243);
   border-top: solid 1px $color-gray-soft;
   bottom: 4px;
   left: 1px;
@@ -91,4 +110,6 @@ tr.plugin h3 {
 .plugin-actions {
   padding-top: 10px;
 }
-
+.available-theme .card {
+  width:250px;
+}

@@ -4,16 +4,14 @@
   }
 
   @extend .px-sm-2, .px-0, .bg-black-light, .min-vh-100, .text-white;
-  max-width: 250px;
-  min-width: 220px;
-
+  max-width: 15rem;
   div {
     &.nav-link {
       background-color: $gray-800;
       color: $nav-pills-link-active-color;
 
-      i {
-
+      >i {
+        margin-left: 1rem;
         transition: ease 500ms;
 
         &.collapsed {
@@ -50,7 +48,7 @@
 .sidebar-submenu {
 
   background-color: $color-gray-black;
-  border: 0 $border-width solid transparent;
+  border: $border-width solid transparent;
   border-top-left-radius: 0;
   border-top-right-radius: 0;
   font-size: $font-size-sm;

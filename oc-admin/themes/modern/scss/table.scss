@@ -1,6 +1,7 @@
 .table {
   @extend .shadow-sm, .table-striped;
   --#{$variable-prefix}table-striped-bg: #{$gray-300}33;
+  background-color: $gray-100;
   border: 1px solid $gray-400;
   font-size: 14px;
   width: 100%;
