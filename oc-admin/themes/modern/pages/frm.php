@@ -119,39 +119,36 @@ osc_add_hook('admin_header', 'customHead', 10);
 
 osc_current_admin_theme_path('parts/header.php'); ?>
 <h2 class="render-title"><?php echo customFrmText('title'); ?></h2>
-<div id="item-form">
-    <?php printLocaleTabs(); ?>
+<div id="item-form" class="col-xl-10">
+    <?php PageForm::printMultiLangTab(); ?>
     <form action="<?php echo osc_admin_base_url(true); ?>" method="post">
         <input type="hidden" name="page" value="pages"/>
         <input type="hidden" name="action" value="<?php echo customFrmText('action_frm'); ?>"/>
         <?php PageForm::primary_input_hidden($page); ?>
-        <?php printLocaleTitlePage($locales, $page); ?>
-        <div>
-            <label><?php _e('Internal name'); ?></label>
-            <?php PageForm::internal_name_input_text($page); ?>
-            <div class="flashmessage flashmessage-warning flashmessage-inline">
-                <p><?php _e('Used to quickly identify this page'); ?></p>
-            </div>
-            <span class="help"></span>
-        </div>
         <?php if (count($templates) > 0) { ?>
-            <div>
+            <div class="select-box-big">
                 <label><?php _e('Page template'); ?></label>
-                <select name="meta[template]">
-                    <option value="default" <?php if ($template_selected == 'default') {
+                <select class="form-control form-control-sm" name="meta[template]">
+                    <option value="default" <?php if ($template_selected === 'default') {
                         echo 'selected="selected"';
-                                            } ?>><?php _e('Default template'); ?></option>
+                    } ?>><?php _e('Default template'); ?></option>
                     <?php foreach ($templates as $template) { ?>
-                        <option value="<?php echo $template ?>" <?php if ($template_selected == $template) {
+                        <option value="<?php echo $template ?>" <?php if ($template_selected === $template) {
                             echo 'selected="selected"';
-                                       } ?>><?php echo $template; ?></option>
+                        } ?>><?php echo $template; ?></option>
                     <?php } ?>
                 </select>
             </div>
         <?php } ?>
-        <div class="input-description-wide">
-            <?php printLocaleDescriptionPage($locales, $page); ?>
+        <div>
+            <label><?php _e('Internal name'); ?>/<?php echo __('Slug');?></label>
+            <?php PageForm::internal_name_input_text($page); ?>
+            <div class="help-box">
+                <p><?php _e('Used to quickly identify this page'); ?></p>
+            </div>
+            <span class="help"></span>
         </div>
+        <?php PageForm::printMultiLangTitleDesc($page, false); ?>
         <div class="form-controls">
             <div class="form-label-checkbox">
                 <label><?php PageForm::link_checkbox($page); ?><?php _e('Show a link in footer'); ?></label>
