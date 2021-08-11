@@ -405,8 +405,6 @@ class AdminMenu
         $aMenu     = $adminMenu->get_array_menu();
 
         $is_moderator = osc_is_moderator();
-
-
 // find current menu section
         $current_menu    = '';
         $current_submenu = '';
@@ -470,7 +468,7 @@ class AdminMenu
 
         $sMenu .= '<div class="px-1 pt-2">' .
                   PHP_EOL;
-        $sMenu .= '<ul id="dashboard-menu" class="oscmenu col-md-12 nav nav-pills flex-column mb-auto">' .
+        $sMenu .= '<ul id="dashboard-menu" class="oscmenu col-md-12 nav nav-pills flex-column">' .
                   PHP_EOL;
 
 
@@ -539,7 +537,7 @@ class AdminMenu
 
             if (isset($value['sub']) && !empty($value['sub'])) {
                 $str .= ' <i class="float-end bi bi-chevron-down ' . ($activeMenu !== $menuId ? 'collapsed ' : '')
-                        . ' mt-auto" data-bs-target="#'
+                        . '" data-bs-target="#'
                         . $menuId . '-submenu" data-bs-toggle="collapse" role="button" ></i>';
                 $str .= '</div>';
                 $str .= $this->renderSubMenu($menuId, $value['sub'], $is_moderator, $activeMenu, $activeSubmenu);
@@ -672,9 +670,6 @@ class AdminMenu
                 $priority     = 0;
             }
         }
-        echo '<!--';
-        var_export($aMenu);
-        echo '-->';
         $value = array();
         foreach ($aMenu as $key => $value) {
             $sSubmenu   = '';
