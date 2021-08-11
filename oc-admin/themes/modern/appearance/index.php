@@ -92,66 +92,71 @@ osc_current_admin_theme_path('parts/header.php'); ?>
                                 title="<?php echo $info['name']; ?>" alt="<?php echo $info['name']; ?>"
                         />
                         <div class="theme-info">
-                            <h3><?php echo $info['name']; ?></h3>
-                            <p><?php _e('Version')?> : <?php echo $info['version']; ?></p>
-                            <p><?php _e('Author')?> : <a href="<?php echo $info['author_url']; ?>"
-                                                       target="_blank"><?php echo $info['author_name']; ?></a>
+                            <h3 class="lead"><?php echo $info['name']; ?></h3>
+                            <p><?php _e('Version') ?> : <?php echo $info['version']; ?></p>
+                            <p><?php _e('Author') ?> : <a href="<?php echo $info['author_url']; ?>"
+                                                          target="_blank"><?php echo $info['author_name']; ?></a>
                             </p>
-                            <p><?php _e('Description')?> : <?php echo $info['description']; ?></p>
+                            <p><?php _e('Description') ?> : <?php echo $info['description']; ?></p>
                         </div>
                         <div class="clear"></div>
                     </div>
                 </div>
                 <h2 class="render-title lead"><?php _e('Available themes'); ?></h2>
-                <div class="available-theme">
-                    <?php
-                    $aThemesToUpdate = json_decode(osc_get_preference('themes_to_update'), true);
-                    $bThemesToUpdate = (is_array($aThemesToUpdate)) ? true : false;
-                    $csrf_token      = osc_csrf_token_url();
-                    foreach ($themes as $theme) { ?>
+                <hr>
+                <div class="available-theme row row-cols-1 row-cols-md-3 row-cols-lg-4 g-4">
+                    <div class="col">
                         <?php
-                        if ($theme === osc_theme()) {
-                            continue;
-                        }
-                        $info = WebThemes::newInstance()->loadThemeInfo($theme);
-                        ?>
-                        <div class="theme">
-                            <img class="card-img-top" src="<?php echo osc_base_url(); ?>/oc-content/themes/<?php echo $theme; ?>/screenshot.png"
-                                 title="<?php echo $info['name']; ?>" alt="<?php echo $info['name']; ?>"/>
-                            <div class="theme-stage">
-                                <div class="theme-actions">
-                                    <a href="<?php echo osc_admin_base_url(true);
-                                    ?>?page=appearance&amp;action=activate&amp;theme=<?php
-                                    echo $theme; ?>&amp;<?php echo $csrf_token;
-                                    ?>" class="btn btn-mini btn-green"><?php _e('Activate'); ?></a>
-                                    <a target="_blank"
-                                       href="<?php echo osc_base_url(true); ?>?theme=<?php echo $theme; ?>"
-                                       class="btn btn-mini btn-blue"><?php _e('Preview'); ?></a>
-                                    <a onclick="return delete_dialog('<?php echo $theme; ?>');"
-                                       href="<?php echo osc_admin_base_url(true);
-                                       ?>?page=appearance&amp;action=delete&amp;webtheme=<?php
-                                       echo $theme; ?>&amp;<?php echo $csrf_token; ?>"
-                                       class="btn btn-sm btn-success float-right delete"><?php _e('Delete'); ?></a>
-                                    <?php
-                                    if ($bThemesToUpdate && in_array($theme, $aThemesToUpdate)) { ?>
-                                        <a href='#<?php echo htmlentities(@$info['theme_update_uri']); ?>'
-                                           class="btn btn-mini btn-orange market-popup"><?php _e('Update'); ?></a>
-                                    <?php } ?>
+                        $aThemesToUpdate = json_decode(osc_get_preference('themes_to_update'), true);
+                        $bThemesToUpdate = is_array($aThemesToUpdate);
+                        $csrf_token      = osc_csrf_token_url();
+                        foreach ($themes as $theme) { ?>
+                            <?php
+                            if ($theme === osc_theme()) {
+                                continue;
+                            }
+                            $info = WebThemes::newInstance()->loadThemeInfo($theme);
+                            ?>
+                            <div class="card">
+                                <img class="card-img-top"
+                                     src="<?php echo osc_base_url(); ?>/oc-content/themes/<?php echo $theme; ?>/screenshot.png"
+                                     title="<?php echo $info['name']; ?>" alt="<?php echo $info['name']; ?>"/>
+                                <div class="card-body">
+                                    <div class="theme-stage">
+                                        <div class="">
+                                            <a href="<?php echo osc_admin_base_url(true);
+                                            ?>?page=appearance&amp;action=activate&amp;theme=<?php
+                                            echo $theme; ?>&amp;<?php echo $csrf_token;
+                                            ?>" class="btn btn-mini btn-green"><?php _e('Activate'); ?></a>
+                                            <a target="_blank"
+                                               href="<?php echo osc_base_url(true); ?>?theme=<?php echo $theme; ?>"
+                                               class="btn btn-mini btn-blue"><?php _e('Preview'); ?></a>
+                                            <a onclick="return delete_dialog('<?php echo $theme; ?>');"
+                                               href="<?php echo osc_admin_base_url(true);
+                                               ?>?page=appearance&amp;action=delete&amp;webtheme=<?php
+                                               echo $theme; ?>&amp;<?php echo $csrf_token; ?>"
+                                               class="btn btn-sm btn-success delete"><?php _e('Delete'); ?></a>
+                                            <?php
+                                            if ($bThemesToUpdate && in_array($theme, $aThemesToUpdate)) { ?>
+                                                <a href='#<?php echo htmlentities(@$info['theme_update_uri']); ?>'
+                                                   class="btn btn-mini btn-orange market-popup"><?php _e('Update'); ?></a>
+                                            <?php } ?>
+                                        </div>
+                                        <h4>
+                                            <?php echo ucfirst($info['name']); ?>
+                                        </h4>
+                                        <div class="theme-info">
+                                            <div><?php echo __('Version:') ?>: <?php echo $info['version']; ?></div>
+                                            <div><?php echo __('Author:') ?>: <a target="_blank"
+                                                                               href="<?php echo $info['author_url']; ?>"><?php echo $info['author_name']; ?></a>
+                                            </div>
+                                            <div><?php echo __('Description:') ?>: <?php echo $info['description']; ?></div>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
-                            <div class="theme-info">
-                                <h3><?php echo $info['name']; ?> <?php echo $info['version']; ?> <?php _e('by'); ?>
-                                    <a target="_blank" href="<?php echo $info['author_url']; ?>">
-                                        <?php echo $info['author_name']; ?>
-                                    </a>
-                                </h3>
-                            </div>
-                            <div class="theme-description">
-                                <?php echo $info['description']; ?>
-                            </div>
-                        </div>
-                    <?php } ?>
-                    <div class="clear"></div>
+                        <?php } ?>
+                    </div>
                 </div>
             </div>
         </div>
