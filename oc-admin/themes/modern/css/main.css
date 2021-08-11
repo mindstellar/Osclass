@@ -1,3 +1,4 @@
+@charset "UTF-8";
 /*!
  * Bootstrap v5.0.2 (https://getbootstrap.com/)
  * Copyright 2011-2021 The Bootstrap Authors
@@ -1704,8 +1705,7 @@ progress {
 
 .form-control, input.xlarge,
 .input-text,
-.input-password, input.input-small, input.input-medium, input.input-large, .form-controls
-select input {
+.input-password, input.input-small, input.input-medium, input.input-large, .form-controls input:not([type="checkbox"]):not([type="radio"]) {
   display: block;
   width: 100%;
   padding: 0.375rem 0.75rem;
@@ -1722,23 +1722,19 @@ select input {
   @media (prefers-reduced-motion: reduce) {
     .form-control, input.xlarge,
     .input-text,
-    .input-password, input.input-small, input.input-medium, input.input-large, .form-controls
-    select input {
+    .input-password, input.input-small, input.input-medium, input.input-large, .form-controls input:not([type="checkbox"]):not([type="radio"]) {
       transition: none; } }
   .form-control[type="file"], input[type="file"].xlarge,
   [type="file"].input-text,
-  [type="file"].input-password, input[type="file"].input-small, input[type="file"].input-medium, input[type="file"].input-large, .form-controls
-  select input[type="file"] {
+  [type="file"].input-password, input[type="file"].input-small, input[type="file"].input-medium, input[type="file"].input-large, .form-controls input[type="file"]:not([type="checkbox"]):not([type="radio"]) {
     overflow: hidden; }
     .form-control[type="file"]:not(:disabled):not([readonly]), input[type="file"].xlarge:not(:disabled):not([readonly]),
     [type="file"].input-text:not(:disabled):not([readonly]),
-    [type="file"].input-password:not(:disabled):not([readonly]), input[type="file"].input-small:not(:disabled):not([readonly]), input[type="file"].input-medium:not(:disabled):not([readonly]), input[type="file"].input-large:not(:disabled):not([readonly]), .form-controls
-    select input[type="file"]:not(:disabled):not([readonly]) {
+    [type="file"].input-password:not(:disabled):not([readonly]), input[type="file"].input-small:not(:disabled):not([readonly]), input[type="file"].input-medium:not(:disabled):not([readonly]), input[type="file"].input-large:not(:disabled):not([readonly]), .form-controls input[type="file"]:not(:disabled):not([readonly]):not([type="checkbox"]):not([type="radio"]) {
       cursor: pointer; }
   .form-control:focus, input.xlarge:focus,
   .input-text:focus,
-  .input-password:focus, input.input-small:focus, input.input-medium:focus, input.input-large:focus, .form-controls
-  select input:focus {
+  .input-password:focus, input.input-small:focus, input.input-medium:focus, input.input-large:focus, .form-controls input:focus:not([type="checkbox"]):not([type="radio"]) {
     color: #212529;
     background-color: #fff;
     border-color: #86b7fe;
@@ -1746,28 +1742,23 @@ select input {
     box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.25); }
   .form-control::-webkit-date-and-time-value, input.xlarge::-webkit-date-and-time-value,
   .input-text::-webkit-date-and-time-value,
-  .input-password::-webkit-date-and-time-value, input.input-small::-webkit-date-and-time-value, input.input-medium::-webkit-date-and-time-value, input.input-large::-webkit-date-and-time-value, .form-controls
-  select input::-webkit-date-and-time-value {
+  .input-password::-webkit-date-and-time-value, input.input-small::-webkit-date-and-time-value, input.input-medium::-webkit-date-and-time-value, input.input-large::-webkit-date-and-time-value, .form-controls input:not([type="radio"]):not([type="checkbox"])::-webkit-date-and-time-value {
     height: 1.5em; }
   .form-control::placeholder, input.xlarge::placeholder,
   .input-text::placeholder,
-  .input-password::placeholder, input.input-small::placeholder, input.input-medium::placeholder, input.input-large::placeholder, .form-controls
-  select input::placeholder {
+  .input-password::placeholder, input.input-small::placeholder, input.input-medium::placeholder, input.input-large::placeholder, .form-controls input:not([type="radio"]):not([type="checkbox"])::placeholder {
     color: #6c757d;
     opacity: 1; }
   .form-control:disabled, input.xlarge:disabled,
   .input-text:disabled,
-  .input-password:disabled, input.input-small:disabled, input.input-medium:disabled, input.input-large:disabled, .form-controls
-  select input:disabled, .form-control[readonly], input[readonly].xlarge,
+  .input-password:disabled, input.input-small:disabled, input.input-medium:disabled, input.input-large:disabled, .form-controls input:disabled:not([type="checkbox"]):not([type="radio"]), .form-control[readonly], input[readonly].xlarge,
   [readonly].input-text,
-  [readonly].input-password, input[readonly].input-small, input[readonly].input-medium, input[readonly].input-large, .form-controls
-  select input[readonly] {
+  [readonly].input-password, input[readonly].input-small, input[readonly].input-medium, input[readonly].input-large, .form-controls input[readonly]:not([type="checkbox"]):not([type="radio"]) {
     background-color: #e9ecef;
     opacity: 1; }
   .form-control::file-selector-button, input.xlarge::file-selector-button,
   .input-text::file-selector-button,
-  .input-password::file-selector-button, input.input-small::file-selector-button, input.input-medium::file-selector-button, input.input-large::file-selector-button, .form-controls
-  select input::file-selector-button {
+  .input-password::file-selector-button, input.input-small::file-selector-button, input.input-medium::file-selector-button, input.input-large::file-selector-button, .form-controls input:not([type="radio"]):not([type="checkbox"])::file-selector-button {
     padding: 0.375rem 0.75rem;
     margin: -0.375rem -0.75rem;
     margin-inline-end: 0.75rem;
@@ -1783,18 +1774,15 @@ select input {
     @media (prefers-reduced-motion: reduce) {
       .form-control::file-selector-button, input.xlarge::file-selector-button,
       .input-text::file-selector-button,
-      .input-password::file-selector-button, input.input-small::file-selector-button, input.input-medium::file-selector-button, input.input-large::file-selector-button, .form-controls
-      select input::file-selector-button {
+      .input-password::file-selector-button, input.input-small::file-selector-button, input.input-medium::file-selector-button, input.input-large::file-selector-button, .form-controls input:not([type="radio"]):not([type="checkbox"])::file-selector-button {
         transition: none; } }
   .form-control:hover:not(:disabled):not([readonly])::file-selector-button, input.xlarge:hover:not(:disabled):not([readonly])::file-selector-button,
   .input-text:hover:not(:disabled):not([readonly])::file-selector-button,
-  .input-password:hover:not(:disabled):not([readonly])::file-selector-button, input.input-small:hover:not(:disabled):not([readonly])::file-selector-button, input.input-medium:hover:not(:disabled):not([readonly])::file-selector-button, input.input-large:hover:not(:disabled):not([readonly])::file-selector-button, .form-controls
-  select input:hover:not(:disabled):not([readonly])::file-selector-button {
+  .input-password:hover:not(:disabled):not([readonly])::file-selector-button, input.input-small:hover:not(:disabled):not([readonly])::file-selector-button, input.input-medium:hover:not(:disabled):not([readonly])::file-selector-button, input.input-large:hover:not(:disabled):not([readonly])::file-selector-button, .form-controls input:not([type="radio"]):not([type="checkbox"]):hover:not(:disabled):not([readonly])::file-selector-button {
     background-color: #dde0e3; }
   .form-control::-webkit-file-upload-button, input.xlarge::-webkit-file-upload-button,
   .input-text::-webkit-file-upload-button,
-  .input-password::-webkit-file-upload-button, input.input-small::-webkit-file-upload-button, input.input-medium::-webkit-file-upload-button, input.input-large::-webkit-file-upload-button, .form-controls
-  select input::-webkit-file-upload-button {
+  .input-password::-webkit-file-upload-button, input.input-small::-webkit-file-upload-button, input.input-medium::-webkit-file-upload-button, input.input-large::-webkit-file-upload-button, .form-controls input:not([type="radio"]):not([type="checkbox"])::-webkit-file-upload-button {
     padding: 0.375rem 0.75rem;
     margin: -0.375rem -0.75rem;
     margin-inline-end: 0.75rem;
@@ -1810,13 +1798,11 @@ select input {
     @media (prefers-reduced-motion: reduce) {
       .form-control::-webkit-file-upload-button, input.xlarge::-webkit-file-upload-button,
       .input-text::-webkit-file-upload-button,
-      .input-password::-webkit-file-upload-button, input.input-small::-webkit-file-upload-button, input.input-medium::-webkit-file-upload-button, input.input-large::-webkit-file-upload-button, .form-controls
-      select input::-webkit-file-upload-button {
+      .input-password::-webkit-file-upload-button, input.input-small::-webkit-file-upload-button, input.input-medium::-webkit-file-upload-button, input.input-large::-webkit-file-upload-button, .form-controls input:not([type="radio"]):not([type="checkbox"])::-webkit-file-upload-button {
         transition: none; } }
   .form-control:hover:not(:disabled):not([readonly])::-webkit-file-upload-button, input.xlarge:hover:not(:disabled):not([readonly])::-webkit-file-upload-button,
   .input-text:hover:not(:disabled):not([readonly])::-webkit-file-upload-button,
-  .input-password:hover:not(:disabled):not([readonly])::-webkit-file-upload-button, input.input-small:hover:not(:disabled):not([readonly])::-webkit-file-upload-button, input.input-medium:hover:not(:disabled):not([readonly])::-webkit-file-upload-button, input.input-large:hover:not(:disabled):not([readonly])::-webkit-file-upload-button, .form-controls
-  select input:hover:not(:disabled):not([readonly])::-webkit-file-upload-button {
+  .input-password:hover:not(:disabled):not([readonly])::-webkit-file-upload-button, input.input-small:hover:not(:disabled):not([readonly])::-webkit-file-upload-button, input.input-medium:hover:not(:disabled):not([readonly])::-webkit-file-upload-button, input.input-large:hover:not(:disabled):not([readonly])::-webkit-file-upload-button, .form-controls input:not([type="radio"]):not([type="checkbox"]):hover:not(:disabled):not([readonly])::-webkit-file-upload-button {
     background-color: #dde0e3; }
 
 .form-control-plaintext {
@@ -1831,30 +1817,26 @@ select input {
   border-width: 1px 0; }
   .form-control-plaintext.form-control-sm, input.form-control-plaintext.xlarge,
   .form-control-plaintext.input-text,
-  .form-control-plaintext.input-password, input.form-control-plaintext.input-small, input.form-control-plaintext.input-medium, input.form-control-plaintext.input-large, .form-controls
-  select input.form-control-plaintext, .form-control-plaintext.form-control-lg {
+  .form-control-plaintext.input-password, input.form-control-plaintext.input-small, input.form-control-plaintext.input-medium, input.form-control-plaintext.input-large, .form-controls input.form-control-plaintext:not([type="checkbox"]):not([type="radio"]), .form-control-plaintext.form-control-lg {
     padding-right: 0;
     padding-left: 0; }
 
 .form-control-sm, input.xlarge,
 .input-text,
-.input-password, input.input-small, input.input-medium, input.input-large, .form-controls
-select input {
+.input-password, input.input-small, input.input-medium, input.input-large, .form-controls input:not([type="checkbox"]):not([type="radio"]) {
   min-height: calc(1.5em + (0.5rem + 2px));
   padding: 0.25rem 0.5rem;
   font-size: 0.875rem;
   border-radius: 0.2rem; }
   .form-control-sm::file-selector-button, input.xlarge::file-selector-button,
   .input-text::file-selector-button,
-  .input-password::file-selector-button, input.input-small::file-selector-button, input.input-medium::file-selector-button, input.input-large::file-selector-button, .form-controls
-  select input::file-selector-button {
+  .input-password::file-selector-button, input.input-small::file-selector-button, input.input-medium::file-selector-button, input.input-large::file-selector-button, .form-controls input:not([type="radio"]):not([type="checkbox"])::file-selector-button {
     padding: 0.25rem 0.5rem;
     margin: -0.25rem -0.5rem;
     margin-inline-end: 0.5rem; }
   .form-control-sm::-webkit-file-upload-button, input.xlarge::-webkit-file-upload-button,
   .input-text::-webkit-file-upload-button,
-  .input-password::-webkit-file-upload-button, input.input-small::-webkit-file-upload-button, input.input-medium::-webkit-file-upload-button, input.input-large::-webkit-file-upload-button, .form-controls
-  select input::-webkit-file-upload-button {
+  .input-password::-webkit-file-upload-button, input.input-small::-webkit-file-upload-button, input.input-medium::-webkit-file-upload-button, input.input-large::-webkit-file-upload-button, .form-controls input:not([type="radio"]):not([type="checkbox"])::-webkit-file-upload-button {
     padding: 0.25rem 0.5rem;
     margin: -0.25rem -0.5rem;
     margin-inline-end: 0.5rem; }
@@ -1897,8 +1879,7 @@ textarea.form-control-lg {
     height: 1.5em;
     border-radius: 0.25rem; }
 
-.form-select, .widget-box select, .form-controls
-select {
+.form-select, .widget-box select, .form-controls select {
   display: block;
   width: 100%;
   padding: 0.375rem 2.25rem 0.375rem 0.75rem;
@@ -1917,29 +1898,22 @@ select {
   transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
   appearance: none; }
   @media (prefers-reduced-motion: reduce) {
-    .form-select, .widget-box select, .form-controls
-    select {
+    .form-select, .widget-box select, .form-controls select {
       transition: none; } }
-  .form-select:focus, .widget-box select:focus, .form-controls
-  select:focus {
+  .form-select:focus, .widget-box select:focus, .form-controls select:focus {
     border-color: #86b7fe;
     outline: 0;
     box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.25); }
-  .form-select[multiple], .widget-box select[multiple], .form-controls
-  select[multiple], .form-select[size]:not([size="1"]), .widget-box select[size]:not([size="1"]), .form-controls
-  select[size]:not([size="1"]) {
+  .form-select[multiple], .widget-box select[multiple], .form-controls select[multiple], .form-select[size]:not([size="1"]), .widget-box select[size]:not([size="1"]), .form-controls select[size]:not([size="1"]) {
     padding-right: 0.75rem;
     background-image: none; }
-  .form-select:disabled, .widget-box select:disabled, .form-controls
-  select:disabled {
+  .form-select:disabled, .widget-box select:disabled, .form-controls select:disabled {
     background-color: #e9ecef; }
-  .form-select:-moz-focusring, .widget-box select:-moz-focusring, .form-controls
-  select:-moz-focusring {
+  .form-select:-moz-focusring, .widget-box select:-moz-focusring, .form-controls select:-moz-focusring {
     color: transparent;
     text-shadow: 0 0 0 #212529; }
 
-.form-select-sm, .widget-box select, .form-controls
-select {
+.form-select-sm, .widget-box select, .form-controls select {
   padding-top: 0.25rem;
   padding-bottom: 0.25rem;
   padding-left: 0.5rem;
@@ -2099,8 +2073,7 @@ select {
   position: relative; }
   .form-floating > .form-control, .form-floating > input.xlarge,
   .form-floating > .input-text,
-  .form-floating > .input-password, .form-floating > input.input-small, .form-floating > input.input-medium, .form-floating > input.input-large, .form-controls
-  select .form-floating > input,
+  .form-floating > .input-password, .form-floating > input.input-small, .form-floating > input.input-medium, .form-floating > input.input-large, .form-controls .form-floating > input:not([type="checkbox"]):not([type="radio"]),
   .form-floating > .form-select,
   .widget-box .form-floating > select,
   .form-controls .form-floating > select {
@@ -2121,27 +2094,22 @@ select {
         transition: none; } }
   .form-floating > .form-control, .form-floating > input.xlarge,
   .form-floating > .input-text,
-  .form-floating > .input-password, .form-floating > input.input-small, .form-floating > input.input-medium, .form-floating > input.input-large, .form-controls
-  select .form-floating > input {
+  .form-floating > .input-password, .form-floating > input.input-small, .form-floating > input.input-medium, .form-floating > input.input-large, .form-controls .form-floating > input:not([type="checkbox"]):not([type="radio"]) {
     padding: 1rem 0.75rem; }
     .form-floating > .form-control::placeholder, .form-floating > input.xlarge::placeholder,
     .form-floating > .input-text::placeholder,
-    .form-floating > .input-password::placeholder, .form-floating > input.input-small::placeholder, .form-floating > input.input-medium::placeholder, .form-floating > input.input-large::placeholder, .form-controls
-    select .form-floating > input::placeholder {
+    .form-floating > .input-password::placeholder, .form-floating > input.input-small::placeholder, .form-floating > input.input-medium::placeholder, .form-floating > input.input-large::placeholder, .form-controls .form-floating > input:not([type="radio"]):not([type="checkbox"])::placeholder {
       color: transparent; }
     .form-floating > .form-control:focus, .form-floating > input.xlarge:focus,
     .form-floating > .input-text:focus,
-    .form-floating > .input-password:focus, .form-floating > input.input-small:focus, .form-floating > input.input-medium:focus, .form-floating > input.input-large:focus, .form-controls
-    select .form-floating > input:focus, .form-floating > .form-control:not(:placeholder-shown), .form-floating > input.xlarge:not(:placeholder-shown),
+    .form-floating > .input-password:focus, .form-floating > input.input-small:focus, .form-floating > input.input-medium:focus, .form-floating > input.input-large:focus, .form-controls .form-floating > input:focus:not([type="checkbox"]):not([type="radio"]), .form-floating > .form-control:not(:placeholder-shown), .form-floating > input.xlarge:not(:placeholder-shown),
     .form-floating > .input-text:not(:placeholder-shown),
-    .form-floating > .input-password:not(:placeholder-shown), .form-floating > input.input-small:not(:placeholder-shown), .form-floating > input.input-medium:not(:placeholder-shown), .form-floating > input.input-large:not(:placeholder-shown), .form-controls
-    select .form-floating > input:not(:placeholder-shown) {
+    .form-floating > .input-password:not(:placeholder-shown), .form-floating > input.input-small:not(:placeholder-shown), .form-floating > input.input-medium:not(:placeholder-shown), .form-floating > input.input-large:not(:placeholder-shown), .form-controls .form-floating > input:not(:placeholder-shown):not([type="checkbox"]):not([type="radio"]) {
       padding-top: 1.625rem;
       padding-bottom: 0.625rem; }
     .form-floating > .form-control:-webkit-autofill, .form-floating > input.xlarge:-webkit-autofill,
     .form-floating > .input-text:-webkit-autofill,
-    .form-floating > .input-password:-webkit-autofill, .form-floating > input.input-small:-webkit-autofill, .form-floating > input.input-medium:-webkit-autofill, .form-floating > input.input-large:-webkit-autofill, .form-controls
-    select .form-floating > input:-webkit-autofill {
+    .form-floating > .input-password:-webkit-autofill, .form-floating > input.input-small:-webkit-autofill, .form-floating > input.input-medium:-webkit-autofill, .form-floating > input.input-large:-webkit-autofill, .form-controls .form-floating > input:-webkit-autofill:not([type="checkbox"]):not([type="radio"]) {
       padding-top: 1.625rem;
       padding-bottom: 0.625rem; }
   .form-floating > .form-select, .widget-box .form-floating > select, .form-controls .form-floating > select {
@@ -2149,8 +2117,7 @@ select {
     padding-bottom: 0.625rem; }
   .form-floating > .form-control:focus ~ label, .form-floating > input.xlarge:focus ~ label,
   .form-floating > .input-text:focus ~ label,
-  .form-floating > .input-password:focus ~ label, .form-floating > input.input-small:focus ~ label, .form-floating > input.input-medium:focus ~ label, .form-floating > input.input-large:focus ~ label, .form-controls
-  select .form-floating > input:focus ~ label,
+  .form-floating > .input-password:focus ~ label, .form-floating > input.input-small:focus ~ label, .form-floating > input.input-medium:focus ~ label, .form-floating > input.input-large:focus ~ label, .form-controls .form-floating > input:focus:not([type="checkbox"]):not([type="radio"]) ~ label,
   .form-floating > .form-control:not(:placeholder-shown) ~ label,
   .form-floating > input.xlarge:not(:placeholder-shown) ~ label,
   .form-floating > .input-text:not(:placeholder-shown) ~ label,
@@ -2158,8 +2125,7 @@ select {
   .form-floating > input.input-small:not(:placeholder-shown) ~ label,
   .form-floating > input.input-medium:not(:placeholder-shown) ~ label,
   .form-floating > input.input-large:not(:placeholder-shown) ~ label,
-  .form-controls
-  select .form-floating > input:not(:placeholder-shown) ~ label,
+  .form-controls .form-floating > input:not(:placeholder-shown):not([type="checkbox"]):not([type="radio"]) ~ label,
   .form-floating > .form-select ~ label,
   .widget-box .form-floating > select ~ label,
   .form-controls .form-floating > select ~ label {
@@ -2167,8 +2133,7 @@ select {
     transform: scale(0.85) translateY(-0.5rem) translateX(0.15rem); }
   .form-floating > .form-control:-webkit-autofill ~ label, .form-floating > input.xlarge:-webkit-autofill ~ label,
   .form-floating > .input-text:-webkit-autofill ~ label,
-  .form-floating > .input-password:-webkit-autofill ~ label, .form-floating > input.input-small:-webkit-autofill ~ label, .form-floating > input.input-medium:-webkit-autofill ~ label, .form-floating > input.input-large:-webkit-autofill ~ label, .form-controls
-  select .form-floating > input:-webkit-autofill ~ label {
+  .form-floating > .input-password:-webkit-autofill ~ label, .form-floating > input.input-small:-webkit-autofill ~ label, .form-floating > input.input-medium:-webkit-autofill ~ label, .form-floating > input.input-large:-webkit-autofill ~ label, .form-controls .form-floating > input:-webkit-autofill:not([type="checkbox"]):not([type="radio"]) ~ label {
     opacity: 0.65;
     transform: scale(0.85) translateY(-0.5rem) translateX(0.15rem); }
 
@@ -2180,8 +2145,7 @@ select {
   width: 100%; }
   .input-group > .form-control, .input-group > input.xlarge,
   .input-group > .input-text,
-  .input-group > .input-password, .input-group > input.input-small, .input-group > input.input-medium, .input-group > input.input-large, .form-controls
-  select .input-group > input,
+  .input-group > .input-password, .input-group > input.input-small, .input-group > input.input-medium, .input-group > input.input-large, .form-controls .input-group > input:not([type="checkbox"]):not([type="radio"]),
   .input-group > .form-select,
   .widget-box .input-group > select,
   .form-controls .input-group > select {
@@ -2191,8 +2155,7 @@ select {
     min-width: 0; }
   .input-group > .form-control:focus, .input-group > input.xlarge:focus,
   .input-group > .input-text:focus,
-  .input-group > .input-password:focus, .input-group > input.input-small:focus, .input-group > input.input-medium:focus, .input-group > input.input-large:focus, .form-controls
-  select .input-group > input:focus,
+  .input-group > .input-password:focus, .input-group > input.input-small:focus, .input-group > input.input-medium:focus, .input-group > input.input-large:focus, .form-controls .input-group > input:focus:not([type="checkbox"]):not([type="radio"]),
   .input-group > .form-select:focus,
   .widget-box .input-group > select:focus,
   .form-controls .input-group > select:focus {
@@ -2219,8 +2182,7 @@ select {
 
 .input-group-lg > .form-control, .input-group-lg > input.xlarge,
 .input-group-lg > .input-text,
-.input-group-lg > .input-password, .input-group-lg > input.input-small, .input-group-lg > input.input-medium, .input-group-lg > input.input-large, .form-controls
-select .input-group-lg > input,
+.input-group-lg > .input-password, .input-group-lg > input.input-small, .input-group-lg > input.input-medium, .input-group-lg > input.input-large, .form-controls .input-group-lg > input:not([type="checkbox"]):not([type="radio"]),
 .input-group-lg > .form-select,
 .widget-box .input-group-lg > select,
 .form-controls .input-group-lg > select,
@@ -2232,8 +2194,7 @@ select .input-group-lg > input,
 
 .input-group-sm > .form-control, .input-group-sm > input.xlarge,
 .input-group-sm > .input-text,
-.input-group-sm > .input-password, .input-group-sm > input.input-small, .input-group-sm > input.input-medium, .input-group-sm > input.input-large, .form-controls
-select .input-group-sm > input,
+.input-group-sm > .input-password, .input-group-sm > input.input-small, .input-group-sm > input.input-medium, .input-group-sm > input.input-large, .form-controls .input-group-sm > input:not([type="checkbox"]):not([type="radio"]),
 .input-group-sm > .form-select,
 .widget-box .input-group-sm > select,
 .form-controls .input-group-sm > select,
@@ -2290,12 +2251,9 @@ select .input-group-sm > input,
 
 .was-validated .form-control:valid, .was-validated input.xlarge:valid,
 .was-validated .input-text:valid,
-.was-validated .input-password:valid, .was-validated input.input-small:valid, .was-validated input.input-medium:valid, .was-validated input.input-large:valid, .was-validated .form-controls
-select input:valid, .form-controls
-select .was-validated input:valid, .form-control.is-valid, input.is-valid.xlarge,
+.was-validated .input-password:valid, .was-validated input.input-small:valid, .was-validated input.input-medium:valid, .was-validated input.input-large:valid, .was-validated .form-controls input:valid:not([type="checkbox"]):not([type="radio"]), .form-controls .was-validated input:valid:not([type="checkbox"]):not([type="radio"]), .form-control.is-valid, input.is-valid.xlarge,
 .is-valid.input-text,
-.is-valid.input-password, input.is-valid.input-small, input.is-valid.input-medium, input.is-valid.input-large, .form-controls
-select input.is-valid {
+.is-valid.input-password, input.is-valid.input-small, input.is-valid.input-medium, input.is-valid.input-large, .form-controls input.is-valid:not([type="checkbox"]):not([type="radio"]) {
   border-color: #198754;
   padding-right: calc(1.5em + 0.75rem);
   background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 8 8'%3e%3cpath fill='%23198754' d='M2.3 6.73L.6 4.53c-.4-1.04.46-1.4 1.1-.8l1.1 1.4 3.4-3.8c.6-.63 1.6-.27 1.2.7l-4 4.6c-.43.5-.8.4-1.1.1z'/%3e%3c/svg%3e");
@@ -2304,12 +2262,9 @@ select input.is-valid {
   background-size: calc(0.75em + 0.375rem) calc(0.75em + 0.375rem); }
   .was-validated .form-control:valid:focus, .was-validated input.xlarge:valid:focus,
   .was-validated .input-text:valid:focus,
-  .was-validated .input-password:valid:focus, .was-validated input.input-small:valid:focus, .was-validated input.input-medium:valid:focus, .was-validated input.input-large:valid:focus, .was-validated .form-controls
-  select input:valid:focus, .form-controls
-  select .was-validated input:valid:focus, .form-control.is-valid:focus, input.is-valid.xlarge:focus,
+  .was-validated .input-password:valid:focus, .was-validated input.input-small:valid:focus, .was-validated input.input-medium:valid:focus, .was-validated input.input-large:valid:focus, .was-validated .form-controls input:valid:focus:not([type="checkbox"]):not([type="radio"]), .form-controls .was-validated input:valid:focus:not([type="checkbox"]):not([type="radio"]), .form-control.is-valid:focus, input.is-valid.xlarge:focus,
   .is-valid.input-text:focus,
-  .is-valid.input-password:focus, input.is-valid.input-small:focus, input.is-valid.input-medium:focus, input.is-valid.input-large:focus, .form-controls
-  select input.is-valid:focus {
+  .is-valid.input-password:focus, input.is-valid.input-small:focus, input.is-valid.input-medium:focus, input.is-valid.input-large:focus, .form-controls input.is-valid:focus:not([type="checkbox"]):not([type="radio"]) {
     border-color: #198754;
     box-shadow: 0 0 0 0.25rem rgba(25, 135, 84, 0.25); }
 
@@ -2321,18 +2276,14 @@ textarea.is-valid.input-password {
   padding-right: calc(1.5em + 0.75rem);
   background-position: top calc(0.375em + 0.1875rem) right calc(0.375em + 0.1875rem); }
 
-.was-validated .form-select:valid, .was-validated .widget-box select:valid, .widget-box .was-validated select:valid, .was-validated .form-controls select:valid, .form-controls .was-validated select:valid, .form-select.is-valid, .widget-box select.is-valid, .form-controls
-select.is-valid {
+.was-validated .form-select:valid, .was-validated .widget-box select:valid, .widget-box .was-validated select:valid, .was-validated .form-controls select:valid, .form-controls .was-validated select:valid, .form-select.is-valid, .widget-box select.is-valid, .form-controls select.is-valid {
   border-color: #198754; }
-  .was-validated .form-select:valid:not([multiple]):not([size]), .was-validated .widget-box select:valid:not([multiple]):not([size]), .widget-box .was-validated select:valid:not([multiple]):not([size]), .was-validated .form-controls select:valid:not([multiple]):not([size]), .form-controls .was-validated select:valid:not([multiple]):not([size]), .was-validated .form-select:valid:not([multiple])[size="1"], .was-validated .widget-box select:valid:not([multiple])[size="1"], .widget-box .was-validated select:valid:not([multiple])[size="1"], .was-validated .form-controls select:valid:not([multiple])[size="1"], .form-controls .was-validated select:valid:not([multiple])[size="1"], .form-select.is-valid:not([multiple]):not([size]), .widget-box select.is-valid:not([multiple]):not([size]), .form-controls
-  select.is-valid:not([multiple]):not([size]), .form-select.is-valid:not([multiple])[size="1"], .widget-box select.is-valid:not([multiple])[size="1"], .form-controls
-  select.is-valid:not([multiple])[size="1"] {
+  .was-validated .form-select:valid:not([multiple]):not([size]), .was-validated .widget-box select:valid:not([multiple]):not([size]), .widget-box .was-validated select:valid:not([multiple]):not([size]), .was-validated .form-controls select:valid:not([multiple]):not([size]), .form-controls .was-validated select:valid:not([multiple]):not([size]), .was-validated .form-select:valid:not([multiple])[size="1"], .was-validated .widget-box select:valid:not([multiple])[size="1"], .widget-box .was-validated select:valid:not([multiple])[size="1"], .was-validated .form-controls select:valid:not([multiple])[size="1"], .form-controls .was-validated select:valid:not([multiple])[size="1"], .form-select.is-valid:not([multiple]):not([size]), .widget-box select.is-valid:not([multiple]):not([size]), .form-controls select.is-valid:not([multiple]):not([size]), .form-select.is-valid:not([multiple])[size="1"], .widget-box select.is-valid:not([multiple])[size="1"], .form-controls select.is-valid:not([multiple])[size="1"] {
     padding-right: 4.125rem;
     background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3e%3cpath fill='none' stroke='%23343a40' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M2 5l6 6 6-6'/%3e%3c/svg%3e"), url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 8 8'%3e%3cpath fill='%23198754' d='M2.3 6.73L.6 4.53c-.4-1.04.46-1.4 1.1-.8l1.1 1.4 3.4-3.8c.6-.63 1.6-.27 1.2.7l-4 4.6c-.43.5-.8.4-1.1.1z'/%3e%3c/svg%3e");
     background-position: right 0.75rem center, center right 2.25rem;
     background-size: 16px 12px, calc(0.75em + 0.375rem) calc(0.75em + 0.375rem); }
-  .was-validated .form-select:valid:focus, .was-validated .widget-box select:valid:focus, .widget-box .was-validated select:valid:focus, .was-validated .form-controls select:valid:focus, .form-controls .was-validated select:valid:focus, .form-select.is-valid:focus, .widget-box select.is-valid:focus, .form-controls
-  select.is-valid:focus {
+  .was-validated .form-select:valid:focus, .was-validated .widget-box select:valid:focus, .widget-box .was-validated select:valid:focus, .was-validated .form-controls select:valid:focus, .form-controls .was-validated select:valid:focus, .form-select.is-valid:focus, .widget-box select.is-valid:focus, .form-controls select.is-valid:focus {
     border-color: #198754;
     box-shadow: 0 0 0 0.25rem rgba(25, 135, 84, 0.25); }
 
@@ -2350,13 +2301,9 @@ select.is-valid {
 
 .was-validated .input-group .form-control:valid, .was-validated .input-group input.xlarge:valid,
 .was-validated .input-group .input-text:valid,
-.was-validated .input-group .input-password:valid, .was-validated .input-group input.input-small:valid, .was-validated .input-group input.input-medium:valid, .was-validated .input-group input.input-large:valid, .was-validated .input-group .form-controls
-select input:valid, .form-controls
-select .was-validated .input-group input:valid, .input-group .form-control.is-valid, .input-group input.is-valid.xlarge,
+.was-validated .input-group .input-password:valid, .was-validated .input-group input.input-small:valid, .was-validated .input-group input.input-medium:valid, .was-validated .input-group input.input-large:valid, .was-validated .input-group .form-controls input:valid:not([type="checkbox"]):not([type="radio"]), .form-controls .was-validated .input-group input:valid:not([type="checkbox"]):not([type="radio"]), .input-group .form-control.is-valid, .input-group input.is-valid.xlarge,
 .input-group .is-valid.input-text,
-.input-group .is-valid.input-password, .input-group input.is-valid.input-small, .input-group input.is-valid.input-medium, .input-group input.is-valid.input-large, .input-group .form-controls
-select input.is-valid, .form-controls
-select .input-group input.is-valid,
+.input-group .is-valid.input-password, .input-group input.is-valid.input-small, .input-group input.is-valid.input-medium, .input-group input.is-valid.input-large, .input-group .form-controls input.is-valid:not([type="checkbox"]):not([type="radio"]), .form-controls .input-group input.is-valid:not([type="checkbox"]):not([type="radio"]),
 .was-validated .input-group .form-select:valid,
 .was-validated .input-group .widget-box select:valid,
 .widget-box .was-validated .input-group select:valid,
@@ -2370,13 +2317,9 @@ select .input-group input.is-valid,
   z-index: 1; }
   .was-validated .input-group .form-control:valid:focus, .was-validated .input-group input.xlarge:valid:focus,
   .was-validated .input-group .input-text:valid:focus,
-  .was-validated .input-group .input-password:valid:focus, .was-validated .input-group input.input-small:valid:focus, .was-validated .input-group input.input-medium:valid:focus, .was-validated .input-group input.input-large:valid:focus, .was-validated .input-group .form-controls
-  select input:valid:focus, .form-controls
-  select .was-validated .input-group input:valid:focus, .input-group .form-control.is-valid:focus, .input-group input.is-valid.xlarge:focus,
+  .was-validated .input-group .input-password:valid:focus, .was-validated .input-group input.input-small:valid:focus, .was-validated .input-group input.input-medium:valid:focus, .was-validated .input-group input.input-large:valid:focus, .was-validated .input-group .form-controls input:valid:focus:not([type="checkbox"]):not([type="radio"]), .form-controls .was-validated .input-group input:valid:focus:not([type="checkbox"]):not([type="radio"]), .input-group .form-control.is-valid:focus, .input-group input.is-valid.xlarge:focus,
   .input-group .is-valid.input-text:focus,
-  .input-group .is-valid.input-password:focus, .input-group input.is-valid.input-small:focus, .input-group input.is-valid.input-medium:focus, .input-group input.is-valid.input-large:focus, .input-group .form-controls
-  select input.is-valid:focus, .form-controls
-  select .input-group input.is-valid:focus,
+  .input-group .is-valid.input-password:focus, .input-group input.is-valid.input-small:focus, .input-group input.is-valid.input-medium:focus, .input-group input.is-valid.input-large:focus, .input-group .form-controls input.is-valid:focus:not([type="checkbox"]):not([type="radio"]), .form-controls .input-group input.is-valid:focus:not([type="checkbox"]):not([type="radio"]),
   .was-validated .input-group .form-select:valid:focus,
   .was-validated .input-group .widget-box select:valid:focus,
   .widget-box .was-validated .input-group select:valid:focus,
@@ -2417,12 +2360,9 @@ select .input-group input.is-valid,
 
 .was-validated .form-control:invalid, .was-validated input.xlarge:invalid,
 .was-validated .input-text:invalid,
-.was-validated .input-password:invalid, .was-validated input.input-small:invalid, .was-validated input.input-medium:invalid, .was-validated input.input-large:invalid, .was-validated .form-controls
-select input:invalid, .form-controls
-select .was-validated input:invalid, .form-control.is-invalid, input.is-invalid.xlarge,
+.was-validated .input-password:invalid, .was-validated input.input-small:invalid, .was-validated input.input-medium:invalid, .was-validated input.input-large:invalid, .was-validated .form-controls input:invalid:not([type="checkbox"]):not([type="radio"]), .form-controls .was-validated input:invalid:not([type="checkbox"]):not([type="radio"]), .form-control.is-invalid, input.is-invalid.xlarge,
 .is-invalid.input-text,
-.is-invalid.input-password, input.is-invalid.input-small, input.is-invalid.input-medium, input.is-invalid.input-large, .form-controls
-select input.is-invalid {
+.is-invalid.input-password, input.is-invalid.input-small, input.is-invalid.input-medium, input.is-invalid.input-large, .form-controls input.is-invalid:not([type="checkbox"]):not([type="radio"]) {
   border-color: #dc3545;
   padding-right: calc(1.5em + 0.75rem);
   background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 12' width='12' height='12' fill='none' stroke='%23dc3545'%3e%3ccircle cx='6' cy='6' r='4.5'/%3e%3cpath stroke-linejoin='round' d='M5.8 3.6h.4L6 6.5z'/%3e%3ccircle cx='6' cy='8.2' r='.6' fill='%23dc3545' stroke='none'/%3e%3c/svg%3e");
@@ -2431,12 +2371,9 @@ select input.is-invalid {
   background-size: calc(0.75em + 0.375rem) calc(0.75em + 0.375rem); }
   .was-validated .form-control:invalid:focus, .was-validated input.xlarge:invalid:focus,
   .was-validated .input-text:invalid:focus,
-  .was-validated .input-password:invalid:focus, .was-validated input.input-small:invalid:focus, .was-validated input.input-medium:invalid:focus, .was-validated input.input-large:invalid:focus, .was-validated .form-controls
-  select input:invalid:focus, .form-controls
-  select .was-validated input:invalid:focus, .form-control.is-invalid:focus, input.is-invalid.xlarge:focus,
+  .was-validated .input-password:invalid:focus, .was-validated input.input-small:invalid:focus, .was-validated input.input-medium:invalid:focus, .was-validated input.input-large:invalid:focus, .was-validated .form-controls input:invalid:focus:not([type="checkbox"]):not([type="radio"]), .form-controls .was-validated input:invalid:focus:not([type="checkbox"]):not([type="radio"]), .form-control.is-invalid:focus, input.is-invalid.xlarge:focus,
   .is-invalid.input-text:focus,
-  .is-invalid.input-password:focus, input.is-invalid.input-small:focus, input.is-invalid.input-medium:focus, input.is-invalid.input-large:focus, .form-controls
-  select input.is-invalid:focus {
+  .is-invalid.input-password:focus, input.is-invalid.input-small:focus, input.is-invalid.input-medium:focus, input.is-invalid.input-large:focus, .form-controls input.is-invalid:focus:not([type="checkbox"]):not([type="radio"]) {
     border-color: #dc3545;
     box-shadow: 0 0 0 0.25rem rgba(220, 53, 69, 0.25); }
 
@@ -2448,18 +2385,14 @@ textarea.is-invalid.input-password {
   padding-right: calc(1.5em + 0.75rem);
   background-position: top calc(0.375em + 0.1875rem) right calc(0.375em + 0.1875rem); }
 
-.was-validated .form-select:invalid, .was-validated .widget-box select:invalid, .widget-box .was-validated select:invalid, .was-validated .form-controls select:invalid, .form-controls .was-validated select:invalid, .form-select.is-invalid, .widget-box select.is-invalid, .form-controls
-select.is-invalid {
+.was-validated .form-select:invalid, .was-validated .widget-box select:invalid, .widget-box .was-validated select:invalid, .was-validated .form-controls select:invalid, .form-controls .was-validated select:invalid, .form-select.is-invalid, .widget-box select.is-invalid, .form-controls select.is-invalid {
   border-color: #dc3545; }
-  .was-validated .form-select:invalid:not([multiple]):not([size]), .was-validated .widget-box select:invalid:not([multiple]):not([size]), .widget-box .was-validated select:invalid:not([multiple]):not([size]), .was-validated .form-controls select:invalid:not([multiple]):not([size]), .form-controls .was-validated select:invalid:not([multiple]):not([size]), .was-validated .form-select:invalid:not([multiple])[size="1"], .was-validated .widget-box select:invalid:not([multiple])[size="1"], .widget-box .was-validated select:invalid:not([multiple])[size="1"], .was-validated .form-controls select:invalid:not([multiple])[size="1"], .form-controls .was-validated select:invalid:not([multiple])[size="1"], .form-select.is-invalid:not([multiple]):not([size]), .widget-box select.is-invalid:not([multiple]):not([size]), .form-controls
-  select.is-invalid:not([multiple]):not([size]), .form-select.is-invalid:not([multiple])[size="1"], .widget-box select.is-invalid:not([multiple])[size="1"], .form-controls
-  select.is-invalid:not([multiple])[size="1"] {
+  .was-validated .form-select:invalid:not([multiple]):not([size]), .was-validated .widget-box select:invalid:not([multiple]):not([size]), .widget-box .was-validated select:invalid:not([multiple]):not([size]), .was-validated .form-controls select:invalid:not([multiple]):not([size]), .form-controls .was-validated select:invalid:not([multiple]):not([size]), .was-validated .form-select:invalid:not([multiple])[size="1"], .was-validated .widget-box select:invalid:not([multiple])[size="1"], .widget-box .was-validated select:invalid:not([multiple])[size="1"], .was-validated .form-controls select:invalid:not([multiple])[size="1"], .form-controls .was-validated select:invalid:not([multiple])[size="1"], .form-select.is-invalid:not([multiple]):not([size]), .widget-box select.is-invalid:not([multiple]):not([size]), .form-controls select.is-invalid:not([multiple]):not([size]), .form-select.is-invalid:not([multiple])[size="1"], .widget-box select.is-invalid:not([multiple])[size="1"], .form-controls select.is-invalid:not([multiple])[size="1"] {
     padding-right: 4.125rem;
     background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3e%3cpath fill='none' stroke='%23343a40' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M2 5l6 6 6-6'/%3e%3c/svg%3e"), url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 12' width='12' height='12' fill='none' stroke='%23dc3545'%3e%3ccircle cx='6' cy='6' r='4.5'/%3e%3cpath stroke-linejoin='round' d='M5.8 3.6h.4L6 6.5z'/%3e%3ccircle cx='6' cy='8.2' r='.6' fill='%23dc3545' stroke='none'/%3e%3c/svg%3e");
     background-position: right 0.75rem center, center right 2.25rem;
     background-size: 16px 12px, calc(0.75em + 0.375rem) calc(0.75em + 0.375rem); }
-  .was-validated .form-select:invalid:focus, .was-validated .widget-box select:invalid:focus, .widget-box .was-validated select:invalid:focus, .was-validated .form-controls select:invalid:focus, .form-controls .was-validated select:invalid:focus, .form-select.is-invalid:focus, .widget-box select.is-invalid:focus, .form-controls
-  select.is-invalid:focus {
+  .was-validated .form-select:invalid:focus, .was-validated .widget-box select:invalid:focus, .widget-box .was-validated select:invalid:focus, .was-validated .form-controls select:invalid:focus, .form-controls .was-validated select:invalid:focus, .form-select.is-invalid:focus, .widget-box select.is-invalid:focus, .form-controls select.is-invalid:focus {
     border-color: #dc3545;
     box-shadow: 0 0 0 0.25rem rgba(220, 53, 69, 0.25); }
 
@@ -2477,13 +2410,9 @@ select.is-invalid {
 
 .was-validated .input-group .form-control:invalid, .was-validated .input-group input.xlarge:invalid,
 .was-validated .input-group .input-text:invalid,
-.was-validated .input-group .input-password:invalid, .was-validated .input-group input.input-small:invalid, .was-validated .input-group input.input-medium:invalid, .was-validated .input-group input.input-large:invalid, .was-validated .input-group .form-controls
-select input:invalid, .form-controls
-select .was-validated .input-group input:invalid, .input-group .form-control.is-invalid, .input-group input.is-invalid.xlarge,
+.was-validated .input-group .input-password:invalid, .was-validated .input-group input.input-small:invalid, .was-validated .input-group input.input-medium:invalid, .was-validated .input-group input.input-large:invalid, .was-validated .input-group .form-controls input:invalid:not([type="checkbox"]):not([type="radio"]), .form-controls .was-validated .input-group input:invalid:not([type="checkbox"]):not([type="radio"]), .input-group .form-control.is-invalid, .input-group input.is-invalid.xlarge,
 .input-group .is-invalid.input-text,
-.input-group .is-invalid.input-password, .input-group input.is-invalid.input-small, .input-group input.is-invalid.input-medium, .input-group input.is-invalid.input-large, .input-group .form-controls
-select input.is-invalid, .form-controls
-select .input-group input.is-invalid,
+.input-group .is-invalid.input-password, .input-group input.is-invalid.input-small, .input-group input.is-invalid.input-medium, .input-group input.is-invalid.input-large, .input-group .form-controls input.is-invalid:not([type="checkbox"]):not([type="radio"]), .form-controls .input-group input.is-invalid:not([type="checkbox"]):not([type="radio"]),
 .was-validated .input-group .form-select:invalid,
 .was-validated .input-group .widget-box select:invalid,
 .widget-box .was-validated .input-group select:invalid,
@@ -2497,13 +2426,9 @@ select .input-group input.is-invalid,
   z-index: 2; }
   .was-validated .input-group .form-control:invalid:focus, .was-validated .input-group input.xlarge:invalid:focus,
   .was-validated .input-group .input-text:invalid:focus,
-  .was-validated .input-group .input-password:invalid:focus, .was-validated .input-group input.input-small:invalid:focus, .was-validated .input-group input.input-medium:invalid:focus, .was-validated .input-group input.input-large:invalid:focus, .was-validated .input-group .form-controls
-  select input:invalid:focus, .form-controls
-  select .was-validated .input-group input:invalid:focus, .input-group .form-control.is-invalid:focus, .input-group input.is-invalid.xlarge:focus,
+  .was-validated .input-group .input-password:invalid:focus, .was-validated .input-group input.input-small:invalid:focus, .was-validated .input-group input.input-medium:invalid:focus, .was-validated .input-group input.input-large:invalid:focus, .was-validated .input-group .form-controls input:invalid:focus:not([type="checkbox"]):not([type="radio"]), .form-controls .was-validated .input-group input:invalid:focus:not([type="checkbox"]):not([type="radio"]), .input-group .form-control.is-invalid:focus, .input-group input.is-invalid.xlarge:focus,
   .input-group .is-invalid.input-text:focus,
-  .input-group .is-invalid.input-password:focus, .input-group input.is-invalid.input-small:focus, .input-group input.is-invalid.input-medium:focus, .input-group input.is-invalid.input-large:focus, .input-group .form-controls
-  select input.is-invalid:focus, .form-controls
-  select .input-group input.is-invalid:focus,
+  .input-group .is-invalid.input-password:focus, .input-group input.is-invalid.input-small:focus, .input-group input.is-invalid.input-medium:focus, .input-group input.is-invalid.input-large:focus, .input-group .form-controls input.is-invalid:focus:not([type="checkbox"]):not([type="radio"]), .form-controls .input-group input.is-invalid:focus:not([type="checkbox"]):not([type="radio"]),
   .was-validated .input-group .form-select:invalid:focus,
   .was-validated .input-group .widget-box select:invalid:focus,
   .widget-box .was-validated .input-group select:invalid:focus,
@@ -3956,7 +3881,7 @@ select .input-group input.is-invalid,
 
 .alert-dismissible {
   padding-right: 3rem; }
-  .alert-dismissible .btn-close {
+  .alert-dismissible .btn-close, .alert-dismissible .ico-close {
     position: absolute;
     top: 0;
     right: 0;
@@ -4308,7 +4233,7 @@ select .input-group input.is-invalid,
     background-color: #141619;
     border-color: #141619; }
 
-.btn-close {
+.btn-close, .ico-close {
   box-sizing: content-box;
   width: 1em;
   height: 1em;
@@ -4318,15 +4243,15 @@ select .input-group input.is-invalid,
   border: 0;
   border-radius: 0.25rem;
   opacity: 0.5; }
-  .btn-close:hover {
+  .btn-close:hover, .ico-close:hover {
     color: #000;
     text-decoration: none;
     opacity: 0.75; }
-  .btn-close:focus {
+  .btn-close:focus, .ico-close:focus {
     outline: 0;
     box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.25);
     opacity: 1; }
-  .btn-close:disabled, .btn-close.disabled {
+  .btn-close:disabled, .ico-close:disabled, .btn-close.disabled, .disabled.ico-close {
     pointer-events: none;
     user-select: none;
     opacity: 0.25; }
@@ -4366,7 +4291,7 @@ select .input-group input.is-invalid,
   border-bottom: 1px solid rgba(0, 0, 0, 0.05);
   border-top-left-radius: calc(0.25rem - 1px);
   border-top-right-radius: calc(0.25rem - 1px); }
-  .toast-header .btn-close {
+  .toast-header .btn-close, .toast-header .ico-close {
     margin-right: -0.375rem;
     margin-left: 0.75rem; }
 
@@ -4449,7 +4374,7 @@ select .input-group input.is-invalid,
   border-bottom: 1px solid #dee2e6;
   border-top-left-radius: calc(0.3rem - 1px);
   border-top-right-radius: calc(0.3rem - 1px); }
-  .modal-header .btn-close {
+  .modal-header .btn-close, .modal-header .ico-close {
     padding: 0.5rem 0.5rem;
     margin: -0.5rem -0.5rem -0.5rem auto; }
 
@@ -5021,7 +4946,7 @@ select .input-group input.is-invalid,
   align-items: center;
   justify-content: space-between;
   padding: 1rem 1rem; }
-  .offcanvas-header .btn-close {
+  .offcanvas-header .btn-close, .offcanvas-header .ico-close {
     padding: 0.5rem 0.5rem;
     margin-top: -0.5rem;
     margin-right: -0.5rem;
@@ -5229,10 +5154,10 @@ select .input-group input.is-invalid,
 .align-text-top {
   vertical-align: text-top !important; }
 
-.float-start {
+.float-start, .float-left {
   float: left !important; }
 
-.float-end {
+.float-end, .float-right {
   float: right !important; }
 
 .float-none {
@@ -8659,295 +8584,29 @@ select .input-group input.is-invalid,
 
   .d-print-none {
     display: none !important; } }
-/* THEME ROLLER JQUERY UI
-http://jqueryui.com/themeroller/#ffDefault=Arial%2C+%22Helvetica+Neue%22%2C+Helvetica%2C+Verdana%2C+sans-serif%3B &fwDefault=normal &fsDefault=13px &cornerRadius=4px &bgColorHeader=f3f3f3 &bgTextureHeader=01_flat.png &bgImgOpacityHeader=0 &borderColorHeader=dddddd &fcHeader=222222 &iconColorHeader=222222 &bgColorContent=ffffff &bgTextureContent=01_flat.png &bgImgOpacityContent=0 &borderColorContent=dddddd &fcContent=222222 &iconColorContent=222222 &bgColorDefault=e6e6e6 &bgTextureDefault=01_flat.png &bgImgOpacityDefault=75 &borderColorDefault=dddddd &fcDefault=555555 &iconColorDefault=888888 &bgColorHover=dadada &bgTextureHover=01_flat.png &bgImgOpacityHover=75 &borderColorHover=dddddd &fcHover=212121 &iconColorHover=454545 &bgColorActive=ffffff &bgTextureActive=02_glass.png &bgImgOpacityActive=65 &borderColorActive=dddddd &fcActive=212121 &iconColorActive=454545 &bgColorHighlight=fbf9ee &bgTextureHighlight=02_glass.png &bgImgOpacityHighlight=55 &borderColorHighlight=fcefa1 &fcHighlight=363636 &iconColorHighlight=2e83ff &bgColorError=fef1ec &bgTextureError=05_inset_soft.png &bgImgOpacityError=95 &borderColorError=cd0a0a &fcError=cd0a0a &iconColorError=cd0a0a &bgColorOverlay=000000 &bgTextureOverlay=01_flat.png &bgImgOpacityOverlay=0 &opacityOverlay=30 &bgColorShadow=aaaaaa &bgTextureShadow=01_flat.png &bgImgOpacityShadow=0 &opacityShadow=30 &thicknessShadow=8px &offsetTopShadow=-8px &offsetLeftShadow=-8px &cornerRadiusShadow=8px
-*/
 /* Colors */
 /* $STANDARD */
 /* $ALERTS */
-/* $TABLES */
 /* $GRAY */
-/* K: 78.0%  */
-/* K: 72.0%  */
-/* K: 62.0%  */
-/* K: 27.0%  */
-/* K: 14.0%  */
-/* K: 04.5% */
 /* $MARKET */
-.ico,
-.status-expanded,
-.status-collapsed {
-  background-image: url("../images/split.png") !important; }
-
-@media only screen and (-moz-min-device-pixel-ratio: 2), only screen and (-o-min-device-pixel-ratio: 2 / 1), only screen and (-webkit-min-device-pixel-ratio: 2), only screen and (min-device-pixel-ratio: 2) {
-  .ico,
-  .status-expanded,
-  .status-collapsed {
-    background-image: url("../images/split$2x.png") !important;
-    background-size: 262px 420px; } }
-.ico {
-  text-indent: -99999px;
-  background-repeat: no-repeat; }
-
-.ico-dashboard,
-.ico-dash {
-  background-position: -48px 0; }
-
-.current .ico-dashboard,
-li.hover .ico-dashboard,
-.current .ico-dash,
-li.hover .ico-dash {
-  background-position: 0 0; }
-
-body.compact .ico-dashboard,
-body.compact .ico-dash {
-  background-position: -192px -35px; }
-
-body.compact .current .ico-dashboard,
-body.compact li.hover .ico-dashboard,
-body.compact .current .ico-dash,
-body.compact li.hover .ico-dash {
-  background-position: -192px 0; }
-
-.ico-listing,
-.ico-items {
-  background-position: -144px 0; }
-
-.current .ico-listing,
-li.hover .ico-listing,
-.current .ico-items,
-li.hover .ico-items {
-  background-position: -96px 0; }
-
-body.compact .ico-listing,
-body.compact .ico-items {
-  background-position: -192px -105px; }
-
-body.compact .current .ico-listing,
-body.compact li.hover .ico-listing,
-body.compact .current .ico-items,
-body.compact li.hover .ico-items {
-  background-position: -192px -70px; }
-
-.ico-categories {
-  background-position: -48px -48px; }
-
-.current .ico-categories,
-li.hover .ico-categories {
-  background-position: -0px -48px; }
-
-body.compact .ico-categories {
-  background-position: -192px -175px; }
-
-body.compact .current .ico-categories,
-body.compact li.hover .ico-categories {
-  background-position: -192px -140px; }
-
-.ico-pages {
-  background-position: -144px -48px; }
-
-.current .ico-pages,
-li.hover .ico-pages {
-  background-position: -96px -48px; }
-
-body.compact .ico-pages {
-  background-position: -192px -245px; }
-
-body.compact .current .ico-pages,
-body.compact li.hover .ico-pages {
-  background-position: -192px -210px; }
-
-.ico-appearance {
-  background-position: -48px -96px; }
-
-.current .ico-appearance,
-li.hover .ico-appearance {
-  background-position: -0px -96px; }
-
-body.compact .ico-appearance {
-  background-position: -192px -315px; }
-
-body.compact .current .ico-appearance,
-body.compact li.hover .ico-appearance {
-  background-position: -192px -280px; }
-
-.ico-plugins {
-  background-position: -144px -96px; }
-
-.current .ico-plugins,
-li.hover .ico-plugins {
-  background-position: -96px -96px; }
-
-body.compact .ico-plugins {
-  background-position: -192px -385px; }
-
-body.compact .current .ico-plugins,
-body.compact li.hover .ico-plugins {
-  background-position: -192px -350px; }
-
-.ico-settings {
-  background-position: -48px -144px; }
-
-.current .ico-settings,
-li.hover .ico-settings {
-  background-position: -0px -144px; }
-
-body.compact .ico-settings {
-  background-position: -227px -35px; }
-
-body.compact .current .ico-settings,
-body.compact li.hover .ico-settings {
-  background-position: -227px -0px; }
-
-.ico-tools {
-  background-position: -144px -144px; }
-
-.current .ico-tools,
-li.hover .ico-tools {
-  background-position: -96px -144px; }
-
-body.compact .ico-tools {
-  background-position: -227px -105px; }
-
-body.compact .current .ico-tools,
-body.compact li.hover .ico-tools {
-  background-position: -227px -70px; }
-
-.ico-users {
-  background-position: -48px -192px; }
-
-.current .ico-users,
-li.hover .ico-users {
-  background-position: -0px -192px; }
-
-body.compact .ico-users {
-  background-position: -227px -175px; }
-
-body.compact .current .ico-users,
-body.compact li.hover .ico-users {
-  background-position: -227px -140px; }
-
-.ico-statistics,
-.ico-stats {
-  background-position: -144px -192px; }
-
-.current .ico-statistics,
-li.hover .ico-statistics,
-.current .ico-stats,
-li.hover .ico-stats {
-  background-position: -96px -192px; }
-
-body.compact .ico-statistics,
-body.compact .ico-stats {
-  background-position: -227px -245px; }
-
-body.compact .current .ico-statistics,
-body.compact li.hover .ico-statistics,
-body.compact .current .ico-stats,
-body.compact li.hover .ico-stats {
-  background-position: -227px -210px; }
-
-.ico-more {
-  background-position: -48px -240px; }
-
-.current .ico-more,
-li.hover .ico-more {
-  background-position: -0px -240px; }
-
-.ico-market {
-  background-position: -144px -240px; }
-
-.current .ico-market,
-li.hover .ico-market {
-  background-position: -96px -240px; }
-
-body.compact .ico-market,
-body.compact .ico-market {
-  background-position: -227px -385px; }
-
-body.compact .current .ico-market,
-body.compact li.hover .ico-market,
-body.compact .current .ico-market,
-body.compact li.hover .ico-market {
-  background-position: -227px -350px; }
-
-.ico-engine {
-  background-position: 0 -288px; }
-
-.ico-engine:hover,
-.ico-engine-white {
-  background-position: -32px -288px; }
-
-.ico-search {
-  background-position: -64px -288px; }
-
-.ico-search:hover,
-.ico-search-white {
-  background-position: -96px -288px; }
-
-.ico-help {
-  background-position: -0px -320px; }
-
-.ico-help:hover,
-.ico-help-white {
-  background-position: -32px -320px; }
-
-.ico-add {
-  background-position: -64px -320px; }
-
-.ico-add:hover,
-.ico-add-white {
-  background-position: -96px -320px; }
-
-.ico-power {
-  background-position: -0px -352px; }
-
-.ico-power:hover,
-.ico-power-white {
-  background-position: -32px -352px; }
-
-.ico-droppable {
-  background-position: -64px -352px; }
-
-.ico-droppable:hover,
-.ico-droppable-white {
-  background-position: -96px -352px; }
-
 .ico-close {
-  background-position: -152px -288px;
-  float: right !important;
-  padding: 0 !important;
-  width: 20px !important;
-  height: 20px !important; }
+  content-visibility: hidden;
+  float: right !important; }
 
-.ico-close:hover {
-  background-position: -172px -288px; }
-
-.ico-drop-down {
-  background-position: -152px -308px; }
-
-.status-collapsed {
-  background-position: -147px -343px; }
-
-.status-expanded {
-  background-position: -167px -343px; }
+#header.navbar {
+  padding-bottom: 0.1rem;
+  padding-top: 0.1rem; }
 
 #footer-wrapper {
-  border-top: 3px solid #dddddd;
-  background-color: #f3f3f3;
-  color: #555;
-  padding: 20px 70px 20px 15px; }
+  padding: 20px; }
+  #footer-wrapper a {
+    text-decoration-line: none; }
 
 #footer {
   font-size: 12px; }
 
-#footer #ninja {
-  position: absolute;
-  right: 15px;
-  top: 5px; }
-
-#dashboard {
-  width: 900px; }
+#content-page {
+  min-width: 450px; }
 
 h2.separate-top, .separate-top.h2,
 .separate-top {
@@ -8959,9 +8618,6 @@ h3.separate-top, .separate-top.h3,
 
 .separate-top-medium {
   margin-top: 15px; }
-
-div.no-bottom-margin {
-  margin-bottom: 0; }
 
 .relative {
   position: relative; }
@@ -8979,7 +8635,7 @@ div.no-bottom-margin {
   padding: 0.5rem; }
 
 .show-grid .row-wrapper {
-  background-color: #f3f3f3;
+  background-color: #f8f9fa;
   padding: 10px 0;
   border-radius: 5px; }
 
@@ -9032,23 +8688,29 @@ div.row-offset {
   margin-right: 0 !important; }
 
 #content-head {
-  border-bottom: solid 1px #dddddd;
-  background-color: #f3f3f3;
-  padding: 24px 30px; }
+  background-color: #f8f9fa;
+  border-bottom: solid 1px #e9ecef;
+  padding: 10px 15px; }
 
-#content-head h1, #content-head .h1,
-#content-head h2,
-#content-head .h2 {
-  margin: 0;
-  color: #474749;
+#content-head h1, #content-head .h1, #content-head h2, #content-head .h2 {
+  color: #495057;
   font-size: 30px;
-  font-weight: normal; }
+  font-weight: 400;
+  margin: 0; }
+#content-head h2, #content-head .h2 {
+  font-size: 20px;
+  font-weight: 300; }
+#content-head h3, #content-head .h3 {
+  font-size: 18px;
+  font-weight: 300; }
+
+#content-render {
+  background-color: #e9ecef; }
 
 #content-page {
-  background-color: #ffffff;
+  min-height: calc(100vh - 9rem);
   padding: 22px 15px 60px;
-  position: relative;
-  min-height: calc(100vh - 210px); }
+  position: relative; }
 
 #content-head h1 .ico, #content-head .h1 .ico,
 #content-head h2 .ico,
@@ -9056,49 +8718,48 @@ div.row-offset {
   margin-left: 10px; }
 
 .render-title {
-  margin: 0 0 20px;
-  color: #616161;
   font-size: 21px;
-  font-weight: normal; }
+  font-weight: normal;
+  margin: 0 0 20px; }
 
 h3.render-title, .render-title.h3 {
   font-size: 18px; }
 
 .render-title a.btn-mini, .form-controls a.btn-mini {
-  height: 24px;
-  padding-top: 4px;
   float: none;
-  vertical-align: 4px;
-  padding-bottom: 5px; }
+  height: 24px;
+  padding-bottom: 5px;
+  padding-top: 4px;
+  vertical-align: 4px; }
 
 .form-controls a.btn-mini {
-  vertical-align: 2px;
-  margin-left: 5px; }
+  margin-left: 5px;
+  vertical-align: 2px; }
 
 .quick-search input.input-text {
-  display: inline-block;
-  width: 208px;
-  height: 24px;
-  padding: 4px 6px;
-  font-size: 13px;
-  line-height: 18px;
+  background-color: #f8f9fa;
+  border: 1px solid #e9ecef;
   color: #555;
-  background-color: #f3f3f3;
-  border: 1px solid #dddddd;
-  border-radius: 4px 0 0 4px;
+  display: inline-block;
+  font-size: 13px;
+  height: 24px;
+  line-height: 18px;
   outline: none;
+  padding: 4px 6px;
+  width: 208px;
+  border-radius: 4px 0 0 4px;
   vertical-align: top; }
 
 .quick-search .ico-search {
-  margin-left: 0;
   border-left: 0;
+  margin-left: 0;
   border-radius: 0px 4px 4px 0;
   border-radius: 0px 4px 4px 0;
-  width: 34px !important;
-  height: 34px;
   display: block;
+  height: 34px;
+  margin-right: 10px;
   padding: 0;
-  margin-right: 10px; }
+  width: 34px !important; }
 
 .locations img {
   vertical-align: bottom; }
@@ -9107,38 +8768,38 @@ h3.render-title, .render-title.h3 {
   clear: both; }
 
 .ico-48 {
-  width: 48px;
-  height: 48px;
   display: block;
-  padding: 0; }
+  height: 48px;
+  padding: 0;
+  width: 48px; }
 
 .ico-20,
 a.ico-20 {
-  width: 20px;
   height: 20px;
-  padding: 0; }
+  padding: 0;
+  width: 20px; }
 
 .ico-32,
 a.ico-32 {
-  width: 32px;
-  height: 32px;
   display: block;
-  padding: 0; }
+  height: 32px;
+  padding: 0;
+  width: 32px; }
 
 .action-btn {
-  padding: 9px 10px;
-  background-color: #dddddd;
-  margin: 0 10px;
+  background-color: #e9ecef;
+  border: solid 1px #6c757d;
   font-size: 14px;
   line-height: 14px;
-  border: solid 1px #616161;
+  margin: 0 10px;
+  padding: 9px 10px;
   border-radius: 4px;
   text-decoration: none; }
 
 .action-btn-black {
-  background: #383838;
-  border-color: #616161;
-  color: #bababa; }
+  background: #343a40;
+  border-color: #6c757d;
+  color: #dee2e6; }
 
 .action-btn-black:hover {
   background-color: #1e1e1e; }
@@ -9148,20 +8809,20 @@ a.ico-32 {
 
 .circle {
   border-radius: 15px;
-  min-width: 18px;
-  height: 16px;
-  font-size: 12px;
-  padding-top: 2px;
+  background: #dee2e6;
+  border: solid 1px #6c757d;
+  color: #6c757d;
   float: left;
-  position: relative;
-  margin-top: -3px;
-  margin-left: -2px;
-  text-align: center;
-  margin-right: 8px;
+  font-size: 12px;
   font-style: normal;
-  background: #bababa;
-  color: #616161;
-  border: solid 1px #616161; }
+  height: 16px;
+  margin-left: -2px;
+  margin-right: 8px;
+  margin-top: -3px;
+  min-width: 18px;
+  padding-top: 2px;
+  position: relative;
+  text-align: center; }
 
 .circle-red {
   background: #dc3545;
@@ -9174,8 +8835,8 @@ a.ico-32 {
   color: #ffffff; }
 
 .btn-black {
-  background-color: #383838;
-  border: solid 1px #616161; }
+  background-color: #343a40;
+  border: solid 1px #6c757d; }
 
 /**
 .btn-black:hover {
@@ -9196,45 +8857,39 @@ input.ico-32 {
   display: inline;
   width: 34px !important; }
 
-.float-left {
-  float: left !important; }
-
-.float-right {
-  float: right !important; }
-
 /* Selectmenu
 ----------------------------------*/
 .select-box {
-  z-index: 0;
+  display: inline-block;
   position: relative;
-  display: inline-block; }
+  z-index: 0; }
 
 #bulk-actions .select-box,
 #listing-toolbar .select-box {
   float: left; }
 
 .select-box-big .select-box-trigger {
-  padding: 7px 45px 6px 12px;
-  font-size: 13px; }
+  font-size: 13px;
+  padding: 7px 45px 6px 12px; }
 
 .select-box .select-box-label {
-  overflow: hidden;
   display: block;
+  float: left;
   line-height: 16px;
-  float: left; }
+  overflow: hidden; }
 
 .select-box-big .select-box-icon {
-  height: 29px;
-  border-left: solid 1px #dddddd; }
+  border-left: solid 1px #e9ecef;
+  height: 29px; }
 
 .select-box-extra .select-box-trigger {
+  font-size: 13px;
   height: 16px;
-  padding: 9px 45px 7px 12px;
-  font-size: 13px; }
+  padding: 9px 45px 7px 12px; }
 
 .select-box-extra .select-box-icon {
-  height: 32px;
-  border-left: solid 1px #dddddd; }
+  border-left: solid 1px #e9ecef;
+  height: 32px; }
 
 .select-box-input .select-box-trigger {
   width: 50px;
@@ -9256,8 +8911,8 @@ div.select-box-input select {
   width: 109px; }
 
 .select-box-icon .ico {
-  margin-top: 5px;
-  margin-left: 5px; }
+  margin-left: 5px;
+  margin-top: 5px; }
 
 input.xlarge,
 .input-text,
@@ -9280,9 +8935,9 @@ input.input-actions {
   height: 24px; }
 
 .well {
-  padding: 10px;
-  background-color: #f3f3f3;
-  border: solid 1px #dddddd; }
+  background-color: #f8f9fa;
+  border: solid 1px #e9ecef;
+  padding: 10px; }
 
 .input-has-placeholder {
   position: relative; }
@@ -9294,21 +8949,21 @@ input.input-actions {
   position: relative; }
 
 .input-has-placeholder label {
-  position: absolute;
-  left: 8px;
-  top: 7px;
+  color: #6c757d;
   font-size: 13px;
-  color: #616161;
+  left: 8px;
+  margin-bottom: 0 !important;
   margin-top: 0 !important;
-  margin-bottom: 0 !important; }
+  position: absolute;
+  top: 7px; }
 
 textarea {
-  padding: 4px 6px;
+  background-color: #ffffff;
+  border: 1px solid #e9ecef;
+  color: #495057;
   font-size: 13px;
   line-height: 18px;
-  color: #474749;
-  background-color: #ffffff;
-  border: 1px solid #dddddd;
+  padding: 4px 6px;
   border-radius: 3px;
   vertical-align: top;
   width: 208px; }
@@ -9323,12 +8978,12 @@ textarea {
   text-align: right; }
 
 .has-pagination ul {
-  display: inline-block;
-  *display: inline;
   /* IE7 inline-block hack */
   *zoom: 1;
-  margin: 25px 0 0;
+  display: inline-block;
+  *display: inline;
   height: 36px;
+  margin: 25px 0 0;
   border-radius: 4px; }
 
 .has-pagination li {
@@ -9336,12 +8991,12 @@ textarea {
 
 .has-pagination a,
 .has-pagination span {
-  float: left;
-  padding: 0 10px;
-  line-height: 30px;
-  text-decoration: none;
   border: 1px solid #ddd;
-  border-left-width: 0; }
+  border-left-width: 0;
+  float: left;
+  line-height: 30px;
+  padding: 0 10px;
+  text-decoration: none; }
 
 .has-pagination a:hover,
 .has-pagination .active a {
@@ -9354,8 +9009,8 @@ textarea {
 .has-pagination .disabled span,
 .has-pagination .disabled a,
 .has-pagination .disabled a:hover {
-  color: #999999;
   background-color: transparent;
+  color: #999999;
   cursor: default; }
 
 .has-pagination .list-first {
@@ -9367,8 +9022,8 @@ textarea {
 
 ul.showing-results {
   float: left;
-  padding: 0;
-  margin: 25px 0 0; }
+  margin: 25px 0 0;
+  padding: 0; }
 
 .showing-results span {
   border-left-width: 1px;
@@ -9381,42 +9036,42 @@ ul.showing-results {
   text-align: right; }
 
 .pagination-input {
-  float: left;
-  padding: 0;
-  line-height: 30px;
-  text-decoration: none;
   border: 1px solid #ddd;
   border-left-width: 0;
+  float: left;
+  line-height: 30px;
+  padding: 0;
+  text-decoration: none;
   border-radius: 0 3px 3px 0; }
 
 .pagination-input input {
+  border: 0;
   height: 30px;
   margin: 0;
-  border: 0;
   padding: 0;
-  width: 40px;
   text-align: center;
-  border-radius: 0;
-  vertical-align: top; }
+  vertical-align: top;
+  width: 40px;
+  border-radius: 0; }
 
 .pagination-input button {
-  height: 30px;
   background: white;
   border: 0;
+  border-left: solid 1px #e9ecef;
+  color: #018BE3;
+  cursor: pointer;
+  font-size: 13px;
+  font-weight: bold;
+  height: 30px;
   margin: 0;
   padding: 0 10px;
-  border-left: solid 1px #dddddd;
-  cursor: pointer;
-  color: #018BE3;
-  font-weight: bold;
   vertical-align: top;
-  font-size: 13px;
   border-radius: 0 3px 3px 0; }
 
 .display-select-bottom {
   float: left;
-  padding: 0;
-  margin: 25px 0 0 10px; }
+  margin: 25px 0 0 10px;
+  padding: 0; }
 
 .inline {
   display: inline; }
@@ -9425,40 +9080,40 @@ ul.showing-results {
   *margin-top: -27px; }
 
 .ui-autocomplete-loading {
-  display: block;
-  background: white url("../images/loading.gif") right center no-repeat; }
+  background: white url("../images/loading.gif") right center no-repeat;
+  display: block; }
 
 .btn-disabled {
-  opacity: 0.7;
-  filter: alpha(opacity=70); }
+  filter: alpha(opacity=70);
+  opacity: 0.7; }
 
 .btn-market-update,
 .btn-market-preview {
   background-color: #2fbfd1;
   border-radius: 3px;
-  padding: 3px 10px;
   color: #fff;
+  margin-left: 5px;
   margin-top: 5px;
-  margin-left: 5px; }
+  padding: 3px 10px; }
 
 .btn-market-preview {
-  background-color: #bababa;
+  background-color: #dee2e6;
   margin-left: 0; }
 
 .spinner {
-  width: 16px;
-  height: 16px;
+  background: url("../images/loading.gif");
   display: block;
-  margin-right: 10px;
   float: left;
-  background: url("../images/loading.gif"); }
+  height: 16px;
+  margin-right: 10px;
+  width: 16px; }
 
 .widget-box select {
   width: 50%; }
 
 .widget-box-title {
+  color: #495057;
   font-size: 18px;
-  color: #474749;
   position: relative; }
 
 .widget-box-title h1, .widget-box-title .h1,
@@ -9470,14 +9125,14 @@ ul.showing-results {
 .widget-box-title .h4,
 .widget-box-title h5,
 .widget-box-title .h5 {
-  margin: 0;
   font-size: 18px;
-  font-weight: normal; }
+  font-weight: normal;
+  margin: 0; }
 
 .widget-box-title .select-box {
-  widows: 50%;
   right: 0;
-  top: 0; }
+  top: 0;
+  widows: 50%; }
 
 .widget-box-title .select-box-trigger {
   background-color: #ffffff; }
@@ -9489,47 +9144,47 @@ ul.showing-results {
   position: relative; }
 
 .widget-box-selector {
-  float: right;
-  display: block; }
+  display: block;
+  float: right; }
 
 .widget-box h4, .widget-box .h4 {
-  margin: 20px 0 10px;
+  border-bottom: 1px dotted #6c757d;
+  color: #6c757d;
   font-size: 16px;
-  color: #616161;
-  border-bottom: 1px dotted #616161; }
+  margin: 20px 0 10px; }
 
 .widget-box h4.first-title, .widget-box .first-title.h4 {
   margin: 0 0 10px; }
 
 .stats-title {
+  color: #6c757d;
   font-size: 16px;
-  line-height: 20px;
-  color: #616161; }
+  line-height: 20px; }
 
 .stats-detail {
-  font-size: 14px;
-  color: #616161; }
+  color: #6c757d;
+  font-size: 14px; }
 
 .widget-box .form-row {
   margin-bottom: 15px; }
 
 .widget-box .form-label {
   float: left;
-  padding-top: 5px;
   margin-left: 10px;
+  padding-top: 5px;
   text-align: right; }
 
 div.widget-box-content-no-wrapp,
 #dashboard div.widget-box-content-no-wrapp {
-  padding: 0;
-  height: 250px; }
+  height: 250px;
+  padding: 0; }
 
 div.widget-box-content-no-wrapp h4, div.widget-box-content-no-wrapp .h4,
 div.widget-box-content-no-wrapp .first-title {
-  padding: 5px 15px;
-  background: #dddddd;
+  background: #e9ecef;
   border-bottom: 0;
-  margin: 0; }
+  margin: 0;
+  padding: 5px 15px; }
 
 div.widget-box-content-no-wrapp li {
   padding: 5px 15px; }
@@ -9541,13 +9196,16 @@ div.widget-box-content-no-wrapp li a {
   padding: 0 15px; }
 
 .dashboard-sidebar {
-  min-width: 220px; }
+  max-width: 15rem; }
+  .dashboard-sidebar.offcanvas {
+    overflow-y: auto; }
   .dashboard-sidebar div.nav-link {
-    color: #fff;
-    background-color: #343a40; }
-    .dashboard-sidebar div.nav-link i {
+    background-color: #343a40;
+    color: #fff; }
+    .dashboard-sidebar div.nav-link > i {
+      margin-left: 1rem;
       transition: ease 500ms; }
-      .dashboard-sidebar div.nav-link i.collapsed {
+      .dashboard-sidebar div.nav-link > i.collapsed {
         transform: rotate(-90deg); }
   .dashboard-sidebar .nav-link.active a {
     color: #e9ecef; }
@@ -9560,27 +9218,28 @@ div.widget-box-content-no-wrapp li a {
       transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out; }
 
 .sidebar-submenu {
-  background-color: #474749;
+  background-color: #495057;
+  border: 1px solid transparent;
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
   font-size: 0.875rem;
   margin-top: -.1rem;
   padding-top: .1rem;
-  border: 0 1px solid transparent;
-  border-radius: 0.25rem;
-  border-top-left-radius: 0;
-  border-top-right-radius: 0; }
+  border-radius: 0.25rem; }
   .sidebar-submenu a {
     color: #ced4da;
     font-size: 0.875rem;
     margin-bottom: 1px; }
     .sidebar-submenu a.sub-active, .sidebar-submenu a:hover {
-      color: #e9ecef;
-      background-color: #6c757d; }
+      background-color: #6c757d;
+      color: #e9ecef; }
 
 .table {
-  width: 100%;
-  font-size: 14px;
+  --bs-table-striped-bg: #dee2e633;
+  background-color: #f8f9fa;
   border: 1px solid #ced4da;
-  --bs-table-striped-bg: #dee2e633; }
+  font-size: 14px;
+  width: 100%; }
   .table thead {
     border-bottom: 1px solid #ced4da; }
     .table thead th {
@@ -9588,19 +9247,19 @@ div.widget-box-content-no-wrapp li a {
       .table thead th a {
         text-decoration-line: none; }
   .table tbody .col-title {
-    font-weight: 500;
-    font-size: 0.9rem; }
+    font-size: 0.9rem;
+    font-weight: 500; }
     .table tbody .col-title a {
       text-decoration-line: none; }
 
 .table th,
 .table td {
-  padding: 7px;
-  line-height: 18px;
+  border-bottom: 0;
+  border-left: 0;
   border-left: 0;
   border-top: 0;
-  border-bottom: 0;
-  border-left: 0; }
+  line-height: 18px;
+  padding: 7px; }
 
 .table thead th,
 .table thead td,
@@ -9612,10 +9271,10 @@ div.widget-box-content-no-wrapp li a {
 
 #table-row-actions {
   display: none;
-  position: absolute;
-  margin-top: -22px;
   font-size: 13px;
-  padding: 0 6px; }
+  margin-top: -25px;
+  padding: 0 6px;
+  position: absolute; }
   #table-row-actions a {
     text-decoration-line: none; }
 
@@ -9631,8 +9290,8 @@ div.widget-box-content-no-wrapp li a {
 
 #table-row-actions ul {
   list-style: none;
-  padding: 0;
-  margin: 4px 0 0; }
+  margin: 4px 0 0;
+  padding: 0; }
 
 #table-row-actions li {
   float: left;
@@ -9675,22 +9334,22 @@ div.widget-box-content-no-wrapp li a {
   display: none; }
 
 .table td.col-status-border {
-  width: 1px;
+  border-bottom: 0;
+  border-right: 0;
+  border-top: 0;
   margin: 0;
   padding: 0;
-  border-top: 0;
-  border-bottom: 0;
-  border-right: 0; }
+  width: 1px; }
 
 .table td.col-status {
-  border-top: 1px solid rgba(0, 0, 0, 0.1);
   border-bottom: 0;
-  width: 50px;
-  padding: 0 10px;
-  margin: 0;
+  border-left: 0;
+  border-top: 1px solid rgba(0, 0, 0, 0.1);
   font-weight: bold;
+  margin: 0;
+  padding: 0 10px;
   vertical-align: middle;
-  border-left: 0; }
+  width: 50px; }
 
 .table .status-spam td.col-status-border {
   background: #323A45; }
@@ -9741,21 +9400,21 @@ table.table-small {
   width: 280px; }
 
 .order-box {
-  position: relative;
-  padding-right: 20px; }
+  padding-right: 20px;
+  position: relative; }
 
 .order-box img {
+  cursor: pointer;
+  filter: alpha(opacity=5);
+  height: 10px;
+  opacity: 0.5;
   position: absolute;
   right: 5px;
-  width: 10px;
-  height: 10px;
-  cursor: pointer;
-  opacity: 0.5;
-  filter: alpha(opacity=5); }
+  width: 10px; }
 
 .order-box img:hover {
-  opacity: 1;
-  filter: alpha(opacity=1); }
+  filter: alpha(opacity=1);
+  opacity: 1; }
 
 .order-box .up {
   top: 0; }
@@ -9766,14 +9425,14 @@ table.table-small {
 .sorting_desc a {
   padding-right: 30px; }
   .sorting_desc a:before {
-    font-family: 'bootstrap-icons';
-    content: "\f229"; }
+    content: "\f229";
+    font-family: 'bootstrap-icons'; }
 
 .sorting_asc a {
   padding-right: 30px; }
   .sorting_asc a:before {
-    font-family: 'bootstrap-icons';
-    content: "\f235"; }
+    content: "\f235";
+    font-family: 'bootstrap-icons'; }
 
 /* Columns width */
 .col-bulkactions {
@@ -9791,15 +9450,12 @@ table.table-small {
 table .icon-new-window {
   margin-left: 5px; }
   table .icon-new-window:before {
-    font-family: 'bootstrap-icons';
-    content: "\f1c5"; }
-
-#help-box {
-  background: #FCF8E3; }
+    content: "\f1c5";
+    font-family: 'bootstrap-icons'; }
 
 #help-box h3, #help-box .h3 {
-  margin: 0;
-  font-size: 14px; }
+  font-size: 14px;
+  margin: 0; }
 
 #help-box p {
   font-size: 13px; }
@@ -9810,53 +9466,45 @@ table .icon-new-window {
   padding: 0; }
 
 .list-latests li {
-  border-bottom: solid 1px #dddddd;
+  border-bottom: solid 1px #e9ecef;
   padding: 5px 0; }
 
 .form-label {
-  font-size: 13px;
-  color: #616161; }
-
-.form-row {
-  font-size: 13px;
-  line-height: 18px;
-  color: #616161; }
-
-.form-actions {
-  width: 100%;
-  background: #f3f3f3;
-  border-radius: 4px;
-  padding: 10px 150px;
-  box-shadow: inset 0 0 2px 0px #0000001c; }
-
-.form-horizontal .form-row {
-  margin-bottom: 15px; }
-
-.form-horizontal .form-label {
-  float: left;
-  width: 150px;
-  padding-top: 5px;
-  text-align: right; }
-
-.form-horizontal .form-controls {
-  margin-left: 170px; }
-
-.form-horizontal .form-actions {
-  padding-left: 170px; }
+  font-size: 13px; }
 
 .form-label-checkbox {
   padding-top: 5px; }
 
-.help-box {
-  font-style: italic; }
+.form-row {
+  font-size: 13px;
+  line-height: 18px; }
 
-.form-row .input-text,
-.form-row input[type="text"] {
+.form-actions {
+  background: #f3f3f3;
+  border-radius: 4px;
+  box-shadow: inset 0 0 2px 0px #0000001c;
+  padding: 10px 100px;
+  width: 100%; }
+
+.form-horizontal .form-row {
+  margin-bottom: 15px; }
+.form-horizontal .form-label {
+  float: left;
+  padding-top: 5px;
+  text-align: right;
+  width: 150px; }
+.form-horizontal .form-controls {
+  margin-left: 170px; }
+.form-horizontal .form-actions {
+  padding-left: 170px; }
+
+.form-row .input-text, .form-row input[type="text"] {
   vertical-align: baseline; }
 
-.form-controls
-select {
-  width: auto; }
+.form-controls select {
+  width: 200px; }
+.form-controls input:not([type="checkbox"]):not([type="radio"]) {
+  width: 200px; }
 
 table.table-small td {
   vertical-align: bottom; }
@@ -9866,56 +9514,75 @@ table.table-small td {
 .custom-date-time #time {
   width: 150px; }
 
-#market-quick-search {
-  position: absolute;
-  right: 30px;
-  top: 30px; }
-
+/*!
+ * OSClass – software for creating and publishing online classified advertising platforms
+ *
+ * Copyright (c) 2021.  Mindstellar
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+ *
+ *                     GNU GENERAL PUBLIC LICENSE
+ *                        Version 3, 29 June 2007
+ *
+ *  Copyright (C) 2007 Free Software Foundation, Inc. <http://fsf.org/>
+ *  Everyone is permitted to copy and distribute verbatim copies
+ *  of this license document, but changing it is not allowed.
+ *
+ *  You should have received a copy of the GNU Affero General Public
+ *  License along with this program. If not, see <http://www.gnu.org/licenses/>.
+ *
+ */
 .current-theme {
   padding-top: 20px; }
 
 .current-theme .theme {
   float: none;
-  width: auto;
+  height: auto !important;
   margin-right: 0;
-  height: auto !important; }
+  width: auto; }
 
 .current-theme .theme img {
   float: left; }
 
 .theme {
+  background-color: #f8f9fa;
+  float: left;
+  font-size: .95rem;
   margin-bottom: 40px;
-  background-color: #f3f3f3;
+  margin-right: 20px;
   padding: 10px;
   border-radius: 4px;
-  float: left;
-  width: 250px;
-  margin-right: 20px;
-  font-size: 12px; }
+  width: 250px; }
 
 .theme img {
-  width: 250px;
+  border: solid 1px #e9ecef;
   margin-right: 20px;
-  border: solid 1px #dddddd;
+  width: 250px;
   border-radius: 4px; }
 
 .theme .theme-actions {
-  position: absolute;
+  background-color: rgba(243, 243, 243, 0.9);
+  border-top: solid 1px #e9ecef;
   bottom: 4px;
   left: 1px;
   padding: 6px 0 1px 6px;
-  width: 244px;
-  border-top: solid 1px #dddddd;
-  background-color: rgba(243, 243, 243, 0.9);
-  *background-color: #f3f3f3; }
+  position: absolute;
+  width: 244px; }
 
 .theme .theme-actions .btn {
+  margin-bottom: 5px;
   padding-left: 6px;
-  padding-right: 6px;
-  margin-bottom: 5px; }
+  padding-right: 6px; }
 
 .theme-actions a.delete {
-  color: #616161; }
+  color: #6c757d; }
 
 .theme .theme-info,
 .theme .theme-info h3,
@@ -9929,8 +9596,8 @@ table.table-small td {
   height: 285px; }
 
 .appearance .theme img {
-  width: 250px;
-  height: 187px; }
+  height: 187px;
+  width: 250px; }
 
 tr.plugin td {
   padding: 10px; }
@@ -9938,42 +9605,36 @@ tr.plugin td {
 tr.plugin h3, tr.plugin .h3,
 tr.plugin h3,
 tr.plugin .h3 {
+  color: #343a40;
   font-weight: bold;
-  color: #383838;
   margin: 0; }
 
 .plugin-actions {
   padding-top: 10px; }
 
+.available-theme .card, .available-theme .widget-box, .available-theme .iframe-category {
+  width: 250px; }
+
 .flashmessage-inline {
   display: inline-block;
-  padding: 0 10px;
   min-height: 0;
+  padding: 0 10px;
   border-radius: 4px; }
 
 .flashmessage-inline p {
   margin: 5px 0; }
 
 #error_list {
-  padding: 15px;
-  display: none;
   background: #F2DEDE;
   border: 1px solid;
   color: #B94A48;
-  border-radius: 4px; }
+  display: none;
+  padding: 15px;
+  border-radius: 4px;
+  list-style-type: none; }
 
 #content-page .flashmessage {
-  /*padding:15px;
-  min-height:0;
-  margin-bottom:15px;*/
-  border-radius: 4px;
-  /*
-  > p:first-child{
-    margin-top:0;
-  }
-  > p:last-child{
-    margin-bottom:0;
-  }*/ }
+  border-radius: 4px; }
 #content-page .flashmessage-info {
   border-top: solid 1px #BCE8F1; }
 #content-page .flashmessage-error {
@@ -9983,18 +9644,162 @@ tr.plugin .h3 {
 #content-page .flashmessage-warning {
   border-top: solid 1px #FBEED5; }
 
+.callout-primary {
+  color: #343a40;
+  background-color: #e7f1ff;
+  border-color: #0c63e4;
+  border-left: 0.35rem solid #0d6efd;
+  border-radius: 4px;
+  display: inline-block;
+  font-size: .85rem;
+  font-style: italic;
+  margin-top: .2rem;
+  padding: .35rem .50rem; }
+  .callout-primary .callout-link {
+    color: #2a2e33; }
+
+.callout-secondary {
+  color: #343a40;
+  background-color: #f0f1f2;
+  border-color: #616971;
+  border-left: 0.35rem solid #6c757d;
+  border-radius: 4px;
+  display: inline-block;
+  font-size: .85rem;
+  font-style: italic;
+  margin-top: .2rem;
+  padding: .35rem .50rem; }
+  .callout-secondary .callout-link {
+    color: #2a2e33; }
+
+.callout-success {
+  color: #343a40;
+  background-color: #e8f3ee;
+  border-color: #177a4c;
+  border-left: 0.35rem solid #198754;
+  border-radius: 4px;
+  display: inline-block;
+  font-size: .85rem;
+  font-style: italic;
+  margin-top: .2rem;
+  padding: .35rem .50rem; }
+  .callout-success .callout-link {
+    color: #2a2e33; }
+
+.callout-ok {
+  color: #343a40;
+  background-color: #e8f3ee;
+  border-color: #177a4c;
+  border-left: 0.35rem solid #198754;
+  border-radius: 4px;
+  display: inline-block;
+  font-size: .85rem;
+  font-style: italic;
+  margin-top: .2rem;
+  padding: .35rem .50rem; }
+  .callout-ok .callout-link {
+    color: #2a2e33; }
+
+.callout-info {
+  color: #343a40;
+  background-color: #e7fafe;
+  border-color: #0cb6d8;
+  border-left: 0.35rem solid #0dcaf0;
+  border-radius: 4px;
+  display: inline-block;
+  font-size: .85rem;
+  font-style: italic;
+  margin-top: .2rem;
+  padding: .35rem .50rem; }
+  .callout-info .callout-link {
+    color: #2a2e33; }
+
+.callout-warning {
+  color: #343a40;
+  background-color: #fff9e6;
+  border-color: #e6ae06;
+  border-left: 0.35rem solid #ffc107;
+  border-radius: 4px;
+  display: inline-block;
+  font-size: .85rem;
+  font-style: italic;
+  margin-top: .2rem;
+  padding: .35rem .50rem; }
+  .callout-warning .callout-link {
+    color: #2a2e33; }
+
+.callout-danger {
+  color: #343a40;
+  background-color: #fcebec;
+  border-color: #c6303e;
+  border-left: 0.35rem solid #dc3545;
+  border-radius: 4px;
+  display: inline-block;
+  font-size: .85rem;
+  font-style: italic;
+  margin-top: .2rem;
+  padding: .35rem .50rem; }
+  .callout-danger .callout-link {
+    color: #2a2e33; }
+
+.callout-error {
+  color: #343a40;
+  background-color: #fcebec;
+  border-color: #c6303e;
+  border-left: 0.35rem solid #dc3545;
+  border-radius: 4px;
+  display: inline-block;
+  font-size: .85rem;
+  font-style: italic;
+  margin-top: .2rem;
+  padding: .35rem .50rem; }
+  .callout-error .callout-link {
+    color: #2a2e33; }
+
+.callout-light {
+  color: #343a40;
+  background-color: #fefeff;
+  border-color: #dfe0e1;
+  border-left: 0.35rem solid #f8f9fa;
+  border-radius: 4px;
+  display: inline-block;
+  font-size: .85rem;
+  font-style: italic;
+  margin-top: .2rem;
+  padding: .35rem .50rem; }
+  .callout-light .callout-link {
+    color: #2a2e33; }
+
+.callout-dark {
+  color: #343a40;
+  background-color: #e9e9ea;
+  border-color: #1e2125;
+  border-left: 0.35rem solid #212529;
+  border-radius: 4px;
+  display: inline-block;
+  font-size: .85rem;
+  font-style: italic;
+  margin-top: .2rem;
+  padding: .35rem .50rem; }
+  .callout-dark .callout-link {
+    color: #2a2e33; }
+
+.callout-block {
+  display: block;
+  padding: 1rem .85rem; }
+
 div.guideline-header {
   position: relative; }
 
 pre,
 code {
-  padding: 8px;
-  background-color: #f3f3f3;
-  border: 1px solid #dddddd;
-  word-break: break-all;
   word-wrap: break-word;
+  background-color: #f8f9fa;
+  border: 1px solid #e9ecef;
+  padding: 8px;
   white-space: pre;
   white-space: pre-wrap;
+  word-break: break-all;
   border-radius: 4px; }
 
 #listing-toolbar,
@@ -10003,9 +9808,9 @@ code {
   margin-bottom: 16px; }
 
 #datatablesForm #bulk-actions {
+  left: 0;
   position: absolute;
-  top: 0;
-  left: 0; }
+  top: 0; }
 
 .submit-right {
   margin: 0; }
@@ -10022,13 +9827,12 @@ code {
 #item-form label {
   display: block;
   font-size: 14px;
-  color: #616161;
-  margin-top: 10px;
-  margin-bottom: 5px; }
+  margin-bottom: 5px;
+  margin-top: 10px; }
 
 .input-title-wide input {
-  width: 516px;
-  height: 22px; }
+  height: 22px;
+  width: 516px; }
 
 .input-title-wide label {
   font-size: 18px !important; }
@@ -10037,15 +9841,15 @@ code {
   width: 516px; }
 
 #item-form .input-currency {
-  vertical-align: bottom;
   font-size: 18px;
-  line-height: 28px; }
+  line-height: 28px;
+  vertical-align: bottom; }
 
 #item-form h3.label, #item-form .label.h3 {
-  font-weight: normal;
+  color: #6c757d;
   font-size: 14px;
-  margin: 0 0 10px;
-  color: #616161; }
+  font-weight: 500;
+  margin: 0 0 10px; }
 
 /*
 #item-form .well input {
@@ -10062,9 +9866,9 @@ code {
   margin-bottom: 25px; }
 
 #item-form #photos {
+  background-color: #f8f9fa;
+  border: solid 1px #e9ecef;
   padding: 10px;
-  background-color: #f3f3f3;
-  border: solid 1px #dddddd;
   border-radius: 4px; }
 
 /*
@@ -10128,13 +9932,16 @@ code {
 #showEmail {
   width: inherit !important; }
 
+#multiLangTabsContent textarea {
+  min-height: 30rem; }
+
 .category-details-form label {
   display: block; }
 
 .category-details-form input,
 .category-details-form textarea {
-  width: 250px;
-  margin-bottom: 20px; }
+  margin-bottom: 20px;
+  width: 250px; }
 
 .ui-sortable {
   margin: 0;
@@ -10153,8 +9960,8 @@ code {
 
 .list-categories .category_div,
 .cfield-div {
-  background-color: #f3f3f3;
-  border: solid 1px #dddddd;
+  background-color: #f8f9fa;
+  border: solid 1px #e9ecef;
   padding: 5px;
   border-radius: 4px;
   position: relative; }
@@ -10167,23 +9974,23 @@ code {
   padding-left: 87px; }
 
 .ico-droppable {
-  position: absolute;
-  left: 1px;
-  top: 1px;
-  border-right: solid 1px #dddddd;
-  width: 34px;
+  border-right: solid 1px #e9ecef;
+  cursor: move;
   height: 36px;
+  left: 1px;
   margin-left: 2px;
-  cursor: move; }
+  position: absolute;
+  top: 1px;
+  width: 34px; }
 
 .ico-childrens {
-  position: absolute;
-  left: 36px;
-  top: 1px;
-  border-right: solid 1px #dddddd;
-  width: 38px;
+  border-right: solid 1px #e9ecef;
   height: 36px;
-  margin-left: 2px; }
+  left: 36px;
+  margin-left: 2px;
+  position: absolute;
+  top: 1px;
+  width: 38px; }
 
 .ui-sortable li ul li ul li ul .category_row {
   padding-left: 49px; }
@@ -10198,31 +10005,14 @@ code {
 }
 */
 .ico-childrens .toggle {
-  /*.rounded-corners(15px);
-  min-width:18px;
-  height:16px;
-  font-size:12px;
-  padding-top:2px;
-  float:left;
-  background:white;
-  position: relative;
-  margin-top:6px;
-  margin-left:7px;
-  text-align:center;
-  margin-right:8px;
-  font-style:normal;
-  font-weight:bold;
-  background-color: $color-gray-ash;
-  color:$color-white;
-  border:solid 1px $color-gray-ash;*/
-  width: 10px;
-  height: 10px;
   display: block;
   float: left;
-  text-indent: -99999px;
-  padding: 5px;
+  height: 10px;
   margin-left: 7px;
-  margin-top: 7px; }
+  margin-top: 7px;
+  padding: 5px;
+  text-indent: -99999px;
+  width: 10px; }
 
 /* categories */
 .list-categories a {
@@ -10230,10 +10020,9 @@ code {
 
 .list-categories .name-cat,
 .list-fields .name-edit-cfield {
-  padding-right: 300px;
+  color: #6c757d;
   font-size: 15px;
-  line-height: 26px;
-  color: #616161; }
+  line-height: 26px; }
 
 .list-fields .name-edit-cfield {
   padding-left: 10px; }
@@ -10269,47 +10058,47 @@ div.disabled .category_row,
   clear: both; }
 
 #advanced_fields_iframe {
+  border-bottom: solid 1px #e9ecef;
   font-size: 16px;
   font-weight: normal;
-  position: relative;
-  border-bottom: solid 1px #dddddd;
+  margin-bottom: 10px;
   padding-bottom: 5px;
   padding-left: 15px;
-  margin-bottom: 10px; }
+  position: relative; }
 
 .custom-field-shrink .icon-more:before {
-  font-family: "bootstrap-icons";
-  content: "\f231"; }
+  content: "\f231";
+  font-family: "bootstrap-icons"; }
 
 .custom-field-expanded .icon-more:before {
-  font-family: "bootstrap-icons";
-  content: "\f229"; }
+  content: "\f229";
+  font-family: "bootstrap-icons"; }
 
 .treeview, .treeview ul {
-  padding: 0;
+  list-style: none;
   margin: 0;
-  list-style: none; }
+  padding: 0; }
 
 .treeview ul {
   margin-top: 0; }
 
 .treeview .hitarea {
-  height: 12px;
-  width: 12px;
-  float: left;
   cursor: pointer;
-  margin-right: 5px; }
+  float: left;
+  height: 12px;
+  margin-right: 5px;
+  width: 12px; }
   .treeview .hitarea:before {
-    font-family: 'bootstrap-icons';
-    content: "\f2e5"; }
+    content: "\f2e5";
+    font-family: 'bootstrap-icons'; }
 
 .treeview ul li {
   margin: 0;
   padding: 3px 0 3px 16px; }
 
 #treecontrol {
-  margin: 1em 0;
-  display: none; }
+  display: none;
+  margin: 1em 0; }
 
 .treeview .hover {
   cursor: pointer; }
@@ -10317,14 +10106,8 @@ div.disabled .category_row,
 .treeview .expandable-hitarea {
   margin-right: 5px; }
   .treeview .expandable-hitarea:before {
-    font-family: 'bootstrap-icons';
-    content: "\f4f9"; }
-
-.treeview .placeholder {
-  background: url(../images/split.png) 0 0 no-repeat;
-  height: 12px;
-  width: 12px;
-  display: block; }
+    content: "\f4f9";
+    font-family: 'bootstrap-icons'; }
 
 form h3, form .h3 {
   font-size: 16px;
@@ -10337,70 +10120,35 @@ form h3, form .h3 {
   border: 0;
   padding: 0; }
 
-/*.ui-osc-tabs .ui-tabs-panel{
-    padding:15px 0;
-}*/
 .ui-osc-tabs .ui-tabs-nav {
   border: 0;
   padding: 4px 5px 0;
   border-radius: 4px 4px 0 0;
-  border-bottom: solid 1px #dddddd; }
+  border-bottom: solid 1px #e9ecef; }
 
-/*.ui-tabs-right .ui-tabs-nav li.ui-state-default {float: right; }
-.ui-tabs-right .ui-tabs-nav li a { float: right; }*/
 .ui-osc-tabs .ui-tabs-nav li {
   float: right; }
 
-/*
-.ui-dialog{
-    padding:0;
-    border:0;
-}
-.ui-dialog .ui-dialog-content{
-    padding:0;
-    border:solid 1px $color-blue-border;
-    @include rounded-corners(0 0 4px 4px);
-
-}
-.ui-dialog .ui-dialog-titlebar{
-    @include rounded-corners(4px 4px 0 0);
-    border:none;
-    background-color:$color-blue;
-    color:$color-white;
-    font-weight:normal;
-    font-size:16px;
-    border:solid 1px $color-blue-border;
-    border-bottom:none;
-}
-.osc-modal-content{
-    padding:15px;
-}
-
-#downloading{
-    font-size:15px;
-    color:$color-gray-dim;
-    text-align:center;
-}*/
 .ui-dialog {
+  background: #f8f9fa;
   border: 0;
-  background: #f3f3f3;
   padding: 5px;
   border-radius: 4px; }
 
 .ui-dialog .ui-dialog-titlebar {
+  border: none;
+  color: #495057;
+  font-size: 18px;
   margin: 0;
   padding: 7px 5px;
-  font-size: 18px;
-  color: #474749;
   position: relative;
   border-radius: 4px 4px 0 0;
-  border: none;
   border-radius: 4px 4px 0 0; }
 
 .ui-dialog .ui-dialog-title {
-  margin: 0;
   font-size: 18px;
-  font-weight: normal; }
+  font-weight: normal;
+  margin: 0; }
 
 .ui-dialog .ui-dialog-content {
   background: #ffffff;
@@ -10410,12 +10158,12 @@ form h3, form .h3 {
 
 .ui-dialog .form-actions {
   border-radius: 0 0 4px 4px;
+  bottom: 0;
+  left: 0;
   margin-bottom: 0;
   padding: 0;
-  bottom: 0;
-  width: 100%;
-  left: 0;
-  position: absolute; }
+  position: absolute;
+  width: 100%; }
 
 .ui-dialog .form-actions .wrapper {
   border-radius: none; }
@@ -10424,14 +10172,14 @@ form h3, form .h3 {
   color: #fff; }
 
 .ui-dialog .has-form-actions {
-  position: relative;
-  padding-bottom: 85px !important; }
+  padding-bottom: 85px !important;
+  position: relative; }
 
 .osc-modal-content-market img {
+  border: solid 2px #f8f9fa;
   float: left;
-  max-height: 106px;
-  border: solid 2px #f3f3f3;
   margin-right: 20px;
+  max-height: 106px;
   border-radius: 4px; }
 
 .osc-modal-content-market .table {
@@ -10439,8 +10187,8 @@ form h3, form .h3 {
   width: 300px; }
 
 .osc-modal-content-market .form-row .market-data {
-  padding-left: 100px;
-  display: block; }
+  display: block;
+  padding-left: 100px; }
 
 .plugin-support-icon {
   margin: 5px; }
@@ -10448,30 +10196,80 @@ form h3, form .h3 {
 #upload-plugins .table {
   border: none; }
   #upload-plugins .table tr {
-    vertical-align: middle;
-    border-right: 0.05rem solid #ced4da; }
+    border-bottom: 0.05rem solid #e9ecef;
+    border-right: 0.05rem solid #ced4da;
+    vertical-align: middle; }
   #upload-plugins .table thead tr {
     border: 0.05rem solid #ced4da;
     border-left-width: .2rem; }
   #upload-plugins .table tbody tr a {
-    text-decoration-line: none;
     font-weight: 500;
-    text-align: center; }
-  #upload-plugins .table tbody tr i {
     text-align: center;
+    text-decoration-line: none; }
+  #upload-plugins .table tbody tr i {
+    color: #343a40;
     font-size: 1.2rem;
-    color: #343a40; }
+    text-align: center; }
 #upload-plugins .plugin-active {
   background: #d1e7dd;
-  color: #343a40;
-  border-left: 0.2rem solid #198754; }
+  border-left: 0.2rem solid #198754;
+  color: #343a40; }
 #upload-plugins .plugin-disabled {
   background: #fff3cd;
-  color: #343a40;
-  border-left: 0.2rem solid #ffc107; }
+  border-left: 0.2rem solid #ffc107;
+  color: #343a40; }
 #upload-plugins .plugin-uninstalled {
   background: #f8d7da;
-  color: #343a40;
-  border-left: 0.2rem solid #dc3545; }
+  border-left: 0.2rem solid #dc3545;
+  color: #343a40; }
+
+/*!Custom Responsive rules */
+@media (max-width: 576px) {
+  .form-horizontal .form-row .form-label {
+    float: none;
+    font-weight: 700;
+    padding-top: .5rem;
+    text-align: inherit;
+    width: 100%; }
+  .form-horizontal .form-row .form-controls {
+    margin-left: inherit; }
+    .form-horizontal .form-row .form-controls select {
+      width: 100%; }
+    .form-horizontal .form-row .form-controls input:not([type="checkbox"]):not([type="radio"]) {
+      width: 100%; }
+  .form-horizontal .form-actions {
+    padding: 1rem 1rem; }
+
+  #datatablesForm .table .col-location {
+    display: none;
+    visibility: hidden; }
+  #datatablesForm .table .col-exp {
+    display: none; }
+  #datatablesForm .table .col-date {
+    display: none; }
+
+  #listing-toolbar + #datatablesForm #bulk-actions, #admins-toolbar + #datatablesForm #bulk-actions, #users-toolbar + #datatablesForm #bulk-actions {
+    left: inherit;
+    max-width: 12rem;
+    position: absolute;
+    right: 0;
+    top: -3rem; } }
+@media (max-width: 768px) {
+  #header .navbar-nav .dropdown-menu {
+    position: absolute; }
+
+  #content-page {
+    padding: .5rem .5rem 3rem; }
+    #content-page > div > div.row-wrapper {
+      padding: .1rem; }
+
+  #datatablesForm .table .col-title {
+    min-width: 100px; }
+  #datatablesForm .table .col-expiration {
+    display: none; }
+  #datatablesForm .table .col-status-border {
+    display: none; }
+  #datatablesForm .table .col-status {
+    border-left: 1px solid rgba(0, 0, 0, 0.1); } }
 
 /*# sourceMappingURL=main.css.map */
