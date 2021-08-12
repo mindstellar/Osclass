@@ -88,10 +88,6 @@ function getServerParam($param, $htmlencode = false, $xss_check = true, $quotes_
         return htmlspecialchars(stripslashes($value), ENT_NOQUOTES);
     }
 
-    if (get_magic_quotes_gpc()) {
-        $value = strip_slashes_extended($value);
-    }
-
     return ($value);
 }
 

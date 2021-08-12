@@ -33,9 +33,7 @@ define('LIB_PATH', ABS_PATH . 'oc-includes/');
 define('CONTENT_PATH', ABS_PATH . 'oc-content/');
 define('TRANSLATIONS_PATH', CONTENT_PATH . 'languages/');
 define('OSC_INSTALLING', 1);
-
 require_once LIB_PATH . 'vendor/autoload.php';
-
 if (extension_loaded('mysqli')) {
     require_once LIB_PATH . 'osclass/helpers/hPreference.php';
 }
@@ -49,11 +47,11 @@ require_once LIB_PATH . 'osclass/helpers/hPlugins.php';
 require_once LIB_PATH . 'osclass/helpers/hUtils.php';
 require_once LIB_PATH . 'osclass/helpers/hTranslations.php';
 require_once LIB_PATH . 'osclass/helpers/hSanitize.php';
-require_once LIB_PATH . 'osclass/default-constants.php';
 require_once LIB_PATH . 'osclass/install-functions.php';
 require_once LIB_PATH . 'osclass/utils.php';
 require_once LIB_PATH . 'osclass/locales.php';
-
+require_once LIB_PATH . 'osclass/default-constants.php';
+define('WEB_PATH',osc_get_absolute_url());
 Params::init();
 Session::newInstance()->session_start();
 
