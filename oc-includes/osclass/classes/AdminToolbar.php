@@ -148,7 +148,6 @@ class AdminToolbar
     public function render()
     {
         if (count($this->nodes) > 0) {
-
             foreach ($this->nodes as $value) {
                 $hasSubmenu = false;
                 if (isset($value->submenu) && is_array($value->submenu)) {
@@ -159,7 +158,7 @@ class AdminToolbar
                     foreach ($value->meta as $k => $v) {
                         if ($k === 'class') {
                             $v = "nav-link " . $v;
-                            if($hasSubmenu){
+                            if ($hasSubmenu) {
                                 $v .= ' dropdown';
                             }
                         }
@@ -168,21 +167,21 @@ class AdminToolbar
                 }
                 echo '<li class="nav-item" id="osc_toolbar_' . $value->id . '" ><a ' . $meta . ' href="' . $value->href . '" '
                      . ((isset($value->target)) ? 'target="' . $value->target . '"' : '') . '>' . $value->title . '</a>';
-                if($hasSubmenu === true) {
+                if ($hasSubmenu === true) {
                     echo '<ul class="osc_admin_submenu" id="osc_toolbar_sub_' . $value->id . '">';
                         //echo '<ul class="osc_admin_submenu" id="osc_toolbar_sub_' . $value->id . '"></ul>';
-                        foreach ($value->submenu as $subvalue) {
-                            if (isset($subvalue->subid)) {
-                                $submeta = '';
-                                if (isset($subvalue->meta)) {
-                                    foreach ($subvalue->meta as $sk => $sv) {
-                                        $submeta .= $sk . '="' . $sv . '" ';
-                                    }
+                    foreach ($value->submenu as $subvalue) {
+                        if (isset($subvalue->subid)) {
+                            $submeta = '';
+                            if (isset($subvalue->meta)) {
+                                foreach ($subvalue->meta as $sk => $sv) {
+                                    $submeta .= $sk . '="' . $sv . '" ';
                                 }
-                                echo '<li><a ' . $submeta . ' href="' . $subvalue->href . '" ' . ((isset($subvalue->target))
-                                        ? 'target="' . $subvalue->target . '"' : '') . '>' . $subvalue->title . '</a><li>';
                             }
+                            echo '<li><a ' . $submeta . ' href="' . $subvalue->href . '" ' . ((isset($subvalue->target))
+                                    ? 'target="' . $subvalue->target . '"' : '') . '>' . $subvalue->title . '</a><li>';
                         }
+                    }
 
 
                     echo '</ul>';

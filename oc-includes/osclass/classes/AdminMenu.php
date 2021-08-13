@@ -479,7 +479,6 @@ class AdminMenu
                 $active = true;
             }
             $sMenu .= $this->renderMenu($menuId, $value, $current_menu, $current_submenu);
-
         }
 
         $sMenu .= '</ul></div>' . PHP_EOL;

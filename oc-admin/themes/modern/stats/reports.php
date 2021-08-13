@@ -180,7 +180,7 @@ osc_add_hook('admin_header', 'customHead', 10);
                 <div class="btn-group btn-group-sm float-end">
                 <?php
                 $comments_stats_intervals = ['month', 'week', 'day'];
-                if(!$type){
+                if (!$type) {
                     $type = 'day';
                 }
                 foreach ($comments_stats_intervals as $k => $v) {

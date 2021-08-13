@@ -34,7 +34,7 @@ class FieldForm extends Form
 {
     public static function i18n_datePicker()
     {
-?>
+        ?>
         <script>
             $.datepicker.regional['custom'] = { // Default regional settings
                 closeText: '<?php echo osc_esc_js(__('Done')); ?>', // Display text for close link

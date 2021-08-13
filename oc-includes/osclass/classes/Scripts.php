@@ -120,7 +120,7 @@ class Scripts extends Dependencies
         Plugins::addHook('admin_footer',
             function () {
                 Plugins::runHook('admin_scripts_loaded');
-            },20);
+            }, 20);
     }
 
     /**
@@ -165,7 +165,7 @@ class Scripts extends Dependencies
         Plugins::addHook('footer',
             function () {
                 Plugins::runHook('scripts_loaded');
-            },20);
+            }, 20);
     }
 
     /**

@@ -123,7 +123,6 @@ class Item extends FormInputs
     public function printMultiLangTab()
     {
         if (count($this->locales) > 1) {
-
             echo '<div id="language-tab" class="mt-3">';
             echo '<ul class="nav nav-tabs" id="multiLangTabs" role="tablist">';
             foreach ($this->locales as $locale) {

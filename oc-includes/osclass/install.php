@@ -51,7 +51,7 @@ require_once LIB_PATH . 'osclass/install-functions.php';
 require_once LIB_PATH . 'osclass/utils.php';
 require_once LIB_PATH . 'osclass/locales.php';
 require_once LIB_PATH . 'osclass/default-constants.php';
-define('WEB_PATH',osc_get_absolute_url());
+define('WEB_PATH', osc_get_absolute_url());
 Params::init();
 Session::newInstance()->session_start();
 

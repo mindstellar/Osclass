@@ -129,13 +129,13 @@ $withFilters = __get('withFilters');
                     <option value="10"><?php printf(__('%d Listings'), 10); ?></option>
                     <option value="25" <?php if (Params::getParam('iDisplayLength') == 25) {
                         echo 'selected';
-                    } ?> ><?php printf(__('%d Listings'), 25); ?></option>
+                                       } ?> ><?php printf(__('%d Listings'), 25); ?></option>
                     <option value="50" <?php if (Params::getParam('iDisplayLength') == 50) {
                         echo 'selected';
-                    } ?> ><?php printf(__('%d Listings'), 50); ?></option>
+                                       } ?> ><?php printf(__('%d Listings'), 50); ?></option>
                     <option value="100" <?php if (Params::getParam('iDisplayLength') == 100) {
                         echo 'selected';
-                    } ?> ><?php printf(__('%d Listings'), 100); ?></option>
+                                        } ?> ><?php printf(__('%d Listings'), 100); ?></option>
                 </select>
             </form>
             <form method="get" action="<?php echo osc_admin_base_url(true); ?>" id="shortcut-filters"
@@ -152,7 +152,7 @@ $withFilters = __get('withFilters');
                     <?php } ?>
                     <a data-bs-toggle="modal" data-bs-target="#display-filters" href="#" class="btn btn-dim <?php if ($withFilters) {
                         echo 'btn-red';
-                    } ?>" title="<?php _e('Show filters'); ?>"><i class="bi bi-filter"></i>
+                                                                                                            } ?>" title="<?php _e('Show filters'); ?>"><i class="bi bi-filter"></i>
                     </a>
                     <button type="submit" class="btn btn-primary" title="<?php echo osc_esc_html(__('Find')); ?>">
                         <i class="bi bi-search"></i>

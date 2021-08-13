@@ -1748,7 +1748,8 @@ class ItemActions
      *
      * @return string
      */
-    private function validateCommonInput(string $flash_error, $aItem) {
+    private function validateCommonInput(string $flash_error, $aItem)
+    {
         $flash_error .= ((!osc_validate_category($aItem['catId'])) ? _m('Category invalid.') . PHP_EOL : '');
         $flash_error .= ((!osc_validate_number($aItem['price'])) ? _m('Price must be a number.') . PHP_EOL : '');
         $flash_error .= ((!osc_validate_max(number_format($aItem['price'], 0, '', ''), 15))
@@ -1780,7 +1781,7 @@ class ItemActions
         }
 
         return $flash_error;
-}
+    }
 }
 
 if (osc_force_jpeg()) {

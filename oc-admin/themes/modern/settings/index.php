@@ -242,26 +242,26 @@ osc_current_admin_theme_path('parts/header.php'); ?>
                         <div class="form-controls">
                             <select class="form-select form-select-sm " name="weekStart" id="weekStart">
                                 <option value="0" <?php if (osc_week_starts_at() == '0') {
-                                ?>selected="selected"<?php
-                                } ?>><?php _e('Sunday'); ?></option>
+                                    ?>selected="selected"<?php
+                                                  } ?>><?php _e('Sunday'); ?></option>
                                 <option value="1" <?php if (osc_week_starts_at() == '1') {
-                                ?>selected="selected"<?php
-                                } ?>><?php _e('Monday'); ?></option>
+                                    ?>selected="selected"<?php
+                                                  } ?>><?php _e('Monday'); ?></option>
                                 <option value="2" <?php if (osc_week_starts_at() == '2') {
-                                ?>selected="selected"<?php
-                                } ?>><?php _e('Tuesday'); ?></option>
+                                    ?>selected="selected"<?php
+                                                  } ?>><?php _e('Tuesday'); ?></option>
                                 <option value="3" <?php if (osc_week_starts_at() == '3') {
-                                ?>selected="selected"<?php
-                                } ?>><?php _e('Wednesday'); ?></option>
+                                    ?>selected="selected"<?php
+                                                  } ?>><?php _e('Wednesday'); ?></option>
                                 <option value="4" <?php if (osc_week_starts_at() == '4') {
-                                ?>selected="selected"<?php
-                                } ?>><?php _e('Thursday'); ?></option>
+                                    ?>selected="selected"<?php
+                                                  } ?>><?php _e('Thursday'); ?></option>
                                 <option value="5" <?php if (osc_week_starts_at() == '5') {
-                                ?>selected="selected"<?php
-                                } ?>><?php _e('Friday'); ?></option>
+                                    ?>selected="selected"<?php
+                                                  } ?>><?php _e('Friday'); ?></option>
                                 <option value="6" <?php if (osc_week_starts_at() == '6') {
-                                ?>selected="selected"<?php
-                                } ?>><?php _e('Saturday'); ?></option>
+                                    ?>selected="selected"<?php
+                                                  } ?>><?php _e('Saturday'); ?></option>
                             </select>
                         </div>
                     </div>
@@ -276,7 +276,7 @@ osc_current_admin_theme_path('parts/header.php'); ?>
                                 foreach ($timezone as $tz) { ?>
                                     <option value="<?php echo $tz; ?>" <?php if ($selected_tz === $tz) {
                                         ?> selected="selected" <?php
-                                    } ?>><?php echo $tz; ?></option>
+                                                   } ?>><?php echo $tz; ?></option>
                                 <?php } ?>
                             </select>
                         </div>
@@ -298,7 +298,7 @@ osc_current_admin_theme_path('parts/header.php'); ?>
                                         <div>
                                             <input type="radio" name="df" id="<?php echo $df; ?>"
                                                    value="<?php echo $df; ?>" <?php echo($checked ? 'checked="checked"'
-                                                : ''); ?>
+                                                    : ''); ?>
                                                    onclick="document.getElementById('dateFormat').value = '<?php echo $df; ?>';"/>
                                             <?php echo date($df); ?>
                                         </div>
@@ -307,12 +307,12 @@ osc_current_admin_theme_path('parts/header.php'); ?>
                                         <div class="input-group-text">
                                             <input type="radio" name="df" id="df_custom"
                                                    value="df_custom" <?php echo($custom_checked ? 'checked="checked"'
-                                                : ''); ?> />
+                                                    : ''); ?> />
                                         </div>
                                         <input type="text" name="df_custom_text" id="df_custom_text"
                                                class="input-medium" <?php echo($custom_checked ? 'value="'
                                                                                                  . osc_esc_html(osc_date_format()) . '"'
-                                            : ''); ?>
+                                                : ''); ?>
                                                onchange="document.getElementById('dateFormat').value = this.value;"
                                                onkeyup="custom_date(this.value);"/>
                                     </div>
@@ -334,7 +334,7 @@ osc_current_admin_theme_path('parts/header.php'); ?>
                                         <div>
                                             <input type="radio" name="tf" id="<?php echo $tf; ?>"
                                                    value="<?php echo $tf; ?>" <?php echo($checked ? 'checked="checked"'
-                                                : ''); ?>
+                                                    : ''); ?>
                                                    onclick="document.getElementById('timeFormat').value = '<?php echo $tf; ?>';"/>
                                             <?php echo date($tf); ?>
                                         </div>
@@ -343,7 +343,7 @@ osc_current_admin_theme_path('parts/header.php'); ?>
                                         <div class="input-group-text">
                                             <input type="radio" name="tf" id="tf_custom"
                                                    value="tf_custom" <?php echo($custom_checked ? 'checked="checked"'
-                                                : ''); ?> />
+                                                    : ''); ?> />
                                         </div>
                                         <input type="text" class="input-medium" <?php echo($custom_checked ? 'value="'
                                                                                                              . osc_esc_html(osc_time_format())

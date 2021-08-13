@@ -50,7 +50,7 @@ function customPageHeader()
         </a>
         <a href="<?php echo osc_admin_base_url(true); ?>?page=languages&amp;action=add"
            class="ms-1 text-success float-end" data-bs-toggle="tooltip" data-bs-placement="bottom" title="<?php _e('Upload language');
-        ?>"><i class="bi bi-plus-circle-fill"></i></a>
+            ?>"><i class="bi bi-plus-circle-fill"></i></a>
     </h1>
     <?php
 }
@@ -129,7 +129,7 @@ osc_current_admin_theme_path('parts/header.php');
                             <?php foreach ($array as $key => $value) { ?>
                                 <td <?php if ($key == 0) {
                                     ?> class="col-bulkactions" <?php
-                                } ?>>
+                                    } ?>>
                                     <?php echo $value; ?>
                                 </td>
                             <?php } ?>
@@ -173,7 +173,7 @@ osc_current_admin_theme_path('parts/header.php');
 
                                 as $code => $name) { ?>
                             <option value="<?php echo $code; ?>"><?php echo $name; ?></option>
-                            <?php } ?>
+                                <?php } ?>
                         </select>
                     <?php } else { ?>
                         <p><?php _e('No official languages available.'); ?></p>

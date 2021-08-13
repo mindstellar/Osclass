@@ -71,7 +71,7 @@ function customHead()
                 var name = 'frame_' + id;
                 var id_ = 'frame_' + id;
                 var url = '<?php echo osc_admin_base_url(true); ?>?page=ajax&action=field_categories_iframe&<?php echo $csrf_token;
-                    ?>&id=' + id;
+                ?>&id=' + id;
                 $.ajax({
                     url: url,
                     context: document.body,
@@ -209,10 +209,10 @@ osc_current_admin_theme_path('parts/header.php');
                                 <div class="ms-auto btn-group">
                                     <a class="px-2 text-dark" href="javascript:void(0);"
                                        onclick="show_iframe('content_list_<?php echo $field['pk_i_id']; ?>','<?php echo
-                                       $field['pk_i_id']; ?>');" title="<?php _e('Edit'); ?>"><i class="bi bi-pencil-fill"></i></a>
+                                        $field['pk_i_id']; ?>');" title="<?php _e('Edit'); ?>"><i class="bi bi-pencil-fill"></i></a>
                                     <a class="px-2 text-dark" href="javascript:void(0);"
                                        onclick="delete_field('<?php echo $field['pk_i_id']; ?>');" title="<?php _e('Delete');
-                                    ?>">
+                                        ?>">
                                         <i class="bi bi-trash-fill"></i>
                                     </a>
                                 </div>
@@ -276,7 +276,7 @@ osc_current_admin_theme_path('parts/header.php');
             ).dataset.fieldId;
             let url = "<?php
                 echo osc_admin_base_url(true); ?>?page=ajax&action=delete_field&<?php echo osc_csrf_token_url();
-                ?>&id=" + fieldId;
+?>&id=" + fieldId;
             fetch(url, {
                 credentials: "same-origin"
             }).then(function(response) {

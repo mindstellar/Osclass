@@ -130,23 +130,23 @@ osc_current_admin_theme_path('parts/header.php');
                         <div class="form-controls">
                             <select name="e_type" id="e_type">
                                 <option value="" <?php if (osc_subdomain_type()) {
-                                ?>selected="selected"<?php
-                                } ?>><?php _e('No subdomains'); ?></option>
+                                    ?>selected="selected"<?php
+                                                 } ?>><?php _e('No subdomains'); ?></option>
                                 <option value="category" <?php if (osc_subdomain_type() === 'category') {
-                                ?>selected="selected"<?php
-                                } ?>><?php _e('Category based'); ?></option>
+                                    ?>selected="selected"<?php
+                                                         } ?>><?php _e('Category based'); ?></option>
                                 <option value="country" <?php if (osc_subdomain_type() === 'country') {
-                                ?>selected="selected"<?php
-                                } ?>><?php _e('Country based'); ?></option>
+                                    ?>selected="selected"<?php
+                                                        } ?>><?php _e('Country based'); ?></option>
                                 <option value="region" <?php if (osc_subdomain_type() === 'region') {
-                                ?>selected="selected"<?php
-                                } ?>><?php _e('Region based'); ?></option>
+                                    ?>selected="selected"<?php
+                                                       } ?>><?php _e('Region based'); ?></option>
                                 <option value="city" <?php if (osc_subdomain_type() === 'city') {
-                                ?>selected="selected"<?php
-                                } ?>><?php _e('City based'); ?></option>
+                                    ?>selected="selected"<?php
+                                                     } ?>><?php _e('City based'); ?></option>
                                 <option value="user" <?php if (osc_subdomain_type() === 'user') {
-                                ?>selected="selected"<?php
-                                } ?>><?php _e('User based'); ?></option>
+                                    ?>selected="selected"<?php
+                                                     } ?>><?php _e('User based'); ?></option>
                             </select>
                         </div>
                     </div>

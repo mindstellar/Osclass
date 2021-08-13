@@ -43,7 +43,7 @@ function customPageHeader()
     <h1><?php _e('Listings'); ?>
         <a class="ms-1 bi bi-question-circle-fill float-right" data-bs-target="#help-box" data-bs-toggle="collapse" href="#help-box"></a>
     </h1>
-<?php
+    <?php
 }
 
 osc_add_hook('admin_page_header', 'customPageHeader');
@@ -76,19 +76,19 @@ osc_current_admin_theme_path('parts/header.php'); ?>
                 <?php foreach (Params::getParamsAsArray('get') as $key => $value) { ?>
                     <?php if ($key !== 'iDisplayLength') { ?>
                         <input type="hidden" name="<?php echo osc_esc_html($key); ?>" value="<?php echo osc_esc_html($value); ?>" />
-                <?php }
+                    <?php }
                 } ?>
                 <select name="iDisplayLength" class="form-select form-select-sm " onchange="this.form.submit();">
                     <option value="10"><?php printf(__('%d Listings'), 10); ?></option>
                     <option value="25" <?php if (Params::getParam('iDisplayLength') == 25) {
                         echo 'selected';
-                } ?>><?php printf(__('%d Listings'), 25); ?></option>
+                                       } ?>><?php printf(__('%d Listings'), 25); ?></option>
                     <option value="50" <?php if (Params::getParam('iDisplayLength') == 50) {
                         echo 'selected';
-                } ?>><?php printf(__('%d Listings'), 50); ?></option>
+                                       } ?>><?php printf(__('%d Listings'), 50); ?></option>
                     <option value="100" <?php if (Params::getParam('iDisplayLength') == 100) {
                         echo 'selected';
-                } ?>><?php printf(__('%d Listings'), 100); ?></option>
+                                        } ?>><?php printf(__('%d Listings'), 100); ?></option>
                 </select>
             </form>
             <?php if ($sort !== 'date') { ?>

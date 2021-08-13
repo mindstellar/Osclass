@@ -53,12 +53,12 @@ class CategoryForm extends Form
         $default_item = null,
         $name = 'sCategory'
     ) {
-        $value = self::prepareOptionsArray($categories,0);
+        $value = self::prepareOptionsArray($categories, 0);
         $attribute['id'] = 'id';
         $default_value = $category['pk_i_id'] ?? '';
         $options['defaultValue'] = $default_value;
         $options['selectPlaceholder'] = $default_item;
-        echo (new self())->select($name,$value,$attribute,$options);
+        echo (new self())->select($name, $value, $attribute, $options);
     }
 
     /**
@@ -67,7 +67,8 @@ class CategoryForm extends Form
      *
      * @return array
      */
-    private static function prepareOptionsArray($array,$deep){
+    private static function prepareOptionsArray($array, $deep)
+    {
         $deep_string = str_repeat('&nbsp;&nbsp;', $deep);
         $deep++;
         $values = [];
@@ -76,11 +77,10 @@ class CategoryForm extends Form
             $option['option']['label'] = $deep_string.$c['s_name'];
 
             if (isset($c['categories']) && is_array($c['categories']) && ! empty($c['categories'])) {
-                $option['children'] = self::prepareOptionsArray($c['categories'],$deep);
+                $option['children'] = self::prepareOptionsArray($c['categories'], $deep);
             }
             $values[] = $option;
             unset($option);
-
         }
         return $values;
     }

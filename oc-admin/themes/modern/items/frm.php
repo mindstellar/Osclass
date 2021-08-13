@@ -143,8 +143,8 @@ function customHead()
     </script>
     <?php ItemForm::location_javascript_new('admin'); ?>
     <?php if (osc_images_enabled_at_items()) {
-    ItemForm::photos_javascript();
-} ?>
+        ItemForm::photos_javascript();
+    } ?>
     <?php
 }
 
@@ -169,7 +169,7 @@ osc_current_admin_theme_path('parts/header.php'); ?>
     <div class="row ">
         <div class="col">
                 <h2 class="render-title"><?php echo customText('subtitle'); ?></h2>
-                <?php if(!$new_item){ ?>
+                <?php if (!$new_item) { ?>
                     <a href="<?php echo osc_item_url(); ?>"><?php _e('View listing on front'); ?><i class="bi
                     bi-arrow-up-right-square ms-1"></i></a>
                 <?php } ?>
@@ -178,7 +178,6 @@ osc_current_admin_theme_path('parts/header.php'); ?>
                 <?php if (!$new_item) { ?>
                     <div id="item-action-list" class="btn-group btn-group-sm float-right">
                         <?php foreach ($actions as $aux) { ?>
-
                             <?php echo $aux; ?>
 
                         <?php } ?>

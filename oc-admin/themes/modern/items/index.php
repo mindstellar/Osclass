@@ -145,13 +145,13 @@ osc_current_admin_theme_path('parts/header.php'); ?>
                     <option value="10"><?php printf(__('%d Listings'), 10); ?></option>
                     <option value="25" <?php if (Params::getParam('iDisplayLength') == 25) {
                         echo 'selected';
-                    } ?> ><?php printf(__('%d Listings'), 25); ?></option>
+                                       } ?> ><?php printf(__('%d Listings'), 25); ?></option>
                     <option value="50" <?php if (Params::getParam('iDisplayLength') == 50) {
                         echo 'selected';
-                    } ?> ><?php printf(__('%d Listings'), 50); ?></option>
+                                       } ?> ><?php printf(__('%d Listings'), 50); ?></option>
                     <option value="100" <?php if (Params::getParam('iDisplayLength') == 100) {
                         echo 'selected';
-                    } ?> ><?php printf(__('%d Listings'), 100); ?></option>
+                                        } ?> ><?php printf(__('%d Listings'), 100); ?></option>
                 </select>
             </form>
             <form method="get" action="<?php echo osc_admin_base_url(true); ?>" id="shortcut-filters">
@@ -181,13 +181,13 @@ osc_current_admin_theme_path('parts/header.php'); ?>
                     <select id="filter-select" name="shortcut-filter" class="form-select form-select-sm">
                         <option value="oPattern" <?php if ($opt === 'oPattern') {
                             echo 'selected="selected"';
-                        } ?>><?php _e('Pattern'); ?></option>
+                                                 } ?>><?php _e('Pattern'); ?></option>
                         <option value="oUser" <?php if ($opt === 'oUser') {
                             echo 'selected="selected"';
-                        } ?>><?php _e('Email'); ?></option>
+                                              } ?>><?php _e('Email'); ?></option>
                         <option value="oItemId" <?php if ($opt === 'oItemId') {
                             echo 'selected="selected"';
-                        } ?>><?php _e('Item ID'); ?></option>
+                                                } ?>><?php _e('Item ID'); ?></option>
                     </select>
                     <input
                             id="fPattern" type="text" name="sSearch" placeholder="<?php _e('Keywords') ?>"
@@ -206,8 +206,7 @@ osc_current_admin_theme_path('parts/header.php'); ?>
                             class="form-control w-25 <?php echo $classItemId; ?>"/>
 
                     <a id="btn-display-filters" data-bs-toggle="modal" data-bs-target="#display-filters" href="#" class="btn btn-dim <?php
-                    if
-                    ($withFilters
+                    if ($withFilters
                     ) {
                         echo 'btn-red';
                     } ?>" title="<?php _e('Show filters'); ?>"><i class="bi bi-filter"></i>

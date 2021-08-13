@@ -180,7 +180,6 @@ class PageForm extends Form
     {
         $locales = osc_get_admin_locales();
         if (count(osc_get_admin_locales()) > 1) {
-
             echo '<div id="language-tab" class="mt-3">';
             echo '<ul class="nav nav-tabs" id="multiLangTabs" role="tablist">';
             foreach ($locales as $locale) {
@@ -203,13 +202,13 @@ class PageForm extends Form
      * @param                                   $locale
      * @param array                             $page
      */
-    private static function printPageTitleInput($locale, array $page )
+    private static function printPageTitleInput($locale, array $page)
     {
         $aFieldsDescription = Session::newInstance()->_getForm('aFieldsDescription');
         $title = '';
         if (isset($aFieldsDescription[$locale['pk_c_code']]['s_title'])) {
             $title = $aFieldsDescription[$locale['pk_c_code']]['s_title'];
-        } elseif(isset($page['locale'][$locale['pk_c_code']])){
+        } elseif (isset($page['locale'][$locale['pk_c_code']])) {
             $title = $page['locale'][$locale['pk_c_code']]['s_title'];
         }
         $value        = osc_apply_filter('admin_page_title', $title, $page, $locale);
