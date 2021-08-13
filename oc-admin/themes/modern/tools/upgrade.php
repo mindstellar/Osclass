@@ -46,7 +46,7 @@ function customHead()
                 }
                 var loading_image = document.getElementById('loading_image');
                 loading_image.style.display = "none";
-                steps.append(text(data.message).html() + "<br />");
+                steps.append(data.message).html() + "<br />");
             });
             <?php } else { ?>
             steps.append('<?php echo osc_esc_js(__('Congratulations! Your Osclass installation is up to date!')); ?>');

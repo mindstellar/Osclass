@@ -120,10 +120,21 @@ class Upgrade
             // Enable maintenance mode
             $this->FileSystem->touch(ABS_PATH . '.maintenance');
 
-            $originDir = $extracted_package_path . '/' . $this->objPackage->getShortName();
+            if (file_exists($extracted_package_path . '/index.php')) {
+                //make this the origin directory
+                $originDir = $extracted_package_path;
+            } elseif (file_exists($extracted_package_path . '/' . $this->objPackage->getShortName())
+                      && file_exists($extracted_package_path . '/' . $this->objPackage->getShortName().'/index.php')) {
+                $originDir = $extracted_package_path . '/' . $this->objPackage->getShortName();
+            } else {
+                throw new RuntimeException(
+                    __("Invalid Zip package, it's not in valid format.")
+                );
+            }
+
             if ($this->FileSystem->exists($originDir)) {
                 $this->FileSystem->sync(
-                    $extracted_package_path . '/' . $this->objPackage->getShortName(),
+                    $originDir . '/',
                     $this->objPackage->getTargetDirectory(),
                     null,
                     $this->objPackage->getFilteredFiles() //Don't overwrite these files or directory while upgrading
