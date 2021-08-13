@@ -2,9 +2,15 @@
   @extend .card, .shadow-sm;
 }
 
-.widget-box select {
-  @extend .form-select, .form-select-sm;
+.widget-box-title select {
+  @extend .form-select;
   width: 50%;
+  padding-top: 0.25rem;
+  padding-bottom: 0.25rem;
+  padding-left: 0.5rem;
+  font-size: 0.875rem;
+  margin-top: -.3rem;
+  margin-bottom: -.3rem;
 }
 
 .widget-box-title {

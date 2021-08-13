@@ -88,7 +88,7 @@ osc_current_admin_theme_path('parts/header.php'); ?>
     <h2 class="render-title"><?php _e('Upgrade'); ?></h2>
     <div id="result">
         <div id="output" style="display:none">
-            <i id="loading_image" class="fas fa-spinner fa-spin"></i>
+            <span class="spinner-border text-secondary" role="status"></span>
             <?php _e('Upgrading your Osclass installation (this could take a while): ', 'admin'); ?>
         </div>
         <div id="tohide">

@@ -60,92 +60,6 @@ function customPageTitle($string)
 
 osc_add_filter('admin_title', 'customPageTitle');
 
-//customize Head
-function customHead()
-{
-    ?>
-    <script type="text/javascript">
-        $(document).ready(function () {
-            //tooltip
-            $('.more-tooltip').each(function () {
-                $(this).osc_tooltip($(this).attr("categories"), {
-                    layout: 'gray-tooltip',
-                    position: {x: 'right', y: 'middle'}
-                });
-            });
-
-            // check_all bulkactions
-            $("#check_all").change(function () {
-                var isChecked = $(this).prop("checked");
-                $('.col-bulkactions input').each(function () {
-                    if (isChecked == 1) {
-                        this.checked = true;
-                    } else {
-                        this.checked = false;
-                    }
-                });
-            });
-
-            // dialog delete
-            $("#dialog-alert-delete").dialog({
-                autoOpen: false,
-                modal: true
-            });
-
-            // dialog bulk actions
-            $("#dialog-bulk-actions").dialog({
-                autoOpen: false,
-                modal: true
-            });
-            $("#bulk-actions-submit").click(function () {
-                if ($("#bulk_actions").attr("value") == "delete") {
-                    $("#action").attr("value", "delete_alerts");
-                } else if ($("#bulk_actions").attr("value") == "activate") {
-                    $("#action").attr("value", "status_alerts");
-                    $("#status").attr("value", "1");
-                } else {
-                    $("#action").attr("value", "status_alerts");
-                    $("#status").attr("value", "0");
-                }
-
-                $("#datatablesForm").submit();
-            });
-            $("#bulk-actions-cancel").click(function () {
-                $("#datatablesForm").attr('data-dialog-open', 'false');
-                $('#dialog-bulk-actions').dialog('close');
-            });
-            // dialog bulk actions function
-            $("#datatablesForm").submit(function () {
-                if ($("#bulk_actions option:selected").val() == "") {
-                    return false;
-                }
-
-                if ($("#datatablesForm").attr('data-dialog-open') == "true") {
-                    return true;
-                }
-
-                $("#dialog-bulk-actions .form-row").html($("#bulk_actions option:selected").attr('data-dialog-content'));
-                $("#bulk-actions-submit").html($("#bulk_actions option:selected").text());
-                $("#datatablesForm").attr('data-dialog-open', 'true');
-                $("#dialog-bulk-actions").dialog('open');
-                return false;
-            });
-            // /dialog bulk actions
-        });
-
-        // dialog delete function
-        function delete_alert(id) {
-            $("#alert_id").attr('value', id);
-            $("#dialog-alert-delete").dialog('open');
-        };
-
-    </script>
-    <?php
-}
-
-
-osc_add_hook('admin_header', 'customHead', 10);
-
 $aData     = __get('aData');
 $aRawRows  = __get('aRawRows');
 $sort      = Params::getParam('sort');
@@ -163,11 +77,14 @@ $rows    = $aData['aRows'];
                       class="inline">
                     <input type="hidden" name="page" value="users"/>
                     <input type="hidden" name="action" value="alerts"/>
-                    <input
-                            id="fPattern" type="text" name="sSearch"
-                            value="<?php echo osc_esc_html(Params::getParam('sSearch')); ?>"
-                            class="input-text input-actions"/>
-                    <input type="submit" class="btn submit-right" value="<?php echo osc_esc_html(__('Find')); ?>">
+                    <div class="btn-group btn-group-sm">
+                        <input
+                                id="fPattern" type="text" name="sSearch"
+                                value="<?php echo osc_esc_html(Params::getParam('sSearch')); ?>"
+                                class="input-text input-actions"/>
+                        <button type="submit" class="btn btn-primary" title="<?php echo osc_esc_html(__('Find')); ?>"><i
+                                    class="bi bi-search"></i></button>
+                    </div>
                 </form>
             </div>
         </div>
@@ -189,7 +106,7 @@ $rows    = $aData['aRows'];
                         <option value="delete"
                                 data-dialog-content="<?php printf(__('Are you sure you want to %s the selected alerts?'),
                                                                   strtolower(__('Delete'))); ?>"><?php _e('Delete'); ?></option>
-                    </select> <input type="submit" id="bulk_apply" class="btn btn-dim"
+                    </select> <input type="submit" id="bulk_apply" class="btn btn-primary"
                                      value="<?php echo osc_esc_html(__('Apply')); ?>"/>
                 </div>
             </div>
@@ -247,38 +164,93 @@ function showingResults()
 osc_add_hook('before_show_pagination_admin', 'showingResults');
 osc_show_pagination_admin($aData);
 ?>
-    <form id="dialog-alert-delete" method="get" action="<?php echo osc_admin_base_url(true); ?>"
-          class="has-form-actions hide" title="<?php echo osc_esc_html(__('Delete alert')); ?>">
+    <form id="deleteModal" method="get" action="<?php echo osc_admin_base_url(true); ?>"
+          class="modal fade static">
         <input type="hidden" name="page" value="users"/>
         <input type="hidden" name="action" value="delete_alerts"/>
         <input type="hidden" name="alert_id[]" id="alert_id" value=""/>
         <input type="hidden" name="alert_user_id" value=""/>
-        <div class="form-horizontal">
-            <div class="form-row">
-                <?php _e('Are you sure you want to delete this alert?'); ?>
-            </div>
-            <div class="form-actions">
-                <div class="wrapper">
-                    <a class="btn btn-dim" href="javascript:void(0);"
-                       onclick="$('#dialog-alert-delete').dialog('close');"><?php _e('Cancel'); ?></a>
-                    <input id="alert-delete-submit" type="submit" value="<?php echo osc_esc_html(__('Delete')); ?>"
-                           class="btn btn-red"/>
+        <div class="modal-dialog modal-sm">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">
+                        <?php echo osc_esc_html(__('Delete alert')); ?>
+                    </h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <?php _e('Are you sure you want to delete this alert?'); ?>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-sm btn-secondary" data-bs-dismiss="modal"><?php _e('Cancel'); ?></button>
+                    <button id="deleteSubmit" class="btn btn-sm btn-red" type="submit">
+                        <?php echo __('Delete'); ?>
+                    </button>
                 </div>
             </div>
         </div>
     </form>
-    <div id="dialog-bulk-actions" title="<?php _e('Bulk actions'); ?>" class="has-form-actions hide">
-        <div class="form-horizontal">
-            <div class="form-row"></div>
-            <div class="form-actions">
-                <div class="wrapper">
-                    <a id="bulk-actions-cancel" class="btn btn-dim" href="javascript:void(0);"><?php _e('Cancel'); ?></a>
-                    <a id="bulk-actions-submit" href="javascript:void(0);"
-                       class="btn btn-red"><?php echo osc_esc_html(__('Delete')); ?></a>
-                    <div class="clear"></div>
+    <div id="bulkActionsModal" class="modal fade static" tabindex="-1" aria-labelledby="bulkActionsModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-sm">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="bulkActionsModalLabel"><?php _e('Bulk actions'); ?></h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <p></p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-sm btn-secondary" data-bs-dismiss="modal"><?php _e('Cancel'); ?></button>
+                    <button id="bulkActionsSubmit" onclick="bulkActionsSubmit()"
+                            class="btn btn-sm btn-red"><?php echo osc_esc_html(__('Delete')); ?></button>
                 </div>
             </div>
         </div>
     </div>
     <div id="more-tooltip"></div>
+    <script>
+        $(document).ready(function () {
+            // check_all bulkactions
+            $("#check_all").change(function () {
+                var isChecked = $(this).prop("checked");
+                $('.col-bulkactions input').each(function () {
+                    this.checked = isChecked == 1;
+                });
+            });
+
+        });
+
+        function delete_alert(id) {
+            var deleteModal = document.getElementById("deleteModal")
+            deleteModal.querySelector("input[name='alert_id[]']").value = id;
+            (new bootstrap.Modal(document.getElementById('deleteModal'))).toggle()
+            return false;
+        }
+
+        function toggleBulkActionsModal() {
+            var bulkSelect = document.getElementById('bulk_actions')
+            var bulkActionsModal = new bootstrap.Modal(document.getElementById('bulkActionsModal'))
+            if (bulkSelect.options[bulkSelect.selectedIndex].value !== '') {
+                bulkActionsModal.toggle()
+            }
+            event.preventDefault()
+            return false
+        }
+
+        function bulkActionsSubmit() {
+            document.getElementById('datatablesForm').submit()
+        }
+
+        document.getElementById('datatablesForm').onsubmit = function () {
+            toggleBulkActionsModal()
+        };
+        var bulkActionsModal = document.getElementById('bulkActionsModal')
+        bulkActionsModal.addEventListener('show.bs.modal', function () {
+            var bulkSelect = document.getElementById('bulk_actions')
+            bulkActionsModal.querySelector('.modal-body p').textContent = bulkSelect.options[bulkSelect.selectedIndex]
+                .getAttribute('data-dialog-content')
+            bulkActionsModal.querySelector('#bulkActionsSubmit').textContent = bulkSelect.options[bulkSelect.selectedIndex].text;
+        })
+    </script>
 <?php osc_current_admin_theme_path('parts/footer.php'); ?>

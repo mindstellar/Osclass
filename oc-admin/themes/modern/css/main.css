@@ -1879,7 +1879,7 @@ textarea.form-control-lg {
     height: 1.5em;
     border-radius: 0.25rem; }
 
-.form-select, .widget-box select, .form-controls select {
+.form-select, .widget-box-title select, .form-controls select {
   display: block;
   width: 100%;
   padding: 0.375rem 2.25rem 0.375rem 0.75rem;
@@ -1898,22 +1898,22 @@ textarea.form-control-lg {
   transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
   appearance: none; }
   @media (prefers-reduced-motion: reduce) {
-    .form-select, .widget-box select, .form-controls select {
+    .form-select, .widget-box-title select, .form-controls select {
       transition: none; } }
-  .form-select:focus, .widget-box select:focus, .form-controls select:focus {
+  .form-select:focus, .widget-box-title select:focus, .form-controls select:focus {
     border-color: #86b7fe;
     outline: 0;
     box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.25); }
-  .form-select[multiple], .widget-box select[multiple], .form-controls select[multiple], .form-select[size]:not([size="1"]), .widget-box select[size]:not([size="1"]), .form-controls select[size]:not([size="1"]) {
+  .form-select[multiple], .widget-box-title select[multiple], .form-controls select[multiple], .form-select[size]:not([size="1"]), .widget-box-title select[size]:not([size="1"]), .form-controls select[size]:not([size="1"]) {
     padding-right: 0.75rem;
     background-image: none; }
-  .form-select:disabled, .widget-box select:disabled, .form-controls select:disabled {
+  .form-select:disabled, .widget-box-title select:disabled, .form-controls select:disabled {
     background-color: #e9ecef; }
-  .form-select:-moz-focusring, .widget-box select:-moz-focusring, .form-controls select:-moz-focusring {
+  .form-select:-moz-focusring, .widget-box-title select:-moz-focusring, .form-controls select:-moz-focusring {
     color: transparent;
     text-shadow: 0 0 0 #212529; }
 
-.form-select-sm, .widget-box select, .form-controls select {
+.form-select-sm, .form-controls select {
   padding-top: 0.25rem;
   padding-bottom: 0.25rem;
   padding-left: 0.5rem;
@@ -2075,7 +2075,7 @@ textarea.form-control-lg {
   .form-floating > .input-text,
   .form-floating > .input-password, .form-floating > input.input-small, .form-floating > input.input-medium, .form-floating > input.input-large, .form-controls .form-floating > input:not([type="checkbox"]):not([type="radio"]),
   .form-floating > .form-select,
-  .widget-box .form-floating > select,
+  .widget-box-title .form-floating > select,
   .form-controls .form-floating > select {
     height: calc(3.5rem + 2px);
     line-height: 1.25; }
@@ -2112,7 +2112,7 @@ textarea.form-control-lg {
     .form-floating > .input-password:-webkit-autofill, .form-floating > input.input-small:-webkit-autofill, .form-floating > input.input-medium:-webkit-autofill, .form-floating > input.input-large:-webkit-autofill, .form-controls .form-floating > input:-webkit-autofill:not([type="checkbox"]):not([type="radio"]) {
       padding-top: 1.625rem;
       padding-bottom: 0.625rem; }
-  .form-floating > .form-select, .widget-box .form-floating > select, .form-controls .form-floating > select {
+  .form-floating > .form-select, .widget-box-title .form-floating > select, .form-controls .form-floating > select {
     padding-top: 1.625rem;
     padding-bottom: 0.625rem; }
   .form-floating > .form-control:focus ~ label, .form-floating > input.xlarge:focus ~ label,
@@ -2127,7 +2127,7 @@ textarea.form-control-lg {
   .form-floating > input.input-large:not(:placeholder-shown) ~ label,
   .form-controls .form-floating > input:not(:placeholder-shown):not([type="checkbox"]):not([type="radio"]) ~ label,
   .form-floating > .form-select ~ label,
-  .widget-box .form-floating > select ~ label,
+  .widget-box-title .form-floating > select ~ label,
   .form-controls .form-floating > select ~ label {
     opacity: 0.65;
     transform: scale(0.85) translateY(-0.5rem) translateX(0.15rem); }
@@ -2147,7 +2147,7 @@ textarea.form-control-lg {
   .input-group > .input-text,
   .input-group > .input-password, .input-group > input.input-small, .input-group > input.input-medium, .input-group > input.input-large, .form-controls .input-group > input:not([type="checkbox"]):not([type="radio"]),
   .input-group > .form-select,
-  .widget-box .input-group > select,
+  .widget-box-title .input-group > select,
   .form-controls .input-group > select {
     position: relative;
     flex: 1 1 auto;
@@ -2157,7 +2157,7 @@ textarea.form-control-lg {
   .input-group > .input-text:focus,
   .input-group > .input-password:focus, .input-group > input.input-small:focus, .input-group > input.input-medium:focus, .input-group > input.input-large:focus, .form-controls .input-group > input:focus:not([type="checkbox"]):not([type="radio"]),
   .input-group > .form-select:focus,
-  .widget-box .input-group > select:focus,
+  .widget-box-title .input-group > select:focus,
   .form-controls .input-group > select:focus {
     z-index: 3; }
   .input-group .btn {
@@ -2184,7 +2184,7 @@ textarea.form-control-lg {
 .input-group-lg > .input-text,
 .input-group-lg > .input-password, .input-group-lg > input.input-small, .input-group-lg > input.input-medium, .input-group-lg > input.input-large, .form-controls .input-group-lg > input:not([type="checkbox"]):not([type="radio"]),
 .input-group-lg > .form-select,
-.widget-box .input-group-lg > select,
+.widget-box-title .input-group-lg > select,
 .form-controls .input-group-lg > select,
 .input-group-lg > .input-group-text,
 .input-group-lg > .btn {
@@ -2196,7 +2196,7 @@ textarea.form-control-lg {
 .input-group-sm > .input-text,
 .input-group-sm > .input-password, .input-group-sm > input.input-small, .input-group-sm > input.input-medium, .input-group-sm > input.input-large, .form-controls .input-group-sm > input:not([type="checkbox"]):not([type="radio"]),
 .input-group-sm > .form-select,
-.widget-box .input-group-sm > select,
+.widget-box-title .input-group-sm > select,
 .form-controls .input-group-sm > select,
 .input-group-sm > .input-group-text,
 .input-group-sm > .btn {
@@ -2204,9 +2204,9 @@ textarea.form-control-lg {
   font-size: 0.875rem;
   border-radius: 0.2rem; }
 
-.input-group-lg > .form-select, .widget-box .input-group-lg > select, .form-controls .input-group-lg > select,
+.input-group-lg > .form-select, .widget-box-title .input-group-lg > select, .form-controls .input-group-lg > select,
 .input-group-sm > .form-select,
-.widget-box .input-group-sm > select,
+.widget-box-title .input-group-sm > select,
 .form-controls .input-group-sm > select {
   padding-right: 3rem; }
 
@@ -2276,14 +2276,14 @@ textarea.is-valid.input-password {
   padding-right: calc(1.5em + 0.75rem);
   background-position: top calc(0.375em + 0.1875rem) right calc(0.375em + 0.1875rem); }
 
-.was-validated .form-select:valid, .was-validated .widget-box select:valid, .widget-box .was-validated select:valid, .was-validated .form-controls select:valid, .form-controls .was-validated select:valid, .form-select.is-valid, .widget-box select.is-valid, .form-controls select.is-valid {
+.was-validated .form-select:valid, .was-validated .widget-box-title select:valid, .widget-box-title .was-validated select:valid, .was-validated .form-controls select:valid, .form-controls .was-validated select:valid, .form-select.is-valid, .widget-box-title select.is-valid, .form-controls select.is-valid {
   border-color: #198754; }
-  .was-validated .form-select:valid:not([multiple]):not([size]), .was-validated .widget-box select:valid:not([multiple]):not([size]), .widget-box .was-validated select:valid:not([multiple]):not([size]), .was-validated .form-controls select:valid:not([multiple]):not([size]), .form-controls .was-validated select:valid:not([multiple]):not([size]), .was-validated .form-select:valid:not([multiple])[size="1"], .was-validated .widget-box select:valid:not([multiple])[size="1"], .widget-box .was-validated select:valid:not([multiple])[size="1"], .was-validated .form-controls select:valid:not([multiple])[size="1"], .form-controls .was-validated select:valid:not([multiple])[size="1"], .form-select.is-valid:not([multiple]):not([size]), .widget-box select.is-valid:not([multiple]):not([size]), .form-controls select.is-valid:not([multiple]):not([size]), .form-select.is-valid:not([multiple])[size="1"], .widget-box select.is-valid:not([multiple])[size="1"], .form-controls select.is-valid:not([multiple])[size="1"] {
+  .was-validated .form-select:valid:not([multiple]):not([size]), .was-validated .widget-box-title select:valid:not([multiple]):not([size]), .widget-box-title .was-validated select:valid:not([multiple]):not([size]), .was-validated .form-controls select:valid:not([multiple]):not([size]), .form-controls .was-validated select:valid:not([multiple]):not([size]), .was-validated .form-select:valid:not([multiple])[size="1"], .was-validated .widget-box-title select:valid:not([multiple])[size="1"], .widget-box-title .was-validated select:valid:not([multiple])[size="1"], .was-validated .form-controls select:valid:not([multiple])[size="1"], .form-controls .was-validated select:valid:not([multiple])[size="1"], .form-select.is-valid:not([multiple]):not([size]), .widget-box-title select.is-valid:not([multiple]):not([size]), .form-controls select.is-valid:not([multiple]):not([size]), .form-select.is-valid:not([multiple])[size="1"], .widget-box-title select.is-valid:not([multiple])[size="1"], .form-controls select.is-valid:not([multiple])[size="1"] {
     padding-right: 4.125rem;
     background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3e%3cpath fill='none' stroke='%23343a40' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M2 5l6 6 6-6'/%3e%3c/svg%3e"), url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 8 8'%3e%3cpath fill='%23198754' d='M2.3 6.73L.6 4.53c-.4-1.04.46-1.4 1.1-.8l1.1 1.4 3.4-3.8c.6-.63 1.6-.27 1.2.7l-4 4.6c-.43.5-.8.4-1.1.1z'/%3e%3c/svg%3e");
     background-position: right 0.75rem center, center right 2.25rem;
     background-size: 16px 12px, calc(0.75em + 0.375rem) calc(0.75em + 0.375rem); }
-  .was-validated .form-select:valid:focus, .was-validated .widget-box select:valid:focus, .widget-box .was-validated select:valid:focus, .was-validated .form-controls select:valid:focus, .form-controls .was-validated select:valid:focus, .form-select.is-valid:focus, .widget-box select.is-valid:focus, .form-controls select.is-valid:focus {
+  .was-validated .form-select:valid:focus, .was-validated .widget-box-title select:valid:focus, .widget-box-title .was-validated select:valid:focus, .was-validated .form-controls select:valid:focus, .form-controls .was-validated select:valid:focus, .form-select.is-valid:focus, .widget-box-title select.is-valid:focus, .form-controls select.is-valid:focus {
     border-color: #198754;
     box-shadow: 0 0 0 0.25rem rgba(25, 135, 84, 0.25); }
 
@@ -2305,13 +2305,13 @@ textarea.is-valid.input-password {
 .input-group .is-valid.input-text,
 .input-group .is-valid.input-password, .input-group input.is-valid.input-small, .input-group input.is-valid.input-medium, .input-group input.is-valid.input-large, .input-group .form-controls input.is-valid:not([type="checkbox"]):not([type="radio"]), .form-controls .input-group input.is-valid:not([type="checkbox"]):not([type="radio"]),
 .was-validated .input-group .form-select:valid,
-.was-validated .input-group .widget-box select:valid,
-.widget-box .was-validated .input-group select:valid,
+.was-validated .input-group .widget-box-title select:valid,
+.widget-box-title .was-validated .input-group select:valid,
 .was-validated .input-group .form-controls select:valid,
 .form-controls .was-validated .input-group select:valid,
 .input-group .form-select.is-valid,
-.input-group .widget-box select.is-valid,
-.widget-box .input-group select.is-valid,
+.input-group .widget-box-title select.is-valid,
+.widget-box-title .input-group select.is-valid,
 .input-group .form-controls select.is-valid,
 .form-controls .input-group select.is-valid {
   z-index: 1; }
@@ -2321,13 +2321,13 @@ textarea.is-valid.input-password {
   .input-group .is-valid.input-text:focus,
   .input-group .is-valid.input-password:focus, .input-group input.is-valid.input-small:focus, .input-group input.is-valid.input-medium:focus, .input-group input.is-valid.input-large:focus, .input-group .form-controls input.is-valid:focus:not([type="checkbox"]):not([type="radio"]), .form-controls .input-group input.is-valid:focus:not([type="checkbox"]):not([type="radio"]),
   .was-validated .input-group .form-select:valid:focus,
-  .was-validated .input-group .widget-box select:valid:focus,
-  .widget-box .was-validated .input-group select:valid:focus,
+  .was-validated .input-group .widget-box-title select:valid:focus,
+  .widget-box-title .was-validated .input-group select:valid:focus,
   .was-validated .input-group .form-controls select:valid:focus,
   .form-controls .was-validated .input-group select:valid:focus,
   .input-group .form-select.is-valid:focus,
-  .input-group .widget-box select.is-valid:focus,
-  .widget-box .input-group select.is-valid:focus,
+  .input-group .widget-box-title select.is-valid:focus,
+  .widget-box-title .input-group select.is-valid:focus,
   .input-group .form-controls select.is-valid:focus,
   .form-controls .input-group select.is-valid:focus {
     z-index: 3; }
@@ -2385,14 +2385,14 @@ textarea.is-invalid.input-password {
   padding-right: calc(1.5em + 0.75rem);
   background-position: top calc(0.375em + 0.1875rem) right calc(0.375em + 0.1875rem); }
 
-.was-validated .form-select:invalid, .was-validated .widget-box select:invalid, .widget-box .was-validated select:invalid, .was-validated .form-controls select:invalid, .form-controls .was-validated select:invalid, .form-select.is-invalid, .widget-box select.is-invalid, .form-controls select.is-invalid {
+.was-validated .form-select:invalid, .was-validated .widget-box-title select:invalid, .widget-box-title .was-validated select:invalid, .was-validated .form-controls select:invalid, .form-controls .was-validated select:invalid, .form-select.is-invalid, .widget-box-title select.is-invalid, .form-controls select.is-invalid {
   border-color: #dc3545; }
-  .was-validated .form-select:invalid:not([multiple]):not([size]), .was-validated .widget-box select:invalid:not([multiple]):not([size]), .widget-box .was-validated select:invalid:not([multiple]):not([size]), .was-validated .form-controls select:invalid:not([multiple]):not([size]), .form-controls .was-validated select:invalid:not([multiple]):not([size]), .was-validated .form-select:invalid:not([multiple])[size="1"], .was-validated .widget-box select:invalid:not([multiple])[size="1"], .widget-box .was-validated select:invalid:not([multiple])[size="1"], .was-validated .form-controls select:invalid:not([multiple])[size="1"], .form-controls .was-validated select:invalid:not([multiple])[size="1"], .form-select.is-invalid:not([multiple]):not([size]), .widget-box select.is-invalid:not([multiple]):not([size]), .form-controls select.is-invalid:not([multiple]):not([size]), .form-select.is-invalid:not([multiple])[size="1"], .widget-box select.is-invalid:not([multiple])[size="1"], .form-controls select.is-invalid:not([multiple])[size="1"] {
+  .was-validated .form-select:invalid:not([multiple]):not([size]), .was-validated .widget-box-title select:invalid:not([multiple]):not([size]), .widget-box-title .was-validated select:invalid:not([multiple]):not([size]), .was-validated .form-controls select:invalid:not([multiple]):not([size]), .form-controls .was-validated select:invalid:not([multiple]):not([size]), .was-validated .form-select:invalid:not([multiple])[size="1"], .was-validated .widget-box-title select:invalid:not([multiple])[size="1"], .widget-box-title .was-validated select:invalid:not([multiple])[size="1"], .was-validated .form-controls select:invalid:not([multiple])[size="1"], .form-controls .was-validated select:invalid:not([multiple])[size="1"], .form-select.is-invalid:not([multiple]):not([size]), .widget-box-title select.is-invalid:not([multiple]):not([size]), .form-controls select.is-invalid:not([multiple]):not([size]), .form-select.is-invalid:not([multiple])[size="1"], .widget-box-title select.is-invalid:not([multiple])[size="1"], .form-controls select.is-invalid:not([multiple])[size="1"] {
     padding-right: 4.125rem;
     background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3e%3cpath fill='none' stroke='%23343a40' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M2 5l6 6 6-6'/%3e%3c/svg%3e"), url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 12' width='12' height='12' fill='none' stroke='%23dc3545'%3e%3ccircle cx='6' cy='6' r='4.5'/%3e%3cpath stroke-linejoin='round' d='M5.8 3.6h.4L6 6.5z'/%3e%3ccircle cx='6' cy='8.2' r='.6' fill='%23dc3545' stroke='none'/%3e%3c/svg%3e");
     background-position: right 0.75rem center, center right 2.25rem;
     background-size: 16px 12px, calc(0.75em + 0.375rem) calc(0.75em + 0.375rem); }
-  .was-validated .form-select:invalid:focus, .was-validated .widget-box select:invalid:focus, .widget-box .was-validated select:invalid:focus, .was-validated .form-controls select:invalid:focus, .form-controls .was-validated select:invalid:focus, .form-select.is-invalid:focus, .widget-box select.is-invalid:focus, .form-controls select.is-invalid:focus {
+  .was-validated .form-select:invalid:focus, .was-validated .widget-box-title select:invalid:focus, .widget-box-title .was-validated select:invalid:focus, .was-validated .form-controls select:invalid:focus, .form-controls .was-validated select:invalid:focus, .form-select.is-invalid:focus, .widget-box-title select.is-invalid:focus, .form-controls select.is-invalid:focus {
     border-color: #dc3545;
     box-shadow: 0 0 0 0.25rem rgba(220, 53, 69, 0.25); }
 
@@ -2414,13 +2414,13 @@ textarea.is-invalid.input-password {
 .input-group .is-invalid.input-text,
 .input-group .is-invalid.input-password, .input-group input.is-invalid.input-small, .input-group input.is-invalid.input-medium, .input-group input.is-invalid.input-large, .input-group .form-controls input.is-invalid:not([type="checkbox"]):not([type="radio"]), .form-controls .input-group input.is-invalid:not([type="checkbox"]):not([type="radio"]),
 .was-validated .input-group .form-select:invalid,
-.was-validated .input-group .widget-box select:invalid,
-.widget-box .was-validated .input-group select:invalid,
+.was-validated .input-group .widget-box-title select:invalid,
+.widget-box-title .was-validated .input-group select:invalid,
 .was-validated .input-group .form-controls select:invalid,
 .form-controls .was-validated .input-group select:invalid,
 .input-group .form-select.is-invalid,
-.input-group .widget-box select.is-invalid,
-.widget-box .input-group select.is-invalid,
+.input-group .widget-box-title select.is-invalid,
+.widget-box-title .input-group select.is-invalid,
 .input-group .form-controls select.is-invalid,
 .form-controls .input-group select.is-invalid {
   z-index: 2; }
@@ -2430,13 +2430,13 @@ textarea.is-invalid.input-password {
   .input-group .is-invalid.input-text:focus,
   .input-group .is-invalid.input-password:focus, .input-group input.is-invalid.input-small:focus, .input-group input.is-invalid.input-medium:focus, .input-group input.is-invalid.input-large:focus, .input-group .form-controls input.is-invalid:focus:not([type="checkbox"]):not([type="radio"]), .form-controls .input-group input.is-invalid:focus:not([type="checkbox"]):not([type="radio"]),
   .was-validated .input-group .form-select:invalid:focus,
-  .was-validated .input-group .widget-box select:invalid:focus,
-  .widget-box .was-validated .input-group select:invalid:focus,
+  .was-validated .input-group .widget-box-title select:invalid:focus,
+  .widget-box-title .was-validated .input-group select:invalid:focus,
   .was-validated .input-group .form-controls select:invalid:focus,
   .form-controls .was-validated .input-group select:invalid:focus,
   .input-group .form-select.is-invalid:focus,
-  .input-group .widget-box select.is-invalid:focus,
-  .widget-box .input-group select.is-invalid:focus,
+  .input-group .widget-box-title select.is-invalid:focus,
+  .widget-box-title .input-group select.is-invalid:focus,
   .input-group .form-controls select.is-invalid:focus,
   .form-controls .input-group select.is-invalid:focus {
     z-index: 3; }
@@ -9108,8 +9108,14 @@ ul.showing-results {
   margin-right: 10px;
   width: 16px; }
 
-.widget-box select {
-  width: 50%; }
+.widget-box-title select {
+  width: 50%;
+  padding-top: 0.25rem;
+  padding-bottom: 0.25rem;
+  padding-left: 0.5rem;
+  font-size: 0.875rem;
+  margin-top: -.3rem;
+  margin-bottom: -.3rem; }
 
 .widget-box-title {
   color: #495057;

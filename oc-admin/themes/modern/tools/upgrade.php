@@ -35,7 +35,7 @@ function customHead()
             onclick="window.location.href='<?php echo osc_admin_base_url(true) . '?page=tools&action=upgrade&confirm=true';?> ';" />`);
 
             <?php } elseif ($is_upgrade_available && Params::getParam('confirm') === 'true') { ?>
-            steps.append(`<i id="loading_image" class="fas fa-spinner fa-spin"></i> <?php
+            steps.append(`<span class="spinner-border text-secondary" role="status"></span> <?php
             echo osc_esc_js(__('Upgrading your Osclass installation (this could take a while):'));
             ?>`);
             $.getJSON('<?php

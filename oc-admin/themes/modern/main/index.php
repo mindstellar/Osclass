@@ -207,8 +207,8 @@ osc_add_hook('admin_footer', 'chartJs', 10);
 
 osc_current_admin_theme_path('parts/header.php'); ?>
 <div id="dashboard">
-    <div class="row row-col-lg-3 row-col-md-6 gap-3">
-        <div class="col">
+    <div class="row g-1">
+        <div class="col-lg-4 col-md-6">
             <div class="widget-box h-100">
                 <div class="widget-box-title"><h3><?php _e('Listings by category'); ?></h3></div>
                 <div class="widget-box-content">
@@ -264,7 +264,7 @@ osc_current_admin_theme_path('parts/header.php'); ?>
                 </div>
             </div>
         </div>
-        <div class="col">
+        <div class="col-lg-4 col-md-6">
             <div class="widget-box h-100">
                 <div class="widget-box-title">
                     <h3><?php _e('Statistics'); ?> <select id="widget-box-stats-select" onchange="changeStats()"
