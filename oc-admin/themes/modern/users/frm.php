@@ -198,12 +198,12 @@ $aux = customFrmText();
     });
 </script>
 
-<div class="grid-row no-bottom-margin">
+<div class="grid-row mb-0">
     <div class="row-wrapper">
         <h2 class="render-title"><?php echo $aux['title']; ?></h2>
     </div>
 </div>
-<div class="grid-row no-bottom-margin float-right">
+<div class="grid-row mb-0 float-right">
     <div class="row-wrapper">
         <?php if (__get('user') != '') {
             $actions = __get('actions'); ?>
@@ -360,7 +360,7 @@ $aux = customFrmText();
 
                 <div class="clear"></div>
                 <div class="form-actions">
-                    <input type="submit" value="<?php echo osc_esc_html($aux['btn_text']); ?>" class="btn btn-submit"/>
+                    <button type="submit" class="btn btn-submit"><?php echo osc_esc_html($aux['btn_text']); ?></button>
                 </div>
             </div>
         </fieldset>
@@ -450,7 +450,7 @@ $aux = customFrmText();
             </div>
             <div class="form-actions">
                 <div class="wrapper">
-                    <a class="btn" href="javascript:void(0);"
+                    <a class="btn btn-dim" href="javascript:void(0);"
                        onclick="$('#dialog-alert-delete').dialog('close');"><?php _e('Cancel'); ?></a>
                     <input id="alert-delete-submit" type="submit" value="<?php echo osc_esc_html(__('Delete')); ?>"
                            class="btn btn-red"/>

@@ -44,7 +44,8 @@ function customPageHeader()
 {
     ?>
     <h1><?php _e('Plugins'); ?>
-        <a href="#" class="btn ico ico-32 ico-help float-right"></a>
+        <a class="ms-1 bi bi-question-circle-fill float-right" data-bs-target="#help-box" data-bs-toggle="collapse"
+           href="#help-box"></a>
     </h1>
     <?php
 }
@@ -81,7 +82,7 @@ osc_current_admin_theme_path('parts/header.php'); ?>
                         </div>
                     </div>
                     <div class="form-actions">
-                        <input type="submit" value="<?php echo osc_esc_html(__('Upload')); ?>" class="btn btn-submit"/>
+                        <button type="submit" class="btn btn-submit"><?php echo osc_esc_html(__('Upload')); ?></button>
                     </div>
                 </form>
             <?php } else { ?>

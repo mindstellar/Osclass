@@ -35,7 +35,7 @@ function customHead()
             onclick="window.location.href='<?php echo osc_admin_base_url(true) . '?page=tools&action=upgrade&confirm=true';?> ';" />`);
 
             <?php } elseif ($is_upgrade_available && Params::getParam('confirm') === 'true') { ?>
-            steps.append(`<i id="loading_image" class="fas fa-spinner fa-spin"></i> <?php
+            steps.append(`<span class="spinner-border text-secondary" role="status"></span> <?php
             echo osc_esc_js(__('Upgrading your Osclass installation (this could take a while):'));
             ?>`);
             $.getJSON('<?php
@@ -46,7 +46,7 @@ function customHead()
                 }
                 var loading_image = document.getElementById('loading_image');
                 loading_image.style.display = "none";
-                steps.append(text(data.message).html() + "<br />");
+                steps.append(data.message).html() + "<br />");
             });
             <?php } else { ?>
             steps.append('<?php echo osc_esc_js(__('Congratulations! Your Osclass installation is up to date!')); ?>');
@@ -85,7 +85,8 @@ function customPageHeader()
 {
     ?>
     <h1><?php _e('Tools'); ?>
-        <a href="#" class="btn ico ico-32 ico-help float-right"></a>
+        <a class="ms-1 bi bi-question-circle-fill float-right" data-bs-target="#help-box" data-bs-toggle="collapse"
+           href="#help-box"></a>
     </h1>
     <?php
 }

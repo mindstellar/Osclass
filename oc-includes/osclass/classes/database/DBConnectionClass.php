@@ -165,6 +165,7 @@ class DBConnectionClass
                 'Osclass &raquo; Error',
                 'Osclass database server is not available. <a href="https://osclass.discourse.group/">Need more help?</a></p>'
             );
+            return false;
         }
 
         $this->setCharset('utf8');

@@ -1,0 +1,62 @@
+.grid-system {
+  @include make-row()
+}
+
+.row-wrapper {
+  padding: .5rem
+}
+
+.show-grid .row-wrapper {
+  background-color: $color-gray-light;
+  padding: 10px 0;
+  @include rounded-corners(5px);
+}
+
+.grid-10 {
+  @include make-col(1, 10);
+}
+
+.grid-20 {
+  @include make-col(2, 10);
+}
+
+.grid-30 {
+  @include make-col(3, 10);
+}
+
+.grid-33 {
+  @include make-col(3.3, 10);
+}
+
+.grid-40 {
+  @include make-col(4, 10);
+}
+
+.grid-50 {
+  @include make-col(5, 10);
+}
+
+.grid-60 {
+  @include make-col(6, 10);
+}
+
+.grid-70 {
+  @include make-col(7, 10);
+}
+
+.grid-80 {
+  @include make-col(8, 10);
+}
+
+.grid-80 {
+  @include make-col(9, 10);
+}
+
+.grid-100 {
+  @include make-col(10, 10);
+}
+
+div.row-offset {
+  margin-left: 0 !important;
+  margin-right: 0 !important;
+}

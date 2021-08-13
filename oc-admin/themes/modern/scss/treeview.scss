@@ -1,0 +1,50 @@
+.treeview, .treeview ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.treeview ul {
+  margin-top: 0;
+}
+
+.treeview .hitarea {
+  cursor: pointer;
+  float: left;
+  height: 12px;
+  margin-right: 5px;
+  width: 12px;
+
+  &:before {
+    content: "\f2e5";
+    font-family: 'bootstrap-icons';
+  }
+}
+
+.treeview ul li {
+  margin: 0;
+  padding: 3px 0 3px 16px;
+}
+
+#treecontrol {
+  display: none;
+  margin: 1em 0;
+}
+
+.treeview .hover {
+  cursor: pointer;
+}
+
+.treeview .expandable-hitarea {
+  margin-right: 5px;
+
+  &:before {
+    content: "\f4f9";
+    font-family: 'bootstrap-icons';
+  }
+}
+
+form h3 {
+  font-size: 16px;
+  font-weight: normal;
+}

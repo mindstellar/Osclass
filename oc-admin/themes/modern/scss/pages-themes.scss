@@ -1,0 +1,115 @@
+/*!
+ * OSClass – software for creating and publishing online classified advertising platforms
+ *
+ * Copyright (c) 2021.  Mindstellar
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+ *
+ *                     GNU GENERAL PUBLIC LICENSE
+ *                        Version 3, 29 June 2007
+ *
+ *  Copyright (C) 2007 Free Software Foundation, Inc. <http://fsf.org/>
+ *  Everyone is permitted to copy and distribute verbatim copies
+ *  of this license document, but changing it is not allowed.
+ *
+ *  You should have received a copy of the GNU Affero General Public
+ *  License along with this program. If not, see <http://www.gnu.org/licenses/>.
+ *
+ */
+
+.current-theme {
+  padding-top: 20px;
+}
+
+.current-theme .theme {
+  float: none;
+  height: auto !important;
+  margin-right: 0;
+  width: auto;
+}
+
+.current-theme .theme img {
+  float: left;
+}
+
+.theme {
+  background-color: $color-gray-light;
+  float: left;
+  font-size: .95rem;
+  margin-bottom: 40px;
+  margin-right: 20px;
+  padding: 10px;
+
+  @include rounded-corners;
+  width: 250px;
+}
+
+.theme img {
+  border: solid 1px $color-gray-soft;
+  margin-right: 20px;
+  width: 250px;
+  @include rounded-corners;
+}
+
+.theme .theme-actions {
+  background-color: rgba(243, 243, 243, 0.9);
+  border-top: solid 1px $color-gray-soft;
+  bottom: 4px;
+  left: 1px;
+  padding: 6px 0 1px 6px;
+  position: absolute;
+  width: 244px;
+}
+
+.theme .theme-actions .btn {
+  margin-bottom: 5px;
+  padding-left: 6px;
+  padding-right: 6px;
+}
+
+.theme-actions a.delete {
+  color: $color-gray-dim;
+}
+
+.theme .theme-info,
+.theme .theme-info h3 {
+  font-weight: normal;
+}
+
+.theme-stage {
+  position: relative;
+}
+
+.appearance .theme {
+  height: 285px;
+}
+
+.appearance .theme img {
+  height: 187px;
+  width: 250px;
+}
+
+tr.plugin td {
+  padding: 10px;
+}
+
+tr.plugin h3,
+tr.plugin h3 {
+  color: $color-gray-hardblack;
+  font-weight: bold;
+  margin: 0;
+}
+
+.plugin-actions {
+  padding-top: 10px;
+}
+.available-theme .card {
+  width:250px;
+}

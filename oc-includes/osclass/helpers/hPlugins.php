@@ -38,7 +38,7 @@
 /**
  * Run a hook
  *
- * @param       $hook
+ * @param callable-string      $hook
  * @param mixed ...$args
  */
 function osc_run_hook($hook, ...$args)

@@ -34,6 +34,6 @@ if (Params::getParam('plugin_action') == 'done') {
         </div>
     </div>
     <div class="form-actions">
-        <input type="submit" value="<?php _e('Save changes', 'google_maps'); ?>" class="btn btn-submit">
+        <button type="submit" class="btn btn-submit"><?php _e('Save changes', 'google_maps'); ?></button>
     </div>
 </form>

@@ -153,39 +153,14 @@ class ItemActions
             $is_spam = 1;
         }
 
-        $flash_error .= ((!osc_validate_category($aItem['catId'])) ? _m('Category invalid.') . PHP_EOL : '');
-        $flash_error .= ((!osc_validate_number($aItem['price'])) ? _m('Price must be a number.') . PHP_EOL : '');
-        $flash_error .= ((!osc_validate_max(number_format($aItem['price'], 0, '', ''), 15))
-            ? _m('Price too long.')
-            . PHP_EOL : '');
-        $flash_error .= (($aItem['price'] !== null && (int)$aItem['price'] < 0)
-            ? _m('Price must be positive number.') . PHP_EOL : '');
         $flash_error .= ((!osc_validate_max($contactName, 35)) ? _m('Name too long.') . PHP_EOL : '');
         $flash_error .= ((!osc_validate_email($contactEmail)) ? _m('Email invalid.') . PHP_EOL : '');
-        $flash_error .= ((!osc_validate_phone($contactPhone, 4)) ? _m('Phone invalid.') . PHP_EOL : '');
-        $flash_error .= ((!osc_validate_text($aItem['countryName'], 2, false))
-            ? _m('Country too short.') . PHP_EOL
-            : '');
-        $flash_error .= ((!osc_validate_max($aItem['countryName'], 50)) ? _m('Country too long.') . PHP_EOL : '');
-        $flash_error .= ((!osc_validate_text($aItem['regionName'], 2, false))
-            ? _m('Region too short.') . PHP_EOL
-            : '');
-        $flash_error .= ((!osc_validate_max($aItem['regionName'], 50)) ? _m('Region too long.') . PHP_EOL : '');
-        $flash_error .= ((!osc_validate_text($aItem['cityName'], 2, false))
-            ? _m('City too short.') . PHP_EOL : '');
-        $flash_error .= ((!osc_validate_max($aItem['cityName'], 50)) ? _m('City too long.') . PHP_EOL : '');
-        $flash_error .= ((!osc_validate_text($aItem['cityArea'], 2, false))
-            ? _m('Municipality too short.')
-            . PHP_EOL : '');
-        $flash_error .= ((!osc_validate_max($aItem['cityArea'], 50)) ? _m('Municipality too long.') . PHP_EOL : '');
-        $flash_error .= ((!osc_validate_text($aItem['address'], 3, false))
-            ? _m('Address too short.') . PHP_EOL
-            : '');
-        $flash_error .= ((!osc_validate_max($aItem['address'], 100)) ? _m('Address too long.') . PHP_EOL : '');
+
+        $flash_error .= $this->validateCommonInput($flash_error, $aItem);
         $flash_error .= ((((time() - (int)Session::newInstance()->_get('last_submit_item')) < osc_items_wait_time())
-            && !$this->is_admin)
+                          && !$this->is_admin)
             ? _m('Too fast. You should wait a little to publish your ad.')
-            . PHP_EOL : '');
+              . PHP_EOL : '');
 
         $_meta = Field::newInstance()->findByCategory($aItem['catId']);
         $meta  = Params::getParam('meta');
@@ -692,44 +667,11 @@ class ItemActions
                     ? _m('Description too long.') . PHP_EOL : '');
         }
         $flash_error .= $desc_message;
-
-        $flash_error .= ((!osc_validate_category($aItem['catId'])) ? _m('Category invalid.') . PHP_EOL : '');
-        $flash_error .= ((!osc_validate_number($aItem['price'])) ? _m('Price must be a number.') . PHP_EOL : '');
-        $flash_error .= ((!osc_validate_max(number_format($aItem['price'], 0, '', ''), 15))
-            ? _m('Price too long.')
-            . PHP_EOL : '');
-        $flash_error .= (($aItem['price'] !== null && (int)$aItem['price'] < 0)
-            ? _m('Price must be positive number.') . PHP_EOL : '');
-        $flash_error .= ((!osc_validate_text($aItem['countryName'], 3, false))
-            ? _m('Country too short.') . PHP_EOL
-            : '');
-        $flash_error .= ((!osc_validate_max($aItem['countryName'], 50))
-            ? _m('Country too long.') . PHP_EOL : '');
-        $flash_error .= ((!osc_validate_text($aItem['regionName'], 2, false))
-            ? _m('Region too short.') . PHP_EOL
-            : '');
-        $flash_error .= ((!osc_validate_max($aItem['regionName'], 50))
-            ? _m('Region too long.') . PHP_EOL : '');
-        $flash_error .= ((!osc_validate_text($aItem['cityName'], 2, false))
-            ? _m('City too short.') . PHP_EOL : '');
-        $flash_error .= ((!osc_validate_max($aItem['cityName'], 50))
-            ? _m('City too long.') . PHP_EOL : '');
-        $flash_error .= ((!osc_validate_text($aItem['cityArea'], 3, false))
-            ? _m('Municipality too short.')
-            . PHP_EOL : '');
-        $flash_error .= ((!osc_validate_max($aItem['cityArea'], 50))
-            ? _m('Municipality too long.') . PHP_EOL : '');
-        $flash_error .= ((!osc_validate_text($aItem['address'], 3, false))
-            ? _m('Address too short.') . PHP_EOL
-            : '');
-        $flash_error .= ((!osc_validate_max($aItem['address'], 100))
-            ? _m('Address too long.') . PHP_EOL : '');
-        $flash_error .= ((!osc_validate_phone($aItem['s_contact_phone'], 4)) ? _m('Phone invalid.') . PHP_EOL : '');
-
+        $flash_error .= $this->validateCommonInput($flash_error, $aItem);
         $_meta = Field::newInstance()->findByCategory($aItem['catId']);
         $meta  = Params::getParam('meta');
         foreach ($_meta as $_m) {
-            $meta[$_m['pk_i_id']] = isset($meta[$_m['pk_i_id']]) ? $meta[$_m['pk_i_id']] : '';
+            $meta[$_m['pk_i_id']] = $meta[$_m['pk_i_id']] ?? '';
         }
         if ($meta && count($meta) > 0) {
             $mField = Field::newInstance();
@@ -743,9 +685,7 @@ class ItemActions
             }
         }
 
-        // hook pre add or edit
-        // DEPRECATED : preitem_psot will be removed in 3.4
-        // osc_run_hook('pre_item_post');
+        // hook pre edit
         osc_run_hook('pre_item_edit', $aItem, $flash_error);
         $flash_error = osc_apply_filter('pre_item_edit_error', $flash_error, $aItem);
 
@@ -1357,7 +1297,7 @@ class ItemActions
             $flash_error = __('Your name: this field is required') . PHP_EOL;
         }
         if (!osc_validate_email($aItem['yourEmail'])) {
-            $flash_error .= __('Invalid email address') . PHP_EOL;
+            $flash_error .= __('Invalid email address' . $aItem['yourEmail']) . PHP_EOL;
         }
         if (!osc_validate_text($aItem['message'])) {
             $flash_error .= __('Message: this field is required') . PHP_EOL;
@@ -1655,7 +1595,7 @@ class ItemActions
                 }
             } else {
                 $_category              = Category::newInstance()->findByPrimaryKey($aItem['catId']);
-                $aItem['dt_expiration'] = $_category['i_expiration_days'];
+                $aItem['dt_expiration'] = $_category['i_expiration_days'] ?? null;
             }
             unset($dt_expiration);
         } else {
@@ -1799,6 +1739,48 @@ class ItemActions
         }
 
         return $location;
+    }
+
+    /**
+     * Validate common inputs while editing/publishing
+     * @param string $flash_error
+     * @param        $aItem
+     *
+     * @return string
+     */
+    private function validateCommonInput(string $flash_error, $aItem)
+    {
+        $flash_error .= ((!osc_validate_category($aItem['catId'])) ? _m('Category invalid.') . PHP_EOL : '');
+        $flash_error .= ((!osc_validate_number($aItem['price'])) ? _m('Price must be a number.') . PHP_EOL : '');
+        $flash_error .= ((!osc_validate_max(number_format($aItem['price'], 0, '', ''), 15))
+            ? _m('Price too long.')
+              . PHP_EOL : '');
+        $flash_error .= (($aItem['price'] !== null && (int)$aItem['price'] < 0)
+            ? _m('Price must be positive number.') . PHP_EOL : '');
+        $flash_error .= ((!osc_validate_text($aItem['countryName'], 3, false))
+            ? _m('Country too short.') . PHP_EOL
+            : '');
+        $flash_error .= ((!osc_validate_max($aItem['countryName'], 50)) ? _m('Country too long.') . PHP_EOL : '');
+        $flash_error .= ((!osc_validate_text($aItem['regionName'], 2, false))
+            ? _m('Region too short.') . PHP_EOL
+            : '');
+        $flash_error .= ((!osc_validate_max($aItem['regionName'], 50)) ? _m('Region too long.') . PHP_EOL : '');
+        $flash_error .= ((!osc_validate_text($aItem['cityName'], 2, false))
+            ? _m('City too short.') . PHP_EOL : '');
+        $flash_error .= ((!osc_validate_max($aItem['cityName'], 50)) ? _m('City too long.') . PHP_EOL : '');
+        $flash_error .= ((!osc_validate_text($aItem['cityArea'], 3, false))
+            ? _m('Municipality too short.')
+              . PHP_EOL : '');
+        $flash_error .= ((!osc_validate_max($aItem['cityArea'], 50)) ? _m('Municipality too long.') . PHP_EOL : '');
+        $flash_error .= ((!osc_validate_text($aItem['address'], 3, false))
+            ? _m('Address too short.') . PHP_EOL
+            : '');
+        $flash_error .= ((!osc_validate_max($aItem['address'], 100)) ? _m('Address too long.') . PHP_EOL : '');
+        if (isset($aItem['s_contact_phone']) && (!osc_validate_phone($aItem['s_contact_phone'], 4))) {
+            $flash_error .= (_m('Phone invalid.') . PHP_EOL);
+        }
+
+        return $flash_error;
     }
 }
 

@@ -31,12 +31,14 @@ use mindstellar\form\base\FormInputs;
 
 /**
  * Class Form
- *
- * @deprecated Use \mindstellar\form\base\FormInputs or \mindstellar\form\base\FormBuilder instead
+ * For compatibility
+ * Use \mindstellar\form\base\FormInputs or \mindstellar\form\base\FormBuilder instead
  */
-class Form
+class Form extends FormInputs
 {
-    private static $FormInputs;
+    protected $textClass = 'form-control form-control-sm';
+    protected $selectClass = 'form-select form-select-sm';
+    protected $passwordClass = 'form-control form-control-sm';
 
     /**
      * @param $name
@@ -57,19 +59,7 @@ class Form
                 $values[$i[$fld_key]] = $i[$fld_name];
             }
         }
-        echo self::formInputs()->select($name, $values, $attributes, $options);
-    }
-
-    /**
-     * @return \mindstellar\form\base\FormInputs
-     */
-    public static function formInputs()
-    {
-        if (!self::$FormInputs instanceof FormInputs) {
-            self::$FormInputs = new FormInputs();
-        }
-
-        return self::$FormInputs;
+        echo (new self())->select($name, $values, $attributes, $options);
     }
 
     /**
@@ -98,7 +88,7 @@ class Form
         if (!$autocomplete) {
             $attributes['autocomplete'] = 'off';
         }
-        echo self::formInputs()->text($name, $value, $attributes);
+        echo (new self())->text($name, $value, $attributes);
     }
 
     /**
@@ -117,7 +107,7 @@ class Form
             $attributes['readonly'] = 'readonly';
             $attributes['disabled'] = 'disabled';
         }
-        echo self::formInputs()->password($name, $value, $attributes);
+        echo (new self())->password($name, $value, $attributes);
     }
 
     /**
@@ -127,7 +117,7 @@ class Form
     protected static function generic_input_hidden($name, $value)
     {
         $attributes['id'] = preg_replace('|([^_a-zA-Z0-9-]+)|', '', $name);
-        echo self::formInputs()->hidden($name, $value, $attributes);
+        echo (new self())->hidden($name, $value, $attributes);
     }
 
     /**
@@ -142,7 +132,7 @@ class Form
         if ($checked) {
             $attributes['checked'] = 'checked';
         }
-        echo self::formInputs()->checkbox($name, $value, $attributes, $options);
+        echo (new self())->checkbox($name, $value, $attributes, $options);
 
     }
 
@@ -153,6 +143,6 @@ class Form
     protected static function generic_textarea($name, $value)
     {
         $attributes['id'] = preg_replace('|([^_a-zA-Z0-9-]+)|', '', $name);
-        echo self::formInputs()->textarea($name, $value, $attributes);
+        echo (new self())->textarea($name, $value, $attributes);
     }
 }

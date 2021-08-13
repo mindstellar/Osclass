@@ -27,6 +27,8 @@
  *
  */
 
+use mindstellar\utility\Deprecate;
+
 /**
  * Class PageForm
  */
@@ -39,7 +41,8 @@ class PageForm extends Form
     public static function primary_input_hidden($page = null)
     {
         if (isset($page['pk_i_id'])) {
-            parent::generic_input_hidden('id', $page['pk_i_id']);
+            $attributes['id'] = 'id';
+            echo (new self())->hidden('id', $page['pk_i_id'], $attributes);
         }
     }
 
@@ -55,12 +58,14 @@ class PageForm extends Form
         if (Session::newInstance()->_getForm('s_internal_name') != '') {
             $internal_name = Session::newInstance()->_getForm('s_internal_name');
         }
-        parent::generic_input_text(
-            's_internal_name',
-            $internal_name,
-            null,
-            (isset($page['b_indelible']) && $page['b_indelible'] == 1)
-        );
+        $attributes['id']    = 's_internal_name';
+        $attributes['class'] = 'form-control form-control-sm input-large';
+
+        if ((isset($page['b_indelible']) && $page['b_indelible'] == 1)) {
+            $attributes['readonly'] = '';
+            $attributes['disabled'] = '';
+        }
+        echo (new self())->text('s_internal_name', $internal_name, $attributes);
     }
 
     /**
@@ -68,20 +73,25 @@ class PageForm extends Form
      */
     public static function link_checkbox($page = null)
     {
-        $checked = true;
-        if (is_array($page) && isset($page['b_link']) && $page['b_link'] == 0) {
-            $checked = false;
+        $attributes['id']           = 'b_link';
+        $options['noCheckboxLabel'] = true;
+        if (isset($page['b_link'])) {
+            $options['defaultValue'] = $page['b_link'];
         }
-
-        parent::generic_input_checkbox('b_link', '1', $checked);
+        echo (new self())->checkbox('b_link', 1, $attributes, $options);
     }
 
     /**
+     * @deprecated
      * @param      $locales
      * @param null $page
      */
     public static function multilanguage_name_description($locales, $page = null)
     {
+        Deprecate::deprecatedFunction('multilanguage_name_description',
+                                                           '5.1.0',
+                                                           'printMultiLangTitleDesc'
+        );
         $num_locales = count($locales);
         if ($num_locales > 1) {
             echo '<div class="tabber">';
@@ -99,13 +109,15 @@ class PageForm extends Form
             if (isset($page['locale'][$locale['pk_c_code']])) {
                 $title = $page['locale'][$locale['pk_c_code']]['s_title'];
             }
-            if (isset($aFieldsDescription[$locale['pk_c_code']])
-                && isset($aFieldsDescription[$locale['pk_c_code']]['s_title'])
-                && $aFieldsDescription[$locale['pk_c_code']]['s_title'] != ''
+            if (isset($aFieldsDescription[$locale['pk_c_code']]['s_title'])
+                && $aFieldsDescription[$locale['pk_c_code']]['s_title']
             ) {
                 $title = $aFieldsDescription[$locale['pk_c_code']]['s_title'];
             }
-            parent::generic_input_text($locale['pk_c_code'] . '#s_title', $title);
+            $attributes['id'] = $locale['pk_c_code'] . '#s_title';
+
+            echo (new self())->text($locale['pk_c_code'] . '#s_title', $title, $attributes);
+
             echo '</div>';
             echo '</div>';
             echo '<div class="FormElement">';
@@ -115,13 +127,13 @@ class PageForm extends Form
             if (isset($page['locale'][$locale['pk_c_code']])) {
                 $description = $page['locale'][$locale['pk_c_code']]['s_text'];
             }
-            if (isset($aFieldsDescription[$locale['pk_c_code']])
-                && isset($aFieldsDescription[$locale['pk_c_code']]['s_text'])
-                && $aFieldsDescription[$locale['pk_c_code']]['s_text'] != ''
+            if (isset($aFieldsDescription[$locale['pk_c_code']]['s_text'])
+                && $aFieldsDescription[$locale['pk_c_code']]['s_text']
             ) {
                 $description = $aFieldsDescription[$locale['pk_c_code']]['s_text'];
             }
-            parent::generic_textarea($locale['pk_c_code'] . '#s_text', $description);
+            $attributes1['id'] =  $locale['pk_c_code'] . '#s_text';
+            echo (new self())->textarea($locale['pk_c_code'] . '#s_text', $description, $attributes1);
             echo '</div>';
             echo '</div>';
             if ($num_locales > 1) {
@@ -130,6 +142,129 @@ class PageForm extends Form
         }
         if ($num_locales > 1) {
             echo '</div>';
+        }
+    }
+
+
+    /**
+     * Generate MultiLanguage Title Description Fields for Item
+     *
+     * @param null $locales
+     * @param null $page
+     */
+    public static function printMultiLangTitleDesc($page = null, $with_tab = true)
+    {
+        if ($with_tab) {
+            self::printMultiLangTab();
+        }
+        echo '<div class="tab-content mb-3" id="multiLangTabsContent" >';
+
+        foreach (osc_get_admin_locales() as $locale) {
+            // Add class active if $current_locale is equal to $locale['pk_c_code']
+            $active = '';
+            if ($locale['pk_c_code'] === osc_current_admin_locale()) {
+                $active = 'show active';
+            }
+            echo '<div class="tab-pane fade ' . $active . '" id="' . $locale['pk_c_code'] . '" role="tabpanel">';
+            self::printPageTitleInput($locale, $page);
+            self::printPageDescriptionInput($locale, $page);
+            echo '</div>';
+        }
+        echo '</div>';
+    }
+
+    /**
+     * Print MultiLang Tab
+     */
+    public static function printMultiLangTab()
+    {
+        $locales = osc_get_admin_locales();
+        if (count(osc_get_admin_locales()) > 1) {
+            echo '<div id="language-tab" class="mt-3">';
+            echo '<ul class="nav nav-tabs" id="multiLangTabs" role="tablist">';
+            foreach ($locales as $locale) {
+                $active = '';
+                if ($locale['pk_c_code'] === osc_current_admin_locale()) {
+                    $active = 'show active';
+                }
+                echo '<li class="nav-item"><a class="nav-link btn-sm ' . $active . '" href="#' . $locale['pk_c_code']
+                     . '" data-bs-toggle="tab">'
+                     . $locale['s_name'] . '</a></li>';
+            }
+            echo '</ul>';
+            echo '</div>';
+        }
+    }
+
+    /**
+     * Print Item Title Input
+     *
+     * @param                                   $locale
+     * @param array                             $page
+     */
+    private static function printPageTitleInput($locale, array $page)
+    {
+        $aFieldsDescription = Session::newInstance()->_getForm('aFieldsDescription');
+        $title = '';
+        if (isset($aFieldsDescription[$locale['pk_c_code']]['s_title'])) {
+            $title = $aFieldsDescription[$locale['pk_c_code']]['s_title'];
+        } elseif (isset($page['locale'][$locale['pk_c_code']])) {
+            $title = $page['locale'][$locale['pk_c_code']]['s_title'];
+        }
+        $value        = osc_apply_filter('admin_page_title', $title, $page, $locale);
+        $name         = $locale['pk_c_code'] . '#s_title';
+        $attributes   = [
+            'id'          => $name,
+            'placeholder' => __('Enter title here') . ' *',
+        ];
+        $options      = [
+            'sanitize' => 'html',
+            'label'    => __('Title') . ' *'
+        ];
+        try {
+            echo (new self())->text($name, $value, $attributes, $options);
+        } catch (Exception $e) {
+            if (OSC_DEBUG) {
+                trigger_error($e->getTraceAsString());
+            }
+        }
+    }
+
+    /**
+     * Print Item Description Text Area
+     *
+     * @param                                   $locale
+     * @param array                             $item
+     */
+    private static function printPageDescriptionInput($locale, array $page = null)
+    {
+        $description = '';
+        $aFieldsDescription = Session::newInstance()->_getForm('aFieldsDescription');
+        if (isset($page['locale'][$locale['pk_c_code']])) {
+            $description = $page['locale'][$locale['pk_c_code']]['s_text'];
+        }
+        if (isset($aFieldsDescription[$locale['pk_c_code']]['s_text'])
+            && $aFieldsDescription[$locale['pk_c_code']]['s_text']
+        ) {
+            $description = $aFieldsDescription[$locale['pk_c_code']]['s_text'];
+        }
+
+        $value = osc_apply_filter('admin_page_description', $description, $page, $locale);
+        $name = $locale['pk_c_code'] . '#s_text';
+        $attributes  = [
+            'id'       => $name,
+            'rows'     => '20'
+        ];
+        $options     = [
+            'label'    => __('Description') . ' *',
+            'sanitize' => null,
+        ];
+        try {
+            echo (new self())->textarea($name, $value, $attributes, $options);
+        } catch (Exception $e) {
+            if (OSC_DEBUG) {
+                trigger_error($e->getTraceAsString());
+            }
         }
     }
 }

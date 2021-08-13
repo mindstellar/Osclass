@@ -1,0 +1,69 @@
+.dashboard-sidebar {
+  &.offcanvas {
+    overflow-y: auto;
+  }
+
+  @extend .px-sm-2, .px-0, .bg-black-light, .min-vh-100, .text-white;
+  max-width: 15rem;
+  div {
+    &.nav-link {
+      background-color: $gray-800;
+      color: $nav-pills-link-active-color;
+
+      >i {
+        margin-left: 1rem;
+        transition: ease 500ms;
+
+        &.collapsed {
+          transform: rotate(-90deg);
+        }
+      }
+    }
+  }
+
+  .nav-link {
+    &.active {
+      & a {
+        color: $gray-200;
+
+        :hover {
+          color: $gray-100;
+        }
+      }
+    }
+
+    a {
+      color: $gray-500;
+
+      :hover {
+        color: $gray-200;
+        transition: $nav-link-transition;
+      }
+
+      @extend .text-decoration-none;
+    }
+  }
+}
+
+.sidebar-submenu {
+
+  background-color: $color-gray-black;
+  border: $border-width solid transparent;
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
+  font-size: $font-size-sm;
+  margin-top: -.1rem;
+  padding-top: .1rem;
+  @include border-radius($navbar-toggler-border-radius);
+
+  a {
+    color: $gray-400;
+    font-size: $font-size-sm;
+    margin-bottom: $border-width;
+
+    &.sub-active, &:hover {
+      background-color: $gray-600;
+      color: $gray-200;
+    }
+  }
+}

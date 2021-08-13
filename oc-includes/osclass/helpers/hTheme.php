@@ -237,7 +237,7 @@ function osc_load_styles()
  */
 function osc_print_bulk_actions($id, $name, $options, $class = '')
 {
-    echo '<select id="' . $id . '" name="' . $name . '" ' . ($class != '' ? 'class="' . $class . '"' : '') . '>';
+    echo '<select id="' . $id . '" name="' . $name . '" ' . ($class != '' ? 'class="form-select ' . $class . '"' : 'form-select') . '>';
     foreach ($options as $o) {
         $opt   = '';
         $label = '';

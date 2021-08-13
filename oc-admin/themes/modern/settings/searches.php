@@ -105,7 +105,8 @@ function customPageHeader()
 {
     ?>
     <h1><?php _e('Settings'); ?>
-        <a href="#" class="btn ico ico-32 ico-help float-right"></a>
+        <a class="ms-1 bi bi-question-circle-fill float-right" data-bs-target="#help-box" data-bs-toggle="collapse"
+           href="#help-box"></a>
     </h1>
     <?php
 }
@@ -196,7 +197,7 @@ osc_current_admin_theme_path('parts/header.php'); ?>
                                 />
                                 <?php printf(
                                     __('Store %s queries'),
-                                    '<input name="custom_queries" id="custom_queries" type="text" class="input-small" '
+                                    '<input name="custom_queries" id="custom_queries" type="number" class="input-medium" '
                                     . (!in_array(
                                         osc_purge_latest_searches(),
                                         array('hour', 'day', 'week', 'forever', '1000')

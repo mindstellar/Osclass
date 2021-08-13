@@ -1,0 +1,290 @@
+.table {
+  @extend .shadow-sm, .table-striped;
+  --#{$variable-prefix}table-striped-bg: #{$gray-300}33;
+  background-color: $gray-100;
+  border: 1px solid $gray-400;
+  font-size: 14px;
+  width: 100%;
+
+  thead {
+    border-bottom: 1px solid $gray-400;
+
+    th {
+      font-weight: normal;
+
+      a {
+        text-decoration-line: none;
+      }
+    }
+  }
+
+  tbody {
+    .col-title {
+      font-size: ($font-size-base - .1);
+      font-weight: 500;
+
+      a {
+        text-decoration-line: none;
+      }
+    }
+  }
+}
+
+.table th,
+.table td {
+  border-bottom: 0;
+  border-left: 0;
+  border-left: 0;
+  border-top: 0;
+  line-height: 18px;
+  padding: 7px;
+}
+
+.table thead th,
+.table thead td,
+.table-first-row td {
+  border-top: 0;
+}
+
+.table-contains-actions tbody td {
+  padding-bottom: 25px;
+}
+
+#table-row-actions {
+  display: none;
+  font-size: 13px;
+  margin-top: -25px;
+  padding: 0 6px;
+  position: absolute;
+
+  a {
+    text-decoration-line: none;
+  }
+}
+
+.table-collapsed #table-row-actions {
+  margin-top: 0;
+  padding: 3px 42px;
+}
+
+.table-collapsed tbody td {
+  padding-bottom: 4px;
+}
+
+.collapsed-hover td {
+  padding-top: 31px;
+}
+
+#table-row-actions ul {
+  list-style: none;
+  margin: 4px 0 0;
+  padding: 0;
+}
+
+#table-row-actions li {
+  float: left;
+  margin-right: 10px;
+}
+
+#table-row-actions li a {
+  float: left;
+}
+
+#table-row-actions li ul {
+  float: left;
+  margin: 0;
+}
+
+#table-row-actions a {
+  color: #018BE3;
+  text-decoration: none;
+}
+
+#table-row-actions .show-more ul {
+  display: none;
+}
+
+#table-row-actions .hover a {
+  display: none;
+}
+
+#table-row-actions .hover ul a {
+  display: block;
+}
+
+#table-row-actions .hover ul {
+  display: block;
+}
+
+#table-row-actions a:hover {
+  text-decoration: underline;
+}
+
+.col-bulkactions {
+  opacity: 1 !important;
+  text-align: center !important;
+}
+
+.table-contains-actions {
+  position: relative;
+}
+
+.table div.actions {
+  display: none;
+}
+
+.table td.col-status-border {
+  border-bottom: 0;
+  border-right: 0;
+  border-top: 0;
+  margin: 0;
+  padding: 0;
+  width: 1px;
+}
+
+.table td.col-status {
+  border-bottom: 0;
+  border-left: 0;
+  border-top: 1px solid rgba(0, 0, 0, 0.1);
+  font-weight: bold;
+  margin: 0;
+  padding: 0 10px;
+  vertical-align: middle;
+  width: 50px;
+}
+
+.table .status-spam td.col-status-border {
+  background: #323A45;
+}
+
+.table .status-spam td.col-status {
+  background: $gray-700;
+  color: $gray-200;
+}
+
+.table .status-blocked td.col-status-border {
+  background: $color-red-border;
+}
+
+.table .status-blocked td.col-status {
+  background: $color-red;
+  color: $gray-100;
+}
+
+.table .status-inactive td.col-status-border {
+  background: $gray-500;
+}
+
+.table .status-inactive td.col-status {
+  background: $gray-400;
+  color: $gray-800;
+}
+
+.table .status-premium td.col-status-border {
+  background: $yellow;
+}
+
+.table .status-premium td.col-status {
+  background: $yellow-300;
+  color: $yellow-800;
+}
+
+.table .status-active td.col-status-border {
+  background: $color-blue-border;
+}
+
+.table .status-active td.col-status {
+  background: $color-blue-hover;
+  color: $gray-100;
+}
+
+.table .status-expired td.col-status-border {
+  background: $gray-800;
+}
+
+.table .status-expired td.col-status {
+  background: $gray-200;
+  color: $gray-800;
+}
+
+td.children-cat {
+  padding-left: 20px;
+}
+
+table.table-small {
+  width: 280px;
+}
+
+.order-box {
+  padding-right: 20px;
+  position: relative;
+}
+
+.order-box img {
+  cursor: pointer;
+
+  filter: alpha(opacity=5);
+  height: 10px;
+  opacity: 0.5;
+  position: absolute;
+  right: 5px;
+  width: 10px;
+}
+
+.order-box img:hover {
+
+  filter: alpha(opacity=1);
+  opacity: 1;
+}
+
+.order-box .up {
+  top: 0;
+}
+
+.order-box .down {
+  top: 10px;
+}
+
+.sorting_desc a {
+  padding-right: 30px;
+
+  &:before {
+    content: "\f229";
+    font-family: 'bootstrap-icons';
+  }
+}
+
+.sorting_asc a {
+  padding-right: 30px;
+
+  &:before {
+    content: "\f235";
+    font-family: 'bootstrap-icons';
+  }
+}
+
+/* Columns width */
+.col-bulkactions {
+  width: 20px;
+}
+
+.col-order {
+  width: 55px;
+}
+
+.col-date {
+  width: 160px;
+}
+
+.col-title {
+  min-width: 280px;
+}
+
+table .icon-new-window {
+  margin-left: 5px;
+
+  &:before {
+    content: "\f1c5";
+    font-family: 'bootstrap-icons';
+  }
+}

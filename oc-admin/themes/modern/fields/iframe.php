@@ -33,22 +33,23 @@ $categories = __get('categories');
 $selected   = __get('selected');
 ?>
 <!-- custom field frame -->
-<div id="edit-custom-field-frame" class="custom-field-frame">
+<div id="edit-custom-field-frame" class="card custom-field-frame">
     <div class="form-horizontal">
         <form id="nedit_field_form" action="<?php echo osc_admin_base_url(true); ?>" method="post">
             <input type="hidden" name="page" value="ajax"/>
             <input type="hidden" name="action" value="field_categories_post"/>
             <?php FieldForm::primary_input_hidden($field); ?>
+            <h3 class="card-header"><?php _e('Edit custom field'); ?></h3>
             <fieldset>
-                <h3><?php _e('Edit custom field'); ?></h3>
-                <div class="form-row">
-                    <div class="form-label"><?php _e('Name'); ?></div>
-                    <div class="form-controls"><?php FieldForm::name_input_text($field); ?></div>
-                </div>
-                <div class="form-row">
-                    <div class="form-label"><?php _e('Type'); ?></div>
-                    <div class="form-controls"><?php FieldForm::type_select($field); ?></div>
-                </div>
+                <div class="card-body col-md-6">
+                    <div class="form-row">
+                        <div class="form-label"><?php _e('Name'); ?></div>
+                        <div class="form-controls"><?php FieldForm::name_input_text($field); ?></div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-label"><?php _e('Type'); ?></div>
+                        <div class="form-controls"><?php FieldForm::type_select($field); ?></div>
+                    </div>
                 <div class="form-row" id="div_field_options">
                     <div class="form-label"><?php _e('Options'); ?></div>
                     <div class="form-controls">
@@ -79,18 +80,18 @@ $selected   = __get('selected');
                     </div>
                 </div>
 
-                <div id="advanced_fields_iframe" class="custom-field-shrink">
-                    <div class="icon-more"></div><?php _e('Advanced options'); ?>
-                </div>
-                <div id="more-options_iframe" class="input-line">
-                    <div class="form-row" id="div_field_options">
-                        <div class="form-label"><?php _e('Identifier name'); ?></div>
-                        <div class="form-controls">
-                            <input type="text" class="medium" name="field_slug"
-                                   value="<?php echo $field['s_slug']; ?>"/>
-                            <p class="help-inline"><?php _e('Only alphanumeric characters are allowed [a-z0-9_-]'); ?></p>
-                        </div>
+                    <div id="advanced_fields_iframe" class="custom-field-shrink">
+                        <span class="icon-more"></span><?php _e('Advanced options'); ?>
                     </div>
+                    <div id="more-options_iframe" class="input-line">
+                        <div class="form-row" id="div_field_options">
+                            <div class="form-label"><?php _e('Identifier name'); ?></div>
+                            <div class="form-controls">
+                                <input type="text" class="form-control" name="field_slug"
+                                       value="<?php echo $field['s_slug']; ?>"/>
+                                <p class="help-inline"><?php _e('Only alphanumeric characters are allowed [a-z0-9_-]'); ?></p>
+                            </div>
+                        </div>
                     <div class="form-row">
                         <div class="form-label"></div>
                         <div class="form-controls">
@@ -98,8 +99,9 @@ $selected   = __get('selected');
                                 _e('Tick to allow searches by this field'); ?></label>
                         </div>
                     </div>
+                    </div>
                 </div>
-                <div class="form-actions">
+                <div class="card-footer form-actions">
                     <input type="submit" id="cfield_save" value="<?php echo osc_esc_html(__('Save changes')); ?>"
                            class="btn btn-submit"/>
                     <input type="button" value="<?php echo osc_esc_html(__('Cancel')); ?>" class="btn btn-red"

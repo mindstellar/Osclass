@@ -212,7 +212,7 @@ function osc_locale_thousands_sep()
     $cLocale  = $aLocales[0];
 
     foreach ($aLocales as $locale) {
-        if ($locale['pk_c_code'] == osc_current_user_locale()) {
+        if ($locale['pk_c_code'] === osc_current_user_locale()) {
             $cLocale = $locale;
             break;
         }

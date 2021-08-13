@@ -1,0 +1,87 @@
+.flashmessage {
+  @extend .alert;
+  @extend .shadow-sm;
+}
+
+.flashmessage-info {
+  @extend .alert-info;
+}
+
+.flashmessage-error,
+.flashmessage-error td {
+  @extend .alert-danger;
+}
+
+.flashmessage-ok {
+  @extend .alert-success;
+}
+
+.flashmessage-warning {
+  @extend .alert-warning;
+}
+
+.flashmessage-inline {
+  display: inline-block;
+  min-height: 0;
+  padding: 0 10px;
+  @include rounded-corners;
+}
+
+.flashmessage-inline p {
+  margin: 5px 0;
+}
+
+#error_list {
+  background: $error-bg;
+  border: 1px solid;
+  color: $error-text;
+  display: none;
+  padding: 15px;
+  @include rounded-corners;
+  list-style-type: none
+
+}
+
+#content-page {
+  .flashmessage {
+    @include rounded-corners;
+  }
+
+  .flashmessage-info {
+    border-top: solid 1px $info-border;
+  }
+
+  .flashmessage-error {
+    border-top: solid 1px $error-border;
+  }
+
+  .flashmessage-ok {
+    border-top: solid 1px $success-border;
+  }
+
+  .flashmessage-warning {
+    border-top: solid 1px $warning-border;
+  }
+}
+
+// scss-docs-end callout-variant-mixin
+@each $state, $value in $callout-colors {
+  $callout-background: shift-color($value, -90%);
+  $callout-border: shift-color($value, 10%);
+  $callout-color: $gray-800;
+  .callout-#{$state} {
+    @include callout-variant($callout-background, $callout-border, $callout-color);
+    border-left: .35rem solid $value;
+    border-radius: 4px;
+    display: inline-block;
+    font-size: .85rem;
+    font-style: italic;
+    margin-top: .2rem;
+    padding: .35rem .50rem;
+  }
+}
+
+.callout-block {
+  display: block;
+  padding: 1rem .85rem;
+}

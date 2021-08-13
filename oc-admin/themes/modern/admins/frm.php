@@ -152,10 +152,9 @@ osc_current_admin_theme_path('parts/header.php'); ?>
                     <div class="clear"></div>
                     <div class="form-actions">
                         <?php if ($aux['admin_edit']) { ?>
-                            <a href="javascript:history.go(-1)" class="btn"><?php _e('Cancel'); ?></a>
+                            <a href="javascript:history.go(-1)" class="btn btn-dim"><?php _e('Cancel'); ?></a>
                         <?php } ?>
-                        <input type="submit" value="<?php echo osc_esc_html($aux['btn_text']); ?>"
-                               class="btn btn-submit"/>
+                        <button class="btn btn-submit" type="submit"><?php echo osc_esc_html($aux['btn_text']); ?></button>
                     </div>
                 </div>
             </fieldset>

@@ -67,7 +67,7 @@ $aLocale = __get('aLocale');
 
 osc_current_admin_theme_path('parts/header.php'); ?>
     <h2 class="render-title"><?php _e('Edit language'); ?></h2>
-    <div id="language-form">
+    <div id="language-form" class="col-lg-6">
         <ul id="error_list"></ul>
         <form name="language_form" action="<?php echo osc_admin_base_url(true); ?>" method="post">
             <input type="hidden" name="page" value="languages"/>
@@ -143,7 +143,7 @@ osc_current_admin_theme_path('parts/header.php'); ?>
                 </div>
             </div>
             <div class="form-actions">
-                <input type="submit" value="<?php echo osc_esc_html(__('Save changes')); ?>" class="btn btn-submit"/>
+                <button type="submit" class="btn btn-submit"><?php echo osc_esc_html(__('Save changes')); ?></button>
             </div>
         </form>
     </div>

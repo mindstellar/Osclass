@@ -83,9 +83,11 @@ function customPageHeader()
 {
     ?>
     <h1><?php _e('Settings'); ?>
-        <a href="#" class="btn ico ico-32 ico-help float-right"></a>
+        <a class="ms-1 bi bi-question-circle-fill float-right" data-bs-target="#help-box" data-bs-toggle="collapse"
+           href="#help-box"></a>
         <a href="<?php echo osc_admin_base_url(true) . '?page=settings&action=currencies&type=add'; ?>"
-           class="btn btn-green ico ico-32 ico-add-white float-right"><?php _e('Add'); ?></a>
+           class="ms-1 text-success float-end" data-bs-toggle="tooltip" data-bs-placement="bottom" title="<?php _e('Add'); ?>"><i
+                    class="bi bi-plus-circle-fill"></i></a>
     </h1>
     <?php
 }
@@ -181,13 +183,12 @@ osc_current_admin_theme_path('parts/header.php'); ?>
                         </div>
                     </div>
                     <div class="form-actions">
-                        <?php if ($typeForm == 'edit_post') { ?>
+                        <?php if ($typeForm === 'edit_post') { ?>
                             <input class="btn btn-red" type="button" value="<?php echo osc_esc_html(__('Cancel')); ?>"
                                    onclick="location.href='<?php echo osc_admin_base_url(true);
                                     ?>?page=settings&amp;action=currencies'">
                         <?php } ?>
-                        <input type="submit" value="<?php echo osc_esc_html(customText('button')); ?>"
-                               class="btn btn-submit"/>
+                        <button type="submit" class="btn btn-submit"><?php echo osc_esc_html(customText('button')); ?></button>
                     </div>
                 </div>
             </fieldset>

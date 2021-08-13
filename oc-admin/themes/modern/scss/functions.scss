@@ -1,0 +1,30 @@
+@mixin rounded-corners($radius: 4px) {
+  border-radius: $radius;
+}
+
+@mixin error-color() {
+  background: $color-error-bg;
+  border: solid 1px $color-error-border;
+  color: $color-error-text;
+}
+
+@mixin submit-color() {
+  background: $color-submit-bg;
+  border: solid 1px $color-submit-border;
+  color: $color-submit-text;
+}
+
+@mixin border-radius($radius) {
+  @include rounded-corners($radius);
+}
+
+// scss-docs-start callout-variant-mixin
+@mixin callout-variant($background, $border, $color) {
+  color: $color;
+  @include gradient-bg($background);
+  border-color: $border;
+
+  .callout-link {
+    color: shade-color($color, 20%);
+  }
+}

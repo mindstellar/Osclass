@@ -1,0 +1,15 @@
+div.guideline-header {
+  position: relative;
+}
+
+pre,
+code {
+  word-wrap: break-word;
+  background-color: $color-gray-light;
+  border: 1px solid $color-gray-soft;
+  padding: 8px;
+  white-space: pre;
+  white-space: pre-wrap;
+  word-break: break-all;
+  @include rounded-corners;
+}

@@ -393,9 +393,8 @@ class CAdminPlugins extends AdminSecBaseModel
                     $sHelp = '';
                     if ($pInfo['support_uri'] != '') {
                         $sHelp = '<span class="plugin-support-icon plugin-tooltip" ><a target="_blank" href="'
-                            . osc_sanitize_url($pInfo['support_uri']) . '" ><img src="'
-                            . osc_current_admin_theme_url('images/question.png') . '" alt="'
-                            . osc_esc_html(__('Problems with this plugin? Ask for support.')) . '" ></a></span>';
+                            . osc_sanitize_url($pInfo['support_uri']) . '" ><i class="bi bi-info-circle-fill" title="'
+                            . osc_esc_html(__('Problems with this plugin? Ask for support.')) . '" ></i></a></span>';
                     }
                     $sSiteUrl = '';
                     if ($pInfo['plugin_uri'] != '') {

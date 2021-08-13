@@ -314,7 +314,7 @@ class ItemForm extends Form
             $categories = Category::newInstance()->listEnabled();
         }
 
-        parent::generic_input_hidden('catId', $categoryID);
+        self::generic_input_hidden('catId', $categoryID);
 
         ?>
         <div id="select_holder"></div>
@@ -382,14 +382,15 @@ class ItemForm extends Form
                 tmp_categories = window['categories_' + categoryID];
                 if (tmp_categories != null && $.isArray(tmp_categories)) {
                     $("#select_holder").before(
-                        '<select id="select_' + select + '" name="select_' + select + '" depth="' + select + '"></select>'
+                        '<select id="select_' + select + '" class="form-select form-select-sm" name="select_' + select + '" ' +
+                        'depth="' + select +
+                        '"></select>'
                     );
 
-                    if (categoryID == 0) {
-                        var options = '<option value="' + categoryID + '" >' + osc.langs.select_category + '</option>';
-                    } else {
-                        var options = '<option value="' + categoryID + '" >' + osc.langs.select_subcategory + '</option>';
-                    }
+                    var options = '<option value="' + categoryID + '" >'
+                        + (categoryID == 0 ? osc.langs.select_category : osc.langs.select_category)
+                        + '</option>';
+
                     $.each(tmp_categories, function (index, value) {
                         options +=
                             '<option value="' + value[0] + '" ' +
@@ -463,7 +464,7 @@ class ItemForm extends Form
         if ($type === 'edit') {
             $value = '-1';  // default no change expiration date
         }
-        echo '<input id="dt_expiration" type="text" name="dt_expiration" value="'
+        echo '<input class="form-control form-control-sm" id="dt_expiration" type="text" name="dt_expiration" value="'
             . osc_esc_html(htmlentities($value, ENT_COMPAT, 'UTF-8'))
             . '" placeholder="yyyy-mm-dd HH:mm:ss" />';
 
@@ -499,22 +500,22 @@ class ItemForm extends Form
                 });
                 draw_expiration(exp_days[$("#catId").value]);
             });
-            if (osc == undefined) {
+            if (osc === undefined) {
                 var osc = {};
             }
-            if (osc.langs == undefined) {
+            if (osc.langs === undefined) {
                 osc.langs = {};
             }
-            if (osc.langs.nochange_expiration == undefined) {
+            if (osc.langs.nochange_expiration === undefined) {
                 osc.langs.nochange_expiration = '<?php echo osc_esc_js(__('No change expiration')); ?>';
             }
-            if (osc.langs.without_expiration == undefined) {
+            if (osc.langs.without_expiration === undefined) {
                 osc.langs.without_expiration = '<?php echo osc_esc_js(__('Without expiration')); ?>';
             }
-            if (osc.langs.expiration_day == undefined) {
+            if (osc.langs.expiration_day === undefined) {
                 osc.langs.expiration_day = '<?php echo osc_esc_js(__('1 day')); ?>';
             }
-            if (osc.langs.expiration_days == undefined) {
+            if (osc.langs.expiration_days === undefined) {
                 osc.langs.expiration_days = '<?php echo osc_esc_js(__('%d days')); ?>';
             }
 

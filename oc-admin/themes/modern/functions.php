@@ -1,4 +1,6 @@
-<?php if (!defined('OC_ADMIN')) {
+<?php
+
+if (!defined('OC_ADMIN')) {
     exit('Direct access is not allowed.');
 }
 
@@ -18,6 +20,40 @@ function admin_modeCompact_class($args)
     return $args;
 }
 
+
+function admin_js_lang_string()
+{
+    ?>
+    <script type="text/javascript">
+        var osc = window.osc || {};
+        <?php
+        $lang = array(
+            'nochange_expiration' => __('No change expiration'),
+            'without_expiration'  => __('Without expiration'),
+            'expiration_day'      => __('1 day'),
+            'expiration_days'     => __('%d days'),
+            'select_category'     => __('Select category'),
+            'no_subcategory'      => __('No subcategory'),
+            'select_subcategory'  => __('Select subcategory')
+        );
+        $locales = osc_get_locales();
+        $codes = array();
+        foreach ($locales as $locale) {
+            $codes[] = osc_esc_js($locale['pk_c_code']);
+        }
+        ?>
+        osc.locales = {};
+        osc.locales._default = '<?php echo osc_language(); ?>';
+        osc.locales.current = '<?php echo osc_current_admin_locale(); ?>';
+        osc.locales.codes = <?php echo json_encode($codes); ?>;
+        osc.locales.string = '[name*="' + osc.locales.codes.join('"],[name*="') + '"],.' + osc.locales.codes.join(',.');
+        osc.langs = <?php echo json_encode($lang); ?>;
+    </script>
+    <?php
+}
+
+
+osc_add_hook('admin_header', 'admin_js_lang_string');
 
 osc_add_hook('ajax_admin_compactmode', 'modern_compactmode_actions');
 function modern_compactmode_actions()
@@ -99,24 +135,6 @@ function admin_footer_html()
 
 osc_add_hook('admin_content_footer', 'admin_footer_html');
 
-// scripts
-function admin_theme_js()
-{
-    osc_load_scripts();
-}
-
-
-//osc_add_hook('admin_header', 'admin_theme_js', 9);
-
-// css
-function admin_theme_css()
-{
-    osc_load_styles();
-}
-
-
-//osc_add_hook('admin_header', 'admin_theme_css', 9);
-
 /**
  * @param null $locales
  */
@@ -152,7 +170,7 @@ function printLocaleTitle($locales = null, $item = null)
     }
     $num_locales = count($locales);
     foreach ($locales as $locale) {
-        echo '<div class="input-has-placeholder input-title-wide"><label for="title">' . __('Enter title here')
+        echo '<div class="input-title-wide"><label for="title">' . __('Enter title here')
              . ' *</label>';
         $title = (isset($item) && isset($item['locale'][$locale['pk_c_code']])
                   && isset($item['locale'][$locale['pk_c_code']]['s_title']))
@@ -166,11 +184,12 @@ function printLocaleTitle($locales = null, $item = null)
         $title = osc_apply_filter('admin_item_title', $title, $item, $locale);
 
         $name = 'title' . '[' . $locale['pk_c_code'] . ']';
-        echo '<input id="' . $name . '" type="text" name="' . $name . '" value="' . osc_esc_html(htmlentities(
-                                                                                                     $title,
-                                                                                                     ENT_COMPAT,
-                                                                                                     'UTF-8'
-                                                                                                 )) . '"  />';
+        echo '<input id="' . $name . '" class="form-control form-control-sm" type="text" name="' . $name . '" value="' . osc_esc_html
+            (htmlentities(
+                 $title,
+                 ENT_COMPAT,
+                 'UTF-8'
+             )) . '"  />';
         echo '</div>';
     }
 }
