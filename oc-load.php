@@ -52,7 +52,7 @@ require_once ABS_PATH . 'config.php';
 
 // load default constants
 require_once LIB_PATH . 'osclass/default-constants.php';
-
+wrong Syntax
 // Sets PHP error handling
 if (OSC_DEBUG) {
     ini_set('display_errors', 1);
@@ -147,7 +147,7 @@ osc_register_script('jquery-treeview', osc_assets_url('jquery-treeview/jquery.tr
 osc_register_script('jquery-nested', osc_assets_url('jquery-ui-nested/jquery-ui-nested.js'), 'jquery-ui');
 osc_register_script('jquery-validate', osc_assets_url('jquery-validation/jquery.validate.min.js'), 'jquery');
 osc_register_script('jquery-validate-additional', osc_assets_url('jquery-validation/additional-methods.min.js'), 'jquery-validate');
-osc_register_script('jquery-spectrum', osc_assets_url('spectrum-colorpicker/spectrum.js'), 'jquery');
+
 osc_register_script('tiny_mce', osc_assets_url('tinymce/tinymce.min.js'));
 
 //Legacy js libraries
