@@ -1,15 +1,17 @@
 name: Osclass CI
 on: [push]
-steps:
-  - name: PHP syntax checker 7.0
-    uses: linter/7.0@v1
-  - name: PHP syntax checker 7.1
-    uses: linter/7.1@v1
-  - name: PHP syntax checker 7.2
-    uses: linter/7.2@v1
-  - name: PHP syntax checker 7.3
-    uses: linter/7.3@v1
-  - name: PHP syntax checker 7.4
-    uses: linter/7.4@v1
-  - name: PHP syntax checker 8.0
-    uses: linter/8.0@v1
+jobs:
+  osclass_lint_test:
+    steps:
+      - name: PHP syntax checker 7.0
+        uses: linter/7.0
+      - name: PHP syntax checker 7.1
+        uses: linter/7.1
+      - name: PHP syntax checker 7.2
+        uses: linter/7.2
+      - name: PHP syntax checker 7.3
+        uses: linter/7.3
+      - name: PHP syntax checker 7.4
+        uses: linter/7.4
+      - name: PHP syntax checker 8.0
+        uses: linter/8.0
