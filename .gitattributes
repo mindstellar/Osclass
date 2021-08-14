@@ -8,6 +8,7 @@
 /.package.json export-ignore
 /.gitmodules export-ignore
 /.build.sh export-ignore
+/.bump export-ignore
 /Releases export-ignore
 /Gruntfile.js export-ignore
 /composer.json export-ignore
