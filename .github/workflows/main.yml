@@ -17,6 +17,6 @@ jobs:
           php-version: ${{ matrix.php-versions }}
           extensions: mbstring, intl, pdo_sqlite, pdo_mysql
       - name: Test Syntax
-        run: find . -type f -name \"*.php\" $1 -exec php -l -n {} \; | grep -v \"No syntax errors detected\"
+        run: find -L . ! -name 'HTMLPurifierExtras.autoload-legacy.php' ! -name 'HTMLPurifier.autoload-legacy.php' -name '*.php' -print0 | xargs -0 -n 1 -P 4 php -l
           
   
