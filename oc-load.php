@@ -52,7 +52,7 @@ require_once ABS_PATH . 'config.php';
 
 // load default constants
 require_once LIB_PATH . 'osclass/default-constants.php';
-wrong Syntax
+
 // Sets PHP error handling
 if (OSC_DEBUG) {
     ini_set('display_errors', 1);
