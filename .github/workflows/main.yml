@@ -1,0 +1,22 @@
+# GitHub Action for Osclass
+name: Osclass CI
+on: [push, pull_request]
+jobs:
+  tests:
+    strategy:
+      matrix:
+        operating-system: [ubuntu-latest]
+        php-versions: ['7.0','7.1','7.2', '7.3', '7.4','8.0']
+    runs-on: ${{ matrix.operating-system }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2 #https://github.com/shivammathur/setup-php
+        with:
+          php-version: ${{ matrix.php-versions }}
+          extensions: mbstring, intl, pdo_sqlite, pdo_mysql
+      - name: Test Syntax
+        run: find . -type f -name \"*.php\" $1 -exec php -l -n {} \; | grep -v \"No syntax errors detected\"
+          
+  
