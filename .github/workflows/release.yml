@@ -9,7 +9,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Run build script
-        run: sh ./.build.sh
+        run: sh .build.sh
       - run: echo "Uploading release package"
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
