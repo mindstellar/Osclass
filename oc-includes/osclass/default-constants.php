@@ -28,7 +28,7 @@
  */
 
 if (!defined('OSCLASS_VERSION')) {
-    define('OSCLASS_VERSION', 'v5.1.0.text');
+    define('OSCLASS_VERSION', 'v5.1.0.test');
 }
 
 if (!defined('MULTISITE')) {
