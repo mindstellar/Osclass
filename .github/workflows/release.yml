@@ -25,12 +25,14 @@ jobs:
       - name: Update draft to ${{ steps.vars.outputs.tag }}
         id: create-release
         run: |
-          curl \
+          echo 'JSON_RESPONSE<<EOF' >> $GITHUB_ENV
+          curl -s \
           -X POST \
           -H 'Accept: application/vnd.github.v3+json' \
           -H 'Authorization: Bearer ${{ secrets.GITHUB_TOKEN }}' \
           https://api.github.com/repos/mindstellar/Osclass/releases \
-          -d '{"tag_name":"${{ steps.vars.outputs.tag }}", "name": "Osclass v${{ steps.vars.outputs.tag }}", "draft": true}'
+          -d '{"tag_name":"${{ steps.vars.outputs.tag }}", "name": "Osclass v${{ steps.vars.outputs.tag }}", "draft": true}' >> $GITHUB_ENV
+          echo 'EOF' >> $GITHUB_ENV
       - name: Upload asset to ${{ github.event.client_payload.release_tag }}
         run: |
           curl \
@@ -38,7 +40,7 @@ jobs:
           -H 'Accept: application/vnd.github.v3+json' \
           -H 'Content-Type: application/zip' \
           -H 'Authorization: Bearer ${{ secrets.GITHUB_TOKEN }}' \
-          https://api.github.com/repos/mindstellar/Osclass/releases/${{ steps.create-release.outputs.id }}/assets \
+          https://api.github.com/repos/mindstellar/Osclass/releases/${{ env.JSON_RESPONSE.id }}/assets \
           -d '{"name":"./release/osclass_v${{ steps.vars.outputs.tag }}.zip"}'
   
         
