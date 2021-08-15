@@ -9,7 +9,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Run build script
-        run: chmod +x .build.sh
+        run: echo $(ls)
+      - run: chmod +x .build.sh
       - run: ./.build.sh
         shell: bash
       - run: echo "Uploading release package"
