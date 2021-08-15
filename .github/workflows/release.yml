@@ -38,7 +38,7 @@ jobs:
           -H 'Accept: application/vnd.github.v3+json' \
           -H 'Content-Type: application/zip' \
           -H 'Authorization: Bearer ${{ secrets.GITHUB_TOKEN }}' \
-          https://api.github.com/repos/mindstellar/Osclass/releases/${{ steps.create-release.outputs.release_id }}/assets \
+          https://api.github.com/repos/mindstellar/Osclass/releases/${{ steps.create-release.outputs.id }}/assets \
           -d '{"name":"./release/osclass_v${{ steps.vars.outputs.tag }}.zip"}'
   
         
