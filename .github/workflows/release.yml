@@ -1,9 +1,8 @@
 # GitHub Action for Osclass
 name: Osclass Release
-on:  
-  push:
-    tags:
-      - '*'
+on:
+  create:
+       tags:
 jobs:
   build-test:
     if: ${{ github.ref == 'refs/heads/workflow-test' }}
