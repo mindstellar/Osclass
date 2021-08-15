@@ -1,10 +1,11 @@
 # GitHub Action for Osclass
 name: Osclass Release
-on:
+on:  
   push:
-    tags: v*
+    tags:
+      - '*'
 jobs:
-  build-main:
+  build-test:
     if: ${{ github.ref == 'refs/heads/workflow-test' }}
     runs-on: ubuntu-latest
     steps:
