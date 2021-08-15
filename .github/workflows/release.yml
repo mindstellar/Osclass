@@ -24,7 +24,7 @@ jobs:
         run: |
           echo $RELEASE_VERSION
           echo ${{ steps.vars.outputs.tag }}
-      - name: Update draft to ${{ steps.vars.outputs.tag }
+      - name: Update draft to ${{ steps.vars.outputs.tag }}
         id: update_draft
         run: |
           curl \
