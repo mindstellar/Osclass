@@ -8,8 +8,8 @@ jobs:
   build-test:
     runs-on: ubuntu-latest
     steps:
-      - name: Run build script
-        run: echo $(ls)
+      - name: Checkout
+        uses: actions/checkout@v2
       - run: chmod +x .build.sh
       - run: ./.build.sh
         shell: bash
@@ -18,16 +18,16 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       - name: Set output
         id: vars
-        run: echo ::set-output name=tag::${GITHUB_REF#refs/*/}
+      - run: echo ::set-output name=tag::${GITHUB_REF#refs/*/}
       - name: Check output
         env:
           RELEASE_VERSION: ${{ steps.vars.outputs.tag }}
-        run: |
+      - run: |
           echo $RELEASE_VERSION
           echo ${{ steps.vars.outputs.tag }}
       - name: Update draft to ${{ steps.vars.outputs.tag }}
         id: update_draft
-        run: |
+      - run: |
           curl \
           -X POST \
           -H 'Accept: application/vnd.github.v3+json' \
