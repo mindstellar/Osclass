@@ -33,7 +33,6 @@ jobs:
           https://api.github.com/repos/mindstellar/Osclass/releases \
           -d '{"tag_name":"${{ steps.vars.outputs.tag }}", "name": "Osclass v${{ steps.vars.outputs.tag }}", "draft": true}' >> $GITHUB_ENV
           echo 'EOF' >> $GITHUB_ENV
-      - run: echo ${{fromJson(env.JSON_RESPONSE.id)}}
       - name: Upload asset to ${{ github.event.client_payload.release_tag }}
         run: |
           curl \
