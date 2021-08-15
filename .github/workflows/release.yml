@@ -30,7 +30,7 @@ jobs:
           -H 'Accept: application/vnd.github.v3+json' \
           -H 'Authorization: Bearer ${{ secrets.GITHUB_TOKEN }}' \
           https://api.github.com/repos/mindstellar/Osclass/releases \
-          -d '{"tag_name":"${{ steps.vars.outputs.tag }}", "name": "Osclass v${{ steps.vars.outputs.tag }}", "draft": "true", "prerelease": "true"}'
+          -d '{"tag_name":"${{ steps.vars.outputs.tag }}", "name": "Osclass v${{ steps.vars.outputs.tag }}", "draft": true}'
       - name: Upload asset to ${{ github.event.client_payload.release_tag }}
         run: |
           curl \
