@@ -10,6 +10,7 @@ jobs:
     steps:
       - name: Run build script
         run: sh .build.sh
+        shell: bash
       - run: echo "Uploading release package"
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
