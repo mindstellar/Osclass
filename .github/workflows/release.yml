@@ -26,13 +26,14 @@ jobs:
         id: create-release
         run: |
           echo 'JSON_RESPONSE<<EOF' >> $GITHUB_ENV
-          curl -s \
+          curl \
           -X POST \
           -H 'Accept: application/vnd.github.v3+json' \
           -H 'Authorization: Bearer ${{ secrets.GITHUB_TOKEN }}' \
           https://api.github.com/repos/mindstellar/Osclass/releases \
           -d '{"tag_name":"${{ steps.vars.outputs.tag }}", "name": "Osclass v${{ steps.vars.outputs.tag }}", "draft": true}' >> $GITHUB_ENV
           echo 'EOF' >> $GITHUB_ENV
+      - run: echo ${{ env.JSON_RESPONSE }}
       - name: Upload asset to ${{ github.event.client_payload.release_tag }}
         run: |
           curl \
