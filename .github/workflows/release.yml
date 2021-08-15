@@ -6,10 +6,8 @@ on:
         - '*'
 jobs:
   build-test:
-    if: ${{ github.ref == 'refs/heads/workflow-test' }}
     runs-on: ubuntu-latest
     steps:
-      - run: echo "Creating release on branch $GITHUB_REF"
       - name: Run build script
         run: sh ./.build
         shell: bash
