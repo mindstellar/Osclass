@@ -10,8 +10,8 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v2
-      - run: chmod +x .build.sh
-      - run: ./.build.sh
+      - name: Build  
+        run: sh ./.build.sh
         shell: bash
       - run: echo "Uploading release package"
         env:
