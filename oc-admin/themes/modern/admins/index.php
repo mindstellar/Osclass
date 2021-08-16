@@ -65,10 +65,7 @@ function customPageHeader()
     <?php
 }
 
-
 osc_add_hook('admin_page_header', 'customPageHeader');
-
-osc_add_hook('admin_header', 'customHead', 10);
 
 $iDisplayLength = __get('iDisplayLength');
 $aData          = __get('aAdmins');
