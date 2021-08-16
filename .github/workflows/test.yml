@@ -1,5 +1,5 @@
 # GitHub Action for Osclass
-name: Osclass CI
+name: Test PHP
 on: [push, pull_request]
 jobs:
   tests:
