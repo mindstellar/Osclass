@@ -133,7 +133,7 @@ osc_current_admin_theme_path('parts/header.php'); ?>
             <input type="hidden" name="page" value="settings"/>
             <input type="hidden" name="action" value="recaptcha_post"/>
             <input type="hidden" id="recaptchaVersion" name="recaptchaVersion" value="2"/>
-            <fieldset>
+            <fieldset class="form-horizontal">
                 <div class="form-row">
                     <div class="form-label"><?php _e('Site key'); ?></div>
                     <div class="form-controls">

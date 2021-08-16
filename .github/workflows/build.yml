@@ -1,0 +1,48 @@
+# GitHub Action for Osclass
+name: Build
+on:
+  push:
+      tags: 
+        - '*'
+jobs:
+  build-test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: Build  
+        run: sh ./.build.sh
+        shell: bash
+      - run: echo "Uploading release package"
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: Set output
+        id: vars
+        run: echo ::set-output name=tag::${GITHUB_REF#refs/*/}
+      - name: Check output
+        run: |
+          echo ${{ steps.vars.outputs.tag }}
+      - name: Update draft to ${{ steps.vars.outputs.tag }}
+        id: create-release
+        run: |
+          echo 'JSON_RESPONSE<<EOF' >> $GITHUB_ENV
+          curl \
+          -X POST \
+          -H 'Accept: application/vnd.github.v3+json' \
+          -H 'Authorization: Bearer ${{ secrets.GITHUB_TOKEN }}' \
+          https://api.github.com/repos/mindstellar/Osclass/releases \
+          -d '{"tag_name":"${{ steps.vars.outputs.tag }}", "name": "Osclass v${{ steps.vars.outputs.tag }}", "draft": true}' >> $GITHUB_ENV
+          echo 'EOF' >> $GITHUB_ENV
+      - run: |
+          curl \
+          -X POST \
+          -H 'Accept: application/vnd.github.v3+json' \
+          -H 'Content-Type: application/zip' \
+          -H 'Authorization: Bearer ${{ secrets.GITHUB_TOKEN }}' \
+          https://uploads.github.com/repos/mindstellar/Osclass/releases/${{fromJSON(env.JSON_RESPONSE).id }}/assets?name=osclass_v${{ steps.vars.outputs.tag }}.zip \
+          --data-binary "@release/osclass_v${{ steps.vars.outputs.tag }}.zip"
+
+  
+        
+      
+          
