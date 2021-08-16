@@ -33,6 +33,9 @@ jobs:
           https://api.github.com/repos/mindstellar/Osclass/releases \
           -d '{"tag_name":"${{ steps.vars.outputs.tag }}", "name": "Osclass v${{ steps.vars.outputs.tag }}", "draft": true}' >> $GITHUB_ENV
           echo 'EOF' >> $GITHUB_ENV
+      - run: echo $JSON_RESPONSE
+      - run: echo ${{ github.event.client_payload.release_tag }}
+      - run: echo ${{fromJSON(env.JSON_RESPONSE).id }}
       - name: Upload asset to ${{ github.event.client_payload.release_tag }}
         run: |
           curl \
@@ -40,8 +43,9 @@ jobs:
           -H 'Accept: application/vnd.github.v3+json' \
           -H 'Content-Type: application/zip' \
           -H 'Authorization: Bearer ${{ secrets.GITHUB_TOKEN }}' \
-          https://api.github.com/repos/mindstellar/Osclass/releases/${{fromJson(env.JSON_RESPONSE.id)}}/assets \
+          https://api.github.com/repos/mindstellar/Osclass/releases/${{fromJSON(env.JSON_RESPONSE).id }}/assets \
           -d '{"name":"./release/osclass_v${{ steps.vars.outputs.tag }}.zip"}'
+
   
         
       
