@@ -24,7 +24,7 @@ jobs:
           echo ${{ steps.vars.outputs.tag }}
       - name: Update draft to ${{ steps.vars.outputs.tag }}
         id: create-release
-      - run: |
+        run: |
           echo 'JSON_RESPONSE<<EOF' >> $GITHUB_ENV
           curl \
           -X POST \
