@@ -41,7 +41,7 @@ $locales     = OSCLocale::newInstance()->listAllEnabled();
         <fieldset>
             <div class="grid-system">
                 <div class="grid-row grid-first-row grid-30 mb-0">
-                    <div class="row-wrapper">
+                    <div class="row-wrapper form-row">
                         <label><?php _e('Expiration dates'); ?></label>
                         <div class="input micro">
                             <?php CategoryForm::expiration_days_input_text($category); ?>
@@ -58,7 +58,7 @@ $locales     = OSCLocale::newInstance()->listAllEnabled();
                     </div>
                 </div>
                 <div class="grid-row grid-70 mb-0">
-                    <div class="row-wrapper">
+                    <div class="row-wrapper form-row">
                         <?php CategoryForm::multilanguage_name_description($locales, $category); ?>
                     </div>
                 </div>
@@ -66,9 +66,9 @@ $locales     = OSCLocale::newInstance()->listAllEnabled();
             </div>
             <div class="form-vertical">
                 <div class="form-actions">
-                    <input type="submit" class="btn btn-submit"
+                    <input type="submit" class="btn btn-submit btn-sm"
                            value="<?php echo osc_esc_html(__('Save changes')); ?>"/>
-                    <input type="button" class="btn btn-red" onclick="$('.iframe-category').remove();"
+                    <input type="button" class="btn btn-red btn-sm" onclick="$('.iframe-category').remove();"
                            value="<?php echo osc_esc_html(__('Cancel')); ?>"/>
                 </div>
             </div>

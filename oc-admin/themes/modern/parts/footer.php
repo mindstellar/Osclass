@@ -18,16 +18,23 @@
 <script>
     window.onresize = resetSidebar;
     function resetSidebar() {
+        var eT = document.querySelector("#header .toggle-icon");
         var sC;
         var eH;
         var eS;
         var bE;
-        if (window.matchMedia("(max-width: 768px)").matches) {
+        if (window.matchMedia("(max-width: 1024px)").matches) {
             eH = document.getElementById("header");
             eS = document.getElementById("sidebar-wrapper");
             eS.classList.add('offcanvas');
             eS.classList.add('offcanvas-start');
             eS.style.marginTop = eH.offsetHeight + "px";
+            eS.addEventListener('shown.bs.offcanvas', function () {
+                eT.classList.add('open');
+            })
+            eS.addEventListener('hidden.bs.offcanvas', function () {
+                eT.classList.remove('open');
+            })
             /* The viewport is less than, or equal to, 768 pixels wide */
         } else {
             eS = document.querySelector("#sidebar-wrapper.offcanvas");
@@ -44,9 +51,10 @@
                     if (bE !== null) {
                         bE.remove()
                     }
+                    eT.classList.remove('open')
                 }
             }
-            /* The viewport is greater than 768 pixels wide */
+            /* The viewport is greater than 1024 pixels wide */
         }
     }
     resetSidebar();

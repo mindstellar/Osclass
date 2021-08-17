@@ -16,14 +16,14 @@
 <header id="header" class="navbar navbar-expand-md navbar-dark bg-dark">
     <div class="container-fluid">
         <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#sidebar-wrapper">
-            <span class="navbar-toggler-icon"></span>
+            <div class="toggle-icon"><span></span><span></span><span></span></div>
         </button>
-        <a id="osc_toolbar_home" class="navbar-brand me-auto ps-1" target="_blank" href="<?php echo osc_base_url(); ?>">
+        <a id="osc_toolbar_home" class="navbar-brand ps-1" target="_blank" href="<?php echo osc_base_url(); ?>">
             <i class="bi bi-house-fill"></i><?php echo osc_page_title() ?></a>
         <ul class="navbar-nav navbar-collapse collapse justify-content-end">
             <?php AdminToolbar::newInstance()->render(); ?>
         </ul>
-        <ul class="navbar-nav ms-auto">
+        <ul class="navbar-nav">
             <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" href="#" id="userDropdown" data-bs-toggle="dropdown">
                     <i class="bi bi-person-circle"><div class="visually-hidden"><?php _e('User Menu'); ?></div></i>

@@ -148,14 +148,8 @@ $rows    = $aData['aRows'];
 
 ?>
 <?php osc_current_admin_theme_path('parts/header.php'); ?>
-    <h2 class="render-title"><?php _e('Manage ban rules'); ?> <a
-                href="<?php echo osc_admin_base_url(true) . '?page=users&action=create_ban_rule'; ?>"
-                class="btn btn-sm btn-success"><?php _e('Add new'); ?></a></h2>
+    <h2 class="render-title"><?php _e('Manage ban rules'); ?></h2>
     <div class="relative">
-        <div id="users-toolbar" class="table-toolbar">
-            <div class="float-right">
-            </div>
-        </div>
         <form class="" id="datatablesForm" action="<?php echo osc_admin_base_url(true); ?>" method="post">
             <input type="hidden" name="page" value="users"/>
 

@@ -112,9 +112,7 @@ $rows        = $aData['aRows'];
 $withFilters = __get('withFilters');
 ?>
 <?php osc_current_admin_theme_path('parts/header.php'); ?>
-    <h2 class="render-title"><?php _e('Manage users'); ?> <a
-                href="<?php echo osc_admin_base_url(true) . '?page=users&action=create'; ?>"
-                class="btn btn-sm btn-success"><?php _e('Add new'); ?></a></h2>
+    <h2 class="render-title"><?php _e('Manage users'); ?></h2>
     <div class="relative">
         <div id="users-toolbar" class="table-toolbar d-flex justify-content-end">
             <form method="get" action="<?php echo osc_admin_base_url(true); ?>" class="inline nocsrf">
@@ -239,7 +237,7 @@ osc_show_pagination_admin($aData);
                     <input type="hidden" name="direction" value="<?php echo $direction; ?>"/>
                     <div class="form-horizontal">
                         <div class="row row-cols-lg-2">
-                            <div class="col">
+                            <div class="col-lg-6">
                                 <div class="row-wrapper">
                                     <div class="form-row">
                                         <div class="form-label">

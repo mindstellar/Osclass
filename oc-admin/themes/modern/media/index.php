@@ -75,8 +75,6 @@ $rows    = $aData['aRows'];
 ?>
 <?php osc_current_admin_theme_path('parts/header.php'); ?>
     <div class="relative">
-        <div id="media-toolbar" class="table-toolbar">
-        </div>
         <form class="" id="datatablesForm" action="<?php echo osc_admin_base_url(true); ?>" method="post">
             <input type="hidden" name="page" value="media"/>
             <input type="hidden" name="action" value="bulk_actions"/>

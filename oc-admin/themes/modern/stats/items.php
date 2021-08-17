@@ -328,7 +328,7 @@ function customHead()
 
         }
     </script>
-    <?php }
+<?php }
 }
 
 
@@ -342,27 +342,29 @@ osc_add_hook('admin_header', 'customHead', 10);
             </div>
         </div>
         <div class="grid-row grid-50 mb-0">
-            <div class="btn-group btn-group-sm float-end">
-            <?php
-            $stats_intervals = ['month', 'week', 'day'];
-            if (!$type) {
-                $type = 'day';
-            }
-            foreach ($stats_intervals as $k => $v) {
-                echo '<a id="' . $v . '" class="btn btn-outline-primary';
-                if ($type === $v) {
-                    echo ' active';
-                }
-                echo '" href="' . osc_admin_base_url(true) . '?page=stats&amp;action=items&amp;type_stat=' . $v . '">';
-                if ($v === 'month') {
-                    echo __('Last 10 months');
-                } elseif ($v === 'week') {
-                    echo __('Last 10 weeks');
-                } elseif ($v === 'day') {
-                    echo __('Last 10 days');
-                }
-                echo '</a>';
-            } ?>
+            <div class="row-wrapper">
+                <div class="btn-group btn-group-sm float-end">
+                    <?php
+                    $stats_intervals = ['month', 'week', 'day'];
+                    if (!$type) {
+                        $type = 'day';
+                    }
+                    foreach ($stats_intervals as $k => $v) {
+                        echo '<a id="' . $v . '" class="btn btn-outline-primary';
+                        if ($type === $v) {
+                            echo ' active';
+                        }
+                        echo '" href="' . osc_admin_base_url(true) . '?page=stats&amp;action=items&amp;type_stat=' . $v . '">';
+                        if ($v === 'month') {
+                            echo __('Last 10 months');
+                        } elseif ($v === 'week') {
+                            echo __('Last 10 weeks');
+                        } elseif ($v === 'day') {
+                            echo __('Last 10 days');
+                        }
+                        echo '</a>';
+                    } ?>
+                </div>
             </div>
         </div>
         <div class="grid-row grid-50 clear">

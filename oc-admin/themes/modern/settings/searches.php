@@ -203,7 +203,7 @@ osc_current_admin_theme_path('parts/header.php'); ?>
                                         array('hour', 'day', 'week', 'forever', '1000')
                                     ) ? 'value="'
                                         . osc_esc_html(osc_purge_latest_searches()) . '"' : '')
-                                    . ' onkeyup="javascript:document.getElementById(\'customPurge\').value = this.value;" />'
+                                    . ' onchange="javascript:document.getElementById(\'customPurge\').value = this.value;" />'
                                 ); ?>
                                 <div class="help-box">
                                     <?php _e(

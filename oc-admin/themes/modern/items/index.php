@@ -297,7 +297,7 @@ osc_show_pagination_admin($aData);
             <input type="hidden" name="direction" value="<?php echo $direction; ?>"/>
             <div class="form-horizontal modal-body">
                 <div class="row">
-                    <div class="col-md-6">
+                    <div class="col-lg-6">
                         <div class="row-wrapper">
                             <div class="form-row">
                                 <div class="form-label">
@@ -342,7 +342,7 @@ osc_show_pagination_admin($aData);
                             </div>
                         </div>
                     </div>
-                    <div class="col-md-6">
+                    <div class="col-lg-6">
                         <div class="row-wrapper">
                             <div class="form-row">
                                 <div class="form-label">
