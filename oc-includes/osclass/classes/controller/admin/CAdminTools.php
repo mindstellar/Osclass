@@ -123,7 +123,7 @@ class CAdminTools extends AdminSecBaseModel
                 //databasse dump...
                 if (Params::getParam('bck_dir') != '') {
                     $path = trim(Params::getParam('bck_dir'));
-                    if (substr($path, -1, 1) != '/') {
+                    if (substr($path, -1, 1) !== '/') {
                         $path .= '/';
                     }
                 } else {
@@ -137,7 +137,7 @@ class CAdminTools extends AdminSecBaseModel
                         osc_add_flash_error_message($msg, 'admin');
                         break;
                     case (-2):
-                        $msg = sprintf(_m('Could not connect with the database. Error: %s'), mysql_error());
+                        $msg = sprintf(_m('Could not connect with the database'));
                         osc_add_flash_error_message($msg, 'admin');
                         break;
                     case (-3):
@@ -266,7 +266,7 @@ class CAdminTools extends AdminSecBaseModel
                     break;
                 }
                 $mode = Params::getParam('mode');
-                if ($mode == 'on') {
+                if ($mode === 'on') {
                     osc_csrf_check();
                     $maintenance_file = osc_base_path() . '.maintenance';
                     $fileHandler      = @fopen($maintenance_file, 'wb');
@@ -280,7 +280,7 @@ class CAdminTools extends AdminSecBaseModel
                     }
                     fclose($fileHandler);
                     $this->redirectTo(osc_admin_base_url(true) . '?page=tools&action=maintenance');
-                } elseif ($mode == 'off') {
+                } elseif ($mode === 'off') {
                     osc_csrf_check();
                     $deleted = @unlink(osc_base_path() . '.maintenance');
                     if ($deleted) {

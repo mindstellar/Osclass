@@ -61,26 +61,23 @@ class Pagination
     {
         $this->total              = isset($params['total']) ? $params['total'] + 1 : osc_search_total_pages() + 1;
         $this->selected           = isset($params['selected']) ? $params['selected'] + 1 : osc_search_page() + 1;
-        $this->class_first        = isset($params['class_first']) ? $params['class_first'] : 'searchPaginationFirst';
-        $this->class_last         = isset($params['class_last']) ? $params['class_last'] : 'searchPaginationLast';
-        $this->class_prev         = isset($params['class_prev']) ? $params['class_prev'] : 'searchPaginationPrev';
-        $this->class_next         = isset($params['class_next']) ? $params['class_next'] : 'searchPaginationNext';
-        $this->text_first         = isset($params['text_first']) ? $params['text_first'] : '&laquo;';
-        $this->text_last          = isset($params['text_last']) ? $params['text_last'] : '&raquo;';
-        $this->text_prev          = isset($params['text_prev']) ? $params['text_prev'] : '&lt;';
-        $this->text_next          = isset($params['text_next']) ? $params['text_next'] : '&gt;';
-        $this->class_selected     =
-            isset($params['class_selected']) ? $params['class_selected'] : 'searchPaginationSelected';
-        $this->class_non_selected =
-            isset($params['class_non_selected']) ? $params['class_non_selected'] : 'searchPaginationNonSelected';
-        $this->delimiter          = isset($params['delimiter']) ? $params['delimiter'] : ' ';
-        $this->force_limits       = isset($params['force_limits']) ? (bool)$params['force_limits'] : false;
-        $this->sides              = isset($params['sides']) ? $params['sides'] : 2;
-        $this->url                =
-            isset($params['url']) ? $params['url'] : osc_update_search_url(array('iPage' => '{PAGE}'));
-        $this->firstUrl           = isset($params['first_url']) ? $params['first_url'] : $this->url;
-        $this->nofollow           = isset($params['nofollow']) ? $params['nofollow'] : false;
-        $this->listClass          = isset($params['list_class']) ? $params['list_class'] : false;
+        $this->class_first        = $params['class_first'] ?? 'searchPaginationFirst';
+        $this->class_last         = $params['class_last'] ?? 'searchPaginationLast';
+        $this->class_prev         = $params['class_prev'] ?? 'searchPaginationPrev';
+        $this->class_next         = $params['class_next'] ?? 'searchPaginationNext';
+        $this->text_first         = $params['text_first'] ?? '&laquo;';
+        $this->text_last          = $params['text_last'] ?? '&raquo;';
+        $this->text_prev          = $params['text_prev'] ?? '&lt;';
+        $this->text_next          = $params['text_next'] ?? '&gt;';
+        $this->class_selected     = $params['class_selected'] ?? 'searchPaginationSelected';
+        $this->class_non_selected = $params['class_non_selected'] ?? 'searchPaginationNonSelected';
+        $this->delimiter          = $params['delimiter'] ?? ' ';
+        $this->force_limits       = isset($params['force_limits']) && $params['force_limits'];
+        $this->sides              = $params['sides'] ?? 2;
+        $this->url                = $params['url'] ?? osc_update_search_url(array('iPage' => '{PAGE}'));
+        $this->firstUrl           = $params['first_url'] ?? $this->url;
+        $this->nofollow           = $params['nofollow'] ?? false;
+        $this->listClass          = $params['list_class'] ?? false;
     }
 
     /**
@@ -95,9 +92,9 @@ class Pagination
             }
 
             return '<ul>' . implode($this->delimiter, $links) . '</ul>';
-        } else {
-            return '';
         }
+
+        return '';
     }
 
     /**
