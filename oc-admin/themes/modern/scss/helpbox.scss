@@ -1,8 +1,22 @@
-#help-box h3 {
-  font-size: 14px;
-  margin: 0;
+#help-box {
+  h3 {
+    font-size: 14px;
+    margin: 0;
+  }
+
+  p {
+    font-size: .85rem;
+  }
 }
 
-#help-box p {
-  font-size: 13px;
+.help-box {
+  font-style: italic;
+  font-size: .85rem;
+  background: $info-bg;
+  padding: .5rem;
+  width: auto;
+  margin-top: .5rem;
+  display: inline-block;
+  box-shadow: 0 0 5px 0px $gray-200;
+  border-radius: 4px;
 }

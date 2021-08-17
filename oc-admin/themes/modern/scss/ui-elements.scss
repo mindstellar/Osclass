@@ -50,20 +50,17 @@ a.ico-32 {
 }
 
 .circle {
-  @include rounded-corners(15px);
-  background: $color-gray-ash;
-  border: solid 1px $color-gray-dim;
-  color: $color-gray-dim;
-  float: left;
-  font-size: 12px;
+  border-radius: 1rem;
+  background: #dee2e6;
+  border: solid 1px #6c757d;
+  color: #6c757d;
+  float: right;
   font-style: normal;
-  height: 16px;
-  margin-left: -2px;
-  margin-right: 8px;
-  margin-top: -3px;
-  min-width: 18px;
-  padding-top: 2px;
-  position: relative;
+  height: 1.2rem;
+  margin-left: .1rem;
+  margin-top: -.2rem;
+  padding-top: .1rem;
+  min-width: 1.2rem;
   text-align: center;
 }
 
@@ -171,7 +168,7 @@ input.ico-32 {
 }
 
 .select-box-big .select-box-trigger {
-  font-size: 13px;
+  font-size: .85rem;
   padding: 7px 45px 6px 12px;
 }
 
@@ -188,7 +185,7 @@ input.ico-32 {
 }
 
 .select-box-extra .select-box-trigger {
-  font-size: 13px;
+  font-size: .85rem;
   height: 16px;
   padding: 9px 45px 7px 12px;
 }
@@ -296,7 +293,7 @@ input.btn-mini,
 
 .input-has-placeholder label {
   color: $color-gray-dim;
-  font-size: 13px;
+  font-size: .85rem;
   left: 8px;
   margin-bottom: 0 !important;
   margin-top: 0 !important;
@@ -308,7 +305,7 @@ textarea {
   background-color: $color-white;
   border: 1px solid $color-gray-soft;
   color: $color-gray-black;
-  font-size: 13px;
+  font-size: .85rem;
   line-height: 18px;
   padding: 4px 6px;
   @include rounded-corners(3px);
@@ -429,7 +426,7 @@ ul.showing-results {
   border-left: solid 1px $color-gray-soft;
   color: #018BE3;
   cursor: pointer;
-  font-size: 13px;
+  font-size: .85rem;
   font-weight: bold;
   height: 30px;
   margin: 0;
@@ -484,4 +481,70 @@ ul.showing-results {
   height: 16px;
   margin-right: 10px;
   width: 16px;
+}
+
+.toggle-icon {
+  width: 2rem;
+  height: 1.5rem;
+  position: relative;
+  margin: 0;
+  transform: rotate(0deg);
+  transition: .5s ease-in-out;
+  cursor: pointer;
+
+  span {
+    display: block;
+    position: absolute;
+    background: $navbar-dark-color;
+    height: .2rem;
+    width: 100%;
+    border-radius: .9rem;
+    opacity: 1;
+    left: 0;
+    transform: rotate(0deg);
+    transition: .25s ease-in-out;
+
+    &:hover,
+    &:focus {
+      background: $navbar-dark-hover-color;
+    }
+
+    &:nth-child(1) {
+      top: .2rem;
+      transform-origin: left center;
+    }
+
+    &:nth-child(2) {
+      top: .7rem;
+      transform-origin: left center;
+    }
+
+    &:nth-child(3) {
+      top: 1.2rem;
+      transform-origin: left center;
+    }
+  }
+
+  &.open {
+    span {
+      background: $white;
+
+      &:nth-child(1) {
+        top: 0;
+        left: .2rem;
+        transform: rotate(45deg);
+      }
+
+      &:nth-child(2) {
+        width: 0%;
+        opacity: 0;
+      }
+
+      &:nth-child(3) {
+        transform: rotate(-45deg);
+        top: 1.45rem;
+        left: .2rem;
+      }
+    }
+  }
 }

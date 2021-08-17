@@ -4,10 +4,17 @@
   margin-bottom: 16px;
 }
 
-#datatablesForm #bulk-actions {
-  left: 0;
-  position: absolute;
-  top: 0
+#listing-toolbar, #admins-toolbar, #users-toolbar {
+  & + #datatablesForm #bulk-actions {
+    left: 0;
+    position: absolute;
+    top: 0
+  }
+}
+
+#bulk-actions {
+  margin-bottom: 1rem;
+  max-width: 15rem;
 }
 
 .submit-right {

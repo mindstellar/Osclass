@@ -63,3 +63,11 @@ $callout-colors: (
         "light": $light,
         "dark": $dark
 ) !default;
+$table-status: (
+        "active":$blue-500,
+        "blocked":$red-500,
+        "expired": $gray-200,
+        "inactive":$gray-500,
+        "premium":$yellow-400,
+        "spam": $gray-800,
+);

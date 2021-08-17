@@ -1,5 +1,5 @@
 .form-label {
-  font-size: 13px;
+  font-size: .85rem;
 }
 
 .form-label-checkbox {
@@ -7,7 +7,7 @@
 }
 
 .form-row {
-  font-size: 13px;
+  font-size: .85rem;
   line-height: 18px;
 }
 
@@ -28,7 +28,7 @@
     float: left;
     padding-top: 5px;
     text-align: right;
-    width: 150px;
+    min-width: 150px;
   }
 
   .form-controls {

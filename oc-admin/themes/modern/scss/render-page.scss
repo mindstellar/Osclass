@@ -64,7 +64,7 @@ h3.render-title {
   border: 1px solid $color-gray-soft;
   color: #555;
   display: inline-block;
-  font-size: 13px;
+  font-size: .85rem;
   height: 24px;
   line-height: 18px;
   outline: none;
@@ -88,4 +88,16 @@ h3.render-title {
 
 .locations img {
   vertical-align: bottom;
+}
+
+#l_countries, #i_regions, #i_cities {
+  a {
+    text-decoration: none;
+    font-size: .85rem;
+  }
+
+  .list-group-item {
+    padding-top: .2rem;
+    padding-bottom: .2rem
+  }
 }
