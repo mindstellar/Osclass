@@ -16,14 +16,17 @@
     font-size: 20px;
     font-weight: 300;
   }
+
   h3 {
     font-size: 18px;
     font-weight: 300;
   }
 }
-#content-render{
+
+#content-render {
   background-color: $gray-200;
 }
+
 #content-page {
   //background-color: $color-white;
   min-height: calc(100vh - 9rem);
@@ -69,18 +72,18 @@ h3.render-title {
   line-height: 18px;
   outline: none;
   padding: 4px 6px;
-  width: 208px;
-  @include rounded-corners(4px 0 0 4px);
   vertical-align: top;
+  @include rounded-corners(4px 0 0 4px);
+  width: 208px;
 }
 
 .quick-search .ico-search {
   border-left: 0;
-  margin-left: 0;
-  @include rounded-corners(0px 4px 4px 0);
-  @include rounded-corners(0px 4px 4px 0);
   display: block;
+  @include rounded-corners(0px 4px 4px 0);
+  @include rounded-corners(0px 4px 4px 0);
   height: 34px;
+  margin-left: 0;
   margin-right: 10px;
   padding: 0;
   width: 34px !important;
@@ -92,12 +95,12 @@ h3.render-title {
 
 #l_countries, #i_regions, #i_cities {
   a {
-    text-decoration: none;
     font-size: .85rem;
+    text-decoration: none;
   }
 
   .list-group-item {
+    padding-bottom: .2rem;
     padding-top: .2rem;
-    padding-bottom: .2rem
   }
 }

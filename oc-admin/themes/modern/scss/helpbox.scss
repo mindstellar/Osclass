@@ -10,13 +10,13 @@
 }
 
 .help-box {
-  font-style: italic;
-  font-size: .85rem;
   background: $info-bg;
+  border-radius: 4px;
+  box-shadow: 0 0 5px 0px $gray-200;
+  display: inline-block;
+  font-size: .85rem;
+  font-style: italic;
+  margin-top: .5rem;
   padding: .5rem;
   width: auto;
-  margin-top: .5rem;
-  display: inline-block;
-  box-shadow: 0 0 5px 0px $gray-200;
-  border-radius: 4px;
 }

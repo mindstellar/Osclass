@@ -26,9 +26,10 @@
 
   .form-label {
     float: left;
-    padding-top: 5px;
+    width: 150px;
+    /*padding-top: 5px;*/
     text-align: right;
-    min-width: 150px;
+    word-break: break-word;
   }
 
   .form-controls {
@@ -50,11 +51,68 @@
 .form-controls {
   select {
     @extend .form-select-sm, .form-select;
-    width: 200px;
+    max-width: 15rem;
   }
 
-  input:not([type="checkbox"]):not([type="radio"]) {
-    @extend .form-control, .form-control-sm;
-    width: 200px;
+  input {
+    &:not([type="checkbox"]):not([type="radio"]):not([type="submit"]) {
+      @extend .form-control, .form-control-sm;
+      width: 15rem;
+    }
   }
+  textarea {
+    @extend .form-control;
+  }
+}
+
+.select-box-medium {
+  select {
+    width: 12rem;
+  }
+}
+
+.select-box-input {
+  select {
+    width: 10rem;
+  }
+}
+
+.select-box-big {
+  select {
+    width: 15rem;
+  }
+}
+
+.select-box .select-box-label {
+  display: block;
+  float: left;
+  line-height: 16px;
+  overflow: hidden;
+}
+input.large,
+input.xlarge,
+.input-text,
+.input-password,
+{
+  @extend .form-control, .form-control-sm;
+  width: 15rem;
+}
+
+input.input-small {
+  @extend .form-control, .form-control-sm;
+  width: 5rem;
+}
+
+input.input-medium {
+  @extend .form-control, .form-control-sm;
+  width: 10rem;
+}
+
+input.input-large {
+  @extend .form-control, .form-control-sm;
+  width: 15rem;
+}
+
+input.input-actions {
+  height: 24px;
 }

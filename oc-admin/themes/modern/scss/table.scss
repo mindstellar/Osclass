@@ -80,7 +80,7 @@
 
     &:before {
       content: "\f1c5";
-      font-family: 'bootstrap-icons';
+      font-family: "bootstrap-icons";
     }
   }
 }
@@ -175,12 +175,6 @@
   }
 }
 
-
-.col-bulkactions {
-  opacity: 1 !important;
-  text-align: center !important;
-}
-
 .table-contains-actions {
   position: relative;
 }
@@ -225,7 +219,7 @@ td {
 
     &:before {
       content: "\f229";
-      font-family: 'bootstrap-icons';
+      font-family: "bootstrap-icons";
     }
   }
 }
@@ -236,13 +230,15 @@ td {
 
     &:before {
       content: "\f235";
-      font-family: 'bootstrap-icons';
+      font-family: "bootstrap-icons";
     }
   }
 }
 
 /* Columns width */
 .col-bulkactions {
+  opacity: 1 !important;
+  text-align: center !important;
   width: 20px;
 }
 

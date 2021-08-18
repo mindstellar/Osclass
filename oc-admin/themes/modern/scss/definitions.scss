@@ -9,8 +9,8 @@ $color-orange-border: shade-color($orange, 20%);
 $color-red: $danger;
 $color-red-hover: shade-color($red, 10%);
 $color-red-border: shade-color($red, 20%);
-$color-white: #ffffff;
-$color-black: #1e1e1e;
+$color-white: $white;
+$color-black: $black;
 $color-error-bg: $color-red;
 $color-error-border: $color-red-border;
 $color-error-text: $color-white;
@@ -39,10 +39,10 @@ $info-border: #BCE8F1;
 $info-text: #3A87AD;
 
 /* $GRAY */
-$color-gray-hardblack: $gray-800;
-$color-gray-black: $gray-700;
-$color-gray-dim: $gray-600;
-$color-gray-ash: $gray-300;
+$color-gray-hardblack: $gray-900;
+$color-gray-black: $gray-800;
+$color-gray-dim: $gray-700;
+$color-gray-ash: $gray-500;
 $color-gray-soft: $gray-200;
 $color-gray-light: $gray-100;
 
@@ -70,4 +70,9 @@ $table-status: (
         "inactive":$gray-500,
         "premium":$yellow-400,
         "spam": $gray-800,
+);
+$plugin-status:(
+        "active":$success,
+        "disabled":$warning,
+        "uninstalled":$danger,
 );

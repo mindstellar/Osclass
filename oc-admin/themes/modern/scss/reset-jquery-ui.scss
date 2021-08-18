@@ -5,9 +5,9 @@
 
 .ui-osc-tabs .ui-tabs-nav {
   border: 0;
-  padding: 4px 5px 0;
-  @include rounded-corners(4px 4px 0 0);
   border-bottom: solid 1px $color-gray-soft;
+  @include rounded-corners(4px 4px 0 0);
+  padding: 4px 5px 0;
 }
 
 .ui-osc-tabs .ui-tabs-nav li {

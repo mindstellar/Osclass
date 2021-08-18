@@ -12,30 +12,42 @@
     width: 100%
   }
   #display-filters .form-horizontal, .form-horizontal {
-    .form-row {
-      .form-label {
-        float: none;
-        font-weight: $font-weight-bold;
-        padding-top: .5rem;
-        text-align: inherit;
+    .form-label {
+      float: none;
+      font-weight: 600;
+      padding-top: .5rem;
+      text-align: inherit;
+      width: 100%;
+    }
+    .form-controls {
+      margin-left: inherit;
+
+      select {
         width: 100%;
       }
 
-      .form-controls {
-        margin-left: inherit;
-
-        select {
-          width: 100%;
-        }
-
-        > input:not([type="checkbox"]):not([type="radio"]) {
-          width: 100%;
-        }
+      > input:not([type="checkbox"]):not([type="radio"]):not([type="submit"]) {
+        width: 100%;
+      }
+      .input-small,
+      .input-medium,
+      .input-large,
+      .xlarge,
+      .input-text,
+      .input-password {
+        width: 100%;
       }
     }
 
     .form-actions {
       padding: 1rem 1rem;
+    }
+  }
+  .select-box-medium,
+  .select-box-input ,
+  .select-box-big {
+    select {
+      width: 100%;
     }
   }
   .form-vertical {
@@ -60,9 +72,9 @@
 
       .col-off, .col-rep, .col-bad, .col-spam {
         max-width: 2.5rem !important;
-        white-space: nowrap;
         overflow: hidden;
         text-overflow: ellipsis;
+        white-space: nowrap;
       }
     }
   }
@@ -136,9 +148,9 @@
 
           & ~ th {
             max-width: 6rem;
-            white-space: nowrap;
             overflow: hidden;
             text-overflow: ellipsis;
+            white-space: nowrap;
           }
         }
       }

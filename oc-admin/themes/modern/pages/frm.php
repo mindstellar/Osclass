@@ -128,7 +128,7 @@ osc_current_admin_theme_path('parts/header.php'); ?>
         <?php if (count($templates) > 0) { ?>
             <div class="select-box-big">
                 <label><?php _e('Page template'); ?></label>
-                <select class="form-control form-control-sm" name="meta[template]">
+                <select class="form-select form-select-sm" name="meta[template]">
                     <option value="default" <?php if ($template_selected === 'default') {
                         echo 'selected="selected"';
                                             } ?>><?php _e('Default template'); ?></option>

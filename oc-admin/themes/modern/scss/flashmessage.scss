@@ -36,9 +36,9 @@
   border: 1px solid;
   color: $error-text;
   display: none;
-  padding: 15px;
+  list-style-type: none;
   @include rounded-corners;
-  list-style-type: none
+  padding: 15px;
 
 }
 

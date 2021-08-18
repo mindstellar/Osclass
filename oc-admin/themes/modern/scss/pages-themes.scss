@@ -26,6 +26,23 @@
 
 .current-theme {
   padding-top: 20px;
+
+  .card {
+    p {
+      margin-bottom: .2rem;
+    }
+  }
+
+  .card-img {
+    border-bottom-right-radius: 0;
+    border-top-right-radius: 0;
+    height: 100%;
+    width: 100%;
+  }
+
+  .card-title {
+    text-transform: capitalize;
+  }
 }
 
 .current-theme .theme {
@@ -110,6 +127,7 @@ tr.plugin h3 {
 .plugin-actions {
   padding-top: 10px;
 }
+
 .available-theme .card {
-  width:250px;
+  width: 250px;
 }

@@ -4,12 +4,12 @@ div.guideline-header {
 
 pre,
 code {
-  word-wrap: break-word;
   background-color: $color-gray-light;
   border: 1px solid $color-gray-soft;
   padding: 8px;
   white-space: pre;
   white-space: pre-wrap;
   word-break: break-all;
+  word-wrap: break-word;
   @include rounded-corners;
 }

@@ -1703,9 +1703,10 @@ progress {
   font-size: 0.875em;
   color: #6c757d; }
 
-.form-control, input.xlarge,
+.form-control, .form-controls input:not([type="checkbox"]):not([type="radio"]):not([type="submit"]), .form-controls textarea, input.large,
+input.xlarge,
 .input-text,
-.input-password, input.input-small, input.input-medium, input.input-large, .form-controls input:not([type="checkbox"]):not([type="radio"]) {
+.input-password, input.input-small, input.input-medium, input.input-large {
   display: block;
   width: 100%;
   padding: 0.375rem 0.75rem;
@@ -1720,45 +1721,54 @@ progress {
   border-radius: 0.25rem;
   transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out; }
   @media (prefers-reduced-motion: reduce) {
-    .form-control, input.xlarge,
+    .form-control, .form-controls input:not([type="checkbox"]):not([type="radio"]):not([type="submit"]), .form-controls textarea, input.large,
+    input.xlarge,
     .input-text,
-    .input-password, input.input-small, input.input-medium, input.input-large, .form-controls input:not([type="checkbox"]):not([type="radio"]) {
+    .input-password, input.input-small, input.input-medium, input.input-large {
       transition: none; } }
-  .form-control[type="file"], input[type="file"].xlarge,
+  .form-control[type="file"], .form-controls input[type="file"]:not([type="checkbox"]):not([type="radio"]):not([type="submit"]), .form-controls textarea[type="file"], input[type="file"].large,
+  input[type="file"].xlarge,
   [type="file"].input-text,
-  [type="file"].input-password, input[type="file"].input-small, input[type="file"].input-medium, input[type="file"].input-large, .form-controls input[type="file"]:not([type="checkbox"]):not([type="radio"]) {
+  [type="file"].input-password, input[type="file"].input-small, input[type="file"].input-medium, input[type="file"].input-large {
     overflow: hidden; }
-    .form-control[type="file"]:not(:disabled):not([readonly]), input[type="file"].xlarge:not(:disabled):not([readonly]),
+    .form-control[type="file"]:not(:disabled):not([readonly]), .form-controls input[type="file"]:not(:disabled):not([readonly]):not([type="checkbox"]):not([type="radio"]):not([type="submit"]), .form-controls textarea[type="file"]:not(:disabled):not([readonly]), input[type="file"].large:not(:disabled):not([readonly]),
+    input[type="file"].xlarge:not(:disabled):not([readonly]),
     [type="file"].input-text:not(:disabled):not([readonly]),
-    [type="file"].input-password:not(:disabled):not([readonly]), input[type="file"].input-small:not(:disabled):not([readonly]), input[type="file"].input-medium:not(:disabled):not([readonly]), input[type="file"].input-large:not(:disabled):not([readonly]), .form-controls input[type="file"]:not(:disabled):not([readonly]):not([type="checkbox"]):not([type="radio"]) {
+    [type="file"].input-password:not(:disabled):not([readonly]), input[type="file"].input-small:not(:disabled):not([readonly]), input[type="file"].input-medium:not(:disabled):not([readonly]), input[type="file"].input-large:not(:disabled):not([readonly]) {
       cursor: pointer; }
-  .form-control:focus, input.xlarge:focus,
+  .form-control:focus, .form-controls input:focus:not([type="checkbox"]):not([type="radio"]):not([type="submit"]), .form-controls textarea:focus, input.large:focus,
+  input.xlarge:focus,
   .input-text:focus,
-  .input-password:focus, input.input-small:focus, input.input-medium:focus, input.input-large:focus, .form-controls input:focus:not([type="checkbox"]):not([type="radio"]) {
+  .input-password:focus, input.input-small:focus, input.input-medium:focus, input.input-large:focus {
     color: #212529;
     background-color: #fff;
     border-color: #86b7fe;
     outline: 0;
     box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.25); }
-  .form-control::-webkit-date-and-time-value, input.xlarge::-webkit-date-and-time-value,
+  .form-control::-webkit-date-and-time-value, .form-controls input:not([type="submit"]):not([type="radio"]):not([type="checkbox"])::-webkit-date-and-time-value, .form-controls textarea::-webkit-date-and-time-value, input.large::-webkit-date-and-time-value,
+  input.xlarge::-webkit-date-and-time-value,
   .input-text::-webkit-date-and-time-value,
-  .input-password::-webkit-date-and-time-value, input.input-small::-webkit-date-and-time-value, input.input-medium::-webkit-date-and-time-value, input.input-large::-webkit-date-and-time-value, .form-controls input:not([type="radio"]):not([type="checkbox"])::-webkit-date-and-time-value {
+  .input-password::-webkit-date-and-time-value, input.input-small::-webkit-date-and-time-value, input.input-medium::-webkit-date-and-time-value, input.input-large::-webkit-date-and-time-value {
     height: 1.5em; }
-  .form-control::placeholder, input.xlarge::placeholder,
+  .form-control::placeholder, .form-controls input:not([type="submit"]):not([type="radio"]):not([type="checkbox"])::placeholder, .form-controls textarea::placeholder, input.large::placeholder,
+  input.xlarge::placeholder,
   .input-text::placeholder,
-  .input-password::placeholder, input.input-small::placeholder, input.input-medium::placeholder, input.input-large::placeholder, .form-controls input:not([type="radio"]):not([type="checkbox"])::placeholder {
+  .input-password::placeholder, input.input-small::placeholder, input.input-medium::placeholder, input.input-large::placeholder {
     color: #6c757d;
     opacity: 1; }
-  .form-control:disabled, input.xlarge:disabled,
+  .form-control:disabled, .form-controls input:disabled:not([type="checkbox"]):not([type="radio"]):not([type="submit"]), .form-controls textarea:disabled, input.large:disabled,
+  input.xlarge:disabled,
   .input-text:disabled,
-  .input-password:disabled, input.input-small:disabled, input.input-medium:disabled, input.input-large:disabled, .form-controls input:disabled:not([type="checkbox"]):not([type="radio"]), .form-control[readonly], input[readonly].xlarge,
+  .input-password:disabled, input.input-small:disabled, input.input-medium:disabled, input.input-large:disabled, .form-control[readonly], .form-controls input[readonly]:not([type="checkbox"]):not([type="radio"]):not([type="submit"]), .form-controls textarea[readonly], input[readonly].large,
+  input[readonly].xlarge,
   [readonly].input-text,
-  [readonly].input-password, input[readonly].input-small, input[readonly].input-medium, input[readonly].input-large, .form-controls input[readonly]:not([type="checkbox"]):not([type="radio"]) {
+  [readonly].input-password, input[readonly].input-small, input[readonly].input-medium, input[readonly].input-large {
     background-color: #e9ecef;
     opacity: 1; }
-  .form-control::file-selector-button, input.xlarge::file-selector-button,
+  .form-control::file-selector-button, .form-controls input:not([type="submit"]):not([type="radio"]):not([type="checkbox"])::file-selector-button, .form-controls textarea::file-selector-button, input.large::file-selector-button,
+  input.xlarge::file-selector-button,
   .input-text::file-selector-button,
-  .input-password::file-selector-button, input.input-small::file-selector-button, input.input-medium::file-selector-button, input.input-large::file-selector-button, .form-controls input:not([type="radio"]):not([type="checkbox"])::file-selector-button {
+  .input-password::file-selector-button, input.input-small::file-selector-button, input.input-medium::file-selector-button, input.input-large::file-selector-button {
     padding: 0.375rem 0.75rem;
     margin: -0.375rem -0.75rem;
     margin-inline-end: 0.75rem;
@@ -1772,17 +1782,20 @@ progress {
     border-radius: 0;
     transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out; }
     @media (prefers-reduced-motion: reduce) {
-      .form-control::file-selector-button, input.xlarge::file-selector-button,
+      .form-control::file-selector-button, .form-controls input:not([type="submit"]):not([type="radio"]):not([type="checkbox"])::file-selector-button, .form-controls textarea::file-selector-button, input.large::file-selector-button,
+      input.xlarge::file-selector-button,
       .input-text::file-selector-button,
-      .input-password::file-selector-button, input.input-small::file-selector-button, input.input-medium::file-selector-button, input.input-large::file-selector-button, .form-controls input:not([type="radio"]):not([type="checkbox"])::file-selector-button {
+      .input-password::file-selector-button, input.input-small::file-selector-button, input.input-medium::file-selector-button, input.input-large::file-selector-button {
         transition: none; } }
-  .form-control:hover:not(:disabled):not([readonly])::file-selector-button, input.xlarge:hover:not(:disabled):not([readonly])::file-selector-button,
+  .form-control:hover:not(:disabled):not([readonly])::file-selector-button, .form-controls input:not([type="submit"]):not([type="radio"]):not([type="checkbox"]):hover:not(:disabled):not([readonly])::file-selector-button, .form-controls textarea:hover:not(:disabled):not([readonly])::file-selector-button, input.large:hover:not(:disabled):not([readonly])::file-selector-button,
+  input.xlarge:hover:not(:disabled):not([readonly])::file-selector-button,
   .input-text:hover:not(:disabled):not([readonly])::file-selector-button,
-  .input-password:hover:not(:disabled):not([readonly])::file-selector-button, input.input-small:hover:not(:disabled):not([readonly])::file-selector-button, input.input-medium:hover:not(:disabled):not([readonly])::file-selector-button, input.input-large:hover:not(:disabled):not([readonly])::file-selector-button, .form-controls input:not([type="radio"]):not([type="checkbox"]):hover:not(:disabled):not([readonly])::file-selector-button {
+  .input-password:hover:not(:disabled):not([readonly])::file-selector-button, input.input-small:hover:not(:disabled):not([readonly])::file-selector-button, input.input-medium:hover:not(:disabled):not([readonly])::file-selector-button, input.input-large:hover:not(:disabled):not([readonly])::file-selector-button {
     background-color: #dde0e3; }
-  .form-control::-webkit-file-upload-button, input.xlarge::-webkit-file-upload-button,
+  .form-control::-webkit-file-upload-button, .form-controls input:not([type="submit"]):not([type="radio"]):not([type="checkbox"])::-webkit-file-upload-button, .form-controls textarea::-webkit-file-upload-button, input.large::-webkit-file-upload-button,
+  input.xlarge::-webkit-file-upload-button,
   .input-text::-webkit-file-upload-button,
-  .input-password::-webkit-file-upload-button, input.input-small::-webkit-file-upload-button, input.input-medium::-webkit-file-upload-button, input.input-large::-webkit-file-upload-button, .form-controls input:not([type="radio"]):not([type="checkbox"])::-webkit-file-upload-button {
+  .input-password::-webkit-file-upload-button, input.input-small::-webkit-file-upload-button, input.input-medium::-webkit-file-upload-button, input.input-large::-webkit-file-upload-button {
     padding: 0.375rem 0.75rem;
     margin: -0.375rem -0.75rem;
     margin-inline-end: 0.75rem;
@@ -1796,13 +1809,15 @@ progress {
     border-radius: 0;
     transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out; }
     @media (prefers-reduced-motion: reduce) {
-      .form-control::-webkit-file-upload-button, input.xlarge::-webkit-file-upload-button,
+      .form-control::-webkit-file-upload-button, .form-controls input:not([type="submit"]):not([type="radio"]):not([type="checkbox"])::-webkit-file-upload-button, .form-controls textarea::-webkit-file-upload-button, input.large::-webkit-file-upload-button,
+      input.xlarge::-webkit-file-upload-button,
       .input-text::-webkit-file-upload-button,
-      .input-password::-webkit-file-upload-button, input.input-small::-webkit-file-upload-button, input.input-medium::-webkit-file-upload-button, input.input-large::-webkit-file-upload-button, .form-controls input:not([type="radio"]):not([type="checkbox"])::-webkit-file-upload-button {
+      .input-password::-webkit-file-upload-button, input.input-small::-webkit-file-upload-button, input.input-medium::-webkit-file-upload-button, input.input-large::-webkit-file-upload-button {
         transition: none; } }
-  .form-control:hover:not(:disabled):not([readonly])::-webkit-file-upload-button, input.xlarge:hover:not(:disabled):not([readonly])::-webkit-file-upload-button,
+  .form-control:hover:not(:disabled):not([readonly])::-webkit-file-upload-button, .form-controls input:not([type="submit"]):not([type="radio"]):not([type="checkbox"]):hover:not(:disabled):not([readonly])::-webkit-file-upload-button, .form-controls textarea:hover:not(:disabled):not([readonly])::-webkit-file-upload-button, input.large:hover:not(:disabled):not([readonly])::-webkit-file-upload-button,
+  input.xlarge:hover:not(:disabled):not([readonly])::-webkit-file-upload-button,
   .input-text:hover:not(:disabled):not([readonly])::-webkit-file-upload-button,
-  .input-password:hover:not(:disabled):not([readonly])::-webkit-file-upload-button, input.input-small:hover:not(:disabled):not([readonly])::-webkit-file-upload-button, input.input-medium:hover:not(:disabled):not([readonly])::-webkit-file-upload-button, input.input-large:hover:not(:disabled):not([readonly])::-webkit-file-upload-button, .form-controls input:not([type="radio"]):not([type="checkbox"]):hover:not(:disabled):not([readonly])::-webkit-file-upload-button {
+  .input-password:hover:not(:disabled):not([readonly])::-webkit-file-upload-button, input.input-small:hover:not(:disabled):not([readonly])::-webkit-file-upload-button, input.input-medium:hover:not(:disabled):not([readonly])::-webkit-file-upload-button, input.input-large:hover:not(:disabled):not([readonly])::-webkit-file-upload-button {
     background-color: #dde0e3; }
 
 .form-control-plaintext {
@@ -1815,28 +1830,32 @@ progress {
   background-color: transparent;
   border: solid transparent;
   border-width: 1px 0; }
-  .form-control-plaintext.form-control-sm, input.form-control-plaintext.xlarge,
+  .form-control-plaintext.form-control-sm, .form-controls input.form-control-plaintext:not([type="checkbox"]):not([type="radio"]):not([type="submit"]), input.form-control-plaintext.large,
+  input.form-control-plaintext.xlarge,
   .form-control-plaintext.input-text,
-  .form-control-plaintext.input-password, input.form-control-plaintext.input-small, input.form-control-plaintext.input-medium, input.form-control-plaintext.input-large, .form-controls input.form-control-plaintext:not([type="checkbox"]):not([type="radio"]), .form-control-plaintext.form-control-lg {
+  .form-control-plaintext.input-password, input.form-control-plaintext.input-small, input.form-control-plaintext.input-medium, input.form-control-plaintext.input-large, .form-control-plaintext.form-control-lg {
     padding-right: 0;
     padding-left: 0; }
 
-.form-control-sm, input.xlarge,
+.form-control-sm, .form-controls input:not([type="checkbox"]):not([type="radio"]):not([type="submit"]), input.large,
+input.xlarge,
 .input-text,
-.input-password, input.input-small, input.input-medium, input.input-large, .form-controls input:not([type="checkbox"]):not([type="radio"]) {
+.input-password, input.input-small, input.input-medium, input.input-large {
   min-height: calc(1.5em + (0.5rem + 2px));
   padding: 0.25rem 0.5rem;
   font-size: 0.875rem;
   border-radius: 0.2rem; }
-  .form-control-sm::file-selector-button, input.xlarge::file-selector-button,
+  .form-control-sm::file-selector-button, .form-controls input:not([type="submit"]):not([type="radio"]):not([type="checkbox"])::file-selector-button, input.large::file-selector-button,
+  input.xlarge::file-selector-button,
   .input-text::file-selector-button,
-  .input-password::file-selector-button, input.input-small::file-selector-button, input.input-medium::file-selector-button, input.input-large::file-selector-button, .form-controls input:not([type="radio"]):not([type="checkbox"])::file-selector-button {
+  .input-password::file-selector-button, input.input-small::file-selector-button, input.input-medium::file-selector-button, input.input-large::file-selector-button {
     padding: 0.25rem 0.5rem;
     margin: -0.25rem -0.5rem;
     margin-inline-end: 0.5rem; }
-  .form-control-sm::-webkit-file-upload-button, input.xlarge::-webkit-file-upload-button,
+  .form-control-sm::-webkit-file-upload-button, .form-controls input:not([type="submit"]):not([type="radio"]):not([type="checkbox"])::-webkit-file-upload-button, input.large::-webkit-file-upload-button,
+  input.xlarge::-webkit-file-upload-button,
   .input-text::-webkit-file-upload-button,
-  .input-password::-webkit-file-upload-button, input.input-small::-webkit-file-upload-button, input.input-medium::-webkit-file-upload-button, input.input-large::-webkit-file-upload-button, .form-controls input:not([type="radio"]):not([type="checkbox"])::-webkit-file-upload-button {
+  .input-password::-webkit-file-upload-button, input.input-small::-webkit-file-upload-button, input.input-medium::-webkit-file-upload-button, input.input-large::-webkit-file-upload-button {
     padding: 0.25rem 0.5rem;
     margin: -0.25rem -0.5rem;
     margin-inline-end: 0.5rem; }
@@ -1855,7 +1874,7 @@ progress {
     margin: -0.5rem -1rem;
     margin-inline-end: 1rem; }
 
-textarea.form-control,
+textarea.form-control, .form-controls textarea,
 textarea.input-text,
 textarea.input-password {
   min-height: calc(1.5em + (0.75rem + 2px)); }
@@ -2071,9 +2090,10 @@ textarea.form-control-lg {
 
 .form-floating {
   position: relative; }
-  .form-floating > .form-control, .form-floating > input.xlarge,
+  .form-floating > .form-control, .form-controls .form-floating > input:not([type="checkbox"]):not([type="radio"]):not([type="submit"]), .form-controls .form-floating > textarea, .form-floating > input.large,
+  .form-floating > input.xlarge,
   .form-floating > .input-text,
-  .form-floating > .input-password, .form-floating > input.input-small, .form-floating > input.input-medium, .form-floating > input.input-large, .form-controls .form-floating > input:not([type="checkbox"]):not([type="radio"]),
+  .form-floating > .input-password, .form-floating > input.input-small, .form-floating > input.input-medium, .form-floating > input.input-large,
   .form-floating > .form-select,
   .widget-box-title .form-floating > select,
   .form-controls .form-floating > select {
@@ -2092,48 +2112,57 @@ textarea.form-control-lg {
     @media (prefers-reduced-motion: reduce) {
       .form-floating > label {
         transition: none; } }
-  .form-floating > .form-control, .form-floating > input.xlarge,
+  .form-floating > .form-control, .form-controls .form-floating > input:not([type="checkbox"]):not([type="radio"]):not([type="submit"]), .form-controls .form-floating > textarea, .form-floating > input.large,
+  .form-floating > input.xlarge,
   .form-floating > .input-text,
-  .form-floating > .input-password, .form-floating > input.input-small, .form-floating > input.input-medium, .form-floating > input.input-large, .form-controls .form-floating > input:not([type="checkbox"]):not([type="radio"]) {
+  .form-floating > .input-password, .form-floating > input.input-small, .form-floating > input.input-medium, .form-floating > input.input-large {
     padding: 1rem 0.75rem; }
-    .form-floating > .form-control::placeholder, .form-floating > input.xlarge::placeholder,
+    .form-floating > .form-control::placeholder, .form-controls .form-floating > input:not([type="submit"]):not([type="radio"]):not([type="checkbox"])::placeholder, .form-controls .form-floating > textarea::placeholder, .form-floating > input.large::placeholder,
+    .form-floating > input.xlarge::placeholder,
     .form-floating > .input-text::placeholder,
-    .form-floating > .input-password::placeholder, .form-floating > input.input-small::placeholder, .form-floating > input.input-medium::placeholder, .form-floating > input.input-large::placeholder, .form-controls .form-floating > input:not([type="radio"]):not([type="checkbox"])::placeholder {
+    .form-floating > .input-password::placeholder, .form-floating > input.input-small::placeholder, .form-floating > input.input-medium::placeholder, .form-floating > input.input-large::placeholder {
       color: transparent; }
-    .form-floating > .form-control:focus, .form-floating > input.xlarge:focus,
+    .form-floating > .form-control:focus, .form-controls .form-floating > input:focus:not([type="checkbox"]):not([type="radio"]):not([type="submit"]), .form-controls .form-floating > textarea:focus, .form-floating > input.large:focus,
+    .form-floating > input.xlarge:focus,
     .form-floating > .input-text:focus,
-    .form-floating > .input-password:focus, .form-floating > input.input-small:focus, .form-floating > input.input-medium:focus, .form-floating > input.input-large:focus, .form-controls .form-floating > input:focus:not([type="checkbox"]):not([type="radio"]), .form-floating > .form-control:not(:placeholder-shown), .form-floating > input.xlarge:not(:placeholder-shown),
+    .form-floating > .input-password:focus, .form-floating > input.input-small:focus, .form-floating > input.input-medium:focus, .form-floating > input.input-large:focus, .form-floating > .form-control:not(:placeholder-shown), .form-controls .form-floating > input:not(:placeholder-shown):not([type="checkbox"]):not([type="radio"]):not([type="submit"]), .form-controls .form-floating > textarea:not(:placeholder-shown), .form-floating > input.large:not(:placeholder-shown),
+    .form-floating > input.xlarge:not(:placeholder-shown),
     .form-floating > .input-text:not(:placeholder-shown),
-    .form-floating > .input-password:not(:placeholder-shown), .form-floating > input.input-small:not(:placeholder-shown), .form-floating > input.input-medium:not(:placeholder-shown), .form-floating > input.input-large:not(:placeholder-shown), .form-controls .form-floating > input:not(:placeholder-shown):not([type="checkbox"]):not([type="radio"]) {
+    .form-floating > .input-password:not(:placeholder-shown), .form-floating > input.input-small:not(:placeholder-shown), .form-floating > input.input-medium:not(:placeholder-shown), .form-floating > input.input-large:not(:placeholder-shown) {
       padding-top: 1.625rem;
       padding-bottom: 0.625rem; }
-    .form-floating > .form-control:-webkit-autofill, .form-floating > input.xlarge:-webkit-autofill,
+    .form-floating > .form-control:-webkit-autofill, .form-controls .form-floating > input:-webkit-autofill:not([type="checkbox"]):not([type="radio"]):not([type="submit"]), .form-controls .form-floating > textarea:-webkit-autofill, .form-floating > input.large:-webkit-autofill,
+    .form-floating > input.xlarge:-webkit-autofill,
     .form-floating > .input-text:-webkit-autofill,
-    .form-floating > .input-password:-webkit-autofill, .form-floating > input.input-small:-webkit-autofill, .form-floating > input.input-medium:-webkit-autofill, .form-floating > input.input-large:-webkit-autofill, .form-controls .form-floating > input:-webkit-autofill:not([type="checkbox"]):not([type="radio"]) {
+    .form-floating > .input-password:-webkit-autofill, .form-floating > input.input-small:-webkit-autofill, .form-floating > input.input-medium:-webkit-autofill, .form-floating > input.input-large:-webkit-autofill {
       padding-top: 1.625rem;
       padding-bottom: 0.625rem; }
   .form-floating > .form-select, .widget-box-title .form-floating > select, .form-controls .form-floating > select {
     padding-top: 1.625rem;
     padding-bottom: 0.625rem; }
-  .form-floating > .form-control:focus ~ label, .form-floating > input.xlarge:focus ~ label,
+  .form-floating > .form-control:focus ~ label, .form-controls .form-floating > input:focus:not([type="checkbox"]):not([type="radio"]):not([type="submit"]) ~ label, .form-controls .form-floating > textarea:focus ~ label, .form-floating > input.large:focus ~ label,
+  .form-floating > input.xlarge:focus ~ label,
   .form-floating > .input-text:focus ~ label,
-  .form-floating > .input-password:focus ~ label, .form-floating > input.input-small:focus ~ label, .form-floating > input.input-medium:focus ~ label, .form-floating > input.input-large:focus ~ label, .form-controls .form-floating > input:focus:not([type="checkbox"]):not([type="radio"]) ~ label,
+  .form-floating > .input-password:focus ~ label, .form-floating > input.input-small:focus ~ label, .form-floating > input.input-medium:focus ~ label, .form-floating > input.input-large:focus ~ label,
   .form-floating > .form-control:not(:placeholder-shown) ~ label,
+  .form-controls .form-floating > input:not(:placeholder-shown):not([type="checkbox"]):not([type="radio"]):not([type="submit"]) ~ label,
+  .form-controls .form-floating > textarea:not(:placeholder-shown) ~ label,
+  .form-floating > input.large:not(:placeholder-shown) ~ label,
   .form-floating > input.xlarge:not(:placeholder-shown) ~ label,
   .form-floating > .input-text:not(:placeholder-shown) ~ label,
   .form-floating > .input-password:not(:placeholder-shown) ~ label,
   .form-floating > input.input-small:not(:placeholder-shown) ~ label,
   .form-floating > input.input-medium:not(:placeholder-shown) ~ label,
   .form-floating > input.input-large:not(:placeholder-shown) ~ label,
-  .form-controls .form-floating > input:not(:placeholder-shown):not([type="checkbox"]):not([type="radio"]) ~ label,
   .form-floating > .form-select ~ label,
   .widget-box-title .form-floating > select ~ label,
   .form-controls .form-floating > select ~ label {
     opacity: 0.65;
     transform: scale(0.85) translateY(-0.5rem) translateX(0.15rem); }
-  .form-floating > .form-control:-webkit-autofill ~ label, .form-floating > input.xlarge:-webkit-autofill ~ label,
+  .form-floating > .form-control:-webkit-autofill ~ label, .form-controls .form-floating > input:-webkit-autofill:not([type="checkbox"]):not([type="radio"]):not([type="submit"]) ~ label, .form-controls .form-floating > textarea:-webkit-autofill ~ label, .form-floating > input.large:-webkit-autofill ~ label,
+  .form-floating > input.xlarge:-webkit-autofill ~ label,
   .form-floating > .input-text:-webkit-autofill ~ label,
-  .form-floating > .input-password:-webkit-autofill ~ label, .form-floating > input.input-small:-webkit-autofill ~ label, .form-floating > input.input-medium:-webkit-autofill ~ label, .form-floating > input.input-large:-webkit-autofill ~ label, .form-controls .form-floating > input:-webkit-autofill:not([type="checkbox"]):not([type="radio"]) ~ label {
+  .form-floating > .input-password:-webkit-autofill ~ label, .form-floating > input.input-small:-webkit-autofill ~ label, .form-floating > input.input-medium:-webkit-autofill ~ label, .form-floating > input.input-large:-webkit-autofill ~ label {
     opacity: 0.65;
     transform: scale(0.85) translateY(-0.5rem) translateX(0.15rem); }
 
@@ -2143,9 +2172,10 @@ textarea.form-control-lg {
   flex-wrap: wrap;
   align-items: stretch;
   width: 100%; }
-  .input-group > .form-control, .input-group > input.xlarge,
+  .input-group > .form-control, .form-controls .input-group > input:not([type="checkbox"]):not([type="radio"]):not([type="submit"]), .form-controls .input-group > textarea, .input-group > input.large,
+  .input-group > input.xlarge,
   .input-group > .input-text,
-  .input-group > .input-password, .input-group > input.input-small, .input-group > input.input-medium, .input-group > input.input-large, .form-controls .input-group > input:not([type="checkbox"]):not([type="radio"]),
+  .input-group > .input-password, .input-group > input.input-small, .input-group > input.input-medium, .input-group > input.input-large,
   .input-group > .form-select,
   .widget-box-title .input-group > select,
   .form-controls .input-group > select {
@@ -2153,9 +2183,10 @@ textarea.form-control-lg {
     flex: 1 1 auto;
     width: 1%;
     min-width: 0; }
-  .input-group > .form-control:focus, .input-group > input.xlarge:focus,
+  .input-group > .form-control:focus, .form-controls .input-group > input:focus:not([type="checkbox"]):not([type="radio"]):not([type="submit"]), .form-controls .input-group > textarea:focus, .input-group > input.large:focus,
+  .input-group > input.xlarge:focus,
   .input-group > .input-text:focus,
-  .input-group > .input-password:focus, .input-group > input.input-small:focus, .input-group > input.input-medium:focus, .input-group > input.input-large:focus, .form-controls .input-group > input:focus:not([type="checkbox"]):not([type="radio"]),
+  .input-group > .input-password:focus, .input-group > input.input-small:focus, .input-group > input.input-medium:focus, .input-group > input.input-large:focus,
   .input-group > .form-select:focus,
   .widget-box-title .input-group > select:focus,
   .form-controls .input-group > select:focus {
@@ -2180,9 +2211,10 @@ textarea.form-control-lg {
   border: 1px solid #ced4da;
   border-radius: 0.25rem; }
 
-.input-group-lg > .form-control, .input-group-lg > input.xlarge,
+.input-group-lg > .form-control, .form-controls .input-group-lg > input:not([type="checkbox"]):not([type="radio"]):not([type="submit"]), .form-controls .input-group-lg > textarea, .input-group-lg > input.large,
+.input-group-lg > input.xlarge,
 .input-group-lg > .input-text,
-.input-group-lg > .input-password, .input-group-lg > input.input-small, .input-group-lg > input.input-medium, .input-group-lg > input.input-large, .form-controls .input-group-lg > input:not([type="checkbox"]):not([type="radio"]),
+.input-group-lg > .input-password, .input-group-lg > input.input-small, .input-group-lg > input.input-medium, .input-group-lg > input.input-large,
 .input-group-lg > .form-select,
 .widget-box-title .input-group-lg > select,
 .form-controls .input-group-lg > select,
@@ -2192,9 +2224,10 @@ textarea.form-control-lg {
   font-size: 1.25rem;
   border-radius: 0.3rem; }
 
-.input-group-sm > .form-control, .input-group-sm > input.xlarge,
+.input-group-sm > .form-control, .form-controls .input-group-sm > input:not([type="checkbox"]):not([type="radio"]):not([type="submit"]), .form-controls .input-group-sm > textarea, .input-group-sm > input.large,
+.input-group-sm > input.xlarge,
 .input-group-sm > .input-text,
-.input-group-sm > .input-password, .input-group-sm > input.input-small, .input-group-sm > input.input-medium, .input-group-sm > input.input-large, .form-controls .input-group-sm > input:not([type="checkbox"]):not([type="radio"]),
+.input-group-sm > .input-password, .input-group-sm > input.input-small, .input-group-sm > input.input-medium, .input-group-sm > input.input-large,
 .input-group-sm > .form-select,
 .widget-box-title .input-group-sm > select,
 .form-controls .input-group-sm > select,
@@ -2249,28 +2282,32 @@ textarea.form-control-lg {
 .is-valid ~ .valid-tooltip {
   display: block; }
 
-.was-validated .form-control:valid, .was-validated input.xlarge:valid,
+.was-validated .form-control:valid, .was-validated .form-controls input:valid:not([type="checkbox"]):not([type="radio"]):not([type="submit"]), .form-controls .was-validated input:valid:not([type="checkbox"]):not([type="radio"]):not([type="submit"]), .was-validated .form-controls textarea:valid, .form-controls .was-validated textarea:valid, .was-validated input.large:valid,
+.was-validated input.xlarge:valid,
 .was-validated .input-text:valid,
-.was-validated .input-password:valid, .was-validated input.input-small:valid, .was-validated input.input-medium:valid, .was-validated input.input-large:valid, .was-validated .form-controls input:valid:not([type="checkbox"]):not([type="radio"]), .form-controls .was-validated input:valid:not([type="checkbox"]):not([type="radio"]), .form-control.is-valid, input.is-valid.xlarge,
+.was-validated .input-password:valid, .was-validated input.input-small:valid, .was-validated input.input-medium:valid, .was-validated input.input-large:valid, .form-control.is-valid, .form-controls input.is-valid:not([type="checkbox"]):not([type="radio"]):not([type="submit"]), .form-controls textarea.is-valid, input.is-valid.large,
+input.is-valid.xlarge,
 .is-valid.input-text,
-.is-valid.input-password, input.is-valid.input-small, input.is-valid.input-medium, input.is-valid.input-large, .form-controls input.is-valid:not([type="checkbox"]):not([type="radio"]) {
+.is-valid.input-password, input.is-valid.input-small, input.is-valid.input-medium, input.is-valid.input-large {
   border-color: #198754;
   padding-right: calc(1.5em + 0.75rem);
   background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 8 8'%3e%3cpath fill='%23198754' d='M2.3 6.73L.6 4.53c-.4-1.04.46-1.4 1.1-.8l1.1 1.4 3.4-3.8c.6-.63 1.6-.27 1.2.7l-4 4.6c-.43.5-.8.4-1.1.1z'/%3e%3c/svg%3e");
   background-repeat: no-repeat;
   background-position: right calc(0.375em + 0.1875rem) center;
   background-size: calc(0.75em + 0.375rem) calc(0.75em + 0.375rem); }
-  .was-validated .form-control:valid:focus, .was-validated input.xlarge:valid:focus,
+  .was-validated .form-control:valid:focus, .was-validated .form-controls input:valid:focus:not([type="checkbox"]):not([type="radio"]):not([type="submit"]), .form-controls .was-validated input:valid:focus:not([type="checkbox"]):not([type="radio"]):not([type="submit"]), .was-validated .form-controls textarea:valid:focus, .form-controls .was-validated textarea:valid:focus, .was-validated input.large:valid:focus,
+  .was-validated input.xlarge:valid:focus,
   .was-validated .input-text:valid:focus,
-  .was-validated .input-password:valid:focus, .was-validated input.input-small:valid:focus, .was-validated input.input-medium:valid:focus, .was-validated input.input-large:valid:focus, .was-validated .form-controls input:valid:focus:not([type="checkbox"]):not([type="radio"]), .form-controls .was-validated input:valid:focus:not([type="checkbox"]):not([type="radio"]), .form-control.is-valid:focus, input.is-valid.xlarge:focus,
+  .was-validated .input-password:valid:focus, .was-validated input.input-small:valid:focus, .was-validated input.input-medium:valid:focus, .was-validated input.input-large:valid:focus, .form-control.is-valid:focus, .form-controls input.is-valid:focus:not([type="checkbox"]):not([type="radio"]):not([type="submit"]), .form-controls textarea.is-valid:focus, input.is-valid.large:focus,
+  input.is-valid.xlarge:focus,
   .is-valid.input-text:focus,
-  .is-valid.input-password:focus, input.is-valid.input-small:focus, input.is-valid.input-medium:focus, input.is-valid.input-large:focus, .form-controls input.is-valid:focus:not([type="checkbox"]):not([type="radio"]) {
+  .is-valid.input-password:focus, input.is-valid.input-small:focus, input.is-valid.input-medium:focus, input.is-valid.input-large:focus {
     border-color: #198754;
     box-shadow: 0 0 0 0.25rem rgba(25, 135, 84, 0.25); }
 
-.was-validated textarea.form-control:valid,
+.was-validated textarea.form-control:valid, .was-validated .form-controls textarea:valid, .form-controls .was-validated textarea:valid,
 .was-validated textarea.input-text:valid,
-.was-validated textarea.input-password:valid, textarea.form-control.is-valid,
+.was-validated textarea.input-password:valid, textarea.form-control.is-valid, .form-controls textarea.is-valid,
 textarea.is-valid.input-text,
 textarea.is-valid.input-password {
   padding-right: calc(1.5em + 0.75rem);
@@ -2299,11 +2336,13 @@ textarea.is-valid.input-password {
 .form-check-inline .form-check-input ~ .valid-feedback {
   margin-left: .5em; }
 
-.was-validated .input-group .form-control:valid, .was-validated .input-group input.xlarge:valid,
+.was-validated .input-group .form-control:valid, .was-validated .input-group .form-controls input:valid:not([type="checkbox"]):not([type="radio"]):not([type="submit"]), .form-controls .was-validated .input-group input:valid:not([type="checkbox"]):not([type="radio"]):not([type="submit"]), .was-validated .input-group .form-controls textarea:valid, .form-controls .was-validated .input-group textarea:valid, .was-validated .input-group input.large:valid,
+.was-validated .input-group input.xlarge:valid,
 .was-validated .input-group .input-text:valid,
-.was-validated .input-group .input-password:valid, .was-validated .input-group input.input-small:valid, .was-validated .input-group input.input-medium:valid, .was-validated .input-group input.input-large:valid, .was-validated .input-group .form-controls input:valid:not([type="checkbox"]):not([type="radio"]), .form-controls .was-validated .input-group input:valid:not([type="checkbox"]):not([type="radio"]), .input-group .form-control.is-valid, .input-group input.is-valid.xlarge,
+.was-validated .input-group .input-password:valid, .was-validated .input-group input.input-small:valid, .was-validated .input-group input.input-medium:valid, .was-validated .input-group input.input-large:valid, .input-group .form-control.is-valid, .input-group .form-controls input.is-valid:not([type="checkbox"]):not([type="radio"]):not([type="submit"]), .form-controls .input-group input.is-valid:not([type="checkbox"]):not([type="radio"]):not([type="submit"]), .input-group .form-controls textarea.is-valid, .form-controls .input-group textarea.is-valid, .input-group input.is-valid.large,
+.input-group input.is-valid.xlarge,
 .input-group .is-valid.input-text,
-.input-group .is-valid.input-password, .input-group input.is-valid.input-small, .input-group input.is-valid.input-medium, .input-group input.is-valid.input-large, .input-group .form-controls input.is-valid:not([type="checkbox"]):not([type="radio"]), .form-controls .input-group input.is-valid:not([type="checkbox"]):not([type="radio"]),
+.input-group .is-valid.input-password, .input-group input.is-valid.input-small, .input-group input.is-valid.input-medium, .input-group input.is-valid.input-large,
 .was-validated .input-group .form-select:valid,
 .was-validated .input-group .widget-box-title select:valid,
 .widget-box-title .was-validated .input-group select:valid,
@@ -2315,11 +2354,13 @@ textarea.is-valid.input-password {
 .input-group .form-controls select.is-valid,
 .form-controls .input-group select.is-valid {
   z-index: 1; }
-  .was-validated .input-group .form-control:valid:focus, .was-validated .input-group input.xlarge:valid:focus,
+  .was-validated .input-group .form-control:valid:focus, .was-validated .input-group .form-controls input:valid:focus:not([type="checkbox"]):not([type="radio"]):not([type="submit"]), .form-controls .was-validated .input-group input:valid:focus:not([type="checkbox"]):not([type="radio"]):not([type="submit"]), .was-validated .input-group .form-controls textarea:valid:focus, .form-controls .was-validated .input-group textarea:valid:focus, .was-validated .input-group input.large:valid:focus,
+  .was-validated .input-group input.xlarge:valid:focus,
   .was-validated .input-group .input-text:valid:focus,
-  .was-validated .input-group .input-password:valid:focus, .was-validated .input-group input.input-small:valid:focus, .was-validated .input-group input.input-medium:valid:focus, .was-validated .input-group input.input-large:valid:focus, .was-validated .input-group .form-controls input:valid:focus:not([type="checkbox"]):not([type="radio"]), .form-controls .was-validated .input-group input:valid:focus:not([type="checkbox"]):not([type="radio"]), .input-group .form-control.is-valid:focus, .input-group input.is-valid.xlarge:focus,
+  .was-validated .input-group .input-password:valid:focus, .was-validated .input-group input.input-small:valid:focus, .was-validated .input-group input.input-medium:valid:focus, .was-validated .input-group input.input-large:valid:focus, .input-group .form-control.is-valid:focus, .input-group .form-controls input.is-valid:focus:not([type="checkbox"]):not([type="radio"]):not([type="submit"]), .form-controls .input-group input.is-valid:focus:not([type="checkbox"]):not([type="radio"]):not([type="submit"]), .input-group .form-controls textarea.is-valid:focus, .form-controls .input-group textarea.is-valid:focus, .input-group input.is-valid.large:focus,
+  .input-group input.is-valid.xlarge:focus,
   .input-group .is-valid.input-text:focus,
-  .input-group .is-valid.input-password:focus, .input-group input.is-valid.input-small:focus, .input-group input.is-valid.input-medium:focus, .input-group input.is-valid.input-large:focus, .input-group .form-controls input.is-valid:focus:not([type="checkbox"]):not([type="radio"]), .form-controls .input-group input.is-valid:focus:not([type="checkbox"]):not([type="radio"]),
+  .input-group .is-valid.input-password:focus, .input-group input.is-valid.input-small:focus, .input-group input.is-valid.input-medium:focus, .input-group input.is-valid.input-large:focus,
   .was-validated .input-group .form-select:valid:focus,
   .was-validated .input-group .widget-box-title select:valid:focus,
   .widget-box-title .was-validated .input-group select:valid:focus,
@@ -2358,28 +2399,32 @@ textarea.is-valid.input-password {
 .is-invalid ~ .invalid-tooltip {
   display: block; }
 
-.was-validated .form-control:invalid, .was-validated input.xlarge:invalid,
+.was-validated .form-control:invalid, .was-validated .form-controls input:invalid:not([type="checkbox"]):not([type="radio"]):not([type="submit"]), .form-controls .was-validated input:invalid:not([type="checkbox"]):not([type="radio"]):not([type="submit"]), .was-validated .form-controls textarea:invalid, .form-controls .was-validated textarea:invalid, .was-validated input.large:invalid,
+.was-validated input.xlarge:invalid,
 .was-validated .input-text:invalid,
-.was-validated .input-password:invalid, .was-validated input.input-small:invalid, .was-validated input.input-medium:invalid, .was-validated input.input-large:invalid, .was-validated .form-controls input:invalid:not([type="checkbox"]):not([type="radio"]), .form-controls .was-validated input:invalid:not([type="checkbox"]):not([type="radio"]), .form-control.is-invalid, input.is-invalid.xlarge,
+.was-validated .input-password:invalid, .was-validated input.input-small:invalid, .was-validated input.input-medium:invalid, .was-validated input.input-large:invalid, .form-control.is-invalid, .form-controls input.is-invalid:not([type="checkbox"]):not([type="radio"]):not([type="submit"]), .form-controls textarea.is-invalid, input.is-invalid.large,
+input.is-invalid.xlarge,
 .is-invalid.input-text,
-.is-invalid.input-password, input.is-invalid.input-small, input.is-invalid.input-medium, input.is-invalid.input-large, .form-controls input.is-invalid:not([type="checkbox"]):not([type="radio"]) {
+.is-invalid.input-password, input.is-invalid.input-small, input.is-invalid.input-medium, input.is-invalid.input-large {
   border-color: #dc3545;
   padding-right: calc(1.5em + 0.75rem);
   background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 12' width='12' height='12' fill='none' stroke='%23dc3545'%3e%3ccircle cx='6' cy='6' r='4.5'/%3e%3cpath stroke-linejoin='round' d='M5.8 3.6h.4L6 6.5z'/%3e%3ccircle cx='6' cy='8.2' r='.6' fill='%23dc3545' stroke='none'/%3e%3c/svg%3e");
   background-repeat: no-repeat;
   background-position: right calc(0.375em + 0.1875rem) center;
   background-size: calc(0.75em + 0.375rem) calc(0.75em + 0.375rem); }
-  .was-validated .form-control:invalid:focus, .was-validated input.xlarge:invalid:focus,
+  .was-validated .form-control:invalid:focus, .was-validated .form-controls input:invalid:focus:not([type="checkbox"]):not([type="radio"]):not([type="submit"]), .form-controls .was-validated input:invalid:focus:not([type="checkbox"]):not([type="radio"]):not([type="submit"]), .was-validated .form-controls textarea:invalid:focus, .form-controls .was-validated textarea:invalid:focus, .was-validated input.large:invalid:focus,
+  .was-validated input.xlarge:invalid:focus,
   .was-validated .input-text:invalid:focus,
-  .was-validated .input-password:invalid:focus, .was-validated input.input-small:invalid:focus, .was-validated input.input-medium:invalid:focus, .was-validated input.input-large:invalid:focus, .was-validated .form-controls input:invalid:focus:not([type="checkbox"]):not([type="radio"]), .form-controls .was-validated input:invalid:focus:not([type="checkbox"]):not([type="radio"]), .form-control.is-invalid:focus, input.is-invalid.xlarge:focus,
+  .was-validated .input-password:invalid:focus, .was-validated input.input-small:invalid:focus, .was-validated input.input-medium:invalid:focus, .was-validated input.input-large:invalid:focus, .form-control.is-invalid:focus, .form-controls input.is-invalid:focus:not([type="checkbox"]):not([type="radio"]):not([type="submit"]), .form-controls textarea.is-invalid:focus, input.is-invalid.large:focus,
+  input.is-invalid.xlarge:focus,
   .is-invalid.input-text:focus,
-  .is-invalid.input-password:focus, input.is-invalid.input-small:focus, input.is-invalid.input-medium:focus, input.is-invalid.input-large:focus, .form-controls input.is-invalid:focus:not([type="checkbox"]):not([type="radio"]) {
+  .is-invalid.input-password:focus, input.is-invalid.input-small:focus, input.is-invalid.input-medium:focus, input.is-invalid.input-large:focus {
     border-color: #dc3545;
     box-shadow: 0 0 0 0.25rem rgba(220, 53, 69, 0.25); }
 
-.was-validated textarea.form-control:invalid,
+.was-validated textarea.form-control:invalid, .was-validated .form-controls textarea:invalid, .form-controls .was-validated textarea:invalid,
 .was-validated textarea.input-text:invalid,
-.was-validated textarea.input-password:invalid, textarea.form-control.is-invalid,
+.was-validated textarea.input-password:invalid, textarea.form-control.is-invalid, .form-controls textarea.is-invalid,
 textarea.is-invalid.input-text,
 textarea.is-invalid.input-password {
   padding-right: calc(1.5em + 0.75rem);
@@ -2408,11 +2453,13 @@ textarea.is-invalid.input-password {
 .form-check-inline .form-check-input ~ .invalid-feedback {
   margin-left: .5em; }
 
-.was-validated .input-group .form-control:invalid, .was-validated .input-group input.xlarge:invalid,
+.was-validated .input-group .form-control:invalid, .was-validated .input-group .form-controls input:invalid:not([type="checkbox"]):not([type="radio"]):not([type="submit"]), .form-controls .was-validated .input-group input:invalid:not([type="checkbox"]):not([type="radio"]):not([type="submit"]), .was-validated .input-group .form-controls textarea:invalid, .form-controls .was-validated .input-group textarea:invalid, .was-validated .input-group input.large:invalid,
+.was-validated .input-group input.xlarge:invalid,
 .was-validated .input-group .input-text:invalid,
-.was-validated .input-group .input-password:invalid, .was-validated .input-group input.input-small:invalid, .was-validated .input-group input.input-medium:invalid, .was-validated .input-group input.input-large:invalid, .was-validated .input-group .form-controls input:invalid:not([type="checkbox"]):not([type="radio"]), .form-controls .was-validated .input-group input:invalid:not([type="checkbox"]):not([type="radio"]), .input-group .form-control.is-invalid, .input-group input.is-invalid.xlarge,
+.was-validated .input-group .input-password:invalid, .was-validated .input-group input.input-small:invalid, .was-validated .input-group input.input-medium:invalid, .was-validated .input-group input.input-large:invalid, .input-group .form-control.is-invalid, .input-group .form-controls input.is-invalid:not([type="checkbox"]):not([type="radio"]):not([type="submit"]), .form-controls .input-group input.is-invalid:not([type="checkbox"]):not([type="radio"]):not([type="submit"]), .input-group .form-controls textarea.is-invalid, .form-controls .input-group textarea.is-invalid, .input-group input.is-invalid.large,
+.input-group input.is-invalid.xlarge,
 .input-group .is-invalid.input-text,
-.input-group .is-invalid.input-password, .input-group input.is-invalid.input-small, .input-group input.is-invalid.input-medium, .input-group input.is-invalid.input-large, .input-group .form-controls input.is-invalid:not([type="checkbox"]):not([type="radio"]), .form-controls .input-group input.is-invalid:not([type="checkbox"]):not([type="radio"]),
+.input-group .is-invalid.input-password, .input-group input.is-invalid.input-small, .input-group input.is-invalid.input-medium, .input-group input.is-invalid.input-large,
 .was-validated .input-group .form-select:invalid,
 .was-validated .input-group .widget-box-title select:invalid,
 .widget-box-title .was-validated .input-group select:invalid,
@@ -2424,11 +2471,13 @@ textarea.is-invalid.input-password {
 .input-group .form-controls select.is-invalid,
 .form-controls .input-group select.is-invalid {
   z-index: 2; }
-  .was-validated .input-group .form-control:invalid:focus, .was-validated .input-group input.xlarge:invalid:focus,
+  .was-validated .input-group .form-control:invalid:focus, .was-validated .input-group .form-controls input:invalid:focus:not([type="checkbox"]):not([type="radio"]):not([type="submit"]), .form-controls .was-validated .input-group input:invalid:focus:not([type="checkbox"]):not([type="radio"]):not([type="submit"]), .was-validated .input-group .form-controls textarea:invalid:focus, .form-controls .was-validated .input-group textarea:invalid:focus, .was-validated .input-group input.large:invalid:focus,
+  .was-validated .input-group input.xlarge:invalid:focus,
   .was-validated .input-group .input-text:invalid:focus,
-  .was-validated .input-group .input-password:invalid:focus, .was-validated .input-group input.input-small:invalid:focus, .was-validated .input-group input.input-medium:invalid:focus, .was-validated .input-group input.input-large:invalid:focus, .was-validated .input-group .form-controls input:invalid:focus:not([type="checkbox"]):not([type="radio"]), .form-controls .was-validated .input-group input:invalid:focus:not([type="checkbox"]):not([type="radio"]), .input-group .form-control.is-invalid:focus, .input-group input.is-invalid.xlarge:focus,
+  .was-validated .input-group .input-password:invalid:focus, .was-validated .input-group input.input-small:invalid:focus, .was-validated .input-group input.input-medium:invalid:focus, .was-validated .input-group input.input-large:invalid:focus, .input-group .form-control.is-invalid:focus, .input-group .form-controls input.is-invalid:focus:not([type="checkbox"]):not([type="radio"]):not([type="submit"]), .form-controls .input-group input.is-invalid:focus:not([type="checkbox"]):not([type="radio"]):not([type="submit"]), .input-group .form-controls textarea.is-invalid:focus, .form-controls .input-group textarea.is-invalid:focus, .input-group input.is-invalid.large:focus,
+  .input-group input.is-invalid.xlarge:focus,
   .input-group .is-invalid.input-text:focus,
-  .input-group .is-invalid.input-password:focus, .input-group input.is-invalid.input-small:focus, .input-group input.is-invalid.input-medium:focus, .input-group input.is-invalid.input-large:focus, .input-group .form-controls input.is-invalid:focus:not([type="checkbox"]):not([type="radio"]), .form-controls .input-group input.is-invalid:focus:not([type="checkbox"]):not([type="radio"]),
+  .input-group .is-invalid.input-password:focus, .input-group input.is-invalid.input-small:focus, .input-group input.is-invalid.input-medium:focus, .input-group input.is-invalid.input-large:focus,
   .was-validated .input-group .form-select:invalid:focus,
   .was-validated .input-group .widget-box-title select:invalid:focus,
   .widget-box-title .was-validated .input-group select:invalid:focus,
@@ -8690,7 +8739,7 @@ div.row-offset {
   padding: 10px 15px; }
 
 #content-head h1, #content-head .h1, #content-head h2, #content-head .h2 {
-  color: #495057;
+  color: #343a40;
   font-size: 30px;
   font-weight: 400;
   margin: 0; }
@@ -8743,47 +8792,39 @@ h3.render-title, .render-title.h3 {
   line-height: 18px;
   outline: none;
   padding: 4px 6px;
-  width: 208px;
-  border-radius: 4px 0 0 4px;
   vertical-align: top;
-}
+  border-radius: 4px 0 0 4px;
+  width: 208px; }
 
 .quick-search .ico-search {
   border-left: 0;
-  margin-left: 0;
-  border-radius: 0px 4px 4px 0;
-  border-radius: 0px 4px 4px 0;
   display: block;
+  border-radius: 0px 4px 4px 0;
+  border-radius: 0px 4px 4px 0;
   height: 34px;
+  margin-left: 0;
   margin-right: 10px;
   padding: 0;
-  width: 34px !important;
-}
+  width: 34px !important; }
 
 .locations img {
-  vertical-align: bottom;
-}
+  vertical-align: bottom; }
 
 #l_countries a, #i_regions a, #i_cities a {
-  text-decoration: none;
   font-size: .85rem;
-}
-
+  text-decoration: none; }
 #l_countries .list-group-item, #i_regions .list-group-item, #i_cities .list-group-item {
-  padding-top: .2rem;
-  padding-bottom: 0.2rem;
-}
+  padding-bottom: .2rem;
+  padding-top: .2rem; }
 
 .clear {
-  clear: both;
-}
+  clear: both; }
 
 .ico-48 {
   display: block;
   height: 48px;
   padding: 0;
-  width: 48px;
-}
+  width: 48px; }
 
 .ico-20,
 a.ico-20 {
@@ -8800,7 +8841,7 @@ a.ico-32 {
 
 .action-btn {
   background-color: #e9ecef;
-  border: solid 1px #6c757d;
+  border: solid 1px #495057;
   font-size: 14px;
   line-height: 14px;
   margin: 0 10px;
@@ -8809,44 +8850,43 @@ a.ico-32 {
   text-decoration: none; }
 
 .action-btn-black {
-  background: #343a40;
-  border-color: #6c757d;
-  color: #dee2e6; }
+  background: #212529;
+  border-color: #495057;
+  color: #adb5bd; }
 
 .action-btn-black:hover {
-  background-color: #1e1e1e; }
+  background-color: #000; }
 
 .bg-black-light, .dashboard-sidebar {
   background-color: #2b2b2b; }
 
 .circle {
-  border-radius: 1rem;
   background: #dee2e6;
   border: solid 1px #6c757d;
+  border-radius: 1rem;
   color: #6c757d;
   float: right;
   font-style: normal;
   height: 1.2rem;
   margin-left: .1rem;
   margin-top: -.2rem;
-  padding-top: .1rem;
   min-width: 1.2rem;
-  text-align: center;
-}
+  padding-top: .1rem;
+  text-align: center; }
 
 .circle-red {
   background: #dc3545;
   border: solid 1px #b02a37;
-  color: #ffffff; }
+  color: #fff; }
 
 .circle-green {
   background: #198754;
   border: solid 1px #177a4c;
-  color: #ffffff; }
+  color: #fff; }
 
 .btn-black {
-  background-color: #343a40;
-  border: solid 1px #6c757d; }
+  background-color: #212529;
+  border: solid 1px #495057; }
 
 /**
 .btn-black:hover {
@@ -8867,85 +8907,6 @@ input.ico-32 {
   display: inline;
   width: 34px !important; }
 
-/* Selectmenu
-----------------------------------*/
-.select-box {
-  display: inline-block;
-  position: relative;
-  z-index: 0; }
-
-#bulk-actions .select-box,
-#listing-toolbar .select-box {
-  float: left; }
-
-.select-box-big .select-box-trigger {
-  font-size: .85rem;
-  padding: 7px 45px 6px 12px;
-}
-
-.select-box .select-box-label {
-  display: block;
-  float: left;
-  line-height: 16px;
-  overflow: hidden; }
-
-.select-box-big .select-box-icon {
-  border-left: solid 1px #e9ecef;
-  height: 29px; }
-
-.select-box-extra .select-box-trigger {
-  font-size: .85rem;
-  height: 16px;
-  padding: 9px 45px 7px 12px;
-}
-
-.select-box-extra .select-box-icon {
-  border-left: solid 1px #e9ecef;
-  height: 32px; }
-
-.select-box-input .select-box-trigger {
-  width: 50px;
-  border-radius: 4px 0 0 4px; }
-
-.select-box-medium .select-box-trigger {
-  width: 75px; }
-
-div.select-box-medium select {
-  width: 134px; }
-
-.select-box-big .select-box-trigger {
-  width: 125px; }
-
-div.select-box-big select {
-  width: 184px; }
-
-div.select-box-input select {
-  width: 109px; }
-
-.select-box-icon .ico {
-  margin-left: 5px;
-  margin-top: 5px; }
-
-input.xlarge,
-.input-text,
-.input-password {
-  width: 208px; }
-
-input.input-small {
-  width: 70px; }
-
-input.input-medium {
-  width: 90px; }
-
-div.input-medium .select-box-trigger {
-  width: 101px; }
-
-input.input-large {
-  width: 320px; }
-
-input.input-actions {
-  height: 24px; }
-
 .well {
   background-color: #f8f9fa;
   border: solid 1px #e9ecef;
@@ -8961,26 +8922,24 @@ input.input-actions {
   position: relative; }
 
 .input-has-placeholder label {
-  color: #6c757d;
+  color: #495057;
   font-size: .85rem;
   left: 8px;
   margin-bottom: 0 !important;
   margin-top: 0 !important;
   position: absolute;
-  top: 7px;
-}
+  top: 7px; }
 
 textarea {
-  background-color: #ffffff;
+  background-color: #fff;
   border: 1px solid #e9ecef;
-  color: #495057;
+  color: #343a40;
   font-size: .85rem;
   line-height: 18px;
   padding: 4px 6px;
   border-radius: 3px;
   vertical-align: top;
-  width: 208px;
-}
+  width: 208px; }
 
 .ui-rounded-corners {
   border-radius: 4px; }
@@ -8993,11 +8952,11 @@ textarea {
 
 .has-pagination ul {
   /* IE7 inline-block hack */
-  *zoom: 1;
   display: inline-block;
   *display: inline;
   height: 36px;
   margin: 25px 0 0;
+  *zoom: 1;
   border-radius: 4px; }
 
 .has-pagination li {
@@ -9080,8 +9039,7 @@ ul.showing-results {
   margin: 0;
   padding: 0 10px;
   vertical-align: top;
-  border-radius: 0 3px 3px 0;
-}
+  border-radius: 0 3px 3px 0; }
 
 .display-select-bottom {
   float: left;
@@ -9112,9 +9070,8 @@ ul.showing-results {
   padding: 3px 10px; }
 
 .btn-market-preview {
-  background-color: #dee2e6;
-  margin-left: 0;
-}
+  background-color: #adb5bd;
+  margin-left: 0; }
 
 .spinner {
   background: url("../images/loading.gif");
@@ -9122,84 +9079,63 @@ ul.showing-results {
   float: left;
   height: 16px;
   margin-right: 10px;
-  width: 16px;
-}
+  width: 16px; }
 
 .toggle-icon {
-  width: 2rem;
+  cursor: pointer;
   height: 1.5rem;
-  position: relative;
   margin: 0;
+  position: relative;
   transform: rotate(0deg);
   transition: .5s ease-in-out;
-  cursor: pointer;
-}
-
-.toggle-icon span {
-  display: block;
-  position: absolute;
-  background: rgba(255, 255, 255, 0.55);
-  height: .2rem;
-  width: 100%;
-  border-radius: .9rem;
-  opacity: 1;
-  left: 0;
-  transform: rotate(0deg);
-  transition: .25s ease-in-out;
-}
-
-.toggle-icon span:hover, .toggle-icon span:focus {
-  background: rgba(255, 255, 255, 0.75);
-}
-
-.toggle-icon span:nth-child(1) {
-  top: .2rem;
-  transform-origin: left center;
-}
-
-.toggle-icon span:nth-child(2) {
-  top: .7rem;
-  transform-origin: left center;
-}
-
-.toggle-icon span:nth-child(3) {
-  top: 1.2rem;
-  transform-origin: left center;
-}
-
-.toggle-icon.open span {
-  background: #fff;
-}
-
-.toggle-icon.open span:nth-child(1) {
-  top: 0;
-  left: .2rem;
-  transform: rotate(45deg);
-}
-
-.toggle-icon.open span:nth-child(2) {
-  width: 0%;
-  opacity: 0;
-}
-
-.toggle-icon.open span:nth-child(3) {
-  transform: rotate(-45deg);
-  top: 1.45rem;
-  left: .2rem;
-}
+  width: 2rem; }
+  .toggle-icon span {
+    background: rgba(255, 255, 255, 0.55);
+    border-radius: .9rem;
+    display: block;
+    height: .2rem;
+    left: 0;
+    opacity: 1;
+    position: absolute;
+    transform: rotate(0deg);
+    transition: .25s ease-in-out;
+    width: 100%; }
+    .toggle-icon span:hover, .toggle-icon span:focus {
+      background: rgba(255, 255, 255, 0.75); }
+    .toggle-icon span:nth-child(1) {
+      top: .2rem;
+      transform-origin: left center; }
+    .toggle-icon span:nth-child(2) {
+      top: .7rem;
+      transform-origin: left center; }
+    .toggle-icon span:nth-child(3) {
+      top: 1.2rem;
+      transform-origin: left center; }
+  .toggle-icon.open span {
+    background: #fff; }
+    .toggle-icon.open span:nth-child(1) {
+      left: .2rem;
+      top: 0;
+      transform: rotate(45deg); }
+    .toggle-icon.open span:nth-child(2) {
+      opacity: 0;
+      width: 0%; }
+    .toggle-icon.open span:nth-child(3) {
+      left: .2rem;
+      top: 1.45rem;
+      transform: rotate(-45deg); }
 
 .widget-box-title select {
-  width: 50%;
-  padding-top: 0.25rem;
+  font-size: 0.875rem;
+  margin-bottom: -.3rem;
+  margin-top: -.3rem;
   padding-bottom: 0.25rem;
   padding-left: 0.5rem;
-  font-size: 0.875rem;
-  margin-top: -.3rem;
-  margin-bottom: -.3rem;
-}
+  padding-top: 0.25rem;
+  width: 50%; }
 
 .widget-box-title {
-  color: #495057;
+  color: #343a40;
   font-size: 18px;
   position: relative; }
 
@@ -9222,10 +9158,10 @@ ul.showing-results {
   widows: 50%; }
 
 .widget-box-title .select-box-trigger {
-  background-color: #ffffff; }
+  background-color: #fff; }
 
 .widget-box-content {
-  background-color: #ffffff;
+  background-color: #fff;
   padding: 15px;
   border-radius: 4px;
   position: relative; }
@@ -9235,8 +9171,8 @@ ul.showing-results {
   float: right; }
 
 .widget-box h4, .widget-box .h4 {
-  border-bottom: 1px dotted #6c757d;
-  color: #6c757d;
+  border-bottom: 1px dotted #495057;
+  color: #495057;
   font-size: 16px;
   margin: 20px 0 10px; }
 
@@ -9244,12 +9180,12 @@ ul.showing-results {
   margin: 0 0 10px; }
 
 .stats-title {
-  color: #6c757d;
+  color: #495057;
   font-size: 16px;
   line-height: 20px; }
 
 .stats-detail {
-  color: #6c757d;
+  color: #495057;
   font-size: 14px; }
 
 .widget-box .form-row {
@@ -9291,7 +9227,7 @@ div.widget-box-content-no-wrapp li a {
     color: #fff; }
     .dashboard-sidebar div.nav-link > i {
       margin-left: 1rem;
-      transition: ease 500ms; }
+      transition: ease 250ms; }
       .dashboard-sidebar div.nav-link > i.collapsed {
         transform: rotate(-90deg); }
   .dashboard-sidebar .nav-link.active a {
@@ -9305,7 +9241,7 @@ div.widget-box-content-no-wrapp li a {
       transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out; }
 
 .sidebar-submenu {
-  background-color: #495057;
+  background-color: #343a40;
   border: 1px solid transparent;
   border-top-left-radius: 0;
   border-top-right-radius: 0;
@@ -9317,320 +9253,213 @@ div.widget-box-content-no-wrapp li a {
     color: #ced4da;
     font-size: 0.875rem;
     margin-bottom: 1px; }
-
-.sidebar-submenu a.sub-active, .sidebar-submenu a:hover {
-  background-color: #6c757d;
-  color: #e9ecef;
-}
+    .sidebar-submenu a.sub-active, .sidebar-submenu a:hover {
+      background-color: #6c757d;
+      color: #e9ecef; }
 
 .table {
   --bs-table-striped-bg: #dee2e633;
   background-color: #f8f9fa;
   border: 1px solid #ced4da;
   font-size: 14px;
-  width: 100%;
-}
-
-.table.table-small {
-  width: 280px;
-}
-
-.table thead {
-  border-bottom: 1px solid #ced4da;
-}
-
-.table thead th {
-  font-weight: normal;
-}
-
-.table thead th a {
-  text-decoration-line: none;
-}
-
-.table tbody .col-title {
-  font-size: 0.9rem;
-  font-weight: 500;
-}
-
-.table tbody .col-title a {
-  text-decoration-line: none;
-}
-
-.table th, .table td {
-  border-bottom: 0;
-  border-left: 0;
-  border-top: 0;
-  line-height: 1rem;
-  padding: .5rem;
-}
-
-.table td.col-status {
-  border-top: 1px solid rgba(0, 0, 0, 0.1);
-  font-weight: bold;
-  margin: 0;
-  vertical-align: middle;
-}
-
-.table td.col-status-border {
-  margin: 0;
-  padding: 0;
-  width: .8rem;
-}
-
-.table div.actions {
-  display: none;
-}
-
-.table .status-active .col-status {
-  background: #0d6efd;
-  color: #fff;
-}
-
-.table .status-active .col-status-border {
-  background: #0a58ca;
-}
-
-.table .status-blocked .col-status {
-  background: #dc3545;
-  color: #fff;
-}
-
-.table .status-blocked .col-status-border {
-  background: #b02a37;
-}
-
-.table .status-expired .col-status {
-  background: #e9ecef;
-  color: #000;
-}
-
-.table .status-expired .col-status-border {
-  background: #babdbf;
-}
-
-.table .status-inactive .col-status {
-  background: #adb5bd;
-  color: #000;
-}
-
-.table .status-inactive .col-status-border {
-  background: #8a9197;
-}
-
-.table .status-premium .col-status {
-  background: #ffcd39;
-  color: #000;
-}
-
-.table .status-premium .col-status-border {
-  background: #cca42e;
-}
-
-.table .status-spam .col-status {
-  background: #343a40;
-  color: #fff;
-}
-
-.table .status-spam .col-status-border {
-  background: #2a2e33;
-}
-
-.table .icon-new-window {
-  margin-left: 5px;
-}
-
-.table .icon-new-window:before {
-  content: "\f1c5";
-  font-family: 'bootstrap-icons';
-}
+  width: 100%; }
+  .table.table-small {
+    width: 280px; }
+  .table thead {
+    border-bottom: 1px solid #ced4da; }
+    .table thead th {
+      font-weight: normal; }
+      .table thead th a {
+        text-decoration-line: none; }
+  .table tbody .col-title {
+    font-size: 0.9rem;
+    font-weight: 500; }
+    .table tbody .col-title a {
+      text-decoration-line: none; }
+  .table th, .table td {
+    border-bottom: 0;
+    border-left: 0;
+    border-top: 0;
+    line-height: 1rem;
+    padding: .5rem; }
+  .table td.col-status {
+    border-top: 1px solid rgba(0, 0, 0, 0.1);
+    font-weight: bold;
+    margin: 0;
+    vertical-align: middle; }
+  .table td.col-status-border {
+    margin: 0;
+    padding: 0;
+    width: .8rem; }
+  .table div.actions {
+    display: none; }
+  .table .status-active .col-status {
+    background: #0d6efd;
+    color: #fff; }
+  .table .status-active .col-status-border {
+    background: #0a58ca; }
+  .table .status-blocked .col-status {
+    background: #dc3545;
+    color: #fff; }
+  .table .status-blocked .col-status-border {
+    background: #b02a37; }
+  .table .status-expired .col-status {
+    background: #e9ecef;
+    color: #000; }
+  .table .status-expired .col-status-border {
+    background: #babdbf; }
+  .table .status-inactive .col-status {
+    background: #adb5bd;
+    color: #000; }
+  .table .status-inactive .col-status-border {
+    background: #8a9197; }
+  .table .status-premium .col-status {
+    background: #ffcd39;
+    color: #000; }
+  .table .status-premium .col-status-border {
+    background: #cca42e; }
+  .table .status-spam .col-status {
+    background: #343a40;
+    color: #fff; }
+  .table .status-spam .col-status-border {
+    background: #2a2e33; }
+  .table .icon-new-window {
+    margin-left: 5px; }
+    .table .icon-new-window:before {
+      content: "\f1c5";
+      font-family: "bootstrap-icons"; }
 
 .table-first-row td {
-  border-top: 0;
-}
+  border-top: 0; }
 
 .table-contains-actions tbody td {
-  padding-bottom: 25px;
-}
+  padding-bottom: 25px; }
 
 .table-collapsed #table-row-actions {
   margin-top: 0;
-  padding: 3px 42px;
-}
-
+  padding: 3px 42px; }
 .table-collapsed tbody td {
-  padding-bottom: 4px;
-}
+  padding-bottom: 4px; }
 
 .collapsed-hover td {
-  padding-top: 31px;
-}
+  padding-top: 31px; }
 
 #table-row-actions {
   display: none;
   font-size: .85rem;
   margin-top: -25px;
   padding: 0 6px;
-  position: absolute;
-}
-
-#table-row-actions a {
-  color: #018BE3;
-  text-decoration: none;
-}
-
-#table-row-actions a:hover {
-  text-decoration: underline;
-}
-
-#table-row-actions ul {
-  list-style: none;
-  margin: 4px 0 0;
-  padding: 0;
-}
-
-#table-row-actions li {
-  float: left;
-  margin-right: 10px;
-}
-
-#table-row-actions li a {
-  float: left;
-}
-
-#table-row-actions li ul {
-  float: left;
-  margin: 0;
-}
-
-#table-row-actions .show-more ul {
-  display: none;
-}
-
-#table-row-actions .hover a {
-  display: none;
-}
-
-#table-row-actions .hover ul {
-  display: block;
-}
-
-#table-row-actions .hover ul a {
-  display: block;
-}
-
-.col-bulkactions {
-  opacity: 1 !important;
-  text-align: center !important;
-}
+  position: absolute; }
+  #table-row-actions a {
+    color: #018BE3;
+    text-decoration: none; }
+    #table-row-actions a:hover {
+      text-decoration: underline; }
+  #table-row-actions ul {
+    list-style: none;
+    margin: 4px 0 0;
+    padding: 0; }
+  #table-row-actions li {
+    float: left;
+    margin-right: 10px; }
+    #table-row-actions li a {
+      float: left; }
+    #table-row-actions li ul {
+      float: left;
+      margin: 0; }
+  #table-row-actions .show-more ul {
+    display: none; }
+  #table-row-actions .hover a {
+    display: none; }
+  #table-row-actions .hover ul {
+    display: block; }
+    #table-row-actions .hover ul a {
+      display: block; }
 
 .table-contains-actions {
-  position: relative;
-}
+  position: relative; }
 
 td.children-cat {
-  padding-left: 20px;
-}
+  padding-left: 20px; }
 
 .order-box {
   padding-right: 20px;
-  position: relative;
-}
-
-.order-box img {
-  cursor: pointer;
-  filter: alpha(opacity=5);
-  height: 10px;
-  opacity: 0.5;
-  position: absolute;
-  right: 5px;
-  width: 10px;
-}
-
-.order-box img:hover {
-  filter: alpha(opacity=1);
-  opacity: 1;
-}
-
-.order-box .up {
-  top: 0;
-}
-
-.order-box .down {
-  top: 10px;
-}
+  position: relative; }
+  .order-box img {
+    cursor: pointer;
+    filter: alpha(opacity=5);
+    height: 10px;
+    opacity: 0.5;
+    position: absolute;
+    right: 5px;
+    width: 10px; }
+    .order-box img:hover {
+      filter: alpha(opacity=1);
+      opacity: 1; }
+  .order-box .up {
+    top: 0; }
+  .order-box .down {
+    top: 10px; }
 
 .sorting_desc a {
-  padding-right: 30px;
-}
-
-.sorting_desc a:before {
-  content: "\f229";
-  font-family: 'bootstrap-icons';
-}
+  padding-right: 30px; }
+  .sorting_desc a:before {
+    content: "\f229";
+    font-family: "bootstrap-icons"; }
 
 .sorting_asc a {
-  padding-right: 30px;
-}
-
-.sorting_asc a:before {
+  padding-right: 30px; }
+  .sorting_asc a:before {
     content: "\f235";
-    font-family: 'bootstrap-icons'; }
+    font-family: "bootstrap-icons"; }
 
 /* Columns width */
 .col-bulkactions {
+  opacity: 1 !important;
+  text-align: center !important;
   width: 20px; }
 
 .col-order {
-  width: 55px;
-}
+  width: 55px; }
 
 .col-title {
-  min-width: 280px;
-}
+  min-width: 280px; }
 
 #help-box h3, #help-box .h3 {
   font-size: 14px;
-  margin: 0;
-}
-
+  margin: 0; }
 #help-box p {
-  font-size: .85rem;
-}
+  font-size: .85rem; }
 
 .help-box {
-  font-style: italic;
-  font-size: .85rem;
   background: #D9EDF7;
-  padding: .5rem;
-  width: auto;
-  margin-top: .5rem;
-  display: inline-block;
-  box-shadow: 0 0 5px 0px #e9ecef;
   border-radius: 4px;
-}
+  box-shadow: 0 0 5px 0px #e9ecef;
+  display: inline-block;
+  font-size: .85rem;
+  font-style: italic;
+  margin-top: .5rem;
+  padding: .5rem;
+  width: auto; }
 
 .list-latests {
   list-style: none;
   margin: 0;
-  padding: 0;
-}
+  padding: 0; }
 
 .list-latests li {
   border-bottom: solid 1px #e9ecef;
-  padding: 5px 0;
-}
+  padding: 5px 0; }
 
 .form-label {
-  font-size: .85rem;
-}
+  font-size: .85rem; }
 
 .form-label-checkbox {
   padding-top: 5px; }
 
 .form-row {
   font-size: .85rem;
-  line-height: 18px;
-}
+  line-height: 18px; }
 
 .form-actions {
   background: #f3f3f3;
@@ -9643,10 +9472,10 @@ td.children-cat {
   margin-bottom: 15px; }
 .form-horizontal .form-label {
   float: left;
-  padding-top: 5px;
+  width: 150px;
+  /*padding-top: 5px;*/
   text-align: right;
-  min-width: 150px;
-}
+  word-break: break-word; }
 .form-horizontal .form-controls {
   margin-left: 170px; }
 .form-horizontal .form-actions {
@@ -9656,9 +9485,42 @@ td.children-cat {
   vertical-align: baseline; }
 
 .form-controls select {
-  width: 200px; }
-.form-controls input:not([type="checkbox"]):not([type="radio"]) {
-  width: 200px; }
+  max-width: 15rem; }
+.form-controls input:not([type="checkbox"]):not([type="radio"]):not([type="submit"]) {
+  width: 15rem; }
+
+.select-box-medium select {
+  width: 12rem; }
+
+.select-box-input select {
+  width: 10rem; }
+
+.select-box-big select {
+  width: 15rem; }
+
+.select-box .select-box-label {
+  display: block;
+  float: left;
+  line-height: 16px;
+  overflow: hidden; }
+
+input.large,
+input.xlarge,
+.input-text,
+.input-password {
+  width: 15rem; }
+
+input.input-small {
+  width: 5rem; }
+
+input.input-medium {
+  width: 10rem; }
+
+input.input-large {
+  width: 15rem; }
+
+input.input-actions {
+  height: 24px; }
 
 table.table-small td {
   vertical-align: bottom; }
@@ -9695,6 +9557,15 @@ table.table-small td {
  */
 .current-theme {
   padding-top: 20px; }
+  .current-theme .card p, .current-theme .widget-box p, .current-theme .iframe-category p {
+    margin-bottom: .2rem; }
+  .current-theme .card-img {
+    border-bottom-right-radius: 0;
+    border-top-right-radius: 0;
+    height: 100%;
+    width: 100%; }
+  .current-theme .card-title {
+    text-transform: capitalize; }
 
 .current-theme .theme {
   float: none;
@@ -9736,7 +9607,7 @@ table.table-small td {
   padding-right: 6px; }
 
 .theme-actions a.delete {
-  color: #6c757d; }
+  color: #495057; }
 
 .theme .theme-info,
 .theme .theme-info h3,
@@ -9759,7 +9630,7 @@ tr.plugin td {
 tr.plugin h3, tr.plugin .h3,
 tr.plugin h3,
 tr.plugin .h3 {
-  color: #343a40;
+  color: #212529;
   font-weight: bold;
   margin: 0; }
 
@@ -9783,9 +9654,9 @@ tr.plugin .h3 {
   border: 1px solid;
   color: #B94A48;
   display: none;
-  padding: 15px;
+  list-style-type: none;
   border-radius: 4px;
-  list-style-type: none; }
+  padding: 15px; }
 
 #content-page .flashmessage {
   border-radius: 4px; }
@@ -9947,43 +9818,37 @@ div.guideline-header {
 
 pre,
 code {
-  word-wrap: break-word;
   background-color: #f8f9fa;
   border: 1px solid #e9ecef;
   padding: 8px;
   white-space: pre;
   white-space: pre-wrap;
   word-break: break-all;
+  word-wrap: break-word;
   border-radius: 4px; }
 
 #listing-toolbar,
 .table-toolbar {
   height: 44px;
-  margin-bottom: 16px;
-}
+  margin-bottom: 16px; }
 
 #listing-toolbar + #datatablesForm #bulk-actions, #admins-toolbar + #datatablesForm #bulk-actions, #users-toolbar + #datatablesForm #bulk-actions {
   left: 0;
   position: absolute;
-  top: 0;
-}
+  top: 0; }
 
 #bulk-actions {
   margin-bottom: 1rem;
-  max-width: 15rem;
-}
+  max-width: 15rem; }
 
 .submit-right {
-  margin: 0;
-}
+  margin: 0; }
 
 #display-filters {
-  padding: 40px 0 0;
-}
+  padding: 40px 0 0; }
 
 #display-filters .form-label {
-  width: 70px;
-}
+  width: 70px; }
 
 #display-filters .form-controls {
   margin-left: 80px; }
@@ -10010,7 +9875,7 @@ code {
   vertical-align: bottom; }
 
 #item-form h3.label, #item-form .label.h3 {
-  color: #6c757d;
+  color: #495057;
   font-size: 14px;
   font-weight: 500;
   margin: 0 0 10px; }
@@ -10184,7 +10049,7 @@ code {
 
 .list-categories .name-cat,
 .list-fields .name-edit-cfield {
-  color: #6c757d;
+  color: #495057;
   font-size: 15px;
   line-height: 26px; }
 
@@ -10254,7 +10119,7 @@ div.disabled .category_row,
   width: 12px; }
   .treeview .hitarea:before {
     content: "\f2e5";
-    font-family: 'bootstrap-icons'; }
+    font-family: "bootstrap-icons"; }
 
 .treeview ul li {
   margin: 0;
@@ -10271,7 +10136,7 @@ div.disabled .category_row,
   margin-right: 5px; }
   .treeview .expandable-hitarea:before {
     content: "\f4f9";
-    font-family: 'bootstrap-icons'; }
+    font-family: "bootstrap-icons"; }
 
 form h3, form .h3 {
   font-size: 16px;
@@ -10286,9 +10151,9 @@ form h3, form .h3 {
 
 .ui-osc-tabs .ui-tabs-nav {
   border: 0;
-  padding: 4px 5px 0;
+  border-bottom: solid 1px #e9ecef;
   border-radius: 4px 4px 0 0;
-  border-bottom: solid 1px #e9ecef; }
+  padding: 4px 5px 0; }
 
 .ui-osc-tabs .ui-tabs-nav li {
   float: right; }
@@ -10301,7 +10166,7 @@ form h3, form .h3 {
 
 .ui-dialog .ui-dialog-titlebar {
   border: none;
-  color: #495057;
+  color: #343a40;
   font-size: 18px;
   margin: 0;
   padding: 7px 5px;
@@ -10315,7 +10180,7 @@ form h3, form .h3 {
   margin: 0; }
 
 .ui-dialog .ui-dialog-content {
-  background: #ffffff;
+  background: #fff;
   padding: 15px;
   border-radius: 0 0 4px 4px;
   position: relative; }
@@ -10377,144 +10242,116 @@ form h3, form .h3 {
 #upload-plugins .plugin-active {
   background: #d1e7dd;
   border-left: 0.2rem solid #198754;
-  color: #343a40; }
+  color: #000; }
 #upload-plugins .plugin-disabled {
   background: #fff3cd;
   border-left: 0.2rem solid #ffc107;
-  color: #343a40; }
+  color: #000; }
 #upload-plugins .plugin-uninstalled {
   background: #f8d7da;
   border-left: 0.2rem solid #dc3545;
-  color: #343a40; }
+  color: #000; }
 
 /*!Custom Responsive rules */
 @media (max-width: 576px) {
   #content-page > .col {
     padding-left: .1rem;
-    padding-right: .1rem;
-  }
+    padding-right: .1rem; }
 
   .grid-10,
   .grid-20, .grid-30, .grid-33, .grid-40, .grid-50, .grid-60, .grid-70, .grid-80, .grid-80, .grid-100 {
-    width: 100%;
-  }
+    width: 100%; }
 
-  #display-filters .form-horizontal .form-row .form-label, .form-horizontal .form-row .form-label {
+  #display-filters .form-horizontal .form-label, .form-horizontal .form-label {
     float: none;
-    font-weight: 700;
+    font-weight: 600;
     padding-top: .5rem;
     text-align: inherit;
-    width: 100%;
-  }
-
-  #display-filters .form-horizontal .form-row .form-controls, .form-horizontal .form-row .form-controls {
-    margin-left: inherit;
-  }
-
-  #display-filters .form-horizontal .form-row .form-controls select, .form-horizontal .form-row .form-controls select {
-    width: 100%;
-  }
-
-  #display-filters .form-horizontal .form-row .form-controls > input:not([type="checkbox"]):not([type="radio"]), .form-horizontal .form-row .form-controls > input:not([type="checkbox"]):not([type="radio"]) {
-    width: 100%;
-  }
-
+    width: 100%; }
+  #display-filters .form-horizontal .form-controls, .form-horizontal .form-controls {
+    margin-left: inherit; }
+    #display-filters .form-horizontal .form-controls select, .form-horizontal .form-controls select {
+      width: 100%; }
+    #display-filters .form-horizontal .form-controls > input:not([type="checkbox"]):not([type="radio"]):not([type="submit"]), .form-horizontal .form-controls > input:not([type="checkbox"]):not([type="radio"]):not([type="submit"]) {
+      width: 100%; }
+    #display-filters .form-horizontal .form-controls .input-small,
+    #display-filters .form-horizontal .form-controls .input-medium,
+    #display-filters .form-horizontal .form-controls .input-large,
+    #display-filters .form-horizontal .form-controls .xlarge,
+    #display-filters .form-horizontal .form-controls .input-text,
+    #display-filters .form-horizontal .form-controls .input-password, .form-horizontal .form-controls .input-small,
+    .form-horizontal .form-controls .input-medium,
+    .form-horizontal .form-controls .input-large,
+    .form-horizontal .form-controls .xlarge,
+    .form-horizontal .form-controls .input-text,
+    .form-horizontal .form-controls .input-password {
+      width: 100%; }
   #display-filters .form-horizontal .form-actions, .form-horizontal .form-actions {
-    padding: 1rem 1rem;
-  }
+    padding: 1rem 1rem; }
+
+  .select-box-medium select,
+  .select-box-input select,
+  .select-box-big select {
+    width: 100%; }
 
   .form-vertical .form-actions {
-    padding: 1rem 1rem;
-  }
+    padding: 1rem 1rem; }
 
   #datatablesForm .table .col-location {
     display: none;
-    visibility: hidden;
-  }
-
+    visibility: hidden; }
   #datatablesForm .table .col-exp {
-    display: none;
-  }
-
+    display: none; }
   #datatablesForm .table .col-date {
-    display: none;
-  }
-
+    display: none; }
   #datatablesForm .table .col-off, #datatablesForm .table .col-rep, #datatablesForm .table .col-bad, #datatablesForm .table .col-spam {
     max-width: 2.5rem !important;
-    white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
-  }
+    white-space: nowrap; }
 
   #upload-plugins th:nth-child(2), #upload-plugins td:nth-child(2) {
-    display: none;
-  }
-}
-
+    display: none; } }
 @media (max-width: 768px) {
   #header .navbar-nav .dropdown-menu {
-    position: absolute;
-  }
+    position: absolute; }
 
   #content-page {
-    padding: .5rem .5rem 3rem;
-  }
-
-  #content-page > div > div.row-wrapper {
-    padding: .1rem;
-  }
+    padding: .5rem .5rem 3rem; }
+    #content-page > div > div.row-wrapper {
+      padding: .1rem; }
 
   #listing-toolbar + #datatablesForm #bulk-actions, #admins-toolbar + #datatablesForm #bulk-actions, #users-toolbar + #datatablesForm #bulk-actions {
     left: inherit;
     max-width: 12rem;
     position: absolute;
     right: 0;
-    top: -3rem;
-  }
+    top: -3rem; }
 
   .table .col-title {
-    min-width: 100px;
-  }
-
+    min-width: 100px; }
   .table .col-expiration {
-    display: none;
-  }
-
+    display: none; }
   .table .col-status-border {
-    display: none;
-  }
-
+    display: none; }
   .table .col-status {
-    border-left: 1px solid rgba(0, 0, 0, 0.1);
-  }
-}
-
+    border-left: 1px solid rgba(0, 0, 0, 0.1); } }
 @media (max-width: 1024px) {
   #header .navbar-toggler {
-    display: block;
-  }
+    display: block; }
 
   #datatablesForm .table .col-bulkactions + td {
-    min-width: 3rem;
-  }
-
-  #datatablesForm .table .col-bulkactions + td ~ td {
-    max-width: 4rem;
-    overflow: hidden;
-    text-overflow: ellipsis;
-  }
-
+    min-width: 3rem; }
+    #datatablesForm .table .col-bulkactions + td ~ td {
+      max-width: 4rem;
+      overflow: hidden;
+      text-overflow: ellipsis; }
   #datatablesForm .table .col-bulkactions + th {
-    min-width: 3rem;
-  }
-
-  #datatablesForm .table .col-bulkactions + th ~ th {
-    max-width: 6rem;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-  }
-}
+    min-width: 3rem; }
+    #datatablesForm .table .col-bulkactions + th ~ th {
+      max-width: 6rem;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap; } }
 
 /*# sourceMappingURL=main.css.map */

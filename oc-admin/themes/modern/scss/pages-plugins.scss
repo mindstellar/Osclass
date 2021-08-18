@@ -37,21 +37,11 @@
     }
   }
 
-  .plugin-active {
-    background: tint-color($success, 80%);
-    border-left: .2rem solid $success;
-    color: $gray-800;
-  }
-
-  .plugin-disabled {
-    background: tint-color($warning, 80%);
-    border-left: .2rem solid $warning;
-    color: $gray-800;
-  }
-
-  .plugin-uninstalled {
-    background: tint-color($danger, 80%);
-    border-left: .2rem solid $danger;
-    color: $gray-800;
+  @each $status, $border-color in $plugin-status{
+    .plugin-#{$status} {
+      background: tint-color($border-color, 80%);
+      border-left: .2rem solid $border-color;
+      color: color-contrast(tint-color($border-color, 80%));
+    }
   }
 }

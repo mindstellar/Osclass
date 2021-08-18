@@ -50,17 +50,17 @@ a.ico-32 {
 }
 
 .circle {
-  border-radius: 1rem;
   background: #dee2e6;
   border: solid 1px #6c757d;
+  border-radius: 1rem;
   color: #6c757d;
   float: right;
   font-style: normal;
   height: 1.2rem;
   margin-left: .1rem;
   margin-top: -.2rem;
-  padding-top: .1rem;
   min-width: 1.2rem;
+  padding-top: .1rem;
   text-align: center;
 }
 
@@ -154,108 +154,6 @@ input.ico-32 {
   @extend .float-end;
 }
 
-/* Selectmenu
-----------------------------------*/
-.select-box {
-  display: inline-block;
-  position: relative;
-  z-index: 0;
-}
-
-#bulk-actions .select-box,
-#listing-toolbar .select-box {
-  float: left;
-}
-
-.select-box-big .select-box-trigger {
-  font-size: .85rem;
-  padding: 7px 45px 6px 12px;
-}
-
-.select-box .select-box-label {
-  display: block;
-  float: left;
-  line-height: 16px;
-  overflow: hidden;
-}
-
-.select-box-big .select-box-icon {
-  border-left: solid 1px $color-gray-soft;
-  height: 29px;
-}
-
-.select-box-extra .select-box-trigger {
-  font-size: .85rem;
-  height: 16px;
-  padding: 9px 45px 7px 12px;
-}
-
-.select-box-extra .select-box-icon {
-  border-left: solid 1px $color-gray-soft;
-  height: 32px;
-}
-
-.select-box-input .select-box-trigger {
-  width: 50px;
-  @include rounded-corners(4px 0 0 4px);
-}
-
-.select-box-medium .select-box-trigger {
-  width: 75px;
-}
-
-div.select-box-medium select {
-  width: 134px;
-}
-
-.select-box-big .select-box-trigger {
-  width: 125px;
-}
-
-div.select-box-big select {
-  width: 184px;
-}
-
-div.select-box-input select {
-  width: 109px;
-}
-
-.select-box-icon .ico {
-  margin-left: 5px;
-  margin-top: 5px;
-}
-
-input.xlarge,
-.input-text,
-.input-password,
-{
-  @extend .form-control, .form-control-sm;
-  width: 208px;
-}
-
-input.input-small {
-  @extend .form-control, .form-control-sm;
-  width: 70px;
-}
-
-input.input-medium {
-  @extend .form-control, .form-control-sm;
-  width: 90px;
-}
-
-div.input-medium .select-box-trigger {
-  width: 101px;
-}
-
-input.input-large {
-  @extend .form-control, .form-control-sm;
-  width: 320px;
-}
-
-input.input-actions {
-  height: 24px;
-}
-
 button {
   @extend button;
 }
@@ -329,11 +227,11 @@ textarea {
 .has-pagination ul {
   /* IE7 inline-block hack */
 
-  *zoom: 1;
   display: inline-block;
   *display: inline;
   height: 36px;
   margin: 25px 0 0;
+  *zoom: 1;
   @include rounded-corners;
 
 }
@@ -450,7 +348,7 @@ ul.showing-results {
 }
 
 .ui-autocomplete-loading {
-  background: white url('../images/loading.gif') right center no-repeat;
+  background: white url("../images/loading.gif") right center no-repeat;
   display: block;
 }
 
@@ -475,7 +373,7 @@ ul.showing-results {
 }
 
 .spinner {
-  background: url('../images/loading.gif');
+  background: url("../images/loading.gif");
   display: block;
   float: left;
   height: 16px;
@@ -484,25 +382,25 @@ ul.showing-results {
 }
 
 .toggle-icon {
-  width: 2rem;
+  cursor: pointer;
   height: 1.5rem;
-  position: relative;
   margin: 0;
+  position: relative;
   transform: rotate(0deg);
   transition: .5s ease-in-out;
-  cursor: pointer;
+  width: 2rem;
 
   span {
-    display: block;
-    position: absolute;
     background: $navbar-dark-color;
-    height: .2rem;
-    width: 100%;
     border-radius: .9rem;
-    opacity: 1;
+    display: block;
+    height: .2rem;
     left: 0;
+    opacity: 1;
+    position: absolute;
     transform: rotate(0deg);
     transition: .25s ease-in-out;
+    width: 100%;
 
     &:hover,
     &:focus {
@@ -530,20 +428,20 @@ ul.showing-results {
       background: $white;
 
       &:nth-child(1) {
-        top: 0;
         left: .2rem;
+        top: 0;
         transform: rotate(45deg);
       }
 
       &:nth-child(2) {
-        width: 0%;
         opacity: 0;
+        width: 0%;
       }
 
       &:nth-child(3) {
-        transform: rotate(-45deg);
-        top: 1.45rem;
         left: .2rem;
+        top: 1.45rem;
+        transform: rotate(-45deg);
       }
     }
   }

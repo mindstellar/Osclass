@@ -85,21 +85,21 @@ osc_current_admin_theme_path('parts/header.php'); ?>
                             href="<?php echo osc_admin_base_url(true); ?>?page=appearance&amp;action=add"
                             class="btn btn-sm btn-success"><?php _e('Add new'); ?></a></h2>
                 <div class="current-theme">
-                    <div class="theme">
-                        <img
-                                src="<?php echo osc_base_url() . '/oc-content/themes/' . osc_theme()
-                                                . '/screenshot.png' ?>"
-                                title="<?php echo $info['name']; ?>" alt="<?php echo $info['name']; ?>"
-                        />
-                        <div class="theme-info">
-                            <h3 class="lead"><?php echo $info['name']; ?></h3>
-                            <p><?php _e('Version') ?> : <?php echo $info['version']; ?></p>
-                            <p><?php _e('Author') ?> : <a href="<?php echo $info['author_url']; ?>"
-                                                          target="_blank"><?php echo $info['author_name']; ?></a>
-                            </p>
-                            <p><?php _e('Description') ?> : <?php echo $info['description']; ?></p>
+                    <div class="card mb-3 col-sm-12 col-md-8 col-lg-8">
+                        <div class="row no-gutters">
+                            <div class="col">
+                                <img src="<?php echo osc_base_url() . '/oc-content/themes/' . osc_theme() . '/screenshot.png' ?>" class="card-img" alt="<?php echo $info['name']; ?>">
+                            </div>
+                            <div class="col">
+                                <div class="card-body">
+                                    <h5 class="card-title"><?php echo $info['name']; ?></h5>
+                                    <p><?php _e('Description') ?> : <?php echo $info['description']; ?></p>
+                                    <p><?php _e('Version') ?> : <?php echo $info['version']; ?></p>
+                                    <p><?php _e('Author') ?> : <a href="<?php echo $info['author_url']; ?>"
+                                                                  target="_blank"><?php echo $info['author_name']; ?></a>
+                                </div>
+                            </div>
                         </div>
-                        <div class="clear"></div>
                     </div>
                 </div>
                 <h2 class="render-title lead"><?php _e('Available themes'); ?></h2>
@@ -127,13 +127,13 @@ osc_current_admin_theme_path('parts/header.php'); ?>
                                             <a href="<?php echo osc_admin_base_url(true);
                                             ?>?page=appearance&amp;action=activate&amp;theme=<?php
                                             echo $theme; ?>&amp;<?php echo $csrf_token;
-?>" class="btn btn-mini btn-green"><?php _e('Activate'); ?></a>
+                                            ?>" class="btn btn-mini btn-green"><?php _e('Activate'); ?></a>
                                             <a target="_blank"
                                                href="<?php echo osc_base_url(true); ?>?theme=<?php echo $theme; ?>"
                                                class="btn btn-mini btn-blue"><?php _e('Preview'); ?></a>
                                             <a onclick="return delete_dialog('<?php echo $theme; ?>');"
                                                href="<?php echo osc_admin_base_url(true);
-                                                ?>?page=appearance&amp;action=delete&amp;webtheme=<?php
+                                               ?>?page=appearance&amp;action=delete&amp;webtheme=<?php
                                                echo $theme; ?>&amp;<?php echo $csrf_token; ?>"
                                                class="btn btn-sm btn-success delete"><?php _e('Delete'); ?></a>
                                             <?php
@@ -148,7 +148,7 @@ osc_current_admin_theme_path('parts/header.php'); ?>
                                         <div class="theme-info">
                                             <div><?php echo __('Version:') ?>: <?php echo $info['version']; ?></div>
                                             <div><?php echo __('Author:') ?>: <a target="_blank"
-                                                                               href="<?php echo $info['author_url']; ?>"><?php echo $info['author_name']; ?></a>
+                                                                                 href="<?php echo $info['author_url']; ?>"><?php echo $info['author_name']; ?></a>
                                             </div>
                                             <div><?php echo __('Description:') ?>: <?php echo $info['description']; ?></div>
                                         </div>
