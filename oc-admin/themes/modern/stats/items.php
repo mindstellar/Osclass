@@ -328,7 +328,7 @@ function customHead()
 
         }
     </script>
-<?php }
+    <?php }
 }
 
 
