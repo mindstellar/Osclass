@@ -114,11 +114,7 @@ class Session
      */
     public function _get($key)
     {
-        if (!isset($this->session[$key])) {
-            return '';
-        }
-
-        return $this->session[$key];
+        return $this->session[$key] ?? '';
     }
 
     /**
@@ -128,7 +124,7 @@ class Session
      * @since 4.0.0
      */
     public function _has($key)
-    {
+    : bool {
          return isset($this->session[$key]);
            
     }
@@ -171,11 +167,7 @@ class Session
      */
     public function _getReferer()
     {
-        if (isset($this->session['osc_http_referer'])) {
-            return $this->session['osc_http_referer'];
-        }
-
-        return '';
+        return $this->session['osc_http_referer'] ?? '';
     }
 
     public function _view()
@@ -203,11 +195,8 @@ class Session
     public function _getMessage($key)
     {
         $messages = $this->_get('messages');
-        if (isset($messages[$key])) {
-            return $messages[$key];
-        }
 
-        return '';
+        return $messages[$key] ?? '';
     }
 
     /**
