@@ -229,7 +229,7 @@ class FileSystem
             }
         }
 
-        $copyOnWindows = isset($options['copy_on_windows']) ? $options['copy_on_windows'] : false;
+        $copyOnWindows = $options['copy_on_windows'] ?? false;
 
         if (null === $iterator) {
             $flags = $copyOnWindows ? FilesystemIterator::SKIP_DOTS | FilesystemIterator::FOLLOW_SYMLINKS
@@ -271,7 +271,7 @@ class FileSystem
             } elseif (is_dir($file)) {
                 $this->mkdir($target);
             } elseif (is_file($file)) {
-                $this->copy($file, $target, isset($options['override']) ? $options['override'] : false);
+                $this->copy($file, $target, $options['override'] ?? false);
             } else {
                 throw new RuntimeException(sprintf('Unable to guess "%s" file type.', $file));
             }
@@ -621,7 +621,7 @@ class FileSystem
      *
      * @return bool|string $data
      */
-    public function getContents($url, $post_data = null, $verify_ssl = true)
+    public function getContents($url, $post_data = null, bool $verify_ssl = true)
     {
         $data = null;
         if ($this->testCurl()) {
@@ -665,6 +665,7 @@ class FileSystem
      * @return bool
      */
     private function testCurl()
+    : bool
     {
         return (function_exists('curl_init') || function_exists('curl_exec'));
     }
@@ -672,13 +673,13 @@ class FileSystem
     /**
      * Return directory structure of given root directory
      *
-     * @param string $root_dir
-     * @param string $pattern preg_match supported regex pattern
-     * @param bool   $follow_symlinks
+     * @param string      $root_dir
+     * @param string|null $pattern preg_match supported regex pattern
+     * @param bool        $follow_symlinks
      *
      * @return array
      */
-    public function rSearch($root_dir, $pattern = null, $follow_symlinks = false)
+    public function rSearch(string $root_dir, string $pattern = null, bool $follow_symlinks = false)
     {
         $dirIterator = new RecursiveDirectoryIterator($root_dir, RecursiveDirectoryIterator::SKIP_DOTS);
 
@@ -710,7 +711,7 @@ class FileSystem
      * Download Files from given url
      * try to overwrite existing file.
      *
-     * @param        $sourceURL
+     * @param string $sourceURL
      * @param string $filename
      * @param null   $post_data
      * @param bool   $verify_ssl
@@ -718,7 +719,7 @@ class FileSystem
      * @return bool|string
      * @throws \Exception
      */
-    public function downloadFile($sourceURL, $filename, $post_data = null, $verify_ssl = true)
+    public function downloadFile(string $sourceURL, string $filename, $post_data = null, bool $verify_ssl = true)
     {
         if (!filter_var($sourceURL, FILTER_VALIDATE_URL)) {
             throw new InvalidArgumentException(sprintf('Invalid source url "%s". ', $sourceURL));
@@ -731,18 +732,18 @@ class FileSystem
             $this->remove($file_path);
         }
         if ($this->testCurl()) {
-            @set_time_limit(0);
-            $fp = @fopen($filename, 'wb+');
+            set_time_limit(0);
+            $fp = fopen($filename, 'wb+');
             if ($fp) {
                 $ch = curl_init($sourceURL);
-                @curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, 5);
+                curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, 5);
                 curl_setopt(
                     $ch,
                     CURLOPT_USERAGENT,
                     Params::getServerParam('HTTP_USER_AGENT') . ' Osclass (v.' . OSCLASS_VERSION . ')'
                 );
                 curl_setopt($ch, CURLOPT_FILE, $fp);
-                @curl_setopt($ch, CURLOPT_FOLLOWLOCATION, true);
+                curl_setopt($ch, CURLOPT_FOLLOWLOCATION, true);
                 curl_setopt($ch, CURLOPT_REFERER, osc_base_url());
 
                 if (stripos($sourceURL, 'https') !== false) {
