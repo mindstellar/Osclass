@@ -9431,9 +9431,10 @@ td.children-cat {
   font-size: .85rem; }
 
 .help-box {
-  background: #D9EDF7;
+  background: #fff3cd;
+  border-left: 0.2rem #ffc107 solid;
+  color: #000;
   border-radius: 4px;
-  box-shadow: 0 0 5px 0px #e9ecef;
   display: inline-block;
   font-size: .85rem;
   font-style: italic;

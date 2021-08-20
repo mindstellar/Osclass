@@ -10,9 +10,10 @@
 }
 
 .help-box {
-  background: $info-bg;
+  background: $yellow-100;
+  border-left: .2rem $yellow-500 solid;
+  color: color-contrast($yellow-100);
   border-radius: 4px;
-  box-shadow: 0 0 5px 0px $gray-200;
   display: inline-block;
   font-size: .85rem;
   font-style: italic;
