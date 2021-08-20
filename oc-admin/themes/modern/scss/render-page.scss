@@ -104,3 +104,22 @@ h3.render-title {
     padding-top: .2rem;
   }
 }
+#system-info {
+  .card-body .row {
+    flex-flow: row;
+    .col-sm-4.info-label {
+      font-size: .85rem;
+      font-weight: 500;
+      background: #0095ff57;
+      border-bottom: 1px dotted;
+    }
+    .col.info-value {
+      font-size: .8rem;
+      font-family: monospace;
+      background: #ffcc0029;
+      border-bottom:1px dotted;
+      word-break:break-all;
+    }
+  }
+}
+

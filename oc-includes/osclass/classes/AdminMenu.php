@@ -338,9 +338,9 @@ class AdminMenu
         );
         $this->add_submenu(
             'tools',
-            __('PHP info'),
-            osc_admin_base_url(true) . '?page=tools&action=phpinfo',
-            'tools_phpinfo',
+            __('System info'),
+            osc_admin_base_url(true) . '?page=tools&action=system_info',
+            'tools_system_info',
             'administrator'
         );
         osc_run_hook('admin_menu_init');

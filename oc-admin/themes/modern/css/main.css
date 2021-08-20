@@ -8647,12 +8647,10 @@ textarea.is-invalid.input-password {
   padding-top: 0.1rem; }
 
 #footer-wrapper {
-  padding: 20px; }
+  padding: 20px 0;
+  font-size: 12px; }
   #footer-wrapper a {
     text-decoration-line: none; }
-
-#footer {
-  font-size: 12px; }
 
 h2.separate-top, .separate-top.h2,
 .separate-top {
@@ -8816,6 +8814,20 @@ h3.render-title, .render-title.h3 {
 #l_countries .list-group-item, #i_regions .list-group-item, #i_cities .list-group-item {
   padding-bottom: .2rem;
   padding-top: .2rem; }
+
+#system-info .card-body .row, #system-info .widget-box-content .row, #system-info .iframe-category .grid-system .row, .iframe-category #system-info .grid-system .row {
+  flex-flow: row; }
+  #system-info .card-body .row .col-sm-4.info-label, #system-info .widget-box-content .row .col-sm-4.info-label, #system-info .iframe-category .grid-system .row .col-sm-4.info-label, .iframe-category #system-info .grid-system .row .col-sm-4.info-label {
+    font-size: .85rem;
+    font-weight: 500;
+    background: #0095ff57;
+    border-bottom: 1px dotted; }
+  #system-info .card-body .row .col.info-value, #system-info .widget-box-content .row .col.info-value, #system-info .iframe-category .grid-system .row .col.info-value, .iframe-category #system-info .grid-system .row .col.info-value {
+    font-size: .8rem;
+    font-family: monospace;
+    background: #ffcc0029;
+    border-bottom: 1px dotted;
+    word-break: break-all; }
 
 .clear {
   clear: both; }
