@@ -101,7 +101,7 @@ abstract class BaseModel
                         $this->_exportVariableToView('subdomain_name', $category['s_name']);
                         $this->_exportVariableToView('subdomain_slug', $category['s_slug']);
                         Params::setParam('sCategory', $category['pk_i_id']);
-                        if (Params::getParam('page') == '') {
+                        if (!Params::getParam('page')) {
                             Params::setParam('page', 'search');
                         }
                     } else {
@@ -160,19 +160,15 @@ abstract class BaseModel
         exit;
     }
 
-    //only for debug (deprecated, all inside View.php)
-
     /**
      *
-     * @since 3.9.0 -develop
+     * @since 3.9.0
      */
     protected function setParams()
     {
         $this->page   = Params::getParam('page');
         $this->action = Params::getParam('action');
     }
-
-    // Functions that will have to be rewritten in the class that extends from this
 
     public function __destruct()
     {
@@ -223,6 +219,9 @@ abstract class BaseModel
         osc_current_web_theme_path('404.php');
         exit;
     }
+    /**
+     *  Functions that will have to be rewritten in the class that extends from this
+     */
     abstract protected function doModel();
 
     /**
