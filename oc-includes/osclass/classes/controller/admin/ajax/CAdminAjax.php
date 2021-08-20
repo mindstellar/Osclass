@@ -564,7 +564,7 @@ class CAdminAjax extends AdminSecBaseModel
                 } catch (Exception $e) {
                         echo json_encode(array('error' => 1, 'msg' => $e->getMessage()));
                 }
-                if(isset($package_json) && is_array($package_json)) {
+                if (isset($package_json) && is_array($package_json)) {
                     $upgradeOsclass    = new Osclass($package_json);
                     $upgrade_available = $upgradeOsclass->isUpgradable();
                     if ($upgrade_available) {
