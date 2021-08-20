@@ -56,13 +56,12 @@ class Osclass extends UpgradePackage
      *
      * @param array $package_info
      * @param bool  $force_upgrade
-     * @param bool  $enable_prerelease
      */
     public function __construct(
-        $package_info,
-        $force_upgrade = false,
-        $enable_prerelease = false
+        array $package_info,
+        bool  $force_upgrade = false
     ) {
+        $enable_prerelease = false;
         if (defined('ENABLE_PRERELEASE') && ENABLE_PRERELEASE === true ) {
             $enable_prerelease = true;
         }
@@ -76,7 +75,7 @@ class Osclass extends UpgradePackage
      *
      * @return false|string
      */
-    public static function upgradeDB($skip_db = false)
+    public static function upgradeDB(bool $skip_db = false)
     {
         set_time_limit(0);
 
@@ -155,7 +154,7 @@ class Osclass extends UpgradePackage
                 }
             }
 
-            if (!$aSelfPackage['draft']) {
+            if (!empty($aSelfPackage) && !$aSelfPackage['draft']) {
                 if (isset($aSelfPackage['name'])) {
                     $package_info['s_title'] = $aSelfPackage['name'];
                 }
