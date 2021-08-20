@@ -469,10 +469,7 @@ class CAdminAjax extends AdminSecBaseModel
                 if (Params::existParam('route')) {
                     $routes = Rewrite::newInstance()->getRoutes();
                     $rid    = Params::getParam('route');
-                    $file   = '../';
-                    if (isset($routes[$rid], $routes[$rid]['file'])) {
-                        $file = $routes[$rid]['file'];
-                    }
+                    $file   = $routes[$rid]['file'] ?? '../';
                 } else {
                     $file = Params::getParam('ajaxfile');
                 }
@@ -564,9 +561,12 @@ class CAdminAjax extends AdminSecBaseModel
             case 'check_version':
                 try {
                     $package_json = Osclass::getPackageInfo(true);
+                } catch (Exception $e) {
+                        echo json_encode(array('error' => 1, 'msg' => $e->getMessage()));
+                }
+                if(isset($package_json) && is_array($package_json)) {
                     $upgradeOsclass    = new Osclass($package_json);
                     $upgrade_available = $upgradeOsclass->isUpgradable();
-
                     if ($upgrade_available) {
                         osc_set_preference('update_core_available', $upgradeOsclass->isUpgradable());
                         echo json_encode(array('error' => 0, 'msg' => __('Update available')));
@@ -576,8 +576,8 @@ class CAdminAjax extends AdminSecBaseModel
                     }
                     osc_set_preference('update_core_json', json_encode($package_json));
                     osc_set_preference('last_version_check', time());
-                } catch (Exception $e) {
-                        echo json_encode(array('error' => 1, 'msg' => $e->getMessage()));
+                } else {
+                    echo json_encode(array('error' => 1, 'msg' => __('Network error')));
                 }
 
                 break;
