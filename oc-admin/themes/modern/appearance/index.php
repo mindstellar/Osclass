@@ -127,13 +127,13 @@ osc_current_admin_theme_path('parts/header.php'); ?>
                                             <a href="<?php echo osc_admin_base_url(true);
                                             ?>?page=appearance&amp;action=activate&amp;theme=<?php
                                             echo $theme; ?>&amp;<?php echo $csrf_token;
-                                            ?>" class="btn btn-mini btn-green"><?php _e('Activate'); ?></a>
+?>" class="btn btn-mini btn-green"><?php _e('Activate'); ?></a>
                                             <a target="_blank"
                                                href="<?php echo osc_base_url(true); ?>?theme=<?php echo $theme; ?>"
                                                class="btn btn-mini btn-blue"><?php _e('Preview'); ?></a>
                                             <a onclick="return delete_dialog('<?php echo $theme; ?>');"
                                                href="<?php echo osc_admin_base_url(true);
-                                               ?>?page=appearance&amp;action=delete&amp;webtheme=<?php
+                                                ?>?page=appearance&amp;action=delete&amp;webtheme=<?php
                                                echo $theme; ?>&amp;<?php echo $csrf_token; ?>"
                                                class="btn btn-sm btn-success delete"><?php _e('Delete'); ?></a>
                                             <?php
