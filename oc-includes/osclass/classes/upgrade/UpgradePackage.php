@@ -95,7 +95,7 @@ abstract class UpgradePackage
      * @param bool  $force_upgrade
      * @param bool  $enable_prerelease
      */
-    public function __construct($package_info, $force_upgrade = false, $enable_prerelease = false)
+    public function __construct(array $package_info, bool $force_upgrade = false, bool $enable_prerelease = false)
     {
         $this->setVariable($package_info);
         $this->enablePreRelease = $enable_prerelease;
@@ -119,7 +119,7 @@ abstract class UpgradePackage
      *                           's_prerelease' => true or false (Optional)
      *                           ]
      */
-    private function setVariable($package_info)
+    private function setVariable(array $package_info)
     {
 
         if (isset($package_info) && !empty($package_info)) {
@@ -148,8 +148,6 @@ abstract class UpgradePackage
             }
             if (isset($package_info['a_filtered_files']) && is_array($package_info['a_filtered_files'])) {
                 $this->a_filtered_files = $package_info['a_filtered_files'];
-            } else {
-                throw new RuntimeException(__('Invalid a_filtered_files.'));
             }
             if (isset($package_info['s_compatible'])) {
                 $this->a_compatible = explode(',', $package_info['s_compatible']);
@@ -168,6 +166,7 @@ abstract class UpgradePackage
      * @return string
      */
     public function getTitle()
+    : string
     {
         return $this->s_title;
     }
@@ -178,6 +177,7 @@ abstract class UpgradePackage
      * @return string
      */
     public function getShortName()
+    : string
     {
         return $this->s_short_name;
     }
@@ -188,6 +188,7 @@ abstract class UpgradePackage
      * @return string
      */
     public function getSourceUrl()
+    : string
     {
         return $this->s_source_url;
     }
@@ -198,6 +199,7 @@ abstract class UpgradePackage
      * @return string
      */
     public function getTargetDirectory()
+    : string
     {
         return $this->s_target_directory;
     }
@@ -208,6 +210,7 @@ abstract class UpgradePackage
      * @return array
      */
     public function getFilteredFiles()
+    : array
     {
         return $this->a_filtered_files;
     }
@@ -218,6 +221,7 @@ abstract class UpgradePackage
      * @return bool
      */
     public function isCompatible()
+    : bool
     {
         if ($this->a_compatible !== null && !$this->forceUpgrade) {
             return in_array($this->osclass_version, $this->a_compatible, false);
@@ -228,7 +232,6 @@ abstract class UpgradePackage
     /**
      * Actions after upgrade process is done
      *
-     * @return bool
      */
     abstract public function afterProcessUpgrade();
 
@@ -252,6 +255,7 @@ abstract class UpgradePackage
      * @return string
      */
     public function getNewVersion()
+    : string
     {
         return $this->s_new_version;
     }
