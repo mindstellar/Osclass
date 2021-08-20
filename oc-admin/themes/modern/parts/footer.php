@@ -22,7 +22,6 @@
         var sC;
         var eH;
         var eS;
-        var bE;
         if (window.matchMedia("(max-width: 1024px)").matches) {
             eH = document.getElementById("header");
             eS = document.getElementById("sidebar-wrapper");
@@ -41,16 +40,13 @@
             if (eS !== null) {
                 sC = bootstrap.Offcanvas.getOrCreateInstance(eS);
                 if (sC) {
+                    sC.dispose();
                     eS.classList.remove('offcanvas');
                     eS.classList.remove('offcanvas-start');
                     eS.classList.remove('show');
                     eS.removeAttribute('style');
                     eS.removeAttribute('aria-hidden');
                     document.querySelector('body').removeAttribute('style');
-                    bE = document.querySelector("#content > div > .modal-backdrop.fade.show");
-                    if (bE !== null) {
-                        bE.remove()
-                    }
                     eT.classList.remove('open')
                 }
             }

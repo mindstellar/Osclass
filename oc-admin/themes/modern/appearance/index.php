@@ -85,7 +85,7 @@ osc_current_admin_theme_path('parts/header.php'); ?>
                             href="<?php echo osc_admin_base_url(true); ?>?page=appearance&amp;action=add"
                             class="btn btn-sm btn-success"><?php _e('Add new'); ?></a></h2>
                 <div class="current-theme">
-                    <div class="card mb-3 col-sm-12 col-md-8 col-lg-8">
+                    <div class="card mb-3 col-sm-12 col-md-8 col-lg-6">
                         <div class="row no-gutters">
                             <div class="col">
                                 <img src="<?php echo osc_base_url() . '/oc-content/themes/' . osc_theme() . '/screenshot.png' ?>" class="card-img" alt="<?php echo $info['name']; ?>">
