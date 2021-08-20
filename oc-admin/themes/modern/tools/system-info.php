@@ -1,7 +1,7 @@
 <?php
-/* 
+/*
  * @author: Navjot Tomer
- * 
+ *
  * OSClass – software for creating and publishing online classified advertising platforms
  *
  * Copyright (c) 2021.  Mindstellar
@@ -70,9 +70,9 @@ osc_current_admin_theme_path('parts/header.php');
         <ul class="nav nav-tabs mb-2">
             <li class="nav-item<?php if (!in_array($infoType, ['php-info', 'database-info'], true)) {
                 echo ' show';
-            } else {
-                echo '';
-            } ?>">
+                               } else {
+                                   echo '';
+                               } ?>">
                 <a class="nav-link"
                    href="<?php echo osc_admin_base_url(true) . '?' . http_build_query(
                            ['page' => 'tools', 'action' => 'system-info']
@@ -80,9 +80,9 @@ osc_current_admin_theme_path('parts/header.php');
             </li>
             <li class="nav-item<?php if ($infoType === 'php-info') {
                 echo ' show';
-            } else {
-                echo '';
-            } ?>">
+                               } else {
+                                   echo '';
+                               } ?>">
                 <a class="nav-link"
                    href="<?php echo osc_admin_base_url(true) . '?' . http_build_query(
                            ['page' => 'tools', 'action' => 'system-info', 'info-type' => 'php-info']
@@ -144,7 +144,7 @@ osc_current_admin_theme_path('parts/header.php');
                     unset($systemInfoArray);
                     ?>
                 </div>
-            <?php
+                <?php
         }
         unset($infoType, $SystemInfo);
         ?>

@@ -1,7 +1,7 @@
 <?php
-/* 
+/*
  * @author: Navjot Tomer
- * 
+ *
  * OSClass – software for creating and publishing online classified advertising platforms
  *
  * Copyright (c) 2021.  Mindstellar
