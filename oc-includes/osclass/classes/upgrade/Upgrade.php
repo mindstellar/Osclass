@@ -161,12 +161,11 @@ class Upgrade
         )
         ) {
             $resultCode = $this->Zip->unzipFile($downloaded, $download_path . $unique_id);
+            $this->FileSystem->remove($download_path . $unique_filename);
             if ($resultCode === 1) {
-                $this->FileSystem->remove($download_path . $unique_filename);
 
                 return $download_path . $unique_id;
             }
-            $this->FileSystem->remove($download_path . $unique_filename);
             throw new RuntimeException(__('Unable to unzip package file.'));
         }
 
