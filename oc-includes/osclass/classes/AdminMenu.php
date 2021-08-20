@@ -401,7 +401,7 @@ class AdminMenu
         $actual_url  = urldecode(Params::getServerParam('QUERY_STRING', false, false));
         $actual_page = Params::getParam('page');
 
-        $adminMenu = AdminMenu::newInstance();
+        $adminMenu = self::newInstance();
         $aMenu     = $adminMenu->get_array_menu();
 
         $is_moderator = osc_is_moderator();
@@ -565,7 +565,7 @@ class AdminMenu
     {
         $str =
             '<ul class="sidebar-submenu collapse list-unstyled ' . ($activeMenu === $parentMenuId ? 'show' : '') . '" id="' . $parentMenuId
-            . '-submenu">';
+            . '-submenu" data-bs-parent="#dashboard-menu">';
         foreach ($subMenu as $key => $arrSubMenu) {
             if (!$is_moderator || ($arrSubMenu['sub'][4] === 'moderator')) {
                 if (strpos($arrSubMenu[1], 'divider_') === 0) {
@@ -584,149 +584,6 @@ class AdminMenu
 
         return $str;
 
-    }
-
-    /**
-     * Render Admin Menu
-     */
-    public function renderAdminMenu2()
-    {
-        // actual url
-        $actual_url  = urldecode(Params::getServerParam('QUERY_STRING', false, false));
-        $actual_page = Params::getParam('page');
-
-        $something_selected = false;
-        $adminMenu          = AdminMenu::newInstance();
-        $aMenu              = $adminMenu->get_array_menu();
-        $current_menu_id    = osc_current_menu();
-        $is_moderator       = osc_is_moderator();
-
-        $sub_current = false;
-        $sMenu       = '<!-- menu -->' . PHP_EOL;
-        $sMenu       .= '<div class="col-auto col-md-2 col-xl-2 px-sm-2 px-0 bg-dark min-vh-100">' .
-                        PHP_EOL;
-        $sMenu       .= '<div class="d-flex flex-column align-items-center align-items-sm-start px-3 pt-2 text-white">' .
-                        PHP_EOL;
-        $sMenu       .= '<ul id="dashboard-menu" class="oscmenu nav nav-pills flex-column mb-sm-auto mb-0 align-items-center align-items-sm-start">'
-                        .
-                        PHP_EOL;
-
-        // find current menu section
-        $current_menu = '';
-        $priority     = 0;
-        $urlLenght    = 0;
-        foreach ($aMenu as $key => $value) {
-            // --- submenu section
-            if (array_key_exists('sub', $value)) {
-                $aSubmenu = $value['sub'];
-                foreach ($aSubmenu as $aSub) {
-                    $credential_sub = $aSub[4] ?? $aSub[3];
-
-                    if (!$is_moderator || ($credential_sub === 'moderator')) { // show
-                        $url_submenu = $aSub[1];
-                        $url_submenu = str_replace(array(
-                                                       osc_admin_base_url(true) . '?',
-                                                       osc_admin_base_url()
-                                                   ), '', $url_submenu);
-
-                        if (strpos($actual_url, $url_submenu) === 0 && $priority <= 2 && $url_submenu != '') {
-                            if ($urlLenght < strlen($url_submenu)) {
-                                $urlLenght    = strlen($url_submenu);
-                                $sub_current  = true;
-                                $current_menu = $value[2];
-                                $priority     = 2;
-                            }
-                        } elseif ($actual_page == $value[2] && $priority < 1) {
-                            $sub_current  = true;
-                            $current_menu = $value[2];
-                            $priority     = 1;
-                        }
-                    }
-                }
-            }
-
-            // --- menu section
-            $url_menu = $value[1];
-            $url_menu = str_replace(array(
-                                        osc_admin_base_url(true) . '?',
-                                        osc_admin_base_url()
-                                    ), '', $url_menu);
-
-            if (@strpos($actual_url, $url_menu) === 0 && $priority <= 2 && $url_menu != '') {
-                if ($urlLenght < strlen($url_menu)) {
-                    $urlLenght    = strlen($url_menu);
-                    $sub_current  = true;
-                    $current_menu = $value[2];
-                    $priority     = 2;
-                }
-            } elseif ($actual_page == $value[2] && $priority < 1) {
-                $sub_current  = true;
-                $current_menu = $value[2];
-                $priority     = 1;
-            } elseif ($url_menu == $actual_page) {
-                $sub_current  = true;
-                $current_menu = $value[2];
-                $priority     = 0;
-            }
-        }
-        $value = array();
-        foreach ($aMenu as $key => $value) {
-            $sSubmenu   = '';
-            $credential = $value[3];
-            if (!$is_moderator || ($credential === 'moderator')) { // show
-                $class = '';
-                if (array_key_exists('sub', $value)) {
-                    // submenu
-                    $aSubmenu = $value['sub'];
-                    if ($aSubmenu) {
-                        $sSubmenu .= '<ul>' . PHP_EOL;
-                        foreach ($aSubmenu as $aSub) {
-                            $credential_sub = $aSub[4] ?? $aSub[3];
-                            if (!$is_moderator || ($credential_sub === 'moderator')) { // show
-                                if (strpos($aSub[1], 'divider_') === 0) {
-                                    $sSubmenu .= '<li class="nav nav-pills flex-column mb-auto submenu-divide">' . $aSub[0] . '</li>'
-                                                 . PHP_EOL;
-                                } else {
-                                    $sSubmenu .= '<li class="nav nav-pills flex-column mb-auto"><a class="nav-link align-middle px-0" id="'
-                                                 . $aSub[2] . '" href="' . $aSub[1] . '">' .
-                                                 $aSub[0]
-                                                 . '</a></li>' . PHP_EOL;
-                                }
-                            }
-                        }
-                        // hardcoded plugins/themes under menu plugins
-                        $plugins_out = '';
-                        if ($key === 'plugins' && !$is_moderator) {
-                            $sSubmenu .= $plugins_out;
-                        }
-
-                        //$sSubmenu .= '<li class="arrow"></li>' . PHP_EOL;
-                        $sSubmenu .= '</ul>' . PHP_EOL;
-                    }
-                }
-
-                $class = osc_apply_filter('current_admin_menu_' . $value[2], $class);
-
-                $icon = '';
-                if (isset($value[4])) {
-                    $icon = '<div class="ico ico-48" style="background-image:url(\'' . $value[4] . '\');">';
-                } else {
-                    $icon = '<i class="bi bi-' . $value[2] . '">';
-                }
-
-                if ($current_menu == $value[2]) {
-                    $class = 'current';
-                }
-                $sMenu .= '<li id="menu_' . $value[2] . '" class="nav-item ' . $class . '">' . PHP_EOL;
-                $sMenu .= '<a class="nav-link align-middle px-0" id="' . $value[2] . '" href="' . $value[1] . '">' . $icon . '</i>'
-                          . $value[0]
-                          . '</a>' . PHP_EOL;
-                $sMenu .= $sSubmenu;
-                $sMenu .= '</li>' . PHP_EOL;
-            }
-        }
-        $sMenu .= '</ul></div></div>' . PHP_EOL;
-        echo $sMenu;
     }
 
     /**
@@ -869,10 +726,6 @@ class AdminMenu
     {
         $this->add_submenu('tools', $submenu_title, $url, $submenu_id, $capability, $icon_url);
     }
-
-    /*
-     * Empty the menu
-     */
 
     /**
      * @param      $submenu_title
