@@ -168,7 +168,7 @@ class CategoryForm extends Form
         if ((isset($category['b_enabled']) && $category['b_enabled'])) {
             $options['checkboxChecked'] = true;
         }
-        echo (new self())->checkbox('b_enabled',1, $attributes, $options);
+        echo (new self())->checkbox('b_enabled', 1, $attributes, $options);
     }
 
     /**
