@@ -76,10 +76,10 @@ class AdminSecBaseModel extends SecBaseModel
         }
 
         // enqueue scripts
-        osc_enqueue_script('jquery');
-        osc_enqueue_script('jquery-ui');
-        osc_enqueue_script('admin-osc');
-        osc_enqueue_script('admin-ui-osc');
+        //osc_enqueue_script('jquery');
+        //osc_enqueue_script('jquery-ui');
+        //osc_enqueue_script('admin-osc');
+        //osc_enqueue_script('admin-ui-osc');
     }
 
     /**
