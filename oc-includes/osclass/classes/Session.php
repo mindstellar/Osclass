@@ -124,7 +124,8 @@ class Session
      * @since 4.0.0
      */
     public function _has($key)
-    : bool {
+    : bool
+    {
          return isset($this->session[$key]);
            
     }
