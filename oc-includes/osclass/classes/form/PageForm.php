@@ -75,8 +75,8 @@ class PageForm extends Form
     {
         $attributes['id']           = 'b_link';
         $options['noCheckboxLabel'] = true;
-        if (isset($page['b_link'])) {
-            $options['defaultValue'] = $page['b_link'];
+        if (isset($page['b_link']) && $page['b_link']) {
+            $options['checkboxChecked'] = true;
         }
         echo (new self())->checkbox('b_link', 1, $attributes, $options);
     }

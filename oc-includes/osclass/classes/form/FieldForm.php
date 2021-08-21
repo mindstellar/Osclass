@@ -150,8 +150,8 @@ class FieldForm extends Form
         $name                       = 'field_required';
         $attributes['id']           = $name;
         $options['noCheckboxLabel'] = true;
-        if (($field !== null && isset($field['b_required']) && $field['b_required'] === 1)) {
-            $attributes['checked'] = 'checked';
+        if (($field !== null && isset($field['b_required']) && $field['b_required'])) {
+            $options['checkboxChecked'] = true;
         }
         echo (new self())->checkbox($name, 1, $attributes, $options);
     }
@@ -164,8 +164,8 @@ class FieldForm extends Form
         $name                       = 'field_searchable';
         $attributes['id']           = $name;
         $options['noCheckboxLabel'] = true;
-        if ($field !== null && isset($field['b_searchable']) && $field['b_searchable'] === 1) {
-            $attributes['checked'] = 'checked';
+        if ($field !== null && isset($field['b_searchable']) && $field['b_searchable']) {
+            $options['checkboxChecked'] = true;
         }
         echo (new self())->checkbox($name, 1, $attributes, $options);
     }

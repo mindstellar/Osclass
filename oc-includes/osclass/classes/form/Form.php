@@ -129,9 +129,7 @@ class Form extends FormInputs
     {
         $attributes['id']           = preg_replace('|([^_a-zA-Z0-9-]+)|', '', $name);
         $options['noCheckboxLabel'] = true;
-        if ($checked) {
-            $attributes['checked'] = 'checked';
-        }
+        $options['checkboxChecked'] = $checked;
         echo (new self())->checkbox($name, $value, $attributes, $options);
 
     }

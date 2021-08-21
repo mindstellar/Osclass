@@ -178,6 +178,39 @@ class FormInputs implements InputInterface
         switch ($attributes['type']) {
             // Generate input with type=radio or type=checkbox
             case 'radio':
+                $i = 0;
+                if (is_string($values)) {
+                    $values = explode(',', $values);
+                    //rename $values array key to value
+                    foreach ($values as $k => $v) {
+                        $values[$v] = $v;
+                        unset($values[$k]);
+                    }
+                }
+                foreach ($values as $v => $l) {
+                    $checked = isset($options['defaultValue']) && $v == $options['defaultValue'] ? ' checked' : '';
+                    $i++;
+                    $input .= sprintf('<div%s>', $attributesString);
+                    $input .= sprintf(
+                        '<input class="%s" type="%s" name="%s" id="%s" value="%s"%s>',
+                        $attributes['type'] === 'radio' ? $this->radioClass : $this->checkboxClass,
+                        $attributes['type'],
+                        $name,
+                        $name . $i,
+                        $v,
+                        $checked
+                    );
+                    // if $options['noCheckboxLabel'] is set, don't add label after checkbox]
+                    if (!isset($options['noCheckboxLabel'])) {
+                        //Add label if $label is set or use $name as $label
+                        if (!isset($l)) {
+                            $label = $name;
+                        }
+                        $input .= $this->label($l, $name . $i, 'form-check-label');
+                    }
+                    $input .= '</div>';
+                }
+                break;
             case 'checkbox':
                 $i = 0;
                 if (is_string($values)) {
@@ -189,12 +222,17 @@ class FormInputs implements InputInterface
                     }
                 }
                 foreach ($values as $v => $l) {
-                    $checked = isset($options['defaultValue']) && $v === $options['defaultValue'] ? ' checked' : '';
+                    if ((isset($options['defaultValue']) && $v === $options['defaultValue']) ||(isset($options['checkboxChecked']) &&
+                                                                                                $options['checkboxChecked'])) {
+                        $checked = ' checked';
+                    } else {
+                        $checked = '';
+                    }
                     $i++;
                     $input .= sprintf('<div%s>', $attributesString);
                     $input .= sprintf(
                         '<input class="%s" type="%s" name="%s" id="%s" value="%s"%s>',
-                        $attributes['type'] === 'radio' ? $this->radioClass : $this->checkboxClass,
+                        $this->checkboxClass,
                         $attributes['type'],
                         $name,
                         $name . $i,
@@ -451,7 +489,6 @@ class FormInputs implements InputInterface
         if (!isset($attributes['class'])) {
             $attributes['class'] = $this->checkboxContainerClass;
         }
-
         return $this->generateInput($name, $value, $attributes, $options);
     }
 
