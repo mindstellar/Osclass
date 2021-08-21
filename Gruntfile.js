@@ -195,6 +195,17 @@ module.exports = function (grunt) {
                     flatten: true
                 }]
             },
+            'sortablejs': {
+                files:[{
+                    expand: true,
+                    src: [
+                        nodeDir + '/sortablejs/Sortable.min.js',
+                        nodeDir + '/sortablejs/LICENSE',
+                    ],
+                    dest: assetsDir + '/sortablejs',
+                    flatten: true
+                }]
+            }
         },
         sass: {
             dist: {

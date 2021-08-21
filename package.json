@@ -37,6 +37,7 @@
     "jquery-validation": "^1.19.3",
     "npm-font-open-sans": "^1.1.*",
     "osclass-legacy-assets": "github:mindstellar/osclass-legacy-assets#master",
+    "sortablejs": "^1.14.0",
     "spectrum-colorpicker": "^1.8.*",
     "tinymce": "^5.8.1"
   }
