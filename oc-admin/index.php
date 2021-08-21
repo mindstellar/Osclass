@@ -39,7 +39,7 @@ osc_register_script('admin-osc', osc_current_admin_theme_js_url('osc.js'), 'jque
 osc_register_script('admin-ui-osc', osc_current_admin_theme_js_url('ui-osc.js'), 'jquery-ui');
 osc_register_script('admin-location', osc_current_admin_theme_js_url('location.min.js'), 'bootstrap5');
 osc_register_script('bootstrap5', osc_assets_url('bootstrap/bootstrap.min.js'));
-osc_register_script('sortablejs',osc_assets_url('sortablejs/Sortable.min.js'));
+osc_register_script('sortablejs', osc_assets_url('sortablejs/Sortable.min.js'));
 // enqueue scripts
 osc_enqueue_script('bootstrap5');
 osc_enqueue_script('admin-osc');
