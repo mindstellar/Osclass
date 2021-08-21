@@ -228,8 +228,8 @@ osc_current_admin_theme_path('parts/header.php'); ?>
                             <input type="text" class="input-small" name="warn_expiration"
                                    value="<?php echo osc_esc_html(osc_warn_expiration()); ?>"/>
                             <?php _e('days'); ?>
+                            <div class="help-box"><?php _e('This option will send an email X days before an ad expires to the author. 0 for no email.'); ?></div>
                         </div>
-                        <span class="help-box"><?php _e('This option will send an email X days before an ad expires to the author. 0 for no email.'); ?></span>
                     </div>
                     <div class="form-row">
                         <div class="form-label"> <?php _e('Title length'); ?></div>

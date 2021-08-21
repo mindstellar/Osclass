@@ -256,7 +256,7 @@ osc_current_admin_theme_path('parts/header.php'); ?>
                                    value="<?php echo osc_esc_html(osc_max_size_kb()); ?>"/>
                             <span class="help-box"><?php _e('Size in KB'); ?></span>
                             <div class="callout-warning">
-                                <p><?php printf(__('Maximum size PHP configuration allows: %d KB'), $maxPHPsize); ?></p>
+                               <?php printf(__('Maximum size PHP configuration allows: %d KB'), $maxPHPsize); ?>
                             </div>
                         </div>
                     </div>
