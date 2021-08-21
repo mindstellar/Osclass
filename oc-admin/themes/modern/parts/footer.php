@@ -28,10 +28,10 @@
             eS.classList.add('offcanvas');
             eS.classList.add('offcanvas-start');
             eS.style.marginTop = eH.offsetHeight + "px";
-            eS.addEventListener('shown.bs.offcanvas', function () {
+            eS.addEventListener('show.bs.offcanvas', function () {
                 eT.classList.add('open');
             })
-            eS.addEventListener('hidden.bs.offcanvas', function () {
+            eS.addEventListener('hide.bs.offcanvas', function () {
                 eT.classList.remove('open');
             })
             /* The viewport is less than, or equal to, 768 pixels wide */
