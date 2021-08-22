@@ -219,11 +219,11 @@ function drawCategory($category)
                     $category['pk_i_id']; ?>');" title="<?php _e('Edit'); ?>"><i class="bi bi-pencil-fill"></i></a>
                     <a class="btn btn-sm enable"
                        onclick="enable_cat('<?php echo $category['pk_i_id']; ?>')" <?php
-                    if ($category['b_enabled']) {
-                        echo 'title="' . __('Disable') . '"><i class="bi bi-slash-circle-fill"></i></a>';
-                    } else {
-                        echo 'title="' . __('Enable') . '"><i class="bi bi-play-circle-fill"></i></a>';
-                    } ?> <a class="btn btn-sm" onclick="delete_category(<?php echo $category['pk_i_id']; ?>)"
+                        if ($category['b_enabled']) {
+                            echo 'title="' . __('Disable') . '"><i class="bi bi-slash-circle-fill"></i></a>';
+                        } else {
+                            echo 'title="' . __('Enable') . '"><i class="bi bi-play-circle-fill"></i></a>';
+                        } ?> <a class="btn btn-sm" onclick="delete_category(<?php echo $category['pk_i_id']; ?>)"
                             title="<?php _e('Delete'); ?>">
                         <i class="text-danger bi bi-x-circle-fill"></i>
                     </a>
@@ -287,7 +287,7 @@ function drawCategory($category)
                 <div class="modal-body">
                     <?php _e('<strong>WARNING</strong>: This will also delete the listings under that category.'
                              . ' This action cannot be undone. Are you sure you want to continue?');
-                    ?>
+?>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-sm btn-secondary" data-bs-dismiss="modal"><?php _e('Cancel'); ?></button>
@@ -312,7 +312,7 @@ function drawCategory($category)
             ).dataset.categoryId;
             let url = "<?php
                 echo osc_admin_base_url(true); ?>?page=ajax&action=delete_category&<?php echo osc_csrf_token_url();
-                ?>&id=" + categoryId;
+?>&id=" + categoryId;
             fetch(url, {
                 credentials: "same-origin"
             }).then(function (response) {
