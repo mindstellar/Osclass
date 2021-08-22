@@ -78,7 +78,7 @@ function customPageHeader()
 {
     ?>
     <h1><?php _e('Listing'); ?>
-        <a href="#" class="ms-1 bi bi-question-circle-fill float-right" data-bs-target="#help-box" data-bs-toggle="collapse"
+        <a class="ms-1 bi bi-question-circle-fill float-right" data-bs-target="#help-box" data-bs-toggle="collapse"
            href="#help-box"></a>
     </h1>
     <?php
@@ -297,10 +297,10 @@ osc_current_admin_theme_path('parts/header.php'); ?>
                                     <option value="0" <?php if (!$map_type) {
                                         echo 'selected';
                                                       } ?>><?php _e('None'); ?></option>
-                                    <option value="google" <?php if ($map_type == 'google') {
+                                    <option value="google" <?php if ($map_type === 'google') {
                                         echo 'selected';
                                                            } ?>><?php _e('Google Maps'); ?></option>
-                                    <option value="openstreet" <?php if ($map_type == 'openstreet') {
+                                    <option value="openstreet" <?php if ($map_type === 'openstreet') {
                                         echo 'selected';
                                                                } ?>><?php _e('OpenStreetMaps'); ?></option>
                                 </select>
