@@ -152,7 +152,7 @@ class CAdminSettingsMain extends AdminSecBaseModel
                 $iUpdated += osc_set_preference('openstreet_api_key', $osMapsKey);
 
                 // Enable prerelease osclass update
-                $iUpdated += osc_set_preference('allow_update_prerelease',Params::getParam('allow_update_prerelease'));
+                $iUpdated += osc_set_preference('allow_update_prerelease', Params::getParam('allow_update_prerelease'));
 
                 if ($iUpdated > 0) {
                     if ($error) {
