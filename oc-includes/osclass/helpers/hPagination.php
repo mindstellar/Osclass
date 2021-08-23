@@ -175,7 +175,7 @@ function osc_show_pagination_admin($aData)
     <div class="has-pagination">
         <?php osc_run_hook('before_show_pagination_admin'); ?>
         <?php if ($pageTotal > 1) { ?>
-            <form method="get" action="<?php echo $urlActual; ?>" style="display:inline;">
+            <form method="get" action="<?php echo $urlActual; ?>" style="display:inline;" nocsrf>
                 <?php foreach (Params::getParamsAsArray('get') as $key => $value) { ?>
                     <?php if ($key !== 'iPage') { ?>
                         <input type="hidden" name="<?php echo osc_esc_html($key); ?>"
