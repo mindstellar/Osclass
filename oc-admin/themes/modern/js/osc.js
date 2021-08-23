@@ -40,6 +40,7 @@
  *     }
  * }
  **/
+/*jshint browser: true*/
 osc.tooltip = function(message, options){
     defaults = {
         position:{
@@ -52,7 +53,7 @@ osc.tooltip = function(message, options){
 
     // check if exists tooltip
     var $tooltip = $('#osc-tooltip');
-    if($tooltip.length == 0){
+    if($tooltip.length === 0){
         $tooltip = $('<div id="osc-tooltip"></div>');
         $('body').append($tooltip);
     }
@@ -62,9 +63,9 @@ osc.tooltip = function(message, options){
     $(this).hover(function(){
         hovered = true;
         var offset = $(this).offset();
-        var $tooltipContainer = $('<div class="tooltip-message"></div>');
-        $tooltipContainer.append(message);
-        $tooltip.html($tooltipContainer).attr('class',opts.layout+' '+opts.position.x+'-'+opts.position.y).append('<div class="tooltip-arrow"></div>').show();
+        var tooltipContainer = $('<div class="tooltip-message"></div>');
+        tooltipContainer.append(message);
+        $tooltip.html(tooltipContainer).attr('class',opts.layout+' '+opts.position.x+'-'+opts.position.y).append('<div class="tooltip-arrow"></div>').show();
         switch (opts.position.y) {
             case 'top':
                 positionTop = offset.top-($tooltip.outerHeight());
@@ -112,7 +113,7 @@ osc.tooltip = function(message, options){
 };
 
 //extend
-$.fn.osc_tooltip = osc.tooltip
+$.fn.osc_tooltip = osc.tooltip;
 
 
 var OSC_ESC_MAP = {
@@ -130,4 +131,12 @@ function oscEscapeHTML(str) {
         });
     }
     return "";
+}
+function setJsMessage(alertClass, alertMessage) {
+    var jsMessage = document.getElementById("jsMessage");
+    var pTag = jsMessage.querySelector("p");
+    pTag.setAttribute("class", alertClass);
+    pTag.textContent = alertMessage;
+    jsMessage.classList.remove('hide');
+    jsMessage.removeAttribute('style');
 }

@@ -298,12 +298,6 @@ osc_current_admin_theme_path('parts/header.php');
             });
         };
 
-        function setJsMessage(alertClass, alertMessage) {
-            var pTag = document.getElementById("jsMessage").querySelector("p");
-            pTag.setAttribute("class", alertClass);
-            pTag.textContent = alertMessage;
-            document.getElementById("jsMessage").classList.remove('hide')
-        }
         function delete_field(id) {
             var deleteModal = document.getElementById("deleteModal");
             deleteModal.setAttribute("data-field-id", id);

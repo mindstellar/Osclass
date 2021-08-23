@@ -64,7 +64,7 @@ class Rewrite
 
     public function setRules()
     {
-        Preference::newInstance()->set('rewrite_rules', serialize($this->rules));
+        Preference::newInstance()->replace('rewrite_rules', serialize($this->rules));
     }
 
     /**
@@ -224,7 +224,6 @@ class Rewrite
                         Params::setParam('page', 'route');
                     } else {
                         Params::setParam('page', 'custom');
-
                         $this->location = $route['location'];
                         $this->section  = $route['section'];
                         $this->title    = $route['title'];
@@ -260,10 +259,10 @@ class Rewrite
                 }
                 $this->request_uri = $request_uri;
 
-                if (Params::getParam('page') !== '') {
+                if (Params::getParam('page')) {
                     $this->location = Params::getParam('page');
                 }
-                if (Params::getParam('action') !== '') {
+                if (Params::getParam('action')) {
                     $this->section = Params::getParam('action');
                 }
             }

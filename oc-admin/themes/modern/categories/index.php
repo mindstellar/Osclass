@@ -334,15 +334,6 @@ function drawCategory($category)
             });
         };
 
-        function setJsMessage(alertClass, alertMessage) {
-            var jsMessage = document.getElementById("jsMessage")
-            var pTag = jsMessage.querySelector("p");
-            pTag.setAttribute("class", alertClass);
-            pTag.textContent = alertMessage;
-            jsMessage.classList.remove('hide');
-            jsMessage.removeAttribute('style');
-        }
-
         var nestedCategoriesRoot = document.querySelector('.sortable');
 
         function serializeNested(rootElement, parent = null) {
