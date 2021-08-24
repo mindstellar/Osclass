@@ -170,11 +170,7 @@ class Preference extends DAO
      */
     public function get($key, $section = 'osclass')
     {
-        if (isset($this->pref[$section]) && isset($this->pref[$section][$key])) {
-            return $this->pref[$section][$key];
-        }
-
-        return '';
+        return $this->pref[$section][$key] ?? '';
     }
 
     /**

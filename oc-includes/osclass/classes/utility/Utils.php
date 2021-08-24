@@ -374,7 +374,7 @@ class Utils
                 unset($aRegionsCountry);
             }
             unset($aCountry);
-            Preference::newInstance()->set('location_todo', LocationsTmp::newInstance()->count());
+            Preference::newInstance()->replace('location_todo', LocationsTmp::newInstance()->count());
         }
 
         return LocationsTmp::newInstance()->count();
