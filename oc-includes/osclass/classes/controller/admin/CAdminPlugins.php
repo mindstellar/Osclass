@@ -408,7 +408,15 @@ class CAdminPlugins extends AdminSecBaseModel
                     } else {
                         $sAuthor = __('By') . ' ' . $pInfo['author'];
                     }
-
+                    $plugin_status = 'uninstalled';
+                    if($installed){
+                        if($enabled){
+                            $plugin_status = 'active';
+                        } else {
+                            $plugin_status = 'disabled';
+                        }
+                    }
+                    $row['plugin_status']= $plugin_status;
                     $row[]   =
                         '<input type="hidden" name="installed" value="' . $installed . '" enabled="' . $enabled . '" />'
                         . $pInfo['plugin_name'] . $sHelp . '<div>' . $sUpdate . '</div>';

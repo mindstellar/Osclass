@@ -52,6 +52,7 @@ function customPageHeader()
     <?php
 }
 
+
 osc_add_hook('admin_page_header', 'customPageHeader');
 
 /**
@@ -63,6 +64,8 @@ function customPageTitle($string)
 {
     return sprintf(__('Plugins &raquo; %s'), $string);
 }
+
+
 osc_add_filter('admin_title', 'customPageTitle');
 
 $iDisplayLength = __get('iDisplayLength');
@@ -97,23 +100,23 @@ $tab_index = 2;
         </tr>
         </thead>
         <tbody>
-        <?php if (count($aData['aaData']) > 0) : ?>
-            <?php foreach ($aData['aaData'] as $array) : ?>
-                <tr>
-                    <?php foreach ($array as $key => $value) : ?>
+        <?php if (count($aData['aaData']) > 0) { ?>
+            <?php foreach ($aData['aaData'] as $array) {?>
+                <tr class="plugin-<?php echo $array['plugin_status']; unset($array['plugin_status']) ?>">
+                    <?php foreach ($array as $key => $value) { ?>
                         <td>
                             <?php echo $value; ?>
                         </td>
-                    <?php endforeach; ?>
+                    <?php } ?>
                 </tr>
-            <?php endforeach; ?>
-        <?php else : ?>
+            <?php } ?>
+        <?php } else { ?>
             <tr>
                 <td colspan="6" class="text-center">
                     <p><?php _e('No data available in table'); ?></p>
                 </td>
             </tr>
-        <?php endif; ?>
+        <?php } ?>
         </tbody>
     </table>
     <?php
@@ -146,16 +149,16 @@ $tab_index = 2;
                     onchange="this.form.submit();">
                 <option value="10" <?php if (Params::getParam('iDisplayLength') == 10) {
                     echo 'selected';
-                                   } ?> ><?php printf(__('%d plugins'), 10); ?></option>
+                } ?> ><?php printf(__('%d plugins'), 10); ?></option>
                 <option value="25" <?php if (Params::getParam('iDisplayLength') == 25) {
                     echo 'selected';
-                                   } ?> ><?php printf(__('%d plugins'), 25); ?></option>
+                } ?> ><?php printf(__('%d plugins'), 25); ?></option>
                 <option value="50" <?php if (Params::getParam('iDisplayLength') == 50) {
                     echo 'selected';
-                                   } ?> ><?php printf(__('%d plugins'), 50); ?></option>
+                } ?> ><?php printf(__('%d plugins'), 50); ?></option>
                 <option value="100" <?php if (Params::getParam('iDisplayLength') == 100) {
                     echo 'selected';
-                                    } ?> ><?php printf(__('%d plugins'), 100); ?></option>
+                } ?> ><?php printf(__('%d plugins'), 100); ?></option>
             </select>
         </form>
     </div>
@@ -193,26 +196,7 @@ $tab_index = 2;
         });
 
     });
-    (function (){
-        var i, len;
-        var plugins = document.getElementById("upload-plugins")
-        var pluginsRows = plugins.querySelectorAll("tbody tr")
-        for (i = 0, len = pluginsRows.length; i < len; i++) {
-            let input
-            input = pluginsRows[i].querySelector("input")
-            if(input.value == 1){
-                if(input.getAttribute('enabled') == 1){
-                    pluginsRows[i].classList.add('plugin-active')
-                } else {
-                    pluginsRows[i].classList.add('plugin-disabled')
-                }
-            } else {
-                pluginsRows[i].classList.add('plugin-uninstalled')
-            }
-        }
-    })()
-
-    function uninstall_dialog(plugin,title) {
+    function uninstall_dialog(plugin, title) {
         var deleteModal = document.getElementById("pluginModal")
         deleteModal.querySelector("input[name='plugin']")
             .value = plugin;
@@ -222,8 +206,8 @@ $tab_index = 2;
             .textContent = title;
         deleteModal.querySelector(".modal-body")
             .textContent = "<?php echo osc_esc_js(__('This action can not be undone.'
-                                                . ' Uninstalling plugins may result in a permanent loss of data. '
-                                                . 'Are you sure you want to continue?')); ?>";
+                                                     . ' Uninstalling plugins may result in a permanent loss of data. '
+                                                     . 'Are you sure you want to continue?')); ?>";
         deleteModal.querySelector("#pluginModalSubmit")
             .textContent = "<?php echo osc_esc_js(__('Uninstall')); ?>";
         (new bootstrap.Modal(document.getElementById("pluginModal"))).toggle()
