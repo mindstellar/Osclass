@@ -409,8 +409,8 @@ class CAdminPlugins extends AdminSecBaseModel
                         $sAuthor = __('By') . ' ' . $pInfo['author'];
                     }
                     $plugin_status = 'uninstalled';
-                    if($installed){
-                        if($enabled){
+                    if ($installed) {
+                        if ($enabled) {
                             $plugin_status = 'active';
                         } else {
                             $plugin_status = 'disabled';

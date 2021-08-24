@@ -149,16 +149,16 @@ $tab_index = 2;
                     onchange="this.form.submit();">
                 <option value="10" <?php if (Params::getParam('iDisplayLength') == 10) {
                     echo 'selected';
-                } ?> ><?php printf(__('%d plugins'), 10); ?></option>
+                                   } ?> ><?php printf(__('%d plugins'), 10); ?></option>
                 <option value="25" <?php if (Params::getParam('iDisplayLength') == 25) {
                     echo 'selected';
-                } ?> ><?php printf(__('%d plugins'), 25); ?></option>
+                                   } ?> ><?php printf(__('%d plugins'), 25); ?></option>
                 <option value="50" <?php if (Params::getParam('iDisplayLength') == 50) {
                     echo 'selected';
-                } ?> ><?php printf(__('%d plugins'), 50); ?></option>
+                                   } ?> ><?php printf(__('%d plugins'), 50); ?></option>
                 <option value="100" <?php if (Params::getParam('iDisplayLength') == 100) {
                     echo 'selected';
-                } ?> ><?php printf(__('%d plugins'), 100); ?></option>
+                                    } ?> ><?php printf(__('%d plugins'), 100); ?></option>
             </select>
         </form>
     </div>
