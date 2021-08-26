@@ -100,16 +100,6 @@ osc.tooltip = function(message, options){
             $tooltip.hide();
         }}, 100);
     });
-
-    jQuery("#osc-tooltip").mouseover(function(){
-        hovered = true;
-    }).mouseout(function(){
-        hovered = false;
-        setTimeout(function(){
-        if(!hovered) {
-            $tooltip.hide();
-        }}, 100);
-    });
 };
 
 //extend
