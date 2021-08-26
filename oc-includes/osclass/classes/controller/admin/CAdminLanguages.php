@@ -110,7 +110,6 @@ class CAdminLanguages extends AdminSecBaseModel
                     osc_add_flash_warning_message(_m("This action can't be done because it's a demo site"), 'admin');
                     $this->redirectTo(osc_admin_base_url(true) . '?page=languages');
                 }
-                osc_csrf_check();
 
                 $language = Params::getParam('language');
                 if ($language != '') {
@@ -149,7 +148,18 @@ class CAdminLanguages extends AdminSecBaseModel
                             $values['s_stop_words'] = $locales[$language]['stop_words'];
                         }
                         OSCLocale::newInstance()->insert($values);
-
+                        // inserting e-mail translations
+                        $path = sprintf('%s%s/mail.sql', osc_translations_path(), $language);
+                        if (file_exists($path)) {
+                            $sql    = file_get_contents($path);
+                            $conn   = DBConnectionClass::newInstance();
+                            $c_db   = $conn->getOsclassDb();
+                            $comm   = new DBCommandClass($c_db);
+                            $result = $comm->importSQL($sql);
+                            if (!$result) {
+                                osc_add_flash_error_message(_m('There was a problem importing email templates'), 'admin');
+                            }
+                        }
                         osc_add_flash_ok_message(_m('Language imported successfully'), 'admin');
                         $this->redirectTo(osc_admin_base_url(true) . '?page=languages');
 
@@ -194,7 +204,6 @@ class CAdminLanguages extends AdminSecBaseModel
                 $languageThousandsSep   = Params::getParam('s_thousands_sep');
                 $languageDateFormat     = Params::getParam('s_date_format');
                 $languageStopWords      = Params::getParam('s_stop_words');
-
 
                 // formatting variables
                 if (!preg_match('/.{2}_.{2}/', $languageCode)) {
@@ -453,7 +462,7 @@ class CAdminLanguages extends AdminSecBaseModel
                 }
                 // ----
                 $aLanguagesToUpdate = json_decode(osc_get_preference('languages_to_update'), true);
-                $bLanguagesToUpdate = is_array($aLanguagesToUpdate) ? true : false;
+                $bLanguagesToUpdate = is_array($aLanguagesToUpdate);
                 // ----
                 $aData = array();
                 $max   = ($start + $limit);
@@ -583,18 +592,6 @@ class CAdminLanguages extends AdminSecBaseModel
                 );
                 $bulk_options = osc_apply_filter('language_bulk_filter', $bulk_options);
                 $this->_exportVariableToView('bulk_options', $bulk_options);
-
-                $aExistingLanguages = OSCLocale::newInstance()->listAllCodes();
-                $aJsonLanguages     = json_decode(osc_file_get_contents(osc_get_languages_json_url()), true);
-                // IDEA: This probably can be improved.
-                foreach ($aJsonLanguages as $code => $name) {
-                    if (in_array($code, $aExistingLanguages, false)) {
-                        unset($aJsonLanguages[$code]);
-                    }
-                }
-                if (is_array($aJsonLanguages) && count($aJsonLanguages) > 0) {
-                    $this->_exportVariableToView('aOfficialLanguages', $aJsonLanguages);
-                }
 
                 $this->doView('languages/index.php');
                 break;

@@ -113,14 +113,13 @@ $selected   = __get('selected');
 </div>
 <!-- /custom field frame -->
 <script type="text/javascript">
-    $(document).ready(function () {
         $("#cat_tree").treeview({
             animated: "fast",
             collapsed: true
         });
 
         $('select[name="field_type"]').change(function () {
-            if ($(this).prop('value') == 'DROPDOWN' || $(this).prop('value') == 'RADIO') {
+            if ($(this).prop('value') === 'DROPDOWN' || $(this).prop('value') === 'RADIO') {
                 $('#div_field_options').show();
             } else {
                 $('#div_field_options').hide();
@@ -130,8 +129,8 @@ $selected   = __get('selected');
         $('select[name="field_type"]').change();
 
         $('#edit-custom-field-frame form').submit(function () {
-            if (($('select[name="field_type"]').prop('value') == 'DROPDOWN'
-                || $('select[name="field_type"]').prop('value') == 'RADIO')
+            if (($('select[name="field_type"]').prop('value') === 'DROPDOWN'
+                || $('select[name="field_type"]').prop('value') === 'RADIO')
                 && $("#s_options").prop("value") == "") {
                 $(".jsMessage").fadeIn('fast');
                 $(".jsMessage p").html('<?php echo osc_esc_js(__('At least one option is required.')); ?>');
@@ -182,5 +181,4 @@ $selected   = __get('selected');
             }
         });
         $('#more-options_iframe').hide();
-    });
 </script>

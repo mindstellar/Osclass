@@ -50,7 +50,7 @@ function customPageHeader()
         </a>
         <a href="<?php echo osc_admin_base_url(true); ?>?page=languages&amp;action=add"
            class="ms-1 text-success float-end" data-bs-toggle="tooltip" data-bs-placement="bottom" title="<?php _e('Upload language');
-            ?>"><i class="bi bi-plus-circle-fill"></i></a>
+        ?>"><i class="bi bi-plus-circle-fill"></i></a>
     </h1>
     <?php
 }
@@ -99,9 +99,6 @@ osc_current_admin_theme_path('parts/header.php');
     <?php _e('Manage Languages'); ?>
 </h2>
 <div class="relative">
-    <div id="language-toolbar" class="table-toolbar">
-        <div class="float-right"></div>
-    </div>
     <form id="datatablesForm" action="<?php echo osc_admin_base_url(true); ?>" method="post" data-dialog-open="false">
         <input type="hidden" name="page" value="languages"/>
         <div id="bulk-actions">
@@ -116,8 +113,8 @@ osc_current_admin_theme_path('parts/header.php');
                 <tr class="table-secondary">
                     <th class="col-bulkactions"><input id="check_all" type="checkbox"/></th>
                     <th><?php _e('Name'); ?></th>
-                    <th><?php _e('Short name'); ?></th>
-                    <th><?php _e('Description'); ?></th>
+                    <th class="col-short-name"><?php _e('Short name'); ?></th>
+                    <th class="col-description"><?php _e('Description'); ?></th>
                     <th><?php _e('Enabled (website)'); ?></th>
                     <th><?php _e('Enabled (oc-admin)'); ?></th>
                 </tr>
@@ -127,11 +124,13 @@ osc_current_admin_theme_path('parts/header.php');
                     <?php foreach ($aData['aaData'] as $array) { ?>
                         <tr>
                             <?php foreach ($array as $key => $value) { ?>
-                                <td <?php if ($key == 0) {
-                                    ?> class="col-bulkactions" <?php
-                                    } ?>>
-                                    <?php echo $value; ?>
-                                </td>
+                                <td <?php if ($key === 0) {
+                                    echo 'class="col-bulkactions"';
+                                } elseif ($key === 2) {
+                                    echo 'class="col-short-name"';
+                                } elseif ($key === 3) {
+                                    echo 'class="col-description"';
+                                } ?>><?php echo $value; ?></td>
                             <?php } ?>
                         </tr>
                     <?php } ?>
@@ -165,19 +164,10 @@ osc_current_admin_theme_path('parts/header.php');
                 <p><?php _e("Import a language from our database. " . "Already imported languages aren't shown."); ?></p>
                 <div class="mb-3 ">
                     <label><?php _e('Import a language'); ?>:</label>
-                    <?php $languages = View::newInstance()->_get('aOfficialLanguages'); ?>
-                    <?php if (count($languages)) { ?>
-                        <select class="form-select-sm form-select" name="language" required>
-                            <option value=""><?php _e('Select an option'); ?>
-                                <?php foreach ($languages
-
-                                as $code => $name) { ?>
-                            <option value="<?php echo $code; ?>"><?php echo $name; ?></option>
-                                <?php } ?>
-                        </select>
-                    <?php } else { ?>
-                        <p><?php _e('No official languages available.'); ?></p>
-                    <?php } ?>
+                    <select class="form-select-sm form-select" name="language" required>
+                        <option value=""><?php _e('Select an option'); ?>
+                    </select>
+                    <p class="text-danger"></p>
                 </div>
             </div>
             <div class="modal-footer">
@@ -233,18 +223,38 @@ osc_current_admin_theme_path('parts/header.php');
     </div>
 </div>
 <script>
-    // dialog add official lang
-    $("#b_add_official").click(function () {
-        $("#dialog-add-official").dialog({
-            width: 400,
-            modal: true,
-            title: '<?php echo osc_esc_js(__('Add official languages.')); ?>',
-        });
-    });
+    var aExistingLanguages = <?php echo json_encode(OSCLocale::newInstance()->listAllCodes()); ?>;
+    var localeImportUrl = '<?php echo osc_esc_js(osc_get_languages_json_url())?>';
+    let languageOptionsSet = false;
+
     function languageModal() {
+        var importSelect;
         (new bootstrap.Modal(document.getElementById("languageModal"))).toggle()
+        importSelect = document.querySelector("#languageModal select");
+
+        if (languageOptionsSet === false) {
+            fetch(localeImportUrl).then(response => {
+                if (response.ok) {
+                    return response.json();
+                }
+            }).then(locales => {
+                var localeCodes = Object.keys(locales);
+                for (let i = 0, l = localeCodes.length; i < l; i++) {
+                    if (!aExistingLanguages.includes(localeCodes[i])) {
+                        var opt = document.createElement("option");
+                        opt.value = localeCodes[i];
+                        opt.textContent = locales[localeCodes[i]];
+                        importSelect.appendChild(opt);
+                    }
+                }
+                languageOptionsSet = true;
+            }).catch(error => {
+                document.querySelector("#languageModal .text-danger").textContent = '<?php osc_esc_js(__('No official languages available.')); ?> ' + error;
+            });
+        }
         return false;
     }
+
     function delete_dialog(id) {
         var deleteModal = document.getElementById("deleteModal")
         deleteModal.querySelector("input[name='id[]']").value = id;
