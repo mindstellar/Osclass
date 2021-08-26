@@ -56,7 +56,7 @@ class CategoryForm extends Form
         $options['selectOptions'] = self::prepareOptionsArray($categories, 0);
         $attribute['id'] = 'id';
         $options['selectPlaceholder'] = $default_item;
-        echo (new self())->select($name,  $category['pk_i_id'] ?? '', $attribute, $options);
+        echo (new self())->select($name, $category['pk_i_id'] ?? '', $attribute, $options);
     }
 
     /**
