@@ -1,0 +1,12 @@
+{
+    "locale_code": "en_US",
+    "name": "English (US)",
+    "short_name": "English",
+    "description": "American english translation",
+    "version": "1.0.0",
+    "author_name": "navjottomer",
+    "author_url": "https:\/\/github.com\/navjottomer",
+    "currency_format": "{NUMBER} {CURRENCY}",
+    "date_format": "m\/d\/Y",
+    "stop_words": "i,a,about,an,are,as,at,be,by,com,for,from,how,in,is,it,of,on,or,that,the,this,to,was,what,when,where,who,will,with,the"
+}
