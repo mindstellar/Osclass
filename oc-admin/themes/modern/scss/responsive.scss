@@ -112,11 +112,7 @@
       min-width: 100px;
     }
 
-    .col-expiration {
-      display: none;
-    }
-
-    .col-status-border {
+    .col-expiration ,.col-status-border,.col-short-name, .col-description {
       display: none;
     }
 

@@ -225,13 +225,14 @@ class Item extends FormInputs
                 }
                 $attributes['id']             = 'currency';
                 $attributes['style']          = 'max-width:150px';
-                $options['defaultValue']      = $default_key;
+
                 $options['selectPlaceholder'] = __('Select Currency');
-                $values                       = [];
+                $options['selectOptions']     = [];
                 foreach ($currencies as $i) {
-                    $values[$i['pk_c_code']] = $i['s_description'];
+                    $options['selectOptions'][$i['pk_c_code']] = $i['s_description'];
                 }
-                echo $this->select('currency', $values, $attributes, $options);
+
+                echo $this->select('currency', $default_key, $attributes, $options);
             } elseif (count($currencies) === 1) {
                 echo $this->hidden('currency', $currencies[0]['pk_c_code']);
                 echo '<div class="input-group-append">';

@@ -79,11 +79,11 @@ interface InputInterface
      * Select
      *
      * @param string       $name
-     * @param array|string $values
+     * @param array|string $value
      * @param array        $attributes
      * @param array        $options
      */
-    public function select(string $name, $values, array $attributes = [], array $options = []);
+    public function select(string $name, $value, array $attributes = [], array $options = []);
 
     /**
      * Password
@@ -99,11 +99,11 @@ interface InputInterface
      * radio
      *
      * @param string       $name
-     * @param array|string $values
+     * @param array|string|int $value
      * @param array        $attributes
      * @param array        $options
      */
-    public function radio(string $name, $values, array $attributes = [], array $options = []);
+    public function radio(string $name, $value, array $attributes = [], array $options = []);
 
     /**
      * hidden

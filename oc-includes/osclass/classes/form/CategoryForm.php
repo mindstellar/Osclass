@@ -53,12 +53,10 @@ class CategoryForm extends Form
         $default_item = null,
         $name = 'sCategory'
     ) {
-        $value = self::prepareOptionsArray($categories, 0);
+        $options['selectOptions'] = self::prepareOptionsArray($categories, 0);
         $attribute['id'] = 'id';
-        $default_value = $category['pk_i_id'] ?? '';
-        $options['defaultValue'] = $default_value;
         $options['selectPlaceholder'] = $default_item;
-        echo (new self())->select($name, $value, $attribute, $options);
+        echo (new self())->select($name,  $category['pk_i_id'] ?? '', $attribute, $options);
     }
 
     /**
@@ -164,11 +162,10 @@ class CategoryForm extends Form
     public static function enabled_input_checkbox($category = null)
     {
         $attributes['id']           = 'b_enabled';
-        $options['noCheckboxLabel'] = true;
         if ((isset($category['b_enabled']) && $category['b_enabled'])) {
-            $options['checkboxChecked'] = true;
+            $attributes['checked'] = true;
         }
-        echo (new self())->checkbox('b_enabled', 1, $attributes, $options);
+        echo (new self())->checkbox('b_enabled', 1, $attributes);
     }
 
     /**
@@ -178,9 +175,8 @@ class CategoryForm extends Form
     {
         if ($category['fk_i_parent_id'] === null) {
             $attributes['id']           = 'apply_changes_to_subcategories';
-            $options['noCheckboxLabel'] = true;
-            $options['checkboxChecked'] = true;
-            echo (new self())->checkbox('apply_changes_to_subcategories', 1, $attributes, $options);
+            $attributes['checked'] = true;
+            echo (new self())->checkbox('apply_changes_to_subcategories', 1, $attributes);
         }
     }
 
@@ -190,12 +186,11 @@ class CategoryForm extends Form
     public static function price_enabled_for_category($category = null)
     {
         $attributes['id']           = 'b_price_enabled';
-        $options['noCheckboxLabel'] = true;
         if ((isset($category['b_price_enabled']) && $category['b_price_enabled'])
         ) {
-            $options['checkboxChecked'] = true;
+            $attributes['checked'] = true;
         }
-        echo (new self())->checkbox('b_price_enabled', 1, $attributes, $options);
+        echo (new self())->checkbox('b_price_enabled', 1, $attributes);
     }
 
     /**

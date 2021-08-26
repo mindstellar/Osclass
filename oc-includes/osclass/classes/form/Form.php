@@ -50,16 +50,17 @@ class Form extends FormInputs
      */
     protected static function generic_select($name, $items, $fld_key, $fld_name, $default_item, $id)
     {
+        foreach ($items as $k=>$i) {
+            if (isset($fld_key, $fld_name)) {
+                $items[$i[$fld_key]] = $i[$fld_name];
+                unset($items[$k]);
+            }
+        }
         $attributes['id']             = preg_replace('|([^_a-zA-Z0-9-]+)|', '', $name);
         $options['defaultValue']      = $id;
         $options['selectPlaceholder'] = $default_item;
-        $values                       = [];
-        foreach ($items as $i) {
-            if (isset($fld_key, $fld_name)) {
-                $values[$i[$fld_key]] = $i[$fld_name];
-            }
-        }
-        echo (new self())->select($name, $values, $attributes, $options);
+        $options['selectOptions'] = $items;
+        echo (new self())->select($name, $id, $attributes, $options);
     }
 
     /**
@@ -128,9 +129,8 @@ class Form extends FormInputs
     protected static function generic_input_checkbox($name, $value, $checked = false)
     {
         $attributes['id']           = preg_replace('|([^_a-zA-Z0-9-]+)|', '', $name);
-        $options['noCheckboxLabel'] = true;
-        $options['checkboxChecked'] = $checked;
-        echo (new self())->checkbox($name, $value, $attributes, $options);
+        $attributes['checked'] = $checked;
+        echo (new self())->checkbox($name, $value, $attributes);
 
     }
 

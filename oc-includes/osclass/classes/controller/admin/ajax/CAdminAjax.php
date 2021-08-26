@@ -246,7 +246,7 @@ class CAdminAjax extends AdminSecBaseModel
                     }
                     // error while updating?
                     if ($error == 1) {
-                        $message = __('An error occurred while updating.');
+                        $message = __('An error occurred while updating');
                     }
                 } else {
                     $error   = 1;

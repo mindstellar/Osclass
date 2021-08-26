@@ -74,11 +74,10 @@ class PageForm extends Form
     public static function link_checkbox($page = null)
     {
         $attributes['id']           = 'b_link';
-        $options['noCheckboxLabel'] = true;
         if (isset($page['b_link']) && $page['b_link']) {
-            $options['checkboxChecked'] = true;
+            $attributes['checked'] = true;
         }
-        echo (new self())->checkbox('b_link', 1, $attributes, $options);
+        echo (new self())->checkbox('b_link', 1, $attributes);
     }
 
     /**
