@@ -50,7 +50,7 @@ function customPageHeader()
         </a>
         <a href="<?php echo osc_admin_base_url(true); ?>?page=languages&amp;action=add"
            class="ms-1 text-success float-end" data-bs-toggle="tooltip" data-bs-placement="bottom" title="<?php _e('Upload language');
-        ?>"><i class="bi bi-plus-circle-fill"></i></a>
+            ?>"><i class="bi bi-plus-circle-fill"></i></a>
     </h1>
     <?php
 }
@@ -126,11 +126,11 @@ osc_current_admin_theme_path('parts/header.php');
                             <?php foreach ($array as $key => $value) { ?>
                                 <td <?php if ($key === 0) {
                                     echo 'class="col-bulkactions"';
-                                } elseif ($key === 2) {
-                                    echo 'class="col-short-name"';
-                                } elseif ($key === 3) {
-                                    echo 'class="col-description"';
-                                } ?>><?php echo $value; ?></td>
+                                    } elseif ($key === 2) {
+                                        echo 'class="col-short-name"';
+                                    } elseif ($key === 3) {
+                                        echo 'class="col-description"';
+                                    } ?>><?php echo $value; ?></td>
                             <?php } ?>
                         </tr>
                     <?php } ?>
