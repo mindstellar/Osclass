@@ -307,7 +307,7 @@ class Page extends DAO
      *
      * @access public
      *
-     * @param bool   $indelible true if the page is indelible
+     * @param int   $indelible true if the page is indelible
      * @param null   $b_link
      * @param string $locale
      * @param int    $start
