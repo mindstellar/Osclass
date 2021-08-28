@@ -9288,12 +9288,13 @@ div.widget-box-content-no-wrapp li a {
     font-weight: 500; }
     .table tbody .col-title a {
       text-decoration-line: none; }
-  .table th, .table td {
+  .table th,
+  .table td {
     border-bottom: 0;
     border-left: 0;
     border-top: 0;
     line-height: 1rem;
-    padding: .5rem; }
+    padding: 0.5rem; }
   .table td.col-status {
     font-weight: bold;
     margin: 0;
@@ -9301,9 +9302,45 @@ div.widget-box-content-no-wrapp li a {
   .table td.col-status-border {
     margin: 0;
     padding: 0;
-    width: .8rem; }
+    width: 0.8rem; }
   .table div.actions {
-    display: none; }
+    display: none;
+    font-size: 0.85rem;
+    font-weight: normal;
+    padding-bottom: .85rem;
+    margin-top: 0.85rem;
+    position: absolute; }
+    .table div.actions a {
+      color: #018be3;
+      text-decoration: none; }
+      .table div.actions a:hover {
+        text-decoration: underline; }
+    .table div.actions ul {
+      list-style: none;
+      margin: 4px 0 0;
+      padding: 0; }
+    .table div.actions li {
+      float: left;
+      margin-right: 10px; }
+      .table div.actions li a {
+        float: left; }
+      .table div.actions li ul {
+        float: left;
+        margin: 0; }
+    .table div.actions .show-more ul {
+      display: none; }
+    .table div.actions .hover a {
+      display: none; }
+    .table div.actions .hover ul {
+      display: block; }
+      .table div.actions .hover ul a {
+        display: block; }
+  .table .show-actions .actions {
+    display: block; }
+  .table .show-actions i.bi-three-dots:before {
+    opacity: 0;
+    transition: all 0.5s ease;
+    margin-left: -1.8rem; }
   .table .status-active .col-status {
     background: #0d6efd;
     color: #fff; }
@@ -9343,8 +9380,8 @@ div.widget-box-content-no-wrapp li a {
 .table-first-row td {
   border-top: 0; }
 
-.table-contains-actions tbody td {
-  padding-bottom: 25px; }
+.table-contains-actions .col-bulkactions ~ td {
+  padding-bottom: 2.5rem; }
 
 .table-collapsed #table-row-actions {
   margin-top: 0;
@@ -9354,38 +9391,6 @@ div.widget-box-content-no-wrapp li a {
 
 .collapsed-hover td {
   padding-top: 31px; }
-
-#table-row-actions {
-  display: none;
-  font-size: .85rem;
-  margin-top: -25px;
-  padding: 0 6px;
-  position: absolute; }
-  #table-row-actions a {
-    color: #018BE3;
-    text-decoration: none; }
-    #table-row-actions a:hover {
-      text-decoration: underline; }
-  #table-row-actions ul {
-    list-style: none;
-    margin: 4px 0 0;
-    padding: 0; }
-  #table-row-actions li {
-    float: left;
-    margin-right: 10px; }
-    #table-row-actions li a {
-      float: left; }
-    #table-row-actions li ul {
-      float: left;
-      margin: 0; }
-  #table-row-actions .show-more ul {
-    display: none; }
-  #table-row-actions .hover a {
-    display: none; }
-  #table-row-actions .hover ul {
-    display: block; }
-    #table-row-actions .hover ul a {
-      display: block; }
 
 .table-contains-actions {
   position: relative; }
@@ -10251,87 +10256,6 @@ form h3, form .h3 {
   color: #000; }
 
 /*!Custom Responsive rules */
-@media (max-width: 576px) {
-  #content-page > .col {
-    padding-left: .1rem;
-    padding-right: .1rem; }
-
-  .grid-10,
-  .grid-20, .grid-30, .grid-33, .grid-40, .grid-50, .grid-60, .grid-70, .grid-80, .grid-80, .grid-100 {
-    width: 100%; }
-
-  #display-filters .form-horizontal .form-label, .form-horizontal .form-label {
-    float: none;
-    font-weight: 600;
-    padding-top: .5rem;
-    text-align: inherit;
-    width: 100%; }
-  #display-filters .form-horizontal .form-controls, .form-horizontal .form-controls {
-    margin-left: inherit; }
-    #display-filters .form-horizontal .form-controls select, .form-horizontal .form-controls select {
-      width: 100%; }
-    #display-filters .form-horizontal .form-controls > input:not([type="checkbox"]):not([type="radio"]):not([type="submit"]), .form-horizontal .form-controls > input:not([type="checkbox"]):not([type="radio"]):not([type="submit"]) {
-      width: 100%; }
-    #display-filters .form-horizontal .form-controls .input-small,
-    #display-filters .form-horizontal .form-controls .input-medium,
-    #display-filters .form-horizontal .form-controls .input-large,
-    #display-filters .form-horizontal .form-controls .xlarge,
-    #display-filters .form-horizontal .form-controls .input-text,
-    #display-filters .form-horizontal .form-controls .input-password, .form-horizontal .form-controls .input-small,
-    .form-horizontal .form-controls .input-medium,
-    .form-horizontal .form-controls .input-large,
-    .form-horizontal .form-controls .xlarge,
-    .form-horizontal .form-controls .input-text,
-    .form-horizontal .form-controls .input-password {
-      width: 100%; }
-  #display-filters .form-horizontal .form-actions, .form-horizontal .form-actions {
-    padding: 1rem 1rem; }
-
-  .select-box-medium select,
-  .select-box-input select,
-  .select-box-big select {
-    width: 100%; }
-
-  .form-vertical .form-actions {
-    padding: 1rem 1rem; }
-
-  #datatablesForm .table .col-location {
-    display: none;
-    visibility: hidden; }
-  #datatablesForm .table .col-exp {
-    display: none; }
-  #datatablesForm .table .col-date {
-    display: none; }
-  #datatablesForm .table .col-off, #datatablesForm .table .col-rep, #datatablesForm .table .col-bad, #datatablesForm .table .col-spam {
-    max-width: 2.5rem !important;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap; }
-
-  #upload-plugins th:nth-child(2), #upload-plugins td:nth-child(2) {
-    display: none; } }
-@media (max-width: 768px) {
-  #header .navbar-nav .dropdown-menu {
-    position: absolute; }
-
-  #content-page {
-    padding: .5rem .5rem 3rem; }
-    #content-page > div > div.row-wrapper {
-      padding: .1rem; }
-
-  #listing-toolbar + #datatablesForm #bulk-actions, #admins-toolbar + #datatablesForm #bulk-actions, #users-toolbar + #datatablesForm #bulk-actions {
-    left: inherit;
-    max-width: 12rem;
-    position: absolute;
-    right: 0;
-    top: -3rem; }
-
-  .table .col-title {
-    min-width: 100px; }
-  .table .col-expiration, .table .col-status-border, .table .col-short-name, .table .col-description {
-    display: none; }
-  .table .col-status {
-    border-left: 1px solid rgba(0, 0, 0, 0.1); } }
 @media (max-width: 1024px) {
   #header .navbar-toggler {
     display: block; }
@@ -10349,5 +10273,119 @@ form h3, form .h3 {
       overflow: hidden;
       text-overflow: ellipsis;
       white-space: nowrap; } }
+@media (max-width: 768px) {
+  #header .navbar-nav .dropdown-menu {
+    position: absolute; }
+
+  #content-page {
+    padding: 0.5rem 0.5rem 3rem; }
+    #content-page > div > div.row-wrapper {
+      padding: 0.1rem; }
+
+  #listing-toolbar + #datatablesForm #bulk-actions,
+  #admins-toolbar + #datatablesForm #bulk-actions,
+  #users-toolbar + #datatablesForm #bulk-actions {
+    left: inherit;
+    max-width: 12rem;
+    position: absolute;
+    right: 0;
+    top: -3rem; }
+
+  #datatablesForm .table .col-title {
+    min-width: 100px; }
+  #datatablesForm .table .col-status {
+    border-left: 1px solid rgba(0, 0, 0, 0.1); }
+  #datatablesForm .table .col-bulkactions ~ td:not(.col-order) {
+    max-width: 100%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: block; }
+  #datatablesForm .table .col-bulkactions + td {
+    position: relative; }
+    #datatablesForm .table .col-bulkactions + td ~ td:not(.col-order) {
+      max-width: 100%; }
+      #datatablesForm .table .col-bulkactions + td ~ td:not(.col-order):before {
+        content: attr(data-col-name) ": ";
+        padding-right: 0.5rem;
+        font-weight: 500; }
+  #datatablesForm .table .col-bulkactions + th ~ th:not(.col-order) {
+    display: none; }
+
+  .table-contains-actions .col-bulkactions ~ td {
+    padding-bottom: .5rem; }
+
+  .table td > div.actions {
+    display: block;
+    position: relative; } }
+@media (max-width: 576px) {
+  #content-page > .col {
+    padding-left: 0.1rem;
+    padding-right: 0.1rem; }
+
+  .grid-10,
+  .grid-20,
+  .grid-30,
+  .grid-33,
+  .grid-40,
+  .grid-50,
+  .grid-60,
+  .grid-70,
+  .grid-80,
+  .grid-80 {
+    width: 100%; }
+
+  #display-filters .form-horizontal .form-label,
+  .form-horizontal .form-label {
+    float: none;
+    font-weight: 600;
+    padding-top: 0.5rem;
+    text-align: inherit;
+    width: 100%; }
+  #display-filters .form-horizontal .form-controls,
+  .form-horizontal .form-controls {
+    margin-left: inherit; }
+    #display-filters .form-horizontal .form-controls select,
+    .form-horizontal .form-controls select {
+      width: 100%; }
+    #display-filters .form-horizontal .form-controls > input:not([type="checkbox"]):not([type="radio"]):not([type="submit"]),
+    .form-horizontal .form-controls > input:not([type="checkbox"]):not([type="radio"]):not([type="submit"]) {
+      width: 100%; }
+    #display-filters .form-horizontal .form-controls .input-small,
+    #display-filters .form-horizontal .form-controls .input-medium,
+    #display-filters .form-horizontal .form-controls .input-large,
+    #display-filters .form-horizontal .form-controls .xlarge,
+    #display-filters .form-horizontal .form-controls .input-text,
+    #display-filters .form-horizontal .form-controls .input-password,
+    .form-horizontal .form-controls .input-small,
+    .form-horizontal .form-controls .input-medium,
+    .form-horizontal .form-controls .input-large,
+    .form-horizontal .form-controls .xlarge,
+    .form-horizontal .form-controls .input-text,
+    .form-horizontal .form-controls .input-password {
+      width: 100%; }
+  #display-filters .form-horizontal .form-actions,
+  .form-horizontal .form-actions {
+    padding: 1rem 1rem; }
+
+  .select-box-medium select,
+  .select-box-input select,
+  .select-box-big select {
+    width: 100%; }
+
+  .form-vertical .form-actions {
+    padding: 1rem 1rem; }
+
+  #upload-plugins td,
+  #email-templates td {
+    display: block; }
+    #upload-plugins td:empty,
+    #email-templates td:empty {
+      display: none; }
+    #upload-plugins td:first-child,
+    #email-templates td:first-child {
+      font-weight: 600; }
+  #upload-plugins th ~ th,
+  #email-templates th ~ th {
+    display: none; } }
 
 /*# sourceMappingURL=main.css.map */
