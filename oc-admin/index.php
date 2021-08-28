@@ -35,11 +35,11 @@ if (file_exists(ABS_PATH . '.maintenance')) {
 }
 
 // register admin scripts
-osc_register_script('admin-osc', osc_current_admin_theme_js_url('osc.js'), 'jquery');
-osc_register_script('admin-ui-osc', osc_current_admin_theme_js_url('ui-osc.js'), 'jquery-ui');
-osc_register_script('admin-location', osc_current_admin_theme_js_url('location.min.js'), 'bootstrap5');
-osc_register_script('bootstrap5', osc_assets_url('bootstrap/bootstrap.min.js'));
-osc_register_script('sortablejs', osc_assets_url('sortablejs/Sortable.min.js'));
+osc_register_script('admin-osc', osc_current_admin_theme_js_url('osc.js?v='.OSCLASS_VERSION), 'jquery');
+osc_register_script('admin-ui-osc', osc_current_admin_theme_js_url('ui-osc.js?v='.OSCLASS_VERSION), 'jquery-ui');
+osc_register_script('admin-location', osc_current_admin_theme_js_url('location.min.js?v='.OSCLASS_VERSION), 'bootstrap5');
+osc_register_script('bootstrap5', osc_assets_url('bootstrap/bootstrap.min.js?v='.OSCLASS_VERSION));
+osc_register_script('sortablejs', osc_assets_url('sortablejs/Sortable.min.js?v='.OSCLASS_VERSION));
 // enqueue scripts
 osc_enqueue_script('bootstrap5');
 osc_enqueue_script('admin-osc');
@@ -48,9 +48,9 @@ osc_enqueue_script('admin-ui-osc');
 osc_add_hook('admin_footer', array('FieldForm', 'i18n_datePicker'));
 
 // register css styles
-osc_register_style('jquery-ui', osc_assets_url('jquery-ui/jquery-ui.min.css'));
-osc_register_style('admin-css', osc_current_admin_theme_styles_url('main.css'));
-osc_register_style('bootstrap-icons', osc_assets_url('bootstrap-icons/bootstrap-icons.css'));
+osc_register_style('jquery-ui', osc_assets_url('jquery-ui/jquery-ui.min.css?v='.OSCLASS_VERSION));
+osc_register_style('admin-css', osc_current_admin_theme_styles_url('main.css?v='.OSCLASS_VERSION));
+osc_register_style('bootstrap-icons', osc_assets_url('bootstrap-icons/bootstrap-icons.css?v='.OSCLASS_VERSION));
 
 // enqueue css styles
 osc_enqueue_style('admin-css');
