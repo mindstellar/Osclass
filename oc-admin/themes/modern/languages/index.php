@@ -126,11 +126,19 @@ osc_current_admin_theme_path('parts/header.php');
                             <?php foreach ($array as $key => $value) { ?>
                                 <td <?php if ($key === 0) {
                                     echo 'class="col-bulkactions"';
-                                } elseif ($key === 2) {
-                                    echo 'class="col-short-name"';
+                                } elseif($key === 1) {
+                                    echo 'data-col-name="'.__("Name").'"';
+                                }
+                                 elseif ($key === 2) {
+                                    echo 'class="col-short-name" data-col-name="'.__("Short name").'"';
                                 } elseif ($key === 3) {
-                                    echo 'class="col-description"';
-                                } ?>><?php echo $value; ?></td>
+                                    echo 'class="col-description" data-col-name="'. __("Description").'"';
+                                } elseif ($key === 4) {
+                                    echo 'class="col-enabled-website" data-col-name="'.__("Enabled (website)").'"';
+                                } elseif ($key === 5) {
+                                    echo 'class="col-enabled-backend" data-col-name="'.__("Enabled (oc-admin)").'"';
+                                } ?>>
+                                <?php echo $value; ?></td>
                             <?php } ?>
                         </tr>
                     <?php } ?>
@@ -231,22 +239,28 @@ osc_current_admin_theme_path('parts/header.php');
         var importSelect;
         (new bootstrap.Modal(document.getElementById("languageModal"))).toggle()
         importSelect = document.querySelector("#languageModal select");
-
+        
         if (languageOptionsSet === false) {
             fetch(localeImportUrl).then(response => {
                 if (response.ok) {
                     return response.json();
                 }
             }).then(locales => {
-                var localeCodes = Object.keys(locales);
-                for (let i = 0, l = localeCodes.length; i < l; i++) {
-                    if (!aExistingLanguages.includes(localeCodes[i])) {
-                        var opt = document.createElement("option");
-                        opt.value = localeCodes[i];
-                        opt.textContent = locales[localeCodes[i]];
-                        importSelect.appendChild(opt);
-                    }
-                }
+                var localeCodes;
+                var opt;
+                // convert to array
+                locales = Object.keys(locales).map(key => [key,locales[key]]);
+                // remove already imported languages
+                locales = locales.filter(locale => !aExistingLanguages.includes(locale[0]));
+                // sort by language name
+                locales.sort((a, b) => a[1].localeCompare(b[1]));
+                // add to select options
+                locales.forEach(locale => {
+                    opt = document.createElement('option');
+                    opt.value = locale[0];
+                    opt.innerHTML = locale[1];
+                    importSelect.appendChild(opt);
+                });
                 languageOptionsSet = true;
             }).catch(error => {
                 document.querySelector("#languageModal .text-danger").textContent = '<?php osc_esc_js(__('No official languages available.')); ?> ' + error;
