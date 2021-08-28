@@ -50,7 +50,7 @@ function customPageHeader()
         </a>
         <a href="<?php echo osc_admin_base_url(true); ?>?page=languages&amp;action=add"
            class="ms-1 text-success float-end" data-bs-toggle="tooltip" data-bs-placement="bottom" title="<?php _e('Upload language');
-        ?>"><i class="bi bi-plus-circle-fill"></i></a>
+            ?>"><i class="bi bi-plus-circle-fill"></i></a>
     </h1>
     <?php
 }
