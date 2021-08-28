@@ -33,8 +33,8 @@ osc_enqueue_script('jquery-validate');
 function addHelp()
 {
     echo '<p>'
-         . __('Manage all the listings on your site: edit, delete or block the latest listings published. You can also filter by several parameters: user, region, city, etc.')
-         . '</p>';
+        . __('Manage all the listings on your site: edit, delete or block the latest listings published. You can also filter by several parameters: user, region, city, etc.')
+        . '</p>';
 }
 
 
@@ -42,17 +42,13 @@ osc_add_hook('help_box', 'addHelp');
 
 function customPageHeader()
 {
-    ?>
+?>
     <h1><?php _e('Listings'); ?>
-        <a href="<?php echo osc_admin_base_url(true); ?>?page=items&amp;action=settings"
-           class="ms-1 text-dark float-end" title="<?php _e('Settings'); ?>"><i class="bi bi-gear-fill"></i></a>
-        <a class="ms-1 bi bi-question-circle-fill float-right" data-bs-target="#help-box" data-bs-toggle="collapse"
-           href="#help-box"></a>
-        <a href="<?php echo osc_admin_base_url(true) . '?page=items&action=post'; ?>"
-           class="ms-1 text-success float-end" data-bs-toggle="tooltip" data-bs-placement="bottom" title="<?php _e('Add listing'); ?>"><i
-                    class="bi bi-plus-circle-fill"></i></a>
+        <a href="<?php echo osc_admin_base_url(true); ?>?page=items&amp;action=settings" class="ms-1 text-dark float-end" title="<?php _e('Settings'); ?>"><i class="bi bi-gear-fill"></i></a>
+        <a class="ms-1 bi bi-question-circle-fill float-right" data-bs-target="#help-box" data-bs-toggle="collapse" href="#help-box"></a>
+        <a href="<?php echo osc_admin_base_url(true) . '?page=items&action=post'; ?>" class="ms-1 text-success float-end" data-bs-toggle="tooltip" data-bs-placement="bottom" title="<?php _e('Add listing'); ?>"><i class="bi bi-plus-circle-fill"></i></a>
     </h1>
-    <?php
+<?php
 }
 
 
@@ -76,19 +72,19 @@ function customHead()
     ItemForm::location_javascript_new('admin'); ?>
     <script type="text/javascript">
         // autocomplete users
-        $(document).ready(function () {
+        $(document).ready(function() {
 
             $('input[name="user"]').attr("autocomplete", "off");
             $('#user,#fUser').autocomplete({
                 source: "<?php echo osc_admin_base_url(true); ?>?page=ajax&action=userajax",
                 minLength: 0,
-                select: function (event, ui) {
+                select: function(event, ui) {
                     if (ui.item.id == '')
                         return false;
                     $('#userId').val(ui.item.id);
                     $('#fUserId').val(ui.item.id);
                 },
-                search: function () {
+                search: function() {
                     $('#userId').val('');
                     $('#fUserId').val('');
                 }
@@ -97,9 +93,9 @@ function customHead()
             $('.ui-autocomplete').css('zIndex', 10000);
 
             // check_all bulkactions
-            $("#check_all").change(function () {
+            $("#check_all").change(function() {
                 var isChecked = $(this).prop("checked");
-                $('.col-bulkactions input').each(function () {
+                $('.col-bulkactions input').each(function() {
                     if (isChecked == 1) {
                         this.checked = true;
                     } else {
@@ -109,7 +105,7 @@ function customHead()
             });
         });
     </script>
-    <?php
+<?php
 }
 
 
@@ -136,31 +132,28 @@ osc_current_admin_theme_path('parts/header.php'); ?>
             <form method="get" action="<?php echo osc_admin_base_url(true); ?>" class="inline nocsrf">
                 <?php foreach (Params::getParamsAsArray('get') as $key => $value) { ?>
                     <?php if ($key !== 'iDisplayLength') { ?>
-                        <input type="hidden" name="<?php echo osc_esc_html($key); ?>"
-                               value="<?php echo osc_esc_html($value); ?>"/>
-                    <?php }
+                        <input type="hidden" name="<?php echo osc_esc_html($key); ?>" value="<?php echo osc_esc_html($value); ?>" />
+                <?php }
                 } ?>
-                <select name="iDisplayLength" class="form-select form-select-sm"
-                        onchange="this.form.submit();">
+                <select name="iDisplayLength" class="form-select form-select-sm" onchange="this.form.submit();">
                     <option value="10"><?php printf(__('%d Listings'), 10); ?></option>
                     <option value="25" <?php if (Params::getParam('iDisplayLength') == 25) {
-                        echo 'selected';
-                                       } ?> ><?php printf(__('%d Listings'), 25); ?></option>
+                                            echo 'selected';
+                                        } ?>><?php printf(__('%d Listings'), 25); ?></option>
                     <option value="50" <?php if (Params::getParam('iDisplayLength') == 50) {
-                        echo 'selected';
-                                       } ?> ><?php printf(__('%d Listings'), 50); ?></option>
+                                            echo 'selected';
+                                        } ?>><?php printf(__('%d Listings'), 50); ?></option>
                     <option value="100" <?php if (Params::getParam('iDisplayLength') == 100) {
-                        echo 'selected';
-                                        } ?> ><?php printf(__('%d Listings'), 100); ?></option>
+                                            echo 'selected';
+                                        } ?>><?php printf(__('%d Listings'), 100); ?></option>
                 </select>
             </form>
             <form method="get" action="<?php echo osc_admin_base_url(true); ?>" id="shortcut-filters">
-                <input type="hidden" name="page" value="items"/>
-                <input type="hidden" name="iDisplayLength" value="<?php echo $iDisplayLength; ?>"/>
+                <input type="hidden" name="page" value="items" />
+                <input type="hidden" name="iDisplayLength" value="<?php echo $iDisplayLength; ?>" />
                 <div class="input-group-sm input-group">
                     <?php if ($withFilters) { ?>
-                        <a id="btn-hide-filters" class="btn btn-dim"
-                           href="<?php echo osc_admin_base_url(true) . '?page=items'; ?>"><?php _e('Reset filters'); ?></a>
+                        <a id="btn-hide-filters" class="btn btn-dim" href="<?php echo osc_admin_base_url(true) . '?page=items'; ?>"><?php _e('Reset filters'); ?></a>
                     <?php } ?>
                     <?php $opt = 'oPattern';
                     if (Params::getParam('shortcut-filter') != '') {
@@ -180,36 +173,24 @@ osc_current_admin_theme_path('parts/header.php'); ?>
                     } ?>
                     <select id="filter-select" name="shortcut-filter" class="form-select form-select-sm">
                         <option value="oPattern" <?php if ($opt === 'oPattern') {
-                            echo 'selected="selected"';
-                                                 } ?>><?php _e('Pattern'); ?></option>
+                                                        echo 'selected="selected"';
+                                                    } ?>><?php _e('Pattern'); ?></option>
                         <option value="oUser" <?php if ($opt === 'oUser') {
-                            echo 'selected="selected"';
-                                              } ?>><?php _e('Email'); ?></option>
+                                                    echo 'selected="selected"';
+                                                } ?>><?php _e('Email'); ?></option>
                         <option value="oItemId" <?php if ($opt === 'oItemId') {
-                            echo 'selected="selected"';
+                                                    echo 'selected="selected"';
                                                 } ?>><?php _e('Item ID'); ?></option>
                     </select>
-                    <input
-                            id="fPattern" type="text" name="sSearch" placeholder="<?php _e('Keywords') ?>"
-                            value="<?php echo osc_esc_html(Params::getParam('sSearch')); ?>"
-                            class="form-control w-25 <?php echo $classPattern; ?>"/>
-                    <input
-                            id="fUser" name="user" type="text" placeholder="<?php _e('User Email') ?>"
-                            class="fUser form-control w-25 <?php echo $classUser; ?>"
-                            value="<?php echo osc_esc_html(Params::getParam('user')); ?>"/>
-                    <input
-                            id="fUserId" name="userId" type="hidden" placeholder="<?php _e('User ID') ?>" class="form-control w-25"
-                            value="<?php echo osc_esc_html(Params::getParam('userId')); ?>"/>
-                    <input
-                            id="fItemId" type="text" name="itemId" placeholder="<?php _e('Item ID') ?>"
-                            value="<?php echo osc_esc_html(Params::getParam('itemId')); ?>"
-                            class="form-control w-25 <?php echo $classItemId; ?>"/>
+                    <input id="fPattern" type="text" name="sSearch" placeholder="<?php _e('Keywords') ?>" value="<?php echo osc_esc_html(Params::getParam('sSearch')); ?>" class="form-control w-25 <?php echo $classPattern; ?>" />
+                    <input id="fUser" name="user" type="text" placeholder="<?php _e('User Email') ?>" class="fUser form-control w-25 <?php echo $classUser; ?>" value="<?php echo osc_esc_html(Params::getParam('user')); ?>" />
+                    <input id="fUserId" name="userId" type="hidden" placeholder="<?php _e('User ID') ?>" class="form-control w-25" value="<?php echo osc_esc_html(Params::getParam('userId')); ?>" />
+                    <input id="fItemId" type="text" name="itemId" placeholder="<?php _e('Item ID') ?>" value="<?php echo osc_esc_html(Params::getParam('itemId')); ?>" class="form-control w-25 <?php echo $classItemId; ?>" />
 
                     <a id="btn-display-filters" data-bs-toggle="modal" data-bs-target="#display-filters" href="#" class="btn btn-dim <?php
-                    if ($withFilters
-                    ) {
-                        echo 'btn-red';
-                    } ?>" title="<?php _e('Show filters'); ?>"><i class="bi bi-filter"></i>
+                                                                                                                                        if ($withFilters) {
+                                                                                                                                            echo 'btn-red';
+                                                                                                                                        } ?>" title="<?php _e('Show filters'); ?>"><i class="bi bi-filter"></i>
                     </a>
                     <button type="submit" class="btn btn-primary" title="<?php echo osc_esc_html(__('Find')); ?>">
                         <i class="bi bi-search"></i>
@@ -218,47 +199,52 @@ osc_current_admin_theme_path('parts/header.php'); ?>
             </form>
         </div>
     </div>
-    <form class="" id="datatablesForm" action="<?php echo osc_admin_base_url(true); ?>" method="post"
-          data-dialog-open="false">
-        <input type="hidden" name="page" value="items"/>
-        <input type="hidden" name="action" value="bulk_actions"/>
+    <form class="" id="datatablesForm" action="<?php echo osc_admin_base_url(true); ?>" method="post" data-dialog-open="false">
+        <input type="hidden" name="page" value="items" />
+        <input type="hidden" name="action" value="bulk_actions" />
         <div id="bulk-actions">
             <div class="input-group input-group-sm">
-                <?php osc_print_bulk_actions('bulk_actions', 'bulk_actions', __get('bulk_options'),
-                                             'select-box-extra'); ?>
-                <input type="submit" id="bulk_apply" class="btn btn-primary" value="<?php echo osc_esc_html(__('Apply')); ?>"/>
+                <?php osc_print_bulk_actions(
+                    'bulk_actions',
+                    'bulk_actions',
+                    __get('bulk_options'),
+                    'select-box-extra'
+                ); ?>
+                <input type="submit" id="bulk_apply" class="btn btn-primary" value="<?php echo osc_esc_html(__('Apply')); ?>" />
             </div>
         </div>
         <div class="table-contains-actions shadow-sm">
             <table class="table" cellpadding="0" cellspacing="0">
                 <thead>
-                <tr>
-                    <?php foreach ($columns as $k => $v) {
-                        if ($direction === 'desc') {
-                            echo '<th class="col-' . $k . ' ' . ($sort === $k ? ('sorting_desc') : '') . '">' . $v . '</th>';
-                        } else {
-                            echo '<th class="col-' . $k . ' ' . ($sort === $k ? ('sorting_asc') : '') . '">' . $v . '</th>';
-                        }
-                    } ?>
-                </tr>
+                    <tr>
+                        <?php foreach ($columns as $k => $v) {
+                            if ($direction === 'desc') {
+                                echo '<th class="col-' . $k . ' ' . ($sort === $k ? ('sorting_desc') : '') . '">' . $v . '</th>';
+                            } else {
+                                echo '<th class="col-' . $k . ' ' . ($sort === $k ? ('sorting_asc') : '') . '">' . $v . '</th>';
+                            }
+                        } ?>
+                    </tr>
                 </thead>
                 <tbody>
-                <?php if (count($rows) > 0) { ?>
-                    <?php foreach ($rows as $key => $row) { ?>
-                        <tr class="<?php echo implode(' ',
-                                                      osc_apply_filter('datatable_listing_class', array(), $aRawRows[$key], $row)); ?>">
-                            <?php foreach ($row as $k => $v) { ?>
-                                <td class="col-<?php echo $k; ?>"><?php echo $v; ?></td>
-                            <?php } ?>
+                    <?php if (count($rows) > 0) { ?>
+                        <?php foreach ($rows as $key => $row) { ?>
+                            <tr class="<?php echo implode(
+                                            ' ',
+                                            osc_apply_filter('datatable_listing_class', array(), $aRawRows[$key], $row)
+                                        ); ?>">
+                                <?php foreach ($row as $k => $v) { ?>
+                                    <td class="col-<?php echo $k; ?>" data-col-name=<?php echo ucfirst($k); ?>><?php echo $v; ?></td>
+                                <?php } ?>
+                            </tr>
+                        <?php } ?>
+                    <?php } else { ?>
+                        <tr>
+                            <td colspan="<?php echo count($columns); ?>" class="text-center">
+                                <p><?php _e('No data available in table'); ?></p>
+                            </td>
                         </tr>
                     <?php } ?>
-                <?php } else { ?>
-                    <tr>
-                        <td colspan="<?php echo count($columns); ?>" class="text-center">
-                            <p><?php _e('No data available in table'); ?></p>
-                        </td>
-                    </tr>
-                <?php } ?>
                 </tbody>
             </table>
             <div id="table-row-actions"></div> <!-- used for table actions -->
@@ -270,31 +256,30 @@ function showingResults()
 {
     $aData = __get('aData');
     echo '<ul class="showing-results"><li><span>' . osc_pagination_showing((Params::getParam('iPage') - 1)
-                                                                           * $aData['iDisplayLength'] + 1,
-                                                                           ((Params::getParam('iPage') - 1) * $aData['iDisplayLength'])
-                                                                           + count($aData['aRows']),
-                                                                           $aData['iTotalDisplayRecords'], $aData['iTotalRecords'])
-         . '</span></li></ul>';
+            * $aData['iDisplayLength'] + 1,
+        ((Params::getParam('iPage') - 1) * $aData['iDisplayLength'])
+            + count($aData['aRows']),
+        $aData['iTotalDisplayRecords'],
+        $aData['iTotalRecords']
+    )
+        . '</span></li></ul>';
 }
 
 
 osc_add_hook('before_show_pagination_admin', 'showingResults');
 osc_show_pagination_admin($aData);
 ?>
-<form id="display-filters" method="get" action="<?php echo osc_admin_base_url(true); ?>"
-      class="modal fade nocsrf"
-      data-bs-backdrop="static"
-      data-bs-keyboard="false" tabindex="-1">
+<form id="display-filters" method="get" action="<?php echo osc_admin_base_url(true); ?>" class="modal fade nocsrf" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1">
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title" id="staticBackdropLabel"><?php _e('Filters') ?></h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-            <input type="hidden" name="page" value="items"/>
-            <input type="hidden" name="iDisplayLength" value="<?php echo $iDisplayLength; ?>"/>
-            <input type="hidden" name="sort" value="<?php echo $sort; ?>"/>
-            <input type="hidden" name="direction" value="<?php echo $direction; ?>"/>
+            <input type="hidden" name="page" value="items" />
+            <input type="hidden" name="iDisplayLength" value="<?php echo $iDisplayLength; ?>" />
+            <input type="hidden" name="sort" value="<?php echo $sort; ?>" />
+            <input type="hidden" name="direction" value="<?php echo $direction; ?>" />
             <div class="form-horizontal modal-body">
                 <div class="row">
                     <div class="col-lg-6">
@@ -304,8 +289,7 @@ osc_show_pagination_admin($aData);
                                     <?php _e('Pattern'); ?>
                                 </div>
                                 <div class="form-controls">
-                                    <input class="form-control" type="text" name="sSearch" id="sSearch"
-                                           value="<?php echo osc_esc_html(Params::getParam('sSearch')); ?>"/>
+                                    <input class="form-control" type="text" name="sSearch" id="sSearch" value="<?php echo osc_esc_html(Params::getParam('sSearch')); ?>" />
                                 </div>
                             </div>
                             <div class="form-row">
@@ -349,10 +333,8 @@ osc_show_pagination_admin($aData);
                                     <?php _e('Email'); ?>
                                 </div>
                                 <div class="form-controls">
-                                    <input class="form-control" id="user" name="user" type="text"
-                                           value="<?php echo osc_esc_html(Params::getParam('user')); ?>"/>
-                                    <input id="userId" name="userId" type="hidden"
-                                           value="<?php echo osc_esc_html(Params::getParam('userId')); ?>"/>
+                                    <input class="form-control" id="user" name="user" type="text" value="<?php echo osc_esc_html(Params::getParam('user')); ?>" />
+                                    <input id="userId" name="userId" type="hidden" value="<?php echo osc_esc_html(Params::getParam('userId')); ?>" />
                                 </div>
                             </div>
                             <div class="form-row">
@@ -361,12 +343,12 @@ osc_show_pagination_admin($aData);
                                 </div>
                                 <div class="form-controls">
                                     <select class="form-select" id="b_premium" name="b_premium">
-                                        <option value="" <?php echo((Params::getParam('b_premium') == '')
-                                            ? 'selected="selected"' : '') ?>><?php _e('Choose an option'); ?></option>
-                                        <option value="1" <?php echo((Params::getParam('b_premium') == '1')
-                                            ? 'selected="selected"' : '') ?>><?php _e('ON'); ?></option>
-                                        <option value="0" <?php echo((Params::getParam('b_premium') == '0')
-                                            ? 'selected="selected"' : '') ?>><?php _e('OFF'); ?></option>
+                                        <option value="" <?php echo ((Params::getParam('b_premium') == '')
+                                                                ? 'selected="selected"' : '') ?>><?php _e('Choose an option'); ?></option>
+                                        <option value="1" <?php echo ((Params::getParam('b_premium') == '1')
+                                                                ? 'selected="selected"' : '') ?>><?php _e('ON'); ?></option>
+                                        <option value="0" <?php echo ((Params::getParam('b_premium') == '0')
+                                                                ? 'selected="selected"' : '') ?>><?php _e('OFF'); ?></option>
                                     </select>
                                 </div>
                             </div>
@@ -376,12 +358,12 @@ osc_show_pagination_admin($aData);
                                 </div>
                                 <div class="form-controls">
                                     <select class="form-select" id="b_active" name="b_active">
-                                        <option value="" <?php echo((Params::getParam('b_active') == '') ? 'selected="selected"'
-                                            : '') ?>><?php _e('Choose an option'); ?></option>
-                                        <option value="1" <?php echo((Params::getParam('b_active') == '1')
-                                            ? 'selected="selected"' : '') ?>><?php _e('ON'); ?></option>
-                                        <option value="0" <?php echo((Params::getParam('b_active') == '0')
-                                            ? 'selected="selected"' : '') ?>><?php _e('OFF'); ?></option>
+                                        <option value="" <?php echo ((Params::getParam('b_active') == '') ? 'selected="selected"'
+                                                                : '') ?>><?php _e('Choose an option'); ?></option>
+                                        <option value="1" <?php echo ((Params::getParam('b_active') == '1')
+                                                                ? 'selected="selected"' : '') ?>><?php _e('ON'); ?></option>
+                                        <option value="0" <?php echo ((Params::getParam('b_active') == '0')
+                                                                ? 'selected="selected"' : '') ?>><?php _e('OFF'); ?></option>
                                     </select>
                                 </div>
                             </div>
@@ -391,12 +373,12 @@ osc_show_pagination_admin($aData);
                                 </div>
                                 <div class="form-controls">
                                     <select class="form-select" id="b_enabled" name="b_enabled">
-                                        <option value="" <?php echo((Params::getParam('b_enabled') == '')
-                                            ? 'selected="selected"' : '') ?>><?php _e('Choose an option'); ?></option>
-                                        <option value="0" <?php echo((Params::getParam('b_enabled') == '0')
-                                            ? 'selected="selected"' : '') ?>><?php _e('ON'); ?></option>
-                                        <option value="1" <?php echo((Params::getParam('b_enabled') == '1')
-                                            ? 'selected="selected"' : '') ?>><?php _e('OFF'); ?></option>
+                                        <option value="" <?php echo ((Params::getParam('b_enabled') == '')
+                                                                ? 'selected="selected"' : '') ?>><?php _e('Choose an option'); ?></option>
+                                        <option value="0" <?php echo ((Params::getParam('b_enabled') == '0')
+                                                                ? 'selected="selected"' : '') ?>><?php _e('ON'); ?></option>
+                                        <option value="1" <?php echo ((Params::getParam('b_enabled') == '1')
+                                                                ? 'selected="selected"' : '') ?>><?php _e('OFF'); ?></option>
                                     </select>
                                 </div>
                             </div>
@@ -406,12 +388,12 @@ osc_show_pagination_admin($aData);
                                 </div>
                                 <div class="form-controls">
                                     <select class="form-select" id="b_spam" name="b_spam">
-                                        <option value="" <?php echo((Params::getParam('b_spam') == '') ? 'selected="selected"'
-                                            : '') ?>><?php _e('Choose an option'); ?></option>
-                                        <option value="1" <?php echo((Params::getParam('b_spam') == '1') ? 'selected="selected"'
-                                            : '') ?>><?php _e('ON'); ?></option>
-                                        <option value="0" <?php echo((Params::getParam('b_spam') == '0') ? 'selected="selected"'
-                                            : '') ?>><?php _e('OFF'); ?></option>
+                                        <option value="" <?php echo ((Params::getParam('b_spam') == '') ? 'selected="selected"'
+                                                                : '') ?>><?php _e('Choose an option'); ?></option>
+                                        <option value="1" <?php echo ((Params::getParam('b_spam') == '1') ? 'selected="selected"'
+                                                                : '') ?>><?php _e('ON'); ?></option>
+                                        <option value="0" <?php echo ((Params::getParam('b_spam') == '0') ? 'selected="selected"'
+                                                                : '') ?>><?php _e('OFF'); ?></option>
                                     </select>
                                 </div>
                             </div>
@@ -421,19 +403,16 @@ osc_show_pagination_admin($aData);
                 </div>
             </div>
             <div class="modal-footer">
-                <input id="show-filters" type="submit" value="<?php echo osc_esc_html(__('Apply filters')); ?>"
-                       class="btn btn-success btn-sm"/>
-                <a class="btn btn-warning btn-sm"
-                   href="<?php echo osc_admin_base_url(true) . '?page=items'; ?>"><?php _e('Reset filters'); ?></a>
+                <input id="show-filters" type="submit" value="<?php echo osc_esc_html(__('Apply filters')); ?>" class="btn btn-success btn-sm" />
+                <a class="btn btn-warning btn-sm" href="<?php echo osc_admin_base_url(true) . '?page=items'; ?>"><?php _e('Reset filters'); ?></a>
             </div>
         </div>
     </div>
 </form>
-<form id="itemDeleteModal" method="get" action="<?php echo osc_admin_base_url(true); ?>"
-      class="modal fade static">
-    <input type="hidden" name="page" value="items"/>
-    <input type="hidden" name="action" value="delete"/>
-    <input type="hidden" name="id[]" value=""/>
+<form id="itemDeleteModal" method="get" action="<?php echo osc_admin_base_url(true); ?>" class="modal fade static">
+    <input type="hidden" name="page" value="items" />
+    <input type="hidden" name="action" value="delete" />
+    <input type="hidden" name="id[]" value="" />
     <div class="modal-dialog modal-sm">
         <div class="modal-content">
             <div class="modal-header">
@@ -466,22 +445,21 @@ osc_show_pagination_admin($aData);
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-sm btn-secondary" data-bs-dismiss="modal"><?php _e('Cancel'); ?></button>
-                <button id="bulkActionsSubmit" onclick="bulkActionsSubmit()"
-                        class="btn btn-sm btn-red"><?php echo osc_esc_html(__('Delete')); ?></button>
+                <button id="bulkActionsSubmit" onclick="bulkActionsSubmit()" class="btn btn-sm btn-red"><?php echo osc_esc_html(__('Delete')); ?></button>
             </div>
         </div>
     </div>
 </div>
 <script>
     var filterSelect = document.getElementById("filter-select")
-    filterSelect.onchange = function () {
+    filterSelect.onchange = function() {
         let selectedOption = this.options[this.selectedIndex].value
         let inputIdsArr = ['ItemId', 'User', 'Pattern']
         for (let i = 0; i < inputIdsArr.length; i++) {
-            if ('o'+ inputIdsArr[i] === selectedOption) {
-                document.getElementById("f"+ inputIdsArr[i]).classList.remove("hide");
+            if ('o' + inputIdsArr[i] === selectedOption) {
+                document.getElementById("f" + inputIdsArr[i]).classList.remove("hide");
             } else {
-                document.getElementById("f"+ inputIdsArr[i]).classList.add("hide");
+                document.getElementById("f" + inputIdsArr[i]).classList.add("hide");
             }
         }
     }
@@ -507,15 +485,15 @@ osc_show_pagination_admin($aData);
         document.getElementById("datatablesForm").submit()
     }
 
-    document.getElementById("datatablesForm").onsubmit = function () {
+    document.getElementById("datatablesForm").onsubmit = function() {
         toggleBulkActionsModal()
     };
     var bulkActionsModal = document.getElementById("bulkActionsModal")
-    bulkActionsModal.addEventListener("show.bs.modal", function () {
+    bulkActionsModal.addEventListener("show.bs.modal", function() {
         var bulkSelect = document.getElementById("bulk_actions")
         bulkActionsModal.querySelector('.modal-body p').textContent = bulkSelect.options[bulkSelect.selectedIndex]
             .getAttribute("data-dialog-content")
         bulkActionsModal.querySelector('#bulkActionsSubmit').textContent = bulkSelect.options[bulkSelect.selectedIndex].text;
-    })
+    });
 </script>
 <?php osc_current_admin_theme_path('parts/footer.php'); ?>
