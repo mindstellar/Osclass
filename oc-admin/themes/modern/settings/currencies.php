@@ -121,17 +121,17 @@ osc_current_admin_theme_path('parts/header.php'); ?>
                 <?php foreach ($aData as $array) { ?>
                     <tr>
                         <?php foreach ($array as $key => $value) { ?>
-                            <td <?php if ($key == 0) { 
+                            <td <?php if ($key == 0) {
                                 echo 'class="col-bulkactions"';
-                            } elseif($key === 1) { 
-                                echo 'data-col-name ='. __('Code');
-                            } elseif($key === 2) {
-                                echo 'data-col-name ='. __('Name');
-                            } elseif($key === 3) {
-                                echo 'data-col-name ='. __('Description');
-                            } else {
-                                 echo 'data-col-name="'.ucfirst($key).'"';
-                            } ?>>
+                                } elseif ($key === 1) {
+                                    echo 'data-col-name ='. __('Code');
+                                } elseif ($key === 2) {
+                                    echo 'data-col-name ='. __('Name');
+                                } elseif ($key === 3) {
+                                    echo 'data-col-name ='. __('Description');
+                                } else {
+                                    echo 'data-col-name="'.ucfirst($key).'"';
+                                } ?>>
                             <?php echo $value; ?>
                             </td>
                         <?php } ?>
