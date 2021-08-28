@@ -24,7 +24,7 @@
 
   tbody {
     .col-title {
-      font-size: ($font-size-base - .1);
+      font-size: ($font-size-base - 0.1);
       font-weight: 500;
 
       a {
@@ -33,12 +33,13 @@
     }
   }
 
-  th, td {
+  th,
+  td {
     border-bottom: 0;
     border-left: 0;
     border-top: 0;
     line-height: 1rem;
-    padding: .5rem;
+    padding: 0.5rem;
   }
 
   td {
@@ -51,13 +52,77 @@
     &.col-status-border {
       margin: 0;
       padding: 0;
-      width: .8rem;
+      width: 0.8rem;
     }
   }
 
   div {
     &.actions {
       display: none;
+      font-size: 0.85rem;
+      font-weight: normal;
+      padding-bottom: .85rem;
+      margin-top: 0.85rem;
+      position: absolute;
+
+      a {
+        color: #018be3;
+        text-decoration: none;
+
+        &:hover {
+          text-decoration: underline;
+        }
+      }
+
+      ul {
+        list-style: none;
+        margin: 4px 0 0;
+        padding: 0;
+      }
+
+      li {
+        float: left;
+        margin-right: 10px;
+
+        a {
+          float: left;
+        }
+
+        ul {
+          float: left;
+          margin: 0;
+        }
+      }
+
+      .show-more {
+        ul {
+          display: none;
+        }
+      }
+
+      .hover {
+        a {
+          display: none;
+        }
+
+        ul {
+          display: block;
+
+          a {
+            display: block;
+          }
+        }
+      }
+    }
+  }
+  .show-actions {
+    .actions {
+      display: block;
+    }
+    i.bi-three-dots:before {
+      opacity: 0;
+      transition: all 0.5s ease;
+      margin-left: -1.8rem;
     }
   }
 
@@ -65,7 +130,7 @@
     .status-#{$state} {
       .col-status {
         background: $bg-status;
-        color: color-contrast($bg-status)
+        color: color-contrast($bg-status);
       }
 
       .col-status-border {
@@ -91,9 +156,9 @@
 }
 
 .table-contains-actions {
-  tbody {
-    td {
-      padding-bottom: 25px;
+  .col-bulkactions {
+    &~ td {
+      padding-bottom: 2.5rem;
     }
   }
 }
@@ -114,63 +179,6 @@
 .collapsed-hover {
   td {
     padding-top: 31px;
-  }
-}
-
-#table-row-actions {
-  display: none;
-  font-size: .85rem;
-  margin-top: -25px;
-  padding: 0 6px;
-  position: absolute;
-
-  a {
-    color: #018BE3;
-    text-decoration: none;
-
-    &:hover {
-      text-decoration: underline;
-    }
-  }
-
-  ul {
-    list-style: none;
-    margin: 4px 0 0;
-    padding: 0;
-  }
-
-  li {
-    float: left;
-    margin-right: 10px;
-
-    a {
-      float: left;
-    }
-
-    ul {
-      float: left;
-      margin: 0;
-    }
-  }
-
-  .show-more {
-    ul {
-      display: none;
-    }
-  }
-
-  .hover {
-    a {
-      display: none;
-    }
-
-    ul {
-      display: block;
-
-      a {
-        display: block;
-      }
-    }
   }
 }
 
