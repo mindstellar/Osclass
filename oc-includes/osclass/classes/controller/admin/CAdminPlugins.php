@@ -422,11 +422,11 @@ class CAdminPlugins extends AdminSecBaseModel
                         . $pInfo['plugin_name'] . $sHelp . '<div>' . $sUpdate . '</div>';
                     $row[]   = $pInfo['description'] . '<br />' . __('Version:') . $pInfo['version'] . ' | ' . $sAuthor
                         . $sSiteUrl;
-                    $row[]   = ($sUpdate != '') ? $sUpdate : '&nbsp;';
-                    $row[]   = ($sConfigure != '') ? $sConfigure : '&nbsp;';
-                    $row[]   = ($sEnable != '') ? $sEnable : '&nbsp;';
-                    $row[]   = ($sInstall != '') ? $sInstall : '&nbsp;';
-                    $row[]   = ($sDelete != '') ? $sDelete : '&nbsp;';
+                    $row[]   = ($sUpdate != '') ? $sUpdate : '';
+                    $row[]   = ($sConfigure != '') ? $sConfigure : '';
+                    $row[]   = ($sEnable != '') ? $sEnable : '';
+                    $row[]   = ($sInstall != '') ? $sInstall : '';
+                    $row[]   = ($sDelete != '') ? $sDelete : '';
                     $aData[] = $row;
                     if (@$pInfo['plugin_update_uri'] != '') {
                         $aInfo[@$pInfo['plugin_update_uri']] = $pInfo;
