@@ -187,7 +187,7 @@ $withFilters = __get('withFilters');
                             <tr class="<?php echo implode(' ',
                                                           osc_apply_filter('datatable_user_class', array(), $aRawRows[$key], $row)); ?>">
                                 <?php foreach ($row as $k => $v) { ?>
-                                    <td class="col-<?php echo $k; ?>"><?php echo $v; ?></td>
+                                    <td class="col-<?php echo $k; ?>" data-col-name="<?php echo ucfirst($k); ?>"><?php echo $v; ?></td>
                                 <?php } ?>
                             </tr>
                         <?php } ?>
