@@ -104,9 +104,7 @@ $tab_index = 2;
             <?php foreach ($aData['aaData'] as $array) {?>
                 <tr class="plugin-<?php echo $array['plugin_status']; unset($array['plugin_status']) ?>">
                     <?php foreach ($array as $key => $value) { ?>
-                        <td>
-                            <?php echo $value; ?>
-                        </td>
+                        <td><?php echo $value; ?></td>
                     <?php } ?>
                 </tr>
             <?php } ?>
