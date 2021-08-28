@@ -1,44 +1,4 @@
 $(function () {
-    //Row actions
-    $('.table .actions').each(function () {
-        var $actions = $(this);
-        var $rowActions = $('#table-row-actions');
-        $(this).parents('tr').mouseenter(function (event) {
-            event.preventDefault();
-            var $containterOffset = $('.table-contains-actions').offset();
-            $thisOffset = $(this).offset();
-            var extra_offset = 0;
-            colStatusBorderOuterWidth = $('td.col-status-border').outerWidth();
-            if (!isNaN(colStatusBorderOuterWidth)) {
-                extra_offset += colStatusBorderOuterWidth;
-            }
-            colStatusOuterWidth = $('td.col-status').outerWidth();
-            if (!isNaN(colStatusOuterWidth)) {
-                extra_offset += colStatusOuterWidth;
-            }
-            colBulkactionsOuterWidth = $('td.col-bulkactions').outerWidth();
-            if (!isNaN(colBulkactionsOuterWidth)) {
-                extra_offset += colBulkactionsOuterWidth;
-            }
-            $rowActions.empty().append($actions.clone()).css({
-                width: $(this).width() - 13 - extra_offset,
-                top: ($thisOffset.top - $containterOffset.top) + $(this).height() - 1,
-                left: extra_offset
-            }).show();
-            $('tr').removeClass('collapsed-hover');
-            if ($(this).parents('div.table-contains-actions').hasClass('table-collapsed')) {
-                var thatRow = $(this);
-                thatRow.next().addClass('collapsed-hover');
-                $rowActions.mouseleave(function () {
-                    $('tr').removeClass('collapsed-hover');
-                });
-            }
-        });
-    });
-    $('.table-contains-actions').mouseleave(function () {
-        $('tr').removeClass('collapsed-hover');
-        $('#table-row-actions').hide();
-    });
     //Close help
     $('.flashmessage .ico-close').on('click', function () {
         $(this).parents('.flashmessage').hide();
