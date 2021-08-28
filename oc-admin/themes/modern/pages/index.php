@@ -164,7 +164,7 @@ osc_current_admin_theme_path('parts/header.php');
                         <?php foreach ($rows as $key => $row) { ?>
                             <tr>
                                 <?php foreach ($row as $k => $v) { ?>
-                                    <td class="col-<?php echo $k; ?>"><?php echo $v; ?></td>
+                                    <td class="col-<?php echo $k; ?>" data-col-name="<?php echo ucfirst($k); ?>"><?php echo $v; ?></td>
                                 <?php } ?>
                             </tr>
                         <?php } ?>
