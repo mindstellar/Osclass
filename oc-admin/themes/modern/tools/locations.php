@@ -61,6 +61,7 @@ function customHead()
                 success: function (data) {
                     if (data.status == 'done') {
                         $('span#percent').html(100);
+                        $('.spinner-border').remove();
                     } else {
                         var pending = data.pending;
                         var all = <?php echo osc_esc_js($all);?>;
@@ -74,8 +75,7 @@ function customHead()
 
         $(document).ready(function () {
             if (<?php echo $worktodo;?>>
-            0
-        )
+            0)
             {
                 ajax_();
             }
@@ -116,7 +116,7 @@ osc_current_admin_theme_path('parts/header.php'); ?>
         <h2 class="render-title"><?php _e('Locations stats'); ?></h2>
         <?php if ($worktodo > 0) { ?>
             <p>
-                <span id="percent">0</span> % <?php _e('Complete'); ?>
+                <span id="percent">0</span> % <?php _e('Complete'); ?> <span class="spinner-border spinner-border-sm text-primary"></span>
             </p>
         <?php } ?>
         <p>
