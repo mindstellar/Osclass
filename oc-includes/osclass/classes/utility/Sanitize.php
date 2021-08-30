@@ -126,50 +126,22 @@ class Sanitize
     }
 
     /**
-     * Sanitised Float
+     * Sanitised website URL
      *
      * @param mixed $value
-     * @param array $options
-     *
-     * @return float;
      */
-    public function float($value, ...$options)
+    public function websiteUrl($value)
     {
-        $options = array_merge([
-                                   'flags'   => FILTER_FLAG_ALLOW_FRACTION,
-                                   'options' => [
-                                       'min_range' => 0,
-                                       'max_range' => 65535,
-                                   ],
+        //remove invalid chars from url
+        $value = $this->url($value);
+        //remove possible xss attempts
+        $value = str_replace(['<', '>', '"', '\'', '%3C', '%3E', '%22', '%27'], '', $value);
+        //check if it has http:// or https://
+        if (strpos($value, 'http') !== 0) {
+            $value = 'http://' . $value;
+        }
 
-                               ],
-                               $options);
-
-        return filter_var($value, FILTER_SANITIZE_NUMBER_FLOAT, $options);
-    }
-
-    /**
-     * Sanitised Email
-     *
-     * @param mixed $value
-     * @param array $options
-     *
-     * @return string
-     */
-    public function email($value, ...$options)
-    {
-        $options = array_merge([
-                                   'flags'   => FILTER_FLAG_STRIP_LOW
-                                                | FILTER_FLAG_STRIP_HIGH,
-                                   'options' => [
-                                       'min_range' => 0,
-                                       'max_range' => 65535,
-                                   ],
-
-                               ],
-                               $options);
-
-        return filter_var($value, FILTER_SANITIZE_EMAIL, $options);
+        return $value;
     }
 
     /**
@@ -197,22 +169,54 @@ class Sanitize
     }
 
     /**
-     * Sanitised website URL
+     * Sanitised float
+     *
+     * @param       $value
+     * @param array $options
+     *
+     * @return bool|float
+     * @deprecated use Sanitize::float() instead will be removed in the next major 6.x release
+     */
+    public function filterFloat($value, ...$options)
+    {
+        return $this->float($value, ...$options);
+    }
+
+    /**
+     * Sanitised Float
      *
      * @param mixed $value
+     * @param array $options
+     *
+     * @return float;
      */
-    public function websiteUrl($value)
+    public function float($value, ...$options)
     {
-        //remove invalid chars from url
-        $value = $this->url($value);
-        //remove possible xss attempts
-        $value = str_replace(['<', '>', '"', '\'', '%3C', '%3E', '%22', '%27'], '', $value);
-        //check if it has http:// or https://
-        if (strpos($value, 'http') !== 0) {
-            $value = 'http://' . $value;
-        }
+        $options = array_merge([
+                                   'flags'   => FILTER_FLAG_ALLOW_FRACTION,
+                                   'options' => [
+                                       'min_range' => 0,
+                                       'max_range' => 65535,
+                                   ],
 
-        return $value;
+                               ],
+                               $options);
+
+        return filter_var($value, FILTER_SANITIZE_NUMBER_FLOAT, $options);
+    }
+
+    /**
+     * Sanitised encoded
+     *
+     * @param       $value
+     * @param array $options
+     *
+     * @return string
+     * @deprecated use Sanitize::encoded() instead will be removed in the next major 6.x release
+     */
+    public function filterEncoded($value, ...$options)
+    {
+        return $this->encoded($value, ...$options);
     }
 
     /**
@@ -240,48 +244,6 @@ class Sanitize
     }
 
     /**
-     * Add Slashes
-     *
-     * @param mixed $value
-     * @param array $options
-     *
-     * @return string
-     */
-    public function quotes($value)
-    {
-        return addslashes($value);
-    }
-
-
-    /**
-     * Sanitised float
-     *
-     * @param       $value
-     * @param array $options
-     *
-     * @return bool|float
-     * @deprecated use Sanitize::float() instead will be removed in the next major 6.x release
-     */
-    public function filterFloat($value, ...$options)
-    {
-        return $this->float($value, ...$options);
-    }
-
-    /**
-     * Sanitised encoded
-     *
-     * @param       $value
-     * @param array $options
-     *
-     * @return string
-     * @deprecated use Sanitize::encoded() instead will be removed in the next major 6.x release
-     */
-    public function filterEncoded($value, ...$options)
-    {
-        return $this->encoded($value, ...$options);
-    }
-
-    /**
      * Sanitised Email
      *
      * @param       $value
@@ -296,6 +258,30 @@ class Sanitize
     }
 
     /**
+     * Sanitised Email
+     *
+     * @param mixed $value
+     * @param array $options
+     *
+     * @return string
+     */
+    public function email($value, ...$options)
+    {
+        $options = array_merge([
+                                   'flags'   => FILTER_FLAG_STRIP_LOW
+                                                | FILTER_FLAG_STRIP_HIGH,
+                                   'options' => [
+                                       'min_range' => 0,
+                                       'max_range' => 65535,
+                                   ],
+
+                               ],
+                               $options);
+
+        return filter_var($value, FILTER_SANITIZE_EMAIL, $options);
+    }
+
+    /**
      * Sanitised Quotes
      *
      * @param       $value
@@ -307,6 +293,19 @@ class Sanitize
     public function filterQuotes($value, ...$options)
     {
         return $this->quotes($value, ...$options);
+    }
+
+    /**
+     * Add Slashes
+     *
+     * @param mixed $value
+     * @param array $options
+     *
+     * @return string
+     */
+    public function quotes($value)
+    {
+        return addslashes($value);
     }
 
     /**
