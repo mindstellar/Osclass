@@ -27,6 +27,8 @@
  *
  */
 
+use mindstellar\utility\Sanitize;
+
 /**
  * Class ItemActions
  */
@@ -35,6 +37,7 @@ class ItemActions
     public $is_admin;
     public $data;
     private $manager;
+    private $Sanitize;
 
     /**
      * ItemActions constructor.
@@ -45,6 +48,7 @@ class ItemActions
     {
         $this->is_admin = $is_admin;
         $this->manager  = Item::newInstance();
+        $this->Sanitize = (new Sanitize());
     }
 
     /**
@@ -164,7 +168,7 @@ class ItemActions
 
         $_meta = Field::newInstance()->findByCategory($aItem['catId']);
         $meta  = Params::getParam('meta');
-        $this->validateItemMetaField($_meta, $meta, $flash_error);
+        $this->handleMetaField($_meta, $meta, $flash_error);
 
         // hook pre add or edit
         // DEPRECATED: pre_item_post will be removed in 3.4
@@ -489,24 +493,135 @@ class ItemActions
      * @param        $k
      * @param        $v
      */
-    private function validateItemMetaField(array $_meta, &$meta, string &$flash_error)
+    private function handleMetaField(array $_meta, &$meta, string &$flash_error)
     {
         if (!empty($_meta) && is_array($meta)) {
             $valid_id = array_column($_meta, 'pk_i_id');
             foreach ($meta as $k => $v) {
                 if (!in_array($k, $valid_id, false)) {
                     unset($meta[$k]);
+                } else {
+                    $key = array_search($k, array_column($_meta, 'pk_i_id'), false);
+                    // Sanitize by type
+                    $meta[$k] = $this->sanitizeMetaField($_meta[$key]['e_type'], $v);
                 }
                 unset($k, $v);
             }
-            foreach ($_meta as $_m) {
-                if ($_m['b_required']) {
-                    if (!isset($meta[$_m['pk_i_id']]) || !$meta[$_m['pk_i_id']]) {
-                        $flash_error .= sprintf(_m('%s field is required.'), $_m['s_name']) . PHP_EOL;
+            list($meta, $flash_error) = $this->validateMetaFields($_meta, $meta, $flash_error);
+        }
+    }
+
+    /**
+     * @param       $e_type
+     * @param       $metaValue
+     *
+     * @return array
+     */
+    private function sanitizeMetaField($e_type, $metaValue)
+    {
+        switch ($e_type) {
+            case 'DATEINTERVAL':
+                if (!empty($metaValue)) {
+                    if ($metaValue['from']) {
+                        $metaValue['from'] = (int)$metaValue['from'];
+                    }
+                    if ($metaValue['to']) {
+                        $metaValue['to'] = (int)$metaValue['to'];
                     }
                 }
+                break;
+            case 'DATE':
+                if (!empty($metaValue)) {
+                    $metaValue = (int)$metaValue;
+                }
+                break;
+            case 'CHECKBOX':
+                $metaValue = (int)$metaValue;
+                break;
+            case 'URL':
+                $metaValue = $this->Sanitize->websiteUrl($metaValue);
+                break;
+            default:
+                // sanitize string safe for html
+                $metaValue = $this->Sanitize->html($metaValue);
+                break;
+
+        }
+
+        return $metaValue;
+    }
+
+    /**
+     * @param array  $_meta
+     * @param array  $meta
+     * @param string $flash_error
+     *
+     * @return array
+     */
+    private function validateMetaFields($_meta, $meta, $flash_error)
+    {
+        foreach ($_meta as $_m) {
+            $isMetaRequired = $_m['b_required'];
+            $isMetaValueSet = isset($meta[$_m['pk_i_id']]);
+            $metaValue      = $meta[$_m['pk_i_id']];
+            switch ($_m['e_type']) {
+                case 'DATEINTERVAL':
+                    if ($isMetaValueSet && $metaValue) {
+                        if ($metaValue['from'] && $metaValue['to']) {
+                            if (!is_numeric($metaValue['from']) || !is_numeric($metaValue['to'])) {
+                                $flash_error .= sprintf(_m('%s is invalid.'), $_m['s_name']) . PHP_EOL;
+                            }
+                        } elseif ($isMetaRequired) {
+                            $flash_error .= sprintf(_m('%s is required.'), $_m['s_name']) . PHP_EOL;
+                        }
+                    } elseif ($isMetaRequired) {
+                        $flash_error .= sprintf(_m('%s is required.'), $_m['s_name']) . PHP_EOL;
+                    }
+                    break;
+                case 'CHECKBOX':
+                case 'DATE':
+                    if ($isMetaValueSet && $metaValue > 0) {
+                        if (!is_numeric($metaValue)) {
+                            $flash_error .= sprintf(_m('%s is invalid.'), $_m['s_name']) . PHP_EOL;
+                        }
+                    } elseif ($isMetaRequired) {
+                        $flash_error .= sprintf(_m('%s is required.'), $_m['s_name']) . PHP_EOL;
+                    }
+                    break;
+                case 'RADIO':
+                case 'DROPDOWN':
+                    if ($isMetaValueSet && $metaValue) {
+                        // check value exist in options csv
+                        if (!in_array($metaValue, explode(',', $_m['s_options']), false)) {
+                            $flash_error .= sprintf(_m('%s is invalid.'), $_m['s_name']) . PHP_EOL;
+                        }
+                    } elseif ($isMetaRequired) {
+                        $flash_error .= sprintf(_m('%s is required.'), $_m['s_name']) . PHP_EOL;
+                    }
+                    break;
+                case 'URL':
+                    if ($isMetaValueSet && $metaValue) {
+                        // first validate using filter_var than osc_validate_url
+                        if (!filter_var($metaValue, FILTER_VALIDATE_URL)) {
+                            $flash_error .= sprintf(_m('%s is invalid.'), $_m['s_name']) . PHP_EOL;
+                        } elseif (!osc_validate_url($metaValue)) {
+                            $flash_error .= sprintf(_m('%s is invalid.'), $_m['s_name']) . PHP_EOL;
+                        }
+                    } elseif ($isMetaRequired) {
+                        $flash_error .= sprintf(_m('%s is required.'), $_m['s_name']) . PHP_EOL;
+                    }
+                    break;
+                case 'TEXTAREA':
+                case 'TEXT':
+                default:
+                    if ($isMetaRequired && (!$isMetaValueSet || !$metaValue)) {
+                        $flash_error .= sprintf(_m('%s is required.'), $_m['s_name']) . PHP_EOL;
+                    }
+                    break;
             }
         }
+
+        return array($meta, $flash_error);
     }
 
     /**
@@ -811,7 +926,7 @@ class ItemActions
 
         $_meta = Field::newInstance()->findByCategory($aItem['catId']);
         $meta  = Params::getParam('meta');
-        $this->validateItemMetaField($_meta, $meta, $flash_error);
+        $this->handleMetaField($_meta, $meta, $flash_error);
 
         // hook pre edit
         osc_run_hook('pre_item_edit', $aItem, $flash_error);
@@ -1142,7 +1257,7 @@ class ItemActions
             array('b_premium' => $value),
             array('pk_i_id' => $id)
         );
-        // updated corretcly
+        // updated correctly
         if ($result == 1) {
             if ($on) {
                 osc_run_hook('item_premium_on', $id);
@@ -1784,31 +1899,4 @@ class ItemActions
         $aItem      = osc_apply_filter('item_prepare_data', $aItem);
         $this->data = $aItem;
     }
-}
-
-if (osc_force_jpeg()) {
-    /**
-     * @param $content
-     *
-     * @return string
-     */
-    function osc_force_jpeg_extension($content)
-    {
-        return 'jpg';
-    }
-
-
-    /**
-     * @param $content
-     *
-     * @return string
-     */
-    function osc_force_jpeg_mime($content)
-    {
-        return 'image/jpeg';
-    }
-
-
-    osc_add_filter('upload_image_extension', 'osc_force_jpeg_extension');
-    osc_add_filter('upload_image_mime', 'osc_force_jpeg_mime');
 }

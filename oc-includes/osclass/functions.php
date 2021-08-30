@@ -906,3 +906,30 @@ function osc_meta_generator()
 
 
 osc_add_hook('header', 'osc_meta_generator');
+
+if (osc_force_jpeg()) {
+    /**
+     * @param $content
+     *
+     * @return string
+     */
+    function osc_force_jpeg_extension($content)
+    {
+        return 'jpg';
+    }
+
+
+    /**
+     * @param $content
+     *
+     * @return string
+     */
+    function osc_force_jpeg_mime($content)
+    {
+        return 'image/jpeg';
+    }
+
+
+    osc_add_filter('upload_image_extension', 'osc_force_jpeg_extension');
+    osc_add_filter('upload_image_mime', 'osc_force_jpeg_mime');
+}
