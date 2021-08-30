@@ -42,15 +42,15 @@ class Sanitize
      */
     public function string($value, ...$options)
     {
-        $options = array_merge(                                                                                                   [
-                                                                                                                                      'flags'   => FILTER_FLAG_STRIP_LOW
-                                                                                                                                                   | FILTER_FLAG_STRIP_HIGH,
-                                                                                                                                      'options' => [
-                                                                                                                                          'min_range' => 0,
-                                                                                                                                          'max_range' => 65535,
-                                                                                                                                      ],
-                                                                                                                                  ],
-                                                                                                                                  $options);
+        $options = array_merge([
+                                   'flags'   => FILTER_FLAG_STRIP_LOW
+                                                | FILTER_FLAG_STRIP_HIGH,
+                                   'options' => [
+                                       'min_range' => 0,
+                                       'max_range' => 65535,
+                                   ],
+                               ],
+                               $options);
 
         return filter_var($value, FILTER_SANITIZE_STRING, $options);
     }
@@ -65,24 +65,25 @@ class Sanitize
      */
     public function price($value, ...$options)
     {
-        $options = array_merge(                                                                                                   [
-                                                                                                                                      'flags'   => FILTER_FLAG_STRIP_LOW
-                                                                                                                                                   | FILTER_FLAG_STRIP_HIGH,
-                                                                                                                                      'options' => [
-                                                                                                                                          'min_range' => 0,
-                                                                                                                                          'max_range' => 65535,
-                                                                                                                                      ],
-                                                                                                                                  ],
-                                                                                                                                  $options);
+        $options = array_merge([
+                                   'flags'   => FILTER_FLAG_STRIP_LOW
+                                                | FILTER_FLAG_STRIP_HIGH,
+                                   'options' => [
+                                       'min_range' => 0,
+                                       'max_range' => 65535,
+                                   ],
+                               ],
+                               $options);
 
         return filter_var($value, FILTER_SANITIZE_NUMBER_FLOAT, $options);
     }
 
     /**
      * Sanitise
-
-    /**
+     *
+     * /**
      * Sanitize a string and escape it for use in html
+     *
      * @param string $value
      */
     public function html($value)
@@ -111,88 +112,17 @@ class Sanitize
      */
     public function int($value, ...$options)
     {
-        $options = array_merge(                                                                                                   [
-                                                                                                                                      'flags'   => FILTER_FLAG_ALLOW_OCTAL,
-                                                                                                                                      'options' => [
-                                                                                                                                          'min_range' => 0,
-                                                                                                                                          'max_range' => 65535,
-                                                                                                                                      ],
+        $options = array_merge([
+                                   'flags'   => FILTER_FLAG_ALLOW_OCTAL,
+                                   'options' => [
+                                       'min_range' => 0,
+                                       'max_range' => 65535,
+                                   ],
 
-                                                                                                                                  ],
-                                                                                                                                  $options);
+                               ],
+                               $options);
 
         return filter_var($value, FILTER_SANITIZE_NUMBER_INT, $options);
-    }
-
-    /**
-     * Sanitised Float
-     *
-     * @param mixed $value
-     * @param array $options
-     *
-     * @return float;
-     */
-    public function float($value, ...$options)
-    {
-        $options = array_merge(                                                                                                   [
-                                                                                                                                      'flags'   => FILTER_FLAG_ALLOW_FRACTION,
-                                                                                                                                      'options' => [
-                                                                                                                                          'min_range' => 0,
-                                                                                                                                          'max_range' => 65535,
-                                                                                                                                      ],
-
-                                                                                                                                  ],
-                                                                                                                                  $options);
-
-        return filter_var($value, FILTER_SANITIZE_NUMBER_FLOAT, $options);
-    }
-
-    /**
-     * Sanitised Email
-     *
-     * @param mixed $value
-     * @param array $options
-     *
-     * @return string
-     */
-    public function email($value, ...$options)
-    {
-        $options = array_merge(                                                                                                   [
-                                                                                                                                      'flags'   => FILTER_FLAG_STRIP_LOW
-                                                                                                                                                   | FILTER_FLAG_STRIP_HIGH,
-                                                                                                                                      'options' => [
-                                                                                                                                          'min_range' => 0,
-                                                                                                                                          'max_range' => 65535,
-                                                                                                                                      ],
-
-                                                                                                                                  ],
-                                                                                                                                  $options);
-
-        return filter_var($value, FILTER_SANITIZE_EMAIL, $options);
-    }
-
-    /**
-     * Sanitised URL
-     *
-     * @param mixed $value
-     * @param array $options
-     *
-     * @return string
-     */
-    public function url($value, ...$options)
-    {
-        $options = array_merge(                                                                                                   [
-                                                                                                                                      'flags'   => FILTER_FLAG_STRIP_LOW
-                                                                                                                                                   | FILTER_FLAG_STRIP_HIGH,
-                                                                                                                                      'options' => [
-                                                                                                                                          'min_range' => 0,
-                                                                                                                                          'max_range' => 65535,
-                                                                                                                                      ],
-
-                                                                                                                                  ],
-                                                                                                                                  $options);
-
-        return filter_var($value, FILTER_SANITIZE_URL, $options);
     }
 
     /**
@@ -215,42 +145,28 @@ class Sanitize
     }
 
     /**
-     * Sanitised Encoded
+     * Sanitised URL
      *
      * @param mixed $value
      * @param array $options
      *
      * @return string
      */
-    public function encoded($value, ...$options)
+    public function url($value, ...$options)
     {
-        $options = array_merge(                                                                                                   [
-                                                                                                                                      'flags'   => FILTER_FLAG_STRIP_LOW
-                                                                                                                                                   | FILTER_FLAG_STRIP_HIGH,
-                                                                                                                                      'options' => [
-                                                                                                                                          'min_range' => 0,
-                                                                                                                                          'max_range' => 65535,
-                                                                                                                                      ],
+        $options = array_merge([
+                                   'flags'   => FILTER_FLAG_STRIP_LOW
+                                                | FILTER_FLAG_STRIP_HIGH,
+                                   'options' => [
+                                       'min_range' => 0,
+                                       'max_range' => 65535,
+                                   ],
 
-                                                                                                                                  ],
-                                                                                                                                  $options);
+                               ],
+                               $options);
 
-        return filter_var($value, FILTER_SANITIZE_ENCODED, $options);
+        return filter_var($value, FILTER_SANITIZE_URL, $options);
     }
-
-    /**
-     * Add Slashes
-     *
-     * @param mixed $value
-     * @param array $options
-     *
-     * @return string
-     */
-    public function quotes($value)
-    {
-        return addslashes($value);
-    }
-
 
     /**
      * Sanitised float
@@ -264,6 +180,29 @@ class Sanitize
     public function filterFloat($value, ...$options)
     {
         return $this->float($value, ...$options);
+    }
+
+    /**
+     * Sanitised Float
+     *
+     * @param mixed $value
+     * @param array $options
+     *
+     * @return float;
+     */
+    public function float($value, ...$options)
+    {
+        $options = array_merge([
+                                   'flags'   => FILTER_FLAG_ALLOW_FRACTION,
+                                   'options' => [
+                                       'min_range' => 0,
+                                       'max_range' => 65535,
+                                   ],
+
+                               ],
+                               $options);
+
+        return filter_var($value, FILTER_SANITIZE_NUMBER_FLOAT, $options);
     }
 
     /**
@@ -281,6 +220,30 @@ class Sanitize
     }
 
     /**
+     * Sanitised Encoded
+     *
+     * @param mixed $value
+     * @param array $options
+     *
+     * @return string
+     */
+    public function encoded($value, ...$options)
+    {
+        $options = array_merge([
+                                   'flags'   => FILTER_FLAG_STRIP_LOW
+                                                | FILTER_FLAG_STRIP_HIGH,
+                                   'options' => [
+                                       'min_range' => 0,
+                                       'max_range' => 65535,
+                                   ],
+
+                               ],
+                               $options);
+
+        return filter_var($value, FILTER_SANITIZE_ENCODED, $options);
+    }
+
+    /**
      * Sanitised Email
      *
      * @param       $value
@@ -295,6 +258,30 @@ class Sanitize
     }
 
     /**
+     * Sanitised Email
+     *
+     * @param mixed $value
+     * @param array $options
+     *
+     * @return string
+     */
+    public function email($value, ...$options)
+    {
+        $options = array_merge([
+                                   'flags'   => FILTER_FLAG_STRIP_LOW
+                                                | FILTER_FLAG_STRIP_HIGH,
+                                   'options' => [
+                                       'min_range' => 0,
+                                       'max_range' => 65535,
+                                   ],
+
+                               ],
+                               $options);
+
+        return filter_var($value, FILTER_SANITIZE_EMAIL, $options);
+    }
+
+    /**
      * Sanitised Quotes
      *
      * @param       $value
@@ -306,6 +293,19 @@ class Sanitize
     public function filterQuotes($value, ...$options)
     {
         return $this->quotes($value, ...$options);
+    }
+
+    /**
+     * Add Slashes
+     *
+     * @param mixed $value
+     * @param array $options
+     *
+     * @return string
+     */
+    public function quotes($value)
+    {
+        return addslashes($value);
     }
 
     /**
@@ -335,6 +335,7 @@ class Sanitize
         if ($sanitizedString != false) {
             return ucfirst(strtolower($sanitizedString));
         }
+
         return '';
     }
 
@@ -357,6 +358,7 @@ class Sanitize
 
             return $value;
         }
+
         return '';
     }
 
