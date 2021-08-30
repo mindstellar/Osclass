@@ -126,18 +126,17 @@ osc_current_admin_theme_path('parts/header.php');
                             <?php foreach ($array as $key => $value) { ?>
                                 <td <?php if ($key === 0) {
                                     echo 'class="col-bulkactions"';
-                                } elseif($key === 1) {
-                                    echo 'data-col-name="'.__("Name").'"';
-                                }
-                                 elseif ($key === 2) {
-                                    echo 'class="col-short-name" data-col-name="'.__("Short name").'"';
-                                } elseif ($key === 3) {
-                                    echo 'class="col-description" data-col-name="'. __("Description").'"';
-                                } elseif ($key === 4) {
-                                    echo 'class="col-enabled-website" data-col-name="'.__("Enabled (website)").'"';
-                                } elseif ($key === 5) {
-                                    echo 'class="col-enabled-backend" data-col-name="'.__("Enabled (oc-admin)").'"';
-                                } ?>>
+                                    } elseif ($key === 1) {
+                                        echo 'data-col-name="'.__("Name").'"';
+                                    } elseif ($key === 2) {
+                                        echo 'class="col-short-name" data-col-name="'.__("Short name").'"';
+                                    } elseif ($key === 3) {
+                                        echo 'class="col-description" data-col-name="'. __("Description").'"';
+                                    } elseif ($key === 4) {
+                                        echo 'class="col-enabled-website" data-col-name="'.__("Enabled (website)").'"';
+                                    } elseif ($key === 5) {
+                                        echo 'class="col-enabled-backend" data-col-name="'.__("Enabled (oc-admin)").'"';
+                                    } ?>>
                                 <?php echo $value; ?></td>
                             <?php } ?>
                         </tr>
