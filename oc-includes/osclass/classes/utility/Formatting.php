@@ -509,7 +509,7 @@ class Formatting
     public function name($value)
     {
         $value = trim($value);
-        // remove all special characters with space except . and space 
+        // remove all special characters with space except . and space
         $value = preg_replace('/[^a-zA-Z0-9\s\.]/', ' ', $value);
         // remove double spaces and trim after that
         $value = preg_replace('/\s\s+/', ' ', $value);
