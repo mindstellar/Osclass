@@ -487,6 +487,7 @@ class Formatting
 
     /**
      * Check if non ascii character exists in given string
+     *
      * @param $string
      *
      * @return false|int
@@ -494,5 +495,51 @@ class Formatting
     private function nonAsciiCharExists($string)
     {
         return preg_match('/[\x80-\xff]/', $string);
+    }
+
+    /**
+     * Format name.
+     * Capitalize first letter of each name.
+     * If all-caps, remove all-caps.
+     *
+     * @param string $value value to sanitize
+     *
+     * @return string formatted
+     */
+    public function name($value)
+    {
+        $value = trim($value);
+        // remove all special characters with space except . and space 
+        $value = preg_replace('/[^a-zA-Z0-9\s\.]/', ' ', $value);
+        // remove double spaces and trim after that
+        $value = preg_replace('/\s\s+/', ' ', $value);
+        $value = trim($value);
+        // capitalize first letter of each word
+        // and remove all-caps
+        $value = ucwords(strtolower($value));
+
+        return $value;
+    }
+
+    /**
+     * Format username.
+     * Remove all special characters except . and _ and replace spaces with _
+     *
+     * @param string $value value to format
+     *
+     * @return string formatted
+     */
+    public function username($value)
+    {
+        $value = trim($value);
+        // remove all special characters with space except . and space
+        $value = preg_replace('/[^a-zA-Z0-9\s\._]/', ' ', $value);
+        // remove double spaces and trim after that
+        $value = preg_replace('/\s\s+/', ' ', $value);
+        $value = trim($value);
+        // replace spaces with _
+        $value = str_replace(' ', '_', $value);
+
+        return $value;
     }
 }
