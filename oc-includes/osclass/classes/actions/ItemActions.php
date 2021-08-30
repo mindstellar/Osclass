@@ -545,7 +545,6 @@ class ItemActions
                 // sanitize string safe for html
                 $metaValue = $this->Sanitize->html($metaValue);
                 break;
-
         }
 
         return $metaValue;
