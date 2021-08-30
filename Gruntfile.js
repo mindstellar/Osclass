@@ -122,13 +122,32 @@ module.exports = function (grunt) {
                     }]
             },
             'tinymce': {
-                files: [{
-                    expand: true,
-                    cwd: nodeDir + '/tinymce',
-                    src: '**/*',
-                    dest: assetsDir + '/tinymce',
-                    flatten: false
-                }]
+                files: [
+                    {
+                        expand: true,
+                        cwd: nodeDir + '/tinymce',
+                        src: ['license.txt', 'tinymce.min.js'],
+                        dest: assetsDir + '/tinymce',
+                        flatten: false
+                    },
+                    {
+                        expand: true,
+                        cwd: nodeDir + '/tinymce',
+                        src: ['icons/**/**/*.min.*', 'skins/ui/oxide/**/*.min.*', 'skins/content/default/**/*.min.*', 'themes/silver/**/**/*.min.*'],
+                        dest: assetsDir + '/tinymce',
+                        flatten: false
+                    },
+                    {
+                        expand: true,
+                        cwd: nodeDir + '/tinymce/plugins',
+                        src: ['advlist/*.min.js', 'anchor/*.min.js', 'autolink/*.min.js', 'charmap/*.min.js', 'code/*.min.js', 'fullscreen/*.min.js',
+                            'image/*.min.js', 'imagetools/*.min.js', 'insertdatetime/*.min.js', 'link/*.min.js', 'lists/*.min.js', 'media/*.min.js', 'paste/*.min.js', 'preview/*.min.js',
+                            'searchreplace/*.min.js', 'table/*.min.js', 'visualblocks/*.min.js'
+                        ],
+                        dest: assetsDir + '/tinymce/plugins',
+                    }
+                ]
+
             },
             'opensans-regular-font': {
                 files: [{

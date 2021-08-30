@@ -367,7 +367,7 @@ class Validate
     public function url($value, $required = false, $get_headers = false)
     {
         if ($required || $value !== '') {
-            $sanitizedValue = (new Sanitize())->filterURL($value);
+            $sanitizedValue = (new Sanitize())->url($value);
 
             $success = $this->filterURL($sanitizedValue);
 

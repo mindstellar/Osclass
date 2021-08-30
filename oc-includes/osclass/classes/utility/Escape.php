@@ -17,44 +17,6 @@ namespace mindstellar\utility;
 class Escape
 {
     /**
-     * Escape html
-     *
-     * Formats text so that it can be safely placed in a form field in the event it has HTML tags.
-     *
-     * @access  public
-     *
-     * @param string
-     *
-     * @return  string
-     * @version 2.4
-     */
-    public static function html($str)
-    {
-        if (!isset($str) || $str === '') {
-            return '';
-        }
-
-        $temp = '__TEMP_AMPERSANDS__';
-
-        // Replace entities to temporary markers so that
-        // htmlspecialchars won't mess them up
-        $str = preg_replace("/&#(\d+);/", "$temp\\1;", $str);
-        $str = preg_replace("/&(\w+);/", "$temp\\1;", $str);
-
-        $str = htmlspecialchars($str);
-
-        // In case htmlspecialchars misses these.
-        $str = str_replace(array("'", '"'), array('&#39;', '&quot;'), $str);
-
-        // Decode the temp markers back to entities
-        $str = preg_replace("/$temp(\d+);/", "&#\\1;", $str);
-        $str = preg_replace("/$temp(\w+);/", "&\\1;", $str);
-
-        return $str;
-    }
-
-
-    /**
      * Escape single quotes, double quotes, <, >, & and line endings
      *
      * @access  public
@@ -75,4 +37,69 @@ class Escape
 
         return $str;
     }
+
+    /**
+     * Escape given characters
+     *
+     * @param string $str
+     * @param string $chars
+     *
+     * @return string
+     * @since 5.1
+     */
+    public static function escapeChars($str, $chars = '"')
+    {
+        return preg_replace('/[' . $chars . ']/', '\\\$0', $str);
+    }
+
+    /**
+     * Escape unicode characters
+     */
+    public static function unicode($str)
+    {
+        return preg_replace_callback('/\\\\u([0-9a-fA-F]{4})/', function ($match) {
+            return mb_convert_encoding(pack('H*', $match[1]), 'UTF-8', 'UCS-2BE');
+        }, $str);
+    }
+
+    /**
+     * Escape html keep encoded entities
+     *
+     * @param string $str
+     *
+     * @return string
+     * @since 5.1
+     */
+    public static function html($str)
+    {
+        $str = self::entities($str);
+
+        return htmlspecialchars($str, ENT_QUOTES);
+    }
+
+    /**
+     * Escape html entities
+     */
+    public static function entities($str)
+    {
+        return preg_replace_callback('/&#([0-9a-zA-Z]*);/', function ($match) {
+            return mb_convert_encoding(pack('H*', $match[1]), 'UTF-8', 'UCS-2BE');
+        }, $str);
+    }
+
+    /**
+     * Escape html string for use in javascript
+     *
+     * @param string $str
+     *
+     * @return string
+     * @since 5.1
+     */
+    public static function jsHtml($str)
+    {
+        $str = self::entities($str);
+
+        return preg_replace('/</', '\\x3C', $str);
+    }
+
 }

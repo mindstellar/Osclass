@@ -1,3 +1,19 @@
+# Osclass 5.0.1 Changelog
+
+* Security Fix in custom fields, it is recommended to upgrade this version.
+* Update Utility classes Escape.php, Format.php, Sanitize.php, Validate.php
+* Update Utility classes are updated, fixed some issue extracting upgrade package.
+* Removed: unnecessary TinyMCE plugins, only minified and license files are included now, huge decrease in install
+  package.
+* Fixed: issue with upgrading from legacy version of osclass.
+* Requirement Change: Minimum PHP requirement is changes from php 5.6 to 7.0.
+* Please see commit history to see all changes.
+* Not a huge update as we are already working on major release.
+
+# Osclass 5.0.1 Changelog:
+
+* PHP 8.0 Installation bug
+
 # Osclass 5.0.0 Changelog:
 
 * New geodata support from https:/github.com/mindstellar/geodata 100+ new countries with updated cities and regions

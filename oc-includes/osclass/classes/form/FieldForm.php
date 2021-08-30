@@ -488,9 +488,9 @@ class FieldForm extends Form
                 });
                 $.datepicker.setDefaults($.datepicker.regional['custom']);
 
-                if($value>0 && $value!='';) {
+                if($value>0 && $value!='') {
                     // hack - same dateformat as php date function
-                    $('.$id_field').prop('value', date('$dateFormat', $value);)
+                    $('.$id_field').prop('value', date('$dateFormat', $value))
                     $('#$id_field').prop('value', '$value');
                 }
 

@@ -137,21 +137,21 @@ function get_relative_url()
 function get_requirements()
 {
     $array = array(
-        'PHP version >= 5.6.x' => array(
-            'requirement' => __('PHP version >= 5.6.x'),
-            'fn'          => version_compare(PHP_VERSION, '5.6.0', '>='),
-            'solution'    => __('At least PHP5.6 (PHP 7.0 or higher recommended) is required to run Osclass. '
-                . 'You may talk with your hosting to upgrade your PHP version.')
+        'PHP version >= 7.0.0' => array(
+            'requirement' => __('PHP version >= 7.0.0'),
+            'fn'          => version_compare(PHP_VERSION, '7.0.0', '>='),
+            'solution'    => sprintf(__('At least PHP %s (PHP %s or higher recommended) is required to run Osclass. '
+                                        . 'You may talk with your hosting to upgrade your PHP version.'), 7.0, 7.3)
         ),
 
         'MySQLi extension for PHP' => array(
             'requirement' => __('MySQLi extension for PHP'),
             'fn'          => extension_loaded('mysqli'),
             'solution'    => __('MySQLi extension is required. How to '
-                . '<a target="_blank" href="http://www.php.net/manual/en/mysqli.setup.php">install/configure</a>.')
+                                . '<a target="_blank" href="http://www.php.net/manual/en/mysqli.setup.php">install/configure</a>.')
         ),
 
-        'GD extension for PHP' => array(
+        'GD extension for PHP'   => array(
             'requirement' => __('GD extension for PHP'),
             'fn'          => extension_loaded('gd'),
             'solution'    => __('GD extension is required. How to '

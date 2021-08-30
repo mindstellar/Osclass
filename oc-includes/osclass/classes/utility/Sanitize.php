@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Created by Mindstellar Community.
  * User: navjottomer
@@ -11,7 +12,7 @@ namespace mindstellar\utility;
 
 /**
  * Class Sanitize
- * Provide common sanitization methods
+ * Provide common sanitization methods using PHP filter_var() method where possible
  *
  * @package mindstellar\utility
  */
@@ -24,83 +25,70 @@ class Sanitize
      * @param array $options
      *
      * @return bool|string
+     * @deprecated use Sanitize::string() instead will be removed in the next 6.x release
      */
-    public function filterString($value, $options = [])
+    public function filterString($value, ...$options)
     {
-        return $this->filter($value, 'string', $options);
+        return $this->string($value, ...$options);
     }
 
     /**
-     * sanitise using filter_var
-     * common method to get sanitized value
-     * Validate before using these values, this will only sanitize the requested param
+     * Sanitised String
      *
-     * @param string $value  name of param
-     * @param string $type   What type is the variable (string, email, int, float, encoded, url, email)
-     * @param array  $option Options for filter_var
+     * @param mixed $value
+     * @param array $options
      *
-     * @return false|int|float|string will return false on failure
+     * @return string
      */
-    private function filter($value, $type = 'string', $options = [])
+    public function string($value, ...$options)
     {
-        return $this->filterVar($value, $this->getFilter($type), $options);
+        $options = array_merge([
+                                   'flags'   => FILTER_FLAG_STRIP_LOW
+                                                | FILTER_FLAG_STRIP_HIGH,
+                                   'options' => [
+                                       'min_range' => 0,
+                                       'max_range' => 65535,
+                                   ],
+                               ],
+                               $options);
+
+        return filter_var($value, FILTER_SANITIZE_STRING, $options);
     }
 
     /**
-     * @param $value
-     * @param $type
-     * @param $options
+     * Sanitised Price
      *
-     * @return false|int|float|string will return false on failure
+     * @param mixed $value
+     * @param array $options
+     *
+     * @return string
      */
-    private function filterVar($value, $type, $options = [])
+    public function price($value, ...$options)
     {
-        return filter_var($value, $type, $options);
+        $options = array_merge([
+                                   'flags'   => FILTER_FLAG_STRIP_LOW
+                                                | FILTER_FLAG_STRIP_HIGH,
+                                   'options' => [
+                                       'min_range' => 0,
+                                       'max_range' => 65535,
+                                   ],
+                               ],
+                               $options);
+
+        return filter_var($value, FILTER_SANITIZE_NUMBER_FLOAT, $options);
     }
 
     /**
-     * Private function to get filter type
+     * Sanitise
      *
-     * @param string $type What type is the variable (string, email, int, float, encoded, url, email)
+     * /**
+     * Sanitize a string and escape it for use in html
      *
-     * @return int
+     * @param string $value
      */
-    private function getFilter($type)
+    public function html($value)
     {
-        switch (strtolower($type)) {
-            case 'string':
-                $filter = FILTER_SANITIZE_STRING;
-                break;
-
-            case 'int':
-                $filter = FILTER_SANITIZE_NUMBER_INT;
-                break;
-
-            case 'float':
-                $filter = FILTER_SANITIZE_NUMBER_FLOAT;
-                break;
-
-            case 'encoded':
-                $filter = FILTER_SANITIZE_ENCODED;
-                break;
-
-            case 'url':
-                $filter = FILTER_SANITIZE_URL;
-                break;
-
-            case 'email':
-                $filter = FILTER_SANITIZE_EMAIL;
-                break;
-
-            case 'quotes':
-                $filter = FILTER_SANITIZE_MAGIC_QUOTES;
-                break;
-
-            default:
-                $filter = FILTER_SANITIZE_STRING;
-        }
-
-        return $filter;
+        return htmlspecialchars($value, ENT_QUOTES, 'UTF-8');
     }
 
     /**
@@ -110,10 +98,74 @@ class Sanitize
      * @param array $options
      *
      * @return bool|int
+     * @deprecated use Sanitize::int() instead will be removed in the next 6.x release
      */
-    public function filterInt($value, $options = [])
+    public function filterInt($value, ...$options)
     {
-        return $this->filter($value, 'int', $options);
+        return $this->int($value, ...$options);
+    }
+
+    /**
+     * Sanitised Int
+     *
+     * @param mixed $value
+     */
+    public function int($value, ...$options)
+    {
+        $options = array_merge([
+                                   'flags'   => FILTER_FLAG_ALLOW_OCTAL,
+                                   'options' => [
+                                       'min_range' => 0,
+                                       'max_range' => 65535,
+                                   ],
+
+                               ],
+                               $options);
+
+        return filter_var($value, FILTER_SANITIZE_NUMBER_INT, $options);
+    }
+
+    /**
+     * Sanitised website URL
+     *
+     * @param mixed $value
+     */
+    public function websiteUrl($value)
+    {
+        //remove invalid chars from url
+        $value = $this->url($value);
+        //remove possible xss attempts
+        $value = str_replace(['<', '>', '"', '\'', '%3C', '%3E', '%22', '%27'], '', $value);
+        //check if it has http:// or https://
+        if (strpos($value, 'http') !== 0) {
+            $value = 'http://' . $value;
+        }
+
+        return $value;
+    }
+
+    /**
+     * Sanitised URL
+     *
+     * @param mixed $value
+     * @param array $options
+     *
+     * @return string
+     */
+    public function url($value, ...$options)
+    {
+        $options = array_merge([
+                                   'flags'   => FILTER_FLAG_STRIP_LOW
+                                                | FILTER_FLAG_STRIP_HIGH,
+                                   'options' => [
+                                       'min_range' => 0,
+                                       'max_range' => 65535,
+                                   ],
+
+                               ],
+                               $options);
+
+        return filter_var($value, FILTER_SANITIZE_URL, $options);
     }
 
     /**
@@ -123,10 +175,34 @@ class Sanitize
      * @param array $options
      *
      * @return bool|float
+     * @deprecated use Sanitize::float() instead will be removed in the next major 6.x release
      */
-    public function filterFloat($value, $options = [])
+    public function filterFloat($value, ...$options)
     {
-        return $this->filter($value, 'float', $options);
+        return $this->float($value, ...$options);
+    }
+
+    /**
+     * Sanitised Float
+     *
+     * @param mixed $value
+     * @param array $options
+     *
+     * @return float;
+     */
+    public function float($value, ...$options)
+    {
+        $options = array_merge([
+                                   'flags'   => FILTER_FLAG_ALLOW_FRACTION,
+                                   'options' => [
+                                       'min_range' => 0,
+                                       'max_range' => 65535,
+                                   ],
+
+                               ],
+                               $options);
+
+        return filter_var($value, FILTER_SANITIZE_NUMBER_FLOAT, $options);
     }
 
     /**
@@ -135,11 +211,36 @@ class Sanitize
      * @param       $value
      * @param array $options
      *
-     * @return bool|string
+     * @return string
+     * @deprecated use Sanitize::encoded() instead will be removed in the next major 6.x release
      */
-    public function filterEncoded($value, $options = [])
+    public function filterEncoded($value, ...$options)
     {
-        return $this->filter($value, 'encoded', $options);
+        return $this->encoded($value, ...$options);
+    }
+
+    /**
+     * Sanitised Encoded
+     *
+     * @param mixed $value
+     * @param array $options
+     *
+     * @return string
+     */
+    public function encoded($value, ...$options)
+    {
+        $options = array_merge([
+                                   'flags'   => FILTER_FLAG_STRIP_LOW
+                                                | FILTER_FLAG_STRIP_HIGH,
+                                   'options' => [
+                                       'min_range' => 0,
+                                       'max_range' => 65535,
+                                   ],
+
+                               ],
+                               $options);
+
+        return filter_var($value, FILTER_SANITIZE_ENCODED, $options);
     }
 
     /**
@@ -148,11 +249,36 @@ class Sanitize
      * @param       $value
      * @param array $options
      *
-     * @return bool|string
+     * @return string
+     * @deprecated use Sanitize::email() instead will be removed in the next major 6.x release
      */
-    public function filterEmail($value, $options = [])
+    public function filterEmail($value, ...$options)
     {
-        return $this->filter($value, 'email', $options);
+        return $this->email($value, ...$options);
+    }
+
+    /**
+     * Sanitised Email
+     *
+     * @param mixed $value
+     * @param array $options
+     *
+     * @return string
+     */
+    public function email($value, ...$options)
+    {
+        $options = array_merge([
+                                   'flags'   => FILTER_FLAG_STRIP_LOW
+                                                | FILTER_FLAG_STRIP_HIGH,
+                                   'options' => [
+                                       'min_range' => 0,
+                                       'max_range' => 65535,
+                                   ],
+
+                               ],
+                               $options);
+
+        return filter_var($value, FILTER_SANITIZE_EMAIL, $options);
     }
 
     /**
@@ -162,22 +288,24 @@ class Sanitize
      * @param array $options
      *
      * @return bool|string
+     * @deprecated use Sanitize::quotes() instead will be removed in the next major 6.x release
      */
-    public function filterQuotes($value, $options = [])
+    public function filterQuotes($value, ...$options)
     {
-        return $this->filter($value, 'quotes', $options);
+        return $this->quotes($value, ...$options);
     }
 
     /**
-     * Sanitize a website URL.
+     * Add Slashes
      *
-     * @param string $value value to sanitize
+     * @param mixed $value
+     * @param array $options
      *
-     * @return string sanitized
+     * @return string
      */
-    public function url($value)
+    public function quotes($value)
     {
-        return $this->filterURL($value);
+        return addslashes($value);
     }
 
     /**
@@ -187,26 +315,12 @@ class Sanitize
      * @param array $options
      *
      * @return bool|string
+     * @deprecated use Sanitize::url() instead will be removed in the next major 6.x release
      */
-    public function filterURL($value, $options = [])
+    public function filterURL($value, ...$options)
     {
-        return $this->filter($value, 'url', $options);
+        return $this->url($value, ...$options);
     }
-
-    /**
-     * Sanitize capitalization for a string.
-     * Capitalize first letter of each name.
-     * If all-caps, remove all-caps.
-     *
-     * @param string $value value to sanitize
-     *
-     * @return string sanitized
-     */
-    public function name($value)
-    {
-        return ucwords($this->allcaps(trim($value)));
-    }
-
 
     /**
      * Sanitize string that's all-caps
@@ -217,13 +331,13 @@ class Sanitize
      */
     public function allcaps($value)
     {
-        if (preg_match('/^([A-Z][^A-Z]*)+$/', $value) && !preg_match('/[a-z]+/', $value)) {
-            $value = ucfirst(strtolower($value));
+        $sanitizedString = $this->string($value);
+        if ($sanitizedString != false) {
+            return ucfirst(strtolower($sanitizedString));
         }
 
-        return $value;
+        return '';
     }
-
 
     /**
      * Sanitize a username
@@ -234,13 +348,22 @@ class Sanitize
      */
     public function username($value)
     {
-        return preg_replace('/(_+)/', '_', preg_replace('/(\W*)/', '', str_replace(' ', '_', trim($value))));
+        $sanitizedString = $this->string($value);
+        if ($sanitizedString != false) {
+            // Sanitize username, trim leading/trailing spaces and replace space with underscore.
+            $value = preg_replace('/[^a-zA-Z0-9_\.]/', '', $value);
+            $value = trim($value);
+            $value = preg_replace('/[\s]+/', '_', $value);
+            $value = strtolower($value);
+
+            return $value;
+        }
+
+        return '';
     }
 
-
     /**
-     * Format phone number. Supports 10-digit with extensions,
-     * and defaults to international if cannot match US number.
+     * Format phone number. Remove non-numeric characters.
      *
      * @param string $value value to sanitize
      *
@@ -251,31 +374,11 @@ class Sanitize
         if (empty($value)) {
             return '';
         }
-
-        // Remove strings that aren't letter and number.
-        $value = preg_replace('/[^a-z0-9]/', '', strtolower($value));
-
-        // Remove 1 from front of number.
-        if (preg_match('/^(\d{11})/', $value) && $value[0] === 1) {
-            $value = substr($value, 1);
-        }
-
-        // Check for phone ext.
-        if (!preg_match('/^\d$/', $value)) {
-            $value =
-                preg_replace('/^(\d{10})([a-z]+)(\d+)/', '$1ext$3', $value); // Replace 'x|ext|extension' with 'ext'.
-            list($value, $ext) = explode('ext', $value); // Split number & ext.
-        }
-
-        // Add dashes: ___-___-____
-        if (strlen($value) === 7) {
-            $value = preg_replace('/(\d{3})(\d{4})/', '$1-$2', $value);
-        } elseif (strlen($value) === 10) {
-            $value = preg_replace('/(\d{3})(\d{3})(\d{4})/', '$1-$2-$3', $value);
-        }
-
-        if (isset($ext) && $ext) {
-            return $value . ' x' . $ext;
+        // Remove strings that aren't number. leave leading + in number.
+        $value = preg_replace('/[^0-9\+]/', '', $value);
+        // Add leading zero if it's less than 11 digits and doesn't has leading +
+        if (strlen($value) < 11 && strpos($value, '+') === false) {
+            $value = '0' . $value;
         }
 
         return $value;
