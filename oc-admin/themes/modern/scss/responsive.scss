@@ -43,17 +43,6 @@
       padding: 0.1rem;
     }
   }
-  #listing-toolbar,
-  #admins-toolbar,
-  #users-toolbar {
-    & + #datatablesForm #bulk-actions {
-      left: inherit;
-      max-width: 12rem;
-      position: absolute;
-      right: 0;
-      top: -3rem;
-    }
-  }
   #datatablesForm {
     .table {
       .col-title {
@@ -184,6 +173,13 @@
     }
     th ~ th {
       display: none;
+    }
+  }
+  #datatablesForm {
+    .table {
+      .col-status {
+        display: none;
+      }
     }
   }
 }

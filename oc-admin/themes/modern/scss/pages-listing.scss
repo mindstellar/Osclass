@@ -1,14 +1,12 @@
 #listing-toolbar,
 .table-toolbar {
   height: 44px;
-  margin-bottom: 16px;
+  float:right;
 }
 
 #listing-toolbar, #admins-toolbar, #users-toolbar {
   & + #datatablesForm #bulk-actions {
-    left: 0;
-    position: absolute;
-    top: 0
+    float: left;
   }
 }
 

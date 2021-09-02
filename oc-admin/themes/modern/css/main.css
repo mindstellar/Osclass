@@ -9380,8 +9380,11 @@ div.widget-box-content-no-wrapp li a {
 .table-first-row td {
   border-top: 0; }
 
-.table-contains-actions .col-bulkactions ~ td {
-  padding-bottom: 2.5rem; }
+.table-contains-actions {
+  clear: both;
+  position: relative; }
+  .table-contains-actions .col-bulkactions ~ td {
+    padding-bottom: 2.5rem; }
 
 .table-collapsed #table-row-actions {
   margin-top: 0;
@@ -9391,9 +9394,6 @@ div.widget-box-content-no-wrapp li a {
 
 .collapsed-hover td {
   padding-top: 31px; }
-
-.table-contains-actions {
-  position: relative; }
 
 td.children-cat {
   padding-left: 20px; }
@@ -9440,6 +9440,10 @@ td.children-cat {
 
 .col-title {
   min-width: 280px; }
+
+#email-templates div.actions {
+  display: block;
+  position: relative; }
 
 #help-box h3, #help-box .h3 {
   font-size: 14px;
@@ -9847,12 +9851,10 @@ code {
 #listing-toolbar,
 .table-toolbar {
   height: 44px;
-  margin-bottom: 16px; }
+  float: right; }
 
 #listing-toolbar + #datatablesForm #bulk-actions, #admins-toolbar + #datatablesForm #bulk-actions, #users-toolbar + #datatablesForm #bulk-actions {
-  left: 0;
-  position: absolute;
-  top: 0; }
+  float: left; }
 
 #bulk-actions {
   margin-bottom: 1rem;
@@ -10282,15 +10284,6 @@ form h3, form .h3 {
     #content-page > div > div.row-wrapper {
       padding: 0.1rem; }
 
-  #listing-toolbar + #datatablesForm #bulk-actions,
-  #admins-toolbar + #datatablesForm #bulk-actions,
-  #users-toolbar + #datatablesForm #bulk-actions {
-    left: inherit;
-    max-width: 12rem;
-    position: absolute;
-    right: 0;
-    top: -3rem; }
-
   #datatablesForm .table .col-title {
     min-width: 100px; }
   #datatablesForm .table .col-status {
@@ -10386,6 +10379,9 @@ form h3, form .h3 {
       font-weight: 600; }
   #upload-plugins th ~ th,
   #email-templates th ~ th {
+    display: none; }
+
+  #datatablesForm .table .col-status {
     display: none; } }
 
 /*# sourceMappingURL=main.css.map */

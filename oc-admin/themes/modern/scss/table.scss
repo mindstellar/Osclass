@@ -156,6 +156,8 @@
 }
 
 .table-contains-actions {
+  clear: both;
+  position: relative;
   .col-bulkactions {
     &~ td {
       padding-bottom: 2.5rem;
@@ -180,10 +182,6 @@
   td {
     padding-top: 31px;
   }
-}
-
-.table-contains-actions {
-  position: relative;
 }
 
 td {
@@ -255,4 +253,12 @@ td {
 
 .col-title {
   min-width: 280px;
+}
+#email-templates {
+  div{
+    &.actions {
+      display: block;
+      position:relative; 
+    }
+  }
 }
