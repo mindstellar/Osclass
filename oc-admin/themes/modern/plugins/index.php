@@ -195,34 +195,34 @@ $tab_index = 2;
 
     });
     function uninstall_dialog(plugin, title) {
-        var deleteModal = document.getElementById("pluginModal")
-        deleteModal.querySelector("input[name='plugin']")
+        var pluginModal = document.getElementById("pluginModal")
+        pluginModal.querySelector("input[name='plugin']")
             .value = plugin;
-        deleteModal.querySelector("input[name='action']")
+        pluginModal.querySelector("input[name='action']")
             .value = "uninstall";
-        deleteModal.querySelector(".modal-title")
+        pluginModal.querySelector(".modal-title")
             .textContent = title;
-        deleteModal.querySelector(".modal-body")
+        pluginModal.querySelector(".modal-body")
             .textContent = "<?php echo osc_esc_js(__('This action can not be undone.'
                                                      . ' Uninstalling plugins may result in a permanent loss of data. '
                                                      . 'Are you sure you want to continue?')); ?>";
-        deleteModal.querySelector("#pluginModalSubmit")
+        pluginModal.querySelector("#pluginModalSubmit")
             .textContent = "<?php echo osc_esc_js(__('Uninstall')); ?>";
         (new bootstrap.Modal(document.getElementById("pluginModal"))).toggle()
         return false;
     }
 
     function delete_plugin(plugin) {
-        var deleteModal = document.getElementById("pluginModal")
-        deleteModal.querySelector("input[name='plugin']")
+        var pluginModal = document.getElementById("pluginModal")
+        pluginModal.querySelector("input[name='plugin']")
             .value = plugin;
-        deleteModal.querySelector("input[name='action']")
+        pluginModal.querySelector("input[name='action']")
             .value = "delete";
-        deleteModal.querySelector(".modal-title")
+        pluginModal.querySelector(".modal-title")
             .textContent = "<?php echo osc_esc_js(__('Delete Plugin'))?>:" + plugin
-        deleteModal.querySelector(".modal-body")
+        pluginModal.querySelector(".modal-body")
             .textContent = "<?php echo osc_esc_js(__('You are about to delete the files of the plugin. Do you want to continue?'))?>";
-        deleteModal.querySelector("#pluginModalSubmit")
+        pluginModal.querySelector("#pluginModalSubmit")
             .textContent = "<?php echo osc_esc_js(__('Delete')); ?>";
         (new bootstrap.Modal(document.getElementById("pluginModal"))).toggle()
         return false;

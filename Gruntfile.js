@@ -237,7 +237,7 @@ module.exports = function (grunt) {
             grunt.file.mkdir(assetsDir);
 
             // Output a success message
-            grunt.log.oklns(grunt.template.process(
+            grunt.log.ok(grunt.template.process(
                 'Directory "<%= directory %>" was created successfully.',
                 {data: {directory: assetsDir}}
             ));

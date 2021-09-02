@@ -6,10 +6,6 @@ $(function () {
     $('#help-box .ico-close').click(function () {
         $('#help-box').hide();
     });
-    $('#table-row-actions').on('click', '.show-more-trigger', function () {
-        $(this).parent().addClass('hover');
-        return false;
-    });
     oscTab();
     $(".close-dialog").on("click", function () {
         $(".ui-dialog-content").dialog("close");

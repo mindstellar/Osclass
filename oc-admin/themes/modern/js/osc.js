@@ -116,13 +116,14 @@ var OSC_ESC_MAP = {
 };
 
 function oscEscapeHTML(str) {
-    if (str != undefined) {
+    if (str !== undefined) {
         return str.toString().replace(/[&<>'"]/g, function (c) {
             return OSC_ESC_MAP[c];
         });
     }
     return "";
 }
+// display flash message
 function setJsMessage(alertClass, alertMessage) {
     var jsMessage = document.getElementById("jsMessage");
     var pTag = jsMessage.querySelector("p");
@@ -131,12 +132,42 @@ function setJsMessage(alertClass, alertMessage) {
     jsMessage.classList.remove('hide');
     jsMessage.removeAttribute('style');
 }
+// Toggle the bulkActionsModal
+function toggleBulkActionsModal() {
+    var bulkSelect = document.getElementById("bulk_actions");
+    var bulkActionsModal = new bootstrap.Modal(document.getElementById("bulkActionsModal"));
+    if (bulkSelect.options[bulkSelect.selectedIndex].value !== '') {
+        bulkActionsModal.toggle();
+    }
+    event.preventDefault();
+    return false;
+}
+// Submit bulk actions
+function bulkActionsSubmit() {
+    document.getElementById("datatablesForm").submit();
+}
+// Set up the bulkActions modal
+window.addEventListener('load', function () {
+    var datatablesForm = document.getElementById("datatablesForm");
+    if (datatablesForm) {
+        document.getElementById("datatablesForm").onsubmit = function () {
+            toggleBulkActionsModal();
+        };
+        var bulkActionsModal = document.getElementById("bulkActionsModal");
+        bulkActionsModal.addEventListener("show.bs.modal", function () {
+            var bulkSelect = document.getElementById("bulk_actions");
+            bulkActionsModal.querySelector('.modal-body p').textContent = bulkSelect.options[bulkSelect.selectedIndex]
+                .getAttribute("data-dialog-content");
+            bulkActionsModal.querySelector('#bulkActionsSubmit').textContent = bulkSelect.options[bulkSelect.selectedIndex].text;
+        });
+    }
+});
+
 // show div.actions on hover of the row in datatables
 // in pure JavaScript, we wouldn't need to use jQuery
-window.onload = function() {
+window.addEventListener('load', function () {
     var dataTablesRows = document.querySelectorAll('#datatablesForm tr');
-    var dataTablesRows_length = dataTablesRows.length;
-    for (var i = 0; i < dataTablesRows_length; i++) {
+    for (var i = 0; i < dataTablesRows.length; i++) {
         var actions_div = dataTablesRows[i].querySelector('.actions');
         if (actions_div) {
             dataTablesRows[i].onmouseover = function () {
@@ -166,4 +197,4 @@ window.onload = function() {
             }
         }
     }
-}
+});

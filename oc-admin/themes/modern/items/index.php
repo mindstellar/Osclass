@@ -470,30 +470,5 @@ osc_show_pagination_admin($aData);
         (new bootstrap.Modal(document.getElementById("itemDeleteModal"))).toggle()
         return false;
     }
-
-    function toggleBulkActionsModal() {
-        var bulkSelect = document.getElementById("bulk_actions")
-        var bulkActionsModal = new bootstrap.Modal(document.getElementById("bulkActionsModal"))
-        if (bulkSelect.options[bulkSelect.selectedIndex].value !== '') {
-            bulkActionsModal.toggle()
-        }
-        event.preventDefault()
-        return false
-    }
-
-    function bulkActionsSubmit() {
-        document.getElementById("datatablesForm").submit()
-    }
-
-    document.getElementById("datatablesForm").onsubmit = function() {
-        toggleBulkActionsModal()
-    };
-    var bulkActionsModal = document.getElementById("bulkActionsModal")
-    bulkActionsModal.addEventListener("show.bs.modal", function() {
-        var bulkSelect = document.getElementById("bulk_actions")
-        bulkActionsModal.querySelector('.modal-body p').textContent = bulkSelect.options[bulkSelect.selectedIndex]
-            .getAttribute("data-dialog-content")
-        bulkActionsModal.querySelector('#bulkActionsSubmit').textContent = bulkSelect.options[bulkSelect.selectedIndex].text;
-    });
 </script>
 <?php osc_current_admin_theme_path('parts/footer.php'); ?>
