@@ -49,9 +49,9 @@ if (!function_exists('addBodyClass')) {
 osc_add_hook('admin_page_header', 'customPageHeader');
 function customPageHeader()
 {
-?>
+    ?>
     <h1><?php _e('Dashboard'); ?></h1>
-<?php
+    <?php
 }
 
 
@@ -72,7 +72,7 @@ function chartJs()
 {
     $items = __get('item_stats');
     $users = __get('user_stats');
-?>
+    ?>
     <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
     <script type="text/javascript">
         google.charts.load('1', {
@@ -132,7 +132,7 @@ function chartJs()
             });
         }
     </script>
-<?php
+    <?php
 }
 
 
@@ -158,12 +158,12 @@ osc_current_admin_theme_path('parts/header.php'); ?>
                                     <tr<?php if ($even == true) {
                                             $even = false;
                                             echo ' class="even"';
-                                        } else {
-                                            $even = true;
-                                        }
-                                        if ($countEvent == 1) {
-                                            echo ' class="table-first-row"';
-                                        } ?>>
+                                       } else {
+                                           $even = true;
+                                       }
+                                       if ($countEvent == 1) {
+                                           echo ' class="table-first-row"';
+                                       } ?>>
                                         <td><a href="<?php echo osc_admin_base_url(true); ?>?page=items&amp;catId=<?php echo
                                                                                                                     $c['pk_i_id']; ?>"><?php echo $c['s_name']; ?></a>
                                         </td>
@@ -174,9 +174,9 @@ osc_current_admin_theme_path('parts/header.php'); ?>
                                             <tr<?php if ($even == true) {
                                                     $even = false;
                                                     echo ' class="even"';
-                                                } else {
-                                                    $even = true;
-                                                } ?>>
+                                               } else {
+                                                   $even = true;
+                                               } ?>>
                                                 <td class="children-cat"><a href="<?php echo osc_admin_base_url(true); ?>?page=items&amp;
                                             catId=<?php echo $subc['pk_i_id']; ?>"><?php echo $subc['s_name']; ?></a>
                                                 </td>
@@ -186,11 +186,11 @@ osc_current_admin_theme_path('parts/header.php'); ?>
                                             <?php
                                             $countEvent++;
                                         }
-                                            ?>
+                                        ?>
                                         <?php
                                         $countEvent++;
-                                    }
-                                        ?>
+                                }
+                                ?>
                             </tbody>
                         </table>
                     <?php } else { ?>
