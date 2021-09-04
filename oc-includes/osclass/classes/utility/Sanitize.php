@@ -132,13 +132,15 @@ class Sanitize
      */
     public function websiteUrl($value)
     {
-        //remove invalid chars from url
-        $value = $this->url($value);
-        //remove possible xss attempts
-        $value = str_replace(['<', '>', '"', '\'', '%3C', '%3E', '%22', '%27'], '', $value);
-        //check if it has http:// or https://
-        if (strpos($value, 'http') !== 0) {
-            $value = 'http://' . $value;
+        if($value) {
+            //remove invalid chars from url
+            $value = $this->url($value);
+            //remove possible xss attempts
+            $value = str_replace(['<', '>', '"', '\'', '%3C', '%3E', '%22', '%27'], '', $value);
+            //check if it has http:// or https://
+            if (strpos($value, 'http') !== 0) {
+                $value = 'https://' . $value;
+            }
         }
 
         return $value;
