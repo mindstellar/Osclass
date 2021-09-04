@@ -287,6 +287,7 @@ class FieldForm extends Form
             $label            = $field['s_name'];
             $value            = $field['s_value'];
             $attributes['id'] = $id;
+            $options = [];
 
             switch ($field['e_type']) {
                 case 'TEXTAREA':
@@ -411,31 +412,39 @@ class FieldForm extends Form
      */
     public static function initDatePicker($id_field, $dateFormat, $value, $type = 'none')
     {
-
-        if ($value == '') {
+        if (!$value) {
             $value = 0;
-        }
-        $aux = "<script>
-            $(document).ready(function(){
-                $('.{$id_field}').datepicker({
-                    onSelect: function() {
+        } ?>
+        <script type="text/javascript">
+            $(document).ready(function () {
+
+                var fieldIdentifier = '<?php echo $id_field; ?>';
+                var fieldValue = '<?php echo $value; ?>';
+                var dateFormat = '<?php echo $dateFormat; ?>';
+                var fieldType = '<?php echo $type; ?>';
+
+                var datePlaceholder = $('.' + fieldIdentifier);
+                var dateInput = $('#' + fieldIdentifier);
+                datePlaceholder.datepicker({
+                    onSelect: function () {
                         // format to unix timestamp
-                        var fecha = $(this).datepicker('getDate');
-                        if('{$type}'=='from') {
-                            fecha.setHours('0');
-                            fecha.setMinutes('0');
-                            fecha.setSeconds('0');
-                        } else if('{$type}'=='to') {
-                            fecha.setHours('23');
-                            fecha.setMinutes('59');
-                            fecha.setSeconds('59');
+                        var newDate;
+                        var currentDate = $(this).datepicker('getDate');
+                        if (fieldType === 'from') {
+                            currentDate.setHours(0);
+                            currentDate.setMinutes(0);
+                            currentDate.setSeconds(0);
+                        } else if (fieldType === 'to') {
+                            currentDate.setHours(23);
+                            currentDate.setMinutes(59);
+                            currentDate.setSeconds(59);
                         }
 
                         // new date format
-                        var new_date = date('{$dateFormat}', fecha.getTime()/1000 );
+                        newDate = date(dateFormat, currentDate.getTime() / 1000);
                         // hack - same dateformat as php date function
-                        $('.{$id_field}').prop('value', new_date);
-                        $('#{$id_field}').prop('value', fecha.getTime()/1000);
+                        datePlaceholder.prop('value', newDate);
+                        dateInput.prop('value', currentDate.getTime() / 1000);
                     },
                     inline: true,
                     navigationAsDateFormat: true,
@@ -443,14 +452,20 @@ class FieldForm extends Form
                 });
                 $.datepicker.setDefaults($.datepicker.regional['custom']);
 
-                if({$value}>0 && {$value} !='') {
+                if (fieldValue && fieldValue > 0) {
                     // hack - same dateformat as php date function
-                    $('.{$id_field}').prop('value', date('{$dateFormat}', {$value}));
-                    $('#{$id_field}').prop('value', '{$value}{$id_field}.{$id_field}#{$id_field}').prop('value', '');
+                    datePlaceholder.prop('value', date(dateFormat, fieldValue));
+                    dateInput.prop('value', fieldValue);
+                }
+
+                datePlaceholder.change(function () {
+                    if (datePlaceholder.prop('value')) {
+                        dateInput.prop('value', '');
                     }
                 });
-            </script>";
-        echo $aux;
+            });
+        </script>
+        <?php
     }
 
     /**
