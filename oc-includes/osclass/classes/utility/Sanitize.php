@@ -65,30 +65,64 @@ class Sanitize
      */
     public function price($value, ...$options)
     {
-        $options = array_merge([
-                                   'flags'   => FILTER_FLAG_STRIP_LOW
-                                                | FILTER_FLAG_STRIP_HIGH,
-                                   'options' => [
-                                       'min_range' => 0,
-                                       'max_range' => 65535,
-                                   ],
-                               ],
-                               $options);
+        // sanitize price to float up to 2 decimal places, merge with default options
+        if ($value) {
+            $options = array_merge(
+                [
+                    'flags'   => FILTER_FLAG_ALLOW_FRACTION,
+                    'options' => [
+                        'decimal_separator' => '.',
+                        'decimal_places'    => 2,
+                        'min_range'         => 0,
+                        'max_range'         => 9999999999.99,
+                    ],
+                ],
+                $options
+            );
+            $value   = filter_var($value, FILTER_SANITIZE_NUMBER_FLOAT, $options);
+            // round to 2 decimal places
+            $value = round($value, 2);
+        }
 
-        return filter_var($value, FILTER_SANITIZE_NUMBER_FLOAT, $options);
+        return $value;
     }
 
     /**
-     * Sanitise
-     *
-     * /**
-     * Sanitize a string and escape it for use in html
+     * Sanitize a html safe string
      *
      * @param string $value
      */
     public function html($value)
     {
         return htmlspecialchars($value, ENT_QUOTES, 'UTF-8');
+    }
+
+    /**
+     * Sanitize title string
+     *
+     * @param string $value
+     *
+     * @return string
+     */
+    public function title($value)
+    {
+        $value = $this->string($value);
+        if ($value) {
+            // remove all characters except letters, numbers and whitespace punctuation
+            $value = preg_replace('/[^\p{L}\p{N}\s]/u', '', $value);
+
+            // remove all whitespace and replace with a single space
+            $value = preg_replace('/\s+/', ' ', $value);
+
+            // remove all leading and trailing whitespace
+            $value = trim($value);
+
+            // make it html safe
+            return htmlspecialchars($value, ENT_QUOTES, 'UTF-8');
+        }
+
+        return '';
+
     }
 
     /**
@@ -373,16 +407,20 @@ class Sanitize
      */
     public function phone($value)
     {
-        if (empty($value)) {
-            return '';
-        }
-        // Remove strings that aren't number. leave leading + in number.
-        $value = preg_replace('/[^0-9\+]/', '', $value);
-        // Add leading zero if it's less than 11 digits and doesn't has leading +
-        if (strlen($value) < 11 && strpos($value, '+') === false) {
-            $value = '0' . $value;
+        $value = $this->string($value);
+        if ($value) {
+            $value = preg_replace('/[^+0-9]/', '', $value);
+            // check if the first character is a +
+            if (strpos($value, '+') === 0) {
+                $value = '+' . str_replace('+', '', $value);
+            } else {
+                $value = str_replace('+', '', $value);
+            }
+
+            return $value;
         }
 
-        return $value;
+        return '';
     }
+
 }
