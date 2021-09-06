@@ -745,7 +745,6 @@ CONFIG;
 
     file_put_contents(ABS_PATH . 'config.php', $config_text);
 
-    return;
 }
 
 

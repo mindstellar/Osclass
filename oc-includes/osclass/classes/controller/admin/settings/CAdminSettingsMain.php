@@ -27,8 +27,6 @@
  *
  */
 
-use mindstellar\upgrade\Osclass;
-
 /**
  * Class CAdminSettingsMain
  */

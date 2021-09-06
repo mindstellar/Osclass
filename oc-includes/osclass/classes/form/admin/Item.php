@@ -35,7 +35,6 @@
 
 namespace mindstellar\form\admin;
 
-use Category;
 use Exception;
 use mindstellar\form\base\FormInputs;
 use mindstellar\utility\Escape;
