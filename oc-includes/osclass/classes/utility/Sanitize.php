@@ -132,7 +132,7 @@ class Sanitize
      */
     public function websiteUrl($value)
     {
-        if($value) {
+        if ($value) {
             //remove invalid chars from url
             $value = $this->url($value);
             //remove possible xss attempts
