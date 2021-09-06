@@ -90,11 +90,11 @@ abstract class BaseModel
         $subdomain_type = osc_subdomain_type();
         $subhost        = osc_subdomain_host();
         // strpos is used to check if the domain is different, useful when accessing the website by diferent domains
-        if ($subdomain_type != '' && $subhost != '' && strpos($host, $subhost) !== false
+        if ($subdomain_type && $subhost && strpos($host, $subhost) !== false
             && preg_match('|^(www\.)?(.+)\.' . $subhost . '$|i', $host, $match)
         ) {
             $subdomain = $match[2];
-            if ($subdomain != '' && $subdomain !== 'www') {
+            if ($subdomain && $subdomain !== 'www') {
                 if ($subdomain_type === 'category') {
                     $category = Category::newInstance()->findBySlug($subdomain);
                     if (isset($category['pk_i_id'])) {

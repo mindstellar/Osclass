@@ -75,13 +75,13 @@ class Session
         }
 
         $this->session = $_SESSION;
-        if ($this->_get('messages') == '') {
+        if (!$this->_get('messages')) {
             $this->_set('messages', array());
         }
-        if ($this->_get('keepForm') == '') {
+        if (!$this->_get('keepForm')) {
             $this->_set('keepForm', array());
         }
-        if ($this->_get('form') == '') {
+        if (!$this->_get('form')) {
             $this->_set('form', array());
         }
     }
@@ -124,7 +124,6 @@ class Session
      * @since 4.0.0
      */
     public function _has($key)
-    : bool
     {
          return isset($this->session[$key]);
            
@@ -226,7 +225,7 @@ class Session
     public function _dropKeepForm($key = '')
     {
         $aKeep = $this->_get('keepForm');
-        if ($key != '') {
+        if ($key) {
             unset($aKeep[$key]);
             $this->_set('keepForm', $aKeep);
         } else {
@@ -253,7 +252,7 @@ class Session
     public function _getForm($key = '')
     {
         $form = $this->_get('form');
-        if ($key !== '') {
+        if ($key) {
             return $form[$key] ?? '';
         }
 
