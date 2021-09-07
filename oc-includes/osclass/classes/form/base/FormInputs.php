@@ -426,7 +426,7 @@ class FormInputs implements InputInterface
         $selectOptionsString = '';
         // $selectOptions is an array, loop through it
         if (is_array($selectOptions)) {
-            if(isset($options['sanitize'])) {
+            if (isset($options['sanitize'])) {
                 $selectOptions = $this->sanitizeByType($selectOptions, $options['sanitize']);
             }
             foreach ($selectOptions as $k => $v) {
