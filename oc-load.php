@@ -27,6 +27,7 @@
  */
 
 use mindstellar\Csrf;
+use mindstellar\logger\OsclassErrors;
 
 if (!defined('ABS_PATH')) {
     define('ABS_PATH', __DIR__ . '/');
@@ -53,25 +54,10 @@ require_once ABS_PATH . 'config.php';
 // load default constants
 require_once LIB_PATH . 'osclass/default-constants.php';
 
-// Sets PHP error handling
-if (OSC_DEBUG) {
-    ini_set('display_errors', 1);
-    error_reporting(E_ALL | E_STRICT);
-
-    if (OSC_DEBUG_LOG) {
-        ini_set('display_errors', 0);
-        ini_set('log_errors', 1);
-        ini_set('error_log', CONTENT_PATH . 'debug.log');
-    }
-} else {
-    error_reporting(
-        E_CORE_ERROR | E_CORE_WARNING | E_COMPILE_ERROR | E_ERROR | E_WARNING | E_PARSE
-        | E_USER_ERROR | E_USER_WARNING
-    );
-}
 //Load Autoloader
 require_once LIB_PATH . 'vendor/autoload.php';
-
+//Register error handler
+OsclassErrors::newInstance()->register();
 require_once LIB_PATH . 'osclass/helpers/hDatabaseInfo.php';
 require_once LIB_PATH . 'osclass/helpers/hPreference.php';
 
