@@ -137,7 +137,11 @@ class Item extends DAO
     public function extendData($items)
     {
         if (!empty($items)) {
-            $prefLocale = OC_ADMIN ? osc_current_admin_locale() : osc_current_user_locale();
+            if (defined(OC_ADMIN) && OC_ADMIN) {
+                $prefLocale = osc_current_admin_locale();
+            } else {
+                $prefLocale = osc_current_user_locale();
+            }
             $itemIds    = array_column($items, 'pk_i_id');
 
             // Set ids
