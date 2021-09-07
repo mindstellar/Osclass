@@ -224,7 +224,7 @@ class Csrf
      */
     private function setMessage($str_error)
     {
-        if (defined(OC_ADMIN) && OC_ADMIN) {
+        if (OC_ADMIN) {
             $this->session->_setMessage('admin', $str_error, 'error');
         } else {
             $this->session->_setMessage('pubMessages', $str_error, 'error');
@@ -240,7 +240,7 @@ class Csrf
             Utils::redirectTo($url);
         }
 
-        if (defined(OC_ADMIN) && OC_ADMIN) {
+        if (OC_ADMIN) {
             Utils::redirectTo(osc_admin_base_url(true));
         } else {
             Utils::redirectTo(osc_base_url(true));

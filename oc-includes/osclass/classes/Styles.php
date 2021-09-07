@@ -46,7 +46,7 @@ class Styles extends Dependencies
             self::newInstance()->printStyles();
         };
 
-        if (defined(OC_ADMIN) && OC_ADMIN) {
+        if (OC_ADMIN) {
             Plugins::addHook('admin_header', $print_styles, 9);
         } else {
             Plugins::addHook('header', $print_styles, 9);

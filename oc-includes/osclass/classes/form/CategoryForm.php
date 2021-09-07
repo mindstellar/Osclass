@@ -201,7 +201,7 @@ class CategoryForm extends Form
     {
         $tabs    = array();
         $content = array();
-        $current_locale_code = defined(OC_ADMIN)?osc_current_admin_locale():osc_current_user_locale();
+        $current_locale_code = OC_ADMIN?osc_current_admin_locale():osc_current_user_locale();
         foreach ($locales as $locale) {
             $value         = isset($category['locale'][$locale['pk_c_code']])
                 ? $category['locale'][$locale['pk_c_code']]['s_name'] : '';
