@@ -127,14 +127,14 @@ class Search extends DAO
         }
         $this->total_results       = null;
         $this->total_results_table = null;
-        if (OC_ADMIN) {
+        if (defined(OC_ADMIN) && OC_ADMIN) {
             $this->userLocaleCode = osc_current_admin_locale();
         } else {
             $this->userLocaleCode = osc_current_user_locale();
         }
 
         // get all item_location data
-        if (OC_ADMIN) {
+        if (defined(OC_ADMIN) && OC_ADMIN) {
             $this->addField(sprintf('%st_item_location.*', DB_TABLE_PREFIX));
         }
     }
@@ -690,7 +690,7 @@ class Search extends DAO
             if ($this->withUserId) {
                 $this->addFromUser();
             }
-            if ($this->withLocations || OC_ADMIN) {
+            if ($this->withLocations || defined(OC_ADMIN)) {
                 $this->dao->join(
                     sprintf('%st_item_location', DB_TABLE_PREFIX),
                     sprintf(
@@ -949,7 +949,7 @@ class Search extends DAO
             $this->dao->where('ti.b_premium = 1');
 
             if (empty($this->locale_code)) {
-                if (OC_ADMIN) {
+                if (defined(OC_ADMIN) && OC_ADMIN) {
                     $this->locale_code[osc_current_admin_locale()] = osc_current_admin_locale();
                 } else {
                     $this->locale_code[osc_current_user_locale()] = osc_current_user_locale();
@@ -978,7 +978,7 @@ class Search extends DAO
             $this->dao->where(sprintf('%st_item.b_spam = 0', DB_TABLE_PREFIX));
 
 
-            if ($this->withLocations || OC_ADMIN) {
+            if ($this->withLocations || defined(OC_ADMIN)) {
                 $this->dao->join(
                     sprintf('%st_item_location', DB_TABLE_PREFIX),
                     sprintf(
@@ -1018,7 +1018,7 @@ class Search extends DAO
             $this->dao->where(sprintf('%st_item.b_active = 1 ', DB_TABLE_PREFIX));
             $this->dao->where(sprintf('%st_item.b_spam = 0', DB_TABLE_PREFIX));
 
-            if ($this->withLocations || OC_ADMIN) {
+            if ($this->withLocations ||defined(OC_ADMIN)) {
                 $this->dao->join(
                     sprintf('%st_item_location', DB_TABLE_PREFIX),
                     sprintf(

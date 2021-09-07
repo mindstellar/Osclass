@@ -1277,7 +1277,7 @@ class Item extends DAO
      */
     public function extendCategoryName($items)
     {
-        $prefLocale = OC_ADMIN ? osc_current_admin_locale() : osc_current_user_locale();
+        $prefLocale = defined(OC_ADMIN) ? osc_current_admin_locale() : osc_current_user_locale();
 
         $results = array();
         foreach ($items as $item) {
