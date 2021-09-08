@@ -124,7 +124,7 @@ class CountryStats extends DAO
         $this->dao->from($this->getTableName());
         $this->dao->where($this->getPrimaryKey(), $countryCode);
         $result      = $this->dao->get();
-        if($result instanceof DBRecordsetClass) {
+        if ($result instanceof DBRecordsetClass) {
             $countryStat = $result->row();
         }
 
