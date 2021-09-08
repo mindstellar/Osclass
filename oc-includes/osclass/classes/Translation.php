@@ -49,7 +49,7 @@ class Translation
         $this->translator = new Translator();
         if (!$install) {
             // get user/admin locale
-            if(defined('OC_ADMIN') && OC_ADMIN) {
+            if (defined('OC_ADMIN') && OC_ADMIN) {
                 $locale = osc_current_admin_locale();
             } else {
                 $locale = osc_current_user_locale();

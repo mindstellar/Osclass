@@ -96,7 +96,7 @@ class Scripts extends Dependencies
      */
     public static function init()
     {
-        if(defined('OC_ADMIN') && OC_ADMIN) {
+        if (defined('OC_ADMIN') && OC_ADMIN) {
             self::initPrintScriptsAdmin();
         } else {
             self::initPrintScripts();

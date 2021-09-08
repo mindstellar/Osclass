@@ -1109,7 +1109,7 @@ class Item extends DAO
             CityStats::newInstance()->decreaseNumItems($item['fk_i_city_id']);
         }
         $isAdmin = false;
-        if(defined('OC_ADMIN') && OC_ADMIN){
+        if (defined('OC_ADMIN') && OC_ADMIN) {
             $isAdmin = true;
         }
         ItemActions::deleteResourcesFromHD($id, $isAdmin);
