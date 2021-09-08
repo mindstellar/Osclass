@@ -117,6 +117,7 @@ class OsclassErrors
             } elseif (PHP_SAPI === 'cli') {
                 printf($this->formattedError($error['message'], $error['type'], $error['file'], $error['line'],
                                              var_export($error, true)));
+                exit(1);
             } else {
                 echo sprintf('<!DOCTYPE html>
 <html lang="en">
@@ -307,7 +308,6 @@ class OsclassErrors
             // it's PHP CLI do not use html
             if (PHP_SAPI === 'cli') {
                 printf($this->formattedError($message, $type, $file, $line, $context));
-                exit(1);
             }
             $message = $this->htmlFormattedError($message, $type, $file, $line, $context);
             $this->writeToScreen($message);
