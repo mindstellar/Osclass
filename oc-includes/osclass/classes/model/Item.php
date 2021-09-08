@@ -137,13 +137,14 @@ class Item extends DAO
     public function extendData($items)
     {
         if (!empty($items)) {
-            if (defined(OC_ADMIN) && OC_ADMIN) {
+            if (defined('OC_ADMIN') && OC_ADMIN) {
                 $prefLocale = osc_current_admin_locale();
+
             } else {
                 $prefLocale = osc_current_user_locale();
             }
-            $itemIds    = array_column($items, 'pk_i_id');
 
+            $itemIds    = array_column($items, 'pk_i_id');
             // Set ids
             $this->dao->from($this->getTableName() . ' as i');
             $this->dao->whereIn('i.pk_i_id', $itemIds);
@@ -199,14 +200,15 @@ class Item extends DAO
                 if (isset($descriptions)) {
                     foreach ($descriptions as $itemDesc) {
                         if ($itemDesc['fk_i_item_id'] === $aItem['pk_i_id']) {
-                            if ($itemDesc['s_title'] || $itemDesc['s_description']) {
+                            if ((isset($itemDesc['s_title']) && $itemDesc['s_title'])
+                                || (isset($itemDesc['s_description']) && $itemDesc['s_description'])) {
                                 $aItem['locale'][$itemDesc['fk_c_locale_code']] = $itemDesc;
                             }
                             unset($itemDesc);
                         }
                     }
 
-                    if (isset($aItem['locale'][$prefLocale])) {
+                    if (isset($aItem['locale'][$prefLocale]) && !empty($aItem['locale'][$prefLocale])) {
                         $aItem['s_title']       = $aItem['locale'][$prefLocale]['s_title'];
                         $aItem['s_description'] = $aItem['locale'][$prefLocale]['s_description'];
                     } else {
@@ -217,15 +219,15 @@ class Item extends DAO
                     }
                 }
 
-
                 if (isset($extraFields)) {
                     foreach ($extraFields as $key => $extraField) {
                         if ($aItem['pk_i_id'] === $extraField['fk_i_item_id']) {
-                            $items[$itemKey] = array_merge($aItem, $extraField);
+                            $aItem[] = $extraField;
                             unset($extraFields[$key]);
                         }
                     }
                 }
+                $items[$itemKey] = $aItem;
             }
         }
 
@@ -1116,8 +1118,11 @@ class Item extends DAO
             RegionStats::newInstance()->decreaseNumItems($item['fk_i_region_id']);
             CityStats::newInstance()->decreaseNumItems($item['fk_i_city_id']);
         }
-
-        ItemActions::deleteResourcesFromHD($id, OC_ADMIN);
+        $isAdmin = false;
+        if(defined('OC_ADMIN') && OC_ADMIN){
+            $isAdmin = true;
+        }
+        ItemActions::deleteResourcesFromHD($id, $isAdmin);
 
         $this->dao->delete(DB_TABLE_PREFIX . 't_item_description', "fk_i_item_id = $id");
         $this->dao->delete(DB_TABLE_PREFIX . 't_item_comment', "fk_i_item_id = $id");
