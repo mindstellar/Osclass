@@ -112,6 +112,8 @@ class Osclass extends UpgradePackage
             osc_delete_preference('marketCategories');
             osc_delete_preference('marketDataUpdate');
         }
+        
+        osc_set_preference('admin_theme', 'modern');
 
         Utils::changeOsclassVersionTo(OSCLASS_VERSION);
 
