@@ -160,7 +160,7 @@ function osc_unregister_script($id)
 function osc_load_scripts()
 {
     Scripts::newInstance()->printScripts();
-    if(defined('OC_ADMIN') && OC_ADMIN) {
+    if (defined('OC_ADMIN') && OC_ADMIN) {
         osc_run_hook('admin_scripts_loaded');
     } else {
         osc_run_hook('scripts_loaded');

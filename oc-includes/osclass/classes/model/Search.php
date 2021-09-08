@@ -134,7 +134,7 @@ class Search extends DAO
         }
 
         // get all item_location data
-        if(defined('OC_ADMIN') && OC_ADMIN) {
+        if (defined('OC_ADMIN') && OC_ADMIN) {
             $this->addField(sprintf('%st_item_location.*', DB_TABLE_PREFIX));
         }
     }
@@ -949,7 +949,7 @@ class Search extends DAO
             $this->dao->where('ti.b_premium = 1');
 
             if (empty($this->locale_code)) {
-                if(defined('OC_ADMIN') && OC_ADMIN) {
+                if (defined('OC_ADMIN') && OC_ADMIN) {
                     $this->locale_code[osc_current_admin_locale()] = osc_current_admin_locale();
                 } else {
                     $this->locale_code[osc_current_user_locale()] = osc_current_user_locale();
