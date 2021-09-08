@@ -50,16 +50,17 @@ class Form extends FormInputs
      */
     protected static function generic_select($name, $items, $fld_key, $fld_name, $default_item, $id)
     {
-        foreach ($items as $k=>$i) {
+        $newItems = [];
+        foreach ($items as $k => $item) {
             if (isset($fld_key, $fld_name)) {
-                $items[$i[$fld_key]] = $i[$fld_name];
+                $newItems[$item[$fld_key]] = $item[$fld_name];
                 unset($items[$k]);
             }
         }
         $attributes['id']             = preg_replace('|([^_a-zA-Z0-9-]+)|', '', $name);
         $options['defaultValue']      = $id;
         $options['selectPlaceholder'] = $default_item;
-        $options['selectOptions'] = $items;
+        $options['selectOptions'] = $newItems;
         echo (new self())->select($name, $id, $attributes, $options);
     }
 

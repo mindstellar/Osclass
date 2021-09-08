@@ -375,7 +375,7 @@ class UserForm extends Form
             'i_value',
             's_text',
             null,
-            (isset($user['b_company'])) ? $user['b_company'] : null
+            $user['b_company'] ?? 0
         );
     }
 

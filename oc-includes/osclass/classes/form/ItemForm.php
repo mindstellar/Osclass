@@ -838,7 +838,7 @@ class ItemForm extends Form
         if (Session::newInstance()->_getForm('regionId') != '') {
             $cities =
                 City::newInstance()->findByRegion(Session::newInstance()->_getForm('regionId'));
-        } elseif ($cities == null) {
+        } elseif ($cities == null && isset($item['fk_i_region_id'])) {
             $cities = City::newInstance()->findByRegion($item['fk_i_region_id']);
         }
 

@@ -242,10 +242,14 @@ class FormInputs implements InputInterface
 
                 $input .= sprintf('<select name="%s"%s>', $name, $attributesString);
                 // Add selectPlaceholder option or create a new placeholder if not set
-                if (isset($options['selectPlaceholder']) && $options['selectPlaceholder']) {
-                    $input .= sprintf('<option value="">%s</option>', $options['selectPlaceholder']);
-                } elseif ($options['selectPlaceholder'] !== false) {
-                    $input .= sprintf('<option value="">%s</option>', 'Select Option');
+                $selectPlaceholder = $options['selectPlaceholder'] ?? '';
+
+                if(isset($options['selectPlaceholder']) && $options['selectPlaceholder'] !== null) {
+                    if ($selectPlaceholder) {
+                        $input .= sprintf('<option value="">%s</option>', $options['selectPlaceholder']);
+                    } else {
+                        $input .= sprintf('<option value="">%s</option>', 'Select Option');
+                    }
                 }
 
                 $input .= $this->getOptionsString($values, $options);
@@ -438,7 +442,7 @@ class FormInputs implements InputInterface
                     if ($optGroupLevel === 0) {
                         $selectOptionsString .= sprintf('<optgroup label="%s">', $optionLabel);
                     } else {
-                        $selected            = isset($defaultValue) && $defaultValue === $optionValue ? ' selected' : '';
+                        $selected            = isset($defaultValue) && $defaultValue == $optionValue ? ' selected' : '';
                         $selectOptionsString .= sprintf('<option value="%s"%s>%s</option>', $optionValue, $selected, $optionLabel)
                                                 . PHP_EOL;
                         unset($selected);
@@ -454,7 +458,7 @@ class FormInputs implements InputInterface
                     $optionValue = $k;
                     $optionLabel = $v;
                     // check if default value is set and if it matches the current value
-                    $selected            = isset($defaultValue) && $defaultValue === $optionValue ? ' selected' : '';
+                    $selected            = isset($defaultValue) && $defaultValue == $optionValue ? ' selected' : '';
                     $selectOptionsString .= sprintf('<option value="%s"%s>%s</option>', $optionValue, $selected, $optionLabel) . PHP_EOL;
                     unset($selected);
                 }
