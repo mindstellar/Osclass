@@ -136,7 +136,7 @@ class Sanitize
      */
     public function filterInt($value, ...$options)
     {
-        return $this->int($value, ...$options);
+        return $this->int($value);
     }
 
     /**
@@ -144,19 +144,9 @@ class Sanitize
      *
      * @param mixed $value
      */
-    public function int($value, ...$options)
+    public function int($value)
     {
-        $options = array_merge([
-                                   'flags'   => FILTER_FLAG_ALLOW_OCTAL,
-                                   'options' => [
-                                       'min_range' => 0,
-                                       'max_range' => 65535,
-                                   ],
-
-                               ],
-                               $options);
-
-        return filter_var($value, FILTER_SANITIZE_NUMBER_INT, $options);
+        return filter_var($value, FILTER_SANITIZE_NUMBER_INT);
     }
 
     /**
@@ -210,7 +200,7 @@ class Sanitize
      * @param       $value
      * @param array $options
      *
-     * @return bool|float
+     * @return float
      * @deprecated use Sanitize::float() instead will be removed in the next major 6.x release
      */
     public function filterFloat($value, ...$options)
@@ -385,14 +375,11 @@ class Sanitize
     public function username($value)
     {
         $sanitizedString = $this->string($value);
-        if ($sanitizedString != false) {
+        if ($sanitizedString) {
             // Sanitize username, trim leading/trailing spaces and replace space with underscore.
             $value = preg_replace('/[^a-zA-Z0-9_\.]/', '', $value);
-            $value = trim($value);
             $value = preg_replace('/[\s]+/', '_', $value);
-            $value = strtolower($value);
-
-            return $value;
+            return trim($value);
         }
 
         return '';
