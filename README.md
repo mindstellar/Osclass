@@ -1,3 +1,4 @@
+[![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)][license]
 [![CodeFactor](https://www.codefactor.io/repository/github/mindstellar/osclass/badge)](https://www.codefactor.io/repository/github/mindstellar/osclass)
 [![Test PHP|7.0|7.1|7.2|7.3|7.4|8.0](https://github.com/mindstellar/Osclass/actions/workflows/test.yml/badge.svg?branch=develop)](https://github.com/mindstellar/Osclass/actions/workflows/test.yml)
 ![Forks](https://img.shields.io/github/forks/mindstellar/osclass)
@@ -114,10 +115,10 @@ For any support related query, please visit our official support forum.
 ### Project info
 
 * Documentation: [Documentation][documentation]
-* License: [Apache License V2.0][license]
+* License: [GPLv3][license]
 
 [documentation]: https://docs.mindstellar.com/
 [support-forum]: https://osclass.discourse.group
 [original-code]: https://github.com/osclass/Osclass
 [code]: https://github.com/mindstellar/Osclass
-[license]: http://www.apache.org/licenses/LICENSE-2.0
+[license]: https://github.com/mindstellar/Osclass/blob/master/LICENSE
