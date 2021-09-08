@@ -360,7 +360,7 @@ class DBCommandClass
     public function escape($str)
     {
         if (is_numeric($str)) {
-            if(strlen($str) > 1 && strpos($str,'0') === 0) {
+            if (strlen($str) > 1 && strpos($str, '0') === 0) {
                 $str = "'" . $str . "'";
             } else {
                 return $str;
