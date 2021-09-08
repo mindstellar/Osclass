@@ -479,7 +479,7 @@ class ItemForm extends Form
      */
     public static function expiration_select($options = null)
     {
-        if (OC_ADMIN) {
+        if(defined('OC_ADMIN') && OC_ADMIN) {
             if ($options == null) {
                 $options = array(-1, 0, 1, 3, 5, 7, 10, 15, 30);
             }
@@ -1761,7 +1761,7 @@ class ItemForm extends Form
             ?>
             $("#catId").change(function () {
                 var cat_id = $(this).val();
-                <?php if (OC_ADMIN) { ?>
+                <?php if(defined('OC_ADMIN') && OC_ADMIN) { ?>
                 var url = '<?php echo osc_admin_base_url(true); ?>';
                 <?php } else { ?>
                 var url = '<?php echo osc_base_url(true); ?>';
@@ -1793,7 +1793,7 @@ class ItemForm extends Form
             });
             $(document).ready(function () {
                 var cat_id = $("#catId").val();
-                <?php if (OC_ADMIN) { ?>
+                <?php if(defined('OC_ADMIN') && OC_ADMIN) { ?>
                 var url = '<?php echo osc_admin_base_url(true); ?>';
                 <?php } else { ?>
                 var url = '<?php echo osc_base_url(true); ?>';

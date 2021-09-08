@@ -340,8 +340,7 @@ class OsclassErrors
         }
         return sprintf('<style>
               .error-container {
-                  width: 98vw;
-                  position: absolute;
+                  width: 100%%;
                   left: 0;
                   right: 0;
                   margin: auto;

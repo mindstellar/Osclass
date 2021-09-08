@@ -173,7 +173,7 @@ class CWebAjax extends BaseModel
 
                     if ($resource['fk_i_item_id'] == $item) {
                         // Delete: file, db table entry
-                        if (defined(OC_ADMIN)) {
+                        if (defined('OC_ADMIN') && OC_ADMIN) {
                             osc_deleteResource($id, true);
                             Log::newInstance()->insertLog(
                                 'ajax',

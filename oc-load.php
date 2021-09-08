@@ -143,7 +143,7 @@ osc_register_script('php-date', osc_assets_url('osclass-legacy/js/date.js'));
 osc_register_script('jquery-fineuploader', osc_assets_url('osclass-legacy/js/fineuploader/jquery.fineuploader.min.js'), 'jquery');
 
 Plugins::init();
-if (OC_ADMIN) {
+if(defined('OC_ADMIN') && OC_ADMIN) {
     // init admin menu
     AdminMenu::newInstance()->init();
     $functions_path = AdminThemes::newInstance()->getCurrentThemePath() . 'functions.php';
