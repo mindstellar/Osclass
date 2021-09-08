@@ -121,7 +121,9 @@ class RegionStats extends DAO
         $this->dao->from($this->getTableName());
         $this->dao->where($this->getPrimaryKey(), $regionId);
         $result     = $this->dao->get();
-        $regionStat = $result->row();
+        if($result instanceof DBRecordsetClass) {
+            $regionStat = $result->row();
+        }
 
         if (isset($regionStat['i_num_items'])) {
             $this->dao->from($this->getTableName());
