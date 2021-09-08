@@ -139,7 +139,6 @@ class Item extends DAO
         if (!empty($items)) {
             if (defined('OC_ADMIN') && OC_ADMIN) {
                 $prefLocale = osc_current_admin_locale();
-
             } else {
                 $prefLocale = osc_current_user_locale();
             }
@@ -1119,7 +1118,7 @@ class Item extends DAO
             CityStats::newInstance()->decreaseNumItems($item['fk_i_city_id']);
         }
         $isAdmin = false;
-        if(defined('OC_ADMIN') && OC_ADMIN){
+        if (defined('OC_ADMIN') && OC_ADMIN) {
             $isAdmin = true;
         }
         ItemActions::deleteResourcesFromHD($id, $isAdmin);
