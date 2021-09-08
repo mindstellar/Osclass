@@ -139,7 +139,6 @@ class Item extends DAO
         if (!empty($items)) {
             if (defined('OC_ADMIN') && OC_ADMIN) {
                 $prefLocale = osc_current_admin_locale();
-
             } else {
                 $prefLocale = osc_current_user_locale();
             }
@@ -151,7 +150,6 @@ class Item extends DAO
             $this->dao->groupBy('i.pk_i_id');
 
             // select sum of item_stats
-
             $this->dao->select('SUM(`s`.`i_num_views`) as `i_num_views`');
             $this->dao->select('SUM(`s`.`i_num_spam`) as `i_num_spam`');
             $this->dao->select('SUM(`s`.`i_num_bad_classified`) as `i_num_bad_classified`');
@@ -161,15 +159,11 @@ class Item extends DAO
             $this->dao->select('SUM(`s`.`i_num_premium_views`) as `i_num_premium_views` ');
             $this->dao->join(DB_TABLE_PREFIX . 't_item_stats as s', 'i.pk_i_id = s.fk_i_item_id');
 
-
             // populate locations
-
             $this->dao->select('l.*');
             $this->dao->join(DB_TABLE_PREFIX . 't_item_location as l', 'i.pk_i_id = l.fk_i_item_id');
 
-
             // populate categories
-
             $this->dao->select('cd.s_name as s_category_name');
             $this->dao->join(
                 DB_TABLE_PREFIX . 't_category_description as cd',
@@ -177,14 +171,11 @@ class Item extends DAO
             );
             $this->dao->where('cd.fk_c_locale_code', $prefLocale);
 
-
             $result      = $this->dao->get();
             $extraFields = $result->result();
             unset($result);
 
-
             //get description
-
             $this->dao->select('d.fk_i_item_id, d.fk_c_locale_code, d.s_title, d.s_description');
             $this->dao->from(DB_TABLE_PREFIX . 't_item_description as d');
             $this->dao->whereIn('d.fk_i_item_id', $itemIds);
@@ -192,7 +183,6 @@ class Item extends DAO
             $result       = $this->dao->get();
             $descriptions = $result->result();
             unset($result);
-
 
             //Merge all data to given $items array
             foreach ($items as $itemKey => $aItem) {
