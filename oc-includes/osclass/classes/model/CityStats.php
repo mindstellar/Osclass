@@ -272,7 +272,8 @@ class CityStats extends DAO
      * @return array
      */
     private function calculateAllStats(array $cities)
-    : array {
+    : array
+    {
         if (empty($cities)) {
             return array();
         }

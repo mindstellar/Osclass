@@ -367,7 +367,7 @@ class Utils
                     $loctmp->batchDelete($cityIds, 'CITY');
                 }
             }
-            unset($regionIds,$cityIds);
+            unset($regionIds, $cityIds);
         } elseif ($force) {
             // we need to populate location tmp table
             LocationsTmp::newInstance()->populateCountries();
