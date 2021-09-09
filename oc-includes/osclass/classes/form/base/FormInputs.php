@@ -244,7 +244,7 @@ class FormInputs implements InputInterface
                 // Add selectPlaceholder option or create a new placeholder if not set
                 $selectPlaceholder = $options['selectPlaceholder'] ?? '';
 
-                if(isset($options['selectPlaceholder']) && $options['selectPlaceholder'] !== null) {
+                if (isset($options['selectPlaceholder']) && $options['selectPlaceholder'] !== null) {
                     if ($selectPlaceholder) {
                         $input .= sprintf('<option value="">%s</option>', $options['selectPlaceholder']);
                     } else {

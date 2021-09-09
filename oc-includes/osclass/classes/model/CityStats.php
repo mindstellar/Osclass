@@ -120,7 +120,7 @@ class CityStats extends DAO
         $this->dao->from($this->getTableName());
         $this->dao->where($this->getPrimaryKey(), $cityId);
         $result   = $this->dao->get();
-        if($result instanceof  DBRecordsetClass) {
+        if ($result instanceof  DBRecordsetClass) {
             $cityStat = $result->row();
         }
 
