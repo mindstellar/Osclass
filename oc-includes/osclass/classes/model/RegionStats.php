@@ -264,6 +264,77 @@ class RegionStats extends DAO
 
         return 0;
     }
+
+    /**
+     * Batch calculate the total items that belong to region id
+     *
+     * @param array $regions array of region ids
+     *
+     * @return array
+     */
+    private function calculateAllStats(array $regions)
+    : array {
+        if (empty($regions)) {
+            return array();
+        }
+        $return = array();
+        
+        $this->dao->select('fk_i_region_id, count(*) as i_num_items');
+        $this->dao->from(DB_TABLE_PREFIX . 't_item_location');
+        $this->dao->join(DB_TABLE_PREFIX . 't_item', DB_TABLE_PREFIX . 't_item.pk_i_id = ' . DB_TABLE_PREFIX . 't_item_location.fk_i_item_id');
+        $this->dao->join(DB_TABLE_PREFIX . 't_category', DB_TABLE_PREFIX . 't_category.pk_i_id = ' . DB_TABLE_PREFIX . 't_item.fk_i_category_id');
+        $this->dao->where(DB_TABLE_PREFIX . 't_item.b_active = 1');
+        $this->dao->where(DB_TABLE_PREFIX . 't_item.b_enabled = 1');
+        $this->dao->where(DB_TABLE_PREFIX . 't_item.b_spam = 0');
+        $this->dao->where(DB_TABLE_PREFIX . 't_item.b_premium = 1 || ' . DB_TABLE_PREFIX . 't_item.dt_expiration >= \''
+            . date('Y-m-d H:i:s') . '\' ');
+        $this->dao->where(DB_TABLE_PREFIX . 't_category.b_enabled = 1');
+        $this->dao->where('fk_i_region_id IN (' . implode(',', $regions) . ')');
+        $this->dao->groupBy('fk_i_region_id');
+        $rs = $this->dao->get();
+        if ($rs === false) {
+            return array();
+        }
+        if ($rs->numRows() > 0) {
+            $aux = $rs->result();
+            foreach ($aux as $a) {
+                $return[$a['fk_i_region_id']] = $a['i_num_items'];
+            }
+        }
+        // fill missing values with 0
+        foreach ($regions as $c) {
+            if (!isset($return[$c])) {
+                $return[$c] = 0;
+            }
+        }
+
+        return $return;
+    }
+
+    /**
+     * Update the number of items for given regions ids
+     *
+     * @param array $regions array of region ids
+     *
+     * @return boolean| \DBRecordsetClass
+     */
+    public function updateAllStats(array $regions)
+    {
+        $newCalculated = $this->calculateAllStats($regions);
+
+        if (empty($newCalculated)) {
+            return false;
+        }
+        //INSERT or Update on duplicate key update use dao
+        $sql = 'INSERT INTO ' . $this->getTableName() . ' (fk_i_region_id, i_num_items) VALUES ';
+        $values = array();
+        foreach ($newCalculated as $id => $num) {
+            $values[] = '(' . $id . ', ' . $num . ')';
+        }
+        $sql .= implode(',', $values);
+        $sql .= ' ON DUPLICATE KEY UPDATE i_num_items = VALUES(i_num_items)';
+        return $this->dao->query($sql);
+    }
 }
 
 /* file end: ./oc-includes/osclass/model/RegionStats.php */

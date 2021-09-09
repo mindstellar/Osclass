@@ -322,6 +322,8 @@ class Utils
                 $limit        = max(1000, ceil($total_cities / 22));
             }
             $aLocations = $loctmp->getLocations($limit);
+            $regionIds = [];
+            $cityIds = [];
             foreach ($aLocations as $location) {
                 $id   = $location['id_location'];
                 $type = $location['e_type'];
@@ -334,46 +336,44 @@ class Utils
                         unset($numItems);
                         break;
                     case 'REGION':
-                        $numItems = RegionStats::newInstance()->calculateNumItems($id);
-                        $data     = RegionStats::newInstance()->setNumItems($id, $numItems);
-                        unset($numItems);
+                        $regionIds[] = $id;
                         break;
                     case 'CITY':
-                        $numItems = CityStats::newInstance()->calculateNumItems($id);
-                        $data     = CityStats::newInstance()->setNumItems($id, $numItems);
-                        unset($numItems);
+                        $cityIds[] = $id;
                         break;
                     default:
                         break;
                 }
-                if ($data >= 0) {
+
+                if ($data >= 0 && $type === 'COUNTRY') {
                     $loctmp->delete(array(
                         'e_type'      => $location['e_type'],
                         'id_location' => $location['id_location']
                     ));
                 }
             }
+            if (count($regionIds) > 0) {
+                $regionUpdate = RegionStats::newInstance()->updateAllStats($regionIds);
+                if ($regionUpdate >=0) {
+                    // batch delete $regionIds from locations_tmp
+                    $loctmp->batchDelete($regionIds, 'REGION');
+                }
+            }
+
+            if (count($cityIds) > 0) {
+                $cityUpdate = CityStats::newInstance()->updateAllStats($cityIds);
+                if ($cityUpdate >= 0) {
+                    // batch delete $cityIds from locations_tmp
+                    $loctmp->batchDelete($cityIds, 'CITY');
+                }
+            }
+            unset($regionIds,$cityIds);
         } elseif ($force) {
             // we need to populate location tmp table
-            $aCountry = Country::newInstance()->listAll();
+            LocationsTmp::newInstance()->populateCountries();
+            LocationsTmp::newInstance()->populateRegions();
+            LocationsTmp::newInstance()->populateCities();
 
-            foreach ($aCountry as $country) {
-                $aRegionsCountry = Region::newInstance()->findByCountry($country['pk_c_code']);
-                $loctmp->insert(array('id_location' => $country['pk_c_code'], 'e_type' => 'COUNTRY'));
-                foreach ($aRegionsCountry as $region) {
-                    $aCitiesRegion = City::newInstance()->findByRegion($region['pk_i_id']);
-                    $loctmp->insert(array('id_location' => $region['pk_i_id'], 'e_type' => 'REGION'));
-                    $batchCities = array();
-                    foreach ($aCitiesRegion as $city) {
-                        $batchCities[] = $city['pk_i_id'];
-                    }
-                    unset($aCitiesRegion);
-                    $loctmp->batchInsert($batchCities, 'CITY');
-                    unset($batchCities);
-                }
-                unset($aRegionsCountry);
-            }
-            unset($aCountry);
             Preference::newInstance()->replace('location_todo', LocationsTmp::newInstance()->count());
         }
 

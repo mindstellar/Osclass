@@ -263,6 +263,77 @@ class CityStats extends DAO
 
         return 0;
     }
+
+    /**
+     * Batch calculate the total items that belong to city id
+     *
+     * @param array $cities array of city ids
+     *
+     * @return array
+     */
+    private function calculateAllStats(array $cities)
+    : array {
+        if (empty($cities)) {
+            return array();
+        }
+        $return = array();
+        
+        $this->dao->select('fk_i_city_id, count(*) as i_num_items');
+        $this->dao->from(DB_TABLE_PREFIX . 't_item_location');
+        $this->dao->join(DB_TABLE_PREFIX . 't_item', DB_TABLE_PREFIX . 't_item.pk_i_id = ' . DB_TABLE_PREFIX . 't_item_location.fk_i_item_id');
+        $this->dao->join(DB_TABLE_PREFIX . 't_category', DB_TABLE_PREFIX . 't_category.pk_i_id = ' . DB_TABLE_PREFIX . 't_item.fk_i_category_id');
+        $this->dao->where(DB_TABLE_PREFIX . 't_item.b_active = 1');
+        $this->dao->where(DB_TABLE_PREFIX . 't_item.b_enabled = 1');
+        $this->dao->where(DB_TABLE_PREFIX . 't_item.b_spam = 0');
+        $this->dao->where(DB_TABLE_PREFIX . 't_item.b_premium = 1 || ' . DB_TABLE_PREFIX . 't_item.dt_expiration >= \''
+            . date('Y-m-d H:i:s') . '\' ');
+        $this->dao->where(DB_TABLE_PREFIX . 't_category.b_enabled = 1');
+        $this->dao->where('fk_i_city_id IN (' . implode(',', $cities) . ')');
+        $this->dao->groupBy('fk_i_city_id');
+        $rs = $this->dao->get();
+        if ($rs === false) {
+            return array();
+        }
+        if ($rs->numRows() > 0) {
+            $aux = $rs->result();
+            foreach ($aux as $a) {
+                $return[$a['fk_i_city_id']] = $a['i_num_items'];
+            }
+        }
+        // fill missing values with 0
+        foreach ($cities as $c) {
+            if (!isset($return[$c])) {
+                $return[$c] = 0;
+            }
+        }
+
+        return $return;
+    }
+
+    /**
+     * Update the number of items for given cities ids
+     *
+     * @param array $cities array of city ids
+     *
+     * @return boolean| \DBRecordsetClass
+     */
+    public function updateAllStats(array $cities)
+    {
+        $newCalculated = $this->calculateAllStats($cities);
+
+        if (empty($newCalculated)) {
+            return false;
+        }
+        //INSERT or Update on duplicate key update use dao
+        $sql = 'INSERT INTO ' . $this->getTableName() . ' (fk_i_city_id, i_num_items) VALUES ';
+        $values = array();
+        foreach ($newCalculated as $id => $num) {
+            $values[] = '(' . $id . ', ' . $num . ')';
+        }
+        $sql .= implode(',', $values);
+        $sql .= ' ON DUPLICATE KEY UPDATE i_num_items = VALUES(i_num_items)';
+        return $this->dao->query($sql);
+    }
 }
 
 /* file end: ./oc-includes/osclass/model/CityStats.php */
