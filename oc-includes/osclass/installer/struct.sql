@@ -6,6 +6,7 @@ CREATE TABLE /*TABLE_PREFIX*/t_locale (
     s_short_name VARCHAR(40) NOT NULL,
     s_description VARCHAR(100) NOT NULL,
     s_version VARCHAR(20) NOT NULL,
+    s_direction VARCHAR(3) NOT NULL DEFAULT 'ltr',
     s_author_name VARCHAR(100) NOT NULL,
     s_author_url VARCHAR(100) NOT NULL,
     s_currency_format VARCHAR(50) NOT NULL,

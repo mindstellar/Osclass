@@ -705,6 +705,40 @@ class Page extends DAO
 
         return $result->numRows() > 0;
     }
+
+    /**
+     * Public function to import email templates from json file
+     * @param string JSON 
+     */
+    public function importEmailJsonTemplates($json)
+    {
+        $json = json_decode($json, true);
+        // check if the json is valid
+        if (!$json) {
+            return false;
+        }
+        // check if json has language code and templates array
+        if (!isset($json['language'], $json['template'])) {
+            return false;
+        }
+
+        $language = $json['language'];
+        $templates = $json['template'];
+        // check if templates array is not empty
+        if (!$templates) {
+            return false;
+        }
+
+        foreach ($templates as $template) {
+            $result = $this->updateDescription($template['fk_i_page_id'], $language, $template['s_title'], $template['s_description']);
+            if(!$result){
+                $errorPageIds [] = $template['fk_i_page_id'];
+            }
+        }
+        return true;
+    }
+
+
 }
 
 /* file end: ./oc-includes/osclass/model/Page.php */

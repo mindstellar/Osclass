@@ -511,43 +511,30 @@ function osc_get_locations_sql_url($location)
 }
 
 /**
- * Get URL of language files JSON.
- *
+ * Get i18n repository URL.
  * @return string
  */
-function osc_get_languages_json_url()
+function osc_get_i18n_repository_url($path = '')
 {
-    return 'https://raw.githubusercontent.com/mindstellar/osclass-languages/master/src/list.json';
-}
-/**
- * Get URL of language folder.
- *
- * @param string $language
- *
- * @return string
- */
-function osc_get_language_folder_url($language)
-{
-    return 'https://raw.githubusercontent.com/mindstellar/osclass-languages/master/src/' . $language;
-}
-/**
- * Get required language files and their URLs.
- *
- * @param string $language
- *
- * @return array
- */
-function osc_get_language_files_urls($language)
-{
-    $base_url = osc_get_language_folder_url($language);
-    return array(
-        'index.php' => $base_url.'/index.php',
-        'core.mo' => $base_url.'/core.mo',
-        'core.po' => $base_url.'/core.po',
-        'mail.sql' => $base_url.'/mail.sql',
-        'messages.po' => $base_url.'/messages.po',
-        'messages.mo' => $base_url.'/messages.mo',
-        'theme.po' => $base_url.'/theme.po',
-        'theme.mo' => $base_url.'/theme.mo',
-    );
+    // Check if version tring contain dev,alpha,beta,RC set is_dev to 1
+    $is_dev = false;
+    // try str_replace to remove all version tags from string if string changed than it's dev
+    $version = str_replace(array('dev', 'alpha', 'beta', 'rc'), '', strtolower(osc_version()));
+    // if version string changed than it's dev
+    if ($version !== osc_version()) {
+        $is_dev = true;
+    }
+    if ($is_dev) {
+        // get url of local_list.json from github
+        $repoUrl = 'https://raw.githubusercontent.com/mindstellar/i10n-osclass/develop/';
+    } else {
+        $repoUrl = 'https://raw.githubusercontent.com/mindstellar/i10n-osclass/master/';
+    }
+    if ($path === '') {
+        $path = 'locale_list.json';
+    }
+    ltrim($path, '/');
+    $path = rawurlencode($path);
+
+    return $repoUrl . $path;
 }

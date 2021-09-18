@@ -52,6 +52,7 @@ class OSCLocale extends DAO
             's_short_name',
             's_description',
             's_version',
+            's_direction',
             's_author_name',
             's_author_url',
             's_currency_format',

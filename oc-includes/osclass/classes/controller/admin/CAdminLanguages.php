@@ -105,73 +105,112 @@ class CAdminLanguages extends AdminSecBaseModel
 
                 $this->redirectTo(osc_admin_base_url(true) . '?page=languages');
                 break;
-            case ('import_official'): // import official languages
-                if (defined('DEMO')) {
-                    osc_add_flash_warning_message(_m("This action can't be done because it's a demo site"), 'admin');
-                    $this->redirectTo(osc_admin_base_url(true) . '?page=languages');
-                }
-
-                $language = Params::getParam('language');
-                if ($language != '') {
-                    $aExistingLanguages = OSCLocale::newInstance()->listAllCodes();
-                    $aJsonLanguages     = json_decode(osc_file_get_contents(osc_get_languages_json_url()), true);
-                    if (!array_key_exists($language, $aExistingLanguages)
-                        && array_key_exists($language, $aJsonLanguages)
-                    ) {
-                        $folder = osc_translations_path() . $language;
-                        if (!mkdir($folder, 0755, true) && !is_dir($folder)) {
-                            throw new \RuntimeException(sprintf('Directory "%s" was not created', $folder));
+            case('import_locations'):
+                $languageToImport = Params::getParam('language');
+                if ($languageToImport != '') {
+                    if (defined('DEMO')) {
+                        osc_add_flash_warning_message(_m("This action can't be done because it's a demo site"), 'admin');
+                        $this->redirectTo(osc_admin_base_url(true) . '?page=languages');
+                    }
+                    
+                    $url = osc_get_i18n_repository_url();
+                    $json = json_decode(osc_file_get_contents($url), true);
+                    
+                    /* example json
+                        [ {
+                        "locale_code": "en_US",
+                        "name": "English (US)",
+                        "short_name": "English",
+                        "description": "American english translation",
+                        "direction": "ltr",
+                        "version": "1.0.0",
+                        "author_name": "navjottomer",
+                        "author_url": "https://github.com/navjottomer",
+                        "currency_format": "{NUMBER} {CURRENCY}",
+                        "date_format": "m/d/Y",
+                        "stop_words": "i,a,about,an,are,as,at,be,by,com,for,from,how,in,is,it,of,on,or,that,the,this,to,was,what,when,where,who,will,with,the",
+                        "mail_json": "en_US/mail.json"
+                        },  {
+                            ... more locales
+                        }]
+                    */
+                    foreach ($json as $l) {
+                        if (isset($l['locale_code']) && $l['locale_code'] === $languageToImport) {
+                            $locale = $l;
+                            break;
                         }
-
-                        $files = osc_get_language_files_urls($language);
-                        foreach ($files as $file => $url) {
-                            $content = osc_file_get_contents($url);
-                            file_put_contents($folder . '/' . $file, $content);
-                        }
-
+                    }
+                    if (isset($locale)) {
                         $locales = osc_listLocales();
                         $values  = array(
-                            'pk_c_code'         => $locales[$language]['code'],
-                            's_name'            => $locales[$language]['name'],
-                            's_short_name'      => $locales[$language]['short_name'],
-                            's_description'     => $locales[$language]['description'],
-                            's_version'         => $locales[$language]['version'],
-                            's_author_name'     => $locales[$language]['author_name'],
-                            's_author_url'      => $locales[$language]['author_url'],
-                            's_currency_format' => $locales[$language]['currency_format'],
-                            's_date_format'     => $locales[$language]['date_format'],
+                            'pk_c_code'         => $locale['locale_code'],
+                            's_name'            => $locale['name'],
+                            's_short_name'      => $locale['short_name'],
+                            's_description'     => $locale['description'],
+                            's_version'         => $locale['version'],
+                            's_direction'       => $locale['direction'],
+                            's_author_name'     => $locale['author_name'],
+                            's_author_url'      => $locale['author_url'],
+                            's_currency_format' => $locale['currency_format'],
+                            's_date_format'     => $locale['date_format'],
                             'b_enabled'         => 1,
                             'b_enabled_bo'      => 1
                         );
-
-                        if (isset($locales[$language]['stop_words'])) {
-                            $values['s_stop_words'] = $locales[$language]['stop_words'];
+                        if (isset($locales[$languageToImport])) {
+                            // don't overwrite existing values use array_merge
+                            $values = array_merge($values, $locales[$languageToImport]);
+                            // update version from imported json
+                            $values['s_version'] = $locale['version'];
                         }
                         OSCLocale::newInstance()->insert($values);
-                        // inserting e-mail translations
-                        $path = sprintf('%s%s/mail.sql', osc_translations_path(), $language);
-                        if (file_exists($path)) {
-                            $sql    = file_get_contents($path);
-                            $conn   = DBConnectionClass::newInstance();
-                            $c_db   = $conn->getOsclassDb();
-                            $comm   = new DBCommandClass($c_db);
-                            $result = $comm->importSQL($sql);
-                            if (!$result) {
+                        // inserting e-mail translations get mail.json from github
+                        $mailJSON = osc_file_get_contents(osc_get_i18n_repository_url('src/translations/'.$languageToImport.'/mail.json'));
+                        if ($mailJSON) {
+                            $mailImported = Page::newInstance()->importEmailJsonTemplates($mailJSON);
+                            if (!$mailImported) {
                                 osc_add_flash_error_message(_m('There was a problem importing email templates'), 'admin');
+                            }
+                        }
+                        // Get themes.po,themes.mo, core.po, core.mo, messages.po, messages.mo from github and save to local
+                        $uploadDir = osc_translations_path() . $languageToImport;
+                        $uploadDir = $uploadDir . '/';
+                        // check if the folder exists and create it if not
+                        if (!file_exists($uploadDir)) {
+                            mkdir($uploadDir, 0755, true);
+                        }
+                        $poFiles = array(
+                            'theme.po',
+                            'core.po',
+                            'messages.po'
+                        );
+                        $moFiles = array(
+                            'theme.mo',
+                            'core.mo',
+                            'messages.mo'
+                        );
+                        foreach ($poFiles as $poFile) {
+                            $poFileFrom = osc_get_i18n_repository_url('src/translations/' .$languageToImport.'/'.$poFile);
+                            $poFileTo = $uploadDir . $poFile;
+                            $poFile = osc_file_get_contents($poFileFrom);
+                            if ($poFile) {
+                                $poFileTo = file_put_contents($poFileTo, $poFile);
+                            }
+                        }
+                        foreach ($moFiles as $moFile) {
+                            $moFileFrom = osc_get_i18n_repository_url('src/translations/' .$languageToImport.'/'.$moFile);
+                            $moFileTo = $uploadDir . $moFile;
+                            $moFile = osc_file_get_contents($moFileFrom);
+                            if ($moFile) {
+                                $moFileTo = file_put_contents($moFileTo, $moFile);
                             }
                         }
                         osc_add_flash_ok_message(_m('Language imported successfully'), 'admin');
                         $this->redirectTo(osc_admin_base_url(true) . '?page=languages');
-
                         return true;
                     }
                 }
-
-                osc_add_flash_error_message(_m('There was a problem importing the selected language'), 'admin');
                 $this->redirectTo(osc_admin_base_url(true) . '?page=languages');
-
-                return false;
-                break;
+            break;
             case ('edit'):               // editing a language
                 $sLocale = Params::getParam('id');
                 if (!preg_match('/.{2}_.{2}/', $sLocale)) {
@@ -195,6 +234,7 @@ class CAdminLanguages extends AdminSecBaseModel
                 $languageCode           = Params::getParam('pk_c_code');
                 $enabledWebstie         = Params::getParam('b_enabled');
                 $enabledBackoffice      = Params::getParam('b_enabled_bo');
+                $languageDirection      = Params::getParam('s_direction');
                 $languageName           = Params::getParam('s_name');
                 $languageShortName      = Params::getParam('s_short_name');
                 $languageDescription    = Params::getParam('s_description');
@@ -232,6 +272,9 @@ class CAdminLanguages extends AdminSecBaseModel
                 if (!osc_validate_text($languageName)) {
                     $msg .= _m('Language name field is required') . '<br/>';
                 }
+                if ($languageDirection != 'ltr' && $languageDirection != 'rtl') {
+                    $msg .= _m('Language direction field is required') . '<br/>';
+                }
                 if (!osc_validate_text($languageShortName)) {
                     $msg .= _m('Language short name field is required') . '<br/>';
                 }
@@ -253,6 +296,7 @@ class CAdminLanguages extends AdminSecBaseModel
                     'b_enabled'         => $enabledWebstie,
                     'b_enabled_bo'      => $enabledBackoffice,
                     's_name'            => $languageName,
+                    's_direction'       => $languageDirection,
                     's_short_name'      => $languageShortName,
                     's_description'     => $languageDescription,
                     's_currency_format' => $languageCurrencyFormat,
