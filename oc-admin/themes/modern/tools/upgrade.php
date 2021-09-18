@@ -9,7 +9,7 @@ if (!defined('OC_ADMIN')) {
 //customize Head
 function customHead()
 {
-?>
+    ?>
     <script>
         // #steps_div hide
         var steps_div = document.getElementById('steps_div');
@@ -158,7 +158,7 @@ function customHead()
             steps_div.style.display = 'block';
         }
     </script>
-<?php
+    <?php
 }
 
 
@@ -188,11 +188,11 @@ osc_add_hook('help_box', 'addHelp');
 osc_add_hook('admin_page_header', 'customPageHeader');
 function customPageHeader()
 {
-?>
+    ?>
     <h1><?php _e('Tools'); ?>
         <a class="ms-1 bi bi-question-circle-fill float-right" data-bs-target="#help-box" data-bs-toggle="collapse" href="#help-box"></a>
     </h1>
-<?php
+    <?php
 }
 
 
