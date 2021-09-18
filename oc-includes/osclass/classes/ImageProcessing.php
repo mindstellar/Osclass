@@ -258,7 +258,6 @@ class ImageProcessing
      * @param      $imagePath
      * @param null $ext
      *
-     * @throws \ImagickException
      */
     public function saveToFile($imagePath, $ext = null)
     {
@@ -275,18 +274,23 @@ class ImageProcessing
         }
 
         if ($this->use_imagick) {
-            if ($ext === 'jpeg' && ($this->ext !== 'jpeg' && $this->ext !== 'jpg')) {
-                $bg = new Imagick();
-                $bg->newImage($this->width, $this->height, 'white');
-                $this->im->thumbnailImage($this->width, $this->height, true);
-                $bg->compositeImage($this->im, imagick::COMPOSITE_OVER, 0, 0);
-                $this->im  = $bg;
-                $this->ext = 'jpeg';
+            try {
+                if ($ext === 'jpeg' && ($this->ext !== 'jpeg' && $this->ext !== 'jpg')) {
+                    $bg = new Imagick();
+                    $bg->newImage($this->width, $this->height, 'white');
+                    $this->im->thumbnailImage($this->width, $this->height, true);
+                    $bg->compositeImage($this->im, imagick::COMPOSITE_OVER, 0, 0);
+                    $this->im  = $bg;
+                    $this->ext = 'jpeg';
+                }
+                $this->im->setImageDepth(8);
+                $this->im->setImageFilename($imagePath);
+                $this->im->setImageFormat($ext);
+                $this->im->writeImage($imagePath);
             }
-            $this->im->setImageDepth(8);
-            $this->im->setImageFilename($imagePath);
-            $this->im->setImageFormat($ext);
-            $this->im->writeImage($imagePath);
+             catch (Exception $e){
+                trigger_error($e->getMessage(),E_USER_WARNING);
+             }
         } else {
             switch ($ext) {
                 case 'gif':
