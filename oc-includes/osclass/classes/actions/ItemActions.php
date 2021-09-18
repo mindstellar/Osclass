@@ -307,14 +307,9 @@ class ItemActions
                     $fileMime = $aResources['type'][$key];
                     if (function_exists('getimagesize') && (stripos($fileMime, 'image/') !== false)) {
                         $info = getimagesize($aResources['tmp_name'][$key]);
-                        if (isset($info['mime'])) {
-                            $fileMime = $info['mime'];
-                        } else {
-                            $fileMime = '';
-                        }
+                        $fileMime = $info['mime'] ?? '';
                     }
-
-
+                    
                     if (in_array($fileMime, $aMimesAllowed, false)) {
                         $bool_img = true;
                     }
@@ -486,8 +481,6 @@ class ItemActions
      * @param array  $_meta
      * @param        $meta
      * @param string $flash_error
-     * @param        $k
-     * @param        $v
      */
     private function handleMetaField(array $_meta, &$meta, string &$flash_error)
     {
@@ -710,7 +703,6 @@ class ItemActions
                             $img->doWatermarkImage();
                         }
                         $img->saveToFile($path, $extension);
-
                         // Create preview
                         $path = $tmpName . '_preview';
                         $size = explode('x', osc_preview_dimensions());
