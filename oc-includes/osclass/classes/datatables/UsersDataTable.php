@@ -114,13 +114,13 @@ class UsersDataTable extends DataTable
             $this->iPage = Params::getParam('iPage');
         }
         # sorting column
-        if(!isset($_get['iSortCol_0']) || $_get['iSortCol_0'] == '') {
+        if (!isset($_get['iSortCol_0']) || $_get['iSortCol_0'] == '') {
             $this->order_by['column_name'] = 'pk_i_id';
         } else {
             $this->order_by['column_name'] = $this->column_names[$_get['iSortCol_0']];
         }
         # Sorting order
-        if(!isset($_get['sSortDir_0']) || $_get['sSortDir_0'] == '') {
+        if (!isset($_get['sSortDir_0']) || $_get['sSortDir_0'] == '') {
             $this->order_by['type'] = 'DESC';
         } else {
             $this->order_by['type'] = $_get['sSortDir_0'];
@@ -144,7 +144,7 @@ class UsersDataTable extends DataTable
         if (isset($_get['s_name']) && $_get['s_name']) {
             $this->conditions['s_name'] = str_replace('*', '%', $_get['s_name']);
             $this->withFilters          = true;
-        } elseif(isset($_get['user']) && $_get['user']) { 
+        } elseif (isset($_get['user']) && $_get['user']) {
             if (!isset($_get['userId']) || $_get['userId'] == '') {
                 // escape value
                 $esc_user                                                                                =

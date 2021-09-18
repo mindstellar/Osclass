@@ -287,10 +287,9 @@ class ImageProcessing
                 $this->im->setImageFilename($imagePath);
                 $this->im->setImageFormat($ext);
                 $this->im->writeImage($imagePath);
+            } catch (Exception $e) {
+                trigger_error($e->getMessage(), E_USER_WARNING);
             }
-             catch (Exception $e){
-                trigger_error($e->getMessage(),E_USER_WARNING);
-             }
         } else {
             switch ($ext) {
                 case 'gif':
