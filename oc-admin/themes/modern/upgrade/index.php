@@ -64,14 +64,14 @@ function customHead()
             $('#output').show();
             $('#tohide').hide();
 
-            $.get('<?php echo osc_admin_base_url(true); ?>?page=ajax&action=upgrade-db&skipdb=<?php echo Params::getParam('skipdb')?>',
+            $.get('<?php echo osc_admin_base_url(true); ?>?page=ajax&action=upgrade_db&skipdb=<?php echo Params::getParam('skipdb')?>',
                 function
                     (data) {
                     $('#loading_image').hide();
-                    if (data.status) {
-                        $("#result").append("Success: " + data.message + "<br />");
+                    if (data.error === 1) {
+                        $("#result").html("Error: " + data.message.replace(/\n/g, "<br />"));
                     } else {
-                        $("#result").append("Error: " + data.message.replace(/\n/g, "<br />"));
+                        $("#result").html("Success: " + data.message + "<br />");
                     }
                 }, 'json');
             <?php } ?>
@@ -88,7 +88,7 @@ osc_current_admin_theme_path('parts/header.php'); ?>
     <h2 class="render-title"><?php _e('Upgrade'); ?></h2>
     <div id="result">
         <div id="output" style="display:none">
-            <span class="spinner-border text-secondary" role="status"></span>
+            <span class="spinner-border text-secondary" style="width:1.2rem;height:1.2rem" role="status"></span>
             <?php _e('Upgrading your Osclass installation (this could take a while): ', 'admin'); ?>
         </div>
         <div id="tohide">

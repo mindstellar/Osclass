@@ -609,12 +609,12 @@ class CAdminAjax extends AdminSecBaseModel
                     try {
                         $upgradeOsclass->doUpgrade();
                         $db_upgrade_result = json_decode($osclassUpgradeObj::upgradeDB(Params::getParam('skipdb')), true);
-                        $result            = ['error' => 0, 'message' => __('Osclass upgraded successfully.')];
+                        $result            = ['error' => $db_upgrade_result['error'], 'message' => $db_upgrade_result['message']];
                     } catch (Exception $e) {
                         $result = ['error' => 1, 'message' => $e->getMessage()];
                         osc_add_flash_error_message($e->getMessage(), 'admin');
                     }
-                    if (isset($db_upgrade_result) && $db_upgrade_result['status'] !== true) {
+                    if (isset($db_upgrade_result) && $db_upgrade_result['error'] == 1) {
                         $result = ['error' => 5, 'message' => $db_upgrade_result['message']];
                         osc_add_flash_warning_message(__('Error occurred while upgrading osclass Database.'), 'admin');
                     }
@@ -645,7 +645,7 @@ class CAdminAjax extends AdminSecBaseModel
                 }
                 echo json_encode($result);
                 break;
-            case 'upgrade-db':
+            case 'upgrade_db':
                 if (defined('DEMO')) {
                     osc_add_flash_warning_message(_m('This action cannot be done because it is a demo site'), 'admin');
                     $this->redirectTo(osc_admin_base_url(true));

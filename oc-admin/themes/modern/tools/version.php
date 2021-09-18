@@ -31,10 +31,9 @@
 
 $customPageHeader = static function () { ?>
     <h1><?php printf(__('Osclass %s'), OSCLASS_VERSION); ?>
-        <a class="ms-1 bi bi-question-circle-fill float-right" data-bs-target="#help-box" data-bs-toggle="collapse"
-           href="#help-box"></a>
+        <a class="ms-1 bi bi-question-circle-fill float-right" data-bs-target="#help-box" data-bs-toggle="collapse" href="#help-box"></a>
     </h1>
-    <?php
+<?php
 };
 osc_add_hook('admin_page_header', $customPageHeader);
 
@@ -47,20 +46,25 @@ unset($customPageTitle, $customPageHeader);
 
 osc_current_admin_theme_path('parts/header.php');
 ?>
-    <div class="row-wrapper">
-        <div class="widget-box">
-            <div class="widget-box-title">
-                <h3>Osclass <?php echo OSCLASS_VERSION; ?></h3>
-            </div>
-            <div class="widget-box-content">
-                <b class="stats-title">Changelog</b>
-                <ul style="list-style-type: disc !important;">
-                    <?php
-                    echo nl2br(file_get_contents(ABS_PATH . 'CHANGELOG.md'));
-                    ?>
-                </ul>
-            </div>
+<div class="row-wrapper">
+    <div class="widget-box">
+        <div class="widget-box-title">
+            <h3>Osclass <?php echo OSCLASS_VERSION; ?></h3>
+        </div>
+        <div class="widget-box-content">
+
+            <?php
+            $changelog = file_get_contents(ABS_PATH . '/CHANGELOG.md');
+
+            $changelog = preg_replace('/\r\n{2,}/', "\n", $changelog);
+            $changelog = preg_replace('/^(#+)(.*)$/m', '<h3>$2</h3>', $changelog);
+            $changelog = preg_replace('/^(##+)(.*)$/m', '<h4>$2</h4>', $changelog);
+            $changelog = preg_replace('/^(###+)(.*)$/m', '<h5>$2</h5>', $changelog);
+            $changelog = preg_replace('/^\*(.*)$/m', '<li>$1</li>', $changelog);
+            echo $changelog;
+            ?>
         </div>
     </div>
+</div>
 <?php
 osc_current_admin_theme_path('parts/footer.php'); ?>

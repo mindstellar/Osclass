@@ -62,7 +62,7 @@ class Osclass extends UpgradePackage
         bool  $force_upgrade = false
     ) {
         $enable_prerelease = false;
-        if (defined('ENABLE_PRERELEASE') && ENABLE_PRERELEASE === true ) {
+        if (defined('ENABLE_PRERELEASE') && ENABLE_PRERELEASE === true) {
             $enable_prerelease = true;
         }
         parent::__construct($package_info, $force_upgrade, $enable_prerelease);
@@ -79,7 +79,6 @@ class Osclass extends UpgradePackage
     {
         set_time_limit(0);
 
-        $error_queries = array();
         if (file_exists(osc_lib_path() . 'osclass/installer/struct.sql')) {
             $sql = file_get_contents(osc_lib_path() . 'osclass/installer/struct.sql');
 
@@ -87,37 +86,44 @@ class Osclass extends UpgradePackage
             $c_db = $conn->getOsclassDb();
             $comm = new DBCommandClass($c_db);
 
-            $error_queries = $comm->updateDB(str_replace('/*TABLE_PREFIX*/', DB_TABLE_PREFIX, $sql));
+            $result = $comm->updateDB(str_replace('/*TABLE_PREFIX*/', DB_TABLE_PREFIX, $sql));
+            list($status, $message, $errorQueries) = $result;
+        }
+        if (isset($status, $message, $errorQueries)) {
+            if (!$skip_db && count($errorQueries) > 0) {
+                $skip_db_link = osc_admin_base_url(true) . '?page=upgrade&confirm=true&skipdb=true';
+                $message      = '<p>';
+                $message      .= __('Osclass &raquo; Has some errors') . PHP_EOL;
+                $message      .= __('We\'ve encountered some problems while updating the database structure. The following queries failed:');
+                $message      .= '</p>' . PHP_EOL;
+                $message      .= '<pre>';
+                $message      .= implode(PHP_EOL, $errorQueries) . PHP_EOL;
+                $message      .= '</pre>';
+                $message      .= __('These errors could be false-positive errors.');
+                $message      .= __(" If you're sure that is the case, you can continue with the upgrade.");
+                $message      .= '<a class="btn btn-sm btn-primary" href="' . $skip_db_link . '">' . __('Continue with upgrade') . '</a>';
+                $message      .= __(" Or you can ask help in our support forum");
+                $message      .= ': <a class="btn btn-sm btn-info" href="https://osclass.discourse.group">' . __('Support Forum') . '</a>';
+
+                return json_encode(['error' => 2, 'message' => $message]);
+            }
+
+            if (osc_version() < 390) {
+                osc_delete_preference('marketAllowExternalSources');
+                osc_delete_preference('marketURL');
+                osc_delete_preference('marketAPIConnect');
+                osc_delete_preference('marketCategories');
+                osc_delete_preference('marketDataUpdate');
+            }
+
+            osc_set_preference('admin_theme', 'modern');
+
+            Utils::changeOsclassVersionTo(OSCLASS_VERSION);
+
+            return json_encode(['error' => 0, 'message' => __('Osclass DB Upgraded Successfully')]);
         }
 
-        if (!$skip_db && count($error_queries[2]) > 0) {
-            $skip_db_link = osc_admin_base_url(true) . '?page=upgrade&confirm=true&skipdb=true';
-            $message      = __('Osclass &raquo; Has some errors') . PHP_EOL;
-            $message      .= __('We\'ve encountered some problems while updating the database structure. 
-            The following queries failed:' . PHP_EOL);
-            $message      .= implode(PHP_EOL, $error_queries[2]) . PHP_EOL;
-            $message      .= sprintf(
-                __('These errors could be false-positive errors. If you\'re sure that is the case, you can 
-                    <a href="%s">continue with the upgrade</a>, or <a href="https://osclass.discourse.group">ask in our forums</a>.'),
-                $skip_db_link
-            );
-
-            return json_encode(['status' => false, 'message' => $message]);
-        }
-
-        if (osc_version() < 390) {
-            osc_delete_preference('marketAllowExternalSources');
-            osc_delete_preference('marketURL');
-            osc_delete_preference('marketAPIConnect');
-            osc_delete_preference('marketCategories');
-            osc_delete_preference('marketDataUpdate');
-        }
-        
-        osc_set_preference('admin_theme', 'modern');
-
-        Utils::changeOsclassVersionTo(OSCLASS_VERSION);
-
-        return json_encode(['status' => true, 'message' => __('Osclass DB Upgraded Successfully')]);
+        return json_encode(['error' => 1, 'message' => __('Unable to upgrade Database')]);
     }
 
     /**
@@ -142,8 +148,8 @@ class Osclass extends UpgradePackage
             || (!$preference->get('update_core_json') && (time() - $preference->get('last_version_check')) > (24 * 3600)
             )
         ) {
-            if (defined('ENABLE_PRERELEASE') && ENABLE_PRERELEASE === true ) {
-                $json_url              = 'https://api.github.com/repos/mindstellar/osclass/releases';
+            if (defined('ENABLE_PRERELEASE') && ENABLE_PRERELEASE === true) {
+                $json_url                  = 'https://api.github.com/repos/mindstellar/osclass/releases';
                 $osclass_package_info_json = (new FileSystem())->getContents($json_url);
                 if ($osclass_package_info_json) {
                     $aSelfPackage = json_decode($osclass_package_info_json, true)[0];
@@ -166,16 +172,17 @@ class Osclass extends UpgradePackage
                 if (isset($aSelfPackage['tag_name'])) {
                     $package_info['s_new_version'] = ltrim(trim($aSelfPackage['tag_name']), 'v');
                 }
-                    $package_info['s_installed_version'] = OSCLASS_VERSION;
-                    $package_info['s_short_name']        = 'osclass';
-                    $package_info['s_target_directory'] = ABS_PATH;
-                    $package_info['a_filtered_files'] = ['oc-content', 'config.php'];
-                    $package_info['s_prerelease'] = $aSelfPackage['prerelease'];
+                $package_info['s_installed_version'] = OSCLASS_VERSION;
+                $package_info['s_short_name']        = 'osclass';
+                $package_info['s_target_directory']  = ABS_PATH;
+                $package_info['a_filtered_files']    = ['oc-content', 'config.php'];
+                $package_info['s_prerelease']        = $aSelfPackage['prerelease'];
             }
         }
         if (!isset($package_info) || empty($package_info)) {
             $package_info = json_decode($preference->get('update_core_json'), true);
         }
+
         return Plugins::applyFilter('osclass_upgrade_package', $package_info);
     }
 

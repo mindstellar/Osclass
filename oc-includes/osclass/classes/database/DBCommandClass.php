@@ -1516,7 +1516,7 @@ class DBCommandClass
         $data_queries   = array();
         $this->prepareAndSepareQueries($queries, $data_queries, $struct_queries);
 
-        // hack
+        // Set foreign keys check to false
         $this->query('SET FOREIGN_KEY_CHECKS = 0');
 
         // Get tables from DB (already installed)
@@ -1561,22 +1561,12 @@ class DBCommandClass
         foreach ($struct_queries as $q) {
             error_log(' --- ' . $q);
         }
-        // HACK: AUTO_INCREMENT fields needs to be also a PRIMARY KEY
-        foreach ($struct_queries as $k => $v) {
-            if (stripos($v, 'auto_increment') !== false && stripos($v, 'primary key') === false) {
-                $struct_queries[$k] = $v . ' PRIMARY KEY';
-            }
-        }
 
         $queries = array_merge($struct_queries, $data_queries);
 
         $ok            = true;
         $error_queries = array();
         foreach ($queries as $query) {
-            // hack for 2.4
-            if (stripos($query, 'country ADD PRIMARY KEY')) {
-                continue;
-            }
             $res = $this->query($query);
             if (!$res) {
                 $ok              = false;
@@ -1589,7 +1579,7 @@ class DBCommandClass
                 error_log(' --- ' . $q);
             }
         }
-        // hack
+        // Set foreign_key_checks to 1
         $this->query('SET FOREIGN_KEY_CHECKS = 1');
         error_log(' ----- END updateDB ----- ');
 
