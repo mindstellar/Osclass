@@ -623,7 +623,7 @@ function osc_item_url_from_item($item, $locale = '')
 function osc_premium_url($locale = '')
 {
     $item = osc_premium();
-    return osc_item_url_from_item($item, $locale);   
+    return osc_item_url_from_item($item, $locale);
 }
 
 
