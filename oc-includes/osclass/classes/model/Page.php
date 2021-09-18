@@ -708,7 +708,7 @@ class Page extends DAO
 
     /**
      * Public function to import email templates from json file
-     * @param string JSON 
+     * @param string JSON
      */
     public function importEmailJsonTemplates($json)
     {
@@ -731,7 +731,7 @@ class Page extends DAO
 
         foreach ($templates as $template) {
             $result = $this->updateDescription($template['fk_i_page_id'], $language, $template['s_title'], $template['s_description']);
-            if(!$result){
+            if (!$result) {
                 $errorPageIds [] = $template['fk_i_page_id'];
             }
         }
