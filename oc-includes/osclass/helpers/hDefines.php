@@ -583,6 +583,10 @@ function osc_item_url($locale = '')
  */
 function osc_item_url_from_item($item, $locale = '')
 {
+    $itemId = $item['pk_i_id'];
+    $itemCity = isset($item['s_city'])?osc_sanitizeString($item['s_city']):'';
+    $itemTitle = osc_sanitizeString(str_replace(',', '-', $item['s_title']));
+
     if (osc_rewrite_enabled()) {
         $url = osc_get_preference('rewrite_item_url');
         if (preg_match('|{CATEGORIES}|', $url)) {
@@ -593,20 +597,9 @@ function osc_item_url_from_item($item, $locale = '')
             }
             $url = str_replace('{CATEGORIES}', implode('/', $sanitized_categories), $url);
         }
-        $url = str_replace(array(
-            '{ITEM_ID}',
-            '{ITEM_CITY}'
-        ), array(
-            osc_sanitizeString($item['pk_i_id']),
-            osc_sanitizeString($item['s_city'])
-        ), $url);
-        $url = str_replace(array(
-            '{ITEM_TITLE}',
-            '?'
-        ), array(
-            osc_sanitizeString(str_replace(',', '-', $item['s_title'])),
-            ''
-        ), $url);
+
+        $url = str_replace(array('{ITEM_ID}', '{ITEM_CITY}', '{ITEM_TITLE}', '?'),
+                           array($itemId, $itemCity, $itemTitle, ''), $url);
         if ($locale != '') {
             $path = osc_base_url() . $locale . '/' . $url;
         } else {
@@ -629,30 +622,8 @@ function osc_item_url_from_item($item, $locale = '')
  */
 function osc_premium_url($locale = '')
 {
-    if (osc_rewrite_enabled()) {
-        $sanitized_categories = array();
-        $cat                  = Category::newInstance()->hierarchy(osc_premium_category_id());
-        for ($i = count($cat); $i > 0; $i--) {
-            $sanitized_categories[] = $cat[$i - 1]['s_slug'];
-        }
-        $url = str_replace(array('{ITEM_ID}', '{CATEGORIES}'), array(
-            osc_premium_id(),
-            implode('/', $sanitized_categories)
-        ), str_replace(
-            '{ITEM_TITLE}',
-            osc_sanitizeString(str_replace(',', '-', osc_premium_title())),
-            osc_get_preference('rewrite_item_url')
-        ));
-        if ($locale != '') {
-            $path = osc_base_url() . $locale . '/' . $url;
-        } else {
-            $path = osc_base_url() . $url;
-        }
-    } else {
-        $path = osc_item_url_ns(osc_premium_id(), $locale);
-    }
-
-    return $path;
+    $item = osc_premium();
+    return osc_item_url_from_item($item, $locale);   
 }
 
 
