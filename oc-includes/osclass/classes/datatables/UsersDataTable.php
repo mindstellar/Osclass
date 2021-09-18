@@ -101,10 +101,11 @@ class UsersDataTable extends DataTable
      */
     private function getDBParams($_get)
     {
-
-        if (!isset($_get['iDisplayStart'])) {
+        # Display length
+        if (!isset($_get['iDisplayStart']) || !is_numeric($_get['iDisplayStart']) || $_get['iDisplayStart'] < 0) {
             $_get['iDisplayStart'] = 0;
         }
+        # Paging
         $p_iPage = 1;
         if (!is_numeric(Params::getParam('iPage')) || Params::getParam('iPage') < 1) {
             Params::setParam('iPage', $p_iPage);
@@ -112,35 +113,39 @@ class UsersDataTable extends DataTable
         } else {
             $this->iPage = Params::getParam('iPage');
         }
-
-        if (@$_get['iSortCol_0'] == '') {
+        # sorting column
+        if(!isset($_get['iSortCol_0']) || $_get['iSortCol_0'] == '') {
             $this->order_by['column_name'] = 'pk_i_id';
         } else {
             $this->order_by['column_name'] = $this->column_names[$_get['iSortCol_0']];
         }
-        if (@$_get['sSortDir_0'] == '') {
+        # Sorting order
+        if(!isset($_get['sSortDir_0']) || $_get['sSortDir_0'] == '') {
             $this->order_by['type'] = 'DESC';
         } else {
             $this->order_by['type'] = $_get['sSortDir_0'];
         }
 
         $this->conditions = array();
-        if (@$_get['userId'] != '') {
+        # condition for userId
+        if (isset($_get['userId']) && is_numeric($_get['userId'])) {
             $this->conditions['pk_i_id'] = str_replace('*', '%', $_get['userId']);
             $this->withFilters           = true;
         }
-        if (@$_get['s_email'] != '') {
+        # condition for s_email
+        if (isset($_get['s_email']) && $_get['s_email']) {
             // escape value
             $esc_email                                             =
                 User::newInstance()->dao->escape(str_replace('*', '%', $_get['s_email']));
             $this->conditions["s_email LIKE " . $esc_email ] = null;
             $this->withFilters                                     = true;
         }
-        if (@$_get['s_name'] != '') {
+        # condition for s_name
+        if (isset($_get['s_name']) && $_get['s_name']) {
             $this->conditions['s_name'] = str_replace('*', '%', $_get['s_name']);
             $this->withFilters          = true;
-        } elseif (@$_get['user'] != '') {
-            if (@$_get['userId'] == '') {
+        } elseif(isset($_get['user']) && $_get['user']) { 
+            if (!isset($_get['userId']) || $_get['userId'] == '') {
                 // escape value
                 $esc_user                                                                                =
                     User::newInstance()->dao->escape(str_replace('*', '%', $_get['user']));
@@ -150,41 +155,43 @@ class UsersDataTable extends DataTable
             }
             $this->withFilters = true;
         }
-        if (@$_get['s_username'] != '') {
+        # condition for s_username
+        if (isset($_get['s_username']) && $_get['s_username'] !='') {
             $this->conditions['s_username'] = str_replace('*', '%', $_get['s_username']);
             $this->withFilters              = true;
         }
-
-        if (@$_get['countryId'] != '') {
+        # condition for countryId
+        if (isset($_get['countryId']) && $_get['countryId'] != '') {
             $this->conditions['fk_c_country_code'] = $_get['countryId'];
             $this->withFilters                     = true;
-        } elseif (@$_get['countryName'] != '') {
+        } elseif (isset($_get['countryName']) && $_get['countryName'] != '') {
             $this->conditions['s_country'] = $_get['countryName'];
             $this->withFilters             = true;
         }
-
-        if (@$_get['regionId'] != '') {
+        # condition for regionId
+        if (isset($_get['regionId']) && $_get['regionId'] != '') {
             $this->conditions['fk_i_region_id'] = $_get['regionId'];
             $this->withFilters                  = true;
-        } elseif (@$_get['region'] != '') {
+        } elseif (isset($_get['region']) && $_get['region'] != '') {
             $this->conditions['s_region'] = $_get['region'];
             $this->withFilters            = true;
         }
-
-        if (@$_get['cityId'] != '') {
+        # condition for cityId
+        if (isset($_get['cityId']) && $_get['cityId'] != '') {
             $this->conditions['fk_i_city_id'] = $_get['cityId'];
             $this->withFilters                = true;
-        } elseif (@$_get['city'] != '') {
+        } elseif (isset($_get['city']) && $_get['city'] != '') {
             $this->conditions['s_city'] = $_get['city'];
             $this->withFilters          = true;
         }
 
-        if (@$_get['b_enabled'] != '') {
+        # condition enabled
+        if (isset($_get['enabled']) && $_get['enabled'] != '') {
             $this->conditions['b_enabled'] = $_get['b_enabled'];
             $this->withFilters             = true;
         }
-
-        if (@$_get['b_active'] != '') {
+        # condition active
+        if (isset($_get['active']) && $_get['active'] != '') {
             $this->conditions['b_active'] = $_get['b_active'];
             $this->withFilters            = true;
         }
