@@ -273,7 +273,8 @@ class RegionStats extends DAO
      * @return array
      */
     private function calculateAllStats(array $regions)
-    : array {
+    : array
+    {
         if (empty($regions)) {
             return array();
         }
