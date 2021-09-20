@@ -136,47 +136,22 @@ class CAdminLanguages extends AdminSecBaseModel
                     */
                     foreach ($json as $l) {
                         if (isset($l['locale_code']) && $l['locale_code'] === $languageToImport) {
-                            $locale = $l;
+                            $importedLocale = $l;
                             break;
                         }
                     }
-                    if (isset($locale)) {
-                        $locales = osc_listLocales();
-                        $values  = array(
-                            'pk_c_code'         => $locale['locale_code'],
-                            's_name'            => $locale['name'],
-                            's_short_name'      => $locale['short_name'],
-                            's_description'     => $locale['description'],
-                            's_version'         => $locale['version'],
-                            's_direction'       => $locale['direction'],
-                            's_author_name'     => $locale['author_name'],
-                            's_author_url'      => $locale['author_url'],
-                            's_currency_format' => $locale['currency_format'],
-                            's_date_format'     => $locale['date_format'],
-                            'b_enabled'         => 1,
-                            'b_enabled_bo'      => 1
-                        );
-                        if (isset($locales[$languageToImport])) {
-                            // don't overwrite existing values use array_merge
-                            $values = array_merge($values, $locales[$languageToImport]);
-                            // update version from imported json
-                            $values['s_version'] = $locale['version'];
-                        }
-                        OSCLocale::newInstance()->insert($values);
+                    if (isset($importedLocale)) {
+                        OSCLocale::newInstance()->insertLocaleInfo($importedLocale, $languageToImport);
                         // inserting e-mail translations get mail.json from github
                         $mailJSON = osc_file_get_contents(osc_get_i18n_repository_url('src/translations/'.$languageToImport.'/mail.json'));
-                        if ($mailJSON) {
-                            $mailImported = Page::newInstance()->importEmailJsonTemplates($mailJSON);
-                            if (!$mailImported) {
-                                osc_add_flash_error_message(_m('There was a problem importing email templates'), 'admin');
-                            }
-                        }
+                        $this->importEmailJson($mailJSON);
                         // Get themes.po,themes.mo, core.po, core.mo, messages.po, messages.mo from github and save to local
                         $uploadDir = osc_translations_path() . $languageToImport;
-                        $uploadDir = $uploadDir . '/';
+                        $uploadDir .= '/';
                         // check if the folder exists and create it if not
-                        if (!file_exists($uploadDir)) {
-                            mkdir($uploadDir, 0755, true);
+                        if (!file_exists($uploadDir) && !mkdir($uploadDir, 0755, true) && !is_dir($uploadDir)) {
+                            osc_add_flash_error_message(sprintf(_m('Directory "%s" was not created'), $uploadDir));
+                            $this->redirectTo(osc_admin_base_url(true) . '?page=languages');
                         }
                         $poFiles = array(
                             'theme.po',
@@ -193,7 +168,7 @@ class CAdminLanguages extends AdminSecBaseModel
                             $poFileTo = $uploadDir . $poFile;
                             $poFile = osc_file_get_contents($poFileFrom);
                             if ($poFile) {
-                                $poFileTo = file_put_contents($poFileTo, $poFile);
+                                file_put_contents($poFileTo, $poFile);
                             }
                         }
                         foreach ($moFiles as $moFile) {
@@ -201,7 +176,7 @@ class CAdminLanguages extends AdminSecBaseModel
                             $moFileTo = $uploadDir . $moFile;
                             $moFile = osc_file_get_contents($moFileFrom);
                             if ($moFile) {
-                                $moFileTo = file_put_contents($moFileTo, $moFile);
+                                file_put_contents($moFileTo, $moFile);
                             }
                         }
                         osc_add_flash_ok_message(_m('Language imported successfully'), 'admin');
@@ -272,7 +247,7 @@ class CAdminLanguages extends AdminSecBaseModel
                 if (!osc_validate_text($languageName)) {
                     $msg .= _m('Language name field is required') . '<br/>';
                 }
-                if ($languageDirection != 'ltr' && $languageDirection != 'rtl') {
+                if ($languageDirection !== 'ltr' && $languageDirection !== 'rtl') {
                     $msg .= _m('Language direction field is required') . '<br/>';
                 }
                 if (!osc_validate_text($languageShortName)) {
@@ -639,6 +614,19 @@ class CAdminLanguages extends AdminSecBaseModel
 
                 $this->doView('languages/index.php');
                 break;
+        }
+    }
+
+    /**
+     * @param $mailJSON
+     */
+    private function importEmailJson($mailJSON)
+    {
+        if ($mailJSON) {
+            $mailImported = Page::newInstance()->importEmailJsonTemplates($mailJSON);
+            if (!$mailImported) {
+                osc_add_flash_error_message(_m('There was a problem importing email templates'), 'admin');
+            }
         }
     }
 }

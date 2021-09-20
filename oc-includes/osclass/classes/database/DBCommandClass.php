@@ -1099,7 +1099,7 @@ class DBCommandClass
         $this->_resetWrite();
         $result = $this->query($sql);
 
-        if ($result == false) {
+        if ($result === false) {
             return false;
         }
 

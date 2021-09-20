@@ -199,6 +199,43 @@ class OSCLocale extends DAO
 
         return $this->dao->delete($this->getTableName(), array('pk_c_code' => $locale));
     }
+    /**
+     * Insert or update location info in database
+     *
+     * @param array  $aLocale
+     * @param string $localeCode pk_c_code
+     */
+    public function insertLocaleInfo($aLocale, $localeCode = '')
+    {
+        if (is_array($aLocale)) {
+            if($localeCode === ''){
+                $localeCode = $aLocale['locale_code'];
+            }
+            $values         = array(
+                'pk_c_code'         => $aLocale['locale_code'],
+                's_name'            => $aLocale['name'],
+                's_short_name'      => $aLocale['short_name'],
+                's_description'     => $aLocale['description'],
+                's_version'         => $aLocale['version'],
+                's_direction'       => $aLocale['direction'],
+                's_author_name'     => $aLocale['author_name'],
+                's_author_url'      => $aLocale['author_url'],
+                's_currency_format' => $aLocale['currency_format'],
+                's_date_format'     => $aLocale['date_format'],
+                'b_enabled'         => 0,
+                'b_enabled_bo'      => 1
+            );
+            $existingLocale = $this->findByCode($localeCode);
+            if ($existingLocale) {
+                // don't overwrite existing values use array_merge
+                unset($existingLocale['s_version']);
+                $values = array_merge($values, $existingLocale);
+                return $this->update($values, ['pk_c_code' => $localeCode]);
+            }
+            return $this->insert($values);
+        }
+        return false;
+    }
 }
 
 /* file end: ./oc-includes/osclass/model/OSCLocale.php */
