@@ -48,7 +48,8 @@
     "pensiero/php-openssl-cryptor": "0.1.0",
     "google/recaptcha": "1.1.*",
     "gettext/gettext": "4.6.*",
-    "phpseclib/mcrypt_compat": "^1.0"
+    "phpseclib/mcrypt_compat": "^1.0",
+    "ext-imagick": "A Faster image manipulation library"
   }
   ,
   "require-dev": {
@@ -56,7 +57,6 @@
   },
   "suggest": {
     "ext-apcu": "Fast PHP user cache",
-    "ext-imagick": "A Faster image manipulation library",
     "ext-memcache": "Will enable to communicate with memcached server"
   }
 }
