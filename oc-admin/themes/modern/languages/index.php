@@ -41,16 +41,16 @@ osc_add_hook('help_box', 'addHelp');
 
 function customPageHeader()
 {
-?>
+    ?>
     <h1><?php _e('Settings'); ?>
         <a class="ms-1 bi bi-question-circle-fill float-right" data-bs-target="#help-box" data-bs-toggle="collapse" href="#help-box"></a>
         <a href="#" onclick="languageModal()" class="ms-1 text-success float-end" title="<?php _e('Download language'); ?>">
             <i class="bi bi-arrow-down-circle-fill"></i>
         </a>
         <a href="<?php echo osc_admin_base_url(true); ?>?page=languages&amp;action=add" class="ms-1 text-success float-end" data-bs-toggle="tooltip" data-bs-placement="bottom" title="<?php _e('Upload language');
-                                                                                                                                                                                        ?>"><i class="bi bi-plus-circle-fill"></i></a>
+        ?>"><i class="bi bi-plus-circle-fill"></i></a>
     </h1>
-<?php
+    <?php
 }
 
 
@@ -66,7 +66,7 @@ osc_add_filter('admin_title', 'customPageTitle');
 
 function customHead()
 {
-?>
+    ?>
     <script type="text/javascript">
         $(document).ready(function() {
             // check_all bulkactions
@@ -82,7 +82,7 @@ function customHead()
             });
         });
     </script>
-<?php
+    <?php
 }
 
 
