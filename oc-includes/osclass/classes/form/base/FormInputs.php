@@ -542,10 +542,19 @@ class FormInputs implements InputInterface
      * Generate Select Input
      *
      * @param string       $name
-     * @param array|string $value  array or csv string
-     *                             [['value' => 'label], ...]
-     * @param array        $attributes
-     * @param array        $options
+     * @param string $value
+     * @param array  $attributes                                input tag attributes
+     * @param array  $options                                   This contains flag for input
+     *                                                          Supported flag in $options array :
+     *                                                          'selectPlaceholder' : placeholder for select input
+     *                                                          'label' : label for input
+     *                                                          'selectOptions' : options for select input
+     *                                                          'optGroupLevel' :int $optgroupLevel -1 = no optgroup, 0 = first level, 1 =
+     *                                                          second level, etc. for select box
+     *                                                          'optGroupKey': SubOption key in array
+     *                                                          'divClass' : css class for input div container, default not set
+     *                                                          'escapeHtml' : escape html for input attributes, default is true
+     *                                                          'sanitize'   : sanitize method for input value, default is 'string'
      *
      * @return string
      * @throws \Exception
