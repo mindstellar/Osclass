@@ -208,7 +208,7 @@ class OSCLocale extends DAO
     public function insertLocaleInfo($aLocale, $localeCode = '')
     {
         if (is_array($aLocale)) {
-            if($localeCode === ''){
+            if ($localeCode === '') {
                 $localeCode = $aLocale['locale_code'];
             }
             $values         = array(

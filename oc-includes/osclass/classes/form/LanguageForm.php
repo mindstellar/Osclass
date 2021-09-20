@@ -179,12 +179,13 @@ class LanguageForm extends Form
         return true;
     }
 
-    public static function text_direction_select($aLocale = null){
+    public static function text_direction_select($aLocale = null)
+    {
         $options['selectOptions'] = 'ltr,rtl';
         $attributes['id'] = 's_direction';
         $value = $aLocale['s_direction'];
 
-        echo (new Form)->select('s_direction',$value,$attributes,$options );
+        echo (new Form)->select('s_direction', $value, $attributes, $options );
     }
 
     /**
