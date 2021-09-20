@@ -35,8 +35,8 @@ function osc_listLocales()
 
     $codes = osc_listLanguageCodes();
     foreach ($codes as $code) {
-        if(file_exists(osc_translations_path().$code.'/locale.json')){
-            $aInfo = json_decode(file_get_contents(osc_translations_path().$code.'/locale.json'),true);
+        if (file_exists(osc_translations_path().$code.'/locale.json')) {
+            $aInfo = json_decode(file_get_contents(osc_translations_path().$code.'/locale.json'), true);
             $languages[$code] = $aInfo;
             unset($aInfo);
         } else {
@@ -82,9 +82,9 @@ function osc_checkLocales()
             }
 
             // inserting e-mail translations
-            if(file_exists(osc_translations_path() . $locale['locale_code'] . '/mail.json' )){
+            if (file_exists(osc_translations_path() . $locale['locale_code'] . '/mail.json' )) {
                 $mailJson = file_get_contents(osc_translations_path() . $locale['locale_code'] . '/mail.json' );
-                if($mailJson){
+                if ($mailJson) {
                     Page::newInstance()->importEmailJsonTemplates($mailJson);
                 }
             } else {
