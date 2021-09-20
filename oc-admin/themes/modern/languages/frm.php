@@ -94,6 +94,12 @@ osc_current_admin_theme_path('parts/header.php'); ?>
                     </div>
                 </div>
                 <div class="form-row">
+                    <div class="form-label"><?php _e('Direction'); ?></div>
+                    <div class="form-controls">
+                        <?php LanguageForm::text_direction_select($aLocale); ?>
+                    </div>
+                </div>
+                <div class="form-row">
                     <div class="form-label"><?php _e('Currency format'); ?></div>
                     <div class="form-controls">
                         <?php LanguageForm::currency_format_input_text($aLocale); ?>
