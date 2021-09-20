@@ -102,7 +102,7 @@ class Breadcrumb
         ) {
             $l = array(
                 'url'   => osc_base_url(),
-                'title' => osc_page_title()
+                'title' => __('Home')
             );
             $this->addLevel($l);
         }
