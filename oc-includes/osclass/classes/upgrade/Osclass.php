@@ -62,7 +62,7 @@ class Osclass extends UpgradePackage
         bool  $force_upgrade = false
     ) {
         $enable_prerelease = false;
-        if(osc_get_preference('allow_update_prerelease')){
+        if (osc_get_preference('allow_update_prerelease')) {
             $enable_prerelease = true;
         }
         if (defined('ENABLE_PRERELEASE') && ENABLE_PRERELEASE === true) {
