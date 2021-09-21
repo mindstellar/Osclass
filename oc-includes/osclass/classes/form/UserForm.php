@@ -236,7 +236,6 @@ class UserForm extends Form
                 }
             }
             echo '</div>';
-
         }
         echo '</div>';
 
