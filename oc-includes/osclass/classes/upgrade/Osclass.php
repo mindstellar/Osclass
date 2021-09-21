@@ -62,9 +62,13 @@ class Osclass extends UpgradePackage
         bool  $force_upgrade = false
     ) {
         $enable_prerelease = false;
+        if(osc_get_preference('allow_update_prerelease')){
+            $enable_prerelease = true;
+        }
         if (defined('ENABLE_PRERELEASE') && ENABLE_PRERELEASE === true) {
             $enable_prerelease = true;
         }
+
         parent::__construct($package_info, $force_upgrade, $enable_prerelease);
     }
 
@@ -148,7 +152,7 @@ class Osclass extends UpgradePackage
             || (!$preference->get('update_core_json') && (time() - $preference->get('last_version_check')) > (24 * 3600)
             )
         ) {
-            if (defined('ENABLE_PRERELEASE') && ENABLE_PRERELEASE === true) {
+            if ((defined('ENABLE_PRERELEASE') && ENABLE_PRERELEASE === true) || osc_get_bool_preference('allow_update_prerelease')) {
                 $json_url                  = 'https://api.github.com/repos/mindstellar/osclass/releases';
                 $osclass_package_info_json = (new FileSystem())->getContents($json_url);
                 if ($osclass_package_info_json) {
