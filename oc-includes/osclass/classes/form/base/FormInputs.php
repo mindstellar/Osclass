@@ -586,6 +586,7 @@ class FormInputs implements InputInterface
     : string
     {
         $attributes['type'] = 'password';
+        $attributes['autocomplete'] = 'on';
         // add class if not set
         if (!isset($attributes['class'])) {
             $attributes['class'] = $this->passwordClass;

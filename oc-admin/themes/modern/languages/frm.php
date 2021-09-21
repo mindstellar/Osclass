@@ -76,6 +76,12 @@ osc_current_admin_theme_path('parts/header.php'); ?>
 
             <div class="form-horizontal">
                 <div class="form-row">
+                    <div class="form-label"><?php _e('Current version'); ?></div>
+                    <div class="form-controls">
+                        <?php echo $aLocale['s_version']; ?>
+                    </div>
+                </div>
+                <div class="form-row">
                     <div class="form-label"><?php _e('Name'); ?></div>
                     <div class="form-controls">
                         <?php LanguageForm::name_input_text($aLocale); ?>

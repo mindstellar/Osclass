@@ -193,31 +193,53 @@ class UserForm extends Form
      */
     public static function multilanguage_info($locales, $user = null)
     {
-        $num_locales = count($locales);
-        if ($num_locales > 1) {
-            echo '<div class="tabber">';
-        }
-        foreach ($locales as $locale) {
-            if ($num_locales > 1) {
-                echo '<div class="tabbertab">';
-            }
-            if ($num_locales > 1) {
-                echo '<h2>' . $locale['s_name'] . '</h2>';
-            }
-            $info = '';
-            if (is_array($user) && isset($user['locale'][$locale['pk_c_code']])) {
-                if (isset($user['locale'][$locale['pk_c_code']]['s_info'])) {
-                    $info = $user['locale'][$locale['pk_c_code']]['s_info'];
+
+        $num_locales = $locales;
+        if (count($num_locales) > 1) {
+            echo '<div id="language-tab" class="mt-3">';
+            echo '<ul class="nav nav-tabs" id="multiLangTabs" role="tablist">';
+            foreach ($num_locales as $locale) {
+                $active = '';
+                if ($locale['pk_c_code'] === osc_current_admin_locale()) {
+                    $active = 'show active';
                 }
+                echo '<li class="nav-item"><a class="nav-link btn-sm ' . $active . '" href="#' . $locale['pk_c_code']
+                     . '" data-bs-toggle="tab">'
+                     . $locale['s_name'] . '</a></li>';
             }
-            self::info_textarea('s_info', $locale['pk_c_code'], $info);
-            if ($num_locales > 1) {
-                echo '</div>';
-            }
-        }
-        if ($num_locales > 1) {
+            echo '</ul>';
             echo '</div>';
         }
+        echo '<div class="tab-content mb-3" id="multiLangTabsContentUser">';
+        foreach ($locales as $locale) {
+            $active = '';
+            if ($locale['pk_c_code'] === osc_current_admin_locale()) {
+                $active = 'show active';
+            }
+            echo '<div class="tab-pane fade ' . $active . '" id="' . $locale['pk_c_code'] . '" role="tabpanel">';
+            $name         = 's_info' . '[' . $locale['pk_c_code'] . ']';
+            $attributes   = [
+                'id'          => $name,
+                'placeholder' => __('Enter user description') ,
+            ];
+
+            $info = '';
+            if (isset($user['locale'][$locale['pk_c_code']]['s_info']) && is_array($user)) {
+                $info = $user['locale'][$locale['pk_c_code']]['s_info'];
+            }
+            $attributes['id'] = 's_info' . '[' . $locale['pk_c_code'] . ']';
+            try {
+                echo (new UserForm())->textarea($name, $info, $attributes);
+            } catch (Exception $e) {
+                if (OSC_DEBUG) {
+                    trigger_error($e->getTraceAsString());
+                }
+            }
+            echo '</div>';
+
+        }
+        echo '</div>';
+
     }
 
     /**
