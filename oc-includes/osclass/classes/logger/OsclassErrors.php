@@ -93,7 +93,7 @@ class OsclassErrors
     {
         if ($this->debugEnabled === true) {
             // register the error handler
-            set_error_handler(array($this, 'log'));
+            set_error_handler(array($this, 'logErrors'));
 
             // register exception handler
             set_exception_handler(array($this, 'logException'));
@@ -105,6 +105,26 @@ class OsclassErrors
         return true;
     }
 
+    /**
+     * Handle errors
+     *
+     * @param int    $type
+     * @param string $message
+     * @param string $file
+     * @param int    $line
+     *
+     * @return bool
+     */
+    public function logErrors(
+        int    $type = E_USER_NOTICE,
+        string $message = '',
+        string $file = __FILE__,
+        int    $line = __LINE__
+    ): bool {
+        $this->log($type,$message,$file,$line);
+
+        return true;
+    }
     /**
      * Logs a fatal error
      *
@@ -306,7 +326,7 @@ class OsclassErrors
         string $message = '',
         string $file = __FILE__,
         int    $line = __LINE__,
-        array $context = []
+        string $context = ''
     ): bool {
         if ($this->logEnabled) {
             $message = $this->formattedError($message, $type, $file, $line, $context);
