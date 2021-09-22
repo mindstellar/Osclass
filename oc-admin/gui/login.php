@@ -88,5 +88,6 @@ if (!defined('ABS_PATH')) {
             $(this).parent().hide();
         });
     });
+</script>
 <?php };
 osc_add_hook('admin_login_footer', $login_js); ?>

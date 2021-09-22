@@ -61,5 +61,6 @@ if (!defined('ABS_PATH')) {
             });
             $("#user_email").focus();
         });
+    </script>
 <?php };
 osc_add_hook('admin_login_footer', $login_js); ?>
