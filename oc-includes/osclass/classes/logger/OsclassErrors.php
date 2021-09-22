@@ -298,7 +298,7 @@ class OsclassErrors
         string $message = '',
         string $file = __FILE__,
         int    $line = __LINE__,
-        string $context = ''
+        array $context = []
     )
     : bool {
         if ($this->logEnabled) {
