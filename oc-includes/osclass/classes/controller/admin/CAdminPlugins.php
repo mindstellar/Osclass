@@ -386,7 +386,7 @@ class CAdminPlugins extends AdminSecBaseModel
                     $sDelete = '';
                     if (!$installed) {
                         $sDelete =
-                            '<a href="javascript:delete_plugin(\'' . $pInfo['filename'] . '\');" >' . __('Delete')
+                            '<a onclick="delete_plugin(\'' . $pInfo['filename'] . '\');" href="#" >' . __('Delete')
                             . '</a>';
                     }
 
