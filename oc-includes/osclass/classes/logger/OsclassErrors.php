@@ -67,7 +67,7 @@ class OsclassErrors
         } else {
             error_reporting(
                 E_CORE_ERROR | E_CORE_WARNING | E_COMPILE_ERROR | E_ERROR | E_WARNING | E_PARSE
-                | E_USER_ERROR | E_USER_WARNING
+                    | E_USER_ERROR | E_USER_WARNING
             );
         }
     }
@@ -75,8 +75,7 @@ class OsclassErrors
     /**
      * Return previous instance or create a new one
      */
-    public static function newInstance()
-    : OsclassErrors
+    public static function newInstance(): OsclassErrors
     {
         if (!self::$instance instanceof self) {
             self::$instance = new self;
@@ -90,8 +89,7 @@ class OsclassErrors
      *
      * @return bool
      */
-    public function register()
-    : bool
+    public function register(): bool
     {
         if ($this->debugEnabled === true) {
             // register the error handler
@@ -120,8 +118,13 @@ class OsclassErrors
                     $this->formattedError($error['message'], $error['type'], $error['file'], $error['line'], var_export($error, true));
                 $this->writeToFile($message);
             } elseif (PHP_SAPI === 'cli') {
-                printf($this->formattedError($error['message'], $error['type'], $error['file'], $error['line'],
-                                             var_export($error, true)));
+                printf($this->formattedError(
+                    $error['message'],
+                    $error['type'],
+                    $error['file'],
+                    $error['line'],
+                    var_export($error, true)
+                ));
                 exit(1);
             } else {
                 echo sprintf('<!DOCTYPE html>
@@ -187,13 +190,13 @@ class OsclassErrors
      *
      * @return string
      */
-    private function formattedError(string $message, int $errorCode, string $file, int $lineNo, $context)
-    : string {
+    private function formattedError(string $message, int $errorCode, string $file, int $lineNo, $context): string
+    {
         $message = $this->errorType($errorCode) . ': ' . $message;
-        $message .= ' in ' . $file . ' on line no ' . $lineNo. ' Error Code:'.$errorCode;
+        $message .= ' in ' . $file . ' on line no ' . $lineNo . ' Error Code:' . $errorCode;
 
         if (!empty($context)) {
-            $message .= ' with context: '. PHP_EOL . var_export($context, true);
+            $message .= ' with context: ' . PHP_EOL . var_export($context, true);
         }
 
         return $message;
@@ -206,8 +209,8 @@ class OsclassErrors
      *
      * @return string
      */
-    private function errorType(int $errorCode)
-    : string {
+    private function errorType(int $errorCode): string
+    {
         switch ($errorCode) {
             case E_WARNING:
                 return 'WARNING';
@@ -304,8 +307,7 @@ class OsclassErrors
         string $file = __FILE__,
         int    $line = __LINE__,
         array $context = []
-    )
-    : bool {
+    ): bool {
         if ($this->logEnabled) {
             $message = $this->formattedError($message, $type, $file, $line, $context);
             $this->writeToFile($message);
@@ -332,11 +334,11 @@ class OsclassErrors
      *
      * @return string
      */
-    private function htmlFormattedError(string $message, int $type, string $file, int $line, string $context)
-    : string {
+    private function htmlFormattedError(string $message, int $type, string $file, int $line, string $context): string
+    {
         // return html formatted message
         $errorTrace = '';
-        if($context){
+        if ($context) {
             $errorTrace = '<pre>' . $context . '</pre>';
         }
         return sprintf('<style>
@@ -392,7 +394,7 @@ class OsclassErrors
                     <br>
                     %s
                 </div>
-           </div>', $this->errorClass($type), $this->errorType($type), $message, $file, $line, $type, $errorTrace );
+           </div>', $this->errorClass($type), $this->errorType($type), $message, $file, $line, $type, $errorTrace);
     }
 
     /**
@@ -402,8 +404,8 @@ class OsclassErrors
      *
      * @return string
      */
-    private function errorClass(int $errorCode)
-    : string {
+    private function errorClass(int $errorCode): string
+    {
         switch ($errorCode) {
             case E_CORE_WARNING:
             case E_COMPILE_WARNING:
@@ -440,11 +442,16 @@ class OsclassErrors
      *
      * @return bool
      */
-    public function logException($exception)
-    : bool {
+    public function logException($exception): bool
+    {
 
-        $this->log($exception->getCode(), $exception->getMessage(), $exception->getFile(), $exception->getLine(),
-                   $exception->getTraceAsString());
+        $this->log(
+            $exception->getCode(),
+            $exception->getMessage(),
+            $exception->getFile(),
+            $exception->getLine(),
+            $exception->getTraceAsString()
+        );
 
         return true;
     }
