@@ -186,12 +186,12 @@ class UsersDataTable extends DataTable
         }
 
         # condition enabled
-        if (isset($_get['enabled']) && $_get['enabled'] != '') {
+        if (isset($_get['b_enabled']) && $_get['b_enabled'] != '') {
             $this->conditions['b_enabled'] = $_get['b_enabled'];
             $this->withFilters             = true;
         }
         # condition active
-        if (isset($_get['active']) && $_get['active'] != '') {
+        if (isset($_get['b_active']) && $_get['b_active'] != '') {
             $this->conditions['b_active'] = $_get['b_active'];
             $this->withFilters            = true;
         }
