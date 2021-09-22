@@ -121,7 +121,7 @@ class OsclassErrors
         string $file = __FILE__,
         int    $line = __LINE__
     ): bool {
-        $this->log($type,$message,$file,$line);
+        $this->log($type, $message, $file, $line);
 
         return true;
     }
