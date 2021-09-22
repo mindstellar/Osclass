@@ -49,15 +49,18 @@ class OsclassErrors
 {
     private static $instance;
     private $logEnabled = false;
+    private $debugEnabled = false;
     private $logFile = '';
 
     public function __construct()
     {
         // check if OSC_DEBUG is defined and is true
         if (defined('OSC_DEBUG') && OSC_DEBUG) {
-            ini_set('display_errors', 0);
+            $this->debugEnabled = true;
+            ini_set('display_errors', 1);
             error_reporting(E_ALL | E_STRICT);
             if (defined('OSC_DEBUG_LOG') && OSC_DEBUG_LOG) {
+                ini_set('display_errors', 0);
                 $this->logEnabled = true;
                 $this->logFile    = CONTENT_PATH . 'debug.log';
             }
@@ -90,14 +93,16 @@ class OsclassErrors
     public function register()
     : bool
     {
-        // register the error handler
-        set_error_handler(array($this, 'log'));
+        if ($this->debugEnabled === true) {
+            // register the error handler
+            set_error_handler(array($this, 'log'));
 
-        // register exception handler
-        set_exception_handler(array($this, 'logException'));
+            // register exception handler
+            set_exception_handler(array($this, 'logException'));
 
-        // register shutdown function for fatal errors
-        register_shutdown_function(array($this, 'logFatalErrors'));
+            // register shutdown function for fatal errors
+            register_shutdown_function(array($this, 'logFatalErrors'));
+        }
 
         return true;
     }
