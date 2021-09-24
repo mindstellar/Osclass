@@ -449,7 +449,7 @@ osc_current_admin_theme_path('parts/header.php'); ?>
                                                value="<?php echo osc_esc_html(osc_get_preference('rewrite_item_url')); ?>"/>
                                         <div class="help-box">
                                             <?php echo sprintf(__('Accepted keywords: %s'),
-                                                               '{ITEM_ID},{ITEM_TITLE},{ITEM_CITY},{CATEGORIES}'); ?>
+                                                               '{ITEM_ID},{ITEM_TITLE},{ITEM_REGION},{ITEM_CITY},{CATEGORIES}'); ?>
                                         </div>
                                     </div>
                                 </div>
