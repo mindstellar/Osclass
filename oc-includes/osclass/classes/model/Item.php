@@ -171,6 +171,9 @@ class Item extends DAO
             );
             $this->dao->where('cd.fk_c_locale_code', $prefLocale);
 
+            // populate plugin per item data
+            osc_run_hook('item_extend_query', $this);
+            
             $result      = $this->dao->get();
             $extraFields = $result->result();
             unset($result);
@@ -221,7 +224,8 @@ class Item extends DAO
             }
         }
 
-        return $items;
+        // allow plugins to merge sub arrays
+        return osc_apply_filter('item_extend_merge', $items);
     }
 
     /**
