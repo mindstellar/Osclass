@@ -61,7 +61,7 @@ function osc_add_admin_menu_page(
     $icon_url = null,
     $position = null
 ) {
-    AdminMenu::newInstance()->add_menu($menu_title, $url, $menu_id, $capability, $icon_url = null, $position);
+    AdminMenu::newInstance()->add_menu($menu_title, $url, $menu_id, $capability, $icon_url, $position);
 }
 
 
