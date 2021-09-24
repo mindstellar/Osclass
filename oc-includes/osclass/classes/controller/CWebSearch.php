@@ -327,7 +327,7 @@ class CWebSearch extends BaseModel
         $aValidShowAsValues = array('list', 'gallery');
         if (!in_array($p_sShowAs, $aValidShowAsValues)) {
             $p_sShowAs = Session::newInstance()->_get('sShowAs');
-            if (!in_array($p_sShowAs, $aValidShowAsValues)) {           
+            if (!in_array($p_sShowAs, $aValidShowAsValues)) {
                 $p_sShowAs  = osc_default_show_as_at_search();
             }
         }

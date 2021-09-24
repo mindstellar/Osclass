@@ -70,7 +70,9 @@ $aRawRows  = View::newInstance()->_get('aRawRows');
 $sort      = Params::getParam('sort');
 $direction = Params::getParam('direction');
 $page      = (int)Params::getParam('iPage');
-if($page==0) { $page = 1; };
+if ($page==0) {
+    $page = 1;
+};
 
 $columns = $aData['aColumns'];
 $rows    = $aData['aRows'];
