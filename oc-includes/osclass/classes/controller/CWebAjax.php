@@ -242,6 +242,7 @@ class CWebAjax extends BaseModel
                 if ($alert != '' && $email != '') {
                     if (osc_validate_email($email)) {
                         $secret = osc_genRandomPassword();
+                        $alert = osc_apply_filter('alert_pre_save', $alert);
 
                         if ($alertID =
                             Alerts::newInstance()->createAlert($userid, $email, $alert, $secret)
