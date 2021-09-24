@@ -178,7 +178,7 @@ class User extends DAO
             $user['locale'][$sub_row['fk_c_locale_code']] = $sub_row;
         }
 
-        return $user;
+        return osc_apply_filter('user_extend', $user);
     }
 
     /**
