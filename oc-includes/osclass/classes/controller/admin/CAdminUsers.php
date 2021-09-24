@@ -161,7 +161,7 @@ class CAdminUsers extends AdminSecBaseModel
                 } elseif ($success == 2) {
                     osc_add_flash_ok_message(_m('The user has been updated and activated'), 'admin');
                 } else {
-                    osc_add_flash_error_message($success);
+                    osc_add_flash_error_message($success, 'admin');
                     $this->redirectTo(osc_admin_base_url(true) . '?page=users&action=edit&id='
                         . Params::getParam('id'));
                 }
