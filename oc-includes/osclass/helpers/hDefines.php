@@ -584,6 +584,7 @@ function osc_item_url($locale = '')
 function osc_item_url_from_item($item, $locale = '')
 {
     $itemId = $item['pk_i_id'];
+    $itemRegion = isset($item['s_region'])?osc_sanitizeString($item['s_region']):'';
     $itemCity = isset($item['s_city'])?osc_sanitizeString($item['s_city']):'';
     $itemTitle = osc_sanitizeString(str_replace(',', '-', $item['s_title']));
 
@@ -598,8 +599,8 @@ function osc_item_url_from_item($item, $locale = '')
             $url = str_replace('{CATEGORIES}', implode('/', $sanitized_categories), $url);
         }
 
-        $url = str_replace(array('{ITEM_ID}', '{ITEM_CITY}', '{ITEM_TITLE}', '?'),
-                           array($itemId, $itemCity, $itemTitle, ''), $url);
+        $url = str_replace(array('{ITEM_ID}', '{ITEM_REGION}', '{ITEM_CITY}', '{ITEM_TITLE}', '?'),
+                           array($itemId, $itemRegion, $itemCity, $itemTitle, ''), $url);
         if ($locale != '') {
             $path = osc_base_url() . $locale . '/' . $url;
         } else {
