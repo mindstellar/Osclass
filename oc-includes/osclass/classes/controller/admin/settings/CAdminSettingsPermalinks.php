@@ -435,44 +435,44 @@ HTACCESS;
                     }
                     $rewrite->addRule(
                         '^([a-z]{2})_([A-Z]{2})/' . str_replace(
-                            '{ITEM_CITY}',
-                            '.*',
+                            '{ITEM_REGION}', '.*', str_replace(
+                                '{ITEM_CITY}',
+                                '.*',
                             str_replace('{CATEGORIES}', '.*', str_replace(
                                 '{ITEM_TITLE}',
                                 '.*',
                                 str_replace('{ITEM_ID}', '([0-9]+)', $item_url . '\?comments-page=([0-9al]*)')
-                            ))
+                            )))
                         ) . '$',
                         'index.php?page=item&id=$3&lang=$1_$2&comments-page=$4'
                     );
                     $rewrite->addRule(
-                        '^' . str_replace('{ITEM_CITY}', '.*', str_replace(
-                            '{CATEGORIES}',
-                            '.*',
-                            str_replace(
+                        '^' . str_replace(
+                            '{ITEM_REGION}', '.*', str_replace(
+                                '{ITEM_CITY}', '.*',
+                            str_replace('{CATEGORIES}','.*', str_replace(
                                 '{ITEM_TITLE}',
                                 '.*',
                                 str_replace('{ITEM_ID}', '([0-9]+)', $item_url . '\?comments-page=([0-9al]*)')
                             )
-                        )) . '$',
+                        ))) . '$',
                         'index.php?page=item&id=$1&comments-page=$2'
                     );
                     $rewrite->addRule('^([a-z]{2})_([A-Z]{2})/' . str_replace(
-                            '{ITEM_CITY}',
-                            '.*',
-                            str_replace(
-                                '{CATEGORIES}',
-                                '.*',
-                                str_replace('{ITEM_TITLE}', '.*', str_replace('{ITEM_ID}', '([0-9]+)', $item_url))
+                            '{ITEM_REGION}', '.*', str_replace(
+                                '{ITEM_CITY}', '.*',
+                            str_replace('{CATEGORIES}','.*', str_replace(
+                                '{ITEM_TITLE}', '.*', str_replace('{ITEM_ID}', '([0-9]+)', $item_url))
                             )
-                        )
+                        ))
                         . '$', 'index.php?page=item&id=$3&lang=$1_$2');
                     $rewrite->addRule(
-                        '^' . str_replace('{ITEM_CITY}', '.*', str_replace(
-                            '{CATEGORIES}',
-                            '.*',
-                            str_replace('{ITEM_TITLE}', '.*', str_replace('{ITEM_ID}', '([0-9]+)', $item_url))
-                        )) . '$',
+                        '^' . str_replace(
+                                '{ITEM_REGION}', '.*', str_replace(
+                                    '{ITEM_CITY}', '.*', 
+                            str_replace('{CATEGORIES}', '.*', str_replace(
+                                '{ITEM_TITLE}', '.*', str_replace('{ITEM_ID}', '([0-9]+)', $item_url))
+                        ))) . '$',
                         'index.php?page=item&id=$1'
                     );
 
