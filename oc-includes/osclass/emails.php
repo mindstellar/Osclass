@@ -95,14 +95,14 @@ function fn_email_alert_validation($alert, $email, $secret)
         $secret
     );
 
-    $emailParams = array(
+    $emailParams = osc_apply_filter('email_alert_validation_params', array(
         'from'     => _osc_from_email_aux(),
         'to'       => $email,
         'to_name'  => $user['s_name'],
         'subject'  => $title,
         'body'     => $body,
         'alt_body' => $body
-    );
+    ));
 
     osc_sendMail($emailParams);
 }
@@ -194,14 +194,14 @@ function fn_alert_email_hourly($user, $ads, $s_search, $items, $totalItems)
         $totalItems
     );
 
-    $emailParams = array(
+    $emailParams = osc_apply_filter('email_alert_validation_params', array(
         'from'     => _osc_from_email_aux(),
         'to'       => $user['s_email'],
         'to_name'  => $user['s_name'],
         'subject'  => $title,
         'body'     => $body,
         'alt_body' => $body
-    );
+    ));
 
     osc_sendMail($emailParams);
 }
@@ -293,14 +293,14 @@ function fn_alert_email_daily($user, $ads, $s_search, $items, $totalItems)
         $totalItems
     );
 
-    $emailParams = array(
+    $emailParams = osc_apply_filter('alert_email_daily_params', array(
         'from'     => _osc_from_email_aux(),
         'to'       => $user['s_email'],
         'to_name'  => $user['s_name'],
         'subject'  => $title,
         'body'     => $body,
         'alt_body' => $body
-    );
+    ));
 
     osc_sendMail($emailParams);
 }
@@ -392,14 +392,14 @@ function fn_alert_email_weekly($user, $ads, $s_search, $items, $totalItems)
         $totalItems
     );
 
-    $emailParams = array(
+    $emailParams = osc_apply_filter('alert_email_weekly_params', array(
         'from'     => _osc_from_email_aux(),
         'to'       => $user['s_email'],
         'to_name'  => $user['s_name'],
         'subject'  => $title,
         'body'     => $body,
         'alt_body' => $body
-    );
+    ));
 
     osc_sendMail($emailParams);
 }
@@ -495,14 +495,14 @@ function fn_alert_email_instant($user, $ads, $s_search, $items, $totalItems)
         $totalItems
     );
 
-    $emailParams = array(
+    $emailParams = osc_apply_filter('alert_email_instant_params', array(
         'from'     => _osc_from_email_aux(),
         'to'       => $user['s_email'],
         'to_name'  => $user['s_name'],
         'subject'  => $title,
         'body'     => $body,
         'alt_body' => $body
-    );
+    ));
 
     osc_sendMail($emailParams);
 }
@@ -564,14 +564,14 @@ function fn_email_comment_validated($aComment)
             $aComment
         );
 
-        $emailParams = array(
+        $emailParams = osc_apply_filter('email_comment_validated_params', array(
             'from'     => _osc_from_email_aux(),
             'to'       => $aComment['s_author_email'],
             'to_name'  => $aComment['s_author_name'],
             'subject'  => $title,
             'body'     => $body,
             'alt_body' => $body
-        );
+        ));
         osc_sendMail($emailParams);
     }
 }
@@ -642,14 +642,14 @@ function fn_email_new_item_non_register_user($item)
         $item
     );
 
-    $emailParams = array(
+    $emailParams = osc_apply_filter('email_new_item_non_register_user_params', array(
         'from'     => _osc_from_email_aux(),
         'to'       => $item['s_contact_email'],
         'to_name'  => $item['s_contact_name'],
         'subject'  => $title,
         'body'     => $body,
         'alt_body' => $body
-    );
+    ));
 
     osc_sendMail($emailParams);
 }
@@ -719,14 +719,14 @@ function fn_email_user_forgot_password($user, $password_url)
             $password_url
         );
 
-        $emailParams = array(
+        $emailParams = osc_apply_filter('email_user_forgot_pass_word_params', array(
             'from'     => _osc_from_email_aux(),
             'to'       => $user['s_email'],
             'to_name'  => $user['s_name'],
             'subject'  => $title,
             'body'     => $body,
             'alt_body' => $body
-        );
+        ));
 
         osc_sendMail($emailParams);
     }
@@ -781,14 +781,14 @@ function fn_email_user_registration($user)
             $user
         );
 
-        $emailParams = array(
+        $emailParams = osc_apply_filter('email_user_registration_params', array(
             'from'     => _osc_from_email_aux(),
             'to'       => $user['s_email'],
             'to_name'  => $user['s_name'],
             'subject'  => $title,
             'body'     => $body,
             'alt_body' => $body
-        );
+        ));
 
         osc_sendMail($emailParams);
     }
@@ -849,14 +849,14 @@ function fn_email_new_email($new_email, $validation_url)
             $validation_url
         );
 
-        $emailParams = array(
+        $emailParams = osc_apply_filter('email_new_email_params', array(
             'from'     => _osc_from_email_aux(),
             'to'       => $new_email,
             'to_name'  => Session::newInstance()->_get('userName'),
             'subject'  => $title,
             'body'     => $body,
             'alt_body' => $body
-        );
+        ));
         osc_sendMail($emailParams);
         osc_add_flash_ok_message(_m("We've sent you an e-mail. Follow its instructions to validate the changes"));
     } else {
@@ -923,14 +923,14 @@ function fn_email_user_validation($user, $input)
             $input
         );
 
-        $emailParams = array(
+        $emailParams = osc_apply_filter('email_user_validation_params', array(
             'from'     => _osc_from_email_aux(),
             'to'       => $user['s_email'],
             'to_name'  => $user['s_name'],
             'subject'  => $title,
             'body'     => $body,
             'alt_body' => $body
-        );
+        ));
         osc_sendMail($emailParams);
     }
 }
@@ -995,7 +995,7 @@ function fn_email_send_friend($aItem)
         $aItem
     );
 
-    $emailParams = array(
+    $emailParams = osc_apply_filter('email_send_friend_params', array(
         'from'      => _osc_from_email_aux(),
         'from_name' => osc_page_title(),
         'to'        => $aItem['friendEmail'],
@@ -1003,7 +1003,7 @@ function fn_email_send_friend($aItem)
         'reply_to'  => $aItem['yourEmail'],
         'subject'   => $title,
         'body'      => $body
-    );
+    ));
 
     if (osc_notify_contact_friends()) {
         $admins      = Admin::newInstance()->listAll();
@@ -1090,7 +1090,7 @@ function fn_email_item_inquiry($aItem)
         $aItem
     );
 
-    $emailParams = array(
+    $emailParams = osc_apply_filter('email_item_inquiry_params', array(
         'from'      => _osc_from_email_aux(),
         'from_name' => osc_page_title(),
         'to'        => $item['s_contact_email'],
@@ -1099,7 +1099,7 @@ function fn_email_item_inquiry($aItem)
         'subject'   => $title,
         'body'      => $body,
         'alt_body'  => $body
-    );
+    ));
 
     if (osc_notify_contact_item()) {
         $admins      = Admin::newInstance()->listAll();
@@ -1213,14 +1213,14 @@ function fn_email_new_comment_admin($aItem)
     $admins = Admin::newInstance()->listAll();
     foreach ($admins as $admin) {
         if (!empty($admin['s_email'])) {
-            $emailParams = array(
+            $emailParams = osc_apply_filter('email_new_comment_admin_params', array(
                 'from'     => _osc_from_email_aux(),
                 'to'       => $admin['s_email'],
                 'to_name'  => __('Admin'),
                 'subject'  => $title_email,
                 'body'     => $body_email,
                 'alt_body' => $body_email
-            );
+            ));
             osc_sendMail($emailParams);
         }
     }
@@ -1324,14 +1324,14 @@ function fn_email_item_validation($item)
         $item
     );
 
-    $emailParams = array(
+    $emailParams = osc_apply_filter('email_item_validation_params', array(
         'from'     => _osc_from_email_aux(),
         'to'       => $contactEmail,
         'to_name'  => $contactName,
         'subject'  => $title,
         'body'     => $body,
         'alt_body' => $body
-    );
+    ));
     osc_sendMail($emailParams);
 }
 
@@ -1442,14 +1442,14 @@ function fn_email_admin_new_item($item)
     $admins = Admin::newInstance()->listAll();
     foreach ($admins as $admin) {
         if (!empty($admin['s_email'])) {
-            $emailParams = array(
+            $emailParams = osc_apply_filter('email_admin_new_item_params', array(
                 'from'     => _osc_from_email_aux(),
                 'to'       => $admin['s_email'],
                 'to_name'  => __('Admin'),
                 'subject'  => $title,
                 'body'     => $body,
                 'alt_body' => $body
-            );
+            ));
             osc_sendMail($emailParams);
         }
     }
@@ -1569,14 +1569,14 @@ function fn_email_item_validation_non_register_user($item)
         $item
     );
 
-    $emailParams = array(
+    $emailParams = osc_apply_filter('email_item_validation_non_register_user_params', array(
         'from'     => _osc_from_email_aux(),
         'to'       => $item['s_contact_email'],
         'to_name'  => $item['s_contact_name'],
         'subject'  => $title,
         'body'     => $body,
         'alt_body' => $body
-    );
+    ));
 
     osc_sendMail($emailParams);
 }
@@ -1623,7 +1623,7 @@ function fn_email_admin_new_user($user)
             osc_mailBeauty(
                 osc_apply_filter(
                     'email_description',
-                    osc_apply_filter('email_admin_user_regsitration_description', $content['s_text'], $user)
+                    osc_apply_filter('email_admin_user_registration_description', $content['s_text'], $user)
                 ),
                 $words
             ),
@@ -1633,14 +1633,14 @@ function fn_email_admin_new_user($user)
         $admins = Admin::newInstance()->listAll();
         foreach ($admins as $admin) {
             if (!empty($admin['s_email'])) {
-                $emailParams = array(
+                $emailParams = osc_apply_filter('email_admin_user_registration_user_params', array(
                     'from'     => _osc_from_email_aux(),
                     'to'       => $admin['s_email'],
                     'to_name'  => osc_page_title(),
                     'subject'  => $title,
                     'body'     => $body,
                     'alt_body' => $body,
-                );
+                ));
                 osc_sendMail($emailParams);
             }
         }
@@ -1825,14 +1825,14 @@ function fn_email_new_comment_user($aItem)
         $aItem
     );
 
-    $emailParams = array(
+    $emailParams = osc_apply_filter('email_new_comment_user_params', array(
         'from'     => _osc_from_email_aux(),
         'to'       => $item['s_contact_email'],
         'to_name'  => $item['s_contact_name'],
         'subject'  => $title_email,
         'body'     => $body_email,
         'alt_body' => $body_email
-    );
+    ));
     osc_sendMail($emailParams);
 }
 
@@ -1888,14 +1888,14 @@ function fn_email_new_admin($data)
         $data
     );
 
-    $emailParams = array(
+    $emailParams = osc_apply_filter('email_new_admin_params', array(
         'from'     => _osc_from_email_aux(),
         'to'       => $data['s_email'],
         'to_name'  => $data['s_name'],
         'subject'  => $title_email,
         'body'     => $body_email,
         'alt_body' => $body_email
-    );
+    ));
     osc_sendMail($emailParams);
 }
 
@@ -1974,14 +1974,14 @@ function fn_email_warn_expiration($aItem)
         $aItem
     );
 
-    $emailParams = array(
+    $emailParams = osc_apply_filter('email_warn_expiration_params', array(
         'from'     => _osc_from_email_aux(),
         'to'       => $aItem['s_contact_email'],
         'to_name'  => $aItem['s_contact_name'],
         'subject'  => $title_email,
         'body'     => $body_email,
         'alt_body' => $body_email
-    );
+    ));
     osc_sendMail($emailParams);
 }
 
@@ -2039,14 +2039,14 @@ function fn_email_auto_upgrade($result)
     $admins = Admin::newInstance()->listAll();
     foreach ($admins as $admin) {
         if (!empty($admin['s_email']) && ($admin['b_moderator'] == 0)) {
-            $emailParams = array(
+            $emailParams = osc_apply_filter('email_after_auto_upgrade_params', array(
                 'from'     => _osc_from_email_aux(),
                 'to'       => $admin['s_email'],
                 'to_name'  => osc_page_title(),
                 'subject'  => $title,
                 'body'     => $body,
                 'alt_body' => $body,
-            );
+            ));
             osc_sendMail($emailParams);
         }
     }
