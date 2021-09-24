@@ -69,6 +69,8 @@ $aData     = View::newInstance()->_get('aData');
 $aRawRows  = View::newInstance()->_get('aRawRows');
 $sort      = Params::getParam('sort');
 $direction = Params::getParam('direction');
+$page      = (int)Params::getParam('iPage');
+if($page==0) { $page = 1; };
 
 $columns = $aData['aColumns'];
 $rows    = $aData['aRows'];
@@ -77,6 +79,7 @@ $rows    = $aData['aRows'];
     <div class="relative">
         <form class="" id="datatablesForm" action="<?php echo osc_admin_base_url(true); ?>" method="post">
             <input type="hidden" name="page" value="media"/>
+            <input type="hidden" name="iPage" value="<?php echo $page; ?>" />
             <input type="hidden" name="action" value="bulk_actions"/>
             <div id="bulk-actions">
                 <div class="input-group input-group-sm">
