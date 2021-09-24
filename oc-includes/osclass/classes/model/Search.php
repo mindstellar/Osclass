@@ -262,7 +262,7 @@ class Search extends DAO
      */
     public static function getAllowedColumnsForSorting()
     {
-        return array('i_price', 'dt_pub_date', 'dt_expiration', 'relevance');
+        return osc_apply_filter('search_page_valid_columns', array('i_price', 'dt_pub_date', 'dt_expiration', 'relevance'));
     }
 
     /**
@@ -273,6 +273,14 @@ class Search extends DAO
     public static function getAllowedTypesForSorting()
     {
         return array(0 => 'asc', 1 => 'desc');
+    }
+
+    /**
+     * Allow search object to be reused
+     */
+    public function reset()
+    {
+        $this->__construct();
     }
 
     /**
@@ -603,6 +611,33 @@ class Search extends DAO
         return $items;
     }
 
+    /* Return search categories
+     *
+     * @return categories
+     */
+    public function getCategories()
+    {
+        return $this->categories;
+    }
+
+    /* Return search conditions
+     *
+     * @return conditions
+     */
+    public function getSearchConditions()
+    {
+        return $this->conditions;
+    }
+
+    /* Return search pattern
+     *
+     * @return pattern
+     */
+    public function getPattern()
+    {
+        return $this->sPattern;
+    }
+
     /**
      * Make the SQL for the search with all the conditions and filters specified
      *
@@ -657,13 +692,13 @@ class Search extends DAO
                 if ($this->order_column === 'relevance') {
                     $this->dao->select(sprintf(
                                            "MATCH(d.s_title, d.s_description) AGAINST(%s) as relevance",
-                                           $this->sPattern
+                                            osc_apply_filter('sql_search_pattern', $this->sPattern)
                                        ));
                     $this->dao->having(sprintf("relevance > %s", 0));
                 } else {
                     $this->dao->where(sprintf(
                                           "MATCH(d.s_title, d.s_description) AGAINST(%s IN BOOLEAN MODE)",
-                                          $this->sPattern
+                                            osc_apply_filter('sql_search_pattern', $this->sPattern)
                                       ));
                 }
                 if (empty($this->locale_code)) {
@@ -747,7 +782,7 @@ class Search extends DAO
             // ---------------------------------------------------------
 
             // order & limit
-            $this->dao->orderBy($this->order_column, $this->order_direction);
+            $this->dao->orderBy(osc_apply_filter('sql_search_order', $this->order_column), $this->order_direction);
 
             if ($count) {
                 $this->dao->limit(100 * $this->results_per_page);
@@ -944,7 +979,7 @@ class Search extends DAO
             $this->dao->where('ti.pk_i_id = d.fk_i_item_id');
             $this->dao->where(sprintf(
                                   "MATCH(d.s_title, d.s_description) AGAINST(%s IN BOOLEAN MODE)",
-                                  $this->sPattern
+                                  osc_apply_filter('sql_search_pattern', $this->sPattern)
                               ));
             $this->dao->where('ti.b_premium = 1');
 
