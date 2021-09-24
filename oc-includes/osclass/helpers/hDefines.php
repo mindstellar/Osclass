@@ -1,5 +1,4 @@
 <?php
-
 /*
  * Osclass - software for creating and publishing online classified advertising platforms
  * Maintained and supported by Mindstellar Community
@@ -27,9 +26,8 @@
  *
  */
 
-
 /**
- * Helper Defines
+ * Helper Search
  *
  * @package    Osclass
  * @subpackage Helpers
@@ -37,1557 +35,1281 @@
  */
 
 /**
- * Gets the root url for your installation
+ * Gets search object
  *
- * @param boolean $with_index true if index.php in the url is needed
- *
- * @return string
+ * @return mixed
  */
-function osc_base_url($with_index = false)
+function osc_search()
 {
-    $path = WEB_PATH;
-    // add the index.php if it's true
-    if ($with_index) {
-        $path .= 'index.php';
+    if (View::newInstance()->_exists('search')) {
+        return View::newInstance()->_get('search');
     }
 
-    return osc_apply_filter('base_url', $path, $with_index);
+    $search = new Search();
+    View::newInstance()->_exportVariableToView('search', $search);
+
+    return $search;
 }
 
 
 /**
+ * Gets available search orders
+ *
+ * @return array
+ */
+function osc_list_orders()
+{
+    if (osc_search_pattern() !== '') {
+        $list_order[__('Relevance')] = ['sOrder' => 'relevance', 'iOrderType' => 'desc'];
+    }
+
+    $list_order[__('Newly listed')] = ['sOrder' => 'dt_pub_date', 'iOrderType' => 'desc'];
+
+    if (osc_price_enabled_at_items()) {
+        $list_order[__('Lower price first')] = ['sOrder' => 'i_price', 'iOrderType' => 'asc'];
+
+        $list_order[__('Higher price first')] = ['sOrder' => 'i_price', 'iOrderType' => 'desc'];
+    }
+
+    return osc_apply_filter("search_page_sort_options", $list_order);
+}
+
+
+/**
+ * Gets current search page
+ *
+ * @return int
+ */
+function osc_search_alert_subscribed()
+{
+    return View::newInstance()->_get('search_alert_subscribed') == 1;
+}
+
+
+/**
+ * Gets current search page
+ *
+ * @return int
+ */
+function osc_search_page()
+{
+    return View::newInstance()->_get('search_page');
+}
+
+
+/**
+ * Gets total pages of search
+ *
+ * @return int
+ */
+function osc_search_total_pages()
+{
+    return View::newInstance()->_get('search_total_pages');
+}
+
+
+/**
+ * Gets if "has pic" option is enabled or not in the search
+ *
+ * @return boolean
+ */
+function osc_search_has_pic()
+{
+    return View::newInstance()->_get('search_has_pic');
+}
+
+
+/**
+ * Gets if "only premium" option is enabled or not in the search
+ *
+ * @return boolean
+ */
+function osc_search_only_premium()
+{
+    return View::newInstance()->_get('search_only_premium');
+}
+
+
+/**
+ * Gets current search order
+ *
+ * @return string
+ */
+function osc_search_order()
+{
+    return View::newInstance()->_get('search_order');
+}
+
+
+/**
+ * Gets current search order type
+ *
+ * @return string
+ */
+function osc_search_order_type()
+{
+    return View::newInstance()->_get('search_order_type');
+}
+
+
+/**
+ * Gets current search pattern
+ *
+ * @return string
+ */
+function osc_search_pattern()
+{
+    if (View::newInstance()->_exists('search_pattern')) {
+        return View::newInstance()->_get('search_pattern');
+    }
+
+    return '';
+}
+
+
+/**
+ * Gets current search country
+ *
+ * @return string
+ */
+function osc_search_country()
+{
+    return View::newInstance()->_get('search_country');
+}
+
+
+/**
+ * Gets current search region
+ *
+ * @return string
+ */
+function osc_search_region()
+{
+    return View::newInstance()->_get('search_region');
+}
+
+
+/**
+ * Gets current search city
+ *
+ * @return string
+ */
+function osc_search_city()
+{
+    return View::newInstance()->_get('search_city');
+}
+
+
+/**
+ * Gets current search users
+ *
+ * @return array
+ */
+function osc_search_user()
+{
+    if (is_array(View::newInstance()->_get('search_from_user'))) {
+        return View::newInstance()->_get('search_from_user');
+    }
+
+    return array();
+}
+
+
+/**
+ * Gets current search max price
+ *
+ * @return float
+ */
+function osc_search_price_max()
+{
+    return View::newInstance()->_get('search_price_max');
+}
+
+
+/**
+ * Gets current search min price
+ *
+ * @return float
+ */
+function osc_search_price_min()
+{
+    return View::newInstance()->_get('search_price_min');
+}
+
+
+/**
+ * Gets current search total items
+ *
+ * @return int
+ */
+function osc_search_total_items()
+{
+    return View::newInstance()->_get('search_total_items');
+}
+
+
+/**
+ * Gets current search "show as" variable (show the items as a list or as a gallery)
+ *
+ * @return string
+ */
+function osc_search_show_as()
+{
+    return View::newInstance()->_get('search_show_as');
+}
+
+
+/**
+ * Gets current search start item record
+ *
+ * @return int
+ */
+function osc_search_start()
+{
+    return View::newInstance()->_get('search_start');
+}
+
+
+/**
+ * Gets current search end item record
+ *
+ * @return int
+ */
+function osc_search_end()
+{
+    return View::newInstance()->_get('search_end');
+}
+
+
+/**
+ * Gets current search category
+ *
+ * @return array
+ */
+function osc_search_category()
+{
+    if (View::newInstance()->_exists('search_subcategories')) {
+        $category = View::newInstance()->_current('search_subcategories');
+    } elseif (View::newInstance()->_exists('search_categories')) {
+        $category = View::newInstance()->_current('search_categories');
+    } else {
+        $category = View::newInstance()->_get('search_category');
+    }
+    if (!is_array($category)) {
+        $category = array();
+    }
+
+    return $category;
+}
+
+
+/**
+ * Gets current search category id
+ *
+ * @return array
+ */
+function osc_search_category_id()
+{
+    $categories = osc_search_category();
+    $category   = array();
+    $mCat       = Category::newInstance();
+
+    foreach ($categories as $cat) {
+        if (is_numeric($cat)) {
+            $tmp = $mCat->findByPrimaryKey($cat);
+            if (isset($tmp['pk_i_id'])) {
+                $category[] = $tmp['pk_i_id'];
+            }
+        } else {
+            $slug_cat = explode('/', trim($cat, '/'));
+            $tmp      = $mCat->findBySlug($slug_cat[count($slug_cat) - 1]);
+            if (isset($tmp['pk_i_id'])) {
+                $category[] = $tmp['pk_i_id'];
+            }
+        }
+    }
+
+    return $category;
+}
+
+
+function osc_search_category_description($locale = '')
+{
+    $a_search_category_id = osc_search_category_id();
+    $text              = '';
+    if (!empty($a_search_category_id)) {
+        list($search_category_id) = $a_search_category_id;
+        if (is_numeric($search_category_id)) {
+            $mCat = Category::newInstance();
+            $tmp = $mCat->findByPrimaryKey($search_category_id, $locale);
+            if (isset($tmp['s_description'])) {
+                $text = $tmp['s_description'];
+            }
+        }
+    }
+
+    return $text;
+}
+
+/**
+ * Update the search url with new options
+ *
+ * @param array $params
+ * @param bool  $forced
+ *
+ * @return string
+ */
+function osc_update_search_url($params = array(), $forced = false)
+{
+    $request = Params::getParamsAsArray();
+    unset($request['osclass']);
+    if (isset($request['sCategory[0]'])) {
+        unset($request['sCategory']);
+    }
+    unset($request['sCategory[]']);
+    if (isset($request['sUser[0]'])) {
+        unset($request['sUser']);
+    }
+    unset($request['sUser[]']);
+    if (!$forced && View::newInstance()->_get('subdomain_slug') != '') {
+        $subdomain_type = osc_subdomain_type();
+        if ($subdomain_type === 'category') {
+            unset($request['sCategory']);
+        } elseif ($subdomain_type === 'country') {
+            unset($request['sCountry']);
+        } elseif ($subdomain_type === 'region') {
+            unset($request['sCountry'], $request['sRegion']);
+        } elseif ($subdomain_type === 'city') {
+            unset($request['sCountry'], $request['sRegion'], $request['sCity']);
+        } elseif ($subdomain_type === 'user') {
+            unset($request['sUser']);
+        }
+    }
+    $merged = array_merge($request, $params);
+
+    return osc_search_url($merged);
+}
+
+
+/**
+ * Load the form for the alert subscription
+ *
+ * @return void
+ */
+function osc_alert_form()
+{
+    osc_current_web_theme_path('alert-form.php');
+}
+
+
+/**
+ * Gets alert of current search
+ *
+ * @return string
+ */
+function osc_search_alert()
+{
+    return View::newInstance()->_get('search_alert');
+}
+
+
+/**
+ * Gets for a default search (all categories, noother option)
+ *
  * @param array $params
  *
  * @return string
  */
-function osc_subdomain_base_url($params = array())
+function osc_search_show_all_url($params = array())
 {
-    $fields['category'] = 'sCategory';
-    $fields['country']  = 'sCountry';
-    $fields['region']   = 'sRegion';
-    $fields['city']     = 'sCity';
-    $fields['user']     = 'sUser';
-    if (isset($fields[osc_subdomain_type()])) {
-        $field = $fields[osc_subdomain_type()];
-        if (isset($params[$field]) && !is_array($params[$field]) && $params[$field] != ''
-            && strpos($params[$field], ',') === false
-        ) {
-            return osc_search_url(array($fields[osc_subdomain_type()] => $params[$field]));
-        }
+    $params['page'] = 'search';
+
+    return osc_update_search_url($params);
+}
+
+
+/**
+ * Gets search url given params
+ *
+ * @params array $params
+ * @param null $params
+ *
+ * @return string
+ */
+function osc_search_url($params = null)
+{
+    if (is_array($params)) {
+        osc_prune_array($params);
     }
-
-    return osc_base_url();
-}
-
-
-/**
- * Gets the root url of oc-admin for your installation
- *
- * @param boolean $with_index true if index.php in the url is needed
- *
- * @return string
- */
-function osc_admin_base_url($with_index = false)
-{
-    $path = osc_base_url() . 'oc-admin/';
-
-    // add the index.php if it's true
-    if ($with_index) {
-        $path .= 'index.php';
+    $countP = is_array($params) ? count($params) : 0;
+    if ($countP == 0) {
+        $params['page'] = 'search';
     }
-
-    return osc_apply_filter('admin_base_url', $path, $with_index);
-}
-
-
-/**
- * Gets the root path for your installation
- *
- * @return string
- */
-function osc_base_path()
-{
-    return ABS_PATH;
-}
-
-
-/**
- * Gets the root path of oc-admin
- *
- * @return string
- */
-function osc_admin_base_path()
-{
-    return (osc_base_path() . 'oc-admin/');
-}
-
-
-/**
- * Gets the libraries path
- *
- * @return string
- */
-function osc_lib_path()
-{
-    return LIB_PATH;
-}
-
-
-/**
- * Gets the content path
- *
- * @return string
- */
-function osc_content_path()
-{
-    return CONTENT_PATH;
-}
-
-
-/**
- * Gets the themes path
- *
- * @return string
- */
-function osc_themes_path()
-{
-    return THEMES_PATH;
-}
-
-
-/**
- * Gets the plugins path
- *
- * @return string
- */
-function osc_plugins_path()
-{
-    return PLUGINS_PATH;
-}
-
-
-/**
- * Gets the translations path
- *
- * @return string
- */
-function osc_translations_path()
-{
-    return TRANSLATIONS_PATH;
-}
-
-
-/**
- * Gets the translations path
- *
- * @return string
- */
-function osc_uploads_path()
-{
-    return UPLOADS_PATH;
-}
-
-
-/**
- * Gets the current oc-admin theme
- *
- * @return string
- */
-function osc_current_admin_theme()
-{
-    return AdminThemes::newInstance()->getCurrentTheme();
-}
-
-
-/**
- * Gets the complete url of a given admin's file
- *
- * @param string $file the admin's file
- *
- * @return string
- */
-function osc_current_admin_theme_url($file = '')
-{
-    return AdminThemes::newInstance()->getCurrentThemeUrl() . $file;
-}
-
-
-/**
- * Gets the complete path of a given admin's file
- *
- * @param string $file the admin's file
- *
- * @return void
- */
-function osc_current_admin_theme_path($file = '')
-{
-    require AdminThemes::newInstance()->getCurrentThemePath() . $file;
-}
-
-
-/**
- * Gets the complete url of a given style's file
- *
- * @param string $file the style's file
- *
- * @return string
- */
-function osc_current_admin_theme_styles_url($file = '')
-{
-    return AdminThemes::newInstance()->getCurrentThemeStyles() . $file;
-}
-
-
-/**
- * Gets the complete url of a given js's file
- *
- * @param string $file the js's file
- *
- * @return string
- */
-function osc_current_admin_theme_js_url($file = '')
-{
-    return AdminThemes::newInstance()->getCurrentThemeJs() . $file;
-}
-
-
-/**
- * Gets the current theme for the public website
- *
- * @return string
- */
-function osc_current_web_theme()
-{
-    return WebThemes::newInstance()->getCurrentTheme();
-}
-
-
-/**
- * Gets the complete url of a given file using the theme url as a root
- *
- * @param string $file the given file
- *
- * @return string
- */
-function osc_current_web_theme_url($file = '')
-{
-    $info = WebThemes::newInstance()->loadThemeInfo(WebThemes::newInstance()->getCurrentTheme());
-    if (!file_exists(WebThemes::newInstance()->getCurrentThemePath() . $file) && $info['template'] != '') {
-        WebThemes::newInstance()->setParentTheme();
+    $base_url = osc_base_url();
+    $http_url = osc_is_ssl() ? 'https://' : 'http://';
+    if (!empty($params['sPattern'])) {
+        $params['sPattern'] = osc_apply_filter('search_pattern', $params['sPattern']);
     }
-
-    return WebThemes::newInstance()->getCurrentThemeUrl() . $file;
-}
-
-
-/**
- * Gets the complete path of a given file using the theme path as a root
- *
- * @param string $file
- *
- * @return void
- */
-function osc_current_web_theme_path($file = '')
-{
-    if (file_exists(WebThemes::newInstance()->getCurrentThemePath() . $file)) {
-        require WebThemes::newInstance()->getCurrentThemePath() . $file;
-    } else {
-        $info = WebThemes::newInstance()->loadThemeInfo(WebThemes::newInstance()->getCurrentTheme());
-        if ($info['template'] != '') {
-            WebThemes::newInstance()->setParentTheme();
-            if (file_exists(WebThemes::newInstance()->getCurrentThemePath() . $file)) {
-                require WebThemes::newInstance()->getCurrentThemePath() . $file;
-            } else {
-                WebThemes::newInstance()->setGuiTheme();
-                if (file_exists(WebThemes::newInstance()->getCurrentThemePath() . $file)) {
-                    require WebThemes::newInstance()->getCurrentThemePath() . $file;
+    if (osc_subdomain_type() === 'category' && isset($params['sCategory'])) {
+        if ($params['sCategory'] != Params::getParam('sCategory')) {
+            if (is_array($params['sCategory'])) {
+                $params['sCategory'] = implode(',', $params['sCategory']);
+            }
+            if ($params['sCategory'] != '' && strpos($params['sCategory'], ',') === false) {
+                if (is_numeric($params['sCategory'])) {
+                    $category = Category::newInstance()->findByPrimaryKey($params['sCategory']);
+                } else {
+                    $category = Category::newInstance()->findBySlug($params['sCategory']);
+                }
+                if (isset($category['s_slug'])) {
+                    $base_url =
+                        $http_url . $category['s_slug'] . '.' . osc_subdomain_host() . REL_WEB_URL;
+                    unset($params['sCategory']);
                 }
             }
-        } else {
-            WebThemes::newInstance()->setGuiTheme();
-            if (file_exists(WebThemes::newInstance()->getCurrentThemePath() . $file)) {
-                require WebThemes::newInstance()->getCurrentThemePath() . $file;
+        } elseif (osc_is_subdomain()) {
+            unset($params['sCategory']);
+        }
+    } elseif (osc_subdomain_type() === 'country' && isset($params['sCountry'])) {
+        if ($params['sCountry'] != Params::getParam('sCountry')) {
+            if (is_array($params['sCountry'])) {
+                $params['sCountry'] = implode(',', $params['sCountry']);
+            }
+            if ($params['sCountry'] != '' && strpos($params['sCountry'], ',') === false) {
+                if (is_numeric($params['sCountry'])) {
+                    $country = Country::newInstance()->findByPrimaryKey($params['sCountry']);
+                } else {
+                    $country = Country::newInstance()->findByCode($params['sCountry']);
+                }
+                if (isset($country['s_slug'])) {
+                    $base_url =
+                        $http_url . $country['s_slug'] . '.' . osc_subdomain_host() . REL_WEB_URL;
+                    unset($params['sCountry']);
+                }
+            }
+        } elseif (osc_is_subdomain()) {
+            unset($params['sCountry']);
+        }
+    } elseif (osc_subdomain_type() === 'region' && isset($params['sRegion'])) {
+        if ($params['sRegion'] != Params::getParam('sRegion')) {
+            if (is_array($params['sRegion'])) {
+                $params['sRegion'] = implode(',', $params['sRegion']);
+            }
+            if ($params['sRegion'] != '' && strpos($params['sRegion'], ',') === false) {
+                if (is_numeric($params['sRegion'])) {
+                    $region = Region::newInstance()->findByPrimaryKey($params['sRegion']);
+                } else {
+                    $region = Region::newInstance()->findByName($params['sRegion']);
+                }
+                if (isset($region['s_slug'])) {
+                    $base_url =
+                        $http_url . $region['s_slug'] . '.' . osc_subdomain_host() . REL_WEB_URL;
+                    unset($params['sRegion']);
+                }
+            }
+        } elseif (osc_is_subdomain()) {
+            unset($params['sRegion']);
+        }
+    } elseif (osc_subdomain_type() === 'city' && isset($params['sCity'])) {
+        if ($params['sCity'] != Params::getParam('sCity')) {
+            if (is_array($params['sCity'])) {
+                $params['sCity'] = implode(',', $params['sCity']);
+            }
+            if ($params['sCity'] != '' && strpos($params['sCity'], ',') === false) {
+                if (is_numeric($params['sCity'])) {
+                    $city = City::newInstance()->findByPrimaryKey($params['sCity']);
+                } else {
+                    $city = City::newInstance()->findByName($params['sCity']);
+                }
+                if (isset($city['s_slug'])) {
+                    $base_url =
+                        $http_url . $city['s_slug'] . '.' . osc_subdomain_host() . REL_WEB_URL;
+                    unset($params['sCity']);
+                }
+            }
+        } elseif (osc_is_subdomain()) {
+            unset($params['sCity']);
+        }
+    } elseif (osc_subdomain_type() === 'user' && isset($params['sUser'])) {
+        if ($params['sUser'] != Params::getParam('sUser')) {
+            if (is_array($params['sUser'])) {
+                $params['sUser'] = implode(',', $params['sUser']);
+            }
+            if ($params['sUser'] != '' && strpos($params['sUser'], ',') === false) {
+                if (is_numeric($params['sUser'])) {
+                    $user = User::newInstance()->findByPrimaryKey($params['sUser']);
+                } else {
+                    $user = User::newInstance()->findByUsername($params['sUser']);
+                }
+                if (isset($user['s_username'])) {
+                    $base_url =
+                        $http_url . $user['s_username'] . '.' . osc_subdomain_host() . REL_WEB_URL;
+                    unset($params['sUser']);
+                }
+            }
+        } elseif (osc_is_subdomain()) {
+            unset($params['sUser']);
+        }
+    }
+
+    $countP = count($params);
+    if ($countP == 0) {
+        return $base_url;
+    }
+    unset($params['page']);
+    $countP = count($params);
+
+    if (osc_rewrite_enabled()) {
+        foreach ($params as $kp => $vp) {
+            $params[$kp] = osc_remove_slash($vp);
+        }
+        $url = $base_url . osc_get_preference('rewrite_search_url');
+        // CANONICAL URLS
+        if (isset($params['sCategory']) && !is_array($params['sCategory'])
+            && strpos($params['sCategory'], ',') === false
+            && ($countP == 1 || ($countP == 2 && isset($params['iPage'])))
+        ) {
+            if (osc_category_id() == $params['sCategory']) {
+                $category['pk_i_id'] = osc_category_id();
+                $category['s_slug']  = osc_category_slug();
+            } elseif (is_numeric($params['sCategory'])) {
+                $category = Category::newInstance()->findByPrimaryKey($params['sCategory']);
+            } else {
+                $category = Category::newInstance()->findBySlug($params['sCategory']);
+            }
+            if (isset($category['pk_i_id'])) {
+                $url = osc_get_preference('rewrite_cat_url');
+                if (preg_match('|{CATEGORIES}|', $url)) {
+                    $categories           =
+                        Category::newInstance()->hierarchy($category['pk_i_id']);
+                    $sanitized_categories = array();
+                    $mCat                 = Category::newInstance();
+                    for ($i = count($categories); $i > 0; $i--) {
+                        $tmpcat                 =
+                            $mCat->findByPrimaryKey($categories[$i - 1]['pk_i_id']);
+                        $sanitized_categories[] = $tmpcat['s_slug'];
+                    }
+                    $url = str_replace('{CATEGORIES}', implode('/', $sanitized_categories), $url);
+                }
+                $seo_prefix = '';
+                if (osc_get_preference('seo_url_search_prefix') != '') {
+                    $seo_prefix = osc_get_preference('seo_url_search_prefix') . '/';
+                }
+                // DEPRECATED : CATEGORY_SLUG is going to be removed in 3.4
+                $url = str_replace(
+                    array('{CATEGORY_NAME}', '{CATEGORY_SLUG}', '{CATEGORY_ID}'),
+                    array($category['s_slug'], $category['s_slug'], $category['pk_i_id']),
+                    $url
+                );
+            } else {
+                // Search by a category which does not exists (by form)
+                // TODO CHANGE TO NEW ROUTES!!
+                return $base_url . 'index.php?page=search&sCategory='
+                    . urlencode($params['sCategory']);
+            }
+            if (isset($params['iPage']) && $params['iPage'] != '' && $params['iPage'] != 1) {
+                $url .= '/' . $params['iPage'];
+            }
+            $url = $base_url . $seo_prefix . $url;
+        } elseif (isset($params['sRegion']) && is_string($params['sRegion'])
+            && strpos($params['sRegion'], ',') === false
+            && ($countP == 1 || ($countP == 2 && (isset($params['iPage']) || isset($params['sCategory'])))
+                || (isset($params['iPage'], $params['sCategory']) && $countP == 3)
+            )
+        ) {
+            $url = $base_url;
+            if (osc_get_preference('seo_url_search_prefix') != '') {
+                $url .= osc_get_preference('seo_url_search_prefix') . '/';
+            }
+            if (isset($params['sCategory'])) {
+                $_auxSlug = _aux_search_category_slug($params['sCategory']);
+                if ($_auxSlug != '') {
+                    $url .= $_auxSlug . '_';
+                }
+            }
+
+            if (isset($params['sRegion'])) {
+                if (osc_list_region_id() == $params['sRegion']) {
+                    $url .= osc_sanitizeString(osc_list_region_slug()) . '-r'
+                        . osc_list_region_id();
+                } else {
+                    if (is_numeric($params['sRegion'])) {
+                        $region = Region::newInstance()->findByPrimaryKey($params['sRegion']);
+                    } else {
+                        $region = Region::newInstance()->findByName($params['sRegion']);
+                    }
+                    if (isset($region['s_slug'])) {
+                        $url .= osc_sanitizeString($region['s_slug']) . '-r' . $region['pk_i_id'];
+                    } else {
+                        // Search by a region which does not exists (by form)
+                        // TODO CHANGE TO NEW ROUTES!!
+                        return $url . 'index.php?page=search&sRegion='
+                            . urlencode($params['sRegion']);
+                    }
+                }
+            }
+            if (isset($params['iPage']) && $params['iPage'] != '' && $params['iPage'] != 1) {
+                $url .= '/' . $params['iPage'];
+            }
+        } elseif (isset($params['sCity']) && !is_array($params['sCity'])
+            && strpos($params['sCity'], ',') === false
+            && ($countP == 1
+                || ($countP == 2
+                    && (isset($params['iPage'])
+                        || isset($params['sCategory'])))
+                || (isset($params['iPage'], $params['sCategory']) && $countP == 3))
+        ) {
+            $url = $base_url;
+            if (osc_get_preference('seo_url_search_prefix') != '') {
+                $url .= osc_get_preference('seo_url_search_prefix') . '/';
+            }
+            if (isset($params['sCategory'])) {
+                $_auxSlug = _aux_search_category_slug($params['sCategory']);
+                if ($_auxSlug != '') {
+                    $url .= $_auxSlug . '_';
+                }
+            }
+            if (isset($params['sCity'])) {
+                if (osc_list_city_id() == $params['sCity']) {
+                    $url .= osc_sanitizeString(osc_list_city_slug()) . '-c' . osc_list_city_id();
+                } else {
+                    if (is_numeric($params['sCity'])) {
+                        $city = City::newInstance()->findByPrimaryKey($params['sCity']);
+                    } else {
+                        $city = City::newInstance()->findByName($params['sCity']);
+                    }
+                    if (isset($city['s_slug'])) {
+                        $url .= osc_sanitizeString($city['s_slug']) . '-c' . $city['pk_i_id'];
+                    } else {
+                        // Search by a city which does not exists (by form)
+                        // TODO CHANGE TO NEW ROUTES!!
+                        return $url . 'index.php?page=search&sCity=' . urlencode($params['sCity']);
+                    }
+                }
+            }
+            if (isset($params['iPage']) && $params['iPage'] != '' && $params['iPage'] != 1) {
+                $url .= '/' . $params['iPage'];
+            }
+        } elseif ($params != null && is_array($params)) {
+            foreach ($params as $k => $v) {
+                switch ($k) {
+                    case 'sCountry':
+                        $k = osc_get_preference('rewrite_search_country');
+                        break;
+                    case 'sRegion':
+                        $k = osc_get_preference('rewrite_search_region');
+                        break;
+                    case 'sCity':
+                        $k = osc_get_preference('rewrite_search_city');
+                        break;
+                    case 'sCityArea':
+                        $k = osc_get_preference('rewrite_search_city_area');
+                        break;
+                    case 'sCategory':
+                        $k = osc_get_preference('rewrite_search_category');
+                        if (is_array($v)) {
+                            $v = implode(',', $v);
+                        }
+                        break;
+                    case 'sUser':
+                        $k = osc_get_preference('rewrite_search_user');
+                        if (is_array($v)) {
+                            $v = implode(',', $v);
+                        }
+                        break;
+                    case 'sPattern':
+                        $k = osc_get_preference('rewrite_search_pattern');
+                        break;
+                    case 'meta':
+                        // meta(@id),value/meta(@id),value2/...
+                        foreach ($v as $key => $value) {
+                            if (is_array($value)) {
+                                foreach ($value as $_key => $_value) {
+                                    if ($value != '') {
+                                        $url .= '/meta' . $key . '-' . $_key . ','
+                                            . urlencode($_value);
+                                    }
+                                }
+                            } elseif ($value != '') {
+                                $url .= '/meta' . $key . ',' . urlencode($value);
+                            }
+                        }
+                        break;
+                    default:
+                        break;
+                }
+                if (!is_array($v) && $v != '') {
+                    $url .= '/' . $k . ',' . urlencode($v);
+                }
+            }
+        }
+    } else {
+        $url = $base_url . 'index.php?page=search';
+        if ($params != null && is_array($params)) {
+            foreach ($params as $k => $v) {
+                if ($k === 'meta' || strncmp($k, 'meta[', 5) === 0) {
+                    if (is_array($v)) {
+                        foreach ($v as $_k => $aux) {
+                            if (is_array($aux)) {
+                                foreach (array_keys($aux) as $aux_k) {
+                                    $url .= "&meta[$_k][$aux_k]=" . urlencode($aux[$aux_k]);
+                                }
+                            } else {
+                                $url .= '&meta[' . $_k . ']=' . urlencode($aux);
+                            }
+                        }
+                    }
+                } else {
+                    if (is_array($v)) {
+                        $v = implode(',', $v);
+                    }
+                    $url .= '&' . $k . '=' . urlencode($v);
+                }
             }
         }
     }
+
+    return str_replace('%2C', ',', $url);
 }
 
 
 /**
- * Gets the complete path of a given styles file using the theme path as a root
+ * @param $var
  *
- * @param string $file
- *
- * @return string
+ * @return array|mixed
  */
-function osc_current_web_theme_styles_url($file = '')
+function osc_remove_slash($var)
 {
-    return WebThemes::newInstance()->getCurrentThemeStyles() . $file;
-}
-
-
-/**
- * Gets the complete path of a given js file using the theme path as a root
- *
- * @param string $file
- *
- * @return string
- */
-function osc_current_web_theme_js_url($file = '')
-{
-    return WebThemes::newInstance()->getCurrentThemeJs() . $file;
-}
-
-
-/**
- * Gets the complete path of a given common asset
- *
- * @param string $file
- * @param string $assets_base_url
- *
- * @return string
- * @since 3.0
- */
-function osc_assets_url($file = '', $assets_base_url = null)
-{
-    if (strpos($file, '../') !== false || strpos($file, '..\\') !== false) {
-        $file = '';
-    }
-
-    if ($assets_base_url === null) {
-        return osc_base_url() . 'oc-includes/assets/' . $file;
-    }
-
-    return $assets_base_url . $file;
-}
-
-/**
- *  Create automatically the contact url
- *
- * @return string
- */
-function osc_contact_url()
-{
-    if (osc_rewrite_enabled()) {
-        $path = osc_base_url() . osc_get_preference('rewrite_contact');
-    } else {
-        $path = osc_base_url(true) . '?page=contact';
-    }
-
-    return $path;
-}
-
-
-/**
- * Create automatically the url to post an item in a category
- *
- * @return string
- */
-function osc_item_post_url_in_category()
-{
-    if (osc_category_id() > 0) {
-        if (osc_rewrite_enabled()) {
-            $path = osc_base_url() . osc_get_preference('rewrite_item_new') . '/' . osc_category_id();
-        } else {
-            $path = sprintf(osc_base_url(true) . '?page=item&action=item_add&catId=%d', osc_category_id());
+    if (is_array($var)) {
+        foreach ($var as $k => $v) {
+            $var[$k] = osc_remove_slash($v);
         }
     } else {
-        $path = osc_item_post_url();
+        $var = str_ireplace('/', ' ', $var);
     }
 
-    return $path;
+    return $var;
 }
 
 
 /**
- *  Create automatically the url to post an item
- *
- * @return string
- */
-function osc_item_post_url()
-{
-    if (osc_rewrite_enabled()) {
-        $path = osc_base_url() . osc_get_preference('rewrite_item_new');
-    } else {
-        $path = osc_base_url(true) . '?page=item&action=item_add';
-    }
-
-    return $path;
-}
-
-
-/**
- * Create automatically the url of a category
- *
- * @return string the url
- */
-function osc_search_category_url()
-{
-    return osc_search_url(array('sCategory' => osc_category_id()));
-}
-
-
-/**
- * Create automatically the url of the users' dashboard
- *
- * @return string
- */
-function osc_user_dashboard_url()
-{
-    if (osc_rewrite_enabled()) {
-        $path = osc_base_url() . osc_get_preference('rewrite_user_dashboard');
-    } else {
-        $path = osc_base_url(true) . '?page=user&action=dashboard';
-    }
-
-    return $path;
-}
-
-
-/**
- * Create automatically the logout url
- *
- * @return string
- */
-function osc_user_logout_url()
-{
-    if (osc_rewrite_enabled()) {
-        $path = osc_base_url() . osc_get_preference('rewrite_user_logout');
-    } else {
-        $path = osc_base_url(true) . '?page=main&action=logout';
-    }
-
-    return $path;
-}
-
-
-/**
- * Create automatically the login url
- *
- * @return string
- */
-function osc_user_login_url()
-{
-    if (osc_rewrite_enabled()) {
-        $path = osc_base_url() . osc_get_preference('rewrite_user_login');
-    } else {
-        $path = osc_base_url(true) . '?page=login';
-    }
-
-    return $path;
-}
-
-
-/**
- * Create automatically the url to register an account
- *
- * @return string
- */
-function osc_register_account_url()
-{
-    if (osc_rewrite_enabled()) {
-        $path = osc_base_url() . osc_get_preference('rewrite_user_register');
-    } else {
-        $path = osc_base_url(true) . '?page=register&action=register';
-    }
-
-    return $path;
-}
-
-
-/**
- * Create automatically the url to activate an account
- *
- * @param int    $id
- * @param string $code
- *
- * @return string
- */
-function osc_user_activate_url($id, $code)
-{
-    if (osc_rewrite_enabled()) {
-        return osc_base_url() . osc_get_preference('rewrite_user_activate') . '/' . $id . '/' . $code;
-    }
-
-    return osc_base_url(true) . '?page=register&action=validate&id=' . $id . '&code=' . $code;
-}
-
-
-/**
- * Re-send the activation link
- *
- * @param int    $id
- * @param string $email
- *
- * @return string
- */
-function osc_user_resend_activation_link($id, $email)
-{
-    return osc_base_url(true) . '?page=login&action=resend&id=' . $id . '&email=' . $email;
-}
-
-
-/**
- * Create automatically the url of the item's comments page
- *
- * @param mixed  $page
- * @param string $locale
- *
- * @return string
- */
-function osc_item_comments_url($page = 'all', $locale = '')
-{
-    if (osc_rewrite_enabled()) {
-        return osc_item_url($locale) . '?comments-page=' . $page;
-    }
-
-    return osc_item_url($locale) . '&comments-page=' . $page;
-}
-
-
-/**
- * Create automatically the url of the item's comments page
- *
- * @param string $locale
- *
- * @return string
- */
-function osc_comment_url($locale = '')
-{
-    return osc_item_url($locale) . '?comment=' . osc_comment_id();
-}
-
-
-/**
- * Create automatically the url of the item details page
- *
- * @param string $locale
- *
- * @return string
- */
-function osc_item_url($locale = '')
-{
-    return osc_item_url_from_item(osc_item(), $locale);
-}
-
-
-/**
- * Create item url from item data without exported to view.
- *
- * @param array  $item
- * @param string $locale
- *
- * @return string
- * @since 3.3
- *
- */
-function osc_item_url_from_item($item, $locale = '')
-{
-    $itemId = $item['pk_i_id'];
-    $itemRegion = isset($item['s_region'])?osc_sanitizeString($item['s_region']):'';
-    $itemCity = isset($item['s_city'])?osc_sanitizeString($item['s_city']):'';
-    $itemTitle = osc_sanitizeString(str_replace(',', '-', $item['s_title']));
-
-    if (osc_rewrite_enabled()) {
-        $url = osc_get_preference('rewrite_item_url');
-        if (preg_match('|{CATEGORIES}|', $url)) {
-            $sanitized_categories = array();
-            $cat                  = Category::newInstance()->hierarchy($item['fk_i_category_id']);
-            for ($i = count($cat); $i > 0; $i--) {
-                $sanitized_categories[] = $cat[$i - 1]['s_slug'];
-            }
-            $url = str_replace('{CATEGORIES}', implode('/', $sanitized_categories), $url);
-        }
-
-        $url = str_replace(array('{ITEM_ID}', '{ITEM_REGION}', '{ITEM_CITY}', '{ITEM_TITLE}', '?'),
-                           array($itemId, $itemRegion, $itemCity, $itemTitle, ''), $url);
-        if ($locale != '') {
-            $path = osc_base_url() . $locale . '/' . $url;
-        } else {
-            $path = osc_base_url() . $url;
-        }
-    } else {
-        $path = osc_item_url_ns($item['pk_i_id'], $locale);
-    }
-
-    return $path;
-}
-
-
-/**
- * Create automatically the url of the item details page
- *
- * @param string $locale
- *
- * @return string
- */
-function osc_premium_url($locale = '')
-{
-    $item = osc_premium();
-    return osc_item_url_from_item($item, $locale);
-}
-
-
-/**
- * Create the no friendly url of the item using the id of the item
- *
- * @param int $id the primary key of the item
- * @param     $locale
- *
- * @return string
- */
-function osc_item_url_ns($id, $locale = '')
-{
-    $path = osc_base_url(true) . '?page=item&id=' . $id;
-    if ($locale != '') {
-        $path .= '&lang=' . $locale;
-    }
-
-    return $path;
-}
-
-
-/**
- * Create automatically the url to for admin to edit an item
- *
- * @param int $id
- *
- * @return string
- */
-function osc_item_admin_edit_url($id)
-{
-    return osc_admin_base_url(true) . '?page=items&action=item_edit&id=' . $id;
-}
-
-
-/**
- * Gets current user alerts' url
- *
- * @return string
- */
-function osc_user_alerts_url()
-{
-    if (osc_rewrite_enabled()) {
-        return osc_base_url() . osc_get_preference('rewrite_user_alerts');
-    }
-
-    return osc_base_url(true) . '?page=user&action=alerts';
-}
-
-
-/**
- * Gets current user alert unsubscribe url
- *
- * @param string $id
- * @param string $email
- * @param string $secret
- *
- * @return string
- */
-function osc_user_unsubscribe_alert_url($id = '', $email = '', $secret = '')
-{
-    if ($secret == '') {
-        $secret = osc_alert_secret();
-    }
-    if ($id == '') {
-        $id = osc_alert_id();
-    }
-    if ($email == '') {
-        $email = osc_user_email();
-    }
-
-    return osc_base_url(true) . '?page=user&action=unsub_alert&email=' . urlencode($email) . '&secret=' . $secret
-        . '&id=' . $id;
-}
-
-
-/**
- * Gets user alert activate url
- *
- * @param        $id
- * @param string $secret
- * @param string $email
- *
- * @return string
- */
-function osc_user_activate_alert_url($id, $secret, $email)
-{
-    if (osc_rewrite_enabled()) {
-        return osc_base_url() . osc_get_preference('rewrite_user_activate_alert') . '/' . $id . '/' . $secret . '/'
-            . urlencode($email);
-    }
-
-    return osc_base_url(true) . '?page=user&action=activate_alert&email=' . urlencode($email) . '&secret=' . $secret
-        . '&id=' . $id;
-}
-
-
-/**
- * Gets current user url
- *
- * @return string
- */
-function osc_user_profile_url()
-{
-    if (osc_rewrite_enabled()) {
-        return osc_base_url() . osc_get_preference('rewrite_user_profile');
-    }
-
-    return osc_base_url(true) . '?page=user&action=profile';
-}
-
-
-/**
- * Gets current user alert activate url
- *
- * @param string $page
- * @param string $typeItem
- *
- * @return string
- */
-function osc_user_list_items_url($page = '', $typeItem = '')
-{
-    if (osc_rewrite_enabled()) {
-        if ($page == '') {
-            $typeItem = $typeItem != '' ? '?itemType=' . $typeItem : '';
-
-            return osc_base_url() . osc_get_preference('rewrite_user_items') . $typeItem;
-        }
-
-        $typeItem = $typeItem != '' ? '&itemType=' . $typeItem : '';
-
-        return osc_base_url() . osc_get_preference('rewrite_user_items') . '?iPage=' . $page . $typeItem;
-    } else {
-        if ($page == '') {
-            return osc_base_url(true) . '?page=user&action=items';
-        }
-
-        return osc_base_url(true) . '?page=user&action=items&iPage=' . $page;
-    }
-}
-
-
-/**
- * Gets url to change email
- *
- * @return string
- */
-function osc_change_user_email_url()
-{
-    if (osc_rewrite_enabled()) {
-        return osc_base_url() . osc_get_preference('rewrite_user_change_email');
-    }
-
-    return osc_base_url(true) . '?page=user&action=change_email';
-}
-
-
-/**
- * Gets url to change username
- *
- * @return string
- */
-function osc_change_user_username_url()
-{
-    if (osc_rewrite_enabled()) {
-        return osc_base_url() . osc_get_preference('rewrite_user_change_username');
-    }
-
-    return osc_base_url(true) . '?page=user&action=change_username';
-}
-
-
-/**
- * Gets confirmation url of change email
- *
- * @param int    $userId
- * @param string $code
- *
- * @return string
- */
-function osc_change_user_email_confirm_url($userId, $code)
-{
-    if (osc_rewrite_enabled()) {
-        return osc_base_url() . osc_get_preference('rewrite_user_change_email_confirm') . '/' . $userId . '/' . $code;
-    }
-
-    return osc_base_url(true) . '?page=user&action=change_email_confirm&userId=' . $userId . '&code=' . $code;
-}
-
-
-/**
- * Gets url for changing password
- *
- * @return string
- */
-function osc_change_user_password_url()
-{
-    if (osc_rewrite_enabled()) {
-        return osc_base_url() . osc_get_preference('rewrite_user_change_password');
-    }
-
-    return osc_base_url(true) . '?page=user&action=change_password';
-}
-
-
-/**
- * Gets url for recovering password
- *
- * @return string
- */
-function osc_recover_user_password_url()
-{
-    if (osc_rewrite_enabled()) {
-        return osc_base_url() . osc_get_preference('rewrite_user_recover');
-    }
-
-    return osc_base_url(true) . '?page=login&action=recover';
-}
-
-
-/**
- * Gets url for confirm the forgot password process
- *
- * @param int    $userId
- * @param string $code
- *
- * @return string
- */
-function osc_forgot_user_password_confirm_url($userId, $code)
-{
-    if (osc_rewrite_enabled()) {
-        return osc_base_url() . osc_get_preference('rewrite_user_forgot') . '/' . $userId . '/' . $code;
-    }
-
-    return osc_base_url(true) . '?page=login&action=forgot&userId=' . $userId . '&code=' . $code;
-}
-
-
-/**
- * Gets url for confirmation admin password recover proces
- *
- * @param int    $adminId
- * @param string $code
- *
- * @return string
- */
-function osc_forgot_admin_password_confirm_url($adminId, $code)
-{
-    return osc_admin_base_url(true) . '?page=login&action=forgot&adminId=' . $adminId . '&code=' . $code;
-}
-
-
-/**
- * Gets url for changing website language (for users)
- *
- * @param string $locale
- *
- * @return string
- */
-function osc_change_language_url($locale)
-{
-    if (osc_rewrite_enabled()) {
-        return osc_base_url() . osc_get_preference('rewrite_language') . '/' . $locale;
-    }
-
-    return osc_base_url(true) . '?page=language&locale=' . $locale;
-}
-
-
-/////////////////////////////////////
-//       functions for items       //
-/////////////////////////////////////
-
-/**
- * Gets url for editing an item
- *
- * @param string $secret
- * @param string $id
- *
- * @return string
- */
-function osc_item_edit_url($secret = '', $id = '')
-{
-    if ($id == '') {
-        $id = osc_item_id();
-    }
-    if (osc_rewrite_enabled()) {
-        return osc_base_url() . osc_get_preference('rewrite_item_edit') . '/' . $id . '/' . $secret;
-    }
-
-    return osc_base_url(true) . '?page=item&action=item_edit&id=' . $id . ($secret != '' ? '&secret=' . $secret
-            : '');
-}
-
-
-/**
- * Gets url for delete an item
- *
- * @param string $secret
- * @param string $id
- *
- * @return string
- */
-function osc_item_delete_url($secret = '', $id = '')
-{
-    if ($id == '') {
-        $id = osc_item_id();
-    }
-    if (osc_rewrite_enabled()) {
-        return osc_base_url() . osc_get_preference('rewrite_item_delete') . '/' . $id . '/' . $secret;
-    }
-
-    return osc_base_url(true) . '?page=item&action=item_delete&id=' . $id . ($secret != '' ? '&secret=' . $secret
-            : '');
-}
-
-
-/**
- * Gets url for activate an item
- *
- * @param string $secret
- * @param string $id
- *
- * @return string
- */
-function osc_item_activate_url($secret = '', $id = '')
-{
-    if ($id == '') {
-        $id = osc_item_id();
-    }
-    if (osc_rewrite_enabled()) {
-        return osc_base_url() . osc_get_preference('rewrite_item_activate') . '/' . $id . '/' . $secret;
-    }
-
-    return osc_base_url(true) . '?page=item&action=activate&id=' . $id . ($secret != '' ? '&secret=' . $secret
-            : '');
-}
-
-
-/**
- * Gets url for deleting a resource of an item
- *
- * @param int    $id of the resource
- * @param int    $item
- * @param string $code
- * @param string $secret
- *
- * @return string
- */
-function osc_item_resource_delete_url($id, $item, $code, $secret = '')
-{
-    if (osc_rewrite_enabled()) {
-        return osc_base_url() . osc_get_preference('rewrite_item_resource_delete') . '/' . $id . '/' . $item . '/'
-            . $code . ($secret != '' ? '/' . $secret : '');
-    }
-
-    return osc_base_url(true) . '?page=item&action=deleteResource&id=' . $id . '&item=' . $item . '&code=' . $code
-        . ($secret != '' ? '&secret=' . $secret : '');
-}
-
-
-/**
- * Gets url of send a friend (current item)
- *
- * @return string
- */
-function osc_item_send_friend_url()
-{
-    if (osc_rewrite_enabled()) {
-        return osc_base_url() . osc_get_preference('rewrite_item_send_friend') . '/' . osc_item_id();
-    }
-
-    return osc_base_url(true) . '?page=item&action=send_friend&id=' . osc_item_id();
-}
-
-
-/**
- * @param $id
- * @param $args
- *
- * @return string
- * @since 3.2
- */
-function osc_route_url($id, $args = array())
-{
-    $routes = Rewrite::newInstance()->getRoutes();
-    if (!isset($routes[$id])) {
-        return '';
-    }
-    if (osc_rewrite_enabled()) {
-        $uri        = $routes[$id]['url'];
-        $params_url = '';
-        foreach ($args as $k => $v) {
-            $old_uri = $uri;
-            $uri     = str_ireplace('{' . $k . '}', $v, $uri);
-            if ($old_uri == $uri) {
-                $params_url .= '&' . $k . '=' . $v;
-            }
-        }
-
-        return osc_base_url() . $uri . (($params_url != '') ? '?' . $params_url : '');
-    }
-
-    $params_url = '';
-    foreach ($args as $k => $v) {
-        $params_url .= '&' . $k . '=' . $v;
-    }
-
-    return osc_base_url(true) . '?page=custom&route=' . $id . $params_url;
-}
-
-
-/**
- * @param $id
- * @param $args
- *
- * @return string
- * @since 3.2
- */
-function osc_route_admin_url($id, $args = array())
-{
-    $routes = Rewrite::newInstance()->getRoutes();
-    if (!isset($routes[$id])) {
-        return '';
-    }
-    $params_url = '';
-    foreach ($args as $k => $v) {
-        $params_url .= '&' . $k . '=' . $v;
-    }
-
-    return osc_admin_base_url(true) . '?page=plugins&action=renderplugin&route=' . $id . $params_url;
-}
-
-
-/**
- * @param $id
- * @param $args
- *
- * @return string
- * @since 3.2
- */
-function osc_route_ajax_url($id, $args = array())
-{
-    $routes = Rewrite::newInstance()->getRoutes();
-    if (!isset($routes[$id])) {
-        return '';
-    }
-    $params_url = '';
-    foreach ($args as $k => $v) {
-        $params_url .= '&' . $k . '=' . $v;
-    }
-
-    return osc_base_url(true) . '?page=ajax&action=custom&route=' . $id . $params_url;
-}
-
-
-/**
- * @param $id
- * @param $args
- *
- * @return string
- * @since 3.2
- */
-function osc_route_admin_ajax_url($id, $args = array())
-{
-    $routes = Rewrite::newInstance()->getRoutes();
-    if (!isset($routes[$id])) {
-        return '';
-    }
-    $params_url = '';
-    foreach ($args as $k => $v) {
-        $params_url .= '&' . $k . '=' . $v;
-    }
-
-    return osc_admin_base_url(true) . '?page=ajax&action=custom&route=' . $id . $params_url;
-}
-
-
-/////////////////////////////////////
-//functions for locations & search //
-/////////////////////////////////////
-
-
-/**
- * Gets list of countries
+ * Gets list of countries with items
  *
  * @return array
  */
-function osc_get_countries()
+function osc_list_country()
 {
-    if (View::newInstance()->_exists('countries')) {
-        return View::newInstance()->_get('countries');
+    if (View::newInstance()->_exists('list_countries')) {
+        return View::newInstance()->_current('list_countries');
     }
 
-    return Country::newInstance()->listAll();
+    return null;
 }
 
 
 /**
- * Gets list of regions (from a country)
+ * Gets list of regions with items
+ *
+ * @return array
+ */
+function osc_list_region()
+{
+    if (View::newInstance()->_exists('list_regions')) {
+        return View::newInstance()->_current('list_regions');
+    }
+
+    return null;
+}
+
+
+/**
+ * Gets list of cities with items
+ *
+ * @return array
+ */
+function osc_list_city()
+{
+    if (View::newInstance()->_exists('list_cities')) {
+        return View::newInstance()->_current('list_cities');
+    }
+
+    return null;
+}
+
+
+/**
+ * Gets the next country in the list_countries list
+ *
+ * @return array
+ */
+function osc_has_list_countries()
+{
+    if (!View::newInstance()->_exists('list_countries')) {
+        View::newInstance()
+            ->_exportVariableToView('list_countries', CountryStats::newInstance()->listCountries());
+    }
+    $result = View::newInstance()->_next('list_countries');
+    if (!$result) {
+        View::newInstance()->_reset('list_countries');
+    }
+
+    return $result;
+}
+
+
+/**
+ * Gets the next region in the list_regions list
  *
  * @param string $country
  *
- * @return array|string
+ * @return array
  */
-function osc_get_regions($country = '')
+function osc_has_list_regions($country = '%%%%')
 {
-    if (View::newInstance()->_exists('regions')) {
-        return View::newInstance()->_get('regions');
+    if (!View::newInstance()->_exists('list_regions')) {
+        View::newInstance()->_exportVariableToView(
+            'list_regions',
+            RegionStats::newInstance()->listRegions($country)
+        );
+    }
+    $result = View::newInstance()->_next('list_regions');
+    if (!$result) {
+        View::newInstance()->_reset('list_regions');
     }
 
-    if ($country == '') {
-        return Region::newInstance()->listAll();
-    }
-
-    return Region::newInstance()->findByCountry($country);
+    return $result;
 }
 
 
 /**
- * Gets list of cities (from a region)
+ * Gets the next city in the list_cities list
  *
  * @param string $region
  *
- * @return array|string
+ * @return array
  */
-function osc_get_cities($region = '')
+function osc_has_list_cities($region = '%%%%')
 {
-    if (View::newInstance()->_exists('cities')) {
-        return View::newInstance()->_get('cities');
+    if (!View::newInstance()->_exists('list_cities')) {
+        View::newInstance()
+            ->_exportVariableToView('list_cities', CityStats::newInstance()->listCities($region));
+    }
+    $result = View::newInstance()->_next('list_cities');
+    if (!$result) {
+        View::newInstance()->_reset('list_cities');
     }
 
-    if ($region == '') {
-        return City::newInstance()->listAll();
-    }
-
-    return City::newInstance()->findByRegion($region);
+    return $result;
 }
 
 
 /**
- * Gets list of currencies
+ * Gets the total number of countries in list_countries
+ *
+ * @return int
+ */
+function osc_count_list_countries()
+{
+    if (!View::newInstance()->_exists('list_countries')) {
+        View::newInstance()
+            ->_exportVariableToView('list_countries', CountryStats::newInstance()->listCountries());
+    }
+
+    return View::newInstance()->_count('list_countries');
+}
+
+
+/**
+ * Gets the total number of regions in list_regions
+ *
+ * @param string $country
+ *
+ * @return int
+ */
+function osc_count_list_regions($country = '%%%%')
+{
+    if (!View::newInstance()->_exists('list_regions')) {
+        View::newInstance()->_exportVariableToView(
+            'list_regions',
+            RegionStats::newInstance()->listRegions($country)
+        );
+    }
+
+    return View::newInstance()->_count('list_regions');
+}
+
+
+/**
+ * Gets the total number of cities in list_cities
+ *
+ * @param string $region
+ *
+ * @return int
+ */
+function osc_count_list_cities($region = '%%%%')
+{
+    if (!View::newInstance()->_exists('list_cities')) {
+        View::newInstance()
+            ->_exportVariableToView('list_cities', CityStats::newInstance()->listCities($region));
+    }
+
+    return View::newInstance()->_count('list_cities');
+}
+
+
+// country attributes
+/**
+ * Gets the name of current "list country"
+ *
+ * @return string
+ */
+function osc_list_country_name()
+{
+    return osc_field(osc_list_country(), 'country_name', '');
+}
+
+
+/**
+ * Gets the number of items of current "list country"
+ *
+ * @return int
+ */
+function osc_list_country_code()
+{
+    return osc_field(osc_list_country(), 'country_code', '');
+}
+
+
+/**
+ * Gets the number of items of current "list country"
+ *
+ * @return int
+ */
+function osc_list_country_items()
+{
+    return osc_field(osc_list_country(), 'items', '');
+}
+
+
+/**
+ * Gets the url of current "list country"
+ *
+ * @return string
+ */
+function osc_list_country_url()
+{
+    return osc_search_url(array('sCountry' => osc_list_country_code()));
+}
+
+
+// region attributes
+/**
+ * Gets the name of current "list region" by name
+ *
+ * @return string
+ */
+function osc_list_region_name()
+{
+    return osc_field(osc_list_region(), 'region_name', '');
+}
+
+
+/**
+ * Gets the name of current "list region" by slug
+ *
+ * @return string
+ */
+function osc_list_region_slug()
+{
+    return osc_field(osc_list_region(), 'region_name', '');
+}
+
+
+/**
+ * Gets the ID of current "list region"
+ *
+ * @return string
+ */
+function osc_list_region_id()
+{
+    return osc_field(osc_list_region(), 'region_id', '');
+}
+
+
+/**
+ * Gets the number of items of current "list region"
+ *
+ * @return int
+ */
+function osc_list_region_items()
+{
+    return osc_field(osc_list_region(), 'items', '');
+}
+
+
+/**
+ * Gets the url of current "list region"
+ *
+ * @return string
+ */
+function osc_list_region_url()
+{
+    return osc_search_url(array('sRegion' => osc_list_region_id()));
+}
+
+
+// city attributes
+/**
+ * Gets the name of current "list city" by name
+ *
+ * @return string
+ */
+function osc_list_city_name()
+{
+    return osc_field(osc_list_city(), 'city_name', '');
+}
+
+
+/**
+ * Gets the list of current "list city" by slug
+ *
+ * @return string
+ */
+function osc_list_city_slug()
+{
+    return osc_field(osc_list_city(), 'city_slug', '');
+}
+
+
+/**
+ * Gets the ID of current "list city"
+ *
+ * @return string
+ */
+function osc_list_city_id()
+{
+    return osc_field(osc_list_city(), 'city_id', '');
+}
+
+
+/**
+ * Gets the number of items of current "list city"
+ *
+ * @return int
+ */
+function osc_list_city_items()
+{
+    return osc_field(osc_list_city(), 'items', '');
+}
+
+
+/**
+ * Gets the url of current "list city"
+ *
+ * @return string
+ */
+function osc_list_city_url()
+{
+    return osc_search_url(array('sCity' => osc_list_city_id()));
+}
+
+
+/**********************
+ ** LATEST SEARCHES **
+ **********************/
+/**
+ * Gets the latest searches done in the website
+ *
+ * @param int $limit
  *
  * @return array
  */
-function osc_get_currencies()
+function osc_get_latest_searches($limit = 20)
 {
-    if (!View::newInstance()->_exists('currencies')) {
-        View::newInstance()->_exportVariableToView('currencies', Currency::newInstance()->listAll());
+    if (!View::newInstance()->_exists('latest_searches')) {
+        View::newInstance()->_exportVariableToView(
+            'latest_searches',
+            LatestSearches::newInstance()->getSearches($limit)
+        );
     }
 
-    return View::newInstance()->_get('currencies');
+    return View::newInstance()->_get('latest_searches');
 }
 
 
 /**
- * Prints the additional options to the menu
+ * Gets the total number of latest searches done in the website
  *
- * @param array $option with options of the form array('name' => 'display name', 'url' => 'url of link')
- *
- * @return void
+ * @return int
  */
-function osc_add_option_menu($option = null)
+function osc_count_latest_searches()
 {
-    if ($option != null) {
-        echo '<li><a href="' . $option['url'] . '" >' . $option['name'] . '</a></li>';
-    }
-}
-
-
-/**
- * Get if user is on homepage
- *
- * @return boolean
- */
-function osc_is_home_page()
-{
-    return osc_is_current_page('', '');
-}
-
-
-/**
- * Get if user is on search page
- *
- * @return boolean
- */
-function osc_is_search_page()
-{
-    return osc_is_current_page('search', '');
-}
-
-
-/**
- * Get if user is on search category page
- * @return bool
- * @since 4.0.0
- */
-function osc_is_search_category_page()
-{
-    if (osc_is_search_page()) {
-        $params = Params::getParamsAsArray();
-        unset($params['page']);
-        $countP = count($params);
-
-        if (isset($params['sCategory']) && !is_array($params['sCategory'])
-            && (
-                $countP === 1
-                || (isset($params['iPage']) && $countP === 2)
-                || (isset($params['sOrder'], $params['iOrderType']) && $countP === 4)
-            )
-            && strpos($params['sCategory'], ',') === false
-        ) {
-            return true;
-        }
+    if (!View::newInstance()->_exists('latest_searches')) {
+        View::newInstance()->_exportVariableToView(
+            'latest_searches',
+            LatestSearches::newInstance()->getSearches()
+        );
     }
 
-    return false;
-}
-
-/**
- * Get if user is on a static page
- *
- * @return boolean
- */
-function osc_is_static_page()
-{
-    return osc_is_current_page('page', '');
+    return View::newInstance()->_count('latest_searches');
 }
 
 
 /**
- * Get if user is on a contact page
+ * Gets the next latest search
  *
- * @return boolean
+ * @return array
  */
-function osc_is_contact_page()
+function osc_has_latest_searches()
 {
-    return osc_is_current_page('contact', '');
-}
-
-
-/**
- * Get if user is on ad page
- *
- * @return boolean
- */
-function osc_is_ad_page()
-{
-    return osc_is_current_page('item', '');
-}
-
-
-/**
- * Get if user is on publish page
- *
- * @return boolean
- */
-function osc_is_publish_page()
-{
-    return osc_is_current_page('item', 'item_add');
-}
-
-
-/**
- * Get if user is on edit page
- *
- * @return boolean
- */
-function osc_is_edit_page()
-{
-    return osc_is_current_page('item', 'item_edit');
-}
-
-
-/**
- * Get if user is on a item contact page
- *
- * @return boolean
- */
-function osc_is_item_contact_page()
-{
-    return osc_is_current_page('item', 'contact');
-}
-
-
-/**
- * Get if user is on login form
- *
- * @return boolean
- * @deprecated since version 3.5.7 use osc_is_login_page()
- */
-function osc_is_login_form()
-{
-    return osc_is_current_page('login', '');
-}
-
-
-/**
- * Get if user is on login page
- *
- * @return boolean
- */
-function osc_is_login_page()
-{
-    return osc_is_current_page('login', '');
-}
-
-
-/**
- * Get if user is on register page
- *
- * @return boolean
- */
-function osc_is_register_page()
-{
-    return osc_is_current_page('register', 'register');
-}
-
-
-/**
- * Get if the user is on recover page
- *
- * @return boolean
- */
-function osc_is_recover_page()
-{
-    return osc_is_current_page('login', 'recover');
-}
-
-
-/**
- * Get if the user is on forgot page
- *
- * @return boolean
- */
-function osc_is_forgot_page()
-{
-    return osc_is_current_page('login', 'forgot');
-}
-
-
-/**
- * Get if the user is on custom page
- *
- * @param null $value
- *
- * @return boolean
- */
-function osc_is_custom_page($value = null)
-{
-    if (Rewrite::newInstance()->get_location() === 'custom') {
-        if ($value == null || Params::getParam('file') == $value || Params::getParam('route') == $value) {
-            return true;
-        }
+    if (!View::newInstance()->_exists('latest_searches')) {
+        View::newInstance()->_exportVariableToView(
+            'latest_searches',
+            LatestSearches::newInstance()->getSearches()
+        );
     }
 
-    return false;
+    return View::newInstance()->_next('latest_searches');
 }
 
 
 /**
- * Get if the user is on public profile page
+ * Gets the current latest search
  *
- * @return boolean
+ * @return array
  */
-function osc_is_public_profile()
+function osc_latest_search()
 {
-    return osc_is_current_page('user', 'pub_profile');
+    if (View::newInstance()->_exists('latest_searches')) {
+        return View::newInstance()->_current('latest_searches');
+    }
+
+    return null;
 }
 
 
 /**
- * Get if user is on user dashboard
- *
- * @return boolean
- */
-function osc_is_user_dashboard()
-{
-    return osc_is_current_page('user', 'dashboard');
-}
-
-
-/**
- * Get if user is on user profile
- *
- * @return boolean
- */
-function osc_is_user_profile()
-{
-    return osc_is_current_page('user', 'profile');
-}
-
-
-/**
- * Get if the user is on user's items page
- *
- * @return boolean
- */
-function osc_is_list_items()
-{
-    return osc_is_current_page('user', 'items');
-}
-
-
-/**
- * Get if the user is on user's alerts page
- *
- * @return boolean
- */
-function osc_is_list_alerts()
-{
-    return osc_is_current_page('user', 'alerts');
-}
-
-
-/**
- * Get if user is on change email page
- *
- * @return boolean
- */
-function osc_is_change_email_page()
-{
-    return osc_is_current_page('user', 'change_email');
-}
-
-
-/**
- * Get if user is on change username page
- *
- * @return boolean
- */
-function osc_is_change_username_page()
-{
-    return osc_is_current_page('user', 'change_username');
-}
-
-
-/**
- * Get if user is on change password page
- *
- * @return boolean
- */
-function osc_is_change_password_page()
-{
-    return osc_is_current_page('user', 'change_password');
-}
-
-
-/**
- * Get if the user is on page
- *
- * @param string $location of the resource
- * @param string $section
- *
- * @return boolean
- */
-function osc_is_current_page($location, $section)
-{
-    return osc_get_osclass_location() === $location && osc_get_osclass_section() === $section;
-}
-
-
-/**
- * Get if the user is on 404 error page
- *
- * @return boolean
- */
-function osc_is_404()
-{
-    return (Rewrite::newInstance()->get_location() === 'error');
-}
-
-
-/**
- * Get location
+ * Gets the current latest search pattern
  *
  * @return string
  */
-function osc_get_osclass_location()
+function osc_latest_search_text()
 {
-    return Rewrite::newInstance()->get_location();
+    return osc_field(osc_latest_search(), 's_search', '');
 }
 
 
 /**
- * Get section
+ * Gets the current latest search date
  *
  * @return string
  */
-function osc_get_osclass_section()
+function osc_latest_search_date()
 {
-    return Rewrite::newInstance()->get_section();
+    return osc_field(osc_latest_search(), 'd_date', '');
 }
 
 
 /**
- * Check is an admin is a super admin or only a moderator
+ * Gets the current latest search total
  *
- * @return boolean
+ * @return string
  */
-function osc_is_moderator()
+function osc_latest_search_total()
 {
-    $admin = Admin::newInstance()->findByPrimaryKey(osc_logged_admin_id());
-
-    return isset($admin['b_moderator']) && $admin['b_moderator'] != 0;
+    return osc_field(osc_latest_search(), 'i_total', '');
 }
 
 
 /**
+ * @return array|mixed|string
+ */
+function osc_get_canonical()
+{
+    if (View::newInstance()->_exists('canonical')) {
+        return View::newInstance()->_get('canonical');
+    }
+
+    return '';
+}
+
+
+/**
+ * @param $conditions
+ *
  * @return mixed
  */
-function osc_get_domain()
+function osc_get_raw_search($conditions)
 {
-    $result = parse_url(osc_base_url());
-
-    return $result['host'];
-}
-
-
-/**
- * @param string $separator
- * @param bool   $echo
- * @param array  $lang
- *
- * @return string|void
- */
-function osc_breadcrumb($separator = '&raquo;', $echo = true, $lang = array())
-{
-    $br = new Breadcrumb($lang);
-    $br->init();
-    if ($echo) {
-        echo $br->render($separator);
-
-        return;
+    $keys      = array('aCategories', 'countries', 'regions', 'cities', 'city_areas');
+    $mCategory = Category::newInstance();
+    foreach ($keys as $key) {
+        if (isset($conditions[$key]) && is_array($conditions[$key]) && !empty($conditions[$key])) {
+            foreach ($conditions[$key] as $k => $v) {
+                if (preg_match('|([0-9]+)|', $v, $match)) {
+                    if ($key === 'aCategories') {
+                        $conditions[$key][$k] = $mCategory->findNameByPrimaryKey($match[1]);
+                    } else {
+                        $conditions[$key][$k] = $match[1];
+                    }
+                }
+            }
+        } else {
+            unset($conditions[$key]);
+        }
     }
 
-    return $br->render($separator);
+    if (!isset($conditions['price_min']) || $conditions['price_min'] == 0) {
+        unset($conditions['price_min']);
+    }
+
+    if (!isset($conditions['price_max']) || $conditions['price_max'] == 0) {
+        unset($conditions['price_max']);
+    }
+
+    if (!isset($conditions['sPattern']) || $conditions['sPattern'] == '') {
+        unset($conditions['sPattern']);
+    }
+
+    unset(
+        $conditions['withPattern'],
+        $conditions['tables'],
+        $conditions['tables_join'],
+        $conditions['no_catched_tables'],
+        $conditions['no_catched_conditions'],
+        $conditions['user_ids'],
+        $conditions['order_column'],
+        $conditions['order_direction'],
+        $conditions['limit_init'],
+        $conditions['results_per_page']
+    );
+
+    return $conditions;
 }
 
 
 /**
- * @return mixed|string
+ * @param $paramCat
+ *
+ * @return string
  */
-function osc_subdomain_name()
+function _aux_search_category_slug($paramCat)
 {
-    return View::newInstance()->_get('subdomain_name');
+    if (is_array($paramCat)) {
+        if (count($paramCat) == 1) {
+            $paramCat = $paramCat[0];
+        } else {
+            return '';
+        }
+    }
+
+    if (osc_category_id() == $paramCat) {
+        $category['s_slug'] = osc_category_slug();
+    } elseif (is_numeric($paramCat)) {
+        $category = Category::newInstance()->findByPrimaryKey($paramCat);
+    } else {
+        $category = Category::newInstance()->findBySlug($paramCat);
+    }
+
+    return isset($category['s_slug']) ? $category['s_slug'] : '';
 }
-
-
-/**
- * @return mixed|string
- */
-function osc_subdomain_slug()
-{
-    return View::newInstance()->_get('subdomain_slug');
-}
-
-
-/**
- * @return bool
- */
-function osc_is_subdomain()
-{
-    return View::newInstance()->_get('subdomain_slug') != '';
-}
-/* file end: ./oc-includes/osclass/helpers/hDefines.php */
