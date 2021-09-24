@@ -75,6 +75,9 @@ class CAdminMedia extends AdminSecBaseModel
 
                         break;
                 }
+                $page  = (int)Params::getParam('iPage');
+                if($page==0) { $page = 1; };
+                Params::setParam('iPage', $page);
                 $this->redirectTo(osc_admin_base_url(true) . '?page=media');
                 break;
             case ('delete'):
@@ -90,6 +93,9 @@ class CAdminMedia extends AdminSecBaseModel
                     $this->resourcesManager->deleteResourcesIds($ids);
                 }
                 osc_add_flash_ok_message(_m('Resource deleted'), 'admin');
+                $page  = (int)Params::getParam('iPage');
+                if($page==0) { $page = 1; };
+                Params::setParam('iPage', $page);
                 $this->redirectTo(osc_admin_base_url(true) . '?page=media');
                 break;
             default:
