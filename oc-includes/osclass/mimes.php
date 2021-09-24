@@ -142,5 +142,6 @@ $mimes = array(
     'ott'   => 'application/vnd.oasis.opendocument.text-template',
     'ots'   => 'application/vnd.oasis.opendocument.spreadsheet-template',
     'otp'   => 'application/vnd.oasis.opendocument.presentation-template',
-    'otg'   => 'application/vnd.oasis.opendocument.graphics-templte'
+    'otg'   => 'application/vnd.oasis.opendocument.graphics-templte',
+    'xlsm'  => 'application/vnd.ms-excel.sheet.macroEnabled.12'
 );
