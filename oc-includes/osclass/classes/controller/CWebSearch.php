@@ -326,9 +326,13 @@ class CWebSearch extends BaseModel
         $p_sShowAs          = Params::getParam('sShowAs');
         $aValidShowAsValues = array('list', 'gallery');
         if (!in_array($p_sShowAs, $aValidShowAsValues)) {
-            $p_sShowAs = osc_default_show_as_at_search();
+            $p_sShowAs = Session::newInstance()->_get('sShowAs');
+            if (!in_array($p_sShowAs, $aValidShowAsValues)) {           
+                $p_sShowAs  = osc_default_show_as_at_search();
+            }
         }
-
+        Session::newInstance()->_set('sShowAs', $p_sShowAs);
+        
         // search results: it's blocked with the maxResultsPerPage@search defined in t_preferences
         $p_iPageSize = (int)Params::getParam('iPagesize');
         if ($p_iPageSize > 0) {
@@ -585,13 +589,14 @@ class CWebSearch extends BaseModel
         $this->_exportVariableToView('search_total_items', $iTotalItems);
         $this->_exportVariableToView('items', $aItems);
         $this->_exportVariableToView('search_show_as', $p_sShowAs);
+        $this->_exportVariableToView('items_per_page', $p_iPageSize);
 
         if (OSC_DEBUG) {
             $this->_exportVariableToView('search', $this->mSearch);
         }
 
         // json
-        $json          = $this->mSearch->toJson();
+        $json          = osc_apply_filter('alert_search_json', $this->mSearch->toJson());
         $encoded_alert = base64_encode(osc_encrypt_alert($json));
 
         // Create the HMAC signature and convert the resulting hex hash into base64
