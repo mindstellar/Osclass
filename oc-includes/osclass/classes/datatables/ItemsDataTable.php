@@ -243,7 +243,7 @@ class ItemsDataTable extends DataTable
                 $options = array();
                 // -- prepare data --
                 // prepare item title
-                $title = mb_substr($aRow['s_title'], 0, 30, 'UTF-8');
+                $title = mb_substr($aRow['s_title'], 0, 60, 'UTF-8');
                 if ($title != $aRow['s_title']) {
                     $title .= '...';
                 }
