@@ -212,12 +212,11 @@ class Item extends DAO
                 if (isset($extraFields) && !empty($extraFields)) {
                     $extraFields = $extraFields[0];
 
-                        if ($aItem['pk_i_id'] === $extraFields['fk_i_item_id']) {
-                            // will not override anything, overriding key will be ignored, not an issue though
-                            $aItem += $extraFields;
-                            unset($extraFields);
-                        }
-
+                    if ($aItem['pk_i_id'] === $extraFields['fk_i_item_id']) {
+                        // will not override anything, overriding key will be ignored, not an issue though
+                        $aItem += $extraFields;
+                        unset($extraFields);
+                    }
                 }
                 $items[$itemKey] = $aItem;
             }
