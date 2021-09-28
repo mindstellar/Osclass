@@ -56,12 +56,16 @@ class Scripts extends Dependencies
      * @param string $code         javascript code string with script tag
      * @param array  $dependencies ids array of registered js libraries (not script code) this code depends on
      */
-    public static function enqueueScriptCode($code, $dependencies = null)
+    public static function enqueueScriptCode($code, $dependencies = null, $admin = false)
     {
+        $prefix = '';
+        if($admin === true){
+            $prefix = 'admin_';
+        }
         $print_code = static function () use ($code) {
             echo $code;
         };
-        Plugins::addHook('footer_scripts_loaded', $print_code, 10);
+        Plugins::addHook($prefix.'footer_scripts_loaded', $print_code, 10);
         if ($dependencies !== null && is_array($dependencies)) {
             foreach ($dependencies as $script) {
                 self::newInstance()->enqueueScript($script);
@@ -97,30 +101,10 @@ class Scripts extends Dependencies
     public static function init()
     {
         if (defined('OC_ADMIN') && OC_ADMIN) {
-            self::initPrintScriptsAdmin();
+            self::initPrintScripts(true);
         } else {
             self::initPrintScripts();
         }
-    }
-
-    /**
-     * Print enqueued scripts and run a 'scripts_loaded' hook after scripts print
-     *
-     */
-    private static function initPrintScriptsAdmin()
-    {
-        $printScript = function () {
-            Scripts::newInstance()->printScripts();
-        };
-        if (!Preference::newInstance()->get('enqueue_scripts_in_footer')) {
-            Plugins::addHook('admin_header', $printScript, 10);
-        }
-        Plugins::addHook('admin_footer', $printScript, 10);
-
-        Plugins::addHook('admin_footer',
-            function () {
-                Plugins::runHook('admin_scripts_loaded');
-            }, 20);
     }
 
     /**
@@ -152,40 +136,30 @@ class Scripts extends Dependencies
         return $scripts;
     }
 
-    private static function initPrintScripts()
+    /**
+     * Init Scripts enqueue hooks
+     *
+     * @param false $admin
+     */
+    private static function initPrintScripts(bool $admin = false)
     {
+        $prefix = '';
+        if($admin === true){
+            $prefix = 'admin_';
+        }
         $printScript = function () {
             Scripts::newInstance()->printScripts();
         };
-        if (!Preference::newInstance()->get('enqueue_scripts_in_footer')) {
-            Plugins::addHook('header', $printScript, 10);
+        if (!Preference::newInstance()->get($prefix.'enqueue_scripts_in_footer')) {
+            Plugins::addHook($prefix.'header', $printScript, 10);
+            Deprecate::deprecatedRunHook($prefix.'header_scripts_loaded','5.1.0',$prefix.'scripts_loaded');
         }
         Plugins::addHook('footer', $printScript, 10);
-
-        Plugins::addHook('footer',
-            function () {
-                Plugins::runHook('scripts_loaded');
-            }, 20);
-    }
-
-    /**
-     * Print enqueued scripts and run a 'scripts_loaded' hook after scripts print
-     *
-     * @param string $prefix
-     */
-    private static function printScriptRunLoadHook($prefix)
-    {
-        if ($prefix) {
-            osc_load_scripts();
-        }
-        $closure = static function () use ($prefix) {
-            Scripts::newInstance()->printScripts();
-            Plugins::runHook($prefix . '_scripts_loaded');
+        $scriptsLoaded = static function () use ($prefix) {
+            Plugins::runHook($prefix.'scripts_loaded');
+            Deprecate::deprecatedRunHook($prefix.'footer_scripts_loaded','5.1.0',$prefix.'scripts_loaded');
         };
-        Plugins::addHook($prefix, $closure, 10);
-        if (!Preference::newInstance()->get('enqueue_scripts_in_footer')) {
-            Plugins::addHook($prefix, $closure, 10);
-        }
+        Plugins::addHook($prefix.'footer',$scriptsLoaded, 20);
     }
 
     /**
