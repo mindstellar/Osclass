@@ -59,7 +59,7 @@ class Scripts extends Dependencies
     public static function enqueueScriptCode($code, $dependencies = null, $admin = false)
     {
         $prefix = '';
-        if($admin === true){
+        if ($admin === true) {
             $prefix = 'admin_';
         }
         $print_code = static function () use ($code) {
@@ -144,7 +144,7 @@ class Scripts extends Dependencies
     private static function initPrintScripts(bool $admin = false)
     {
         $prefix = '';
-        if($admin === true){
+        if ($admin === true) {
             $prefix = 'admin_';
         }
         $printScript = function () {
@@ -152,14 +152,14 @@ class Scripts extends Dependencies
         };
         if (!Preference::newInstance()->get($prefix.'enqueue_scripts_in_footer')) {
             Plugins::addHook($prefix.'header', $printScript, 10);
-            Deprecate::deprecatedRunHook($prefix.'header_scripts_loaded','5.1.0',$prefix.'scripts_loaded');
+            Deprecate::deprecatedRunHook($prefix.'header_scripts_loaded', '5.1.0', $prefix.'scripts_loaded');
         }
         Plugins::addHook('footer', $printScript, 10);
         $scriptsLoaded = static function () use ($prefix) {
             Plugins::runHook($prefix.'scripts_loaded');
-            Deprecate::deprecatedRunHook($prefix.'footer_scripts_loaded','5.1.0',$prefix.'scripts_loaded');
+            Deprecate::deprecatedRunHook($prefix.'footer_scripts_loaded', '5.1.0', $prefix.'scripts_loaded');
         };
-        Plugins::addHook($prefix.'footer',$scriptsLoaded, 20);
+        Plugins::addHook($prefix.'footer', $scriptsLoaded, 20);
     }
 
     /**
