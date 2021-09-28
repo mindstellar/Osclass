@@ -146,7 +146,7 @@ osc_current_admin_theme_path('parts/header.php'); ?>
                 <div class="widget-box-title">
                     <h3><?php _e('Listings by category'); ?></h3>
                 </div>
-                <div class="widget-box-content">
+                <div class="widget-box-content" style="max-height: 300px;overflow-x: auto">
                     <?php
                     $countEvent = 1;
                     if (!empty($numItemsPerCategory)) { ?>
