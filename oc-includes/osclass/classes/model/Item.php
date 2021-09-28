@@ -109,7 +109,7 @@ class Item extends DAO
     {
         $this->dao->select();
         $this->dao->from($this->getTableName() . ' i, ' . DB_TABLE_PREFIX . 't_item_location l, ' . DB_TABLE_PREFIX
-            . 't_item_stats s');
+                         . 't_item_stats s');
         $this->dao->where('l.fk_i_item_id = i.pk_i_id AND s.fk_i_item_id = i.pk_i_id');
         $this->dao->groupBy('s.fk_i_item_id');
         $this->dao->orderBy('i_num_views', 'DESC');
@@ -210,15 +210,15 @@ class Item extends DAO
                 }
 
                 if (isset($extraFields) && !empty($extraFields)) {
-                    $extraFields = $extraFields[0];
-
-                    if ($aItem['pk_i_id'] === $extraFields['fk_i_item_id']) {
-                        // will not override anything, overriding key will be ignored, not an issue though
-                        $aItem += $extraFields;
-                        unset($extraFields);
+                    foreach ($extraFields as $key => $extraField) {
+                        if ($aItem['pk_i_id'] === $extraField['fk_i_item_id']) {
+                            $aItem += $extraField;
+                            unset($extraFields[$key]);
+                        }
                     }
                 }
                 $items[$itemKey] = $aItem;
+                unset($aItem);
             }
         }
 
@@ -236,7 +236,7 @@ class Item extends DAO
     {
         $this->dao->select('i.*, cd.s_name AS s_category_name ');
         $this->dao->from($this->getTableName() . ' i, ' . DB_TABLE_PREFIX . 't_category c, ' . DB_TABLE_PREFIX
-            . 't_category_description cd');
+                         . 't_category_description cd');
         $this->dao->where('c.pk_i_id = i.fk_i_category_id AND cd.fk_i_category_id = i.fk_i_category_id');
         $result = $this->dao->get();
         if ($result == false) {
@@ -1017,7 +1017,7 @@ class Item extends DAO
         $this->dao->select('im.s_value as s_value,mf.pk_i_id as pk_i_id, mf.s_name as s_name');
         $this->dao->select('mf.e_type as e_type, im.s_multi as s_multi, mf.s_slug as s_slug');
         $this->dao->from($this->getTableName() . ' i, ' . DB_TABLE_PREFIX . 't_item_meta im, ' . DB_TABLE_PREFIX
-            . 't_meta_categories mc, ' . DB_TABLE_PREFIX . 't_meta_fields mf');
+                         . 't_meta_categories mc, ' . DB_TABLE_PREFIX . 't_meta_fields mf');
         $this->dao->where('mf.pk_i_id = im.fk_i_field_id');
         $this->dao->where('mf.pk_i_id = mc.fk_i_field_id');
         $this->dao->where('mc.fk_i_category_id = i.fk_i_category_id');
