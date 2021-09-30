@@ -9576,17 +9576,15 @@ table.table-small td {
  *  License along with this program. If not, see <http://www.gnu.org/licenses/>.
  *
  */
-.current-theme {
-  padding-top: 20px; }
-  .current-theme .card p, .current-theme .widget-box p, .current-theme #plugin-hook p, .current-theme .iframe-category p {
-    margin-bottom: .2rem; }
-  .current-theme .card-img {
-    border-bottom-right-radius: 0;
-    border-top-right-radius: 0;
-    height: 100%;
-    width: 100%; }
-  .current-theme .card-title {
-    text-transform: capitalize; }
+.current-theme .card p, .current-theme .widget-box p, .current-theme #plugin-hook p, .current-theme .iframe-category p {
+  margin-bottom: .2rem; }
+.current-theme .card-img {
+  border-bottom-right-radius: 0;
+  border-top-right-radius: 0;
+  height: 100%;
+  width: 100%; }
+.current-theme .card-title {
+  text-transform: capitalize; }
 
 .current-theme .theme {
   float: none;
@@ -9659,7 +9657,8 @@ tr.plugin .h3 {
   padding-top: 10px; }
 
 .available-theme .card, .available-theme .widget-box, .available-theme #plugin-hook, .available-theme .iframe-category {
-  width: 250px; }
+  height: 100%;
+  margin-bottom: .5rem; }
 
 .flashmessage-inline {
   display: inline-block;
@@ -10281,8 +10280,6 @@ form h3, form .h3 {
 
   #content-page {
     padding: 0.5rem 0.5rem 3rem; }
-    #content-page > div > div.row-wrapper {
-      padding: 0.1rem; }
 
   #datatablesForm .table .col-title {
     min-width: 100px; }

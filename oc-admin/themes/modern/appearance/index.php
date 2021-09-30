@@ -88,7 +88,8 @@ osc_current_admin_theme_path('parts/header.php'); ?>
                     <div class="card mb-3 col-sm-12 col-md-8 col-lg-6">
                         <div class="row no-gutters">
                             <div class="col">
-                                <img src="<?php echo osc_base_url() . '/oc-content/themes/' . osc_theme() . '/screenshot.png' ?>" class="card-img" alt="<?php echo $info['name']; ?>">
+                                <img src="<?php echo osc_base_url() . '/oc-content/themes/' . osc_theme() . '/screenshot.png' ?>"
+                                     class="card-img" alt="<?php echo $info['name']; ?>">
                             </div>
                             <div class="col">
                                 <div class="card-body">
@@ -104,19 +105,18 @@ osc_current_admin_theme_path('parts/header.php'); ?>
                 </div>
                 <h2 class="render-title lead"><?php _e('Available themes'); ?></h2>
                 <hr>
-                <div class="available-theme row row-cols-1 row-cols-md-3 row-cols-lg-4 g-4">
-                    <div class="col">
-                        <?php
-                        $aThemesToUpdate = json_decode(osc_get_preference('themes_to_update'), true);
-                        $bThemesToUpdate = is_array($aThemesToUpdate);
-                        $csrf_token      = osc_csrf_token_url();
-                        foreach ($themes as $theme) { ?>
-                            <?php
-                            if ($theme === osc_theme()) {
-                                continue;
-                            }
-                            $info = WebThemes::newInstance()->loadThemeInfo($theme);
-                            ?>
+                <div class="available-theme row row-cols-1 row-cols-sm-2 row-cols-lg-3 row-cols-xl-4">
+                    <?php
+                    $aThemesToUpdate = json_decode(osc_get_preference('themes_to_update'), true);
+                    $bThemesToUpdate = is_array($aThemesToUpdate);
+                    $csrf_token      = osc_csrf_token_url();
+                    foreach ($themes as $theme) {
+                        if ($theme === osc_theme()) {
+                            continue;
+                        }
+                        $info = WebThemes::newInstance()->loadThemeInfo($theme);
+                        ?>
+                        <div class="col">
                             <div class="card">
                                 <img class="card-img-top"
                                      src="<?php echo osc_base_url(); ?>/oc-content/themes/<?php echo $theme; ?>/screenshot.png"
@@ -127,13 +127,13 @@ osc_current_admin_theme_path('parts/header.php'); ?>
                                             <a href="<?php echo osc_admin_base_url(true);
                                             ?>?page=appearance&amp;action=activate&amp;theme=<?php
                                             echo $theme; ?>&amp;<?php echo $csrf_token;
-?>" class="btn btn-mini btn-green"><?php _e('Activate'); ?></a>
+                                            ?>" class="btn btn-mini btn-green"><?php _e('Activate'); ?></a>
                                             <a target="_blank"
                                                href="<?php echo osc_base_url(true); ?>?theme=<?php echo $theme; ?>"
                                                class="btn btn-mini btn-blue"><?php _e('Preview'); ?></a>
                                             <a onclick="return delete_dialog('<?php echo $theme; ?>');"
                                                href="<?php echo osc_admin_base_url(true);
-                                                ?>?page=appearance&amp;action=delete&amp;webtheme=<?php
+                                               ?>?page=appearance&amp;action=delete&amp;webtheme=<?php
                                                echo $theme; ?>&amp;<?php echo $csrf_token; ?>"
                                                class="btn btn-sm btn-success delete"><?php _e('Delete'); ?></a>
                                             <?php
@@ -146,17 +146,17 @@ osc_current_admin_theme_path('parts/header.php'); ?>
                                             <?php echo ucfirst($info['name']); ?>
                                         </h4>
                                         <div class="theme-info">
-                                            <div><?php echo __('Version:') ?>: <?php echo $info['version']; ?></div>
-                                            <div><?php echo __('Author:') ?>: <a target="_blank"
-                                                                                 href="<?php echo $info['author_url']; ?>"><?php echo $info['author_name']; ?></a>
+                                            <div><?php echo __('Version') ?>: <?php echo $info['version']; ?></div>
+                                            <div><?php echo __('Author') ?>: <a target="_blank"
+                                                                                href="<?php echo $info['author_url']; ?>"><?php echo $info['author_name']; ?></a>
                                             </div>
-                                            <div><?php echo __('Description:') ?>: <?php echo $info['description']; ?></div>
+                                            <div><?php echo __('Description') ?>: <?php echo $info['description']; ?></div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                        <?php } ?>
-                    </div>
+                        </div>
+                    <?php } ?>
                 </div>
             </div>
         </div>
