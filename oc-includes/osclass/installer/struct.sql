@@ -124,7 +124,7 @@ CREATE TABLE /*TABLE_PREFIX*/t_user (
     b_active TINYINT(1) NOT NULL DEFAULT 0,
     s_pass_code VARCHAR(100) NULL ,
     s_pass_date DATETIME NULL ,
-    s_pass_ip VARCHAR(15) NULL,
+    s_pass_ip VARCHAR(50) NULL,
     fk_c_country_code CHAR(2) NULL,
     s_country VARCHAR(40) NULL,
     s_address VARCHAR(100) NULL,
@@ -141,7 +141,7 @@ CREATE TABLE /*TABLE_PREFIX*/t_user (
     i_items INT UNSIGNED NULL DEFAULT 0,
     i_comments INT UNSIGNED NULL DEFAULT 0,
     dt_access_date DATETIME NOT NULL DEFAULT  '1000-01-01 00:00:00',
-    s_access_ip VARCHAR(15) NOT NULL DEFAULT '',
+    s_access_ip VARCHAR(50) NOT NULL DEFAULT '',
 
         PRIMARY KEY (pk_i_id),
         UNIQUE KEY (s_email),
