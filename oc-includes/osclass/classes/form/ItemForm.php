@@ -842,7 +842,7 @@ class ItemForm extends Form
             $cities = City::newInstance()->findByRegion($item['fk_i_region_id']);
         }
 
-        if (count($cities) >= 1) {
+        if (!empty($cities) && count($cities) >= 1) {
             if (Session::newInstance()->_getForm('cityId') != '') {
                 $item['fk_i_city_id'] = Session::newInstance()->_getForm('cityId');
             }
