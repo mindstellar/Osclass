@@ -583,7 +583,7 @@ class ImageProcessing
             $background = new ImagickPixel('#' . $background_color);
 
             $imagick->newImage($watermark_width, $watermark_height, $background);
-
+            $font_color = ltrim($font_color, '#');
             $draw->setFillColor('#' . $font_color);
             $draw->setFont($font_path);
             $draw->setFontSize($font_size * 1.33);
