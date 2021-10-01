@@ -151,15 +151,15 @@ class Scripts extends Dependencies
             Scripts::newInstance()->printScripts();
         };
         if (!Preference::newInstance()->get($prefix.'enqueue_scripts_in_footer')) {
-            Plugins::addHook($prefix.'header', $printScript, 10);
+            Plugins::addHook($prefix.'header', $printScript, 8);
             Deprecate::deprecatedRunHook($prefix.'header_scripts_loaded', '5.1.0', $prefix.'scripts_loaded');
         }
-        Plugins::addHook('footer', $printScript, 10);
+        Plugins::addHook('footer', $printScript, 8);
         $scriptsLoaded = static function () use ($prefix) {
             Plugins::runHook($prefix.'scripts_loaded');
             Deprecate::deprecatedRunHook($prefix.'footer_scripts_loaded', '5.1.0', $prefix.'scripts_loaded');
         };
-        Plugins::addHook($prefix.'footer', $scriptsLoaded, 20);
+        Plugins::addHook($prefix.'footer', $scriptsLoaded, 10);
     }
 
     /**
