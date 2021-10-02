@@ -298,6 +298,16 @@ function osc_recaptcha_items_enabled()
     return getBoolPreference('enabled_recaptcha_items');
 }
 
+/**
+ * Gets if recaptcha for items is enabled or not
+ *
+ * @return boolean
+ */
+function osc_item_urls_new_tab()
+{
+    return getBoolPreference('item_urls_new_tab');
+}
+
 
 /**
  * Gets how many seconds should an user wait to post a second item (0 for no waiting)

@@ -339,6 +339,9 @@ osc_current_admin_theme_path('parts/header.php'); ?>
 <script>
     tinyMCE.init({
         mode: 'textareas',
+        default_link_target: '_blank',
+        target_list: false,
+        link_assume_external_targets: 'http',
         theme_advanced_toolbar_align: 'left',
         theme_advanced_toolbar_location: 'top',
         theme_advanced_buttons1_add: 'forecolorpicker,fontsizeselect',
