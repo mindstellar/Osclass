@@ -652,7 +652,7 @@ class CAdminUsers extends AdminSecBaseModel
             case ('login'):
                 osc_csrf_check();
                 $aUser = $this->userManager->findByPrimaryKey(Params::getParam('id'));
-                if(!count($aUser)) {
+                if (!count($aUser)) {
                     osc_add_flash_error_message(_m("The user doesn't exist"), 'admin');
                     $this->redirectTo(osc_admin_base_url(true) . '?page=users');
                 }
