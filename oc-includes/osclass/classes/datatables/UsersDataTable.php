@@ -226,7 +226,7 @@ class UsersDataTable extends DataTable
                 $options[] = '<a href="' . osc_user_public_profile_url($aRow['pk_i_id']) . '" target="_blank">'
                     . __('Public profile') . '</a>';
 
-                $options[] = '<a href="' . osc_admin_base_url(true) . '?page=users&action=login&id='
+                $options[] = '<a href="' . osc_admin_base_url(true) . '?page=users&action=user_login&id='
                     . $aRow['pk_i_id'] . '&' . $csrf_token_url . '" target="_blank">' . __('Login') . '</a>';
 
                 if ($aRow['b_active'] == 1) {

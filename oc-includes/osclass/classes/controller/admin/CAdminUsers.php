@@ -133,7 +133,7 @@ class CAdminUsers extends AdminSecBaseModel
                         . __('Unblock') . '</a>';
                 }
                 $actions[] = '<a class="btn btn-outline-secondary" href="' . osc_admin_base_url(true)
-                    . '?page=users&action=login&id=' . $aUser['pk_i_id'] . '&' . $csrf_token . '" target="_blank">'
+                    . '?page=users&action=user_login&id=' . $aUser['pk_i_id'] . '&' . $csrf_token . '" target="_blank">'
                     . __('Login') . '</a>';
 
                 $aLocale = $aUser['locale'];
@@ -649,7 +649,7 @@ class CAdminUsers extends AdminSecBaseModel
                 osc_add_flash_ok_message($msg, 'admin');
                 $this->redirectTo(osc_admin_base_url(true) . '?page=users&action=ban');
                 break;
-            case ('login'):
+            case ('user_login'):
                 osc_csrf_check();
                 $aUser = $this->userManager->findByPrimaryKey(Params::getParam('id'));
                 if (!count($aUser)) {
