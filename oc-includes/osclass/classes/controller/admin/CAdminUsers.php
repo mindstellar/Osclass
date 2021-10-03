@@ -665,7 +665,7 @@ class CAdminUsers extends AdminSecBaseModel
 
                 osc_run_hook('after_login', $user, osc_user_dashboard_url());
                 osc_add_flash_ok_message(sprintf(_m('Logged in as %s successfully'), $aUser['s_name']));
-                $this->redirectTo(osc_apply_filter('correct_login_url_redirect', osc_user_dashboard_url()));
+                $this->redirectTo(osc_user_dashboard_url());
                 break;
             default:
                 if (Params::getParam('action') != '') {
