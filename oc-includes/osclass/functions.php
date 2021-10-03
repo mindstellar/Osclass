@@ -853,8 +853,8 @@ function osc_item_tinymce_footer()
     <script>
         tinyMCE.init({
             mode: 'none',
-            default_link_target: '_blank',
             target_list: false,
+            extended_valid_elements: 'a[href|rel=nofollow noopener<?php echo osc_item_urls_new_tab() ? '|target=_blank' : ''; ?>]',
             link_assume_external_targets: 'http',
             theme_advanced_toolbar_align: 'left',
             theme_advanced_toolbar_location: 'top',

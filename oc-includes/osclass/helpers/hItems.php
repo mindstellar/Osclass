@@ -1556,7 +1556,7 @@ function osc_item_meta_value()
         return '<img src="' . osc_current_web_theme_url('images/cross.png') . '" alt="" title=""/>';
     } elseif ($meta['e_type'] == 'URL') {
         if ($value != '') {
-            $attributes  = 'rel="noopener"';
+            $attributes  = 'rel="noopener nofollow"';
             $attributes .= (osc_item_urls_new_tab()) ? ' target="_blank"' : '';
 
             if (stripos($value, 'http://') !== false || stripos($value, 'https://') !== false) {
