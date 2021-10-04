@@ -279,7 +279,6 @@ class ItemActions
     private function checkAllowedExt($aResources)
     {
         $success = true;
-
         require LIB_PATH . 'osclass/mimes.php';
         if (!empty($aResources)) {
             // get allowedExt
@@ -306,12 +305,19 @@ class ItemActions
                     // check mime file
                     $fileMime = $aResources['type'][$key];
                     if (function_exists('getimagesize') && (stripos($fileMime, 'image/') !== false)) {
-                        $info = getimagesize($aResources['tmp_name'][$key]);
-                        $fileMime = $info['mime'] ?? '';
-                    }
-                    
-                    if (in_array($fileMime, $aMimesAllowed, false)) {
-                        $bool_img = true;
+                        // check if it is a file
+                        $filePath = $aResources['tmp_name'][$key];
+                        $fileMime = '';
+                        if (file_exists($filePath)) {
+                            $imageInfo = getimagesize($filePath);
+                            if (isset($imageInfo['mime'])) {
+                                $fileMime = $imageInfo['mime'];
+                                // check if it's in the allowed mimes
+                                if (in_array($fileMime, $aMimesAllowed, false)) {
+                                    $bool_img = true;
+                                }
+                            }
+                        }
                     }
                     if (!$bool_img && $success) {
                         $success = false;
