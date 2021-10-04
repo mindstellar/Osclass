@@ -636,8 +636,9 @@ class ItemForm extends Form
      */
     public static function description_textarea($name, $locale = 'en_US', $value = '')
     {
-        parent::generic_textarea($name . '[' . $locale . ']', $value);
-
+        $attributes['id'] = preg_replace('|([^_a-zA-Z0-9-]+)|', '', $name . '[' . $locale . ']');
+        $options['sanitize'] = null;
+        echo (new self())->textarea($name . '[' . $locale . ']', $value, $attributes, $options);
         return true;
     }
 

@@ -498,19 +498,16 @@ class FormInputs implements InputInterface
     : string
     {
         $attributes['type'] = 'textarea';
-
-        if (isset($attributes['class'])) {
-            $attributes['class'] = $this->textareaClass;
-        }
-        if (!isset($options['sanitize'])) {
-            $options['sanitize'] = 'html';
-        }
-        if (!isset($attributes['row'])) {
-            $attributes['rows'] = 10;
-        }
-        if (!isset($attributes['columns'])) {
-            $attributes['columns'] = 5;
-        }
+        // set default attributes
+        $attributes = array_merge([
+            'class' => $this->textareaClass,
+            'columns' => 5,
+            'rows' => 10,
+        ], $attributes);
+        // set default options
+        $options = array_merge([
+            'sanitize' => 'html',
+        ], $options);
 
         return $this->generateInput($name, $value, $attributes, $options);
     }
