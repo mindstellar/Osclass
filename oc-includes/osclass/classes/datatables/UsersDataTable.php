@@ -64,6 +64,9 @@ class UsersDataTable extends DataTable
         $this->addTableHeader();
         $this->getDBParams($params);
 
+        osc_run_hook('manage_user_search_conditions', $this->conditions);
+        $this->order_by = osc_apply_filter('manage_user_search_order_by', $this->order_by);
+
         $list_users = User::newInstance()->search(
             $this->start,
             $this->limit,
@@ -336,7 +339,7 @@ class UsersDataTable extends DataTable
      */
     public function withFilters()
     {
-        return $this->withFilters;
+        return osc_apply_filter('manage_user_search_with_filters', $this->withFilters);
     }
 
     /**

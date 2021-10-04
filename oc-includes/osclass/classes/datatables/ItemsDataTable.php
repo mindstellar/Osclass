@@ -57,9 +57,9 @@ class ItemsDataTable extends DataTable
         $this->addTableHeader();
         $this->mSearch = new Search(true);
         $this->getDBParams($params);
-        // add more conditions here
+
         osc_run_hook('manage_item_search_conditions', $this->mSearch);
-        // do Search
+
         $this->processData(Item::newInstance()->extendCategoryName($this->mSearch->doSearch()));
         $this->totalFiltered = $this->mSearch->countAll();
         $this->total         = $this->mSearch->count();
@@ -227,7 +227,9 @@ class ItemsDataTable extends DataTable
             $sort = $arraySortColumns[$sort];
         }
         // only some fields can be ordered
-        $this->mSearch->order($sort, $direction);
+
+        $order_by = osc_apply_filter('manage_item_search_order_by', array('column_name' => $sort, 'type' => $direction));
+        $this->mSearch->order($order_by['column_name'], $order_by['type']);
     }
 
     /**
@@ -698,7 +700,7 @@ class ItemsDataTable extends DataTable
      */
     public function withFilters()
     {
-        return $this->withFilters;
+        return osc_apply_filter('manage_item_search_with_filters', $this->withFilters);
     }
 
     /**
