@@ -92,13 +92,20 @@ $selected   = __get('selected');
                                 <p class="help-inline"><?php _e('Only alphanumeric characters are allowed [a-z0-9_-]'); ?></p>
                             </div>
                         </div>
-                    <div class="form-row">
-                        <div class="form-label"></div>
-                        <div class="form-controls">
-                            <label><?php FieldForm::searchable_checkbox($field); ?><?php
-                                _e('Tick to allow searches by this field'); ?></label>
+                        <div class="form-row">
+                            <div class="form-label"></div>
+                            <div class="form-controls">
+                                <label><?php FieldForm::searchable_checkbox($field); ?><?php
+                                    _e('Tick to allow searches by this field'); ?></label>
+                            </div>
                         </div>
-                    </div>
+                        <div class="form-row" id="field_newtab" style="display: none;">
+                            <div class="form-label"></div>
+                            <div class="form-controls">
+                                <label><?php FieldForm::newtab_checkbox($field); ?><?php
+                                    _e('Tick to open links in new tab'); ?></label>
+                            </div>
+                        </div>
                     </div>
                 </div>
                 <div class="card-footer form-actions">
@@ -124,6 +131,8 @@ $selected   = __get('selected');
             } else {
                 $('#div_field_options').hide();
             }
+
+            ($(this).prop('value') === 'URL') ? $('#field_newtab').show() : $('#field_newtab').hide();
         });
 
         $('select[name="field_type"]').change();

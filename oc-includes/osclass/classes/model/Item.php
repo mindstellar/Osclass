@@ -1015,7 +1015,7 @@ class Item extends DAO
     public function metaFields($id)
     {
         $this->dao->select('im.s_value as s_value,mf.pk_i_id as pk_i_id, mf.s_name as s_name');
-        $this->dao->select('mf.e_type as e_type, im.s_multi as s_multi, mf.s_slug as s_slug');
+        $this->dao->select('mf.e_type as e_type, im.s_multi as s_multi, mf.s_slug as s_slug, mf.b_newtab as b_newtab');
         $this->dao->from($this->getTableName() . ' i, ' . DB_TABLE_PREFIX . 't_item_meta im, ' . DB_TABLE_PREFIX
                          . 't_meta_categories mc, ' . DB_TABLE_PREFIX . 't_meta_fields mf');
         $this->dao->where('mf.pk_i_id = im.fk_i_field_id');

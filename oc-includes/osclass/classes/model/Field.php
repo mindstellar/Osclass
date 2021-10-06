@@ -54,7 +54,7 @@ class Field extends DAO
         parent::__construct();
         $this->setTableName('t_meta_fields');
         $this->setPrimaryKey('pk_i_id');
-        $this->setFields(array('pk_i_id', 's_name', 'e_type', 'b_required', 'b_searchable', 's_slug', 's_options'));
+        $this->setFields(array('pk_i_id', 's_name', 'e_type', 'b_required', 'b_searchable', 'b_newtab', 's_slug', 's_options'));
     }
 
     /**
