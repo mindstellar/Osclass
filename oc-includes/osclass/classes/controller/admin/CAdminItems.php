@@ -732,8 +732,6 @@ class CAdminItems extends AdminSecBaseModel
                 $iUpdated                 = 0;
                 $enabledRecaptchaItems    = Params::getParam('enabled_recaptcha_items');
                 $enabledRecaptchaItems    = (($enabledRecaptchaItems == '1') ? true : false);
-                $itemUrlsNewTab           = Params::getParam('item_urls_new_tab');
-                $itemUrlsNewTab           = (($itemUrlsNewTab == '1') ? true : false);
                 $moderateItems            = Params::getParam('moderate_items');
                 $moderateItems            = (($moderateItems != '') ? true : false);
                 $numModerateItems         = Params::getParam('num_moderate_items');
@@ -797,7 +795,6 @@ class CAdminItems extends AdminSecBaseModel
 
 
                 $iUpdated += osc_set_preference('enabled_recaptcha_items', $enabledRecaptchaItems);
-                $iUpdated += osc_set_preference('item_urls_new_tab', $itemUrlsNewTab);
                 if ($moderateItems) {
                     $iUpdated += osc_set_preference('moderate_items', $numModerateItems);
                 } else {

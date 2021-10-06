@@ -853,9 +853,6 @@ function osc_item_tinymce_footer()
     <script>
         tinyMCE.init({
             mode: 'none',
-            default_link_target: '_blank',
-            target_list: false,
-            link_assume_external_targets: 'http',
             theme_advanced_toolbar_align: 'left',
             theme_advanced_toolbar_location: 'top',
             theme_advanced_buttons1_add: 'forecolorpicker,fontsizeselect',
@@ -863,7 +860,7 @@ function osc_item_tinymce_footer()
             plugins: 'advlist autolink lists link charmap preview anchor searchreplace visualblocks code fullscreen table paste'
         });
         $(function () {
-            $('textarea[id^=description]').each(function() {
+            $('textarea[id^=description]').each(function () {
                 tinyMCE.execCommand('mceAddEditor', true, this.id);
             });
         });

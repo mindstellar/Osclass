@@ -175,13 +175,6 @@ osc_current_admin_theme_path('parts/header.php'); ?>
                                 </label>
                                 <div class="help-box"><?php _e('<strong>Remember</strong> that you must configure reCAPTCHA first'); ?></div>
                             </div>
-                            <div class="separate-top-medium">
-                                <label>
-                                    <input type="checkbox" <?php echo(osc_item_urls_new_tab()
-                                        ? 'checked="checked"' : ''); ?> name="item_urls_new_tab" value="1"/>
-                                    <?php _e('Open URLs from listings in new tab'); ?>
-                                </label>
-                            </div>
                         </div>
                     </div>
                     <div class="form-row">
