@@ -83,6 +83,10 @@ class CAdminSettings
             case ('latestsearches_post'):
                 $do = new CAdminSettingsLatestSearches();
                 break;
+            case ('cookiesgdpr'):
+            case ('cookiesgdpr_post'):
+                $do = new CAdminSettingsCookiesGDPR();
+                break;
             case ('update'):
             case ('check_updates'):
             default:
