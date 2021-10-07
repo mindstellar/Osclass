@@ -228,7 +228,7 @@ class CAdminAjax extends AdminSecBaseModel
                             ),
                             array('pk_i_id' => Params::getParam('id'))
                         );
-                        Field::newInstance()->updateJsonMeta(Params::getParam('id'),'b_new_tab',Params::getParam('b_new_tab'));
+                        Field::newInstance()->updateJsonMeta(Params::getParam('id'), 'b_new_tab', Params::getParam('b_new_tab'));
 
                         if (is_bool($res) && !$res) {
                             $error = 1;
