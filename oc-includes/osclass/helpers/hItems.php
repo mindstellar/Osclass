@@ -1521,6 +1521,12 @@ function osc_item_meta()
 function osc_item_meta_value()
 {
     $meta  = osc_item_meta();
+    //check if s_meta json is in $meta
+    $sMetaArray = [];
+    if (isset($meta['s_meta'])) {
+        $sMetaArray = json_decode($meta['s_meta'], true);
+    }
+
     $value = osc_field($meta, 's_value', '');
     $value = osc_apply_filter('osc_item_meta_value_pre_filter', $value, $meta);
     if ($meta['e_type'] == 'DATEINTERVAL' || $meta['e_type'] == 'DATE') {
@@ -1557,7 +1563,10 @@ function osc_item_meta_value()
     } elseif ($meta['e_type'] == 'URL') {
         if ($value != '') {
             $attributes  = 'rel="noopener nofollow"';
-            $attributes .= ($meta['b_newtab']) ? ' target="_blank"' : '';
+            //check if b_new_tab is enabled in $meta['s_meta'] json
+            if (isset($sMetaArray['b_new_tab']) && $sMetaArray['b_new_tab'] == 1) {
+                $attributes .= ' target="_blank"';
+            }
 
             if (stripos($value, 'http://') !== false || stripos($value, 'https://') !== false) {
                 return '<a href="' . html_entity_decode($value, ENT_COMPAT, 'UTF-8') . '" ' . $attributes . '>'
