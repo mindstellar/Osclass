@@ -426,7 +426,8 @@ class UserForm extends Form
         self::gdpr_checkbox('privacy', __('I agree with the Privacy Policy.'));
     }
 
-    protected static function gdpr_checkbox($type, $label) {
+    protected static function gdpr_checkbox($type, $label)
+    {
         $attributes['id'] = preg_replace('|([^_a-zA-Z0-9-]+)|', '', 'gdpr_' . $type);
         $attributes['required'] = true;
         $options['label'] = $label;

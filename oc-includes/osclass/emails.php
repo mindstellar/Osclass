@@ -2068,16 +2068,16 @@ function fn_email_gdpr_download($user) // This needs to be a mail template...
     $body .= '<p><strong>ID</strong>: #' . $aUser['pk_i_id'] . '</p>';
     $body .= '<p><strong>Name</strong>: ' . $aUser['s_name'] . '</p>';
     $body .= '<p><strong>Email</strong>: ' . $aUser['s_email'] . '</p>';
-    if($location != '') {
+    if ($location != '') {
         $body .= '<p><strong>Website</strong>: ' . $location . '</p>';
     }
-    if($aUser['s_website'] != '') {
+    if ($aUser['s_website'] != '') {
         $body .= '<p><strong>Website</strong>: ' . $aUser['s_website'] . '</p>';
     }
-    if($aUser['s_phone_mobile'] != '') {
+    if ($aUser['s_phone_mobile'] != '') {
         $body .= '<p><strong>Phone (mobile)</strong>: ' . $aUser['s_phone_mobile'] . '</p>';
     }
-    if($aUser['s_phone_land'] != '') {
+    if ($aUser['s_phone_land'] != '') {
         $body .= '<p><strong>Phone (land)</strong>: ' . $aUser['s_phone_land'] . '</p>';
     }
     $body .= '<p><strong>Registration date</strong>: ' . $aUser['dt_reg_date'] . '</p>';
@@ -2085,11 +2085,11 @@ function fn_email_gdpr_download($user) // This needs to be a mail template...
     $body .= '<p><strong>Last login date</strong>: ' . $aUser['dt_access_date'] . '</p>';
     $body .= '<p><strong>Last login IP</strong>: ' . $aUser['s_access_ip'] . '</p>';
 
-    if(count($aItems)) {
+    if (count($aItems)) {
         $body .= '<hr>';
         $body .= '<p>Data associated with published listings</p>';
   
-        foreach($aItems as $item) {
+        foreach ($aItems as $item) {
             $contact = implode(' / ', array_filter([$item['s_contact_name'], $item['s_contact_email'], $item['s_contact_phone']]));
             $body .= '<p><strong>Item #' . $item['pk_i_id'] . '</strong> ' . $contact . '<br>';
         }

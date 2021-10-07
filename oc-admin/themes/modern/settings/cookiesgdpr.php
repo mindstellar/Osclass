@@ -90,7 +90,7 @@ osc_current_admin_theme_path('parts/header.php');
                         <input type="text" name="cookie_consent_url" list="staticpages" value="<?php echo osc_esc_html(osc_cookie_consent_url()); ?>"/>
                         <datalist id="staticpages">
                             <?php osc_reset_static_pages(); ?>
-                            <?php while(osc_has_static_pages()) { ?>
+                            <?php while (osc_has_static_pages()) { ?>
                                 <option value="<?php echo osc_static_page_url(); ?>" <?php echo $selected; ?>><?php echo osc_static_page_title();?></option>
                             <?php } ?>
                         </datalist>
@@ -146,7 +146,7 @@ osc_current_admin_theme_path('parts/header.php');
                         <select class="form-select form-select-sm " name="gdpr_terms_page">
                             <option value="0" selected="selected"><?php _e('Select a page...'); ?></option>
                             <?php osc_reset_static_pages(); ?>
-                            <?php while(osc_has_static_pages()) { ?>
+                            <?php while (osc_has_static_pages()) { ?>
                                 <?php $selected = (osc_gdpr_terms_page() == osc_static_page_id()) ? 'selected' : ''; ?>
                                 <option value="<?php echo osc_static_page_id(); ?>" <?php echo $selected; ?>><?php echo osc_static_page_title();?></option>
                             <?php } ?>
@@ -159,7 +159,7 @@ osc_current_admin_theme_path('parts/header.php');
                         <select class="form-select form-select-sm " name="gdpr_privacy_page">
                             <option value="0" selected="selected"><?php _e('Select a page...'); ?></option>
                             <?php osc_reset_static_pages(); ?>
-                            <?php while(osc_has_static_pages()) { ?>
+                            <?php while (osc_has_static_pages()) { ?>
                                 <?php $selected = (osc_gdpr_privacy_page() == osc_static_page_id()) ? 'selected' : ''; ?>
                                 <option value="<?php echo osc_static_page_id(); ?>" <?php echo $selected; ?>><?php echo osc_static_page_title();?></option>
                             <?php } ?>

@@ -812,7 +812,9 @@ function osc_admin_toolbar_update_languages($force = false)
 
 function osc_ga_analytics_footer()
 {
-    if(osc_cookie_consent_nonmandatory() && (!isset($_COOKIE['cookieconsent_status']) || (isset($_COOKIE['cookieconsent_status']) && $_COOKIE['cookieconsent_status'] != 'allow'))) return;
+    if (osc_cookie_consent_nonmandatory() && (!isset($_COOKIE['cookieconsent_status']) || (isset($_COOKIE['cookieconsent_status']) && $_COOKIE['cookieconsent_status'] != 'allow'))) {
+        return;
+    }
 
     $id = osc_google_analytics_id();
     if ($id) {
@@ -884,14 +886,14 @@ function osc_cookie_consent_load()
     osc_enqueue_script('cookieconsent');
     osc_enqueue_style('cookieconsent');
 
-    osc_add_hook('footer', function() {
+    osc_add_hook('footer', function () {
         $options = array(
             'palette' => array(
                 'popup' => array('background' => '#eaf7f7', 'text' => '#5c7291'),
                 'button' => array('background' => '#56cbdb', 'text' => '#ffffff'),
             )
         );
-        if(osc_cookie_consent_nonmandatory()) {
+        if (osc_cookie_consent_nonmandatory()) {
             $options['type'] = 'opt-in';
             $options['content'] = array(
                 'allow' => __('Allow all cookies'),
@@ -899,7 +901,7 @@ function osc_cookie_consent_load()
             );
         }
         $url = osc_cookie_consent_url();
-        if($url != '') {
+        if ($url != '') {
             $options['content']['href'] = $url;
         }
 
@@ -916,15 +918,15 @@ function osc_cookie_consent_load()
     });
 }
 
-if(osc_cookie_consent_enabled()) {
+if (osc_cookie_consent_enabled()) {
     osc_add_hook('init', 'osc_cookie_consent_load');
 }
 
 function osc_gdpr_checkbox($catId = null)
 {
-    if(osc_is_web_user_logged_in()) {
+    if (osc_is_web_user_logged_in()) {
         $user = User::newInstance()->findByPrimaryKey(osc_logged_user_id()); // No need to fetch entire user...
-        if($user['b_gdpr']) {
+        if ($user['b_gdpr']) {
             return;
         }
     }
@@ -939,16 +941,16 @@ function osc_gdpr_checkbox($catId = null)
 
 function osc_gdpr_checkbox_save($userId = null)
 {
-    if(osc_is_web_user_logged_in()) {
+    if (osc_is_web_user_logged_in()) {
         $userId = osc_logged_user_id();
     }
 
-    if($userId && Params::getParam('gdpr_terms') && Params::getParam('gdpr_privacy')) {
+    if ($userId && Params::getParam('gdpr_terms') && Params::getParam('gdpr_privacy')) {
         User::newInstance()->updateByPrimaryKey(array('b_gdpr' => '1'), $userId);
     }
 }
 
-if(osc_gdpr_checkboxes_enabled()) {
+if (osc_gdpr_checkboxes_enabled()) {
     osc_add_hook('item_form', 'osc_gdpr_checkbox');
     osc_add_hook('user_register_form', 'osc_gdpr_checkbox');
     osc_add_hook('posted_item', 'osc_gdpr_checkbox_save');
