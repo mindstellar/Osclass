@@ -492,7 +492,12 @@ class Field extends DAO
 
         $meta             = $result->row();
         $meta             = json_decode($meta['s_meta'], true);
-        $meta[$fieldName] = $fieldValue;
+        // if $fieldValue is '', null
+        if ($fieldValue === '' || $fieldValue === null) {
+            unset($meta[$fieldName]);
+        } else {
+            $meta[$fieldName] = $fieldValue;
+        }
         $meta             = json_encode($meta);
 
         return $this->dao->update($this->getTableName(), array('s_meta' => $meta), array('pk_i_id' => $metaId));
@@ -519,8 +524,14 @@ class Field extends DAO
 
         $meta = $result->row();
         $meta = json_decode($meta['s_meta'], true);
+        // if $meta[$fieldName] is not set or is '', null return false
+        if (!isset($meta[$fieldName]) || $meta[$fieldName]
+            === '' || $meta[$fieldName] === null
+        ) {
+            return false;
+        }
+        return $meta[$fieldName];
 
-        return $meta[$fieldName] ?? false;
     }
 
 }
