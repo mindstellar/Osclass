@@ -102,10 +102,31 @@ switch ($step) {
             $langFolder = osc_translations_path() . $install_locale;
             mkdir($langFolder, 0755, true);
 
-            $files = osc_get_language_files_urls($install_locale);
-            foreach ($files as $file => $url) {
-                $content = osc_file_get_contents($url);
-                file_put_contents($langFolder . '/' . $file, $content);
+            $poFiles = array(
+                'theme.po',
+                'core.po',
+                'messages.po'
+            );
+            $moFiles = array(
+                'theme.mo',
+                'core.mo',
+                'messages.mo'
+            );
+            foreach ($poFiles as $poFile) {
+                $poFileFrom = osc_get_i18n_repository_url('src/translations/' .$install_locale.'/'.$poFile);
+                $poFileTo = $langFolder . $poFile;
+                $poFile = osc_file_get_contents($poFileFrom);
+                if ($poFile) {
+                    file_put_contents($poFileTo, $poFile);
+                }
+            }
+            foreach ($moFiles as $moFile) {
+                $moFileFrom = osc_get_i18n_repository_url('src/translations/' .$install_locale.'/'.$moFile);
+                $moFileTo = $langFolder . $moFile;
+                $moFile = osc_file_get_contents($moFileFrom);
+                if ($moFile) {
+                    file_put_contents($moFileTo, $moFile);
+                }
             }
             header('Location: ' . $_SERVER['REQUEST_URI']);
             die;
