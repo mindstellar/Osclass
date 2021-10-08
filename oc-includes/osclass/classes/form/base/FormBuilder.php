@@ -41,6 +41,7 @@ use mindstellar\Csrf;
 
 /**
  * Class FormBuilder
+ * Still in development for internal use only
  *
  * @package mindstellar\form
  */
