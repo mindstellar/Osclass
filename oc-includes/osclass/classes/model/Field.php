@@ -54,7 +54,7 @@ class Field extends DAO
         parent::__construct();
         $this->setTableName('t_meta_fields');
         $this->setPrimaryKey('pk_i_id');
-        $this->setFields(array('pk_i_id', 's_name', 'e_type', 'b_required', 'b_searchable', 's_slug', 's_options'));
+        $this->setFields(array('pk_i_id', 's_name', 'e_type', 'b_required', 'b_searchable', 's_slug', 's_options', 's_meta'));
     }
 
     /**
@@ -469,6 +469,71 @@ class Field extends DAO
             );
         }
     }
+
+    /**
+     * Update JSON fieldName in s_meta json column
+     *
+     * @param int    $metaId
+     * @param int    $fieldName
+     * @param string $fieldValue
+     *
+     * @return bool
+     */
+    public function updateJsonMeta($metaId, $fieldName, $fieldValue)
+    {
+        $this->dao->select('s_meta');
+        $this->dao->from($this->getTableName());
+        $this->dao->where('pk_i_id', $metaId);
+        $result = $this->dao->get();
+
+        if ($result == false) {
+            return false;
+        }
+
+        $meta             = $result->row();
+        $meta             = json_decode($meta['s_meta'], true);
+        // if $fieldValue is '', null
+        if ($fieldValue === '' || $fieldValue === null) {
+            unset($meta[$fieldName]);
+        } else {
+            $meta[$fieldName] = $fieldValue;
+        }
+        $meta             = json_encode($meta);
+
+        return $this->dao->update($this->getTableName(), array('s_meta' => $meta), array('pk_i_id' => $metaId));
+    }
+
+    /**
+     * Get JSON fieldName from s_meta json column
+     *
+     * @param int $metaId
+     * @param int $fieldName
+     *
+     * @return mixed
+     */
+    public function getJsonMeta($metaId, $fieldName)
+    {
+        $this->dao->select('s_meta');
+        $this->dao->from($this->getTableName());
+        $this->dao->where('pk_i_id', $metaId);
+        $result = $this->dao->get();
+
+        if ($result == false) {
+            return false;
+        }
+
+        $meta = $result->row();
+        $meta = json_decode($meta['s_meta'], true);
+        // if $meta[$fieldName] is not set or is '', null return false
+        if (!isset($meta[$fieldName]) || $meta[$fieldName]
+            === '' || $meta[$fieldName] === null
+        ) {
+            return false;
+        }
+        return $meta[$fieldName];
+
+    }
+
 }
 
 /* file end: ./oc-includes/osclass/model/Field.php */

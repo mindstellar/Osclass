@@ -212,10 +212,9 @@ class CAdminAjax extends AdminSecBaseModel
                         $aux       = Params::getParam('s_options');
                         $aAux      = explode(',', $aux);
 
-                        foreach ($aAux as &$option) {
-                            $option = trim($option);
+                        foreach ($aAux as $k => $v) {
+                            $aAux[$k] = trim($v);
                         }
-
                         $s_options = implode(',', $aAux);
 
                         $res = Field::newInstance()->update(
@@ -229,6 +228,7 @@ class CAdminAjax extends AdminSecBaseModel
                             ),
                             array('pk_i_id' => Params::getParam('id'))
                         );
+                        Field::newInstance()->updateJsonMeta(Params::getParam('id'), 'b_new_tab', Params::getParam('b_new_tab'));
 
                         if (is_bool($res) && !$res) {
                             $error = 1;
