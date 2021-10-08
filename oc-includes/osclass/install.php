@@ -61,7 +61,7 @@ if ($step < 1) {
 }
 
 $locales = osc_listLocales();
-$jsonLocales = osc_file_get_contents(osc_get_languages_json_url());
+$jsonLocales = osc_file_get_contents(osc_get_locations_json_url());
 $jsonLocales = json_decode($jsonLocales, true);
 $install_locale = Params::getParam('install_locale');
 
