@@ -187,6 +187,28 @@ class FieldForm extends Form
 
     /**
      * @param null $field
+     */
+    public static function newtab_checkbox($field = null)
+    {
+        $name             = 'b_new_tab';
+        $attributes['id'] = $name;
+
+        if (!empty($field)) {
+            $json_decoded_field = json_decode($field['s_meta'], true);
+        }
+        if (isset($json_decoded_field['b_new_tab']) && $json_decoded_field['b_new_tab']) {
+            $attributes['checked'] = true;
+        }
+
+        try {
+            echo self::getInstance()->checkbox($name, 1, $attributes);
+        } catch (Exception $e) {
+            trigger_error($e->getMessage());
+        }
+    }
+
+    /**
+     * @param null $field
      *
      */
     public static function type_select($field = null)
