@@ -71,7 +71,7 @@ osc_current_admin_theme_path('parts/header.php'); ?>
 <h2 class="render-title"><?php _e('Reported listings'); ?></h2>
 <div class="relative">
     <div id="listing-toolbar">
-        <div class="float-right">
+        <div class="input-group input-group-sm">
             <form method="get" action="<?php echo osc_admin_base_url(true); ?>" class="inline" nocsrf>
                 <?php foreach (Params::getParamsAsArray('get') as $key => $value) { ?>
                     <?php if ($key !== 'iDisplayLength') { ?>
