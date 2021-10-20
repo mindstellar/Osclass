@@ -27,12 +27,44 @@
  *
  */
 
+use mindstellar\utility\Escape;
+use mindstellar\utility\Sanitize;
+
 /**
  * Class FieldForm
  */
 class FieldForm extends Form
 {
     private static $instance;
+    /**
+     * Enabled admin locale
+     * @var array
+     */
+    private $adminLocales;
+    /**
+     * Current admin locale
+     * @var string
+     */
+    private $activeAdminLocale;
+    /**
+     * Enabled user locales
+     * @var array
+     */
+    private $userLocales;
+    /**
+     * Current User Locale
+     * @var string
+     */
+    private $activeUserLocale;
+
+    public function __construct(Escape $escape = null, Sanitize $sanitize = null) {
+        $this->adminLocales = osc_get_admin_locales();
+        $this->activeAdminLocale = osc_current_admin_locale();
+
+        $this->userLocales = osc_get_locales();
+        $this->activeUserLocale = osc_current_user_locale();
+        parent::__construct($escape, $sanitize);
+    }
 
     public static function i18n_datePicker()
     {
@@ -506,5 +538,83 @@ class FieldForm extends Form
             }
             echo '</div>';
         }
+    }
+    /**
+     * Generate MultiLanguage Title Description Fields for Item
+     *
+     * @param null $field
+     */
+    public static function multiLangTitle($field)
+    {
+        $locales  = osc_get_admin_locales();
+        $currentLocale = osc_current_admin_locale();
+        self::getInstance()->printMultiLangTab($locales,$currentLocale);
+
+        $locales  = osc_get_admin_locales();
+        $currentLocale = osc_current_admin_locale();
+        echo '<div class="tab-content mb-3" id="multiLangTabsContent" >';
+
+        foreach ($locales as $locale) {
+            // Add class active if $current_locale is equal to $locale['pk_c_code']
+            $active = '';
+            if ($locale['pk_c_code'] === $currentLocale) {
+                $active = 'show active';
+            }
+            echo '<div class="tab-pane fade ' . $active . '" id="meta_' . $locale['pk_c_code'] . '" role="tabpanel">';
+            self::getInstance()->printFieldTitle($locale, $field);
+            echo '</div>';
+        }
+        echo '</div>';
+    }
+     /**
+     * Print MultiLang Tab
+     */
+    private function printMultiLangTab($locales, $activeLocaleCode)
+    {
+        if ($locales > 1) {
+            echo '<div id="language-tab" class="mt-3">';
+            echo '<ul class="nav nav-tabs nav-tabs-sm" id="multiLangTabs" role="tablist">';
+            foreach ($locales as $locale) {
+                $active = '';
+                if ($locale['pk_c_code'] === $activeLocaleCode) {
+                    $active = 'show active';
+                }
+                echo '<li class="nav-item"><a class="nav-link ' . $active . '" href="#meta_' . $locale['pk_c_code']
+                    . '" data-bs-toggle="tab">'
+                    . $locale['s_name'] . '</a></li>';
+            }
+            echo '</ul>';
+            echo '</div>';
+        }
+    }
+
+    /**
+     * Print Multi language Field Name Input
+     *
+     * @param                                   $locale
+     * @param array                             $field
+     */
+    private function printFieldTitle($locale, array $field = null)
+    {
+        $fieldTitleInputName         = 'meta_s_name' . '[' . $locale['pk_c_code'] . ']';
+        $valueTitleInput        = $field['locale'][$locale['pk_c_code']]['s_name'] ?? '';
+        $fieldTitleAttributes   = [
+            'id'          => $fieldTitleInputName,
+            'placeholder' => __('Enter field name'),
+        ];
+        $fieldTitleOptions      = [
+            'sanitize' => 'html',
+            'label'    => __('Name'),
+            'inputDivClass' => 'form-controls',
+            'divClass' => 'form-row meta-name-inputs'
+        ];
+        try {
+            echo $this->text($fieldTitleInputName, $valueTitleInput, $fieldTitleAttributes, $fieldTitleOptions);
+        } catch (Exception $e) {
+            if(defined('OSC_DEBUG') && OSC_DEBUG){
+                trigger_error($e->getTraceAsString(),E_USER_WARNING);
+            }
+        }
+
     }
 }

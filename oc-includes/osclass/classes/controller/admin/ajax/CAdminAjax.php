@@ -206,30 +206,43 @@ class CAdminAjax extends AdminSecBaseModel
                             $slug_k++;
                             $slug = $slug_tmp . '_' . $slug_k;
                         }
-
-                        // trim options
-                        $s_options = '';
-                        $aux       = Params::getParam('s_options');
-                        $aAux      = explode(',', $aux);
-
-                        foreach ($aAux as $k => $v) {
-                            $aAux[$k] = trim($v);
+                        // prepare multi locale data
+                        $currentAdminLocale = osc_current_admin_locale();
+                        $aMetaNames        = Params::getParam('meta_s_name');
+                        $metaLocale = array();
+                        foreach ($aMetaNames as $k => $v) {
+                            if (!empty($v)) {
+                                $metaLocale[$k] = array(
+                                    's_name' => trim($v),
+                                );
+                            }
                         }
-                        $s_options = implode(',', $aAux);
+
+                        $metaOptions     = Params::getParam('s_options');
+
+                        // trim all csv options
+                        if (!empty($metaOptions)) {
+                            $tmpValues = explode(',',$metaOptions);
+                            foreach ($tmpValues as $k => $v) {
+                                $tmpValues[$k] = trim($v);
+                            }
+                            $metaOptions = implode(',', $tmpValues);
+                            unset($tmpValues); 
+                        }
 
                         $res = Field::newInstance()->update(
                             array(
-                                's_name'       => Params::getParam('s_name'),
+                                's_name'       => $aMetaNames[$currentAdminLocale],
                                 'e_type'       => Params::getParam('field_type'),
                                 's_slug'       => $slug,
                                 'b_required'   => Params::getParam('field_required') == '1' ? 1 : 0,
                                 'b_searchable' => Params::getParam('field_searchable') == '1' ? 1 : 0,
-                                's_options'    => $s_options
+                                's_options'    => $metaOptions,
                             ),
                             array('pk_i_id' => Params::getParam('id'))
                         );
                         Field::newInstance()->updateJsonMeta(Params::getParam('id'), 'b_new_tab', Params::getParam('b_new_tab'));
-
+                        Field::newInstance()->updateJsonMeta(Params::getParam('id'), 'locale', $metaLocale);
                         if (is_bool($res) && !$res) {
                             $error = 1;
                         }
@@ -258,7 +271,7 @@ class CAdminAjax extends AdminSecBaseModel
                 } else {
                     $result = array(
                         'ok'       => __('Saved'),
-                        'text'     => Params::getParam('s_name'),
+                        'text'     => $aMetaNames[$currentAdminLocale],
                         'field_id' => Params::getParam('id')
                     );
                 }

@@ -9137,6 +9137,9 @@ ul.ui-autocomplete.ui-menu {
       top: 1.45rem;
       transform: rotate(-45deg); }
 
+.nav-tabs-sm .nav-link {
+  padding: 0.25rem 0.5rem; }
+
 .widget-box-title select {
   font-size: 0.875rem;
   margin-bottom: -.3rem;
@@ -9970,7 +9973,7 @@ code {
   margin: 0;
   padding: 0; }
 
-.list-fields ul li {
+.list-fields > ul > li {
   margin-bottom: 10px; }
 
 .list-categories .category_div,
