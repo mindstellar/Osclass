@@ -57,7 +57,8 @@ class FieldForm extends Form
      */
     private $activeUserLocale;
 
-    public function __construct(Escape $escape = null, Sanitize $sanitize = null) {
+    public function __construct(Escape $escape = null, Sanitize $sanitize = null)
+    {
         $this->adminLocales = osc_get_admin_locales();
         $this->activeAdminLocale = osc_current_admin_locale();
 
@@ -548,7 +549,7 @@ class FieldForm extends Form
     {
         $locales  = osc_get_admin_locales();
         $currentLocale = osc_current_admin_locale();
-        self::getInstance()->printMultiLangTab($locales,$currentLocale);
+        self::getInstance()->printMultiLangTab($locales, $currentLocale);
 
         $locales  = osc_get_admin_locales();
         $currentLocale = osc_current_admin_locale();
@@ -611,8 +612,8 @@ class FieldForm extends Form
         try {
             echo $this->text($fieldTitleInputName, $valueTitleInput, $fieldTitleAttributes, $fieldTitleOptions);
         } catch (Exception $e) {
-            if(defined('OSC_DEBUG') && OSC_DEBUG){
-                trigger_error($e->getTraceAsString(),E_USER_WARNING);
+            if (defined('OSC_DEBUG') && OSC_DEBUG) {
+                trigger_error($e->getTraceAsString(), E_USER_WARNING);
             }
         }
 

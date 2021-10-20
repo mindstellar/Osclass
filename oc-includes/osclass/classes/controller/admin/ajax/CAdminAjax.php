@@ -222,12 +222,12 @@ class CAdminAjax extends AdminSecBaseModel
 
                         // trim all csv options
                         if (!empty($metaOptions)) {
-                            $tmpValues = explode(',',$metaOptions);
+                            $tmpValues = explode(',', $metaOptions);
                             foreach ($tmpValues as $k => $v) {
                                 $tmpValues[$k] = trim($v);
                             }
                             $metaOptions = implode(',', $tmpValues);
-                            unset($tmpValues); 
+                            unset($tmpValues);
                         }
 
                         $res = Field::newInstance()->update(
