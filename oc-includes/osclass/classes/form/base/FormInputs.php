@@ -117,7 +117,8 @@ class FormInputs implements InputInterface
      * @throws \Exception
      */
     public function text(string $name, $value, array $attributes = [], array $options = [])
-    : string {
+    : string
+    {
         if (!isset($attributes['type'])) {
             $attributes['type'] = 'text';
         }
@@ -156,7 +157,8 @@ class FormInputs implements InputInterface
      * @throws \Exception
      */
     private function generateInput(string $name, $values = null, array $attributes = [], array $options = [])
-    : string {
+    : string
+    {
         if (!isset($name)) {
             throw new Exception('Input Name is not set');
         }
@@ -364,14 +366,15 @@ class FormInputs implements InputInterface
      * @return array
      */
     private function setContainerClasses(array $options)
-    : array {
+    : array
+    {
         if (isset($options['divClass'])) {
             $divStart  = '<div class="' . $options['divClass'] . '">';
             $divEnd = '</div>';
         } else {
             $divStart = '';
             $divEnd = '';
-         }
+        }
         // Set Label Div container
         if ($this->labelDivClass !== null) {
             $labelDivStart = $this->labelDivClass;
@@ -435,7 +438,8 @@ class FormInputs implements InputInterface
      * @return string
      */
     private function label(string $label, string $for, string $class = null)
-    : string {
+    : string
+    {
         if ($class === null) {
             $class = $this->labelClass;
         }
@@ -451,7 +455,8 @@ class FormInputs implements InputInterface
      * @return string
      */
     private function attributesToString(array $attributes)
-    : string {
+    : string
+    {
         $attributesString = '';
         foreach ($attributes as $key => $value) {
             // escape html special chars if escapeHtml is true
@@ -471,7 +476,8 @@ class FormInputs implements InputInterface
      * @param              $options ['optgroupLevel'] -1 = no optgroup, 0 = first level, 1 = second level, etc
      */
     private function getOptionsString($value, $options)
-    : string {
+    : string
+    {
         // get defaultValue, optGroupLevel options if set or set default
         $defaultValue  = $value ?? '';
         $optGroupLevel = $options['optGroupLevel'] ?? -1;
@@ -536,7 +542,8 @@ class FormInputs implements InputInterface
      * @return string
      */
     private function addHtml(string $htmlContent)
-    : string {
+    : string
+    {
         return $this->escape::html($htmlContent);
     }
 
@@ -552,7 +559,8 @@ class FormInputs implements InputInterface
      * @throws \Exception
      */
     public function textarea(string $name, $value, array $attributes = [], array $options = [])
-    : string {
+    : string
+    {
         $attributes['type'] = 'textarea';
         // set default attributes
         $attributes = array_merge([
@@ -581,7 +589,8 @@ class FormInputs implements InputInterface
      * @throws \Exception
      */
     public function checkbox(string $name, $value, array $attributes = [], array $options = [])
-    : string {
+    : string
+    {
         $attributes['type'] = 'checkbox';
         // add css class if not set
         if (!isset($attributes['class'])) {
@@ -613,7 +622,8 @@ class FormInputs implements InputInterface
      * @throws \Exception
      */
     public function select(string $name, $value, array $attributes = [], array $options = [])
-    : string {
+    : string
+    {
         $attributes['type'] = 'select';
         // add class if not set
         if (!isset($attributes['class'])) {
@@ -635,7 +645,8 @@ class FormInputs implements InputInterface
      * @throws \Exception
      */
     public function password(string $name, string $value, array $attributes = [], array $options = [])
-    : string {
+    : string
+    {
         $attributes['type']         = 'password';
         $attributes['autocomplete'] = 'on';
         // add class if not set
@@ -658,7 +669,8 @@ class FormInputs implements InputInterface
      * @throws \Exception
      */
     public function radio(string $name, $value, array $attributes = [], array $options = [])
-    : string {
+    : string
+    {
         $attributes['type'] = 'radio';
         // add css class if not set
         if (!isset($options['class'])) {
@@ -680,7 +692,8 @@ class FormInputs implements InputInterface
      * @throws \Exception
      */
     public function hidden(string $name, $value, array $attributes = [], array $options = [])
-    : string {
+    : string
+    {
         $attributes['type'] = 'hidden';
 
         return $this->generateInput($name, $value, $attributes, $options);
@@ -697,7 +710,8 @@ class FormInputs implements InputInterface
      * @throws \Exception
      */
     public function submit(string $name, array $attributes = [], array $options = [])
-    : string {
+    : string
+    {
         $attributes['type'] = 'submit';
         // add css class if not set
         if (!isset($attributes['class'])) {
@@ -718,7 +732,8 @@ class FormInputs implements InputInterface
      * @throws \Exception
      */
     public function file(string $name, array $attributes = [], array $options = [])
-    : string {
+    : string
+    {
         $attributes['type'] = 'file';
         if (!isset($attributes['class'])) {
             $attributes['class'] = $this->fileClass;
