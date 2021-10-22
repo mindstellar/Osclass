@@ -1015,7 +1015,7 @@ class Item extends DAO
     public function metaFields($id)
     {
         $metaFields = Field::newInstance()->findByItem($id);
-        if (empty($metaFields)){
+        if (empty($metaFields)) {
             return [];
         }
         $aTemp = $metaFields;
@@ -1030,7 +1030,6 @@ class Item extends DAO
                 }
                 $aValue[$value['s_multi']] = $value['s_value'];
                 $value['s_value']          = $aValue;
-
             }
             $array[$value['pk_i_id']] = $value;
         }
