@@ -1014,23 +1014,11 @@ class Item extends DAO
      */
     public function metaFields($id)
     {
-        $this->dao->select('im.s_value as s_value,mf.pk_i_id as pk_i_id, mf.s_name as s_name');
-        $this->dao->select('mf.e_type as e_type, im.s_multi as s_multi, mf.s_slug as s_slug, mf.s_meta as s_meta');
-        $this->dao->from($this->getTableName() . ' i, ' . DB_TABLE_PREFIX . 't_item_meta im, ' . DB_TABLE_PREFIX
-                         . 't_meta_categories mc, ' . DB_TABLE_PREFIX . 't_meta_fields mf');
-        $this->dao->where('mf.pk_i_id = im.fk_i_field_id');
-        $this->dao->where('mf.pk_i_id = mc.fk_i_field_id');
-        $this->dao->where('mc.fk_i_category_id = i.fk_i_category_id');
-        $array_where = array(
-            'im.fk_i_item_id' => $id,
-            'i.pk_i_id'       => $id
-        );
-        $this->dao->where($array_where);
-        $result = $this->dao->get();
-        if ($result == false) {
-            return array();
+        $metaFields = Field::newInstance()->findByItem($id);
+        if (empty($metaFields)){
+            return [];
         }
-        $aTemp = $result->result();
+        $aTemp = $metaFields;
 
         $array = array();
         // prepare data - date interval - from <-> to
@@ -1043,10 +1031,8 @@ class Item extends DAO
                 $aValue[$value['s_multi']] = $value['s_value'];
                 $value['s_value']          = $aValue;
 
-                $array[$value['pk_i_id']] = $value;
-            } else {
-                $array[$value['pk_i_id']] = $value;
             }
+            $array[$value['pk_i_id']] = $value;
         }
 
         return $array;

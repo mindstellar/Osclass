@@ -311,6 +311,40 @@ class Field extends DAO
     }
 
     /**
+     * Find a field by item id with matching item category
+     * @param $itemId
+     * @return array
+     */
+    public function findByItem($itemId)
+    {
+        if (!is_numeric($itemId)) {
+            return array();
+        }
+        $this->dao->select('mf.pk_i_id as pk_i_id, im.s_value as s_value, mf.s_name as s_name, mf.e_type as e_type, im.s_multi as s_multi, mf.s_slug as s_slug, mf.s_meta as s_meta');
+        $this->dao->from(sprintf('%st_item i', DB_TABLE_PREFIX));
+        $this->dao->join(sprintf('%st_item_meta im', DB_TABLE_PREFIX), 'i.pk_i_id = im.fk_i_item_id', 'LEFT');
+        $this->dao->join(sprintf('%st_meta_fields mf', DB_TABLE_PREFIX), 'mf.pk_i_id = im.fk_i_field_id', 'LEFT');
+        $this->dao->join(sprintf('%st_meta_categories mc', DB_TABLE_PREFIX), 'i.fk_i_category_id = mc.fk_i_category_id', 'LEFT');
+        $this->dao->where('mf.pk_i_id = mc.fk_i_field_id');
+        $this->dao->where('im.fk_i_item_id = ' . $itemId);
+
+        $result = $this->dao->get();
+
+        if ($result == false) {
+            return array();
+        }
+
+        $fields = $result->result();
+        // extend fields
+        $extendedFields = array();
+        foreach ($fields as $field) {
+            $extendedFields[] = $this->extendField($field);
+        }
+
+        return $extendedFields;
+    }
+    
+    /**
      * Find a field by its name
      *
      * @access public
