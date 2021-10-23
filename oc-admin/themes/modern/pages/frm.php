@@ -32,7 +32,9 @@ osc_enqueue_script('tiny_mce');
 
 $page      = __get('page');
 $templates = __get('templates');
-$meta      = json_decode(@$page['s_meta'], true);
+if (isset($page)) {
+    $meta      = json_decode($page['s_meta'], true);
+}
 
 $template_selected = (isset($meta['template']) && $meta['template'] != '') ? $meta['template'] : 'default';
 $locales           = OSCLocale::newInstance()->listAllEnabled();
