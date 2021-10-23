@@ -492,6 +492,12 @@ class ItemActions
     {
         if (!empty($_meta) && is_array($meta)) {
             $valid_id = array_column($_meta, 'pk_i_id');
+            // special case for checkboxes
+            foreach ($_meta as $value) {
+                if (isset($value['e_type']) && $value['e_type'] === 'CHECKBOX') {
+                    $meta[$value['pk_i_id']] = ($meta[$value['pk_i_id']] ?? 0);
+                }
+            }
             foreach ($meta as $k => $v) {
                 if (!in_array($k, $valid_id, false)) {
                     unset($meta[$k]);
@@ -557,7 +563,7 @@ class ItemActions
         foreach ($_meta as $_m) {
             $isMetaRequired = $_m['b_required'];
             $isMetaValueSet = isset($meta[$_m['pk_i_id']]);
-            $metaValue      = $meta[$_m['pk_i_id']];
+            $metaValue      = $meta[$_m['pk_i_id']] ?? null;
             switch ($_m['e_type']) {
                 case 'DATEINTERVAL':
                     if ($isMetaValueSet && $metaValue) {
