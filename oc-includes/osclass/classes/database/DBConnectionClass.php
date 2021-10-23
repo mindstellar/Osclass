@@ -160,7 +160,6 @@ class DBConnectionClass
         $conn = $this->connectToDb();
 
         if ($conn === false) {
-            $this->releaseDb();
             $this->handleDbError(
                 'Osclass &raquo; Error',
                 'Osclass database server is not available. <a href="https://osclass.discourse.group/">Need more help?</a></p>'
