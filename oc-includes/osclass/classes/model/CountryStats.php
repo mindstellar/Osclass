@@ -116,8 +116,8 @@ class CountryStats extends DAO
      */
     public function decreaseNumItems($countryCode)
     {
-        $lenght = strlen($countryCode);
-        if ($lenght > 2 || $lenght == '') {
+        $length = strlen($countryCode);
+        if ($length > 2 || !$length) {
             return false;
         }
         $this->dao->select('i_num_items');
