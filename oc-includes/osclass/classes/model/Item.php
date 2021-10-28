@@ -137,7 +137,7 @@ class Item extends DAO
     public function extendData($items, $prefLocale = null)
     {
         if (!empty($items)) {
-            if(null === $prefLocale) {
+            if (null === $prefLocale) {
                 $prefLocale = OC_ADMIN ? osc_current_admin_locale() : osc_current_user_locale();
             }
             $items = $this->extendCategoryName($items, $prefLocale);
@@ -1217,7 +1217,7 @@ class Item extends DAO
      */
     public function extendCategoryName($items, $prefLocale = null)
     {
-        if(null === $prefLocale) {
+        if (null === $prefLocale) {
             $prefLocale = OC_ADMIN ? osc_current_admin_locale() : osc_current_user_locale();
         }
         $results = array();
@@ -1228,7 +1228,7 @@ class Item extends DAO
         $this->dao->select('fk_i_category_id, fk_c_locale_code, s_name');
         $this->dao->from(DB_TABLE_PREFIX . 't_category_description');
         $this->dao->whereIn('fk_i_category_id', $categoryIds);
-        $this->dao->where('s_name!=','');
+        $this->dao->where('s_name!=', '');
 
         $result = $this->dao->get();
         if ($result === false) {
@@ -1243,10 +1243,10 @@ class Item extends DAO
             }
         }
 
-        foreach ($items as $item){
-            if(isset($item['fk_i_category_id'], $aCategories[$item['fk_i_category_id']])){
+        foreach ($items as $item) {
+            if (isset($item['fk_i_category_id'], $aCategories[$item['fk_i_category_id']])) {
                 // if $item['locale'] exists, then we have to merge the arrays
-                if(isset($item['locale'])){
+                if (isset($item['locale'])) {
                     $item['locale'] = array_merge($item['locale'], $aCategories[$item['fk_i_category_id']]['locale']);
                 } else {
                     $item['locale'] = $aCategories[$item['fk_i_category_id']]['locale'];
@@ -1255,7 +1255,6 @@ class Item extends DAO
             if (isset($item['locale'][$prefLocale]['s_category_name'])) {
                 $item['s_category_name'] = $item['locale'][$prefLocale]['s_category_name'];
             } else {
-
                 // check each locale until we find one that has a name
                 $item['s_category_name'] = '';
                 foreach ($item['locale'] as $locale => $data) {
@@ -1280,9 +1279,10 @@ class Item extends DAO
      * @return array $items with description
      * @since  unknown
      */
-    private function extendItemDescription($items, $prefLocale = null){
-        if(!empty($items)){
-            if(null === $prefLocale) {
+    private function extendItemDescription($items, $prefLocale = null)
+    {
+        if (!empty($items)) {
+            if (null === $prefLocale) {
                 $prefLocale = OC_ADMIN ? osc_current_admin_locale() : osc_current_user_locale();
             }
             $itemIds = array_column($items, 'pk_i_id');
@@ -1297,18 +1297,18 @@ class Item extends DAO
             $descriptions = $result->result();
             $aDescriptions = array();
             foreach ($descriptions as $d) {
-                if($d['s_title']!='') {
+                if ($d['s_title']!='') {
                     $aDescriptions[$d['fk_i_item_id']]['locale'][$d['fk_c_locale_code']]['s_title'] = $d['s_title'];
                 }
-                if($d['s_description']!='') {
+                if ($d['s_description']!='') {
                     $aDescriptions[$d['fk_i_item_id']]['locale'][$d['fk_c_locale_code']]['s_description'] = $d['s_description'];
                 }
             }
             $extendedItems = [];
-            foreach ($items as $item){
-                if(isset($item['pk_i_id'], $aDescriptions[$item['pk_i_id']])){
+            foreach ($items as $item) {
+                if (isset($item['pk_i_id'], $aDescriptions[$item['pk_i_id']])) {
                     //if $item['locale'] exists, then we have to merge the arrays
-                    if(isset($item['locale'])){
+                    if (isset($item['locale'])) {
                         $item['locale'] = array_merge($item['locale'], $aDescriptions[$item['pk_i_id']]['locale']);
                     } else {
                         $item['locale'] = $aDescriptions[$item['pk_i_id']]['locale'];
