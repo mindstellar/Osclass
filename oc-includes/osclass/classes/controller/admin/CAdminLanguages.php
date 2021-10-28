@@ -112,10 +112,10 @@ class CAdminLanguages extends AdminSecBaseModel
                         osc_add_flash_warning_message(_m("This action can't be done because it's a demo site"), 'admin');
                         $this->redirectTo(osc_admin_base_url(true) . '?page=languages');
                     }
-                    
-                    $url = osc_get_i18n_repository_url();
+
+                    $url  = osc_get_i18n_repository_url();
                     $json = json_decode(osc_file_get_contents($url), true);
-                    
+
                     /* example json
                         [ {
                         "locale_code": "en_US",
@@ -143,7 +143,8 @@ class CAdminLanguages extends AdminSecBaseModel
                     if (isset($importedLocale)) {
                         OSCLocale::newInstance()->insertLocaleInfo($importedLocale, $languageToImport);
                         // inserting e-mail translations get mail.json from github
-                        $mailJSON = osc_file_get_contents(osc_get_i18n_repository_url('src/translations/'.$languageToImport.'/mail.json'));
+                        $mailJSON =
+                            osc_file_get_contents(osc_get_i18n_repository_url('src/translations/' . $languageToImport . '/mail.json'));
                         $this->importEmailJson($mailJSON);
                         // Get themes.po,themes.mo, core.po, core.mo, messages.po, messages.mo from github and save to local
                         $uploadDir = osc_translations_path() . $languageToImport;
@@ -164,28 +165,29 @@ class CAdminLanguages extends AdminSecBaseModel
                             'messages.mo'
                         );
                         foreach ($poFiles as $poFile) {
-                            $poFileFrom = osc_get_i18n_repository_url('src/translations/' .$languageToImport.'/'.$poFile);
-                            $poFileTo = $uploadDir . $poFile;
-                            $poFile = osc_file_get_contents($poFileFrom);
+                            $poFileFrom = osc_get_i18n_repository_url('src/translations/' . $languageToImport . '/' . $poFile);
+                            $poFileTo   = $uploadDir . $poFile;
+                            $poFile     = osc_file_get_contents($poFileFrom);
                             if ($poFile) {
                                 file_put_contents($poFileTo, $poFile);
                             }
                         }
                         foreach ($moFiles as $moFile) {
-                            $moFileFrom = osc_get_i18n_repository_url('src/translations/' .$languageToImport.'/'.$moFile);
-                            $moFileTo = $uploadDir . $moFile;
-                            $moFile = osc_file_get_contents($moFileFrom);
+                            $moFileFrom = osc_get_i18n_repository_url('src/translations/' . $languageToImport . '/' . $moFile);
+                            $moFileTo   = $uploadDir . $moFile;
+                            $moFile     = osc_file_get_contents($moFileFrom);
                             if ($moFile) {
                                 file_put_contents($moFileTo, $moFile);
                             }
                         }
                         osc_add_flash_ok_message(_m('Language imported successfully'), 'admin');
                         $this->redirectTo(osc_admin_base_url(true) . '?page=languages');
+
                         return true;
                     }
                 }
                 $this->redirectTo(osc_admin_base_url(true) . '?page=languages');
-            break;
+                break;
             case ('edit'):               // editing a language
                 $sLocale = Params::getParam('id');
                 if (!preg_match('/.{2}_.{2}/', $sLocale)) {
@@ -411,34 +413,39 @@ class CAdminLanguages extends AdminSecBaseModel
                 if (is_array(Params::getParam('id'))) {
                     $default_lang = osc_language();
                     foreach (Params::getParam('id') as $code) {
-                        if ($default_lang != $code) {
-                            if ($this->localeManager->deleteLocale($code)) {
-                                if (!osc_deleteDir(osc_translations_path() . $code)) {
-                                    osc_add_flash_error_message(sprintf(
-                                        _m("Directory '%s' couldn't be removed"),
-                                        $code
-                                    ), 'admin');
-                                } else {
-                                    osc_add_flash_ok_message(
-                                        sprintf(_m('Directory "%s" has been successfully removed'), $code),
-                                        'admin'
-                                    );
-                                }
+                        $isDefaultLanguage = ($default_lang === $code);
+                        $isCurrentLanguage = (osc_current_admin_locale() === $code);
+                        if ($isDefaultLanguage || $isCurrentLanguage) {
+                            if ($isCurrentLanguage) {
+                                osc_add_flash_warning_message(_m('The current language can\'t be deleted. Please logout and login again with another language.'),
+                                                              'admin');
                             } else {
                                 osc_add_flash_error_message(
-                                    sprintf(_m("Directory '%s' couldn't be removed;)"), $code),
+                                    sprintf(
+                                        _m(
+                                            "Directory '%s' couldn't be removed because it's the default language. <a href=\"%s\">Set another language</a> as default first and try again"
+                                        ),
+                                        $code,
+                                        osc_admin_base_url(true) . '?page=settings'
+                                    ),
+                                    'admin'
+                                );
+                            }
+                        } elseif ($this->localeManager->deleteLocale($code)) {
+                            if (!osc_deleteDir(osc_translations_path() . $code)) {
+                                osc_add_flash_error_message(sprintf(
+                                                                _m("Directory '%s' couldn't be removed"),
+                                                                $code
+                                                            ), 'admin');
+                            } else {
+                                osc_add_flash_ok_message(
+                                    sprintf(_m('Directory "%s" has been successfully removed'), $code),
                                     'admin'
                                 );
                             }
                         } else {
                             osc_add_flash_error_message(
-                                sprintf(
-                                    _m(
-                                        "Directory '%s' couldn't be removed because it's the default language. <a href=\"%s\">Set another language</a> as default first and try again"
-                                    ),
-                                    $code,
-                                    osc_admin_base_url(true) . '?page=settings'
-                                ),
+                                sprintf(_m("Directory '%s' couldn't be removed;)"), $code),
                                 'admin'
                             );
                         }
@@ -495,8 +502,8 @@ class CAdminLanguages extends AdminSecBaseModel
 
                     $options   = array();
                     $options[] = '<a href="' . osc_admin_base_url(true) . '?page=languages&amp;action=edit&amp;id='
-                        . $l['pk_c_code']
-                        . '">' . __('Edit') . '</a>';
+                                 . $l['pk_c_code']
+                                 . '">' . __('Edit') . '</a>';
                     $options[] =
                         '<a href="' . osc_admin_base_url(true) . '?page=languages&amp;action=' . ($l['b_enabled'] == 1
                             ? 'disable_selected' : 'enable_selected') . '&amp;id[]=' . $l['pk_c_code'] . '&amp;'
@@ -504,17 +511,17 @@ class CAdminLanguages extends AdminSecBaseModel
                         . '">' . ($l['b_enabled'] == 1 ? __('Disable (website)') : __('Enable (website)')) . '</a> ';
                     $options[] =
                         '<a href="' . osc_admin_base_url(true) . '?page=languages&amp;action=' . ($l['b_enabled_bo']
-                        == 1
+                                                                                                  == 1
                             ? 'disable_bo_selected' : 'enable_bo_selected') . '&amp;id[]=' . $l['pk_c_code'] . '&amp;'
                         . osc_csrf_token_url() . '">' . ($l['b_enabled_bo'] == 1 ? __('Disable (oc-admin)')
                             : __('Enable (oc-admin)'))
                         . '</a>';
                     $options[] = '<a onclick="return delete_dialog(\'' . $l['pk_c_code'] . '\');"  href="'
-                        . osc_admin_base_url(true)
-                        . '?page=languages&amp;action=delete&amp;id[]=' . $l['pk_c_code'] . '&amp;'
-                        . osc_csrf_token_url() . '">' . __(
-                            'Delete'
-                        ) . '</a>';
+                                 . osc_admin_base_url(true)
+                                 . '?page=languages&amp;action=delete&amp;id[]=' . $l['pk_c_code'] . '&amp;'
+                                 . osc_csrf_token_url() . '">' . __(
+                                     'Delete'
+                                 ) . '</a>';
 
                     $auxOptions = '<ul>' . PHP_EOL;
                     foreach ($options as $actual) {
