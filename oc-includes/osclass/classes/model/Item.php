@@ -1256,35 +1256,58 @@ class Item extends DAO
      * @return array with category name
      * @since  unknown
      */
-    public function extendCategoryName($items)
+    public function extendCategoryName($items, $prefLocale = null)
     {
-        $prefLocale = OC_ADMIN ? osc_current_admin_locale() : osc_current_user_locale();
-
+        if(null === $prefLocale) {
+            $prefLocale = OC_ADMIN ? osc_current_admin_locale() : osc_current_user_locale();
+        }
         $results = array();
-        foreach ($items as $item) {
-            $this->dao->select('fk_c_locale_code, s_name as s_category_name');
-            $this->dao->from(DB_TABLE_PREFIX . 't_category_description');
-            $this->dao->where('fk_i_category_id', $item['fk_i_category_id']);
-            $result       = $this->dao->get();
-            $descriptions = $result->result();
+        // get categoryIds from items
+        $categoryIds = array_column($items, 'fk_i_category_id');
+        $categoryIds = array_unique($categoryIds);
 
-            foreach ($descriptions as $desc) {
-                $item['locale'][$desc['fk_c_locale_code']]['s_category_name'] = $desc['s_category_name'];
+        $this->dao->select('fk_i_category_id, fk_c_locale_code, s_name');
+        $this->dao->from(DB_TABLE_PREFIX . 't_category_description');
+        $this->dao->whereIn('fk_i_category_id', $categoryIds);
+        $this->dao->where('s_name!=','');
+
+        $result = $this->dao->get();
+        if ($result === false) {
+            return $items;
+        }
+        $categories = $result->result();
+        $aCategories = array();
+        foreach ($categories as $c) {
+            // if category name is not empty
+            if ($c['s_name'] != '') {
+                $aCategories[$c['fk_i_category_id']]['locale'][$c['fk_c_locale_code']]['s_category_name'] = $c['s_name'];
+            }
+        }
+
+        foreach ($items as $item){
+            if(isset($item['fk_i_category_id'], $aCategories[$item['fk_i_category_id']])){
+                // if $item['locale'] exists, then we have to merge the arrays
+                if(isset($item['locale'])){
+                    $item['locale'] = array_merge($item['locale'], $aCategories[$item['fk_i_category_id']]['locale']);
+                } else {
+                    $item['locale'] = $aCategories[$item['fk_i_category_id']]['locale'];
+                }
             }
             if (isset($item['locale'][$prefLocale]['s_category_name'])) {
                 $item['s_category_name'] = $item['locale'][$prefLocale]['s_category_name'];
             } else {
-                $data = current($item['locale']);
-                if (isset($data['s_category_name'])) {
-                    $item['s_category_name'] = $data['s_category_name'];
-                } else {
-                    $item['s_category_name'] = '';
+
+                // check each locale until we find one that has a name
+                $item['s_category_name'] = '';
+                foreach ($item['locale'] as $locale => $data) {
+                    if ($data['s_category_name'] != '') {
+                        $item['s_category_name'] = $data['s_category_name'];
+                        break;
+                    }
                 }
-                unset($data);
             }
             $results[] = $item;
         }
-
         return $results;
     }
 }
