@@ -1320,7 +1320,7 @@ class Item extends DAO
                     // check each locale until we find one that has a title
                     $item['s_title'] = '';
                     foreach ($item['locale'] as $locale => $title) {
-                        if ($title['s_title'] != '') {
+                        if (isset($title['s_title']) && $title['s_title']  != '') {
                             $item['s_title'] = $title['s_title'];
                             break;
                         }
@@ -1332,7 +1332,7 @@ class Item extends DAO
                     // check each locale until we find one that has a description
                     $item['s_description'] = '';
                     foreach ($item['locale'] as $locale => $description) {
-                        if ($description['s_description'] != '') {
+                        if (isset($description['s_description']) && $description['s_description'] != '') {
                             $item['s_description'] = $description['s_description'];
                             break;
                         }
