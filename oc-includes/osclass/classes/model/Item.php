@@ -134,91 +134,50 @@ class Item extends DAO
      * @return array with description extended with all available locales
      *
      */
-    public function extendData($items)
+    public function extendData($items, $prefLocale = null)
     {
         if (!empty($items)) {
-            if (defined('OC_ADMIN') && OC_ADMIN) {
-                $prefLocale = osc_current_admin_locale();
+            if(null === $prefLocale) {
+                $prefLocale = OC_ADMIN ? osc_current_admin_locale() : osc_current_user_locale();
+            }
+            $items = $this->extendCategoryName($items, $prefLocale);
+            $items = $this->extendItemDescription($items, $prefLocale);
+
+            $itemIds = array_column($items, 'pk_i_id');
+            // First get stats and locations data
+            $this->dao->select(
+                'SUM(s.i_num_views) as i_num_views, ' .
+                'SUM(s.i_num_spam) as i_num_spam, ' .
+                'SUM(s.i_num_bad_classified) as i_num_bad_classified, ' .
+                'SUM(s.i_num_repeated) as i_num_repeated, ' .
+                'SUM(s.i_num_offensive) as i_num_offensive, ' .
+                'SUM(s.i_num_expired) as i_num_expired, ' .
+                'SUM(s.i_num_premium_views) as i_num_premium_views, ' .
+                'l.*'
+            );
+            $this->dao->from(DB_TABLE_PREFIX . 't_item_stats s');
+            $this->dao->join(DB_TABLE_PREFIX . 't_item_location l', 's.fk_i_item_id = l.fk_i_item_id');
+            $this->dao->whereIn('s.fk_i_item_id', $itemIds);
+            $this->dao->groupBy('s.fk_i_item_id');
+
+            $result = $this->dao->get();
+            if (!$result) {
+                $itemStatsLocations = array();
             } else {
-                $prefLocale = osc_current_user_locale();
+                $itemStatsLocations = $result->result();
             }
 
-            $itemIds    = array_column($items, 'pk_i_id');
-            // Set ids
-            $this->dao->from($this->getTableName() . ' as i');
-            $this->dao->whereIn('i.pk_i_id', $itemIds);
-            $this->dao->groupBy('i.pk_i_id');
-
-            // select sum of item_stats
-            $this->dao->select('SUM(`s`.`i_num_views`) as `i_num_views`');
-            $this->dao->select('SUM(`s`.`i_num_spam`) as `i_num_spam`');
-            $this->dao->select('SUM(`s`.`i_num_bad_classified`) as `i_num_bad_classified`');
-            $this->dao->select('SUM(`s`.`i_num_repeated`) as `i_num_repeated`');
-            $this->dao->select('SUM(`s`.`i_num_offensive`) as `i_num_offensive`');
-            $this->dao->select('SUM(`s`.`i_num_expired`) as `i_num_expired` ');
-            $this->dao->select('SUM(`s`.`i_num_premium_views`) as `i_num_premium_views` ');
-            $this->dao->join(DB_TABLE_PREFIX . 't_item_stats as s', 'i.pk_i_id = s.fk_i_item_id');
-
-            // populate locations
-            $this->dao->select('l.*');
-            $this->dao->join(DB_TABLE_PREFIX . 't_item_location as l', 'i.pk_i_id = l.fk_i_item_id');
-
-            // populate categories
-            $this->dao->select('cd.s_name as s_category_name');
-            $this->dao->join(
-                DB_TABLE_PREFIX . 't_category_description as cd',
-                'i.fk_i_category_id = cd.fk_i_category_id'
-            );
-            $this->dao->where('cd.fk_c_locale_code', $prefLocale);
-
-            $result      = $this->dao->get();
-            $extraFields = $result->result();
-            unset($result);
-
-            //get description
-            $this->dao->select('d.fk_i_item_id, d.fk_c_locale_code, d.s_title, d.s_description');
-            $this->dao->from(DB_TABLE_PREFIX . 't_item_description as d');
-            $this->dao->whereIn('d.fk_i_item_id', $itemIds);
-
-            $result       = $this->dao->get();
-            $descriptions = $result->result();
-            unset($result);
-
-            //Merge all data to given $items array
-            foreach ($items as $itemKey => $aItem) {
-                $aItem['locale'] = array();
-                if (isset($descriptions)) {
-                    foreach ($descriptions as $itemDesc) {
-                        if ($itemDesc['fk_i_item_id'] === $aItem['pk_i_id']) {
-                            if ((isset($itemDesc['s_title']) && $itemDesc['s_title'])
-                                || (isset($itemDesc['s_description']) && $itemDesc['s_description'])) {
-                                $aItem['locale'][$itemDesc['fk_c_locale_code']] = $itemDesc;
-                            }
-                            unset($itemDesc);
-                        }
-                    }
-
-                    if (isset($aItem['locale'][$prefLocale]) && !empty($aItem['locale'][$prefLocale])) {
-                        $aItem['s_title']       = $aItem['locale'][$prefLocale]['s_title'];
-                        $aItem['s_description'] = $aItem['locale'][$prefLocale]['s_description'];
-                    } else {
-                        $data                   = current($aItem['locale']);
-                        $aItem['s_title']       = $data['s_title'];
-                        $aItem['s_description'] = $data['s_description'];
-                        unset($data);
-                    }
-                }
-
-                if (isset($extraFields) && !empty($extraFields)) {
-                    foreach ($extraFields as $key => $extraField) {
-                        if ($aItem['pk_i_id'] === $extraField['fk_i_item_id']) {
-                            $aItem += $extraField;
-                            unset($extraFields[$key]);
+            foreach ($items as $k => $aItem) {
+                // Add stats and locations data
+                if (isset($itemStatsLocations)) {
+                    foreach ($itemStatsLocations as $key => $isl) {
+                        if ($aItem['pk_i_id'] === $isl['fk_i_item_id']) {
+                            $aItem += $isl;
+                            unset($itemStatsLocations[$key]);
                         }
                     }
                 }
-                $items[$itemKey] = $aItem;
-                unset($aItem);
+                $items[$k] = $aItem;
             }
         }
 
@@ -300,7 +259,7 @@ class Item extends DAO
      */
     public function listWhere(...$args)
     {
-        $sql  = null;
+        $sql = null;
         switch (func_num_args()) {
             case 0:
                 return array();
@@ -552,7 +511,7 @@ class Item extends DAO
      */
     public function findItemByTypes($conditions = null, $itemType = false, $count = false, $limit = 0, $offset = null)
     {
-        $this->dao->from($this->getTableName().' i');
+        $this->dao->from($this->getTableName() . ' i');
         if ($conditions !== null) {
             if (is_array($conditions)) {
                 foreach ($conditions as $condition) {
