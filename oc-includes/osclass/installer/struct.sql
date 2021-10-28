@@ -250,7 +250,7 @@ CREATE TABLE /*TABLE_PREFIX*/t_item_description (
     s_description MEDIUMTEXT NOT NULL,
         PRIMARY KEY (fk_i_item_id, fk_c_locale_code),
         FULLTEXT s_description (s_description, s_title)
-) ENGINE=MyISAM DEFAULT CHARACTER SET 'UTF8' COLLATE 'UTF8_GENERAL_CI';
+) ENGINE=InnoDB DEFAULT CHARACTER SET 'UTF8' COLLATE 'UTF8_GENERAL_CI';
 
 
 CREATE TABLE /*TABLE_PREFIX*/t_item_location (
