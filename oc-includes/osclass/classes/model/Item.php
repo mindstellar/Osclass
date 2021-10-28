@@ -1310,6 +1310,81 @@ class Item extends DAO
         }
         return $results;
     }
+
+    /**
+     * Extends the given array $items with description in available locales
+     *
+     * @access public
+     *
+     * @param array $items array with items
+     *
+     * @return array $items with description
+     * @since  unknown
+     */
+    private function extendItemDescription($items, $prefLocale = null){
+        if(!empty($items)){
+            if(null === $prefLocale) {
+                $prefLocale = OC_ADMIN ? osc_current_admin_locale() : osc_current_user_locale();
+            }
+            $itemIds = array_column($items, 'pk_i_id');
+
+            $this->dao->select('fk_i_item_id, fk_c_locale_code, s_title, s_description');
+            $this->dao->from(DB_TABLE_PREFIX . 't_item_description');
+            $this->dao->whereIn('fk_i_item_id', $itemIds);
+            $result = $this->dao->get();
+            if ($result === false) {
+                return $items;
+            }
+            $descriptions = $result->result();
+            $aDescriptions = array();
+            foreach ($descriptions as $d) {
+                if($d['s_title']!='') {
+                    $aDescriptions[$d['fk_i_item_id']]['locale'][$d['fk_c_locale_code']]['s_title'] = $d['s_title'];
+                }
+                if($d['s_description']!='') {
+                    $aDescriptions[$d['fk_i_item_id']]['locale'][$d['fk_c_locale_code']]['s_description'] = $d['s_description'];
+                }
+            }
+            $extendedItems = [];
+            foreach ($items as $item){
+                if(isset($item['pk_i_id'], $aDescriptions[$item['pk_i_id']])){
+                    //if $item['locale'] exists, then we have to merge the arrays
+                    if(isset($item['locale'])){
+                        $item['locale'] = array_merge($item['locale'], $aDescriptions[$item['pk_i_id']]['locale']);
+                    } else {
+                        $item['locale'] = $aDescriptions[$item['pk_i_id']]['locale'];
+                    }
+                }
+                if (isset($item['locale'][$prefLocale]['s_title'])) {
+                    $item['s_title'] = $item['locale'][$prefLocale]['s_title'];
+                } else {
+                    // check each locale until we find one that has a title
+                    $item['s_title'] = '';
+                    foreach ($item['locale'] as $locale => $title) {
+                        if ($title['s_title'] != '') {
+                            $item['s_title'] = $title['s_title'];
+                            break;
+                        }
+                    }
+                }
+                if (isset($item['locale'][$prefLocale]['s_description'])) {
+                    $item['s_description'] = $item['locale'][$prefLocale]['s_description'];
+                } else {
+                    // check each locale until we find one that has a description
+                    $item['s_description'] = '';
+                    foreach ($item['locale'] as $locale => $description) {
+                        if ($description['s_description'] != '') {
+                            $item['s_description'] = $description['s_description'];
+                            break;
+                        }
+                    }
+                }
+                $extendedItems[] = $item;
+            }
+            return $extendedItems;
+        }
+        return $items;
+    }
 }
 
 /* file end: ./oc-includes/osclass/model/Item.php */
