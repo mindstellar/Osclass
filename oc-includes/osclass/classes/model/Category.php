@@ -194,15 +194,11 @@ class Category extends DAO
                 break;
         }
 
+        // Category with Description and category stats
         $this->dao->select('a.*, b.*, c.i_num_items');
         $this->dao->from($this->getTableName() . ' as a');
         $this->dao->join(
-            DB_TABLE_PREFIX . 't_category_description as b',
-            sprintf(
-                '(a.pk_i_id = b.fk_i_category_id AND b.fk_c_locale_code = %s)',
-                $this->dao->escape($this->language)
-            ),
-            'INNER'
+            DB_TABLE_PREFIX . 't_category_description as b', '(a.pk_i_id = b.fk_i_category_id )', 'LEFT'
         );
         $this->dao->join(DB_TABLE_PREFIX . 't_category_stats  as c ', 'a.pk_i_id = c.fk_i_category_id', 'LEFT');
         if ($sql != null) {
@@ -212,78 +208,41 @@ class Category extends DAO
         $rs = $this->dao->get();
 
         if ($rs === false) {
-            $aux = array();
-        } elseif ($rs->numRows() === 0) {
-            $aux = array();
-        } else {
-            $aux = $rs->result();
+            return array();
+        }
+        if ($rs->numRows() === 0) {
+            return array();
         }
 
-        // (missing translations #mariadb)
-        // get all category IDs
-        $this->dao->select('a.pk_i_id, a.i_position, b.*');
-        $this->dao->from($this->getTableName() . ' as a');
-        $this->dao->join(DB_TABLE_PREFIX . 't_category_description as b', 'a.pk_i_id = b.fk_i_category_id', 'INNER');
-        if ($sql != null) {
-            $this->dao->where($sql);
-        }
-        $this->dao->orderBy('i_position', 'ASC');
-        $this->dao->groupBy('a.pk_i_id');
-        $rs = $this->dao->get();
-
-        $_categories = array();
-        if ($rs === false) {
-            $_categories = array();
-        } elseif ($rs->numRows() === 0) {
-            $_categories = array();
-        } else {
-            $_categories = $rs->result();
-        }
-        // END - get all category IDs
-
-        if (count($aux) < count($_categories)) {
-            $finalArray = array();
-            // $missing_categories = (int)count($_categories) - (int)count($aux);
-            $mapIndexArray = array_column($aux, 'pk_i_id');
-            foreach ($_categories as $key => $current) {
-                $index = array_search($current['pk_i_id'], $mapIndexArray);
-                if ($index !== false) {
-                    $finalArray[$key] = $aux[$index];
-                } else { // current category doesn't exist in the current category array, (missing translation)
-                    $finalArray[$key] = array();
-                    $this->dao->select('a.*, b.*, c.i_num_items');
-                    $this->dao->from($this->getTableName() . ' as a');
-                    $this->dao->join(
-                        DB_TABLE_PREFIX . 't_category_description as b',
-                        'a.pk_i_id = b.fk_i_category_id',
-                        'INNER'
-                    );
-                    $this->dao->join(
-                        DB_TABLE_PREFIX . 't_category_stats  as c ',
-                        'a.pk_i_id = c.fk_i_category_id',
-                        'LEFT'
-                    );
-                    $this->dao->where('pk_i_id', (int)$current['pk_i_id']);
-                    $this->dao->where('s_name <> ""');
-                    $this->dao->limit(1);
-
-                    $rs = $this->dao->get();
-                    if ($rs === false) {
-                        $_categoryInfo = array();
-                    } elseif ($rs->numRows() === 0) {
-                        $_categoryInfo = array();
-                    } else {
-                        $category_element_array                     = $rs->row();
-                        $category_element_array['fk_c_locale_code'] = $this->language;
-                        $_categoryInfo                              = $category_element_array;
-                    }
-                    $finalArray[$key] = $_categoryInfo;
-                }
+        $allResults = $rs->result();
+        $mergedCategories = [];
+        foreach ($allResults as $cat){
+            // merge all the array with the same pk_i_id
+            if(!isset($mergedCategories[$cat['pk_i_id']])){
+                $mergedCategories[$cat['pk_i_id']] = $cat;
+            } elseif (!empty($cat['s_name']) && !empty($cat['s_description'])) {
+                // merge fk_i_category_id, fk_c_locale_code, s_name, s_description in locale index
+                $mergedCategories[$cat['pk_i_id']]['locale'][$cat['fk_c_locale_code']] = array(
+                    'fk_i_category_id' => $cat['fk_i_category_id'],
+                    'fk_c_locale_code' => $cat['fk_c_locale_code'],
+                    's_name'           => $cat['s_name'],
+                    's_description'    => $cat['s_description']
+                );
             }
-            $aux = $finalArray;
         }
-
-        return $aux;
+        // correct locale to $this->language if exists or set it to first locale
+        foreach ($mergedCategories as $k => $cat) {
+            if (isset($cat['locale'][$this->language])) {
+                $mergedCategories[$k] = array_merge($cat, $cat['locale'][$this->language]);
+            } elseif(empty($cat['s_name']) && empty($cat['s_description'])) {
+                // get first locale
+                $mergedCategories[$k] = array_merge($cat, $cat['locale'][key($cat['locale'])]);
+            }
+            $mergedCategories[$k]['fk_c_locale_code'] = $this->language;
+            unset($mergedCategories[$k]['locale']);
+        }
+        // reset keys, same as old ways
+        return array_values($mergedCategories);
     }
 
     /**
