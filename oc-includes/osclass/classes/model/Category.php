@@ -216,9 +216,9 @@ class Category extends DAO
 
         $allResults = $rs->result();
         $mergedCategories = [];
-        foreach ($allResults as $cat){
+        foreach ($allResults as $cat) {
             // merge all the array with the same pk_i_id
-            if(!isset($mergedCategories[$cat['pk_i_id']])){
+            if (!isset($mergedCategories[$cat['pk_i_id']])) {
                 $mergedCategories[$cat['pk_i_id']] = $cat;
             } elseif (!empty($cat['s_name']) && !empty($cat['s_description'])) {
                 // merge fk_i_category_id, fk_c_locale_code, s_name, s_description in locale index
@@ -234,7 +234,7 @@ class Category extends DAO
         foreach ($mergedCategories as $k => $cat) {
             if (isset($cat['locale'][$this->language])) {
                 $mergedCategories[$k] = array_merge($cat, $cat['locale'][$this->language]);
-            } elseif(empty($cat['s_name']) && empty($cat['s_description'])) {
+            } elseif (empty($cat['s_name']) && empty($cat['s_description'])) {
                 // get first locale
                 $mergedCategories[$k] = array_merge($cat, $cat['locale'][key($cat['locale'])]);
             }
