@@ -60,24 +60,35 @@ class Item extends FormInputs
     /**
      * @var array
      */
-    private $locales;
+    private $adminLocales;
     /**
      * @var string
      */
-    private $currentLocaleCode;
+    private $adminLocaleCode;
+    /**
+     * @var string
+     */
+    private $defaultLocaleCode;
+    /**
+     * @var array
+     */
+    private $userLocales;
 
     public function __construct(Escape $escape = null, Sanitize $sanitize = null)
     {
         parent::__construct($escape, $sanitize);
         $this->Session           = Session::newInstance();
-        $this->locales           = osc_get_admin_locales();
-        $this->currentLocaleCode = osc_current_admin_locale();
+        $this->adminLocales      = osc_get_admin_locales();
+        $this->adminLocaleCode   = osc_current_admin_locale();
+        $this->defaultLocaleCode = osc_language();
+        $this->userLocales       = osc_get_locales();
     }
 
     /**
      * @return \mindstellar\form\admin\Item
      */
-    public static function instance(): Item
+    public static function instance()
+    : Item
     {
         if (!isset(self::$instance)) {
             self::$instance = new self;
@@ -102,10 +113,10 @@ class Item extends FormInputs
         }
         echo '<div class="tab-content mb-3" id="multiLangTabsContent" >';
 
-        foreach ($this->locales as $locale) {
-            // Add class active if $current_locale is equal to $locale['pk_c_code']
+        foreach ($this->userLocales as $locale) {
+            // Add class active if $defaultLocale is equal to $locale['pk_c_code']
             $active = '';
-            if ($locale['pk_c_code'] === $this->currentLocaleCode) {
+            if ($locale['pk_c_code'] === $this->defaultLocaleCode) {
                 $active = 'show active';
             }
             echo '<div class="tab-pane fade ' . $active . '" id="' . $locale['pk_c_code'] . '" role="tabpanel">';
@@ -121,17 +132,17 @@ class Item extends FormInputs
      */
     public function printMultiLangTab()
     {
-        if (count($this->locales) > 1) {
+        if (count($this->userLocales) > 1) {
             echo '<div id="language-tab" class="mt-3">';
             echo '<ul class="nav nav-tabs" id="multiLangTabs" role="tablist">';
-            foreach ($this->locales as $locale) {
+            foreach ($this->userLocales as $locale) {
                 $active = '';
-                if ($locale['pk_c_code'] === $this->currentLocaleCode) {
+                if ($locale['pk_c_code'] === $this->defaultLocaleCode) {
                     $active = 'show active';
                 }
                 echo '<li class="nav-item"><a class="nav-link btn-sm ' . $active . '" href="#' . $locale['pk_c_code']
-                    . '" data-bs-toggle="tab">'
-                    . $locale['s_name'] . '</a></li>';
+                     . '" data-bs-toggle="tab">'
+                     . $locale['s_name'] . '</a></li>';
             }
             echo '</ul>';
             echo '</div>';
@@ -180,8 +191,8 @@ class Item extends FormInputs
         $value       = osc_apply_filter('admin_item_description', $value, $item, $locale);
         $name        = 'description' . '[' . $locale['pk_c_code'] . ']';
         $attributes  = [
-            'id'       => $name,
-            'rows'     => '20'
+            'id'   => $name,
+            'rows' => '20'
         ];
         $options     = [
             'label'    => __('Description') . ' *',
@@ -222,8 +233,8 @@ class Item extends FormInputs
                 } elseif (isset($currency)) {
                     $default_key = $currency;
                 }
-                $attributes['id']             = 'currency';
-                $attributes['style']          = 'max-width:150px';
+                $attributes['id']    = 'currency';
+                $attributes['style'] = 'max-width:150px';
 
                 $options['selectPlaceholder'] = __('Select Currency');
                 $options['selectOptions']     = [];
@@ -244,6 +255,7 @@ class Item extends FormInputs
 
     /**
      * Print Price Input without currency select
+     *
      * @param array $item
      *
      */
