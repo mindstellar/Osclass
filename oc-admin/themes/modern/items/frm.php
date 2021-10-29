@@ -32,9 +32,10 @@ osc_enqueue_script('jquery-validate-additional');
 osc_enqueue_script('php-date');
 osc_enqueue_script('tiny_mce');
 
-
+/* Not used ?
 // cateogry js
 $categories = Category::newInstance()->toTree();
+*/
 
 $new_item = __get('new_item');
 /**
