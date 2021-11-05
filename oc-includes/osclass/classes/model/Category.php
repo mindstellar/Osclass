@@ -235,7 +235,7 @@ class Category extends DAO
                 $mergedCategories[$k] = array_merge($cat, $cat['locale'][$this->language]);
             } elseif (empty($cat['s_name']) && empty($cat['s_description'])) {
                 // get first locale
-                if(isset($cat['locale'])) {
+                if (isset($cat['locale'])) {
                     $mergedCategories[$k] = array_merge($cat, $cat['locale'][key($cat['locale'])]);
                 }
             }
