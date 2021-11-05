@@ -1244,9 +1244,9 @@ class Item extends DAO
 
         foreach ($items as $item) {
             if (isset($item['fk_i_category_id'], $aCategories[$item['fk_i_category_id']])) {
-                if(is_array($item['locale'])){
-                    foreach ($item['locale'] as $localeCode => $itemLocale){
-                        if(isset($aCategories[$item['fk_i_category_id']]['locale'][$localeCode])){
+                if (is_array($item['locale'])) {
+                    foreach ($item['locale'] as $localeCode => $itemLocale) {
+                        if (isset($aCategories[$item['fk_i_category_id']]['locale'][$localeCode])) {
                             $item['locale'][$localeCode]['s_category_name'] = $aCategories[$item['fk_i_category_id']]['locale'][$localeCode]['s_category_name'];
                         }
                     }

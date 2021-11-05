@@ -743,11 +743,11 @@ class CWebItem extends BaseModel
                 }
 
                 foreach ($item['locale'] as $k => $v) {
-                    if(isset($item['locale'][$k]['s_title'])) {
+                    if (isset($item['locale'][$k]['s_title'])) {
                         $item['locale'][$k]['s_title'] =
                             osc_apply_filter('item_title', $v['s_title']);
                     }
-                    if(isset($item['locale'][$k]['s_description'])) {
+                    if (isset($item['locale'][$k]['s_description'])) {
                         $item['locale'][$k]['s_description'] =
                             nl2br(osc_apply_filter('item_description', $v['s_description']));
                     }
