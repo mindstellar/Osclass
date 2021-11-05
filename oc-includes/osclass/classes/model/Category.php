@@ -220,14 +220,13 @@ class Category extends DAO
             // merge all the array with the same pk_i_id
             if (!isset($mergedCategories[$cat['pk_i_id']])) {
                 $mergedCategories[$cat['pk_i_id']] = $cat;
-            } elseif (!empty($cat['s_name']) && !empty($cat['s_description'])) {
+            }
+            if (!empty($cat['s_name'])) {
                 // merge fk_i_category_id, fk_c_locale_code, s_name, s_description in locale index
-                $mergedCategories[$cat['pk_i_id']]['locale'][$cat['fk_c_locale_code']] = array(
-                    'fk_i_category_id' => $cat['fk_i_category_id'],
-                    'fk_c_locale_code' => $cat['fk_c_locale_code'],
+                $mergedCategories[$cat['pk_i_id']]['locale'][$cat['fk_c_locale_code']] = [
                     's_name'           => $cat['s_name'],
-                    's_description'    => $cat['s_description']
-                );
+                    's_description'    => $cat['s_description'],
+                ];
             }
         }
         // correct locale to $this->language if exists or set it to first locale
@@ -236,10 +235,12 @@ class Category extends DAO
                 $mergedCategories[$k] = array_merge($cat, $cat['locale'][$this->language]);
             } elseif (empty($cat['s_name']) && empty($cat['s_description'])) {
                 // get first locale
-                $mergedCategories[$k] = array_merge($cat, $cat['locale'][key($cat['locale'])]);
+                if(isset($cat['locale'])) {
+                    $mergedCategories[$k] = array_merge($cat, $cat['locale'][key($cat['locale'])]);
+                }
             }
             $mergedCategories[$k]['fk_c_locale_code'] = $this->language;
-            unset($mergedCategories[$k]['locale']);
+            //unset($mergedCategories[$k]['locale']);
         }
         // reset keys, same as old ways
         return array_values($mergedCategories);
