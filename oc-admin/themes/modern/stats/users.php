@@ -188,7 +188,7 @@ function customHead()
             data_region.addColumn('number', '<?php _e('Users per region'); ?>');
             data_region.addRows(<?php echo count($users_by_region); ?>);
             <?php foreach ($users_by_region as $k => $v) {
-                echo "data_region.setValue(" . $k . ", 0, '" . (($v['s_region'] == null) ? __('Unknown') : $v['s_region'])
+                echo "data_region.setValue(" . $k . ", 0, '" . (($v['s_region'] == null) ? __('Unknown') : osc_esc_js($v['s_region']))
                  . "');";
                 echo "data_region.setValue(" . $k . ", 1, " . $v['num'] . ");";
             } ?>
