@@ -1,0 +1,181 @@
+/*!Custom Responsive rules */
+@media (max-width: 1024px) {
+  #header .navbar-toggler {
+    display: block;
+  }
+  #datatablesForm {
+    .table {
+      .col-bulkactions {
+        & + td {
+          min-width: 3rem;
+
+          & ~ td {
+            max-width: 4rem;
+            overflow: hidden;
+            text-overflow: ellipsis;
+          }
+        }
+
+        & + th {
+          min-width: 3rem;
+
+          & ~ th {
+            max-width: 6rem;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+          }
+        }
+      }
+    }
+  }
+}
+@media (max-width: 768px) {
+  #header {
+    .navbar-nav .dropdown-menu {
+      position: absolute;
+    }
+  }
+  #content-page {
+    padding: 0.5rem 0.5rem 3rem;
+  }
+  #datatablesForm {
+    .table {
+      .col-title {
+        min-width: 100px;
+      }
+      .col-status {
+        border-left: 1px solid rgba(0, 0, 0, 0.1);
+      }
+      .col-bulkactions {
+        & ~ {
+          td:not(.col-order) {
+            max-width: 100%;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            display: block;
+          }
+        }
+        & + {
+          td {
+            position: relative;
+            ~ td:not(.col-order) {
+              max-width: 100%;
+              &:before {
+                content: attr(data-col-name) ": ";
+                padding-right: 0.5rem;
+                font-weight: 500;
+              }
+            }
+          }
+          th ~ th:not(.col-order) {
+            display: none;
+          }
+        }
+      }
+    }
+  }
+  .table-contains-actions {
+    .col-bulkactions {
+      & ~ td {
+        padding-bottom: .5rem;
+      }
+    }
+  }
+  .table {
+    td {
+      & > div.actions {
+        display: block;
+        position: relative;
+      }
+    }
+  }
+}
+
+@media (max-width: 576px) {
+  #content-page {
+    & > .col {
+      padding-left: 0.1rem;
+      padding-right: 0.1rem;
+    }
+  }
+  .grid-10,
+  .grid-20,
+  .grid-30,
+  .grid-33,
+  .grid-40,
+  .grid-50,
+  .grid-60,
+  .grid-70,
+  .grid-80,
+  .grid-80 {
+    width: 100%;
+  }
+  #display-filters .form-horizontal,
+  .form-horizontal {
+    .form-label {
+      float: none;
+      font-weight: 600;
+      padding-top: 0.5rem;
+      text-align: inherit;
+      width: 100%;
+    }
+    .form-controls {
+      margin-left: inherit;
+
+      select {
+        width: 100%;
+      }
+
+      > input:not([type="checkbox"]):not([type="radio"]):not([type="submit"]) {
+        width: 100%;
+      }
+      .input-small,
+      .input-medium,
+      .input-large,
+      .xlarge,
+      .input-text,
+      .input-password {
+        width: 100%;
+      }
+    }
+
+    .form-actions {
+      padding: 1rem 1rem;
+    }
+  }
+  .select-box-medium,
+  .select-box-input,
+  .select-box-big {
+    select {
+      width: 100%;
+    }
+  }
+  .form-vertical {
+    .form-actions {
+      padding: 1rem 1rem;
+    }
+  }
+  #upload-plugins,
+  #email-templates {
+    td {
+      display: block;
+      &:empty {
+        display: none;
+      }
+      &:first-child {
+        font-weight: 600;
+      }
+    }
+    th ~ th {
+      display: none;
+    }
+  }
+  #datatablesForm {
+    .table {
+      .col-status {
+        display: none;
+      }
+    }
+  }
+}

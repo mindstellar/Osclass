@@ -56,17 +56,31 @@ class Scripts extends Dependencies
      * @param string $code         javascript code string with script tag
      * @param array  $dependencies ids array of registered js libraries (not script code) this code depends on
      */
-    public static function enqueueScriptCode($code, $dependencies = null)
+    public static function enqueueScriptCode($code, $dependencies = null, $admin = false)
     {
+        $prefix = '';
+        if ($admin === true) {
+            $prefix = 'admin_';
+        }
         $print_code = static function () use ($code) {
             echo $code;
         };
-        Plugins::addHook('footer_scripts_loaded', $print_code, 10);
+        Plugins::addHook($prefix.'footer_scripts_loaded', $print_code, 10);
         if ($dependencies !== null && is_array($dependencies)) {
             foreach ($dependencies as $script) {
                 self::newInstance()->enqueueScript($script);
             }
         }
+    }
+
+    /**
+     * Enqueue script to be loaded
+     *
+     * @param $id
+     */
+    public function enqueueScript($id)
+    {
+        $this->queue[$id] = $id;
     }
 
     /**
@@ -86,15 +100,11 @@ class Scripts extends Dependencies
      */
     public static function init()
     {
-        $admin_prefix = '';
-        if (OC_ADMIN) {
-            $admin_prefix = 'admin_';
+        if (defined('OC_ADMIN') && OC_ADMIN) {
+            self::initPrintScripts(true);
+        } else {
+            self::initPrintScripts();
         }
-
-        if (!Preference::newInstance()->get('enqueue_scripts_in_footer')) {
-            self::printScriptRunLoadHook($admin_prefix.'header');
-        }
-        self::printScriptRunLoadHook($admin_prefix.'footer');
     }
 
     /**
@@ -127,16 +137,29 @@ class Scripts extends Dependencies
     }
 
     /**
-     * Print enqueued scripts and run a 'scripts_loaded' hook after scripts print
-     * @param string $hook_name
+     * Init Scripts enqueue hooks
+     *
+     * @param false $admin
      */
-    private static function printScriptRunLoadHook($hook_name)
+    private static function initPrintScripts(bool $admin = false)
     {
-
-        Plugins::addHook($hook_name, static function () use ($hook_name) {
+        $prefix = '';
+        if ($admin === true) {
+            $prefix = 'admin_';
+        }
+        $printScript = function () {
             Scripts::newInstance()->printScripts();
-            Plugins::runHook($hook_name.'_scripts_loaded');
-        }, 10);
+        };
+        if (!Preference::newInstance()->get($prefix.'enqueue_scripts_in_footer')) {
+            Plugins::addHook($prefix.'header', $printScript, 8);
+            Deprecate::deprecatedRunHook($prefix.'header_scripts_loaded', '5.1.0', $prefix.'scripts_loaded');
+        }
+        Plugins::addHook($prefix.'footer', $printScript, 8);
+        $scriptsLoaded = static function () use ($prefix) {
+            Plugins::runHook($prefix.'scripts_loaded');
+            Deprecate::deprecatedRunHook($prefix.'footer_scripts_loaded', '5.1.0', $prefix.'scripts_loaded');
+        };
+        Plugins::addHook($prefix.'footer', $scriptsLoaded, 10);
     }
 
     /**
@@ -163,23 +186,15 @@ class Scripts extends Dependencies
 
     /**
      * Enqueu script to be loaded
-     * @deprecated since 4.0.0
+     *
      * @param $id
+     *
+     * @deprecated since 4.0.0
      */
     public function enqueuScript($id)
     {
         Deprecate::deprecatedFunction(__METHOD__, '4.0.0', 'Scripts::enqueueScript()');
         $this->enqueueScript($id);
-    }
-
-    /**
-     * Enqueue script to be loaded
-     *
-     * @param $id
-     */
-    public function enqueueScript($id)
-    {
-        $this->queue[$id] = $id;
     }
 
     /**

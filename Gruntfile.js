@@ -10,7 +10,7 @@ module.exports = function (grunt) {
 
     grunt.initConfig({
         clean: {
-            vendors: [assetsDir]
+            vendors: [assetsDir, 'oc-admin/themes/modern/scss/bootstrap']
         },
         copy: {
             'jquery': {
@@ -18,7 +18,6 @@ module.exports = function (grunt) {
                     expand: true,
                     src: [
                         nodeDir + '/jquery/dist/jquery.min.js',
-                        nodeDir + '/jquery/README.md',
                         nodeDir + '/jquery/LICENSE.txt'
                     ],
                     dest: assetsDir + '/jquery',
@@ -30,7 +29,6 @@ module.exports = function (grunt) {
                     expand: true,
                     src: [
                         nodeDir + '/jquery-migrate/dist/jquery-migrate.min.js',
-                        nodeDir + '/jquery-migrate/README.md',
                         nodeDir + '/jquery-migrate/LICENSE.txt'
                     ],
                     dest: assetsDir + '/jquery-migrate',
@@ -44,7 +42,6 @@ module.exports = function (grunt) {
                         src: [
                             nodeDir + '/jquery-ui-dist/*.min.js',
                             nodeDir + '/jquery-ui-dist/*.min.css',
-                            nodeDir + '/jquery-ui-dist/README.md',
                             nodeDir + '/jquery-ui-dist/LICENSE.txt'
                         ],
                         dest: assetsDir + '/jquery-ui',
@@ -61,7 +58,6 @@ module.exports = function (grunt) {
                     expand: true,
                     src: [
                         nodeDir + '/jquery-treeview/jquery.treeview.js',
-                        nodeDir + '/jquery-treeview/README.md'
                     ],
                     dest: assetsDir + '/jquery-treeview',
                     flatten: true
@@ -73,7 +69,6 @@ module.exports = function (grunt) {
                     src: [
                         nodeDir + '/jquery-validation/dist/jquery.validate.min.js',
                         nodeDir + '/jquery-validation/dist/additional-methods.min.js',
-                        nodeDir + '/jquery-validation/README.md',
                         nodeDir + '/jquery-validation/LICENSE.md'
                     ],
                     dest: assetsDir + '/jquery-validation',
@@ -85,7 +80,6 @@ module.exports = function (grunt) {
                     expand: true,
                     src: [
                         nodeDir + '/jquery-ui-nested/jquery-ui-nested.js',
-                        nodeDir + '/jquery-ui-nested/README.md'
                     ],
                     dest: assetsDir + '/jquery-ui-nested',
                     flatten: true
@@ -97,7 +91,6 @@ module.exports = function (grunt) {
                         expand: true,
                         src: [
                             nodeDir + '/spectrum-colorpicker/spectrum.js',
-                            nodeDir + '/spectrum-colorpicker/README.md',
                             nodeDir + '/spectrum-colorpicker/LICENSE',
                             nodeDir + '/spectrum-colorpicker/spectrum.css'
                         ],
@@ -155,7 +148,6 @@ module.exports = function (grunt) {
                     src: [
                         nodeDir + '/npm-font-open-sans/fonts/Regular/OpenSans-Regular.ttf',
                         nodeDir + '/npm-font-open-sans/LICENSE',
-                        nodeDir + '/npm-font-open-sans/README.md',
                     ],
                     dest: assetsDir + '/fonts/open-sans',
                     flatten: true
@@ -167,7 +159,6 @@ module.exports = function (grunt) {
                     src: [
                         nodeDir + '/bootstrap/dist/css/bootstrap.min.*',
                         nodeDir + '/bootstrap/dist/js/bootstrap.min.*',
-                        nodeDir + '/bootstrap/README.md',
                         nodeDir + '/bootstrap/LICENSE'
                     ],
                     dest: assetsDir + '/bootstrap',
@@ -182,19 +173,62 @@ module.exports = function (grunt) {
                     dest: assetsDir + '/osclass-legacy/',
                     flatten: false
                 }]
+            },
+            'bootstrap-scss': {
+                files: [{
+                    expand: true,
+                    cwd: nodeDir + '/bootstrap/scss',
+                    src: '**/*',
+                    dest: 'oc-admin/themes/modern/scss/bootstrap',
+                    flatten: false
+                }
+                ]
+            },
+            'chart-js': {
+                files: [{
+                    expand: true,
+                    src: [
+                        nodeDir + '/chart.js/dist/chart.min.js',
+                        nodeDir + '/chart.js/LICENSE.md',
+                    ],
+                    dest: assetsDir + '/chart-js',
+                    flatten: true
+                }]
+            },
+            'sortablejs': {
+                files:[{
+                    expand: true,
+                    src: [
+                        nodeDir + '/sortablejs/Sortable.min.js',
+                        nodeDir + '/sortablejs/LICENSE',
+                    ],
+                    dest: assetsDir + '/sortablejs',
+                    flatten: true
+                }]
             }
         },
-        less: {
-            compile: {
+        sass: {
+            dist: {
                 options: {
-                    paths: ['oc-admin/themes/modern/less'],
-                    compress: true
+                    style: 'nested'
                 },
                 files: {
-                    'oc-admin/themes/modern/css/main.css': 'oc-admin/themes/modern/less/main.less'
+                    'oc-admin/themes/modern/css/main.css':
+                        'oc-admin/themes/modern/scss/main.scss'
+                }
+            }
+        },
+        uglify: {
+            dist: {
+                files: {
+                    'oc-admin/themes/modern/js/location.min.js': ['oc-admin/themes/modern/js/location.js']
+                },
+                options: {
+                    sourceMap: true
                 }
             }
         }
+
     });
 
     grunt.registerTask('createAssetsDir', 'Creates the necessary static assets directory', function () {
@@ -203,15 +237,18 @@ module.exports = function (grunt) {
             grunt.file.mkdir(assetsDir);
 
             // Output a success message
-            grunt.log.oklns(grunt.template.process(
+            grunt.log.ok(grunt.template.process(
                 'Directory "<%= directory %>" was created successfully.',
                 {data: {directory: assetsDir}}
             ));
         }
     });
 
-    grunt.registerTask('default', ['clean', 'createAssetsDir', 'copy', 'less']);
+    grunt.registerTask('default', ['clean', 'createAssetsDir', 'copy', 'sass', 'uglify']);
+    grunt.registerTask('compile', ['sass']);
+    grunt.registerTask('uglify',['uglify']);
     grunt.loadNpmTasks('grunt-contrib-clean');
     grunt.loadNpmTasks('grunt-contrib-copy');
-    grunt.loadNpmTasks('grunt-contrib-less');
+    grunt.loadNpmTasks('grunt-contrib-sass');
+    grunt.loadNpmTasks('grunt-contrib-uglify');
 };

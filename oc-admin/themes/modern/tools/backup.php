@@ -28,22 +28,6 @@
  *
  */
 
-//customize Head
-function customHead()
-{
-    ?>
-    <script type="text/javascript">
-        function submitForm(frm, type) {
-            frm.action.value = 'backup-' + type;
-            frm.submit();
-        }
-    </script>
-    <?php
-}
-
-
-osc_add_hook('admin_header', 'customHead', 10);
-
 /**
  * @return string
  */
@@ -69,7 +53,8 @@ function customPageHeader()
 {
     ?>
     <h1><?php _e('Tools'); ?>
-        <a href="#" class="btn ico ico-32 ico-help float-right"></a>
+        <a class="ms-1 bi bi-question-circle-fill float-right" data-bs-target="#help-box" data-bs-toggle="collapse"
+           href="#help-box"></a>
     </h1>
     <?php
 }
@@ -95,7 +80,6 @@ osc_current_admin_theme_path('parts/header.php'); ?>
             <h2 class="render-title"><?php _e('Backup'); ?></h2>
             <form id="backup_form" name="backup_form" action="<?php echo osc_admin_base_url(true); ?>" method="post">
                 <input type="hidden" name="page" value="tools"/>
-                <input type="hidden" name="action" value=""/>
                 <fieldset>
                     <div class="form-horizontal">
                         <div class="form-row">
@@ -111,16 +95,20 @@ osc_current_admin_theme_path('parts/header.php'); ?>
                                 </div>
                             </div>
                         </div>
+                        <div class="form-row">
+                        <div class="form-label"><?php _e('Backup Method');?></div>
+                            <div class="form-controls">
+                                <select class="form-select form-select-sm" name="action">
+                                    <option><?php _e('Choose backup method'); ?></option>
+                                    <option value="backup-sql"><?php _e('Backup SQL (store on server)'); ?></option>
+                                    <option value="backup-sql_file"><?php _e('Backup SQL (download file)'); ?></option>
+                                    <option value="backup-zip"><?php _e('Backup files (store on server)'); ?></option>
+                                </select>
+                            </div>
+                        </div>
                         <div class="form-actions">
-                            <input type="button" id="backup_sql" onclick="javascript:submitForm(this.form, 'sql');"
-                                   value="<?php echo osc_esc_html(__('Backup SQL (store on server)')); ?>"
-                                   class="btn btn-submit"/>
-                            <input type="button" id="backup_sql_file"
-                                   onclick="javascript:submitForm(this.form, 'sql_file');"
-                                   value="<?php echo osc_esc_html(__('Backup SQL (download file)')); ?>"
-                                   class="btn btn-submit"/>
-                            <input type="button" id="backup_zip" onclick="javascript:submitForm(this.form, 'zip');"
-                                   value="<?php echo osc_esc_html(__('Backup files (store on server)')); ?>"
+                            <input type="submit"
+                                   value="<?php echo osc_esc_html(__('Submit')); ?>"
                                    class="btn btn-submit"/>
                         </div>
                     </div>

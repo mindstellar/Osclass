@@ -1,0 +1,125 @@
+#content-head {
+  background-color: $color-gray-light;
+  border-bottom: solid 1px $color-gray-soft;
+  padding: 10px 15px;
+}
+
+#content-head {
+  h1, h2 {
+    color: $color-gray-black;
+    font-size: 30px;
+    font-weight: 400;
+    margin: 0;
+  }
+
+  h2 {
+    font-size: 20px;
+    font-weight: 300;
+  }
+
+  h3 {
+    font-size: 18px;
+    font-weight: 300;
+  }
+}
+
+#content-render {
+  background-color: $gray-200;
+}
+
+#content-page {
+  //background-color: $color-white;
+  min-height: calc(100vh - 9rem);
+  padding: 22px 15px 60px;
+  position: relative
+}
+
+#content-head h1 .ico,
+#content-head h2 .ico {
+  margin-left: 10px;
+}
+
+.render-title {
+  font-size: 21px;
+  font-weight: normal;
+  margin: 0 0 20px;
+}
+
+h3.render-title {
+  font-size: 18px;
+}
+
+.render-title a.btn-mini, .form-controls a.btn-mini {
+  float: none;
+  height: 24px;
+  padding-bottom: 5px;
+  padding-top: 4px;
+  vertical-align: 4px;
+}
+
+.form-controls a.btn-mini {
+  margin-left: 5px;
+  vertical-align: 2px;
+}
+
+.quick-search input.input-text {
+  background-color: $color-gray-light;
+  border: 1px solid $color-gray-soft;
+  color: #555;
+  display: inline-block;
+  font-size: .85rem;
+  height: 24px;
+  line-height: 18px;
+  outline: none;
+  padding: 4px 6px;
+  vertical-align: top;
+  @include rounded-corners(4px 0 0 4px);
+  width: 208px;
+}
+
+.quick-search .ico-search {
+  border-left: 0;
+  display: block;
+  @include rounded-corners(0px 4px 4px 0);
+  @include rounded-corners(0px 4px 4px 0);
+  height: 34px;
+  margin-left: 0;
+  margin-right: 10px;
+  padding: 0;
+  width: 34px !important;
+}
+
+.locations img {
+  vertical-align: bottom;
+}
+
+#l_countries, #i_regions, #i_cities {
+  a {
+    font-size: .85rem;
+    text-decoration: none;
+  }
+
+  .list-group-item {
+    padding-bottom: .2rem;
+    padding-top: .2rem;
+  }
+}
+#system-info {
+  .card-body .row {
+    flex-flow: row;
+    .col-sm-4.info-label {
+      font-size: .85rem;
+      font-weight: 500;
+      background: #0095ff57;
+      border-bottom: 1px dotted;
+    }
+    .col.info-value {
+      font-size: .8rem;
+      font-family: monospace;
+      background: #ffcc0029;
+      border-bottom:1px dotted;
+      word-break:break-all;
+    }
+  }
+}
+

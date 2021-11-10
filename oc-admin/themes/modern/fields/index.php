@@ -50,9 +50,9 @@ function customPageHeader()
 {
     ?>
     <h1><?php _e('Listing'); ?>
-        <a href="#" class="btn ico ico-32 ico-help float-right"></a>
-        <a href="#" class="btn btn-green ico ico-32 ico-add-white float-right"
-           id="add-button"><?php _e('Add custom field'); ?></a>
+        <a href="#" class="ms-1 bi bi-question-circle-fill float-right" data-bs-target="#help-box" data-bs-toggle="collapse"></a>
+        <a href="#" class="text-success ms-1 float-end"
+           id="add-button" title="<?php _e('Add custom field'); ?>"><i class="bi bi-plus-circle-fill"></i></a>
     </h1>
     <?php
 }
@@ -64,6 +64,7 @@ function customHead()
 {
     $csrf_token = osc_csrf_token_url(); ?>
     <script type="text/javascript">
+
         function show_iframe(class_name, id) {
             if ($('.content_list_' + id + ' .custom-field-frame').length == 0) {
                 $('.custom-field-frame').remove();
@@ -75,19 +76,13 @@ function customHead()
                     url: url,
                     context: document.body,
                     success: function (res) {
-                        $('div.' + class_name).html(res);
+                        $('div.' + class_name).append().html(res);
                         $('div.' + class_name).fadeIn("fast");
                     }
                 });
             } else {
                 $('.custom-field-frame').remove();
             }
-            return false;
-        }
-
-        function delete_field(id) {
-            $("#dialog-delete-field").attr('data-field-id', id);
-            $("#dialog-delete-field").dialog('open');
             return false;
         }
 
@@ -105,48 +100,8 @@ function customHead()
         }
 
         $(document).ready(function () {
-            $('.cfield-div').on('mouseenter', function () {
-                $(this).addClass('cfield-hover');
-            }).on('mouseleave', function () {
-                $(this).removeClass('cfield-hover');
-            });
 
-            // dialog delete
-            $("#dialog-delete-field").dialog({
-                autoOpen: false,
-                modal: true
-            });
-            $("#field-delete-submit").click(function () {
-                var id = $("#dialog-delete-field").attr('data-field-id');
-                var url = '<?php echo osc_admin_base_url(true); ?>?page=ajax&action=delete_field&<?php echo $csrf_token;
-                ?>&id=' + id;
-                $.ajax({
-                    url: url,
-                    context: document.body,
-                    success: function (res) {
-                        var ret = eval("(" + res + ")");
-                        var message = "";
-                        if (ret.error) {
-                            message += ret.error;
-                        }
-                        if (ret.ok) {
-                            message += ret.ok;
 
-                            $('#list_' + id).fadeOut("slow");
-                            $('#list_' + id).remove();
-                        }
-
-                        $(".jsMessage").css('display', 'block');
-                        $(".jsMessage p").html(message);
-                    },
-                    error: function () {
-                        $(".jsMessage").css('display', 'block');
-                        $(".jsMessage p").html('<?php echo osc_esc_js(__('Ajax error, try again.')); ?>');
-                    }
-                });
-                $('#dialog-delete-field').dialog('close');
-                return false;
-            });
 
             $("#add-button, .add-button").bind('click', function () {
                 $.ajax({
@@ -155,26 +110,26 @@ function customHead()
                     success: function (res) {
                         var ret = eval("(" + res + ")");
                         if (ret.error == 0) {
-                            var html = '';
-                            html += '<li id="list_' + ret.field_id + '" class="field_li even">';
-                            html += '<div class="cfield-div" field_id="' + ret.field_id + '" >';
-                            html += '<div class="name-edit-cfield" id="quick_edit_' + ret.field_id + '">';
-                            html += ret.field_name;
-                            html += '</div>';
-                            html += '<div class="actions-edit-cfield">';
-                            html += '<a href="javascript:void(0);"  onclick="show_iframe(\'content_list_'
-                                + ret.field_id + '\',\'' + ret.field_id
-                                + '\');"><?php echo osc_esc_js(__('Edit')); ?></a>';
-                            html += ' &middot; ';
-                            html += '<a href="javascript:void(0);"  onclick="delete_field(\''
-                                + ret.field_id
-                                + '\');"><?php echo osc_esc_js(__('Delete')); ?></a>';
-                            html += '</div>';
-                            html += '<div class="edit content_list_' + ret.field_id + '"></div>';
-                            html += '</div>';
-                            html += '</li>';
+                            const customFieldMarkup = `
+                            <li id="list_${ret.field_id}" class="field_li even">
+                            <div class="cfield-div" field_id="${ret.field_id}">
+                                <div class="name-edit-cfield" id="${ret.field_id}">
+                                    ${ret.field_name}
+                                </div>
+                                <div class="ms-auto btn-group">
+                                    <a class="px-2 text-dark" href="javascript:void(0);"
+                                       onclick="show_iframe('content_list_${ret.field_id}','${ret.field_id}');"
+                                       title="<?php echo osc_esc_js(__('Edit')); ?>"><i class="bi bi-pencil-fill"></i></a>
+                                    <a class="px-2 text-dark" href="javascript:void(0);"
+                                       onclick="delete_field('${ret.field_id}');" title="<?php echo osc_esc_js(__('Delete'));?>">
+                                        <i class="bi bi-trash-fill"></i>
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="edit content_list_${ret.field_id}"></div>
+                        </li>`;
                             $("#fields-empty").remove();
-                            $("#ul_fields").append(html);
+                            $("#ul_fields").append(customFieldMarkup);
                             show_iframe('content_list_' + ret.field_id, ret.field_id);
                         } else {
                             var message = "";
@@ -231,8 +186,8 @@ osc_add_filter('admin_title', 'customPageTitle');
 osc_current_admin_theme_path('parts/header.php');
 ?>
     <div class="header_title">
-        <h2 class="render-title"><?php _e('Custom fields'); ?> <a href="javascript:void(0);"
-                                                                  class="btn btn-mini add-button"><?php _e('Add new'); ?></a>
+        <h2 class="render-title">
+            <?php _e('Custom fields'); ?>
         </h2>
     </div>
     <!-- custom fields -->
@@ -251,16 +206,18 @@ osc_current_admin_theme_path('parts/header.php');
                                 <div class="name-edit-cfield" id="<?php echo 'quick_edit_' . $field['pk_i_id']; ?>">
                                     <?php echo $field['s_name']; ?>
                                 </div>
-                                <div class="actions-edit-cfield">
-                                    <a href="javascript:void(0);"
-                                       onclick="javascript:show_iframe('content_list_<?php echo $field['pk_i_id']; ?>','<?php echo
-                                        $field['pk_i_id']; ?>');"><?php _e('Edit'); ?></a>
-                                    &middot;
-                                    <a href="javascript:void(0);"
-                                       onclick="javascript:delete_field('<?php echo $field['pk_i_id']; ?>');"><?php _e('Delete'); ?></a>
+                                <div class="ms-auto btn-group">
+                                    <a class="px-2 text-dark" href="javascript:void(0);"
+                                       onclick="show_iframe('content_list_<?php echo $field['pk_i_id']; ?>','<?php echo
+                                        $field['pk_i_id']; ?>');" title="<?php _e('Edit'); ?>"><i class="bi bi-pencil-fill"></i></a>
+                                    <a class="px-2 text-dark" href="javascript:void(0);"
+                                       onclick="delete_field('<?php echo $field['pk_i_id']; ?>');" title="<?php _e('Delete');
+                                        ?>">
+                                        <i class="bi bi-trash-fill"></i>
+                                    </a>
                                 </div>
-                                <div class="edit content_list_<?php echo $field['pk_i_id']; ?>"></div>
                             </div>
+                            <div class="edit content_list_<?php echo $field['pk_i_id']; ?>"></div>
                         </li>
                         <?php $even = !$even;
                     }
@@ -279,7 +236,7 @@ osc_current_admin_theme_path('parts/header.php');
             </div>
             <div class="form-actions">
                 <div class="wrapper">
-                    <a class="btn" href="javascript:void(0);"
+                    <a class="btn btn-dim" href="javascript:void(0);"
                        onclick="$('#dialog-delete-field').dialog('close');"><?php _e('Cancel'); ?></a>
                     <a id="field-delete-submit" href="javascript:void(0);"
                        class="btn btn-red"><?php echo osc_esc_html(__('Delete')); ?></a>
@@ -288,4 +245,64 @@ osc_current_admin_theme_path('parts/header.php');
             </div>
         </div>
     </div>
+    <div id="deleteModal" method="get"
+         action="<?php echo osc_admin_base_url(true); ?>"
+         class="modal fade static"
+         data-field-id="">
+        <div class="modal-dialog modal-sm">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">
+                        <?php echo __('Delete custom field'); ?>
+                    </h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <?php _e('Are you sure you want to delete this custom field?'); ?>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-sm btn-secondary" data-bs-dismiss="modal"><?php _e('Cancel'); ?></button>
+                    <button id="deleteSubmit" data-bs-dismiss="modal" class="btn btn-sm btn-red" type="submit">
+                        <?php echo __('Delete'); ?>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        document.getElementById("deleteSubmit").onclick = function() {
+            let fieldId = document.getElementById(
+                "deleteModal"
+            ).dataset.fieldId;
+            let url = "<?php
+                echo osc_admin_base_url(true); ?>?page=ajax&action=delete_field&<?php echo osc_csrf_token_url();
+?>&id=" + fieldId;
+            fetch(url, {
+                credentials: "same-origin"
+            }).then(function(response) {
+                    if (!response.ok) {
+                        setJsMessage("error", response.statusText);
+                    }
+                    return response.json()
+                })
+                .then(function(jsonObj) {
+                    if (jsonObj.error) {
+                        setJsMessage("error", jsonObj.error);
+                    }
+                    if (jsonObj.ok) {
+                        setJsMessage("ok", jsonObj.ok);
+                        document.getElementById('list_' + fieldId).remove()
+                    }
+                }).catch(function(error) {
+                setJsMessage("error", "<?php echo osc_esc_js(__("Ajax error, try again.")); ?>:" + error);
+            });
+        };
+
+        function delete_field(id) {
+            var deleteModal = document.getElementById("deleteModal");
+            deleteModal.setAttribute("data-field-id", id);
+            (new bootstrap.Modal(document.getElementById("deleteModal"))).toggle();
+            return false;
+        }
+    </script>
 <?php osc_current_admin_theme_path('parts/footer.php'); ?>

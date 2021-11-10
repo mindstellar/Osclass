@@ -20,10 +20,7 @@
 $numItemsPerCategory = __get('numItemsPerCategory');
 $numItems            = __get('numItems');
 $numUsers            = __get('numUsers');
-
-
-$aFeatured = __get('aFeatured');
-
+$aFeatured           = __get('aFeatured');
 osc_add_filter('render-wrapper', 'render_offset');
 /**
  * @return string
@@ -71,164 +68,96 @@ function customPageTitle($string)
 
 osc_add_filter('admin_title', 'customPageTitle');
 
-function customHead()
+function chartJs()
 {
     $items = __get('item_stats');
     $users = __get('user_stats');
     ?>
-    <script type="text/javascript" src="https://www.google.com/jsapi"></script>
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
     <script type="text/javascript">
-        google.load('visualization', '1', {'packages': ['corechart']});
-        google.setOnLoadCallback(drawChartListing);
-        google.setOnLoadCallback(drawChartUser);
-
-        function drawChartListing() {
-            var data = new google.visualization.DataTable();
-            data.addColumn('string', '<?php _e('Date'); ?>');
-            data.addColumn('number', '<?php _e('Listings'); ?>');
-            data.addColumn({type: 'boolean', role: 'certainty'});
-            <?php $k = 0;
-            echo 'data.addRows(' . count($items) . ');';
-            foreach ($items as $date => $num) {
-                echo 'data.setValue(' . $k . ', 0, "' . $date . '");';
-                echo 'data.setValue(' . $k . ', 1, ' . $num . ');';
-                $k++;
-            }
-            $k = 0;
-            ?>
-
-            // Instantiate and draw our chart, passing in some options.
-            var chart = new google.visualization.AreaChart(document.getElementById('placeholder-listing'));
-            chart.draw(data, {
-                colors: ['#058dc7', '#e6f4fa'],
-                areaOpacity: 0.1,
-                lineWidth: 3,
-                hAxis: {
-                    gridlines: {
-                        color: '#333',
-                        count: 3
-                    },
-                    viewWindow: 'explicit',
-                    showTextEvery: 2,
-                    slantedText: false,
-                    textStyle: {
-                        color: '#058dc7',
-                        fontSize: 10
-                    }
-                },
-                vAxis: {
-                    gridlines: {
-                        color: '#DDD',
-                        count: 4,
-                        style: 'dooted'
-                    },
-                    viewWindow: 'explicit',
-                    baselineColor: '#bababa'
-
-                },
-                pointSize: 6,
-                legend: 'none',
-                chartArea: {
-                    left: 10,
-                    top: 10,
-                    width: "95%",
-                    height: "88%"
-                }
-            });
-        }
-
-        function drawChartUser() {
-            var data = new google.visualization.DataTable();
-            data.addColumn('string', '<?php _e('Date'); ?>');
-            data.addColumn('number', '<?php _e('Users'); ?>');
-            data.addColumn({type: 'boolean', role: 'certainty'});
-            <?php $k = 0;
-            echo 'data.addRows(' . count($users) . ');';
-            foreach ($users as $date => $num) {
-                echo 'data.setValue(' . $k . ', 0, "' . $date . '");';
-                echo 'data.setValue(' . $k . ', 1, ' . $num . ');';
-                $k++;
-            }
-            $k = 0;
-            ?>
-
-            // Instantiate and draw our chart, passing in some options.
-            var chart = new google.visualization.AreaChart(document.getElementById('placeholder-user'));
-            chart.draw(data, {
-                colors: ['#058dc7', '#e6f4fa'],
-                areaOpacity: 0.1,
-                lineWidth: 3,
-                hAxis: {
-                    gridlines: {
-                        color: '#333',
-                        count: 3
-                    },
-                    viewWindow: 'explicit',
-                    showTextEvery: 2,
-                    slantedText: false,
-                    textStyle: {
-                        color: '#058dc7',
-                        fontSize: 10
-                    }
-                },
-                vAxis: {
-                    gridlines: {
-                        color: '#DDD',
-                        count: 4,
-                        style: 'dooted'
-                    },
-                    viewWindow: 'explicit',
-                    baselineColor: '#bababa'
-
-                },
-                pointSize: 6,
-                legend: 'none',
-                chartArea: {
-                    left: 10,
-                    top: 10,
-                    width: "95%",
-                    height: "88%"
-                }
-            });
-        }
-
-        $(document).ready(function () {
-            $("#widget-box-stats-select").bind('change', function () {
-                if ($(this).val() == 'users') {
-                    $('#widget-box-stats-listings').css('visibility', 'hidden');
-                    $('#widget-box-stats-users').css('visibility', 'visible');
-                } else {
-                    $('#widget-box-stats-users').css('visibility', 'hidden');
-                    $('#widget-box-stats-listings').css('visibility', 'visible');
-                }
-            });
+        google.charts.load('1', {
+            'packages': ['corechart']
         });
+        google.charts.setOnLoadCallback(drawChartListing);
+        //google.charts.setOnLoadCallback(drawChartUser);
+        function drawChartListing() {
+            var data = google.visualization.arrayToDataTable([
+                ['<?php _e('Date'); ?>', '<?php _e('Listings'); ?>', '<?php _e('Users'); ?>'],
+                <?php foreach ($items as $k => $v) {
+                    echo "['" . $k . "', $v , $users[$k]],";
+                } ?>
+            ]);
+            var options = {
+                title: '<?php _e('New listings/users'); ?>',
+                titleTextStyle: {
+                    color: '#444444',
+                    fontSize: 16,
+                    bold : false
+                },
+                hAxis: {
+                    titleTextStyle: {
+                        color: '#333'
+                    },
+                    slantedText: false,
+                },
+                vAxis: {
+                    minValue: 0
+                },
+                legend: {
+                    position: 'bottom',
+                    alignment: 'center',
+                },
+                colors: ['#03dffc', '#035afc'],
+                chartArea: {
+                    top:20,
+                    width: '95%',
+                    height: '80%'
+                },
+                animation: {
+                    "startup": true,
+                    duration: 250,
+                    easing: 'out',
+                           
+                }
+            };
+
+            var chart = new google.visualization.AreaChart(document.getElementById('placeholder-listing'));
+            chart.draw(data, options);
+            var windowResizeTimer;
+            window.addEventListener('resize', function(e) {
+                clearTimeout(windowResizeTimer);
+                windowResizeTimer = setTimeout(function() {
+                    chart.draw(data, options);
+                }, 750);
+            });
+        }
     </script>
     <?php
 }
 
 
-osc_add_hook('admin_header', 'customHead', 10);
+osc_add_hook('admin_footer', 'chartJs', 10);
 
 osc_current_admin_theme_path('parts/header.php'); ?>
 <div id="dashboard">
-    <div class="grid-system">
-        <div class="grid-row grid-first-row grid-50">
-            <div class="row-wrapper">
-                <div class="widget-box">
-                    <div class="widget-box-title"><h3><?php _e('Listings by category'); ?></h3></div>
-                    <div class="widget-box-content">
-                        <?php
-                        $countEvent = 1;
-                        if (!empty($numItemsPerCategory)) { ?>
-                            <table class="table" cellpadding="0" cellspacing="0">
-                                <tbody>
+    <div class="row g-1">
+        <div class="col-lg-4 col-md-6">
+            <div class="widget-box h-100">
+                <div class="widget-box-title">
+                    <h3><?php _e('Listings by category'); ?></h3>
+                </div>
+                <div class="widget-box-content" style="max-height: 300px;overflow-x: auto">
+                    <?php
+                    $countEvent = 1;
+                    if (!empty($numItemsPerCategory)) { ?>
+                        <table class="table" cellpadding="0" cellspacing="0">
+                            <tbody>
                                 <?php
                                 $even = false;
                                 foreach ($numItemsPerCategory as $c) { ?>
                                     <tr<?php if ($even == true) {
-                                        $even = false;
-                                        echo ' class="even"';
+                                            $even = false;
+                                            echo ' class="even"';
                                        } else {
                                            $even = true;
                                        }
@@ -236,72 +165,62 @@ osc_current_admin_theme_path('parts/header.php'); ?>
                                            echo ' class="table-first-row"';
                                        } ?>>
                                         <td><a href="<?php echo osc_admin_base_url(true); ?>?page=items&amp;catId=<?php echo
-                                            $c['pk_i_id']; ?>"><?php echo $c['s_name']; ?></a>
+                                                                                                                    $c['pk_i_id']; ?>"><?php echo $c['s_name']; ?></a>
                                         </td>
                                         <td><?php echo $c['i_num_items'] . '&nbsp;' . (($c['i_num_items'] == 1)
-                                                    ? __('Listing') : __('Listings')); ?></td>
-                                    </tr>
-                                    <?php foreach ($c['categories'] as $subc) { ?>
-                                        <tr<?php if ($even == true) {
-                                            $even = false;
-                                            echo ' class="even"';
-                                           } else {
-                                               $even = true;
-                                           } ?>>
-                                            <td class="children-cat"><a href="<?php echo osc_admin_base_url(true); ?>?page=items&amp;
-                                            catId=<?php echo $subc['pk_i_id']; ?>"><?php echo $subc['s_name']; ?></a>
-                                            </td>
-                                            <td><?php echo $subc['i_num_items'] . ' ' . (($subc['i_num_items'] == 1)
-                                                        ? __('Listing') : __('Listings')); ?></td>
+                                                ? __('Listing') : __('Listings')); ?></td>
                                         </tr>
+                                        <?php foreach ($c['categories'] as $subc) { ?>
+                                            <tr<?php if ($even == true) {
+                                                    $even = false;
+                                                    echo ' class="even"';
+                                               } else {
+                                                   $even = true;
+                                               } ?>>
+                                                <td class="children-cat"><a href="<?php echo osc_admin_base_url(true); ?>?page=items&amp;
+                                            catId=<?php echo $subc['pk_i_id']; ?>"><?php echo $subc['s_name']; ?></a>
+                                                </td>
+                                                <td><?php echo $subc['i_num_items'] . ' ' . (($subc['i_num_items'] == 1)
+                                                        ? __('Listing') : __('Listings')); ?></td>
+                                                </tr>
+                                            <?php
+                                            $countEvent++;
+                                        }
+                                        ?>
                                         <?php
                                         $countEvent++;
-                                    }
-                                    ?>
-                                    <?php
-                                    $countEvent++;
                                 }
                                 ?>
-                                </tbody>
-                            </table>
-                        <?php } else { ?>
-                            <?php _e("There aren't any uploaded listing yet"); ?>
-                        <?php } ?>
+                            </tbody>
+                        </table>
+                    <?php } else { ?>
+                        <?php _e("There aren't any uploaded listing yet"); ?>
+                    <?php } ?>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-4 col-md-6">
+            <div class="widget-box">
+                <div class="widget-box-title">
+                    <h3><?php _e('Statistics'); ?></h3>
+                </div>
+                <div class="widget-box-content widget-box-content-stats">
+                    <div id="widget-box-stats-listings" class="widget-box-stats">
+                        <div class="stats-detail"><?php printf(
+                                                        __('Total number of listings: %s'),
+                                                        $numItems
+                                                    ); ?></div>
+                        <div class="stats-detail"><?php printf(
+                                                        __('Total number of users: %s'),
+                                                        $numUsers
+                                                    ); ?></div>
+                        <div id="placeholder-listing" class="graph-placeholder" height="120"></div>
+                        <a href="<?php echo osc_admin_base_url(true); ?>?page=stats&amp;action=items" class="btn btn-sm btn-dim"><?php _e('Listing statistics'); ?></a>
+                        <a href="<?php echo osc_admin_base_url(true); ?>?page=stats&amp;action=users" class="btn btn-sm btn-dim"><?php _e('User statistics'); ?></a>
                     </div>
                 </div>
             </div>
         </div>
-        <div class="grid-row grid-50">
-            <div class="row-wrapper">
-                <div class="widget-box">
-                    <div class="widget-box-title">
-                        <h3><?php _e('Statistics'); ?> <select id="widget-box-stats-select"
-                                                               class="widget-box-selector select-box-big input-medium">
-                                <option value="listing"><?php _e('New listings'); ?></option>
-                                <option value="users"><?php _e('New users'); ?></option>
-                            </select></h3>
-                    </div>
-                    <div class="widget-box-content widget-box-content-stats" style="overflow-y: visible;">
-                        <div id="widget-box-stats-listings" class="widget-box-stats">
-                            <b class="stats-title"><?php _e('New listings'); ?></b>
-                            <div class="stats-detail"><?php printf(__('Total number of listings: %s'),
-                                                                   $numItems); ?></div>
-                            <div id="placeholder-listing" class="graph-placeholder"></div>
-                            <a href="<?php echo osc_admin_base_url(true); ?>?page=stats&amp;action=items"
-                               class="btn"><?php _e('Listing statistics'); ?></a>
-                        </div>
-                        <div id="widget-box-stats-users" class="widget-box-stats" style="visibility: hidden;">
-                            <b class="stats-title"><?php _e('New users'); ?></b>
-                            <div class="stats-detail"><?php printf(__('Total number of users: %s'), $numUsers); ?></div>
-                            <div id="placeholder-user" class="graph-placeholder"></div>
-                            <a href="<?php echo osc_admin_base_url(true); ?>?page=stats&amp;action=users"
-                               class="btn"><?php _e('User statistics'); ?></a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="clear"></div>
     </div>
 </div>
 

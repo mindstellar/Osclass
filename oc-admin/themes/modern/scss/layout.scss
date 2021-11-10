@@ -1,0 +1,32 @@
+#header {
+  &.navbar {
+    padding-bottom: 0.1rem;
+    padding-top: 0.1rem;
+  }
+}
+
+#footer-wrapper {
+  padding: 20px 0;
+  font-size: 12px;
+  a {
+    text-decoration-line: none;
+  }
+}
+
+h2.separate-top,
+.separate-top {
+  margin-top: 40px;
+}
+
+h3.separate-top,
+.separate-top {
+  margin-top: 20px !important;
+}
+
+.separate-top-medium {
+  margin-top: 15px;
+}
+
+.relative {
+  position: relative;
+}

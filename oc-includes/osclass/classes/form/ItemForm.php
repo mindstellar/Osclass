@@ -314,7 +314,7 @@ class ItemForm extends Form
             $categories = Category::newInstance()->listEnabled();
         }
 
-        parent::generic_input_hidden('catId', $categoryID);
+        self::generic_input_hidden('catId', $categoryID);
 
         ?>
         <div id="select_holder"></div>
@@ -382,14 +382,15 @@ class ItemForm extends Form
                 tmp_categories = window['categories_' + categoryID];
                 if (tmp_categories != null && $.isArray(tmp_categories)) {
                     $("#select_holder").before(
-                        '<select id="select_' + select + '" name="select_' + select + '" depth="' + select + '"></select>'
+                        '<select id="select_' + select + '" class="form-select form-select-sm" name="select_' + select + '" ' +
+                        'depth="' + select +
+                        '"></select>'
                     );
 
-                    if (categoryID == 0) {
-                        var options = '<option value="' + categoryID + '" >' + osc.langs.select_category + '</option>';
-                    } else {
-                        var options = '<option value="' + categoryID + '" >' + osc.langs.select_subcategory + '</option>';
-                    }
+                    var options = '<option value="' + categoryID + '" >'
+                        + (categoryID == 0 ? osc.langs.select_category : osc.langs.select_category)
+                        + '</option>';
+
                     $.each(tmp_categories, function (index, value) {
                         options +=
                             '<option value="' + value[0] + '" ' +
@@ -463,7 +464,7 @@ class ItemForm extends Form
         if ($type === 'edit') {
             $value = '-1';  // default no change expiration date
         }
-        echo '<input id="dt_expiration" type="text" name="dt_expiration" value="'
+        echo '<input class="form-control form-control-sm" id="dt_expiration" type="text" name="dt_expiration" value="'
             . osc_esc_html(htmlentities($value, ENT_COMPAT, 'UTF-8'))
             . '" placeholder="yyyy-mm-dd HH:mm:ss" />';
 
@@ -478,7 +479,7 @@ class ItemForm extends Form
      */
     public static function expiration_select($options = null)
     {
-        if (OC_ADMIN) {
+        if (defined('OC_ADMIN') && OC_ADMIN) {
             if ($options == null) {
                 $options = array(-1, 0, 1, 3, 5, 7, 10, 15, 30);
             }
@@ -499,22 +500,22 @@ class ItemForm extends Form
                 });
                 draw_expiration(exp_days[$("#catId").value]);
             });
-            if (osc == undefined) {
+            if (osc === undefined) {
                 var osc = {};
             }
-            if (osc.langs == undefined) {
+            if (osc.langs === undefined) {
                 osc.langs = {};
             }
-            if (osc.langs.nochange_expiration == undefined) {
+            if (osc.langs.nochange_expiration === undefined) {
                 osc.langs.nochange_expiration = '<?php echo osc_esc_js(__('No change expiration')); ?>';
             }
-            if (osc.langs.without_expiration == undefined) {
+            if (osc.langs.without_expiration === undefined) {
                 osc.langs.without_expiration = '<?php echo osc_esc_js(__('Without expiration')); ?>';
             }
-            if (osc.langs.expiration_day == undefined) {
+            if (osc.langs.expiration_day === undefined) {
                 osc.langs.expiration_day = '<?php echo osc_esc_js(__('1 day')); ?>';
             }
-            if (osc.langs.expiration_days == undefined) {
+            if (osc.langs.expiration_days === undefined) {
                 osc.langs.expiration_days = '<?php echo osc_esc_js(__('%d days')); ?>';
             }
 
@@ -635,8 +636,9 @@ class ItemForm extends Form
      */
     public static function description_textarea($name, $locale = 'en_US', $value = '')
     {
-        parent::generic_textarea($name . '[' . $locale . ']', $value);
-
+        $attributes['id'] = preg_replace('|([^_a-zA-Z0-9-]+)|', '', $name . '[' . $locale . ']');
+        $options['sanitize'] = null;
+        echo (new self())->textarea($name . '[' . $locale . ']', $value, $attributes, $options);
         return true;
     }
 
@@ -837,11 +839,11 @@ class ItemForm extends Form
         if (Session::newInstance()->_getForm('regionId') != '') {
             $cities =
                 City::newInstance()->findByRegion(Session::newInstance()->_getForm('regionId'));
-        } elseif ($cities == null) {
+        } elseif ($cities == null && isset($item['fk_i_region_id'])) {
             $cities = City::newInstance()->findByRegion($item['fk_i_region_id']);
         }
 
-        if (count($cities) >= 1) {
+        if (!empty($cities) && count($cities) >= 1) {
             if (Session::newInstance()->_getForm('cityId') != '') {
                 $item['fk_i_city_id'] = Session::newInstance()->_getForm('cityId');
             }
@@ -1760,7 +1762,7 @@ class ItemForm extends Form
             ?>
             $("#catId").change(function () {
                 var cat_id = $(this).val();
-                <?php if (OC_ADMIN) { ?>
+                <?php if (defined('OC_ADMIN') && OC_ADMIN) { ?>
                 var url = '<?php echo osc_admin_base_url(true); ?>';
                 <?php } else { ?>
                 var url = '<?php echo osc_base_url(true); ?>';
@@ -1792,7 +1794,7 @@ class ItemForm extends Form
             });
             $(document).ready(function () {
                 var cat_id = $("#catId").val();
-                <?php if (OC_ADMIN) { ?>
+                <?php if (defined('OC_ADMIN') && OC_ADMIN) { ?>
                 var url = '<?php echo osc_admin_base_url(true); ?>';
                 <?php } else { ?>
                 var url = '<?php echo osc_base_url(true); ?>';

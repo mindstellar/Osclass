@@ -1,36 +1,42 @@
-<?php if (!defined('OC_ADMIN')) {
+<?php
+
+if (!defined('OC_ADMIN')) {
     exit('Direct access is not allowed.');
 }
 
-osc_add_filter('admin_body_class', 'admin_modeCompact_class');
-/**
- * @param $args
- *
- * @return array
- */
-function admin_modeCompact_class($args)
+function admin_js_lang_string()
 {
-    $compactMode = osc_get_preference('compact_mode', 'modern_admin_theme');
-    if ($compactMode == true) {
-        $args[] = 'compact';
-    }
-
-    return $args;
+    ?>
+    <script type="text/javascript">
+        var osc = window.osc || {};
+        <?php
+        $lang = array(
+            'nochange_expiration' => __('No change expiration'),
+            'without_expiration'  => __('Without expiration'),
+            'expiration_day'      => __('1 day'),
+            'expiration_days'     => __('%d days'),
+            'select_category'     => __('Select category'),
+            'no_subcategory'      => __('No subcategory'),
+            'select_subcategory'  => __('Select subcategory')
+        );
+        $locales = osc_get_locales();
+        $codes = array();
+        foreach ($locales as $locale) {
+            $codes[] = osc_esc_js($locale['pk_c_code']);
+        }
+        ?>
+        osc.locales = {};
+        osc.locales._default = '<?php echo osc_language(); ?>';
+        osc.locales.current = '<?php echo osc_current_admin_locale(); ?>';
+        osc.locales.codes = <?php echo json_encode($codes); ?>;
+        osc.locales.string = '[name*="' + osc.locales.codes.join('"],[name*="') + '"],.' + osc.locales.codes.join(',.');
+        osc.langs = <?php echo json_encode($lang); ?>;
+    </script>
+    <?php
 }
 
 
-osc_add_hook('ajax_admin_compactmode', 'modern_compactmode_actions');
-function modern_compactmode_actions()
-{
-    $compactMode = osc_get_preference('compact_mode', 'modern_admin_theme');
-    $modeStatus  = array('compact_mode' => true);
-    if ($compactMode == true) {
-        $modeStatus['compact_mode'] = false;
-    }
-    osc_set_preference('compact_mode', $modeStatus['compact_mode'], 'modern_admin_theme');
-    echo json_encode($modeStatus);
-}
-
+osc_add_hook('admin_header', 'admin_js_lang_string');
 
 // favicons
 function admin_header_favicons()
@@ -98,191 +104,6 @@ function admin_footer_html()
 
 
 osc_add_hook('admin_content_footer', 'admin_footer_html');
-
-// scripts
-function admin_theme_js()
-{
-    osc_load_scripts();
-}
-
-
-//osc_add_hook('admin_header', 'admin_theme_js', 9);
-
-// css
-function admin_theme_css()
-{
-    osc_load_styles();
-}
-
-
-//osc_add_hook('admin_header', 'admin_theme_css', 9);
-
-/**
- * @param null $locales
- */
-function printLocaleTabs($locales = null)
-{
-    if ($locales == null) {
-        $locales = osc_get_locales();
-    }
-    $num_locales = count($locales);
-    if ($num_locales > 1) {
-        echo '<div id="language-tab" class="ui-osc-tabs ui-tabs ui-widget ui-widget-content ui-corner-all">';
-        echo '<ul class="ui-tabs-nav ui-helper-reset ui-helper-clearfix ui-widget-header ui-corner-all">';
-        foreach ($locales as $locale) {
-            echo '<li class="ui-state-default ui-corner-top"><a href="#' . $locale['pk_c_code'] . '">'
-                 . $locale['s_name'] . '</a></li>';
-        }
-        echo '</ul></div>';
-    }
-}
-
-
-/**
- * @param null $locales
- * @param null $item
- */
-function printLocaleTitle($locales = null, $item = null)
-{
-    if ($locales == null) {
-        $locales = osc_get_locales();
-    }
-    if ($item == null) {
-        $item = osc_item();
-    }
-    $num_locales = count($locales);
-    foreach ($locales as $locale) {
-        echo '<div class="input-has-placeholder input-title-wide"><label for="title">' . __('Enter title here')
-             . ' *</label>';
-        $title = (isset($item) && isset($item['locale'][$locale['pk_c_code']])
-                  && isset($item['locale'][$locale['pk_c_code']]['s_title']))
-            ? $item['locale'][$locale['pk_c_code']]['s_title'] : '';
-        if (Session::newInstance()->_getForm('title') != '') {
-            $title_ = Session::newInstance()->_getForm('title');
-            if ($title_[$locale['pk_c_code']] != '') {
-                $title = $title_[$locale['pk_c_code']];
-            }
-        }
-        $title = osc_apply_filter('admin_item_title', $title, $item, $locale);
-
-        $name = 'title' . '[' . $locale['pk_c_code'] . ']';
-        echo '<input id="' . $name . '" type="text" name="' . $name . '" value="' . osc_esc_html(htmlentities(
-                                                                                                     $title,
-                                                                                                     ENT_COMPAT,
-                                                                                                     'UTF-8'
-                                                                                                 )) . '"  />';
-        echo '</div>';
-    }
-}
-
-
-/**
- * @param null $locales
- * @param null $page
- */
-function printLocaleTitlePage($locales = null, $page = null)
-{
-    if ($locales == null) {
-        $locales = osc_get_locales();
-    }
-    $aFieldsDescription = Session::newInstance()->_getForm('aFieldsDescription');
-    $num_locales        = count($locales);
-    echo '<label for="title">' . __('Title') . ' *</label>';
-
-    foreach ($locales as $locale) {
-        $title = '';
-        if (isset($page['locale'][$locale['pk_c_code']])) {
-            $title = $page['locale'][$locale['pk_c_code']]['s_title'];
-        }
-        if (isset($aFieldsDescription[$locale['pk_c_code']])
-            && isset($aFieldsDescription[$locale['pk_c_code']]['s_title'])
-            && $aFieldsDescription[$locale['pk_c_code']]['s_title'] != ''
-        ) {
-            $title = $aFieldsDescription[$locale['pk_c_code']]['s_title'];
-        }
-        $name = $locale['pk_c_code'] . '#s_title';
-
-        $title = osc_apply_filter('admin_page_title', $title, $page, $locale);
-
-        echo '<div class="input-has-placeholder input-title-wide"><label for="title">' . __('Enter title here')
-             . ' *</label>';
-        echo '<input id="' . $name . '" type="text" name="' . $name . '" value="' . osc_esc_html(htmlentities(
-                                                                                                     $title,
-                                                                                                     ENT_COMPAT,
-                                                                                                     'UTF-8'
-                                                                                                 )) . '"  />';
-        echo '</div>';
-    }
-}
-
-
-/**
- * @param null $locales
- * @param null $item
- */
-function printLocaleDescription($locales = null, $item = null)
-{
-    if ($locales == null) {
-        $locales = osc_get_locales();
-    }
-    if ($item == null) {
-        $item = osc_item();
-    }
-    $num_locales = count($locales);
-    foreach ($locales as $locale) {
-        $name = 'description' . '[' . $locale['pk_c_code'] . ']';
-
-        echo '<div><label for="description">' . __('Description') . ' *</label>';
-        $description = (isset($item) && isset($item['locale'][$locale['pk_c_code']])
-                        && isset($item['locale'][$locale['pk_c_code']]['s_description']))
-            ? $item['locale'][$locale['pk_c_code']]['s_description'] : '';
-
-        if (Session::newInstance()->_getForm('description') != '') {
-            $description_ = Session::newInstance()->_getForm('description');
-            if ($description_[$locale['pk_c_code']] != '') {
-                $description = $description_[$locale['pk_c_code']];
-            }
-        }
-
-        $description = osc_apply_filter('admin_item_description', $description, $item, $locale);
-
-        echo '<textarea id="' . $name . '" name="' . $name . '" rows="10">' . $description . '</textarea></div>';
-    }
-}
-
-
-/**
- * @param null $locales
- * @param null $page
- */
-function printLocaleDescriptionPage($locales = null, $page = null)
-{
-    if ($locales == null) {
-        $locales = osc_get_locales();
-    }
-    $aFieldsDescription = Session::newInstance()->_getForm('aFieldsDescription');
-    $num_locales        = count($locales);
-
-    foreach ($locales as $locale) {
-        $description = '';
-        if (isset($page['locale'][$locale['pk_c_code']])) {
-            $description = $page['locale'][$locale['pk_c_code']]['s_text'];
-        }
-        if (isset($aFieldsDescription[$locale['pk_c_code']])
-            && isset($aFieldsDescription[$locale['pk_c_code']]['s_text'])
-            && $aFieldsDescription[$locale['pk_c_code']]['s_text'] != ''
-        ) {
-            $description = $aFieldsDescription[$locale['pk_c_code']]['s_text'];
-        }
-
-        $description = osc_apply_filter('admin_page_description', $description, $page, $locale);
-
-        $name = $locale['pk_c_code'] . '#s_text';
-        echo '<div><label for="description">' . __('Description') . ' *</label>';
-        echo '<textarea id="' . $name . '" name="' . $name . '" rows="10">' . $description . '</textarea></div>';
-    }
-}
-
 
 /**
  * @param $slug

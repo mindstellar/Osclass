@@ -535,11 +535,12 @@ function oc_install()
 
     $locales = osc_listLocales();
     $values  = array(
-        'pk_c_code'         => $locales[osc_current_admin_locale()]['code'],
+        'pk_c_code'         => $locales[osc_current_admin_locale()]['locale_code'],
         's_name'            => $locales[osc_current_admin_locale()]['name'],
         's_short_name'      => $locales[osc_current_admin_locale()]['short_name'],
         's_description'     => $locales[osc_current_admin_locale()]['description'],
         's_version'         => $locales[osc_current_admin_locale()]['version'],
+        's_direction'       => $locales[osc_current_admin_locale()]['direction'],
         's_author_name'     => $locales[osc_current_admin_locale()]['author_name'],
         's_author_url'      => $locales[osc_current_admin_locale()]['author_url'],
         's_currency_format' => $locales[osc_current_admin_locale()]['currency_format'],
@@ -745,7 +746,6 @@ CONFIG;
 
     file_put_contents(ABS_PATH . 'config.php', $config_text);
 
-    return;
 }
 
 

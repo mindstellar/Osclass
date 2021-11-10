@@ -48,7 +48,6 @@ class CAdminSettingsMain extends AdminSecBaseModel
                 osc_admin_toolbar_update_plugins(true);
 
                 osc_add_flash_ok_message(_m('Last check') . ':   ' . date('Y-m-d H:i'), 'admin');
-
                 $this->redirectTo(osc_admin_base_url(true) . '?page=settings');
                 break;
             case ('update'):
@@ -86,8 +85,8 @@ class CAdminSettingsMain extends AdminSecBaseModel
                 $sNumRssItems      = (int)trim(strip_tags($sNumRssItems));
                 $maxLatestItems    = (int)trim(strip_tags($maxLatestItems));
                 $numItemsSearch    = (int)$numItemsSearch;
-                $contactAttachment = ($contactAttachment ? true : false);
-                $bAutoCron         = ($bAutoCron ? true : false);
+                $contactAttachment = (bool)$contactAttachment;
+                $bAutoCron         = (bool)$bAutoCron;
                 $error             = '';
 
                 $msg = '';
@@ -136,7 +135,7 @@ class CAdminSettingsMain extends AdminSecBaseModel
                 if (is_int($maxLatestItems)) {
                     $iUpdated += osc_set_preference('maxLatestItems@home', $maxLatestItems);
                 } else {
-                    if ($error != '') {
+                    if ($error) {
                         $error .= '</p><p>';
                     }
                     $error .= _m('Number of recent listings displayed at home must be an integer');
@@ -149,6 +148,9 @@ class CAdminSettingsMain extends AdminSecBaseModel
                 $iUpdated += osc_set_preference('ga_tracking_id', $gaTrackingId);
                 $iUpdated += osc_set_preference('googlemaps_api_key', $gMapsKey);
                 $iUpdated += osc_set_preference('openstreet_api_key', $osMapsKey);
+
+                // Enable prerelease osclass update
+                $iUpdated += osc_set_preference('allow_update_prerelease', Params::getParam('allow_update_prerelease'));
 
                 if ($iUpdated > 0) {
                     if ($error) {

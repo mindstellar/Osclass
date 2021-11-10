@@ -53,9 +53,9 @@ function osc_render_file($file = '')
     // Clean $file to prevent hacking of some
     osc_sanitize_url($file);
     $file = str_replace(array(
-        "..\\",
-        '../'
-    ), '', str_replace('://', '', preg_replace('|http([s]*)|', '', $file)));
+                            "..\\",
+                            '../'
+                        ), '', str_replace('://', '', preg_replace('|http([s]*)|', '', $file)));
     if (file_exists(osc_themes_path() . osc_theme() . '/plugins/' . $file)) {
         include osc_themes_path() . osc_theme() . '/plugins/' . $file;
     } elseif (file_exists(osc_plugins_path() . $file)) {
@@ -75,9 +75,9 @@ function osc_render_file_url($file = '')
 {
     osc_sanitize_url($file);
     $file = str_replace(array(
-        "..\\",
-        '../'
-    ), '', str_replace('://', '', preg_replace('|http([s]*)|', '', $file)));
+                            "..\\",
+                            '../'
+                        ), '', str_replace('://', '', preg_replace('|http([s]*)|', '', $file)));
 
     return osc_base_url(true) . '?page=custom&file=' . $file;
 }
@@ -160,7 +160,7 @@ function osc_unregister_script($id)
 function osc_load_scripts()
 {
     Scripts::newInstance()->printScripts();
-    if (OC_ADMIN) {
+    if (defined('OC_ADMIN') && OC_ADMIN) {
         osc_run_hook('admin_scripts_loaded');
     } else {
         osc_run_hook('scripts_loaded');
@@ -169,14 +169,43 @@ function osc_load_scripts()
 
 
 /**
+ * Register style with dependencies
+ *
+ * @param $id           string Id to identify the style
+ * @param $url          string url of the .css file
+ * @param $dependencies mixed, could be an array or a string
+ */
+function osc_register_style($id, $url, $dependencies = null)
+{
+    Styles::newInstance()->register($id, $url, $dependencies);
+}
+
+
+/**
+ * Remove style from the queue, so it will not be loaded
+ *
+ * @param string $id
+ */
+function osc_unregister_style($id)
+{
+    Styles::newInstance()->unregister($id);
+}
+
+
+/**
  * Add style to be loaded
+ * If style is already registered only id is needed to enqueue style
  *
  * @param $id  string Id to identify the style
- * @param $url string Url of the .css file
+ * @param $url string|null Url of the .css file
  */
-function osc_enqueue_style($id, $url)
+function osc_enqueue_style($id, $url = null)
 {
-    Styles::newInstance()->addStyle($id, $url);
+    if ($url === null) {
+        Styles::newInstance()->enqueue($id);
+    } else {
+        Styles::newInstance()->addStyle($id, $url);
+    }
 }
 
 
@@ -208,7 +237,7 @@ function osc_load_styles()
  */
 function osc_print_bulk_actions($id, $name, $options, $class = '')
 {
-    echo '<select id="' . $id . '" name="' . $name . '" ' . ($class != '' ? 'class="' . $class . '"' : '') . '>';
+    echo '<select id="' . $id . '" name="' . $name . '" ' . ($class != '' ? 'class="form-select ' . $class . '"' : 'form-select') . '>';
     foreach ($options as $o) {
         $opt   = '';
         $label = '';

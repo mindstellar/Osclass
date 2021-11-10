@@ -648,11 +648,11 @@ function osc_update_core_json()
 /**
  * Gets current version
  *
- * @return int
+ * @return string
  */
 function osc_version()
 {
-    return (int)getPreference('version');
+    return getPreference('version');
 }
 
 

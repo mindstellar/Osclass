@@ -206,30 +206,43 @@ class CAdminAjax extends AdminSecBaseModel
                             $slug_k++;
                             $slug = $slug_tmp . '_' . $slug_k;
                         }
-
-                        // trim options
-                        $s_options = '';
-                        $aux       = Params::getParam('s_options');
-                        $aAux      = explode(',', $aux);
-
-                        foreach ($aAux as &$option) {
-                            $option = trim($option);
+                        // prepare multi locale data
+                        $currentAdminLocale = osc_current_admin_locale();
+                        $aMetaNames        = Params::getParam('meta_s_name');
+                        $metaLocale = array();
+                        foreach ($aMetaNames as $k => $v) {
+                            if (!empty($v)) {
+                                $metaLocale[$k] = array(
+                                    's_name' => trim($v),
+                                );
+                            }
                         }
 
-                        $s_options = implode(',', $aAux);
+                        $metaOptions     = Params::getParam('s_options');
+
+                        // trim all csv options
+                        if (!empty($metaOptions)) {
+                            $tmpValues = explode(',', $metaOptions);
+                            foreach ($tmpValues as $k => $v) {
+                                $tmpValues[$k] = trim($v);
+                            }
+                            $metaOptions = implode(',', $tmpValues);
+                            unset($tmpValues);
+                        }
 
                         $res = Field::newInstance()->update(
                             array(
-                                's_name'       => Params::getParam('s_name'),
+                                's_name'       => $aMetaNames[$currentAdminLocale],
                                 'e_type'       => Params::getParam('field_type'),
                                 's_slug'       => $slug,
                                 'b_required'   => Params::getParam('field_required') == '1' ? 1 : 0,
                                 'b_searchable' => Params::getParam('field_searchable') == '1' ? 1 : 0,
-                                's_options'    => $s_options
+                                's_options'    => $metaOptions,
                             ),
                             array('pk_i_id' => Params::getParam('id'))
                         );
-
+                        Field::newInstance()->updateJsonMeta(Params::getParam('id'), 'b_new_tab', Params::getParam('b_new_tab'));
+                        Field::newInstance()->updateJsonMeta(Params::getParam('id'), 'locale', $metaLocale);
                         if (is_bool($res) && !$res) {
                             $error = 1;
                         }
@@ -246,7 +259,7 @@ class CAdminAjax extends AdminSecBaseModel
                     }
                     // error while updating?
                     if ($error == 1) {
-                        $message = __('An error occurred while updating.');
+                        $message = __('An error occurred while updating');
                     }
                 } else {
                     $error   = 1;
@@ -258,7 +271,7 @@ class CAdminAjax extends AdminSecBaseModel
                 } else {
                     $result = array(
                         'ok'       => __('Saved'),
-                        'text'     => Params::getParam('s_name'),
+                        'text'     => $aMetaNames[$currentAdminLocale],
                         'field_id' => Params::getParam('id')
                     );
                 }
@@ -469,10 +482,7 @@ class CAdminAjax extends AdminSecBaseModel
                 if (Params::existParam('route')) {
                     $routes = Rewrite::newInstance()->getRoutes();
                     $rid    = Params::getParam('route');
-                    $file   = '../';
-                    if (isset($routes[$rid], $routes[$rid]['file'])) {
-                        $file = $routes[$rid]['file'];
-                    }
+                    $file   = $routes[$rid]['file'] ?? '../';
                 } else {
                     $file = Params::getParam('ajaxfile');
                 }
@@ -564,9 +574,12 @@ class CAdminAjax extends AdminSecBaseModel
             case 'check_version':
                 try {
                     $package_json = Osclass::getPackageInfo(true);
+                } catch (Exception $e) {
+                        echo json_encode(array('error' => 1, 'msg' => $e->getMessage()));
+                }
+                if (isset($package_json) && is_array($package_json)) {
                     $upgradeOsclass    = new Osclass($package_json);
                     $upgrade_available = $upgradeOsclass->isUpgradable();
-
                     if ($upgrade_available) {
                         osc_set_preference('update_core_available', $upgradeOsclass->isUpgradable());
                         echo json_encode(array('error' => 0, 'msg' => __('Update available')));
@@ -576,8 +589,8 @@ class CAdminAjax extends AdminSecBaseModel
                     }
                     osc_set_preference('update_core_json', json_encode($package_json));
                     osc_set_preference('last_version_check', time());
-                } catch (Exception $e) {
-                        echo json_encode(array('error' => 1, 'msg' => $e->getMessage()));
+                } else {
+                    echo json_encode(array('error' => 1, 'msg' => __('Network error')));
                 }
 
                 break;
@@ -609,12 +622,12 @@ class CAdminAjax extends AdminSecBaseModel
                     try {
                         $upgradeOsclass->doUpgrade();
                         $db_upgrade_result = json_decode($osclassUpgradeObj::upgradeDB(Params::getParam('skipdb')), true);
-                        $result            = ['error' => 0, 'message' => __('Osclass upgraded successfully.')];
+                        $result            = ['error' => $db_upgrade_result['error'], 'message' => $db_upgrade_result['message']];
                     } catch (Exception $e) {
                         $result = ['error' => 1, 'message' => $e->getMessage()];
                         osc_add_flash_error_message($e->getMessage(), 'admin');
                     }
-                    if (isset($db_upgrade_result) && $db_upgrade_result['status'] !== true) {
+                    if (isset($db_upgrade_result) && $db_upgrade_result['error'] == 1) {
                         $result = ['error' => 5, 'message' => $db_upgrade_result['message']];
                         osc_add_flash_warning_message(__('Error occurred while upgrading osclass Database.'), 'admin');
                     }
@@ -645,7 +658,7 @@ class CAdminAjax extends AdminSecBaseModel
                 }
                 echo json_encode($result);
                 break;
-            case 'upgrade-db':
+            case 'upgrade_db':
                 if (defined('DEMO')) {
                     osc_add_flash_warning_message(_m('This action cannot be done because it is a demo site'), 'admin');
                     $this->redirectTo(osc_admin_base_url(true));

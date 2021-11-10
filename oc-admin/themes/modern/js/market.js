@@ -21,11 +21,11 @@ function installMarketItem(thatItem){
             if(data.error == 0) { // no errors
                 content += '<h3>'+oscEscapeHTML(messages.download_ok)+'</h3>';
                 content += "<p>";
-                content += '<a class="btn btn-mini btn-green" href="'+theme.adminBaseUrl+'?page='+pageRedirect+'&marketError='+oscEscapeHTML(data.error)+'&slug='+oscEscapeHTML(data.data['s_update_url'])+'">'+theme.langs.ok+'</a>';
-                content += '<a class="btn btn-mini" href="javascript:location.reload(true)">'+theme.langs.close+'</a>';
+                content += '<a class="btn btn-mini btn-green" href="' + theme.adminBaseUrl + '?page=' + pageRedirect + '&marketError=' + oscEscapeHTML(data.error) + '&slug=' + oscEscapeHTML(data.data['s_update_url']) + '">' + theme.langs.ok + '</a>';
+                content += '<a class="btn btn-sm btn-success" href="javascript:location.reload(true)">' + theme.langs.close + '</a>';
                 content += "</p>";
             } else {
-                content += '<a class="btn btn-mini" href="javascript:location.reload(true)">'+theme.langs.close+'</a>';
+                content += '<a class="btn btn-sm btn-success" href="javascript:location.reload(true)">' + theme.langs.close + '</a>';
             }
             $("#downloading .osc-modal-content").html(content);
             $("#downloading").dialog("option", "position", "center");
@@ -36,9 +36,9 @@ function checkCompatibility(thatDialog){
     if(notCompatible){
             content   = $('<div id="not-compatible-prompt"></div>');
             container = $('<div id="not-compatible-prompt"></div>');
-            actions   = $('<p></p>');
-            btnOk     = $('<a class="btn btn-mini">'+theme.langs.proceed_anyway_btn+'</a>');
-            btnClose  = $('<a class="btn btn-mini btn-red">'+theme.langs.close+'</a>');
+        actions = $('<p></p>');
+        btnOk = $('<a class="btn btn-sm btn-success">' + theme.langs.proceed_anyway_btn + '</a>');
+        btnClose = $('<a class="btn btn-mini btn-red">' + theme.langs.close + '</a>');
 
             btnOk.click(function(){
                 installMarketItem(thatDialog);

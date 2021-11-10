@@ -104,75 +104,42 @@ class ItemActions
 
         // Sanitize
         foreach ($aItem['title'] as $key => $value) {
-            $aItem['title'][$key] = strip_tags(trim($value));
+            $aItem['title'][$key] = $this->Sanitize->title($value);
         }
 
-        $aItem['price']    = $aItem['price'] !== null ? strip_tags(trim($aItem['price'])) : $aItem['price'];
-        $contactName       = strip_tags(trim($aItem['contactName']));
-        $contactEmail      = strip_tags(trim($aItem['contactEmail']));
-        $contactPhone      = strip_tags(trim($aItem['contactPhone']));
+        if ($aItem['price'] !== null) {
+            $aItem['price'] = $this->Sanitize->price($aItem['price']);
+        }
+
+        $aItem['contactName']       = trim($this->Sanitize->string($aItem['contactName']));
+        $aItem['contactEmail']      = $this->Sanitize->email($aItem['contactEmail']);
+        $aItem['contactPhone']      = $this->Sanitize->phone($aItem['contactPhone']);
         $aItem['cityArea'] = osc_sanitize_name(strip_tags(trim($aItem['cityArea'])));
         $aItem['address']  = osc_sanitize_name(strip_tags(trim($aItem['address'])));
 
         // Anonymous
-        $contactName = osc_validate_text($contactName, 3) ? $contactName : __('Anonymous');
+        $aItem['contactName'] = osc_validate_text($aItem['contactName'], 3) ? $aItem['contactName'] : __('Anonymous');
 
         // Validate
-        if (!$this->checkAllowedExt($aItem['photos'])) {
-            $flash_error .= _m('Image with an incorrect extension.') . PHP_EOL;
-        }
-        if (!$this->checkSize($aItem['photos'])) {
-            $flash_error .= _m('Image is too big. Max. size') . osc_max_size_kb() . ' Kb' . PHP_EOL;
-        }
-
-        $title_message = '';
-        foreach ($aItem['title'] as $key => $value) {
-            if (osc_validate_text($value) && osc_validate_max($value, osc_max_characters_per_title())) {
-                $title_message = '';
-                break;
-            }
-
-            $title_message .= (!osc_validate_text($value) ? sprintf(_m('Title too short (%s).'), $key) . PHP_EOL : '');
-            $title_message .= (!osc_validate_max($value, osc_max_characters_per_title())
-                ? sprintf(_m('Title too long (%s).'), $key) . PHP_EOL : '');
-        }
-        $flash_error .= $title_message;
-
-        $desc_message = '';
-        foreach ($aItem['description'] as $key => $value) {
-            if (osc_validate_text($value, 3) && osc_validate_max($value, osc_max_characters_per_description())) {
-                $desc_message = '';
-                break;
-            }
-
-            $desc_message .= (!osc_validate_text($value, 3) ? sprintf(_m('Description too short (%s).'), $key) . PHP_EOL
-                : '');
-            $desc_message .= (!osc_validate_max($value, osc_max_characters_per_description())
-                ? sprintf(_m('Description too long (%s).'), $key) . PHP_EOL : '');
-        }
-        $flash_error .= $desc_message;
-
-        // akismet check spam ...
-        if ($this->akismetText($aItem['title'], $aItem['description'], $contactName, $contactEmail)) {
-            $is_spam = 1;
-        }
-
-        $flash_error .= ((!osc_validate_max($contactName, 35)) ? _m('Name too long.') . PHP_EOL : '');
-        $flash_error .= ((!osc_validate_email($contactEmail)) ? _m('Email invalid.') . PHP_EOL : '');
+        $flash_error .= ((!osc_validate_max($aItem['contactName'], 35)) ? _m('Name too long.') . PHP_EOL : '');
+        $flash_error .= ((!osc_validate_email($aItem['contactEmail'])) ? _m('Email invalid.') . PHP_EOL : '');
 
         $flash_error .= $this->validateCommonInput($flash_error, $aItem);
+
         $flash_error .= ((((time() - (int)Session::newInstance()->_get('last_submit_item')) < osc_items_wait_time())
                           && !$this->is_admin)
             ? _m('Too fast. You should wait a little to publish your ad.')
               . PHP_EOL : '');
 
+        // akismet check spam ...
+        if ($this->akismetText($aItem['title'], $aItem['description'], $aItem['contactName'], $aItem['contactEmail'])) {
+            $is_spam = 1;
+        }
         $_meta = Field::newInstance()->findByCategory($aItem['catId']);
         $meta  = Params::getParam('meta');
         $this->handleMetaField($_meta, $meta, $flash_error);
 
-        // hook pre add or edit
-        // DEPRECATED: pre_item_post will be removed in 3.4
-        osc_run_hook('pre_item_post');
+        // hook pre add
         osc_run_hook('pre_item_add', $aItem, $flash_error);
         $flash_error = osc_apply_filter('pre_item_add_error', $flash_error, $aItem);
 
@@ -190,9 +157,9 @@ class ItemActions
                                        'fk_i_category_id'   => $aItem['catId'],
                                        'i_price'            => $aItem['price'],
                                        'fk_c_currency_code' => $aItem['currency'],
-                                       's_contact_name'     => $contactName,
-                                       's_contact_email'    => $contactEmail,
-                                       's_contact_phone'    => $contactPhone,
+                                       's_contact_name'     => $aItem['contactName'],
+                                       's_contact_email'    => $aItem['contactEmail'],
+                                       's_contact_phone'    => $aItem['contactPhone'],
                                        's_secret'           => $code,
                                        'b_active'           => $active === 'ACTIVE' ? 1 : 0,
                                        'b_enabled'          => $enabled,
@@ -244,11 +211,7 @@ class ItemActions
             $locationManager = ItemLocation::newInstance();
             $locationManager->insert($location);
 
-            try {
-                $this->uploadItemResources($aItem['photos'], $itemId);
-            } catch (ImagickException $e) {
-                trigger_error($e->getMessage(), E_USER_WARNING);
-            }
+            $this->uploadItemResources($aItem['photos'], $itemId);
 
             // update dt_expiration at t_item
             Item::newInstance()->updateExpirationDate($itemId, $aItem['dt_expiration']);
@@ -316,7 +279,6 @@ class ItemActions
     private function checkAllowedExt($aResources)
     {
         $success = true;
-
         require LIB_PATH . 'osclass/mimes.php';
         if (!empty($aResources)) {
             // get allowedExt
@@ -343,17 +305,19 @@ class ItemActions
                     // check mime file
                     $fileMime = $aResources['type'][$key];
                     if (function_exists('getimagesize') && (stripos($fileMime, 'image/') !== false)) {
-                        $info = getimagesize($aResources['tmp_name'][$key]);
-                        if (isset($info['mime'])) {
-                            $fileMime = $info['mime'];
-                        } else {
-                            $fileMime = '';
+                        // check if it is a file
+                        $filePath = $aResources['tmp_name'][$key];
+                        $fileMime = '';
+                        if (file_exists($filePath)) {
+                            $imageInfo = getimagesize($filePath);
+                            if (isset($imageInfo['mime'])) {
+                                $fileMime = $imageInfo['mime'];
+                                // check if it's in the allowed mimes
+                                if (in_array($fileMime, $aMimesAllowed, false)) {
+                                    $bool_img = true;
+                                }
+                            }
                         }
-                    }
-
-
-                    if (in_array($fileMime, $aMimesAllowed, false)) {
-                        $bool_img = true;
                     }
                     if (!$bool_img && $success) {
                         $success = false;
@@ -451,6 +415,39 @@ class ItemActions
      */
     private function validateCommonInput(string $flash_error, $aItem)
     {
+        if (!$this->checkAllowedExt($aItem['photos'])) {
+            $flash_error .= _m('Image with an incorrect extension.') . PHP_EOL;
+        }
+        if (!$this->checkSize($aItem['photos'])) {
+            $flash_error .= _m('Image is too big. Max. size') . osc_max_size_kb() . ' Kb' . PHP_EOL;
+        }
+
+        $title_message = '';
+        foreach ($aItem['title'] as $key => $value) {
+            if (osc_validate_text($value) && osc_validate_max($value, osc_max_characters_per_title())) {
+                $title_message = '';
+                break;
+            }
+
+            $title_message .= (!osc_validate_text($value) ? sprintf(_m('Title too short (%s).'), $key) . PHP_EOL : '');
+            $title_message .= (!osc_validate_max($value, osc_max_characters_per_title())
+                ? sprintf(_m('Title too long (%s).'), $key) . PHP_EOL : '');
+        }
+        $flash_error .= $title_message;
+
+        $desc_message = '';
+        foreach ($aItem['description'] as $key => $value) {
+            if (osc_validate_text($value, 3) && osc_validate_max($value, osc_max_characters_per_description())) {
+                $desc_message = '';
+                break;
+            }
+            $desc_message .= (!osc_validate_text($value, 3) ? sprintf(_m('Description too short (%s).'), $key) . PHP_EOL
+                : '');
+            $desc_message .= (!osc_validate_max($value, osc_max_characters_per_description())
+                ? sprintf(_m('Description too long (%s).'), $key) . PHP_EOL : '');
+        }
+        $flash_error .= $desc_message;
+
         $flash_error .= ((!osc_validate_category($aItem['catId'])) ? _m('Category invalid.') . PHP_EOL : '');
         $flash_error .= ((!osc_validate_number($aItem['price'])) ? _m('Price must be a number.') . PHP_EOL : '');
         $flash_error .= ((!osc_validate_max(number_format($aItem['price'], 0, '', ''), 15))
@@ -490,13 +487,17 @@ class ItemActions
      * @param array  $_meta
      * @param        $meta
      * @param string $flash_error
-     * @param        $k
-     * @param        $v
      */
     private function handleMetaField(array $_meta, &$meta, string &$flash_error)
     {
         if (!empty($_meta) && is_array($meta)) {
             $valid_id = array_column($_meta, 'pk_i_id');
+            // special case for checkboxes
+            foreach ($_meta as $value) {
+                if (isset($value['e_type']) && $value['e_type'] === 'CHECKBOX') {
+                    $meta[$value['pk_i_id']] = ($meta[$value['pk_i_id']] ?? 0);
+                }
+            }
             foreach ($meta as $k => $v) {
                 if (!in_array($k, $valid_id, false)) {
                     unset($meta[$k]);
@@ -562,7 +563,7 @@ class ItemActions
         foreach ($_meta as $_m) {
             $isMetaRequired = $_m['b_required'];
             $isMetaValueSet = isset($meta[$_m['pk_i_id']]);
-            $metaValue      = $meta[$_m['pk_i_id']];
+            $metaValue      = $meta[$_m['pk_i_id']] ?? null;
             switch ($_m['e_type']) {
                 case 'DATEINTERVAL':
                     if ($isMetaValueSet && $metaValue) {
@@ -684,7 +685,6 @@ class ItemActions
      * @param $itemId
      *
      * @return int
-     * @throws \ImagickException
      */
     public function uploadItemResources($aResources, $itemId)
     {
@@ -715,7 +715,6 @@ class ItemActions
                             $img->doWatermarkImage();
                         }
                         $img->saveToFile($path, $extension);
-
                         // Create preview
                         $path = $tmpName . '_preview';
                         $size = explode('x', osc_preview_dimensions());
@@ -880,47 +879,17 @@ class ItemActions
 
         // Sanitize
         foreach ($aItem['title'] as $key => $value) {
-            $aItem['title'][$key] = strip_tags(trim($value));
+            $aItem['title'][$key] = $this->Sanitize->title($value);
         }
 
-        $aItem['price']        = $aItem['price'] !== null ? strip_tags(trim($aItem['price'])) : $aItem['price'];
+        if ($aItem['price'] !== null) {
+            $aItem['price'] = $this->Sanitize->price($aItem['price']);
+        }
         $aItem['cityArea']     = osc_sanitize_name(strip_tags(trim($aItem['cityArea'])));
         $aItem['address']      = osc_sanitize_name(strip_tags(trim($aItem['address'])));
-        $aItem['contactPhone'] = strip_tags(trim($aItem['contactPhone']));
+        $aItem['contactPhone'] = $this->Sanitize->phone($aItem['contactPhone']);
 
         // Validate
-        if (!$this->checkAllowedExt($aItem['photos'])) {
-            $flash_error .= _m('Image with an incorrect extension.') . PHP_EOL;
-        }
-        if (!$this->checkSize($aItem['photos'])) {
-            $flash_error .= _m('Image is too big. Max. size') . osc_max_size_kb() . ' Kb' . PHP_EOL;
-        }
-
-        $td_message = '';
-        foreach (@$aItem['title'] as $key => $value) {
-            if (osc_validate_text($value) && osc_validate_max($value, osc_max_characters_per_title())) {
-                $td_message = '';
-                break;
-            }
-
-            $td_message .= (!osc_validate_text($value) ? _m('Title too short.') . PHP_EOL : '') .
-                           (!osc_validate_max($value, osc_max_characters_per_title()) ? _m('Title too long.')
-                                                                                        . PHP_EOL : '');
-        }
-        $flash_error .= $td_message;
-
-        $desc_message = '';
-        foreach (@$aItem['description'] as $key => $value) {
-            if (osc_validate_text($value, 3) && osc_validate_max($value, osc_max_characters_per_description())) {
-                $desc_message = '';
-                break;
-            }
-
-            $desc_message .= (!osc_validate_text($value, 3) ? _m('Description too short.') . PHP_EOL : '') .
-                             (!osc_validate_max($value, osc_max_characters_per_description())
-                                 ? _m('Description too long.') . PHP_EOL : '');
-        }
-        $flash_error .= $desc_message;
         $flash_error .= $this->validateCommonInput($flash_error, $aItem);
 
         $_meta = Field::newInstance()->findByCategory($aItem['catId']);
@@ -1734,7 +1703,7 @@ class ItemActions
         $aItem['showEmail']    = Params::getParam('showEmail') ? 1 : 0;
         $aItem['title']        = Params::getParam('title');
         $aItem['description']  =
-            (osc_tinymce_frontend() || OC_ADMIN) ? Params::getParam('description', false, false) : Params::getParam('description');
+            (osc_tinymce_frontend() || (defined('OC_ADMIN') && OC_ADMIN)) ? Params::getParam('description', false, false) : Params::getParam('description');
         $aItem['photos']       = Params::getFiles('photos');
         $ajax_photos           = Params::getParam('ajax_photos');
         $aItem['s_ip']         = get_ip();
@@ -1763,15 +1732,14 @@ class ItemActions
                 $aItem['dt_expiration'] = '';
             } elseif ($dt_expiration != ''
                       && (
-                                                                ctype_digit($dt_expiration)
-                                                                || preg_match(
-                                                                    '|^([0-9]{4})-([0-9]{2})-([0-9]{2}) ([0-9]{2}):([0-9]{2}):([0-9]{2})$|',
-                                                                    $dt_expiration,
-                                                                    $match
-                                                                )
-                                                                || preg_match('|^([0-9]{4})-([0-9]{2})-([0-9]{2})$|', $dt_expiration,
-                                                                              $match)
-                                                            )
+                          ctype_digit($dt_expiration)
+                          || preg_match(
+                              '|^([0-9]{4})-([0-9]{2})-([0-9]{2}) ([0-9]{2}):([0-9]{2}):([0-9]{2})$|',
+                              $dt_expiration,
+                              $match
+                          )
+                          || preg_match('|^([0-9]{4})-([0-9]{2})-([0-9]{2})$|', $dt_expiration, $match)
+                      )
             ) {
                 $aItem['dt_expiration'] = $dt_expiration;
                 $_category              = Category::newInstance()->findByPrimaryKey($aItem['catId']);

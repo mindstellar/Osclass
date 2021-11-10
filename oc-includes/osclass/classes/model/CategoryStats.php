@@ -212,7 +212,9 @@ class CategoryStats extends DAO
         $this->dao->from($this->getTableName());
         $this->dao->where('fk_i_category_id', $categoryId);
         $result = $this->dao->get();
-        $data   = $result->row();
+        if ($result instanceof DBRecordsetClass) {
+            $data = $result->row();
+        }
         if ($data == null) {
             return 0;
         }

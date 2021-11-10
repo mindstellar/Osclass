@@ -35,20 +35,25 @@ function osc_listLocales()
 
     $codes = osc_listLanguageCodes();
     foreach ($codes as $code) {
-        $path   = sprintf('%s%s/index.php', osc_translations_path(), $code);
-        $fxName = sprintf('locale_%s_info', $code);
-        if (file_exists($path)) {
-            require_once $path;
-            if (function_exists($fxName)) {
-                $languages[$code]         = $fxName();
-                $languages[$code]['code'] = $code;
+        if (file_exists(osc_translations_path().$code.'/locale.json')) {
+            $aInfo = json_decode(file_get_contents(osc_translations_path().$code.'/locale.json'), true);
+            $languages[$code] = $aInfo;
+            unset($aInfo);
+        } else {
+            $path   = osc_translations_path() . $code . '/index.php';
+            $fxName = "locale_{$code}_info";
+            if (file_exists($path)) {
+                require_once $path;
+                if (function_exists($fxName)) {
+                    $languages[$code]                = $fxName();
+                    $languages[$code]['locale_code'] = $code;
+                }
             }
         }
     }
 
     return $languages;
 }
-
 
 /**
  * @return bool
@@ -58,25 +63,16 @@ function osc_checkLocales()
     $locales = osc_listLocales();
 
     foreach ($locales as $locale) {
-        $data = OSCLocale::newInstance()->findByPrimaryKey($locale['code']);
-        if (!is_array($data)) {
-            $values = array(
-                'pk_c_code'         => $locale['code'],
-                's_name'            => $locale['name'],
-                's_short_name'      => $locale['short_name'],
-                's_description'     => $locale['description'],
-                's_version'         => $locale['version'],
-                's_author_name'     => $locale['author_name'],
-                's_author_url'      => $locale['author_url'],
-                's_currency_format' => $locale['currency_format'],
-                's_date_format'     => $locale['date_format'],
-                's_stop_words'      => $locale['stop_words'],
-                'b_enabled'         => 0,
-                'b_enabled_bo'      => 1
-            );
-            $result = OSCLocale::newInstance()->insert($values);
+        // if it's a demo, we don't import any data
+        if (defined('DEMO')) {
+            return true;
+        }
 
-            if (!$result) {
+        $data = OSCLocale::newInstance()->findByPrimaryKey($locale['locale_code']);
+        if (!is_array($data)) {
+            $result = OSCLocale::newInstance()->insertLocaleInfo($locale);
+
+            if ($result === false) {
                 return false;
             }
 
@@ -86,23 +82,27 @@ function osc_checkLocales()
             }
 
             // inserting e-mail translations
-            $path = sprintf('%s%s/mail.sql', osc_translations_path(), $locale['code']);
-            if (file_exists($path)) {
-                $sql    = file_get_contents($path);
-                $conn   = DBConnectionClass::newInstance();
-                $c_db   = $conn->getOsclassDb();
-                $comm   = new DBCommandClass($c_db);
-                $result = $comm->importSQL($sql);
-                if (!$result) {
-                    return false;
+            if (file_exists(osc_translations_path() . $locale['locale_code'] . '/mail.json' )) {
+                $mailJson = file_get_contents(osc_translations_path() . $locale['locale_code'] . '/mail.json' );
+                if ($mailJson) {
+                    Page::newInstance()->importEmailJsonTemplates($mailJson);
+                }
+            } else {
+                // old templates
+                $path = osc_translations_path() . $locale['locale_code'] . '/mail.sql';
+                if (file_exists($path)) {
+                    $sql    = file_get_contents($path);
+                    $conn   = DBConnectionClass::newInstance();
+                    $c_db   = $conn->getOsclassDb();
+                    $comm   = new DBCommandClass($c_db);
+                    $result = $comm->importSQL($sql);
+                    if (!$result) {
+                        return false;
+                    }
                 }
             }
         } else {
-            // update language version
-            OSCLocale::newInstance()->update(
-                array('s_version' => $locale['version']),
-                array('pk_c_code' => $locale['code'])
-            );
+            OSCLocale::newInstance()->insertLocaleInfo($locale);
         }
     }
 

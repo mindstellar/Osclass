@@ -1,0 +1,23 @@
+#help-box {
+  h3 {
+    font-size: 14px;
+    margin: 0;
+  }
+
+  p {
+    font-size: .85rem;
+  }
+}
+
+.help-box {
+  background: #caecf3;
+  border-left: 0.2rem var(--bs-info) solid;
+  color: color-contrast(#caecf3);
+  border-radius: 4px;
+  display: inline-block;
+  font-size: .85rem;
+  font-style: italic;
+  margin-top: .2rem;
+  padding: .35rem .50rem;
+  width: auto;
+}

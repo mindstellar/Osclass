@@ -42,15 +42,16 @@ class Sanitize
      */
     public function string($value, ...$options)
     {
-        $options = array_merge([
-                                   'flags'   => FILTER_FLAG_STRIP_LOW
-                                                | FILTER_FLAG_STRIP_HIGH,
-                                   'options' => [
-                                       'min_range' => 0,
-                                       'max_range' => 65535,
-                                   ],
-                               ],
-                               $options);
+        // utf8 safe sanitize
+        $options = array_merge(
+            [
+                'flags' => FILTER_FLAG_NO_ENCODE_QUOTES,
+                'options' => [
+                    'default' => '',
+                ],
+            ],
+            $options
+        );
 
         return filter_var($value, FILTER_SANITIZE_STRING, $options);
     }
@@ -65,30 +66,63 @@ class Sanitize
      */
     public function price($value, ...$options)
     {
-        $options = array_merge([
-                                   'flags'   => FILTER_FLAG_STRIP_LOW
-                                                | FILTER_FLAG_STRIP_HIGH,
-                                   'options' => [
-                                       'min_range' => 0,
-                                       'max_range' => 65535,
-                                   ],
-                               ],
-                               $options);
+        // sanitize price to float up to 2 decimal places, merge with default options
+        if ($value) {
+            $options = array_merge(
+                [
+                    'flags'   => FILTER_FLAG_ALLOW_FRACTION,
+                    'options' => [
+                        'decimal_separator' => '.',
+                        'decimal_places'    => 2,
+                        'min_range'         => 0,
+                        'max_range'         => 9999999999.99,
+                    ],
+                ],
+                $options
+            );
+            $value   = filter_var($value, FILTER_SANITIZE_NUMBER_FLOAT, $options);
+            // round to 2 decimal places
+            $value = round($value, 2);
+        }
 
-        return filter_var($value, FILTER_SANITIZE_NUMBER_FLOAT, $options);
+        return $value;
     }
 
     /**
-     * Sanitise
-     *
-     * /**
-     * Sanitize a string and escape it for use in html
+     * Sanitize a html safe string
      *
      * @param string $value
      */
     public function html($value)
     {
         return htmlspecialchars($value, ENT_QUOTES, 'UTF-8');
+    }
+
+    /**
+     * Sanitize title utf8 string
+     *
+     * @param string $value
+     *
+     * @return string
+     */
+    public function title($value)
+    {
+        $value = $this->string($value);
+        if ($value) {
+            // remove all characters except letters, numbers and whitespace punctuation utf8 safe
+            $value = preg_replace('/[^\p{L}\p{N}\s]/u', '', $value);
+
+            // remove all whitespace and replace with a single space
+            $value = preg_replace('/\s+/', ' ', $value);
+
+            // remove all leading and trailing whitespace
+            $value = trim($value);
+
+            // make it html safe
+            return htmlspecialchars($value, ENT_QUOTES, 'UTF-8');
+        }
+
+        return '';
     }
 
     /**
@@ -102,7 +136,7 @@ class Sanitize
      */
     public function filterInt($value, ...$options)
     {
-        return $this->int($value, ...$options);
+        return $this->int($value);
     }
 
     /**
@@ -110,19 +144,9 @@ class Sanitize
      *
      * @param mixed $value
      */
-    public function int($value, ...$options)
+    public function int($value)
     {
-        $options = array_merge([
-                                   'flags'   => FILTER_FLAG_ALLOW_OCTAL,
-                                   'options' => [
-                                       'min_range' => 0,
-                                       'max_range' => 65535,
-                                   ],
-
-                               ],
-                               $options);
-
-        return filter_var($value, FILTER_SANITIZE_NUMBER_INT, $options);
+        return filter_var($value, FILTER_SANITIZE_NUMBER_INT);
     }
 
     /**
@@ -132,13 +156,15 @@ class Sanitize
      */
     public function websiteUrl($value)
     {
-        //remove invalid chars from url
-        $value = $this->url($value);
-        //remove possible xss attempts
-        $value = str_replace(['<', '>', '"', '\'', '%3C', '%3E', '%22', '%27'], '', $value);
-        //check if it has http:// or https://
-        if (strpos($value, 'http') !== 0) {
-            $value = 'http://' . $value;
+        if ($value) {
+            //remove invalid chars from url
+            $value = $this->url($value);
+            //remove possible xss attempts
+            $value = str_replace(['<', '>', '"', '\'', '%3C', '%3E', '%22', '%27'], '', $value);
+            //check if it has http:// or https://
+            if (strpos($value, 'http') !== 0) {
+                $value = 'https://' . $value;
+            }
         }
 
         return $value;
@@ -154,16 +180,12 @@ class Sanitize
      */
     public function url($value, ...$options)
     {
-        $options = array_merge([
-                                   'flags'   => FILTER_FLAG_STRIP_LOW
-                                                | FILTER_FLAG_STRIP_HIGH,
-                                   'options' => [
-                                       'min_range' => 0,
-                                       'max_range' => 65535,
-                                   ],
-
-                               ],
-                               $options);
+        $options = array_merge(
+            [
+                'default' => '',
+            ],
+            $options
+        );
 
         return filter_var($value, FILTER_SANITIZE_URL, $options);
     }
@@ -174,7 +196,7 @@ class Sanitize
      * @param       $value
      * @param array $options
      *
-     * @return bool|float
+     * @return float
      * @deprecated use Sanitize::float() instead will be removed in the next major 6.x release
      */
     public function filterFloat($value, ...$options)
@@ -192,15 +214,17 @@ class Sanitize
      */
     public function float($value, ...$options)
     {
-        $options = array_merge([
-                                   'flags'   => FILTER_FLAG_ALLOW_FRACTION,
-                                   'options' => [
-                                       'min_range' => 0,
-                                       'max_range' => 65535,
-                                   ],
+        $options = array_merge(
+            [
+                'flags'   => FILTER_FLAG_ALLOW_FRACTION,
+                'options' => [
+                    'min_range' => 0,
+                    'max_range' => 65535,
+                ],
 
-                               ],
-                               $options);
+            ],
+            $options
+        );
 
         return filter_var($value, FILTER_SANITIZE_NUMBER_FLOAT, $options);
     }
@@ -229,16 +253,12 @@ class Sanitize
      */
     public function encoded($value, ...$options)
     {
-        $options = array_merge([
-                                   'flags'   => FILTER_FLAG_STRIP_LOW
-                                                | FILTER_FLAG_STRIP_HIGH,
-                                   'options' => [
-                                       'min_range' => 0,
-                                       'max_range' => 65535,
-                                   ],
-
-                               ],
-                               $options);
+        $options = array_merge(
+            [
+                'default' => '',
+            ],
+            $options
+        );
 
         return filter_var($value, FILTER_SANITIZE_ENCODED, $options);
     }
@@ -267,16 +287,12 @@ class Sanitize
      */
     public function email($value, ...$options)
     {
-        $options = array_merge([
-                                   'flags'   => FILTER_FLAG_STRIP_LOW
-                                                | FILTER_FLAG_STRIP_HIGH,
-                                   'options' => [
-                                       'min_range' => 0,
-                                       'max_range' => 65535,
-                                   ],
-
-                               ],
-                               $options);
+        $options = array_merge(
+            [
+                'default' => '',
+            ],
+            $options
+        );
 
         return filter_var($value, FILTER_SANITIZE_EMAIL, $options);
     }
@@ -292,7 +308,7 @@ class Sanitize
      */
     public function filterQuotes($value, ...$options)
     {
-        return $this->quotes($value, ...$options);
+        return $this->quotes($value);
     }
 
     /**
@@ -349,14 +365,11 @@ class Sanitize
     public function username($value)
     {
         $sanitizedString = $this->string($value);
-        if ($sanitizedString != false) {
+        if ($sanitizedString) {
             // Sanitize username, trim leading/trailing spaces and replace space with underscore.
             $value = preg_replace('/[^a-zA-Z0-9_\.]/', '', $value);
-            $value = trim($value);
             $value = preg_replace('/[\s]+/', '_', $value);
-            $value = strtolower($value);
-
-            return $value;
+            return trim($value);
         }
 
         return '';
@@ -371,16 +384,19 @@ class Sanitize
      */
     public function phone($value)
     {
-        if (empty($value)) {
-            return '';
-        }
-        // Remove strings that aren't number. leave leading + in number.
-        $value = preg_replace('/[^0-9\+]/', '', $value);
-        // Add leading zero if it's less than 11 digits and doesn't has leading +
-        if (strlen($value) < 11 && strpos($value, '+') === false) {
-            $value = '0' . $value;
+        $value = $this->string($value);
+        if ($value) {
+            $value = preg_replace('/[^+0-9]/', '', $value);
+            // check if the first character is a +
+            if (strpos($value, '+') === 0) {
+                $value = '+' . str_replace('+', '', $value);
+            } else {
+                $value = str_replace('+', '', $value);
+            }
+
+            return $value;
         }
 
-        return $value;
+        return '';
     }
 }

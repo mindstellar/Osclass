@@ -1,0 +1,131 @@
+#listing-toolbar,
+.table-toolbar {
+  height: 44px;
+  float:right;
+}
+
+#listing-toolbar, #admins-toolbar, #users-toolbar {
+  & + #datatablesForm #bulk-actions {
+    float: left;
+  }
+}
+
+#bulk-actions {
+  margin-bottom: 1rem;
+  max-width: 15rem;
+}
+
+.submit-right {
+  margin: 0;
+}
+
+#display-filters {
+  padding: 40px 0 0;
+}
+
+#display-filters .form-label {
+  width: 70px;
+}
+
+#display-filters .form-controls {
+  margin-left: 80px;
+}
+
+#item-form label {
+  display: block;
+  font-size: 14px;
+  margin-bottom: 5px;
+  margin-top: 10px;
+}
+
+.input-title-wide input {
+  height: 22px;
+  width: 516px;
+}
+
+.input-title-wide label {
+  font-size: 18px !important;
+}
+
+.input-description-wide textarea {
+  width: 516px;
+}
+
+#item-form .input-currency {
+  font-size: 18px;
+  line-height: 28px;
+  vertical-align: bottom;
+}
+
+#item-form h3.label {
+  color: $color-gray-dim;
+  font-size: 14px;
+  font-weight: 500;
+  margin: 0 0 10px;
+}
+
+/*
+#item-form .well input {
+  width: 194px;
+}
+*/
+
+#item-form .well .select-box-trigger {
+  width: 151px;
+}
+
+#item-form .well {
+  padding: 15px;
+}
+
+#language-tab {
+  margin-bottom: 25px;
+}
+
+#item-form #photos {
+  background-color: $color-gray-light;
+  border: solid 1px $color-gray-soft;
+  padding: 10px;
+  @include rounded-corners;
+}
+
+/*
+#plugin-hook .row{}
+#plugin-hook .row label{
+    clear:both;
+    float:left;
+    width:160px;
+    min-height:30px;
+    margin:0;
+    vertical-align:top;
+}
+#plugin-hook .row select,
+#plugin-hook .row input{
+    margin-left:180px;
+    display: block;
+}
+#plugin-hook .row br{
+    display:none;
+}
+#plugin-hook .row p{
+    margin:0;
+}*/
+/* Plugin */
+#plugin-hook {
+  @extend .card;
+  padding: 0 1rem;
+  .has-slider {
+    padding-left: 180px;
+  }
+  .meta {
+    select, input[type='text'], input[type='email'], input.cf_date {
+      max-width:15rem;
+    }
+  }
+}
+
+#multiLangTabsContent {
+  textarea {
+    min-height: 30rem;
+  }
+}

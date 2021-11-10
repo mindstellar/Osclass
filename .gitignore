@@ -61,3 +61,6 @@ robots.txt
 /error.log
 /.php-cs-fixer.cache
 
+/oc-admin/themes/modern/scss/bootstrap/
+/oc-admin/themes/template/
+.vscode/settings.json

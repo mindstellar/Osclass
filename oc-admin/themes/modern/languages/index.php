@@ -31,9 +31,9 @@
 function addHelp()
 {
     echo '<p>'
-         . __("Add, edit or delete the language in which your Osclass is displayed, "
-              . "both the part that's viewable by users and the admin panel.")
-         . '</p>';
+        . __("Add, edit or delete the language in which your Osclass is displayed, "
+            . "both the part that's viewable by users and the admin panel.")
+        . '</p>';
 }
 
 
@@ -43,9 +43,12 @@ function customPageHeader()
 {
     ?>
     <h1><?php _e('Settings'); ?>
-        <a href="#" class="btn ico ico-32 ico-help float-right"></a>
-        <a href="<?php echo osc_admin_base_url(true); ?>?page=languages&amp;action=add"
-           class="btn btn-green ico ico-32 ico-add-white float-right"><?php _e('Add language'); ?></a>
+        <a class="ms-1 bi bi-question-circle-fill float-right" data-bs-target="#help-box" data-bs-toggle="collapse" href="#help-box"></a>
+        <a href="#" onclick="languageModal()" class="ms-1 text-success float-end" title="<?php _e('Download language'); ?>">
+            <i class="bi bi-arrow-down-circle-fill"></i>
+        </a>
+        <a href="<?php echo osc_admin_base_url(true); ?>?page=languages&amp;action=add" class="ms-1 text-success float-end" data-bs-toggle="tooltip" data-bs-placement="bottom" title="<?php _e('Upload language');
+        ?>"><i class="bi bi-plus-circle-fill"></i></a>
     </h1>
     <?php
 }
@@ -65,11 +68,11 @@ function customHead()
 {
     ?>
     <script type="text/javascript">
-        $(document).ready(function () {
+        $(document).ready(function() {
             // check_all bulkactions
-            $("#check_all").change(function () {
+            $("#check_all").change(function() {
                 var isChecked = $(this).prop("checked");
-                $('.col-bulkactions input').each(function () {
+                $('.col-bulkactions input').each(function() {
                     if (isChecked == 1) {
                         this.checked = true;
                     } else {
@@ -77,59 +80,7 @@ function customHead()
                     }
                 });
             });
-
-            // dialog add official lang
-            $("#b_add_official").click(function () {
-                $("#dialog-add-official").dialog({
-                    width: 400,
-                    modal: true,
-                    title: '<?php echo osc_esc_js(__('Add official languages.')); ?>',
-                });
-            });
-
-            // dialog delete
-            $("#dialog-language-delete").dialog({
-                autoOpen: false,
-                modal: true,
-                title: '<?php echo osc_esc_js(__('Delete language')); ?>'
-            });
-
-            // dialog bulk actions
-            $("#dialog-bulk-actions").dialog({
-                autoOpen: false,
-                modal: true
-            });
-            $("#bulk-actions-submit").click(function () {
-                $("#datatablesForm").submit();
-            });
-            $("#bulk-actions-cancel").click(function () {
-                $("#datatablesForm").attr('data-dialog-open', 'false');
-                $('#dialog-bulk-actions').dialog('close');
-            });
-            // dialog bulk actions function
-            $("#datatablesForm").submit(function () {
-                if ($("#bulk_actions option:selected").val() == "") {
-                    return false;
-                }
-
-                if ($("#datatablesForm").attr('data-dialog-open') == "true") {
-                    return true;
-                }
-
-                $("#dialog-bulk-actions .form-row").html($("#bulk_actions option:selected").attr('data-dialog-content'));
-                $("#bulk-actions-submit").html($("#bulk_actions option:selected").text());
-                $("#datatablesForm").attr('data-dialog-open', 'true');
-                $("#dialog-bulk-actions").dialog('open');
-                return false;
-            });
         });
-
-        // dialog delete function
-        function delete_dialog(item_id) {
-            $("#dialog-language-delete input[name='id[]']").attr('value', item_id);
-            $("#dialog-language-delete").dialog('open');
-            return false;
-        }
     </script>
     <?php
 }
@@ -144,54 +95,57 @@ osc_current_admin_theme_path('parts/header.php');
 ?>
 <h2 class="render-title">
     <?php _e('Manage Languages'); ?>
-    <a id="b_add_official" href="javascript:void(0)" class="btn btn-mini"><?php _e('Add new (official)'); ?></a>
-    <a href="<?php echo osc_admin_base_url(true); ?>?page=languages&amp;action=add" class="btn btn-mini"><?php
-        _e('Add new (.zip)'); ?></a>
 </h2>
 <div class="relative">
-    <div id="language-toolbar" class="table-toolbar">
-        <div class="float-right"></div>
-    </div>
     <form id="datatablesForm" action="<?php echo osc_admin_base_url(true); ?>" method="post" data-dialog-open="false">
-        <input type="hidden" name="page" value="languages"/>
+        <input type="hidden" name="page" value="languages" />
         <div id="bulk-actions">
-            <label>
+            <div class="input-group input-group-sm">
                 <?php osc_print_bulk_actions('bulk_actions', 'action', __get('bulk_options'), 'select-box-extra'); ?>
-                <input type="submit" id="bulk_apply" class="btn" value="<?php echo osc_esc_html(__('Apply')); ?>"/>
-            </label>
+                <input type="submit" id="bulk_apply" class="btn btn-primary" value="<?php echo osc_esc_html(__('Apply')); ?>" />
+            </div>
         </div>
-        <div class="table-contains-actions">
+        <div class="table-contains-actions shadow-sm">
             <table class="table" cellpadding="0" cellspacing="0">
                 <thead>
-                <tr>
-                    <th class="col-bulkactions"><input id="check_all" type="checkbox"/></th>
-                    <th><?php _e('Name'); ?></th>
-                    <th><?php _e('Short name'); ?></th>
-                    <th><?php _e('Description'); ?></th>
-                    <th><?php _e('Enabled (website)'); ?></th>
-                    <th><?php _e('Enabled (oc-admin)'); ?></th>
-                </tr>
+                    <tr class="table-secondary">
+                        <th class="col-bulkactions"><input id="check_all" type="checkbox" /></th>
+                        <th><?php _e('Name'); ?></th>
+                        <th class="col-short-name"><?php _e('Short name'); ?></th>
+                        <th class="col-description"><?php _e('Description'); ?></th>
+                        <th><?php _e('Enabled (website)'); ?></th>
+                        <th><?php _e('Enabled (oc-admin)'); ?></th>
+                    </tr>
                 </thead>
                 <tbody>
-                <?php if (count($aData['aaData']) > 0) { ?>
-                    <?php foreach ($aData['aaData'] as $array) { ?>
+                    <?php if (count($aData['aaData']) > 0) { ?>
+                        <?php foreach ($aData['aaData'] as $array) { ?>
+                            <tr>
+                                <?php foreach ($array as $key => $value) { ?>
+                                    <td <?php if ($key === 0) {
+                                            echo 'class="col-bulkactions"';
+                                        } elseif ($key === 1) {
+                                            echo 'data-col-name="' . __("Name") . '"';
+                                        } elseif ($key === 2) {
+                                            echo 'class="col-short-name" data-col-name="' . __("Short name") . '"';
+                                        } elseif ($key === 3) {
+                                            echo 'class="col-description" data-col-name="' . __("Description") . '"';
+                                        } elseif ($key === 4) {
+                                            echo 'class="col-enabled-website" data-col-name="' . __("Enabled (website)") . '"';
+                                        } elseif ($key === 5) {
+                                            echo 'class="col-enabled-backend" data-col-name="' . __("Enabled (oc-admin)") . '"';
+                                        } ?>>
+                                        <?php echo $value; ?></td>
+                                <?php } ?>
+                            </tr>
+                        <?php } ?>
+                    <?php } else { ?>
                         <tr>
-                            <?php foreach ($array as $key => $value) { ?>
-                                <td <?php if ($key == 0) {
-                                    ?> class="col-bulkactions" <?php
-                                    } ?>>
-                                    <?php echo $value; ?>
-                                </td>
-                            <?php } ?>
+                            <td colspan="6" class="text-center">
+                                <p><?php _e('No data available in table'); ?></p>
+                            </td>
                         </tr>
                     <?php } ?>
-                <?php } else { ?>
-                    <tr>
-                        <td colspan="6" class="text-center">
-                            <p><?php _e('No data available in table'); ?></p>
-                        </td>
-                    </tr>
-                <?php } ?>
                 </tbody>
             </table>
             <div id="table-row-actions"></div>
@@ -200,77 +154,137 @@ osc_current_admin_theme_path('parts/header.php');
 </div>
 
 <?php osc_show_pagination_admin($aData); ?>
-
-<form id="dialog-language-delete" method="get" action="<?php echo osc_admin_base_url(true); ?>" class="has-form-actions hide">
-    <input type="hidden" name="page" value="languages"/>
-    <input type="hidden" name="action" value="delete"/>
-    <input type="hidden" name="id[]" value=""/>
-    <div class="form-horizontal">
-        <div class="form-row">
-            <?php _e('Are you sure you want to delete this language?'); ?>
-        </div>
-        <div class="form-actions">
-            <div class="wrapper">
-                <a class="btn" href="javascript:void(0);" onclick="$('#dialog-language-delete').dialog('close');"><?php _e('Cancel');
-                ?></a>
-                <input id="language-delete-submit" type="submit" value="<?php echo osc_esc_html(__('Delete')); ?>" class="btn
-                btn-red"/>
+<form id="languageModal" method="get" action="<?php echo osc_admin_base_url(true); ?>" class="modal fade static">
+    <input type="hidden" name="page" value="languages" />
+    <input type="hidden" name="action" value="import_locations" />
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">
+                    <?php _e('Import a language'); ?>:
+                </h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <p><?php _e("Import a language from our database. " . "Already imported languages aren't shown."); ?></p>
+                <div class="mb-3 ">
+                    <label><?php _e('Import a language'); ?>:</label>
+                    <select class="form-select-sm form-select" name="language" required>
+                        <option value=""><?php _e('Select an option'); ?>
+                    </select>
+                    <p class="text-danger"></p>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <div class="wrapper">
+                    <button type="button" class="btn btn-sm btn-secondary" data-bs-dismiss="modal"><?php _e('Cancel'); ?></button>
+                    <button type="submit" class="btn btn-sm btn-submit"><?php echo osc_esc_html(__('Import')); ?></button>
+                </div>
             </div>
         </div>
     </div>
 </form>
-
-<div id="dialog-bulk-actions" title="<?php _e('Bulk actions'); ?>" class="has-form-actions hide">
-    <div class="form-horizontal">
-        <div class="form-row"></div>
-        <div class="form-actions">
-            <div class="wrapper">
-                <a id="bulk-actions-cancel" class="btn" href="javascript:void(0);"><?php _e('Cancel'); ?></a>
-                <a id="bulk-actions-submit" href="javascript:void(0);" class="btn btn-red"><?php echo osc_esc_html(__('Delete'));
-                ?></a>
-                <div class="clear"></div>
+<form id="deleteModal" method="get" action="<?php echo osc_admin_base_url(true); ?>" class="modal fade static">
+    <input type="hidden" name="page" value="languages" />
+    <input type="hidden" name="action" value="delete" />
+    <input type="hidden" name="id[]" value="" />
+    <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">
+                    <?php echo __('Delete language'); ?>
+                </h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <?php _e('Are you sure you want to delete this language?'); ?>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-sm btn-secondary" data-bs-dismiss="modal"><?php _e('Cancel'); ?></button>
+                <button id="deleteSubmit" class="btn btn-sm btn-red" type="submit">
+                    <?php echo __('Delete'); ?>
+                </button>
+            </div>
+        </div>
+    </div>
+</form>
+<div id="bulkActionsModal" class="modal fade static" tabindex="-1" aria-labelledby="bulkActionsModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="bulkActionsModalLabel"><?php _e('Bulk actions'); ?></h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <p></p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-sm btn-secondary" data-bs-dismiss="modal"><?php _e('Cancel'); ?></button>
+                <button id="bulkActionsSubmit" onclick="bulkActionsSubmit()" class="btn btn-sm btn-red"><?php echo osc_esc_html(__('Delete')); ?></button>
             </div>
         </div>
     </div>
 </div>
+<script>
+    var aExistingLanguages = <?php echo json_encode(OSCLocale::newInstance()->listAll()); ?>;
+    var localeImportUrl = '<?php echo osc_esc_js(osc_get_i18n_repository_url()) ?>';
+    let languageOptionsSet = false;
+    // shift locale code as array key
+    for (let i = 0; i < aExistingLanguages.length; i++) {
+        aExistingLanguages[aExistingLanguages[i].pk_c_code] = aExistingLanguages[i];
+        delete aExistingLanguages[i];
+    }
+    // function to compare to version
+    function compareVersion(a, b) {
+        var aParts = a.split('.');
+        var bParts = b.split('.');
+        for (var i = 0; i < aParts.length; i++) {
+            if (aParts[i] > bParts[i]) return 1;
+            if (aParts[i] < bParts[i]) return -1;
+        }
+        return 0;
+    }
 
-<form id="dialog-add-official" method="get" action="<?php echo osc_admin_base_url(true); ?>" class="has-form-actions hide">
-    <input type="hidden" name="page" value="languages"/>
-    <input type="hidden" name="action" value="import_official"/>
-    <div class="form-horizontal">
-        <div class="form-row">
-            <?php _e("Import a language from our database. " . "Already imported languages aren't shown."); ?>
-        </div>
-        <div class="form-row">
-            <table>
-                <tr>
-                    <td><?php _e('Import a language'); ?>:</td>
-                    <td>
-                        <?php $languages = View::newInstance()->_get('aOfficialLanguages'); ?>
-                        <?php if (count($languages)) { ?>
-                            <select name="language" required>
-                                <option value=""><?php _e('Select an option'); ?>
-                                    <?php foreach ($languages
+    function languageModal() {
+        var importSelect;
+        (new bootstrap.Modal(document.getElementById("languageModal"))).toggle()
+        importSelect = document.querySelector("#languageModal select");
 
-                                    as $code => $name) { ?>
-                                <option value="<?php echo $code; ?>"><?php echo $name; ?></option>
-                                    <?php } ?>
-                            </select>
-                        <?php } else { ?>
-                            <p><?php _e('No official languages available.'); ?></p>
-                        <?php } ?>
-                    </td>
-                </tr>
-            </table>
-        </div>
-        <div class="form-actions">
-            <div class="wrapper">
-                <a class="btn" href="javascript:void(0);" onclick="$('#dialog-add-official').dialog('close');"><?php _e('Cancel');
-                ?></a>
-                <button type="submit" class="btn btn-submit"><?php echo osc_esc_html(__('Import')); ?></button>
-            </div>
-        </div>
-    </div>
-</form>
+        if (languageOptionsSet === false) {
+            fetch(localeImportUrl).then(response => {
+                if (response.ok) {
+                    return response.json();
+                }
+            }).then(locales => {
+                var localeCodes;
+                var opt;
+                // add to select options
+                locales.forEach(locale => {
+                    let isUpdated
+                    // check if locale is not already in the existing languages list, if it has same or higher version, don't add it
+                    if (aExistingLanguages[locale.locale_code] === undefined || (isUpdated = compareVersion(locale.version, aExistingLanguages[locale.locale_code].s_version) > 0)) {
+                        opt = document.createElement('option');
+                        opt.value = locale.locale_code;
+                        opt.innerHTML = locale.name;
+                        if(isUpdated) {
+                            opt.innerHTML += ' (<?php _e('Updated');?>)';
+                        }
+                        importSelect.appendChild(opt);
+                    }
+                });
+                languageOptionsSet = true;
+            }).catch(error => {
+                document.querySelector("#languageModal .text-danger").textContent = '<?php osc_esc_js(__('No official languages available.')); ?> ' + error;
+            });
+        }
+        return false;
+    }
 
+    function delete_dialog(id) {
+        var deleteModal = document.getElementById("deleteModal")
+        deleteModal.querySelector("input[name='id[]']").value = id;
+        (new bootstrap.Modal(document.getElementById("deleteModal"))).toggle()
+        return false;
+    }
+</script>
 <?php osc_current_admin_theme_path('parts/footer.php'); ?>

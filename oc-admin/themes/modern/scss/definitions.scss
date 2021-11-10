@@ -1,0 +1,78 @@
+/* Colors */
+/* $STANDARD */
+$color-blue: $primary;
+$color-blue-hover: shade-color($blue, 10%);
+$color-blue-border: shade-color($blue, 20%);
+$color-orange: $orange;
+$color-orange-hover: shade-color($orange, 10%);
+$color-orange-border: shade-color($orange, 20%);
+$color-red: $danger;
+$color-red-hover: shade-color($red, 10%);
+$color-red-border: shade-color($red, 20%);
+$color-white: $white;
+$color-black: $black;
+$color-error-bg: $color-red;
+$color-error-border: $color-red-border;
+$color-error-text: $color-white;
+$color-submit-bg: $success;
+$color-submit-border: shade-color($success, 10%);
+$color-submit-text: $color-white;
+$color-green: $green;
+$color-green-dark: $green-900;
+$color-green-hover: $green-600;
+/* $ALERTS */
+$error-bg: #F2DEDE;
+$error-text: #B94A48;
+$error-border: #EED3D7;
+
+$warning-bg: #FCF8E3;
+$warning-border: #FBEED5;
+$warning-text: #C09853;
+
+
+$success-bg: #DFF0D8;
+$success-text: #468847;
+$success-border: #D6E9C6;
+
+$info-bg: #D9EDF7;
+$info-border: #BCE8F1;
+$info-text: #3A87AD;
+
+/* $GRAY */
+$color-gray-hardblack: $gray-900;
+$color-gray-black: $gray-800;
+$color-gray-dim: $gray-700;
+$color-gray-ash: $gray-500;
+$color-gray-soft: $gray-200;
+$color-gray-light: $gray-100;
+
+/* $MARKET */
+$softgray-color: $color-gray-soft;
+$title-color: $color-gray-hardblack;
+$border-color: $color-gray-ash;
+
+$callout-colors: (
+        "primary": $primary,
+        "secondary": $secondary,
+        "success": $success,
+        "ok": $success,
+        "info": $info,
+        "warning": $warning,
+        "danger": $danger,
+        "error" : $danger,
+        "light": $light,
+        "dark": $dark
+) !default;
+$table-status: (
+        "active":$blue-500,
+        "blocked":$red-500,
+        "expired": $gray-200,
+        "inactive":$gray-500,
+        "premium":$yellow-400,
+        "spam": $gray-800,
+);
+$plugin-status:(
+        "active":$success,
+        "disabled":$warning,
+        "uninstalled":$danger,
+);

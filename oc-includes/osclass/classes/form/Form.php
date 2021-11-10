@@ -27,11 +27,19 @@
  *
  */
 
+use mindstellar\form\base\FormInputs;
+
 /**
  * Class Form
+ * For compatibility
+ * Use \mindstellar\form\base\FormInputs or \mindstellar\form\base\FormBuilder instead
  */
-class Form
+class Form extends FormInputs
 {
+    protected $textClass = 'form-control form-control-sm';
+    protected $selectClass = 'form-select form-select-sm';
+    protected $passwordClass = 'form-control form-control-sm';
+
     /**
      * @param $name
      * @param $items
@@ -42,19 +50,18 @@ class Form
      */
     protected static function generic_select($name, $items, $fld_key, $fld_name, $default_item, $id)
     {
-        $name = osc_esc_html($name);
-        echo '<select name="' . $name . '" id="' . preg_replace('|([^_a-zA-Z0-9-]+)|', '', $name)
-            . '">';
-        if (isset($default_item)) {
-            echo '<option value="">' . $default_item . '</option>';
-        }
-        foreach ($items as $i) {
-            if (isset($fld_key) && isset($fld_name)) {
-                echo '<option value="' . osc_esc_html($i[$fld_key]) . '"' . (($id == $i[$fld_key])
-                        ? ' selected="selected"' : '') . '>' . $i[$fld_name] . '</option>';
+        $newItems = [];
+        foreach ($items as $k => $item) {
+            if (isset($fld_key, $fld_name)) {
+                $newItems[$item[$fld_key]] = $item[$fld_name];
+                unset($items[$k]);
             }
         }
-        echo '</select>';
+        $attributes['id']             = preg_replace('|([^_a-zA-Z0-9-]+)|', '', $name);
+        $options['defaultValue']      = $id;
+        $options['selectPlaceholder'] = $default_item;
+        $options['selectOptions'] = $newItems;
+        echo (new self())->select($name, $id, $attributes, $options);
     }
 
     /**
@@ -71,19 +78,19 @@ class Form
         $readOnly = false,
         $autocomplete = true
     ) {
-        $name = osc_esc_html($name);
-        echo '<input id="' . preg_replace('|([^_a-zA-Z0-9-]+)|', '', $name) . '" type="text" name="'
-            . $name . '" value="' . osc_esc_html(htmlentities($value, ENT_COMPAT, 'UTF-8')) . '"';
+        $attributes['id'] = preg_replace('|([^_a-zA-Z0-9-]+)|', '', $name);
         if (isset($maxLength)) {
-            echo ' maxlength="' . osc_esc_html($maxLength) . '"';
-        }
-        if (!$autocomplete) {
-            echo ' autocomplete="off"';
+            $attributes['maxlength'] = $maxLength;
         }
         if ($readOnly) {
-            echo ' disabled="disabled" readonly="readonly"';
+            $attributes['readonly'] = 'readonly';
+            $attributes['disabled'] = 'disabled';
         }
-        echo ' />';
+
+        if (!$autocomplete) {
+            $attributes['autocomplete'] = 'off';
+        }
+        echo (new self())->text($name, $value, $attributes);
     }
 
     /**
@@ -94,20 +101,15 @@ class Form
      */
     protected static function generic_password($name, $value, $maxLength = null, $readOnly = false)
     {
-        $name = osc_esc_html($name);
-        echo '<input id="' . preg_replace('|([^_a-zA-Z0-9-]+)|', '', $name)
-            . '" type="password" name="' . $name . '" value="' . osc_esc_html(htmlentities(
-                $value,
-                ENT_COMPAT,
-                'UTF-8'
-            )) . '"';
+        $attributes['id'] = preg_replace('|([^_a-zA-Z0-9-]+)|', '', $name);
         if (isset($maxLength)) {
-            echo ' maxlength="' . osc_esc_html($maxLength) . '"';
+            $attributes['maxlength'] = $maxLength;
         }
         if ($readOnly) {
-            echo ' disabled="disabled" readonly="readonly"';
+            $attributes['readonly'] = 'readonly';
+            $attributes['disabled'] = 'disabled';
         }
-        echo ' autocomplete="off" />';
+        echo (new self())->password($name, $value, $attributes);
     }
 
     /**
@@ -116,13 +118,8 @@ class Form
      */
     protected static function generic_input_hidden($name, $value)
     {
-        $name = osc_esc_html($name);
-        echo '<input id="' . preg_replace('|([^_a-zA-Z0-9-]+)|', '', $name)
-            . '" type="hidden" name="' . $name . '" value="' . osc_esc_html(htmlentities(
-                $value,
-                ENT_COMPAT,
-                'UTF-8'
-            )) . '" />';
+        $attributes['id'] = preg_replace('|([^_a-zA-Z0-9-]+)|', '', $name);
+        echo (new self())->hidden($name, $value, $attributes);
     }
 
     /**
@@ -132,17 +129,10 @@ class Form
      */
     protected static function generic_input_checkbox($name, $value, $checked = false)
     {
-        $name = osc_esc_html($name);
-        echo '<input id="' . preg_replace('|([^_a-zA-Z0-9-]+)|', '', $name)
-            . '" type="checkbox" name="' . $name . '" value="' . osc_esc_html(htmlentities(
-                $value,
-                ENT_COMPAT,
-                'UTF-8'
-            )) . '"';
-        if ($checked) {
-            echo ' checked="checked"';
-        }
-        echo ' />';
+        $attributes['id']           = preg_replace('|([^_a-zA-Z0-9-]+)|', '', $name);
+        $attributes['checked'] = $checked;
+        echo (new self())->checkbox($name, $value, $attributes);
+
     }
 
     /**
@@ -151,8 +141,7 @@ class Form
      */
     protected static function generic_textarea($name, $value)
     {
-        $name = osc_esc_html($name);
-        echo '<textarea id="' . preg_replace('|([^_a-zA-Z0-9-]+)|', '', $name) . '" name="' . $name
-            . '" rows="10">' . $value . '</textarea>';
+        $attributes['id'] = preg_replace('|([^_a-zA-Z0-9-]+)|', '', $name);
+        echo (new self())->textarea($name, $value, $attributes);
     }
 }

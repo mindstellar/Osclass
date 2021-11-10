@@ -427,7 +427,7 @@ class CAdminSettingsLocations extends AdminSecBaseModel
                         $country = Country::newInstance()->findByCode($region['fk_c_country_code']);
 
                         $name = $newCity;
-                        $slug = Params::getParam('e_country_slug');
+                        $slug = Params::getParam('e_city_slug');
                         if ($slug == '') {
                             $slug     = osc_sanitizeString($name);
                             $slug_tmp = $slug;

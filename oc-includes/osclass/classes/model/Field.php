@@ -47,6 +47,12 @@ class Field extends DAO
     private static $instance;
 
     /**
+     * Current locale code
+     *
+     */
+    public $currentLocaleCode;
+
+    /**
      * Set data related to t_meta_fields table
      */
     public function __construct()
@@ -54,7 +60,12 @@ class Field extends DAO
         parent::__construct();
         $this->setTableName('t_meta_fields');
         $this->setPrimaryKey('pk_i_id');
-        $this->setFields(array('pk_i_id', 's_name', 'e_type', 'b_required', 'b_searchable', 's_slug', 's_options'));
+        $this->setFields(array('pk_i_id', 's_name', 'e_type', 'b_required', 'b_searchable', 's_slug', 's_options', 's_meta'));
+        if (defined('OC_ADMIN') && OC_ADMIN) {
+            $this->currentLocaleCode = osc_current_admin_locale();
+        } else {
+            $this->currentLocaleCode = osc_current_user_locale();
+        }
     }
 
     /**
@@ -96,7 +107,37 @@ class Field extends DAO
             return array();
         }
 
-        return $result->row();
+        $field = $result->row();
+
+        return $this->extendField($field);
+    }
+
+    /**
+     * Extend s_meta json column to field array
+     *
+     * @param array $field
+     *
+     * @return array
+     */
+    private function extendField($field)
+    {
+        // if s_meta json column is not empty merge it with $field
+        if (!empty($field['s_meta'])) {
+            $aMeta = json_decode($field['s_meta'], true);
+            if (is_array($aMeta)) {
+                $field = array_merge($field, $aMeta);
+            }
+        }
+
+        // check if $field['locale] is set and if it's not empty
+        if (isset($field['locale'][$this->currentLocaleCode]['s_name']) && !empty($field['locale'][$this->currentLocaleCode]['s_name'])) {
+            $field['s_name'] = $field['locale'][$this->currentLocaleCode]['s_name'];
+        } else {
+            // hack to avoid problems with old data
+            $field['locale'][$this->currentLocaleCode]['s_name'] = $field['s_name'];
+        }
+
+        return $field;
     }
 
     /**
@@ -115,6 +156,32 @@ class Field extends DAO
         $this->dao->delete(sprintf('%st_meta_categories', DB_TABLE_PREFIX), array('fk_i_field_id' => $id));
 
         return $this->dao->delete($this->getTableName(), array('pk_i_id' => $id));
+    }
+
+    /**
+     * Get all the rows from the table $tableName
+     *
+     * @access public
+     * @return array
+     * @since  unknown
+     */
+    public function listAll()
+    {
+        $this->dao->select($this->getFields());
+        $this->dao->from($this->getTableName());
+        $result = $this->dao->get();
+
+        if ($result == false) {
+            return array();
+        }
+
+        $fields         = $result->result();
+        $extendedFields = array();
+        foreach ($fields as $field) {
+            $extendedFields[] = $this->extendField($field, $this->currentLocaleCode);
+        }
+
+        return $extendedFields;
     }
 
     /**
@@ -140,7 +207,13 @@ class Field extends DAO
             return array();
         }
 
-        return $result->result();
+        $fields         = $result->result();
+        $extendedFields = [];
+        foreach ($fields as $field) {
+            $extendedFields[] = $this->extendField($field, $this->currentLocaleCode);
+        }
+
+        return $extendedFields;
     }
 
     /**
@@ -215,21 +288,62 @@ class Field extends DAO
 
         $result =
             $this->dao->query(sprintf(
-                'SELECT query.*, im.s_value as s_value, im.fk_i_item_id FROM (SELECT mf.* FROM %st_meta_fields mf, %st_meta_categories mc WHERE mc.fk_i_category_id = %d AND mf.pk_i_id = mc.fk_i_field_id) as query LEFT JOIN %st_item_meta im ON im.fk_i_field_id = query.pk_i_id AND im.fk_i_item_id = %d group by pk_i_id',
-                DB_TABLE_PREFIX,
-                DB_TABLE_PREFIX,
-                $catId,
-                DB_TABLE_PREFIX,
-                $itemId
-            ));
+                                  'SELECT query.*, im.s_value as s_value, im.fk_i_item_id FROM (SELECT mf.* FROM %st_meta_fields mf, %st_meta_categories mc WHERE mc.fk_i_category_id = %d AND mf.pk_i_id = mc.fk_i_field_id) as query LEFT JOIN %st_item_meta im ON im.fk_i_field_id = query.pk_i_id AND im.fk_i_item_id = %d group by pk_i_id',
+                                  DB_TABLE_PREFIX,
+                                  DB_TABLE_PREFIX,
+                                  $catId,
+                                  DB_TABLE_PREFIX,
+                                  $itemId
+                              ));
 
         if ($result == false) {
             return array();
         }
 
-        return $result->result();
+        $fields = $result->result();
+        // extend fields
+        $extendedFields = array();
+        foreach ($fields as $field) {
+            $extendedFields[] = $this->extendField($field);
+        }
+
+        return $extendedFields;
     }
 
+    /**
+     * Find a field by item id with matching item category
+     * @param $itemId
+     * @return array
+     */
+    public function findByItem($itemId)
+    {
+        if (!is_numeric($itemId)) {
+            return array();
+        }
+        $this->dao->select('mf.pk_i_id as pk_i_id, im.s_value as s_value, mf.s_name as s_name, mf.e_type as e_type, im.s_multi as s_multi, mf.s_slug as s_slug, mf.s_meta as s_meta');
+        $this->dao->from(sprintf('%st_item i', DB_TABLE_PREFIX));
+        $this->dao->join(sprintf('%st_item_meta im', DB_TABLE_PREFIX), 'i.pk_i_id = im.fk_i_item_id', 'LEFT');
+        $this->dao->join(sprintf('%st_meta_fields mf', DB_TABLE_PREFIX), 'mf.pk_i_id = im.fk_i_field_id', 'LEFT');
+        $this->dao->join(sprintf('%st_meta_categories mc', DB_TABLE_PREFIX), 'i.fk_i_category_id = mc.fk_i_category_id', 'LEFT');
+        $this->dao->where('mf.pk_i_id = mc.fk_i_field_id');
+        $this->dao->where('im.fk_i_item_id = ' . $itemId);
+
+        $result = $this->dao->get();
+
+        if ($result == false) {
+            return array();
+        }
+
+        $fields = $result->result();
+        // extend fields
+        $extendedFields = array();
+        foreach ($fields as $field) {
+            $extendedFields[] = $this->extendField($field);
+        }
+
+        return $extendedFields;
+    }
+    
     /**
      * Find a field by its name
      *
@@ -252,7 +366,9 @@ class Field extends DAO
             return array();
         }
 
-        return $result->row();
+        $field = $result->row();
+
+        return $this->extendField($field);
     }
 
     /**
@@ -391,8 +507,9 @@ class Field extends DAO
         if ($result == false) {
             return array();
         }
+        $field = $result->row();
 
-        return $result->row();
+        return $this->extendField($field);
     }
 
     /**
@@ -446,9 +563,9 @@ class Field extends DAO
      *
      * @access public
      *
-     * @param int    $itemId
-     * @param int    $field
-     * @param string $value
+     * @param int          $itemId
+     * @param int          $field
+     * @param string|array $value
      *
      * @return bool|\DBRecordsetClass false on fail, int of num. of affected rows
      * @since  unknown
@@ -468,6 +585,77 @@ class Field extends DAO
                 array('fk_i_item_id' => $itemId, 'fk_i_field_id' => $field, 's_value' => $value)
             );
         }
+    }
+
+    /**
+     * Update JSON fieldName in s_meta json column
+     *
+     * @param int   $metaId
+     * @param int   $fieldName
+     * @param mixed $fieldValue
+     *
+     * @return bool
+     */
+    public function updateJsonMeta($metaId, $fieldName, $fieldValue)
+    {
+        $this->dao->select('s_meta');
+        $this->dao->from($this->getTableName());
+        $this->dao->where('pk_i_id', $metaId);
+        $result = $this->dao->get();
+
+        if ($result == false) {
+            return false;
+        }
+
+        $meta = $result->row();
+        $meta = json_decode($meta['s_meta'], true);
+        // if $fieldValue is '', null
+        if ($fieldValue === '' || $fieldValue === null) {
+            unset($meta[$fieldName]);
+        } else {
+            $meta[$fieldName] = $fieldValue;
+        }
+        $meta = json_encode($meta);
+
+        return $this->dao->update($this->getTableName(), array('s_meta' => $meta), array('pk_i_id' => $metaId));
+    }
+
+    /**
+     * Get JSON fieldValue from s_meta json column
+     *
+     * @param int    $metaId
+     * @param string $fieldName
+     * @param array  $field
+     *
+     * @return mixed
+     */
+    public function getJsonMetaValue($fieldName, $field = null, $metaId = null)
+    {
+        // $field is not null
+        if ($field !== null) {
+            if (isset($field['s_meta']) && $field['s_meta'] !== '') {
+                $meta = json_decode($field['s_meta'], true);
+
+                return $meta[$fieldName] ?? false;
+            }
+        } else {
+            if ($metaId === null) {
+                return false;
+            }
+            $this->dao->select('s_meta');
+            $this->dao->from($this->getTableName());
+            $this->dao->where('pk_i_id', $metaId);
+            $result = $this->dao->get();
+            if ($result == false) {
+                return false;
+            }
+            $meta = $result->row();
+            $meta = json_decode($meta['s_meta'], true);
+
+            return $meta[$fieldName] ?? false;
+        }
+
+        return false;
     }
 }
 

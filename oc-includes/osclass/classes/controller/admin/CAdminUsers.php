@@ -115,23 +115,27 @@ class CAdminUsers extends AdminSecBaseModel
 
                 $csrf_token = osc_csrf_token_url();
                 if ($aUser['b_active']) {
-                    $actions[] = '<a class="btn float-left" href="' . osc_admin_base_url(true)
+                    $actions[] = '<a class="btn btn-outline-danger" href="' . osc_admin_base_url(true)
                         . '?page=users&action=deactivate&id[]=' . $aUser['pk_i_id'] . '&' . $csrf_token
                         . '&value=INACTIVE">' . __('Deactivate') . '</a>';
                 } else {
-                    $actions[] = '<a class="btn btn-red float-left" href="' . osc_admin_base_url(true)
+                    $actions[] = '<a class="btn btn-danger" href="' . osc_admin_base_url(true)
                         . '?page=users&action=activate&id[]=' . $aUser['pk_i_id'] . '&' . $csrf_token
                         . '&value=ACTIVE">' . __('Activate') . '</a>';
                 }
                 if ($aUser['b_enabled']) {
-                    $actions[] = '<a class="btn float-left" href="' . osc_admin_base_url(true)
+                    $actions[] = '<a class="btn btn-outline-danger" href="' . osc_admin_base_url(true)
                         . '?page=users&action=disable&id[]=' . $aUser['pk_i_id'] . '&' . $csrf_token
                         . '&value=DISABLE">' . __('Block') . '</a>';
                 } else {
-                    $actions[] = '<a class="btn btn-red float-left" href="' . osc_admin_base_url(true)
+                    $actions[] = '<a class="btn btn-danger" href="' . osc_admin_base_url(true)
                         . '?page=users&action=enable&id[]=' . $aUser['pk_i_id'] . '&' . $csrf_token . '&value=ENABLE">'
                         . __('Unblock') . '</a>';
                 }
+                $actions[] = '<a class="btn btn-outline-secondary" href="' . osc_admin_base_url(true)
+                    . '?page=users&action=user_login&id=' . $aUser['pk_i_id'] . '&' . $csrf_token . '" target="_blank">'
+                    . __('Login') . '</a>';
+
                 $aLocale = $aUser['locale'];
                 foreach ($aLocale as $locale => $aInfo) {
                     $aUser['locale'][$locale]['s_info'] =
@@ -644,6 +648,24 @@ class CAdminUsers extends AdminSecBaseModel
 
                 osc_add_flash_ok_message($msg, 'admin');
                 $this->redirectTo(osc_admin_base_url(true) . '?page=users&action=ban');
+                break;
+            case ('user_login'):
+                osc_csrf_check();
+                $aUser = $this->userManager->findByPrimaryKey(Params::getParam('id'));
+                if (!count($aUser)) {
+                    osc_add_flash_error_message(_m("The user doesn't exist"), 'admin');
+                    $this->redirectTo(osc_admin_base_url(true) . '?page=users');
+                }
+
+                Session::newInstance()->_set('userId', $aUser['pk_i_id']);
+                Session::newInstance()->_set('userName', $aUser['s_name']);
+                Session::newInstance()->_set('userEmail', $aUser['s_email']);
+                $phone = $aUser['s_phone_mobile'] ?: $aUser['s_phone_land'];
+                Session::newInstance()->_set('userPhone', $phone);
+
+                osc_run_hook('after_login', $aUser, osc_user_dashboard_url());
+                osc_add_flash_ok_message(sprintf(_m('Logged in as %s successfully'), $aUser['s_name']));
+                $this->redirectTo(osc_user_dashboard_url());
                 break;
             default:
                 if (Params::getParam('action') != '') {

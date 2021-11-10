@@ -93,6 +93,49 @@ class LocationsTmp extends DAO
     }
 
     /**
+     * Populate Cities from City Table
+     * @return bool
+     */
+    public function populateCities()
+    : bool
+    {
+        // INSERT IGNORE ...SELECT pk_i_id column from t_city table to t_locations_tmp table
+        $cityTableName = City::newInstance()->getTableName();
+        $rs = $this->dao->query(sprintf("INSERT IGNORE INTO %s (id_location, e_type) SELECT pk_i_id, 'CITY' FROM %s", $this->getTableName(), $cityTableName));
+
+        return !($rs === false);
+    }
+
+    /**
+     * populate Regions from Region Table
+     * @return bool
+     */
+    public function populateRegions()
+    : bool
+    {
+        // INSERT IGNORE ...SELECT pk_i_id column from t_region table to t_locations_tmp table
+        $regionTableName = Region::newInstance()->getTableName();
+        $rs = $this->dao->query(sprintf("INSERT IGNORE INTO %s (id_location, e_type) SELECT pk_i_id, 'REGION' FROM %s", $this->getTableName(), $regionTableName));
+
+        return !($rs === false);
+    }
+
+    /**
+     * populate Countries from Country Table
+     * @return bool
+     */
+    public function populateCountries()
+    : bool
+    {
+        // INSERT IGNORE ...SELECT pk_c_code column from t_country table to t_locations_tmp table
+        $countryTableName = Country::newInstance()->getTableName();
+        $rs = $this->dao->query(sprintf("INSERT IGNORE INTO %s (id_location, e_type) SELECT pk_c_code, 'COUNTRY' FROM %s", $this->getTableName(), $countryTableName));
+
+        return !($rs === false);
+    }
+
+
+    /**
      * @param array $where
      *
      * @return bool|int
@@ -115,6 +158,26 @@ class LocationsTmp extends DAO
                 "INSERT INTO %s (id_location, e_type) VALUES (%s, '%s')",
                 $this->getTableName(),
                 implode(",'" . $type . "'),(", $ids),
+                $type
+            ));
+        }
+
+        return false;
+    }
+
+    /**
+     * Batch Delete Locations
+     * @param $ids
+     * @param $type
+     * @return bool|\DBRecordsetClass
+     */
+    public function batchDelete($ids, $type)
+    {
+        if (!empty($ids)) {
+            return $this->dao->query(sprintf(
+                "DELETE FROM %s WHERE id_location IN (%s) AND e_type = '%s'",
+                $this->getTableName(),
+                implode(",", $ids),
                 $type
             ));
         }

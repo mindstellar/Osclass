@@ -27,17 +27,50 @@
  *
  */
 
+use mindstellar\utility\Escape;
+use mindstellar\utility\Sanitize;
+
 /**
  * Class FieldForm
  */
 class FieldForm extends Form
 {
+    private static $instance;
+    /**
+     * Enabled admin locale
+     * @var array
+     */
+    private $adminLocales;
+    /**
+     * Current admin locale
+     * @var string
+     */
+    private $activeAdminLocale;
+    /**
+     * Enabled user locales
+     * @var array
+     */
+    private $userLocales;
+    /**
+     * Current User Locale
+     * @var string
+     */
+    private $activeUserLocale;
+
+    public function __construct(Escape $escape = null, Sanitize $sanitize = null)
+    {
+        $this->adminLocales = osc_get_admin_locales();
+        $this->activeAdminLocale = osc_current_admin_locale();
+
+        $this->userLocales = osc_get_locales();
+        $this->activeUserLocale = osc_current_user_locale();
+        parent::__construct($escape, $sanitize);
+    }
 
     public static function i18n_datePicker()
     {
         ?>
         <script>
-
             $.datepicker.regional['custom'] = { // Default regional settings
                 closeText: '<?php echo osc_esc_js(__('Done')); ?>', // Display text for close link
                 prevText: '<?php echo osc_esc_js(__('Prev')); ?>', // Display text for previous month link
@@ -115,39 +148,48 @@ class FieldForm extends Form
     public static function primary_input_hidden($field = null)
     {
         if (isset($field['pk_i_id'])) {
-            parent::generic_input_hidden('id', $field['pk_i_id']);
+            echo self::getInstance()->hidden('id', $field['pk_i_id']);
         }
     }
 
     /**
-     * @param null $field
+     * This returns the instance of FieldForm class or creates a new one
+     * for private use.
      *
-     * @return bool
+     * @return \FieldForm
      */
-    public static function name_input_text($field = null)
+    private static function getInstance()
     {
-        parent::generic_input_text(
-            's_name',
-            (isset($field) && isset($field['s_name'])) ? $field['s_name'] : ''
-        );
+        if (!self::$instance) {
+            return self::$instance = new self();
+        }
 
-        return true;
+        return self::$instance;
     }
 
     /**
      * @param null $field
      *
-     * @return bool
+     */
+    public static function name_input_text($field = null)
+    {
+        $name                       = 's_name';
+        $value                      = $field['s_name'] ?? '';
+        $attributes['id']           = $name;
+        $attributes['autocomplete'] = 'off';
+        echo self::getInstance()->text($name, $value, $attributes);
+    }
+
+    /**
+     * @param null $field
+     *
      */
     public static function options_input_text($field = null)
     {
-        parent::generic_input_text(
-            's_options',
-            (isset($field) && isset($field['s_options'])) ? html_entity_decode($field['s_options'])
-                : ''
-        );
-
-        return true;
+        $name             = 's_options';
+        $value            = (isset($field['s_options'])) ? html_entity_decode($field['s_options']) : '';
+        $attributes['id'] = $name;
+        echo self::getInstance()->text($name, $value, $attributes);
     }
 
     /**
@@ -155,11 +197,12 @@ class FieldForm extends Form
      */
     public static function required_checkbox($field = null)
     {
-        parent::generic_input_checkbox(
-            'field_required',
-            1,
-            ($field != null && isset($field['b_required']) && $field['b_required'] == 1)
-        );
+        $name             = 'field_required';
+        $attributes['id'] = $name;
+        if (($field !== null && isset($field['b_required']) && $field['b_required'])) {
+            $attributes['checked'] = true;
+        }
+        echo self::getInstance()->checkbox($name, 1, $attributes);
     }
 
     /**
@@ -167,60 +210,58 @@ class FieldForm extends Form
      */
     public static function searchable_checkbox($field = null)
     {
-        parent::generic_input_checkbox(
-            'field_searchable',
-            1,
-            ($field != null && isset($field['b_searchable']) && $field['b_searchable'] == 1)
-        );
+        $name             = 'field_searchable';
+        $attributes['id'] = $name;
+        if ($field !== null && isset($field['b_searchable']) && $field['b_searchable']) {
+            $attributes['checked'] = true;
+        }
+        echo self::getInstance()->checkbox($name, 1, $attributes);
+    }
+
+    /**
+     * @param null $field
+     */
+    public static function newtab_checkbox($field = null)
+    {
+        $name             = 'b_new_tab';
+        $attributes['id'] = $name;
+
+        if (!empty($field)) {
+            $json_decoded_field = json_decode($field['s_meta'], true);
+        }
+        if (isset($json_decoded_field['b_new_tab']) && $json_decoded_field['b_new_tab']) {
+            $attributes['checked'] = true;
+        }
+
+        try {
+            echo self::getInstance()->checkbox($name, 1, $attributes);
+        } catch (Exception $e) {
+            trigger_error($e->getMessage());
+        }
     }
 
     /**
      * @param null $field
      *
-     * @return bool
      */
     public static function type_select($field = null)
     {
-        ?>
-        <select name="field_type" id="field_type">
-            <option value="TEXT" <?php if ($field['e_type'] === 'TEXT') {
-                echo 'selected="selected"';
-                                 } ?>><?php _e('TEXT'); ?></option>
-            <option value="TEXTAREA" <?php if ($field['e_type'] === 'TEXTAREA') {
-                echo 'selected="selected"';
-                                     } ?>><?php _e('TEXTAREA'); ?></option>
-            <option value="DROPDOWN" <?php if ($field['e_type'] === 'DROPDOWN') {
-                echo 'selected="selected"';
-                                     } ?>><?php _e('DROPDOWN'); ?></option>
-            <option value="RADIO" <?php if ($field['e_type'] === 'RADIO') {
-                echo 'selected="selected"';
-                                  } ?>><?php _e('RADIO'); ?></option>
-            <option value="CHECKBOX" <?php if ($field['e_type'] === 'CHECKBOX') {
-                echo 'selected="selected"';
-                                     } ?>><?php _e('CHECKBOX'); ?></option>
-            <option value="URL" <?php if ($field['e_type'] === 'URL') {
-                echo 'selected="selected"';
-                                } ?>><?php _e('URL'); ?></option>
-            <option value="DATE" <?php if ($field['e_type'] === 'DATE') {
-                echo 'selected="selected"';
-                                 } ?>><?php _e('DATE'); ?></option>
-            <option value="DATEINTERVAL" <?php if ($field['e_type'] === 'DATEINTERVAL') {
-                echo 'selected="selected"';
-                                         } ?>><?php _e('DATE INTERVAL'); ?></option>
-        </select>
-        <?php
-        return true;
+        $name                         = 'field_type';
+        $attributes['id']             = $name;
+        $options['selectPlaceholder'] = false;
+        $options['selectOptions']     = 'TEXT,TEXTAREA,DROPDOWN,RADIO,CHECKBOX,URL,DATE,DATEINTERVAL';
+        echo self::getInstance()->select($name, $field['e_type'] ?? '', $attributes, $options);
     }
 
     /**
      * @param null $catId
      *
-     * @return bool|false
+     * @return bool|false|void
      */
     public static function meta_fields_search($catId = null)
     {
         // we received the categoryID
-        if ($catId == null) {
+        if ($catId === null) {
             return false;
         }
 
@@ -229,7 +270,7 @@ class FieldForm extends Form
         foreach ($catId as $id) {
             $aTemp = Field::newInstance()->findByCategory($id);
             foreach ($aTemp as $field) {
-                if ($field['b_searchable'] == 1) {
+                if ($field['b_searchable']) {
                     $aCustomFields[$field['pk_i_id']] = $field;
                 }
             }
@@ -258,10 +299,10 @@ class FieldForm extends Form
      * @param null $field
      * @param bool $search
      */
-    public static function meta($field = null, $search = false)
+    public static function meta($field = null, bool $search = false)
     {
 
-        if ($field != null) {
+        if ($field !== null) {
             // date interval
             if ($field['e_type'] === 'DATEINTERVAL') {
                 $field['s_value']         = array();
@@ -270,7 +311,7 @@ class FieldForm extends Form
 
                 if (!$search) {
                     $aInterval = Field::newInstance()
-                        ->getDateIntervalByPrimaryKey($field['fk_i_item_id'], $field['pk_i_id']);
+                                      ->getDateIntervalByPrimaryKey($field['fk_i_item_id'], $field['pk_i_id']);
 
                     if (is_array($aInterval) && !empty($aInterval)) {
                         $temp['from']     = @$aInterval['from'];
@@ -287,162 +328,133 @@ class FieldForm extends Form
             // end date interval
             if (Session::newInstance()->_getForm('meta_' . $field['pk_i_id']) != '') {
                 $field['s_value'] = Session::newInstance()->_getForm('meta_' . $field['pk_i_id']);
-            } elseif (!isset($field['s_value']) || $field['s_value'] == '') {
+            } elseif (!isset($field['s_value']) || !$field['s_value']) {
                 $s_value          = Params::getParam('meta');
                 $field['s_value'] = '';
                 if (isset($s_value[$field['pk_i_id']])) {
                     $field['s_value'] = $s_value[$field['pk_i_id']];
                 }
+                unset($s_value);
             }
+            //switch using $field['e_type']
+            $name             = 'meta[' . $field['pk_i_id'] . ']';
+            $id               = 'meta_' . $field['s_slug'];
+            $label            = $field['s_name'];
+            $value            = $field['s_value'];
+            $attributes['id'] = $id;
+            $options = [];
 
-            if ($field['e_type'] === 'TEXTAREA') {
-                if ($search) {
-                    echo '<h6>' . $field['s_name'] . '</h6>';
-                    echo '<input id="meta_' . $field['s_slug'] . '" type="text" name="meta['
-                        . $field['pk_i_id'] . ']" value="' . osc_esc_html((isset($field)
-                            && isset($field['s_value'])) ? $field['s_value'] : '') . '" />';
-                } else {
-                    $field_textarea_value = isset($field['s_value']) ? $field['s_value'] : '';
-                    $field_textarea_value =
-                        osc_apply_filter(
+            switch ($field['e_type']) {
+                case 'TEXTAREA':
+                    if ($search) {
+                        $options['sanitize'] = 'html';
+
+                        echo '<h6>' . $label . '</h6>';
+                        echo self::getInstance()->text($name, $value, $attributes, $options);
+                    } else {
+                        $value              = osc_apply_filter(
                             'osc_item_edit_meta_textarea_value_filter',
-                            $field_textarea_value,
+                            $value,
                             $field
                         );
-                    echo '<label for="meta_' . $field['s_slug'] . '">' . $field['s_name']
-                        . ': </label>';
-                    echo '<textarea id="meta_' . $field['s_slug'] . '" name="meta['
-                        . $field['pk_i_id'] . ']" rows="10">' . ((isset($field)
-                            && isset($field_textarea_value)) ? $field_textarea_value : '')
-                        . '</textarea>';
-                }
-            } elseif ($field['e_type'] === 'DROPDOWN') {
-                if ($search) {
-                    echo '<h6>' . $field['s_name'] . '</h6>';
-                } else {
-                    echo '<label for="meta_' . $field['s_slug'] . '">' . $field['s_name']
-                        . ': </label>';
-                }
-                if (isset($field) && isset($field['s_options'])) {
-                    $options = explode(',', $field['s_options']);
-                    if (count($options) > 0) {
-                        echo '<select name="meta[' . $field['pk_i_id'] . ']" id="meta_'
-                            . $field['s_slug'] . '">';
-                        if ($search) {
-                            echo '<option value="">' . __('Select', 'osclass') . ' '
-                                . $field['s_name'] . '</option>';
-                        }
-                        foreach ($options as $option) {
-                            echo '<option value="' . osc_esc_html($option) . '" '
-                                . ($field['s_value'] == $option ? 'selected="selected"' : '') . '>'
-                                . $option . '</option>';
-                        }
-                        echo '</select>';
+                        $attributes['rows'] = 10;
+                        $options['label']   = $label;
+                        echo self::getInstance()->textarea($name, $value, $attributes);
                     }
-                }
-            } elseif ($field['e_type'] === 'RADIO') {
-                // radio at search page, becomes dropdown with radio options
-                if ($search) {
-                    echo '<h6>' . $field['s_name'] . '</h6>';
-                    if (isset($field) && isset($field['s_options'])) {
-                        $options = explode(',', $field['s_options']);
-                        if (count($options) > 0) {
-                            foreach ($options as $key => $option) {
-                                echo '<label for="meta_' . $field['s_slug'] . '_' . $key
-                                    . '"><input type="radio" name="meta[' . $field['pk_i_id']
-                                    . ']" id="meta_' . $field['s_slug'] . '_' . $key . '" value="'
-                                    . osc_esc_html($option) . '"' . ($field['s_value'] == $option
-                                        ? ' checked="checked"' : '') . ' />' . $option
-                                    . '</label><br/>';
-                            }
-                        }
+                    break;
+                case 'DROPDOWN':
+                    if ($search) {
+                        echo '<h6>' . $label . '</h6>';
+                    } else {
+                        $options['label'] = $label;
                     }
-                } else {
-                    echo '<label for="meta_' . $field['s_slug'] . '">' . $field['s_name']
-                        . ': </label>';
-                    if (isset($field) && isset($field['s_options'])) {
-                        $options = explode(',', $field['s_options']);
-                        if (count($options) > 0) {
-                            echo '<ul>';
-                            foreach ($options as $key => $option) {
-                                echo '<li><input type="radio" name="meta[' . $field['pk_i_id']
-                                    . ']" id="meta_' . $field['s_slug'] . '_' . $key . '" value="'
-                                    . osc_esc_html($option) . '"' . ($field['s_value'] == $option
-                                        ? ' checked="checked"' : '') . ' /><label for="meta_'
-                                    . $field['s_slug'] . '_' . $key . '">' . $option
-                                    . '</label></li>';
-                            }
-                            echo '</ul>';
-                        }
-                    }
-                }
-            } elseif ($field['e_type'] === 'CHECKBOX') {
-                if (isset($field) && isset($field['s_options'])) {
-                    echo '<input type="checkbox" name="meta[' . $field['pk_i_id'] . ']" id="meta_'
-                        . $field['s_slug'] . '" value="1"' . ((isset($field)
-                            && isset($field['s_value'])
-                            && $field['s_value'] == 1) ? ' checked="checked"' : '') . ' />';
-                    echo '<label for="meta_' . $field['s_slug'] . '">' . $field['s_name']
-                        . ' </label>';
-                }
-            } elseif ($field['e_type'] === 'DATE') {
-                if ($search) {
-                    echo '<h6>' . $field['s_name'] . '</h6>';
-                } else {
-                    echo '<label for="meta_' . $field['s_slug'] . '">' . $field['s_name']
-                        . ': </label>';
-                }
-                // timestamp/1000 (javascript timestamp)
-                echo '<input type="hidden" id="meta_' . $field['s_slug'] . '" name="meta['
-                    . $field['pk_i_id'] . ']" value="" />';
-                echo '<input type="text" id="" class="meta_' . $field['s_slug']
-                    . ' cf_date" value="" />';
-                self::initDatePicker(
-                    'meta_' . $field['s_slug'],
-                    osc_date_format(),
-                    $field['s_value']
-                );
-            } elseif ($field['e_type'] === 'DATEINTERVAL') {
-                if ($search) {
-                    echo '<h6>' . $field['s_name'] . '</h6>';
-                } else {
-                    echo '<label for="meta_' . $field['s_slug'] . '">' . $field['s_name']
-                        . ': </label>';
-                }
 
-                echo __('from') . ' ';
-                echo '<input type="hidden" id="meta_' . $field['s_slug'] . '_from" name="meta['
-                    . $field['pk_i_id'] . '][from]" value="' . $field['s_value']['from'] . '" />';
-                echo '<input type="text" id="" class="meta_' . $field['s_slug']
-                    . '_from cf_date_interval" value="" />';
-                self::initDatePicker(
-                    'meta_' . $field['s_slug'] . '_from',
-                    osc_date_format(),
-                    $field['s_value']['from'],
-                    'from'
-                );
+                    if (isset($field['s_options'])) {
+                        $options['selectOptions']     = $field['s_options'];
+                        $options['selectPlaceholder'] = __('Select', 'osclass');
+                        echo self::getInstance()->select($name, $value, $attributes, $options);
+                    }
+                    break;
+                case 'RADIO':
+                    if ($search) {
+                        echo '<h6>' . $label . '</h6>';
+                    } else {
+                        $options['label'] = $label;
+                    }
+                    if (isset($field['s_options'])) {
+                        $options['radioOptions'] = $field['s_options'];
+                        echo self::getInstance()->radio($name, $value, $attributes, $options);
+                    }
+                    break;
+                case 'CHECKBOX':
+                    $options['divClass'] = 'form-check';
+                    $options['label']    = $label;
+                    if ($value) {
+                        $attributes['checked'] = true;
+                    }
+                    echo self::getInstance()->checkbox($name, 1, $attributes, $options);
+                    break;
+                case 'DATE':
+                    if ($search) {
+                        echo '<h6>' . $label . '</h6>';
+                    } else {
+                        $options['label'] = $label;
+                    }
+                    // add cf_date class to the input field
+                    $attributes['class'] = self::getInstance()->textClass . ' cf_date ' . $id;
+                    echo self::getInstance()->hidden($name, $value, ['id' => $id]);
+                    unset($attributes['id']);
+                    echo self::getInstance()->text('datepicker-placeholder', '', $attributes, $options);
+                    // timestamp/1000 (javascript timestamp)
+                    self::initDatePicker(
+                        'meta_' . $field['s_slug'],
+                        osc_date_format(),
+                        $field['s_value']
+                    );
+                    break;
+                case 'DATEINTERVAL':
+                    if ($search) {
+                        echo '<h6>' . $label . '</h6>';
+                    } else {
+                        // print label tag
+                        echo '<label for="meta_' . $field['s_slug'] . '_from">' . $label . '</label>';
+                    }
+                    // add cf_date_interval class to the input field
+                    $attributes['class'] = self::getInstance()->textClass . ' cf_date_interval ' . $id . '_from';
+                    echo self::getInstance()->hidden($name . '[from]', $value['from'], ['id' => $id . '_from']);
+                    echo '<div class="input-group input-group-sm">';
+                    echo '<span class="input-group-text">' . ucfirst(__('from')) . ' </span>';
+                    unset($attributes['id']);
+                    echo self::getInstance()->text('datepicker-placeholder-from', '', $attributes);
 
-                echo ' ' . __('to') . ' ';
-                echo '<input type="hidden" id="meta_' . $field['s_slug'] . '_to" name="meta['
-                    . $field['pk_i_id'] . '][to]" value="' . $field['s_value']['to'] . '" />';
-                echo '<input type="text" id="" class="meta_' . $field['s_slug']
-                    . '_to cf_date_interval" value="" />';
-                self::initDatePicker(
-                    'meta_' . $field['s_slug'] . '_to',
-                    osc_date_format(),
-                    $field['s_value']['to'],
-                    'to'
-                );
-            } else {
-                if ($search) {
-                    echo '<h6>' . $field['s_name'] . '</h6>';
-                } else {
-                    echo '<label for="meta_' . $field['s_slug'] . '">' . $field['s_name']
-                        . ': </label>';
-                }
-                echo '<input id="meta_' . $field['s_slug'] . '" type="text" name="meta['
-                    . $field['pk_i_id'] . ']" value="' . osc_esc_html((isset($field)
-                        && isset($field['s_value'])) ? $field['s_value'] : '') . '" />';
+                    echo '<span class="input-group-text">' . ucfirst(__('to')) . ' </span>';
+                    $attributes['class'] = self::getInstance()->textClass . ' cf_date_interval ' . $id . '_to';
+                    echo self::getInstance()->hidden($name . '[to]', $value['to'], ['id' => $id . '_to']);
+                    unset($attributes['id']);
+                    echo self::getInstance()->text('datepicker-placeholder-to', '', $attributes);
+                    echo '</div>';
+
+                    self::initDatePicker(
+                        'meta_' . $field['s_slug'] . '_from',
+                        osc_date_format(),
+                        $field['s_value']['from'],
+                        'from'
+                    );
+                    self::initDatePicker(
+                        'meta_' . $field['s_slug'] . '_to',
+                        osc_date_format(),
+                        $field['s_value']['to'],
+                        'to'
+                    );
+                    break;
+                default:
+                    if ($search) {
+                        echo '<h6>' . $label . '</h6>';
+                    } else {
+                        $options['label'] = $label;
+                    }
+                    echo self::getInstance()->text($name, $value, $attributes, $options);
+                    break;
             }
         }
     }
@@ -455,32 +467,39 @@ class FieldForm extends Form
      */
     public static function initDatePicker($id_field, $dateFormat, $value, $type = 'none')
     {
-
-        if ($value == '') {
+        if (!$value) {
             $value = 0;
-        }
-        $aux = <<<FB
-            <script>
-            $(document).ready(function(){
-                $('.$id_field').datepicker({
-                    onSelect: function() {
+        } ?>
+        <script type="text/javascript">
+            $(document).ready(function () {
+
+                var fieldIdentifier = '<?php echo $id_field; ?>';
+                var fieldValue = '<?php echo $value; ?>';
+                var dateFormat = '<?php echo $dateFormat; ?>';
+                var fieldType = '<?php echo $type; ?>';
+
+                var datePlaceholder = $('.' + fieldIdentifier);
+                var dateInput = $('#' + fieldIdentifier);
+                datePlaceholder.datepicker({
+                    onSelect: function () {
                         // format to unix timestamp
-                        var fecha = $(this).datepicker('getDate');
-                        if('$type'=='from') {
-                            fecha.setHours('0');
-                            fecha.setMinutes('0');
-                            fecha.setSeconds('0');
-                        } else if('$type'=='to') {
-                            fecha.setHours('23');
-                            fecha.setMinutes('59');
-                            fecha.setSeconds('59');
+                        var newDate;
+                        var currentDate = $(this).datepicker('getDate');
+                        if (fieldType === 'from') {
+                            currentDate.setHours(0);
+                            currentDate.setMinutes(0);
+                            currentDate.setSeconds(0);
+                        } else if (fieldType === 'to') {
+                            currentDate.setHours(23);
+                            currentDate.setMinutes(59);
+                            currentDate.setSeconds(59);
                         }
 
                         // new date format
-                        var new_date = date('$dateFormat', fecha.getTime()/1000 );
+                        newDate = date(dateFormat, currentDate.getTime() / 1000);
                         // hack - same dateformat as php date function
-                        $('.$id_field').prop('value', new_date);
-                        $('#$id_field').prop('value', fecha.getTime()/1000);
+                        datePlaceholder.prop('value', newDate);
+                        dateInput.prop('value', currentDate.getTime() / 1000);
                     },
                     inline: true,
                     navigationAsDateFormat: true,
@@ -488,21 +507,20 @@ class FieldForm extends Form
                 });
                 $.datepicker.setDefaults($.datepicker.regional['custom']);
 
-                if($value>0 && $value!='') {
+                if (fieldValue && fieldValue > 0) {
                     // hack - same dateformat as php date function
-                    $('.$id_field').prop('value', date('$dateFormat', $value))
-                    $('#$id_field').prop('value', '$value');
+                    datePlaceholder.prop('value', date(dateFormat, fieldValue));
+                    dateInput.prop('value', fieldValue);
                 }
 
-                $(".$id_field").change( function () {
-                    if($(".$id_field").prop('value') == '') {
-                        $('#$id_field').prop('value', '');
+                datePlaceholder.change(function () {
+                    if (datePlaceholder.prop('value')) {
+                        dateInput.prop('value', '');
                     }
                 });
-                });
-            </script>
-FB;
-        echo $aux;
+            });
+        </script>
+        <?php
     }
 
     /**
@@ -513,7 +531,7 @@ FB;
     {
         $fields = Field::newInstance()->findByCategoryItem($catId, $itemId);
         if (count($fields) > 0) {
-            echo '<div class="meta_list">';
+            echo '<div class="meta_list card-body">';
             foreach ($fields as $field) {
                 echo '<div class="meta">';
                 self::meta($field);
@@ -521,5 +539,83 @@ FB;
             }
             echo '</div>';
         }
+    }
+    /**
+     * Generate MultiLanguage Title Description Fields for Item
+     *
+     * @param null $field
+     */
+    public static function multiLangTitle($field)
+    {
+        $locales  = osc_get_admin_locales();
+        $currentLocale = osc_current_admin_locale();
+        self::getInstance()->printMultiLangTab($locales, $currentLocale);
+
+        $locales  = osc_get_admin_locales();
+        $currentLocale = osc_current_admin_locale();
+        echo '<div class="tab-content mb-3" id="multiLangTabsContent" >';
+
+        foreach ($locales as $locale) {
+            // Add class active if $current_locale is equal to $locale['pk_c_code']
+            $active = '';
+            if ($locale['pk_c_code'] === $currentLocale) {
+                $active = 'show active';
+            }
+            echo '<div class="tab-pane fade ' . $active . '" id="meta_' . $locale['pk_c_code'] . '" role="tabpanel">';
+            self::getInstance()->printFieldTitle($locale, $field);
+            echo '</div>';
+        }
+        echo '</div>';
+    }
+     /**
+     * Print MultiLang Tab
+     */
+    private function printMultiLangTab($locales, $activeLocaleCode)
+    {
+        if ($locales > 1) {
+            echo '<div id="language-tab" class="mt-3">';
+            echo '<ul class="nav nav-tabs nav-tabs-sm" id="multiLangTabs" role="tablist">';
+            foreach ($locales as $locale) {
+                $active = '';
+                if ($locale['pk_c_code'] === $activeLocaleCode) {
+                    $active = 'show active';
+                }
+                echo '<li class="nav-item"><a class="nav-link ' . $active . '" href="#meta_' . $locale['pk_c_code']
+                    . '" data-bs-toggle="tab">'
+                    . $locale['s_name'] . '</a></li>';
+            }
+            echo '</ul>';
+            echo '</div>';
+        }
+    }
+
+    /**
+     * Print Multi language Field Name Input
+     *
+     * @param                                   $locale
+     * @param array                             $field
+     */
+    private function printFieldTitle($locale, array $field = null)
+    {
+        $fieldTitleInputName         = 'meta_s_name' . '[' . $locale['pk_c_code'] . ']';
+        $valueTitleInput        = $field['locale'][$locale['pk_c_code']]['s_name'] ?? '';
+        $fieldTitleAttributes   = [
+            'id'          => $fieldTitleInputName,
+            'placeholder' => __('Enter field name'),
+        ];
+        $fieldTitleOptions      = [
+            'sanitize' => 'html',
+            'label'    => __('Name'),
+            'inputDivClass' => 'form-controls',
+            'divClass' => 'form-row meta-name-inputs'
+        ];
+        try {
+            echo $this->text($fieldTitleInputName, $valueTitleInput, $fieldTitleAttributes, $fieldTitleOptions);
+        } catch (Exception $e) {
+            if (defined('OSC_DEBUG') && OSC_DEBUG) {
+                trigger_error($e->getTraceAsString(), E_USER_WARNING);
+            }
+        }
+
     }
 }

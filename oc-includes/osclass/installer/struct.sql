@@ -6,6 +6,7 @@ CREATE TABLE /*TABLE_PREFIX*/t_locale (
     s_short_name VARCHAR(40) NOT NULL,
     s_description VARCHAR(100) NOT NULL,
     s_version VARCHAR(20) NOT NULL,
+    s_direction VARCHAR(3) NOT NULL DEFAULT 'ltr',
     s_author_name VARCHAR(100) NOT NULL,
     s_author_url VARCHAR(100) NOT NULL,
     s_currency_format VARCHAR(50) NOT NULL,
@@ -123,7 +124,7 @@ CREATE TABLE /*TABLE_PREFIX*/t_user (
     b_active TINYINT(1) NOT NULL DEFAULT 0,
     s_pass_code VARCHAR(100) NULL ,
     s_pass_date DATETIME NULL ,
-    s_pass_ip VARCHAR(15) NULL,
+    s_pass_ip VARCHAR(50) NULL,
     fk_c_country_code CHAR(2) NULL,
     s_country VARCHAR(40) NULL,
     s_address VARCHAR(100) NULL,
@@ -140,7 +141,7 @@ CREATE TABLE /*TABLE_PREFIX*/t_user (
     i_items INT UNSIGNED NULL DEFAULT 0,
     i_comments INT UNSIGNED NULL DEFAULT 0,
     dt_access_date DATETIME NOT NULL DEFAULT  '1000-01-01 00:00:00',
-    s_access_ip VARCHAR(15) NOT NULL DEFAULT '',
+    s_access_ip VARCHAR(50) NOT NULL DEFAULT '',
 
         PRIMARY KEY (pk_i_id),
         UNIQUE KEY (s_email),
@@ -249,7 +250,7 @@ CREATE TABLE /*TABLE_PREFIX*/t_item_description (
     s_description MEDIUMTEXT NOT NULL,
         PRIMARY KEY (fk_i_item_id, fk_c_locale_code),
         FULLTEXT s_description (s_description, s_title)
-) ENGINE=MyISAM DEFAULT CHARACTER SET 'UTF8' COLLATE 'UTF8_GENERAL_CI';
+) ENGINE=InnoDB DEFAULT CHARACTER SET 'UTF8' COLLATE 'UTF8_GENERAL_CI';
 
 
 CREATE TABLE /*TABLE_PREFIX*/t_item_location (
@@ -422,6 +423,7 @@ CREATE TABLE /*TABLE_PREFIX*/t_meta_fields (
     s_options VARCHAR(2048) NULL,
     b_required TINYINT(1) NOT NULL DEFAULT 0,
     b_searchable TINYINT(1) NOT NULL DEFAULT 0,
+    s_meta MEDIUMTEXT NULL DEFAULT NULL,
 
         PRIMARY KEY (pk_i_id)
 ) ENGINE=InnoDB DEFAULT CHARACTER SET 'UTF8' COLLATE 'UTF8_GENERAL_CI';

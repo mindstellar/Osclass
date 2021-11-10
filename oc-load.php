@@ -27,6 +27,7 @@
  */
 
 use mindstellar\Csrf;
+use mindstellar\logger\OsclassErrors;
 
 if (!defined('ABS_PATH')) {
     define('ABS_PATH', __DIR__ . '/');
@@ -53,25 +54,10 @@ require_once ABS_PATH . 'config.php';
 // load default constants
 require_once LIB_PATH . 'osclass/default-constants.php';
 
-// Sets PHP error handling
-if (OSC_DEBUG) {
-    ini_set('display_errors', 1);
-    error_reporting(E_ALL | E_STRICT);
-
-    if (OSC_DEBUG_LOG) {
-        ini_set('display_errors', 0);
-        ini_set('log_errors', 1);
-        ini_set('error_log', CONTENT_PATH . 'debug.log');
-    }
-} else {
-    error_reporting(
-        E_CORE_ERROR | E_CORE_WARNING | E_COMPILE_ERROR | E_ERROR | E_WARNING | E_PARSE
-        | E_USER_ERROR | E_USER_WARNING
-    );
-}
 //Load Autoloader
 require_once LIB_PATH . 'vendor/autoload.php';
-
+//Register error handler
+OsclassErrors::newInstance()->register();
 require_once LIB_PATH . 'osclass/helpers/hDatabaseInfo.php';
 require_once LIB_PATH . 'osclass/helpers/hPreference.php';
 
@@ -147,7 +133,7 @@ osc_register_script('jquery-treeview', osc_assets_url('jquery-treeview/jquery.tr
 osc_register_script('jquery-nested', osc_assets_url('jquery-ui-nested/jquery-ui-nested.js'), 'jquery-ui');
 osc_register_script('jquery-validate', osc_assets_url('jquery-validation/jquery.validate.min.js'), 'jquery');
 osc_register_script('jquery-validate-additional', osc_assets_url('jquery-validation/additional-methods.min.js'), 'jquery-validate');
-osc_register_script('jquery-spectrum', osc_assets_url('spectrum-colorpicker/spectrum.js'), 'jquery');
+
 osc_register_script('tiny_mce', osc_assets_url('tinymce/tinymce.min.js'));
 
 //Legacy js libraries
@@ -156,10 +142,8 @@ osc_register_script('colorpicker', osc_assets_url('osclass-legacy/js/colorpicker
 osc_register_script('php-date', osc_assets_url('osclass-legacy/js/date.js'));
 osc_register_script('jquery-fineuploader', osc_assets_url('osclass-legacy/js/fineuploader/jquery.fineuploader.min.js'), 'jquery');
 
-
-
 Plugins::init();
-if (OC_ADMIN) {
+if (defined('OC_ADMIN') && OC_ADMIN) {
     // init admin menu
     AdminMenu::newInstance()->init();
     $functions_path = AdminThemes::newInstance()->getCurrentThemePath() . 'functions.php';

@@ -44,7 +44,8 @@ function customPageHeader()
 {
     ?>
     <h1><?php _e('Settings'); ?>
-        <a href="#" class="btn ico ico-32 ico-help float-right"></a>
+        <a class="ms-1 bi bi-question-circle-fill float-right" data-bs-target="#help-box" data-bs-toggle="collapse"
+           href="#help-box"></a>
     </h1>
     <?php
 }
@@ -69,10 +70,10 @@ $aData = __get('aEmails');
 
 osc_current_admin_theme_path('parts/header.php'); ?>
     <h2 class="render-title"><?php _e('Emails templates'); ?></h2>
-    <div class="table-contains-actions">
+    <div id="email-templates" class="table-contains-actions shadow-sm">
         <table class="table" cellpadding="0" cellspacing="0">
             <thead>
-            <tr>
+            <tr class="table-secondary">
                 <th class="col-name"><?php _e('Name'); ?></th>
                 <th class="col-title"><?php _e('Title'); ?></th>
             </tr>
@@ -82,7 +83,7 @@ osc_current_admin_theme_path('parts/header.php'); ?>
                 <?php foreach ($aData['aaData'] as $array) { ?>
                     <tr>
                         <?php foreach ($array as $key => $value) { ?>
-                            <td>
+                            <td data-col-name="<?php echo ucfirst($key); ?>">
                                 <?php echo $value; ?>
                             </td>
                         <?php } ?>

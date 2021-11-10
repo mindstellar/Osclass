@@ -32,7 +32,9 @@ osc_enqueue_script('tiny_mce');
 
 $page      = __get('page');
 $templates = __get('templates');
-$meta      = json_decode(@$page['s_meta'], true);
+if (isset($page)) {
+    $meta      = json_decode($page['s_meta'], true);
+}
 
 $template_selected = (isset($meta['template']) && $meta['template'] != '') ? $meta['template'] : 'default';
 $locales           = OSCLocale::newInstance()->listAllEnabled();
@@ -98,14 +100,12 @@ function customHead()
             theme_advanced_toolbar_align: "left",
             theme_advanced_toolbar_location: "top",
             plugins: [
-                "advlist autolink lists link image charmap preview anchor",
-                "searchreplace visualblocks code fullscreen",
-                "insertdatetime media table paste"
+                "advlist autolink lists link charmap preview anchor",
+                "searchreplace visualblocks code fullscreen media image",
+                "insertdatetime table paste"
             ],
             entity_encoding: "raw",
-            theme_advanced_buttons1_add: "forecolorpicker,fontsizeselect",
-            theme_advanced_buttons2_add: "media",
-            theme_advanced_buttons3: "",
+            theme_advanced_buttons1_add: "forecolorpicker,fontsizeselect,image",
             theme_advanced_disable: "styleselect,anchor",
             relative_urls: false,
             remove_script_host: false,
@@ -121,39 +121,36 @@ osc_add_hook('admin_header', 'customHead', 10);
 
 osc_current_admin_theme_path('parts/header.php'); ?>
 <h2 class="render-title"><?php echo customFrmText('title'); ?></h2>
-<div id="item-form">
-    <?php printLocaleTabs(); ?>
+<div id="item-form" class="col-xl-10">
+    <?php PageForm::printMultiLangTab(); ?>
     <form action="<?php echo osc_admin_base_url(true); ?>" method="post">
         <input type="hidden" name="page" value="pages"/>
         <input type="hidden" name="action" value="<?php echo customFrmText('action_frm'); ?>"/>
         <?php PageForm::primary_input_hidden($page); ?>
-        <?php printLocaleTitlePage($locales, $page); ?>
-        <div>
-            <label><?php _e('Internal name'); ?></label>
-            <?php PageForm::internal_name_input_text($page); ?>
-            <div class="flashmessage flashmessage-warning flashmessage-inline">
-                <p><?php _e('Used to quickly identify this page'); ?></p>
-            </div>
-            <span class="help"></span>
-        </div>
         <?php if (count($templates) > 0) { ?>
-            <div>
+            <div class="select-box-big">
                 <label><?php _e('Page template'); ?></label>
-                <select name="meta[template]">
-                    <option value="default" <?php if ($template_selected == 'default') {
+                <select class="form-select form-select-sm" name="meta[template]">
+                    <option value="default" <?php if ($template_selected === 'default') {
                         echo 'selected="selected"';
                                             } ?>><?php _e('Default template'); ?></option>
                     <?php foreach ($templates as $template) { ?>
-                        <option value="<?php echo $template ?>" <?php if ($template_selected == $template) {
+                        <option value="<?php echo $template ?>" <?php if ($template_selected === $template) {
                             echo 'selected="selected"';
                                        } ?>><?php echo $template; ?></option>
                     <?php } ?>
                 </select>
             </div>
         <?php } ?>
-        <div class="input-description-wide">
-            <?php printLocaleDescriptionPage($locales, $page); ?>
+        <div>
+            <label><?php _e('Internal name'); ?>/<?php echo __('Slug');?></label>
+            <?php PageForm::internal_name_input_text($page); ?>
+            <div class="help-box">
+                <p><?php _e('Used to quickly identify this page'); ?></p>
+            </div>
+            <span class="help"></span>
         </div>
+        <?php PageForm::printMultiLangTitleDesc($page, false); ?>
         <div class="form-controls">
             <div class="form-label-checkbox">
                 <label><?php PageForm::link_checkbox($page); ?><?php _e('Show a link in footer'); ?></label>
@@ -165,9 +162,9 @@ osc_current_admin_theme_path('parts/header.php'); ?>
         <div class="clear"></div>
         <div class="form-actions">
             <?php if (customFrmText('edit')) { ?>
-                <a href="javascript:history.go(-1)" class="btn"><?php _e('Cancel'); ?></a>
+                <a href="javascript:history.go(-1)" class="btn btn-dim"><?php _e('Cancel'); ?></a>
             <?php } ?>
-            <input type="submit" value="<?php echo osc_esc_html(customFrmText('btn_text')); ?>" class="btn btn-submit"/>
+            <button type="submit" class="btn btn-submit"><?php echo osc_esc_html(customFrmText('btn_text')); ?></button>
         </div>
     </form>
 </div>

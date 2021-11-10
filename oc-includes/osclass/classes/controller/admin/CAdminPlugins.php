@@ -386,16 +386,15 @@ class CAdminPlugins extends AdminSecBaseModel
                     $sDelete = '';
                     if (!$installed) {
                         $sDelete =
-                            '<a href="javascript:delete_plugin(\'' . $pInfo['filename'] . '\');" >' . __('Delete')
+                            '<a onclick="delete_plugin(\'' . $pInfo['filename'] . '\');" href="#" >' . __('Delete')
                             . '</a>';
                     }
 
                     $sHelp = '';
                     if ($pInfo['support_uri'] != '') {
                         $sHelp = '<span class="plugin-support-icon plugin-tooltip" ><a target="_blank" href="'
-                            . osc_sanitize_url($pInfo['support_uri']) . '" ><img src="'
-                            . osc_current_admin_theme_url('images/question.png') . '" alt="'
-                            . osc_esc_html(__('Problems with this plugin? Ask for support.')) . '" ></a></span>';
+                            . osc_sanitize_url($pInfo['support_uri']) . '" ><i class="bi bi-info-circle-fill" title="'
+                            . osc_esc_html(__('Problems with this plugin? Ask for support.')) . '" ></i></a></span>';
                     }
                     $sSiteUrl = '';
                     if ($pInfo['plugin_uri'] != '') {
@@ -409,17 +408,25 @@ class CAdminPlugins extends AdminSecBaseModel
                     } else {
                         $sAuthor = __('By') . ' ' . $pInfo['author'];
                     }
-
+                    $plugin_status = 'uninstalled';
+                    if ($installed) {
+                        if ($enabled) {
+                            $plugin_status = 'active';
+                        } else {
+                            $plugin_status = 'disabled';
+                        }
+                    }
+                    $row['plugin_status']= $plugin_status;
                     $row[]   =
                         '<input type="hidden" name="installed" value="' . $installed . '" enabled="' . $enabled . '" />'
                         . $pInfo['plugin_name'] . $sHelp . '<div>' . $sUpdate . '</div>';
                     $row[]   = $pInfo['description'] . '<br />' . __('Version:') . $pInfo['version'] . ' | ' . $sAuthor
                         . $sSiteUrl;
-                    $row[]   = ($sUpdate != '') ? $sUpdate : '&nbsp;';
-                    $row[]   = ($sConfigure != '') ? $sConfigure : '&nbsp;';
-                    $row[]   = ($sEnable != '') ? $sEnable : '&nbsp;';
-                    $row[]   = ($sInstall != '') ? $sInstall : '&nbsp;';
-                    $row[]   = ($sDelete != '') ? $sDelete : '&nbsp;';
+                    $row[]   = ($sUpdate != '') ? $sUpdate : '';
+                    $row[]   = ($sConfigure != '') ? $sConfigure : '';
+                    $row[]   = ($sEnable != '') ? $sEnable : '';
+                    $row[]   = ($sInstall != '') ? $sInstall : '';
+                    $row[]   = ($sDelete != '') ? $sDelete : '';
                     $aData[] = $row;
                     if (@$pInfo['plugin_update_uri'] != '') {
                         $aInfo[@$pInfo['plugin_update_uri']] = $pInfo;

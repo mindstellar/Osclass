@@ -27,6 +27,8 @@
  *
  */
 
+use mindstellar\utility\Sanitize;
+
 /**
  * Class UserActions
  */
@@ -34,6 +36,10 @@ class UserActions
 {
     public $is_admin;
     public $manager;
+    /**
+     * @var \mindstellar\utility\Sanitize
+     */
+    private $Sanitize;
 
     /**
      * UserActions constructor.
@@ -44,18 +50,18 @@ class UserActions
     {
         $this->is_admin = $is_admin;
         $this->manager  = User::newInstance();
+        $this->Sanitize = new Sanitize();
     }
 
-    //add...
-
     /**
+     * Add user data
      * @return int
      */
     public function add()
     {
         $error       = array();
         $flash_error = '';
-        if ((osc_recaptcha_private_key() != '') && !$this->is_admin && !osc_check_recaptcha()) {
+        if (!$this->is_admin && osc_recaptcha_private_key() && !osc_check_recaptcha()) {
             $flash_error .= _m('The reCAPTCHA was not entered correctly') . PHP_EOL;
             $error[]     = 4;
         }
@@ -71,6 +77,10 @@ class UserActions
         }
 
         $input = $this->prepareData(true);
+
+        if (!osc_validate_url($input['s_website'])) {
+            $input['s_website'] = '';
+        }
 
         if ($input['s_name'] == '') {
             $flash_error .= _m('The name cannot be empty') . PHP_EOL;
@@ -144,11 +154,11 @@ class UserActions
         );
 
         $user = $this->manager->findByPrimaryKey($userId);
-        if (osc_notify_new_user() && !$this->is_admin) {
+        if (!$this->is_admin && osc_notify_new_user()) {
             osc_run_hook('hook_email_admin_new_user', $user);
         }
 
-        if (osc_user_validation_enabled() && !$this->is_admin) {
+        if (!$this->is_admin && osc_user_validation_enabled()) {
             osc_run_hook('hook_email_user_validation', $user, $input);
             $success = 1;
         } else {
@@ -177,9 +187,8 @@ class UserActions
         return $success;
     }
 
-    //edit...
-
     /**
+     * Prepare and sanitize user input data
      * @param $is_add
      *
      * @return array
@@ -201,79 +210,68 @@ class UserActions
 
         //only for administration, in the public website this two params are edited separately
         if ($this->is_admin || $is_add) {
-            $input['s_email'] = Params::getParam('s_email');
-
+            $input['s_email'] = $this->Sanitize->email(Params::getParam('s_email'));
+            $password1 = Params::getParam('s_password', false, false);
             //if we want to change the password
-            if (Params::getParam('s_password', false, false) != '') {
-                $input['s_password'] = osc_hash_password(Params::getParam('s_password', false, false));
+            if ($password1) {
+                $input['s_password'] = osc_hash_password($password1);
             }
-            $input['s_username'] = osc_sanitize_username(Params::getParam('s_username'));
+            $input['s_username'] = $this->Sanitize->username(Params::getParam('s_username'));
         }
 
-        $input['s_name']         = trim(Params::getParam('s_name'));
-        $input['s_website']      = trim(Params::getParam('s_website'));
-        $input['s_phone_land']   = trim(Params::getParam('s_phone_land'));
-        $input['s_phone_mobile'] = trim(Params::getParam('s_phone_mobile'));
-
-        if (0 !== stripos($input['s_website'], 'http')) {
-            $input['s_website'] = 'http://' . $input['s_website'];
-        }
-        $input['s_website'] = osc_sanitize_url($input['s_website']);
-        if (!osc_validate_url($input['s_website'])) {
-            $input['s_website'] = '';
-        }
+        $input['s_name']         = $this->Sanitize->string(Params::getParam('s_name'));
+        $input['s_website']      = $this->Sanitize->websiteUrl(Params::getParam('s_website'));
+        $input['s_phone_land']   = $this->Sanitize->phone(Params::getParam('s_phone_land'));
+        $input['s_phone_mobile'] = $this->Sanitize->phone(Params::getParam('s_phone_mobile'));
 
         //locations...
         $country = Country::newInstance()->findByCode(Params::getParam('countryId'));
         if (count($country) > 0) {
-            $countryId   = $country['pk_c_code'];
-            $countryName = $country['s_name'];
+            $input['fk_c_country_code']   = $country['pk_c_code'];
+            $input['s_country'] = $country['s_name'];
         } else {
-            $countryId   = null;
-            $countryName = Params::getParam('country');
+            $input['fk_c_country_code']   = null;
+            $input['s_country'] = $this->Sanitize->string(Params::getParam('country'));
         }
 
         if ((int)Params::getParam('regionId')) {
             $region = Region::newInstance()->findByPrimaryKey(Params::getParam('regionId'));
             if (count($region) > 0) {
-                $regionId   = $region['pk_i_id'];
-                $regionName = $region['s_name'];
+                $input['fk_i_region_id']   = $region['pk_i_id'];
+                $input['s_region'] = $region['s_name'];
             }
         } else {
-            $regionId   = null;
-            $regionName = Params::getParam('region');
+            $input['fk_i_region_id']   = null;
+            $input['s_region'] = $this->Sanitize->string(Params::getParam('region'));
         }
 
         if ((int)Params::getParam('cityId')) {
             $city = City::newInstance()->findByPrimaryKey(Params::getParam('cityId'));
             if (count($city) > 0) {
-                $cityId   = $city['pk_i_id'];
-                $cityName = $city['s_name'];
+                $input['fk_i_city_id']   = $city['pk_i_id'];
+                $input['s_city'] = $city['s_name'];
             }
         } else {
-            $cityId   = null;
-            $cityName = Params::getParam('city');
+            $input['fk_i_city_id']   = null;
+            $input['s_city'] = $this->Sanitize->string(Params::getParam('city'));
         }
 
-        $input['fk_c_country_code'] = $countryId;
-        $input['s_country']         = $countryName;
-        $input['fk_i_region_id']    = $regionId;
-        $input['s_region']          = $regionName;
-        $input['fk_i_city_id']      = $cityId;
-        $input['s_city']            = $cityName;
-        $input['s_city_area']       = Params::getParam('cityArea');
-        $input['s_address']         = Params::getParam('address');
-        $input['s_zip']             = Params::getParam('zip');
-        $input['d_coord_lat']       = (Params::getParam('d_coord_lat') != '') ? Params::getParam('d_coord_lat') : null;
-        $input['d_coord_long']      =
-            (Params::getParam('d_coord_long') != '') ? Params::getParam('d_coord_long') : null;
-        $input['b_company']         =
-            (Params::getParam('b_company') != '' && Params::getParam('b_company') != 0) ? 1 : 0;
+        $input['s_city_area']       = $this->Sanitize->string(Params::getParam('cityArea'));
+        $input['s_address']         = $this->Sanitize->string(Params::getParam('address'));
+        $input['s_zip']             = $this->Sanitize->string(Params::getParam('zip'));
+
+        $latitude = $this->Sanitize->string(Params::getParam('d_coord_lat'));
+        $input['d_coord_lat']       = ($latitude) ?: null;
+        $longitude = $this->Sanitize->string(Params::getParam('d_coord_long'));
+        $input['d_coord_long']      = ($longitude) ?: null;
+
+        $input['b_company']         = (Params::getParam('b_company')) ? 1 : 0;
 
         return $input;
     }
 
     /**
+     * Edit user data
      * @param $userId
      *
      * @return int
@@ -294,6 +292,10 @@ class UserActions
                     . PHP_EOL;
                 $error[]     = 3;
             }
+        }
+
+        if (!osc_validate_url($input['s_website'])) {
+            $input['s_website'] = '';
         }
 
         if ($input['s_name'] == '') {
@@ -367,13 +369,13 @@ class UserActions
 
         if ($this->is_admin) {
             $iUpdated = 0;
-            if ((Params::getParam('b_enabled') != '') && (Params::getParam('b_enabled') == 1)) {
+            if (Params::getParam('b_enabled')) {
                 $iUpdated += $this->manager->update(array('b_enabled' => 1), array('pk_i_id' => $userId));
             } else {
                 $iUpdated += $this->manager->update(array('b_enabled' => 0), array('pk_i_id' => $userId));
             }
 
-            if ((Params::getParam('b_active') != '') && (Params::getParam('b_active') == 1)) {
+            if (Params::getParam('b_active')) {
                 $iUpdated += $this->manager->update(array('b_active' => 1), array('pk_i_id' => $userId));
             } else {
                 $iUpdated += $this->manager->update(array('b_active' => 0), array('pk_i_id' => $userId));
@@ -388,6 +390,7 @@ class UserActions
     }
 
     /**
+     * Recover user password
      * @return int
      */
     public function recover_password()
@@ -419,6 +422,7 @@ class UserActions
     }
 
     /**
+     * Activate User
      * @param $user_id
      *
      * @return bool
@@ -473,6 +477,7 @@ class UserActions
     }
 
     /**
+     * Deactive user
      * @param $user_id
      *
      * @return bool
@@ -510,6 +515,7 @@ class UserActions
     }
 
     /**
+     * Enable User
      * @param $user_id
      *
      * @return bool
@@ -546,6 +552,7 @@ class UserActions
     }
 
     /**
+     * Disable user
      * @param $user_id
      *
      * @return bool
@@ -582,6 +589,7 @@ class UserActions
     }
 
     /**
+     * Resend user activation email
      * @param $user_id
      *
      * @return int
@@ -605,6 +613,7 @@ class UserActions
     }
 
     /**
+     * Bootstrap user login
      * @param $user_id
      *
      * @return int

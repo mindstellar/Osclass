@@ -34,6 +34,8 @@
  */
 class SecBaseModel extends BaseModel
 {
+    private $grant;
+
     public function __construct()
     {
         parent::__construct();

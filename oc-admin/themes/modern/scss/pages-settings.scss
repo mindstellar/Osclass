@@ -1,0 +1,16 @@
+table.table-small td {
+  vertical-align: bottom;
+}
+
+.custom-date-time {
+
+  #date {
+    @extend .mb-2;
+    width: 150px;
+  }
+
+  #time {
+    @extend .mb-2;
+    width: 150px;
+  }
+}

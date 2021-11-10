@@ -31,21 +31,76 @@
  *
  * @since 3.1.1
  */
-class Styles
+class Styles extends Dependencies
 {
 
     private static $instance;
-    public $styles = array();
+    public $styles = [];
 
-    public function __construct()
+    /**
+     * Initialize Scripts class
+     */
+    public static function init()
+    {
+        $print_styles = static function () {
+            self::newInstance()->printStyles();
+        };
+
+        if (defined('OC_ADMIN') && OC_ADMIN) {
+            Plugins::addHook('admin_header', $print_styles, 9);
+        } else {
+            Plugins::addHook('header', $print_styles, 9);
+        }
+    }
+
+    /**
+     * Print the HTML tags to load the styles
+     */
+    public function printStyles()
+    {
+        // Keeping compatibility with old methods
+        $styles = $this->getStyles();
+        foreach ($styles as $css) {
+            echo $this->cssLinkTag($css);
+        }
+    }
+
+    /**
+     * Get the css styles urls
+     */
+    public function getStyles()
+    : array
     {
         $styles = array();
+        $this->order();
+        foreach ($this->queue as $id) {
+            if (isset($this->registered[$id]['url'])) {
+                $styles[] = $this->registered[$id]['url'];
+            }
+        }
+
+        return $styles;
+    }
+
+    /**
+     * Return css tag with given css url
+     *
+     * @param string $css
+     *
+     * @return string
+     */
+    private function cssLinkTag(string $css)
+    : string
+    {
+        return '<link href="' . Plugins::applyFilter('style_url', $css) . '" rel="stylesheet" type="text/css" />'
+               . PHP_EOL;
     }
 
     /**
      * @return \Styles
      */
     public static function newInstance()
+    : Styles
     {
         if (!self::$instance instanceof self) {
             self::$instance = new self;
@@ -62,7 +117,9 @@ class Styles
      */
     public function addStyle($id, $url)
     {
-        $this->styles[$id] = $url;
+        $this->register($id, $url, null);
+        $this->enqueue($id);
+
     }
 
     /**
@@ -76,37 +133,22 @@ class Styles
     }
 
     /**
-     * Get the css styles urls
+     * Enqueue Style to be loaded
+     *
+     * @param $id
      */
-    public function getStyles()
+    public function enqueue($id)
     {
-        return $this->styles;
+        $this->queue[$id] = $id;
     }
 
     /**
-     * Print the HTML tags to load the styles
+     * Remove Style to not be loaded
+     *
+     * @param $id
      */
-    public function printStyles()
+    public function removeFromQueue($id)
     {
-        foreach ($this->styles as $css) {
-            echo '<link href="' . Plugins::applyFilter('style_url', $css) . '" rel="stylesheet" type="text/css" />'
-                . PHP_EOL;
-        }
-    }
-
-    /**
-     * Initialize Scripts class
-     */
-    public static function init()
-    {
-        $print_styles = static function () {
-            self::newInstance()->printStyles();
-        };
-
-        if (OC_ADMIN) {
-            Plugins::addHook('admin_header', $print_styles, 9);
-        } else {
-            Plugins::addHook('header', $print_styles, 9);
-        }
+        unset($this->queue[$id]);
     }
 }

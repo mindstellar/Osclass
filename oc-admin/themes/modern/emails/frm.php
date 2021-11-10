@@ -52,13 +52,12 @@ function customHead()
             theme_advanced_toolbar_align: "left",
             theme_advanced_toolbar_location: "top",
             plugins: [
-                "advlist autolink lists link image charmap preview anchor",
+                "advlist autolink lists link charmap preview anchor",
                 "searchreplace visualblocks code fullscreen",
-                "insertdatetime media table paste"
+                "insertdatetime table paste"
             ],
             entity_encoding: "raw",
             theme_advanced_buttons1_add: "forecolorpicker,fontsizeselect",
-            theme_advanced_buttons2_add: "media",
             theme_advanced_buttons3: "",
             theme_advanced_disable: "styleselect,anchor",
             relative_urls: false,
@@ -68,16 +67,8 @@ function customHead()
 
 
         $(document).ready(function () {
-            // dialog filters
-            $('#dialog-test-it').dialog({
-                autoOpen: false,
-                modal: true,
-                width: 360,
-                minHeight: 42,
-                title: '<?php echo osc_esc_js(__('Send email')); ?>'
-            });
             $('#btn-display-test-it').click(function () {
-                $('#dialog-test-it').dialog('open');
+                (new bootstrap.Modal(document.getElementById('dialog-test-it'))).toggle();
                 return false;
             });
 
@@ -96,7 +87,7 @@ function customHead()
                         body: tinyMCE.get(idTinymce).getContent({format: 'html'})
                     },
                     function (data) {
-                        alert(data.html);
+                        $("#dialog-test-it .modal-body").append(data.html);
                     }, 'json');
                 return false;
             });
@@ -129,50 +120,50 @@ $locales = OSCLocale::newInstance()->listAllEnabled();
 
 osc_current_admin_theme_path('parts/header.php'); ?>
 
-<div class="grid-row no-bottom-margin">
+<div class="grid-row mb-0">
     <div class="row-wrapper">
         <h2 class="render-title"><?php _e('Edit email template'); ?></h2>
     </div>
 </div>
 <div id="pretty-form">
-    <div class="grid-row grid-100">
+    <div class="col">
         <div class="row-wrapper">
-            <div id="item-form">
-                <div id="left-side">
-
-                    <?php printLocaleTabs(); ?>
+            <div id="item-form" class="row">
+                <div class="col" id="left-side">
+                    <?php PageForm::printMultiLangTab(); ?>
                     <form action="<?php echo osc_admin_base_url(true); ?>" method="post">
                         <input type="hidden" name="page" value="emails"/>
                         <input type="hidden" name="action" value="edit_post"/>
                         <?php PageForm::primary_input_hidden($email); ?>
                         <div id="left-side">
-                            <?php printLocaleTitlePage($locales, $email); ?>
                             <div>
                                 <label><?php _e('Internal name'); ?></label>
                                 <?php PageForm::internal_name_input_text($email); ?>
-                                <div class="flashmessage flashmessage-warning flashmessage-inline">
+                                <div class="callout-warning">
                                     <p><?php _e('Used to identify the email template'); ?></p>
                                 </div>
                             </div>
-                            <div class="input-description-wide">
-                                <?php printLocaleDescriptionPage($locales, $email); ?>
-                            </div>
+                            <?php PageForm::printMultiLangTitleDesc($email, false)
+                            ?>
                         </div>
                         <div class="clear"></div>
                         <div class="form-actions form-inline">
-                            <input type="submit" value="<?php echo osc_esc_html(__('Save changes')); ?>"
-                                   class="btn btn-submit"/>
-                            <a id="btn-display-test-it" class="btn btn-submit"><?php _e('Test it'); ?></a>
+                            <button type="submit" class="btn btn-submit"><?php echo osc_esc_html(__('Save changes')); ?></button>
+                            <a id="btn-display-test-it" class="btn btn-secondary"><?php _e('Test it'); ?></a>
                         </div>
                     </form>
                 </div>
-                <div id="right-side">
-                    <div class="well ui-rounded-corners">
-                        <h3 style="margin: 0;margin-bottom: 10px;text-align: center; color: #616161;"><?php _e('Legend'); ?></h3>
-                        <?php foreach ($aEmailVars as $key => $value) { ?>
-                            <label><b><?php echo $key; ?></b><br/><?php echo $value; ?></label>
-                            <hr/>
-                        <?php } ?>
+                <div class="col-lg-4 col-xl-3" id="right-side">
+                    <div class="card">
+                        <div class="card-header">
+                            <h3 class="card-title"><?php _e('Legend'); ?></h3>
+                        </div>
+                        <div class="card-body">
+                            <?php foreach ($aEmailVars as $key => $value) { ?>
+                                <label><b><?php echo $key; ?></b><br/><?php echo $value; ?></label>
+                                <hr/>
+                            <?php } ?>
+                        </div>
                     </div>
                 </div>
                 <div class="clear"></div>
@@ -180,9 +171,27 @@ osc_current_admin_theme_path('parts/header.php'); ?>
         </div>
     </div>
 </div>
-<div id="dialog-test-it" class="hide">
-    <input type="text" name="test_email" class="input-actions"/>
-    <input type="submit" id="btn-test-it" href="#" class="btn btn-blue submit-right"
-           value="<?php _e('Send email'); ?>"/>
+<div id="dialog-test-it" class="modal fade static">
+    <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">
+                    <?php echo __('Send email'); ?>
+                </h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <input placeholder="someone@example.com" type="text" name="test_email" class="form-control
+                form-control-sm"/>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-sm btn-secondary" data-bs-dismiss="modal"><?php _e('Close'); ?></button>
+                <button id="btn-test-it" class="btn btn-sm btn-red" type="submit">
+                    <?php _e('Send email'); ?>
+                </button>
+            </div>
+        </div>
+    </div>
 </div>
+
 <?php osc_current_admin_theme_path('parts/footer.php'); ?>

@@ -78,7 +78,8 @@ function customPageHeader()
 {
     ?>
     <h1><?php _e('Listing'); ?>
-        <a href="#" class="btn ico ico-32 ico-help float-right"></a>
+        <a class="ms-1 bi bi-question-circle-fill float-right" data-bs-target="#help-box" data-bs-toggle="collapse"
+           href="#help-box"></a>
     </h1>
     <?php
 }
@@ -227,8 +228,8 @@ osc_current_admin_theme_path('parts/header.php'); ?>
                             <input type="text" class="input-small" name="warn_expiration"
                                    value="<?php echo osc_esc_html(osc_warn_expiration()); ?>"/>
                             <?php _e('days'); ?>
+                            <div class="help-box"><?php _e('This option will send an email X days before an ad expires to the author. 0 for no email.'); ?></div>
                         </div>
-                        <span class="help-box"><?php _e('This option will send an email X days before an ad expires to the author. 0 for no email.'); ?></span>
                     </div>
                     <div class="form-row">
                         <div class="form-label"> <?php _e('Title length'); ?></div>
@@ -296,10 +297,10 @@ osc_current_admin_theme_path('parts/header.php'); ?>
                                     <option value="0" <?php if (!$map_type) {
                                         echo 'selected';
                                                       } ?>><?php _e('None'); ?></option>
-                                    <option value="google" <?php if ($map_type == 'google') {
+                                    <option value="google" <?php if ($map_type === 'google') {
                                         echo 'selected';
                                                            } ?>><?php _e('Google Maps'); ?></option>
-                                    <option value="openstreet" <?php if ($map_type == 'openstreet') {
+                                    <option value="openstreet" <?php if ($map_type === 'openstreet') {
                                         echo 'selected';
                                                                } ?>><?php _e('OpenStreetMaps'); ?></option>
                                 </select>

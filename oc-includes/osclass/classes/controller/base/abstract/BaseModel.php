@@ -90,18 +90,18 @@ abstract class BaseModel
         $subdomain_type = osc_subdomain_type();
         $subhost        = osc_subdomain_host();
         // strpos is used to check if the domain is different, useful when accessing the website by diferent domains
-        if ($subdomain_type != '' && $subhost != '' && strpos($host, $subhost) !== false
+        if ($subdomain_type && $subhost && strpos($host, $subhost) !== false
             && preg_match('|^(www\.)?(.+)\.' . $subhost . '$|i', $host, $match)
         ) {
             $subdomain = $match[2];
-            if ($subdomain != '' && $subdomain !== 'www') {
+            if ($subdomain && $subdomain !== 'www') {
                 if ($subdomain_type === 'category') {
                     $category = Category::newInstance()->findBySlug($subdomain);
                     if (isset($category['pk_i_id'])) {
                         $this->_exportVariableToView('subdomain_name', $category['s_name']);
                         $this->_exportVariableToView('subdomain_slug', $category['s_slug']);
                         Params::setParam('sCategory', $category['pk_i_id']);
-                        if (Params::getParam('page') == '') {
+                        if (!Params::getParam('page')) {
                             Params::setParam('page', 'search');
                         }
                     } else {
@@ -160,19 +160,15 @@ abstract class BaseModel
         exit;
     }
 
-    //only for debug (deprecated, all inside View.php)
-
     /**
      *
-     * @since 3.9.0 -develop
+     * @since 3.9.0
      */
     protected function setParams()
     {
         $this->page   = Params::getParam('page');
         $this->action = Params::getParam('action');
     }
-
-    // Functions that will have to be rewritten in the class that extends from this
 
     public function __destruct()
     {
@@ -223,6 +219,9 @@ abstract class BaseModel
         osc_current_web_theme_path('404.php');
         exit;
     }
+    /**
+     *  Functions that will have to be rewritten in the class that extends from this
+     */
     abstract protected function doModel();
 
     /**

@@ -144,8 +144,8 @@ $comment = __get('comment');
                 </div>
             </div>
             <div class="form-actions">
-                <a href="javascript:history.go(-1)" class="btn"><?php _e('Cancel'); ?></a>
-                <input type="submit" value="<?php echo $btn_text; ?>" class="btn btn-submit"/>
+                <a href="javascript:history.go(-1)" class="btn btn-dim"><?php _e('Cancel'); ?></a>
+                <button type="submit" class="btn btn-submit"><?php echo $btn_text; ?></button>
             </div>
         </form>
     </div>

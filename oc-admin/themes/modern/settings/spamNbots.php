@@ -53,7 +53,8 @@ function customPageHeader()
 {
     ?>
     <h1><?php _e('Settings'); ?>
-        <a href="#" class="btn ico ico-32 ico-help float-right"></a>
+        <a class="ms-1 bi bi-question-circle-fill float-right" data-bs-target="#help-box" data-bs-toggle="collapse"
+           href="#help-box"></a>
     </h1>
     <?php
 }
@@ -110,7 +111,7 @@ osc_current_admin_theme_path('parts/header.php'); ?>
                                     break;
                             }
                             ?>
-                            <div class="flashmessage flashmessage-inline flashmessage-<?php echo $alert_type; ?> separate-top-medium">
+                            <div class="callout-<?php echo $alert_type; ?> separate-top-medium">
                                 <p><?php echo $alert_msg; ?></p>
                             </div>
                         </div>
@@ -132,7 +133,7 @@ osc_current_admin_theme_path('parts/header.php'); ?>
             <input type="hidden" name="page" value="settings"/>
             <input type="hidden" name="action" value="recaptcha_post"/>
             <input type="hidden" id="recaptchaVersion" name="recaptchaVersion" value="2"/>
-            <fieldset>
+            <fieldset class="form-horizontal">
                 <div class="form-row">
                     <div class="form-label"><?php _e('Site key'); ?></div>
                     <div class="form-controls">

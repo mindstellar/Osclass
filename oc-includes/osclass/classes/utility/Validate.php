@@ -420,10 +420,10 @@ class Validate
     {
         if (strlen($string) === 5) {
             if ($admin) {
-                return array_search($string, array_column(osc_get_admin_locales(), 'pk_c_code'), true) !== false;
+                return in_array($string, array_column(osc_get_admin_locales(), 'pk_c_code'), true);
             }
 
-            return array_search($string, array_column(osc_get_locales(), 'pk_c_code'), true) !== false;
+            return in_array($string, array_column(osc_get_locales(), 'pk_c_code'), true);
         }
 
         return false;

@@ -212,13 +212,33 @@ function osc_locale_thousands_sep()
     $cLocale  = $aLocales[0];
 
     foreach ($aLocales as $locale) {
-        if ($locale['pk_c_code'] == osc_current_user_locale()) {
+        if ($locale['pk_c_code'] === osc_current_user_locale()) {
             $cLocale = $locale;
             break;
         }
     }
 
     return $cLocale['s_thousands_sep'];
+}
+
+/**
+ * Gets current locale's test direction
+ *
+ * @return string
+ */
+function osc_locale_text_direction()
+{
+    $aLocales = osc_get_locales();
+    $cLocale  = $aLocales[0];
+    
+    foreach ($aLocales as $locale) {
+        if ($locale['pk_c_code'] === osc_current_user_locale()) {
+            $cLocale = $locale;
+            break;
+        }
+    }
+
+    return $cLocale['s_direction'];
 }
 
 

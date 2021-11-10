@@ -44,7 +44,6 @@ class DBConnectionClass
      * @var DBConnectionClass
      */
     private static $instance;
-
     /** A list of incompatible SQL modes.
      *
      * @since  2.3
@@ -97,15 +96,8 @@ class DBConnectionClass
      * @since  2.3
      * @var mysqli
      */
-    private $db = 0;
-    /**
-     * Database connection object to metadata database
-     *
-     * @access private
-     * @since  2.3
-     * @var mysqli
-     */
-    private $metadataDb = 0;
+    private $connId;
+
     /**
      * Database error number
      *
@@ -147,7 +139,7 @@ class DBConnectionClass
      * @param string $password MySQL password
      * @param string $database Default database to be used when performing queries
      */
-    public function __construct($server, $user, $password, $database)
+    public function __construct($server = DB_HOST, $user = DB_USER, $password = DB_PASSWORD, $database = DB_NAME)
     {
         $this->dbHost     = $server;
         $this->dbName     = $database;
@@ -165,11 +157,9 @@ class DBConnectionClass
      */
     public function connectToOsclassDb()
     {
-        $conn = $this->connectToDb($this->dbHost, $this->dbUser, $this->dbPassword, $this->db);
+        $conn = $this->connectToDb();
 
-        if ($conn == false) {
-            $this->errorConnection();
-            $this->releaseOsclassDb();
+        if ($conn === false) {
             $this->handleDbError(
                 'Osclass &raquo; Error',
                 'Osclass database server is not available. <a href="https://osclass.discourse.group/">Need more help?</a></p>'
@@ -177,17 +167,17 @@ class DBConnectionClass
             return false;
         }
 
-        $this->setCharset('utf8', $this->db);
+        $this->setCharset('utf8');
 
 
         if (!$this->dbName) {
             return true;
         }
 
-        $selectDb = $this->selectOsclassDb();
-        if ($selectDb == false) {
+        $selectDb = $this->selectDb();
+        if ($selectDb === false) {
             $this->errorReport();
-            $this->releaseOsclassDb();
+            $this->releaseDb();
             $this->handleDbError(
                 'Osclass &raquo; Error',
                 'Osclass database is not available. <a href="https://osclass.discourse.group/">Need more help?</a></p>'
@@ -198,50 +188,57 @@ class DBConnectionClass
     }
 
     /**
-     * Connect to the database passed per parameter
-     *
-     * @param string $host     Database host
-     * @param string $user     Database user
-     * @param string $password Database user password
-     * @param mysqli $connId   Database connector link
+     * Connect to the database
      *
      * @return boolean It returns true if the connection
      */
-    private function connectToDb($host, $user, $password, &$connId)
+    private function connectToDb()
     {
-        if (OSC_DEBUG) {
-            $connId = new mysqli($host, $user, $password);
-        } else {
-            $connId = @new mysqli($host, $user, $password);
-        }
-        if ($connId->connect_errno) {
+
+        $this->connId = new mysqli($this->dbHost, $this->dbUser, $this->dbPassword);
+
+        $this->errorConnection();
+        if ($this->connId->connect_errno) {
             return false;
         }
-        $this->setSQLMode($connId, array());
+        $this->setSQLMode();
+
         return true;
+    }
+
+    /**
+     * Set connection error num error and connection error description
+     *
+     * @access private
+     * @since  2.3
+     */
+    private function errorConnection()
+    {
+
+        $this->connErrorLevel = $this->connId->connect_errno;
+        $this->connErrorDesc  = $this->connId->connect_error;
+
     }
 
     /**
      * Set sql_mode
      *
      * @param array $modes
-     * @param       $connId
      */
-    public function setSQLMode(&$connId, $modes = array())
+    private function setSQLMode($modes = [])
     {
         if (empty($modes)) {
-            $res = mysqli_query($connId, 'SELECT @@SESSION.sql_mode');
+            $res = $this->connId->query('SELECT @@SESSION.sql_mode');
 
             if (empty($res)) {
                 return;
             }
 
-            $modes_array = mysqli_fetch_array($res);
+            $modes_array = $res->fetch_array();
             if (empty($modes_array[0])) {
                 return;
             }
             $modes_str = $modes_array[0];
-
 
             if (empty($modes_str)) {
                 return;
@@ -259,61 +256,28 @@ class DBConnectionClass
         }
 
         $modes_str = implode(',', $modes);
-        mysqli_query($connId, "SET SESSION sql_mode='$modes_str'");
+        $this->connId->query("SET SESSION sql_mode='$modes_str'");
     }
 
     /**
-     * Set connection error num error and connection error description
-     *
-     * @access private
-     * @since  2.3
-     */
-    private function errorConnection()
-    {
-        if (OSC_DEBUG) {
-            $this->connErrorLevel = $this->db->connect_errno;
-            $this->connErrorDesc  = $this->db->connect_error;
-        } else {
-            $this->connErrorLevel = @$this->db->connect_errno;
-            $this->connErrorDesc  = @$this->db->connect_error;
-        }
-    }
-
-    /**
-     * Release the Osclass database connection
+     * Release the database connection
+     * Return true on success and false on failure
      *
      * @access private
      * @return boolean
      * @since  2.3
      */
-    private function releaseOsclassDb()
+    private function releaseDb()
     {
-        $release = $this->releaseDb($this->db);
-
+        if (!$this->connId) {
+            return true;
+        }
+        $release = $this->connId->close();
         if (!$release) {
             $this->errorReport();
         }
 
         return $release;
-    }
-
-    /**
-     * Release the database connection passed per parameter
-     *
-     * @param mysqli $connId Database connection to be released
-     *
-     * @return boolean It returns true if the database connection is released and false
-     * if the database connection couldn't be closed
-     * @since  2.3
-     * @access private
-     */
-    private function releaseDb(&$connId)
-    {
-        if (!$connId) {
-            return true;
-        }
-
-        return @$connId->close();
     }
 
     /**
@@ -324,12 +288,23 @@ class DBConnectionClass
      */
     public function errorReport()
     {
-        if (OSC_DEBUG) {
-            $this->errorLevel = $this->db->errno;
-            $this->errorDesc  = $this->db->error;
-        } else {
-            $this->errorLevel = @$this->db->errno;
-            $this->errorDesc  = @$this->db->error;
+
+        $this->errorLevel = $this->connId->errno;
+        $this->errorDesc  = $this->connId->error;
+
+    }
+
+    /**
+     * This handle database error and show error page with given title,message.
+     *
+     * @param $title
+     * @param $message
+     */
+    private function handleDbError($title, $message)
+    {
+        if (defined('OSC_INSTALLING') && OSC_INSTALLING !== 1) {
+            require_once LIB_PATH . 'osclass/helpers/hErrors.php';
+            osc_die($title, $message);
         }
     }
 
@@ -342,49 +317,26 @@ class DBConnectionClass
      * @since  2.3
      * @access private
      */
-    private function setCharset($charset, &$connId)
+    private function setCharset($charset)
     {
-        if (OSC_DEBUG) {
-            $connId->set_charset($charset);
-        }
-
-        @$connId->set_charset($charset);
+        $this->connId->set_charset($charset);
     }
 
     /**
-     * Select Osclass database in $db var
+     * Select Database set as $this->dbName
      *
      * @access private
-     * @return boolean It returns true if the database has been selected sucessfully or false if not
+     * @return boolean It returns true if the database has been selected successfully or false if not
      * @since  2.3
      */
-    private function selectOsclassDb()
+    private function selectDb()
     {
-        return $this->selectDb($this->dbName, $this->db);
-    }
-
-    /**
-     * It selects the database of a connector database link
-     *
-     * @param string $dbName Database name. If you leave blank this field, it will
-     *                       select the database set in the init method
-     * @param mysqli $connId Database connector link
-     *
-     * @return boolean It returns true if the database has been selected or false if not
-     * @since  2.3
-     * @access private
-     */
-    private function selectDb($dbName, &$connId)
-    {
-        if ($connId->connect_errno) {
+        if ($this->connId->connect_errno) {
             return false;
         }
 
-        if (OSC_DEBUG) {
-            return $connId->select_db($dbName);
-        }
+        return $this->connId->select_db($this->dbName);
 
-        return @$connId->select_db($dbName);
     }
 
     /**
@@ -415,26 +367,15 @@ class DBConnectionClass
      */
     public function __destruct()
     {
-        $printFrontend = OSC_DEBUG_DB ? osc_is_admin_user_logged_in() : false;
-        $this->releaseOsclassDb();
-        $this->releaseMetadataDb();
-        $this->debug($printFrontend);
+        if (function_exists('osc_is_admin_user_logged_in')) {
+            $printFrontend = OSC_DEBUG_DB && osc_is_admin_user_logged_in();
+            $this->releaseDb();
+            $this->debug($printFrontend);
+        }
     }
 
     /**
-     * Release the metadata database connection
-     *
-     * @access private
-     * @return boolean
-     * @since  2.3
-     */
-    public function releaseMetadataDb()
-    {
-        return $this->releaseDb($this->metadataDb);
-    }
-
-    /**
-     * At the end of the execution it prints the database debug if it's necessary
+     * Prints the database debug if it's necessary
      *
      * @param bool $printFrontend
      *
@@ -443,7 +384,7 @@ class DBConnectionClass
      * @access private
      *
      */
-    public function debug($printFrontend = true)
+    private function debug($printFrontend = true)
     {
         $log = LogDatabase::newInstance();
 
@@ -521,55 +462,19 @@ class DBConnectionClass
     }
 
     /**
-     * It returns the osclass database link connection
+     * Placeholder method for compatibility
      *
-     * @access public
-     * @since  2.3
+     * @sugession use getDb() method
+     * @access    public
+     * @since     2.3
      */
     public function getOsclassDb()
     {
-        return $this->getDb($this->db);
-    }
-
-    /**
-     * It returns database link connection
-     *
-     * @param mysqli $connId Database connector link
-     *
-     * @return \mysqli|bool mysqli link connector if it's correct, or false if the dabase connection
-     * hasn't been done.
-     */
-    private function getDb(&$connId)
-    {
-        if ($connId) {
-            return $connId;
+        if ($this->connId) {
+            return $this->connId;
         }
 
         return false;
-    }
-
-    /**
-     * It returns the metadata database link connection
-     *
-     * @access public
-     * @since  2.3
-     */
-    public function getMetadataDb()
-    {
-        return $this->getDb($this->metadataDb);
-    }
-
-    /**
-     * This handle database error and show error page with given title,message.
-     * @param $title
-     * @param $message
-     */
-    private function handleDbError($title, $message)
-    {
-        if (OSC_INSTALLING !== 1) {
-            require_once LIB_PATH . 'osclass/helpers/hErrors.php';
-            osc_die($title, $message);
-        }
     }
 
     /**
@@ -580,65 +485,8 @@ class DBConnectionClass
      */
     private function reconnectOsclassDb()
     {
-        $this->releaseOsclassDb();
+        $this->releaseDb();
         $this->connectToOsclassDb();
-    }
-
-    /**
-     * It reconnects to metadata database. First, it releases the database link connection and it connects again
-     *
-     * @access private
-     * @since  2.3
-     */
-    private function reconnectMetadataDb()
-    {
-        $this->releaseMetadataDb();
-        $this->connectToMetadataDb();
-    }
-
-    /**
-     * Connect to metadata database
-     *
-     * @access public
-     * @return boolean It returns true if the connection has been successful or false if not
-     * @since  2.3
-     */
-    public function connectToMetadataDb()
-    {
-        $conn = $this->connectToDb(DB_HOST, DB_USER, DB_PASSWORD, $this->metadataDb);
-
-        if ($conn == false) {
-            $this->releaseMetadataDb();
-
-            return false;
-        }
-
-        $this->setCharset('utf8', $this->metadataDb);
-
-        if (!DB_NAME) {
-            return true;
-        }
-
-        $selectDb = $this->selectMetadataDb();
-        if ($selectDb == false) {
-            $this->releaseMetadataDb();
-
-            return false;
-        }
-
-        return true;
-    }
-
-    /**
-     * Select metadata database in $metadata_db var
-     *
-     * @access private
-     * @return boolean It returns true if the database has been selected sucessfully or false if not
-     * @since  2.3
-     */
-    private function selectMetadataDb()
-    {
-        return $this->selectDb(DB_NAME, $this->metadataDb);
     }
 }
 

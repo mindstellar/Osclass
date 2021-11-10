@@ -1,0 +1,113 @@
+.widget-box {
+  @extend .card, .shadow-sm;
+}
+
+.widget-box-title select {
+  @extend .form-select;
+  font-size: 0.875rem;
+  margin-bottom: -.3rem;
+  margin-top: -.3rem;
+  padding-bottom: 0.25rem;
+  padding-left: 0.5rem;
+  padding-top: 0.25rem;
+  width: 50%;
+}
+
+.widget-box-title {
+  @extend .card-header;
+  color: $color-gray-black;
+  font-size: 18px;
+  position: relative;
+}
+
+.widget-box-title h1,
+.widget-box-title h2,
+.widget-box-title h3,
+.widget-box-title h4,
+.widget-box-title h5 {
+  font-size: 18px;
+  font-weight: normal;
+  margin: 0;
+}
+
+.widget-box-title .select-box {
+  right: 0;
+  top: 0;
+  widows: 50%;
+}
+
+.widget-box-title .select-box-trigger {
+  background-color: $color-white;
+}
+
+.widget-box-content {
+  @extend .card-body;
+  background-color: $color-white;
+  padding: 15px;
+  @include rounded-corners(4px);
+  position: relative;
+}
+
+.widget-box-selector {
+  display: block;
+  float: right;
+}
+
+.widget-box h4 {
+  border-bottom: 1px dotted $color-gray-dim;
+  color: $color-gray-dim;
+  font-size: 16px;
+  margin: 20px 0 10px;
+}
+
+.widget-box h4.first-title {
+  margin: 0 0 10px;
+}
+
+.stats-title {
+  color: $color-gray-dim;
+  font-size: 16px;
+  line-height: 20px;
+}
+
+.stats-detail {
+  color: $color-gray-dim;
+  font-size: 14px;
+}
+
+.widget-box .form-row {
+  margin-bottom: 15px;
+}
+
+.widget-box .form-label {
+  float: left;
+  margin-left: 10px;
+  padding-top: 5px;
+  text-align: right;
+}
+
+div.widget-box-content-no-wrapp,
+#dashboard div.widget-box-content-no-wrapp {
+  height: 250px;
+  padding: 0;
+}
+
+div.widget-box-content-no-wrapp h4,
+div.widget-box-content-no-wrapp .first-title {
+  background: $color-gray-soft;
+  border-bottom: 0;
+  margin: 0;
+  padding: 5px 15px;
+}
+
+div.widget-box-content-no-wrapp li {
+  padding: 5px 15px;
+}
+
+div.widget-box-content-no-wrapp li a {
+  font-size: 12px;
+}
+
+.dash-widget-form {
+  padding: 0 15px;
+}

@@ -43,7 +43,6 @@ class Plugins
     {
     }
 
-
     /**
      * @param       $hook
      * @param       $content
@@ -51,7 +50,7 @@ class Plugins
      *
      * @return mixed
      */
-    public static function applyFilter($hook, $content, ...$args)
+    public static function applyFilter($hook, $content = '', ...$args)
     {
         if (isset(self::$hooks[$hook])) {
             self::$used_hooks[$hook] = true;
@@ -59,8 +58,7 @@ class Plugins
                 if (isset(self::$hooks[$hook][$priority]) && is_array(self::$hooks[$hook][$priority])) {
                     foreach (self::$hooks[$hook][$priority] as $fxName) {
                         if (is_callable($fxName)) {
-                            $content = $fxName($content, ...$args);
-                            $args[0] = $content;
+                            $content = $fxName( $content, ...$args);
                         } else {
                             trigger_error('Unknown filter ' . $fxName, E_USER_WARNING);
                         }
@@ -398,7 +396,7 @@ class Plugins
 
 
     /**
-     * @param       $hook
+     * @param callable-string  $hook
      * @param mixed ...$args
      */
     public static function runHook($hook, ...$args)

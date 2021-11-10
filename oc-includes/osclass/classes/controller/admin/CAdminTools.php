@@ -123,7 +123,7 @@ class CAdminTools extends AdminSecBaseModel
                 //databasse dump...
                 if (Params::getParam('bck_dir') != '') {
                     $path = trim(Params::getParam('bck_dir'));
-                    if (substr($path, -1, 1) != '/') {
+                    if (substr($path, -1, 1) !== '/') {
                         $path .= '/';
                     }
                 } else {
@@ -137,7 +137,7 @@ class CAdminTools extends AdminSecBaseModel
                         osc_add_flash_error_message($msg, 'admin');
                         break;
                     case (-2):
-                        $msg = sprintf(_m('Could not connect with the database. Error: %s'), mysql_error());
+                        $msg = sprintf(_m('Could not connect with the database'));
                         osc_add_flash_error_message($msg, 'admin');
                         break;
                     case (-3):
@@ -171,11 +171,13 @@ class CAdminTools extends AdminSecBaseModel
                         osc_add_flash_error_message($msg, 'admin');
                         break;
                     case (-2):
-                        $msg = sprintf(_m('Could not connect with the database. Error: %s'), mysql_error());
+                        $msg = sprintf(_m('Could not connect with the database. Error: %s'), DBConnectionClass::newInstance()
+                                                                                                              ->getOsclassDb()->connect_error);
                         osc_add_flash_error_message($msg, 'admin');
                         break;
                     case (-3):
-                        $msg = sprintf(_m('Could not select the database. Error: %s'), mysql_error());
+                        $msg = sprintf(_m('Could not select the database. Error: %s'), DBConnectionClass::newInstance()
+                                                                                                        ->getOsclassDb()->error);
                         osc_add_flash_error_message($msg, 'admin');
                         break;
                     case (-4):
@@ -239,12 +241,12 @@ class CAdminTools extends AdminSecBaseModel
                 }
                 //zip of the code just to back it up
                 osc_csrf_check();
-                if (Params::getParam('bck_dir') != '') {
+                if (Params::getParam('bck_dir')) {
                     $archive_name = trim(Params::getParam('bck_dir'));
-                    if (substr(trim($archive_name), -1, 1) != '/') {
+                    if (substr(trim($archive_name), -1, 1) !== '/') {
                         $archive_name .= '/';
                     }
-                    $archive_name = Params::getParam('bck_dir') . '/Osclass_backup.' . date('YmdHis') . '.zip';
+                    $archive_name .= '/Osclass_backup.' . date('YmdHis') . '.zip';
                 } else {
                     $archive_name = osc_base_path() . 'Osclass_backup.' . date('YmdHis') . '.zip';
                 }
@@ -266,7 +268,7 @@ class CAdminTools extends AdminSecBaseModel
                     break;
                 }
                 $mode = Params::getParam('mode');
-                if ($mode == 'on') {
+                if ($mode === 'on') {
                     osc_csrf_check();
                     $maintenance_file = osc_base_path() . '.maintenance';
                     $fileHandler      = @fopen($maintenance_file, 'wb');
@@ -280,7 +282,7 @@ class CAdminTools extends AdminSecBaseModel
                     }
                     fclose($fileHandler);
                     $this->redirectTo(osc_admin_base_url(true) . '?page=tools&action=maintenance');
-                } elseif ($mode == 'off') {
+                } elseif ($mode === 'off') {
                     osc_csrf_check();
                     $deleted = @unlink(osc_base_path() . '.maintenance');
                     if ($deleted) {
@@ -295,9 +297,9 @@ class CAdminTools extends AdminSecBaseModel
                 }
                 $this->doView('tools/maintenance.php');
                 break;
+            case 'system_info':
             default:
-            case ('phpinfo'):
-                $this->doView('tools/phpinfo.php');
+                $this->doView('tools/system-info.php');
                 break;
         }
     }
