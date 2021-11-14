@@ -1252,8 +1252,8 @@ class Item extends DAO
                     }
                 }
             }
-            if (isset($aCategories[$item['fk_i_category_id']][$prefLocale]['s_category_name'])) {
-                $item['s_category_name'] = $aCategories[$item['fk_i_category_id']][$prefLocale]['s_category_name'];
+            if (isset($aCategories[$item['fk_i_category_id']]['locale'][$prefLocale]['s_category_name'])) {
+                $item['s_category_name'] = $aCategories[$item['fk_i_category_id']]['locale'][$prefLocale]['s_category_name'];
             } else {
                 // check each locale until we find one that has a name
                 $item['s_category_name'] = '';
