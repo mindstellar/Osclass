@@ -226,6 +226,7 @@ class Category extends DAO
                 $mergedCategories[$cat['pk_i_id']]['locale'][$cat['fk_c_locale_code']] = [
                     's_name'           => $cat['s_name'],
                     's_description'    => $cat['s_description'],
+                    's_slug'           => $cat['s_slug'],
                 ];
             }
         }
