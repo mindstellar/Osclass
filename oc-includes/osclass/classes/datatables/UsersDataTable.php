@@ -40,10 +40,10 @@ class UsersDataTable extends DataTable
 
     private $withUserId;
     private $search;
-    private $order_by;
-    private $conditions;
-    private $withFilters = false;
     private $column_names;
+    public $order_by;
+    public $conditions;
+    public $withFilters = false;
 
     public function __construct()
     {
@@ -63,6 +63,9 @@ class UsersDataTable extends DataTable
         $this->search     = '';
         $this->addTableHeader();
         $this->getDBParams($params);
+
+        $dummy = &$this;
+        osc_run_hook('manage_user_search_conditions', $dummy);
 
         $list_users = User::newInstance()->search(
             $this->start,
@@ -339,7 +342,7 @@ class UsersDataTable extends DataTable
      */
     public function withFilters()
     {
-        return $this->withFilters;
+        return osc_apply_filter('manage_user_search_with_filters', $this->withFilters);
     }
 
     /**
