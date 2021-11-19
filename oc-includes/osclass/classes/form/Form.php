@@ -130,7 +130,7 @@ class Form extends FormInputs
     protected static function generic_input_checkbox($name, $value, $checked = false)
     {
         $attributes['id']           = preg_replace('|([^_a-zA-Z0-9-]+)|', '', $name);
-        if($checked != false) {
+        if ($checked != false) {
             $attributes['checked'] = 'checked';
         }
         echo (new self())->checkbox($name, $value, $attributes);
