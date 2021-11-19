@@ -361,6 +361,10 @@ class CWebAjax extends BaseModel
                 try {
                     $result =
                         $uploader->handleUpload(osc_content_path() . 'uploads/temp/' . $filename);
+                    
+                    if(isset($result['error'])) {
+                        throw new Exception($result['error']);
+                    }
                 } catch (Exception $e) {
                     trigger_error($e->getMessage(), E_USER_WARNING);
                     echo json_encode(array('success' => false));
