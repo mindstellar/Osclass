@@ -227,9 +227,7 @@ class ItemsDataTable extends DataTable
             $sort = $arraySortColumns[$sort];
         }
         // only some fields can be ordered
-
-        $order_by = osc_apply_filter('manage_item_search_order_by', array('column_name' => $sort, 'type' => $direction));
-        $this->mSearch->order($order_by['column_name'], $order_by['type']);
+        $this->mSearch->order($sort, $direction);
     }
 
     /**
