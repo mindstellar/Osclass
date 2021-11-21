@@ -249,7 +249,7 @@ class FieldForm extends Form
         $name                         = 'field_type';
         $attributes['id']             = $name;
         $options['selectPlaceholder'] = false;
-        $options['selectOptions']     = 'TEXT,TEXTAREA,DROPDOWN,RADIO,CHECKBOX,URL,DATE,DATEINTERVAL';
+        $options['selectOptions']     = 'TEXT,NUMBER,TEXTAREA,DROPDOWN,RADIO,CHECKBOX,URL,DATE,DATEINTERVAL';
         echo self::getInstance()->select($name, $field['e_type'] ?? '', $attributes, $options);
     }
 
@@ -279,7 +279,7 @@ class FieldForm extends Form
         if (count($aCustomFields) > 0) {
             echo '<fieldset>';
             foreach ($aCustomFields as $field) {
-                if ($field['e_type'] === 'DATEINTERVAL') {
+                if ($field['e_type'] === 'DATEINTERVAL' || $field['e_type'] === 'NUMBER') {
                     echo '<div class="row two_input">';
                 } elseif ($field['e_type'] === 'CHECKBOX') {
                     echo '<div class="row checkbox">';
@@ -446,6 +446,22 @@ class FieldForm extends Form
                         $field['s_value']['to'],
                         'to'
                     );
+                    break;
+                case 'NUMBER':
+                    if ($search) {
+                        echo '<h6>' . $label . '</h6>';
+
+                        echo '<div class="input-group input-group-sm">';
+                        echo '<span class="input-group-text">' . ucfirst(__('from')) . ' </span>';
+                        echo self::getInstance()->text($name . '[from]', $value['from'], $attributes);
+                        echo '<span class="input-group-text">' . ucfirst(__('to')) . ' </span>';
+                        echo self::getInstance()->text($name . '[to]', $value['to'], $attributes);
+                        echo '</div>';
+                    } else {
+                        $options['label'] = $label;
+                        $attributes['type'] = 'number';
+                        echo self::getInstance()->text($name, $value, $attributes, $options);
+                    }
                     break;
                 default:
                     if ($search) {
