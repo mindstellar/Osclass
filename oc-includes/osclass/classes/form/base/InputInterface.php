@@ -53,6 +53,16 @@ interface InputInterface
     public function text(string $name, $value, array $attributes = [], array $options = []);
 
     /**
+     * Number
+     * 
+     * @param string $name
+     * @param string|int $value
+     * @param array  $attributes
+     * @param array  $options
+     */
+    public function number(string $name, $value, array $attributes = [], array $options = []);
+
+    /**
      * TextArea
      *
      * @param string $name

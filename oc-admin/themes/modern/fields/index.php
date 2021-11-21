@@ -157,6 +157,7 @@ function customHead()
 
             var field_type_new_value = $("select[name='field_type_new']").attr('value');
             if (field_type_new_value == 'TEXT'
+                || field_type_new_value == 'NUMBER'
                 || field_type_new_value == 'TEXTAREA'
                 || field_type_new_value == 'CHECKBOX'
                 || field_type_new_value == 'URL') {
