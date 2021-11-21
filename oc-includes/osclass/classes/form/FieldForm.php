@@ -459,7 +459,8 @@ class FieldForm extends Form
                         echo '</div>';
                     } else {
                         $options['label'] = $label;
-                        echo self::getInstance()->number($name, $value, $attributes, $options);
+                        $attributes['type'] = 'number';
+                        echo self::getInstance()->text($name, $value, $attributes, $options);
                     }
                     break;
                 default:
