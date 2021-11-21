@@ -548,26 +548,6 @@ class FormInputs implements InputInterface
     }
 
     /**
-     * @param string $name
-     * @param string|int $value
-     * @param array  $attributes
-     * @param array  $options
-     *
-     * @return string
-     * @throws \Exception
-     */
-    public function number(string $name, $value, array $attributes = [], array $options = [])
-    : string
-    {
-        $attributes['type'] = 'number';
-        if (!isset($attributes['class'])) {
-            $attributes['class'] = $this->textClass;
-        }
-
-        return $this->generateInput($name, $value, $attributes, $options);
-    }
-
-    /**
      * Generate Text Area Input
      *
      * @param string $name
