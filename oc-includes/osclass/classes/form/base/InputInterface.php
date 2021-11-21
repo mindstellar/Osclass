@@ -54,7 +54,7 @@ interface InputInterface
 
     /**
      * Number
-     * 
+     *
      * @param string $name
      * @param string|int $value
      * @param array  $attributes

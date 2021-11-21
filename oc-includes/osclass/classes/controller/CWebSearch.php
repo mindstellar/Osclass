@@ -504,17 +504,17 @@ class CWebSearch extends BaseModel
                                     . 't_item.pk_i_id IN (' . $sql_interval . ')');
                             }
                             break;
-                            case 'NUMBER':
-                                if (is_array($aux) && (!empty($aux['from']) && !empty($aux['to']))) {
-                                    $min   = $aux['from'];
-                                    $max   = $aux['to'];
-                                    $sql   = "SELECT fk_i_item_id FROM $table WHERE ";
-                                    $sql   .= $table . '.fk_i_field_id = ' . $key . ' AND ';
-                                    $sql   .= $table . '.s_value >= ' . $min . ' AND ';
-                                    $sql   .= $table . '.s_value <= ' . $max;
-                                    $this->mSearch->addConditions(DB_TABLE_PREFIX
-                                        . 't_item.pk_i_id IN (' . $sql . ')');
-                                }
+                        case 'NUMBER':
+                            if (is_array($aux) && (!empty($aux['from']) && !empty($aux['to']))) {
+                                $min   = $aux['from'];
+                                $max   = $aux['to'];
+                                $sql   = "SELECT fk_i_item_id FROM $table WHERE ";
+                                $sql   .= $table . '.fk_i_field_id = ' . $key . ' AND ';
+                                $sql   .= $table . '.s_value >= ' . $min . ' AND ';
+                                $sql   .= $table . '.s_value <= ' . $max;
+                                $this->mSearch->addConditions(DB_TABLE_PREFIX
+                                    . 't_item.pk_i_id IN (' . $sql . ')');
+                            }
                                 break;
                         default:
                             break;
