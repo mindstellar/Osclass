@@ -55,17 +55,17 @@ class AjaxUploader
     public function handleUpload($uploadFilename, $replace = false)
     {
         if (!is_writable(dirname($uploadFilename))) {
-            return array('error' => __("Server error. Upload directory isn't writable."));
+            throw new Exception(__("Server error. Upload directory isn't writable."));
         }
         if (!$this->file) {
-            return array('error' => __('No files were uploaded.'));
+            throw new Exception(__('No files were uploaded.'));
         }
         $size = $this->file->getSize();
         if ($size == 0) {
-            return array('error' => __('File is empty'));
+            throw new Exception(__('File is empty'));
         }
         if ($size > $this->sizeLimit) {
-            return array('error' => __('File is too large'));
+            throw new Exception(__('File is too large'));
         }
 
         $pathinfo = pathinfo($this->file->getOriginalName());
@@ -75,16 +75,14 @@ class AjaxUploader
         if ($this->allowedExtensions && stripos($this->allowedExtensions, strtolower($ext)) === false) {
             @unlink($uploadFilename); // Wrong extension, remove it for security reasons
 
-            return array(
-                'error' => sprintf(
-                    __('File has an invalid extension, it should be one of %s.'),
-                    $this->allowedExtensions
-                )
-            );
+            throw new Exception(sprintf(
+                __('File has an invalid extension, it should be one of %s.'),
+                $this->allowedExtensions
+            ));
         }
 
         if (!$replace && file_exists($uploadFilename)) {
-            return array('error' => 'Could not save uploaded file. File already exists');
+            throw new Exception(__('Could not save uploaded file. File already exists'));
         }
 
         if ($this->file->save($uploadFilename)) {
@@ -92,12 +90,10 @@ class AjaxUploader
             if (!$result) {
                 @unlink($uploadFilename); // Wrong extension, remove it for security reasons
 
-                return array(
-                    'error' => sprintf(
-                        __('File has an invalid extension, it should be one of %s.'),
-                        $this->allowedExtensions
-                    )
-                );
+                throw new Exception(sprintf(
+                    __('File has an invalid extension, it should be one of %s.'),
+                    $this->allowedExtensions
+                ));
             }
             $files = Session::newInstance()->_get('ajax_files');
             if (!is_array($files)) {
@@ -109,7 +105,7 @@ class AjaxUploader
             return array('success' => true);
         }
 
-        return array('error' => 'Could not save uploaded file. The upload was cancelled, or server error encountered');
+        throw new Exception('Could not save uploaded file. The upload was cancelled, or server error encountered');
     }
 
     /**

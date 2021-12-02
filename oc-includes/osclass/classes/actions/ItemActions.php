@@ -579,6 +579,7 @@ class ItemActions
                     }
                     break;
                 case 'CHECKBOX':
+                case 'NUMBER':
                 case 'DATE':
                     if ($isMetaValueSet && $metaValue > 0) {
                         if (!is_numeric($metaValue)) {
