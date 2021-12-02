@@ -669,7 +669,7 @@ if (!function_exists('http_chunked_decode')) {
                 $chunk,
                 $pos,
                 ($newlineAt = strpos($chunk, "\n", $pos + 1)) - $pos
-            ))) {
+               ))) {
             if (!is_hex($chunkLenHex)) {
                 trigger_error('Value is not properly chunk encoded', E_USER_WARNING);
 
