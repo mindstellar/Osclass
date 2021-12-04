@@ -84,7 +84,7 @@ function osc_deleteResource($id, $admin)
                 || $v['function'] === 'require'
             ) {
                 $backtracel .= '#' . $k . ' ' . $v['function'] . '(' . $v['args'][0] . ') called@ [' . $v['file'] . ':'
-                    . $v['line'] . '] / ';
+                               . $v['line'] . '] / ';
             } else {
                 $backtracel .= '#' . $k . ' ' . $v['function'] . ' called@ [' . $v['file'] . ':' . $v['line'] . '] / ';
             }
@@ -98,14 +98,18 @@ function osc_deleteResource($id, $admin)
             $admin ? 'admin' : 'user',
             $admin ? osc_logged_admin_id() : osc_logged_user_id()
         );
-
+        // check if resource s_path, pk_i_id and s_extension are set and not empty
         try {
-            (new FileSystem())->remove([
-                osc_base_path() . $resource['s_path'] . $resource['pk_i_id'] . '.' . $resource['s_extension'],
-                osc_base_path() . $resource['s_path'] . $resource['pk_i_id'] . '_original.' . $resource['s_extension'],
-                osc_base_path() . $resource['s_path'] . $resource['pk_i_id'] . '_thumbnail.' . $resource['s_extension'],
-                osc_base_path() . $resource['s_path'] . $resource['pk_i_id'] . '_preview.' . $resource['s_extension']
-            ]);
+            $filesToRemove = [
+                $resource['s_path'] . $resource['pk_i_id'] . '.' . $resource['s_extension'],
+                $resource['s_path'] . $resource['pk_i_id'] . '_original.' . $resource['s_extension'],
+                $resource['s_path'] . $resource['pk_i_id'] . '_thumbnail.' . $resource['s_extension'],
+            ];
+            foreach ($filesToRemove as $file) {
+                if (file_exists($file) && !is_dir($file)) {
+                    (new mindstellar\utility\FileSystem)->remove($file);
+                }
+            }
         } catch (Exception $e) {
             trigger_error($e->getMessage(), E_USER_WARNING);
         }
@@ -125,6 +129,7 @@ function osc_deleteDir($path)
 {
     return (new FileSystem())->deleteDir($path);
 }
+
 
 /**
  * Serialize the data (usefull at plugins activation)
@@ -209,6 +214,7 @@ function is_serialized($data)
  *
  * @param $url   string
  * @param $_data array
+ *
  * @return bool false on error or number of bytes sent.
  */
 function osc_doRequest($url, $_data)
@@ -398,6 +404,7 @@ function osc_sendMail($params)
         $mail->send();
     } catch (\PHPMailer\PHPMailer\Exception $e) {
         trigger_error($e->errorMessage(), E_USER_WARNING);
+
         return false;
     }
 
@@ -440,6 +447,7 @@ function osc_mailBeauty($text, $params)
  * @param      $dir
  * @param int  $mode
  * @param bool $recursive
+ *
  * @return bool
  */
 function osc_mkdir($dir, $mode = 0755, $recursive = true)
@@ -449,6 +457,7 @@ function osc_mkdir($dir, $mode = 0755, $recursive = true)
         (new FileSystem())->mkdir($dir, $mode);
     } catch (Exception $e) {
         trigger_error($e->getMessage(), E_USER_WARNING);
+
         return false;
     }
 
@@ -465,11 +474,13 @@ function osc_mkdir($dir, $mode = 0755, $recursive = true)
 function osc_copy($source, $dest)
 {
     try {
-        (new FileSystem())->copy($source, $dest );
+        (new FileSystem())->copy($source, $dest);
     } catch (Exception $e) {
         trigger_error($e->getMessage(), E_USER_WARNING);
+
         return false;
     }
+
     return true;
 }
 
@@ -520,8 +531,8 @@ function osc_dbdump($path, $file)
         return -2;
     }
 
-    $path   .= $file;
-    $result = $dump->showTables();
+    $path       .= $file;
+    $result     = $dump->showTables();
     $fileSystem = new FileSystem();
     if (!$result) {
         $_str = '';
@@ -621,8 +632,9 @@ function testCurl()
 
 /**
  * Returns true if there is fsockopen on system environment
- * @deprecated  since 4.0.0
+ *
  * @return bool
+ * @deprecated  since 4.0.0
  */
 function testFsockopen()
 {
@@ -653,11 +665,11 @@ if (!function_exists('http_chunked_decode')) {
         $len     = strlen($chunk);
         $dechunk = null;
         while (($pos < $len)
-            && ($chunkLenHex = substr(
+               && ($chunkLenHex = substr(
                 $chunk,
                 $pos,
                 ($newlineAt = strpos($chunk, "\n", $pos + 1)) - $pos
-            ))) {
+               ))) {
             if (!is_hex($chunkLenHex)) {
                 trigger_error('Value is not properly chunk encoded', E_USER_WARNING);
 
@@ -752,7 +764,7 @@ function processHeaders($headers)
  * @param null   $post_data
  *
  * @return bool|string
- * @since 3.0
+ * @since      3.0
  * @deprecated since 4.0.0
  */
 function download_fsockopen($sourceFile, $fileout = null, $post_data = null)
@@ -853,14 +865,17 @@ function osc_downloadFile($sourceFile, $downloadedFile, $post_data = null)
         (new FileSystem())->downloadFile($sourceFile, $downloadedFile, $post_data);
     } catch (Exception $e) {
         trigger_error($e->getMessage(), E_USER_WARNING);
+
         return false;
     }
+
     return true;
 }
 
 
 /**
  * Osclass file_get_contents implementation
+ *
  * @param      $url
  * @param null $post_data
  *
@@ -872,6 +887,7 @@ function osc_file_get_contents($url, $post_data = null)
         return (new FileSystem())->getContents($url, $post_data, false);
     } catch (Exception $e) {
         trigger_error($e->getMessage(), E_USER_WARNING);
+
         return false;
     }
 }
@@ -930,9 +946,11 @@ function osc_unzip_file($file, $to)
         return (new \mindstellar\utility\Zip())->unzipFile($file, $to);
     } catch (Exception $e) {
         trigger_error($e->getMessage(), E_USER_WARNING);
+
         return 0;
     }
 }
+
 
 /**
  * Common interface to zip a specified folder to a file using ziparchive or pclzip
@@ -946,6 +964,7 @@ function osc_zip_folder($archive_folder, $archive_name)
 {
     return (new \mindstellar\utility\Zip())->zipFolder($archive_folder, $archive_name);
 }
+
 
 /**
  * @return bool
@@ -969,6 +988,7 @@ function osc_check_recaptcha()
  * replace double slash with single slash
  *
  * @param $path
+ *
  * @return string
  */
 function osc_replace_double_slash($path)
@@ -1039,8 +1059,9 @@ function osc_check_dir_writable($dir = ABS_PATH)
 
 /**
  * @param mixed|string $dir
- * @deprecated since 4.0.0
+ *
  * @return bool
+ * @deprecated since 4.0.0
  */
 function osc_change_permissions($dir = ABS_PATH)
 {
@@ -1168,15 +1189,17 @@ function rglob($pattern, $flags = 0, $path = '')
         if ($dir === '\\' || $dir === '/') {
             $dir = '';
         }
+
         return rglob(basename($pattern), $flags, $dir . '/');
     }
-    $paths = glob($path . '*', GLOB_ONLYDIR | GLOB_NOSORT);
-    $files = glob($path . $pattern, $flags);
+    $paths    = glob($path . '*', GLOB_ONLYDIR | GLOB_NOSORT);
+    $files    = glob($path . $pattern, $flags);
     $fileList = [];
     foreach ($paths as $p) {
         $fileList[] = rglob($pattern, $flags, $p . '/');
     }
     $files = array_merge($files, ...$fileList);
+
     return $files;
 }
 
@@ -1186,8 +1209,9 @@ function rglob($pattern, $flags = 0, $path = '')
  *
  * @param      $update_uri
  * @param null $version
- * @deprecated since 4.0.0
+ *
  * @return bool
+ * @deprecated since 4.0.0
  */
 function osc_check_plugin_update($update_uri, $version = null)
 {
@@ -1203,8 +1227,9 @@ function osc_check_plugin_update($update_uri, $version = null)
 /**
  * @param string $update_uri
  * @param null   $version
- * @deprecated since 4.0.0
+ *
  * @return bool
+ * @deprecated since 4.0.0
  */
 function osc_check_theme_update($update_uri, $version = null)
 {
@@ -1222,8 +1247,9 @@ function osc_check_theme_update($update_uri, $version = null)
  * @param null   $version
  *
  * @param bool   $disable
- * @deprecated since 4.0.0
+ *
  * @return bool
+ * @deprecated since 4.0.0
  */
 function osc_check_language_update($update_uri, $version = null, $disable = true)
 {
@@ -1259,8 +1285,9 @@ function osc_check_language_update($update_uri, $version = null, $disable = true
  * @param      $update_uri
  *
  * @param bool $disable
- * @deprecated since 4.0.0
+ *
  * @return bool|string
+ * @deprecated since 4.0.0
  */
 function _get_market_url($type, $update_uri, $disable = true)
 {
@@ -1294,8 +1321,9 @@ function _get_market_url($type, $update_uri, $disable = true)
  * @param      $version
  *
  * @param bool $disable
- * @deprecated since 4.0.0
+ *
  * @return bool
+ * @deprecated since 4.0.0
  */
 function _need_update($uri, $version, $disable = true)
 {
@@ -1326,8 +1354,9 @@ function _need_update($uri, $version, $disable = true)
  *
  * @param string $a -> from market
  * @param string $b -> installed version
- * @deprecated since 4.0.0
+ *
  * @return int
+ * @deprecated since 4.0.0
  */
 function version_compare2($a, $b)
 {
@@ -1344,7 +1373,7 @@ function version_compare2($a, $b)
                 return -1;
             } //Return A > B //Return B > A
             //An equal result is inconclusive at this point
-        } else { //If B does not match A to this depth, then A comes after B in sort order
+        } else {      //If B does not match A to this depth, then A comes after B in sort order
             return 1; //so return A > B
         }
     }
@@ -1352,6 +1381,7 @@ function version_compare2($a, $b)
     //Either the loop ended because A is shorter than B, or both are equal.
     return (count($aA) < count($aB)) ? -1 : 0;
 }
+
 
 /**
  * Update category stats
@@ -1380,6 +1410,7 @@ function osc_update_cat_stats_id($id)
  *
  * @param bool $force
  * @param int  $limit
+ *
  * @return int
  * @since 3.1
  */
@@ -1480,6 +1511,7 @@ function osc_is_update_compatible($section, $element, $osclass_version = OSCLASS
     return false;
 }
 
+
 /**
  * @return bool
  */
@@ -1494,14 +1526,16 @@ if (!function_exists('hex2b64')) {
     /**
      * Used to encode a field for Amazon Auth
      * (taken from the Amazon S3 PHP example library)
-     * @deprecated since 4.0.0
+     *
      * @param $str
      *
      * @return string
+     * @deprecated since 4.0.0
      */
     function hex2b64($str)
     {
         Deprecate::deprecatedFunction(__FUNCTION__, '4.0.0', 'Utils::hex2b64()');
+
         return Utils::hex2b64($str);
     }
 }
@@ -1510,15 +1544,17 @@ if (!function_exists('hmacsha1')) {
     /**
      * Calculate HMAC-SHA1 according to RFC2104
      * See http://www.faqs.org/rfcs/rfc2104.html
-     * @deprecated since 4.0.0
+     *
      * @param $key
      * @param $data
      *
      * @return string
+     * @deprecated since 4.0.0
      */
     function hmacsha1($key, $data)
     {
         Deprecate::deprecatedFunction(__FUNCTION__, '4.0.0', 'Utils::hmacsha1()');
+
         return Utils::hmacsha1($key, $data);
     }
 }

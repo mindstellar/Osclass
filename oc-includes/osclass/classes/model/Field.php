@@ -132,8 +132,7 @@ class Field extends DAO
         // check if $field['locale] is set and if it's not empty
         if (isset($field['locale'][$this->currentLocaleCode]['s_name']) && !empty($field['locale'][$this->currentLocaleCode]['s_name'])) {
             $field['s_name'] = $field['locale'][$this->currentLocaleCode]['s_name'];
-        } else {
-            // hack to avoid problems with old data
+        } elseif (isset($field['s_name'])) {
             $field['locale'][$this->currentLocaleCode]['s_name'] = $field['s_name'];
         }
 
