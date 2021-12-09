@@ -76,8 +76,8 @@ class UsersDataTable extends DataTable
         );
 
         $this->processData($list_users['users']);
-        $this->totalFiltered = $list_users['rows'];
-        $this->total         = $list_users['total_results'];
+        $this->totalFiltered = $list_users['total_results'];
+        $this->total         = $list_users['rows'];
 
         return $this->getData();
     }

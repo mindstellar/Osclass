@@ -61,8 +61,8 @@ class ItemsDataTable extends DataTable
         osc_run_hook('manage_item_search_conditions', $this->mSearch);
 
         $this->processData(Item::newInstance()->extendCategoryName($this->mSearch->doSearch()));
-        $this->totalFiltered = $this->mSearch->countAll();
-        $this->total         = $this->mSearch->count();
+        $this->totalFiltered = $this->mSearch->count();
+        $this->total         = $this->mSearch->countAll();
 
         return $this->getData();
     }

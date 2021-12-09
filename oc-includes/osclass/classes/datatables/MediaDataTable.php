@@ -56,8 +56,7 @@ class MediaDataTable extends DataTable
         $this->addTableHeader();
         $this->getDBParams($params);
 
-        $media = ItemResource::newInstance()
-            ->getResources(
+        $media = ItemResource::newInstance()->getResources(
                 $this->resourceID,
                 $this->start,
                 $this->limit,
@@ -69,8 +68,10 @@ class MediaDataTable extends DataTable
         $this->total = ItemResource::newInstance()->countResources();
         if ($this->resourceID === null) {
             $this->total_filtered = $this->total;
+            $this->totalFiltered = $this->total;
         } else {
             $this->total_filtered = ItemResource::newInstance()->countResources($this->resourceID);
+            $this->totalFiltered = $this->total_filtered;
         }
 
         return $this->getData();
