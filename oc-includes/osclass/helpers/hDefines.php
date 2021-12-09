@@ -585,7 +585,6 @@ function osc_item_url_from_item($item, $locale = '')
 {
     // check if item is array and has all the necessary variables
     if (is_array($item) && isset($item['pk_i_id'])) {
-
         $itemId    = $item['pk_i_id'];
         $itemCity  = isset($item['s_city']) ? osc_sanitizeString($item['s_city']) : '';
         $itemTitle = osc_sanitizeString(str_replace(',', '-', $item['s_title']));
