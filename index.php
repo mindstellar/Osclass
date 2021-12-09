@@ -28,6 +28,8 @@
 
 if (PHP_SAPI === 'cli') {
     define('CLI', true);
+} else {
+    define('CLI', false);
 }
 
 require_once __DIR__ . '/oc-load.php';
