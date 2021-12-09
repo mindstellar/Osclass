@@ -367,10 +367,9 @@ class DBConnectionClass
      */
     public function __destruct()
     {
-        if (function_exists('osc_is_admin_user_logged_in')) {
-            $printFrontend = OSC_DEBUG_DB && osc_is_admin_user_logged_in();
-            $this->releaseDb();
-            $this->debug($printFrontend);
+        $this->releaseDb();
+        if (function_exists('osc_is_admin_user_logged_in') && (OSC_DEBUG_DB && osc_is_admin_user_logged_in())) {
+            $this->debug();
         }
     }
 
