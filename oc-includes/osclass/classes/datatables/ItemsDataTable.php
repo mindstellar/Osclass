@@ -505,7 +505,7 @@ class ItemsDataTable extends DataTable
         $this->mSearch->addGroupBy(sprintf(' %st_item.pk_i_id ', DB_TABLE_PREFIX));
         // do Search
         $this->processDataReported(Item::newInstance()->extendCategoryName($this->mSearch->doSearch()));
-        $this->totalFiltered = $this->mSearch->countAll();
+        $this->totalFiltered = $this->mSearch->count();
         $this->total         = $this->mSearch->count();
 
         return $this->getData();

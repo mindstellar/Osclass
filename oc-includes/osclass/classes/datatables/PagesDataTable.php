@@ -61,6 +61,7 @@ class PagesDataTable extends DataTable
 
         $this->total          = Page::newInstance()->count(0);
         $this->total_filtered = $this->total;
+        $this->totalFiltered  = $this->total_filtered;
 
         return $this->getData();
     }
