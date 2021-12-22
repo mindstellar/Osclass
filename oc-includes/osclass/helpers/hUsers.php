@@ -80,37 +80,24 @@ function osc_is_web_user_logged_in()
 {
     if (View::newInstance()->_exists('_loggedUser')) {
         $user = View::newInstance()->_get('_loggedUser');
-
-        return isset($user['b_enabled']) && $user['b_enabled'] == 1;
-    }
-
-    if (Session::newInstance()->_get('userId') != '') {
+    } elseif (Session::newInstance()->_get('userId') != '') {
         $user = User::newInstance()->findByPrimaryKey(Session::newInstance()->_get('userId'));
         View::newInstance()->_exportVariableToView('_loggedUser', $user);
-
-        return isset($user['b_enabled']) && $user['b_enabled'] == 1;
-    }
-
-    //can already be a logged user or not, we'll take a look into the cookie
-    if (Cookie::newInstance()->get_value('oc_userId') != ''
-        && Cookie::newInstance()->get_value('oc_userSecret') != ''
-    ) {
+    } elseif (Cookie::newInstance()->get_value('oc_userId') != '' && Cookie::newInstance()->get_value('oc_userSecret') != '') {
         $user = User::newInstance()->findByIdSecret(
             Cookie::newInstance()->get_value('oc_userId'),
             Cookie::newInstance()->get_value('oc_userSecret')
         );
         View::newInstance()->_exportVariableToView('_loggedUser', $user);
-        if (isset($user['b_enabled']) && $user['b_enabled'] == 1) {
-            Session::newInstance()->_set('userId', $user['pk_i_id']);
-            Session::newInstance()->_set('userName', $user['s_name']);
-            Session::newInstance()->_set('userEmail', $user['s_email']);
-            $phone = $user['s_phone_mobile'] ?: $user['s_phone_land'];
-            Session::newInstance()->_set('userPhone', $phone);
+    }
+    if (isset($user['b_enabled'], $user['b_active']) && $user['b_enabled'] == 1 && $user['b_active'] == 1) {
+        Session::newInstance()->_set('userId', $user['pk_i_id']);
+        Session::newInstance()->_set('userName', $user['s_name']);
+        Session::newInstance()->_set('userEmail', $user['s_email']);
+        $phone = $user['s_phone_mobile'] ?: $user['s_phone_land'];
+        Session::newInstance()->_set('userPhone', $phone);
 
-            return true;
-        }
-
-        return false;
+        return true;
     }
 
     return false;
