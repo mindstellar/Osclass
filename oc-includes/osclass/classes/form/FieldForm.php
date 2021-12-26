@@ -303,12 +303,14 @@ class FieldForm extends Form
     {
 
         if ($field !== null) {
-            // date interval
-            if ($field['e_type'] === 'DATEINTERVAL') {
+            if ($field['e_type'] === 'DATEINTERVAL' || $field['e_type'] === 'NUMBER') {
                 $field['s_value']         = array();
                 $field['s_value']['from'] = '';
                 $field['s_value']['to']   = '';
+            }
 
+            // date interval
+            if ($field['e_type'] === 'DATEINTERVAL') {
                 if (!$search) {
                     $aInterval = Field::newInstance()
                                       ->getDateIntervalByPrimaryKey($field['fk_i_item_id'], $field['pk_i_id']);
