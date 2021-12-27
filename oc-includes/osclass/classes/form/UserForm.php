@@ -408,6 +408,33 @@ class UserForm extends Form
         Form::generic_select('userId', $users, 'pk_i_id', 's_name', __('All'), null);
     }
 
+    /**
+     * @param null $user
+     */
+    public static function gdpr_terms_checkbox($user = null)
+    {
+        // self::gdpr_checkbox('terms', sprintf(__('I agree with the <a href="%s">Terms and Conditions</a>.'), osc_gdpr_terms_page())); // HTML label is getting escaped...
+        self::gdpr_checkbox('terms', __('I agree with the Terms and Conditions.'));
+    }
+
+    /**
+     * @param null $user
+     */
+    public static function gdpr_privacy_checkbox($user = null)
+    {
+        // self::gdpr_checkbox('privacy', sprintf(__('I agree with the <a href="%s">Privacy Policy</a>.'), osc_gdpr_privacy_page())); // HTML label is getting escaped...
+        self::gdpr_checkbox('privacy', __('I agree with the Privacy Policy.'));
+    }
+
+    protected static function gdpr_checkbox($type, $label)
+    {
+        $attributes['id'] = preg_replace('|([^_a-zA-Z0-9-]+)|', '', 'gdpr_' . $type);
+        $attributes['required'] = true;
+        $options['label'] = $label;
+        $options['sanitize'] = null;
+        echo (new self())->checkbox('gdpr_' . $type, '1', $attributes, $options);
+    }
+
     public static function js_validation()
     {
         ?>

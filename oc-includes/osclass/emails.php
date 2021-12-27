@@ -2055,6 +2055,75 @@ function fn_email_auto_upgrade($result)
 
 osc_add_hook('after_auto_upgrade', 'fn_email_auto_upgrade', 10);
 
+function fn_email_gdpr_download($user) // This needs to be a mail template...
+{
+
+    $aUser = User::newInstance()->findByPrimaryKey($user);
+    $aItems = Item::newInstance()->findByUserID($user);
+    $location = implode(', ', array_filter($user['s_address'], $user['s_city_area'], $user['s_city'], $user['s_region'], $user['s_country']));
+
+    $title = '{WEB_TITLE} data';
+
+    $body = '<p>Your {WEB_TITLE} data</p><br>';
+    $body .= '<p><strong>ID</strong>: #' . $aUser['pk_i_id'] . '</p>';
+    $body .= '<p><strong>Name</strong>: ' . $aUser['s_name'] . '</p>';
+    $body .= '<p><strong>Email</strong>: ' . $aUser['s_email'] . '</p>';
+    if ($location != '') {
+        $body .= '<p><strong>Website</strong>: ' . $location . '</p>';
+    }
+    if ($aUser['s_website'] != '') {
+        $body .= '<p><strong>Website</strong>: ' . $aUser['s_website'] . '</p>';
+    }
+    if ($aUser['s_phone_mobile'] != '') {
+        $body .= '<p><strong>Phone (mobile)</strong>: ' . $aUser['s_phone_mobile'] . '</p>';
+    }
+    if ($aUser['s_phone_land'] != '') {
+        $body .= '<p><strong>Phone (land)</strong>: ' . $aUser['s_phone_land'] . '</p>';
+    }
+    $body .= '<p><strong>Registration date</strong>: ' . $aUser['dt_reg_date'] . '</p>';
+    $body .= '<p><strong>Update date</strong>: ' . $aUser['dt_mod_date'] . '</p>';
+    $body .= '<p><strong>Last login date</strong>: ' . $aUser['dt_access_date'] . '</p>';
+    $body .= '<p><strong>Last login IP</strong>: ' . $aUser['s_access_ip'] . '</p>';
+
+    if (count($aItems)) {
+        $body .= '<hr>';
+        $body .= '<p>Data associated with published listings</p>';
+  
+        foreach ($aItems as $item) {
+            $contact = implode(' / ', array_filter([$item['s_contact_name'], $item['s_contact_email'], $item['s_contact_phone']]));
+            $body .= '<p><strong>Item #' . $item['pk_i_id'] . '</strong> ' . $contact . '<br>';
+        }
+    }
+
+    $words = array([], []);
+
+    $title = osc_apply_filter('email_gdpr_download_title_after', osc_mailBeauty(osc_apply_filter(
+        'email_title',
+        osc_apply_filter('email_gdpr_download_title', $title, $user)
+    ), $words), $user);
+    $body  = osc_apply_filter(
+        'email_gdpr_download_description_after',
+        osc_mailBeauty(
+            osc_apply_filter(
+                'email_description',
+                osc_apply_filter('email_gdpr_download_description', $body, $user)
+            ),
+            $words
+        ),
+        $user
+    );
+
+    $emailParams = array(
+        'from'     => _osc_from_email_aux(),
+        'to'       => $aUser['s_email'],
+        'to_name'  => $aUser['s_name'],
+        'subject'  => $title,
+        'body'     => $body,
+        'alt_body' => $body
+    );
+    osc_sendMail($emailParams);
+}
+
 /**
  * @return string
  */

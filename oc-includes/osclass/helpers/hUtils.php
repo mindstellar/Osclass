@@ -282,6 +282,10 @@ function osc_private_user_menu($options = null)
         $options[] = array('name' => __('Logout'), 'url' => osc_user_logout_url(), 'class' => 'opt_logout');
     }
 
+    if (osc_gdpr_download_enabled()) {
+        $options[] = array('name' => __('Download data'), 'url' => osc_base_url(true) . '?page=user&action=gdpr_download', 'class' => 'opt_download_data');
+    }
+
     $options = osc_apply_filter('user_menu_filter', $options);
 
     echo '<script type="text/javascript">';
@@ -300,6 +304,11 @@ function osc_private_user_menu($options = null)
 
     echo '<li class="' . $options[$var_l - 1]['class'] . '" ><a href="' . $options[$var_l - 1]['url'] . '" >'
         . $options[$var_l - 1]['name'] . '</a></li>';
+
+    if (osc_gdpr_delete_enabled()) {
+        echo '<li class="opt_delete_account"><a href="' . osc_base_url(true) . '?page=user&action=delete&id=' . osc_user_id() . '&secret=' . osc_user_field('s_secret') . '" onclick="return confirm(\''.__('Are you sure you want to delete your account?').'\')">'
+            . __('Delete account') . '</a></li>';
+    }
 
     echo '</ul>';
 }
