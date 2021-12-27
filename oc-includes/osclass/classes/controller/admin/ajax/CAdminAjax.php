@@ -318,6 +318,33 @@ class CAdminAjax extends AdminSecBaseModel
                     echo json_encode(array('error' => 1));
                 }
                 break;
+            case 'fields_order':
+                osc_csrf_check();
+                $aIds  = json_decode(Params::getParam('list'), true);
+                $order = array();
+                $error = 0;
+
+                $fieldManager = Field::newInstance();
+                foreach ($aIds as $pos => $field) {
+                    $res = $fieldManager->update(
+                        array(
+                            'i_position' => $pos
+                        ),
+                        array('pk_i_id' => $field)
+                    );
+                    if (is_bool($res) && !$res) {
+                        $error = 1;
+                    }
+                }
+
+                if ($error) {
+                    $result = array('error' => __('An error occurred'));
+                } else {
+                    $result = array('ok' => __('Order saved'));
+                }
+
+                echo json_encode($result);
+                break;
             case 'enable_category':
                 osc_csrf_check();
                 $id       = strip_tags(Params::getParam('id'));

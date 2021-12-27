@@ -29,6 +29,7 @@
  */
 
 osc_enqueue_script('jquery-treeview');
+osc_enqueue_script('sortablejs');
 
 $fields     = __get('fields');
 $categories = __get('categories');
@@ -39,7 +40,8 @@ function addHelp()
     echo '<p>'
          . __('Create new fields for users to fill out when they publish a listing. '
               . 'You can require extra  information such as the number of bedrooms in real estate listings or '
-              . 'fuel type in car listings, for example.')
+              . 'fuel type in car listings, for example.'
+              . 'Reorder fields by dragging and dropping. ')
          . '</p>';
 }
 
@@ -195,15 +197,17 @@ osc_current_admin_theme_path('parts/header.php');
     <div class="custom-fields">
         <!-- list fields -->
         <div class="list-fields">
-            <ul id="ul_fields">
+            <ul id="ul_fields" class="sortable">
                 <?php $even = true;
                 if (count($fields) == 0) { ?>
                     <span id="fields-empty"><?php _e("You don't have any custom fields yet"); ?></span>
                 <?php } else {
                     foreach ($fields as $field) { ?>
                         <li id="list_<?php echo $field['pk_i_id']; ?>"
-                            class="field_li <?php echo($even ? 'even' : 'odd'); ?>">
-                            <div class="cfield-div" field_id="<?php echo $field['pk_i_id']; ?>">
+                            class="field_li <?php echo($even ? 'even' : 'odd'); ?>"
+                            data-field-id="<?php echo $field['pk_i_id']; ?>">
+                            <div class="cfield-div">
+                                <div class="px-2 border-end handle"><i class="align-middle bi bi-arrows-move" role="button"></i></div>
                                 <div class="name-edit-cfield" id="<?php echo 'quick_edit_' . $field['pk_i_id']; ?>">
                                     <?php echo $field['s_name']; ?>
                                 </div>
@@ -305,5 +309,51 @@ osc_current_admin_theme_path('parts/header.php');
             (new bootstrap.Modal(document.getElementById("deleteModal"))).toggle();
             return false;
         }
+
+        function orderArray(rootElement) {
+            var serialized = [];
+            var children = [].slice.call(rootElement.children);
+            for (let i = 0; i < children.length; i++) {
+                serialized.push(children[i].dataset['fieldId']);
+            }
+            return serialized
+        }
+
+        var orderRoot = document.querySelector('.sortable');
+        var oldOrder = orderArray(orderRoot);
+
+        var sortable = new Sortable(document.querySelector('.sortable'), {
+            sort: true,
+            handle: '.handle',
+            ghostClass: 'drag-ghost',
+            animation: 150,
+            fallbackOnBody: true,
+            swapThreshold: 0.10,
+            onEnd: function () {
+                var newOrder = orderArray(orderRoot);
+                if (oldOrder !== newOrder) {
+                    $.ajax({
+                        type: 'POST',
+                        url: "<?php echo osc_admin_base_url(true) . '?page=ajax&action=fields_order&' . osc_csrf_token_url(); ?>",
+                        data: {
+                            'list': JSON.stringify(newOrder)
+                        },
+                        success: function (res) {
+                            var ret = JSON.parse(res);
+                            if (ret.error) {
+                                setJsMessage('error', ret.error);
+                            }
+                            if (ret.ok) {
+                                setJsMessage('ok', ret.ok);
+                            }
+                        },
+                        error: function () {
+                            setJsMessage('error', '<?php echo osc_esc_js(__('Ajax error, please try again.')); ?>');
+                        }
+                    });
+                    newOrder = newOrder;
+                }
+            }
+        });
     </script>
 <?php osc_current_admin_theme_path('parts/footer.php'); ?>

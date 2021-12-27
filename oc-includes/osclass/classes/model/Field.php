@@ -60,7 +60,7 @@ class Field extends DAO
         parent::__construct();
         $this->setTableName('t_meta_fields');
         $this->setPrimaryKey('pk_i_id');
-        $this->setFields(array('pk_i_id', 's_name', 'e_type', 'b_required', 'b_searchable', 's_slug', 's_options', 's_meta'));
+        $this->setFields(array('pk_i_id', 's_name', 'e_type', 'b_required', 'b_searchable', 's_slug', 's_options', 's_meta', 'i_position'));
         if (defined('OC_ADMIN') && OC_ADMIN) {
             $this->currentLocaleCode = osc_current_admin_locale();
         } else {
@@ -168,6 +168,7 @@ class Field extends DAO
     {
         $this->dao->select($this->getFields());
         $this->dao->from($this->getTableName());
+        $this->dao->orderBy('i_position', 'ASC');
         $result = $this->dao->get();
 
         if ($result == false) {
@@ -199,6 +200,7 @@ class Field extends DAO
         $this->dao->from(sprintf('%st_meta_fields mf, %st_meta_categories mc', DB_TABLE_PREFIX, DB_TABLE_PREFIX));
         $this->dao->where('mc.fk_i_category_id', $id);
         $this->dao->where('mf.pk_i_id = mc.fk_i_field_id');
+        $this->dao->orderBy('mf.i_position', 'ASC');
 
         $result = $this->dao->get();
 
@@ -287,7 +289,7 @@ class Field extends DAO
 
         $result =
             $this->dao->query(sprintf(
-                                  'SELECT query.*, im.s_value as s_value, im.fk_i_item_id FROM (SELECT mf.* FROM %st_meta_fields mf, %st_meta_categories mc WHERE mc.fk_i_category_id = %d AND mf.pk_i_id = mc.fk_i_field_id) as query LEFT JOIN %st_item_meta im ON im.fk_i_field_id = query.pk_i_id AND im.fk_i_item_id = %d group by pk_i_id',
+                                  'SELECT query.*, im.s_value as s_value, im.fk_i_item_id FROM (SELECT mf.* FROM %st_meta_fields mf, %st_meta_categories mc WHERE mc.fk_i_category_id = %d AND mf.pk_i_id = mc.fk_i_field_id) as query LEFT JOIN %st_item_meta im ON im.fk_i_field_id = query.pk_i_id AND im.fk_i_item_id = %d group by pk_i_id  ORDER BY query.i_position ASC',
                                   DB_TABLE_PREFIX,
                                   DB_TABLE_PREFIX,
                                   $catId,
@@ -326,6 +328,7 @@ class Field extends DAO
         $this->dao->join(sprintf('%st_meta_categories mc', DB_TABLE_PREFIX), 'i.fk_i_category_id = mc.fk_i_category_id', 'LEFT');
         $this->dao->where('mf.pk_i_id = mc.fk_i_field_id');
         $this->dao->where('im.fk_i_item_id = ' . $itemId);
+        $this->dao->orderBy('mf.i_position', 'ASC');
 
         $result = $this->dao->get();
 
