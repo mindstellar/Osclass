@@ -303,7 +303,7 @@ class FieldForm extends Form
     {
 
         if ($field !== null) {
-            if ($field['e_type'] === 'DATEINTERVAL' || $field['e_type'] === 'NUMBER') {
+            if ($field['e_type'] === 'DATEINTERVAL' || ($field['e_type'] === 'NUMBER' && $search)) {
                 $field['s_value']         = array();
                 $field['s_value']['from'] = '';
                 $field['s_value']['to']   = '';
