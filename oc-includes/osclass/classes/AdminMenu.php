@@ -240,13 +240,6 @@ class AdminMenu
         );
         $this->add_submenu(
             'settings',
-            __('Cookies & GDPR'),
-            osc_admin_base_url(true) . '?page=settings&action=cookiesgdpr',
-            'settings_cookiesgdpr',
-            'administrator'
-        );
-        $this->add_submenu(
-            'settings',
             __('Advanced'),
             osc_admin_base_url(true) . '?page=settings&action=advanced',
             'settings_advanced',

@@ -357,11 +357,6 @@ class CWebUser extends WebSecBaseModel
                     $this->redirectTo(osc_base_url());
                 }
                 break;
-            case 'gdpr_download':
-                fn_email_gdpr_download(osc_logged_user_id());
-                osc_add_flash_ok_message(_m('Your data has been sent to your email address'));
-                $this->redirectTo(osc_user_dashboard_url());
-                break;
         }
     }
 
