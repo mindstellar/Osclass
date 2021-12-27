@@ -812,10 +812,6 @@ function osc_admin_toolbar_update_languages($force = false)
 
 function osc_ga_analytics_footer()
 {
-    if (osc_cookie_consent_nonmandatory() && (!isset($_COOKIE['cookieconsent_status']) || (isset($_COOKIE['cookieconsent_status']) && $_COOKIE['cookieconsent_status'] != 'allow'))) {
-        return;
-    }
-
     $id = osc_google_analytics_id();
     if ($id) {
         ?>
@@ -876,85 +872,6 @@ function osc_item_tinymce_footer()
 if (osc_tinymce_frontend()) {
     osc_add_hook('header', 'osc_item_tinymce_header');
     osc_add_hook('footer', 'osc_item_tinymce_footer');
-}
-
-osc_register_script('cookieconsent', osc_assets_url('cookieconsent/cookieconsent.min.js'));
-osc_register_style('cookieconsent', osc_assets_url('cookieconsent/cookieconsent.min.css'));
-
-function osc_cookie_consent_load()
-{
-    osc_enqueue_script('cookieconsent');
-    osc_enqueue_style('cookieconsent');
-
-    osc_add_hook('footer', function () {
-        $options = array(
-            'palette' => array(
-                'popup' => array('background' => '#eaf7f7', 'text' => '#5c7291'),
-                'button' => array('background' => '#56cbdb', 'text' => '#ffffff'),
-            )
-        );
-        if (osc_cookie_consent_nonmandatory()) {
-            $options['type'] = 'opt-in';
-            $options['content'] = array(
-                'allow' => __('Allow all cookies'),
-                'deny' => __('Allow only mandatory cookies')
-            );
-        }
-        $url = osc_cookie_consent_url();
-        if ($url != '') {
-            $options['content']['href'] = $url;
-        }
-
-        $options = osc_apply_filter('cookieconsent_options', $options);
-        ?>
-        <script>
-        window.cookieconsent.initialise(<?php echo json_encode($options); ?>);
-        cookieconsent.onStatusChange = function(status) {
-     console.log(this.hasConsented() ?
-      'enable cookies' : 'disable cookies');
-    }
-        </script>
-        <?php
-    });
-}
-
-if (osc_cookie_consent_enabled()) {
-    osc_add_hook('init', 'osc_cookie_consent_load');
-}
-
-function osc_gdpr_checkbox($catId = null)
-{
-    if (osc_is_web_user_logged_in()) {
-        $user = User::newInstance()->findByPrimaryKey(osc_logged_user_id()); // No need to fetch entire user...
-        if ($user['b_gdpr']) {
-            return;
-        }
-    }
-
-    echo '<div class="row control-group">';
-    UserForm::gdpr_terms_checkbox();
-    echo '</div>';
-    echo '<div class="row control-group">';
-    UserForm::gdpr_privacy_checkbox();
-    echo '</div>';
-}
-
-function osc_gdpr_checkbox_save($userId = null)
-{
-    if (osc_is_web_user_logged_in()) {
-        $userId = osc_logged_user_id();
-    }
-
-    if ($userId && Params::getParam('gdpr_terms') && Params::getParam('gdpr_privacy')) {
-        User::newInstance()->updateByPrimaryKey(array('b_gdpr' => '1'), $userId);
-    }
-}
-
-if (osc_gdpr_checkboxes_enabled()) {
-    osc_add_hook('item_form', 'osc_gdpr_checkbox');
-    osc_add_hook('user_register_form', 'osc_gdpr_checkbox');
-    osc_add_hook('posted_item', 'osc_gdpr_checkbox_save');
-    osc_add_hook('user_register_completed', 'osc_gdpr_checkbox_save');
 }
 
 function osc_show_maintenance()

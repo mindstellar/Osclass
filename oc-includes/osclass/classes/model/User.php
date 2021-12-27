@@ -79,8 +79,7 @@ class User extends DAO
             'i_items',
             'i_comments',
             'dt_access_date',
-            's_access_ip',
-            'b_gdpr'
+            's_access_ip'
         );
         $this->setFields($array_fields);
     }

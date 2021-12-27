@@ -1252,46 +1252,6 @@ function osc_recaptcha_version()
     return getPreference('recaptcha_version');
 }
 
-function osc_cookie_consent_enabled()
-{
-    return getBoolPreference('cookie_consent_enabled');
-}
-
-function osc_cookie_consent_nonmandatory()
-{
-    return getBoolPreference('cookie_consent_nonmandatory');
-}
-
-function osc_cookie_consent_url()
-{
-    return getPreference('cookie_consent_url');
-}
-
-function osc_gdpr_delete_enabled()
-{
-    return getBoolPreference('gdpr_delete_enabled');
-}
-
-function osc_gdpr_download_enabled()
-{
-    return getBoolPreference('gdpr_download_enabled');
-}
-
-function osc_gdpr_checkboxes_enabled()
-{
-    return getBoolPreference('gdpr_checkboxes_enabled');
-}
-
-function osc_gdpr_terms_page()
-{
-    return getPreference('gdpr_terms_page');
-}
-
-function osc_gdpr_privacy_page()
-{
-    return getPreference('gdpr_privacy_page');
-}
-
 
 //PRIVATE FUNCTION (if there was a class :P)
 /**
