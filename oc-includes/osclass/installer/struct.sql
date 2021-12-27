@@ -142,7 +142,6 @@ CREATE TABLE /*TABLE_PREFIX*/t_user (
     i_comments INT UNSIGNED NULL DEFAULT 0,
     dt_access_date DATETIME NOT NULL DEFAULT  '1000-01-01 00:00:00',
     s_access_ip VARCHAR(50) NOT NULL DEFAULT '',
-    b_gdpr TINYINT(1) NOT NULL DEFAULT 0,
 
         PRIMARY KEY (pk_i_id),
         UNIQUE KEY (s_email),
