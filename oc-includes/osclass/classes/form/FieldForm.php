@@ -359,7 +359,7 @@ class FieldForm extends Form
                         );
                         $attributes['rows'] = 10;
                         $options['label']   = $label;
-                        echo self::getInstance()->textarea($name, $value, $attributes);
+                        echo self::getInstance()->textarea($name, $value, $attributes, $options);
                     }
                     break;
                 case 'DROPDOWN':
