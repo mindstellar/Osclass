@@ -127,8 +127,6 @@ class Translation
         }
         //Create a Translations instance using a po file
         $translations = Gettext\Translations::fromMoFile($file);
-
-        $translations->addFromMoFile($file);
         $translations->setDomain($domain);
 
         $this->translator->loadTranslations($translations);
