@@ -31,7 +31,7 @@ class Docs extends Html
      */
     protected static function toStringDo($languages)
     {
-        $result = <<<EOT
+        $result = <<<'EOT'
 <!doctype html>
 <html lang="en">
     <head>
@@ -50,7 +50,7 @@ class Docs extends Html
 
 EOT;
         $result .= static::buildTable($languages, true);
-        $result .= <<<EOT
+        $result .= <<<'EOT'
 
         </div>
         <script src="//code.jquery.com/jquery-1.11.2.min.js"></script>

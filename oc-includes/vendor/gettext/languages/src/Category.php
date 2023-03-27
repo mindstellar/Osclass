@@ -42,15 +42,15 @@ class Category
     {
         $matches = array();
         if (!preg_match('/^pluralRule-count-(.+)$/', $cldrCategoryId, $matches)) {
-            throw new Exception("Invalid CLDR category: '${cldrCategoryId}'");
+            throw new Exception("Invalid CLDR category: '{$cldrCategoryId}'");
         }
         if (!in_array($matches[1], CldrData::$categories)) {
-            throw new Exception("Invalid CLDR category: '${cldrCategoryId}'");
+            throw new Exception("Invalid CLDR category: '{$cldrCategoryId}'");
         }
         $this->id = $matches[1];
         $cldrFormulaAndExamplesNormalized = trim(preg_replace('/\s+/', ' ', $cldrFormulaAndExamples));
         if (!preg_match('/^([^@]*)(?:@integer([^@]+))?(?:@decimal(?:[^@]+))?$/', $cldrFormulaAndExamplesNormalized, $matches)) {
-            throw new Exception("Invalid CLDR category rule: ${cldrFormulaAndExamples}");
+            throw new Exception("Invalid CLDR category rule: {$cldrFormulaAndExamples}");
         }
         $cldrFormula = trim($matches[1]);
         $s = isset($matches[2]) ? trim($matches[2]) : '';
@@ -58,7 +58,7 @@ class Category
         switch ($this->id) {
             case CldrData::OTHER_CATEGORY:
                 if ($cldrFormula !== '') {
-                    throw new Exception("The '" . CldrData::OTHER_CATEGORY . "' category should not have any formula, but it has '${cldrFormula}'");
+                    throw new Exception("The '" . CldrData::OTHER_CATEGORY . "' category should not have any formula, but it has '{$cldrFormula}'");
                 }
                 $this->formula = null;
                 break;
@@ -100,8 +100,8 @@ class Category
             $examples = substr($examples, 0, strlen($examples) - strlen(', …'));
         }
         foreach (explode(',', str_replace(' ', '', $examples)) as $range) {
-            if (preg_match('/^\d+$/', $range)) {
-                $result[] = (int) $range;
+            if (preg_match('/^(?<num>\d+)((c|e)(?<exp>\d+))?$/', $range, $m)) {
+                $result[] = (int) (isset($m['exp']) ? ($m['num'] . str_repeat('0', (int) $m['exp'])) : $range);
             } elseif (preg_match('/^(\d+)~(\d+)$/', $range, $m)) {
                 $from = (int) $m[1];
                 $to = (int) $m[2];
@@ -112,11 +112,11 @@ class Category
                 }
                 $result[] = $to;
             } else {
-                throw new Exception("Unhandled test range '${range}' in '${examples}'");
+                throw new Exception("Unhandled test range '{$range}' in '{$examples}'");
             }
         }
         if (empty($result)) {
-            throw new Exception("No test numbers from '${examples}'");
+            throw new Exception("No test numbers from '{$examples}'");
         }
 
         return $result;

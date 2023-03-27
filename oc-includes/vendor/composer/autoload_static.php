@@ -4,7 +4,7 @@
 
 namespace Composer\Autoload;
 
-class ComposerStaticInit1fcba07043a631f012853cd02fe384cd
+class ComposerStaticInitcacf2fb59ceafa0761df38efb16f9123
 {
     public static $files = array (
         'decc78cc4436b1292c6c0d151b19445c' => __DIR__ . '/..' . '/phpseclib/phpseclib/phpseclib/bootstrap.php',
@@ -175,6 +175,7 @@ class ComposerStaticInit1fcba07043a631f012853cd02fe384cd
         'Gettext\\Extractors\\CsvDictionary' => __DIR__ . '/..' . '/gettext/gettext/src/Extractors/CsvDictionary.php',
         'Gettext\\Extractors\\Extractor' => __DIR__ . '/..' . '/gettext/gettext/src/Extractors/Extractor.php',
         'Gettext\\Extractors\\ExtractorInterface' => __DIR__ . '/..' . '/gettext/gettext/src/Extractors/ExtractorInterface.php',
+        'Gettext\\Extractors\\ExtractorMultiInterface' => __DIR__ . '/..' . '/gettext/gettext/src/Extractors/ExtractorMultiInterface.php',
         'Gettext\\Extractors\\Jed' => __DIR__ . '/..' . '/gettext/gettext/src/Extractors/Jed.php',
         'Gettext\\Extractors\\JsCode' => __DIR__ . '/..' . '/gettext/gettext/src/Extractors/JsCode.php',
         'Gettext\\Extractors\\Json' => __DIR__ . '/..' . '/gettext/gettext/src/Extractors/Json.php',
@@ -211,6 +212,7 @@ class ComposerStaticInit1fcba07043a631f012853cd02fe384cd
         'Gettext\\Languages\\Exporter\\Php' => __DIR__ . '/..' . '/gettext/languages/src/Exporter/Php.php',
         'Gettext\\Languages\\Exporter\\Po' => __DIR__ . '/..' . '/gettext/languages/src/Exporter/Po.php',
         'Gettext\\Languages\\Exporter\\Prettyjson' => __DIR__ . '/..' . '/gettext/languages/src/Exporter/Prettyjson.php',
+        'Gettext\\Languages\\Exporter\\Ruby' => __DIR__ . '/..' . '/gettext/languages/src/Exporter/Ruby.php',
         'Gettext\\Languages\\Exporter\\Xml' => __DIR__ . '/..' . '/gettext/languages/src/Exporter/Xml.php',
         'Gettext\\Languages\\FormulaConverter' => __DIR__ . '/..' . '/gettext/languages/src/FormulaConverter.php',
         'Gettext\\Languages\\Language' => __DIR__ . '/..' . '/gettext/languages/src/Language.php',
@@ -259,6 +261,7 @@ class ComposerStaticInit1fcba07043a631f012853cd02fe384cd
         'HTMLPurifier_AttrDef_HTML_Bool' => __DIR__ . '/..' . '/ezyang/htmlpurifier/library/HTMLPurifier/AttrDef/HTML/Bool.php',
         'HTMLPurifier_AttrDef_HTML_Class' => __DIR__ . '/..' . '/ezyang/htmlpurifier/library/HTMLPurifier/AttrDef/HTML/Class.php',
         'HTMLPurifier_AttrDef_HTML_Color' => __DIR__ . '/..' . '/ezyang/htmlpurifier/library/HTMLPurifier/AttrDef/HTML/Color.php',
+        'HTMLPurifier_AttrDef_HTML_ContentEditable' => __DIR__ . '/..' . '/ezyang/htmlpurifier/library/HTMLPurifier/AttrDef/HTML/ContentEditable.php',
         'HTMLPurifier_AttrDef_HTML_FrameTarget' => __DIR__ . '/..' . '/ezyang/htmlpurifier/library/HTMLPurifier/AttrDef/HTML/FrameTarget.php',
         'HTMLPurifier_AttrDef_HTML_ID' => __DIR__ . '/..' . '/ezyang/htmlpurifier/library/HTMLPurifier/AttrDef/HTML/ID.php',
         'HTMLPurifier_AttrDef_HTML_Length' => __DIR__ . '/..' . '/ezyang/htmlpurifier/library/HTMLPurifier/AttrDef/HTML/Length.php',
@@ -537,9 +540,11 @@ class ComposerStaticInit1fcba07043a631f012853cd02fe384cd
         'Widget' => __DIR__ . '/../../..' . '/oc-includes/osclass/classes/model/Widget.php',
         'iObject_Cache' => __DIR__ . '/../../..' . '/oc-includes/osclass/classes/cache/interface/iObject_Cache.php',
         'mindstellar\\Csrf' => __DIR__ . '/../../..' . '/oc-includes/osclass/classes/Csrf.php',
+        'mindstellar\\form\\admin\\Item' => __DIR__ . '/../../..' . '/oc-includes/osclass/classes/form/admin/Item.php',
         'mindstellar\\form\\base\\FormBuilder' => __DIR__ . '/../../..' . '/oc-includes/osclass/classes/form/base/FormBuilder.php',
         'mindstellar\\form\\base\\FormInputs' => __DIR__ . '/../../..' . '/oc-includes/osclass/classes/form/base/FormInputs.php',
         'mindstellar\\form\\base\\InputInterface' => __DIR__ . '/../../..' . '/oc-includes/osclass/classes/form/base/InputInterface.php',
+        'mindstellar\\logger\\OsclassErrors' => __DIR__ . '/../../..' . '/oc-includes/osclass/classes/logger/OsclassErrors.php',
         'mindstellar\\upgrade\\Osclass' => __DIR__ . '/../../..' . '/oc-includes/osclass/classes/upgrade/Osclass.php',
         'mindstellar\\upgrade\\Plugin' => __DIR__ . '/../../..' . '/oc-includes/osclass/classes/upgrade/Plugin.php',
         'mindstellar\\upgrade\\Theme' => __DIR__ . '/../../..' . '/oc-includes/osclass/classes/upgrade/Theme.php',
@@ -550,6 +555,7 @@ class ComposerStaticInit1fcba07043a631f012853cd02fe384cd
         'mindstellar\\utility\\FileSystem' => __DIR__ . '/../../..' . '/oc-includes/osclass/classes/utility/FileSystem.php',
         'mindstellar\\utility\\Formatting' => __DIR__ . '/../../..' . '/oc-includes/osclass/classes/utility/Formatting.php',
         'mindstellar\\utility\\Sanitize' => __DIR__ . '/../../..' . '/oc-includes/osclass/classes/utility/Sanitize.php',
+        'mindstellar\\utility\\SystemInfo' => __DIR__ . '/../../..' . '/oc-includes/osclass/classes/utility/SystemInfo.php',
         'mindstellar\\utility\\Utils' => __DIR__ . '/../../..' . '/oc-includes/osclass/classes/utility/Utils.php',
         'mindstellar\\utility\\Validate' => __DIR__ . '/../../..' . '/oc-includes/osclass/classes/utility/Validate.php',
         'mindstellar\\utility\\Zip' => __DIR__ . '/../../..' . '/oc-includes/osclass/classes/utility/Zip.php',
@@ -582,10 +588,10 @@ class ComposerStaticInit1fcba07043a631f012853cd02fe384cd
     public static function getInitializer(ClassLoader $loader)
     {
         return \Closure::bind(function () use ($loader) {
-            $loader->prefixLengthsPsr4 = ComposerStaticInit1fcba07043a631f012853cd02fe384cd::$prefixLengthsPsr4;
-            $loader->prefixDirsPsr4 = ComposerStaticInit1fcba07043a631f012853cd02fe384cd::$prefixDirsPsr4;
-            $loader->prefixesPsr0 = ComposerStaticInit1fcba07043a631f012853cd02fe384cd::$prefixesPsr0;
-            $loader->classMap = ComposerStaticInit1fcba07043a631f012853cd02fe384cd::$classMap;
+            $loader->prefixLengthsPsr4 = ComposerStaticInitcacf2fb59ceafa0761df38efb16f9123::$prefixLengthsPsr4;
+            $loader->prefixDirsPsr4 = ComposerStaticInitcacf2fb59ceafa0761df38efb16f9123::$prefixDirsPsr4;
+            $loader->prefixesPsr0 = ComposerStaticInitcacf2fb59ceafa0761df38efb16f9123::$prefixesPsr0;
+            $loader->classMap = ComposerStaticInitcacf2fb59ceafa0761df38efb16f9123::$classMap;
 
         }, null, ClassLoader::class);
     }

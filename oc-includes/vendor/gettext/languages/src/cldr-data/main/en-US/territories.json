@@ -3,15 +3,14 @@
     "en-US": {
       "identity": {
         "version": {
-          "_number": "$Revision$",
-          "_cldrVersion": "36"
+          "_cldrVersion": "42"
         },
         "language": "en",
         "territory": "US"
       },
       "localeDisplayNames": {
         "territories": {
-          "001": "World",
+          "001": "world",
           "002": "Africa",
           "003": "North America",
           "005": "South America",
@@ -100,6 +99,7 @@
           "CR": "Costa Rica",
           "CU": "Cuba",
           "CV": "Cape Verde",
+          "CV-alt-variant": "Cabo Verde",
           "CW": "Curaçao",
           "CX": "Christmas Island",
           "CY": "Cyprus",
@@ -201,7 +201,6 @@
           "MG": "Madagascar",
           "MH": "Marshall Islands",
           "MK": "North Macedonia",
-          "MK-alt-variant": "MK",
           "ML": "Mali",
           "MM": "Myanmar (Burma)",
           "MM-alt-short": "Myanmar",
@@ -231,6 +230,7 @@
           "NR": "Nauru",
           "NU": "Niue",
           "NZ": "New Zealand",
+          "NZ-alt-variant": "Aotearoa New Zealand",
           "OM": "Oman",
           "PA": "Panama",
           "PE": "Peru",
@@ -290,6 +290,7 @@
           "TN": "Tunisia",
           "TO": "Tonga",
           "TR": "Turkey",
+          "TR-alt-variant": "Türkiye",
           "TT": "Trinidad & Tobago",
           "TV": "Tuvalu",
           "TW": "Taiwan",

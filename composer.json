@@ -30,7 +30,7 @@
     "optimize-autoloader": true
   },
   "require": {
-    "php": ">=7.0.0",
+    "php": ">=7.2.0",
     "ext-ctype": "*",
     "ext-json": "*",
     "ext-openssl": "*",
@@ -41,15 +41,15 @@
     "ext-fileinfo": "*",
     "ext-mbstring": "*",
     "ext-gd": "*",
-    "ezyang/htmlpurifier": "4.12.*",
+    "ezyang/htmlpurifier": "4.15.*",
     "phpmailer/phpmailer": "6.5.*",
-    "pclzip/pclzip": "2.8.2",
+    "pclzip/pclzip": "2.8.*",
     "phpseclib/phpseclib": "2.0.*",
-    "pensiero/php-openssl-cryptor": "0.1.0",
+    "pensiero/php-openssl-cryptor": "0.1.*",
     "google/recaptcha": "1.1.*",
-    "gettext/gettext": "4.6.*",
+    "gettext/gettext": "4.8.*",
     "phpseclib/mcrypt_compat": "^1.0",
-    "ext-imagick": "A Faster image manipulation library"
+    "ext-imagick": "*"
   }
   ,
   "require-dev": {
