@@ -89,7 +89,7 @@ class Category extends DAO
      * @return array
      * @since  unknown
      */
-    public function toTree($empty = true)
+    public function toTree(bool $empty = true)
     {
         $key   = md5(osc_base_url() . (string)$this->language . (string)$empty);
         $found = null;
@@ -125,7 +125,7 @@ class Category extends DAO
             }
 
             $this->tree = $this->sideTree($this->relation[0], $this->categories, $this->relation);
-
+            $cache                      = [];
             $cache['tree']              = $this->tree;
             $cache['empty_tree']        = $this->emptyTree;
             $cache['relation']          = $this->relation;
