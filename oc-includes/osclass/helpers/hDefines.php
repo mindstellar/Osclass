@@ -293,7 +293,7 @@ function osc_current_web_theme_path($file = '')
         require WebThemes::newInstance()->getCurrentThemePath() . $file;
     } else {
         $info = WebThemes::newInstance()->loadThemeInfo(WebThemes::newInstance()->getCurrentTheme());
-        if ($info['template'] != '') {
+        if (isset($info['template']) && $info['template'] != '') {
             WebThemes::newInstance()->setParentTheme();
             if (file_exists(WebThemes::newInstance()->getCurrentThemePath() . $file)) {
                 require WebThemes::newInstance()->getCurrentThemePath() . $file;
