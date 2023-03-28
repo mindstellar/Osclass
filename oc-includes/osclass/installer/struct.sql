@@ -289,6 +289,13 @@ CREATE TABLE /*TABLE_PREFIX*/t_item_stats (
 
         PRIMARY KEY (fk_i_item_id, dt_date),
         INDEX dt_date_fk_i_item_id (dt_date, fk_i_item_id),
+        INDEX i_num_spam (i_num_spam),
+        INDEX i_num_views (i_num_views),
+        INDEX i_num_repeated (i_num_repeated),
+        INDEX i_num_bad_classified (i_num_bad_classified),
+        INDEX i_num_offensive (i_num_offensive),
+        INDEX i_num_expired (i_num_expired),
+        INDEX i_num_premium_views (i_num_premium_views),
         FOREIGN KEY (fk_i_item_id) REFERENCES /*TABLE_PREFIX*/t_item (pk_i_id)
 ) ENGINE=InnoDB DEFAULT CHARACTER SET 'UTF8' COLLATE 'UTF8_GENERAL_CI';
 

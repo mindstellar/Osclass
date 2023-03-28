@@ -498,8 +498,15 @@ class ItemsDataTable extends DataTable
         $this->mSearch->addField('SUM(s.`i_num_expired`) as i_num_expired');
 
         // having
-
-
+        
+        // Faster for large tables (tested with 1.5 million rows)
+        // if indexes for all i_num_* columns are created
+        $this->mSearch->addConditions(sprintf(' 
+            %st_item.pk_i_id IN ( 
+            SELECT s.fk_i_item_id 
+            FROM %st_item_stats s 
+            WHERE s.i_num_spam > 0 OR s.i_num_bad_classified > 0 OR s.i_num_repeated > 0 OR s.i_num_offensive > 0 OR s.i_num_expired > 0 
+            )', DB_TABLE_PREFIX, DB_TABLE_PREFIX));
         $this->mSearch->addConditions(sprintf(' %st_item.pk_i_id ', DB_TABLE_PREFIX));
         $this->mSearch->addConditions(sprintf(' %st_item.pk_i_id = s.fk_i_item_id', DB_TABLE_PREFIX));
         $this->mSearch->addGroupBy(sprintf(' %st_item.pk_i_id ', DB_TABLE_PREFIX));
