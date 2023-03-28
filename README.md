@@ -1,23 +1,53 @@
-[![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)][license]
+![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)
 [![CodeFactor](https://www.codefactor.io/repository/github/mindstellar/osclass/badge)](https://www.codefactor.io/repository/github/mindstellar/osclass)
-[![Test PHP|7.0|7.1|7.2|7.3|7.4|8.0](https://github.com/mindstellar/Osclass/actions/workflows/test.yml/badge.svg?branch=develop)](https://github.com/mindstellar/Osclass/actions/workflows/test.yml)
+[![Test PHP|7.2|7.3|7.4|8.0|8.1|8.2](https://github.com/mindstellar/Osclass/actions/workflows/test.yml/badge.svg?branch=develop)](https://github.com/mindstellar/Osclass/actions/workflows/test.yml)
 ![Forks](https://img.shields.io/github/forks/mindstellar/osclass)
 ![Stars](https://img.shields.io/github/stars/mindstellar/osclass)
 [![Latest Release](https://img.shields.io/badge/dynamic/json?label=Latest%20Release&query=%24.tag_name&url=https%3A%2F%2Fapi.github.com%2Frepos%2Fmindstellar%2Fosclass%2Freleases%2Flatest)](https://github.com/mindstellar/Osclass/releases/latest)
 ![Downloads](https://img.shields.io/github/downloads/mindstellar/Osclass/total)
 
-# Osclass <sub>by Mindstellar</sub>
+# 📦 Osclass <sub>by Mindstellar</sub>
 
-#### A free and open source script by Mindstellar
+#### 💻 A free and open-source script to create your own classifieds site.
 
-### What is Osclass?
+### 🤔 What is Osclass?
 
-Osclass is a free and open script to create your advertisement or listings site. Best features: Plugins, themes,
-multi-language, CAPTCHA, dashboard, SEO friendly.
+Osclass is a powerful script that allows you to create and manage your own online classifieds website. 
 
-### How to install Osclass?
+With features like customizable themes and plugins, powerful search and filtering options, user registration and management, and free plugins for integration with popular payment gateways.
 
-To install Osclass you need to follow these easy steps:
+Osclass is the perfect solution for anyone looking to build a successful online marketplace.
+
+### 🔥 Features
+
+Some of the amazing features of Osclass include:
+
+- 🎨 Customizable themes and plugins
+- 🔍 Powerful search and filtering options
+- 👥 User registration and management
+- 💰 Integration with popular payment gateways
+- 🌎 Multi-language support
+- 🔒 CAPTCHA and other security measures
+- 💻 Responsive design for mobile and desktop
+
+### 🤝 Contributing
+
+We welcome contributions of all kinds, from bug fixes to new features. If you're interested in contributing to Osclass, please follow these steps:
+
+1. Fork the repository and clone it to your local machine.
+2. Install the required dependencies using `npm install`.
+3. Create a new branch for your changes.
+4. Make your changes and test them thoroughly.
+5. Commit your changes and push them to your forked repository.
+6. Submit a pull request to the main repository.
+
+### 📜 License
+
+Osclass is released under the GPLv3 license. See [LICENSE](https://github.com/mindstellar/Osclass/blob/master/LICENSE) for more information.
+
+### 🚀 Getting Started
+
+To get started with Osclass, follow these easy steps:
 ***
 
 1. Download the latest zip package of Osclass from [GitHub Release](https://github.com/mindstellar/Osclass/releases) and
@@ -41,7 +71,7 @@ To install Osclass you need to follow these easy steps:
        ![Step-3](https://raw.githubusercontent.com/mindstellar/Osclass-Docs/master/.gitbook/assets/installer-step-3.png)
       Installation finished. Use the automatically-generated password to access your admin panel (example.com/oc-admin).
 
-### How to get the latest version?
+### 📚 How to get latest version of Osclass
 Checkout our [GitHub Release](https://github.com/mindstellar/Osclass/releases) section to get latest version of osclass.
  
 Do not use master branch for your deployment, it may include untested code. Only use zip file provided in our release section.
@@ -112,13 +142,14 @@ For any support related query, please visit our official support forum.
 ### Installation Guide
 * Visit our documentation : https://docs.mindstellar.com/osclass-docs/beginners/install
 
-### Project info
+### 🔗 Links
 
-* Documentation: [Documentation][documentation]
-* License: [GPLv3][license]
+- [Official Website][official-website]
+- [Documentation][documentation]
+- [Support Forum][support-forum]
+- [GitHub Repository][github-repo]
 
-[documentation]: https://docs.mindstellar.com/
+[official-website]: https://osclass.org
+[documentation]: https://docs.mindstellar.com/osclass-docs/beginners/install
 [support-forum]: https://osclass.discourse.group
-[original-code]: https://github.com/osclass/Osclass
-[code]: https://github.com/mindstellar/Osclass
-[license]: https://github.com/mindstellar/Osclass/blob/master/LICENSE
+[github-repo]: https://github.com/mindstellar/Osclass
