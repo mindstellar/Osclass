@@ -366,12 +366,12 @@ class DBConnectionClass
      * Connection destructor and print debug
      */
     public function __destruct()
-    {   
+    {
         if (function_exists('osc_is_admin_user_logged_in') && (OSC_DEBUG_DB && osc_is_admin_user_logged_in())) {
             $this->debug();
         }
         $this->releaseDb();
-    }   
+    }
 
     /**
      * Prints the database debug if it's necessary
