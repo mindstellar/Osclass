@@ -186,7 +186,7 @@ class Plugins
                 if (file_exists($pluginPath)) {
                     $plugins[] = $file . '/index.php';
                 } else {
-                    trigger_error(sprintf(__('Plugin %s is missing the index.php file %s'), $file, $pluginPath));
+                    trigger_error(sprintf(__('Plugin %s is missing the index.php file %s'), $file, $pluginPath), E_USER_WARNING);
                 }
             }
         }
@@ -199,7 +199,9 @@ class Plugins
             foreach ($plugins as $p) {
                 $extended_list[$p] = self::getInfo($p);
             }
-            uasort($extended_list, array('self', 'strnatcmpCustom'));
+            uasort($extended_list, function ($a, $b) {
+                return strnatcmp($a['plugin_name'], $b['plugin_name']);
+            });
             $plugins = array();
             // Enabled
             foreach ($extended_list as $k => $v) {
