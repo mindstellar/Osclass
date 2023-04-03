@@ -1072,7 +1072,7 @@ class ItemForm extends Form
         if ($item == null) {
             $item = osc_item();
         }
-        if (Session::newInstance()->_getForm('showEmail') != 0) {
+        if (!Session::newInstance()->_getForm('showEmail')) {
             $item['b_show_email'] = Session::newInstance()->_getForm('showEmail');
         }
         parent::generic_input_checkbox(
