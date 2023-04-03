@@ -104,6 +104,7 @@ function osc_deleteResource($id, $admin)
                 $resource['s_path'] . $resource['pk_i_id'] . '.' . $resource['s_extension'],
                 $resource['s_path'] . $resource['pk_i_id'] . '_original.' . $resource['s_extension'],
                 $resource['s_path'] . $resource['pk_i_id'] . '_thumbnail.' . $resource['s_extension'],
+                $resource['s_path'] . $resource['pk_i_id'] . '_preview.' . $resource['s_extension'],
             ];
             foreach ($filesToRemove as $file) {
                 if (file_exists($file) && !is_dir($file)) {
