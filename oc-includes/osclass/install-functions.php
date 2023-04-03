@@ -138,10 +138,10 @@ function get_requirements()
 {
     $array = array(
         'PHP version >= 7.0.0' => array(
-            'requirement' => __('PHP version >= 7.0.0'),
-            'fn'          => version_compare(PHP_VERSION, '7.0.0', '>='),
+            'requirement' => __('PHP version >= 7.2.0'),
+            'fn'          => version_compare(PHP_VERSION, '7.2.0', '>='),
             'solution'    => sprintf(__('At least PHP %s (PHP %s or higher recommended) is required to run Osclass. '
-                                        . 'You may talk with your hosting to upgrade your PHP version.'), 7.0, 7.3)
+                                        . 'You may talk with your hosting to upgrade your PHP version.'), 7.2, 7.3)
         ),
 
         'MySQLi extension for PHP' => array(
