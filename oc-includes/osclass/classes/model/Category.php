@@ -72,6 +72,9 @@ class Category extends DAO
 
         if ($l == '') {
             $l = osc_current_user_locale();
+            if (OC_ADMIN) {
+                $l = osc_current_admin_locale();
+            }
         }
 
         $this->language  = $l;
