@@ -162,7 +162,7 @@ class DBConnectionClass
         if ($conn === false) {
             $this->handleDbError(
                 'Osclass &raquo; Error',
-                'Osclass database server is not available. <a href="https://osclass.discourse.group/">Need more help?</a></p>'
+                'Osclass database server is not available. <a href="https://github.com">Need more help?</a></p>'
             );
             return false;
         }
@@ -180,7 +180,7 @@ class DBConnectionClass
             $this->releaseDb();
             $this->handleDbError(
                 'Osclass &raquo; Error',
-                'Osclass database is not available. <a href="https://osclass.discourse.group/">Need more help?</a></p>'
+                'Osclass database is not available. <a href="https://github.com/mindstellar/Osclass/discussions">Need more help?</a></p>'
             );
         }
 
@@ -370,7 +370,6 @@ class DBConnectionClass
         if (function_exists('osc_is_admin_user_logged_in') && (OSC_DEBUG_DB && osc_is_admin_user_logged_in())) {
             $this->debug();
         }
-        $this->releaseDb();
     }
 
     /**
