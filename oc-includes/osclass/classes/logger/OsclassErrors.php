@@ -38,75 +38,76 @@ namespace mindstellar\logger;
 use Exception;
 
 /**
- * Class LogErrors
+ * Class OsclassErrors
  *
- * @desc    PHP error handler class
- * @package mindstellar\logger
- * @author  Mindstellar Community
- * @version 1.0
+ * @package Mindstellar\Logger
  */
 class OsclassErrors
 {
-    private static $instance;
-    private $logEnabled = false;
-    private $debugEnabled = false;
-    private $logFile = '';
+    private static ?OsclassErrors $instance = null;
+    private bool $logEnabled = false;
+    private bool $debugEnabled = false;
+    private string $logFile = '';
 
-    public function __construct()
+    /**
+     * OsclassErrors constructor.
+     */
+    private function __construct()
     {
-        // check if OSC_DEBUG is defined and is true
+        $this->initializeErrorSettings();
+    }
+
+    /**
+     * Get an instance of OsclassErrors (Singleton pattern).
+     *
+     * @return OsclassErrors
+     */
+    public static function newInstance(): OsclassErrors
+    {
+        return self::$instance ??= new self();
+    }
+
+    /**
+     * Initialize error settings based on defined constants.
+     */
+    private function initializeErrorSettings(): void
+    {
         if (defined('OSC_DEBUG') && OSC_DEBUG) {
             $this->debugEnabled = true;
             ini_set('display_errors', 1);
             error_reporting(E_ALL | E_STRICT);
+
             if (defined('OSC_DEBUG_LOG') && OSC_DEBUG_LOG) {
                 ini_set('display_errors', 0);
                 $this->logEnabled = true;
-                $this->logFile    = CONTENT_PATH . 'debug.log';
+                $this->logFile = CONTENT_PATH . 'debug.log';
             }
         } else {
             error_reporting(
                 E_CORE_ERROR | E_CORE_WARNING | E_COMPILE_ERROR | E_ERROR | E_WARNING | E_PARSE
-                    | E_USER_ERROR | E_USER_WARNING
+                | E_USER_ERROR | E_USER_WARNING
             );
         }
     }
 
     /**
-     * Return previous instance or create a new one
-     */
-    public static function newInstance(): OsclassErrors
-    {
-        if (!self::$instance instanceof self) {
-            self::$instance = new self;
-        }
-
-        return self::$instance;
-    }
-
-    /**
-     * register the error handler
+     * Register error handling functions.
      *
      * @return bool
      */
     public function register(): bool
     {
-        if ($this->debugEnabled === true) {
-            // register the error handler
-            set_error_handler(array($this, 'logErrors'));
-
-            // register exception handler
-            set_exception_handler(array($this, 'logException'));
-
-            // register shutdown function for fatal errors
-            register_shutdown_function(array($this, 'logFatalErrors'));
+        if ($this->debugEnabled) {
+            set_error_handler([$this, 'logErrors']);
+            set_exception_handler([$this, 'logException']);
+            register_shutdown_function([$this, 'logFatalErrors']);
         }
 
         return true;
     }
 
     /**
-     * Handle errors
+     * Handle general errors.
      *
      * @param int    $type
      * @param string $message
@@ -115,27 +116,23 @@ class OsclassErrors
      *
      * @return bool
      */
-    public function logErrors(
-        int    $type = E_USER_NOTICE,
-        string $message = '',
-        string $file = __FILE__,
-        int    $line = __LINE__
-    ): bool {
+    public function logErrors(int $type = E_USER_NOTICE, string $message = '', string $file = __FILE__, int $line = __LINE__): bool
+    {
         $this->log($type, $message, $file, $line);
 
         return true;
     }
+
     /**
-     * Logs a fatal error
-     *
+     * Handle fatal errors.
      */
-    public function logFatalErrors()
+    public function logFatalErrors(): void
     {
         $error = error_get_last();
+
         if (!empty($error)) {
             if ($this->logEnabled) {
-                $message =
-                    $this->formattedError($error['message'], $error['type'], $error['file'], $error['line'], var_export($error, true));
+                $message = $this->formattedError($error['message'], $error['type'], $error['file'], $error['line'], var_export($error, true));
                 $this->writeToFile($message);
             } elseif (PHP_SAPI === 'cli') {
                 printf($this->formattedError(
@@ -147,60 +144,24 @@ class OsclassErrors
                 ));
                 exit(1);
             } else {
-                echo sprintf('<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<meta name="description" content="">
-<meta name="author" content="">
-<link rel="icon" href="../../../../favicon.ico">
-<title>OSClass Error</title>
-<link href="%soc-admin/themes/modern/css/main.css" rel="stylesheet">
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-</head>
-<body style="background:var(--bs-gray-dark);">
-<div class="container">
-<div class="row">
-    <div class="col-lg-12">
-        <h1 class="display-4 text-center text-primary mt-5"><i class="fa fa-warning text-warning"></i> OSClass Error</h1>
-        <hr>
-    </div>
-    <div class="col-lg-12">
-        <div class="row">
-            <div class="col-lg-12">
-                <div class="card mb-5 bg-dark text-light shadow">
-                    <div class="card-body">
-                        <div class="row">
-                            <div class="col-lg-4">
-                                <h2 class="mb-3 p-1">Error Message</h2>
-                                <p class="lead text-primary font-monospace">%s</p>
-                            </div>
-                            <div class="col-lg-8">
-                                <h2 class="mb-1 p-1">Error Details</h2>
-                                <div class="p-2 font-monospace">
-                                    <div class="p-1 text-info"><strong class="">File: </strong>%s</div>
-                                    <div class="p-1 text-info"><strong>Line: </strong>%s</div>
-                                    <div class="p-1 text-info"><strong>Type: </strong>%s</div>
-                                    <pre style="background:var(--bs-gray-dark);" class="mt-4 text-warning border-0">%s</pre>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-</div>
-</body>
-</html>', WEB_PATH, $error['message'], $error['file'], $error['line'], $this->errorType($error['type']), var_export($error, true));
+                $this->displayErrorPage($error);
             }
         }
     }
 
     /**
-     * Formats a message
+     * Display error page.
+     *
+     * @param array $error
+     */
+    private function displayErrorPage(array $error): void
+    {
+        extract($error);
+        include_once ABS_PATH . 'oc-admin/gui/error.php';
+    }
+
+    /**
+     * Format error message.
      *
      * @param string       $message
      * @param int          $errorCode
@@ -223,7 +184,7 @@ class OsclassErrors
     }
 
     /**
-     * Formats a errorCode
+     * Get error type based on error code.
      *
      * @param int $errorCode
      *
@@ -231,58 +192,39 @@ class OsclassErrors
      */
     private function errorType(int $errorCode): string
     {
-        switch ($errorCode) {
-            case E_WARNING:
-                return 'WARNING';
-            case E_PARSE:
-                return 'PARSE';
-            case E_NOTICE:
-                return 'NOTICE';
-            case E_CORE_ERROR:
-                return 'CORE_ERROR';
-            case E_CORE_WARNING:
-                return 'CORE_WARNING';
-            case E_COMPILE_ERROR:
-                return 'COMPILE_ERROR';
-            case E_COMPILE_WARNING:
-                return 'COMPILE_WARNING';
-            case E_USER_ERROR:
-                return 'USER_ERROR';
-            case E_USER_WARNING:
-                return 'USER_WARNING';
-            case E_USER_NOTICE:
-                return 'USER_NOTICE';
-            case E_STRICT:
-                return 'STRICT';
-            case E_RECOVERABLE_ERROR:
-                return 'RECOVERABLE_ERROR';
-            case E_DEPRECATED:
-                return 'DEPRECATED';
-            case E_USER_DEPRECATED:
-                return 'USER_DEPRECATED';
-            default:
-                return 'ERROR';
+        $errorTypes = [
+            E_WARNING => 'WARNING',
+            E_PARSE => 'PARSE',
+            E_NOTICE => 'NOTICE',
+            E_CORE_ERROR => 'CORE_ERROR',
+            E_CORE_WARNING => 'CORE_WARNING',
+            E_COMPILE_ERROR => 'COMPILE_ERROR',
+            E_COMPILE_WARNING => 'COMPILE_WARNING',
+            E_USER_ERROR => 'USER_ERROR',
+            E_USER_WARNING => 'USER_WARNING',
+            E_USER_NOTICE => 'USER_NOTICE',
+            E_STRICT => 'STRICT',
+            E_RECOVERABLE_ERROR => 'RECOVERABLE_ERROR',
+            E_DEPRECATED => 'DEPRECATED',
+            E_USER_DEPRECATED => 'USER_DEPRECATED',
+        ];
+
+        // Add default error type
+        if (!isset($errorTypes[$errorCode])) {
+            $errorTypes[$errorCode] = 'ERROR';
         }
+
+        return $errorTypes[$errorCode];
     }
 
     /**
-     * Writes a message to the log file
+     * Write error message to log file.
      *
      * @param string $message
-     *
-     * @return void
      */
-    private function writeToFile(string $message)
+    private function writeToFile(string $message): void
     {
-        if (!file_exists($this->logFile)) {
-            // try to create the log file or throw an exception with the error
-            try {
-                $this->createLogFile();
-            } catch (Exception $e) {
-                $this->logFile = ini_get('error_log');
-                $this->log($e->getCode(), $e->getTraceAsString());
-            }
-        }
+        $this->ensureLogFileExists();
 
         $message = date('Y-m-d H:i:s') . ' - ' . $message . PHP_EOL;
 
@@ -290,12 +232,26 @@ class OsclassErrors
     }
 
     /**
-     * Creates the log file
-     *
-     * @return void
-     * @throws \Exception
+     * Ensure log file exists or create it.
      */
-    private function createLogFile()
+    private function ensureLogFileExists(): void
+    {
+        if (!file_exists($this->logFile)) {
+            try {
+                $this->createLogFile();
+            } catch (Exception $e) {
+                $this->logFile = ini_get('error_log');
+                $this->log($e->getCode(), $e->getTraceAsString());
+            }
+        }
+    }
+
+    /**
+     * Create log file.
+     *
+     * @throws Exception
+     */
+    private function createLogFile(): void
     {
         $logFile = CONTENT_PATH . 'debug.log';
 
@@ -311,7 +267,7 @@ class OsclassErrors
     }
 
     /**
-     * Logs a message
+     * Log error.
      *
      * @param int    $type
      * @param string $message
@@ -321,22 +277,16 @@ class OsclassErrors
      *
      * @return bool
      */
-    public function log(
-        int    $type = E_USER_NOTICE,
-        string $message = '',
-        string $file = __FILE__,
-        int    $line = __LINE__,
-        string $context = ''
-    ): bool {
+    public function log(int $type = E_USER_NOTICE, string $message = '', string $file = __FILE__, int $line = __LINE__, string $context = ''): bool
+    {
         if ($this->logEnabled) {
             $message = $this->formattedError($message, $type, $file, $line, $context);
             $this->writeToFile($message);
         } else {
-            // it's PHP CLI do not use html
-            if (PHP_SAPI === 'cli') {
-                printf($this->formattedError($message, $type, $file, $line, $context));
-            }
-            $message = $this->htmlFormattedError($message, $type, $file, $line, $context);
+            $message = PHP_SAPI === 'cli'
+                ? $this->formattedError($message, $type, $file, $line, $context)
+                : $this->htmlFormattedError($message, $type, $file, $line, $context);
+
             $this->writeToScreen($message);
         }
 
@@ -344,7 +294,7 @@ class OsclassErrors
     }
 
     /**
-     * Format message in html for screen
+     * Format error message in HTML.
      *
      * @param string $message
      * @param int    $type
@@ -355,70 +305,78 @@ class OsclassErrors
      * @return string
      */
     private function htmlFormattedError(string $message, int $type, string $file, int $line, string $context): string
-    {
-        // return html formatted message
-        $errorTrace = '';
-        if ($context) {
-            $errorTrace = '<pre>' . $context . '</pre>';
+{
+    $errorTrace = $context ? '<pre>' . $context . '</pre>' : '';
+
+    ob_start();
+    ?>
+    <style>
+        .error-container {
+            width: 100%;
+            left: 0;
+            right: 0;
+            margin: auto;
+            z-index: 999;
         }
-        return sprintf('<style>
-              .error-container {
-                  width: 100%%;
-                  left: 0;
-                  right: 0;
-                  margin: auto;
-                  z-index: 999;
-              }
-              .error-container .error {
-                  border-radius: .25rem;
-                  font-size: 1.2rem;
-                  font-weight: normal;
-                  padding: 1rem;
-                  margin-top: 10px;
-                  margin-bottom: 10px;
-                  clear: both;
-                  text-align: initial;
-                  color: #231c1c;
-              }
-              .error-container .error-info {
-                  color: #055160;
-                  background-color: #cff4fc;
-              }
-              .error-container .error-warning {
-                  color: #5a5a00;
-                  background-color: #fff7bd;
-              }
-              .error-container .error-danger {
-                  color: #720505;
-                  background-color: #fcd5d1;
-              }
-              .error-container pre {
-                  background: #343a40;
-                  color: #ffc107;
-                  padding: 1rem;
-                  font-size: 1rem;
-                  border-radius: 0.25rem;
-                  margin-top: 2rem;
-                  border:0;
-              }
-            </style>
-            <div class="error-container">
-                <div class="error error-%s">
-                    <strong>%s:</strong> %s
-                    <br>
-                    <strong>Error File:</strong> %s
-                    <br>
-                    <strong>Error Line:</strong> %d
-                    <br>
-                    <strong>Error Code:</strong> %s
-                    <br>
-                    %s
-                </div>
-           </div>', $this->errorClass($type), $this->errorType($type), $message, $file, $line, $type, $errorTrace);
-    }
+
+        .error-container .error {
+            border-radius: .25rem;
+            font-size: 1.2rem;
+            font-weight: normal;
+            padding: 1rem;
+            margin-top: 10px;
+            margin-bottom: 10px;
+            clear: both;
+            text-align: initial;
+            color: #231c1c;
+        }
+
+        .error-container .error-info {
+            color: #055160;
+            background-color: #cff4fc;
+        }
+
+        .error-container .error-warning {
+            color: #5a5a00;
+            background-color: #fff7bd;
+        }
+
+        .error-container .error-danger {
+            color: #720505;
+            background-color: #fcd5d1;
+        }
+
+        .error-container pre {
+            background: #343a40;
+            color: #ffc107;
+            padding: 1rem;
+            font-size: 1rem;
+            border-radius: 0.25rem;
+            margin-top: 2rem;
+            border: 0;
+        }
+    </style>
+
+    <div class="error-container">
+        <div class="error error-<?php echo $this->errorClass($type); ?>">
+            <strong><?php echo $this->errorType($type); ?>:</strong> <?php echo $message; ?>
+            <br>
+            <strong>Error File:</strong> <?php echo $file; ?>
+            <br>
+            <strong>Error Line:</strong> <?php echo $line; ?>
+            <br>
+            <strong>Error Code:</strong> <?php echo $type; ?>
+            <br>
+            <?php echo $errorTrace; ?>
+        </div>
+    </div>
+    <?php
+    return ob_get_clean();
+}
+
 
     /**
-     * Get the class for the alert type
+     * Get error class based on error code.
      *
      * @param int $errorCode
      *
@@ -444,27 +402,24 @@ class OsclassErrors
     }
 
     /**
-     * Writes a message to the screen
+     * Write error message to screen.
      *
      * @param string $message
-     *
-     * @return void
      */
-    private function writeToScreen(string $message)
+    private function writeToScreen(string $message): void
     {
         echo $message;
     }
 
     /**
-     * Logs an exception
+     * Log exception.
      *
-     * @param $exception object
+     * @param Exception $exception
      *
      * @return bool
      */
-    public function logException($exception): bool
+    public function logException(Exception $exception): bool
     {
-
         $this->log(
             $exception->getCode(),
             $exception->getMessage(),
