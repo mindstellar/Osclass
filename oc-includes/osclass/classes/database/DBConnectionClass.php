@@ -157,13 +157,15 @@ class DBConnectionClass
      */
     public function connectToOsclassDb()
     {
-        $conn = $this->connectToDb();
+        try {
+            $conn = $this->connectToDb();
+        } catch (Exception $e) {
+            $this->handleDbError();
+            return false;
+        }
 
         if ($conn === false) {
-            $this->handleDbError(
-                'Osclass &raquo; Error',
-                'Osclass database server is not available. <a href="https://github.com">Need more help?</a></p>'
-            );
+            $this->handleDbError();
             return false;
         }
 
@@ -178,10 +180,7 @@ class DBConnectionClass
         if ($selectDb === false) {
             $this->errorReport();
             $this->releaseDb();
-            $this->handleDbError(
-                'Osclass &raquo; Error',
-                'Osclass database is not available. <a href="https://github.com/mindstellar/Osclass/discussions">Need more help?</a></p>'
-            );
+            $this->handleDbError();
         }
 
         return true;
@@ -194,9 +193,11 @@ class DBConnectionClass
      */
     private function connectToDb()
     {
-
         $this->connId = new mysqli($this->dbHost, $this->dbUser, $this->dbPassword);
-
+        if (!$this->connId) {
+            $this->errorConnection();
+            return false;
+        }
         $this->errorConnection();
         if ($this->connId->connect_errno) {
             return false;
@@ -300,9 +301,11 @@ class DBConnectionClass
      * @param $title
      * @param $message
      */
-    private function handleDbError($title, $message)
+    private function handleDbError($title = null, $message = null)
     {
-        if (defined('OSC_INSTALLING') && OSC_INSTALLING !== 1) {
+        $title = $title??'Osclass &raquo; Error';
+        $message = $message??'Osclass database server is not available. <a href="https://github.com/mindstellar/Osclass/discussions">Need more help?</a></p>';
+        if (!defined('OSC_INSTALLING') ) {
             require_once LIB_PATH . 'osclass/helpers/hErrors.php';
             osc_die($title, $message);
         }
