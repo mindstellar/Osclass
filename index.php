@@ -35,6 +35,7 @@ if (PHP_SAPI === 'cli') {
 require_once __DIR__ . '/oc-load.php';
 
 if (CLI) {
+    //Example: php index.php -p cron -t hourly
     $cli_params = getopt('p:t:');
     if ($cli_params) {
         Params::setParam('page', $cli_params['p']);
