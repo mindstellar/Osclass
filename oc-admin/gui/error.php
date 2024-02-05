@@ -26,15 +26,15 @@
                                 <div class="row">
                                     <div class="col-lg-4">
                                         <h2 class="mb-3 p-1">Error Message</h2>
-                                        <p class="lead text-primary font-monospace"><?php echo $error_message; ?></p>
+                                        <p class="lead text-primary font-monospace"><?php echo $message; ?></p>
                                     </div>
                                     <div class="col-lg-8">
                                         <h2 class="mb-1 p-1">Error Details</h2>
                                         <div class="p-2 font-monospace">
-                                            <div class="p-1 text-info"><strong class="">File: </strong><?php echo $error_file; ?></div>
-                                            <div class="p-1 text-info"><strong>Line: </strong><?php echo $error_line; ?></div>
-                                            <div class="p-1 text-info"><strong>Type: </strong><?php echo $error_type; ?></div>
-                                            <pre style="background:var(--bs-gray-dark);" class="mt-4 text-warning border-0"><?php echo $error_trace; ?></pre>
+                                            <div class="p-1 text-info"><strong class="">File: </strong><?php echo $file; ?></div>
+                                            <div class="p-1 text-info"><strong>Line: </strong><?php echo $line; ?></div>
+                                            <div class="p-1 text-info"><strong>Type: </strong><?php echo $type; ?></div>
+                                            <pre style="background:var(--bs-gray-dark);" class="mt-4 text-warning border-0"><?php echo $trace; ?></pre>
                                         </div>
                                     </div>
                                 </div>

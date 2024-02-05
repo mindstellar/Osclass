@@ -72,7 +72,7 @@ class OsclassErrors
      */
     private function initializeErrorSettings(): void
     {
-        if (defined('OSC_DEBUG') && OSC_DEBUG) {
+        if (defined('OSC_DEBUG') && OSC_DEBUG || defined('OSC_INSTALLING')) {
             $this->debugEnabled = true;
             ini_set('display_errors', 1);
             error_reporting(E_ALL | E_STRICT);
@@ -157,7 +157,9 @@ class OsclassErrors
     private function displayErrorPage(array $error): void
     {
         extract($error);
-        include_once ABS_PATH . 'oc-admin/gui/error.php';
+        $trace = var_export(debug_backtrace(), true);
+
+        include ABS_PATH . 'oc-admin/gui/error.php';
     }
 
     /**
@@ -414,11 +416,11 @@ class OsclassErrors
     /**
      * Log exception.
      *
-     * @param Exception $exception
+     * @param $exception
      *
      * @return bool
      */
-    public function logException(Exception $exception): bool
+    public function logException($exception): bool
     {
         $this->log(
             $exception->getCode(),
