@@ -66,4 +66,3 @@ services:
 
 volumes:
   mysql-data:
-  osclass-content:
