@@ -1,9 +1,7 @@
-###############################################################################
-#                         Osclass Docker Config                               #
-###############################################################################
-version: "3.1"
-services:
+# Docker Compose Configuration for Osclass Application
+version: "3.7"
 
+services:
   webserver:
     image: nginx:alpine
     container_name: osclass-webserver
@@ -12,46 +10,59 @@ services:
       - .:/application
       - ./.docker/nginx/nginx.conf:/etc/nginx/conf.d/default.conf
     ports:
-      - "5000:80"
-
+      - "5080:80"
+  # PHP-FPM Service
   php-fpm:
-    image: mindstellar/osclass-php-fpm
+    build:
+      context: .
+      dockerfile: .docker/php-fpm/Dockerfile
     container_name: osclass-php-fpm
     working_dir: /application
-    volumes:
-      - .:/application
-      - ./.docker/php-fpm/php-ini-overrides.ini:/etc/php/7.3/fpm/conf.d/99-overrides.ini
-
-  mysql:
-    image: mysql:5.7
-    container_name: osclass-mysql
-    working_dir: /application
-    volumes:
-      - .:/application
-    environment:
-      - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD:-root-password}
-      - MYSQL_DATABASE=${MYSQL_OSCLASS_DATABASE_NAME:-osclass-db}
-      - MYSQL_USER=${MYSQL_OSCLASS_DATABASE_USER:-osclass-db-user}
-      - MYSQL_PASSWORD=${MYSQL_OSCLASS_DATABASE_PASSWORD:-osclass-db-password}
     ports:
-      - "5002:3306"
+      - "5090:9000"
+    volumes:
+      - .:/application
+      - ./.docker/php-fpm/php-ini-overrides.ini:/etc/php/8.2/fpm/conf.d/99-overrides.ini
+      - osclass-content:/application/oc-content
+  # MySQL Database
+  mysql:
+    # Uncomment this line if you are using a M1 Mac and facing issues with MySQL image
+    # platform: linux/x86_64
+    image: mysql:8.0
+    container_name: osclass-mysql
+    volumes:
+      - mysql-data:/var/lib/mysql
+    environment:
+      - MYSQL_ROOT_PASSWORD=${ROOT_PASSWORD_MYSQL:-root}
+      - MYSQL_DATABASE=${OSCLASS_DATABASE_NAME:-osclass}
+      - MYSQL_USER=${OSCLASS_DATABASE_USER:-osclass}
+      - MYSQL_PASSWORD=${OSCLASS_DATABASE_PASSWORD:-osclass}
+    ports:
+      - "5306:3306"
 
+  # Memcached for Caching
   memcached:
     image: memcached:alpine
     container_name: osclass-memcached
 
+  # Mailhog for Email Testing
   mailhog:
     image: mailhog/mailhog:latest
     container_name: osclass-mailhog
     ports:
-      - "5003:8025"
+      - "5025:8025"
 
+  # PHPMyAdmin for Database Management
   phpmyadmin:
     image: phpmyadmin/phpmyadmin
     container_name: osclass-phpmyadmin
     ports:
-      - "5001:80"
+      - "5800:80"
     environment:
       - PMA_HOST=mysql
       - PMA_USER=root
-      - PMA_PASSWORD=${MYSQL_ROOT_PASSWORD:-root-password}
+      - PMA_PASSWORD=${MYSQL_ROOT_PASSWORD:-root}
+
+volumes:
+  mysql-data:
+  osclass-content:
