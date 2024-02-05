@@ -23,7 +23,8 @@ services:
     volumes:
       - .:/application
       - ./.docker/php-fpm/php-ini-overrides.ini:/etc/php/8.2/fpm/conf.d/99-overrides.ini
-      - osclass-content:/application/oc-content
+    command: php-fpm
+
   # MySQL Database
   mysql:
     # Uncomment this line if you are using a M1 Mac and facing issues with MySQL image
