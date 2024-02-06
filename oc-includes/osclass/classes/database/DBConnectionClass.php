@@ -157,15 +157,13 @@ class DBConnectionClass
      */
     public function connectToOsclassDb()
     {
-        try {
-            $conn = $this->connectToDb();
-        } catch (Exception $e) {
-            $this->handleDbError();
-            return false;
-        }
+        $conn = $this->connectToDb();
 
         if ($conn === false) {
-            $this->handleDbError();
+            $this->handleDbError(
+                'Osclass &raquo; Error',
+                'Osclass database server is not available. <a href="https://github.com/mindstellar/Osclass/discussions">Need more help?</a></p>'
+            );
             return false;
         }
 
@@ -180,7 +178,10 @@ class DBConnectionClass
         if ($selectDb === false) {
             $this->errorReport();
             $this->releaseDb();
-            $this->handleDbError();
+            $this->handleDbError(
+                'Osclass &raquo; Error',
+                'Osclass database is not available. <a href="https://github.com/mindstellar/Osclass/discussions">Need more help?</a></p>'
+            );
         }
 
         return true;
@@ -193,13 +194,20 @@ class DBConnectionClass
      */
     private function connectToDb()
     {
-        $this->connId = new mysqli($this->dbHost, $this->dbUser, $this->dbPassword);
-        if (!$this->connId) {
-            $this->errorConnection();
+        try {
+            $this->connId = new mysqli($this->dbHost, $this->dbUser, $this->dbPassword);
+        } catch (Exception $e) {
+            $this->errorDesc = $e->getMessage();
+            $this->errorLevel = $e->getCode();
+            $this->connErrorLevel = $e->getCode();
+            $this->connErrorDesc = $e->getMessage();
             return false;
         }
-        $this->errorConnection();
+
+        // Check for connection errors
         if ($this->connId->connect_errno) {
+            $this->errorConnection();
+            $this->errorReport();  // Set error information
             return false;
         }
         $this->setSQLMode();
@@ -218,7 +226,6 @@ class DBConnectionClass
 
         $this->connErrorLevel = $this->connId->connect_errno;
         $this->connErrorDesc  = $this->connId->connect_error;
-
     }
 
     /**
@@ -292,7 +299,6 @@ class DBConnectionClass
 
         $this->errorLevel = $this->connId->errno;
         $this->errorDesc  = $this->connId->error;
-
     }
 
     /**
@@ -301,11 +307,9 @@ class DBConnectionClass
      * @param $title
      * @param $message
      */
-    private function handleDbError($title = null, $message = null)
+    private function handleDbError($title, $message)
     {
-        $title = $title??'Osclass &raquo; Error';
-        $message = $message??'Osclass database server is not available. <a href="https://github.com/mindstellar/Osclass/discussions">Need more help?</a></p>';
-        if (!defined('OSC_INSTALLING') ) {
+        if (defined('OSC_INSTALLING') && OSC_INSTALLING !== 1) {
             require_once LIB_PATH . 'osclass/helpers/hErrors.php';
             osc_die($title, $message);
         }
@@ -339,7 +343,6 @@ class DBConnectionClass
         }
 
         return $this->connId->select_db($this->dbName);
-
     }
 
     /**
