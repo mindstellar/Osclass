@@ -168,9 +168,6 @@ switch ($step) {
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title><?php _e('Osclass Installation'); ?></title>
-    <!--<link rel="stylesheet" type="text/css" media="all"
-          href="<?php echo get_absolute_url(); ?>oc-includes/osclass/installer/install.css"/>
-          -->
     <link rel="stylesheet" type="text/css" media="all"
           href="<?php echo get_absolute_url(); ?>oc-includes/assets/bootstrap/bootstrap.min.css"/>
     <link rel="stylesheet" type="text/css" media="all"
@@ -265,7 +262,7 @@ switch ($step) {
                                                 <?php } ?>
                                             <?php } ?>
                                             <li class="small">
-                                                <a href="https://osclass.discourse.group"
+                                                <a href="https://github.com/mindstellar/Osclass/discussions" target="_blank"
                                                    hreflang="en"><?php _e('Need more help?'); ?></a></li>
                                         </ul>
                                     </div>
