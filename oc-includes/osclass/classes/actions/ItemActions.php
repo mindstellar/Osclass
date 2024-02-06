@@ -450,9 +450,11 @@ class ItemActions
 
         $flash_error .= ((!osc_validate_category($aItem['catId'])) ? _m('Category invalid.') . PHP_EOL : '');
         $flash_error .= ((!osc_validate_number($aItem['price'])) ? _m('Price must be a number.') . PHP_EOL : '');
-        $flash_error .= ((!osc_validate_max(number_format($aItem['price'], 0, '', ''), 15))
+        if ($aItem['price'] !== null) {
+            $flash_error .= ((!osc_validate_max(number_format($aItem['price'], 0, '', ''), 15))
             ? _m('Price too long.')
             . PHP_EOL : '');
+        }
         $flash_error .= (($aItem['price'] !== null && (float)$aItem['price'] < 0)
             ? _m('Price must be positive number.') . PHP_EOL : '');
         $flash_error .= ((!osc_validate_text($aItem['countryName'], 3, false))
