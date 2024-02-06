@@ -95,10 +95,10 @@ Once you're done, simply `cd` to Osclass directory and run `docker-compose up -d
 
   Service|Address outside containers
   ------|---------
-  Webserver|[localhost:5000](http://localhost:5000)
-  PhpMyAdmin web interface|[localhost:5001](http://localhost:5001)
-  MySQL|**host:** `localhost`; **port:** `5002`
-  Mailhog web interface|[localhost:5003](http://localhost:5003)
+  Webserver|[localhost:5080](http://localhost:5080)
+  PhpMyAdmin web interface|[localhost:5800](http://localhost:5800)
+  MySQL|**host:** `localhost`; **port:** `5306`
+  Mailhog web interface|[localhost:5025](http://localhost:5025)
 
 * #### Hosts for osclass docker environment ##
 

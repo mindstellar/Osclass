@@ -2,15 +2,6 @@
 version: "3.7"
 
 services:
-  webserver:
-    image: nginx:alpine
-    container_name: osclass-webserver
-    working_dir: /application
-    volumes:
-      - .:/application
-      - ./.docker/nginx/nginx.conf:/etc/nginx/conf.d/default.conf
-    ports:
-      - "5080:80"
   # PHP-FPM Service
   php-fpm:
     build:
@@ -18,8 +9,6 @@ services:
       dockerfile: .docker/php-fpm/Dockerfile
     container_name: osclass-php-fpm
     working_dir: /application
-    ports:
-      - "5090:9000"
     volumes:
       - .:/application
       - ./.docker/php-fpm/php-ini-overrides.ini:/etc/php/8.2/fpm/conf.d/99-overrides.ini
@@ -38,13 +27,22 @@ services:
       - MYSQL_DATABASE=${OSCLASS_DATABASE_NAME:-osclass}
       - MYSQL_USER=${OSCLASS_DATABASE_USER:-osclass}
       - MYSQL_PASSWORD=${OSCLASS_DATABASE_PASSWORD:-osclass}
-    ports:
-      - "5306:3306"
-
+      
   # Memcached for Caching
   memcached:
     image: memcached:alpine
     container_name: osclass-memcached
+
+  # Nginx Webserver
+  webserver:
+    image: nginx:alpine
+    container_name: osclass-webserver
+    working_dir: /application
+    volumes:
+      - .:/application
+      - ./.docker/nginx/nginx.conf:/etc/nginx/conf.d/default.conf
+    ports:
+      - "5080:80"
 
   # Mailhog for Email Testing
   mailhog:
@@ -63,6 +61,6 @@ services:
       - PMA_HOST=mysql
       - PMA_USER=root
       - PMA_PASSWORD=${MYSQL_ROOT_PASSWORD:-root}
-
+# persistent volumes
 volumes:
   mysql-data:
