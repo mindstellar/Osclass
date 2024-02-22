@@ -63,8 +63,7 @@ if (!isset($country_list[0]->s_country_name)) {
             </div>
         </div>
         <h4 class="title"><?php _e('Location'); ?></h4>
-        <p class="space-left-25 left no-bottom"><?php _e('Choose a country where your target users are located'); ?>
-            .</p>
+        <p class="space-left-25 left no-bottom"><?php _e('Choose a country where your target users are located'); ?></p>
         <div id="location">
             <?php if (!$internet_error) { ?>
                 <input type="hidden" id="skip-location-input" name="skip-location-input" value="<?php echo $country_ip ? 0 : 1; ?>" />
