@@ -307,11 +307,11 @@ class OsclassErrors
      * @return string
      */
     private function htmlFormattedError(string $message, int $type, string $file, int $line, string $context): string
-{
-    $errorTrace = $context ? '<pre>' . $context . '</pre>' : '';
+    {
+        $errorTrace = $context ? '<pre>' . $context . '</pre>' : '';
 
-    ob_start();
-    ?>
+        ob_start();
+        ?>
     <style>
         .error-container {
             width: 100%;
@@ -372,9 +372,9 @@ class OsclassErrors
             <?php echo $errorTrace; ?>
         </div>
     </div>
-    <?php
-    return ob_get_clean();
-}
+        <?php
+        return ob_get_clean();
+    }
 
 
     /**
