@@ -1,4 +1,6 @@
-<?php if (!defined('ABS_PATH')) exit('ABS_PATH is not loaded. Direct access is not allowed.');
+<?php if (!defined('ABS_PATH')) {
+    exit('ABS_PATH is not loaded. Direct access is not allowed.');
+}
 $data = finish_installation($password);
 ?>
 <?php if (Params::getParam('error_location') == 1) { ?>
@@ -13,7 +15,7 @@ $data = finish_installation($password);
 <?php } ?>
 <h2 class="display-6 text-success"><?php _e('Congratulations!'); ?></h2>
 <div class="alert alert-success shadow-sm mb3"><?php _e("Osclass has been installed. Were you expecting more steps? Sorry to disappoint you!");
-                                                ?></div>
+?></div>
 <div class="alert alert-info shadow-sm mb-3">
     <?php echo sprintf(
         __('An e-mail with the password for oc-admin has been sent to: %s'),

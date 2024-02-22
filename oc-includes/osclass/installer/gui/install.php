@@ -1,4 +1,6 @@
-<?php if( !defined('ABS_PATH') ){ exit('ABS_PATH is not loaded. Direct access is not allowed.'); } ?>
+<?php if ( !defined('ABS_PATH') ) {
+    exit('ABS_PATH is not loaded. Direct access is not allowed.');
+} ?>
 <!doctype html>
 <html lang="en">
 <head>

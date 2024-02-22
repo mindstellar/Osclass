@@ -336,7 +336,6 @@ function oc_install()
         $error_num   = $adminInstance->getErrorConnectionLevel();
 
         if ($error_num > 0) {
-
             switch ($error_num) {
                 case 1049:
                     return array(
@@ -369,7 +368,6 @@ function oc_install()
         $error_num = $comm->getErrorLevel();
 
         if ($error_num > 0) {
-
             if (in_array($error_num, array(1006, 1044, 1045))) {
                 return array(
                     'error' => __("Can't create the database. Check if the admin username "
@@ -521,7 +519,6 @@ function oc_install()
     $error_num = $comm->getErrorLevel();
 
     if ($error_num > 0) {
-
         if ($error_num === 1471) {
             return array(
                 'error' => __("Can't insert basic configuration. "
@@ -800,13 +797,13 @@ function finish_installation($password)
  */
 function display_database_config()
 {
- include_once 'installer/gui/install-database.php';
+    include_once 'installer/gui/install-database.php';
 }
 
 
 function display_target()
-{  
- include_once 'installer/gui/install-target.php';
+{
+    include_once 'installer/gui/install-target.php';
 }
 
 
@@ -816,14 +813,14 @@ function display_target()
  */
 function display_database_error($error, $step)
 {
-?>
+    ?>
     <h2 class="target display-6"><?php _e('Error'); ?></h2>
     <div class="alert alert-danger shadow">
         <?php echo $error['error'] ?>
     </div>
     <a href="<?php echo get_absolute_url(); ?>oc-includes/osclass/install.php?step=<?php echo $step; ?>" class="btn btn-warning"><?php _e('Go back'); ?></a>
     <div class="clear bottom"></div>
-<?php
+    <?php
 }
 
 

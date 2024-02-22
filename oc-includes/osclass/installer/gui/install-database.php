@@ -1,4 +1,6 @@
-<?php if (!defined('ABS_PATH')) exit('ABS_PATH is not loaded. Direct access is not allowed.'); ?>
+<?php if (!defined('ABS_PATH')) {
+    exit('ABS_PATH is not loaded. Direct access is not allowed.');
+} ?>
 <form class="p-3" action="install.php" method="post">
     <input type="hidden" name="step" value="3" />
     <h2 class="display-6 mb-3"><?php _e('Database information'); ?></h2>
@@ -12,16 +14,16 @@
         </div>
         <div class="row mb-3">
             <label for="dbname" class="col-md-3 col-sm-6 col-form-label"><strong><?php _e('Database name');
-                                                                                    ?></strong></label>
+            ?></strong></label>
             <div class="col-md-3 col-sm-6">
                 <input class="form-control" type="text" id="dbname" name="dbname" value="osclass" size="25" />
             </div>
             <div class="small"><?php _e('The name of the database you want to run Osclass in');
-                                ?></div>
+            ?></div>
         </div>
         <div class="row mb-3">
             <label for="username" class="col-md-3 col-sm-6 col-form-label"><strong><?php _e('User Name');
-                                                                                    ?></strong></label>
+            ?></strong></label>
             <div class="col-md-3 col-sm-6">
                 <input class="form-control" type="text" id="username" name="username" size="25" />
             </div>
@@ -29,7 +31,7 @@
         </div>
         <div class="row mb-3">
             <label for="password" class="col-md-3 col-sm-6 col-form-label"><strong><?php _e('Password');
-                                                                                    ?></strong></label>
+            ?></strong></label>
             <div class="col-md-3 col-sm-6">
                 <input class="form-control" type="password" id="password" name="password" value="" size="25" autocomplete="off" />
             </div>
@@ -37,7 +39,7 @@
         </div>
         <div class="row mb-3">
             <label for="tableprefix" class="col-md-3 col-sm-6 col-form-label"><strong><?php _e('Table prefix');
-                                                                                        ?></strong></label>
+            ?></strong></label>
             <div class="col-md-3 col-sm-6">
                 <input class="form-control" type="text" id="tableprefix" name="tableprefix" value="oc_" size="25" />
             </div>
