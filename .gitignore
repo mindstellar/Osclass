@@ -65,3 +65,6 @@ robots.txt
 /oc-admin/themes/template/
 .vscode/settings.json
 .vscode/launch.json
+info.php
+testmail.php
+config.php.local
