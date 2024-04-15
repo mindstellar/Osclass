@@ -1,4 +1,8 @@
-# Security Policy 🔒
+# Security Policy
+
+## Reporting a Vulnerability
+
+Please report security issues to `security@mindstellar.com`# Security Policy 🔒
 
 ## Reporting a Vulnerability 🚨
 
