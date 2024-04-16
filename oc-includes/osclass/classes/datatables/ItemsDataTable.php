@@ -27,6 +27,8 @@
  *
  */
 
+use mindstellar\utility\Sanitize;
+
 /**
  * ItemsDataTable class
  *
@@ -37,7 +39,9 @@
  */
 class ItemsDataTable extends DataTable
 {
-    /** @var $mSearch \Search */
+    /**
+     * @var Search
+     */
     private $mSearch;
     private $withFilters = false;
 
@@ -131,6 +135,7 @@ class ItemsDataTable extends DataTable
 
         $withUserId    = false;
         $no_user_email = '';
+        $sanitizer     = new Sanitize();
         // get & set values
         foreach ($_get as $k => $v) {
             if ($k === 'sSearch' && $v != '') {
@@ -138,14 +143,13 @@ class ItemsDataTable extends DataTable
                 $this->withFilters = true;
             }
 
-            // filters
             if ($k === 'userId' && $v != '') {
-                $this->mSearch->fromUser($v);
+                $this->mSearch->fromUser($sanitizer->int($v));
                 $this->withFilters = true;
                 $withUserId        = true;
             }
             if ($k === 'itemId' && $v != '') {
-                $this->mSearch->addItemId($v);
+                $this->mSearch->addItemId($sanitizer->int($v));
                 $this->withFilters = true;
             }
             if ($k === 'countryId' && $v != '') {
@@ -178,19 +182,19 @@ class ItemsDataTable extends DataTable
                 $this->withFilters = true;
             }
             if ($k === 'b_premium' && $v != '') {
-                $this->mSearch->addItemConditions(DB_TABLE_PREFIX . 't_item.b_premium = ' . $v);
+                $this->mSearch->addItemConditions(DB_TABLE_PREFIX . 't_item.b_premium = ' . $sanitizer->int($v));
                 $this->withFilters = true;
             }
             if ($k === 'b_active' && $v != '') {
-                $this->mSearch->addItemConditions(DB_TABLE_PREFIX . 't_item.b_active = ' . $v);
+                $this->mSearch->addItemConditions(DB_TABLE_PREFIX . 't_item.b_active = ' . $sanitizer->int($v));
                 $this->withFilters = true;
             }
             if ($k === 'b_enabled' && $v != '') {
-                $this->mSearch->addItemConditions(DB_TABLE_PREFIX . 't_item.b_enabled = ' . $v);
+                $this->mSearch->addItemConditions(DB_TABLE_PREFIX . 't_item.b_enabled = ' . $sanitizer->int($v));
                 $this->withFilters = true;
             }
             if ($k === 'b_spam' && $v != '') {
-                $this->mSearch->addItemConditions(DB_TABLE_PREFIX . 't_item.b_spam = ' . $v);
+                $this->mSearch->addItemConditions(DB_TABLE_PREFIX . 't_item.b_spam = ' . $sanitizer->int($v));
                 $this->withFilters = true;
             }
             if ($k === 'user' && $v != '') {
