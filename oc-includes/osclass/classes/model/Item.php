@@ -1226,7 +1226,9 @@ class Item extends DAO
 
         $this->dao->select('fk_i_category_id, fk_c_locale_code, s_name');
         $this->dao->from(DB_TABLE_PREFIX . 't_category_description');
-        $this->dao->whereIn('fk_i_category_id', $categoryIds);
+        if (count($categoryIds) > 0) {
+            $this->dao->whereIn('fk_i_category_id', $categoryIds);
+        }
         $this->dao->where('s_name!=', '');
 
         $result = $this->dao->get();
