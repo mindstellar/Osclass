@@ -600,8 +600,11 @@ function osc_item_url_from_item($item, $locale = '')
                 $url = str_replace('{CATEGORIES}', implode('/', $sanitized_categories), $url);
             }
 
-            $url = str_replace(array('{ITEM_ID}', '{ITEM_CITY}', '{ITEM_TITLE}', '?'),
-                               array($itemId, $itemCity, $itemTitle, ''), $url);
+            $url = str_replace(
+                array('{ITEM_ID}', '{ITEM_CITY}', '{ITEM_TITLE}', '?'),
+                array($itemId, $itemCity, $itemTitle, ''),
+                $url
+            );
             if ($locale != '') {
                 $path = osc_base_url() . $locale . '/' . $url;
             } else {
@@ -612,7 +615,9 @@ function osc_item_url_from_item($item, $locale = '')
         }
     } else {
         $path = '';
-        trigger_error('Item is not an array or does not have the necessary variables', E_USER_WARNING);
+        if (OSC_DEBUG) {
+            trigger_error('Item is not an array or does not have the necessary variables', E_USER_WARNING);
+        }
     }
 
     return $path;
@@ -921,7 +926,7 @@ function osc_item_edit_url($secret = '', $id = '')
     }
 
     return osc_base_url(true) . '?page=item&action=item_edit&id=' . $id . ($secret != '' ? '&secret=' . $secret
-            : '');
+        : '');
 }
 
 
@@ -943,7 +948,7 @@ function osc_item_delete_url($secret = '', $id = '')
     }
 
     return osc_base_url(true) . '?page=item&action=item_delete&id=' . $id . ($secret != '' ? '&secret=' . $secret
-            : '');
+        : '');
 }
 
 
@@ -965,7 +970,7 @@ function osc_item_activate_url($secret = '', $id = '')
     }
 
     return osc_base_url(true) . '?page=item&action=activate&id=' . $id . ($secret != '' ? '&secret=' . $secret
-            : '');
+        : '');
 }
 
 
