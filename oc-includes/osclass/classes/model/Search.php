@@ -832,8 +832,9 @@ class Search extends DAO
 
     private function loadUserTable()
     {
-        if (!$this->userTableLoaded) {
-            $this->dao->from(sprintf('%st_user', DB_TABLE_PREFIX));
+        $from = $this->dao->aFrom;
+        if (!in_array(DB_TABLE_PREFIX . 't_user', $from)) {
+            $this->dao->from(DB_TABLE_PREFIX . 't_user');
             $this->userTableLoaded = true;
         }
     }
