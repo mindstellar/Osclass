@@ -1335,7 +1335,7 @@ class DBCommandClass
             if (!is_array($this->aFrom)) {
                 $this->a_from = array($this->aFrom);
             }
-            $sql .= '(' . implode(', ', $this->aFrom) . ')';
+            $sql .= implode(', ', $this->aFrom);
         }
 
         // "JOIN" portion of the query
