@@ -387,10 +387,12 @@ class Item extends DAO
                     $this->dao->where('i.b_spam', 0);
                     break;
                 case 'EXPIRED':
-                    $this->dao->where('( i.b_premium = 0 && i.dt_expiration < \'' . date('Y-m-d H:i:s') . '\' )');
+                    $this->dao->where('i.b_premium', 0);
+                    $this->dao->where('( i.dt_expiration < \'' . date('Y-m-d H:i:s') . '\' )');
                     break;
                 case 'NOTEXPIRED':
-                    $this->dao->where('( i.b_premium = 1 || i.dt_expiration >= \'' . date('Y-m-d H:i:s') . '\' )');
+                    $this->dao->orWhere('i.b_premium', 1);
+                    $this->dao->where('( i.dt_expiration >= \'' . date('Y-m-d H:i:s') . '\' )');
                     break;
                 case 'PREMIUM':
                     $this->dao->where('i.b_premium', 1);
@@ -564,7 +566,7 @@ class Item extends DAO
 
                 return;
             case 'active':
-                $this->addWhereByOptions(['ACTIVE', 'NOTEXPIRED']);
+                $this->addWhereByOptions(['ACTIVE', 'ENABLED', 'NOTEXPIRED']);
 
                 return;
             case 'nospam':
@@ -587,7 +589,7 @@ class Item extends DAO
             case 'all':
                 return;
             default:
-                $this->addWhereByOptions(['ENABLED', 'ACTIVE', 'NOTEXPIRED']);
+                $this->addWhereByOptions(['ENABLED', 'ACTIVE', 'NOTEXPIRED', 'NOTSPAM']);
         }
     }
 
