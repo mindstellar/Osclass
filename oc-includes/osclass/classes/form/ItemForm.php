@@ -132,7 +132,7 @@ class ItemForm extends Form
                     || (isset($catId) && $catId == $c['pk_i_id']));
 
             echo '<option value="' . $c['pk_i_id'] . '"' . ($selected ? ' selected="selected'
-                    . ($item['fk_i_category_id'] ?? '') . '"' : '') . '>' 
+                    . ($item['fk_i_category_id'] ?? '') . '"' : '') . '>'
                     . $deep_string . $c['s_name']
                 . '</option>';
             if (isset($c['categories']) && is_array($c['categories'])) {
