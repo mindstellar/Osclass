@@ -587,7 +587,7 @@ class Item extends DAO
             case 'all':
                 return;
             default:
-                $this->addWhereByOptions(['ENABLED']);
+                $this->addWhereByOptions(['ENABLED', 'ACTIVE', 'NOTEXPIRED']);
         }
     }
 
