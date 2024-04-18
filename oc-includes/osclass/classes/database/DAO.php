@@ -133,6 +133,31 @@ class DAO
     }
 
     /**
+     * Get the result matching of the primary key passed by parameter
+     * Check if Item exists
+     * @access public
+     * @param int $value
+     * @return bool If the result has been found, it return the array row. If not, it returns false
+     */
+    public function existsByPrimaryKey($value)
+    {
+        $this->dao->select($this->getPrimaryKey());
+        $this->dao->from($this->getTableName());
+        $this->dao->where($this->getPrimaryKey(), $value);
+        $result = $this->dao->get();
+
+        if ($result === false) {
+            return false;
+        }
+
+        if ($result->numRows() > 0) {
+            return false;
+        }
+
+        return true;
+    }
+
+    /**
      * Get table name
      *
      * @access public
