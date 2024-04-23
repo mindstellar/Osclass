@@ -79,7 +79,7 @@ class Osclass extends UpgradePackage
      *
      * @return false|string
      */
-    public static function upgradeDB(bool $skip_db = false)
+    public static function upgradeDB($skip_db = false)
     {
         set_time_limit(0);
 
