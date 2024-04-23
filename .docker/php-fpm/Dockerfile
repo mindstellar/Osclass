@@ -1,5 +1,5 @@
 # Custom PHP-FPM image with PHP extensions and Composer
-FROM php:8.2-fpm-alpine
+FROM php:8.3-fpm-alpine
 LABEL maintainer="navjottomer@gmail.com"
 
 # Download script to install PHP extensions and dependencies
