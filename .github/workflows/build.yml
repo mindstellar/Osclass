@@ -53,7 +53,7 @@ jobs:
               
             # Create release branch if not dev and release branch does not exist
 
-            if [[ $SUB_VERSION != "dev"; then
+            if [[ $SUB_VERSION != "dev" ]]; then
             # check if release branch already exists
                 if git show-ref --verify --quiet refs/heads/release/$BASE_VERSION; then
                     echo "Release branch already exists."
