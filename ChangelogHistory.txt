@@ -1,3 +1,8 @@
+# Update changelog for Osclass 5.1.1 Release Notes {#release-notes-5-1-0}
+* Fixed a bug that prevented adding new custom fields in admin dashboard.
+* Fixed a potential bug which could lead to core file deletion.
+
+# Osclass 5.1.0 Changelog
 * New: Backend is based on Bootstrap 5
 * New: Many changes are made to make it more user-friendly on small screens while keeping the same functionality
 * New: System info page in the tools menu.
