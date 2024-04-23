@@ -1335,7 +1335,13 @@ class DBCommandClass
             if (!is_array($this->aFrom)) {
                 $this->a_from = array($this->aFrom);
             }
-            $sql .= implode(', ', $this->aFrom);
+            // instead of comma separated tables, we use cross join
+            // , is same as CROSS JOIN in this case
+            if (count($this->aFrom) > 1) {
+                $sql .= implode(' CROSS JOIN ', $this->aFrom);
+            } else {
+                $sql .= implode(', ', $this->aFrom);
+            }
         }
 
         // "JOIN" portion of the query
