@@ -63,16 +63,17 @@ jobs:
                     git merge develop
                 else
                     git checkout -b release/$BASE_VERSION
-                    git pull origin develop
                 fi
             fi
               
             # Update version in codebase
             sed -i -E "s/define\('OSCLASS_VERSION.+\);/define('OSCLASS_VERSION', '$VERSION');/" oc-includes/osclass/default-constants.php
               
-            # Commit changes
-            git add oc-includes/osclass/default-constants.php
-            git commit -m "Update version to $VERSION"
+            # Commit changes if changes were made
+            if [[ $(git status --porcelain) ]]; then
+                git add oc-includes/osclass/default-constants.php
+                git commit -m "Update version to $VERSION"
+            fi
               
             # Push changes and create tag
             git push origin HEAD 
