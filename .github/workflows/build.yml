@@ -21,7 +21,7 @@ jobs:
         run: |
             MESSAGE=$(git log --format=%B -n 1 ${{ github.sha }})
             echo "MESSAGE=$MESSAGE" >> $GITHUB_ENV
-            if [[ $MESSAGE =~ \[release-([0-9]+\.[0-9]+\.[0-9])+\.([dev|rc|beta]+([0-9]*))?\] ]]; then
+            if [[ $MESSAGE =~ \[release-([0-9]+\.[0-9]+\.[0-9])+\.{0,1}([dev|rc|beta[0-9]*)?\] ]]; then
                 echo "Release string found in the commit message."
                 BASE_VERSION="${BASH_REMATCH[1]}" 
                 SUB_VERSION="${BASH_REMATCH[2]}"
