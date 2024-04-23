@@ -51,9 +51,9 @@ jobs:
             echo "Sub sub version: $SUB_SUB_VERSION"
             echo "Version: $VERSION"
               
-            # Create release branch if not dev and rc/beta branches are not created
+            # Create release branch if not dev and release branch does not exist
 
-            if [[ $SUB_VERSION =~ (rc|beta) ]]; then
+            if [[ $SUB_VERSION != "dev"; then
             # check if release branch already exists
                 if git show-ref --verify --quiet refs/heads/release/$BASE_VERSION; then
                     echo "Release branch already exists."
@@ -87,12 +87,12 @@ jobs:
             echo "PRERELEASE=$PRERELEASE" >> $GITHUB_ENV
         
       - name: Create GitHub Release Archive
-        if: env.PRERELEASE == 'true'
+        if: env.VERSION != null
         run: |
             sh ./.build.sh
       - name: Create GitHub Release
         #Only create a release if the version is dev 
-        if: env.PRERELEASE == 'true'
+        if: env.VERSION != null
         uses: softprops/action-gh-release@v1
         with:
           files: release/osclass_v${{ env.VERSION }}.zip
