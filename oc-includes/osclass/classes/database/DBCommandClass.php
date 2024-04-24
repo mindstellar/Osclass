@@ -1270,10 +1270,16 @@ class DBCommandClass
     public function from($from)
     {
         if (!is_array($from)) {
-            if (strpos($from, ',') !== false) {
-                $from = explode(',', $from);
+            // Check if $from is a subquery
+            if (strpos($from, '(') !== false && strpos($from, ')') !== false) {
+                $from = array($from); // Wrap the subquery in an array
             } else {
-                $from = array($from);
+                // Explode by comma as before
+                if (strpos($from, ',') !== false) {
+                    $from = explode(',', $from);
+                } else {
+                    $from = array($from);
+                }
             }
         }
 
