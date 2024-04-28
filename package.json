@@ -4,8 +4,13 @@
     "@popperjs/core": "^2.9.2",
     "eslint": "^6.8.0",
     "grunt": "^1.4.1",
+    "grunt-cli": "^1.4.3",
     "grunt-contrib-clean": "^2.0.0",
-    "grunt-contrib-copy": "^1.0.0"
+    "grunt-contrib-copy": "^1.0.0",
+    "grunt-contrib-uglify": "^5.2.2",
+    "grunt-sass": "^3.1.0",
+    "load-grunt-tasks": "^5.1.0",
+    "node-sass": "^9.0.0"
   },
   "description": "Osclass is a free and open script to create your advertisement or listings site. Best features: Plugins, themes, multi-language, CAPTCHA, dashboard, SEO friendly.",
   "scripts": {
@@ -26,9 +31,6 @@
     "bootstrap": "^5.0.*",
     "bootstrap-icons": "^1.5.0",
     "chart.js": "^3.5.0",
-    "grunt-cli": "^1.4.3",
-    "grunt-contrib-sass": "^2.0.0",
-    "grunt-contrib-uglify": "^5.0.1",
     "jquery": "^3.6.0",
     "jquery-migrate": "^3.3.2",
     "jquery-treeview": "^1.4.*",
@@ -39,6 +41,6 @@
     "osclass-legacy-assets": "github:mindstellar/osclass-legacy-assets#master",
     "sortablejs": "^1.14.0",
     "spectrum-colorpicker": "^1.8.*",
-    "tinymce": "^5.8.1"
+    "tinymce": "^7.0.1"
   }
 }
