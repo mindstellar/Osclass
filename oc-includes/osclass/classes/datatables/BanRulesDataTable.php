@@ -67,8 +67,8 @@ class BanRulesDataTable extends DataTable
         );
 
         $this->processData($list_rules['rules']);
-        $this->totalFiltered = $list_rules['rows'];
-        $this->total         = $list_rules['total_results'];
+        $this->totalFiltered = $list_rules['total_results'];
+        $this->total         = $list_rules['rows'];
 
         return $this->getData();
     }

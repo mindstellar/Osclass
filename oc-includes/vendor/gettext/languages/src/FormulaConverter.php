@@ -21,7 +21,7 @@ class FormulaConverter
     public static function convertFormula($cldrFormula)
     {
         if (strpbrk($cldrFormula, '()') !== false) {
-            throw new Exception("Unable to convert the formula '${cldrFormula}': parenthesis handling not implemented");
+            throw new Exception("Unable to convert the formula '{$cldrFormula}': parenthesis handling not implemented");
         }
         $orSeparatedChunks = array();
         foreach (explode(' or ', $cldrFormula) as $cldrFormulaChunk) {
@@ -95,13 +95,13 @@ class FormulaConverter
         if (preg_match('/^(?:v|w)(?: % 10+)? != (\d+)(?:\.\.\d+)?$/', $gettextAtom, $m)) { // For gettext: v == 0, w == 0
             return (int) $m[1] === 0 ? false : true;
         }
-        if (preg_match('/^(?:f|t)(?: % 10+)? == (\d+)(?:\.\.\d+)?$/', $gettextAtom, $m)) { // f == empty, t == empty
+        if (preg_match('/^(?:f|t|c|e)(?: % 10+)? == (\d+)(?:\.\.\d+)?$/', $gettextAtom, $m)) { // f == empty, t == empty, c == empty, e == empty
             return (int) $m[1] === 0 ? true : false;
         }
-        if (preg_match('/^(?:f|t)(?: % 10+)? != (\d+)(?:\.\.\d+)?$/', $gettextAtom, $m)) { // f == empty, t == empty
+        if (preg_match('/^(?:f|t|c|e)(?: % 10+)? != (\d+)(?:\.\.\d+)?$/', $gettextAtom, $m)) { // f == empty, t == empty, c == empty, e == empty
             return (int) $m[1] === 0 ? false : true;
         }
-        throw new Exception("Unable to convert the formula chunk '${cldrAtom}' from CLDR to gettext");
+        throw new Exception("Unable to convert the formula chunk '{$cldrAtom}' from CLDR to gettext");
     }
 
     /**
@@ -123,7 +123,7 @@ class FormulaConverter
             foreach (explode(',', $m[3]) as $range) {
                 $chunk = null;
                 if ((!isset($chunk)) && preg_match('/^\d+$/', $range)) {
-                    $chunk = "${what} ${op} ${range}";
+                    $chunk = "{$what} {$op} {$range}";
                 }
                 if ((!isset($chunk)) && preg_match('/^(\d+)\.\.(\d+)$/', $range, $m)) {
                     $from = (int) $m[1];
@@ -131,29 +131,29 @@ class FormulaConverter
                     if (($to - $from) === 1) {
                         switch ($op) {
                             case '==':
-                                $chunk = "(${what} == ${from} || ${what} == ${to})";
+                                $chunk = "({$what} == {$from} || {$what} == {$to})";
                                 break;
                             case '!=':
-                                $chunk = "${what} != ${from} && ${what} == ${to}";
+                                $chunk = "{$what} != {$from} && {$what} == {$to}";
                                 break;
                         }
                     } else {
                         switch ($op) {
                             case '==':
-                                $chunk = "${what} >= ${from} && ${what} <= ${to}";
+                                $chunk = "{$what} >= {$from} && {$what} <= {$to}";
                                 break;
                             case '!=':
                                 if ($what === 'n' && $from <= 0) {
-                                    $chunk = "${what} > ${to}";
+                                    $chunk = "{$what} > {$to}";
                                 } else {
-                                    $chunk = "(${what} < ${from} || ${what} > ${to})";
+                                    $chunk = "({$what} < {$from} || {$what} > {$to})";
                                 }
                                 break;
                         }
                     }
                 }
                 if (!isset($chunk)) {
-                    throw new Exception("Unhandled range '${range}' in '${atom}'");
+                    throw new Exception("Unhandled range '{$range}' in '{$atom}'");
                 }
                 $chunks[] = $chunk;
             }
@@ -162,11 +162,11 @@ class FormulaConverter
             }
             switch ($op) {
                 case '==':
-                    return '(' . implode(' || ', $chunks) . ')'; break;
+                    return '(' . implode(' || ', $chunks) . ')';
                 case '!=':
                     return implode(' && ', $chunks);
             }
         }
-        throw new Exception("Unable to expand '${atom}'");
+        throw new Exception("Unable to expand '{$atom}'");
     }
 }

@@ -439,6 +439,10 @@ class CWebItem extends BaseModel
                 $as = Params::getParam('as');
 
                 $item = Item::newInstance()->findByPrimaryKey($id);
+                if (count($item) == 0) {
+                    osc_add_flash_error_message(_m("This listing doesn't exist"));
+                    $this->redirectTo(osc_base_url(true));
+                }
                 View::newInstance()->_exportVariableToView('item', $item);
 
                 require_once osc_lib_path() . 'osclass/user-agents.php';

@@ -82,8 +82,10 @@ class CommentsDataTable extends DataTable
 
         if ($this->resourceID === null) {
             $this->total_filtered = $this->total;
+            $this->totalFiltered  = $this->total;
         } else {
             $this->total_filtered = ItemComment::newInstance()->count($this->resourceID);
+            $this->totalFiltered  = $this->total_filtered;
         }
 
         return $this->getData();

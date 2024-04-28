@@ -1270,10 +1270,16 @@ class DBCommandClass
     public function from($from)
     {
         if (!is_array($from)) {
-            if (strpos($from, ',') !== false) {
-                $from = explode(',', $from);
+            // Check if $from is a subquery
+            if (strpos($from, '(') !== false && strpos($from, ')') !== false) {
+                $from = array($from); // Wrap the subquery in an array
             } else {
-                $from = array($from);
+                // Explode by comma as before
+                if (strpos($from, ',') !== false) {
+                    $from = explode(',', $from);
+                } else {
+                    $from = array($from);
+                }
             }
         }
 
@@ -1335,7 +1341,13 @@ class DBCommandClass
             if (!is_array($this->aFrom)) {
                 $this->a_from = array($this->aFrom);
             }
-            $sql .= '(' . implode(', ', $this->aFrom) . ')';
+            // instead of comma separated tables, we use cross join
+            // , is same as CROSS JOIN in this case
+            if (count($this->aFrom) > 1) {
+                $sql .= implode(' CROSS JOIN ', $this->aFrom);
+            } else {
+                $sql .= implode(', ', $this->aFrom);
+            }
         }
 
         // "JOIN" portion of the query

@@ -132,7 +132,8 @@ class ItemForm extends Form
                     || (isset($catId) && $catId == $c['pk_i_id']));
 
             echo '<option value="' . $c['pk_i_id'] . '"' . ($selected ? ' selected="selected'
-                    . $item['fk_i_category_id'] . '"' : '') . '>' . $deep_string . $c['s_name']
+                    . ($item['fk_i_category_id'] ?? '') . '"' : '') . '>'
+                    . $deep_string . $c['s_name']
                 . '</option>';
             if (isset($c['categories']) && is_array($c['categories'])) {
                 self::subcategory_select($c['categories'], $item, $default_item, $deep);
@@ -1072,7 +1073,7 @@ class ItemForm extends Form
         if ($item == null) {
             $item = osc_item();
         }
-        if (Session::newInstance()->_getForm('showEmail') != 0) {
+        if (!Session::newInstance()->_getForm('showEmail')) {
             $item['b_show_email'] = Session::newInstance()->_getForm('showEmail');
         }
         parent::generic_input_checkbox(

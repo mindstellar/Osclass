@@ -813,12 +813,7 @@ class Search extends DAO
 
     private function addFromUser()
     {
-        $this->loadUserTable();
-        $this->dao->where(sprintf(
-                              '%st_user.pk_i_id = %st_item.fk_i_user_id',
-                              DB_TABLE_PREFIX,
-                              DB_TABLE_PREFIX
-                          ));
+        $this->dao->join(DB_TABLE_PREFIX.'t_user', DB_TABLE_PREFIX.'t_user.pk_i_id = '.DB_TABLE_PREFIX.'t_item.fk_i_user_id', 'LEFT');
         if (is_array($this->user_ids)) {
             $this->dao->where(' ( ' . implode(' || ', $this->user_ids) . ' ) ');
         } else {
@@ -832,8 +827,9 @@ class Search extends DAO
 
     private function loadUserTable()
     {
-        if (!$this->userTableLoaded) {
-            $this->dao->from(sprintf('%st_user', DB_TABLE_PREFIX));
+        $from = $this->dao->aFrom;
+        if (!in_array(DB_TABLE_PREFIX . 't_user', $from)) {
+            $this->dao->from(DB_TABLE_PREFIX . 't_user');
             $this->userTableLoaded = true;
         }
     }

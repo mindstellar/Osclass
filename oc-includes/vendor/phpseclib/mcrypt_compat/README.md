@@ -1,8 +1,8 @@
 # mcrypt_compat
 
-[![Build Status](https://travis-ci.org/phpseclib/mcrypt_compat.svg?branch=master)](https://travis-ci.org/phpseclib/mcrypt_compat)
+[![Build Status](https://travis-ci.org/phpseclib/mcrypt_compat.svg?branch=master)](https://app.travis-ci.com/github/phpseclib/mcrypt_compat)
 
-PHP 5.x/7.x polyfill for mcrypt extension.
+PHP 5.x-8.x polyfill for mcrypt extension.
 
 ## Installation
 
@@ -44,6 +44,7 @@ composer require phpseclib/mcrypt_compat
 - ctr
 - ecb
 - nofb
+- ofb
 - stream
 
-Although `nofb` is supported `ofb` is not. Further, mcrypt_compat's `ncfb` implementation has some incompatibles with mcrypt's implementation where `mcrypt_generic` and `mdecrypt_generic` are concerned. The unit tests elaborate.
+mcrypt_compat's `ncfb` implementation has some incompatibles with mcrypt's implementation where `mcrypt_generic` and `mdecrypt_generic` are concerned. The unit tests elaborate.

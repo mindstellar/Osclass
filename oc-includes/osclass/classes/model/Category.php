@@ -72,6 +72,9 @@ class Category extends DAO
 
         if ($l == '') {
             $l = osc_current_user_locale();
+            if (OC_ADMIN) {
+                $l = osc_current_admin_locale();
+            }
         }
 
         $this->language  = $l;
@@ -89,7 +92,7 @@ class Category extends DAO
      * @return array
      * @since  unknown
      */
-    public function toTree($empty = true)
+    public function toTree(bool $empty = true)
     {
         $key   = md5(osc_base_url() . (string)$this->language . (string)$empty);
         $found = null;
@@ -125,7 +128,7 @@ class Category extends DAO
             }
 
             $this->tree = $this->sideTree($this->relation[0], $this->categories, $this->relation);
-
+            $cache                      = [];
             $cache['tree']              = $this->tree;
             $cache['empty_tree']        = $this->emptyTree;
             $cache['relation']          = $this->relation;
@@ -226,6 +229,7 @@ class Category extends DAO
                 $mergedCategories[$cat['pk_i_id']]['locale'][$cat['fk_c_locale_code']] = [
                     's_name'           => $cat['s_name'],
                     's_description'    => $cat['s_description'],
+                    's_slug'           => $cat['s_slug'],
                 ];
             }
         }

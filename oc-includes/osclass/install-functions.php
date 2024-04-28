@@ -104,7 +104,7 @@ function get_absolute_url()
 {
     $protocol =
         (getServerParam('HTTPS') === 'on' || getServerParam('HTTP_X_FORWARDED_PROTO') === 'https')
-            ? 'https' : 'http';
+        ? 'https' : 'http';
     $pos      = strpos(getServerParam('REQUEST_URI'), 'oc-includes');
     $URI      = rtrim(substr(getServerParam('REQUEST_URI'), 0, $pos), '/') . '/';
 
@@ -137,18 +137,18 @@ function get_relative_url()
 function get_requirements()
 {
     $array = array(
-        'PHP version >= 7.0.0' => array(
-            'requirement' => __('PHP version >= 7.0.0'),
-            'fn'          => version_compare(PHP_VERSION, '7.0.0', '>='),
+        'PHP version >= 8.0.0' => array(
+            'requirement' => __('PHP version >= 8.0.0'),
+            'fn'          => version_compare(PHP_VERSION, '8.0.0', '>='),
             'solution'    => sprintf(__('At least PHP %s (PHP %s or higher recommended) is required to run Osclass. '
-                                        . 'You may talk with your hosting to upgrade your PHP version.'), 7.0, 7.3)
+                . 'You may talk with your hosting to upgrade your PHP version.'), 7.2, 7.3)
         ),
 
         'MySQLi extension for PHP' => array(
             'requirement' => __('MySQLi extension for PHP'),
             'fn'          => extension_loaded('mysqli'),
             'solution'    => __('MySQLi extension is required. How to '
-                                . '<a target="_blank" href="http://www.php.net/manual/en/mysqli.setup.php">install/configure</a>.')
+                . '<a target="_blank" href="http://www.php.net/manual/en/mysqli.setup.php">install/configure</a>.')
         ),
 
         'GD extension for PHP'   => array(
@@ -286,17 +286,6 @@ function check_requirements($array)
 
 
 /**
- * Check if allowed to send stats to Osclass
- *
- * @return boolean Check if allowed to send stats to Osclass
- */
-function reportToOsclass()
-{
-    return $_COOKIE['osclass_save_stats'];
-}
-
-
-/**
  * insert/update preference allow_report_osclass
  *
  * @param $value
@@ -343,18 +332,10 @@ function oc_install()
         $adminuser = Params::getParam('admin_username');
         $adminpwd  = Params::getParam('admin_password', false, false);
 
-        $master_conn = new DBConnectionClass($dbhost, $adminuser, $adminpwd, '');
-        $error_num   = $master_conn->getErrorConnectionLevel();
+        $adminInstance = new DBConnectionClass($dbhost, $adminuser, $adminpwd, '');
+        $error_num   = $adminInstance->getErrorConnectionLevel();
 
         if ($error_num > 0) {
-            if (reportToOsclass()) {
-                LogOsclassInstaller::newInstance()
-                    ->error(sprintf(
-                        __('Cannot connect to the database. Error number: %s'),
-                        $error_num
-                    ), __FILE__ . '::' . __LINE__);
-            }
-
             switch ($error_num) {
                 case 1049:
                     return array(
@@ -367,6 +348,7 @@ function oc_install()
                     return array(
                         'error' => __('Cannot connect to the database. Check if the username and password are correct.')
                     );
+                case 2002:
                 case 2005:
                     return array('error' => __("Can't resolve MySQL host. Check if the host is correct."));
                 default:
@@ -376,7 +358,7 @@ function oc_install()
             }
         }
 
-        $m_db = $master_conn->getOsclassDb();
+        $m_db = $adminInstance->getOsclassDb();
         $comm = new DBCommandClass($m_db);
         $comm->query(sprintf(
             "CREATE DATABASE IF NOT EXISTS %s DEFAULT CHARACTER SET 'UTF8' COLLATE 'UTF8_GENERAL_CI'",
@@ -386,14 +368,6 @@ function oc_install()
         $error_num = $comm->getErrorLevel();
 
         if ($error_num > 0) {
-            if (reportToOsclass()) {
-                LogOsclassInstaller::newInstance()
-                    ->error(
-                        sprintf(__("Can't create the database. Error number: %s"), $error_num),
-                        __FILE__ . "::" . __LINE__
-                    );
-            }
-
             if (in_array($error_num, array(1006, 1044, 1045))) {
                 return array(
                     'error' => __("Can't create the database. Check if the admin username "
@@ -406,25 +380,17 @@ function oc_install()
             );
         }
 
-        unset($conn, $comm, $master_conn);
+        unset($dbInstance, $comm, $adminInstance);
     }
 
-    $conn      = new DBConnectionClass($dbhost, $username, $password, $dbname);
-    $error_num = $conn->getErrorConnectionLevel();
+    $dbInstance      = new DBConnectionClass($dbhost, $username, $password, $dbname);
+    $error_num = $dbInstance->getErrorConnectionLevel();
 
     if ($error_num == 0) {
-        $error_num = $conn->getErrorLevel();
+        $error_num = $dbInstance->getErrorLevel();
     }
 
     if ($error_num > 0) {
-        if (reportToOsclass()) {
-            LogOsclassInstaller::newInstance()
-                ->error(
-                    sprintf(__('Cannot connect to the database. Error number: %s'), $error_num),
-                    __FILE__ . '::' . __LINE__
-                );
-        }
-
         switch ($error_num) {
             case 1049:
                 return array(
@@ -441,13 +407,15 @@ function oc_install()
                         . 'are correct.')
                 );
                 break;
+            case 2002:
             case 2005:
                 return array('error' => __("Can't resolve MySQL host. Check if the host is correct."));
                 break;
             default:
                 return array(
                     'error' => sprintf(
-                        __('Cannot connect to the database. Error number: %s'),
+                        __('Cannot connect to the database. Check if you host, username, password, '
+                            . 'database. Error number: %s'),
                         $error_num
                     )
                 );
@@ -457,50 +425,26 @@ function oc_install()
 
     if (file_exists(ABS_PATH . 'config.php')) {
         if (!is_writable(ABS_PATH . 'config.php')) {
-            if (reportToOsclass()) {
-                LogOsclassInstaller::newInstance()
-                    ->error(
-                        __("Can't write in config.php file. Check if the file is writable."),
-                        __FILE__ . '::' . __LINE__
-                    );
-            }
-
             return array('error' => __("Can't write in config.php file. Check if the file is writable."));
         }
         create_config_file($dbname, $username, $password, $dbhost, $tableprefix);
     } else {
         if (!file_exists(ABS_PATH . 'config-sample.php')) {
-            if (reportToOsclass()) {
-                LogOsclassInstaller::newInstance()
-                    ->error(
-                        __("config-sample.php doesn't exist. Check if everything is decompressed correctly."),
-                        __FILE__ . '::' . __LINE__
-                    );
-            }
-
             return array(
                 'error' => __("config-sample.php doesn't exist. Check if everything is "
                     . 'decompressed correctly.')
             );
         }
         if (!is_writable(ABS_PATH)) {
-            if (reportToOsclass()) {
-                LogOsclassInstaller::newInstance()
-                    ->error(
-                        __('Can\'t copy config-sample.php. Check if the root directory is writable.'),
-                        __FILE__ . '::' . __LINE__
-                    );
-            }
-
             return array('error' => __('Can\'t copy config-sample.php. Check if the root directory is writable.'));
         }
-        copy_config_file($dbname, $username, $password, $dbhost, $tableprefix);
     }
 
-    require_once ABS_PATH . 'config.php';
+    define_install_constants($dbhost, $dbname, $username, $password, $tableprefix);
 
     $sql = file_get_contents(ABS_PATH . 'oc-includes/osclass/installer/struct.sql');
 
+    $conn = new DBConnectionClass(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
     $c_db = $conn->getOsclassDb();
     $comm = new DBCommandClass($c_db);
     $comm->importSQL($sql);
@@ -508,14 +452,6 @@ function oc_install()
     $error_num = $comm->getErrorLevel();
 
     if ($error_num > 0) {
-        if (reportToOsclass()) {
-            LogOsclassInstaller::newInstance()
-                ->error(sprintf(
-                    __("Can't create the database structure. Error number: %s"),
-                    $error_num
-                ), __FILE__ . '::' . __LINE__);
-        }
-
         if ($error_num === 1050) {
             return array(
                 'error' => __('There are tables with the same name in the database. '
@@ -572,13 +508,6 @@ function oc_install()
     $sql = '';
     foreach ($required_files as $file) {
         if (!file_exists($file)) {
-            if (reportToOsclass()) {
-                LogOsclassInstaller::newInstance()->error(sprintf(
-                    __('The file %s doesn\'t exist'),
-                    $file
-                ), __FILE__ . '::' . __LINE__);
-            }
-
             return array('error' => sprintf(__('The file %s doesn\'t exist'), $file));
         }
 
@@ -590,14 +519,6 @@ function oc_install()
     $error_num = $comm->getErrorLevel();
 
     if ($error_num > 0) {
-        if (reportToOsclass()) {
-            LogOsclassInstaller::newInstance()
-                ->error(sprintf(
-                    __("Can't insert basic configuration. Error number: %s"),
-                    $error_num
-                ), __FILE__ . '::' . __LINE__);
-        }
-
         if ($error_num === 1471) {
             return array(
                 'error' => __("Can't insert basic configuration. "
@@ -618,12 +539,7 @@ function oc_install()
     osc_set_preference('csrf_name', 'CSRF' . mt_rand(0, mt_getrandmax()));
 
     oc_install_example_data();
-
-    if (reportToOsclass()) {
-        set_allow_report_osclass(true);
-    } else {
-        set_allow_report_osclass(false);
-    }
+    copy_config_file($dbname, $username, $password, $dbhost, $tableprefix);
 
     return false;
 }
@@ -681,9 +597,9 @@ function oc_install_example_data()
     }
 
     $mItem->prepareData(true);
-    $successItem = $mItem->add();
+    $mItem->add();
 
-    $successPageresult = Page::newInstance()->insert(
+    Page::newInstance()->insert(
         array(
             's_internal_name' => $page['s_internal_name'],
             'b_indelible'     => 0,
@@ -698,6 +614,17 @@ function oc_install_example_data()
     );
 }
 
+function define_install_constants($dbhost, $dbname, $username, $password, $tableprefix)
+{
+    
+    defined('DB_NAME') or define('DB_NAME', $dbname);
+    defined('DB_USER') or define('DB_USER', $username);
+    defined('DB_PASSWORD') or define('DB_PASSWORD', $password);
+    defined('DB_HOST') or define('DB_HOST', $dbhost);
+    defined('DB_TABLE_PREFIX') or define('DB_TABLE_PREFIX', $tableprefix);
+    defined('REL_WEB_URL') or define('REL_WEB_URL', get_relative_url());
+    defined('WEB_PATH') or define('WEB_PATH', get_absolute_url());
+}
 
 /**
  * Create config file from scratch
@@ -745,7 +672,6 @@ define('WEB_PATH', '$abs_url');
 CONFIG;
 
     file_put_contents(ABS_PATH . 'config.php', $config_text);
-
 }
 
 
@@ -849,12 +775,9 @@ function finish_installation($password)
     $mPreference = Preference::newInstance();
     $mPreference->insert(
         array(
-            's_section' => 'osclass'
-            ,
-            's_name'    => 'osclass_installed'
-            ,
-            's_value'   => '1'
-            ,
+            's_section' => 'osclass',
+            's_name'    => 'osclass_installed',
+            's_value'   => '1',
             'e_type'    => 'BOOLEAN'
         )
     );
@@ -874,232 +797,13 @@ function finish_installation($password)
  */
 function display_database_config()
 {
-    ?>
-    <form class="p-3" action="install.php" method="post">
-        <input type="hidden" name="step" value="3"/>
-        <h2 class="display-6 mb-3"><?php _e('Database information'); ?></h2>
-        <div class="form-table">
-            <div class="row mb-3">
-                <label for="dbhost" class="col-md-3 col-sm-6 col-form-label text"><strong><?php _e('Host'); ?></strong></label>
-                <div class="col-md-3 col-sm-6">
-                    <input class="form-control" type="text" id="dbhost" name="dbhost" value="localhost" size="25"/>
-                </div>
-                <div class="small"><?php _e('Server name or IP where the database engine resides'); ?></div>
-            </div>
-            <div class="row mb-3">
-                <label for="dbname" class="col-md-3 col-sm-6 col-form-label"><strong><?php _e('Database name');
-                ?></strong></label>
-                <div class="col-md-3 col-sm-6">
-                    <input class="form-control" type="text" id="dbname" name="dbname" value="osclass" size="25"/>
-                </div>
-                <div class="small"><?php _e('The name of the database you want to run Osclass in');
-                ?></div>
-            </div>
-            <div class="row mb-3">
-                <label for="username" class="col-md-3 col-sm-6 col-form-label"><strong><?php _e('User Name');
-                ?></strong></label>
-                <div class="col-md-3 col-sm-6">
-                    <input class="form-control" type="text" id="username" name="username" size="25"/>
-                </div>
-                <div class="small"><?php _e('Your MySQL username'); ?></div>
-            </div>
-            <div class="row mb-3">
-                <label for="password" class="col-md-3 col-sm-6 col-form-label"><strong><?php _e('Password');
-                ?></strong></label>
-                <div class="col-md-3 col-sm-6">
-                    <input class="form-control" type="password" id="password" name="password"
-                           value="" size="25" autocomplete="off"/>
-                </div>
-                <div class="small"><?php _e('Your MySQL password'); ?></div>
-            </div>
-            <div class="row mb-3">
-                <label for="tableprefix" class="col-md-3 col-sm-6 col-form-label"><strong><?php _e('Table prefix');
-                ?></strong></label>
-                <div class="col-md-3 col-sm-6">
-                    <input class="form-control" type="text" id="tableprefix" name="tableprefix"
-                           value="oc_" size="25"/>
-                </div>
-                <div class="small"><?php _e('If you want to run multiple Osclass installations in a single database, change this'); ?></div>
-            </div>
-            <div class="accordion mb-3" id="accordianAdvance">
-                <div class="accordion-item">
-                    <h2 class="accordion-header" id="headingAdvance">
-                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
-                                data-bs-target="#collapseAdvance" aria-expanded="false"
-                                aria-controls="accordianAdvance">
-                            <?php _e('Advanced'); ?>
-                        </button>
-                    </h2>
-                    <div id="collapseAdvance" class="accordion-collapse collapse hide" aria-labelledby="headingAdvance"
-                         data-bs-parent="#accordianAdvance">
-                        <div class="accordion-body">
-                            <div class="row mb-3">
-                                <div class="col-md-8 col-sm-12">
-                                    <input type="checkbox" id="createdb" name="createdb" onclick="db_admin();"
-                                           value="1"/>
-                                    <label for="createdb"><strong><?php _e('Create DB'); ?></strong></label>
-                                    <div class="small"><?php _e('Check here if the database is not created and you want to create it now'); ?></div>
-                                </div>
-                            </div>
-                            <div id="admin_username_row" class="row mb-3">
-                                <label class="col-md-3 col-sm-6 col-form-label"
-                                       for="admin_username"><strong><?php _e('DB admin username'); ?></strong></label>
-                                <div class="col-md-4 col-sm-6">
-                                    <input class="form-control" type="text" id="admin_username" name="admin_username"
-                                           size="25"
-                                           disabled="disabled"/>
-                                </div>
-                            </div>
-                            <div id="admin_password_row" class="row mb-3">
-                                <label class="col-md-3 col-sm-6 col-form-label"
-                                       for="admin_password"><strong><?php _e('DB admin password'); ?></strong></label>
-                                <div class="col-md-4 col-sm-6">
-                                    <input class="form-control" type="password" id="admin_password"
-                                           name="admin_password" value=""
-                                           size="25" disabled="disabled" autocomplete="off"/>
-                                    <span id="password_copied"><?php _e('Password copied from above'); ?></span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <script type="text/javascript">
-                $(document).ready(function () {
-                    var username =
-                    $('#createdb').on('click', function () {
-                        if ($("#createdb").is(':checked')) {
-                            if ($("#admin_username").val() == '') {
-                                $("#admin_username").val($("#username").val());
-                            }
-                            if ($("#admin_password").val() == '') {
-                                $("#admin_password").val( $("#password").val());
-                                $("#password_copied").show();
-                            }
-                        } else {
-                            $("#password_copied").hide();
-                        }
-                    });
-                    $("#password_copied").hide();
-                });
-            </script>
-        </div>
-        <input type="submit" class="btn btn-primary" name="submit" value="Next"/>
-        <div class="clear"></div>
-    </form>
-    <?php
+    include_once 'installer/gui/install-database.php';
 }
 
 
 function display_target()
 {
-    $internet_error = false;
-    require_once LIB_PATH . 'osclass/helpers/hUtils.php';
-    $country_list = osc_file_get_contents(osc_get_locations_json_url());
-    $country_list = json_decode($country_list, false);
-    $country_list = $country_list->locations;
-
-    $country_ip = '';
-    if (preg_match(
-        '|([a-z]{2})-([A-Z]{2})|',
-        Params::getServerParam('HTTP_ACCEPT_LANGUAGE'),
-        $match
-    )
-    ) {
-        $country_ip = $match[2];
-    }
-
-    if (!isset($country_list[0]->s_country_name)) {
-        $internet_error = true;
-    }
-    ?>
-    <form class="p-3" id="target_form" name="target_form" action="#" method="post" onsubmit="return false;">
-        <h2 class="display-6"><?php _e('Information needed'); ?></h2>
-        <div class="form-table">
-            <h4 class="title"><?php _e('Admin user'); ?></h4>
-            <div class="admin-user mb-3">
-                <div class="row mb-3">
-                    <label class="col-md-3 col-sm-6 col-form-label" for="admin_user"><?php _e('Username'); ?></label>
-                    <div class="col-md-4 col-sm-6">
-                        <input class="form-control" size="25" id="admin_user" name="s_name" type="text" value="admin"/>
-                        <span id="admin-user-error" class="error" aria-hidden="true"
-                              style="display:none;"><?php _e('Admin user is required'); ?></span>
-                    </div>
-                </div>
-                <div class="row mb-3">
-                    <label class="col-md-3 col-sm-6 col-form-label" for="s_passwd"><?php _e('Password'); ?></label>
-                    <div class="col-md-4 col-sm-6">
-                        <input size="25" class=" form-control password_test" name="s_passwd"
-                               id="s_passwd"
-                               type="password" value="" autocomplete="off"/>
-                    </div>
-                    <td></td>
-                </div>
-            </div>
-            <div class="admin-user mb-3">
-                <?php _e('A password will be automatically generated for you if you leave this blank.'); ?>
-                <i class="bi bi-question-circle-fill vtip"
-                   title="<?php echo osc_esc_html(__('You can modify username and password if you like, just change the input value.')); ?>">
-                </i>
-            </div>
-            <h4 class="title"><?php _e('Contact information'); ?></h4>
-            <div class="contact-info">
-                <div class="row mb-3">
-                    <label class="col-md-3 col-sm-6 col-form-label" for="webtitle"><?php _e('Web title'); ?></label>
-                    <div class="col-md-4 col-sm-6"><input class="form-control" type="text" id="webtitle" name="webtitle" size="25"/></div>
-                    <td></td>
-                </div>
-                <div class="row mb-3">
-                    <label class="col-md-3 col-sm-6 col-form-label" for="email"><?php _e('Contact e-mail'); ?></label>
-                    <div class="col-md-4 col-sm-6">
-                        <input class="form-control" type="text" id="email" name="email" size="25"/>
-                        <span id="email-error" class="error"
-                              style="display:none;"><?php _e('Put your e-mail here'); ?></span>
-                    </div>
-                    <span id="email-error" class="error"
-                              style="display:none;"><?php _e('Put your e-mail here'); ?></span>
-                </div>
-            </div>
-            <h4 class="title"><?php _e('Location'); ?></h4>
-            <p class="space-left-25 left no-bottom"><?php _e('Choose a country where your target users are located'); ?>
-                .</p>
-            <div id="location">
-                <?php if (!$internet_error) { ?>
-                    <input type="hidden" id="skip-location-input" name="skip-location-input"
-                           value="0"/>
-                    <div class="col-md-3 col-sm-6" id="country-box">
-                        <select class="form-select" name="location-json" id="location-json">
-                            <option value="skip"><?php _e("Skip location"); ?></option>
-                            <!-- <option value="all"><?php _e("International"); ?></option> -->
-                            <?php foreach ($country_list as $c) { ?>
-                                <option value="<?php echo $c->s_file_name; ?>" <?php if (strpos($c->s_file_name, $country_ip) === 0) {
-                                    echo 'selected="selected"';
-                                               } ?>><?php echo $c->s_country_name; ?></option>
-                            <?php } ?>
-                        </select>
-                    </div>
-                <?php } else { ?>
-                    <div id="location-error">
-                        <div class="alert alert-danger">
-                            <?php _e('No internet connection. You can continue the installation and insert countries later.'); ?>
-                        </div>
-                        <input type="hidden" id="skip-location-input" name="skip-location-input"
-                               value="1"/>
-                    </div>
-                <?php }; ?>
-            </div>
-        </div>
-        <div class="mt-3">
-            <a href="#" class="btn btn-primary" onclick="validate_form();">Next</a>
-        </div>
-    </form>
-    <div id="lightbox" style="display:none;">
-        <div class="progress">
-            <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="100"
-                 aria-valuemin="0" aria-valuemax="100" style="width: 100%"></div>
-        </div>
-    </div>
-    <?php
+    include_once 'installer/gui/install-target.php';
 }
 
 
@@ -1114,8 +818,7 @@ function display_database_error($error, $step)
     <div class="alert alert-danger shadow">
         <?php echo $error['error'] ?>
     </div>
-    <a href="<?php echo get_absolute_url(); ?>oc-includes/osclass/install.php?step=<?php echo $step; ?>"
-       class="btn btn-warning"><?php _e('Go back'); ?></a>
+    <a href="<?php echo get_absolute_url(); ?>oc-includes/osclass/install.php?step=<?php echo $step; ?>" class="btn btn-warning"><?php _e('Go back'); ?></a>
     <div class="clear bottom"></div>
     <?php
 }
@@ -1131,12 +834,9 @@ function ping_search_engines($bool)
     if ($bool == 1) {
         $mPreference->insert(
             array(
-                's_section' => 'osclass'
-                ,
-                's_name'    => 'ping_search_engines'
-                ,
-                's_value'   => '1'
-                ,
+                's_section' => 'osclass',
+                's_name'    => 'ping_search_engines',
+                's_value'   => '1',
                 'e_type'    => 'BOOLEAN'
             )
         );
@@ -1152,12 +852,9 @@ function ping_search_engines($bool)
     } else {
         $mPreference->insert(
             array(
-                's_section' => 'osclass'
-                ,
-                's_name'    => 'ping_search_engines'
-                ,
-                's_value'   => '0'
-                ,
+                's_section' => 'osclass',
+                's_name'    => 'ping_search_engines',
+                's_value'   => '0',
                 'e_type'    => 'BOOLEAN'
             )
         );
@@ -1170,40 +867,7 @@ function ping_search_engines($bool)
  */
 function display_finish($password)
 {
-    $data = finish_installation($password);
-    ?>
-    <?php if (Params::getParam('error_location') == 1) { ?>
-    <script type="text/javascript">
-        setTimeout(function () {
-            $('.error-location').fadeOut('slow');
-        }, 2500);
-    </script>
-    <div class="alert alert-warning shadow-sm mb-3">
-        <?php _e('The selected location could not been installed'); ?>
-    </div>
-    <?php } ?>
-    <h2 class="display-6 text-success"><?php _e('Congratulations!'); ?></h2>
-    <div class="alert alert-success shadow-sm mb3"><?php _e("Osclass has been installed. Were you expecting more steps? Sorry to disappoint you!");
-    ?></div>
-    <div class="alert alert-info shadow-sm mb-3"><?php echo sprintf(
-            __('An e-mail with the password for oc-admin has been sent to: %s'),
-            $data['s_email']
-                                                 ); ?></div>
-    <div class="finish">
-        <div class="row mb-3">
-            <span class="col-md-3 col-sm-6 h6"><?php _e('Username'); ?>: </span>
-            <span class="col-md-4 col-sm-6"><?php echo $data['admin_user']; ?></span>
-        </div>
-        <div class="row mb-3">
-            <span class="col-md-3 col-sm-6 h6"><?php _e('Password'); ?>: </span>
-            <span class="col-md-4 col-sm-6"><?php echo osc_esc_html($data['password']); ?></span>
-        </div>
-        <div class="row mb-3">
-            <a target="_blank" href="<?php echo get_absolute_url() ?>oc-admin/index.php"
-               class="btn btn-primary"><?php _e('Finish and go to the administration panel'); ?></a>
-        </div>
-    </div>
-    <?php
+    include_once 'installer/gui/install-finish.php';
 }
 
 
@@ -1252,7 +916,7 @@ function basic_info()
 
     $body = sprintf(__('Hi %s,'), Params::getParam('webtitle')) . '<br/>';
     $body .= sprintf(__('Your Osclass installation at %s is up and running.'
-                        . ' ' . 'You can access the administration panel with these details:'), WEB_PATH);
+        . ' ' . 'You can access the administration panel with these details:'), WEB_PATH);
     $body .= '<br/>';
     $body .= '<ul>';
     $body .= '<li>' . sprintf(__('username: %s'), $admin) . '</li>';

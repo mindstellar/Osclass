@@ -146,6 +146,12 @@ osc_current_admin_theme_path('parts/header.php'); ?>
                     <option value="100" <?php if (Params::getParam('iDisplayLength') == 100) {
                                             echo 'selected';
                                         } ?>><?php printf(__('%d Listings'), 100); ?></option>
+                    <option value="250" <?php if (Params::getParam('iDisplayLength') == 250) {
+                                            echo 'selected';
+                                        } ?>><?php printf(__('%d Listings'), 250); ?></option>
+                    <option value="500" <?php if (Params::getParam('iDisplayLength') == 500) {
+                                            echo 'selected';
+                                        } ?>><?php printf(__('%d Listings'), 500); ?></option>                    
                 </select>
             </form>
             <form method="get" action="<?php echo osc_admin_base_url(true); ?>" id="shortcut-filters">

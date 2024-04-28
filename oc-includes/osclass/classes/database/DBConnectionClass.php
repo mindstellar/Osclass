@@ -162,7 +162,7 @@ class DBConnectionClass
         if ($conn === false) {
             $this->handleDbError(
                 'Osclass &raquo; Error',
-                'Osclass database server is not available. <a href="https://osclass.discourse.group/">Need more help?</a></p>'
+                'Osclass database server is not available. <a href="https://github.com/mindstellar/Osclass/discussions">Need more help?</a></p>'
             );
             return false;
         }
@@ -180,7 +180,7 @@ class DBConnectionClass
             $this->releaseDb();
             $this->handleDbError(
                 'Osclass &raquo; Error',
-                'Osclass database is not available. <a href="https://osclass.discourse.group/">Need more help?</a></p>'
+                'Osclass database is not available. <a href="https://github.com/mindstellar/Osclass/discussions">Need more help?</a></p>'
             );
         }
 
@@ -194,11 +194,20 @@ class DBConnectionClass
      */
     private function connectToDb()
     {
+        try {
+            $this->connId = new mysqli($this->dbHost, $this->dbUser, $this->dbPassword);
+        } catch (Exception $e) {
+            $this->errorDesc = $e->getMessage();
+            $this->errorLevel = $e->getCode();
+            $this->connErrorLevel = $e->getCode();
+            $this->connErrorDesc = $e->getMessage();
+            return false;
+        }
 
-        $this->connId = new mysqli($this->dbHost, $this->dbUser, $this->dbPassword);
-
-        $this->errorConnection();
+        // Check for connection errors
         if ($this->connId->connect_errno) {
+            $this->errorConnection();
+            $this->errorReport();  // Set error information
             return false;
         }
         $this->setSQLMode();
@@ -217,7 +226,6 @@ class DBConnectionClass
 
         $this->connErrorLevel = $this->connId->connect_errno;
         $this->connErrorDesc  = $this->connId->connect_error;
-
     }
 
     /**
@@ -291,7 +299,6 @@ class DBConnectionClass
 
         $this->errorLevel = $this->connId->errno;
         $this->errorDesc  = $this->connId->error;
-
     }
 
     /**
@@ -336,7 +343,6 @@ class DBConnectionClass
         }
 
         return $this->connId->select_db($this->dbName);
-
     }
 
     /**
@@ -367,10 +373,8 @@ class DBConnectionClass
      */
     public function __destruct()
     {
-        if (function_exists('osc_is_admin_user_logged_in')) {
-            $printFrontend = OSC_DEBUG_DB && osc_is_admin_user_logged_in();
-            $this->releaseDb();
-            $this->debug($printFrontend);
+        if (function_exists('osc_is_admin_user_logged_in') && (OSC_DEBUG_DB && osc_is_admin_user_logged_in())) {
+            $this->debug();
         }
     }
 

@@ -66,7 +66,19 @@ $columns   = $aData['aColumns'];
 $rows      = $aData['aRows'];
 $sort      = Params::getParam('sort');
 $direction = Params::getParam('direction');
+function showingResults()
+{
+    $aData = __get('aData');
+    echo '<ul class="showing-results"><li><span>' . osc_pagination_showing((Params::getParam('iPage') - 1)
+                                                                           * $aData['iDisplayLength'] + 1,
+                                                                           ((Params::getParam('iPage') - 1) * $aData['iDisplayLength'])
+                                                                           + count($aData['aRows']),
+                                                                           $aData['iTotalDisplayRecords'],
+                                                                           $aData['iTotalRecords']) . '</span></li></ul>';
+}
 
+
+osc_add_hook('before_show_pagination_admin', 'showingResults');
 osc_current_admin_theme_path('parts/header.php'); ?>
 <h2 class="render-title"><?php _e('Reported listings'); ?></h2>
 <div class="relative">

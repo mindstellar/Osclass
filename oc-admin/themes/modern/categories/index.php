@@ -306,7 +306,9 @@ function drawCategory($category)
             return false;
         }
 
-        document.getElementById("deleteSubmit").onclick = function () {
+        document.getElementById("deleteSubmit").onclick = function (e) {
+            // prevent other events
+            e.preventDefault();
             let categoryId = document.getElementById(
                 "deleteModal"
             ).dataset.categoryId;

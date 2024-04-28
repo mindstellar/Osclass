@@ -62,8 +62,9 @@ class AlertsDataTable extends DataTable
                 $this->search
             );
         $this->processData($alerts);
-        $this->total          = $alerts['total_results'];
-        $this->total_filtered = $alerts['rows'];
+        $this->total          = $alerts['rows'];
+        $this->total_filtered = $alerts['total_results'];
+        $this->totalFiltered  = $alerts['total_results'];
 
         return $this->getData();
     }

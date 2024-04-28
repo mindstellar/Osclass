@@ -91,7 +91,7 @@ class RSSFeed
             echo '<guid>', $item['link'], '</guid>', PHP_EOL;
 
             echo '<description><![CDATA[';
-            if (@$item['image']) {
+            if (isset($item['image']) && !empty($item['image'])) {
                 echo '<a href="' . $item['image']['link'] . '" title="' . $item['image']['title'] . '" rel="nofollow">';
                 echo '<img style="float:left;border:0px;" src="' . $item['image']['url'] . '" alt="'
                     . $item['image']['title'] . '"/> </a>';

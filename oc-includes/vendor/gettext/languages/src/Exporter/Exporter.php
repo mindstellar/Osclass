@@ -62,7 +62,7 @@ abstract class Exporter
     {
         $exporters = self::getExporters();
         if (!isset($exporters[$exporterHandle])) {
-            throw new Exception("Invalid exporter handle: '${exporterHandle}'");
+            throw new Exception("Invalid exporter handle: '{$exporterHandle}'");
         }
 
         return call_user_func(self::getExporterClassName($exporterHandle) . '::getDescription');
@@ -84,6 +84,7 @@ abstract class Exporter
      * Convert a list of Language instances to string.
      *
      * @param \Gettext\Languages\Language[] $languages the Language instances to convert
+     * @param array|null $options
      *
      * @return string
      */
@@ -106,6 +107,7 @@ abstract class Exporter
      * Save the Language instances to a file.
      *
      * @param \Gettext\Languages\Language[] $languages the Language instances to convert
+     * @param array|null $options
      *
      * @throws \Exception
      */
@@ -113,7 +115,7 @@ abstract class Exporter
     {
         $data = self::toString($languages, $options);
         if (@file_put_contents($filename, $data) === false) {
-            throw new Exception("Error writing data to '${filename}'");
+            throw new Exception("Error writing data to '{$filename}'");
         }
     }
 

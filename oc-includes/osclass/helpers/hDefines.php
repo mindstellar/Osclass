@@ -293,7 +293,7 @@ function osc_current_web_theme_path($file = '')
         require WebThemes::newInstance()->getCurrentThemePath() . $file;
     } else {
         $info = WebThemes::newInstance()->loadThemeInfo(WebThemes::newInstance()->getCurrentTheme());
-        if ($info['template'] != '') {
+        if (isset($info['template']) && $info['template'] != '') {
             WebThemes::newInstance()->setParentTheme();
             if (file_exists(WebThemes::newInstance()->getCurrentThemePath() . $file)) {
                 require WebThemes::newInstance()->getCurrentThemePath() . $file;
@@ -583,30 +583,41 @@ function osc_item_url($locale = '')
  */
 function osc_item_url_from_item($item, $locale = '')
 {
-    $itemId = $item['pk_i_id'];
-    $itemCity = isset($item['s_city'])?osc_sanitizeString($item['s_city']):'';
-    $itemTitle = osc_sanitizeString(str_replace(',', '-', $item['s_title']));
+    // check if item is array and has all the necessary variables
+    if (is_array($item) && isset($item['pk_i_id'])) {
+        $itemId    = $item['pk_i_id'];
+        $itemCity  = isset($item['s_city']) ? osc_sanitizeString($item['s_city']) : '';
+        $itemTitle = osc_sanitizeString(str_replace(',', '-', $item['s_title']));
 
-    if (osc_rewrite_enabled()) {
-        $url = osc_get_preference('rewrite_item_url');
-        if (preg_match('|{CATEGORIES}|', $url)) {
-            $sanitized_categories = array();
-            $cat                  = Category::newInstance()->hierarchy($item['fk_i_category_id']);
-            for ($i = count($cat); $i > 0; $i--) {
-                $sanitized_categories[] = $cat[$i - 1]['s_slug'];
+        if (osc_rewrite_enabled()) {
+            $url = osc_get_preference('rewrite_item_url');
+            if (preg_match('|{CATEGORIES}|', $url)) {
+                $sanitized_categories = array();
+                $cat                  = Category::newInstance()->hierarchy($item['fk_i_category_id']);
+                for ($i = count($cat); $i > 0; $i--) {
+                    $sanitized_categories[] = $cat[$i - 1]['s_slug'];
+                }
+                $url = str_replace('{CATEGORIES}', implode('/', $sanitized_categories), $url);
             }
-            $url = str_replace('{CATEGORIES}', implode('/', $sanitized_categories), $url);
-        }
 
-        $url = str_replace(array('{ITEM_ID}', '{ITEM_CITY}', '{ITEM_TITLE}', '?'),
-                           array($itemId, $itemCity, $itemTitle, ''), $url);
-        if ($locale != '') {
-            $path = osc_base_url() . $locale . '/' . $url;
+            $url = str_replace(
+                array('{ITEM_ID}', '{ITEM_CITY}', '{ITEM_TITLE}', '?'),
+                array($itemId, $itemCity, $itemTitle, ''),
+                $url
+            );
+            if ($locale != '') {
+                $path = osc_base_url() . $locale . '/' . $url;
+            } else {
+                $path = osc_base_url() . $url;
+            }
         } else {
-            $path = osc_base_url() . $url;
+            $path = osc_item_url_ns($item['pk_i_id'], $locale);
         }
     } else {
-        $path = osc_item_url_ns($item['pk_i_id'], $locale);
+        $path = '';
+        if (OSC_DEBUG) {
+            trigger_error('Item is not an array or does not have the necessary variables', E_USER_WARNING);
+        }
     }
 
     return $path;
@@ -915,7 +926,7 @@ function osc_item_edit_url($secret = '', $id = '')
     }
 
     return osc_base_url(true) . '?page=item&action=item_edit&id=' . $id . ($secret != '' ? '&secret=' . $secret
-            : '');
+        : '');
 }
 
 
@@ -937,7 +948,7 @@ function osc_item_delete_url($secret = '', $id = '')
     }
 
     return osc_base_url(true) . '?page=item&action=item_delete&id=' . $id . ($secret != '' ? '&secret=' . $secret
-            : '');
+        : '');
 }
 
 
@@ -959,7 +970,7 @@ function osc_item_activate_url($secret = '', $id = '')
     }
 
     return osc_base_url(true) . '?page=item&action=activate&id=' . $id . ($secret != '' ? '&secret=' . $secret
-            : '');
+        : '');
 }
 
 

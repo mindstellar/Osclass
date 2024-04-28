@@ -137,9 +137,9 @@ abstract class DataTable
             ,
             'iDisplayLength'       => $this->limit
             ,
-            'iTotalDisplayRecords' => $this->total
+            'iTotalDisplayRecords' => $this->totalFiltered
             ,
-            'iTotalRecords'        => $this->totalFiltered
+            'iTotalRecords'        => $this->total
             ,
             'iPage'                => $this->iPage
         );

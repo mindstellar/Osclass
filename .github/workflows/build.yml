@@ -1,48 +1,103 @@
-# GitHub Action for Osclass
-name: Build
+name: Release Workflow
+
 on:
   push:
-      tags: 
-        - '*'
+    branches:
+      - develop
+permissions:
+  contents: write
+  pull-requests: write
+  issues: write
 jobs:
-  build-test:
+  create_release_branch_and_tag:
     runs-on: ubuntu-latest
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v2
-      - name: Build  
-        run: sh ./.build.sh
-        shell: bash
-      - run: echo "Uploading release package"
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      - name: Set output
-        id: vars
-        run: echo ::set-output name=tag::${GITHUB_REF#refs/*/}
-      - name: Check output
-        run: |
-          echo ${{ steps.vars.outputs.tag }}
-      - name: Update draft to ${{ steps.vars.outputs.tag }}
-        id: create-release
-        run: |
-          echo 'JSON_RESPONSE<<EOF' >> $GITHUB_ENV
-          curl \
-          -X POST \
-          -H 'Accept: application/vnd.github.v3+json' \
-          -H 'Authorization: Bearer ${{ secrets.GITHUB_TOKEN }}' \
-          https://api.github.com/repos/mindstellar/Osclass/releases \
-          -d '{"tag_name":"${{ steps.vars.outputs.tag }}", "name": "Osclass v${{ steps.vars.outputs.tag }}", "draft": true}' >> $GITHUB_ENV
-          echo 'EOF' >> $GITHUB_ENV
-      - run: |
-          curl \
-          -X POST \
-          -H 'Accept: application/vnd.github.v3+json' \
-          -H 'Content-Type: application/zip' \
-          -H 'Authorization: Bearer ${{ secrets.GITHUB_TOKEN }}' \
-          https://uploads.github.com/repos/mindstellar/Osclass/releases/${{fromJSON(env.JSON_RESPONSE).id }}/assets?name=osclass_v${{ steps.vars.outputs.tag }}.zip \
-          --data-binary "@release/osclass_v${{ steps.vars.outputs.tag }}.zip"
 
-  
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Get commit message and extract version
+        id: get_commit_message
+        run: |
+            MESSAGE=$(git log --format=%B -n 1 ${{ github.sha }})
+            echo "MESSAGE=$MESSAGE" >> $GITHUB_ENV
+            if [[ $MESSAGE =~ \[release-([0-9]+\.[0-9]+\.[0-9])+\.{0,1}([dev|rc|beta[0-9]*)?\] ]]; then
+                echo "Release string found in the commit message."
+                BASE_VERSION="${BASH_REMATCH[1]}" 
+                SUB_VERSION="${BASH_REMATCH[2]}"
+                SUB_SUB_VERSION="${BASH_REMATCH[3]}"
+                VERSION=${SUB_VERSION:+$BASE_VERSION.$SUB_VERSION}
+                VERSION=${VERSION:-$BASE_VERSION}
+                echo "BASE_VERSION=$BASE_VERSION" >> $GITHUB_ENV
+                echo "SUB_VERSION=$SUB_VERSION" >> $GITHUB_ENV
+                echo "SUB_SUB_VERSION=$SUB_SUB_VERSION" >> $GITHUB_ENV
+                echo "VERSION=$VERSION" >> $GITHUB_ENV
+            else
+                echo "No release string found in the commit message."
+            fi
+      - name: setup git config
+        if: env.VERSION != null
+        id: setup_git
+        run: |
+            # setup the username and email.'GitHub Actions Bot' with no email by default
+            git config user.name "GitHub Actions Bot"
+            git config user.email "<>"
+      - name: Create branch/tag
+        if: env.VERSION != null
+        id: create_branch
+        run: |
+            echo "Base version: $BASE_VERSION"
+            echo "Sub version: $SUB_VERSION"
+            echo "Sub sub version: $SUB_SUB_VERSION"
+            echo "Version: $VERSION"
+              
+            # Create release branch if not dev and release branch does not exist
+
+            if [[ $SUB_VERSION != "dev" ]]; then
+            # check if release branch already exists
+                if git show-ref --verify --quiet refs/heads/release/$BASE_VERSION; then
+                    echo "Release branch already exists."
+                    # checkout release branch and merge develop branch
+                    git pull origin release/$BASE_VERSION
+                    git checkout release/$BASE_VERSION
+                    git merge develop
+                else
+                    git checkout -b release/$BASE_VERSION
+                fi
+            fi
+              
+            # Update version in codebase
+            sed -i -E "s/define\('OSCLASS_VERSION.+\);/define('OSCLASS_VERSION', '$VERSION');/" oc-includes/osclass/default-constants.php
+              
+            # Commit changes if changes were made
+            if [[ $(git status --porcelain) ]]; then
+                git add oc-includes/osclass/default-constants.php
+                git commit -m "Update version to $VERSION"
+            fi
+              
+            # Push changes and create tag
+            git push origin HEAD 
+            git tag -a $VERSION -m "Release $VERSION"
+            git push origin $VERSION
+              
+            # Determine if pre-release dev release
+            PRERELEASE=false
+            if [[ $SUB_VERSION =~ (dev|rc|beta) ]]; then
+                PRERELEASE=true
+            fi
+            echo "PRERELEASE=$PRERELEASE" >> $GITHUB_ENV
         
-      
-          
+      - name: Create GitHub Release Archive
+        if: env.VERSION != null
+        run: |
+            sh ./.build.sh
+      - name: Create GitHub Release
+        #Only create a release if the version is dev 
+        if: env.VERSION != null
+        uses: softprops/action-gh-release@v1
+        with:
+          files: release/osclass_v${{ env.VERSION }}.zip
+          tag_name: ${{ env.BASE_VERSION }}
+          name: Release ${{ env.BASE_VERSION }}
+          draft: true
+          prerelease: ${{ env.PRERELEASE }}

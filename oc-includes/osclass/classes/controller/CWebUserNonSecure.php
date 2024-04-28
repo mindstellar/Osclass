@@ -168,6 +168,17 @@ class CWebUserNonSecure extends BaseModel
                     return;
                 }
 
+                if ($user['b_active'] == 0) {
+                    // user is not active, redirect to homepage
+                    osc_add_flash_warning_message(_m('User not activated'));
+                    $this->redirectTo(osc_base_url());
+                }
+                if ($user['b_enabled'] == 0) {
+                    // user is not enabled, redirect to homepage
+                    osc_add_flash_warning_message(_m('User not enabled'));
+                    $this->redirectTo(osc_base_url());
+                }
+
                 $itemsPerPage = Params::getParam('itemsPerPage');
                 if (is_numeric($itemsPerPage) && (int)$itemsPerPage > 0) {
                     $itemsPerPage = (int)$itemsPerPage;

@@ -53,7 +53,7 @@ class Sanitize
             $options
         );
 
-        return filter_var($value, FILTER_SANITIZE_STRING, $options);
+        return filter_var($value, FILTER_SANITIZE_FULL_SPECIAL_CHARS, $options);
     }
 
     /**

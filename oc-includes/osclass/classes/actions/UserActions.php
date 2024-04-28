@@ -92,6 +92,17 @@ class UserActions
             $error[]     = 5;
         }
 
+        if (is_array(Params::getParam('s_info'))) {
+            foreach (Params::getParam('s_info') as $key => $value) {
+                // validate max length to 512 chars
+                $valid = osc_validate_text($value, 256, false);
+                if (!$valid) {
+                    $flash_error .= _m('The field %s is too long', $key) . PHP_EOL;
+                    $error[]     = 11;
+                }
+            }
+        }
+
         $email_taken = $this->manager->findByEmail($input['s_email']);
         if ($email_taken != false) {
             osc_run_hook('register_email_taken', $input['s_email']);

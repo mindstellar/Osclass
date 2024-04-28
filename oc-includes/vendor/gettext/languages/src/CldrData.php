@@ -301,9 +301,6 @@ class CldrData
             }
             // Fix the languages for which we have plurals
             $formerCodes = array(
-                'in' => 'id', // former Indonesian
-                'iw' => 'he', // former Hebrew
-                'ji' => 'yi', // former Yiddish
                 'jw' => 'jv', // former Javanese
                 'mo' => 'ro_MD', // former Moldavian
             );
@@ -320,7 +317,7 @@ class CldrData
                     if (isset($knownMissingLanguages[$missingLanguage])) {
                         $data['languages'][$missingLanguage] = $knownMissingLanguages[$missingLanguage];
                     } else {
-                        throw new Exception("We have the plural rule for the language '${missingLanguage}' but we don't have its language name");
+                        throw new Exception("We have the plural rule for the language '{$missingLanguage}' but we don't have its language name");
                     }
                 }
             }
@@ -333,7 +330,7 @@ class CldrData
             self::$data = $data;
         }
         if (!isset(self::$data[$key])) {
-            throw new Exception("Invalid CLDR data key: '${key}'");
+            throw new Exception("Invalid CLDR data key: '{$key}'");
         }
 
         return self::$data[$key];

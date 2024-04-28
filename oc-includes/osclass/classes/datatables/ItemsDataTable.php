@@ -27,6 +27,8 @@
  *
  */
 
+use mindstellar\utility\Sanitize;
+
 /**
  * ItemsDataTable class
  *
@@ -37,7 +39,9 @@
  */
 class ItemsDataTable extends DataTable
 {
-    /** @var $mSearch \Search */
+    /**
+     * @var Search
+     */
     private $mSearch;
     private $withFilters = false;
 
@@ -57,12 +61,12 @@ class ItemsDataTable extends DataTable
         $this->addTableHeader();
         $this->mSearch = new Search(true);
         $this->getDBParams($params);
-        // add more conditions here
+
         osc_run_hook('manage_item_search_conditions', $this->mSearch);
-        // do Search
+
         $this->processData(Item::newInstance()->extendCategoryName($this->mSearch->doSearch()));
-        $this->totalFiltered = $this->mSearch->countAll();
-        $this->total         = $this->mSearch->count();
+        $this->totalFiltered = $this->mSearch->count();
+        $this->total         = $this->mSearch->countAll();
 
         return $this->getData();
     }
@@ -131,6 +135,7 @@ class ItemsDataTable extends DataTable
 
         $withUserId    = false;
         $no_user_email = '';
+        $sanitizer     = new Sanitize();
         // get & set values
         foreach ($_get as $k => $v) {
             if ($k === 'sSearch' && $v != '') {
@@ -138,14 +143,13 @@ class ItemsDataTable extends DataTable
                 $this->withFilters = true;
             }
 
-            // filters
             if ($k === 'userId' && $v != '') {
-                $this->mSearch->fromUser($v);
+                $this->mSearch->fromUser($sanitizer->int($v));
                 $this->withFilters = true;
                 $withUserId        = true;
             }
             if ($k === 'itemId' && $v != '') {
-                $this->mSearch->addItemId($v);
+                $this->mSearch->addItemId($sanitizer->int($v));
                 $this->withFilters = true;
             }
             if ($k === 'countryId' && $v != '') {
@@ -178,19 +182,19 @@ class ItemsDataTable extends DataTable
                 $this->withFilters = true;
             }
             if ($k === 'b_premium' && $v != '') {
-                $this->mSearch->addItemConditions(DB_TABLE_PREFIX . 't_item.b_premium = ' . $v);
+                $this->mSearch->addItemConditions(DB_TABLE_PREFIX . 't_item.b_premium = ' . $sanitizer->int($v));
                 $this->withFilters = true;
             }
             if ($k === 'b_active' && $v != '') {
-                $this->mSearch->addItemConditions(DB_TABLE_PREFIX . 't_item.b_active = ' . $v);
+                $this->mSearch->addItemConditions(DB_TABLE_PREFIX . 't_item.b_active = ' . $sanitizer->int($v));
                 $this->withFilters = true;
             }
             if ($k === 'b_enabled' && $v != '') {
-                $this->mSearch->addItemConditions(DB_TABLE_PREFIX . 't_item.b_enabled = ' . $v);
+                $this->mSearch->addItemConditions(DB_TABLE_PREFIX . 't_item.b_enabled = ' . $sanitizer->int($v));
                 $this->withFilters = true;
             }
             if ($k === 'b_spam' && $v != '') {
-                $this->mSearch->addItemConditions(DB_TABLE_PREFIX . 't_item.b_spam = ' . $v);
+                $this->mSearch->addItemConditions(DB_TABLE_PREFIX . 't_item.b_spam = ' . $sanitizer->int($v));
                 $this->withFilters = true;
             }
             if ($k === 'user' && $v != '') {
@@ -498,14 +502,21 @@ class ItemsDataTable extends DataTable
         $this->mSearch->addField('SUM(s.`i_num_expired`) as i_num_expired');
 
         // having
-
-
+        
+        // Faster for large tables (tested with 1.5 million rows)
+        // if indexes for all i_num_* columns are created
+        $this->mSearch->addConditions(sprintf(' 
+            %st_item.pk_i_id IN ( 
+            SELECT s.fk_i_item_id 
+            FROM %st_item_stats s 
+            WHERE s.i_num_spam > 0 OR s.i_num_bad_classified > 0 OR s.i_num_repeated > 0 OR s.i_num_offensive > 0 OR s.i_num_expired > 0 
+            )', DB_TABLE_PREFIX, DB_TABLE_PREFIX));
         $this->mSearch->addConditions(sprintf(' %st_item.pk_i_id ', DB_TABLE_PREFIX));
         $this->mSearch->addConditions(sprintf(' %st_item.pk_i_id = s.fk_i_item_id', DB_TABLE_PREFIX));
         $this->mSearch->addGroupBy(sprintf(' %st_item.pk_i_id ', DB_TABLE_PREFIX));
         // do Search
         $this->processDataReported(Item::newInstance()->extendCategoryName($this->mSearch->doSearch()));
-        $this->totalFiltered = $this->mSearch->countAll();
+        $this->totalFiltered = $this->mSearch->count();
         $this->total         = $this->mSearch->count();
 
         return $this->getData();
@@ -698,7 +709,7 @@ class ItemsDataTable extends DataTable
      */
     public function withFilters()
     {
-        return $this->withFilters;
+        return osc_apply_filter('manage_item_search_with_filters', $this->withFilters);
     }
 
     /**
