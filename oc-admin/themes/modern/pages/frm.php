@@ -93,7 +93,8 @@ function customHead()
     ?>
     <script type="text/javascript">
         tinyMCE.init({
-            mode: "textareas",
+            selector: "textarea",
+            promotion: false,
             width: "100%",
             height: "440px",
             language: 'en',

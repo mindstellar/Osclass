@@ -126,7 +126,8 @@ osc_current_admin_theme_path('parts/header.php'); ?>
 </div>
 <script type="text/javascript">
     tinyMCE.init({
-        mode: "textareas",
+        selector: "textarea",
+        promotion: false,
         width: "500px",
         height: "340px",
         theme_advanced_buttons3: "",

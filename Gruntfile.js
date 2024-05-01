@@ -133,6 +133,20 @@ module.exports = function (grunt) {
                     },
                     {
                         expand: true,
+                        cwd: nodeDir + '/tinymce/models/dom',
+                        src: ['**/*.min.js'],
+                        dest: assetsDir + '/tinymce/models/dom',
+                        flatten: false
+                    },
+                    {
+                        expand: true,
+                        cwd: nodeDir + '/tinymce/skins',
+                        src: ['content/default/content.min.css', 'ui/oxide/skin.min.css'],
+                        dest: assetsDir + '/tinymce/skins',
+                        flatten: false
+                    },
+                    {
+                        expand: true,
                         cwd: nodeDir + '/tinymce/plugins',
                         src: ['advlist/*.min.js', 'anchor/*.min.js', 'autolink/*.min.js', 'charmap/*.min.js', 'code/*.min.js', 'fullscreen/*.min.js',
                             'image/*.min.js', 'imagetools/*.min.js', 'insertdatetime/*.min.js', 'link/*.min.js', 'lists/*.min.js', 'media/*.min.js', 'paste/*.min.js', 'preview/*.min.js',
