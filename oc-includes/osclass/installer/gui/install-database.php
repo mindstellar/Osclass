@@ -1,7 +1,7 @@
 <?php if (!defined('ABS_PATH')) {
     exit('ABS_PATH is not loaded. Direct access is not allowed.');
 } ?>
-<?php if(isset($error) && $error != '') { ?>
+<?php if (isset($error) && $error != '') { ?>
     <div class="alert alert-danger shadow">
         <?php echo $error['error'] ?>
     </div>

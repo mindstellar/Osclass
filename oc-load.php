@@ -61,7 +61,6 @@ require_once LIB_PATH . 'osclass/helpers/hDatabaseInfo.php';
 require_once LIB_PATH . 'osclass/helpers/hPreference.php';
 // check if Osclass is installed
 if (!Preference::newInstance()->get('osclass_installed')) {
-    
     $title   = 'Osclass &raquo; Error';
     $message =
         '<code>config.php</code> file is present but Osclass isn\'t installed. '

@@ -73,7 +73,7 @@
                                                                                                                 === Session::newInstance()->_get('userLocale')
                                                                                                             ) {
                                                                                                                 echo 'selected="selected"';
-                                                                                                            } ?>><?php echo $locale; ?></option>
+                                                                           } ?>><?php echo $locale; ?></option>
                                                         <?php } ?>
                                                     </select>
                                                 </div>
