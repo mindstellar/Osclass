@@ -1,6 +1,5 @@
 # Docker Compose Configuration for Osclass Application
-version: "3.7"
-
+name: osclass
 services:
   # PHP-FPM Service
   php-fpm:
