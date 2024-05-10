@@ -667,7 +667,7 @@ define('DB_TABLE_PREFIX', '$tableprefix');
 
 define('REL_WEB_URL', '$rel_url');
 
-define('WEB_PATH', '$abs_url');
+defined('WEB_PATH') or define('WEB_PATH', '$abs_url');
 
 CONFIG;
 
@@ -688,43 +688,49 @@ CONFIG;
  */
 function copy_config_file($dbname, $username, $password, $dbhost, $tableprefix)
 {
-    $password      = addslashes($password);
-    $abs_url       = get_absolute_url();
-    $rel_url       = get_relative_url();
-    $config_sample = file(ABS_PATH . 'config-sample.php');
+    // Prepare variables
+    $password = addslashes($password);
+    $abs_url = get_absolute_url();
+    $rel_url = get_relative_url();
+    
+    // Load config sample
+    $config_sample_path = ABS_PATH . 'config-sample.php';
+    $config_sample = file($config_sample_path);
+    if (!$config_sample) {
+        // Handle file loading error
+        return false;
+    }
 
-    foreach ($config_sample as $line_num => $line) {
-        switch (substr($line, 0, 16)) {
-            case "define('DB_NAME'":
-                $config_sample[$line_num] = str_replace("database_name", $dbname, $line);
-                break;
-            case "define('DB_USER'":
-                $config_sample[$line_num] = str_replace("'username'", "'$username'", $line);
-                break;
-            case "define('DB_PASSW":
-                $config_sample[$line_num] = str_replace("'password'", "'$password'", $line);
-                break;
-            case "define('DB_HOST'":
-                $config_sample[$line_num] = str_replace("localhost", $dbhost, $line);
-                break;
-            case "define('DB_TABLE":
-                $config_sample[$line_num] = str_replace('oc_', $tableprefix, $line);
-                break;
-            case "define('REL_WEB_":
-                $config_sample[$line_num] = str_replace('rel_here', $rel_url, $line);
-                break;
-            case "define('WEB_PATH":
-                $config_sample[$line_num] = str_replace('http://localhost', $abs_url, $line);
-                break;
+    // Define replacements
+    $replacements = array(
+        'database_name' => $dbname,
+        'username' => $username,
+        'password' => $password,
+        'db_host' => $dbhost,
+        'oc_' => $tableprefix,
+        'rel_here' => $rel_url,
+        'web_path_here' => $abs_url,
+    );
+
+    // Perform replacements
+    foreach ($config_sample as &$line) {
+        foreach ($replacements as $search => $replace) {
+            $line = str_replace($search, $replace, $line);
         }
     }
 
-    $handle = fopen(ABS_PATH . 'config.php', 'w');
-    foreach ($config_sample as $line) {
-        fwrite($handle, $line);
+    // Write to config.php
+    $config_path = ABS_PATH . 'config.php';
+    $write_success = file_put_contents($config_path, implode('', $config_sample));
+    if (!$write_success) {
+        // Handle write error
+        return false;
     }
-    fclose($handle);
-    chmod(ABS_PATH . 'config.php', 0666);
+
+    // Set file permissions
+    chmod($config_path, 0666);
+
+    return true;
 }
 
 
@@ -795,7 +801,7 @@ function finish_installation($password)
 /**
  * Menus
  */
-function display_database_config()
+function display_database_config($form_data = null, $error = null)
 {
     include_once 'installer/gui/install-database.php';
 }
@@ -804,23 +810,6 @@ function display_database_config()
 function display_target()
 {
     include_once 'installer/gui/install-target.php';
-}
-
-
-/**
- * @param $error
- * @param $step
- */
-function display_database_error($error, $step)
-{
-    ?>
-    <h2 class="target display-6"><?php _e('Error'); ?></h2>
-    <div class="alert alert-danger shadow">
-        <?php echo $error['error'] ?>
-    </div>
-    <a href="<?php echo get_absolute_url(); ?>oc-includes/osclass/install.php?step=<?php echo $step; ?>" class="btn btn-warning"><?php _e('Go back'); ?></a>
-    <div class="clear bottom"></div>
-    <?php
 }
 
 

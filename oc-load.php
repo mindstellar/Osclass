@@ -35,9 +35,8 @@ if (!defined('ABS_PATH')) {
 
 define('LIB_PATH', ABS_PATH . 'oc-includes/');
 
+require_once LIB_PATH . 'osclass/helpers/hErrors.php';
 if (!file_exists(ABS_PATH . 'config.php')) {
-    require_once LIB_PATH . 'osclass/helpers/hErrors.php';
-
     $title   = 'Osclass &raquo; Error';
     $message =
         'There doesn\'t seem to be a <code>config.php</code> file. Osclass isn\'t installed. '
@@ -60,17 +59,15 @@ require_once LIB_PATH . 'vendor/autoload.php';
 OsclassErrors::newInstance()->register();
 require_once LIB_PATH . 'osclass/helpers/hDatabaseInfo.php';
 require_once LIB_PATH . 'osclass/helpers/hPreference.php';
-
 // check if Osclass is installed
 if (!Preference::newInstance()->get('osclass_installed')) {
-    require_once LIB_PATH . 'osclass/helpers/hErrors.php';
-
+    
     $title   = 'Osclass &raquo; Error';
     $message =
-        'Osclass isn\'t installed. <a href="https://github.com/mindstellar/Osclass/discussions">Need more help?</a></p>';
-    $message .= '<p><a class="button" href="' . osc_get_absolute_url()
+        '<code>config.php</code> file is present but Osclass isn\'t installed. '
+        .'Are you sure you want to install Osclass?'
+        . '<p><a class="button" href="' . osc_get_absolute_url()
         . 'oc-includes/osclass/install.php">Install</a></p>';
-
     osc_die($title, $message);
 }
 require_once LIB_PATH . 'osclass/helpers/hDefines.php';
