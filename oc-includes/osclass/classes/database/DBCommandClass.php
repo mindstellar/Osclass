@@ -970,7 +970,18 @@ class DBCommandClass
      */
     private function execute($sql)
     {
-        return $this->connId->query($sql);
+        if ($this->connId === null) {
+            return false;
+        }
+        try {
+            $result = $this->connId->query($sql);
+        } catch (Exception $e) {
+            $this->errorLevel = $e->getCode();
+            $this->errorDesc  = $e->getMessage();
+            $result = false;
+        }
+
+        return $result;
     }
 
     /**

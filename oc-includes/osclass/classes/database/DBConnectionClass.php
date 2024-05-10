@@ -310,7 +310,6 @@ class DBConnectionClass
     private function handleDbError($title, $message)
     {
         if (defined('OSC_INSTALLING') && OSC_INSTALLING !== 1) {
-            require_once LIB_PATH . 'osclass/helpers/hErrors.php';
             osc_die($title, $message);
         }
     }
