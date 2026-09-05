@@ -20,6 +20,22 @@ if (!defined('ABS_PATH')) {
  * footer -- so a bare `table` or `input` rule here would restyle the theme's
  * markup on the same page.
  *
+ * Two things make these rules defaults rather than an obstacle, and a theme
+ * should never have to know which selector core happened to write:
+ *
+ * 1. Everything is in `@layer shopclass`. A layered rule loses to any unlayered
+ *    rule at any specificity, so a theme overrides `.oe-btn` by writing
+ *    `.oe-btn {}` once -- no `!important`, and no need to mirror core's own
+ *    selector shape. A theme that says nothing still gets these defaults.
+ *    This is the whole-sheet form of what item-comments-style.php does per rule
+ *    with :where().
+ * 2. The component vocabulary -- buttons, actions, fields -- is not scoped under
+ *    .oe-page, because core emits it outside .oe-page too: osc_alert_form()
+ *    renders into a theme's own search page. Scoped, those controls fell back to
+ *    the user agent. The .oe-* prefix, not the ancestor, is what keeps these
+ *    rules off a theme's markup. Shell rules and anything targeting a bare
+ *    element keep the .oe-page ancestor and must keep it.
+ *
  * The palette is a hand-copied snapshot of oc-admin/themes/modern/scss/_brand.scss.
  * Copied rather than imported because the card layout renders when the database
  * is unreachable and no build output can be assumed. Change the brand there and
@@ -29,7 +45,11 @@ if (!defined('ABS_PATH')) {
  */
 ?>
 <style>
-  .oe-page {
+@layer shopclass {
+  /* On :root, not .oe-page: an un-scoped component rule has to resolve these
+     when core renders that component inside a theme, where there is no .oe-page
+     ancestor to inherit from. */
+  :root {
     --oe-bench-warm:#f7f9fb; --oe-bench:#fff; --oe-bench-sunk:#eef1f5;
     --oe-rule:#dde3ea; --oe-ink:#14181f; --oe-ink-muted:#5f6b7a;
     --oe-teal:#0b7269; --oe-teal-deep:#09625c;
@@ -89,28 +109,31 @@ if (!defined('ABS_PATH')) {
     background:var(--oe-bench);border:1px solid var(--oe-rule);border-radius:6px;
     padding:20px 24px;margin-bottom:20px;
   }
-  .oe-page .oe-btn,.oe-page .oe-bill-btn,.oe-page .oe-lead a.button,.oe-page .oe-lead a.btn,.oe-page .oe-actions a.oe-primary,.oe-page .oe-actions a.oe-secondary{
+  /* Un-scoped from here to the end of the form block: these are the names the
+     alert form, the contact form and the send-to-a-friend form emit, and those
+     partials render inside a theme's page where .oe-page never appears. */
+  .oe-btn,.oe-bill-btn,.oe-lead a.button,.oe-lead a.btn,.oe-actions a.oe-primary,.oe-actions a.oe-secondary{
     display:inline-block;text-decoration:none;border:1px solid var(--oe-teal);border-radius:4px;
     padding:9px 18px;font:inherit;font-size:.9375rem;font-weight:500;cursor:pointer;
     background:var(--oe-teal);color:#fff;
   }
-  .oe-page .oe-btn:hover,.oe-page .oe-bill-btn:hover,.oe-page .oe-lead a.button:hover,.oe-page .oe-actions a.oe-primary:hover{
+  .oe-btn:hover,.oe-bill-btn:hover,.oe-lead a.button:hover,.oe-actions a.oe-primary:hover{
     background:var(--oe-teal-deep);
   }
-  .oe-page .oe-btn-danger{background:var(--oe-danger);border-color:var(--oe-danger);}
-  .oe-page .oe-actions,.oe-page .oe-bill-actions{display:flex;flex-wrap:wrap;gap:12px;margin-top:16px;}
-  .oe-page .oe-actions a.oe-secondary,.oe-page .oe-btn.oe-secondary{
+  .oe-btn-danger{background:var(--oe-danger);border-color:var(--oe-danger);}
+  .oe-actions,.oe-bill-actions{display:flex;flex-wrap:wrap;gap:12px;margin-top:16px;}
+  .oe-actions a.oe-secondary,.oe-btn.oe-secondary{
     background:var(--oe-bench);color:var(--oe-ink);border-color:var(--oe-rule);
   }
-  .oe-page .oe-actions a.oe-secondary:hover,.oe-page .oe-btn.oe-secondary:hover{border-color:var(--oe-ink-muted);}
+  .oe-actions a.oe-secondary:hover,.oe-btn.oe-secondary:hover{border-color:var(--oe-ink-muted);}
 
-  .oe-page .oe-field{margin:0 0 16px;}
-  .oe-page .oe-label{display:block;font-size:.9375rem;font-weight:500;margin-bottom:6px;}
-  .oe-page .oe-input{
+  .oe-field{margin:0 0 16px;}
+  .oe-label{display:block;font-size:.9375rem;font-weight:500;margin-bottom:6px;}
+  .oe-input{
     font:inherit;font-size:.9375rem;width:100%;max-width:320px;padding:8px 10px;
     background:var(--oe-bench);color:var(--oe-ink);border:1px solid var(--oe-rule);border-radius:4px;
   }
-  .oe-page .oe-input:focus-visible{outline:2px solid var(--oe-teal);outline-offset:1px;}
+  .oe-input:focus-visible{outline:2px solid var(--oe-teal);outline-offset:1px;}
   .oe-page fieldset{border:0;margin:0 0 20px;padding:0;}
   .oe-page legend{font-weight:600;font-size:1.0625rem;margin:0 0 12px;padding:0;}
   .oe-page input[type=radio],.oe-page input[type=checkbox]{accent-color:var(--oe-teal);}
@@ -126,7 +149,8 @@ if (!defined('ABS_PATH')) {
   .oe-page .oe-num,.oe-page .oe-bill-num{text-align:right;font-variant-numeric:tabular-nums;}
   .oe-page .oe-scroll{overflow-x:auto;}
 
-  .oe-page .oe-muted,.oe-page .oe-bill-sub{color:var(--oe-ink-muted);margin:4px 0 0;font-size:.875rem;}
+  /* Un-scoped: the alert form uses .oe-muted for its subscribed notice. */
+  .oe-muted,.oe-bill-sub{color:var(--oe-ink-muted);margin:4px 0 0;font-size:.875rem;}
   .oe-page .oe-empty,.oe-page .oe-bill-empty{color:var(--oe-ink-muted);padding:24px 0;text-align:center;}
   .oe-page .oe-pager,.oe-page .oe-bill-pager{display:flex;justify-content:space-between;margin-top:16px;font-size:.875rem;}
   .oe-page .oe-pager a,.oe-page .oe-bill-pager a{text-decoration:none;}
@@ -244,23 +268,23 @@ if (!defined('ABS_PATH')) {
   }
 
   /* Help text bound to its field with aria-describedby. */
-  .oe-page .oe-hint{display:block;font-size:.8125rem;color:var(--oe-ink-muted);margin-block-start:6px;}
+  .oe-hint{display:block;font-size:.8125rem;color:var(--oe-ink-muted);margin-block-start:6px;}
   /* A checkbox and its label on one line -- the label wraps the control, so the
      whole row is the target and no `for` can drift. */
-  .oe-page .oe-check{display:flex;align-items:center;gap:10px;margin:0 0 16px;font-size:.9375rem;}
-  .oe-page .oe-check input{inline-size:auto;flex:none;}
+  .oe-check{display:flex;align-items:center;gap:10px;margin:0 0 16px;font-size:.9375rem;}
+  .oe-check input{inline-size:auto;flex:none;}
 
   /* The floor under a control core did not put a class on: UserForm renders bare
      <input>/<select>/<textarea>. Zero specificity on purpose (:where), so ANY
      rule a theme writes -- even a bare `input {}` -- wins. Inside a theme these
      should look like the theme's fields, not like core's. */
-  :where(.oe-page .oe-field, .oe-page .oe-check) :where(input,select,textarea){
+  :where(.oe-field, .oe-check) :where(input,select,textarea){
     font:inherit; font-size:.9375rem; inline-size:100%; max-inline-size:22rem;
     padding:8px 10px; background:var(--oe-bench); color:var(--oe-ink);
     border:1px solid var(--oe-rule); border-radius:4px;
   }
-  :where(.oe-page .oe-field) :where(textarea){min-block-size:7rem;max-inline-size:34rem;line-height:1.55;}
-  .oe-page .oe-field :is(input,select,textarea):focus-visible{outline:2px solid var(--oe-teal);outline-offset:1px;}
+  :where(.oe-field) :where(textarea){min-block-size:7rem;max-inline-size:34rem;line-height:1.55;}
+  .oe-field :is(input,select,textarea):focus-visible{outline:2px solid var(--oe-teal);outline-offset:1px;}
 
   .oe-page .oe-ref{font-size:.8125rem;color:var(--oe-ink-muted);margin:16px 0 0;}
   .oe-page .oe-ref code{
@@ -280,4 +304,5 @@ if (!defined('ABS_PATH')) {
     font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
     font-size:.8125rem;line-height:1.5;color:var(--oe-ink-muted);
   }
+}
 </style>
