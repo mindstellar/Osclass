@@ -58,14 +58,6 @@ function customHead()
 
 osc_add_hook('admin_header', 'customHead', 10);
 
-/**
- * @return string
- */
-function render_offset()
-{
-    return 'row-offset';
-}
-
 osc_admin_page(array(
     'section' => __('Settings'),
     'title'   => __('Comment Settings'),
@@ -106,26 +98,31 @@ osc_current_admin_theme_path('parts/header.php'); ?>
                             'label'   => __('A comment is being held for moderation'),
                             'checked' => osc_moderate_comments() != -1,
                         )); ?>
-                        <div class="form-label-checkbox-offset">
-                            <?php printf(
-                                __('Before a comment appears, comment author must have at least %s previously approved comments'),
-                                '<input type="text" class="input-small" name="num_moderate_comments" value="'
-                                 . ((osc_moderate_comments() == -1) ? '0' : osc_esc_html(osc_moderate_comments()))
-                                 . '" />'
-                            ); ?>
-                            <div class="help-box"><?php _e('If the value is zero, an administrator must always approve comments'); ?></div>
+                        <div class="form-label-checkbox-offset comments_approved">
+                            <?php osc_admin_number(array(
+                                'row'    => false,
+                                'name'   => 'num_moderate_comments',
+                                'value'  => osc_moderate_comments() == -1 ? 0 : osc_moderate_comments(),
+                                'min'    => 0,
+                                'prefix' => __('Before a comment appears, comment author must have at least'),
+                                'suffix' => __('previously approved comments'),
+                                'help'   => __('If the value is zero, an administrator must always approve comments'),
+                            )); ?>
                         </div>
                     </div>
                 </div>
                 <div class="form-row">
                     <div class="form-label"><?php _e('Other comment settings'); ?></div>
                     <div class="form-controls">
-                        <?php printf(
-                            __('Break comments into pages with %s comments per page'),
-                            '<input type="text" class="input-small" name="comments_per_page" value="'
-                                     . osc_esc_html(osc_comments_per_page()) . '" />'
-                        ); ?>
-                        <div class="help-box"><?php _e('If the value is zero all comments are shown'); ?></div>
+                        <?php osc_admin_number(array(
+                            'row'    => false,
+                            'name'   => 'comments_per_page',
+                            'value'  => osc_comments_per_page(),
+                            'min'    => 0,
+                            'prefix' => __('Break comments into pages with'),
+                            'suffix' => __('comments per page'),
+                            'help'   => __('If the value is zero all comments are shown'),
+                        )); ?>
                     </div>
                 </div>
 

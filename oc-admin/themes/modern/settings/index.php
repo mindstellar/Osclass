@@ -65,36 +65,69 @@ function customHead()
             });
         });
 
-        function custom_date(date_format) {
-            fetch("<?php echo osc_admin_base_url(true); ?>?page=ajax&action=date_format&format=" + encodeURIComponent(date_format), {
+        // Date and time format. The radios and the free-text box both write the hidden
+        // field the controller reads (dateFormat / timeFormat); the free-text box also asks
+        // the server what its format renders as, since PHP's date() is not JS's.
+        function previewFormat(format, target) {
+            if (!target) {
+                return;
+            }
+            if (format === '') {
+                target.textContent = '';
+
+                return;
+            }
+            fetch("<?php echo osc_admin_base_url(true); ?>?page=ajax&action=date_format&format=" + encodeURIComponent(format), {
                 credentials: 'same-origin', headers: { 'X-Requested-With': 'XMLHttpRequest' }
             }).then(function (r) { return r.json(); }).then(function (data) {
-                var el = document.getElementById('custom_date');
-                if (el) { el.textContent = data.str_formatted != '' ? ' <?php echo osc_esc_js(__('Preview')); ?>: ' + data.str_formatted : ''; }
+                target.textContent = data.str_formatted !== '' ? ' <?php echo osc_esc_js(__('Preview')); ?>: ' + data.str_formatted : '';
             });
         }
 
-        function custom_time(time_format) {
-            fetch("<?php echo osc_admin_base_url(true); ?>?page=ajax&action=date_format&format=" + encodeURIComponent(time_format), {
-                credentials: 'same-origin', headers: { 'X-Requested-With': 'XMLHttpRequest' }
-            }).then(function (r) { return r.json(); }).then(function (data) {
-                var el = document.getElementById('custom_time');
-                if (el) { el.textContent = data.str_formatted != '' ? ' <?php echo osc_esc_js(__('Preview')); ?>: ' + data.str_formatted : ''; }
+        document.addEventListener('DOMContentLoaded', function () {
+            [['date', 'df'], ['time', 'tf']].forEach(function (pair) {
+                var kind    = pair[0];
+                var group   = pair[1];
+                var hidden  = document.getElementById(kind === 'date' ? 'dateFormat' : 'timeFormat');
+                var custom  = document.getElementById(group + '_custom_text');
+                var preview = document.getElementById('custom_' + kind);
+                var radios  = document.querySelectorAll('input[name="' + group + '"]');
+                if (!hidden || !radios.length) {
+                    return;
+                }
+
+                function sync() {
+                    var picked = document.querySelector('input[name="' + group + '"]:checked');
+                    if (!picked) {
+                        return;
+                    }
+                    var isCustom = picked.value === group + '_custom';
+                    hidden.value = isCustom ? (custom ? custom.value : '') : picked.value;
+                    previewFormat(isCustom ? hidden.value : '', preview);
+                }
+
+                radios.forEach(function (radio) {
+                    radio.addEventListener('change', sync);
+                });
+
+                if (custom) {
+                    // Typing a format is choosing it: without this the value is entered and
+                    // silently discarded because another radio is still selected.
+                    custom.addEventListener('input', function () {
+                        var radio = document.querySelector('input[name="' + group + '"][value="' + group + '_custom"]');
+                        if (radio) {
+                            radio.checked = true;
+                        }
+                        sync();
+                    });
+                }
             });
-        }
+        });
     </script>
     <?php
 }
 
 osc_add_hook('admin_header', 'customHead', 10);
-
-/**
- * @return string
- */
-function render_offset()
-{
-    return 'row-offset';
-}
 
 osc_admin_page(array(
     'section' => __('Settings'),
@@ -115,200 +148,159 @@ osc_current_admin_theme_path('parts/header.php'); ?>
             <input type="hidden" name="action" value="update"/>
             <fieldset>
                 <div class="form-horizontal">
-                    <div class="form-row">
-                        <div class="form-label"><?php _e('Page title'); ?></div>
-                        <div class="form-controls"><input type="text" class="xlarge" name="pageTitle"
-                                                          value="<?php echo osc_esc_html(osc_page_title()); ?>"/></div>
-                    </div>
-                    <div class="form-row">
-                        <div class="form-label"><?php _e('Page description'); ?></div>
-                        <div class="form-controls"><input type="text" class="xlarge" name="pageDesc"
-                                                          value="<?php echo osc_esc_html(osc_page_description()); ?>"/>
-                        </div>
-                    </div>
-                    <div class="form-row">
-                        <div class="form-label"><?php _e('Contact e-mail'); ?></div>
-                        <div class="form-controls"><input type="text" class="xlarge" name="contactEmail"
-                                                          value="<?php echo osc_esc_html(osc_contact_email()); ?>"/>
-                        </div>
-                    </div>
-                    <div class="form-row">
-                        <div class="form-label"><?php _e('Default language'); ?></div>
-                        <div class="form-controls">
-                            <select class="form-select form-select-sm " name="language">
-                                <?php foreach ($aLanguages as $lang) { ?>
-                                    <option value="<?php echo $lang['pk_c_code']; ?>" <?php echo((osc_language()
-                                                                                                  === $lang['pk_c_code'])
-                                        ? 'selected="selected"'
-                                        : ''); ?>><?php echo $lang['s_name']; ?></option>
-                                <?php } ?>
-                            </select>
-                        </div>
-                    </div>
-                    <div class="form-row">
-                        <div class="form-label"><?php _e('Default currency'); ?></div>
-                        <div class="form-controls">
-                            <select class="form-select form-select-sm " name="currency" id="currency_admin">
-                                <?php foreach ($aCurrencies as $currency) { ?>
-                                    <option value="<?php echo osc_esc_html($currency['pk_c_code']); ?>" <?php echo((osc_currency()
-                                                                                                                    === $currency['pk_c_code'])
-                                        ? 'selected="selected"'
-                                        : ''); ?>><?php echo $currency['pk_c_code'] ?></option>
-                                <?php } ?>
-                            </select>
-                        </div>
-                    </div>
-                    <div class="form-row">
-                        <div class="form-label"><?php _e('Week starts on'); ?></div>
-                        <div class="form-controls">
-                            <select class="form-select form-select-sm " name="weekStart" id="weekStart">
-                                <option value="0" <?php if (osc_week_starts_at() == '0') {
-                                    ?>selected="selected"<?php
-                                } ?>><?php _e('Sunday'); ?></option>
-                                <option value="1" <?php if (osc_week_starts_at() == '1') {
-                                    ?>selected="selected"<?php
-                                } ?>><?php _e('Monday'); ?></option>
-                                <option value="2" <?php if (osc_week_starts_at() == '2') {
-                                    ?>selected="selected"<?php
-                                } ?>><?php _e('Tuesday'); ?></option>
-                                <option value="3" <?php if (osc_week_starts_at() == '3') {
-                                    ?>selected="selected"<?php
-                                } ?>><?php _e('Wednesday'); ?></option>
-                                <option value="4" <?php if (osc_week_starts_at() == '4') {
-                                    ?>selected="selected"<?php
-                                } ?>><?php _e('Thursday'); ?></option>
-                                <option value="5" <?php if (osc_week_starts_at() == '5') {
-                                    ?>selected="selected"<?php
-                                } ?>><?php _e('Friday'); ?></option>
-                                <option value="6" <?php if (osc_week_starts_at() == '6') {
-                                    ?>selected="selected"<?php
-                                } ?>><?php _e('Saturday'); ?></option>
-                            </select>
-                        </div>
-                    </div>
-                    <div class="form-row">
-                        <div class="form-label"><?php _e('Timezone'); ?></div>
-                        <div class="form-controls">
-                            <select class="form-select form-select-sm " name="timezone" id="timezone">
-                                <?php $selected_tz = osc_timezone(); ?>
-                                <option value="" selected="selected"><?php _e('Select a timezone...'); ?></option>
-                                <?php
-                                $timezone = Utils::timezoneList();
-foreach ($timezone as $tz) { ?>
-                                    <option value="<?php echo $tz; ?>" <?php if ($selected_tz === $tz) {
-                                        ?> selected="selected" <?php
-                                    } ?>><?php echo $tz; ?></option>
-                                <?php } ?>
-                            </select>
-                        </div>
-                    </div>
+                    <?php
+                    osc_admin_text(array(
+                        'name'  => 'pageTitle',
+                        'label' => __('Page title'),
+                        'value' => osc_page_title(),
+                    ));
+                    osc_admin_text(array(
+                        'name'  => 'pageDesc',
+                        'label' => __('Page description'),
+                        'value' => osc_page_description(),
+                    ));
+                    osc_admin_field(array(
+                        'type'  => 'email',
+                        'name'  => 'contactEmail',
+                        'label' => __('Contact e-mail'),
+                        'value' => osc_contact_email(),
+                    )); ?>
+                    <?php
+                    $languageOptions = array();
+                    foreach ($aLanguages as $lang) {
+                        $languageOptions[$lang['pk_c_code']] = $lang['s_name'];
+                    }
+                    osc_admin_select(array(
+                        'name'     => 'language',
+                        'label'    => __('Default language'),
+                        'selected' => osc_language(),
+                        'options'  => $languageOptions,
+                    ));
+
+                    $currencyOptions = array();
+                    foreach ($aCurrencies as $currency) {
+                        $currencyOptions[$currency['pk_c_code']] = $currency['pk_c_code'];
+                    }
+                    osc_admin_select(array(
+                        'id'       => 'currency_admin',
+                        'name'     => 'currency',
+                        'label'    => __('Default currency'),
+                        'selected' => osc_currency(),
+                        'options'  => $currencyOptions,
+                    ));
+
+                    osc_admin_select(array(
+                        'id'       => 'weekStart',
+                        'name'     => 'weekStart',
+                        'label'    => __('Week starts on'),
+                        'selected' => (string)osc_week_starts_at(),
+                        'options'  => array(
+                            '0' => __('Sunday'),
+                            '1' => __('Monday'),
+                            '2' => __('Tuesday'),
+                            '3' => __('Wednesday'),
+                            '4' => __('Thursday'),
+                            '5' => __('Friday'),
+                            '6' => __('Saturday'),
+                        ),
+                    ));
+
+                    $timezoneOptions = array();
+                    foreach (Utils::timezoneList() as $tz) {
+                        $timezoneOptions[$tz] = $tz;
+                    }
+                    osc_admin_select(array(
+                        'name'     => 'timezone',
+                        'label'    => __('Timezone'),
+                        'selected' => osc_timezone(),
+                        'options'  => $timezoneOptions,
+                        'width'    => 'text',
+                    )); ?>
                     <div class="form-row">
                         <div class="form-label"><?php _e('Date & time format'); ?></div>
                         <div class="form-controls">
-                            <div class="custom-date-time pt-2">
+                            <div class="custom-date-time">
                                 <div id="date">
-                                    <div><?php _e('Date'); ?>:</div>
+                                    <div class="form-sublabel"><?php _e('Date'); ?></div>
                                     <?php
-                                    $custom_checked = true;
-foreach ($dateFormats as $dfIndex => $df) {
-    $checked = false;
-    if ($df === osc_date_format()) {
-        $custom_checked = false;
-        $checked        = true;
-    } ?>
-                                        <div>
-                                            <input type="radio" name="df" id="df_<?php echo $dfIndex; ?>"
-                                                   value="<?php echo osc_esc_html($df); ?>" <?php echo($checked ? 'checked="checked"'
-                : ''); ?>
-                                                   onclick="document.getElementById('dateFormat').value = '<?php echo osc_esc_js($df); ?>';"/>
-                                            <label for="df_<?php echo $dfIndex; ?>"><?php echo date($df); ?></label>
-                                        </div>
-                                    <?php } ?>
-                                    <div class="input-group input-group-sm pe-1">
-                                        <div class="input-group-text">
-                                            <input type="radio" name="df" id="df_custom"
-                                                   aria-label="<?php echo osc_esc_html(__('Custom date format')); ?>"
-                                                   value="df_custom" <?php echo($custom_checked ? 'checked="checked"'
-                : ''); ?> />
-                                        </div>
-                                        <input type="text" name="df_custom_text" id="df_custom_text"
-                                               class="input-medium" <?php echo($custom_checked ? 'value="'
-                                                             . osc_esc_html(osc_date_format()) . '"'
-            : ''); ?>
-                                               onchange="document.getElementById('dateFormat').value = this.value;"
-                                               onkeyup="custom_date(this.value);"/>
-                                    </div>
+                                    $dfOptions = array();
+foreach ($dateFormats as $df) {
+    $dfOptions[$df] = date($df);
+}
+                                    $dfCustom            = !in_array(osc_date_format(), $dateFormats, true);
+                                    $dfOptions['df_custom'] = array(
+                                        'label'       => __('Custom'),
+                                        'custom_html' => '<input type="text" name="df_custom_text" id="df_custom_text"'
+                                            . ' class="input-text field-inline-text"'
+                                            . ' aria-label="' . osc_esc_html(__('Custom date format')) . '"'
+                                            . ' value="' . ($dfCustom ? osc_esc_html(osc_date_format()) : '') . '" />',
+                                    );
+                                    osc_admin_radio_group(array(
+                                        'row'      => false,
+                                        'name'     => 'df',
+                                        'label'    => __('Date'),
+                                        'selected' => $dfCustom ? 'df_custom' : osc_date_format(),
+                                        'options'  => $dfOptions,
+                                    )); ?>
                                     <span id="custom_date"></span>
                                     <input type="hidden" name="dateFormat" id="dateFormat"
-                                           value="<?php echo osc_date_format(); ?>"/>
+                                           value="<?php echo osc_esc_html(osc_date_format()); ?>"/>
                                 </div>
                                 <div id="time">
-                                    <div><?php _e('Time'); ?>:</div>
+                                    <div class="form-sublabel"><?php _e('Time'); ?></div>
                                     <?php
-                                    $custom_checked = true;
-foreach ($timeFormats as $tfIndex => $tf) {
-    $checked = false;
-    if ($tf === osc_time_format()) {
-        $custom_checked = false;
-        $checked        = true;
-    }
-    ?>
-                                        <div>
-                                            <input type="radio" name="tf" id="tf_<?php echo $tfIndex; ?>"
-                                                   value="<?php echo osc_esc_html($tf); ?>" <?php echo($checked ? 'checked="checked"'
-                : ''); ?>
-                                                   onclick="document.getElementById('timeFormat').value = '<?php echo osc_esc_js($tf); ?>';"/>
-                                            <label for="tf_<?php echo $tfIndex; ?>"><?php echo date($tf); ?></label>
-                                        </div>
-                                    <?php } ?>
-                                    <div class="input-group input-group-sm pe-1">
-                                        <div class="input-group-text">
-                                            <input type="radio" name="tf" id="tf_custom"
-                                                   aria-label="<?php echo osc_esc_html(__('Custom time format')); ?>"
-                                                   value="tf_custom" <?php echo($custom_checked ? 'checked="checked"'
-                : ''); ?> />
-                                        </div>
-                                        <input type="text" class="input-medium" <?php echo($custom_checked ? 'value="'
-                                                                         . osc_esc_html(osc_time_format())
-                                                                         . '"' : ''); ?>
-                                               onchange="document.getElementById('timeFormat').value = this.value;"
-                                               onkeyup="custom_time(this.value);"/>
-                                    </div>
+                                    $tfOptions = array();
+foreach ($timeFormats as $tf) {
+    $tfOptions[$tf] = date($tf);
+}
+                                    $tfCustom            = !in_array(osc_time_format(), $timeFormats, true);
+                                    $tfOptions['tf_custom'] = array(
+                                        'label'       => __('Custom'),
+                                        'custom_html' => '<input type="text" name="tf_custom_text" id="tf_custom_text"'
+                                            . ' class="input-text field-inline-text"'
+                                            . ' aria-label="' . osc_esc_html(__('Custom time format')) . '"'
+                                            . ' value="' . ($tfCustom ? osc_esc_html(osc_time_format()) : '') . '" />',
+                                    );
+                                    osc_admin_radio_group(array(
+                                        'row'      => false,
+                                        'name'     => 'tf',
+                                        'label'    => __('Time'),
+                                        'selected' => $tfCustom ? 'tf_custom' : osc_time_format(),
+                                        'options'  => $tfOptions,
+                                    )); ?>
                                     <span id="custom_time"></span>
                                     <input type="hidden" name="timeFormat" id="timeFormat"
                                            value="<?php echo osc_esc_html(osc_time_format()); ?>"/>
                                 </div>
                             </div>
-                            <div class="help-box" style="clear:both; float:none;">
-                                <a href="http://php.net/date"
-                                   target="_blank"><?php _e('Documentation on date and time formatting'); ?></a>
+                            <div class="help-box">
+                                <a href="https://php.net/date"
+                                   target="_blank" rel="noopener"><?php _e('Documentation on date and time formatting'); ?></a>
                             </div>
                         </div>
                     </div>
-                    <div class="form-row">
-                        <div class="form-label"><?php _e('RSS shows'); ?></div>
-                        <div class="form-controls">
-                            <input type="number" min="0" class="input-small" name="num_rss_items"
-                                   value="<?php echo osc_esc_html(osc_num_rss_items()); ?>"/>
-                            <?php _e('listings at most'); ?>
-                        </div>
-                    </div>
-                    <div class="form-row">
-                        <div class="form-label"><?php _e('Latest listings shown'); ?></div>
-                        <div class="form-controls">
-                            <input type="number" min="0" class="input-small" name="max_latest_items_at_home"
-                                   value="<?php echo osc_esc_html(osc_max_latest_items_at_home()); ?>"/>
-                            <?php _e('at most'); ?>
-                        </div>
-                    </div>
-                    <div class="form-row">
-                        <div class="form-label"><?php _e('Search page shows'); ?></div>
-                        <div class="form-controls">
-                            <input type="number" min="0" class="input-small" name="default_results_per_page"
-                                   value="<?php echo osc_esc_html(osc_default_results_per_page_at_search()); ?>"/>
-                            <?php _e('listings at most'); ?>
-                        </div>
-                    </div>
+                    <?php
+                    osc_admin_number(array(
+                        'name'   => 'num_rss_items',
+                        'label'  => __('RSS shows'),
+                        'value'  => osc_num_rss_items(),
+                        'min'    => 0,
+                        'suffix' => __('listings at most'),
+                    ));
+                    osc_admin_number(array(
+                        'name'   => 'max_latest_items_at_home',
+                        'label'  => __('Latest listings shown'),
+                        'value'  => osc_max_latest_items_at_home(),
+                        'min'    => 0,
+                        'suffix' => __('at most'),
+                    ));
+                    osc_admin_number(array(
+                        'name'   => 'default_results_per_page',
+                        'label'  => __('Search page shows'),
+                        'value'  => osc_default_results_per_page_at_search(),
+                        'min'    => 0,
+                        'suffix' => __('listings at most'),
+                    )); ?>
                     <?php osc_admin_page_head(__('Category settings')); ?>
                     <div class="form-row">
                         <div class="form-label"><?php _e('Parent categories'); ?></div>
@@ -333,46 +325,37 @@ foreach ($timeFormats as $tfIndex => $tf) {
                         </div>
                     </div>
                     <?php osc_admin_page_head(__('Cron Settings')); ?>
-                    <div class="form-row">
-                        <div class="form-label"><?php _e('Automatic cron process'); ?></div>
-                        <div class="form-controls">
-                            <div class="form-label-checkbox">
-                                <label>
-                                    <input type="checkbox" <?php echo(osc_auto_cron() ? 'checked="checked"' : ''); ?>
-                                           name="auto_cron"/>
-                                    <?php printf(
-                                        __('Allow Shopclass to run a built-in <a href="%s" target="_blank">cron</a>' . ' '
-                                           . 'automatically without setting crontab'),
-                                        'http://en.wikipedia.org/wiki/Cron'
-                                    ); ?>
-                                </label>
-                            </div>
-                            <span class="help-box">
-                                <?php _e('It is <b>recommended</b> to have this option enabled, because some features require it.'); ?>
-                            </span>
-                        </div>
-                    </div>
+                    <?php osc_admin_field(array(
+                        'type'       => 'checkbox',
+                        'row_label'  => __('Automatic cron process'),
+                        'name'       => 'auto_cron',
+                        'checked'    => osc_auto_cron(),
+                        'label_html' => sprintf(
+                            __('Allow Shopclass to run a built-in <a href="%s" target="_blank" rel="noopener">cron</a>'
+                               . ' automatically without setting crontab'),
+                            'https://en.wikipedia.org/wiki/Cron'
+                        ),
+                        'help_html'  => __('It is <b>recommended</b> to have this option enabled, because some features require it.'),
+                    )); ?>
                     <?php osc_admin_page_head(__('Maps')); ?>
-                    <div class="form-row">
-                        <div class="form-label"><?php _e('Google Maps key'); ?></div>
-                        <div class="form-controls">
-                            <input type="text" class="xlarge" name="googlemaps_api_key"
-                                   value="<?php echo osc_esc_html(osc_google_maps_api_key()); ?>"/>
-                            <div class="help-box">
-                                <?php _e('Add your Google Maps JavaScript API key.'); ?>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="form-row">
-                        <div class="form-label"><?php _e('OpenStreetMaps key'); ?></div>
-                        <div class="form-controls">
-                            <input type="text" class="xlarge" name="openstreet_api_key"
-                                   value="<?php echo osc_esc_html(osc_openstreet_api_key()); ?>"/>
-                            <div class="help-box">
-                                <?php _e('Add your Mapquest Consumer key.'); ?>
-                            </div>
-                        </div>
-                    </div>
+                    <?php
+                    // Not osc_admin_secret(): a Maps JavaScript key is public by design — it
+                    // ships in the page source — so masking it would only hide it from the
+                    // administrator who has to check it.
+                    osc_admin_text(array(
+                        'name'  => 'googlemaps_api_key',
+                        'label' => __('Google Maps key'),
+                        'value' => osc_google_maps_api_key(),
+                        'width' => 'key',
+                        'help'  => __('Add your Google Maps JavaScript API key.'),
+                    ));
+                    osc_admin_text(array(
+                        'name'  => 'openstreet_api_key',
+                        'label' => __('OpenStreetMaps key'),
+                        'value' => osc_openstreet_api_key(),
+                        'width' => 'key',
+                        'help'  => __('Add your Mapquest Consumer key.'),
+                    )); ?>
                     <?php osc_admin_page_head(__('Software updates')); ?>
                     <?php
                     /**

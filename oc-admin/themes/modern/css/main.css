@@ -8201,7 +8201,7 @@ textarea.is-invalid.input-password, .form-controls textarea.is-invalid {
   margin-bottom: 0.25rem !important;
 }
 
-.mb-2, .custom-date-time #time, .custom-date-time #date {
+.mb-2 {
   margin-bottom: 0.5rem !important;
 }
 
@@ -14728,8 +14728,10 @@ input.input-actions {
   width: auto;
 }
 
+.field-prefix,
 .field-suffix {
   color: var(--osc-ink-muted);
+  cursor: pointer;
   white-space: nowrap;
 }
 
@@ -14860,11 +14862,18 @@ table.table-small td {
   overflow-x: auto;
 }
 
-.custom-date-time #date {
-  width: 150px;
+.custom-date-time {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem 2.5rem;
+  margin-block-end: 0.5rem;
 }
-.custom-date-time #time {
-  width: 150px;
+
+.form-sublabel {
+  color: var(--osc-ink-muted);
+  font-size: 0.8125rem;
+  font-weight: 500;
+  margin-block-end: 0.35rem;
 }
 
 /*

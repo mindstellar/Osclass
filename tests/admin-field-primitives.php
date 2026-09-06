@@ -109,9 +109,21 @@ $html = render(static function () {
     ));
 });
 emits('wraps control and suffix together', $html, '<div class="field-inline">');
-emits('renders the suffix in its own span', $html, '<span class="field-suffix">comments per page</span>');
+emits('renders the suffix in its own label', $html, '<label class="field-suffix" for="field-comments_per_page">comments per page</label>');
 emits('passes min through', $html, 'min="0"');
 check('the suffix follows the input', strpos($html, 'field-suffix') > strpos($html, '<input'), $html);
+// The words in front of a field are a slot too: the sentence they came from is never
+// split around a %s the translator cannot move the field within.
+$both = render(static function () {
+    osc_admin_number(array(
+        'name'   => 'comments_per_page',
+        'value'  => 10,
+        'prefix' => 'Break comments into pages with',
+        'suffix' => 'comments per page',
+    ));
+});
+emits('renders a prefix', $both, '<label class="field-prefix" for="field-comments_per_page">Break comments into pages with</label>');
+check('the prefix comes before the input', strpos($both, 'field-prefix') < strpos($both, '<input'), $both);
 // Without a suffix there is nothing to keep on one line, so no wrapper.
 $plain = render(static function () {
     osc_admin_number(array('name' => 'n', 'label' => 'N'));

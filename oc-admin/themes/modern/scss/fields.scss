@@ -25,8 +25,12 @@
   }
 }
 
+// The words either side of a field. Labels, not spans: they name the control they sit
+// against, and the row's own label column is often a category rather than a name.
+.field-prefix,
 .field-suffix {
   color: var(--osc-ink-muted);
+  cursor: pointer;
   white-space: nowrap;
 }
 

@@ -47,12 +47,13 @@ if (!function_exists('osc_admin_field')) {
      * is the only new name a plugin has to depend on.
      *
      * Keys, all optional but `name`:
-     *   'type'      => text|number|select|textarea|radio|checkbox|secret|custom
+     *   'type'      => text|email|url|tel|number|select|textarea|radio|checkbox|secret|custom
      *   'name'      => request/preference key
      *   'label'     => the label. For a checkbox it sits beside the control, so the row's
      *                  own label column comes from 'row_label' instead.
      *   'value'     => current value ('selected' is accepted for select and radio)
      *   'help'      => hint under the field. 'help_html' for a hint carrying markup.
+     *   'prefix'    => leading words that belong to the field, e.g. "Break comments into"
      *   'suffix'    => trailing words that belong to the field, e.g. "listings at most"
      *   'width'     => text|num|key|select|full, overriding the width the type implies
      *   'options'   => value => label, for select and radio
@@ -88,18 +89,27 @@ if (!function_exists('osc_admin_field')) {
             $spec['id'] = $id;
             osc_admin_checkbox($spec);
         } else {
-            // A suffix, and a secret's reveal button, sit on the control's own line. The
-            // inputs are display:block, so without this they drop underneath it.
+            // The words either side of a field, and a secret's reveal button, sit on the
+            // control's own line. The inputs are display:block, so without this they drop
+            // underneath. Each affix is a whole phrase the translator can read, which is the
+            // point: the sentence is never split around an opaque %s they cannot move.
+            $prefix = (string)($spec['prefix'] ?? '');
             $suffix = (string)($spec['suffix'] ?? '');
-            $inline = $suffix !== '' || ($type === 'secret' && !empty($spec['reveal']));
+            $inline = $prefix !== '' || $suffix !== ''
+                || ($type === 'secret' && !empty($spec['reveal']));
             if ($inline) {
                 echo '<div class="field-inline">';
+            }
+            // A choice list has no single control to name, so its affixes stay plain text.
+            $affixFor = $type === 'radio' ? '' : ' for="' . osc_esc_html($id) . '"';
+            if ($prefix !== '') {
+                echo '<label class="field-prefix"' . $affixFor . '>' . osc_esc_html($prefix) . '</label>';
             }
 
             osc_admin_field_control($type, $id, $spec);
 
             if ($suffix !== '') {
-                echo '<span class="field-suffix">' . osc_esc_html($suffix) . '</span>';
+                echo '<label class="field-suffix"' . $affixFor . '>' . osc_esc_html($suffix) . '</label>';
             }
             if ($inline) {
                 echo '</div>';
@@ -203,7 +213,11 @@ if (!function_exists('osc_admin_field_control')) {
                 break;
 
             default:
-                echo '<input type="text"' . $common . ' class="' . osc_admin_field_class($type, $spec) . '"'
+                // email/url/tel are text fields wearing a keyboard and a validator. Anything
+                // else falls back to text rather than emitting a type the caller invented.
+                $htmlType = in_array($type, array('email', 'url', 'tel'), true) ? $type : 'text';
+                echo '<input type="' . $htmlType . '"' . $common
+                    . ' class="' . osc_admin_field_class($type, $spec) . '"'
                     . ' value="' . osc_esc_html((string)$value) . '"' . $attrs . ' />';
                 break;
         }
@@ -369,7 +383,7 @@ if (!function_exists('osc_admin_field_attrs')) {
 
 if (!function_exists('osc_admin_text')) {
     /**
-     * Single-line text. Keys: the shared set, plus 'placeholder', 'width', 'suffix'.
+     * Single-line text. Keys: the shared set, plus 'placeholder', 'width', 'prefix', 'suffix'.
      *
      * @param array $opts
      *
@@ -384,7 +398,8 @@ if (!function_exists('osc_admin_text')) {
 
 if (!function_exists('osc_admin_number')) {
     /**
-     * A number, at number width. Keys: the shared set, plus 'min', 'max', 'step', 'suffix'.
+     * A number, at number width. Keys: the shared set, plus 'min', 'max', 'step', 'prefix',
+     * 'suffix'.
      *
      * @param array $opts
      *
@@ -507,6 +522,7 @@ if (!function_exists('osc_admin_checkbox')) {
      * A checkbox with its label on one line and its hint underneath.
      *
      * Keys: name, label, checked, value (default '1'), help, help_html, id, attrs.
+     * `label_html` is the raw-markup form of `label`, for the label that has to carry a link.
      *
      * @param array $opts
      *
@@ -520,7 +536,7 @@ if (!function_exists('osc_admin_checkbox')) {
             . ' value="' . osc_esc_html($opts['value'] ?? '1') . '"'
             . (!empty($opts['checked']) ? ' checked="checked"' : '')
             . osc_admin_field_attrs($opts['attrs'] ?? array()) . ' /> '
-            . osc_esc_html($opts['label'] ?? '')
+            . (!empty($opts['label_html']) ? $opts['label_html'] : osc_esc_html($opts['label'] ?? ''))
             . '</label>';
         osc_admin_field_help($opts);
         echo '</div>';

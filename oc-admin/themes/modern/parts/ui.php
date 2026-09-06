@@ -539,6 +539,7 @@ if (!function_exists('osc_admin_checkbox')) {
      * A checkbox with its label on one line and its hint underneath.
      *
      * Keys: name, label, checked, value (default '1'), help, help_html, id, attrs.
+     * `label_html` is the raw-markup form of `label`, for the label that has to carry a link.
      *
      * @param array $opts
      */
@@ -554,7 +555,9 @@ if (!function_exists('osc_admin_checkbox')) {
                        <?php if (!empty($opts['id'])) { ?>id="<?php echo osc_esc_html($opts['id']); ?>"<?php } ?>
                        value="<?php echo osc_esc_html($opts['value'] ?? '1'); ?>"
                        <?php echo !empty($opts['checked']) ? 'checked="checked"' : ''; ?><?php echo $attrs; ?> />
-                <?php echo osc_esc_html($opts['label'] ?? ''); ?>
+                <?php echo !empty($opts['label_html'])
+                    ? $opts['label_html']
+                    : osc_esc_html($opts['label'] ?? ''); ?>
             </label>
             <?php if (!empty($opts['help']) || !empty($opts['help_html'])) { ?>
                 <div class="help-box"><?php

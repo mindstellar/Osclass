@@ -72,6 +72,18 @@ theme ships none, using a documented class vocabulary a theme restyles in CSS al
 
 ### Fixed
 
+- A number field inside a sentence — "Break comments into pages with __ comments per page" —
+  rendered as a full-width block that pushed the rest of the sentence onto its own line, on
+  Comments and Listing settings. The words either side of a field are now slots the field
+  sits between, which also stops splitting the sentence around a `%s` translators cannot move
+  the field within.
+- The date and time format columns were 150px wide, so every option's label wrapped beneath
+  its own radio; a locale with longer month names wrapped harder. They size to their content
+  now, and picking a format no longer runs through inline `onclick` handlers.
+- Typing a custom date or time format without first selecting its radio silently discarded the
+  value on save.
+- The moderation-count field on Comments settings never hid itself when moderation was off —
+  the class its script looks for was not in the markup.
 - CSRF tokens were injected into GET forms, so a search submitted with the token in its
   URL — shared in links, kept in referrers, and unique per visitor, which gave every
   search its own canonical and its own cache entry. GET forms are skipped now; `nocsrf`
