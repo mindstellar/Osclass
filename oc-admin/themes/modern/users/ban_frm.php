@@ -69,30 +69,31 @@ $aux = customFrmText();
 <?php osc_admin_page_head($aux['title']); ?>
 <div class="settings-user">
     <ul id="error_list"></ul>
-    <form name="register" action="<?php echo osc_admin_base_url(true); ?>" method="post">
-        <input type="hidden" name="page" value="users"/>
-        <input type="hidden" name="action" value="<?php echo $aux['action_frm']; ?>"/>
-        <?php osc_admin_form_section(__('Contact info')); ?>
-        <?php BanRuleForm::primary_input_hidden($rule); ?>
-        <fieldset>
-            <div class="form-horizontal">
-                <?php osc_admin_form_row_open(__('Ban name / Reason')); ?>
-                        <?php BanRuleForm::name_text($rule); ?>
-                <?php osc_admin_form_row_close(); ?>
-                <?php osc_admin_form_row_open(__('IP rule')); ?>
-                        <?php BanRuleForm::ip_text($rule); ?>
-                        <span class="help-box"><?php _e('(e.g. 192.168.10-20.*)'); ?></span>
-                <?php osc_admin_form_row_close(); ?>
-                <?php osc_admin_form_row_open(__('E-mail rule')); ?>
-                        <?php BanRuleForm::email_text($rule); ?>
-                        <span class="help-box"><?php _e('(e.g. *@badsite.com, *@subdomain.badsite.com, *@*badsite.com)'); ?></span>
-                <?php osc_admin_form_row_close(); ?>
-                <div class="clear"></div>
-                <?php osc_admin_form_actions(array(
-                    array('label' => $aux['btn_text'], 'type' => 'submit', 'variant' => 'primary'),
-                )); ?>
-            </div>
-        </fieldset>
-    </form>
+    <?php osc_admin_form_open(array(
+        'name'   => 'register',
+        'page'   => 'users',
+        'action' => $aux['action_frm'],
+        'fields' => array('id' => $rule['pk_i_id'] ?? ''),
+    )); ?>
+        <?php osc_admin_text(array(
+            'name'  => 's_name',
+            'label' => __('Ban name / Reason'),
+            'value' => $rule['s_name'] ?? '',
+        )); ?>
+        <?php osc_admin_text(array(
+            'name'  => 's_ip',
+            'label' => __('IP rule'),
+            'value' => $rule['s_ip'] ?? '',
+            'help'  => __('(e.g. 192.168.10-20.*)'),
+        )); ?>
+        <?php osc_admin_text(array(
+            'name'  => 's_email',
+            'label' => __('E-mail rule'),
+            'value' => $rule['s_email'] ?? '',
+            'help'  => __('(e.g. *@badsite.com, *@subdomain.badsite.com, *@*badsite.com)'),
+        )); ?>
+    <?php osc_admin_form_close(array(
+        array('label' => $aux['btn_text'], 'type' => 'submit', 'variant' => 'primary'),
+    )); ?>
 </div>
 <?php osc_current_admin_theme_path('parts/footer.php'); ?>

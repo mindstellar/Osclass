@@ -59,35 +59,42 @@ $aux = customFrmText();
 <?php osc_admin_page_head($aux['title']); ?>
 <div class="settings-user">
     <ul id="error_list"></ul>
-    <?php
-    osc_admin_form_open(array(
+    <?php osc_admin_form_open(array(
         'name'   => 'keyword_block_form',
         'page'   => 'settings',
         'action' => $aux['action_frm'],
-    ));
-    KeywordBlockForm::primary_input_hidden($keyword); ?>
-                <?php osc_admin_form_row_open(__('Keyword')); ?>
-                        <?php KeywordBlockForm::keyword_text($keyword); ?>
-                        <div class="help-box">
-                            <?php printf(
-                                __('At least %d characters. Matched as a whole word unless "Substring" is checked below.'),
-                                ItemSpamFilter::MIN_KEYWORD_LENGTH
-                            ); ?>
-                        </div>
-                <?php osc_admin_form_row_close(); ?>
-                <?php osc_admin_form_row_open(__('Where to match')); ?>
-                        <?php KeywordBlockForm::scope_select($keyword); ?>
-                <?php osc_admin_form_row_close(); ?>
+        'fields' => array('id' => $keyword['pk_i_id'] ?? ''),
+    )); ?>
+                <?php osc_admin_text(array(
+                    'name'  => 's_keyword',
+                    'label' => __('Keyword'),
+                    'value' => $keyword['s_keyword'] ?? '',
+                    'help'  => sprintf(
+                        __('At least %d characters. Matched as a whole word unless "Substring" is checked below.'),
+                        ItemSpamFilter::MIN_KEYWORD_LENGTH
+                    ),
+                )); ?>
+                <?php osc_admin_select(array(
+                    'name'     => 's_scope',
+                    'label'    => __('Where to match'),
+                    'selected' => $keyword['s_scope'] ?? 'all',
+                    'options'  => array(
+                        'title'       => __('Title only'),
+                        'description' => __('Description only'),
+                        'all'         => __('Title and description'),
+                        'meta'        => __('Custom fields'),
+                    ),
+                )); ?>
                 <?php osc_admin_form_row_open(__('Substring')); ?>
-                        <div class="form-label-checkbox">
-                            <?php KeywordBlockForm::substring_checkbox($keyword); ?>
-                            <label for="b_substring"><?php _e('Match anywhere inside a word, not just whole words'); ?></label>
-                        </div>
-                        <div class="help-box text-danger">
-                            <?php _e('Broader and riskier — leave unchecked unless you specifically need to catch a fragment inside longer words.'); ?>
-                        </div>
+                        <?php osc_admin_checkbox(array(
+                            'name'      => 'b_substring',
+                            'id'        => 'b_substring',
+                            'value'     => '1',
+                            'label'     => __('Match anywhere inside a word, not just whole words'),
+                            'checked'   => isset($keyword['b_substring']) && (int)$keyword['b_substring'] === 1,
+                            'help_html' => '<span class="text-danger">' . __('Broader and riskier — leave unchecked unless you specifically need to catch a fragment inside longer words.') . '</span>',
+                        )); ?>
                 <?php osc_admin_form_row_close(); ?>
-                <div class="clear"></div>
                 <?php osc_admin_form_close(array(
                     array('label' => $aux['btn_text'], 'type' => 'submit', 'variant' => 'primary'),
                     array(

@@ -61,67 +61,65 @@ osc_current_admin_theme_path('parts/header.php'); ?>
     <!-- add/edit admin form -->
     <div class="settings-user">
         <ul id="error_list"></ul>
-        <form name="admin_form" action="<?php echo osc_admin_base_url(true); ?>" method="post">
-            <input type="hidden" name="action" value="<?php echo $aux['action_frm']; ?>"/>
-            <input type="hidden" name="page" value="admins"/>
-            <?php AdminForm::primary_input_hidden($admin); ?>
+        <?php osc_admin_form_open(array(
+            'name'   => 'admin_form',
+            'page'   => 'admins',
+            'action' => $aux['action_frm'],
+            'fields' => array('id' => $admin['pk_i_id'] ?? ''),
+        )); ?>
             <?php AdminForm::js_validation(); ?>
-            <fieldset>
-                <div class="form-horizontal">
-                    <?php osc_admin_form_row_open(__('Name <em>(required)</em>')); ?>
-                        <?php AdminForm::name_text($admin); ?>
-                    <?php osc_admin_form_row_close(); ?>
-                    <?php osc_admin_form_row_open(__('Username <em>(required)</em>')); ?>
-                        <?php AdminForm::username_text($admin); ?>
-                    <?php osc_admin_form_row_close(); ?>
-                    <?php osc_admin_form_row_open(__('E-mail <em>(required)</em>')); ?>
-                        <?php AdminForm::email_text($admin); ?>
-                    <?php osc_admin_form_row_close(); ?>
-                    <?php if (!$aux['admin_edit']
-                              || ($aux['admin_edit']
-                                  && Params::getParam('id') != osc_logged_admin_id()
-                                  && Params::getParam('id') != '')
-                    ) { ?>
-                        <?php osc_admin_form_row_open(__('Admin type <em>(required)</em>')); ?>
-                            <?php AdminForm::type_select($admin); ?>
-                                <p class="help-inline">
-                                    <em><?php _e('Administrators have total control over all aspects of your installation, '
-                                                 . 'while moderators are only allowed to moderate listings, comments and media files');
-                        ?></em>
-                                </p>
-                        <?php osc_admin_form_row_close(); ?>
-                    <?php } ?>
-                    <?php osc_admin_form_row_open(__('New password')); ?>
-                        <?php AdminForm::password_text($admin); ?>
-                    <?php osc_admin_form_row_close(); ?>
-                    <?php if ($aux['admin_edit']) { ?>
-                        <?php osc_admin_form_row_open(__('Confirm new password')); ?>
-                            <?php AdminForm::check_password_text($admin); ?>
-                                <p class="help-inline"><em><?php _e('Type your new password again'); ?></em></p>
-                        <?php osc_admin_form_row_close(); ?>
-                    <?php } ?>
+            <?php osc_admin_form_row_open('', array('label_html' => __('Name <em>(required)</em>'))); ?>
+                <?php osc_admin_text(array('row' => false, 'name' => 's_name', 'value' => $admin['s_name'] ?? '')); ?>
+            <?php osc_admin_form_row_close(); ?>
+            <?php osc_admin_form_row_open('', array('label_html' => __('Username <em>(required)</em>'))); ?>
+                <?php osc_admin_text(array('row' => false, 'name' => 's_username', 'value' => $admin['s_username'] ?? '')); ?>
+            <?php osc_admin_form_row_close(); ?>
+            <?php osc_admin_form_row_open('', array('label_html' => __('E-mail <em>(required)</em>'))); ?>
+                <?php osc_admin_text(array('row' => false, 'type' => 'email', 'name' => 's_email', 'value' => $admin['s_email'] ?? '')); ?>
+            <?php osc_admin_form_row_close(); ?>
+            <?php if (!$aux['admin_edit']
+                      || ($aux['admin_edit']
+                          && Params::getParam('id') != osc_logged_admin_id()
+                          && Params::getParam('id') != '')
+            ) { ?>
+                <?php osc_admin_form_row_open('', array('label_html' => __('Admin type <em>(required)</em>'))); ?>
+                    <?php osc_admin_select(array(
+                        'row'      => false,
+                        'name'     => 'b_moderator',
+                        'selected' => (string)($admin['b_moderator'] ?? '0'),
+                        'options'  => array('0' => __('Administrator'), '1' => __('Moderator')),
+                        'help'     => __('Administrators have total control over all aspects of your installation, '
+                                         . 'while moderators are only allowed to moderate listings, comments and media files'),
+                    )); ?>
+                <?php osc_admin_form_row_close(); ?>
+            <?php } ?>
+            <?php osc_admin_secret(array('name' => 's_password', 'label' => __('New password'), 'width' => 'text')); ?>
+            <?php if ($aux['admin_edit']) {
+                osc_admin_secret(array(
+                    'name'  => 's_password2',
+                    'label' => __('Confirm new password'),
+                    'width' => 'text',
+                    'help'  => __('Type your new password again'),
+                ));
+            } ?>
 
-                    <hr/>
-                    <?php osc_admin_form_row_open(__('Your current password')); ?>
-                        <?php AdminForm::old_password_text(); ?>
-                            <p class="help-inline">
-                                <em><?php _e('For security, type <b>your current password</b>'); ?></em></p>
-                    <?php osc_admin_form_row_close(); ?>
+            <hr/>
+            <?php osc_admin_secret(array(
+                'name'      => 'old_password',
+                'label'     => __('Your current password'),
+                'width'     => 'text',
+                'help_html' => __('For security, type <b>your current password</b>'),
+            )); ?>
 
-
-                    <?php osc_run_hook('admin_profile_form', $admin); ?>
-                    <div class="clear"></div>
-                    <?php
-                    $formActions = array();
-                    if ($aux['admin_edit']) {
-                        $formActions[] = array('label' => __('Cancel'), 'url' => 'javascript:history.go(-1)', 'variant' => 'dim');
-                    }
-                    $formActions[] = array('label' => $aux['btn_text'], 'type' => 'submit', 'variant' => 'primary');
-                    osc_admin_form_actions($formActions);
-                    ?>
-                </div>
-            </fieldset>
-        </form>
+            <?php osc_run_hook('admin_profile_form', $admin); ?>
+            <?php
+            $formActions = array();
+            if ($aux['admin_edit']) {
+                $formActions[] = array('label' => __('Cancel'), 'url' => 'javascript:history.go(-1)', 'variant' => 'dim');
+            }
+            $formActions[] = array('label' => $aux['btn_text'], 'type' => 'submit', 'variant' => 'primary');
+            osc_admin_form_close($formActions);
+            ?>
     </div>
     <!-- /add user form -->
 <?php osc_current_admin_theme_path('parts/footer.php'); ?>
