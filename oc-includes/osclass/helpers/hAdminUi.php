@@ -245,39 +245,7 @@ if (!function_exists('osc_admin_form_open')) {
      */
     function osc_admin_form_open(array $opts = array())
     {
-        $method     = strtolower((string)($opts['method'] ?? 'post'));
-        $horizontal = $opts['horizontal'] ?? true;
-
-        echo '<form action="' . osc_esc_html($opts['url'] ?? osc_admin_base_url(true)) . '"'
-            . ' method="' . osc_esc_html($method) . '"'
-            . (!empty($opts['name']) ? ' name="' . osc_esc_html($opts['name']) . '"' : '')
-            . (!empty($opts['id']) ? ' id="' . osc_esc_html($opts['id']) . '"' : '')
-            . (!empty($opts['class']) ? ' class="' . osc_esc_html($opts['class']) . '"' : '')
-            . (!empty($opts['upload']) ? ' enctype="multipart/form-data"' : '')
-            . (isset($opts['csrf']) && !$opts['csrf'] ? ' nocsrf' : '')
-            . '>';
-
-        $hidden = $opts['fields'] ?? array();
-        if ($method === 'post' || array_key_exists('page', $opts) || array_key_exists('action', $opts)) {
-            $hidden = array_merge(
-                array(
-                    'page'   => $opts['page'] ?? Params::getParam('page'),
-                    'action' => $opts['action'] ?? null,
-                ),
-                $hidden
-            );
-        }
-        foreach ($hidden as $name => $value) {
-            if ($value === null || $value === '') {
-                continue;
-            }
-            echo '<input type="hidden" name="' . osc_esc_html($name) . '"'
-                . ' value="' . osc_esc_html($value) . '"/>';
-        }
-
-        if ($horizontal) {
-            echo '<fieldset><div class="form-horizontal">';
-        }
+        \mindstellar\admin\ui\Form::open($opts);
     }
 }
 
@@ -297,13 +265,7 @@ if (!function_exists('osc_admin_form_close')) {
      */
     function osc_admin_form_close($actions = null, array $opts = array())
     {
-        if (is_array($actions)) {
-            osc_admin_form_actions($actions);
-        }
-        if ($opts['horizontal'] ?? true) {
-            echo '</div></fieldset>';
-        }
-        echo '</form>';
+        \mindstellar\admin\ui\Form::close($actions, $opts);
     }
 }
 
@@ -325,17 +287,7 @@ if (!function_exists('osc_admin_form_section')) {
      */
     function osc_admin_form_section($title, array $opts = array())
     {
-        $level = (int)($opts['level'] ?? 3) === 2 ? 2 : 3;
-        $class = 'render-title' . (!empty($opts['spaced']) ? ' separate-top' : '');
-
-        if ($title !== '') {
-            echo '<h' . $level . ' class="' . $class . '">' . osc_esc_html($title) . '</h' . $level . '>';
-        }
-        if (!empty($opts['intro_html'])) {
-            echo '<p class="form-intro">' . $opts['intro_html'] . '</p>';
-        } elseif (!empty($opts['intro'])) {
-            echo '<p class="form-intro">' . osc_esc_html($opts['intro']) . '</p>';
-        }
+        \mindstellar\admin\ui\Form::section($title, $opts);
     }
 }
 
@@ -547,48 +499,7 @@ if (!function_exists('osc_admin_form_row_open')) {
      */
     function osc_admin_form_row_open($label = '', array $opts = array())
     {
-        $class = 'form-row';
-        if (!empty($opts['class'])) {
-            $class .= ' ' . osc_esc_html($opts['class']);
-        }
-        if (($opts['layout'] ?? '') === 'stacked') {
-            $class .= ' form-row-stacked';
-        }
-
-        $data_attrs = '';
-        if (!empty($opts['data']) && is_array($opts['data'])) {
-            foreach ($opts['data'] as $data_key => $data_value) {
-                if (preg_match('/^[a-z0-9_-]+$/i', $data_key)) {
-                    $data_attrs .= ' data-' . $data_key . '="' . osc_esc_html($data_value) . '"';
-                }
-            }
-        }
-
-        echo '<div class="' . $class . '"'
-            . (!empty($opts['id']) ? ' id="' . osc_esc_html($opts['id']) . '"' : '')
-            . (!empty($opts['style']) ? ' style="' . osc_esc_html($opts['style']) . '"' : '')
-            . $data_attrs
-            . '>';
-
-        $label_html = $opts['label_html'] ?? '';
-        if ($label !== '' || $label_html !== '') {
-            $for = $opts['for'] ?? '';
-            echo '<div class="form-label">';
-            if ($label_html !== '') {
-                echo $for !== ''
-                    ? '<label for="' . osc_esc_html($for) . '">' . $label_html . '</label>'
-                    : $label_html;
-            } else {
-                echo $for !== ''
-                    ? '<label for="' . osc_esc_html($for) . '">' . osc_esc_html($label) . '</label>'
-                    : osc_esc_html($label);
-            }
-            echo '</div>';
-        }
-
-        echo '<div class="form-controls'
-            . (!empty($opts['controls_class']) ? ' ' . osc_esc_html($opts['controls_class']) : '')
-            . '">';
+        \mindstellar\admin\ui\Form::rowOpen($label, $opts);
     }
 }
 
@@ -598,7 +509,7 @@ if (!function_exists('osc_admin_form_row_close')) {
      */
     function osc_admin_form_row_close()
     {
-        echo '</div></div>';
+        \mindstellar\admin\ui\Form::rowClose();
     }
 }
 

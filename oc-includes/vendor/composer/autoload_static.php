@@ -946,6 +946,7 @@ class ComposerStaticInitcacf2fb59ceafa0761df38efb16f9123
         'iObject_Cache' => __DIR__ . '/../../..' . '/oc-includes/osclass/classes/cache/interface/iObject_Cache.php',
         'mindstellar\\Csrf' => __DIR__ . '/../../..' . '/oc-includes/osclass/classes/Csrf.php',
         'mindstellar\\admin\\ui\\Field' => __DIR__ . '/../../..' . '/oc-includes/osclass/classes/admin/ui/Field.php',
+        'mindstellar\\admin\\ui\\Form' => __DIR__ . '/../../..' . '/oc-includes/osclass/classes/admin/ui/Form.php',
         'mindstellar\\billing\\Billing' => __DIR__ . '/../../..' . '/oc-includes/osclass/classes/billing/Billing.php',
         'mindstellar\\billing\\CallbackResult' => __DIR__ . '/../../..' . '/oc-includes/osclass/classes/billing/CallbackResult.php',
         'mindstellar\\billing\\CheckoutIntent' => __DIR__ . '/../../..' . '/oc-includes/osclass/classes/billing/CheckoutIntent.php',
