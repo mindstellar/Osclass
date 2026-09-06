@@ -174,12 +174,16 @@ $gateways       = __get('gateways');
                     )); ?>
                 <?php osc_admin_form_row_close(); ?>
 
-                <?php osc_admin_form_row_open(__('Payment instructions'), array('for' => 'billing_offline_instructions')); ?>
-                    <textarea id="billing_offline_instructions" name="billing_offline_instructions" rows="5"
-                              class="form-control"><?php echo osc_esc_html(osc_billing_offline_instructions()); ?></textarea>
-                    <div class="help-box"><?php _e('Bank details, or wherever a buyer sends the money. Shown to the '
-                                                    . 'buyer exactly as written here.'); ?></div>
-                <?php osc_admin_form_row_close(); ?>
+                <?php osc_admin_textarea(array(
+                    'id'    => 'billing_offline_instructions',
+                    'name'  => 'billing_offline_instructions',
+                    'label' => __('Payment instructions'),
+                    'value' => osc_billing_offline_instructions(),
+                    'rows'  => 5,
+                    'width' => 'key',
+                    'help'  => __('Bank details, or wherever a buyer sends the money. Shown to the '
+                                  . 'buyer exactly as written here.'),
+                )); ?>
 
                 <?php osc_admin_form_actions(array(
                     array('label' => __('Save bank transfer settings'), 'type' => 'submit'),
