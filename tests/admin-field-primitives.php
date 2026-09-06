@@ -205,6 +205,35 @@ $masked = render(static function () {
 check('masked never echoes the secret', strpos($masked, 's3cret') === false, $masked);
 emits('masked shows bullets instead', $masked, 'placeholder="••••••••"');
 
+harness_section('colour and file');
+$html = render(static function () {
+    osc_admin_field(array('type' => 'color', 'name' => 'tint', 'label' => 'Tint', 'value' => '#112233'));
+});
+emits('a colour field is a colour well', $html, '<input type="color" id="field-tint" name="tint" class="field-color"');
+check('and is not styled as a text control', strpos($html, 'input-text') === false, $html);
+$html = render(static function () {
+    osc_admin_field(array('type' => 'file', 'name' => 'logo', 'label' => 'Logo', 'value' => '/etc/passwd'));
+});
+emits('a file field is a file picker', $html, '<input type="file"');
+// A file input's value cannot be set from markup, and echoing one back would be a
+// path disclosure for nothing.
+check('a file field carries no value', strpos($html, 'value=') === false, $html);
+
+harness_section('an option can be disabled or keep its own id');
+$html = render(static function () {
+    osc_admin_radio_group(array(
+        'name'     => 'watermark_type',
+        'selected' => 'none',
+        'options'  => array(
+            'none' => array('label' => 'None', 'id' => 'watermark_none'),
+            'text' => array('label' => 'Text', 'id' => 'watermark_text', 'disabled' => true),
+        ),
+    ));
+});
+emits('an option keeps the id a script already reaches for', $html, 'id="watermark_none"');
+emits('and one option can be disabled alone', $html, 'id="watermark_text" name="watermark_type" value="text" disabled');
+check('without disabling the rest', substr_count($html, 'disabled') === 1, $html);
+
 harness_section('checkbox keeps its published shape');
 $html = render(static function () {
     osc_admin_field(array(
@@ -219,6 +248,16 @@ emits('labels the row separately', $html, '<div class="form-label"><label for="f
 emits('the control label sits beside the box', $html, 'class="form-label-checkbox"');
 emits('is checked', $html, 'checked="checked"');
 check('the label is printed once', substr_count($html, 'Enable the thing') === 1, $html);
+// A checkbox label sometimes has to carry a link; label_html is that slot, named so the
+// _html suffix still marks every raw sink.
+$html = render(static function () {
+    osc_admin_field(array(
+        'type'       => 'checkbox',
+        'name'       => 'cron',
+        'label_html' => 'Run <a href="#">cron</a>',
+    ));
+});
+emits('label_html is a markup slot', $html, 'Run <a href="#">cron</a>');
 
 harness_section('custom');
 $html = render(static function () {
