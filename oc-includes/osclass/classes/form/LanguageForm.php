@@ -17,7 +17,6 @@
  */
 class LanguageForm extends Form
 {
-
     /**
      * @param bool $admin
      */

@@ -17,7 +17,6 @@
  */
 class AdminForm extends Form
 {
-
     public static function js_validation()
     {
         // Admin-only form: uses the admin's native validator (ui-osc.js), not jQuery.
