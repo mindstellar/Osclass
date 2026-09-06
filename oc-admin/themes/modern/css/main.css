@@ -13585,18 +13585,57 @@ div.widget-box-content-no-wrapp li a {
 }
 .admin-topbar .nav-link {
   align-items: center;
+  background-color: transparent;
+  border: 0;
   border-radius: 4px;
   color: var(--osc-ink-muted);
   display: inline-flex;
-  gap: 0.35rem;
+  font-size: 0.875rem;
+  font-weight: 500;
+  gap: 0.4rem;
+  margin: 0;
+  min-height: 2.25rem;
   padding: 0.4rem 0.6rem;
+  white-space: nowrap;
 }
 .admin-topbar .nav-link > i {
-  font-size: 1.05rem;
+  font-size: 1.1rem;
+}
+.admin-topbar .nav-link .circle {
+  align-items: center;
+  block-size: 1.15rem;
+  display: inline-flex;
+  float: none;
+  font-size: 0.72rem;
+  font-weight: 600;
+  justify-content: center;
+  line-height: 1;
+  margin: 0;
+  min-inline-size: 1.15rem;
+  padding: 0 0.28rem;
 }
 .admin-topbar .nav-link:hover, .admin-topbar .nav-link:focus-visible {
   background-color: var(--osc-chrome-hover);
   color: var(--osc-bronze);
+}
+.admin-topbar .nav-link:focus-visible {
+  outline: 2px solid var(--osc-bronze);
+  outline-offset: -2px;
+}
+.admin-topbar .circle-green {
+  background: var(--osc-success-tint);
+  border-color: transparent;
+  color: var(--osc-success-deep);
+}
+.admin-topbar .circle-red {
+  background: var(--osc-danger-tint);
+  border-color: transparent;
+  color: var(--osc-danger-deep);
+}
+.admin-topbar .circle-gray {
+  background: var(--osc-bench-sunk);
+  border-color: var(--osc-rule);
+  color: var(--osc-ink-muted);
 }
 .admin-topbar .admin-topbar-divider {
   align-self: center;
@@ -13699,6 +13738,11 @@ div.widget-box-content-no-wrapp li a {
 
 @media (max-width: 575.98px) {
   .admin-topbar .admin-topbar-account-name {
+    display: none;
+  }
+}
+@media (max-width: 767.98px) {
+  .admin-topbar .nav-link .toolbar-label {
     display: none;
   }
 }

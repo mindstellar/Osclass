@@ -589,14 +589,17 @@ function osc_admin_toolbar_comments()
 {
     $total = ItemComment::newInstance()->countAll('( c.b_active = 0 OR c.b_enabled = 0 OR c.b_spam = 1 )');
     if ($total > 0) {
-        $title = '<i class="circle circle-green">' . $total . '</i>' . __('New comments');
+        $label = __('New comments');
+        $title = '<i class="bi bi-chat-left-text" aria-hidden="true"></i>'
+            . '<span class="toolbar-label">' . $label . '</span>'
+            . '<i class="circle circle-green">' . $total . '</i>';
 
         AdminToolbar::newInstance()->add_menu(
             array(
                 'id'    => 'comments',
                 'title' => $title,
                 'href'  => osc_admin_base_url(true) . '?page=comments',
-                'meta'  => array('class' => 'action-btn ')
+                'meta'  => array('class' => 'action-btn ', 'title' => $label)
             )
         );
     }
@@ -606,14 +609,17 @@ function osc_admin_toolbar_spam()
 {
     $total = Item::newInstance()->countByMarkas('spam');
     if ($total > 0) {
-        $title = '<i class="circle circle-red">' . $total . '</i>' . __('Spam');
+        $label = __('Spam');
+        $title = '<i class="bi bi-shield-exclamation" aria-hidden="true"></i>'
+            . '<span class="toolbar-label">' . $label . '</span>'
+            . '<i class="circle circle-red">' . $total . '</i>';
 
         AdminToolbar::newInstance()->add_menu(
             array(
                 'id'    => 'spam',
                 'title' => $title,
                 'href'  => osc_admin_base_url(true) . '?page=items&action=items_reported&sort=spam',
-                'meta'  => array('class' => 'action-btn ')
+                'meta'  => array('class' => 'action-btn ', 'title' => $label)
             )
         );
     }
@@ -630,13 +636,15 @@ function osc_admin_toolbar_update_core($force = false)
         }
         if (getPreference('update_core_available')) {
             $update_json = json_decode(Preference::newInstance()->get('update_core_json'), false);
-            $title       = __('Shopclass ') . $update_json->s_new_version . __(' is available');
+            $label       = __('Shopclass ') . $update_json->s_new_version . __(' is available');
+            $title       = '<i class="bi bi-arrow-up-circle" aria-hidden="true"></i>'
+                . '<span class="toolbar-label">' . $label . '</span>';
             AdminToolbar::newInstance()->add_menu(
                 array(
                     'id'    => 'update_core',
                     'title' => $title,
                     'href'  => osc_admin_base_url(true) . '?page=tools&action=upgrade',
-                    'meta'  => array('class' => 'action-btn ')
+                    'meta'  => array('class' => 'action-btn ', 'title' => $label)
                 )
             );
         }
@@ -711,13 +719,16 @@ function osc_admin_toolbar_update_plugins($force = false)
             AdminToolbar::newInstance()->remove_menu('update_plugin');
         }
         if ($total > 0) {
-            $title = '<i class="circle circle-gray">' . $total . '</i>' . __('Plugin updates');
+            $label = __('Plugin updates');
+            $title = '<i class="bi bi-plug" aria-hidden="true"></i>'
+                . '<span class="toolbar-label">' . $label . '</span>'
+                . '<i class="circle circle-gray">' . $total . '</i>';
             AdminToolbar::newInstance()->add_menu(
                 array(
                     'id'    => 'update_plugin',
                     'title' => $title,
                     'href'  => osc_admin_base_url(true) . '?page=plugins#update-plugins',
-                    'meta'  => array('class' => 'action-btn ')
+                    'meta'  => array('class' => 'action-btn ', 'title' => $label)
                 )
             );
         }
@@ -786,13 +797,16 @@ function osc_admin_toolbar_update_themes($force = false)
             AdminToolbar::newInstance()->remove_menu('update_theme');
         }
         if ($total > 0) {
-            $title = '<i class="circle circle-gray">' . $total . '</i>' . __('Theme updates');
+            $label = __('Theme updates');
+            $title = '<i class="bi bi-brush" aria-hidden="true"></i>'
+                . '<span class="toolbar-label">' . $label . '</span>'
+                . '<i class="circle circle-gray">' . $total . '</i>';
             AdminToolbar::newInstance()->add_menu(
                 array(
                     'id'    => 'update_theme',
                     'title' => $title,
                     'href'  => osc_admin_base_url(true) . '?page=appearance',
-                    'meta'  => array('class' => 'action-btn ')
+                    'meta'  => array('class' => 'action-btn ', 'title' => $label)
                 )
             );
         }
@@ -856,13 +870,16 @@ function osc_admin_toolbar_update_languages($force = false)
             AdminToolbar::newInstance()->remove_menu('update_language');
         }
         if ($total > 0) {
-            $title = '<i class="circle circle-gray">' . $total . '</i>' . __('Language updates');
+            $label = __('Language updates');
+            $title = '<i class="bi bi-translate" aria-hidden="true"></i>'
+                . '<span class="toolbar-label">' . $label . '</span>'
+                . '<i class="circle circle-gray">' . $total . '</i>';
             AdminToolbar::newInstance()->add_menu(
                 array(
                     'id'    => 'update_language',
                     'title' => $title,
                     'href'  => osc_admin_base_url(true) . '?page=languages',
-                    'meta'  => array('class' => 'action-btn ')
+                    'meta'  => array('class' => 'action-btn ', 'title' => $label)
                 )
             );
         }
