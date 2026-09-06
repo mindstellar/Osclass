@@ -274,11 +274,12 @@ $aux = customFrmText();
                                         <?php UserForm::address_text($user); ?>
                                 <?php osc_admin_form_row_close(); ?>
                                 <?php osc_admin_form_section(__('Password')); ?>
-                                <div class="form-row">
-                                    <div class="form-label"><?php _e('New password'); ?><?php if (!$aux['edit']) {
-                                        printf('<br/><em>%s</em>', __('(twice, required)'));
-                                    } ?></div>
-                                    <div class="form-controls">
+                                <?php
+                                $passwordLabel = __('New password');
+                                if (!$aux['edit']) {
+                                    $passwordLabel .= sprintf('<br/><em>%s</em>', __('(twice, required)'));
+                                }
+                                osc_admin_form_row_open('', array('label_html' => $passwordLabel)); ?>
                                         <?php UserForm::password_text($user); ?>
                                         <?php if ($aux['edit']) { ?>
                                             <p class="help-inline"><?php _e("If you'd like to change the password, type a new one. Otherwise leave this blank"); ?></p>
@@ -289,8 +290,7 @@ $aux = customFrmText();
                                                 <p class="help-inline"><?php _e('Type your new password again'); ?></p>
                                             <?php } ?>
                                         </div>
-                                    </div>
-                                </div>
+                                <?php osc_admin_form_row_close(); ?>
 
                                 <?php if (!$aux['edit']) {
                                     osc_run_hook('user_register_form');
@@ -313,7 +313,6 @@ $aux = customFrmText();
                         <form>
                             <div class="form-horizontal">
                                 <?php osc_admin_form_section(__('Alerts')); ?>
-                                <div class="form-row">
                                     <?php for ($k = 0, $kMax = count($aux['alerts']); $k < $kMax; $k++) {
                                         $array_conditions = (array)json_decode($aux['alerts'][$k]['s_search'], true);
                                         $raw_data         = osc_get_raw_search($array_conditions);
@@ -321,8 +320,8 @@ $aux = customFrmText();
                                         $new_search->setJsonAlert($array_conditions);
                                         $new_search->limit(0, 2);
                                         $results = $new_search->doSearch();
+                                        ob_start();
                                         ?>
-                                        <div class="form-label">
                                             <?php echo sprintf(__('Alert #%d'), ($k + 1)); ?>
                                             <br/>
                                             <?php if (isset($raw_data['sPattern']) && $raw_data['sPattern'] != '') { ?>
@@ -358,8 +357,8 @@ $aux = customFrmText();
                                                                     . $aux['alerts'][$k]['pk_i_id'] . '&status=1&user_id='
                                                                     . $user['pk_i_id']; ?>"><?php _e('Enable'); ?></a>
                                             <?php } ?>
-                                        </div>
-                                        <div class="form-controls">
+                                        <?php
+                                        osc_admin_form_row_open('', array('label_html' => ob_get_clean())); ?>
                                             <?php if (!empty($results)) {
                                                 foreach ($results as $r) { ?>
                                                     <label><b><?php echo osc_esc_html($r['s_title']); ?></b></label>
@@ -369,10 +368,9 @@ $aux = customFrmText();
                                                 <label>&nbsp;</label>
                                                 <p>&nbsp;</p>
                                             <?php } ?>
-                                        </div>
+                                        <?php osc_admin_form_row_close(); ?>
                                         <div class="clear"></div>
                                     <?php } ?>
-                                </div>
                                 <div class="clear"></div>
                             </div>
                             </fieldset>
