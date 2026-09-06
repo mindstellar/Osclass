@@ -178,29 +178,19 @@ class UserForm extends Form
     public static function multilanguage_info($locales, $user = null)
     {
 
-        $num_locales = $locales;
-        if (count($num_locales) > 1) {
-            echo '<div id="language-tab" class="mt-3">';
-            echo '<ul class="nav nav-tabs" id="multiLangTabs" role="tablist">';
-            foreach ($num_locales as $locale) {
-                $active = '';
-                if ($locale['pk_c_code'] === osc_current_admin_locale()) {
-                    $active = 'show active';
-                }
-                echo '<li class="nav-item"><a class="nav-link btn-sm ' . $active . '" href="#' . $locale['pk_c_code']
-                     . '" data-bs-toggle="tab">'
-                     . $locale['s_name'] . '</a></li>';
+        echo '<div id="language-tab" class="ui-osc-tabs osc-tab mt-3">';
+        if (count($locales) > 1) {
+            echo '<ul>';
+            foreach ($locales as $locale) {
+                $active = ($locale['pk_c_code'] === osc_current_admin_locale()) ? ' class="ui-tabs-active ui-state-active"' : '';
+                echo '<li' . $active . '><a href="#' . osc_esc_html($locale['pk_c_code']) . '">'
+                     . osc_esc_html($locale['s_name']) . '</a></li>';
             }
             echo '</ul>';
-            echo '</div>';
         }
-        echo '<div class="tab-content mb-3" id="multiLangTabsContentUser">';
         foreach ($locales as $locale) {
-            $active = '';
-            if ($locale['pk_c_code'] === osc_current_admin_locale()) {
-                $active = 'show active';
-            }
-            echo '<div class="tab-pane fade ' . $active . '" id="' . $locale['pk_c_code'] . '" role="tabpanel">';
+            $hidden = ($locale['pk_c_code'] === osc_current_admin_locale()) ? '' : ' hidden';
+            echo '<div id="' . osc_esc_html($locale['pk_c_code']) . '" role="tabpanel"' . $hidden . '>';
             $name         = 's_info' . '[' . $locale['pk_c_code'] . ']';
             $attributes   = [
                 'id'          => $name,

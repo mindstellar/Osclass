@@ -800,46 +800,24 @@ class FieldForm extends Form
      */
     public static function multiLangTitle($field)
     {
-        $locales  = osc_get_admin_locales();
+        $locales       = osc_get_admin_locales();
         $currentLocale = osc_current_admin_locale();
-        self::getInstance()->printMultiLangTab($locales, $currentLocale);
 
-        $locales  = osc_get_admin_locales();
-        $currentLocale = osc_current_admin_locale();
-        echo '<div class="tab-content mb-3" id="multiLangTabsContent" >';
-
+        echo '<div id="language-tab" class="ui-osc-tabs osc-tab mt-3">';
+        echo '<ul>';
         foreach ($locales as $locale) {
-            // Add class active if $current_locale is equal to $locale['pk_c_code']
-            $active = '';
-            if ($locale['pk_c_code'] === $currentLocale) {
-                $active = 'show active';
-            }
-            echo '<div class="tab-pane fade ' . $active . '" id="meta_' . $locale['pk_c_code'] . '" role="tabpanel">';
+            $active = ($locale['pk_c_code'] === $currentLocale) ? ' class="ui-tabs-active ui-state-active"' : '';
+            echo '<li' . $active . '><a href="#meta_' . osc_esc_html($locale['pk_c_code']) . '">'
+                . osc_esc_html($locale['s_name']) . '</a></li>';
+        }
+        echo '</ul>';
+        foreach ($locales as $locale) {
+            $hidden = ($locale['pk_c_code'] === $currentLocale) ? '' : ' hidden';
+            echo '<div id="meta_' . osc_esc_html($locale['pk_c_code']) . '" role="tabpanel"' . $hidden . '>';
             self::getInstance()->printFieldTitle($locale, $field);
             echo '</div>';
         }
         echo '</div>';
-    }
-    /**
-    * Print MultiLang Tab
-    */
-    private function printMultiLangTab($locales, $activeLocaleCode)
-    {
-        if ($locales > 1) {
-            echo '<div id="language-tab" class="mt-3">';
-            echo '<ul class="nav nav-tabs nav-tabs-sm" id="multiLangTabs" role="tablist">';
-            foreach ($locales as $locale) {
-                $active = '';
-                if ($locale['pk_c_code'] === $activeLocaleCode) {
-                    $active = 'show active';
-                }
-                echo '<li class="nav-item"><a class="nav-link ' . $active . '" href="#meta_' . $locale['pk_c_code']
-                    . '" data-bs-toggle="tab">'
-                    . $locale['s_name'] . '</a></li>';
-            }
-            echo '</ul>';
-            echo '</div>';
-        }
     }
 
     /**

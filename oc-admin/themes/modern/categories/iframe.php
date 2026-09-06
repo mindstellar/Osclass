@@ -26,9 +26,7 @@ $locales     = OSCLocale::newInstance()->listAllEnabled();
         <fieldset>
             <div class="row g-3">
                 <div class="col-12">
-                    <div class="form-row">
-                        <?php CategoryForm::multilanguage_name_description($locales, $category); ?>
-                    </div>
+                    <?php CategoryForm::multilanguage_name_description($locales, $category); ?>
                 </div>
                 <div class="col-12">
                     <div class="form-row">

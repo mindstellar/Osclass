@@ -93,15 +93,11 @@ class Item extends FormInputs
         if ($with_tab) {
             $this->printMultiLangTab();
         }
-        echo '<div class="tab-content mb-3" id="multiLangTabsContent" >';
+        echo '<div class="mb-3" id="multiLangTabsContent">';
 
         foreach ($this->userLocales as $locale) {
-            // Add class active if $defaultLocale is equal to $locale['pk_c_code']
-            $active = '';
-            if ($locale['pk_c_code'] === $this->defaultLocaleCode) {
-                $active = 'show active';
-            }
-            echo '<div class="tab-pane fade ' . $active . '" id="' . $locale['pk_c_code'] . '" role="tabpanel">';
+            $hidden = ($locale['pk_c_code'] === $this->defaultLocaleCode) ? '' : ' hidden';
+            echo '<div id="' . osc_esc_html($locale['pk_c_code']) . '" role="tabpanel"' . $hidden . '>';
             $this->printItemTitleInput($locale, $item);
             $this->printItemDescriptionInput($locale, $item);
             echo '</div>';
@@ -115,16 +111,12 @@ class Item extends FormInputs
     public function printMultiLangTab()
     {
         if (count($this->userLocales) > 1) {
-            echo '<div id="language-tab" class="mt-3">';
-            echo '<ul class="nav nav-tabs" id="multiLangTabs" role="tablist">';
+            echo '<div id="language-tab" class="ui-osc-tabs osc-tab mt-3">';
+            echo '<ul>';
             foreach ($this->userLocales as $locale) {
-                $active = '';
-                if ($locale['pk_c_code'] === $this->defaultLocaleCode) {
-                    $active = 'show active';
-                }
-                echo '<li class="nav-item"><a class="nav-link btn-sm ' . $active . '" href="#' . $locale['pk_c_code']
-                     . '" data-bs-toggle="tab">'
-                     . $locale['s_name'] . '</a></li>';
+                $active = ($locale['pk_c_code'] === $this->defaultLocaleCode) ? ' class="ui-tabs-active ui-state-active"' : '';
+                echo '<li' . $active . '><a href="#' . osc_esc_html($locale['pk_c_code']) . '">'
+                     . osc_esc_html($locale['s_name']) . '</a></li>';
             }
             echo '</ul>';
             echo '</div>';

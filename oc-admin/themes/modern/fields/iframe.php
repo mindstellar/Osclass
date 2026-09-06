@@ -86,9 +86,7 @@ $formCount = (int)__get('form_count');
                             ); ?>
                         </p>
                     <?php } ?>
-                    <div class="form-row">
-                        <?php FieldForm::multiLangTitle($field); ?>
-                    </div>
+                    <?php FieldForm::multiLangTitle($field); ?>
                     <div class="cf-editor-body">
                         <?php osc_admin_form_row_open(__('Options'), array('id' => 'div_field_options')); ?>
                                 <?php FieldForm::options_input_text($field); ?>
@@ -287,6 +285,9 @@ _e('Tick to open links in new tab'); ?></label>
 <!-- /custom field frame -->
 <script type="text/javascript">
     (function () {
+        // Injected editor: the shared tab widget is wired on DOMContentLoaded, which has
+        // already fired, so init the just-injected locale tabs here (idempotent).
+        if (typeof oscInitTabs === 'function') { oscInitTabs(document); }
         if (typeof oscTreeview === 'function') {
             oscTreeview(document.getElementById('cat_tree'), {
                 collapsed: true,
