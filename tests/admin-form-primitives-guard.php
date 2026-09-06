@@ -74,12 +74,12 @@ foreach ($primitives as $fn) {
 }
 
 /*
- * 2. No new hand-written form row. Only these files may still open a raw one, and only
- *    because the block is not a label|control row the helper models:
- *    - categories/iframe.php: the .cat-edit-group expiration/price editor, its own layout.
- *    A leading * (a block-comment continuation line) is not markup and is skipped.
+ * 2. No hand-written form row in a view -- every one goes through the helper now. If a block
+ *    is genuinely not a label|control row, give it its own class rather than borrowing
+ *    .form-row, and add it here with the reason. A leading * (a block-comment continuation
+ *    line) is not markup and is skipped.
  */
-$rawRowAllow = array('categories/iframe.php' => 1);
+$rawRowAllow = array();
 $rawRowFound = array();
 foreach ($themePhp as $path) {
     foreach (explode("\n", (string) file_get_contents($path)) as $line) {
