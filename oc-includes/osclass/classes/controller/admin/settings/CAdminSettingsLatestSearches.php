@@ -38,11 +38,13 @@ class CAdminSettingsLatestSearches extends AdminSecBaseModel
             case ('latestsearches_post'):
                 // updating comment
                 osc_csrf_check();
-                if (Params::getParam('save_latest_searches') === 'on') {
-                    osc_set_preference('save_latest_searches', 1);
-                } else {
-                    osc_set_preference('save_latest_searches', 0);
-                }
+                // Present means on. Comparing against 'on' tied this to the value a browser
+                // invents for a checkbox with no value attribute of its own, so the moment the
+                // field declared value="1" the setting could no longer be switched on.
+                osc_set_preference(
+                    'save_latest_searches',
+                    Params::getParam('save_latest_searches') !== '' ? 1 : 0
+                );
 
                 if (Params::getParam('customPurge') == '') {
                     osc_add_flash_error_message(_m('Custom number could not be left empty'), 'admin');

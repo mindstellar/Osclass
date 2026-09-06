@@ -72,6 +72,8 @@ theme ships none, using a documented class vocabulary a theme restyles in CSS al
 
 ### Fixed
 
+- "Save the latest user searches" could not be switched on: the controller compared the
+  submitted value against `on`, the value a browser invents for a checkbox that declares none.
 - Every settings screen is drawn from the core field primitives: one width per field type,
   hints always on their own line, and no screen inventing its own input markup. Nothing is
   renamed — `form-row`, `form-controls`, `help-box` and the rest render exactly as before.
