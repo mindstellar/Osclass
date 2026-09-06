@@ -43,8 +43,13 @@
 
 // Three widths, tied to meaning: a number, prose, a long opaque token.
 .field-num {
-  text-align: end;
   width: 7rem !important;
+}
+
+// Right-align digits, not everything narrow: a "240x200" dimension wears the same width
+// and reads wrong flushed right.
+input[type="number"].field-num {
+  text-align: end;
 }
 
 .field-text {
@@ -61,6 +66,16 @@
 
 .field-mono {
   font-family: var(--bs-font-monospace);
+}
+
+// A colour well is its swatch: sized to the control, not stretched across the row.
+.field-color {
+  block-size: 2.25rem;
+  border: 1px solid var(--osc-chrome-edge);
+  border-radius: .25rem;
+  cursor: pointer;
+  inline-size: 3.5rem !important;
+  padding: .2rem;
 }
 
 // Ties with `.form-controls select`; wins on source order because this file is imported

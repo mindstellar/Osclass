@@ -66,17 +66,19 @@ $gateways       = __get('gateways');
                              . 'admin grants credits by hand.'); ?>
                 </p>
 
-                <?php osc_admin_form_row_open(__('Free listings per seller'), array('for' => 'billing_free_live_listings')); ?>
-                    <input type="number" min="0" class="input-small" id="billing_free_live_listings"
-                           name="billing_free_live_listings"
-                           value="<?php echo osc_esc_html((string) osc_billing_free_live_listings()); ?>"/>
-                    <div class="help-box"><?php _e('How many of a seller\'s listings may be live '
-                                                    . '(published, not yet expired) at once. 0 means '
-                                                    . 'unlimited. A pending or admin-disabled listing '
-                                                    . 'still counts -- only expiry or deletion frees a slot. '
-                                                    . 'Lowering this never touches a listing a seller already '
-                                                    . 'has -- it only changes whether their next post is allowed.'); ?></div>
-                <?php osc_admin_form_row_close(); ?>
+                <?php osc_admin_number(array(
+                    'name'  => 'billing_free_live_listings',
+                    'id'    => 'billing_free_live_listings',
+                    'label' => __('Free listings per seller'),
+                    'value' => (string) osc_billing_free_live_listings(),
+                    'min'   => 0,
+                    'help'  => __('How many of a seller\'s listings may be live '
+                                  . '(published, not yet expired) at once. 0 means '
+                                  . 'unlimited. A pending or admin-disabled listing '
+                                  . 'still counts -- only expiry or deletion frees a slot. '
+                                  . 'Lowering this never touches a listing a seller already '
+                                  . 'has -- it only changes whether their next post is allowed.'),
+                )); ?>
 
                 <?php osc_admin_form_row_open(__('Extra slots')); ?>
                     <?php osc_admin_checkbox(array(
@@ -89,17 +91,21 @@ $gateways       = __get('gateways');
                     )); ?>
                 <?php osc_admin_form_row_close(); ?>
 
-                <?php osc_admin_form_row_open(__('Slot price in credits'), array('for' => 'billing_slot_credits')); ?>
-                    <input type="number" min="0" class="input-small" id="billing_slot_credits"
-                           name="billing_slot_credits"
-                           value="<?php echo osc_esc_html((string) osc_billing_slot_credits()); ?>"/>
-                <?php osc_admin_form_row_close(); ?>
+                <?php osc_admin_number(array(
+                    'name'  => 'billing_slot_credits',
+                    'id'    => 'billing_slot_credits',
+                    'label' => __('Slot price in credits'),
+                    'value' => (string) osc_billing_slot_credits(),
+                    'min'   => 0,
+                )); ?>
 
-                <?php osc_admin_form_row_open(__('Slots per purchase'), array('for' => 'billing_slot_quantity')); ?>
-                    <input type="number" min="1" class="input-small" id="billing_slot_quantity"
-                           name="billing_slot_quantity"
-                           value="<?php echo osc_esc_html((string) osc_billing_slot_quantity()); ?>"/>
-                <?php osc_admin_form_row_close(); ?>
+                <?php osc_admin_number(array(
+                    'name'  => 'billing_slot_quantity',
+                    'id'    => 'billing_slot_quantity',
+                    'label' => __('Slots per purchase'),
+                    'value' => (string) osc_billing_slot_quantity(),
+                    'min'   => 1,
+                )); ?>
 
                 <?php osc_admin_form_row_open(__('Featured listings')); ?>
                     <?php osc_admin_checkbox(array(
@@ -111,24 +117,31 @@ $gateways       = __get('gateways');
                     )); ?>
                 <?php osc_admin_form_row_close(); ?>
 
-                <?php osc_admin_form_row_open(__('Featured listing price (credits)'), array('for' => 'billing_premium_credits')); ?>
-                    <input type="number" min="0" class="input-small" id="billing_premium_credits"
-                           name="billing_premium_credits"
-                           value="<?php echo osc_esc_html((string) osc_billing_premium_credits()); ?>"/>
-                <?php osc_admin_form_row_close(); ?>
+                <?php osc_admin_number(array(
+                    'name'  => 'billing_premium_credits',
+                    'id'    => 'billing_premium_credits',
+                    'label' => __('Featured listing price (credits)'),
+                    'value' => (string) osc_billing_premium_credits(),
+                    'min'   => 0,
+                )); ?>
 
-                <?php osc_admin_form_row_open(__('Featured listing duration (days)'), array('for' => 'billing_premium_days')); ?>
-                    <input type="number" min="1" class="input-small" id="billing_premium_days"
-                           name="billing_premium_days"
-                           value="<?php echo osc_esc_html((string) osc_billing_premium_days()); ?>"/>
-                <?php osc_admin_form_row_close(); ?>
+                <?php osc_admin_number(array(
+                    'name'  => 'billing_premium_days',
+                    'id'    => 'billing_premium_days',
+                    'label' => __('Featured listing duration (days)'),
+                    'value' => (string) osc_billing_premium_days(),
+                    'min'   => 1,
+                )); ?>
 
-                <?php osc_admin_form_row_open(__('Currency'), array('for' => 'billing_currency')); ?>
-                    <input type="text" maxlength="3" class="input-small" id="billing_currency"
-                           name="billing_currency"
-                           value="<?php echo osc_esc_html(osc_billing_currency()); ?>"/>
-                    <div class="help-box"><?php _e('A 3-letter ISO 4217 code, e.g. USD, EUR.'); ?></div>
-                <?php osc_admin_form_row_close(); ?>
+                <?php osc_admin_text(array(
+                    'name'  => 'billing_currency',
+                    'id'    => 'billing_currency',
+                    'label' => __('Currency'),
+                    'value' => osc_billing_currency(),
+                    'width' => 'num',
+                    'attrs' => array('maxlength' => 3),
+                    'help'  => __('A 3-letter ISO 4217 code, e.g. USD, EUR.'),
+                )); ?>
 
                 <?php osc_admin_form_actions(array(
                     array('label' => __('Save pricing'), 'type' => 'submit'),
@@ -197,18 +210,22 @@ $gateways       = __get('gateways');
                     )); ?>
                 <?php osc_admin_form_row_close(); ?>
 
-                <?php osc_admin_form_row_open(__('Bump price (credits)'), array('for' => 'billing_bump_credits')); ?>
-                    <input type="number" min="0" class="input-small" id="billing_bump_credits"
-                           name="billing_bump_credits"
-                           value="<?php echo osc_esc_html((string) osc_billing_bump_credits()); ?>"/>
-                <?php osc_admin_form_row_close(); ?>
+                <?php osc_admin_number(array(
+                    'name'  => 'billing_bump_credits',
+                    'id'    => 'billing_bump_credits',
+                    'label' => __('Bump price (credits)'),
+                    'value' => (string) osc_billing_bump_credits(),
+                    'min'   => 0,
+                )); ?>
 
-                <?php osc_admin_form_row_open(__('Cooldown (hours)'), array('for' => 'billing_bump_cooldown_hours')); ?>
-                    <input type="number" min="1" class="input-small" id="billing_bump_cooldown_hours"
-                           name="billing_bump_cooldown_hours"
-                           value="<?php echo osc_esc_html((string) osc_billing_bump_cooldown_hours()); ?>"/>
-                    <div class="help-box"><?php _e('How long a listing must wait before it can be bumped again.'); ?></div>
-                <?php osc_admin_form_row_close(); ?>
+                <?php osc_admin_number(array(
+                    'name'  => 'billing_bump_cooldown_hours',
+                    'id'    => 'billing_bump_cooldown_hours',
+                    'label' => __('Cooldown (hours)'),
+                    'value' => (string) osc_billing_bump_cooldown_hours(),
+                    'min'   => 1,
+                    'help'  => __('How long a listing must wait before it can be bumped again.'),
+                )); ?>
 
                 <?php osc_admin_form_row_open(__('Highlight')); ?>
                     <?php osc_admin_checkbox(array(
@@ -219,17 +236,21 @@ $gateways       = __get('gateways');
                     )); ?>
                 <?php osc_admin_form_row_close(); ?>
 
-                <?php osc_admin_form_row_open(__('Highlight price (credits)'), array('for' => 'billing_highlight_credits')); ?>
-                    <input type="number" min="0" class="input-small" id="billing_highlight_credits"
-                           name="billing_highlight_credits"
-                           value="<?php echo osc_esc_html((string) osc_billing_highlight_credits()); ?>"/>
-                <?php osc_admin_form_row_close(); ?>
+                <?php osc_admin_number(array(
+                    'name'  => 'billing_highlight_credits',
+                    'id'    => 'billing_highlight_credits',
+                    'label' => __('Highlight price (credits)'),
+                    'value' => (string) osc_billing_highlight_credits(),
+                    'min'   => 0,
+                )); ?>
 
-                <?php osc_admin_form_row_open(__('Highlight duration (days)'), array('for' => 'billing_highlight_days')); ?>
-                    <input type="number" min="1" class="input-small" id="billing_highlight_days"
-                           name="billing_highlight_days"
-                           value="<?php echo osc_esc_html((string) osc_billing_highlight_days()); ?>"/>
-                <?php osc_admin_form_row_close(); ?>
+                <?php osc_admin_number(array(
+                    'name'  => 'billing_highlight_days',
+                    'id'    => 'billing_highlight_days',
+                    'label' => __('Highlight duration (days)'),
+                    'value' => (string) osc_billing_highlight_days(),
+                    'min'   => 1,
+                )); ?>
 
                 <?php osc_admin_form_row_open(__('Urgent')); ?>
                     <?php osc_admin_checkbox(array(
@@ -240,17 +261,21 @@ $gateways       = __get('gateways');
                     )); ?>
                 <?php osc_admin_form_row_close(); ?>
 
-                <?php osc_admin_form_row_open(__('Urgent price (credits)'), array('for' => 'billing_urgent_credits')); ?>
-                    <input type="number" min="0" class="input-small" id="billing_urgent_credits"
-                           name="billing_urgent_credits"
-                           value="<?php echo osc_esc_html((string) osc_billing_urgent_credits()); ?>"/>
-                <?php osc_admin_form_row_close(); ?>
+                <?php osc_admin_number(array(
+                    'name'  => 'billing_urgent_credits',
+                    'id'    => 'billing_urgent_credits',
+                    'label' => __('Urgent price (credits)'),
+                    'value' => (string) osc_billing_urgent_credits(),
+                    'min'   => 0,
+                )); ?>
 
-                <?php osc_admin_form_row_open(__('Urgent duration (days)'), array('for' => 'billing_urgent_days')); ?>
-                    <input type="number" min="1" class="input-small" id="billing_urgent_days"
-                           name="billing_urgent_days"
-                           value="<?php echo osc_esc_html((string) osc_billing_urgent_days()); ?>"/>
-                <?php osc_admin_form_row_close(); ?>
+                <?php osc_admin_number(array(
+                    'name'  => 'billing_urgent_days',
+                    'id'    => 'billing_urgent_days',
+                    'label' => __('Urgent duration (days)'),
+                    'value' => (string) osc_billing_urgent_days(),
+                    'min'   => 1,
+                )); ?>
 
                 <?php osc_admin_form_actions(array(
                     array('label' => __('Save upgrade settings'), 'type' => 'submit'),
@@ -281,18 +306,22 @@ $gateways       = __get('gateways');
                     )); ?>
                 <?php osc_admin_form_row_close(); ?>
 
-                <?php osc_admin_form_row_open(__('Price (credits)'), array('for' => 'billing_photos_credits')); ?>
-                    <input type="number" min="0" class="input-small" id="billing_photos_credits"
-                           name="billing_photos_credits"
-                           value="<?php echo osc_esc_html((string) osc_billing_photos_credits()); ?>"/>
-                <?php osc_admin_form_row_close(); ?>
+                <?php osc_admin_number(array(
+                    'name'  => 'billing_photos_credits',
+                    'id'    => 'billing_photos_credits',
+                    'label' => __('Price (credits)'),
+                    'value' => (string) osc_billing_photos_credits(),
+                    'min'   => 0,
+                )); ?>
 
-                <?php osc_admin_form_row_open(__('Photo cap'), array('for' => 'billing_photos_quantity')); ?>
-                    <input type="number" min="1" class="input-small" id="billing_photos_quantity"
-                           name="billing_photos_quantity"
-                           value="<?php echo osc_esc_html((string) osc_billing_photos_quantity()); ?>"/>
-                    <div class="help-box"><?php _e('Photos allowed per listing while the entitlement is held.'); ?></div>
-                <?php osc_admin_form_row_close(); ?>
+                <?php osc_admin_number(array(
+                    'name'  => 'billing_photos_quantity',
+                    'id'    => 'billing_photos_quantity',
+                    'label' => __('Photo cap'),
+                    'value' => (string) osc_billing_photos_quantity(),
+                    'min'   => 1,
+                    'help'  => __('Photos allowed per listing while the entitlement is held.'),
+                )); ?>
 
                 <?php osc_admin_form_row_open(__('Skip the posting wait')); ?>
                     <?php osc_admin_checkbox(array(
@@ -303,17 +332,21 @@ $gateways       = __get('gateways');
                     )); ?>
                 <?php osc_admin_form_row_close(); ?>
 
-                <?php osc_admin_form_row_open(__('Price (credits)'), array('for' => 'billing_no_wait_credits')); ?>
-                    <input type="number" min="0" class="input-small" id="billing_no_wait_credits"
-                           name="billing_no_wait_credits"
-                           value="<?php echo osc_esc_html((string) osc_billing_no_wait_credits()); ?>"/>
-                <?php osc_admin_form_row_close(); ?>
+                <?php osc_admin_number(array(
+                    'name'  => 'billing_no_wait_credits',
+                    'id'    => 'billing_no_wait_credits',
+                    'label' => __('Price (credits)'),
+                    'value' => (string) osc_billing_no_wait_credits(),
+                    'min'   => 0,
+                )); ?>
 
-                <?php osc_admin_form_row_open(__('Duration (days)'), array('for' => 'billing_no_wait_days')); ?>
-                    <input type="number" min="1" class="input-small" id="billing_no_wait_days"
-                           name="billing_no_wait_days"
-                           value="<?php echo osc_esc_html((string) osc_billing_no_wait_days()); ?>"/>
-                <?php osc_admin_form_row_close(); ?>
+                <?php osc_admin_number(array(
+                    'name'  => 'billing_no_wait_days',
+                    'id'    => 'billing_no_wait_days',
+                    'label' => __('Duration (days)'),
+                    'value' => (string) osc_billing_no_wait_days(),
+                    'min'   => 1,
+                )); ?>
 
                 <?php osc_admin_form_row_open(__('Extra listing runtime')); ?>
                     <?php osc_admin_checkbox(array(
@@ -324,18 +357,22 @@ $gateways       = __get('gateways');
                     )); ?>
                 <?php osc_admin_form_row_close(); ?>
 
-                <?php osc_admin_form_row_open(__('Price (credits)'), array('for' => 'billing_runtime_credits')); ?>
-                    <input type="number" min="0" class="input-small" id="billing_runtime_credits"
-                           name="billing_runtime_credits"
-                           value="<?php echo osc_esc_html((string) osc_billing_runtime_credits()); ?>"/>
-                <?php osc_admin_form_row_close(); ?>
+                <?php osc_admin_number(array(
+                    'name'  => 'billing_runtime_credits',
+                    'id'    => 'billing_runtime_credits',
+                    'label' => __('Price (credits)'),
+                    'value' => (string) osc_billing_runtime_credits(),
+                    'min'   => 0,
+                )); ?>
 
-                <?php osc_admin_form_row_open(__('Extra days'), array('for' => 'billing_runtime_days')); ?>
-                    <input type="number" min="1" class="input-small" id="billing_runtime_days"
-                           name="billing_runtime_days"
-                           value="<?php echo osc_esc_html((string) osc_billing_runtime_days()); ?>"/>
-                    <div class="help-box"><?php _e('Added on top of the category\'s own expiration ceiling.'); ?></div>
-                <?php osc_admin_form_row_close(); ?>
+                <?php osc_admin_number(array(
+                    'name'  => 'billing_runtime_days',
+                    'id'    => 'billing_runtime_days',
+                    'label' => __('Extra days'),
+                    'value' => (string) osc_billing_runtime_days(),
+                    'min'   => 1,
+                    'help'  => __('Added on top of the category\'s own expiration ceiling.'),
+                )); ?>
 
                 <?php osc_admin_form_actions(array(
                     array('label' => __('Save limits'), 'type' => 'submit'),

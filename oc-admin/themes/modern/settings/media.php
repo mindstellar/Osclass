@@ -110,8 +110,15 @@ osc_admin_page(array(
                     . 'the number of images per ad, include a watermark, etc.'),
 ));
 
+$watermarkPlaces = array(
+    'centre' => __('Centre'),
+    'tl'     => __('Top Left'),
+    'tr'     => __('Top Right'),
+    'bl'     => __('Bottom Left'),
+    'br'     => __('Bottom Right'),
+);
+
 osc_current_admin_theme_path('parts/header.php'); ?>
-    <!--the inputs have a class for the size ...-->
     <div id="general-settings">
         <?php osc_admin_page_head(__('Media Settings')); ?>
         <ul id="error_list"></ul>
@@ -125,145 +132,122 @@ osc_current_admin_theme_path('parts/header.php'); ?>
                     <p class="form-intro"><?php _e('The sizes listed below determine the maximum dimensions in pixels to use when uploading a image.'
                                 . ' Format: <b>Width</b> x <b>Height</b>.'); ?>
                     </p>
-                    <div class="form-row">
-                        <div class="form-label"><?php _e('Thumbnail size'); ?></div>
-                        <div class="form-controls"><input type="text" class="input-medium" name="dimThumbnail"
-                                                          value="<?php echo osc_esc_html(osc_thumbnail_dimensions()); ?>"/>
-                        </div>
-                    </div>
-                    <div class="form-row">
-                        <div class="form-label"><?php _e('Preview size'); ?></div>
-                        <div class="form-controls"><input type="text" class="input-medium" name="dimPreview"
-                                                          value="<?php echo osc_esc_html(osc_preview_dimensions()); ?>"/>
-                        </div>
-                    </div>
-                    <div class="form-row">
-                        <div class="form-label"><?php _e('Normal size'); ?></div>
-                        <div class="form-controls"><input type="text" class="input-medium" name="dimNormal"
-                                                          value="<?php echo osc_esc_html(osc_normal_dimensions()); ?>"/>
-                        </div>
-                    </div>
-                    <div class="form-row">
-                        <div class="form-label"><?php _e('Original size'); ?></div>
-                        <div class="form-controls">
-                            <div class="form-label-checkbox">
-                                <input type="checkbox" id="keep_original_image" name="keep_original_image"
-                                       value="1" <?php echo(osc_keep_original_image() ? 'checked="checked"' : ''); ?> />
-                                <label for="keep_original_image"><?php _e('Keep original image, unaltered after uploading.'); ?></label>
-                                <span class="help-box"><?php _e('Image may occupy more space than usual.'); ?></span>
-                            </div>
-                        </div>
-                    </div>
-                    <?php osc_admin_page_head(__('Restrictions')); ?>
-                    <div class="form-row">
-                        <div class="form-label"><?php _e('Force JPEG'); ?></div>
-                        <div class="form-controls">
-                            <div class="form-label-checkbox">
-                                <input type="checkbox" id="force_jpeg" name="force_jpeg"
-                                       value="1" <?php echo(osc_force_jpeg() ? 'checked="checked"' : ''); ?> />
-                                <label for="force_jpeg"><?php _e('Force JPEG extension.'); ?></label>
-                                <span class="help-box"><?php _e('Uploaded images will be saved in JPG/JPEG format, '
-                                                                . 'it saves space but images will not have transparent background.'); ?></span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="form-row">
-                        <div class="form-label"><?php _e('JPEG quality'); ?></div>
-                        <div class="form-controls">
-                            <?php $jpegQuality = (int) osc_get_preference('jpeg_quality');
-if ($jpegQuality < 1 || $jpegQuality > 100) {
-    $jpegQuality = 82;
-} ?>
-                            <input type="number" min="1" max="100" class="input-small" name="jpeg_quality"
-                                   style="width:6rem" value="<?php echo $jpegQuality; ?>"/>
-                            <span class="help-box"><?php _e('Compression quality for saved JPEGs, from 1 (smallest file) to '
-                                . '100 (best quality). 82 is a good balance.'); ?></span>
-                        </div>
-                    </div>
-                    <div class="form-row">
-                        <div class="form-label"><?php _e('Force aspect'); ?></div>
-                        <div class="form-controls">
-                            <div class="form-label-checkbox">
-                                <input type="checkbox" id="force_aspect_image" name="force_aspect_image"
-                                       value="1" <?php echo(osc_force_aspect_image() ? 'checked="checked"' : ''); ?> />
-                                <label for="force_aspect_image"><?php _e('Force image aspect.'); ?></label>
-                                <span class="help-box"><?php _e('No white background will be added to keep the size.'); ?></span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="form-row">
-                        <div class="form-label"><?php _e('Maximum size'); ?></div>
-                        <div class="form-controls">
-                            <input type="text" class="input-medium" name="maxSizeKb"
-                                   value="<?php echo osc_esc_html(osc_max_size_kb()); ?>"/>
-                            <span class="help-box"><?php _e('Size in KB'); ?></span>
-                            <div class="callout-warning">
-                               <?php printf(__('Maximum size PHP configuration allows: %d KB'), $maxPHPsize); ?>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="form-row">
-                        <div class="form-label"><?php _e('ImageMagick'); ?></div>
-                        <div class="form-controls">
-                            <div class="form-label-checkbox">
-                                <input type="checkbox" name="use_imagick" value="1" <?php
-    echo(($imagickLoaded && osc_use_imagick()) ? 'checked="checked"' : '');
-if (!$imagickLoaded) {
-    echo 'disabled="disabled"';
-} ?> />
-                                <label for="use_imagick"><?php _e('Use ImageMagick instead of GD library'); ?></label>
-                            </div>
-                            <?php if (!$imagickLoaded) { ?>
-                                <div class="callout-danger">
-                                    <p><?php _e('ImageMagick library is not loaded'); ?></p>
-                                </div>
-                            <?php } ?>
-                            <div class="help-box">
-                                <?php _e("It's faster and consumes less resources than GD library."); ?>
-                            </div>
-                        </div>
-                    </div>
+                    <?php
+                    osc_admin_text(array(
+                        'name'  => 'dimThumbnail',
+                        'label' => __('Thumbnail size'),
+                        'value' => osc_thumbnail_dimensions(),
+                        'width' => 'num',
+                    ));
+                    osc_admin_text(array(
+                        'name'  => 'dimPreview',
+                        'label' => __('Preview size'),
+                        'value' => osc_preview_dimensions(),
+                        'width' => 'num',
+                    ));
+                    osc_admin_text(array(
+                        'name'  => 'dimNormal',
+                        'label' => __('Normal size'),
+                        'value' => osc_normal_dimensions(),
+                        'width' => 'num',
+                    ));
+                    osc_admin_field(array(
+                        'type'      => 'checkbox',
+                        'row_label' => __('Original size'),
+                        'id'        => 'keep_original_image',
+                        'name'      => 'keep_original_image',
+                        'label'     => __('Keep original image, unaltered after uploading.'),
+                        'checked'   => osc_keep_original_image(),
+                        'help'      => __('Image may occupy more space than usual.'),
+                    ));
+
+                    osc_admin_page_head(__('Restrictions'));
+
+                    osc_admin_field(array(
+                        'type'      => 'checkbox',
+                        'row_label' => __('Force JPEG'),
+                        'id'        => 'force_jpeg',
+                        'name'      => 'force_jpeg',
+                        'label'     => __('Force JPEG extension.'),
+                        'checked'   => osc_force_jpeg(),
+                        'help'      => __('Uploaded images will be saved in JPG/JPEG format, '
+                                          . 'it saves space but images will not have transparent background.'),
+                    ));
+
+                    $jpegQuality = (int)osc_get_preference('jpeg_quality');
+                    if ($jpegQuality < 1 || $jpegQuality > 100) {
+                        $jpegQuality = 82;
+                    }
+                    osc_admin_number(array(
+                        'name'  => 'jpeg_quality',
+                        'label' => __('JPEG quality'),
+                        'value' => $jpegQuality,
+                        'min'   => 1,
+                        'max'   => 100,
+                        'help'  => __('Compression quality for saved JPEGs, from 1 (smallest file) to '
+                                      . '100 (best quality). 82 is a good balance.'),
+                    ));
+                    osc_admin_field(array(
+                        'type'      => 'checkbox',
+                        'row_label' => __('Force aspect'),
+                        'id'        => 'force_aspect_image',
+                        'name'      => 'force_aspect_image',
+                        'label'     => __('Force image aspect.'),
+                        'checked'   => osc_force_aspect_image(),
+                        'help'      => __('No white background will be added to keep the size.'),
+                    ));
+                    osc_admin_number(array(
+                        'name'      => 'maxSizeKb',
+                        'label'     => __('Maximum size'),
+                        'value'     => osc_max_size_kb(),
+                        'min'       => 1,
+                        'suffix'    => __('KB'),
+                        'help_html' => '<span class="callout-warning">'
+                            . osc_esc_html(sprintf(__('Maximum size PHP configuration allows: %d KB'), $maxPHPsize))
+                            . '</span>',
+                    ));
+                    osc_admin_field(array(
+                        'type'      => 'checkbox',
+                        'row_label' => __('ImageMagick'),
+                        'id'        => 'use_imagick',
+                        'name'      => 'use_imagick',
+                        'label'     => __('Use ImageMagick instead of GD library'),
+                        'checked'   => $imagickLoaded && osc_use_imagick(),
+                        'disabled'  => !$imagickLoaded,
+                        'help_html' => ($imagickLoaded
+                            ? ''
+                            : '<span class="callout-danger">' . osc_esc_html(__('ImageMagick library is not loaded')) . '</span> ')
+                            . osc_esc_html(__("It's faster and consumes less resources than GD library.")),
+                    )); ?>
                     <?php osc_admin_page_head(__('Watermark')); ?>
-                    <div class="form-row">
-                        <div class="form-label"><?php _e('Watermark type'); ?></div>
-                        <div class="form-controls">
-                            <div class="form-label-checkbox">
-                                <input type="radio" id="watermark_none" name="watermark_type"
-                                       value="none" <?php echo((!osc_is_watermark_image() && !osc_is_watermark_text())
-        ? 'checked="checked"' : ''); ?> />
-                                <label for="watermark_none"><?php _e('None'); ?></label>
-                            </div>
-                            <div class="form-label-checkbox">
-                                <input type="radio" id="watermark_text" name="watermark_type"
-                                       value="text" <?php echo(osc_is_watermark_text() ? 'checked="checked"'
-        : ''); ?> <?php echo($freeType ? '' : 'disabled="disabled"'); ?> />
-                                <label for="watermark_text"><?php _e('Text'); ?></label>
-                                <?php if (!$freeType) { ?>
-                                    <div class="callout-danger">
-                                        <p><?php printf(
-                                            __('Freetype library is required. How to <a target="_blank" href="%s">install/configure</a>'),
-                                            'https://www.php.net/manual/en/image.installation.php'
-                                        ); ?></p>
-                                    </div>
-                                <?php } ?>
-                            </div>
-                            <div class="form-label-checkbox">
-                                <input type="radio" id="watermark_image" name="watermark_type"
-                                       value="image" <?php echo(osc_is_watermark_image() ? 'checked="checked"' : ''); ?> />
-                                <label for="watermark_image"><?php _e('Image'); ?></label>
-                            </div>
-                        </div>
-                    </div>
+                    <?php
+                    $watermarkType = osc_is_watermark_image() ? 'image' : (osc_is_watermark_text() ? 'text' : 'none');
+                    osc_admin_radio_group(array(
+                        'name'     => 'watermark_type',
+                        'label'    => __('Watermark type'),
+                        'selected' => $watermarkType,
+                        'options'  => array(
+                            'none'  => array('label' => __('None'), 'id' => 'watermark_none'),
+                            'text'  => array(
+                                'label'       => __('Text'),
+                                'id'          => 'watermark_text',
+                                'disabled'    => !$freeType,
+                                'custom_html' => $freeType ? '' : '<span class="callout-danger">' . sprintf(
+                                    __('Freetype library is required. How to <a target="_blank" rel="noopener" href="%s">install/configure</a>'),
+                                    'https://www.php.net/manual/en/image.installation.php'
+                                ) . '</span>',
+                            ),
+                            'image' => array('label' => __('Image'), 'id' => 'watermark_image'),
+                        ),
+                    )); ?>
                     <div id="watermark_text_box" class="table-backoffice-form" <?php echo(osc_is_watermark_text() ? ''
                         : 'style="display:none;"'); ?>>
                         <?php osc_admin_page_head(__('Watermark Text Settings')); ?>
-                        <div class="form-row">
-                            <div class="form-label"><?php _e('Watermark Text'); ?></div>
-                            <div class="form-controls">
-                                <input type="text" class="input-large" name="watermark_text"
-                                       value="<?php echo osc_esc_html(osc_watermark_text()); ?>"/>
-                            </div>
-                        </div>
+                        <?php osc_admin_text(array(
+                            'name'  => 'watermark_text',
+                            'label' => __('Watermark Text'),
+                            'value' => osc_watermark_text(),
+                        )); ?>
                         <?php
                         if (Preference::newInstance()->get('watermark_text_options')) {
                             $watermark_options = json_decode(
@@ -302,54 +286,50 @@ if (!$imagickLoaded) {
                             }
 
                             ?>
-                            <div class="form-row">
-                                <div class="form-label"><?php _e('Watermark Width'); ?></div>
-                                <div class="form-controls">
-                                    <input type="number" class="input-large" name="watermark_width" step="1"
-                                           value="<?php echo $watermark_width; ?>"/>
-                                </div>
-                            </div>
-                            <div class="form-row">
-                                <div class="form-label"><?php _e('Watermark Height'); ?></div>
-                                <div class="form-controls">
-                                    <input type="number" class="input-large" name="watermark_height" step="1"
-                                           value="<?php echo $watermark_height; ?>"/>
-                                </div>
-                            </div>
-                            <div class="form-row">
-                                <div class="form-label"><?php _e('Text offset_x'); ?></div>
-                                <div class="form-controls">
-                                    <input type="number" class="input-large" name="text_offset_x" step="1"
-                                           value="<?php echo $text_offset_x; ?>"/>
-                                </div>
-                            </div>
-                            <div class="form-row">
-                                <div class="form-label"><?php _e('Text offset_y'); ?></div>
-                                <div class="form-controls">
-                                    <input type="number" class="input-large" name="text_offset_y" step="1"
-                                           value="<?php echo $text_offset_y; ?>"/>
-                                </div>
-                            </div>
-                            <div class="form-row">
-                                <div class="form-label"><?php _e('Text Color'); ?></div>
-                                <div class="form-controls">
-                                    <input type="color" maxlength="8" id="colorpickerField1" class="form-control form-control-color"
-                                           name="watermark_text_color"
-                                           value="<?php echo osc_esc_html(osc_watermark_text_color()); ?>"/>
-                                </div>
-                            </div>
-                            <div class="form-row">
-                                <div class="form-label"><?php _e('Background Color'); ?></div>
-                                <div class="form-controls">
-                                    <input type="color" maxlength="8" id="colorpickerField2" class="form-control form-control-color"
-                                           name="background_color"
-                                           value="<?php echo $background_color;
-                            ?>"/>
-                                    <div class="help-box">
-                                        <?php _e('Background Hexadecimal color value'); ?>
-                                    </div>
-                                </div>
-                            </div>
+                            <?php
+                            osc_admin_number(array(
+                                'name'   => 'watermark_width',
+                                'label'  => __('Watermark Width'),
+                                'value'  => $watermark_width,
+                                'step'   => 1,
+                                'suffix' => __('px'),
+                            ));
+                            osc_admin_number(array(
+                                'name'   => 'watermark_height',
+                                'label'  => __('Watermark Height'),
+                                'value'  => $watermark_height,
+                                'step'   => 1,
+                                'suffix' => __('px'),
+                            ));
+                            osc_admin_number(array(
+                                'name'   => 'text_offset_x',
+                                'label'  => __('Text offset_x'),
+                                'value'  => $text_offset_x,
+                                'step'   => 1,
+                                'suffix' => __('px'),
+                            ));
+                            osc_admin_number(array(
+                                'name'   => 'text_offset_y',
+                                'label'  => __('Text offset_y'),
+                                'value'  => $text_offset_y,
+                                'step'   => 1,
+                                'suffix' => __('px'),
+                            ));
+                            osc_admin_field(array(
+                                'type'  => 'color',
+                                'id'    => 'colorpickerField1',
+                                'name'  => 'watermark_text_color',
+                                'label' => __('Text Color'),
+                                'value' => osc_watermark_text_color(),
+                            ));
+                            osc_admin_field(array(
+                                'type'  => 'color',
+                                'id'    => 'colorpickerField2',
+                                'name'  => 'background_color',
+                                'label' => __('Background Color'),
+                                'value' => $background_color,
+                                'help'  => __('Background Hexadecimal color value'),
+                            )); ?>
                         <?php } ?>
                         <?php if (osc_is_watermark_text() && osc_watermark_text_color()) { ?>
                             <div class="form-row">
@@ -371,59 +351,37 @@ if (!$imagickLoaded) {
                                 </div>
                             </div>
                         <?php } ?>
-                        <div class="form-row">
-                            <div class="form-label"><?php _e('Position'); ?></div>
-                            <div class="form-controls">
-                                <select name="watermark_text_place" id="watermark_text_place">
-                                    <option value="centre" <?php echo (osc_watermark_place() === 'centre')
-                            ? 'selected="true"' : ''; ?>><?php _e('Centre'); ?></option>
-                                    <option value="tl" <?php echo (osc_watermark_place() === 'tl') ? 'selected="true"'
-                            : ''; ?>><?php _e('Top Left'); ?></option>
-                                    <option value="tr" <?php echo (osc_watermark_place() === 'tr') ? 'selected="true"'
-                            : ''; ?>><?php _e('Top Right'); ?></option>
-                                    <option value="bl" <?php echo (osc_watermark_place() === 'bl') ? 'selected="true"'
-                            : ''; ?>><?php _e('Bottom Left'); ?></option>
-                                    <option value="br" <?php echo (osc_watermark_place() === 'br') ? 'selected="true"'
-                            : ''; ?>><?php _e('Bottom Right'); ?></option>
-                                </select>
-                            </div>
-                        </div>
+                        <?php osc_admin_select(array(
+                            'id'       => 'watermark_text_place',
+                            'name'     => 'watermark_text_place',
+                            'label'    => __('Position'),
+                            'selected' => osc_watermark_place(),
+                            'options'  => $watermarkPlaces,
+                        )); ?>
                     </div>
                     <div id="watermark_image_box" <?php echo(osc_is_watermark_image() ? '' : 'style="display:none;"'); ?>>
                         <?php osc_admin_page_head(__('Watermark Image Settings')); ?>
-                        <div class="form-row">
-                            <div class="form-label"><?php _e('Image'); ?></div>
-                            <div class="form-controls">
-                                <input type="file" name="watermark_image" id="watermark_image_file"/>
-                                <?php if (osc_is_watermark_image()) { ?>
-                                    <div class="help-box"><img width="100px"
-                                                               src="<?php echo osc_base_url() . str_replace(
-                                                                   osc_base_path(),
-                                                                   '',
-                                                                   osc_uploads_path()
-                                                               ) . 'watermark.png' ?>"/></div>
-                                <?php } ?>
-                                <div class="help-box"><?php _e('It has to be a .PNG image'); ?></div>
-                                <div class="help-box"><?php _e("Shopclass doesn't check the watermark image size"); ?></div>
-                            </div>
-                        </div>
-                        <div class="form-row">
-                            <div class="form-label"><?php _e('Position'); ?></div>
-                            <div class="form-controls">
-                                <select name="watermark_image_place" id="watermark_image_place">
-                                    <option value="centre" <?php echo (osc_watermark_place() === 'centre')
-                                                               ? 'selected="true"' : ''; ?>><?php _e('Centre'); ?></option>
-                                    <option value="tl" <?php echo (osc_watermark_place() === 'tl') ? 'selected="true"'
-                                                               : ''; ?>><?php _e('Top Left'); ?></option>
-                                    <option value="tr" <?php echo (osc_watermark_place() === 'tr') ? 'selected="true"'
-                                                               : ''; ?>><?php _e('Top Right'); ?></option>
-                                    <option value="bl" <?php echo (osc_watermark_place() === 'bl') ? 'selected="true"'
-                                                               : ''; ?>><?php _e('Bottom Left'); ?></option>
-                                    <option value="br" <?php echo (osc_watermark_place() === 'br') ? 'selected="true"'
-                                                               : ''; ?>><?php _e('Bottom Right'); ?></option>
-                                </select>
-                            </div>
-                        </div>
+                        <?php osc_admin_field(array(
+                            'type'      => 'file',
+                            'id'        => 'watermark_image_file',
+                            'name'      => 'watermark_image',
+                            'label'     => __('Image'),
+                            'attrs'     => array('accept' => 'image/png'),
+                            'help_html' => (osc_is_watermark_image()
+                                ? '<img width="100" alt="" src="' . osc_esc_html(
+                                    osc_base_url() . str_replace(osc_base_path(), '', osc_uploads_path()) . 'watermark.png'
+                                ) . '"><br>'
+                                : '')
+                                . osc_esc_html(__('It has to be a .PNG image')) . '<br>'
+                                . osc_esc_html(__("Shopclass doesn't check the watermark image size")),
+                        )); ?>
+                        <?php osc_admin_select(array(
+                            'id'       => 'watermark_image_place',
+                            'name'     => 'watermark_image_place',
+                            'label'    => __('Position'),
+                            'selected' => osc_watermark_place(),
+                            'options'  => $watermarkPlaces,
+                        )); ?>
                     </div>
                     <?php osc_admin_page_head(__('Regenerate images')); ?>
                     <div class="form-row">

@@ -14740,8 +14740,11 @@ input.input-actions {
 }
 
 .field-num {
-  text-align: end;
   width: 7rem !important;
+}
+
+input[type=number].field-num {
+  text-align: end;
 }
 
 .field-text {
@@ -14758,6 +14761,15 @@ input.input-actions {
 
 .field-mono {
   font-family: var(--bs-font-monospace);
+}
+
+.field-color {
+  block-size: 2.25rem;
+  border: 1px solid var(--osc-chrome-edge);
+  border-radius: 0.25rem;
+  cursor: pointer;
+  inline-size: 3.5rem !important;
+  padding: 0.2rem;
 }
 
 select.field-select {

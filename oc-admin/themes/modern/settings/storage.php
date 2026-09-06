@@ -98,125 +98,111 @@ osc_current_admin_theme_path('parts/header.php'); ?>
             <input type="hidden" name="action" value="storage_post"/>
             <fieldset>
                 <div class="form-horizontal">
-                    <div class="form-row">
-                        <div class="form-label"><?php _e('Active storage'); ?></div>
-                        <div class="form-controls">
-                            <select class="form-select form-select-sm" name="storage_active">
-                                <option value="local" <?php echo ($prefs['storage_active'] !== 's3')
-                                    ? 'selected="true"' : ''; ?>><?php _e('Local disk'); ?></option>
-                                <option value="s3" <?php echo ($prefs['storage_active'] === 's3')
-                                    ? 'selected="true"' : ''; ?>><?php _e('Amazon S3-compatible'); ?></option>
-                            </select>
-                        </div>
-                    </div>
-                    <div class="form-row">
-                        <div class="form-label"><?php _e('Provider'); ?></div>
-                        <div class="form-controls">
-                            <select class="form-select form-select-sm" id="storage_provider" name="storage_s3_provider">
-                                <?php foreach ($providers as $id => $preset) { ?>
-                                    <option value="<?php echo osc_esc_html($id); ?>"
-                                        <?php echo ($prefs['storage_s3_provider'] === $id) ? 'selected="selected"' : ''; ?>>
-                                        <?php echo osc_esc_html($preset['label']); ?>
-                                    </option>
-                                <?php } ?>
-                            </select>
-                            <div class="help-box">
-                                <?php _e('Prefills the connection fields below with a starting point for the selected provider. '
-                                         . 'Review every field before saving.'); ?>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="form-row">
-                        <div class="form-label"><?php _e('Bucket'); ?></div>
-                        <div class="form-controls">
-                            <input type="text" class="input-large" name="storage_s3_bucket"
-                                   value="<?php echo osc_esc_html($prefs['storage_s3_bucket']); ?>"/>
-                        </div>
-                    </div>
-                    <div class="form-row">
-                        <div class="form-label"><?php _e('Region'); ?></div>
-                        <div class="form-controls">
-                            <input type="text" class="input-medium" name="storage_s3_region"
-                                   value="<?php echo osc_esc_html($prefs['storage_s3_region']); ?>"/>
-                        </div>
-                    </div>
-                    <div class="form-row">
-                        <div class="form-label"><?php _e('Endpoint'); ?></div>
-                        <div class="form-controls">
-                            <input type="text" class="input-large" name="storage_s3_endpoint"
-                                   value="<?php echo osc_esc_html($prefs['storage_s3_endpoint']); ?>"/>
-                            <div class="help-box">
-                                <?php _e('Leave the provider-specific placeholders (e.g. {region}, {account_id}) filled in '
-                                         . 'with your own values.'); ?>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="form-row">
-                        <div class="form-label"><?php _e('Access key'); ?></div>
-                        <div class="form-controls">
-                            <input type="text" class="input-large" name="storage_s3_access_key"
-                                   value="<?php echo osc_esc_html($prefs['storage_s3_access_key']); ?>"/>
-                        </div>
-                    </div>
-                    <div class="form-row">
-                        <div class="form-label"><?php _e('Secret key'); ?></div>
-                        <div class="form-controls">
-                            <input type="password" class="input-large" name="storage_s3_secret_key" value=""
-                                   placeholder="<?php echo osc_esc_html(__('Leave blank to keep the currently saved secret key')); ?>"
-                                   autocomplete="new-password"/>
-                        </div>
-                    </div>
-                    <div class="form-row">
-                        <div class="form-label"><?php _e('Path-style URLs'); ?></div>
-                        <div class="form-controls">
-                            <div class="form-label-checkbox">
-                                <input type="checkbox" id="storage_s3_path_style" name="storage_s3_path_style"
-                                       value="1" <?php echo($prefs['storage_s3_path_style'] ? 'checked="checked"' : ''); ?> />
-                                <label for="storage_s3_path_style"><?php _e('Use path-style bucket URLs.'); ?></label>
-                                <span class="help-box"><?php _e('Required by MinIO and most self-hosted setups; leave off for AWS.'); ?></span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="form-row">
-                        <div class="form-label"><?php _e('Public URL'); ?></div>
-                        <div class="form-controls">
-                            <input type="text" class="input-large" name="storage_s3_public_url"
-                                   value="<?php echo osc_esc_html($prefs['storage_s3_public_url']); ?>"/>
-                            <div class="help-box" id="storage_public_url_hint">
-                                <?php _e('Optional. Overrides the URL used to serve files, e.g. a CDN domain in front of the bucket.'); ?>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="form-row">
-                        <div class="form-label"><?php _e('Signed URLs'); ?></div>
-                        <div class="form-controls">
-                            <div class="form-label-checkbox">
-                                <input type="checkbox" id="storage_s3_signed_urls" name="storage_s3_signed_urls"
-                                       value="1" <?php echo($prefs['storage_s3_signed_urls'] ? 'checked="checked"' : ''); ?> />
-                                <label for="storage_s3_signed_urls"><?php _e('Serve files through time-limited signed URLs.'); ?></label>
-                                <span class="help-box"><?php _e('Use this for a private bucket. Leave off for a public bucket or CDN.'); ?></span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="form-row">
-                        <div class="form-label"><?php _e('Signed URL TTL'); ?></div>
-                        <div class="form-controls">
-                            <input type="number" class="input-medium" name="storage_s3_signed_ttl" min="60" max="604800"
-                                   value="<?php echo osc_esc_html($prefs['storage_s3_signed_ttl']); ?>"/>
-                            <span class="help-box"><?php _e('Seconds a signed URL stays valid (60-604800).'); ?></span>
-                        </div>
-                    </div>
-                    <div class="form-row">
-                        <div class="form-label"><?php _e('Local copies'); ?></div>
-                        <div class="form-controls">
-                            <select class="form-select form-select-sm" name="storage_keep_local">
-                                <option value="all" <?php echo ($prefs['storage_keep_local'] !== 'none')
-                                    ? 'selected="true"' : ''; ?>><?php _e('Keep local copies'); ?></option>
-                                <option value="none" <?php echo ($prefs['storage_keep_local'] === 'none')
-                                    ? 'selected="true"' : ''; ?>><?php _e('Delete after upload'); ?></option>
-                            </select>
-                        </div>
-                    </div>
+                    <?php
+                    osc_admin_select(array(
+                        'name'     => 'storage_active',
+                        'label'    => __('Active storage'),
+                        'selected' => $prefs['storage_active'] === 's3' ? 's3' : 'local',
+                        'options'  => array(
+                            'local' => __('Local disk'),
+                            's3'    => __('Amazon S3-compatible'),
+                        ),
+                    ));
+
+                    $providerOptions = array();
+                    foreach ($providers as $id => $preset) {
+                        $providerOptions[$id] = $preset['label'];
+                    }
+                    osc_admin_select(array(
+                        'id'       => 'storage_provider',
+                        'name'     => 'storage_s3_provider',
+                        'label'    => __('Provider'),
+                        'selected' => $prefs['storage_s3_provider'],
+                        'options'  => $providerOptions,
+                        'help'     => __('Prefills the connection fields below with a starting point for the selected provider. '
+                                         . 'Review every field before saving.'),
+                    ));
+                    osc_admin_text(array(
+                        'name'  => 'storage_s3_bucket',
+                        'label' => __('Bucket'),
+                        'value' => $prefs['storage_s3_bucket'],
+                    ));
+                    osc_admin_text(array(
+                        'name'  => 'storage_s3_region',
+                        'label' => __('Region'),
+                        'value' => $prefs['storage_s3_region'],
+                    ));
+                    osc_admin_field(array(
+                        'type'  => 'url',
+                        'name'  => 'storage_s3_endpoint',
+                        'label' => __('Endpoint'),
+                        'value' => $prefs['storage_s3_endpoint'],
+                        'width' => 'key',
+                        'help'  => __('Leave the provider-specific placeholders (e.g. {region}, {account_id}) filled in '
+                                      . 'with your own values.'),
+                    ));
+                    osc_admin_text(array(
+                        'name'  => 'storage_s3_access_key',
+                        'label' => __('Access key'),
+                        'value' => $prefs['storage_s3_access_key'],
+                        'width' => 'key',
+                    ));
+                    // Never rendered back into the page; blank means "keep the saved one",
+                    // which is what the controller already does with an empty value.
+                    osc_admin_secret(array(
+                        'name'        => 'storage_s3_secret_key',
+                        'label'       => __('Secret key'),
+                        'value'       => '',
+                        'reveal'      => true,
+                        'placeholder' => __('Leave blank to keep the currently saved secret key'),
+                        'attrs'       => array('autocomplete' => 'new-password'),
+                    ));
+                    osc_admin_field(array(
+                        'type'      => 'checkbox',
+                        'row_label' => __('Path-style URLs'),
+                        'id'        => 'storage_s3_path_style',
+                        'name'      => 'storage_s3_path_style',
+                        'label'     => __('Use path-style bucket URLs.'),
+                        'checked'   => $prefs['storage_s3_path_style'],
+                        'help'      => __('Required by MinIO and most self-hosted setups; leave off for AWS.'),
+                    ));
+                    osc_admin_field(array(
+                        'type'      => 'url',
+                        'name'      => 'storage_s3_public_url',
+                        'label'     => __('Public URL'),
+                        'value'     => $prefs['storage_s3_public_url'],
+                        'width'     => 'key',
+                        'help_html' => '<span id="storage_public_url_hint">'
+                            . osc_esc_html(__('Optional. Overrides the URL used to serve files, e.g. a CDN domain in front of the bucket.'))
+                            . '</span>',
+                    ));
+                    osc_admin_field(array(
+                        'type'      => 'checkbox',
+                        'row_label' => __('Signed URLs'),
+                        'id'        => 'storage_s3_signed_urls',
+                        'name'      => 'storage_s3_signed_urls',
+                        'label'     => __('Serve files through time-limited signed URLs.'),
+                        'checked'   => $prefs['storage_s3_signed_urls'],
+                        'help'      => __('Use this for a private bucket. Leave off for a public bucket or CDN.'),
+                    ));
+                    osc_admin_number(array(
+                        'name'   => 'storage_s3_signed_ttl',
+                        'label'  => __('Signed URL TTL'),
+                        'value'  => $prefs['storage_s3_signed_ttl'],
+                        'min'    => 60,
+                        'max'    => 604800,
+                        'suffix' => __('seconds'),
+                        'help'   => __('How long a signed URL stays valid (60-604800).'),
+                    ));
+                    osc_admin_select(array(
+                        'name'     => 'storage_keep_local',
+                        'label'    => __('Local copies'),
+                        'selected' => $prefs['storage_keep_local'] === 'none' ? 'none' : 'all',
+                        'options'  => array(
+                            'all'  => __('Keep local copies'),
+                            'none' => __('Delete after upload'),
+                        ),
+                    )); ?>
                     <div class="clear"></div>
                     <?php osc_admin_form_actions(); ?>
                 </div>

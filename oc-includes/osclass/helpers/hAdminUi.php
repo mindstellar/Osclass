@@ -47,7 +47,7 @@ if (!function_exists('osc_admin_field')) {
      * is the only new name a plugin has to depend on.
      *
      * Keys, all optional but `name`:
-     *   'type'      => text|email|url|tel|number|select|textarea|radio|checkbox|secret|custom
+     *   'type'      => text|email|url|tel|number|color|file|select|textarea|radio|checkbox|secret|custom
      *   'name'      => request/preference key
      *   'label'     => the label. For a checkbox it sits beside the control, so the row's
      *                  own label column comes from 'row_label' instead.
@@ -183,6 +183,17 @@ if (!function_exists('osc_admin_field_control')) {
                 osc_admin_field_choices($id, $name, (string)$value, $spec);
                 break;
 
+            case 'color':
+                echo '<input type="color"' . $common . ' class="' . osc_admin_field_class($type, $spec) . '"'
+                    . ' value="' . osc_esc_html((string)$value) . '"' . $attrs . ' />';
+                break;
+
+            case 'file':
+                // No value: a file input's value cannot be set, and a browser would refuse it.
+                echo '<input type="file"' . $common . ' class="' . osc_admin_field_class($type, $spec) . '"'
+                    . $attrs . ' />';
+                break;
+
             case 'number':
                 foreach (array('min', 'max', 'step') as $key) {
                     if (isset($spec[$key])) {
@@ -229,8 +240,10 @@ if (!function_exists('osc_admin_field_choices')) {
      * The option list of a radio group. Each option is its own label wrapping its own
      * control, so the whole line is a hit target and no id can drift from its label.
      *
-     * An option may carry 'custom_html' -- markup rendered inside the label after its text,
-     * which is how "Custom: [____]" rows keep the free-text input inside the choice.
+     * An option may be a plain label, or an array carrying 'label' plus any of 'custom_html'
+     * (markup rendered inside the label after its text, which is how "Custom: [____]" rows keep
+     * the free-text input inside the choice), 'disabled', and 'id' where an existing script
+     * already reaches for one.
      *
      * @param string $id
      * @param string $name
@@ -249,20 +262,24 @@ if (!function_exists('osc_admin_field_choices')) {
         $i = 0;
         foreach (($spec['options'] ?? array()) as $optValue => $option) {
             $i++;
-            $custom = '';
+            $custom      = '';
+            $optId       = $id . '-' . $i;
+            $optDisabled = false;
             if (is_array($option)) {
-                $custom = (string)($option['custom_html'] ?? '');
-                $option = $option['label'] ?? '';
+                $custom      = (string)($option['custom_html'] ?? '');
+                $optId       = (string)($option['id'] ?? $optId);
+                $optDisabled = !empty($option['disabled']);
+                $option      = $option['label'] ?? '';
             }
 
             // The id counts the options rather than slugging their values: a value is free
             // text ("F j, Y"), and neither spaces nor two values slugging to the same
             // string can be allowed to produce an id two radios share.
             echo '<label class="field-choice">'
-                . '<input type="radio" id="' . osc_esc_html($id . '-' . $i) . '"'
+                . '<input type="radio" id="' . osc_esc_html($optId) . '"'
                 . ' name="' . osc_esc_html($name) . '" value="' . osc_esc_html($optValue) . '"'
                 . ((string)$optValue === $value ? ' checked' : '')
-                . (!empty($spec['disabled']) ? ' disabled' : '') . ' />'
+                . (!empty($spec['disabled']) || $optDisabled ? ' disabled' : '') . ' />'
                 . '<span>' . osc_esc_html($option) . '</span>'
                 . $custom
                 . '</label>';
@@ -296,13 +313,17 @@ if (!function_exists('osc_admin_field_class')) {
             'select'   => 'field-select',
             'secret'   => 'field-key',
             'textarea' => 'field-text',
+            'color'    => 'field-color',
+            'file'     => '',
         );
 
         $width = isset($spec['width'])
             ? ($widths[$spec['width']] ?? '')
             : ($byType[$type] ?? 'field-text');
 
-        $classes = $type === 'select' ? array() : array('input-text');
+        // input-text is what the admin styles a text control with; a select, a colour well and
+        // a file picker are not text controls and the class would fight their own sizing.
+        $classes = in_array($type, array('select', 'color', 'file'), true) ? array() : array('input-text');
         if ($width !== '') {
             $classes[] = $width;
         }

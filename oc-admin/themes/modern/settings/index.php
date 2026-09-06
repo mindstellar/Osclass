@@ -412,28 +412,32 @@ foreach ($timeFormats as $tf) {
                      * </div>
                      */
 ?>
-                    <div class="form-row">
-                        <div class="form-label"></div>
-                        <div class="form-controls">
-                            <span id="last-version-check">
-                                <?php
-            $last_version_check = (int) osc_get_preference('last_version_check');
-echo __('Last checked on ') . ($last_version_check > 0
-    ? osc_format_date(date('d-m-Y h:i:s', $last_version_check))
-    : __('never')); ?></span>
-                            <button type="button" class="btn btn-sm btn-secondary" onclick="checkOsclassUpdate()"><?php _e('Check updates'); ?></button>
-                        </div>
-                    </div>
-                    <div class="form-row">
-                        <div class="form-label"><?php _e('Allow Prerelease'); ?></div>
-                        <div class="form-controls">
-                            <?php osc_admin_checkbox(array(
-                                'name'    => 'allow_update_prerelease',
-                                'label'   => __('Allow prerelease update'),
-                                'checked' => osc_get_preference('allow_update_prerelease'),
-                            )); ?>
-                        </div>
-                    </div>
+                    <?php
+                    $last_version_check = (int)osc_get_preference('last_version_check');
+                    osc_admin_field(array(
+                        'type'   => 'custom',
+                        'render' => static function () use ($last_version_check) {
+                            echo '<div class="field-inline"><span id="last-version-check">'
+                                . osc_esc_html(__('Last checked on ') . ($last_version_check > 0
+                                    ? osc_format_date(date('d-m-Y h:i:s', $last_version_check))
+                                    : __('never')))
+                                . '</span>';
+                            osc_admin_action_button(array(
+                                'label'   => __('Check updates'),
+                                'type'    => 'button',
+                                'variant' => 'secondary',
+                                'attrs'   => array('id' => 'check-updates'),
+                            ));
+                            echo '</div>';
+                        },
+                    ));
+                    osc_admin_field(array(
+                        'type'      => 'checkbox',
+                        'row_label' => __('Allow Prerelease'),
+                        'name'      => 'allow_update_prerelease',
+                        'label'     => __('Allow prerelease update'),
+                        'checked'   => osc_get_preference('allow_update_prerelease'),
+                    )); ?>
                     <div class="clear"></div>
                     <?php osc_admin_form_actions(); ?>
                 </div>
@@ -443,15 +447,15 @@ echo __('Last checked on ') . ($last_version_check > 0
     <!-- /settings form -->
 </div>
 <script>
-    function checkOsclassUpdate() {
-        var lastVersionElement = document.getElementById("last-version-check");
+    document.getElementById('check-updates').addEventListener('click', function () {
+        var lastVersionElement = document.getElementById('last-version-check');
         fetch('<?php echo osc_admin_base_url(true); ?>?page=ajax&action=check_version')
-            .then(response => response.json())
-            .then(data => {
+            .then(function (response) { return response.json(); })
+            .then(function (data) {
                 lastVersionElement.textContent = '<?php echo osc_esc_js(__('Last checked on ')); ?>' + new Date().toLocaleString();
                 setJsMessage('info', data.msg);
             })
-            .catch(error => setJsMessage('error', error));
-    }
+            .catch(function (error) { setJsMessage('error', error); });
+    });
 </script>
 <?php osc_current_admin_theme_path('parts/footer.php'); ?>

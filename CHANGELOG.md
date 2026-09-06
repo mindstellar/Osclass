@@ -72,6 +72,11 @@ theme ships none, using a documented class vocabulary a theme restyles in CSS al
 
 ### Fixed
 
+- Every settings screen is drawn from the core field primitives: one width per field type,
+  hints always on their own line, and no screen inventing its own input markup. Nothing is
+  renamed — `form-row`, `form-controls`, `help-box` and the rest render exactly as before.
+- Mail settings offered Encryption as a free-text box whose help said "blank, ssl or tls";
+  it is those three options now.
 - A number field inside a sentence — "Break comments into pages with __ comments per page" —
   rendered as a full-width block that pushed the rest of the sentence onto its own line, on
   Comments and Listing settings. The words either side of a field are now slots the field

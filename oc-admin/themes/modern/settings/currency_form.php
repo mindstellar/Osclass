@@ -110,49 +110,43 @@ osc_current_admin_theme_path('parts/header.php'); ?>
             <?php } ?>
             <fieldset>
                 <div class="form-horizontal">
-                    <div class="form-row">
-                        <div class="form-label"><?php _e('Currency Code'); ?></div>
-                        <div class="form-controls">
-                            <input
-                                    class="input-small"
-                                    name="pk_c_code"
-                                    type="text"
-                                    value="<?php echo osc_esc_html($aCurrency['pk_c_code']); ?>"
-                                <?php if ($typeForm
-                                          === 'edit_post'
-                                ) {
-                                    echo 'disabled="disabled"';
-                                }
-?>
-                            />
-                            <span class="help-box">
-                                <?php printf(
-                                    __('Must be a three-character code according to the <a href="%s" target="_blank">ISO 4217</a>'),
-                                    'http://en.wikipedia.org/wiki/ISO_4217'
-                                ); ?>
-                            </span>
-                        </div>
-                    </div>
-                    <div class="form-row">
-                        <div class="form-label"><?php _e('Currency symbol'); ?></div>
-                        <div class="form-controls">
-                            <input type="text" class="input-small" name="s_description"
-                                   value="<?php echo osc_esc_html($aCurrency['s_description']); ?>"/>
-                        </div>
-                    </div>
-                    <div class="form-row">
-                        <div class="form-label"><?php _e('Name'); ?></div>
-                        <div class="form-controls">
-                            <input type="text" name="s_name" value="<?php echo osc_esc_html($aCurrency['s_name']); ?>"/>
-                        </div>
-                    </div>
+                    <?php
+                    osc_admin_text(array(
+                        'name'      => 'pk_c_code',
+                        'label'     => __('Currency Code'),
+                        'value'     => $aCurrency['pk_c_code'],
+                        'width'     => 'num',
+                        'disabled'  => $typeForm === 'edit_post',
+                        'attrs'     => array('maxlength' => 3),
+                        'help_html' => sprintf(
+                            __('Must be a three-character code according to the <a href="%s" target="_blank" rel="noopener">ISO 4217</a>'),
+                            'https://en.wikipedia.org/wiki/ISO_4217'
+                        ),
+                    ));
+                    osc_admin_text(array(
+                        'name'  => 's_description',
+                        'label' => __('Currency symbol'),
+                        'value' => $aCurrency['s_description'],
+                        'width' => 'num',
+                    ));
+                    osc_admin_text(array(
+                        'name'  => 's_name',
+                        'label' => __('Name'),
+                        'value' => $aCurrency['s_name'],
+                    )); ?>
                     <div class="form-actions">
-                        <?php if ($typeForm === 'edit_post') { ?>
-                            <input class="btn btn-red" type="button" value="<?php echo osc_esc_html(__('Cancel')); ?>"
-                                   onclick="location.href='<?php echo osc_admin_base_url(true);
-                            ?>?page=settings&amp;action=currencies'">
-                        <?php } ?>
-                        <button type="submit" class="btn btn-submit"><?php echo osc_esc_html(customText('button')); ?></button>
+                        <?php if ($typeForm === 'edit_post') {
+                            osc_admin_action_button(array(
+                                'label'   => __('Cancel'),
+                                'variant' => 'red',
+                                'url'     => osc_admin_base_url(true) . '?page=settings&action=currencies',
+                            ));
+                        }
+                        osc_admin_action_button(array(
+                            'label'   => customText('button'),
+                            'type'    => 'submit',
+                            'variant' => 'primary',
+                        )); ?>
                     </div>
                 </div>
             </fieldset>

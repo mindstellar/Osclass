@@ -110,62 +110,52 @@ $scopeOptions = array(
             <input type="hidden" name="page" value="settings"/>
             <input type="hidden" name="action" value="keyword_block_prefs_post"/>
             <fieldset class="form-horizontal">
-                <div class="form-row">
-                    <div class="form-label"><?php _e('Keyword filter'); ?></div>
-                    <div class="form-controls">
-                        <div class="form-label-checkbox">
-                            <input type="checkbox" id="keyword_spam_enabled" name="keyword_spam_enabled" value="1"
-                                <?php echo(!empty($prefs['keyword_spam_enabled']) ? 'checked="checked"' : ''); ?> />
-                            <label for="keyword_spam_enabled"><?php _e('Check new and edited listings against the keyword blocklist below'); ?></label>
-                        </div>
-                    </div>
-                </div>
-                <div class="form-row">
-                    <div class="form-label"><?php _e('On a match'); ?></div>
-                    <div class="form-controls">
-                        <div class="form-label-checkbox">
-                            <input type="checkbox" id="keyword_spam_hard_block" name="keyword_spam_hard_block" value="1"
-                                <?php echo(!empty($prefs['keyword_spam_hard_block']) ? 'checked="checked"' : ''); ?> />
-                            <label for="keyword_spam_hard_block"><?php _e('Reject the listing outright instead of quarantining it for review'); ?></label>
-                        </div>
-                        <div class="help-box">
-                            <?php _e('Off by default: a match is quarantined (flagged spam and hidden) so it can be reviewed and reversed. Turn this on to reject the post before it is ever saved.'); ?>
-                        </div>
-                    </div>
-                </div>
-                <div class="form-row">
-                    <div class="form-label"><?php _e('Report auto-block'); ?></div>
-                    <div class="form-controls">
-                        <div class="form-label-checkbox">
-                            <input type="checkbox" id="report_autoblock" name="report_autoblock" value="1"
-                                <?php echo(!empty($prefs['report_autoblock']) ? 'checked="checked"' : ''); ?> />
-                            <label for="report_autoblock"><?php _e('Automatically hide a listing once enough distinct visitors have reported it'); ?></label>
-                        </div>
-                    </div>
-                </div>
-                <div class="form-row">
-                    <div class="form-label"><?php _e('Report threshold'); ?></div>
-                    <div class="form-controls">
-                        <input type="text" class="input-medium" id="report_threshold" name="report_threshold"
-                               value="<?php echo osc_esc_html($prefs['report_threshold']); ?>"/>
-                        <div class="help-box">
-                            <?php _e('Number of distinct reporters (one vote per person) that auto-hides a listing.'); ?>
-                        </div>
-                    </div>
-                </div>
-                <div class="form-row">
-                    <div class="form-label"><?php _e('Report CAPTCHA'); ?></div>
-                    <div class="form-controls">
-                        <div class="form-label-checkbox">
-                            <input type="checkbox" id="enabled_recaptcha_reports" name="enabled_recaptcha_reports" value="1"
-                                <?php echo(!empty($prefs['enabled_recaptcha_reports']) ? 'checked="checked"' : ''); ?> />
-                            <label for="enabled_recaptcha_reports"><?php _e('Require a CAPTCHA to report a listing'); ?></label>
-                        </div>
-                        <div class="help-box">
-                            <?php _e('Needs a CAPTCHA provider configured under Settings &raquo; reCAPTCHA/Turnstile; otherwise no challenge is shown.'); ?>
-                        </div>
-                    </div>
-                </div>
+                <?php
+                osc_admin_field(array(
+                    'type'      => 'checkbox',
+                    'row_label' => __('Keyword filter'),
+                    'id'        => 'keyword_spam_enabled',
+                    'name'      => 'keyword_spam_enabled',
+                    'label'     => __('Check new and edited listings against the keyword blocklist below'),
+                    'checked'   => !empty($prefs['keyword_spam_enabled']),
+                ));
+                osc_admin_field(array(
+                    'type'      => 'checkbox',
+                    'row_label' => __('On a match'),
+                    'id'        => 'keyword_spam_hard_block',
+                    'name'      => 'keyword_spam_hard_block',
+                    'label'     => __('Reject the listing outright instead of quarantining it for review'),
+                    'checked'   => !empty($prefs['keyword_spam_hard_block']),
+                    'help'      => __('Off by default: a match is quarantined (flagged spam and hidden) so it can be '
+                                      . 'reviewed and reversed. Turn this on to reject the post before it is ever saved.'),
+                ));
+                osc_admin_field(array(
+                    'type'      => 'checkbox',
+                    'row_label' => __('Report auto-block'),
+                    'id'        => 'report_autoblock',
+                    'name'      => 'report_autoblock',
+                    'label'     => __('Automatically hide a listing once enough distinct visitors have reported it'),
+                    'checked'   => !empty($prefs['report_autoblock']),
+                ));
+                osc_admin_number(array(
+                    'id'     => 'report_threshold',
+                    'name'   => 'report_threshold',
+                    'label'  => __('Report threshold'),
+                    'value'  => $prefs['report_threshold'],
+                    'min'    => 1,
+                    'suffix' => __('reporters'),
+                    'help'   => __('Number of distinct reporters (one vote per person) that auto-hides a listing.'),
+                ));
+                osc_admin_field(array(
+                    'type'      => 'checkbox',
+                    'row_label' => __('Report CAPTCHA'),
+                    'id'        => 'enabled_recaptcha_reports',
+                    'name'      => 'enabled_recaptcha_reports',
+                    'label'     => __('Require a CAPTCHA to report a listing'),
+                    'checked'   => !empty($prefs['enabled_recaptcha_reports']),
+                    'help'      => __('Needs a CAPTCHA provider configured under Settings &raquo; reCAPTCHA/Turnstile; '
+                                      . 'otherwise no challenge is shown.'),
+                )); ?>
                 <?php osc_admin_form_actions(); ?>
             </fieldset>
         </form>
@@ -178,24 +168,20 @@ $scopeOptions = array(
             <input type="hidden" name="page" value="settings"/>
             <input type="hidden" name="action" value="keyword_block_import_post"/>
             <fieldset class="form-horizontal">
-                <div class="form-row">
-                    <div class="form-label"><?php _e('Keywords'); ?></div>
-                    <div class="form-controls">
-                        <textarea id="import_list" name="import_list" rows="4"
-                                  style="width:100%;max-width:640px;"
-                                  placeholder="viagra, *casino*, call girl"></textarea>
-                    </div>
-                </div>
-                <div class="form-row">
-                    <div class="form-label"><?php _e('Where to match'); ?></div>
-                    <div class="form-controls">
-                        <select class="form-select form-select-sm" name="import_scope">
-                            <?php foreach ($scopeOptions as $value => $label) { ?>
-                                <option value="<?php echo osc_esc_html($value); ?>"><?php echo osc_esc_html($label); ?></option>
-                            <?php } ?>
-                        </select>
-                    </div>
-                </div>
+                <?php
+                osc_admin_textarea(array(
+                    'id'          => 'import_list',
+                    'name'        => 'import_list',
+                    'label'       => __('Keywords'),
+                    'rows'        => 4,
+                    'width'       => 'key',
+                    'placeholder' => 'viagra, *casino*, call girl',
+                ));
+                osc_admin_select(array(
+                    'name'    => 'import_scope',
+                    'label'   => __('Where to match'),
+                    'options' => $scopeOptions,
+                )); ?>
                 <?php osc_admin_form_actions(array(
                     array('label' => __('Import'), 'type' => 'submit'),
                 )); ?>

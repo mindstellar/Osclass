@@ -358,317 +358,259 @@ osc_current_admin_theme_path('parts/header.php'); ?>
                 <input type="hidden" name="action" value="permalinks_post"/>
                 <fieldset>
                     <div class="form-horizontal">
-                        <div class="form-row">
-                            <div class="form-label"><?php _e('Enable friendly urls'); ?></div>
-                            <div class="form-controls">
-                                <div class="form-label-checkbox"><input type="checkbox" <?php echo(osc_rewrite_enabled()
-                                        ? 'checked="checked"' : ''); ?> name="rewrite_enabled" id="rewrite_enabled"
-                                                                        value="1"/>
-                                </div>
-                                <div class="help-box">
-                                    <?php _e('Turns links like index.php?page=item&id=42 into readable ones like '
-                                             . '/listing/blue-bicycle-42. Your web server needs URL rewriting enabled '
-                                             . 'for this to work.'); ?>
-                                </div>
-                            </div>
-                        </div>
+                        <?php osc_admin_field(array(
+                            'type'      => 'checkbox',
+                            'row_label' => __('Friendly URLs'),
+                            'id'        => 'rewrite_enabled',
+                            'name'      => 'rewrite_enabled',
+                            'label'     => __('Enable friendly urls'),
+                            'checked'   => osc_rewrite_enabled(),
+                            'help'      => __('Turns links like index.php?page=item&id=42 into readable ones like '
+                                              . '/listing/blue-bicycle-42. Your web server needs URL rewriting enabled '
+                                              . 'for this to work.'),
+                        )); ?>
                         <div id="custom_rules" <?php if (!osc_rewrite_enabled()) {
                             echo 'class="hide"';
                         } ?>>
                             <details class="rules-disclosure">
                                 <summary><?php _e('Advanced: customize URL structure'); ?></summary>
                                 <h3 class="render-title"><?php _e('Listings, pages &amp; categories'); ?></h3>
-                                <div class="form-row">
-                                    <div class="form-label"><?php _e('Listing URL:'); ?></div>
-                                    <div class="form-controls">
-                                        <input type="text" class="input-large" name="rewrite_item_url"
-                                               value="<?php echo osc_esc_html(osc_get_preference('rewrite_item_url')); ?>"/>
-                                        <div class="help-box">
-                                            <?php echo sprintf(
-                                                __('Accepted keywords: %s'),
-                                                '{ITEM_ID},{ITEM_TITLE},{ITEM_CITY},{CATEGORIES}'
-                                            ); ?>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="form-row">
-                                    <div class="form-label"><?php _e('Page URL:'); ?></div>
-                                    <div class="form-controls">
-                                        <input type="text" class="input-large" name="rewrite_page_url"
-                                               value="<?php echo osc_esc_html(osc_get_preference('rewrite_page_url')); ?>"/>
-                                        <div class="help-box">
-                                            <?php echo sprintf(
-                                                __('Accepted keywords: %s'),
-                                                '{PAGE_ID}, {PAGE_SLUG}'
-                                            ); ?>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="form-row">
-                                    <div class="form-label"><?php _e('Category URL:'); ?></div>
-                                    <div class="form-controls">
-                                        <input type="text" class="input-large" name="rewrite_cat_url"
-                                               value="<?php echo osc_esc_html(osc_get_preference('rewrite_cat_url')); ?>"/>
-                                        <div class="help-box">
-                                            <?php echo sprintf(
-                                                __('Accepted keywords: %s'),
-                                                '{CATEGORY_ID},{CATEGORY_NAME},{CATEGORIES}'
-                                            ); ?>
-                                        </div>
-                                    </div>
-                                </div>
+                                <?php osc_admin_text(array(
+                                    'name'  => 'rewrite_item_url',
+                                    'label' => __('Listing URL:'),
+                                    'value' => osc_get_preference('rewrite_item_url'),
+                                    'width' => 'key',
+                                    'help'  => sprintf(__('Accepted keywords: %s'), '{ITEM_ID},{ITEM_TITLE},{ITEM_CITY},{CATEGORIES}'),
+                                )); ?>
+                                <?php osc_admin_text(array(
+                                    'name'  => 'rewrite_page_url',
+                                    'label' => __('Page URL:'),
+                                    'value' => osc_get_preference('rewrite_page_url'),
+                                    'width' => 'key',
+                                    'help'  => sprintf(__('Accepted keywords: %s'), '{PAGE_ID}, {PAGE_SLUG}'),
+                                )); ?>
+                                <?php osc_admin_text(array(
+                                    'name'  => 'rewrite_cat_url',
+                                    'label' => __('Category URL:'),
+                                    'value' => osc_get_preference('rewrite_cat_url'),
+                                    'width' => 'key',
+                                    'help'  => sprintf(__('Accepted keywords: %s'), '{CATEGORY_ID},{CATEGORY_NAME},{CATEGORIES}'),
+                                )); ?>
                                 <h3 class="render-title separate-top"><?php _e('Search'); ?></h3>
-                                <div class="form-row">
-                                    <div class="form-label"><?php _e('Search prefix URL:'); ?></div>
-                                    <div class="form-controls">
-                                        <input type="text" class="input-large" name="seo_url_search_prefix"
-                                               value="<?php echo osc_esc_html(osc_get_preference('seo_url_search_prefix')); ?>"/>
-                                        <div class="help-box">
-                                            <?php _e('It always appear before the category, region or city url.'); ?>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="form-row">
-                                    <div class="form-label"><?php _e('Search URL:'); ?></div>
-                                    <div class="form-controls">
-                                        <input type="text" class="input-large" name="rewrite_search_url"
-                                               value="<?php echo osc_esc_html(osc_get_preference('rewrite_search_url')); ?>"/>
-                                    </div>
-                                </div>
-                                <div class="form-row">
-                                    <div class="form-label"><?php _e('Search keyword country'); ?></div>
-                                    <div class="form-controls">
-                                        <input type="text" class="input-large" name="rewrite_search_country"
-                                               value="<?php echo osc_esc_html(osc_get_preference('rewrite_search_country')); ?>"/>
-                                    </div>
-                                </div>
-                                <div class="form-row">
-                                    <div class="form-label"><?php _e('Search keyword region'); ?></div>
-                                    <div class="form-controls">
-                                        <input type="text" class="input-large" name="rewrite_search_region"
-                                               value="<?php echo osc_esc_html(osc_get_preference('rewrite_search_region')); ?>"/>
-                                    </div>
-                                </div>
-                                <div class="form-row">
-                                    <div class="form-label"><?php _e('Search keyword city'); ?></div>
-                                    <div class="form-controls">
-                                        <input type="text" class="input-large" name="rewrite_search_city"
-                                               value="<?php echo osc_esc_html(osc_get_preference('rewrite_search_city')); ?>"/>
-                                    </div>
-                                </div>
-                                <div class="form-row">
-                                    <div class="form-label"><?php _e('Search keyword city area'); ?></div>
-                                    <div class="form-controls">
-                                        <input type="text" class="input-large" name="rewrite_search_city_area"
-                                               value="<?php echo osc_esc_html(osc_get_preference('rewrite_search_city_area')); ?>"/>
-                                    </div>
-                                </div>
-                                <div class="form-row">
-                                    <div class="form-label"><?php _e('Search keyword category'); ?></div>
-                                    <div class="form-controls">
-                                        <input type="text" class="input-large" name="rewrite_search_category"
-                                               value="<?php echo osc_esc_html(osc_get_preference('rewrite_search_category')); ?>"/>
-                                    </div>
-                                </div>
-                                <div class="form-row">
-                                    <div class="form-label"><?php _e('Search keyword user'); ?></div>
-                                    <div class="form-controls">
-                                        <input type="text" class="input-large" name="rewrite_search_user"
-                                               value="<?php echo osc_esc_html(osc_get_preference('rewrite_search_user')); ?>"/>
-                                    </div>
-                                </div>
-                                <div class="form-row">
-                                    <div class="form-label"><?php _e('Search keyword pattern'); ?></div>
-                                    <div class="form-controls">
-                                        <input type="text" class="input-large" name="rewrite_search_pattern"
-                                               value="<?php echo osc_esc_html(osc_get_preference('rewrite_search_pattern')); ?>"/>
-                                    </div>
-                                </div>
+                                <?php osc_admin_text(array(
+                                    'name'  => 'seo_url_search_prefix',
+                                    'label' => __('Search prefix URL:'),
+                                    'value' => osc_get_preference('seo_url_search_prefix'),
+                                    'width' => 'key',
+                                    'help'  => __('It always appear before the category, region or city url.'),
+                                )); ?>
+                                <?php osc_admin_text(array(
+                                    'name'  => 'rewrite_search_url',
+                                    'label' => __('Search URL:'),
+                                    'value' => osc_get_preference('rewrite_search_url'),
+                                    'width' => 'key',
+                                )); ?>
+                                <?php osc_admin_text(array(
+                                    'name'  => 'rewrite_search_country',
+                                    'label' => __('Search keyword country'),
+                                    'value' => osc_get_preference('rewrite_search_country'),
+                                    'width' => 'key',
+                                )); ?>
+                                <?php osc_admin_text(array(
+                                    'name'  => 'rewrite_search_region',
+                                    'label' => __('Search keyword region'),
+                                    'value' => osc_get_preference('rewrite_search_region'),
+                                    'width' => 'key',
+                                )); ?>
+                                <?php osc_admin_text(array(
+                                    'name'  => 'rewrite_search_city',
+                                    'label' => __('Search keyword city'),
+                                    'value' => osc_get_preference('rewrite_search_city'),
+                                    'width' => 'key',
+                                )); ?>
+                                <?php osc_admin_text(array(
+                                    'name'  => 'rewrite_search_city_area',
+                                    'label' => __('Search keyword city area'),
+                                    'value' => osc_get_preference('rewrite_search_city_area'),
+                                    'width' => 'key',
+                                )); ?>
+                                <?php osc_admin_text(array(
+                                    'name'  => 'rewrite_search_category',
+                                    'label' => __('Search keyword category'),
+                                    'value' => osc_get_preference('rewrite_search_category'),
+                                    'width' => 'key',
+                                )); ?>
+                                <?php osc_admin_text(array(
+                                    'name'  => 'rewrite_search_user',
+                                    'label' => __('Search keyword user'),
+                                    'value' => osc_get_preference('rewrite_search_user'),
+                                    'width' => 'key',
+                                )); ?>
+                                <?php osc_admin_text(array(
+                                    'name'  => 'rewrite_search_pattern',
+                                    'label' => __('Search keyword pattern'),
+                                    'value' => osc_get_preference('rewrite_search_pattern'),
+                                    'width' => 'key',
+                                )); ?>
                                 <h3 class="render-title separate-top"><?php _e('Contact, feed &amp; language'); ?></h3>
-                                <div class="form-row">
-                                    <div class="form-label"><?php _e('Contact'); ?></div>
-                                    <div class="form-controls">
-                                        <input type="text" class="input-large" name="rewrite_contact"
-                                               value="<?php echo osc_esc_html(osc_get_preference('rewrite_contact')); ?>"/>
-                                    </div>
-                                </div>
-                                <div class="form-row">
-                                    <div class="form-label"><?php _e('Feed'); ?></div>
-                                    <div class="form-controls">
-                                        <input type="text" class="input-large" name="rewrite_feed"
-                                               value="<?php echo osc_esc_html(osc_get_preference('rewrite_feed')); ?>"/>
-                                    </div>
-                                </div>
-                                <div class="form-row">
-                                    <div class="form-label"><?php _e('Language'); ?></div>
-                                    <div class="form-controls">
-                                        <input type="text" class="input-large" name="rewrite_language"
-                                               value="<?php echo osc_esc_html(osc_get_preference('rewrite_language')); ?>"/>
-                                    </div>
-                                </div>
+                                <?php osc_admin_text(array(
+                                    'name'  => 'rewrite_contact',
+                                    'label' => __('Contact'),
+                                    'value' => osc_get_preference('rewrite_contact'),
+                                    'width' => 'key',
+                                )); ?>
+                                <?php osc_admin_text(array(
+                                    'name'  => 'rewrite_feed',
+                                    'label' => __('Feed'),
+                                    'value' => osc_get_preference('rewrite_feed'),
+                                    'width' => 'key',
+                                )); ?>
+                                <?php osc_admin_text(array(
+                                    'name'  => 'rewrite_language',
+                                    'label' => __('Language'),
+                                    'value' => osc_get_preference('rewrite_language'),
+                                    'width' => 'key',
+                                )); ?>
                                 <h3 class="render-title separate-top"><?php _e('Listing actions'); ?></h3>
-                                <div class="form-row">
-                                    <div class="form-label"><?php _e('Listing mark'); ?></div>
-                                    <div class="form-controls">
-                                        <input type="text" class="input-large" name="rewrite_item_mark"
-                                               value="<?php echo osc_esc_html(osc_get_preference('rewrite_item_mark')); ?>"/>
-                                    </div>
-                                </div>
-                                <div class="form-row">
-                                    <div class="form-label"><?php _e('Listing send friend'); ?></div>
-                                    <div class="form-controls">
-                                        <input type="text" class="input-large" name="rewrite_item_send_friend"
-                                               value="<?php echo osc_esc_html(osc_get_preference('rewrite_item_send_friend')); ?>"/>
-                                    </div>
-                                </div>
-                                <div class="form-row">
-                                    <div class="form-label"><?php _e('Listing contact'); ?></div>
-                                    <div class="form-controls">
-                                        <input type="text" class="input-large" name="rewrite_item_contact"
-                                               value="<?php echo osc_esc_html(osc_get_preference('rewrite_item_contact')); ?>"/>
-                                    </div>
-                                </div>
-                                <div class="form-row">
-                                    <div class="form-label"><?php _e('Listing new'); ?></div>
-                                    <div class="form-controls">
-                                        <input type="text" class="input-large" name="rewrite_item_new"
-                                               value="<?php echo osc_esc_html(osc_get_preference('rewrite_item_new')); ?>"/>
-                                    </div>
-                                </div>
-                                <div class="form-row">
-                                    <div class="form-label"><?php _e('Listing activate'); ?></div>
-                                    <div class="form-controls">
-                                        <input type="text" class="input-large" name="rewrite_item_activate"
-                                               value="<?php echo osc_esc_html(osc_get_preference('rewrite_item_activate')); ?>"/>
-                                    </div>
-                                </div>
-                                <div class="form-row">
-                                    <div class="form-label"><?php _e('Listing edit'); ?></div>
-                                    <div class="form-controls">
-                                        <input type="text" class="input-large" name="rewrite_item_edit"
-                                               value="<?php echo osc_esc_html(osc_get_preference('rewrite_item_edit')); ?>"/>
-                                    </div>
-                                </div>
-                                <div class="form-row">
-                                    <div class="form-label"><?php _e('Listing delete'); ?></div>
-                                    <div class="form-controls">
-                                        <input type="text" class="input-large" name="rewrite_item_delete"
-                                               value="<?php echo osc_esc_html(osc_get_preference('rewrite_item_delete')); ?>"/>
-                                    </div>
-                                </div>
-                                <div class="form-row">
-                                    <div class="form-label"><?php _e('Listing resource delete'); ?></div>
-                                    <div class="form-controls">
-                                        <input type="text" class="input-large" name="rewrite_item_resource_delete"
-                                               value="<?php echo osc_esc_html(osc_get_preference('rewrite_item_resource_delete')); ?>"/>
-                                    </div>
-                                </div>
+                                <?php osc_admin_text(array(
+                                    'name'  => 'rewrite_item_mark',
+                                    'label' => __('Listing mark'),
+                                    'value' => osc_get_preference('rewrite_item_mark'),
+                                    'width' => 'key',
+                                )); ?>
+                                <?php osc_admin_text(array(
+                                    'name'  => 'rewrite_item_send_friend',
+                                    'label' => __('Listing send friend'),
+                                    'value' => osc_get_preference('rewrite_item_send_friend'),
+                                    'width' => 'key',
+                                )); ?>
+                                <?php osc_admin_text(array(
+                                    'name'  => 'rewrite_item_contact',
+                                    'label' => __('Listing contact'),
+                                    'value' => osc_get_preference('rewrite_item_contact'),
+                                    'width' => 'key',
+                                )); ?>
+                                <?php osc_admin_text(array(
+                                    'name'  => 'rewrite_item_new',
+                                    'label' => __('Listing new'),
+                                    'value' => osc_get_preference('rewrite_item_new'),
+                                    'width' => 'key',
+                                )); ?>
+                                <?php osc_admin_text(array(
+                                    'name'  => 'rewrite_item_activate',
+                                    'label' => __('Listing activate'),
+                                    'value' => osc_get_preference('rewrite_item_activate'),
+                                    'width' => 'key',
+                                )); ?>
+                                <?php osc_admin_text(array(
+                                    'name'  => 'rewrite_item_edit',
+                                    'label' => __('Listing edit'),
+                                    'value' => osc_get_preference('rewrite_item_edit'),
+                                    'width' => 'key',
+                                )); ?>
+                                <?php osc_admin_text(array(
+                                    'name'  => 'rewrite_item_delete',
+                                    'label' => __('Listing delete'),
+                                    'value' => osc_get_preference('rewrite_item_delete'),
+                                    'width' => 'key',
+                                )); ?>
+                                <?php osc_admin_text(array(
+                                    'name'  => 'rewrite_item_resource_delete',
+                                    'label' => __('Listing resource delete'),
+                                    'value' => osc_get_preference('rewrite_item_resource_delete'),
+                                    'width' => 'key',
+                                )); ?>
                                 <h3 class="render-title separate-top"><?php _e('User account'); ?></h3>
-                                <div class="form-row">
-                                    <div class="form-label"><?php _e('User login'); ?></div>
-                                    <div class="form-controls">
-                                        <input type="text" class="input-large" name="rewrite_user_login"
-                                               value="<?php echo osc_esc_html(osc_get_preference('rewrite_user_login')); ?>"/>
-                                    </div>
-                                </div>
-                                <div class="form-row">
-                                    <div class="form-label"><?php _e('User dashboard'); ?></div>
-                                    <div class="form-controls">
-                                        <input type="text" class="input-large" name="rewrite_user_dashboard"
-                                               value="<?php echo osc_esc_html(osc_get_preference('rewrite_user_dashboard')); ?>"/>
-                                    </div>
-                                </div>
-                                <div class="form-row">
-                                    <div class="form-label"><?php _e('User logout'); ?></div>
-                                    <div class="form-controls">
-                                        <input type="text" class="input-large" name="rewrite_user_logout"
-                                               value="<?php echo osc_esc_html(osc_get_preference('rewrite_user_logout')); ?>"/>
-                                    </div>
-                                </div>
-                                <div class="form-row">
-                                    <div class="form-label"><?php _e('User register'); ?></div>
-                                    <div class="form-controls">
-                                        <input type="text" class="input-large" name="rewrite_user_register"
-                                               value="<?php echo osc_esc_html(osc_get_preference('rewrite_user_register')); ?>"/>
-                                    </div>
-                                </div>
-                                <div class="form-row">
-                                    <div class="form-label"><?php _e('User activate'); ?></div>
-                                    <div class="form-controls">
-                                        <input type="text" class="input-large" name="rewrite_user_activate"
-                                               value="<?php echo osc_esc_html(osc_get_preference('rewrite_user_activate')); ?>"/>
-                                    </div>
-                                </div>
-                                <div class="form-row">
-                                    <div class="form-label"><?php _e('User activate alert'); ?></div>
-                                    <div class="form-controls">
-                                        <input type="text" class="input-large" name="rewrite_user_activate_alert"
-                                               value="<?php echo osc_esc_html(osc_get_preference('rewrite_user_activate_alert')); ?>"/>
-                                    </div>
-                                </div>
-                                <div class="form-row">
-                                    <div class="form-label"><?php _e('User profile'); ?></div>
-                                    <div class="form-controls">
-                                        <input type="text" class="input-large" name="rewrite_user_profile"
-                                               value="<?php echo osc_esc_html(osc_get_preference('rewrite_user_profile')); ?>"/>
-                                    </div>
-                                </div>
-                                <div class="form-row">
-                                    <div class="form-label"><?php _e('User listings'); ?></div>
-                                    <div class="form-controls">
-                                        <input type="text" class="input-large" name="rewrite_user_items"
-                                               value="<?php echo osc_esc_html(osc_get_preference('rewrite_user_items')); ?>"/>
-                                    </div>
-                                </div>
-                                <div class="form-row">
-                                    <div class="form-label"><?php _e('User alerts'); ?></div>
-                                    <div class="form-controls">
-                                        <input type="text" class="input-large" name="rewrite_user_alerts"
-                                               value="<?php echo osc_esc_html(osc_get_preference('rewrite_user_alerts')); ?>"/>
-                                    </div>
-                                </div>
-                                <div class="form-row">
-                                    <div class="form-label"><?php _e('User recover'); ?></div>
-                                    <div class="form-controls">
-                                        <input type="text" class="input-large" name="rewrite_user_recover"
-                                               value="<?php echo osc_esc_html(osc_get_preference('rewrite_user_recover')); ?>"/>
-                                    </div>
-                                </div>
-                                <div class="form-row">
-                                    <div class="form-label"><?php _e('User forgot'); ?></div>
-                                    <div class="form-controls">
-                                        <input type="text" class="input-large" name="rewrite_user_forgot"
-                                               value="<?php echo osc_esc_html(osc_get_preference('rewrite_user_forgot')); ?>"/>
-                                    </div>
-                                </div>
-                                <div class="form-row">
-                                    <div class="form-label"><?php _e('User change password'); ?></div>
-                                    <div class="form-controls">
-                                        <input type="text" class="input-large" name="rewrite_user_change_password"
-                                               value="<?php echo osc_esc_html(osc_get_preference('rewrite_user_change_password')); ?>"/>
-                                    </div>
-                                </div>
-                                <div class="form-row">
-                                    <div class="form-label"><?php _e('User change email'); ?></div>
-                                    <div class="form-controls">
-                                        <input type="text" class="input-large" name="rewrite_user_change_email"
-                                               value="<?php echo osc_esc_html(osc_get_preference('rewrite_user_change_email')); ?>"/>
-                                    </div>
-                                </div>
-                                <div class="form-row">
-                                    <div class="form-label"><?php _e('User change email confirm'); ?></div>
-                                    <div class="form-controls">
-                                        <input type="text" class="input-large" name="rewrite_user_change_email_confirm"
-                                               value="<?php echo osc_esc_html(osc_get_preference('rewrite_user_change_email_confirm')); ?>"/>
-                                    </div>
-                                </div>
-                                <div class="form-row">
-                                    <div class="form-label"><?php _e('User change username'); ?></div>
-                                    <div class="form-controls">
-                                        <input type="text" class="input-large" name="rewrite_user_change_username"
-                                               value="<?php echo osc_esc_html(osc_get_preference('rewrite_user_change_username')); ?>"/>
-                                    </div>
-                                </div>
+                                <?php osc_admin_text(array(
+                                    'name'  => 'rewrite_user_login',
+                                    'label' => __('User login'),
+                                    'value' => osc_get_preference('rewrite_user_login'),
+                                    'width' => 'key',
+                                )); ?>
+                                <?php osc_admin_text(array(
+                                    'name'  => 'rewrite_user_dashboard',
+                                    'label' => __('User dashboard'),
+                                    'value' => osc_get_preference('rewrite_user_dashboard'),
+                                    'width' => 'key',
+                                )); ?>
+                                <?php osc_admin_text(array(
+                                    'name'  => 'rewrite_user_logout',
+                                    'label' => __('User logout'),
+                                    'value' => osc_get_preference('rewrite_user_logout'),
+                                    'width' => 'key',
+                                )); ?>
+                                <?php osc_admin_text(array(
+                                    'name'  => 'rewrite_user_register',
+                                    'label' => __('User register'),
+                                    'value' => osc_get_preference('rewrite_user_register'),
+                                    'width' => 'key',
+                                )); ?>
+                                <?php osc_admin_text(array(
+                                    'name'  => 'rewrite_user_activate',
+                                    'label' => __('User activate'),
+                                    'value' => osc_get_preference('rewrite_user_activate'),
+                                    'width' => 'key',
+                                )); ?>
+                                <?php osc_admin_text(array(
+                                    'name'  => 'rewrite_user_activate_alert',
+                                    'label' => __('User activate alert'),
+                                    'value' => osc_get_preference('rewrite_user_activate_alert'),
+                                    'width' => 'key',
+                                )); ?>
+                                <?php osc_admin_text(array(
+                                    'name'  => 'rewrite_user_profile',
+                                    'label' => __('User profile'),
+                                    'value' => osc_get_preference('rewrite_user_profile'),
+                                    'width' => 'key',
+                                )); ?>
+                                <?php osc_admin_text(array(
+                                    'name'  => 'rewrite_user_items',
+                                    'label' => __('User listings'),
+                                    'value' => osc_get_preference('rewrite_user_items'),
+                                    'width' => 'key',
+                                )); ?>
+                                <?php osc_admin_text(array(
+                                    'name'  => 'rewrite_user_alerts',
+                                    'label' => __('User alerts'),
+                                    'value' => osc_get_preference('rewrite_user_alerts'),
+                                    'width' => 'key',
+                                )); ?>
+                                <?php osc_admin_text(array(
+                                    'name'  => 'rewrite_user_recover',
+                                    'label' => __('User recover'),
+                                    'value' => osc_get_preference('rewrite_user_recover'),
+                                    'width' => 'key',
+                                )); ?>
+                                <?php osc_admin_text(array(
+                                    'name'  => 'rewrite_user_forgot',
+                                    'label' => __('User forgot'),
+                                    'value' => osc_get_preference('rewrite_user_forgot'),
+                                    'width' => 'key',
+                                )); ?>
+                                <?php osc_admin_text(array(
+                                    'name'  => 'rewrite_user_change_password',
+                                    'label' => __('User change password'),
+                                    'value' => osc_get_preference('rewrite_user_change_password'),
+                                    'width' => 'key',
+                                )); ?>
+                                <?php osc_admin_text(array(
+                                    'name'  => 'rewrite_user_change_email',
+                                    'label' => __('User change email'),
+                                    'value' => osc_get_preference('rewrite_user_change_email'),
+                                    'width' => 'key',
+                                )); ?>
+                                <?php osc_admin_text(array(
+                                    'name'  => 'rewrite_user_change_email_confirm',
+                                    'label' => __('User change email confirm'),
+                                    'value' => osc_get_preference('rewrite_user_change_email_confirm'),
+                                    'width' => 'key',
+                                )); ?>
+                                <?php osc_admin_text(array(
+                                    'name'  => 'rewrite_user_change_username',
+                                    'label' => __('User change username'),
+                                    'value' => osc_get_preference('rewrite_user_change_username'),
+                                    'width' => 'key',
+                                )); ?>
                             </details>
                         </div>
                         <?php if (osc_rewrite_enabled()) {
