@@ -109,6 +109,7 @@ osc_current_admin_theme_path('parts/header.php'); ?>
         }
         osc_admin_form_open(array(
             'name'   => 'currency_form',
+            'page'   => 'settings',
             'action' => 'currencies',
             'fields' => $currencyFields,
         )); ?>

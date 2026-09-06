@@ -55,6 +55,7 @@ osc_current_admin_theme_path('parts/header.php'); ?>
         </div>
         <?php osc_admin_form_open(array(
             'id'         => 'datatablesForm',
+            'page'   => 'settings',
             'action'     => 'currencies',
             'fields'     => array('type' => 'delete'),
             'horizontal' => false,

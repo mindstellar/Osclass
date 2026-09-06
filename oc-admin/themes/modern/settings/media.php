@@ -124,6 +124,7 @@ osc_current_admin_theme_path('parts/header.php'); ?>
         <ul id="error_list"></ul>
         <?php osc_admin_form_open(array(
             'name'   => 'media_form',
+            'page'   => 'settings',
             'action' => 'media_post',
             'upload' => true,
         )); ?>

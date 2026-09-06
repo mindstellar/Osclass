@@ -177,6 +177,19 @@ check(
     ))) !== null
 );
 
+harness_section('two plugins claiming one id');
+// The first keeps it: replacing the page would take the other plugin's settings off the
+// menu and leave its saved values under a section nothing reads, both without a sound.
+// Throwing is not an option either -- plugins are included unguarded from oc-load.php,
+// so an exception here would white-screen the front end over a name collision.
+$before = osc_settings_page('myplugin')['title'];
+register_error('myplugin', array('title' => 'Impostor', 'fields' => array(array('name' => 'z'))));
+pin('the first registration keeps the page', $before, osc_settings_page('myplugin')['title']);
+check('the field it declared is not there', !array_key_exists('z', SettingsPageRegistry::instance()->fields('myplugin')));
+// Silent would be as bad as replacing; the collision is recorded so it can be found.
+pin('and the collision is counted', 1, osc_settings_page_conflicts()['myplugin'] ?? 0);
+check('a healthy id is not listed', !array_key_exists('cust', osc_settings_page_conflicts()));
+
 harness_section('defaults');
 $page = osc_settings_page('myplugin');
 pin('the section defaults to the page id', 'myplugin', $page['section']);

@@ -72,6 +72,20 @@ if (!function_exists('osc_settings_page')) {
     }
 }
 
+if (!function_exists('osc_settings_page_conflicts')) {
+    /**
+     * Page ids more than one plugin tried to register, and how many times each. Empty on a
+     * healthy install; an entry means a plugin's settings page is not the one being shown,
+     * and its saved values are under a section nothing reads.
+     *
+     * @return array
+     */
+    function osc_settings_page_conflicts()
+    {
+        return SettingsPageRegistry::instance()->conflicts();
+    }
+}
+
 if (!function_exists('osc_settings_page_url')) {
     /**
      * The admin URL of a declared settings page.

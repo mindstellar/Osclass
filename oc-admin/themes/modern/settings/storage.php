@@ -213,6 +213,7 @@ osc_current_admin_theme_path('parts/header.php'); ?>
                     <?php
                     osc_admin_form_open(array(
                         'name'       => 'storage_test_form',
+                        'page'   => 'settings',
                         'action'     => 'storage_test_post',
                         'horizontal' => false,
                     ));
@@ -236,6 +237,7 @@ osc_current_admin_theme_path('parts/header.php'); ?>
                     <?php
                     osc_admin_form_open(array(
                         'name'       => 'storage_queue_form',
+                        'page'   => 'settings',
                         'action'     => 'storage_queue_run',
                         'horizontal' => false,
                     ));
@@ -269,6 +271,7 @@ osc_current_admin_theme_path('parts/header.php'); ?>
                     <?php
                     osc_admin_form_open(array(
                         'name'       => 'storage_offload_all_form',
+                        'page'   => 'settings',
                         'action'     => 'storage_migrate_post',
                         'fields'     => array('op' => 'offload_all'),
                         'horizontal' => false,
@@ -287,6 +290,7 @@ osc_current_admin_theme_path('parts/header.php'); ?>
                     <?php
                     osc_admin_form_open(array(
                         'name'       => 'storage_restore_all_form',
+                        'page'   => 'settings',
                         'action'     => 'storage_migrate_post',
                         'fields'     => array('op' => 'restore_all'),
                         'horizontal' => false,
@@ -306,6 +310,7 @@ osc_current_admin_theme_path('parts/header.php'); ?>
                         <?php
                         osc_admin_form_open(array(
                             'name'       => 'storage_adopt_better_s3_form',
+                            'page'   => 'settings',
                             'action'     => 'storage_migrate_post',
                             'fields'     => array('op' => 'adopt_better_s3'),
                             'horizontal' => false,

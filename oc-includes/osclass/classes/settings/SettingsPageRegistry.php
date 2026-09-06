@@ -67,6 +67,9 @@ final class SettingsPageRegistry
     /** @var array<string,array> normalised page specs, keyed by id */
     private array $pages = array();
 
+    /** @var array<string,int> ids a second registration tried to claim */
+    private array $conflicts = array();
+
     private function __construct()
     {
     }
@@ -114,6 +117,17 @@ final class SettingsPageRegistry
     {
         if (!self::isValidId($id)) {
             throw new InvalidArgumentException('SettingsPageRegistry: invalid page id "' . $id . '"');
+        }
+
+        // Two plugins claiming one id: the first keeps it. Replacing it would take the other
+        // plugin's page off the menu *and* point its saved values at a section it no longer
+        // reads, both silently. Throwing is not the answer either -- plugins are included
+        // unguarded from oc-load.php, so an exception here white-screens the whole site,
+        // front end included, over a name collision. See conflicts().
+        if (isset($this->pages[$id])) {
+            $this->conflicts[$id] = ($this->conflicts[$id] ?? 0) + 1;
+
+            return;
         }
         if (empty($spec['title']) || !is_string($spec['title'])) {
             throw new InvalidArgumentException('SettingsPageRegistry: page "' . $id . '" needs a string title');
@@ -192,6 +206,17 @@ final class SettingsPageRegistry
         }
 
         return $fields;
+    }
+
+    /**
+     * Ids more than one registration tried to claim, and how many times. Empty on a healthy
+     * install; non-empty means a plugin's settings page is not the one on screen.
+     *
+     * @return array<string,int>
+     */
+    public function conflicts(): array
+    {
+        return $this->conflicts;
     }
 
     /**

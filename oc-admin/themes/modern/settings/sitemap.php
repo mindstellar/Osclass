@@ -144,6 +144,7 @@ osc_current_admin_theme_path('parts/header.php'); ?>
                             <?php
                             osc_admin_form_open(array(
                                 'name'       => 'sitemap_url_remove_form',
+                                'page'   => 'settings',
                                 'action'     => 'sitemap_custom_url_remove',
                                 'fields'     => array('sitemap_url_index' => $index),
                                 'horizontal' => false,
@@ -201,6 +202,7 @@ osc_current_admin_theme_path('parts/header.php'); ?>
         <?php
         osc_admin_form_open(array(
             'name'       => 'sitemap_regenerate_form',
+            'page'   => 'settings',
             'action'     => 'sitemap_regenerate',
             'horizontal' => false,
         ));

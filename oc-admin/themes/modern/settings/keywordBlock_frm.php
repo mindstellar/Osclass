@@ -62,6 +62,7 @@ $aux = customFrmText();
     <?php
     osc_admin_form_open(array(
         'name'   => 'keyword_block_form',
+        'page'   => 'settings',
         'action' => $aux['action_frm'],
     ));
     KeywordBlockForm::primary_input_hidden($keyword); ?>
