@@ -79,6 +79,13 @@ theme ships none, using a documented class vocabulary a theme restyles in CSS al
   sanitisation, validation, persistence into the plugin's own preference section, the flash
   message and the Save row all come from the declaration; the plugin writes no markup and no
   save handler. `osc_settings_value()` reads a field back in the shape its type implies.
+- `osc_admin_form_open()`, `osc_admin_form_close()` and `osc_admin_form_section()` complete the
+  admin form vocabulary: a screen declares the route its form posts to and the sections it is
+  divided into, instead of writing the `<form>`, its hidden `page`/`action` fields, the
+  `<fieldset><div class="form-horizontal">` wrapper and its own `<h3>` for every section. Core
+  also carries fallback copies of `osc_admin_page_head()`, `osc_admin_action_button()` and
+  `osc_admin_form_actions()`, so a plugin's declared settings page renders on an admin theme
+  that ships none of them.
 - The admin's other form screens — Cleanup, Activity log, Backup, Import, billing packages
   and wallet, user settings, the theme/language/plugin upload rows, the widget editor and the
   custom-field builder — are drawn from the same field primitives as Settings. Hints that used

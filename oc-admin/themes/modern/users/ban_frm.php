@@ -72,7 +72,7 @@ $aux = customFrmText();
     <form name="register" action="<?php echo osc_admin_base_url(true); ?>" method="post">
         <input type="hidden" name="page" value="users"/>
         <input type="hidden" name="action" value="<?php echo $aux['action_frm']; ?>"/>
-        <h3 class="render-title"><?php _e('Contact info'); ?></h3>
+        <?php osc_admin_form_section(__('Contact info')); ?>
         <?php BanRuleForm::primary_input_hidden($rule); ?>
         <fieldset>
             <div class="form-horizontal">

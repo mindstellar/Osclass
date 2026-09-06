@@ -52,11 +52,12 @@ osc_current_admin_theme_path('parts/header.php'); ?>
     </p>
 
     <div id="sitemap-general-settings">
-        <h3 class="render-title"><?php _e('Sitemap settings'); ?></h3>
-        <form name="settings_form" action="<?php echo osc_admin_base_url(true); ?>" method="post">
-            <input type="hidden" name="page" value="settings"/>
-            <input type="hidden" name="action" value="sitemap_settings_post"/>
-            <fieldset class="form-horizontal">
+        <?php osc_admin_form_section(__('Sitemap settings')); ?>
+        <?php osc_admin_form_open(array(
+            'name'   => 'settings_form',
+            'page'   => 'settings',
+            'action' => 'sitemap_settings_post',
+        )); ?>
                 <?php
                 osc_admin_number(array(
                     'id'     => 'sitemap_number',
@@ -79,20 +80,19 @@ osc_current_admin_theme_path('parts/header.php'); ?>
                         'checked' => !empty($prefs[$key]),
                     ));
                 } ?>
-                <?php osc_admin_form_actions(array(
+                <?php osc_admin_form_close(array(
                     array('label' => __('Save changes'), 'type' => 'submit', 'attrs' => array('id' => 'submit_sitemap_settings')),
                 )); ?>
-            </fieldset>
-        </form>
     </div>
 
     <div id="sitemap-custom-urls" class="separate-top">
-        <h3 class="render-title"><?php _e('Custom sitemap URLs'); ?></h3>
+        <?php osc_admin_form_section(__('Custom sitemap URLs')); ?>
         <p><?php _e('Add URLs the sitemap would not otherwise discover on its own, such as pages served by a plugin.'); ?></p>
-        <form name="sitemap_url_form" action="<?php echo osc_admin_base_url(true); ?>" method="post">
-            <input type="hidden" name="page" value="settings"/>
-            <input type="hidden" name="action" value="sitemap_custom_url_add"/>
-            <fieldset class="form-horizontal">
+        <?php osc_admin_form_open(array(
+            'name'   => 'sitemap_url_form',
+            'page'   => 'settings',
+            'action' => 'sitemap_custom_url_add',
+        )); ?>
                 <?php
                 osc_admin_field(array(
                     'type'        => 'url',
@@ -114,11 +114,9 @@ osc_current_admin_theme_path('parts/header.php'); ?>
                     'attrs'       => array('inputmode' => 'numeric'),
                     'help'        => __('Optional. Leave blank to use today\'s date.'),
                 )); ?>
-                <?php osc_admin_form_actions(array(
+                <?php osc_admin_form_close(array(
                     array('label' => __('Add URL'), 'type' => 'submit'),
                 )); ?>
-            </fieldset>
-        </form>
 
         <?php if (!empty($custom_urls)) { ?>
             <table class="table" cellpadding="0" cellspacing="0">
@@ -158,16 +156,17 @@ osc_current_admin_theme_path('parts/header.php'); ?>
     </div>
 
     <div id="sitemap-robots" class="separate-top">
-        <h3 class="render-title"><?php _e('robots.txt'); ?></h3>
+        <?php osc_admin_form_section(__('robots.txt')); ?>
         <?php if (!$robots_writable) { ?>
             <div class="flashmessage flashmessage-error">
                 <?php _e('robots.txt is not writable by the web server. Fix the file or folder permissions before saving changes here.'); ?>
             </div>
         <?php } ?>
-        <form name="sitemap_robots_form" action="<?php echo osc_admin_base_url(true); ?>" method="post">
-            <input type="hidden" name="page" value="settings"/>
-            <input type="hidden" name="action" value="sitemap_robots_post"/>
-            <fieldset class="form-horizontal">
+        <?php osc_admin_form_open(array(
+            'name'   => 'sitemap_robots_form',
+            'page'   => 'settings',
+            'action' => 'sitemap_robots_post',
+        )); ?>
                 <?php osc_admin_textarea(array(
                     'id'        => 'sitemap_robots',
                     'name'      => 'sitemap_robots',
@@ -179,19 +178,17 @@ osc_current_admin_theme_path('parts/header.php'); ?>
                     'help_html' => '<span class="text-danger">'
                         . osc_esc_html(__('Make a backup before changing your robots.txt file.')) . '</span>',
                 )); ?>
-                <?php osc_admin_form_actions(array(
+                <?php osc_admin_form_close(array(
                     array(
                         'label' => __('Save robots.txt'),
                         'type'  => 'submit',
                         'attrs' => $robots_writable ? array() : array('disabled' => 'disabled'),
                     ),
                 )); ?>
-            </fieldset>
-        </form>
     </div>
 
     <div id="sitemap-regenerate" class="separate-top">
-        <h3 class="render-title"><?php _e('Regenerate'); ?></h3>
+        <?php osc_admin_form_section(__('Regenerate')); ?>
         <p><?php _e('The sitemap is cached for a few hours after it is first requested. Use this if you need '
                             . 'search engines to see fresh content immediately.'); ?></p>
         <form name="sitemap_regenerate_form" action="<?php echo osc_admin_base_url(true); ?>" method="post">

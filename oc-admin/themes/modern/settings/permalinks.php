@@ -353,11 +353,11 @@ osc_current_admin_theme_path('parts/header.php'); ?>
                      . 'However, Shopclass offers you friendly urls. This can improve the aesthetics, usability, '
                      . 'and forward-compatibility of your links'); ?></p>
             <ul id="error_list"></ul>
-            <form name="settings_form" action="<?php echo osc_admin_base_url(true); ?>" method="post">
-                <input type="hidden" name="page" value="settings"/>
-                <input type="hidden" name="action" value="permalinks_post"/>
-                <fieldset>
-                    <div class="form-horizontal">
+            <?php osc_admin_form_open(array(
+                'name'   => 'settings_form',
+                'page'   => 'settings',
+                'action' => 'permalinks_post',
+            )); ?>
                         <?php osc_admin_field(array(
                             'type'      => 'checkbox',
                             'row_label' => __('Friendly URLs'),
@@ -374,7 +374,7 @@ osc_current_admin_theme_path('parts/header.php'); ?>
                         } ?>>
                             <details class="rules-disclosure">
                                 <summary><?php _e('Advanced: customize URL structure'); ?></summary>
-                                <h3 class="render-title"><?php _e('Listings, pages &amp; categories'); ?></h3>
+                                <?php osc_admin_form_section(__('Listings, pages &amp; categories')); ?>
                                 <?php osc_admin_text(array(
                                     'name'  => 'rewrite_item_url',
                                     'label' => __('Listing URL:'),
@@ -396,7 +396,7 @@ osc_current_admin_theme_path('parts/header.php'); ?>
                                     'width' => 'key',
                                     'help'  => sprintf(__('Accepted keywords: %s'), '{CATEGORY_ID},{CATEGORY_NAME},{CATEGORIES}'),
                                 )); ?>
-                                <h3 class="render-title separate-top"><?php _e('Search'); ?></h3>
+                                <?php osc_admin_form_section(__('Search'), array('spaced' => true)); ?>
                                 <?php osc_admin_text(array(
                                     'name'  => 'seo_url_search_prefix',
                                     'label' => __('Search prefix URL:'),
@@ -452,7 +452,7 @@ osc_current_admin_theme_path('parts/header.php'); ?>
                                     'value' => osc_get_preference('rewrite_search_pattern'),
                                     'width' => 'key',
                                 )); ?>
-                                <h3 class="render-title separate-top"><?php _e('Contact, feed &amp; language'); ?></h3>
+                                <?php osc_admin_form_section(__('Contact, feed &amp; language'), array('spaced' => true)); ?>
                                 <?php osc_admin_text(array(
                                     'name'  => 'rewrite_contact',
                                     'label' => __('Contact'),
@@ -471,7 +471,7 @@ osc_current_admin_theme_path('parts/header.php'); ?>
                                     'value' => osc_get_preference('rewrite_language'),
                                     'width' => 'key',
                                 )); ?>
-                                <h3 class="render-title separate-top"><?php _e('Listing actions'); ?></h3>
+                                <?php osc_admin_form_section(__('Listing actions'), array('spaced' => true)); ?>
                                 <?php osc_admin_text(array(
                                     'name'  => 'rewrite_item_mark',
                                     'label' => __('Listing mark'),
@@ -520,7 +520,7 @@ osc_current_admin_theme_path('parts/header.php'); ?>
                                     'value' => osc_get_preference('rewrite_item_resource_delete'),
                                     'width' => 'key',
                                 )); ?>
-                                <h3 class="render-title separate-top"><?php _e('User account'); ?></h3>
+                                <?php osc_admin_form_section(__('User account'), array('spaced' => true)); ?>
                                 <?php osc_admin_text(array(
                                     'name'  => 'rewrite_user_login',
                                     'label' => __('User login'),
@@ -625,7 +625,7 @@ location {$rewrite_base} {
 NGINX;
                                 ?>
                                 <div class="server-config">
-                                    <h3 class="render-title separate-top"><?php _e('Server rules (nginx)'); ?></h3>
+                                    <?php osc_admin_form_section(__('Server rules (nginx)'), array('spaced' => true)); ?>
                                     <p class="settings-lead"><?php _e('nginx does not read .htaccess files. Add the '
                                              . 'block below to your site\'s nginx server configuration, then reload '
                                              . 'nginx.'); ?></p>
@@ -649,7 +649,7 @@ HTACCESS;
                                 $htaccess_exists = file_exists(osc_base_path() . '.htaccess');
                                 ?>
                                 <div class="server-config">
-                                    <h3 class="render-title separate-top"><?php _e('Server rules (.htaccess)'); ?></h3>
+                                    <?php osc_admin_form_section(__('Server rules (.htaccess)'), array('spaced' => true)); ?>
                                     <div class="server-config-grid">
                                         <?php if ($htaccess_exists) { ?>
                                             <div class="server-config-block">
@@ -671,10 +671,7 @@ HTACCESS;
                                 </div>
                             <?php }
                             } ?>
-                        <?php osc_admin_form_actions(); ?>
-                    </div>
-                </fieldset>
-            </form>
+                        <?php osc_admin_form_close(array()); ?>
         </div>
         <!-- /settings form -->
     </div>

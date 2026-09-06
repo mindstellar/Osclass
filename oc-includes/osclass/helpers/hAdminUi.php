@@ -412,6 +412,132 @@ if (!function_exists('osc_admin_field_attrs')) {
     }
 }
 
+if (!function_exists('osc_admin_form_open')) {
+    /**
+     * Open an admin form: the element, the hidden route fields it posts to, and the
+     * wrappers the row layout needs.
+     *
+     * The fields on a settings screen were primitives already; everything around them was
+     * not. Every screen wrote its own `<form>`, its own `page`/`action` hidden inputs and
+     * its own `<fieldset><div class="form-horizontal">` -- 93 forms and 158 hidden route
+     * fields across the admin, each a chance to post to the wrong action or to lose the
+     * layout wrapper and with it the label column.
+     *
+     * Keys:
+     *   'action' => string  The `action` this form posts to. Emitted as a hidden field.
+     *   'page'   => string  The `page` it posts to; defaults to the current one, which is
+     *                       almost always right -- a form usually posts back to its own
+     *                       screen.
+     *   'url'    => string  The form's action attribute; defaults to the admin base URL.
+     *   'method' => string  Defaults to post. A GET form is never given a CSRF token.
+     *   'fields' => array   Extra hidden fields, name => value.
+     *   'name', 'id', 'class' => string
+     *   'upload' => bool    multipart/form-data, for a form carrying a file field.
+     *   'horizontal' => bool  Wrap in fieldset + .form-horizontal (default true). False for
+     *                       a stacked form in a dialog or a panel.
+     *   'csrf'   => bool    False marks the form `nocsrf`, which is only ever right for a
+     *                       form that changes nothing.
+     *
+     * @param array $opts
+     *
+     * @return void
+     */
+    function osc_admin_form_open(array $opts = array())
+    {
+        $method     = strtolower((string)($opts['method'] ?? 'post'));
+        $horizontal = $opts['horizontal'] ?? true;
+
+        echo '<form action="' . osc_esc_html($opts['url'] ?? osc_admin_base_url(true)) . '"'
+            . ' method="' . osc_esc_html($method) . '"'
+            . (!empty($opts['name']) ? ' name="' . osc_esc_html($opts['name']) . '"' : '')
+            . (!empty($opts['id']) ? ' id="' . osc_esc_html($opts['id']) . '"' : '')
+            . (!empty($opts['class']) ? ' class="' . osc_esc_html($opts['class']) . '"' : '')
+            . (!empty($opts['upload']) ? ' enctype="multipart/form-data"' : '')
+            . (isset($opts['csrf']) && !$opts['csrf'] ? ' nocsrf' : '')
+            . '>';
+
+        $hidden = $opts['fields'] ?? array();
+        if ($method === 'post' || array_key_exists('page', $opts) || array_key_exists('action', $opts)) {
+            $hidden = array_merge(
+                array(
+                    'page'   => $opts['page'] ?? Params::getParam('page'),
+                    'action' => $opts['action'] ?? null,
+                ),
+                $hidden
+            );
+        }
+        foreach ($hidden as $name => $value) {
+            if ($value === null || $value === '') {
+                continue;
+            }
+            echo '<input type="hidden" name="' . osc_esc_html($name) . '"'
+                . ' value="' . osc_esc_html($value) . '"/>';
+        }
+
+        if ($horizontal) {
+            echo '<fieldset><div class="form-horizontal">';
+        }
+    }
+}
+
+if (!function_exists('osc_admin_form_close')) {
+    /**
+     * Close what osc_admin_form_open() opened, optionally with the submit row.
+     *
+     * Pass an array -- empty for the plain "Save changes" every settings screen ends on --
+     * to emit osc_admin_form_actions() inside the wrappers, where the row's own indent
+     * lines it up with the controls above it. Pass nothing for a form whose buttons are
+     * somewhere else.
+     *
+     * @param array|null $actions
+     * @param array      $opts 'horizontal' => false when the form was opened that way
+     *
+     * @return void
+     */
+    function osc_admin_form_close($actions = null, array $opts = array())
+    {
+        if (is_array($actions)) {
+            osc_admin_form_actions($actions);
+        }
+        if ($opts['horizontal'] ?? true) {
+            echo '</div></fieldset>';
+        }
+        echo '</form>';
+    }
+}
+
+if (!function_exists('osc_admin_form_section')) {
+    /**
+     * A titled group of fields within a screen, with an optional explanatory paragraph.
+     *
+     * Sections were headings written by hand: 29 `<h3 class="render-title">` in the admin,
+     * plus screens calling osc_admin_page_head() a second time for a section, which gives a
+     * page two competing `<h2>`s. This is one heading level for one meaning -- the page has
+     * a head, a section is inside it.
+     *
+     * @param string $title
+     * @param array  $opts 'intro' => paragraph under the heading, 'intro_html' for markup,
+     *                     'spaced' => true to separate it from the block above,
+     *                     'level' => 2 to render the section as a page head instead.
+     *
+     * @return void
+     */
+    function osc_admin_form_section($title, array $opts = array())
+    {
+        $level = (int)($opts['level'] ?? 3) === 2 ? 2 : 3;
+        $class = 'render-title' . (!empty($opts['spaced']) ? ' separate-top' : '');
+
+        if ($title !== '') {
+            echo '<h' . $level . ' class="' . $class . '">' . osc_esc_html($title) . '</h' . $level . '>';
+        }
+        if (!empty($opts['intro_html'])) {
+            echo '<p class="form-intro">' . $opts['intro_html'] . '</p>';
+        } elseif (!empty($opts['intro'])) {
+            echo '<p class="form-intro">' . osc_esc_html($opts['intro']) . '</p>';
+        }
+    }
+}
+
 if (!function_exists('osc_admin_text')) {
     /**
      * Single-line text. Keys: the shared set, plus 'placeholder', 'width', 'prefix', 'suffix'.
@@ -505,12 +631,104 @@ if (!function_exists('osc_admin_secret')) {
 }
 
 /*
- * Fallbacks for the three theme components the primitives above build on. The active admin
+ * Fallbacks for the theme components the primitives above build on. The active admin
  * theme defines these already and loads first, so on a stock install nothing below runs --
  * they exist so a plugin calling osc_admin_field() still renders on a theme that ships
- * neither. Markup is identical to themes/modern/parts/ui.php by design; the class names are
- * consumed directly by third-party plugins and cannot drift between the two copies.
+ * neither -- and core's own declared-settings-page view calls them too, which would fatal
+ * on such a theme. Markup is identical to themes/modern/parts/ui.php by design; the class
+ * names are consumed directly by third-party plugins and cannot drift between the two copies.
  */
+
+if (!function_exists('osc_admin_page_head')) {
+    /**
+     * The heading a screen opens on.
+     *
+     * @param string $title
+     * @param array  $actions Action specs rendered to its right
+     * @param array  $opts    'class' => extra classes on the heading
+     *
+     * @return void
+     */
+    function osc_admin_page_head($title, array $actions = array(), array $opts = array())
+    {
+        $class = 'render-title' . (!empty($opts['class']) ? ' ' . $opts['class'] : '');
+
+        if ($actions === array()) {
+            echo '<h2 class="' . osc_esc_html($class) . '">' . osc_esc_html($title) . '</h2>';
+
+            return;
+        }
+
+        echo '<div class="page-head"><h2 class="' . osc_esc_html($class) . '">'
+            . osc_esc_html($title) . '</h2><div class="page-head-actions">';
+        foreach ($actions as $action) {
+            osc_admin_action_button($action);
+        }
+        echo '</div></div>';
+    }
+}
+
+if (!function_exists('osc_admin_action_button')) {
+    /**
+     * One action, as a link or a button.
+     *
+     * Keys: label, url, variant (primary|secondary|danger|dim), icon, title, attrs, type.
+     *
+     * @param array $action
+     *
+     * @return void
+     */
+    function osc_admin_action_button(array $action)
+    {
+        $variant   = $action['variant'] ?? 'secondary';
+        $classes   = 'btn btn-sm btn-' . ($variant === 'primary' ? 'submit' : $variant);
+        $attrs     = osc_admin_field_attrs($action['attrs'] ?? array());
+        if (!empty($action['title'])) {
+            $attrs .= ' title="' . osc_esc_html($action['title']) . '"';
+        }
+
+        $inner = '';
+        if (!empty($action['icon'])) {
+            $inner .= '<i class="bi ' . osc_esc_html($action['icon']) . '" aria-hidden="true"></i> ';
+        }
+        $inner .= osc_esc_html($action['label'] ?? '');
+
+        if (!empty($action['url'])) {
+            echo '<a class="' . osc_esc_html($classes) . '" href="' . osc_esc_html($action['url']) . '"'
+                . $attrs . '>' . $inner . '</a>';
+
+            return;
+        }
+
+        echo '<button type="' . osc_esc_html($action['type'] ?? 'button') . '"'
+            . ' class="' . osc_esc_html($classes) . '"' . $attrs . '>' . $inner . '</button>';
+    }
+}
+
+if (!function_exists('osc_admin_form_actions')) {
+    /**
+     * The submit row at the foot of a form. With no arguments this is a lone "Save
+     * changes" -- the case that covers most settings screens.
+     *
+     * @param array $actions Action specs; the first defaults to variant 'primary'
+     *
+     * @return void
+     */
+    function osc_admin_form_actions(array $actions = array())
+    {
+        if ($actions === array()) {
+            $actions = array(array('label' => __('Save changes'), 'type' => 'submit', 'variant' => 'primary'));
+        }
+
+        echo '<div class="form-actions">';
+        foreach ($actions as $i => $action) {
+            $action['variant'] = $action['variant'] ?? ($i === 0 ? 'primary' : 'secondary');
+            $action['type']    = $action['type'] ?? 'submit';
+            osc_admin_action_button($action);
+        }
+        echo '</div>';
+    }
+}
 
 if (!function_exists('osc_admin_form_row_open')) {
     /**

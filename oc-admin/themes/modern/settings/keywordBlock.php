@@ -105,11 +105,12 @@ $scopeOptions = array(
     <?php osc_admin_page_head(__('Keyword blocklist')); ?>
 
     <div id="keyword-block-settings">
-        <h3 class="render-title"><?php _e('Moderation'); ?></h3>
-        <form name="keyword_block_prefs_form" action="<?php echo osc_admin_base_url(true); ?>" method="post">
-            <input type="hidden" name="page" value="settings"/>
-            <input type="hidden" name="action" value="keyword_block_prefs_post"/>
-            <fieldset class="form-horizontal">
+        <?php osc_admin_form_section(__('Moderation')); ?>
+        <?php osc_admin_form_open(array(
+            'name'   => 'keyword_block_prefs_form',
+            'page'   => 'settings',
+            'action' => 'keyword_block_prefs_post',
+        )); ?>
                 <?php
                 osc_admin_field(array(
                     'type'      => 'checkbox',
@@ -156,18 +157,17 @@ $scopeOptions = array(
                     'help'      => __('Needs a CAPTCHA provider configured under Settings &raquo; reCAPTCHA/Turnstile; '
                                       . 'otherwise no challenge is shown.'),
                 )); ?>
-                <?php osc_admin_form_actions(); ?>
-            </fieldset>
-        </form>
+                <?php osc_admin_form_close(array()); ?>
     </div>
 
     <div id="keyword-block-import" class="separate-top">
-        <h3 class="render-title"><?php _e('Import keyword list'); ?></h3>
+        <?php osc_admin_form_section(__('Import keyword list')); ?>
         <p><?php _e('Paste a comma-separated keyword list — useful for migrating an existing list from a theme or plugin. Wrap a keyword in asterisks (e.g. *viagra*) to import it as a substring match. Keywords already on file are skipped.'); ?></p>
-        <form name="keyword_block_import_form" action="<?php echo osc_admin_base_url(true); ?>" method="post">
-            <input type="hidden" name="page" value="settings"/>
-            <input type="hidden" name="action" value="keyword_block_import_post"/>
-            <fieldset class="form-horizontal">
+        <?php osc_admin_form_open(array(
+            'name'   => 'keyword_block_import_form',
+            'page'   => 'settings',
+            'action' => 'keyword_block_import_post',
+        )); ?>
                 <?php
                 osc_admin_textarea(array(
                     'id'          => 'import_list',
@@ -182,14 +182,12 @@ $scopeOptions = array(
                     'label'   => __('Where to match'),
                     'options' => $scopeOptions,
                 )); ?>
-                <?php osc_admin_form_actions(array(
+                <?php osc_admin_form_close(array(
                     array('label' => __('Import'), 'type' => 'submit'),
                 )); ?>
-            </fieldset>
-        </form>
     </div>
 
-    <h3 class="render-title separate-top"><?php _e('Blocked keywords'); ?></h3>
+    <?php osc_admin_form_section(__('Blocked keywords'), array('spaced' => true)); ?>
     <div class="relative">
         <form class="" id="datatablesForm" action="<?php echo osc_admin_base_url(true); ?>" method="post">
             <input type="hidden" name="page" value="settings"/>

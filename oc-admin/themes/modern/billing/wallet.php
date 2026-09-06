@@ -50,7 +50,7 @@ $reasonWords = array(
 
     <div class="billing-detail-grid">
         <div>
-            <h3 class="render-title"><?php _e('History'); ?></h3>
+            <?php osc_admin_form_section(__('History')); ?>
             <?php if (empty($entries)) {
                 osc_admin_empty(array(
                     'icon'  => 'bi-clock-history',

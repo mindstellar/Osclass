@@ -34,7 +34,7 @@ osc_current_admin_theme_path('parts/header.php'); ?>
     <?php osc_admin_page_head(__('Activity log')); ?>
 
     <div id="log-settings">
-        <h3 class="render-title"><?php _e('Logging'); ?></h3>
+        <?php osc_admin_form_section(__('Logging')); ?>
         <form name="log_settings_form" action="<?php echo osc_admin_base_url(true); ?>" method="post">
             <input type="hidden" name="page" value="tools"/>
             <input type="hidden" name="action" value="logs_settings_post"/>
@@ -66,7 +66,7 @@ osc_current_admin_theme_path('parts/header.php'); ?>
         </form>
     </div>
 
-    <h3 class="render-title separate-top"><?php _e('Recent activity'); ?></h3>
+    <?php osc_admin_form_section(__('Recent activity'), array('spaced' => true)); ?>
     <div class="relative">
         <div class="table-toolbar">
             <form method="get" action="<?php echo osc_admin_base_url(true); ?>">

@@ -24,58 +24,56 @@ osc_current_admin_theme_path('parts/header.php'); ?>
 <div id="spam-setting">
     <?php osc_admin_page_head(__('Spam and bots')); ?>
     <div id="akismet-settings">
-        <h3 class="render-title"><?php _e('Akismet'); ?></h3>
+        <?php osc_admin_form_section(__('Akismet')); ?>
         <p><?php _e("Akismet is a hosted web service that saves you time by automatically detecting comment and trackback spam. "
                     . "It's hosted on our servers, but we give you access to it through plugins and our API."); ?></p>
-        <form name="settings_form" action="<?php echo osc_admin_base_url(true); ?>" method="post">
-            <input type="hidden" name="page" value="settings"/>
-            <input type="hidden" name="action" value="akismet_post"/>
-            <fieldset>
-                <div class="form-horizontal">
-                    <?php
-                            $akismet_status = View::newInstance()->_get('akismet_status');
+        <?php osc_admin_form_open(array(
+    'name'   => 'settings_form',
+    'page'   => 'settings',
+    'action' => 'akismet_post',
+)); ?>
+            <?php
+                    $akismet_status = View::newInstance()->_get('akismet_status');
 $alert_msg      = '';
 $alert_type     = 'error';
 switch ($akismet_status) {
     case 1:
-        $alert_type = 'ok';
-        $alert_msg  = __('This key is valid');
-        break;
+$alert_type = 'ok';
+$alert_msg  = __('This key is valid');
+break;
     case 2:
-        $alert_type = 'error';
-        $alert_msg  = __('The key you entered is invalid. Please double-check it');
-        break;
+$alert_type = 'error';
+$alert_msg  = __('The key you entered is invalid. Please double-check it');
+break;
     case 3:
-        $alert_type = 'warning';
-        $alert_msg  =
-            sprintf(
-                __('Akismet is disabled, please enter an API key. <a href="%s" target="_blank">(Get your key)</a>'),
-                'http://akismet.com/get/'
-            );
-        break;
+$alert_type = 'warning';
+$alert_msg  =
+    sprintf(
+        __('Akismet is disabled, please enter an API key. <a href="%s" target="_blank">(Get your key)</a>'),
+        'http://akismet.com/get/'
+    );
+break;
 }
 
-                    // Not masked: an empty key is how Akismet is switched off, so a blank
-                    // submission has to mean "clear it" rather than "leave it alone".
-                    osc_admin_text(array(
-                        'name'      => 'akismetKey',
-                        'label'     => __('Akismet API Key'),
-                        'value'     => osc_akismet_key() ?: '',
-                        'width'     => 'key',
-                        'help_html' => $alert_msg === ''
-                            ? ''
-                            : '<span class="callout-' . osc_esc_html($alert_type) . '">' . $alert_msg . '</span>',
-                    ));
+            // Not masked: an empty key is how Akismet is switched off, so a blank
+            // submission has to mean "clear it" rather than "leave it alone".
+            osc_admin_text(array(
+                'name'      => 'akismetKey',
+                'label'     => __('Akismet API Key'),
+                'value'     => osc_akismet_key() ?: '',
+                'width'     => 'key',
+                'help_html' => $alert_msg === ''
+                    ? ''
+                    : '<span class="callout-' . osc_esc_html($alert_type) . '">' . $alert_msg . '</span>',
+            ));
 
-                    osc_admin_form_actions(array(
-                        array('label' => __('Save changes'), 'type' => 'submit', 'attrs' => array('id' => 'submit_akismet')),
-                    )); ?>
-                </div>
-            </fieldset>
-        </form>
+            osc_admin_form_actions(array(
+                array('label' => __('Save changes'), 'type' => 'submit', 'attrs' => array('id' => 'submit_akismet')),
+            )); ?>
+                <?php osc_admin_form_close(); ?>
     </div>
     <div id="recaptcha-settings" class="separate-top">
-        <h3 class="render-title"><?php _e('Captcha'); ?></h3>
+        <?php osc_admin_form_section(__('Captcha')); ?>
         <p><?php printf(
             __('Protect your site from automated abuse with Google reCAPTCHA or Cloudflare Turnstile. '
                            . '<a href="%1$s" target="_blank">Get a reCAPTCHA key</a> or '
@@ -83,11 +81,12 @@ switch ($akismet_status) {
             'https://www.google.com/recaptcha/admin#whyrecaptcha',
             'https://dash.cloudflare.com/?to=/:account/turnstile'
         ); ?></p>
-        <form name="settings_form" action="<?php echo osc_admin_base_url(true); ?>" method="post">
-            <input type="hidden" name="page" value="settings"/>
-            <input type="hidden" name="action" value="recaptcha_post"/>
-            <input type="hidden" id="recaptchaVersion" name="recaptchaVersion" value="2"/>
-            <fieldset class="form-horizontal">
+        <?php osc_admin_form_open(array(
+            'name'   => 'settings_form',
+            'page'   => 'settings',
+            'action' => 'recaptcha_post',
+            'fields' => array('recaptchaVersion' => 2),
+        )); ?>
                 <?php
                 $captcha_provider_pref = osc_captcha_provider_pref();
                 // A forced provider (Turnstile/reCAPTCHA) whose keys are blank resolves to
@@ -158,20 +157,19 @@ switch ($akismet_status) {
                         </div>
                     </div>
                 <?php } ?>
-                <?php osc_admin_form_actions(array(
+                <?php osc_admin_form_close(array(
                     array('label' => __('Save changes'), 'type' => 'submit', 'attrs' => array('id' => 'submit_recaptcha')),
                 )); ?>
-            </fieldset>
-        </form>
     </div>
     <div id="alerts-settings" class="separate-top">
-        <h3 class="render-title"><?php _e('Search alerts'); ?></h3>
+        <?php osc_admin_form_section(__('Search alerts')); ?>
         <p><?php _e('Search alerts email visitors when new listings match a saved search. Requiring login before '
                     . 'subscribing prevents anonymous email harvesting and confirmation-email abuse through the alert endpoint.'); ?></p>
-        <form name="settings_form" action="<?php echo osc_admin_base_url(true); ?>" method="post">
-            <input type="hidden" name="page" value="settings"/>
-            <input type="hidden" name="action" value="alerts_post"/>
-            <fieldset class="form-horizontal">
+        <?php osc_admin_form_open(array(
+            'name'   => 'settings_form',
+            'page'   => 'settings',
+            'action' => 'alerts_post',
+        )); ?>
                 <?php osc_admin_field(array(
                     'type'      => 'checkbox',
                     'row_label' => __('Require login for alerts'),
@@ -179,24 +177,23 @@ switch ($akismet_status) {
                     'label'     => __('Only logged-in users can subscribe to search alerts'),
                     'checked'   => osc_get_preference('alerts_require_login'),
                 )); ?>
-                <?php osc_admin_form_actions(array(
+                <?php osc_admin_form_close(array(
                     array('label' => __('Save changes'), 'type' => 'submit', 'attrs' => array('id' => 'submit_alerts')),
                 )); ?>
-            </fieldset>
-        </form>
     </div>
     <div id="login-throttle-settings" class="separate-top">
-        <h3 class="render-title"><?php _e('Sign-in protection'); ?></h3>
+        <?php osc_admin_form_section(__('Sign-in protection')); ?>
         <p><?php _e('Failed sign-ins and password-reset requests are counted per visitor address and per account '
                     . 'name. Passing a limit refuses further attempts until the older ones age out of the window, '
                     . 'which is what stops a stolen password list being tried one guess at a time.'); ?></p>
         <p><?php _e('The account limit is skipped while a captcha provider is configured above, because every '
                     . 'attempt already has to solve one. Without that, an attacker could hold someone else\'s '
                     . 'account shut simply by failing against it.'); ?></p>
-        <form name="settings_form" action="<?php echo osc_admin_base_url(true); ?>" method="post">
-            <input type="hidden" name="page" value="settings"/>
-            <input type="hidden" name="action" value="login_throttle_post"/>
-            <fieldset class="form-horizontal">
+        <?php osc_admin_form_open(array(
+            'name'   => 'settings_form',
+            'page'   => 'settings',
+            'action' => 'login_throttle_post',
+        )); ?>
                 <?php
                 osc_admin_field(array(
                     'type'      => 'checkbox',
@@ -238,15 +235,14 @@ switch ($akismet_status) {
                     'help'   => __('Pruned by the daily cron. Only the window above affects the limits; the rest is '
                                    . 'history. 0 keeps everything.'),
                 )); ?>
-                <?php osc_admin_form_actions(array(
+                <?php osc_admin_form_close(array(
                     array('label' => __('Save changes'), 'type' => 'submit', 'attrs' => array('id' => 'submit_login_throttle')),
                 )); ?>
-            </fieldset>
-        </form>
-        <form name="settings_form" action="<?php echo osc_admin_base_url(true); ?>" method="post">
-            <input type="hidden" name="page" value="settings"/>
-            <input type="hidden" name="action" value="login_throttle_reset"/>
-            <fieldset class="form-horizontal">
+        <?php osc_admin_form_open(array(
+            'name'   => 'settings_form',
+            'page'   => 'settings',
+            'action' => 'login_throttle_reset',
+        )); ?>
                 <?php osc_admin_field(array(
                     'type'   => 'custom',
                     'label'  => __('Clear recorded attempts'),
@@ -259,8 +255,7 @@ switch ($akismet_status) {
                         ));
                     },
                 )); ?>
-            </fieldset>
-        </form>
+            <?php osc_admin_form_close(); ?>
     </div>
 </div>
 <?php osc_current_admin_theme_path('parts/footer.php'); ?>

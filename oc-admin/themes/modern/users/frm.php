@@ -195,7 +195,7 @@ $aux = customFrmText();
                     <form name="register" action="<?php echo osc_admin_base_url(true); ?>" method="post" enctype="multipart/form-data">
                         <input type="hidden" name="page" value="users"/>
                         <input type="hidden" name="action" value="<?php echo $aux['action_frm']; ?>"/>
-                        <h3 class="render-title"><?php _e('Contact info'); ?></h3>
+                        <?php osc_admin_form_section(__('Contact info')); ?>
                         <?php UserForm::primary_input_hidden($user); ?>
                         <?php if ($aux['edit']) { ?>
                             <input type="hidden" name="b_enabled" value="<?php echo $user['b_enabled']; ?>"/>
@@ -274,7 +274,7 @@ $aux = customFrmText();
                                         <?php } ?>
                                     </div>
                                 </div>
-                                <h3 class="render-title"><?php _e('About you'); ?></h3>
+                                <?php osc_admin_form_section(__('About you')); ?>
                                 <div class="form-row">
                                     <div class="form-label"><?php _e('User type'); ?></div>
                                     <div class="form-controls">
@@ -287,7 +287,7 @@ $aux = customFrmText();
                                         <?php UserForm::multilanguage_info($locales, $user); ?>
                                     </div>
                                 </div>
-                                <h3 class="render-title"><?php _e('Location'); ?></h3>
+                                <?php osc_admin_form_section(__('Location')); ?>
                                 <div class="form-row">
                                     <div class="form-label"><?php _e('Country'); ?></div>
                                     <div class="form-controls">
@@ -324,7 +324,7 @@ $aux = customFrmText();
                                         <?php UserForm::address_text($user); ?>
                                     </div>
                                 </div>
-                                <h3 class="render-title"><?php _e('Password'); ?></h3>
+                                <?php osc_admin_form_section(__('Password')); ?>
                                 <div class="form-row">
                                     <div class="form-label"><?php _e('New password'); ?><?php if (!$aux['edit']) {
                                         printf('<br/><em>%s</em>', __('(twice, required)'));
@@ -363,7 +363,7 @@ $aux = customFrmText();
                         <ul id="error_list"></ul>
                         <form>
                             <div class="form-horizontal">
-                                <h3 class="render-title"><?php _e('Alerts'); ?></h3>
+                                <?php osc_admin_form_section(__('Alerts')); ?>
                                 <div class="form-row">
                                     <?php for ($k = 0, $kMax = count($aux['alerts']); $k < $kMax; $k++) {
                                         $array_conditions = (array)json_decode($aux['alerts'][$k]['s_search'], true);

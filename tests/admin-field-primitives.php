@@ -42,6 +42,21 @@ if (!function_exists('__')) {
     }
 }
 
+if (!class_exists('Params')) {
+    class Params
+    {
+        public static function getParam($key, $a = false, $b = true)
+        {
+            return $GLOBALS['params'][$key] ?? '';
+        }
+    }
+}
+
+function osc_admin_base_url($index = false)
+{
+    return 'https://example.test/oc-admin/index.php';
+}
+
 require_once ABS_PATH . 'oc-includes/osclass/helpers/hAdminUi.php';
 
 /** Capture what a helper prints. */
@@ -258,6 +273,46 @@ $html = render(static function () {
     ));
 });
 emits('label_html is a markup slot', $html, 'Run <a href="#">cron</a>');
+
+harness_section('the form and section scaffolding');
+$html = render(static function () {
+    osc_admin_form_open(array('action' => 'comments_post', 'page' => 'settings', 'name' => 'comments_form'));
+    osc_admin_form_close(array());
+});
+emits('opens a post form', $html, '<form action="https://example.test/oc-admin/index.php" method="post" name="comments_form">');
+// The route a form posts to was a pair of hidden fields every screen wrote for itself.
+emits('carries the page it posts to', $html, '<input type="hidden" name="page" value="settings"/>');
+emits('and the action', $html, '<input type="hidden" name="action" value="comments_post"/>');
+emits('wraps the rows for the label column', $html, '<fieldset><div class="form-horizontal">');
+emits('an empty actions array is the Save row', $html, '<div class="form-actions">');
+check('and everything closes', substr($html, -22) === '</div></div></fieldset></form>'
+    || strpos($html, '</div></fieldset></form>') !== false, $html);
+
+// A form whose buttons live elsewhere must not have one invented for it.
+$bare = render(static function () {
+    osc_admin_form_open(array('action' => 'x'));
+    osc_admin_form_close();
+});
+check('no actions row unless asked for', strpos($bare, 'form-actions') === false, $bare);
+
+$upload = render(static function () {
+    osc_admin_form_open(array('action' => 'import', 'upload' => true, 'horizontal' => false, 'csrf' => false));
+    osc_admin_form_close(null, array('horizontal' => false));
+});
+emits('a file form is multipart', $upload, 'enctype="multipart/form-data"');
+// nocsrf is only ever right for a form that changes nothing; it is opt-in and explicit.
+emits('csrf can be opted out of', $upload, 'nocsrf');
+check('a stacked form skips the row wrappers', strpos($upload, 'form-horizontal') === false, $upload);
+
+$section = render(static function () {
+    osc_admin_form_section('Notifications', array('intro' => 'Who hears about what.'));
+});
+// A section is inside the page head, not a second one: h3, not h2.
+emits('a section is an h3', $section, '<h3 class="render-title">Notifications</h3>');
+emits('with its intro under it', $section, '<p class="form-intro">Who hears about what.</p>');
+emits('and can be spaced from the block above', render(static function () {
+    osc_admin_form_section('Later', array('spaced' => true));
+}), '<h3 class="render-title separate-top">Later</h3>');
 
 harness_section('custom');
 $html = render(static function () {
