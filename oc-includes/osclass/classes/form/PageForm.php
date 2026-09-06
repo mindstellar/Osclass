@@ -42,14 +42,18 @@ class PageForm extends Form
         if (Session::newInstance()->_getForm('s_internal_name') != '') {
             $internal_name = Session::newInstance()->_getForm('s_internal_name');
         }
-        $attributes['id']    = 's_internal_name';
-        $attributes['class'] = 'form-control form-control-sm input-large';
-
+        $attrs = array();
         if ((isset($page['b_indelible']) && $page['b_indelible'] == 1)) {
-            $attributes['readonly'] = '';
-            $attributes['disabled'] = '';
+            $attrs['readonly'] = true;
+            $attrs['disabled'] = true;
         }
-        echo (new self())->text('s_internal_name', $internal_name, $attributes);
+        osc_admin_field(array(
+            'row'   => false,
+            'id'    => 's_internal_name',
+            'name'  => 's_internal_name',
+            'value' => $internal_name,
+            'attrs' => $attrs,
+        ));
     }
 
     /**
