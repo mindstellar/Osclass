@@ -105,14 +105,18 @@ $formCount = (int)__get('form_count');
                         <div class="form-row">
                             <div class="form-label"><?php _e('Group'); ?></div>
                             <div class="form-controls">
-                                <select class="form-select" name="field_group" id="field_group">
-                                    <option value="0"><?php _e('Ungrouped'); ?></option>
-                                    <?php foreach ($allGroups as $g) {
-                                        $selAttr = ($fieldGroupId === (int)$g['pk_i_id']) ? ' selected' : '';
-                                        echo '<option value="' . (int)$g['pk_i_id'] . '"' . $selAttr . '>'
-                                            . osc_esc_html($g['s_name']) . '</option>';
-                                    } ?>
-                                </select>
+                                <?php
+                                $groupOptions = array('0' => __('Ungrouped'));
+                                foreach ($allGroups as $g) {
+                                    $groupOptions[(int)$g['pk_i_id']] = $g['s_name'];
+                                }
+                                osc_admin_select(array(
+                                    'row'      => false,
+                                    'id'       => 'field_group',
+                                    'name'     => 'field_group',
+                                    'selected' => (string)$fieldGroupId,
+                                    'options'  => $groupOptions,
+                                )); ?>
                                 <p class="help-inline"><?php _e('Grouped fields inherit their categories from the group and render as a section.'); ?></p>
                             </div>
                         </div>
@@ -143,10 +147,13 @@ $formCount = (int)__get('form_count');
                                 <div class="form-row cf-config-row" data-cfg-key="<?php echo osc_esc_html($cfgKey); ?>">
                                     <div class="form-label"><?php echo osc_esc_html($cfgRow['label']); ?></div>
                                     <div class="form-controls">
-                                        <input type="<?php echo $cfgRow['type']; ?>" class="form-control"
-                                               name="cfg_<?php echo osc_esc_html($cfgKey); ?>"
-                                               value="<?php echo osc_esc_html($cfgValue($cfgKey)); ?>"<?php
-                       echo $cfgRow['type'] === 'number' ? ' step="any"' : ''; ?> />
+                                        <?php osc_admin_field(array(
+                                            'row'   => false,
+                                            'type'  => $cfgRow['type'] === 'number' ? 'number' : 'text',
+                                            'name'  => 'cfg_' . $cfgKey,
+                                            'value' => $cfgValue($cfgKey),
+                                            'step'  => $cfgRow['type'] === 'number' ? 'any' : null,
+                                        )); ?>
                                     </div>
                                 </div>
                             <?php } ?>
@@ -160,38 +167,55 @@ $formCount = (int)__get('form_count');
                             <div class="form-row">
                                 <div class="form-label"><?php _e('Conditional logic'); ?></div>
                                 <div class="form-controls">
-                                    <select class="form-select" id="cf_rule_action">
-                                        <option value=""<?php echo $ruleAction === '' ? ' selected' : ''; ?>><?php _e('Always show'); ?></option>
-                                        <option value="show_when"<?php echo $ruleAction === 'show_when' ? ' selected' : ''; ?>><?php _e('Show only when…'); ?></option>
-                                        <option value="required_when"<?php echo $ruleAction === 'required_when' ? ' selected' : ''; ?>><?php _e('Required only when…'); ?></option>
-                                    </select>
+                                    <?php osc_admin_select(array(
+                                        'row'      => false,
+                                        'id'       => 'cf_rule_action',
+                                        'name'     => '',
+                                        'selected' => $ruleAction,
+                                        'options'  => array(
+                                            ''              => __('Always show'),
+                                            'show_when'     => __('Show only when…'),
+                                            'required_when' => __('Required only when…'),
+                                        ),
+                                    )); ?>
                                 </div>
                             </div>
                             <div class="form-row" id="cf_rule_condition" style="display:none;">
                                 <div class="form-label"></div>
                                 <div class="form-controls cf-rule-condition">
-                                    <select class="form-select" id="cf_rule_field">
-                                        <option value=""><?php _e('Select a field'); ?></option>
-                                        <?php foreach ($allFields as $sibling) {
-                                            if ((int)$sibling['pk_i_id'] === (int)$field['pk_i_id']) {
-                                                continue; // a field cannot depend on itself
-                                            }
-                                            $selAttr = (isset($ruleCond['field']) && $ruleCond['field'] === $sibling['s_slug']) ? ' selected' : '';
-                                            echo '<option value="' . osc_esc_html($sibling['s_slug']) . '"' . $selAttr . '>'
-                                                . osc_esc_html($sibling['s_name']) . '</option>';
-                                        } ?>
-                                    </select>
-                                    <select class="form-select" id="cf_rule_op">
-                                        <?php
-                                        $ops = array('eq' => __('is'), 'neq' => __('is not'), 'filled' => __('is filled'), 'gt' => __('is greater than'), 'lt' => __('is less than'));
-foreach ($ops as $opKey => $opLabel) {
-    $selAttr = (isset($ruleCond['op']) && $ruleCond['op'] === $opKey) ? ' selected' : '';
-    echo '<option value="' . $opKey . '"' . $selAttr . '>' . osc_esc_html($opLabel) . '</option>';
-} ?>
-                                    </select>
-                                    <input type="text" class="form-control" id="cf_rule_value"
-                                           value="<?php echo osc_esc_html($ruleCond['value'] ?? ''); ?>"
-                                           placeholder="<?php echo osc_esc_html(__('Value')); ?>" />
+                                    <?php
+                                    $ruleFieldOptions = array('' => __('Select a field'));
+                                    foreach ($allFields as $sibling) {
+                                        if ((int)$sibling['pk_i_id'] === (int)$field['pk_i_id']) {
+                                            continue;
+                                        }
+                                        $ruleFieldOptions[$sibling['s_slug']] = $sibling['s_name'];
+                                    }
+                                    osc_admin_select(array(
+                                        'row'      => false,
+                                        'id'       => 'cf_rule_field',
+                                        'selected' => $ruleCond['field'] ?? '',
+                                        'options'  => $ruleFieldOptions,
+                                    ));
+                                    osc_admin_select(array(
+                                        'row'      => false,
+                                        'id'       => 'cf_rule_op',
+                                        'selected' => $ruleCond['op'] ?? '',
+                                        'options'  => array(
+                                            'eq'     => __('is'),
+                                            'neq'    => __('is not'),
+                                            'filled' => __('is filled'),
+                                            'gt'     => __('is greater than'),
+                                            'lt'     => __('is less than'),
+                                        ),
+                                    ));
+                                    osc_admin_text(array(
+                                        'row'         => false,
+                                        'id'          => 'cf_rule_value',
+                                        'value'       => $ruleCond['value'] ?? '',
+                                        'placeholder' => __('Value'),
+                                        'width'       => 'num',
+                                    )); ?>
                                 </div>
                             </div>
                             <input type="hidden" name="cfg_rules" id="cfg_rules" value="" />
@@ -205,25 +229,36 @@ foreach ($ops as $opKey => $opLabel) {
                             <div class="form-row">
                                 <div class="form-label"><?php _e('Cascading options'); ?></div>
                                 <div class="form-controls">
-                                    <select class="form-select" name="cfg_cascade_parent" id="cfg_cascade_parent">
-                                        <option value=""><?php _e('Not cascading'); ?></option>
-                                        <?php foreach ($allFields as $sibling) {
-                                            if ((int)$sibling['pk_i_id'] === (int)$field['pk_i_id']) {
-                                                continue;
-                                            }
-                                            $selAttr = ($cascadeParent === $sibling['s_slug']) ? ' selected' : '';
-                                            echo '<option value="' . osc_esc_html($sibling['s_slug']) . '"' . $selAttr . '>'
-                                                . osc_esc_html($sibling['s_name']) . '</option>';
-                                        } ?>
-                                    </select>
+                                    <?php
+                                    $cascadeOptions = array('' => __('Not cascading'));
+                                    foreach ($allFields as $sibling) {
+                                        if ((int)$sibling['pk_i_id'] === (int)$field['pk_i_id']) {
+                                            continue;
+                                        }
+                                        $cascadeOptions[$sibling['s_slug']] = $sibling['s_name'];
+                                    }
+                                    osc_admin_select(array(
+                                        'row'      => false,
+                                        'id'       => 'cfg_cascade_parent',
+                                        'name'     => 'cfg_cascade_parent',
+                                        'selected' => $cascadeParent,
+                                        'options'  => $cascadeOptions,
+                                    )); ?>
                                     <p class="help-inline"><?php _e('Filter this field\'s options by the value of a parent field.'); ?></p>
                                 </div>
                             </div>
                             <div class="form-row" id="cf_cascade_map_row" style="display:none;">
                                 <div class="form-label"><?php _e('Option map'); ?></div>
                                 <div class="form-controls">
-                                    <textarea class="form-control" name="cfg_cascade_map" id="cfg_cascade_map" rows="5"
-                                              placeholder="Toyota: Corolla, Camry, RAV4&#10;Honda: Civic, Accord"><?php echo osc_esc_html($cascadeText); ?></textarea>
+                                    <?php osc_admin_textarea(array(
+                                        'row'         => false,
+                                        'id'          => 'cfg_cascade_map',
+                                        'name'        => 'cfg_cascade_map',
+                                        'value'       => $cascadeText,
+                                        'rows'        => 5,
+                                        'width'       => 'key',
+                                        'placeholder' => "Toyota: Corolla, Camry, RAV4\nHonda: Civic, Accord",
+                                    )); ?>
                                     <p class="help-inline"><?php _e('One line per parent value: "ParentValue: option1, option2".'); ?></p>
                                 </div>
                             </div>
@@ -253,7 +288,11 @@ foreach ($ops as $opKey => $opLabel) {
                             <div class="form-row" id="div_field_options">
                                 <div class="form-label"><?php _e('Identifier name'); ?></div>
                                 <div class="form-controls">
-                                    <input type="text" class="form-control" name="field_slug" value="<?php echo osc_esc_html($field['s_slug']); ?>" />
+                                    <?php osc_admin_text(array(
+                                        'row'   => false,
+                                        'name'  => 'field_slug',
+                                        'value' => $field['s_slug'],
+                                    )); ?>
                                     <p class="help-inline"><?php _e('Only alphanumeric characters are allowed [a-z0-9_-]'); ?></p>
                                 </div>
                             </div>

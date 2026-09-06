@@ -66,16 +66,14 @@ osc_current_admin_theme_path('parts/header.php'); ?>
                         )); ?>
                     </div>
                 </div>
-                <div class="form-row">
-                    <div class="form-label"> <?php _e('Username blacklist'); ?></div>
-                    <div class="form-controls">
-                        <label id="username_blacklist" class="form-label-input">
-                            <input type="text" id="username_blacklist" name="username_blacklist"
-                                   value="<?php echo osc_esc_html(osc_username_blacklist()); ?>"/>
-                            <span class="help-box"><?php _e('List of terms not allowed in usernames, separated by commas'); ?></span>
-                        </label>
-                    </div>
-                </div>
+                <?php osc_admin_text(array(
+                    'id'    => 'username_blacklist',
+                    'name'  => 'username_blacklist',
+                    'label' => __('Username blacklist'),
+                    'value' => osc_username_blacklist(),
+                    'width' => 'key',
+                    'help'  => __('List of terms not allowed in usernames, separated by commas'),
+                )); ?>
                 <?php osc_admin_form_actions(array(
                     array('label' => __('Save changes'), 'type' => 'submit', 'variant' => 'primary', 'attrs' => array('id' => 'save_changes')),
                 )); ?>

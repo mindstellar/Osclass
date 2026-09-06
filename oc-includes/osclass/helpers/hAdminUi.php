@@ -151,7 +151,10 @@ if (!function_exists('osc_admin_field_control')) {
             $attrs .= ' placeholder="' . osc_esc_html($spec['placeholder']) . '"';
         }
 
-        $common = ' id="' . osc_esc_html($id) . '" name="' . osc_esc_html($name) . '"';
+        // A control the page drives from script and never submits has no name; emitting an
+        // empty one would put it in the request as a blank key.
+        $common = ' id="' . osc_esc_html($id) . '"'
+            . ($name === '' ? '' : ' name="' . osc_esc_html($name) . '"');
 
         switch ($type) {
             case 'custom':
@@ -324,6 +327,13 @@ if (!function_exists('osc_admin_field_class')) {
         // input-text is what the admin styles a text control with; a select, a colour well and
         // a file picker are not text controls and the class would fight their own sizing.
         $classes = in_array($type, array('select', 'color', 'file'), true) ? array() : array('input-text');
+
+        // field-select is a select's appearance, not just its width, so it stays on even when
+        // the caller asks for a different width -- the width classes carry !important and win
+        // that part on their own.
+        if ($type === 'select' && $width !== 'field-select') {
+            $classes[] = 'field-select';
+        }
         if ($width !== '') {
             $classes[] = $width;
         }

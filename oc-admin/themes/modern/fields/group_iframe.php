@@ -35,15 +35,23 @@ $isPlaceable = is_array($groupMeta) && !empty($groupMeta['placeable']);
                     <div class="form-row">
                         <div class="form-label"><?php _e('Group name'); ?></div>
                         <div class="form-controls">
-                            <input type="text" class="form-control" name="group_name" id="group_name"
-                                   value="<?php echo osc_esc_html($groupName); ?>" autocomplete="off" />
+                            <?php osc_admin_text(array(
+                                'row'   => false,
+                                'id'    => 'group_name',
+                                'name'  => 'group_name',
+                                'value' => $groupName,
+                                'attrs' => array('autocomplete' => 'off'),
+                            )); ?>
                         </div>
                     </div>
                     <div class="form-row">
                         <div class="form-label"><?php _e('Identifier name'); ?></div>
                         <div class="form-controls">
-                            <input type="text" class="form-control" name="group_slug"
-                                   value="<?php echo osc_esc_html($groupSlug); ?>" />
+                            <?php osc_admin_text(array(
+                                'row'   => false,
+                                'name'  => 'group_slug',
+                                'value' => $groupSlug,
+                            )); ?>
                             <p class="help-inline"><?php _e('Only alphanumeric characters are allowed [a-z0-9_-]'); ?></p>
                         </div>
                     </div>

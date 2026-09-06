@@ -52,19 +52,15 @@ osc_current_admin_theme_path('parts/header.php'); ?>
                         </div>
                     </div>
                 </div>
-                <div class="form-row">
-                    <div class="form-label"><?php _e('Keep entries for'); ?></div>
-                    <div class="form-controls">
-                        <div class="input-group input-group-sm" style="max-width:12rem">
-                            <input type="number" min="0" class="form-control" id="admin_log_retention_days"
-                                   name="admin_log_retention_days" value="<?php echo $retention; ?>">
-                            <span class="input-group-text"><?php _e('days'); ?></span>
-                        </div>
-                        <div class="help-box">
-                            <?php _e('The daily task deletes entries older than this. Set to 0 to keep them forever.'); ?>
-                        </div>
-                    </div>
-                </div>
+                <?php osc_admin_number(array(
+                    'id'     => 'admin_log_retention_days',
+                    'name'   => 'admin_log_retention_days',
+                    'label'  => __('Keep entries for'),
+                    'value'  => $retention,
+                    'min'    => 0,
+                    'suffix' => __('days'),
+                    'help'   => __('The daily task deletes entries older than this. Set to 0 to keep them forever.'),
+                )); ?>
                 <?php osc_admin_form_actions(); ?>
             </fieldset>
         </form>

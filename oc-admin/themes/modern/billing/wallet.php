@@ -140,9 +140,16 @@ $reasonWords = array(
                     <input type="hidden" name="userId" value="<?php echo $userId; ?>"/>
                     <input type="hidden" name="mode" value="add"/>
                     <div class="form-row">
-                        <label for="add-amount"><?php _e('How many credits'); ?></label>
-                        <input type="number" min="1" step="1" required class="form-control" id="add-amount"
-                               name="amount" value=""/>
+                        <label class="form-sublabel" for="add-amount"><?php _e('How many credits'); ?></label>
+                        <?php osc_admin_number(array(
+                            'row'      => false,
+                            'id'       => 'add-amount',
+                            'name'     => 'amount',
+                            'value'    => '',
+                            'min'      => 1,
+                            'step'     => 1,
+                            'required' => true,
+                        )); ?>
                     </div>
                     <button type="submit" class="btn btn-submit"><?php _e('Add credits'); ?></button>
                 </form>
@@ -159,15 +166,21 @@ $reasonWords = array(
                     <input type="hidden" name="userId" value="<?php echo $userId; ?>"/>
                     <input type="hidden" name="mode" value="remove"/>
                     <div class="form-row">
-                        <label for="remove-amount"><?php _e('How many credits'); ?></label>
-                        <input type="number" min="1" step="1" max="<?php echo max(0, $balance); ?>" required
-                               class="form-control" id="remove-amount" name="amount" value=""/>
-                        <div class="help-block">
-                            <?php printf(
-                                osc_esc_html(__('No more than the %s credits currently held.')),
+                        <label class="form-sublabel" for="remove-amount"><?php _e('How many credits'); ?></label>
+                        <?php osc_admin_number(array(
+                            'row'      => false,
+                            'id'       => 'remove-amount',
+                            'name'     => 'amount',
+                            'value'    => '',
+                            'min'      => 1,
+                            'max'      => max(0, $balance),
+                            'step'     => 1,
+                            'required' => true,
+                            'help'     => sprintf(
+                                __('No more than the %s credits currently held.'),
                                 number_format(max(0, $balance))
-                            ); ?>
-                        </div>
+                            ),
+                        )); ?>
                     </div>
                     <button type="submit" class="btn btn-secondary"
                         <?php echo $balance < 1 ? 'disabled' : ''; ?>><?php _e('Remove credits'); ?></button>

@@ -152,34 +152,44 @@ if (!$inline) {
                 <?php } ?>
                 <fieldset>
                     <div class="mb-3">
-                        <label for="widget_description"><?php _e('Description (for internal purposes only)'); ?></label>
-                        <input type="text" class="form-control form-control-sm" id="widget_description"
-                               name="description" value="<?php if ($edit) {
-                                   echo osc_esc_html($widget['s_description']);
-                               } ?>"/>
+                        <label class="form-sublabel" for="widget_description"><?php _e('Description (for internal purposes only)'); ?></label>
+                        <?php osc_admin_text(array(
+                            'row'   => false,
+                            'id'    => 'widget_description',
+                            'name'  => 'description',
+                            'value' => $edit ? $widget['s_description'] : '',
+                        )); ?>
                     </div>
                     <div class="mb-3">
-                        <label for="widget_type_select"><?php _e('Widget type'); ?></label>
-                        <select id="widget_type_select" name="s_type" class="form-select form-select-sm">
-                            <option value="" <?php echo ($currentTypeId === '') ? 'selected="selected"' : ''; ?>>
-                                <?php echo osc_esc_html(__('Custom HTML (legacy)')); ?>
-                            </option>
-                            <?php foreach ($widgetTypes as $typeId => $typeSpec) { ?>
-                                <option value="<?php echo osc_esc_html($typeId); ?>"
-                                    <?php echo ($currentTypeId === $typeId) ? 'selected="selected"' : ''; ?>>
-                                    <?php echo osc_esc_html($typeSpec['label']); ?>
-                                </option>
-                            <?php } ?>
-                        </select>
+                        <label class="form-sublabel" for="widget_type_select"><?php _e('Widget type'); ?></label>
+                        <?php
+                        $widgetTypeOptions = array('' => __('Custom HTML (legacy)'));
+                        foreach ($widgetTypes as $typeId => $typeSpec) {
+                            $widgetTypeOptions[$typeId] = $typeSpec['label'];
+                        }
+                        osc_admin_select(array(
+                            'row'      => false,
+                            'id'       => 'widget_type_select',
+                            'name'     => 's_type',
+                            'selected' => $currentTypeId,
+                            'options'  => $widgetTypeOptions,
+                            'width'    => 'text',
+                        )); ?>
                         <p class="help-box" id="widget_type_description"></p>
                     </div>
                     <div class="alert alert-danger" role="alert" id="widget_type_danger" hidden></div>
                     <div class="mb-3" id="widget-legacy-content"
                         <?php echo ($currentTypeId !== '') ? 'hidden' : ''; ?>>
-                        <label for="body"><?php _e('HTML Code for the Widget'); ?></label>
-                        <textarea name="content" id="body"><?php if ($edit) {
-                            echo osc_esc_html($widget['s_content']);
-                        } ?></textarea>
+                        <label class="form-sublabel" for="body"><?php _e('HTML Code for the Widget'); ?></label>
+                        <?php osc_admin_textarea(array(
+                            'row'       => false,
+                            'id'        => 'body',
+                            'name'      => 'content',
+                            'value'     => $edit ? $widget['s_content'] : '',
+                            'rows'      => 8,
+                            'width'     => 'full',
+                            'monospace' => true,
+                        )); ?>
                     </div>
                     <div id="widget-type-fields">
                         <?php foreach ($widgetTypes as $typeId => $typeSpec) {

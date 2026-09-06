@@ -261,13 +261,17 @@ function widgetConfigFieldId($typeId, $fieldName)
 }
 
 /**
- * Render one widget config field as a Bootstrap control named config[<name>].
- * The single source both the appearance widget editor and the page-builder block
- * dialog use, so a field looks and behaves the same in both. $disabled is true
- * for a field whose type is not the currently selected one, so it does not post
- * until the type is switched client-side. Supported types:
- * text, number, textarea, select, checkbox, code, image. Field types map to what
- * CAdminAppearance::buildWidgetConfig() accepts.
+ * Render one widget config field as a control named config[<name>].
+ *
+ * The single source both the appearance widget editor and the page-builder block dialog
+ * use, so a field looks and behaves the same in both. $disabled is true for a field whose
+ * type is not the currently selected one, so it does not post until the type is switched
+ * client-side. Supported types: text, number, textarea, select, checkbox, code, image.
+ * Field types map to what CAdminAppearance::buildWidgetConfig() accepts.
+ *
+ * Everything except `image` goes through the core field primitives -- this function used to
+ * be a second, theme-local implementation of them, one `case` per type, with its own idea
+ * of what each control should look like.
  *
  * @param string $typeId
  * @param array  $field
@@ -283,63 +287,68 @@ function osc_widget_config_field($typeId, $field, $value, $disabled)
     if ($name === '') {
         return;
     }
+
     $label     = isset($field['label']) && is_string($field['label']) ? $field['label'] : $name;
     $fieldType = isset($field['type']) && is_string($field['type']) ? $field['type'] : 'text';
     $id        = widgetConfigFieldId($typeId, $name);
     $inputName = 'config[' . $name . ']';
-    $dis       = $disabled ? 'disabled="disabled"' : '';
-    $val       = (string) $value;
+    $val       = (string)$value;
+
+    $spec = array(
+        'row'      => false,
+        'id'       => $id,
+        'name'     => $inputName,
+        'value'    => $val,
+        'disabled' => $disabled,
+    );
     ?>
     <div class="mb-3">
         <?php if ($fieldType !== 'checkbox') { ?>
-            <label for="<?php echo osc_esc_html($id); ?>"><?php echo osc_esc_html($label); ?></label>
-        <?php } ?>
-        <?php switch ($fieldType) {
-            case 'checkbox': ?>
-                <div class="form-check">
-                    <input type="checkbox" class="form-check-input" id="<?php echo osc_esc_html($id); ?>"
-                           name="<?php echo osc_esc_html($inputName); ?>" value="1"
-                           <?php echo (!empty($val) && $val !== '0') ? 'checked="checked"' : ''; ?>
-                           <?php echo $dis; ?>/>
-                    <label class="form-check-label"
-                           for="<?php echo osc_esc_html($id); ?>"><?php echo osc_esc_html($label); ?></label>
-                </div>
-                <?php break;
-            case 'select': ?>
-                <select id="<?php echo osc_esc_html($id); ?>" class="form-select form-select-sm"
-                        name="<?php echo osc_esc_html($inputName); ?>" <?php echo $dis; ?>>
-                    <?php foreach (widgetConfigSelectOptions($field['options'] ?? array()) as $opt) { ?>
-                        <option value="<?php echo osc_esc_html($opt['value']); ?>"
-                            <?php echo ($val === $opt['value']) ? 'selected="selected"' : ''; ?>>
-                            <?php echo osc_esc_html($opt['label']); ?>
-                        </option>
-                    <?php } ?>
-                </select>
-                <?php break;
-            case 'number': ?>
-                <input type="number" id="<?php echo osc_esc_html($id); ?>" class="form-control form-control-sm"
-                       name="<?php echo osc_esc_html($inputName); ?>"
-                       value="<?php echo osc_esc_html($val); ?>" <?php echo $dis; ?>/>
-                <?php break;
-            case 'code': ?>
-                <?php // Raw HTML/JS: a plain monospace textarea, never TinyMCE. The
-                      // widget-code-editor class keeps the appearance TinyMCE init away.?>
-                <textarea id="<?php echo osc_esc_html($id); ?>" class="form-control widget-code-editor"
-                          style="font-family:monospace" rows="8" spellcheck="false" autocomplete="off"
-                          name="<?php echo osc_esc_html($inputName); ?>"
-                          <?php echo $dis; ?>><?php echo osc_esc_html($val); ?></textarea>
-                <?php break;
-            case 'textarea': ?>
-                <textarea id="<?php echo osc_esc_html($id); ?>" class="form-control" rows="5"
-                          name="<?php echo osc_esc_html($inputName); ?>"
-                          <?php echo $dis; ?>><?php echo osc_esc_html($val); ?></textarea>
-                <?php break;
-            case 'image': ?>
-                <?php // A media URL chosen via the picker (parts/media-picker.php).?>
+            <label class="form-sublabel" for="<?php echo osc_esc_html($id); ?>"><?php echo osc_esc_html($label); ?></label>
+        <?php }
+
+        switch ($fieldType) {
+            case 'checkbox':
+                // value stays '1': it is what a ticked box submits, not what is stored.
+                osc_admin_checkbox(array_merge($spec, array(
+                    'label'   => $label,
+                    'value'   => '1',
+                    'checked' => !empty($val) && $val !== '0',
+                    'attrs'   => $disabled ? array('disabled' => true) : array(),
+                )));
+                break;
+            case 'select':
+                $options = array();
+                foreach ((isset($field['options']) && is_array($field['options']) ? $field['options'] : array()) as $opt) {
+                    $options[$opt['value']] = $opt['label'];
+                }
+                osc_admin_select(array_merge($spec, array('options' => $options, 'selected' => $val, 'width' => 'text')));
+                break;
+            case 'number':
+                osc_admin_number($spec);
+                break;
+            case 'code':
+                // Raw HTML/JS: a plain monospace textarea, never TinyMCE. The
+                // widget-code-editor class keeps the appearance TinyMCE init away.
+                osc_admin_textarea(array_merge($spec, array(
+                    'rows'      => 8,
+                    'width'     => 'full',
+                    'monospace' => true,
+                    'class'     => 'widget-code-editor',
+                    'attrs'     => array('spellcheck' => 'false', 'autocomplete' => 'off'),
+                )));
+                break;
+            case 'textarea':
+                osc_admin_textarea(array_merge($spec, array('rows' => 5, 'width' => 'full')));
+                break;
+            case 'image':
+                // A media URL chosen via the picker (parts/media-picker.php), so the value
+                // itself is hidden and the buttons are the control.
+                ?>
                 <div class="widget-image-field">
                     <input type="hidden" id="<?php echo osc_esc_html($id); ?>" class="widget-image-input"
                            name="<?php echo osc_esc_html($inputName); ?>"
-                           value="<?php echo osc_esc_html($val); ?>" <?php echo $dis; ?>/>
+                           value="<?php echo osc_esc_html($val); ?>" <?php echo $disabled ? 'disabled="disabled"' : ''; ?>/>
                     <div class="widget-image-preview"<?php echo $val !== '' ? '' : ' hidden'; ?>>
                         <img src="<?php echo osc_esc_html($val); ?>" alt=""/>
                     </div>
@@ -351,12 +360,11 @@ function osc_widget_config_field($typeId, $field, $value, $disabled)
                             <?php echo $val !== '' ? '' : 'hidden'; ?>><?php _e('Remove'); ?></button>
                     </div>
                 </div>
-                <?php break;
-            default: ?>
-                <input type="text" id="<?php echo osc_esc_html($id); ?>" class="form-control form-control-sm"
-                       name="<?php echo osc_esc_html($inputName); ?>"
-                       value="<?php echo osc_esc_html($val); ?>" <?php echo $dis; ?>/>
-                <?php break;
+                <?php
+                break;
+            default:
+                osc_admin_text($spec);
+                break;
         } ?>
     </div>
     <?php

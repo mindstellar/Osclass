@@ -62,7 +62,7 @@ osc_current_admin_theme_path('parts/header.php'); ?>
                         $matching = $engine->countFor($rule, $meta['days'] ? $days : 0); ?>
                         <tr>
                             <td>
-                                <input class="form-check-input" type="checkbox" id="enabled_<?php echo $rule; ?>"
+                                <input type="checkbox" id="enabled_<?php echo $rule; ?>"
                                        name="enabled_<?php echo $rule; ?>" value="1" <?php echo $enabled ? 'checked' : ''; ?>>
                             </td>
                             <td>
@@ -70,13 +70,15 @@ osc_current_admin_theme_path('parts/header.php'); ?>
                                 <div class="text-muted"><?php echo osc_esc_html($meta['desc']); ?></div>
                             </td>
                             <td>
-                                <?php if ($meta['days']) { ?>
-                                    <div class="input-group input-group-sm" style="max-width:11rem">
-                                        <input type="number" min="1" class="form-control" name="days_<?php echo $rule; ?>"
-                                               value="<?php echo $days; ?>">
-                                        <span class="input-group-text"><?php _e('days'); ?></span>
-                                    </div>
-                                <?php } else { ?>
+                                <?php if ($meta['days']) {
+                                    osc_admin_number(array(
+                                        'row'    => false,
+                                        'name'   => 'days_' . $rule,
+                                        'value'  => $days,
+                                        'min'    => 1,
+                                        'suffix' => __('days'),
+                                    ));
+                                } else { ?>
                                     <span class="text-muted">&mdash;</span>
                                 <?php } ?>
                             </td>
@@ -87,11 +89,16 @@ osc_current_admin_theme_path('parts/header.php'); ?>
                 </table>
                 </div>
 
-                <div class="form-row mt-3" style="max-width:20rem">
-                    <label for="batch_limit"><?php _e('Maximum items removed per run'); ?></label>
-                    <input type="number" min="1" class="form-control form-control-sm" id="batch_limit"
-                           name="batch_limit" value="<?php echo $batch_limit; ?>">
-                    <div class="help-block"><?php _e('Keeps each run bounded so it never times out; run again to clear a larger backlog.'); ?></div>
+                <div class="form-row mt-3">
+                    <label class="form-sublabel" for="batch_limit"><?php _e('Maximum items removed per run'); ?></label>
+                    <?php osc_admin_number(array(
+                        'row'   => false,
+                        'id'    => 'batch_limit',
+                        'name'  => 'batch_limit',
+                        'value' => $batch_limit,
+                        'min'   => 1,
+                        'help'  => __('Keeps each run bounded so it never times out; run again to clear a larger backlog.'),
+                    )); ?>
                 </div>
             </div>
         </div>
@@ -106,36 +113,36 @@ osc_current_admin_theme_path('parts/header.php'); ?>
                              . 'write on a large site. Turn them off if you do not use them.'); ?>
                 </p>
 
-                <div class="form-row">
-                    <div class="form-check">
-                        <input class="form-check-input" type="checkbox" id="item_views_enabled"
-                               name="item_views_enabled" value="1" <?php echo osc_item_views_enabled() ? 'checked' : ''; ?>>
-                        <label class="form-check-label" for="item_views_enabled">
-                            <?php _e('Count listing views'); ?>
-                        </label>
-                    </div>
-                    <div class="help-block"><?php _e('Report counts are always recorded — moderation depends on them.'); ?></div>
-                </div>
+                <?php
+                osc_admin_checkbox(array(
+                    'id'      => 'item_views_enabled',
+                    'name'    => 'item_views_enabled',
+                    'label'   => __('Count listing views'),
+                    'checked' => osc_item_views_enabled(),
+                    'help'    => __('Report counts are always recorded — moderation depends on them.'),
+                ));
+                osc_admin_checkbox(array(
+                    'id'      => 'count_bot_views',
+                    'name'    => 'count_bot_views',
+                    'label'   => __('Count crawler visits as views'),
+                    'checked' => osc_count_bot_views(),
+                    'help'    => __('Off by default. Search-engine and AI crawlers are usually most of a busy '
+                                    . "site's traffic, so counting them both inflates the numbers and multiplies "
+                                    . 'the writes.'),
+                )); ?>
 
                 <div class="form-row mt-3">
-                    <div class="form-check">
-                        <input class="form-check-input" type="checkbox" id="count_bot_views"
-                               name="count_bot_views" value="1" <?php echo osc_count_bot_views() ? 'checked' : ''; ?>>
-                        <label class="form-check-label" for="count_bot_views">
-                            <?php _e('Count crawler visits as views'); ?>
-                        </label>
-                    </div>
-                    <div class="help-block"><?php _e('Off by default. Search-engine and AI crawlers are usually most of a busy site\'s traffic, so counting them both inflates the numbers and multiplies the writes.'); ?></div>
-                </div>
-
-                <div class="form-row mt-3" style="max-width:20rem">
-                    <label for="item_stats_retention_days"><?php _e('Keep daily statistics history for'); ?></label>
-                    <div class="input-group input-group-sm">
-                        <input type="number" min="0" class="form-control" id="item_stats_retention_days"
-                               name="item_stats_retention_days" value="<?php echo osc_item_stats_retention_days(); ?>">
-                        <span class="input-group-text"><?php _e('days'); ?></span>
-                    </div>
-                    <div class="help-block"><?php _e('0 keeps it forever. This is the history behind the statistics charts, which look back up to ten months; it is a few rows per day for the whole site.'); ?></div>
+                    <label class="form-sublabel" for="item_stats_retention_days"><?php _e('Keep daily statistics history for'); ?></label>
+                    <?php osc_admin_number(array(
+                        'row'    => false,
+                        'id'     => 'item_stats_retention_days',
+                        'name'   => 'item_stats_retention_days',
+                        'value'  => osc_item_stats_retention_days(),
+                        'min'    => 0,
+                        'suffix' => __('days'),
+                        'help'   => __('0 keeps it forever. This is the history behind the statistics charts, which '
+                                       . 'look back up to ten months; it is a few rows per day for the whole site.'),
+                    )); ?>
                 </div>
             </div>
         </div>

@@ -79,6 +79,11 @@ theme ships none, using a documented class vocabulary a theme restyles in CSS al
   sanitisation, validation, persistence into the plugin's own preference section, the flash
   message and the Save row all come from the declaration; the plugin writes no markup and no
   save handler. `osc_settings_value()` reads a field back in the shape its type implies.
+- The admin's other form screens — Cleanup, Activity log, Backup, Import, billing packages
+  and wallet, user settings, the theme/language/plugin upload rows, the widget editor and the
+  custom-field builder — are drawn from the same field primitives as Settings. Hints that used
+  a Bootstrap 3 class the theme never styled (`help-block`) are muted helper text now, and the
+  `input-group` "N days" pairs read as one line.
 - Every settings screen is drawn from the core field primitives: one width per field type,
   hints always on their own line, and no screen inventing its own input markup. Nothing is
   renamed — `form-row`, `form-controls`, `help-box` and the rest render exactly as before.

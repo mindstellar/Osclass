@@ -78,9 +78,14 @@ input[type="number"].field-num {
   padding: .2rem;
 }
 
-// Ties with `.form-controls select`; wins on source order because this file is imported
-// after forms.scss.
+// A select the primitive renders may sit anywhere — a dialog, a widget editor, a table
+// cell — not just inside `.form-controls`, which is where the theme's only select styling
+// was scoped. Extending here is the one place the appearance is attached, which is also the
+// single seam to cut when the theme stops standing on Bootstrap: replace this rule, not
+// every call site.
 select.field-select {
+  @extend .form-select-sm, .form-select;
+
   max-width: 100%;
   width: 14rem;
 }
