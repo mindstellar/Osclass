@@ -74,9 +74,7 @@ osc_current_admin_theme_path('parts/header.php'); ?>
     )); ?>
         <?php osc_admin_page_head(__('Comment Settings')); ?>
 
-        <div class="form-row">
-            <div class="form-label"><?php _e('Default comment settings'); ?></div>
-            <div class="form-controls">
+        <?php osc_admin_form_row_open(__('Default comment settings')); ?>
                 <?php osc_admin_checkbox(array(
                     'name'    => 'enabled_comments',
                     'label'   => __('Allow people to post comments on listings'),
@@ -109,11 +107,8 @@ osc_current_admin_theme_path('parts/header.php'); ?>
                         'help'   => __('If the value is zero, an administrator must always approve comments'),
                     )); ?>
                 </div>
-            </div>
-        </div>
-        <div class="form-row">
-            <div class="form-label"><?php _e('Other comment settings'); ?></div>
-            <div class="form-controls">
+        <?php osc_admin_form_row_close(); ?>
+        <?php osc_admin_form_row_open(__('Other comment settings')); ?>
                 <?php osc_admin_number(array(
                     'row'    => false,
                     'name'   => 'comments_per_page',
@@ -123,31 +118,24 @@ osc_current_admin_theme_path('parts/header.php'); ?>
                     'suffix' => __('comments per page'),
                     'help'   => __('If the value is zero all comments are shown'),
                 )); ?>
-            </div>
-        </div>
+        <?php osc_admin_form_row_close(); ?>
 
         <?php osc_admin_page_head(__('Notifications')); ?>
 
-        <div class="form-row">
-            <div class="form-label"><?php _e('E-mail admin whenever') ?></div>
-            <div class="form-controls">
+        <?php osc_admin_form_row_open(__('E-mail admin whenever')); ?>
                 <?php osc_admin_checkbox(array(
                     'name'    => 'notify_new_comment',
                     'label'   => __('A new comment is posted'),
                     'checked' => osc_notify_new_comment(),
                 )); ?>
-            </div>
-        </div>
-        <div class="form-row">
-            <div class="form-label"><?php _e('E-mail user whenever') ?></div>
-            <div class="form-controls">
+        <?php osc_admin_form_row_close(); ?>
+        <?php osc_admin_form_row_open(__('E-mail user whenever')); ?>
                 <?php osc_admin_checkbox(array(
                     'name'    => 'notify_new_comment_user',
                     'label'   => __("There's a new comment on his listing"),
                     'checked' => osc_notify_new_comment_user(),
                 )); ?>
-            </div>
-        </div>
+        <?php osc_admin_form_row_close(); ?>
                 <?php osc_admin_form_close(array()); ?>
 </div>
 <?php osc_current_admin_theme_path('parts/footer.php'); ?>

@@ -28,9 +28,7 @@ osc_current_admin_theme_path('parts/header.php'); ?>
         <input type="hidden" name="action" value="settings_post"/>
         <fieldset>
             <div class="form-horizontal">
-                <div class="form-row">
-                    <div class="form-label"> <?php _e('Settings'); ?></div>
-                    <div class="form-controls">
+                <?php osc_admin_form_row_open(__('Settings')); ?>
                         <?php osc_admin_checkbox(array(
                             'name'    => 'enabled_users',
                             'id'      => 'enabled_users',
@@ -53,19 +51,15 @@ osc_current_admin_theme_path('parts/header.php'); ?>
                             'label'   => __('Users need to validate their account'),
                             'checked' => osc_user_validation_enabled(),
                         )); ?>
-                    </div>
-                </div>
-                <div class="form-row">
-                    <div class="form-label"> <?php _e('Admin notifications'); ?></div>
-                    <div class="form-controls">
+                <?php osc_admin_form_row_close(); ?>
+                <?php osc_admin_form_row_open(__('Admin notifications')); ?>
                         <?php osc_admin_checkbox(array(
                             'name'    => 'notify_new_user',
                             'id'      => 'notify_new_user',
                             'label'   => __('When a new user is registered'),
                             'checked' => osc_notify_new_user(),
                         )); ?>
-                    </div>
-                </div>
+                <?php osc_admin_form_row_close(); ?>
                 <?php osc_admin_text(array(
                     'id'    => 'username_blacklist',
                     'name'  => 'username_blacklist',

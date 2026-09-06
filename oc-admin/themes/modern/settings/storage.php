@@ -208,8 +208,7 @@ osc_current_admin_theme_path('parts/header.php'); ?>
 
         <div class="form-horizontal">
             <?php osc_admin_page_head(__('Connection test')); ?>
-            <div class="form-row">
-                <div class="form-controls">
+            <?php osc_admin_form_row_open(''); ?>
                     <p><?php _e('Runs a small write/read/delete probe against the saved connection settings above.'); ?></p>
                     <?php
                     osc_admin_form_open(array(
@@ -223,12 +222,10 @@ osc_current_admin_theme_path('parts/header.php'); ?>
                         'variant' => 'dim',
                     ));
                     osc_admin_form_close(null, array('horizontal' => false)); ?>
-                </div>
-            </div>
+            <?php osc_admin_form_row_close(); ?>
 
             <?php osc_admin_page_head(__('Storage queue')); ?>
-            <div class="form-row">
-                <div class="form-controls">
+            <?php osc_admin_form_row_open(''); ?>
                     <p>
                         <?php echo sprintf(
                             osc_esc_html(__('Pending jobs: %d &middot; Failed jobs: %d')),
@@ -262,12 +259,10 @@ osc_current_admin_theme_path('parts/header.php'); ?>
                             </ul>
                         </div>
                     <?php } ?>
-                </div>
-            </div>
+            <?php osc_admin_form_row_close(); ?>
 
             <?php osc_admin_page_head(__('Migration')); ?>
-            <div class="form-row">
-                <div class="form-controls">
+            <?php osc_admin_form_row_open(''); ?>
                     <p><?php _e('Backfill existing images between local disk and remote storage. Each action queues '
                                  . 'jobs processed by the storage queue above (or by cron) rather than running immediately.'); ?></p>
 
@@ -326,8 +321,7 @@ osc_current_admin_theme_path('parts/header.php'); ?>
                          . 'bucket as remote, without re-uploading them.'); ?>
                         </div>
                     <?php } ?>
-                </div>
-            </div>
+            <?php osc_admin_form_row_close(); ?>
         </div>
     </div>
 

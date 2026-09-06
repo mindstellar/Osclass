@@ -39,74 +39,40 @@ osc_current_admin_theme_path('parts/header.php'); ?>
             <?php LanguageForm::primary_input_hidden($aLocale); ?>
 
             <div class="form-horizontal">
-                <div class="form-row">
-                    <div class="form-label"><?php _e('Current version'); ?></div>
-                    <div class="form-controls">
+                <?php osc_admin_form_row_open(__('Current version')); ?>
                         <?php echo $aLocale['s_version']; ?>
-                    </div>
-                </div>
-                <div class="form-row">
-                    <div class="form-label"><?php _e('Name'); ?></div>
-                    <div class="form-controls">
+                <?php osc_admin_form_row_close(); ?>
+                <?php osc_admin_form_row_open(__('Name')); ?>
                         <?php LanguageForm::name_input_text($aLocale); ?>
-                    </div>
-                </div>
-                <div class="form-row">
-                    <div class="form-label"><?php _e('Short name'); ?></div>
-                    <div class="form-controls">
+                <?php osc_admin_form_row_close(); ?>
+                <?php osc_admin_form_row_open(__('Short name')); ?>
                         <?php LanguageForm::short_name_input_text($aLocale); ?>
-                    </div>
-                </div>
-                <div class="form-row">
-                    <div class="form-label"><?php _e('Description'); ?></div>
-                    <div class="form-controls">
+                <?php osc_admin_form_row_close(); ?>
+                <?php osc_admin_form_row_open(__('Description')); ?>
                         <?php LanguageForm::description_input_text($aLocale); ?>
-                    </div>
-                </div>
-                <div class="form-row">
-                    <div class="form-label"><?php _e('Direction'); ?></div>
-                    <div class="form-controls">
+                <?php osc_admin_form_row_close(); ?>
+                <?php osc_admin_form_row_open(__('Direction')); ?>
                         <?php LanguageForm::text_direction_select($aLocale); ?>
-                    </div>
-                </div>
-                <div class="form-row">
-                    <div class="form-label"><?php _e('Currency format'); ?></div>
-                    <div class="form-controls">
+                <?php osc_admin_form_row_close(); ?>
+                <?php osc_admin_form_row_open(__('Currency format')); ?>
                         <?php LanguageForm::currency_format_input_text($aLocale); ?>
-                    </div>
-                </div>
-                <div class="form-row">
-                    <div class="form-label"><?php _e('Number of decimals'); ?></div>
-                    <div class="form-controls">
+                <?php osc_admin_form_row_close(); ?>
+                <?php osc_admin_form_row_open(__('Number of decimals')); ?>
                         <?php LanguageForm::num_dec_input_text($aLocale); ?>
-                    </div>
-                </div>
-                <div class="form-row">
-                    <div class="form-label"><?php _e('Decimal point'); ?></div>
-                    <div class="form-controls">
+                <?php osc_admin_form_row_close(); ?>
+                <?php osc_admin_form_row_open(__('Decimal point')); ?>
                         <?php LanguageForm::dec_point_input_text($aLocale); ?>
-                    </div>
-                </div>
-                <div class="form-row">
-                    <div class="form-label"><?php _e('Thousands separator'); ?></div>
-                    <div class="form-controls">
+                <?php osc_admin_form_row_close(); ?>
+                <?php osc_admin_form_row_open(__('Thousands separator')); ?>
                         <?php LanguageForm::thousands_sep_input_text($aLocale); ?>
-                    </div>
-                </div>
-                <div class="form-row">
-                    <div class="form-label"><?php _e('Date format'); ?></div>
-                    <div class="form-controls">
+                <?php osc_admin_form_row_close(); ?>
+                <?php osc_admin_form_row_open(__('Date format')); ?>
                         <?php LanguageForm::date_format_input_text($aLocale); ?>
-                    </div>
-                </div>
-                <div class="form-row">
-                    <div class="form-label"><?php _e('Stopwords'); ?></div>
-                    <div class="form-controls">
+                <?php osc_admin_form_row_close(); ?>
+                <?php osc_admin_form_row_open(__('Stopwords')); ?>
                         <?php LanguageForm::description_textarea($aLocale); ?>
-                    </div>
-                </div>
-                <div class="form-row">
-                    <div class="form-controls">
+                <?php osc_admin_form_row_close(); ?>
+                <?php osc_admin_form_row_open(''); ?>
                         <div class="form-label-checkbox">
                             <?php LanguageForm::enabled_input_checkbox($aLocale); ?>
                             <?php _e('Enabled for the public website'); ?>
@@ -115,8 +81,7 @@ osc_current_admin_theme_path('parts/header.php'); ?>
                             <?php LanguageForm::enabled_bo_input_checkbox($aLocale); ?>
                             <?php _e('Enabled for the backoffice (oc-admin)'); ?>
                         </div>
-                    </div>
-                </div>
+                <?php osc_admin_form_row_close(); ?>
             </div>
             <?php osc_admin_form_actions(); ?>
         </form>

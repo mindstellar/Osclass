@@ -32,9 +32,7 @@ $isPlaceable = is_array($groupMeta) && !empty($groupMeta['placeable']);
             <h3 class="card-header"><?php _e('Edit field group'); ?></h3>
             <fieldset>
                 <div class="card-body">
-                    <div class="form-row">
-                        <div class="form-label"><?php _e('Group name'); ?></div>
-                        <div class="form-controls">
+                    <?php osc_admin_form_row_open(__('Group name')); ?>
                             <?php osc_admin_text(array(
                                 'row'   => false,
                                 'id'    => 'group_name',
@@ -42,26 +40,19 @@ $isPlaceable = is_array($groupMeta) && !empty($groupMeta['placeable']);
                                 'value' => $groupName,
                                 'attrs' => array('autocomplete' => 'off'),
                             )); ?>
-                        </div>
-                    </div>
-                    <div class="form-row">
-                        <div class="form-label"><?php _e('Identifier name'); ?></div>
-                        <div class="form-controls">
+                    <?php osc_admin_form_row_close(); ?>
+                    <?php osc_admin_form_row_open(__('Identifier name')); ?>
                             <?php osc_admin_text(array(
                                 'row'   => false,
                                 'name'  => 'group_slug',
                                 'value' => $groupSlug,
                             )); ?>
                             <p class="help-inline"><?php _e('Only alphanumeric characters are allowed [a-z0-9_-]'); ?></p>
-                        </div>
-                    </div>
-                    <div class="form-row">
-                        <div class="form-label"></div>
-                        <div class="form-controls">
+                    <?php osc_admin_form_row_close(); ?>
+                    <?php osc_admin_form_row_open(''); ?>
                             <label><input type="checkbox" name="group_placeable" value="1"<?php echo $isPlaceable ? ' checked' : ''; ?> />
                                 <span><?php _e('Available as a block (place this form on pages and layouts)'); ?></span></label>
-                        </div>
-                    </div>
+                    <?php osc_admin_form_row_close(); ?>
                     <div class="form-row">
                         <div><?php _e('Select the categories where you want to apply this group:'); ?></div>
                         <div class="separate-top">

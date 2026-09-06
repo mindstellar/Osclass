@@ -204,55 +204,29 @@ $aux = customFrmText();
                         <fieldset>
                             <div class="form-horizontal">
                                 <?php if ($aux['edit']) { ?>
-                                    <div class="form-row">
-                                        <div class="form-label"><?php _e('Last access'); ?></div>
-                                        <div class="form-controls">
+                                    <?php osc_admin_form_row_open(__('Last access')); ?>
                                             <div class='form-label-checkbox'>
                                                 <?php echo sprintf(__('%s on %s'), $user['s_access_ip'], $user['dt_access_date']); ?>
                                             </div>
-                                        </div>
-                                    </div>
+                                    <?php osc_admin_form_row_close(); ?>
                                 <?php } ?>
-                                <div class="form-row">
-                                    <div class="form-label"><?php _e('Name'); ?></div>
-                                    <div class="form-controls">
+                                <?php osc_admin_form_row_open(__('Name')); ?>
                                         <?php UserForm::name_text($user); ?>
-                                    </div>
-                                </div>
-                                <div class="form-row">
-                                    <div class="form-label"><?php _e('Username'); ?></div>
-                                    <div class="form-controls">
+                                <?php osc_admin_form_row_close(); ?>
+                                <?php osc_admin_form_row_open(__('Username')); ?>
                                         <?php UserForm::username_text($user); ?>
                                         <div id="available"></div>
-                                    </div>
-                                </div>
-                                <div class="form-row">
-                                    <div class="form-label"><?php _e('E-mail'); ?> <em><?php _e('(required)'); ?></em></div>
-                                    <div class="form-controls">
-                                        <?php UserForm::email_text($user); ?>
-                                    </div>
-                                </div>
-                                <div class="form-row">
-                                    <div class="form-label"><?php _e('Cell phone'); ?></div>
-                                    <div class="form-controls">
+                                <?php osc_admin_form_row_close(); ?>
+                                <?php osc_admin_form_row_open(__('E-mail')); ?>
                                         <?php UserForm::mobile_text($user); ?>
-                                    </div>
-                                </div>
-                                <div class="form-row">
-                                    <div class="form-label"><?php _e('Phone'); ?></div>
-                                    <div class="form-controls">
+                                <?php osc_admin_form_row_close(); ?>
+                                <?php osc_admin_form_row_open(__('Phone')); ?>
                                         <?php UserForm::phone_land_text($user); ?>
-                                    </div>
-                                </div>
-                                <div class="form-row">
-                                    <div class="form-label"><?php _e('Website'); ?></div>
-                                    <div class="form-controls">
+                                <?php osc_admin_form_row_close(); ?>
+                                <?php osc_admin_form_row_open(__('Website')); ?>
                                         <?php UserForm::website_text($user); ?>
-                                    </div>
-                                </div>
-                                <div class="form-row">
-                                    <div class="form-label"><?php _e('Avatar'); ?></div>
-                                    <div class="form-controls">
+                                <?php osc_admin_form_row_close(); ?>
+                                <?php osc_admin_form_row_open(__('Avatar')); ?>
                                         <?php if ($aux['edit'] && function_exists('osc_user_avatar_url')) { ?>
                                             <div class="form-label-checkbox">
                                                 <img src="<?php echo osc_esc_html(osc_user_avatar_url($user['pk_i_id'], 'normal')); ?>"
@@ -272,58 +246,33 @@ $aux = customFrmText();
                                                 </label>
                                             </div>
                                         <?php } ?>
-                                    </div>
-                                </div>
+                                <?php osc_admin_form_row_close(); ?>
                                 <?php osc_admin_form_section(__('About you')); ?>
-                                <div class="form-row">
-                                    <div class="form-label"><?php _e('User type'); ?></div>
-                                    <div class="form-controls">
+                                <?php osc_admin_form_row_open(__('User type')); ?>
                                         <?php UserForm::is_company_select($user); ?>
-                                    </div>
-                                </div>
-                                <div class="form-row">
-                                    <div class="form-label"><?php _e('Additional information'); ?></div>
-                                    <div class="form-controls">
+                                <?php osc_admin_form_row_close(); ?>
+                                <?php osc_admin_form_row_open(__('Additional information')); ?>
                                         <?php UserForm::multilanguage_info($locales, $user); ?>
-                                    </div>
-                                </div>
+                                <?php osc_admin_form_row_close(); ?>
                                 <?php osc_admin_form_section(__('Location')); ?>
-                                <div class="form-row">
-                                    <div class="form-label"><?php _e('Country'); ?></div>
-                                    <div class="form-controls">
+                                <?php osc_admin_form_row_open(__('Country')); ?>
                                         <?php UserForm::country_select($countries, $user); ?>
-                                    </div>
-                                </div>
-                                <div class="form-row">
-                                    <div class="form-label"><?php _e('Region'); ?></div>
-                                    <div class="form-controls">
+                                <?php osc_admin_form_row_close(); ?>
+                                <?php osc_admin_form_row_open(__('Region')); ?>
                                         <?php UserForm::region_select($regions, $user); ?>
-                                    </div>
-                                </div>
-                                <div class="form-row">
-                                    <div class="form-label"><?php _e('City'); ?></div>
-                                    <div class="form-controls">
+                                <?php osc_admin_form_row_close(); ?>
+                                <?php osc_admin_form_row_open(__('City')); ?>
                                         <?php UserForm::city_select($cities, $user); ?>
-                                    </div>
-                                </div>
-                                <div class="form-row">
-                                    <div class="form-label"><?php _e('City area'); ?></div>
-                                    <div class="form-controls">
+                                <?php osc_admin_form_row_close(); ?>
+                                <?php osc_admin_form_row_open(__('City area')); ?>
                                         <?php UserForm::city_area_text($user); ?>
-                                    </div>
-                                </div>
-                                <div class="form-row">
-                                    <div class="form-label"><?php _e('Zip code'); ?></div>
-                                    <div class="form-controls">
+                                <?php osc_admin_form_row_close(); ?>
+                                <?php osc_admin_form_row_open(__('Zip code')); ?>
                                         <?php UserForm::zip_text($user); ?>
-                                    </div>
-                                </div>
-                                <div class="form-row">
-                                    <div class="form-label"><?php _e('Address'); ?></div>
-                                    <div class="form-controls">
+                                <?php osc_admin_form_row_close(); ?>
+                                <?php osc_admin_form_row_open(__('Address')); ?>
                                         <?php UserForm::address_text($user); ?>
-                                    </div>
-                                </div>
+                                <?php osc_admin_form_row_close(); ?>
                                 <?php osc_admin_form_section(__('Password')); ?>
                                 <div class="form-row">
                                     <div class="form-label"><?php _e('New password'); ?><?php if (!$aux['edit']) {

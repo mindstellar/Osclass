@@ -68,62 +68,45 @@ osc_current_admin_theme_path('parts/header.php'); ?>
             <?php AdminForm::js_validation(); ?>
             <fieldset>
                 <div class="form-horizontal">
-                    <div class="form-row">
-                        <div class="form-label"><?php _e('Name <em>(required)</em>'); ?></div>
-                        <div class="form-controls">
-                            <?php AdminForm::name_text($admin); ?>
-                        </div>
-                    </div>
-                    <div class="form-row">
-                        <div class="form-label"><?php _e('Username <em>(required)</em>'); ?></div>
-                        <div class="form-controls"><?php AdminForm::username_text($admin); ?></div>
-                    </div>
-                    <div class="form-row">
-                        <div class="form-label"><?php _e('E-mail <em>(required)</em>'); ?></div>
-                        <div class="form-controls"><?php AdminForm::email_text($admin); ?></div>
-                    </div>
+                    <?php osc_admin_form_row_open(__('Name <em>(required)</em>')); ?>
+                        <?php AdminForm::name_text($admin); ?>
+                    <?php osc_admin_form_row_close(); ?>
+                    <?php osc_admin_form_row_open(__('Username <em>(required)</em>')); ?>
+                        <?php AdminForm::username_text($admin); ?>
+                    <?php osc_admin_form_row_close(); ?>
+                    <?php osc_admin_form_row_open(__('E-mail <em>(required)</em>')); ?>
+                        <?php AdminForm::email_text($admin); ?>
+                    <?php osc_admin_form_row_close(); ?>
                     <?php if (!$aux['admin_edit']
                               || ($aux['admin_edit']
                                   && Params::getParam('id') != osc_logged_admin_id()
                                   && Params::getParam('id') != '')
                     ) { ?>
-                        <div class="form-row">
-                            <div class="form-label"><?php _e('Admin type <em>(required)</em>'); ?></div>
-                            <div class="form-controls">
-                                                       <?php AdminForm::type_select($admin); ?>
+                        <?php osc_admin_form_row_open(__('Admin type <em>(required)</em>')); ?>
+                            <?php AdminForm::type_select($admin); ?>
                                 <p class="help-inline">
                                     <em><?php _e('Administrators have total control over all aspects of your installation, '
                                                  . 'while moderators are only allowed to moderate listings, comments and media files');
                         ?></em>
                                 </p>
-                            </div>
-                        </div>
+                        <?php osc_admin_form_row_close(); ?>
                     <?php } ?>
-                    <div class="form-row">
-                        <div class="form-label"><?php _e('New password'); ?></div>
-                        <div class="form-controls">
-                            <?php AdminForm::password_text($admin); ?>
-                        </div>
-                    </div>
+                    <?php osc_admin_form_row_open(__('New password')); ?>
+                        <?php AdminForm::password_text($admin); ?>
+                    <?php osc_admin_form_row_close(); ?>
                     <?php if ($aux['admin_edit']) { ?>
-                        <div class="form-row">
-                            <div class="form-label"><?php _e('Confirm new password'); ?></div>
-                            <div class="form-controls">
-                                <?php AdminForm::check_password_text($admin); ?>
+                        <?php osc_admin_form_row_open(__('Confirm new password')); ?>
+                            <?php AdminForm::check_password_text($admin); ?>
                                 <p class="help-inline"><em><?php _e('Type your new password again'); ?></em></p>
-                            </div>
-                        </div>
+                        <?php osc_admin_form_row_close(); ?>
                     <?php } ?>
 
                     <hr/>
-                    <div class="form-row">
-                        <div class="form-label"><?php _e('Your current password'); ?></div>
-                        <div class="form-controls">
-                            <?php AdminForm::old_password_text(); ?>
+                    <?php osc_admin_form_row_open(__('Your current password')); ?>
+                        <?php AdminForm::old_password_text(); ?>
                             <p class="help-inline">
                                 <em><?php _e('For security, type <b>your current password</b>'); ?></em></p>
-                        </div>
-                    </div>
+                    <?php osc_admin_form_row_close(); ?>
 
 
                     <?php osc_run_hook('admin_profile_form', $admin); ?>

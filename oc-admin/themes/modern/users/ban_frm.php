@@ -76,26 +76,17 @@ $aux = customFrmText();
         <?php BanRuleForm::primary_input_hidden($rule); ?>
         <fieldset>
             <div class="form-horizontal">
-                <div class="form-row">
-                    <div class="form-label"><?php _e('Ban name / Reason'); ?></div>
-                    <div class="form-controls">
+                <?php osc_admin_form_row_open(__('Ban name / Reason')); ?>
                         <?php BanRuleForm::name_text($rule); ?>
-                    </div>
-                </div>
-                <div class="form-row">
-                    <div class="form-label"><?php _e('IP rule'); ?></div>
-                    <div class="form-controls">
+                <?php osc_admin_form_row_close(); ?>
+                <?php osc_admin_form_row_open(__('IP rule')); ?>
                         <?php BanRuleForm::ip_text($rule); ?>
                         <span class="help-box"><?php _e('(e.g. 192.168.10-20.*)'); ?></span>
-                    </div>
-                </div>
-                <div class="form-row">
-                    <div class="form-label"><?php _e('E-mail rule'); ?></div>
-                    <div class="form-controls">
+                <?php osc_admin_form_row_close(); ?>
+                <?php osc_admin_form_row_open(__('E-mail rule')); ?>
                         <?php BanRuleForm::email_text($rule); ?>
                         <span class="help-box"><?php _e('(e.g. *@badsite.com, *@subdomain.badsite.com, *@*badsite.com)'); ?></span>
-                    </div>
-                </div>
+                <?php osc_admin_form_row_close(); ?>
                 <div class="clear"></div>
                 <?php osc_admin_form_actions(array(
                     array('label' => $aux['btn_text'], 'type' => 'submit', 'variant' => 'primary'),

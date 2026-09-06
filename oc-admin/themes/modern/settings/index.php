@@ -216,9 +216,7 @@ osc_current_admin_theme_path('parts/header.php'); ?>
                 'options'  => $timezoneOptions,
                 'width'    => 'text',
             )); ?>
-            <div class="form-row">
-                <div class="form-label"><?php _e('Date & time format'); ?></div>
-                <div class="form-controls">
+            <?php osc_admin_form_row_open(__('Date & time format')); ?>
                     <div class="custom-date-time">
                         <div id="date">
                             <div class="form-sublabel"><?php _e('Date'); ?></div>
@@ -277,8 +275,7 @@ foreach ($timeFormats as $tf) {
                         <a href="https://php.net/date"
                            target="_blank" rel="noopener"><?php _e('Documentation on date and time formatting'); ?></a>
                     </div>
-                </div>
-            </div>
+            <?php osc_admin_form_row_close(); ?>
             <?php
             osc_admin_number(array(
                 'name'   => 'num_rss_items',
@@ -302,28 +299,22 @@ foreach ($timeFormats as $tf) {
                 'suffix' => __('listings at most'),
             )); ?>
             <?php osc_admin_page_head(__('Category settings')); ?>
-            <div class="form-row">
-                <div class="form-label"><?php _e('Parent categories'); ?></div>
-                <div class="form-controls">
+            <?php osc_admin_form_row_open(__('Parent categories')); ?>
                     <?php osc_admin_checkbox(array(
                         'name'    => 'selectable_parent_categories',
                         'label'   => __('Allow users to select a parent category as a category
                             when inserting or editing a listing '),
                         'checked' => osc_selectable_parent_categories(),
                     )); ?>
-                </div>
-            </div>
+            <?php osc_admin_form_row_close(); ?>
             <?php osc_admin_page_head(__('Contact Settings')); ?>
-            <div class="form-row">
-                <div class="form-label"><?php _e('Attachments'); ?></div>
-                <div class="form-controls">
+            <?php osc_admin_form_row_open(__('Attachments')); ?>
                     <?php osc_admin_checkbox(array(
                         'name'    => 'enabled_attachment',
                         'label'   => __('Allow people to attach a file to the contact form'),
                         'checked' => osc_contact_attachment(),
                     )); ?>
-                </div>
-            </div>
+            <?php osc_admin_form_row_close(); ?>
             <?php osc_admin_page_head(__('Cron Settings')); ?>
             <?php osc_admin_field(array(
                 'type'       => 'checkbox',

@@ -274,6 +274,54 @@ $html = render(static function () {
 });
 emits('label_html is a markup slot', $html, 'Run <a href="#">cron</a>');
 
+harness_section('a labelled row of several fields');
+$html = render(static function () {
+    osc_admin_field_row('Default comment settings', array(
+        array('type' => 'checkbox', 'name' => 'enabled', 'label' => 'Allow comments', 'checked' => true),
+        array('type' => 'checkbox', 'name' => 'reg_only', 'label' => 'Registered only'),
+        array('type' => 'number', 'name' => 'per_page', 'value' => 10, 'suffix' => 'per page'),
+    ));
+});
+emits('opens one row', $html, '<div class="form-row"><div class="form-label">Default comment settings</div>');
+check('with one controls column', substr_count($html, 'class="form-controls"') === 1, $html);
+// The fields share the row, so none of them may draw one of its own.
+check('and no field draws a row of its own', substr_count($html, 'class="form-row"') === 1, $html);
+emits('the checkboxes are in it', $html, 'name="enabled"');
+emits('and so is the number field', $html, 'name="per_page"');
+emits('which keeps its suffix', $html, '<label class="field-suffix"');
+// A row that has to drop to markup for one part should not hand-write the row around it.
+$mixed = render(static function () {
+    osc_admin_field_row('Mixed', array(
+        array('type' => 'checkbox', 'name' => 'a', 'label' => 'A'),
+        static function () {
+            echo '<p>anything</p>';
+        },
+    ));
+});
+emits('a callable emits into the same column', $mixed, '<p>anything</p>');
+
+harness_section('a row a script has to address');
+// A row shown and hidden by the page's own script needs its id and its hidden state; without
+// somewhere to put them the view has to hand-write the row, which is what these replaced.
+$html = render(static function () {
+    osc_admin_form_row_open('Option map', array(
+        'id'             => 'cf_cascade_map_row',
+        'style'          => 'display:none;',
+        'controls_class' => 'cf-rule-condition',
+    ));
+    osc_admin_form_row_close();
+});
+emits('the row carries its id', $html, '<div class="form-row" id="cf_cascade_map_row"');
+emits('and its inline state', $html, 'style="display:none;"');
+emits('the controls column can be classed', $html, '<div class="form-controls cf-rule-condition">');
+$plain = render(static function () {
+    osc_admin_form_row_open('');
+    osc_admin_form_row_close();
+});
+// A row with nothing to label must not emit an empty label column, which would indent its
+// contents past a heading that is not there.
+check('an unlabelled row has no label column', strpos($plain, 'form-label') === false, $plain);
+
 harness_section('the form and section scaffolding');
 $html = render(static function () {
     osc_admin_form_open(array('action' => 'comments_post', 'page' => 'settings', 'name' => 'comments_form'));

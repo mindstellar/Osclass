@@ -90,22 +90,16 @@ $formCount = (int)__get('form_count');
                         <?php FieldForm::multiLangTitle($field); ?>
                     </div>
                     <div class="cf-editor-body">
-                        <div class="form-row" id="div_field_options">
-                            <div class="form-label"><?php _e('Options'); ?></div>
-                            <div class="form-controls">
+                        <?php osc_admin_form_row_open(__('Options'), array('id' => 'div_field_options')); ?>
                                 <?php FieldForm::options_input_text($field); ?>
                                 <p class="help-inline"><?php _e('Separate options with commas'); ?></p>
-                            </div>
-                        </div>
-                        <div class="form-row">
-                            <div class="form-label"><?php _e('Type'); ?></div>
-                            <div class="form-controls"><?php FieldForm::type_select($field); ?></div>
-                        </div>
+                        <?php osc_admin_form_row_close(); ?>
+                        <?php osc_admin_form_row_open(__('Type')); ?>
+                            <?php FieldForm::type_select($field); ?>
+                        <?php osc_admin_form_row_close(); ?>
                         <?php if (!$builderMode) { ?>
-                        <div class="form-row">
-                            <div class="form-label"><?php _e('Group'); ?></div>
-                            <div class="form-controls">
-                                <?php
+                        <?php osc_admin_form_row_open(__('Group')); ?>
+                            <?php
                                 $groupOptions = array('0' => __('Ungrouped'));
                                 foreach ($allGroups as $g) {
                                     $groupOptions[(int)$g['pk_i_id']] = $g['s_name'];
@@ -118,14 +112,12 @@ $formCount = (int)__get('form_count');
                                     'options'  => $groupOptions,
                                 )); ?>
                                 <p class="help-inline"><?php _e('Grouped fields inherit their categories from the group and render as a section.'); ?></p>
-                            </div>
-                        </div>
+                        <?php osc_admin_form_row_close(); ?>
                         <?php } ?>
-                        <div class="form-row">
-                            <div class="form-label"></div>
-                            <div class="form-controls"><label><?php FieldForm::required_checkbox($field); ?>
-                                    <span><?php _e('This field is required'); ?></span></label></div>
-                        </div>
+                        <?php osc_admin_form_row_open(''); ?>
+                            <label><?php FieldForm::required_checkbox($field); ?>
+                                    <span><?php _e('This field is required'); ?></span></label>
+                        <?php osc_admin_form_row_close(); ?>
 
                         <?php
                         // Configuration inputs. Each row carries the config key it
@@ -164,10 +156,8 @@ $formCount = (int)__get('form_count');
 // a sibling field. Emitted as JSON in cfg_rules on submit.
 ?>
                         <div id="cf_rules_block" class="cf-rules-block">
-                            <div class="form-row">
-                                <div class="form-label"><?php _e('Conditional logic'); ?></div>
-                                <div class="form-controls">
-                                    <?php osc_admin_select(array(
+                            <?php osc_admin_form_row_open(__('Conditional logic')); ?>
+                                <?php osc_admin_select(array(
                                         'row'      => false,
                                         'id'       => 'cf_rule_action',
                                         'name'     => '',
@@ -178,11 +168,8 @@ $formCount = (int)__get('form_count');
                                             'required_when' => __('Required only when…'),
                                         ),
                                     )); ?>
-                                </div>
-                            </div>
-                            <div class="form-row" id="cf_rule_condition" style="display:none;">
-                                <div class="form-label"></div>
-                                <div class="form-controls cf-rule-condition">
+                            <?php osc_admin_form_row_close(); ?>
+                            <?php osc_admin_form_row_open('', array('id' => 'cf_rule_condition', 'style' => 'display:none;', 'controls_class' => 'cf-rule-condition')); ?>
                                     <?php
                                     $ruleFieldOptions = array('' => __('Select a field'));
                                     foreach ($allFields as $sibling) {
@@ -216,8 +203,7 @@ $formCount = (int)__get('form_count');
                                         'placeholder' => __('Value'),
                                         'width'       => 'num',
                                     )); ?>
-                                </div>
-                            </div>
+                            <?php osc_admin_form_row_close(); ?>
                             <input type="hidden" name="cfg_rules" id="cfg_rules" value="" />
                         </div>
 
@@ -226,10 +212,8 @@ $formCount = (int)__get('form_count');
                         // shows this block for DROPDOWN/RADIO only.
 ?>
                         <div id="cf_cascade_block" class="cf-rules-block" style="display:none;">
-                            <div class="form-row">
-                                <div class="form-label"><?php _e('Cascading options'); ?></div>
-                                <div class="form-controls">
-                                    <?php
+                            <?php osc_admin_form_row_open(__('Cascading options')); ?>
+                                <?php
                                     $cascadeOptions = array('' => __('Not cascading'));
                                     foreach ($allFields as $sibling) {
                                         if ((int)$sibling['pk_i_id'] === (int)$field['pk_i_id']) {
@@ -245,11 +229,8 @@ $formCount = (int)__get('form_count');
                                         'options'  => $cascadeOptions,
                                     )); ?>
                                     <p class="help-inline"><?php _e('Filter this field\'s options by the value of a parent field.'); ?></p>
-                                </div>
-                            </div>
-                            <div class="form-row" id="cf_cascade_map_row" style="display:none;">
-                                <div class="form-label"><?php _e('Option map'); ?></div>
-                                <div class="form-controls">
+                            <?php osc_admin_form_row_close(); ?>
+                            <?php osc_admin_form_row_open(__('Option map'), array('id' => 'cf_cascade_map_row', 'style' => 'display:none;')); ?>
                                     <?php osc_admin_textarea(array(
                                         'row'         => false,
                                         'id'          => 'cfg_cascade_map',
@@ -260,8 +241,7 @@ $formCount = (int)__get('form_count');
                                         'placeholder' => "Toyota: Corolla, Camry, RAV4\nHonda: Civic, Accord",
                                     )); ?>
                                     <p class="help-inline"><?php _e('One line per parent value: "ParentValue: option1, option2".'); ?></p>
-                                </div>
-                            </div>
+                            <?php osc_admin_form_row_close(); ?>
                         </div>
                         <?php if (!$builderMode) { ?>
                         <div class="form-row" id="field_cat_select">
@@ -285,31 +265,22 @@ $formCount = (int)__get('form_count');
                             <span class="icon-more"></span><?php _e('Advanced options'); ?>
                         </div>
                         <div id="more-options_iframe" class="input-line">
-                            <div class="form-row" id="div_field_options">
-                                <div class="form-label"><?php _e('Identifier name'); ?></div>
-                                <div class="form-controls">
+                            <?php osc_admin_form_row_open(__('Identifier name'), array('id' => 'div_field_options')); ?>
                                     <?php osc_admin_text(array(
                                         'row'   => false,
                                         'name'  => 'field_slug',
                                         'value' => $field['s_slug'],
                                     )); ?>
                                     <p class="help-inline"><?php _e('Only alphanumeric characters are allowed [a-z0-9_-]'); ?></p>
-                                </div>
-                            </div>
-                            <div class="form-row">
-                                <div class="form-label"></div>
-                                <div class="form-controls">
-                                    <label><?php FieldForm::searchable_checkbox($field); ?><?php
+                            <?php osc_admin_form_row_close(); ?>
+                            <?php osc_admin_form_row_open(''); ?>
+                                <label><?php FieldForm::searchable_checkbox($field); ?><?php
 _e('Tick to allow searches by this field'); ?></label>
-                                </div>
-                            </div>
-                            <div class="form-row" id="field_newtab" style="display: none;">
-                                <div class="form-label"></div>
-                                <div class="form-controls">
+                            <?php osc_admin_form_row_close(); ?>
+                            <?php osc_admin_form_row_open('', array('id' => 'field_newtab', 'style' => 'display: none;')); ?>
                                     <label><?php FieldForm::newtab_checkbox($field); ?><?php
 _e('Tick to open links in new tab'); ?></label>
-                                </div>
-                            </div>
+                            <?php osc_admin_form_row_close(); ?>
                         </div>
                     </div>
                 </div>

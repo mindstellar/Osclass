@@ -79,6 +79,12 @@ theme ships none, using a documented class vocabulary a theme restyles in CSS al
   sanitisation, validation, persistence into the plugin's own preference section, the flash
   message and the Save row all come from the declaration; the plugin writes no markup and no
   save handler. `osc_settings_value()` reads a field back in the shape its type implies.
+- `osc_admin_field_row()` renders one labelled row holding several fields — the shape most of
+  the admin is made of, one label against a stack of related checkboxes. `osc_admin_form_row_open()`
+  now also carries a row id, inline state and an extra class on the controls column, so a row a
+  script shows and hides no longer has to be hand-written. 100 of the admin's 117 hand-written
+  row blocks are declared now; what is left either carries markup no helper models or sits in
+  dead code.
 - `osc_admin_form_open()`, `osc_admin_form_close()` and `osc_admin_form_section()` complete the
   admin form vocabulary: a screen declares the route its form posts to and the sections it is
   divided into, instead of writing the `<form>`, its hidden `page`/`action` fields, the

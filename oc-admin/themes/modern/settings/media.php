@@ -331,9 +331,7 @@ osc_current_admin_theme_path('parts/header.php'); ?>
                             )); ?>
                         <?php } ?>
                         <?php if (osc_is_watermark_text() && osc_watermark_text_color()) { ?>
-                            <div class="form-row">
-                                <div class="form-label"><?php _e('Preview Watermark'); ?></div>
-                                <div class="form-controls">
+                            <?php osc_admin_form_row_open(__('Preview Watermark')); ?>
                                     <div class="help-box">
                                         <?php if (!file_exists(Preference::newInstance()->get('watermark_text_options'))) {
                                             ImageProcessing::createWatermarkImageFromText(
@@ -347,8 +345,7 @@ osc_current_admin_theme_path('parts/header.php'); ?>
                                  . str_replace(osc_base_path(), '', osc_uploads_path())
                                  . Preference::newInstance()->get('watermark_text_image_name') ?>"/>
                                     </div>
-                                </div>
-                            </div>
+                            <?php osc_admin_form_row_close(); ?>
                         <?php } ?>
                         <?php osc_admin_select(array(
                             'id'       => 'watermark_text_place',
@@ -383,8 +380,7 @@ osc_current_admin_theme_path('parts/header.php'); ?>
                         )); ?>
                     </div>
                     <?php osc_admin_page_head(__('Regenerate images')); ?>
-                    <div class="form-row">
-                        <div class="form-controls">
+                    <?php osc_admin_form_row_open(''); ?>
                             <p>
                                 <?php _e('You can regenerate different image dimensions. If you have changed the dimension of thumbnails, '
                                                                 . 'preview or normal images, you might want to regenerate your images.'); ?>
@@ -392,8 +388,7 @@ osc_current_admin_theme_path('parts/header.php'); ?>
                             <a class="btn btn-dim"
                                href="<?php echo osc_admin_base_url(true) . '?page=settings&action=images_post' . '&'
                                                                        . osc_csrf_token_url(); ?>"><?php _e('Regenerate'); ?></a>
-                        </div>
-                    </div>
+                    <?php osc_admin_form_row_close(); ?>
                     <div class="clear"></div>
                     <?php osc_admin_form_close(array()); ?>
     </div>

@@ -148,14 +148,9 @@ break;
                     'help'  => __('From the Cloudflare dashboard &raquo; Turnstile.'),
                 )); ?>
                 <?php if (osc_captcha_enabled()) { ?>
-                    <div class="form-row">
-                        <div class="form-label">
-                            <?php _e('If you see a captcha widget below, the active provider is configured correctly'); ?>
-                        </div>
-                        <div class="form-controls">
+                    <?php osc_admin_form_row_open(__('If you see a captcha widget below, the active provider is configured correctly')); ?>
                             <?php osc_show_captcha(); ?>
-                        </div>
-                    </div>
+                    <?php osc_admin_form_row_close(); ?>
                 <?php } ?>
                 <?php osc_admin_form_close(array(
                     array('label' => __('Save changes'), 'type' => 'submit', 'attrs' => array('id' => 'submit_recaptcha')),

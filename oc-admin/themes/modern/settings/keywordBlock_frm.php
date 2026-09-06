@@ -65,9 +65,7 @@ $aux = customFrmText();
         'action' => $aux['action_frm'],
     ));
     KeywordBlockForm::primary_input_hidden($keyword); ?>
-                <div class="form-row">
-                    <div class="form-label"><?php _e('Keyword'); ?></div>
-                    <div class="form-controls">
+                <?php osc_admin_form_row_open(__('Keyword')); ?>
                         <?php KeywordBlockForm::keyword_text($keyword); ?>
                         <div class="help-box">
                             <?php printf(
@@ -75,17 +73,11 @@ $aux = customFrmText();
                                 ItemSpamFilter::MIN_KEYWORD_LENGTH
                             ); ?>
                         </div>
-                    </div>
-                </div>
-                <div class="form-row">
-                    <div class="form-label"><?php _e('Where to match'); ?></div>
-                    <div class="form-controls">
+                <?php osc_admin_form_row_close(); ?>
+                <?php osc_admin_form_row_open(__('Where to match')); ?>
                         <?php KeywordBlockForm::scope_select($keyword); ?>
-                    </div>
-                </div>
-                <div class="form-row">
-                    <div class="form-label"><?php _e('Substring'); ?></div>
-                    <div class="form-controls">
+                <?php osc_admin_form_row_close(); ?>
+                <?php osc_admin_form_row_open(__('Substring')); ?>
                         <div class="form-label-checkbox">
                             <?php KeywordBlockForm::substring_checkbox($keyword); ?>
                             <label for="b_substring"><?php _e('Match anywhere inside a word, not just whole words'); ?></label>
@@ -93,8 +85,7 @@ $aux = customFrmText();
                         <div class="help-box text-danger">
                             <?php _e('Broader and riskier — leave unchecked unless you specifically need to catch a fragment inside longer words.'); ?>
                         </div>
-                    </div>
-                </div>
+                <?php osc_admin_form_row_close(); ?>
                 <div class="clear"></div>
                 <?php osc_admin_form_close(array(
                     array('label' => $aux['btn_text'], 'type' => 'submit', 'variant' => 'primary'),

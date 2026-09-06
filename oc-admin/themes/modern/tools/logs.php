@@ -39,9 +39,7 @@ osc_current_admin_theme_path('parts/header.php'); ?>
             <input type="hidden" name="page" value="tools"/>
             <input type="hidden" name="action" value="logs_settings_post"/>
             <fieldset class="form-horizontal">
-                <div class="form-row">
-                    <div class="form-label"><?php _e('Record activity'); ?></div>
-                    <div class="form-controls">
+                <?php osc_admin_form_row_open(__('Record activity')); ?>
                         <div class="form-label-checkbox">
                             <input type="checkbox" id="admin_log_enabled" name="admin_log_enabled" value="1"
                                 <?php echo($enabled ? 'checked="checked"' : ''); ?> />
@@ -50,8 +48,7 @@ osc_current_admin_theme_path('parts/header.php'); ?>
                         <div class="help-box">
                             <?php _e('Turn logging off to stop recording new entries. Existing entries are kept until pruned.'); ?>
                         </div>
-                    </div>
-                </div>
+                <?php osc_admin_form_row_close(); ?>
                 <?php osc_admin_number(array(
                     'id'     => 'admin_log_retention_days',
                     'name'   => 'admin_log_retention_days',

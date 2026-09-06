@@ -412,6 +412,46 @@ if (!function_exists('osc_admin_field_attrs')) {
     }
 }
 
+if (!function_exists('osc_admin_field_row')) {
+    /**
+     * One labelled row holding several fields.
+     *
+     * osc_admin_field() draws its own row, which covers a label with a control beside it.
+     * It does not cover the shape most settings screens are actually made of -- one label
+     * against a stack of related checkboxes ("Default comment settings", "Notifications",
+     * "Optional fields") -- and every one of those was still opening `<div class="form-row">`
+     * and its two inner divs by hand.
+     *
+     * Each entry is an ordinary field spec. A callable is invoked instead, for the row that
+     * has to drop to markup for one of its parts without hand-writing the row around it.
+     *
+     * @param string $label  The row's label. Empty for a row that continues the one above.
+     * @param array  $fields Field specs, or callables emitting into the controls column.
+     * @param array  $opts   'for' => id the label points at
+     *
+     * @return void
+     */
+    function osc_admin_field_row($label, array $fields, array $opts = array())
+    {
+        osc_admin_form_row_open($label, $opts);
+
+        foreach ($fields as $field) {
+            if (is_callable($field)) {
+                $field();
+                continue;
+            }
+            $field['row'] = false;
+            if (($field['type'] ?? 'text') === 'checkbox') {
+                osc_admin_checkbox($field);
+                continue;
+            }
+            osc_admin_field($field);
+        }
+
+        osc_admin_form_row_close();
+    }
+}
+
 if (!function_exists('osc_admin_form_open')) {
     /**
      * Open an admin form: the element, the hidden route fields it posts to, and the
@@ -734,14 +774,19 @@ if (!function_exists('osc_admin_form_row_open')) {
     /**
      * One labelled row of a form.
      *
-     * @param string $label
-     * @param array  $opts 'for' => input id, so the label is clickable
+     * @param string $label Empty for a row with no label column of its own.
+     * @param array  $opts  'for' => input id, so the label is clickable;
+     *                      'id'/'class' => on the row, for a row a script shows and hides;
+     *                      'controls_class' => extra classes on the controls column
      *
      * @return void
      */
     function osc_admin_form_row_open($label = '', array $opts = array())
     {
-        echo '<div class="form-row">';
+        echo '<div class="form-row' . (!empty($opts['class']) ? ' ' . osc_esc_html($opts['class']) : '') . '"'
+            . (!empty($opts['id']) ? ' id="' . osc_esc_html($opts['id']) . '"' : '')
+            . (!empty($opts['style']) ? ' style="' . osc_esc_html($opts['style']) . '"' : '')
+            . '>';
 
         if ($label !== '') {
             $for = $opts['for'] ?? '';
@@ -752,7 +797,9 @@ if (!function_exists('osc_admin_form_row_open')) {
             echo '</div>';
         }
 
-        echo '<div class="form-controls">';
+        echo '<div class="form-controls'
+            . (!empty($opts['controls_class']) ? ' ' . osc_esc_html($opts['controls_class']) : '')
+            . '">';
     }
 }
 

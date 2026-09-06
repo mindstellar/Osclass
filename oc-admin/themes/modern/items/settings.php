@@ -61,9 +61,7 @@ osc_current_admin_theme_path('parts/header.php'); ?>
     'page'   => 'items',
     'action' => 'settings_post',
 )); ?>
-            <div class="form-row">
-                <div class="form-label"><?php _e('Settings'); ?></div>
-                <div class="form-controls">
+            <?php osc_admin_form_row_open(__('Settings')); ?>
                     <?php
                     osc_admin_checkbox(array(
                         'name'    => 'reg_user_post',
@@ -117,11 +115,8 @@ osc_current_admin_theme_path('parts/header.php'); ?>
                         'checked'   => osc_recaptcha_items_enabled() != '0',
                         'help_html' => __('<strong>Remember</strong> that you must configure reCAPTCHA first'),
                     )); ?>
-                </div>
-            </div>
-            <div class="form-row">
-                <div class="form-label"><?php _e('Contact publisher'); ?></div>
-                <div class="form-controls">
+            <?php osc_admin_form_row_close(); ?>
+            <?php osc_admin_form_row_open(__('Contact publisher')); ?>
                     <?php
                     osc_admin_checkbox(array(
                         'name'    => 'reg_user_can_contact',
@@ -133,11 +128,8 @@ osc_current_admin_theme_path('parts/header.php'); ?>
                         'label'   => __('Allow attached files in contact publisher form'),
                         'checked' => osc_item_attachment(),
                     )); ?>
-                </div>
-            </div>
-            <div class="form-row">
-                <div class="form-label"><?php _e('Share listing'); ?></div>
-                <div class="form-controls">
+            <?php osc_admin_form_row_close(); ?>
+            <?php osc_admin_form_row_open(__('Share listing')); ?>
                     <?php
                     osc_admin_checkbox(array(
                         'name'    => 'enable_send_friend',
@@ -150,11 +142,8 @@ osc_current_admin_theme_path('parts/header.php'); ?>
                         'label'   => __('Only allow registered users to share listings'),
                         'checked' => osc_reg_user_can_send_friend(),
                     )); ?>
-                </div>
-            </div>
-            <div class="form-row">
-                <div class="form-label"><?php _e('Notifications'); ?></div>
-                <div class="form-controls">
+            <?php osc_admin_form_row_close(); ?>
+            <?php osc_admin_form_row_open(__('Notifications')); ?>
                     <?php
                     osc_admin_checkbox(array(
                         'name'    => 'notify_new_item',
@@ -171,8 +160,7 @@ osc_current_admin_theme_path('parts/header.php'); ?>
                         'label'   => __('Send admin a copy to "share listing" email'),
                         'checked' => osc_notify_contact_friends(),
                     )); ?>
-                </div>
-            </div>
+            <?php osc_admin_form_row_close(); ?>
             <?php
             osc_admin_number(array(
                 'name'   => 'warn_expiration',
@@ -203,9 +191,7 @@ osc_current_admin_theme_path('parts/header.php'); ?>
                 'label'     => __('Enable TinyMCE on frontend'),
                 'checked'   => osc_tinymce_frontend(),
             )); ?>
-            <div class="form-row">
-                <div class="form-label"><?php _e('Optional fields'); ?></div>
-                <div class="form-controls">
+            <?php osc_admin_form_row_open(__('Optional fields')); ?>
                     <?php
                     osc_admin_checkbox(array(
                         'name'    => 'enableField#f_price@items',
@@ -226,8 +212,7 @@ osc_current_admin_theme_path('parts/header.php'); ?>
                         'suffix' => __('images per listing'),
                         'help'   => __('If the value is zero, it means an unlimited number of images is allowed'),
                     )); ?>
-                </div>
-            </div>
+            <?php osc_admin_form_row_close(); ?>
             <?php osc_admin_select(array(
                 'name'     => 'map_type',
                 'label'    => __('Maps'),
