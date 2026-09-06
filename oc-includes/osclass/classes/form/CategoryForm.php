@@ -208,11 +208,11 @@ class CategoryForm extends Form
                 . '" class="category-details-form">';
             $contentTemp .= '<div class="form-controls"><label>' . __('Name') . '</label><input id="'
                 . $name . '" type="text" name="' . $name . '" value="'
-                . osc_esc_html(htmlentities($value, ENT_COMPAT, 'UTF-8')) . '"/></div>';
+                . osc_esc_html(htmlentities($value, ENT_COMPAT, 'UTF-8', false)) . '"/></div>';
 
             $contentTemp .= '<div class="form-controls"><label>' . __('Slug') . '</label><input id="'
-                . $name . '" type="text" name="' . $nameSlug . '" value="'
-                . urldecode($valueSlug) . '" /></div>';
+                . $nameSlug . '" type="text" name="' . $nameSlug . '" value="'
+                . osc_esc_html(urldecode($valueSlug)) . '" /></div>';
 
             $contentTemp .= '<div class="form-controls"><label>' . __('Description') . '</label>';
             $contentTemp .= '<textarea id="' . $nameTextarea . '" name="' . $nameTextarea
