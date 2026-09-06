@@ -37,129 +37,114 @@ if ($batch_limit < 1) {
 osc_current_admin_theme_path('parts/header.php'); ?>
     <?php osc_admin_page_head(__('Cleanup')); ?>
 
-    <form method="post" action="<?php echo osc_admin_base_url(true); ?>">
-        <input type="hidden" name="page" value="tools"/>
-        <input type="hidden" name="action" value="cleanup_post"/>
-        <div class="widget-box">
-            <div class="widget-box-content">
-                <div class="table-responsive">
-                <table class="table" style="min-width:34rem">
-                    <thead>
-                    <tr>
-                        <th><?php _e('Enabled'); ?></th>
-                        <th><?php _e('What to remove'); ?></th>
-                        <th><?php _e('Older than'); ?></th>
-                        <th class="text-end"><?php _e('Matching now'); ?></th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <?php foreach ($cleanup_rules as $rule => $meta) {
-                        $enabled = osc_get_preference('enabled_' . $rule, 'osclass') == 1;
-                        $days    = (int)osc_get_preference('days_' . $rule, 'osclass');
-                        if ($days < 1) {
-                            $days = 30;
-                        }
-                        $matching = $engine->countFor($rule, $meta['days'] ? $days : 0); ?>
-                        <tr>
-                            <td>
-                                <input type="checkbox" id="enabled_<?php echo $rule; ?>"
-                                       name="enabled_<?php echo $rule; ?>" value="1" <?php echo $enabled ? 'checked' : ''; ?>>
-                            </td>
-                            <td>
-                                <label for="enabled_<?php echo $rule; ?>"><strong><?php echo osc_esc_html($meta['label']); ?></strong></label>
-                                <div class="text-muted"><?php echo osc_esc_html($meta['desc']); ?></div>
-                            </td>
-                            <td>
-                                <?php if ($meta['days']) {
-                                    osc_admin_number(array(
-                                        'row'    => false,
-                                        'name'   => 'days_' . $rule,
-                                        'value'  => $days,
-                                        'min'    => 1,
-                                        'suffix' => __('days'),
-                                    ));
-                                } else { ?>
-                                    <span class="text-muted">&mdash;</span>
-                                <?php } ?>
-                            </td>
-                            <td class="text-end"><?php echo number_format($matching); ?></td>
-                        </tr>
-                    <?php } ?>
-                    </tbody>
-                </table>
-                </div>
+    <?php osc_admin_form_open(array('page' => 'tools', 'action' => 'cleanup_post')); ?>
 
-                <?php osc_admin_form_row_open('', array(
-                    'layout'     => 'stacked',
-                    'class'      => 'mt-3',
-                    'for'        => 'batch_limit',
-                    'label_html' => '<span class="form-sublabel">' . __('Maximum items removed per run') . '</span>',
-                )); ?>
-                    <?php osc_admin_number(array(
-                        'row'   => false,
-                        'id'    => 'batch_limit',
-                        'name'  => 'batch_limit',
-                        'value' => $batch_limit,
-                        'min'   => 1,
-                        'help'  => __('Keeps each run bounded so it never times out; run again to clear a larger backlog.'),
-                    )); ?>
-                <?php osc_admin_form_row_close(); ?>
-            </div>
+        <div class="table-responsive">
+        <table class="table" style="min-width:34rem">
+            <thead>
+            <tr>
+                <th><?php _e('Enabled'); ?></th>
+                <th><?php _e('What to remove'); ?></th>
+                <th><?php _e('Older than'); ?></th>
+                <th class="text-end"><?php _e('Matching now'); ?></th>
+            </tr>
+            </thead>
+            <tbody>
+            <?php foreach ($cleanup_rules as $rule => $meta) {
+                $enabled = osc_get_preference('enabled_' . $rule, 'osclass') == 1;
+                $days    = (int)osc_get_preference('days_' . $rule, 'osclass');
+                if ($days < 1) {
+                    $days = 30;
+                }
+                $matching = $engine->countFor($rule, $meta['days'] ? $days : 0); ?>
+                <tr>
+                    <td>
+                        <input type="checkbox" id="enabled_<?php echo $rule; ?>"
+                               name="enabled_<?php echo $rule; ?>" value="1" <?php echo $enabled ? 'checked' : ''; ?>>
+                    </td>
+                    <td>
+                        <label for="enabled_<?php echo $rule; ?>"><strong><?php echo osc_esc_html($meta['label']); ?></strong></label>
+                        <div class="text-muted"><?php echo osc_esc_html($meta['desc']); ?></div>
+                    </td>
+                    <td>
+                        <?php if ($meta['days']) {
+                            osc_admin_number(array(
+                                'row'    => false,
+                                'name'   => 'days_' . $rule,
+                                'value'  => $days,
+                                'min'    => 1,
+                                'suffix' => __('days'),
+                            ));
+                        } else { ?>
+                            <span class="text-muted">&mdash;</span>
+                        <?php } ?>
+                    </td>
+                    <td class="text-end"><?php echo number_format($matching); ?></td>
+                </tr>
+            <?php } ?>
+            </tbody>
+        </table>
         </div>
 
-        <div class="widget-box">
-            <div class="widget-box-title">
-                <span><?php _e('Listing statistics'); ?></span>
-            </div>
-            <div class="widget-box-content">
-                <p class="text-muted">
-                    <?php _e('View counts are written on every page render, so they are the busiest '
-                             . 'write on a large site. Turn them off if you do not use them.'); ?>
-                </p>
+        <?php osc_admin_form_row_open(__('Maximum items removed per run'), array('for' => 'batch_limit')); ?>
+            <?php osc_admin_number(array(
+                'row'   => false,
+                'id'    => 'batch_limit',
+                'name'  => 'batch_limit',
+                'value' => $batch_limit,
+                'min'   => 1,
+                'help'  => __('Keeps each run bounded so it never times out; run again to clear a larger backlog.'),
+            )); ?>
+        <?php osc_admin_form_row_close(); ?>
 
-                <?php
-                osc_admin_checkbox(array(
-                    'id'      => 'item_views_enabled',
-                    'name'    => 'item_views_enabled',
-                    'label'   => __('Count listing views'),
-                    'checked' => osc_item_views_enabled(),
-                    'help'    => __('Report counts are always recorded — moderation depends on them.'),
-                ));
-                osc_admin_checkbox(array(
-                    'id'      => 'count_bot_views',
-                    'name'    => 'count_bot_views',
-                    'label'   => __('Count crawler visits as views'),
-                    'checked' => osc_count_bot_views(),
-                    'help'    => __('Off by default. Search-engine and AI crawlers are usually most of a busy '
-                                    . "site's traffic, so counting them both inflates the numbers and multiplies "
-                                    . 'the writes.'),
-                )); ?>
+        <?php osc_admin_page_head(__('Listing statistics')); ?>
 
-                <?php osc_admin_form_row_open('', array(
-                    'layout'     => 'stacked',
-                    'class'      => 'mt-3',
-                    'for'        => 'item_stats_retention_days',
-                    'label_html' => '<span class="form-sublabel">' . __('Keep daily statistics history for') . '</span>',
-                )); ?>
-                    <?php osc_admin_number(array(
-                        'row'    => false,
-                        'id'     => 'item_stats_retention_days',
-                        'name'   => 'item_stats_retention_days',
-                        'value'  => osc_item_stats_retention_days(),
-                        'min'    => 0,
-                        'suffix' => __('days'),
-                        'help'   => __('0 keeps it forever. This is the history behind the statistics charts, which '
-                                       . 'look back up to ten months; it is a few rows per day for the whole site.'),
-                    )); ?>
-                <?php osc_admin_form_row_close(); ?>
-            </div>
-        </div>
+        <p class="form-intro">
+            <?php _e('View counts are written on every page render, so they are the busiest '
+                     . 'write on a large site. Turn them off if you do not use them.'); ?>
+        </p>
 
-        <div class="form-actions">
-            <button type="submit" class="btn btn-submit"><?php echo osc_esc_html(__('Save settings')); ?></button>
-            <button type="button" class="btn btn-danger" data-osc-dialog-open="#cleanup-run-dialog"><?php _e('Run cleanup now'); ?></button>
-        </div>
-    </form>
+        <?php osc_admin_form_row_open(__('View counting')); ?>
+            <?php osc_admin_checkbox(array(
+                'id'      => 'item_views_enabled',
+                'name'    => 'item_views_enabled',
+                'label'   => __('Count listing views'),
+                'checked' => osc_item_views_enabled(),
+                'help'    => __('Report counts are always recorded — moderation depends on them.'),
+            ));
+            osc_admin_checkbox(array(
+                'id'      => 'count_bot_views',
+                'name'    => 'count_bot_views',
+                'label'   => __('Count crawler visits as views'),
+                'checked' => osc_count_bot_views(),
+                'help'    => __('Off by default. Search-engine and AI crawlers are usually most of a busy '
+                                . "site's traffic, so counting them both inflates the numbers and multiplies "
+                                . 'the writes.'),
+            )); ?>
+        <?php osc_admin_form_row_close(); ?>
+
+        <?php osc_admin_form_row_open(__('Keep daily statistics history for'), array('for' => 'item_stats_retention_days')); ?>
+            <?php osc_admin_number(array(
+                'row'    => false,
+                'id'     => 'item_stats_retention_days',
+                'name'   => 'item_stats_retention_days',
+                'value'  => osc_item_stats_retention_days(),
+                'min'    => 0,
+                'suffix' => __('days'),
+                'help'   => __('0 keeps it forever. This is the history behind the statistics charts, which '
+                               . 'look back up to ten months; it is a few rows per day for the whole site.'),
+            )); ?>
+        <?php osc_admin_form_row_close(); ?>
+
+    <?php osc_admin_form_close(array(
+        array('label' => __('Save settings'), 'type' => 'submit', 'variant' => 'primary'),
+        array(
+            'label'   => __('Run cleanup now'),
+            'type'    => 'button',
+            'variant' => 'danger',
+            'attrs'   => array('data-osc-dialog-open' => '#cleanup-run-dialog'),
+        ),
+    )); ?>
 
     <p class="text-muted mt-2">
         <i class="bi bi-clock-history"></i>
