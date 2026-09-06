@@ -244,21 +244,13 @@ $formCount = (int)__get('form_count');
                             <?php osc_admin_form_row_close(); ?>
                         </div>
                         <?php if (!$builderMode) { ?>
-                        <div class="form-row" id="field_cat_select">
-                            <div><?php _e('Select the categories where you want to apply this attribute:'); ?></div>
-                            <div class="separate-top">
-                                <div class="form-label">
-                                    <a href="javascript:void(0);" onclick="checkAll('cat_tree', true); return false;"><?php _e('Check all'); ?></a>
-                                    &middot;
-                                    <a href="javascript:void(0);" onclick="checkAll('cat_tree', false); return false;"><?php _e('Uncheck all'); ?></a>
-                                </div>
-                                <div class="form-controls">
-                                    <ul id="cat_tree">
-                                        <?php CategoryForm::categories_tree($categories, $selected); ?>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
+                        <?php osc_admin_tree_picker(array(
+                            'id'         => 'cat_tree',
+                            'intro'      => __('Select the categories where you want to apply this attribute:'),
+                            'categories' => $categories,
+                            'selected'   => $selected,
+                            'wrapper_id' => 'field_cat_select',
+                        )); ?>
                         <?php } ?>
 
                         <div id="advanced_fields_iframe" class="custom-field-shrink">

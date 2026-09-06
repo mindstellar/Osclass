@@ -241,14 +241,6 @@ function customHead()
             return false;
         }
 
-        function checkAll(id, check) {
-            var root = document.getElementById(id);
-            if (root) { root.querySelectorAll('input[type=checkbox]').forEach(function (cb) { cb.checked = check; }); }
-        }
-        function checkCat(id, check) {
-            var root = document.getElementById('cat' + id);
-            if (root) { root.querySelectorAll('input[type=checkbox]').forEach(function (cb) { cb.checked = check; }); }
-        }
 
         function delete_group(id) {
             var modal = document.getElementById('deleteGroupModal');

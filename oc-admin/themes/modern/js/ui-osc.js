@@ -227,6 +227,28 @@ function oscTreeview(root, opts) {
     }
 }
 
+// Global so third-party plugins calling checkAll(id, check) by name keep working.
+function checkAll(id, check) {
+    var root = document.getElementById(id);
+    if (root) { root.querySelectorAll('input[type=checkbox]').forEach(function (cb) { cb.checked = check; }); }
+}
+
+// Toggle a category subtree (#cat<id>); emitted inline by CategoryForm::categories_tree
+// on every parent checkbox, so it must be global on every page a tree picker can appear.
+function checkCat(id, check) {
+    var root = document.getElementById('cat' + id);
+    if (root) { root.querySelectorAll('input[type=checkbox]').forEach(function (cb) { cb.checked = check; }); }
+}
+
+// Delegated, so it also covers tree pickers injected after load (e.g. the field
+// and group edit iframes, which are innerHTML-injected).
+document.addEventListener('click', function (e) {
+    var t = e.target.closest('[data-tree-toggle]');
+    if (!t) { return; }
+    e.preventDefault();
+    checkAll(t.getAttribute('data-tree-toggle'), t.getAttribute('data-tree-check') === '1');
+});
+
 // Flash messages — progressive enhancement shared by core- and plugin-rendered
 // markup (anything carrying .flashmessage). Adds the ARIA a screen reader needs,
 // a labelled dismiss control, and an animated removal that respects reduced motion.

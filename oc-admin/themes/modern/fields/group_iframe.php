@@ -53,21 +53,12 @@ $isPlaceable = is_array($groupMeta) && !empty($groupMeta['placeable']);
                             <label><input type="checkbox" name="group_placeable" value="1"<?php echo $isPlaceable ? ' checked' : ''; ?> />
                                 <span><?php _e('Available as a block (place this form on pages and layouts)'); ?></span></label>
                     <?php osc_admin_form_row_close(); ?>
-                    <div class="form-row">
-                        <div><?php _e('Select the categories where you want to apply this group:'); ?></div>
-                        <div class="separate-top">
-                            <div class="form-label">
-                                <a href="javascript:void(0);" onclick="checkAll('group_cat_tree', true); return false;"><?php _e('Check all'); ?></a>
-                                &middot;
-                                <a href="javascript:void(0);" onclick="checkAll('group_cat_tree', false); return false;"><?php _e('Uncheck all'); ?></a>
-                            </div>
-                            <div class="form-controls">
-                                <ul id="group_cat_tree">
-                                    <?php CategoryForm::categories_tree($categories, $selected); ?>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
+                    <?php osc_admin_tree_picker(array(
+                        'id'         => 'group_cat_tree',
+                        'intro'      => __('Select the categories where you want to apply this group:'),
+                        'categories' => $categories,
+                        'selected'   => $selected,
+                    )); ?>
                 </div>
                 <div class="card-footer form-actions">
                     <input type="submit" id="group_save" value="<?php echo osc_esc_html(__('Save changes')); ?>" class="btn btn-submit" />
