@@ -777,23 +777,51 @@ if (!function_exists('osc_admin_form_row_open')) {
      * @param string $label Empty for a row with no label column of its own.
      * @param array  $opts  'for' => input id, so the label is clickable;
      *                      'id'/'class' => on the row, for a row a script shows and hides;
-     *                      'controls_class' => extra classes on the controls column
+     *                      'controls_class' => extra classes on the controls column;
+     *                      'data' => assoc array rendered as data-* attrs on the row;
+     *                      'label_html' => raw markup for the label, instead of the escaped $label;
+     *                      'layout' => 'stacked' to stack the label above a full-width control
      *
      * @return void
      */
     function osc_admin_form_row_open($label = '', array $opts = array())
     {
-        echo '<div class="form-row' . (!empty($opts['class']) ? ' ' . osc_esc_html($opts['class']) : '') . '"'
+        $class = 'form-row';
+        if (!empty($opts['class'])) {
+            $class .= ' ' . osc_esc_html($opts['class']);
+        }
+        if (($opts['layout'] ?? '') === 'stacked') {
+            $class .= ' form-row-stacked';
+        }
+
+        $data_attrs = '';
+        if (!empty($opts['data']) && is_array($opts['data'])) {
+            foreach ($opts['data'] as $data_key => $data_value) {
+                if (preg_match('/^[a-z0-9_-]+$/i', $data_key)) {
+                    $data_attrs .= ' data-' . $data_key . '="' . osc_esc_html($data_value) . '"';
+                }
+            }
+        }
+
+        echo '<div class="' . $class . '"'
             . (!empty($opts['id']) ? ' id="' . osc_esc_html($opts['id']) . '"' : '')
             . (!empty($opts['style']) ? ' style="' . osc_esc_html($opts['style']) . '"' : '')
+            . $data_attrs
             . '>';
 
-        if ($label !== '') {
+        $label_html = $opts['label_html'] ?? '';
+        if ($label !== '' || $label_html !== '') {
             $for = $opts['for'] ?? '';
             echo '<div class="form-label">';
-            echo $for !== ''
-                ? '<label for="' . osc_esc_html($for) . '">' . osc_esc_html($label) . '</label>'
-                : osc_esc_html($label);
+            if ($label_html !== '') {
+                echo $for !== ''
+                    ? '<label for="' . osc_esc_html($for) . '">' . $label_html . '</label>'
+                    : $label_html;
+            } else {
+                echo $for !== ''
+                    ? '<label for="' . osc_esc_html($for) . '">' . osc_esc_html($label) . '</label>'
+                    : osc_esc_html($label);
+            }
             echo '</div>';
         }
 

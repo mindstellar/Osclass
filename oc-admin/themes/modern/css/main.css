@@ -14675,6 +14675,13 @@ td.children-cat {
 .form-horizontal .form-actions {
   padding-inline-start: 170px;
 }
+.form-horizontal .form-row-stacked {
+  display: block;
+}
+.form-horizontal .form-row-stacked .form-label {
+  padding-block-start: 0;
+  text-align: start;
+}
 
 .form-row .input-text, .form-row input[type=text] {
   vertical-align: baseline;

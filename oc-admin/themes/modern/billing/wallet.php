@@ -139,8 +139,11 @@ $reasonWords = array(
                     <input type="hidden" name="action" value="wallet_adjust"/>
                     <input type="hidden" name="userId" value="<?php echo $userId; ?>"/>
                     <input type="hidden" name="mode" value="add"/>
-                    <div class="form-row">
-                        <label class="form-sublabel" for="add-amount"><?php _e('How many credits'); ?></label>
+                    <?php osc_admin_form_row_open('', array(
+                        'layout'     => 'stacked',
+                        'for'        => 'add-amount',
+                        'label_html' => '<span class="form-sublabel">' . __('How many credits') . '</span>',
+                    )); ?>
                         <?php osc_admin_number(array(
                             'row'      => false,
                             'id'       => 'add-amount',
@@ -150,7 +153,7 @@ $reasonWords = array(
                             'step'     => 1,
                             'required' => true,
                         )); ?>
-                    </div>
+                    <?php osc_admin_form_row_close(); ?>
                     <button type="submit" class="btn btn-submit"><?php _e('Add credits'); ?></button>
                 </form>
             <?php osc_admin_panel_close(); ?>
@@ -165,8 +168,11 @@ $reasonWords = array(
                     <input type="hidden" name="action" value="wallet_adjust"/>
                     <input type="hidden" name="userId" value="<?php echo $userId; ?>"/>
                     <input type="hidden" name="mode" value="remove"/>
-                    <div class="form-row">
-                        <label class="form-sublabel" for="remove-amount"><?php _e('How many credits'); ?></label>
+                    <?php osc_admin_form_row_open('', array(
+                        'layout'     => 'stacked',
+                        'for'        => 'remove-amount',
+                        'label_html' => '<span class="form-sublabel">' . __('How many credits') . '</span>',
+                    )); ?>
                         <?php osc_admin_number(array(
                             'row'      => false,
                             'id'       => 'remove-amount',
@@ -181,7 +187,7 @@ $reasonWords = array(
                                 number_format(max(0, $balance))
                             ),
                         )); ?>
-                    </div>
+                    <?php osc_admin_form_row_close(); ?>
                     <button type="submit" class="btn btn-secondary"
                         <?php echo $balance < 1 ? 'disabled' : ''; ?>><?php _e('Remove credits'); ?></button>
                 </form>

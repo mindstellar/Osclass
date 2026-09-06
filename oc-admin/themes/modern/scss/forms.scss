@@ -69,6 +69,18 @@
   .form-actions {
     padding-inline-start: 170px;
   }
+
+  // A row that stacks its label above a full-width control instead of the two-column
+  // layout above. Reset what the flex .form-label picked up for that column (right
+  // alignment, top offset) since this label now just sits on its own line.
+  .form-row-stacked {
+    display: block;
+
+    .form-label {
+      padding-block-start: 0;
+      text-align: start;
+    }
+  }
 }
 
 .form-row {

@@ -322,6 +322,60 @@ $plain = render(static function () {
 // contents past a heading that is not there.
 check('an unlabelled row has no label column', strpos($plain, 'form-label') === false, $plain);
 
+harness_section('a row with a data attribute, a stacked layout, or a raw label');
+$html = render(static function () {
+    osc_admin_form_row_open('', array('data' => array('cfg-key' => 'placeholder', 'a b' => 'nope')));
+    osc_admin_form_row_close();
+});
+emits('a data opt becomes a data-* attribute', $html, '<div class="form-row" data-cfg-key="placeholder">');
+check(
+    'a data key with an illegal character is dropped, not just its value',
+    strpos($html, 'a b') === false && strpos($html, 'nope') === false,
+    $html
+);
+$html = render(static function () {
+    osc_admin_form_row_open('', array('data' => array('x' => '"><b>')));
+    osc_admin_form_row_close();
+});
+check('a data value is escaped, not raw', strpos($html, '"><b>') === false, $html);
+emits('escaped as an attribute', $html, 'data-x="&quot;&gt;&lt;b&gt;"');
+$html = render(static function () {
+    osc_admin_form_row_open('', array('layout' => 'stacked'));
+    osc_admin_form_row_close();
+});
+emits('a stacked layout adds its class', $html, 'class="form-row form-row-stacked"');
+$html = render(static function () {
+    osc_admin_form_row_open('', array('label_html' => '<em>x</em>'));
+    osc_admin_form_row_close();
+});
+emits('a label column is emitted even though $label is empty', $html, '<div class="form-label">');
+emits('label_html is raw markup', $html, '<em>x</em>');
+check('label_html is not escaped', strpos($html, '&lt;em&gt;') === false, $html);
+$html = render(static function () {
+    osc_admin_form_row_open('', array('for' => 'field-x', 'label_html' => '<em>x</em>'));
+    osc_admin_form_row_close();
+});
+emits(
+    'label_html respects for, wrapping in one label',
+    $html,
+    '<div class="form-label"><label for="field-x"><em>x</em></label></div>'
+);
+$html = render(static function () {
+    osc_admin_form_row_open('', array(
+        'layout'     => 'stacked',
+        'for'        => 'field-y',
+        'label_html' => '<span class="form-sublabel">Y</span>',
+    ));
+    osc_admin_form_row_close();
+});
+emits(
+    'stacked + label_html + for still wraps once',
+    $html,
+    '<div class="form-row form-row-stacked"><div class="form-label">'
+    . '<label for="field-y"><span class="form-sublabel">Y</span></label></div>'
+);
+check('only one label element wraps it', substr_count($html, '<label') === 1, $html);
+
 harness_section('the form and section scaffolding');
 $html = render(static function () {
     osc_admin_form_open(array('action' => 'comments_post', 'page' => 'settings', 'name' => 'comments_form'));

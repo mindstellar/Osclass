@@ -136,18 +136,18 @@ $formCount = (int)__get('form_count');
 ?>
                         <div id="cf_config_block" class="cf-config-block">
                             <?php foreach ($cfgRows as $cfgKey => $cfgRow) { ?>
-                                <div class="form-row cf-config-row" data-cfg-key="<?php echo osc_esc_html($cfgKey); ?>">
-                                    <div class="form-label"><?php echo osc_esc_html($cfgRow['label']); ?></div>
-                                    <div class="form-controls">
-                                        <?php osc_admin_field(array(
-                                            'row'   => false,
-                                            'type'  => $cfgRow['type'] === 'number' ? 'number' : 'text',
-                                            'name'  => 'cfg_' . $cfgKey,
-                                            'value' => $cfgValue($cfgKey),
-                                            'step'  => $cfgRow['type'] === 'number' ? 'any' : null,
-                                        )); ?>
-                                    </div>
-                                </div>
+                                <?php osc_admin_form_row_open($cfgRow['label'], array(
+                                    'class' => 'cf-config-row',
+                                    'data'  => array('cfg-key' => $cfgKey),
+                                )); ?>
+                                    <?php osc_admin_field(array(
+                                        'row'   => false,
+                                        'type'  => $cfgRow['type'] === 'number' ? 'number' : 'text',
+                                        'name'  => 'cfg_' . $cfgKey,
+                                        'value' => $cfgValue($cfgKey),
+                                        'step'  => $cfgRow['type'] === 'number' ? 'any' : null,
+                                    )); ?>
+                                <?php osc_admin_form_row_close(); ?>
                             <?php } ?>
                         </div>
 
@@ -265,7 +265,7 @@ $formCount = (int)__get('form_count');
                             <span class="icon-more"></span><?php _e('Advanced options'); ?>
                         </div>
                         <div id="more-options_iframe" class="input-line">
-                            <?php osc_admin_form_row_open(__('Identifier name'), array('id' => 'div_field_options')); ?>
+                            <?php osc_admin_form_row_open(__('Identifier name')); ?>
                                     <?php osc_admin_text(array(
                                         'row'   => false,
                                         'name'  => 'field_slug',

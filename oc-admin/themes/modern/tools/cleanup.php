@@ -89,8 +89,12 @@ osc_current_admin_theme_path('parts/header.php'); ?>
                 </table>
                 </div>
 
-                <div class="form-row mt-3">
-                    <label class="form-sublabel" for="batch_limit"><?php _e('Maximum items removed per run'); ?></label>
+                <?php osc_admin_form_row_open('', array(
+                    'layout'     => 'stacked',
+                    'class'      => 'mt-3',
+                    'for'        => 'batch_limit',
+                    'label_html' => '<span class="form-sublabel">' . __('Maximum items removed per run') . '</span>',
+                )); ?>
                     <?php osc_admin_number(array(
                         'row'   => false,
                         'id'    => 'batch_limit',
@@ -99,7 +103,7 @@ osc_current_admin_theme_path('parts/header.php'); ?>
                         'min'   => 1,
                         'help'  => __('Keeps each run bounded so it never times out; run again to clear a larger backlog.'),
                     )); ?>
-                </div>
+                <?php osc_admin_form_row_close(); ?>
             </div>
         </div>
 
@@ -131,8 +135,12 @@ osc_current_admin_theme_path('parts/header.php'); ?>
                                     . 'the writes.'),
                 )); ?>
 
-                <div class="form-row mt-3">
-                    <label class="form-sublabel" for="item_stats_retention_days"><?php _e('Keep daily statistics history for'); ?></label>
+                <?php osc_admin_form_row_open('', array(
+                    'layout'     => 'stacked',
+                    'class'      => 'mt-3',
+                    'for'        => 'item_stats_retention_days',
+                    'label_html' => '<span class="form-sublabel">' . __('Keep daily statistics history for') . '</span>',
+                )); ?>
                     <?php osc_admin_number(array(
                         'row'    => false,
                         'id'     => 'item_stats_retention_days',
@@ -143,7 +151,7 @@ osc_current_admin_theme_path('parts/header.php'); ?>
                         'help'   => __('0 keeps it forever. This is the history behind the statistics charts, which '
                                        . 'look back up to ten months; it is a few rows per day for the whole site.'),
                     )); ?>
-                </div>
+                <?php osc_admin_form_row_close(); ?>
             </div>
         </div>
 
