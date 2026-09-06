@@ -153,12 +153,12 @@ $mediaUrl     = osc_admin_base_url(true) . '?page=settings&action=media';
 ?>
     <?php osc_admin_page_head(__('System info')); ?>
     <div id="system-info">
-        <ul class="nav nav-tabs mb-3">
-            <li class="nav-item">
-                <a class="nav-link<?php echo $infoType === 'php-info' ? '' : ' active'; ?>" href="<?php echo osc_esc_html($overviewUrl); ?>"><?php _e('Overview'); ?></a>
+        <ul class="osc-tabnav mb-3">
+            <li>
+                <a<?php echo $infoType === 'php-info' ? '' : ' class="is-active"'; ?> href="<?php echo osc_esc_html($overviewUrl); ?>"><?php _e('Overview'); ?></a>
             </li>
-            <li class="nav-item">
-                <a class="nav-link<?php echo $infoType === 'php-info' ? ' active' : ''; ?>" href="<?php echo osc_esc_html($phpInfoUrl); ?>"><?php _e('PHP settings &amp; help'); ?></a>
+            <li>
+                <a<?php echo $infoType === 'php-info' ? ' class="is-active"' : ''; ?> href="<?php echo osc_esc_html($phpInfoUrl); ?>"><?php _e('PHP settings &amp; help'); ?></a>
             </li>
         </ul>
         <?php

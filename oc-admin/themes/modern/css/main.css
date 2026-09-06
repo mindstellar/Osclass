@@ -17714,28 +17714,6 @@ form h3, form .h3 {
   height: 225px;
 }
 
-#system-info .nav-tabs {
-  border-block-end: 1px solid var(--osc-rule);
-  gap: 0.25rem;
-}
-#system-info .nav-tabs .nav-link {
-  background: transparent;
-  border: 0;
-  border-block-end: 2px solid transparent;
-  border-radius: 0;
-  color: var(--osc-ink-muted);
-  font-weight: 500;
-  margin-block-end: -1px;
-  padding: 0.5rem 0.9rem;
-}
-#system-info .nav-tabs .nav-link:hover {
-  color: var(--osc-ink);
-}
-#system-info .nav-tabs .nav-link.active {
-  background: transparent;
-  border-block-end-color: var(--osc-bronze);
-  color: var(--osc-bronze);
-}
 #system-info .card-title {
   color: var(--osc-ink);
   font-size: 1.0625rem;
@@ -18096,6 +18074,35 @@ form h3, form .h3 {
   background-color: var(--osc-bench);
   color: var(--osc-ink);
   font-weight: 600;
+}
+
+.osc-tabnav {
+  border-block-end: 1px solid var(--osc-rule);
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.25rem;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.osc-tabnav li {
+  margin: 0;
+}
+.osc-tabnav a {
+  border-block-end: 2px solid transparent;
+  color: var(--osc-ink-muted);
+  display: block;
+  font-weight: 500;
+  margin-block-end: -1px;
+  padding: 0.5rem 0.9rem;
+  text-decoration: none;
+}
+.osc-tabnav a:hover {
+  color: var(--osc-ink);
+}
+.osc-tabnav a.is-active {
+  border-block-end-color: var(--osc-bronze);
+  color: var(--osc-bronze);
 }
 
 .plugin-support-icon {

@@ -108,7 +108,18 @@ foreach ($rawRowAllow as $rel => $expected) {
     );
 }
 
-/* 3. The multilang editors stay off Bootstrap tabs. */
+/* 3a. No admin view brings back a Bootstrap nav-tabs strip; tabs are .osc-tab (in-page,
+ *     JS) or .osc-tabnav (URL navigation). The sidebar's nav-pills are a separate
+ *     component and are not matched here. */
+foreach ($themePhp as $path) {
+    $rel = str_replace($themeDir . '/', '', $path);
+    check(
+        'no Bootstrap nav-tabs in ' . $rel,
+        strpos((string) file_get_contents($path), 'nav nav-tabs') === false
+    );
+}
+
+/* 3b. The multilang editors stay off Bootstrap tabs. */
 $multilangForms = array(
     'oc-includes/osclass/classes/form/FieldForm.php',
     'oc-includes/osclass/classes/form/admin/Item.php',
