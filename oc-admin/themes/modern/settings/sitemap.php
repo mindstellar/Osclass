@@ -69,17 +69,16 @@ osc_current_admin_theme_path('parts/header.php'); ?>
                     'help'   => __('Number of URLs per XML item sitemap file. Extra listings roll into additional '
                                    . 'sitemaps automatically. Keep this low if you hit memory or timeout errors.'),
                 ));
-                // One checkbox per row, each labelled twice — once as the row and once beside
-                // the box — is what the old markup did; the row label alone is enough.
+                osc_admin_form_row_open(__('Include in sitemap'));
                 foreach ($sitemapChecks as $key => $label) {
-                    osc_admin_field(array(
-                        'type'    => 'checkbox',
+                    osc_admin_checkbox(array(
                         'id'      => $key,
                         'name'    => $key,
                         'label'   => $label,
                         'checked' => !empty($prefs[$key]),
                     ));
-                } ?>
+                }
+                osc_admin_form_row_close(); ?>
                 <?php osc_admin_form_close(array(
                     array('label' => __('Save changes'), 'type' => 'submit', 'attrs' => array('id' => 'submit_sitemap_settings')),
                 )); ?>
