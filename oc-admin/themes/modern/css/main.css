@@ -14,6 +14,23 @@
   --osc-chrome-edge: #cfd6df;
   --osc-chrome-hover: rgba(15, 24, 40, .07);
   --osc-nav-label: #576371;
+  --osc-sidebar-surface: var(--osc-chrome);
+  --osc-sidebar-edge: var(--osc-chrome-edge);
+  --osc-sidebar-divider: var(--osc-chrome-edge);
+  --osc-sidebar-label: var(--osc-nav-label);
+  --osc-sidebar-strong: var(--osc-ink);
+  --osc-sidebar-subhead: var(--osc-ink-emphasis);
+  --osc-sidebar-icon: var(--osc-rule-strong);
+  --osc-sidebar-accent: var(--osc-bronze);
+  --osc-sidebar-accent-hover: var(--osc-accent-brand);
+  --osc-sidebar-active-bg: var(--osc-bronze-tint);
+  --osc-sidebar-hover-bg: var(--osc-chrome-hover);
+  --osc-sidebar-scroll: var(--osc-rule-strong);
+  --osc-sidebar-scroll-hover: var(--osc-ink-muted);
+  --osc-sidebar-brand-bg: var(--osc-bench);
+  --osc-sidebar-brand-edge: var(--osc-rule);
+  --osc-sidebar-brand-ink: var(--osc-ink);
+  --osc-sidebar-brand-accent: var(--osc-bronze);
   --osc-rule: #dde3ea;
   --osc-rule-strong: #7e8998;
   --osc-ink: #14181f;
@@ -13339,8 +13356,8 @@ div.widget-box-content-no-wrapp li a {
 
 .dashboard-sidebar {
   max-width: 15rem;
-  background-color: var(--osc-chrome);
-  border-inline-end: 1px solid var(--osc-chrome-edge);
+  background-color: var(--osc-sidebar-surface);
+  border-inline-end: 1px solid var(--osc-sidebar-edge);
 }
 .dashboard-sidebar.offcanvas {
   overflow-y: auto;
@@ -13348,7 +13365,7 @@ div.widget-box-content-no-wrapp li a {
 .dashboard-sidebar .nav-link {
   align-items: center;
   border-radius: 4px;
-  color: var(--osc-nav-label);
+  color: var(--osc-sidebar-label);
   display: flex;
   gap: 0;
   min-height: 2.5rem;
@@ -13376,7 +13393,7 @@ div.widget-box-content-no-wrapp li a {
 }
 .dashboard-sidebar .nav-link a:focus-visible {
   border-radius: 4px;
-  outline: 2px solid var(--osc-bronze);
+  outline: 2px solid var(--osc-sidebar-accent);
   outline-offset: 2px;
 }
 .dashboard-sidebar .nav-link > .nav-chevron {
@@ -13396,27 +13413,27 @@ div.widget-box-content-no-wrapp li a {
   transform: rotate(-90deg);
 }
 .dashboard-sidebar .nav-link > .nav-chevron:focus-visible {
-  outline: 2px solid var(--osc-bronze);
+  outline: 2px solid var(--osc-sidebar-accent);
   outline-offset: 2px;
 }
 .dashboard-sidebar .nav-link:hover {
-  background-color: var(--osc-chrome-hover);
-  color: var(--osc-ink);
+  background-color: var(--osc-sidebar-hover-bg);
+  color: var(--osc-sidebar-strong);
 }
 .dashboard-sidebar .nav-link:hover a > i {
-  color: var(--osc-accent-brand);
+  color: var(--osc-sidebar-accent-hover);
   transform: scale(1.08);
 }
 .dashboard-sidebar .nav-link.active {
-  background-color: var(--osc-bronze-tint);
-  color: var(--osc-bronze);
+  background-color: var(--osc-sidebar-active-bg);
+  color: var(--osc-sidebar-accent);
 }
 .dashboard-sidebar .nav-link.active a {
-  color: var(--osc-bronze);
+  color: var(--osc-sidebar-accent);
   font-weight: 600;
 }
 .dashboard-sidebar #dashboard-menu > .nav-item-band {
-  border-block-start: 1px solid var(--osc-chrome-edge);
+  border-block-start: 1px solid var(--osc-sidebar-divider);
   margin-block-start: 0.5rem;
   padding-block-start: 0.5rem;
 }
@@ -13430,7 +13447,7 @@ div.widget-box-content-no-wrapp li a {
 }
 .dashboard-sidebar .sidebar-submenu a {
   border-radius: 4px;
-  color: var(--osc-nav-label);
+  color: var(--osc-sidebar-label);
   font-size: 0.875rem;
   min-height: 2rem;
   margin-block: 0.1rem;
@@ -13438,7 +13455,7 @@ div.widget-box-content-no-wrapp li a {
   position: relative;
 }
 .dashboard-sidebar .sidebar-submenu a::before {
-  background-color: var(--osc-rule-strong);
+  background-color: var(--osc-sidebar-icon);
   block-size: 0.34rem;
   border-radius: 50%;
   content: "";
@@ -13450,28 +13467,28 @@ div.widget-box-content-no-wrapp li a {
   transition: background-color var(--osc-duration-fast) var(--osc-ease), box-shadow var(--osc-duration-fast) var(--osc-ease), transform var(--osc-duration-fast) var(--osc-ease);
 }
 .dashboard-sidebar .sidebar-submenu a:hover {
-  background-color: var(--osc-chrome-hover);
-  color: var(--osc-ink);
+  background-color: var(--osc-sidebar-hover-bg);
+  color: var(--osc-sidebar-strong);
 }
 .dashboard-sidebar .sidebar-submenu a:hover::before {
-  background-color: var(--osc-bronze);
+  background-color: var(--osc-sidebar-accent);
   transform: translateY(-50%) scale(1.15);
 }
 .dashboard-sidebar .sidebar-submenu a.sub-active {
-  background-color: var(--osc-bronze-tint);
-  color: var(--osc-bronze);
+  background-color: var(--osc-sidebar-active-bg);
+  color: var(--osc-sidebar-accent);
   font-weight: 600;
 }
 .dashboard-sidebar .sidebar-submenu a.sub-active::before {
-  background-color: var(--osc-bronze);
+  background-color: var(--osc-sidebar-accent);
 }
 .dashboard-sidebar .sidebar-submenu a:focus-visible {
-  outline: 2px solid var(--osc-bronze);
+  outline: 2px solid var(--osc-sidebar-accent);
   outline-offset: 2px;
 }
 .dashboard-sidebar .sidebar-submenu .submenu-divide {
-  border-block-start: 1px solid var(--osc-chrome-edge);
-  color: var(--osc-ink-emphasis);
+  border-block-start: 1px solid var(--osc-sidebar-divider);
+  color: var(--osc-sidebar-subhead);
   font-size: 0.8125rem;
   font-weight: 600;
   margin-block-start: 0.4rem;
@@ -13484,7 +13501,7 @@ div.widget-box-content-no-wrapp li a {
   padding-block-start: 0.15rem;
 }
 .dashboard-sidebar .sidebar-submenu .submenu-break {
-  border-block-start: 1px solid var(--osc-chrome-edge);
+  border-block-start: 1px solid var(--osc-sidebar-divider);
   margin-block-start: 0.4rem;
   margin-inline-start: 1.05rem;
 }
@@ -13496,9 +13513,9 @@ div.widget-box-content-no-wrapp li a {
 
 .sidebar-brand {
   align-items: center;
-  background-color: var(--osc-bench);
-  border-block-end: 1px solid var(--osc-rule);
-  color: var(--osc-ink);
+  background-color: var(--osc-sidebar-brand-bg);
+  border-block-end: 1px solid var(--osc-sidebar-brand-edge);
+  color: var(--osc-sidebar-brand-ink);
   display: flex;
   font-weight: 600;
   gap: 0.5rem;
@@ -13514,7 +13531,7 @@ div.widget-box-content-no-wrapp li a {
   }
 }
 .sidebar-brand > i {
-  color: var(--osc-bronze);
+  color: var(--osc-sidebar-brand-accent);
   flex: 0 0 auto;
   font-size: 1.15rem;
 }
@@ -13526,13 +13543,13 @@ div.widget-box-content-no-wrapp li a {
   color: var(--osc-bronze-deep);
 }
 .sidebar-brand:focus-visible {
-  outline: 2px solid var(--osc-bronze);
+  outline: 2px solid var(--osc-sidebar-brand-accent);
   outline-offset: -2px;
 }
 
 .sidebar-footer {
-  background-color: var(--osc-chrome);
-  border-block-start: 1px solid var(--osc-chrome-edge);
+  background-color: var(--osc-sidebar-surface);
+  border-block-start: 1px solid var(--osc-sidebar-divider);
   display: flex;
   flex: 0 0 auto;
   flex-direction: column;
@@ -13545,7 +13562,7 @@ div.widget-box-content-no-wrapp li a {
   background-color: transparent;
   border: 0;
   border-radius: 4px;
-  color: var(--osc-nav-label);
+  color: var(--osc-sidebar-label);
   cursor: pointer;
   display: flex;
   font-size: 0.875rem;
@@ -13562,11 +13579,11 @@ div.widget-box-content-no-wrapp li a {
   transition: transform var(--osc-duration-base) var(--osc-ease);
 }
 .sidebar-collapse-toggle:hover {
-  background-color: var(--osc-bench);
-  color: var(--osc-ink);
+  background-color: var(--osc-sidebar-hover-bg);
+  color: var(--osc-sidebar-strong);
 }
 .sidebar-collapse-toggle:focus-visible {
-  outline: 2px solid var(--osc-bronze);
+  outline: 2px solid var(--osc-sidebar-accent);
   outline-offset: -2px;
 }
 
@@ -13778,14 +13795,14 @@ div.widget-box-content-no-wrapp li a {
 }
 
 .ghost-scrollbar-thumb {
-  background-color: var(--osc-rule-strong);
+  background-color: var(--osc-sidebar-scroll);
   border-radius: 999px;
   cursor: grab;
   transition: background-color var(--osc-duration-fast) var(--osc-ease);
   width: 100%;
 }
 .ghost-scrollbar-thumb:hover {
-  background-color: var(--osc-ink-muted);
+  background-color: var(--osc-sidebar-scroll-hover);
 }
 
 .ghost-scrollbar.is-active .ghost-scrollbar-thumb {
@@ -13872,6 +13889,13 @@ div.widget-box-content-no-wrapp li a {
   [data-osc-sidebar=collapsed] .dashboard-sidebar .sidebar-submenu,
   [data-osc-sidebar=collapsed] .dashboard-sidebar .sidebar-flyout {
     --osc-flyout-hide: .15s;
+    --osc-sidebar-label: var(--osc-nav-label);
+    --osc-sidebar-strong: var(--osc-ink);
+    --osc-sidebar-icon: var(--osc-rule-strong);
+    --osc-sidebar-accent: var(--osc-bronze);
+    --osc-sidebar-active-bg: var(--osc-bronze-tint);
+    --osc-sidebar-hover-bg: var(--osc-chrome-hover);
+    --osc-sidebar-divider: var(--osc-chrome-edge);
     background-color: var(--osc-bench);
     border: 1px solid var(--osc-rule);
     box-shadow: var(--osc-shadow-overlay);
