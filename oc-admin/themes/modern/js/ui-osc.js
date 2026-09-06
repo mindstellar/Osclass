@@ -225,12 +225,38 @@ function oscTreeview(root, opts) {
             li.insertBefore(toggle, li.firstChild);
         })(lis[i]);
     }
+
+    // Reflect partial selection on a parent: an unchecked category whose subtree holds any
+    // checked box shows the indeterminate dash, so a collapsed branch still signals that
+    // something inside it is selected. Runs on load and after any box in the tree changes.
+    function oscTreeSyncParents() {
+        var items = root.querySelectorAll('li');
+        for (var i = 0; i < items.length; i++) {
+            var box = null;
+            var sub = null;
+            var kids = items[i].children;
+            for (var c = 0; c < kids.length; c++) {
+                if (kids[c].tagName === 'INPUT' && kids[c].type === 'checkbox') { box = kids[c]; }
+                if (kids[c].tagName === 'UL') { sub = kids[c]; }
+            }
+            if (!box || !sub) { continue; }
+            box.indeterminate = !box.checked && sub.querySelector('input[type=checkbox]:checked') !== null;
+        }
+    }
+
+    root.addEventListener('change', oscTreeSyncParents);
+    oscTreeSyncParents();
 }
 
 // Global so third-party plugins calling checkAll(id, check) by name keep working.
 function checkAll(id, check) {
     var root = document.getElementById(id);
-    if (root) { root.querySelectorAll('input[type=checkbox]').forEach(function (cb) { cb.checked = check; }); }
+    if (root) {
+        root.querySelectorAll('input[type=checkbox]').forEach(function (cb) { cb.checked = check; });
+        // Bulk toggles set .checked in script, which fires no change event; nudge one so a
+        // treeview watching this root re-reads its parent indeterminate states.
+        root.dispatchEvent(new Event('change', { bubbles: true }));
+    }
 }
 
 // Toggle a category subtree (#cat<id>); emitted inline by CategoryForm::categories_tree
