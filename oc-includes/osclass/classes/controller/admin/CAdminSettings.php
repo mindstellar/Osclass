@@ -102,6 +102,10 @@ class CAdminSettings
             case ('storage_migrate_post'):
                 $do = new CAdminSettingsStorage();
                 break;
+            case ('custom'):
+            case ('custom_post'):
+                $do = new CAdminSettingsCustom();
+                break;
             case ('update'):
             case ('check_updates'):
             default:

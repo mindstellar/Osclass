@@ -109,6 +109,7 @@ require_once LIB_PATH . 'osclass/helpers/hSpam.php';
 require_once LIB_PATH . 'osclass/helpers/hWidgets.php';
 require_once LIB_PATH . 'osclass/helpers/hPageTemplates.php';
 require_once LIB_PATH . 'osclass/helpers/hFields.php';
+require_once LIB_PATH . 'osclass/helpers/hSettings.php';
 require_once LIB_PATH . 'osclass/helpers/hForms.php';
 require_once LIB_PATH . 'osclass/helpers/hBilling.php';
 require_once LIB_PATH . 'osclass/compatibility.php';

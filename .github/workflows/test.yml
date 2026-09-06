@@ -167,6 +167,11 @@ jobs:
       # part of the view contract -- the page shipped as a fragment with no <head> at all.
       - name: Page builder render
         run: php tests/page-builder-render.php
+      # A declared settings page is the one place a plugin's admin form is not its own
+      # code: a spec error accepted here is a field silently missing from the page, and a
+      # value stored past its declared options is one nothing downstream expects.
+      - name: Settings page registry
+        run: php tests/settings-page-registry.php
       # The admin field primitives are what a plugin builds a settings page from, so their
       # markup is a contract both ways: an unescaped value is stored XSS on an admin-only
       # page, and a dropped field-* class puts a number back to full width, breaking the
