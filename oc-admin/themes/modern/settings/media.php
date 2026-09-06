@@ -122,12 +122,11 @@ osc_current_admin_theme_path('parts/header.php'); ?>
     <div id="general-settings">
         <?php osc_admin_page_head(__('Media Settings')); ?>
         <ul id="error_list"></ul>
-        <form name="media_form" action="<?php echo osc_admin_base_url(true); ?>" method="post"
-              enctype="multipart/form-data">
-            <input type="hidden" name="page" value="settings"/>
-            <input type="hidden" name="action" value="media_post"/>
-            <fieldset>
-                <div class="form-horizontal">
+        <?php osc_admin_form_open(array(
+            'name'   => 'media_form',
+            'action' => 'media_post',
+            'upload' => true,
+        )); ?>
                     <?php osc_admin_page_head(__('Image sizes')); ?>
                     <p class="form-intro"><?php _e('The sizes listed below determine the maximum dimensions in pixels to use when uploading a image.'
                                 . ' Format: <b>Width</b> x <b>Height</b>.'); ?>
@@ -396,10 +395,7 @@ osc_current_admin_theme_path('parts/header.php'); ?>
                         </div>
                     </div>
                     <div class="clear"></div>
-                    <?php osc_admin_form_actions(); ?>
-                </div>
-            </fieldset>
-        </form>
+                    <?php osc_admin_form_close(array()); ?>
     </div>
     <dialog id="dialog-watermark-warning" class="osc-dialog">
         <div class="osc-dialog-body">

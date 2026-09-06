@@ -141,12 +141,19 @@ osc_current_admin_theme_path('parts/header.php'); ?>
                             <?php echo osc_esc_html($custom['lastmod'] ?? ''); ?>
                         </td>
                         <td class="text-end">
-                            <form name="sitemap_url_remove_form" action="<?php echo osc_admin_base_url(true); ?>" method="post">
-                                <input type="hidden" name="page" value="settings"/>
-                                <input type="hidden" name="action" value="sitemap_custom_url_remove"/>
-                                <input type="hidden" name="sitemap_url_index" value="<?php echo osc_esc_html($index); ?>"/>
-                                <input type="submit" value="<?php echo osc_esc_html(__('Remove')); ?>" class="btn btn-mini"/>
-                            </form>
+                            <?php
+                            osc_admin_form_open(array(
+                                'name'       => 'sitemap_url_remove_form',
+                                'action'     => 'sitemap_custom_url_remove',
+                                'fields'     => array('sitemap_url_index' => $index),
+                                'horizontal' => false,
+                            ));
+                            osc_admin_action_button(array(
+                                'label'   => __('Remove'),
+                                'type'    => 'submit',
+                                'variant' => 'dim',
+                            ));
+                            osc_admin_form_close(null, array('horizontal' => false)); ?>
                         </td>
                     </tr>
                 <?php } ?>
@@ -191,11 +198,18 @@ osc_current_admin_theme_path('parts/header.php'); ?>
         <?php osc_admin_form_section(__('Regenerate')); ?>
         <p><?php _e('The sitemap is cached for a few hours after it is first requested. Use this if you need '
                             . 'search engines to see fresh content immediately.'); ?></p>
-        <form name="sitemap_regenerate_form" action="<?php echo osc_admin_base_url(true); ?>" method="post">
-            <input type="hidden" name="page" value="settings"/>
-            <input type="hidden" name="action" value="sitemap_regenerate"/>
-            <input type="submit" value="<?php echo osc_esc_html(__('Regenerate / clear cache')); ?>" class="btn btn-submit"/>
-        </form>
+        <?php
+        osc_admin_form_open(array(
+            'name'       => 'sitemap_regenerate_form',
+            'action'     => 'sitemap_regenerate',
+            'horizontal' => false,
+        ));
+        osc_admin_action_button(array(
+            'label'   => __('Regenerate / clear cache'),
+            'type'    => 'submit',
+            'variant' => 'primary',
+        ));
+        osc_admin_form_close(null, array('horizontal' => false)); ?>
     </div>
 </div>
 <?php osc_current_admin_theme_path('parts/footer.php'); ?>

@@ -101,15 +101,17 @@ osc_current_admin_theme_path('parts/header.php'); ?>
     <div id="add-currency-settings">
         <?php osc_admin_page_head(customText('title')); ?>
         <ul id="error_list"></ul>
-        <form name="currency_form" action="<?php echo osc_admin_base_url(true); ?>" method="post">
-            <input type="hidden" name="page" value="settings"/>
-            <input type="hidden" name="action" value="currencies"/>
-            <input type="hidden" name="type" value="<?php echo $typeForm; ?>"/>
-            <?php if ($typeForm === 'edit_post') { ?>
-                <input type="hidden" name="pk_c_code" value="<?php echo osc_esc_html($aCurrency['pk_c_code']); ?>"/>
-            <?php } ?>
-            <fieldset>
-                <div class="form-horizontal">
+        <?php
+        $currencyFields = array('type' => $typeForm);
+        if ($typeForm === 'edit_post') {
+            // The code is the primary key, so an edit has to carry the row it is editing.
+            $currencyFields['pk_c_code'] = $aCurrency['pk_c_code'];
+        }
+        osc_admin_form_open(array(
+            'name'   => 'currency_form',
+            'action' => 'currencies',
+            'fields' => $currencyFields,
+        )); ?>
                     <?php
                     osc_admin_text(array(
                         'name'      => 'pk_c_code',
@@ -134,23 +136,18 @@ osc_current_admin_theme_path('parts/header.php'); ?>
                         'label' => __('Name'),
                         'value' => $aCurrency['s_name'],
                     )); ?>
-                    <div class="form-actions">
-                        <?php if ($typeForm === 'edit_post') {
-                            osc_admin_action_button(array(
-                                'label'   => __('Cancel'),
-                                'variant' => 'red',
-                                'url'     => osc_admin_base_url(true) . '?page=settings&action=currencies',
-                            ));
-                        }
-                        osc_admin_action_button(array(
-                            'label'   => customText('button'),
-                            'type'    => 'submit',
-                            'variant' => 'primary',
-                        )); ?>
-                    </div>
-                </div>
-            </fieldset>
-        </form>
+                    <?php
+                    $currencyActions = array(
+                        array('label' => customText('button'), 'type' => 'submit', 'variant' => 'primary'),
+                    );
+                    if ($typeForm === 'edit_post') {
+                        $currencyActions[] = array(
+                            'label'   => __('Cancel'),
+                            'variant' => 'red',
+                            'url'     => osc_admin_base_url(true) . '?page=settings&action=currencies',
+                        );
+                    }
+                    osc_admin_form_close($currencyActions); ?>
     </div>
     <!-- /settings form -->
 <?php osc_current_admin_theme_path('parts/footer.php'); ?>

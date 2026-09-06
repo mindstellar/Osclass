@@ -53,10 +53,12 @@ osc_current_admin_theme_path('parts/header.php'); ?>
     <div class="relative">
         <div id="currencies-toolbar" class="table-toolbar">
         </div>
-        <form class="" id="datatablesForm" action="<?php echo osc_admin_base_url(true); ?>" method="post">
-            <input type="hidden" name="page" value="settings"/>
-            <input type="hidden" name="action" value="currencies"/>
-            <input type="hidden" name="type" value="delete"/>
+        <?php osc_admin_form_open(array(
+            'id'         => 'datatablesForm',
+            'action'     => 'currencies',
+            'fields'     => array('type' => 'delete'),
+            'horizontal' => false,
+        )); ?>
             <?php osc_admin_bulk_actions(array('options_html' => static function () { ?>
                 <select id="bulk_actions" name="bulk_actions" class="select-box-extra form-select">
                     <option value=""><?php _e('Bulk actions'); ?></option>
@@ -99,7 +101,7 @@ osc_current_admin_theme_path('parts/header.php'); ?>
                 <?php } ?>
                 </tbody>
             </table>
-        </form>
+        <?php osc_admin_form_close(null, array('horizontal' => false)); ?>
     </div>
     <?php osc_admin_confirm_dialog(array(
         'id'         => 'deleteModal',

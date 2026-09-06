@@ -189,8 +189,11 @@ $scopeOptions = array(
 
     <?php osc_admin_form_section(__('Blocked keywords'), array('spaced' => true)); ?>
     <div class="relative">
-        <form class="" id="datatablesForm" action="<?php echo osc_admin_base_url(true); ?>" method="post">
-            <input type="hidden" name="page" value="settings"/>
+        <?php osc_admin_form_open(array(
+            'id'         => 'datatablesForm',
+            'page'       => 'settings',
+            'horizontal' => false,
+        )); ?>
 
             <?php osc_admin_bulk_actions(array('options' => __get('bulk_options'))); ?>
             <div class="table-contains-actions">
@@ -226,7 +229,7 @@ $scopeOptions = array(
                 </table>
                 <div id="table-row-actions"></div> <!-- used for table actions -->
             </div>
-        </form>
+        <?php osc_admin_form_close(null, array('horizontal' => false)); ?>
     </div>
 <?php
 osc_admin_pagination($aData);

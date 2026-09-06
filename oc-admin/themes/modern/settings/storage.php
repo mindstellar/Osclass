@@ -211,11 +211,18 @@ osc_current_admin_theme_path('parts/header.php'); ?>
             <div class="form-row">
                 <div class="form-controls">
                     <p><?php _e('Runs a small write/read/delete probe against the saved connection settings above.'); ?></p>
-                    <form name="storage_test_form" action="<?php echo osc_admin_base_url(true); ?>" method="post">
-                        <input type="hidden" name="page" value="settings"/>
-                        <input type="hidden" name="action" value="storage_test_post"/>
-                        <input type="submit" value="<?php echo osc_esc_html(__('Test connection')); ?>" class="btn btn-dim"/>
-                    </form>
+                    <?php
+                    osc_admin_form_open(array(
+                        'name'       => 'storage_test_form',
+                        'action'     => 'storage_test_post',
+                        'horizontal' => false,
+                    ));
+                    osc_admin_action_button(array(
+                        'label'   => __('Test connection'),
+                        'type'    => 'submit',
+                        'variant' => 'dim',
+                    ));
+                    osc_admin_form_close(null, array('horizontal' => false)); ?>
                 </div>
             </div>
 
@@ -229,11 +236,18 @@ osc_current_admin_theme_path('parts/header.php'); ?>
                             (int) $queueStats['error']
                         ); ?>
                     </p>
-                    <form name="storage_queue_form" action="<?php echo osc_admin_base_url(true); ?>" method="post">
-                        <input type="hidden" name="page" value="settings"/>
-                        <input type="hidden" name="action" value="storage_queue_run"/>
-                        <input type="submit" value="<?php echo osc_esc_html(__('Process queue now')); ?>" class="btn btn-dim"/>
-                    </form>
+                    <?php
+                    osc_admin_form_open(array(
+                        'name'       => 'storage_queue_form',
+                        'action'     => 'storage_queue_run',
+                        'horizontal' => false,
+                    ));
+                    osc_admin_action_button(array(
+                        'label'   => __('Process queue now'),
+                        'type'    => 'submit',
+                        'variant' => 'dim',
+                    ));
+                    osc_admin_form_close(null, array('horizontal' => false)); ?>
                     <?php if (!empty($queueStats['dead_letters'])) { ?>
                         <div class="help-box">
                             <p><?php _e('Dead-lettered jobs (past the retry ceiling):'); ?></p>
@@ -257,35 +271,56 @@ osc_current_admin_theme_path('parts/header.php'); ?>
                     <p><?php _e('Backfill existing images between local disk and remote storage. Each action queues '
                                  . 'jobs processed by the storage queue above (or by cron) rather than running immediately.'); ?></p>
 
-                    <form name="storage_offload_all_form" action="<?php echo osc_admin_base_url(true); ?>" method="post">
-                        <input type="hidden" name="page" value="settings"/>
-                        <input type="hidden" name="action" value="storage_migrate_post"/>
-                        <input type="hidden" name="op" value="offload_all"/>
-                        <button type="button" class="btn btn-dim" data-osc-dialog-open="#storage-offload-dialog"><?php echo osc_esc_html(__('Offload all local images to remote storage')); ?></button>
-                    </form>
+                    <?php
+                    osc_admin_form_open(array(
+                        'name'       => 'storage_offload_all_form',
+                        'action'     => 'storage_migrate_post',
+                        'fields'     => array('op' => 'offload_all'),
+                        'horizontal' => false,
+                    ));
+                    osc_admin_action_button(array(
+                        'label'   => __('Offload all local images to remote storage'),
+                        'variant' => 'dim',
+                        'attrs'   => array('data-osc-dialog-open' => '#storage-offload-dialog'),
+                    ));
+                    osc_admin_form_close(null, array('horizontal' => false)); ?>
                     <div class="help-box">
                         <?php _e('Backfills every image still on local disk to the active remote storage backend. '
                                  . 'Existing images are queued for upload; new uploads are already handled automatically.'); ?>
                     </div>
 
-                    <form name="storage_restore_all_form" action="<?php echo osc_admin_base_url(true); ?>" method="post">
-                        <input type="hidden" name="page" value="settings"/>
-                        <input type="hidden" name="action" value="storage_migrate_post"/>
-                        <input type="hidden" name="op" value="restore_all"/>
-                        <button type="button" class="btn btn-dim" data-osc-dialog-open="#storage-restore-dialog"><?php echo osc_esc_html(__('Download all remote images back to local (offline copy)')); ?></button>
-                    </form>
+                    <?php
+                    osc_admin_form_open(array(
+                        'name'       => 'storage_restore_all_form',
+                        'action'     => 'storage_migrate_post',
+                        'fields'     => array('op' => 'restore_all'),
+                        'horizontal' => false,
+                    ));
+                    osc_admin_action_button(array(
+                        'label'   => __('Download all remote images back to local (offline copy)'),
+                        'variant' => 'dim',
+                        'attrs'   => array('data-osc-dialog-open' => '#storage-restore-dialog'),
+                    ));
+                    osc_admin_form_close(null, array('horizontal' => false)); ?>
                     <div class="help-box">
                         <?php _e('Brings every remote image back to local disk and switches it back to local storage. '
                                  . 'Use this to keep a local copy, or before disabling remote storage.'); ?>
                     </div>
 
                     <?php if ($betterS3Configured) { ?>
-                        <form name="storage_adopt_better_s3_form" action="<?php echo osc_admin_base_url(true); ?>" method="post">
-                            <input type="hidden" name="page" value="settings"/>
-                            <input type="hidden" name="action" value="storage_migrate_post"/>
-                            <input type="hidden" name="op" value="adopt_better_s3"/>
-                            <button type="button" class="btn btn-dim" data-osc-dialog-open="#storage-adopt-dialog"><?php echo osc_esc_html(__('Adopt existing Better S3 images')); ?></button>
-                        </form>
+                        <?php
+                        osc_admin_form_open(array(
+                            'name'       => 'storage_adopt_better_s3_form',
+                            'action'     => 'storage_migrate_post',
+                            'fields'     => array('op' => 'adopt_better_s3'),
+                            'horizontal' => false,
+                        ));
+                        osc_admin_action_button(array(
+                            'label'   => __('Adopt existing Better S3 images'),
+                            'variant' => 'dim',
+                            'attrs'   => array('data-osc-dialog-open' => '#storage-adopt-dialog'),
+                        ));
+                        osc_admin_form_close(null, array('horizontal' => false)); ?>
                         <div class="help-box">
                             <?php _e('Imports your Better S3 connection settings and marks images already uploaded to that '
                          . 'bucket as remote, without re-uploading them.'); ?>

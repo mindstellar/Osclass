@@ -116,7 +116,7 @@ osc_current_admin_theme_path('parts/header.php'); ?>
         </div>
     </div>
     <dialog id="locationModal" class="osc-dialog">
-        <form method="post" action="<?php echo osc_admin_base_url(true); ?>">
+        <?php osc_admin_form_open(array('page' => '', 'action' => '', 'horizontal' => false)); ?>
             <div class="osc-dialog-body">
                 <p class="osc-dialog-title"></p>
                 <div class="osc-dialog-content"></div>
@@ -125,7 +125,7 @@ osc_current_admin_theme_path('parts/header.php'); ?>
                 <button type="button" class="btn btn-dim btn-sm" data-osc-dialog-close><?php _e('Cancel'); ?></button>
                 <button class="btn btn-submit btn-sm" type="submit"></button>
             </div>
-        </form>
+        <?php osc_admin_form_close(null, array('horizontal' => false)); ?>
     </dialog>
     <!-- End form add country -->
     <script>

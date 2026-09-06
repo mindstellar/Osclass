@@ -37,12 +37,20 @@ $controller = __DIR__ . '/../oc-includes/osclass/classes/controller/admin/CAdmin
 check('the settings view directory is where it is expected', is_dir($viewDir));
 check('CAdminSettings.php is where it is expected', is_file($controller));
 
-/** Actions the settings views post, as `<input type="hidden" name="action" value="...">`. */
+/**
+ * Actions the settings views post. Two spellings, because a view may declare its form
+ * either way: osc_admin_form_open(array('action' => 'x')) is the current one, and a
+ * hand-written `<input type="hidden" name="action" value="x">` still works and still has
+ * to be routed. An action built at runtime is not scannable and is not checked here.
+ */
 $posted = array();
 foreach (glob($viewDir . '/*.php') as $view) {
-    if (preg_match_all('/name="action"\s+value="([a-z_]+)"/', (string) file_get_contents($view), $m)) {
-        foreach ($m[1] as $action) {
-            $posted[$action] = basename($view);
+    $src = (string) file_get_contents($view);
+    foreach (array('/name="action"\s+value="([a-z_]+)"/', "/'action'\s*=>\s*'([a-z_]+)'/") as $pattern) {
+        if (preg_match_all($pattern, $src, $m)) {
+            foreach ($m[1] as $action) {
+                $posted[$action] = basename($view);
+            }
         }
     }
 }

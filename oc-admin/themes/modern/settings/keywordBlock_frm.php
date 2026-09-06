@@ -59,12 +59,12 @@ $aux = customFrmText();
 <?php osc_admin_page_head($aux['title']); ?>
 <div class="settings-user">
     <ul id="error_list"></ul>
-    <form name="keyword_block_form" action="<?php echo osc_admin_base_url(true); ?>" method="post">
-        <input type="hidden" name="page" value="settings"/>
-        <input type="hidden" name="action" value="<?php echo osc_esc_html($aux['action_frm']); ?>"/>
-        <?php KeywordBlockForm::primary_input_hidden($keyword); ?>
-        <fieldset>
-            <div class="form-horizontal">
+    <?php
+    osc_admin_form_open(array(
+        'name'   => 'keyword_block_form',
+        'action' => $aux['action_frm'],
+    ));
+    KeywordBlockForm::primary_input_hidden($keyword); ?>
                 <div class="form-row">
                     <div class="form-label"><?php _e('Keyword'); ?></div>
                     <div class="form-controls">
@@ -96,12 +96,13 @@ $aux = customFrmText();
                     </div>
                 </div>
                 <div class="clear"></div>
-                <div class="form-actions">
-                    <button type="submit" class="btn btn-submit"><?php echo osc_esc_html($aux['btn_text']); ?></button>
-                    <a class="btn btn-dim" href="<?php echo osc_admin_base_url(true); ?>?page=settings&action=keyword_block"><?php _e('Cancel'); ?></a>
-                </div>
-            </div>
-        </fieldset>
-    </form>
+                <?php osc_admin_form_close(array(
+                    array('label' => $aux['btn_text'], 'type' => 'submit', 'variant' => 'primary'),
+                    array(
+                        'label'   => __('Cancel'),
+                        'variant' => 'dim',
+                        'url'     => osc_admin_base_url(true) . '?page=settings&action=keyword_block',
+                    ),
+                )); ?>
 </div>
 <?php osc_current_admin_theme_path('parts/footer.php'); ?>
