@@ -69,58 +69,7 @@ if (!function_exists('osc_admin_field')) {
      */
     function osc_admin_field(array $spec)
     {
-        $type = $spec['type'] ?? 'text';
-        $id   = osc_admin_field_id($spec);
-        $row  = $spec['row'] ?? true;
-
-        if ($row) {
-            // A checkbox carries its own label beside the control; anything else labels the
-            // row. Passing both would print the label twice.
-            $rowLabel = $type === 'checkbox'
-                ? ($spec['row_label'] ?? '')
-                : ($spec['label'] ?? '');
-            // A choice list has no single control to point at -- each option owns its own
-            // label -- so the row label stays plain text and the group is named through
-            // aria-label instead. A `for` pointing at an id nothing carries reaches nothing.
-            osc_admin_form_row_open($rowLabel, $type === 'radio' ? array() : array('for' => $id));
-        }
-
-        if ($type === 'checkbox') {
-            $spec['id'] = $id;
-            osc_admin_checkbox($spec);
-        } else {
-            // The words either side of a field, and a secret's reveal button, sit on the
-            // control's own line. The inputs are display:block, so without this they drop
-            // underneath. Each affix is a whole phrase the translator can read, which is the
-            // point: the sentence is never split around an opaque %s they cannot move.
-            $prefix = (string)($spec['prefix'] ?? '');
-            $suffix = (string)($spec['suffix'] ?? '');
-            $inline = $prefix !== '' || $suffix !== ''
-                || ($type === 'secret' && !empty($spec['reveal']));
-            if ($inline) {
-                echo '<div class="field-inline">';
-            }
-            // A choice list has no single control to name, so its affixes stay plain text.
-            $affixFor = $type === 'radio' ? '' : ' for="' . osc_esc_html($id) . '"';
-            if ($prefix !== '') {
-                echo '<label class="field-prefix"' . $affixFor . '>' . osc_esc_html($prefix) . '</label>';
-            }
-
-            osc_admin_field_control($type, $id, $spec);
-
-            if ($suffix !== '') {
-                echo '<label class="field-suffix"' . $affixFor . '>' . osc_esc_html($suffix) . '</label>';
-            }
-            if ($inline) {
-                echo '</div>';
-            }
-
-            osc_admin_field_help($spec);
-        }
-
-        if ($row) {
-            osc_admin_form_row_close();
-        }
+        (new \mindstellar\admin\ui\Field($spec))->render();
     }
 }
 
@@ -137,104 +86,7 @@ if (!function_exists('osc_admin_field_control')) {
      */
     function osc_admin_field_control($type, $id, array $spec)
     {
-        $name  = (string)($spec['name'] ?? '');
-        $value = $spec['value'] ?? ($spec['selected'] ?? '');
-        $attrs = osc_admin_field_attrs($spec['attrs'] ?? array());
-
-        if (!empty($spec['required'])) {
-            $attrs .= ' required';
-        }
-        if (!empty($spec['disabled'])) {
-            $attrs .= ' disabled';
-        }
-        if (isset($spec['placeholder']) && $type !== 'select') {
-            $attrs .= ' placeholder="' . osc_esc_html($spec['placeholder']) . '"';
-        }
-
-        // A control the page drives from script and never submits has no name; emitting an
-        // empty one would put it in the request as a blank key.
-        $common = ' id="' . osc_esc_html($id) . '"'
-            . ($name === '' ? '' : ' name="' . osc_esc_html($name) . '"');
-
-        switch ($type) {
-            case 'custom':
-                if (isset($spec['render']) && is_callable($spec['render'])) {
-                    call_user_func($spec['render'], $spec);
-                }
-                break;
-
-            case 'select':
-                echo '<select' . $common . ' class="' . osc_admin_field_class($type, $spec) . '"' . $attrs . '>';
-                if (isset($spec['placeholder'])) {
-                    echo '<option value="">' . osc_esc_html($spec['placeholder']) . '</option>';
-                }
-                foreach (($spec['options'] ?? array()) as $optValue => $optLabel) {
-                    echo '<option value="' . osc_esc_html($optValue) . '"'
-                        . ((string)$optValue === (string)$value ? ' selected' : '') . '>'
-                        . osc_esc_html($optLabel) . '</option>';
-                }
-                echo '</select>';
-                break;
-
-            case 'textarea':
-                echo '<textarea' . $common . ' class="' . osc_admin_field_class($type, $spec) . '"'
-                    . ' rows="' . (int)($spec['rows'] ?? 5) . '"' . $attrs . '>'
-                    . osc_esc_html((string)$value) . '</textarea>';
-                break;
-
-            case 'radio':
-                osc_admin_field_choices($id, $name, (string)$value, $spec);
-                break;
-
-            case 'color':
-                echo '<input type="color"' . $common . ' class="' . osc_admin_field_class($type, $spec) . '"'
-                    . ' value="' . osc_esc_html((string)$value) . '"' . $attrs . ' />';
-                break;
-
-            case 'file':
-                // No value: a file input's value cannot be set, and a browser would refuse it.
-                echo '<input type="file"' . $common . ' class="' . osc_admin_field_class($type, $spec) . '"'
-                    . $attrs . ' />';
-                break;
-
-            case 'number':
-                foreach (array('min', 'max', 'step') as $key) {
-                    if (isset($spec[$key])) {
-                        $attrs .= ' ' . $key . '="' . osc_esc_html($spec[$key]) . '"';
-                    }
-                }
-                echo '<input type="number"' . $common . ' class="' . osc_admin_field_class($type, $spec) . '"'
-                    . ' value="' . osc_esc_html((string)$value) . '"' . $attrs . ' />';
-                break;
-
-            case 'secret':
-                // A stored secret is not echoed back into the DOM when 'masked' is set: the
-                // field renders empty over a bullet placeholder, and a blank submission means
-                // "unchanged". Callers keep the old value themselves until the save layer lands.
-                $masked = !empty($spec['masked']);
-                echo '<input type="password"' . $common . ' class="' . osc_admin_field_class($type, $spec) . '"'
-                    . ' value="' . ($masked ? '' : osc_esc_html((string)$value)) . '"'
-                    . ' autocomplete="off" spellcheck="false"'
-                    . ($masked && (string)$value !== '' ? ' placeholder="••••••••"' : '')
-                    . $attrs . ' />';
-                if (!empty($spec['reveal'])) {
-                    echo '<button type="button" class="btn btn-sm btn-secondary" data-osc-reveal="'
-                        . osc_esc_html($id) . '" aria-controls="' . osc_esc_html($id) . '"'
-                        . ' aria-pressed="false" data-label-show="' . osc_esc_html(__('Show')) . '"'
-                        . ' data-label-hide="' . osc_esc_html(__('Hide')) . '">'
-                        . osc_esc_html(__('Show')) . '</button>';
-                }
-                break;
-
-            default:
-                // email/url/tel are text fields wearing a keyboard and a validator. Anything
-                // else falls back to text rather than emitting a type the caller invented.
-                $htmlType = in_array($type, array('email', 'url', 'tel'), true) ? $type : 'text';
-                echo '<input type="' . $htmlType . '"' . $common
-                    . ' class="' . osc_admin_field_class($type, $spec) . '"'
-                    . ' value="' . osc_esc_html((string)$value) . '"' . $attrs . ' />';
-                break;
-        }
+        \mindstellar\admin\ui\Field::control($type, $id, $spec);
     }
 }
 
@@ -257,37 +109,7 @@ if (!function_exists('osc_admin_field_choices')) {
      */
     function osc_admin_field_choices($id, $name, $value, array $spec)
     {
-        $label = (string)($spec['label'] ?? '');
-        echo '<div class="field-choices"'
-            . ($label === '' ? '' : ' role="group" aria-label="' . osc_esc_html($label) . '"')
-            . '>';
-
-        $i = 0;
-        foreach (($spec['options'] ?? array()) as $optValue => $option) {
-            $i++;
-            $custom      = '';
-            $optId       = $id . '-' . $i;
-            $optDisabled = false;
-            if (is_array($option)) {
-                $custom      = (string)($option['custom_html'] ?? '');
-                $optId       = (string)($option['id'] ?? $optId);
-                $optDisabled = !empty($option['disabled']);
-                $option      = $option['label'] ?? '';
-            }
-
-            // The id counts the options rather than slugging their values: a value is free
-            // text ("F j, Y"), and neither spaces nor two values slugging to the same
-            // string can be allowed to produce an id two radios share.
-            echo '<label class="field-choice">'
-                . '<input type="radio" id="' . osc_esc_html($optId) . '"'
-                . ' name="' . osc_esc_html($name) . '" value="' . osc_esc_html($optValue) . '"'
-                . ((string)$optValue === $value ? ' checked' : '')
-                . (!empty($spec['disabled']) || $optDisabled ? ' disabled' : '') . ' />'
-                . '<span>' . osc_esc_html($option) . '</span>'
-                . $custom
-                . '</label>';
-        }
-        echo '</div>';
+        \mindstellar\admin\ui\Field::choices($id, $name, $value, $spec);
     }
 }
 
@@ -303,48 +125,7 @@ if (!function_exists('osc_admin_field_class')) {
      */
     function osc_admin_field_class($type, array $spec)
     {
-        $widths = array(
-            'num'    => 'field-num',
-            'text'   => 'field-text',
-            'key'    => 'field-key',
-            'select' => 'field-select',
-            'full'   => '',
-        );
-
-        $byType = array(
-            'number'   => 'field-num',
-            'select'   => 'field-select',
-            'secret'   => 'field-key',
-            'textarea' => 'field-text',
-            'color'    => 'field-color',
-            'file'     => '',
-        );
-
-        $width = isset($spec['width'])
-            ? ($widths[$spec['width']] ?? '')
-            : ($byType[$type] ?? 'field-text');
-
-        // input-text is what the admin styles a text control with; a select, a colour well and
-        // a file picker are not text controls and the class would fight their own sizing.
-        $classes = in_array($type, array('select', 'color', 'file'), true) ? array() : array('input-text');
-
-        // field-select is a select's appearance, not just its width, so it stays on even when
-        // the caller asks for a different width -- the width classes carry !important and win
-        // that part on their own.
-        if ($type === 'select' && $width !== 'field-select') {
-            $classes[] = 'field-select';
-        }
-        if ($width !== '') {
-            $classes[] = $width;
-        }
-        if ($type === 'textarea' && !empty($spec['monospace'])) {
-            $classes[] = 'field-mono';
-        }
-        if (!empty($spec['class'])) {
-            $classes[] = $spec['class'];
-        }
-
-        return osc_esc_html(implode(' ', $classes));
+        return \mindstellar\admin\ui\Field::cssClass($type, $spec);
     }
 }
 
@@ -358,11 +139,7 @@ if (!function_exists('osc_admin_field_help')) {
      */
     function osc_admin_field_help(array $spec)
     {
-        if (!empty($spec['help_html'])) {
-            echo '<div class="help-box">' . $spec['help_html'] . '</div>';
-        } elseif (!empty($spec['help'])) {
-            echo '<div class="help-box">' . osc_esc_html((string)$spec['help']) . '</div>';
-        }
+        \mindstellar\admin\ui\Field::help($spec);
     }
 }
 
@@ -377,13 +154,7 @@ if (!function_exists('osc_admin_field_id')) {
      */
     function osc_admin_field_id(array $spec)
     {
-        if (!empty($spec['id'])) {
-            return (string)$spec['id'];
-        }
-
-        $name = (string)($spec['name'] ?? '');
-
-        return $name === '' ? '' : 'field-' . preg_replace('/[^A-Za-z0-9_-]+/', '-', $name);
+        return \mindstellar\admin\ui\Field::idFor($spec);
     }
 }
 
@@ -398,17 +169,7 @@ if (!function_exists('osc_admin_field_attrs')) {
      */
     function osc_admin_field_attrs(array $attrs)
     {
-        $out = '';
-        foreach ($attrs as $name => $value) {
-            if ($value === false || $value === null) {
-                continue;
-            }
-            $out .= $value === true
-                ? ' ' . osc_esc_html($name)
-                : ' ' . osc_esc_html($name) . '="' . osc_esc_html($value) . '"';
-        }
-
-        return $out;
+        return \mindstellar\admin\ui\Field::attrsString($attrs);
     }
 }
 

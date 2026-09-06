@@ -818,6 +818,7 @@ return array(
     'Widget' => $baseDir . '/oc-includes/osclass/classes/model/Widget.php',
     'iObject_Cache' => $baseDir . '/oc-includes/osclass/classes/cache/interface/iObject_Cache.php',
     'mindstellar\\Csrf' => $baseDir . '/oc-includes/osclass/classes/Csrf.php',
+    'mindstellar\\admin\\ui\\Field' => $baseDir . '/oc-includes/osclass/classes/admin/ui/Field.php',
     'mindstellar\\billing\\Billing' => $baseDir . '/oc-includes/osclass/classes/billing/Billing.php',
     'mindstellar\\billing\\CallbackResult' => $baseDir . '/oc-includes/osclass/classes/billing/CallbackResult.php',
     'mindstellar\\billing\\CheckoutIntent' => $baseDir . '/oc-includes/osclass/classes/billing/CheckoutIntent.php',

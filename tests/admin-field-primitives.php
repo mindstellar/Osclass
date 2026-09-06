@@ -57,6 +57,7 @@ function osc_admin_base_url($index = false)
     return 'https://example.test/oc-admin/index.php';
 }
 
+require_once ABS_PATH . 'oc-includes/osclass/classes/admin/ui/Field.php';
 require_once ABS_PATH . 'oc-includes/osclass/helpers/hAdminUi.php';
 
 /** Capture what a helper prints. */
