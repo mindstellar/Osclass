@@ -178,6 +178,10 @@ jobs:
       # sentence it sits in.
       - name: Admin field primitives
         run: php tests/admin-field-primitives.php
+      # Keeps the row/checkbox/tab primitives unified: no theme copy shadowing core, no
+      # hand-written form row creeping back, no return to Bootstrap tabs.
+      - name: Admin form primitives guard
+        run: php tests/admin-form-primitives-guard.php
       # user_menu_filter is the only way a plugin reaches the account menu, and a wrong
       # order there is silent -- the entry renders, just under the log-out row.
       - name: Account menu order
