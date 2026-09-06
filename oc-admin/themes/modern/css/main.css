@@ -14728,6 +14728,10 @@ input.input-actions {
   width: auto;
 }
 
+.form-controls > .help-box {
+  display: block;
+}
+
 .field-prefix,
 .field-suffix {
   color: var(--osc-ink-muted);

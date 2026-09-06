@@ -25,6 +25,13 @@
   }
 }
 
+// A field's hint owns its line. `.help-box` is inline-block globally — plugins place it
+// mid-sentence and that has to keep working — but inside a settings row it follows a
+// control, and after an inline one (a button, a reveal toggle) it ran on into the same line.
+.form-controls > .help-box {
+  display: block;
+}
+
 // The words either side of a field. Labels, not spans: they name the control they sit
 // against, and the row's own label column is often a category rather than a name.
 .field-prefix,

@@ -66,14 +66,6 @@ function customHead()
 
 osc_add_hook('admin_header', 'customHead', 10);
 
-/**
- * @return string
- */
-function render_offset()
-{
-    return 'row-offset';
-}
-
 osc_admin_page(array(
     'section' => __('Settings'),
     'title'   => __('Mail Settings'),
@@ -93,92 +85,89 @@ osc_current_admin_theme_path('parts/header.php'); ?>
             <input type="hidden" name="action" value="mailserver_post"/>
             <fieldset>
                 <div class="form-horizontal">
-                    <div class="form-row">
-                        <div class="form-label"><?php _e('Server type'); ?></div>
-                        <div class="form-controls">
-                            <select class="form-select form-select-sm " name="mailserver_type">
-                                <option value="custom" <?php echo (osc_mailserver_type() === 'custom')
-                                    ? 'selected="true"' : ''; ?>><?php _e('Custom Server'); ?></option>
-                                <option value="gmail" <?php echo (osc_mailserver_type() === 'gmail') ? 'selected="true"'
-                                    : ''; ?>><?php _e('GMail Server'); ?></option>
-                            </select>
-                        </div>
-                    </div>
-                    <div class="form-row">
-                        <div class="form-label"><?php _e('Hostname'); ?></div>
-                        <div class="form-controls">
-                            <input type="text" class="input-large" name="mailserver_host"
-                                   value="<?php echo osc_esc_html(osc_mailserver_host()); ?>"/>
-                        </div>
-                    </div>
-                    <div class="form-row">
-                        <div class="form-label"><?php _e('Mail from'); ?></div>
-                        <div class="form-controls">
-                            <input type="text" class="input-large" name="mailserver_mail_from"
-                                   value="<?php echo osc_esc_html(osc_mailserver_mail_from()); ?>"/>
-                        </div>
-                    </div>
-                    <div class="form-row">
-                        <div class="form-label"><?php _e('Name from'); ?></div>
-                        <div class="form-controls">
-                            <input type="text" class="input-large" name="mailserver_name_from"
-                                   value="<?php echo osc_esc_html(osc_mailserver_name_from()); ?>"/>
-                        </div>
-                    </div>
-                    <div class="form-row">
-                        <div class="form-label"><?php _e('Server port'); ?></div>
-                        <div class="form-controls">
-                            <input type="text" class="input-large" name="mailserver_port"
-                                   value="<?php echo osc_esc_html(osc_mailserver_port()); ?>"/>
-                        </div>
-                    </div>
-                    <div class="form-row">
-                        <div class="form-label"><?php _e('Username'); ?></div>
-                        <div class="form-controls">
-                            <input type="text" class="input-large" name="mailserver_username"
-                                   value="<?php echo osc_esc_html(osc_mailserver_username()); ?>"/>
-                        </div>
-                    </div>
-                    <div class="form-row">
-                        <div class="form-label"><?php _e('Password'); ?></div>
-                        <div class="form-controls">
-                            <input type="password" class="input-large" name="mailserver_password"
-                                   value="<?php echo osc_esc_html(osc_mailserver_password()); ?>"/>
-                        </div>
-                    </div>
-                    <div class="form-row">
-                        <div class="form-label"><?php _e('Encryption'); ?></div>
-                        <div class="form-controls">
-                            <input type="text" class="input-medium" name="mailserver_ssl"
-                                   value="<?php echo osc_esc_html(osc_mailserver_ssl()); ?>"/>
-                            <?php _e('Options: blank, ssl or tls'); ?>
-                            <?php if (PHP_SAPI === 'cgi-fcgi' || PHP_SAPI === 'cgi') { ?>
-                                <div class="callout-warning">
-                                    <p><?php _e('Cannot be sure that Apache Module <b>mod_ssl</b> is loaded.'); ?></p>
-                                </div>
-                            <?php } elseif (!@apache_mod_loaded('mod_ssl')) { ?>
-                                <div class="callout-warning">
-                                    <p><?php _e('Apache Module <b>mod_ssl</b> is not loaded'); ?></p>
-                                </div>
-                            <?php } ?>
-                        </div>
-                    </div>
-                    <div class="form-row">
-                        <div class="form-label"><?php _e('SMTP'); ?></div>
-                        <div class="form-controls">
-                            <div class="form-label-checkbox"><input type="checkbox" <?php echo(osc_mailserver_auth()
-                                    ? 'checked="checked"' : ''); ?> name="mailserver_auth" value="1"/>
-                                <?php _e('SMTP authentication enabled'); ?></div>
-                        </div>
-                    </div>
-                    <div class="form-row">
-                        <div class="form-label"><?php _e('POP'); ?></div>
-                        <div class="form-controls">
-                            <div class="form-label-checkbox"><input type="checkbox" <?php echo(osc_mailserver_pop()
-                                    ? 'checked="checked"' : ''); ?> name="mailserver_pop" value="1"/>
-                                <?php _e('Use POP before SMTP'); ?></div>
-                        </div>
-                    </div>
+                    <?php
+                    osc_admin_select(array(
+                        'name'     => 'mailserver_type',
+                        'label'    => __('Server type'),
+                        'selected' => osc_mailserver_type(),
+                        'options'  => array(
+                            'custom' => __('Custom Server'),
+                            'gmail'  => __('GMail Server'),
+                        ),
+                    ));
+                    osc_admin_text(array(
+                        'name'  => 'mailserver_host',
+                        'label' => __('Hostname'),
+                        'value' => osc_mailserver_host(),
+                    ));
+                    osc_admin_field(array(
+                        'type'  => 'email',
+                        'name'  => 'mailserver_mail_from',
+                        'label' => __('Mail from'),
+                        'value' => osc_mailserver_mail_from(),
+                    ));
+                    osc_admin_text(array(
+                        'name'  => 'mailserver_name_from',
+                        'label' => __('Name from'),
+                        'value' => osc_mailserver_name_from(),
+                    ));
+                    osc_admin_number(array(
+                        'name'  => 'mailserver_port',
+                        'label' => __('Server port'),
+                        'value' => osc_mailserver_port(),
+                        'min'   => 0,
+                        'max'   => 65535,
+                    ));
+                    osc_admin_text(array(
+                        'name'  => 'mailserver_username',
+                        'label' => __('Username'),
+                        'value' => osc_mailserver_username(),
+                    ));
+                    // Masked: the stored password is never written into the page. Submitting the
+                    // field blank leaves it as it was; see CAdminSettingsMailserver.
+                    osc_admin_secret(array(
+                        'name'   => 'mailserver_password',
+                        'label'  => __('Password'),
+                        'value'  => osc_mailserver_password(),
+                        'masked' => true,
+                        'reveal' => true,
+                        'help'   => __('Leave blank to keep the current password.'),
+                    ));
+
+                    $sslWarning = '';
+                    if (PHP_SAPI === 'cgi-fcgi' || PHP_SAPI === 'cgi') {
+                        $sslWarning = __('Cannot be sure that Apache Module <b>mod_ssl</b> is loaded.');
+                    } elseif (!@apache_mod_loaded('mod_ssl')) {
+                        $sslWarning = __('Apache Module <b>mod_ssl</b> is not loaded');
+                    }
+                    osc_admin_select(array(
+                        'name'      => 'mailserver_ssl',
+                        'label'     => __('Encryption'),
+                        'selected'  => (string)osc_mailserver_ssl(),
+                        'options'   => array(
+                            ''    => __('None'),
+                            'ssl' => 'SSL',
+                            'tls' => 'TLS',
+                        ),
+                        'help_html' => $sslWarning === ''
+                            ? ''
+                            : '<span class="callout-warning">' . $sslWarning . '</span>',
+                    ));
+
+                    osc_admin_field(array(
+                        'type'      => 'checkbox',
+                        'row_label' => __('SMTP'),
+                        'name'      => 'mailserver_auth',
+                        'label'     => __('SMTP authentication enabled'),
+                        'checked'   => osc_mailserver_auth(),
+                    ));
+                    osc_admin_field(array(
+                        'type'      => 'checkbox',
+                        'row_label' => __('POP'),
+                        'name'      => 'mailserver_pop',
+                        'label'     => __('Use POP before SMTP'),
+                        'checked'   => osc_mailserver_pop(),
+                    )); ?>
                     <?php osc_admin_form_actions(); ?>
                 </div>
             </fieldset>

@@ -52,7 +52,12 @@ class CAdminSettingsMailserver extends AdminSecBaseModel
                 $mailserverHost     = Params::getParam('mailserver_host');
                 $mailserverPort     = Params::getParam('mailserver_port');
                 $mailserverUsername = Params::getParam('mailserver_username');
+                // The field renders masked: it never carries the stored password into the page,
+                // so a blank submission means "leave it alone", not "clear it".
                 $mailserverPassword = Params::getParam('mailserver_password', false, false);
+                if ($mailserverPassword === '') {
+                    $mailserverPassword = osc_mailserver_password();
+                }
                 $mailserverSsl      = Params::getParam('mailserver_ssl');
                 $mailserverMailFrom = Params::getParam('mailserver_mail_from');
                 $mailserverNameFrom = Params::getParam('mailserver_name_from');

@@ -57,30 +57,28 @@ osc_current_admin_theme_path('parts/header.php'); ?>
             <input type="hidden" name="page" value="settings"/>
             <input type="hidden" name="action" value="sitemap_settings_post"/>
             <fieldset class="form-horizontal">
-                <div class="form-row">
-                    <div class="form-label"><?php _e('URLs per sitemap file'); ?></div>
-                    <div class="form-controls">
-                        <input type="text" class="input-medium" id="sitemap_number" name="sitemap_number"
-                               value="<?php echo osc_esc_html($prefs['sitemap_number']); ?>"/>
-                        <div class="help-box">
-                            <?php _e('Number of URLs per XML item sitemap file. Extra listings roll into additional '
-                                             . 'sitemaps automatically. Keep this low if you hit memory or timeout errors.'); ?>
-                        </div>
-                    </div>
-                </div>
-                <?php foreach ($sitemapChecks as $key => $label) { ?>
-                    <div class="form-row">
-                        <div class="form-label"><?php echo osc_esc_html($label); ?></div>
-                        <div class="form-controls">
-                            <div class="form-label-checkbox">
-                                <input type="checkbox" id="<?php echo osc_esc_html($key); ?>"
-                                       name="<?php echo osc_esc_html($key); ?>" value="1"
-                                    <?php echo(!empty($prefs[$key]) ? 'checked="checked"' : ''); ?> />
-                                <label for="<?php echo osc_esc_html($key); ?>"><?php echo osc_esc_html($label); ?></label>
-                            </div>
-                        </div>
-                    </div>
-                <?php } ?>
+                <?php
+                osc_admin_number(array(
+                    'id'     => 'sitemap_number',
+                    'name'   => 'sitemap_number',
+                    'label'  => __('URLs per sitemap file'),
+                    'value'  => $prefs['sitemap_number'],
+                    'min'    => 1,
+                    'suffix' => __('URLs'),
+                    'help'   => __('Number of URLs per XML item sitemap file. Extra listings roll into additional '
+                                   . 'sitemaps automatically. Keep this low if you hit memory or timeout errors.'),
+                ));
+                // One checkbox per row, each labelled twice — once as the row and once beside
+                // the box — is what the old markup did; the row label alone is enough.
+                foreach ($sitemapChecks as $key => $label) {
+                    osc_admin_field(array(
+                        'type'    => 'checkbox',
+                        'id'      => $key,
+                        'name'    => $key,
+                        'label'   => $label,
+                        'checked' => !empty($prefs[$key]),
+                    ));
+                } ?>
                 <?php osc_admin_form_actions(array(
                     array('label' => __('Save changes'), 'type' => 'submit', 'attrs' => array('id' => 'submit_sitemap_settings')),
                 )); ?>
@@ -95,34 +93,27 @@ osc_current_admin_theme_path('parts/header.php'); ?>
             <input type="hidden" name="page" value="settings"/>
             <input type="hidden" name="action" value="sitemap_custom_url_add"/>
             <fieldset class="form-horizontal">
-                <div class="form-row">
-                    <div class="form-label"><?php _e('URL'); ?></div>
-                    <div class="form-controls">
-                        <input type="text" class="input-large" name="sitemap_url" placeholder="https://www.example.com/page"/>
-                    </div>
-                </div>
-                <div class="form-row">
-                    <div class="form-label"><?php _e('Frequency'); ?></div>
-                    <div class="form-controls">
-                        <select class="form-select form-select-sm" name="sitemap_freq">
-                            <?php foreach ($freqOptions as $value => $label) { ?>
-                                <option value="<?php echo osc_esc_html($value); ?>"
-                                    <?php echo ($value === 'weekly') ? 'selected="selected"' : ''; ?>>
-                                    <?php echo osc_esc_html($label); ?>
-                                </option>
-                            <?php } ?>
-                        </select>
-                    </div>
-                </div>
-                <div class="form-row">
-                    <div class="form-label"><?php _e('Last modified'); ?></div>
-                    <div class="form-controls">
-                        <input type="text" class="input-medium" name="sitemap_lastmod" placeholder="YYYY-MM-DD"/>
-                        <div class="help-box">
-                            <?php _e('Optional. Leave blank to use today\'s date.'); ?>
-                        </div>
-                    </div>
-                </div>
+                <?php
+                osc_admin_field(array(
+                    'type'        => 'url',
+                    'name'        => 'sitemap_url',
+                    'label'       => __('URL'),
+                    'placeholder' => 'https://www.example.com/page',
+                ));
+                osc_admin_select(array(
+                    'name'     => 'sitemap_freq',
+                    'label'    => __('Frequency'),
+                    'selected' => 'weekly',
+                    'options'  => $freqOptions,
+                ));
+                osc_admin_text(array(
+                    'name'        => 'sitemap_lastmod',
+                    'label'       => __('Last modified'),
+                    'placeholder' => 'YYYY-MM-DD',
+                    'width'       => 'num',
+                    'attrs'       => array('inputmode' => 'numeric'),
+                    'help'        => __('Optional. Leave blank to use today\'s date.'),
+                )); ?>
                 <?php osc_admin_form_actions(array(
                     array('label' => __('Add URL'), 'type' => 'submit'),
                 )); ?>
@@ -177,16 +168,17 @@ osc_current_admin_theme_path('parts/header.php'); ?>
             <input type="hidden" name="page" value="settings"/>
             <input type="hidden" name="action" value="sitemap_robots_post"/>
             <fieldset class="form-horizontal">
-                <div class="form-row">
-                    <div class="form-label"><?php _e('robots.txt contents'); ?></div>
-                    <div class="form-controls">
-                        <textarea id="sitemap_robots" name="sitemap_robots" rows="10"
-                                  style="width:100%;max-width:640px;"><?php echo osc_esc_html($robots_content); ?></textarea>
-                        <div class="help-box text-danger">
-                            <?php _e('Make a backup before changing your robots.txt file.'); ?>
-                        </div>
-                    </div>
-                </div>
+                <?php osc_admin_textarea(array(
+                    'id'        => 'sitemap_robots',
+                    'name'      => 'sitemap_robots',
+                    'label'     => __('robots.txt contents'),
+                    'value'     => $robots_content,
+                    'rows'      => 10,
+                    'width'     => 'key',
+                    'monospace' => true,
+                    'help_html' => '<span class="text-danger">'
+                        . osc_esc_html(__('Make a backup before changing your robots.txt file.')) . '</span>',
+                )); ?>
                 <?php osc_admin_form_actions(array(
                     array(
                         'label' => __('Save robots.txt'),
