@@ -167,6 +167,15 @@ class CAdminLanguages extends AdminSecBaseModel
                                 file_put_contents($moFileTo, $moFile);
                             }
                         }
+                        // Clear this code from the pending-update list so the row's
+                        // "Update" action disappears until the next version check.
+                        $pending = json_decode(osc_get_preference('languages_to_update'), true);
+                        if (is_array($pending) && ($k = array_search($languageToImport, $pending, true)) !== false) {
+                            unset($pending[$k]);
+                            osc_set_preference('languages_to_update', json_encode(array_values($pending)));
+                            osc_set_preference('languages_update_count', count($pending));
+                            osc_reset_preferences();
+                        }
                         osc_add_flash_ok_message(_m('Language imported successfully'), 'admin');
                         $this->redirectTo(osc_admin_base_url(true) . '?page=languages');
 
@@ -490,6 +499,11 @@ class CAdminLanguages extends AdminSecBaseModel
                     $row[] = '<input type="checkbox" name="id[]" value="' . $l['pk_c_code'] . '" />';
 
                     $options   = array();
+                    if ($bLanguagesToUpdate && in_array($l['pk_c_code'], $aLanguagesToUpdate)) {
+                        $options[] = '<a class="strong" href="' . osc_admin_base_url(true)
+                                     . '?page=languages&amp;action=import_locations&amp;language=' . $l['pk_c_code']
+                                     . '">' . __('Update') . '</a>';
+                    }
                     $options[] = '<a href="' . osc_admin_base_url(true) . '?page=languages&amp;action=edit&amp;id='
                                  . $l['pk_c_code']
                                  . '">' . __('Edit') . '</a>';
@@ -518,17 +532,7 @@ class CAdminLanguages extends AdminSecBaseModel
                     }
                     $actions = '<div class="actions">' . $auxOptions . '</div>' . PHP_EOL;
 
-                    $sUpdate = '';
-                    // get languages to update from t_preference
-                    if ($bLanguagesToUpdate && in_array($l['pk_c_code'], $aLanguagesToUpdate)) {
-                        $sUpdate =
-                            '<a class="btn-market-update btn-market-popup" href="#' . htmlentities($l['pk_c_code'])
-                            . '">' . __(
-                                'Update here'
-                            ) . '</a>';
-                    }
-
-                    $row[] = $l['s_name'] . $sUpdate . $actions;
+                    $row[] = $l['s_name'] . $actions;
                     $row[] = $l['s_short_name'];
                     $row[] = $l['s_description'];
                     $row[] = ($l['b_enabled'] ? __('Yes') : __('No'));
