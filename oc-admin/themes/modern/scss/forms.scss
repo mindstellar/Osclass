@@ -30,8 +30,14 @@
 }
 
 .form-actions {
+  align-items: center;
   background: var(--osc-bench-warm);
   border-radius: 4px;
+  // Flex + gap so multiple buttons (Save + Cancel, …) are spaced; the renderer emits them
+  // with no whitespace between, so a block container left them touching.
+  display: flex;
+  flex-wrap: wrap;
+  gap: .5rem;
   padding: 12px 16px;
   width: 100%;
 }

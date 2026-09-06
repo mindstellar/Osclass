@@ -14718,8 +14718,12 @@ td.children-cat {
 }
 
 .form-actions {
+  align-items: center;
   background: var(--osc-bench-warm);
   border-radius: 4px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
   padding: 12px 16px;
   width: 100%;
 }
