@@ -776,11 +776,14 @@
     flex: 1 1 auto;
     min-width: 0;
 
-    input:not([type="checkbox"]):not([type="radio"]):not([type="submit"]),
+    // The editor sits in a narrow drawer, so text controls fill its width rather than
+    // stopping at their content-width token (field-text/-key/-select). Numbers keep their
+    // compact field-num. !important because the width tokens carry it too.
+    input:not([type="checkbox"]):not([type="radio"]):not([type="submit"]):not([type="number"]),
     select,
     textarea {
-      max-width: 100%;
-      width: 100%;
+      max-width: 100% !important;
+      width: 100% !important;
     }
 
     // Checkbox rows (required / searchable / block) read as one line: box, label.

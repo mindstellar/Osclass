@@ -16890,14 +16890,14 @@ code {
   flex: 1 1 auto;
   min-width: 0;
 }
-.field-chip-editor .custom-field-frame .form-controls input:not([type=checkbox]):not([type=radio]):not([type=submit]),
+.field-chip-editor .custom-field-frame .form-controls input:not([type=checkbox]):not([type=radio]):not([type=submit]):not([type=number]),
 .field-chip-editor .custom-field-frame .form-controls select,
 .field-chip-editor .custom-field-frame .form-controls textarea,
-.form-card-editor .custom-field-frame .form-controls input:not([type=checkbox]):not([type=radio]):not([type=submit]),
+.form-card-editor .custom-field-frame .form-controls input:not([type=checkbox]):not([type=radio]):not([type=submit]):not([type=number]),
 .form-card-editor .custom-field-frame .form-controls select,
 .form-card-editor .custom-field-frame .form-controls textarea {
-  max-width: 100%;
-  width: 100%;
+  max-width: 100% !important;
+  width: 100% !important;
 }
 .field-chip-editor .custom-field-frame .form-controls > label,
 .form-card-editor .custom-field-frame .form-controls > label {
