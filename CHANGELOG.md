@@ -63,6 +63,12 @@ theme ships none, using a documented class vocabulary a theme restyles in CSS al
   gets the feature — on by default — without laying out a form whose field names are core's.
   It fires `item_comments_before`, `comment_form` and `item_comments_after`, and ships
   zero-specificity defaults a theme overrides with a single class.
+- `osc_admin_field()` and its per-type sugar (`osc_admin_text()`, `osc_admin_number()`,
+  `osc_admin_select()`, `osc_admin_textarea()`, `osc_admin_radio_group()`, `osc_admin_secret()`)
+  render an admin form field from core, so a plugin no longer hand-writes markup against the
+  admin theme's class names. Width follows the field's type, a trailing phrase is a `suffix`
+  slot rather than a sentence split around `%s`, and every value is escaped. The admin theme's
+  own copies still win where it defines them.
 
 ### Fixed
 

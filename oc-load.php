@@ -179,6 +179,10 @@ if (defined('OC_ADMIN') && OC_ADMIN) {
         require_once $functions_path;
     }
 }
+// Deliberately after the admin theme's functions.php, not up with the helpers above: every
+// function in here is function_exists()-guarded, so a theme shipping its own copy wins and
+// core only fills the gaps. Moving this line up inverts that.
+require_once LIB_PATH . 'osclass/helpers/hAdminUi.php';
 WebThemes::init();
 Translation::init();
 Csrf::init();

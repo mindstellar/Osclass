@@ -167,6 +167,12 @@ jobs:
       # part of the view contract -- the page shipped as a fragment with no <head> at all.
       - name: Page builder render
         run: php tests/page-builder-render.php
+      # The admin field primitives are what a plugin builds a settings page from, so their
+      # markup is a contract both ways: an unescaped value is stored XSS on an admin-only
+      # page, and a dropped field-* class puts a number back to full width, breaking the
+      # sentence it sits in.
+      - name: Admin field primitives
+        run: php tests/admin-field-primitives.php
       # user_menu_filter is the only way a plugin reaches the account menu, and a wrong
       # order there is silent -- the entry renders, just under the log-out row.
       - name: Account menu order

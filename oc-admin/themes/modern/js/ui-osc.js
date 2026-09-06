@@ -333,3 +333,22 @@ document.addEventListener('click', function (e) {
         lastChecked = box;
     });
 })();
+
+// Reveal toggle for osc_admin_secret(..., 'reveal' => true). Delegated, so a field
+// rendered into a dialog or by a plugin after load is wired without re-initialising.
+document.addEventListener('click', function (e) {
+    var btn = e.target.closest ? e.target.closest('[data-osc-reveal]') : null;
+    if (!btn) {
+        return;
+    }
+    var input = document.getElementById(btn.getAttribute('data-osc-reveal'));
+    if (!input) {
+        return;
+    }
+    var shown = input.type === 'text';
+    input.type = shown ? 'password' : 'text';
+    btn.setAttribute('aria-pressed', shown ? 'false' : 'true');
+    if (btn.dataset.labelShow || btn.dataset.labelHide) {
+        btn.textContent = shown ? btn.dataset.labelShow : btn.dataset.labelHide;
+    }
+});
