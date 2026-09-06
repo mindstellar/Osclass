@@ -38,13 +38,13 @@ osc_current_admin_theme_path('parts/header.php'); ?>
         <form>
             <fieldset>
                 <div class="form-horizontal">
-                    <div class="form-row">
+                    <p class="form-intro">
                         <?php _e("While in maintenance mode, users can't access your website. Useful if you need to "
                                  . "make changes on your website. Use the following button to toggle maintenance mode ON/OFF."); ?>
-                        <div class="<?php echo $maintenance ? 'callout-danger' : 'callout-success'; ?>">
-                            <?php printf(__('Maintenance mode is: <strong>%s</strong>'),
-                                ($maintenance ? __('ON') : __('OFF'))); ?>
-                        </div>
+                    </p>
+                    <div class="<?php echo $maintenance ? 'callout-danger' : 'callout-success'; ?>">
+                        <?php printf(__('Maintenance mode is: <strong>%s</strong>'),
+                            ($maintenance ? __('ON') : __('OFF'))); ?>
                     </div>
                     <div class="form-actions">
                         <input type="button"
