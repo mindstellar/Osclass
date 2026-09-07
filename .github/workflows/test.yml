@@ -239,6 +239,22 @@ jobs:
         run: php tests/db-typed-rows.php
       - name: Secret-comparison regression
         run: php tests/security-secret-coercion.php
+      # An unauthenticated alert token is the whole bug: the fix these pin is invisible from
+      # the outside, so a regression reads as a working unsubscribe link that anyone can forge.
+      - name: Alert token crypto
+        run: php tests/alert-token-crypto.php
+      # The custom ajax action once ran any file under oc-content/plugins. A regression is a
+      # remote file execution that still returns a perfectly normal-looking response.
+      - name: Plugin ajax file allowlist
+        run: php tests/plugin-ajax-file.php
+      # A field dropped from the export map does not error -- the download simply omits a
+      # category of personal data, which is only noticed by whoever asked for their copy.
+      - name: Personal data map
+        run: php tests/personal-data-map.php
+      # A stale or mis-keyed catalogue cache serves the wrong language rather than failing,
+      # so nothing surfaces until a visitor reports the site in someone else's locale.
+      - name: Translation cache
+        run: php tests/translation-cache.php
       # Both directions of a wrong cookie allowlist are silent: a name no setcookie()
       # writes never matches at the proxy, and a missing one lets a personalized page be
       # stored under a URL whose cache key has no such component.
