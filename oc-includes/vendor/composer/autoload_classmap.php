@@ -820,6 +820,7 @@ return array(
     'mindstellar\\Csrf' => $baseDir . '/oc-includes/osclass/classes/Csrf.php',
     'mindstellar\\admin\\ui\\Field' => $baseDir . '/oc-includes/osclass/classes/admin/ui/Field.php',
     'mindstellar\\admin\\ui\\Form' => $baseDir . '/oc-includes/osclass/classes/admin/ui/Form.php',
+    'mindstellar\\admin\\ui\\FormSpec' => $baseDir . '/oc-includes/osclass/classes/admin/ui/FormSpec.php',
     'mindstellar\\billing\\Billing' => $baseDir . '/oc-includes/osclass/classes/billing/Billing.php',
     'mindstellar\\billing\\CallbackResult' => $baseDir . '/oc-includes/osclass/classes/billing/CallbackResult.php',
     'mindstellar\\billing\\CheckoutIntent' => $baseDir . '/oc-includes/osclass/classes/billing/CheckoutIntent.php',

@@ -183,6 +183,13 @@ jobs:
       # would let any listener store an arbitrary preference under any page's section.
       - name: Admin form lifecycle hooks
         run: php tests/admin-form-lifecycle-hooks.php
+      # osc_admin_form() is sugar over the spec array osc_register_settings_page() already
+      # takes, so the two front doors have to keep emitting the same thing. Every way they
+      # can drift is silent: a modifier writing the wrong key is a field that renders
+      # without its hint or is never rejected as empty, and a builder that stopped handing
+      # the array to the registry would accept a spec the array form still refuses.
+      - name: Admin form builder
+        run: php tests/admin-form-builder.php
       # The admin field primitives are what a plugin builds a settings page from, so their
       # markup is a contract both ways: an unescaped value is stored XSS on an admin-only
       # page, and a dropped field-* class puts a number back to full width, breaking the

@@ -46,6 +46,34 @@ if (!function_exists('osc_register_settings_page')) {
     }
 }
 
+if (!function_exists('osc_admin_form')) {
+    /**
+     * A fluent builder over the same spec osc_register_settings_page() takes.
+     *
+     * Sugar only: it stores nothing, renders nothing and validates nothing. ->toArray()
+     * hands back the array a hand-written page would have declared, and ->register()
+     * passes that array to osc_register_settings_page() unchanged, so a bad spec still
+     * throws from the registry.
+     *
+     *   osc_admin_form('acme')
+     *       ->title($pageTitle)
+     *       ->group($groupTitle)
+     *       ->secret('api_key', $keyLabel)->required()
+     *       ->register();
+     *
+     * It lives here rather than with the field primitives because plugins declare their
+     * pages at include time, before hAdminUi.php is loaded.
+     *
+     * @param string $id Namespaced slug, usually the plugin's own.
+     *
+     * @return \mindstellar\admin\ui\FormSpec
+     */
+    function osc_admin_form($id)
+    {
+        return new \mindstellar\admin\ui\FormSpec($id);
+    }
+}
+
 if (!function_exists('osc_settings_pages')) {
     /**
      * All registered settings pages, keyed by id.
