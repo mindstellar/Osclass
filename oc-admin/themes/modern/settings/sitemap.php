@@ -194,23 +194,20 @@ osc_current_admin_theme_path('parts/header.php'); ?>
                 )); ?>
     </div>
 
-    <div id="sitemap-regenerate" class="separate-top">
-        <?php osc_admin_form_section(__('Regenerate')); ?>
-        <p><?php _e('The sitemap is cached for a few hours after it is first requested. Use this if you need '
-                            . 'search engines to see fresh content immediately.'); ?></p>
-        <?php
-        osc_admin_form_open(array(
-            'name'       => 'sitemap_regenerate_form',
-            'page'   => 'settings',
-            'action'     => 'sitemap_regenerate',
-            'horizontal' => false,
-        ));
-        osc_admin_action_button(array(
-            'label'   => __('Regenerate / clear cache'),
-            'type'    => 'submit',
-            'variant' => 'primary',
-        ));
-        osc_admin_form_close(null, array('horizontal' => false)); ?>
-    </div>
+    <?php osc_admin_action_section(array(
+        'title'   => __('Regenerate'),
+        'spaced'  => true,
+        'intro'   => __('The sitemap is cached for a few hours after it is first requested. Use this if you need '
+                        . 'search engines to see fresh content immediately.'),
+        'actions' => array(
+            array(
+                'label'   => __('Regenerate / clear cache'),
+                'page'    => 'settings',
+                'action'  => 'sitemap_regenerate',
+                'name'    => 'sitemap_regenerate_form',
+                'variant' => 'primary',
+            ),
+        ),
+    )); ?>
 </div>
 <?php osc_current_admin_theme_path('parts/footer.php'); ?>

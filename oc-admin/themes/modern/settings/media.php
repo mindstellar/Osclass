@@ -380,18 +380,21 @@ osc_current_admin_theme_path('parts/header.php'); ?>
                             'options'  => $watermarkPlaces,
                         )); ?>
                     </div>
-                    <?php osc_admin_page_head(__('Regenerate images')); ?>
-                    <?php osc_admin_form_row_open(''); ?>
-                            <p>
-                                <?php _e('You can regenerate different image dimensions. If you have changed the dimension of thumbnails, '
-                                                                . 'preview or normal images, you might want to regenerate your images.'); ?>
-                            </p>
-                            <a class="btn btn-dim"
-                               href="<?php echo osc_admin_base_url(true) . '?page=settings&action=images_post' . '&'
-                                                                       . osc_csrf_token_url(); ?>"><?php _e('Regenerate'); ?></a>
-                    <?php osc_admin_form_row_close(); ?>
                     <div class="clear"></div>
                     <?php osc_admin_form_close(array()); ?>
+
+        <?php osc_admin_action_section(array(
+    'title'   => __('Regenerate images'),
+    'intro'   => __('You can regenerate different image dimensions. If you have changed the dimension of thumbnails, '
+                    . 'preview or normal images, you might want to regenerate your images.'),
+    'actions' => array(
+        array(
+            'label'   => __('Regenerate'),
+            'variant' => 'dim',
+            'url'     => osc_admin_base_url(true) . '?page=settings&action=images_post&' . osc_csrf_token_url(),
+        ),
+    ),
+)); ?>
     </div>
     <dialog id="dialog-watermark-warning" class="osc-dialog">
         <div class="osc-dialog-body">
