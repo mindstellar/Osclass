@@ -161,7 +161,14 @@ if (!function_exists('cfields_form_cat_summary')) {
 
 function customHead()
 {
-    $csrf_token = osc_csrf_token_url(); ?>
+    $csrf_token = osc_csrf_token_url();
+    // Fetched here rather than read from the file scope above: this is a function, so the
+    // view's own $catNames is not visible and json_encode() would emit an empty map --
+    // leaving every saved form labelled "not attached" until the page was reloaded.
+    $catNames = __get('category_names');
+    if (!is_array($catNames)) {
+        $catNames = array();
+    } ?>
     <script type="text/javascript">
         // Inject fetched HTML and run any <script> it carries (innerHTML alone does
         // not execute scripts; the editors wire themselves up in one).
