@@ -135,7 +135,10 @@ class CAdminSettingsSitemap extends AdminSecBaseModel
                         'admin'
                     );
                 } else {
-                    $content = str_replace("\r\n", "\n", (string) Params::getParam('sitemap_robots'));
+                    // Raw, because robots.txt is a plain-text file, not markup: the default
+                    // XSS filter turns "Disallow: /x?a=1&b=2" into "&amp;" and deletes any
+                    // <angle-bracketed> word in a comment, both silently.
+                    $content = str_replace("\r\n", "\n", (string) Params::getParam('sitemap_robots', false, false));
                     if (file_put_contents($path, $content, LOCK_EX) === false) {
                         osc_add_flash_error_message(_m('robots.txt could not be saved'), 'admin');
                     } else {
