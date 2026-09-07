@@ -182,6 +182,110 @@ check(
     ))) !== null
 );
 
+// A master that is not on the page can never be switched on: the dependent field renders,
+// never hides, and has its value discarded on every save with nothing to explain why.
+$dependsError = register_error('x10', array('title' => 'X', 'fields' => array(
+    array('name' => 'a', 'depends' => 'ghost'),
+)));
+check('a depends naming a field the page does not declare is refused', $dependsError !== null);
+pin(
+    'and the message names both the field and the master it wanted',
+    'SettingsPageRegistry: page "x10" field "a" depends on "ghost", which the page does not declare',
+    $dependsError
+);
+check(
+    'a depends that is not a field name is refused',
+    register_error('x11', array('title' => 'X', 'fields' => array(array('name' => 'a', 'depends' => true)))) !== null
+);
+// A master may sit in a later group than the field following it, so the check cannot run
+// while the groups are still being walked one at a time.
+check('a depends on a field declared in a later group is accepted', register_error('x12', array(
+    'title'  => 'X',
+    'groups' => array(
+        array('fields' => array(array('name' => 'a', 'depends' => 'b'))),
+        array('fields' => array(array('name' => 'b', 'type' => 'checkbox'))),
+    ),
+)) === null);
+// Only text and textarea expand over locales. Anywhere else the flag would be read on save
+// and ignored at render, so the page would store keys nothing on it can edit.
+check(
+    'translate on a field that cannot expand over locales is refused',
+    register_error('x13', array('title' => 'X', 'fields' => array(
+        array('name' => 'a', 'type' => 'checkbox', 'translate' => true),
+    ))) !== null
+);
+check('translate on a text field is accepted', register_error('x14', array('title' => 'X', 'fields' => array(
+    array('name' => 'a', 'type' => 'text', 'translate' => true),
+))) === null);
+check('translate on a textarea is accepted', register_error('x15', array('title' => 'X', 'fields' => array(
+    array('name' => 'a', 'type' => 'textarea', 'translate' => true),
+))) === null);
+
+// Core never collects a custom field's value, so a custom master is read as off on every
+// save while the plugin's own markup shows the dependent row as though it were on.
+$customMaster = register_error('x16', array('title' => 'X', 'fields' => array(
+    array('name' => 'widget', 'type' => 'custom', 'render' => static fn () => null),
+    array('name' => 'a', 'depends' => 'widget'),
+)));
+check('a depends on a custom field is refused', $customMaster !== null);
+pin(
+    'and the message says why core cannot answer for it',
+    'SettingsPageRegistry: page "x16" field "a" depends on custom field "widget", '
+    . 'whose value core never reads',
+    $customMaster
+);
+// A translated master has one value per locale and its controls are named for the locale,
+// so the server would call it on while the client script cannot find it at all.
+$transMaster = register_error('x17', array('title' => 'X', 'fields' => array(
+    array('name' => 'master', 'type' => 'text', 'translate' => true),
+    array('name' => 'a', 'depends' => 'master'),
+)));
+check('a depends on a translated field is refused', $transMaster !== null);
+pin(
+    'and the message names the per-locale problem',
+    'SettingsPageRegistry: page "x17" field "a" depends on translated field "master", '
+    . 'which has one value per locale',
+    $transMaster
+);
+// A cycle resolves to off at save time, so every field on it is discarded on every
+// submission: no error, nothing written, and "Nothing to update" as the only symptom.
+$selfCycle = register_error('x18', array('title' => 'X', 'fields' => array(
+    array('name' => 'a', 'depends' => 'a'),
+)));
+check('a field depending on itself is refused', $selfCycle !== null);
+pin(
+    'and the message shows the loop',
+    'SettingsPageRegistry: page "x18" has a depends cycle: a -> a',
+    $selfCycle
+);
+$pairCycle = register_error('x19', array('title' => 'X', 'fields' => array(
+    array('name' => 'a', 'depends' => 'b'),
+    array('name' => 'b', 'depends' => 'a'),
+)));
+check('two fields depending on each other are refused', $pairCycle !== null);
+pin(
+    'and the message walks the whole chain',
+    'SettingsPageRegistry: page "x19" has a depends cycle: a -> b -> a',
+    $pairCycle
+);
+check('a three-field cycle is refused too', register_error('x20', array('title' => 'X', 'fields' => array(
+    array('name' => 'a', 'depends' => 'b'),
+    array('name' => 'b', 'depends' => 'c'),
+    array('name' => 'c', 'depends' => 'a'),
+))) !== null);
+// The cycle check must not mistake a long chain for a loop.
+check('a three-field chain that ends is accepted', register_error('x21', array('title' => 'X', 'fields' => array(
+    array('name' => 'a', 'depends' => 'b'),
+    array('name' => 'b', 'depends' => 'c'),
+    array('name' => 'c', 'type' => 'checkbox'),
+))) === null);
+// A custom field may still follow a master: core stores nothing for it either way, and the
+// plugin's own markup is what the shared script hides.
+check('a custom field may itself depend on something', register_error('x22', array('title' => 'X', 'fields' => array(
+    array('name' => 'b_on', 'type' => 'checkbox'),
+    array('name' => 'widget', 'type' => 'custom', 'render' => static fn () => null, 'depends' => 'b_on'),
+))) === null);
+
 harness_section('after_save');
 check(
     'a non-callable after_save is refused',

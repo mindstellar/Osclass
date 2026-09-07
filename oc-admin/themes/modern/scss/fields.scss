@@ -142,3 +142,9 @@ select.field-select {
   font-weight: 650;
   padding: .6rem .9rem;
 }
+
+// One control per locale, under the shared .osc-tab strip. Hiding is left to [hidden],
+// which Reboot already takes off the page; the strip only needs its own spacing.
+.field-translate .osc-tab {
+  margin-block-end: .5rem;
+}

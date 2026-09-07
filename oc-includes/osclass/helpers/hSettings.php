@@ -155,6 +155,22 @@ if (!function_exists('osc_settings_value')) {
             return null;
         }
 
+        $locales = osc_settings_field_locales($field);
+        if ($locales !== array()) {
+            // A translated field is not one value but one per locale, keyed by locale code,
+            // so a caller reads osc_settings_value(...)[$code] and never has to know how the
+            // preference key is spelled.
+            $values = array();
+            foreach ($locales as $code => $localeName) {
+                $stored        = Preference::newInstance()->get($name . $code, $page['section']);
+                $values[$code] = ($stored === null || $stored === '')
+                    ? (string)($field['default'] ?? '')
+                    : $stored;
+            }
+
+            return $values;
+        }
+
         $stored = Preference::newInstance()->get($name, $page['section']);
         if ($stored === null || $stored === '') {
             // A checkbox saved as off stores '0', not '', so an empty read really is
@@ -205,6 +221,147 @@ if (!function_exists('osc_settings_values')) {
         }
 
         return $values;
+    }
+}
+
+if (!function_exists('osc_settings_locales')) {
+    /**
+     * Every enabled locale as code => name, in the order the site lists them.
+     *
+     * A translated field's preference key is the field name with the locale code appended,
+     * so codes must stay the fixed five characters of 'en_US' or those keys turn ambiguous.
+     *
+     * @param bool $refresh re-read the list after a locale is enabled or disabled
+     *
+     * @return array<string,string>
+     */
+    function osc_settings_locales($refresh = false)
+    {
+        static $cache = null;
+        if ($cache !== null && !$refresh) {
+            return $cache;
+        }
+
+        $cache = array();
+        foreach (OSCLocale::newInstance()->listAllEnabled() as $locale) {
+            $code = (string)($locale['pk_c_code'] ?? '');
+            if ($code !== '') {
+                $cache[$code] = (string)($locale['s_name'] ?? $code);
+            }
+        }
+
+        return $cache;
+    }
+}
+
+if (!function_exists('osc_settings_field_locales')) {
+    /**
+     * The locales one field expands over: every enabled locale for a translated text or
+     * textarea, and none at all for anything else.
+     *
+     * An install with one enabled locale still gets the per-locale key, otherwise enabling
+     * a second locale later would strand everything already stored.
+     *
+     * @param array $field
+     *
+     * @return array<string,string> code => locale name
+     */
+    function osc_settings_field_locales(array $field)
+    {
+        if (empty($field['translate'])
+            || !in_array($field['type'] ?? 'text', array('text', 'textarea'), true)
+        ) {
+            return array();
+        }
+
+        return osc_settings_locales();
+    }
+}
+
+if (!function_exists('osc_settings_master_on')) {
+    /**
+     * Whether a master field's submitted value counts as switched on.
+     *
+     * '0' is off: that is what an unticked checkbox stores and what a select may offer,
+     * and a dependent field has to read the same answer from either.
+     *
+     * @param mixed $value
+     *
+     * @return bool
+     */
+    function osc_settings_master_on($value)
+    {
+        if (is_array($value)) {
+            foreach ($value as $one) {
+                if (osc_settings_master_on($one)) {
+                    return true;
+                }
+            }
+
+            return false;
+        }
+
+        return trim((string)$value) !== '' && (string)$value !== '0';
+    }
+}
+
+if (!function_exists('osc_settings_depends_met')) {
+    /**
+     * Whether a field's 'depends' chain is satisfied by the submitted values.
+     *
+     * Walks the chain rather than looking at the immediate master alone: a dependent
+     * master that is itself switched off leaves its own control on screen with a value
+     * still in it, and taking that at face value would keep a grandchild field alive.
+     *
+     * @param array  $fields declared fields, keyed by name
+     * @param string $name
+     * @param array  $values submitted values, keyed by field name
+     * @param array  $seen   names already on this chain
+     *
+     * @return bool
+     */
+    function osc_settings_depends_met(array $fields, $name, array $values, array $seen = array())
+    {
+        $field = $fields[$name] ?? null;
+        if ($field === null || empty($field['depends'])) {
+            return true;
+        }
+
+        $master = (string)$field['depends'];
+        // A chain that loops back on itself has no answer, and a master that is not on the
+        // page can never be on. Both are spec errors; off is the side that stores nothing.
+        if (isset($seen[$name]) || !isset($fields[$master])) {
+            return false;
+        }
+        $seen[$name] = true;
+
+        return osc_settings_master_on($values[$master] ?? '')
+            && osc_settings_depends_met($fields, $master, $values, $seen);
+    }
+}
+
+if (!function_exists('osc_settings_field_active')) {
+    /**
+     * Whether a declared field is part of this submission at all.
+     *
+     * The client script hiding a row is UX and nothing more. This is the answer the save
+     * path uses: a field whose master is off is not required and its posted value is
+     * discarded rather than stored, so nothing is gained by submitting one by hand.
+     *
+     * @param string     $pageId
+     * @param string     $name
+     * @param array      $values submitted values, keyed by field name
+     * @param array|null $fields the page's declared fields, when the caller already holds them
+     *
+     * @return bool
+     */
+    function osc_settings_field_active($pageId, $name, array $values, ?array $fields = null)
+    {
+        if ($fields === null) {
+            $fields = SettingsPageRegistry::instance()->fields($pageId);
+        }
+
+        return osc_settings_depends_met($fields, $name, $values);
     }
 }
 
@@ -340,6 +497,9 @@ if (!function_exists('osc_settings_save')) {
      * the lifecycle hooks -- 'admin_form_after_save' and a page's inline 'after_save' never
      * run on a rejected submission, and each runs exactly once on a successful one.
      *
+     * A field whose 'depends' master is switched off is not part of the submission: its
+     * posted value is discarded before validation, so it is neither required nor stored.
+     *
      * The order on a successful save is part of the contract: 'admin_form_before_save'
      * filters the values, the store writes them, the 'admin_form_after_save' hook runs, and
      * the page's own inline 'after_save' runs last -- so a page sees whatever a listener
@@ -359,17 +519,65 @@ if (!function_exists('osc_settings_save')) {
             return array('errors' => $errors, 'updated' => 0, 'values' => array());
         }
 
-        $values = array();
-        $errors = array();
-        foreach (SettingsPageRegistry::instance()->fields($pageId) as $name => $field) {
+        $fields  = SettingsPageRegistry::instance()->fields($pageId);
+        $locales = array();
+        $values  = array();
+        $errors  = array();
+
+        foreach ($fields as $name => $field) {
             if ($field['type'] === 'custom') {
                 // Core does not know what a custom field submitted, so it does not pretend
                 // to store it. The plugin owns the value the same way it owns the markup.
                 continue;
             }
-            $value          = osc_settings_sanitize($field);
-            $values[$name]  = $value;
-            $error          = osc_settings_validate($field, $value);
+            $locales[$name] = osc_settings_field_locales($field);
+            if ($locales[$name] === array()) {
+                $values[$name] = osc_settings_sanitize($field);
+                continue;
+            }
+            $translated = array();
+            foreach ($locales[$name] as $code => $localeName) {
+                $translated[$code] = osc_settings_sanitize(
+                    array('name' => $name . $code) + $field
+                );
+            }
+            $values[$name] = $translated;
+        }
+
+        // The client script only hides a row; this is what decides, and a field whose
+        // master is off is neither required nor stored. Every answer is worked out against
+        // the untouched submission and applied after, so declaration order cannot change it.
+        $discard = array();
+        foreach ($fields as $name => $field) {
+            if (array_key_exists($name, $values)
+                && !osc_settings_field_active($pageId, $name, $values, $fields)
+            ) {
+                $discard[] = $name;
+            }
+        }
+        foreach ($discard as $name) {
+            unset($values[$name]);
+        }
+
+        foreach ($fields as $name => $field) {
+            if (!array_key_exists($name, $values)) {
+                continue;
+            }
+            if ($locales[$name] !== array()) {
+                foreach ($locales[$name] as $code => $localeName) {
+                    // The locale is named in the error: "Title cannot be left empty" on a
+                    // page with four tabs does not say which tab to open.
+                    $error = osc_settings_validate(
+                        array('label' => ($field['label'] ?? $name) . ' (' . $localeName . ')') + $field,
+                        $values[$name][$code]
+                    );
+                    if ($error !== null) {
+                        $errors[] = $error;
+                    }
+                }
+                continue;
+            }
+            $error = osc_settings_validate($field, $values[$name]);
             if ($error !== null) {
                 $errors[] = $error;
             }
@@ -390,8 +598,25 @@ if (!function_exists('osc_settings_save')) {
         // listener from writing a key the page never declared. A custom field stays
         // uncollected here too: core did not read it, so it does not write one back.
         $updated = 0;
-        foreach (SettingsPageRegistry::instance()->fields($pageId) as $name => $field) {
+        foreach ($fields as $name => $field) {
             if ($field['type'] === 'custom' || !array_key_exists($name, $values)) {
+                continue;
+            }
+            if (($locales[$name] ?? array()) !== array()) {
+                // Core writes only what it can read back: a before_save listener that
+                // replaced the per-locale array with a scalar has nothing to spread over
+                // the locales, and the bare name is a key this page never reads.
+                if (!is_array($values[$name])) {
+                    continue;
+                }
+                foreach ($locales[$name] as $code => $localeName) {
+                    $updated += (int)osc_set_preference(
+                        $name . $code,
+                        (string)($values[$name][$code] ?? ''),
+                        $page['section'],
+                        'STRING'
+                    );
+                }
                 continue;
             }
             $value = $values[$name];

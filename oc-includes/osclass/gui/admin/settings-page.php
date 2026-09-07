@@ -60,6 +60,13 @@ osc_current_admin_theme_path('parts/header.php'); ?>
                             $field['checked']   = !empty($values[$name]);
                         } else {
                             $field['value'] = $values[$name] ?? '';
+                            // Resolved here, not inside the field: drawing a control must
+                            // not query anything, and render and store have to expand a
+                            // translated field over the same list.
+                            $locales = osc_settings_field_locales($field);
+                            if ($locales !== array()) {
+                                $field['locales'] = $locales;
+                            }
                         }
                         // A filter over the field spec: a listener can add a hint, retitle a
                         // field or mark it readonly. It cannot suppress the control or put a

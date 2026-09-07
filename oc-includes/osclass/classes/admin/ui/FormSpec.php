@@ -61,6 +61,8 @@ final class FormSpec
         'default',
         'required',
         'disabled',
+        'depends',
+        'translate',
         'options',
         'row_label',
         'prefix',
@@ -295,6 +297,22 @@ final class FormSpec
     public function default($value): self
     {
         return $this->set('default', $value);
+    }
+
+    /**
+     * Show this field only while another field on the same page is switched on. Server
+     * side as well as client side: while the master is off the value is discarded and the
+     * field is not required.
+     */
+    public function dependsOn(string $master): self
+    {
+        return $this->set('depends', $master);
+    }
+
+    /** One control per enabled locale, each stored under its own key. text and textarea only. */
+    public function translate(bool $translate = true): self
+    {
+        return $this->set('translate', $translate);
     }
 
     /** @param array<string,string> $options */

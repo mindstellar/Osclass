@@ -90,6 +90,7 @@ class CAdminLanguages extends AdminSecBaseModel
                         break;
                 }
 
+                osc_invalidate_locale_cache();
                 $this->redirectTo(osc_admin_base_url(true) . '?page=languages');
                 break;
             case ('import_locations'):
@@ -176,6 +177,7 @@ class CAdminLanguages extends AdminSecBaseModel
                             osc_set_preference('languages_update_count', count($pending));
                             osc_reset_preferences();
                         }
+                        osc_invalidate_locale_cache();
                         osc_add_flash_ok_message(_m('Language imported successfully'), 'admin');
                         $this->redirectTo(osc_admin_base_url(true) . '?page=languages');
 
@@ -281,6 +283,7 @@ class CAdminLanguages extends AdminSecBaseModel
                 );
 
                 $iUpdated = $this->localeManager->update($array, array('pk_c_code' => $languageCode));
+                osc_invalidate_locale_cache();
                 if ($iUpdated > 0) {
                     osc_add_flash_ok_message(sprintf(_m('%s has been updated'), $languageShortName), 'admin');
                 }
@@ -303,6 +306,7 @@ class CAdminLanguages extends AdminSecBaseModel
                     osc_translate_categories($i);
                     $iUpdated += $this->localeManager->update($aValues, array('pk_c_code' => $i));
                 }
+                osc_invalidate_locale_cache();
 
                 if ($iUpdated > 0) {
                     osc_add_flash_ok_message($msg, 'admin');
@@ -332,6 +336,7 @@ class CAdminLanguages extends AdminSecBaseModel
                     }
                     $iUpdated += $this->localeManager->update($aValues, array('pk_c_code' => $i));
                 }
+                osc_invalidate_locale_cache();
 
                 if ($msg_warning != '') {
                     if ($iUpdated > 0) {
@@ -362,6 +367,7 @@ class CAdminLanguages extends AdminSecBaseModel
                     osc_translate_categories($i);
                     $iUpdated += $this->localeManager->update($aValues, array('pk_c_code' => $i));
                 }
+                osc_invalidate_locale_cache();
 
                 if ($iUpdated > 0) {
                     osc_add_flash_ok_message($msg, 'admin');
@@ -391,6 +397,7 @@ class CAdminLanguages extends AdminSecBaseModel
                     }
                     $iUpdated += $this->localeManager->update($aValues, array('pk_c_code' => $i));
                 }
+                osc_invalidate_locale_cache();
 
                 if ($msg_warning != '') {
                     if ($iUpdated > 0) {
@@ -449,6 +456,7 @@ class CAdminLanguages extends AdminSecBaseModel
                         }
                     }
                 }
+                osc_invalidate_locale_cache();
                 $this->redirectTo(osc_admin_base_url(true) . '?page=languages');
                 break;
             default:

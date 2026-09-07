@@ -224,6 +224,8 @@ harness_section('every modifier writes the key the registry reads');
 $mods = array(
     'required'  => array(array(), array('required' => true)),
     'disabled'  => array(array(), array('disabled' => true)),
+    'dependsOn' => array(array('b_enabled'), array('depends' => 'b_enabled')),
+    'translate' => array(array(), array('translate' => true)),
     'default'   => array(array('7'), array('default' => '7')),
     'options'   => array(array(array('a' => 'A')), array('options' => array('a' => 'A'))),
     'rowLabel'  => array(array('Row'), array('row_label' => 'Row')),
@@ -318,19 +320,21 @@ harness_section('no modifier escapes the key order or the cases above');
 // below is method => the field spec key it writes, and reflection holds it against the
 // class.
 $modifierKeys = array(
-    'required' => 'required',
-    'disabled' => 'disabled',
-    'default'  => 'default',
-    'options'  => 'options',
-    'rowLabel' => 'row_label',
-    'hint'     => 'help',
-    'prefix'   => 'prefix',
-    'suffix'   => 'suffix',
-    'width'    => 'width',
-    'attrs'    => 'attrs',
-    'render'   => 'render',
-    'sanitize' => 'sanitize',
-    'validate' => 'validate',
+    'required'  => 'required',
+    'disabled'  => 'disabled',
+    'dependsOn' => 'depends',
+    'translate' => 'translate',
+    'default'   => 'default',
+    'options'   => 'options',
+    'rowLabel'  => 'row_label',
+    'hint'      => 'help',
+    'prefix'    => 'prefix',
+    'suffix'    => 'suffix',
+    'width'     => 'width',
+    'attrs'     => 'attrs',
+    'render'    => 'render',
+    'sanitize'  => 'sanitize',
+    'validate'  => 'validate',
 );
 
 // Everything public that is not a field modifier, and why. Field type methods come from
@@ -407,7 +411,7 @@ check(
     $notModifier === array(),
     'not a modifier: ' . implode(', ', $notModifier)
 );
-pin('so the count is the whole set, not a sample', 13, count($modifierKeys));
+pin('so the count is the whole set, not a sample', 15, count($modifierKeys));
 
 harness_section('page-level keys');
 
@@ -604,6 +608,17 @@ pin(
     'a custom field with no renderer',
     'SettingsPageRegistry: page "bad-custom" field "widget" is custom and needs a render callable',
     builder_error(osc_admin_form('bad-custom')->title('T')->custom('widget'))
+);
+pin(
+    'a dependsOn naming a field the page never declares',
+    'SettingsPageRegistry: page "bad-depends" field "s_ip" depends on "b_ip", which the page does not declare',
+    builder_error(osc_admin_form('bad-depends')->title('T')->text('s_ip')->dependsOn('b_ip'))
+);
+pin(
+    'a translate on a type that cannot expand over locales',
+    'SettingsPageRegistry: page "bad-translate" field "verbose" cannot be translated:'
+    . ' only text and textarea expand over locales',
+    builder_error(osc_admin_form('bad-translate')->title('T')->checkbox('verbose')->translate())
 );
 pin(
     'a non-callable after_save',

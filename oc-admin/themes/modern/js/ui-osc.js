@@ -400,3 +400,72 @@ document.addEventListener('click', function (e) {
         btn.textContent = shown ? btn.dataset.labelShow : btn.dataset.labelHide;
     }
 });
+
+// Conditional fields: a form row carrying data-osc-depends="<field name>" is shown only
+// while that field is switched on, which is UX — the save path re-evaluates the same
+// relationship and discards a hidden field's value.
+// "On" matches the server: neither empty nor "0", and a master that is itself dependent
+// counts as off while its own master is.
+function oscDependsOn(name, scope, seen) {
+    if (!name || seen.indexOf(name) !== -1) {
+        return false;
+    }
+    seen.push(name);
+    var controls = scope.querySelectorAll('[name="' + name.replace(/"/g, '\\"') + '"]');
+    if (!controls.length) {
+        return false;
+    }
+    var on = false;
+    var masterRow = null;
+    for (var i = 0; i < controls.length; i++) {
+        var el = controls[i];
+        var value = (el.type === 'checkbox' || el.type === 'radio')
+            ? (el.checked ? (el.value === '' ? '1' : el.value) : '')
+            : el.value;
+        if (String(value).trim() !== '' && String(value) !== '0') {
+            on = true;
+        }
+        if (!masterRow && el.closest) {
+            masterRow = el.closest('[data-osc-depends]');
+        }
+    }
+    if (on && masterRow) {
+        on = oscDependsOn(masterRow.getAttribute('data-osc-depends'), scope, seen);
+    }
+    return on;
+}
+
+// A hidden control that is still `required` blocks submission with a message pointing at
+// something nobody can see, so the flag is lifted while the row is off and put back with
+// it. The server decides again either way: the field is not required while its master is
+// off, whatever the browser was told.
+function oscDependsRequired(row, on) {
+    var controls = row.querySelectorAll('input, select, textarea');
+    for (var i = 0; i < controls.length; i++) {
+        var control = controls[i];
+        if (!on && control.required) {
+            control.setAttribute('data-osc-was-required', '1');
+            control.required = false;
+        } else if (on && control.hasAttribute('data-osc-was-required')) {
+            control.removeAttribute('data-osc-was-required');
+            control.required = true;
+        }
+    }
+}
+
+function oscSyncDepends(root) {
+    root = root || document;
+    var rows = root.querySelectorAll('[data-osc-depends]');
+    for (var i = 0; i < rows.length; i++) {
+        var scope = (rows[i].closest && rows[i].closest('form')) || document;
+        var on = oscDependsOn(rows[i].getAttribute('data-osc-depends'), scope, []);
+        rows[i].hidden = !on;
+        oscDependsRequired(rows[i], on);
+    }
+}
+
+document.addEventListener('DOMContentLoaded', function () { oscSyncDepends(document); });
+// Delegated and re-run whole: one change can flip a chain of rows, not only the row
+// whose master was touched.
+document.addEventListener('change', function () { oscSyncDepends(document); });
+document.addEventListener('input', function () { oscSyncDepends(document); });

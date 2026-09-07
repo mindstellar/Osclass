@@ -112,6 +112,12 @@ final class SettingsPageRegistry
      *   'sanitize' => callable  callable(mixed $value): mixed, run before validation.
      *   'validate' => callable  callable(mixed $value, array $field): ?string returning
      *                           an error message, or null when the value is good.
+     *   'depends'  => string    Another field on this page -- not a custom or translated
+     *                           one, and not a cycle. While that field is off, this one is
+     *                           hidden, is not required, and its submitted value is
+     *                           discarded rather than stored.
+     *   'translate' => bool     text and textarea only: one control per enabled locale,
+     *                           each stored under the field name plus the locale code.
      *
      * @param string $id   Namespaced slug, [a-z0-9_.-]{1,60}. Usually the plugin's own.
      * @param array  $spec Page specification (see above).
@@ -244,8 +250,9 @@ final class SettingsPageRegistry
      */
     private function normaliseGroups(string $id, array $groups): array
     {
-        $out  = array();
-        $seen = array();
+        $out     = array();
+        $seen    = array();
+        $depends = array();
 
         foreach ($groups as $group) {
             if (!is_array($group) || !isset($group['fields']) || !is_array($group['fields'])) {
@@ -288,13 +295,30 @@ final class SettingsPageRegistry
                         );
                     }
                 }
+                if (isset($field['translate']) && $field['translate']
+                    && !in_array($type, array('text', 'textarea'), true)
+                ) {
+                    throw new InvalidArgumentException(
+                        'SettingsPageRegistry: page "' . $id . '" field "' . $field['name']
+                        . '" cannot be translated: only text and textarea expand over locales'
+                    );
+                }
+                if (isset($field['depends'])) {
+                    if (!is_string($field['depends']) || $field['depends'] === '') {
+                        throw new InvalidArgumentException(
+                            'SettingsPageRegistry: page "' . $id . '" field "' . $field['name']
+                            . '" depends must name a field'
+                        );
+                    }
+                    $depends[$field['name']] = $field['depends'];
+                }
                 if (isset($seen[$field['name']])) {
                     throw new InvalidArgumentException(
                         'SettingsPageRegistry: page "' . $id . '" declares "' . $field['name'] . '" twice'
                     );
                 }
 
-                $seen[$field['name']] = true;
+                $seen[$field['name']] = array('type' => $type, 'translate' => !empty($field['translate']));
                 $field['type']        = $type;
                 $fields[]             = $field;
             }
@@ -304,6 +328,45 @@ final class SettingsPageRegistry
                 'intro'  => isset($group['intro']) && is_string($group['intro']) ? $group['intro'] : '',
                 'fields' => $fields,
             );
+        }
+
+        // Checked once every group is in: a master may be declared in a later group than
+        // the field depending on it. Every refusal here is a relationship that would
+        // register cleanly and then discard the dependent's value on every save.
+        foreach ($depends as $name => $master) {
+            $prefix = 'SettingsPageRegistry: page "' . $id . '" field "' . $name . '" depends on ';
+            if (!isset($seen[$master])) {
+                throw new InvalidArgumentException(
+                    $prefix . '"' . $master . '", which the page does not declare'
+                );
+            }
+            if ($seen[$master]['type'] === 'custom') {
+                throw new InvalidArgumentException(
+                    $prefix . 'custom field "' . $master . '", whose value core never reads'
+                );
+            }
+            if ($seen[$master]['translate']) {
+                throw new InvalidArgumentException(
+                    $prefix . 'translated field "' . $master . '", which has one value per locale'
+                );
+            }
+        }
+
+        foreach ($depends as $name => $master) {
+            $path  = array($name);
+            $chain = array($name => true);
+            for ($at = $master; ; $at = $depends[$at]) {
+                $path[] = $at;
+                if (isset($chain[$at])) {
+                    throw new InvalidArgumentException(
+                        'SettingsPageRegistry: page "' . $id . '" has a depends cycle: ' . implode(' -> ', $path)
+                    );
+                }
+                $chain[$at] = true;
+                if (!isset($depends[$at])) {
+                    break;
+                }
+            }
         }
 
         return $out;

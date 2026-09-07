@@ -300,6 +300,29 @@ function osc_invalidate_category_cache()
     return $gen;
 }
 
+/**
+ * Drop the memoised list of enabled locales (osc_settings_locales()) after a locale is
+ * added, edited, enabled, disabled or deleted.
+ *
+ * Unlike the rest of this family, the cache being invalidated is a per-request PHP static
+ * rather than the cross-request object cache: the list is read once and reused by every
+ * translated field on the page, so a write in the same request would otherwise keep
+ * rendering and storing the locale set as it was before. The list is re-read here, and
+ * the hook fires after it, so a listener already sees the new one.
+ *
+ * @return void
+ */
+function osc_invalidate_locale_cache()
+{
+    if (function_exists('osc_settings_locales')) {
+        osc_settings_locales(true);
+    }
+
+    if (function_exists('osc_run_hook')) {
+        osc_run_hook('invalidate_locale_cache');
+    }
+}
+
 // Clear an item's derived cache on the lifecycle events that change it, so reads
 // following a write see fresh data instead of a stale cached copy.
 osc_add_hook('edited_item', static function ($item) {

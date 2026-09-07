@@ -200,10 +200,18 @@ class OSCLocale extends DAO
         }
 
         try {
-            return osc_db_table($this->getTableName())->where('pk_c_code', $locale)->delete();
+            $deleted = osc_db_table($this->getTableName())->where('pk_c_code', $locale)->delete();
         } catch (\mindstellar\database\DbException $e) {
-            return false;
+            $deleted = false;
         }
+
+        // The enabled-locale list is memoised per request, so anything drawn after this
+        // would still offer the locale that has just gone.
+        if (function_exists('osc_invalidate_locale_cache')) {
+            osc_invalidate_locale_cache();
+        }
+
+        return $deleted;
     }
     /**
      * Insert or update location info in database
@@ -242,9 +250,17 @@ class OSCLocale extends DAO
                 $existingRow = $existing[0];
                 unset($existingRow['s_version']);
                 $values = array_merge($values, $existingRow);
-                return $this->update($values, ['pk_c_code' => $localeCode]);
+                $result = $this->update($values, ['pk_c_code' => $localeCode]);
+            } else {
+                $result = $this->insert($values);
             }
-            return $this->insert($values);
+
+            // As deleteLocale(): the memoised enabled-locale list predates this write.
+            if (function_exists('osc_invalidate_locale_cache')) {
+                osc_invalidate_locale_cache();
+            }
+
+            return $result;
         }
         return false;
     }

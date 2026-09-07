@@ -46,10 +46,11 @@ class Field
      */
     public function render()
     {
-        $type = $this->type;
-        $id   = $this->id;
-        $spec = $this->spec;
-        $row  = $spec['row'] ?? true;
+        $type    = $this->type;
+        $id      = $this->id;
+        $spec    = $this->spec;
+        $row     = $spec['row'] ?? true;
+        $locales = self::localesFor($spec);
 
         if ($row) {
             // A checkbox carries its own label beside the control; anything else labels the
@@ -60,12 +61,26 @@ class Field
             // A choice list has no single control to point at -- each option owns its own
             // label -- so the row label stays plain text and the group is named through
             // aria-label instead. A `for` pointing at an id nothing carries reaches nothing.
-            osc_admin_form_row_open($rowLabel, $type === 'radio' ? array() : array('for' => $id));
+            $opts = $type === 'radio'
+                ? array()
+                : array('for' => $locales === array() ? $id : self::idFor(array(
+                    'name' => (string)($spec['name'] ?? '') . array_key_first($locales),
+                )));
+            // The row is what the shared script shows and hides, so the relationship is
+            // declared on it. Which way it resolves is decided again on save: this is a
+            // convenience, not the rule.
+            if (!empty($spec['depends'])) {
+                $opts['data'] = array('osc-depends' => (string)$spec['depends']);
+            }
+            osc_admin_form_row_open($rowLabel, $opts);
         }
 
         if ($type === 'checkbox') {
             $spec['id'] = $id;
             osc_admin_checkbox($spec);
+        } elseif ($locales !== array()) {
+            self::translated($id, $spec, $locales);
+            self::help($spec);
         } else {
             // The words either side of a field, and a secret's reveal button, sit on the
             // control's own line. The inputs are display:block, so without this they drop
@@ -211,6 +226,100 @@ class Field
                     . ' value="' . osc_esc_html((string)$value) . '"' . $attrs . ' />';
                 break;
         }
+    }
+
+    /**
+     * The locales a field expands over: what 'locales' carries when 'translate' is set on
+     * a text or textarea, and nothing otherwise. The caller supplies the list -- core's
+     * declared settings page from osc_settings_field_locales(), a plugin from whatever it
+     * already has -- so drawing a field never queries anything.
+     *
+     * @param array $spec
+     *
+     * @return array<string,string> code => locale name
+     */
+    public static function localesFor(array $spec)
+    {
+        if (empty($spec['translate'])
+            || !in_array($spec['type'] ?? 'text', array('text', 'textarea'), true)
+            || empty($spec['locales'])
+            || !is_array($spec['locales'])
+        ) {
+            return array();
+        }
+
+        return $spec['locales'];
+    }
+
+    /**
+     * One control per locale, in the tab widget the rest of the admin's multilang editors
+     * use. Each control is named for its locale (the field name with the locale code
+     * appended), which is the key the value is stored under.
+     *
+     * One enabled locale gets no tabs: a single tab is a label pretending to be a choice.
+     *
+     * @param string $id      the field's own id, which the panels are named from
+     * @param array  $spec
+     * @param array  $locales code => locale name
+     *
+     * @return void
+     */
+    public static function translated($id, array $spec, array $locales)
+    {
+        $type   = $spec['type'] ?? 'text';
+        $name   = (string)($spec['name'] ?? '');
+        $stored = is_array($spec['value'] ?? null) ? $spec['value'] : array();
+        $label  = (string)($spec['label'] ?? '');
+        $tabs   = count($locales) > 1;
+
+        echo '<div class="field-translate">';
+        if ($tabs) {
+            echo '<div class="osc-tab"><ul>';
+            foreach ($locales as $code => $localeName) {
+                echo '<li><a href="#' . osc_esc_html(self::localePanelId($id, $code)) . '">'
+                    . osc_esc_html($localeName) . '</a></li>';
+            }
+            echo '</ul></div>';
+        }
+
+        $first = true;
+        foreach ($locales as $code => $localeName) {
+            $sub          = $spec;
+            $sub['name']  = $name . $code;
+            $sub['value'] = (string)($stored[$code] ?? '');
+            unset($sub['id']);
+            if ($tabs && $label !== '') {
+                // Only the tab strip says which locale a control belongs to, and a tab is
+                // not the control's label. A caller's own aria-label still wins.
+                $sub['attrs'] = (array)($spec['attrs'] ?? array())
+                    + array('aria-label' => $label . ' (' . $localeName . ')');
+            }
+            if ($tabs) {
+                echo '<div class="field-translate-panel" id="'
+                    . osc_esc_html(self::localePanelId($id, $code)) . '"'
+                    . ($first ? '' : ' hidden') . '>';
+            }
+            self::control($type, self::idFor($sub), $sub);
+            if ($tabs) {
+                echo '</div>';
+            }
+            $first = false;
+        }
+        echo '</div>';
+    }
+
+    /**
+     * The id of one locale's panel. Kept off the control's own id: they sit on different
+     * elements and an id used twice is a tab that focuses the wrong thing.
+     *
+     * @param string $id
+     * @param string $code
+     *
+     * @return string
+     */
+    public static function localePanelId($id, $code)
+    {
+        return $id . '-' . preg_replace('/[^A-Za-z0-9_-]+/', '-', (string)$code);
     }
 
     /**

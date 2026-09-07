@@ -190,6 +190,34 @@ jobs:
       # the array to the registry would accept a spec the array form still refuses.
       - name: Admin form builder
         run: php tests/admin-form-builder.php
+      # 'depends' and 'translate' are schema features, so both halves have to agree. The
+      # dependent half is the security one: the client script only hides a row, and a field
+      # whose master is off must have its posted value discarded and must not be required,
+      # or a row the browser never showed becomes a value anyone can set by hand. The
+      # translated half fails just as quietly -- a control reading or writing a key the
+      # store does not use drops what was typed with nothing on screen to show for it.
+      # The dependent half is driven in the runner's Chrome against the committed ui-osc.js
+      # and main.css, because a source grep cannot tell a script that runs from one that is
+      # merely present; the browser half is skipped where there is no Chrome to run it.
+      # The browser is a dependency of that suite, so it is named here rather than assumed
+      # of the runner image: with CI set the suite fails instead of skipping, and this step
+      # says which build ran.
+      - name: Browser for the driven assertions
+        run: |
+          for b in "$CHROME" google-chrome google-chrome-stable chromium chromium-browser; do
+            [ -n "$b" ] && command -v "$b" >/dev/null 2>&1 && exec "$b" --version
+          done
+          echo "no chrome/chromium on PATH; the driven assertions would skip" >&2
+          exit 1
+      - name: Admin form depends and translate
+        run: php tests/admin-form-depends-translate.php
+      # The enabled-locale list is memoised for the request, so a locale added, enabled,
+      # disabled or deleted leaves every translated field on the page working from the list
+      # as it was -- and the languages screen redirects to itself, so the stale row is the
+      # first thing shown. The source scan derives the writing actions from the controller,
+      # so a new one is held to the same rule rather than being exempt for being new.
+      - name: Locale cache invalidation
+        run: php tests/locale-cache-invalidation.php
       # The admin field primitives are what a plugin builds a settings page from, so their
       # markup is a contract both ways: an unescaped value is stored XSS on an admin-only
       # page, and a dropped field-* class puts a number back to full width, breaking the

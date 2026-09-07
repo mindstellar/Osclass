@@ -14942,6 +14942,10 @@ select.field-select {
   padding: 0.6rem 0.9rem;
 }
 
+.field-translate .osc-tab {
+  margin-block-end: 0.5rem;
+}
+
 table.table-small td {
   vertical-align: bottom;
 }
