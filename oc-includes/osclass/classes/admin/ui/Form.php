@@ -105,6 +105,84 @@ class Form
     }
 
     /**
+     * A titled block of actions: a heading, an optional intro, optional body content, and a
+     * list of actions each rendered as a button with its own help line. Body of
+     * osc_admin_action_section(). For the "do a thing" panels (connection test, queue,
+     * migration, cleanup, maintenance) that are not label|control forms.
+     *
+     * Each action is one of:
+     *  - a confirm trigger: 'confirm' => '#dialog-id' (opens a osc_admin_confirm_dialog,
+     *    which carries its own fields and submits itself — no wrapping form here);
+     *  - its own mini-form: 'action' (and optional 'page'/'fields'/'name') → a submit button
+     *    in a horizontal:false form;
+     *  - a link: 'url';
+     *  - a bare button otherwise.
+     * plus 'label', 'variant', 'icon', 'attrs', and 'help'/'help_html'.
+     *
+     * @param array $opts 'title', 'intro'/'intro_html', 'body_html' (before the actions),
+     *                    'actions' (list), 'footer_html' (after the actions)
+     *
+     * @return void
+     */
+    public static function actionSection(array $opts = array())
+    {
+        echo '<section class="settings-actions">';
+        self::section($opts['title'] ?? '', $opts);
+
+        if (!empty($opts['body_html'])) {
+            echo $opts['body_html'];
+        }
+
+        foreach ($opts['actions'] ?? array() as $action) {
+            echo '<div class="settings-action">';
+
+            $btn = array(
+                'label'   => $action['label'] ?? '',
+                'variant' => $action['variant'] ?? 'secondary',
+                'icon'    => $action['icon'] ?? null,
+                'attrs'   => $action['attrs'] ?? array(),
+            );
+
+            if (!empty($action['confirm'])) {
+                $btn['type']                          = 'button';
+                $btn['attrs']['data-osc-dialog-open'] = $action['confirm'];
+                osc_admin_action_button($btn);
+            } elseif (!empty($action['url'])) {
+                $btn['url'] = $action['url'];
+                osc_admin_action_button($btn);
+            } elseif (isset($action['action']) || isset($action['fields'])) {
+                $btn['type'] = $action['type'] ?? 'submit';
+                self::open(array(
+                    'page'       => $action['page'] ?? null,
+                    'action'     => $action['action'] ?? null,
+                    'fields'     => $action['fields'] ?? array(),
+                    'name'       => $action['name'] ?? null,
+                    'horizontal' => false,
+                ));
+                osc_admin_action_button($btn);
+                self::close(null, array('horizontal' => false));
+            } else {
+                $btn['type'] = $action['type'] ?? 'button';
+                osc_admin_action_button($btn);
+            }
+
+            if (!empty($action['help_html'])) {
+                echo '<p class="settings-action-help">' . $action['help_html'] . '</p>';
+            } elseif (!empty($action['help'])) {
+                echo '<p class="settings-action-help">' . osc_esc_html($action['help']) . '</p>';
+            }
+
+            echo '</div>';
+        }
+
+        if (!empty($opts['footer_html'])) {
+            echo $opts['footer_html'];
+        }
+
+        echo '</section>';
+    }
+
+    /**
      * Open one labelled row. Body of osc_admin_form_row_open().
      *
      * @param string $label

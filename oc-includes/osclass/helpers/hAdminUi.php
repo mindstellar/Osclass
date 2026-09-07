@@ -291,6 +291,27 @@ if (!function_exists('osc_admin_form_section')) {
     }
 }
 
+if (!function_exists('osc_admin_action_section')) {
+    /**
+     * A titled block of actions — the "do a thing" panel (connection test, queue, migration,
+     * cleanup, maintenance) that is not a label|control form. Renders a heading, an optional
+     * intro, optional body content, and each action as a button with its own help line.
+     *
+     * @param array $opts 'title', 'intro'/'intro_html', 'body_html' (before the actions),
+     *                    'footer_html' (after them), and 'actions' — a list where each is:
+     *                    'label', 'variant', 'icon', 'attrs', 'help'/'help_html', plus one of
+     *                    'confirm' => '#dialog-id' (opens a confirm dialog that submits itself),
+     *                    'action' [+ 'page'/'fields'/'name'] (its own submit form),
+     *                    or 'url' (a link).
+     *
+     * @return void
+     */
+    function osc_admin_action_section(array $opts = array())
+    {
+        \mindstellar\admin\ui\Form::actionSection($opts);
+    }
+}
+
 if (!function_exists('osc_admin_text')) {
     /**
      * Single-line text. Keys: the shared set, plus 'placeholder', 'width', 'prefix', 'suffix'.

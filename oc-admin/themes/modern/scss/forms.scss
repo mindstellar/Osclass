@@ -42,6 +42,42 @@
   width: 100%;
 }
 
+// A titled block of actions (osc_admin_action_section): the "do a thing" panels — connection
+// test, queue, migration, cleanup — that are not label|control forms. A section heading, an
+// optional intro, then each action as a button with its own help line, on a steady rhythm.
+.settings-actions {
+  margin-block-start: 1.5rem;
+  max-width: 68ch;
+
+  // Its heading is a section head, not a page head: separate it from the block above.
+  .render-title {
+    margin-block-start: 0;
+  }
+
+  & + .settings-actions {
+    margin-block-start: 2rem;
+  }
+}
+
+.settings-action {
+  margin-block-end: 1.25rem;
+
+  &:last-child {
+    margin-block-end: 0;
+  }
+
+  // Each action carries its own mini <form>; keep the button on the flow line.
+  form {
+    display: inline;
+  }
+}
+
+.settings-action-help {
+  color: var(--osc-ink-muted);
+  font-size: $font-size-sm;
+  margin-block: .4rem 0;
+}
+
 .form-horizontal {
   // Was a float layout: the label floated into a 150px well and the control was given a
   // matching 170px inline-start margin to clear it. Floats need clearfix hacks (there is

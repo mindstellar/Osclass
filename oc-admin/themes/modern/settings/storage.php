@@ -206,128 +206,86 @@ osc_current_admin_theme_path('parts/header.php'); ?>
             <div class="clear"></div>
                     <?php osc_admin_form_close(array()); ?>
 
-        <div class="form-horizontal">
-            <?php osc_admin_page_head(__('Connection test')); ?>
-            <?php osc_admin_form_row_open(''); ?>
-                    <p><?php _e('Runs a small write/read/delete probe against the saved connection settings above.'); ?></p>
-                    <?php
-                    osc_admin_form_open(array(
-                        'name'       => 'storage_test_form',
-                        'page'   => 'settings',
-                        'action'     => 'storage_test_post',
-                        'horizontal' => false,
-                    ));
-                    osc_admin_action_button(array(
-                        'label'   => __('Test connection'),
-                        'type'    => 'submit',
-                        'variant' => 'dim',
-                    ));
-                    osc_admin_form_close(null, array('horizontal' => false)); ?>
-            <?php osc_admin_form_row_close(); ?>
+        <?php
+        osc_admin_action_section(array(
+            'title'   => __('Connection test'),
+            'intro'   => __('Runs a small write/read/delete probe against the saved connection settings above.'),
+            'actions' => array(
+                array(
+                    'label'   => __('Test connection'),
+                    'page'    => 'settings',
+                    'action'  => 'storage_test_post',
+                    'name'    => 'storage_test_form',
+                    'variant' => 'dim',
+                ),
+            ),
+        ));
 
-            <?php osc_admin_page_head(__('Storage queue')); ?>
-            <?php osc_admin_form_row_open(''); ?>
-                    <p>
-                        <?php echo sprintf(
-                            osc_esc_html(__('Pending jobs: %d &middot; Failed jobs: %d')),
-                            (int) $queueStats['pending'],
-                            (int) $queueStats['error']
-                        ); ?>
-                    </p>
-                    <?php
-                    osc_admin_form_open(array(
-                        'name'       => 'storage_queue_form',
-                        'page'   => 'settings',
-                        'action'     => 'storage_queue_run',
-                        'horizontal' => false,
-                    ));
-                    osc_admin_action_button(array(
-                        'label'   => __('Process queue now'),
-                        'type'    => 'submit',
-                        'variant' => 'dim',
-                    ));
-                    osc_admin_form_close(null, array('horizontal' => false)); ?>
-                    <?php if (!empty($queueStats['dead_letters'])) { ?>
-                        <div class="help-box">
-                            <p><?php _e('Dead-lettered jobs (past the retry ceiling):'); ?></p>
-                            <ul>
-                                <?php foreach ($queueStats['dead_letters'] as $job) { ?>
-                                    <li>
-                                        #<?php echo osc_esc_html($job['pk_i_id']); ?>
-                                        &mdash; <?php echo osc_esc_html($job['s_type']); ?>
-                                        (<?php echo osc_esc_html($job['s_last_error']); ?>)
-                                    </li>
-                                <?php } ?>
-                            </ul>
-                        </div>
-                    <?php } ?>
-            <?php osc_admin_form_row_close(); ?>
+        $queueBody = '<p>' . sprintf(
+            osc_esc_html(__('Pending jobs: %d &middot; Failed jobs: %d')),
+            (int) $queueStats['pending'],
+            (int) $queueStats['error']
+        ) . '</p>';
 
-            <?php osc_admin_page_head(__('Migration')); ?>
-            <?php osc_admin_form_row_open(''); ?>
-                    <p><?php _e('Backfill existing images between local disk and remote storage. Each action queues '
-                                 . 'jobs processed by the storage queue above (or by cron) rather than running immediately.'); ?></p>
+        $queueFooter = '';
+        if (!empty($queueStats['dead_letters'])) {
+            $queueFooter .= '<div class="help-box"><p>'
+                . osc_esc_html(__('Dead-lettered jobs (past the retry ceiling):')) . '</p><ul>';
+            foreach ($queueStats['dead_letters'] as $job) {
+                $queueFooter .= '<li>#' . osc_esc_html($job['pk_i_id']) . ' &mdash; '
+                    . osc_esc_html($job['s_type']) . ' (' . osc_esc_html($job['s_last_error']) . ')</li>';
+            }
+            $queueFooter .= '</ul></div>';
+        }
 
-                    <?php
-                    osc_admin_form_open(array(
-                        'name'       => 'storage_offload_all_form',
-                        'page'   => 'settings',
-                        'action'     => 'storage_migrate_post',
-                        'fields'     => array('op' => 'offload_all'),
-                        'horizontal' => false,
-                    ));
-                    osc_admin_action_button(array(
-                        'label'   => __('Offload all local images to remote storage'),
-                        'variant' => 'dim',
-                        'attrs'   => array('data-osc-dialog-open' => '#storage-offload-dialog'),
-                    ));
-                    osc_admin_form_close(null, array('horizontal' => false)); ?>
-                    <div class="help-box">
-                        <?php _e('Backfills every image still on local disk to the active remote storage backend. '
-                                 . 'Existing images are queued for upload; new uploads are already handled automatically.'); ?>
-                    </div>
+        osc_admin_action_section(array(
+            'title'       => __('Storage queue'),
+            'body_html'   => $queueBody,
+            'actions'     => array(
+                array(
+                    'label'   => __('Process queue now'),
+                    'page'    => 'settings',
+                    'action'  => 'storage_queue_run',
+                    'name'    => 'storage_queue_form',
+                    'variant' => 'dim',
+                ),
+            ),
+            'footer_html' => $queueFooter,
+        ));
 
-                    <?php
-                    osc_admin_form_open(array(
-                        'name'       => 'storage_restore_all_form',
-                        'page'   => 'settings',
-                        'action'     => 'storage_migrate_post',
-                        'fields'     => array('op' => 'restore_all'),
-                        'horizontal' => false,
-                    ));
-                    osc_admin_action_button(array(
-                        'label'   => __('Download all remote images back to local (offline copy)'),
-                        'variant' => 'dim',
-                        'attrs'   => array('data-osc-dialog-open' => '#storage-restore-dialog'),
-                    ));
-                    osc_admin_form_close(null, array('horizontal' => false)); ?>
-                    <div class="help-box">
-                        <?php _e('Brings every remote image back to local disk and switches it back to local storage. '
-                                 . 'Use this to keep a local copy, or before disabling remote storage.'); ?>
-                    </div>
+        $migrationActions = array(
+            array(
+                'label'   => __('Offload all local images to remote storage'),
+                'variant' => 'dim',
+                'confirm' => '#storage-offload-dialog',
+                'help'    => __('Backfills every image still on local disk to the active remote storage backend. '
+                                . 'Existing images are queued for upload; new uploads are already handled automatically.'),
+            ),
+            array(
+                'label'   => __('Download all remote images back to local (offline copy)'),
+                'variant' => 'dim',
+                'confirm' => '#storage-restore-dialog',
+                'help'    => __('Brings every remote image back to local disk and switches it back to local storage. '
+                                . 'Use this to keep a local copy, or before disabling remote storage.'),
+            ),
+        );
+        if ($betterS3Configured) {
+            $migrationActions[] = array(
+                'label'   => __('Adopt existing Better S3 images'),
+                'variant' => 'dim',
+                'confirm' => '#storage-adopt-dialog',
+                'help'    => __('Imports your Better S3 connection settings and marks images already uploaded to that '
+                                . 'bucket as remote, without re-uploading them.'),
+            );
+        }
 
-                    <?php if ($betterS3Configured) { ?>
-                        <?php
-                        osc_admin_form_open(array(
-                            'name'       => 'storage_adopt_better_s3_form',
-                            'page'   => 'settings',
-                            'action'     => 'storage_migrate_post',
-                            'fields'     => array('op' => 'adopt_better_s3'),
-                            'horizontal' => false,
-                        ));
-                        osc_admin_action_button(array(
-                            'label'   => __('Adopt existing Better S3 images'),
-                            'variant' => 'dim',
-                            'attrs'   => array('data-osc-dialog-open' => '#storage-adopt-dialog'),
-                        ));
-                        osc_admin_form_close(null, array('horizontal' => false)); ?>
-                        <div class="help-box">
-                            <?php _e('Imports your Better S3 connection settings and marks images already uploaded to that '
-                         . 'bucket as remote, without re-uploading them.'); ?>
-                        </div>
-                    <?php } ?>
-            <?php osc_admin_form_row_close(); ?>
-        </div>
+        osc_admin_action_section(array(
+            'title'   => __('Migration'),
+            'intro'   => __('Backfill existing images between local disk and remote storage. Each action queues '
+                            . 'jobs processed by the storage queue above (or by cron) rather than running immediately.'),
+            'actions' => $migrationActions,
+        ));
+        ?>
     </div>
 
 <?php
