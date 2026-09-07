@@ -70,6 +70,7 @@ HTACCESS;
                     // 3. No se puede crear + apache
                     // 4. No se puede crear + no apache
                     // 5. .htaccess exists, no overwrite
+                    // 6. .htaccess exists, no overwrite, no apache module detected
                     $status = 3;
                     if (file_exists($htaccess_file)) {
                         $status = 5;
@@ -400,8 +401,13 @@ HTACCESS;
                             }
                             osc_add_flash_error_message($msg, 'admin');
                             break;
+                        // 6 is 5 with mod_rewrite unverified. It is the ordinary case on
+                        // nginx, where apache_mod_loaded() can never answer yes -- without
+                        // its own branch the save fell off the switch and reported nothing.
                         case 5:
+                        case 6:
                             $warning = false;
+                            $msg     = '';
                             if (file_exists($htaccess_file)) {
                                 $htaccess_content = file_get_contents($htaccess_file);
                                 if ($htaccess_content != $htaccess) {
@@ -423,6 +429,11 @@ HTACCESS;
                             } else {
                                 osc_add_flash_ok_message($msg, 'admin');
                             }
+                            break;
+                        default:
+                            // Every reachable status has a branch above; this only fires if
+                            // one is added without a message, which must not pass silently.
+                            osc_add_flash_ok_message(_m('Permalinks structure updated'), 'admin');
                             break;
                     }
                 } else {
