@@ -614,15 +614,10 @@ osc_current_admin_theme_path('parts/header.php'); ?>
                             </details>
                         </div>
                         <?php if (osc_rewrite_enabled()) {
-                            $rewrite_base    = REL_WEB_URL;
-                            $server_software = strtolower(Params::getServerParam('SERVER_SOFTWARE'));
-                            $is_nginx        = strpos($server_software, 'nginx') !== false;
+                            $rewrite_base = REL_WEB_URL;
+                            $is_nginx     = osc_server_is_nginx();
                             if ($is_nginx) {
-                                $nginx_conf = <<<NGINX
-location {$rewrite_base} {
-    try_files \$uri \$uri/ {$rewrite_base}index.php?\$args;
-}
-NGINX;
+                                $nginx_conf = osc_server_rewrite_rules();
                                 ?>
                                 <div class="server-config">
                                     <?php osc_admin_form_section(__('Server rules (nginx)'), array('spaced' => true)); ?>

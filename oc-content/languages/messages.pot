@@ -2855,6 +2855,12 @@ msgstr ""
 msgid "credits available"
 msgstr ""
 
+#: oc-includes/osclass/classes/controller/admin/settings/CAdminSettingsPermalinks.php
+msgid ""
+"nginx does not read .htaccess: check the server rules below are in your "
+"nginx configuration, then reload nginx."
+msgstr ""
+
 #: oc-includes/osclass/gui/item-comments-content.php
 msgid "not published"
 msgstr ""

@@ -71,15 +71,22 @@ HTACCESS;
                     // 4. No se puede crear + no apache
                     // 5. .htaccess exists, no overwrite
                     // 6. .htaccess exists, no overwrite, no apache module detected
-                    $status = 3;
-                    if (file_exists($htaccess_file)) {
-                        $status = 5;
-                    } elseif (is_writable(osc_base_path()) && file_put_contents($htaccess_file, $htaccess)) {
-                        $status = 1;
-                    }
+                    // 7. nginx: rewriting lives in the server block, not in a file we own
+                    if (osc_server_is_nginx()) {
+                        // Writing .htaccess here would create a file nginx never reads, and
+                        // mod_rewrite is Apache's, so neither test says anything true.
+                        $status = 7;
+                    } else {
+                        $status = 3;
+                        if (file_exists($htaccess_file)) {
+                            $status = 5;
+                        } elseif (is_writable(osc_base_path()) && file_put_contents($htaccess_file, $htaccess)) {
+                            $status = 1;
+                        }
 
-                    if (!@apache_mod_loaded('mod_rewrite')) {
-                        $status++;
+                        if (!@apache_mod_loaded('mod_rewrite')) {
+                            $status++;
+                        }
                     }
 
                     $errors   = 0;
@@ -430,6 +437,20 @@ HTACCESS;
                                 osc_add_flash_ok_message($msg, 'admin');
                             }
                             break;
+                        case 7:
+                            // nginx. The rules the admin has to paste are on the screen they
+                            // are being sent back to, so point at them rather than repeating
+                            // them into a flash message.
+                            $msg = _m('Permalinks structure updated');
+                            $msg .= ' ';
+                            $msg .= _m('nginx does not read .htaccess: check the server rules below are in your nginx configuration, then reload nginx.');
+                            if ($errors > 0) {
+                                $msg .= $msg_error;
+                                osc_add_flash_warning_message($msg, 'admin');
+                            } else {
+                                osc_add_flash_ok_message($msg, 'admin');
+                            }
+                            break;
                         default:
                             // Every reachable status has a branch above; this only fires if
                             // one is added without a message, which must not pass silently.
@@ -440,8 +461,11 @@ HTACCESS;
                     osc_set_preference('rewriteEnabled', 0);
                     osc_set_preference('mod_rewrite_loaded', 0);
 
-                    $deleted = true;
-                    if (file_exists($htaccess_file)) {
+                    $deleted      = true;
+                    $same_content = false;
+                    // On nginx the file is not ours and is not what routes requests, so
+                    // deleting it would only remove something another server might need.
+                    if (!osc_server_is_nginx() && file_exists($htaccess_file)) {
                         $htaccess_content = file_get_contents($htaccess_file);
                         if ($htaccess_content == $htaccess) {
                             $deleted      = @unlink($htaccess_file);

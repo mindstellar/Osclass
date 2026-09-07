@@ -1204,3 +1204,59 @@ function osc_tinymce_config($preset = 'basic', array $overrides = array())
 
     return json_encode($config, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE);
 }
+
+if (!function_exists('osc_server_software')) {
+    /**
+     * The web server's reported identity, lowercased, e.g. "nginx/1.27.0".
+     *
+     * @return string Empty when the SAPI does not report one (CLI, some FastCGI setups).
+     */
+    function osc_server_software()
+    {
+        return strtolower((string)Params::getServerParam('SERVER_SOFTWARE'));
+    }
+}
+
+if (!function_exists('osc_server_is_nginx')) {
+    /**
+     * Whether the site is served by nginx, which ignores .htaccess entirely: rewriting is
+     * configured in the server block instead, so anything written to that file is inert.
+     *
+     * @return bool
+     */
+    function osc_server_is_nginx()
+    {
+        return strpos(osc_server_software(), 'nginx') !== false;
+    }
+}
+
+if (!function_exists('osc_server_rewrite_rules')) {
+    /**
+     * The rewrite rules this server needs to route every request through index.php --
+     * an nginx location block, or the .htaccess body Apache reads.
+     *
+     * @return string
+     */
+    function osc_server_rewrite_rules()
+    {
+        $base = REL_WEB_URL;
+
+        if (osc_server_is_nginx()) {
+            return "location {$base} {\n"
+                   . "    try_files \$uri \$uri/ {$base}index.php?\$args;\n"
+                   . '}';
+        }
+
+        return "<IfModule mod_rewrite.c>\n"
+               . "RewriteEngine On\n"
+               . "RewriteBase {$base}\n"
+               . "RewriteRule ^index\\.php$ - [L]\n"
+               . "RewriteCond %{REQUEST_FILENAME} !-f\n"
+               . "RewriteCond %{REQUEST_FILENAME} !-d\n"
+               . "RewriteRule . {$base}index.php [L]\n"
+               . "</IfModule>\n"
+               . "<IfModule mod_mime.c>\n"
+               . "AddType text/xsl .xsl\n"
+               . '</IfModule>';
+    }
+}
