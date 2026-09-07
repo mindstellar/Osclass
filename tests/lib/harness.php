@@ -33,9 +33,57 @@ if (!isset($GLOBALS['failLabels'])) {
     $GLOBALS['failLabels'] = array();
 }
 
+if (!function_exists('harness_export')) {
+    /**
+     * Render a value var_export-style: quoted strings, bare numbers, bracketed arrays.
+     *
+     * Nesting stops at $maxDepth and the caller bounds the length, so a large or deeply
+     * nested value cannot flood the log.
+     *
+     * @param mixed $v
+     * @param int   $depth
+     * @param int   $maxDepth
+     *
+     * @return string
+     */
+    function harness_export($v, int $depth = 0, int $maxDepth = 3): string
+    {
+        if (is_array($v)) {
+            if ($v === array()) {
+                return '[]';
+            }
+            if ($depth >= $maxDepth) {
+                return 'array(' . count($v) . ')';
+            }
+            $isList = array_keys($v) === range(0, count($v) - 1);
+            $parts  = array();
+            foreach ($v as $k => $item) {
+                $parts[] = ($isList ? '' : harness_export($k, $depth + 1, $maxDepth) . ' => ')
+                    . harness_export($item, $depth + 1, $maxDepth);
+            }
+
+            return '[' . implode(', ', $parts) . ']';
+        }
+        if (is_object($v)) {
+            return 'object(' . get_class($v) . ')';
+        }
+        if (is_string($v)) {
+            return "'" . $v . "'";
+        }
+        if ($v === null || is_bool($v) || is_int($v) || is_float($v)) {
+            return var_export($v, true);
+        }
+
+        return gettype($v);
+    }
+}
+
 if (!function_exists('describe')) {
     /**
      * Render a value as type + content for assertion output.
+     *
+     * Arrays carry their contents, not just a count: two arrays of the same length that
+     * differ say nothing useful when both sides print as array(2).
      *
      * @param mixed $v
      *
@@ -59,7 +107,12 @@ if (!function_exists('describe')) {
             return 'string("' . $v . '")';
         }
         if (is_array($v)) {
-            return 'array(' . count($v) . ')';
+            $body = harness_export($v);
+            if (strlen($body) > 400) {
+                $body = substr($body, 0, 397) . '...';
+            }
+
+            return 'array(' . count($v) . ')' . $body;
         }
         if (is_object($v)) {
             return 'object(' . get_class($v) . ')';
