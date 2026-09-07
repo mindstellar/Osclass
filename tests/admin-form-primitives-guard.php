@@ -11,7 +11,7 @@
 /**
  * Keeps the admin form primitives standardised once they were unified.
  *
- * Three regressions this pins, each of which was a real, silent breakage:
+ * Four regressions this pins, each of which was a real, silent breakage:
  *
  *  1. The modern theme once shipped its own osc_admin_form_row_open/close/checkbox in
  *     parts/ui.php. Being loaded first, that copy won and silently dropped id/style/
@@ -23,6 +23,9 @@
  *  3. The per-locale name/description editors were moved off Bootstrap nav-tabs onto the
  *     theme's own .osc-tab widget. A returning data-bs-toggle="tab" would split the tab
  *     UX in two again.
+ *  4. A declared settings page has exactly one render-time extension point, and it is a
+ *     filter over the field spec. Dropping the call, or downgrading it to a hook, takes
+ *     every plugin that adjusts a field on someone else's page off the air in silence.
  *
  * DB-free: a filesystem scan, so a regression is caught the moment it is written.
  * Usage: php tests/admin-form-primitives-guard.php
@@ -132,5 +135,17 @@ foreach ($multilangForms as $rel) {
     check(basename($rel) . ' has no nav-tabs strip', strpos($src, 'nav nav-tabs') === false);
     check(basename($rel) . ' wires the shared tab widget', strpos($src, 'osc-tab') !== false);
 }
+
+/* 4. The one render-time extension point on a declared settings page. It has to stay a
+ *    filter: a hook hands the listener a copy of the spec and its edits go nowhere.
+ *    A substring scan sees the call site and nothing else -- that the filter actually runs
+ *    per field and that its return value is used are pinned by the behavioural assertions
+ *    in tests/admin-form-lifecycle-hooks.php. */
+$declaredPageView = (string) file_get_contents(__DIR__ . '/../oc-includes/osclass/gui/admin/settings-page.php');
+check(
+    'the declared settings page still names admin_form_render_field as a filter',
+    strpos($declaredPageView, "osc_apply_filter('admin_form_render_field'") !== false,
+    'the call site was removed, the hook renamed, or osc_apply_filter downgraded to osc_run_hook'
+);
 
 exit(harness_result());

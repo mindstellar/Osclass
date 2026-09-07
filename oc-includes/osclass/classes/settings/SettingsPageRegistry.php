@@ -100,6 +100,11 @@ final class SettingsPageRegistry
      *   'intro'      => string    Explanatory paragraph above the first group.
      *   'groups'     => array[]   array('title' =>, 'intro' =>, 'fields' => array[]).
      *   'fields'     => array[]   Sugar for a single untitled group.
+     *   'after_save' => callable callable(array $values, $id): void, run once after a
+     *                             successful save, never on a rejected one. An alternative
+     *                             to hooking 'admin_form_after_save' when the effect only
+     *                             belongs to this one page; it runs after that hook, not
+     *                             before it.
      *
      * A field spec is what osc_admin_field() takes, plus:
      *   'default'  => mixed     Value used until something is saved.
@@ -147,6 +152,9 @@ final class SettingsPageRegistry
         if ($groups === array()) {
             throw new InvalidArgumentException('SettingsPageRegistry: page "' . $id . '" declares no fields');
         }
+        if (isset($spec['after_save']) && !is_callable($spec['after_save'])) {
+            throw new InvalidArgumentException('SettingsPageRegistry: page "' . $id . '" after_save must be callable');
+        }
 
         $this->pages[$id] = array(
             'id'         => $id,
@@ -162,6 +170,7 @@ final class SettingsPageRegistry
             'help'       => isset($spec['help']) && is_string($spec['help']) ? $spec['help'] : '',
             'intro'      => isset($spec['intro']) && is_string($spec['intro']) ? $spec['intro'] : '',
             'groups'     => $this->normaliseGroups($id, $groups),
+            'after_save' => isset($spec['after_save']) && is_callable($spec['after_save']) ? $spec['after_save'] : null,
         );
     }
 

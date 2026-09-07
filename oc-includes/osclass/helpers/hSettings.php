@@ -308,7 +308,14 @@ if (!function_exists('osc_settings_save')) {
      * Sanitise, validate and store every field on a declared page.
      *
      * Nothing is written unless every field passes: half a saved page is worse than a
-     * rejected one, because the half that landed is invisible.
+     * rejected one, because the half that landed is invisible. The same guarantee covers
+     * the lifecycle hooks -- 'admin_form_after_save' and a page's inline 'after_save' never
+     * run on a rejected submission, and each runs exactly once on a successful one.
+     *
+     * The order on a successful save is part of the contract: 'admin_form_before_save'
+     * filters the values, the store writes them, the 'admin_form_after_save' hook runs, and
+     * the page's own inline 'after_save' runs last -- so a page sees whatever a listener
+     * already did rather than racing it.
      *
      * @param string $pageId
      *
@@ -318,7 +325,10 @@ if (!function_exists('osc_settings_save')) {
     {
         $page = osc_settings_page($pageId);
         if ($page === null) {
-            return array('errors' => array(__('That settings page is not registered.')), 'updated' => 0, 'values' => array());
+            $errors = array(__('That settings page is not registered.'));
+            osc_run_hook('admin_form_save_failed', $pageId, $errors, array());
+
+            return array('errors' => $errors, 'updated' => 0, 'values' => array());
         }
 
         $values = array();
@@ -338,12 +348,22 @@ if (!function_exists('osc_settings_save')) {
         }
 
         if ($errors !== array()) {
+            osc_run_hook('admin_form_save_failed', $pageId, $errors, $values);
+
             return array('errors' => $errors, 'updated' => 0, 'values' => $values);
         }
 
+        // A filter, not an action: deriving or normalising a value means handing it back,
+        // and a hook would only ever mutate its own copy of the array.
+        $filtered = osc_apply_filter('admin_form_before_save', $values, $pageId);
+        $values   = is_array($filtered) ? $filtered : $values;
+
+        // Walking the declared fields rather than $values is what keeps a before_save
+        // listener from writing a key the page never declared. A custom field stays
+        // uncollected here too: core did not read it, so it does not write one back.
         $updated = 0;
         foreach (SettingsPageRegistry::instance()->fields($pageId) as $name => $field) {
-            if (!array_key_exists($name, $values)) {
+            if ($field['type'] === 'custom' || !array_key_exists($name, $values)) {
                 continue;
             }
             $value = $values[$name];
@@ -351,6 +371,13 @@ if (!function_exists('osc_settings_save')) {
                 $value = $value ? '1' : '0';
             }
             $updated += (int)osc_set_preference($name, (string)$value, $page['section'], 'STRING');
+        }
+
+        // No entity primary key exists until a table-backed store lands; a preference page
+        // passes null where a future model-backed page would pass the row it just wrote.
+        osc_run_hook('admin_form_after_save', $pageId, $values, null);
+        if (isset($page['after_save']) && is_callable($page['after_save'])) {
+            call_user_func($page['after_save'], $values, null);
         }
 
         osc_run_hook('settings_page_saved', $pageId, $values);

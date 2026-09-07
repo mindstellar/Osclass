@@ -61,6 +61,11 @@ osc_current_admin_theme_path('parts/header.php'); ?>
                         } else {
                             $field['value'] = $values[$name] ?? '';
                         }
+                        // A filter over the field spec: a listener can add a hint, retitle a
+                        // field or mark it readonly. It cannot suppress the control or put a
+                        // different one in its place -- the field below renders regardless.
+                        $filtered = osc_apply_filter('admin_form_render_field', $field, $page['id'], $values);
+                        $field    = is_array($filtered) ? $filtered : $field;
                         osc_admin_field($field);
                     }
 

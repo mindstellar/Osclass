@@ -81,6 +81,11 @@ function osc_run_hook($hook, ...$args)
 {
 }
 
+function osc_apply_filter($hook, $content = '', ...$args)
+{
+    return $content;
+}
+
 function osc_admin_base_url($index = false)
 {
     return 'https://example.test/oc-admin/index.php';
@@ -176,6 +181,23 @@ check(
         array('name' => 'a'),
     ))) !== null
 );
+
+harness_section('after_save');
+check(
+    'a non-callable after_save is refused',
+    register_error('x8', array('title' => 'X', 'fields' => array(array('name' => 'a')), 'after_save' => 'not a function')) !== null
+);
+$x9AfterSave = static function ($values, $id) {
+};
+check('a well-formed page with after_save registers', register_error('x9', array(
+    'title'      => 'X',
+    'fields'     => array(array('name' => 'a')),
+    'after_save' => $x9AfterSave,
+)) === null);
+// Identity, not is_callable(): the page has to run the callable it was handed, and a
+// wrapper or a default substituted for it would satisfy is_callable() just as well.
+check('its after_save is the very callable that was declared', osc_settings_page('x9')['after_save'] === $x9AfterSave);
+pin('a page that declared none has a null after_save', null, osc_settings_page('myplugin')['after_save']);
 
 harness_section('two plugins claiming one id');
 // The first keeps it: replacing the page would take the other plugin's settings off the
