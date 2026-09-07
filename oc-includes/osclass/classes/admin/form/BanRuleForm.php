@@ -38,27 +38,6 @@ final class BanRuleForm
             return self::PAGE_ID;
         }
 
-        // What Params::getParam() did for these three fields before the screen was
-        // declared: every tag out of the value, contents and all. The declared path reads
-        // the request raw, so the screen carries its own.
-        $plainText = static function ($value) {
-            static $purifier = null;
-
-            if ((string)$value === '') {
-                return '';
-            }
-            if ($purifier === null) {
-                $config = \HTMLPurifier_Config::createDefault();
-                $config->set('HTML.Allowed', '');
-                // Nothing to persist once every tag is stripped, so no serializer blobs are
-                // written to the uploads dir.
-                $config->set('Cache.DefinitionImpl', null);
-                $purifier = new \HTMLPurifier($config);
-            }
-
-            return trim($purifier->purify((string)$value));
-        };
-
         osc_admin_form(self::PAGE_ID)
             ->title(__('Ban rule'))
             // Reached from the ban-rule list, not from a menu of its own.
@@ -77,15 +56,14 @@ final class BanRuleForm
             })
             // The lengths are the columns'. Declared, an over-long value comes back to be
             // shortened; undeclared, MySQL keeps as much of it as fits and says nothing.
+            // Declared text is purified by default, which is what these three always were.
             ->text('s_name', __('Ban name / Reason'))
-                ->sanitize($plainText)
                 ->set('maxlength', 250)
             ->text('s_ip', __('IP rule'), __('(e.g. 192.168.10-20.*)'))
-                ->sanitize($plainText)
                 ->set('maxlength', 50)
             ->text('s_email', __('E-mail rule'), __('(e.g. *@badsite.com, *@subdomain.badsite.com, *@*badsite.com)'))
                 // Addresses are matched lower-cased, so they are stored that way.
-                ->sanitize(static fn ($value) => strtolower($plainText($value)))
+                ->sanitize(static fn ($value) => strtolower($value))
                 ->set('maxlength', 250)
             ->register();
 

@@ -400,6 +400,14 @@ if (!function_exists('osc_settings_sanitize')) {
         }
         $value = trim((string)$value);
 
+        // Every tag out of free-typed text, contents and all: what Params::getParam() has
+        // always done to the same value on a hand-written screen, so a screen moved onto
+        // a declaration does not start storing markup it used to strip. A field holding
+        // markup or code on purpose declares 'purify' => false and is read raw.
+        if (($field['purify'] ?? true) && in_array($field['type'], SettingsPageRegistry::PURIFIED_TYPES, true)) {
+            $value = trim(osc_sanitize_text($value));
+        }
+
         if (isset($field['sanitize'])) {
             return call_user_func($field['sanitize'], $value);
         }
@@ -475,8 +483,11 @@ if (!function_exists('osc_settings_validate')) {
                 break;
         }
 
-        if (isset($field['maxlength']) && mb_strlen((string)$value) > (int)$field['maxlength']) {
-            return sprintf(__('%1$s must be %2$s characters or fewer'), $label, (int)$field['maxlength']);
+        // Either spelling of the cap: the control renders one number, and it is this one
+        // the save enforces, so a declaration cannot show a limit it does not apply.
+        $maxlength = $field['maxlength'] ?? ($field['attrs']['maxlength'] ?? null);
+        if ($maxlength !== null && mb_strlen((string)$value) > (int)$maxlength) {
+            return sprintf(__('%1$s must be %2$s characters or fewer'), $label, (int)$maxlength);
         }
         if (isset($field['pattern']) && !preg_match($field['pattern'], (string)$value)) {
             return sprintf(__('%s is not in the expected format'), $label);

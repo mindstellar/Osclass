@@ -232,6 +232,7 @@ $mods = array(
     'column'    => array(array('s_email'), array('column' => 's_email')),
     'dependsOn' => array(array('b_enabled'), array('depends' => 'b_enabled')),
     'translate' => array(array(), array('translate' => true)),
+    'purify'    => array(array(), array('purify' => false)),
     'default'   => array(array('7'), array('default' => '7')),
     'options'   => array(array(array('a' => 'A')), array('options' => array('a' => 'A'))),
     'rowLabel'  => array(array('Row'), array('row_label' => 'Row')),
@@ -331,6 +332,7 @@ $modifierKeys = array(
     'column'    => 'column',
     'dependsOn' => 'depends',
     'translate' => 'translate',
+    'purify'    => 'purify',
     'default'   => 'default',
     'options'   => 'options',
     'rowLabel'  => 'row_label',
@@ -420,7 +422,7 @@ check(
     $notModifier === array(),
     'not a modifier: ' . implode(', ', $notModifier)
 );
-pin('so the count is the whole set, not a sample', 16, count($modifierKeys));
+pin('so the count is the whole set, not a sample', 17, count($modifierKeys));
 
 harness_section('page-level keys');
 

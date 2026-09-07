@@ -20,6 +20,16 @@ namespace mindstellar\admin\ui;
  */
 class Field
 {
+    /** The types a browser applies maxlength to; on the rest the attribute is ignored. */
+    private const LENGTH_HINT_TYPES = array('text', 'email', 'url', 'tel', 'secret', 'textarea');
+
+    /**
+     * The types whose stored value is escaped on save, so its length is not the one the
+     * browser counted. Mirrors SettingsPageRegistry::PURIFIED_TYPES, copied rather than
+     * imported so a field primitive need not know about the settings registry.
+     */
+    private const PURIFIED_TYPES = array('text', 'textarea', 'tel', 'color');
+
     /** @var array */
     private $spec;
 
@@ -130,7 +140,14 @@ class Field
     {
         $name  = (string)($spec['name'] ?? '');
         $value = $spec['value'] ?? ($spec['selected'] ?? '');
-        $attrs = self::attrsString($spec['attrs'] ?? array());
+        $extra = $spec['attrs'] ?? array();
+        // Two spellings for one cap. The declared key is the one the save enforces, so it
+        // is the number the control shows; the attrs copy is dropped rather than emitted
+        // beside it.
+        if (isset($spec['maxlength'], $extra['maxlength'])) {
+            unset($extra['maxlength']);
+        }
+        $attrs = self::attrsString($extra);
 
         if (!empty($spec['required'])) {
             $attrs .= ' required';
@@ -140,6 +157,16 @@ class Field
         }
         if (isset($spec['placeholder']) && $type !== 'select') {
             $attrs .= ' placeholder="' . osc_esc_html($spec['placeholder']) . '"';
+        }
+        // Emitted only where the number is honest. A purified value is escaped on the way
+        // in and escaping lengthens -- one typed "&" reaches the column as five characters
+        // -- so on those types the attribute would promise a cap the save does not apply.
+        $maxlength = isset($spec['maxlength']) ? (int)$spec['maxlength'] : 0;
+        if ($maxlength > 0
+            && in_array($type, self::LENGTH_HINT_TYPES, true)
+            && !(($spec['purify'] ?? true) && in_array($type, self::PURIFIED_TYPES, true))
+        ) {
+            $attrs .= ' maxlength="' . $maxlength . '"';
         }
 
         // A control the page drives from script and never submits has no name; emitting an

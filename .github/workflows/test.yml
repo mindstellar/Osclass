@@ -247,6 +247,16 @@ jobs:
       # reaches is the same install as no guard.
       - name: Admin ban rule form
         run: php tests/admin-ban-rule-form.php
+      # A declared text field is read with the XSS check off, so without the default here
+      # every migrated screen stores markup the hand-written controller it replaced had
+      # always stripped -- and nothing shows it, because core escapes on the way out
+      # either way. What is taken out is measured against Params::getParam()'s live output
+      # rather than a transcribed constant. The stored value is escaped, which is what keeps
+      # it inert for a plugin that prints it raw, and what makes the length rule count the
+      # stored value and not the typed one: a single "&" costs the column five characters,
+      # so a purified control is handed no maxlength to promise otherwise.
+      - name: Admin form text purification
+        run: php tests/admin-form-text-purify.php
       # The admin field primitives are what a plugin builds a settings page from, so their
       # markup is a contract both ways: an unescaped value is stored XSS on an admin-only
       # page, and a dropped field-* class puts a number back to full width, breaking the

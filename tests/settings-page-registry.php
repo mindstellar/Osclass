@@ -45,6 +45,7 @@ use mindstellar\settings\SettingsPageRegistry;
 $GLOBALS['params']      = array();
 $GLOBALS['preferences'] = array();
 $GLOBALS['hooks']       = array();
+$GLOBALS['purified']    = array();
 
 class Params
 {
@@ -113,6 +114,16 @@ function osc_validate_url($value, $required = false, $headers = false)
 function osc_sanitize_url($value)
 {
     return filter_var($value, FILTER_SANITIZE_URL);
+}
+
+// The real one is hSanitize's, over HTMLPurifier. Here it only records, so which fields
+// the save path sends through it can be asserted without a purifier; what it strips is
+// pinned against the real one in tests/admin-form-text-purify.php.
+function osc_sanitize_text($value)
+{
+    $GLOBALS['purified'][] = $value;
+
+    return $value;
 }
 
 function __($key, $domain = 'core')
@@ -224,6 +235,49 @@ check('translate on a text field is accepted', register_error('x14', array('titl
 check('translate on a textarea is accepted', register_error('x15', array('title' => 'X', 'fields' => array(
     array('name' => 'a', 'type' => 'textarea', 'translate' => true),
 ))) === null);
+
+// Same rule for the flag that turns purification off: only free-typed values are purified,
+// so setting it anywhere else reads as a decision that was taken and is not.
+check(
+    'purify on a type nothing purifies is refused',
+    register_error('x30', array('title' => 'X', 'fields' => array(
+        array('name' => 'a', 'type' => 'secret', 'purify' => false),
+    ))) !== null
+);
+pin(
+    'and the refusal says which types are purified',
+    'SettingsPageRegistry: page "x31" field "a" cannot set purify: only text, textarea, tel, color are purified',
+    register_error('x31', array('title' => 'X', 'fields' => array(
+        array('name' => 'a', 'type' => 'secret', 'purify' => false),
+    )))
+);
+// 'purify' => 'no' is truthy, so a string here would switch purification *on* for a field
+// that was asking for the opposite.
+check(
+    'a purify that is not a boolean is refused',
+    register_error('x32', array('title' => 'X', 'fields' => array(
+        array('name' => 'a', 'type' => 'text', 'purify' => 'no'),
+    ))) !== null
+);
+check('purify on a text field is accepted', register_error('x33', array('title' => 'X', 'fields' => array(
+    array('name' => 'a', 'type' => 'text', 'purify' => false),
+))) === null);
+check('purify on a textarea is accepted', register_error('x34', array('title' => 'X', 'fields' => array(
+    array('name' => 'a', 'type' => 'textarea', 'purify' => false),
+))) === null);
+// A phone number and a colour are typed by hand into a control that filters nothing, so
+// they are purified like the text field beside them and can say otherwise.
+check('purify on a tel is accepted', register_error('x35', array('title' => 'X', 'fields' => array(
+    array('name' => 'a', 'type' => 'tel', 'purify' => false),
+))) === null);
+check('purify on a color is accepted', register_error('x36', array('title' => 'X', 'fields' => array(
+    array('name' => 'a', 'type' => 'color', 'purify' => false),
+))) === null);
+pin(
+    'and the list the registry accepts is the list the save path purifies',
+    array('text', 'textarea', 'tel', 'color'),
+    SettingsPageRegistry::PURIFIED_TYPES
+);
 
 // Core never collects a custom field's value, so a custom master is read as off on every
 // save while the plugin's own markup shows the dependent row as though it were on.
@@ -574,6 +628,53 @@ $cust = SettingsPageRegistry::instance()->fields('cust');
 $GLOBALS['params'] = array('slug' => 'My Slug');
 pin('the field sanitiser runs instead of the type default', 'my-slug', osc_settings_sanitize($cust['slug']));
 pin('the field validator runs', 'Slug is too long', osc_settings_validate($cust['slug'], 'aaaaaaaaaa'));
+
+harness_section('which fields the save path purifies');
+// Declared text is stripped to plain text before anything else sees it -- the field's own
+// sanitiser included, so a callback like the slug one above is handed text and not markup.
+$GLOBALS['purified'] = array();
+$GLOBALS['params']   = array('slug' => 'My Slug');
+osc_settings_sanitize($cust['slug']);
+pin('a text field goes through the shared text sanitiser', array('My Slug'), $GLOBALS['purified']);
+$GLOBALS['purified'] = array();
+$GLOBALS['params']   = array('api_key' => 'sk-live-9f2a', 'batch' => '4', 'notify' => 'a@b.com');
+osc_settings_sanitize($fields['api_key']);
+osc_settings_sanitize($fields['batch']);
+osc_settings_sanitize($fields['notify']);
+// A secret may legitimately contain anything, and a number or an address is already
+// narrowed by its own type. Purifying those would take characters out for no gain.
+pin('a secret, a number and an email do not', array(), $GLOBALS['purified']);
+
+SettingsPageRegistry::instance()->register('typed', array(
+    'title'  => 'Typed',
+    'fields' => array(
+        array('name' => 'phone', 'type' => 'tel'),
+        array('name' => 'shade', 'type' => 'color'),
+    ),
+));
+$typedFields         = SettingsPageRegistry::instance()->fields('typed');
+$GLOBALS['purified'] = array();
+$GLOBALS['params']   = array('phone' => '+1 555 0100', 'shade' => '#ff8800');
+osc_settings_sanitize($typedFields['phone']);
+osc_settings_sanitize($typedFields['shade']);
+// Neither control filters what is typed into it, and neither type has a sanitiser of its
+// own, so without this they store less filtered than the text field beside them.
+pin('a tel and a color are purified like text', array('+1 555 0100', '#ff8800'), $GLOBALS['purified']);
+
+SettingsPageRegistry::instance()->register('raw', array(
+    'title'  => 'Raw',
+    'fields' => array(
+        array('name' => 'body', 'type' => 'textarea', 'purify' => false),
+        array('name' => 'title', 'type' => 'text'),
+    ),
+));
+$rawFields           = SettingsPageRegistry::instance()->fields('raw');
+$GLOBALS['purified'] = array();
+$GLOBALS['params']   = array('body' => '<p>kept</p>', 'title' => '<p>stripped</p>');
+osc_settings_sanitize($rawFields['body']);
+pin('a field declaring purify => false is not sent through it', array(), $GLOBALS['purified']);
+osc_settings_sanitize($rawFields['title']);
+pin('while the field beside it still is', array('<p>stripped</p>'), $GLOBALS['purified']);
 
 harness_section('saving');
 $GLOBALS['params'] = array('api_key' => 'k', 'batch' => '25', 'mode' => 'live', 'verbose' => '1', 'notify' => 'a@b.com');

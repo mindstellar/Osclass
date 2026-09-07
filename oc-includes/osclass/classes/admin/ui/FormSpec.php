@@ -68,6 +68,7 @@ final class FormSpec
         'disabled',
         'depends',
         'translate',
+        'purify',
         'options',
         'row_label',
         'prefix',
@@ -348,6 +349,17 @@ final class FormSpec
         return $this->set('translate', $translate);
     }
 
+    /**
+     * Store the value as submitted, apart from the trim every field gets, instead of
+     * reducing it to plain text. For a field that holds markup or code on purpose;
+     * text, textarea, tel and color only. Either way the stored value is printed through
+     * osc_esc_html() or osc_esc_js(): this governs stripping, not escaping.
+     */
+    public function purify(bool $purify = false): self
+    {
+        return $this->set('purify', $purify);
+    }
+
     /** @param array<string,string> $options */
     public function options(array $options): self
     {
@@ -393,7 +405,10 @@ final class FormSpec
         return $this->set('render', $render);
     }
 
-    /** @param mixed $callback callable(mixed $value): mixed, run before validation */
+    /**
+     * @param mixed $callback callable(mixed $value): mixed, run before validation. On a
+     *                        purified type the tags are already out of the value it gets.
+     */
     public function sanitize($callback): self
     {
         return $this->set('sanitize', $callback);

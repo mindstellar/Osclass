@@ -121,6 +121,19 @@ class Params
     }
 
     /**
+     * Run the filter getParam() applies to request data over a value that did not come
+     * from the request: every tag out, contents and all.
+     *
+     * @param mixed $value string or array
+     *
+     * @return mixed same shape as $value
+     */
+    public static function purifyText($value)
+    {
+        return self::purify($value);
+    }
+
+    /**
      * Function to purify given string or array
      * Should be moved to separate class
      *

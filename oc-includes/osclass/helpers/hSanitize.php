@@ -145,6 +145,29 @@ function osc_sanitize_phone($value)
 }
 
 /**
+ * Reduce a value to plain text, taking every tag out along with what it contained.
+ *
+ * The filter is the one Params::getParam() runs over request data, applied to a value read
+ * from somewhere else. Like that one it escapes what it keeps, so the result is stored
+ * pre-escaped and stays inert wherever it is printed.
+ *
+ * @param array|string $value value to sanitize
+ *
+ * @return array|string same shape as $value
+ */
+function osc_sanitize_text($value)
+{
+    if (is_array($value)) {
+        return array_map('osc_sanitize_text', $value);
+    }
+    if (!is_string($value)) {
+        return $value;
+    }
+
+    return Params::purifyText($value);
+}
+
+/**
  * Escape html
  *
  * Formats text so that it can be safely placed in a form field in the event it has HTML tags.

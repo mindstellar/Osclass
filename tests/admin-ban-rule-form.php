@@ -391,17 +391,24 @@ pin('the declared path stores the same text', 'spam', row($admin, $purified)['s_
 pin('differing from the old row only in the space around it', trim($wasStored), row($admin, $purified)['s_name']);
 pin('and it is one row, saved', $count + 1, rows($admin));
 
-// An ampersand was encoded on the way in before this screen was declared, and still is:
-// what changed would be visible in the table, so it is asked of the table.
+// An ampersand was escaped on the way in before this screen was declared, and still is:
+// what changed would be visible in the table, so it is asked of the table. Storing it
+// pre-escaped is what keeps the value inert for anything that prints it without escaping,
+// and osc_esc_html() is built to carry an already-escaped entity through untouched -- a
+// row holding the bare character renders a raw "&" from the reason "Q&A; Session".
 $driven = drive('create_ban_rule_post', array(
-    's_name'  => 'Tom & Jerry',
+    's_name'  => 'Q&A; Session',
     's_ip'    => '10.5.5.6',
     's_email' => '',
 ));
-pin(
-    'an ampersand is stored the way the old path stored it',
-    Params::getParam('s_name'),
-    row($admin, (int)($driven['effects'][0][1] ?? 0))['s_name'] ?? null
+$stored = row($admin, (int)($driven['effects'][0][1] ?? 0))['s_name'] ?? null;
+pin('an ampersand is stored the way the old path stored it', Params::getParam('s_name'), $stored);
+pin('which is escaped', 'Q&amp;A; Session', $stored);
+pin('and comes back out of osc_esc_html() as the admin typed it', 'Q&amp;A; Session', osc_esc_html($stored));
+check(
+    'while the bare character would not survive the same trip',
+    osc_esc_html('Q&A; Session') === 'Q&A; Session',
+    osc_esc_html('Q&A; Session')
 );
 
 harness_section('a value the column cannot hold is refused, not cut short');
@@ -436,6 +443,24 @@ $driven = drive('create_ban_rule_post', array(
 ));
 pin('exactly 250 characters is still saved', array(array('ok', 'Rule saved correctly')), $driven['flashes']);
 pin('and stored whole', str_repeat('a', 250), row($admin, (int)($driven['effects'][0][1] ?? 0))['s_name'] ?? null);
+
+// The cap is the column's, so it is measured on what reaches the column and not on what was
+// typed. Escaping four characters out of one puts 249 a's and an ampersand over a 250-wide
+// column, and the rule refuses it rather than letting MySQL cut it: that is the whole point
+// of declaring the width, and the reason the control is given no maxlength to promise
+// otherwise.
+$count  = rows($admin);
+$driven = drive('create_ban_rule_post', array(
+    's_name'  => str_repeat('a', 249) . '&',
+    's_ip'    => '10.7.7.9',
+    's_email' => '',
+));
+pin(
+    'the length rule counts the stored value, not the typed one',
+    array(array('error', 'Ban name / Reason must be 250 characters or fewer')),
+    $driven['flashes']
+);
+pin('so nothing was inserted', $count, rows($admin));
 
 // Each field is held to its own column, not to one width for the screen.
 $count  = rows($admin);

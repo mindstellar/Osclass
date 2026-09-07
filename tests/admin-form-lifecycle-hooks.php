@@ -64,6 +64,14 @@ class Params
     {
         return $GLOBALS['params'][$key] ?? '';
     }
+
+    // The save path purifies declared text through this. Left as a pass-through: what it
+    // strips is pinned against the real one in tests/admin-form-text-purify.php, and these
+    // tests are about what reaches it.
+    public static function purifyText($value)
+    {
+        return $value;
+    }
 }
 
 class Preference

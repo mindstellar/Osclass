@@ -51,6 +51,18 @@ final class SettingsPageRegistry
         'custom',
     );
 
+    /**
+     * The types whose value is free text the admin types, so it is reduced to plain text on
+     * save unless the field declares 'purify' => false. email and url are narrowed by their
+     * own filters, a number is cast, and a secret may legitimately hold anything.
+     */
+    public const PURIFIED_TYPES = array(
+        'text',
+        'textarea',
+        'tel',
+        'color',
+    );
+
     /** Anything used as a table, column or key name. Matches what QueryBuilder will accept. */
     private const IDENTIFIER = '/^[A-Za-z0-9_]+$/';
 
@@ -132,7 +144,10 @@ final class SettingsPageRegistry
      * A field spec is what osc_admin_field() takes, plus:
      *   'default'  => mixed     Value used until something is saved.
      *   'required' => bool      Rejected as empty on save.
-     *   'sanitize' => callable  callable(mixed $value): mixed, run before validation.
+     *   'sanitize' => callable  callable(mixed $value): mixed, run before validation. The
+     *                           value it receives is trimmed, and on a purified type its
+     *                           tags are already gone, so a callback never has to strip
+     *                           them itself.
      *   'validate' => callable  callable(mixed $value, array $field): ?string returning
      *                           an error message, or null when the value is good.
      *   'depends'  => string    Another field on this page -- not a custom or translated
@@ -141,6 +156,14 @@ final class SettingsPageRegistry
      *                           discarded rather than stored.
      *   'translate' => bool     text and textarea only: one control per enabled locale,
      *                           each stored under the field name plus the locale code.
+     *   'purify'   => bool      text, textarea, tel and color only: false stores the value
+     *                           as submitted apart from the trim every field gets, for a
+     *                           field that holds markup or code on purpose. Defaults to
+     *                           true -- every tag out, contents and all, which is what a
+     *                           hand-written screen reading the same field through
+     *                           Params::getParam() has always stored. This governs what is
+     *                           stripped, not what is escaped: a stored value is still
+     *                           printed through osc_esc_html() or osc_esc_js().
      *   'column'   => string    Table stores only: the column this field maps to, when it
      *                           is not the field's own name.
      *
@@ -421,6 +444,23 @@ final class SettingsPageRegistry
                         'SettingsPageRegistry: page "' . $id . '" field "' . $field['name']
                         . '" cannot be translated: only text and textarea expand over locales'
                     );
+                }
+                if (isset($field['purify'])) {
+                    if (!is_bool($field['purify'])) {
+                        throw new InvalidArgumentException(
+                            'SettingsPageRegistry: page "' . $id . '" field "' . $field['name']
+                            . '" purify must be true or false'
+                        );
+                    }
+                    // Set on a type nothing purifies, it reads as a decision that was taken
+                    // and is not: a secret or a select would be stored raw either way.
+                    if (!in_array($type, self::PURIFIED_TYPES, true)) {
+                        throw new InvalidArgumentException(
+                            'SettingsPageRegistry: page "' . $id . '" field "' . $field['name']
+                            . '" cannot set purify: only ' . implode(', ', self::PURIFIED_TYPES)
+                            . ' are purified'
+                        );
+                    }
                 }
                 $this->checkFieldStorage($id, $field, $type, $store);
                 if (isset($field['depends'])) {
