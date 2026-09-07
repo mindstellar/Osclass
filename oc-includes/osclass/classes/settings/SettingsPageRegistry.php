@@ -115,6 +115,14 @@ final class SettingsPageRegistry
      *   'intro'      => string    Explanatory paragraph above the first group.
      *   'groups'     => array[]   array('title' =>, 'intro' =>, 'fields' => array[]).
      *   'fields'     => array[]   Sugar for a single untitled group.
+     *   'validate'   => callable callable(array $values, string $pageId, $id):
+     *                             string|string[]|null returning the error, or the errors, a
+     *                             rule spanning more than one field found. $id is the row
+     *                             being saved, null on an insert and on a preference page,
+     *                             so "that name is taken" can exclude the row being edited.
+     *                             Runs after every field has been checked, so a page reports
+     *                             all its problems at once. A field discarded with its
+     *                             'depends' master off is not in $values at all.
      *   'after_save' => callable callable(array $values, $id): void, run once after a
      *                             successful save, never on a rejected one. An alternative
      *                             to hooking 'admin_form_after_save' when the effect only
@@ -178,6 +186,9 @@ final class SettingsPageRegistry
         if (isset($spec['after_save']) && !is_callable($spec['after_save'])) {
             throw new InvalidArgumentException('SettingsPageRegistry: page "' . $id . '" after_save must be callable');
         }
+        if (isset($spec['validate']) && !is_callable($spec['validate'])) {
+            throw new InvalidArgumentException('SettingsPageRegistry: page "' . $id . '" validate must be callable');
+        }
 
         $store = $this->normaliseStore($id, $spec['store'] ?? 'preference');
 
@@ -196,6 +207,7 @@ final class SettingsPageRegistry
             'help'       => isset($spec['help']) && is_string($spec['help']) ? $spec['help'] : '',
             'intro'      => isset($spec['intro']) && is_string($spec['intro']) ? $spec['intro'] : '',
             'groups'     => $this->normaliseGroups($id, $groups, $store),
+            'validate'   => isset($spec['validate']) && is_callable($spec['validate']) ? $spec['validate'] : null,
             'after_save' => isset($spec['after_save']) && is_callable($spec['after_save']) ? $spec['after_save'] : null,
         );
     }

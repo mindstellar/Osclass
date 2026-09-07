@@ -96,6 +96,7 @@ $renderer  = static function (array $field, array $values): void {
 };
 $sanitizer = static fn ($value) => trim((string)$value);
 $validator = static fn ($value, array $field) => null;
+$pageValidate = static fn (array $values, string $pageId, $id) => null;
 
 harness_section('the helper');
 
@@ -362,6 +363,7 @@ $notModifiers = array_merge(
         'capability',
         'help',
         'intro',
+        'onValidate',
         'onAfterSave',
     ),
     SettingsPageRegistry::FIELD_TYPES
@@ -433,6 +435,7 @@ pin(
         'capability' => 'moderator',
         'help'       => 'What this page does.',
         'intro'      => 'Everything Acme does.',
+        'validate'   => $pageValidate,
         'after_save' => $afterSave,
         'groups'     => array(array('fields' => array(array('type' => 'text', 'name' => 'f')))),
     ),
@@ -445,6 +448,7 @@ pin(
         ->capability('moderator')
         ->help('What this page does.')
         ->intro('Everything Acme does.')
+        ->onValidate($pageValidate)
         ->onAfterSave($afterSave)
         ->text('f')
         ->toArray()

@@ -504,6 +504,10 @@ if (!function_exists('osc_settings_save')) {
      * A field whose 'depends' master is switched off is not part of the submission: its
      * posted value is discarded before validation, so it is neither required nor stored.
      *
+     * A page's own 'validate' is where a rule spanning more than one field goes; it runs
+     * after every field has been checked, is handed the row being saved, and its errors
+     * join theirs.
+     *
      * The order on a successful save is part of the contract: 'admin_form_before_save'
      * filters the values, the store writes them, the 'admin_form_after_save' hook runs, and
      * the page's own inline 'after_save' runs last -- so a page sees whatever a listener
@@ -592,6 +596,21 @@ if (!function_exists('osc_settings_save')) {
             $error = osc_settings_validate($field, $values[$name]);
             if ($error !== null) {
                 $errors[] = $error;
+            }
+        }
+
+        // A rule spanning more than one field has nowhere else to live: a field's own
+        // validate callback is handed its value and its spec, and neither says anything
+        // about the field next to it. It is handed the row as well, because the commonest
+        // rule of this kind -- "that name is taken" -- has to exclude the row being edited.
+        // Run after the per-field pass rather than instead of it, so the page still reports
+        // everything wrong with a submission at once.
+        if (isset($page['validate']) && is_callable($page['validate'])) {
+            $reported = call_user_func($page['validate'], $values, $pageId, $id);
+            foreach (is_array($reported) ? $reported : array($reported) as $error) {
+                if (is_string($error) && $error !== '') {
+                    $errors[] = $error;
+                }
             }
         }
 

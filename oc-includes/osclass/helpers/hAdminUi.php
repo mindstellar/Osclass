@@ -269,6 +269,35 @@ if (!function_exists('osc_admin_form_close')) {
     }
 }
 
+if (!function_exists('osc_admin_settings_form')) {
+    /**
+     * The whole form of a declared page (osc_register_settings_page()): the element, the
+     * hidden route, every declared field with the value it should show, and the submit row.
+     *
+     * A screen whose chrome is its own -- a section, a title that changes between add and
+     * edit -- keeps that chrome in its view and calls this for the form, so a declared page
+     * is drawn one way wherever it is drawn from.
+     *
+     * @param array|string $page The page spec, or the id of a registered page.
+     * @param array        $opts 'values'  => values to show, keyed by field name;
+     *                           'route'   => hidden fields, 'page' and 'action' among them,
+     *                                        defaulting to the generic settings controller's;
+     *                           'actions' => the submit row, as osc_admin_form_actions()
+     *                                        takes it;
+     *                           'name', 'url' => attributes of the form element.
+     *
+     * @return void
+     */
+    function osc_admin_settings_form($page, array $opts = array())
+    {
+        \mindstellar\admin\ui\SettingsForm::render(
+            is_array($page) ? $page : (array)osc_settings_page($page),
+            $opts['values'] ?? array(),
+            $opts
+        );
+    }
+}
+
 if (!function_exists('osc_admin_form_section')) {
     /**
      * A titled group of fields within a screen, with an optional explanatory paragraph.

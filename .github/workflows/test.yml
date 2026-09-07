@@ -235,6 +235,18 @@ jobs:
       # hidden input would carry is interpolated and so never appears in the file.
       - name: Admin form table store
         run: php tests/admin-form-store.php
+      # The ban-rule screen is the first core screen saved by a declaration instead of a
+      # hand-written Params::getParam/validate/write block, and every way that can go wrong
+      # is quiet. The row a save writes has to be the one the controller derived and
+      # checked, not one the submission names; a key that is not a row has to write nothing
+      # rather than fall through and insert, which turns an edit screen into one that
+      # silently creates rules; the rule spanning two fields ("both cannot be empty") has no
+      # field to live on, so losing it fills the table with rules matching nobody; and an
+      # unchanged update affects no rows and is still a save. It drives the controller and
+      # reads the row back with raw SQL, because a guard in the source that no branch
+      # reaches is the same install as no guard.
+      - name: Admin ban rule form
+        run: php tests/admin-ban-rule-form.php
       # The admin field primitives are what a plugin builds a settings page from, so their
       # markup is a contract both ways: an unescaped value is stored XSS on an admin-only
       # page, and a dropped field-* class puts a number back to full width, breaking the

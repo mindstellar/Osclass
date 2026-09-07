@@ -141,10 +141,12 @@ foreach ($multilangForms as $rel) {
  *    A substring scan sees the call site and nothing else -- that the filter actually runs
  *    per field and that its return value is used are pinned by the behavioural assertions
  *    in tests/admin-form-lifecycle-hooks.php. */
-$declaredPageView = (string) file_get_contents(__DIR__ . '/../oc-includes/osclass/gui/admin/settings-page.php');
+$declaredPageForm = (string) file_get_contents(
+    __DIR__ . '/../oc-includes/osclass/classes/admin/ui/SettingsForm.php'
+);
 check(
-    'the declared settings page still names admin_form_render_field as a filter',
-    strpos($declaredPageView, "osc_apply_filter('admin_form_render_field'") !== false,
+    'the declared settings form still names admin_form_render_field as a filter',
+    strpos($declaredPageForm, "osc_apply_filter('admin_form_render_field'") !== false,
     'the call site was removed, the hook renamed, or osc_apply_filter downgraded to osc_run_hook'
 );
 

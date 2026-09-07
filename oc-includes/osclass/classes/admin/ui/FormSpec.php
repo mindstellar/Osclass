@@ -22,12 +22,14 @@ use LogicException;
  * The array form stays fully supported. Anything the builder cannot express can be added
  * with field() or set(), so a page never has to drop back to a hand-written form.
  *
- * Three names that do not mean what a reader might assume:
+ * Four names that do not mean what a reader might assume:
  *   section()  sets the *preference section* the values are stored in -- the page-level
  *              'section' key. The visual sections of a page are groups: use group().
  *   default()  sets the field's 'default', the value used until something is saved.
  *   hint()     sets the field's 'help' text, because help() is taken by the page-level
  *              'help' key. A help() chained onto a field writes the page, not the field.
+ *   validate() sets the *field's* check. The page's own, over more than one field, is
+ *              onValidate().
  *
  * Modifiers apply to the field most recently added, so they read as a suffix on it:
  * ->text('s_name', $label)->required(). Calling one before any field is a programming
@@ -50,6 +52,7 @@ final class FormSpec
         'capability',
         'help',
         'intro',
+        'validate',
         'after_save',
     );
 
@@ -150,6 +153,18 @@ final class FormSpec
     public function intro(string $intro): self
     {
         return $this->setPage('intro', $intro);
+    }
+
+    /**
+     * The page's own rule over more than one field, run after every field has been checked
+     * and handed the row being saved. For a rule about one field, see validate(), which is
+     * the field modifier.
+     *
+     * @param mixed $callback callable(array $values, string $pageId, $id): string|string[]|null
+     */
+    public function onValidate($callback): self
+    {
+        return $this->setPage('validate', $callback);
     }
 
     /**

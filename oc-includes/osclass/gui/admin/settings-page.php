@@ -39,51 +39,6 @@ osc_current_admin_theme_path('parts/header.php'); ?>
         <p class="form-intro"><?php echo osc_esc_html($page['intro']); ?></p>
     <?php } ?>
 
-    <form action="<?php echo osc_esc_html(osc_admin_base_url(true)); ?>" method="post">
-        <input type="hidden" name="page" value="settings"/>
-        <input type="hidden" name="action" value="custom_post"/>
-        <input type="hidden" name="id" value="<?php echo osc_esc_html($page['id']); ?>"/>
-        <fieldset>
-            <div class="form-horizontal">
-                <?php foreach ($page['groups'] as $index => $group) {
-                    if ($group['title'] !== '') {
-                        osc_admin_page_head($group['title']);
-                    }
-                    if ($group['intro'] !== '') {
-                        echo '<p class="form-intro">' . osc_esc_html($group['intro']) . '</p>';
-                    }
-
-                    foreach ($group['fields'] as $field) {
-                        $name = $field['name'];
-                        if ($field['type'] === 'checkbox') {
-                            $field['row_label'] = $field['row_label'] ?? '';
-                            $field['checked']   = !empty($values[$name]);
-                        } else {
-                            $field['value'] = $values[$name] ?? '';
-                            // Resolved here, not inside the field: drawing a control must
-                            // not query anything, and render and store have to expand a
-                            // translated field over the same list.
-                            $locales = osc_settings_field_locales($field);
-                            if ($locales !== array()) {
-                                $field['locales'] = $locales;
-                            }
-                        }
-                        // A filter over the field spec: a listener can add a hint, retitle a
-                        // field or mark it readonly. It cannot suppress the control or put a
-                        // different one in its place -- the field below renders regardless.
-                        $filtered = osc_apply_filter('admin_form_render_field', $field, $page['id'], $values);
-                        $field    = is_array($filtered) ? $filtered : $field;
-                        osc_admin_field($field);
-                    }
-
-                    // A schema that cannot express something must not force a plugin back to
-                    // raw HTML for the whole page: this appends to a declared group without
-                    // owning the page it sits on.
-                    osc_run_hook('settings_page_after_group', $page['id'], $group, $index);
-                } ?>
-                <?php osc_admin_form_actions(); ?>
-            </div>
-        </fieldset>
-    </form>
+    <?php osc_admin_settings_form($page, array('values' => $values)); ?>
 </div>
 <?php osc_current_admin_theme_path('parts/footer.php'); ?>

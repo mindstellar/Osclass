@@ -236,11 +236,11 @@ msgstr ""
 msgid "%s's profile"
 msgstr ""
 
-#: oc-admin/themes/modern/users/ban_frm.php
+#: oc-includes/osclass/classes/admin/form/BanRuleForm.php
 msgid "(e.g. *@badsite.com, *@subdomain.badsite.com, *@*badsite.com)"
 msgstr ""
 
-#: oc-admin/themes/modern/users/ban_frm.php
+#: oc-includes/osclass/classes/admin/form/BanRuleForm.php
 msgid "(e.g. 192.168.10-20.*)"
 msgstr ""
 
@@ -548,7 +548,7 @@ msgstr ""
 msgid "Add new"
 msgstr ""
 
-#: oc-admin/themes/modern/users/ban_frm.php
+#: oc-includes/osclass/classes/admin/form/BanRuleForm.php
 msgid "Add new ban rule"
 msgstr ""
 
@@ -1298,9 +1298,13 @@ msgstr ""
 msgid "Balance now"
 msgstr ""
 
-#: oc-admin/themes/modern/users/ban_frm.php
+#: oc-includes/osclass/classes/admin/form/BanRuleForm.php
 #: oc-includes/osclass/classes/datatables/BanRulesDataTable.php
 msgid "Ban name / Reason"
+msgstr ""
+
+#: oc-includes/osclass/classes/admin/form/BanRuleForm.php
+msgid "Ban rule"
 msgstr ""
 
 #: oc-includes/osclass/classes/AdminMenu.php
@@ -2993,7 +2997,7 @@ msgstr ""
 msgid "E-mail admin whenever"
 msgstr ""
 
-#: oc-admin/themes/modern/users/ban_frm.php
+#: oc-includes/osclass/classes/admin/form/BanRuleForm.php
 #: oc-includes/osclass/classes/datatables/BanRulesDataTable.php
 msgid "E-mail rule"
 msgstr ""
@@ -3103,7 +3107,7 @@ msgstr ""
 msgid "Edit profile"
 msgstr ""
 
-#: oc-admin/themes/modern/users/ban_frm.php
+#: oc-includes/osclass/classes/admin/form/BanRuleForm.php
 msgid "Edit rule"
 msgstr ""
 
@@ -4000,7 +4004,7 @@ msgstr ""
 msgid "IP Address: %s"
 msgstr ""
 
-#: oc-admin/themes/modern/users/ban_frm.php
+#: oc-includes/osclass/classes/admin/form/BanRuleForm.php
 #: oc-includes/osclass/classes/datatables/BanRulesDataTable.php
 msgid "IP rule"
 msgstr ""
@@ -9142,7 +9146,7 @@ msgstr ""
 msgid "Update my profile"
 msgstr ""
 
-#: oc-admin/themes/modern/users/ban_frm.php
+#: oc-includes/osclass/classes/admin/form/BanRuleForm.php
 msgid "Update rule"
 msgstr ""
 

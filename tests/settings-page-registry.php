@@ -480,6 +480,27 @@ check('a well-formed page with after_save registers', register_error('x9', array
 check('its after_save is the very callable that was declared', osc_settings_page('x9')['after_save'] === $x9AfterSave);
 pin('a page that declared none has a null after_save', null, osc_settings_page('myplugin')['after_save']);
 
+harness_section('the page\'s own validate');
+// The rule spanning more than one field. Refused here rather than at save time: a page
+// whose cross-field rule is a typo registers cleanly and then never rejects anything,
+// which is the failure nobody sees until the bad row is already stored.
+check(
+    'a non-callable validate is refused',
+    register_error('x10', array('title' => 'X', 'fields' => array(array('name' => 'a')), 'validate' => 'not a function')) !== null
+);
+// The row being saved is the third argument, so a cross-field rule can say "that name is
+// taken, except on this row". Its position is pinned by tests/admin-ban-rule-form.php.
+$x11Validate = static function (array $values, string $pageId, $id) {
+    return null;
+};
+check('a well-formed page with validate registers', register_error('x11', array(
+    'title'    => 'X',
+    'fields'   => array(array('name' => 'a')),
+    'validate' => $x11Validate,
+)) === null);
+check('its validate is the very callable that was declared', osc_settings_page('x11')['validate'] === $x11Validate);
+pin('a page that declared none has a null validate', null, osc_settings_page('myplugin')['validate']);
+
 harness_section('two plugins claiming one id');
 // The first keeps it: replacing the page would take the other plugin's settings off the
 // menu and leave its saved values under a section nothing reads, both without a sound.

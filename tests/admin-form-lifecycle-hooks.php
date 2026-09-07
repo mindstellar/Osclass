@@ -157,6 +157,7 @@ function __($key, $domain = 'core')
 require_once ABS_PATH . 'oc-includes/osclass/helpers/hSettings.php';
 require_once ABS_PATH . 'oc-includes/osclass/classes/admin/ui/Field.php';
 require_once ABS_PATH . 'oc-includes/osclass/classes/admin/ui/Form.php';
+require_once ABS_PATH . 'oc-includes/osclass/classes/admin/ui/SettingsForm.php';
 require_once ABS_PATH . 'oc-includes/osclass/helpers/hAdminUi.php';
 
 /** Draw a declared page through the view core owns, and hand back the markup. */

@@ -885,11 +885,19 @@ check(
 );
 pin('the id it does carry names the page', 'rule', $spec['id']);
 
-$view = file_get_contents(ABS_PATH . 'oc-includes/osclass/gui/admin/settings-page.php');
+// Both halves of the drawing: the view, and the renderer it hands the page to. A scan of
+// the view alone stopped meaning anything the moment the form moved out of it.
+$drawing = '';
+foreach (array(
+    'oc-includes/osclass/gui/admin/settings-page.php',
+    'oc-includes/osclass/classes/admin/ui/SettingsForm.php',
+) as $rel) {
+    $drawing .= (string)file_get_contents(ABS_PATH . $rel);
+}
 check(
-    'and the view never reaches for the store spec at all',
-    preg_match('/\[\s*[\'"]store[\'"]\s*\]/', (string)$view) === 0,
-    'the view reads the store spec, which is one step from emitting the key it names'
+    'and nothing that draws the form reaches for the store spec at all',
+    preg_match('/\[\s*[\'"]store[\'"]\s*\]/', $drawing) === 0,
+    'the form is drawn from the store spec, which is one step from emitting the key it names'
 );
 
 exit(harness_result());
