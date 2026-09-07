@@ -1888,6 +1888,10 @@ msgstr ""
 msgid "That settings page is not available"
 msgstr ""
 
+#: oc-includes/osclass/classes/controller/admin/settings/CAdminSettingsCustom.php
+msgid "That settings page saves into a table, which needs a controller of its own"
+msgstr ""
+
 #: oc-includes/osclass/classes/controller/CWebBilling.php
 msgid "That upgrade is not available"
 msgstr ""

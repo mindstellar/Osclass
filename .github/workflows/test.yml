@@ -218,6 +218,23 @@ jobs:
       # so a new one is held to the same rule rather than being exempt for being new.
       - name: Locale cache invalidation
         run: php tests/locale-cache-invalidation.php
+      # The table store is the last step of a declared save, and every way it can be wrong
+      # is quiet: deciding insert-vs-update wrongly fills the table with copies of the row
+      # being edited, an update naming columns the page never declared erases the half of
+      # the entity that screen does not edit, and reading an unchanged update's zero
+      # affected rows as failure tells the admin their save did not work when it did --
+      # the bug CAdminSettingsKeywordBlock still carries a comment about. It also pins the
+      # two rules that keep a bound table from being everyone's: the row written is the one
+      # the caller named and never one the request carried, and a key is parsed rather than
+      # coerced, because (int) reads ' 12 ' and '12abc' as a real row number. And against a
+      # real table it pins the rule that a rejected submission writes no row and runs no
+      # after_save, which is what stops Permalinks rewriting .htaccess for a form that
+      # failed validation. It drives the generic controller rather than reading it, because
+      # a guard that is in the source and never taken is the same install as no guard, and
+      # it reads the shared view's rendered form rather than its source, because the key a
+      # hidden input would carry is interpolated and so never appears in the file.
+      - name: Admin form table store
+        run: php tests/admin-form-store.php
       # The admin field primitives are what a plugin builds a settings page from, so their
       # markup is a contract both ways: an unescaped value is stored XSS on an admin-only
       # page, and a dropped field-* class puts a number back to full width, breaking the

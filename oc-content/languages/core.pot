@@ -8189,6 +8189,18 @@ msgid "Thank you for using <a href=\"%s\" target=\"_blank\">Shopclass</a>"
 msgstr ""
 
 #: oc-includes/osclass/helpers/hSettings.php
+msgid "That could not be saved. Please check the values and try again."
+msgstr ""
+
+#: oc-includes/osclass/helpers/hSettings.php
+msgid "That form does not name a record that can be saved."
+msgstr ""
+
+#: oc-includes/osclass/helpers/hSettings.php
+msgid "That record no longer exists, so nothing was saved."
+msgstr ""
+
+#: oc-includes/osclass/helpers/hSettings.php
 msgid "That settings page is not registered."
 msgstr ""
 

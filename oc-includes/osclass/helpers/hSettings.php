@@ -8,6 +8,9 @@
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
+use mindstellar\admin\form\store\StoreException;
+use mindstellar\admin\form\store\StoreFactory;
+use mindstellar\database\DbException;
 use mindstellar\settings\SettingsPageRegistry;
 
 /**
@@ -137,15 +140,24 @@ if (!function_exists('osc_settings_value')) {
      * the stored string -- so a caller never has to remember what a preference column
      * holds.
      *
-     * @param string $pageId
-     * @param string $name
+     * A key that does not name a row reads as no row at all -- the declared default --
+     * because an unparseable id in a bookmarked URL has to draw the empty form rather
+     * than a white screen. The write path still refuses the same key outright, so
+     * nothing can be stored under it.
+     *
+     * @param string          $pageId
+     * @param string          $name
+     * @param int|string|null $id     the row to read, on a page bound to a table. A
+     *                                positive integer or nothing: anything else reads
+     *                                as no row rather than being coerced into one.
      *
      * @return mixed
      */
-    function osc_settings_value($pageId, $name)
+    function osc_settings_value($pageId, $name, $id = null)
     {
-        $page = osc_settings_page($pageId);
-        if ($page === null) {
+        $page  = osc_settings_page($pageId);
+        $store = $page === null ? null : StoreFactory::forPage($page);
+        if ($store === null) {
             return null;
         }
 
@@ -155,30 +167,11 @@ if (!function_exists('osc_settings_value')) {
             return null;
         }
 
-        $locales = osc_settings_field_locales($field);
-        if ($locales !== array()) {
-            // A translated field is not one value but one per locale, keyed by locale code,
-            // so a caller reads osc_settings_value(...)[$code] and never has to know how the
-            // preference key is spelled.
-            $values = array();
-            foreach ($locales as $code => $localeName) {
-                $stored        = Preference::newInstance()->get($name . $code, $page['section']);
-                $values[$code] = ($stored === null || $stored === '')
-                    ? (string)($field['default'] ?? '')
-                    : $stored;
-            }
-
-            return $values;
+        try {
+            return $store->value($name, $field, $id);
+        } catch (StoreException $e) {
+            return $store->value($name, $field, null);
         }
-
-        $stored = Preference::newInstance()->get($name, $page['section']);
-        if ($stored === null || $stored === '') {
-            // A checkbox saved as off stores '0', not '', so an empty read really is
-            // "never saved" and the declared default is the right answer.
-            return $field['default'] ?? ($field['type'] === 'checkbox' ? false : '');
-        }
-
-        return osc_settings_cast($field['type'], $stored);
     }
 }
 
@@ -209,18 +202,29 @@ if (!function_exists('osc_settings_values')) {
      * Every declared field on a page, keyed by name, resolved the same way
      * osc_settings_value() resolves one.
      *
-     * @param string $pageId
+     * A key the store cannot parse reads as no row, the same way osc_settings_value()
+     * resolves one.
+     *
+     * @param string          $pageId
+     * @param int|string|null $id     the row to read, on a page bound to a table
      *
      * @return array
      */
-    function osc_settings_values($pageId)
+    function osc_settings_values($pageId, $id = null)
     {
-        $values = array();
-        foreach (SettingsPageRegistry::instance()->fields($pageId) as $name => $field) {
-            $values[$name] = osc_settings_value($pageId, $name);
+        $page  = osc_settings_page($pageId);
+        $store = $page === null ? null : StoreFactory::forPage($page);
+        if ($store === null) {
+            return array();
         }
 
-        return $values;
+        $fields = SettingsPageRegistry::instance()->fields($pageId);
+
+        try {
+            return $store->load($fields, $id);
+        } catch (StoreException $e) {
+            return $store->load($fields, null);
+        }
     }
 }
 
@@ -505,18 +509,26 @@ if (!function_exists('osc_settings_save')) {
      * the page's own inline 'after_save' runs last -- so a page sees whatever a listener
      * already did rather than racing it.
      *
-     * @param string $pageId
+     * A page bound to a table saves the row its caller names and no other: the key is
+     * never read out of the submission, so a request naming somebody else's row is just a
+     * request with an unread field in it. No key inserts; a key that is not a positive
+     * integer, or names a row that is gone, is refused with an error rather than guessed
+     * at.
      *
-     * @return array array('errors' => string[], 'updated' => int, 'values' => array)
+     * @param string          $pageId
+     * @param int|string|null $id     the row to update on a page bound to a table, or
+     *                                null to insert one
+     *
+     * @return array array('errors' => string[], 'updated' => int, 'values' => array, 'id' => mixed)
      */
-    function osc_settings_save($pageId)
+    function osc_settings_save($pageId, $id = null)
     {
         $page = osc_settings_page($pageId);
         if ($page === null) {
             $errors = array(__('That settings page is not registered.'));
             osc_run_hook('admin_form_save_failed', $pageId, $errors, array());
 
-            return array('errors' => $errors, 'updated' => 0, 'values' => array());
+            return array('errors' => $errors, 'updated' => 0, 'values' => array(), 'id' => null);
         }
 
         $fields  = SettingsPageRegistry::instance()->fields($pageId);
@@ -586,7 +598,9 @@ if (!function_exists('osc_settings_save')) {
         if ($errors !== array()) {
             osc_run_hook('admin_form_save_failed', $pageId, $errors, $values);
 
-            return array('errors' => $errors, 'updated' => 0, 'values' => $values);
+            // Nothing was written, so there is no row to name: a rejected save is not half
+            // a save, and that holds for the key as much as for the values.
+            return array('errors' => $errors, 'updated' => 0, 'values' => $values, 'id' => null);
         }
 
         // A filter, not an action: deriving or normalising a value means handing it back,
@@ -594,48 +608,52 @@ if (!function_exists('osc_settings_save')) {
         $filtered = osc_apply_filter('admin_form_before_save', $values, $pageId);
         $values   = is_array($filtered) ? $filtered : $values;
 
-        // Walking the declared fields rather than $values is what keeps a before_save
-        // listener from writing a key the page never declared. A custom field stays
-        // uncollected here too: core did not read it, so it does not write one back.
-        $updated = 0;
-        foreach ($fields as $name => $field) {
-            if ($field['type'] === 'custom' || !array_key_exists($name, $values)) {
-                continue;
-            }
-            if (($locales[$name] ?? array()) !== array()) {
-                // Core writes only what it can read back: a before_save listener that
-                // replaced the per-locale array with a scalar has nothing to spread over
-                // the locales, and the bare name is a key this page never reads.
-                if (!is_array($values[$name])) {
-                    continue;
-                }
-                foreach ($locales[$name] as $code => $localeName) {
-                    $updated += (int)osc_set_preference(
-                        $name . $code,
-                        (string)($values[$name][$code] ?? ''),
-                        $page['section'],
-                        'STRING'
-                    );
-                }
-                continue;
-            }
-            $value = $values[$name];
-            if ($field['type'] === 'checkbox') {
-                $value = $value ? '1' : '0';
-            }
-            $updated += (int)osc_set_preference($name, (string)$value, $page['section'], 'STRING');
+        // The store is the only part of this that knows where the values go. It walks the
+        // declared fields rather than $values, which is what keeps a before_save listener
+        // from writing a key the page never declared.
+        $written = null;
+        $refused = null;
+        try {
+            $written = StoreFactory::forPage($page)->save($fields, $values, $locales, $id);
+        } catch (StoreException $e) {
+            $refused = $e->getCode() === StoreException::NO_ROW
+                ? __('That record no longer exists, so nothing was saved.')
+                : __('That form does not name a record that can be saved.');
+        } catch (DbException $e) {
+            // A declared column the table does not have, or a value it will not hold. The
+            // submission comes back on screen to be corrected rather than becoming an
+            // error page, and the wording is core's own: the driver's names schema.
+            $refused = __('That could not be saved. Please check the values and try again.');
+        }
+        if ($refused !== null) {
+            // A refused write is a rejected save: no effects, no key, and the values back
+            // on screen, exactly as a failed validation leaves them.
+            $errors = array($refused);
+            osc_run_hook('admin_form_save_failed', $pageId, $errors, $values);
+
+            return array('errors' => $errors, 'updated' => 0, 'values' => $values, 'id' => null);
         }
 
-        // No entity primary key exists until a table-backed store lands; a preference page
-        // passes null where a future model-backed page would pass the row it just wrote.
-        osc_run_hook('admin_form_after_save', $pageId, $values, null);
+        $savedId = $written['id'];
+
+        // The key of the row that was written: the new one on an insert, the existing one
+        // on an update, and null on a preference page, which has rows for nothing.
+        osc_run_hook('admin_form_after_save', $pageId, $values, $savedId);
         if (isset($page['after_save']) && is_callable($page['after_save'])) {
-            call_user_func($page['after_save'], $values, null);
+            call_user_func($page['after_save'], $values, $savedId);
         }
 
         osc_run_hook('settings_page_saved', $pageId, $values);
 
-        return array('errors' => array(), 'updated' => $updated, 'values' => $values);
+        // Zero here is an unchanged row and a success: the store throws when a write fails
+        // and refuses a key with no row behind it, so nothing else is left for the count
+        // to mean.
+        return array(
+            'errors'  => array(),
+            'updated' => (int)$written['updated'],
+            'values'  => $values,
+            'id'      => $savedId,
+        );
     }
 }
 

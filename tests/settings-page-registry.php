@@ -34,6 +34,10 @@ if (!defined('ABS_PATH')) {
 
 require_once __DIR__ . '/lib/harness.php';
 require_once ABS_PATH . 'oc-includes/osclass/classes/settings/SettingsPageRegistry.php';
+require_once ABS_PATH . 'oc-includes/osclass/classes/admin/form/store/Store.php';
+require_once ABS_PATH . 'oc-includes/osclass/classes/admin/form/store/PreferenceStore.php';
+require_once ABS_PATH . 'oc-includes/osclass/classes/admin/form/store/TableStore.php';
+require_once ABS_PATH . 'oc-includes/osclass/classes/admin/form/store/StoreFactory.php';
 
 use mindstellar\settings\SettingsPageRegistry;
 
@@ -285,6 +289,179 @@ check('a custom field may itself depend on something', register_error('x22', arr
     array('name' => 'b_on', 'type' => 'checkbox'),
     array('name' => 'widget', 'type' => 'custom', 'render' => static fn () => null, 'depends' => 'b_on'),
 ))) === null);
+
+harness_section('the store a page writes through');
+
+// The default is the compatibility claim: every page declared before the store existed
+// keeps writing preferences with no edit, so a page that names none must normalise to the
+// preference store rather than to nothing.
+pin(
+    'a page that names no store writes preferences',
+    array('type' => 'preference'),
+    osc_settings_page('myplugin')['store']
+);
+check('and naming it explicitly is accepted', register_error('s1', array(
+    'title'  => 'X',
+    'store'  => 'preference',
+    'fields' => array(array('name' => 'a')),
+)) === null);
+// A store nobody implements cannot fall back: silently treated as preferences the page
+// reports a clean save while the table it was bound to stays empty.
+$unknownStore = register_error('s2', array(
+    'title'  => 'X',
+    'store'  => 'model',
+    'fields' => array(array('name' => 'a')),
+));
+check('a store core does not have is refused', $unknownStore !== null);
+pin(
+    'and the message names the store that was asked for',
+    'SettingsPageRegistry: page "s2" store "model" is not a store core has',
+    $unknownStore
+);
+$shapelessStore = register_error('s3', array(
+    'title'  => 'X',
+    'store'  => 42,
+    'fields' => array(array('name' => 'a')),
+));
+check('a store that is neither a name nor a table spec is refused', $shapelessStore !== null);
+pin(
+    'and the message says what one looks like',
+    'SettingsPageRegistry: page "s3" store must be "preference" or an array naming a table and its pk',
+    $shapelessStore
+);
+// Without a key there is nothing to load a row by and nothing to update against, so every
+// save would insert a new row and the edit form would never find the one it edited.
+$noPk = register_error('s4', array(
+    'title'  => 'X',
+    'store'  => array('table' => 't_ban_rule'),
+    'fields' => array(array('name' => 'a')),
+));
+check('a table store with no pk is refused', $noPk !== null);
+pin('and the message names what is missing', 'SettingsPageRegistry: page "s4" store needs a pk', $noPk);
+$noTable = register_error('s5', array(
+    'title'  => 'X',
+    'store'  => array('pk' => 'pk_i_id'),
+    'fields' => array(array('name' => 'a')),
+));
+check('a table store with no table is refused', $noTable !== null);
+pin('and that one too', 'SettingsPageRegistry: page "s5" store needs a table', $noTable);
+// The table and the key are interpolated into SQL as identifiers, so they are held to the
+// same allowlist QueryBuilder applies -- refused here rather than at the first save.
+$badIdent = register_error('s6', array(
+    'title'  => 'X',
+    'store'  => array('table' => 't_ban rule', 'pk' => 'pk_i_id'),
+    'fields' => array(array('name' => 'a')),
+));
+check('a table name that is not an identifier is refused', $badIdent !== null);
+pin(
+    'and the message quotes it',
+    'SettingsPageRegistry: page "s6" store table "t_ban rule" is not an identifier',
+    $badIdent
+);
+check('a pk that is not an identifier is refused', register_error('s7', array(
+    'title'  => 'X',
+    'store'  => array('table' => 't_ban_rule', 'pk' => 'pk i id'),
+    'fields' => array(array('name' => 'a')),
+)) !== null);
+
+// A well-formed table page, and the shape everything downstream reads.
+check('a well-formed table page registers', register_error('s8', array(
+    'title'  => 'X',
+    'store'  => array('table' => 't_ban_rule', 'pk' => 'pk_i_id'),
+    'fields' => array(
+        array('name' => 's_name'),
+        array('name' => 'email', 'column' => 's_email'),
+    ),
+)) === null);
+pin(
+    'and normalises to the table and key it named',
+    array('type' => 'table', 'table' => 't_ban_rule', 'pk' => 'pk_i_id'),
+    osc_settings_page('s8')['store']
+);
+pin(
+    'a field that declares a column keeps it',
+    's_email',
+    SettingsPageRegistry::instance()->fields('s8')['email']['column'] ?? null
+);
+// A column on a preference page is a mapping nothing applies: the value lands under the
+// field name and the column the author meant is never written.
+$prefColumn = register_error('s9', array(
+    'title'  => 'X',
+    'fields' => array(array('name' => 'a', 'column' => 's_name')),
+));
+check('a column on a page that stores preferences is refused', $prefColumn !== null);
+pin(
+    'and the message says which store writes one',
+    'SettingsPageRegistry: page "s9" field "a" declares a column, which only a table store writes',
+    $prefColumn
+);
+check('a column that is not a string is refused', register_error('s10', array(
+    'title'  => 'X',
+    'store'  => array('table' => 't_ban_rule', 'pk' => 'pk_i_id'),
+    'fields' => array(array('name' => 'a', 'column' => true)),
+)) !== null);
+check('an empty column is refused', register_error('s11', array(
+    'title'  => 'X',
+    'store'  => array('table' => 't_ban_rule', 'pk' => 'pk_i_id'),
+    'fields' => array(array('name' => 'a', 'column' => '')),
+)) !== null);
+// A field mapped onto the primary key is the store overwriting the row it is addressing:
+// the update sets the key it is matching on, and the insert names a key nobody chose.
+$pkField = register_error('s12', array(
+    'title'  => 'X',
+    'store'  => array('table' => 't_ban_rule', 'pk' => 'pk_i_id'),
+    'fields' => array(array('name' => 'pk_i_id')),
+));
+check('a field mapped onto the primary key is refused', $pkField !== null);
+pin(
+    'and the message says what the key is for',
+    'SettingsPageRegistry: page "s12" field "pk_i_id" maps to "pk_i_id", '
+    . 'the primary key the store addresses the row by',
+    $pkField
+);
+check('and by an explicit column just the same', register_error('s13', array(
+    'title'  => 'X',
+    'store'  => array('table' => 't_ban_rule', 'pk' => 'pk_i_id'),
+    'fields' => array(array('name' => 'a', 'column' => 'pk_i_id')),
+)) !== null);
+// A field name is a column name on a table store, so it is held to the identifier
+// allowlist even when it declares no column of its own.
+check('a field name that is not an identifier is refused on a table store', register_error('s14', array(
+    'title'  => 'X',
+    'store'  => array('table' => 't_ban_rule', 'pk' => 'pk_i_id'),
+    'fields' => array(array('name' => 'a.b')),
+)) !== null);
+check('while a preference page may still name a field anything', register_error('s15', array(
+    'title'  => 'X',
+    'fields' => array(array('name' => 'a.b')),
+)) === null);
+// One column holds one value. A locale table is a design this store does not have yet, so
+// the flag is refused rather than writing 's_name' plus a locale code as a column name.
+$transTable = register_error('s16', array(
+    'title'  => 'X',
+    'store'  => array('table' => 't_ban_rule', 'pk' => 'pk_i_id'),
+    'fields' => array(array('name' => 's_name', 'type' => 'text', 'translate' => true)),
+));
+check('a translated field on a table store is refused', $transTable !== null);
+pin(
+    'and the message says why a column cannot hold it',
+    'SettingsPageRegistry: page "s16" field "s_name" cannot be translated on a table store: '
+    . 'a column holds one value, not one per locale',
+    $transTable
+);
+// A custom field has no column either way, so the table rules do not apply to it.
+check('a custom field on a table store needs no column', register_error('s17', array(
+    'title'  => 'X',
+    'store'  => array('table' => 't_ban_rule', 'pk' => 'pk_i_id'),
+    'fields' => array(
+        array('name' => 's_name'),
+        array('name' => 'widget.1', 'type' => 'custom', 'render' => static fn () => null),
+    ),
+)) === null);
+check(
+    'and none of the refused pages was registered',
+    osc_settings_page('s2') === null && osc_settings_page('s4') === null && osc_settings_page('s9') === null
+);
 
 harness_section('after_save');
 check(

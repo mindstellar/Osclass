@@ -44,6 +44,10 @@ if (!defined('OC_ADMIN')) {
 require_once __DIR__ . '/lib/harness.php';
 require_once ABS_PATH . 'oc-includes/osclass/helpers/hSanitize.php';
 require_once ABS_PATH . 'oc-includes/osclass/classes/settings/SettingsPageRegistry.php';
+require_once ABS_PATH . 'oc-includes/osclass/classes/admin/form/store/Store.php';
+require_once ABS_PATH . 'oc-includes/osclass/classes/admin/form/store/PreferenceStore.php';
+require_once ABS_PATH . 'oc-includes/osclass/classes/admin/form/store/TableStore.php';
+require_once ABS_PATH . 'oc-includes/osclass/classes/admin/form/store/StoreFactory.php';
 
 use mindstellar\settings\SettingsPageRegistry;
 
@@ -357,14 +361,14 @@ pin('the hook fires exactly once on success', 1, count($after));
 // Guarded so that a hook or callable which never ran fails this assertion and lets the rest
 // of the file run, rather than fataling on a missing offset and taking the tally with it.
 pin(
-    'with the id argument reserved for a future entity primary key',
+    'with a null id, because a preference page has no row to name one',
     null,
     isset($after[0]) && array_key_exists(2, $after[0][1]) ? $after[0][1][2] : 'missing'
 );
 pin('the inline after_save fires exactly once on success', 1, count($inlineCalls));
 pin('the inline after_save sees the saved values', 'Bob', $inlineCalls[0][0]['s_name'] ?? null);
 pin(
-    'the inline after_save sees the same reserved id',
+    'the inline after_save sees the same null id',
     null,
     isset($inlineCalls[0]) && array_key_exists(1, $inlineCalls[0]) ? $inlineCalls[0][1] : 'missing'
 );

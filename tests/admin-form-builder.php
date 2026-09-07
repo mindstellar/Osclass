@@ -40,6 +40,10 @@ if (!defined('ABS_PATH')) {
 
 require_once __DIR__ . '/lib/harness.php';
 require_once ABS_PATH . 'oc-includes/osclass/classes/settings/SettingsPageRegistry.php';
+require_once ABS_PATH . 'oc-includes/osclass/classes/admin/form/store/Store.php';
+require_once ABS_PATH . 'oc-includes/osclass/classes/admin/form/store/PreferenceStore.php';
+require_once ABS_PATH . 'oc-includes/osclass/classes/admin/form/store/TableStore.php';
+require_once ABS_PATH . 'oc-includes/osclass/classes/admin/form/store/StoreFactory.php';
 require_once ABS_PATH . 'oc-includes/osclass/classes/admin/ui/FormSpec.php';
 
 use mindstellar\admin\ui\FormSpec;
@@ -224,6 +228,7 @@ harness_section('every modifier writes the key the registry reads');
 $mods = array(
     'required'  => array(array(), array('required' => true)),
     'disabled'  => array(array(), array('disabled' => true)),
+    'column'    => array(array('s_email'), array('column' => 's_email')),
     'dependsOn' => array(array('b_enabled'), array('depends' => 'b_enabled')),
     'translate' => array(array(), array('translate' => true)),
     'default'   => array(array('7'), array('default' => '7')),
@@ -322,6 +327,7 @@ harness_section('no modifier escapes the key order or the cases above');
 $modifierKeys = array(
     'required'  => 'required',
     'disabled'  => 'disabled',
+    'column'    => 'column',
     'dependsOn' => 'depends',
     'translate' => 'translate',
     'default'   => 'default',
@@ -352,6 +358,7 @@ $notModifiers = array_merge(
         'menu',
         'menuTitle',
         'section',
+        'store',
         'capability',
         'help',
         'intro',
@@ -411,7 +418,7 @@ check(
     $notModifier === array(),
     'not a modifier: ' . implode(', ', $notModifier)
 );
-pin('so the count is the whole set, not a sample', 15, count($modifierKeys));
+pin('so the count is the whole set, not a sample', 16, count($modifierKeys));
 
 harness_section('page-level keys');
 
@@ -422,6 +429,7 @@ pin(
         'menu'       => 'tools',
         'menu_title' => 'Acme settings',
         'section'    => 'acme_prefs',
+        'store'      => array('table' => 't_ban_rule', 'pk' => 'pk_i_id'),
         'capability' => 'moderator',
         'help'       => 'What this page does.',
         'intro'      => 'Everything Acme does.',
@@ -433,6 +441,7 @@ pin(
         ->menu('tools')
         ->menuTitle('Acme settings')
         ->section('acme_prefs')
+        ->store('t_ban_rule', 'pk_i_id')
         ->capability('moderator')
         ->help('What this page does.')
         ->intro('Everything Acme does.')
@@ -456,6 +465,27 @@ pin(
     'a page with no fields still emits groups, so the registry is the one that refuses it',
     array('title' => 'Acme', 'groups' => array()),
     osc_admin_form('acme')->title('Acme')->toArray()
+);
+// store() is the page key that decides where a save lands. Emitted under the wrong key or
+// in the wrong shape it falls back to preferences, so the page reports a clean save while
+// the table it was bound to stays empty.
+pin(
+    'store() names a table and its key',
+    array(
+        'title'  => 'Ban rule',
+        'store'  => array('table' => 't_ban_rule', 'pk' => 'pk_i_id'),
+        'groups' => array(array('fields' => array(array('type' => 'text', 'name' => 's_name')))),
+    ),
+    osc_admin_form('banrule')->title('Ban rule')->store('t_ban_rule', 'pk_i_id')->text('s_name')->toArray()
+);
+pin(
+    'and the key defaults to the one every core table uses',
+    array('table' => 't_ban_rule', 'pk' => 'pk_i_id'),
+    osc_admin_form('banrule')->store('t_ban_rule')->toArray()['store']
+);
+check(
+    'a page declaring no store emits none, leaving the registry to supply the default',
+    !array_key_exists('store', osc_admin_form('acme')->title('Acme')->text('f')->toArray())
 );
 
 harness_section('groups');
@@ -621,6 +651,17 @@ pin(
     builder_error(osc_admin_form('bad-translate')->title('T')->checkbox('verbose')->translate())
 );
 pin(
+    'a column on a page that stores preferences, where nothing would apply it',
+    'SettingsPageRegistry: page "bad-column" field "f" declares a column, which only a table store writes',
+    builder_error(osc_admin_form('bad-column')->title('T')->text('f')->column('s_name'))
+);
+pin(
+    'a field mapped onto the key the store addresses the row by',
+    'SettingsPageRegistry: page "bad-pk" field "f" maps to "pk_i_id", '
+    . 'the primary key the store addresses the row by',
+    builder_error(osc_admin_form('bad-pk')->title('T')->store('t_ban_rule')->text('f')->column('pk_i_id'))
+);
+pin(
     'a non-callable after_save',
     'SettingsPageRegistry: page "bad-after" after_save must be callable',
     builder_error(osc_admin_form('bad-after')->title('T')->text('f')->onAfterSave('not_a_function_anywhere'))
@@ -693,5 +734,50 @@ pin('for the hand-written one too', 'round-hand', $hand['section']);
 unset($hand['id'], $hand['section'], $build['id'], $build['section']);
 pin('and everything else about the page is identical', $hand, $build);
 pin('a page asking for no menu keeps none', '', $build['menu']);
+
+harness_section('a table-backed page through both doors');
+
+$tableSpec = array(
+    'title'  => 'Ban rule',
+    'menu'   => '',
+    'store'  => array('table' => 't_ban_rule', 'pk' => 'pk_i_id'),
+    'fields' => array(
+        array('type' => 'text', 'name' => 's_name', 'label' => 'Name', 'required' => true),
+        array('type' => 'text', 'name' => 'email', 'column' => 's_email', 'label' => 'Email'),
+    ),
+);
+$tableHandError = register_error('table-hand', $tableSpec);
+check('the hand-written table page registers', $tableHandError === null, (string)$tableHandError);
+$tableBuiltError = builder_error(
+    osc_admin_form('table-built')
+        ->title('Ban rule')
+        ->menu('')
+        ->store('t_ban_rule', 'pk_i_id')
+        ->text('s_name', 'Name')->required()
+        ->text('email', 'Email')->column('s_email')
+);
+check('and so does the built one', $tableBuiltError === null, (string)$tableBuiltError);
+pin(
+    'the store normalises to a table and its key',
+    array('type' => 'table', 'table' => 't_ban_rule', 'pk' => 'pk_i_id'),
+    SettingsPageRegistry::instance()->get('table-built')['store']
+);
+pin(
+    'the column a field maps to survives the trip through the registry',
+    's_email',
+    SettingsPageRegistry::instance()->fields('table-built')['email']['column'] ?? null
+);
+pin(
+    'and both doors normalise to the same fields',
+    SettingsPageRegistry::instance()->fields('table-hand'),
+    SettingsPageRegistry::instance()->fields('table-built')
+);
+// The default is the whole compatibility claim: every page declared before the store
+// existed has to keep writing preferences without being edited.
+pin(
+    'a page that declared no store is still a preference page',
+    array('type' => 'preference'),
+    SettingsPageRegistry::instance()->get('round-built')['store']
+);
 
 exit(harness_result());

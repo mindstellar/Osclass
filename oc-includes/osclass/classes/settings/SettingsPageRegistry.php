@@ -12,6 +12,7 @@
 namespace mindstellar\settings;
 
 use InvalidArgumentException;
+use mindstellar\admin\form\store\TableStore;
 
 /**
  * Class SettingsPageRegistry
@@ -49,6 +50,9 @@ final class SettingsPageRegistry
         'checkbox',
         'custom',
     );
+
+    /** Anything used as a table, column or key name. Matches what QueryBuilder will accept. */
+    private const IDENTIFIER = '/^[A-Za-z0-9_]+$/';
 
     /** Core menu sections a page may ask to appear under. */
     public const MENUS = array(
@@ -96,6 +100,17 @@ final class SettingsPageRegistry
      *                             Defaults to the page id, which is what keeps one
      *                             plugin's keys out of core's 'osclass' section.
      *   'capability' => string    'administrator' (default) or 'moderator'.
+     *   'store'      => string|array Where the values live. 'preference' (the default)
+     *                             writes one preference per field under 'section'.
+     *                             array('table' => 't_ban_rule', 'pk' => 'pk_i_id') writes
+     *                             one row of that table -- unprefixed, core applies
+     *                             DB_TABLE_PREFIX. Rows are addressed by an integer key,
+     *                             and the key comes from the controller rather than from
+     *                             the request: no key inserts a row, and a key that is not
+     *                             a positive integer is refused. The generic settings
+     *                             controller therefore does not serve a table-backed page
+     *                             -- one needs a controller that supplies a row id it has
+     *                             validated for this admin.
      *   'help'       => string    Help-box body for the "?" beside the page title.
      *   'intro'      => string    Explanatory paragraph above the first group.
      *   'groups'     => array[]   array('title' =>, 'intro' =>, 'fields' => array[]).
@@ -118,6 +133,8 @@ final class SettingsPageRegistry
      *                           discarded rather than stored.
      *   'translate' => bool     text and textarea only: one control per enabled locale,
      *                           each stored under the field name plus the locale code.
+     *   'column'   => string    Table stores only: the column this field maps to, when it
+     *                           is not the field's own name.
      *
      * @param string $id   Namespaced slug, [a-z0-9_.-]{1,60}. Usually the plugin's own.
      * @param array  $spec Page specification (see above).
@@ -162,6 +179,8 @@ final class SettingsPageRegistry
             throw new InvalidArgumentException('SettingsPageRegistry: page "' . $id . '" after_save must be callable');
         }
 
+        $store = $this->normaliseStore($id, $spec['store'] ?? 'preference');
+
         $this->pages[$id] = array(
             'id'         => $id,
             'title'      => $spec['title'],
@@ -172,10 +191,11 @@ final class SettingsPageRegistry
             'section'    => isset($spec['section']) && is_string($spec['section']) && $spec['section'] !== ''
                 ? $spec['section']
                 : $id,
+            'store'      => $store,
             'capability' => ($spec['capability'] ?? '') === 'moderator' ? 'moderator' : 'administrator',
             'help'       => isset($spec['help']) && is_string($spec['help']) ? $spec['help'] : '',
             'intro'      => isset($spec['intro']) && is_string($spec['intro']) ? $spec['intro'] : '',
-            'groups'     => $this->normaliseGroups($id, $groups),
+            'groups'     => $this->normaliseGroups($id, $groups, $store),
             'after_save' => isset($spec['after_save']) && is_callable($spec['after_save']) ? $spec['after_save'] : null,
         );
     }
@@ -243,12 +263,99 @@ final class SettingsPageRegistry
     }
 
     /**
+     * Normalise the page's 'store' into array('type' => 'preference') or
+     * array('type' => 'table', 'table' =>, 'pk' =>).
+     *
+     * A store nobody implements has to be refused here: accepted, it would fall back to
+     * preferences and the page would look saved while its table stayed empty.
+     *
+     * @param mixed $store
+     *
+     * @throws InvalidArgumentException
+     */
+    private function normaliseStore(string $id, $store): array
+    {
+        $prefix = 'SettingsPageRegistry: page "' . $id . '" store ';
+
+        if (is_string($store)) {
+            if ($store !== 'preference') {
+                throw new InvalidArgumentException($prefix . '"' . $store . '" is not a store core has');
+            }
+
+            return array('type' => 'preference');
+        }
+        if (!is_array($store)) {
+            throw new InvalidArgumentException(
+                $prefix . 'must be "preference" or an array naming a table and its pk'
+            );
+        }
+
+        foreach (array('table', 'pk') as $key) {
+            if (!isset($store[$key]) || !is_string($store[$key]) || $store[$key] === '') {
+                throw new InvalidArgumentException($prefix . 'needs a ' . $key);
+            }
+            if (!preg_match(self::IDENTIFIER, $store[$key])) {
+                throw new InvalidArgumentException(
+                    $prefix . $key . ' "' . $store[$key] . '" is not an identifier'
+                );
+            }
+        }
+
+        return array('type' => 'table', 'table' => $store['table'], 'pk' => $store['pk']);
+    }
+
+    /**
+     * Hold one field against the store the page writes through.
+     *
+     * Every refusal here is something that registers cleanly and then goes wrong at save
+     * time: a 'column' on a preference page is a mapping nothing applies, a field mapped
+     * onto the primary key is the store overwriting the row it is addressing, and a
+     * translated field has one value per locale where a column holds one.
+     *
+     * @throws InvalidArgumentException
+     */
+    private function checkFieldStorage(string $id, array $field, string $type, array $store): void
+    {
+        $prefix = 'SettingsPageRegistry: page "' . $id . '" field "' . $field['name'] . '" ';
+        $table  = $store['type'] === 'table';
+
+        if (isset($field['column'])) {
+            if (!is_string($field['column']) || $field['column'] === '') {
+                throw new InvalidArgumentException($prefix . 'column must name a column');
+            }
+            if (!$table) {
+                throw new InvalidArgumentException(
+                    $prefix . 'declares a column, which only a table store writes'
+                );
+            }
+        }
+        if (!$table || $type === 'custom') {
+            return;
+        }
+
+        $column = TableStore::column($field['name'], $field);
+        if (!preg_match(self::IDENTIFIER, $column)) {
+            throw new InvalidArgumentException($prefix . 'maps to "' . $column . '", which is not an identifier');
+        }
+        if ($column === $store['pk']) {
+            throw new InvalidArgumentException(
+                $prefix . 'maps to "' . $column . '", the primary key the store addresses the row by'
+            );
+        }
+        if (!empty($field['translate'])) {
+            throw new InvalidArgumentException(
+                $prefix . 'cannot be translated on a table store: a column holds one value, not one per locale'
+            );
+        }
+    }
+
+    /**
      * Check the shape of every group and field up front, so a typo in a spec is an
      * exception at registration time rather than a silently missing field on a page.
      *
      * @throws InvalidArgumentException
      */
-    private function normaliseGroups(string $id, array $groups): array
+    private function normaliseGroups(string $id, array $groups, array $store): array
     {
         $out     = array();
         $seen    = array();
@@ -303,6 +410,7 @@ final class SettingsPageRegistry
                         . '" cannot be translated: only text and textarea expand over locales'
                     );
                 }
+                $this->checkFieldStorage($id, $field, $type, $store);
                 if (isset($field['depends'])) {
                     if (!is_string($field['depends']) || $field['depends'] === '') {
                         throw new InvalidArgumentException(

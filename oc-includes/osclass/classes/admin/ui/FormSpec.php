@@ -46,6 +46,7 @@ final class FormSpec
         'menu',
         'menu_title',
         'section',
+        'store',
         'capability',
         'help',
         'intro',
@@ -56,6 +57,7 @@ final class FormSpec
     private const FIELD_KEY_ORDER = array(
         'type',
         'name',
+        'column',
         'label',
         'help',
         'default',
@@ -122,6 +124,16 @@ final class FormSpec
     public function section(string $section): self
     {
         return $this->setPage('section', $section);
+    }
+
+    /**
+     * Bind the page to one row of a table instead of to preferences. The name is
+     * unprefixed -- core applies DB_TABLE_PREFIX -- and the save inserts when no key is
+     * submitted and updates when one is.
+     */
+    public function store(string $table, string $pk = 'pk_i_id'): self
+    {
+        return $this->setPage('store', array('table' => $table, 'pk' => $pk));
     }
 
     public function capability(string $capability): self
@@ -307,6 +319,12 @@ final class FormSpec
     public function dependsOn(string $master): self
     {
         return $this->set('depends', $master);
+    }
+
+    /** The column this field maps to, when it is not the field's own name. Table stores only. */
+    public function column(string $column): self
+    {
+        return $this->set('column', $column);
     }
 
     /** One control per enabled locale, each stored under its own key. text and textarea only. */

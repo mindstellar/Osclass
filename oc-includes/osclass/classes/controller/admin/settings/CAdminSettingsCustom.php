@@ -13,6 +13,8 @@ if (!defined('ABS_PATH')) {
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
+use mindstellar\admin\form\store\StoreFactory;
+
 /**
  * Class CAdminSettingsCustom
  *
@@ -48,6 +50,20 @@ class CAdminSettingsCustom extends AdminSecBaseModel
         if ($page['capability'] === 'administrator' && $this->isModerator()) {
             osc_add_flash_error_message(_m("You don't have enough permissions"), 'admin');
             $this->redirectTo(osc_admin_base_url());
+
+            return;
+        }
+
+        // A table-backed page edits one row, and nothing here knows which: taking the key
+        // out of the request would let anyone who can reach this page name somebody else's
+        // row, and taking none at all inserts a copy on every save. Until a controller that
+        // owns its row drives them, these pages are declared but not served.
+        if (StoreFactory::isTable($page)) {
+            osc_add_flash_error_message(
+                _m('That settings page saves into a table, which needs a controller of its own'),
+                'admin'
+            );
+            $this->redirectTo(osc_admin_base_url(true) . '?page=settings');
 
             return;
         }
