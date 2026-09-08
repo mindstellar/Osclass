@@ -650,6 +650,97 @@ pin('no key comes back', null, $result['id']);
 pin('no effect runs on a write that failed', array(), effects());
 pin('and the submitted values come back for the re-render', 'Alice', $result['values']['s_name'] ?? null);
 
+harness_section('a refused write is a rejected save, and it carries no secret');
+
+// admin_form_save_failed has two call sites and they are not the same code path. The one
+// reached from a failed validation is pinned in tests/admin-form-lifecycle-hooks.php; this
+// is the other one, reached when the row is gone or the table refuses the statement. The
+// password was typed on that attempt exactly as it was on the one that saved, so a listener
+// counting failures would be recording it here too.
+$GLOBALS['failedPayloads'] = array();
+osc_add_hook('admin_form_save_failed', static function ($pageId, $errors, $values) {
+    $GLOBALS['failedPayloads'][] = $values;
+});
+
+// The shape a re-authentication box has: a secret that is no column at all.
+$secretField = array(
+    'type'       => 'secret',
+    'name'       => 'old_password',
+    'label'      => 'Your current password',
+    'persist'    => false,
+    'write_only' => true,
+);
+SettingsPageRegistry::instance()->register('brokensecret', array(
+    'title'  => 'Broken, with a secret',
+    'menu'   => '',
+    'store'  => array('table' => 't_ban_rule', 'pk' => 'pk_i_id'),
+    'fields' => array(
+        array('type' => 'text', 'name' => 's_name', 'column' => 's_not_a_column', 'label' => 'Name'),
+        $secretField,
+    ),
+));
+SettingsPageRegistry::instance()->register('gonesecret', array(
+    'title'  => 'Gone, with a secret',
+    'menu'   => '',
+    'store'  => array('table' => 't_ban_rule', 'pk' => 'pk_i_id'),
+    'fields' => array(
+        array('type' => 'text', 'name' => 's_name', 'label' => 'Name'),
+        $secretField,
+    ),
+));
+
+// Both ways a write is refused, so neither branch can be the one that leaks.
+$refusals = array(
+    'a column the table does not have' => array('brokensecret', null),
+    'a key whose row is gone'          => array('gonesecret', $deleted),
+);
+foreach ($refusals as $what => $case) {
+    $GLOBALS['failedPayloads'] = array();
+    $result = post($case[0], array('s_name' => 'Alice', 'old_password' => 'hunter2'), $case[1]);
+    pin('the write is refused for ' . $what, 1, count($result['errors']));
+    pin('and admin_form_save_failed fired once for ' . $what, 1, count($GLOBALS['failedPayloads']));
+    $payload = $GLOBALS['failedPayloads'][0] ?? array();
+    check(
+        'carrying no secret for ' . $what,
+        is_array($payload) && !array_key_exists('old_password', $payload),
+        implode(', ', array_keys(is_array($payload) ? $payload : array()))
+    );
+    pin('while the field beside it is there for ' . $what, 'Alice', $payload['s_name'] ?? null);
+    // The caller declared the field, so it still has it: withholding is about the hooks.
+    pin('and the caller still sees it for ' . $what, 'hunter2', $result['values']['old_password'] ?? null);
+}
+
+harness_section('a before_save listener cannot write a column the page never declared');
+
+// The store walks the declaration and not the submission, which is the other half of
+// narrowing what the filter hands back: with either one gone, a listener on any page could
+// write any column of the bound table. Neither is observable on its own, so the assertion
+// below is what says the pair of them still holds.
+$injectTarget = post('rule', array('s_name' => 'Declared', 's_ip' => '10.0.0.20'))['id'];
+$admin->query(
+    'UPDATE ' . DB_TABLE_PREFIX . "t_ban_rule SET s_email = 'notyours@example.test' WHERE pk_i_id = "
+    . (int)$injectTarget
+);
+$inject = static function ($values, $pageId) {
+    // s_email is a real column of t_ban_rule that the 'rule' page does not declare.
+    $values['s_email'] = 'injected@example.test';
+
+    return $values;
+};
+osc_add_filter('admin_form_before_save', $inject);
+$result = post('rule', array('s_name' => 'Declared again', 's_ip' => '10.0.0.21'), $injectTarget);
+osc_remove_filter('admin_form_before_save', $inject);
+pin('the save itself is clean', array(), $result['errors']);
+$stored = row($admin, 't_ban_rule', (int)$injectTarget);
+pin('the declared columns take the submission', 'Declared again', $stored['s_name'] ?? null);
+pin('all of them', '10.0.0.21', $stored['s_ip'] ?? null);
+pin('and the column the listener named is untouched', 'notyours@example.test', $stored['s_email'] ?? null);
+check(
+    'the key it invented does not come back to the caller either',
+    !array_key_exists('s_email', $result['values']),
+    implode(', ', array_keys($result['values']))
+);
+
 harness_section('a field core did not collect keeps its column');
 
 // The subtler half of "only declared columns are written": a field core never read has no
@@ -728,6 +819,138 @@ $result = post('nothing', array('s_name' => 'Blanked'));
 pin('with no key there is nothing to insert', $before, rows($admin, 't_ban_rule'));
 pin('so no key comes back', null, $result['id']);
 pin('and it is still not an error', array(), $result['errors']);
+
+harness_section('a field says what its column takes, or that it has none');
+
+// Two shapes of the same key. 'persist' => false is a control that is not a column at all
+// -- a confirmation box, a re-authentication box -- collected and validated like any other
+// and written nowhere; a callable derives what the column takes, and null from it writes
+// nothing, which is how "blank means unchanged" is declared rather than special-cased.
+// It says nothing about what the control shows on the way back; that is 'write_only',
+// its own key, checked below.
+SettingsPageRegistry::instance()->register('derived', array(
+    'title'  => 'Derived columns',
+    'menu'   => '',
+    'store'  => array('table' => 't_ban_rule', 'pk' => 'pk_i_id'),
+    'fields' => array(
+        array(
+            'type'    => 'text',
+            'name'    => 's_name',
+            'label'   => 'Name',
+            'persist' => static fn ($value) => $value === '' ? null : 'derived:' . $value,
+        ),
+        array('type' => 'text', 'name' => 's_ip', 'label' => 'IP'),
+        // Named after a real column on purpose: that is the only way to tell "not written"
+        // from "written as nothing".
+        array('type' => 'text', 'name' => 's_email', 'label' => 'Confirm', 'persist' => false),
+    ),
+));
+
+$derived = seed_exec(
+    $admin,
+    'INSERT INTO ' . DB_TABLE_PREFIX . 't_ban_rule (s_name, s_ip, s_email) VALUES (?, ?, ?)',
+    'sss',
+    array('Before', '10.4.0.1', 'before@example.test')
+);
+$before = rows($admin, 't_ban_rule');
+$result = post('derived', array(
+    's_name'  => 'typed',
+    's_ip'    => '10.4.0.2',
+    's_email' => 'attacker@example.test',
+), $derived);
+pin('the save is clean', array(), $result['errors']);
+$stored = row($admin, 't_ban_rule', $derived);
+pin('the column takes what the callable made of the value', 'derived:typed', $stored['s_name'] ?? null);
+pin('an ordinary field still takes the value itself', '10.4.0.2', $stored['s_ip'] ?? null);
+pin('and the column a persist-false field is named after is untouched', 'before@example.test', $stored['s_email'] ?? null);
+pin('no row was inserted', $before, rows($admin, 't_ban_rule'));
+
+// null from the callable is "leave this column alone", the whole reason a blank password
+// box can mean "unchanged" without the store knowing what a password is.
+$result = post('derived', array('s_name' => '', 's_ip' => '10.4.0.3', 's_email' => ''), $derived);
+pin('a callable returning null is not an error', array(), $result['errors']);
+$stored = row($admin, 't_ban_rule', $derived);
+pin('its column keeps exactly what it held', 'derived:typed', $stored['s_name'] ?? null);
+pin('while the field beside it still saves', '10.4.0.3', $stored['s_ip'] ?? null);
+
+// persist is not readback. Riding both on one key blanked a column nobody had been shown:
+// a field deriving its column drew empty, the admin saved the form as it stood, and the
+// column went with it. So a derived field still reads its column unless it says otherwise.
+$values = osc_settings_values('derived', $derived);
+pin('a derived field still reads its column back', 'derived:typed', $values['s_name'] ?? null);
+pin('an ordinary field does too', '10.4.0.3', $values['s_ip'] ?? null);
+// A field that is no column has none to read: it is named after a real one here on
+// purpose, and reading that would be showing a column belonging to something else.
+pin('and a field that is no column reads its default', '', $values['s_email'] ?? null);
+
+harness_section('write_only is the other half, and it is its own key');
+
+SettingsPageRegistry::instance()->register('writeonly', array(
+    'title'  => 'Write-only columns',
+    'menu'   => '',
+    'store'  => array('table' => 't_ban_rule', 'pk' => 'pk_i_id'),
+    'fields' => array(
+        array(
+            'type'       => 'text',
+            'name'       => 's_name',
+            'label'      => 'Name',
+            'persist'    => static fn ($value) => $value === '' ? null : 'derived:' . $value,
+            'write_only' => true,
+        ),
+        array('type' => 'text', 'name' => 's_ip', 'label' => 'IP', 'write_only' => true, 'default' => 'n/a'),
+        array('type' => 'text', 'name' => 's_email', 'label' => 'Email'),
+    ),
+));
+
+$result = post('writeonly', array(
+    's_name'  => 'typed',
+    's_ip'    => '10.4.0.9',
+    's_email' => 'shown@example.test',
+), $derived);
+pin('a write-only field is still collected and written', array(), $result['errors']);
+$stored = row($admin, 't_ban_rule', $derived);
+pin('its column takes what it derived', 'derived:typed', $stored['s_name'] ?? null);
+pin('and one with no persist takes the value itself', '10.4.0.9', $stored['s_ip'] ?? null);
+
+$values = osc_settings_values('writeonly', $derived);
+pin('but the control shows the declared default instead of the column', '', $values['s_name'] ?? null);
+pin('the default, not the empty string, when one is declared', 'n/a', $values['s_ip'] ?? null);
+pin('while the field that is not write-only shows what is stored', 'shown@example.test', $values['s_email'] ?? null);
+pin('and one field at a time reads the same way', '', osc_settings_value('writeonly', 's_name', $derived));
+
+// The same key on the preference store: a stored API key is as good a reason not to redraw
+// a value as a column holding a hash, so it is not a table-store-only idea.
+SettingsPageRegistry::instance()->register('writeonlypref', array(
+    'title'  => 'Write-only preferences',
+    'menu'   => '',
+    'fields' => array(
+        array('type' => 'text', 'name' => 'p_shown', 'label' => 'Shown'),
+        array('type' => 'text', 'name' => 'p_hidden', 'label' => 'Hidden', 'write_only' => true, 'default' => 'x'),
+    ),
+));
+$result = post('writeonlypref', array('p_shown' => 'a', 'p_hidden' => 'b'));
+pin('the preference save is clean', array(), $result['errors']);
+pin('the write-only preference is written', 'b', osc_get_preference('p_hidden', 'writeonlypref'));
+$values = osc_settings_values('writeonlypref');
+pin('and read back as its default', 'x', $values['p_hidden'] ?? null);
+pin('while its neighbour reads what was stored', 'a', $values['p_shown'] ?? null);
+
+// The validation pipeline still runs over both: they are refused, re-rendered and reported
+// exactly like a column-backed field, which is what makes a confirmation box declarable.
+SettingsPageRegistry::instance()->register('derivedreq', array(
+    'title'  => 'Derived and required',
+    'menu'   => '',
+    'store'  => array('table' => 't_ban_rule', 'pk' => 'pk_i_id'),
+    'fields' => array(
+        array('type' => 'text', 'name' => 's_name', 'label' => 'Name'),
+        array('type' => 'text', 'name' => 's_email', 'label' => 'Confirm', 'persist' => false, 'required' => true),
+    ),
+));
+$kept   = row($admin, 't_ban_rule', $derived);
+$result = post('derivedreq', array('s_name' => 'Rejected', 's_email' => ''), $derived);
+pin('a field that is no column is still required when it says so', array('Confirm cannot be left empty'), $result['errors']);
+pin('and the row is untouched, byte for byte', $kept, row($admin, 't_ban_rule', $derived));
+pin('while its value still comes back to be corrected', '', $result['values']['s_email'] ?? null);
 
 harness_section('a dependent field on a table store is left alone, not blanked');
 

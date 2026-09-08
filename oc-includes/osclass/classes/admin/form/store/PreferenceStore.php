@@ -20,6 +20,9 @@ use Preference;
  * store interface unchanged. A page that declares no store gets it, so nothing already
  * registered has to be edited.
  *
+ * A field declaring 'write_only' is written and never read back, so what the control shows
+ * is its declared default rather than the stored value.
+ *
  * @package mindstellar\admin\form\store
  */
 final class PreferenceStore implements Store
@@ -36,6 +39,12 @@ final class PreferenceStore implements Store
      */
     public function value(string $name, array $field, $id = null)
     {
+        if (!empty($field['write_only'])) {
+            // The preference is not read at all, so a stored secret cannot reach the page
+            // even by accident. It is still written on save.
+            return $field['default'] ?? (($field['type'] ?? 'text') === 'checkbox' ? false : '');
+        }
+
         $locales = osc_settings_field_locales($field);
         if ($locales !== array()) {
             // A translated field is not one value but one per locale, keyed by locale code,

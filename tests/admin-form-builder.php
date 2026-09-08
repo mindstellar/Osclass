@@ -230,6 +230,8 @@ $mods = array(
     'required'  => array(array(), array('required' => true)),
     'disabled'  => array(array(), array('disabled' => true)),
     'column'    => array(array('s_email'), array('column' => 's_email')),
+    'persist'   => array(array(false), array('persist' => false)),
+    'writeOnly' => array(array(), array('write_only' => true)),
     'dependsOn' => array(array('b_enabled'), array('depends' => 'b_enabled')),
     'translate' => array(array(), array('translate' => true)),
     'purify'    => array(array(), array('purify' => false)),
@@ -330,6 +332,8 @@ $modifierKeys = array(
     'required'  => 'required',
     'disabled'  => 'disabled',
     'column'    => 'column',
+    'persist'   => 'persist',
+    'writeOnly' => 'write_only',
     'dependsOn' => 'depends',
     'translate' => 'translate',
     'purify'    => 'purify',
@@ -422,7 +426,34 @@ check(
     $notModifier === array(),
     'not a modifier: ' . implode(', ', $notModifier)
 );
-pin('so the count is the whole set, not a sample', 17, count($modifierKeys));
+pin('so the count is the whole set, not a sample', 19, count($modifierKeys));
+
+// The other half of persist(): false says "no column", and a callable says what the column
+// takes. Both are one key, so the case above only covers one of them.
+$deriver = static fn ($value) => strtoupper((string)$value);
+pin(
+    'persist() also takes the callable that derives the column value',
+    array('groups' => array(array('fields' => array(
+        array('type' => 'text', 'name' => 'f', 'persist' => $deriver),
+    )))),
+    osc_admin_form('t')->text('f')->persist($deriver)->toArray()
+);
+// The two are separate keys, and in that order: what the column takes is not what the
+// control shows, and one chain writing both must not collapse them into one.
+pin(
+    'persist() and writeOnly() write their own keys, in FIELD_KEY_ORDER',
+    array('groups' => array(array('fields' => array(
+        array('type' => 'secret', 'name' => 'f', 'persist' => $deriver, 'write_only' => true),
+    )))),
+    osc_admin_form('t')->secret('f')->persist($deriver)->writeOnly()->toArray()
+);
+pin(
+    'and writeOnly(false) is a field that says it reads back',
+    array('groups' => array(array('fields' => array(
+        array('type' => 'secret', 'name' => 'f', 'write_only' => false),
+    )))),
+    osc_admin_form('t')->secret('f')->writeOnly(false)->toArray()
+);
 
 harness_section('page-level keys');
 
@@ -549,7 +580,8 @@ $handSpec = array(
             'title'  => 'Connection',
             'intro'  => 'Where to talk to.',
             'fields' => array(
-                array('type' => 'secret', 'name' => 'api_key', 'label' => 'API key', 'required' => true),
+                array('type' => 'secret', 'name' => 'api_key', 'write_only' => false, 'label' => 'API key',
+                      'required' => true),
                 array('type' => 'url', 'name' => 'endpoint', 'label' => 'Endpoint', 'default' => 'https://example.test'),
                 array('type' => 'number', 'name' => 'batch', 'label' => 'Batch', 'suffix' => 'items', 'width' => 'num'),
             ),
@@ -581,7 +613,7 @@ $built = osc_admin_form('myplugin-built')
     ->intro('Intro.')
     ->onAfterSave($afterSave)
     ->group('Connection', 'Where to talk to.')
-    ->secret('api_key', 'API key')->required()
+    ->secret('api_key', 'API key')->writeOnly(false)->required()
     ->url('endpoint', 'Endpoint')->default('https://example.test')
     ->number('batch', 'Batch')->suffix('items')->width('num')
     ->group('Behaviour')

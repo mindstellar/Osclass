@@ -476,11 +476,11 @@ msgstr ""
 msgid "Activity log"
 msgstr ""
 
-#: oc-admin/themes/modern/admins/frm.php
 #: oc-admin/themes/modern/comments/frm.php
 #: oc-admin/themes/modern/settings/currencies.php
 #: oc-admin/themes/modern/settings/currency_form.php
 #: oc-admin/themes/modern/users/index.php
+#: oc-includes/osclass/classes/admin/form/AdminAccountForm.php
 msgid "Add"
 msgstr ""
 
@@ -500,8 +500,8 @@ msgid ""
 "listings."
 msgstr ""
 
-#: oc-admin/themes/modern/admins/frm.php
 #: oc-admin/themes/modern/admins/index.php
+#: oc-includes/osclass/classes/admin/form/AdminAccountForm.php
 msgid "Add admin"
 msgstr ""
 
@@ -701,11 +701,15 @@ msgstr ""
 msgid "Admin sections"
 msgstr ""
 
-#: oc-admin/themes/modern/admins/frm.php
+#: oc-includes/osclass/classes/admin/form/AdminAccountForm.php
+msgid "Admin type"
+msgstr ""
+
+#: oc-includes/osclass/classes/admin/form/AdminAccountForm.php
 msgid "Admin type <em>(required)</em>"
 msgstr ""
 
-#: oc-admin/themes/modern/admins/frm.php
+#: oc-includes/osclass/classes/admin/form/AdminAccountForm.php
 msgid "Administrator"
 msgstr ""
 
@@ -713,7 +717,7 @@ msgstr ""
 msgid "Administrators"
 msgstr ""
 
-#: oc-admin/themes/modern/admins/frm.php
+#: oc-includes/osclass/classes/admin/form/AdminAccountForm.php
 msgid "Administrators have total control over all aspects of your installation, "
 msgstr ""
 
@@ -1531,7 +1535,6 @@ msgstr ""
 msgid "Can't write in config.php file. Check if the file is writable."
 msgstr ""
 
-#: oc-admin/themes/modern/admins/frm.php
 #: oc-admin/themes/modern/appearance/page-block-form.php
 #: oc-admin/themes/modern/billing/order.php
 #: oc-admin/themes/modern/billing/packages.php
@@ -1555,6 +1558,7 @@ msgstr ""
 #: oc-admin/themes/modern/settings/media.php
 #: oc-admin/themes/modern/users/ban.php
 #: oc-admin/themes/modern/users/frm.php
+#: oc-includes/osclass/classes/admin/form/AdminAccountForm.php
 msgid "Cancel"
 msgstr ""
 
@@ -2110,7 +2114,7 @@ msgstr ""
 msgid "Configured through the OSC_CACHE constant."
 msgstr ""
 
-#: oc-admin/themes/modern/admins/frm.php
+#: oc-includes/osclass/classes/admin/form/AdminAccountForm.php
 msgid "Confirm new password"
 msgstr ""
 
@@ -2984,12 +2988,13 @@ msgstr ""
 #: oc-admin/themes/modern/admins/index.php
 #: oc-admin/themes/modern/items/frm.php
 #: oc-admin/themes/modern/users/frm.php
+#: oc-includes/osclass/classes/admin/form/AdminAccountForm.php
 #: oc-includes/osclass/classes/datatables/AlertsDataTable.php
 #: oc-includes/osclass/classes/datatables/UsersDataTable.php
 msgid "E-mail"
 msgstr ""
 
-#: oc-admin/themes/modern/admins/frm.php
+#: oc-includes/osclass/classes/admin/form/AdminAccountForm.php
 msgid "E-mail <em>(required)</em>"
 msgstr ""
 
@@ -3050,7 +3055,7 @@ msgstr ""
 msgid "Edit %s"
 msgstr ""
 
-#: oc-admin/themes/modern/admins/frm.php
+#: oc-includes/osclass/classes/admin/form/AdminAccountForm.php
 msgid "Edit admin"
 msgstr ""
 
@@ -3592,7 +3597,7 @@ msgstr ""
 msgid "For sale"
 msgstr ""
 
-#: oc-admin/themes/modern/admins/frm.php
+#: oc-includes/osclass/classes/admin/form/AdminAccountForm.php
 msgid "For security, type <b>your current password</b>"
 msgstr ""
 
@@ -5372,7 +5377,7 @@ msgstr ""
 msgid "Moderation"
 msgstr ""
 
-#: oc-admin/themes/modern/admins/frm.php
+#: oc-includes/osclass/classes/admin/form/AdminAccountForm.php
 msgid "Moderator"
 msgstr ""
 
@@ -5511,6 +5516,7 @@ msgstr ""
 #: oc-admin/themes/modern/stats/users.php
 #: oc-admin/themes/modern/users/frm.php
 #: oc-admin/themes/modern/users/index.php
+#: oc-includes/osclass/classes/admin/form/AdminAccountForm.php
 #: oc-includes/osclass/classes/datatables/UsersDataTable.php
 #: oc-includes/osclass/classes/form/CategoryForm.php
 #: oc-includes/osclass/classes/form/FieldForm.php
@@ -5525,7 +5531,7 @@ msgstr ""
 msgid "Name (Z–A)"
 msgstr ""
 
-#: oc-admin/themes/modern/admins/frm.php
+#: oc-includes/osclass/classes/admin/form/AdminAccountForm.php
 msgid "Name <em>(required)</em>"
 msgstr ""
 
@@ -5633,8 +5639,8 @@ msgid "New listings/users"
 msgstr ""
 
 #: oc-admin/gui/forgot_password.php
-#: oc-admin/themes/modern/admins/frm.php
 #: oc-admin/themes/modern/users/frm.php
+#: oc-includes/osclass/classes/admin/form/AdminAccountForm.php
 msgid "New password"
 msgstr ""
 
@@ -7206,8 +7212,8 @@ msgstr ""
 msgid "Saturday"
 msgstr ""
 
-#: oc-admin/themes/modern/admins/frm.php
 #: oc-admin/themes/modern/settings/locations.php
+#: oc-includes/osclass/classes/admin/form/AdminAccountForm.php
 msgid "Save"
 msgstr ""
 
@@ -8994,8 +9000,8 @@ msgstr ""
 msgid "Type your new password"
 msgstr ""
 
-#: oc-admin/themes/modern/admins/frm.php
 #: oc-admin/themes/modern/users/frm.php
+#: oc-includes/osclass/classes/admin/form/AdminAccountForm.php
 msgid "Type your new password again"
 msgstr ""
 
@@ -9477,6 +9483,7 @@ msgstr ""
 #: oc-admin/themes/modern/settings/mailserver.php
 #: oc-admin/themes/modern/users/frm.php
 #: oc-admin/themes/modern/users/index.php
+#: oc-includes/osclass/classes/admin/form/AdminAccountForm.php
 #: oc-includes/osclass/classes/datatables/UsersDataTable.php
 #: oc-includes/osclass/installer/gui/install-database.php
 #: oc-includes/osclass/installer/gui/install-finish.php
@@ -9484,7 +9491,7 @@ msgstr ""
 msgid "Username"
 msgstr ""
 
-#: oc-admin/themes/modern/admins/frm.php
+#: oc-includes/osclass/classes/admin/form/AdminAccountForm.php
 msgid "Username <em>(required)</em>"
 msgstr ""
 
@@ -9958,7 +9965,7 @@ msgstr ""
 msgid "Your current host is \"%s\". Add it without \"www\"."
 msgstr ""
 
-#: oc-admin/themes/modern/admins/frm.php
+#: oc-includes/osclass/classes/admin/form/AdminAccountForm.php
 msgid "Your current password"
 msgstr ""
 

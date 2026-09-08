@@ -221,7 +221,7 @@ SettingsPageRegistry::instance()->register('purify.test', array(
               'sanitize' => static fn ($v) => strtolower($v)),
         array('type' => 'text', 'name' => 'snippet', 'label' => 'Snippet', 'purify' => false),
         array('type' => 'textarea', 'name' => 'template', 'label' => 'Template', 'purify' => false),
-        array('type' => 'secret', 'name' => 'api_key', 'label' => 'API key'),
+        array('type' => 'secret', 'name' => 'api_key', 'label' => 'API key', 'write_only' => false),
     ),
 ));
 $fields = SettingsPageRegistry::instance()->fields('purify.test');

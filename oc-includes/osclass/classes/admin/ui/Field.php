@@ -76,6 +76,12 @@ class Field
                 : array('for' => $locales === array() ? $id : self::idFor(array(
                     'name' => (string)($spec['name'] ?? '') . array_key_first($locales),
                 )));
+            // The marked-up form of the row label, for the label carrying an <em> or a
+            // link. It is raw markup and so is the declaration's to get right, exactly as
+            // it already is on osc_admin_form_row_open().
+            if (isset($spec['label_html']) && $spec['label_html'] !== '') {
+                $opts['label_html'] = $spec['label_html'];
+            }
             // The row is what the shared script shows and hides, so the relationship is
             // declared on it. Which way it resolves is decided again on save: this is a
             // convenience, not the rule.

@@ -689,12 +689,8 @@ msgstr ""
 msgid "Email address or username"
 msgstr ""
 
-#: oc-includes/osclass/classes/controller/admin/CAdminAdmins.php
+#: oc-includes/osclass/classes/admin/form/AdminAccountForm.php
 msgid "Email already in use"
-msgstr ""
-
-#: oc-includes/osclass/classes/controller/admin/CAdminAdmins.php
-msgid "Email invalid"
 msgstr ""
 
 #: oc-includes/osclass/classes/actions/ItemActions.php
@@ -759,11 +755,11 @@ msgstr ""
 msgid "Error: the currency code is not in the correct format"
 msgstr ""
 
-#: oc-includes/osclass/classes/controller/admin/CAdminAdmins.php
+#: oc-includes/osclass/classes/admin/form/AdminAccountForm.php
 msgid "Existing email"
 msgstr ""
 
-#: oc-includes/osclass/classes/controller/admin/CAdminAdmins.php
+#: oc-includes/osclass/classes/admin/form/AdminAccountForm.php
 msgid "Existing username"
 msgstr ""
 
@@ -876,7 +872,7 @@ msgstr ""
 msgid "Incorrect link"
 msgstr ""
 
-#: oc-includes/osclass/classes/controller/admin/CAdminAdmins.php
+#: oc-includes/osclass/classes/admin/form/AdminAccountForm.php
 msgid "Incorrent current password"
 msgstr ""
 
@@ -1039,10 +1035,6 @@ msgstr ""
 #: oc-includes/osclass/gui/account/user-profile-content.php
 #: oc-includes/osclass/gui/account/user-register-content.php
 msgid "Name"
-msgstr ""
-
-#: oc-includes/osclass/classes/controller/admin/CAdminAdmins.php
-msgid "Name invalid"
 msgstr ""
 
 #: oc-includes/osclass/classes/actions/ItemActions.php
@@ -1406,10 +1398,6 @@ msgstr ""
 
 #: oc-includes/osclass/classes/controller/CWebUser.php
 msgid "Password has been changed"
-msgstr ""
-
-#: oc-includes/osclass/classes/controller/admin/CAdminAdmins.php
-msgid "Password invalid"
 msgstr ""
 
 #: oc-includes/osclass/classes/controller/CWebUser.php
@@ -2190,7 +2178,7 @@ msgstr ""
 msgid "The password cannot be empty"
 msgstr ""
 
-#: oc-includes/osclass/classes/controller/admin/CAdminAdmins.php
+#: oc-includes/osclass/classes/admin/form/AdminAccountForm.php
 msgid "The password couldn't be updated. Passwords don't match"
 msgstr ""
 
@@ -2358,10 +2346,6 @@ msgstr ""
 
 #: oc-includes/osclass/classes/controller/admin/CAdminTools.php
 msgid "There are no tables to back up"
-msgstr ""
-
-#: oc-includes/osclass/classes/controller/admin/CAdminAdmins.php
-msgid "There has been an error adding a new admin"
 msgstr ""
 
 #: oc-includes/osclass/emails.php
@@ -2549,11 +2533,11 @@ msgstr ""
 msgid "Username"
 msgstr ""
 
-#: oc-includes/osclass/classes/controller/admin/CAdminAdmins.php
+#: oc-includes/osclass/classes/admin/form/AdminAccountForm.php
 msgid "Username already in use"
 msgstr ""
 
-#: oc-includes/osclass/classes/controller/admin/CAdminAdmins.php
+#: oc-includes/osclass/classes/admin/form/AdminAccountForm.php
 msgid "Username invalid"
 msgstr ""
 

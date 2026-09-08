@@ -61,7 +61,7 @@ if (!function_exists('osc_admin_form')) {
      *   osc_admin_form('acme')
      *       ->title($pageTitle)
      *       ->group($groupTitle)
-     *       ->secret('api_key', $keyLabel)->required()
+     *       ->secret('api_key', $keyLabel)->writeOnly(false)->required()
      *       ->register();
      *
      * It lives here rather than with the field primitives because plugins declare their
@@ -416,7 +416,11 @@ if (!function_exists('osc_settings_sanitize')) {
             case 'number':
                 return $value === '' ? '' : (strpos($value, '.') === false ? (int)$value : (float)$value);
             case 'email':
-                return (string)filter_var($value, FILTER_SANITIZE_EMAIL);
+                // Deliberately not FILTER_SANITIZE_EMAIL: it deletes the illegal characters
+                // and hands back something that then validates, so "john doe@example.test"
+                // is stored as a different address instead of being refused. An address is
+                // an identifier -- a typo has to come back to be corrected.
+                return $value;
             case 'url':
                 return osc_sanitize_url($value);
             default:
@@ -503,6 +507,34 @@ if (!function_exists('osc_settings_validate')) {
     }
 }
 
+if (!function_exists('osc_settings_hook_values')) {
+    /**
+     * The submitted values as a hook listener may see them: everything except the secrets.
+     *
+     * A 'secret' is the one field type whose value must not travel -- a listener that logs
+     * or forwards what it is handed would be recording the administrator's own password,
+     * on a rejected submission as much as on a saved one. Nothing else is withheld: a
+     * field that is no column is still an ordinary value a listener has every reason to
+     * see, so the line is drawn at the type that means "do not repeat this", not at how
+     * the field happens to be stored.
+     *
+     * @param array $fields declared fields, keyed by name
+     * @param array $values submitted values, keyed by field name
+     *
+     * @return array
+     */
+    function osc_settings_hook_values(array $fields, array $values)
+    {
+        foreach ($fields as $name => $field) {
+            if (($field['type'] ?? 'text') === 'secret') {
+                unset($values[$name]);
+            }
+        }
+
+        return $values;
+    }
+}
+
 if (!function_exists('osc_settings_save')) {
     /**
      * Sanitise, validate and store every field on a declared page.
@@ -523,6 +555,11 @@ if (!function_exists('osc_settings_save')) {
      * filters the values, the store writes them, the 'admin_form_after_save' hook runs, and
      * the page's own inline 'after_save' runs last -- so a page sees whatever a listener
      * already did rather than racing it.
+     *
+     * What a hook is handed is the submission without its secrets, and 'before_save' may
+     * only hand back keys it was shown. A listener therefore cannot read the password the
+     * administrator typed and cannot write one either; the page's own callables, which
+     * declared the field in the first place, are handed everything.
      *
      * A page bound to a table saves the row its caller names and no other: the key is
      * never read out of the submission, so a request naming somebody else's row is just a
@@ -626,7 +663,7 @@ if (!function_exists('osc_settings_save')) {
         }
 
         if ($errors !== array()) {
-            osc_run_hook('admin_form_save_failed', $pageId, $errors, $values);
+            osc_run_hook('admin_form_save_failed', $pageId, $errors, osc_settings_hook_values($fields, $values));
 
             // Nothing was written, so there is no row to name: a rejected save is not half
             // a save, and that holds for the key as much as for the values.
@@ -634,9 +671,25 @@ if (!function_exists('osc_settings_save')) {
         }
 
         // A filter, not an action: deriving or normalising a value means handing it back,
-        // and a hook would only ever mutate its own copy of the array.
-        $filtered = osc_apply_filter('admin_form_before_save', $values, $pageId);
-        $values   = is_array($filtered) ? $filtered : $values;
+        // and a hook would only ever mutate its own copy of the array. What comes back is
+        // narrowed to the keys that went out, so a listener can change a value it was shown
+        // and cannot invent one it was not -- which is the same rule as withholding the
+        // secrets, read from the other end. Without it a listener could rewrite a password
+        // or an account type after every rule on the page had already passed.
+        $exposed  = osc_settings_hook_values($fields, $values);
+        $filtered = osc_apply_filter('admin_form_before_save', $exposed, $pageId);
+        if (is_array($filtered)) {
+            foreach ($values as $name => $value) {
+                if (!array_key_exists($name, $exposed)) {
+                    continue;
+                }
+                if (!array_key_exists($name, $filtered)) {
+                    unset($values[$name]);
+                    continue;
+                }
+                $values[$name] = $filtered[$name];
+            }
+        }
 
         // The store is the only part of this that knows where the values go. It walks the
         // declared fields rather than $values, which is what keeps a before_save listener
@@ -659,7 +712,7 @@ if (!function_exists('osc_settings_save')) {
             // A refused write is a rejected save: no effects, no key, and the values back
             // on screen, exactly as a failed validation leaves them.
             $errors = array($refused);
-            osc_run_hook('admin_form_save_failed', $pageId, $errors, $values);
+            osc_run_hook('admin_form_save_failed', $pageId, $errors, osc_settings_hook_values($fields, $values));
 
             return array('errors' => $errors, 'updated' => 0, 'values' => $values, 'id' => null);
         }
@@ -668,12 +721,15 @@ if (!function_exists('osc_settings_save')) {
 
         // The key of the row that was written: the new one on an insert, the existing one
         // on an update, and null on a preference page, which has rows for nothing.
-        osc_run_hook('admin_form_after_save', $pageId, $values, $savedId);
+        $exposed = osc_settings_hook_values($fields, $values);
+        osc_run_hook('admin_form_after_save', $pageId, $exposed, $savedId);
+        // The page's own callable is the other half of the declaration that named the
+        // field, so it is handed everything; a hook listener is a third party and is not.
         if (isset($page['after_save']) && is_callable($page['after_save'])) {
             call_user_func($page['after_save'], $values, $savedId);
         }
 
-        osc_run_hook('settings_page_saved', $pageId, $values);
+        osc_run_hook('settings_page_saved', $pageId, $exposed);
 
         // Zero here is an unchanged row and a success: the store throws when a write fails
         // and refuses a key with no row behind it, so nothing else is left for the count

@@ -61,6 +61,8 @@ final class FormSpec
         'type',
         'name',
         'column',
+        'persist',
+        'write_only',
         'label',
         'help',
         'default',
@@ -341,6 +343,35 @@ final class FormSpec
     public function column(string $column): self
     {
         return $this->set('column', $column);
+    }
+
+    /**
+     * What this field's column takes. Table stores only.
+     *
+     * false is a field that is no column -- a confirmation box, a re-authentication box --
+     * collected and validated like any other and never written. A callable is handed the
+     * validated value and every other validated value, and returns what the column takes;
+     * null from it writes nothing, which is how "blank means unchanged" is declared.
+     *
+     * It says nothing about what the control shows on the way back: that is writeOnly().
+     *
+     * @param mixed $persist false, or callable(mixed $value, array $values): mixed|null
+     */
+    public function persist($persist): self
+    {
+        return $this->set('persist', $persist);
+    }
+
+    /**
+     * Whether the control shows what is stored.
+     *
+     * Off by default, so a field draws the stored value. On, nothing is read and the
+     * control draws the declared default -- for a value whose stored form is not the one
+     * that was typed, or that has no stored form at all. A secret must say which it is.
+     */
+    public function writeOnly(bool $writeOnly = true): self
+    {
+        return $this->set('write_only', $writeOnly);
     }
 
     /** One control per enabled locale, each stored under its own key. text and textarea only. */

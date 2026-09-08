@@ -945,6 +945,7 @@ class ComposerStaticInitcacf2fb59ceafa0761df38efb16f9123
         'Widget' => __DIR__ . '/../../..' . '/oc-includes/osclass/classes/model/Widget.php',
         'iObject_Cache' => __DIR__ . '/../../..' . '/oc-includes/osclass/classes/cache/interface/iObject_Cache.php',
         'mindstellar\\Csrf' => __DIR__ . '/../../..' . '/oc-includes/osclass/classes/Csrf.php',
+        'mindstellar\\admin\\form\\AdminAccountForm' => __DIR__ . '/../../..' . '/oc-includes/osclass/classes/admin/form/AdminAccountForm.php',
         'mindstellar\\admin\\form\\BanRuleForm' => __DIR__ . '/../../..' . '/oc-includes/osclass/classes/admin/form/BanRuleForm.php',
         'mindstellar\\admin\\form\\store\\PreferenceStore' => __DIR__ . '/../../..' . '/oc-includes/osclass/classes/admin/form/store/PreferenceStore.php',
         'mindstellar\\admin\\form\\store\\Store' => __DIR__ . '/../../..' . '/oc-includes/osclass/classes/admin/form/store/Store.php',

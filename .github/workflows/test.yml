@@ -247,6 +247,18 @@ jobs:
       # reaches is the same install as no guard.
       - name: Admin ban rule form
         run: php tests/admin-ban-rule-form.php
+      # The administrator account screen is a privilege boundary, and every way it can go
+      # wrong is quiet. The current-password box is the re-authentication standing between
+      # an unattended session and a second administrator, and it is a control that is never
+      # stored -- so losing the check in a migration looks identical on screen. The account
+      # type is not the edited admin's to set on their own row, or a moderator promotes
+      # themselves. A blank new-password box means "leave it alone"; written through, it
+      # stores the hash of an empty string and every rename changes a password. And the
+      # column has to take the hash while the plaintext survives as far as the welcome
+      # email. It drives the controller and reads the row back with raw SQL, because a
+      # guard in the source that no branch reaches is the same install as no guard.
+      - name: Admin account form
+        run: php tests/admin-account-form.php
       # A declared text field is read with the XSS check off, so without the default here
       # every migrated screen stores markup the hand-written controller it replaced had
       # always stripped -- and nothing shows it, because core escapes on the way out

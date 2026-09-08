@@ -28,6 +28,12 @@ namespace mindstellar\admin\form\store;
  * did not collect -- a custom one, or one whose 'depends' master is off -- is not written,
  * so its column keeps its previous value.
  *
+ * A field may also say what its column takes, with 'persist': false for a field that is
+ * no column at all, or a callable returning the value to write, where null writes nothing.
+ * What the column takes and what the control shows are separate answers, so a derived
+ * column still reads back unless the field also declares 'write_only'. A field that is no
+ * column is the exception, because it has none to read.
+ *
  * @package mindstellar\admin\form\store
  */
 final class TableStore implements Store
@@ -80,6 +86,14 @@ final class TableStore implements Store
                 $values[$name] = $field['default'] ?? '';
                 continue;
             }
+            // Nothing to read in either case, for two different reasons: a write-only
+            // field has a column it must never show -- a password hash -- and a
+            // 'persist' => false field has no column at all, so one that happens to share
+            // its name belongs to something else.
+            if (!empty($field['write_only']) || (($field['persist'] ?? null) === false)) {
+                $values[$name] = $field['default'] ?? ($type === 'checkbox' ? false : '');
+                continue;
+            }
             $column = self::column($name, $field);
             if (!array_key_exists($column, $row)) {
                 $values[$name] = $field['default'] ?? ($type === 'checkbox' ? false : '');
@@ -114,7 +128,14 @@ final class TableStore implements Store
                 // is blanking a value the administrator never touched.
                 continue;
             }
-            $data[self::column($name, $field)] = self::columnValue($field, $values[$name]);
+            $column = self::persisted($field, $values[$name], $values);
+            if ($column === null) {
+                // Declared as no column at all, or derived to nothing: "leave this one
+                // alone", which is how a blank new-password box means "unchanged" without
+                // the store having to know what a password is.
+                continue;
+            }
+            $data[self::column($name, $field)] = $column;
         }
 
         if ($data === array()) {
@@ -179,6 +200,33 @@ final class TableStore implements Store
         throw StoreException::badKey(
             'TableStore: ' . $this->table . '.' . $this->pk . ' needs a positive integer key'
         );
+    }
+
+    /**
+     * The value a field's column takes, or null when it takes none.
+     *
+     * A field declaring 'persist' => false is no column; one declaring a callable gets
+     * whatever the callable makes of the validated value, and null from it leaves the
+     * column as it was.
+     *
+     * @param mixed $value
+     *
+     * @return mixed
+     */
+    private static function persisted(array $field, $value, array $values)
+    {
+        if (!array_key_exists('persist', $field)) {
+            return self::columnValue($field, $value);
+        }
+        if ($field['persist'] === false) {
+            return null;
+        }
+
+        $derived = call_user_func($field['persist'], $value, $values);
+
+        // A column cannot hold an array, and a callable handing one back is a bug in the
+        // declaration rather than something to write an empty string for silently.
+        return is_array($derived) ? null : $derived;
     }
 
     /**

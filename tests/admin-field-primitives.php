@@ -87,6 +87,55 @@ emits('derives an id from the name', $html, 'id="field-site_title"');
 emits('carries the value', $html, 'value="Shopclass"');
 check('closes both wrappers', substr($html, -12) === '</div></div>', $html);
 
+// A row label that has to carry markup -- the "(required)" the admin screens italicise, or
+// a link -- reaches the row through the field spec, the same slot osc_admin_form_row_open()
+// has always taken. Without it a declared field could only ever have a plain-text label,
+// and a screen wanting one would have to write the row by hand again.
+$marked = render(static function () {
+    osc_admin_text(array('name' => 's_name', 'label' => 'Name', 'label_html' => 'Name <em>(required)</em>'));
+});
+emits(
+    'label_html on a field is the row label, wrapped once and pointed at the control',
+    $marked,
+    '<div class="form-label"><label for="field-s_name">Name <em>(required)</em></label></div>'
+);
+check('and it is raw markup, not escaped', strpos($marked, '&lt;em&gt;') === false, $marked);
+check(
+    'the plain label is not printed beside it',
+    substr_count($marked, 'Name') === 1 || strpos($marked, '>Name</label>') === false,
+    $marked
+);
+
+// osc_admin_text() used to force 'text' over whatever the caller asked for, so a caller
+// that named a type got a plain text box and no sign that it had been ignored. The list is
+// the renderer's own, so the helper cannot promise a type that gets downgraded a layer down.
+foreach (array('text', 'email', 'url', 'tel') as $type) {
+    $typed = render(static function () use ($type) {
+        osc_admin_text(array('name' => 't', 'label' => 'T', 'type' => $type));
+    });
+    emits('osc_admin_text() honours an explicit ' . $type, $typed, '<input type="' . $type . '"');
+}
+$defaulted = render(static function () {
+    osc_admin_text(array('name' => 't', 'label' => 'T'));
+});
+emits('and still defaults to text when none is named', $defaulted, '<input type="text"');
+// It is the helper that draws a line of text, so it does not become another control
+// because a caller said so. Every type below is one the renderer draws differently, so each
+// would be a visibly different control if the helper let it through -- 'secret' worst of
+// all, which turns a line of text into a password box with a reveal button beside it. A
+// type the renderer does not know ('search', a typo, anything invented) is deliberately not
+// on this list: the renderer falls back to text for those on its own, so pinning one would
+// pass with no allowlist here at all.
+foreach (array('select', 'checkbox', 'textarea', 'number', 'color', 'file', 'radio', 'secret') as $type) {
+    $typed = render(static function () use ($type) {
+        osc_admin_text(array('name' => 't', 'label' => 'T', 'type' => $type, 'options' => array('a' => 'A')));
+    });
+    emits('a ' . $type . ' asked of osc_admin_text() is still a text box', $typed, '<input type="text"');
+    // The class carries the width, so a type that got through the input-type check and not
+    // this one is still the wrong control in the sentence it sits in.
+    emits('and still classed as one (' . $type . ')', $typed, 'class="input-text field-text"');
+}
+
 // A caller composing its own row (a plugin inside an existing screen) needs the
 // control alone, or it nests a form-row inside a form-row.
 $bare = render(static function () {

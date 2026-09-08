@@ -345,13 +345,20 @@ if (!function_exists('osc_admin_text')) {
     /**
      * Single-line text. Keys: the shared set, plus 'placeholder', 'width', 'prefix', 'suffix'.
      *
+     * A caller may name any of the single-line types the renderer draws the same way --
+     * 'email', 'url', 'tel' -- and get that input type. Anything else is a text box: this
+     * helper is the one that draws a line of text and does not become a <select> because a
+     * caller said so. The list is the renderer's own, so the helper cannot promise a type
+     * that would be quietly downgraded a layer down.
+     *
      * @param array $opts
      *
      * @return void
      */
     function osc_admin_text(array $opts)
     {
-        $opts['type'] = 'text';
+        $type = (string)($opts['type'] ?? 'text');
+        $opts['type'] = in_array($type, array('text', 'email', 'url', 'tel'), true) ? $type : 'text';
         osc_admin_field($opts);
     }
 }

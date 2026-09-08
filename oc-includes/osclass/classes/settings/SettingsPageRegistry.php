@@ -166,6 +166,22 @@ final class SettingsPageRegistry
      *                           printed through osc_esc_html() or osc_esc_js().
      *   'column'   => string    Table stores only: the column this field maps to, when it
      *                           is not the field's own name.
+     *   'persist'  => false|callable Table stores only: what the field's column takes.
+     *                           false is a field that is no column -- a confirmation box,
+     *                           a re-authentication box -- collected and validated like
+     *                           any other and never written. A callable(mixed $value,
+     *                           array $values) returns the value to write, and null from
+     *                           it writes nothing, so "blank means unchanged" is declared
+     *                           rather than special-cased. It says nothing about what the
+     *                           control shows; that is 'write_only'.
+     *   'write_only' => bool    Whether the control shows what is stored. false (the
+     *                           default) reads the stored value back into the control;
+     *                           true never reads it and draws the declared default, for a
+     *                           value whose stored form is not the one that was typed --
+     *                           a password hash -- or that has no stored form at all.
+     *                           Required on a 'secret', where the type alone does not say
+     *                           which of the two it is: an API key is meant to be read
+     *                           back and edited, a password never is.
      *
      * @param string $id   Namespaced slug, [a-z0-9_.-]{1,60}. Usually the plugin's own.
      * @param array  $spec Page specification (see above).
@@ -354,6 +370,16 @@ final class SettingsPageRegistry
         $prefix = 'SettingsPageRegistry: page "' . $id . '" field "' . $field['name'] . '" ';
         $table  = $store['type'] === 'table';
 
+        if (array_key_exists('persist', $field)) {
+            if ($field['persist'] !== false && !is_callable($field['persist'])) {
+                throw new InvalidArgumentException($prefix . 'persist must be false or a callable');
+            }
+            if (!$table) {
+                throw new InvalidArgumentException(
+                    $prefix . 'declares persist, which only a table store applies'
+                );
+            }
+        }
         if (isset($field['column'])) {
             if (!is_string($field['column']) || $field['column'] === '') {
                 throw new InvalidArgumentException($prefix . 'column must name a column');
@@ -364,7 +390,9 @@ final class SettingsPageRegistry
                 );
             }
         }
-        if (!$table || $type === 'custom') {
+        // A field that is no column has none to hold to the column rules: it is never
+        // read and never written, so what it would have been called does not arise.
+        if (!$table || $type === 'custom' || (($field['persist'] ?? null) === false)) {
             return;
         }
 
@@ -461,6 +489,29 @@ final class SettingsPageRegistry
                             . ' are purified'
                         );
                     }
+                }
+                if (array_key_exists('write_only', $field)) {
+                    if (!is_bool($field['write_only'])) {
+                        throw new InvalidArgumentException(
+                            'SettingsPageRegistry: page "' . $id . '" field "' . $field['name']
+                            . '" write_only must be true or false'
+                        );
+                    }
+                    if ($type === 'custom') {
+                        throw new InvalidArgumentException(
+                            'SettingsPageRegistry: page "' . $id . '" field "' . $field['name']
+                            . '" cannot set write_only: core neither reads nor writes a custom field'
+                        );
+                    }
+                } elseif ($type === 'secret') {
+                    // A stored secret is either one the admin has to be able to read back
+                    // and edit -- an API key -- or one they must never see again, and the
+                    // type does not say which. Omitting it is how a password hash ends up
+                    // drawn into the page, so it is not a thing that can be omitted.
+                    throw new InvalidArgumentException(
+                        'SettingsPageRegistry: page "' . $id . '" field "' . $field['name']
+                        . '" is a secret and must declare write_only'
+                    );
                 }
                 $this->checkFieldStorage($id, $field, $type, $store);
                 if (isset($field['depends'])) {

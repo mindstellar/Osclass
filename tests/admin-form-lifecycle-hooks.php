@@ -324,6 +324,10 @@ pin(
     array_keys($GLOBALS['preferences'])
 );
 
+// The filter transforms what it was shown; it does not get to invent a key. A listener that
+// can add one can add a declared one it was deliberately not handed -- a password, an
+// account type -- after every rule on the page has already passed, which is the same defect
+// as leaking the secret, read from the other end.
 reset_log();
 listen('admin_form_before_save', static function ($values, $pageId) {
     $values['s_undeclared'] = 'injected';
@@ -333,19 +337,19 @@ listen('admin_form_before_save', static function ($values, $pageId) {
 $GLOBALS['params'] = array('s_one' => '1', 's_two' => '2');
 $result = osc_settings_save('writeset');
 check(
-    'a listener may still add a key -- the filter contract is honoured',
-    ($result['values']['s_undeclared'] ?? null) === 'injected'
+    'a key the listener was not shown does not come back with it',
+    !array_key_exists('s_undeclared', $result['values'])
 );
-check('but an undeclared key is not written', !array_key_exists('writeset/s_undeclared', $GLOBALS['preferences']));
+check('nor is it written', !array_key_exists('writeset/s_undeclared', $GLOBALS['preferences']));
 pin(
     'and the write set is unchanged by it',
     array('writeset/s_one', 'writeset/s_two'),
     array_keys($GLOBALS['preferences'])
 );
 
-// The edge the two rules meet at. Core deliberately skips collecting a custom field, so it
-// also declines to write one a listener injected: core does not know what a custom field
-// submitted, and a value it never read is not one it can be responsible for storing.
+// The edge the two rules meet at. Core deliberately skips collecting a custom field, so a
+// listener is never shown one and cannot hand one back: core does not know what a custom
+// field submitted, and a value it never read is not one it can be responsible for storing.
 reset_log();
 listen('admin_form_before_save', static function ($values, $pageId) {
     $values['s_custom'] = 'injected';
@@ -355,10 +359,23 @@ listen('admin_form_before_save', static function ($values, $pageId) {
 $GLOBALS['params'] = array('s_one' => '1', 's_two' => '2');
 $result = osc_settings_save('writeset');
 check(
-    'a value injected for a declared custom field reaches the caller',
-    ($result['values']['s_custom'] ?? null) === 'injected'
+    'a value invented for a declared custom field is dropped too',
+    !array_key_exists('s_custom', $result['values'])
 );
-check('but core does not write it', !array_key_exists('writeset/s_custom', $GLOBALS['preferences']));
+check('and core does not write it', !array_key_exists('writeset/s_custom', $GLOBALS['preferences']));
+
+// The other direction: a key the listener *was* shown, changed, still lands.
+reset_log();
+listen('admin_form_before_save', static function ($values, $pageId) {
+    $values['s_one'] = 'rewritten';
+    unset($values['s_two']);
+
+    return $values;
+});
+$GLOBALS['params'] = array('s_one' => '1', 's_two' => '2');
+$result = osc_settings_save('writeset');
+pin('a key it was shown is still its to change', 'rewritten', $GLOBALS['preferences']['writeset/s_one'] ?? null);
+check('and one it dropped is not written', !array_key_exists('writeset/s_two', $GLOBALS['preferences']));
 
 harness_section('admin_form_after_save and the inline after_save: success');
 reset_log();
@@ -448,6 +465,98 @@ pin('and admin_form_save_failed fires for it too', 1, count($failed));
 pin('carrying the page id that was asked for', 'no-such-page', $failed[0][1][0] ?? null);
 check('with the error it was rejected with', count($failed[0][1][1] ?? array()) === 1);
 check('nothing is written', $GLOBALS['preferences'] === array());
+
+harness_section('no hook payload carries a secret');
+
+// Four hooks are handed the submission, and a plugin listening on any of them may log it or
+// forward it. A 'secret' is the one field type whose value must not travel: on this screen
+// it is the acting administrator's own password, typed on every attempt including the ones
+// that are rejected.
+SettingsPageRegistry::instance()->register('secrets', array(
+    'title'      => 'Secrets',
+    'after_save' => static function ($values, $id) {
+        $GLOBALS['inlineValues'] = $values;
+    },
+    'fields'     => array(
+        array('type' => 'text', 'name' => 's_name', 'label' => 'Name', 'required' => true),
+        array('type' => 'secret', 'name' => 's_password', 'label' => 'Password', 'write_only' => true),
+    ),
+));
+
+/** Every payload a hook was handed under $name, in the order they fired. */
+$payloads = static function (string $name, int $index): array {
+    $out = array();
+    foreach ($GLOBALS['hookLog'] as $entry) {
+        if ($entry[0] === $name) {
+            $out[] = $entry[1][$index] ?? null;
+        }
+    }
+
+    return $out;
+};
+
+reset_log();
+$GLOBALS['inlineValues'] = null;
+$GLOBALS['params'] = array('s_name' => 'Erin', 's_password' => 'hunter2');
+$result = osc_settings_save('secrets');
+pin('the save is clean', array(), $result['errors']);
+pin('and the secret was written', 'hunter2', $GLOBALS['preferences']['secrets/s_password'] ?? null);
+
+foreach (array('admin_form_before_save' => 0, 'admin_form_after_save' => 1, 'settings_page_saved' => 1) as $hook => $at) {
+    $seen = $payloads($hook, $at);
+    pin($hook . ' fired once', 1, count($seen));
+    check(
+        'and was handed no s_password (' . $hook . ')',
+        is_array($seen[0]) && !array_key_exists('s_password', $seen[0]),
+        var_export($seen[0], true)
+    );
+    check(
+        'while the field beside it is there (' . $hook . ')',
+        is_array($seen[0]) && ($seen[0]['s_name'] ?? null) === 'Erin',
+        var_export($seen[0], true)
+    );
+}
+
+// The page's own callable declared the field, so it is the one party that is handed it.
+// The caller is too: the admins screen still has a welcome e-mail to send.
+pin('the page\'s own after_save is handed the secret', 'hunter2', $GLOBALS['inlineValues']['s_password'] ?? null);
+pin('and so is the caller', 'hunter2', $result['values']['s_password'] ?? null);
+
+// The rejected path matters more, not less: the password is typed on every attempt, and a
+// listener counting failures would have been recording it every time.
+reset_log();
+$GLOBALS['params'] = array('s_name' => '', 's_password' => 'hunter2');
+$result = osc_settings_save('secrets');
+pin('the submission is rejected', 1, count($result['errors']));
+$seen = $payloads('admin_form_save_failed', 2);
+pin('admin_form_save_failed fired once', 1, count($seen));
+check(
+    'and was handed no s_password either',
+    is_array($seen[0]) && !array_key_exists('s_password', $seen[0]),
+    var_export($seen[0], true)
+);
+
+// A filter that cannot read the secret must not be able to write one either, or the leak is
+// simply reversed: a listener would set the password after every rule had already passed.
+reset_log();
+listen('admin_form_before_save', static function ($values, $pageId) {
+    $values['s_password'] = 'set-by-a-plugin';
+
+    return $values;
+});
+$GLOBALS['params'] = array('s_name' => 'Frank', 's_password' => 'typed-by-the-admin');
+$result = osc_settings_save('secrets');
+pin('the value the admin typed is what was written', 'typed-by-the-admin', $GLOBALS['preferences']['secrets/s_password'] ?? null);
+pin('and what the caller sees', 'typed-by-the-admin', $result['values']['s_password'] ?? null);
+
+// The helper on its own, so the rule is pinned where it is stated rather than only through
+// four call sites.
+$fields = SettingsPageRegistry::instance()->fields('secrets');
+pin(
+    'osc_settings_hook_values withholds the secrets and nothing else',
+    array('s_name' => 'Erin'),
+    osc_settings_hook_values($fields, array('s_name' => 'Erin', 's_password' => 'hunter2'))
+);
 
 harness_section('admin_form_render_field');
 reset_log();

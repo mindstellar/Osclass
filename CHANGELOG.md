@@ -90,9 +90,18 @@ theme ships none, using a documented class vocabulary a theme restyles in CSS al
   characters for a name, username, e-mail, website, region, city or address, 45 for a phone
   number, 80 for a country and 15 for a postcode. Publishing gained the two length checks it
   was missing — postcode and phone — and its country check now matches the column it writes to.
+- The admin account screen reports every error at once and redraws what was typed, instead of
+  discarding the form on the first failure. An unchanged save now confirms, and a refused write
+  reports rather than staying silent.
+- `admin_edit_completed` receives the admin id as an int, where it received the raw request
+  string. A listener comparing it with `===` or `is_string()` sees a different value.
 
 ### Fixed
 
+- The admin account form's e-mail box refuses an invalid address instead of silently rewriting
+  it — `john doe@example.test` was stored as `johndoe@example.test` and reported as saved.
+- `osc_admin_text()` honours an explicitly passed `email`, `url` or `tel` type instead of
+  forcing every box to `text`.
 - `t_user.s_country` and `t_item_location.s_country` are widened from `VARCHAR(40)` to
   `VARCHAR(80)`, the width of the `t_country.s_name` they copy — a country name longer than 40
   characters was stored cut in half. Upgrading runs an `ALTER TABLE` on both.

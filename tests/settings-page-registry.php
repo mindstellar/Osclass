@@ -153,7 +153,8 @@ $spec = array(
         array(
             'title'  => 'Connection',
             'fields' => array(
-                array('type' => 'secret', 'name' => 'api_key', 'label' => 'API key', 'required' => true),
+                array('type' => 'secret', 'name' => 'api_key', 'label' => 'API key', 'required' => true,
+                      'write_only' => false),
                 array('type' => 'number', 'name' => 'batch', 'label' => 'Batch', 'min' => 1, 'max' => 500, 'default' => 50),
                 array('type' => 'select', 'name' => 'mode', 'label' => 'Mode',
                       'options' => array('live' => 'Live', 'test' => 'Test'), 'default' => 'test'),
@@ -273,6 +274,55 @@ check('purify on a tel is accepted', register_error('x35', array('title' => 'X',
 check('purify on a color is accepted', register_error('x36', array('title' => 'X', 'fields' => array(
     array('name' => 'a', 'type' => 'color', 'purify' => false),
 ))) === null);
+
+// write_only is what the control shows, and it is deliberately not the same key as
+// persist, which is what the column takes. Riding both on one key blanked a column the
+// admin had never been shown: the form drew the field empty and saved that.
+harness_section('write_only says what the control shows, and a secret must say');
+check(
+    'a secret that does not declare write_only is refused',
+    register_error('w1', array('title' => 'X', 'fields' => array(
+        array('name' => 'k', 'type' => 'secret'),
+    ))) !== null
+);
+pin(
+    'and the refusal names the key it wants',
+    'SettingsPageRegistry: page "w2" field "k" is a secret and must declare write_only',
+    register_error('w2', array('title' => 'X', 'fields' => array(
+        array('name' => 'k', 'type' => 'secret'),
+    )))
+);
+check('a secret that is write-only registers', register_error('w3', array('title' => 'X', 'fields' => array(
+    array('name' => 'k', 'type' => 'secret', 'write_only' => true),
+))) === null);
+// An API key is the other kind of secret: it is stored to be read back and edited, and
+// the type alone cannot tell the two apart, which is why the declaration has to.
+check('so does one that says it reads back', register_error('w4', array('title' => 'X', 'fields' => array(
+    array('name' => 'k', 'type' => 'secret', 'write_only' => false),
+))) === null);
+check(
+    'write_only that is not a boolean is refused',
+    register_error('w5', array('title' => 'X', 'fields' => array(
+        array('name' => 'a', 'type' => 'text', 'write_only' => 'yes'),
+    ))) !== null
+);
+check(
+    'write_only on a custom field is refused, because core neither reads nor writes one',
+    register_error('w6', array('title' => 'X', 'fields' => array(
+        array('name' => 'a', 'type' => 'custom', 'render' => static function () {
+        }, 'write_only' => true),
+    ))) !== null
+);
+// Every other type may declare it, on either store: a preference holding an API key is as
+// good a reason not to redraw it as a column holding a hash.
+check('write_only on a text field is accepted', register_error('w7', array('title' => 'X', 'fields' => array(
+    array('name' => 'a', 'type' => 'text', 'write_only' => true),
+))) === null);
+check('and it is not a table-store-only key', register_error('w8', array(
+    'title'  => 'X',
+    'store'  => 'preference',
+    'fields' => array(array('name' => 'a', 'type' => 'text', 'write_only' => true)),
+)) === null);
 pin(
     'and the list the registry accepts is the list the save path purifies',
     array('text', 'textarea', 'tel', 'color'),
@@ -503,6 +553,45 @@ pin(
     . 'a column holds one value, not one per locale',
     $transTable
 );
+// A field that says what its column takes is the only way a screen can declare a control
+// that is not a column -- a confirmation box, a re-authentication box -- or a column whose
+// value is derived. Both are refused on a preference page, where nothing would apply them.
+$prefPersist = register_error('s18', array(
+    'title'  => 'X',
+    'fields' => array(array('name' => 'a', 'persist' => false)),
+));
+check('persist on a page that stores preferences is refused', $prefPersist !== null);
+pin(
+    'and the message says which store applies one',
+    'SettingsPageRegistry: page "s18" field "a" declares persist, which only a table store applies',
+    $prefPersist
+);
+$badPersist = register_error('s19', array(
+    'title'  => 'X',
+    'store'  => array('table' => 't_ban_rule', 'pk' => 'pk_i_id'),
+    'fields' => array(array('name' => 'a', 'persist' => true)),
+));
+check('persist that is neither false nor a callable is refused', $badPersist !== null);
+pin(
+    'and the message says what it may be',
+    'SettingsPageRegistry: page "s19" field "a" persist must be false or a callable',
+    $badPersist
+);
+// A field that is no column is held to none of the column rules: it may be named anything,
+// because nothing is ever written under that name.
+check('a field that is no column may be named after the primary key', register_error('s20', array(
+    'title'  => 'X',
+    'store'  => array('table' => 't_ban_rule', 'pk' => 'pk_i_id'),
+    'fields' => array(
+        array('name' => 's_name'),
+        array('name' => 'pk_i_id', 'persist' => false),
+    ),
+)) === null);
+check('and a field whose column is derived is still held to them', register_error('s21', array(
+    'title'  => 'X',
+    'store'  => array('table' => 't_ban_rule', 'pk' => 'pk_i_id'),
+    'fields' => array(array('name' => 'pk_i_id', 'persist' => static fn ($v) => $v)),
+)) !== null);
 // A custom field has no column either way, so the table rules do not apply to it.
 check('a custom field on a table store needs no column', register_error('s17', array(
     'title'  => 'X',
@@ -602,6 +691,26 @@ pin("a checkbox is read by presence, not by its value", true, osc_settings_sanit
 // An array where a scalar was declared is the shape an attacker reaches for first.
 $GLOBALS['params'] = array('api_key' => array('a', 'b'));
 pin('an array submitted for a scalar field is dropped', '', osc_settings_sanitize($fields['api_key']));
+
+// An address is an identifier, so a typo has to come back to be corrected rather than be
+// edited into a different address that then validates. FILTER_SANITIZE_EMAIL did the
+// latter: 'john doe@example.test' was stored as johndoe@example.test and reported saved.
+$GLOBALS['params'] = array('notify' => '  someone@example.test  ');
+pin('an address is trimmed', 'someone@example.test', osc_settings_sanitize($fields['notify']));
+$GLOBALS['params'] = array('notify' => 'john doe@example.test');
+pin('and otherwise handed on as typed', 'john doe@example.test', osc_settings_sanitize($fields['notify']));
+pin(
+    'so validation is what answers it',
+    'Notify is not a valid email address',
+    osc_settings_validate($fields['notify'], osc_settings_sanitize($fields['notify']))
+);
+$GLOBALS['params'] = array('notify' => '<b>joe</b>@example.test');
+pin('a tag is not quietly deleted out of one either', '<b>joe</b>@example.test', osc_settings_sanitize($fields['notify']));
+pin(
+    'it is refused too',
+    'Notify is not a valid email address',
+    osc_settings_validate($fields['notify'], osc_settings_sanitize($fields['notify']))
+);
 
 harness_section('validation');
 pin('a required field left empty is rejected', 'API key cannot be left empty', osc_settings_validate($fields['api_key'], ''));

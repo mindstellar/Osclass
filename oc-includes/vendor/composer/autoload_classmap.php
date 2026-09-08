@@ -818,6 +818,7 @@ return array(
     'Widget' => $baseDir . '/oc-includes/osclass/classes/model/Widget.php',
     'iObject_Cache' => $baseDir . '/oc-includes/osclass/classes/cache/interface/iObject_Cache.php',
     'mindstellar\\Csrf' => $baseDir . '/oc-includes/osclass/classes/Csrf.php',
+    'mindstellar\\admin\\form\\AdminAccountForm' => $baseDir . '/oc-includes/osclass/classes/admin/form/AdminAccountForm.php',
     'mindstellar\\admin\\form\\BanRuleForm' => $baseDir . '/oc-includes/osclass/classes/admin/form/BanRuleForm.php',
     'mindstellar\\admin\\form\\store\\PreferenceStore' => $baseDir . '/oc-includes/osclass/classes/admin/form/store/PreferenceStore.php',
     'mindstellar\\admin\\form\\store\\Store' => $baseDir . '/oc-includes/osclass/classes/admin/form/store/Store.php',
