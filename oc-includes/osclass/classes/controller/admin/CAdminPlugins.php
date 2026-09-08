@@ -417,9 +417,8 @@ class CAdminPlugins extends AdminSecBaseModel
                     } else {
                         $sAuthor = __('By') . ' ' . $pInfo['author'];
                     }
-                    // The state of a plugin used to reach the page as a row colour and nothing
-                    // else. It now travels as a word as well, rendered in the Status column as
-                    // a badge; the class on the <tr> only picks the badge's tint and glyph.
+                    // The state travels as a word, rendered in the Status column as a badge;
+                    // the class on the <tr> only picks the badge's tint and glyph.
                     $plugin_status = 'uninstalled';
                     $sStatusWord   = __('Not installed');
                     if ($installed) {

@@ -72,9 +72,8 @@ final class LatestSearchSettingsForm
                 ->persist(false)
                 ->default($isCustom ? 'custom' : (string)$stored)
             ->hidden('customPurge', __('Custom number'))
-                // The id the page's own script writes the chosen answer into, kept as it
-                // has always been spelled: derived from the name it would be field-customPurge,
-                // and the lookup would find nothing.
+                // The id this page's own script writes the chosen answer into. The derived
+                // one would be field-customPurge, and the lookup would find nothing.
                 ->set('id', 'customPurge')
                 ->column('purge_latest_searches')
                 ->required()

@@ -489,9 +489,8 @@ class CWebUser extends WebSecBaseModel
     public function doView($file)
     {
         osc_run_hook('before_html');
-        // Core has a fallback page for every account view. A theme that ships the
-        // view still wins; this only replaces the blank page a theme that does not
-        // used to produce.
+        // Core has a fallback page for every account view. A theme that ships the view
+        // still wins; this only keeps a theme that does not from rendering blank.
         if (!osc_gui_account_view($file)) {
             osc_current_web_theme_path($file);
         }

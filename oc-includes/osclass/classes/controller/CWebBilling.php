@@ -309,8 +309,7 @@ class CWebBilling extends WebSecBaseModel
      * exceptions stay refused: a permanent hold has nothing to extend, and
      * item.bump's hold is not a benefit at all -- it is the cooldown that stops
      * a listing being re-bumped to the top on a timer, so a feature that does
-     * not consume a duration keeps being refused while its row is live, exactly
-     * as before this method existed.
+     * not consume a duration stays refused while its row is live.
      */
     private static function decideUpgrade(string $featureId, Feature $feature, array $item): string
     {

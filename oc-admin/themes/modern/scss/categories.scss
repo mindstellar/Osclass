@@ -17,8 +17,7 @@
 
 // ---- Custom-field rows ------------------------------------------------------
 // A flat row on the content surface: grip | name | type badge | required flag |
-// edit/delete. Neutral hover (the amber warning wash it used to share with the
-// category rows was a caution colour on a routine row).
+// edit/delete. Hover is neutral: an amber wash would read as caution on a routine row.
 .cfield-div {
   align-items: center;
   background-color: var(--osc-bench);

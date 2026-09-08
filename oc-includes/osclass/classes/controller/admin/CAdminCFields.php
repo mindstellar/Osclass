@@ -152,9 +152,8 @@ class CAdminCFields extends AdminSecBaseModel
             $status = null;
         }
 
-        // Paged like every other list screen. This used to fetch a flat 200 rows at
-        // offset 0, so a form past its two-hundredth entry simply stopped showing them
-        // with nothing on screen to say so.
+        // Paged like every other list screen: a flat fetch stops showing entries past its
+        // limit with nothing on screen to say so.
         $perPage = Params::getParamInt('iDisplayLength');
         if (!in_array($perPage, self::PER_PAGE_OPTIONS, true)) {
             $perPage = 25;

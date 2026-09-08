@@ -76,8 +76,8 @@ final class AdminAccountForm
             ->onValidate(static function (array $values, string $pageId, $rowId) use ($edit) {
                 return self::rules($values, $rowId, $edit);
             })
-            // Client-side validation, where it has always been: first inside the form, so
-            // what the browser is handed is the element stream the screen already shipped.
+            // Client-side validation goes first inside the form, so the browser is handed
+            // the element stream the screen ships.
             ->custom('form_js', static function () {
                 \AdminForm::js_validation();
             })
@@ -212,10 +212,9 @@ final class AdminAccountForm
      * One row of t_admin by primary key, or an empty array when there is none.
      *
      * Read through the query builder rather than the model, whose findByPrimaryKey()
-     * memoises per instance -- an existence check that answers from a cache is one that
-     * can answer for a row somebody has since deleted. Columns are handed back as strings,
-     * because this row reaches the admin_profile_form hook and the DAO it used to come
-     * from never gave a plugin an int.
+     * memoises per instance -- an existence check answering from a cache can answer for a
+     * row somebody has since deleted. Columns stay strings: this row reaches the
+     * admin_profile_form hook, and no plugin has ever been handed an int here.
      *
      * @return array
      */
@@ -249,9 +248,8 @@ final class AdminAccountForm
         $errors = array();
 
         // The acting administrator's own password, not the edited account's: this is what
-        // stops a walked-away-from session being used to mint another administrator.
-        // Blank and wrong are answered the same way on purpose -- it is the answer this
-        // screen has always given, and it says nothing about which of the two it was.
+        // stops a walked-away-from session being used to mint another administrator. Blank
+        // and wrong are answered identically, so the reply says nothing about which it was.
         $typed   = (string)($values['old_password'] ?? '');
         $current = self::row(osc_logged_admin_id());
         $stored  = (string)($current['s_password'] ?? '');

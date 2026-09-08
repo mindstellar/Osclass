@@ -325,13 +325,10 @@ osc_current_admin_theme_path('parts/header.php'); ?>
     </div>
 </div>
 <script>
-    // This block used to call tinyMCE.init() inline, before the enqueued tinymce
-    // bundle had executed, which threw "tinyMCE is not defined" and left bare
-    // textareas. Wait for DOM ready (the library has loaded by then) and guard,
-    // the same way the page and email editors do. The old config also carried
-    // TinyMCE 3-era options (theme_advanced_*, forecolorpicker, fontsizeselect,
-    // the merged-in paste plugin) that are inert in TinyMCE 7 — replaced with the
-    // valid equivalents.
+    // Init on DOM ready and guard, the same way the page and email editors do: inline,
+    // the enqueued tinymce bundle has not executed yet and this throws "tinyMCE is not
+    // defined", leaving bare textareas. The options are TinyMCE 7's; the 3-era ones
+    // (theme_advanced_*, forecolorpicker, fontsizeselect, paste) are inert.
     document.addEventListener('DOMContentLoaded', function () {
         if (typeof tinymce === 'undefined') {
             return;

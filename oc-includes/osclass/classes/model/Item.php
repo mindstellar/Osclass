@@ -145,9 +145,8 @@ class Item extends DAO
             // the query builder's identifier allowlist, so this is hand-written
             // SQL. The only values are the item ids, bound as an IN (?, ...) list.
             //
-            // This used to aggregate the seven counters over every dated row each
-            // listing had ever accumulated, on every list render. The stats row is
-            // now the total, so the counters come back as plain columns.
+            // The stats row holds the total, so the seven counters come back as plain
+            // columns rather than an aggregate over every dated row.
             if (!empty($itemIds)) {
                 $placeholders = implode(', ', array_fill(0, count($itemIds), '?'));
                 $sql = 'SELECT s.i_num_views,'

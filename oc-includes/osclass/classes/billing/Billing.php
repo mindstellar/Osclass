@@ -48,11 +48,10 @@ final class Billing
      *
      * apply() runs while spend() still holds the wallet row's write lock (see
      * Wallet::debit(), called just before it in the same transaction), and a hook is
-     * arbitrary plugin code with no business running while that lock is held. The
-     * built-in features that used to fire item_premium_on/item_bumped from inside
-     * their own apply() call this instead. A caller invoking a feature's apply()
-     * directly, outside spend(), sees no difference -- nothing is deferring, so the
-     * hook fires exactly where it always did.
+     * arbitrary plugin code with no business running while that lock is held, so
+     * item_premium_on and item_bumped go through here rather than firing from inside
+     * their own apply(). A caller invoking a feature's apply() directly, outside
+     * spend(), sees no difference: nothing is deferring, so the hook fires in place.
      */
     public static function deferHook(string $hook, array $args = array()): void
     {

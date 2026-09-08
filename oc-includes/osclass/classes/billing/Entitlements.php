@@ -155,8 +155,8 @@ final class Entitlements
 
         // A capacity feature is a ceiling that is read, not spent -- refuse before
         // touching a row at all, so a mistaken call (ours or a plugin's) cannot drain
-        // one. A feature id with no registry entry cannot be checked this way and
-        // falls through to the ordinary spend below, same as before this guard.
+        // one. A feature id with no registry entry cannot be checked this way and falls
+        // through to the ordinary spend below.
         $registered = FeatureRegistry::instance()->get($feature);
         if ($registered !== null && $registered->getConsumes() === Feature::CONSUMES_CAPACITY) {
             return false;

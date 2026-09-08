@@ -358,8 +358,7 @@ document.addEventListener('click', function (e) {
 
 // Shift-click a checkbox to toggle every checkbox between it and the last one
 // clicked — a bulk-select convenience for the admin data tables. Scoped to the
-// nearest table or form so a range never leaks across regions. Pure vanilla,
-// replacing the jQuery shift-select this admin used to rely on.
+// nearest table or form so a range never leaks across regions.
 (function () {
     var lastChecked = null;
     document.addEventListener('click', function (e) {

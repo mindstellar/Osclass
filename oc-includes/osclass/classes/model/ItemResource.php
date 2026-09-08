@@ -247,8 +247,8 @@ class ItemResource extends DAO
             return 0;
         }
 
-        // An aggregate with no GROUP BY always yields exactly one row, so the
-        // "not exactly one row" branch this method used to have was unreachable.
+        // An aggregate with no GROUP BY always yields exactly one row, so there is no
+        // "not exactly one row" branch to take.
         return (string)$count;
     }
 

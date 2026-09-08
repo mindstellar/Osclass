@@ -786,17 +786,14 @@ class AdminMenu
         $str =
             '<ul class="sidebar-submenu collapse list-unstyled ' . ($activeMenu === $parentMenuId ? 'show' : '') . '" id="' . $parentMenuId
             . '-submenu" data-bs-parent="#dashboard-menu">';
-        // Which items this admin may see. Index 4 is the capability on a submenu; this
-        // read used to be `$arrSubMenu['sub'][4]`, a key that exists on no entry — so it
-        // always evaluated null and a moderator was shown no submenu items at all, in any
-        // section.
+        // Which items this admin may see. Index 4 is the capability on a submenu entry.
         //
-        // A divider is skipped here on purpose. It is a label with no destination, so it
-        // can expose nothing, and judging it by its own capability produced the two ways
-        // a heading can be wrong: `add_submenu_divider()` defaults the capability to null,
-        // which hid a plugin's heading from a moderator while its items still showed, and
-        // a heading whose whole group was filtered out stayed behind titling nothing. Its
-        // visibility is decided below, by what actually follows it.
+        // A divider is skipped here on purpose. It is a label with no destination, so it can
+        // expose nothing, and judging it by its own capability gives the two ways a heading
+        // can be wrong: `add_submenu_divider()` defaults the capability to null, hiding a
+        // plugin's heading from a moderator while its items still show, and a heading whose
+        // whole group is filtered out stays behind titling nothing. Its visibility is decided
+        // below, by what actually follows it.
         $visible = array();
         foreach ($subMenu as $key => $arrSubMenu) {
             $isDivider = strpos($arrSubMenu[1], 'divider_') === 0;

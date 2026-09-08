@@ -118,13 +118,9 @@ function osc_show_widgets_by_description($description)
  * Every form gets the same widget. `$section` is only a per-form label kept for the
  * documented signature, so a theme passing one still works.
  *
- * It used to select a 'recover_password' branch that rendered a captcha only when a reset
- * had been requested in the last 20 minutes, recording in the session when it had not so
- * the reset action would skip validating one. Both values were session-scoped, so a client
- * discarding cookies was always on its first attempt and never saw a captcha at all — and
- * because LoginThrottle drops its per-account limit whenever a provider is configured, the
- * reset form ended up with neither. The window bought nothing a cookie jar could not
- * sidestep, so it is gone.
+ * There is deliberately no per-form exemption window. LoginThrottle drops its per-account
+ * limit whenever a provider is configured, so a form skipping the captcha would have
+ * neither guard, and any session-scoped window is sidestepped by discarding cookies.
  *
  * @param string $section per-form label; does not change what is rendered
  *
@@ -746,13 +742,11 @@ function osc_upload_token()
 /**
  * Remember where a visitor came from across the login POST without a session.
  *
- * The login form used to stash the referer in $_SESSION so it could send the user back
- * after signing in — but that started a physical session on a mere GET of the login page,
- * leaving even a visitor who never logs in carrying an osclass cookie that defeats
- * reverse-proxy caching. Instead, carry the destination in a short-lived, HMAC-signed
- * cookie: set here on the login page, consumed and cleared by osc_pop_login_redirect() on
- * the login POST. Only a same-site URL (and never the login page itself) is stored, so
- * there is no open-redirect surface; the signature is defence in depth.
+ * Stashing the referer in $_SESSION would start a physical session on a GET of the login
+ * page, leaving a visitor who never logs in carrying a cookie that defeats reverse-proxy
+ * caching. The destination rides a short-lived HMAC-signed cookie instead: set here,
+ * consumed and cleared by osc_pop_login_redirect() on the login POST. Only a same-site URL
+ * (never the login page itself) is stored, so there is no open-redirect surface.
  *
  * @param string $url
  * @param bool   $keepExisting keep an already-stored destination instead of overwriting it,
@@ -1059,9 +1053,8 @@ function osc_get_locations_json_url()
     // so a corrected place name reaches installs without a core release. Pinning a
     // release here would tie the data to the version of Shopclass that shipped it.
     //
-    // The dataset behind it is built from Wikidata and published CC0, replacing the
-    // ODbL-licensed one this used to point at — no attribution or share-alike condition
-    // travels with the data a site imports.
+    // The dataset behind it is built from Wikidata and published CC0, so no attribution
+    // or share-alike condition travels with the data a site imports.
     return osc_apply_filter(
         'locations_json_url',
         'https://geo.mindstellar.com/releases/latest.json'

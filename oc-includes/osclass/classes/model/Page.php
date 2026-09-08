@@ -462,10 +462,8 @@ class Page extends DAO
             $aFields['b_link'] = 0;
         }
 
-        // The id and the success check used to be read off the connection after
-        // the write. The builder hands back the new id directly, and a write that
-        // does not raise has inserted its row, which is what the affected-row
-        // check was standing in for.
+        // The builder hands back the new id directly, and a write that does not raise has
+        // inserted its row -- which is what an affected-row check stands in for.
         try {
             $id = osc_db_table($this->tableName)->insert(array(
                 's_internal_name' => $aFields['s_internal_name'],

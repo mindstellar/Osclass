@@ -85,9 +85,8 @@ final class CommentSettingsForm
                 ->prefix(__('Before a comment appears, comment author must have at least'))
                 ->suffix(__('previously approved comments'))
                 ->required()
-                // On screen only while moderation is on, which is the whole reason the
-                // relationship is declared: the browser will not submit a form holding a
-                // required control it cannot show, so the save button would look dead.
+                // On screen only while moderation is on. The browser refuses to submit a
+                // form holding a required control it cannot show, so Save would look dead.
                 ->dependsOn('moderate_comments')
                 ->set('min', 0)
                 ->sanitize(CoreSettings::wholeNumber())
@@ -108,8 +107,7 @@ final class CommentSettingsForm
                 ->suffix(__('comments per page'))
                 ->required()
                 ->set('min', 0)
-                // A count, not a measurement. Without this a posted "2.5" lands in the
-                // preference verbatim, where the old screen refused it outright.
+                // A count, not a measurement: without this a posted "2.5" is stored verbatim.
                 ->sanitize(CoreSettings::wholeNumber())
                 ->default(0)
             ->group(__('Notifications'))

@@ -546,11 +546,9 @@ class ItemsDataTable extends DataTable
 
         $this->mSearch->order($sort, $direction);
 
-        // One stats row per listing now, so the counters are plain columns: no
-        // aggregate to build them, no GROUP BY to collapse a listing's dated rows,
-        // and therefore no HAVING — the filter is an ordinary WHERE. The
-        // IN (SELECT ...) that used to stand in for an index_merge over seven
-        // single-column indexes goes with them.
+        // One stats row per listing, so the counters are plain columns: no aggregate to
+        // build them, no GROUP BY, and therefore no HAVING -- the filter is an ordinary
+        // WHERE over indexed columns.
         $this->mSearch->addTable(sprintf('%st_item_stats s', DB_TABLE_PREFIX));
         $this->mSearch->addField('s.`i_num_spam` as i_num_spam');
         $this->mSearch->addField('s.`i_num_bad_classified` as i_num_bad_classified');

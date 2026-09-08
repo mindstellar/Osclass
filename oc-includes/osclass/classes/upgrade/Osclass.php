@@ -327,7 +327,7 @@ class Osclass extends UpgradePackage
     /**
      * Pick the Shopclass package asset from a GitHub release's assets list. Prefers the
      * canonical `osclass_v*.zip`, then any `.zip`, so extra release assets do not break
-     * selection (the old code blindly took assets[0]).
+     * selection. Never take assets[0].
      *
      * @param array $assets GitHub release "assets" array
      *

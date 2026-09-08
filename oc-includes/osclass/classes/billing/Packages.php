@@ -19,9 +19,8 @@ use mindstellar\database\QueryBuilder;
  *
  * A package is a plain array, not a domain object: it is edited and removed by an
  * admin, not appended to like the ledger, so it carries no history requirement of its
- * own. Orders::create() takes its amount and credits straight from a row read here,
- * which is the whole reason this catalogue exists -- without it, checkout would have
- * nowhere server-owned to read a price from.
+ * own. Orders::create() takes its amount and credits straight from a row read here, so
+ * checkout never reads a price the request supplied.
  *
  * @package mindstellar\billing
  */

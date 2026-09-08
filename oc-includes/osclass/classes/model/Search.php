@@ -1170,12 +1170,10 @@ class Search extends DAO
     /**
      * Bridge conditions added directly on $this->dao into the internal builder.
      *
-     * Before this model assembled its own statement, callers filtered a search by
-     * calling $oSearch->dao->where()/orderBy()/select()/join()/having()/groupBy()
-     * and the dao compiled them in. The builder no longer touches $this->dao, so
-     * those clauses were being dropped — silently returning an unfiltered result
-     * (e.g. a theme hydrating a Manticore id list via dao->where('... IN (...)')).
-     * Fold them back in here so that contract keeps working.
+     * Callers filter a search by calling $oSearch->dao->where()/orderBy()/select()/
+     * join()/having()/groupBy() — a theme hydrating a Manticore id list, for instance.
+     * The builder does not touch $this->dao, so without folding those clauses back in
+     * here they are dropped and the search silently returns an unfiltered result.
      *
      * The dao's own first WHERE carries no boolean connector, so add one when it
      * lands after clauses the model already built. ORDER BY goes to the FRONT so a
@@ -1453,10 +1451,9 @@ class Search extends DAO
             }
             $this->addWhere(DB_TABLE_PREFIX . 't_item.pk_i_id IN (' . $subSelect . ')');
 
-            // Least-shown first, so the block rotates. The stats row holds the
-            // running total and there is exactly one per listing, so neither the
-            // SUM nor the GROUP BY that used to collapse a listing's dated rows
-            // is needed to read it.
+            // Least-shown first, so the block rotates. The stats row holds the running
+            // total and there is exactly one per listing, so reading it needs neither a
+            // SUM nor a GROUP BY.
             $this->addOrderBy(
                 sprintf('%st_item_stats.i_num_premium_views', DB_TABLE_PREFIX),
                 'ASC'
@@ -1495,10 +1492,9 @@ class Search extends DAO
                                   . implode(', ', $this->categories) . ')');
             }
 
-            // Least-shown first, so the block rotates. The stats row holds the
-            // running total and there is exactly one per listing, so neither the
-            // SUM nor the GROUP BY that used to collapse a listing's dated rows
-            // is needed to read it.
+            // Least-shown first, so the block rotates. The stats row holds the running
+            // total and there is exactly one per listing, so reading it needs neither a
+            // SUM nor a GROUP BY.
             $this->addOrderBy(
                 sprintf('%st_item_stats.i_num_premium_views', DB_TABLE_PREFIX),
                 'ASC'

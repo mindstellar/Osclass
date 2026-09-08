@@ -86,7 +86,7 @@ final class SpamSettingsForm
 
     /**
      * The captcha provider and the two pairs of keys. The version is a hidden constant the
-     * form has always posted and the preference has always been written from.
+     * form posts and the preference is written from.
      *
      * @return string the page id
      */

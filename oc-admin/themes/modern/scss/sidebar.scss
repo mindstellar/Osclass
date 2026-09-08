@@ -478,8 +478,8 @@ $sidebar-gutter: 2.35rem;
       font-size: 1.1rem;
     }
 
-    // The count is an <i class="circle"> too — hold it to a compact chip rather
-    // than letting the icon sizing above blow it up, and drop the legacy float.
+    // The count is an <i class="circle"> too — hold it to a compact chip rather than
+    // letting the icon sizing above blow it up.
     .circle {
       align-items: center;
       block-size: 1.15rem;

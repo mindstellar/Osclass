@@ -105,9 +105,7 @@ if (!function_exists('osc_admin_page_header')) {
      * The page <h1> and the icon actions that belong beside it.
      *
      * Actions are emitted in one order everywhere: what the page is for first (add,
-     * upload), then where to configure it, then help last. Before this, each screen chose
-     * its own order, so the "?" moved between the left and right of the cluster depending
-     * on which page you were on.
+     * upload), then where to configure it, then help last.
      *
      * Each action: icon (bootstrap-icon name), url, title, and optionally onclick or
      * attrs (associative, escaped). The title is both the tooltip and the accessible name
@@ -554,9 +552,8 @@ if (!function_exists('osc_admin_bulk_actions')) {
     /**
      * The select-plus-Apply group above a table of selectable rows.
      *
-     * Apply used to be `.btn-primary`, which Bootstrap compiles to a fixed light-mode
-     * fill and so kept its light colour under `data-bs-theme="dark"`. It is the theme's
-     * own primary here, which follows the theme.
+     * Apply takes the theme's own primary, not `.btn-primary`: Bootstrap compiles that
+     * to a fixed light-mode fill that stays light under `data-bs-theme="dark"`.
      *
      * Keys: name (select name), options (osc_print_bulk_actions format), id, label.
      * A screen whose options carry per-option markup can pass 'options_html' => callable
@@ -593,10 +590,8 @@ if (!function_exists('osc_admin_bulk_confirm_dialog')) {
      * The confirm shown before a bulk action runs.
      *
      * Its body is deliberately empty: `osc.js` copies the selected option's
-     * `data-dialog-content` into it, so the question matches the action chosen rather than
-     * being a generic "are you sure". That is why this cannot go through
-     * osc_admin_confirm_dialog(), which owns its own title and text -- and why nine list
-     * screens each carried a byte-identical copy of this markup instead.
+     * `data-dialog-content` into it, so the question matches the action chosen. It cannot
+     * go through osc_admin_confirm_dialog(), which owns its own title and text.
      *
      * @param array $opts 'id' (default 'bulkActionsModal'), 'confirm' (button label)
      */
@@ -723,9 +718,8 @@ if (!function_exists('osc_admin_confirm_dialog')) {
      * Keys: id, title, text, confirm (label), confirm_id, method ('get'|'post'), url,
      * fields (name => value hidden inputs), body_html (extra markup inside the form).
      *
-     * `text` is escaped, exactly as osc_admin_empty()'s `text` is. The two used to differ,
-     * which meant the same key name in the same file was safe in one call and a raw sink
-     * in the next. Pass `text_html` for the rare sentence that needs a <strong>.
+     * `text` is escaped, exactly as osc_admin_empty()'s `text` is. Pass `text_html` for
+     * the rare sentence that needs a <strong>.
      *
      * @param array $opts
      */

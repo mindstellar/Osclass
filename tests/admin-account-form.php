@@ -33,10 +33,10 @@
  *    but a silent insert, which turns the edit screen into one that creates administrators.
  *  - Both unique columns are refused before the statement runs, because a duplicate that
  *    reaches MySQL is an exception the admin cannot read after their form was thrown away.
- *  - A value longer than its column used to be stored as much of it as fitted, under a
- *    success message: STRICT_TRANS_TABLES is off unless OSC_DB_STRICT_MODE says otherwise.
- *  - And what lands in the row has to be what landed before, which for the name means the
- *    purified form the edit path has always stored.
+ *  - A value longer than its column is stored truncated under a success message unless it
+ *    is refused first: STRICT_TRANS_TABLES is off unless OSC_DB_STRICT_MODE says otherwise.
+ *  - And what lands in the row has to be unchanged, which for the name means the purified
+ *    form the edit path stores.
  *
  * The guards at the foot are the plan's "no regression to hand-rolled". Each says which
  * kind it is: a behavioural assertion drives the code and reads what it did, a source scan
@@ -864,8 +864,8 @@ pin('the key did not', $new, (int)($stored['pk_i_id'] ?? 0));
 
 harness_section('a blank new-password box leaves the password alone');
 
-// The whole reason the field declares what its column takes: written through, a blank box
-// stores the hash of an empty string and every edit of a name changes a password.
+// Why the field declares what its column takes: written through, a blank box stores the
+// hash of an empty string and every edit of a name changes a password.
 $was    = (string)row($admin, $new)['s_password'];
 $driven = drive('edit_post', submission(array(
     's_name'      => 'Renamed Again',
@@ -1142,8 +1142,8 @@ check(
 // The one hook a plugin has ever had inside this form, still fired and still handed the row.
 pin('the profile hook runs once', 1, count($driven['profile']));
 pin('and is given the row being edited', $new, (int)($driven['profile'][0]['pk_i_id'] ?? 0));
-// As strings, which is the shape the DAO it used to come from handed a plugin. A row read
-// through the query builder is typed, so without that the hook's payload changes kind.
+// As strings, the shape a plugin has always been handed here. A row read through the query
+// builder is typed, so without that the hook's payload changes kind.
 pin('with its columns still strings, as they were', (string)$new, $driven['profile'][0]['pk_i_id'] ?? null);
 check('with its markup inside the form', strpos(form_of($html), '<!--plugin-row-->') !== false, form_of($html));
 
@@ -1166,9 +1166,8 @@ $html   = $driven['drawn'];
 // e-mail box carries its column's maxlength, and the account type is no longer a row the
 // view builds by hand.
 $form = form_of($html);
-// The client-side validator's own <script>, whose body is a wall of rules that says nothing
-// about the migration, stood down to a marker -- along with the literal indentation the PHP
-// file it is written in puts around it, which is what the old view emitted too.
+// The client-side validator's own <script>, stood down to a marker along with the literal
+// indentation the PHP file it is written in puts around it.
 $form = preg_replace('/\s*<script>.*?<\/script>\s*/s', '<script/>', $form);
 pin(
     'the add screen draws the markup it drew before the migration',

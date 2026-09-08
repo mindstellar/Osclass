@@ -404,11 +404,8 @@ final class Catalog
 
     /**
      * A raw catalog version entry carries `requires` / `requires_php` / `tested` — the
-     * facts `Compatibility::evaluate()` runs locally. A catalog built before this class
-     * stopped publishing a baked verdict also carries a `compat` key here; this whitelists
-     * only the fields below, so that key (and anything else unrecognised) is silently
-     * dropped rather than trusted — the same catalog reads cleanly whichever build produced
-     * it, and a stale precomputed verdict never reaches a caller.
+     * facts `Compatibility::evaluate()` runs locally. Only the fields below are read, so an
+     * older catalog's baked `compat` verdict is dropped rather than trusted.
      */
     private function sanitizeVersionEntry(array $entry, string $slug): ?array
     {
@@ -439,9 +436,8 @@ final class Catalog
         $size = $entry['size'] ?? 0;
         $size = is_int($size) || is_float($size) ? max(0, (int) $size) : 0;
 
-        // GitHub's cumulative release-asset download count for this version. Absent on any
-        // catalog published before this field existed, so it defaults to 0 rather than
-        // dropping the version or warning — see the class docblock on catalog tolerance.
+        // GitHub's cumulative release-asset download count for this version. Absent on an
+        // older catalog, so it defaults to 0 rather than dropping the version.
         $downloads = $entry['downloads'] ?? 0;
         $downloads = is_int($downloads) || is_float($downloads) ? max(0, (int) $downloads) : 0;
 
@@ -499,9 +495,8 @@ final class Catalog
                 $iconValue = null;
             }
 
-            // Package total (sum across every published version). Absent on a catalog
-            // published before this field existed — defaults to 0, same tolerance as every
-            // other field here.
+            // Package total (sum across every published version), 0 when the catalog
+            // does not carry it.
             $downloads = $row['downloads'] ?? 0;
             $downloads = is_int($downloads) || is_float($downloads) ? max(0, (int) $downloads) : 0;
 
@@ -521,11 +516,9 @@ final class Catalog
                 'updated_at'        => is_string($row['updated_at'] ?? null) ? $row['updated_at'] : '',
                 'downloads'         => $downloads,
                 // Package-level supported range (docs/MARKET.md §5) — the lowest `requires`
-                // and highest `tested` across every version the catalog build resolved, so
-                // Browse can render "works with X – Y" from this slim row alone. Absent on a
-                // catalog published before this field existed, same tolerant default (null,
-                // not a dropped row) as everything else here; `Compatibility::rangeLabel()`
-                // already renders null/null as "not declared".
+                // and highest `tested` across every version, so Browse can render
+                // "works with X – Y" from this row alone. Null when the catalog omits it,
+                // which `Compatibility::rangeLabel()` renders as "not declared".
                 'requires_min'      => $this->sanitizeVersionLike($row['requires_min'] ?? null),
                 'tested_max'        => $this->sanitizeVersionLike($row['tested_max'] ?? null),
             ];
@@ -606,8 +599,8 @@ final class Catalog
             $links['repo'] = 'https://github.com/' . $raw['source']['repo'];
         }
 
-        // Package total (sum across every published version) — same tolerant default as
-        // index()/updates() so a catalog published before this field existed still reads.
+        // Package total (sum across every published version), 0 when the catalog
+        // does not carry it.
         $downloads = $raw['downloads'] ?? 0;
         $downloads = is_int($downloads) || is_float($downloads) ? max(0, (int) $downloads) : 0;
 
