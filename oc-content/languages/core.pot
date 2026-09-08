@@ -2381,6 +2381,7 @@ msgstr ""
 msgid "Currency format: this field is required"
 msgstr ""
 
+#: oc-admin/themes/modern/settings/currencies.php
 #: oc-admin/themes/modern/settings/currency_form.php
 msgid "Currency symbol"
 msgstr ""
@@ -2803,7 +2804,6 @@ msgstr ""
 #: oc-admin/themes/modern/languages/frm.php
 #: oc-admin/themes/modern/languages/index.php
 #: oc-admin/themes/modern/plugins/index.php
-#: oc-admin/themes/modern/settings/currencies.php
 #: oc-includes/osclass/classes/form/CategoryForm.php
 #: oc-includes/osclass/classes/form/ItemForm.php
 #: oc-includes/osclass/classes/form/PageForm.php
