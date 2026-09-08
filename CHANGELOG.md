@@ -103,6 +103,10 @@ theme ships none, using a documented class vocabulary a theme restyles in CSS al
 - Preference rows written by those screens record `e_type` from the field type rather than
   always `STRING`; a checkbox that is off stores `0` where a few of them stored an empty
   string. Nothing in core reads either.
+- Permalinks saves through a declaration too; writing `.htaccess` and rebuilding the rewrite
+  cache run only after a successful save.
+- The friendly-URL structure boxes hide and show through the shared conditional-field
+  attribute instead of a script of their own.
 
 ### Fixed
 
@@ -114,6 +118,9 @@ theme ships none, using a documented class vocabulary a theme restyles in CSS al
   `apache_mod_loaded()` to check for `mod_ssl` without asking whether the function exists.
 - A blank "custom" retention on Latest searches no longer saves the switch beside it before
   refusing the form.
+- The `.htaccess` body Permalinks shows for copy-paste was missing the `mod_mime` block the
+  same screen writes and compares against, so pasting it produced a warning that could not be
+  cleared.
 - `osc_admin_text()` honours an explicitly passed `email`, `url` or `tel` type instead of
   forcing every box to `text`.
 - `t_user.s_country` and `t_item_location.s_country` are widened from `VARCHAR(40)` to

@@ -9,8 +9,8 @@
  */
 
 /**
- * The eight side-effect-free settings screens, saved through their declarations rather than
- * through hand-written Params::getParam / validate / osc_set_preference blocks.
+ * The nine declared settings screens, saved through their declarations rather than through
+ * hand-written Params::getParam / validate / osc_set_preference blocks.
  *
  * What this is guarding, in the order it would go wrong:
  *
@@ -104,6 +104,50 @@ foreach (array('error', 'ok', 'warning', 'info') as $kind) {
     if (!function_exists('osc_add_flash_' . $kind . '_message')) {
         eval('function osc_add_flash_' . $kind . '_message($msg, $section = "pubMessages") {'
              . '$GLOBALS["flashes"][] = array("' . $kind . '", $msg); }');
+    }
+}
+
+// Permalinks writes a file and rebuilds the rule cache. The file goes to a scratch root, not
+// to the checkout, and the rebuild is recorded rather than run: what is under test is that
+// each happens once on a save and not at all on a refusal.
+if (!defined('REL_WEB_URL')) {
+    define('REL_WEB_URL', '/');
+}
+$GLOBALS['fakeRoot'] = rtrim((string)tempnam(sys_get_temp_dir(), 'oscroot_'), '/');
+@unlink($GLOBALS['fakeRoot']);
+@mkdir($GLOBALS['fakeRoot']);
+register_shutdown_function(static function () {
+    @unlink($GLOBALS['fakeRoot'] . '/.htaccess');
+    @rmdir($GLOBALS['fakeRoot']);
+});
+if (!function_exists('osc_base_path')) {
+    function osc_base_path()
+    {
+        return $GLOBALS['fakeRoot'] . '/';
+    }
+}
+if (!function_exists('apache_mod_loaded')) {
+    function apache_mod_loaded($mod)
+    {
+        return false;
+    }
+}
+
+/** The rule-cache rebuild, recorded. Declared before anything can autoload the real one. */
+class Rewrite
+{
+    private static $instance;
+
+    public static function newInstance()
+    {
+        return self::$instance ?? (self::$instance = new self());
+    }
+
+    public function rebuildAndPersistRules()
+    {
+        $GLOBALS['effects'][] = 'rewrite:rebuild';
+
+        return array();
     }
 }
 
@@ -208,7 +252,16 @@ class AdminSecBaseModel
     }
 }
 
-foreach (array('Main', 'Comments', 'Mailserver', 'LatestSearches', 'Advanced', 'SpamnBots', 'Billing') as $screen) {
+foreach (array(
+    'Main',
+    'Comments',
+    'Mailserver',
+    'LatestSearches',
+    'Advanced',
+    'SpamnBots',
+    'Billing',
+    'Permalinks',
+) as $screen) {
     require_once ABS_PATH . 'oc-includes/osclass/classes/controller/admin/settings/CAdminSettings' . $screen . '.php';
 }
 
@@ -218,6 +271,7 @@ use mindstellar\admin\form\KeywordBlockSettingsForm;
 use mindstellar\admin\form\LatestSearchSettingsForm;
 use mindstellar\admin\form\MailServerSettingsForm;
 use mindstellar\admin\form\MainSettingsForm;
+use mindstellar\admin\form\PermalinkSettingsForm;
 use mindstellar\admin\form\SpamSettingsForm;
 use mindstellar\admin\form\store\PreferenceStore;
 use mindstellar\settings\SettingsPageRegistry;
@@ -400,6 +454,54 @@ pin(
         's_host' => 'osclass/subdomain_host',
     ),
     keymap(AdvancedSettingsForm::register())
+);
+// Only the switch is renamed on the way to storage, and it is the one whose key nothing
+// else spells: every reader asks getBoolPreference('rewriteEnabled'), and a control called
+// rewrite_enabled writing under its own name would leave friendly URLs permanently off.
+pin(
+    'the permalinks screen, where the switch is the only renamed key',
+    array(
+        'rewrite_enabled'                   => 'osclass/rewriteEnabled',
+        'rewrite_item_url'                  => 'osclass/rewrite_item_url',
+        'rewrite_page_url'                  => 'osclass/rewrite_page_url',
+        'rewrite_cat_url'                   => 'osclass/rewrite_cat_url',
+        'seo_url_search_prefix'             => 'osclass/seo_url_search_prefix',
+        'rewrite_search_url'                => 'osclass/rewrite_search_url',
+        'rewrite_search_country'            => 'osclass/rewrite_search_country',
+        'rewrite_search_region'             => 'osclass/rewrite_search_region',
+        'rewrite_search_city'               => 'osclass/rewrite_search_city',
+        'rewrite_search_city_area'          => 'osclass/rewrite_search_city_area',
+        'rewrite_search_category'           => 'osclass/rewrite_search_category',
+        'rewrite_search_user'               => 'osclass/rewrite_search_user',
+        'rewrite_search_pattern'            => 'osclass/rewrite_search_pattern',
+        'rewrite_contact'                   => 'osclass/rewrite_contact',
+        'rewrite_feed'                      => 'osclass/rewrite_feed',
+        'rewrite_language'                  => 'osclass/rewrite_language',
+        'rewrite_item_mark'                 => 'osclass/rewrite_item_mark',
+        'rewrite_item_send_friend'          => 'osclass/rewrite_item_send_friend',
+        'rewrite_item_contact'              => 'osclass/rewrite_item_contact',
+        'rewrite_item_new'                  => 'osclass/rewrite_item_new',
+        'rewrite_item_activate'             => 'osclass/rewrite_item_activate',
+        'rewrite_item_edit'                 => 'osclass/rewrite_item_edit',
+        'rewrite_item_delete'               => 'osclass/rewrite_item_delete',
+        'rewrite_item_resource_delete'      => 'osclass/rewrite_item_resource_delete',
+        'rewrite_user_login'                => 'osclass/rewrite_user_login',
+        'rewrite_user_dashboard'            => 'osclass/rewrite_user_dashboard',
+        'rewrite_user_logout'               => 'osclass/rewrite_user_logout',
+        'rewrite_user_register'             => 'osclass/rewrite_user_register',
+        'rewrite_user_activate'             => 'osclass/rewrite_user_activate',
+        'rewrite_user_activate_alert'       => 'osclass/rewrite_user_activate_alert',
+        'rewrite_user_profile'              => 'osclass/rewrite_user_profile',
+        'rewrite_user_items'                => 'osclass/rewrite_user_items',
+        'rewrite_user_alerts'               => 'osclass/rewrite_user_alerts',
+        'rewrite_user_recover'              => 'osclass/rewrite_user_recover',
+        'rewrite_user_forgot'               => 'osclass/rewrite_user_forgot',
+        'rewrite_user_change_password'      => 'osclass/rewrite_user_change_password',
+        'rewrite_user_change_email'         => 'osclass/rewrite_user_change_email',
+        'rewrite_user_change_email_confirm' => 'osclass/rewrite_user_change_email_confirm',
+        'rewrite_user_change_username'      => 'osclass/rewrite_user_change_username',
+    ),
+    keymap(PermalinkSettingsForm::register())
 );
 pin(
     'the mail-server screen',
@@ -754,6 +856,183 @@ $run = drive('CAdminSettingsBilling', 'billing_post', array('billing_enabled' =>
 pin('the switch is a boolean', array('1', 'BOOLEAN'), pref($admin, 'billing_enabled'));
 pin('and reports itself', array('ok:Billing settings have been updated'), flashed($run));
 
+harness_section('permalinks, and the two effects that follow a save');
+
+// The structure as the screen posts it, with the shapes the hand-written controller
+// normalised: a doubled slash, a trailing one, and the older spelling of the category
+// keyword. Every value here is valid, so the refusals below differ from it in one field.
+$permalinks = array(
+    'rewrite_enabled'                   => '1',
+    'rewrite_item_url'                  => '{CATEGORIES}//{ITEM_TITLE}_i{ITEM_ID}/',
+    'rewrite_page_url'                  => '{PAGE_SLUG}-p{PAGE_ID}',
+    'rewrite_cat_url'                   => '{CATEGORY_SLUG}',
+    'seo_url_search_prefix'             => 'shop/',
+    'rewrite_search_url'                => 'search',
+    'rewrite_search_country'            => 'country/',
+    'rewrite_search_region'             => 'region',
+    'rewrite_search_city'               => 'city',
+    'rewrite_search_city_area'          => 'cityarea',
+    'rewrite_search_category'           => 'category',
+    'rewrite_search_user'               => 'user',
+    'rewrite_search_pattern'            => 'pattern',
+    'rewrite_contact'                   => 'contact',
+    'rewrite_feed'                      => 'feed',
+    'rewrite_language'                  => 'language',
+    'rewrite_item_mark'                 => 'item/mark',
+    'rewrite_item_send_friend'          => 'item/send-friend',
+    'rewrite_item_contact'              => 'item/contact',
+    'rewrite_item_new'                  => 'item/new',
+    'rewrite_item_activate'             => 'item/activate',
+    'rewrite_item_edit'                 => 'item//edit/',
+    'rewrite_item_delete'               => 'item/delete',
+    'rewrite_item_resource_delete'      => 'resource/delete',
+    'rewrite_user_login'                => 'user/login',
+    'rewrite_user_dashboard'            => 'user/dashboard',
+    'rewrite_user_logout'               => 'user/logout',
+    'rewrite_user_register'             => 'user/register',
+    'rewrite_user_activate'             => 'user/activate',
+    'rewrite_user_activate_alert'       => 'alert/confirm',
+    'rewrite_user_profile'              => 'user/profile',
+    'rewrite_user_items'                => 'user/items',
+    'rewrite_user_alerts'               => 'user/alerts',
+    'rewrite_user_recover'              => 'user/recover',
+    'rewrite_user_forgot'               => 'user/forgot',
+    'rewrite_user_change_password'      => 'password/change',
+    'rewrite_user_change_email'         => 'email/change',
+    'rewrite_user_change_email_confirm' => 'email/confirm',
+    'rewrite_user_change_username'      => 'username/change',
+);
+
+$htaccess = $GLOBALS['fakeRoot'] . '/.htaccess';
+@unlink($htaccess);
+seed_pref($admin, 'rewriteEnabled', '0', 'BOOLEAN');
+seed_pref($admin, 'mod_rewrite_loaded', '0', 'BOOLEAN');
+foreach ($permalinks as $name => $ignored) {
+    if ($name !== 'rewrite_enabled') {
+        seed_pref($admin, $name, 'seeded');
+    }
+}
+seed_pref($admin, 'rewrite_item_url', '{CATEGORIES}/{ITEM_TITLE}_i{ITEM_ID}');
+osc_reset_preferences();
+
+$run = drive('CAdminSettingsPermalinks', 'permalinks_post', $permalinks);
+pin('the switch lands under the key every reader asks for', array('1', 'BOOLEAN'), pref($admin, 'rewriteEnabled'));
+pin('a doubled slash is collapsed and the trailing one dropped', array('item/edit', 'STRING'), pref($admin, 'rewrite_item_edit'));
+pin('and in the listing structure too', array('{CATEGORIES}/{ITEM_TITLE}_i{ITEM_ID}', 'STRING'), pref($admin, 'rewrite_item_url'));
+pin('the retired category keyword is still accepted', array('{CATEGORY_NAME}', 'STRING'), pref($admin, 'rewrite_cat_url'));
+pin('the search prefix loses its trailing slash', array('shop', 'STRING'), pref($admin, 'seo_url_search_prefix'));
+// Characterization, not a preference: the seven search keywords never took the slash pass
+// on the hand-written screen, and a route built from them would move if they started to.
+pin('a search keyword is stored exactly as typed', array('country/', 'STRING'), pref($admin, 'rewrite_search_country'));
+check('the server rules are on disk', file_exists($htaccess));
+pin(
+    'and they are byte for byte the ones the screen tells the administrator to paste',
+    osc_server_rewrite_rules(),
+    (string)file_get_contents($htaccess)
+);
+pin('the rule cache is rebuilt exactly once', array('rewrite:rebuild'), $run['effects']);
+pin(
+    'and off mod_php the save says so rather than claiming mod_rewrite is loaded',
+    array('warning:Permalinks structure updated. However, we can\'t check if Apache module <b>mod_rewrite</b> is loaded. If you experience some problems with the URLs, you should deactivate <em>Friendly URLs</em>'),
+    flashed($run)
+);
+pin('a saved form redirects rather than redrawing', 1, count($run['redirects']));
+
+// The file is now ours and unchanged, which is the case the byte comparison decides.
+$run = drive('CAdminSettingsPermalinks', 'permalinks_post', $permalinks);
+pin(
+    'saving again over our own file reports success rather than a permanent warning',
+    array('ok:Permalinks structure updated'),
+    flashed($run)
+);
+
+$run = drive('CAdminSettingsPermalinks', 'permalinks_post', array(
+    'rewrite_item_url' => '{ITEM_TITLE}',
+) + $permalinks);
+pin(
+    'a listing structure with no {ITEM_ID} is refused',
+    array('warning:The listing permalink structure must include {ITEM_ID}.'),
+    flashed($run)
+);
+pin('nothing is rebuilt for a save that did not happen', array(), $run['effects']);
+pin('the stored structure is untouched', array('{CATEGORIES}/{ITEM_TITLE}_i{ITEM_ID}', 'STRING'), pref($admin, 'rewrite_item_url'));
+pin('and the form comes back to be corrected', array('settings/permalinks.php'), $run['views']);
+check('with what was typed still in it', strpos($run['drawn'], 'value="{ITEM_TITLE}"') !== false);
+
+$run = drive('CAdminSettingsPermalinks', 'permalinks_post', array(
+    'rewrite_user_login' => '',
+    'rewrite_feed'       => '-',
+) + $permalinks);
+pin(
+    'every empty and every letterless fragment is reported at once, not the first one only',
+    array(
+        'warning:Feed is not in the expected format',
+        'warning:User login cannot be left empty',
+    ),
+    flashed($run)
+);
+
+// The label is what the refusal is worded from, so a label punctuated for the row column
+// reads back as "Page URL: cannot be left empty".
+$run = drive('CAdminSettingsPermalinks', 'permalinks_post', array('rewrite_page_url' => '') + $permalinks);
+pin('a refusal names the field without the row column\'s punctuation', array('warning:Page URL cannot be left empty'), flashed($run));
+pin('and neither refusal touches the rules on disk', osc_server_rewrite_rules(), (string)file_get_contents($htaccess));
+
+// A refused save redraws the form from the submission, and the two blocks the declaration
+// draws by hand have to be drawn from it as well. An administrator switching friendly URLs
+// on for the first time and mistyping one structure is sent back to the one screen whose
+// job is to hand them the rules to paste.
+seed_pref($admin, 'rewriteEnabled', '0', 'BOOLEAN');
+osc_reset_preferences();
+$run = drive('CAdminSettingsPermalinks', 'permalinks_post', array(
+    'rewrite_item_url' => '{ITEM_TITLE}',
+) + $permalinks);
+check('a refused first switch-on still shows the switch ticked', strpos($run['drawn'], 'name="rewrite_enabled" id="rewrite_enabled" value="1" checked') !== false);
+check('the disclosure it opens is not sent back hidden', strpos($run['drawn'], 'id="custom_rules" data-osc-depends="rewrite_enabled" hidden') === false);
+check('and the rules block is on the page to be copied', strpos($run['drawn'], 'class="server-config"') !== false);
+
+// Switching friendly URLs off posts the structure boxes as well -- they are on the page,
+// merely hidden -- and none of it may be stored, exactly as the hand-written screen's
+// single if arranged.
+$run = drive('CAdminSettingsPermalinks', 'permalinks_post', array(
+    'rewrite_feed' => 'a-different-feed',
+) + array_diff_key($permalinks, array('rewrite_enabled' => true)));
+pin('the switch goes off', array('0', 'BOOLEAN'), pref($admin, 'rewriteEnabled'));
+pin('and so does the module flag beside it', array('0', 'BOOLEAN'), pref($admin, 'mod_rewrite_loaded'));
+pin('a structure typed while the switch was off is discarded', array('feed', 'STRING'), pref($admin, 'rewrite_feed'));
+check('our own rules file is taken back off disk', !file_exists($htaccess));
+pin('the rule cache is not rebuilt for a structure that was not stored', array(), $run['effects']);
+pin('and the screen says so', array('ok:Friendly URLs successfully deactivated'), flashed($run));
+
+// A file somebody else wrote is not ours to delete: it may be carrying rules that have
+// nothing to do with this, and the byte comparison is the only thing that can tell.
+file_put_contents($htaccess, "# hand written\n");
+$run = drive('CAdminSettingsPermalinks', 'permalinks_post', array_diff_key($permalinks, array('rewrite_enabled' => true)));
+check('a .htaccess written by hand is left where it is', file_exists($htaccess));
+pin(
+    'and the screen says why',
+    array('warning:Friendly URLs deactivated, but .htaccess file was modified outside Shopclass and was not deleted'),
+    flashed($run)
+);
+@unlink($htaccess);
+
+// nginx reads no .htaccess at all, so there is nothing to write and no mod_rewrite to test.
+$_SERVER['SERVER_SOFTWARE'] = 'nginx/1.27.0';
+$run = drive('CAdminSettingsPermalinks', 'permalinks_post', $permalinks);
+check('on nginx no file is written', !file_exists($htaccess));
+pin(
+    'and the save points at the server block instead of a file nobody reads',
+    array('ok:Permalinks structure updated nginx does not read .htaccess: check the server rules below are in your nginx configuration, then reload nginx.'),
+    flashed($run)
+);
+pin('the structure is still stored', array('1', 'BOOLEAN'), pref($admin, 'rewriteEnabled'));
+$run = drive('CAdminSettingsPermalinks', 'permalinks');
+check(
+    'and the screen shows the nginx location block, not an .htaccess body',
+    strpos($run['drawn'], 'try_files') !== false && strpos($run['drawn'], 'mod_rewrite') === false
+);
+unset($_SERVER['SERVER_SOFTWARE']);
+
 /* ---------------------------------------------------------------------------------------
  * What the page around the form still reaches for. A declared field's id is derived from
  * its name -- field-<name> -- while the hand-written view it replaced wrote its own. Where
@@ -773,6 +1052,7 @@ $screenViews = array(
     'settings/advanced.php'   => array('CAdminSettingsAdvanced', 'advanced'),
     'settings/spamNbots.php'  => array('CAdminSettingsSpamnBots', 'spamNbots'),
     'settings/billing.php'    => array('CAdminSettingsBilling', 'billing'),
+    'settings/permalinks.php' => array('CAdminSettingsPermalinks', 'permalinks'),
 );
 $drawn = array();
 foreach ($screenViews as $view => $screen) {
@@ -792,6 +1072,22 @@ check(
 check(
     'and the time format beside it',
     strpos($drawn['settings/index.php'], 'id="timeFormat"') !== false
+);
+// Permalinks used to drive its disclosure from a script of its own, reaching for these two
+// ids by hand; the declaration replaced the listener with the shared conditional-field
+// attribute. The ids stay because a forked admin theme's copy of the view may still be the
+// hand-written one, and because field-rewrite_enabled is not the name anything looks up.
+check(
+    'the friendly-URLs switch keeps the id the screen has always given it',
+    strpos($drawn['settings/permalinks.php'], 'id="rewrite_enabled"') !== false
+);
+check(
+    'the structure disclosure keeps its own',
+    strpos($drawn['settings/permalinks.php'], 'id="custom_rules"') !== false
+);
+check(
+    'and it is hidden and shown by the shared attribute rather than a listener of its own',
+    strpos($drawn['settings/permalinks.php'], 'id="custom_rules" data-osc-depends="rewrite_enabled"') !== false
 );
 
 $missing = array();
@@ -868,6 +1164,10 @@ $screens = array(
     'settings/spamNbots.php'    => array('CAdminSettingsSpamnBots.php', array('akismetKey', 'login_throttle_window')),
     'settings/billing.php'      => array('CAdminSettingsBilling.php', array('billing_currency', 'billing_enabled')),
     'settings/keywordBlock.php' => array('CAdminSettingsKeywordBlock.php', array('report_threshold', 'report_autoblock')),
+    'settings/permalinks.php'   => array(
+        'CAdminSettingsPermalinks.php',
+        array('rewrite_enabled', 'rewrite_item_url', 'seo_url_search_prefix'),
+    ),
 );
 foreach ($screens as $view => $screen) {
     [$controller, $fields] = $screen;
@@ -900,6 +1200,7 @@ foreach (array(
     'LatestSearchSettingsForm.php' => array('purge_latest_searches'),
     'AdvancedSettingsForm.php'     => array('subdomain_type', 'subdomain_host'),
     'SpamSettingsForm.php'         => array('recaptcha_version'),
+    'PermalinkSettingsForm.php'    => array('rewriteEnabled'),
 ) as $file => $keys) {
     $src = (string)file_get_contents(ABS_PATH . 'oc-includes/osclass/classes/admin/form/' . $file);
     foreach ($keys as $key) {

@@ -955,6 +955,7 @@ class ComposerStaticInitcacf2fb59ceafa0761df38efb16f9123
         'mindstellar\\admin\\form\\LatestSearchSettingsForm' => __DIR__ . '/../../..' . '/oc-includes/osclass/classes/admin/form/LatestSearchSettingsForm.php',
         'mindstellar\\admin\\form\\MailServerSettingsForm' => __DIR__ . '/../../..' . '/oc-includes/osclass/classes/admin/form/MailServerSettingsForm.php',
         'mindstellar\\admin\\form\\MainSettingsForm' => __DIR__ . '/../../..' . '/oc-includes/osclass/classes/admin/form/MainSettingsForm.php',
+        'mindstellar\\admin\\form\\PermalinkSettingsForm' => __DIR__ . '/../../..' . '/oc-includes/osclass/classes/admin/form/PermalinkSettingsForm.php',
         'mindstellar\\admin\\form\\SpamSettingsForm' => __DIR__ . '/../../..' . '/oc-includes/osclass/classes/admin/form/SpamSettingsForm.php',
         'mindstellar\\admin\\form\\store\\PreferenceStore' => __DIR__ . '/../../..' . '/oc-includes/osclass/classes/admin/form/store/PreferenceStore.php',
         'mindstellar\\admin\\form\\store\\Store' => __DIR__ . '/../../..' . '/oc-includes/osclass/classes/admin/form/store/Store.php',

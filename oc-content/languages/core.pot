@@ -395,7 +395,7 @@ msgstr ""
 msgid "Accept bank transfer / cash payment"
 msgstr ""
 
-#: oc-admin/themes/modern/settings/permalinks.php
+#: oc-includes/osclass/classes/admin/form/PermalinkSettingsForm.php
 msgid "Accepted keywords: %s"
 msgstr ""
 
@@ -440,21 +440,9 @@ msgid "Activate"
 msgstr ""
 
 #: oc-admin/themes/modern/settings/permalinks.php
-msgid "Activate alert url: this field is required"
-msgstr ""
-
-#: oc-admin/themes/modern/settings/permalinks.php
-msgid "Activate listing url: this field is required"
-msgstr ""
-
-#: oc-admin/themes/modern/settings/permalinks.php
 msgid ""
 "Activate this option if you want your site's URLs to be more attractive to "
 "search engines and intelligible for users."
-msgstr ""
-
-#: oc-admin/themes/modern/settings/permalinks.php
-msgid "Activate user url: this field is required"
 msgstr ""
 
 #: oc-admin/themes/modern/comments/frm.php
@@ -746,7 +734,7 @@ msgstr ""
 msgid "Advanced options"
 msgstr ""
 
-#: oc-admin/themes/modern/settings/permalinks.php
+#: oc-includes/osclass/classes/admin/form/PermalinkSettingsForm.php
 msgid "Advanced: customize URL structure"
 msgstr ""
 
@@ -1616,10 +1604,6 @@ msgstr ""
 msgid "Categories are the sections people browse and file listings under. "
 msgstr ""
 
-#: oc-admin/themes/modern/settings/permalinks.php
-msgid "Categories url: this field is required"
-msgstr ""
-
 #: oc-admin/themes/modern/items/frm.php
 #: oc-admin/themes/modern/items/index.php
 #: oc-admin/themes/modern/parts/market.php
@@ -1627,8 +1611,8 @@ msgstr ""
 msgid "Category"
 msgstr ""
 
-#: oc-admin/themes/modern/settings/permalinks.php
-msgid "Category URL:"
+#: oc-includes/osclass/classes/admin/form/PermalinkSettingsForm.php
+msgid "Category URL"
 msgstr ""
 
 #: oc-includes/osclass/classes/admin/form/AdvancedSettingsForm.php
@@ -1672,14 +1656,6 @@ msgstr ""
 msgid "Change advanced configuration of your Shopclass. "
 msgstr ""
 
-#: oc-admin/themes/modern/settings/permalinks.php
-msgid "Change email confirm url: this field is required"
-msgstr ""
-
-#: oc-admin/themes/modern/settings/permalinks.php
-msgid "Change email url: this field is required"
-msgstr ""
-
 #: oc-includes/osclass/classes/Breadcrumb.php
 msgid "Change my email"
 msgstr ""
@@ -1696,10 +1672,6 @@ msgstr ""
 msgid "Change password"
 msgstr ""
 
-#: oc-admin/themes/modern/settings/permalinks.php
-msgid "Change password url: this field is required"
-msgstr ""
-
 #: oc-admin/themes/modern/settings/index.php
 msgid ""
 "Change the basic configuration of your Shopclass. From here, you can modify "
@@ -1708,10 +1680,6 @@ msgstr ""
 
 #: oc-includes/osclass/classes/EmailVariables.php
 msgid "Change user password link"
-msgstr ""
-
-#: oc-admin/themes/modern/settings/permalinks.php
-msgid "Change username url: this field is required"
 msgstr ""
 
 #: oc-includes/osclass/classes/Breadcrumb.php
@@ -2139,8 +2107,8 @@ msgstr ""
 msgid "Connection test"
 msgstr ""
 
-#: oc-admin/themes/modern/settings/permalinks.php
 #: oc-includes/osclass/classes/Breadcrumb.php
+#: oc-includes/osclass/classes/admin/form/PermalinkSettingsForm.php
 #: oc-includes/osclass/classes/controller/CWebContact.php
 #: oc-includes/osclass/functions.php
 msgid "Contact"
@@ -2175,11 +2143,7 @@ msgstr ""
 msgid "Contact seller"
 msgstr ""
 
-#: oc-admin/themes/modern/settings/permalinks.php
-msgid "Contact url: this field is required"
-msgstr ""
-
-#: oc-admin/themes/modern/settings/permalinks.php
+#: oc-includes/osclass/classes/admin/form/PermalinkSettingsForm.php
 msgid "Contact, feed &amp; language"
 msgstr ""
 
@@ -2726,16 +2690,8 @@ msgstr ""
 msgid "Delete listing link"
 msgstr ""
 
-#: oc-admin/themes/modern/settings/permalinks.php
-msgid "Delete listing resource url: this field is required"
-msgstr ""
-
 #: oc-includes/osclass/classes/EmailVariables.php
 msgid "Delete listing url"
-msgstr ""
-
-#: oc-admin/themes/modern/settings/permalinks.php
-msgid "Delete listing url: this field is required"
 msgstr ""
 
 #: oc-admin/themes/modern/tools/cleanup.php
@@ -3093,10 +3049,6 @@ msgstr ""
 msgid "Edit listing"
 msgstr ""
 
-#: oc-admin/themes/modern/settings/permalinks.php
-msgid "Edit listing url: this field is required"
-msgstr ""
-
 #: oc-admin/themes/modern/pages/frm.php
 msgid "Edit page"
 msgstr ""
@@ -3210,7 +3162,7 @@ msgstr ""
 msgid "Enable billing"
 msgstr ""
 
-#: oc-admin/themes/modern/settings/permalinks.php
+#: oc-includes/osclass/classes/admin/form/PermalinkSettingsForm.php
 msgid "Enable friendly urls"
 msgstr ""
 
@@ -3488,12 +3440,8 @@ msgstr ""
 msgid "February"
 msgstr ""
 
-#: oc-admin/themes/modern/settings/permalinks.php
+#: oc-includes/osclass/classes/admin/form/PermalinkSettingsForm.php
 msgid "Feed"
-msgstr ""
-
-#: oc-admin/themes/modern/settings/permalinks.php
-msgid "Feed url: this field is required"
 msgstr ""
 
 #: oc-includes/osclass/installer/gui/install.php
@@ -3677,7 +3625,7 @@ msgstr ""
 msgid "Friend's name: this field is required"
 msgstr ""
 
-#: oc-admin/themes/modern/settings/permalinks.php
+#: oc-includes/osclass/classes/admin/form/PermalinkSettingsForm.php
 msgid "Friendly URLs"
 msgstr ""
 
@@ -4361,7 +4309,7 @@ msgstr ""
 msgid "Issue tracker"
 msgstr ""
 
-#: oc-admin/themes/modern/settings/permalinks.php
+#: oc-includes/osclass/classes/admin/form/PermalinkSettingsForm.php
 msgid "It always appear before the category, region or city url."
 msgstr ""
 
@@ -4539,7 +4487,7 @@ msgstr ""
 msgid "Land"
 msgstr ""
 
-#: oc-admin/themes/modern/settings/permalinks.php
+#: oc-includes/osclass/classes/admin/form/PermalinkSettingsForm.php
 #: oc-includes/osclass/emails.php
 #: oc-includes/osclass/installer/gui/install.php
 msgid "Language"
@@ -4555,10 +4503,6 @@ msgstr ""
 
 #: oc-includes/osclass/functions.php
 msgid "Language updates"
-msgstr ""
-
-#: oc-admin/themes/modern/settings/permalinks.php
-msgid "Language url: this field is required"
 msgstr ""
 
 #: oc-admin/themes/modern/languages/index.php
@@ -4745,15 +4689,15 @@ msgstr ""
 msgid "Listing Statistics"
 msgstr ""
 
-#: oc-admin/themes/modern/settings/permalinks.php
-msgid "Listing URL:"
+#: oc-includes/osclass/classes/admin/form/PermalinkSettingsForm.php
+msgid "Listing URL"
 msgstr ""
 
-#: oc-admin/themes/modern/settings/permalinks.php
+#: oc-includes/osclass/classes/admin/form/PermalinkSettingsForm.php
 msgid "Listing actions"
 msgstr ""
 
-#: oc-admin/themes/modern/settings/permalinks.php
+#: oc-includes/osclass/classes/admin/form/PermalinkSettingsForm.php
 msgid "Listing activate"
 msgstr ""
 
@@ -4761,19 +4705,15 @@ msgstr ""
 msgid "Listing city"
 msgstr ""
 
-#: oc-admin/themes/modern/settings/permalinks.php
+#: oc-includes/osclass/classes/admin/form/PermalinkSettingsForm.php
 msgid "Listing contact"
-msgstr ""
-
-#: oc-admin/themes/modern/settings/permalinks.php
-msgid "Listing contact url: this field is required"
 msgstr ""
 
 #: oc-includes/osclass/classes/EmailVariables.php
 msgid "Listing country"
 msgstr ""
 
-#: oc-admin/themes/modern/settings/permalinks.php
+#: oc-includes/osclass/classes/admin/form/PermalinkSettingsForm.php
 msgid "Listing delete"
 msgstr ""
 
@@ -4785,7 +4725,7 @@ msgstr ""
 msgid "Listing description in all languages"
 msgstr ""
 
-#: oc-admin/themes/modern/settings/permalinks.php
+#: oc-includes/osclass/classes/admin/form/PermalinkSettingsForm.php
 msgid "Listing edit"
 msgstr ""
 
@@ -4797,15 +4737,11 @@ msgstr ""
 msgid "Listing list"
 msgstr ""
 
-#: oc-admin/themes/modern/settings/permalinks.php
+#: oc-includes/osclass/classes/admin/form/PermalinkSettingsForm.php
 msgid "Listing mark"
 msgstr ""
 
-#: oc-admin/themes/modern/settings/permalinks.php
-msgid "Listing mark url: this field is required"
-msgstr ""
-
-#: oc-admin/themes/modern/settings/permalinks.php
+#: oc-includes/osclass/classes/admin/form/PermalinkSettingsForm.php
 msgid "Listing new"
 msgstr ""
 
@@ -4817,16 +4753,12 @@ msgstr ""
 msgid "Listing region"
 msgstr ""
 
-#: oc-admin/themes/modern/settings/permalinks.php
+#: oc-includes/osclass/classes/admin/form/PermalinkSettingsForm.php
 msgid "Listing resource delete"
 msgstr ""
 
-#: oc-admin/themes/modern/settings/permalinks.php
+#: oc-includes/osclass/classes/admin/form/PermalinkSettingsForm.php
 msgid "Listing send friend"
-msgstr ""
-
-#: oc-admin/themes/modern/settings/permalinks.php
-msgid "Listing send friend url: this field is required"
 msgstr ""
 
 #: oc-admin/themes/modern/main/index.php
@@ -4915,10 +4847,6 @@ msgstr ""
 msgid "Listings that are disabled/blocked."
 msgstr ""
 
-#: oc-admin/themes/modern/settings/permalinks.php
-msgid "Listings url: this field is required"
-msgstr ""
-
 #: oc-admin/themes/modern/tools/cleanup.php
 msgid "Listings visitors have flagged as spam."
 msgstr ""
@@ -4927,7 +4855,7 @@ msgstr ""
 msgid "Listings' views"
 msgstr ""
 
-#: oc-admin/themes/modern/settings/permalinks.php
+#: oc-includes/osclass/classes/admin/form/PermalinkSettingsForm.php
 msgid "Listings, pages &amp; categories"
 msgstr ""
 
@@ -4996,17 +4924,9 @@ msgstr ""
 msgid "Login"
 msgstr ""
 
-#: oc-admin/themes/modern/settings/permalinks.php
-msgid "Login url: this field is required"
-msgstr ""
-
 #: oc-includes/osclass/functions.php
 #: oc-includes/osclass/helpers/hUtils.php
 msgid "Logout"
-msgstr ""
-
-#: oc-admin/themes/modern/settings/permalinks.php
-msgid "Logout url: this field is required"
 msgstr ""
 
 #: oc-admin/themes/modern/tools/system-info.php
@@ -5621,10 +5541,6 @@ msgstr ""
 
 #: oc-admin/themes/modern/stats/items.php
 msgid "New listing"
-msgstr ""
-
-#: oc-admin/themes/modern/settings/permalinks.php
-msgid "New listing url: this field is required"
 msgstr ""
 
 #: oc-admin/themes/modern/main/index.php
@@ -6363,8 +6279,8 @@ msgstr ""
 msgid "Page %s"
 msgstr ""
 
-#: oc-admin/themes/modern/settings/permalinks.php
-msgid "Page URL:"
+#: oc-includes/osclass/classes/admin/form/PermalinkSettingsForm.php
+msgid "Page URL"
 msgstr ""
 
 #: oc-includes/osclass/classes/admin/form/MainSettingsForm.php
@@ -6385,10 +6301,6 @@ msgstr ""
 
 #: oc-admin/themes/modern/settings/index.php
 msgid "Page title: this field is required"
-msgstr ""
-
-#: oc-admin/themes/modern/settings/permalinks.php
-msgid "Page url: this field is required"
 msgstr ""
 
 #: oc-admin/themes/modern/appearance/widgets.php
@@ -6502,6 +6414,7 @@ msgstr ""
 
 #: oc-admin/themes/modern/settings/permalinks.php
 #: oc-includes/osclass/classes/AdminMenu.php
+#: oc-includes/osclass/classes/admin/form/PermalinkSettingsForm.php
 msgid "Permalinks"
 msgstr ""
 
@@ -6864,10 +6777,6 @@ msgstr ""
 
 #: oc-includes/osclass/functions.php
 msgid "Recover my password"
-msgstr ""
-
-#: oc-admin/themes/modern/settings/permalinks.php
-msgid "Recover user url: this field is required"
 msgstr ""
 
 #: oc-includes/osclass/classes/Breadcrumb.php
@@ -7301,12 +7210,12 @@ msgid "Screenshots"
 msgstr ""
 
 #: oc-admin/themes/modern/parts/market.php
-#: oc-admin/themes/modern/settings/permalinks.php
+#: oc-includes/osclass/classes/admin/form/PermalinkSettingsForm.php
 msgid "Search"
 msgstr ""
 
-#: oc-admin/themes/modern/settings/permalinks.php
-msgid "Search URL:"
+#: oc-includes/osclass/classes/admin/form/PermalinkSettingsForm.php
+msgid "Search URL"
 msgstr ""
 
 #: oc-admin/themes/modern/settings/spamNbots.php
@@ -7320,47 +7229,31 @@ msgid ""
 "Requiring login before "
 msgstr ""
 
-#: oc-admin/themes/modern/settings/permalinks.php
-msgid "Search category: this field is required"
-msgstr ""
-
-#: oc-admin/themes/modern/settings/permalinks.php
-msgid "Search city area: this field is required"
-msgstr ""
-
-#: oc-admin/themes/modern/settings/permalinks.php
-msgid "Search city: this field is required"
-msgstr ""
-
-#: oc-admin/themes/modern/settings/permalinks.php
-msgid "Search country: this field is required"
-msgstr ""
-
-#: oc-admin/themes/modern/settings/permalinks.php
+#: oc-includes/osclass/classes/admin/form/PermalinkSettingsForm.php
 msgid "Search keyword category"
 msgstr ""
 
-#: oc-admin/themes/modern/settings/permalinks.php
+#: oc-includes/osclass/classes/admin/form/PermalinkSettingsForm.php
 msgid "Search keyword city"
 msgstr ""
 
-#: oc-admin/themes/modern/settings/permalinks.php
+#: oc-includes/osclass/classes/admin/form/PermalinkSettingsForm.php
 msgid "Search keyword city area"
 msgstr ""
 
-#: oc-admin/themes/modern/settings/permalinks.php
+#: oc-includes/osclass/classes/admin/form/PermalinkSettingsForm.php
 msgid "Search keyword country"
 msgstr ""
 
-#: oc-admin/themes/modern/settings/permalinks.php
+#: oc-includes/osclass/classes/admin/form/PermalinkSettingsForm.php
 msgid "Search keyword pattern"
 msgstr ""
 
-#: oc-admin/themes/modern/settings/permalinks.php
+#: oc-includes/osclass/classes/admin/form/PermalinkSettingsForm.php
 msgid "Search keyword region"
 msgstr ""
 
-#: oc-admin/themes/modern/settings/permalinks.php
+#: oc-includes/osclass/classes/admin/form/PermalinkSettingsForm.php
 msgid "Search keyword user"
 msgstr ""
 
@@ -7368,20 +7261,12 @@ msgstr ""
 msgid "Search page shows"
 msgstr ""
 
-#: oc-admin/themes/modern/settings/permalinks.php
-msgid "Search pattern: this field is required"
-msgstr ""
-
 #: oc-admin/themes/modern/parts/market.php
 msgid "Search plugins…"
 msgstr ""
 
-#: oc-admin/themes/modern/settings/permalinks.php
-msgid "Search prefix URL:"
-msgstr ""
-
-#: oc-admin/themes/modern/settings/permalinks.php
-msgid "Search region: this field is required"
+#: oc-includes/osclass/classes/admin/form/PermalinkSettingsForm.php
+msgid "Search prefix URL"
 msgstr ""
 
 #: oc-includes/osclass/classes/Breadcrumb.php
@@ -7395,14 +7280,6 @@ msgstr ""
 
 #: oc-admin/themes/modern/parts/market.php
 msgid "Search themes…"
-msgstr ""
-
-#: oc-admin/themes/modern/settings/permalinks.php
-msgid "Search url: this field is required"
-msgstr ""
-
-#: oc-admin/themes/modern/settings/permalinks.php
-msgid "Search user: this field is required"
 msgstr ""
 
 #: oc-includes/osclass/classes/form/UserForm.php
@@ -7603,11 +7480,11 @@ msgstr ""
 msgid "Server port"
 msgstr ""
 
-#: oc-admin/themes/modern/settings/permalinks.php
+#: oc-includes/osclass/classes/admin/form/PermalinkSettingsForm.php
 msgid "Server rules (.htaccess)"
 msgstr ""
 
-#: oc-admin/themes/modern/settings/permalinks.php
+#: oc-includes/osclass/classes/admin/form/PermalinkSettingsForm.php
 msgid "Server rules (nginx)"
 msgstr ""
 
@@ -8361,6 +8238,10 @@ msgid ""
 "runs again."
 msgstr ""
 
+#: oc-includes/osclass/classes/admin/form/PermalinkSettingsForm.php
+msgid "The listing permalink structure must include {ITEM_ID}."
+msgstr ""
+
 #: oc-admin/themes/modern/tools/cache.php
 msgid "The older memcache extension."
 msgstr ""
@@ -8959,7 +8840,7 @@ msgid ""
 "credits, "
 msgstr ""
 
-#: oc-admin/themes/modern/settings/permalinks.php
+#: oc-includes/osclass/classes/admin/form/PermalinkSettingsForm.php
 msgid "Turns links like index.php?page=item&id=42 into readable ones like "
 msgstr ""
 
@@ -9359,83 +9240,67 @@ msgstr ""
 msgid "User Statistics"
 msgstr ""
 
-#: oc-admin/themes/modern/settings/permalinks.php
+#: oc-includes/osclass/classes/admin/form/PermalinkSettingsForm.php
 msgid "User account"
 msgstr ""
 
-#: oc-admin/themes/modern/settings/permalinks.php
+#: oc-includes/osclass/classes/admin/form/PermalinkSettingsForm.php
 msgid "User activate"
 msgstr ""
 
-#: oc-admin/themes/modern/settings/permalinks.php
+#: oc-includes/osclass/classes/admin/form/PermalinkSettingsForm.php
 msgid "User activate alert"
 msgstr ""
 
-#: oc-admin/themes/modern/settings/permalinks.php
+#: oc-includes/osclass/classes/admin/form/PermalinkSettingsForm.php
 msgid "User alerts"
-msgstr ""
-
-#: oc-admin/themes/modern/settings/permalinks.php
-msgid "User alerts url: this field is required"
 msgstr ""
 
 #: oc-includes/osclass/classes/admin/form/AdvancedSettingsForm.php
 msgid "User based"
 msgstr ""
 
-#: oc-admin/themes/modern/settings/permalinks.php
+#: oc-includes/osclass/classes/admin/form/PermalinkSettingsForm.php
 msgid "User change email"
 msgstr ""
 
-#: oc-admin/themes/modern/settings/permalinks.php
+#: oc-includes/osclass/classes/admin/form/PermalinkSettingsForm.php
 msgid "User change email confirm"
 msgstr ""
 
-#: oc-admin/themes/modern/settings/permalinks.php
+#: oc-includes/osclass/classes/admin/form/PermalinkSettingsForm.php
 msgid "User change password"
 msgstr ""
 
-#: oc-admin/themes/modern/settings/permalinks.php
+#: oc-includes/osclass/classes/admin/form/PermalinkSettingsForm.php
 msgid "User change username"
 msgstr ""
 
-#: oc-admin/themes/modern/settings/permalinks.php
+#: oc-includes/osclass/classes/admin/form/PermalinkSettingsForm.php
 msgid "User dashboard"
-msgstr ""
-
-#: oc-admin/themes/modern/settings/permalinks.php
-msgid "User dashboard url: this field is required"
 msgstr ""
 
 #: oc-includes/osclass/classes/EmailVariables.php
 msgid "User email"
 msgstr ""
 
-#: oc-admin/themes/modern/settings/permalinks.php
+#: oc-includes/osclass/classes/admin/form/PermalinkSettingsForm.php
 msgid "User forgot"
-msgstr ""
-
-#: oc-admin/themes/modern/settings/permalinks.php
-msgid "User forgot url: this field is required"
 msgstr ""
 
 #: oc-includes/osclass/classes/EmailVariables.php
 msgid "User ip address"
 msgstr ""
 
-#: oc-admin/themes/modern/settings/permalinks.php
+#: oc-includes/osclass/classes/admin/form/PermalinkSettingsForm.php
 msgid "User listings"
 msgstr ""
 
-#: oc-admin/themes/modern/settings/permalinks.php
-msgid "User listings url: this field is required"
-msgstr ""
-
-#: oc-admin/themes/modern/settings/permalinks.php
+#: oc-includes/osclass/classes/admin/form/PermalinkSettingsForm.php
 msgid "User login"
 msgstr ""
 
-#: oc-admin/themes/modern/settings/permalinks.php
+#: oc-includes/osclass/classes/admin/form/PermalinkSettingsForm.php
 msgid "User logout"
 msgstr ""
 
@@ -9447,24 +9312,16 @@ msgstr ""
 msgid "User phone number"
 msgstr ""
 
-#: oc-admin/themes/modern/settings/permalinks.php
+#: oc-includes/osclass/classes/admin/form/PermalinkSettingsForm.php
 msgid "User profile"
 msgstr ""
 
-#: oc-admin/themes/modern/settings/permalinks.php
-msgid "User profile url: this field is required"
-msgstr ""
-
-#: oc-admin/themes/modern/settings/permalinks.php
+#: oc-includes/osclass/classes/admin/form/PermalinkSettingsForm.php
 msgid "User recover"
 msgstr ""
 
-#: oc-admin/themes/modern/settings/permalinks.php
+#: oc-includes/osclass/classes/admin/form/PermalinkSettingsForm.php
 msgid "User register"
-msgstr ""
-
-#: oc-admin/themes/modern/settings/permalinks.php
-msgid "User register url: this field is required"
 msgstr ""
 
 #: oc-admin/themes/modern/main/index.php
@@ -9760,7 +9617,7 @@ msgstr ""
 msgid "What happened"
 msgstr ""
 
-#: oc-admin/themes/modern/settings/permalinks.php
+#: oc-includes/osclass/classes/admin/form/PermalinkSettingsForm.php
 msgid "What it should look like"
 msgstr ""
 
@@ -9772,7 +9629,7 @@ msgstr ""
 msgid "What to remove"
 msgstr ""
 
-#: oc-admin/themes/modern/settings/permalinks.php
+#: oc-includes/osclass/classes/admin/form/PermalinkSettingsForm.php
 msgid "What your .htaccess file should look like"
 msgstr ""
 
@@ -9954,7 +9811,7 @@ msgstr ""
 msgid "Your Shopclass installation has been upgraded to version "
 msgstr ""
 
-#: oc-admin/themes/modern/settings/permalinks.php
+#: oc-includes/osclass/classes/admin/form/PermalinkSettingsForm.php
 msgid "Your current .htaccess file"
 msgstr ""
 
@@ -10235,7 +10092,7 @@ msgstr ""
 msgid "never run"
 msgstr ""
 
-#: oc-admin/themes/modern/settings/permalinks.php
+#: oc-includes/osclass/classes/admin/form/PermalinkSettingsForm.php
 msgid "nginx does not read .htaccess files. Add the "
 msgstr ""
 

@@ -91,7 +91,12 @@ final class SettingsForm
     private static function field(array $field, $pageId, array $values)
     {
         $name = $field['name'];
-        if ($field['type'] === 'checkbox') {
+        if ($field['type'] === 'custom') {
+            // What a custom field draws is often conditional on the rest of the form, so it
+            // gets the same values every declared control is drawn from -- including the
+            // submission a rejected save is handing back.
+            $field['values'] = $values;
+        } elseif ($field['type'] === 'checkbox') {
             $field['row_label'] = $field['row_label'] ?? '';
             $field['checked']   = !empty($values[$name]);
         } else {
