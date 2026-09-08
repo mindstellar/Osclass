@@ -26,23 +26,9 @@ function _purify($value, $xss_check)
         return $value;
     }
 
-    $_config = HTMLPurifier_Config::createDefault();
-    $_config->set('HTML.Allowed', '');
-    // Strips all tags, so nothing needs persisting: use the in-memory NullCache rather than
-    // writing serializer blobs into oc-content/uploads/ (which may not yet exist during install).
-    $_config->set('Cache.DefinitionImpl', null);
-
-    $_purifier = new HTMLPurifier($_config);
-
-    if (is_array($value)) {
-        foreach ($value as $k => &$v) {
-            $v = _purify($v, $xss_check); // recursive
-        }
-    } else {
-        $value = $_purifier->purify($value);
-    }
-
-    return $value;
+    // The same strip-every-tag purifier the request layer uses, so the installer cannot
+    // sanitise to a different standard than the site it is installing.
+    return Params::stripTags($value);
 }
 
 /**

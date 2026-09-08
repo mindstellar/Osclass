@@ -624,10 +624,6 @@ class ItemActions
                 $flash_error .= $message . PHP_EOL;
             }
         }
-        if (isset($aItem['s_contact_phone']) && (!osc_validate_phone($aItem['s_contact_phone'], 4))) {
-            $flash_error .= (_m('Phone invalid.') . PHP_EOL);
-        }
-
         return $flash_error;
     }
 

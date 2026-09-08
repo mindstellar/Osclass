@@ -145,6 +145,18 @@ class Params
      *
      * @return string
      */
+    /**
+     * Every tag out, contents kept -- no HTML encoding and no quote encoding.
+     *
+     * @param array|string $value
+     *
+     * @return array|string same shape as $value
+     */
+    public static function stripTags($value)
+    {
+        return self::purify($value, false, true, false);
+    }
+
     private static function purify($value, $html_encode = false, $xss_check = true, $quotes_encode = true)
     {
         if ($html_encode === false && $xss_check === false && $quotes_encode === false) {
