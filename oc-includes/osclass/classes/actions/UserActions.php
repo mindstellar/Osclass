@@ -19,6 +19,26 @@ use mindstellar\utility\Sanitize;
  */
 class UserActions
 {
+    /**
+     * Widths of the t_user columns an account form fills, from struct.sql.
+     * tests/strict-write-guards.php reads this and pins it against the live schema, so a
+     * column that is widened cannot leave a stale limit rejecting values it would now hold.
+     */
+    public const COLUMN_WIDTHS = array(
+        's_name'         => 100,
+        's_username'     => 100,
+        's_email'        => 100,
+        's_website'      => 100,
+        's_phone_land'   => 45,
+        's_phone_mobile' => 45,
+        's_country'      => 80,
+        's_region'       => 100,
+        's_city'         => 100,
+        's_city_area'    => 200,
+        's_address'      => 100,
+        's_zip'          => 15,
+    );
+
     public $is_admin;
     public $manager;
     /**
@@ -306,30 +326,27 @@ class UserActions
      */
     private function tooLongFields(array $input)
     {
-        // Widths of t_user, from struct.sql. tests/strict-write-guards.php pins them
-        // against the live schema, so a column that is widened cannot leave a stale
-        // limit rejecting values the database would now accept.
-        $limits = array(
-            's_name'         => array(100, _m('Name')),
-            's_username'     => array(100, _m('Username')),
-            's_email'        => array(100, _m('E-mail')),
-            's_website'      => array(100, _m('Website')),
-            's_phone_land'   => array(45, _m('Landline')),
-            's_phone_mobile' => array(45, _m('Mobile')),
-            's_country'      => array(80, _m('Country')),
-            's_region'       => array(100, _m('Region')),
-            's_city'         => array(100, _m('City')),
-            's_city_area'    => array(200, _m('Municipality')),
-            's_address'      => array(100, _m('Address')),
-            's_zip'          => array(15, _m('Zip code')),
+        $labels = array(
+            's_name'         => _m('Name'),
+            's_username'     => _m('Username'),
+            's_email'        => _m('E-mail'),
+            's_website'      => _m('Website'),
+            's_phone_land'   => _m('Landline'),
+            's_phone_mobile' => _m('Mobile'),
+            's_country'      => _m('Country'),
+            's_region'       => _m('Region'),
+            's_city'         => _m('City'),
+            's_city_area'    => _m('Municipality'),
+            's_address'      => _m('Address'),
+            's_zip'          => _m('Zip code'),
         );
 
         $flash_error = '';
-        foreach ($limits as $column => $limit) {
-            if (!isset($input[$column]) || osc_validate_max((string)$input[$column], $limit[0])) {
+        foreach (self::COLUMN_WIDTHS as $column => $width) {
+            if (!isset($input[$column]) || osc_validate_max((string)$input[$column], $width)) {
                 continue;
             }
-            $flash_error .= sprintf(_m('%s is too long, the maximum is %d characters'), $limit[1], $limit[0])
+            $flash_error .= sprintf(_m('%s is too long, the maximum is %d characters'), $labels[$column], $width)
                 . PHP_EOL;
         }
 

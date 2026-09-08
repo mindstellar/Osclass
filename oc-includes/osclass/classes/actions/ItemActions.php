@@ -19,6 +19,22 @@ use mindstellar\utility\Sanitize;
  */
 class ItemActions
 {
+    /**
+     * Widths of the t_item_location and t_item columns a submitted listing fills, from
+     * struct.sql. A value wider than its column is cut short on a relaxed connection and
+     * rejects the whole insert on a strict one, so each is refused by name first;
+     * tests/strict-write-guards.php reads this and pins it against the live schema.
+     */
+    public const COLUMN_WIDTHS = array(
+        's_country'       => 80,
+        's_region'        => 100,
+        's_city'          => 100,
+        's_city_area'     => 200,
+        's_address'       => 100,
+        's_zip'           => 15,
+        's_contact_phone' => 40,
+    );
+
     public $is_admin;
     public $data;
     private $manager;
@@ -580,30 +596,34 @@ class ItemActions
         $flash_error .= ((!osc_validate_text($aItem['countryName'], 3, false))
             ? _m('Country too short.') . PHP_EOL
             : '');
-        // The caps below are the widths of t_item_location/t_item, not round numbers:
-        // a value wider than its column is cut short on a relaxed connection and
-        // rejects the whole insert on a strict one. Region and city were capped at 50
-        // against columns of 100, refusing catalog place names the picker offers.
-        $flash_error .= ((!osc_validate_max($aItem['countryName'], 80)) ? _m('Country too long.') . PHP_EOL : '');
         $flash_error .= ((!osc_validate_text($aItem['regionName'], 2, false))
             ? _m('Region too short.') . PHP_EOL
             : '');
-        $flash_error .= ((!osc_validate_max($aItem['regionName'], 100)) ? _m('Region too long.') . PHP_EOL : '');
         $flash_error .= ((!osc_validate_text($aItem['cityName'], 2, false))
             ? _m('City too short.') . PHP_EOL : '');
-        $flash_error .= ((!osc_validate_max($aItem['cityName'], 100)) ? _m('City too long.') . PHP_EOL : '');
         $flash_error .= ((!osc_validate_text($aItem['cityArea'], 3, false))
             ? _m('Municipality too short.')
             . PHP_EOL : '');
-        $flash_error .= ((!osc_validate_max($aItem['cityArea'], 50)) ? _m('Municipality too long.') . PHP_EOL : '');
         $flash_error .= ((!osc_validate_text($aItem['address'], 3, false))
             ? _m('Address too short.') . PHP_EOL
             : '');
-        $flash_error .= ((!osc_validate_max($aItem['address'], 100)) ? _m('Address too long.') . PHP_EOL : '');
-        $flash_error .= ((!osc_validate_max((string)($aItem['s_zip'] ?? ''), 15))
-            ? _m('Zip code too long.') . PHP_EOL : '');
-        $flash_error .= ((!osc_validate_max((string)($aItem['contactPhone'] ?? ''), 40))
-            ? _m('Phone too long.') . PHP_EOL : '');
+        // The input key each capped column is filled from, and what to say when it does
+        // not fit. The widths themselves are COLUMN_WIDTHS, pinned against the live schema.
+        $capped = array(
+            's_country'       => array('countryName', _m('Country too long.')),
+            's_region'        => array('regionName', _m('Region too long.')),
+            's_city'          => array('cityName', _m('City too long.')),
+            's_city_area'     => array('cityArea', _m('Municipality too long.')),
+            's_address'       => array('address', _m('Address too long.')),
+            's_zip'           => array('s_zip', _m('Zip code too long.')),
+            's_contact_phone' => array('contactPhone', _m('Phone too long.')),
+        );
+        foreach (self::COLUMN_WIDTHS as $column => $width) {
+            list($key, $message) = $capped[$column];
+            if (!osc_validate_max((string)($aItem[$key] ?? ''), $width)) {
+                $flash_error .= $message . PHP_EOL;
+            }
+        }
         if (isset($aItem['s_contact_phone']) && (!osc_validate_phone($aItem['s_contact_phone'], 4))) {
             $flash_error .= (_m('Phone invalid.') . PHP_EOL);
         }

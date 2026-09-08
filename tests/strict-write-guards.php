@@ -154,20 +154,10 @@ $register = static function (array $params, bool $isAdmin = false) {
  * ------------------------------------------------------------------------- */
 harness_section('the declared widths are the schema\'s widths');
 
-$declared = array(
-    's_name'         => 100,
-    's_username'     => 100,
-    's_email'        => 100,
-    's_website'      => 100,
-    's_phone_land'   => 45,
-    's_phone_mobile' => 45,
-    's_country'      => 80,
-    's_region'       => 100,
-    's_city'         => 100,
-    's_city_area'    => 200,
-    's_address'      => 100,
-    's_zip'          => 15,
-);
+// Read off the classes, never retyped here: a hand-copied table pins the copy against the
+// schema and lets the code that does the rejecting drift away from both.
+$declared     = UserActions::COLUMN_WIDTHS;
+$itemDeclared = ItemActions::COLUMN_WIDTHS;
 
 /** information_schema hands columns back in ordinal order; the pins compare by name. */
 $sorted = static function (array $widths): array {
@@ -197,16 +187,19 @@ pin(
     $sorted(array_intersect_key($userWidths, $declared))
 );
 
+// s_contact_phone is the one capped column that lives on t_item; the rest are the location row.
 $locationWidths = $widthsOf('t_item_location');
+$itemLocation   = array_diff_key($itemDeclared, array('s_contact_phone' => true));
 pin(
-    'and the listing location columns ItemActions caps match too',
-    $sorted(array('s_country' => 80, 's_address' => 100, 's_zip' => 15, 's_city_area' => 200)),
-    $sorted(array_intersect_key(
-        $locationWidths,
-        array_flip(array('s_country', 's_address', 's_zip', 's_city_area'))
-    ))
+    'and every listing location column ItemActions caps matches too',
+    $sorted($itemLocation),
+    $sorted(array_intersect_key($locationWidths, $itemLocation))
 );
-pin('as does the listing phone column', 40, $widthsOf('t_item')['s_contact_phone'] ?? null);
+pin(
+    'as does the listing phone column',
+    $itemDeclared['s_contact_phone'],
+    $widthsOf('t_item')['s_contact_phone'] ?? null
+);
 
 /*
  * The denormalised place names are copies of catalog rows the user picks from, so a
@@ -530,6 +523,19 @@ pin(
     'and 101 characters, past the column, is still refused',
     "City too long.\n",
     $publish(array('cityName' => str_repeat('c', 101)))
+);
+
+// s_city_area holds 200 and the cap was 50, so a municipality between the two was refused
+// with "too long" against a column with room for it four times over.
+pin(
+    'a 60-character municipality goes through',
+    2,
+    $publish(array('cityArea' => str_repeat('m', 60)))
+);
+pin(
+    'and 201 characters, past the column, is refused',
+    "Municipality too long.\n",
+    $publish(array('cityArea' => str_repeat('m', 201)))
 );
 
 /* ----------------------------------------------------------------------------

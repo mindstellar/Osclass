@@ -571,4 +571,36 @@ $html = render(static function () {
 });
 emits('a field with no row label still labels the row with its own', $html, '<label for="field-n">Count</label>');
 
+harness_section('the length hint, and the mirror it depends on');
+// Field keeps its own copy of the purified-type list so a markup primitive need not load
+// the settings registry. The copy is only safe while it stays a copy.
+require_once ABS_PATH . 'oc-includes/osclass/classes/settings/SettingsPageRegistry.php';
+$mirror = new ReflectionClassConstant('mindstellar\\admin\\ui\\Field', 'PURIFIED_TYPES');
+pin(
+    'Field\'s purified-type list still matches the registry it mirrors',
+    mindstellar\settings\SettingsPageRegistry::PURIFIED_TYPES,
+    $mirror->getValue()
+);
+
+// Escaping lengthens -- one typed "&" reaches the column as five characters -- so on a
+// purified type the attribute would promise a cap the save does not apply.
+foreach (array('text', 'tel', 'textarea') as $type) {
+    $html = render(static function () use ($type) {
+        osc_admin_field(array('type' => $type, 'name' => 'f', 'label' => 'F', 'maxlength' => 20));
+    });
+    check("a purified {$type} carries no maxlength", strpos($html, 'maxlength') === false);
+    $html = render(static function () use ($type) {
+        osc_admin_field(array(
+            'type' => $type, 'name' => 'f', 'label' => 'F', 'maxlength' => 20, 'purify' => false,
+        ));
+    });
+    check("and takes one once it is not purified", strpos($html, 'maxlength="20"') !== false);
+}
+foreach (array('email', 'url', 'secret') as $type) {
+    $html = render(static function () use ($type) {
+        osc_admin_field(array('type' => $type, 'name' => 'f', 'label' => 'F', 'maxlength' => 20));
+    });
+    check("an unpurified {$type} carries the cap it was given", strpos($html, 'maxlength="20"') !== false);
+}
+
 exit(harness_result());
