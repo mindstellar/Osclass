@@ -85,10 +85,12 @@ class UserActions
 
         if (is_array(Params::getParam('s_info'))) {
             foreach (Params::getParam('s_info') as $key => $value) {
-                // validate max length to 512 chars
-                $valid = osc_validate_text($value, 256, false);
-                if (!$valid) {
-                    $flash_error .= _m('The field %s is too long', $key) . PHP_EOL;
+                // s_info is TEXT, so the limit is 65535 *bytes*, not characters.
+                // osc_validate_text() is a minimum-length gate: at 256 it demanded
+                // 256 consecutive alphanumerics, which no prose containing a space
+                // can satisfy, and reported the failure as "too long".
+                if (strlen((string) $value) > 65535) {
+                    $flash_error .= sprintf(_m('The field %s is too long'), osc_esc_html($key)) . PHP_EOL;
                     $error[]     = 11;
                 }
             }
