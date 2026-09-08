@@ -381,11 +381,13 @@ class FieldGroup extends DAO
         // bound placeholder each.
         $prefix       = DB_TABLE_PREFIX;
         $placeholders = implode(', ', array_fill(0, count($path), '?'));
+        // The membership rows are matched in a subquery rather than joined and then
+        // collapsed with GROUP BY: a group assigned to several ancestor categories
+        // still yields one row, and selecting g.* beside GROUP BY g.pk_i_id is
+        // rejected under ONLY_FULL_GROUP_BY on servers that do not infer the key.
         $sql          = 'SELECT g.* FROM ' . $prefix . 't_meta_group g'
-            . ' CROSS JOIN ' . $prefix . 't_meta_group_categories gc'
-            . ' WHERE gc.fk_i_category_id IN (' . $placeholders . ')'
-            . ' AND g.pk_i_id = gc.fk_i_group_id'
-            . ' GROUP BY g.pk_i_id'
+            . ' WHERE g.pk_i_id IN (SELECT gc.fk_i_group_id FROM ' . $prefix . 't_meta_group_categories gc'
+            . ' WHERE gc.fk_i_category_id IN (' . $placeholders . '))'
             . ' ORDER BY g.i_position ASC';
 
         try {

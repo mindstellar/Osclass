@@ -325,7 +325,14 @@ class ItemActions
             $location = array_merge($location, $this->getItemCoordinates($location));
 
             $locationManager = ItemLocation::newInstance();
-            $locationManager->insert($location);
+            // The listing row already exists, so there is nothing useful to tell the
+            // poster here -- but a refused location write leaves a listing that no
+            // location search will ever return, and DAO::insert() reports it only in
+            // its return value. The length checks above make user input a clean
+            // rejection instead; what is left is a filtered or plugin-supplied value.
+            if (!$locationManager->insert($location)) {
+                trigger_error('Item location insert wrote no row for item ' . $itemId . '.', E_USER_WARNING);
+            }
 
             $this->uploadItemResources($aItem['photos'], $itemId);
 
@@ -573,14 +580,18 @@ class ItemActions
         $flash_error .= ((!osc_validate_text($aItem['countryName'], 3, false))
             ? _m('Country too short.') . PHP_EOL
             : '');
-        $flash_error .= ((!osc_validate_max($aItem['countryName'], 50)) ? _m('Country too long.') . PHP_EOL : '');
+        // The caps below are the widths of t_item_location/t_item, not round numbers:
+        // a value wider than its column is cut short on a relaxed connection and
+        // rejects the whole insert on a strict one. Region and city were capped at 50
+        // against columns of 100, refusing catalog place names the picker offers.
+        $flash_error .= ((!osc_validate_max($aItem['countryName'], 80)) ? _m('Country too long.') . PHP_EOL : '');
         $flash_error .= ((!osc_validate_text($aItem['regionName'], 2, false))
             ? _m('Region too short.') . PHP_EOL
             : '');
-        $flash_error .= ((!osc_validate_max($aItem['regionName'], 50)) ? _m('Region too long.') . PHP_EOL : '');
+        $flash_error .= ((!osc_validate_max($aItem['regionName'], 100)) ? _m('Region too long.') . PHP_EOL : '');
         $flash_error .= ((!osc_validate_text($aItem['cityName'], 2, false))
             ? _m('City too short.') . PHP_EOL : '');
-        $flash_error .= ((!osc_validate_max($aItem['cityName'], 50)) ? _m('City too long.') . PHP_EOL : '');
+        $flash_error .= ((!osc_validate_max($aItem['cityName'], 100)) ? _m('City too long.') . PHP_EOL : '');
         $flash_error .= ((!osc_validate_text($aItem['cityArea'], 3, false))
             ? _m('Municipality too short.')
             . PHP_EOL : '');
@@ -589,6 +600,10 @@ class ItemActions
             ? _m('Address too short.') . PHP_EOL
             : '');
         $flash_error .= ((!osc_validate_max($aItem['address'], 100)) ? _m('Address too long.') . PHP_EOL : '');
+        $flash_error .= ((!osc_validate_max((string)($aItem['s_zip'] ?? ''), 15))
+            ? _m('Zip code too long.') . PHP_EOL : '');
+        $flash_error .= ((!osc_validate_max((string)($aItem['contactPhone'] ?? ''), 40))
+            ? _m('Phone too long.') . PHP_EOL : '');
         if (isset($aItem['s_contact_phone']) && (!osc_validate_phone($aItem['s_contact_phone'], 4))) {
             $flash_error .= (_m('Phone invalid.') . PHP_EOL);
         }
@@ -1141,7 +1156,11 @@ class ItemActions
             $locationManager   = ItemLocation::newInstance();
             $old_item_location = $locationManager->findByPrimaryKey($aItem['idItem']);
 
-            $locationManager->update($location, array('fk_i_item_id' => $aItem['idItem']));
+            // A rejected update leaves the previous location in place and every hook
+            // below still fires, so the only trace it left was the unread return value.
+            if ($locationManager->update($location, array('fk_i_item_id' => $aItem['idItem'])) === false) {
+                trigger_error('Item location update wrote no row for item ' . $aItem['idItem'] . '.', E_USER_WARNING);
+            }
 
             $old_item = $this->manager->findByPrimaryKey($aItem['idItem']);
 

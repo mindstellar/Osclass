@@ -581,6 +581,14 @@ function oc_install()
 
     // When the configuration comes from the environment there is no config.php
     // to write or check — the database settings are managed externally.
+    //
+    // So an env-only install does NOT get OSC_DB_STRICT_MODE, which a config.php
+    // install has written into it below: there is no file to write it to, and
+    // defaulting it on for every OSC_CONFIG_FROM_ENV deploy would flip existing
+    // containers to strict on their next image pull. config-loader.php cannot tell
+    // the two apart — it runs before the database is reachable, and config.php is
+    // the only marker of a fresh install there is. Set OSC_DB_STRICT_MODE=1 in the
+    // environment to opt a container in.
     $writesConfig = !(defined('OSC_CONFIG_FROM_ENV') && OSC_CONFIG_FROM_ENV);
 
     if ($writesConfig) {
@@ -867,6 +875,14 @@ define('DB_HOST', getenv('DB_HOST') ?: '$dbhost');
 
 /** Database Table prefix */
 define('DB_TABLE_PREFIX', getenv('DB_TABLE_PREFIX') ?: '$tableprefix');
+
+/**
+ * Keep the server's own strict SQL modes instead of relaxing them.
+ *
+ * With this on, a value the column cannot hold is rejected rather than silently
+ * cut short or clamped. Remove the line to go back to the relaxed modes.
+ */
+define('OSC_DB_STRICT_MODE', true);
 
 define('REL_WEB_URL', '$rel_url');
 

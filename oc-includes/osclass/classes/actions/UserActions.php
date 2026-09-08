@@ -77,6 +77,12 @@ class UserActions
             $error[]     = 5;
         }
 
+        $too_long = $this->tooLongFields($input);
+        if ($too_long !== '') {
+            $flash_error .= $too_long;
+            $error[]     = 11;
+        }
+
         if (is_array(Params::getParam('s_info'))) {
             foreach (Params::getParam('s_info') as $key => $value) {
                 // validate max length to 512 chars
@@ -131,6 +137,17 @@ class UserActions
         }
 
         $userId = $this->manager->insertGetId($input);
+
+        // insertGetId() swallows the database error and answers 0, so an unchecked call
+        // walked on with $userId = 0 -- writing the log against no user, mailing an
+        // activation link for a row that does not exist and telling the visitor the
+        // account was created. Stop here instead and say so.
+        if ($userId <= 0) {
+            trigger_error('User insert produced no row; registration aborted.', E_USER_WARNING);
+            osc_run_hook('user_register_failed', array(12));
+
+            return _m('Your account could not be created. Please try again.') . PHP_EOL;
+        }
 
         if ($input['s_username'] == '') {
             $this->manager->update(
@@ -274,6 +291,50 @@ class UserActions
     }
 
     /**
+     * Field-level rejection for anything wider than the column that has to hold it.
+     *
+     * prepareData() sanitises but never shortens, so an over-long value reaches
+     * t_user as it was typed. A relaxed connection cuts it short and stores the
+     * remainder; a strict one refuses the whole statement. Neither is something to
+     * hand a visitor, so the value is refused by name before either can happen.
+     *
+     * @param array $input Row as prepareData() built it
+     *
+     * @return string Accumulated flash error, empty when every field fits
+     */
+    private function tooLongFields(array $input)
+    {
+        // Widths of t_user, from struct.sql. tests/strict-write-guards.php pins them
+        // against the live schema, so a column that is widened cannot leave a stale
+        // limit rejecting values the database would now accept.
+        $limits = array(
+            's_name'         => array(100, _m('Name')),
+            's_username'     => array(100, _m('Username')),
+            's_email'        => array(100, _m('E-mail')),
+            's_website'      => array(100, _m('Website')),
+            's_phone_land'   => array(45, _m('Landline')),
+            's_phone_mobile' => array(45, _m('Mobile')),
+            's_country'      => array(80, _m('Country')),
+            's_region'       => array(100, _m('Region')),
+            's_city'         => array(100, _m('City')),
+            's_city_area'    => array(200, _m('Municipality')),
+            's_address'      => array(100, _m('Address')),
+            's_zip'          => array(15, _m('Zip code')),
+        );
+
+        $flash_error = '';
+        foreach ($limits as $column => $limit) {
+            if (!isset($input[$column]) || osc_validate_max((string)$input[$column], $limit[0])) {
+                continue;
+            }
+            $flash_error .= sprintf(_m('%s is too long, the maximum is %d characters'), $limit[1], $limit[0])
+                . PHP_EOL;
+        }
+
+        return $flash_error;
+    }
+
+    /**
      * Edit user data
      * @param $userId
      *
@@ -313,12 +374,22 @@ class UserActions
             $error[]     = 7;
         }
 
+        $too_long = $this->tooLongFields($input);
+        if ($too_long !== '') {
+            $flash_error .= $too_long;
+            $error[]     = 11;
+        }
+
         $flash_error = osc_apply_filter('user_edit_flash_error', $flash_error, $userId);
         if ($flash_error != '') {
             return $flash_error;
         }
 
-        $this->manager->update($input, array('pk_i_id' => $userId));
+        if ($this->manager->update($input, array('pk_i_id' => $userId)) === false) {
+            trigger_error('User update wrote no row; profile save aborted.', E_USER_WARNING);
+
+            return _m('Your profile could not be saved. Please try again.') . PHP_EOL;
+        }
 
         if ($this->is_admin) {
             Item::newInstance()->update(array(

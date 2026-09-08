@@ -321,6 +321,45 @@ if (!function_exists('harness_questions')) {
     }
 }
 
+if (!function_exists('harness_sql_mode')) {
+    /**
+     * Read the effective session sql_mode off the singleton handle.
+     *
+     * @return string[] Uppercase mode names, empty when the probe fails
+     */
+    function harness_sql_mode(): array
+    {
+        $db  = DBConnectionClass::newInstance()->getOsclassDb();
+        $res = $db->query('SELECT @@SESSION.sql_mode AS m');
+        if (!$res) {
+            return array();
+        }
+        $row = $res->fetch_assoc();
+        $res->free();
+        $raw = (string)($row['m'] ?? '');
+
+        return $raw === '' ? array() : array_map('strtoupper', explode(',', $raw));
+    }
+}
+
+if (!function_exists('harness_strict_writes')) {
+    /**
+     * Whether the connection rejects out-of-range and mistyped writes instead of
+     * coercing them. Several models are pinned twice because the two outcomes are
+     * both real: which one a site gets depends on OSC_DB_STRICT_MODE.
+     *
+     * @return bool
+     */
+    function harness_strict_writes(): bool
+    {
+        $modes = harness_sql_mode();
+
+        return in_array('STRICT_TRANS_TABLES', $modes, true)
+            || in_array('STRICT_ALL_TABLES', $modes, true)
+            || in_array('TRADITIONAL', $modes, true);
+    }
+}
+
 if (!function_exists('harness_query_count')) {
     /**
      * Count the statements $fn sends to the server.

@@ -70,8 +70,51 @@ theme ships none, using a documented class vocabulary a theme restyles in CSS al
   slot rather than a sentence split around `%s`, and every value is escaped. The admin theme's
   own copies still win where it defines them.
 
+### Changed
+
+- **New installs keep the database server's strict SQL modes; upgrades opt in.** Every
+  connection has always had `NO_ZERO_DATE`, `ONLY_FULL_GROUP_BY`, `STRICT_TRANS_TABLES`,
+  `STRICT_ALL_TABLES` and `TRADITIONAL` stripped from it, so a value too long for its column
+  was silently cut short and one out of range clamped to fit. A fresh install now writes
+  `define('OSC_DB_STRICT_MODE', true);` into `config.php` and those modes stand: the write is
+  rejected instead. Upgrades keep the old behaviour, because the risk is not core — the schema,
+  the seed data and every migration from the oldest supported baseline are replayed under the
+  strict modes on every CI run — it is a plugin that has been truncating a value for years and
+  would begin to fail mid-request. To opt an existing site in, add that same line to
+  `config.php`; a container has no `config.php` to write it into, so set
+  `OSC_DB_STRICT_MODE=1` in its environment instead — that is the one place a new install does
+  not get it automatically. Removing it goes back. Try it on a copy first if the site runs
+  third-party plugins that write to the database.
+- A value too long for the column that has to hold it is now refused by name on registration
+  and on the profile form, rather than being cut short. The widths are those of `t_user`: 100
+  characters for a name, username, e-mail, website, region, city or address, 45 for a phone
+  number, 80 for a country and 15 for a postcode. Publishing gained the two length checks it
+  was missing — postcode and phone — and its country check now matches the column it writes to.
+
 ### Fixed
 
+- `t_user.s_country` and `t_item_location.s_country` are widened from `VARCHAR(40)` to
+  `VARCHAR(80)`, the width of the `t_country.s_name` they copy — a country name longer than 40
+  characters was stored cut in half. Upgrading runs an `ALTER TABLE` on both.
+- Publishing refused any region or city name over 50 characters, though the columns hold 100
+  and the location catalog offers names up to 60. The caps are the columns' widths now.
+- Registration could report success while creating no account. `DAO::insertGetId()` answers 0
+  on a rejected write and `UserActions::add()` never looked at it, so a field the column could
+  not hold — a long name, a sixteen-character postcode — left the visitor told to check their
+  inbox for an account that does not exist. The return is checked now, on the profile save and
+  the listing's location write too.
+- Several of core's grouped queries were rejected outright when `ONLY_FULL_GROUP_BY` was on, and each
+  one swallowed the failure and returned nothing at all: saved-search alerts stopped being
+  sent, a category's custom fields and forms vanished from the listing form and from search,
+  the latest-searches list emptied, the statistics charts drew blank and a theme's search
+  footer links disappeared — none of it logged anywhere. They are written to run under the
+  strict modes now, on MariaDB as well as MySQL.
+- The daily statistics counts group by the whole date rather than by day-of-month, so a range
+  longer than a month no longer collapses the 5th of January and the 5th of February into one
+  point. No core screen changes: every core caller asks for an eleven-day window, where two
+  days cannot share a day-of-month. A theme or plugin calling `new_users_count()`,
+  `new_items_count()`, `new_comments_count()` or `new_alerts_count()` over a longer range gets
+  one point per day where it used to get a mixture.
 - "Save the latest user searches" could not be switched on: the controller compared the
   submitted value against `on`, the value a browser invents for a checkbox that declares none.
 - `osc_register_settings_page()` declares a whole settings page — title, menu entry, groups

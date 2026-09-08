@@ -271,15 +271,19 @@ class ConnectionManager
      *
      * Define the optional constant OSC_DB_STRICT_MODE (truthy) to opt out of that
      * loosening: when set, the server's own sql_mode is left exactly as configured
-     * (early return, connection untouched) so the server's modern strict defaults
-     * stand. It defaults OFF, so every install that does not define it keeps the
-     * historic behaviour byte-for-byte.
+     * (early return, connection untouched). The installer writes that constant into
+     * a new install's config.php, so a fresh site runs strict; an install upgraded
+     * from an earlier release defines nothing and keeps the historic behaviour
+     * byte-for-byte until an operator adds the line.
      *
-     * Before enabling, operators should audit for runtime risks: INSERT/UPDATE
-     * truncation from over-length or out-of-range values, and non-aggregated
-     * columns in GROUP BY queries. The bundled schema (struct.sql) carries no
-     * '0000-00-00' zero-date defaults, so it is strict-safe on its own; the risk
-     * is in runtime data and queries, not the schema.
+     * tests/db-strict-mode.php replays three things on a session set strict by hand:
+     * the bundled schema and seed data, every migration from the oldest supported
+     * upgrade baseline, and the aggregates ONLY_FULL_GROUP_BY was found to reject.
+     * That is the extent of the claim. Core's remaining grouped queries are covered
+     * only by their own model tests, which run relaxed; and third-party code, which
+     * writes through this same connection, is not covered at all — a plugin storing
+     * an over-length or out-of-range value gets an error where it used to get a
+     * silently altered row.
      *
      * @param array $modes
      */

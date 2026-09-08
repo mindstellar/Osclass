@@ -171,15 +171,25 @@ class Alerts extends DAO
      */
     public function findByTypeGroup($type, $active = false, $unsub = false)
     {
-        $query = osc_db_table($this->getTableName())
-            ->where('e_type', $type);
+        $table  = $this->getTableName();
+        $where  = array('a.e_type = ?');
+        $params = array($type);
         if (!$unsub) {
-            $query = $query->whereRaw('dt_unsub_date IS NULL');
+            $where[] = 'a.dt_unsub_date IS NULL';
         }
         if ($active) {
-            $query = $query->where('b_active', 1);
+            $where[]  = 'a.b_active = ?';
+            $params[] = 1;
         }
-        $query = $query->groupBy('s_search');
+
+        // The lowest id in each s_search group, not an arbitrary member of it:
+        // selecting every column alongside GROUP BY s_search is rejected under
+        // ONLY_FULL_GROUP_BY, which left the alert cron with nothing to send.
+        $query = osc_db_table($table)->whereRaw(
+            'pk_i_id IN (SELECT MIN(a.pk_i_id) FROM ' . $table . ' a'
+            . ' WHERE ' . implode(' AND ', $where) . ' GROUP BY a.s_search)',
+            $params
+        );
 
         try {
             $rows = $query->get();

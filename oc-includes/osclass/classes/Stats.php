@@ -108,8 +108,8 @@ class Stats
         $sql = 'SELECT ' . $dDate . ' as d_date, COUNT(pk_i_id) as num'
             . ' FROM ' . DB_TABLE_PREFIX . 't_user'
             . ' WHERE dt_reg_date >= ?'
-            . ' GROUP BY ' . $groupBy
-            . ' ORDER BY dt_reg_date DESC';
+            . ' GROUP BY ' . $groupBy . ', ' . $dDate
+            . ' ORDER BY MAX(dt_reg_date) DESC';
 
         return $this->rows($sql, array($from_date));
     }
@@ -172,8 +172,8 @@ class Stats
         $sql = 'SELECT ' . $dDate . ' as d_date, COUNT(pk_i_id) as num'
             . ' FROM ' . DB_TABLE_PREFIX . 't_item'
             . ' WHERE dt_pub_date >= ?'
-            . ' GROUP BY ' . $groupBy
-            . ' ORDER BY dt_pub_date DESC';
+            . ' GROUP BY ' . $groupBy . ', ' . $dDate
+            . ' ORDER BY MAX(dt_pub_date) DESC';
 
         return $this->rows($sql, array($from_date));
     }
@@ -183,12 +183,17 @@ class Stats
      */
     public function latest_items()
     {
+        // One description row per listing is chosen in the WHERE clause rather than
+        // collapsed afterwards: t_item_description is keyed on (item, locale), so
+        // GROUP BY i.pk_i_id left its columns undetermined and the whole query was
+        // rejected under ONLY_FULL_GROUP_BY.
         $sql = 'SELECT l.*, i.*, d.*'
-            . ' FROM ' . DB_TABLE_PREFIX . 't_item i, ' . DB_TABLE_PREFIX . 't_item_location l, '
-            . DB_TABLE_PREFIX . 't_item_description d'
-            . ' WHERE l.fk_i_item_id = i.pk_i_id AND d.fk_i_item_id = i.pk_i_id'
-            . ' GROUP BY i.pk_i_id'
-            . ' ORDER BY dt_pub_date DESC'
+            . ' FROM ' . DB_TABLE_PREFIX . 't_item i'
+            . ' JOIN ' . DB_TABLE_PREFIX . 't_item_location l ON l.fk_i_item_id = i.pk_i_id'
+            . ' JOIN ' . DB_TABLE_PREFIX . 't_item_description d ON d.fk_i_item_id = i.pk_i_id'
+            . ' WHERE d.fk_c_locale_code = (SELECT MIN(d2.fk_c_locale_code) FROM '
+            . DB_TABLE_PREFIX . 't_item_description d2 WHERE d2.fk_i_item_id = i.pk_i_id)'
+            . ' ORDER BY i.dt_pub_date DESC'
             . ' LIMIT 5';
 
         return $this->rows($sql);
@@ -211,8 +216,8 @@ class Stats
         $sql = 'SELECT ' . $dDate . ' as d_date, COUNT(pk_i_id) as num'
             . ' FROM ' . DB_TABLE_PREFIX . 't_item_comment'
             . ' WHERE dt_pub_date >= ?'
-            . ' GROUP BY ' . $groupBy
-            . ' ORDER BY dt_pub_date DESC';
+            . ' GROUP BY ' . $groupBy . ', ' . $dDate
+            . ' ORDER BY MAX(dt_pub_date) DESC';
 
         return $this->rows($sql, array($from_date));
     }
@@ -257,7 +262,7 @@ class Stats
         $sql = 'SELECT ' . $dDate . ' as d_date, ' . $sums
             . ' FROM ' . DB_TABLE_PREFIX . 't_item_stats_daily'
             . ' WHERE dt_date >= ?'
-            . ' GROUP BY ' . $groupBy;
+            . ' GROUP BY ' . $groupBy . ', ' . $dDate;
 
         return $this->rows($sql, array($from_date));
     }
@@ -303,7 +308,7 @@ class Stats
         return 'SELECT ' . $dDate . ' as d_date, ' . $aggregate . ' as num'
             . ' FROM ' . DB_TABLE_PREFIX . 't_alerts'
             . ' WHERE dt_date >= ? AND dt_unsub_date IS NULL'
-            . ' GROUP BY ' . $groupBy
-            . ' ORDER BY dt_date ASC';
+            . ' GROUP BY ' . $groupBy . ', ' . $dDate
+            . ' ORDER BY MAX(dt_date) ASC';
     }
 }

@@ -155,7 +155,7 @@ CREATE TABLE /*TABLE_PREFIX*/t_user (
     s_pass_date DATETIME NULL ,
     s_pass_ip VARCHAR(50) NULL,
     fk_c_country_code CHAR(2) NULL,
-    s_country VARCHAR(40) NULL,
+    s_country VARCHAR(80) NULL,
     s_address VARCHAR(100) NULL,
     s_zip VARCHAR(15) NULL,
     fk_i_region_id INT UNSIGNED NULL,
@@ -307,7 +307,7 @@ CREATE TABLE /*TABLE_PREFIX*/t_item_description (
 CREATE TABLE /*TABLE_PREFIX*/t_item_location (
     fk_i_item_id INT UNSIGNED NOT NULL,
     fk_c_country_code CHAR(2) NULL,
-    s_country VARCHAR(40) NULL,
+    s_country VARCHAR(80) NULL,
     s_address VARCHAR(100) NULL,
     s_zip VARCHAR(15) NULL,
     fk_i_region_id INT UNSIGNED NULL,

@@ -179,6 +179,10 @@ msgstr ""
 msgid "%s is required."
 msgstr ""
 
+#: oc-includes/osclass/classes/actions/UserActions.php
+msgid "%s is too long, the maximum is %d characters"
+msgstr ""
+
 #: oc-includes/osclass/classes/controller/admin/CAdminPages.php
 msgid "%s pages couldn't be deleted"
 msgstr ""
@@ -242,6 +246,7 @@ msgstr ""
 msgid "Added by admin"
 msgstr ""
 
+#: oc-includes/osclass/classes/actions/UserActions.php
 #: oc-includes/osclass/gui/account/user-profile-content.php
 msgid "Address"
 msgstr ""
@@ -413,6 +418,7 @@ msgstr ""
 msgid "Choose a package"
 msgstr ""
 
+#: oc-includes/osclass/classes/actions/UserActions.php
 #: oc-includes/osclass/gui/account/user-profile-content.php
 msgid "City"
 msgstr ""
@@ -505,6 +511,7 @@ msgstr ""
 msgid "Could not select the database. Error: %s"
 msgstr ""
 
+#: oc-includes/osclass/classes/actions/UserActions.php
 #: oc-includes/osclass/gui/account/user-profile-content.php
 msgid "Country"
 msgstr ""
@@ -662,6 +669,10 @@ msgstr ""
 
 #: oc-includes/osclass/classes/controller/admin/CAdminLanguages.php
 msgid "Directory '%s' couldn't be removed;)"
+msgstr ""
+
+#: oc-includes/osclass/classes/actions/UserActions.php
+msgid "E-mail"
 msgstr ""
 
 #: oc-includes/osclass/gui/account/parts/item-row.php
@@ -905,6 +916,10 @@ msgstr ""
 msgid "Keyword updated correctly"
 msgstr ""
 
+#: oc-includes/osclass/classes/actions/UserActions.php
+msgid "Landline"
+msgstr ""
+
 #: oc-includes/osclass/classes/controller/admin/CAdminLanguages.php
 msgid "Language description field is required"
 msgstr ""
@@ -999,12 +1014,17 @@ msgstr ""
 msgid "Message"
 msgstr ""
 
+#: oc-includes/osclass/classes/actions/UserActions.php
 #: oc-includes/osclass/gui/account/user-profile-content.php
 msgid "Mobile"
 msgstr ""
 
 #: oc-includes/osclass/classes/controller/admin/settings/CAdminSettingsKeywordBlock.php
 msgid "Moderation settings have been updated"
+msgstr ""
+
+#: oc-includes/osclass/classes/actions/UserActions.php
+msgid "Municipality"
 msgstr ""
 
 #: oc-includes/osclass/classes/actions/ItemActions.php
@@ -1015,6 +1035,7 @@ msgstr ""
 msgid "Municipality too short."
 msgstr ""
 
+#: oc-includes/osclass/classes/actions/UserActions.php
 #: oc-includes/osclass/gui/account/user-profile-content.php
 #: oc-includes/osclass/gui/account/user-register-content.php
 msgid "Name"
@@ -1433,6 +1454,10 @@ msgstr ""
 msgid "Phone number"
 msgstr ""
 
+#: oc-includes/osclass/classes/actions/ItemActions.php
+msgid "Phone too long."
+msgstr ""
+
 #: oc-includes/osclass/gui/account/user-profile-content.php
 msgid "Picture"
 msgstr ""
@@ -1589,6 +1614,7 @@ msgstr ""
 msgid "Refunded"
 msgstr ""
 
+#: oc-includes/osclass/classes/actions/UserActions.php
 #: oc-includes/osclass/gui/account/user-profile-content.php
 msgid "Region"
 msgstr ""
@@ -2518,6 +2544,7 @@ msgstr ""
 msgid "User settings have been updated"
 msgstr ""
 
+#: oc-includes/osclass/classes/actions/UserActions.php
 #: oc-includes/osclass/gui/account/user-signin-content.php
 msgid "Username"
 msgstr ""
@@ -2600,6 +2627,7 @@ msgstr ""
 msgid "We've sent you an e-mail. Follow its instructions to validate the changes"
 msgstr ""
 
+#: oc-includes/osclass/classes/actions/UserActions.php
 #: oc-includes/osclass/gui/account/user-profile-content.php
 msgid "Website"
 msgstr ""
@@ -2720,6 +2748,10 @@ msgstr ""
 #: oc-includes/osclass/gui/account/nav.php
 #: oc-includes/osclass/helpers/hTheme.php
 msgid "Your account"
+msgstr ""
+
+#: oc-includes/osclass/classes/actions/UserActions.php
+msgid "Your account could not be created. Please try again."
 msgstr ""
 
 #: oc-includes/osclass/classes/controller/CWebRegister.php
@@ -2843,6 +2875,10 @@ msgstr ""
 msgid "Your profile"
 msgstr ""
 
+#: oc-includes/osclass/classes/actions/UserActions.php
+msgid "Your profile could not be saved. Please try again."
+msgstr ""
+
 #: oc-includes/osclass/classes/controller/CWebUser.php
 msgid "Your profile has been updated successfully"
 msgstr ""
@@ -2857,6 +2893,14 @@ msgstr ""
 
 #: oc-includes/osclass/classes/Csrf.php
 msgid "Your session has expired, please reload the page and try again."
+msgstr ""
+
+#: oc-includes/osclass/classes/actions/UserActions.php
+msgid "Zip code"
+msgstr ""
+
+#: oc-includes/osclass/classes/actions/ItemActions.php
+msgid "Zip code too long."
 msgstr ""
 
 #: oc-includes/osclass/gui/billing/wallet-content.php

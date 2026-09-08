@@ -64,7 +64,9 @@ class LatestSearches extends DAO
     {
         // The COUNT(...) AS alias in a comma-separated column list is rejected
         // by the builder's identifier allowlist, so this stays hand-written SQL.
-        $sql = 'SELECT d_date, s_search, COUNT(s_search) as i_total FROM '
+        // d_date is the group's most recent hit rather than an arbitrary member's:
+        // a bare d_date beside GROUP BY s_search is rejected under ONLY_FULL_GROUP_BY.
+        $sql = 'SELECT MAX(d_date) AS d_date, s_search, COUNT(s_search) as i_total FROM '
             . $this->getTableName() . ' GROUP BY s_search ORDER BY d_date DESC';
 
         // A non-numeric $limit leaves the clause off entirely and returns every
@@ -105,7 +107,7 @@ class LatestSearches extends DAO
         // what the method name and its $time parameter describe. An exact equality
         // here matched only rows written in the same second as the cutoff, so it
         // returned nothing for any realistic input.
-        $sql = 'SELECT d_date, s_search, COUNT(s_search) as i_total FROM '
+        $sql = 'SELECT MAX(d_date) AS d_date, s_search, COUNT(s_search) as i_total FROM '
             . $this->getTableName() . ' WHERE d_date >= ? GROUP BY s_search ORDER BY d_date DESC';
         $params = array(date('Y-m-d H:i:s', $time));
 
@@ -139,7 +141,8 @@ class LatestSearches extends DAO
             return false;
         }
 
-        $sql = 'SELECT d_date FROM ' . $this->getTableName() . ' GROUP BY s_search ORDER BY d_date DESC';
+        $sql = 'SELECT MAX(d_date) AS d_date FROM ' . $this->getTableName()
+            . ' GROUP BY s_search ORDER BY d_date DESC';
 
         // $number is an OFFSET, not a row count: the clause is MySQL's comma form
         // ("LIMIT <offset>, <count>"), so this selects the single row $number

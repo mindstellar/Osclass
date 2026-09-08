@@ -459,10 +459,17 @@ function osc_search_footer_links()
         $groupBy = 'l.fk_i_region_id';
     }
 
-    $sql = 'SELECT i.fk_i_category_id, l.*, COUNT(*) AS total'
+    // The count is grouped in a subquery that also names one representative listing
+    // per group, and the displayed columns are read back from that listing. Selecting
+    // l.* beside GROUP BY on a single location column is rejected under
+    // ONLY_FULL_GROUP_BY, which emptied the footer links entirely.
+    $sql = 'SELECT i.fk_i_category_id, l.*, g.total'
+        . ' FROM (SELECT MIN(l.fk_i_item_id) AS rep_id, COUNT(*) AS total'
         . ' FROM ' . DB_TABLE_PREFIX . 't_item as i, ' . DB_TABLE_PREFIX . 't_item_location as l'
         . ' WHERE ' . implode(' AND ', $where)
-        . ' GROUP BY ' . $groupBy;
+        . ' GROUP BY ' . $groupBy . ') AS g'
+        . ' JOIN ' . DB_TABLE_PREFIX . 't_item_location as l ON l.fk_i_item_id = g.rep_id'
+        . ' JOIN ' . DB_TABLE_PREFIX . 't_item as i ON i.pk_i_id = g.rep_id';
 
     try {
         return osc_db_stringify_rows(osc_db_select($sql, $params));

@@ -340,6 +340,20 @@ jobs:
         run: php tests/run-models.php
       - name: Delete cascades
         run: php tests/delete-cascade.php
+      # ONLY_FULL_GROUP_BY rejects a grouped query outright, and every one of them is
+      # wrapped in a catch that returns an empty array — so a site that turns the strict
+      # modes on loses its alert emails, its custom fields and its statistics charts with
+      # nothing in any log. The modes are SET by hand here because MariaDB's defaults omit
+      # ONLY_FULL_GROUP_BY entirely and the file would otherwise pass without testing it.
+      - name: Strict SQL mode
+        run: php tests/db-strict-mode.php
+      # DAO::insertGetId() answers 0 on a rejected write and DAO::update() answers
+      # false, so an unchecked return turned a refused registration into "check your
+      # inbox" for an account that was never created. Nothing throws, nothing logs,
+      # and the failure only appears when someone types a postcode one character too
+      # long — which is also why the column widths are pinned against the live schema.
+      - name: Strict write guards
+        run: php tests/strict-write-guards.php
       # The upgrade screen and upgradeDB() are replaced at different moments — an
       # opcode cache can serve the previous class behind the new template — so the
       # screen has to stay truthful when the answer predates it.

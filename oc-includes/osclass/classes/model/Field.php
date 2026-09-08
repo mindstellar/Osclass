@@ -310,17 +310,28 @@ class Field extends DAO
         // Loose fields directly assigned (and in NO form), plus grouped fields whose
         // form is assigned to the category — form membership now comes from the link
         // table t_meta_group_fields (a field can be in several forms).
-        $sql = 'SELECT query.* FROM ('
-            . 'SELECT mf.*, 0 AS cf_group_position FROM ' . $p . 't_meta_fields mf, ' . $p . 't_meta_categories mc'
-            . ' WHERE mc.fk_i_category_id IN (' . $placeholders . ') AND mf.pk_i_id = mc.fk_i_field_id'
-            . ' AND NOT EXISTS (SELECT 1 FROM ' . $p . 't_meta_group_fields gfx WHERE gfx.fk_i_field_id = mf.pk_i_id)'
+        // The union carries ids and group positions only, it is collapsed to one row
+        // per field inside its own subquery, and the field columns are read back from
+        // t_meta_fields with no GROUP BY in sight: selecting whole rows alongside a
+        // GROUP BY is rejected under ONLY_FULL_GROUP_BY. MIN() also makes a field that
+        // is both loose and grouped sort as loose rather than as whichever row the
+        // server reached first.
+        $sql = 'SELECT mf.*, query.cf_group_position'
+            . ' FROM ' . $p . 't_meta_fields mf JOIN ('
+            . 'SELECT u.pk_i_id AS pk_i_id, MIN(u.cf_group_position) AS cf_group_position FROM ('
+            . 'SELECT mfa.pk_i_id AS pk_i_id, 0 AS cf_group_position'
+            . ' FROM ' . $p . 't_meta_fields mfa, ' . $p . 't_meta_categories mc'
+            . ' WHERE mc.fk_i_category_id IN (' . $placeholders . ') AND mfa.pk_i_id = mc.fk_i_field_id'
+            . ' AND NOT EXISTS (SELECT 1 FROM ' . $p . 't_meta_group_fields gfx WHERE gfx.fk_i_field_id = mfa.pk_i_id)'
             . ' UNION '
-            . 'SELECT mf.*, g.i_position AS cf_group_position FROM ' . $p . 't_meta_fields mf'
-            . ' JOIN ' . $p . 't_meta_group_fields gf ON gf.fk_i_field_id = mf.pk_i_id'
+            . 'SELECT mfb.pk_i_id AS pk_i_id, g.i_position AS cf_group_position FROM ' . $p . 't_meta_fields mfb'
+            . ' JOIN ' . $p . 't_meta_group_fields gf ON gf.fk_i_field_id = mfb.pk_i_id'
             . ' JOIN ' . $p . 't_meta_group g ON gf.fk_i_group_id = g.pk_i_id'
             . ' JOIN ' . $p . 't_meta_group_categories gc ON gc.fk_i_group_id = g.pk_i_id'
             . ' WHERE gc.fk_i_category_id IN (' . $placeholders . ')'
-            . ') AS query GROUP BY query.pk_i_id ORDER BY query.cf_group_position ASC, query.i_position ASC';
+            . ') AS u GROUP BY u.pk_i_id'
+            . ') AS query ON query.pk_i_id = mf.pk_i_id'
+            . ' ORDER BY query.cf_group_position ASC, mf.i_position ASC';
 
         try {
             $fields = osc_db_select($sql, array_merge($path, $path));
