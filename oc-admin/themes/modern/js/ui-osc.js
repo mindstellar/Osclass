@@ -472,6 +472,82 @@ function oscDependsIsMaster(target) {
     return !!name && !!document.querySelector('[data-osc-depends="' + name.replace(/"/g, '\\"') + '"]');
 }
 
+// The action row of a declared settings page counts what has actually changed since the
+// page loaded, so Save is quiet on a form nobody has touched.
+function oscControlValue(el) {
+    if (el.type === 'checkbox' || el.type === 'radio') {
+        return el.checked ? '1' : '';
+    }
+    if (el.multiple && el.options) {
+        var picked = [];
+        for (var i = 0; i < el.options.length; i++) {
+            if (el.options[i].selected) { picked.push(el.options[i].value); }
+        }
+
+        return picked.join('\u0000');
+    }
+
+    return el.value;
+}
+
+function oscDirtyControls(form) {
+    var out = [];
+    var all = form.querySelectorAll('input, select, textarea');
+    for (var i = 0; i < all.length; i++) {
+        var el = all[i];
+        // A control with no name submits nothing, and the token is not the admin's edit.
+        if (!el.name || el.type === 'submit' || el.type === 'button' || el.name === 'CSRFName'
+            || el.name === 'CSRFToken') {
+            continue;
+        }
+        out.push(el);
+    }
+
+    return out;
+}
+
+function oscDirtySync(bar) {
+    var form = bar.closest && bar.closest('form');
+    if (!form) { return; }
+    var controls = oscDirtyControls(form);
+    var changed = 0;
+    for (var i = 0; i < controls.length; i++) {
+        if (controls[i].getAttribute('data-osc-was') !== oscControlValue(controls[i])) { changed++; }
+    }
+    var status = bar.querySelector('.form-actions-status');
+    if (status) {
+        status.textContent = changed === 0
+            ? ''
+            : (changed === 1
+                ? (bar.getAttribute('data-osc-dirty-one') || '')
+                : (bar.getAttribute('data-osc-dirty-many') || '').replace('%d', String(changed)));
+    }
+    bar.classList.toggle('is-dirty', changed > 0);
+}
+
+function oscDirtyInit(root) {
+    var bars = (root || document).querySelectorAll('[data-osc-dirty-bar]');
+    for (var i = 0; i < bars.length; i++) {
+        var form = bars[i].closest && bars[i].closest('form');
+        if (!form) { continue; }
+        var controls = oscDirtyControls(form);
+        for (var j = 0; j < controls.length; j++) {
+            controls[j].setAttribute('data-osc-was', oscControlValue(controls[j]));
+        }
+        oscDirtySync(bars[i]);
+    }
+}
+
+document.addEventListener('DOMContentLoaded', function () { oscDirtyInit(document); });
+document.addEventListener('change', function (e) {
+    var bar = e.target && e.target.form && e.target.form.querySelector('[data-osc-dirty-bar]');
+    if (bar) { oscDirtySync(bar); }
+});
+document.addEventListener('input', function (e) {
+    var bar = e.target && e.target.form && e.target.form.querySelector('[data-osc-dirty-bar]');
+    if (bar) { oscDirtySync(bar); }
+});
+
 document.addEventListener('DOMContentLoaded', function () { oscSyncDepends(document); });
 // Delegated and re-run whole: one change can flip a chain of rows, not only the row
 // whose master was touched.

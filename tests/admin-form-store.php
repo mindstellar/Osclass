@@ -344,6 +344,14 @@ SettingsPageRegistry::instance()->register('mapped', array(
 ));
 
 // A preference page declared exactly as one was before the store existed.
+SettingsPageRegistry::instance()->register('prefs_blank', array(
+    'title'  => 'Blank',
+    'menu'   => '',
+    'fields' => array(
+        array('type' => 'text', 'name' => 's_opt', 'label' => 'Optional'),
+    ),
+));
+
 SettingsPageRegistry::instance()->register('prefs', array(
     'title'      => 'Prefs',
     'menu'       => '',
@@ -572,6 +580,34 @@ pin('the effects ran', 2, count($ran));
 pin('with a null id, because a preference page has no row', null, effect_id(0));
 pin('the inline callable is handed no key either', null, effect_id(1));
 pin('and no ban rule was written by it', 4, rows($admin, 't_ban_rule'));
+
+// A preference page counts real changes, the way a table-backed one already does through
+// its affected-row count. Without it every field it declares counts as written, so an
+// unchanged save reports a change and the screen can never say "Nothing to update".
+$result = post('prefs', array('s_name' => 'Carol'));
+pin('re-posting the same value changes nothing', 0, $result['updated']);
+pin('and the stored value is still there', 'Carol', Preference::newInstance()->get('s_name', 'prefs'));
+$result = post('prefs', array('s_name' => 'Carol '));
+pin('a value that only differs by the trim is no change either', 0, $result['updated']);
+$result = post('prefs', array('s_name' => 'Dave'));
+pin('changing it is one change', 1, $result['updated']);
+pin('and the new value is stored', 'Dave', Preference::newInstance()->get('s_name', 'prefs'));
+
+// get() answers '' both for a key that is absent and for one stored empty, so a
+// write-only-if-changed that compared values would skip the write that creates the row --
+// and the page would come back showing its declared default instead of the blank.
+check('the optional key starts absent', pref_type($admin, 'prefs_blank', 's_opt') === null);
+$result = post('prefs_blank', array('s_opt' => ''));
+pin('a first save of a blank value is still a write', 1, $result['updated']);
+check(
+    'so the key exists rather than staying absent',
+    array_key_exists('s_opt', Preference::newInstance()->getSection('prefs_blank')),
+    var_export(Preference::newInstance()->getSection('prefs_blank'), true)
+);
+$result = post('prefs_blank', array('s_opt' => ''));
+pin('and saving the same blank again changes nothing', 0, $result['updated']);
+$result = post('prefs_blank', array('s_opt' => 'now set'));
+pin('filling it in is a change', 1, $result['updated']);
 
 harness_section('a preference page maps, derives and withholds the same way a table does');
 

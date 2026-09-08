@@ -151,6 +151,10 @@ msgstr[1] ""
 msgid "%d submissions"
 msgstr ""
 
+#: oc-includes/osclass/helpers/hAdminUi.php
+msgid "%d unsaved changes"
+msgstr ""
+
 #: oc-admin/themes/modern/appearance/widgets.php
 msgid "%d widget"
 msgid_plural "%d widgets"
@@ -263,6 +267,10 @@ msgstr ""
 
 #: oc-admin/themes/modern/functions.php
 msgid "1 day"
+msgstr ""
+
+#: oc-includes/osclass/helpers/hAdminUi.php
+msgid "1 unsaved change"
 msgstr ""
 
 #: oc-admin/themes/modern/appearance/widgets.php

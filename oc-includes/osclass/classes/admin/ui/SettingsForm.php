@@ -76,7 +76,9 @@ final class SettingsForm
             osc_run_hook('settings_page_after_group', $page['id'], $group, $index);
         }
 
-        osc_admin_form_close($opts['actions'] ?? array());
+        // Every declared page gets the dirty-tracking action row; a hand-written screen
+        // opts in by passing 'dirty' to osc_admin_form_close().
+        osc_admin_form_close($opts['actions'] ?? array(), array('dirty' => true));
     }
 
     /**

@@ -56,6 +56,20 @@ class Preference
     {
         return $GLOBALS['preferences'][$section . '/' . $key] ?? null;
     }
+
+    /** Mirrors the real Preference: the whole section, keyed by name. */
+    public function getSection($section = 'osclass')
+    {
+        $out    = array();
+        $prefix = $section . '/';
+        foreach (($GLOBALS['preferences'] ?? array()) as $k => $v) {
+            if (strpos($k, $prefix) === 0) {
+                $out[substr($k, strlen($prefix))] = $v;
+            }
+        }
+
+        return $out;
+    }
 }
 
 class OSCLocale

@@ -91,6 +91,20 @@ class Preference
     {
         return $GLOBALS['preferences'][$section . '/' . $key] ?? null;
     }
+
+    /** Mirrors the real Preference: the whole section, keyed by name. */
+    public function getSection($section = 'osclass')
+    {
+        $out    = array();
+        $prefix = $section . '/';
+        foreach (($GLOBALS['preferences'] ?? array()) as $k => $v) {
+            if (strpos($k, $prefix) === 0) {
+                $out[substr($k, strlen($prefix))] = $v;
+            }
+        }
+
+        return $out;
+    }
 }
 
 /** Read at call time, so a test can change which locales are enabled. */
@@ -526,6 +540,25 @@ if ($chrome === '') {
     $off = $snaps[2] ?? array();
     check('unticking it hides the row again', ($off['hidden'] ?? null) === true, var_export($off, true));
     check('and lifts required a second time', ($off['required'] ?? null) === false, var_export($off, true));
+
+    // The action row counts what has changed since the page loaded, so Save is quiet on a
+    // form nobody has touched and says how much is pending on one somebody has.
+    $dirt = drive_page($chrome, render_settings_page('cond'), 'dirty-driver.js');
+    check('the dirty-bar browser run produced a reading', is_array($dirt) && count($dirt) === 4, var_export($dirt, true));
+
+    $start = $dirt[0] ?? array();
+    check('an untouched form is not dirty', ($start['dirty'] ?? null) === false, var_export($start, true));
+    pin('and says nothing', '', $start['text'] ?? null);
+    pin('the row is sticky, so it stays reachable down a long page', 'sticky', $start['position'] ?? null);
+
+    pin('one edit counts as one', '1 unsaved change', ($dirt[1]['text'] ?? null));
+    check('and the row goes loud', ($dirt[1]['dirty'] ?? null) === true, var_export($dirt[1] ?? null, true));
+    pin('a second, on a different control, counts as two', '2 unsaved changes', ($dirt[2]['text'] ?? null));
+
+    // The count is measured against the baseline, not tallied per event, so undoing an edit
+    // takes it back down rather than counting the undo as another change.
+    pin('putting both back is no change at all', '', ($dirt[3]['text'] ?? null));
+    check('and the row goes quiet again', ($dirt[3]['dirty'] ?? null) === false, var_export($dirt[3] ?? null, true));
 
     // Every keystroke used to re-scan every dependent row on the page; on Permalinks that
     // is 39 of them for a box none of them follows.

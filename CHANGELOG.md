@@ -63,6 +63,8 @@ theme ships none, using a documented class vocabulary a theme restyles in CSS al
   gets the feature — on by default — without laying out a form whose field names are core's.
   It fires `item_comments_before`, `comment_form` and `item_comments_after`, and ships
   zero-specificity defaults a theme overrides with a single class.
+- Settings pages are documented for plugin authors, with a worked example of both the array
+  form and the builder — see `docs/site/developers/settings-pages.md`.
 - `osc_admin_field()` and its per-type sugar (`osc_admin_text()`, `osc_admin_number()`,
   `osc_admin_select()`, `osc_admin_textarea()`, `osc_admin_radio_group()`, `osc_admin_secret()`)
   render an admin form field from core, so a plugin no longer hand-writes markup against the
@@ -107,6 +109,10 @@ theme ships none, using a documented class vocabulary a theme restyles in CSS al
   cache run only after a successful save.
 - The friendly-URL structure boxes hide and show through the shared conditional-field
   attribute instead of a script of their own.
+- A declared settings page's action row follows the page as you scroll and counts what has
+  changed since it loaded, staying quiet until something has.
+- A preference-backed page writes only the values that actually differ, so a save that
+  changes nothing says so instead of reporting success.
 
 ### Fixed
 

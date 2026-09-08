@@ -14728,6 +14728,30 @@ td.children-cat {
   width: 100%;
 }
 
+.form-actions[data-osc-dirty-bar] {
+  bottom: 0;
+  position: sticky;
+  z-index: 3;
+}
+.form-actions[data-osc-dirty-bar] .form-actions-status {
+  color: var(--osc-ink-muted);
+  font-size: 0.875rem;
+  margin: 0;
+  margin-inline-end: auto;
+}
+.form-actions[data-osc-dirty-bar].is-dirty {
+  box-shadow: 0 -1px 0 var(--osc-rule), 0 -6px 16px -12px rgba(0, 0, 0, 0.4);
+}
+.form-actions[data-osc-dirty-bar].is-dirty .form-actions-status {
+  color: var(--osc-ink);
+  font-weight: 600;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .form-actions[data-osc-dirty-bar] {
+    position: static;
+  }
+}
 .settings-actions {
   margin-block-start: 1.5rem;
   max-width: 68ch;

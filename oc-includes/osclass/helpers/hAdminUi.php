@@ -524,13 +524,22 @@ if (!function_exists('osc_admin_form_actions')) {
      *
      * @return void
      */
-    function osc_admin_form_actions(array $actions = array())
+    function osc_admin_form_actions(array $actions = array(), array $opts = array())
     {
         if ($actions === array()) {
             $actions = array(array('label' => __('Save changes'), 'type' => 'submit', 'variant' => 'primary'));
         }
 
-        echo '<div class="form-actions">';
+        // Opt-in, so an existing screen's action row is the markup it has always been.
+        $dirty = !empty($opts['dirty'])
+            ? ' data-osc-dirty-bar data-osc-dirty-one="' . osc_esc_html(__('1 unsaved change')) . '"'
+              . ' data-osc-dirty-many="' . osc_esc_html(__('%d unsaved changes')) . '"'
+            : '';
+
+        echo '<div class="form-actions"' . $dirty . '>';
+        if ($dirty !== '') {
+            echo '<p class="form-actions-status" role="status" aria-live="polite"></p>';
+        }
         foreach ($actions as $i => $action) {
             $action['variant'] = $action['variant'] ?? ($i === 0 ? 'primary' : 'secondary');
             $action['type']    = $action['type'] ?? 'submit';

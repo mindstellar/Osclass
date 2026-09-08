@@ -124,12 +124,7 @@ final class PreferenceStore implements Store
                     continue;
                 }
                 foreach ($locales[$name] as $code => $localeName) {
-                    $updated += (int)osc_set_preference(
-                        $key . $code,
-                        (string)($values[$name][$code] ?? ''),
-                        $this->section,
-                        'STRING'
-                    );
+                    $updated += $this->put($key . $code, (string)($values[$name][$code] ?? ''), 'STRING');
                 }
                 continue;
             }
@@ -143,12 +138,32 @@ final class PreferenceStore implements Store
             } elseif ($field['type'] === 'checkbox') {
                 $value = $value ? '1' : '0';
             }
-            $updated += (int)osc_set_preference($key, (string)$value, $this->section, self::type($field));
+            $updated += $this->put($key, (string)$value, self::type($field));
         }
 
         // Preferences are keyed by name, not by row, so there is no primary key to hand
         // an after_save listener.
         return array('updated' => $updated, 'id' => null);
+    }
+
+    /**
+     * Write a preference only when it differs from the one stored, and report whether it
+     * changed. A preference page then counts real changes, the way a table-backed one
+     * already does through its affected-row count -- so "nothing to update" can be said.
+     *
+     * A key with no row yet is always written, so a first save creates its rows. That is
+     * why this asks the section for the key rather than for its value: get() answers ''
+     * for a key that is absent and for one stored empty alike, so comparing values would
+     * skip the write that creates the row.
+     */
+    private function put(string $key, string $value, string $type): int
+    {
+        $section = Preference::newInstance()->getSection($this->section);
+        if (array_key_exists($key, $section) && (string)$section[$key] === $value) {
+            return 0;
+        }
+
+        return osc_set_preference($key, $value, $this->section, $type) ? 1 : 0;
     }
 
     /**

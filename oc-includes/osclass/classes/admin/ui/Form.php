@@ -73,7 +73,7 @@ class Form
     public static function close($actions = null, array $opts = array())
     {
         if (is_array($actions)) {
-            osc_admin_form_actions($actions);
+            osc_admin_form_actions($actions, $opts);
         }
         if ($opts['horizontal'] ?? true) {
             echo '</div></fieldset>';
