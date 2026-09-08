@@ -247,7 +247,8 @@ check(
 );
 pin(
     'and the refusal says which types are purified',
-    'SettingsPageRegistry: page "x31" field "a" cannot set purify: only text, textarea, tel, color are purified',
+    'SettingsPageRegistry: page "x31" field "a" cannot set purify: only text, textarea, tel, color, hidden'
+    . ' are purified',
     register_error('x31', array('title' => 'X', 'fields' => array(
         array('name' => 'a', 'type' => 'secret', 'purify' => false),
     )))
@@ -325,7 +326,7 @@ check('and it is not a table-store-only key', register_error('w8', array(
 )) === null);
 pin(
     'and the list the registry accepts is the list the save path purifies',
-    array('text', 'textarea', 'tel', 'color'),
+    array('text', 'textarea', 'tel', 'color', 'hidden'),
     SettingsPageRegistry::PURIFIED_TYPES
 );
 
@@ -487,18 +488,40 @@ pin(
     's_email',
     SettingsPageRegistry::instance()->fields('s8')['email']['column'] ?? null
 );
-// A column on a preference page is a mapping nothing applies: the value lands under the
-// field name and the column the author meant is never written.
-$prefColumn = register_error('s9', array(
+// A preference has a key the same way a row has a column, so a column on a preference page
+// is the preference the value is stored under -- which is what lets a control keep the name
+// its own page's script knows while the value goes on living under the key readers use.
+check('a column on a page that stores preferences names the preference', register_error('s9', array(
     'title'  => 'X',
-    'fields' => array(array('name' => 'a', 'column' => 's_name')),
-));
-check('a column on a page that stores preferences is refused', $prefColumn !== null);
+    'fields' => array(array('name' => 'max_latest_items_at_home', 'column' => 'maxLatestItems@home')),
+)) === null);
 pin(
-    'and the message says which store writes one',
-    'SettingsPageRegistry: page "s9" field "a" declares a column, which only a table store writes',
-    $prefColumn
+    'and it is kept as declared, punctuation and all',
+    'maxLatestItems@home',
+    SettingsPageRegistry::instance()->fields('s9')['max_latest_items_at_home']['column'] ?? null
 );
+// t_preference takes any string for a key, so nothing downstream would refuse this: the
+// declaration would simply write whatever it named into the page's section.
+$badPrefKey = register_error('s9b', array(
+    'title'  => 'X',
+    'fields' => array(array('name' => 'a', 'column' => 'not a key')),
+));
+check('a preference key that is not one is refused', $badPrefKey !== null);
+pin(
+    'and the message says what it mapped to',
+    'SettingsPageRegistry: page "s9b" field "a" maps to "not a key", which is not a preference key',
+    $badPrefKey
+);
+check('two scopes are not a key either', register_error('s9c', array(
+    'title'  => 'X',
+    'fields' => array(array('name' => 'a', 'column' => 'a@b@c')),
+)) !== null);
+// The field that is stored nowhere never reaches a key, so what it would have been called
+// does not arise -- the same escape the table store already has.
+check('a field stored nowhere is not held to it', register_error('s9d', array(
+    'title'  => 'X',
+    'fields' => array(array('name' => 'a', 'column' => 'not a key', 'persist' => false)),
+)) === null);
 check('a column that is not a string is refused', register_error('s10', array(
     'title'  => 'X',
     'store'  => array('table' => 't_ban_rule', 'pk' => 'pk_i_id'),
@@ -553,19 +576,18 @@ pin(
     . 'a column holds one value, not one per locale',
     $transTable
 );
-// A field that says what its column takes is the only way a screen can declare a control
-// that is not a column -- a confirmation box, a re-authentication box -- or a column whose
-// value is derived. Both are refused on a preference page, where nothing would apply them.
-$prefPersist = register_error('s18', array(
+// A field that says what its key takes is the only way a screen can declare a control that
+// is stored nowhere -- a confirmation box, a re-authentication box, the presets another
+// field is derived from -- or a value that is derived from the controls beside it. Neither
+// is about columns, so both apply on a preference page too.
+check('persist on a page that stores preferences is accepted', register_error('s18', array(
     'title'  => 'X',
     'fields' => array(array('name' => 'a', 'persist' => false)),
-));
-check('persist on a page that stores preferences is refused', $prefPersist !== null);
-pin(
-    'and the message says which store applies one',
-    'SettingsPageRegistry: page "s18" field "a" declares persist, which only a table store applies',
-    $prefPersist
-);
+)) === null);
+check('and so is a persist callable there', register_error('s18b', array(
+    'title'  => 'X',
+    'fields' => array(array('name' => 'a', 'persist' => static fn ($v) => $v)),
+)) === null);
 $badPersist = register_error('s19', array(
     'title'  => 'X',
     'store'  => array('table' => 't_ban_rule', 'pk' => 'pk_i_id'),
@@ -603,7 +625,7 @@ check('a custom field on a table store needs no column', register_error('s17', a
 )) === null);
 check(
     'and none of the refused pages was registered',
-    osc_settings_page('s2') === null && osc_settings_page('s4') === null && osc_settings_page('s9') === null
+    osc_settings_page('s2') === null && osc_settings_page('s4') === null && osc_settings_page('s21') === null
 );
 
 harness_section('after_save');
@@ -678,8 +700,14 @@ $GLOBALS['params'] = array('batch' => ' 12 ');
 pin('a number arrives as an int', 12, osc_settings_sanitize($fields['batch']));
 $GLOBALS['params'] = array('batch' => '2.5');
 pin('a decimal stays a float', 2.5, osc_settings_sanitize($fields['batch']));
+// The one type that keeps its whitespace. A password with a space at either end is a
+// password, and the sign-in form reads what was typed rather than a trimmed copy of it.
 $GLOBALS['params'] = array('api_key' => '  sk-live-9f2a  ');
-pin('a secret is trimmed but otherwise untouched', 'sk-live-9f2a', osc_settings_sanitize($fields['api_key']));
+pin('a secret is stored exactly as typed', '  sk-live-9f2a  ', osc_settings_sanitize($fields['api_key']));
+$GLOBALS['params'] = array('api_key' => '   ');
+pin('spaces alone are a value like any other', '   ', osc_settings_sanitize($fields['api_key']));
+$GLOBALS['params'] = array('notify' => '  ops@example.test  ');
+pin('while every other type still loses them', 'ops@example.test', osc_settings_sanitize($fields['notify']));
 $GLOBALS['params'] = array('verbose' => '1');
 pin('a ticked checkbox is true', true, osc_settings_sanitize($fields['verbose']));
 $GLOBALS['params'] = array();

@@ -13,6 +13,14 @@
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
+/**
+ * The chrome around the declared comment-settings form. The form itself -- its route, its
+ * fields, their values and the submit row -- is core's, drawn from the declaration the
+ * controller saves through.
+ */
+
+$form = __get('comment_form');
+
 //customize Head
 function customHead()
 {
@@ -67,75 +75,6 @@ osc_admin_page(array(
 osc_current_admin_theme_path('parts/header.php'); ?>
 <div id="general-settings">
     <ul id="error_list"></ul>
-    <?php osc_admin_form_open(array(
-'name'   => 'comments_form',
-'page'   => 'settings',
-'action' => 'comments_post',
-    )); ?>
-        <?php osc_admin_page_head(__('Comment Settings')); ?>
-
-        <?php osc_admin_form_row_open(__('Default comment settings')); ?>
-                <?php osc_admin_checkbox(array(
-                    'name'    => 'enabled_comments',
-                    'label'   => __('Allow people to post comments on listings'),
-                    'checked' => osc_comments_enabled(),
-                )); ?>
-                <?php osc_admin_checkbox(array(
-                    'name'    => 'reg_user_post_comments',
-                    'label'   => __('Users must be registered and logged in to comment'),
-                    'checked' => osc_reg_user_post_comments(),
-                )); ?>
-                <?php osc_admin_checkbox(array(
-                    'name'    => 'enabled_recaptcha_comments',
-                    'label'   => __('Require a CAPTCHA to post a comment'),
-                    'checked' => osc_recaptcha_comments_enabled(),
-                    'help'    => __('Needs a CAPTCHA provider configured under Settings &raquo; reCAPTCHA/Turnstile; otherwise no challenge is shown.'),
-                )); ?>
-                <?php osc_admin_checkbox(array(
-                    'name'    => 'moderate_comments',
-                    'label'   => __('A comment is being held for moderation'),
-                    'checked' => osc_moderate_comments() != -1,
-                )); ?>
-                <div class="form-label-checkbox-offset comments_approved">
-                    <?php osc_admin_number(array(
-                        'row'    => false,
-                        'name'   => 'num_moderate_comments',
-                        'value'  => osc_moderate_comments() == -1 ? 0 : osc_moderate_comments(),
-                        'min'    => 0,
-                        'prefix' => __('Before a comment appears, comment author must have at least'),
-                        'suffix' => __('previously approved comments'),
-                        'help'   => __('If the value is zero, an administrator must always approve comments'),
-                    )); ?>
-                </div>
-        <?php osc_admin_form_row_close(); ?>
-        <?php osc_admin_form_row_open(__('Other comment settings')); ?>
-                <?php osc_admin_number(array(
-                    'row'    => false,
-                    'name'   => 'comments_per_page',
-                    'value'  => osc_comments_per_page(),
-                    'min'    => 0,
-                    'prefix' => __('Break comments into pages with'),
-                    'suffix' => __('comments per page'),
-                    'help'   => __('If the value is zero all comments are shown'),
-                )); ?>
-        <?php osc_admin_form_row_close(); ?>
-
-        <?php osc_admin_page_head(__('Notifications')); ?>
-
-        <?php osc_admin_form_row_open(__('E-mail admin whenever')); ?>
-                <?php osc_admin_checkbox(array(
-                    'name'    => 'notify_new_comment',
-                    'label'   => __('A new comment is posted'),
-                    'checked' => osc_notify_new_comment(),
-                )); ?>
-        <?php osc_admin_form_row_close(); ?>
-        <?php osc_admin_form_row_open(__('E-mail user whenever')); ?>
-                <?php osc_admin_checkbox(array(
-                    'name'    => 'notify_new_comment_user',
-                    'label'   => __("There's a new comment on his listing"),
-                    'checked' => osc_notify_new_comment_user(),
-                )); ?>
-        <?php osc_admin_form_row_close(); ?>
-                <?php osc_admin_form_close(array()); ?>
+    <?php osc_admin_settings_form($form['id'], $form); ?>
 </div>
 <?php osc_current_admin_theme_path('parts/footer.php'); ?>

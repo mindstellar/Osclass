@@ -13,6 +13,14 @@
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
+/**
+ * The chrome around the declared latest-searches form. The form itself -- its route, its
+ * fields, their values and the submit row -- is core's, drawn from the declaration the
+ * controller saves through.
+ */
+
+$form = __get('searches_form');
+
 //customize Head
 function customHead()
 {
@@ -46,8 +54,8 @@ function customHead()
                 }
             });
 
-            // The radios and the free-text box both write the hidden field the controller
-            // reads. Typing a number is choosing it, or the value is entered and discarded.
+            // The radios and the free-text box both write the hidden field the form stores.
+            // Typing a number is choosing it, or the value is entered and discarded.
             var purge  = document.getElementById('customPurge');
             var custom = document.getElementById('custom_queries');
             if (purge) {
@@ -91,46 +99,7 @@ osc_current_admin_theme_path('parts/header.php'); ?>
     <div id="general-settings">
         <?php osc_admin_page_head(__('Latest searches Settings')); ?>
         <ul id="error_list"></ul>
-        <?php osc_admin_form_open(array(
-    'name'   => 'searches_form',
-    'page'   => 'settings',
-    'action' => 'latestsearches_post',
-)); ?>
-            <?php
-            osc_admin_field(array(
-                'type'      => 'checkbox',
-                'row_label' => __('Latest searches'),
-                'name'      => 'save_latest_searches',
-                'label'     => __('Save the latest user searches'),
-                'checked'   => osc_save_latest_searches(),
-                'help'      => __('It may be useful to know what queries users make.'),
-            ));
-
-            $presets     = array('hour', 'day', 'week', 'forever', '1000');
-            $isCustom    = !in_array(osc_purge_latest_searches(), $presets, true);
-            osc_admin_radio_group(array(
-                'name'     => 'purge_searches',
-                'label'    => __('How long queries are stored'),
-                'selected' => $isCustom ? 'custom' : (string)osc_purge_latest_searches(),
-                'help'     => __("This feature can generate a lot of data. It's recommended to purge this data periodically."),
-                'options'  => array(
-                    'hour'    => __('One hour'),
-                    'day'     => __('One day'),
-                    'week'    => __('One week'),
-                    'forever' => __('Forever'),
-                    '1000'    => __('Store 1000 queries'),
-                    'custom'  => array(
-                        'label'       => __('Store'),
-                        'custom_html' => '<input type="number" min="0" name="custom_queries" id="custom_queries"'
-                            . ' class="input-text field-inline-text"'
-                            . ' value="' . ($isCustom ? osc_esc_html(osc_purge_latest_searches()) : '') . '" />'
-                            . '<span class="field-suffix">' . osc_esc_html(__('queries')) . '</span>',
-                    ),
-                ),
-            )); ?>
-            <input type="hidden" id="customPurge" name="customPurge"
-                   value="<?php echo osc_esc_html(osc_purge_latest_searches()); ?>"/>
-                    <?php osc_admin_form_close(array()); ?>
+        <?php osc_admin_settings_form($form['id'], $form); ?>
     </div>
     <!-- /settings form -->
 </div>

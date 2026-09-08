@@ -188,6 +188,20 @@ function post(string $pageId, array $fields, $id = null): array
     return osc_settings_save($pageId, $id);
 }
 
+/** The e_type column beside one preference, read with raw SQL. */
+function pref_type(mysqli $admin, string $section, string $name): ?string
+{
+    $stmt = $admin->prepare(
+        'SELECT e_type FROM ' . DB_TABLE_PREFIX . 't_preference WHERE s_section = ? AND s_name = ?'
+    );
+    $stmt->bind_param('ss', $section, $name);
+    $stmt->execute();
+    $row = $stmt->get_result()->fetch_assoc();
+    $stmt->close();
+
+    return $row === null ? null : (string)$row['e_type'];
+}
+
 /** One row by primary key, read with raw SQL so the code under test is not asked to agree. */
 function row(mysqli $admin, string $table, int $id): array
 {
@@ -337,6 +351,34 @@ SettingsPageRegistry::instance()->register('prefs', array(
         array('type' => 'text', 'name' => 's_name', 'label' => 'Name', 'required' => true),
     ),
     'after_save' => $recordInline,
+));
+
+// A preference has a key the same way a row has a column, and a control may be stored
+// nowhere or derived from the ones beside it, on either store. This is a preference page
+// that uses all three, which is what every migrated core settings screen does.
+SettingsPageRegistry::instance()->register('prefs_mapped', array(
+    'title'   => 'Mapped prefs',
+    'menu'    => '',
+    'section' => 'mapped',
+    'fields'  => array(
+        array('type' => 'text', 'name' => 'shown_as', 'column' => 'stored@as', 'label' => 'Mapped'),
+        array('type' => 'text', 'name' => 'helper', 'label' => 'Helper', 'persist' => false),
+        array(
+            'type'    => 'checkbox',
+            'name'    => 'switch',
+            'label'   => 'Switch',
+            'persist' => static fn ($value, array $values) => $value ? (string)$values['helper'] : '-1',
+        ),
+        array(
+            'type'    => 'secret',
+            'name'    => 'token',
+            'label'   => 'Token',
+            'persist' => static fn ($value) => $value === '' ? null : $value,
+            'write_only' => false,
+        ),
+        array('type' => 'checkbox', 'name' => 'plain_switch', 'label' => 'Plain'),
+        array('type' => 'number', 'name' => 'count', 'label' => 'Count'),
+    ),
 ));
 
 harness_section('a new row is inserted');
@@ -530,6 +572,45 @@ pin('the effects ran', 2, count($ran));
 pin('with a null id, because a preference page has no row', null, effect_id(0));
 pin('for the inline callable too', null, effect_id(1));
 pin('and no ban rule was written by it', 4, rows($admin, 't_ban_rule'));
+
+harness_section('a preference page maps, derives and withholds the same way a table does');
+
+$result = post('prefs_mapped', array(
+    'shown_as' => 'value',
+    'helper'   => '7',
+    'switch'   => '1',
+    'token'    => 'sekrit',
+    'plain_switch' => '1',
+    'count'    => '3',
+));
+pin('the mapped page saves cleanly', array(), $result['errors']);
+pin(
+    'a field with a column lands under that key, punctuation and all',
+    'value',
+    Preference::newInstance()->get('stored@as', 'mapped')
+);
+pin('and not under the name of its control', '', Preference::newInstance()->get('shown_as', 'mapped'));
+pin('a field that is stored nowhere is stored nowhere', '', Preference::newInstance()->get('helper', 'mapped'));
+check('with no row of its own in the table', pref_type($admin, 'mapped', 'helper') === null);
+pin('a derived value is what its callable returned', '7', Preference::newInstance()->get('switch', 'mapped'));
+pin('a secret that was typed is written', 'sekrit', Preference::newInstance()->get('token', 'mapped'));
+
+$result = post('prefs_mapped', array('shown_as' => 'value', 'helper' => '7', 'switch' => '', 'token' => ''));
+pin('the derivation answers the other way when the switch is off', '-1', Preference::newInstance()->get('switch', 'mapped'));
+pin('and a callable returning null leaves the value alone', 'sekrit', Preference::newInstance()->get('token', 'mapped'));
+
+// Nothing in core reads e_type, but it is what a site owner sees looking at the table and
+// what the screens this replaced had already decided, so it is derived rather than dropped.
+pin(
+    'the type column follows the field type',
+    array('STRING', 'BOOLEAN', 'INTEGER'),
+    array(
+        pref_type($admin, 'mapped', 'stored@as'),
+        pref_type($admin, 'mapped', 'plain_switch'),
+        pref_type($admin, 'mapped', 'count'),
+    )
+);
+pin('and a derived value is a string, because core does not know what came back', 'STRING', pref_type($admin, 'mapped', 'switch'));
 
 harness_section('the row is the caller\'s, never the request\'s');
 

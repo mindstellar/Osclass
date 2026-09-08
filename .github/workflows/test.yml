@@ -259,6 +259,18 @@ jobs:
       # guard in the source that no branch reaches is the same install as no guard.
       - name: Admin account form
         run: php tests/admin-account-form.php
+      # The eight side-effect-free settings screens, once they save through their
+      # declarations. Four of their controls keep the name their page's script knows while
+      # the value lives under a different preference key -- maxLatestItems@home,
+      # defaultResultsPerPage@search, contact_attachment, purge_latest_searches -- so a key
+      # spelled wrong saves happily into something nothing reads and the setting silently
+      # reverts. Two controls write one preference (comment moderation is -1 or a count,
+      # search retention is a preset or a typed number), a blank mail-server password means
+      # "leave it alone" rather than "clear it and stop sending mail", and the clamped
+      # numbers are clamped rather than refused because a zero sign-in window shuts the form
+      # for everyone. It drives the controllers and reads t_preference back with raw SQL.
+      - name: Settings screen forms
+        run: php tests/settings-screen-forms.php
       # A declared text field is read with the XSS check off, so without the default here
       # every migrated screen stores markup the hand-written controller it replaced had
       # always stripped -- and nothing shows it, because core escapes on the way out

@@ -480,5 +480,95 @@ $html = render(static function () {
 });
 emits('a custom field renders into the normal row', $html, '<div class="form-row">');
 emits('and its callable owns the control', $html, '<em>thing</em>');
+// What the callable draws is the declaration's business -- a pair of radio groups, a button,
+// nothing at all -- so there is no one control for the row label to point at. A `for`
+// naming an id nothing carries reaches nothing when it is clicked.
+emits('its row label is plain text', $html, '<div class="form-label">Thing</div>');
+check('with no for at all', strpos($html, 'for="thing"') === false && strpos($html, 'for="field-thing"') === false);
+
+harness_section('required is only said out loud where it can be obeyed');
+$html = render(static function () {
+    osc_admin_field(array('type' => 'text', 'name' => 'a', 'label' => 'A', 'required' => true));
+});
+emits('a plain required field carries the attribute', $html, 'value="" required />');
+$html = render(static function () {
+    osc_admin_field(array('type' => 'hidden', 'name' => 'b', 'label' => 'B', 'required' => true));
+});
+check('a hidden one does not, being barred from validation anyway', strpos($html, 'required') === false);
+// A browser will not submit a form holding a required control it cannot show, and it
+// refuses silently: no submit event, so the page's own validator never runs and never
+// reports anything, and the save button looks dead. A dependent row is safe, because the
+// shared script lifts the flag while the row is off and puts it back with the row.
+$html = render(static function () {
+    osc_admin_field(array(
+        'type'     => 'number',
+        'name'     => 'c',
+        'label'    => 'C',
+        'required' => true,
+        'depends'  => 'master',
+    ));
+});
+emits('a dependent row declares what it hangs on', $html, 'data-osc-depends="master"');
+emits('and keeps the flag, which the shared script lifts while the row is off', $html, 'value="" required');
+// The script finds the control through that attribute, and the attribute is on the row. A
+// dependent field drawing no row of its own is hidden by whatever page put it there, and
+// nothing would ever give the flag back.
+$html = render(static function () {
+    osc_admin_field(array(
+        'type'     => 'number',
+        'name'     => 'd',
+        'label'    => 'D',
+        'required' => true,
+        'depends'  => 'master',
+        'row'      => false,
+    ));
+});
+check('one with no row of its own carries no data-osc-depends', strpos($html, 'data-osc-depends') === false);
+check('and so says nothing the browser could hold it to', strpos($html, 'required') === false);
+
+harness_section('hidden');
+// The value a page's own script computes from the controls beside it: collected, validated
+// and stored like any other field, and drawn as nothing at all. A row around it would put
+// an empty label column and a gap where no control is.
+$html = render(static function () {
+    osc_admin_field(array(
+        'type'  => 'hidden',
+        'name'  => 'dateFormat',
+        'label' => 'Date format',
+        'help'  => 'Never shown.',
+        'value' => 'Y/m/d',
+    ));
+});
+pin(
+    'a hidden field is the input and nothing else',
+    '<input type="hidden" id="field-dateFormat" name="dateFormat" value="Y/m/d" />',
+    $html
+);
+$html = render(static function () {
+    osc_admin_field(array('type' => 'hidden', 'name' => 'q', 'value' => '<b>&"'));
+});
+emits('and its value is escaped like any other', $html, 'value="&lt;b&gt;&amp;&quot;"');
+
+harness_section('a row that is labelled one thing and named another');
+// The field whose row says "Other comment settings" and whose errors have to say "Comments
+// per page must be 0 or more". Without this the two are one string and one of them is wrong.
+$html = render(static function () {
+    osc_admin_field(array(
+        'type'      => 'number',
+        'name'      => 'comments_per_page',
+        'label'     => 'Comments per page',
+        'row_label' => 'Other comment settings',
+    ));
+});
+emits(
+    'the row carries the row label',
+    $html,
+    '<div class="form-label"><label for="field-comments_per_page">Other comment settings</label></div>'
+);
+check('and the field label is nowhere in the markup', strpos($html, 'Comments per page') === false);
+$html = render(static function () {
+    osc_admin_field(array('type' => 'number', 'name' => 'n', 'label' => 'Count'));
+});
+emits('a field with no row label still labels the row with its own', $html, '<label for="field-n">Count</label>');
 
 exit(harness_result());

@@ -13,6 +13,14 @@
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
+/**
+ * The chrome around the declared mail-settings form. The form itself -- its route, its
+ * fields, their values and the submit row -- is core's, drawn from the declaration the
+ * controller saves through.
+ */
+
+$form = __get('mailserver_form');
+
 //customize Head
 function customHead()
 {
@@ -80,95 +88,7 @@ osc_current_admin_theme_path('parts/header.php'); ?>
     <div id="mail-settings">
         <?php osc_admin_page_head(__('Mail Settings')); ?>
         <ul id="error_list"></ul>
-        <?php osc_admin_form_open(array(
-    'name'   => 'settings_form',
-    'page'   => 'settings',
-    'action' => 'mailserver_post',
-)); ?>
-            <?php
-            osc_admin_select(array(
-                'name'     => 'mailserver_type',
-                'label'    => __('Server type'),
-                'selected' => osc_mailserver_type(),
-                'options'  => array(
-                    'custom' => __('Custom Server'),
-                    'gmail'  => __('GMail Server'),
-                ),
-            ));
-            osc_admin_text(array(
-                'name'  => 'mailserver_host',
-                'label' => __('Hostname'),
-                'value' => osc_mailserver_host(),
-            ));
-            osc_admin_field(array(
-                'type'  => 'email',
-                'name'  => 'mailserver_mail_from',
-                'label' => __('Mail from'),
-                'value' => osc_mailserver_mail_from(),
-            ));
-            osc_admin_text(array(
-                'name'  => 'mailserver_name_from',
-                'label' => __('Name from'),
-                'value' => osc_mailserver_name_from(),
-            ));
-            osc_admin_number(array(
-                'name'  => 'mailserver_port',
-                'label' => __('Server port'),
-                'value' => osc_mailserver_port(),
-                'min'   => 0,
-                'max'   => 65535,
-            ));
-            osc_admin_text(array(
-                'name'  => 'mailserver_username',
-                'label' => __('Username'),
-                'value' => osc_mailserver_username(),
-            ));
-            // Masked: the stored password is never written into the page. Submitting the
-            // field blank leaves it as it was; see CAdminSettingsMailserver.
-            osc_admin_secret(array(
-                'name'   => 'mailserver_password',
-                'label'  => __('Password'),
-                'value'  => osc_mailserver_password(),
-                'masked' => true,
-                'reveal' => true,
-                'help'   => __('Leave blank to keep the current password.'),
-            ));
-
-            $sslWarning = '';
-            if (PHP_SAPI === 'cgi-fcgi' || PHP_SAPI === 'cgi') {
-                $sslWarning = __('Cannot be sure that Apache Module <b>mod_ssl</b> is loaded.');
-            } elseif (!@apache_mod_loaded('mod_ssl')) {
-                $sslWarning = __('Apache Module <b>mod_ssl</b> is not loaded');
-            }
-            osc_admin_select(array(
-                'name'      => 'mailserver_ssl',
-                'label'     => __('Encryption'),
-                'selected'  => (string)osc_mailserver_ssl(),
-                'options'   => array(
-                    ''    => __('None'),
-                    'ssl' => 'SSL',
-                    'tls' => 'TLS',
-                ),
-                'help_html' => $sslWarning === ''
-                    ? ''
-                    : '<span class="callout-warning">' . $sslWarning . '</span>',
-            ));
-
-            osc_admin_field(array(
-                'type'      => 'checkbox',
-                'row_label' => __('SMTP'),
-                'name'      => 'mailserver_auth',
-                'label'     => __('SMTP authentication enabled'),
-                'checked'   => osc_mailserver_auth(),
-            ));
-            osc_admin_field(array(
-                'type'      => 'checkbox',
-                'row_label' => __('POP'),
-                'name'      => 'mailserver_pop',
-                'label'     => __('Use POP before SMTP'),
-                'checked'   => osc_mailserver_pop(),
-            )); ?>
-                    <?php osc_admin_form_close(array()); ?>
+        <?php osc_admin_settings_form($form['id'], $form); ?>
     </div>
     <!-- /settings form -->
 </div>

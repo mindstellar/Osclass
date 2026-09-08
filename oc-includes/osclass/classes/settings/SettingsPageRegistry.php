@@ -48,6 +48,7 @@ final class SettingsPageRegistry
         'select',
         'radio',
         'checkbox',
+        'hidden',
         'custom',
     );
 
@@ -61,10 +62,18 @@ final class SettingsPageRegistry
         'textarea',
         'tel',
         'color',
+        'hidden',
     );
 
     /** Anything used as a table, column or key name. Matches what QueryBuilder will accept. */
     private const IDENTIFIER = '/^[A-Za-z0-9_]+$/';
+
+    /**
+     * A preference key: an identifier, optionally with the "@scope" suffix core's own keys
+     * already use ('maxLatestItems@home'). t_preference takes any string, so without this a
+     * declaration could write whatever it liked into the page's section.
+     */
+    private const PREFERENCE_KEY = '/^[A-Za-z0-9_]+(@[A-Za-z0-9_]+)?$/';
 
     /** Core menu sections a page may ask to appear under. */
     public const MENUS = array(
@@ -164,16 +173,20 @@ final class SettingsPageRegistry
      *                           Params::getParam() has always stored. This governs what is
      *                           stripped, not what is escaped: a stored value is still
      *                           printed through osc_esc_html() or osc_esc_js().
-     *   'column'   => string    Table stores only: the column this field maps to, when it
-     *                           is not the field's own name.
-     *   'persist'  => false|callable Table stores only: what the field's column takes.
-     *                           false is a field that is no column -- a confirmation box,
-     *                           a re-authentication box -- collected and validated like
-     *                           any other and never written. A callable(mixed $value,
-     *                           array $values) returns the value to write, and null from
-     *                           it writes nothing, so "blank means unchanged" is declared
-     *                           rather than special-cased. It says nothing about what the
-     *                           control shows; that is 'write_only'.
+     *   'column'   => string    The key this field is stored under, when it is not the
+     *                           field's own name: a column on a table store, a preference
+     *                           name on a preference one. It is what lets a control keep
+     *                           the name its own page's script already knows while the
+     *                           value goes on living under the key every reader uses.
+     *   'persist'  => false|callable What the field's key takes.
+     *                           false is a field that is stored nowhere -- a confirmation
+     *                           box, a re-authentication box, a control another field is
+     *                           derived from -- collected and validated like any other and
+     *                           never written. A callable(mixed $value, array $values)
+     *                           returns the value to write, and null from it writes
+     *                           nothing, so "blank means unchanged" is declared rather
+     *                           than special-cased. It says nothing about what the control
+     *                           shows; that is 'write_only'.
      *   'write_only' => bool    Whether the control shows what is stored. false (the
      *                           default) reads the stored value back into the control;
      *                           true never reads it and draws the declared default, for a
@@ -359,9 +372,13 @@ final class SettingsPageRegistry
      * Hold one field against the store the page writes through.
      *
      * Every refusal here is something that registers cleanly and then goes wrong at save
-     * time: a 'column' on a preference page is a mapping nothing applies, a field mapped
-     * onto the primary key is the store overwriting the row it is addressing, and a
-     * translated field has one value per locale where a column holds one.
+     * time: a field mapped onto the primary key is the store overwriting the row it is
+     * addressing, and a translated field has one value per locale where a column holds one.
+     *
+     * 'column' and 'persist' apply to either store -- a preference has a key the same way a
+     * row has a column, and a control that is stored nowhere is stored nowhere either way.
+     * Both kinds of key are held to a shape; only the rules after that are about columns,
+     * because only a table has any.
      *
      * @throws InvalidArgumentException
      */
@@ -370,29 +387,24 @@ final class SettingsPageRegistry
         $prefix = 'SettingsPageRegistry: page "' . $id . '" field "' . $field['name'] . '" ';
         $table  = $store['type'] === 'table';
 
-        if (array_key_exists('persist', $field)) {
-            if ($field['persist'] !== false && !is_callable($field['persist'])) {
-                throw new InvalidArgumentException($prefix . 'persist must be false or a callable');
-            }
-            if (!$table) {
-                throw new InvalidArgumentException(
-                    $prefix . 'declares persist, which only a table store applies'
-                );
-            }
+        if (array_key_exists('persist', $field) && $field['persist'] !== false && !is_callable($field['persist'])) {
+            throw new InvalidArgumentException($prefix . 'persist must be false or a callable');
         }
-        if (isset($field['column'])) {
-            if (!is_string($field['column']) || $field['column'] === '') {
-                throw new InvalidArgumentException($prefix . 'column must name a column');
-            }
-            if (!$table) {
-                throw new InvalidArgumentException(
-                    $prefix . 'declares a column, which only a table store writes'
-                );
-            }
+        if (isset($field['column']) && (!is_string($field['column']) || $field['column'] === '')) {
+            throw new InvalidArgumentException($prefix . 'column must name a key');
         }
-        // A field that is no column has none to hold to the column rules: it is never
+        // A field that is stored nowhere has no key to hold to the rules below: it is never
         // read and never written, so what it would have been called does not arise.
-        if (!$table || $type === 'custom' || (($field['persist'] ?? null) === false)) {
+        if ($type === 'custom' || (($field['persist'] ?? null) === false)) {
+            return;
+        }
+        if (!$table) {
+            if (isset($field['column']) && !preg_match(self::PREFERENCE_KEY, $field['column'])) {
+                throw new InvalidArgumentException(
+                    $prefix . 'maps to "' . $field['column'] . '", which is not a preference key'
+                );
+            }
+
             return;
         }
 

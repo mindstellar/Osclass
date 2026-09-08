@@ -21,7 +21,10 @@ use Preference;
  * registered has to be edited.
  *
  * A field declaring 'write_only' is written and never read back, so what the control shows
- * is its declared default rather than the stored value.
+ * is its declared default rather than the stored value. A field declaring 'column' is
+ * stored under that key rather than under its own name, which is what lets a control keep
+ * the name its page's script already knows while the value goes on living under the key
+ * every reader uses. A field declaring 'persist' => false is stored nowhere at all.
  *
  * @package mindstellar\admin\form\store
  */
@@ -35,6 +38,17 @@ final class PreferenceStore implements Store
     }
 
     /**
+     * The preference key one field is stored under: its 'column' when it declares one, its
+     * own name otherwise. Public so the read and the write cannot disagree about it.
+     */
+    public static function key(string $name, array $field): string
+    {
+        $key = $field['column'] ?? '';
+
+        return is_string($key) && $key !== '' ? $key : $name;
+    }
+
+    /**
      * @inheritDoc
      */
     public function value(string $name, array $field, $id = null)
@@ -45,6 +59,7 @@ final class PreferenceStore implements Store
             return $field['default'] ?? (($field['type'] ?? 'text') === 'checkbox' ? false : '');
         }
 
+        $key     = self::key($name, $field);
         $locales = osc_settings_field_locales($field);
         if ($locales !== array()) {
             // A translated field is not one value but one per locale, keyed by locale code,
@@ -52,7 +67,7 @@ final class PreferenceStore implements Store
             // preference key is spelled.
             $values = array();
             foreach ($locales as $code => $localeName) {
-                $stored        = Preference::newInstance()->get($name . $code, $this->section);
+                $stored        = Preference::newInstance()->get($key . $code, $this->section);
                 $values[$code] = ($stored === null || $stored === '')
                     ? (string)($field['default'] ?? '')
                     : $stored;
@@ -61,7 +76,7 @@ final class PreferenceStore implements Store
             return $values;
         }
 
-        $stored = Preference::newInstance()->get($name, $this->section);
+        $stored = Preference::newInstance()->get($key, $this->section);
         if ($stored === null || $stored === '') {
             // A checkbox saved as off stores '0', not '', so an empty read really is
             // "never saved" and the declared default is the right answer.
@@ -96,6 +111,11 @@ final class PreferenceStore implements Store
                 // to store it. The plugin owns the value the same way it owns the markup.
                 continue;
             }
+            $persist = $field['persist'] ?? null;
+            if ($persist === false) {
+                continue;
+            }
+            $key = self::key($name, $field);
             if (($locales[$name] ?? array()) !== array()) {
                 // Core writes only what it can read back: a before_save listener that
                 // replaced the per-locale array with a scalar has nothing to spread over
@@ -105,7 +125,7 @@ final class PreferenceStore implements Store
                 }
                 foreach ($locales[$name] as $code => $localeName) {
                     $updated += (int)osc_set_preference(
-                        $name . $code,
+                        $key . $code,
                         (string)($values[$name][$code] ?? ''),
                         $this->section,
                         'STRING'
@@ -114,14 +134,39 @@ final class PreferenceStore implements Store
                 continue;
             }
             $value = $values[$name];
-            if ($field['type'] === 'checkbox') {
+            if (is_callable($persist)) {
+                $value = call_user_func($persist, $value, $values);
+                if ($value === null) {
+                    // "Leave it as it was", declared rather than special-cased inside here.
+                    continue;
+                }
+            } elseif ($field['type'] === 'checkbox') {
                 $value = $value ? '1' : '0';
             }
-            $updated += (int)osc_set_preference($name, (string)$value, $this->section, 'STRING');
+            $updated += (int)osc_set_preference($key, (string)$value, $this->section, self::type($field));
         }
 
         // Preferences are keyed by name, not by row, so there is no primary key to hand
         // an after_save listener.
         return array('updated' => $updated, 'id' => null);
+    }
+
+    /**
+     * The e_type column t_preference records beside the value. Nothing in core reads it, but
+     * it is what a site owner sees looking at the table, and a hand-written screen that was
+     * moved onto a declaration had already decided it. Derived from the field type so the
+     * two front doors cannot disagree; a field deriving its own stored form through a
+     * persist callable is STRING, because core does not know what came back.
+     */
+    private static function type(array $field): string
+    {
+        if (isset($field['persist'])) {
+            return 'STRING';
+        }
+        if (($field['type'] ?? 'text') === 'checkbox') {
+            return 'BOOLEAN';
+        }
+
+        return ($field['type'] ?? 'text') === 'number' ? 'INTEGER' : 'STRING';
     }
 }

@@ -95,11 +95,25 @@ theme ships none, using a documented class vocabulary a theme restyles in CSS al
   reports rather than staying silent.
 - `admin_edit_completed` receives the admin id as an int, where it received the raw request
   string. A listener comparing it with `===` or `is_string()` sees a different value.
+- The eight settings screens with no save-time effect — General, Billing, Comments, Mail
+  server, Spam and bots, Keyword blocklist, Latest searches and Advanced — save through a
+  declaration instead of a hand-written read-validate-write block. Each reports every error
+  at once and redraws what was typed, and each refused save now writes nothing at all where
+  some of them used to store the first few fields before bouncing.
+- Preference rows written by those screens record `e_type` from the field type rather than
+  always `STRING`; a checkbox that is off stores `0` where a few of them stored an empty
+  string. Nothing in core reads either.
 
 ### Fixed
 
 - The admin account form's e-mail box refuses an invalid address instead of silently rewriting
   it — `john doe@example.test` was stored as `johndoe@example.test` and reported as saved.
+- Admin and mail-server passwords are stored exactly as typed; one with a leading or trailing
+  space was trimmed on save while the sign-in form reads it raw.
+- The Mail settings screen no longer dies on a server that is not mod_php: it called
+  `apache_mod_loaded()` to check for `mod_ssl` without asking whether the function exists.
+- A blank "custom" retention on Latest searches no longer saves the switch beside it before
+  refusing the form.
 - `osc_admin_text()` honours an explicitly passed `email`, `url` or `tel` type instead of
   forcing every box to `text`.
 - `t_user.s_country` and `t_item_location.s_country` are widened from `VARCHAR(40)` to

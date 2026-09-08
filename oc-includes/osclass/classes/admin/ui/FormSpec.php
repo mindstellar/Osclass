@@ -270,6 +270,16 @@ final class FormSpec
         return $this->field($field);
     }
 
+    /**
+     * A value the page's own script computes from the controls beside it. Collected,
+     * validated and stored like any other field, and drawn as a bare <input type="hidden">
+     * with no row of its own. The label is still worth giving: it is what an error names.
+     */
+    public function hidden(string $name, string $label = ''): self
+    {
+        return $this->field($this->base('hidden', $name, $label, ''));
+    }
+
     /** The label sits beside the control; the row's own label comes from rowLabel(). */
     public function checkbox(string $name, string $label = '', string $help = ''): self
     {
@@ -339,19 +349,23 @@ final class FormSpec
         return $this->set('depends', $master);
     }
 
-    /** The column this field maps to, when it is not the field's own name. Table stores only. */
+    /**
+     * The key this field is stored under, when it is not the field's own name: a column on
+     * a table store, a preference name on a preference one.
+     */
     public function column(string $column): self
     {
         return $this->set('column', $column);
     }
 
     /**
-     * What this field's column takes. Table stores only.
+     * What this field's key takes.
      *
-     * false is a field that is no column -- a confirmation box, a re-authentication box --
-     * collected and validated like any other and never written. A callable is handed the
-     * validated value and every other validated value, and returns what the column takes;
-     * null from it writes nothing, which is how "blank means unchanged" is declared.
+     * false is a field that is stored nowhere -- a confirmation box, a re-authentication
+     * box, a control another field is derived from -- collected and validated like any
+     * other and never written. A callable is handed the validated value and every other
+     * validated value, and returns what is stored; null from it writes nothing, which is
+     * how "blank means unchanged" is declared.
      *
      * It says nothing about what the control shows on the way back: that is writeOnly().
      *
@@ -449,6 +463,20 @@ final class FormSpec
     public function validate($callback): self
     {
         return $this->set('validate', $callback);
+    }
+
+    /**
+     * Floor the value at $min and tell the browser the same floor. Written out by hand that
+     * is two numbers that can disagree; here it is one, for the number a screen corrects
+     * rather than refuses.
+     */
+    public function clampMin(int $min): self
+    {
+        return $this
+            ->set('min', $min)
+            ->sanitize(static function ($value) use ($min) {
+                return max($min, (int)$value);
+            });
     }
 
     /**

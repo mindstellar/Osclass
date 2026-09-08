@@ -1,0 +1,921 @@
+<?php
+/*
+ * This file is part of Shopclass (Mindstellar).
+ * Copyright (c) 2021-2026 Mindstellar Community
+ *
+ * Distributed under the GNU General Public License v3.0 or later. See LICENSE.
+ *
+ * SPDX-License-Identifier: GPL-3.0-or-later
+ */
+
+/**
+ * The eight side-effect-free settings screens, saved through their declarations rather than
+ * through hand-written Params::getParam / validate / osc_set_preference blocks.
+ *
+ * What this is guarding, in the order it would go wrong:
+ *
+ *  - The preference a control writes is not always the control's own name. Four of them --
+ *    the latest-listings count, the search page size, the contact attachment switch and the
+ *    retention answer -- keep the name their page's script and its client-side validation
+ *    already know while the value lives under the key every reader uses. Get one wrong and
+ *    the screen saves happily into a key nothing reads, and the setting silently reverts.
+ *  - Two controls write one preference. Comment moderation is -1 when it is off and a count
+ *    when it is on, and how long searches are kept is picked from a list or typed into a
+ *    box. Losing the derivation stores the tick rather than the count, or the word "custom"
+ *    rather than a number.
+ *  - A blank mail-server password means "leave it alone". Written through, it clears the
+ *    password and every mail the site sends stops going out, with a success message.
+ *  - The clamped numbers are clamped, not refused. A zero sign-in window would shut the
+ *    form for everyone including whoever typed it, and the hand-written screens floored the
+ *    value rather than bouncing the save.
+ *  - Nothing is written when anything is refused, and the effects do not run either --
+ *    recalculating the location slugs, or re-registering a billing product, after a save
+ *    that did not happen is a site whose behaviour no longer matches its settings.
+ *  - And what lands in each preference row -- the value and the type column beside it --
+ *    has to be what landed before.
+ *
+ * DB-backed: the rows are the point, so t_preference is read back with raw SQL rather than
+ * through the code under test. The controllers are driven the way a browser drives them,
+ * because a rule in a declaration that no request reaches is the same install as no rule.
+ *
+ * Usage:  php tests/settings-screen-forms.php
+ * Env:    DRIFT_DB_HOST DRIFT_DB_PORT DRIFT_DB_USER DRIFT_DB_PASS
+ */
+
+require_once __DIR__ . '/lib/scratchdb.php';
+require_once __DIR__ . '/lib/harness.php';
+
+$admin = scratchdb_session('osc_settings_screen_forms');
+
+if (!defined('OC_ADMIN')) {
+    define('OC_ADMIN', true);
+}
+if (!defined('PLUGINS_PATH')) {
+    define('PLUGINS_PATH', ABS_PATH . 'oc-content/plugins/');
+}
+if (!function_exists('osc_plugins_path')) {
+    function osc_plugins_path()
+    {
+        return PLUGINS_PATH;
+    }
+}
+if (!function_exists('__')) {
+    function __($key, $domain = 'core')
+    {
+        return $key;
+    }
+}
+if (!function_exists('_m')) {
+    function _m($key)
+    {
+        return $key;
+    }
+}
+if (!function_exists('_e')) {
+    function _e($key, $domain = 'core')
+    {
+        echo $key;
+    }
+}
+if (!function_exists('osc_admin_base_url')) {
+    function osc_admin_base_url($index = false)
+    {
+        return 'https://example.test/oc-admin/index.php';
+    }
+}
+if (!function_exists('osc_add_admin_submenu_page')) {
+    function osc_add_admin_submenu_page($menu, $title, $url, $id, $capability = 'administrator')
+    {
+    }
+}
+
+// Recorded rather than enforced: whether the check runs at all, and on which actions, is one
+// of the things this file asserts.
+$GLOBALS['csrfChecks'] = array();
+if (!function_exists('osc_csrf_check')) {
+    function osc_csrf_check($die = true)
+    {
+        $GLOBALS['csrfChecks'][] = Params::getParam('action');
+
+        return true;
+    }
+}
+foreach (array('error', 'ok', 'warning', 'info') as $kind) {
+    if (!function_exists('osc_add_flash_' . $kind . '_message')) {
+        eval('function osc_add_flash_' . $kind . '_message($msg, $section = "pubMessages") {'
+             . '$GLOBALS["flashes"][] = array("' . $kind . '", $msg); }');
+    }
+}
+
+// The effects the declarations own. Recorded, because the guarantee under test is that they
+// run once on a save and not at all on a refusal.
+$GLOBALS['effects'] = array();
+if (!function_exists('osc_calculate_location_slug')) {
+    function osc_calculate_location_slug($type)
+    {
+        $GLOBALS['effects'][] = 'slug:' . $type;
+    }
+}
+foreach (array('premium', 'slot', 'item_upgrades', 'seller_limits') as $product) {
+    if (!function_exists('osc_register_billing_' . $product)) {
+        eval('function osc_register_billing_' . $product . '() {'
+             . '$GLOBALS["effects"][] = "billing:' . $product . '"; }');
+    }
+}
+
+require_once ABS_PATH . 'oc-admin/themes/modern/parts/ui.php';
+if (!function_exists('osc_current_admin_theme_path')) {
+    function osc_current_admin_theme_path($file = '')
+    {
+    }
+}
+if (!function_exists('osc_current_admin_theme_url')) {
+    function osc_current_admin_theme_url($file = '')
+    {
+        return 'https://example.test/oc-admin/themes/modern/' . $file;
+    }
+}
+
+require_once ABS_PATH . 'oc-includes/osclass/helpers/hSanitize.php';
+require_once ABS_PATH . 'oc-includes/osclass/helpers/hValidate.php';
+require_once ABS_PATH . 'oc-includes/osclass/helpers/hSettings.php';
+require_once ABS_PATH . 'oc-includes/osclass/helpers/hAdminUi.php';
+require_once ABS_PATH . 'oc-includes/osclass/helpers/hPreference.php';
+require_once ABS_PATH . 'oc-includes/osclass/helpers/hUtils.php';
+
+/**
+ * The controller's base class, stubbed: a redirect is recorded rather than taken (the real
+ * one exits), and the section permission check has already happened by the time doModel()
+ * runs.
+ */
+class AdminSecBaseModel
+{
+    protected $action;
+
+    protected $page;
+
+    public function __construct()
+    {
+        $this->action = Params::getParam('action');
+        $this->page   = Params::getParam('page');
+    }
+
+    public function doModel()
+    {
+    }
+
+    public function isModerator()
+    {
+        return false;
+    }
+
+    public function redirectTo($url, $code = null)
+    {
+        $GLOBALS['redirects'][] = $url;
+    }
+
+    public function _exportVariableToView($key, $value)
+    {
+        View::newInstance()->_exportVariableToView($key, $value);
+    }
+
+    /**
+     * The admin theme's view for this screen, drawn where the real one would draw it.
+     *
+     * Every settings view declares a customHead() at file scope under that one name, so a
+     * process that draws more than one of them -- which a request never does and this file
+     * does constantly -- would die on the redeclaration. Each view is therefore included
+     * through a copy whose head function carries a name of its own. Nothing else about the
+     * file is touched, so what is asserted below is the view as it ships.
+     */
+    public function doView($view)
+    {
+        $GLOBALS['views'][] = $view;
+
+        $suffix = 'v' . count($GLOBALS['viewCopies']);
+        $src    = (string)file_get_contents(ABS_PATH . 'oc-admin/themes/modern/' . $view);
+        $src    = str_replace(
+            array('function customHead(', "'customHead'"),
+            array('function customHead_' . $suffix . '(', "'customHead_" . $suffix . "'"),
+            $src
+        );
+        $copy = tempnam(sys_get_temp_dir(), 'oscview_') . '.php';
+        file_put_contents($copy, $src);
+        $GLOBALS['viewCopies'][] = $copy;
+        register_shutdown_function(static fn () => @unlink($copy));
+
+        include $copy;
+    }
+}
+
+foreach (array('Main', 'Comments', 'Mailserver', 'LatestSearches', 'Advanced', 'SpamnBots', 'Billing') as $screen) {
+    require_once ABS_PATH . 'oc-includes/osclass/classes/controller/admin/settings/CAdminSettings' . $screen . '.php';
+}
+
+use mindstellar\admin\form\AdvancedSettingsForm;
+use mindstellar\admin\form\CommentSettingsForm;
+use mindstellar\admin\form\KeywordBlockSettingsForm;
+use mindstellar\admin\form\LatestSearchSettingsForm;
+use mindstellar\admin\form\MailServerSettingsForm;
+use mindstellar\admin\form\MainSettingsForm;
+use mindstellar\admin\form\SpamSettingsForm;
+use mindstellar\admin\form\store\PreferenceStore;
+use mindstellar\settings\SettingsPageRegistry;
+
+$GLOBALS['flashes']   = array();
+$GLOBALS['redirects'] = array();
+$GLOBALS['views']     = array();
+$GLOBALS['viewCopies'] = array();
+
+/** One preference row exactly as the table holds it, or null when there is none. */
+function pref(mysqli $admin, string $name, string $section = 'osclass'): ?array
+{
+    $stmt = $admin->prepare(
+        'SELECT s_value, e_type FROM ' . DB_TABLE_PREFIX . 't_preference WHERE s_section = ? AND s_name = ?'
+    );
+    $stmt->bind_param('ss', $section, $name);
+    $stmt->execute();
+    $row = $stmt->get_result()->fetch_assoc();
+    $stmt->close();
+
+    return $row === null ? null : array((string)$row['s_value'], (string)$row['e_type']);
+}
+
+/** Write a preference the way the installer does, without going through the code under test. */
+function seed_pref(mysqli $admin, string $name, string $value, string $type = 'STRING', string $section = 'osclass'): void
+{
+    $stmt = $admin->prepare(
+        'REPLACE INTO ' . DB_TABLE_PREFIX . 't_preference (s_section, s_name, s_value, e_type) VALUES (?, ?, ?, ?)'
+    );
+    $stmt->bind_param('ssss', $section, $name, $value, $type);
+    $stmt->execute();
+    $stmt->close();
+}
+
+/** Put a request in front of a real controller the way a browser would. */
+function drive(string $controller, string $action, array $fields = array()): array
+{
+    $_GET  = array('page' => 'settings', 'action' => $action);
+    $_POST = $fields;
+    Params::init();
+    $GLOBALS['flashes']    = array();
+    $GLOBALS['redirects']  = array();
+    $GLOBALS['csrfChecks'] = array();
+    $GLOBALS['effects']    = array();
+    $GLOBALS['views']      = array();
+
+    ob_start();
+    $instance = new $controller();
+    $instance->doModel();
+    $drawn = (string)ob_get_clean();
+
+    return array(
+        'flashes'   => $GLOBALS['flashes'],
+        'redirects' => $GLOBALS['redirects'],
+        'csrf'      => $GLOBALS['csrfChecks'],
+        'effects'   => $GLOBALS['effects'],
+        'views'     => $GLOBALS['views'],
+        'drawn'     => $drawn,
+    );
+}
+
+/** The messages a run flashed, as "kind:body" so both halves are asserted at once. */
+function flashed(array $result): array
+{
+    return array_map(static fn ($flash) => $flash[0] . ':' . $flash[1], $result['flashes']);
+}
+
+seed_locale($admin, 'en_US', 'English');
+seed_locale($admin, 'es_ES', 'Espanol');
+seed_currency($admin, 'USD', 'US Dollar');
+seed_currency($admin, 'EUR', 'Euro');
+
+foreach (array(
+    array('pageTitle', 'Shopclass', 'STRING'),
+    array('pageDesc', '', 'STRING'),
+    array('contactEmail', 'admin@example.test', 'STRING'),
+    array('language', 'en_US', 'STRING'),
+    array('currency', 'USD', 'STRING'),
+    array('weekStart', '0', 'STRING'),
+    array('timezone', 'Europe/Madrid', 'STRING'),
+    array('dateFormat', 'F j, Y', 'STRING'),
+    array('timeFormat', 'g:i a', 'STRING'),
+    array('num_rss_items', '50', 'INTEGER'),
+    array('maxLatestItems@home', '12', 'INTEGER'),
+    array('defaultResultsPerPage@search', '12', 'INTEGER'),
+    array('moderate_comments', '0', 'INTEGER'),
+    array('comments_per_page', '10', 'INTEGER'),
+    array('purge_latest_searches', 'week', 'STRING'),
+    array('save_latest_searches', '0', 'BOOLEAN'),
+    array('mailserver_password', 'the-old-one', 'STRING'),
+    array('mailserver_type', 'custom', 'STRING'),
+    array('mailserver_host', 'localhost', 'STRING'),
+    array('subdomain_type', '', 'STRING'),
+    array('subdomain_host', '', 'STRING'),
+    array('report_threshold', '5', 'INTEGER'),
+    array('akismetKey', '', 'STRING'),
+    array('recaptcha_version', '2', 'STRING'),
+    array('billing_currency', 'USD', 'STRING'),
+) as $seed) {
+    seed_pref($admin, $seed[0], $seed[1], $seed[2]);
+}
+osc_reset_preferences();
+
+/* ---------------------------------------------------------------------------------------
+ * The map: which preference each control writes, and in which section. This is the one
+ * thing a reader of the declarations cannot check by eye, because four of the keys are not
+ * the field's own name and three of the controls are not preferences at all.
+ * ------------------------------------------------------------------------------------ */
+
+harness_section('every control writes the key the readers already use');
+
+/** Every declared field of a page as "field => section/key", or "field => (not stored)". */
+function keymap(string $pageId): array
+{
+    $page = osc_settings_page($pageId);
+    $map  = array();
+    foreach (SettingsPageRegistry::instance()->fields($pageId) as $name => $field) {
+        if ($field['type'] === 'custom') {
+            continue;
+        }
+        $map[$name] = ($field['persist'] ?? null) === false
+            ? '(not stored)'
+            : $page['section'] . '/' . PreferenceStore::key($name, $field);
+    }
+
+    return $map;
+}
+
+pin(
+    'the general settings screen',
+    array(
+        'pageTitle'                    => 'osclass/pageTitle',
+        'pageDesc'                     => 'osclass/pageDesc',
+        'contactEmail'                 => 'osclass/contactEmail',
+        'language'                     => 'osclass/language',
+        'currency'                     => 'osclass/currency',
+        'weekStart'                    => 'osclass/weekStart',
+        'timezone'                     => 'osclass/timezone',
+        'dateFormat'                   => 'osclass/dateFormat',
+        'timeFormat'                   => 'osclass/timeFormat',
+        'num_rss_items'                => 'osclass/num_rss_items',
+        'max_latest_items_at_home'     => 'osclass/maxLatestItems@home',
+        'default_results_per_page'     => 'osclass/defaultResultsPerPage@search',
+        'selectable_parent_categories' => 'osclass/selectable_parent_categories',
+        'enabled_attachment'           => 'osclass/contact_attachment',
+        'auto_cron'                    => 'osclass/auto_cron',
+        'googlemaps_api_key'           => 'osclass/googlemaps_api_key',
+        'openstreet_api_key'           => 'osclass/openstreet_api_key',
+        'allow_update_prerelease'      => 'osclass/allow_update_prerelease',
+    ),
+    keymap(MainSettingsForm::register())
+);
+pin(
+    'the comment screen, where the moderation count is the switch and not the box',
+    array(
+        'enabled_comments'           => 'osclass/enabled_comments',
+        'reg_user_post_comments'     => 'osclass/reg_user_post_comments',
+        'enabled_recaptcha_comments' => 'osclass/enabled_recaptcha_comments',
+        'moderate_comments'          => 'osclass/moderate_comments',
+        'num_moderate_comments'      => '(not stored)',
+        'comments_per_page'          => 'osclass/comments_per_page',
+        'notify_new_comment'         => 'osclass/notify_new_comment',
+        'notify_new_comment_user'    => 'osclass/notify_new_comment_user',
+    ),
+    keymap(CommentSettingsForm::register())
+);
+pin(
+    'the latest-searches screen, where the presets pick and the hidden field carries',
+    array(
+        'save_latest_searches' => 'osclass/save_latest_searches',
+        'purge_searches'       => '(not stored)',
+        'customPurge'          => 'osclass/purge_latest_searches',
+    ),
+    keymap(LatestSearchSettingsForm::register())
+);
+pin(
+    'the advanced screen',
+    array(
+        'e_type' => 'osclass/subdomain_type',
+        's_host' => 'osclass/subdomain_host',
+    ),
+    keymap(AdvancedSettingsForm::register())
+);
+pin(
+    'the mail-server screen',
+    array(
+        'mailserver_type'      => 'osclass/mailserver_type',
+        'mailserver_host'      => 'osclass/mailserver_host',
+        'mailserver_mail_from' => 'osclass/mailserver_mail_from',
+        'mailserver_name_from' => 'osclass/mailserver_name_from',
+        'mailserver_port'      => 'osclass/mailserver_port',
+        'mailserver_username'  => 'osclass/mailserver_username',
+        'mailserver_password'  => 'osclass/mailserver_password',
+        'mailserver_ssl'       => 'osclass/mailserver_ssl',
+        'mailserver_auth'      => 'osclass/mailserver_auth',
+        'mailserver_pop'       => 'osclass/mailserver_pop',
+    ),
+    keymap(MailServerSettingsForm::register())
+);
+pin(
+    'the keyword-blocklist moderation switches',
+    array(
+        'keyword_spam_enabled'      => 'osclass/keyword_spam_enabled',
+        'keyword_spam_hard_block'   => 'osclass/keyword_spam_hard_block',
+        'report_autoblock'          => 'osclass/report_autoblock',
+        'report_threshold'          => 'osclass/report_threshold',
+        'enabled_recaptcha_reports' => 'osclass/enabled_recaptcha_reports',
+    ),
+    keymap(KeywordBlockSettingsForm::register())
+);
+pin(
+    'the captcha screen, whose version is a hidden constant',
+    array(
+        'recaptchaVersion'   => 'osclass/recaptcha_version',
+        'captchaProvider'    => 'osclass/captchaProvider',
+        'recaptchaPubKey'    => 'osclass/recaptchaPubKey',
+        'recaptchaPrivKey'   => 'osclass/recaptchaPrivKey',
+        'turnstileSiteKey'   => 'osclass/turnstileSiteKey',
+        'turnstileSecretKey' => 'osclass/turnstileSecretKey',
+    ),
+    keymap(SpamSettingsForm::registerCaptcha())
+);
+pin(
+    'the sign-in limiter, which is the one screen here that is not an osclass preference',
+    array(
+        'login_throttle_enabled'       => 'security/login_throttle_enabled',
+        'login_throttle_window'        => 'security/login_throttle_window',
+        'login_throttle_max_ip'        => 'security/login_throttle_max_ip',
+        'login_throttle_max_account'   => 'security/login_throttle_max_account',
+        'login_attempt_retention_days' => 'security/login_attempt_retention_days',
+    ),
+    keymap(SpamSettingsForm::registerLoginThrottle())
+);
+pin(
+    'and the Akismet key and the search-alert rule',
+    array('akismetKey' => 'osclass/akismetKey', 'alerts_require_login' => 'osclass/alerts_require_login'),
+    keymap(SpamSettingsForm::registerAkismet()) + keymap(SpamSettingsForm::registerAlerts())
+);
+
+/* ------------------------------------------------------------------------------------ */
+
+harness_section('general settings');
+
+$main = array(
+    'pageTitle'                    => 'My Classifieds',
+    'pageDesc'                     => 'Things for sale',
+    'contactEmail'                 => 'owner@example.test',
+    'language'                     => 'es_ES',
+    'currency'                     => 'EUR',
+    'weekStart'                    => '1',
+    'timezone'                     => 'Europe/Madrid',
+    'dateFormat'                   => 'Y/m/d',
+    'timeFormat'                   => 'H:i',
+    'num_rss_items'                => '25',
+    'max_latest_items_at_home'     => '9',
+    'default_results_per_page'     => '20',
+    'selectable_parent_categories' => '1',
+    'enabled_attachment'           => '1',
+    'auto_cron'                    => '1',
+    'googlemaps_api_key'           => ' gmk ',
+    'openstreet_api_key'           => 'osm',
+    'allow_update_prerelease'      => '1',
+);
+$run = drive('CAdminSettingsMain', 'update', $main);
+
+pin('the save is CSRF-checked', array('update'), $run['csrf']);
+pin('and reports one success', array('ok:General settings have been updated'), flashed($run));
+pin('and goes back to the screen', array('https://example.test/oc-admin/index.php?page=settings'), $run['redirects']);
+pin('the page title lands as typed', array('My Classifieds', 'STRING'), pref($admin, 'pageTitle'));
+pin('the contact address too', array('owner@example.test', 'STRING'), pref($admin, 'contactEmail'));
+pin('the latest-listings count lands under the key readers use', array('9', 'INTEGER'), pref($admin, 'maxLatestItems@home'));
+pin('and the search page size under its own', array('20', 'INTEGER'), pref($admin, 'defaultResultsPerPage@search'));
+pin('the attachment switch under contact_attachment', array('1', 'BOOLEAN'), pref($admin, 'contact_attachment'));
+check('and not under the name of its control', pref($admin, 'enabled_attachment') === null);
+pin('a hidden date format is stored like any other value', array('Y/m/d', 'STRING'), pref($admin, 'dateFormat'));
+pin('and the time format beside it', array('H:i', 'STRING'), pref($admin, 'timeFormat'));
+pin('a key is trimmed', array('gmk', 'STRING'), pref($admin, 'googlemaps_api_key'));
+
+// A checkbox that was not ticked submits nothing at all, and the preference has to say so
+// rather than keeping the value from the last save.
+$run = drive('CAdminSettingsMain', 'update', array_diff_key($main, array('auto_cron' => 1)));
+pin('an unticked switch stores a zero, not an empty string', array('0', 'BOOLEAN'), pref($admin, 'auto_cron'));
+
+// The one rule the hand-written screen had that a type cannot express: a title of
+// punctuation is not a title.
+$run = drive('CAdminSettingsMain', 'update', array('pageTitle' => '...') + $main);
+pin('a title with no letter or digit is refused', array('warning:Page title field is required'), flashed($run));
+pin('nothing is stored for it', array('My Classifieds', 'STRING'), pref($admin, 'pageTitle'));
+pin('and the screen is redrawn rather than redirected away from', array('settings/index.php'), $run['views']);
+pin('with no redirect at all', array(), $run['redirects']);
+check('with what was typed still in it', strpos($run['drawn'], 'value="..."') !== false);
+
+$run = drive('CAdminSettingsMain', 'update', array('pageTitle' => '') + $main);
+pin('an empty title is refused too', array('warning:Page title cannot be left empty'), flashed($run));
+
+$run = drive('CAdminSettingsMain', 'update', array('language' => 'de_DE') + $main);
+pin(
+    'a language the site does not offer is refused rather than stored',
+    array('warning:Default language is not one of the available options'),
+    flashed($run)
+);
+pin('and the stored one is untouched', array('es_ES', 'STRING'), pref($admin, 'language'));
+
+$run = drive('CAdminSettingsMain', 'update', array('num_rss_items' => '-1') + $main);
+pin('a negative count is refused', array('warning:RSS shows must be 0 or more'), flashed($run));
+$run = drive('CAdminSettingsMain', 'update', array('num_rss_items' => '') + $main);
+pin('and a blank one is the zero the screen has always stored', array('0', 'INTEGER'), pref($admin, 'num_rss_items'));
+
+harness_section('comment settings');
+
+$comments = array(
+    'enabled_comments'      => '1',
+    'moderate_comments'     => '1',
+    'num_moderate_comments' => '3',
+    'comments_per_page'     => '25',
+);
+$run = drive('CAdminSettingsComments', 'comments_post', $comments);
+pin('moderation on stores the count, not the tick', array('3', 'STRING'), pref($admin, 'moderate_comments'));
+check('and the box beside it is no preference of its own', pref($admin, 'num_moderate_comments') === null);
+pin('the page size lands', array('25', 'INTEGER'), pref($admin, 'comments_per_page'));
+pin('and the switches beside it', array('1', 'BOOLEAN'), pref($admin, 'enabled_comments'));
+pin('an unticked one stores a zero', array('0', 'BOOLEAN'), pref($admin, 'notify_new_comment'));
+
+$run = drive('CAdminSettingsComments', 'comments_post', array('moderate_comments' => '') + $comments);
+pin('moderation off is the -1 every reader understands', array('-1', 'STRING'), pref($admin, 'moderate_comments'));
+
+$run = drive('CAdminSettingsComments', 'comments_post', array('comments_per_page' => '') + $comments);
+pin(
+    'a blank page size is refused, as it always was',
+    array('warning:Comments per page cannot be left empty'),
+    flashed($run)
+);
+pin('and nothing was written', array('-1', 'STRING'), pref($admin, 'moderate_comments'));
+
+// Both counts were checked with osc_validate_int() before the screen was declared, so a
+// decimal never reached the column. Nothing downstream would notice one -- every reader
+// casts -- which is exactly why it would sit there.
+$run = drive('CAdminSettingsComments', 'comments_post', array('comments_per_page' => '2.5') + $comments);
+pin('a page size typed with a decimal point is stored whole', array('2', 'INTEGER'), pref($admin, 'comments_per_page'));
+$run = drive('CAdminSettingsComments', 'comments_post', array('num_moderate_comments' => '3.7') + $comments);
+pin('and so is the count the moderation switch takes its value from', array('3', 'STRING'), pref($admin, 'moderate_comments'));
+
+// The box lives inside .comments_approved, which the page's own script sets to display:none
+// while moderation is off. A browser will not submit a form holding a required control it
+// cannot show: no submit event fires, the page's validator never runs, #error_list stays
+// empty and the save button looks dead. The save enforces the rule instead.
+$html = drive('CAdminSettingsComments', 'comments')['drawn'];
+preg_match('/<input[^>]*name="num_moderate_comments"[^>]*>/', $html, $hidden);
+check('the box the page sometimes hides is drawn', $hidden !== array());
+check(
+    'and carries no native required',
+    $hidden !== array() && strpos($hidden[0], 'required') === false,
+    $hidden[0] ?? '(not drawn)'
+);
+preg_match('/<input[^>]*name="comments_per_page"[^>]*>/', $html, $always);
+check(
+    'while the field beside it that is always on screen still does',
+    $always !== array() && strpos($always[0], 'required') !== false,
+    $always[0] ?? '(not drawn)'
+);
+$run = drive('CAdminSettingsComments', 'comments_post', array('num_moderate_comments' => '') + $comments);
+pin(
+    'and an empty box with moderation on is still refused, by the save',
+    array('warning:Moderated comments cannot be left empty'),
+    flashed($run)
+);
+$run = drive('CAdminSettingsComments', 'comments_post', array(
+    'moderate_comments'     => '',
+    'num_moderate_comments' => '',
+) + $comments);
+pin(
+    'with moderation off it is not asked for at all',
+    array('ok:Comment settings have been updated'),
+    flashed($run)
+);
+pin('and the -1 lands', array('-1', 'STRING'), pref($admin, 'moderate_comments'));
+
+harness_section('latest searches');
+
+$run = drive('CAdminSettingsLatestSearches', 'latestsearches_post', array(
+    'save_latest_searches' => '1',
+    'purge_searches'       => 'custom',
+    'customPurge'          => '250',
+));
+pin('the hidden field is what is stored', array('250', 'STRING'), pref($admin, 'purge_latest_searches'));
+pin('and the switch beside it', array('1', 'BOOLEAN'), pref($admin, 'save_latest_searches'));
+check('while the presets are stored nowhere', pref($admin, 'purge_searches') === null);
+
+$run = drive('CAdminSettingsLatestSearches', 'latestsearches_post', array(
+    'save_latest_searches' => '',
+    'purge_searches'       => 'custom',
+    'customPurge'          => '',
+));
+pin('an empty answer is refused', array('warning:Custom number cannot be left empty'), flashed($run));
+pin('and the switch is not written either -- a refused save is not half a save', array('1', 'BOOLEAN'), pref($admin, 'save_latest_searches'));
+
+harness_section('mail server');
+
+$mail = array(
+    'mailserver_type'      => 'custom',
+    'mailserver_host'      => 'smtp.example.test',
+    'mailserver_mail_from' => 'noreply@example.test',
+    'mailserver_name_from' => 'Example',
+    'mailserver_port'      => '587',
+    'mailserver_username'  => 'postmaster',
+    'mailserver_password'  => '',
+    'mailserver_ssl'       => 'tls',
+);
+$run = drive('CAdminSettingsMailserver', 'mailserver_post', $mail);
+pin('a blank password leaves the stored one alone', array('the-old-one', 'STRING'), pref($admin, 'mailserver_password'));
+pin('the host lands', array('smtp.example.test', 'STRING'), pref($admin, 'mailserver_host'));
+pin('and the port is a number', array('587', 'INTEGER'), pref($admin, 'mailserver_port'));
+
+$run = drive('CAdminSettingsMailserver', 'mailserver_post', array('mailserver_password' => 'a new one') + $mail);
+pin('a typed password replaces it', array('a new one', 'STRING'), pref($admin, 'mailserver_password'));
+
+$run = drive('CAdminSettingsMailserver', 'mailserver_post', array('mailserver_mail_from' => 'not an address') + $mail);
+pin(
+    'an address that is not one is refused rather than rewritten',
+    array('warning:Mail from is not a valid email address'),
+    flashed($run)
+);
+pin('and nothing else was written either', array('a new one', 'STRING'), pref($admin, 'mailserver_password'));
+
+// The one type that keeps its whitespace. An SMTP password with a space at either end is
+// the password; a trimmed copy of it fails to authenticate, and the screen that stored it
+// says the settings have been updated.
+$run = drive('CAdminSettingsMailserver', 'mailserver_post', array(
+    'mailserver_password' => '  pa ss  ',
+    'mailserver_username' => ' postmaster ',
+) + $mail);
+pin('a password is stored exactly as typed', array('  pa ss  ', 'STRING'), pref($admin, 'mailserver_password'));
+pin('while the box above it is trimmed like everything else', array('postmaster', 'STRING'), pref($admin, 'mailserver_username'));
+
+harness_section('advanced settings, and the effect that belongs to them');
+
+$run = drive('CAdminSettingsAdvanced', 'advanced_post', array('e_type' => 'city', 's_host' => ' example.test '));
+pin('the subdomain type lands under its own key', array('city', 'STRING'), pref($admin, 'subdomain_type'));
+pin('and the host, trimmed', array('example.test', 'STRING'), pref($admin, 'subdomain_host'));
+pin('the slugs are recalculated once', array('slug:city'), $run['effects']);
+
+$run = drive('CAdminSettingsAdvanced', 'advanced_post', array('e_type' => 'planet', 's_host' => 'x'));
+pin(
+    'a subdomain type the screen never offered is refused',
+    array('warning:Subdomain type is not one of the available options'),
+    flashed($run)
+);
+pin('nothing is recalculated for a save that did not happen', array(), $run['effects']);
+pin('and the stored type is untouched', array('city', 'STRING'), pref($admin, 'subdomain_type'));
+
+harness_section('spam and bots');
+
+$throttle = array(
+    'login_throttle_enabled'       => '1',
+    'login_throttle_window'        => '0',
+    'login_throttle_max_ip'        => '0',
+    'login_throttle_max_account'   => '-5',
+    'login_attempt_retention_days' => '-1',
+);
+$run = drive('CAdminSettingsSpamnBots', 'login_throttle_post', $throttle);
+pin('a zero window is floored, not refused', array('1', 'INTEGER'), pref($admin, 'login_throttle_window', 'security'));
+pin('and so is a negative account limit', array('1', 'INTEGER'), pref($admin, 'login_throttle_max_account', 'security'));
+pin('retention floors at zero instead', array('0', 'INTEGER'), pref($admin, 'login_attempt_retention_days', 'security'));
+pin('the switch is a boolean', array('1', 'BOOLEAN'), pref($admin, 'login_throttle_enabled', 'security'));
+check('and none of it landed in the osclass section', pref($admin, 'login_throttle_window') === null);
+pin('the save reports itself once', array('ok:Sign-in protection settings have been updated'), flashed($run));
+
+$run = drive('CAdminSettingsSpamnBots', 'akismet_post', array('akismetKey' => '  abc123  '));
+pin('an Akismet key is trimmed', array('abc123', 'STRING'), pref($admin, 'akismetKey'));
+pin('and a key that was set says so', array('ok:Your Akismet key has been updated'), flashed($run));
+$run = drive('CAdminSettingsSpamnBots', 'akismet_post', array('akismetKey' => ''));
+pin('a cleared one says the other thing', array('info:Your Akismet key has been cleared'), flashed($run));
+pin('and the preference is empty', array('', 'STRING'), pref($admin, 'akismetKey'));
+
+$run = drive('CAdminSettingsSpamnBots', 'recaptcha_post', array(
+    'recaptchaVersion'   => '2',
+    'captchaProvider'    => 'turnstile',
+    'recaptchaPubKey'    => '',
+    'recaptchaPrivKey'   => '',
+    'turnstileSiteKey'   => 'site',
+    'turnstileSecretKey' => 'secret',
+));
+pin('the provider lands', array('turnstile', 'STRING'), pref($admin, 'captchaProvider'));
+pin('the hidden version keeps the key it has always had', array('2', 'STRING'), pref($admin, 'recaptcha_version'));
+pin('and a blank key is cleared rather than left alone', array('', 'STRING'), pref($admin, 'recaptchaPubKey'));
+
+$run = drive('CAdminSettingsSpamnBots', 'alerts_post', array('alerts_require_login' => '1'));
+pin('the alert rule is a boolean', array('1', 'BOOLEAN'), pref($admin, 'alerts_require_login'));
+
+harness_section('keyword blocklist moderation');
+
+$run = drive('CAdminSettingsKeywordBlock', 'keyword_block_prefs_post', array(
+    'keyword_spam_enabled' => '1',
+    'report_threshold'     => '0',
+));
+pin('the threshold is floored at one reporter', array('1', 'INTEGER'), pref($admin, 'report_threshold'));
+pin('the filter switch is a boolean', array('1', 'BOOLEAN'), pref($admin, 'keyword_spam_enabled'));
+pin('and an untouched switch is off', array('0', 'BOOLEAN'), pref($admin, 'report_autoblock'));
+
+harness_section('billing, and the registrations that follow a save');
+
+$pricing = array(
+    'billing_free_live_listings' => '5',
+    'billing_slot_enabled'       => '1',
+    'billing_slot_credits'       => '-3',
+    'billing_slot_quantity'      => '0',
+    'billing_premium_enabled'    => '',
+    'billing_premium_credits'    => '10',
+    'billing_premium_days'       => '30',
+    'billing_currency'           => 'eur',
+);
+$run = drive('CAdminSettingsBilling', 'billing_pricing_post', $pricing);
+pin('a currency is stored upper-cased', array('EUR', 'STRING'), pref($admin, 'billing_currency'));
+pin('a negative price is floored', array('0', 'INTEGER'), pref($admin, 'billing_slot_credits'));
+pin('and a zero quantity at one', array('1', 'INTEGER'), pref($admin, 'billing_slot_quantity'));
+pin('the products are re-registered once each', array('billing:premium', 'billing:slot'), $run['effects']);
+
+$run = drive('CAdminSettingsBilling', 'billing_pricing_post', array('billing_currency' => 'e1') + $pricing);
+pin(
+    'a currency that is not three letters is refused',
+    array('warning:Currency must be a 3-letter code, e.g. USD.'),
+    flashed($run)
+);
+$run = drive('CAdminSettingsBilling', 'billing_pricing_post', array('billing_currency' => 'euro') + $pricing);
+pin(
+    'and one longer than the box allows is refused by the cap the box shows',
+    array('warning:Currency must be 3 characters or fewer'),
+    flashed($run)
+);
+pin('nothing is re-registered for a save that did not happen', array(), $run['effects']);
+pin('and the stored currency is untouched', array('EUR', 'STRING'), pref($admin, 'billing_currency'));
+
+$run = drive('CAdminSettingsBilling', 'billing_post', array('billing_enabled' => '1'));
+pin('the switch is a boolean', array('1', 'BOOLEAN'), pref($admin, 'billing_enabled'));
+pin('and reports itself', array('ok:Billing settings have been updated'), flashed($run));
+
+/* ---------------------------------------------------------------------------------------
+ * What the page around the form still reaches for. A declared field's id is derived from
+ * its name -- field-<name> -- while the hand-written view it replaced wrote its own. Where
+ * the page's script looks one up by hand and the id moved, getElementById answers null, the
+ * script quietly does nothing, and the control it was driving submits whatever it held when
+ * the page loaded: no error, no warning, and a green "settings have been updated" over the
+ * old value.
+ * ------------------------------------------------------------------------------------ */
+
+harness_section('the ids and form names each page\'s own script reaches for');
+
+$screenViews = array(
+    'settings/index.php'      => array('CAdminSettingsMain', 'settings'),
+    'settings/comments.php'   => array('CAdminSettingsComments', 'comments'),
+    'settings/mailserver.php' => array('CAdminSettingsMailserver', 'mailserver'),
+    'settings/searches.php'   => array('CAdminSettingsLatestSearches', 'latestsearches'),
+    'settings/advanced.php'   => array('CAdminSettingsAdvanced', 'advanced'),
+    'settings/spamNbots.php'  => array('CAdminSettingsSpamnBots', 'spamNbots'),
+    'settings/billing.php'    => array('CAdminSettingsBilling', 'billing'),
+);
+$drawn = array();
+foreach ($screenViews as $view => $screen) {
+    $drawn[$view] = drive($screen[0], $screen[1])['drawn'];
+}
+
+// The three the declarations have to spell out, because a page's script writes the answer
+// into them and the save reads nothing else.
+check(
+    'the retention answer is written into the id searches.php names',
+    strpos($drawn['settings/searches.php'], 'id="customPurge"') !== false
+);
+check(
+    'the date format into the one index.php names',
+    strpos($drawn['settings/index.php'], 'id="dateFormat"') !== false
+);
+check(
+    'and the time format beside it',
+    strpos($drawn['settings/index.php'], 'id="timeFormat"') !== false
+);
+
+$missing = array();
+foreach ($drawn as $view => $html) {
+    $src = (string)file_get_contents(ABS_PATH . 'oc-admin/themes/modern/' . $view);
+    preg_match_all("/getElementById\('([^']+)'\)/", $src, $ids);
+    foreach (array_unique($ids[1]) as $id) {
+        if (strpos($html, 'id="' . $id . '"') === false) {
+            $missing[] = basename($view) . ': #' . $id;
+        }
+    }
+    preg_match_all('/form\[name=([A-Za-z0-9_]+)\]/', $src, $names);
+    foreach (array_unique($names[1]) as $name) {
+        if (strpos($html, 'name="' . $name . '"') === false) {
+            $missing[] = basename($view) . ': form ' . $name;
+        }
+    }
+}
+// Pinned as a list rather than asserted empty: the test-mail button was dropped from this
+// screen long before the form was declared, and its listener has been guarded and inert
+// ever since. Recording it is honest; asserting nothing is missing would mean deleting the
+// check that matters.
+pin(
+    'every id and form name a script names is one the page draws',
+    array('mailserver.php: #testMail', 'mailserver.php: #testMail_message'),
+    $missing
+);
+
+harness_section('the view variables a replaced admin theme still reads');
+
+// doView() resolves through osc_current_admin_theme_path(), so on an install with a forked
+// admin theme it is that theme's copy of these views that runs, still reading the variables
+// core exported before the forms were declared. View::_get() answers '' for a key nobody
+// exported, and '' is falsy: the billing switch would draw unticked and the next save would
+// turn billing off with a success message.
+drive('CAdminSettingsMain', 'settings');
+check('the general screen still exports its language list', is_array(__get('aLanguages')) && __get('aLanguages') !== array());
+check('and its currency list', is_array(__get('aCurrencies')) && __get('aCurrencies') !== array());
+drive('CAdminSettingsBilling', 'billing');
+pin('the billing screen still exports whether billing is on', true, (bool)__get('billing_enabled'));
+drive('CAdminSettingsSpamnBots', 'spamNbots');
+pin('the spam screen still exports the Akismet key status', 3, (int)__get('akismet_status'));
+// Source scan, not proof: the keyword-block screen is a data table around its form and
+// drawing one needs half the admin theme, so the export is held at source level here.
+$keywordSrc = (string)file_get_contents(
+    ABS_PATH . 'oc-includes/osclass/classes/controller/admin/settings/CAdminSettingsKeywordBlock.php'
+);
+check(
+    'and the keyword screen still exports its moderation switches',
+    strpos($keywordSrc, "_exportVariableToView('moderation_prefs'") !== false
+);
+foreach (array(
+    'keyword_spam_enabled',
+    'keyword_spam_hard_block',
+    'report_autoblock',
+    'report_threshold',
+    'enabled_recaptcha_reports',
+) as $switch) {
+    check('with "' . $switch . '" among them', strpos($keywordSrc, "'" . $switch . "'") !== false);
+}
+
+/* ---------------------------------------------------------------------------------------
+ * Source scans. The cheap extra, never the proof: each says which kind it is.
+ * ------------------------------------------------------------------------------------ */
+
+harness_section('no regression to the hand-rolled path');
+
+$screens = array(
+    'settings/index.php'        => array('CAdminSettingsMain.php', array('pageTitle', 'contactEmail', 'auto_cron')),
+    'settings/comments.php'     => array('CAdminSettingsComments.php', array('enabled_comments', 'comments_per_page')),
+    'settings/mailserver.php'   => array('CAdminSettingsMailserver.php', array('mailserver_host', 'mailserver_password')),
+    'settings/searches.php'     => array('CAdminSettingsLatestSearches.php', array('save_latest_searches', 'customPurge')),
+    'settings/advanced.php'     => array('CAdminSettingsAdvanced.php', array('e_type', 's_host')),
+    'settings/spamNbots.php'    => array('CAdminSettingsSpamnBots.php', array('akismetKey', 'login_throttle_window')),
+    'settings/billing.php'      => array('CAdminSettingsBilling.php', array('billing_currency', 'billing_enabled')),
+    'settings/keywordBlock.php' => array('CAdminSettingsKeywordBlock.php', array('report_threshold', 'report_autoblock')),
+);
+foreach ($screens as $view => $screen) {
+    [$controller, $fields] = $screen;
+    $viewSrc = (string)file_get_contents(ABS_PATH . 'oc-admin/themes/modern/' . $view);
+    $ctrlSrc = (string)file_get_contents(
+        ABS_PATH . 'oc-includes/osclass/classes/controller/admin/settings/' . $controller
+    );
+
+    check(basename($view) . ' draws its form from the declaration', strpos($viewSrc, 'osc_admin_settings_form(') !== false);
+    foreach ($fields as $field) {
+        check(
+            $controller . ' no longer reads "' . $field . '" out of the request',
+            !preg_match('/Params::getParam[A-Za-z]*\(\s*\047' . preg_quote($field, '/') . '\047/', $ctrlSrc)
+        );
+        check(
+            basename($view) . ' no longer draws "' . $field . '" by hand',
+            !preg_match("/'name'\\s*=>\\s*'" . preg_quote($field, '/') . "'/", $viewSrc)
+        );
+    }
+    check(
+        $controller . ' has no osc_set_preference of its own',
+        strpos($ctrlSrc, 'osc_set_preference') === false
+    );
+}
+
+// The four keys that are not the field's own name are the ones a rename would break
+// silently, so the declarations are held to spelling them.
+foreach (array(
+    'MainSettingsForm.php'         => array('maxLatestItems@home', 'defaultResultsPerPage@search', 'contact_attachment'),
+    'LatestSearchSettingsForm.php' => array('purge_latest_searches'),
+    'AdvancedSettingsForm.php'     => array('subdomain_type', 'subdomain_host'),
+    'SpamSettingsForm.php'         => array('recaptcha_version'),
+) as $file => $keys) {
+    $src = (string)file_get_contents(ABS_PATH . 'oc-includes/osclass/classes/admin/form/' . $file);
+    foreach ($keys as $key) {
+        check($file . ' still names the "' . $key . '" preference', strpos($src, $key) !== false);
+    }
+}
+
+// One place decides how a refused save is reported, or eight screens drift into reporting
+// it eight ways.
+$shared = (string)file_get_contents(ABS_PATH . 'oc-includes/osclass/classes/admin/form/CoreSettings.php');
+check('the shared helper is what flashes a refusal', strpos($shared, 'osc_add_flash_warning_message') !== false);
+foreach (array_column($screens, 0) as $controller) {
+    $src = (string)file_get_contents(
+        ABS_PATH . 'oc-includes/osclass/classes/controller/admin/settings/' . $controller
+    );
+    check($controller . ' reports one through the shared helper', strpos($src, 'CoreSettings::attempt(') !== false);
+}
+
+exit(harness_result());

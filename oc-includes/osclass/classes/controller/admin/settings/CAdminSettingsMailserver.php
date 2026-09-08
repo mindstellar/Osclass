@@ -16,6 +16,9 @@ if (!defined('ABS_PATH')) {
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
+use mindstellar\admin\form\CoreSettings;
+use mindstellar\admin\form\MailServerSettingsForm;
+
 /**
  * Class CAdminSettingsMailserver
  */
@@ -33,7 +36,7 @@ class CAdminSettingsMailserver extends AdminSecBaseModel
         switch ($this->action) {
             case ('mailserver'):
                 // calling the mailserver view
-                $this->doView('settings/mailserver.php');
+                $this->drawForm();
                 break;
             case ('mailserver_post'):
                 if (defined('DEMO')) {
@@ -42,48 +45,29 @@ class CAdminSettingsMailserver extends AdminSecBaseModel
                 }
 
                 osc_csrf_check();
-                // updating mailserver
-                $iUpdated           = 0;
-                $mailserverAuth     = Params::getParam('mailserver_auth');
-                $mailserverAuth     = ($mailserverAuth != '' ? true : false);
-                $mailserverPop      = Params::getParam('mailserver_pop');
-                $mailserverPop      = ($mailserverPop != '' ? true : false);
-                $mailserverType     = Params::getParam('mailserver_type');
-                $mailserverHost     = Params::getParam('mailserver_host');
-                $mailserverPort     = Params::getParam('mailserver_port');
-                $mailserverUsername = Params::getParam('mailserver_username');
-                // The field renders masked: it never carries the stored password into the page,
-                // so a blank submission means "leave it alone", not "clear it".
-                $mailserverPassword = Params::getParam('mailserver_password', false, false);
-                if ($mailserverPassword === '') {
-                    $mailserverPassword = osc_mailserver_password();
-                }
-                $mailserverSsl      = Params::getParam('mailserver_ssl');
-                $mailserverMailFrom = Params::getParam('mailserver_mail_from');
-                $mailserverNameFrom = Params::getParam('mailserver_name_from');
 
-                if (!in_array($mailserverType, array('custom', 'gmail'))) {
-                    osc_add_flash_error_message(_m('Mail server type is incorrect'), 'admin');
-                    $this->redirectTo(osc_admin_base_url(true) . '?page=settings&action=mailserver');
+                $result = CoreSettings::attempt(MailServerSettingsForm::register());
+                if ($result['errors'] !== array()) {
+                    // Redrawn with what was typed rather than thrown away with a redirect.
+                    $this->drawForm($result['values']);
+                    break;
                 }
 
-                $iUpdated += osc_set_preference('mailserver_auth', $mailserverAuth);
-                $iUpdated += osc_set_preference('mailserver_pop', $mailserverPop);
-                $iUpdated += osc_set_preference('mailserver_type', $mailserverType);
-                $iUpdated += osc_set_preference('mailserver_host', $mailserverHost);
-                $iUpdated += osc_set_preference('mailserver_port', $mailserverPort);
-                $iUpdated += osc_set_preference('mailserver_username', $mailserverUsername);
-                $iUpdated += osc_set_preference('mailserver_password', $mailserverPassword);
-                $iUpdated += osc_set_preference('mailserver_ssl', $mailserverSsl);
-                $iUpdated += osc_set_preference('mailserver_mail_from', $mailserverMailFrom);
-                $iUpdated += osc_set_preference('mailserver_name_from', $mailserverNameFrom);
-
-                if ($iUpdated > 0) {
-                    osc_add_flash_ok_message(_m('Mail server configuration has changed'), 'admin');
-                }
+                osc_add_flash_ok_message(_m('Mail server configuration has changed'), 'admin');
                 $this->redirectTo(osc_admin_base_url(true) . '?page=settings&action=mailserver');
                 break;
         }
+    }
+
+    /**
+     * @param array|null $values values a rejected save is handing back
+     *
+     * @return void
+     */
+    private function drawForm(?array $values = null)
+    {
+        $this->_exportVariableToView('mailserver_form', MailServerSettingsForm::formVars($values));
+        $this->doView('settings/mailserver.php');
     }
 }
 

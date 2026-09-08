@@ -255,8 +255,10 @@ pin('a field sanitiser is handed the purified value', 'my slug', osc_settings_sa
 // body. Purifying those would empty them, so a field says so and is read raw.
 pin('a field declaring purify => false keeps its markup', trim($dirty), osc_settings_sanitize($fields['snippet']));
 pin('and so does a textarea declaring it', trim($dirty), osc_settings_sanitize($fields['template']));
-// A secret may legitimately contain anything, and always could: this is unchanged.
-pin('a secret is still read raw', trim($dirty), osc_settings_sanitize($fields['api_key']));
+// A secret may legitimately contain anything, and always could. It is the one type that
+// keeps its surrounding whitespace too: a password with a space at either end is the
+// password, and the sign-in form reads what was typed rather than a trimmed copy.
+pin('a secret is still read raw, and untrimmed with it', $dirty, osc_settings_sanitize($fields['api_key']));
 
 harness_section('a translated field, whose value is one per locale');
 

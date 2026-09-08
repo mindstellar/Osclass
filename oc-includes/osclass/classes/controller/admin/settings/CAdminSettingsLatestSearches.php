@@ -16,6 +16,9 @@ if (!defined('ABS_PATH')) {
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
+use mindstellar\admin\form\CoreSettings;
+use mindstellar\admin\form\LatestSearchSettingsForm;
+
 /**
  * Class CAdminSettingsLatestSearches
  */
@@ -32,31 +35,35 @@ class CAdminSettingsLatestSearches extends AdminSecBaseModel
     {
         switch ($this->action) {
             case ('latestsearches'):
-                //calling the comments settings view
-                $this->doView('settings/searches.php');
+                //calling the latest searches settings view
+                $this->drawForm();
                 break;
             case ('latestsearches_post'):
-                // updating comment
                 osc_csrf_check();
-                // Present means on. Comparing against 'on' tied this to the value a browser
-                // invents for a checkbox with no value attribute of its own, so the moment the
-                // field declared value="1" the setting could no longer be switched on.
-                osc_set_preference(
-                    'save_latest_searches',
-                    Params::getParam('save_latest_searches') !== '' ? 1 : 0
-                );
 
-                if (Params::getParam('customPurge') == '') {
-                    osc_add_flash_error_message(_m('Custom number could not be left empty'), 'admin');
-                    $this->redirectTo(osc_admin_base_url(true) . '?page=settings&action=latestsearches');
-                } else {
-                    osc_set_preference('purge_latest_searches', Params::getParam('customPurge'));
-
-                    osc_add_flash_ok_message(_m('Last search settings have been updated'), 'admin');
-                    $this->redirectTo(osc_admin_base_url(true) . '?page=settings&action=latestsearches');
+                $result = CoreSettings::attempt(LatestSearchSettingsForm::register());
+                if ($result['errors'] !== array()) {
+                    // Nothing was written, not even the switch: a rejected save is not half
+                    // a save. Redrawn with what was typed rather than thrown away.
+                    $this->drawForm($result['values']);
+                    break;
                 }
+
+                osc_add_flash_ok_message(_m('Last search settings have been updated'), 'admin');
+                $this->redirectTo(osc_admin_base_url(true) . '?page=settings&action=latestsearches');
                 break;
         }
+    }
+
+    /**
+     * @param array|null $values values a rejected save is handing back
+     *
+     * @return void
+     */
+    private function drawForm(?array $values = null)
+    {
+        $this->_exportVariableToView('searches_form', LatestSearchSettingsForm::formVars($values));
+        $this->doView('settings/searches.php');
     }
 }
 

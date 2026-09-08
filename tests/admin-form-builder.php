@@ -131,7 +131,7 @@ harness_section('every field type has a builder method');
 foreach (SettingsPageRegistry::FIELD_TYPES as $type) {
     check('the builder can declare a ' . $type, method_exists(FormSpec::class, $type));
 }
-pin('and no type is missing from the registry list', 12, count(SettingsPageRegistry::FIELD_TYPES));
+pin('and no type is missing from the registry list', 13, count(SettingsPageRegistry::FIELD_TYPES));
 
 harness_section('one field of each type is the array a hand writes');
 
@@ -268,6 +268,17 @@ pin(
     array('groups' => array(array('fields' => array(array('type' => 'text', 'name' => 'f', 'disabled' => false))))),
     osc_admin_form('t')->text('f')->disabled(false)->toArray()
 );
+// The floor the browser is told and the floor the save applies are one number here. Written
+// out as a pair -- ->set('min', N)->sanitize(clamp(N)) -- they can disagree, and a control
+// that shows one limit while the save enforces another silently corrects what was typed.
+$clamped = osc_admin_form('t')->number('n')->clampMin(3)->toArray()['groups'][0]['fields'][0];
+pin('clampMin() tells the browser the floor', 3, $clamped['min'] ?? null);
+check('and hands the save a sanitiser', isset($clamped['sanitize']) && is_callable($clamped['sanitize']));
+pin('which floors what was typed', 3, call_user_func($clamped['sanitize'], '1'));
+pin('and leaves anything above it alone', 9, call_user_func($clamped['sanitize'], '9'));
+pin('a blank box is the floor too, not a zero', 3, call_user_func($clamped['sanitize'], ''));
+pin('and a whole number is what comes out', 4, call_user_func($clamped['sanitize'], '4.7'));
+
 pin(
     'set() reaches a key with no method of its own',
     array('groups' => array(array('fields' => array(array('type' => 'text', 'name' => 'f', 'placeholder' => 'x'))))),
@@ -360,6 +371,7 @@ $notModifiers = array_merge(
         'register',   // output, and it writes to the registry
         'set',        // freeform by design: an unlisted key is emitted after the ordered ones
         'field',      // appends a whole spec rather than writing one key
+        'clampMin',   // writes two keys at once, which is the point of it
         'group',      // structure: starts a group rather than writing a key
         'title',      // page-level from here down
         'menu',
@@ -598,6 +610,7 @@ $handSpec = array(
                 array('type' => 'text', 'name' => 'tag', 'label' => 'Tag', 'prefix' => 'Tagged', 'attrs' => array('maxlength' => '20')),
                 array('type' => 'tel', 'name' => 'phone', 'label' => 'Phone', 'disabled' => true),
                 array('type' => 'color', 'name' => 'accent', 'label' => 'Accent'),
+                array('type' => 'hidden', 'name' => 'computed', 'label' => 'Computed'),
             ),
         ),
     ),
@@ -625,7 +638,8 @@ $built = osc_admin_form('myplugin-built')
     ->email('notify', 'Notify')->sanitize($sanitizer)->validate($validator)
     ->text('tag', 'Tag')->prefix('Tagged')->attrs(array('maxlength' => '20'))
     ->tel('phone', 'Phone')->disabled()
-    ->color('accent', 'Accent');
+    ->color('accent', 'Accent')
+    ->hidden('computed', 'Computed');
 
 pin('a whole page is the array a hand writes', $handSpec, $built->toArray());
 
@@ -638,7 +652,7 @@ check('the hand-written page registered', SettingsPageRegistry::instance()->get(
 check('the built page registered', SettingsPageRegistry::instance()->get('myplugin-built') !== null);
 pin('both declare the same field names', array_keys($handFields), array_keys($builtFields));
 pin('and the same normalised field specs', $handFields, $builtFields);
-pin('nothing is lost on the way through the groups', 12, count($builtFields));
+pin('nothing is lost on the way through the groups', 13, count($builtFields));
 $builtTypes = array_values(array_unique(array_column($builtFields, 'type')));
 sort($builtTypes);
 $allTypes = SettingsPageRegistry::FIELD_TYPES;
@@ -689,9 +703,9 @@ pin(
     builder_error(osc_admin_form('bad-translate')->title('T')->checkbox('verbose')->translate())
 );
 pin(
-    'a column on a page that stores preferences, where nothing would apply it',
-    'SettingsPageRegistry: page "bad-column" field "f" declares a column, which only a table store writes',
-    builder_error(osc_admin_form('bad-column')->title('T')->text('f')->column('s_name'))
+    'a column that is not a key at all',
+    'SettingsPageRegistry: page "bad-column" field "f" column must name a key',
+    builder_error(osc_admin_form('bad-column')->title('T')->text('f')->column(''))
 );
 pin(
     'a field mapped onto the key the store addresses the row by',

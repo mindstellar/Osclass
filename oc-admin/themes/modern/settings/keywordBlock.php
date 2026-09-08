@@ -88,7 +88,7 @@ $aData     = __get('aData');
 $aRawRows  = __get('aRawRows');
 $sort      = Params::getParam('sort');
 $direction = Params::getParam('direction');
-$prefs     = __get('moderation_prefs');
+$prefsForm = __get('moderation_form');
 
 $columns = $aData['aColumns'];
 $rows    = $aData['aRows'];
@@ -106,58 +106,7 @@ $scopeOptions = array(
 
     <div id="keyword-block-settings">
         <?php osc_admin_form_section(__('Moderation')); ?>
-        <?php osc_admin_form_open(array(
-            'name'   => 'keyword_block_prefs_form',
-            'page'   => 'settings',
-            'action' => 'keyword_block_prefs_post',
-        )); ?>
-                <?php
-                osc_admin_field(array(
-                    'type'      => 'checkbox',
-                    'row_label' => __('Keyword filter'),
-                    'id'        => 'keyword_spam_enabled',
-                    'name'      => 'keyword_spam_enabled',
-                    'label'     => __('Check new and edited listings against the keyword blocklist below'),
-                    'checked'   => !empty($prefs['keyword_spam_enabled']),
-                ));
-                osc_admin_field(array(
-                    'type'      => 'checkbox',
-                    'row_label' => __('On a match'),
-                    'id'        => 'keyword_spam_hard_block',
-                    'name'      => 'keyword_spam_hard_block',
-                    'label'     => __('Reject the listing outright instead of quarantining it for review'),
-                    'checked'   => !empty($prefs['keyword_spam_hard_block']),
-                    'help'      => __('Off by default: a match is quarantined (flagged spam and hidden) so it can be '
-                                      . 'reviewed and reversed. Turn this on to reject the post before it is ever saved.'),
-                ));
-                osc_admin_field(array(
-                    'type'      => 'checkbox',
-                    'row_label' => __('Report auto-block'),
-                    'id'        => 'report_autoblock',
-                    'name'      => 'report_autoblock',
-                    'label'     => __('Automatically hide a listing once enough distinct visitors have reported it'),
-                    'checked'   => !empty($prefs['report_autoblock']),
-                ));
-                osc_admin_number(array(
-                    'id'     => 'report_threshold',
-                    'name'   => 'report_threshold',
-                    'label'  => __('Report threshold'),
-                    'value'  => $prefs['report_threshold'],
-                    'min'    => 1,
-                    'suffix' => __('reporters'),
-                    'help'   => __('Number of distinct reporters (one vote per person) that auto-hides a listing.'),
-                ));
-                osc_admin_field(array(
-                    'type'      => 'checkbox',
-                    'row_label' => __('Report CAPTCHA'),
-                    'id'        => 'enabled_recaptcha_reports',
-                    'name'      => 'enabled_recaptcha_reports',
-                    'label'     => __('Require a CAPTCHA to report a listing'),
-                    'checked'   => !empty($prefs['enabled_recaptcha_reports']),
-                    'help'      => __('Needs a CAPTCHA provider configured under Settings &raquo; reCAPTCHA/Turnstile; '
-                                      . 'otherwise no challenge is shown.'),
-                )); ?>
-                <?php osc_admin_form_close(array()); ?>
+        <?php osc_admin_settings_form($prefsForm['id'], $prefsForm); ?>
     </div>
 
     <div id="keyword-block-import" class="separate-top">

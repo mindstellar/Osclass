@@ -398,7 +398,13 @@ if (!function_exists('osc_settings_sanitize')) {
         if (is_array($value)) {
             return '';
         }
-        $value = trim((string)$value);
+        $value = (string)$value;
+        // Every type but one loses the whitespace around it. A secret is stored exactly as
+        // typed: a password with a leading or trailing space is a password, and trimming one
+        // here would store a hash of something the sign-in form never sees.
+        if ($field['type'] !== 'secret') {
+            $value = trim($value);
+        }
 
         // Every tag out of free-typed text, contents and all: what Params::getParam() has
         // always done to the same value on a hand-written screen, so a screen moved onto

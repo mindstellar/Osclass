@@ -32,9 +32,11 @@ $GLOBALS['failCount']  = 0;
 $GLOBALS['failLabels'] = array();
 
 $viewDir    = __DIR__ . '/../oc-admin/themes/modern/settings';
+$formDir    = __DIR__ . '/../oc-includes/osclass/classes/admin/form';
 $controller = __DIR__ . '/../oc-includes/osclass/classes/controller/admin/CAdminSettings.php';
 
 check('the settings view directory is where it is expected', is_dir($viewDir));
+check('the declared-form directory is where it is expected', is_dir($formDir));
 check('CAdminSettings.php is where it is expected', is_file($controller));
 
 /**
@@ -51,6 +53,32 @@ foreach (glob($viewDir . '/*.php') as $view) {
             foreach ($m[1] as $action) {
                 $posted[$action] = basename($view);
             }
+        }
+    }
+}
+
+/*
+ * A declared form names its action in the declaration rather than in the view, so the same
+ * check has to read there too, or migrating a screen onto the declarative layer takes it
+ * out of this test's sight -- which is precisely the failure the file exists for.
+ */
+foreach (glob($formDir . '/*.php') as $form) {
+    $src = (string) file_get_contents($form);
+    if (strpos($src, 'CoreSettings::') === false) {
+        // An entity screen with a controller of its own -- admins, ban rules -- posts to
+        // that controller, not to ?page=settings, so its actions are not this router's.
+        continue;
+    }
+    if (preg_match_all("/CoreSettings::vars\(\s*[^,]+,\s*'([a-z_]+)'/", $src, $m)) {
+        foreach ($m[1] as $action) {
+            $posted[$action] = basename($form);
+        }
+    }
+    // A screen with more than one form lists them, so the action is a bare literal rather
+    // than an argument in the call. Any *_post spelled out in a declaration is one.
+    if (preg_match_all("/'([a-z_]+_post)'/", $src, $m)) {
+        foreach ($m[1] as $action) {
+            $posted[$action] = basename($form);
         }
     }
 }

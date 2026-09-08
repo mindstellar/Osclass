@@ -28,7 +28,7 @@ class Field
      * browser counted. Mirrors SettingsPageRegistry::PURIFIED_TYPES, copied rather than
      * imported so a field primitive need not know about the settings registry.
      */
-    private const PURIFIED_TYPES = array('text', 'textarea', 'tel', 'color');
+    private const PURIFIED_TYPES = array('text', 'textarea', 'tel', 'color', 'hidden');
 
     /** @var array */
     private $spec;
@@ -59,19 +59,26 @@ class Field
         $type    = $this->type;
         $id      = $this->id;
         $spec    = $this->spec;
-        $row     = $spec['row'] ?? true;
+        // A hidden input has nothing to label and nothing to hint at; a row around it would
+        // draw an empty label column and a gap where no control is, and a help box under it
+        // would explain something nobody can see.
+        $row     = $type === 'hidden' ? false : ($spec['row'] ?? true);
         $locales = self::localesFor($spec);
 
         if ($row) {
             // A checkbox carries its own label beside the control; anything else labels the
-            // row. Passing both would print the label twice.
+            // row. Passing both would print the label twice. A row_label on any other type
+            // labels the row instead of the field's own label, for the field whose row says
+            // one thing ("Other comment settings") and whose errors have to say another
+            // ("Comments per page must be 0 or more").
             $rowLabel = $type === 'checkbox'
                 ? ($spec['row_label'] ?? '')
-                : ($spec['label'] ?? '');
-            // A choice list has no single control to point at -- each option owns its own
-            // label -- so the row label stays plain text and the group is named through
-            // aria-label instead. A `for` pointing at an id nothing carries reaches nothing.
-            $opts = $type === 'radio'
+                : ($spec['row_label'] ?? $spec['label'] ?? '');
+            // Neither a choice list nor a custom field has one control to point at -- each
+            // radio owns its own label, and what a custom field draws is the declaration's
+            // business -- so the row label stays plain text. A `for` pointing at an id
+            // nothing carries reaches nothing.
+            $opts = in_array($type, array('radio', 'custom'), true)
                 ? array()
                 : array('for' => $locales === array() ? $id : self::idFor(array(
                     'name' => (string)($spec['name'] ?? '') . array_key_first($locales),
@@ -109,8 +116,11 @@ class Field
             if ($inline) {
                 echo '<div class="field-inline">';
             }
-            // A choice list has no single control to name, so its affixes stay plain text.
-            $affixFor = $type === 'radio' ? '' : ' for="' . osc_esc_html($id) . '"';
+            // Neither a choice list nor a custom field has one control to name, so their
+            // affixes stay plain text.
+            $affixFor = in_array($type, array('radio', 'custom'), true)
+                ? ''
+                : ' for="' . osc_esc_html($id) . '"';
             if ($prefix !== '') {
                 echo '<label class="field-prefix"' . $affixFor . '>' . osc_esc_html($prefix) . '</label>';
             }
@@ -124,7 +134,9 @@ class Field
                 echo '</div>';
             }
 
-            self::help($spec);
+            if ($type !== 'hidden') {
+                self::help($spec);
+            }
         }
 
         if ($row) {
@@ -155,7 +167,19 @@ class Field
         }
         $attrs = self::attrsString($extra);
 
-        if (!empty($spec['required'])) {
+        // A hidden input is barred from constraint validation, so 'required' on one is a
+        // promise the browser ignores. The save enforces it either way.
+        //
+        // A conditional field says it only where something can lift it again: the browser
+        // refuses to submit a form holding a required control it cannot show, and it does
+        // so silently -- no submit event, so the page's own validator never runs and never
+        // reports anything, and the button looks dead. The shared script lifts the flag
+        // while the row is off and puts it back with the row, but it finds the row by the
+        // data-osc-depends attribute, which is emitted only when this draws the row. A
+        // dependent field drawing no row of its own is hidden by whatever page put it
+        // there, and nothing would give the flag back.
+        $lifted = empty($spec['depends']) || ($spec['row'] ?? true);
+        if (!empty($spec['required']) && $type !== 'hidden' && $lifted) {
             $attrs .= ' required';
         }
         if (!empty($spec['disabled'])) {
@@ -213,6 +237,14 @@ class Field
             case 'color':
                 echo '<input type="color"' . $common . ' class="' . self::cssClass($type, $spec) . '"'
                     . ' value="' . osc_esc_html((string)$value) . '"' . $attrs . ' />';
+                break;
+
+            case 'hidden':
+                // The value a page's own script computes from the controls beside it. It is
+                // collected, validated and stored like any other field; it is simply not one
+                // the administrator types into.
+                echo '<input type="hidden"' . $common . ' value="' . osc_esc_html((string)$value) . '"'
+                    . $attrs . ' />';
                 break;
 
             case 'file':

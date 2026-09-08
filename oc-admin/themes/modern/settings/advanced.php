@@ -14,10 +14,13 @@ if (!defined('OC_ADMIN')) {
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
-$current_host = parse_url(Params::getServerParam('HTTP_HOST'), PHP_URL_HOST);
-if ($current_host === null) {
-    $current_host = Params::getServerParam('HTTP_HOST');
-}
+/**
+ * The chrome around the declared advanced-settings form. The form itself -- its route, its
+ * fields, their values and the submit row -- is core's, drawn from the declaration the
+ * controller saves through.
+ */
+
+$form = __get('advanced_form');
 
 //customize Head
 function customHead()
@@ -40,37 +43,7 @@ osc_current_admin_theme_path('parts/header.php');
     <div id="general-settings">
         <?php osc_admin_page_head(__('Advanced Settings')); ?>
         <ul id="error_list"></ul>
-        <?php osc_admin_form_open(array(
-    'name'   => 'settings_form',
-    'page'   => 'settings',
-    'action' => 'advanced_post',
-)); ?>
-            <?php
-            osc_admin_select(array(
-                'id'       => 'e_type',
-                'name'     => 'e_type',
-                'label'    => __('Subdomain type'),
-                'selected' => (string)osc_subdomain_type(),
-                'options'  => array(
-                    ''         => __('No subdomains'),
-                    'category' => __('Category based'),
-                    'country'  => __('Country based'),
-                    'region'   => __('Region based'),
-                    'city'     => __('City based'),
-                    'user'     => __('User based'),
-                ),
-            ));
-            osc_admin_text(array(
-                'name'      => 's_host',
-                'label'     => __('Host'),
-                'value'     => osc_subdomain_host(),
-                'width'     => 'key',
-                'help_html' => osc_esc_html(__('Your host is required to know the subdomain.')) . ' '
-                    . osc_esc_html(sprintf(__('Your current host is "%s". Add it without "www".'), $current_host)) . ' '
-                    . osc_esc_html(__('Remember to enable cookies for the subdomains too.')),
-            )); ?>
-            <div class="clear"></div>
-                    <?php osc_admin_form_close(array()); ?>
+        <?php osc_admin_settings_form($form['id'], $form); ?>
     </div>
     <!-- /settings form -->
 </div>
