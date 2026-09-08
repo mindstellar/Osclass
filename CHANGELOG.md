@@ -130,6 +130,8 @@ theme ships none, using a documented class vocabulary a theme restyles in CSS al
 - `osc_admin_text()` honours an explicitly passed `email`, `url` or `tel` type instead of
   forcing every box to `text`.
 - Municipality was capped at 50 characters against a column holding 200.
+- The contact phone on a published listing is format-checked again; the check read a key the
+  save path never set, so any number of digits was accepted.
 - `t_user.s_country` and `t_item_location.s_country` are widened from `VARCHAR(40)` to
   `VARCHAR(80)`, the width of the `t_country.s_name` they copy — a country name longer than 40
   characters was stored cut in half. Upgrading runs an `ALTER TABLE` on both.

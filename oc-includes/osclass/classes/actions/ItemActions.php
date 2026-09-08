@@ -624,6 +624,12 @@ class ItemActions
                 $flash_error .= $message . PHP_EOL;
             }
         }
+        // Checked after Sanitize::phone() has reduced the input to digits and a leading
+        // plus, so this is the format of what would be stored, not of what was typed.
+        if (!osc_validate_phone((string)($aItem['contactPhone'] ?? ''), 4)) {
+            $flash_error .= _m('Phone invalid.') . PHP_EOL;
+        }
+
         return $flash_error;
     }
 

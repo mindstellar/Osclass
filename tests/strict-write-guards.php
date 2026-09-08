@@ -498,6 +498,33 @@ pin(
     $publish(array('contactPhone' => str_repeat('5', 41)))
 );
 
+/*
+ * The format check runs on the sanitised value, so it governs what would be stored.
+ * Sanitize::phone() has already thrown away everything but the digits and a leading
+ * plus by then: punctuation cannot fail it, and an entry with no digits at all is
+ * emptied rather than refused.
+ */
+pin(
+    'a three-digit phone is refused as a phone',
+    "Phone invalid.\n",
+    $publish(array('contactPhone' => '123'))
+);
+pin(
+    'and four digits is enough',
+    2,
+    $publish(array('contactPhone' => '5551'))
+);
+pin(
+    'a phone written the way people write one goes through',
+    2,
+    $publish(array('contactPhone' => '+1 (555) 123-4567'))
+);
+pin(
+    'and an entry with no digits is emptied by the sanitiser, not refused',
+    2,
+    $publish(array('contactPhone' => 'call me'))
+);
+
 // The country copy is as wide as t_country.s_name now, so the cap is 80 rather than
 // the 50 it was against a column of 40 -- a name in between used to be cut short on a
 // relaxed connection and refuse the whole insert on a strict one.

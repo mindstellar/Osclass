@@ -1384,6 +1384,10 @@ msgstr ""
 msgid "Permalinks structure updated."
 msgstr ""
 
+#: oc-includes/osclass/classes/actions/ItemActions.php
+msgid "Phone invalid."
+msgstr ""
+
 #: oc-includes/osclass/gui/item-contact-content.php
 msgid "Phone number"
 msgstr ""
