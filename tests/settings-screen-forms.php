@@ -595,7 +595,7 @@ pin('and the search page size under its own', array('20', 'INTEGER'), pref($admi
 pin('the attachment switch under contact_attachment', array('1', 'BOOLEAN'), pref($admin, 'contact_attachment'));
 check('and not under the name of its control', pref($admin, 'enabled_attachment') === null);
 pin('a hidden date format is stored like any other value', array('Y/m/d', 'STRING'), pref($admin, 'dateFormat'));
-pin('and the time format beside it', array('H:i', 'STRING'), pref($admin, 'timeFormat'));
+pin('and the time format is stored beside it', array('H:i', 'STRING'), pref($admin, 'timeFormat'));
 pin('a key is trimmed', array('gmk', 'STRING'), pref($admin, 'googlemaps_api_key'));
 
 // A checkbox that was not ticked submits nothing at all, and the preference has to say so
@@ -610,7 +610,7 @@ pin('a title with no letter or digit is refused', array('warning:Page title fiel
 pin('nothing is stored for it', array('My Classifieds', 'STRING'), pref($admin, 'pageTitle'));
 pin('and the screen is redrawn rather than redirected away from', array('settings/index.php'), $run['views']);
 pin('with no redirect at all', array(), $run['redirects']);
-check('with what was typed still in it', strpos($run['drawn'], 'value="..."') !== false);
+check('with the rejected date format still in it', strpos($run['drawn'], 'value="..."') !== false);
 
 $run = drive('CAdminSettingsMain', 'update', array('pageTitle' => '') + $main);
 pin('an empty title is refused too', array('warning:Page title cannot be left empty'), flashed($run));
@@ -783,7 +783,7 @@ $run = drive('CAdminSettingsSpamnBots', 'login_throttle_post', $throttle);
 pin('a zero window is floored, not refused', array('1', 'INTEGER'), pref($admin, 'login_throttle_window', 'security'));
 pin('and so is a negative account limit', array('1', 'INTEGER'), pref($admin, 'login_throttle_max_account', 'security'));
 pin('retention floors at zero instead', array('0', 'INTEGER'), pref($admin, 'login_attempt_retention_days', 'security'));
-pin('the switch is a boolean', array('1', 'BOOLEAN'), pref($admin, 'login_throttle_enabled', 'security'));
+pin('the throttle switch is a boolean', array('1', 'BOOLEAN'), pref($admin, 'login_throttle_enabled', 'security'));
 check('and none of it landed in the osclass section', pref($admin, 'login_throttle_window') === null);
 pin('the save reports itself once', array('ok:Sign-in protection settings have been updated'), flashed($run));
 
@@ -853,7 +853,7 @@ pin('nothing is re-registered for a save that did not happen', array(), $run['ef
 pin('and the stored currency is untouched', array('EUR', 'STRING'), pref($admin, 'billing_currency'));
 
 $run = drive('CAdminSettingsBilling', 'billing_post', array('billing_enabled' => '1'));
-pin('the switch is a boolean', array('1', 'BOOLEAN'), pref($admin, 'billing_enabled'));
+pin('the billing switch is a boolean', array('1', 'BOOLEAN'), pref($admin, 'billing_enabled'));
 pin('and reports itself', array('ok:Billing settings have been updated'), flashed($run));
 
 harness_section('permalinks, and the two effects that follow a save');
@@ -957,7 +957,7 @@ pin(
 pin('nothing is rebuilt for a save that did not happen', array(), $run['effects']);
 pin('the stored structure is untouched', array('{CATEGORIES}/{ITEM_TITLE}_i{ITEM_ID}', 'STRING'), pref($admin, 'rewrite_item_url'));
 pin('and the form comes back to be corrected', array('settings/permalinks.php'), $run['views']);
-check('with what was typed still in it', strpos($run['drawn'], 'value="{ITEM_TITLE}"') !== false);
+check('with the rejected listing structure still in it', strpos($run['drawn'], 'value="{ITEM_TITLE}"') !== false);
 
 $run = drive('CAdminSettingsPermalinks', 'permalinks_post', array(
     'rewrite_user_login' => '',

@@ -770,7 +770,7 @@ $builtError = builder_error(
         ->text('a', 'A')->required()
         ->checkbox('b', 'B')
 );
-check('and so does the built one', $builtError === null, (string)$builtError);
+check('and so does the built preference page', $builtError === null, (string)$builtError);
 
 pin(
     'the fields sugar and one untitled group normalise the same',
@@ -808,7 +808,7 @@ $tableBuiltError = builder_error(
         ->text('s_name', 'Name')->required()
         ->text('email', 'Email')->column('s_email')
 );
-check('and so does the built one', $tableBuiltError === null, (string)$tableBuiltError);
+check('and so does the built table page', $tableBuiltError === null, (string)$tableBuiltError);
 pin(
     'the store normalises to a table and its key',
     array('type' => 'table', 'table' => 't_ban_rule', 'pk' => 'pk_i_id'),

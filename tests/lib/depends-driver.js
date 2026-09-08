@@ -30,5 +30,26 @@ document.addEventListener('DOMContentLoaded', function () {
     toggle(false);
     out.push(snap());
 
+    // Typing in a box no row follows cannot flip anything, so the sweep over every
+    // dependent row must not run for it. Counted rather than timed: the handlers resolve
+    // the global at call time, so replacing it here sees every call they make.
+    var calls = 0;
+    var real = window.oscSyncDepends;
+    window.oscSyncDepends = function (root) {
+        calls++;
+
+        return real(root);
+    };
+    toggle(true);
+    calls = 0;
+    control.value = 'typed';
+    control.dispatchEvent(new Event('input', { bubbles: true }));
+    var afterDependent = calls;
+    master.dispatchEvent(new Event('input', { bubbles: true }));
+    var afterMaster = calls;
+    window.oscSyncDepends = real;
+
+    out.push({ afterDependent: afterDependent, afterMaster: afterMaster, hidden: row.hidden });
+
     document.getElementById('osc-out').textContent = btoa(JSON.stringify(out));
 });

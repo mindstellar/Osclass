@@ -531,7 +531,7 @@ $driven = drive('add_post', submission());
 pin('one account more than there was', $before + 1, rows($admin));
 pin('the admin is told it was added', array(array('ok', 'The admin has been added')), $driven['flashes']);
 pin(
-    'and is sent back to the list',
+    'and an added account is sent back to the list',
     array('https://example.test/oc-admin/index.php?page=admins'),
     $driven['redirects']
 );
@@ -613,13 +613,13 @@ $driven = drive('add_post', submission(array(
     's_username' => 'toolong',
     's_email'    => 'toolong@example.test',
 )));
-pin('nothing was inserted', $count, rows($admin));
+pin('nothing was inserted for an over-long field', $count, rows($admin));
 pin(
     'the admin is told which field is too long, and how long it may be',
     array(array('warning', 'Name must be 100 characters or fewer')),
     $driven['flashes']
 );
-pin('no effect ran', array(), $driven['effects']);
+pin('no effect ran for the refused add', array(), $driven['effects']);
 pin('no welcome email went out', array(), $driven['emails']);
 pin('the admin was not sent away', array(), $driven['redirects']);
 check('the form was drawn again', strpos($driven['drawn'], '<form ') !== false, $driven['drawn']);
@@ -653,7 +653,7 @@ $driven = drive('add_post', array(
     's_password'   => '',
     'old_password' => 'topsecret',
 ));
-pin('nothing was inserted', $count, rows($admin));
+pin('nothing was inserted for a form of invalid fields', $count, rows($admin));
 // In declaration order, which is the order they appear on screen: an admin reading a list
 // of problems should be able to walk down the form.
 pin('and all four problems are reported together', array(
@@ -850,7 +850,7 @@ $driven = drive('edit_post', submission(array(
 pin('no second row: the edit updated one', $count, rows($admin));
 pin('the admin is told it updated', array(array('ok', 'The admin has been updated')), $driven['flashes']);
 pin(
-    'and is sent back to the list',
+    'and an edited account is sent back to the list',
     array('https://example.test/oc-admin/index.php?page=admins'),
     $driven['redirects']
 );
@@ -858,7 +858,7 @@ pin('the effects name the row that was already there', array(array('core.admin_a
 pin('no welcome email is sent for an edit', array(), $driven['emails']);
 pin('and the edit hook is handed the row and the count', array(array($new, 1)), $driven['edited']);
 $stored = row($admin, $new);
-pin('the name changed', 'Someone Else', $stored['s_name'] ?? null);
+pin('an edit changes the name', 'Someone Else', $stored['s_name'] ?? null);
 pin('the account type changed', '1', (string)($stored['b_moderator'] ?? null));
 pin('the key did not', $new, (int)($stored['pk_i_id'] ?? 0));
 
@@ -876,7 +876,7 @@ $driven = drive('edit_post', submission(array(
     's_password2' => '',
 )), array('id' => (string)$new));
 pin('the save reports success', array(array('ok', 'The admin has been updated')), $driven['flashes']);
-pin('the name changed', 'Renamed Again', row($admin, $new)['s_name'] ?? null);
+pin('the name changed alongside the blank password box', 'Renamed Again', row($admin, $new)['s_name'] ?? null);
 pin('and the password column is untouched, to the byte', $was, (string)row($admin, $new)['s_password']);
 check('so the old password still verifies', password_verify('first-password', $was));
 
@@ -912,7 +912,7 @@ pin(
 );
 pin('and the password column is untouched', $was, (string)row($admin, $new)['s_password']);
 pin('nothing else on the row was written either', 'Renamed Again', row($admin, $new)['s_name'] ?? null);
-pin('no effect ran', array(), $driven['effects']);
+pin('no effect ran for the refused password change', array(), $driven['effects']);
 
 harness_section('an unchanged save is a save');
 

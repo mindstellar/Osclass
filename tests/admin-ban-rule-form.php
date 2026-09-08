@@ -354,7 +354,7 @@ $driven = drive('create_ban_rule_post', array(
 pin('one rule more than there was', $before + 1, rows($admin));
 pin('the admin is told it saved', array(array('ok', 'Rule saved correctly')), $driven['flashes']);
 pin(
-    'and is sent back to the list',
+    'and an added rule is sent back to the list',
     array('https://example.test/oc-admin/index.php?page=users&action=ban'),
     $driven['redirects']
 );
@@ -424,15 +424,15 @@ $driven = drive('create_ban_rule_post', array(
     's_ip'    => '10.7.7.7',
     's_email' => '',
 ));
-pin('nothing was inserted', $count, rows($admin));
+pin('nothing was inserted for an over-long field', $count, rows($admin));
 pin(
     'the admin is told which field is too long, and how long it may be',
     array(array('error', 'Ban name / Reason must be 250 characters or fewer')),
     $driven['flashes']
 );
-pin('no effect ran', array(), $driven['effects']);
-pin('the admin was not sent away', array(), $driven['redirects']);
-check('the form was drawn again', strpos($driven['drawn'], '<form ') !== false, $driven['drawn']);
+pin('no effect ran for the over-long field', array(), $driven['effects']);
+pin('the admin was not sent away for the over-long field', array(), $driven['redirects']);
+check('the form was drawn again for the over-long field', strpos($driven['drawn'], '<form ') !== false, $driven['drawn']);
 pin('with all 251 characters still in it, to be shortened', $long, control_value($driven['drawn'], 's_name'));
 
 // The boundary, because a cap that is one out rejects a value the column holds fine.
@@ -483,7 +483,7 @@ $driven = drive('edit_ban_rule_post', array(
 pin('no second row: the edit updated one', $count, rows($admin));
 pin('the admin is told it updated', array(array('ok', 'Rule updated correctly')), $driven['flashes']);
 pin(
-    'and is sent back to the list',
+    'and an edited rule is sent back to the list',
     array('https://example.test/oc-admin/index.php?page=users&action=ban'),
     $driven['redirects']
 );
@@ -586,7 +586,7 @@ pin(
     $driven['flashes']
 );
 pin(
-    'and sent back to the list',
+    'and a submission for a missing row is sent back to the list',
     array('https://example.test/oc-admin/index.php?page=users&action=ban'),
     $driven['redirects']
 );
@@ -606,7 +606,7 @@ pin(
     $driven['flashes']
 );
 pin(
-    'and sent back to the list',
+    'and a draw for a missing row is sent back to the list',
     array('https://example.test/oc-admin/index.php?page=users&action=ban'),
     $driven['redirects']
 );
@@ -635,17 +635,17 @@ $driven = drive('create_ban_rule_post', array(
     's_ip'    => '',
     's_email' => '',
 ));
-pin('nothing was inserted', $count, rows($admin));
+pin('nothing was inserted for a rule that names neither', $count, rows($admin));
 pin(
     'and the reason is the one this screen has always given',
     array(array('error', 'Both rules can not be empty')),
     $driven['flashes']
 );
-pin('no effect ran', array(), $driven['effects']);
-pin('the admin was not sent away', array(), $driven['redirects']);
+pin('no effect ran for the empty rule', array(), $driven['effects']);
+pin('the admin was not sent away for the empty rule', array(), $driven['redirects']);
 // The improvement the declared path brings: a rejected save is redrawn with what was
 // typed, instead of being thrown away by a redirect to the list.
-check('the form was drawn again', strpos($driven['drawn'], '<form ') !== false, $driven['drawn']);
+check('the form was drawn again for the empty rule', strpos($driven['drawn'], '<form ') !== false, $driven['drawn']);
 pin('carrying the name that was rejected', 'Neither one nor the other', control_value($driven['drawn'], 's_name'));
 pin('and still posting as an add', 'create_ban_rule_post', hidden($driven['drawn'], 'action'));
 

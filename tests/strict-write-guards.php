@@ -235,7 +235,7 @@ check('the connection really is relaxed', !harness_strict_writes(), implode(',',
 
 $before = $userCount();
 pin('an ordinary registration still succeeds', 2, $register(array()));
-pin('and wrote its row', $before + 1, $userCount());
+pin('and wrote its user row', $before + 1, $userCount());
 
 $before = $userCount();
 pin(
@@ -290,7 +290,7 @@ check('the connection is strict now', harness_strict_writes(), implode(',', harn
 
 $before = $userCount();
 pin('an ordinary registration is unaffected by the mode', 2, $register(array()));
-pin('and wrote its row', $before + 1, $userCount());
+pin('and wrote the second user row', $before + 1, $userCount());
 
 $before = $userCount();
 pin(

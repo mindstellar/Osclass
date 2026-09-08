@@ -464,8 +464,21 @@ function oscSyncDepends(root) {
     }
 }
 
+// A control nothing declares a dependency on cannot flip any row, and typing in one is
+// the common case: without this every keystroke in any box re-scans every dependent row
+// on the page.
+function oscDependsIsMaster(target) {
+    var name = target && target.name;
+
+    return !!name && !!document.querySelector('[data-osc-depends="' + name.replace(/"/g, '\\"') + '"]');
+}
+
 document.addEventListener('DOMContentLoaded', function () { oscSyncDepends(document); });
 // Delegated and re-run whole: one change can flip a chain of rows, not only the row
 // whose master was touched.
-document.addEventListener('change', function () { oscSyncDepends(document); });
-document.addEventListener('input', function () { oscSyncDepends(document); });
+document.addEventListener('change', function (e) {
+    if (oscDependsIsMaster(e.target)) { oscSyncDepends(document); }
+});
+document.addEventListener('input', function (e) {
+    if (oscDependsIsMaster(e.target)) { oscSyncDepends(document); }
+});

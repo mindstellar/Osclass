@@ -370,7 +370,7 @@ harness_section('a dependent field whose master is on');
 
 $GLOBALS['preferences'] = array();
 $result = submit('cond', array('b_enabled' => '1', 's_key' => 'sk-live-9f2a', 's_always' => 'kept'));
-pin('the save succeeds', 0, count($result['errors']));
+pin('the save succeeds with the dependency met', 0, count($result['errors']));
 pin('and the value is stored', 'sk-live-9f2a', $GLOBALS['preferences']['cond/s_key'] ?? null);
 
 $GLOBALS['preferences'] = array();
@@ -483,7 +483,7 @@ $sharedScript = (string)file_get_contents(ABS_PATH . 'oc-admin/themes/modern/js/
 // The needles below live inside oscSyncDepends and its two helpers, which is a function
 // nothing calls unless these registrations exist -- dead code that reads exactly like
 // working code, and leaves every dependent row on screen and required for ever.
-preg_match_all('/document\\.addEventListener\\(\\s*\'([A-Za-z]+)\'[^\\n]*oscSyncDepends/', $sharedScript, $m);
+preg_match_all('/document\\.addEventListener\\(\\s*\'([A-Za-z]+)\'[\\s\\S]{0,200}?oscSyncDepends/', $sharedScript, $m);
 pin('the sync runs at load and on every edit', array('DOMContentLoaded', 'change', 'input'), $m[1]);
 
 harness_section('the shared script, driven in a browser');
@@ -506,7 +506,7 @@ if ($chrome === '') {
     echo "  (skipped: no Chrome or Chromium on this machine)\n";
 } else {
     $snaps = drive_page($chrome, render_settings_page('cond'), 'depends-driver.js');
-    check('the browser run produced a reading', is_array($snaps) && count($snaps) === 3, var_export($snaps, true));
+    check('the depends browser run produced a reading', is_array($snaps) && count($snaps) === 4, var_export($snaps, true));
 
     $atLoad = $snaps[0] ?? array();
     check('the dependent row starts hidden, its master being off', ($atLoad['hidden'] ?? null) === true, var_export($atLoad, true));
@@ -526,6 +526,13 @@ if ($chrome === '') {
     $off = $snaps[2] ?? array();
     check('unticking it hides the row again', ($off['hidden'] ?? null) === true, var_export($off, true));
     check('and lifts required a second time', ($off['required'] ?? null) === false, var_export($off, true));
+
+    // Every keystroke used to re-scan every dependent row on the page; on Permalinks that
+    // is 39 of them for a box none of them follows.
+    $counted = $snaps[3] ?? array();
+    pin('typing in a box no row follows runs no sweep', 0, $counted['afterDependent'] ?? null);
+    pin('and touching the master still runs exactly one', 1, $counted['afterMaster'] ?? null);
+    check('the row it governs is still shown', ($counted['hidden'] ?? null) === false, var_export($counted, true));
 }
 
 harness_section('the surface the render path added');
@@ -595,7 +602,7 @@ $result = submit('multi', array(
     's_bodyes_ES'  => 'Cuerpo',
     's_plain'      => 'one',
 ));
-pin('the save succeeds', 0, count($result['errors']));
+pin('the save succeeds across every locale', 0, count($result['errors']));
 // The key is the field name with the locale code appended -- read the other way round and
 // every locale but one silently loses what was typed into it.
 pin(
@@ -670,7 +677,7 @@ if ($chrome === '') {
     echo "  (skipped: no Chrome or Chromium on this machine)\n";
 } else {
     $tabbed = drive_page($chrome, render_settings_page('multi'), 'translate-driver.js');
-    check('the browser run produced a reading', is_array($tabbed) && count($tabbed) === 3, var_export($tabbed, true));
+    check('the locale-tab browser run produced a reading', is_array($tabbed) && count($tabbed) === 3, var_export($tabbed, true));
     pin('two translated fields, two locales each', 4, $tabbed['tabCount'] ?? null);
     pin(
         'each field opens on its first locale and no other',

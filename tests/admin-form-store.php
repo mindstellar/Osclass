@@ -421,12 +421,12 @@ pin('and the key is the row that was already there', $id, $result['id']);
 pin('no second row was inserted', 2, rows($admin, 't_ban_rule'));
 $stored = row($admin, 't_ban_rule', (int)$id);
 pin('the declared columns hold the new values', 'Alicia', $stored['s_name'] ?? null);
-pin('all of them', '10.0.0.2', $stored['s_ip'] ?? null);
+pin('all of the address too', '10.0.0.2', $stored['s_ip'] ?? null);
 // The whole reason the store names columns from the declaration rather than from the row.
 pin('and a column the page never declared is untouched', 'kept@example.test', $stored['s_email'] ?? null);
 $untouched = row($admin, 't_ban_rule', $other);
 pin('a row the submission did not name keeps its name', 'Untouched', $untouched['s_name'] ?? null);
-pin('and its address', '192.168.0.1', $untouched['s_ip'] ?? null);
+pin('and the untouched row keeps its address', '192.168.0.1', $untouched['s_ip'] ?? null);
 
 harness_section('an unchanged save affects no rows and is still a success');
 
@@ -449,9 +449,9 @@ $before = rows($admin, 't_ban_rule');
 $result = post('rule', array('s_name' => '', 's_ip' => '10.0.0.9'));
 pin('the required field is reported', 1, count($result['errors']));
 pin('and named', 'Name cannot be left empty', $result['errors'][0] ?? null);
-pin('no row was inserted', $before, rows($admin, 't_ban_rule'));
+pin('no row was inserted by the refused save', $before, rows($admin, 't_ban_rule'));
 pin('nothing was written, so there is no key to report', null, $result['id']);
-pin('and the submitted values come back for the re-render', '10.0.0.9', $result['values']['s_ip'] ?? null);
+pin('and the submitted address comes back for the re-render', '10.0.0.9', $result['values']['s_ip'] ?? null);
 // The reason Permalinks may not rewrite .htaccess on a rejected form: not "ran once and
 // did nothing", but never ran.
 pin('no effect ran at all', array(), effects());
@@ -460,7 +460,7 @@ $result = post('rule', array('s_name' => '', 's_ip' => '10.0.0.9'), $id);
 pin('a rejected update reports its error too', 1, count($result['errors']));
 $stored = row($admin, 't_ban_rule', (int)$id);
 pin('and the row it named is untouched', 'Alicia', $stored['s_name'] ?? null);
-pin('every column of it', '10.0.0.2', $stored['s_ip'] ?? null);
+pin('every column of the inserted row', '10.0.0.2', $stored['s_ip'] ?? null);
 pin('with no effect run', array(), effects());
 
 harness_section('the effects are handed the row they are about');
@@ -489,19 +489,19 @@ $result = post('rule', array('s_name' => 'Bobby', 's_ip' => '10.0.0.4'), $new);
 $ran    = effects();
 pin('an update runs them once as well', 2, count($ran));
 pin('and the id is the existing row, not a new one', $new, effect_id(0));
-pin('for the inline callable too', $new, effect_id(1));
+pin('the inline callable is handed the new key too', $new, effect_id(1));
 // The same read-back on the update path: a key naming some other row that happens to exist
 // is still a key, and only the row behind it says whether it is the right one.
 $updated = row($admin, 't_ban_rule', (int)effect_id(0));
 pin('the row that key names holds what was just saved', 'Bobby', $updated['s_name'] ?? null);
-pin('every column of it', '10.0.0.4', $updated['s_ip'] ?? null);
+pin('every column of the updated row', '10.0.0.4', $updated['s_ip'] ?? null);
 pin('and no row was inserted behind the update', 3, rows($admin, 't_ban_rule'));
 
 harness_section('a field writes the column it declares');
 
 $before = rows($admin, 't_ban_rule');
 $result = post('mapped', array('s_ip' => 'someone@example.test'));
-pin('the mapped page saves cleanly', array(), $result['errors']);
+pin('the mapped page saves cleanly on insert', array(), $result['errors']);
 pin('and inserts a row', $before + 1, rows($admin, 't_ban_rule'));
 $stored = row($admin, 't_ban_rule', (int)$result['id']);
 pin('the value lands in the declared column', 'someone@example.test', $stored['s_email'] ?? null);
@@ -514,7 +514,7 @@ harness_section('reading a row back into the form');
 $values = osc_settings_values('rule', $new);
 pin('every declared field is keyed by its name', array('s_name', 's_ip'), array_keys($values));
 pin('and holds the stored value', 'Bobby', $values['s_name'] ?? null);
-pin('all of them', '10.0.0.4', $values['s_ip'] ?? null);
+pin('all of the re-read address too', '10.0.0.4', $values['s_ip'] ?? null);
 pin('one field can be read on its own', 'Bobby', osc_settings_value('rule', 's_name', $new));
 pin('a mapped field reads back through its column', 'kept@example.test', osc_settings_value('mapped', 's_ip', (int)$id));
 // A new-entity form has no key, so there is no row and the declared defaults are the
@@ -570,7 +570,7 @@ pin('reading it back goes through the same store', 'Carol', osc_settings_value('
 $ran = effects();
 pin('the effects ran', 2, count($ran));
 pin('with a null id, because a preference page has no row', null, effect_id(0));
-pin('for the inline callable too', null, effect_id(1));
+pin('the inline callable is handed no key either', null, effect_id(1));
 pin('and no ban rule was written by it', 4, rows($admin, 't_ban_rule'));
 
 harness_section('a preference page maps, derives and withholds the same way a table does');
@@ -583,7 +583,7 @@ $result = post('prefs_mapped', array(
     'plain_switch' => '1',
     'count'    => '3',
 ));
-pin('the mapped page saves cleanly', array(), $result['errors']);
+pin('the mapped page saves cleanly on update', array(), $result['errors']);
 pin(
     'a field with a column lands under that key, punctuation and all',
     'value',
@@ -629,7 +629,7 @@ check(
 pin('it inserted a row of its own instead', $before + 1, rows($admin, 't_ban_rule'));
 $still = row($admin, 't_ban_rule', (int)$id);
 pin('the row the request named keeps its name', $victim['s_name'] ?? null, $still['s_name'] ?? null);
-pin('and its address', $victim['s_ip'] ?? null, $still['s_ip'] ?? null);
+pin('and the surviving row keeps its address', $victim['s_ip'] ?? null, $still['s_ip'] ?? null);
 pin('and the column the page never declared', $victim['s_email'] ?? null, $still['s_email'] ?? null);
 
 harness_section('a key that is not a positive integer is refused, not guessed at');
@@ -667,7 +667,7 @@ foreach ($cases as $what => $key) {
 pin('with the submitted values back for the re-render', '10.0.0.7', $result['values']['s_ip'] ?? null);
 $still = row($admin, 't_ban_rule', (int)$id);
 pin('the row a coerced key would have landed on keeps its name', $kept['s_name'] ?? null, $still['s_name'] ?? null);
-pin('and its address', $kept['s_ip'] ?? null, $still['s_ip'] ?? null);
+pin('and the kept row keeps its address', $kept['s_ip'] ?? null, $still['s_ip'] ?? null);
 
 harness_section('a key with no row behind it is refused');
 
@@ -683,7 +683,7 @@ pin('saving a row that was deleted elsewhere is an error', 1, count($result['err
 pin('and says so', 'That record no longer exists, so nothing was saved.', $result['errors'][0] ?? null);
 pin('the edit is not reported as a save that changed nothing', 0, $result['updated']);
 pin('no row is recreated under the key', $before, rows($admin, 't_ban_rule'));
-pin('no key comes back', null, $result['id']);
+pin('no key comes back from the refused save', null, $result['id']);
 pin('no effect runs for a save that wrote nothing', array(), effects());
 pin('and the edits come back on screen', 'Doomed edited', $result['values']['s_name'] ?? null);
 
@@ -727,9 +727,9 @@ foreach (array('Database query failed', 's_not_a_column', 't_ban_rule', 'SQL') a
     );
 }
 pin('nothing was written', $before, rows($admin, 't_ban_rule'));
-pin('no key comes back', null, $result['id']);
+pin('no key comes back from the refused update', null, $result['id']);
 pin('no effect runs on a write that failed', array(), effects());
-pin('and the submitted values come back for the re-render', 'Alice', $result['values']['s_name'] ?? null);
+pin('and the submitted name comes back for the re-render', 'Alice', $result['values']['s_name'] ?? null);
 
 harness_section('a refused write is a rejected save, and it carries no secret');
 
@@ -814,7 +814,7 @@ osc_remove_filter('admin_form_before_save', $inject);
 pin('the save itself is clean', array(), $result['errors']);
 $stored = row($admin, 't_ban_rule', (int)$injectTarget);
 pin('the declared columns take the submission', 'Declared again', $stored['s_name'] ?? null);
-pin('all of them', '10.0.0.21', $stored['s_ip'] ?? null);
+pin('all of the address on the second store too', '10.0.0.21', $stored['s_ip'] ?? null);
 pin('and the column the listener named is untouched', 'notyours@example.test', $stored['s_email'] ?? null);
 check(
     'the key it invented does not come back to the caller either',
@@ -891,7 +891,7 @@ $result = post('nothing', array('s_name' => 'Blanked'), $keeper);
 pin('a page with no column to write is not an error', array(), $result['errors']);
 pin('and reports that nothing changed', 0, $result['updated']);
 pin('the row it named keeps its name', $kept['s_name'] ?? null, row($admin, 't_ban_rule', $keeper)['s_name'] ?? null);
-pin('and its address', $kept['s_ip'] ?? null, row($admin, 't_ban_rule', $keeper)['s_ip'] ?? null);
+pin('and the keeper row keeps its address', $kept['s_ip'] ?? null, row($admin, 't_ban_rule', $keeper)['s_ip'] ?? null);
 pin('and its address book', $kept['s_email'] ?? null, row($admin, 't_ban_rule', $keeper)['s_email'] ?? null);
 pin('the key still comes back', $keeper, $result['id']);
 pin('and the effects run for whatever did draw the fields', 2, count(effects()));
@@ -939,12 +939,12 @@ $result = post('derived', array(
     's_ip'    => '10.4.0.2',
     's_email' => 'attacker@example.test',
 ), $derived);
-pin('the save is clean', array(), $result['errors']);
+pin('the save is clean for the mapped columns', array(), $result['errors']);
 $stored = row($admin, 't_ban_rule', $derived);
 pin('the column takes what the callable made of the value', 'derived:typed', $stored['s_name'] ?? null);
 pin('an ordinary field still takes the value itself', '10.4.0.2', $stored['s_ip'] ?? null);
 pin('and the column a persist-false field is named after is untouched', 'before@example.test', $stored['s_email'] ?? null);
-pin('no row was inserted', $before, rows($admin, 't_ban_rule'));
+pin('no row was inserted by the second store', $before, rows($admin, 't_ban_rule'));
 
 // null from the callable is "leave this column alone", the whole reason a blank password
 // box can mean "unchanged" without the store knowing what a password is.
@@ -1098,7 +1098,7 @@ osc_add_filter('admin_form_before_save', static function ($values, $pageId) {
 });
 
 $result = post('arrayed', array('s_name' => 'Arrayed', 's_ip' => '10.4.0.0'));
-pin('the save is clean', array(), $result['errors']);
+pin('the save is clean for the write-only field', array(), $result['errors']);
 $stored = row($admin, 't_ban_rule', (int)$result['id']);
 pin('the scalar field is stored as submitted', 'Arrayed', $stored['s_name'] ?? null);
 pin('and the column that was handed an array is empty, not the word Array', '', $stored['s_ip'] ?? null);
