@@ -62,9 +62,29 @@ foreach ($locations as $slug => $spec) {
     $sections[$slug] = $spec + array('orphan' => false);
 }
 foreach (Widget::newInstance()->distinctLocations() as $stored) {
-    if (!isset($sections[$stored])) {
-        $sections[$stored] = array('label' => $stored, 'description' => '', 'orphan' => true);
+    if (isset($sections[$stored])) {
+        continue;
     }
+    // "page.<id>" is the page builder's own canvas, not a theme section, so it is only
+    // orphaned once the page itself is gone. Its widgets are edited on that page.
+    if (strpos($stored, 'page.') === 0) {
+        $pageId = (int)substr($stored, 5);
+        $page   = $pageId > 0 ? Page::newInstance()->findByPrimaryKey($pageId) : array();
+        if (!empty($page)) {
+            $locales = isset($page['locale']) && is_array($page['locale']) ? $page['locale'] : array();
+            $current = $locales[osc_current_admin_locale()] ?? reset($locales);
+            $title   = is_array($current) && isset($current['s_title']) && $current['s_title'] !== ''
+                ? $current['s_title']
+                : ($page['s_internal_name'] ?? ('#' . $pageId));
+            $sections[$stored] = array(
+                'label'       => sprintf(__('Page: %s'), $title),
+                'description' => __('Placed on this page in the page builder. Edit it there.'),
+                'orphan'      => false,
+            );
+            continue;
+        }
+    }
+    $sections[$stored] = array('label' => $stored, 'description' => '', 'orphan' => true);
 }
 ?>
 <?php if ($locations === array()) { ?>
