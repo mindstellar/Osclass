@@ -77,7 +77,7 @@ osc_current_admin_theme_path('parts/header.php'); ?>
                     <th class="col-bulkactions"><input id="check_all" type="checkbox"/></th>
                     <th><?php _e('Code'); ?></th>
                     <th><?php _e('Name'); ?></th>
-                    <th><?php _e('Description'); ?></th>
+                    <th><?php _e('Currency symbol'); ?></th>
                 </tr>
                 </thead>
                 <tbody>
@@ -91,7 +91,7 @@ osc_current_admin_theme_path('parts/header.php'); ?>
                             } elseif ($key === 2) {
                                 echo 'data-col-name ='. __('Name');
                             } elseif ($key === 3) {
-                                echo 'data-col-name ='. __('Description');
+                                echo 'data-col-name ='. __('Currency symbol');
                             } else {
                                 echo 'data-col-name="'.ucfirst($key).'"';
                             } ?>>
