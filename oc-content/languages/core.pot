@@ -6392,6 +6392,10 @@ msgstr ""
 msgid "Page url: this field is required"
 msgstr ""
 
+#: oc-admin/themes/modern/appearance/widgets.php
+msgid "Page: %s"
+msgstr ""
+
 #: oc-admin/themes/modern/pages/frm.php
 #: oc-admin/themes/modern/pages/index.php
 #: oc-includes/osclass/classes/AdminMenu.php
@@ -6533,6 +6537,10 @@ msgstr ""
 
 #: oc-admin/themes/modern/fields/submissions.php
 msgid "Pick a form to see its submissions"
+msgstr ""
+
+#: oc-admin/themes/modern/appearance/widgets.php
+msgid "Placed on this page in the page builder. Edit it there."
 msgstr ""
 
 #: oc-admin/themes/modern/fields/iframe.php
