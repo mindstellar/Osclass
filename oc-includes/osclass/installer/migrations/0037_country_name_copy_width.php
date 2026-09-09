@@ -27,6 +27,14 @@ return new class () implements MigrationInterface {
     /** Tables carrying an s_country copy of t_country.s_name. */
     private const TABLES = array('t_user', 't_item_location');
 
+    /**
+     * Widen s_country to VARCHAR(80) on t_user and t_item_location wherever it is
+     * still narrower than t_country.s_name.
+     *
+     * @param Connection $conn
+     *
+     * @throws \mindstellar\database\DbException
+     */
     public function up(Connection $conn): void
     {
         foreach (self::TABLES as $table) {
@@ -41,6 +49,13 @@ return new class () implements MigrationInterface {
 
     /**
      * Declared character length of $column, or 0 when the column is absent.
+     *
+     * @param Connection $conn
+     * @param string     $table
+     * @param string     $column
+     *
+     * @return int
+     * @throws \mindstellar\database\DbException
      */
     private function widthOf(Connection $conn, string $table, string $column): int
     {

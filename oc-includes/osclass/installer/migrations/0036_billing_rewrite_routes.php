@@ -41,6 +41,13 @@ return new class () implements MigrationInterface {
         'rewrite_billing_orders' => array('user/orders', 'STRING'),
     );
 
+    /**
+     * Seed the rewrite preferences for the wallet, package picker and orders pages.
+     *
+     * @param Connection $conn
+     *
+     * @throws \mindstellar\database\DbException
+     */
     public function up(Connection $conn): void
     {
         $table = DB_TABLE_PREFIX . 't_preference';
