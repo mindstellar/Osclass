@@ -49,7 +49,7 @@ class UserActions
     /**
      * UserActions constructor.
      *
-     * @param $is_admin
+     * @param bool $is_admin Run as an admin edit rather than a front-end one
      */
     public function __construct($is_admin)
     {
@@ -60,7 +60,8 @@ class UserActions
 
     /**
      * Add user data
-     * @return int
+     *
+     * @return int|string 1 on success, 2 when activation is pending, else an error message
      */
     public function add()
     {
@@ -231,9 +232,10 @@ class UserActions
 
     /**
      * Prepare and sanitize user input data
-     * @param $is_add
      *
-     * @return array
+     * @param bool $is_add Build a row for an insert rather than an update
+     *
+     * @return array<string,mixed>
      */
     public function prepareData($is_add)
     {
@@ -355,9 +357,10 @@ class UserActions
 
     /**
      * Edit user data
-     * @param $userId
      *
-     * @return int
+     * @param int $userId
+     *
+     * @return int|string 1 on success, 2 when a new email needs validating, else an error message
      */
     public function edit($userId)
     {
@@ -492,7 +495,7 @@ class UserActions
      * consulted — and a captcha token verifies exactly once, so there is only ever one
      * place to do it. CWebLogin's 'recover_post' does it, mirroring CAdminLogin.
      *
-     * @return int
+     * @return int 0 when the email was sent, 1 when the address matched no enabled account
      */
     public function recover_password()
     {
@@ -517,7 +520,8 @@ class UserActions
 
     /**
      * Activate User
-     * @param $user_id
+     *
+     * @param int $user_id
      *
      * @return bool
      */
@@ -572,7 +576,8 @@ class UserActions
 
     /**
      * Deactive user
-     * @param $user_id
+     *
+     * @param int $user_id
      *
      * @return bool
      */
@@ -610,7 +615,8 @@ class UserActions
 
     /**
      * Enable User
-     * @param $user_id
+     *
+     * @param int $user_id
      *
      * @return bool
      */
@@ -647,7 +653,8 @@ class UserActions
 
     /**
      * Disable user
-     * @param $user_id
+     *
+     * @param int $user_id
      *
      * @return bool
      */
@@ -684,7 +691,8 @@ class UserActions
 
     /**
      * Resend user activation email
-     * @param $user_id
+     *
+     * @param int $user_id
      *
      * @return int
      */
@@ -714,7 +722,8 @@ class UserActions
 
     /**
      * Bootstrap user login
-     * @param $user_id
+     *
+     * @param int $user_id
      *
      * @return int
      */

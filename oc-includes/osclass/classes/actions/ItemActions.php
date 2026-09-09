@@ -55,8 +55,12 @@ class ItemActions
     /**
      * Delete resources from the hard drive
      *
-     * @param int  $itemId
-     * @param bool $is_admin
+     * @param int                                 $itemId
+     * @param bool                                $is_admin
+     * @param array<int,array<string,mixed>>|null $resources Rows the caller read before the
+     *                                                       delete; looked up when null
+     *
+     * @return void
      */
     public static function deleteResourcesFromHD($itemId, $is_admin = false, $resources = null)
     {
@@ -167,7 +171,9 @@ class ItemActions
     }
 
     /**
-     * @return boolean
+     * Insert a listing from $this->data, with its locales, location, images, meta and stats.
+     *
+     * @return int|string 1 on success, 2 when it still needs validation, else an error message
      */
     public function add()
     {
@@ -409,7 +415,9 @@ class ItemActions
     }
 
     /**
-     * @param $aResources
+     * Whether every uploaded file's MIME type is in the allowed-extension list.
+     *
+     * @param array<string,array<int,mixed>> $aResources A $_FILES entry
      *
      * @return bool
      */
@@ -471,7 +479,9 @@ class ItemActions
     }
 
     /**
-     * @param $aResources
+     * Whether every uploaded file is within the configured maximum size.
+     *
+     * @param array<string,array<int,mixed>> $aResources A $_FILES entry
      *
      * @return bool
      */
@@ -499,10 +509,12 @@ class ItemActions
     }
 
     /**
-     * @param array  $title
-     * @param array  $description
-     * @param string $author
-     * @param string $email
+     * Whether Akismet judges any locale of this listing to be spam.
+     *
+     * @param array<string,string> $title       Title per locale
+     * @param array<string,string> $description Description per locale
+     * @param string               $author
+     * @param string               $email
      *
      * @return bool
      *
@@ -636,9 +648,11 @@ class ItemActions
     /**
      * Validate Item meta field and check required fields are not empty
      *
-     * @param array  $_meta
-     * @param        $meta
-     * @param string $flash_error
+     * @param array<int,array<string,mixed>> $_meta       The category's field definitions
+     * @param array<int,mixed>|mixed          $meta        Submitted values, sanitised in place
+     * @param string                          $flash_error Appended to in place
+     *
+     * @return void
      */
     private function handleMetaField(array $_meta, &$meta, string &$flash_error)
     {
@@ -665,10 +679,12 @@ class ItemActions
     }
 
     /**
-     * @param       $e_type
-     * @param       $metaValue
+     * Sanitise one submitted custom-field value according to its field type.
      *
-     * @return array
+     * @param string $e_type
+     * @param mixed  $metaValue
+     *
+     * @return mixed same shape as $metaValue
      */
     private function sanitizeMetaField($e_type, $metaValue)
     {
@@ -704,11 +720,13 @@ class ItemActions
     }
 
     /**
-     * @param array  $_meta
-     * @param array  $meta
-     * @param string $flash_error
+     * Apply the conditional and required rules to the submitted custom-field values.
      *
-     * @return array
+     * @param array<int,array<string,mixed>> $_meta       The category's field definitions
+     * @param array<int,mixed>               $meta        Submitted values
+     * @param string                         $flash_error
+     *
+     * @return array{0:array<int,mixed>,1:string} the surviving values and the error text
      */
     private function validateMetaFields($_meta, $meta, $flash_error)
     {
@@ -863,10 +881,14 @@ class ItemActions
     }
 
     /**
-     * @param $type
-     * @param $title
-     * @param $description
-     * @param $itemId
+     * Write one title/description row per locale for a listing.
+     *
+     * @param string               $type        'ADD' or 'EDIT'
+     * @param array<string,string> $title       Title per locale
+     * @param array<string,string> $description Description per locale
+     * @param int                  $itemId
+     *
+     * @return void
      */
     public function insertItemLocales($type, $title, $description, $itemId)
     {
@@ -919,10 +941,12 @@ class ItemActions
     }
 
     /**
-     * @param $aResources
-     * @param $itemId
+     * Store the uploaded images for a listing, honouring the per-item image cap.
      *
-     * @return int
+     * @param array<string,array<int,mixed>> $aResources A $_FILES entry
+     * @param int                            $itemId
+     *
+     * @return int 0 when nothing went wrong
      */
     public function uploadItemResources($aResources, $itemId)
     {
@@ -1021,7 +1045,11 @@ class ItemActions
     }
 
     /**
-     * @param $aItem
+     * Fire the notification hooks a newly posted listing needs.
+     *
+     * @param array<string,mixed> $aItem The prepared listing data, with its 'item' rows
+     *
+     * @return void
      */
     public function sendEmails($aItem)
     {
@@ -1053,8 +1081,9 @@ class ItemActions
      * Private function for increment stats.
      * tables: t_user/t_category_stats/t_country_stats/t_region_stats/t_city_stats
      *
-     * @param array item
+     * @param array<string,mixed> $item
      *
+     * @return void
      */
     private function increaseStats($item)
     {
@@ -1109,8 +1138,9 @@ class ItemActions
      * Private function for decrease stats.
      * tables: t_user/t_category_stats/t_country_stats/t_region_stats/t_city_stats
      *
-     * @param array item
+     * @param array<string,mixed> $item
      *
+     * @return void
      */
     private function _decreaseStats($item)
     {
@@ -1125,7 +1155,9 @@ class ItemActions
     }
 
     /**
-     * @return bool|mixed
+     * Update a listing from $this->data, with its locales, location, images, meta and stats.
+     *
+     * @return int|string|false rows updated on success, an error message, or false
      */
     public function edit()
     {
@@ -1287,14 +1319,15 @@ class ItemActions
      * User item stats, Category item stats,
      *  country item stats, region item stats, city item stats
      *
-     * @param bool | array $result
-     * @param array        $old_item
-     * @param bool         $oldIsExpired
-     * @param array        $old_item_location
-     * @param array        $aItem
-     * @param bool         $newIsExpired
-     * @param array        $location
+     * @param bool|int            $result What the item update returned
+     * @param array<string,mixed> $old_item
+     * @param bool                $oldIsExpired
+     * @param array<string,mixed> $old_item_location
+     * @param array<string,mixed> $aItem
+     * @param bool                $newIsExpired
+     * @param array<string,mixed> $location
      *
+     * @return void
      */
     private function updateStats(
         $result,
@@ -1637,7 +1670,9 @@ class ItemActions
      * Mark an item
      *
      * @param int    $id
-     * @param string $as
+     * @param string $as 'spam' | 'badcat' | 'offensive' | 'repeated' | 'expired'
+     *
+     * @return void
      */
     public function mark($id, $as)
     {
@@ -1789,7 +1824,9 @@ class ItemActions
     }
 
     /**
-     * @return string
+     * Validate the contact form and fire the listing-inquiry email hook.
+     *
+     * @return string|null the validation errors, or null when the inquiry was sent
      */
     public function contact()
     {
@@ -1814,7 +1851,9 @@ class ItemActions
     }
 
     /**
-     * @return int
+     * Validate and store a comment on a listing.
+     *
+     * @return int a status code; 7 when comments are disabled
      */
     public function add_comment()
     {

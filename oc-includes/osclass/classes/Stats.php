@@ -30,6 +30,8 @@ class Stats
     private static $instance;
 
     /**
+     * The shared Stats instance, created on first call.
+     *
      * @return \Stats
      */
     public static function newInstance()
@@ -50,10 +52,10 @@ class Stats
      * or the bare column -- so each caller supplies its own rather than sharing a
      * single definition.
      *
-     * @param string $date
-     * @param array  $map
+     * @param string                                 $date Bucket granularity: 'day' | 'week' | 'month'
+     * @param array<string,array{0:string,1:string}> $map
      *
-     * @return array
+     * @return array{0:string,1:string} the SELECT expression and the GROUP BY expression
      */
     private function bucket($date, array $map)
     {
@@ -92,10 +94,12 @@ class Stats
     }
 
     /**
-     * @param        $from_date
-     * @param string $date
+     * Registrations per bucket since $from_date, newest bucket first.
      *
-     * @return array
+     * @param string $from_date Inclusive lower bound, as a SQL datetime
+     * @param string $date      Bucket granularity: 'day' | 'week' | 'month'
+     *
+     * @return array<int,array<string,string>>
      */
     public function new_users_count($from_date, $date = 'day')
     {
@@ -115,7 +119,9 @@ class Stats
     }
 
     /**
-     * @return array
+     * Registered users per country.
+     *
+     * @return array<int,array<string,string>>
      */
     public function users_by_country()
     {
@@ -125,7 +131,9 @@ class Stats
     }
 
     /**
-     * @return array
+     * Registered users per region.
+     *
+     * @return array<int,array<string,string>>
      */
     public function users_by_region()
     {
@@ -135,7 +143,9 @@ class Stats
     }
 
     /**
-     * @return array
+     * The average number of listings per contact email, as a single row.
+     *
+     * @return array<int,array<string,string>>
      */
     public function items_by_user()
     {
@@ -146,7 +156,9 @@ class Stats
     }
 
     /**
-     * @return array
+     * The five most recently registered users.
+     *
+     * @return array<int,array<string,string>>
      */
     public function latest_users()
     {
@@ -156,10 +168,12 @@ class Stats
     }
 
     /**
-     * @param        $from_date
-     * @param string $date
+     * Published listings per bucket since $from_date, newest bucket first.
      *
-     * @return array
+     * @param string $from_date Inclusive lower bound, as a SQL datetime
+     * @param string $date      Bucket granularity: 'day' | 'week' | 'month'
+     *
+     * @return array<int,array<string,string>>
      */
     public function new_items_count($from_date, $date = 'day')
     {
@@ -179,7 +193,9 @@ class Stats
     }
 
     /**
-     * @return array
+     * The five most recently published listings, with location and description.
+     *
+     * @return array<int,array<string,string>>
      */
     public function latest_items()
     {
@@ -200,10 +216,12 @@ class Stats
     }
 
     /**
-     * @param        $from_date
-     * @param string $date
+     * Comments per bucket since $from_date, newest bucket first.
      *
-     * @return array
+     * @param string $from_date Inclusive lower bound, as a SQL datetime
+     * @param string $date      Bucket granularity: 'day' | 'week' | 'month'
+     *
+     * @return array<int,array<string,string>>
      */
     public function new_comments_count($from_date, $date = 'day')
     {
@@ -223,7 +241,9 @@ class Stats
     }
 
     /**
-     * @return array|false
+     * The five most recent comments, with their listing.
+     *
+     * @return array<int,array<string,string>>|false false when the query fails
      */
     public function latest_comments()
     {
@@ -237,10 +257,12 @@ class Stats
     }
 
     /**
-     * @param        $from_date
-     * @param string $date
+     * Site-wide view and report totals per bucket since $from_date.
      *
-     * @return array
+     * @param string $from_date Inclusive lower bound, as a SQL datetime
+     * @param string $date      Bucket granularity: 'day' | 'week' | 'month'
+     *
+     * @return array<int,array<string,string>>
      */
     public function new_reports_count($from_date, $date = 'day')
     {
@@ -268,10 +290,12 @@ class Stats
     }
 
     /**
-     * @param        $from_date
-     * @param string $date
+     * Alerts created per bucket since $from_date.
      *
-     * @return array
+     * @param string $from_date Inclusive lower bound, as a SQL datetime
+     * @param string $date      Bucket granularity: 'day' | 'week' | 'month'
+     *
+     * @return array<int,array<string,string>>
      */
     public function new_alerts_count($from_date, $date = 'day')
     {
@@ -279,10 +303,12 @@ class Stats
     }
 
     /**
-     * @param        $from_date
-     * @param string $date
+     * Distinct alert subscribers per bucket since $from_date.
      *
-     * @return array
+     * @param string $from_date Inclusive lower bound, as a SQL datetime
+     * @param string $date      Bucket granularity: 'day' | 'week' | 'month'
+     *
+     * @return array<int,array<string,string>>
      */
     public function new_subscribers_count($from_date, $date = 'day')
     {

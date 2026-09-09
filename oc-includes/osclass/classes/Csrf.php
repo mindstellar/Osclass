@@ -92,6 +92,8 @@ class Csrf
     }
 
     /**
+     * The shared Csrf instance, created on first call.
+     *
      * @return \mindstellar\Csrf
      */
     public static function newInstance()
@@ -105,6 +107,8 @@ class Csrf
 
     /**
      * Initalize csrf guard
+     *
+     * @return void
      */
     public static function init()
     {
@@ -129,7 +133,8 @@ class Csrf
 
     /**
      * Replace form with csrf inputs added
-     * @param $form_data_html
+     *
+     * @param string $form_data_html Rendered page HTML
      *
      * @return string
      */
@@ -159,6 +164,8 @@ class Csrf
      * Resolve the token for this request. Signing touches no session state, so this is called
      * lazily at the point a token is actually emitted (tokenForm/tokenUrl/replaceForms) and never
      * starts a session. All forms on a page share one token — same issue time and binding.
+     *
+     * @return void
      */
     private function setToken()
     {
@@ -199,6 +206,8 @@ class Csrf
 
     /**
      * Check if CSRF token is valid, die in other case
+     *
+     * @return void
      */
     public function check()
     {
@@ -276,14 +285,6 @@ class Csrf
     }
 
     /**
-     * Identity the token is bound to: the logged-in admin or web user, else empty for an
-     * anonymous visitor. Read-only — Session::_get resumes an existing session but never starts a
-     * new one, so anonymous requests stay cacheable. Binding stops a valid token issued to one
-     * logged-in account from being replayed against another.
-     *
-     * @return string
-     */
-    /**
      * Issue time for a token, rounded down to ISSUE_BUCKET. Always <= now, so it can never
      * trip validate()'s clock-skew guard.
      *
@@ -294,6 +295,14 @@ class Csrf
         return (int)(floor(time() / self::ISSUE_BUCKET) * self::ISSUE_BUCKET);
     }
 
+    /**
+     * Identity the token is bound to: the logged-in admin or web user, else empty for an
+     * anonymous visitor. Read-only — Session::_get resumes an existing session but never starts a
+     * new one, so anonymous requests stay cacheable. Binding stops a valid token issued to one
+     * logged-in account from being replayed against another.
+     *
+     * @return string
+     */
     private function bind()
     {
         $adminId = $this->session->_get('adminId');
@@ -343,6 +352,8 @@ class Csrf
     }
 
     /**
+     * Decode URL/attribute-safe base64 back to its raw payload.
+     *
      * @param string $data
      *
      * @return string|false decoded payload, or false on malformed input
@@ -355,7 +366,9 @@ class Csrf
     /**
      * Flash error message
      *
-     * @param $str_error
+     * @param string $str_error
+     *
+     * @return void
      */
     private function setMessage($str_error)
     {
@@ -366,6 +379,11 @@ class Csrf
         }
     }
 
+    /**
+     * Send the visitor back where they came from, or to the site/admin home, and stop.
+     *
+     * @return void
+     */
     private function errorRedirect()
     {
         $url = Utils::getHttpReferer();
@@ -383,6 +401,8 @@ class Csrf
     }
 
     /**
+     * The CSRFName value for this request's token (the encoded payload).
+     *
      * @return string
      */
     public function getCsrfTokenName()
@@ -393,6 +413,8 @@ class Csrf
     }
 
     /**
+     * The CSRFToken value for this request's token (the signature).
+     *
      * @return string
      */
     public function getCsrfTokenValue()

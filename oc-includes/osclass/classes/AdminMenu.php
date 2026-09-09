@@ -38,6 +38,9 @@ class AdminMenu
     /** Submenu keys per section as core left them, before anyone else registered. */
     private $aCoreSubmenus = array();
 
+    /**
+     * Start with an empty menu tree.
+     */
     public function __construct()
     {
         $this->aMenu = array();
@@ -45,6 +48,8 @@ class AdminMenu
 
     /**
      *  Initialize menu representation.
+     *
+     * @return void
      */
     public function init()
     {
@@ -490,12 +495,14 @@ class AdminMenu
     /**
      * Add menu entry
      *
-     * @param $menu_title
-     * @param $url
-     * @param $menu_id
-     * @param $icon_url   (unused)
-     * @param $capability (unused)
-     * @param $position   (unused)
+     * @param string      $menu_title
+     * @param string      $url
+     * @param string      $menu_id
+     * @param string|null $capability 'moderator' to keep the section visible to moderators
+     * @param string|null $icon_url   Bootstrap icon class, or an http(s) url
+     * @param int|null    $position   (unused)
+     *
+     * @return void
      */
     public function add_menu($menu_title, $url, $menu_id, $capability = null, $icon_url = null, $position = null)
     {
@@ -513,12 +520,14 @@ class AdminMenu
     /**
      * Add submenu under menu id $menu_id
      *
-     * @param      $menu_id
-     * @param      $submenu_title
-     * @param      $url
-     * @param      $submenu_id
-     * @param      $capability
-     * @param null $icon_url
+     * @param string      $menu_id
+     * @param string      $submenu_title
+     * @param string      $url
+     * @param string      $submenu_id
+     * @param string|null $capability 'moderator' to keep it visible to moderators
+     * @param string|null $icon_url
+     *
+     * @return void
      */
     public function add_submenu($menu_id, $submenu_title, $url, $submenu_id, $capability = null, $icon_url = null)
     {
@@ -535,6 +544,8 @@ class AdminMenu
 
     /**
      * Render Admin Menu
+     *
+     * @return void
      */
     public function renderAdminMenu()
     {
@@ -657,8 +668,8 @@ class AdminMenu
      * no group for an appended entry to be mistaken for, and a rule would be noise. An
      * entry that brings its own heading needs no rule either: the heading is the boundary.
      *
-     * @param string $menuId
-     * @param array  $visible list of array($isDivider, $entry, $key)
+     * @param string                                   $menuId
+     * @param array<int,array{0:bool,1:array,2:string}> $visible list of array($isDivider, $entry, $key)
      *
      * @return string|null
      */
@@ -690,6 +701,8 @@ class AdminMenu
     }
 
     /**
+     * The shared AdminMenu instance, created on first call.
+     *
      * @return \AdminMenu
      */
     public static function newInstance()
@@ -704,7 +717,7 @@ class AdminMenu
     /**
      * Return menu as array
      *
-     * @return array
+     * @return array<string,mixed> Sections keyed by menu id, each with an optional 'sub' list
      */
     public function get_array_menu()
     {
@@ -714,10 +727,10 @@ class AdminMenu
     /**
      * Render Menu in Admin Sidebar
      *
-     * @param $menuId
-     * @param $value
-     * @param $activeMenu
-     * @param $activeSubmenu
+     * @param string $menuId
+     * @param mixed  $value         The section entry; anything that is not a section renders ''
+     * @param string $activeMenu
+     * @param string $activeSubmenu
      *
      * @return string
      */
@@ -773,11 +786,11 @@ class AdminMenu
     /**
      * Private function for rendering submenus
      *
-     * @param $parentMenuId
-     * @param $subMenu
-     * @param $is_moderator
-     * @param $activeMenu
-     * @param $activeSubmenu
+     * @param string                     $parentMenuId
+     * @param array<string,array<mixed>> $subMenu
+     * @param bool                       $is_moderator
+     * @param string                     $activeMenu
+     * @param string                     $activeSubmenu
      *
      * @return string
      */
@@ -842,7 +855,9 @@ class AdminMenu
     /**
      * Remove menu and submenus under menu with id $id_menu
      *
-     * @param $menu_id
+     * @param string $menu_id
+     *
+     * @return void
      */
     public function remove_menu($menu_id)
     {
@@ -852,8 +867,10 @@ class AdminMenu
     /**
      * Remove submenu with id $id_submenu under menu id $id_menu
      *
-     * @param $menu_id
-     * @param $submenu_id
+     * @param string $menu_id
+     * @param string $submenu_id
+     *
+     * @return void
      */
     public function remove_submenu($menu_id, $submenu_id)
     {
@@ -869,11 +886,12 @@ class AdminMenu
      * only when a visible item follows, so $capability does not govern it — a label has no
      * destination to protect, and the items decide whether their heading is worth drawing.
      *
-     * @param      $menu_id
-     * @param      $submenu_title
-     * @param      $submenu_id
-     * @param      $capability   Kept for signature compatibility; not used for visibility.
+     * @param string      $menu_id
+     * @param string      $submenu_title
+     * @param string      $submenu_id
+     * @param string|null $capability Kept for signature compatibility; not used for visibility.
      *
+     * @return void
      * @since 3.1
      */
     public function add_submenu_divider($menu_id, $submenu_title, $submenu_id, $capability = null)
@@ -888,11 +906,12 @@ class AdminMenu
     }
 
     /**
-     * Remove submenu with id $id_submenu under menu id $id_menu
+     * Remove the group heading $submenu_id under menu id $menu_id
      *
-     * @param $menu_id
-     * @param $submenu_id
+     * @param string $menu_id
+     * @param string $submenu_id
      *
+     * @return void
      * @since 3.1
      */
     public function remove_submenu_divider($menu_id, $submenu_id)
@@ -901,11 +920,15 @@ class AdminMenu
     }
 
     /**
-     * @param      $submenu_title
-     * @param      $url
-     * @param      $submenu_id
-     * @param null $capability
-     * @param null $icon_url
+     * Add a submenu entry under the Listings section.
+     *
+     * @param string      $submenu_title
+     * @param string      $url
+     * @param string      $submenu_id
+     * @param string|null $capability 'moderator' to keep it visible to moderators
+     * @param string|null $icon_url
+     *
+     * @return void
      */
     public function add_menu_items($submenu_title, $url, $submenu_id, $capability = null, $icon_url = null)
     {
@@ -913,11 +936,15 @@ class AdminMenu
     }
 
     /**
-     * @param      $submenu_title
-     * @param      $url
-     * @param      $submenu_id
-     * @param null $capability
-     * @param null $icon_url
+     * Add a submenu entry under the Listings section.
+     *
+     * @param string      $submenu_title
+     * @param string      $url
+     * @param string      $submenu_id
+     * @param string|null $capability 'moderator' to keep it visible to moderators
+     * @param string|null $icon_url
+     *
+     * @return void
      */
     public function add_menu_categories($submenu_title, $url, $submenu_id, $capability = null, $icon_url = null)
     {
@@ -930,11 +957,15 @@ class AdminMenu
     }
 
     /**
-     * @param      $submenu_title
-     * @param      $url
-     * @param      $submenu_id
-     * @param null $capability
-     * @param null $icon_url
+     * Add a submenu entry under the Pages section.
+     *
+     * @param string      $submenu_title
+     * @param string      $url
+     * @param string      $submenu_id
+     * @param string|null $capability 'moderator' to keep it visible to moderators
+     * @param string|null $icon_url
+     *
+     * @return void
      */
     public function add_menu_pages($submenu_title, $url, $submenu_id, $capability = null, $icon_url = null)
     {
@@ -942,11 +973,15 @@ class AdminMenu
     }
 
     /**
-     * @param      $submenu_title
-     * @param      $url
-     * @param      $submenu_id
-     * @param null $capability
-     * @param null $icon_url
+     * Add a submenu entry under the Appearance section.
+     *
+     * @param string      $submenu_title
+     * @param string      $url
+     * @param string      $submenu_id
+     * @param string|null $capability 'moderator' to keep it visible to moderators
+     * @param string|null $icon_url
+     *
+     * @return void
      */
     public function add_menu_appearance($submenu_title, $url, $submenu_id, $capability = null, $icon_url = null)
     {
@@ -954,11 +989,15 @@ class AdminMenu
     }
 
     /**
-     * @param      $submenu_title
-     * @param      $url
-     * @param      $submenu_id
-     * @param null $capability
-     * @param null $icon_url
+     * Add a submenu entry under the Plugins section.
+     *
+     * @param string      $submenu_title
+     * @param string      $url
+     * @param string      $submenu_id
+     * @param string|null $capability 'moderator' to keep it visible to moderators
+     * @param string|null $icon_url
+     *
+     * @return void
      */
     public function add_menu_plugins($submenu_title, $url, $submenu_id, $capability = null, $icon_url = null)
     {
@@ -966,11 +1005,15 @@ class AdminMenu
     }
 
     /**
-     * @param      $submenu_title
-     * @param      $url
-     * @param      $submenu_id
-     * @param null $capability
-     * @param null $icon_url
+     * Add a submenu entry under the Settings section.
+     *
+     * @param string      $submenu_title
+     * @param string      $url
+     * @param string      $submenu_id
+     * @param string|null $capability 'moderator' to keep it visible to moderators
+     * @param string|null $icon_url
+     *
+     * @return void
      */
     public function add_menu_settings($submenu_title, $url, $submenu_id, $capability = null, $icon_url = null)
     {
@@ -978,11 +1021,15 @@ class AdminMenu
     }
 
     /**
-     * @param      $submenu_title
-     * @param      $url
-     * @param      $submenu_id
-     * @param null $capability
-     * @param null $icon_url
+     * Add a submenu entry under the Tools section.
+     *
+     * @param string      $submenu_title
+     * @param string      $url
+     * @param string      $submenu_id
+     * @param string|null $capability 'moderator' to keep it visible to moderators
+     * @param string|null $icon_url
+     *
+     * @return void
      */
     public function add_menu_tools($submenu_title, $url, $submenu_id, $capability = null, $icon_url = null)
     {
@@ -990,11 +1037,15 @@ class AdminMenu
     }
 
     /**
-     * @param      $submenu_title
-     * @param      $url
-     * @param      $submenu_id
-     * @param null $capability
-     * @param null $icon_url
+     * Add a submenu entry under the Users section.
+     *
+     * @param string      $submenu_title
+     * @param string      $url
+     * @param string      $submenu_id
+     * @param string|null $capability 'moderator' to keep it visible to moderators
+     * @param string|null $icon_url
+     *
+     * @return void
      */
     public function add_menu_users($submenu_title, $url, $submenu_id, $capability = null, $icon_url = null)
     {
@@ -1002,17 +1053,26 @@ class AdminMenu
     }
 
     /**
-     * @param      $submenu_title
-     * @param      $url
-     * @param      $submenu_id
-     * @param null $capability
-     * @param null $icon_url
+     * Add a submenu entry under the Statistics section.
+     *
+     * @param string      $submenu_title
+     * @param string      $url
+     * @param string      $submenu_id
+     * @param string|null $capability 'moderator' to keep it visible to moderators
+     * @param string|null $icon_url
+     *
+     * @return void
      */
     public function add_menu_stats($submenu_title, $url, $submenu_id, $capability = null, $icon_url = null)
     {
         $this->add_submenu('stats', $submenu_title, $url, $submenu_id, $capability, $icon_url);
     }
 
+    /**
+     * Drop every registered menu and submenu.
+     *
+     * @return void
+     */
     public function clear_menu()
     {
         $this->aMenu = array();
