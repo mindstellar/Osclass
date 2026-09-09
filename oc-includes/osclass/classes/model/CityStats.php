@@ -25,7 +25,6 @@ class CityStats extends DAO
      * It references to self object: CityStats.
      * It is used as a singleton
      *
-     * @access private
      * @since  2.4
      * @var CityStats
      */
@@ -34,7 +33,6 @@ class CityStats extends DAO
     /**
      * Set data related to t_city_stats table
      *
-     * @access public
      * @since  2.4
      */
     public function __construct()
@@ -49,7 +47,6 @@ class CityStats extends DAO
      * It creates a new CityStats object class if it has been created
      * before, it return the previous object
      *
-     * @access public
      * @return \CityStats
      * @since  2.4
      */
@@ -64,8 +61,6 @@ class CityStats extends DAO
 
     /**
      * Increase number of city items, given a city id
-     *
-     * @access public
      *
      * @param int $cityId City id
      *
@@ -105,8 +100,6 @@ class CityStats extends DAO
 
     /**
      * Increase number of city items, given a city id
-     *
-     * @access public
      *
      * @param int $cityId City id
      *
@@ -149,14 +142,11 @@ class CityStats extends DAO
     /**
      * Set i_num_items, given a city id
      *
-     * @access public
-     *
      * @param int $cityID
      * @param int $numItems
      *
      * @return bool True once the counter is written, false when the write fails
      * @since  2.4
-     *
      */
     public function setNumItems($cityID, $numItems)
     {
@@ -180,8 +170,6 @@ class CityStats extends DAO
 
     /**
      * Find stats by city id
-     *
-     * @access public
      *
      * @param int $cityId city id
      *

@@ -552,7 +552,6 @@ function osc_footer_link_title($f = null)
  *
  * @return bool
  * @since  3.0
- * @access private
  */
 function _osc_admin_toolbar_init()
 {

@@ -172,8 +172,6 @@ function osc_sanitize_text($value)
  *
  * Formats text so that it can be safely placed in a form field in the event it has HTML tags.
  *
- * @access  public
- *
  * @param string
  *
  * @return  string
@@ -269,8 +267,6 @@ function osc_esc_html($str = '')
 
 /**
  * Escape single quotes, double quotes, <, >, & and line endings
- *
- * @access  public
  *
  * @param string $str
  *

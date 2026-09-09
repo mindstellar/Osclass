@@ -48,13 +48,9 @@ class Cron extends DAO
     /**
      * Return crons by type
      *
-     * @access public
-     *
      * @param string $type
      *
      * @return array|bool
-     * @since  unknown
-     *
      */
     public function getCronByType($type)
     {

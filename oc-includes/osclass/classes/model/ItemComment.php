@@ -17,7 +17,6 @@
  *
  * @package    Shopclass
  * @subpackage Model
- * @since      unknown
  */
 class ItemComment extends DAO
 {
@@ -25,8 +24,6 @@ class ItemComment extends DAO
      * It references to self object: ItemComment.
      * It is used as a singleton
      *
-     * @access private
-     * @since  unknown
      * @var Item
      */
     private static $instance;
@@ -59,9 +56,7 @@ class ItemComment extends DAO
      * It creates a new ItemComment object class ir if it has been created
      * before, it return the previous object
      *
-     * @access public
      * @return ItemComment
-     * @since  unknown
      */
     public static function newInstance()
     {
@@ -75,12 +70,9 @@ class ItemComment extends DAO
     /**
      * Searches for comments information, given an item id.
      *
-     * @access public
-     *
      * @param integer $id
      *
      * @return array
-     * @since  unknown
      */
     public function findByItemIDAll($id)
     {
@@ -98,15 +90,11 @@ class ItemComment extends DAO
     /**
      * Searches for comments information, given an item id, page and comments per page.
      *
-     * @access public
-     *
      * @param integer $id
      * @param integer $page
      * @param null    $commentsPerPage
      *
      * @return array
-     * @since  unknown
-     *
      */
     public function findByItemID($id, $page = null, $commentsPerPage = null)
     {
@@ -146,13 +134,10 @@ class ItemComment extends DAO
     /**
      * Return total of comments, given an item id. (active & enabled)
      *
-     * @access     public
-     *
      * @param integer $id
      *
      * @return integer
      * @see        ItemComment::totalComments
-     * @since      unknown
      * @deprecated since 2.3
      */
     public function total_comments($id)
@@ -162,8 +147,6 @@ class ItemComment extends DAO
 
     /**
      * Return total of comments, given an item id. (active & enabled)
-     *
-     * @access public
      *
      * @param integer $id
      *
@@ -202,12 +185,9 @@ class ItemComment extends DAO
     /**
      * Searches for comments information, given an user id.
      *
-     * @access public
-     *
      * @param integer $id
      *
      * @return array
-     * @since  unknown
      */
     public function findByAuthorID($id)
     {
@@ -227,12 +207,9 @@ class ItemComment extends DAO
     /**
      * Searches for comments information, given an user id.
      *
-     * @access public
-     *
      * @param integer $itemId
      *
      * @return array
-     * @since  unknown
      */
     public function getAllComments($itemId = null)
     {
@@ -266,12 +243,9 @@ class ItemComment extends DAO
     /**
      * Extends an array of comments with title / description
      *
-     * @access private
-     *
      * @param array $items
      *
      * @return array
-     * @since  unknown
      */
     private function extendData($items)
     {
@@ -330,13 +304,9 @@ class ItemComment extends DAO
     /**
      * Searches for last comments information, given a limit of comments.
      *
-     * @access public
-     *
      * @param integer $num
      *
      * @return array|bool
-     * @since  unknown
-     *
      */
     public function getLastComments($num)
     {
@@ -371,8 +341,6 @@ class ItemComment extends DAO
 
     /**
      * Return comments on command
-     *
-     * @access public
      *
      * @param int item's ID or null
      * @param int start

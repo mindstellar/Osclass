@@ -1558,7 +1558,6 @@ function osc_format_price($price, $symbol = null)
  *
  * @return int
  * @deprecated deprecated since version 2.4
- * @access     private
  */
 function osc_priv_count_items()
 {
@@ -1570,7 +1569,6 @@ function osc_priv_count_items()
  *
  * @return int
  * @deprecated deprecated since version 2.4
- * @access     private
  */
 function osc_priv_count_item_resources()
 {

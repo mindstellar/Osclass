@@ -43,9 +43,6 @@ class Preference extends DAO
 
     /**
      * Modify the structure of table.
-     *
-     * @access public
-     * @since  unknown
      */
     public function toArray()
     {
@@ -84,13 +81,9 @@ class Preference extends DAO
     /**
      * Find a value by its name
      *
-     * @access public
-     *
      * @param $name
      *
      * @return bool
-     * @since  unknown
-     *
      */
     public function findValueByName($name)
     {
@@ -113,13 +106,9 @@ class Preference extends DAO
     /**
      * Find array preference for a given section
      *
-     * @access public
-     *
      * @param string $name
      *
      * @return array|bool
-     * @since  unknown
-     *
      */
     public function findBySection($name)
     {
@@ -149,13 +138,10 @@ class Preference extends DAO
     /**
      * Get value, given a preference name and a section name.
      *
-     * @access public
-     *
      * @param string $key
      * @param string $section
      *
      * @return string
-     * @since  unknown
      */
     public function get($key, $section = 'osclass')
     {
@@ -165,12 +151,9 @@ class Preference extends DAO
     /**
      * Get value, given a preference name and a section name.
      *
-     * @access public
-     *
      * @param string $section
      *
      * @return array
-     * @since  unknown
      */
     public function getSection($section = 'osclass')
     {
@@ -184,13 +167,9 @@ class Preference extends DAO
     /**
      * Set preference value, given a preference name and a section name.
      *
-     * @access public
-     *
      * @param string $key
      * @param string $value
      * @param string $section
-     *
-     * @since  unknown
      */
     public function set($key, $value, $section = 'osclass')
     {
@@ -200,15 +179,12 @@ class Preference extends DAO
     /**
      * Replace preference value, given preference name, preference section and value.
      *
-     * @access public
-     *
      * @param string $key
      * @param string $value
      * @param string $section
      * @param string $type
      *
      * @return boolean
-     * @since  unknown
      */
     public function replace($key, $value, $section = 'osclass', $type = 'STRING')
     {

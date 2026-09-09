@@ -17,7 +17,6 @@
  *
  * @package    Shopclass
  * @subpackage Model
- * @since      unknown
  */
 class CategoryStats extends DAO
 {
@@ -25,8 +24,6 @@ class CategoryStats extends DAO
      * It references to self object: CategotyStats.
      * It is used as a singleton
      *
-     * @access private
-     * @since  unknown
      * @var CategoryStats
      */
     private static $instance;
@@ -46,9 +43,7 @@ class CategoryStats extends DAO
      * It creates a new CategoryStats object class if it has been created
      * before, it return the previous object
      *
-     * @access public
      * @return CategoryStats
-     * @since  unknown
      */
     public static function newInstance()
     {
@@ -62,14 +57,9 @@ class CategoryStats extends DAO
     /**
      * Increase number of category items, given a category id
      *
-     * @access public
-     *
      * @param int $categoryId Category id
      *
      * @return int number of affected rows, id error occurred return false
-     *
-     * @since  unknown
-     *
      */
     public function increaseNumItems($categoryId)
     {
@@ -115,14 +105,9 @@ class CategoryStats extends DAO
     /**
      * Increase number of category items, given a category id
      *
-     * @access public
-     *
      * @param int $categoryId Category id
      *
      * @return int number of affected rows, id error occurred return false
-     *
-     * @since  unknown
-     *
      */
     public function decreaseNumItems($categoryId)
     {
@@ -214,12 +199,9 @@ class CategoryStats extends DAO
     /**
      * Find stats by category id
      *
-     * @access public
-     *
      * @param int $categoryId Category id
      *
      * @return array CategoryStats
-     * @since  unknown
      */
     public function findByCategoryId($categoryId)
     {
@@ -229,12 +211,9 @@ class CategoryStats extends DAO
     /**
      * Count items,  given a category id
      *
-     * @access public
-     *
      * @param $categoryId Category id
      *
      * @return int number of items into category
-     * @since  unknown
      */
     public function countItemsFromCategory($categoryId)
     {
@@ -259,15 +238,11 @@ class CategoryStats extends DAO
     /**
      * Get number of items
      *
-     * @access    public
-     *
      * @param array $cat category array
      *
      * @return int
      *
-     * @since     unknown
      * @staticvar string $numItemsMap
-     *
      */
     public function getNumItems($cat)
     {
@@ -292,10 +267,7 @@ class CategoryStats extends DAO
     }
 
     /**
-     *
-     * @access public
      * @return array
-     * @since  unknown
      */
     public function toNumItemsMap()
     {

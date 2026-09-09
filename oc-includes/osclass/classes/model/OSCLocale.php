@@ -67,14 +67,10 @@ class OSCLocale extends DAO
     /**
      * Return all locales enabled.
      *
-     * @access public
-     *
      * @param bool $isBo
      * @param bool $indexedByPk
      *
      * @return array
-     * @since  unknown
-     *
      */
     public function listAllCodes()
     {
@@ -99,14 +95,10 @@ class OSCLocale extends DAO
     /**
      * Return all locales enabled.
      *
-     * @access public
-     *
      * @param bool $isBo
      * @param bool $indexedByPk
      *
      * @return array
-     * @since  unknown
-     *
      */
     public function listAllEnabled($isBo = false, $indexedByPk = false)
     {
@@ -137,8 +129,6 @@ class OSCLocale extends DAO
     /**
      * Return all locales by code
      *
-     * @access public
-     *
      * @param string $code
      *
      * @return array
@@ -161,12 +151,9 @@ class OSCLocale extends DAO
     /**
      * Delete all related to locale code.
      *
-     * @access public
-     *
      * @param string $locale
      *
      * @return bool
-     * @since  unknown
      */
     public function deleteLocale($locale)
     {

@@ -24,7 +24,6 @@ class DBRecordsetClass
     /**
      * Database connection object to Shopclass database
      *
-     * @access public
      * @since  2.3
      * @var mysqli
      */
@@ -32,7 +31,6 @@ class DBRecordsetClass
     /**
      * Database result object
      *
-     * @access public
      * @since  2.3
      * @var MySQLi_Result
      */
@@ -40,7 +38,6 @@ class DBRecordsetClass
     /**
      * Result array
      *
-     * @access private
      * @since  2.3
      * @var array
      */
@@ -48,7 +45,6 @@ class DBRecordsetClass
     /**
      * Result object
      *
-     * @access private
      * @since  2.3
      * @var object
      */
@@ -56,7 +52,6 @@ class DBRecordsetClass
     /**
      * Number of rows
      *
-     * @access public
      * @since  2.3
      * @var int
      */
@@ -64,7 +59,6 @@ class DBRecordsetClass
     /**
      * Current row
      *
-     * @access private
      * @since  2.3
      * @var int
      */
@@ -110,8 +104,6 @@ class DBRecordsetClass
     /**
      * Get a result row as an array
      *
-     * @access public
-     *
      * @param int $n
      *
      * @return array
@@ -135,7 +127,6 @@ class DBRecordsetClass
     /**
      * Get the results of MySQLi_Result object in array format
      *
-     * @access public
      * @return array
      * @since  2.3
      */
@@ -156,8 +147,6 @@ class DBRecordsetClass
     /**
      * Adjust resultId pointer to the selected row
      *
-     * @access private
-     *
      * @param int $offset Must be between zero and the total number of rows minus one
      *
      * @return bool true on success or false on failure
@@ -171,7 +160,6 @@ class DBRecordsetClass
     /**
      * Returns the current row of a result set as an array
      *
-     * @access private
      * @return array
      * @since  2.3
      */
@@ -182,8 +170,6 @@ class DBRecordsetClass
 
     /**
      * Get a result row as an object
-     *
-     * @access public
      *
      * @param int $n
      *
@@ -208,7 +194,6 @@ class DBRecordsetClass
     /**
      * Get the results of MySQLi_Result object in object format
      *
-     * @access public
      * @return array|object
      * @since  2.3
      */
@@ -229,7 +214,6 @@ class DBRecordsetClass
     /**
      * Returns the current row of a result set as an object
      *
-     * @access private
      * @return object
      * @since  2.3
      */
@@ -240,8 +224,6 @@ class DBRecordsetClass
 
     /**
      * Get the first row as an array or object
-     *
-     * @access public
      *
      * @param string $type
      *
@@ -262,8 +244,6 @@ class DBRecordsetClass
     /**
      * Get the results of MySQLi_Result object
      *
-     * @access public
-     *
      * @param string $type
      *
      * @return array | object It can be an array or an object
@@ -280,8 +260,6 @@ class DBRecordsetClass
 
     /**
      * Get the last row as an array or object
-     *
-     * @access public
      *
      * @param string $type
      *
@@ -301,8 +279,6 @@ class DBRecordsetClass
 
     /**
      * Get next row as an array or object
-     *
-     * @access public
      *
      * @param string $type
      *
@@ -327,8 +303,6 @@ class DBRecordsetClass
     /**
      * Get previous row as an array or object
      *
-     * @access public
-     *
      * @param string $type
      *
      * @return mixed
@@ -352,7 +326,6 @@ class DBRecordsetClass
     /**
      * Get number of rows
      *
-     * @access public
      * @return int
      * @since  2.3
      */
@@ -364,7 +337,6 @@ class DBRecordsetClass
     /**
      * Get the number of fields in a result
      *
-     * @access public
      * @return int
      * @since  2.3
      */
@@ -376,7 +348,6 @@ class DBRecordsetClass
     /**
      * Get the name of the fields in an array
      *
-     * @access public
      * @return array
      * @since  2.3
      */

@@ -50,13 +50,9 @@ class PluginCategory extends DAO
     /**
      * Return all information given a category id
      *
-     * @access public
-     *
      * @param $categoryId
      *
      * @return array
-     * @since  unknown
-     *
      */
     public function findByCategoryId($categoryId)
     {
@@ -75,12 +71,9 @@ class PluginCategory extends DAO
     /**
      * Return list of categories asociated with a plugin
      *
-     * @access public
-     *
      * @param string $plugin
      *
      * @return array
-     * @since  unknown
      */
     public function listSelected($plugin)
     {
@@ -104,13 +97,10 @@ class PluginCategory extends DAO
     /**
      * Check if a category is asociated with a plugin
      *
-     * @access public
-     *
      * @param string $pluginName
      * @param int    $categoryId
      *
      * @return bool
-     * @since  unknown
      */
     public function isThisCategory($pluginName, $categoryId)
     {

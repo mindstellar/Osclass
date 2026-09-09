@@ -20,7 +20,6 @@ class Object_Cache_default implements iObject_Cache
      * Holds the cached objects
      *
      * @var array
-     * @access private
      * @since  3.4
      */
     public $cache = array();
@@ -29,7 +28,6 @@ class Object_Cache_default implements iObject_Cache
      * The amount of times the cache data was already stored in the cache.
      *
      * @since  3.4
-     * @access private
      * @var int
      */
     public $cache_hits = 0;
@@ -38,7 +36,6 @@ class Object_Cache_default implements iObject_Cache
      * Amount of times the cache did not have the request in cache
      *
      * @var int
-     * @access public
      * @since  3.4
      */
     public $cache_misses = 0;
@@ -47,7 +44,6 @@ class Object_Cache_default implements iObject_Cache
      * The site prefix to prepend to keys.
      *
      * @var int
-     * @access private
      * @since  3.4
      */
     public $site_prefix;
@@ -91,9 +87,6 @@ class Object_Cache_default implements iObject_Cache
      *
      * @return bool
      * @since  3.4
-     *
-     * @access protected
-     *
      */
     protected function _exists($key)
     {

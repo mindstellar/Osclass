@@ -17,7 +17,6 @@
  *
  * @package    Shopclass
  * @subpackage Model
- * @since      unknown
  */
 class Dump extends DAO
 {
@@ -25,8 +24,6 @@ class Dump extends DAO
      * It references to self object: Dump.
      * It is used as a singleton
      *
-     * @access private
-     * @since  unknown
      * @var Dump
      */
     private static $instance;

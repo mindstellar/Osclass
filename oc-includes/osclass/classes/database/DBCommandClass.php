@@ -35,7 +35,6 @@ class DBCommandClass
     /**
      * Database result object
      *
-     * @access public
      * @since  2.3
      * @var MySQLi_Result
      */
@@ -148,7 +147,6 @@ class DBCommandClass
     /**
      * Database connection object to Shopclass database
      *
-     * @access private
      * @since  2.3
      * @var mysqli
      */
@@ -197,7 +195,6 @@ class DBCommandClass
      * It creates a new DBCommandClass object or if it has been created before, it
      * returns the previous object
      *
-     * @access public
      * @return DBCommandClass
      * @since  2.3
      */
@@ -220,8 +217,6 @@ class DBCommandClass
 
     /**
      * Set SELECT clause
-     *
-     * @access public
      *
      * @param mixed $select It can be a string or array
      *
@@ -247,8 +242,6 @@ class DBCommandClass
 
     /**
      * Set JOIN clause
-     *
-     * @access public
      *
      * @param string $table
      * @param string $cond
@@ -281,8 +274,6 @@ class DBCommandClass
     /**
      * Set WHERE clause using OR operator
      *
-     * @access public
-     *
      * @param mixed $key
      * @param mixed $value
      *
@@ -296,8 +287,6 @@ class DBCommandClass
 
     /**
      * Set WHERE clause
-     *
-     * @access private
      *
      * @param mixed  $key
      * @param mixed  $value
@@ -332,8 +321,6 @@ class DBCommandClass
     /**
      * Check if the string has an operator
      *
-     * @access private
-     *
      * @param string $str
      *
      * @return bool
@@ -356,8 +343,6 @@ class DBCommandClass
      * Note: this escape-then-concatenate approach is the legacy path and is easy
      * to misuse. For new code prefer bound parameters via
      * mindstellar\database\Connection; never use escape() for identifiers.
-     *
-     * @access private
      *
      * @param string|bool|int $str
      *
@@ -386,8 +371,6 @@ class DBCommandClass
     /**
      * Escape the string if it's necessary
      *
-     * @access private
-     *
      * @param string $str
      * @param bool   $like
      *
@@ -412,8 +395,6 @@ class DBCommandClass
     /**
      * Set WHERE IN clause using AND operator
      *
-     * @access public
-     *
      * @param string       $key
      * @param array|string $values
      *
@@ -427,8 +408,6 @@ class DBCommandClass
 
     /**
      * Set WHERE IN clause
-     *
-     * @access private
      *
      * @param mixed  $key
      * @param mixed  $values
@@ -463,8 +442,6 @@ class DBCommandClass
     /**
      * Set WHERE IN clause using OR operator
      *
-     * @access public
-     *
      * @param mixed $key
      * @param mixed $values
      *
@@ -481,8 +458,6 @@ class DBCommandClass
 
     /**
      * Set WHERE NOT IN clause using AND operator
-     *
-     * @access public
      *
      * @param mixed $key
      * @param mixed $values
@@ -501,8 +476,6 @@ class DBCommandClass
     /**
      * Set WHERE NOT IN clause using OR operator
      *
-     * @access public
-     *
      * @param mixed $key
      * @param mixed $values
      *
@@ -520,8 +493,6 @@ class DBCommandClass
     /**
      * Set LIKE clause
      *
-     * @access public
-     *
      * @param        $field
      * @param string $match
      * @param string $side
@@ -535,8 +506,6 @@ class DBCommandClass
 
     /**
      * Set LIKE clause
-     *
-     * @access private
      *
      * @param string|array $field
      * @param string       $match
@@ -580,8 +549,6 @@ class DBCommandClass
     /**
      * Set NOT LIKE clause using AND operator
      *
-     * @access public
-     *
      * @param string $field
      * @param string $match
      * @param string $side
@@ -599,8 +566,6 @@ class DBCommandClass
 
     /**
      * Set LIKE clause using OR operator
-     *
-     * @access public
      *
      * @param string $field
      * @param string $match
@@ -621,8 +586,6 @@ class DBCommandClass
     /**
      * Set NOT LIKE clause using OR operator
      *
-     * @access public
-     *
      * @param string $field
      * @param string $match
      * @param string $side
@@ -640,8 +603,6 @@ class DBCommandClass
 
     /**
      * Fields for GROUP BY clause
-     *
-     * @access public
      *
      * @param mixed $by
      *
@@ -723,14 +684,11 @@ class DBCommandClass
     /**
      * Set ORDER BY clause
      *
-     * @access public
-     *
      * @param string $orderby
      * @param string $direction Accepted directions: random, asc, desc
      *
      * @return \DBCommandClass
      * @since  2.3
-     *
      */
     public function orderBy($orderby, $direction = '')
     {
@@ -747,8 +705,6 @@ class DBCommandClass
 
     /**
      * Set the offset in the LIMIT clause
-     *
-     * @access public
      *
      * @param int $offset
      *
@@ -767,8 +723,6 @@ class DBCommandClass
 
     /**
      * Create the INSERT sql and perform the query
-     *
-     * @access public
      *
      * @param mixed $table
      * @param mixed $set
@@ -803,8 +757,6 @@ class DBCommandClass
     /**
      * Set aSet array
      *
-     * @access public
-     *
      * @param mixed $key
      * @param mixed $value
      * @param bool  $escape
@@ -832,8 +784,6 @@ class DBCommandClass
     /**
      * Create the INSERT sql string
      *
-     * @access private
-     *
      * @param string $table
      * @param array  $keys
      * @param array  $values
@@ -849,7 +799,6 @@ class DBCommandClass
     /**
      * Reset variables used in write sql: aSet, aFrom, aWhere, aLike, aOrderby, aLimit, aOrder
      *
-     * @access private
      * @since  2.3
      */
     private function _resetWrite()
@@ -870,8 +819,6 @@ class DBCommandClass
     /**
      * Initializate $aReset variables
      *
-     * @access private
-     *
      * @param array $aReset
      *
      * @since  2.3
@@ -885,8 +832,6 @@ class DBCommandClass
 
     /**
      * Performs a query on the database
-     *
-     * @access public
      *
      * @param string $sql
      *
@@ -946,8 +891,6 @@ class DBCommandClass
     /**
      * Check if the sql is a select
      *
-     * @access private
-     *
      * @param string $sql
      *
      * @return bool
@@ -1003,8 +946,6 @@ class DBCommandClass
     /**
      * Performs a query on the database
      *
-     * @access private
-     *
      * @param string $sql
      *
      * @return bool|\mysqli_result
@@ -1029,7 +970,6 @@ class DBCommandClass
     /**
      * Set last error code and descriptionfor the most recent mysqli function call
      *
-     * @access private
      * @since  2.3
      */
     private function errorReport()
@@ -1040,8 +980,6 @@ class DBCommandClass
 
     /**
      * Check if the sql is a write such as INSERT, UPDATE, UPDATE...
-     *
-     * @access private
      *
      * @param string $sql
      *
@@ -1063,8 +1001,6 @@ class DBCommandClass
 
     /**
      * Create the REPLACE INTO sql and perform the query
-     *
-     * @access public
      *
      * @param mixed $table
      * @param mixed $set
@@ -1099,8 +1035,6 @@ class DBCommandClass
     /**
      * Create the REPLACE INTO sql string
      *
-     * @access private
-     *
      * @param string $table
      * @param        $keys
      * @param array  $values
@@ -1115,8 +1049,6 @@ class DBCommandClass
 
     /**
      * Create the UPDATE sql and perform the query
-     *
-     * @access public
      *
      * @param mixed $table
      * @param mixed $set
@@ -1162,8 +1094,6 @@ class DBCommandClass
     /**
      * Set WHERE clause using OR operator
      *
-     * @access public
-     *
      * @param mixed $key
      * @param mixed $value
      *
@@ -1177,8 +1107,6 @@ class DBCommandClass
 
     /**
      * Create the UPDATE sql string
-     *
-     * @access private
      *
      * @param string $table
      * @param array  $values
@@ -1203,7 +1131,6 @@ class DBCommandClass
     /**
      * Gets the number of affected rows in a previous MySQL operation
      *
-     * @access public
      * @return int
      * @since  2.3
      */
@@ -1214,8 +1141,6 @@ class DBCommandClass
 
     /**
      * Create the DELETE sql and perform the query
-     *
-     * @access public
      *
      * @param mixed $table
      * @param mixed $where
@@ -1256,8 +1181,6 @@ class DBCommandClass
     /**
      * Create the DELETE sql string
      *
-     * @access private
-     *
      * @param string $table
      * @param array  $where
      * @param array  $like
@@ -1285,8 +1208,6 @@ class DBCommandClass
     /**
      * Compile the select sql string and perform the query. Quick method for
      * getting the rows of one table
-     *
-     * @access public
      *
      * @param mixed $table
      * @param mixed $limit
@@ -1346,8 +1267,6 @@ class DBCommandClass
     /**
      * Set LIMIT clause
      *
-     * @access public
-     *
      * @param int    $value
      * @param string $offset
      *
@@ -1373,7 +1292,6 @@ class DBCommandClass
     /**
      * Create SELECT sql statement
      *
-     * @access private
      * @return string
      * @since  2.3
      * @deprecated 5.3 Unused by core. Retained only because the object is reachable
@@ -1468,7 +1386,6 @@ class DBCommandClass
      * Reset variables used in select sql: aSelect, aFrom, aJoin, aWhere, aLike, aGroupby, aHaving,
      * aOrderby, aWherein, aLimit, aOffset, aOrder
      *
-     * @access private
      * @since  2.3
      */
     public function _resetSelect()
@@ -1494,8 +1411,6 @@ class DBCommandClass
     /**
      * Execute queries sql. We replace TABLE_PREFIX for the real prefix: DB_TABLE_PREFIX
      * The executions is stopped if some query throws an error.
-     *
-     * @access public
      *
      * @param string $sql
      *
@@ -1541,7 +1456,6 @@ class DBCommandClass
     /**
      * Get last SQL query
      *
-     * @access public
      * @return string
      * @since  2.3
      * @deprecated 5.3 Unused by core. Retained only because the object is reachable
@@ -1556,7 +1470,6 @@ class DBCommandClass
     /**
      * Get the ID generated from the previous INSERT operation
      *
-     * @access public
      * @return int|string
      * @since  2.3
      */
@@ -1568,7 +1481,6 @@ class DBCommandClass
     /**
      * Returns the last error code for the most recent mysqli function call
      *
-     * @access public
      * @return int
      * @since  2.3
      */
@@ -1580,7 +1492,6 @@ class DBCommandClass
     /**
      * Returns a string description of the last error for the most recent MySQLi function call
      *
-     * @access public
      * @return string
      * @since  2.3
      */

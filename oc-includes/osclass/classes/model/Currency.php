@@ -17,7 +17,6 @@
  *
  * @package    Shopclass
  * @subpackage Model
- * @since      unknown
  */
 class Currency extends DAO
 {
@@ -25,8 +24,6 @@ class Currency extends DAO
      * It references to self object: Currency.
      * It is used as a singleton
      *
-     * @access private
-     * @since  unknown
      * @var Currency
      */
     private static $instance;
@@ -47,9 +44,7 @@ class Currency extends DAO
      * It creates a new Currency object class ir if it has been created
      * before, it return the previous object
      *
-     * @access public
      * @return Currency
-     * @since  unknown
      */
     public static function newInstance()
     {

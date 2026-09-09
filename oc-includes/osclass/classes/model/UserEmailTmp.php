@@ -47,14 +47,9 @@ class UserEmailTmp extends DAO
     }
 
     /**
-     *
-     * @access public
-     *
      * @param $userEmailTmp
      *
      * @return array|bool
-     * @since  unknown
-     *
      */
     public function insertOrUpdate($userEmailTmp)
     {

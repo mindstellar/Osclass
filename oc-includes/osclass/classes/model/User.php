@@ -84,13 +84,10 @@ class User extends DAO
     /**
      * Find an user by its primary key
      *
-     * @access public
-     *
      * @param string $query
      *
      * @return array
      * @since  2.3.2
-     *
      */
     public function ajax($query = '')
     {
@@ -115,13 +112,10 @@ class User extends DAO
     /**
      * Find an user by its primary key
      *
-     * @access public
-     *
      * @param int    $id
      * @param string $locale
      *
      * @return array
-     * @since  unknown
      */
     public function findByPrimaryKey($id, $locale = null)
     {
@@ -208,14 +202,11 @@ class User extends DAO
     /**
      * Find an user by its username
      *
-     * @access public
-     *
      * @param string $username
      * @param null   $locale
      *
      * @return array|bool
      * @since  3.1
-     *
      */
     public function findByUsername($username, $locale = null)
     {
@@ -238,14 +229,11 @@ class User extends DAO
     /**
      * Find an user by its email and password
      *
-     * @access public
-     *
      * @param        $email
      * @param string $password
      * @param null   $locale
      *
      * @return array
-     * @since  unknown
      */
     public function findByCredentials($email, $password, $locale = null)
     {
@@ -260,14 +248,10 @@ class User extends DAO
     /**
      * Find an user by its email
      *
-     * @access public
-     *
      * @param string $email
      * @param null   $locale
      *
      * @return array|bool
-     * @since  unknown
-     *
      */
     public function findByEmail($email, $locale = null)
     {
@@ -290,16 +274,12 @@ class User extends DAO
     /**
      * Find an user by its id and secret
      *
-     * @access public
-     *
      * @param string $id
      * @param string $secret
      *
      * @param null   $locale
      *
      * @return array|bool
-     * @since  unknown
-     *
      */
     public function findByIdSecret($id, $secret, $locale = null)
     {
@@ -326,17 +306,11 @@ class User extends DAO
     }
 
     /**
-     *
-     *
-     * @access public
-     *
      * @param string $id
      * @param string $secret
      * @param null   $locale
      *
      * @return array|bool
-     * @since  unknown
-     *
      */
     public function findByIdPasswordSecret($id, $secret, $locale = null)
     {
@@ -369,13 +343,9 @@ class User extends DAO
     /**
      * Delete an user given its id
      *
-     * @access public
-     *
      * @param int $id
      *
      * @return bool
-     * @since  unknown
-     *
      */
     public function deleteUser($id = null)
     {
@@ -432,14 +402,11 @@ class User extends DAO
     /**
      * Update users' description
      *
-     * @access public
-     *
      * @param int    $id
      * @param string $locale
      * @param string $info
      *
      * @return bool
-     * @since  unknown
      */
     public function updateDescription($id, $locale, $info)
     {
@@ -468,12 +435,9 @@ class User extends DAO
     /**
      * Check if a description exists
      *
-     * @access private
-     *
      * @param array $conditions
      *
      * @return bool
-     * @since  unknown
      */
     private function existDescription($conditions)
     {
@@ -492,14 +456,11 @@ class User extends DAO
     /**
      * Insert users' description
      *
-     * @access private
-     *
      * @param int    $id
      * @param string $locale
      * @param string $info
      *
      * @return bool
-     * @since  unknown
      */
     private function insertDescription($id, $locale, $info)
     {
@@ -518,8 +479,6 @@ class User extends DAO
 
     /**
      * Return list of users
-     *
-     * @access public
      *
      * @param int    $start
      * @param int    $end
@@ -618,8 +577,6 @@ class User extends DAO
     /**
      * Return list of users
      *
-     * @access public
-     *
      * @param int    $start
      * @param int    $end
      * @param string $order_column
@@ -642,8 +599,6 @@ class User extends DAO
 
     /**
      * Return list of users by email
-     *
-     * @access public
      *
      * @param int    $start
      * @param int    $end
@@ -723,13 +678,10 @@ class User extends DAO
     /**
      * Increase number of items, given a user id
      *
-     * @access public
-     *
      * @param int $id    user id
      * @param int $items number of items to add (default 1)
      *
      * @return bool|\DBRecordsetClass number of affected rows, id error occurred return false
-     * @since  unknown
      */
     public function increaseNumItems($id, $items = 1)
     {
@@ -753,12 +705,9 @@ class User extends DAO
     /**
      * Decrease number of items, given a user id
      *
-     * @access public
-     *
      * @param int $id user id
      *
      * @return bool|\DBRecordsetClass number of affected rows, id error occurred return false
-     * @since  unknown
      */
     public function decreaseNumItems($id)
     {

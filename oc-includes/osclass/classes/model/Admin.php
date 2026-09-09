@@ -17,7 +17,6 @@
  *
  * @package    Shopclass
  * @subpackage Model
- * @since      unknown
  */
 class Admin extends DAO
 {
@@ -25,8 +24,6 @@ class Admin extends DAO
      * It references to self object: Admin.
      * It is used as a singleton
      *
-     * @access private
-     * @since  unknown
      * @var Admin
      */
     private static $instance;
@@ -108,13 +105,9 @@ class Admin extends DAO
      * Searches for admin information, given an email address.
      * If email not exist return false.
      *
-     * @access public
-     *
      * @param string $email
      *
      * @return array|bool
-     * @since  unknown
-     *
      */
     public function findByEmail($email)
     {
@@ -135,14 +128,10 @@ class Admin extends DAO
      * Searches for admin information, given a username and password
      * If credential don't match return false.
      *
-     * @access public
-     *
      * @param string $userName
      * @param string $password
      *
      * @return array|bool
-     * @since  unknown
-     *
      */
     public function findByCredentials($userName, $password)
     {
@@ -158,13 +147,9 @@ class Admin extends DAO
      * Searches for admin information, given a username.
      * If admin not exist return false.
      *
-     * @access public
-     *
      * @param string $username
      *
      * @return array|bool
-     * @since  unknown
-     *
      */
     public function findByUsername($username)
     {
@@ -185,14 +170,10 @@ class Admin extends DAO
      * Searches for admin information, given a admin id and secret.
      * If credential don't match return false.
      *
-     * @access public
-     *
      * @param integer $id
      * @param string  $secret
      *
      * @return array|bool
-     * @since  unknown
-     *
      */
     public function findByIdSecret($id, $secret)
     {
@@ -216,14 +197,10 @@ class Admin extends DAO
      * Searches for admin information, given a admin id and password.
      * If credential don't match return false.
      *
-     * @access public
-     *
      * @param integer $id
      * @param string  $password
      *
      * @return array|bool
-     * @since  unknown
-     *
      */
     public function findByIdPassword($id, $password)
     {
@@ -245,8 +222,6 @@ class Admin extends DAO
 
     /**
      * Perform a batch delete (for more than one admin ID)
-     *
-     * @access public
      *
      * @param array $id
      *

@@ -47,13 +47,9 @@ class Widget extends DAO
     }
 
     /**
-     *
-     * @access public
-     *
      * @param string $location
      *
      * @return array
-     * @since  unknown
      */
     public function findByLocation($location)
     {
@@ -149,9 +145,6 @@ class Widget extends DAO
     }
 
     /**
-     *
-     * @access public
-     *
      * @param string $description
      *
      * @return array

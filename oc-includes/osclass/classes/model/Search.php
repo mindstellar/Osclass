@@ -149,13 +149,9 @@ class Search extends DAO
     /**
      * Establish the order of the search
      *
-     * @access public
-     *
      * @param string $o_c column
      * @param string $o_d direction
      * @param string $table
-     *
-     * @since  unknown
      */
     public function order($o_c = '', $o_d = 'DESC', $table = null)
     {
@@ -185,13 +181,8 @@ class Search extends DAO
     /**
      * Limit the results of the search
      *
-     * @access public
-     *
      * @param int  $l_i
      * @param null $r_p_p
-     *
-     * @since  unknown
-     *
      */
     public function limit($l_i = 0, $r_p_p = null)
     {
@@ -266,11 +257,7 @@ class Search extends DAO
     /**
      * Add item conditions to the search
      *
-     * @access public
-     *
      * @param mixed $conditions
-     *
-     * @since  unknown
      */
     public function addItemConditions($conditions)
     {
@@ -292,11 +279,7 @@ class Search extends DAO
     /**
      * Add new fields to the search
      *
-     * @access public
-     *
      * @param mixed $fields
-     *
-     * @since  unknown
      */
     public function addField($fields)
     {
@@ -350,11 +333,7 @@ class Search extends DAO
     /**
      * Add conditions to the search
      *
-     * @access public
-     *
      * @param mixed $conditions
-     *
-     * @since  unknown
      */
     public function addConditions($conditions)
     {
@@ -376,8 +355,6 @@ class Search extends DAO
     /**
      * Add locale conditions to the search
      *
-     * @access public
-     *
      * @param array|string $locales
      *
      * @since  3.2
@@ -398,11 +375,7 @@ class Search extends DAO
     /**
      * Add extra table to the search
      *
-     * @access public
-     *
      * @param mixed $tables
-     *
-     * @since  unknown
      */
     public function addTable($tables)
     {
@@ -424,12 +397,7 @@ class Search extends DAO
     /**
      * Add group by to the search
      *
-     * @access public
-     *
      * @param $groupBy
-     *
-     * @since  unknown
-     *
      */
     public function addGroupBy($groupBy)
     {
@@ -439,12 +407,8 @@ class Search extends DAO
     /**
      * Select the page of the search
      *
-     * @access public
-     *
      * @param int  $p page
      * @param null $r_p_p
-     *
-     * @since  unknown
      */
     public function page($p = 0, $r_p_p = null)
     {
@@ -457,11 +421,7 @@ class Search extends DAO
     /**
      * Add city areas to the search
      *
-     * @access public
-     *
      * @param mixed $city_area
-     *
-     * @since  unknown
      */
     public function addCityArea($city_area = array())
     {
@@ -511,11 +471,7 @@ class Search extends DAO
     /**
      * Establish max price
      *
-     * @access public
-     *
      * @param int $price
-     *
-     * @since  unknown
      */
     public function priceMax($price)
     {
@@ -525,12 +481,8 @@ class Search extends DAO
     /**
      * Establish price range
      *
-     * @access public
-     *
      * @param int $price_min
      * @param int $price_max
-     *
-     * @since  unknown
      */
     public function priceRange($price_min = 0, $price_max = 0)
     {
@@ -541,11 +493,7 @@ class Search extends DAO
     /**
      * Establish min price
      *
-     * @access public
-     *
      * @param int $price
-     *
-     * @since  unknown
      */
     public function priceMin($price)
     {
@@ -564,8 +512,6 @@ class Search extends DAO
 
     /**
      * Filter by email
-     *
-     * @access public
      *
      * @param $email
      *
@@ -616,9 +562,6 @@ class Search extends DAO
 
     /**
      * Return number of ads selected
-     *
-     * @access public
-     * @since  unknown
      */
     public function count()
     {
@@ -632,15 +575,11 @@ class Search extends DAO
     /**
      * Perform the search
      *
-     * @access public
-     *
      * @param bool $extended if you want to extend ad's data
      *
      * @param bool $count
      *
      * @return array
-     * @since  unknown
-     *
      */
     public function doSearch($extended = true, $count = true)
     {
@@ -687,15 +626,11 @@ class Search extends DAO
     /**
      * Make the SQL for the search with all the conditions and filters specified
      *
-     * @access private
-     *
      * @param bool $count
      *
      * @param bool $premium
      *
      * @return string
-     * @since  unknown
-     *
      */
     private function makeSQL($count = false, $premium = false)
     {
@@ -1558,11 +1493,7 @@ class Search extends DAO
     /**
      * Limit the results of the search
      *
-     * @access public
-     *
      * @param $r_p_p
-     *
-     * @since  unknown
      */
     public function set_rpp($r_p_p)
     {
@@ -1572,11 +1503,7 @@ class Search extends DAO
     /**
      * Filter by ad with picture or not
      *
-     * @access public
-     *
      * @param bool $pic
-     *
-     * @since  unknown
      */
     public function withPicture($pic = false)
     {
@@ -1586,13 +1513,9 @@ class Search extends DAO
     /**
      * Add categories to the search
      *
-     * @access public
-     *
      * @param mixed $category
      *
      * @return bool
-     * @since  unknown
-     *
      */
     public function addCategory($category = null)
     {
@@ -1623,11 +1546,7 @@ class Search extends DAO
     /**
      * Clear the categories
      *
-     * @access private
-     *
      * @param array $branches
-     *
-     * @since  unknown
      */
     private function pruneBranches($branches = null)
     {
@@ -1646,11 +1565,7 @@ class Search extends DAO
     /**
      * Add countries to the search
      *
-     * @access public
-     *
      * @param mixed $country
-     *
-     * @since  unknown
      */
     public function addCountry($country = array())
     {
@@ -1686,11 +1601,7 @@ class Search extends DAO
     /**
      * Add regions to the search
      *
-     * @access public
-     *
      * @param mixed $region
-     *
-     * @since  unknown
      */
     public function addRegion($region = array())
     {
@@ -1726,11 +1637,7 @@ class Search extends DAO
     /**
      * Add cities to the search
      *
-     * @access public
-     *
      * @param array|string|int $city
-     *
-     * @since  unknown
      */
     public function addCity($city = array())
     {
@@ -1766,11 +1673,7 @@ class Search extends DAO
     /**
      * Return ads from specified users
      *
-     * @access public
-     *
      * @param array|string|int $id
-     *
-     * @since  unknown
      */
     public function fromUser($id = null)
     {
@@ -1812,10 +1715,8 @@ class Search extends DAO
      * @param string $order
      *
      * @return array
-     * @since  unknown
      *
      * @deprecated
-     * @access public
      */
     public function listCountries($zero = '>', $order = 'items DESC')
     {
@@ -1833,10 +1734,8 @@ class Search extends DAO
      * @param string $order
      *
      * @return array
-     * @since  unknown
      *
      * @deprecated
-     * @access public
      */
     public function listRegions($country = '%%%%', $zero = '>', $order = 'items DESC')
     {
@@ -1855,10 +1754,8 @@ class Search extends DAO
      * @param string $order
      *
      * @return array
-     * @since  unknown
      *
      * @deprecated
-     * @access public
      */
     public function listCities($region = null, $zero = '>', $order = 'city_name ASC')
     {
@@ -1868,15 +1765,11 @@ class Search extends DAO
     /**
      * Returns number of ads from each city area
      *
-     * @access public
-     *
      * @param string $city
      * @param string $zero if you want to include locations with zero results
      * @param string $order
      *
      * @return array
-     * @since  unknown
-     *
      */
     public function listCityAreas($city = null, $zero = '>', $order = 'items DESC')
     {
@@ -2250,8 +2143,6 @@ class Search extends DAO
     /**
      * Filter by search pattern
      *
-     * @access public
-     *
      * @param string $pattern
      *
      * @since  2.4
@@ -2425,8 +2316,6 @@ class Search extends DAO
 
     /**
      * Filter by premium ad status
-     *
-     * @access public
      *
      * @param bool $premium
      *

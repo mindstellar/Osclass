@@ -52,13 +52,9 @@ class LatestSearches extends DAO
     /**
      * Get last searches, given a limit.
      *
-     * @access public
-     *
      * @param int $limit
      *
      * @return array|bool
-     * @since  unknown
-     *
      */
     public function getSearches($limit = 20)
     {
@@ -89,13 +85,9 @@ class LatestSearches extends DAO
     /**
      * Get last searches, given since time.
      *
-     * @access public
-     *
      * @param int $time
      *
      * @return array|bool
-     * @since  unknown
-     *
      */
     public function getSearchesByDate($time = null, $limit = 20)
     {
@@ -128,12 +120,9 @@ class LatestSearches extends DAO
     /**
      * Purge n last searches.
      *
-     * @access public
-     *
      * @param int $number
      *
      * @return bool
-     * @since  unknown
      */
     public function purgeNumber($number = null)
     {
@@ -169,12 +158,9 @@ class LatestSearches extends DAO
     /**
      * Purge all searches by date.
      *
-     * @access public
-     *
      * @param string $date
      *
      * @return bool
-     * @since  unknown
      */
     public function purgeDate($date = null)
     {

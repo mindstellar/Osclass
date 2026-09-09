@@ -58,8 +58,6 @@ class Log extends DAO
     /**
      * Insert a log row.
      *
-     * @access public
-     *
      * @param string  $section
      * @param string  $action
      * @param integer $id
@@ -68,8 +66,6 @@ class Log extends DAO
      * @param         $whoId
      *
      * @return boolean
-     * @since  unknown
-     *
      */
     public function insertLog($section, $action, $id, $data, $who, $whoId)
     {

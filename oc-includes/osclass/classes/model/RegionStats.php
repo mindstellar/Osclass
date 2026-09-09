@@ -25,7 +25,6 @@ class RegionStats extends DAO
      * It references to self object: RegionStats.
      * It is used as a singleton
      *
-     * @access private
      * @since  2.4
      * @var RegionStats
      */
@@ -34,7 +33,6 @@ class RegionStats extends DAO
     /**
      * Set data related to t_region_stats table
      *
-     * @access public
      * @since  2.4
      */
     public function __construct()
@@ -49,7 +47,6 @@ class RegionStats extends DAO
      * It creates a new RegionStats object class if it has been created
      * before, it return the previous object
      *
-     * @access public
      * @return RegionStats
      * @since  2.4
      */
@@ -64,8 +61,6 @@ class RegionStats extends DAO
 
     /**
      * Increase number of region items, given a region id
-     *
-     * @access public
      *
      * @param int $regionId Region id
      *
@@ -106,8 +101,6 @@ class RegionStats extends DAO
 
     /**
      * Decrease number of region items, given a region id
-     *
-     * @access public
      *
      * @param int $regionId Region id
      *
@@ -150,14 +143,11 @@ class RegionStats extends DAO
     /**
      * Set i_num_items, given a region id
      *
-     * @access public
-     *
      * @param int $regionID
      * @param int $numItems
      *
      * @return bool True once the counter is written, false when the write fails
      * @since  2.4
-     *
      */
     public function setNumItems($regionID, $numItems)
     {
@@ -182,8 +172,6 @@ class RegionStats extends DAO
     /**
      * Find stats by region id
      *
-     * @access public
-     *
      * @param int $regionId region id
      *
      * @return array
@@ -201,15 +189,12 @@ class RegionStats extends DAO
      * and ordered by region_name or items counter.
      * $order = 'region_name ASC' OR $oder = 'items DESC'
      *
-     * @access public
-     *
      * @param string $country
      * @param string $zero
      * @param string $order
      *
      * @return array
      * @since  2.4
-     *
      */
     public function listRegions($country = '%%%%', $zero = '>', $order = 'region_name ASC')
     {

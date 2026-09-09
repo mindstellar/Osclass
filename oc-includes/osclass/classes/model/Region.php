@@ -17,7 +17,6 @@
  *
  * @package    Shopclass
  * @subpackage Model
- * @since      unknown
  */
 class Region extends DAO
 {
@@ -53,13 +52,10 @@ class Region extends DAO
     /**
      * Gets all regions from a country
      *
-     * @access     public
-     *
      * @param $countryId
      *
      * @return array
      * @see        Region::findByCountry
-     * @since      unknown
      * @deprecated since 2.3
      */
     public function getByCountry($countryId)
@@ -70,12 +66,9 @@ class Region extends DAO
     /**
      * Gets all regions from a country
      *
-     * @access public
-     *
      * @param $countryId
      *
      * @return array
-     * @since  unknown
      */
     public function findByCountry($countryId)
     {
@@ -94,13 +87,10 @@ class Region extends DAO
     /**
      * Find a region by its name and country
      *
-     * @access public
-     *
      * @param string $name
      * @param string $country
      *
      * @return array
-     * @since  unknown
      */
     public function findByName($name, $country = null)
     {
@@ -125,14 +115,10 @@ class Region extends DAO
     /**
      * Function to deal with ajax queries
      *
-     * @access public
-     *
      * @param      $query
      * @param null $country
      *
      * @return array
-     * @since  unknown
-     *
      */
     public function ajax($query, $country = null)
     {
@@ -178,13 +164,10 @@ class Region extends DAO
     /**
      *  Delete a region with its cities and city areas
      *
-     * @access public
-     *
      * @param $pk
      *
      * @return int number of failed deletions or 0 in case of none
      * @since  3.1
-     *
      */
     public function deleteByPrimaryKey($pk)
     {
@@ -230,8 +213,6 @@ class Region extends DAO
     /**
      * Find a location by its slug
      *
-     * @access public
-     *
      * @param $slug
      *
      * @return array
@@ -260,8 +241,6 @@ class Region extends DAO
      * and slugs are renamed upstream constantly. It is unique table-wide, not scoped to
      * a country.
      *
-     * @access public
-     *
      * @param $sourceId
      *
      * @return array
@@ -285,7 +264,6 @@ class Region extends DAO
     /**
      * Find a locations with no slug
      *
-     * @access public
      * @return array
      * @since  3.2.1
      */

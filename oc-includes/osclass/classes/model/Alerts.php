@@ -61,14 +61,10 @@ class Alerts extends DAO
      * Searches for user alerts, given an user id.
      * If user id not exist return empty array.
      *
-     * @access public
-     *
      * @param string $userId
      * @param bool   $unsub
      *
      * @return array
-     * @since  unknown
-     *
      */
     public function findByUser($userId, $unsub = false)
     {
@@ -92,14 +88,10 @@ class Alerts extends DAO
      * Searches for user alerts, given an user id.
      * If user id not exist return empty array.
      *
-     * @access public
-     *
      * @param string $email
      * @param bool   $unsub
      *
      * @return array
-     * @since  unknown
-     *
      */
     public function findByEmail($email, $unsub = false)
     {
@@ -127,14 +119,11 @@ class Alerts extends DAO
      * Searches for alerts, given a type.
      * If type don't match return empty array.
      *
-     * @access public
-     *
      * @param string $type
      * @param bool   $active
      * @param bool   $unsub
      *
      * @return array
-     * @since  unknown
      */
     public function findByType($type, $active = false, $unsub = false)
     {
@@ -160,14 +149,11 @@ class Alerts extends DAO
      * Searches for alerts, given a type group by s_search.
      * If type don't match return empty array.
      *
-     * @access public
-     *
      * @param string $type
      * @param bool   $active
      * @param bool   $unsub
      *
      * @return array
-     * @since  unknown
      */
     public function findByTypeGroup($type, $active = false, $unsub = false)
     {
@@ -204,8 +190,6 @@ class Alerts extends DAO
      * Searches for alerts, given an user and a s_search.
      * If type don't match return empty array.
      *
-     * @access public
-     *
      * @param string $search
      * @param string $user
      * @param bool   $unsub
@@ -213,7 +197,6 @@ class Alerts extends DAO
      * @return array
      *
      * WARNIGN doble where!
-     * @since  unknown
      */
     public function findBySearchAndUser($search, $user, $unsub = false)
     {
@@ -237,8 +220,6 @@ class Alerts extends DAO
      * Searches for alerts, given a type group and a s_search.
      * If type don't match return empty array.
      *
-     * @access public
-     *
      * @param string $search
      * @param string $type
      * @param bool   $unsub
@@ -246,7 +227,6 @@ class Alerts extends DAO
      * @return array
      *
      * WARNIGN doble where!
-     * @since  unknown
      */
     public function findBySearchAndType($search, $type, $unsub = false)
     {
@@ -272,15 +252,12 @@ class Alerts extends DAO
      * Searches for users, given a type group and a s_search.
      * If type don't match return empty array.
      *
-     * @access public
-     *
      * @param string $search
      * @param string $type
      * @param bool   $active
      * @param bool   $unsub
      *
      * @return array
-     * @since  unknown
      */
     public function findUsersBySearchAndType($search, $type, $active = false, $unsub = false)
     {
@@ -307,14 +284,11 @@ class Alerts extends DAO
      * Searches for alerts, given a type group and an user id
      * If type don't match return empty array.
      *
-     * @access public
-     *
      * @param int    $userId
      * @param string $type
      * @param bool   $unsub
      *
      * @return array
-     * @since  unknown
      */
     public function findByUserByType($userId, $type, $unsub = false)
     {
@@ -338,14 +312,11 @@ class Alerts extends DAO
      * Searches for alerts, given a type group and an email
      * If type don't match return empty array.
      *
-     * @access public
-     *
      * @param string $email
      * @param string $type
      * @param bool   $unsub
      *
      * @return array
-     * @since  unknown
      */
     public function findByEmailByType($email, $type, $unsub = false)
     {
@@ -372,8 +343,6 @@ class Alerts extends DAO
     /**
      * Create a new alert
      *
-     * @access public
-     *
      * @param int    $userid
      * @param string $email
      * @param string $alert
@@ -381,7 +350,6 @@ class Alerts extends DAO
      * @param string $type
      *
      * @return bool on success
-     * @since  unknown
      */
     public function createAlert($userid, $email, $alert, $secret, $type = 'DAILY')
     {
@@ -418,12 +386,9 @@ class Alerts extends DAO
     /**
      * Activate an alert
      *
-     * @access public
-     *
      * @param string $id
      *
      * @return mixed false on fail, int of num. of affected rows
-     * @since  unknown
      */
     public function activate($id)
     {
@@ -438,8 +403,6 @@ class Alerts extends DAO
 
     /**
      * Dectivate an alert
-     *
-     * @access public
      *
      * @param string $id
      *
@@ -459,8 +422,6 @@ class Alerts extends DAO
 
     /**
      * Unsub from an alert
-     *
-     * @access public
      *
      * @param string $id
      *
@@ -482,8 +443,6 @@ class Alerts extends DAO
 
     /**
      * Search alerts
-     *
-     * @access public
      *
      * @param int    $start
      * @param int    $end

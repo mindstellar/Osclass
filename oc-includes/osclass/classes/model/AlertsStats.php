@@ -25,7 +25,6 @@ class AlertsStats extends DAO
      * It references to self object: AlertsStats.
      * It is used as a singleton
      *
-     * @access private
      * @since  3.1
      * @var AlertsStats
      */
@@ -46,7 +45,6 @@ class AlertsStats extends DAO
      * It creates a new AlertsStats object class ir if it has been created
      * before, it return the previous object
      *
-     * @access public
      * @return AlertsStats
      * @since  3.1
      */
@@ -61,8 +59,6 @@ class AlertsStats extends DAO
 
     /**
      * Increase the stat column given column name and item id
-     *
-     * @access public
      *
      * @param string $date
      *

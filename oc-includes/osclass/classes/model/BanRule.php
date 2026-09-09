@@ -55,8 +55,6 @@ class BanRule extends DAO
     /**
      * Return list of ban rules
      *
-     * @access public
-     *
      * @param int    $start
      * @param int    $end
      * @param string $order_column
@@ -66,7 +64,6 @@ class BanRule extends DAO
      * @return array
      * @parma  string $name
      * @since  3.1
-     *
      */
     public function search($start = 0, $end = 10, $order_column = 'pk_i_id', $order_direction = 'DESC', $name = '')
     {

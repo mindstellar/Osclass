@@ -25,7 +25,6 @@ class LocationsTmp extends DAO
      * It references to self object: LocationsTmp.
      * It is used as a singleton
      *
-     * @access private
      * @since  2.4
      * @var CountryStats
      */
@@ -45,7 +44,6 @@ class LocationsTmp extends DAO
      * It creates a new LocationsTmp object class if it has been created
      * before, it return the previous object
      *
-     * @access public
      * @return LocationsTmp
      * @since  2.4
      */

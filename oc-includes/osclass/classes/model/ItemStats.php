@@ -29,7 +29,6 @@
  *
  * @package    Shopclass
  * @subpackage Model
- * @since      unknown
  */
 class ItemStats extends DAO
 {
@@ -37,8 +36,6 @@ class ItemStats extends DAO
      * It references to self object: ItemStats.
      * It is used as a singleton
      *
-     * @access private
-     * @since  unknown
      * @var ItemStats
      */
     private static $instance;
@@ -90,9 +87,7 @@ class ItemStats extends DAO
      * It creates a new ItemStats object class ir if it has been created
      * before, it return the previous object
      *
-     * @access public
      * @return ItemStats
-     * @since  unknown
      */
     public static function newInstance()
     {
@@ -106,13 +101,10 @@ class ItemStats extends DAO
     /**
      * Increase the stat column given column name and item id
      *
-     * @access public
-     *
      * @param string $column
      * @param int    $itemId
      *
      * @return bool
-     * @since  unknown
      */
     public function increase($column, $itemId)
     {
@@ -154,8 +146,6 @@ class ItemStats extends DAO
      * category and home page. One statement per listing made that the busiest
      * write on the site; this collapses a page's worth into a single multi-row
      * upsert plus a single rollup upsert, whatever the block size.
-     *
-     * @access public
      *
      * @param string $column
      * @param array  $itemIds
@@ -248,12 +238,9 @@ class ItemStats extends DAO
     /**
      * Insert an empty row into table item stats
      *
-     * @access public
-     *
      * @param int $itemId Item id
      *
      * @return bool
-     * @since  unknown
      */
     public function emptyRow($itemId)
     {
@@ -265,8 +252,6 @@ class ItemStats extends DAO
 
     /**
      * Drop rollup rows older than $date. Backs the retention sweep on cron.
-     *
-     * @access public
      *
      * @param string $date
      *
@@ -290,8 +275,6 @@ class ItemStats extends DAO
 
     /**
      * Return number of views of an item
-     *
-     * @access public
      *
      * @param int $itemId Item id
      *
@@ -330,7 +313,6 @@ class ItemStats extends DAO
     /**
      * Return number of views of an item
      *
-     * @access public
      * @return int
      * @since  2.3.3
      */

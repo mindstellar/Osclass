@@ -17,7 +17,6 @@
  *
  * @package    Shopclass
  * @subpackage Model
- * @since      unknown
  */
 class Country extends DAO
 {
@@ -53,12 +52,9 @@ class Country extends DAO
     /**
      * Find a country by its ISO code
      *
-     * @access public
-     *
      * @param $code
      *
      * @return array
-     * @since  unknown
      */
     public function findByCode($code)
     {
@@ -76,12 +72,9 @@ class Country extends DAO
     /**
      * Find a country by its name
      *
-     * @access public
-     *
      * @param $name
      *
      * @return array
-     * @since  unknown
      */
     public function findByName($name)
     {
@@ -99,9 +92,7 @@ class Country extends DAO
     /**
      * List all the countries
      *
-     * @access public
      * @return array
-     * @since  unknown
      */
     public function listAll()
     {
@@ -119,13 +110,10 @@ class Country extends DAO
     /**
      *  Delete a country with its regions, cities,..
      *
-     * @access public
-     *
      * @param $pk
      *
      * @return int number of failed deletions or 0 in case of none
      * @since  2.4
-     *
      */
     public function deleteByPrimaryKey($pk)
     {
@@ -159,9 +147,7 @@ class Country extends DAO
     /**
      * List names of all the countries. Used for location import.
      *
-     * @access public
      * @return array
-     * @since  unknown
      */
     public function listNames()
     {
@@ -179,12 +165,9 @@ class Country extends DAO
     /**
      * Function that work with the ajax file
      *
-     * @access public
-     *
      * @param $query
      *
      * @return array
-     * @since  unknown
      */
     public function ajax($query)
     {
@@ -215,8 +198,6 @@ class Country extends DAO
     /**
      * Find a location by its slug
      *
-     * @access public
-     *
      * @param $slug
      *
      * @return array
@@ -238,7 +219,6 @@ class Country extends DAO
     /**
      * Find a locations with no slug
      *
-     * @access public
      * @return array
      * @since  3.2.1
      */

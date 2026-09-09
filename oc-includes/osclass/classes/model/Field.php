@@ -17,7 +17,6 @@
  *
  * @package    Shopclass
  * @subpackage Model
- * @since      unknown
  */
 class Field extends DAO
 {
@@ -25,8 +24,6 @@ class Field extends DAO
      * It references to self object: Field.
      * It is used as a singleton
      *
-     * @access private
-     * @since  unknown
      * @var Field
      */
     private static $instance;
@@ -57,9 +54,7 @@ class Field extends DAO
      * It creates a new Field object class ir if it has been created
      * before, it return the previous object
      *
-     * @access public
      * @return Field
-     * @since  unknown
      */
     public static function newInstance()
     {
@@ -73,12 +68,9 @@ class Field extends DAO
     /**
      * Find a field by its id.
      *
-     * @access public
-     *
      * @param int $id
      *
      * @return array Field information. If there's no information, return an empty array.
-     * @since  unknown
      */
     public function findByPrimaryKey($id)
     {
@@ -124,12 +116,9 @@ class Field extends DAO
     /**
      * Delete a field and all information associated with it
      *
-     * @access public
-     *
      * @param int $id
      *
      * @return bool on success
-     * @since  unknown
      */
     public function deleteByPrimaryKey($id)
     {
@@ -178,9 +167,7 @@ class Field extends DAO
     /**
      * Get all the rows from the table $tableName
      *
-     * @access public
      * @return array
-     * @since  unknown
      */
     public function listAll()
     {
@@ -287,12 +274,9 @@ class Field extends DAO
      * (a loose field, via t_meta_categories) or through a group assigned to the
      * category (t_meta_group_categories). De-duplicated by field id and ordered.
      *
-     * @access public
-     *
      * @param int $id
      *
      * @return array Field information. If there's no information, return an empty array.
-     * @since  unknown
      */
     public function findByCategory($id)
     {
@@ -350,13 +334,9 @@ class Field extends DAO
     /**
      * Find a field by its name
      *
-     * @access public
-     *
      * @param mixed $ids
      *
      * @return array Fields' id
-     * @since  unknown
-     *
      */
     public function findIDSearchableByCategories($ids)
     {
@@ -425,14 +405,10 @@ class Field extends DAO
     /**
      * Find fields from a category and an item
      *
-     * @access public
-     *
      * @param $catId
      * @param $itemId
      *
      * @return array Field information. If there's no information, return an empty array.
-     * @since  unknown
-     *
      */
     public function findByCategoryItem($catId, $itemId)
     {
@@ -552,12 +528,9 @@ class Field extends DAO
     /**
      * Find a field by its name
      *
-     * @access public
-     *
      * @param string $name
      *
      * @return array Field information. If there's no information, return an empty array.
-     * @since  unknown
      */
     public function findByName($name)
     {
@@ -607,12 +580,9 @@ class Field extends DAO
     /**
      * Gets which categories are associated with that field
      *
-     * @access public
-     *
      * @param string $id
      *
      * @return array
-     * @since  unknown
      */
     public function categories($id)
     {
@@ -638,8 +608,6 @@ class Field extends DAO
     /**
      * Insert a new field
      *
-     * @access public
-     *
      * @param string $name
      * @param string $type
      * @param string $slug
@@ -648,8 +616,6 @@ class Field extends DAO
      * @param array  $categories
      *
      * @return bool
-     * @since  unknown
-     *
      */
     public function insertField($name, $type, $slug, $required, $options, $categories = null)
     {
@@ -699,12 +665,9 @@ class Field extends DAO
     /**
      * Find a field by its name
      *
-     * @access public
-     *
      * @param string $slug
      *
      * @return array Field information. If there's no information, return an empty array.
-     * @since  unknown
      */
     public function findBySlug($slug)
     {
@@ -723,13 +686,10 @@ class Field extends DAO
     /**
      * Save the categories linked to a field
      *
-     * @access public
-     *
      * @param int   $id
      * @param array $categories
      *
      * @return bool
-     * @since  unknown
      */
     public function insertCategories($id, $categories = null)
     {
@@ -760,12 +720,9 @@ class Field extends DAO
     /**
      * Removes categories from a field
      *
-     * @access public
-     *
      * @param int $id
      *
      * @return bool on success
-     * @since  unknown
      */
     public function cleanCategoriesFromField($id)
     {
@@ -788,14 +745,11 @@ class Field extends DAO
     /**
      * Update a field value
      *
-     * @access public
-     *
      * @param int          $itemId
      * @param int          $field
      * @param string|array $value
      *
      * @return bool|\DBRecordsetClass false on fail, int of num. of affected rows
-     * @since  unknown
      */
     public function replace($itemId, $field, $value)
     {

@@ -56,23 +56,18 @@ class DAO
     /**
      * Table name
      *
-     * @access private
-     * @since  unknown
      * @var string
      */
     public $tableName;
     /**
      * Table prefix
      *
-     * @access private
-     * @since  unknown
      * @var string
      */
     public $tablePrefix;
     /**
      * Primary key of the table
      *
-     * @access private
      * @since  2.3
      * @var string
      */
@@ -80,7 +75,6 @@ class DAO
     /**
      * Fields of the table
      *
-     * @access private
      * @since  2.3
      * @var array
      */
@@ -127,12 +121,9 @@ class DAO
     /**
      * Get the result match of the primary key passed by parameter
      *
-     * @access public
-     *
      * @param string $value
      *
      * @return mixed If the result has been found, it return the array row. If not, it returns false
-     * @since  unknown
      */
     public function findByPrimaryKey($value)
     {
@@ -152,7 +143,6 @@ class DAO
     /**
      * Check whether a row with the given primary key value exists
      *
-     * @access public
      * @param int|string $value
      * @return bool True if a matching row exists, false otherwise
      *
@@ -173,7 +163,6 @@ class DAO
     /**
      * Check whether at least one row matches the given conditions
      *
-     * @access public
      * @param array $where Array with keys (database field) and values
      * @return bool True if a matching row exists, false otherwise
      */
@@ -198,9 +187,7 @@ class DAO
     /**
      * Get table name
      *
-     * @access public
      * @return string
-     * @since  unknown
      */
     public function getTableName()
     {
@@ -210,11 +197,7 @@ class DAO
     /**
      * Set table name, adding the DB_TABLE_PREFIX at the beginning
      *
-     * @access private
-     *
      * @param string $table
-     *
-     * @since  unknown
      */
     public function setTableName($table)
     {
@@ -224,9 +207,7 @@ class DAO
     /**
      * Get primary key string
      *
-     * @access public
      * @return string
-     * @since  unknown
      */
     public function getPrimaryKey()
     {
@@ -236,11 +217,7 @@ class DAO
     /**
      * Set primary key string
      *
-     * @access private
-     *
      * @param string $key
-     *
-     * @since  unknown
      */
     public function setPrimaryKey($key)
     {
@@ -250,14 +227,11 @@ class DAO
     /**
      * Update row by primary key
      *
-     * @access public
-     *
      * @param array  $values Array with keys (database field) and values
      * @param string $key    Primary key to be updated
      *
      * @return mixed It return the number of affected rows if the update has been
      * correct or false if nothing has been modified
-     * @since  unknown
      */
     public function updateByPrimaryKey($values, $key)
     {
@@ -275,15 +249,11 @@ class DAO
      * An empty $where updates every row, which is what this has always done --
      * only delete() refuses an unbounded write.
      *
-     * @access public
-     *
      * @param string|array $values Array with keys (database field) and values
      * @param array        $where
      *
      * @return mixed It returns the number of affected rows if the update has been
      * correct or false if an error happended
-     * @since  unknown
-     *
      */
     public function update($values, $where)
     {
@@ -322,8 +292,6 @@ class DAO
     /**
      * Check if the keys of the array exist in the $fields array
      *
-     * @access private
-     *
      * @param array $aKey
      *
      * @return boolean
@@ -343,7 +311,6 @@ class DAO
     /**
      * Get fields array
      *
-     * @access public
      * @return array
      * @since  2.3
      */
@@ -354,8 +321,6 @@ class DAO
 
     /**
      * Set fields array
-     *
-     * @access private
      *
      * @param array $fields
      *
@@ -369,13 +334,10 @@ class DAO
     /**
      * Delete the result match from the primary key passed by parameter
      *
-     * @access public
-     *
      * @param string $value
      *
      * @return mixed It return the number of affected rows if the delete has been
      * correct or false if nothing has been modified
-     * @since  unknown
      */
     public function deleteByPrimaryKey($value)
     {
@@ -392,13 +354,10 @@ class DAO
      *
      * An empty $where is refused rather than deleting every row.
      *
-     * @access public
-     *
      * @param array $where
      *
      * @return bool|int It returns the number of affected rows if the delete has been
      * correct or false if an error happended
-     * @since  unknown
      */
     public function delete($where)
     {
@@ -418,9 +377,7 @@ class DAO
     /**
      * Get all the rows from the table $tableName
      *
-     * @access public
      * @return array
-     * @since  unknown
      */
     public function listAll()
     {
@@ -432,12 +389,9 @@ class DAO
     /**
      * Basic insert
      *
-     * @access public
-     *
      * @param array $values
      *
      * @return boolean
-     * @since  unknown
      */
     public function insert($values)
     {
@@ -504,7 +458,6 @@ class DAO
     /**
      * Get table prefix
      *
-     * @access public
      * @return string
      * @since  2.3
      */
@@ -516,7 +469,6 @@ class DAO
     /**
      * Returns the last error code for the most recent mysqli function call
      *
-     * @access public
      * @return int
      * @since  2.3
      */
@@ -528,7 +480,6 @@ class DAO
     /**
      * Returns a string description of the last error for the most recent MySQLi function call
      *
-     * @access public
      * @return string
      * @since  2.3
      */
@@ -543,9 +494,7 @@ class DAO
      * The count comes back as a string, the shape the driver has always
      * returned; a failed query yields int 0.
      *
-     * @access public
      * @return int|string
-     * @since  unknown
      */
     public function count()
     {

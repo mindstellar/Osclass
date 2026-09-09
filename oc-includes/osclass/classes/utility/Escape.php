@@ -19,8 +19,6 @@ class Escape
     /**
      * Escape single quotes, double quotes, <, >, & and line endings
      *
-     * @access  public
-     *
      * @param string $str
      *
      * @return string

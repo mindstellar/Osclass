@@ -652,7 +652,6 @@ function osc_has_premium_comments()
 /**
  * Gets number of premiums
  *
- * @access private
  * @return int
  */
 function osc_priv_count_premiums()

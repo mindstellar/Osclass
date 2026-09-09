@@ -17,7 +17,6 @@
  *
  * @package    Shopclass
  * @subpackage Model
- * @since      unknown
  */
 class City extends DAO
 {
@@ -25,8 +24,6 @@ class City extends DAO
      * It references to self object: City.
      * It is used as a singleton
      *
-     * @access private
-     * @since  unknown
      * @var City
      */
     private static $instance;
@@ -46,9 +43,7 @@ class City extends DAO
      * It creates a new City object class ir if it has been created
      * before, it return the previous object
      *
-     * @access public
      * @return City
-     * @since  unknown
      */
     public static function newInstance()
     {
@@ -62,13 +57,10 @@ class City extends DAO
     /**
      * Get the cities having part of the city name and region (it can be null)
      *
-     * @access public
-     *
      * @param string   $query    The beginning of the city name to look for
      * @param int|null $regionId Region id
      *
      * @return array If there's an error or 0 results, it returns an empty array
-     * @since  unknown
      */
     public function ajax($query, $regionId = null)
     {
@@ -105,13 +97,10 @@ class City extends DAO
     /**
      * Get the cities from an specific region id. It's deprecated, use findByRegion
      *
-     * @access     public
-     *
      * @param int $regionId Region id
      *
      * @return array If there's an error or 0 results, it returns an empty array
      * @see        City::findByRegion
-     * @since      unknown
      * @deprecated deprecated since 2.3
      */
     public function getByRegion($regionId)
@@ -121,8 +110,6 @@ class City extends DAO
 
     /**
      * Get the cities from an specific region id
-     *
-     * @access public
      *
      * @param int $regionId Region id
      *
@@ -147,14 +134,10 @@ class City extends DAO
     /**
      * Get the citiy by its name and region
      *
-     * @access public
-     *
      * @param     $cityName
      * @param int $regionId
      *
      * @return array
-     * @since  unknown
-     *
      */
     public function findByName($cityName, $regionId = null)
     {
@@ -182,9 +165,7 @@ class City extends DAO
     /**
      * Get all the rows from the table t_city
      *
-     * @access public
      * @return array
-     * @since  unknown
      */
     public function listAll()
     {
@@ -203,13 +184,10 @@ class City extends DAO
     /**
      *  Delete a city with its city areas
      *
-     * @access public
-     *
      * @param $pk
      *
      * @return int number of failed deletions or 0 in case of none
      * @since  3.1
-     *
      */
     public function deleteByPrimaryKey($pk)
     {
@@ -253,8 +231,6 @@ class City extends DAO
     /**
      * Find a location by its slug
      *
-     * @access public
-     *
      * @param $slug
      *
      * @return array
@@ -285,8 +261,6 @@ class City extends DAO
      * slugs are renamed upstream constantly. It is unique table-wide, not scoped to a
      * region.
      *
-     * @access public
-     *
      * @param $sourceId
      *
      * @return array
@@ -312,7 +286,6 @@ class City extends DAO
     /**
      * Find a locations with no slug
      *
-     * @access public
      * @return array
      * @since  3.2.1
      */

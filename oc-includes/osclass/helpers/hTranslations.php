@@ -26,8 +26,6 @@
  * @param string $domain
  *
  * @return string
- * @since unknown
- *
  */
 function __($key, $domain = 'core')
 {
@@ -42,9 +40,6 @@ function __($key, $domain = 'core')
  *
  * @param string $key
  * @param string $domain
- *
- * @since unknown
- *
  */
 function _e($key, $domain = 'core')
 {
@@ -57,8 +52,6 @@ function _e($key, $domain = 'core')
  * @param string $key
  *
  * @return string
- * @since unknown
- *
  */
 function _m($key)
 {

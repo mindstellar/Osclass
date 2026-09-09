@@ -59,14 +59,10 @@ class Page extends DAO
     /**
      * Find a page by order.
      *
-     * @access public
-     *
      * @param      $order
      * @param null $locale
      *
      * @return array It returns page fields. If it has no results, it returns an empty array.
-     * @since  unknown
-     *
      */
     public function findByOrder($order, $locale = null)
     {
@@ -89,13 +85,10 @@ class Page extends DAO
     /**
      * An array with data of some page, returns the title and description in every language available
      *
-     * @access public
-     *
      * @param array $aPage
      * @param null  $locale
      *
      * @return array Page information, title and description in every language available
-     * @since  unknown
      */
     public function extendDescription($aPage, $locale = null)
     {
@@ -193,12 +186,9 @@ class Page extends DAO
     /**
      * Delete a page by internal name.
      *
-     * @access public
-     *
      * @param string $intName Page internal name which is going to be deleted
      *
      * @return bool True on successful removal, false on failure
-     * @since  unknown
      */
     public function deleteByInternalName($intName)
     {
@@ -210,13 +200,10 @@ class Page extends DAO
     /**
      * Find a page by internal name.
      *
-     * @access public
-     *
      * @param string $intName Internal name of the page to find.
      * @param string $locale  Locale string.
      *
      * @return array It returns page fields. If it has no results, it returns an empty array.
-     * @since  unknown
      */
     public function findByInternalName($intName, $locale = null)
     {
@@ -238,13 +225,10 @@ class Page extends DAO
     /**
      * Delete a page by id number.
      *
-     * @access public
-     *
      * @param int $id Page id which is going to be deleted
      *
      * @return bool|int @return mixed It return the number of affected rows if the delete has been
      *                correct or false if nothing has been modified
-     * @since  unknown
      */
     public function deleteByPrimaryKey($id)
     {
@@ -283,13 +267,10 @@ class Page extends DAO
     /**
      * Find a page by page id.
      *
-     * @access public
-     *
      * @param int    $id     Page id.
      * @param string $locale By default is null but you can specify locale code.
      *
      * @return array Page information. If there's no information, return an empty array.
-     * @since  unknown
      */
     public function findByPrimaryKey($id, $locale = null)
     {
@@ -326,13 +307,9 @@ class Page extends DAO
     /**
      * Order pages from $order
      *
-     * @access private
-     *
      * @param int $order
      *
      * @return int|mixed
-     * @since  unknown
-     *
      */
     private function reOrderPages($order)
     {
@@ -358,8 +335,6 @@ class Page extends DAO
     /**
      * Get all the pages with the parameters you choose.
      *
-     * @access public
-     *
      * @param int   $indelible true if the page is indelible
      * @param null   $b_link
      * @param string $locale
@@ -368,8 +343,6 @@ class Page extends DAO
      *
      * @return array Return all the pages that have been found with the criteria selected. If there's no pages, the
      *                          result is an empty array.
-     * @since  unknown
-     *
      */
     public function listAll($indelible = null, $b_link = null, $locale = null, $start = null, $limit = null)
     {
@@ -413,8 +386,6 @@ class Page extends DAO
     /**
      * Return number of all pages, or only number of indelible pages
      *
-     * @access public
-     *
      * @param int $indelible
      *
      * @return int
@@ -439,13 +410,10 @@ class Page extends DAO
     /**
      * Insert a new page. You have to pass all the parameters
      *
-     * @access public
-     *
      * @param array $aFields            Fields to be inserted in pages table
      * @param array $aFieldsDescription An array with the titles and descriptions in every language.
      *
      * @return bool True if the insert has been done well and false if not.
-     * @since  unknown
      */
     public function insert($aFields, $aFieldsDescription = null)
     {
@@ -491,15 +459,12 @@ class Page extends DAO
     /**
      * Insert the content (title and description) of a page.
      *
-     * @access private
-     *
      * @param int    $id     Id of the page, it would be the foreign key
      * @param string $locale Locale code of the language
      * @param string $title  Text to be inserted in s_title
      * @param string $text   Text to be inserted in s_text
      *
      * @return bool True if the insert has been done well and false if not.
-     * @since  unknown
      */
     private function insertDescription($id, $locale, $title, $text)
     {
@@ -521,13 +486,10 @@ class Page extends DAO
     /**
      * Find previous page
      *
-     * @access public
-     *
      * @param int $order
      *
      * @return array
      * @since  2.4
-     *
      */
     public function findPrevPage($order)
     {
@@ -551,13 +513,10 @@ class Page extends DAO
     /**
      * Find next page
      *
-     * @access public
-     *
      * @param int $order
      *
      * @return array
      * @since  2.4
-     *
      */
     public function findNextPage($order)
     {
@@ -581,15 +540,12 @@ class Page extends DAO
     /**
      * Update the content (title and description) of a page
      *
-     * @access public
-     *
      * @param int    $id     Id of the page id is going to be modified
      * @param string $locale Locale code of the language
      * @param string $title  Text to be updated in s_title
      * @param string $text   Text to be updated in s_text
      *
      * @return int Number of affected rows.
-     * @since  unknown
      */
     public function updateDescription($id, $locale, $title, $text)
     {
@@ -613,12 +569,9 @@ class Page extends DAO
     /**
      * Check if depending the conditions, the row exists in de DB.
      *
-     * @access public
-     *
      * @param array $conditions
      *
      * @return bool Return true if exists and false if not.
-     * @since  unknown
      */
     public function existDescription($conditions)
     {
@@ -633,13 +586,10 @@ class Page extends DAO
     /**
      * It change the internal name of a page. Here you don't check if in indelible or not the page.
      *
-     * @access public
-     *
      * @param int    $id      The id of the page to be changed.
      * @param string $intName The new internal name.
      *
      * @return int Number of affected rows.
-     * @since  unknown
      */
     public function updateInternalName($id, $intName)
     {
@@ -659,13 +609,10 @@ class Page extends DAO
     /**
      * It changes the b_link of a page. Here you don't check if in indelible or not the page.
      *
-     * @access public
-     *
      * @param int    $id    The id of the page to be changed.
      * @param string $bLink The show link status.
      *
      * @return int Number of affected rows.
-     * @since  unknown
      */
     public function updateLink($id, $bLink)
     {
@@ -684,8 +631,6 @@ class Page extends DAO
 
     /**
      * It change the meta field of a page.
-     *
-     * @access public
      *
      * @param int    $id   The id of the page to be changed.
      * @param string $meta The meta field
@@ -711,12 +656,9 @@ class Page extends DAO
     /**
      * Check if a page id is indelible
      *
-     * @access public
-     *
      * @param int $id Page id
      *
      * @return true if it's indelible, false in case not
-     * @since  unknown
      */
     public function isIndelible($id)
     {
@@ -728,13 +670,10 @@ class Page extends DAO
     /**
      * Check if Internal Name exists with another id
      *
-     * @access public
-     *
      * @param int    $id           page id
      * @param string $internalName page internal name
      *
      * @return true if internal name exists, false if not
-     * @since  unknown
      */
     public function internalNameExists($id, $internalName)
     {

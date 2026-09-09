@@ -17,7 +17,6 @@
  *
  * @package    Shopclass
  * @subpackage Model
- * @since      unknown
  */
 class ItemResource extends DAO
 {
@@ -25,8 +24,6 @@ class ItemResource extends DAO
      * It references to self object: ItemResource.
      * It is used as a singleton
      *
-     * @access private
-     * @since  unknown
      * @var ItemResource
      */
     private static $instance;
@@ -46,9 +43,7 @@ class ItemResource extends DAO
      * It creates a new ItemResource object class ir if it has been created
      * before, it return the previous object
      *
-     * @access public
      * @return ItemResource
-     * @since  unknown
      */
     public static function newInstance()
     {
@@ -62,9 +57,7 @@ class ItemResource extends DAO
     /**
      * Get all resources
      *
-     * @access public
      * @return array of resources
-     * @since  unknown
      */
     public function getAllResources()
     {
@@ -87,9 +80,7 @@ class ItemResource extends DAO
     /**
      * Return table item name
      *
-     * @access public
      * @return string table name
-     * @since  unknown
      */
     public function getTableItemName()
     {
@@ -99,14 +90,11 @@ class ItemResource extends DAO
     /**
      * Get all resources belong to an item given its id
      *
-     * @access public
-     *
      * @param int $itemId Item id
      *
      * @return array of resources
      *
      * @since  2.3.7
-     *
      */
     public function getAllResourcesFromItem($itemId)
     {
@@ -179,12 +167,9 @@ class ItemResource extends DAO
     /**
      * Get first resource belong to an item given it id
      *
-     * @access public
-     *
      * @param int $itemId Item id
      *
      * @return array resource
-     * @since  unknown
      */
     public function getResource($itemId)
     {
@@ -221,13 +206,10 @@ class ItemResource extends DAO
     /**
      * Check if resource id and name exist
      *
-     * @access public
-     *
      * @param int    $resourceId
      * @param string $code
      *
      * @return bool
-     * @since  unknown
      */
     public function existResource($resourceId, $code)
     {
@@ -255,12 +237,9 @@ class ItemResource extends DAO
     /**
      * Count resouces belong to item given its id
      *
-     * @access public
-     *
      * @param int $itemId Item id
      *
      * @return int
-     * @since  unknown
      */
     public function countResources($itemId = null)
     {
@@ -283,8 +262,6 @@ class ItemResource extends DAO
      * Get resources, if $itemId is set return resources belong to an item given its id,
      * can be filtered by $start/$end and ordered by column.
      *
-     * @access public
-     *
      * @param int    $itemId Item id
      * @param int    $start  beginig
      * @param int    $length ending
@@ -292,7 +269,6 @@ class ItemResource extends DAO
      * @param string $type   order type [DESC|ASC]
      *
      * @return array of resources
-     * @since  unknown
      */
     public function getResources($itemId = null, $start = 0, $length = 10, $order = 'r.pk_i_id', $type = 'DESC')
     {
@@ -448,9 +424,7 @@ class ItemResource extends DAO
     /**
      * Return table description name
      *
-     * @access public
      * @return string table description name
-     * @since  unknown
      */
     public function getTableItemDescription()
     {
