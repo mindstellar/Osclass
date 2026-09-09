@@ -26,6 +26,9 @@ class CAdminUsers extends AdminSecBaseModel
     //specific for this class
     private $userManager;
 
+    /**
+     * Take the user manager for this request.
+     */
     public function __construct()
     {
         parent::__construct();
@@ -36,6 +39,13 @@ class CAdminUsers extends AdminSecBaseModel
     }
 
     //Business Layer...
+
+    /**
+     * Dispatch the requested users action: create, edit and their saves, the activate,
+     * enable and delete toggles, alerts, ban rules, user settings and login-as-user.
+     *
+     * @return void
+     */
     public function doModel()
     {
         parent::doModel();

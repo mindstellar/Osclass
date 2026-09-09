@@ -28,6 +28,10 @@ define('IS_AJAX', true);
  */
 class CAdminAjax extends AdminSecBaseModel
 {
+    /**
+     * Mark the request as ajax and reduce a moderator to the handful of actions their
+     * role may reach.
+     */
     public function __construct()
     {
         parent::__construct();
@@ -40,6 +44,13 @@ class CAdminAjax extends AdminSecBaseModel
     }
 
     //Business Layer...
+
+    /**
+     * Dispatch the requested ajax action and emit its JSON, then drop the session's
+     * kept form state.
+     *
+     * @return void
+     */
     public function doModel()
     {
         //specific things for this class
@@ -1213,16 +1224,37 @@ class CAdminAjax extends AdminSecBaseModel
         return in_array($type, array('plugin', 'theme'), true) ? $type : null;
     }
 
+    /**
+     * The cached catalog for the requested package kind.
+     *
+     * @param string $type 'theme', otherwise plugins
+     *
+     * @return Catalog
+     */
     private static function marketCatalog($type)
     {
         return $type === 'theme' ? Catalog::forThemes() : Catalog::forPlugins();
     }
 
+    /**
+     * The installed/available package index for the requested package kind.
+     *
+     * @param string $type 'theme', otherwise plugins
+     *
+     * @return PackageIndex
+     */
     private static function marketPackageIndex($type)
     {
         return $type === 'theme' ? PackageIndex::forThemes() : PackageIndex::forPlugins();
     }
 
+    /**
+     * The installer for the requested package kind.
+     *
+     * @param string $type 'theme', otherwise plugins
+     *
+     * @return Installer
+     */
     private static function marketInstaller($type)
     {
         return $type === 'theme' ? Installer::forThemes() : Installer::forPlugins();
@@ -1237,7 +1269,9 @@ class CAdminAjax extends AdminSecBaseModel
      * plugin's leftovers, an upgrade interrupted half way -- and the site owner is
      * better off knowing that happened than having it fixed silently.
      *
-     * @param array $repairs statements the repair pass applied
+     * @param array<int,string> $repairs statements the repair pass applied
+     *
+     * @return void
      */
     private function flashSchemaRepairs($repairs)
     {
@@ -1457,10 +1491,10 @@ class CAdminAjax extends AdminSecBaseModel
      * the host allowlist on every read -- both happen here, on the response path, rather than
      * trusting whatever is already sitting in the cache.
      *
-     * @param string $slug
-     * @param array  $raw  Catalog::detail()'s sanitised (but not description-purified) array
+     * @param string              $slug
+     * @param array<string,mixed> $raw  Catalog::detail()'s sanitised (but not description-purified) array
      *
-     * @return array
+     * @return array<string,mixed>
      */
     private static function marketBuildDetail($slug, array $raw)
     {
@@ -1484,7 +1518,7 @@ class CAdminAjax extends AdminSecBaseModel
      * in, so a host that was allowed when this slug was cached and is not allowed today (or a
      * cache entry that predates a stricter policy) still can't reach the dialog's DOM.
      *
-     * @param array $raw
+     * @param array<string,mixed> $raw
      *
      * @return array<int, array{src:string, caption:string}>
      */
@@ -1518,9 +1552,9 @@ class CAdminAjax extends AdminSecBaseModel
      * `updates.json` and this detail payload) does not carry the catalog's `published_at`
      * field through, so there is nothing to surface here without a `Catalog.php` change.
      *
-     * @param array $raw
+     * @param array<string,mixed> $raw
      *
-     * @return array
+     * @return array<int,array<string,mixed>>
      */
     private static function marketSanitizeVersions(array $raw)
     {
@@ -1567,7 +1601,7 @@ class CAdminAjax extends AdminSecBaseModel
      * is derived from the issue tracker URL instead: a GitHub issue tracker always lives at
      * "<repo>/issues".
      *
-     * @param array $raw
+     * @param array<string,mixed> $raw
      *
      * @return array{homepage:?string, repo:?string, issues:?string, docs:?string}
      */
@@ -1617,7 +1651,6 @@ class CAdminAjax extends AdminSecBaseModel
      * every `<img>` that survives purification is re-checked against the same package host
      * allowlist that governs `screenshots[].src` and the support links (marketDropUnallowedHostUrls()).
      *
-
      * @param mixed $html
      *
      * @return string
@@ -1704,7 +1737,10 @@ class CAdminAjax extends AdminSecBaseModel
     }
 
     /**
-     * @param $file
+     * Render an admin theme template. Ajax actions answer with JSON, so this is only
+     * reached by the few that draw an iframe.
+     *
+     * @param string $file Path relative to the admin theme
      *
      * @return void
      */

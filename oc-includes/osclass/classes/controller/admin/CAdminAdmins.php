@@ -26,6 +26,9 @@ class CAdminAdmins extends AdminSecBaseModel
     //specific for this class
     private Admin $adminManager;
 
+    /**
+     * Hold a moderator to their own account and take the admin manager for this request.
+     */
     public function __construct()
     {
         parent::__construct();
@@ -46,6 +49,13 @@ class CAdminAdmins extends AdminSecBaseModel
     }
 
     //Business Layer...
+
+    /**
+     * Dispatch the requested admins action: the add/edit form, its save, a batch delete,
+     * or the paginated list.
+     *
+     * @return void
+     */
     public function doModel()
     {
         parent::doModel();

@@ -24,6 +24,9 @@ class CAdminPages extends AdminSecBaseModel
     //specific for this class
     private $pageManager;
 
+    /**
+     * Take the page manager for this request.
+     */
     public function __construct()
     {
         parent::__construct();
@@ -34,6 +37,13 @@ class CAdminPages extends AdminSecBaseModel
     }
 
     //Business Layer...
+
+    /**
+     * Dispatch the requested static-pages action: add, edit, their saves and delete,
+     * otherwise the list.
+     *
+     * @return void
+     */
     public function doModel()
     {
         parent::doModel();

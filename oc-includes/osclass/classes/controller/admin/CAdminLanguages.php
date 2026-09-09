@@ -24,6 +24,9 @@ class CAdminLanguages extends AdminSecBaseModel
     //specific for this class
     private OSCLocale $localeManager;
 
+    /**
+     * Take the locale manager for this request.
+     */
     public function __construct()
     {
         parent::__construct();
@@ -36,7 +39,10 @@ class CAdminLanguages extends AdminSecBaseModel
     /**
      * Business Layer...
      *
-     * @return bool
+     * Dispatch the requested languages action: add, import from the translation
+     * repository, edit, enable/disable, delete, otherwise the list.
+     *
+     * @return true|null true once an import has finished
      */
     public function doModel()
     {
@@ -626,7 +632,12 @@ class CAdminLanguages extends AdminSecBaseModel
     }
 
     /**
-     * @param $mailJSON
+     * Load the email templates that came with a downloaded language, flashing an error
+     * when they cannot be read.
+     *
+     * @param string|false $mailJSON Raw mail.json, or false when the download failed
+     *
+     * @return void
      */
     private function importEmailJson($mailJSON)
     {

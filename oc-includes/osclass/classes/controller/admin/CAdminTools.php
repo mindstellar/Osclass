@@ -21,6 +21,9 @@ if (!defined('ABS_PATH')) {
  */
 class CAdminTools extends AdminSecBaseModel
 {
+    /**
+     * Let plugins hook the tools section before anything is dispatched.
+     */
     public function __construct()
     {
         parent::__construct();
@@ -28,6 +31,13 @@ class CAdminTools extends AdminSecBaseModel
     }
 
     //Business Layer...
+
+    /**
+     * Dispatch the requested tools action: SQL import, category and location
+     * maintenance, the cache, and the SQL/zip backups.
+     *
+     * @return void
+     */
     public function doModel()
     {
         parent::doModel();
