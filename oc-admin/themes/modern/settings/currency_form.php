@@ -84,7 +84,7 @@ function customText($return = 'title')
 }
 
 /**
- * @param $string
+ * @param string $string
  *
  * @return string
  */
