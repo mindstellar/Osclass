@@ -50,6 +50,8 @@ class DAO
      *             QueryBuilder instead. Still populated and still supported --
      *             the models themselves stopped using it in 5.3, so this is now
      *             purely a compatibility surface for plugins.
+     * @see        \mindstellar\database\Connection
+     * @see        \mindstellar\database\QueryBuilder
      * @var DBCommandClass
      */
     public $dao;
@@ -110,6 +112,8 @@ class DAO
 
     /**
      * Reinitialize connection to the database once the object is unserialized
+     *
+     * @return void
      */
     public function __wakeup()
     {
@@ -121,9 +125,9 @@ class DAO
     /**
      * Get the result match of the primary key passed by parameter
      *
-     * @param string $value
+     * @param int|string $value
      *
-     * @return mixed If the result has been found, it return the array row. If not, it returns false
+     * @return array<string,string|null>|false The matching row, or false when there is not exactly one
      */
     public function findByPrimaryKey($value)
     {
@@ -163,7 +167,8 @@ class DAO
     /**
      * Check whether at least one row matches the given conditions
      *
-     * @param array $where Array with keys (database field) and values
+     * @param array<string,mixed> $where Array with keys (database field) and values
+     *
      * @return bool True if a matching row exists, false otherwise
      */
     public function exists(array $where): bool
@@ -198,6 +203,8 @@ class DAO
      * Set table name, adding the DB_TABLE_PREFIX at the beginning
      *
      * @param string $table
+     *
+     * @return void
      */
     public function setTableName($table)
     {
@@ -218,6 +225,8 @@ class DAO
      * Set primary key string
      *
      * @param string $key
+     *
+     * @return void
      */
     public function setPrimaryKey($key)
     {
@@ -227,10 +236,10 @@ class DAO
     /**
      * Update row by primary key
      *
-     * @param array  $values Array with keys (database field) and values
-     * @param string $key    Primary key to be updated
+     * @param array<string,mixed> $values Array with keys (database field) and values
+     * @param int|string          $key    Primary key to be updated
      *
-     * @return mixed It return the number of affected rows if the update has been
+     * @return int|false It return the number of affected rows if the update has been
      * correct or false if nothing has been modified
      */
     public function updateByPrimaryKey($values, $key)
@@ -249,10 +258,11 @@ class DAO
      * An empty $where updates every row, which is what this has always done --
      * only delete() refuses an unbounded write.
      *
-     * @param string|array $values Array with keys (database field) and values
-     * @param array        $where
+     * @param array<string,mixed> $values Array with keys (database field) and values;
+     *                                    anything else is refused with false
+     * @param array<string,mixed> $where
      *
-     * @return mixed It returns the number of affected rows if the update has been
+     * @return int|false It returns the number of affected rows if the update has been
      * correct or false if an error happended
      */
     public function update($values, $where)
@@ -292,9 +302,9 @@ class DAO
     /**
      * Check if the keys of the array exist in the $fields array
      *
-     * @param array $aKey
+     * @param array<int,string> $aKey
      *
-     * @return boolean
+     * @return bool
      * @since  2.3
      */
     public function checkFieldKeys($aKey)
@@ -311,7 +321,7 @@ class DAO
     /**
      * Get fields array
      *
-     * @return array
+     * @return array<int,string>|null null until setFields() has run
      * @since  2.3
      */
     public function getFields()
@@ -322,8 +332,9 @@ class DAO
     /**
      * Set fields array
      *
-     * @param array $fields
+     * @param array<int,string> $fields
      *
+     * @return void
      * @since  2.3
      */
     public function setFields($fields)
@@ -334,9 +345,9 @@ class DAO
     /**
      * Delete the result match from the primary key passed by parameter
      *
-     * @param string $value
+     * @param int|string $value
      *
-     * @return mixed It return the number of affected rows if the delete has been
+     * @return int|false It return the number of affected rows if the delete has been
      * correct or false if nothing has been modified
      */
     public function deleteByPrimaryKey($value)
@@ -354,9 +365,9 @@ class DAO
      *
      * An empty $where is refused rather than deleting every row.
      *
-     * @param array $where
+     * @param array<string,mixed> $where
      *
-     * @return bool|int It returns the number of affected rows if the delete has been
+     * @return int|false It returns the number of affected rows if the delete has been
      * correct or false if an error happended
      */
     public function delete($where)
@@ -377,7 +388,7 @@ class DAO
     /**
      * Get all the rows from the table $tableName
      *
-     * @return array
+     * @return array<int,array<string,string|null>> Empty when the query fails
      */
     public function listAll()
     {
@@ -389,9 +400,9 @@ class DAO
     /**
      * Basic insert
      *
-     * @param array $values
+     * @param array<string,mixed> $values
      *
-     * @return boolean
+     * @return bool
      */
     public function insert($values)
     {
@@ -426,7 +437,7 @@ class DAO
      * 0, whereupon callers wrote child rows with a 0 foreign key (FK failures) and fired hooks
      * with an empty item. Callers that need the new id must use this, not ->dao->insertedId().
      *
-     * @param array $values
+     * @param array<string,mixed> $values
      *
      * @return int the new row's id, or 0 when the insert wrote no row
      */
@@ -531,9 +542,9 @@ class DAO
      * Keys have already been checked against the model's field list by the
      * caller, so they are the model's own column names rather than input.
      *
-     * @param array $where
+     * @param array<string,mixed> $where
      *
-     * @return array{0:string,1:array} clause ('' when $where is empty) and its values
+     * @return array{0:string,1:array<int,mixed>} clause ('' when $where is empty) and its values
      */
     private function buildWhere(array $where)
     {
@@ -550,10 +561,10 @@ class DAO
     /**
      * Run a SELECT, returning string-valued rows or false on failure.
      *
-     * @param string $sql
-     * @param array  $params
+     * @param string           $sql
+     * @param array<int,mixed> $params
      *
-     * @return array|false
+     * @return array<int,array<string,string|null>>|false
      */
     private function fetch($sql, array $params = array())
     {
@@ -572,8 +583,8 @@ class DAO
     /**
      * Run a write, returning the affected-row count or false on failure.
      *
-     * @param string $sql
-     * @param array  $params
+     * @param string           $sql
+     * @param array<int,mixed> $params
      *
      * @return int|false
      */
@@ -592,6 +603,8 @@ class DAO
     }
 
     /**
+     * Reset this object's recorded error to "last operation succeeded".
+     *
      * @return void
      */
     private function clearError()

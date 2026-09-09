@@ -28,25 +28,30 @@
  *             mindstellar\database\Connection and the immutable
  *             mindstellar\database\QueryBuilder. This class remains the legacy
  *             query layer that existing models and plugins depend on.
+ * @see \mindstellar\database\Connection
+ * @see \mindstellar\database\QueryBuilder
  */
 class DBCommandClass
 {
     private static $instance;
     /**
-     * Database result object
+     * Driver result of the most recent query: a result set for a SELECT, true for
+     * a write, false on failure. Initialised to 0.
      *
      * @since  2.3
-     * @var MySQLi_Result
+     * @var mysqli_result|bool|int
      */
     public $resultId;
     /**
+     * Every statement run through this object, when OSC_DEBUG_DB is on.
      *
-     * @var array
+     * @var array<int,string>
      */
     public $queries;
     /**
+     * Wall-clock seconds per entry in {@see $queries}.
      *
-     * @var array
+     * @var array<int,float>
      */
     public $queryTimes;
     /**
@@ -56,90 +61,107 @@ class DBCommandClass
      */
     public $lastQuerySql = '';
     /**
+     * Statements run through this object since it was created.
      *
      * @var int
      */
     public $queryCount;
     /**
+     * Driver error number of the last statement, 0 when it succeeded.
      *
      * @var int
      */
     public $errorLevel;
     /**
+     * Driver error text of the last statement, '' when it succeeded.
      *
      * @var string
      */
     public $errorDesc;
     /**
+     * SELECT column expressions.
      *
-     * @var array
+     * @var array<int,string>
      */
     public $aSelect;
     /**
+     * FROM tables (or subquery expressions).
      *
-     * @var array
+     * @var array<int,string>
      */
     public $aFrom;
     /*var $aDistinct; */
     /**
+     * Compiled JOIN clauses.
      *
-     * @var array
+     * @var array<int,string>
      */
     public $aJoin;
     /**
+     * Compiled WHERE conditions, each already carrying its AND/OR prefix.
      *
-     * @var array
+     * @var array<int,string>
      */
     public $aWhere;
     /**
+     * Compiled LIKE conditions.
      *
-     * @var array
+     * @var array<int,string>
      */
     public $aLike;
     /**
+     * GROUP BY expressions.
      *
-     * @var array
+     * @var array<int,string>
      */
     public $aGroupby;
     /**
+     * Compiled HAVING conditions.
      *
-     * @var array
+     * @var array<int,string>
      */
     public $aHaving;
     /**
+     * LIMIT row count, false when unset.
      *
-     * @var mixed
+     * @var int|false
      */
     public $aLimit;
     /* var $aKeys; */
     /**
+     * LIMIT offset, false when unset.
      *
-     * @var mixed
+     * @var int|false
      */
     public $aOffset;
     /**
+     * Global ORDER BY direction ('desc' or anything else for ASC), false when unset.
      *
-     * @var mixed
+     * @var string|false
      */
     public $aOrder;
     /**
+     * ORDER BY expressions, each with its own direction appended.
      *
-     * @var array
+     * @var array<int,string>
      */
     public $aOrderby;
     /**
+     * Column => already-escaped value map for the next INSERT/REPLACE/UPDATE.
      *
-     * @var array
+     * @var array<string,string|int>
      */
     public $aSet;
     /**
+     * Escaped values collected while building the current IN (...) list.
      *
-     * @var array
+     * @var array<int,string|int>
      */
     public $aWherein;
     /**
+     * Query log, only instantiated when OSC_DEBUG_DB or OSC_DEBUG_DB_EXPLAIN is on.
      *
-     * @var LogDatabase
+     * @var LogDatabase|null
      */
     public $log;
     /* var $aAliasedTables; */
@@ -148,18 +170,20 @@ class DBCommandClass
      * Database connection object to Shopclass database
      *
      * @since  2.3
-     * @var mysqli
+     * @var mysqli|false|null
      */
     private $connId;
     /**
-     * @var array
+     * Written by _getSelect() on a branch that cannot be reached and read nowhere.
+     *
+     * @var array<int,string>
      */
     private $a_from;
 
     /**
      * DBCommandClass constructor.
      *
-     * @param mysqli $connId
+     * @param mysqli|false $connId Handed straight from ConnectionManager::getHandle()
      */
     public function __construct(&$connId)
     {
@@ -209,6 +233,8 @@ class DBCommandClass
 
     /**
      * Unset connection and result objects
+     *
+     * @return void
      */
     public function __destruct()
     {
@@ -218,9 +244,9 @@ class DBCommandClass
     /**
      * Set SELECT clause
      *
-     * @param mixed $select It can be a string or array
+     * @param string|array<int,string> $select Comma-separated list, or one entry per column
      *
-     * @return DBCommandClass
+     * @return self
      * @since  2.3
      */
     public function select($select = '*')
@@ -247,11 +273,12 @@ class DBCommandClass
      * @param string $cond
      * @param string $type It can be: LEFT, RIGHT, OUTER, INNER, LEFT OUTER or RIGHT OUTER
      *
-     * @return DBCommandClass
+     * @return self
      * @since  2.3
      * @deprecated 5.3 Unused by core. Retained only because the object is reachable
      *             from plugins as $model->dao; prefer mindstellar\database\Connection
      *             or QueryBuilder in new code.
+     * @see \mindstellar\database\QueryBuilder::join()
      */
     public function join($table, $cond, $type = '')
     {
@@ -274,10 +301,10 @@ class DBCommandClass
     /**
      * Set WHERE clause using OR operator
      *
-     * @param mixed $key
-     * @param mixed $value
+     * @param string|array<string,mixed> $key   Column (with optional operator), or a column => value map
+     * @param mixed                      $value Ignored when $key is an array
      *
-     * @return DBCommandClass
+     * @return self
      * @since  2.3
      */
     public function orWhere($key, $value = null)
@@ -288,11 +315,11 @@ class DBCommandClass
     /**
      * Set WHERE clause
      *
-     * @param mixed  $key
-     * @param mixed  $value
-     * @param string $type
+     * @param string|array<string,mixed> $key   Column (with optional operator), or a column => value map
+     * @param mixed                      $value Ignored when $key is an array
+     * @param string                     $type  'AND ' or 'OR ', used from the second condition on
      *
-     * @return DBCommandClass
+     * @return self
      * @since  2.3
      */
     private function _where($key, $value = null, $type = 'AND ')
@@ -344,9 +371,9 @@ class DBCommandClass
      * to misuse. For new code prefer bound parameters via
      * mindstellar\database\Connection; never use escape() for identifiers.
      *
-     * @param string|bool|int $str
+     * @param string|bool|int|float|null $str
      *
-     * @return string
+     * @return string|int|float A numeric value is returned unchanged, a bool as 0 or 1
      * @since  2.3
      */
     public function escape($str)
@@ -395,10 +422,10 @@ class DBCommandClass
     /**
      * Set WHERE IN clause using AND operator
      *
-     * @param string       $key
-     * @param array|string $values
+     * @param string|null      $key
+     * @param array<int,mixed>|scalar|null $values A non-array is treated as a single-element list
      *
-     * @return DBCommandClass
+     * @return self
      * @since  2.3
      */
     public function whereIn($key = null, $values = null)
@@ -409,12 +436,12 @@ class DBCommandClass
     /**
      * Set WHERE IN clause
      *
-     * @param mixed  $key
-     * @param mixed  $values
-     * @param string $not
-     * @param string $type
+     * @param string|null                  $key
+     * @param array<int,mixed>|scalar|null $values A non-array is treated as a single-element list
+     * @param bool                         $not    true for NOT IN
+     * @param string                       $type   'AND ' or 'OR ', used from the second condition on
      *
-     * @return DBCommandClass
+     * @return self
      * @since  2.3
      */
     private function _whereIn($key = null, $values = null, $not = false, $type = 'AND ')
@@ -442,14 +469,15 @@ class DBCommandClass
     /**
      * Set WHERE IN clause using OR operator
      *
-     * @param mixed $key
-     * @param mixed $values
+     * @param string|null                  $key
+     * @param array<int,mixed>|scalar|null $values
      *
-     * @return DBCommandClass
+     * @return self
      * @since  2.3
      * @deprecated 5.3 Unused by core. Retained only because the object is reachable
      *             from plugins as $model->dao; prefer mindstellar\database\Connection
      *             or QueryBuilder in new code.
+     * @see \mindstellar\database\QueryBuilder
      */
     public function orWhereIn($key = null, $values = null)
     {
@@ -459,14 +487,15 @@ class DBCommandClass
     /**
      * Set WHERE NOT IN clause using AND operator
      *
-     * @param mixed $key
-     * @param mixed $values
+     * @param string|null                  $key
+     * @param array<int,mixed>|scalar|null $values
      *
-     * @return DBCommandClass
+     * @return self
      * @since  2.3
      * @deprecated 5.3 Unused by core. Retained only because the object is reachable
      *             from plugins as $model->dao; prefer mindstellar\database\Connection
      *             or QueryBuilder in new code.
+     * @see \mindstellar\database\QueryBuilder
      */
     public function whereNotIn($key = null, $values = null)
     {
@@ -476,14 +505,15 @@ class DBCommandClass
     /**
      * Set WHERE NOT IN clause using OR operator
      *
-     * @param mixed $key
-     * @param mixed $values
+     * @param string|null                  $key
+     * @param array<int,mixed>|scalar|null $values
      *
-     * @return DBCommandClass
+     * @return self
      * @since  2.3
      * @deprecated 5.3 Unused by core. Retained only because the object is reachable
      *             from plugins as $model->dao; prefer mindstellar\database\Connection
      *             or QueryBuilder in new code.
+     * @see \mindstellar\database\QueryBuilder
      */
     public function orWhereNotIn($key = null, $values = null)
     {
@@ -493,11 +523,11 @@ class DBCommandClass
     /**
      * Set LIKE clause
      *
-     * @param        $field
-     * @param string $match
-     * @param string $side
+     * @param string|array<string,string> $field Column, or a column => match map
+     * @param string                      $match Ignored when $field is an array
+     * @param string                      $side  before, after or both
      *
-     * @return DBCommandClass
+     * @return self
      */
     public function like($field, $match = '', $side = 'both')
     {
@@ -507,13 +537,13 @@ class DBCommandClass
     /**
      * Set LIKE clause
      *
-     * @param string|array $field
-     * @param string       $match
-     * @param string       $type Types: AND, OR
-     * @param string       $side Options: before, after, both
-     * @param string       $not  Two possibilities: blank or NOT
+     * @param string|array<string,string> $field Column, or a column => match map
+     * @param string                      $match Ignored when $field is an array
+     * @param string                      $type  Types: AND, OR
+     * @param string                      $side  Options: before, after, both
+     * @param string                      $not   Two possibilities: blank or NOT
      *
-     * @return DBCommandClass
+     * @return self
      * @since  2.3
      */
     private function _like($field, $match = '', $type = 'AND ', $side = 'both', $not = '')
@@ -551,13 +581,14 @@ class DBCommandClass
      *
      * @param string $field
      * @param string $match
-     * @param string $side
+     * @param string $side before, after or both
      *
-     * @return DBCommandClass
+     * @return self
      * @since  2.3
      * @deprecated 5.3 Unused by core. Retained only because the object is reachable
      *             from plugins as $model->dao; prefer mindstellar\database\Connection
      *             or QueryBuilder in new code.
+     * @see \mindstellar\database\QueryBuilder
      */
     public function notLike($field, $match = '', $side = 'both')
     {
@@ -569,14 +600,15 @@ class DBCommandClass
      *
      * @param string $field
      * @param string $match
-     * @param string $side
+     * @param string $side before, after or both
      *
-     * @return \DBCommandClass
+     * @return self
      * @since  2.3
      *
      * @deprecated 5.3 Unused by core. Retained only because the object is reachable
      *             from plugins as $model->dao; prefer mindstellar\database\Connection
      *             or QueryBuilder in new code.
+     * @see \mindstellar\database\QueryBuilder
      */
     public function orLike($field, $match = '', $side = 'both')
     {
@@ -588,13 +620,14 @@ class DBCommandClass
      *
      * @param string $field
      * @param string $match
-     * @param string $side
+     * @param string $side before, after or both
      *
-     * @return DBCommandClass
+     * @return self
      * @since  2.3
      * @deprecated 5.3 Unused by core. Retained only because the object is reachable
      *             from plugins as $model->dao; prefer mindstellar\database\Connection
      *             or QueryBuilder in new code.
+     * @see \mindstellar\database\QueryBuilder
      */
     public function orNotLike($field, $match = '', $side = 'both')
     {
@@ -604,9 +637,9 @@ class DBCommandClass
     /**
      * Fields for GROUP BY clause
      *
-     * @param mixed $by
+     * @param string|array<int,string> $by Comma-separated list, or one entry per expression
      *
-     * @return DBCommandClass
+     * @return self
      * @since  2.3
      */
     public function groupBy($by)
@@ -627,14 +660,17 @@ class DBCommandClass
     }
 
     /**
+     * Add an AND HAVING condition. Unlike the other clause methods this does NOT
+     * return the builder, so it cannot be chained.
      *
-     * @param        $key
-     * @param string $value
+     * @param string|array<string,mixed> $key   Column (with optional operator), or a column => value map
+     * @param string                     $value Ignored when $key is an array
      *
      * @return void
      * @deprecated 5.3 Unused by core. Retained only because the object is reachable
      *             from plugins as $model->dao; prefer mindstellar\database\Connection
      *             or QueryBuilder in new code.
+     * @see \mindstellar\database\QueryBuilder::having()
      */
     public function having($key, $value = '')
     {
@@ -642,10 +678,13 @@ class DBCommandClass
     }
 
     /**
+     * Append a HAVING condition, joined to the previous one with $type.
      *
-     * @param        $key
-     * @param string $value
-     * @param string $type $type
+     * @param string|array<string,mixed> $key   Column (with optional operator), or a column => value map
+     * @param string                     $value Ignored when $key is an array
+     * @param string                     $type  'AND ' or 'OR ', used from the second condition on
+     *
+     * @return void
      */
     private function _having($key, $value = '', $type = 'AND ')
     {
@@ -667,14 +706,16 @@ class DBCommandClass
     }
 
     /**
+     * Add an OR HAVING condition. Like having(), it does NOT return the builder.
      *
-     * @param        $key
-     * @param string $value
+     * @param string|array<string,mixed> $key   Column (with optional operator), or a column => value map
+     * @param string                     $value Ignored when $key is an array
      *
      * @return void
      * @deprecated 5.3 Unused by core. Retained only because the object is reachable
      *             from plugins as $model->dao; prefer mindstellar\database\Connection
      *             or QueryBuilder in new code.
+     * @see \mindstellar\database\QueryBuilder::having()
      */
     public function orHaving($key, $value = '')
     {
@@ -687,7 +728,7 @@ class DBCommandClass
      * @param string $orderby
      * @param string $direction Accepted directions: random, asc, desc
      *
-     * @return \DBCommandClass
+     * @return self
      * @since  2.3
      */
     public function orderBy($orderby, $direction = '')
@@ -706,9 +747,9 @@ class DBCommandClass
     /**
      * Set the offset in the LIMIT clause
      *
-     * @param int $offset
+     * @param int|string $offset Anything non-numeric resets the offset to 0
      *
-     * @return DBCommandClass
+     * @return self
      * @since  2.3
      */
     public function offset($offset)
@@ -724,10 +765,10 @@ class DBCommandClass
     /**
      * Create the INSERT sql and perform the query
      *
-     * @param mixed $table
-     * @param mixed $set
+     * @param string                   $table Falls back to the first FROM table when empty
+     * @param array<string,mixed>|null $set   Merged into the pending SET map first
      *
-     * @return boolean
+     * @return bool
      * @since  2.3
      */
     public function insert($table = '', $set = null)
@@ -757,11 +798,11 @@ class DBCommandClass
     /**
      * Set aSet array
      *
-     * @param mixed $key
-     * @param mixed $value
-     * @param bool  $escape
+     * @param string|array<string,mixed> $key    Column, or a column => value map
+     * @param mixed                      $value  Ignored when $key is an array
+     * @param bool                       $escape Run each value through escape() first
      *
-     * @return DBCommandClass
+     * @return self
      * @since  2.3
      */
     public function set($key, $value = '', $escape = true)
@@ -784,9 +825,9 @@ class DBCommandClass
     /**
      * Create the INSERT sql string
      *
-     * @param string $table
-     * @param array  $keys
-     * @param array  $values
+     * @param string            $table
+     * @param array<int,string> $keys
+     * @param array<int,mixed>  $values Already escaped by set()
      *
      * @return string
      * @since  2.3
@@ -799,6 +840,7 @@ class DBCommandClass
     /**
      * Reset variables used in write sql: aSet, aFrom, aWhere, aLike, aOrderby, aLimit, aOrder
      *
+     * @return void
      * @since  2.3
      */
     private function _resetWrite()
@@ -819,8 +861,9 @@ class DBCommandClass
     /**
      * Initializate $aReset variables
      *
-     * @param array $aReset
+     * @param array<string,mixed> $aReset Property name => value to restore
      *
+     * @return void
      * @since  2.3
      */
     private function _resetRun($aReset)
@@ -898,6 +941,7 @@ class DBCommandClass
      * @deprecated 5.3 Unused by core. Retained only because the object is reachable
      *             from plugins as $model->dao; prefer mindstellar\database\Connection
      *             or QueryBuilder in new code.
+     * @see \mindstellar\database\QueryBuilder
      */
     public function isSelectType($sql)
     {
@@ -909,12 +953,15 @@ class DBCommandClass
     }
 
     /**
-     * @param $sql
+     * Run EXPLAIN for $sql and record the plan in the debug log.
      *
-     * @return bool
+     * @param string $sql
+     *
+     * @return bool false when the statement is empty, fails, or explains to nothing
      * @deprecated 5.3 Unused by core. Retained only because the object is reachable
      *             from plugins as $model->dao; prefer mindstellar\database\Connection
      *             or QueryBuilder in new code.
+     * @see \mindstellar\database\QueryBuilder
      */
     public function query_debug($sql)
     {
@@ -970,6 +1017,7 @@ class DBCommandClass
     /**
      * Set last error code and descriptionfor the most recent mysqli function call
      *
+     * @return void
      * @since  2.3
      */
     private function errorReport()
@@ -1002,10 +1050,10 @@ class DBCommandClass
     /**
      * Create the REPLACE INTO sql and perform the query
      *
-     * @param mixed $table
-     * @param mixed $set
+     * @param string                   $table Falls back to the first FROM table when empty
+     * @param array<string,mixed>|null $set   Merged into the pending SET map first
      *
-     * @return boolean
+     * @return bool
      * @since  2.3
      */
     public function replace($table = '', $set = null)
@@ -1035,9 +1083,9 @@ class DBCommandClass
     /**
      * Create the REPLACE INTO sql string
      *
-     * @param string $table
-     * @param        $keys
-     * @param array  $values
+     * @param string            $table
+     * @param array<int,string> $keys
+     * @param array<int,mixed>  $values Already escaped by set()
      *
      * @return string
      * @since  2.3
@@ -1050,11 +1098,11 @@ class DBCommandClass
     /**
      * Create the UPDATE sql and perform the query
      *
-     * @param mixed $table
-     * @param mixed $set
-     * @param mixed $where
+     * @param string                                  $table Falls back to the first FROM table when empty
+     * @param array<string,mixed>|null                $set   Merged into the pending SET map first
+     * @param string|array<string,mixed>|null         $where Added to the pending WHERE conditions
      *
-     * @return false|int
+     * @return int|false Affected rows, or false when nothing could be run
      * @since  2.3
      */
     public function update($table = '', $set = null, $where = null)
@@ -1094,10 +1142,10 @@ class DBCommandClass
     /**
      * Set WHERE clause using OR operator
      *
-     * @param mixed $key
-     * @param mixed $value
+     * @param string|array<string,mixed> $key   Column (with optional operator), or a column => value map
+     * @param mixed                      $value Ignored when $key is an array
      *
-     * @return DBCommandClass
+     * @return self
      * @since  2.3
      */
     public function where($key, $value = null)
@@ -1108,9 +1156,9 @@ class DBCommandClass
     /**
      * Create the UPDATE sql string
      *
-     * @param string $table
-     * @param array  $values
-     * @param array  $where
+     * @param string              $table
+     * @param array<string,mixed> $values Column => already-escaped value
+     * @param array<int,string>   $where  Compiled WHERE conditions
      *
      * @return string
      * @since  2.3
@@ -1142,10 +1190,10 @@ class DBCommandClass
     /**
      * Create the DELETE sql and perform the query
      *
-     * @param mixed $table
-     * @param mixed $where
+     * @param string                          $table Falls back to the first FROM table when empty
+     * @param string|array<string,mixed>|null $where Added to the pending WHERE conditions
      *
-     * @return bool|int
+     * @return int|false Affected rows, or false when there is nothing to bound the delete
      * @since  2.3
      */
     public function delete($table = '', $where = '')
@@ -1181,9 +1229,9 @@ class DBCommandClass
     /**
      * Create the DELETE sql string
      *
-     * @param string $table
-     * @param array  $where
-     * @param array  $like
+     * @param string            $table
+     * @param array<int,string> $where Compiled WHERE conditions
+     * @param array<int,string> $like  Compiled LIKE conditions
      *
      * @return string
      * @since  2.3
@@ -1209,11 +1257,11 @@ class DBCommandClass
      * Compile the select sql string and perform the query. Quick method for
      * getting the rows of one table
      *
-     * @param mixed $table
-     * @param mixed $limit
-     * @param mixed $offset
+     * @param string          $table
+     * @param int|null        $limit
+     * @param int|string|null $offset Only applied when $limit is given
      *
-     * @return \DBRecordsetClass
+     * @return DBRecordsetClass|bool The recordset, or false when the query fails
      * @since  2.3
      */
     public function get($table = '', $limit = null, $offset = null)
@@ -1237,9 +1285,9 @@ class DBCommandClass
     /**
      * Set FROM clause
      *
-     * @param string|array $from It can be a string or array
+     * @param string|array<int,string> $from Comma-separated list, a single subquery, or one entry per table
      *
-     * @return DBCommandClass
+     * @return self
      */
     public function from($from)
     {
@@ -1267,10 +1315,10 @@ class DBCommandClass
     /**
      * Set LIMIT clause
      *
-     * @param int    $value
-     * @param string $offset
+     * @param int|string        $value
+     * @param int|string         $offset Ignored when empty
      *
-     * @return DBCommandClass
+     * @return self
      * @since  2.3
      */
     public function limit($value, $offset = '')
@@ -1297,6 +1345,7 @@ class DBCommandClass
      * @deprecated 5.3 Unused by core. Retained only because the object is reachable
      *             from plugins as $model->dao; prefer mindstellar\database\Connection
      *             or QueryBuilder in new code.
+     * @see \mindstellar\database\QueryBuilder
      */
     public function _getSelect()
     {
@@ -1386,6 +1435,7 @@ class DBCommandClass
      * Reset variables used in select sql: aSelect, aFrom, aJoin, aWhere, aLike, aGroupby, aHaving,
      * aOrderby, aWherein, aLimit, aOffset, aOrder
      *
+     * @return void
      * @since  2.3
      */
     public function _resetSelect()
@@ -1440,9 +1490,10 @@ class DBCommandClass
      * which runs on the parameterized layer; this stays as the entry point the
      * upgrade tooling and any plugin already calls, with the same return shape.
      *
-     * @param array|string $queries
+     * @param array<int,string>|string $queries struct.sql, or its statements already split
      *
-     * @return array{0:bool,1:array,2:array} success, the statements it ran, and those that failed
+     * @return array{0:bool,1:array<int|string,string>,2:array<int,string>} success, the statements it
+     *                                                                     ran, and those that failed
      */
     public function updateDB($queries = '')
     {
@@ -1461,6 +1512,7 @@ class DBCommandClass
      * @deprecated 5.3 Unused by core. Retained only because the object is reachable
      *             from plugins as $model->dao; prefer mindstellar\database\Connection
      *             or QueryBuilder in new code.
+     * @see \mindstellar\database\QueryBuilder
      */
     public function lastQuery()
     {

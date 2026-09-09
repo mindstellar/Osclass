@@ -82,6 +82,9 @@ final class SqlScript
     }
 
     /**
+     * Remove C-style block comments, which is also what erases the schema placeholder
+     * tokens once they have been substituted.
+     *
      * @param string $sql
      *
      * @return string

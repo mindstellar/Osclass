@@ -25,28 +25,28 @@ class DBRecordsetClass
      * Database connection object to Shopclass database
      *
      * @since  2.3
-     * @var mysqli
+     * @var mysqli|null
      */
     public $connId;
     /**
      * Database result object
      *
      * @since  2.3
-     * @var MySQLi_Result
+     * @var mysqli_result|null
      */
     public $resultId;
     /**
      * Result array
      *
      * @since  2.3
-     * @var array
+     * @var array<int,array<string,mixed>>
      */
     public $resultArray;
     /**
-     * Result object
+     * Rows fetched as objects
      *
      * @since  2.3
-     * @var object
+     * @var array<int,object>
      */
     public $resultObject;
     /**
@@ -67,8 +67,8 @@ class DBRecordsetClass
     /**
      * Initialize Recordset Class
      *
-     * @param mysqli        $connId
-     * @param MySQLi_Result $resultId
+     * @param mysqli|null        $connId
+     * @param mysqli_result|null $resultId
      */
     public function __construct($connId = null, $resultId = null)
     {
@@ -84,9 +84,9 @@ class DBRecordsetClass
      * Get a result row as an array or object
      *
      * @param int    $n
-     * @param string $type
+     * @param string $type 'array' for an associative row, anything else for an object
      *
-     * @return array|object
+     * @return array<string,mixed>|object|array{} An empty array when there are no rows
      */
     public function row($n = 0, $type = 'array')
     {
@@ -106,7 +106,7 @@ class DBRecordsetClass
      *
      * @param int $n
      *
-     * @return array
+     * @return array<string,mixed>|array{} An empty array when there are no rows
      * @since  2.3
      */
     public function rowArray($n = 0)
@@ -127,7 +127,7 @@ class DBRecordsetClass
     /**
      * Get the results of MySQLi_Result object in array format
      *
-     * @return array
+     * @return array<int,array<string,mixed>>
      * @since  2.3
      */
     public function resultArray()
@@ -160,7 +160,7 @@ class DBRecordsetClass
     /**
      * Returns the current row of a result set as an array
      *
-     * @return array
+     * @return array<string,mixed>|null null once the rows are exhausted
      * @since  2.3
      */
     public function _fetchArray()
@@ -173,7 +173,7 @@ class DBRecordsetClass
      *
      * @param int $n
      *
-     * @return object
+     * @return object|array{} An empty array when there are no rows
      * @since  2.3
      */
     public function rowObject($n = 0)
@@ -194,7 +194,7 @@ class DBRecordsetClass
     /**
      * Get the results of MySQLi_Result object in object format
      *
-     * @return array|object
+     * @return array<int,object>
      * @since  2.3
      */
     public function resultObject()
@@ -214,7 +214,7 @@ class DBRecordsetClass
     /**
      * Returns the current row of a result set as an object
      *
-     * @return object
+     * @return object|null null once the rows are exhausted
      * @since  2.3
      */
     public function _fetchObject()
@@ -225,9 +225,9 @@ class DBRecordsetClass
     /**
      * Get the first row as an array or object
      *
-     * @param string $type
+     * @param string $type 'array' for associative rows, anything else for objects
      *
-     * @return mixed
+     * @return array<string,mixed>|object|array{} An empty array when there are no rows
      * @since  2.3
      */
     public function firstRow($type = 'array')
@@ -244,9 +244,9 @@ class DBRecordsetClass
     /**
      * Get the results of MySQLi_Result object
      *
-     * @param string $type
+     * @param string $type 'array' for associative rows, anything else for objects
      *
-     * @return array | object It can be an array or an object
+     * @return array<int,array<string,mixed>>|array<int,object>
      * @since  2.3
      */
     public function result($type = 'array')
@@ -261,9 +261,9 @@ class DBRecordsetClass
     /**
      * Get the last row as an array or object
      *
-     * @param string $type
+     * @param string $type 'array' for an associative row, anything else for an object
      *
-     * @return mixed
+     * @return array<string,mixed>|object|array{} An empty array when there are no rows
      * @since  2.3
      */
     public function lastRow($type = 'array')
@@ -280,9 +280,9 @@ class DBRecordsetClass
     /**
      * Get next row as an array or object
      *
-     * @param string $type
+     * @param string $type 'array' for an associative row, anything else for an object
      *
-     * @return mixed
+     * @return array<string,mixed>|object|array{} An empty array when there are no rows
      * @since  2.3
      */
     public function nextRow($type = 'array')
@@ -303,9 +303,9 @@ class DBRecordsetClass
     /**
      * Get previous row as an array or object
      *
-     * @param string $type
+     * @param string $type 'array' for an associative row, anything else for an object
      *
-     * @return mixed
+     * @return array<string,mixed>|object|array{} An empty array when there are no rows
      * @since  2.3
      */
     public function previousRow($type = 'array')
@@ -348,7 +348,7 @@ class DBRecordsetClass
     /**
      * Get the name of the fields in an array
      *
-     * @return array
+     * @return string[]
      * @since  2.3
      */
     public function listFields()

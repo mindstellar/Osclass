@@ -44,7 +44,7 @@ class ConnectionManager
     private static $instance;
     /** A list of incompatible SQL modes.
      *
-     * @var array
+     * @var array<int,string>
      */
     protected $incompatible_modes = array(
         'NO_ZERO_DATE',
@@ -86,9 +86,9 @@ class ConnectionManager
      */
     private $dbPassword;
     /**
-     * Database connection object to Shopclass database
+     * Database connection object to Shopclass database, null while unconnected.
      *
-     * @var mysqli
+     * @var mysqli|null
      */
     private $connId;
 
@@ -197,7 +197,7 @@ class ConnectionManager
     /**
      * Connect to the database
      *
-     * @return boolean It returns true if the connection
+     * @return bool true once connected, false when the handle could not be opened
      */
     private function connectToDb()
     {
@@ -252,6 +252,8 @@ class ConnectionManager
 
     /**
      * Set connection error num error and connection error description
+     *
+     * @return void
      */
     private function errorConnection()
     {
@@ -285,7 +287,9 @@ class ConnectionManager
      * an over-length or out-of-range value gets an error where it used to get a
      * silently altered row.
      *
-     * @param array $modes
+     * @param array<int,string> $modes modes to apply; read from the session when empty
+     *
+     * @return void
      */
     private function setSQLMode($modes = [])
     {
@@ -355,6 +359,8 @@ class ConnectionManager
 
     /**
      * Set error num error and error description
+     *
+     * @return void
      */
     public function errorReport()
     {
@@ -368,6 +374,8 @@ class ConnectionManager
      * the installer) with the given message.
      *
      * @param string $message
+     *
+     * @return void
      */
     private function handleDbError($message)
     {
@@ -402,6 +410,8 @@ class ConnectionManager
      * failure is reported but never aborts the connection.
      *
      * @param string $charset The charset to be set
+     *
+     * @return void
      */
     private function setCharset($charset)
     {
@@ -455,7 +465,8 @@ class ConnectionManager
      * @param string   $user     MySQL user name
      * @param string   $password MySQL password
      * @param string   $database Default database to be used when performing queries
-     * @param int|null $port
+     * @param int|null $port     Explicit TCP port; falls back to a host:port string,
+     *                           then the DB_PORT constant
      *
      * @return ConnectionManager
      */
@@ -475,6 +486,8 @@ class ConnectionManager
 
     /**
      * Connection destructor and print debug
+     *
+     * @return void
      */
     public function __destruct()
     {
@@ -486,9 +499,9 @@ class ConnectionManager
     /**
      * Prints the database debug if it's necessary
      *
-     * @param bool $printFrontend
+     * @param bool $printFrontend print to the page when logging to file is off
      *
-     * @return bool
+     * @return bool true when something was written or printed, false otherwise
      */
     private function debug($printFrontend = true)
     {
