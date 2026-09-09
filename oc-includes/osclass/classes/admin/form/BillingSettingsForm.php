@@ -314,8 +314,11 @@ final class BillingSettingsForm
     /**
      * What the view needs to draw all five forms, keyed by the section each one is.
      *
-     * @param string     $rejected the page id of the form that was refused, if any
-     * @param array|null $values   that form's submitted values
+     * @param string                   $rejected the page id of the form that was refused, if any
+     * @param array<string,mixed>|null $values   that form's submitted values
+     *
+     * @return array<string,array<string,mixed>> view variables per section: 'switch',
+     *         'pricing', 'offline', 'upgrades', 'limits'
      */
     public static function formVars(string $rejected = '', ?array $values = null): array
     {

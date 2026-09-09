@@ -238,9 +238,14 @@ final class SpamSettingsForm
     /**
      * What the view needs to draw all four forms, keyed by the div each one sits in.
      *
-     * @param int|null   $akismetStatus what Akismet said about the stored key
-     * @param string     $rejected      the page id a refused save belongs to, if any
-     * @param array|null $values        that page's submitted values
+     * @param int|null                 $akismetStatus what Akismet said about the stored key:
+     *                                                1 valid, 2 invalid, 3 no key at all
+     * @param string                   $rejected      the page id a refused save belongs to,
+     *                                                if any
+     * @param array<string,mixed>|null $values        that page's submitted values
+     *
+     * @return array<string,array<string,mixed>> view variables per div: 'akismet', 'captcha',
+     *         'alerts', 'login_throttle'
      */
     public static function formVars($akismetStatus = null, string $rejected = '', ?array $values = null): array
     {

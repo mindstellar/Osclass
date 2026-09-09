@@ -168,7 +168,10 @@ final class MainSettingsForm
     /**
      * What the view needs to draw the form.
      *
-     * @param array|null $values values a rejected save is handing back, or null for the stored ones
+     * @param array<string,mixed>|null $values values a rejected save is handing back, or null
+     *                                         for the stored ones
+     *
+     * @return array<string,mixed> view variables for osc_admin_settings_form()
      */
     public static function formVars(?array $values = null): array
     {
@@ -189,7 +192,11 @@ final class MainSettingsForm
         return $vars;
     }
 
-    /** Every enabled locale, code => name. */
+    /**
+     * Every enabled locale, code => name.
+     *
+     * @return array<string,string>
+     */
     private static function locales(): array
     {
         $options = array();
@@ -200,7 +207,11 @@ final class MainSettingsForm
         return self::orStored($options, (string)osc_language());
     }
 
-    /** Every currency the site knows, by its own code. */
+    /**
+     * Every currency the site knows, by its own code.
+     *
+     * @return array<string,string>
+     */
     private static function currencies(): array
     {
         $options = array();
@@ -217,6 +228,8 @@ final class MainSettingsForm
      * far worse than a list with one entry on an install that somehow has no others.
      *
      * @param array<string,string> $options
+     * @param string               $current the stored value, used as the sole option when
+     *                                      the list is empty
      *
      * @return array<string,string>
      */
@@ -225,7 +238,11 @@ final class MainSettingsForm
         return $options === array() ? array($current => $current) : $options;
     }
 
-    /** Every timezone, by its own name. */
+    /**
+     * Every timezone, by its own name.
+     *
+     * @return array<string,string>
+     */
     private static function timezones(): array
     {
         $options = array();
@@ -284,7 +301,12 @@ final class MainSettingsForm
     /**
      * One of the two sample lists.
      *
-     * @param string[] $formats
+     * @param string   $wrapperId   id of the wrapper the page's script targets
+     * @param string   $group       the radio group's name, and the prefix of its custom entry
+     * @param string   $label
+     * @param string   $customLabel accessible name of the free-text box
+     * @param string[] $formats     the samples offered
+     * @param string   $current     the format in force, selecting a sample or filling the box
      *
      * @return void
      */

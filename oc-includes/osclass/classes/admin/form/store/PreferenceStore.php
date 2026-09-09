@@ -32,6 +32,9 @@ final class PreferenceStore implements Store
 {
     private string $section;
 
+    /**
+     * @param string $section the preference section every value is stored under
+     */
     public function __construct(string $section)
     {
         $this->section = $section;
@@ -40,6 +43,11 @@ final class PreferenceStore implements Store
     /**
      * The preference key one field is stored under: its 'column' when it declares one, its
      * own name otherwise. Public so the read and the write cannot disagree about it.
+     *
+     * @param string              $name
+     * @param array<string,mixed> $field field spec
+     *
+     * @return string
      */
     public static function key(string $name, array $field): string
     {
@@ -49,7 +57,16 @@ final class PreferenceStore implements Store
     }
 
     /**
+     * The stored preference for one declared field, or its declared default when nothing
+     * has been saved. A translated field answers with one value per locale code.
+     *
      * @inheritDoc
+     *
+     * @param string              $name  field name
+     * @param array<string,mixed> $field field spec
+     * @param int|string|null     $id    unused: preferences have no rows
+     *
+     * @return mixed
      */
     public function value(string $name, array $field, $id = null)
     {
@@ -87,7 +104,14 @@ final class PreferenceStore implements Store
     }
 
     /**
+     * Every declared field's stored preference, keyed by field name.
+     *
      * @inheritDoc
+     *
+     * @param array<string,array<string,mixed>> $fields declared fields, keyed by name
+     * @param int|string|null                   $id     unused: preferences have no rows
+     *
+     * @return array<string,mixed>
      */
     public function load(array $fields, $id = null): array
     {
@@ -100,7 +124,16 @@ final class PreferenceStore implements Store
     }
 
     /**
+     * Write one preference per declared field and count the ones that actually changed.
+     *
      * @inheritDoc
+     *
+     * @param array<string,array<string,mixed>>  $fields  declared fields, keyed by name
+     * @param array<string,mixed>                $values  validated values, keyed by field name
+     * @param array<string,array<string,string>> $locales per field, the locales it expands over
+     * @param int|string|null                    $id      unused: preferences have no rows
+     *
+     * @return array{updated:int,id:null} preferences actually changed; no row key to report
      */
     public function save(array $fields, array $values, array $locales, $id = null): array
     {
@@ -155,6 +188,12 @@ final class PreferenceStore implements Store
      * why this asks the section for the key rather than for its value: get() answers ''
      * for a key that is absent and for one stored empty alike, so comparing values would
      * skip the write that creates the row.
+     *
+     * @param string $key
+     * @param string $value
+     * @param string $type the e_type column t_preference records
+     *
+     * @return int 1 when the preference was written, 0 when it already said this
      */
     private function put(string $key, string $value, string $type): int
     {
@@ -172,6 +211,10 @@ final class PreferenceStore implements Store
      * moved onto a declaration had already decided it. Derived from the field type so the
      * two front doors cannot disagree; a field deriving its own stored form through a
      * persist callable is STRING, because core does not know what came back.
+     *
+     * @param array<string,mixed> $field field spec
+     *
+     * @return string 'STRING', 'BOOLEAN' or 'INTEGER'
      */
     private static function type(array $field): string
     {

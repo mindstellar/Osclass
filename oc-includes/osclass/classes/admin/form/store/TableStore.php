@@ -54,6 +54,11 @@ final class TableStore implements Store
 
     /**
      * The column a field maps to: its own name unless it declares another.
+     *
+     * @param string              $name
+     * @param array<string,mixed> $field field spec
+     *
+     * @return string
      */
     public static function column(string $name, array $field): string
     {
@@ -63,7 +68,19 @@ final class TableStore implements Store
     }
 
     /**
+     * The column value of one declared field, or its declared default when the row has no
+     * such column.
+     *
      * @inheritDoc
+     *
+     * @param string              $name  field name
+     * @param array<string,mixed> $field field spec
+     * @param int|string|null     $id    the row: a positive integer, or the decimal string
+     *                                   of one
+     *
+     * @return mixed
+     * @throws StoreException when the key is not a positive integer
+     * @throws \mindstellar\database\DbException on a failed read
      */
     public function value(string $name, array $field, $id = null)
     {
@@ -71,7 +88,16 @@ final class TableStore implements Store
     }
 
     /**
+     * Every declared field's column value, keyed by field name.
+     *
      * @inheritDoc
+     *
+     * @param array<string,array<string,mixed>> $fields declared fields, keyed by name
+     * @param int|string|null                   $id     the row, or null for a new one
+     *
+     * @return array<string,mixed>
+     * @throws StoreException when the key is not a positive integer
+     * @throws \mindstellar\database\DbException on a failed read
      */
     public function load(array $fields, $id = null): array
     {
@@ -106,7 +132,21 @@ final class TableStore implements Store
     }
 
     /**
+     * Write the declared columns of one row, inserting when no key was given and updating
+     * when one was.
+     *
      * @inheritDoc
+     *
+     * @param array<string,array<string,mixed>>  $fields  declared fields, keyed by name
+     * @param array<string,mixed>                $values  validated values, keyed by field name
+     * @param array<string,array<string,string>> $locales unused: no declared column expands
+     *                                                    over locales
+     * @param int|string|null                    $id      the row, or null to insert one
+     *
+     * @return array{updated:int,id:int|string|null} rows affected, and the key written
+     * @throws StoreException when the key is not a positive integer, or names a row that is
+     *                        gone
+     * @throws \mindstellar\database\DbException on a failed write
      */
     public function save(array $fields, array $values, array $locales, $id = null): array
     {
@@ -163,6 +203,11 @@ final class TableStore implements Store
     /**
      * The row a primary key addresses, or an empty array when there is no key yet or no
      * row under it.
+     *
+     * @param int|null $id
+     *
+     * @return array<string,mixed>
+     * @throws \mindstellar\database\DbException on a failed read
      */
     private function row(?int $id): array
     {
@@ -186,6 +231,7 @@ final class TableStore implements Store
      *
      * @param int|string|null $id
      *
+     * @return int|null the row named, or null for a new one
      * @throws StoreException when the key is not a positive integer
      */
     private function identify($id): ?int
@@ -209,9 +255,11 @@ final class TableStore implements Store
      * whatever the callable makes of the validated value, and null from it leaves the
      * column as it was.
      *
-     * @param mixed $value
+     * @param array<string,mixed> $field  field spec
+     * @param mixed               $value  the validated value
+     * @param array<string,mixed> $values every validated value, keyed by field name
      *
-     * @return mixed
+     * @return mixed null when the field takes no column
      */
     private static function persisted(array $field, $value, array $values)
     {
@@ -232,7 +280,8 @@ final class TableStore implements Store
     /**
      * The value a column takes for a validated field value.
      *
-     * @param mixed $value
+     * @param array<string,mixed> $field field spec
+     * @param mixed               $value
      *
      * @return mixed
      */

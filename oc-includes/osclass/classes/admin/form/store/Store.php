@@ -31,22 +31,24 @@ interface Store
      * The stored value of one declared field, or the field's declared default when
      * nothing has been saved for it yet.
      *
-     * @param string          $name  field name
-     * @param array           $field field spec
-     * @param int|string|null $id    the row, for a store that has rows: a positive
-     *                               integer, or the decimal string of one
+     * @param string              $name  field name
+     * @param array<string,mixed> $field field spec
+     * @param int|string|null     $id    the row, for a store that has rows: a positive
+     *                                   integer, or the decimal string of one
      *
      * @return mixed
+     * @throws StoreException when the key is not a positive integer
      */
     public function value(string $name, array $field, $id = null);
 
     /**
      * Every declared field's stored value, keyed by field name.
      *
-     * @param array<string,array> $fields declared fields, keyed by name
-     * @param int|string|null     $id     the row, for a store that has rows
+     * @param array<string,array<string,mixed>> $fields declared fields, keyed by name
+     * @param int|string|null                   $id     the row, for a store that has rows
      *
      * @return array<string,mixed>
+     * @throws StoreException when the key is not a positive integer
      */
     public function load(array $fields, $id = null): array;
 
@@ -57,14 +59,16 @@ interface Store
      * submission. It walks the declared fields rather than the values it was handed, so
      * a before_save listener cannot introduce a key the page never declared.
      *
-     * @param array<string,array>          $fields  declared fields, keyed by name
-     * @param array<string,mixed>          $values  validated values, keyed by field name
+     * @param array<string,array<string,mixed>>  $fields  declared fields, keyed by name
+     * @param array<string,mixed>                $values  validated values, keyed by field name
      * @param array<string,array<string,string>> $locales per field, the locales it expands over
-     * @param int|string|null              $id      the row, for a store that has rows
+     * @param int|string|null                    $id      the row, for a store that has rows
      *
      * @return array{updated:int,id:int|string|null} rows or values actually changed, and the
      *                                               key of the row written (null when the
      *                                               store has no rows)
+     * @throws StoreException when the key is not a positive integer, or names a row that is
+     *                        gone
      */
     public function save(array $fields, array $values, array $locales, $id = null): array;
 }

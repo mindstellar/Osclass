@@ -166,7 +166,10 @@ final class PermalinkSettingsForm
     /**
      * What the view needs to draw the form.
      *
-     * @param array|null $values values a rejected save is handing back, or null for the stored ones
+     * @param array<string,mixed>|null $values values a rejected save is handing back, or null
+     *                                         for the stored ones
+     *
+     * @return array<string,mixed> view variables for osc_admin_settings_form()
      */
     public static function formVars(?array $values = null): array
     {
@@ -185,7 +188,7 @@ final class PermalinkSettingsForm
      * Runs only after a successful save, so the rules on disk always describe a structure
      * that is actually stored.
      *
-     * @param array $values the values that were written
+     * @param array<string,mixed> $values the values that were written
      *
      * @return void
      */
@@ -223,6 +226,11 @@ final class PermalinkSettingsForm
      *  5. a file is already there and was left alone
      *  6. the same, with mod_rewrite unconfirmed
      *  7. nginx, which reads no such file at all
+     *
+     * @param string $file  the .htaccess path
+     * @param string $rules the rules the server should be reading
+     *
+     * @return int one of the statuses above
      */
     private static function writeRules(string $file, string $rules): int
     {
@@ -247,6 +255,12 @@ final class PermalinkSettingsForm
     }
 
     /**
+     * Flash the message a writeRules() status calls for.
+     *
+     * @param int    $status a writeRules() status
+     * @param string $file   the .htaccess path
+     * @param string $rules  the rules the server should be reading
+     *
      * @return void
      */
     private static function reportEnabled(int $status, string $file, string $rules): void
@@ -308,6 +322,9 @@ final class PermalinkSettingsForm
     /**
      * Take our own rules back off disk, and say so. A file somebody else edited is left
      * where it is: it may be carrying rules that have nothing to do with this.
+     *
+     * @param string $file  the .htaccess path
+     * @param string $rules the rules a file of ours would be carrying
      *
      * @return void
      */
@@ -385,6 +402,11 @@ final class PermalinkSettingsForm
      * A heading inside the disclosure. Drawn as the screen has always drawn it, which is a
      * section rather than a second page head.
      *
+     * @param \mindstellar\admin\ui\FormSpec $form
+     * @param string                         $id     suffix of the custom field it is drawn by
+     * @param string                         $title
+     * @param bool                           $spaced
+     *
      * @return void
      */
     private static function section(
@@ -403,6 +425,13 @@ final class PermalinkSettingsForm
     /**
      * A structure fragment: collapsed slashes, no trailing one, and at least one letter or
      * digit left in it.
+     *
+     * @param \mindstellar\admin\ui\FormSpec $form
+     * @param string                         $name
+     * @param string                         $label
+     * @param string                         $help
+     *
+     * @return \mindstellar\admin\ui\FormSpec the same builder, for chaining
      */
     private static function path(
         \mindstellar\admin\ui\FormSpec $form,
@@ -416,7 +445,16 @@ final class PermalinkSettingsForm
             });
     }
 
-    /** A structure fragment stored as typed -- the search keywords never took the slash pass. */
+    /**
+     * A structure fragment stored as typed -- the search keywords never took the slash pass.
+     *
+     * @param \mindstellar\admin\ui\FormSpec $form
+     * @param string                         $name
+     * @param string                         $label
+     * @param string                         $help
+     *
+     * @return \mindstellar\admin\ui\FormSpec the same builder, for chaining
+     */
     private static function keyword(
         \mindstellar\admin\ui\FormSpec $form,
         string $name,
@@ -430,7 +468,13 @@ final class PermalinkSettingsForm
             ->set('pattern', self::NOT_BLANK);
     }
 
-    /** One slash where two were typed, and none on the end. */
+    /**
+     * One slash where two were typed, and none on the end.
+     *
+     * @param mixed $value
+     *
+     * @return string
+     */
     private static function normalise($value): string
     {
         return substr(str_replace('//', '/', (string)$value . '/'), 0, -1);

@@ -28,13 +28,17 @@ namespace mindstellar\admin\ui;
 final class SettingsForm
 {
     /**
-     * @param array $page   normalised page spec
-     * @param array $values values to show, keyed by field name
-     * @param array $opts   'route'   => hidden fields, 'page' and 'action' among them;
-     *                                   defaults to the generic settings controller's;
-     *                      'actions' => the submit row, as osc_admin_form_actions() takes it;
-     *                      'name'    => the form's name attribute;
-     *                      'url'     => the form's action attribute
+     * Draw a declared page's form: route, every field of every group, and the submit row.
+     *
+     * @param array<string,mixed> $page   normalised page spec
+     * @param array<string,mixed> $values values to show, keyed by field name
+     * @param array<string,mixed> $opts   'route'   => hidden fields, 'page' and 'action' among
+     *                                                 them; defaults to the generic settings
+     *                                                 controller's;
+     *                                    'actions' => the submit row, as
+     *                                                 osc_admin_form_actions() takes it;
+     *                                    'name'    => the form's name attribute;
+     *                                    'url'     => the form's action attribute
      *
      * @return void
      */
@@ -84,9 +88,9 @@ final class SettingsForm
     /**
      * One declared field, carrying the value it should show.
      *
-     * @param array  $field
-     * @param string $pageId
-     * @param array  $values
+     * @param array<string,mixed> $field
+     * @param string              $pageId
+     * @param array<string,mixed> $values
      *
      * @return void
      */

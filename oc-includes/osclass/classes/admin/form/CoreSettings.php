@@ -36,6 +36,12 @@ final class CoreSettings
      *
      * No menu entry: these screens are already on the Settings menu, built by the admin
      * theme, and a second entry would list each of them twice.
+     *
+     * @param string $id      the page id to register under
+     * @param string $title
+     * @param string $section the preference section the values are stored in
+     *
+     * @return FormSpec
      */
     public static function page(string $id, string $title, string $section = self::SECTION): FormSpec
     {
@@ -65,7 +71,10 @@ final class CoreSettings
      * path, and it is the one presentation decision these screens share. The caller decides
      * what a success says and where it goes, because no two of them say the same thing.
      *
-     * @return array the osc_settings_save() result; 'errors' empty means it was written
+     * @param string $pageId
+     *
+     * @return array{errors:string[],updated:int,values:array<string,mixed>,id:mixed} the
+     *         osc_settings_save() result; 'errors' empty means it was written
      */
     public static function attempt(string $pageId): array
     {
@@ -82,9 +91,14 @@ final class CoreSettings
      * what the fields say now -- the stored values, or the ones a rejected save is handing
      * back to be corrected.
      *
-     * @param string     $action  the settings-controller action this form posts to
-     * @param array|null $values  values to show, when a rejected save is being redrawn
-     * @param array      $opts    'name' => the form's name attribute, 'actions' => the submit row
+     * @param string                   $pageId
+     * @param string                   $action the settings-controller action this form posts to
+     * @param array<string,mixed>|null $values values to show, when a rejected save is being
+     *                                         redrawn
+     * @param array<string,mixed>      $opts   'name' => the form's name attribute,
+     *                                         'actions' => the submit row
+     *
+     * @return array<string,mixed> view variables for osc_admin_settings_form()
      */
     public static function vars(string $pageId, string $action, ?array $values = null, array $opts = array()): array
     {

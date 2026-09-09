@@ -21,7 +21,7 @@ class Form
      * Open a form: the <form>, its hidden page/action/extra fields, and the horizontal
      * wrapper. Body of osc_admin_form_open().
      *
-     * @param array $opts
+     * @param array<string,mixed> $opts
      *
      * @return void
      */
@@ -65,8 +65,8 @@ class Form
     /**
      * Close a form, optionally with its action row. Body of osc_admin_form_close().
      *
-     * @param array|null $actions
-     * @param array      $opts
+     * @param array<int,array<string,mixed>>|null $actions
+     * @param array<string,mixed>                  $opts
      *
      * @return void
      */
@@ -84,8 +84,8 @@ class Form
     /**
      * A section heading with an optional intro paragraph. Body of osc_admin_form_section().
      *
-     * @param string $title
-     * @param array  $opts
+     * @param string              $title
+     * @param array<string,mixed> $opts
      *
      * @return void
      */
@@ -119,8 +119,8 @@ class Form
      *  - a bare button otherwise.
      * plus 'label', 'variant', 'icon', 'attrs', and 'help'/'help_html'.
      *
-     * @param array $opts 'title', 'intro'/'intro_html', 'body_html' (before the actions),
-     *                    'actions' (list), 'footer_html' (after the actions)
+     * @param array<string,mixed> $opts 'title', 'intro'/'intro_html', 'body_html' (before the
+     *                            actions), 'actions' (list), 'footer_html' (after the actions)
      *
      * @return void
      */
@@ -185,8 +185,8 @@ class Form
     /**
      * Open one labelled row. Body of osc_admin_form_row_open().
      *
-     * @param string $label
-     * @param array  $opts
+     * @param string              $label
+     * @param array<string,mixed> $opts
      *
      * @return void
      */

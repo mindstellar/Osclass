@@ -161,11 +161,13 @@ final class AdminAccountForm
      * Everything the view needs to draw the screen: which page, which route, what the
      * fields say now, and what the buttons are called.
      *
-     * @param int|null $id         the account being edited, or null when one is being added
-     * @param array    $values     values to show -- what is stored, or what was just rejected
-     * @param bool     $canSetType whether the account type is this admin's to change
+     * @param int|null            $id         the account being edited, or null when one is
+     *                                        being added
+     * @param array<string,mixed> $values     values to show -- what is stored, or what was
+     *                                        just rejected
+     * @param bool                $canSetType whether the account type is this admin's to change
      *
-     * @return array
+     * @return array<string,mixed> view variables for osc_admin_settings_form()
      */
     public static function formVars($id, array $values, bool $canSetType): array
     {
@@ -216,7 +218,10 @@ final class AdminAccountForm
      * row somebody has since deleted. Columns stay strings: this row reaches the
      * admin_profile_form hook, and no plugin has ever been handed an int here.
      *
-     * @return array
+     * @param int $id
+     *
+     * @return array<string,string|null> the row as strings, or empty when there is none
+     * @throws \mindstellar\database\DbException on a failed read
      */
     public static function row(int $id): array
     {
@@ -237,11 +242,12 @@ final class AdminAccountForm
      * The rules that no single field can answer: the re-authentication, the confirmation,
      * and the two columns that are unique.
      *
-     * @param array    $values validated values, keyed by field name
-     * @param int|null $rowId  the account being saved, null while one is being added
-     * @param bool     $edit
+     * @param array<string,mixed> $values validated values, keyed by field name
+     * @param int|null            $rowId  the account being saved, null while one is being added
+     * @param bool                $edit
      *
-     * @return array<int,string>
+     * @return array<int,string> one message per rule that failed
+     * @throws \mindstellar\database\DbException on a failed read
      */
     private static function rules(array $values, $rowId, bool $edit): array
     {

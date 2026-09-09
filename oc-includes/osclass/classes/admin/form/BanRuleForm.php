@@ -74,10 +74,12 @@ final class BanRuleForm
      * Everything the view needs to draw the screen: which page, which route, what the
      * fields say now, and what the button is called.
      *
-     * @param int|null $id     the row being edited, or null when one is being added
-     * @param array    $values values to show -- what is stored, or what was just rejected
+     * @param int|null            $id     the row being edited, or null when one is being
+     *                                    added
+     * @param array<string,mixed> $values values to show -- what is stored, or what was just
+     *                                    rejected
      *
-     * @return array
+     * @return array<string,mixed> view variables for osc_admin_settings_form()
      */
     public static function formVars($id, array $values): array
     {

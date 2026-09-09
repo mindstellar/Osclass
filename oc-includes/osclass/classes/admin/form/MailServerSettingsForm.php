@@ -87,7 +87,10 @@ final class MailServerSettingsForm
     /**
      * What the view needs to draw the form.
      *
-     * @param array|null $values values a rejected save is handing back, or null for the stored ones
+     * @param array<string,mixed>|null $values values a rejected save is handing back, or null
+     *                                         for the stored ones
+     *
+     * @return array<string,mixed> view variables for osc_admin_settings_form()
      */
     public static function formVars(?array $values = null): array
     {

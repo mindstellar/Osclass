@@ -22,6 +22,14 @@ namespace mindstellar\admin\form\store;
  */
 final class StoreFactory
 {
+    /**
+     * The store a normalised page spec asks for: a TableStore when it declared one, a
+     * PreferenceStore otherwise.
+     *
+     * @param array<string,mixed> $page normalised page spec
+     *
+     * @return Store
+     */
     public static function forPage(array $page): Store
     {
         if (self::isTable($page)) {
@@ -36,6 +44,10 @@ final class StoreFactory
      *
      * A table-backed page cannot be driven by a controller that does not know which row
      * it is editing, so the decision has to be askable before a save is attempted.
+     *
+     * @param array<string,mixed> $page normalised page spec
+     *
+     * @return bool
      */
     public static function isTable(array $page): bool
     {

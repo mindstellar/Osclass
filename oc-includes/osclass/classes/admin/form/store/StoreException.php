@@ -31,11 +31,25 @@ final class StoreException extends RuntimeException
     /** The key is well formed, but no row is under it. */
     public const NO_ROW = 2;
 
+    /**
+     * The caller named something that is not a row key.
+     *
+     * @param string $detail for a log, not for a page
+     *
+     * @return self
+     */
     public static function badKey(string $detail): self
     {
         return new self($detail, self::BAD_KEY);
     }
 
+    /**
+     * The key is well formed, but no row is under it.
+     *
+     * @param string $detail for a log, not for a page
+     *
+     * @return self
+     */
     public static function noRow(string $detail): self
     {
         return new self($detail, self::NO_ROW);

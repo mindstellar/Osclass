@@ -30,7 +30,7 @@ class Field
      */
     private const PURIFIED_TYPES = array('text', 'textarea', 'tel', 'color', 'hidden');
 
-    /** @var array */
+    /** @var array<string,mixed> */
     private $spec;
 
     /** @var string */
@@ -40,7 +40,7 @@ class Field
     private $id;
 
     /**
-     * @param array $spec
+     * @param array<string,mixed> $spec
      */
     public function __construct(array $spec)
     {
@@ -148,9 +148,9 @@ class Field
      * The control alone, without its row, label or hint. One escaping path and one width
      * decision for every field type.
      *
-     * @param string $type
-     * @param string $id
-     * @param array  $spec
+     * @param string              $type
+     * @param string              $id
+     * @param array<string,mixed> $spec
      *
      * @return void
      */
@@ -299,7 +299,7 @@ class Field
      * declared settings page from osc_settings_field_locales(), a plugin from whatever it
      * already has -- so drawing a field never queries anything.
      *
-     * @param array $spec
+     * @param array<string,mixed> $spec
      *
      * @return array<string,string> code => locale name
      */
@@ -323,9 +323,9 @@ class Field
      *
      * One enabled locale gets no tabs: a single tab is a label pretending to be a choice.
      *
-     * @param string $id      the field's own id, which the panels are named from
-     * @param array  $spec
-     * @param array  $locales code => locale name
+     * @param string               $id      the field's own id, which the panels are named from
+     * @param array<string,mixed>  $spec
+     * @param array<string,string> $locales code => locale name
      *
      * @return void
      */
@@ -391,10 +391,10 @@ class Field
      * The option list of a radio group. Each option is its own label wrapping its own
      * control, so the whole line is a hit target and no id can drift from its label.
      *
-     * @param string $id
-     * @param string $name
-     * @param string $value
-     * @param array  $spec
+     * @param string              $id
+     * @param string              $name
+     * @param string              $value
+     * @param array<string,mixed> $spec
      *
      * @return void
      */
@@ -437,8 +437,8 @@ class Field
      * The width class a field gets. Width follows the field's meaning, not the page it
      * happens to sit on; 'width' overrides it when a screen genuinely needs something else.
      *
-     * @param string $type
-     * @param array  $spec
+     * @param string              $type
+     * @param array<string,mixed> $spec
      *
      * @return string
      */
@@ -491,7 +491,7 @@ class Field
     /**
      * The hint under a field, in the same help-box the admin already uses.
      *
-     * @param array $spec
+     * @param array<string,mixed> $spec
      *
      * @return void
      */
@@ -508,7 +508,7 @@ class Field
      * A field's DOM id: its own, or one derived from its name so the label is clickable
      * without every caller having to invent one.
      *
-     * @param array $spec
+     * @param array<string,mixed> $spec
      *
      * @return string
      */
@@ -527,7 +527,7 @@ class Field
      * Extra attributes as an escaped string. A value of true renders the attribute alone
      * (`readonly`), false and null drop it.
      *
-     * @param array $attrs name => value
+     * @param array<string,mixed> $attrs name => value; true renders bare, false and null drop
      *
      * @return string
      */
