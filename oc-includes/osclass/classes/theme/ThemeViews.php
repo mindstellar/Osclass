@@ -75,6 +75,10 @@ final class ThemeViews
     /**
      * A view name as the vocabulary holds it: no directory, no .php.
      * Comparison stays case-sensitive, as it has always been.
+     *
+     * @param string $name
+     *
+     * @return string
      */
     public static function normalize(string $name): string
     {

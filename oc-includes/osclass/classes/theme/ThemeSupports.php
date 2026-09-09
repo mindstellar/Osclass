@@ -33,10 +33,18 @@ final class ThemeSupports
     /** @var array<string,mixed> feature arguments, keyed by feature name */
     private array $features = [];
 
+    /**
+     * Singleton: obtain the registry through instance().
+     */
     private function __construct()
     {
     }
 
+    /**
+     * Shared registry instance, created on first use.
+     *
+     * @return self
+     */
     public static function instance(): self
     {
         if (self::$instance === null) {
@@ -47,6 +55,8 @@ final class ThemeSupports
     }
 
     /**
+     * Declare that the active theme supports $feature.
+     *
      * @param string $feature Slug, [a-z0-9_-]+, max 60 chars.
      * @param mixed  $args    Feature arguments, or true for a bare flag.
      *
@@ -65,6 +75,8 @@ final class ThemeSupports
     /**
      * Declared arguments for $feature, or false when it was never registered.
      *
+     * @param string $feature
+     *
      * @return mixed
      */
     public function get(string $feature)
@@ -72,6 +84,11 @@ final class ThemeSupports
         return $this->features[$feature] ?? false;
     }
 
+    /**
+     * Drop a declaration, leaving the feature unsupported again.
+     *
+     * @param string $feature
+     */
     public function remove(string $feature): void
     {
         unset($this->features[$feature]);
@@ -86,6 +103,13 @@ final class ThemeSupports
         $this->features = [];
     }
 
+    /**
+     * Whether $feature is a well-formed feature name.
+     *
+     * @param string $feature
+     *
+     * @return bool
+     */
     private static function isValidFeature(string $feature): bool
     {
         return $feature !== ''

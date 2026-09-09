@@ -23,11 +23,19 @@ class WebThemes extends Themes
      */
     private $path;
 
+    /**
+     * Starts out looking for themes in oc-content/themes/.
+     */
     public function __construct()
     {
         parent::__construct();
         $this->path = osc_themes_path();
     }
+    /**
+     * Load the active public theme, wrapped in the before/after init hooks.
+     *
+     * @return void
+     */
     public static function init()
     {
         Plugins::runHook('before_init_web_theme');
@@ -35,6 +43,13 @@ class WebThemes extends Themes
         Plugins::runHook('after_init_web_theme');
     }
 
+    /**
+     * Select the active theme -- the ?theme= preview when an admin is logged in,
+     * otherwise the configured one -- and require its functions.php, then the
+     * parent theme's when it declares one.
+     *
+     * @return void
+     */
     private function loadActive()
     {
         if (Params::getParam('theme') != '' && Session::newInstance()->_get('adminId') != '') {
@@ -58,10 +73,12 @@ class WebThemes extends Themes
         }
     }
     /**
+     * Header fields read out of a theme's index.php, falling back to the legacy
+     * <theme>_theme_info() function. False when the theme has neither.
      *
-     * @param  $theme
+     * @param string $theme Theme directory name.
      *
-     * @return array|bool
+     * @return array<string,mixed>|false
      */
     public function loadThemeInfo($theme)
     {
@@ -173,6 +190,8 @@ class WebThemes extends Themes
     }
 
     /**
+     * Shared WebThemes instance, created on first use.
+     *
      * @return \WebThemes
      */
     public static function newInstance()
@@ -186,6 +205,12 @@ class WebThemes extends Themes
 
     /* PUBLIC */
 
+    /**
+     * Point theme_path at the current theme's directory, falling back to the
+     * bundled storefront theme when it is missing.
+     *
+     * @return void
+     */
     public function setCurrentThemePath()
     {
         if (file_exists($this->path . $this->theme . '/')) {
@@ -197,6 +222,12 @@ class WebThemes extends Themes
         }
     }
 
+    /**
+     * Point theme_url at the current theme's directory, falling back to the
+     * bundled storefront theme when it is missing. Filtered by 'theme_url'.
+     *
+     * @return void
+     */
     public function setCurrentThemeUrl()
     {
         if ($this->theme_exists) {
@@ -208,7 +239,10 @@ class WebThemes extends Themes
     }
 
     /**
-     * @param $path
+     * Change the directory themes are looked up in. False when $path does not
+     * exist, in which case nothing changes.
+     *
+     * @param string $path
      *
      * @return bool
      */
@@ -223,6 +257,11 @@ class WebThemes extends Themes
         return false;
     }
 
+    /**
+     * Force the bundled storefront theme and require its functions.php.
+     *
+     * @return void
+     */
     public function setGuiTheme()
     {
         $this->theme = '';
@@ -237,6 +276,11 @@ class WebThemes extends Themes
         }
     }
 
+    /**
+     * Switch to the parent theme declared by the current child theme's header.
+     *
+     * @return void
+     */
     public function setParentTheme()
     {
         $info = $this->loadThemeInfo($this->theme);
@@ -256,7 +300,7 @@ class WebThemes extends Themes
     /**
      * This function returns an array of themes (those copied in the oc-content/themes folder)
      *
-     * @return array
+     * @return string[] theme directory names
      */
     public function getListThemes()
     {
@@ -286,7 +330,7 @@ class WebThemes extends Themes
      * theme declared through osc_add_theme_support('views', …), so a theme with
      * views core has never heard of can protect their names without a core patch.
      *
-     * @param $internal_name
+     * @param string $internal_name
      *
      * @return bool
      */
@@ -296,9 +340,12 @@ class WebThemes extends Themes
     }
 
     /**
-     * @param null $theme
+     * Filenames of the template-*.php files a theme ships, defaulting to the
+     * current theme.
      *
-     * @return array
+     * @param string|null $theme Theme directory name.
+     *
+     * @return string[]
      */
     public function getAvailableTemplates($theme = null)
     {

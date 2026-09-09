@@ -95,10 +95,18 @@ final class SettingsPageRegistry
     /** @var array<string,int> ids a second registration tried to claim */
     private array $conflicts = array();
 
+    /**
+     * Singleton: obtain the registry through instance().
+     */
     private function __construct()
     {
     }
 
+    /**
+     * Shared registry instance, created on first use.
+     *
+     * @return self
+     */
     public static function instance(): self
     {
         if (self::$instance === null) {
@@ -267,6 +275,10 @@ final class SettingsPageRegistry
     /**
      * The spec for a registered page, or null when the id is not registered (e.g. its
      * plugin is deactivated -- which is exactly when a bookmarked URL is still requested).
+     *
+     * @param string $id
+     *
+     * @return array<string,mixed>|null
      */
     public function get(string $id): ?array
     {
@@ -287,6 +299,8 @@ final class SettingsPageRegistry
      * Every field on a page, flattened out of its groups and keyed by name. The save
      * path walks this rather than the groups: what a field is grouped with is a layout
      * decision and has nothing to do with what gets stored.
+     *
+     * @param string $id
      *
      * @return array<string,array>
      */
@@ -320,6 +334,10 @@ final class SettingsPageRegistry
 
     /**
      * Whether $id is a well-formed page id.
+     *
+     * @param string $id
+     *
+     * @return bool
      */
     public static function isValidId(string $id): bool
     {
@@ -333,9 +351,12 @@ final class SettingsPageRegistry
      * A store nobody implements has to be refused here: accepted, it would fall back to
      * preferences and the page would look saved while its table stayed empty.
      *
-     * @param mixed $store
+     * @param string $id
+     * @param mixed  $store
      *
-     * @throws InvalidArgumentException
+     * @return array<string,string>
+     * @throws InvalidArgumentException on a store core does not implement, or a
+     *         table/pk that is not an identifier.
      */
     private function normaliseStore(string $id, $store): array
     {
@@ -380,7 +401,12 @@ final class SettingsPageRegistry
      * Both kinds of key are held to a shape; only the rules after that are about columns,
      * because only a table has any.
      *
-     * @throws InvalidArgumentException
+     * @param string               $id
+     * @param array<string,mixed>  $field
+     * @param string               $type Normalised field type.
+     * @param array<string,string> $store Output of normaliseStore().
+     *
+     * @throws InvalidArgumentException when the field cannot be stored through this store.
      */
     private function checkFieldStorage(string $id, array $field, string $type, array $store): void
     {
@@ -428,7 +454,13 @@ final class SettingsPageRegistry
      * Check the shape of every group and field up front, so a typo in a spec is an
      * exception at registration time rather than a silently missing field on a page.
      *
-     * @throws InvalidArgumentException
+     * @param string                         $id
+     * @param array<int,array<string,mixed>> $groups
+     * @param array<string,string>           $store Output of normaliseStore().
+     *
+     * @return array<int,array<string,mixed>> normalised groups, each array{title:string,
+     *         intro:string, fields:array<int,array<string,mixed>>}
+     * @throws InvalidArgumentException on a malformed group, field, depends chain or cycle.
      */
     private function normaliseGroups(string $id, array $groups, array $store): array
     {
