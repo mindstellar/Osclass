@@ -158,7 +158,7 @@ function osc_has_city_areas($city = '%%%%')
  */
 function osc_count_countries()
 {
-    if (!View::newInstance()->_exists('contries')) {
+    if (!View::newInstance()->_exists('countries')) {
         View::newInstance()
             ->_exportVariableToView('countries', CountryStats::newInstance()->listCountries('>=', 'country_name ASC'));
     }

@@ -1003,13 +1003,13 @@ function osc_list_region_name()
 }
 
 /**
- * Gets the name of current "list region" by slug
+ * Gets the slug of current "list region"
  *
  * @return string
  */
 function osc_list_region_slug()
 {
-    return osc_field(osc_list_region(), 'region_name', '');
+    return osc_field(osc_list_region(), 'region_slug', '');
 }
 
 /**

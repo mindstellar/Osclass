@@ -28,13 +28,18 @@ function osc_cache_add($key, $data, $expire = 0)
 }
 
 /**
- * Close the active cache driver. No bundled driver implements close().
+ * Close the active cache driver.
  *
- * @return mixed
+ * No bundled driver implements close() -- iObject_Cache releases through __destruct --
+ * so this is a no-op unless a custom driver defines one.
+ *
+ * @return mixed True when the driver has nothing to close
  */
 function osc_cache_close()
 {
-    return Object_Cache_Factory::newInstance()->close();
+    $cache = Object_Cache_Factory::newInstance();
+
+    return method_exists($cache, 'close') ? $cache->close() : true;
 }
 
 /**

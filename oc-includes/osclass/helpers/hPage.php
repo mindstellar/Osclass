@@ -157,7 +157,7 @@ function osc_static_page_meta($field = null)
     } else {
         $meta = View::newInstance()->_get('page_meta');
     }
-    if ($field == null) {
+    if ($field !== null) {
         $meta = (isset($meta[$field]) && !empty($meta[$field])) ? $meta[$field] : '';
     }
 
