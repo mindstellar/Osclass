@@ -18,7 +18,11 @@
 class LanguageForm extends Form
 {
     /**
-     * @param bool $admin
+     * Echo the client-side validation script for the language form.
+     *
+     * @param bool $admin Unused
+     *
+     * @return void
      */
     public static function js_validation($admin = false)
     {

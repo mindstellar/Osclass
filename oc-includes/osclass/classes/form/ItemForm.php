@@ -18,7 +18,11 @@
 class ItemForm extends Form
 {
     /**
-     * @param $item
+     * Echo the hidden input carrying the item id.
+     *
+     * @param array<string,mixed>|null $item Defaults to the current item
+     *
+     * @return void
      */
     public static function primary_input_hidden($item)
     {
@@ -29,12 +33,15 @@ class ItemForm extends Form
     }
 
     /**
-     * @param null $categories
-     * @param null $item
-     * @param null $default_item
-     * @param bool $parent_selectable
+     * Echo the category select for the item form, marking the item's or the posted category.
      *
-     * @return bool
+     * @param array<int,array<string,mixed>>|null $categories        Defaults to the view's or the site's categories
+     * @param array<string,mixed>|null            $item              Defaults to the current item
+     * @param string|null                         $default_item      Placeholder option label
+     * @param bool                                $parent_selectable Allow selecting a parent category
+     * @param array<string,scalar>                $attributes        Extra attributes for the <select>
+     *
+     * @return bool always true
      */
     public static function category_select(
         $categories = null,
@@ -101,10 +108,14 @@ class ItemForm extends Form
     }
 
     /**
-     * @param      $categories
-     * @param      $item
-     * @param null $default_item
-     * @param int  $deep
+     * Echo the <option> rows for a subcategory tree, recursing into deeper levels.
+     *
+     * @param array<int,array<string,mixed>> $categories
+     * @param array<string,mixed>|null       $item
+     * @param string|null                    $default_item Unused
+     * @param int                            $deep
+     *
+     * @return void
      */
     public static function subcategory_select($categories, $item, $default_item = null, $deep = 0)
     {
@@ -131,6 +142,16 @@ class ItemForm extends Form
             }
         }
     }
+    /**
+     * Echo the cascading category selects (one per tree level) plus the hidden catId input.
+     *
+     * @param array<int,array<string,mixed>>|null $categories        Defaults to every enabled category
+     * @param array<string,mixed>|null            $item              Defaults to the current item
+     * @param string|null                         $default_item      Unused
+     * @param bool                                $parent_selectable Unused
+     *
+     * @return void
+     */
     public static function category_multiple_selects(
         $categories = null,
         $item = null,
@@ -276,11 +297,13 @@ class ItemForm extends Form
     }
 
     /**
-     * @param null $users
-     * @param null $item
-     * @param null $default_item
+     * Echo a select of users, marking the item's owner.
      *
-     * @return bool
+     * @param array<int,array<string,mixed>>|null $users        Defaults to every user
+     * @param array<string,mixed>|null            $item         Defaults to the current item
+     * @param string|null                         $default_item Placeholder option label
+     *
+     * @return bool always true
      */
     public static function user_select($users = null, $item = null, $default_item = null)
     {
@@ -322,10 +345,12 @@ class ItemForm extends Form
     }
 
     /**
-     * @param string $type
+     * Echo the expiration-date input; editing defaults to -1, meaning "leave unchanged".
+     *
+     * @param string $type  'add' or 'edit'
      * @param string $value
      *
-     * @return bool
+     * @return bool always true
      */
     public static function expiration_input($type = 'add', $value = '')
     {
@@ -338,6 +363,14 @@ class ItemForm extends Form
 
         return true;
     }
+    /**
+     * Echo the per-locale title and description fields in the legacy tabber markup.
+     *
+     * @param array<int,array<string,mixed>>|null $locales Defaults to the enabled locales
+     * @param array<string,mixed>|null            $item    Defaults to the current item
+     *
+     * @return void
+     */
     public static function multilanguage_title_description($locales = null, $item = null)
     {
         if ($locales === null) {
@@ -394,11 +427,13 @@ class ItemForm extends Form
     }
 
     /**
-     * @param        $name
-     * @param string $locale
-     * @param string $value
+     * Echo one locale's item title input.
      *
-     * @return bool
+     * @param string      $name   Base input name; the locale code is appended as an array key
+     * @param string|null $locale Defaults to the posting locale
+     * @param string      $value
+     *
+     * @return bool always true
      */
     public static function title_input($name, $locale = null, $value = '')
     {
@@ -447,11 +482,13 @@ class ItemForm extends Form
     }
 
     /**
-     * @param        $name
-     * @param string $locale
-     * @param string $value
+     * Echo one locale's item description textarea.
      *
-     * @return bool
+     * @param string      $name   Base input name; the locale code is appended as an array key
+     * @param string|null $locale Defaults to the posting locale
+     * @param string      $value
+     *
+     * @return bool always true
      */
     public static function description_textarea($name, $locale = null, $value = '')
     {
@@ -464,7 +501,11 @@ class ItemForm extends Form
     }
 
     /**
-     * @param null $item
+     * Echo the price input, preferring the failed-submit session value.
+     *
+     * @param array<string,mixed>|null $item Defaults to the current item
+     *
+     * @return void
      */
     public static function price_input_text($item = null)
     {
@@ -481,8 +522,12 @@ class ItemForm extends Form
     }
 
     /**
-     * @param array|null $currencies
-     * @param array|null $item
+     * Echo the currency select, or a hidden input when only one currency exists.
+     *
+     * @param array<int,array<string,mixed>>|null $currencies Defaults to the enabled currencies
+     * @param array<string,mixed>|null            $item       Defaults to the current item
+     *
+     * @return void
      */
     public static function currency_select($currencies = null, $item = null)
     {
@@ -519,10 +564,12 @@ class ItemForm extends Form
     }
 
     /**
-     * @param array|null $countries
-     * @param array|null $item
+     * Echo the country select, marking the item's country.
      *
-     * @return bool
+     * @param array<int,array<string,mixed>>|null $countries Defaults to the enabled countries
+     * @param array<string,mixed>|null            $item      Defaults to the current item
+     *
+     * @return bool always true
      */
     public static function country_select($countries = null, $item = null)
     {
@@ -560,9 +607,11 @@ class ItemForm extends Form
     }
 
     /**
-     * @param null $item
+     * Echo the country name input and its hidden country-code companion, defaulting to the only country when there is one.
      *
-     * @return bool
+     * @param array<string,mixed>|null $item Defaults to the current item
+     *
+     * @return bool always true
      */
     public static function country_text($item = null)
     {
@@ -597,10 +646,12 @@ class ItemForm extends Form
     }
 
     /**
-     * @param null $regions
-     * @param null $item
+     * Echo the region select for the item's country, or a free-text input when it has no regions.
      *
-     * @return bool
+     * @param array<int,array<string,mixed>>|null $regions Defaults to the selected country's regions
+     * @param array<string,mixed>|null            $item    Defaults to the current item
+     *
+     * @return bool always true
      */
     public static function region_select($regions = null, $item = null)
     {
@@ -658,10 +709,12 @@ class ItemForm extends Form
     }
 
     /**
-     * @param null $cities
-     * @param null $item
+     * Echo the city select for the item's region, or a free-text input when it has no cities.
      *
-     * @return bool
+     * @param array<int,array<string,mixed>>|null $cities Defaults to the selected region's cities
+     * @param array<string,mixed>|null            $item   Defaults to the current item
+     *
+     * @return bool always true
      */
     public static function city_select($cities = null, $item = null)
     {
@@ -714,9 +767,11 @@ class ItemForm extends Form
     }
 
     /**
-     * @param null $item
+     * Echo the region name input and its hidden region-id companion.
      *
-     * @return bool
+     * @param array<string,mixed>|null $item Defaults to the current item
+     *
+     * @return bool always true
      */
     public static function region_text($item = null)
     {
@@ -741,9 +796,11 @@ class ItemForm extends Form
     }
 
     /**
-     * @param null $item
+     * Echo the city name input and its hidden city-id companion.
      *
-     * @return bool
+     * @param array<string,mixed>|null $item Defaults to the current item
+     *
+     * @return bool always true
      */
     public static function city_text($item = null)
     {
@@ -764,9 +821,11 @@ class ItemForm extends Form
     }
 
     /**
-     * @param null $item
+     * Echo the city area input and its hidden city-area-id companion.
      *
-     * @return bool
+     * @param array<string,mixed>|null $item Defaults to the current item
+     *
+     * @return bool always true
      */
     public static function city_area_text($item = null)
     {
@@ -790,9 +849,11 @@ class ItemForm extends Form
     }
 
     /**
-     * @param null $item
+     * Echo the street address input.
      *
-     * @return bool
+     * @param array<string,mixed>|null $item Defaults to the current item
+     *
+     * @return bool always true
      */
     public static function address_text($item = null)
     {
@@ -811,9 +872,11 @@ class ItemForm extends Form
     }
 
     /**
-     * @param null $item
+     * Echo the postcode input.
      *
-     * @return bool
+     * @param array<string,mixed>|null $item Defaults to the current item
+     *
+     * @return bool always true
      */
     public static function zip_text($item = null)
     {
@@ -829,9 +892,11 @@ class ItemForm extends Form
     }
 
     /**
-     * @param null $item
+     * Echo the contact name input.
      *
-     * @return bool
+     * @param array<string,mixed>|null $item Defaults to the current item
+     *
+     * @return bool always true
      */
     public static function contact_name_text($item = null)
     {
@@ -850,9 +915,11 @@ class ItemForm extends Form
     }
 
     /**
-     * @param null $item
+     * Echo the contact email input.
      *
-     * @return bool
+     * @param array<string,mixed>|null $item Defaults to the current item
+     *
+     * @return bool always true
      */
     public static function contact_email_text($item = null)
     {
@@ -871,9 +938,11 @@ class ItemForm extends Form
     }
 
     /**
-     * @param null $item
+     * Echo the contact phone input.
      *
-     * @return bool
+     * @param array<string,mixed>|null $item Defaults to the current item
+     *
+     * @return bool always true
      */
     public static function contact_phone_text($item = null)
     {
@@ -893,7 +962,9 @@ class ItemForm extends Form
     // NOTHING TO DO
 
     /**
-     * @return bool
+     * Echo hidden contact name and email inputs for the logged-in user.
+     *
+     * @return bool false when nobody is logged in
      */
     public static function user_data_hidden()
     {
@@ -910,9 +981,11 @@ class ItemForm extends Form
     }
 
     /**
-     * @param null $item
+     * Echo the "show my email" checkbox.
      *
-     * @return bool
+     * @param array<string,mixed>|null $item Defaults to the current item
+     *
+     * @return bool always true
      */
     public static function show_email_checkbox($item = null)
     {
@@ -932,7 +1005,12 @@ class ItemForm extends Form
     }
 
     /**
-     * @param string $path
+     * Echo (or enqueue) the autocomplete-based country/region/city script.
+     *
+     * @param string $path    'admin' to target the admin base url, anything else the public one
+     * @param bool   $enqueue Buffer the script and hand it to Scripts::enqueueScriptCode
+     *
+     * @return void
      */
     public static function location_javascript_new($path = 'front', $enqueue = false)
     {
@@ -1134,7 +1212,12 @@ class ItemForm extends Form
     }
 
     /**
-     * @param string $path
+     * Echo (or enqueue) the select-based country/region/city cascade script.
+     *
+     * @param string $path    'admin' to target the admin base url, anything else the public one
+     * @param bool   $enqueue Buffer the script and hand it to Scripts::enqueueScriptCode
+     *
+     * @return void
      */
     public static function location_javascript($path = 'front', $enqueue = false)
     {
@@ -1375,8 +1458,11 @@ class ItemForm extends Form
     }
 
     /**
-     * @param null $resources
+     * Echo the existing item photos with their delete links.
      *
+     * @param array<int,array<string,mixed>>|null $resources Defaults to the current item's resources
+     *
+     * @return void
      */
     public static function photos($resources = null)
     {
@@ -1407,6 +1493,11 @@ class ItemForm extends Form
         <?php }
         }
 
+    /**
+     * Echo the add/remove photo-field script for the item form.
+     *
+     * @return void
+     */
     public static function photos_javascript()
     {
         ?>
@@ -1485,13 +1576,22 @@ class ItemForm extends Form
         <?php
     }
 
+    /**
+     * Echo the plugin item fields for the edit form, carrying the listing id.
+     *
+     * @return void
+     */
     public static function plugin_edit_item()
     {
         self::plugin_post_item('edit&itemId=' . osc_item_id());
     }
 
     /**
+     * Echo the plugin item fields, running the hook named by $case.
+     *
      * @param string $case 'form', 'edit', or the legacy 'edit&itemId=123' form
+     *
+     * @return void
      */
     public static function plugin_post_item($case = 'form')
     {
@@ -1681,6 +1781,13 @@ class ItemForm extends Form
         self::plugin_post_item();
     }
 
+    /**
+     * Echo the ajax photo uploader, seeded with the item's existing photos.
+     *
+     * @param array<int,array<string,mixed>>|null $resources Defaults to the current item's resources
+     *
+     * @return void
+     */
     public static function ajax_photos($resources = null)
     {
         // Core enqueues both from the head for the publish and edit routes. These

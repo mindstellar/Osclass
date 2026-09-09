@@ -17,6 +17,11 @@
  */
 class AdminForm extends Form
 {
+    /**
+     * Echo the client-side validation script for the admin user form.
+     *
+     * @return void
+     */
     public static function js_validation()
     {
         // Admin-only form: uses the admin's native validator (ui-osc.js), not jQuery.

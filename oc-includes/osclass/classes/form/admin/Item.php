@@ -57,6 +57,10 @@ class Item extends FormInputs
      */
     private $userLocales;
 
+    /**
+     * @param \mindstellar\utility\Escape|null   $escape   Defaults to a new Escape instance
+     * @param \mindstellar\utility\Sanitize|null $sanitize Defaults to a new Sanitize instance
+     */
     public function __construct(?Escape $escape = null, ?Sanitize $sanitize = null)
     {
         parent::__construct($escape, $sanitize);
@@ -68,6 +72,8 @@ class Item extends FormInputs
     }
 
     /**
+     * The shared admin item form instance.
+     *
      * @return \mindstellar\form\admin\Item
      */
     public static function instance(): Item
@@ -82,8 +88,10 @@ class Item extends FormInputs
     /**
      * Generate MultiLanguage Title Description Fields for Item
      *
-     * @param null $locales
-     * @param null $item
+     * @param array<string,mixed>|null $item     Defaults to the current item
+     * @param bool                     $with_tab Also print the locale tab strip
+     *
+     * @return void
      */
     public function printMultiLangTitleDesc($item = null, $with_tab = true)
     {
@@ -107,6 +115,8 @@ class Item extends FormInputs
 
     /**
      * Print MultiLang Tab
+     *
+     * @return void
      */
     public function printMultiLangTab()
     {
@@ -126,8 +136,10 @@ class Item extends FormInputs
     /**
      * Print Item Title Input
      *
-     * @param                                   $locale
-     * @param array                             $item
+     * @param array<string,mixed>      $locale
+     * @param array<string,mixed>|null $item
+     *
+     * @return void
      */
     private function printItemTitleInput($locale, ?array $item = null)
     {
@@ -155,8 +167,10 @@ class Item extends FormInputs
     /**
      * Print Item Description Text Area
      *
-     * @param                                   $locale
-     * @param array                             $item
+     * @param array<string,mixed>      $locale
+     * @param array<string,mixed>|null $item
+     *
+     * @return void
      */
     private function printItemDescriptionInput($locale, ?array $item = null)
     {
@@ -184,8 +198,8 @@ class Item extends FormInputs
     /**
      * print price field and Currency Select Input
      *
-     * @param array|null $currencies
-     * @param array|null $item
+     * @return void
+     * @throws \Exception when an input name is empty
      */
     public function itemPrice()
     {
@@ -230,8 +244,9 @@ class Item extends FormInputs
     /**
      * Print Price Input without currency select
      *
-     * @param array $item
+     * @param array<string,mixed>|null $item
      *
+     * @return void
      */
     private function printPriceInput(?array $item = null)
     {

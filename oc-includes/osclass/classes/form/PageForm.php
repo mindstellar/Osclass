@@ -20,7 +20,11 @@ use mindstellar\utility\Deprecate;
 class PageForm extends Form
 {
     /**
-     * @param null $page
+     * Echo the hidden input carrying the page id, when the page exists.
+     *
+     * @param array<string,mixed>|null $page
+     *
+     * @return void
      */
     public static function primary_input_hidden($page = null)
     {
@@ -31,7 +35,11 @@ class PageForm extends Form
     }
 
     /**
-     * @param null $page
+     * Echo the internal-name field, read-only for indelible pages.
+     *
+     * @param array<string,mixed>|null $page
+     *
+     * @return void
      */
     public static function internal_name_input_text($page = null)
     {
@@ -57,7 +65,11 @@ class PageForm extends Form
     }
 
     /**
-     * @param null $page
+     * Echo the "show in links" checkbox for a page.
+     *
+     * @param array<string,mixed>|null $page
+     *
+     * @return void
      */
     public static function link_checkbox($page = null)
     {
@@ -69,9 +81,14 @@ class PageForm extends Form
     }
 
     /**
-     * @deprecated
-     * @param      $locales
-     * @param null $page
+     * Echo the per-locale title and body fields in the legacy tabber markup.
+     *
+     * @param array<int,array<string,mixed>> $locales
+     * @param array<string,mixed>|null       $page
+     *
+     * @return void
+     * @deprecated since 5.1.0
+     * @see printMultiLangTitleDesc
      */
     public static function multilanguage_name_description($locales, $page = null)
     {
@@ -136,8 +153,10 @@ class PageForm extends Form
     /**
      * Generate MultiLanguage Title Description Fields for Item
      *
-     * @param null $locales
-     * @param null $page
+     * @param array<string,mixed>|null $page
+     * @param bool                     $with_tab Also print the locale tab strip
+     *
+     * @return void
      */
     public static function printMultiLangTitleDesc($page = null, $with_tab = true)
     {
@@ -158,6 +177,8 @@ class PageForm extends Form
 
     /**
      * Print MultiLang Tab
+     *
+     * @return void
      */
     public static function printMultiLangTab()
     {
@@ -178,8 +199,10 @@ class PageForm extends Form
     /**
      * Print Item Title Input
      *
-     * @param                                   $locale
-     * @param array                             $page
+     * @param array<string,mixed> $locale
+     * @param array<string,mixed> $page
+     *
+     * @return void
      */
     private static function printPageTitleInput($locale, array $page)
     {
@@ -212,8 +235,10 @@ class PageForm extends Form
     /**
      * Print Item Description Text Area
      *
-     * @param                                   $locale
-     * @param array                             $item
+     * @param array<string,mixed>      $locale
+     * @param array<string,mixed>|null $page
+     *
+     * @return void
      */
     private static function printPageDescriptionInput($locale, ?array $page = null)
     {

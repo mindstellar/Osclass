@@ -73,8 +73,8 @@ class FormInputs implements InputInterface
     /**
      * FormInputs constructor.
      *
-     * @param \mindstellar\utility\Escape   $escape
-     * @param \mindstellar\utility\Sanitize $sanitize
+     * @param \mindstellar\utility\Escape|null   $escape   Defaults to a new Escape instance
+     * @param \mindstellar\utility\Sanitize|null $sanitize Defaults to a new Sanitize instance
      */
     public function __construct(?Escape $escape = null, ?Sanitize $sanitize = null)
     {
@@ -91,13 +91,15 @@ class FormInputs implements InputInterface
     }
 
     /**
-     * @param string $name
-     * @param        $value
-     * @param array  $attributes
-     * @param array  $options
+     * Generate a text input, defaulting type and css class when not given.
+     *
+     * @param string              $name
+     * @param mixed               $value
+     * @param array<string,mixed> $attributes
+     * @param array<string,mixed> $options
      *
      * @return string
-     * @throws \Exception
+     * @throws \Exception when the input name is empty
      */
     public function text(string $name, $value, array $attributes = [], array $options = []): string
     {
@@ -114,10 +116,10 @@ class FormInputs implements InputInterface
     /**
      * Common method for generating all inputs type
      *
-     * @param string $name
-     * @param null   $value
-     * @param array  $attributes                                input tag attributes
-     * @param array  $options                                   This contains flag for input
+     * @param string              $name
+     * @param mixed               $values
+     * @param array<string,mixed> $attributes                   input tag attributes
+     * @param array<string,mixed> $options                      This contains flag for input
      *                                                          Supported flag in $options array :
      *                                                          'selectPlaceholder' : placeholder for select input
      *                                                          'label' : label for input
@@ -352,11 +354,11 @@ class FormInputs implements InputInterface
     }
 
     /**
-     * Handler for given input option array
+     * Merge the given input options over the class defaults, in place.
      *
-     * @param array $options
-     * @param array $attributes
+     * @param array<string,mixed> $options
      *
+     * @return void
      */
     private function handleOptions(array &$options)
     {
@@ -365,9 +367,13 @@ class FormInputs implements InputInterface
     }
 
     /**
-     * @param array $options
+     * Build the opening and closing markup for the wrapper, label and input containers.
      *
-     * @return array
+     * @param array<string,mixed> $options
+     *
+     * @return array{0:string,1:string,2:string,3:string,4:string,5:string} divStart, divEnd,
+     *                                                                     labelDivStart, labelDivEnd,
+     *                                                                     inputDivStart, inputDivEnd
      */
     private function setContainerClasses(array $options): array
     {
@@ -434,9 +440,10 @@ class FormInputs implements InputInterface
     /**
      * Common method for generating label
      *
-     * @param string $label
-     * @param string $for
-     * @param string $class
+     * @param string      $label
+     * @param string|null $for   Id of the control this labels; null for a group label
+     * @param string|null $class Defaults to the class-wide label class
+     * @param string|null $id    Id put on the label itself, for aria-labelledby
      *
      * @return string
      */
@@ -477,10 +484,12 @@ class FormInputs implements InputInterface
     }
 
     /**
-     * Private function for handling select options
+     * Render the <option> (and optional <optgroup>) markup of a select box.
      *
-     * @param string|int   $value
-     * @param              $options ['optgroupLevel'] -1 = no optgroup, 0 = first level, 1 = second level, etc
+     * @param string|int|null     $value   The currently selected value
+     * @param array<string,mixed> $options ['optGroupLevel'] -1 = no optgroup, 0 = first level, 1 = second level, etc
+     *
+     * @return string
      */
     private function getOptionsString($value, $options): string
     {
@@ -544,11 +553,9 @@ class FormInputs implements InputInterface
     }
 
     /**
-     * Common method for printing customHtml after input tag
+     * Escape custom html appended after an input tag.
      *
-     * @param string $label
-     * @param string $for
-     * @param string $class
+     * @param string $htmlContent
      *
      * @return string
      */
@@ -560,10 +567,10 @@ class FormInputs implements InputInterface
     /**
      * Generate Text Area Input
      *
-     * @param string $name
-     * @param        $value
-     * @param array  $attributes
-     * @param array  $options
+     * @param string              $name
+     * @param mixed               $value
+     * @param array<string,mixed> $attributes
+     * @param array<string,mixed> $options
      *
      * @return string
      * @throws \Exception
@@ -591,10 +598,10 @@ class FormInputs implements InputInterface
     /**
      * Generate Checkbox Input
      *
-     * @param string $name
-     * @param        $value
-     * @param array  $attributes
-     * @param array  $options
+     * @param string              $name
+     * @param mixed               $value
+     * @param array<string,mixed> $attributes
+     * @param array<string,mixed> $options
      *
      * @return string
      * @throws \Exception
@@ -613,10 +620,10 @@ class FormInputs implements InputInterface
     /**
      * Generate Select Input
      *
-     * @param string $name
-     * @param string $value
-     * @param array  $attributes                                input tag attributes
-     * @param array  $options                                   This contains flag for input
+     * @param string              $name
+     * @param string|int|null     $value
+     * @param array<string,mixed> $attributes                   input tag attributes
+     * @param array<string,mixed> $options                      This contains flag for input
      *                                                          Supported flag in $options array :
      *                                                          'selectPlaceholder' : placeholder for select input
      *                                                          'label' : label for input
@@ -645,10 +652,10 @@ class FormInputs implements InputInterface
     /**
      * Generate Password Input
      *
-     * @param string $name
-     * @param string $value
-     * @param array  $attributes
-     * @param array  $options
+     * @param string              $name
+     * @param string              $value
+     * @param array<string,mixed> $attributes
+     * @param array<string,mixed> $options
      *
      * @return string
      * @throws \Exception
@@ -668,10 +675,10 @@ class FormInputs implements InputInterface
     /**
      * Generate radio input
      *
-     * @param string $name
-     * @param        $value
-     * @param array  $attributes
-     * @param array  $options
+     * @param string              $name
+     * @param mixed               $value
+     * @param array<string,mixed> $attributes
+     * @param array<string,mixed> $options
      *
      * @return string
      * @throws \Exception
@@ -690,10 +697,10 @@ class FormInputs implements InputInterface
     /**
      * Generate hidden input
      *
-     * @param string $name
-     * @param        $value
-     * @param array  $attributes
-     * @param array  $options
+     * @param string              $name
+     * @param mixed               $value
+     * @param array<string,mixed> $attributes
+     * @param array<string,mixed> $options
      *
      * @return string
      * @throws \Exception
@@ -708,9 +715,9 @@ class FormInputs implements InputInterface
     /**
      * Generate submit input
      *
-     * @param string $name
-     * @param array  $attributes
-     * @param array  $options
+     * @param string              $name
+     * @param array<string,mixed> $attributes
+     * @param array<string,mixed> $options
      *
      * @return string
      * @throws \Exception
@@ -729,9 +736,9 @@ class FormInputs implements InputInterface
     /**
      * Generate file input
      *
-     * @param string $name
-     * @param array  $attributes
-     * @param array  $options
+     * @param string              $name
+     * @param array<string,mixed> $attributes
+     * @param array<string,mixed> $options
      *
      * @return string
      * @throws \Exception
