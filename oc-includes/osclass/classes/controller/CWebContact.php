@@ -17,6 +17,9 @@
  */
 class CWebContact extends BaseModel
 {
+    /**
+     * Boots the base controller and fires the `init_contact` hook.
+     */
     public function __construct()
     {
         parent::__construct();
@@ -26,7 +29,10 @@ class CWebContact extends BaseModel
     //Business Layer...
 
     /**
-     * @return bool|false
+     * Sends the contact message on `contact_post`, otherwise renders the contact form.
+     *
+     * @return false|null false only when the captcha check failed and the request was
+     *                    redirected back to the form
      */
     public function doModel()
     {
@@ -176,7 +182,9 @@ MESSAGE;
     //hopefully generic...
 
     /**
-     * @param $file
+     * Renders the contact template with its canonical URL exported to the view.
+     *
+     * @param string $file Absolute path to the located template
      *
      * @return void
      */

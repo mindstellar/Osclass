@@ -17,6 +17,10 @@
  */
 class CWebUser extends WebSecBaseModel
 {
+    /**
+     * Boots the secured base controller, bounces the visitor home when accounts are
+     * disabled, and fires the `init_user` hook.
+     */
     public function __construct()
     {
         parent::__construct();
@@ -28,6 +32,12 @@ class CWebUser extends WebSecBaseModel
     }
 
     //Business Layer...
+    /**
+     * Dispatches the signed-in account actions (dashboard, profile, alerts, listings,
+     * password and email changes, account deletion) and renders their views.
+     *
+     * @return void
+     */
     public function doModel()
     {
         switch ($this->action) {
@@ -482,7 +492,9 @@ class CWebUser extends WebSecBaseModel
     //hopefully generic...
 
     /**
-     * @param $file
+     * Renders the account template, falling back to core's view when the theme has none.
+     *
+     * @param string $file Absolute path to the located template
      *
      * @return void
      */

@@ -23,6 +23,10 @@ class CWebItem extends BaseModel
     private $user;
     private $userId;
 
+    /**
+     * Boots the base controller, opens the Item model, loads the signed-in user (if any)
+     * and fires the `init_item` hook.
+     */
     public function __construct()
     {
         parent::__construct();
@@ -42,7 +46,11 @@ class CWebItem extends BaseModel
     //Business Layer...
 
     /**
-     * @return bool|void
+     * Dispatches every listing action -- publish, edit, activate, delete, contact, send to a
+     * friend, comments, the view beacon -- and renders the listing page by default.
+     *
+     * @return false|null false only when a captcha check failed and the request was
+     *                    redirected back to the form
      */
     public function doModel()
     {
@@ -974,7 +982,9 @@ class CWebItem extends BaseModel
     //hopefully generic...
 
     /**
-     * @param $file
+     * Renders the listing template, letting core's page view claim it first.
+     *
+     * @param string $file Absolute path to the located template
      *
      * @return void
      */

@@ -17,6 +17,10 @@
  */
 class CWebLogin extends BaseModel
 {
+    /**
+     * Boots the base controller, bounces the visitor home when accounts are disabled,
+     * and fires the `init_login` hook.
+     */
     public function __construct()
     {
         parent::__construct();
@@ -28,6 +32,12 @@ class CWebLogin extends BaseModel
     }
 
     //Business Layer...
+    /**
+     * Handles the login, activation-resend and password recovery/reset actions; with no
+     * action it renders the login form.
+     *
+     * @return void
+     */
     public function doModel()
     {
         switch ($this->action) {
@@ -353,7 +363,9 @@ class CWebLogin extends BaseModel
     //hopefully generic...
 
     /**
-     * @param $file
+     * Renders the account template, marked noindex.
+     *
+     * @param string $file Absolute path to the located template
      *
      * @return void
      */

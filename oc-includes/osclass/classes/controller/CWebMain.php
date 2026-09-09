@@ -17,6 +17,9 @@
  */
 class CWebMain extends BaseModel
 {
+    /**
+     * Boots the base controller and fires the `init_main` hook.
+     */
     public function __construct()
     {
         parent::__construct();
@@ -24,6 +27,12 @@ class CWebMain extends BaseModel
     }
 
     //Business Layer...
+    /**
+     * Logs the visitor out and redirects home on the `logout` action; otherwise renders the
+     * homepage template.
+     *
+     * @return void
+     */
     public function doModel()
     {
         $i = $this->action;
@@ -52,7 +61,9 @@ class CWebMain extends BaseModel
     //hopefully generic...
 
     /**
-     * @param $file
+     * Renders the given theme template between the `before_html` and `after_html` hooks.
+     *
+     * @param string $file Absolute path to the located template
      *
      * @return void
      */

@@ -21,6 +21,9 @@ class CWebPage extends BaseModel
 {
     public $pageManager;
 
+    /**
+     * Boots the base controller, opens the Page model and fires the `init_page` hook.
+     */
     public function __construct()
     {
         parent::__construct();
@@ -29,6 +32,12 @@ class CWebPage extends BaseModel
         osc_run_hook('init_page');
     }
 
+    /**
+     * Loads the static page by id or slug, expands its {WEB_*} placeholders, and renders it
+     * through the theme convention, a registered page template, or the default page view.
+     *
+     * @return void
+     */
     public function doModel()
     {
         $id   = Params::getParam('id');
@@ -117,8 +126,8 @@ class CWebPage extends BaseModel
      * page scope, mirroring the legacy plugin-template branch). An unresolvable
      * file path degrades to the default page view rather than fataling.
      *
-     * @param array $spec A registered template spec (render, capability, …).
-     * @param array $page The current page row.
+     * @param array<string,mixed> $spec A registered template spec (render, capability, …).
+     * @param array<string,mixed> $page The current page row.
      *
      * @return void
      */
@@ -154,7 +163,9 @@ class CWebPage extends BaseModel
     }
 
     /**
-     * @param $file
+     * Renders the given theme template between the `before_html` and `after_html` hooks.
+     *
+     * @param string $file Theme-relative or located template path
      *
      * @return void
      */

@@ -20,6 +20,10 @@ class CWebSearch extends BaseModel
     public $mSearch;
     public $uri;
 
+    /**
+     * Boots the base controller, opens the Search model, and resolves the friendly search
+     * URI into request params (category slug, location, feed), 404ing when it matches nothing.
+     */
     public function __construct()
     {
         parent::__construct();
@@ -116,6 +120,12 @@ class CWebSearch extends BaseModel
     }
 
     //Business Layer...
+    /**
+     * Runs the listing search, exports the results and paging/canonical data to the view,
+     * and renders the search template or the requested feed.
+     *
+     * @return void
+     */
     public function doModel()
     {
         osc_run_hook('before_search');
@@ -761,7 +771,9 @@ class CWebSearch extends BaseModel
     //hopefully generic...
 
     /**
-     * @param $file
+     * Renders the given theme template between the `before_html` and `after_html` hooks.
+     *
+     * @param string $file Absolute path to the located template
      *
      * @return void
      */
@@ -782,7 +794,7 @@ class CWebSearch extends BaseModel
      *
      * @param string $value
      *
-     * @return array The category row, or an empty array when there is no such category
+     * @return array<string,mixed> The category row, or an empty array when there is no such category
      */
     public static function findCategory($value)
     {
@@ -807,9 +819,9 @@ class CWebSearch extends BaseModel
      * custom-field facets, each of which multiplies into its own crawlable URL
      * that would otherwise self-canonicalise as if it were a page of its own.
      *
-     * @param array $params
+     * @param array<string,mixed> $params
      *
-     * @return array
+     * @return array<string,mixed>
      */
     public static function canonicalParams(array $params)
     {

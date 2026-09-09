@@ -68,6 +68,10 @@ class CWebBilling extends WebSecBaseModel
         'user-billing-orders.php' => 'billing/orders',
     );
 
+    /**
+     * Boots the secured base controller, bounces the visitor home when billing is off,
+     * and fires the `init_billing` hook.
+     */
     public function __construct()
     {
         parent::__construct();
@@ -81,6 +85,11 @@ class CWebBilling extends WebSecBaseModel
     }
 
     //Business Layer...
+    /**
+     * Dispatches the billing action; anything unrecognised falls through to the wallet.
+     *
+     * @return void
+     */
     public function doModel()
     {
         switch ($this->action) {
@@ -105,6 +114,8 @@ class CWebBilling extends WebSecBaseModel
     /**
      * Balance and ledger history. The template this renders is a theme's own
      * (user-billing-wallet.php) or core's fallback -- neither exists yet.
+     *
+     * @return void
      */
     private function walletView()
     {
@@ -122,6 +133,8 @@ class CWebBilling extends WebSecBaseModel
 
     /**
      * The enabled packages and the configured gateways, for a buyer to choose from.
+     *
+     * @return void
      */
     private function buyView()
     {
@@ -132,6 +145,8 @@ class CWebBilling extends WebSecBaseModel
 
     /**
      * The user's own orders.
+     *
+     * @return void
      */
     private function ordersView()
     {
@@ -154,6 +169,8 @@ class CWebBilling extends WebSecBaseModel
      * from the request. A package that has since been disabled or removed, or a
      * gateway that cannot take the package's currency, both fail the same honest way:
      * back to the buy page with a flash message, not a broken checkout.
+     *
+     * @return void
      */
     private function checkoutPost()
     {
@@ -211,6 +228,8 @@ class CWebBilling extends WebSecBaseModel
      * Billing::spend() -- a feature id is attacker-reachable input, and only a
      * feature a site has explicitly marked Feature::SCOPE_ITEM may be spent this
      * way (see FeatureRegistry::register()'s 'scope' key).
+     *
+     * @return void
      */
     private function upgradePost()
     {
@@ -310,6 +329,12 @@ class CWebBilling extends WebSecBaseModel
      * item.bump's hold is not a benefit at all -- it is the cooldown that stops
      * a listing being re-bumped to the top on a timer, so a feature that does
      * not consume a duration stays refused while its row is live.
+     *
+     * @param string               $featureId
+     * @param Feature              $feature
+     * @param array<string,mixed>  $item      the t_item row
+     *
+     * @return string one of the self::DECISION_* constants
      */
     private static function decideUpgrade(string $featureId, Feature $feature, array $item): string
     {
@@ -336,6 +361,11 @@ class CWebBilling extends WebSecBaseModel
      * not b_premium alone, decides "still held": the flag stays set from the
      * moment it lapses until the hourly sweep runs, and reading the flag alone
      * would refuse to re-feature the listing for that entire window.
+     *
+     * @param string              $featureId
+     * @param array<string,mixed> $item      the t_item row
+     *
+     * @return string one of the self::HELD_* constants
      */
     private static function upgradeState(string $featureId, array $item): string
     {
@@ -359,6 +389,13 @@ class CWebBilling extends WebSecBaseModel
         return ItemUpgrades::expiresAt($itemId, $featureId) === null ? self::HELD_PERMANENT : self::HELD_LIVE;
     }
 
+    /**
+     * Absolute URL of a billing page, or of the billing route itself when $action is empty.
+     *
+     * @param string $action
+     *
+     * @return string
+     */
     private function url(string $action = ''): string
     {
         $url = osc_base_url() . '?page=billing';
@@ -381,7 +418,7 @@ class CWebBilling extends WebSecBaseModel
      *      osc_current_web_theme_path()) and may not carry any of the above yet,
      *      but a site must not be left with a dead wallet/buy/orders page.
      *
-     * @param $file
+     * @param string $file Theme view name, e.g. user-billing-wallet.php
      *
      * @return void
      */
@@ -417,6 +454,10 @@ class CWebBilling extends WebSecBaseModel
      * then to the internal gui/storefront theme, either of which could exist without
      * having ever heard of billing, and would render blank instead of falling through
      * to core's fallback.
+     *
+     * @param string $file
+     *
+     * @return bool
      */
     private function themeProvides(string $file): bool
     {
@@ -427,6 +468,8 @@ class CWebBilling extends WebSecBaseModel
      * Heading and tab title for a core-rendered billing page. The partials no
      * longer print their own <h1>: the heading belongs to whatever wraps them,
      * so the theme's chrome and core's shell can each place it their own way.
+     *
+     * @param string $file
      *
      * @return array<string,string>
      */

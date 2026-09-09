@@ -17,6 +17,9 @@
  */
 class CWebCustom extends BaseModel
 {
+    /**
+     * Boots the base controller and fires the `init_custom` hook.
+     */
     public function __construct()
     {
         parent::__construct();
@@ -25,6 +28,12 @@ class CWebCustom extends BaseModel
     }
 
     //Business Layer...
+    /**
+     * Resolves the custom page to render from a registered route (or the deprecated `file`
+     * param), rejects traversal and admin paths with a 404, and renders it.
+     *
+     * @return void
+     */
     public function doModel()
     {
         $user_menu = false;
@@ -89,7 +98,9 @@ class CWebCustom extends BaseModel
     //hopefully generic...
 
     /**
-     * @param $file
+     * Renders the custom template, letting the account/page view helpers claim it first.
+     *
+     * @param string $file Absolute path to the located template
      *
      * @return void
      */

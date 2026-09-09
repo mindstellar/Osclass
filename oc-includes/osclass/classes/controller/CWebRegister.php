@@ -17,6 +17,10 @@
  */
 class CWebRegister extends BaseModel
 {
+    /**
+     * Boots the base controller, bounces the visitor home when registration is unavailable
+     * or they are already signed in, and fires the `init_register` hook.
+     */
     public function __construct()
     {
         parent::__construct();
@@ -37,6 +41,12 @@ class CWebRegister extends BaseModel
         osc_run_hook('init_register');
     }
 
+    /**
+     * Renders the registration form, processes a registration post, or validates an
+     * account from an emailed link.
+     *
+     * @return void
+     */
     public function doModel()
     {
         switch ($this->action) {
@@ -123,7 +133,9 @@ class CWebRegister extends BaseModel
     }
 
     /**
-     * @param $file
+     * Renders the account template, marked noindex.
+     *
+     * @param string $file Absolute path to the located template
      *
      * @return void
      */

@@ -17,6 +17,10 @@
  */
 class CWebUserNonSecure extends BaseModel
 {
+    /**
+     * Boots the base controller, bounces the visitor home when accounts are disabled
+     * (except for the alert actions), and fires the `init_user_non_secure` hook.
+     */
     public function __construct()
     {
         parent::__construct();
@@ -33,7 +37,11 @@ class CWebUserNonSecure extends BaseModel
     //Business Layer...
 
     /**
-     * @return bool|void
+     * Dispatches the account actions that need no session: email-change confirmation,
+     * alert activation/unsubscribe, the public profile and its contact form.
+     *
+     * @return false|null false only when the captcha check failed and the request was
+     *                    redirected back to the profile
      */
     public function doModel()
     {
@@ -257,7 +265,9 @@ class CWebUserNonSecure extends BaseModel
     //hopefully generic...
 
     /**
-     * @param $file
+     * Renders the account template, falling back to core's view when the theme has none.
+     *
+     * @param string $file Absolute path to the located template
      *
      * @return void
      */
