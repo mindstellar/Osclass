@@ -131,7 +131,9 @@ class MediaDataTable extends DataTable
             }
         }
 
-        $direction              = $_get['direction'];
+        $direction              = isset($_get['direction']) && !is_array($_get['direction'])
+            ? (string)$_get['direction']
+            : '';
         $this->order_by['type'] = $direction;
         $arrayDirection         = array('desc', 'asc');
         if (!in_array($direction, $arrayDirection)) {
@@ -140,7 +142,7 @@ class MediaDataTable extends DataTable
         }
 
         // column sort
-        $sort             = $_get['sort'];
+        $sort             = isset($_get['sort']) && !is_array($_get['sort']) ? (string)$_get['sort'] : '';
         $arraySortColumns = array('date' => 'r.pk_i_id', 'attached_to' => 'r.fk_i_item_id');
         if (!array_key_exists($sort, $arraySortColumns)) {
             $this->order_by['column_name'] = 'r.pk_i_id';

@@ -23,7 +23,17 @@
 class BanRulesDataTable extends DataTable
 {
     private $order_by;
-    private $column_names;
+
+    /**
+     * Header column id => the t_ban_rule column it sorts by.
+     *
+     * @var array<string,string>
+     */
+    private $sortable = array(
+        'name'  => 's_name',
+        'ip'    => 's_ip',
+        'email' => 's_email',
+    );
     private $userId;
     /**
      * @var bool
@@ -34,7 +44,7 @@ class BanRulesDataTable extends DataTable
     /**
      * Builds the ban-rule listing for the admin datatable.
      *
-     * @param array<string,mixed> $params Datatable request params (iPage, iDisplayLength, iSortCol_0, sSortDir_0)
+     * @param array<string,mixed> $params Datatable request params (iPage, iDisplayLength, sort, direction)
      *
      * @return array<string,mixed> The getData() payload
      */
@@ -96,8 +106,7 @@ class BanRulesDataTable extends DataTable
             $this->iPage = Params::getParam('iPage');
         }
 
-        $this->order_by['column_name'] = 'pk_i_id';
-        $this->order_by['type']        = 'DESC';
+        $this->order_by = $this->resolveOrder($_get, $this->sortable, 'pk_i_id');
         foreach ($_get as $k => $v) {
             if ($k === 'user') {
                 $this->search = $v;
@@ -105,14 +114,6 @@ class BanRulesDataTable extends DataTable
             if ($k === 'userId' && $v != '') {
                 $this->withUserId = true;
                 $this->userId     = $v;
-            }
-
-            /* for sorting */
-            if ($k === 'iSortCol_0') {
-                $this->order_by['column_name'] = $this->column_names[$v];
-            }
-            if ($k === 'sSortDir_0') {
-                $this->order_by['type'] = $v;
             }
         }
         // set start and limit using iPage param

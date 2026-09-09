@@ -215,7 +215,9 @@ class ItemsDataTable extends DataTable
         $this->limit = (int)$_get['iDisplayLength'];
         $this->mSearch->limit($this->start, $this->limit);
 
-        $direction      = $_get['direction'];
+        $direction      = isset($_get['direction']) && !is_array($_get['direction'])
+            ? (string)$_get['direction']
+            : '';
         $arrayDirection = array('desc', 'asc');
         if (!in_array($direction, $arrayDirection)) {
             Params::setParam('direction', 'desc');
@@ -223,7 +225,7 @@ class ItemsDataTable extends DataTable
         }
 
         // column sort
-        $sort             = $_get['sort'];
+        $sort             = isset($_get['sort']) && !is_array($_get['sort']) ? (string)$_get['sort'] : '';
         $arraySortColumns = array('date' => 'dt_pub_date', 'expiration' => 'dt_expiration');
         if (!array_key_exists($sort, $arraySortColumns)) {
             $sort = 'dt_pub_date';

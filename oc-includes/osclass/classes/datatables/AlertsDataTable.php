@@ -24,12 +24,23 @@ class AlertsDataTable extends DataTable
 {
     private $search;
     private $order_by;
+
+    /**
+     * Header column id => the t_alerts column it sorts by. The alert column renders a
+     * stored search rather than a plain value, so it is not offered.
+     *
+     * @var array<string,string>
+     */
+    private $sortable = array(
+        'email' => 's_email',
+        'date'  => 'dt_date',
+    );
     private $total_filtered;
 
     /**
      * Builds the saved-searches (alerts) listing for the admin datatable.
      *
-     * @param array<string,mixed> $params Datatable request params (iPage, iDisplayLength, sSearch, iSortCol_0, sSortDir_0)
+     * @param array<string,mixed> $params Datatable request params (iPage, iDisplayLength, sSearch, sort, direction)
      *
      * @return array<string,mixed> The getData() payload
      */
@@ -82,16 +93,6 @@ class AlertsDataTable extends DataTable
     private function getDBParams($_get)
     {
 
-        $column_names = array(
-            0 => 'dt_date',
-            1 => 's_email',
-            2 => 's_search',
-            3 => 'dt_date'
-        );
-
-        $this->order_by['column_name'] = 'c.dt_pub_date';
-        $this->order_by['type']        = 'desc';
-
         if (!isset($_get['iDisplayStart'])) {
             $_get['iDisplayStart'] = 0;
         }
@@ -103,19 +104,10 @@ class AlertsDataTable extends DataTable
             $this->iPage = Params::getParam('iPage');
         }
 
-        $this->order_by['column_name'] = 'dt_date';
-        $this->order_by['type']        = 'DESC';
+        $this->order_by = $this->resolveOrder($_get, $this->sortable, 'dt_date');
         foreach ($_get as $k => $v) {
             if ($k === 'sSearch') {
                 $this->search = $v;
-            }
-
-            /* for sorting */
-            if ($k === 'iSortCol_0') {
-                $this->order_by['column_name'] = $column_names[$v];
-            }
-            if ($k === 'sSortDir_0') {
-                $this->order_by['type'] = $v;
             }
         }
         // set start and limit using iPage param

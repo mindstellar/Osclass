@@ -83,6 +83,38 @@ abstract class DataTable
      */
 
     /**
+     * Resolve the ORDER BY from the request's sort and direction params.
+     *
+     * $sortable maps the column id rendered in the header to the column it orders by, so
+     * only a column the table actually offers can reach the query. An unknown or absent
+     * sort falls back to $default rather than ordering by nothing.
+     *
+     * @param array<string,mixed>  $request   Request params, as passed to table()
+     * @param array<string,string> $sortable  Header column id => order column
+     * @param string               $default   Order column used when none is requested
+     * @param string               $direction Direction used when none is requested
+     *
+     * @return array{column_name:string,type:string}
+     */
+    protected function resolveOrder($request, array $sortable, $default, $direction = 'DESC')
+    {
+        $sort = isset($request['sort']) && !is_array($request['sort'])
+            ? (string)$request['sort']
+            : '';
+        $type = isset($request['direction']) && !is_array($request['direction'])
+            ? strtoupper(trim((string)$request['direction']))
+            : '';
+        if ($type !== 'ASC' && $type !== 'DESC') {
+            $type = strtoupper($direction);
+        }
+
+        return array(
+            'column_name' => $sortable[$sort] ?? $default,
+            'type'        => $type,
+        );
+    }
+
+    /**
      * Appends one row to the table.
      *
      * @param array<string,mixed> $aRow

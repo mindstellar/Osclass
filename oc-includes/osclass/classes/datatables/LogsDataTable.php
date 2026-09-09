@@ -18,11 +18,11 @@ class LogsDataTable extends DataTable
     private $order_by;
 
     /**
-     * Map a sortable datatable column to its t_log column.
+     * Header column id => the t_log column it sorts by.
      *
      * @var array<string,string>
      */
-    private $column_names = array(
+    private $sortable = array(
         'date'    => 'dt_date',
         'section' => 's_section',
         'action'  => 's_action',
@@ -33,7 +33,7 @@ class LogsDataTable extends DataTable
     /**
      * Builds the activity-log listing, applying the section and free-text request filters.
      *
-     * @param array<string,mixed> $params Datatable request params (iPage, iDisplayLength, iSortCol_0, sSortDir_0)
+     * @param array<string,mixed> $params Datatable request params (iPage, iDisplayLength, sort, direction)
      *
      * @return array<string,mixed> The getData() payload
      */
@@ -103,17 +103,7 @@ class LogsDataTable extends DataTable
             $this->iPage = Params::getParam('iPage');
         }
 
-        $this->order_by['column_name'] = 'dt_date';
-        $this->order_by['type']        = 'DESC';
-        foreach ($_get as $k => $v) {
-            /* for sorting */
-            if ($k === 'iSortCol_0' && isset($this->column_names[$v])) {
-                $this->order_by['column_name'] = $this->column_names[$v];
-            }
-            if ($k === 'sSortDir_0') {
-                $this->order_by['type'] = $v;
-            }
-        }
+        $this->order_by = $this->resolveOrder($_get, $this->sortable, 'dt_date');
         // set start and limit using iPage param
         $start = ($this->iPage - 1) * $_get['iDisplayLength'];
 

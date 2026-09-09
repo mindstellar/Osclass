@@ -24,7 +24,19 @@ class UsersDataTable extends DataTable
 {
     private $withUserId;
     private $search;
-    private $column_names;
+    /**
+     * Header column id => the t_user column it sorts by.
+     *
+     * @var array<string,string>
+     */
+    private $sortable = array(
+        'email'       => 's_email',
+        'username'    => 's_username',
+        'name'        => 's_name',
+        'date'        => 'dt_reg_date',
+        'items'       => 'i_items',
+        'update_date' => 'dt_mod_date',
+    );
     public $order_by;
     public $conditions;
     public $withFilters = false;
@@ -115,18 +127,8 @@ class UsersDataTable extends DataTable
         } else {
             $this->iPage = Params::getParam('iPage');
         }
-        # sorting column
-        if (!isset($_get['iSortCol_0']) || $_get['iSortCol_0'] == '') {
-            $this->order_by['column_name'] = 'pk_i_id';
-        } else {
-            $this->order_by['column_name'] = $this->column_names[$_get['iSortCol_0']];
-        }
-        # Sorting order
-        if (!isset($_get['sSortDir_0']) || $_get['sSortDir_0'] == '') {
-            $this->order_by['type'] = 'DESC';
-        } else {
-            $this->order_by['type'] = $_get['sSortDir_0'];
-        }
+        # Sorting column and order
+        $this->order_by = $this->resolveOrder($_get, $this->sortable, 'pk_i_id');
 
         $this->conditions = array();
         # condition for userId
