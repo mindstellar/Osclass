@@ -83,7 +83,7 @@ class Object_Cache_default implements iObject_Cache
     /**
      * Utility function to determine whether a key exists in the cache.
      *
-     * @param $key
+     * @param int|string $key
      *
      * @return bool
      * @since  3.4
@@ -182,7 +182,9 @@ class Object_Cache_default implements iObject_Cache
      * Echoes the stats of the caching.
      * Gives the cache hits, and cache misses.
      *
+     * @return void
      * @since 3.4
+     *
      */
     public function stats()
     {
@@ -197,11 +199,6 @@ padding: 1em;'><h2>Default(dummy) stats</h2>";
     }
 
     /**
-     * is_supported()
-     *
-     * Check to see if APC is available on this system, bail if it isn't.
-     */
-    /**
      * Normalised cache statistics for the admin's cache screen.
      *
      * Deliberately NOT part of iObject_Cache: third-party drivers implement that
@@ -209,7 +206,7 @@ padding: 1em;'><h2>Default(dummy) stats</h2>";
      * method_exists() instead. The legacy stats() is left alone — it echoes debug
      * markup and anything already calling it keeps working.
      *
-     * @return array|null Null when the driver has nothing to report.
+     * @return null Always null: an in-request array has no accumulated state to report.
      */
     public function statsData()
     {
@@ -218,19 +215,28 @@ padding: 1em;'><h2>Default(dummy) stats</h2>";
         return null;
     }
 
+    /**
+     * Always available: this driver needs nothing beyond PHP itself.
+     *
+     * @return bool
+     */
     public static function is_supported()
     {
         return true;
     }
 
     /**
+     * Nothing to release: the store is a plain array discarded with the request.
      *
+     * @return void
      */
     public function __destruct()
     {
     }
 
     /**
+     * The driver's identifier, as accepted by OSC_CACHE.
+     *
      * @return string
      */
     public function _get_cache()
@@ -241,7 +247,7 @@ padding: 1em;'><h2>Default(dummy) stats</h2>";
     /**
      * Return hash of a given key
      *
-     * @param $key
+     * @param int|string $key
      *
      * @return string
      */

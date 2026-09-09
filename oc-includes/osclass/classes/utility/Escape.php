@@ -52,6 +52,10 @@ class Escape
 
     /**
      * Escape unicode characters
+     *
+     * @param string $str
+     *
+     * @return string
      */
     public static function unicode($str)
     {
@@ -77,6 +81,10 @@ class Escape
 
     /**
      * Escape html entities
+     *
+     * @param string $str
+     *
+     * @return string
      */
     public static function entities($str)
     {

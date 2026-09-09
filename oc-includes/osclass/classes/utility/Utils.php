@@ -40,11 +40,12 @@ class Utils
      * VERY BASIC
      * Perform a POST request, so we could launch fake-cron calls and other core-system calls without annoying the user
      *
-     * @param $target_url   string
-     * @param $query_data   array http_build_query compatible query_data
-     *                      https://www.php.net/manual/en/function.http-build-query.php
+     * @param string               $target_url
+     * @param array<string,mixed>  $query_data http_build_query compatible query_data
+     *                                         https://www.php.net/manual/en/function.http-build-query.php
      *
-     * @return bool false on error or number of bytes sent.
+     * @return bool|int false on error, or the number of bytes sent.
+     * @throws RuntimeException when allow_url_fopen is disabled
      */
     public static function doRequest($target_url, $query_data)
     {
@@ -117,9 +118,9 @@ class Utils
     /**
      * Change current osclass version to given param number
      *
-     * @param mixed version
+     * @param string|null $version
      *
-     * @return bool
+     * @return array<string,mixed>|false the refreshed preferences, or false when no version was given
      */
     public static function changeOsclassVersionTo($version = null)
     {
@@ -157,7 +158,7 @@ class Utils
     /**
      * replace double slash with single slash
      *
-     * @param $path
+     * @param string $path
      *
      * @return string
      */
@@ -169,7 +170,7 @@ class Utils
     /**
      * Prepare Price for osclass
      *
-     * @param $price
+     * @param int|float $price stored price, in millionths
      *
      * @return string
      */
@@ -234,8 +235,8 @@ class Utils
     /**
      * Return Category Stats in array
      *
-     * @param $aux
-     * @param $categoryTotal
+     * @param array<string,mixed> $aux           category row, with a nested 'categories' list
+     * @param array<int,int>      $categoryTotal accumulator, filled in place
      *
      * @return int
      */
@@ -254,10 +255,12 @@ class Utils
     }
 
     /**
-     * Recount items for a given a category id
+     * Recount items for a given a category id, then walk up to its parents.
      *
      * @param int $id
      *
+     * @return void
+     * @throws \InvalidArgumentException when $id is not numeric
      */
     public static function updateCategoryStatsById($id)
     {
@@ -383,8 +386,9 @@ class Utils
     /**
      * Translate current categories to new locale
      *
-     * @param $locale
+     * @param string $locale
      *
+     * @return void
      */
     public static function translateCategories($locale)
     {
@@ -452,7 +456,9 @@ class Utils
     /**
      * Prune null or empty array element
      *
-     * @param $input
+     * @param array<array-key,mixed> $input pruned in place
+     *
+     * @return void
      */
     public static function pruneArray(&$input)
     {
@@ -469,10 +475,12 @@ class Utils
     }
 
     /**
-     * Redirect to give url
+     * Redirect to the given url and end the request.
      *
-     * @param      $url
-     * @param null $http_response_code
+     * @param string   $url
+     * @param int|null $http_response_code
+     *
+     * @return never
      */
     public static function redirectTo($url, $http_response_code = null)
     {
@@ -556,7 +564,7 @@ class Utils
      * Used to encode a field for Amazon Auth
      * (taken from the Amazon S3 PHP example library)
      *
-     * @param $str
+     * @param string $str hex-encoded input
      *
      * @return string
      */
@@ -568,8 +576,8 @@ class Utils
     /**
      * Calculate HMAC-SHA1
      *
-     * @param $key
-     * @param $data
+     * @param string $key
+     * @param string $data
      *
      * @return string
      */
@@ -581,8 +589,8 @@ class Utils
     /**
      * Calculate base64 encoded HMAC-SHA1
      *
-     * @param $key
-     * @param $data
+     * @param string $key
+     * @param string $data
      *
      * @return string
      */
@@ -592,6 +600,8 @@ class Utils
     }
 
     /**
+     * The best available referring URL: the rewrite layer's, then the session's, then the header.
+     *
      * @return string
      */
     public static function getHttpReferer()
