@@ -38,6 +38,8 @@ class Region extends DAO
     }
 
     /**
+     * Return the shared Region model instance, creating it on first use.
+     *
      * @return \Region
      */
     public static function newInstance()
@@ -52,9 +54,9 @@ class Region extends DAO
     /**
      * Gets all regions from a country
      *
-     * @param $countryId
+     * @param string $countryId Country code
      *
-     * @return array
+     * @return array<int,array<string,string|null>>
      * @see        Region::findByCountry
      * @deprecated since 2.3
      */
@@ -66,9 +68,9 @@ class Region extends DAO
     /**
      * Gets all regions from a country
      *
-     * @param $countryId
+     * @param string $countryId Country code
      *
-     * @return array
+     * @return array<int,array<string,string|null>> Empty when the country has no regions
      */
     public function findByCountry($countryId)
     {
@@ -87,10 +89,10 @@ class Region extends DAO
     /**
      * Find a region by its name and country
      *
-     * @param string $name
-     * @param string $country
+     * @param string      $name
+     * @param string|null $country Country code
      *
-     * @return array
+     * @return array<string,string|null> Empty when no region matches
      */
     public function findByName($name, $country = null)
     {
@@ -115,10 +117,10 @@ class Region extends DAO
     /**
      * Function to deal with ajax queries
      *
-     * @param      $query
-     * @param null $country
+     * @param string      $query   Prefix typed into the autocomplete
+     * @param string|null $country Country code (2 chars) or country name
      *
-     * @return array
+     * @return array<int,array{id:string,label:string,value:string}>
      */
     public function ajax($query, $country = null)
     {
@@ -164,7 +166,7 @@ class Region extends DAO
     /**
      *  Delete a region with its cities and city areas
      *
-     * @param $pk
+     * @param int $pk
      *
      * @return int number of failed deletions or 0 in case of none
      * @since  3.1
@@ -213,9 +215,9 @@ class Region extends DAO
     /**
      * Find a location by its slug
      *
-     * @param $slug
+     * @param string $slug
      *
-     * @return array
+     * @return array<string,string|null> Empty when the slug is unknown
      * @since  3.2.1
      */
     public function findBySlug($slug)
@@ -241,9 +243,9 @@ class Region extends DAO
      * and slugs are renamed upstream constantly. It is unique table-wide, not scoped to
      * a country.
      *
-     * @param $sourceId
+     * @param int $sourceId
      *
-     * @return array
+     * @return array<string,string|null> Empty when the source id is unknown
      * @since  6.2.0
      */
     public function findBySourceId($sourceId)
@@ -264,7 +266,7 @@ class Region extends DAO
     /**
      * Find a locations with no slug
      *
-     * @return array
+     * @return array<int,array<string,string|null>>
      * @since  3.2.1
      */
     public function listByEmptySlug()

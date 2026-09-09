@@ -147,8 +147,8 @@ class ItemStats extends DAO
      * write on the site; this collapses a page's worth into a single multi-row
      * upsert plus a single rollup upsert, whatever the block size.
      *
-     * @param string $column
-     * @param array  $itemIds
+     * @param string                $column
+     * @param array<int,int|string> $itemIds
      *
      * @return bool false if the column is rejected or the statement fails
      * @since  5.3.0
@@ -194,6 +194,8 @@ class ItemStats extends DAO
      *
      * @param string $column already validated against self::COUNTERS
      * @param int    $by
+     *
+     * @return void
      */
     private function increaseDaily($column, $by)
     {
@@ -276,9 +278,9 @@ class ItemStats extends DAO
     /**
      * Return number of views of an item
      *
-     * @param int $itemId Item id
+     * @param int|null $itemId Item id
      *
-     * @return int
+     * @return int|string|null The summed views as a string, int 0 on a null id or a query failure
      * @since  2.3.3
      */
     public function getViews($itemId)
@@ -311,9 +313,9 @@ class ItemStats extends DAO
     }
 
     /**
-     * Return number of views of an item
+     * Return the summed views across every listing.
      *
-     * @return int
+     * @return int|string|null The sum as a string, int 0 on a query failure
      * @since  2.3.3
      */
     public function getAllViews()

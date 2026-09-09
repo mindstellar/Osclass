@@ -27,7 +27,7 @@ class Country extends DAO
     private static $instance;
 
     /**
-     *
+     * Set data related to t_country table
      */
     public function __construct()
     {
@@ -38,6 +38,8 @@ class Country extends DAO
     }
 
     /**
+     * Return the shared Country model instance, creating it on first use.
+     *
      * @return \Country
      */
     public static function newInstance()
@@ -52,9 +54,9 @@ class Country extends DAO
     /**
      * Find a country by its ISO code
      *
-     * @param $code
+     * @param string $code
      *
-     * @return array
+     * @return array<string,string|null> Empty when the code is unknown
      */
     public function findByCode($code)
     {
@@ -72,9 +74,9 @@ class Country extends DAO
     /**
      * Find a country by its name
      *
-     * @param $name
+     * @param string $name
      *
-     * @return array
+     * @return array<string,string|null> Empty when the name is unknown
      */
     public function findByName($name)
     {
@@ -92,7 +94,7 @@ class Country extends DAO
     /**
      * List all the countries
      *
-     * @return array
+     * @return array<int,array<string,string|null>> Empty when the query failed
      */
     public function listAll()
     {
@@ -110,7 +112,7 @@ class Country extends DAO
     /**
      *  Delete a country with its regions, cities,..
      *
-     * @param $pk
+     * @param string $pk Country code
      *
      * @return int number of failed deletions or 0 in case of none
      * @since  2.4
@@ -147,7 +149,7 @@ class Country extends DAO
     /**
      * List names of all the countries. Used for location import.
      *
-     * @return array
+     * @return array<int,string>
      */
     public function listNames()
     {
@@ -165,9 +167,9 @@ class Country extends DAO
     /**
      * Function that work with the ajax file
      *
-     * @param $query
+     * @param string $query Prefix typed into the autocomplete
      *
-     * @return array
+     * @return array<int,array{id:string,label:string,value:string}>
      */
     public function ajax($query)
     {
@@ -198,9 +200,9 @@ class Country extends DAO
     /**
      * Find a location by its slug
      *
-     * @param $slug
+     * @param string $slug
      *
-     * @return array
+     * @return array<string,string|null> Empty when the slug is unknown
      * @since  3.2.1
      */
     public function findBySlug($slug)
@@ -219,7 +221,7 @@ class Country extends DAO
     /**
      * Find a locations with no slug
      *
-     * @return array
+     * @return array<int,array<string,string|null>>
      * @since  3.2.1
      */
     public function listByEmptySlug()

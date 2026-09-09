@@ -46,6 +46,8 @@ class Alerts extends DAO
     }
 
     /**
+     * Return the shared Alerts model instance, creating it on first use.
+     *
      * @return \Alerts
      */
     public static function newInstance()
@@ -61,10 +63,10 @@ class Alerts extends DAO
      * Searches for user alerts, given an user id.
      * If user id not exist return empty array.
      *
-     * @param string $userId
-     * @param bool   $unsub
+     * @param int  $userId
+     * @param bool $unsub Include alerts that have been unsubscribed
      *
-     * @return array
+     * @return array<int,array<string,string|null>>
      */
     public function findByUser($userId, $unsub = false)
     {
@@ -89,9 +91,9 @@ class Alerts extends DAO
      * If user id not exist return empty array.
      *
      * @param string $email
-     * @param bool   $unsub
+     * @param bool   $unsub Include alerts that have been unsubscribed
      *
-     * @return array
+     * @return array<int,array<string,string|null>>
      */
     public function findByEmail($email, $unsub = false)
     {
@@ -120,10 +122,10 @@ class Alerts extends DAO
      * If type don't match return empty array.
      *
      * @param string $type
-     * @param bool   $active
-     * @param bool   $unsub
+     * @param bool   $active Restrict to activated alerts
+     * @param bool   $unsub  Include alerts that have been unsubscribed
      *
-     * @return array
+     * @return array<int,array<string,string|null>>
      */
     public function findByType($type, $active = false, $unsub = false)
     {
@@ -150,10 +152,10 @@ class Alerts extends DAO
      * If type don't match return empty array.
      *
      * @param string $type
-     * @param bool   $active
-     * @param bool   $unsub
+     * @param bool   $active Restrict to activated alerts
+     * @param bool   $unsub  Include alerts that have been unsubscribed
      *
-     * @return array
+     * @return array<int,array<string,string|null>> One row per distinct s_search
      */
     public function findByTypeGroup($type, $active = false, $unsub = false)
     {
@@ -191,10 +193,10 @@ class Alerts extends DAO
      * If type don't match return empty array.
      *
      * @param string $search
-     * @param string $user
-     * @param bool   $unsub
+     * @param int    $user
+     * @param bool   $unsub Include alerts that have been unsubscribed
      *
-     * @return array
+     * @return array<int,array<string,string|null>>
      *
      * WARNIGN doble where!
      */
@@ -222,9 +224,9 @@ class Alerts extends DAO
      *
      * @param string $search
      * @param string $type
-     * @param bool   $unsub
+     * @param bool   $unsub Include alerts that have been unsubscribed
      *
-     * @return array
+     * @return array<int,array<string,string|null>>
      *
      * WARNIGN doble where!
      */
@@ -254,10 +256,10 @@ class Alerts extends DAO
      *
      * @param string $search
      * @param string $type
-     * @param bool   $active
-     * @param bool   $unsub
+     * @param bool   $active Restrict to activated alerts
+     * @param bool   $unsub  Include alerts that have been unsubscribed
      *
-     * @return array
+     * @return array<int,array<string,string|null>>
      */
     public function findUsersBySearchAndType($search, $type, $active = false, $unsub = false)
     {
@@ -286,9 +288,9 @@ class Alerts extends DAO
      *
      * @param int    $userId
      * @param string $type
-     * @param bool   $unsub
+     * @param bool   $unsub Include alerts that have been unsubscribed
      *
-     * @return array
+     * @return array<int,array<string,string|null>>
      */
     public function findByUserByType($userId, $type, $unsub = false)
     {
@@ -314,9 +316,9 @@ class Alerts extends DAO
      *
      * @param string $email
      * @param string $type
-     * @param bool   $unsub
+     * @param bool   $unsub Include alerts that have been unsubscribed
      *
-     * @return array
+     * @return array<int,array<string,string|null>>
      */
     public function findByEmailByType($email, $type, $unsub = false)
     {
@@ -345,11 +347,12 @@ class Alerts extends DAO
      *
      * @param int    $userid
      * @param string $email
-     * @param string $alert
+     * @param string $alert  Serialised search conditions
      * @param string $secret
      * @param string $type
      *
-     * @return bool on success
+     * @return int|false The new alert id, or false when the same alert already exists
+     * @throws \mindstellar\database\DbException on a query failure
      */
     public function createAlert($userid, $email, $alert, $secret, $type = 'DAILY')
     {
@@ -386,9 +389,9 @@ class Alerts extends DAO
     /**
      * Activate an alert
      *
-     * @param string $id
+     * @param int $id
      *
-     * @return mixed false on fail, int of num. of affected rows
+     * @return int|false false on fail, int of num. of affected rows
      */
     public function activate($id)
     {
@@ -404,9 +407,9 @@ class Alerts extends DAO
     /**
      * Dectivate an alert
      *
-     * @param string $id
+     * @param int $id
      *
-     * @return mixed false on fail, int of num. of affected rows
+     * @return int|false false on fail, int of num. of affected rows
      * @since  3.1
      */
     public function deactivate($id)
@@ -423,9 +426,9 @@ class Alerts extends DAO
     /**
      * Unsub from an alert
      *
-     * @param string $id
+     * @param int $id
      *
-     * @return mixed false on fail, int of num. of affected rows
+     * @return int|false false on fail, int of num. of affected rows
      * @since  3.1
      */
     public function unsub($id)
@@ -448,9 +451,10 @@ class Alerts extends DAO
      * @param int    $end
      * @param string $order_column
      * @param string $order_direction
-     * @param string $name
+     * @param string $name Optional s_email LIKE filter
      *
-     * @return array
+     * @return array{rows:int|string,total_results:int|string,alerts:array<int,array<string,string|null>>}
+     *         The two counts stay int 0 on failure and are unprepared-query strings otherwise
      * @since  3.1
      */
     public function search($start = 0, $end = 10, $order_column = 'dt_date', $order_direction = 'DESC', $name = '')

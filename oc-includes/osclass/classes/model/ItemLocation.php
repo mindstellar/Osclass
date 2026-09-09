@@ -24,7 +24,7 @@ class ItemLocation extends DAO
      * It references to self object: ItemLocation.
      * It is used as a singleton
      *
-     * @var ItemResource
+     * @var ItemLocation
      */
     private static $instance;
 

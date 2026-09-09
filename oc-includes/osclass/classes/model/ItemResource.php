@@ -57,7 +57,7 @@ class ItemResource extends DAO
     /**
      * Get all resources
      *
-     * @return array of resources
+     * @return array<int,array<string,string|null>> Resource rows, each with the item's dt_pub_date
      */
     public function getAllResources()
     {
@@ -92,7 +92,7 @@ class ItemResource extends DAO
      *
      * @param int $itemId Item id
      *
-     * @return array of resources
+     * @return array<int,array<string,string|null>>
      *
      * @since  2.3.7
      */
@@ -169,7 +169,7 @@ class ItemResource extends DAO
      *
      * @param int $itemId Item id
      *
-     * @return array resource
+     * @return array<string,string|null> Empty when the item has no resources
      */
     public function getResource($itemId)
     {
@@ -195,7 +195,8 @@ class ItemResource extends DAO
      * @param int    $resourceId
      * @param string $code
      *
-     * @return bool
+     * @return int|string The match count; int 0 for a null argument or a query failure
+     * @see        ItemResource::existResource
      * @deprecated since 2.3
      */
     public function getResourceSecure($resourceId, $code)
@@ -209,7 +210,7 @@ class ItemResource extends DAO
      * @param int    $resourceId
      * @param string $code
      *
-     * @return bool
+     * @return int|string The match count as a string; int 0 for a null argument or a query failure
      */
     public function existResource($resourceId, $code)
     {
@@ -237,9 +238,9 @@ class ItemResource extends DAO
     /**
      * Count resouces belong to item given its id
      *
-     * @param int $itemId Item id
+     * @param int|null $itemId Item id; null counts every resource
      *
-     * @return int
+     * @return int|string The count as a string, int 0 on a query failure
      */
     public function countResources($itemId = null)
     {
@@ -262,13 +263,13 @@ class ItemResource extends DAO
      * Get resources, if $itemId is set return resources belong to an item given its id,
      * can be filtered by $start/$end and ordered by column.
      *
-     * @param int    $itemId Item id
-     * @param int    $start  beginig
-     * @param int    $length ending
-     * @param string $order  column order default='pk_i_id'
-     * @param string $type   order type [DESC|ASC]
+     * @param int|null $itemId Item id
+     * @param int      $start  offset
+     * @param int      $length row count
+     * @param string   $order  column order default='r.pk_i_id'
+     * @param string   $type   order type [DESC|ASC]
      *
-     * @return array of resources
+     * @return array<int,array<string,string|null>> Empty when $order or $type is rejected
      */
     public function getResources($itemId = null, $start = 0, $length = 10, $order = 'r.pk_i_id', $type = 'DESC')
     {
@@ -369,7 +370,7 @@ class ItemResource extends DAO
      * @param int    $offset
      * @param int    $limit
      *
-     * @return array
+     * @return array<int,array<string,string|null>>
      * @since  5.3.0
      */
     public function getResourcesBatchByStorage(string $storage, int $offset, int $limit): array
@@ -398,9 +399,9 @@ class ItemResource extends DAO
     /**
      * Delete all resources where id is in $ids
      *
-     * @param array $ids
+     * @param array<int,int|string>|int|string $ids
      *
-     * @return bool|int
+     * @return int|false Rows deleted, or false for an empty list or a query failure
      */
     public function deleteResourcesIds($ids)
     {

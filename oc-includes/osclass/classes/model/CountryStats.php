@@ -62,7 +62,7 @@ class CountryStats extends DAO
     /**
      * Increase number of country items, given a country id
      *
-     * @param int $countryCode Country code
+     * @param string $countryCode Country code
      *
      * @return bool True once the counter is written, false when the code is
      *              rejected or the write fails
@@ -93,12 +93,12 @@ class CountryStats extends DAO
     }
 
     /**
-     * Increase number of country items, given a Country code
+     * Decrease number of country items, given a Country code
      *
-     * @param $countryCode
+     * @param string $countryCode
      *
-     * @return bool|int Number of affected rows, or false when there is no
-     *                  counter row for that country
+     * @return int|false Number of affected rows, or false when there is no
+     *                   counter row for that country
      * @since  2.4
      */
     public function decreaseNumItems($countryCode)
@@ -165,9 +165,9 @@ class CountryStats extends DAO
     /**
      * Find stats by country code
      *
-     * @param int $countryCode country id
+     * @param string $countryCode
      *
-     * @return array
+     * @return array<string,string|null>|false False when the country has no stats row
      * @since  2.4
      */
     public function findByCountryCode($countryCode)
@@ -181,10 +181,10 @@ class CountryStats extends DAO
      * and ordered by country_name or items counter.
      * $order = 'country_name ASC' OR $oder = 'items DESC'
      *
-     * @param string $zero
-     * @param string $order
+     * @param string $zero  Comparison operator applied to i_num_items
+     * @param string $order  '<column> ASC|DESC'
      *
-     * @return array
+     * @return array<int,array{country_code:string,items:string,country_name:string,country_slug:string}>
      * @since  2.4
      */
     public function listCountries($zero = '>', $order = 'country_name ASC')

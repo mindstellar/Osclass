@@ -24,7 +24,7 @@ class LatestSearches extends DAO
     private static $instance;
 
     /**
-     *
+     * Set data related to t_latest_searches table
      */
     public function __construct()
     {
@@ -38,6 +38,8 @@ class LatestSearches extends DAO
     }
 
     /**
+     * Return the shared LatestSearches model instance, creating it on first use.
+     *
      * @return \LatestSearches
      */
     public static function newInstance()
@@ -52,9 +54,9 @@ class LatestSearches extends DAO
     /**
      * Get last searches, given a limit.
      *
-     * @param int $limit
+     * @param int $limit A non-numeric value returns every row
      *
-     * @return array|bool
+     * @return array<int,array{d_date:string,s_search:string,i_total:string}>|false False on a query failure
      */
     public function getSearches($limit = 20)
     {
@@ -85,9 +87,10 @@ class LatestSearches extends DAO
     /**
      * Get last searches, given since time.
      *
-     * @param int $time
+     * @param int|null $time Unix timestamp; null means seven days ago
+     * @param int      $limit A non-numeric value returns every row
      *
-     * @return array|bool
+     * @return array<int,array{d_date:string,s_search:string,i_total:string}>|false False on a query failure
      */
     public function getSearchesByDate($time = null, $limit = 20)
     {
@@ -120,9 +123,10 @@ class LatestSearches extends DAO
     /**
      * Purge n last searches.
      *
-     * @param int $number
+     * @param int|null $number Offset of the newest search to keep; null is a no-op
      *
-     * @return bool
+     * @return int|false Rows deleted, or false when there is nothing to purge
+     * @throws \mindstellar\database\DbException on a negative $number or a query failure
      */
     public function purgeNumber($number = null)
     {
@@ -158,9 +162,9 @@ class LatestSearches extends DAO
     /**
      * Purge all searches by date.
      *
-     * @param string $date
+     * @param string|null $date 'Y-m-d H:i:s'; null is a no-op
      *
-     * @return bool
+     * @return int|false Rows deleted, or false on a no-op or a query failure
      */
     public function purgeDate($date = null)
     {

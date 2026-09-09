@@ -70,6 +70,8 @@ class User extends DAO
     }
 
     /**
+     * Return the shared User model instance, creating it on first use.
+     *
      * @return \User
      */
     public static function newInstance()
@@ -82,11 +84,11 @@ class User extends DAO
     }
 
     /**
-     * Find an user by its primary key
+     * Autocomplete users by a name or email prefix.
      *
      * @param string $query
      *
-     * @return array
+     * @return array<int,array{id:string,label:string,value:string}>
      * @since  2.3.2
      */
     public function ajax($query = '')
@@ -112,10 +114,10 @@ class User extends DAO
     /**
      * Find an user by its primary key
      *
-     * @param int    $id
-     * @param string $locale
+     * @param int         $id
+     * @param string|null $locale
      *
-     * @return array
+     * @return array<string,mixed> Empty when the id matches no single row
      */
     public function findByPrimaryKey($id, $locale = null)
     {
@@ -154,10 +156,10 @@ class User extends DAO
      * moment its s_password is written. Scoped to s_password writes so ordinary field updates
      * keep their TTL behaviour; only pk-targeted updates carry an id to invalidate.
      *
-     * @param array $values
-     * @param array $where
+     * @param array<string,mixed> $values
+     * @param array<string,mixed> $where
      *
-     * @return bool|int rows changed, or false on a rejected/failed update (as DAO::update)
+     * @return int|false rows changed, or false on a rejected/failed update (as DAO::update)
      */
     public function update($values, $where)
     {
@@ -176,10 +178,11 @@ class User extends DAO
     /**
      * Add description to user array
      *
-     * @param      $user
-     * @param null $locale
+     * @param array<string,mixed> $user
+     * @param string|null         $locale
      *
-     * @return array
+     * @return array<string,mixed>
+     * @throws \mindstellar\database\DbException on a query failure
      * @since 3.1.1
      */
     private function extendData($user, $locale = null)
@@ -202,10 +205,10 @@ class User extends DAO
     /**
      * Find an user by its username
      *
-     * @param string $username
-     * @param null   $locale
+     * @param string      $username
+     * @param string|null $locale
      *
-     * @return array|bool
+     * @return array<string,mixed>|false Empty array when no single row matches, false on a query failure
      * @since  3.1
      */
     public function findByUsername($username, $locale = null)
@@ -229,11 +232,11 @@ class User extends DAO
     /**
      * Find an user by its email and password
      *
-     * @param        $email
-     * @param string $password
-     * @param null   $locale
+     * @param string      $email
+     * @param string      $password
+     * @param string|null $locale
      *
-     * @return array
+     * @return array<string,mixed> Empty when the credentials do not match
      */
     public function findByCredentials($email, $password, $locale = null)
     {
@@ -248,10 +251,10 @@ class User extends DAO
     /**
      * Find an user by its email
      *
-     * @param string $email
-     * @param null   $locale
+     * @param string      $email
+     * @param string|null $locale
      *
-     * @return array|bool
+     * @return array<string,mixed>|false Empty array when no single row matches, false on a query failure
      */
     public function findByEmail($email, $locale = null)
     {
@@ -274,12 +277,11 @@ class User extends DAO
     /**
      * Find an user by its id and secret
      *
-     * @param string $id
-     * @param string $secret
+     * @param int         $id
+     * @param string      $secret
+     * @param string|null $locale
      *
-     * @param null   $locale
-     *
-     * @return array|bool
+     * @return array<string,mixed>|false Empty array when no single row matches, false on a query failure
      */
     public function findByIdSecret($id, $secret, $locale = null)
     {
@@ -306,11 +308,14 @@ class User extends DAO
     }
 
     /**
-     * @param string $id
-     * @param string $secret
-     * @param null   $locale
+     * Find a user by its id and an unexpired password-reset code.
      *
-     * @return array|bool
+     * @param int         $id
+     * @param string      $secret Reset code
+     * @param string|null $locale
+     *
+     * @return array<string,mixed>|false|null Null for an empty code, empty array when no single
+     *         row matches, false on a query failure
      */
     public function findByIdPasswordSecret($id, $secret, $locale = null)
     {
@@ -343,9 +348,9 @@ class User extends DAO
     /**
      * Delete an user given its id
      *
-     * @param int $id
+     * @param int|null $id
      *
-     * @return bool
+     * @return bool True only when exactly one user row was removed
      */
     public function deleteUser($id = null)
     {
@@ -406,7 +411,8 @@ class User extends DAO
      * @param string $locale
      * @param string $info
      *
-     * @return bool
+     * @return int|bool Number of affected rows on an update, the insert's own
+     *                  boolean when the row did not exist yet, false on failure
      */
     public function updateDescription($id, $locale, $info)
     {
@@ -435,9 +441,9 @@ class User extends DAO
     /**
      * Check if a description exists
      *
-     * @param array $conditions
+     * @param array<string,mixed> $conditions
      *
-     * @return bool
+     * @return bool False when nothing matches or the query failed
      */
     private function existDescription($conditions)
     {
@@ -483,11 +489,11 @@ class User extends DAO
      * @param int    $start
      * @param int    $end
      * @param string $order_column
-     * @param string $order_direction
-     * @param null   $conditions
+     * @param string                   $order_direction
+     * @param array<string,mixed>|null $conditions Column => value equality filters
      *
-     * @return array
-     * @parma  array $conditions
+     * @return array{rows:int|string,total_results:int|string,users:array<int,array<string,string|null>>}
+     *         The two counts stay int 0 on failure and are strings otherwise
      * @since  2.4
      */
     public function search(
@@ -501,13 +507,16 @@ class User extends DAO
     }
 
     /**
-     * @param        $fields
-     * @param int    $start
-     * @param int    $end
-     * @param string $order_column
-     * @param string $order_direction
+     * Paginated user list, optionally filtered by exact column matches.
      *
-     * @return array
+     * @param array<string,mixed>|null $fields Column => value equality filters
+     * @param int                      $start  offset
+     * @param int                      $end    row count
+     * @param string                   $order_column
+     * @param string                   $order_direction
+     *
+     * @return array{rows:int|string,total_results:int|string,users:array<int,array<string,string|null>>}
+     *         The two counts stay int 0 on failure and are strings otherwise
      */
     private function _search($fields, $start = 0, $end = 10, $order_column = 'pk_i_id', $order_direction = 'DESC')
     {
@@ -583,8 +592,8 @@ class User extends DAO
      * @param string $order_direction
      * @param string $name
      *
-     * @return array
-     * @parma  string $name
+     * @return array{rows:int|string,total_results:int|string,users:array<int,array<string,string|null>>}
+     *         The two counts stay int 0 on failure and are strings otherwise
      * @since  2.4
      */
     public function searchByName(
@@ -606,8 +615,8 @@ class User extends DAO
      * @param string $order_direction
      * @param string $email
      *
-     * @return array
-     * @parma  string $email
+     * @return array{rows:int|string,total_results:int|string,users:array<int,array<string,string|null>>}
+     *         The two counts stay int 0 on failure and are strings otherwise
      * @since  2.4
      */
     public function searchByEmail(
@@ -623,9 +632,9 @@ class User extends DAO
     /**
      * Return number of users
      *
-     * @param string $condition
+     * @param string $condition Raw SQL fragment the caller owns
      *
-     * @return int
+     * @return int|string The count as a string, int 0 on a query failure
      * @since 2.3.6
      */
     public function countUsers($condition = 'b_enabled = 1 AND b_active = 1')
@@ -647,13 +656,12 @@ class User extends DAO
     /**
      * Insert last access data
      *
-     * @param int    $userId
-     * @param string $date
-     * @param string $ip
+     * @param int      $userId
+     * @param string   $date
+     * @param string   $ip
+     * @param int|null $time Only write when the last access is at least this many seconds old
      *
-     * @param null   $time
-     *
-     * @return boolean on success
+     * @return int|false Rows changed, or false when the write was skipped or failed
      */
     public function lastAccess($userId, $date, $ip, $time = null)
     {
@@ -681,7 +689,7 @@ class User extends DAO
      * @param int $id    user id
      * @param int $items number of items to add (default 1)
      *
-     * @return bool|\DBRecordsetClass number of affected rows, id error occurred return false
+     * @return int|false number of affected rows, false on a non-numeric id or a failure
      */
     public function increaseNumItems($id, $items = 1)
     {
@@ -707,7 +715,7 @@ class User extends DAO
      *
      * @param int $id user id
      *
-     * @return bool|\DBRecordsetClass number of affected rows, id error occurred return false
+     * @return int|false number of affected rows, false on a non-numeric id or a failure
      */
     public function decreaseNumItems($id)
     {

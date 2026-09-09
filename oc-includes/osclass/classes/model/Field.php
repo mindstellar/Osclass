@@ -31,6 +31,7 @@ class Field extends DAO
     /**
      * Current locale code
      *
+     * @var string
      */
     public $currentLocaleCode;
 
@@ -70,7 +71,7 @@ class Field extends DAO
      *
      * @param int $id
      *
-     * @return array Field information. If there's no information, return an empty array.
+     * @return array<string,mixed> Field information. If there's no information, return an empty array.
      */
     public function findByPrimaryKey($id)
     {
@@ -89,9 +90,9 @@ class Field extends DAO
     /**
      * Extend s_meta json column to field array
      *
-     * @param array $field
+     * @param array<string,mixed> $field
      *
-     * @return array
+     * @return array<string,mixed>
      */
     private function extendField($field)
     {
@@ -118,7 +119,7 @@ class Field extends DAO
      *
      * @param int $id
      *
-     * @return bool on success
+     * @return int|false Rows removed from t_meta_fields, or false on a null id or a failure
      */
     public function deleteByPrimaryKey($id)
     {
@@ -167,7 +168,7 @@ class Field extends DAO
     /**
      * Get all the rows from the table $tableName
      *
-     * @return array
+     * @return array<int,array<string,mixed>>
      */
     public function listAll()
     {
@@ -240,7 +241,7 @@ class Field extends DAO
      *
      * @param int $groupId
      *
-     * @return array
+     * @return array<int,array<string,mixed>> Ordered by their position in the form
      */
     public function findByGroup($groupId)
     {
@@ -276,7 +277,7 @@ class Field extends DAO
      *
      * @param int $id
      *
-     * @return array Field information. If there's no information, return an empty array.
+     * @return array<int,array<string,mixed>> Field information. If there's no information, return an empty array.
      */
     public function findByCategory($id)
     {
@@ -332,11 +333,11 @@ class Field extends DAO
     }
 
     /**
-     * Find a field by its name
+     * The ids of every searchable field that applies to the given categories.
      *
-     * @param mixed $ids
+     * @param array<int,int|string>|int|string $ids Category ids or slugs
      *
-     * @return array Fields' id
+     * @return array<int,string> Fields' id
      */
     public function findIDSearchableByCategories($ids)
     {
@@ -405,10 +406,10 @@ class Field extends DAO
     /**
      * Find fields from a category and an item
      *
-     * @param $catId
-     * @param $itemId
+     * @param int $catId
+     * @param int $itemId
      *
-     * @return array Field information. If there's no information, return an empty array.
+     * @return array<int,array<string,mixed>> Field information. If there's no information, return an empty array.
      */
     public function findByCategoryItem($catId, $itemId)
     {
@@ -489,9 +490,9 @@ class Field extends DAO
      * be assigned to the item's exact category, which hid the value of an inherited
      * or grouped field — the value was stored but never shown.
      *
-     * @param $itemId
+     * @param int $itemId
      *
-     * @return array
+     * @return array<int,array<string,mixed>> Empty when the id is not numeric or the query failed
      */
     public function findByItem($itemId)
     {
@@ -530,7 +531,7 @@ class Field extends DAO
      *
      * @param string $name
      *
-     * @return array Field information. If there's no information, return an empty array.
+     * @return array<string,mixed> Field information. If there's no information, return an empty array.
      */
     public function findByName($name)
     {
@@ -550,10 +551,10 @@ class Field extends DAO
      * Return an array with from and to date values
      * given a meta field id
      *
-     * @param $item_id
-     * @param $field_id
+     * @param int $item_id
+     * @param int $field_id
      *
-     * @return array
+     * @return array<string,string|null> Keyed by s_multi ('from'/'to'); empty when there is no value
      */
     public function getDateIntervalByPrimaryKey($item_id, $field_id)
     {
@@ -580,9 +581,9 @@ class Field extends DAO
     /**
      * Gets which categories are associated with that field
      *
-     * @param string $id
+     * @param int $id
      *
-     * @return array
+     * @return array<int,string> Category ids, as strings
      */
     public function categories($id)
     {
@@ -608,14 +609,15 @@ class Field extends DAO
     /**
      * Insert a new field
      *
-     * @param string $name
-     * @param string $type
-     * @param string $slug
-     * @param bool   $required
-     * @param array  $options
-     * @param array  $categories
+     * @param string                     $name
+     * @param string                     $type
+     * @param string                     $slug       Derived from $name when empty
+     * @param bool|int                   $required
+     * @param string                     $options    Serialised option list, stored verbatim
+     * @param array<int,int|string>|null $categories
      *
-     * @return bool
+     * @return int The new field id, or 0 when a category link failed
+     * @throws \mindstellar\database\DbException when the field row itself cannot be written
      */
     public function insertField($name, $type, $slug, $required, $options, $categories = null)
     {
@@ -663,11 +665,11 @@ class Field extends DAO
     }
 
     /**
-     * Find a field by its name
+     * Find a field by its slug
      *
      * @param string $slug
      *
-     * @return array Field information. If there's no information, return an empty array.
+     * @return array<string,mixed> Field information. If there's no information, return an empty array.
      */
     public function findBySlug($slug)
     {
@@ -686,10 +688,10 @@ class Field extends DAO
     /**
      * Save the categories linked to a field
      *
-     * @param int   $id
-     * @param array $categories
+     * @param int                        $id
+     * @param array<int,int|string>|null $categories
      *
-     * @return bool
+     * @return bool False for an empty list, or when any row was rejected
      */
     public function insertCategories($id, $categories = null)
     {
@@ -722,7 +724,7 @@ class Field extends DAO
      *
      * @param int $id
      *
-     * @return bool on success
+     * @return int|false Rows removed, or false on a null id or a query failure
      */
     public function cleanCategoriesFromField($id)
     {
@@ -745,11 +747,11 @@ class Field extends DAO
     /**
      * Update a field value
      *
-     * @param int          $itemId
-     * @param int          $field
-     * @param string|array $value
+     * @param int                             $itemId
+     * @param int                             $field
+     * @param string|array<string,string|null> $value A map writes one row per s_multi key
      *
-     * @return bool|\DBRecordsetClass false on fail, int of num. of affected rows
+     * @return bool|null True/false for a scalar value; null once a multi-value map is written
      */
     public function replace($itemId, $field, $value)
     {
@@ -787,11 +789,11 @@ class Field extends DAO
     /**
      * Update JSON fieldName in s_meta json column
      *
-     * @param int   $metaId
-     * @param int   $fieldName
-     * @param mixed $fieldValue
+     * @param int    $metaId
+     * @param string $fieldName
+     * @param mixed  $fieldValue An empty string or null removes the key
      *
-     * @return bool
+     * @return int|false Rows updated, or false on a null id or a query failure
      */
     public function updateJsonMeta($metaId, $fieldName, $fieldValue)
     {
@@ -831,11 +833,11 @@ class Field extends DAO
     /**
      * Get JSON fieldValue from s_meta json column
      *
-     * @param int    $metaId
-     * @param string $fieldName
-     * @param array  $field
+     * @param string                   $fieldName
+     * @param array<string,mixed>|null $field   An already-loaded field row, read instead of $metaId
+     * @param int|null                 $metaId  Field id to read when $field is null
      *
-     * @return mixed
+     * @return mixed False when the key is absent, unreadable, or both sources are null
      */
     public function getJsonMetaValue($fieldName, $field = null, $metaId = null)
     {

@@ -34,6 +34,8 @@ class Cron extends DAO
     }
 
     /**
+     * Return the shared Cron model instance, creating it on first use.
+     *
      * @return \Cron
      */
     public static function newInstance()
@@ -50,7 +52,7 @@ class Cron extends DAO
      *
      * @param string $type
      *
-     * @return array|bool
+     * @return array<string,string|null>|false The row, or false when no cron of that type exists
      */
     public function getCronByType($type)
     {

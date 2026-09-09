@@ -58,11 +58,11 @@ class AlertsStats extends DAO
     }
 
     /**
-     * Increase the stat column given column name and item id
+     * Increase the alerts-sent counter for one day, creating the row if needed.
      *
-     * @param string $date
+     * @param string $date 'Y-m-d'
      *
-     * @return bool
+     * @return bool False when the date is malformed or the write failed
      * @since  3.1
      */
     public function increase($date)

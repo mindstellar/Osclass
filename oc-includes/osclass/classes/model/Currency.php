@@ -56,9 +56,11 @@ class Currency extends DAO
     }
 
     /**
+     * Find a currency row by its code, memoising the hit for the request.
+     *
      * @param string $value
      *
-     * @return bool|mixed
+     * @return array<string,string|null>|false False when the code is unknown
      */
     public function findByPrimaryKey($value)
     {

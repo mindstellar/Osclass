@@ -99,12 +99,12 @@ class CityStats extends DAO
     }
 
     /**
-     * Increase number of city items, given a city id
+     * Decrease number of city items, given a city id
      *
      * @param int $cityId City id
      *
-     * @return bool|int Number of affected rows, or false when there is no
-     *                  counter row for that city
+     * @return int|false Number of affected rows, or false when there is no
+     *                   counter row for that city
      * @since  2.4
      */
     public function decreaseNumItems($cityId)
@@ -173,7 +173,7 @@ class CityStats extends DAO
      *
      * @param int $cityId city id
      *
-     * @return array
+     * @return array<string,string|null>|false False when the city has no stats row
      * @since  2.4
      */
     public function findByCityId($cityId)
@@ -182,6 +182,7 @@ class CityStats extends DAO
     }
 
     /**
+     * Drop the counter rows of every city in a region.
      *
      * @param int $regionId
      *
@@ -212,11 +213,11 @@ class CityStats extends DAO
      * and ordered by city_name or items counter
      * $order = 'city_name ASC' OR $oder = 'items DESC'
      *
-     * @param int    $region
-     * @param string $zero
-     * @param string $order
+     * @param int|null $region
+     * @param string   $zero  Comparison operator applied to i_num_items
+     * @param string   $order '<column> ASC|DESC'
      *
-     * @return array
+     * @return array<int,array{city_id:string,items:string,city_name:string|null,city_slug:string|null}>
      */
     public function listCities($region = null, $zero = '>', $order = 'city_name ASC')
     {
@@ -311,9 +312,9 @@ class CityStats extends DAO
     /**
      * Batch calculate the total items that belong to city id
      *
-     * @param array $cities array of city ids
+     * @param array<int,int|string> $cities array of city ids
      *
-     * @return array
+     * @return array<int|string,int|string> City id => item count, 0 for a city with none
      */
     private function calculateAllStats(array $cities): array
     {
@@ -370,7 +371,7 @@ class CityStats extends DAO
     /**
      * Update the number of items for given cities ids
      *
-     * @param array $cities array of city ids
+     * @param array<int,int|string> $cities array of city ids
      *
      * @return bool True once every counter is written, false when there is
      *              nothing to write or the upsert fails

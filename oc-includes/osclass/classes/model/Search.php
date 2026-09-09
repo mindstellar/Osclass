@@ -149,9 +149,11 @@ class Search extends DAO
     /**
      * Establish the order of the search
      *
-     * @param string $o_c column
-     * @param string $o_d direction
-     * @param string $table
+     * @param string      $o_c   column
+     * @param string      $o_d   direction
+     * @param string|null $table table qualifier, or a '%s'-style prefix format
+     *
+     * @return void
      */
     public function order($o_c = '', $o_d = 'DESC', $table = null)
     {
@@ -181,8 +183,10 @@ class Search extends DAO
     /**
      * Limit the results of the search
      *
-     * @param int  $l_i
-     * @param null $r_p_p
+     * @param int      $l_i   offset
+     * @param int|null $r_p_p results per page; null keeps the current value
+     *
+     * @return void
      */
     public function limit($l_i = 0, $r_p_p = null)
     {
@@ -257,7 +261,9 @@ class Search extends DAO
     /**
      * Add item conditions to the search
      *
-     * @param mixed $conditions
+     * @param string|array<int,string> $conditions
+     *
+     * @return void
      */
     public function addItemConditions($conditions)
     {
@@ -279,7 +285,9 @@ class Search extends DAO
     /**
      * Add new fields to the search
      *
-     * @param mixed $fields
+     * @param string|array<int,string> $fields
+     *
+     * @return void
      */
     public function addField($fields)
     {
@@ -299,6 +307,8 @@ class Search extends DAO
     }
 
     /**
+     * Return the shared Search instance, creating it on first use.
+     *
      * @return \Search
      */
     public static function newInstance()
@@ -313,7 +323,7 @@ class Search extends DAO
     /**
      * Return an array with columns allowed for sorting
      *
-     * @return array
+     * @return string[]
      */
     public static function getAllowedColumnsForSorting()
     {
@@ -323,7 +333,7 @@ class Search extends DAO
     /**
      * Return an array with of sorting
      *
-     * @return array
+     * @return array<int,string>
      */
     public static function getAllowedTypesForSorting()
     {
@@ -333,7 +343,9 @@ class Search extends DAO
     /**
      * Add conditions to the search
      *
-     * @param mixed $conditions
+     * @param string|array<int,string> $conditions
+     *
+     * @return void
      */
     public function addConditions($conditions)
     {
@@ -355,8 +367,9 @@ class Search extends DAO
     /**
      * Add locale conditions to the search
      *
-     * @param array|string $locales
+     * @param string|array<int,string> $locales
      *
+     * @return void
      * @since  3.2
      */
     public function addLocale($locales)
@@ -375,7 +388,9 @@ class Search extends DAO
     /**
      * Add extra table to the search
      *
-     * @param mixed $tables
+     * @param string|array<int,string> $tables
+     *
+     * @return void
      */
     public function addTable($tables)
     {
@@ -397,7 +412,9 @@ class Search extends DAO
     /**
      * Add group by to the search
      *
-     * @param $groupBy
+     * @param string $groupBy
+     *
+     * @return void
      */
     public function addGroupBy($groupBy)
     {
@@ -407,8 +424,10 @@ class Search extends DAO
     /**
      * Select the page of the search
      *
-     * @param int  $p page
-     * @param null $r_p_p
+     * @param int      $p     page
+     * @param int|null $r_p_p results per page; null keeps the current value
+     *
+     * @return void
      */
     public function page($p = 0, $r_p_p = null)
     {
@@ -421,7 +440,9 @@ class Search extends DAO
     /**
      * Add city areas to the search
      *
-     * @param mixed $city_area
+     * @param string|int|array<int,string|int> $city_area
+     *
+     * @return void
      */
     public function addCityArea($city_area = array())
     {
@@ -472,6 +493,8 @@ class Search extends DAO
      * Establish max price
      *
      * @param int $price
+     *
+     * @return void
      */
     public function priceMax($price)
     {
@@ -481,8 +504,10 @@ class Search extends DAO
     /**
      * Establish price range
      *
-     * @param int $price_min
-     * @param int $price_max
+     * @param int|null $price_min
+     * @param int|null $price_max
+     *
+     * @return void
      */
     public function priceRange($price_min = 0, $price_max = 0)
     {
@@ -494,6 +519,8 @@ class Search extends DAO
      * Establish min price
      *
      * @param int $price
+     *
+     * @return void
      */
     public function priceMin($price)
     {
@@ -503,7 +530,9 @@ class Search extends DAO
     /**
      * Set having sentence to sql
      *
-     * @param $having
+     * @param string $having
+     *
+     * @return void
      */
     public function addHaving($having)
     {
@@ -513,8 +542,9 @@ class Search extends DAO
     /**
      * Filter by email
      *
-     * @param $email
+     * @param string $email
      *
+     * @return void
      * @since  2.4
      */
     public function addContactEmail($email)
@@ -524,7 +554,11 @@ class Search extends DAO
     }
 
     /**
-     * @param $id
+     * Exclude one user's listings from the results.
+     *
+     * @param int $id
+     *
+     * @return void
      */
     public function notFromUser($id)
     {
@@ -537,7 +571,11 @@ class Search extends DAO
     }
 
     /**
-     * @param $id
+     * Restrict the search to one listing id.
+     *
+     * @param int $id
+     *
+     * @return void
      */
     public function addItemId($id)
     {
@@ -553,6 +591,7 @@ class Search extends DAO
      * @param string $condition
      * @param string $type
      *
+     * @return void
      * @since 2.4
      */
     public function addJoinTable($key, $table, $condition, $type)
@@ -562,6 +601,8 @@ class Search extends DAO
 
     /**
      * Return number of ads selected
+     *
+     * @return int
      */
     public function count()
     {
@@ -579,7 +620,7 @@ class Search extends DAO
      *
      * @param bool $count
      *
-     * @return array
+     * @return array<int,array<string,mixed>> Empty when the query failed
      */
     public function doSearch($extended = true, $count = true)
     {
@@ -800,7 +841,7 @@ class Search extends DAO
     /**
      * Create extraFields & conditionsSQL and return as an array
      *
-     * @return array with extraFields & conditions strings
+     * @return array{extraFields:string,conditionsSQL:string}
      */
     private function conditions()
     {
@@ -845,6 +886,11 @@ class Search extends DAO
         );
     }
 
+    /**
+     * Join t_user and constrain the search to the collected user ids.
+     *
+     * @return void
+     */
     private function addFromUser()
     {
         $this->addJoin(DB_TABLE_PREFIX.'t_user', DB_TABLE_PREFIX.'t_user.pk_i_id = '.DB_TABLE_PREFIX.'t_item.fk_i_user_id', 'LEFT');
@@ -859,6 +905,11 @@ class Search extends DAO
         }
     }
 
+    /**
+     * Fold the collected city-area/city/region/country filters into the WHERE clause.
+     *
+     * @return void
+     */
     private function addLocations()
     {
         if (count($this->city_areas) > 0) {
@@ -875,6 +926,11 @@ class Search extends DAO
         }
     }
 
+    /**
+     * Fold the collected price bounds into the WHERE clause.
+     *
+     * @return void
+     */
     private function addPriceRange()
     {
         if (is_numeric($this->price_min) && $this->price_min != 0) {
@@ -888,6 +944,7 @@ class Search extends DAO
     /**
      * Add join to current query
      *
+     * @return void
      * @since 2.4
      */
     private function joinTable()
@@ -916,7 +973,7 @@ class Search extends DAO
      *
      * @param mixed $value
      *
-     * @return mixed
+     * @return string|int|float SQL text: a bare number, a quoted string, 1/0 or NULL
      */
     private function escapeValue($value)
     {
@@ -966,7 +1023,9 @@ class Search extends DAO
     }
 
     /**
-     * @param string|array $select comma-separated list or array of expressions
+     * Add expressions to the SELECT list.
+     *
+     * @param string|array<int,string> $select comma-separated list or array of expressions
      *
      * @return void
      */
@@ -984,7 +1043,9 @@ class Search extends DAO
     }
 
     /**
-     * @param string|array $from
+     * Add tables to the FROM list, keeping a subquery intact.
+     *
+     * @param string|array<int,string> $from
      *
      * @return void
      */
@@ -1006,6 +1067,8 @@ class Search extends DAO
     }
 
     /**
+     * Add a JOIN clause, dropping an unrecognised join type.
+     *
      * @param string $table
      * @param string $cond
      * @param string $type LEFT, RIGHT, OUTER, INNER, LEFT OUTER or RIGHT OUTER
@@ -1025,8 +1088,10 @@ class Search extends DAO
     }
 
     /**
-     * @param string|array $key   fragment, or column when $value is supplied
-     * @param mixed        $value bound-by-value; escaped into the text
+     * Add a WHERE clause, AND-joined to the ones already collected.
+     *
+     * @param string|array<string,mixed> $key   fragment, or column when $value is supplied
+     * @param mixed                      $value bound-by-value; escaped into the text
      *
      * @return void
      */
@@ -1048,7 +1113,9 @@ class Search extends DAO
     }
 
     /**
-     * @param string|array $by
+     * Add columns to the GROUP BY list.
+     *
+     * @param string|array<int,string> $by
      *
      * @return void
      */
@@ -1066,8 +1133,10 @@ class Search extends DAO
     }
 
     /**
-     * @param string|array $key
-     * @param string       $value
+     * Add a HAVING clause, AND-joined to the ones already collected.
+     *
+     * @param string|array<string,string> $key
+     * @param string                      $value
      *
      * @return void
      */
@@ -1086,6 +1155,8 @@ class Search extends DAO
     }
 
     /**
+     * Add an ORDER BY clause, normalising the direction.
+     *
      * @param string $orderby
      * @param string $direction ASC, DESC or 'random'
      *
@@ -1261,7 +1332,7 @@ class Search extends DAO
     /**
      * Return total items on t_item without any filter
      *
-     * @return null
+     * @return string|null The count as a string, null when the query failed
      */
     public function countAll()
     {
@@ -1284,7 +1355,7 @@ class Search extends DAO
      *
      * @param int $max
      *
-     * @return array
+     * @return array<int,array<string,mixed>> Empty when there are no premium listings
      */
     public function getPremiums($max = 2)
     {
@@ -1449,11 +1520,11 @@ class Search extends DAO
      * Return latest posted items, you can filter by category and specify the
      * number of items returned.
      *
-     * @param int   $numItems
-     * @param mixed $options
-     * @param bool  $withPicture
+     * @param int                 $numItems
+     * @param array<string,mixed> $options    sCategory / sCity / sRegion / sCountry filters
+     * @param bool                $withPicture
      *
-     * @return array
+     * @return array<int,array<string,mixed>>
      */
     public function getLatestItems($numItems = 10, $options = array(), $withPicture = false)
     {
@@ -1493,7 +1564,9 @@ class Search extends DAO
     /**
      * Limit the results of the search
      *
-     * @param $r_p_p
+     * @param int $r_p_p
+     *
+     * @return void
      */
     public function set_rpp($r_p_p)
     {
@@ -1504,6 +1577,8 @@ class Search extends DAO
      * Filter by ad with picture or not
      *
      * @param bool $pic
+     *
+     * @return void
      */
     public function withPicture($pic = false)
     {
@@ -1513,9 +1588,9 @@ class Search extends DAO
     /**
      * Add categories to the search
      *
-     * @param mixed $category
+     * @param int|string|array<string,mixed>|null $category Category id, slug, or a category row
      *
-     * @return bool
+     * @return bool False when $category is empty or unknown
      */
     public function addCategory($category = null)
     {
@@ -1546,7 +1621,9 @@ class Search extends DAO
     /**
      * Clear the categories
      *
-     * @param array $branches
+     * @param array<int,array<string,mixed>>|null $branches
+     *
+     * @return void
      */
     private function pruneBranches($branches = null)
     {
@@ -1565,7 +1642,9 @@ class Search extends DAO
     /**
      * Add countries to the search
      *
-     * @param mixed $country
+     * @param string|array<int,string> $country Country codes or names
+     *
+     * @return void
      */
     public function addCountry($country = array())
     {
@@ -1601,7 +1680,9 @@ class Search extends DAO
     /**
      * Add regions to the search
      *
-     * @param mixed $region
+     * @param string|int|array<int,string|int> $region Region ids or names
+     *
+     * @return void
      */
     public function addRegion($region = array())
     {
@@ -1637,7 +1718,9 @@ class Search extends DAO
     /**
      * Add cities to the search
      *
-     * @param array|string|int $city
+     * @param string|int|array<int,string|int> $city City ids or names
+     *
+     * @return void
      */
     public function addCity($city = array())
     {
@@ -1673,7 +1756,9 @@ class Search extends DAO
     /**
      * Return ads from specified users
      *
-     * @param array|string|int $id
+     * @param string|int|array<int,string|int>|null $id User ids or usernames
+     *
+     * @return void
      */
     public function fromUser($id = null)
     {
@@ -1714,8 +1799,9 @@ class Search extends DAO
      * @param string $zero if you want to include locations with zero results
      * @param string $order
      *
-     * @return array
+     * @return array<int,array<string,string|null>>
      *
+     * @see        CountryStats::listCountries
      * @deprecated
      */
     public function listCountries($zero = '>', $order = 'items DESC')
@@ -1733,8 +1819,9 @@ class Search extends DAO
      * @param string $zero if you want to include locations with zero results
      * @param string $order
      *
-     * @return array
+     * @return array<int,array<string,string|null>>
      *
+     * @see        RegionStats::listRegions
      * @deprecated
      */
     public function listRegions($country = '%%%%', $zero = '>', $order = 'items DESC')
@@ -1753,8 +1840,9 @@ class Search extends DAO
      * @param string $zero if you want to include locations with zero results
      * @param string $order
      *
-     * @return array
+     * @return array<int,array<string,string|null>>
      *
+     * @see        CityStats::listCities
      * @deprecated
      */
     public function listCities($region = null, $zero = '>', $order = 'city_name ASC')
@@ -1765,11 +1853,11 @@ class Search extends DAO
     /**
      * Returns number of ads from each city area
      *
-     * @param string $city
-     * @param string $zero if you want to include locations with zero results
-     * @param string $order
+     * @param int|null $city
+     * @param string   $zero if you want to include locations with zero results
+     * @param string   $order
      *
-     * @return array
+     * @return array<int,array<string,string|null>>
      */
     public function listCityAreas($city = null, $zero = '>', $order = 'items DESC')
     {
@@ -1881,7 +1969,7 @@ class Search extends DAO
      * Given the current search object, extract search parameters & conditions
      * as array.
      *
-     * @return array
+     * @return array<string,mixed>
      */
     private function getConditions()
     {
@@ -2069,7 +2157,11 @@ class Search extends DAO
     }
 
     /**
-     * @param $aData
+     * Restore a whole search from a stored alert's decoded JSON.
+     *
+     * @param array<string,mixed> $aData
+     *
+     * @return void
      */
     public function setJsonAlert($aData)
     {
@@ -2145,6 +2237,7 @@ class Search extends DAO
      *
      * @param string $pattern
      *
+     * @return void
      * @since  2.4
      */
     public function addPattern($pattern)
@@ -2185,9 +2278,9 @@ class Search extends DAO
      * '-' is preserved as an exclusion marker; quoted "phrases" are returned whole
      * (without the quotes) via the $phrases out-parameter.
      *
-     * @param array $phrases  filled with the quoted phrases found (operators stripped)
+     * @param string[] $phrases filled with the quoted phrases found (operators stripped)
      *
-     * @return array          the loose words, each ['neg' => bool, 'text' => string]
+     * @return array<int,array{neg:bool,text:string}> the loose words
      */
     private function patternTerms(&$phrases)
     {
@@ -2319,6 +2412,7 @@ class Search extends DAO
      *
      * @param bool $premium
      *
+     * @return void
      * @since  3.2
      */
     public function onlyPremium($premium = false)

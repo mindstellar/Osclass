@@ -24,7 +24,7 @@ class OSCLocale extends DAO
     private static $instance;
 
     /**
-     *
+     * Set data related to t_locale table
      */
     public function __construct()
     {
@@ -53,6 +53,8 @@ class OSCLocale extends DAO
     }
 
     /**
+     * Return the shared OSCLocale model instance, creating it on first use.
+     *
      * @return \OSCLocale
      */
     public static function newInstance()
@@ -65,12 +67,9 @@ class OSCLocale extends DAO
     }
 
     /**
-     * Return all locales enabled.
+     * Return the code of every installed locale, enabled or not.
      *
-     * @param bool $isBo
-     * @param bool $indexedByPk
-     *
-     * @return array
+     * @return array<int,string> Empty when the query failed
      */
     public function listAllCodes()
     {
@@ -95,10 +94,10 @@ class OSCLocale extends DAO
     /**
      * Return all locales enabled.
      *
-     * @param bool $isBo
-     * @param bool $indexedByPk
+     * @param bool $isBo         Read b_enabled_bo (the admin) rather than b_enabled
+     * @param bool $indexedByPk   Key the result by locale code instead of position
      *
-     * @return array
+     * @return array<int|string,array<string,string|null>> Empty when the query failed
      */
     public function listAllEnabled($isBo = false, $indexedByPk = false)
     {
@@ -131,7 +130,7 @@ class OSCLocale extends DAO
      *
      * @param string $code
      *
-     * @return array
+     * @return array<int,array<string,string|null>> Empty when the code is unknown
      * @since  2.3
      */
     public function findByCode($code)
@@ -153,7 +152,7 @@ class OSCLocale extends DAO
      *
      * @param string $locale
      *
-     * @return bool
+     * @return int|false Rows deleted from t_locale, or false for a null code or a query failure
      */
     public function deleteLocale($locale)
     {
@@ -203,8 +202,11 @@ class OSCLocale extends DAO
     /**
      * Insert or update location info in database
      *
-     * @param array  $aLocale
-     * @param string $localeCode pk_c_code
+     * @param array<string,mixed> $aLocale Keyed by the manifest field names (locale_code, name, …)
+     * @param string              $localeCode pk_c_code
+     *
+     * @return int|bool Affected rows from the update, true/false from the insert,
+     *                  or false when $aLocale is not an array
      */
     public function insertLocaleInfo($aLocale, $localeCode = '')
     {

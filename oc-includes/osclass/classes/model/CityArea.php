@@ -57,10 +57,10 @@ class CityArea extends DAO
     /**
      * Get the cityArea by its name and city
      *
-     * @param     $cityAreaName
-     * @param int $cityId
+     * @param string   $cityAreaName
+     * @param int|null $cityId
      *
-     * @return array
+     * @return array<string,string|null> Empty when no city area matches
      */
     public function findByName($cityAreaName, $cityId = null)
     {
@@ -88,9 +88,9 @@ class CityArea extends DAO
     /**
      * Return city areas of a given city ID
      *
-     * @param $cityId
+     * @param int $cityId
      *
-     * @return array
+     * @return array<int,array<string,string|null>> Empty when the city has no areas
      * @since  2.4
      */
     public function findByCity($cityId)
@@ -110,7 +110,7 @@ class CityArea extends DAO
     /**
      *  Delete a city area
      *
-     * @param $pk
+     * @param int $pk
      *
      * @return int number of failed deletions or 0 in case of none
      * @since  3.1

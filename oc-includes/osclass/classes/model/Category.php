@@ -70,9 +70,9 @@ class Category extends DAO
     /**
      * Return categories in a tree
      *
-     * @param bool $empty
+     * @param bool $empty Include categories that hold no listings
      *
-     * @return array
+     * @return array<int,array<string,mixed>> Root categories, each with a nested 'categories' list
      */
     public function toTree(bool $empty = true)
     {
@@ -133,7 +133,7 @@ class Category extends DAO
     /**
      * List all enabled categories
      *
-     * @return array
+     * @return array<int,array<string,mixed>>
      */
     public function listEnabled()
     {
@@ -145,9 +145,10 @@ class Category extends DAO
      *
      * *Note: param needs to be escaped, inside function will not be escaped
      *
-     * @param mixed
+     * @param string $where   A raw WHERE fragment the caller owns, or a printf-style format
+     * @param mixed  ...$args  Values bound to the format's %d/%s conversions
      *
-     * @return array
+     * @return array<int,array<string,mixed>> Empty when there is no argument, no match or a query failure
      */
     public function listWhere()
     {
@@ -247,11 +248,11 @@ class Category extends DAO
     /**
      * Helps create the tree
      *
-     * @param array $branch
-     * @param array $categories
-     * @param array $relation
+     * @param array<int,int|string>                    $branch     Ids at this level
+     * @param array<int|string,array<string,mixed>>    $categories Category rows keyed by id
+     * @param array<int|string,array<int,int|string>>  $relation   Parent id => child ids
      *
-     * @return array
+     * @return array<int,array<string,mixed>>
      */
     private function sideTree($branch, $categories, $relation)
     {
@@ -272,7 +273,9 @@ class Category extends DAO
     }
 
     /**
-     * @param string $l
+     * Return the shared Category model instance, creating it on first use.
+     *
+     * @param string $l Locale code; only honoured on the first call
      *
      * @return \Category
      */
@@ -288,7 +291,7 @@ class Category extends DAO
     /**
      * Find root categories
      *
-     * @return array
+     * @return array<int,array<string,mixed>>
      */
     public function findRootCategories()
     {
@@ -298,7 +301,7 @@ class Category extends DAO
     /**
      * Find root enabled categories
      *
-     * @return array
+     * @return array<int,array<string,mixed>>
      */
     public function findRootCategoriesEnabled()
     {
@@ -308,9 +311,9 @@ class Category extends DAO
     /**
      * Returna  tree of a given category as the root
      *
-     * @param integer $category
+     * @param int|null $category
      *
-     * @return array
+     * @return array<int,array<string,mixed>> Empty when the category has no children
      */
     public function toSubTree($category = null)
     {
@@ -329,7 +332,7 @@ class Category extends DAO
     /**
      * Return a tree of ALL (enabled & disabled) categories
      *
-     * @return array
+     * @return array<int,array<string,mixed>>
      */
     public function toTreeAll()
     {
@@ -358,9 +361,9 @@ class Category extends DAO
     /**
      * List all categories
      *
-     * @param bool $description
+     * @param bool $description Accepted for signature compatibility; unused
      *
-     * @return array
+     * @return array<int,array<string,mixed>>
      */
     public function listAll($description = true)
     {
@@ -370,9 +373,9 @@ class Category extends DAO
     /**
      * Return the root category of a one given
      *
-     * @param integer $categoryID
+     * @param int $categoryID
      *
-     * @return array
+     * @return array<string,mixed>|false False when the id is unknown
      */
     public function findRootCategory($categoryID)
     {
@@ -391,9 +394,9 @@ class Category extends DAO
      * categories on an array for the tree and it's faster than a SQL query
      *
      * @param int    $categoryID primary key
-     * @param string $locale
+     * @param string $locale     Empty means every locale
      *
-     * @return array|bool
+     * @return array<string,mixed>|false False when the id is null, unknown, or the query failed
      */
     public function findByPrimaryKey($categoryID, $locale = '')
     {
@@ -465,9 +468,9 @@ class Category extends DAO
     /**
      * delete a category and all information linked to it
      *
-     * @param integer $pk primary key
+     * @param int $pk primary key
      *
-     * @return bool|int
+     * @return int|false Rows removed from t_category, or false when the transaction failed
      */
     public function deleteByPrimaryKey($pk)
     {
@@ -524,9 +527,9 @@ class Category extends DAO
     /**
      * returns the children of a given category
      *
-     * @param integer $categoryID
+     * @param int $categoryID
      *
-     * @return array
+     * @return array<int,array<string,mixed>>
      */
     public function findSubcategories($categoryID)
     {
@@ -536,10 +539,10 @@ class Category extends DAO
     /**
      * Update a category
      *
-     * @param     $data
+     * @param array{fields:array<string,mixed>,aFieldsDescription:array<string,array<string,mixed>>} $data
      * @param int $pk primary key
      *
-     * @return mixed bool if there is an error, affectedRows if there isn't errors
+     * @return int|bool false if there is an error, affectedRows if there isn't errors
      */
     public function updateByPrimaryKey($data, $pk)
     {
@@ -704,7 +707,7 @@ class Category extends DAO
      *
      * @param string $slug
      *
-     * @return array
+     * @return array<string,mixed>|false Empty array when the slug is unknown
      */
     public function findBySlug($slug)
     {
@@ -728,9 +731,9 @@ class Category extends DAO
     /**
      * Insert the description of a category
      *
-     * @param array $fields_description
+     * @param array<string,mixed> $fields_description
      *
-     * @return bool
+     * @return bool|null Null when the description carries no s_name
      */
     public function insertDescription($fields_description)
     {
@@ -748,10 +751,11 @@ class Category extends DAO
     /**
      * Inser a new category
      *
-     * @param array $fields
-     * @param null  $aFieldsDescription
+     * @param array<string,mixed>                          $fields
+     * @param array<string,array<string,mixed>>|null       $aFieldsDescription Keyed by locale code
      *
-     * @return mixed
+     * @return int The new category id
+     * @throws \mindstellar\database\DbException when the category row cannot be written
      */
     public function insert($fields, $aFieldsDescription = null)
     {
@@ -791,9 +795,9 @@ class Category extends DAO
     /**
      * Same as toRootTree but reverse the results
      *
-     * @param integer $category_id
+     * @param int $category_id
      *
-     * @return array
+     * @return array<int,array<string,mixed>> From the root down to the category
      */
     public function hierarchy($category_id)
     {
@@ -803,9 +807,9 @@ class Category extends DAO
     /**
      * Given a category, return the branch from the root to the category
      *
-     * @param null $cat
+     * @param int|null $cat
      *
-     * @return array
+     * @return array<int,array<string,mixed>> From the category up to the root
      */
     public function toRootTree($cat = null)
     {
@@ -831,9 +835,9 @@ class Category extends DAO
     /**
      * Check if it's a root category
      *
-     * @param $categoryID
+     * @param int $categoryID
      *
-     * @return boolean
+     * @return bool
      */
     public function isRoot($categoryID)
     {
@@ -845,9 +849,9 @@ class Category extends DAO
     /**
      * returns the children of a given category
      *
-     * @param integer $categoryID
+     * @param int $categoryID
      *
-     * @return array
+     * @return array<int,array<string,mixed>>
      */
     public function findSubcategoriesEnabled($categoryID)
     {
@@ -859,7 +863,7 @@ class Category extends DAO
      *
      * @param int $categoryID primary key
      *
-     * @return string
+     * @return string|false False on a null id or a query failure; a placeholder name when unknown
      * @since  3.1
      */
     public function findNameByPrimaryKey($categoryID)
@@ -897,9 +901,9 @@ class Category extends DAO
     /**
      * Return list of categories' name and id by locale
      *
-     * @param string $locale
+     * @param string|null $locale
      *
-     * @return array|bool
+     * @return array<int,array{s_name:string,pk_i_id:string}>|false False on a null locale
      * @since  3.2.1
      */
     public function _findNameIDByLocale($locale = null)
@@ -927,10 +931,10 @@ class Category extends DAO
     /**
      * Update categories' order
      *
-     * @param integer $pk_i_id
-     * @param integer $order
+     * @param int $pk_i_id
+     * @param int $order
      *
-     * @return mixed false on fail, int of num. of affected rows
+     * @return int|false false on fail, int of num. of affected rows
      */
     public function updateOrder($pk_i_id, $order)
     {
@@ -944,11 +948,11 @@ class Category extends DAO
     /**
      * Update categories' expiration
      *
-     * @param integer $pk_i_id
-     * @param integer $expiration
-     * @param boolean $updateSubcategories
+     * @param int  $pk_i_id
+     * @param int  $expiration
+     * @param bool $updateSubcategories
      *
-     * @return mixed false on fail, int of num. of affected rows
+     * @return int|false false on fail, int of num. of affected rows
      */
     public function updateExpiration($pk_i_id, $expiration, $updateSubcategories = false)
     {
@@ -986,11 +990,11 @@ class Category extends DAO
     /**
      * Update categories' price enabled
      *
-     * @param integer $pk_i_id
-     * @param integer $enabled
-     * @param boolean $updateSubcategories
+     * @param int  $pk_i_id
+     * @param int  $enabled
+     * @param bool $updateSubcategories
      *
-     * @return bool true on pass, false on fail
+     * @return int|false false on fail, int of num. of affected rows
      */
     public function updatePriceEnabled($pk_i_id, $enabled, $updateSubcategories = false)
     {
@@ -1014,11 +1018,11 @@ class Category extends DAO
     /**
      * update name of a category
      *
-     * @param integer $pk_i_id
-     * @param string  $locale
-     * @param string  $name
+     * @param int    $pk_i_id
+     * @param string $locale
+     * @param string $name
      *
-     * @return mixed false on fail, int of num. of affected rows
+     * @return int|false false on fail, int of num. of affected rows
      */
     public function updateName($pk_i_id, $locale, $name)
     {
@@ -1035,7 +1039,7 @@ class Category extends DAO
     /**
      * Formats a value before being inserted in DB.
      *
-     * @param $value
+     * @param string|null $value
      *
      * @return string
      */

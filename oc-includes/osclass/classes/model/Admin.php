@@ -37,6 +37,8 @@ class Admin extends DAO
 
     /**
      * Set data from t_admin table
+     *
+     * @throws mysqli_sql_exception when the column probe fails
      */
     public function __construct()
     {
@@ -71,6 +73,8 @@ class Admin extends DAO
     }
 
     /**
+     * Return the shared Admin model instance, creating it on first use.
+     *
      * @return \Admin
      */
     public static function newInstance()
@@ -83,10 +87,12 @@ class Admin extends DAO
     }
 
     /**
-     * @param string $id
-     * @param null   $locale
+     * Find an admin by its id, memoising the row for the request.
      *
-     * @return mixed|string
+     * @param int|string  $id
+     * @param string|null $locale Accepted for signature compatibility; unused
+     *
+     * @return array<string,string|null>|string|false '' for an empty $id, false when unknown
      */
     public function findByPrimaryKey($id, $locale = null)
     {
@@ -107,7 +113,7 @@ class Admin extends DAO
      *
      * @param string $email
      *
-     * @return array|bool
+     * @return array<string,string|null>|false
      */
     public function findByEmail($email)
     {
@@ -131,7 +137,7 @@ class Admin extends DAO
      * @param string $userName
      * @param string $password
      *
-     * @return array|bool
+     * @return array<string,string|null>|false
      */
     public function findByCredentials($userName, $password)
     {
@@ -149,7 +155,7 @@ class Admin extends DAO
      *
      * @param string $username
      *
-     * @return array|bool
+     * @return array<string,string|null>|false
      */
     public function findByUsername($username)
     {
@@ -170,10 +176,10 @@ class Admin extends DAO
      * Searches for admin information, given a admin id and secret.
      * If credential don't match return false.
      *
-     * @param integer $id
-     * @param string  $secret
+     * @param int    $id
+     * @param string $secret
      *
-     * @return array|bool
+     * @return array<string,string|null>|false
      */
     public function findByIdSecret($id, $secret)
     {
@@ -197,10 +203,10 @@ class Admin extends DAO
      * Searches for admin information, given a admin id and password.
      * If credential don't match return false.
      *
-     * @param integer $id
-     * @param string  $password
+     * @param int    $id
+     * @param string $password
      *
-     * @return array|bool
+     * @return array<string,string|null>|false
      */
     public function findByIdPassword($id, $password)
     {
@@ -223,9 +229,9 @@ class Admin extends DAO
     /**
      * Perform a batch delete (for more than one admin ID)
      *
-     * @param array $id
+     * @param array<int,int|string>|int|string $id
      *
-     * @return boolean
+     * @return int|false Rows deleted, or false for an empty list or a query failure
      * @since  2.3.4
      */
     public function deleteBatch($id)

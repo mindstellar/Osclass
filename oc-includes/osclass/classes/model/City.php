@@ -60,7 +60,8 @@ class City extends DAO
      * @param string   $query    The beginning of the city name to look for
      * @param int|null $regionId Region id
      *
-     * @return array If there's an error or 0 results, it returns an empty array
+     * @return array<int,array{id:string,label:string,value:string,region:string|null}>
+     *         If there's an error or 0 results, it returns an empty array
      */
     public function ajax($query, $regionId = null)
     {
@@ -99,9 +100,9 @@ class City extends DAO
      *
      * @param int $regionId Region id
      *
-     * @return array If there's an error or 0 results, it returns an empty array
+     * @return array<int,array<string,string|null>> If there's an error or 0 results, it returns an empty array
      * @see        City::findByRegion
-     * @deprecated deprecated since 2.3
+     * @deprecated since 2.3
      */
     public function getByRegion($regionId)
     {
@@ -113,7 +114,7 @@ class City extends DAO
      *
      * @param int $regionId Region id
      *
-     * @return array If there's an error or 0 results, it returns an empty array
+     * @return array<int,array<string,string|null>> If there's an error or 0 results, it returns an empty array
      * @since  2.3
      */
     public function findByRegion($regionId)
@@ -134,10 +135,10 @@ class City extends DAO
     /**
      * Get the citiy by its name and region
      *
-     * @param     $cityName
-     * @param int $regionId
+     * @param string   $cityName
+     * @param int|null $regionId
      *
-     * @return array
+     * @return array<string,string|null> Empty when no city matches
      */
     public function findByName($cityName, $regionId = null)
     {
@@ -165,7 +166,7 @@ class City extends DAO
     /**
      * Get all the rows from the table t_city
      *
-     * @return array
+     * @return array<int,array<string,string|null>>
      */
     public function listAll()
     {
@@ -184,7 +185,7 @@ class City extends DAO
     /**
      *  Delete a city with its city areas
      *
-     * @param $pk
+     * @param int $pk
      *
      * @return int number of failed deletions or 0 in case of none
      * @since  3.1
@@ -231,9 +232,9 @@ class City extends DAO
     /**
      * Find a location by its slug
      *
-     * @param $slug
+     * @param string $slug
      *
-     * @return array
+     * @return array<string,string|null> Empty when the slug is unknown
      * @since  3.2.1
      */
     public function findBySlug($slug)
@@ -261,9 +262,9 @@ class City extends DAO
      * slugs are renamed upstream constantly. It is unique table-wide, not scoped to a
      * region.
      *
-     * @param $sourceId
+     * @param int $sourceId
      *
-     * @return array
+     * @return array<string,string|null> Empty when the source id is unknown
      * @since  6.2.0
      */
     public function findBySourceId($sourceId)
@@ -286,7 +287,7 @@ class City extends DAO
     /**
      * Find a locations with no slug
      *
-     * @return array
+     * @return array<int,array<string,string|null>>
      * @since  3.2.1
      */
     public function listByEmptySlug()
