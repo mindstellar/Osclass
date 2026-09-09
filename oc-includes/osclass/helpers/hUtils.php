@@ -49,11 +49,11 @@ function osc_get_param($key)
  * Generic function for view layer, return the $field of $item
  * with specific $locale
  *
- * @param array  $item
- * @param string $field
- * @param string $locale
+ * @param array<string,mixed>|null $item
+ * @param string                   $field
+ * @param string                   $locale Empty for the item's own value
  *
- * @return string
+ * @return mixed Empty string when the field is not set
  */
 function osc_field($item, $field, $locale)
 {
@@ -134,8 +134,12 @@ function osc_show_recaptcha($section = '')
 }
 
 /**
- * @param $siteKey
- * @param $lang
+ * Print the reCAPTCHA widget and its loader script.
+ *
+ * @param string $siteKey
+ * @param string $lang    Two-letter language code
+ *
+ * @return void
  */
 function _osc_recaptcha_get_html($siteKey, $lang)
 {
@@ -289,8 +293,8 @@ function osc_captcha_script_url()
 /**
  * Formats the date using the appropiate format.
  *
- * @param string $date
- * @param null   $dateformat
+ * @param string      $date
+ * @param string|null $dateformat Defaults to the site's date format
  *
  * @return string
  */
@@ -373,7 +377,7 @@ function osc_escape_string($string)
 /**
  * Prints the user's account menu
  *
- * @param array $options array with options of the form array('name' => 'display name', 'url' => 'url of link')
+ * @param array<int,array<string,string>>|null $options array('name' => 'display name', 'url' => 'url of link')
  *
  * @return void
  */
@@ -672,7 +676,9 @@ function osc_request_counts_as_view()
 }
 
 /**
+ * Where the visitor came from: the rewrite's referer, the stored one, then a validated Referer header.
  *
+ * @return string Empty string when none is known
  */
 function osc_get_http_referer()
 {
@@ -911,14 +917,18 @@ function osc_write_signed_redirect_cookie($cookieName, $value, $expiry)
 }
 
 /**
- * @param        $id
- * @param        $regexp
- * @param        $url
- * @param        $file
- * @param bool   $user_menu
+ * Register a file-backed custom route.
+ *
+ * @param string $id
+ * @param string $regexp    Pattern the request URI is matched against
+ * @param string $url       URL template, with {placeholders}
+ * @param string $file      File rendered for the route
+ * @param bool   $user_menu List it in the account menu
  * @param string $location
  * @param string $section
  * @param string $title
+ *
+ * @return void
  */
 function osc_add_route(
     $id,
@@ -943,6 +953,8 @@ function osc_add_route(
  * @param string $id
  * @param string $regexp
  * @param string $url
+ *
+ * @return void
  */
 function osc_add_route_hook($id, $regexp, $url)
 {
@@ -950,7 +962,9 @@ function osc_add_route_hook($id, $regexp, $url)
 }
 
 /**
+ * The search parameters the current subdomain pins, as osc_search_url() takes them.
  *
+ * @return array<string,string> Empty off a subdomain
  */
 function osc_get_subdomain_params()
 {
@@ -1016,6 +1030,8 @@ function osc_openstreet_api_key()
 /**
  * Get Google Maps geocode URL.
  *
+ * @param string $address
+ *
  * @return string
  */
 function osc_google_maps_geocode_url($address)
@@ -1026,6 +1042,8 @@ function osc_google_maps_geocode_url($address)
 
 /**
  * Get OpenStreetMaps geocode URL.
+ *
+ * @param string $address
  *
  * @return string
  */
@@ -1076,7 +1094,8 @@ function osc_get_locations_json_url()
  * @param string $location
  *
  * @return string
- * @deprecated since 6.2.0; use osc_get_locations_json_url()
+ * @deprecated since 6.2.0
+ * @see osc_get_locations_json_url()
  */
 function osc_get_locations_sql_url($location)
 {
@@ -1087,6 +1106,9 @@ function osc_get_locations_sql_url($location)
 
 /**
  * Get i18n repository URL.
+ *
+ * @param string $path Repository-relative path; defaults to locale_list.json
+ *
  * @return string
  */
 function osc_get_i18n_repository_url($path = '')

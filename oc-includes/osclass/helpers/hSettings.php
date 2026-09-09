@@ -81,7 +81,7 @@ if (!function_exists('osc_settings_pages')) {
     /**
      * All registered settings pages, keyed by id.
      *
-     * @return array
+     * @return array<string,array<string,mixed>>
      */
     function osc_settings_pages()
     {
@@ -95,7 +95,7 @@ if (!function_exists('osc_settings_page')) {
      *
      * @param string $id
      *
-     * @return array|null
+     * @return array<string,mixed>|null
      */
     function osc_settings_page($id)
     {
@@ -109,7 +109,7 @@ if (!function_exists('osc_settings_page_conflicts')) {
      * healthy install; an entry means a plugin's settings page is not the one being shown,
      * and its saved values are under a section nothing reads.
      *
-     * @return array
+     * @return array<string,int> page id => registration count
      */
     function osc_settings_page_conflicts()
     {
@@ -208,7 +208,7 @@ if (!function_exists('osc_settings_values')) {
      * @param string          $pageId
      * @param int|string|null $id     the row to read, on a page bound to a table
      *
-     * @return array
+     * @return array<string,mixed> field name => value
      */
     function osc_settings_values($pageId, $id = null)
     {
@@ -524,10 +524,10 @@ if (!function_exists('osc_settings_hook_values')) {
      * see, so the line is drawn at the type that means "do not repeat this", not at how
      * the field happens to be stored.
      *
-     * @param array $fields declared fields, keyed by name
-     * @param array $values submitted values, keyed by field name
+     * @param array<string,array<string,mixed>> $fields declared fields, keyed by name
+     * @param array<string,mixed>                $values submitted values, keyed by field name
      *
-     * @return array
+     * @return array<string,mixed>
      */
     function osc_settings_hook_values(array $fields, array $values)
     {

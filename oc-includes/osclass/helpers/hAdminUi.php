@@ -521,6 +521,7 @@ if (!function_exists('osc_admin_form_actions')) {
      * changes" -- the case that covers most settings screens.
      *
      * @param array $actions Action specs; the first defaults to variant 'primary'
+     * @param array $opts    'dirty' => true for the unsaved-changes status bar
      *
      * @return void
      */
@@ -571,6 +572,8 @@ if (!function_exists('osc_admin_form_row_open')) {
 
 if (!function_exists('osc_admin_form_row_close')) {
     /**
+     * Close the row osc_admin_form_row_open() opened.
+     *
      * @return void
      */
     function osc_admin_form_row_close()

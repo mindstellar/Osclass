@@ -27,7 +27,7 @@
 /**
  * Gets current item array from view
  *
- * @return array $item, or null if not exist
+ * @return array<string,mixed>|null
  */
 function osc_item()
 {
@@ -43,7 +43,7 @@ function osc_item()
 /**
  * Gets comment array form view
  *
- * @return array $comment
+ * @return array<string,mixed>|string Empty string when there is none
  */
 function osc_comment()
 {
@@ -59,7 +59,7 @@ function osc_comment()
 /**
  * Gets resource array from view
  *
- * @return array $resource
+ * @return array<string,mixed>|string Empty string when there is none
  */
 function osc_resource()
 {
@@ -78,7 +78,7 @@ function osc_resource()
  * @param string $field
  * @param string $locale
  *
- * @return string
+ * @return mixed Empty string when the field is not set
  */
 function osc_item_field($field, $locale = '')
 {
@@ -91,7 +91,7 @@ function osc_item_field($field, $locale = '')
  * @param string $field
  * @param string $locale
  *
- * @return string
+ * @return mixed Empty string when the field is not set
  */
 function osc_comment_field($field, $locale = '')
 {
@@ -104,7 +104,7 @@ function osc_comment_field($field, $locale = '')
  * @param string $field
  * @param string $locale
  *
- * @return string
+ * @return mixed Empty string when the field is not set
  */
 function osc_resource_field($field, $locale = '')
 {
@@ -294,9 +294,9 @@ function osc_item_category_id()
 /**
  * Checks to see if the price is enabled for this category.
  *
- * @param null $catId
+ * @param int|null $catId Defaults to the current item's category
  *
- * @return string
+ * @return bool
  */
 function osc_item_category_price_enabled($catId = null)
 {
@@ -342,7 +342,7 @@ function osc_item_dt_expiration()
 /**
  * Gets price of current item
  *
- * @return float
+ * @return float|null Null when the listing carries no price
  */
 function osc_item_price()
 {
@@ -588,9 +588,9 @@ function osc_item_is_premium()
 /**
  * return number of views of current item
  *
- * @param bool $viewAll
+ * @param bool $viewAll True to read the stats table instead of the loaded row
  *
- * @return int
+ * @return int|string|null
  */
 function osc_item_views($viewAll = false)
 {
@@ -764,6 +764,8 @@ function osc_item_link_expired()
 
 // DEPRECATED: This function will be removed in version 4.0
 /**
+ * Current page of the search pagination.
+ *
  * @return int
  */
 function osc_list_page()
@@ -773,6 +775,8 @@ function osc_list_page()
 
 // DEPRECATED: This function will be removed in version 4.0
 /**
+ * Total number of pages in the search pagination.
+ *
  * @return int
  */
 function osc_list_total_pages()
@@ -793,7 +797,7 @@ function osc_list_items_per_page()
 /**
  * Gets total number of comments of current item
  *
- * @return int
+ * @return int|string|false False when the item id is null
  */
 function osc_item_total_comments()
 {
@@ -1166,7 +1170,7 @@ function osc_resource_original_url()
 /**
  * Set the internal pointer of array resources to its first element, and return it.
  *
- * @return array
+ * @return mixed The first resource, or array() when there is none
  * @since 2.3.6
  */
 function osc_reset_resources()
@@ -1185,7 +1189,7 @@ function osc_reset_resources()
 /**
  * Gets next item if there is, else return null
  *
- * @return array
+ * @return bool False once the loop is exhausted
  */
 function osc_has_items()
 {
@@ -1216,7 +1220,7 @@ function osc_has_items()
 /**
  * Set the internal pointer of array items to its first element, and return it.
  *
- * @return array
+ * @return mixed The first item, or array() when there is none
  */
 function osc_reset_items()
 {
@@ -1229,7 +1233,7 @@ function osc_reset_items()
 /**
  * Set the internal pointer of array latestItems to its first element, and return it.
  *
- * @return array
+ * @return mixed The first item, or array() when there is none
  * @since 2.4
  */
 function osc_reset_latest_items()
@@ -1268,7 +1272,7 @@ function osc_count_item_resources()
 /**
  * Gets next item resource if there is, else return null
  *
- * @return array
+ * @return bool False once the loop is exhausted
  */
 function osc_has_item_resources()
 {
@@ -1283,7 +1287,7 @@ function osc_has_item_resources()
 /**
  * Gets current resource of current array resources of current item
  *
- * @return array
+ * @return array<int,array<string,mixed>>
  */
 function osc_get_item_resources()
 {
@@ -1345,7 +1349,7 @@ function osc_show_item_comments()
 /**
  * Gets next comment of current item comments
  *
- * @return array
+ * @return bool False once the loop is exhausted
  */
 function osc_has_item_comments()
 {
@@ -1366,11 +1370,11 @@ function osc_has_item_comments()
 /**
  * Gets next item of latest items query
  *
- * @param null  $total_latest_items
- * @param array $options
- * @param bool  $withPicture
+ * @param int|null            $total_latest_items
+ * @param array<string,mixed> $options
+ * @param bool                $withPicture
  *
- * @return boolean It returns true if there is another item available or false if there isn't
+ * @return bool True while another item is available
  */
 function osc_has_latest_items($total_latest_items = null, $options = array(), $withPicture = false)
 {
@@ -1425,8 +1429,8 @@ function osc_has_latest_items($total_latest_items = null, $options = array(), $w
 /**
  * Gets number of latest items
  *
- * @param null  $total_latest_items
- * @param array $options
+ * @param int|null                 $total_latest_items
+ * @param array<string,mixed>|null $options
  *
  * @return int
  */
@@ -1459,7 +1463,7 @@ function osc_count_latest_items($total_latest_items = null, $options = array())
 /**
  * Gets next item of custom items
  *
- * @return array
+ * @return bool False once the loop is exhausted
  */
 function osc_has_custom_items()
 {
@@ -1500,7 +1504,7 @@ function osc_count_custom_items()
 /**
  * Set the internal pointer of array customItems to its first element, and return it.
  *
- * @return array
+ * @return mixed The first item, or array() when there is none
  * @since 2.4
  */
 function osc_reset_custom_items()
@@ -1514,8 +1518,8 @@ function osc_reset_custom_items()
 /**
  * Formats the price using the appropiate currency.
  *
- * @param float $price
- * @param null  $symbol
+ * @param float|int|null $price  In millionths of the currency unit
+ * @param string|null    $symbol Defaults to the current item's currency symbol
  *
  * @return string
  */
@@ -1557,7 +1561,7 @@ function osc_format_price($price, $symbol = null)
  * Gets number of items
  *
  * @return int
- * @deprecated deprecated since version 2.4
+ * @deprecated since 2.4
  */
 function osc_priv_count_items()
 {
@@ -1568,7 +1572,7 @@ function osc_priv_count_items()
  * Gets number of item resources
  *
  * @return int
- * @deprecated deprecated since version 2.4
+ * @deprecated since 2.4
  */
 function osc_priv_count_item_resources()
 {
@@ -1596,7 +1600,7 @@ function osc_count_item_meta()
 /**
  * Gets next item meta field if there is, else return null
  *
- * @return array
+ * @return bool False once the loop is exhausted
  */
 function osc_has_item_meta()
 {
@@ -1610,7 +1614,7 @@ function osc_has_item_meta()
 /**
  * Gets item meta fields
  *
- * @return array
+ * @return array<int,array<string,mixed>>
  */
 function osc_get_item_meta()
 {
@@ -1624,7 +1628,7 @@ function osc_get_item_meta()
 /**
  * Gets item meta field
  *
- * @return array
+ * @return array<string,mixed>|string Empty string when there is none
  */
 function osc_item_meta()
 {
@@ -1727,7 +1731,7 @@ function osc_item_meta_name()
 /**
  * Gets item meta id
  *
- * @return integer
+ * @return int|string
  */
 function osc_item_meta_id()
 {
@@ -1747,7 +1751,7 @@ function osc_item_meta_slug()
 /**
  * Gets total number of active items
  *
- * @return string
+ * @return int|string
  */
 function osc_total_active_items()
 {
@@ -1757,7 +1761,7 @@ function osc_total_active_items()
 /**
  * Gets total number of all items
  *
- * @return string
+ * @return int|string
  */
 function osc_total_items()
 {
@@ -1767,7 +1771,7 @@ function osc_total_items()
 /**
  * Gets total number of active items today
  *
- * @return string
+ * @return int|string
  */
 function osc_total_active_items_today()
 {
@@ -1777,7 +1781,7 @@ function osc_total_active_items_today()
 /**
  * Gets total number of all items today
  *
- * @return string
+ * @return int|string
  */
 function osc_total_items_today()
 {
@@ -1789,8 +1793,6 @@ function osc_total_items_today()
  * export the results to a variable to be able to manage it
  * from custom_items' helpers
  *
- *
- * @param params This could be a string or and array
  *  Examples:
  *  Only one keyword
  *  osc_query_item("keyword=value1,value2,value3,...")
@@ -1829,6 +1831,9 @@ function osc_total_items_today()
  *   osc_run_hook("custom_query", $mSearch, $keyword, $value);
  *  A plugin could be created to handle those extra situation
  *
+ * @param array<string,string>|string|null $params A single "keyword=value" string, or keyword => value pairs
+ *
+ * @return void
  * @since 3.0
  */
 function osc_query_item($params = null)

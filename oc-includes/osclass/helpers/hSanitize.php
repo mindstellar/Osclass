@@ -94,7 +94,7 @@ function osc_sanitize_username($value)
  *
  * @param string $value value to sanitize
  *
- * @return string sanitized
+ * @return int|string sanitized
  */
 function osc_sanitize_int($value)
 {
@@ -168,16 +168,6 @@ function osc_sanitize_text($value)
 }
 
 /**
- * Escape html
- *
- * Formats text so that it can be safely placed in a form field in the event it has HTML tags.
- *
- * @param string
- *
- * @return  string
- * @version 2.4
- */
-/**
  * Sanitise rich text to the markup a Shopclass editor can legitimately produce.
  *
  * The listing description is read with Params' XSS check switched off wherever a rich
@@ -240,6 +230,17 @@ function osc_sanitize_html($value)
     return $purifier->purify($value);
 }
 
+/**
+ * Escape html
+ *
+ * Formats text so that it can be safely placed in a form field in the event it has HTML tags.
+ * Existing entities are left intact.
+ *
+ * @param string $str
+ *
+ * @return string
+ * @version 2.4
+ */
 function osc_esc_html($str = '')
 {
     if ($str === '') {

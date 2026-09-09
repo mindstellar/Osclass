@@ -12,11 +12,13 @@
  */
 
 /**
- * @param     $key
- * @param     $data
- * @param int $expire
+ * Store a value under $key only if it is not cached yet.
  *
- * @return bool
+ * @param string $key
+ * @param mixed  $data
+ * @param int    $expire Seconds, 0 for the driver default
+ *
+ * @return bool False when the key already exists
  */
 function osc_cache_add($key, $data, $expire = 0)
 {
@@ -26,6 +28,8 @@ function osc_cache_add($key, $data, $expire = 0)
 }
 
 /**
+ * Close the active cache driver. No bundled driver implements close().
+ *
  * @return mixed
  */
 function osc_cache_close()
@@ -34,9 +38,11 @@ function osc_cache_close()
 }
 
 /**
- * @param $key
+ * Drop the entry stored under $key.
  *
- * @return bool
+ * @param string $key
+ *
+ * @return bool False when nothing was deleted
  */
 function osc_cache_delete($key)
 {
@@ -46,6 +52,8 @@ function osc_cache_delete($key)
 }
 
 /**
+ * Empty the whole cache.
+ *
  * @return bool
  */
 function osc_cache_flush()
@@ -59,7 +67,7 @@ function osc_cache_flush()
  * Probed rather than declared on iObject_Cache, because third-party drivers
  * implement that interface and a new required method would fatal them.
  *
- * @return array|null
+ * @return array<string,mixed>|null
  */
 function osc_cache_stats()
 {
@@ -107,6 +115,8 @@ function osc_cache_increment($key, $by = 1, $initial = 0, $expire = 0)
 
 /**
  * Initialize Cache factory instance using singleton
+ *
+ * @return void
  */
 function osc_cache_init()
 {
@@ -114,10 +124,12 @@ function osc_cache_init()
 }
 
 /**
- * @param $key
- * @param $found
+ * Read the value stored under $key.
  *
- * @return bool|mixed
+ * @param string $key
+ * @param bool   $found Set by reference to whether the key was a hit
+ *
+ * @return mixed False on a miss
  */
 function osc_cache_get($key, &$found)
 {
@@ -127,9 +139,11 @@ function osc_cache_get($key, &$found)
 }
 
 /**
- * @param     $key
- * @param     $data
- * @param int $expire
+ * Store a value under $key, overwriting any existing entry.
+ *
+ * @param string $key
+ * @param mixed  $data
+ * @param int    $expire Seconds, 0 for the driver default
  *
  * @return bool
  */

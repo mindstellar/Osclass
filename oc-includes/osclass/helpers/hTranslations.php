@@ -40,6 +40,8 @@ function __($key, $domain = 'core')
  *
  * @param string $key
  * @param string $domain
+ *
+ * @return void
  */
 function _e($key, $domain = 'core')
 {
@@ -86,6 +88,8 @@ function _x($key, $context, $domain = 'core')
  * @param string $key
  * @param string $context
  * @param string $domain
+ *
+ * @return void
  */
 function _ex($key, $context, $domain = 'core')
 {

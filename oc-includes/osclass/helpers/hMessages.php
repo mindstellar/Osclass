@@ -23,8 +23,8 @@
 /**
  * Adds an ephemeral message to the session. (error style)
  *
- * @param $msg
- * @param $section
+ * @param string $msg
+ * @param string $section
  *
  * @return void
  */
@@ -36,8 +36,8 @@ function osc_add_flash_message($msg, $section = 'pubMessages')
 /**
  * Adds an ephemeral message to the session. (ok style)
  *
- * @param $msg
- * @param $section
+ * @param string $msg
+ * @param string $section
  *
  * @return void
  */
@@ -49,8 +49,8 @@ function osc_add_flash_ok_message($msg, $section = 'pubMessages')
 /**
  * Adds an ephemeral message to the session. (error style)
  *
- * @param $msg
- * @param $section
+ * @param string $msg
+ * @param string $section
  *
  * @return void
  */
@@ -62,8 +62,8 @@ function osc_add_flash_error_message($msg, $section = 'pubMessages')
 /**
  * Adds an ephemeral message to the session. (info style)
  *
- * @param $msg
- * @param $section
+ * @param string $msg
+ * @param string $section
  *
  * @return void
  */
@@ -75,8 +75,8 @@ function osc_add_flash_info_message($msg, $section = 'pubMessages')
 /**
  * Adds an ephemeral message to the session. (warning style)
  *
- * @param $msg
- * @param $section
+ * @param string $msg
+ * @param string $section
  *
  * @return void
  */
@@ -100,9 +100,9 @@ function osc_add_flash_warning_message($msg, $section = 'pubMessages')
  * plugins and unknown third-party themes all style those exact names -- so they
  * are never renamed. $class is the seam for a theme that wants its own.
  *
- * @param $section
- * @param $class
- * @param $id
+ * @param string $section
+ * @param string $class
+ * @param string $id
  *
  * @return void
  */
@@ -162,12 +162,12 @@ function osc_show_flash_message($section = 'pubMessages', $class = 'flashmessage
 }
 
 /**
- *
+ * The pending flash messages of a section, dropping them from the session by default.
  *
  * @param string $section
  * @param bool   $dropMessages
  *
- * @return string Message
+ * @return array<int,array<string,string>>|string Empty string when the section holds nothing
  */
 function osc_get_flash_message($section = 'pubMessages', $dropMessages = true)
 {

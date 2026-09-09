@@ -45,7 +45,9 @@ function osc_add_theme_support(string $feature, $args = true): void
  * nothing. Callers must treat false as "do what we did before", never as an
  * error.
  *
- * @return mixed
+ * @param string $feature
+ *
+ * @return mixed False when the theme declared nothing
  */
 function osc_theme_supports(string $feature)
 {
@@ -53,7 +55,11 @@ function osc_theme_supports(string $feature)
 }
 
 /**
+ * Withdraw a feature the active theme declared.
+ *
  * @param string $feature
+ *
+ * @return void
  */
 function osc_remove_theme_support(string $feature): void
 {
@@ -154,6 +160,8 @@ function osc_theme_template_paths(): array
  *
  * @param string[]|string $candidates ordered, most specific first
  * @param string          $context    route slug passed to the filter
+ *
+ * @return string A view name, or the last candidate when nothing matches
  */
 function osc_locate_template($candidates, string $context = ''): string
 {
@@ -288,6 +296,10 @@ function osc_theme_chrome(): ?array
  *
  * Returns false for a view core has no page for, so the caller falls through to
  * whatever it did before.
+ *
+ * @param string $themeView view filename, e.g. 'contact.php'
+ *
+ * @return bool False when core has no page for $themeView
  */
 function osc_gui_page_view(string $themeView): bool
 {
@@ -326,6 +338,8 @@ function osc_gui_page_view(string $themeView): bool
 
 /**
  * Whether the active theme can wrap a core-rendered page.
+ *
+ * @return bool
  */
 function osc_theme_has_chrome(): bool
 {
@@ -485,6 +499,8 @@ function osc_gui_view(string $themeView, string $contentFile, array $opts = arra
  * docs/site/developers/account-pages.md and cannot be renamed once released.
  *
  * @param string $themeView view filename, e.g. 'user-login.php'
+ *
+ * @return bool False when core has no partial for $themeView
  */
 function osc_gui_account_view(string $themeView): bool
 {
@@ -555,6 +571,8 @@ function osc_gui_account_view(string $themeView): bool
  * backwards. Filterable through `language_attributes`.
  *
  * @param bool $echo print as well as return
+ *
+ * @return string
  */
 function osc_language_attributes(bool $echo = true): string
 {
@@ -674,6 +692,8 @@ function osc_body_class_list($class = ''): array
  *
  * @param string|string[] $class extra classes from the caller
  * @param bool            $echo  print as well as return
+ *
+ * @return string Empty string when there are no classes
  */
 function osc_body_class($class = '', bool $echo = true): string
 {
@@ -814,6 +834,8 @@ function osc_render_target(string $id): ?string
  *
  * @param string $file must be a relative path, from PLUGINS_PATH, or a registered
  *                      render target id (see osc_register_render_target())
+ *
+ * @return void
  */
 function osc_render_file($file = '')
 {
@@ -863,6 +885,8 @@ function osc_render_file_url($file = '')
  * Re-send the flash messages of the given section. Usefull for custom theme/plugins files.
  *
  * @param string $section
+ *
+ * @return void
  */
 function osc_resend_flash_messages($section = 'pubMessages')
 {
@@ -887,6 +911,8 @@ function osc_resend_flash_messages($section = 'pubMessages')
  * Enqueue script
  *
  * @param string $id
+ *
+ * @return void
  */
 function osc_enqueue_script($id)
 {
@@ -897,9 +923,11 @@ function osc_enqueue_script($id)
  * Enqueue a block of inline JavaScript into the footer, after the file scripts.
  * The admin/front target is detected from the current request.
  *
- * @param string      $code         JavaScript wrapped in its own <script> tag
- * @param array|null  $dependencies registered script ids to enqueue alongside it
- * @param string|null $id           optional id; a repeated id is enqueued only once
+ * @param string                        $code         JavaScript wrapped in its own <script> tag
+ * @param array<int,string>|string|null $dependencies registered script ids to enqueue alongside it
+ * @param string|null                   $id           optional id; a repeated id is enqueued only once
+ *
+ * @return void
  */
 function osc_enqueue_script_code($code, $dependencies = null, $id = null)
 {
@@ -910,6 +938,8 @@ function osc_enqueue_script_code($code, $dependencies = null, $id = null)
  * Remove script from the queue, so it will not be loaded
  *
  * @param string $id
+ *
+ * @return void
  */
 function osc_remove_script($id)
 {
@@ -919,9 +949,11 @@ function osc_remove_script($id)
 /**
  * Add script to be loaded
  *
- * @param $id           string Id to identify the script
- * @param $url          string url of the .js file
- * @param $dependencies mixed, could be an array or a string
+ * @param string                        $id           Id to identify the script
+ * @param string                        $url          url of the .js file
+ * @param array<int,string>|string|null $dependencies
+ *
+ * @return void
  */
 function osc_register_script($id, $url, $dependencies = null)
 {
@@ -932,6 +964,8 @@ function osc_register_script($id, $url, $dependencies = null)
  * Remove script from the queue, so it will not be loaded
  *
  * @param string $id
+ *
+ * @return void
  */
 function osc_unregister_script($id)
 {
@@ -940,6 +974,8 @@ function osc_unregister_script($id)
 
 /**
  * Print the HTML tags to make the script load
+ *
+ * @return void
  */
 function osc_load_scripts()
 {
@@ -954,9 +990,11 @@ function osc_load_scripts()
 /**
  * Register style with dependencies
  *
- * @param $id           string Id to identify the style
- * @param $url          string url of the .css file
- * @param $dependencies mixed, could be an array or a string
+ * @param string                        $id           Id to identify the style
+ * @param string                        $url          url of the .css file
+ * @param array<int,string>|string|null $dependencies
+ *
+ * @return void
  */
 function osc_register_style($id, $url, $dependencies = null)
 {
@@ -967,6 +1005,8 @@ function osc_register_style($id, $url, $dependencies = null)
  * Remove style from the queue, so it will not be loaded
  *
  * @param string $id
+ *
+ * @return void
  */
 function osc_unregister_style($id)
 {
@@ -977,8 +1017,10 @@ function osc_unregister_style($id)
  * Add style to be loaded
  * If style is already registered only id is needed to enqueue style
  *
- * @param $id  string Id to identify the style
- * @param $url string|null Url of the .css file
+ * @param string      $id  Id to identify the style
+ * @param string|null $url Url of the .css file
+ *
+ * @return void
  */
 function osc_enqueue_style($id, $url = null)
 {
@@ -992,7 +1034,9 @@ function osc_enqueue_style($id, $url = null)
 /**
  * Remove style from the queue, so it will not be loaded
  *
- * @param $id
+ * @param string $id
+ *
+ * @return void
  */
 function osc_remove_style($id)
 {
@@ -1001,6 +1045,8 @@ function osc_remove_style($id)
 
 /**
  * Print the HTML tags to make the style load
+ *
+ * @return void
  */
 function osc_load_styles()
 {
@@ -1070,10 +1116,14 @@ function _osc_theme_screenshot_asset($theme)
 }
 
 /**
- * @param        $id
- * @param        $name
- * @param        $options
- * @param string $class
+ * Print a bulk-action <select>. Each option is an attribute map whose 'label' key is its text.
+ *
+ * @param string                          $id
+ * @param string                          $name
+ * @param array<int,array<string,string>> $options
+ * @param string                          $class
+ *
+ * @return void
  */
 function osc_print_bulk_actions($id, $name, $options, $class = '')
 {

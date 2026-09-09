@@ -16,8 +16,8 @@ use mindstellar\widgets\WidgetRegistry;
  *
  * See WidgetRegistry::register() for the $spec shape.
  *
- * @param string $id   Namespaced slug, [a-z0-9_.-]{1,60}.
- * @param array  $spec Type specification.
+ * @param string              $id   Namespaced slug, [a-z0-9_.-]{1,60}.
+ * @param array<string,mixed> $spec Type specification.
  *
  * @return void
  */
@@ -29,7 +29,7 @@ function osc_register_widget($id, $spec)
 /**
  * All registered widget types, keyed by id.
  *
- * @return array
+ * @return array<string,array<string,mixed>>
  */
 function osc_widget_types()
 {
@@ -129,7 +129,7 @@ function _osc_widget_locations_normalize($raw)
  * skipped silently — no output, no fatal. A row with no s_type follows the
  * legacy path and echoes s_content unchanged.
  *
- * @param array $widgetRow A t_widget row.
+ * @param array<string,mixed> $widgetRow A t_widget row.
  *
  * @return void
  */
