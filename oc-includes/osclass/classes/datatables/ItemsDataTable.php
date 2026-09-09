@@ -30,6 +30,9 @@ class ItemsDataTable extends DataTable
     private $mSearch;
     private $withFilters = false;
 
+    /**
+     * Registers the row_class() filter so each listing row gets its status class.
+     */
     public function __construct()
     {
         parent::__construct();
@@ -37,9 +40,12 @@ class ItemsDataTable extends DataTable
     }
 
     /**
-     * @param $params
+     * Builds the listing table, after letting plugins amend the search through
+     * manage_item_search_conditions.
      *
-     * @return array
+     * @param array<string,mixed> $params Datatable request params plus the item search filters
+     *
+     * @return array<string,mixed> The getData() payload
      */
     public function table($params)
     {
@@ -56,6 +62,11 @@ class ItemsDataTable extends DataTable
         return $this->getData();
     }
 
+    /**
+     * Registers the listing columns, building the sort links, and runs admin_items_table.
+     *
+     * @return void
+     */
     private function addTableHeader()
     {
 
@@ -99,8 +110,11 @@ class ItemsDataTable extends DataTable
     }
 
     /**
-     * @param $_get
+     * Translates the request params into Search conditions, paging and ordering.
      *
+     * @param array<string,mixed> $_get
+     *
+     * @return void
      */
     private function getDBParams($_get)
     {
@@ -221,7 +235,11 @@ class ItemsDataTable extends DataTable
     }
 
     /**
-     * @param $items
+     * Formats each listing into table cells and keeps the raw row.
+     *
+     * @param array<int,array<string,mixed>> $items
+     *
+     * @return void
      */
     private function processData($items)
     {
@@ -427,7 +445,7 @@ class ItemsDataTable extends DataTable
      *     - active
      *     - expired
      *
-     * @return array Array with the class and text of the status of the listing in this row. Example:
+     * @return array{class:string,text:string} Array with the class and text of the status of the listing in this row. Example:
      *     array(
      *         'class' => '',
      *         'text'  => ''
@@ -502,9 +520,12 @@ class ItemsDataTable extends DataTable
     }
 
     /**
-     * @param $params
+     * Builds the reported-listings table, joining t_item_stats and narrowing to the
+     * report type the current sort column names.
      *
-     * @return array
+     * @param array<string,mixed> $params Datatable request params plus the item search filters
+     *
+     * @return array<string,mixed> The getData() payload
      */
     public function tableReported($params)
     {
@@ -566,6 +587,12 @@ class ItemsDataTable extends DataTable
         return $this->getData();
     }
 
+    /**
+     * Registers the reported-listing columns, building the sort links, and runs
+     * admin_items_reported_table.
+     *
+     * @return void
+     */
     private function addTableHeaderReported()
     {
 
@@ -665,8 +692,11 @@ class ItemsDataTable extends DataTable
     }
 
     /**
-     * @param $items
+     * Formats each reported listing into table cells and keeps the raw row.
      *
+     * @param array<int,array<string,mixed>> $items
+     *
+     * @return void
      */
     private function processDataReported($items)
     {
@@ -808,7 +838,7 @@ class ItemsDataTable extends DataTable
      * `keyword: "viagra"` for a keyword hit, `reports: 5` for a report-threshold
      * auto-block. The caller is responsible for escaping; this returns raw text.
      *
-     * @param array $modLog a t_item_moderation_log row
+     * @param array<string,mixed> $modLog a t_item_moderation_log row
      *
      * @return string
      */
@@ -826,6 +856,8 @@ class ItemsDataTable extends DataTable
     }
 
     /**
+     * Whether any search filter was applied, after the manage_item_search_with_filters filter.
+     *
      * @return bool
      */
     public function withFilters()
@@ -834,11 +866,13 @@ class ItemsDataTable extends DataTable
     }
 
     /**
-     * @param $class
-     * @param $rawRow
-     * @param $row
+     * datatable_listing_class filter: appends the status class for a listing row.
      *
-     * @return array
+     * @param string[]            $class
+     * @param array<string,mixed> $rawRow The raw item row
+     * @param array<string,mixed> $row    The formatted row
+     *
+     * @return string[]
      */
     public function row_class($class, $rawRow, $row)
     {

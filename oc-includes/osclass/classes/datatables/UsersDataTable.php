@@ -29,6 +29,9 @@ class UsersDataTable extends DataTable
     public $conditions;
     public $withFilters = false;
 
+    /**
+     * Registers the row_class() filter so blocked/inactive users get a status class.
+     */
     public function __construct()
     {
         parent::__construct();
@@ -36,9 +39,12 @@ class UsersDataTable extends DataTable
     }
 
     /**
-     * @param $params
+     * Builds the user listing for the admin datatable, after letting plugins amend the
+     * search conditions through manage_user_search_conditions.
      *
-     * @return array
+     * @param array<string,mixed> $params Datatable request params plus the user search filters
+     *
+     * @return array<string,mixed> The getData() payload
      */
     public function table($params)
     {
@@ -66,6 +72,11 @@ class UsersDataTable extends DataTable
         return $this->getData();
     }
 
+    /**
+     * Registers the user columns and lets plugins extend them via admin_users_table.
+     *
+     * @return void
+     */
     private function addTableHeader()
     {
 
@@ -84,7 +95,11 @@ class UsersDataTable extends DataTable
     }
 
     /**
-     * @param $_get
+     * Derives page, start, limit, ordering and the search conditions from the request params.
+     *
+     * @param array<string,mixed> $_get
+     *
+     * @return void
      */
     private function getDBParams($_get)
     {
@@ -191,7 +206,11 @@ class UsersDataTable extends DataTable
     }
 
     /**
-     * @param $users
+     * Formats each user into table cells and keeps the raw row.
+     *
+     * @param array<int,array<string,mixed>> $users
+     *
+     * @return void
      */
     private function processData($users)
     {
@@ -289,9 +308,9 @@ class UsersDataTable extends DataTable
      *     - inactive
      *     - active
      *
-     * @param $user
+     * @param array<string,mixed> $user The raw user row
      *
-     * @return array Array with the class and text of the status of the listing in this row. Example:
+     * @return array{class:string,text:string} Array with the class and text of the status of the listing in this row. Example:
      *     array(
      *         'class' => '',
      *         'text'  => ''
@@ -323,6 +342,8 @@ class UsersDataTable extends DataTable
     }
 
     /**
+     * Whether any search filter was applied, after the manage_user_search_with_filters filter.
+     *
      * @return bool
      */
     public function withFilters()
@@ -331,11 +352,13 @@ class UsersDataTable extends DataTable
     }
 
     /**
-     * @param $class
-     * @param $rawRow
-     * @param $row
+     * datatable_user_class filter: appends the status class for a user row.
      *
-     * @return array
+     * @param string[]            $class
+     * @param array<string,mixed> $rawRow The raw user row
+     * @param array<string,mixed> $row    The formatted row
+     *
+     * @return string[]
      */
     public function row_class($class, $rawRow, $row)
     {

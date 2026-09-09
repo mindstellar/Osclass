@@ -32,9 +32,11 @@ class BanRulesDataTable extends DataTable
     private $search;
 
     /**
-     * @param $params
+     * Builds the ban-rule listing for the admin datatable.
      *
-     * @return array
+     * @param array<string,mixed> $params Datatable request params (iPage, iDisplayLength, iSortCol_0, sSortDir_0)
+     *
+     * @return array<string,mixed> The getData() payload
      */
     public function table($params)
     {
@@ -56,6 +58,11 @@ class BanRulesDataTable extends DataTable
         return $this->getData();
     }
 
+    /**
+     * Registers the ban-rule columns and lets plugins extend them via admin_rules_table.
+     *
+     * @return void
+     */
     private function addTableHeader()
     {
 
@@ -69,7 +76,11 @@ class BanRulesDataTable extends DataTable
     }
 
     /**
-     * @param $_get
+     * Derives page, start, limit, search term and ordering from the request params.
+     *
+     * @param array<string,mixed> $_get
+     *
+     * @return void
      */
     private function getDBParams($_get)
     {
@@ -112,7 +123,11 @@ class BanRulesDataTable extends DataTable
     }
 
     /**
-     * @param $rules
+     * Formats each ban rule into table cells and keeps the raw row.
+     *
+     * @param array<int,array<string,mixed>> $rules
+     *
+     * @return void
      */
     private function processData($rules)
     {

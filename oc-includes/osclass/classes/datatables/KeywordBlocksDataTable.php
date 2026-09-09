@@ -18,9 +18,11 @@ class KeywordBlocksDataTable extends DataTable
     private $column_names;
 
     /**
-     * @param array $params
+     * Builds the keyword-blocklist listing for the admin datatable.
      *
-     * @return array
+     * @param array<string,mixed> $params Datatable request params (iPage, iDisplayLength, iSortCol_0, sSortDir_0)
+     *
+     * @return array<string,mixed> The getData() payload
      */
     public function table($params)
     {
@@ -41,6 +43,11 @@ class KeywordBlocksDataTable extends DataTable
         return $this->getData();
     }
 
+    /**
+     * Registers the keyword columns and lets plugins extend them via admin_keyword_block_table.
+     *
+     * @return void
+     */
     private function addTableHeader()
     {
         $this->addColumn('bulkactions', '<input id="check_all" type="checkbox" />');
@@ -53,7 +60,11 @@ class KeywordBlocksDataTable extends DataTable
     }
 
     /**
-     * @param array $_get
+     * Derives page, start, limit and ordering from the request params.
+     *
+     * @param array<string,mixed> $_get
+     *
+     * @return void
      */
     private function getDBParams($_get)
     {
@@ -86,6 +97,13 @@ class KeywordBlocksDataTable extends DataTable
         $this->limit = (int)$_get['iDisplayLength'];
     }
 
+    /**
+     * Returns the translated label for a blocklist scope, defaulting to title and description.
+     *
+     * @param string $scope One of title, description, meta, all
+     *
+     * @return string
+     */
     private function scopeLabel($scope)
     {
         switch ($scope) {
@@ -102,7 +120,11 @@ class KeywordBlocksDataTable extends DataTable
     }
 
     /**
-     * @param array $keywords
+     * Formats each blocked keyword into table cells and keeps the raw row.
+     *
+     * @param array<int,array<string,mixed>> $keywords
+     *
+     * @return void
      */
     private function processData($keywords)
     {

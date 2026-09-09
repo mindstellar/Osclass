@@ -31,9 +31,11 @@ class MediaDataTable extends DataTable
     private $sEcho;
 
     /**
-     * @param $params
+     * Builds the media (item resources) listing for the admin datatable.
      *
-     * @return array
+     * @param array<string,mixed> $params Datatable request params (iPage, iDisplayLength, sort, direction, resourceId)
+     *
+     * @return array<string,mixed> The getData() payload
      */
     public function table($params)
     {
@@ -62,6 +64,11 @@ class MediaDataTable extends DataTable
         return $this->getData();
     }
 
+    /**
+     * Registers the media columns, building the sort links, and runs admin_media_table.
+     *
+     * @return void
+     */
     private function addTableHeader()
     {
 
@@ -100,7 +107,11 @@ class MediaDataTable extends DataTable
     }
 
     /**
-     * @param $_get
+     * Derives start, limit, the item filter and the sort column/direction from the request params.
+     *
+     * @param array<string,mixed> $_get
+     *
+     * @return void
      */
     private function getDBParams($_get)
     {
@@ -145,7 +156,11 @@ class MediaDataTable extends DataTable
     }
 
     /**
-     * @param $media
+     * Formats each resource into table cells and keeps the raw row.
+     *
+     * @param array<int,array<string,mixed>> $media
+     *
+     * @return void
      */
     private function processData($media)
     {

@@ -27,9 +27,11 @@ class AlertsDataTable extends DataTable
     private $total_filtered;
 
     /**
-     * @param $params
+     * Builds the saved-searches (alerts) listing for the admin datatable.
      *
-     * @return array
+     * @param array<string,mixed> $params Datatable request params (iPage, iDisplayLength, sSearch, iSortCol_0, sSortDir_0)
+     *
+     * @return array<string,mixed> The getData() payload
      */
     public function table($params)
     {
@@ -53,6 +55,11 @@ class AlertsDataTable extends DataTable
         return $this->getData();
     }
 
+    /**
+     * Registers the alert columns and lets plugins extend them via admin_alerts_table.
+     *
+     * @return void
+     */
     private function addTableHeader()
     {
 
@@ -66,7 +73,11 @@ class AlertsDataTable extends DataTable
     }
 
     /**
-     * @param $_get
+     * Derives page, start, limit, search term and ordering from the request params.
+     *
+     * @param array<string,mixed> $_get
+     *
+     * @return void
      */
     private function getDBParams($_get)
     {
@@ -115,7 +126,11 @@ class AlertsDataTable extends DataTable
     }
 
     /**
-     * @param $alerts
+     * Formats each alert into table cells and keeps the raw row.
+     *
+     * @param array{alerts?:array<int,array<string,mixed>>,rows?:int,total_results?:int} $alerts Result set from Alerts::search()
+     *
+     * @return void
      */
     private function processData($alerts)
     {

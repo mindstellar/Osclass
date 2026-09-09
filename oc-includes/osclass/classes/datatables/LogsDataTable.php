@@ -31,9 +31,11 @@ class LogsDataTable extends DataTable
     );
 
     /**
-     * @param array $params
+     * Builds the activity-log listing, applying the section and free-text request filters.
      *
-     * @return array
+     * @param array<string,mixed> $params Datatable request params (iPage, iDisplayLength, iSortCol_0, sSortDir_0)
+     *
+     * @return array<string,mixed> The getData() payload
      */
     public function table($params)
     {
@@ -60,6 +62,11 @@ class LogsDataTable extends DataTable
         return $this->getData();
     }
 
+    /**
+     * Registers the log columns and lets plugins extend them via admin_logs_table.
+     *
+     * @return void
+     */
     private function addTableHeader()
     {
         $this->addColumn('date', __('Date'));
@@ -74,7 +81,11 @@ class LogsDataTable extends DataTable
     }
 
     /**
-     * @param array $_get
+     * Derives page, start, limit and ordering from the request params.
+     *
+     * @param array<string,mixed> $_get
+     *
+     * @return void
      */
     private function getDBParams($_get)
     {
@@ -113,7 +124,7 @@ class LogsDataTable extends DataTable
     /**
      * Render "who" as the actor plus its id, when present.
      *
-     * @param array $aRow
+     * @param array<string,mixed> $aRow
      *
      * @return string
      */
@@ -128,7 +139,11 @@ class LogsDataTable extends DataTable
     }
 
     /**
-     * @param array $logs
+     * Formats each log entry into table cells and keeps the raw row.
+     *
+     * @param array<int,array<string,mixed>> $logs
+     *
+     * @return void
      */
     private function processData($logs)
     {
