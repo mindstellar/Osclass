@@ -21,6 +21,9 @@ if (!defined('ABS_PATH')) {
  */
 class CAdminSettingsMedia extends AdminSecBaseModel
 {
+    /**
+     * Boots the admin controller and fires the init_admin_settings_media hook.
+     */
     public function __construct()
     {
         parent::__construct();
@@ -28,6 +31,11 @@ class CAdminSettingsMedia extends AdminSecBaseModel
     }
 
     //Business Layer...
+    /**
+     * Draws the media settings screen, or saves the media and image-size forms.
+     *
+     * @return void
+     */
     public function doModel()
     {
         switch ($this->action) {
@@ -240,7 +248,9 @@ class CAdminSettingsMedia extends AdminSecBaseModel
     }
 
     /**
-     * @param $sSize
+     * Converts a php.ini-style byte size ("8M", "1G") to kilobytes.
+     *
+     * @param string $sSize
      *
      * @return int
      */

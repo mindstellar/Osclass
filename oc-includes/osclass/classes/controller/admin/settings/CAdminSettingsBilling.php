@@ -37,6 +37,9 @@ class CAdminSettingsBilling extends AdminSecBaseModel
         'billing_limits_post',
     );
 
+    /**
+     * Boots the admin controller and fires the init_admin_settings_billing hook.
+     */
     public function __construct()
     {
         parent::__construct();
@@ -44,6 +47,11 @@ class CAdminSettingsBilling extends AdminSecBaseModel
     }
 
     //Business Layer...
+    /**
+     * Saves whichever of the five billing forms was posted, otherwise draws the screen.
+     *
+     * @return void
+     */
     public function doModel()
     {
         if (in_array($this->action, self::FORMS, true)) {
@@ -59,6 +67,8 @@ class CAdminSettingsBilling extends AdminSecBaseModel
      * Save one of the five forms. Which preferences are written, and what is re-registered
      * afterwards, is the declaration's; all that is left here is the CSRF check, the message
      * and where to go next.
+     *
+     * @param string $action the form action that was posted, one of self::FORMS
      *
      * @return void
      */
@@ -82,6 +92,10 @@ class CAdminSettingsBilling extends AdminSecBaseModel
     /**
      * What each form says once it has saved. Spelled out rather than looked up, because a
      * message built from a variable is one the translators never see.
+     *
+     * @param string $action
+     *
+     * @return string
      */
     private static function saved(string $action): string
     {
@@ -101,6 +115,10 @@ class CAdminSettingsBilling extends AdminSecBaseModel
 
     /**
      * The declared page one action saves, registered on the way past.
+     *
+     * @param string $action
+     *
+     * @return string
      */
     private static function pageId(string $action): string
     {
@@ -119,6 +137,8 @@ class CAdminSettingsBilling extends AdminSecBaseModel
     }
 
     /**
+     * Exports the five billing forms and the gateway list, then renders the billing view.
+     *
      * @param string     $rejected the page id of the form that was refused, if any
      * @param array|null $values   that form's submitted values
      *

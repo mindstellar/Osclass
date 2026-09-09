@@ -21,6 +21,9 @@ if (!defined('ABS_PATH')) {
  */
 class CAdminSettingsLocations extends AdminSecBaseModel
 {
+    /**
+     * Boots the admin controller and fires the init_admin_settings_locations hook.
+     */
     public function __construct()
     {
         parent::__construct();
@@ -30,6 +33,9 @@ class CAdminSettingsLocations extends AdminSecBaseModel
     //Business Layer...
 
     /**
+     * Routes the location actions: add/edit/delete for countries, regions and cities, plus the importer.
+     *
+     * @return void
      * @throws \Exception
      */
     public function doModel()

@@ -29,6 +29,9 @@ class CAdminSettingsKeywordBlock extends AdminSecBaseModel
     /** @var string[] Valid t_keyword_block.s_scope values. */
     private static $validScopes = array('title', 'description', 'all', 'meta');
 
+    /**
+     * Boots the admin controller and fires the init_admin_settings_keyword_block hook.
+     */
     public function __construct()
     {
         parent::__construct();
@@ -36,6 +39,11 @@ class CAdminSettingsKeywordBlock extends AdminSecBaseModel
     }
 
     //Business Layer...
+    /**
+     * Routes the keyword blocklist actions: the list, add/edit/delete, the comma-list import and the enforcement preferences.
+     *
+     * @return void
+     */
     public function doModel()
     {
         switch ($this->action) {

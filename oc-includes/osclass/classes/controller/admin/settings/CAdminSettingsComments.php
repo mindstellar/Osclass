@@ -24,6 +24,9 @@ use mindstellar\admin\form\CoreSettings;
  */
 class CAdminSettingsComments extends AdminSecBaseModel
 {
+    /**
+     * Boots the admin controller and fires the init_admin_settings_comments hook.
+     */
     public function __construct()
     {
         parent::__construct();
@@ -31,6 +34,11 @@ class CAdminSettingsComments extends AdminSecBaseModel
     }
 
     //Business Layer...
+    /**
+     * Draws the comment settings form, or saves a posted one and redirects back to it.
+     *
+     * @return void
+     */
     public function doModel()
     {
         switch ($this->action) {
@@ -56,6 +64,8 @@ class CAdminSettingsComments extends AdminSecBaseModel
     }
 
     /**
+     * Exports the comment settings form and renders its view.
+     *
      * @param array|null $values values a rejected save is handing back
      *
      * @return void

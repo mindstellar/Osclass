@@ -23,6 +23,9 @@ use mindstellar\storage\StorageWorker;
  */
 class CAdminSettingsStorage extends AdminSecBaseModel
 {
+    /**
+     * Boots the admin controller and fires the init_admin_settings_storage hook.
+     */
     public function __construct()
     {
         parent::__construct();
@@ -30,6 +33,11 @@ class CAdminSettingsStorage extends AdminSecBaseModel
     }
 
     //Business Layer...
+    /**
+     * Routes the storage actions: the settings screen and its save, the connection test, the queue runner and the migration start.
+     *
+     * @return void
+     */
     public function doModel()
     {
         switch ($this->action) {

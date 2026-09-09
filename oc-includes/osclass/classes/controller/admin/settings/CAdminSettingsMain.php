@@ -20,6 +20,9 @@ use mindstellar\admin\form\MainSettingsForm;
  */
 class CAdminSettingsMain extends AdminSecBaseModel
 {
+    /**
+     * Boots the admin controller and fires the init_admin_settings_main hook.
+     */
     public function __construct()
     {
         parent::__construct();
@@ -27,6 +30,11 @@ class CAdminSettingsMain extends AdminSecBaseModel
     }
 
     //Business Layer...
+    /**
+     * Draws the general settings form, saves a posted one, or forces a theme/plugin update check.
+     *
+     * @return void
+     */
     public function doModel()
     {
         switch ($this->action) {
@@ -59,6 +67,8 @@ class CAdminSettingsMain extends AdminSecBaseModel
     }
 
     /**
+     * Exports the general settings form, its language and currency lists, and renders the view.
+     *
      * @param array|null $values values a rejected save is handing back
      *
      * @return void

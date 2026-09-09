@@ -24,6 +24,9 @@ use mindstellar\admin\form\store\StoreFactory;
  */
 class CAdminSettingsCustom extends AdminSecBaseModel
 {
+    /**
+     * Boots the admin controller and fires the init_admin_settings_custom hook.
+     */
     public function __construct()
     {
         parent::__construct();
@@ -31,6 +34,11 @@ class CAdminSettingsCustom extends AdminSecBaseModel
     }
 
     //Business Layer...
+    /**
+     * Serves one declared settings page: resolves it from the id param, checks its capability, then saves or renders it.
+     *
+     * @return void
+     */
     public function doModel()
     {
         $id   = Params::getParam('id');

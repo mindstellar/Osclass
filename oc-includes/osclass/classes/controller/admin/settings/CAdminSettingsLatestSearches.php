@@ -24,6 +24,9 @@ use mindstellar\admin\form\LatestSearchSettingsForm;
  */
 class CAdminSettingsLatestSearches extends AdminSecBaseModel
 {
+    /**
+     * Boots the admin controller and fires the init_admin_settings_latest hook.
+     */
     public function __construct()
     {
         parent::__construct();
@@ -31,6 +34,11 @@ class CAdminSettingsLatestSearches extends AdminSecBaseModel
     }
 
     //Business Layer...
+    /**
+     * Draws the latest-searches settings form, or saves a posted one and redirects back to it.
+     *
+     * @return void
+     */
     public function doModel()
     {
         switch ($this->action) {
@@ -56,6 +64,8 @@ class CAdminSettingsLatestSearches extends AdminSecBaseModel
     }
 
     /**
+     * Exports the latest-searches settings form and renders its view.
+     *
      * @param array|null $values values a rejected save is handing back
      *
      * @return void

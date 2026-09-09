@@ -24,6 +24,9 @@ use mindstellar\admin\form\SpamSettingsForm;
  */
 class CAdminSettingsSpamnBots extends AdminSecBaseModel
 {
+    /**
+     * Boots the admin controller and fires the init_admin_settings_spam hook.
+     */
     public function __construct()
     {
         parent::__construct();
@@ -31,6 +34,11 @@ class CAdminSettingsSpamnBots extends AdminSecBaseModel
     }
 
     //Business Layer...
+    /**
+     * Draws the spam and bots screen, or saves one of its forms (Akismet, captcha, alerts, login throttle).
+     *
+     * @return void
+     */
     public function doModel()
     {
         switch ($this->action) {

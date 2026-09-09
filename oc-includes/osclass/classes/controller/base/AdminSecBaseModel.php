@@ -21,6 +21,9 @@ use mindstellar\utility\Utils;
  */
 class AdminSecBaseModel extends SecBaseModel
 {
+    /**
+     * Enforces moderator page access, carries a version-only upgrade across, and fires init_admin.
+     */
     public function __construct()
     {
         parent::__construct();
@@ -118,6 +121,8 @@ class AdminSecBaseModel extends SecBaseModel
     }
 
     /**
+     * Whether the logged-in admin is a moderator rather than a full administrator.
+     *
      * @return bool
      */
     public function isModerator()
@@ -126,6 +131,8 @@ class AdminSecBaseModel extends SecBaseModel
     }
 
     /**
+     * Whether an admin user is logged in.
+     *
      * @return bool
      */
     public function isLogged()
@@ -133,6 +140,11 @@ class AdminSecBaseModel extends SecBaseModel
         return osc_is_admin_user_logged_in();
     }
 
+    /**
+     * Destroys the admin session and its cookies, keeping only the chosen admin locale.
+     *
+     * @return void
+     */
     public function logout()
     {
         //destroying session
@@ -153,7 +165,11 @@ class AdminSecBaseModel extends SecBaseModel
     }
 
     /**
-     * @param $file
+     * Renders an admin theme template, wrapped in the before/after_admin_html hooks.
+     *
+     * @param string $file
+     *
+     * @return void
      */
     public function doView($file)
     {
@@ -163,6 +179,12 @@ class AdminSecBaseModel extends SecBaseModel
         osc_run_hook('after_admin_html');
     }
 
+    /**
+     * Answers an ajax request with a session-timeout error, otherwise remembers the requested
+     * page and redirects to the admin login.
+     *
+     * @return void
+     */
     public function showAuthFailPage()
     {
         if (Params::getParam('page') === 'ajax') {

@@ -43,6 +43,9 @@ class CAdminSettingsSitemap extends AdminSecBaseModel
     /** @var string[] Allowed `changefreq` values for a custom URL (sitemaps.org). */
     private static $allowedFreq = array('always', 'hourly', 'daily', 'weekly', 'monthly', 'yearly', 'never');
 
+    /**
+     * Boots the admin controller and fires the init_admin_settings_sitemap hook.
+     */
     public function __construct()
     {
         parent::__construct();
@@ -50,6 +53,11 @@ class CAdminSettingsSitemap extends AdminSecBaseModel
     }
 
     //Business Layer...
+    /**
+     * Routes the sitemap actions: the settings save, the custom URL list, the robots.txt editor and a forced regeneration.
+     *
+     * @return void
+     */
     public function doModel()
     {
         switch ($this->action) {
@@ -212,6 +220,8 @@ class CAdminSettingsSitemap extends AdminSecBaseModel
     }
 
     /**
+     * Writes the custom sitemap URL list back to preferences and clears the sitemap cache.
+     *
      * @param array<int, array<string, string>> $list
      *
      * @return void
@@ -223,6 +233,8 @@ class CAdminSettingsSitemap extends AdminSecBaseModel
     }
 
     /**
+     * Absolute path of the site's robots.txt.
+     *
      * @return string
      */
     private function _robotsPath()
