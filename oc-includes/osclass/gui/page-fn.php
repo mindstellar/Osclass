@@ -24,6 +24,10 @@ if (!defined('ABS_PATH')) {
 if (!function_exists('osc_gui_tone_accent')) {
     /**
      * Accent colour for a page tone.
+     *
+     * @param string $tone One of info, warning, danger or success; unknown tones fall back to danger
+     *
+     * @return string
      */
     function osc_gui_tone_accent(string $tone): string
     {
@@ -41,6 +45,10 @@ if (!function_exists('osc_gui_tone_accent')) {
 if (!function_exists('osc_gui_tone_band')) {
     /**
      * Band (tinted strip) colour for a page tone.
+     *
+     * @param string $tone One of info, warning, danger or success; unknown tones fall back to danger
+     *
+     * @return string
      */
     function osc_gui_tone_band(string $tone): string
     {
@@ -58,6 +66,10 @@ if (!function_exists('osc_gui_tone_band')) {
 if (!function_exists('osc_gui_tone_icon')) {
     /**
      * Inline SVG paths for a page tone, already coloured.
+     *
+     * @param string $tone One of info, warning, danger or success; unknown tones fall back to danger
+     *
+     * @return string
      */
     function osc_gui_tone_icon(string $tone): string
     {
@@ -91,6 +103,8 @@ if (!function_exists('osc_gui_print_style')) {
      * bundled themes run that hook inside <head>). osc_gui_view() calls it again
      * before the content in case a theme never runs the hook; the guard makes
      * the second call a no-op.
+     *
+     * @param string $tone Tone whose accent and band colours the stylesheet is built with
      */
     function osc_gui_print_style(string $tone = 'info'): void
     {

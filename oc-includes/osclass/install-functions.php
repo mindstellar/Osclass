@@ -15,8 +15,10 @@ use mindstellar\utility\Utils;
 use PHPMailer\PHPMailer\PHPMailer;
 
 /**
- * @param $value
- * @param $xss_check
+ * Strip every tag from a raw server value, unless the caller opted out.
+ *
+ * @param string $value
+ * @param bool   $xss_check False returns the value untouched
  *
  * @return string
  */
@@ -32,12 +34,14 @@ function _purify($value, $xss_check)
 }
 
 /**
- * @param      $param
- * @param bool $htmlencode
- * @param bool $xss_check
- * @param bool $quotes_encode
+ * Read one $_SERVER value, stripped and optionally HTML-encoded.
  *
- * @return string
+ * @param string $param         Key to read; an empty key returns ''
+ * @param bool   $htmlencode
+ * @param bool   $xss_check
+ * @param bool   $quotes_encode Encode quotes too when $htmlencode is on
+ *
+ * @return string Empty string when the key is missing
  */
 function getServerParam($param, $htmlencode = false, $xss_check = true, $quotes_encode = true)
 {
@@ -232,9 +236,9 @@ function get_requirements()
 /**
  * Check if some of the requirements to install Shopclass are correct or not
  *
- * @param $array
+ * @param array<string,array{requirement:string,fn:bool,solution:string}> $array
  *
- * @return boolean Check if all the requirements are correct
+ * @return bool True when at least one requirement is NOT met
  * @since 1.2
  */
 function check_requirements($array)
@@ -469,7 +473,9 @@ function install_nonce_check()
 /**
  * insert/update preference allow_report_osclass
  *
- * @param $value
+ * @param int|string $value Boolean preference value, 1 or 0
+ *
+ * @return void
  */
 function set_allow_report_osclass($value)
 {
@@ -486,7 +492,7 @@ function set_allow_report_osclass($value)
 /**
  * Install Shopclass database
  *
- * @return mixed Error messages of the installation
+ * @return array{error:string,field?:string}|false False on success, an error payload otherwise
  * @since 1.2
  *
  */
@@ -740,7 +746,7 @@ function oc_install()
 /**
  * Insert the example data (categories and emails) on all available locales
  *
- * @return mixed Error messages of the installation
+ * @return void
  * @since 2.4
  */
 function oc_install_example_data()
@@ -754,10 +760,12 @@ function oc_install_example_data()
 
     if (!function_exists('osc_apply_filter')) {
         /**
-         * @param $dummyfilter
-         * @param $str
+         * Installer stand-in for the plugin filter helper: returns the value unchanged.
          *
-         * @return mixed
+         * @param string $dummyfilter Filter name, ignored
+         * @param mixed  $str
+         *
+         * @return mixed The value it was given
          */
         function osc_apply_filter($dummyfilter, $str)
         {
@@ -811,6 +819,17 @@ function oc_install_example_data()
     );
 }
 
+/**
+ * Define the database and path constants the rest of the installer needs, if not already set.
+ *
+ * @param string $dbhost
+ * @param string $dbname
+ * @param string $username
+ * @param string $password
+ * @param string $tableprefix
+ *
+ * @return void
+ */
 function define_install_constants($dbhost, $dbname, $username, $password, $tableprefix)
 {
 
@@ -832,7 +851,7 @@ function define_install_constants($dbhost, $dbname, $username, $password, $table
  * @param string $dbhost      Database host
  * @param string $tableprefix Prefix for table names
  *
- * @return mixed Error messages of the installation
+ * @return void
  * @since 1.2
  *
  */
@@ -882,12 +901,13 @@ CONFIG;
 /**
  * Create config from config-sample.php file
  *
- * @param $dbname
- * @param $username
- * @param $password
- * @param $dbhost
- * @param $tableprefix
+ * @param string $dbname
+ * @param string $username
+ * @param string $password
+ * @param string $dbhost
+ * @param string $tableprefix
  *
+ * @return bool False when config-sample.php cannot be read or config.php cannot be written
  * @since 1.2
  */
 function copy_config_file($dbname, $username, $password, $dbhost, $tableprefix)
@@ -938,6 +958,9 @@ function copy_config_file($dbname, $username, $password, $dbhost, $tableprefix)
 }
 
 /**
+ * Whether a usable database configuration exists and carries the installed sentinel.
+ * Any configuration, connection or query failure counts as not installed.
+ *
  * @return bool
  */
 function is_osclass_installed()
@@ -968,9 +991,12 @@ function is_osclass_installed()
 }
 
 /**
- * @param $password
+ * Commit the install sentinel, ping the search engines if opted in, and return the
+ * credentials for the finish screen.
  *
- * @return array
+ * @param string $password Plain-text admin password, echoed back for display
+ *
+ * @return array{s_email:string,admin_user:string,password:string}
  */
 function finish_installation($password)
 {
@@ -1009,12 +1035,22 @@ function finish_installation($password)
 
 /**
  * Menus
+ *
+ * @param array<string,mixed>|null $form_data
+ * @param string|null              $error
+ *
+ * @return void
  */
 function display_database_config($form_data = null, $error = null)
 {
     include_once 'installer/gui/install-database.php';
 }
 
+/**
+ * Render the installer's target-directory step.
+ *
+ * @return void
+ */
 function display_target()
 {
     include_once 'installer/gui/install-target.php';
@@ -1025,6 +1061,8 @@ function display_target()
  * the ping_search_engines preference is recorded by the finalize transaction in
  * finish_installation(). Best-effort: each request is isolated so a slow or dead
  * endpoint can never block the finish screen.
+ *
+ * @return void
  */
 function install_ping_search_engines()
 {
@@ -1044,7 +1082,11 @@ function install_ping_search_engines()
 }
 
 /**
- * @param $password
+ * Render the installer's finish step.
+ *
+ * @param string $password Plain-text admin password shown on the screen
+ *
+ * @return void
  */
 function display_finish($password)
 {
@@ -1052,7 +1094,10 @@ function display_finish($password)
 }
 
 /**
- * @return array
+ * Create the admin account and the site's identity preferences, then mail the
+ * credentials to the address given on the form.
+ *
+ * @return array{email_status:string,s_password:string} email_status carries the mailer error, or '' on success
  */
 function basic_info()
 {

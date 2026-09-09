@@ -12,7 +12,11 @@
  */
 
 /**
- * @param null $catId
+ * Print the custom-field inputs for the publish form.
+ *
+ * @param int|null $catId Category whose fields to render; null renders none
+ *
+ * @return void
  */
 function osc_meta_publish($catId = null)
 {
@@ -23,8 +27,12 @@ function osc_meta_publish($catId = null)
 }
 
 /**
- * @param null $catId
- * @param null $item_id
+ * Print the custom-field inputs for the edit form, pre-filled from the listing.
+ *
+ * @param int|null $catId   Category whose fields to render; null renders none
+ * @param int|null $item_id Listing the stored values are read from
+ *
+ * @return void
  */
 function osc_meta_edit($catId = null, $item_id = null)
 {
@@ -38,10 +46,13 @@ osc_add_hook('item_form', 'osc_meta_publish');
 osc_add_hook('item_edit', 'osc_meta_edit');
 
 /**
+ * Print the custom-field inputs for the search form.
  *
  * All CF will be searchable
  *
- * @param null $catId
+ * @param int|null $catId Category whose fields to render; null renders none
+ *
+ * @return void
  */
 function osc_meta_search($catId = null)
 {
@@ -51,6 +62,8 @@ function osc_meta_search($catId = null)
 osc_add_hook('search_form', 'osc_meta_search');
 
 /**
+ * Human-readable heading for the current search: keyword prefix, category and place.
+ *
  * @return string
  */
 function search_title()
@@ -90,7 +103,9 @@ function search_title()
 }
 
 /**
- * @return bool|mixed
+ * Build the <title> text for the current route, suffixed with the site name off the home page.
+ *
+ * @return string After the meta_title_filter filter has run
  */
 function meta_title()
 {
@@ -324,7 +339,9 @@ function osc_search_meta_description()
 }
 
 /**
- * @return bool|mixed
+ * Build the meta description for the current route.
+ *
+ * @return string After the meta_description_filter filter has run
  */
 function meta_description()
 {
@@ -348,7 +365,9 @@ function meta_description()
 }
 
 /**
- * @return bool|mixed
+ * Build the meta keywords list from the current listing or search results.
+ *
+ * @return string After the meta_keywords_filter filter has run
  */
 function meta_keywords()
 {
@@ -397,7 +416,10 @@ function meta_keywords()
 }
 
 /**
- * @return array
+ * Related region or city links for the search-page footer, one row per location group.
+ * Empty when friendly URLs are off, when a city is already selected, or on a query error.
+ *
+ * @return array<int,array<string,mixed>> Location rows carrying a total column
  */
 function osc_search_footer_links()
 {
@@ -479,9 +501,11 @@ function osc_search_footer_links()
 }
 
 /**
- * @param null $f
+ * URL for one search-footer link.
  *
- * @return string
+ * @param array<string,mixed>|null $f Footer-link row; null reuses the row exported to the view
+ *
+ * @return string Empty when no row was passed and none is in the view
  */
 function osc_footer_link_url($f = null)
 {
@@ -510,9 +534,11 @@ function osc_footer_link_url($f = null)
 }
 
 /**
- * @param null $f
+ * Label for one search-footer link: keyword prefix, category and location name.
  *
- * @return string
+ * @param array<string,mixed>|null $f Footer-link row; null reuses the row exported to the view
+ *
+ * @return string Empty when no row was passed and none is in the view
  */
 function osc_footer_link_title($f = null)
 {
@@ -568,6 +594,8 @@ osc_add_hook('init_admin', '_osc_admin_toolbar_init');
 
 /**
  * Draws admin toolbar
+ *
+ * @return void
  */
 function osc_draw_admin_toolbar()
 {
@@ -580,6 +608,8 @@ function osc_draw_admin_toolbar()
 
 /**
  * Add logout link
+ *
+ * @return void
  */
 function osc_admin_toolbar_logout()
 {
@@ -591,6 +621,11 @@ function osc_admin_toolbar_logout()
                                           ));
 }
 
+/**
+ * Add a toolbar counter for comments awaiting moderation, when there are any.
+ *
+ * @return void
+ */
 function osc_admin_toolbar_comments()
 {
     $total = ItemComment::newInstance()->countAll('( c.b_active = 0 OR c.b_enabled = 0 OR c.b_spam = 1 )');
@@ -611,6 +646,11 @@ function osc_admin_toolbar_comments()
     }
 }
 
+/**
+ * Add a toolbar counter for listings marked as spam, when there are any.
+ *
+ * @return void
+ */
 function osc_admin_toolbar_spam()
 {
     $total = Item::newInstance()->countByMarkas('spam');
@@ -632,7 +672,11 @@ function osc_admin_toolbar_spam()
 }
 
 /**
- * @param bool $force
+ * Add the toolbar entry announcing a core update, when one is recorded as available.
+ *
+ * @param bool $force Rebuild the entry rather than leaving an already-rendered one in place
+ *
+ * @return void
  */
 function osc_admin_toolbar_update_core($force = false)
 {
@@ -658,9 +702,12 @@ function osc_admin_toolbar_update_core($force = false)
 }
 
 /**
- * @param bool $force
+ * Number of plugins with an update available, from the cached count unless forced.
+ * Without $force it schedules a background re-check once the cached count is a day old.
  *
- * @return int|string
+ * @param bool $force Re-scan now instead of returning the cached count
+ *
+ * @return int|string Int when re-scanned, the stored preference string otherwise
  */
 function osc_check_plugins_update($force = false)
 {
@@ -677,7 +724,9 @@ function osc_check_plugins_update($force = false)
 }
 
 /**
- * @return int
+ * Re-scan every installed plugin against the catalogue and cache the result.
+ *
+ * @return int Number of plugins with an update available
  */
 function _osc_check_plugins_update()
 {
@@ -714,7 +763,11 @@ function _osc_check_plugins_update()
 }
 
 /**
- * @param bool $force
+ * Add the toolbar counter for plugin updates, when any are available.
+ *
+ * @param bool $force Re-scan for updates and rebuild the entry
+ *
+ * @return void
  */
 function osc_admin_toolbar_update_plugins($force = false)
 {
@@ -742,9 +795,12 @@ function osc_admin_toolbar_update_plugins($force = false)
 }
 
 /**
- * @param bool $force
+ * Number of themes with an update available, from the cached count unless forced.
+ * Without $force it schedules a background re-check once the cached count is a day old.
  *
- * @return int|string
+ * @param bool $force Re-scan now instead of returning the cached count
+ *
+ * @return int|string Int when re-scanned, the stored preference string otherwise
  */
 function osc_check_themes_update($force = false)
 {
@@ -759,7 +815,9 @@ function osc_check_themes_update($force = false)
 }
 
 /**
- * @return int
+ * Re-scan every installed theme against the catalogue and cache the result.
+ *
+ * @return int Number of themes with an update available
  */
 function _osc_check_themes_update()
 {
@@ -792,7 +850,11 @@ function _osc_check_themes_update()
 }
 
 /**
- * @param bool $force
+ * Add the toolbar counter for theme updates, when any are available.
+ *
+ * @param bool $force Re-scan for updates and rebuild the entry
+ *
+ * @return void
  */
 function osc_admin_toolbar_update_themes($force = false)
 {
@@ -821,9 +883,12 @@ function osc_admin_toolbar_update_themes($force = false)
 
 // languages todo
 /**
- * @param bool $force
+ * Number of languages with an update available, from the cached count unless forced.
+ * Without $force it schedules a background re-check once the cached count is a day old.
  *
- * @return int|string
+ * @param bool $force Re-scan now instead of returning the cached count
+ *
+ * @return int|string Int when re-scanned, the stored preference string otherwise
  */
 function osc_check_languages_update($force = false)
 {
@@ -840,7 +905,9 @@ function osc_check_languages_update($force = false)
 }
 
 /**
- * @return int
+ * Re-check every installed language against its published version and cache the result.
+ *
+ * @return int Number of languages with an update available
  */
 function _osc_check_languages_update()
 {
@@ -865,7 +932,11 @@ function _osc_check_languages_update()
 }
 
 /**
- * @param bool $force
+ * Add the toolbar counter for language updates, when any are available.
+ *
+ * @param bool $force Re-scan for updates and rebuild the entry
+ *
+ * @return void
  */
 function osc_admin_toolbar_update_languages($force = false)
 {
@@ -892,6 +963,11 @@ function osc_admin_toolbar_update_languages($force = false)
     }
 }
 
+/**
+ * Enqueue TinyMCE on the public publish and edit pages only.
+ *
+ * @return void
+ */
 function osc_item_tinymce_header()
 {
     if (!osc_is_publish_page() && !osc_is_edit_page()) {
@@ -913,6 +989,8 @@ function osc_item_tinymce_header()
  * Styles print on the header hook, so a stylesheet enqueued while the body is
  * rendering never lands -- ItemForm::ajax_photos() enqueues its own assets, but
  * by then the head has been flushed and only the script survives.
+ *
+ * @return void
  */
 function osc_ui_common_header()
 {
@@ -932,6 +1010,11 @@ function osc_ui_common_header()
 osc_add_hook('header', 'osc_ui_common_header');
 osc_add_hook('header', 'osc_head_hook_guard', 1);
 
+/**
+ * Print the TinyMCE init script for the listing description fields, in the footer.
+ *
+ * @return void
+ */
 function osc_item_tinymce_footer()
 {
     if (!osc_is_publish_page() && !osc_is_edit_page()) {
@@ -1004,6 +1087,11 @@ function osc_expire_premium_items()
 }
 osc_add_hook('cron_hourly', 'osc_expire_premium_items');
 
+/**
+ * Print the maintenance-mode banner while maintenance mode is on.
+ *
+ * @return void
+ */
 function osc_show_maintenance()
 {
     if (defined('__OSC_MAINTENANCE__')) { ?>
@@ -1035,6 +1123,11 @@ function osc_show_maintenance()
 
 osc_add_hook('header', 'osc_show_maintenance');
 
+/**
+ * Print the generator meta tag.
+ *
+ * @return void
+ */
 function osc_meta_generator()
 {
     echo '<meta name="generator" content="Shopclass" />';
@@ -1046,6 +1139,8 @@ osc_add_hook('header', 'osc_meta_generator');
  * Emit <meta name="robots" content="noindex, follow"> when a controller has marked
  * the current response as thin/empty (e.g. a valid but empty category or location
  * browse page). Keeps the URL crawlable and 200, without indexing an empty page.
+ *
+ * @return void
  */
 function osc_meta_noindex()
 {
@@ -1058,7 +1153,9 @@ osc_add_hook('header', 'osc_meta_noindex');
 
 if (osc_force_jpeg()) {
     /**
-     * @param $content
+     * Force the upload_image_extension filter to jpg.
+     *
+     * @param string $content Extension the filter chain has produced so far
      *
      * @return string
      */
@@ -1068,7 +1165,9 @@ if (osc_force_jpeg()) {
     }
 
     /**
-     * @param $content
+     * Force the upload_image_mime filter to image/jpeg.
+     *
+     * @param string $content MIME type the filter chain has produced so far
      *
      * @return string
      */

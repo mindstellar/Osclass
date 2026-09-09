@@ -55,6 +55,10 @@ if (!$oscIgnoreFile && is_file($oscConfigFile)) {
 
 /**
  * Read an environment variable, treating unset and empty-string as "not set".
+ *
+ * @param string $name
+ *
+ * @return string|null
  */
 $oscEnv = static function ($name) {
     $value = getenv($name);
