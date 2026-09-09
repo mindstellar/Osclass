@@ -1802,7 +1802,7 @@ class Search extends DAO
      * @return array<int,array<string,string|null>>
      *
      * @see        CountryStats::listCountries
-     * @deprecated
+     * @deprecated since 2.4 use CountryStats::listCountries() instead
      */
     public function listCountries($zero = '>', $order = 'items DESC')
     {
@@ -1822,7 +1822,7 @@ class Search extends DAO
      * @return array<int,array<string,string|null>>
      *
      * @see        RegionStats::listRegions
-     * @deprecated
+     * @deprecated since 2.4 use RegionStats::listRegions() instead
      */
     public function listRegions($country = '%%%%', $zero = '>', $order = 'items DESC')
     {
@@ -1843,7 +1843,7 @@ class Search extends DAO
      * @return array<int,array<string,string|null>>
      *
      * @see        CityStats::listCities
-     * @deprecated
+     * @deprecated since 2.4 use CityStats::listCities() instead
      */
     public function listCities($region = null, $zero = '>', $order = 'city_name ASC')
     {

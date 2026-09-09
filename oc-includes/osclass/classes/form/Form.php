@@ -16,10 +16,11 @@ use mindstellar\form\base\FormInputs;
 
 /**
  * Class Form
- * For compatibility
- * Use \mindstellar\form\base\FormInputs or \mindstellar\form\base\FormBuilder instead
  *
- * @deprecated since 5.1.0
+ * The base every core form class still extends. New code should build on
+ * \mindstellar\form\base\FormInputs or \mindstellar\form\base\FormBuilder directly;
+ * this class is not going away while the twelve core forms rest on it.
+ *
  * @see \mindstellar\form\base\FormInputs
  */
 class Form extends FormInputs

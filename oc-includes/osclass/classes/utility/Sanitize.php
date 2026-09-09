@@ -25,7 +25,7 @@ class Sanitize
      * @param array $options
      *
      * @return string|false
-     * @deprecated use Sanitize::string() instead will be removed in the next 6.x release
+     * @deprecated since 5.1.0 use Sanitize::string() instead, to be removed in 7.0.0
      */
     public function filterString($value, ...$options)
     {
@@ -149,7 +149,7 @@ class Sanitize
      * @param array $options unused; kept for signature compatibility
      *
      * @return string|false
-     * @deprecated use Sanitize::int() instead will be removed in the next 6.x release
+     * @deprecated since 5.1.0 use Sanitize::int() instead, to be removed in 7.0.0
      */
     public function filterInt($value, ...$options)
     {
@@ -218,7 +218,7 @@ class Sanitize
      * @param array $options
      *
      * @return string|false
-     * @deprecated use Sanitize::float() instead will be removed in the next major 6.x release
+     * @deprecated since 5.1.0 use Sanitize::float() instead, to be removed in 7.0.0
      */
     public function filterFloat($value, ...$options)
     {
@@ -257,7 +257,7 @@ class Sanitize
      * @param array $options
      *
      * @return string|false
-     * @deprecated use Sanitize::encoded() instead will be removed in the next major 6.x release
+     * @deprecated since 5.1.0 use Sanitize::encoded() instead, to be removed in 7.0.0
      */
     public function filterEncoded($value, ...$options)
     {
@@ -291,7 +291,7 @@ class Sanitize
      * @param array $options
      *
      * @return string|false
-     * @deprecated use Sanitize::email() instead will be removed in the next major 6.x release
+     * @deprecated since 5.1.0 use Sanitize::email() instead, to be removed in 7.0.0
      */
     public function filterEmail($value, ...$options)
     {
@@ -325,7 +325,7 @@ class Sanitize
      * @param array $options unused; kept for signature compatibility
      *
      * @return string
-     * @deprecated use Sanitize::quotes() instead will be removed in the next major 6.x release
+     * @deprecated since 5.1.0 use Sanitize::quotes() instead, to be removed in 7.0.0
      */
     public function filterQuotes($value, ...$options)
     {
@@ -351,7 +351,7 @@ class Sanitize
      * @param array $options
      *
      * @return string|false
-     * @deprecated use Sanitize::url() instead will be removed in the next major 6.x release
+     * @deprecated since 5.1.0 use Sanitize::url() instead, to be removed in 7.0.0
      */
     public function filterURL($value, ...$options)
     {

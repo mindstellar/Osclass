@@ -26,8 +26,9 @@
  * @since      2.3
  * @deprecated 5.3 For new code prefer the parameterized, injection-safe
  *             mindstellar\database\Connection and the immutable
- *             mindstellar\database\QueryBuilder. This class remains the legacy
- *             query layer that existing models and plugins depend on.
+ *             mindstellar\database\QueryBuilder. Deprecated for direct use only:
+ *             DAO::__construct() still instantiates it, so every legacy model
+ *             depends on it and it cannot be removed before the legacy DAO is.
  * @see \mindstellar\database\Connection
  * @see \mindstellar\database\QueryBuilder
  */

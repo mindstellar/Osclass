@@ -129,9 +129,14 @@ function osc_plugin_get_info($plugin)
 /**
  * Check if there's a new version of the plugin
  *
+ * Implemented entirely by functions deprecated since 4.0.0. Core's own update scan
+ * reads the catalogue instead, and this asks each plugin's own update URI.
+ *
  * @param string $plugin 'dir/index.php' path
  *
  * @return bool
+ * @deprecated since 6.3.0 use mindstellar\market\PackageIndex::forPlugins()->pendingUpdates() instead
+ * @see \mindstellar\market\PackageIndex::pendingUpdates()
  */
 function osc_plugin_check_update($plugin)
 {

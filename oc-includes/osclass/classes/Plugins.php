@@ -699,9 +699,14 @@ class Plugins
     /**
      * Whether a newer version of this plugin is offered at its update URI.
      *
+     * The whole chain below it has been deprecated since 4.0.0, and core no longer
+     * uses it: _osc_check_plugins_update() reads PackageIndex::pendingUpdates().
+     *
      * @param string $plugin 'dir/index.php' path
      *
      * @return bool
+     * @deprecated since 6.3.0 use mindstellar\market\PackageIndex::forPlugins()->pendingUpdates() instead
+     * @see \mindstellar\market\PackageIndex::pendingUpdates()
      */
     public static function checkUpdate($plugin)
     {

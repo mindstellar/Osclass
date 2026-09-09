@@ -1295,13 +1295,14 @@ function rglob($pattern, $flags = 0, $path = '')
 }
 
 /**
- * Market util functions
+ * Whether a plugin's update URI advertises a version newer than the installed one.
  *
  * @param string      $update_uri
  * @param string|null $version Version currently installed
  *
  * @return bool
- * @deprecated since 4.0.0
+ * @deprecated since 4.0.0 use mindstellar\market\PackageIndex::forPlugins()->pendingUpdates() instead
+ * @see \mindstellar\market\PackageIndex::pendingUpdates()
  */
 function osc_check_plugin_update($update_uri, $version = null)
 {
@@ -1320,7 +1321,8 @@ function osc_check_plugin_update($update_uri, $version = null)
  * @param string|null $version Version currently installed
  *
  * @return bool
- * @deprecated since 4.0.0
+ * @deprecated since 4.0.0 use mindstellar\market\PackageIndex::forThemes()->pendingUpdates() instead
+ * @see \mindstellar\market\PackageIndex::pendingUpdates()
  */
 function osc_check_theme_update($update_uri, $version = null)
 {
