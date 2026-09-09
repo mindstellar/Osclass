@@ -22,6 +22,11 @@
 $form = __get('searches_form');
 
 //customize Head
+/**
+ * Emit the search-settings form's client-side validation rules.
+ *
+ * @return void
+ */
 function customHead()
 {
     ?>

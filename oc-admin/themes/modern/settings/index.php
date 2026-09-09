@@ -22,6 +22,11 @@
 $form = __get('main_form');
 
 //customize Head
+/**
+ * Emit the general-settings form's client-side validation rules.
+ *
+ * @return void
+ */
 function customHead()
 {
     ?>

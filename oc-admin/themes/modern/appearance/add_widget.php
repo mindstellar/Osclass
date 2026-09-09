@@ -112,6 +112,11 @@ if (!$inline) {
         'title'   => __('Appearance'),
     ));
 }
+/**
+ * Registered on `admin_header` for the widget form; it emits nothing.
+ *
+ * @return void
+ */
 function customHead()
 {
     $info   = __get('info');

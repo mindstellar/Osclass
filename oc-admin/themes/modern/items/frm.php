@@ -23,9 +23,11 @@ $categories = Category::newInstance()->toTree();
 
 $new_item = __get('new_item');
 /**
- * @param string $return
+ * One label from the listing form's copy, keyed by name.
  *
- * @return mixed
+ * @param string $return One of 'title', 'subtitle' or 'button'
+ *
+ * @return string
  */
 function customText($return = 'title')
 {
@@ -55,7 +57,9 @@ osc_admin_page(array(
 ));
 
 /**
- * @param $string
+ * Filter callback for `admin_title`: prefix the browser title with the form's subtitle.
+ *
+ * @param string $string
  *
  * @return string
  */
@@ -67,6 +71,11 @@ function customPageTitle($string)
 osc_add_filter('admin_title', 'customPageTitle');
 
 //customize Head
+/**
+ * Emit the listing form's scripts: user autocomplete, price localisation, the expiration toggle, plus the location and photo widgets.
+ *
+ * @return void
+ */
 function customHead()
 {
     ?>
@@ -142,6 +151,8 @@ $actions  = __get('actions');
 
 osc_add_filter('render-wrapper', 'render_offset');
 /**
+ * Filter callback for `render-wrapper`: the CSS class the page wrapper renders with.
+ *
  * @return string
  */
 function render_offset()

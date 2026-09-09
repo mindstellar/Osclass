@@ -22,6 +22,11 @@
 $form = __get('mailserver_form');
 
 //customize Head
+/**
+ * Emit the mail-server script: the provider select fills and locks host/port, and the test button posts to the AJAX mailer.
+ *
+ * @return void
+ */
 function customHead()
 {
     ?>

@@ -32,6 +32,11 @@ osc_admin_page(array(
 ));
 
 //customize Head
+/**
+ * Emit the listing list's scripts: the location filter fields and user autocomplete.
+ *
+ * @return void
+ */
 function customHead()
 {
     ItemForm::location_javascript_new('admin'); ?>

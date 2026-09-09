@@ -44,7 +44,9 @@ osc_admin_page(array(
  * dropped in to nest it). All behaviour lives in categories.js; this only emits
  * markup and the data-* the script reads.
  *
- * @param array $category
+ * @param array<string,mixed> $category Category row plus its nested `categories`
+ *
+ * @return void
  */
 function drawCategory($category)
 {

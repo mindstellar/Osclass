@@ -17,6 +17,8 @@ $all      = osc_get_preference('location_todo');
 $worktodo = LocationsTmp::newInstance()->count();
 
 /**
+ * Filter callback for `render-wrapper`: the CSS class the page wrapper renders with.
+ *
  * @return string
  */
 function render_offset()
@@ -25,6 +27,11 @@ function render_offset()
 }
 
 
+/**
+ * Emit the location-import script: it polls import progress over AJAX and reloads when the queue empties.
+ *
+ * @return void
+ */
 function customHead()
 {
     $all = osc_get_preference('location_todo');

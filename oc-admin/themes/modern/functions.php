@@ -9,6 +9,11 @@ if (!defined('OC_ADMIN')) {
 // page glue, and because a screen should be able to read as a list of components.
 require_once __DIR__ . '/parts/ui.php';
 
+/**
+ * Emit the `osc` JavaScript namespace: the admin locale codes and the strings the admin scripts translate with.
+ *
+ * @return void
+ */
 function admin_js_lang_string()
 {
     ?>
@@ -43,6 +48,11 @@ function admin_js_lang_string()
 osc_add_hook('admin_header', 'admin_js_lang_string');
 
 // favicons
+/**
+ * Emit the admin favicon and manifest <link> tags, after the `admin_favicons` filter.
+ *
+ * @return void
+ */
 function admin_header_favicons()
 {
     $favicons   = array();
@@ -89,6 +99,11 @@ function admin_header_favicons()
 osc_add_hook('admin_header', 'admin_header_favicons');
 
 // admin footer
+/**
+ * Emit the admin footer credit, support links and version line.
+ *
+ * @return void
+ */
 function admin_footer_html()
 {
     ?>
@@ -110,8 +125,10 @@ function admin_footer_html()
 osc_add_hook('admin_content_footer', 'admin_footer_html');
 
 /**
- * @param $slug
- * @param $language_version
+ * Whether a newer translation than the installed one is published for this locale.
+ *
+ * @param string $slug             Locale code
+ * @param string $language_version Ignored
  *
  * @return bool
  */
@@ -121,7 +138,9 @@ function check_market_language_compatibility($slug, $language_version)
 }
 
 /**
- * @param $versions
+ * Whether this Shopclass version is at or below one of the listed supported versions.
+ *
+ * @param string $versions Comma-separated version list
  *
  * @return bool
  */
@@ -141,6 +160,11 @@ function check_market_compatibility($versions)
     return false;
 }
 
+/**
+ * Emit the script that pings the version-check endpoint, at most once a day.
+ *
+ * @return void
+ */
 function check_version_admin_footer()
 {
     if ((time() - osc_last_version_check()) > (24 * 3600)) {
@@ -159,6 +183,11 @@ function check_version_admin_footer()
 
 osc_add_hook('admin_footer', 'check_version_admin_footer');
 
+/**
+ * Emit the script that pings the language-update endpoint.
+ *
+ * @return void
+ */
 function check_languages_admin_footer()
 {
     ?>
@@ -173,6 +202,11 @@ function check_languages_admin_footer()
     <?php
 }
 
+/**
+ * Emit the script that pings the theme-update endpoint.
+ *
+ * @return void
+ */
 function check_themes_admin_footer()
 {
     ?>
@@ -187,6 +221,11 @@ function check_themes_admin_footer()
     <?php
 }
 
+/**
+ * Emit the script that pings the plugin-update endpoint.
+ *
+ * @return void
+ */
 function check_plugins_admin_footer()
 {
     ?>

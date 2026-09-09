@@ -23,6 +23,11 @@ osc_admin_page(array(
 ));
 
 //customize Head
+/**
+ * Emit the plugin screen's script: the plugin tree renders collapsed.
+ *
+ * @return void
+ */
 function customHead()
 {
     ?>

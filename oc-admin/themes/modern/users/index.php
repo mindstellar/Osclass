@@ -33,6 +33,11 @@ osc_admin_page(array(
 ));
 
 //customize Head
+/**
+ * Emit the user list's script: autocomplete on the user filter fields.
+ *
+ * @return void
+ */
 function customHead()
 {
     ?>

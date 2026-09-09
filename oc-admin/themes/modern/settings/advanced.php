@@ -23,6 +23,11 @@ if (!defined('OC_ADMIN')) {
 $form = __get('advanced_form');
 
 //customize Head
+/**
+ * Registered on `admin_header` for the advanced-settings screen; it emits nothing.
+ *
+ * @return void
+ */
 function customHead()
 {
 }

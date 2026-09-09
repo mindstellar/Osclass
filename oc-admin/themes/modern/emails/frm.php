@@ -21,6 +21,11 @@ osc_admin_page(array(
 ));
 
 //customize Head
+/**
+ * Emit the email-template form's TinyMCE setup.
+ *
+ * @return void
+ */
 function customHead()
 {
     ?>

@@ -13,7 +13,9 @@
 $keyword = __get('keyword');
 
 /**
- * @return array
+ * The blocked-keyword form's add/edit copy.
+ *
+ * @return array{edit:bool,title:string,action_frm:string,btn_text:string}
  */
 function customFrmText()
 {
@@ -40,7 +42,9 @@ osc_admin_page(array(
 ));
 
 /**
- * @param $string
+ * Filter callback for `admin_title`: prefix the browser title with the form's title.
+ *
+ * @param string $string
  *
  * @return string
  */

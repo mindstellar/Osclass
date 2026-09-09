@@ -22,6 +22,11 @@
 $form = __get('comment_form');
 
 //customize Head
+/**
+ * Emit the comment-settings form's client-side validation rules.
+ *
+ * @return void
+ */
 function customHead()
 {
     ?>

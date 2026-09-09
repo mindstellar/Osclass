@@ -34,6 +34,11 @@ osc_admin_page(array(
 ));
 
 //customize Head
+/**
+ * Emit the comment form's client-side validation.
+ *
+ * @return void
+ */
 function customHead()
 {
     CommentForm::js_validation(true);

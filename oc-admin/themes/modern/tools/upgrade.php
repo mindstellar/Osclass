@@ -7,6 +7,11 @@ if (!defined('OC_ADMIN')) {
 }
 
 //customize Head
+/**
+ * Emit the upgrade tool's script, or the "in-app updates are disabled" notice on an immutable deployment.
+ *
+ * @return void
+ */
 function customHead()
 {
     // Immutable deployments (the Docker image) disable the in-app updater: a
@@ -181,6 +186,8 @@ function customHead()
 osc_add_hook('admin_footer', 'customHead', 10);
 
 /**
+ * Filter callback for `render-wrapper`: the CSS class the page wrapper renders with.
+ *
  * @return string
  */
 function render_offset()

@@ -20,6 +20,11 @@ osc_admin_page(array(
 ));
 
 //customize Head
+/**
+ * Emit the listing-settings script: the moderation toggle shows and resets the moderated-listing count.
+ *
+ * @return void
+ */
 function customHead()
 {
     ?>

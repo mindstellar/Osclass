@@ -159,6 +159,11 @@ if (!function_exists('cfields_form_cat_summary')) {
     }
 }
 
+/**
+ * Emit the custom-fields script: the inline field and group editors, their drawers, and the delete confirmations.
+ *
+ * @return void
+ */
 function customHead()
 {
     $csrf_token = osc_csrf_token_url();

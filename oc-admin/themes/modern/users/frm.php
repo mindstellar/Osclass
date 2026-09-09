@@ -20,7 +20,9 @@ $cities    = __get('cities');
 $locales   = __get('locales');
 
 /**
- * @return array
+ * The user form's add/edit copy, plus the alerts shown when editing.
+ *
+ * @return array{edit:bool,title:string,action_frm:string,btn_text:string,alerts:array<int,array<string,string>>}
  */
 function customFrmText()
 {
@@ -49,7 +51,9 @@ osc_admin_page(array(
 ));
 
 /**
- * @param $string
+ * Filter callback for `admin_title`: prefix the browser title with the form's title.
+ *
+ * @param string $string
  *
  * @return string
  */
@@ -63,6 +67,11 @@ function customPageTitle($string)
 osc_add_filter('admin_title', 'customPageTitle');
 
 //customize Head
+/**
+ * Emit the user form's client-side validation and location scripts, picking the edit or create rule set.
+ *
+ * @return void
+ */
 function customHead()
 {
     $user = __get('user');

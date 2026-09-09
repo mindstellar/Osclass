@@ -20,6 +20,11 @@ osc_admin_page(array(
 ));
 
 //customize Head
+/**
+ * Emit the language form's client-side validation.
+ *
+ * @return void
+ */
 function customHead()
 {
     LanguageForm::js_validation();

@@ -26,6 +26,11 @@ osc_admin_page(array(
 ));
 
 //customize Head
+/**
+ * Emit the blocked-keywords list's script: row selection, bulk actions and the delete dialogs.
+ *
+ * @return void
+ */
 function customHead()
 {
     ?>
