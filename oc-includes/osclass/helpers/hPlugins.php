@@ -129,8 +129,7 @@ function osc_plugin_get_info($plugin)
 /**
  * Check if there's a new version of the plugin
  *
- * Implemented entirely by functions deprecated since 4.0.0. Core's own update scan
- * reads the catalogue instead, and this asks each plugin's own update URI.
+ * A single-plugin convenience over the package index; core reads the index directly.
  *
  * @param string $plugin 'dir/index.php' path
  *

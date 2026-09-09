@@ -697,10 +697,12 @@ class Plugins
     }
 
     /**
-     * Whether a newer version of this plugin is offered at its update URI.
+     * Whether the catalogue offers this plugin a version it can safely move to.
      *
-     * The whole chain below it has been deprecated since 4.0.0, and core no longer
-     * uses it: _osc_check_plugins_update() reads PackageIndex::pendingUpdates().
+     * Reads the same PackageIndex the admin list and the toolbar counter read, so one
+     * plugin's answer can never disagree with the count beside it. A catalogue failure
+     * is absorbed as "no update", exactly as _osc_check_plugins_update() does -- a
+     * network problem must not surface as an update prompt.
      *
      * @param string $plugin 'dir/index.php' path
      *
@@ -710,9 +712,13 @@ class Plugins
      */
     public static function checkUpdate($plugin)
     {
-        $info = self::getInfo($plugin);
+        try {
+            $pending = \mindstellar\market\PackageIndex::forPlugins()->pendingUpdates();
+        } catch (\Throwable $e) {
+            return false;
+        }
 
-        return osc_check_plugin_update($info['plugin_update_uri'], $info['version']);
+        return isset($pending[dirname($plugin)]);
     }
 
     /**
