@@ -65,7 +65,9 @@ most of them do not use — so it now goes in the same place as any other third-
   edit on the same screen. The 503 page uses the same text. Signed-in admins are never
   locked out. Command-line cron (`php index.php -p cron`) is not served a 503 either, so
   scheduled jobs still run while the public site is down. Installs that have never saved
-  the new checkbox keep today's lockout.
+  the new checkbox keep today's lockout. The banner is printed on the `footer` hook
+  (inside `<body>`), not `header` (`<head>`), so third-party themes style it instead of
+  painting an unstyled bar above the fold.
 
 ### Breaking
 
