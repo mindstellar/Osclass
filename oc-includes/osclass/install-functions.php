@@ -234,22 +234,37 @@ function get_requirements()
 }
 
 /**
+ * Whether every requirement to install Shopclass is met.
+ *
+ * @param array<string,array{requirement:string,fn:bool,solution:string}> $array
+ *
+ * @return bool True when nothing is missing
+ * @since 6.3.0
+ */
+function requirements_met($array)
+{
+    foreach ($array as $v) {
+        if (!$v['fn']) {
+            return false;
+        }
+    }
+
+    return true;
+}
+
+/**
  * Check if some of the requirements to install Shopclass are correct or not
  *
  * @param array<string,array{requirement:string,fn:bool,solution:string}> $array
  *
  * @return bool True when at least one requirement is NOT met
+ * @deprecated since 6.3.0 use requirements_met() instead, which answers the way its name reads
+ * @see requirements_met()
  * @since 1.2
  */
 function check_requirements($array)
 {
-    foreach ($array as $k => $v) {
-        if (!$v['fn']) {
-            return true;
-        }
-    }
-
-    return false;
+    return !requirements_met($array);
 }
 
 /**
